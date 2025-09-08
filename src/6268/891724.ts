@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { c$, bL, l9, mc } from "../905/493196";
-import { h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
@@ -43,7 +43,7 @@ export function $$p0({
     value: e,
     onChange: e => n(e),
     children: [jsx(l9, {
-      label: jsx(h, {
+      label: jsx(HiddenLabel, {
         children: getI18nString("dev_handoff.component_browser.filter")
       }),
       children: jsxs("div", {

@@ -4,8 +4,8 @@ import { useState, useCallback, useMemo, useId } from "react";
 import { $n } from "../905/521428";
 import { p as _$$p } from "../905/185998";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h, J } from "../905/270045";
-import { S } from "../905/274480";
+import { HiddenLabel, Label } from "../905/270045";
+import { Checkbox } from "../905/274480";
 import { v } from "../905/442517";
 import { A } from "../vendor/90566";
 import { s as _$$s } from "../905/573154";
@@ -142,7 +142,7 @@ function w(e) {
           value: currentTimeScale,
           onChange: onChangeTimeScale,
           children: [jsx(l9, {
-            label: jsx(h, {
+            label: jsx(HiddenLabel, {
               children: getI18nString("org_settings.time_scale_label")
             })
           }), jsx(mc, {
@@ -180,14 +180,14 @@ export function $$k3(e) {
 export function $$E8(e) {
   return jsxs("div", {
     className: "x1w4f5ud",
-    children: [jsx(S, {
-      label: jsx(J, {
+    children: [jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("setting_tab.public_sharing.modal.password_required")
       }),
       checked: e.doPublicLinksRequirePassword,
       onChange: e.togglePublicLinksRequirePassword
-    }), e.displayExpiration && jsx(S, {
-      label: jsx(J, {
+    }), e.displayExpiration && jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("setting_tab.public_sharing.modal.expiration_required")
       }),
       checked: e.doPublicLinksRequireExpiration,
@@ -202,7 +202,7 @@ export function $$C6(e) {
     className: "x78zum5 x1q0g3np x1qughib x6s0dn4",
     children: [jsxs("div", {
       className: "x78zum5 xdt5ytf",
-      children: [jsx(J, {
+      children: [jsx(Label, {
         "aria-describedby": a,
         className: "x1s688f",
         htmlFor: t,

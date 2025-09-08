@@ -1,53 +1,54 @@
-let $$n3 = "FIGMA_PROPERTIES";
-let $$r7 = "WEB";
-let $$a6 = "IOS";
-let $$s2 = "ANDROID";
-let $$o0 = "CSSBUILDER";
-let $$l1 = "IOS_UIKIT";
-let $$d4 = "ANDROID_XML";
-let $$c5 = {
-  [$$r7]: {
-    type: "first-party",
-    id: $$r7
-  },
-  [$$a6]: {
-    type: "first-party",
-    id: $$a6
-  },
-  [$$l1]: {
-    type: "first-party",
-    id: $$l1
-  },
-  [$$s2]: {
-    type: "first-party",
-    id: $$s2
-  },
-  [$$d4]: {
-    type: "first-party",
-    id: $$d4
-  }
-};
-export function $$u8(e) {
-  switch (e) {
-    case $$r7:
-    case $$o0:
-      return "React";
-    case $$a6:
-    case $$l1:
-      return "SwiftUI";
-    case $$s2:
-    case $$d4:
-      return "Compose";
+/**
+ * FIGMA_PROPERTIES constant (original: $$n3)
+ */
+export const FIGMA_PROPERTIES = 'FIGMA_PROPERTIES'
+
+/**
+ * Platform identifiers (original: $$r7, $$a6, $$s2, $$o0, $$l1, $$d4)
+ */
+export const WEB = 'WEB'
+export const IOS = 'IOS'
+export const ANDROID = 'ANDROID'
+export const CSSBUILDER = 'CSSBUILDER'
+export const IOS_UIKIT = 'IOS_UIKIT'
+export const ANDROID_XML = 'ANDROID_XML'
+
+/**
+ * Platform metadata map (original: $$c5)
+ */
+export interface PlatformMeta {
+  type: 'first-party'
+  id: string
+}
+
+/**
+ * Supported platforms metadata (original: $$c5)
+ */
+export const SupportedPlatforms: Record<string, PlatformMeta> = {
+  [WEB]: { type: 'first-party', id: WEB },
+  [IOS]: { type: 'first-party', id: IOS },
+  [IOS_UIKIT]: { type: 'first-party', id: IOS_UIKIT },
+  [ANDROID]: { type: 'first-party', id: ANDROID },
+  [ANDROID_XML]: { type: 'first-party', id: ANDROID_XML },
+}
+
+/**
+ * Maps platform id to its corresponding framework.
+ * @param platformId - Platform identifier (original: $$u8)
+ * @returns Framework name or undefined
+ */
+export function mapPlatformToFramework(platformId: string): string | undefined {
+  switch (platformId) {
+    case WEB:
+    case CSSBUILDER:
+      return 'React'
+    case IOS:
+    case IOS_UIKIT:
+      return 'SwiftUI'
+    case ANDROID:
+    case ANDROID_XML:
+      return 'Compose'
     default:
-      return;
+      return undefined
   }
 }
-export const A0 = $$o0;
-export const Ap = $$l1;
-export const LK = $$s2;
-export const MT = $$n3;
-export const NU = $$d4;
-export const S8 = $$c5;
-export const p = $$a6;
-export const uz = $$r7;
-export const yT = $$u8;

@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useSelector } from "../vendor/514228";
-import { Ez5, Egt, glU, lyf } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD } from "../905/871411";
+import { AppStateTsApi, SceneGraphHelpers, Fullscreen, ViewType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, atom } from "../figma_app/27355";
 import c from "../vendor/128080";
@@ -10,11 +10,11 @@ import { U } from "../figma_app/901889";
 import { initializeStub } from "../figma_app/757801";
 import { Ns, isInteractionPathCheck } from "../figma_app/897289";
 import { kG } from "../figma_app/327588";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { KH, p8 } from "../figma_app/722362";
-import { J } from "../905/633914";
+import { useSyncedRef } from "../905/633914";
 import { U3 } from "../figma_app/412189";
-import { ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { wA, Fk } from "../figma_app/167249";
 import { I as _$$I } from "../figma_app/827540";
 import { _j as _$$_j, Wh } from "../figma_app/524655";
@@ -30,7 +30,7 @@ export function $$w2({
   collapsedStatesDisabled: C,
   explicitlyToggledRef: w
 }) {
-  let j = ut(Ez5?.canvasGrid().canvasGridArray, []);
+  let j = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
   let {
     carouselItemsById,
     carouselItemGuids,
@@ -45,7 +45,7 @@ export function $$w2({
     let m = KH();
     let [f, x] = useState(l);
     let C = e.indexOf(f);
-    let w = J2(Ez5.singleSlideView().isCarouselFocused);
+    let w = getObservableOrFallback(AppStateTsApi.singleSlideView().isCarouselFocused);
     let j = useSelector(e => e.isRenaming);
     useEffect(() => {
       1 === Object.keys(m).length && (u ? x(l) : x(Object.keys(m)[0]));
@@ -61,21 +61,21 @@ export function $$w2({
         let i = p.indexOf(e);
         let r = i > t.length - 1 ? t.length - 1 : i;
         h(t[r], !0);
-        Egt.addToSelection(p);
+        SceneGraphHelpers.addToSelection(p);
       }
       k("");
-      Egt.removeFromSelection([e]);
+      SceneGraphHelpers.removeFromSelection([e]);
     }, [p, l, k, h]);
     let O = useCallback(e => {
       k("");
-      e === l || p.includes(e) || Egt.addToSelection([e]);
+      e === l || p.includes(e) || SceneGraphHelpers.addToSelection([e]);
     }, [l, p, k]);
     let L = useCallback(e => {
       p.includes(e) ? A(e) : O(e);
     }, [p, A, O]);
     let R = _$$I();
     U3("keydown", r => {
-      if (!N8() || glU.isInCursorChat() || !w || R || j || function (e, t, i, r) {
+      if (!N8() || Fullscreen.isInCursorChat() || !w || R || j || function (e, t, i, r) {
         if (1 === t.length && "string" == typeof t[0]) {
           let n = t[0];
           let a = i[n];
@@ -111,11 +111,11 @@ export function $$w2({
             r[a] = s;
             return r;
           }(l, o, d);
-          l7.user("reorder-slides-ssv", () => {
-            if (Ez5) {
+          permissionScopeHandler.user("reorder-slides-ssv", () => {
+            if (AppStateTsApi) {
               let e = _$$_j(i, l, 0, n, t);
-              Ez5.canvasGrid().setGridOrder(e);
-              Y5.commit();
+              AppStateTsApi.canvasGrid().setGridOrder(e);
+              fullscreenValue.commit();
             }
           });
           e.stopPropagation();
@@ -142,7 +142,7 @@ export function $$w2({
     return {
       selectedItemIds: p,
       onMouseDownItem: (t, i) => {
-        if (t.metaKey || f === AD) {
+        if (t.metaKey || f === defaultSessionLocalIDString) {
           p.includes(i) || x(i);
           L(i);
         } else if (t.shiftKey) {
@@ -151,10 +151,10 @@ export function $$w2({
           if (I) {
             let i = e.indexOf(I);
             let r = e.slice(Math.min(t, i), Math.max(t, i) + 1);
-            Egt.removeFromSelection(r);
+            SceneGraphHelpers.removeFromSelection(r);
           }
           let n = e.slice(Math.min(t, r), Math.max(t, r) + 1);
-          Egt.addToSelection(n);
+          SceneGraphHelpers.addToSelection(n);
           k(i);
         } else p.includes(i) || (c(i), x(i));
       },
@@ -174,7 +174,7 @@ export function $$w2({
     indentSelectionBy
   } = function (e, t, i, n, o, l) {
     let [d, c] = useState([]);
-    let [f, _, b] = J(!1);
+    let [f, _, b] = useSyncedRef(!1);
     let [C, v] = useState(null);
     let [T, w] = useState(!1);
     let [S, j] = useState(0);
@@ -198,18 +198,18 @@ export function $$w2({
       });
       c(t => u()(e, t) ? t : e);
       w(!0);
-      Y5.commit();
+      fullscreenValue.commit();
     };
     let R = e => {
       e !== S && j(e);
     };
     let D = () => {
-      k ? l7.user("reorder-slides-ssv", () => {
+      k ? permissionScopeHandler.user("reorder-slides-ssv", () => {
         I("reorder_slides", {
           num_slides: e.length
         });
         let i = _$$_j(e, d, S, n, t);
-        u()(i, o) ? b(!1) : (b("PENDING_CANVAS_GRID_UPDATE"), Ez5.canvasGrid().setGridOrder(i), Y5.commit());
+        u()(i, o) ? b(!1) : (b("PENDING_CANVAS_GRID_UPDATE"), AppStateTsApi.canvasGrid().setGridOrder(i), fullscreenValue.commit());
       }) : b(!1);
     };
     return (useEffect(() => {
@@ -275,24 +275,24 @@ export function $$j5() {
   let [e, t] = useAtomValueAndSetter(S);
   return useCallback(e => {
     t("");
-    Ez5.singleSlideView().isFocusedNodeViewEnabled() ? Ez5.singleSlideView().focusNodeInFocusedNodeView(e, !0) : Ez5.singleSlideView().panToNode(e, .6);
-    Egt.replaceSelection([e], !0);
+    AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled() ? AppStateTsApi.singleSlideView().focusNodeInFocusedNodeView(e, !0) : AppStateTsApi.singleSlideView().panToNode(e, .6);
+    SceneGraphHelpers.replaceSelection([e], !0);
   }, [t]);
 }
 export function $$I4() {
   let [e, t] = useAtomValueAndSetter(S);
-  let i = J2(Ez5.cooperFocusView().focusedNodeId);
+  let i = getObservableOrFallback(AppStateTsApi.cooperFocusView().focusedNodeId);
   let n = kG();
   return useCallback(e => {
     if (t(""), n) {
       if (i === e) {
-        Egt.replaceSelection([e], !0);
+        SceneGraphHelpers.replaceSelection([e], !0);
         return;
       }
-      Ez5.cooperFocusView().focusNodeInFocusedNodeView(e, !0);
-      Egt.replaceSelection([e], !0);
-    } else Ez5.cooperFocusView().panToNode(e, .6);
-    Egt.replaceSelection([e], !0);
+      AppStateTsApi.cooperFocusView().focusNodeInFocusedNodeView(e, !0);
+      SceneGraphHelpers.replaceSelection([e], !0);
+    } else AppStateTsApi.cooperFocusView().panToNode(e, .6);
+    SceneGraphHelpers.replaceSelection([e], !0);
   }, [t, i, n]);
 }
 export var $$k0 = (e => (e.NEXT = "NEXT", e.BACK = "BACK", e))($$k0 || {});
@@ -323,7 +323,7 @@ export function $$A3(e, t, i, d) {
       t && (t.isExpanded = !0);
     });
   }, []);
-  let _ = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let _ = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let {
     collapsedCarouselItemIds,
     skippedCarouselItemIds
@@ -336,7 +336,7 @@ export function $$A3(e, t, i, d) {
     collapsedCarouselItemIds: {},
     skippedCarouselItemIds: {}
   }), e);
-  let b = Ez5?.canvasGrid().gridGUID();
+  let b = AppStateTsApi?.canvasGrid().gridGUID();
   let v = Fk((e, t) => !!b && (e.get(t)?.areSlidesManuallyIndented || !1), b ?? "");
   c = e;
   u = _ || i ? {} : collapsedCarouselItemIds;
@@ -409,23 +409,23 @@ export function $$A3(e, t, i, d) {
             let i = t.getCurrentPage();
             let r = i?.directlySelectedNodes?.map(e => e.guid) || [];
             let n = e.filter(e => r.includes(e));
-            n.length > 0 && Egt?.removeFromSelection(n);
+            n.length > 0 && SceneGraphHelpers?.removeFromSelection(n);
           }
         }
       } else i.isExpanded = !0;
-      Y5.commit();
+      fullscreenValue.commit();
     }
   }, [carouselItemsById]);
   let j = useCallback(e => {
     if (i) return;
     let t = carouselItemsById[e];
-    if (t && t.parentGuid && t.parentGuid !== AD) {
+    if (t && t.parentGuid && t.parentGuid !== defaultSessionLocalIDString) {
       let e = carouselItemsById[t.parentGuid];
       if (e && e.isCollapsed) {
         if (d && d.current && d.current.has(t.parentGuid)) return;
-        l7.user("expand-row-ssv", () => {
+        permissionScopeHandler.user("expand-row-ssv", () => {
           let e = getSingletonSceneGraph().get(t.parentGuid);
-          e && (e.isExpanded = !0, Y5.commit());
+          e && (e.isExpanded = !0, fullscreenValue.commit());
         });
       }
     }

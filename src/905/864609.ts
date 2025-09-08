@@ -1,123 +1,162 @@
-var $$n5;
-var $$r8;
-var $$a7;
-var $$s2;
-var $$o4;
-var $$l6;
-let $$d0;
-let c;
-let u;
-function p(e, t, i) {
-  t in e ? Object.defineProperty(e, t, {
-    value: i,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = i;
-  return e;
+// Enums for color management and formats
+/**
+ * Enum for SRGB and DISPLAY_P3 color spaces (RY).
+ */
+export enum ColorSpaceEnum {
+  SRGB = 0,
+  DISPLAY_P3 = 1,
 }
-class m {
-  constructor(e) {
-    p(this, "handle", void 0);
-    this.handle = e;
-  }
+
+/**
+ * Enum for legacy, SRGB, and DISPLAY_P3 color profiles (yw).
+ */
+export enum ColorProfileEnum {
+  LEGACY = 0,
+  SRGB = 1,
+  DISPLAY_P3 = 2,
 }
-class h extends m {
+
+/**
+ * Enum for document color profiles (hz).
+ */
+export enum DocumentColorProfileEnum {
+  DOCUMENT = 0,
+  SRGB = 1,
+  DISPLAY_P3_V4 = 2,
+  CMYK = 3,
+}
+
+/**
+ * Enum for color conversion types (KX).
+ */
+export enum ColorConversionEnum {
+  NO_CONVERSION = 0,
+  SRGB_TO_DISPLAY_P3 = 1,
+  DISPLAY_P3_TO_SRGB = 2,
+}
+
+/**
+ * Enum for color formats (NV).
+ */
+export enum ColorFormatEnum {
+  HEX = 0,
+  RGB = 1,
+  CSS = 2,
+  HSL = 3,
+  HSB = 4,
+  UIColor = 5,
+}
+
+/**
+ * Enum for yes/no values (UF).
+ */
+export enum YesNoEnum {
+  NO = 0,
+  YES = 1,
+}
+
+// Internal state holders
+export let colorManagementStateJs: any;
+export let observableValueDocumentColorProfileInternal: any;
+export let writableObservableValueColorFormatInternal: any;
+
+/**
+ * Base class for observable document color profile values (ObservableValue_DocumentColorProfile_).
+ */
+export class ObservableValueDocumentColorProfile {
+  /** @param handle - The internal handle for the observable value */
+  constructor(public handle: any) {}
+}
+
+/**
+ * Mutable observable value for document color profile (MutableObservableValue_DocumentColorProfile_).
+ */
+export class MutableObservableValueDocumentColorProfile extends ObservableValueDocumentColorProfile {
+  /** Returns a copy of the observable value */
   getCopy() {
-    return c.getCopy(this.handle);
+    return observableValueDocumentColorProfileInternal.getCopy(this.handle);
   }
-  subscribeFromJs(e) {
-    return c.subscribeFromJs(this.handle, e);
+  /** Subscribes from JS */
+  subscribeFromJs(callback: any) {
+    return observableValueDocumentColorProfileInternal.subscribeFromJs(this.handle, callback);
   }
-  unsubscribeFromJs(e) {
-    c.unsubscribeFromJs(this.handle, e);
+  /** Unsubscribes from JS */
+  unsubscribeFromJs(callback: any) {
+    observableValueDocumentColorProfileInternal.unsubscribeFromJs(this.handle, callback);
   }
-  constructor(e) {
-    super(e);
-    p(this, "handle", void 0);
-    this.handle = e;
-  }
-}
-class g {
-  constructor(e) {
-    p(this, "handle", void 0);
-    this.handle = e;
+  constructor(handle: any) {
+    super(handle);
+    this.handle = handle;
   }
 }
-export class $$f9 extends g {
+
+/**
+ * Base class for writable observable color format values (WritableObservableValue_ColorFormat_).
+ */
+export class WritableObservableValueColorFormat {
+  /** @param handle - The internal handle for the writable observable value */
+  constructor(public handle: any) {}
+}
+
+/**
+ * Mutable writable observable value for color format (MutableWritableObservableValue_ColorFormat_).
+ */
+export class MutableWritableObservableValueColorFormat extends WritableObservableValueColorFormat {
+  /** Returns a copy of the writable value */
   getCopy() {
-    return u.getCopy(this.handle);
+    return writableObservableValueColorFormatInternal.getCopy(this.handle);
   }
-  set(e) {
-    u.set(this.handle, e);
+  /** Sets the value */
+  set(value: any) {
+    writableObservableValueColorFormatInternal.set(this.handle, value);
   }
-  subscribeFromJs(e) {
-    return u.subscribeFromJs(this.handle, e);
+  /** Subscribes from JS */
+  subscribeFromJs(callback: any) {
+    return writableObservableValueColorFormatInternal.subscribeFromJs(this.handle, callback);
   }
-  unsubscribeFromJs(e) {
-    u.unsubscribeFromJs(this.handle, e);
+  /** Unsubscribes from JS */
+  unsubscribeFromJs(callback: any) {
+    writableObservableValueColorFormatInternal.unsubscribeFromJs(this.handle, callback);
   }
-  constructor(e) {
-    super(e);
-    p(this, "handle", void 0);
-    this.handle = e;
+  constructor(handle: any) {
+    super(handle);
+    this.handle = handle;
   }
 }
-export function $$_3(e) {
-  $$d0 = e.ColorManagementStateJs;
-  c = e.ObservableValue_DocumentColorProfile__Internal;
-  globalThis.ObservableValue_DocumentColorProfile_ = m;
-  globalThis.MutableObservableValue_DocumentColorProfile_ = h;
-  u = e.WritableObservableValue_ColorFormat__Internal;
-  globalThis.WritableObservableValue_ColorFormat_ = g;
-  globalThis.MutableWritableObservableValue_ColorFormat_ = $$f9;
+
+/**
+ * Initializes internal state and global references (LQ).
+ * @param e - The initialization object containing internal implementations
+ */
+export function initializeColorManagement(e: any) {
+  colorManagementStateJs = e.ColorManagementStateJs;
+  observableValueDocumentColorProfileInternal = e.ObservableValue_DocumentColorProfile__Internal;
+  globalThis.ObservableValue_DocumentColorProfile_ = ObservableValueDocumentColorProfile;
+  globalThis.MutableObservableValue_DocumentColorProfile_ = MutableObservableValueDocumentColorProfile;
+  writableObservableValueColorFormatInternal = e.WritableObservableValue_ColorFormat__Internal;
+  globalThis.WritableObservableValue_ColorFormat_ = WritableObservableValueColorFormat;
+  globalThis.MutableWritableObservableValue_ColorFormat_ = MutableWritableObservableValueColorFormat;
 }
-export function $$A1() {
+
+/**
+ * Returns the current color management state (KO).
+ */
+export function getColorManagementState() {
   return {
-    colorManagementStateJs: $$d0,
-    observableValue_DocumentColorProfile__Internal: c,
-    writableObservableValue_ColorFormat__Internal: u
+    colorManagementStateJs,
+    observableValue_DocumentColorProfile__Internal: observableValueDocumentColorProfileInternal,
+    writableObservableValue_ColorFormat__Internal: writableObservableValueColorFormatInternal,
   };
 }
-!function (e) {
-  e[e.SRGB = 0] = "SRGB";
-  e[e.DISPLAY_P3 = 1] = "DISPLAY_P3";
-}($$n5 || ($$n5 = {}));
-(function (e) {
-  e[e.LEGACY = 0] = "LEGACY";
-  e[e.SRGB = 1] = "SRGB";
-  e[e.DISPLAY_P3 = 2] = "DISPLAY_P3";
-})($$r8 || ($$r8 = {}));
-(function (e) {
-  e[e.DOCUMENT = 0] = "DOCUMENT";
-  e[e.SRGB = 1] = "SRGB";
-  e[e.DISPLAY_P3_V4 = 2] = "DISPLAY_P3_V4";
-  e[e.CMYK = 3] = "CMYK";
-})($$a7 || ($$a7 = {}));
-(function (e) {
-  e[e.NO_CONVERSION = 0] = "NO_CONVERSION";
-  e[e.SRGB_TO_DISPLAY_P3 = 1] = "SRGB_TO_DISPLAY_P3";
-  e[e.DISPLAY_P3_TO_SRGB = 2] = "DISPLAY_P3_TO_SRGB";
-})($$s2 || ($$s2 = {}));
-(function (e) {
-  e[e.HEX = 0] = "HEX";
-  e[e.RGB = 1] = "RGB";
-  e[e.CSS = 2] = "CSS";
-  e[e.HSL = 3] = "HSL";
-  e[e.HSB = 4] = "HSB";
-  e[e.UIColor = 5] = "UIColor";
-})($$o4 || ($$o4 = {}));
-(function (e) {
-  e[e.NO = 0] = "NO";
-  e[e.YES = 1] = "YES";
-})($$l6 || ($$l6 = {}));
-export const H4 = $$d0;
-export const KO = $$A1;
-export const KX = $$s2;
-export const LQ = $$_3;
-export const NV = $$o4;
-export const RY = $$n5;
-export const UF = $$l6;
-export const hz = $$a7;
-export const yw = $$r8;
-export const zc = $$f9;
+
+// Exported variables for external usage
+export const H4 = colorManagementStateJs;
+export const KO = getColorManagementState;
+export const KX = ColorConversionEnum;
+export const LQ = initializeColorManagement;
+export const NV = ColorFormatEnum;
+export const RY = ColorSpaceEnum;
+export const UF = YesNoEnum;
+export const hz = DocumentColorProfileEnum;
+export const yw = ColorProfileEnum;
+export const zc = MutableWritableObservableValueColorFormat;

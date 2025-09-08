@@ -12,7 +12,7 @@ import { L as _$$L } from "../905/408237";
 import { getI18nString } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { sf } from "../905/929976";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { _z, W0 } from "../905/977218";
 import { _6 } from "../figma_app/386952";
 import { uR } from "../figma_app/162807";
@@ -94,7 +94,7 @@ export function $$P0({
       selectionEnd
     } = e.currentTarget;
     let r = 0 === selectionStart && 0 === selectionEnd;
-    "Enter" === e.key && isFauxFocused && (Y(L, M, !0, !0), K && t(Lo()));
+    "Enter" === e.key && isFauxFocused && (Y(L, M, !0, !0), K && t(popModalStack()));
     !M && (("Backspace" === e.key || "Delete" === e.key) && r && (V ? q() : G(U)), "ArrowLeft" === e.key && r && G(U));
   }, [isFauxFocused, c, V, M, U, Y, L, q, G, K, t]);
   let en = useCallback(() => {

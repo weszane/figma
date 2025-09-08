@@ -1,17 +1,17 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useLayoutEffect, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { nzw, qmM, glU, Ez5, sAE, _0v, w3z, m1T, Oin, NLJ, lyf } from "../figma_app/763686";
+import { DiagramElementType, InteractionCpp, Fullscreen, AppStateTsApi, LayoutSizingType, Axis, HandoffBindingsCpp, LayoutTabType, UIVisibilitySetting, DesignGraphElements, ViewType } from "../figma_app/763686";
 import { xx } from "../figma_app/815945";
 import { xo } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
 import { l7, ZO } from "../figma_app/88239";
 import { mV } from "../905/837497";
 import { gI } from "../figma_app/399472";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { k as _$$k } from "../figma_app/564183";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { p8 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
@@ -35,16 +35,16 @@ import { getFeatureFlags } from "../905/601108";
 import M from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E7, gl } from "../905/216495";
+import { normalizeValue, isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { lg } from "../figma_app/164212";
-import { Cc, qE } from "../figma_app/492908";
+import { lerp, clamp } from "../figma_app/492908";
 import { Fo } from "../905/63728";
 import { AF, v_ } from "../figma_app/806412";
 import { Dm } from "../figma_app/8833";
 import { f7 } from "../figma_app/896988";
 import { _X, Z0 } from "../figma_app/62612";
-import { l7 as _$$l2, nc } from "../905/189185";
+import { permissionScopeHandler as _$$l2, scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { U as _$$U } from "../figma_app/901889";
 import { YQ } from "../905/502364";
@@ -89,30 +89,30 @@ function X(e, t, i) {
   let [w, S] = useState(!1);
   let j = useCallback((e, t) => {
     switch (h.mode) {
-      case nzw.FRAME_NAME:
-      case nzw.VAR_WIDTH_SIZE:
-      case nzw.CANVAS_GRID_ROW_STATE_GROUP:
+      case DiagramElementType.FRAME_NAME:
+      case DiagramElementType.VAR_WIDTH_SIZE:
+      case DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP:
         T(Math.min(e, maxWidth * g) + 7);
         break;
-      case nzw.CANVAS_GRID_ROW_NAME:
+      case DiagramElementType.CANVAS_GRID_ROW_NAME:
         let i = Math.min(e, maxWidth * g);
         hasSlideRowBeenManuallyRenamed ? T(i + 14) : T(Math.max(i, 40) + 14);
         break;
-      case nzw.RESPONSIVE_SET_NAME:
-      case nzw.SECTION_NAME:
+      case DiagramElementType.RESPONSIVE_SET_NAME:
+      case DiagramElementType.SECTION_NAME:
         let r = maxWidth * g;
-        h.mode === nzw.RESPONSIVE_SET_NAME && (r -= 60);
+        h.mode === DiagramElementType.RESPONSIVE_SET_NAME && (r -= 60);
         e < r ? T(e) : T(r - 2 * margin.x);
         break;
-      case nzw.FLOW_STARTING_POINT_NAME:
+      case DiagramElementType.FLOW_STARTING_POINT_NAME:
         T(Math.min(e, maxWidth) + 4);
         break;
-      case nzw.MEASUREMENT_FREE_TEXT:
+      case DiagramElementType.MEASUREMENT_FREE_TEXT:
         T(Math.min(e, maxWidth * g) + 8.5);
         break;
-      case nzw.GRID_TRACK_SIZE:
+      case DiagramElementType.GRID_TRACK_SIZE:
         let n = e;
-        qmM && (n = qmM.measureTrackLabelSize(t).x);
+        InteractionCpp && (n = InteractionCpp.measureTrackLabelSize(t).x);
         T(Math.min(n, maxWidth * g + 8.5));
     }
   }, [h.mode, maxWidth, g, margin.x, hasSlideRowBeenManuallyRenamed]);
@@ -127,7 +127,7 @@ function X(e, t, i) {
       let t = !(C.current && C.current.contains(e.target));
       let i = document.querySelector('[data-resource-id="rename-selection"]');
       let r = e.target && i && i.contains(e.target);
-      t && !r && glU?.hideOnCanvasNameEditor();
+      t && !r && Fullscreen?.hideOnCanvasNameEditor();
     };
     document.addEventListener("mousedown", e);
     return () => {
@@ -141,7 +141,7 @@ function X(e, t, i) {
     if (!w) {
       if ("Escape" === e.key && disableSaveOnEscape) {
         b(!1);
-        glU?.hideOnCanvasNameEditor();
+        Fullscreen?.hideOnCanvasNameEditor();
         return;
       }
       switch (e.key) {
@@ -151,8 +151,8 @@ function X(e, t, i) {
           e.preventDefault();
           b(!1);
           t(_);
-          Y5.commit();
-          glU?.hideOnCanvasNameEditor();
+          fullscreenValue.commit();
+          Fullscreen?.hideOnCanvasNameEditor();
           break;
         case "=":
         case "-":
@@ -170,36 +170,36 @@ function X(e, t, i) {
     x: A.x + m.x,
     y: A.y + m.y
   };
-  if (h.mode === nzw.FLOW_STARTING_POINT_NAME && (O.x -= 32 + E, O.y = Math.round(O.y)), h.mode === nzw.FRAME_NAME) {
-    let e = Cc(5, 9, (m.zoomScale - .1) * 5);
-    e = qE(e, 5, 9) - 3;
+  if (h.mode === DiagramElementType.FLOW_STARTING_POINT_NAME && (O.x -= 32 + E, O.y = Math.round(O.y)), h.mode === DiagramElementType.FRAME_NAME) {
+    let e = lerp(5, 9, (m.zoomScale - .1) * 5);
+    e = clamp(e, 5, 9) - 3;
     O.y -= e;
   }
-  if (h.mode === nzw.CANVAS_GRID_ROW_NAME && Ez5) {
-    let e = Ez5.canvasGrid().gridRowSpacing() / 2 * m.zoomScale;
+  if (h.mode === DiagramElementType.CANVAS_GRID_ROW_NAME && AppStateTsApi) {
+    let e = AppStateTsApi.canvasGrid().gridRowSpacing() / 2 * m.zoomScale;
     e -= 8;
     O.y -= e;
   }
-  switch (h.mode === nzw.CANVAS_GRID_ROW_STATE_GROUP && Ez5 && (O.y += 8, O.x += 20), h.mode === nzw.RESPONSIVE_SET_NAME && (O.x += 36, O.y -= 3), h.mode === nzw.VAR_WIDTH_SIZE && (O.y += 20 * h.varWidthTextDirection.y, O.x += 20 * h.varWidthTextDirection.x), h.mode === nzw.GRID_TRACK_SIZE ? h.isShownOnLeft ? (N.transformOrigin = `${O.x - 10}px ${O.y}px`, O.x += 10, N.transform = `rotate(${h.angle}deg) translate(calc(${O.x}px - 100%), ${O.y - 10}px)`) : (N.transformOrigin = `${O.x}px ${O.y}px`, N.transform = `rotate(${h.angle}deg) translate(calc(${O.x}px - 50%), ${O.y - 10}px)`) : h.mode === nzw.MEASUREMENT_FREE_TEXT ? h.invertTextPosition ? N.transform = h.isCentered ? `translate(calc(${O.x}px - 50%), ${O.y - 24}px)` : `translate(calc(${O.x - 6}px - 100%), ${O.y - 9.5}px)` : N.transform = h.isCentered ? `translate(calc(${O.x}px - 50%), ${O.y + 7}px)` : `translate(${O.x + 6}px, ${O.y - 9.5}px)` : h.mode === nzw.VAR_WIDTH_SIZE ? N.transform = `translate(calc(${O.x}px - 50%), ${O.y - 10}px)` : N.transform = `translate(${O.x}px, ${O.y}px) rotate(${h.angle}deg)`, h.mode) {
-    case nzw.FRAME_NAME:
+  switch (h.mode === DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP && AppStateTsApi && (O.y += 8, O.x += 20), h.mode === DiagramElementType.RESPONSIVE_SET_NAME && (O.x += 36, O.y -= 3), h.mode === DiagramElementType.VAR_WIDTH_SIZE && (O.y += 20 * h.varWidthTextDirection.y, O.x += 20 * h.varWidthTextDirection.x), h.mode === DiagramElementType.GRID_TRACK_SIZE ? h.isShownOnLeft ? (N.transformOrigin = `${O.x - 10}px ${O.y}px`, O.x += 10, N.transform = `rotate(${h.angle}deg) translate(calc(${O.x}px - 100%), ${O.y - 10}px)`) : (N.transformOrigin = `${O.x}px ${O.y}px`, N.transform = `rotate(${h.angle}deg) translate(calc(${O.x}px - 50%), ${O.y - 10}px)`) : h.mode === DiagramElementType.MEASUREMENT_FREE_TEXT ? h.invertTextPosition ? N.transform = h.isCentered ? `translate(calc(${O.x}px - 50%), ${O.y - 24}px)` : `translate(calc(${O.x - 6}px - 100%), ${O.y - 9.5}px)` : N.transform = h.isCentered ? `translate(calc(${O.x}px - 50%), ${O.y + 7}px)` : `translate(${O.x + 6}px, ${O.y - 9.5}px)` : h.mode === DiagramElementType.VAR_WIDTH_SIZE ? N.transform = `translate(calc(${O.x}px - 50%), ${O.y - 10}px)` : N.transform = `translate(${O.x}px, ${O.y}px) rotate(${h.angle}deg)`, h.mode) {
+    case DiagramElementType.FRAME_NAME:
       r = q;
       break;
-    case nzw.CANVAS_GRID_ROW_NAME:
+    case DiagramElementType.CANVAS_GRID_ROW_NAME:
       r = "on_canvas_name_editor--canvasGridRowNameInput--NtMKm on_canvas_name_editor--frameNameInput--VpLPf sf_pro--uiFontWithSFProFallback--m-p9V";
       break;
-    case nzw.CANVAS_GRID_ROW_STATE_GROUP:
+    case DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP:
       r = q;
       break;
-    case nzw.FLOW_STARTING_POINT_NAME:
+    case DiagramElementType.FLOW_STARTING_POINT_NAME:
       r = "on_canvas_name_editor--flowStartingPointNameInput--lLEZF";
       break;
-    case nzw.MEASUREMENT_FREE_TEXT:
+    case DiagramElementType.MEASUREMENT_FREE_TEXT:
       r = "on_canvas_name_editor--measurementFreeTextInput--gJle8 sf_pro--uiFontWithSFProFallback--m-p9V";
       break;
-    case nzw.GRID_TRACK_SIZE:
+    case DiagramElementType.GRID_TRACK_SIZE:
       r = "on_canvas_name_editor--gridTrackSizeInput--TX2Zz sf_pro--uiFontWithSFProFallback--m-p9V";
       break;
-    case nzw.VAR_WIDTH_SIZE:
+    case DiagramElementType.VAR_WIDTH_SIZE:
       r = "on_canvas_name_editor--varWidthSizeInput--34tdd sf_pro--uiFontWithSFProFallback--m-p9V";
   }
   return {
@@ -215,7 +215,7 @@ function X(e, t, i) {
     onChange: I,
     onKeyDown: k,
     onBlur: e => {
-      y && (t(e.target.value), Y5.commit(), e.relatedTarget && "focus-target" === e.relatedTarget.className && glU?.hideOnCanvasNameEditor());
+      y && (t(e.target.value), fullscreenValue.commit(), e.relatedTarget && "focus-target" === e.relatedTarget.className && Fullscreen?.hideOnCanvasNameEditor());
     },
     width: E,
     setIsComposing: S
@@ -287,14 +287,14 @@ function Q(e) {
     })
   });
 }
-let $ = Object.values(sAE).filter(e => "number" == typeof e);
+let $ = Object.values(LayoutSizingType).filter(e => "number" == typeof e);
 function ee(e) {
   switch (e) {
-    case sAE.FIXED:
+    case LayoutSizingType.FIXED:
       return "FIXED";
-    case sAE.HUG:
+    case LayoutSizingType.HUG:
       return "HUG";
-    case sAE.FLEX:
+    case LayoutSizingType.FLEX:
       return "FLEX";
   }
 }
@@ -313,15 +313,15 @@ function et() {
     initialText: e.mirror.appModel.onCanvasNameEditorInfo.initialText,
     shouldOpenDropdown: e.mirror.appModel.onCanvasNameEditorInfo.shouldOpenDropdown
   }));
-  let u = E7(kl("gridRowCount"));
-  let p = E7(kl("gridColumnCount"));
-  if (!t || null == n || !width || !p || !u || gl(t) || gl(n)) return null;
-  e = axis === _0v.X ? Math.round(width / p) : Math.round(width / u);
+  let u = normalizeValue(kl("gridRowCount"));
+  let p = normalizeValue(kl("gridColumnCount"));
+  if (!t || null == n || !width || !p || !u || isInvalidValue(t) || isInvalidValue(n)) return null;
+  e = axis === Axis.X ? Math.round(width / p) : Math.round(width / u);
   let h = getFeatureFlags().ce_tv_grid_hug ? "Fill" : "Auto";
-  let m = n === sAE.FLEX ? h : n === sAE.HUG ? "Hug" : lg(t);
+  let m = n === LayoutSizingType.FLEX ? h : n === LayoutSizingType.HUG ? "Hug" : lg(t);
   let f = e => {
     var t;
-    let r = (t = (t = e).trim().toLowerCase(), "auto".startsWith(t) || "fill".startsWith(t)) ? sAE.FLEX : "hug".startsWith(t) && getFeatureFlags().ce_tv_grid_hug ? sAE.HUG : "fixed".startsWith(t) ? sAE.FIXED : null;
+    let r = (t = (t = e).trim().toLowerCase(), "auto".startsWith(t) || "fill".startsWith(t)) ? LayoutSizingType.FLEX : "hug".startsWith(t) && getFeatureFlags().ce_tv_grid_hug ? LayoutSizingType.HUG : "fixed".startsWith(t) ? LayoutSizingType.FIXED : null;
     if (null != r) a(r);else {
       let t = parseFloat(e);
       if (isNaN(t)) return;
@@ -366,16 +366,16 @@ function ei(e) {
       let i = function (e) {
         switch (e) {
           case "FIXED":
-            return sAE.FIXED;
+            return LayoutSizingType.FIXED;
           case "HUG":
-            return sAE.HUG;
+            return LayoutSizingType.HUG;
           case "FLEX":
-            return sAE.FLEX;
+            return LayoutSizingType.FLEX;
           default:
             return null;
         }
       }(t);
-      null != i && (e.setGridTrackSizingType(i), a(!1), glU?.hideOnCanvasNameEditor());
+      null != i && (e.setGridTrackSizingType(i), a(!1), Fullscreen?.hideOnCanvasNameEditor());
     }
   });
   let c = useRef(null);
@@ -471,22 +471,22 @@ function ei(e) {
 }
 function er(e) {
   switch (e.gridTrackSizingType) {
-    case sAE.FIXED:
-      return e.axis === _0v.X ? jsx(_$$w, {}) : jsx(_$$T, {});
-    case sAE.HUG:
-      return e.axis === _0v.X ? jsx(_$$v, {}) : jsx(_$$C, {});
-    case sAE.FLEX:
-      return e.axis === _0v.X ? jsx(_$$G, {}) : jsx(_$$N, {});
+    case LayoutSizingType.FIXED:
+      return e.axis === Axis.X ? jsx(_$$w, {}) : jsx(_$$T, {});
+    case LayoutSizingType.HUG:
+      return e.axis === Axis.X ? jsx(_$$v, {}) : jsx(_$$C, {});
+    case LayoutSizingType.FLEX:
+      return e.axis === Axis.X ? jsx(_$$G, {}) : jsx(_$$N, {});
   }
 }
 function en(e) {
   switch (e.gridTrackSizingType) {
-    case sAE.FIXED:
-      return e.axis === _0v.X ? renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fixed_width") : renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fixed_height");
-    case sAE.HUG:
+    case LayoutSizingType.FIXED:
+      return e.axis === Axis.X ? renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fixed_width") : renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fixed_height");
+    case LayoutSizingType.HUG:
       return renderI18nText("fullscreen.on_canvas_editor.grid_track_size.hug");
-    case sAE.FLEX:
-      return e.axis === _0v.X ? renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fill_column") : renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fill_row");
+    case LayoutSizingType.FLEX:
+      return e.axis === Axis.X ? renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fill_column") : renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fill_row");
   }
 }
 function eh() {
@@ -495,7 +495,7 @@ function eh() {
   let i = xv();
   let n = _$$W();
   if (!e || !t || !i) return null;
-  let o = qmM?.editorTypeConfig().hasSlideRowBeenManuallyRenamed(i) ?? !0;
+  let o = InteractionCpp?.editorTypeConfig().hasSlideRowBeenManuallyRenamed(i) ?? !0;
   return jsx(Q, {
     name: o ? e : "",
     setName: t => {
@@ -521,14 +521,14 @@ function em() {
 }
 function ef() {
   let [e, t] = lJ("prototypeStartingPoint");
-  let i = E7(e)?.name || "";
+  let i = normalizeValue(e)?.name || "";
   return i ? jsx(Q, {
     name: i,
     setName: i => {
       i && t({
         name: i,
-        description: E7(e)?.description || "",
-        position: E7(e)?.position || ""
+        description: normalizeValue(e)?.description || "",
+        position: normalizeValue(e)?.position || ""
       });
     },
     maxWidth: 93,
@@ -541,7 +541,7 @@ function eg() {
     initMeasurementText
   } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
   let i = useSelector(e => e.mirror.appModel.currentPage);
-  let o = useMemo(() => w3z.findMeasurement(measurementId, i), [measurementId, i]);
+  let o = useMemo(() => HandoffBindingsCpp.findMeasurement(measurementId, i), [measurementId, i]);
   let l = useRef(!o?.freeText);
   let d = Kv();
   let c = function () {
@@ -561,7 +561,7 @@ function eg() {
       e("update_annotation_measurement_free_text", s);
     }, [e]);
   }();
-  return o ? d ? (glU?.hideOnCanvasNameEditor(), null) : jsx(Q, {
+  return o ? d ? (Fullscreen?.hideOnCanvasNameEditor(), null) : jsx(Q, {
     name: initMeasurementText,
     setName: e => {
       let i = getSingletonSceneGraph().get(o.fromNode);
@@ -592,7 +592,7 @@ function e_() {
   return jsx(Q, {
     name: (Math.round(10 * d) / 10).toString(),
     containerClassname: "on_canvas_name_editor--varWidthSizeContainer--GP30J",
-    setName: e => nc.user("set-var-width-point-ascent", () => {
+    setName: e => scopeAwareFunction.user("set-var-width-point-ascent", () => {
       let r = parseFloat(e);
       if (isNaN(r)) return;
       let a = [...s];
@@ -638,7 +638,7 @@ function ey(e) {
   });
   let d = useSelector(e => {
     let t = e.mirror.appModel.activeCanvasEditModeType;
-    return t === m1T.DESIGN_LAYOUT || t === m1T.SITES_LAYOUT;
+    return t === LayoutTabType.DESIGN_LAYOUT || t === LayoutTabType.SITES_LAYOUT;
   });
   let {
     fontSize,
@@ -655,13 +655,13 @@ function ey(e) {
       margin,
       cornerRadius
     } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-    let l = qmM.editorTypeConfig().showBigSectionNamePills();
+    let l = InteractionCpp.editorTypeConfig().showBigSectionNamePills();
     let d = padding.x;
     let c = padding.y;
     let u = l ? 24 : 2 * padding.y + _fontSize;
     let p = 0;
     let h = -margin.y - u;
-    let m = qmM.editorTypeConfig().sectionNestedZoomLevel();
+    let m = InteractionCpp.editorTypeConfig().sectionNestedZoomLevel();
     (!e || t <= m) && (p = margin.x, h = margin.y);
     return {
       fontSize: _fontSize,
@@ -781,7 +781,7 @@ function ek(e) {
     })
   });
 }
-let eA = Ju(function (e) {
+let eA = registerModal(function (e) {
   return jsxs(_$$ey, {
     size: "small",
     className: yl,
@@ -805,23 +805,23 @@ export let $$eL4 = xx((e, t, i) => {
 });
 export function $$eR2() {
   switch (p8("onCanvasNameEditorInfo").mode) {
-    case nzw.FRAME_NAME:
+    case DiagramElementType.FRAME_NAME:
       return jsx(eh, {});
-    case nzw.FLOW_STARTING_POINT_NAME:
+    case DiagramElementType.FLOW_STARTING_POINT_NAME:
       return jsx(ef, {});
-    case nzw.SECTION_NAME:
+    case DiagramElementType.SECTION_NAME:
       return jsx(ex, {});
-    case nzw.MEASUREMENT_FREE_TEXT:
+    case DiagramElementType.MEASUREMENT_FREE_TEXT:
       return jsx(eg, {});
-    case nzw.RESPONSIVE_SET_NAME:
+    case DiagramElementType.RESPONSIVE_SET_NAME:
       return jsx(ex, {});
-    case nzw.CANVAS_GRID_ROW_NAME:
+    case DiagramElementType.CANVAS_GRID_ROW_NAME:
       return jsx(em, {});
-    case nzw.CANVAS_GRID_ROW_STATE_GROUP:
+    case DiagramElementType.CANVAS_GRID_ROW_STATE_GROUP:
       return jsx(eh, {});
-    case nzw.GRID_TRACK_SIZE:
+    case DiagramElementType.GRID_TRACK_SIZE:
       return jsx(et, {});
-    case nzw.VAR_WIDTH_SIZE:
+    case DiagramElementType.VAR_WIDTH_SIZE:
       return jsx(e_, {});
     default:
       return null;
@@ -831,7 +831,7 @@ export function $$eD3() {
   let e = eO();
   let t = useSelector(e => e.showingOpenDesktopAppModal);
   let i = useDispatch();
-  if (e.mode !== Oin.OFF) return jsx(Fragment, {});
+  if (e.mode !== UIVisibilitySetting.OFF) return jsx(Fragment, {});
   switch (t) {
     case kF.FOR_OPEN:
       return jsx(_$$g, {
@@ -864,37 +864,37 @@ export function $$eP7() {
     l();
     e.current = setTimeout(() => {
       t.current = !0;
-      o && i.mode !== Oin.OFF && r(to({
+      o && i.mode !== UIVisibilitySetting.OFF && r(showModalHandler({
         type: eA
       }));
     }, 2e4);
   }, [o, i, r, l]);
   let c = useCallback(() => {
-    t.current && r(Ce());
+    t.current && r(hideModal());
     t.current = !1;
     l();
   }, [t, l, r]);
-  useEffect(() => (Y5.fromFullscreen.on("multiplayerConnect", d), Y5.fromFullscreen.on("multiplayerDisconnect", l), Y5.fromFullscreen.on("multiplayerGotSchema", c), () => {
-    Y5.fromFullscreen.removeListener("multiplayerConnect", d);
-    Y5.fromFullscreen.removeListener("multiplayerDisconnect", l);
-    Y5.fromFullscreen.removeListener("multiplayerGotSchema", c);
+  useEffect(() => (fullscreenValue.fromFullscreen.on("multiplayerConnect", d), fullscreenValue.fromFullscreen.on("multiplayerDisconnect", l), fullscreenValue.fromFullscreen.on("multiplayerGotSchema", c), () => {
+    fullscreenValue.fromFullscreen.removeListener("multiplayerConnect", d);
+    fullscreenValue.fromFullscreen.removeListener("multiplayerDisconnect", l);
+    fullscreenValue.fromFullscreen.removeListener("multiplayerGotSchema", c);
     l();
   }), [l, d, c]);
 }
 export function $$eF5(e, t, i) {
   !t.current && function (e, t) {
-    if (t === NLJ.VECTOR_PENCIL || t === NLJ.ERASER || t === NLJ.HIGHLIGHTER) {
+    if (t === DesignGraphElements.VECTOR_PENCIL || t === DesignGraphElements.ERASER || t === DesignGraphElements.HIGHLIGHTER) {
       var i;
       i = "figjam";
       uE("Pointer Input", debugState.getState(), {
         inputSource: e.pointerType,
         tool: function (e) {
           switch (e) {
-            case NLJ.VECTOR_PENCIL:
+            case DesignGraphElements.VECTOR_PENCIL:
               return "VECTOR_PENCIL";
-            case NLJ.ERASER:
+            case DesignGraphElements.ERASER:
               return "ERASER";
-            case NLJ.HIGHLIGHTER:
+            case DesignGraphElements.HIGHLIGHTER:
               return "HIGHLIGHTER";
           }
         }(t),
@@ -911,7 +911,7 @@ export function $$eB6(e, t) {
 export function $$eU1({
   commentsDetailContainerRef: e
 }) {
-  let t = p8("topLevelMode") === lyf.HISTORY;
+  let t = p8("topLevelMode") === ViewType.HISTORY;
   let i = q5();
   let n = useSelector(e => e.user);
   let o = p8("currentPage");

@@ -60,7 +60,7 @@ import { b as _$$b2, d as _$$d4 } from '../905/91820';
 import { k as _$$k6 } from '../905/93362';
 import { c5 as _$$c6 } from '../905/93909';
 import { W as _$$W } from '../905/95038';
-import { Ju, ZU } from '../905/102752';
+import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { U as _$$U4 } from '../905/103637';
 import { J as _$$J } from '../905/125993';
@@ -71,12 +71,12 @@ import { f as _$$f6, r as _$$r8 } from '../905/136283';
 import { Fp } from '../905/148074';
 import { e as _$$e0 } from '../905/149844';
 import { t as _$$t5 } from '../905/150656';
-import { aZ as _$$aZ, hm as _$$hm, to as _$$to2, AS, Ce, ES, Lo } from '../905/156213';
+import { popPrevModal, updateModal, showModalHandler, hideModalHandler, hideModal, hideSpecificModal, popModalStack } from '../905/156213';
 import { i as _$$i } from '../905/159448';
 import { pW as _$$pW } from '../905/160095';
 import { Y5 } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { b as _$$b4 } from '../905/165519';
+import { UpsellModalType } from '../905/165519';
 import { _ as _$$_1 } from '../905/170564';
 import { F as _$$F4, y as _$$y2 } from '../905/171275';
 import { Be as _$$Be } from '../905/172516';
@@ -104,7 +104,7 @@ import { UNASSIGNED } from '../905/247093';
 import { A as _$$A } from '../905/251970';
 import { R as _$$R8 } from '../905/256203';
 import { _ as _$$_9 } from '../905/263184';
-import { h as _$$h9 } from '../905/270045';
+import { HiddenLabel } from '../905/270045';
 import { Cj } from '../905/270084';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { Tf } from '../905/280919';
@@ -459,7 +459,7 @@ import { JR, Qp, Wi } from '../figma_app/162641';
 import { Rx } from '../figma_app/162807';
 import { buildUploadUrl, getInitialOptions, getSupportEmail, isGovCluster } from '../figma_app/169182';
 import { XZ } from '../figma_app/176973';
-import { vh } from '../figma_app/181241';
+import { createNoOpValidator } from '../figma_app/181241';
 import { Zp } from '../figma_app/188671';
 import { FUserRoleType, FFileType, FResourceCategoryType, FTemplateCategoryType, FPlanNameType, FEntityType, FOrganizationRoleType, FAccessLevelType, FProductAccessType, FStudentTeamStatusType, FOrganizationLevelType, FPlanLimitationType, FPaymentHealthStatusType, FMemberRoleType } from '../figma_app/191312';
 import { DA, H0, kx, UE } from '../figma_app/191804';
@@ -486,7 +486,7 @@ import { q as _$$q3 } from '../figma_app/277543';
 import { p as _$$p, Rs } from '../figma_app/288654';
 import { fn as _$$fn, ih as _$$ih, E9, Lm, Mh, Mi } from '../figma_app/297957';
 import { y4 } from '../figma_app/298277';
-import { i8 as _$$i9, ky as _$$ky2, LH } from '../figma_app/300692';
+import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgOrPublisher } from '../figma_app/300692';
 import { vt as _$$vt2 } from '../figma_app/306946';
 import { sx as _$$sx3 } from '../figma_app/307841';
 import { hp as _$$hp, vg as _$$vg, xs as _$$xs, DF, LP } from '../figma_app/310688';
@@ -530,7 +530,7 @@ import { A as _$$A2, x as _$$x } from '../figma_app/475340';
 import { KQ as _$$KQ, Rw } from '../figma_app/475472';
 import { WX as _$$WX, Bq, Vm } from '../figma_app/482142';
 import { _ as _$$_7, S as _$$S9 } from '../figma_app/490799';
-import { y1 as _$$y3, qE } from '../figma_app/492908';
+import { range, clamp } from '../figma_app/492908';
 import { lT as _$$lT } from '../figma_app/494261';
 import { _ as _$$_0 } from '../figma_app/496441';
 import { Y9 } from '../figma_app/502247';
@@ -576,7 +576,7 @@ import { canAdminOrg, canAdminTeam, canEditTeam, canMemberOrg, canOwnTeam, getPe
 import { GG } from '../figma_app/643789';
 import { J7, SN } from '../figma_app/650409';
 import { COLLATOR, MAX_LENGTH, moveElement, sortByCreatedAt, sortByPropertyWithOptions } from '../figma_app/656233';
-import { WQ as _$$WQ } from '../figma_app/661371';
+import { usePaginatedApi } from '../figma_app/661371';
 import { C as _$$C7 } from '../figma_app/667500';
 import { Cm as _$$Cm } from '../figma_app/672951';
 import { wH } from '../figma_app/680166';
@@ -599,7 +599,7 @@ import { d9 as _$$d5 } from '../figma_app/740025';
 import { a9 as _$$a3, LQ } from '../figma_app/741211';
 import { M as _$$M, s as _$$s4 } from '../figma_app/749682';
 import { _5 as _$$_5, cT as _$$cT, rJ as _$$rJ, t2 as _$$t6, ue as _$$ue, C0, De, GB, Gv, Jh, jq, jx, XU } from '../figma_app/756995';
-import { daH } from '../figma_app/763686';
+import { ColorOptions } from '../figma_app/763686';
 import { _4 as _$$_6 } from '../figma_app/773663';
 import { mk as _$$mk2, yl as _$$yl, K2 } from '../figma_app/777551';
 import { K0 } from '../figma_app/778125';
@@ -612,7 +612,7 @@ import { pj as _$$pj, Dv } from '../figma_app/805898';
 import { xx as _$$xx } from '../figma_app/815945';
 import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
-import { tn as _$$tn, NW, TN } from '../figma_app/831101';
+import { UpgradeSteps, BillingCycle, UpsellSourceType } from '../figma_app/831101';
 import { $z as _$$$z, fu as _$$fu, o3 as _$$o3, tf as _$$tf, j6, L0, T8 } from '../figma_app/831799';
 import { e as _$$e5 } from '../figma_app/831857';
 import { y$ as _$$y$2, Lj } from '../figma_app/835219';
@@ -1123,7 +1123,7 @@ function tv(e) {
     children: f
   }) : f;
 }
-let tN = Ju(e => {
+let tN = registerModal(e => {
   let t = useDispatch();
   let r = jsx('span', {
     className: _$$s.fontBold.$,
@@ -1150,7 +1150,7 @@ let tN = Ju(e => {
       })
     })
   });
-}, 'CONFIRM_SECTION_DELETE_MODAL', ZU.YES);
+}, 'CONFIRM_SECTION_DELETE_MODAL', ModalSupportsBackground.YES);
 let tk = 'custom-section-header-context-menu';
 function tR() {
   let e = useSelector(e => e.dropdownShown);
@@ -1163,7 +1163,7 @@ function tA(e) {
   let s = () => {
     r.data.favoritesCount === 0 ? t(_$$de({
       sidebarSectionId: r.data.customSection.id
-    })) : t(_$$to2({
+    })) : t(showModalHandler({
       type: tN,
       data: {
         sectionId: r.data.customSection.id,
@@ -1319,7 +1319,7 @@ function rh(e) {
     t(_$$oB());
   }), ...rf(!_, () => getI18nString('sidebar.share'), () => {
     DF('share');
-    t(_$$to2({
+    t(showModalHandler({
       type: _$$g_,
       data: {
         fileKey: n.key,
@@ -2723,7 +2723,7 @@ function rZ(e) {
     })]
   });
 }
-let at = Ju(e => {
+let at = registerModal(e => {
   let [t, r] = useState(null);
   let n = useDispatch();
   let o = Gs();
@@ -2731,7 +2731,7 @@ let at = Ju(e => {
   let d = useSelector(e => e.teamUserByTeamId);
   let c = useSelector(e => l ? e.authedUsers.byId[l]?.plans?.filter(e => !e.is_org) : null);
   let u = getI18nString('file_browser.planless_favorites.add_favorites_to_modal_title');
-  let m = () => n(Ce());
+  let m = () => n(hideModal());
   let _ = {};
   l && _$$_3(d, l).forEach(e => {
     e.drafts_folder_id && (_[e.team_id] = e.drafts_folder_id);
@@ -2908,7 +2908,7 @@ function ai(e) {
           children: [jsx($$, {
             className: 'favorited_section--favoritesToMoveActionButtons--FUt77',
             onClick: () => {
-              t(_$$to2({
+              t(showModalHandler({
                 type: at,
                 data: {
                   favorites: _
@@ -3205,7 +3205,7 @@ function az(e) {
     }),
     ctaText: r === 0 ? getI18nString('edu.choose_team') : getI18nString('edu.create_free_team'),
     onClickCTA: r === 0 ? () => {
-      t(_$$to2({
+      t(showModalHandler({
         type: _$$q2
       }));
     } : () => {
@@ -3228,10 +3228,10 @@ function aH({
   let r = !!_$$f('edu_hide_verification');
   if (e < 0) return null;
   let s = () => {
-    t(_$$to2({
+    t(showModalHandler({
       type: _$$V4,
       data: {
-        upsellSource: _$$b4.EDU_UPGRADE_SECTION
+        upsellSource: UpsellModalType.EDU_UPGRADE_SECTION
       }
     }));
   };
@@ -3336,16 +3336,16 @@ function a1({
     bodyText: s,
     ctaText: renderI18nText('upgrade.view_plans'),
     onClickCTA: () => {
-      e === _$$VY.SINGLE_TEAM && t(_$$to2({
+      e === _$$VY.SINGLE_TEAM && t(showModalHandler({
         type: HS,
         data: {
-          upsellSource: _$$b4.ORG_UPGRADE_SECTION
+          upsellSource: UpsellModalType.ORG_UPGRADE_SECTION
         }
       }));
-      e === _$$VY.MULTIPLE_TEAMS && t(_$$to2({
+      e === _$$VY.MULTIPLE_TEAMS && t(showModalHandler({
         type: _$$u,
         data: {
-          upsellSource: _$$b4.ORG_UPGRADE_SECTION
+          upsellSource: UpsellModalType.ORG_UPGRADE_SECTION
         }
       }));
     },
@@ -3357,7 +3357,7 @@ let a5 = 'dismissed_paid_free_space_uub';
 function a8(e) {
   let t = useDispatch();
   let r = _$$h3.useTrackingContext({
-    trigger: _$$b4.UNIVERSAL_UPGRADE_SECTION
+    trigger: UpsellModalType.UNIVERSAL_UPGRADE_SECTION
   });
   let {
     open
@@ -3384,10 +3384,10 @@ function a8(e) {
     bodyText: o,
     ctaText: renderI18nText('upgrade.view_all_plans'),
     onClickCTA: () => {
-      t(_$$to2({
+      t(showModalHandler({
         type: _$$V4,
         data: {
-          upsellSource: _$$b4.UNIVERSAL_UPGRADE_SECTION
+          upsellSource: UpsellModalType.UNIVERSAL_UPGRADE_SECTION
         }
       }));
     },
@@ -3438,8 +3438,8 @@ function si({
     annual_seats,
     monthly_seats
   } = n;
-  let c = ss(currency, NW.YEAR, annual_seats) ?? 0;
-  let u = ss(currency, NW.MONTH, monthly_seats) ?? 0;
+  let c = ss(currency, BillingCycle.YEAR, annual_seats) ?? 0;
+  let u = ss(currency, BillingCycle.MONTH, monthly_seats) ?? 0;
   if (e || !(c || u)) return null;
   let {
     cancellationDate,
@@ -3473,10 +3473,10 @@ function si({
     demure: 'very',
     header: x,
     onClickCTA: () => {
-      paymentMethod ? r(_$$to2({
+      paymentMethod ? r(showModalHandler({
         type: _$$U3,
         data: {
-          upsellSource: _$$b4.RESUBSCRIBE_SECTION,
+          upsellSource: UpsellModalType.RESUBSCRIBE_SECTION,
           paymentMethod,
           nextBillDate: cancellationDate,
           amount: h,
@@ -3517,7 +3517,7 @@ function sd({
 }) {
   let r = useDispatch();
   let s = _$$h3.useTrackingContext({
-    trigger: _$$b4.UNIVERSAL_UPGRADE_SECTION
+    trigger: UpsellModalType.UNIVERSAL_UPGRADE_SECTION
   });
   let n = t ? jsxs(Fragment, {
     children: [jsx('span', {
@@ -3540,10 +3540,10 @@ function sd({
     },
     ctaDataTestId: 'redesigned-upgrade-button',
     onClickCTA: () => {
-      r(_$$to2({
+      r(showModalHandler({
         type: _$$V4,
         data: {
-          upsellSource: _$$b4.UNIVERSAL_UPGRADE_SECTION
+          upsellSource: UpsellModalType.UNIVERSAL_UPGRADE_SECTION
         }
       }));
     }
@@ -4621,7 +4621,7 @@ function iD({
     return jsx(_$$h5, {
       teams: e,
       onLeave: e => {
-        r(_$$to2({
+        r(showModalHandler({
           type: _$$p5,
           data: {
             teamId: e.id
@@ -4640,7 +4640,7 @@ function iD({
         let e = {
           workspaceId: t ?? UNASSIGNED
         };
-        r(_$$to2({
+        r(showModalHandler({
           type: Uc,
           data: e
         }));
@@ -4791,7 +4791,7 @@ function iX(e) {
   let r = useSelector(e => e.currentUserOrgId);
   let a = _$$_();
   return () => {
-    r ? t(_$$to2({
+    r ? t(showModalHandler({
       type: Uc,
       data: {
         workspaceId: e ?? UNASSIGNED
@@ -4967,7 +4967,7 @@ function nn(e) {
 let n_ = M4.Mutation(async e => {
   await _$$u4.updateDescription(e);
 });
-let np = Ju(({
+let np = registerModal(({
   workspace: e
 }) => {
   let t = useDispatch();
@@ -5097,7 +5097,7 @@ function nT({
   let n = _$$gY(nj);
   let o = [{
     option: ig
-  }, ...TS('base').filter(e => !DA(e, BV(daH.BLACK, 'base'))).map(e => ({
+  }, ...TS('base').filter(e => !DA(e, BV(ColorOptions.BLACK, 'base'))).map(e => ({
     option: e
   })), ...TS('baseLight').map(e => ({
     option: e
@@ -5285,7 +5285,7 @@ function nP(e) {
   });
 }
 let nL = (e, t) => e.baseOrgUser === null ? -1 : t.baseOrgUser === null ? 1 : e.baseOrgUser.user.handle.localeCompare(t.baseOrgUser.user.handle);
-let nD = Ju(e => {
+let nD = registerModal(e => {
   let t = _$$hS(e);
   let [r, i] = useState('');
   let [n, o, l] = _$$t5.useTabs({
@@ -5359,7 +5359,7 @@ let nD = Ju(e => {
       })]
     })
   });
-}, 'WORKSPACE_MEMBERS_MODAL', ZU.YES);
+}, 'WORKSPACE_MEMBERS_MODAL', ModalSupportsBackground.YES);
 function nM({
   getShouldShowAdminBadge: e,
   query: t,
@@ -5372,7 +5372,7 @@ function nM({
       userId: t.id,
       userViewTab: _$$o9.INTERNAL_PROFILE
     }));
-    n(Ce());
+    n(hideModal());
   }, [n]);
   let l = r.filter(e => {
     let r = e.baseOrgUser?.user;
@@ -5445,7 +5445,7 @@ function nB(e) {
     element: jsx(_$$c2, {
       'variant': 'secondary',
       'onClick': () => {
-        n(_$$to2({
+        n(showModalHandler({
           type: nD,
           data: {
             workspace: e.workspace,
@@ -5493,7 +5493,7 @@ function nB(e) {
       }), i.items.push({
         displayText: getI18nString('workspace_view.description.title'),
         onClick: () => {
-          t(_$$to2({
+          t(showModalHandler({
             type: np,
             data: {
               workspace: r.workspace
@@ -5622,7 +5622,7 @@ function nU(e) {
         children: jsx('button', {
           className: 'workspace_page_meta_content--seeAllMembers--mIOar text--fontPos11--2LvXf text--_fontBase--QdLsd',
           onClick: () => {
-            t(_$$to2({
+            t(showModalHandler({
               type: nD,
               data: {
                 workspace: e.workspace,
@@ -5839,7 +5839,7 @@ let n4 = {
     $$css: !0
   }
 };
-let n2 = Ju(({
+let n2 = registerModal(({
   workspaceId: e
 }) => {
   let t = useDispatch();
@@ -5901,8 +5901,8 @@ let n2 = Ju(({
   let g = resourceUtils.useTransformShallowEqual(f, e => e.map(e => e.key));
   let h = H6(g.unwrapOr([]));
   let x = useCallback(e => {
-    t(ES(n2));
-    t(_$$to2({
+    t(hideSpecificModal(n2));
+    t(showModalHandler({
       type: _$$a7(),
       data: {
         fileKey: e,
@@ -6069,7 +6069,7 @@ function oi({
 }) {
   let n = useDispatch();
   let o = useCallback(t => {
-    n(_$$to2({
+    n(showModalHandler({
       type: _$$a7(),
       data: {
         fileKey: e.key,
@@ -6264,7 +6264,7 @@ function oy({
     let o = a - e.bottom - 16;
     if (o > 100) {
       d({
-        transform: `translate(${qE(e.left - n, 0, e.left)}px, ${e.bottom + 8}px)`,
+        transform: `translate(${clamp(e.left - n, 0, e.left)}px, ${e.bottom + 8}px)`,
         maxHeight: o
       });
       return;
@@ -6273,7 +6273,7 @@ function oy({
     d({
       top: 'auto',
       bottom: '100vh',
-      transform: `translate(${qE(e.left - n, 0, e.left)}px, ${e.top - 8}px)`,
+      transform: `translate(${clamp(e.left - n, 0, e.left)}px, ${e.top - 8}px)`,
       maxHeight: l
     });
   }, [t, d]);
@@ -6372,7 +6372,7 @@ function oE({
   let _ = e.pinnedFiles ?? oT;
   let p = useCallback(r => {
     let a = r[0];
-    a && (e.canAdmin || a.creator?.id === n) && t(_$$to2({
+    a && (e.canAdmin || a.creator?.id === n) && t(showModalHandler({
       type: _$$I3(),
       data: {
         pinnedFileId: a.id
@@ -6519,7 +6519,7 @@ function ok({
   let u = d >= D1;
   let m = c || d > 0;
   let _ = useCallback(() => {
-    l(_$$to2({
+    l(showModalHandler({
       type: n2,
       data: {
         workspaceId: e.id
@@ -8673,7 +8673,7 @@ function dp({
             onClick: () => {
               t(_$$WX({
                 teamId: e,
-                entryPoint: TN.RESOURCE_HUB,
+                entryPoint: UpsellSourceType.RESOURCE_HUB,
                 openInNewTab: !1
               }));
             },
@@ -9737,7 +9737,7 @@ function cs({
         },
         children: [jsx(_$$l5, {
           iconLead: jsx(_$$h8, {}),
-          label: jsx(_$$h9, {
+          label: jsx(HiddenLabel, {
             children: getI18nString('community.search.select_search_scope')
           })
         }), jsxs(_$$mc3, {
@@ -10729,7 +10729,7 @@ function ua(e) {
       postUuid: e.post.publicUuid,
       feedRank: s
     });
-    t(_$$to2({
+    t(showModalHandler({
       type: _$$K4,
       data: {
         postUuid: e.post.publicUuid,
@@ -11118,7 +11118,7 @@ function un(e) {
   useEffect(() => {
     if (void 0 === k || (R(void 0), k < 0) || (k >= 0.5 * y && h && h.loadNext(50), k >= y)) return;
     let e = x.data[k];
-    t(_$$hm({
+    t(updateModal({
       type: _$$K4.type,
       data: {
         postUuid: e.publicUuid,
@@ -11239,7 +11239,7 @@ function um(e) {
     o && !1 === c ? d(!0) : c && !1 === o && d(!1);
   }, [o, c, t]);
   useEffect(() => {
-    e.initialPostUuidToShow && t(_$$to2({
+    e.initialPostUuidToShow && t(showModalHandler({
       type: _$$K4,
       data: {
         postUuid: e.initialPostUuidToShow
@@ -11498,10 +11498,10 @@ function uA({
   return t || !s || w5(s) || n.view !== 'folder' ? null : jsx(uO, {
     folderId: n.folderId,
     showPlanComparisonModal: () => {
-      r(_$$to2({
+      r(showModalHandler({
         type: _$$V4,
         data: {
-          upsellSource: _$$b4.STARTER_LIMIT_OVERVIEW,
+          upsellSource: UpsellModalType.STARTER_LIMIT_OVERVIEW,
           teamId: s.id
         }
       }));
@@ -11519,7 +11519,7 @@ function uO({
     projectId: e
   }));
   let n = _$$h3.useTrackingContext({
-    trigger: _$$b4.STARTER_LIMIT_OVERVIEW
+    trigger: UpsellModalType.STARTER_LIMIT_OVERVIEW
   });
   if (i.status !== 'loaded') return null;
   let o = i.data.project?.team?.projectsCount.status === 'loaded' ? i.data.project?.team?.projectsCount.data ?? 1 : 1;
@@ -12566,17 +12566,17 @@ function mc({
   let n = z3();
   let o = I7('exp_fbg_project_limit_upsell');
   let l = _$$h3.useTrackingContext({
-    trigger: _$$b4.FOLDER_UPSELL_CARD
+    trigger: UpsellModalType.FOLDER_UPSELL_CARD
   });
   if (!(t = _$$X$('FolderUpsellCard').unwrapOr(null)) || !e || t.tier !== FPlanNameType.STARTER || n === 'recentsAndSharing' || n === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
   let d = jsx(Us, {
     className: _$$s.noWrap.cursorDefault.$,
     onClick: e => {
       e.stopPropagation();
-      r(_$$to2({
+      r(showModalHandler({
         type: _$$V4,
         data: {
-          upsellSource: _$$b4.FOLDER_UPSELL_CARD,
+          upsellSource: UpsellModalType.FOLDER_UPSELL_CARD,
           teamId: s?.id
         }
       }));
@@ -12594,7 +12594,7 @@ function mc({
     children: jsxs(_$$$z, {
       className: U()(_$$s.flex.flexColumn.alignLeft.p24.$, 'folder_upsell--card--m7-Lh'),
       onClick: () => {
-        r(_$$to2({
+        r(showModalHandler({
           type: DV,
           data: {
             team: s,
@@ -12603,7 +12603,7 @@ function mc({
             currentPlan: _$$F7.Plan.STARTER,
             upsellPlan: _$$F7.Plan.PRO,
             editorType: null,
-            upsellSource: _$$b4.FOLDER_UPSELL_CARD
+            upsellSource: UpsellModalType.FOLDER_UPSELL_CARD
           }
         }));
       },
@@ -12664,7 +12664,7 @@ function mm({
   let r = _$$ol();
   let s = z3();
   let n = _$$h3.useTrackingContext({
-    trigger: _$$b4.FOLDER_UPSELL_CARD
+    trigger: UpsellModalType.FOLDER_UPSELL_CARD
   });
   let o = I7('exp_fbg_project_limit_upsell');
   if (!r || !e || w5(r) || s === 'recentsAndSharing' || s === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
@@ -12672,10 +12672,10 @@ function mm({
     className: _$$s.noWrap.cursorDefault.$,
     onClick: e => {
       e.stopPropagation();
-      t(_$$to2({
+      t(showModalHandler({
         type: _$$V4,
         data: {
-          upsellSource: _$$b4.FOLDER_UPSELL_CARD,
+          upsellSource: UpsellModalType.FOLDER_UPSELL_CARD,
           teamId: r?.id
         }
       }));
@@ -12698,7 +12698,7 @@ function mm({
       children: jsxs(_$$$z, {
         className: U()(_$$s.flex.alignLeft.gap12.py24.px16.bRadius8.wFull.pl36.$, 'folder_upsell--list--2Higk'),
         onClick: () => {
-          t(_$$to2({
+          t(showModalHandler({
             type: DV,
             data: {
               team: r,
@@ -12707,7 +12707,7 @@ function mm({
               currentPlan: _$$F7.Plan.STARTER,
               upsellPlan: _$$F7.Plan.PRO,
               editorType: null,
-              upsellSource: _$$b4.FOLDER_UPSELL_CARD
+              upsellSource: UpsellModalType.FOLDER_UPSELL_CARD
             }
           }));
         },
@@ -13122,7 +13122,7 @@ let mk = e => {
       return 'created_at';
   }
 };
-let mW = Ju(e => {
+let mW = registerModal(e => {
   let t = useDispatch();
   let r = useSelector(e => e.teams)[e.teamId].subscription;
   let n = e.paymentRequiresAction;
@@ -13136,7 +13136,7 @@ let mW = Ju(e => {
     });
   }, [e.teamId]);
   useEffect(() => {
-    n || r === FPaymentHealthStatusType.INCOMPLETE || t(ES({
+    n || r === FPaymentHealthStatusType.INCOMPLETE || t(hideSpecificModal({
       type: mW.type
     }));
   }, [r, t, n]);
@@ -13326,10 +13326,10 @@ function m9(e, t, r, i, n, l) {
         teamId: l.id
       }
     }));
-    let M = () => i?.(_$$to2({
+    let M = () => i?.(showModalHandler({
       type: _$$V4,
       data: {
-        upsellSource: _$$b4.BANNER
+        upsellSource: UpsellModalType.BANNER
       }
     }));
     let B = _$$_b(l);
@@ -13385,7 +13385,7 @@ function m9(e, t, r, i, n, l) {
         lowerUsageLink: jsx(_$$$z, {
           onClick: e => {
             e.preventDefault();
-            i?.(_$$to2({
+            i?.(showModalHandler({
               type: _$$v7,
               data: {
                 teamId: r
@@ -13432,7 +13432,7 @@ function m9(e, t, r, i, n, l) {
       };
     }
     if (X || Q || Z || ee) {
-      let e = () => i?.(_$$to2({
+      let e = () => i?.(showModalHandler({
         type: ZL,
         data: {
           teamId: l.id
@@ -13558,7 +13558,7 @@ function m9(e, t, r, i, n, l) {
         cta: w ? getI18nString('payments.upgrade_now') : getI18nString('payments.contact_admin_for_details'),
         ctaTrackingProperties: w ? {
           trackingDescriptor: _$$c3.UPGRADE_NOW,
-          upsellSource: _$$b4.BANNER
+          upsellSource: UpsellModalType.BANNER
         } : void 0,
         onClickCta: w ? P : null
       };
@@ -13620,7 +13620,7 @@ function m9(e, t, r, i, n, l) {
         cta: getI18nString('payments.upgrade_now'),
         ctaTrackingProperties: {
           trackingDescriptor: _$$c3.UPGRADE_NOW,
-          upsellSource: _$$b4.BANNER
+          upsellSource: UpsellModalType.BANNER
         },
         onClickCta: P,
         svg: _$$A20,
@@ -13666,7 +13666,7 @@ function m9(e, t, r, i, n, l) {
             trackingDescriptor: _$$c3.VERIFY_PAYMENT,
             trackingContextName: 'Verify Payment Banner'
           },
-          onClick: () => i?.(_$$to2({
+          onClick: () => i?.(showModalHandler({
             type: mW,
             data: {
               teamId: r,
@@ -14081,7 +14081,7 @@ function _c(e) {
     view: 'drafts'
   });
 }
-let _b = Ju(e => {
+let _b = registerModal(e => {
   let t;
   let r;
   let n = useDispatch();
@@ -14542,7 +14542,7 @@ function _M() {
   let eu = ed.length > 0;
   let [em, e_] = useState([]);
   let ep = () => {
-    e(Ce());
+    e(hideModal());
     O(!1);
   };
   let ef = (t, r) => {
@@ -14577,7 +14577,7 @@ function _M() {
       reposToMove
     } = eh(em);
     O(!0);
-    e(_$$to2({
+    e(showModalHandler({
       type: _b,
       data: {
         isPermanentDeletion: t,
@@ -14596,7 +14596,7 @@ function _M() {
       reposToMove
     } = eh(em);
     O(!0);
-    e(_$$to2({
+    e(showModalHandler({
       type: _$$K6,
       data: {
         draftsToMove,
@@ -14658,7 +14658,7 @@ function _M() {
       draftsToMove,
       reposToMove
     } = eh([r]);
-    e(_$$to2({
+    e(showModalHandler({
       type: _$$K6,
       data: {
         draftsToMove,
@@ -14793,7 +14793,7 @@ function _M() {
                 className: 'drafts_to_move_page_view--moveAllDraftsButton--9-TlX',
                 onClick: () => {
                   O(!0);
-                  e(_$$to2({
+                  e(showModalHandler({
                     type: _$$K6,
                     data: {
                       reposToMove: el.map(e => e.repo),
@@ -15953,7 +15953,7 @@ function p5({
     let t = useDispatch();
     let r = e.canEdit;
     return useCallback(() => {
-      e.name && r && t(_$$to2({
+      e.name && r && t(showModalHandler({
         type: _$$y4(),
         data: {
           folder: e
@@ -15997,7 +15997,7 @@ function p5({
   let T = (t?.canConnect ?? !1) && v;
   let E = y.status === 'loaded' && y.data < 3 && !!T;
   let I = () => {
-    n(_$$to2({
+    n(showModalHandler({
       type: _$$W5,
       data: {
         folderId: t.id
@@ -16109,7 +16109,7 @@ function p5({
             onClick: () => {
               S ? n(_$$lT({
                 requestId: S
-              })) : r && n(_$$to2({
+              })) : r && n(showModalHandler({
                 type: _$$$7,
                 data: {
                   team: r,
@@ -16130,7 +16130,7 @@ function p5({
               'variant': 'secondary',
               'size': 'lg',
               'onClick': () => {
-                n(_$$to2({
+                n(showModalHandler({
                   type: _$$l8,
                   data: {
                     folderId: t.id
@@ -16442,7 +16442,7 @@ function p7({
         'aria-label': getI18nString('license_group_view.toolbar.new_team_button_aria_label'),
         'variant': 'primary',
         'onClick': () => {
-          r(_$$to2({
+          r(showModalHandler({
             type: Uc,
             data: {}
           }));
@@ -17007,7 +17007,7 @@ function fR() {
     _.status === 'loaded' && d.stop();
   }, [currentWorkspace, _, d, n.data]);
   let b = useCallback(() => {
-    e(_$$to2({
+    e(showModalHandler({
       type: Uc,
       data: {}
     }));
@@ -17990,8 +17990,8 @@ function gj({
   let i = useRef(null);
   let [n, o] = useState(null);
   let [l, d] = useState(null);
-  let c = useMemo(() => !t && r.numberOfTiles > e.length ? _$$y3(r.numberOfTiles - e.length).map(e => jsx(gw, {}, e)) : [], [r.numberOfTiles, e.length, t]);
-  let u = t ? _$$y3(r.numberOfTiles).map(e => createElement('div', {
+  let c = useMemo(() => !t && r.numberOfTiles > e.length ? range(r.numberOfTiles - e.length).map(e => jsx(gw, {}, e)) : [], [r.numberOfTiles, e.length, t]);
+  let u = t ? range(r.numberOfTiles).map(e => createElement('div', {
     className: 'x1cqoux5 xeuugli',
     key: e
   }, jsx(gp, {}))) : e.map((e, t) => createElement('div', {
@@ -18846,7 +18846,7 @@ let gZ = e => jsx('span', {
   className: 'unsubscribe_confirmation_modal--boldText--dNK-D',
   children: e
 });
-let g0 = Ju(e => {
+let g0 = registerModal(e => {
   let t = useDispatch();
   let r = _$$iZ();
   return r ? jsxs(_$$u9, {
@@ -18873,20 +18873,20 @@ let g0 = Ju(e => {
       })
     }), jsx(_$$nD, {
       onClick: () => {
-        t(Lo());
+        t(popModalStack());
       },
       className: 'unsubscribe_confirmation_modal--button--j6qqT',
       children: renderI18nText('interstitial.done')
     }), jsx('button', {
       className: 'unsubscribe_confirmation_modal--notificationSettingsButton--vmHlZ interstitial_modal--secondaryText--IC9Gu',
       onClick: () => {
-        t(_$$to2({
+        t(showModalHandler({
           type: _$$s7,
           data: {
             tab: _$$c9.NOTIFICATIONS
           }
         }));
-        t(_$$aZ());
+        t(popPrevModal());
       },
       children: renderI18nText('interstitial.open_notifications_settings')
     })]
@@ -18986,8 +18986,8 @@ function g2({
 }
 let g6 = new class {
   constructor() {
-    this.SharerFilterOptionsSchemaValidator = vh();
-    this.PlanFilterOptionsSchemaValidator = vh();
+    this.SharerFilterOptionsSchemaValidator = createNoOpValidator();
+    this.PlanFilterOptionsSchemaValidator = createNoOpValidator();
   }
   getSharerFilterOptions(e) {
     return this.SharerFilterOptionsSchemaValidator.validate(async ({
@@ -19273,7 +19273,7 @@ function hi(e) {
   _$$i8();
   _$$V7();
   useEffect(() => {
-    accountModalTab && accountModalTab !== u ? (t(_$$to2({
+    accountModalTab && accountModalTab !== u ? (t(showModalHandler({
       type: _$$s7,
       data: {
         tab: hs(accountModalTab)
@@ -19285,14 +19285,14 @@ function hi(e) {
       policyType: emailPolicyToUnsubscribeFrom,
       policySetting: 'none'
     }).then(() => {
-      t(_$$to2({
+      t(showModalHandler({
         type: g0,
         data: {
           policyType: emailPolicyToUnsubscribeFrom
         }
       }));
     }).catch(e => {
-      t(_$$to2({
+      t(showModalHandler({
         type: _$$s7,
         data: {
           tab: hs(bb.NOTIFICATIONS)
@@ -19398,11 +19398,11 @@ function hp({
   if (!(!e.subscription && !e.org_id && s && o >= Wf) || l.getConfig().getValue('show_upsell', !1)) return null;
   let d = jsx(Us, {
     'onClick': () => {
-      t(_$$to2({
+      t(showModalHandler({
         type: _$$V4,
         data: {
           teamId: e.id,
-          upsellSource: _$$b4.STARTER_TEAM_FOOTER
+          upsellSource: UpsellModalType.STARTER_TEAM_FOOTER
         }
       }));
     },
@@ -19519,7 +19519,7 @@ function hf(e) {
     })]
   });
 }
-let hk = Ju(({
+let hk = registerModal(({
   teamId: e,
   trackingProperties: t,
   hasSecondaryBtn: r = !0
@@ -19527,7 +19527,7 @@ let hk = Ju(({
   let n = useMemo(() => To(), []);
   let o = useDispatch();
   let l = () => {
-    o(Ce());
+    o(hideModal());
   };
   let d = r ? jsx(_$$V6, {
     onClick: () => {
@@ -19652,7 +19652,7 @@ function hL({
         team: e,
         onJoin: GR(d, e.id),
         onLeave: () => {
-          d(_$$to2({
+          d(showModalHandler({
             type: _$$p5,
             data: {
               teamId: e.id
@@ -19788,7 +19788,7 @@ function hD({
     }));
   }, [_, l, E, C, r, v, t, S]);
   _$$h(() => {
-    n && _(_$$to2({
+    n && _(showModalHandler({
       type: _$$C6,
       data: {
         teamId: e
@@ -19797,7 +19797,7 @@ function hD({
   });
   let k = useRef(!1);
   useEffect(() => {
-    !k.current && f.view === 'team' && f.assetTransferRequestId && _(_$$to2({
+    !k.current && f.view === 'team' && f.assetTransferRequestId && _(showModalHandler({
       type: _$$S1(),
       data: {
         selectedAssetTransferRequest: f.assetTransferRequestId
@@ -19983,7 +19983,7 @@ function hM({
         }));
       },
       onRenameClick: () => {
-        C(_$$to2({
+        C(showModalHandler({
           type: _$$h0(),
           data: {
             team: e
@@ -20099,7 +20099,7 @@ function hM({
             onClick: () => {
               m ? t(_$$lT({
                 requestId: o[e.id]?.id
-              })) : t(_$$to2({
+              })) : t(showModalHandler({
                 type: _$$$7,
                 data: {
                   team: e,
@@ -20167,7 +20167,7 @@ function hM({
             children: jsx(_$$$z, {
               type: 'button',
               onClick: () => {
-                C(_$$to2({
+                C(showModalHandler({
                   type: hk,
                   data: {
                     teamId: e.id
@@ -20223,7 +20223,7 @@ function h1(e) {
   let s = _$$w7(e.user);
   let n = useSelector(t => t.currentUserOrgId === e.orgId);
   let o = () => {
-    t(_$$to2({
+    t(showModalHandler({
       type: _$$u0
     }));
   };
@@ -20483,8 +20483,8 @@ let h3 = connect((e, t) => ({
   });
 });
 function h9(e) {
-  let t = _$$i9(e.publishedPlugins);
-  let r = LH(_$$ky2(t, e.userId), e.org);
+  let t = filterPublishedResources(e.publishedPlugins);
+  let r = filterResourcesByOrgOrPublisher(filterResourcesByMatch(t, e.userId), e.org);
   let s = Object.keys(r).map(e => r[e]);
   let i = sortByCreatedAt(s);
   return i.length === 0 ? null : jsxs(Fragment, {
@@ -20551,7 +20551,7 @@ let xr = e => {
   let _ = getFeatureFlags().xr_debounce_threshold && m;
   let f = l.view === 'user' ? l.userViewTab : void 0;
   useEffect(() => {
-    r(ES({
+    r(hideSpecificModal({
       type: _$$E1
     }));
   }, [r, f]);
@@ -20597,7 +20597,7 @@ let xr = e => {
   let {
     fetchNext,
     hasMore
-  } = _$$WQ(b, F, 55);
+  } = usePaginatedApi(b, F, 55);
   let D = useCallback(async () => {
     if (!hasMore) return;
     let e = async () => {
@@ -21479,7 +21479,7 @@ function xT({
       view: 'teamUpgrade',
       teamFlowType: SC.UPGRADE_EXISTING_TEAM,
       teamId: n.id,
-      paymentStep: _$$tn.UPGRADE_NEW_TEAM,
+      paymentStep: UpgradeSteps.UPGRADE_NEW_TEAM,
       previousView: {
         view: 'team',
         teamId: n.id
@@ -21584,7 +21584,7 @@ function xP(e) {
     _$$hp2.register(_$$a14, e);
     return function () {
       _$$hp2.unregister(_$$a14, e);
-      t(ES({
+      t(hideSpecificModal({
         type: EO.type
       }));
     };
@@ -21629,7 +21629,7 @@ function xP(e) {
       children: [jsx('div', {
         className: 'autosave_notification--mainAction--sidqJ autosave_notification--action--Brz-5',
         onClick: () => {
-          c ? t(_$$to2({
+          c ? t(showModalHandler({
             type: EO
           })) : y8(m) ? Ay.redirect(_$$r3(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(NA({
             file: m,
@@ -21964,7 +21964,7 @@ function xz({
 function xq(e) {
   let t = _$$iZ();
   let [r, n] = useState(() => _$$LN());
-  let o = _$$b4.UPGRADE_NEW_TEAM;
+  let o = UpsellModalType.UPGRADE_NEW_TEAM;
   let l = useDispatch();
   let d = _$$sx3();
   let c = (t, a) => {
@@ -22014,7 +22014,7 @@ function xq(e) {
     name: 'Upgrade Team',
     properties: {
       teamId: p,
-      step: _$$tn.UPGRADE_NEW_TEAM
+      step: UpgradeSteps.UPGRADE_NEW_TEAM
     },
     children: jsx('div', {
       className: 'legacy_upgrade--teamUpgrade--auGJz',
@@ -22377,7 +22377,7 @@ export function $$bo0() {
     document.body.classList.remove(bi);
     document.documentElement.classList.remove(bs);
     $E();
-    e(AS());
+    e(hideModalHandler());
   }));
   useEffect(() => {
     if (desktopAPIInstance || _$$ce()) {
@@ -22436,7 +22436,7 @@ export function $$bo0() {
       })));
     }, [r, t, o.data, o.status, a]);
   }(), I.view === 'teamUpgrade') {
-    return I.paymentStep === _$$tn.UPGRADE_NEW_TEAM ? jsx(xq, {
+    return I.paymentStep === UpgradeSteps.UPGRADE_NEW_TEAM ? jsx(xq, {
       selectedView: I
     }) : jsx(_$$q, {
       selectedView: I

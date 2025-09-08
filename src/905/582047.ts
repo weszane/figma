@@ -4,18 +4,18 @@ import { Ay } from "../905/612521";
 import { s_ } from "../905/17223";
 import { Us, M7, vd } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { pi } from "../figma_app/314264";
 import { WW } from "../figma_app/345997";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 let _ = "file_limit_paywall_modal--textSection--eQg2n";
-let $$A0 = Ju(function (e) {
+let $$A0 = registerModal(function (e) {
   let t = () => {
-    e.dispatch(Lo());
+    e.dispatch(popModalStack());
   };
   return jsx(fu, {
     name: "FileLimitPaywallModal",

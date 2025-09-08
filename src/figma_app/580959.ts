@@ -2,9 +2,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, PureComponent, createRef, useContext, useMemo, forwardRef, useEffect, Fragment as _$$Fragment, useState, useRef } from "react";
 import { useSelector, useDispatch, connect } from "../vendor/514228";
 import { debounce } from "../905/915765";
-import { xN } from "../figma_app/492908";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { nearlyEqual } from "../figma_app/492908";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K } from "../905/443068";
 import { o as _$$o } from "../905/821217";
@@ -14,9 +14,9 @@ import { U as _$$U } from "../905/708285";
 import { O as _$$O } from "../905/487602";
 import { A as _$$A } from "../905/24328";
 import { y as _$$y } from "../905/661502";
-import { j0r, WXh, rXF, rrT, yTM, VD3, e0R, glU, rcl, Osy, Ez5 } from "../figma_app/763686";
+import { PropertyScope, VisibilityCondition, VariableResolvedDataType, NodePropertyCategory, DrawingElementType, StyleVariableOperation, CopyPasteType, Fullscreen, Command, SelectionPaintHelpers, AppStateTsApi } from "../figma_app/763686";
 import { n3, IA } from "../905/859698";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { GP } from "../figma_app/15927";
 import { dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
@@ -37,7 +37,7 @@ import { _j } from "../figma_app/843119";
 import { U as _$$U2 } from "../905/492359";
 import { XE, u1, Uv, Y as _$$Y2, bS } from "../figma_app/91703";
 import { AV, nh } from "../figma_app/933328";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { D as _$$D, w as _$$w } from "../905/295712";
 import { oI, Xp } from "../905/854717";
 import { sw } from "../figma_app/914957";
@@ -46,9 +46,9 @@ import { A as _$$A2 } from "../905/482208";
 import { C1, rC } from "../905/713722";
 import { ZB } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { hS, E7, oV, _W, SX, gl } from "../905/216495";
+import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isAutoMarker, isInvalidValue } from "../905/216495";
 import { sb, Tm, rC as _$$rC } from "../figma_app/385874";
 import { SK } from "../905/619652";
 import { b as _$$b } from "../figma_app/755529";
@@ -114,19 +114,19 @@ import { zm, Cv, BT, np, wM, NI, L3, mK, p as _$$p, Tp, EC, x7, n1, EX, wh, cD, 
 import { A as _$$A3 } from "../2854/630701";
 var n;
 var w = C;
-let $$tt9 = new Set([j0r.STROKE]);
+let $$tt9 = new Set([PropertyScope.STROKE]);
 let tr = e => {
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     exportBackgroundDisabled: !e
   });
 };
 let tn = (e, t, r, n) => {
   getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-fill-change");
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     fillPaints: e
   }, {
     shouldCommit: t,
-    overwrite: n ?? WXh.ONLY_WHEN_NOT_EMPTY
+    overwrite: n ?? VisibilityCondition.ONLY_WHEN_NOT_EMPTY
   });
   a2("fillPaints");
 };
@@ -137,9 +137,9 @@ let $$ti6 = memo(function (e) {
   let r = cJ();
   let n = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
-    return !t || hS(t) && 0 === t.length;
+    return !t || isValidValue(t) && 0 === t.length;
   });
-  let o = Fs("FILL", "PROPS_PANEL", rXF.COLOR);
+  let o = Fs("FILL", "PROPS_PANEL", VariableResolvedDataType.COLOR);
   let l = useCallback((e, {
     fromSearch: r
   } = {}) => {
@@ -149,7 +149,7 @@ let $$ti6 = memo(function (e) {
       fromSearch: r
     }));
   }, [dispatch]);
-  let u = E7(_$$b("guid"));
+  let u = normalizeValue(_$$b("guid"));
   let p = yT({
     ...e,
     styleType: "FILL",
@@ -184,7 +184,7 @@ let $$ti6 = memo(function (e) {
                 onPickerShown: h,
                 pickerInStyleCreationShown: e.pickerInStyleCreationShown,
                 recordingKey: Pt(e, "paintList"),
-                selectedPropertyType: rrT.FILL,
+                selectedPropertyType: NodePropertyCategory.FILL,
                 shouldUseSelectedStyleProperties: e.shouldUseSelectedStyleProperties,
                 variableScopes: e.variableScopes,
                 ..._,
@@ -196,13 +196,13 @@ let $$ti6 = memo(function (e) {
             children: (() => {
               if (e.selectionContainsFrames && e.hasExports && !r && !n) return jsx(Ad, {
                 label: jsx(Fragment, {}),
-                input: jsx(_$$S, {
+                input: jsx(Checkbox, {
                   muted: !0,
-                  mixed: e.exportBackgroundDisabled === oV,
+                  mixed: e.exportBackgroundDisabled === MIXED_MARKER,
                   checked: !1 === e.exportBackgroundDisabled,
                   onChange: tr,
                   recordingKey: Pt(e, "exportDisableCheckbox"),
-                  label: jsx(_$$J, {
+                  label: jsx(Label, {
                     htmlAttributes: {
                       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
                       "data-tooltip-type": Ib.TEXT
@@ -234,8 +234,8 @@ export function $$ta0(e) {
   let l = p8("currentTool");
   let d = p8("activeCanvasEditModeType");
   let c = zr();
-  let u = E7(_$$b("guid"));
-  let p = Fs("STROKE", "PROPS_PANEL", rXF.COLOR);
+  let u = normalizeValue(_$$b("guid"));
+  let p = Fs("STROKE", "PROPS_PANEL", VariableResolvedDataType.COLOR);
   let _ = o3(nt.useGrid);
   return jsx(dD.Provider, {
     value: {
@@ -281,9 +281,9 @@ class to extends PureComponent {
       } : {
         strokePaints: e
       };
-      Y5.updateSelectionProperties(i, {
+      fullscreenValue.updateSelectionProperties(i, {
         shouldCommit: t,
-        overwrite: n ?? WXh.ONLY_WHEN_NOT_EMPTY
+        overwrite: n ?? VisibilityCondition.ONLY_WHEN_NOT_EMPTY
       });
       a2("strokePaints");
     };
@@ -303,7 +303,7 @@ class to extends PureComponent {
           strokeAlign
         } = e;
         trackEventAnalytics("Individual Border Alignment Changed", {
-          position: hS(strokeAlign) ? strokeAlign : "__mixed__"
+          position: isValidValue(strokeAlign) ? strokeAlign : "__mixed__"
         });
       }
       this.onNonPaintsChange(e, t);
@@ -369,7 +369,7 @@ class to extends PureComponent {
     });
     let t = Fc(this.props.numSelectedByType, this.props.strokePaints, e.inheritStyleKey);
     let r = this.props.pickerShown?.id === this.settingsId;
-    let n = this.props.strokePanelMode !== yTM.WASHI_TAPE;
+    let n = this.props.strokePanelMode !== DrawingElementType.WASHI_TAPE;
     return jsx(_$$k2, {
       name: "stroke_panel",
       children: jsxs(Zk, {
@@ -381,7 +381,7 @@ class to extends PureComponent {
           onPickerShown: ts,
           pickerInStyleCreationShown: this.props.pickerInStyleCreationShown,
           recordingKey: Pt(this.props, "paintList"),
-          selectedPropertyType: rrT.STROKE,
+          selectedPropertyType: NodePropertyCategory.STROKE,
           variableScopes: $$tt9,
           ...Rz(this.props),
           ...e,
@@ -465,7 +465,7 @@ let $$tc5 = memo(function ({
   let j = !!useContext(zK);
   let U = j ? `style-modal-${qj(m)}` : qj(m);
   let B = WH(h, g, _);
-  let G = AH(B?.key ?? null, E7(g));
+  let G = AH(B?.key ?? null, normalizeValue(g));
   let H = B?.isLocal ? B : G?.status === "loaded" ? G.data : null;
   let z = function () {
     let e = Rb();
@@ -474,7 +474,7 @@ let $$tc5 = memo(function ({
     let n = Object.keys(t).length > 0;
     return r || n;
   }();
-  let W = t && hS(t) && (t.length > 1 || t.some(e => !sb(e.type))) ? "createStyle" : z ? "createVariable" : "createStyle";
+  let W = t && isValidValue(t) && (t.length > 1 || t.some(e => !sb(e.type))) ? "createStyle" : z ? "createVariable" : "createStyle";
   let K = useCallback(() => M && M.id === U ? M : null, [M, U]);
   let Y = useCallback(({
     initialX: e,
@@ -490,7 +490,7 @@ let $$tc5 = memo(function ({
     Y(e);
   }, [Y]);
   let X = useCallback((e, t) => {
-    r([e], t, void 0, WXh.ONLY_WHEN_NOT_DISABLED);
+    r([e], t, void 0, VisibilityCondition.ONLY_WHEN_NOT_DISABLED);
   }, [r]);
   let q = kl("numSelectedByType");
   let J = y5(R || null);
@@ -538,7 +538,7 @@ let $$tc5 = memo(function ({
     }), (() => {
       let e = K();
       if (!e) return;
-      let r = t && hS(t) && 1 === t.length ? t[0] : {
+      let r = t && isValidValue(t) && 1 === t.length ? t[0] : {
         type: "SOLID",
         color: {
           r: 1,
@@ -576,27 +576,27 @@ export function $$tu7(e) {
   let n = null != t;
   let o = useCallback(() => n, [n]);
   let l = ER();
-  let d = E7(_$$b("guid"));
+  let d = normalizeValue(_$$b("guid"));
   let c = useSelector(t => {
-    let r = e.selectedPropertyType === rrT.STROKE ? "strokePaints" : "fillPaints";
+    let r = e.selectedPropertyType === NodePropertyCategory.STROKE ? "strokePaints" : "fillPaints";
     return e.shouldUseSelectedStyleProperties ? t.mirror.selectedStyleProperties[r] : t.mirror.selectionProperties[r];
   });
   let u = useCallback((t, r = {
     preventAutoToggle: !1
   }) => {
     switch (e.selectedPropertyType) {
-      case rrT.STROKE:
+      case NodePropertyCategory.STROKE:
         if (!l) {
           a2("strokePaints");
-          Y5.triggerActionInUserEditScope("add-stroke-to-selection");
-          let e = _W(c, []);
+          fullscreenValue.triggerActionInUserEditScope("add-stroke-to-selection");
+          let e = valueOrFallback(c, []);
           r.preventAutoToggle || atomStoreManager.set(td, e.length);
         }
         break;
-      case rrT.FILL:
-        if (l) Y5.triggerActionInUserEditScope("add-fill-to-style-selection");else {
-          Y5.triggerActionInUserEditScope("add-fill-to-selection", t);
-          let e = _W(c, []);
+      case NodePropertyCategory.FILL:
+        if (l) fullscreenValue.triggerActionInUserEditScope("add-fill-to-style-selection");else {
+          fullscreenValue.triggerActionInUserEditScope("add-fill-to-selection", t);
+          let e = valueOrFallback(c, []);
           r.preventAutoToggle || atomStoreManager.set(tl, e.length);
         }
         a2("fillPaints");
@@ -620,15 +620,15 @@ export function $$tu7(e) {
   let v = useCallback(e => {
     o() || r(XE());
     r(Uv());
-    let t = _W(c, []).filter((t, r) => r !== e);
-    _$$f(VD3.IGNORE, e0R.UNKNOWN, () => {
+    let t = valueOrFallback(c, []).filter((t, r) => r !== e);
+    _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
       onChange(t);
     });
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
   }, [o, onChange, r, c]);
   let A = useCallback((e, t, r, n) => {
     onChange(e, t, void 0, n);
-    _W(c, []).length !== e.length && Tm.clearCache();
+    valueOrFallback(c, []).length !== e.length && Tm.clearCache();
   }, [onChange, c]);
   let N = useCallback(() => {
     Tm.clearCache();
@@ -643,11 +643,11 @@ export function $$tu7(e) {
   let {
     useGrid
   } = useContext(dD);
-  let R = _W(c, []).filter(e => "PATTERN" === e.type).length >= 1;
+  let R = valueOrFallback(c, []).filter(e => "PATTERN" === e.type).length >= 1;
   let L = useCallback((t, r, n, a, s, l, d, u, p) => {
     let _ = o() ? "preview-paint" : "paint";
     let b = Tm.getId(r, selectedPropertyType, _);
-    let A = _W(c, []).slice(0, r).some(e => e.visible);
+    let A = valueOrFallback(c, []).slice(0, r).some(e => e.visible);
     return jsx($$tp1, {
       disablePatternPaints: R,
       hasFocus: s,
@@ -669,18 +669,18 @@ export function $$tu7(e) {
       sceneGraphSelection: e.sceneGraphSelection,
       selected: stylePickerShown.isShown ? pickerShown?.id === b : n,
       selectedPropertyType,
-      singletonRow: _W(c, []).length <= 1,
+      singletonRow: valueOrFallback(c, []).length <= 1,
       stylePickerShown,
       variableScopes,
       ...w
     }, useGrid ? void 0 : `paint-${r}`);
   }, [o, selectedPropertyType, c, useGrid, inheritStyleKeyField, stylePickerShown, pickerShown?.id, onPickerShown, pickerInStyleCreationShown, onApplyStyle, recordingKey, variableScopes, w, v, R, e.sceneGraphSelection]);
   let D = (() => {
-    let t = _W(c, []);
+    let t = valueOrFallback(c, []);
     switch (e.selectedPropertyType) {
-      case rrT.STROKE:
+      case NodePropertyCategory.STROKE:
         return 0 === t.length ? getI18nString("fullscreen.properties_panel.section_stroke.tooltip_addStroke") : getI18nString("fullscreen.properties_panel.section_stroke.tooltip_addStrokeFill");
-      case rrT.FILL:
+      case NodePropertyCategory.FILL:
         return getI18nString("fullscreen.properties_panel.section_fill.tooltip_addFill");
       default:
         return;
@@ -699,9 +699,9 @@ export function $$tu7(e) {
     selectedPropertyType: e.selectedPropertyType,
     title: (() => {
       switch (e.selectedPropertyType) {
-        case rrT.STROKE:
+        case NodePropertyCategory.STROKE:
           return getI18nString("fullscreen.properties_panel.fill.stroke");
-        case rrT.FILL:
+        case NodePropertyCategory.FILL:
           return getI18nString("fullscreen.properties_panel.fill.fill");
         default:
           return "";
@@ -712,7 +712,7 @@ export function $$tu7(e) {
     defaultColor: e.defaultColor,
     entrypointMenu: (() => {
       switch (e.selectedPropertyType) {
-        case rrT.FILL:
+        case NodePropertyCategory.FILL:
           return jsx(ZQ, {
             addPaintOfType: e => {
               u({
@@ -721,7 +721,7 @@ export function $$tu7(e) {
             },
             disablePatternPaints: R
           });
-        case rrT.STROKE:
+        case NodePropertyCategory.STROKE:
           return jsx(UX, {
             addPaint: () => u({}, {
               preventAutoToggle: !0
@@ -769,7 +769,7 @@ export class $$tp1 extends PureComponent {
       if (!this.row.current) return;
       let e = cn(this.row.current);
       this.props.onPickerShown?.();
-      Y5.updateAppModel({
+      fullscreenValue.updateAppModel({
         currentSelectedProperty: {
           type: this.props.selectedPropertyType,
           indices: [this.props.index]
@@ -791,12 +791,12 @@ export class $$tp1 extends PureComponent {
     };
     this.hidePicker = () => {
       this.isInStyleModal() ? this.props.dispatch(_$$w()) : this.props.dispatch(XE());
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     };
     this.togglePicker = () => {
       this.pickerShown() ? this.hidePicker() : this.showPicker();
     };
-    this.isDragTarget = () => !!E7(this.props.paint);
+    this.isDragTarget = () => !!normalizeValue(this.props.paint);
     this.onDragEnter = () => {
       this.setState({
         isDragHover: !0
@@ -812,24 +812,24 @@ export class $$tp1 extends PureComponent {
         ...this.state,
         isDragHover: !1
       });
-      let t = E7(this.props.paint);
+      let t = normalizeValue(this.props.paint);
       if (!t) return;
-      let r = Y5.fileArrayToString;
+      let r = fullscreenValue.fileArrayToString;
       if (r) {
         let n = r(Array.from(e.files));
-        glU.dropImageOnPaintThumbnail(t.blendMode || "NORMAL", t.opacity || 1, n, this.props.index, this.props.selectedPropertyType);
+        Fullscreen.dropImageOnPaintThumbnail(t.blendMode || "NORMAL", t.opacity || 1, n, this.props.index, this.props.selectedPropertyType);
       }
     };
     this.dropImageOnPaintThumbnail = (e, t, r) => {
-      let n = Y5.fileArrayToString;
+      let n = fullscreenValue.fileArrayToString;
       if (n) {
         let i = n(Array.from(r.files));
-        glU.dropImageOnPaintThumbnail(e, t, i, this.props.index, this.props.selectedPropertyType);
+        Fullscreen.dropImageOnPaintThumbnail(e, t, i, this.props.index, this.props.selectedPropertyType);
       }
     };
-    this.updateStillImageAndSelectionPropertiesForGIF = (e, t) => l7.user("update-gif-image", () => SK(e, t, this.props.selectedPropertyType));
+    this.updateStillImageAndSelectionPropertiesForGIF = (e, t) => permissionScopeHandler.user("update-gif-image", () => SK(e, t, this.props.selectedPropertyType));
     this.onDetachVariableClick = () => {
-      _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+      _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         let e = _$$$(this.props.paint);
         this.onPaintPickerChange(e, zk.YES);
       });
@@ -839,10 +839,10 @@ export class $$tp1 extends PureComponent {
     return null != this.context;
   }
   componentDidMount() {
-    this.isInStyleModal() || (Y5.fromFullscreen.on("openImagePicker", this.handleOpenImagePicker), Y5.fromFullscreen.on("closeImagePicker", this.handleCloseImagePicker));
+    this.isInStyleModal() || (fullscreenValue.fromFullscreen.on("openImagePicker", this.handleOpenImagePicker), fullscreenValue.fromFullscreen.on("closeImagePicker", this.handleCloseImagePicker));
   }
   componentWillUnmount() {
-    this.isInStyleModal() || (Y5.fromFullscreen.removeListener("openImagePicker", this.handleOpenImagePicker), Y5.fromFullscreen.removeListener("closeImagePicker", this.handleCloseImagePicker));
+    this.isInStyleModal() || (fullscreenValue.fromFullscreen.removeListener("openImagePicker", this.handleOpenImagePicker), fullscreenValue.fromFullscreen.removeListener("closeImagePicker", this.handleCloseImagePicker));
     this.isInStyleModal() && this.pickerShown() && this.hidePicker();
   }
   hasBoundPaintVariable() {
@@ -854,9 +854,9 @@ export class $$tp1 extends PureComponent {
   get lastAddedItemIndexAtom() {
     if (this.isInStyleModal()) return null;
     switch (this.props.selectedPropertyType) {
-      case rrT.FILL:
+      case NodePropertyCategory.FILL:
         return tl;
-      case rrT.STROKE:
+      case NodePropertyCategory.STROKE:
         return td;
       default:
         return null;
@@ -903,7 +903,7 @@ export class $$tp1 extends PureComponent {
         children: jsx(_$$K, {
           recordingKey: Pt(this.props, "removeButton"),
           onClick: r ? () => {
-            Y5.triggerActionEnumInUserEditScope(rcl.UNBIND_SELECTION, {
+            fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
               fieldSchemaId: r,
               fieldType: _j.IMAGE,
               removeBoundData: !0
@@ -968,7 +968,7 @@ export class $$tp1 extends PureComponent {
         dropImageOnPaintThumbnail: this.dropImageOnPaintThumbnail,
         dropdownShown: this.props.dropdownShown,
         hasVisiblePaintBelow: this.props.hasVisiblePaintBelow,
-        hidePatternPaints: this.props.selectedPropertyType !== rrT.FILL && this.props.selectedPropertyType !== rrT.STROKE || this.isInStyleModal(),
+        hidePatternPaints: this.props.selectedPropertyType !== NodePropertyCategory.FILL && this.props.selectedPropertyType !== NodePropertyCategory.STROKE || this.isInStyleModal(),
         inheritStyleKeyField: this.props.inheritStyleKeyField,
         isInStyleModal: this.isInStyleModal(),
         onApplyStyle: this.isInStyleModal() ? void 0 : this.props.onApplyStyle,
@@ -1002,7 +1002,7 @@ export let $$t_2 = forwardRef((e, t) => {
     return (t = _$$U2() ? e.paint.colorVar || e.paint.imageVar : e.paint.colorVar) && ("ALIAS" === t.dataType || "CMS_ALIAS" === t.dataType) ? t : null;
   };
   let o = () => {
-    _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+    _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       let t = _$$$(e.paint);
       t.visible = !0;
       e.onChange(t, zk.YES);
@@ -1067,7 +1067,7 @@ export let $$t_2 = forwardRef((e, t) => {
               enableDetach: e.enableVariableDetach && !!e.sceneGraphSelection,
               onDetachClick: () => {
                 let e = t.value?.cmsAliasValue?.fieldId;
-                Y5.triggerActionEnumInUserEditScope(rcl.UNBIND_SELECTION, {
+                fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
                   fieldSchemaId: e,
                   fieldType: _j.IMAGE,
                   removeBoundData: !1
@@ -1244,12 +1244,12 @@ export function $$th8(e) {
           ...e.paint,
           color: t
         };
-        xN(t.a, e.paint.opacity ?? 1) || (n.opacity = t.a, n.visible = !0);
+        nearlyEqual(t.a, e.paint.opacity ?? 1) || (n.opacity = t.a, n.visible = !0);
         r(n);
       },
       recordingKey: Pt(e, "value"),
       noBorderOnFocus: !0
-    }), (!e.allowAutoAndMixed || !SX(e.paint.color) && !gl(e.paint.color)) && jsx(Pd, {
+    }), (!e.allowAutoAndMixed || !isAutoMarker(e.paint.color) && !isInvalidValue(e.paint.color)) && jsx(Pd, {
       className: n1,
       dispatch: o,
       inputClassName: n,
@@ -1286,7 +1286,7 @@ export function $$tg3(e) {
     parseAlpha: !0
   }), [e.allowAutoAndMixed]);
   let r = useMemo(() => new ZB(() => e.paint), [e.paint]);
-  let n = useMemo(() => e.allowAutoAndMixed && (SX(e.paint.color) || gl(e.paint.color)) ? e.paint.color : e.paint.color && {
+  let n = useMemo(() => e.allowAutoAndMixed && (isAutoMarker(e.paint.color) || isInvalidValue(e.paint.color)) ? e.paint.color : e.paint.color && {
     ...e.paint.color,
     a: e.paint.opacity ?? 1
   }, [e.allowAutoAndMixed, e.paint]);
@@ -1349,11 +1349,11 @@ function tf({
   let F = useSelector(t => _$$b2(t, e, null));
   let j = useCallback(() => {
     v(XE());
-    glU.selectStyleByGuid("");
+    Fullscreen.selectStyleByGuid("");
   }, [v]);
   let B = useCallback(() => {
     if (!C.current) return;
-    k && k.value && glU.selectStyleByGuid(k.value.node_id);
+    k && k.value && Fullscreen.selectStyleByGuid(k.value.node_id);
     let {
       x,
       y
@@ -1377,13 +1377,13 @@ function tf({
   }, [j, G, B, stylePreviewShown.isShown, x]);
   let W = useCallback(e => {
     let t = GP(e);
-    l7.user("apply-paint-to-style", () => Osy.updateStyleWithPaint(n, t));
+    permissionScopeHandler.user("apply-paint-to-style", () => SelectionPaintHelpers.updateStyleWithPaint(n, t));
   }, [n]);
   let K = useCallback(e => {
     v(nh({
       style: e,
       callback: e => {
-        l7.user("apply-style", () => Osy.updateStyle(n, e));
+        permissionScopeHandler.user("apply-style", () => SelectionPaintHelpers.updateStyle(n, e));
       }
     }));
     trackEventAnalytics("Edit Selection Style", {
@@ -1394,11 +1394,11 @@ function tf({
   }, [t, v, _, j, n]);
   let X = useCallback(e => {
     e.stopPropagation();
-    l7.user("detach-style", () => Osy.detachStyle(n));
-    glU.selectStyle(n3.INVALID, IA.INVALID);
+    permissionScopeHandler.user("detach-style", () => SelectionPaintHelpers.detachStyle(n));
+    Fullscreen.selectStyle(n3.INVALID, IA.INVALID);
   }, [n]);
   let q = useCallback(() => {
-    Osy.selectOnlySameStyle(n);
+    SelectionPaintHelpers.selectOnlySameStyle(n);
     trackEventAnalytics("Select Selection Style", {
       count: t
     });
@@ -1546,7 +1546,7 @@ $$t_2.displayName = "Paint";
       };
       this.hidePicker = () => {
         this.props.dispatch(XE());
-        Y5.deselectProperty();
+        fullscreenValue.deselectProperty();
       };
       this.togglePicker = () => {
         this.pickerShown() ? this.hidePicker() : this.showPicker();
@@ -1559,8 +1559,8 @@ $$t_2.displayName = "Paint";
       };
       this.onCreateStyle = () => {
         let e = GP(this.props.paint);
-        let t = Osy.paintDataNodesInPaint(e);
-        this.props.dispatch(_$$to({
+        let t = SelectionPaintHelpers.paintDataNodesInPaint(e);
+        this.props.dispatch(showModalHandler({
           type: _$$t2,
           data: {
             originalPaint: this.props.paint,
@@ -1574,11 +1574,11 @@ $$t_2.displayName = "Paint";
         this.hidePicker();
       };
       this.onApplyStyle = e => {
-        let t = Osy.paintDataNodesInPaint(GP(this.props.paint));
+        let t = SelectionPaintHelpers.paintDataNodesInPaint(GP(this.props.paint));
         this.props.dispatch(nh({
           style: e,
           callback: e => {
-            if (t.length > 1) this.props.dispatch(_$$to({
+            if (t.length > 1) this.props.dispatch(showModalHandler({
               type: _$$t2,
               data: {
                 originalPaint: this.props.paint,
@@ -1591,7 +1591,7 @@ $$t_2.displayName = "Paint";
               }
             }));else {
               let t = GP(this.props.paint);
-              l7.user("apply-style", () => Osy.applyStyleToPaintDatas(t, e));
+              permissionScopeHandler.user("apply-style", () => SelectionPaintHelpers.applyStyleToPaintDatas(t, e));
               trackEventAnalytics("Apply Style to Selection Paint ", {
                 count: this.props.uniqueNodesCount
               });
@@ -1608,13 +1608,13 @@ $$t_2.displayName = "Paint";
       });
       this.onChangeForPaint = (e, t) => {
         let r = t == zk.YES;
-        let n = U2(e) || e.colorVar ? Osy.resolvePaintWithVariable(GP(this.props.paint), GP(e)) : "";
+        let n = U2(e) || e.colorVar ? SelectionPaintHelpers.resolvePaintWithVariable(GP(this.props.paint), GP(e)) : "";
         let i = e;
         if (n) {
           let t = _$$K2(n);
           i = t?.paint || e;
         }
-        l7.user("change-paint", () => Osy.updatePaint(GP(this.props.paint), GP(i), r, GP(this.currentPaintValue())));
+        permissionScopeHandler.user("change-paint", () => SelectionPaintHelpers.updatePaint(GP(this.props.paint), GP(i), r, GP(this.currentPaintValue())));
         this.setState({
           paintValueInPicker: i
         });
@@ -1630,7 +1630,7 @@ $$t_2.displayName = "Paint";
       };
       this.debouncedOnChangeForPaintPicker = debounce(this.onChangeForPaintPicker);
       this.onDetachVariableClick = () => {
-        _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+        _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
           let e = _$$$(this.props.paint);
           this.onChangeForPaint(e, zk.YES);
         });
@@ -1652,7 +1652,7 @@ $$t_2.displayName = "Paint";
       };
       this.onSelectSamePaintMouseDown = () => {
         let e = GP(this.props.paint);
-        Osy.selectOnlySamePaint(e);
+        SelectionPaintHelpers.selectOnlySamePaint(e);
         trackEventAnalytics("Select Selection Paint", {
           count: this.props.uniqueNodesCount
         });
@@ -1865,9 +1865,9 @@ export function $$tb4(e) {
   useEffect(() => {
     !1 === d && h(void 0);
   }, [d]);
-  let f = Fs("MULTI", "PROPS_PANEL", rXF.COLOR);
+  let f = Fs("MULTI", "PROPS_PANEL", VariableResolvedDataType.COLOR);
   let E = sO();
-  let y = Ez5.singleSlideView().isFocusedNodeViewEnabled();
+  let y = AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled();
   let T = E && y;
   let {
     sceneGraphSelection
@@ -1891,19 +1891,19 @@ export function $$tb4(e) {
     F.current = forceUpdateForUndo;
   }, [forceUpdateForUndo, S, sceneGraphSelection, G, B]);
   let H = () => {
-    Osy.setIsPaintFocused(!0);
+    SelectionPaintHelpers.setIsPaintFocused(!0);
   };
   let z = () => {
-    Osy.setIsPaintFocused(!1);
+    SelectionPaintHelpers.setIsPaintFocused(!1);
   };
   let W = () => {
-    Osy.setIsPaintOpacityScrubbing(!0);
+    SelectionPaintHelpers.setIsPaintOpacityScrubbing(!0);
   };
   let Y = () => {
-    Osy.setIsPaintOpacityScrubbing(!1);
+    SelectionPaintHelpers.setIsPaintOpacityScrubbing(!1);
   };
   useEffect(() => () => {
-    Osy.setIsPaintFocused(!1);
+    SelectionPaintHelpers.setIsPaintFocused(!1);
   }, []);
   let $ = [...u.paints.filter(e => !!e.paint.colorVar), ...u.styles];
   let X = [...u.paints.filter(e => !e.paint.colorVar)];
@@ -1927,7 +1927,7 @@ export function $$tb4(e) {
           trackEventAnalytics("Show Selection Paints For Large Selection", {
             fileKey: e.openFile?.key || ""
           });
-          Osy.ignoreLimitWhenCollectingPaints();
+          SelectionPaintHelpers.ignoreLimitWhenCollectingPaints();
         },
         "aria-label": getI18nString("fullscreen.properties_panel.fill.show_selection_colors"),
         recordingKey: Pt(e, "limitExceeded"),

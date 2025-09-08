@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useId, useMemo } from "react";
 import { W } from "../905/458642";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 import { r as _$$r2 } from "../905/5729";
 export let $$l0 = forwardRef(function ({
   autofocus: e = !1,
@@ -34,7 +34,7 @@ export let $$l0 = forwardRef(function ({
   return jsx("fieldset", {
     ...t,
     ...c,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ref: u,
     role: "radiogroup",
     "aria-readonly": d || void 0,

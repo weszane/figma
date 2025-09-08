@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { getSingleKey, isEmptyObject } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, KjJ, m1T, JA, Egt, Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, ScrollBehavior, LayoutTabType, SnapshotLevel, SceneGraphHelpers, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { GI } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -33,7 +33,7 @@ import { j7 } from "../905/929976";
 import { Rb } from "../figma_app/8833";
 import { i as _$$i } from "../figma_app/85949";
 import { m0 } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { E as _$$E } from "../905/95280";
 import { bd, hq, GL, kH, Yu, wr, Uc, sK, yF, sq, tU, pr, tJ, Ir, D$, Dh } from "../figma_app/741237";
@@ -42,7 +42,7 @@ import { _Z } from "../figma_app/623300";
 import { S as _$$S } from "../figma_app/106763";
 import { TA } from "../905/372672";
 import { y0 } from "../figma_app/718307";
-import { J2, ut } from "../figma_app/84367";
+import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { wA as _$$wA, $y, Fk } from "../figma_app/167249";
 import { sp, K3 } from "../figma_app/678300";
 import { vo } from "../figma_app/164212";
@@ -274,7 +274,7 @@ function eT(e) {
     let s = e.get(t)?.type;
     return !!s && !_$$w.includes(s);
   }), e.ids);
-  let i = $y((e, t) => glU ? glU.getLastEditTimes(t).reduce((e, s, r) => (e.set(t[r], s), e), new Map()) : new Map(), e.ids);
+  let i = $y((e, t) => Fullscreen ? Fullscreen.getLastEditTimes(t).reduce((e, s, r) => (e.set(t[r], s), e), new Map()) : new Map(), e.ids);
   return jsx(ej, {
     ids: s,
     thumbnailEdits: i,
@@ -388,7 +388,7 @@ class eF extends o6 {
     return jsxs("div", {
       className: t,
       style: e,
-      children: [this.renderPlainIndents(this.props.level), this.props.sectionType === KjJ.FIXED ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed") : getI18nString("fullscreen.properties_panel.scrolls")]
+      children: [this.renderPlainIndents(this.props.level), this.props.sectionType === ScrollBehavior.FIXED ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed") : getI18nString("fullscreen.properties_panel.scrolls")]
     });
   }
 }
@@ -619,12 +619,12 @@ class ez extends o6 {
         this.toggleSelected(t);
         return;
       }
-      getFeatureFlags().version_diffing && this.props.editModeType === m1T.COMPARE_CHANGES && glU.setActiveChange(t) && this.props.showViewChangesNotification(t);
+      getFeatureFlags().version_diffing && this.props.editModeType === LayoutTabType.COMPARE_CHANGES && Fullscreen.setActiveChange(t) && this.props.showViewChangesNotification(t);
       let s = getSingleKey(this.props.sceneGraphSelection);
       let r = null;
       if (s ? r = s : this.rangeSelectAnchorNodeId && K3(this.props.sceneGraphSelection, this.rangeSelectAnchorNodeId) && (r = this.rangeSelectAnchorNodeId), (this.props.allowSelectRange ?? !0) && e.shiftKey && r) {
         GL(r, t);
-        Y5.commit();
+        fullscreenValue.commit();
         return;
       }
       sp(this.getScene(), this.props.sceneGraphSelection, t) || (this.updateSelection(t), this.rangeSelectAnchorNodeId = t);
@@ -669,7 +669,7 @@ class ez extends o6 {
           }
         }
         let n = OL(this.getScene(), this.props.sceneGraphSelection, this.topByGuid, this.heightByGuid, this.sectionById, e.clientX - this.state.mouseDown.x, t, this.mouseOverStickyHeaderGuid(e.clientY), this.props.panelType ?? g$.Object, this.props.topNodeProperties, this.props.insertionLineBoxOffset);
-        this.state.dropTarget && n && this.state.dropTarget.index !== n.index && _$$H.trigger(JA.SNAP);
+        this.state.dropTarget && n && this.state.dropTarget.index !== n.index && _$$H.trigger(SnapshotLevel.SNAP);
         (this.hasCrossedDragThreshold || !n) && (this.expandDropTargetIfNeeded(n, t), this.setState({
           dropTarget: n
         }));
@@ -696,16 +696,16 @@ class ez extends o6 {
           if (!l || void 0 === index) return;
           let a = e.altKey;
           let o = Lc(l, index);
-          a ? (this.props.onSelectNodesFromLayersPanel?.(), l7.user("duplicate-selection", () => kH(l.guid, o, section))) : (this.props.onSelectNodesFromLayersPanel?.(), l7.user("reparent-selection", () => Yu(l.guid, o, section)));
+          a ? (this.props.onSelectNodesFromLayersPanel?.(), permissionScopeHandler.user("duplicate-selection", () => kH(l.guid, o, section))) : (this.props.onSelectNodesFromLayersPanel?.(), permissionScopeHandler.user("reparent-selection", () => Yu(l.guid, o, section)));
           hq(l.guid);
-          Egt.clearTemporarilyExpanded();
-          Y5.commit();
+          SceneGraphHelpers.clearTemporarilyExpanded();
+          fullscreenValue.commit();
         }
       }
       if (this.setState({
         mouseDown: null,
         dropTarget: null
-      }), this.isDraggingToToggle && (s = !0, this.isDraggingToToggle = null, Y5.commit()), !s) return aH;
+      }), this.isDraggingToToggle && (s = !0, this.isDraggingToToggle = null, fullscreenValue.commit()), !s) return aH;
     }, {
       recordMetadata: e => {
         let t = this.getScene();
@@ -752,7 +752,7 @@ class ez extends o6 {
     };
     this.onScrollContainerMouseDown = () => {
       wr();
-      Y5.commit();
+      fullscreenValue.commit();
     };
     this.scrollContainerRef = e => {
       this.scrollContainer = e;
@@ -782,7 +782,7 @@ class ez extends o6 {
       this.isDraggingToToggle = {
         locked: r
       };
-      l7.user("set-locked", () => {
+      permissionScopeHandler.user("set-locked", () => {
         tU(s.guid, r, t.altKey);
       });
     };
@@ -794,7 +794,7 @@ class ez extends o6 {
       this.isDraggingToToggle = {
         visible: r
       };
-      l7.user("set-visible", () => {
+      permissionScopeHandler.user("set-visible", () => {
         pr(s.guid, r, t.altKey);
       });
     };
@@ -808,12 +808,12 @@ class ez extends o6 {
             locked,
             visible
           } = this.isDraggingToToggle;
-          null != locked && l7.user("set-locked", () => function (e, t, s) {
+          null != locked && permissionScopeHandler.user("set-locked", () => function (e, t, s) {
             e && eY(e, s, e => {
               e.locked = t;
             });
           }(s, locked, !1));
-          null != visible && l7.user("set-visible", () => function (e, t, s) {
+          null != visible && permissionScopeHandler.user("set-visible", () => function (e, t, s) {
             e && eY(e, s, e => {
               e.visible = t;
             });
@@ -856,8 +856,8 @@ class ez extends o6 {
     document.addEventListener("mousemove", this.onMouseMove);
     document.addEventListener("mouseup", this.onMouseUp);
     window.addEventListener("resize", this.requestRecalculateLayout);
-    Y5.fromFullscreen.on("scrollToNode", this.scrollToNode);
-    let e = glU && glU.getFirstSelectedNodeIdForCurrentPage();
+    fullscreenValue.fromFullscreen.on("scrollToNode", this.scrollToNode);
+    let e = Fullscreen && Fullscreen.getFirstSelectedNodeIdForCurrentPage();
     e && this.scrollToNode({
       nodeId: e
     });
@@ -872,14 +872,14 @@ class ez extends o6 {
     document.removeEventListener("mousemove", this.onMouseMove);
     document.removeEventListener("mouseup", this.onMouseUp);
     window.removeEventListener("resize", this.requestRecalculateLayout);
-    Y5.fromFullscreen.removeListener("scrollToNode", this.scrollToNode);
+    fullscreenValue.fromFullscreen.removeListener("scrollToNode", this.scrollToNode);
   }
   updateSelection(e) {
-    this.props.onSelectionUpdated ? this.props.onSelectionUpdated(e) : (_$$S("panel"), tJ([e]), Y5.commit());
+    this.props.onSelectionUpdated ? this.props.onSelectionUpdated(e) : (_$$S("panel"), tJ([e]), fullscreenValue.commit());
   }
   UNSAFE_componentWillUpdate(e) {
     if (e.renamingGuid && e.renamingGuid !== this.props.renamingGuid) this.scrollToNodeIdAfterUpdate = e.renamingGuid;else if (e.currentPage && e.currentPage !== this.props.currentPage) {
-      let e = glU && glU.getFirstSelectedNodeIdForCurrentPage();
+      let e = Fullscreen && Fullscreen.getFirstSelectedNodeIdForCurrentPage();
       e && (this.scrollToNodeIdAfterUpdate = e);
     }
     let t = this.props.focusedNodes !== e.focusedNodes;
@@ -969,7 +969,7 @@ class ez extends o6 {
   }
   toggleSelected(e) {
     this.props.sceneGraphSelection[e] ? D$([e]) : (Dh([e]), this.rangeSelectAnchorNodeId = e);
-    Y5.commit();
+    fullscreenValue.commit();
   }
   relativeY(e) {
     let t = bG();
@@ -1165,7 +1165,7 @@ class ez extends o6 {
     let t = this.sectionById[e.sectionId];
     let s = t && sp(this.getScene(), this.props.sceneGraphSelection, t.parentGuid);
     let n = !0;
-    if (t?.parentGuid && t?.type !== KjJ.FIXED) {
+    if (t?.parentGuid && t?.type !== ScrollBehavior.FIXED) {
       let e = this.props.sceneGraph.get(t?.parentGuid);
       e && e.fixedChildrenCount === e.uiOrderedChildren.length && (n = !1);
     }
@@ -1256,13 +1256,13 @@ class ez extends o6 {
 }
 function eW(e) {
   let t = useDispatch();
-  let s = J2(UK().showImmutableFrameSublayers);
-  let l = ut(Ez5?.uiState().reparentIntoStackInfo, null);
+  let s = getObservableOrFallback(UK().showImmutableFrameSublayers);
+  let l = getObservableValue(AppStateTsApi?.uiState().reparentIntoStackInfo, null);
   let a = NF();
   let o = Ht();
-  let c = J2(Ez5.uiState().hoveredComponentPropDef);
+  let c = getObservableOrFallback(AppStateTsApi.uiState().hoveredComponentPropDef);
   let u = no();
-  let g = J2(Ez5.canvasViewState().temporarilyHoveredNodes);
+  let g = getObservableOrFallback(AppStateTsApi.canvasViewState().temporarilyHoveredNodes);
   let f = TA();
   let x = useSelector(e => e.mirror.sceneGraphSelection);
   let y = useSelector(e => e.mirror.objectsPanelRowRebuildCounter);
@@ -1296,7 +1296,7 @@ function eW(e) {
     let t = e.getCurrentPage();
     return getFeatureFlags().derived_prop_slow_selectors ? (t ? t.socialImageGuidsOnPage : []).join(",") : [t?.responsiveSetSettings?.socialImageID, ...(t?.childrenNodes.map(e => "RESPONSIVE_SET" === e.type && e.responsiveSetSettings?.socialImageID) || [])].filter(e => "string" == typeof e).join(",");
   });
-  let H = J2(UK().showGuids);
+  let H = getObservableOrFallback(UK().showGuids);
   let z = _Z().isLoading;
   let q = useMemo(() => new nV(k, x), [k, y, x]);
   let J = useRef(null);

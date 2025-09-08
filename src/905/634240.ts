@@ -1,5 +1,5 @@
-import { glU } from "../figma_app/763686";
-import { Hq } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { i as _$$i } from "../905/970229";
 import { Rw } from "../figma_app/930338";
@@ -12,7 +12,7 @@ export async function $$c0(e, t) {
   let u = new Uint8Array(i);
   let p = _$$i(u) ?? "image/png";
   let m = await UD(u, p, e.name);
-  Hq.system("process-image-file", () => {
+  AIScopeHandler.system("process-image-file", () => {
     let e = getSingletonSceneGraph();
     let i = e.getInternalCanvas();
     if (!i) return;
@@ -25,7 +25,7 @@ export async function $$c0(e, t) {
     r.fills = [];
     r.insertImageInFillPaint(m);
     let s = Rw(m.fullResolution.hash);
-    glU?.addImageNodeAsImageImport(r.id);
+    Fullscreen?.addImageNodeAsImageImport(r.id);
     t({
       type: "IMAGE",
       nodeGuid: r.guid,

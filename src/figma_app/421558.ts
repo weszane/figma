@@ -40,7 +40,7 @@ import { l as _$$l } from "../905/556594";
 import { B as _$$B2 } from "../figma_app/327027";
 import { C as _$$C } from "../figma_app/765025";
 import { t as _$$t } from "../905/316903";
-import { glU, NLJ, lyf, m1T, xae } from "../figma_app/763686";
+import { Fullscreen, DesignGraphElements, ViewType, LayoutTabType, UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getFilteredFeatureFlags } from "../905/717445";
@@ -63,7 +63,7 @@ import { Kv } from "../figma_app/544649";
 import { n6 } from "../905/234821";
 import { k as _$$k3 } from "../figma_app/564183";
 import { wg } from "../figma_app/101956";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { T as _$$T2 } from "../905/858738";
 import { Ij, _D } from "../figma_app/433401";
 import { K as _$$K2 } from "../figma_app/398376";
@@ -304,8 +304,8 @@ function eX({
       recordingKey: Pt("illustrationToolbar.drawing", String(r)),
       isSelected: t,
       onClick: () => {
-        "pen" === r && a || glU.setDefaultEditMode();
-        glU.triggerActionInUserEditScope(e, eY);
+        "pen" === r && a || Fullscreen.setDefaultEditMode();
+        Fullscreen.triggerActionInUserEditScope(e, eY);
       },
       dataTooltip: e,
       tooltipOffset: {
@@ -323,9 +323,9 @@ function eX({
 }
 function eq() {
   let e = _$$T3();
-  let t = e === NLJ.VECTOR_PEN;
-  let r = e === NLJ.BRUSH;
-  let i = e === NLJ.VECTOR_PENCIL;
+  let t = e === DesignGraphElements.VECTOR_PEN;
+  let r = e === DesignGraphElements.BRUSH;
+  let i = e === DesignGraphElements.VECTOR_PENCIL;
   return jsx("div", {
     className: "drawing_tools--container--FXB08",
     children: jsx("div", {
@@ -357,7 +357,7 @@ function eq() {
 }
 let eQ = {
   FRAME: {
-    toolId: NLJ.FRAME,
+    toolId: DesignGraphElements.FRAME,
     getText: () => getI18nString("fullscreen_actions.set-tool-frame"),
     icon: jsx(_$$v, {}),
     smallIcon: jsx(_$$q, {}),
@@ -365,7 +365,7 @@ let eQ = {
     onboardingKey: "frame"
   },
   DROPPER: {
-    toolId: NLJ.DROPPER_COLOR,
+    toolId: DesignGraphElements.DROPPER_COLOR,
     getText: () => getI18nString("dev_handoff.eyedropper.tool_name"),
     icon: jsx(l, {}),
     smallIcon: jsx(_$$G, {}),
@@ -373,84 +373,84 @@ let eQ = {
     onboardingKey: _$$K2
   },
   SECTION: {
-    toolId: NLJ.SECTION,
+    toolId: DesignGraphElements.SECTION,
     getText: () => getI18nString("fullscreen_actions.set-tool-section"),
     icon: jsx(_$$P, {}),
     smallIcon: jsx(_$$c, {}),
     recordingKey: "toolSection"
   },
   SLICE: {
-    toolId: NLJ.SLICE,
+    toolId: DesignGraphElements.SLICE,
     getText: () => getI18nString("fullscreen_actions.set-tool-slice"),
     icon: jsx(p, {}),
     smallIcon: jsx(_$$h, {}),
     recordingKey: "toolSlice"
   },
   RECTANGLE: {
-    toolId: NLJ.SHAPE_RECTANGLE,
+    toolId: DesignGraphElements.SHAPE_RECTANGLE,
     getText: () => getI18nString("fullscreen_actions.set-tool-rectangle"),
     icon: jsx(_$$n, {}),
     smallIcon: jsx(_$$y, {}),
     recordingKey: "toolShapeRectangle"
   },
   LINE: {
-    toolId: NLJ.SHAPE_LINE,
+    toolId: DesignGraphElements.SHAPE_LINE,
     getText: () => getI18nString("fullscreen_actions.set-tool-line"),
     icon: jsx(_$$W, {}),
     smallIcon: jsx(_$$h2, {}),
     recordingKey: "toolShapeLine"
   },
   ARROW: {
-    toolId: NLJ.SHAPE_ARROW,
+    toolId: DesignGraphElements.SHAPE_ARROW,
     getText: () => getI18nString("fullscreen_actions.set-tool-arrow"),
     icon: jsx(_$$F, {}),
     smallIcon: jsx(_$$E, {}),
     recordingKey: "toolShapeArrow"
   },
   ELLIPSE: {
-    toolId: NLJ.SHAPE_ELLIPSE,
+    toolId: DesignGraphElements.SHAPE_ELLIPSE,
     getText: () => getI18nString("fullscreen_actions.set-tool-ellipse"),
     icon: jsx(_$$m, {}),
     smallIcon: jsx(_$$B, {}),
     recordingKey: "toolShapeEllipse"
   },
   REGULAR_POLYGON: {
-    toolId: NLJ.SHAPE_REGULAR_POLYGON,
+    toolId: DesignGraphElements.SHAPE_REGULAR_POLYGON,
     getText: () => getI18nString("fullscreen_actions.set-tool-regular-polygon"),
     icon: jsx(_$$o, {}),
     smallIcon: jsx(_$$h3, {}),
     recordingKey: "toolShapePolygon"
   },
   STAR: {
-    toolId: NLJ.SHAPE_STAR,
+    toolId: DesignGraphElements.SHAPE_STAR,
     getText: () => getI18nString("fullscreen_actions.set-tool-star"),
     icon: jsx(e, {}),
     smallIcon: jsx(_$$Z, {}),
     recordingKey: "toolShapeStar"
   },
   IMAGE_OR_VIDEO: {
-    toolId: NLJ.IMAGE_OR_VIDEO,
+    toolId: DesignGraphElements.IMAGE_OR_VIDEO,
     getText: () => getI18nString("fullscreen_actions.place_image_or_video"),
     icon: jsx(_$$T, {}),
     smallIcon: jsx(_$$s, {}),
     recordingKey: "image-tool"
   },
   PEN: {
-    toolId: NLJ.VECTOR_PEN,
+    toolId: DesignGraphElements.VECTOR_PEN,
     getText: () => getI18nString("fullscreen_actions.set-tool-pen"),
     icon: jsx(_$$N, {}),
     smallIcon: jsx(_$$k, {}),
     recordingKey: "toolPen"
   },
   PENCIL: {
-    toolId: NLJ.VECTOR_PENCIL,
+    toolId: DesignGraphElements.VECTOR_PENCIL,
     getText: () => getI18nString("fullscreen_actions.set-tool-pencil"),
     icon: jsx(_$$L, {}),
     smallIcon: jsx(_$$A, {}),
     recordingKey: "toolPencil"
   },
   COMMENTS: {
-    toolId: NLJ.COMMENTS,
+    toolId: DesignGraphElements.COMMENTS,
     getText: e => e ? getI18nString("dev_handoff.workflows.focus_view.reset_comments_tooltip") : getI18nString("fullscreen_actions.comment"),
     getIcon: ({
       numUnreadComments: e
@@ -460,7 +460,7 @@ let eQ = {
     hideShortcutWhenInteractiveFocus: !0
   },
   MEASURE: {
-    toolId: NLJ.MEASURE,
+    toolId: DesignGraphElements.MEASURE,
     getText: e => e ? getI18nString("dev_handoff.workflows.focus_view.reset_measurement_tooltip") : getI18nString("fullscreen_actions.set-tool-measure"),
     icon: jsx(k, {}),
     smallIcon: jsx(_$$L2, {}),
@@ -469,7 +469,7 @@ let eQ = {
     hideShortcutWhenInteractiveFocus: !0
   },
   ANNOTATE: {
-    toolId: NLJ.ANNOTATE,
+    toolId: DesignGraphElements.ANNOTATE,
     getText: e => e ? getI18nString("dev_handoff.workflows.focus_view.reset_annotation_tooltip") : getI18nString("fullscreen_actions.set-tool-annotate"),
     icon: jsx(_$$K, {}),
     smallIcon: jsx(r, {}),
@@ -478,35 +478,35 @@ let eQ = {
     hideShortcutWhenInteractiveFocus: !0
   },
   SELECT: {
-    toolId: NLJ.SELECT,
+    toolId: DesignGraphElements.SELECT,
     getText: () => getI18nString("fullscreen_actions.set-tool-default"),
     icon: jsx(_$$H, {}),
     smallIcon: jsx(_$$y2, {}),
     recordingKey: "toolDefault"
   },
   HAND: {
-    toolId: NLJ.HAND,
+    toolId: DesignGraphElements.HAND,
     getText: () => getI18nString("fullscreen_actions.set-tool-hand"),
     icon: jsx(t, {}),
     smallIcon: jsx(_$$O, {}),
     recordingKey: "toolHand"
   },
   SCALE: {
-    toolId: NLJ.SCALE,
+    toolId: DesignGraphElements.SCALE,
     getText: () => getI18nString("fullscreen_actions.set-tool-scale"),
     icon: jsx(_$$a, {}),
     smallIcon: jsx(_$$l, {}),
     recordingKey: "toolScale"
   },
   TYPE: {
-    toolId: NLJ.TYPE,
+    toolId: DesignGraphElements.TYPE,
     getText: () => getI18nString("fullscreen_actions.set-tool-type"),
     icon: jsx(_$$B2, {}),
     recordingKey: "toolType",
     onboardingKey: "tool-type-onboarding"
   },
   CODE_COMPONENT: {
-    toolId: NLJ.CODE_COMPONENT,
+    toolId: DesignGraphElements.CODE_COMPONENT,
     getText: () => getI18nString("fullscreen_actions.set-tool-code-component"),
     icon: jsx(_$$C, {}),
     smallIcon: jsx(_$$t, {}),
@@ -538,9 +538,9 @@ export function $$e00(e) {
     activeToolId,
     editModeType
   } = rM(_$$u, c);
-  let _ = topLevelMode === lyf.LAYOUT;
-  let h = topLevelMode === lyf.DEV_HANDOFF;
-  let m = topLevelMode === lyf.HISTORY || editModeType === m1T.DEV_HANDOFF_HISTORY;
+  let _ = topLevelMode === ViewType.LAYOUT;
+  let h = topLevelMode === ViewType.DEV_HANDOFF;
+  let m = topLevelMode === ViewType.HISTORY || editModeType === LayoutTabType.DEV_HANDOFF_HISTORY;
   let g = "illustration" === toolbeltMode;
   let f = _$$z(editModeType);
   let E = _Y();
@@ -561,10 +561,10 @@ export function $$e00(e) {
   let w = AP();
   let O = to();
   let R = WN();
-  let D = e => getFilteredFeatureFlags().ce_il_vem_move && w && e === NLJ.SELECT;
+  let D = e => getFilteredFeatureFlags().ce_il_vem_move && w && e === DesignGraphElements.SELECT;
   let k = e => !D(e);
   let M = e => {
-    D(e) && Y5.triggerAction("leave-edit-mode");
+    D(e) && fullscreenValue.triggerAction("leave-edit-mode");
     activateTool(e);
   };
   let F = ({
@@ -741,13 +741,13 @@ export function $$e00(e) {
           isInteractiveFocus: eR
         })]
       }), !m && (_ && !g && y ? j(H, {}) : jsx(_$$N2, {
-        toolId: NLJ.COMMENTS,
+        toolId: DesignGraphElements.COMMENTS,
         icon: d > 0 && !C ? jsx(_$$X, {}) : jsx(_$$f, {}),
-        onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
+        onActivateTool: activeToolId === DesignGraphElements.COMMENTS ? () => activateTool(DesignGraphElements.SELECT) : activateTool,
         activeToolId,
         recordingKey: v("toolComment"),
         tooltipText: C ? getI18nString("fullscreen_actions.comments-disabled") : eR ? getI18nString("dev_handoff.workflows.focus_view.reset_comments_tooltip") : getI18nString("fullscreen_actions.comment"),
-        tooltipShortcut: C || eR ? "" : A(NLJ.COMMENTS),
+        tooltipShortcut: C || eR ? "" : A(DesignGraphElements.COMMENTS),
         disabled: C || eR
       })), _ && getFeatureFlags().bake_canvas && W(), _ && K(), f && !b && !showDisabledTools && jsx(_$$F2, {
         disableAutoAppearingTooltips: h
@@ -759,7 +759,7 @@ export function $$e00(e) {
       onClick: () => showPublish(!1),
       tooltipText: "Browse assets",
       elementId: "toolbelt-action-open-asset-panel",
-      isActive: I.activeTab === xae.ASSETS,
+      isActive: I.activeTab === UserInterfaceElements.ASSETS,
       disabled: e && !t
     }))()]
   });

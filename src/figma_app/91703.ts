@@ -1,4 +1,4 @@
-import { Ez5, Osy, E63 } from "../figma_app/763686";
+import { AppStateTsApi, SelectionPaintHelpers, SaveConnectionIssues } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
@@ -10,11 +10,11 @@ import { LR } from "../figma_app/564528";
 import { YQ } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { oI } from "../905/854717";
 import { F7, yJ, k8, $T, AB, h2, _V } from "../figma_app/8833";
 import { ds } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { k6, Dg, Ug, V } from "../figma_app/682945";
 import { Ed } from "../figma_app/139113";
 import { nX } from "../figma_app/336853";
@@ -23,7 +23,7 @@ import { Eq } from "../figma_app/598018";
 import { M8 } from "../figma_app/915202";
 import { O } from "../905/833838";
 import { v as _$$v } from "../905/906499";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 let $$w18 = NC("CLEAR_SELECTED_VIEW_COMMENT_ID");
 let $$O17 = NC("UPDATE_RECENTLY_USED_QUICK_COMMAND");
 let $$R13 = NC("RECENTLY_USED_QUICK_COMMANDS");
@@ -32,7 +32,7 @@ let $$P8 = NC("FULLSCREEN_SET_CANVAS_MENTION_POPUP");
 let $$D44 = NC("FULLSCREEN_UPDATE_HYPERLINK_POPUP_POSITION");
 let $$k16 = NC("FULLSCREEN_SET_HYPERLINK_POPUP");
 let $$M5 = NC("FULLSCREEN_SET_EYEDROPPER");
-let $$F50 = nF((e, t) => {
+let $$F50 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.params || {};
   let {
@@ -47,7 +47,7 @@ let $$G40 = NC("FULLSCREEN_SHOW_UPGRADE_BANNER");
 let $$V20 = NC("FULLSCREEN_SET_PREFERRED_VALUES_PICKER_LIST_LAYOUT");
 let $$H36 = NC("FULLSCREEN_SET_INSTANCE_SWAP_PICKER_LIST_LAYOUT");
 let $$z9 = NC("FULLSCREEN_SET_PICKER_LIST_LAYOUT");
-let $$W28 = nF((e, t) => {
+let $$W28 = createOptimistThunk((e, t) => {
   trackEventAnalytics("Style Picker View Changed", {
     styleType: "FILL",
     oldViewMode: t.isListLayout ? "GRID" : "LIST",
@@ -81,26 +81,26 @@ function Q(e, t, r) {
   let E = $$J19(i) && !$$J19(a);
   let b = !$$Z42(i) && $$Z42(a);
   let T = $$Z42(i) && !$$Z42(a);
-  o ? Ez5?.uiState().backgroundPickerOpen.set(!0) : l ? Ez5?.uiState().backgroundPickerOpen.set(!1) : d ? Y5.updateAppModel({
+  o ? AppStateTsApi?.uiState().backgroundPickerOpen.set(!0) : l ? AppStateTsApi?.uiState().backgroundPickerOpen.set(!1) : d ? fullscreenValue.updateAppModel({
     prototypeBackgroundPickerOpen: !0
-  }) : c ? Y5.updateAppModel({
+  }) : c ? fullscreenValue.updateAppModel({
     prototypeBackgroundPickerOpen: !1
-  }) : u ? (Ez5?.propertiesPanelState().typeDetailsPanelOpen.set(!0), trackEventAnalytics("Type Details Panel Opened")) : p && Ez5?.propertiesPanelState().typeDetailsPanelOpen.set(!1);
-  m ? Osy?.setIsPaintPickerOpen(!0) : E && Osy?.setIsPaintPickerOpen(!1);
-  b ? Osy?.setIsStylePickerOpen(!0) : T && Osy?.setIsStylePickerOpen(!1);
-  _ ? Ez5?.uiState().minMaxModalShown.set(!0) : h && Ez5?.uiState().minMaxModalShown.set(!1);
+  }) : u ? (AppStateTsApi?.propertiesPanelState().typeDetailsPanelOpen.set(!0), trackEventAnalytics("Type Details Panel Opened")) : p && AppStateTsApi?.propertiesPanelState().typeDetailsPanelOpen.set(!1);
+  m ? SelectionPaintHelpers?.setIsPaintPickerOpen(!0) : E && SelectionPaintHelpers?.setIsPaintPickerOpen(!1);
+  b ? SelectionPaintHelpers?.setIsStylePickerOpen(!0) : T && SelectionPaintHelpers?.setIsStylePickerOpen(!1);
+  _ ? AppStateTsApi?.uiState().minMaxModalShown.set(!0) : h && AppStateTsApi?.uiState().minMaxModalShown.set(!1);
   E && r(oI({
     paintId: void 0,
     originalPaint: void 0,
     updatedPaintFromDropper: void 0
   }));
 }
-let $$ee26 = nF(e => {
+let $$ee26 = createOptimistThunk(e => {
   let t = e.getState().pickerShown;
   e.dispatch($$X14());
   Q(t, e.getState().pickerShown, e.dispatch);
 });
-let $$et51 = nF((e, t) => {
+let $$et51 = createOptimistThunk((e, t) => {
   let r = e.getState().pickerShown;
   e.dispatch($$q3(t));
   Q(r, e.getState().pickerShown, e.dispatch);
@@ -109,13 +109,13 @@ let $$er0 = NC("FULLSCREEN_UPDATE_LOCAL_FONT_AGENT_VERSION");
 let $$en46 = NC("FULLSCREEN_UPDATE_FONT_LIST");
 let $$ei25 = NC("FULLSCREEN_STOP_RENAMING");
 let $$ea52 = NC("FULLSCREEN_BEGIN_RENAMING");
-let $$es24 = nF((e, t) => {
+let $$es24 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let i = t.newSelectedView;
-  if (r.saveStatus && r.saveStatus.hasUnsavedChanges && r.saveStatus.tabCloseText !== E63.SUPPRESS_UNSAVED_CHANGES_UI) {
+  if (r.saveStatus && r.saveStatus.hasUnsavedChanges && r.saveStatus.tabCloseText !== SaveConnectionIssues.SUPPRESS_UNSAVED_CHANGES_UI) {
     if (!Ed(() => e.dispatch($$eA35()))) {
       let t = getI18nString("autosave.unable_to_leave_document.unsaved_changes_save_in_background");
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: _$$v,
         data: {
           message: t
@@ -129,7 +129,7 @@ let $$es24 = nF((e, t) => {
     });
     e.dispatch(sf(t.oldSelectedView));
   } else {
-    r.saveStatus && r.saveStatus.tabCloseText === E63.SUPPRESS_UNSAVED_CHANGES_UI && trackEventAnalytics("suppress_unsaved_changes_ui", {}, {
+    r.saveStatus && r.saveStatus.tabCloseText === SaveConnectionIssues.SUPPRESS_UNSAVED_CHANGES_UI && trackEventAnalytics("suppress_unsaved_changes_ui", {}, {
       forwardToDatadog: !0
     });
     e.dispatch(sf({
@@ -146,7 +146,7 @@ let $$eu27 = NC("FULLSCREEN_SET_FILE_VERSION");
 let $$ep29 = NC("FULLSCREEN_SET_PROGRESS_BAR_STATE");
 let $$e_31 = NC("FULLSCREEN_STOP_OBSERVING_OTHER_USER");
 let $$eh22 = NC("FULLSCREEN_UPDATE_MULTIPLAYER_STATE");
-let $$em6 = nF((e, t) => {
+let $$em6 = createOptimistThunk((e, t) => {
   void 0 !== t.allUsers && (k6(t.allUsers.length, t.presenterSessionID), YQ({
     id: M8
   }));
@@ -157,17 +157,17 @@ let $$ef1 = NC("FULLSCREEN_HIDE_DOWNTIME_BANNER");
 let $$eE30 = NC("FULLSCREEN_HIDE_OPEN_DESKTOP_APP_MODAL");
 let $$ey32 = NC("FULLSCREEN_SHOW_OPEN_DESKTOP_APP_MODAL");
 let $$eb15 = NC("FULLSCREEN_RECONNECTING_SUCCEEDED");
-let $$eT43 = nF(e => {
+let $$eT43 = createOptimistThunk(e => {
   Dg();
   e.dispatch($$eb15());
 });
 let $$eI53 = NC("FULLSCREEN_RECONNECTING_STARTED");
-let $$eS45 = nF(e => {
+let $$eS45 = createOptimistThunk(e => {
   Ug();
   e.dispatch($$eI53());
 });
 let $$ev33 = NC("FULLSCREEN_ATTEMPT_CLOSE");
-let $$eA35 = nF((e, t) => {
+let $$eA35 = createOptimistThunk((e, t) => {
   if (desktopAPIInstance) {
     t?.closeDesktopTabWithMessage ? (desktopAPIInstance.showFileBrowser(t.closeDesktopTabWithMessage), desktopAPIInstance.close({
       suppressReopening: !0,
@@ -204,11 +204,11 @@ let $$eA35 = nF((e, t) => {
       folderId: c
     });
   }
-  if (Ez5?.uiState().isRecovery.getCopy()) {
+  if (AppStateTsApi?.uiState().isRecovery.getCopy()) {
     let e = xS(r, p);
     Ay.redirect(e);
   }
-  Y5.dispatchIfSaved(sf(p));
+  fullscreenValue.dispatchIfSaved(sf(p));
   V();
   e.dispatch($$ev33(t));
 });

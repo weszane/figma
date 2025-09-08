@@ -1,11 +1,11 @@
 import _require from "../draftjs_composer/524876";
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { kf } from "../905/992467";
+import { setupLazyComponentFactory } from "../905/992467";
 import { renderI18nText } from "../905/303541";
 import { Gm, bQ } from "../905/149906";
 var a = r;
-export let $$d0 = kf("lazy_thread_comment_composer", {
+export let $$d0 = setupLazyComponentFactory("lazy_thread_comment_composer", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await Promise.all([]).then(_require)).ThreadCommentComposer

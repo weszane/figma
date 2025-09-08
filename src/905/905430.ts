@@ -1,18 +1,18 @@
 import { throwTypeError } from "../figma_app/465776";
-import { xg, Au, Av } from "../figma_app/155287";
+import { isMenu, isSeparator, isCommand } from "../figma_app/155287";
 import { c } from "../905/882587";
 export const z = function e(t, i, s = []) {
   return t.map(t => {
-    if (xg(t)) return {
+    if (isMenu(t)) return {
       type: "submenu",
       subtype: "manifest",
       name: t.name,
       submenu: e(t.menu, i, [...s, t.name])
     };
-    if (Au(t)) return {
+    if (isSeparator(t)) return {
       type: "separator"
     };
-    if (Av(t)) {
+    if (isCommand(t)) {
       let e;
       let n = c(t.parameters, t.name);
       e = "localFileId" in i ? {

@@ -1,6 +1,6 @@
 import { xw, TU } from "../905/585727";
-import { ruz } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ImageToolsBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { s as _$$s } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
@@ -116,7 +116,7 @@ export function $$f0({
   action: o
 }) {
   let l;
-  e.isAlive && (l = n ? "image prop generation" : o === JT.EDIT_IMAGE ? "image edit" : "image generation", l7.ai(l, () => {
+  e.isAlive && (l = n ? "image prop generation" : o === JT.EDIT_IMAGE ? "image edit" : "image generation", permissionScopeHandler.ai(l, () => {
     if (n) {
       e.setImageInPropAssignment(t, n);
       return;
@@ -152,16 +152,16 @@ export function $$f0({
   }));
 }
 export function $$_6() {
-  if (!ruz) return;
-  let e = ruz.getEditImageTarget();
+  if (!ImageToolsBindings) return;
+  let e = ImageToolsBindings.getEditImageTarget();
   if (e && null !== e.fillIndex) return {
     guid: e.guid,
     fillIndex: e.fillIndex
   };
 }
 export function $$A2() {
-  if (!ruz) return;
-  let e = ruz.getGenerateImageTarget();
+  if (!ImageToolsBindings) return;
+  let e = ImageToolsBindings.getGenerateImageTarget();
   return e ? null !== e.fillIndex ? {
     guid: e.guid,
     fillIndex: e.fillIndex
@@ -173,10 +173,10 @@ export function $$A2() {
   } : void 0;
 }
 export function $$y4(e) {
-  return ruz?.isEditImageTargetValid(v(e)) ?? !1;
+  return ImageToolsBindings?.isEditImageTargetValid(v(e)) ?? !1;
 }
 export function $$b5(e) {
-  return ruz?.isGenerateImageTargetValid(v(e)) ?? !1;
+  return ImageToolsBindings?.isGenerateImageTargetValid(v(e)) ?? !1;
 }
 function v(e) {
   return "componentPropDefId" in e ? {

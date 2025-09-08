@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
@@ -7,16 +7,16 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { ks } from "../905/773401";
 import { i, C as _$$C } from "../905/64217";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { aJ, kN, QC } from "../figma_app/494261";
 import { Pc } from "../905/372672";
 import { e6 } from "../905/557142";
-export let $$b0 = Ju(function (e) {
+export let $$b0 = registerModal(function (e) {
   let {
     team,
     source,
@@ -24,7 +24,7 @@ export let $$b0 = Ju(function (e) {
   } = e;
   let u = useDispatch();
   let g = () => {
-    u(Lo());
+    u(popModalStack());
   };
   let b = Pc();
   let I = void 0 === requesterCurrentLevel || requesterCurrentLevel < e6.VIEWER;
@@ -137,7 +137,7 @@ function v({
         t(parseInt(e));
       },
       children: [jsx(l9, {
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: getI18nString("file_browser.settings.access")
         }),
         disabled: !a

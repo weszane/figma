@@ -15,7 +15,7 @@ import { F as _$$F } from "../905/302958";
 import { Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
 import { Cy } from "../905/844322";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { z as _$$z } from "../905/373223";
 import { mE } from "../905/561087";
@@ -27,7 +27,7 @@ import { XX, oc } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { e6 } from "../905/557142";
 import { k as _$$k } from "../905/93362";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { fZ } from "../figma_app/805373";
 import { Dd, OJ } from "../905/519092";
 import { hK } from "../figma_app/211706";
@@ -38,7 +38,7 @@ import { KQ } from "../figma_app/475472";
 import { A as _$$A } from "../6828/7452";
 import { A as _$$A2 } from "../1617/567223";
 var l = o;
-let M = Ju(function (e) {
+let M = registerModal(function (e) {
   let {
     teamName,
     userHasAdminLevelPermissions,
@@ -106,7 +106,7 @@ let q = "draft_move_modal--hoverableFolderRow--hUAas";
 let $ = "draft_move_modal--selectedFolderRow--XmVi7";
 let Z = "draft_move_modal--iconContainer--YfzDe";
 let X = "draft_move_modal--learnMoreLink--b5crD";
-let Q = Ju(function (e) {
+let Q = registerModal(function (e) {
   let {
     setNewlyCreatedTeamName,
     setHasCreatedTeam,
@@ -171,7 +171,7 @@ let Q = Ju(function (e) {
 }, "DRAFT_MOVE_TEAM_CREATION_MODAL");
 let et = "https://help.figma.com/hc/articles/18409526530967";
 var ei = (e => (e.FREE = "Free", e.LOCKED = "Locked", e.EDU = "Edu", e.PRO = "Pro", e.ORG = "Org", e.ENT = "Enterprise", e.GUEST = "Guest", e))(ei || {});
-export let $$en0 = Ju(function (e) {
+export let $$en0 = registerModal(function (e) {
   let {
     onClose,
     draftsToMove,
@@ -280,7 +280,7 @@ export let $$en0 = Ju(function (e) {
     U && e && (moveAllDraftsAsync ? ey(e.teamId) : (setSynchronousFileTransferInProgress(draftsToMove.length > 0), eb(e.name, U)), onClose());
   };
   let eI = (e, t, n) => {
-    em(to({
+    em(showModalHandler({
       type: M,
       data: {
         onConfirm: ev,
@@ -428,7 +428,7 @@ export let $$en0 = Ju(function (e) {
               disabled: !V,
               onClick: () => {
                 G(!1);
-                em(to({
+                em(showModalHandler({
                   type: Q,
                   data: {
                     setNewlyCreatedTeamName: et,

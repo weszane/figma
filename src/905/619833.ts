@@ -1,12 +1,12 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { getI18nString } from "../905/303541";
 import { h } from "../905/142086";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { jsx } from "react/jsx-runtime";
 import { R } from "../905/441305";
 import { E } from "../905/984674";
 import { YM } from "../905/122282";
-let d = Ju(function (e) {
+let d = registerModal(function (e) {
   let {
     confirmText,
     content,
@@ -31,7 +31,7 @@ export function $$u0({
   file: e,
   dispatch: t
 }) {
-  t(to({
+  t(showModalHandler({
     type: d,
     data: {
       title: getI18nString("templates.confirmation.move_from_drafts.title"),

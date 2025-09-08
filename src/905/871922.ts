@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 let a = z.object({
   video: z.object({
     url: z.string(),
@@ -33,11 +33,11 @@ let a = z.object({
 });
 let $$s0 = new class {
   constructor() {
-    this.AdminVideosUploadSchemaValidator = vh();
+    this.AdminVideosUploadSchemaValidator = createNoOpValidator();
     this.getAdminVideosUpload = e => this.AdminVideosUploadSchemaValidator.validate(async ({
       xr: t
     }) => await t.get(`/api/admin/${e.resourceType}/${e.id}/videos/${e.sha1}/upload`));
-    this.VideosUploadSchemaValidator = vh();
+    this.VideosUploadSchemaValidator = createNoOpValidator();
     this.getVideoUploadUrl = async e => {
       let t = await this.VideosUploadSchemaValidator.validate(async ({
         xr: t

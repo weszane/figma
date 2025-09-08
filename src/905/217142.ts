@@ -7,7 +7,7 @@ import { s as _$$s } from "../905/328136";
 import { B } from "../905/759157";
 import { r as _$$r } from "../figma_app/896657";
 import { le } from "../figma_app/11182";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Ro } from "../figma_app/564095";
 import { BK } from "../905/848862";
 import { sZ } from "../905/845253";
@@ -43,7 +43,7 @@ export function $$C1(e) {
   if (!targetRect) return null;
   let w = e => {
     e?.stopPropagation();
-    r(to({
+    r(showModalHandler({
       type: H,
       data: {
         plugin: publishedResource

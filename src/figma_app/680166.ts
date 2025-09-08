@@ -15,7 +15,7 @@ import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { to, ES } from "../905/156213";
+import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { tc, i$, PE } from "../905/15667";
 import { ud } from "../905/513035";
 import { wR } from "../figma_app/765689";
@@ -632,7 +632,7 @@ export function $$z2({
       origin: "edit_button_click",
       formState: qB.JOIN_ORG,
       redirectUrl: Ay.location.pathname
-    })), t(to({
+    })), t(showModalHandler({
       type: _$$x,
       data: {}
     }))) : l ? l(e) : t(_$$F.enqueue({
@@ -646,7 +646,7 @@ export function $$z2({
       s(i, {
         autoApproved: !0
       });
-      t(to({
+      t(showModalHandler({
         type: _$$u,
         data: {
           autoApproved: !0,
@@ -659,7 +659,7 @@ export function $$z2({
   };
   if (c === tc.ASK_TO_EDIT_ONE_CLICK) return async a => {
     try {
-      t(to({
+      t(showModalHandler({
         type: _$$$,
         data: {
           planName: i?.name
@@ -670,7 +670,7 @@ export function $$z2({
         autoApproved: !0
       });
     } catch (e) {
-      t(ES(_$$$));
+      t(hideSpecificModal(_$$$));
       A(e);
     }
   };
@@ -691,7 +691,7 @@ export function $$z2({
   let N = i?.tier === FPlanNameType.STUDENT;
   let w = n === _$$J.ADMIN_AUTO_PATHWAY ? _$$D : _$$t2;
   return () => {
-    t(to({
+    t(showModalHandler({
       type: w,
       showModalsBeneath: c === tc.USER_SETTINGS,
       data: {
@@ -770,7 +770,7 @@ export function $$Y3({
         plan: n,
         seatType: c
       });
-      t(to({
+      t(showModalHandler({
         type: _$$u,
         data: {
           autoApproved: !1,
@@ -788,7 +788,7 @@ export function $$Y3({
       }));
     }
   } : u === FOrganizationLevelType.ORG ? o => {
-    t(to({
+    t(showModalHandler({
       type: YG,
       showModalsBeneath: r === tc.USER_SETTINGS,
       data: {
@@ -806,7 +806,7 @@ export function $$Y3({
       }
     }));
   } : u === FOrganizationLevelType.TEAM ? o => {
-    t(to({
+    t(showModalHandler({
       type: PK,
       showModalsBeneath: r === tc.USER_SETTINGS,
       data: {
@@ -882,7 +882,7 @@ export function $$J4(e) {
   } = getPlanAndPlanUser(wR(r?.editorType || null));
   return {
     curfCtaHandler: useCallback(() => {
-      r && planUser && plan && t(to({
+      r && planUser && plan && t(showModalHandler({
         type: YG,
         data: {
           planParentId: plan.key.parentId,

@@ -1,4 +1,4 @@
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
@@ -7,7 +7,7 @@ import { A7 } from "../905/87821";
 import { _ } from "../905/401345";
 let n;
 export function $$u2() {
-  h3O?.detach();
+  Multiplayer?.detach();
   let e = document.getElementById("fullscreen-root");
   e?.remove();
 }

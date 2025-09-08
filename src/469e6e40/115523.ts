@@ -30,7 +30,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { v as _$$v } from "../4452/562448";
 import { B as _$$B } from "../4452/541264";
 import { d as _$$d2 } from "../4452/230712";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Ro } from "../figma_app/805373";
 import { Cj } from "../905/270084";
 import { jT } from "../4452/650793";
@@ -58,7 +58,7 @@ import { hP, CM } from "../905/144598";
 import { A as _$$A3 } from "../6828/70690";
 import { K as _$$K4 } from "../905/443068";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h2 } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { Ax } from "../figma_app/616261";
 import { EJ } from "../figma_app/930338";
 import { L as _$$L } from "../905/408237";
@@ -227,7 +227,7 @@ function ey(e) {
     children: [N, isHostPlanAdmin && resourceTeamId && jsxs(_$$E, {
       className: T()(K, _$$s.mb4.$),
       onClick: () => {
-        resourceTeamId && h(to({
+        resourceTeamId && h(showModalHandler({
           type: _$$T,
           data: {
             teamId: resourceTeamId,
@@ -278,7 +278,7 @@ function ey(e) {
             console.error("Project team ID missing");
             return;
           }
-          h(to({
+          h(showModalHandler({
             type: _$$K3,
             data: {
               resourceConnectionId: id,
@@ -312,7 +312,7 @@ function ey(e) {
       children: jsx($n, {
         variant: "destructiveSecondary",
         onClick: () => {
-          h(to({
+          h(showModalHandler({
             type: _$$h,
             data: {
               resourceConnectionInvite: {
@@ -345,7 +345,7 @@ function ey(e) {
           shareACopyButton: jsx($n, {
             variant: "link",
             onClick: () => {
-              resourceTeamId && h(to({
+              resourceTeamId && h(showModalHandler({
                 type: Lg(),
                 data: {
                   folderId: resourceId,
@@ -366,7 +366,7 @@ function ey(e) {
   let P = jsxs(_$$E, {
     className: K,
     onClick: () => {
-      h(to({
+      h(showModalHandler({
         type: _$$C(),
         data: {
           folder: {
@@ -542,7 +542,7 @@ function eO(e) {
         value: c,
         onChange: e => _(e ?? "ALL"),
         children: [jsx(l9, {
-          label: jsx(_$$h2, {
+          label: jsx(HiddenLabel, {
             children: " "
           })
         }), jsxs(mc, {
@@ -858,7 +858,7 @@ function eU(e) {
   let g = useMemo(() => p.some(e => "disconnected" !== e.status), [p]);
   let h = useMemo(() => p.some(e => "disconnected" === e.status), [p]);
   let x = e => {
-    c(to({
+    c(showModalHandler({
       type: _$$d2,
       data: {
         resourceConnectionInvite: e

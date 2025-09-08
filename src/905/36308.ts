@@ -15,7 +15,7 @@ import { M as _$$M } from '../905/69907';
 import { H as _$$H3 } from '../905/75186';
 import { D as _$$D6 } from '../905/80656';
 import { c as _$$c } from '../905/90943';
-import { Ju, ZU } from '../905/102752';
+import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { h as _$$h4 } from '../905/104000';
 import { E as _$$E3 } from '../905/105281';
 import { K as _$$K3 } from '../905/107582';
@@ -24,14 +24,14 @@ import { go } from '../905/114390';
 import { N as _$$N2 } from '../905/120979';
 import { h as _$$h3 } from '../905/123399';
 import { A as _$$A3 } from '../905/126947';
-import { X as _$$X3 } from '../905/128376';
+import { setupAutofocusHandler } from '../905/128376';
 import { c as _$$c2 } from '../905/144429';
 import { A as _$$A6 } from '../905/150554';
-import { to as _$$to } from '../905/156213';
-import { b as _$$b3 } from '../905/165519';
+import { showModalHandler } from '../905/156213';
+import { UpsellModalType } from '../905/165519';
 import { U as _$$U3 } from '../905/169553';
 import { F as _$$F3 } from '../905/172964';
-import { l7 } from '../905/189185';
+import { permissionScopeHandler } from '../905/189185';
 import { X7 } from '../905/193529';
 import { h as _$$h5 } from '../905/200386';
 import { N as _$$N } from '../905/201779';
@@ -43,9 +43,9 @@ import { nt as _$$nt } from '../905/226610';
 import { p as _$$p } from '../905/233082';
 import { l as _$$l } from '../905/241412';
 import { j as _$$j } from '../905/253683';
-import { J as _$$J } from '../905/270045';
+import { Label } from '../905/270045';
 import { r as _$$r2 } from '../905/271565';
-import { A as _$$A5 } from '../905/284190';
+import { deepClone } from '../905/284190';
 import { y as _$$y2 } from '../905/292472';
 import { dX } from '../905/294543';
 import { A as _$$A2 } from '../905/295481';
@@ -59,7 +59,7 @@ import { e as _$$e3 } from '../905/318479';
 import { dh, IZ, K7 } from '../905/346794';
 import { p as _$$p3 } from '../905/347427';
 import { Z as _$$Z } from '../905/357899';
-import { p as _$$p4, Ap, LK, NU, S8, uz } from '../905/359509';
+import { IOS as _$$p4, IOS_UIKIT, ANDROID, ANDROID_XML, SupportedPlatforms, WEB } from '../905/359509';
 import { w as _$$w } from '../905/359860';
 import { m as _$$m2, t as _$$t3 } from '../905/364535';
 import { E as _$$E5 } from '../905/370356';
@@ -195,7 +195,7 @@ import { ce } from '../figma_app/401069';
 import { OX } from '../figma_app/407414';
 import { k1 } from '../figma_app/407767';
 import { Ay as _$$Ay2 } from '../figma_app/432652';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
 import { xt } from '../figma_app/475303';
 import { tS as _$$tS } from '../figma_app/516028';
@@ -214,7 +214,7 @@ import { fx, PF } from '../figma_app/657972';
 import { i as _$$i2 } from '../figma_app/714009';
 import { eY as _$$eY } from '../figma_app/722362';
 import { UK } from '../figma_app/740163';
-import { Ez5, F84, glU, mgy, nQ7, NUh, otU, Qej, tKW, Vzr } from '../figma_app/763686';
+import { AppStateTsApi, SwitchState, Fullscreen, EasingType, SelfDesignType, LogToConsoleMode, ComponentPanelTab, MenuType, MeasurementUnit, Thumbnail } from '../figma_app/763686';
 import { X as _$$X4 } from '../figma_app/765161';
 import { BrowserInfo } from '../figma_app/778880';
 import { As } from '../figma_app/802241';
@@ -646,7 +646,7 @@ function tU(e, t, i) {
     },
     callback: (e, i, n) => {
       n(dX({
-        codeLanguage: S8[t]
+        codeLanguage: SupportedPlatforms[t]
       }));
     }
   };
@@ -659,7 +659,7 @@ function tB(e, t, i, n, r) {
     displayForQuickCommand: t,
     args: r,
     get checked() {
-      return (s.codeExtensionPreferences[a.id]?.unit ?? tKW.PIXEL) === i;
+      return (s.codeExtensionPreferences[a.id]?.unit ?? MeasurementUnit.PIXEL) === i;
     },
     callback: () => {
       D8(s, a, {
@@ -3165,7 +3165,7 @@ async function t0() {
 }
 function t1(e) {
   let t = e.absoluteBoundingBox;
-  let [i, n] = Vzr.generateThumbnailForNode(e.id, t.width, t.height, 1, {});
+  let [i, n] = Thumbnail.generateThumbnailForNode(e.id, t.width, t.height, 1, {});
   let r = encodeBase64(n);
   let a = debugState.getState().openFile;
   return a?.key === 'b2XUNRa1b1UPr0ZqkqiOOu' && tQ[e.name] ? Promise.resolve({
@@ -3205,7 +3205,7 @@ let iW = {
   },
   results: iH
 };
-let iK = Ju(e => {
+let iK = registerModal(e => {
   return getFeatureFlags().anticipation && getFeatureFlags().anticipation_eval ? jsx(iY, {
     ...e
   }) : null;
@@ -3279,7 +3279,7 @@ function iY(e) {
           entryPoint: qd.EVAL
         });
         let s = new AbortController();
-        let o = new _$$I2(otU.COMPONENTS, s);
+        let o = new _$$I2(ComponentPanelTab.COMPONENTS, s);
         let l = new iq(h, t, e);
         await Promise.all(t.map(async t => {
           let i = await _$$A6({
@@ -3339,7 +3339,7 @@ function iY(e) {
         })
       }), jsx(nB, {
         children: jsxs('div', {
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             htmlFor: 'config',
             children: renderI18nText('auto_suggest.eval.config.label')
           }), jsx('textarea', {
@@ -3468,7 +3468,7 @@ class iq {
   }
   computeAggregate() {
     this.aggregate = iG.reduce((e, t) => {
-      let i = _$$A5(iz);
+      let i = deepClone(iz);
       let n = {
         PASS: [],
         FAIL: [],
@@ -3502,7 +3502,7 @@ class iq {
         numComplete: this.numCompletedTests,
         numTotal: this.numTotalTests
       },
-      results: _$$A5(this.aggregate)
+      results: deepClone(this.aggregate)
     };
     this.updateDisplay(e);
   }
@@ -3530,16 +3530,16 @@ ${t}: ${i.join(', ')}`;
     return e;
   }
   getDetailedResults(e = !1) {
-    let t = Object.fromEntries([...Object.entries(_$$A5(this.testResults))].sort(([e], [t]) => e.localeCompare(t)).map(([t, i]) => [t, e ? i : {
+    let t = Object.fromEntries([...Object.entries(deepClone(this.testResults))].sort(([e], [t]) => e.localeCompare(t)).map(([t, i]) => [t, e ? i : {
       ...i,
       debugInfo: void 0
     }]));
     return {
       startTime: this.startTime,
       numTotalTests: this.numTotalTests,
-      aggregate: _$$A5(this.aggregate),
+      aggregate: deepClone(this.aggregate),
       testResults: t,
-      config: _$$A5(this.config)
+      config: deepClone(this.config)
     };
   }
   getDetailedResultsString(e = !1) {
@@ -3547,15 +3547,15 @@ ${t}: ${i.join(', ')}`;
   }
 }
 function i$(e, t) {
-  let i = _$$A5(t);
+  let i = deepClone(t);
   logInfo('AutoSuggestEval', e, i, {
-    logToConsole: NUh.ALWAYS,
+    logToConsole: LogToConsoleMode.ALWAYS,
     forwardToDatadog: !1,
     reportAsSentryError: !1
   });
 }
 let na = 'debugMissingFontsModal';
-let ns = Ju(no, 'DEBUG_MISSING_FONTS_MODAL', ZU.YES);
+let ns = registerModal(no, 'DEBUG_MISSING_FONTS_MODAL', ModalSupportsBackground.YES);
 function no(e) {
   let [t, i] = useState('Have Fun');
   let [r, a] = useState('Bold');
@@ -3567,11 +3567,11 @@ function no(e) {
     open,
     onClose
   });
-  let d = _$$X3();
+  let d = setupAutofocusHandler();
   let c = of(na, 'submit', e => {
     e.preventDefault();
-    t && r && (l7.user('set-missing-font', () => {
-      Y5.setMissingFont(t, r);
+    t && r && (permissionScopeHandler.user('set-missing-font', () => {
+      fullscreenValue.setMissingFont(t, r);
     }), onClose());
   });
   return jsx(bL, {
@@ -3781,7 +3781,7 @@ let nE = [{
   isLowPriorityMatch: !0,
   isRepairCommand: !0
 }));
-let nS = Ju(e => {
+let nS = registerModal(e => {
   let {
     onSaveClick,
     onClose
@@ -3836,11 +3836,11 @@ function nk() {
   }] : [];
 }
 export function $$nR1() {
-  switch (Ez5.editorState().selectionIsMask.getCopy()) {
-    case F84.OFF:
-    case F84.MIXED:
+  switch (AppStateTsApi.editorState().selectionIsMask.getCopy()) {
+    case SwitchState.OFF:
+    case SwitchState.MIXED:
       return 'mask-selection';
-    case F84.ON:
+    case SwitchState.ON:
       return 'remove-mask';
   }
 }
@@ -3921,7 +3921,7 @@ export function $$nN0(e) {
           dispatch: e,
           onSaveClick: t
         }) {
-          e(_$$to({
+          e(showModalHandler({
             type: nS,
             data: {
               onSaveClick: t
@@ -3949,7 +3949,7 @@ export function $$nN0(e) {
       action: 'export-selected-exportables',
       iconType: createElement(_$$b),
       callback: (e, t, i) => {
-        Y5.triggerAction(e, {
+        fullscreenValue.triggerAction(e, {
           source: 'menu'
         });
       },
@@ -4528,7 +4528,7 @@ export function $$nN0(e) {
     }, {
       action: 'toggle-show-annotations',
       flags: getFeatureFlags().dt_annotations_always_expand ? ['design', 'dev_handoff', '!illustration'] : ['dev_handoff'],
-      property: Ez5.uiState().showAnnotationsInDevMode,
+      property: AppStateTsApi.uiState().showAnnotationsInDevMode,
       propertyValue: !0,
       displayForQuickCommand: 'show-annotations',
       hideForQuickCommand: BrowserInfo.isIpadNative,
@@ -4536,7 +4536,7 @@ export function $$nN0(e) {
     }, {
       action: 'toggle-always-expand-annotations',
       flags: ['design'],
-      property: Ez5.uiState().alwaysExpandAnnotations,
+      property: AppStateTsApi.uiState().alwaysExpandAnnotations,
       propertyValue: !1,
       displayForQuickCommand: 'toggle-always-expand-annotations',
       hideForQuickCommand: BrowserInfo.isIpadNative,
@@ -4590,19 +4590,19 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-memory-usage-indicator',
-      property: Ez5.uiState().showMemoryUsage,
+      property: AppStateTsApi.uiState().showMemoryUsage,
       flags: ['design', 'sites'],
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-resource-use',
-      property: Ez5.uiState().renderResourceUse,
+      property: AppStateTsApi.uiState().renderResourceUse,
       flags: ['whiteboard'],
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'toggle-icon-detection',
-      property: Ez5.devHandoffState().automaticIconDetection,
+      property: AppStateTsApi.devHandoffState().automaticIconDetection,
       propertyValue: !0,
       flags: ['dev_handoff', '!limited_dev_mode'],
       featureFlags: [],
@@ -4613,10 +4613,10 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       separator: !0
-    }, ...(Ez5.uiState().isUI3.getCopy() ? [{
+    }, ...(AppStateTsApi.uiState().isUI3.getCopy() ? [{
       callback: () => {
         let e = atomStoreManager.get(Bu);
-        Y5.triggerAction('toggle-show-property-labels', {
+        fullscreenValue.triggerAction('toggle-show-property-labels', {
           source: e ? 'quick-action' : 'view-menu'
         });
       },
@@ -4628,7 +4628,7 @@ export function $$nN0(e) {
       action: 'toggle-sidebar',
       displayText: getI18nString('fullscreen_actions.minimize-ui'),
       displayForQuickCommand: 'minimize-ui',
-      checked: Ez5?.uiState().leftPanelCollapsedUI3.getCopy(),
+      checked: AppStateTsApi?.uiState().leftPanelCollapsedUI3.getCopy(),
       searchSynonyms: [getI18nString('fullscreen_actions.expand-ui')],
       featureFlags: []
     }] : []), {
@@ -4638,10 +4638,10 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-multiplayer-cursors',
-      property: Ez5?.uiState().hideMultiplayerCursors,
+      property: AppStateTsApi?.uiState().hideMultiplayerCursors,
       propertyValue: !1,
       featureFlags: []
-    }, ...(Ez5.uiState().isUI3.getCopy() ? [] : [{
+    }, ...(AppStateTsApi.uiState().isUI3.getCopy() ? [] : [{
       action: 'toggle-sidebar',
       property: UK().showSidebar,
       propertyValue: !0,
@@ -4663,7 +4663,7 @@ export function $$nN0(e) {
       searchSynonyms: ['mode', 'open'],
       disabled: isZoomIntegration(),
       featureFlags: []
-    }, Ez5.interopToolMode().getCopy() === nQ7.SELF ? {
+    }, AppStateTsApi.interopToolMode().getCopy() === SelfDesignType.SELF ? {
       action: 'enter-slides-design-mode',
       flags: ['slides'],
       featureFlags: []
@@ -4712,7 +4712,7 @@ export function $$nN0(e) {
         featureFlags: []
       }, {
         separator: !0
-      }, ...(Ez5.uiState().isUI3.getCopy() ? [] : [{
+      }, ...(AppStateTsApi.uiState().isUI3.getCopy() ? [] : [{
         action: 'toggle-sidebar',
         property: UK().showSidebar,
         propertyValue: !0,
@@ -4874,7 +4874,7 @@ export function $$nN0(e) {
       flags: ['design', 'edit'],
       displayForQuickCommand: 'show-rotation-origin',
       get disabled() {
-        return Y5.disableShowRotationOriginMenuItem();
+        return fullscreenValue.disableShowRotationOriginMenuItem();
       },
       searchOnly: !0
     }, {
@@ -4966,21 +4966,21 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       get name() {
-        return getFeatureFlags().dse_library_pg_thumbnails ? Y5.getFileThumbnailMenuItemName() : Y5.getThumbnailMenuItemName();
+        return getFeatureFlags().dse_library_pg_thumbnails ? fullscreenValue.getFileThumbnailMenuItemName() : fullscreenValue.getThumbnailMenuItemName();
       },
-      callback: () => Y5.handleFileThumbnailMenuItem(),
+      callback: () => fullscreenValue.handleFileThumbnailMenuItem(),
       get disabled() {
-        return Y5.disableFileThumbnailMenu();
+        return fullscreenValue.disableFileThumbnailMenu();
       },
       flags: ['edit'],
       featureFlags: []
     }, {
       get name() {
-        return Y5.getPageThumbnailMenuItemName();
+        return fullscreenValue.getPageThumbnailMenuItemName();
       },
-      callback: () => Y5.handlePageThumbnailMenuItem(),
+      callback: () => fullscreenValue.handlePageThumbnailMenuItem(),
       get disabled() {
-        return Y5.disablePageThumbnailMenu();
+        return fullscreenValue.disablePageThumbnailMenu();
       },
       flags: ['edit', 'design'],
       featureFlags: ['dse_library_pg_thumbnails']
@@ -5638,12 +5638,12 @@ export function $$nN0(e) {
     children: [{
       name: 'dev-handoff-code-settings-language',
       flags: ['dev_handoff', '!limited_dev_mode'],
-      children: nT((t = debugState.getState().mirror.appModel, [tU('dev-handoff-css-language', uz, t), {
+      children: nT((t = debugState.getState().mirror.appModel, [tU('dev-handoff-css-language', WEB, t), {
         name: 'dev-handoff-ios-language-group',
-        children: [tU('dev-handoff-swiftui-language', _$$p4, t), tU('dev-handoff-uikit-language', Ap, t)]
+        children: [tU('dev-handoff-swiftui-language', _$$p4, t), tU('dev-handoff-uikit-language', IOS_UIKIT, t)]
       }, {
         name: 'dev-handoff-android-language-group',
-        children: [tU('dev-handoff-compose-language', LK, t), tU('dev-handoff-xml-language', NU, t)]
+        children: [tU('dev-handoff-compose-language', ANDROID, t), tU('dev-handoff-xml-language', ANDROID_XML, t)]
       }]))
     }, {
       name: 'dev-handoff-code-settings-unit',
@@ -5651,12 +5651,12 @@ export function $$nN0(e) {
       featureFlags: [],
       children: nT(function (e) {
         let t = e.devHandoffCodeLanguage;
-        return t.type !== 'first-party' ? [] : [tB('dev-handoff-code-settings-unit-pixel', 'dev-handoff-code-settings-unit-pixel-quick-command', tKW.PIXEL, e), tB('dev-handoff-code-settings-unit-scaled', 'dev-handoff-code-settings-unit-scaled-quick-command', tKW.SCALED, e, {
+        return t.type !== 'first-party' ? [] : [tB('dev-handoff-code-settings-unit-pixel', 'dev-handoff-code-settings-unit-pixel-quick-command', MeasurementUnit.PIXEL, e), tB('dev-handoff-code-settings-unit-scaled', 'dev-handoff-code-settings-unit-scaled-quick-command', MeasurementUnit.SCALED, e, {
           scaledUnit: b1(t.id)
         }), {
           name: 'dev-handoff-code-settings-unit-settings',
           callback: (e, t, i) => {
-            i(_$$to({
+            i(showModalHandler({
               type: j6
             }));
           }
@@ -5797,7 +5797,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-use-numbers-for-opacity',
-      property: Ez5.editorState().useNumbersForOpacity,
+      property: AppStateTsApi.editorState().useNumbersForOpacity,
       propertyValue: !0,
       flags: ['edit', 'design', 'slides', 'cooper'],
       hideForQuickCommand: !0,
@@ -5828,7 +5828,7 @@ export function $$nN0(e) {
       flags: ['desktop', 'design', 'dev_handoff'],
       propertyValue: !0,
       callback: (e, t, i) => {
-        i(_$$to({
+        i(showModalHandler({
           type: DV,
           data: {
             team: fileMenuArgs?.openFile?.team ?? null,
@@ -5837,7 +5837,7 @@ export function $$nN0(e) {
             action: ZN.ENABLE_MCP,
             currentPlan: _$$F5.Plan.STARTER,
             upsellPlan: _$$F5.Plan.PRO,
-            upsellSource: _$$b3.MCP_MODAL,
+            upsellSource: UpsellModalType.MCP_MODAL,
             hideUpsellPlanCta: !1
           }
         }));
@@ -6104,7 +6104,7 @@ export function $$nN0(e) {
       name: 'accessibility-settings',
       flags: ['whiteboard', ...conditionalFeatureFlag('a11y_design_dom_mirror', ['design', 'dev_handoff'], []), ...conditionalFeatureFlag('slides_editor_a11y', ['slides'], []), ...conditionalFeatureFlag('fpl_enhanced_contrast_toggle', ['edit', 'sites', 'slides', 'cooper', 'design', 'dev_handoff', 'figmake'], [])].filter(isNotNullish),
       callback: (e, t, i) => {
-        i(_$$to({
+        i(showModalHandler({
           type: _$$L3
         }));
       },
@@ -6138,9 +6138,9 @@ export function $$nN0(e) {
     separator: !0
   }, {
     get name() {
-      return Y5.getDesktopAppMenuItemName();
+      return fullscreenValue.getDesktopAppMenuItemName();
     },
-    callback: e => Y5.handleDesktopAppMenuItem(e),
+    callback: e => fullscreenValue.handleDesktopAppMenuItem(e),
     flags: ['!desktop'],
     platforms: ['mac', 'windows'],
     featureFlags: []
@@ -6397,7 +6397,7 @@ export function $$nN0(e) {
     name: 'set-tool-marker',
     shortcutText: 'M',
     callback: () => {
-      Y5.triggerAction('set-tool-pencil');
+      fullscreenValue.triggerAction('set-tool-pencil');
     },
     flags: ['edit', 'whiteboard'],
     searchOnly: !0,
@@ -6553,7 +6553,7 @@ export function $$nN0(e) {
   }, {
     action: 'toggle-multiplayer-cursors',
     searchOnly: !0,
-    property: Ez5?.uiState().hideMultiplayerCursors,
+    property: AppStateTsApi?.uiState().hideMultiplayerCursors,
     propertyValue: !1,
     featureFlags: []
   }, {
@@ -6600,7 +6600,7 @@ export function $$nN0(e) {
     name: 'report-issue',
     featureFlags: ['bug_reporter'],
     callback: (e, t, i) => {
-      i(_$$to({
+      i(showModalHandler({
         type: bb,
         data: {},
         showModalsBeneath: !0
@@ -6617,7 +6617,7 @@ export function $$nN0(e) {
     name: 'set-commit-sha',
     featureFlags: ['set_frontend_commit_sha'],
     callback: (e, t, i) => {
-      i(_$$to({
+      i(showModalHandler({
         type: _$$H3,
         data: {},
         showModalsBeneath: !0
@@ -6649,7 +6649,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-memory-usage-indicator',
-      property: Ez5.uiState().showMemoryUsage,
+      property: AppStateTsApi.uiState().showMemoryUsage,
       flags: ['design'],
       propertyValue: !0,
       featureFlags: []
@@ -6662,17 +6662,17 @@ export function $$nN0(e) {
       }
     }, {
       action: 'toggle-resource-use',
-      property: Ez5.uiState().renderResourceUse,
+      property: AppStateTsApi.uiState().renderResourceUse,
       propertyValue: !0,
       featureFlags: []
     }, {
       action: 'debug-toggle-show-canvas-axis',
-      property: Ez5.uiState().showCanvasXYAxis,
+      property: AppStateTsApi.uiState().showCanvasXYAxis,
       propertyValue: !0,
       featureFlags: ['internal_only_debug_tools']
     }, {
       action: 'debug-toggle-show-mouse-position',
-      property: Ez5.uiState().showMousePosition,
+      property: AppStateTsApi.uiState().showMousePosition,
       propertyValue: !0,
       featureFlags: ['internal_only_debug_tools']
     }, {
@@ -6693,7 +6693,7 @@ export function $$nN0(e) {
     }, {
       name: 'change-feature-flags',
       callback() {
-        Y5.dispatch(_$$to({
+        fullscreenValue.dispatch(showModalHandler({
           type: qf,
           data: {},
           showModalsBeneath: !0
@@ -6702,7 +6702,7 @@ export function $$nN0(e) {
       featureFlags: ['feature_flag_overrides']
     }, {
       name: 'toggle-downtime-banner',
-      callback: () => Y5.toggleDowntimeBanner()
+      callback: () => fullscreenValue.toggleDowntimeBanner()
     }, {
       action: 'change-document-color-profile-to-display-p3',
       displayForQuickCommand: 'change-document-color-profile-to-display-p3-quick-action',
@@ -6906,7 +6906,7 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       name: 'set-missing-font',
-      callback: () => Y5.dispatch(_$$to({
+      callback: () => fullscreenValue.dispatch(showModalHandler({
         type: ns,
         data: {}
       })),
@@ -7042,7 +7042,7 @@ export function $$nN0(e) {
         name: 'test-typescript-bezier-animation',
         featureFlags: ['fullscreen_flanimations'],
         callback: () => {
-          aZ(_E.forBezier(mgy.INOUT_CUBIC, 2));
+          aZ(_E.forBezier(EasingType.INOUT_CUBIC, 2));
         }
       }, {
         name: 'test-typescript-oscillating-opacity-animation',
@@ -7118,7 +7118,7 @@ export function $$nN0(e) {
       flags: ['design'],
       searchOnly: !0,
       callback: (e, t) => {
-        Y5.dispatch(_$$to({
+        fullscreenValue.dispatch(showModalHandler({
           type: iK,
           data: {},
           showModalsBeneath: !0
@@ -7291,8 +7291,8 @@ export function $$nN0(e) {
   }, {
     action: 'simplify-selected-instance-panels',
     callback: (e, t, i) => {
-      l7.user('simplify-selected-instance-panels', () => {
-        glU.setSimplifyInstancePanels(!0);
+      permissionScopeHandler.user('simplify-selected-instance-panels', () => {
+        Fullscreen.setSimplifyInstancePanels(!0);
       });
     },
     searchOnly: !0,
@@ -7365,7 +7365,7 @@ export function $$nN0(e) {
     action: 'detect-violations',
     callback: () => {
       _$$u4({
-        source: Qej.ACTIONS_MENU
+        source: MenuType.ACTIONS_MENU
       });
     },
     featureFlags: ['aip_flower_garden'],
@@ -7377,7 +7377,7 @@ export function $$nN0(e) {
       let t = atomStoreManager.get(dd);
       t && OX({
         impressionId: t,
-        source: Qej.ACTIONS_MENU,
+        source: MenuType.ACTIONS_MENU,
         hasSearchTerm: e
       });
     }

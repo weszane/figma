@@ -1,7 +1,7 @@
 import type { NoOpVm } from '../700654'
 import type { LibraryResult, VariableResult } from '../types'
 import { z as _$$z, z } from 'zod'
-import { l7 } from '../189185'
+import { permissionScopeHandler } from '../189185'
 import { debugState } from '../407919'
 import { oA } from '../419236'
 import { getFeatureFlags } from '../601108'
@@ -586,7 +586,7 @@ export class VariableFactory {
       resolve,
       reject,
     } = vm.newPromise()
-    vm.registerPromise(fetchAndSubscribeVariable(_$$ey(variableKey))).then((variableInfo: any) => resolve(l7.plugin('plugin-create-variable', () => this.createVariableHandle(variableInfo, this.sceneGraph)))).catch((error: any) => {
+    vm.registerPromise(fetchAndSubscribeVariable(_$$ey(variableKey))).then((variableInfo: any) => resolve(permissionScopeHandler.plugin('plugin-create-variable', () => this.createVariableHandle(variableInfo, this.sceneGraph)))).catch((error: any) => {
       let errorMessage = `unable to import variable with key ${variableKey}`
       if (typeof error === 'string')
         errorMessage = error; else if (error instanceof Error)
@@ -794,8 +794,8 @@ export const VariableCollectionAPI = {
    */
   modes({
     vm,
-          defineVmProp,
-          getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -816,20 +816,20 @@ export const VariableCollectionAPI = {
             }
             return vm.deepWrap(isExtension
               ? modes.map((mode) => {
-                  let parentModeId = ''
-                  if (mode.parentModeID && backingCollection) {
-                    parentModeId = CUU?.isVariableSetExtension(backingCollection.id) ? `${backingCollection.id}/${mode.parentModeID}` : mode.parentModeID
-                  }
-                  return {
-                    name: mode.name,
-                    modeId: `${collectionId}/${mode.modeID}`,
-                    parentModeId,
-                  }
-                })
-              : modes.map(mode => ({
+                let parentModeId = ''
+                if (mode.parentModeID && backingCollection) {
+                  parentModeId = CUU?.isVariableSetExtension(backingCollection.id) ? `${backingCollection.id}/${mode.parentModeID}` : mode.parentModeID
+                }
+                return {
                   name: mode.name,
-                  modeId: mode.modeID,
-                })))
+                  modeId: `${collectionId}/${mode.modeID}`,
+                  parentModeId,
+                }
+              })
+              : modes.map(mode => ({
+                name: mode.name,
+                modeId: mode.modeID,
+              })))
           }
           return vm.newArray()
         },
@@ -841,8 +841,8 @@ export const VariableCollectionAPI = {
    */
   defaultModeId({
     vm,
-                  defineVmProp,
-                  getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -863,8 +863,8 @@ export const VariableCollectionAPI = {
    */
   key({
     vm,
-        defineVmProp,
-        getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -886,8 +886,8 @@ export const VariableCollectionAPI = {
    */
   remote({
     vm,
-           defineVmProp,
-           getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -908,8 +908,8 @@ export const VariableCollectionAPI = {
    */
   variableIds({
     vm,
-                defineVmProp,
-                getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -930,8 +930,8 @@ export const VariableCollectionAPI = {
    */
   getPublishStatus({
     vm,
-                     defineVmFunction,
-                     getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -958,8 +958,8 @@ export const VariableCollectionAPI = {
    */
   remove({
     vm,
-           defineVmFunction,
-           getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -978,8 +978,8 @@ export const VariableCollectionAPI = {
    */
   addMode({
     vm,
-            defineVmFunction,
-            getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1004,8 +1004,8 @@ export const VariableCollectionAPI = {
    */
   removeMode({
     vm,
-               defineVmFunction,
-               getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1030,8 +1030,8 @@ export const VariableCollectionAPI = {
    */
   renameMode({
     vm,
-               defineVmFunction,
-               getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1062,8 +1062,8 @@ export const VariableCollectionAPI = {
    */
   setDefaultMode({
     vm,
-                   defineVmFunction,
-                   getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1088,8 +1088,8 @@ export const VariableCollectionAPI = {
    */
   isExtension({
     vm,
-                defineVmProp,
-                getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -1110,9 +1110,9 @@ export const VariableCollectionAPI = {
    */
   extend({
     vm,
-           defineVmFunction,
-           getVariableCollectionFactory,
-           getVariableCollectionNode,
+    defineVmFunction,
+    getVariableCollectionFactory,
+    getVariableCollectionNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1151,8 +1151,8 @@ export const ExtendedVariableCollectionAPI = {
    */
   inheritedVariableIds({
     vm,
-                         defineVmProp,
-                         getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -1174,8 +1174,8 @@ export const ExtendedVariableCollectionAPI = {
    */
   localVariableIds({
     vm,
-                     defineVmProp,
-                     getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -1197,8 +1197,8 @@ export const ExtendedVariableCollectionAPI = {
    */
   variableOverrides({
     vm,
-                      defineVmProp,
-                      getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -1229,8 +1229,8 @@ export const ExtendedVariableCollectionAPI = {
    */
   removeOverridesForVariable({
     vm,
-                               defineVmFunction,
-                               getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1254,8 +1254,8 @@ export const ExtendedVariableCollectionAPI = {
    */
   parentVariableCollectionId({
     vm,
-                               defineVmProp,
-                               getVariableCollectionNode,
+    defineVmProp,
+    getVariableCollectionNode,
   }, handle) {
     defineVmProp({
       handle,

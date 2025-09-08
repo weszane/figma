@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useContext, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
 import { XHR } from "../905/910117";
@@ -52,7 +52,7 @@ export function $$g2({
         never_movable_node_ids,
         valid_move_id_to_file_key
       } = e.data.meta;
-      for (let e of never_movable_node_ids) glU.clearLibraryMoveInfo(e);
+      for (let e of never_movable_node_ids) Fullscreen.clearLibraryMoveInfo(e);
       p(uo({
         files,
         subscribeToRealtime: !0

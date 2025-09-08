@@ -1,5 +1,5 @@
-import { Vzr } from "../figma_app/763686";
-import { fF } from "../905/471229";
+import { Thumbnail } from "../figma_app/763686";
+import { getTrackingSessionId } from "../905/471229";
 import { D } from "../905/347702";
 import { c as _$$c } from "../905/289751";
 import { PJ, Oq } from "../905/588985";
@@ -8,7 +8,7 @@ export function $$l2(e, t) {
   r.open("GET", `/api/hub_files/cover_image?file_key=${e}`, !0);
   r.setRequestHeader("X-Figma-User-ID", t.id);
   r.setRequestHeader("X-Csrf-Bypass", "yes");
-  r.setRequestHeader("tsid", fF());
+  r.setRequestHeader("tsid", getTrackingSessionId());
   r.responseType = "blob";
   return new Promise((e, t) => {
     r.onreadystatechange = function () {
@@ -48,8 +48,8 @@ export async function $$d1(...e) {
   }
 }
 let c = D(e => {
-  if (!Vzr) return null;
-  let [t, r] = Vzr.generateThumbnailForNode(e, PJ, Oq, 2, {});
+  if (!Thumbnail) return null;
+  let [t, r] = Thumbnail.generateThumbnailForNode(e, PJ, Oq, 2, {});
   return r;
 });
 export function $$u0(e, t) {

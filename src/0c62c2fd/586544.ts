@@ -7,7 +7,7 @@ import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
 import { Pe } from "../4452/207203";
@@ -136,7 +136,7 @@ export function $$N0(e) {
       minWidth: 432,
       containerClassName: "edit_access_modal--modalStyle--20dSp",
       onClose: () => {
-        t(Ce());
+        t(hideModal());
       },
       children: [jsxs("div", {
         className: "edit_access_modal--headerContainer--ZoKpu edit_access_modal--resourceContainer--vZA5E",

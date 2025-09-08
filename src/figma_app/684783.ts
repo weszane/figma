@@ -59,7 +59,7 @@ import { Pz, Ac, GP, IK, Ti, Yu, Xl, Qd } from "../figma_app/292324";
 import { A as _$$A2 } from "../6828/154709";
 import { A as _$$A3 } from "../svg/64643";
 import { A as _$$A4 } from "../svg/242499";
-import { fZb } from "../figma_app/763686";
+import { perfTimerFrameManagerBindings } from "../figma_app/763686";
 import { w as _$$w } from "../905/5147";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
@@ -68,7 +68,7 @@ import { XHR } from "../905/910117";
 import { xy, hJ } from "../figma_app/102712";
 import { Se } from "../figma_app/781115";
 import { F as _$$F2 } from "../905/989956";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r, Q as _$$Q } from "../figma_app/661568";
 import { M as _$$M } from "../905/197794";
 import { o as _$$o } from "../figma_app/885533";
@@ -921,11 +921,11 @@ function eW(e) {
       "rendererDraw" === e && t.handleDocumentRenderStop();
     },
     nextFrame: e => {
-      fZb?.nextFrame(e);
+      perfTimerFrameManagerBindings?.nextFrame(e);
     },
-    startProfile: (e, t) => fZb?.startProfile(e, t) ?? !1,
+    startProfile: (e, t) => perfTimerFrameManagerBindings?.startProfile(e, t) ?? !1,
     stopProfile(e, t) {
-      fZb?.stopProfile(e, t);
+      perfTimerFrameManagerBindings?.stopProfile(e, t);
     },
     kiwiSchema: _$$w
   }, !0);
@@ -1009,7 +1009,7 @@ class eK extends PureComponent {
     this.updateViewportInfoIfNecessary = () => {
       if (!this.lastViewport) return;
       let e = this.getViewport();
-      Y5.viewport.trigger("onSetViewport", e);
+      fullscreenValue.viewport.trigger("onSetViewport", e);
     };
     this.handleViewportChange = e => {
       this.setState({

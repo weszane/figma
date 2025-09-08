@@ -1,5 +1,5 @@
 import { M4 } from "../905/713695";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 let $$a0 = M4.Query({
   fetch: async e => await $$s1.getNumTemplatesByTeam({
@@ -9,13 +9,13 @@ let $$a0 = M4.Query({
 });
 let $$s1 = new class {
   constructor() {
-    this.RecentsSchemaValidator = vh();
-    this.TeamBrowseFromSize10SchemaValidator = vh();
-    this.SearchPaginatedSchemaValidator = vh();
-    this.TeamTemplateLimitValidator = vh();
-    this.TeamTemplateCountValidator = vh();
-    this.UploadTemplateCoverImage = vh();
-    this.UpsertTemplateValidator = vh();
+    this.RecentsSchemaValidator = createNoOpValidator();
+    this.TeamBrowseFromSize10SchemaValidator = createNoOpValidator();
+    this.SearchPaginatedSchemaValidator = createNoOpValidator();
+    this.TeamTemplateLimitValidator = createNoOpValidator();
+    this.TeamTemplateCountValidator = createNoOpValidator();
+    this.UploadTemplateCoverImage = createNoOpValidator();
+    this.UpsertTemplateValidator = createNoOpValidator();
   }
   getRecents(e) {
     return this.RecentsSchemaValidator.validate(async ({
@@ -29,7 +29,7 @@ let $$s1 = new class {
   getTeamBrowsePaginated(e) {
     return this.TeamBrowseFromSize10SchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/templates/${e.orgId}/team/${e.teamId}/browse`, td.toAPIParameters({
+    }) => await t.get(`/api/templates/${e.orgId}/team/${e.teamId}/browse`, APIParameterUtils.toAPIParameters({
       from: e.from,
       size: e.size,
       templateType: e.templateType
@@ -42,7 +42,7 @@ let $$s1 = new class {
     } = e;
     return this.SearchPaginatedSchemaValidator.validate(({
       xr: t
-    }) => t.get(`/api/templates/${e.orgId}/search`, td.toAPIParameters(r)));
+    }) => t.get(`/api/templates/${e.orgId}/search`, APIParameterUtils.toAPIParameters(r)));
   }
   getFilteredTeamTemplates(e) {
     let {
@@ -54,14 +54,14 @@ let $$s1 = new class {
   getTeamTemplateLimitReached(e) {
     return this.TeamTemplateLimitValidator.validate(({
       xr: t
-    }) => t.get(`/api/templates/${e.teamId}/limits`, td.toAPIParameters({
+    }) => t.get(`/api/templates/${e.teamId}/limits`, APIParameterUtils.toAPIParameters({
       editorType: e.editorType
     })));
   }
   getNumTemplatesByTeam(e) {
     return this.TeamTemplateCountValidator.validate(({
       xr: t
-    }) => t.get(`/api/templates/${e.teamId}/count`, td.toAPIParameters({
+    }) => t.get(`/api/templates/${e.teamId}/count`, APIParameterUtils.toAPIParameters({
       editorType: e.editorType
     })));
   }
@@ -78,7 +78,7 @@ let $$s1 = new class {
     } = e;
     return this.UpsertTemplateValidator.validate(({
       xr: e
-    }) => e.post(`/api/templates/file/${fileKey}`, payload, td.toAPIParameters({
+    }) => e.post(`/api/templates/file/${fileKey}`, payload, APIParameterUtils.toAPIParameters({
       params
     })));
   }

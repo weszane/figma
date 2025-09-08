@@ -27,7 +27,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { JL, We } from "../figma_app/165623";
 import { XHR } from "../905/910117";
 import { oB, j7 } from "../905/929976";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { ds } from "../figma_app/314264";
 import { W as _$$W } from "../905/236903";
 import { WO, X0, Mw, HJ, nN } from "../figma_app/122682";
@@ -56,7 +56,7 @@ import { i as _$$i, S as _$$S } from "../3276/270077";
 import { A as _$$A4 } from "../6828/364616";
 import { A as _$$A5 } from "../6828/844411";
 import { ev as _$$ev, YM } from "../9410/232922";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { v as _$$v } from "../905/442517";
 import { P as _$$P2 } from "../3276/355202";
 import { L as _$$L2 } from "../905/473569";
@@ -981,7 +981,7 @@ function te() {
   }), l = jsx(kt, {
     className: "device_controls--captionsLoadingSpinner--ivdGQ"
   }), c = jsx(Fragment, {}));
-  return jsxs(_$$J, {
+  return jsxs(Label, {
     className: "device_controls--closedCaptionRow--OdIHt raw_components--singleRow--W5dYN raw_components--_singleRow--yTGIY raw_components--singleRowHeight--dKM4t raw_components--_row--rHucX raw_components--row--NThzm device_controls--deviceControlRowWithHover--KUbHL device_controls--deviceControlRow--kSC19",
     htmlFor: n,
     children: [l, jsxs("span", {
@@ -1255,7 +1255,7 @@ remote: ${s}`);
   ea && nN(eo) && (ds("voice_caption_download_error", fileKey, v.getState(), {
     error_code: eo,
     source: "voice_widget"
-  }), HJ(ed, !1), ed(_$$to({
+  }), HJ(ed, !1), ed(showModalHandler({
     type: _$$L,
     data: {
       dispatch: ed,

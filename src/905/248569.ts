@@ -1,4 +1,4 @@
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { $q } from "../figma_app/191804";
 let a = e => {
   let t;
@@ -25,7 +25,7 @@ let d = e => Math.round(255 * e).toString(16).toUpperCase().padStart(2, "0");
 let c = (e, t) => {
   let i = `504C5445 ${e}`;
   let r = l(i);
-  return t === RYP.DISPLAY_P3 ? `
+  return t === ColorSpaceEnum.DISPLAY_P3 ? `
     89504E47 0D0A1A0A 0000000D 49484452 00000001 00000001 08030000 0028CB34
     BB000001 62694343 50696363 00002891 7590BD4B C35014C5 4FAB52D0 3A880E1D
     1C328943 D4D20A76 71682B14 45305405 AB539A7E 096D7C24 29527113 5729F81F

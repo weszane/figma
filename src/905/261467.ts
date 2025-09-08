@@ -15,15 +15,15 @@ import { Point } from '../905/736624';
 import { uF } from '../905/748636';
 import { D as _$$D } from '../905/771179';
 import { $A } from '../905/782918';
-import { bA, Wh, Yw } from '../905/968269';
+import { PLUGIN_TIMEOUT_MS, PluginIframeMode, PLUGIN_RETRY_DELAY_MS } from '../905/968269';
 import { A as _$$A } from '../1617/568132';
 import { W_ } from '../figma_app/8833';
 import { atomStoreManager } from '../figma_app/27355';
 import { tui } from '../figma_app/27776';
 import { $g, Nd } from '../figma_app/62612';
 import { sX } from '../figma_app/212767';
-import { $u } from '../figma_app/300692';
-import { Y5 } from '../figma_app/455680';
+import { hasInspectOrPanelCapability } from '../figma_app/300692';
+import { fullscreenValue } from '../figma_app/455680';
 import { d4 } from '../figma_app/474636';
 import { FP } from '../figma_app/580736';
 import { parsePxNumber } from '../figma_app/783094';
@@ -43,10 +43,10 @@ const PLUGIN_POSITIONS_KEY = 'plugin-positions';
 const MIN_WIDTH = 70;
 const WIDTH_PADDING = 50;
 const HEIGHT_PADDING = uF;
-const DEFAULT_IFRAME_WIDTH = bA;
-const DEFAULT_IFRAME_HEIGHT = Yw;
-const INSPECT_PANEL_ID = Wh.INSPECT;
-const BUZZ_LEFT_PANEL_ID = Wh.BUZZ_LEFT_PANEL;
+const DEFAULT_IFRAME_WIDTH = PLUGIN_TIMEOUT_MS;
+const DEFAULT_IFRAME_HEIGHT = PLUGIN_RETRY_DELAY_MS;
+const INSPECT_PANEL_ID = PluginIframeMode.INSPECT;
+const BUZZ_LEFT_PANEL_ID = PluginIframeMode.BUZZ_LEFT_PANEL;
 const CODEGEN_DEFAULT_POSITION = 'codegen-default';
 const tuiPx = parsePxNumber(tui);
 
@@ -194,7 +194,7 @@ export class PluginUIManager {
       titleIconSvgSrc: this.titleIconURL ? undefined : _$$A,
       title: this.iframeTitle || WW(this.title, this.vmType)
     });
-    if (this.iframeId === Wh.MODAL) {
+    if (this.iframeId === PluginIframeMode.MODAL) {
       atomStoreManager.set(_$$D, {
         displayed: this.showingInnerIframe,
         width: this.iframeWidth,
@@ -280,7 +280,7 @@ export class PluginUIManager {
    * (Original: buildXYPosition)
    */
   buildXYPosition(x: number, y: number): Point {
-    const viewport = Y5.getViewportInfo();
+    const viewport = fullscreenValue.getViewportInfo();
     const pos = $g(viewport, {
       x,
       y
@@ -448,7 +448,7 @@ export class PluginUIManager {
       throw new Error('Cannot get the UI position. Did you forget to create a UI by calling showUI?');
     }
     const windowSpace = this.iframeInitialPosition;
-    const viewport = Y5.getViewportInfo();
+    const viewport = fullscreenValue.getViewportInfo();
     const {
       x,
       y
@@ -573,7 +573,7 @@ export class PluginUIManager {
       notification.icon = zX.FROM_URL;
       notification.iconURL = this.titleIconURL;
     }
-    Y5.dispatch(F.enqueue(notification));
+    fullscreenValue.dispatch(F.enqueue(notification));
     if (!this.showingInnerIframe) this.showProgress();
     this.lastNotificationTimeout = Math.max(this.lastNotificationTimeout, Date.now()) + options.timeout;
   }
@@ -583,7 +583,7 @@ export class PluginUIManager {
    * (Original: cancelPluginVisualBell)
    */
   cancelPluginVisualBell(type: string): void {
-    Y5.dispatch(F.dequeue({
+    fullscreenValue.dispatch(F.dequeue({
       matchType: type
     }));
   }
@@ -593,7 +593,7 @@ export class PluginUIManager {
    * (Original: cancelNonErrorPersistentVisualBells)
    */
   cancelNonErrorPersistentVisualBells(): void {
-    Y5.dispatch(F.dequeue({
+    fullscreenValue.dispatch(F.dequeue({
       shouldDequeueFunc: (e: any) => e.type !== 'plugins-runtime-error' && _$$R(e) === Infinity
     }));
   }
@@ -603,7 +603,7 @@ export class PluginUIManager {
    * (Original: cancelAllCustomNotifyVisualBells)
    */
   cancelAllCustomNotifyVisualBells(): void {
-    Y5.dispatch(F.dequeue({
+    fullscreenValue.dispatch(F.dequeue({
       shouldDequeueFunc: (e: any) => {
         const re = /message-from-plugin-*/;
         const isMatch = !!e.type && re.test(e.type);
@@ -632,7 +632,7 @@ export class PluginUIManager {
   }: {
     isBackground?: boolean;
   } = {}): void {
-    if (this.triggeredFrom !== 'codegen' && (this.terminateInspectPluginIfNoIframe(), Y5 && Y5.isReady() && this.shouldShowVisualBell && !this.hideVisibleUI)) {
+    if (this.triggeredFrom !== 'codegen' && (this.terminateInspectPluginIfNoIframe(), fullscreenValue && fullscreenValue.isReady() && this.shouldShowVisualBell && !this.hideVisibleUI)) {
       const delay = isBackground ? 50 : this.isPanelIframe() ? 4000 : undefined;
       Ym({
         name: this.title,
@@ -650,7 +650,7 @@ export class PluginUIManager {
    * (Original: terminateInspectPluginIfNoIframe)
    */
   terminateInspectPluginIfNoIframe(): void {
-    if (!this.timeout && $u(this.capabilities) && !this.capabilities?.includes('codegen') && $A(debugState.getState().selectedView) && this.triggeredFrom !== 'related-link-preview') {
+    if (!this.timeout && hasInspectOrPanelCapability(this.capabilities) && !this.capabilities?.includes('codegen') && $A(debugState.getState().selectedView) && this.triggeredFrom !== 'related-link-preview') {
       this.timeout = setTimeout(() => {
         if (!this.showingInnerIframe) {
           this.cancelCallback({

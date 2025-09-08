@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { R } from "../905/82603";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { E } from "../905/277716";
 import { getI18nString } from "../905/303541";
@@ -23,7 +23,7 @@ export function $$p0({
     name: "slot_name_control",
     children: jsx(_$$R, {
       onSubmit: e => {
-        slotPropertyDefinition && glU?.editComponentPropDefName(slotPropertyDefinition.explicitDefID, e);
+        slotPropertyDefinition && Fullscreen?.editComponentPropDefName(slotPropertyDefinition.explicitDefID, e);
       },
       value: h,
       icon: jsx(R, {}),

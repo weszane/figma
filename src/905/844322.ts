@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { yJ, U2 } from "../figma_app/78808";
 import { yJ as _$$yJ } from "../figma_app/240735";
@@ -18,7 +18,7 @@ import { M4 } from "../905/713695";
 import { Tb } from "../figma_app/633080";
 import { xY } from "../905/70982";
 import { YF, Ip } from "../905/880488";
-let $$E2 = nF((e, t) => {
+let $$E2 = createOptimistThunk((e, t) => {
   if (!t.userInitiated) {
     e.dispatch(YF(t));
     return;
@@ -114,7 +114,7 @@ let $$E2 = nF((e, t) => {
   });
   return a;
 });
-let $$x1 = nF((e, t) => {
+let $$x1 = createOptimistThunk((e, t) => {
   Jl(Ip)(t);
   e.dispatch(xY({
     fileKeys: Object.keys(t.fileKeys)
@@ -161,7 +161,7 @@ let S = M4.Mutation((e, {
   i.optimisticallyUpdate(c, d);
   return d;
 });
-let $$w0 = nF(async (e, t) => {
+let $$w0 = createOptimistThunk(async (e, t) => {
   let {
     files
   } = t;

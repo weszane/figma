@@ -1,9 +1,9 @@
 import { isPartOfGroup } from "../figma_app/664063";
-import { XJn } from "../figma_app/763686";
+import { FirstDraftHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { logWarning } from "../905/714362";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { kS } from "../figma_app/864723";
@@ -52,7 +52,7 @@ export function $$T14(e) {
 }
 export function $$I2(e) {
   let t = new ReduxSceneGraph(e);
-  return XJn.getSubscribedVariableCollectionsInScene(t.scene);
+  return FirstDraftHelpers.getSubscribedVariableCollectionsInScene(t.scene);
 }
 export function $$S12({
   clientLifecycleId: e
@@ -64,7 +64,7 @@ export function $$S12({
     userId: atomStoreManager.get(kS) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     clientLifecycleId: e,
-    trackingSessionId: fF()
+    trackingSessionId: getTrackingSessionId()
   };
 }
 export function $$v7(e) {
@@ -97,7 +97,7 @@ export function $$N13(e, t) {
 }
 export function $$$$C4(e) {
   if ("LOCAL" !== e.dsKitKey.type) return null;
-  let t = XJn.getKitKey(e.dsKitKey.pageId);
+  let t = FirstDraftHelpers.getKitKey(e.dsKitKey.pageId);
   return t ? {
     ...e,
     dsKitKey: {

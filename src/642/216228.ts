@@ -89,7 +89,7 @@ import { K as _$$K2, h as _$$h3 } from "../905/275787";
 import { TG } from "../905/72677";
 import { H as _$$H, lj as _$$lj, Rs, QN, r9 as _$$r2 } from "../905/991973";
 import { eT as _$$eT } from "../figma_app/116234";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Gq, Ew, tM as _$$tM4 } from "../figma_app/361662";
 import { LR } from "../figma_app/120210";
 import { Nz as _$$Nz, cP, FX, ZI, uY } from "../figma_app/475869";
@@ -113,13 +113,13 @@ import { jx, Ay as _$$Ay, W7 } from "../figma_app/675746";
 import { Nv, P5, Ko } from "../figma_app/318590";
 import { r6 as _$$r4, Nn, fi, Bv, t0 as _$$t3, VF, dj, AS, ce as _$$ce } from "../figma_app/177636";
 import { createPortal } from "../vendor/944059";
-import { glU, otU, Ez5, Nfd, m1T } from "../figma_app/763686";
-import { nc as _$$nc, l7 as _$$l2 } from "../905/189185";
+import { Fullscreen, ComponentPanelTab, AppStateTsApi, PanelType, LayoutTabType } from "../figma_app/763686";
+import { scopeAwareFunction as _$$nc, permissionScopeHandler as _$$l2 } from "../905/189185";
 import { z as _$$z } from "../905/239603";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { n as _$$n3 } from "../905/734251";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { t as _$$t4 } from "../905/851577";
 import { N as _$$N3 } from "../905/645480";
 import { P as _$$P2 } from "../905/262370";
@@ -144,7 +144,7 @@ import { $E } from "../figma_app/805898";
 import { o3 } from "../figma_app/831799";
 import { u as _$$u3 } from "../905/389684";
 import { k as _$$k2 } from "../905/443820";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { a as _$$a, P as _$$P3 } from "../figma_app/235371";
 import { Ou, GG as _$$GG, qd as _$$qd, PV, YQ, b4, lS as _$$lS } from "../figma_app/257779";
 import { isDevEnvironment, getInitialOptions, buildUploadUrl } from "../figma_app/169182";
@@ -782,7 +782,7 @@ function e7({
         sectionDepth: u,
         sourceForTracking: p
       };
-      getFeatureFlags().dse_fpl_wave_2 ? setFlyoutProps(h) : t(_$$to({
+      getFeatureFlags().dse_fpl_wave_2 ? setFlyoutProps(h) : t(showModalHandler({
         type: _$$m,
         data: h
       }));
@@ -1852,13 +1852,13 @@ function sc({
     dragPreviewPointerPosition: _$$N3.CENTERED,
     getDragPreviewSrc: () => m.resource.preview_url,
     onPointerDownCallback: () => {
-      glU.setShowHTMLWidgetCanvasDragAndDropOutlines(!0, {
+      Fullscreen.setShowHTMLWidgetCanvasDragAndDropOutlines(!0, {
         x: m.resource.width,
         y: m.resource.height
       });
     },
     onPointerUpCallback: () => {
-      glU.setShowHTMLWidgetCanvasDragAndDropOutlines(!1, null);
+      Fullscreen.setShowHTMLWidgetCanvasDragAndDropOutlines(!1, null);
     },
     recordingKey: Pt("html-widget", m.resource.name)
   });
@@ -1875,7 +1875,7 @@ function sc({
   });
   C0(keyboardNavigationItem, o && currentView === S5.Assets);
   let k = useCallback(t => {
-    let s = Y5.getViewportInfo();
+    let s = fullscreenValue.getViewportInfo();
     sp(e, new Point(s.offsetX, s.offsetY), new Point(.5, .5));
     y(t);
     $z();
@@ -1940,7 +1940,7 @@ let su = _$$P2("recently-used-site-embeds", "name", _$$z.object({
 function sp(e, t, s) {
   atomStoreManager.set(su, e);
   _$$l2.user("insert-embed", () => {
-    glU.insertEmbed(e.initial_url, {
+    Fullscreen.insertEmbed(e.initial_url, {
       x: t.x,
       y: t.y,
       percentOffsetX: s.x,
@@ -1949,7 +1949,7 @@ function sp(e, t, s) {
       x: e.width,
       y: e.height
     });
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
   });
 }
 function sh(e) {
@@ -1962,7 +1962,7 @@ function sh(e) {
     let {
       zoomScale,
       x
-    } = Y5.getViewportInfo();
+    } = fullscreenValue.getViewportInfo();
     let n = e.dragPosition?.x;
     return (!n || n < x) && e.draggingThumbSize ? e.draggingThumbSize : new Point(draggingResource.width, draggingResource.height).scale(zoomScale);
   }(t);
@@ -2930,7 +2930,7 @@ function rB() {
                 let {
                   signal
                 } = i;
-                let d = new _$$I3(otU.COMPONENTS, i);
+                let d = new _$$I3(ComponentPanelTab.COMPONENTS, i);
                 rT({
                   targetNode: n,
                   openFileKey: h,
@@ -3041,12 +3041,12 @@ function rB() {
   }(i);
   let m = Xr(rO);
   let x = rH();
-  let y = ut(Ez5?.editorPreferences().showAssetAutoSuggest, !0);
+  let y = getObservableValue(AppStateTsApi?.editorPreferences().showAssetAutoSuggest, !0);
   let [_, b] = useState(null);
   let C = y && suggestions.length > 0 && s && isInitialized || !!_;
   let j = useCallback(() => {
     let e = !C;
-    Ez5?.editorPreferences().showAssetAutoSuggest.set(e);
+    AppStateTsApi?.editorPreferences().showAssetAutoSuggest.set(e);
     b(e);
     gb(analyticsData, e ? _$$GG.PANEL_OPENED : _$$GG.PANEL_CLOSED, _$$qd.ASSET_PANEL);
   }, [C, analyticsData]);
@@ -3838,7 +3838,7 @@ function n_() {
   } = _$$h5();
   let [t, s] = useAtomValueAndSetter(_$$s2);
   let i = useCallback(() => {
-    s(Nfd.DAKOTA);
+    s(PanelType.DAKOTA);
     closeOverlay();
   }, [s, closeOverlay]);
   return jsx("div", {
@@ -4343,7 +4343,7 @@ function nV({
       let s = useSelector(e => e.teams);
       let r = useSelector(fA);
       let i = useCallback(() => {
-        e(_$$to({
+        e(showModalHandler({
           type: dD,
           data: {
             entrypoint: _$$RR.ASSET_PANEL_LIBRARY_CONTEXT_MENU
@@ -4352,7 +4352,7 @@ function nV({
       }, [e]);
       let l = t?.teamId && s[t.teamId];
       let a = useCallback(() => {
-        e(_$$to({
+        e(showModalHandler({
           type: $3,
           data: {
             afterFileMove: i,
@@ -7335,7 +7335,7 @@ function lb({
   let A = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
     let e = e => {
-      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && A !== m1T.TEXT && (focusSearchBar(), e.preventDefault());
+      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && A !== LayoutTabType.TEXT && (focusSearchBar(), e.preventDefault());
     };
     document.addEventListener("keydown", e);
     return () => {

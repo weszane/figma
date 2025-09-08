@@ -1,22 +1,35 @@
-export const A = function e(t) {
-  if (null === t) return t;
-  if (t instanceof Date) return new Date(t.getTime());
-  if (t instanceof Uint8Array) return new Uint8Array(t);
-  if (t instanceof Array) {
-    let i = [];
-    t.forEach(e => {
-      i.push(e);
-    });
-    return i.map(t => e(t));
+/**
+ * Deeply clones a value, handling Dates, Uint8Arrays, Arrays, and plain objects.
+ * Original function name: e
+ * @param value - The value to clone.
+ * @returns A deep clone of the input value.
+ */
+export function deepClone(value: any): any {
+  if (value === null)
+    return value
+
+  if (value instanceof Date)
+    return new Date(value.getTime())
+
+  if (value instanceof Uint8Array)
+    return new Uint8Array(value)
+
+  if (Array.isArray(value)) {
+    // Recursively clone each element in the array
+    return value.map(deepClone)
   }
-  if ("object" == typeof t) {
-    let i = {
-      ...t
-    };
-    Object.keys(i).forEach(t => {
-      i[t] = e(i[t]);
-    });
-    return i;
+
+  if (typeof value === 'object') {
+    // Recursively clone each property in the object
+    const clonedObj: Record<string, any> = { ...value }
+    Object.keys(clonedObj).forEach((key) => {
+      clonedObj[key] = deepClone(clonedObj[key])
+    })
+    return clonedObj
   }
-  return t;
-};
+
+  return value
+}
+
+// Refactored export for compatibility with import statements
+export const A = deepClone

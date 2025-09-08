@@ -22,7 +22,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { OA } from "../figma_app/419216";
 import { lQ } from "../905/934246";
 import { o as _$$o } from "../905/821217";
-import { RYP, ywP, glU, Ez5 } from "../figma_app/763686";
+import { ColorSpaceEnum, ColorProfileEnum, Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { oA } from "../905/663269";
 import { Rs } from "../figma_app/288654";
 import { R as _$$R } from "../905/304671";
@@ -49,7 +49,7 @@ import { dTR, iY3 } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { p9, fA, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
 import { o1 } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
@@ -82,7 +82,7 @@ import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
 import { kj, U1 } from "../905/191601";
 import { vg } from "../figma_app/91703";
-import { to as _$$to2 } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
 import { _R } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/300562";
@@ -99,7 +99,7 @@ import { e as _$$e4 } from "../905/157975";
 import { dD } from "../905/519113";
 import { RR as _$$RR } from "../905/514666";
 import { $3 } from "../905/946937";
-import { h as _$$h2 } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { pH, GI } from "../figma_app/147337";
 var u = c;
 function S(e) {
@@ -189,12 +189,12 @@ let eI = memo(function () {
   let {
     colorProfilePreference
   } = jK();
-  let i = hP(colorProfilePreference) === RYP.DISPLAY_P3 ? "p3" : "srgb";
+  let i = hP(colorProfilePreference) === ColorSpaceEnum.DISPLAY_P3 ? "p3" : "srgb";
   let n = [{
-    value: ywP.SRGB,
+    value: ColorProfileEnum.SRGB,
     label: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")
   }, {
-    value: ywP.DISPLAY_P3,
+    value: ColorProfileEnum.DISPLAY_P3,
     label: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
   }].sort((t, i) => t.value === e && i.value !== e ? -1 : t.value !== e && i.value === e ? 1 : 0);
   return jsx(YJ, {
@@ -206,17 +206,17 @@ let eI = memo(function () {
           title: jsx(r1, {
             children: getI18nString("fullscreen.filename_view.color_management.file_color_profile")
           }),
-          value: ywP[e],
+          value: ColorProfileEnum[e],
           onChange: e => {
-            e === ywP[ywP.SRGB] ? glU && glU.triggerAction("change-document-color-profile-to-srgb", {}) : e === ywP[ywP.DISPLAY_P3] && glU && glU.triggerAction("change-document-color-profile-to-display-p3", {});
+            e === ColorProfileEnum[ColorProfileEnum.SRGB] ? Fullscreen && Fullscreen.triggerAction("change-document-color-profile-to-srgb", {}) : e === ColorProfileEnum[ColorProfileEnum.DISPLAY_P3] && Fullscreen && Fullscreen.triggerAction("change-document-color-profile-to-display-p3", {});
           },
-          children: [e === ywP.LEGACY && jsx(_$$MJ, {
-            value: ywP[ywP.LEGACY],
+          children: [e === ColorProfileEnum.LEGACY && jsx(_$$MJ, {
+            value: ColorProfileEnum[ColorProfileEnum.LEGACY],
             children: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
               colorProfile: getI18nString(`fullscreen.properties_panel.export_settings_color_profile.${i}`)
             })
           }), n.map(e => jsx(_$$MJ, {
-            value: ywP[e.value],
+            value: ColorProfileEnum[e.value],
             children: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
               color_profile: e.label
             })
@@ -230,7 +230,7 @@ var e1 = (e => (e.DISABLED = "disabled", e.PUBLISH = "publish", e.SHOW_UPSELL_MO
 function e2() {
   let e = useDispatch();
   return () => {
-    e(_$$to2({
+    e(showModalHandler({
       type: dD,
       data: {
         entrypoint: _$$RR.FILENAME_VIEW_DROPDOWN
@@ -341,7 +341,7 @@ let e7 = memo(function ({
         children: l
       }), jsx(MJ, {
         children: jsxs(z6, {
-          title: jsx(_$$h2, {
+          title: jsx(HiddenLabel, {
             children: l
           }),
           value: t?.id || (e ? getI18nString("sidebar.starred") : void 0),
@@ -370,7 +370,7 @@ let e8 = memo(function () {
   let t = function () {
     let e = useDispatch();
     return t => {
-      e(_$$to2({
+      e(showModalHandler({
         type: _$$l(),
         data: {
           pinnedFileId: t
@@ -381,7 +381,7 @@ let e8 = memo(function () {
   let i = function () {
     let e = useDispatch();
     return t => {
-      e(_$$to2({
+      e(showModalHandler({
         type: _$$I(),
         data: {
           pinnedFileId: t
@@ -451,7 +451,7 @@ let ti = memo(function ({
       let e = q5();
       let t = useDispatch();
       return () => {
-        e && t(_$$to2({
+        e && t(showModalHandler({
           type: _$$e3,
           data: {
             fileName: e.name,
@@ -529,7 +529,7 @@ let ti = memo(function ({
       let e = q5();
       let t = useDispatch();
       return useCallback(() => {
-        e && t(_$$to2({
+        e && t(showModalHandler({
           type: _$$e4,
           data: {
             fileKey: e.key,
@@ -560,7 +560,7 @@ let ti = memo(function ({
         return () => {
           if (!e) return;
           let r = e.teamId && t[e.teamId];
-          i(_$$to2({
+          i(showModalHandler({
             type: $3,
             data: {
               afterFileMove: e2,
@@ -681,7 +681,7 @@ let ti = memo(function ({
   let t_ = JU(tg);
   let tx = tg === kN.FILE_IN_DRAFTS;
   let ty = _$$h.useTrackingContext({
-    trigger: _$$b2.FILE_DUPLICATE
+    trigger: UpsellModalType.FILE_DUPLICATE
   });
   useEffect(() => {
     eU && (eU._move_to_project = () => {
@@ -712,7 +712,7 @@ let ti = memo(function ({
     children: getI18nString("fullscreen.filename_view.file_analytics")
   });
   if (!c) return null;
-  let tS = Ez5 && Ez5.uiState().isRecovery.getCopy();
+  let tS = AppStateTsApi && AppStateTsApi.uiState().isRecovery.getCopy();
   let tj = i.editorType;
   let tI = !c.canExport;
   let tk = tj === FEditorType.Whiteboard && !!c.org?.figjamDisabledAt || tj === FEditorType.Slides && oA(c.org?.isSlidesDisabled) || tj === FEditorType.Sites && !!c.org?.isSitesDisabled || tj === FEditorType.Cooper && !!c.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(o) || tI;
@@ -786,7 +786,7 @@ let ti = memo(function ({
             disabled: !eK,
             recordingKey: Pt(e, "exportSelectedExportables"),
             onClick: () => {
-              glU && glU.triggerAction("export-selected-exportables", {
+              Fullscreen && Fullscreen.triggerAction("export-selected-exportables", {
                 source: "toolbar"
               });
             },

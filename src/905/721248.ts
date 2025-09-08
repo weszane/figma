@@ -8,7 +8,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
 import { IK, $n } from "../905/521428";
-import { Dje, CWU, sYL, j0r, aTl, Egt, BtE, lyf, kul, rCR } from "../figma_app/763686";
+import { LibraryUpdateStatus, VariablesBindings, GitReferenceType, PropertyScope, FileAndBranchTipType, SceneGraphHelpers, PreviewStage, ViewType, SchemaJoinStatus, DocumentMode } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Ay } from "../905/612521";
@@ -40,11 +40,11 @@ import { FEditorType } from "../figma_app/53721";
 import { Kn, Wo, PW } from "../905/535806";
 import { e6 as _$$e } from "../905/557142";
 import { e0 as _$$e2 } from "../905/696396";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { K as _$$K } from "../905/443068";
 import { t as _$$t2 } from "../905/117577";
 import { a as _$$a } from "../905/964520";
-import { dI, aI } from "../905/871411";
+import { sessionLocalIDToString, areSessionLocalIDsEqual } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { waitForAnimationFrame } from "../905/236856";
 import Q from "../vendor/961736";
@@ -56,8 +56,8 @@ import { B as _$$B } from "../905/714743";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { zX } from "../905/576487";
-import { nF as _$$nF } from "../905/350402";
-import { Lo as _$$Lo, to as _$$to, Ce } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { $2, s$, KZ, cs, rB, Xp, MY, C_, ju, on, PE, FD, Mt, Oh, uA, yi, Y1, Rw, Oi, WE } from "../905/432493";
 import { ak, ss, tW as _$$tW, qj, wy, nS as _$$nS, FA } from "../905/746499";
 import { ED, _V, $T, z2 } from "../905/467351";
@@ -103,7 +103,7 @@ import { Ez } from "../figma_app/766708";
 import { rY as _$$rY } from "../figma_app/394327";
 import { f as _$$f } from "../905/167712";
 import { d as _$$d } from "../905/49800";
-import { h as _$$h2, J as _$$J } from "../905/270045";
+import { HiddenLabel, Label } from "../905/270045";
 import { r as _$$r } from "../905/571562";
 import { R as _$$R2 } from "../905/621802";
 import { G as _$$G2 } from "../905/750789";
@@ -157,7 +157,7 @@ import { A as _$$A13 } from "../6828/191424";
 import { A as _$$A14 } from "../6828/954206";
 import { A as _$$A15 } from "../6828/364616";
 var J = Q;
-_$$nF(async (e, t) => {
+createOptimistThunk(async (e, t) => {
   try {
     let e = XHR.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       closed: t.closed
@@ -177,7 +177,7 @@ _$$nF(async (e, t) => {
     }));
   }
 });
-let ed = _$$nF(async (e, t) => {
+let ed = createOptimistThunk(async (e, t) => {
   let i = t.approved ? "merge-request-approve" : t.changesRequested ? "merge-request-changes-requested" : "";
   i && e.dispatch(_$$F.enqueue({
     icon: zX.SPINNER,
@@ -225,7 +225,7 @@ let ed = _$$nF(async (e, t) => {
     }));
   }
 });
-let ec = _$$nF(async (e, t) => {
+let ec = createOptimistThunk(async (e, t) => {
   try {
     let e = XHR.put(`/api/merge_requests/${t.mergeRequestKey}/reviewers`, {
       notes: t.notes
@@ -245,7 +245,7 @@ let ec = _$$nF(async (e, t) => {
     }));
   }
 });
-let eu = _$$nF(async (e, t) => {
+let eu = createOptimistThunk(async (e, t) => {
   try {
     let e = XHR.post(`/api/merge_requests/${t.mergeRequestKey}/${t.isApprove ? "approve" : "unapprove"}`);
     await WB()?.optimisticallyUpdate({
@@ -263,7 +263,7 @@ let eu = _$$nF(async (e, t) => {
     }));
   }
 });
-let ep = _$$nF(async (e, t) => {
+let ep = createOptimistThunk(async (e, t) => {
   try {
     let i = XHR.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       rerequest: !0,
@@ -291,7 +291,7 @@ let ep = _$$nF(async (e, t) => {
     }));
   }
 });
-let em = _$$nF(async (e, t) => {
+let em = createOptimistThunk(async (e, t) => {
   try {
     let e = XHR.put(`/api/merge_requests/${t.mergeRequestKey}`, {
       ...t.mergeRequestPayload,
@@ -313,7 +313,7 @@ let em = _$$nF(async (e, t) => {
     }));
   }
 });
-let eh = _$$nF(async (e, t) => {
+let eh = createOptimistThunk(async (e, t) => {
   let i = e.getState();
   e.dispatch(_$$F.enqueue({
     icon: zX.SPINNER,
@@ -470,7 +470,7 @@ let eL = memo(function (e) {
         style: e.beforeBackgroundColorStyle,
         title: renderI18nText("collaboration.branching_chunk.side_by_side_left_label"),
         image: e.beforeImage,
-        shouldSkip: e.displayChunk.mainChunk.phase === Dje.CREATED,
+        shouldSkip: e.displayChunk.mainChunk.phase === LibraryUpdateStatus.CREATED,
         displayNode: e.chunkDetail?.diffBasis?.find($2),
         displayNodeStyleType: u,
         isMainChunkCanvas: c
@@ -479,7 +479,7 @@ let eL = memo(function (e) {
         style: e.beforeBackgroundColorStyle,
         title: renderI18nText("collaboration.branching_chunk.side_by_side_right_label"),
         image: e.afterImage,
-        shouldSkip: e.displayChunk.mainChunk.phase === Dje.REMOVED,
+        shouldSkip: e.displayChunk.mainChunk.phase === LibraryUpdateStatus.REMOVED,
         displayNode: e.displayChunk.mainChunk.displayNode,
         displayNodeStyleType: u,
         isMainChunkCanvas: c
@@ -492,7 +492,7 @@ let eL = memo(function (e) {
         image: e.beforeImage,
         style: e.beforeBackgroundColorStyle,
         className: eC,
-        shouldSkip: e.displayChunk.mainChunk.phase === Dje.CREATED,
+        shouldSkip: e.displayChunk.mainChunk.phase === LibraryUpdateStatus.CREATED,
         displayNodeStyleType: u,
         isMainChunkCanvas: c
       }), l && jsx(eD, {
@@ -502,7 +502,7 @@ let eL = memo(function (e) {
         },
         image: e.afterImage,
         className: eC,
-        shouldSkip: e.displayChunk.mainChunk.phase === Dje.REMOVED,
+        shouldSkip: e.displayChunk.mainChunk.phase === LibraryUpdateStatus.REMOVED,
         displayNodeStyleType: u,
         isMainChunkCanvas: c
       }), jsx(_$$u, {
@@ -525,7 +525,7 @@ function eH(e) {
   e.className && t.push(e.className);
   let i = "chunk_phase--phaseIcon--w-X7b";
   switch (e.phase) {
-    case Dje.UPDATED_LIBRARY:
+    case LibraryUpdateStatus.UPDATED_LIBRARY:
       {
         t.push("chunk_phase--updatedLibrary--pFUV9");
         let r = getI18nString("collaboration.branching_chunk.phase_updated_library");
@@ -544,7 +544,7 @@ function eH(e) {
           })]
         });
       }
-    case Dje.CREATED:
+    case LibraryUpdateStatus.CREATED:
       {
         t.push("chunk_phase--added--PSD48");
         let r = getI18nString("collaboration.branching_chunk.phase_created");
@@ -563,7 +563,7 @@ function eH(e) {
           })]
         });
       }
-    case Dje.REMOVED:
+    case LibraryUpdateStatus.REMOVED:
       {
         t.push("chunk_phase--removed--WDLhF");
         let r = getI18nString("collaboration.branching_chunk.phase_removed");
@@ -582,7 +582,7 @@ function eH(e) {
           })]
         });
       }
-    case Dje.UPDATED:
+    case LibraryUpdateStatus.UPDATED:
       {
         t.push("chunk_phase--edited--1KN2v");
         let r = getI18nString("collaboration.branching_chunk.phase_updated");
@@ -601,7 +601,7 @@ function eH(e) {
           })]
         });
       }
-    case Dje.UNMODIFIED:
+    case LibraryUpdateStatus.UNMODIFIED:
       return null;
     default:
       throwTypeError(e.phase);
@@ -798,7 +798,7 @@ function e6(e) {
   let a = useMemo(() => {
     let e = {};
     (basis || []).forEach(t => {
-      t.guid && (e[dI(t.guid)] = t);
+      t.guid && (e[sessionLocalIDToString(t.guid)] = t);
     });
     return e;
   }, [basis]);
@@ -812,8 +812,8 @@ function e6(e) {
       }), jsx("div", {
         children: changes.map(e => jsx(e3, {
           changes: e,
-          basis: a[dI(e.guid)]
-        }, dI(e.guid)))
+          basis: a[sessionLocalIDToString(e.guid)]
+        }, sessionLocalIDToString(e.guid)))
       })]
     })
   }) : null;
@@ -978,7 +978,7 @@ let tc = memo(function (e) {
             className: ek,
             children: tl
           });
-        })(), phase !== Dje.UNMODIFIED && !isImageLoading && jsx(eH, {
+        })(), phase !== LibraryUpdateStatus.UNMODIFIED && !isImageLoading && jsx(eH, {
           phase,
           className: "chunk_tile--phase--TMVK0"
         })]
@@ -1009,7 +1009,7 @@ let tc = memo(function (e) {
         }), (!!e.affectedCount || !!e.variantCount) && jsxs("div", {
           className: `${ek} chunk_tile--bottom---H91S`,
           children: [!!e.variantCount && jsx(Fragment, {
-            children: e.phase === Dje.UPDATED || e.phase === Dje.UPDATED_LIBRARY ? renderI18nText("collaboration.branching_chunk.tile_variants_changed", {
+            children: e.phase === LibraryUpdateStatus.UPDATED || e.phase === LibraryUpdateStatus.UPDATED_LIBRARY ? renderI18nText("collaboration.branching_chunk.tile_variants_changed", {
               variantCount: e.variantCount
             }) : renderI18nText("collaboration.branching_chunk.tile_variants", {
               variantCount: e.variantCount
@@ -1093,10 +1093,10 @@ function tI(e) {
   } = e;
   let o = group.mainChunk;
   let l = Xp(o, pageIdToInfo);
-  let d = dI(o.displayNode.guid);
+  let d = sessionLocalIDToString(o.displayNode.guid);
   let c = useMemo(() => onChunkClick ? () => onChunkClick(group) : void 0, [onChunkClick, group]);
-  let u = useMemo(() => o.phase !== Dje.UNMODIFIED || MY(o) ? o.phase : Dje.UPDATED, [o]);
-  let p = "state-group" === group.type ? group.variantChunks.filter(e => e.mainChunk.phase !== Dje.UNMODIFIED).length : 0;
+  let u = useMemo(() => o.phase !== LibraryUpdateStatus.UNMODIFIED || MY(o) ? o.phase : LibraryUpdateStatus.UPDATED, [o]);
+  let p = "state-group" === group.type ? group.variantChunks.filter(e => e.mainChunk.phase !== LibraryUpdateStatus.UNMODIFIED).length : 0;
   let h = "affectedChunks" in group ? group.affectedChunks.length : 0;
   let g = useMemo(() => C_(o), [o]);
   return jsx(tc, {
@@ -1124,7 +1124,7 @@ let tx = memo(function (e) {
   let c = l < displayGroups.length;
   let u = useRef(!1);
   e.initiallyCollapsed && !u.current && e.onAllChunksRendered && (e.onAllChunksRendered(), u.current = !0);
-  let m = e.displayGroups.map(e => dI(e.mainChunk.displayNode.guid)).join(",");
+  let m = e.displayGroups.map(e => sessionLocalIDToString(e.mainChunk.displayNode.guid)).join(",");
   let h = !!e.onChangeVisibleGroups;
   let g = useRef(new WeakMap());
   let f = useRef(new Set());
@@ -1210,7 +1210,7 @@ let tx = memo(function (e) {
           onAllChunksRendered: e.initiallyCollapsed ? void 0 : e.onAllChunksRendered,
           children: e.displayGroups.slice(0, l).map(t => {
             let i = t.mainChunk;
-            let r = dI(i.displayNode.guid);
+            let r = sessionLocalIDToString(i.displayNode.guid);
             return jsx("div", {
               ref: e => {
                 e && _.current && h && (_.current.observe(e), g.current.set(e, [t]));
@@ -1409,7 +1409,7 @@ let tk = memo(function (e) {
       icon: _$$A,
       onChunkClick,
       initiallyCollapsed: !1
-    }, dI(displayGroup.mainChunk.displayNode.guid) ?? "")
+    }, sessionLocalIDToString(displayGroup.mainChunk.displayNode.guid) ?? "")
   });
 });
 var tN = (e => (e.SUMMARY = "summary", e.DETAIL = "detail", e.AFFECTED_SUMMARY = "affected_summary", e.AFFECTED_DETAIL = "affected_detail", e.VARIANT_SUMMARY = "variant_summary", e.VARIANT_DETAIL = "variant_detail", e.VARIABLE_SET_DETAIL = "variable_set_detail", e))(tN || {});
@@ -1450,7 +1450,7 @@ function tL({
   currentView: e
 }) {
   let t = tD(e.displayGroup);
-  let i = e.displayGroup.variableChunks.filter(e => e.phase !== Dje.UNMODIFIED).length;
+  let i = e.displayGroup.variableChunks.filter(e => e.phase !== LibraryUpdateStatus.UNMODIFIED).length;
   return jsxs("div", {
     className: k2,
     children: [jsx("span", {
@@ -1675,12 +1675,12 @@ function tX(e) {
   let t = {};
   tJ(e, (e, i) => {
     let n = function (e) {
-      let t = CWU.getLocalVariableInfo(e);
+      let t = VariablesBindings.getLocalVariableInfo(e);
       if (t) return {
         type: "local",
         value: t
       };
-      let i = CWU.getSubscribedVariableInfo(e);
+      let i = VariablesBindings.getSubscribedVariableInfo(e);
       return i ? {
         type: "subscribed",
         value: i
@@ -1692,7 +1692,7 @@ function tX(e) {
       e && i && r.set(yG(e), i);
     }
     let a = n?.value.name ?? getI18nString("variables.missing_name");
-    let s = CWU.getVariableResolvedValue(e, r);
+    let s = VariablesBindings.getVariableResolvedValue(e, r);
     t0(t, e, i, {
       name: a,
       value: s
@@ -1710,13 +1710,13 @@ function tQ({
     let n = e.map(e => e.next);
     let r = {};
     tJ(n, (e, t) => {
-      let i = CWU.getLocalVariableInfo(e) ?? CWU.getSubscribedVariableInfo(e);
+      let i = VariablesBindings.getLocalVariableInfo(e) ?? VariablesBindings.getSubscribedVariableInfo(e);
       let n = i?.name ?? getI18nString("variables.missing_name");
       let a = i && "keyForPublish" in i;
       let s = i && "key" in i;
       let o = a ? i.keyForPublish : s ? i.key : null;
       let l = o && t ? new Map([[yG(o), t]]) : new Map();
-      let d = CWU.getVariableResolvedValue(e, l);
+      let d = VariablesBindings.getVariableResolvedValue(e, l);
       t0(r, e, t, {
         name: n,
         value: d
@@ -1728,19 +1728,19 @@ function tQ({
         b_();
         let e = {};
         tJ(i, (t, i) => {
-          let n = CWU.getLocalVariableInfo(t) ?? CWU.getSubscribedVariableInfo(t);
+          let n = VariablesBindings.getLocalVariableInfo(t) ?? VariablesBindings.getSubscribedVariableInfo(t);
           let r = n?.name ?? getI18nString("variables.missing_name");
           let a = n && "keyForPublish" in n;
           let s = n && "key" in n;
           let o = a ? n.keyForPublish : s ? n.key : null;
           let l = o && i ? new Map([[yG(o), i]]) : new Map();
-          let d = CWU.getVariableResolvedValue(t, l);
+          let d = VariablesBindings.getVariableResolvedValue(t, l);
           t0(e, t, i, {
             name: r,
             value: d
           });
         });
-        gf(sYL.BRANCH);
+        gf(GitReferenceType.BRANCH);
         return e;
       }),
       next: a
@@ -1754,7 +1754,7 @@ function tQ({
 function tJ(e, t) {
   for (let i of e) for (let e of i.variableDataValues?.entries ?? []) if (e.variableData?.dataType === "ALIAS") {
     let i = e.variableData.value?.alias;
-    i && e.modeID && t(_$$dI(i), dI(e.modeID));
+    i && e.modeID && t(_$$dI(i), sessionLocalIDToString(e.modeID));
   }
 }
 function t0(e, t, i, n) {
@@ -1916,7 +1916,7 @@ function iE({
       children: l && jsxs("div", {
         className: "variables_diff--dropdownContent--1LjZZ",
         children: [jsx(iA, {
-          scopes: next.variableScopes ? gK(next.variableScopes) : [j0r.ALL_SCOPES]
+          scopes: next.variableScopes ? gK(next.variableScopes) : [PropertyScope.ALL_SCOPES]
         }), jsx("div", {
           className: il
         }), jsx(iy, {
@@ -1940,7 +1940,7 @@ function ix({
     children: [e && jsx("div", {
       className: ev()({
         [iu]: !0,
-        [ip]: !(t || i === Dje.REMOVED)
+        [ip]: !(t || i === LibraryUpdateStatus.REMOVED)
       }),
       children: e
     }), e && t && jsx("div", {
@@ -1952,7 +1952,7 @@ function ix({
     }), t && jsx("div", {
       className: ev()({
         [iu]: !0,
-        [ip]: !(e || i === Dje.CREATED)
+        [ip]: !(e || i === LibraryUpdateStatus.CREATED)
       }),
       children: t
     })]
@@ -2025,7 +2025,7 @@ function ik({
     children: [jsx(_$$d, {
       checked: e,
       onChange: lQ,
-      label: jsx(_$$h2, {
+      label: jsx(HiddenLabel, {
         children: e ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false")
       })
     }), jsx("span", {
@@ -2085,7 +2085,7 @@ function iO({
       assertNotNullish(e.value?.alias);
       return jsx(iD, {
         variableID: _$$dI(e.value.alias),
-        modeID: dI(t),
+        modeID: sessionLocalIDToString(t),
         aliasCache: i
       });
     case "NODE_FIELD_ALIAS":
@@ -2134,21 +2134,21 @@ function iL({
       originalIndex,
       displayNode
     } = e.mainChunk;
-    let r = rY.getChunkChanges(sYL.BRANCH, originalIndex);
+    let r = rY.getChunkChanges(GitReferenceType.BRANCH, originalIndex);
     let a = (displayNode.variableSetModes ?? []).filter(t);
     let s = (r.diffBasis[0]?.variableSetModes ?? a).filter(t);
     let o = {};
-    for (let e of a) o[dI(e.id)] = {
+    for (let e of a) o[sessionLocalIDToString(e.id)] = {
       id: e.id,
       next: e,
-      phase: Dje.CREATED
+      phase: LibraryUpdateStatus.CREATED
     };
     for (let e of s) {
-      let t = dI(e.id);
-      o.hasOwnProperty(t) ? (o[t].prev = e, o[t].next?.name === e.name ? o[t].phase = Dje.UNMODIFIED : o[t].phase = Dje.UPDATED) : o[t] = {
+      let t = sessionLocalIDToString(e.id);
+      o.hasOwnProperty(t) ? (o[t].prev = e, o[t].next?.name === e.name ? o[t].phase = LibraryUpdateStatus.UNMODIFIED : o[t].phase = LibraryUpdateStatus.UPDATED) : o[t] = {
         id: e.id,
         prev: e,
-        phase: Dje.REMOVED
+        phase: LibraryUpdateStatus.REMOVED
       };
     }
     return Object.values(o).sort((e, t) => {
@@ -2158,7 +2158,7 @@ function iL({
     });
   }, [e.mainChunk]);
   let s = useMemo(() => {
-    let t = e.variableChunks.filter(e => e.phase !== Dje.UNMODIFIED).sort((e, t) => {
+    let t = e.variableChunks.filter(e => e.phase !== LibraryUpdateStatus.UNMODIFIED).sort((e, t) => {
       let i = e.displayNode.sortPosition ?? "";
       let n = t.displayNode.sortPosition ?? "";
       return -Ez(i, n);
@@ -2192,7 +2192,7 @@ function iL({
             next: e.next?.name,
             phase: e.phase
           })
-        }, `mode--${dI(e.id)}`)), jsx(Ar, {})]
+        }, `mode--${sessionLocalIDToString(e.id)}`)), jsx(Ar, {})]
       }), Object.entries(s).map(([e, r]) => jsx(iF, {
         diff: r,
         variableSetModeDiffs: a,
@@ -2234,7 +2234,7 @@ function iF({
       let t = iM(prev, e.id);
       let d = iM(next, e.id);
       let c = _$$rY(t, d);
-      let u = [Dje.UNMODIFIED, Dje.UPDATED].includes(e.phase) ? phase : e.phase;
+      let u = [LibraryUpdateStatus.UNMODIFIED, LibraryUpdateStatus.UPDATED].includes(e.phase) ? phase : e.phase;
       return jsx(Ar, {
         children: jsx(Suspense, {
           fallback: null,
@@ -2252,16 +2252,16 @@ function iF({
             phase: u
           })
         })
-      }, `value--${dI(e.id)}`);
+      }, `value--${sessionLocalIDToString(e.id)}`);
     }), jsx(Ar, {})]
   });
 }
 function iM(e, t) {
-  return e.variableDataValues?.entries?.find(e => aI(e.modeID, t))?.variableData;
+  return e.variableDataValues?.entries?.find(e => areSessionLocalIDsEqual(e.modeID, t))?.variableData;
 }
 let iz = "branching_reviews_modals--input--0a8d0";
 var iH = (e => (e.APPROVED = "approve", e.CHANGES_REQUESTED = "suggest_changes", e))(iH || {});
-let iW = Ju(function (e) {
+let iW = registerModal(function (e) {
   var t;
   var i;
   let s = useDispatch();
@@ -2305,12 +2305,12 @@ let iW = Ju(function (e) {
               inputRef.current?.focus();
             },
             children: [jsx(_$$c, {
-              label: jsx(_$$J, {
+              label: jsx(Label, {
                 children: renderI18nText("collaboration.branching_reviews.approve")
               }),
               value: "approve"
             }), jsx(_$$c, {
-              label: jsx(_$$J, {
+              label: jsx(Label, {
                 children: renderI18nText("collaboration.branching_reviews.suggest_changes")
               }),
               value: "suggest_changes"
@@ -2347,7 +2347,7 @@ let iW = Ju(function (e) {
                 approved: "approve" === p,
                 notes: o
               }));
-              s(_$$Lo());
+              s(popModalStack());
             },
             disabled: !p,
             children: renderI18nText("collaboration.branching_reviews.submit")
@@ -2357,7 +2357,7 @@ let iW = Ju(function (e) {
     })
   });
 }, "leave-review-modal");
-let iK = Ju(function (e) {
+let iK = registerModal(function (e) {
   let [t, i] = useState(e.existingMergeRequest?.description || "");
   let a = hS({
     open: !0,
@@ -3069,7 +3069,7 @@ function nS(e) {
     })
   });
   let o = () => {
-    t(_$$to({
+    t(showModalHandler({
       type: iK,
       showModalsBeneath: !0,
       data: {
@@ -3080,7 +3080,7 @@ function nS(e) {
     }));
   };
   let l = () => {
-    t(_$$to({
+    t(showModalHandler({
       type: iW,
       showModalsBeneath: !0,
       data: {
@@ -3326,7 +3326,7 @@ let nw = memo(function (e) {
       _l();
       let r = n.filter(e => "variable-collection" === e.type).map(e => e.variableChunks).flat();
       let a = tX(r.map(e => e.diffBasis));
-      gf(sYL.BRANCH);
+      gf(GitReferenceType.BRANCH);
       y(!0);
       rY.trackGranularLoadTime({
         branchKey: t,
@@ -3345,16 +3345,16 @@ let nw = memo(function (e) {
       let t;
       if (!n.length) return [[], null];
       e = g.current;
-      (t = (t = a).filter(t => !e.has(dI(t.mainChunk.displayNode.guid)))).length || e.size || (t = n.slice(0, 20));
+      (t = (t = a).filter(t => !e.has(sessionLocalIDToString(t.mainChunk.displayNode.guid)))).length || e.size || (t = n.slice(0, 20));
       let i = t;
       let r = function (e, t, i) {
         if (e.view === tN.DETAIL || e.view === tN.AFFECTED_DETAIL || e.view === tN.VARIANT_SUMMARY || e.view === tN.VARIANT_DETAIL) {
           let t = nx(e);
-          return t && !i.has(dI(t.mainChunk.displayNode.guid)) ? t : null;
+          return t && !i.has(sessionLocalIDToString(t.mainChunk.displayNode.guid)) ? t : null;
         }
       }(s, 0, h.current);
-      for (let e of i) g.current.add(dI(e.mainChunk.displayNode.guid));
-      r && h.current.add(dI(r.mainChunk.displayNode.guid));
+      for (let e of i) g.current.add(sessionLocalIDToString(e.mainChunk.displayNode.guid));
+      r && h.current.add(sessionLocalIDToString(r.mainChunk.displayNode.guid));
       return [i, r];
     }, [n, h, g, s, a]);
     return (useEffect(() => {
@@ -3366,7 +3366,7 @@ let nw = memo(function (e) {
             to,
             fromPromise
           } = function (e, t) {
-            let i = dI(e.mainChunk.displayNode.guid);
+            let i = sessionLocalIDToString(e.mainChunk.displayNode.guid);
             let n = KZ(e.mainChunk.displayNode.styleType);
             let r = [{
               id: null !== e.basisChunkGuid ? e.basisChunkGuid : i,
@@ -3388,7 +3388,7 @@ let nw = memo(function (e) {
                 nodes: r,
                 scale: getFeatureFlags().branching_detail_view_zoom ? n ? 4 : 8 : void 0
               });
-              gf(sYL.BRANCH);
+              gf(GitReferenceType.BRANCH);
               e(t[0]);
             });
             return {
@@ -3537,7 +3537,7 @@ let nw = memo(function (e) {
   }, [A, _, e.isMergeBlocked, e.isConflictDetectionLoading, e.conflictGroups, e.hasDuplicateConflictingGuids, e.unreadCommentCount, eR, eN, f]);
   let eP = useCallback(async () => {
     await ds();
-    t(Ce());
+    t(hideModal());
     let e = {
       branchKey: branch.key,
       sourceKey: branch?.source_file_key,
@@ -3554,7 +3554,7 @@ let nw = memo(function (e) {
   let eO = useMemo(() => {
     if (i.view === tN.SUMMARY || i.view === tN.AFFECTED_SUMMARY) return null;
     let e = nx(i);
-    return e ? rY.getChunkChanges(sYL.BRANCH, e.mainChunk.originalIndex) : null;
+    return e ? rY.getChunkChanges(GitReferenceType.BRANCH, e.mainChunk.originalIndex) : null;
   }, [i]);
   let eD = {
     direction: Kn.TO_SOURCE
@@ -3585,7 +3585,7 @@ let nw = memo(function (e) {
     })]
   });
   let eB = i => {
-    if (t(_$$Lo()), I) {
+    if (t(popModalStack()), I) {
       let e = i !== (I.description || "");
       t(ep({
         mergeRequestId: I.id,
@@ -3705,7 +3705,7 @@ let nw = memo(function (e) {
         if (i.view === tN.SUMMARY) return null;
         let e = nx(i);
         if (!e) return null;
-        let t = detailImages[dI(e.mainChunk.displayNode.guid) || ""];
+        let t = detailImages[sessionLocalIDToString(e.mainChunk.displayNode.guid) || ""];
         let r = t?.from;
         let a = t?.to;
         return jsxs(qj, {
@@ -3761,7 +3761,7 @@ let nw = memo(function (e) {
                     beforeBackgroundColorStyle: Oh(e.mainChunk, pageIdToInfo),
                     afterImage: a,
                     afterBackgroundColorStyle: Oh(e.mainChunk, pageIdToInfo),
-                    showOptions: e.mainChunk.phase !== Dje.CREATED && e.mainChunk.phase !== Dje.REMOVED,
+                    showOptions: e.mainChunk.phase !== LibraryUpdateStatus.CREATED && e.mainChunk.phase !== LibraryUpdateStatus.REMOVED,
                     displayChunk: e,
                     chunkDetail: eO,
                     compareThumbnailSource: FO.BRANCHING
@@ -3798,7 +3798,7 @@ let nw = memo(function (e) {
                     })
                   })]
                 })]
-              }, `${i.view}-${dI(e.mainChunk.displayNode.guid)}`)
+              }, `${i.view}-${sessionLocalIDToString(e.mainChunk.displayNode.guid)}`)
             }), !!getFeatureFlags().branching_and_merging_debug && jsx(FA, {
               className: pG,
               children: eO ? jsx(e7, {
@@ -3854,10 +3854,10 @@ let nw = memo(function (e) {
 });
 let nC = "BranchMergeDebugger";
 function nT(e, t) {
-  return t.find(t => dI(t.displayNode.guid) === e);
+  return t.find(t => sessionLocalIDToString(t.displayNode.guid) === e);
 }
 function nk(e, t) {
-  return t?.find(t => dI(t.mainChunk.displayNode.guid) === e);
+  return t?.find(t => sessionLocalIDToString(t.mainChunk.displayNode.guid) === e);
 }
 var nN = nR;
 let nO = atom("off");
@@ -3949,7 +3949,7 @@ let nF = memo(function (e) {
       setTimeout(async function () {
         if (!c) return;
         let e = d.filter(e => {
-          let t = dI(e.mainChunk.displayNode.guid);
+          let t = sessionLocalIDToString(e.mainChunk.displayNode.guid);
           return !f.current.has(t) && (f.current.add(t), !0);
         });
         if (0 === e.length) return;
@@ -4041,7 +4041,7 @@ let nF = memo(function (e) {
         variant: "primary",
         type: "submit",
         onClick: e.applyChanges,
-        disabled: viewOnly || T !== aTl.STAGED_BRANCH_TIP,
+        disabled: viewOnly || T !== FileAndBranchTipType.STAGED_BRANCH_TIP,
         children: renderI18nText("collaboration.branching_from_source.apply_changes")
       })
     })]
@@ -4202,12 +4202,12 @@ function n2({
   branchAliasCache: o
 }) {
   let l = t?.displayNode.variableSetModes?.sort((e, t) => -1 * Ez(e.sortPosition, t.sortPosition)) ?? [];
-  let d = nZ()(l, e => dI(e.id));
-  let c = l.map(t => e?.displayNode.variableDataValues?.entries?.find(e => aI(e.modeID, t.id))).filter(isNotNullish);
+  let d = nZ()(l, e => sessionLocalIDToString(e.id));
+  let c = l.map(t => e?.displayNode.variableDataValues?.entries?.find(e => areSessionLocalIDsEqual(e.modeID, t.id))).filter(isNotNullish);
   let u = r?.displayNode.variableSetModes?.sort((e, t) => -1 * Ez(e.sortPosition, t.sortPosition)) ?? [];
-  let p = nZ()(u, e => dI(e.id));
-  let m = u.map(e => i?.displayNode.variableDataValues?.entries?.find(t => aI(t.modeID, e.id))).filter(isNotNullish);
-  let h = lp(c, m, e => dI(e.modeID));
+  let p = nZ()(u, e => sessionLocalIDToString(e.id));
+  let m = u.map(e => i?.displayNode.variableDataValues?.entries?.find(t => areSessionLocalIDsEqual(t.modeID, e.id))).filter(isNotNullish);
+  let h = lp(c, m, e => sessionLocalIDToString(e.modeID));
   let g = gK(e?.displayNode.variableScopes ?? []);
   let f = gK(i?.displayNode.variableScopes ?? []);
   let _ = e?.displayNode.codeSyntax && e?.displayNode.codeSyntax.entries ? e?.displayNode.codeSyntax.entries : void 0;
@@ -4289,8 +4289,8 @@ function n2({
     let n = [];
     h.forEach(([e, i], r) => {
       e ? t.push(y({
-        key: dI(e.modeID),
-        modeName: d[dI(e.modeID)].name ?? "",
+        key: sessionLocalIDToString(e.modeID),
+        modeName: d[sessionLocalIDToString(e.modeID)].name ?? "",
         modeID: e.modeID,
         variableData: e.variableData,
         aliasCache: s
@@ -4298,8 +4298,8 @@ function n2({
         key: r
       }));
       i ? n.push(y({
-        key: dI(i.modeID),
-        modeName: p[dI(i.modeID)].name ?? "",
+        key: sessionLocalIDToString(i.modeID),
+        modeName: p[sessionLocalIDToString(i.modeID)].name ?? "",
         modeID: i.modeID,
         variableData: i.variableData,
         aliasCache: o
@@ -4401,7 +4401,7 @@ function rn(e) {
     imageData,
     imageBackgroundColor
   } = e;
-  let o = chunk?.phase === Dje.REMOVED;
+  let o = chunk?.phase === LibraryUpdateStatus.REMOVED;
   let l = chunk?.displayNode;
   let d = chunk?.displayNode.styleType === "TEXT";
   let c = chunk?.displayNode.styleType === "FILL";
@@ -4594,8 +4594,8 @@ function ro({
       children: p.map(([e, i]) => {
         let r = e ? Hm(e) : void 0;
         let c = i ? Hm(i) : void 0;
-        let u = e ? s[dI(e.displayNode.guid)] : void 0;
-        let m = i ? o[dI(i.displayNode.guid)] : void 0;
+        let u = e ? s[sessionLocalIDToString(e.displayNode.guid)] : void 0;
+        let m = i ? o[sessionLocalIDToString(i.displayNode.guid)] : void 0;
         return jsx(rd, {
           alignedChunks: p,
           branchAliasCache: d,
@@ -4807,7 +4807,7 @@ function rb({
         },
         value: o,
         children: [jsx(l9, {
-          label: jsx(_$$h2, {
+          label: jsx(HiddenLabel, {
             children: renderI18nText("collaboration.branching_from_source.resolve_all")
           })
         }), jsxs(_$$mc, {
@@ -5003,7 +5003,7 @@ function rk(e, t, i, n) {
   Ur(e, t);
   let r = i.map(e => ({
     ...e,
-    backgroundColor: Egt.getNodePageBackgroundColor(e.id),
+    backgroundColor: SceneGraphHelpers.getNodePageBackgroundColor(e.id),
     isStyle: e.isStyle
   }));
   let a = FD({
@@ -5202,7 +5202,7 @@ let rR = memo(function (e) {
             imagesByNodeId: _imagesByNodeId,
             aliasVariableCache: _aliasVariableCache
           } = rk(mainGuidsToAlwaysApplyToGenerateImages.concat(extraGuidsToApplyToGenerateMainImageFromDiff), branchGuidsToAlwaysApplyToGenerateImages, i.sourceChunks.map(e => ({
-            id: dI(e.displayNode.guid),
+            id: sessionLocalIDToString(e.displayNode.guid),
             isStyle: void 0 !== e.displayNode.styleType
           })), r);
           logInfo("Branching", "Generating conflict images", {
@@ -5213,7 +5213,7 @@ let rR = memo(function (e) {
             imagesByNodeId,
             aliasVariableCache
           } = rk(mainGuidsToAlwaysApplyToGenerateImages, branchGuidsToAlwaysApplyToGenerateImages.concat(extraGuidsToApplyToGenerateBranchImageFromConflictDiff), i.branchChunks.map(e => ({
-            id: dI(e.displayNode.guid),
+            id: sessionLocalIDToString(e.displayNode.guid),
             isStyle: void 0 !== e.displayNode.styleType && "NONE" !== e.displayNode.styleType
           })), s);
           n.current = i.id;
@@ -5370,7 +5370,7 @@ let rR = memo(function (e) {
                 nonConflictingBranchChunkGUIDs,
                 identicalChunkGUIDs
               } = conflictDetection;
-              Ur(nonConflictingSourceChunkGUIDs, branchPickGUIDs.concat(nonConflictingBranchChunkGUIDs).concat(identicalChunkGUIDs), BtE.STAGE);
+              Ur(nonConflictingSourceChunkGUIDs, branchPickGUIDs.concat(nonConflictingBranchChunkGUIDs).concat(identicalChunkGUIDs), PreviewStage.STAGE);
               e.onSubmit(i);
             } catch (e) {
               B(new s9("Failed to set all picks from branch", {
@@ -5449,13 +5449,13 @@ let rN = memo(function (e) {
       updateBranchStatus: x.updateBranch.status,
       updateBranchReason: x.updateBranch.reason,
       memoryWarningLevel: Wy[S],
-      topLevelMode: lyf[w],
-      multiplayerSessionState: kul[C],
+      topLevelMode: ViewType[w],
+      multiplayerSessionState: SchemaJoinStatus[C],
       conflictCount: conflictDetection.conflictGroups.length
     }), analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.branching.conflict_resolution_blocked", {
       reason: x.updateBranch.reason,
       status: x.updateBranch.status,
-      multiplayerSessionState: kul[C],
+      multiplayerSessionState: SchemaJoinStatus[C],
       conflictCount: conflictDetection.conflictGroups.length
     }), D(!0));
   }, [k, x, S, w, C, conflictDetection, O]), !checkpointDiff || isConflictDetectionLoading || !conflictDetection) return jsx(qj, {
@@ -5470,7 +5470,7 @@ let rN = memo(function (e) {
   let [L, F] = iZ()(conflictDetection?.conflictGroups || [], e => d[e.id] === Wo.BRANCH);
   let M = nN()(L, e => ue(e, Wo.BRANCH));
   let j = new Set(nN()(F, e => ue(e, Wo.MAIN)));
-  let U = (displayGroups ?? []).filter(e => j.has(dI(e.mainChunk.displayNode.guid)));
+  let U = (displayGroups ?? []).filter(e => j.has(sessionLocalIDToString(e.mainChunk.displayNode.guid)));
   let B = L.length === (conflictDetection?.conflictGroups || []).length;
   let V = {
     direction: Kn.FROM_SOURCE
@@ -5675,12 +5675,12 @@ function rF(e) {
   let {
     diffInfo: _diffInfo,
     error: _error
-  } = YH(sYL.BRANCH, e.branchKey, e.sourceKey, e.direction, t, i, e.sourceCheckpointKey ?? null);
+  } = YH(GitReferenceType.BRANCH, e.branchKey, e.sourceKey, e.direction, t, i, e.sourceCheckpointKey ?? null);
   if (_error) throw _error;
   let {
     diffInfo,
     error
-  } = YH(sYL.SOURCE, e.branchKey, e.sourceKey, e.direction, t, i, e.sourceCheckpointKey ?? null);
+  } = YH(GitReferenceType.SOURCE, e.branchKey, e.sourceKey, e.direction, t, i, e.sourceCheckpointKey ?? null);
   if (error) throw error;
   useEffect(() => {
     (async function () {
@@ -5688,7 +5688,7 @@ function rF(e) {
     })();
   }, [_diffInfo.displayGroups, diffInfo.displayGroups, o, e.direction]);
   useEffect(() => {
-    F4(rCR.MERGE_MODAL);
+    F4(DocumentMode.MERGE_MODAL);
   }, []);
   useEffect(() => {
     if (!c && null != diffInfo.styleKeyToLibraryKey && null != _diffInfo.styleKeyToLibraryKey && null == l && p) {
@@ -5775,7 +5775,7 @@ function rM(e) {
     }));
   }, [i, e.branchKey, K]);
   useEffect(() => {
-    J === lyf.BRANCHING || c || u({
+    J === ViewType.BRANCHING || c || u({
       navigationKey: null,
       reason: "not_in_branching_mode"
     });
@@ -5805,18 +5805,18 @@ function rM(e) {
       if (s) {
         window[nC] = {
           getBranchChunks: e => {
-            let t = rY.getChunks(sYL.BRANCH).map(e => ({
+            let t = rY.getChunks(GitReferenceType.BRANCH).map(e => ({
               ...e,
-              phaseString: Dje[e.phase],
-              diffTypeString: sYL[e.diffType]
+              phaseString: LibraryUpdateStatus[e.phase],
+              diffTypeString: GitReferenceType[e.diffType]
             }));
             return e ? nT(e, t) : t;
           },
           getSourceChunks: e => {
-            let t = rY.getChunks(sYL.SOURCE).map(e => ({
+            let t = rY.getChunks(GitReferenceType.SOURCE).map(e => ({
               ...e,
-              phaseString: Dje[e.phase],
-              diffTypeString: sYL[e.diffType]
+              phaseString: LibraryUpdateStatus[e.phase],
+              diffTypeString: GitReferenceType[e.diffType]
             }));
             return e ? nT(e, t) : t;
           },
@@ -5825,7 +5825,7 @@ function rM(e) {
           getConflicts: () => i,
           getConflictGroups: e => {
             let t = i?.conflictGroups || [];
-            return e ? t.find(t => t.sourceChunks.find(t => dI(t.displayNode.guid) === e) || t.branchChunks.find(t => dI(t.displayNode.guid) === e) || t.secondaryBranchChunkGUIDs.find(t => t === e) || t.secondarySourceChunkGUIDs.find(t => t === e)) : t;
+            return e ? t.find(t => t.sourceChunks.find(t => sessionLocalIDToString(t.displayNode.guid) === e) || t.branchChunks.find(t => sessionLocalIDToString(t.displayNode.guid) === e) || t.secondaryBranchChunkGUIDs.find(t => t === e) || t.secondarySourceChunkGUIDs.find(t => t === e)) : t;
           }
         };
         return () => window[nC] = void 0;
@@ -5976,7 +5976,7 @@ function rM(e) {
     })]
   });
 }
-export let $$rj0 = Ju(function (e) {
+export let $$rj0 = registerModal(function (e) {
   _$$h(() => (trackEventAnalytics("Branch Modal Opened", {
     branchKey: e.branchKey,
     sourceKey: e.sourceKey,
@@ -6005,5 +6005,5 @@ export let $$rj0 = Ju(function (e) {
       })
     })
   });
-}, "BranchMergeModalWithDeferredConflicts", ZU.YES);
+}, "BranchMergeModalWithDeferredConflicts", ModalSupportsBackground.YES);
 export const $l = $$rj0;

@@ -5,8 +5,8 @@ import { W as _$$W } from '../905/187396';
 import { h as _$$h } from '../905/310723';
 import { n as _$$n } from '../905/347702';
 import { LogLevelStr } from '../905/361972';
-import { nL, UG } from '../905/414007';
-import { aK, EG, fF } from '../905/471229';
+import { ANONYMOUS_ID_COOKIE, getCookieOrStorage } from '../905/414007';
+import { initISOString, incrementSessionCounter, getTrackingSessionId } from '../905/471229';
 import { YQ } from '../905/502364';
 import { getFeatureFlags } from '../905/601108';
 import { observabilityClient } from '../905/602906';
@@ -95,10 +95,10 @@ class g {
     let r = {
       ...t,
       ...getEnvironmentInfo(),
-      tracking_session_id: fF(),
-      tracking_session_sequence_id: EG()
+      tracking_session_id: getTrackingSessionId(),
+      tracking_session_sequence_id: incrementSessionCounter()
     };
-    getFeatureFlags().record_session_start_time && (r.tracking_session_started_at = aK);
+    getFeatureFlags().record_session_start_time && (r.tracking_session_started_at = initISOString);
     this.delegateLogger.track(e, r, i);
   }
   clearAnalyticsStorage() {
@@ -165,10 +165,10 @@ let I = () => {
 class E {
   constructor(e) {
     this._userId = e;
-    this._storage = UG();
+    this._storage = getCookieOrStorage();
     this._anonymousId = _$$g();
-    let t = this._storage.get(nL);
-    t == null ? this._storage.set(nL, this._anonymousId, {
+    let t = this._storage.get(ANONYMOUS_ID_COOKIE);
+    t == null ? this._storage.set(ANONYMOUS_ID_COOKIE, this._anonymousId, {
       sameSite: 'none'
     }) : this._anonymousId = t;
   }
@@ -178,7 +178,7 @@ class E {
       anonymousId: () => this._anonymousId,
       reset: () => {
         this._anonymousId = _$$g();
-        this._storage.set(nL, this._anonymousId);
+        this._storage.set(ANONYMOUS_ID_COOKIE, this._anonymousId);
         this._userId = null;
       }
     };
@@ -456,7 +456,7 @@ class V {
             shadowed_event_limiting: getFeatureFlags().figment_rate_limit_events ? '0' : '1',
             shadowed_requests_limiting: '0',
             ...getEnvironmentInfo(),
-            tracking_session_id: fF(),
+            tracking_session_id: getTrackingSessionId(),
             events_namespace: this._namespace
           },
           ..._({
@@ -632,7 +632,7 @@ class V {
           retry_count: e.toString(),
           action: 'retry_attempt',
           ...getEnvironmentInfo(),
-          tracking_session_id: fF(),
+          tracking_session_id: getTrackingSessionId(),
           path: t,
           retried_events: n,
           events_namespace: this._namespace

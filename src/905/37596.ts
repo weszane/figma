@@ -29,13 +29,13 @@ import { F as _$$F } from "../905/302958";
 import { nl, Pf } from "../905/590952";
 import { h as _$$h } from "../905/973388";
 import { sf } from "../905/929976";
-import { Ce, Lo, to } from "../905/156213";
+import { hideModal, popModalStack, showModalHandler } from "../905/156213";
 import { fu, j6 } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FPermissionDenialReason } from "../figma_app/191312";
 import { S2 } from "../figma_app/465071";
 import { J7, SN } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { K as _$$K2 } from "../905/41648";
@@ -55,7 +55,7 @@ import { Bi } from "../905/652992";
 import { Ib } from "../905/129884";
 import { DV } from "../905/739964";
 var p = u;
-let Y = Ju(function (e) {
+let Y = registerModal(function (e) {
   let t = S2().unwrapOr(null);
   let i = e.hasOwnProperty("resourceConnectionInvite");
   let d = i ? e.resourceConnectionInvite.hostPlan : e.resourceConnection.hostPlan;
@@ -67,7 +67,7 @@ let Y = Ju(function (e) {
   let h = hS({
     ...e,
     onClose: () => {
-      m(Ce());
+      m(hideModal());
     }
   });
   let g = Hg(i ? void 0 : e.resourceConnection.id);
@@ -136,7 +136,7 @@ let Y = Ju(function (e) {
               className: g2,
               children: [jsx(_$$K, {
                 onClick: () => {
-                  m(Lo());
+                  m(popModalStack());
                 },
                 "aria-label": getI18nString("resource_connection.aria_label.button"),
                 children: jsx(_$$C, {})
@@ -215,7 +215,7 @@ let Y = Ju(function (e) {
                     count: g.data
                   }) : getI18nString("resource_connection.manage_modal.allow_external_teams_to_use_libraries"),
                   onClick: () => {
-                    m(to({
+                    m(showModalHandler({
                       type: _$$T,
                       data: {
                         teamId: e.resourceConnection.projectTeamId,
@@ -277,7 +277,7 @@ let Y = Ju(function (e) {
                     teamAdminConsoleViewTab: DashboardSections.CONTENT,
                     teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS,
                     showResourceConnectionFlyout: e.resourceConnection.id
-                  })), m(Ce()));
+                  })), m(hideModal()));
                 },
                 children: getI18nString("resource_connection.manage_modal.view_in_admin_dashboard")
               })
@@ -297,7 +297,7 @@ let Y = Ju(function (e) {
             }), jsx($n, {
               variant: "destructiveSecondary",
               onClick: i ? () => {
-                m(to({
+                m(showModalHandler({
                   type: _$$h,
                   data: {
                     resourceConnectionInvite: e.resourceConnectionInvite
@@ -310,7 +310,7 @@ let Y = Ju(function (e) {
                   }));
                   return;
                 }
-                m(to({
+                m(showModalHandler({
                   type: _$$K2,
                   data: {
                     resourceConnectionId: e.resourceConnection.id,
@@ -349,7 +349,7 @@ let eo = (e, t) => {
   let x = o?.pendingAssetTransferRequest;
   let S = o?.team?.pendingAssetTransferRequest;
   let w = _$$N2(u?.key, () => {
-    u && a(to({
+    u && a(showModalHandler({
       type: _$$B3,
       data: {
         folder: {
@@ -366,7 +366,7 @@ let eo = (e, t) => {
   if (!C || !o) return [];
   let T = () => x ? cm.PENDING_ASSET_TRANSFER : _ ? cm.PENDING_RESOURCE_CONNECTION : c ? cm.ACTIVE_RESOURCE_CONNECTION : null;
   let k = e => {
-    a(to({
+    a(showModalHandler({
       type: Lg(),
       data: {
         folderId: o.id,
@@ -377,7 +377,7 @@ let eo = (e, t) => {
     }));
   };
   let R = () => {
-    a(to({
+    a(showModalHandler({
       type: DV,
       data: {
         team: o.team,
@@ -392,7 +392,7 @@ let eo = (e, t) => {
     label: renderI18nText("file_browser.folder_settings_modal.name"),
     description: o.name,
     onClick: () => {
-      a(to({
+      a(showModalHandler({
         type: _$$y(),
         data: {
           folder: o
@@ -406,7 +406,7 @@ let eo = (e, t) => {
     label: renderI18nText("file_browser.folder_settings_modal.description"),
     description: o.description && "" !== o.description ? o.description : C.canEdit ? renderI18nText("file_browser.folder_settings_modal.add_description") : renderI18nText("file_browser.folder_settings_modal.no_description_added_yet"),
     onClick: () => {
-      a(to({
+      a(showModalHandler({
         type: _$$C2(),
         data: {
           folder: o
@@ -428,7 +428,7 @@ let eo = (e, t) => {
     label: getI18nString("file_browser.folder_settings_modal.manage_connection"),
     description: D ? getI18nString("file_browser.folder_settings_modal.manage_connection_description") : void 0,
     onClick: () => {
-      c && a(to({
+      c && a(showModalHandler({
         type: Y,
         data: {
           resourceConnection: {
@@ -458,7 +458,7 @@ let eo = (e, t) => {
     label: getI18nString("file_browser.folder_settings_modal.manage_connection"),
     description: getI18nString("file_browser.folder_settings_modal.manage_connection_description"),
     onClick: () => {
-      _ && a(to({
+      _ && a(showModalHandler({
         type: Y,
         data: {
           resourceConnectionInvite: {
@@ -495,7 +495,7 @@ let eo = (e, t) => {
   x ? (C.isPlanMember || C.isPlanAdmin) && N.push({
     label: getI18nString("project_menu.manage_transfer_request"),
     onClick: () => {
-      x && a(to({
+      x && a(showModalHandler({
         type: _$$d(),
         data: {
           pending: x && {
@@ -545,7 +545,7 @@ let eo = (e, t) => {
         folderId: o.id
       }).catch(() => {
         a(_$$s2.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
-      }), t()) : a(to({
+      }), t()) : a(showModalHandler({
         type: _$$V(),
         data: {
           folder: o,
@@ -568,7 +568,7 @@ let eo = (e, t) => {
   });
   return N;
 };
-let $$el0 = Ju(function (e) {
+let $$el0 = registerModal(function (e) {
   let t;
   let i = hS(e);
   let {

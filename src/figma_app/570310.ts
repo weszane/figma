@@ -16,7 +16,7 @@ import { $ as _$$$ } from "../905/692618";
 import { r } from "../905/784543";
 import { g as _$$g } from "../figma_app/479056";
 import { J as _$$J } from "../905/614223";
-import { w3z, glU } from "../figma_app/763686";
+import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
@@ -39,7 +39,7 @@ import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { X as _$$X } from "../905/853613";
 import { findComponentGuidOrPublishId } from "../figma_app/854115";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { tJ } from "../figma_app/741237";
@@ -58,7 +58,7 @@ import { Vr } from "../figma_app/151869";
 import { VZ } from "../figma_app/727192";
 import { l6, c$ } from "../905/794875";
 import { uI } from "../figma_app/598952";
-import { H4 } from "../905/992467";
+import { NONE_SYMBOL } from "../905/992467";
 import { HX, _3, zi } from "../figma_app/97042";
 import { QU, bf } from "../figma_app/856806";
 import { hS } from "../905/437088";
@@ -70,14 +70,14 @@ import { r as _$$r2 } from "../905/216849";
 import { hC } from "../figma_app/901889";
 import { lW } from "../figma_app/11182";
 import { RK } from "../figma_app/815170";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Gg, MC, gY, YN, v_, M7, uw, G5, jt, cL, fq, as, kL, pz, tb, J$, gy, xR, s6, Sd, X4, jH, Iw, F9, Qs } from "../905/610227";
-import { yT as _$$yT } from "../905/359509";
+import { mapPlatformToFramework as _$$yT } from "../905/359509";
 import { Au } from "../figma_app/204145";
 import { A as _$$A4 } from "../5724/663128";
 let el = _$$A.createLazyComponent(() => then(e => e.CodeConnectSection), {
   loading: () => null,
-  error: H4.NONE,
+  error: NONE_SYMBOL.NONE,
   componentName: "CodeConnectSection"
 });
 var eI = (e => (e.REACT = "React", e.SWIFTUI = "SwiftUI", e.COMPOSE = "Compose", e.HTML = "HTML", e))(eI || {});
@@ -628,7 +628,7 @@ function eN() {
     })]
   });
 }
-let eC = Ju(function (e) {
+let eC = registerModal(function (e) {
   let [t, r] = useState("React");
   let s = hC();
   let o = useDispatch();
@@ -722,7 +722,7 @@ let eC = Ju(function (e) {
       })
     })
   });
-}, "CodeConnectModal", ZU.YES);
+}, "CodeConnectModal", ModalSupportsBackground.YES);
 function eR({
   doc: e
 }) {
@@ -886,7 +886,7 @@ function eV() {
     }), jsx($n, {
       variant: "link",
       onClick: () => {
-        e(to({
+        e(showModalHandler({
           type: eC
         }));
       },
@@ -1023,7 +1023,7 @@ function eK({
     backingStateGroupKey
   });
   let O = useCallback(e => {
-    l ? l(e) : w3z.selectAndPanToNode(e);
+    l ? l(e) : HandoffBindingsCpp.selectAndPanToNode(e);
   }, [l]);
   let L = useCallback(() => {
     trackEventAnalytics("code_connect_clicked", {
@@ -1166,7 +1166,7 @@ function eJ({
   let r = function () {
     let e = useDispatch();
     return useCallback(() => {
-      e(to({
+      e(showModalHandler({
         type: eC
       }));
     }, [e]);
@@ -1218,7 +1218,7 @@ export function $$eQ0({
   let r = getFeatureFlags().dt_component_browser_in_context ? getI18nString("dev_handoff.component_browser.in_context_section_title") : getI18nString("dev_handoff.figmadocs.section_title");
   let o = _$$eY();
   let l = T3();
-  let d = glU.getPlaygroundNodeData();
+  let d = Fullscreen.getPlaygroundNodeData();
   let c = uQ();
   let {
     selectedLabel,

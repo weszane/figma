@@ -1,4 +1,4 @@
-import { ofk, W8Y } from "../figma_app/763686";
+import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { handleOptimistTransaction } from "../905/842794";
 import { oA } from "../905/663269";
@@ -9,7 +9,7 @@ import { XHR } from "../905/910117";
 import { Q } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { wr } from "../figma_app/741237";
 import { Qs, iN, sx as _$$sx } from "../905/992395";
 import { of, Cx, x2 } from "../figma_app/714946";
@@ -18,7 +18,7 @@ let $$y8 = NC("SET_HOVERED_IN_MODAL_VOTE_PIN");
 let $$b13 = NC("DESELECT_VOTE_PIN");
 let $$T15 = NC("SELECT_VOTE_PIN");
 let $$I10 = NC("INITIATED_VOTING_SESSION");
-let $$S6 = nF(async (e, {
+let $$S6 = createOptimistThunk(async (e, {
   uiSurface: t
 }) => {
   let r = e.getState();
@@ -61,7 +61,7 @@ let $$S6 = nF(async (e, {
   });
 });
 let $$v16 = e => `end_voting_session_${e}`;
-let $$A14 = nF((e, {
+let $$A14 = createOptimistThunk((e, {
   source: t,
   usedCustomTitle: r,
   requestBody: n,
@@ -107,7 +107,7 @@ let $$A14 = nF((e, {
   });
 });
 let $$x0 = e => `create_voting_session_${e}`;
-let $$N1 = nF((e, {
+let $$N1 = createOptimistThunk((e, {
   votingSessionId: t
 }) => {
   let r = e.getState().selectedView;
@@ -141,25 +141,25 @@ export function $$C3(e, t) {
       date: t
     });
   }(r);
-  ofk.exportVotingSessionAsCsv(t, i);
+  WhiteboardVotingCppBindings.exportVotingSessionAsCsv(t, i);
 }
-let $$w4 = nF((e, t) => {
+let $$w4 = createOptimistThunk((e, t) => {
   let r;
   let i = t.votingStage;
   let a = e.getState();
   let o = a?.mirror?.appModel?.currentPage;
-  if (i === W8Y.NO_SESSION) {
-    ofk.setVotingSessionInfo("", W8Y.NO_SESSION, 0, o);
+  if (i === SessionStatus.NO_SESSION) {
+    WhiteboardVotingCppBindings.setVotingSessionInfo("", SessionStatus.NO_SESSION, 0, o);
     return;
   }
   let l = a?.openFile?.votingSessions;
-  if (i === W8Y.ENDED) {
+  if (i === SessionStatus.ENDED) {
     let e = t.sessionId;
     r = l?.find(t => t.id === e && !t.inProgress);
   } else r = l?.find(e => e.inProgress);
   if (!r) return;
   let d = oA(r.pageNodeId);
-  d && (ofk.setVotingSessionInfo(r.id, i, r.userVoteLimit, d), i === W8Y.JOINED && (e.dispatch($$O7()), a.mirror.selectionProperties.whiteboardNumSelectedByType?.STAMP && wr()));
+  d && (WhiteboardVotingCppBindings.setVotingSessionInfo(r.id, i, r.userVoteLimit, d), i === SessionStatus.JOINED && (e.dispatch($$O7()), a.mirror.selectionProperties.whiteboardNumSelectedByType?.STAMP && wr()));
 });
 let $$O7 = NC("DISMISS_JOIN_CONFIRMATION");
 let $$R9 = NC("HIDE_JOIN_VOTING_SESSION_MODAL");

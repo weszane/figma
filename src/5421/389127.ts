@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { jXp, t8O } from "../figma_app/763686";
+import { FontSourceType, FontHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { a as _$$a } from "../905/714538";
 export function $$s3() {
@@ -8,7 +8,7 @@ export function $$s3() {
   return useMemo(() => {
     let t = {};
     for (let [n, o] of Object.entries(e)) {
-      let e = Object.fromEntries(Object.entries(o).filter(([e, t]) => t.source === jXp.GOOGLE));
+      let e = Object.fromEntries(Object.entries(o).filter(([e, t]) => t.source === FontSourceType.GOOGLE));
       Object.keys(e).length > 0 && (t[n] = e);
     }
     return t;
@@ -20,7 +20,7 @@ export function $$d1(e, t) {
     t.current.removeSelfAndChildren();
     t.current = null;
   }
-  let n = t8O?.getLocalTextStyleFontInfo();
+  let n = FontHelpers?.getLocalTextStyleFontInfo();
   if (n) {
     for (let t of n) if (t.family === e.fontFamily && t.style === e.styleName) return;
   }

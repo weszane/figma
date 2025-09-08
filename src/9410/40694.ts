@@ -3,14 +3,14 @@ import { useCallback } from "react";
 import { createPortal } from "../vendor/944059";
 import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
-import { zkO } from "../figma_app/763686";
+import { SourceType } from "../figma_app/763686";
 import d from "classnames";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { F9 } from "../figma_app/147952";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../3276/966473";
 import { TA } from "../905/372672";
 import { $A, vt } from "../905/862883";
@@ -77,7 +77,7 @@ export function $$j0({
       let n = t.pointerPercentageOffset ? t.pointerPercentageOffset.y : 0;
       let a = new Point(50, 50);
       let s = dropPosition.subtract(new Point(r * a.x, n * a.y)).subtract(new Point(5, 5));
-      xG(m, s.x, s.y, e.id, "drag", zkO.USER);
+      xG(m, s.x, s.y, e.id, "drag", SourceType.USER);
       O();
       T();
     },
@@ -102,8 +102,8 @@ export function $$j0({
         stampImageUrl: m,
         username: e.handle || "",
         onClick: () => {
-          let t = Y5.getViewportInfo();
-          xG(m, t.offsetX, t.offsetY, e.id, "click", zkO.USER);
+          let t = fullscreenValue.getViewportInfo();
+          xG(m, t.offsetX, t.offsetY, e.id, "click", SourceType.USER);
           O();
           T();
         },
@@ -174,7 +174,7 @@ function A(e) {
   let t = function () {
     let {
       zoomScale
-    } = Y5.getViewportInfo();
+    } = fullscreenValue.getViewportInfo();
     return new Point(50, 50).scale(zoomScale);
   }();
   let i = e.dragState.dragPosition.subtract(new Point(e.dragState.grabbedPointerPercentageOffset.x * t.x, e.dragState.grabbedPointerPercentageOffset.y * t.y));

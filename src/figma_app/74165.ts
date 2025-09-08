@@ -1,18 +1,18 @@
 import { useRef, useEffect, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { Ez5, NLJ, QOV } from "../figma_app/763686";
+import { AppStateTsApi, DesignGraphElements, UserActionState } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { L3 } from "../figma_app/385215";
 import { wr } from "../figma_app/741237";
 import { aV, ax, dH } from "../figma_app/722362";
-import { J2, ut } from "../figma_app/84367";
+import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
 import { sO } from "../figma_app/21029";
 import { ow } from "../figma_app/976749";
 export function $$h1() {
   !function (e) {
     let t = sO();
-    let r = J2(Ez5.singleSlideView().isInFocusedNodeView);
+    let r = getObservableOrFallback(AppStateTsApi.singleSlideView().isInFocusedNodeView);
     let {
       isPropertiesPanelCollapsed,
       setPropertiesPanelCollapsed,
@@ -38,11 +38,11 @@ export function $$h1() {
   }(useSelector(e => L3(e.multiplayer)));
 }
 export function $$m0() {
-  let e = !ut(Ez5?.uiState()?.showPropertiesPanel, !0);
+  let e = !getObservableValue(AppStateTsApi?.uiState()?.showPropertiesPanel, !0);
   let t = $$g2();
   let r = e || t;
   let i = useCallback(t => {
-    e !== t && Ez5?.uiState().showPropertiesPanel.set(!t);
+    e !== t && AppStateTsApi?.uiState().showPropertiesPanel.set(!t);
   }, [e]);
   let s = useCallback(() => {
     i(!r);
@@ -59,8 +59,8 @@ export function $$g2() {
   let r = aV();
   let n = ax();
   let s = dH();
-  let o = s === NLJ.FRAME || s === NLJ.COMMENTS || s === NLJ.VECTOR_PENCIL;
-  return !!useSelector(e => e.mirror.appModel.activeUserAction === QOV.DEFAULT) && !!t && !r && !e && !n && !o;
+  let o = s === DesignGraphElements.FRAME || s === DesignGraphElements.COMMENTS || s === DesignGraphElements.VECTOR_PENCIL;
+  return !!useSelector(e => e.mirror.appModel.activeUserAction === UserActionState.DEFAULT) && !!t && !r && !e && !n && !o;
 }
 export const iT = $$m0;
 export const tt = $$h1;

@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { memo, useCallback, useMemo, useEffect, useRef, useState, forwardRef } from "react";
-import { rXF, L5V, w3z, SES, Ez5, RN1, Bll, _gJ, NLJ } from "../figma_app/763686";
+import { VariableResolvedDataType, NodePropertyType, HandoffBindingsCpp, SessionOrigin, AppStateTsApi, ColorPalette, IssueCategory, IAssertResource, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, atom, useAtomWithSubscription, createRemovableAtomFamily, mg, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { eY as _$$eY, dH } from "../figma_app/722362";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { p as _$$p } from "../figma_app/372802";
 import { m as _$$m, f as _$$f } from "../905/70820";
 import { useSelector, useDispatch } from "../vendor/514228";
@@ -45,11 +45,11 @@ import { c1 } from "../figma_app/357047";
 import { j as _$$j } from "../905/834956";
 import { o as _$$o } from "../905/89370";
 import { W as _$$W } from "../905/592530";
-import { l7, nc as _$$nc } from "../905/189185";
+import { permissionScopeHandler, scopeAwareFunction as _$$nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { v4 } from "../figma_app/655139";
 import { qM, Fm } from "../figma_app/120227";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { u as _$$u, hg } from "../figma_app/852050";
 import { m3, nd as _$$nd } from "../figma_app/826998";
 import { wG } from "../905/331989";
@@ -99,7 +99,7 @@ import { rf, iQ, Pt, qP, v_ as _$$v_ } from "../figma_app/806412";
 import { D8, GG } from "../905/511649";
 import { useSprigWithSampling } from "../905/99656";
 import { n } from "../905/734251";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b2 } from "../905/985254";
 import { m0, Em } from "../figma_app/976749";
 import { Fu } from "../figma_app/545877";
@@ -116,7 +116,7 @@ import { O as _$$O } from "../905/487602";
 import { h4, Nz, hh } from "../905/417232";
 import { S as _$$S2 } from "../figma_app/552746";
 import { fO } from "../905/452962";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jT } from "../figma_app/626177";
 import { A as _$$A14 } from "../6828/154709";
 import { A as _$$A15 } from "../5724/713301";
@@ -133,7 +133,7 @@ import { go, gk } from "../3674/705006";
 import { Mk } from "../figma_app/31188";
 import { PW } from "../905/497152";
 import { A as _$$A17 } from "../1617/954184";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { Dk } from "../figma_app/623293";
 import { j7 } from "../905/929976";
 import { i as _$$i } from "../figma_app/85949";
@@ -910,7 +910,7 @@ function tg({
   isPreview: n
 }) {
   let i = _$$u(t?.id);
-  return "mixed" === e ? renderI18nText("fullscreen.mixed") : (i && i.resolvedType !== rXF.FLOAT && (i = null), i && n) ? jsx(Fragment, {
+  return "mixed" === e ? renderI18nText("fullscreen.mixed") : (i && i.resolvedType !== VariableResolvedDataType.FLOAT && (i = null), i && n) ? jsx(Fragment, {
     children: i.name
   }) : jsx(eT, {
     variableContainerClassName: eN,
@@ -920,7 +920,7 @@ function tg({
     }
   });
 }
-let tk = new Map([[L5V.HEIGHT, {
+let tk = new Map([[NodePropertyType.HEIGHT, {
   label: () => getI18nString("fullscreen.properties_panel.transform_panel.height"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -944,7 +944,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.heightVar
   }) : null,
   index: 0
-}], [L5V.MIN_HEIGHT, {
+}], [NodePropertyType.MIN_HEIGHT, {
   label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_height_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -968,7 +968,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.minHeightVar
   }) : null,
   index: 0
-}], [L5V.MAX_HEIGHT, {
+}], [NodePropertyType.MAX_HEIGHT, {
   label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_height_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -992,7 +992,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.maxHeightVar
   }) : null,
   index: 0
-}], [L5V.WIDTH, {
+}], [NodePropertyType.WIDTH, {
   label: () => getI18nString("fullscreen.properties_panel.transform_panel.width"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -1016,7 +1016,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.widthVar
   }) : null,
   index: 0
-}], [L5V.MIN_WIDTH, {
+}], [NodePropertyType.MIN_WIDTH, {
   label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -1040,7 +1040,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.minWidthVar
   }) : null,
   index: 0
-}], [L5V.MAX_WIDTH, {
+}], [NodePropertyType.MAX_WIDTH, {
   label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_width_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -1064,7 +1064,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.maxWidthVar
   }) : null,
   index: 0
-}], [L5V.CORNER_RADIUS, {
+}], [NodePropertyType.CORNER_RADIUS, {
   label: () => getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"),
   category: "dimension",
   Icon: () => jsx(eO, {
@@ -1092,7 +1092,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }) : null,
   index: 0
-}], [L5V.STACK_MODE, {
+}], [NodePropertyType.STACK_MODE, {
   label: () => getI18nString("dev_handoff.annotations.autolayout_mode"),
   category: "stack",
   Icon: ({
@@ -1115,7 +1115,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }) : null,
   index: 0
-}], [L5V.STACK_ALIGNMENT, {
+}], [NodePropertyType.STACK_ALIGNMENT, {
   label: () => getI18nString("dev_handoff.annotations.alignment"),
   category: "stack",
   Icon: ({
@@ -1151,7 +1151,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }) : null,
   index: 0
-}], [L5V.STACK_SPACING, {
+}], [NodePropertyType.STACK_SPACING, {
   label: () => getI18nString("inspect_panel.properties.gap"),
   category: "stack",
   Icon: ({
@@ -1179,7 +1179,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }),
   index: 0
-}], [L5V.GRID_COLUMN_COUNT, {
+}], [NodePropertyType.GRID_COLUMN_COUNT, {
   label: () => getI18nString("inspect_panel.properties.grid.columns"),
   category: "stack",
   Icon: () => jsx(q, {
@@ -1201,7 +1201,7 @@ let tk = new Map([[L5V.HEIGHT, {
     value: e ? e.columnCount : 0
   }),
   index: 0
-}], [L5V.GRID_ROW_COUNT, {
+}], [NodePropertyType.GRID_ROW_COUNT, {
   label: () => getI18nString("inspect_panel.properties.grid.rows"),
   category: "stack",
   Icon: () => jsx(Y, {
@@ -1223,7 +1223,7 @@ let tk = new Map([[L5V.HEIGHT, {
     value: e ? e.rowCount : 0
   }),
   index: 0
-}], [L5V.GRID_COLUMN_GAP, {
+}], [NodePropertyType.GRID_COLUMN_GAP, {
   label: () => getI18nString("inspect_panel.properties.grid.column_gap"),
   category: "stack",
   Icon: ({
@@ -1251,7 +1251,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }),
   index: 0
-}], [L5V.GRID_ROW_GAP, {
+}], [NodePropertyType.GRID_ROW_GAP, {
   label: () => getI18nString("inspect_panel.properties.grid.row_gap"),
   category: "stack",
   Icon: ({
@@ -1279,7 +1279,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }),
   index: 0
-}], [L5V.GRID_COLUMN_ANCHOR_INDEX, {
+}], [NodePropertyType.GRID_COLUMN_ANCHOR_INDEX, {
   label: () => getI18nString("inspect_panel.properties.grid.column_start"),
   category: "stack",
   Icon: () => jsx(q, {
@@ -1301,7 +1301,7 @@ let tk = new Map([[L5V.HEIGHT, {
     value: e ? e.columnIndex + 1 : 0
   }),
   index: 0
-}], [L5V.GRID_ROW_ANCHOR_INDEX, {
+}], [NodePropertyType.GRID_ROW_ANCHOR_INDEX, {
   label: () => getI18nString("inspect_panel.properties.grid.row_start"),
   category: "stack",
   Icon: () => jsx(Y, {
@@ -1323,7 +1323,7 @@ let tk = new Map([[L5V.HEIGHT, {
     value: e ? e.rowIndex + 1 : 0
   }),
   index: 0
-}], [L5V.GRID_COLUMN_SPAN, {
+}], [NodePropertyType.GRID_COLUMN_SPAN, {
   label: () => getI18nString("inspect_panel.properties.grid.horizontal_span"),
   category: "stack",
   Icon: () => jsx(_$$o, {
@@ -1345,7 +1345,7 @@ let tk = new Map([[L5V.HEIGHT, {
     value: e ? e.columnSpan : 0
   }),
   index: 0
-}], [L5V.GRID_ROW_SPAN, {
+}], [NodePropertyType.GRID_ROW_SPAN, {
   label: () => getI18nString("inspect_panel.properties.grid.vertical_span"),
   category: "stack",
   Icon: () => jsx(_$$W, {
@@ -1367,7 +1367,7 @@ let tk = new Map([[L5V.HEIGHT, {
     value: e ? e.rowSpan : 0
   }),
   index: 0
-}], [L5V.STACK_PADDING, {
+}], [NodePropertyType.STACK_PADDING, {
   label: () => getI18nString("inspect_panel.properties.padding"),
   category: "stack",
   Icon: () => jsx(eO, {
@@ -1395,7 +1395,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }) : null,
   index: 0
-}], [L5V.TEXT_STYLE, {
+}], [NodePropertyType.TEXT_STYLE, {
   label: () => getI18nString("dev_handoff.annotations.text_style"),
   category: "text",
   Icon: tc,
@@ -1415,7 +1415,7 @@ let tk = new Map([[L5V.HEIGHT, {
     hideIcon: !0
   }) : null,
   index: 0
-}], [L5V.FONT_FAMILY, {
+}], [NodePropertyType.FONT_FAMILY, {
   label: () => getI18nString("inspect_panel.typography.font"),
   category: "text",
   Icon: tc,
@@ -1437,7 +1437,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.fontFamilyVariable
   }) : null,
   index: 0
-}], [L5V.FONT_STYLE, {
+}], [NodePropertyType.FONT_STYLE, {
   label: () => getI18nString("inspect_panel.code.font_style"),
   category: "text",
   Icon: tc,
@@ -1455,7 +1455,7 @@ let tk = new Map([[L5V.HEIGHT, {
     children: e?.fontStyle
   }),
   index: 0
-}], [L5V.FONT_SIZE, {
+}], [NodePropertyType.FONT_SIZE, {
   label: () => getI18nString("dev_handoff.annotations.font_size"),
   category: "text",
   Icon: tc,
@@ -1479,7 +1479,7 @@ let tk = new Map([[L5V.HEIGHT, {
     isTextProperty: !0
   }) : null,
   index: 0
-}], [L5V.LINE_HEIGHT, {
+}], [NodePropertyType.LINE_HEIGHT, {
   label: () => getI18nString("fullscreen.type_panel.line_height"),
   category: "text",
   Icon: tc,
@@ -1501,7 +1501,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.lineHeightVariable
   }) : null,
   index: 0
-}], [L5V.LETTER_SPACING, {
+}], [NodePropertyType.LETTER_SPACING, {
   label: () => getI18nString("fullscreen.type_panel.letter_spacing"),
   category: "text",
   Icon: tc,
@@ -1525,7 +1525,7 @@ let tk = new Map([[L5V.HEIGHT, {
     isTextProperty: !0
   }) : null,
   index: 0
-}], [L5V.TEXT_ALIGN_HORIZONTAL, {
+}], [NodePropertyType.TEXT_ALIGN_HORIZONTAL, {
   label: () => getI18nString("dev_handoff.annotations.text_align"),
   category: "text",
   Icon: tc,
@@ -1543,7 +1543,7 @@ let tk = new Map([[L5V.HEIGHT, {
     textAlignHorizontal: e.textAlign
   }) : null,
   index: 0
-}], [L5V.FONT_WEIGHT, {
+}], [NodePropertyType.FONT_WEIGHT, {
   label: () => getI18nString("inspect_panel.typography.weight"),
   category: "text",
   Icon: tc,
@@ -1565,7 +1565,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variableAlias: e.fontStyleVariable
   }) : null,
   index: 0
-}], [L5V.FILL, {
+}], [NodePropertyType.FILL, {
   label: () => getI18nString("fullscreen.properties_panel.fill.fill"),
   category: "paint",
   Icon: ({
@@ -1596,7 +1596,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variables: e.fillVariables
   }) : null,
   index: 0
-}], [L5V.STROKE, {
+}], [NodePropertyType.STROKE, {
   label: () => getI18nString("fullscreen.properties_panel.fill.stroke"),
   category: "paint",
   Icon: ({
@@ -1628,7 +1628,7 @@ let tk = new Map([[L5V.HEIGHT, {
     variables: e.strokeVariables
   }) : null,
   index: 0
-}], [L5V.STROKE_WIDTH, {
+}], [NodePropertyType.STROKE_WIDTH, {
   label: () => getI18nString("fullscreen.properties_panel.borders.stroke_width"),
   category: "paint",
   Icon: () => jsx(eO, {
@@ -1659,7 +1659,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }) : null,
   index: 0
-}], [L5V.EFFECT, {
+}], [NodePropertyType.EFFECT, {
   label: () => getI18nString("inspect_panel.code.effect"),
   category: "paint",
   Icon: function () {
@@ -1684,7 +1684,7 @@ let tk = new Map([[L5V.HEIGHT, {
     styleRef: e.inheritedEffectStyle
   }) : null,
   index: 0
-}], [L5V.OPACITY, {
+}], [NodePropertyType.OPACITY, {
   label: () => getI18nString("fullscreen.scrubbable.opacity"),
   category: "paint",
   Icon: () => jsx(eO, {
@@ -1706,7 +1706,7 @@ let tk = new Map([[L5V.HEIGHT, {
     nodeFields: e
   }) : null,
   index: 0
-}], [L5V.COMPONENT, {
+}], [NodePropertyType.COMPONENT, {
   label: () => getI18nString("dev_handoff.annotations.component"),
   category: "component",
   Icon: () => jsx(eO, {
@@ -1879,7 +1879,7 @@ function tO() {
   let t = Xr(_$$m);
   let n = !!hA();
   return useCallback((a, i) => {
-    l7.user("clear-annotations", () => {
+    permissionScopeHandler.user("clear-annotations", () => {
       let o = getSingletonSceneGraph().get(a);
       if (!o) return;
       o.removeAnnotation(i);
@@ -1891,7 +1891,7 @@ function tO() {
         isDevModeFocusView: n
       });
       t(null);
-      Y5.triggerAction("commit");
+      fullscreenValue.triggerAction("commit");
     });
   }, [t, e, n]);
 }
@@ -1905,11 +1905,11 @@ function tB(e) {
   let s = q5();
   let r = useDispatch();
   let c = tO();
-  let u = useMemo(() => w3z.isReadOnly(SES.ANNOTATIONS), []);
+  let u = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
   let h = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let f = XR();
   let g = _$$am();
-  let x = J2(Ez5.uiState().filterAnnotationCategoryId);
+  let x = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let m = {
     displayText: getI18nString("dev_handoff.annotations.hide_annotations"),
     shortcut: c1(h, "toggle-show-annotations"),
@@ -1951,7 +1951,7 @@ function tB(e) {
           categoryLabel: "all",
           source: "context_menu"
         });
-        Ez5?.uiState().filterAnnotationCategoryId.set(null);
+        AppStateTsApi?.uiState().filterAnnotationCategoryId.set(null);
       },
       icon: jsx(_$$y, {
         className: "annotation_context_menu--annotationsCategoryAllIcon--GjsT2"
@@ -1975,7 +1975,7 @@ function tB(e) {
             categoryLabel: t,
             source: "context_menu"
           });
-          Ez5?.uiState().filterAnnotationCategoryId.set(e.id);
+          AppStateTsApi?.uiState().filterAnnotationCategoryId.set(e.id);
         },
         recordingKey: `showAnnotationCategory-${t}`
       };
@@ -2016,9 +2016,9 @@ let nm = "annotation_categories_edit_window--dragging--N-NqM";
 let n_ = "annotation_categories_edit_window--selected---8KFm";
 let nb = Symbol("ANNOTATION_CATEGORY_ITEM");
 var nj = (e => (e[e.INVALID_LABEL = 0] = "INVALID_LABEL", e[e.INVALID_COLOR = 1] = "INVALID_COLOR", e[e.DUPLICATE_CATEGORIES = 2] = "DUPLICATE_CATEGORIES", e))(nj || {});
-let nw = [RN1.YELLOW, RN1.ORANGE, RN1.RED, RN1.PINK, RN1.VIOLET, RN1.BLUE, RN1.TEAL, RN1.GREEN];
+let nw = [ColorPalette.YELLOW, ColorPalette.ORANGE, ColorPalette.RED, ColorPalette.PINK, ColorPalette.VIOLET, ColorPalette.BLUE, ColorPalette.TEAL, ColorPalette.GREEN];
 function nN(e) {
-  return e.preset !== Bll.NONE || null != e.custom && null != e.custom.label && e.custom.label.trim().length > 0 && null != e.custom.color;
+  return e.preset !== IssueCategory.NONE || null != e.custom && null != e.custom.label && e.custom.label.trim().length > 0 && null != e.custom.color;
 }
 function nk({
   recordingKey: e,
@@ -2210,7 +2210,7 @@ function nk({
     })]
   });
 }
-let nA = Ju(function (e) {
+let nA = registerModal(function (e) {
   let t = IL();
   let {
     open,
@@ -2231,14 +2231,14 @@ let nA = Ju(function (e) {
     d && (p(d.map(e => e.id)), f(d.reduce((e, t) => (e[t.id] = t, e), {})));
   }, [d]);
   let v = useMemo(() => {
-    let e = new Set(Object.values(h).map(e => e.preset === Bll.NONE ? e.custom?.color : AP(e.preset)).filter(isNotNullish));
-    return nw.find(t => !e.has(t)) ?? RN1.GREEN;
+    let e = new Set(Object.values(h).map(e => e.preset === IssueCategory.NONE ? e.custom?.color : AP(e.preset)).filter(isNotNullish));
+    return nw.find(t => !e.has(t)) ?? ColorPalette.GREEN;
   }, [h]);
   let [y, b] = useState(null);
   useEffect(() => {
     b(function (e) {
       let t = new Set();
-      for (let n of e) if (t.add(`${n.preset}-${n.custom?.label}-${n.custom?.color}`), n.preset === Bll.NONE && null != n.custom) {
+      for (let n of e) if (t.add(`${n.preset}-${n.custom?.label}-${n.custom?.color}`), n.preset === IssueCategory.NONE && null != n.custom) {
         if (null == n.custom.label || 0 === n.custom.label.trim().length) return {
           type: 0,
           message: getI18nString("dev_handoff.annotations.category_custom.invalid_label")
@@ -2277,7 +2277,7 @@ let nA = Ju(function (e) {
     position === Nz.BEFORE ? p(t => [...t.slice(0, e), dragItem.categoryId, ...t.slice(e)].filter((t, n) => t !== dragItem.categoryId || n === e)) : p(t => [...t.slice(0, e + 1), dragItem.categoryId, ...t.slice(e + 1)].filter((t, n) => t !== dragItem.categoryId || n === e + 1));
     let s = h[dragItem.categoryId];
     s && t("reorder_annotation_category", {
-      category: s.preset === Bll.NONE ? s.custom?.label ?? null : h9(s.preset),
+      category: s.preset === IssueCategory.NONE ? s.custom?.label ?? null : h9(s.preset),
       oldRank: l,
       newRank: e
     });
@@ -2292,7 +2292,7 @@ let nA = Ju(function (e) {
   let M = useCallback(() => {
     let e = {
       id: fO(getSingletonSceneGraph()),
-      preset: Bll.NONE,
+      preset: IssueCategory.NONE,
       custom: {
         label: "",
         color: v
@@ -2310,7 +2310,7 @@ let nA = Ju(function (e) {
   let F = useCallback(e => {
     if (g.includes(e)) x(t => t.filter(t => t !== e));else {
       let t = h[e];
-      t && _(e => [...e, t.preset === Bll.NONE ? t.custom?.label ?? "" : h9(t.preset)]);
+      t && _(e => [...e, t.preset === IssueCategory.NONE ? t.custom?.label ?? "" : h9(t.preset)]);
     }
     p(t => t.filter(t => t !== e));
     f(t => {
@@ -2327,9 +2327,9 @@ let nA = Ju(function (e) {
       ...t,
       [e]: {
         ...a,
-        preset: Bll.NONE,
+        preset: IssueCategory.NONE,
         custom: {
-          ...(a.preset === Bll.NONE ? a.custom : {
+          ...(a.preset === IssueCategory.NONE ? a.custom : {
             label: h9(a.preset),
             color: AP(a.preset)
           }),
@@ -2337,9 +2337,9 @@ let nA = Ju(function (e) {
         }
       }
     })), t("edit_annotation_category_color", {
-      category: a.preset === Bll.NONE ? a.custom?.label ?? null : h9(a.preset),
+      category: a.preset === IssueCategory.NONE ? a.custom?.label ?? null : h9(a.preset),
       newColor: n,
-      oldColor: a.preset === Bll.NONE ? a.custom?.color : AP(a.preset)
+      oldColor: a.preset === IssueCategory.NONE ? a.custom?.color : AP(a.preset)
     }));
   }, [h, t]);
   let H = useCallback((e, n) => {
@@ -2348,9 +2348,9 @@ let nA = Ju(function (e) {
       ...t,
       [e]: {
         ...a,
-        preset: Bll.NONE,
+        preset: IssueCategory.NONE,
         custom: {
-          ...(a.preset === Bll.NONE ? a.custom : {
+          ...(a.preset === IssueCategory.NONE ? a.custom : {
             label: h9(a.preset),
             color: AP(a.preset)
           }),
@@ -2359,7 +2359,7 @@ let nA = Ju(function (e) {
       }
     })), t("edit_annotation_category_name", {
       newCategory: n,
-      oldCategory: a.preset === Bll.NONE ? a.custom?.label : h9(a.preset)
+      oldCategory: a.preset === IssueCategory.NONE ? a.custom?.label : h9(a.preset)
     }));
   }, [h, t]);
   let W = useCallback(() => {
@@ -2367,7 +2367,7 @@ let nA = Ju(function (e) {
   }, [onClose]);
   let G = useCallback(() => {
     if (y) return;
-    let e = u.map(e => h[e]).filter(nN).map(e => e.preset === Bll.NONE ? {
+    let e = u.map(e => h[e]).filter(nN).map(e => e.preset === IssueCategory.NONE ? {
       ...e,
       custom: e.custom ? {
         ...e.custom,
@@ -2426,12 +2426,12 @@ let nA = Ju(function (e) {
               let n = h[e];
               return n ? jsx(nk, {
                 categoryId: e,
-                color: n.preset === Bll.NONE ? n.custom?.color !== void 0 ? yu[n.custom.color] : void 0 : Lw(n.preset),
+                color: n.preset === IssueCategory.NONE ? n.custom?.color !== void 0 ? yu[n.custom.color] : void 0 : Lw(n.preset),
                 dragging: C,
                 index: t,
                 isLastItem: t === u.length - 1,
                 isSelected: w === e,
-                label: n.preset === Bll.NONE ? n.custom?.label : h9(n.preset),
+                label: n.preset === IssueCategory.NONE ? n.custom?.label : h9(n.preset),
                 onColorChange: z,
                 onDragEnd: R,
                 onDragStart: L,
@@ -2661,7 +2661,7 @@ function nX({
   let l = useDispatch();
   let s = hC();
   let r = e => {
-    e && (wr(), _$$S3("annotations"), Dh([e]), _$$tw()?.getCopy() !== _gJ.STRING_MANAGEMENT && _$$ax(_gJ.STRING_MANAGEMENT));
+    e && (wr(), _$$S3("annotations"), Dh([e]), _$$tw()?.getCopy() !== IAssertResource.STRING_MANAGEMENT && _$$ax(IAssertResource.STRING_MANAGEMENT));
   };
   return jsxs("div", {
     className: A()(er, eh, {
@@ -2829,7 +2829,7 @@ function n$({
     annotationsLength,
     nodeType
   } = W ?? {};
-  let K = D === NLJ.ANNOTATE && !P && null !== O && O !== e;
+  let K = D === DesignGraphElements.ANNOTATE && !P && null !== O && O !== e;
   let X = j && !k && !d && !P;
   let J = useCallback(() => {
     null === H && (Uc(e), X && !P && C("hover_minimized_annotation", {
@@ -2913,7 +2913,7 @@ function n2({
     let o = Em();
     let l = XR();
     return useCallback((i, s, r, d) => {
-      l7.user(r ? "edit-annotation" : "create-annotation", () => {
+      permissionScopeHandler.user(r ? "edit-annotation" : "create-annotation", () => {
         r ? i.updateAnnotation(d, s) : i.addAnnotation(s);
         let c = kh(getSingletonSceneGraph(), i.guid);
         let u = s.categoryId ? l.find(e => e.id === s.categoryId) : null;
@@ -2934,7 +2934,7 @@ function n2({
           isDevModeFocusView: n,
           isDesignMode: o
         }));
-        Y5.triggerAction("commit");
+        fullscreenValue.triggerAction("commit");
       });
     }, [Sprig, e, n, a, o, l]);
   }();
@@ -2965,7 +2965,7 @@ function n2({
         label: a ? "" : k,
         properties: I,
         categoryId: T
-      }, n, r), Ez5?.editorState().focusedAnnotationId.set(t));
+      }, n, r), AppStateTsApi?.editorState().focusedAnnotationId.set(t));
     }
     b(null);
   }, [N, k, I, b, y, e, r, v, T, t]);
@@ -3098,7 +3098,7 @@ function n5({
         isDesignMode: b,
         newCategoryLabel: r,
         oldCategoryLabel: l,
-        isPreset: s ? s.preset !== Bll.NONE : null,
+        isPreset: s ? s.preset !== IssueCategory.NONE : null,
         annotationId: x
       });
       Sprig("track", "select_annotation_category", {
@@ -3173,7 +3173,7 @@ function n5({
       nodeType: F,
       isDevModeFocusView: j
     });
-    m(_$$to({
+    m(showModalHandler({
       type: nA,
       data: {
         recordingKey: "annotationCategoriesEditWindow"
@@ -3560,7 +3560,7 @@ let an = memo(function ({
   let b = NW();
   let j = b === t;
   let w = useCallback(e => {
-    e ? Ez5.editorState().focusedAnnotationId.set(t) : e || b !== t || Ez5.editorState().focusedAnnotationId.set(null);
+    e ? AppStateTsApi.editorState().focusedAnnotationId.set(t) : e || b !== t || AppStateTsApi.editorState().focusedAnnotationId.set(null);
   }, [t, b]);
   let k = useCallback(e => {
     let n = nq[y.annotationType];
@@ -3623,25 +3623,25 @@ let aa = memo(function ({
   let w = useRef(null);
   let N = NW();
   let k = tO();
-  let I = useMemo(() => w3z.isReadOnly(SES.ANNOTATIONS), []);
+  let I = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
   let C = Kv();
   let T = s9();
   let L = E_();
   let R = !!hA();
   let D = useDispatch();
   let M = (e, t) => {
-    e && (wr(), _$$S3("annotations"), t ? (w3z.setEnableZoomToSelection(!1), Dh([e]), w3z.setEnableZoomToSelection(!0)) : Dh([e]));
+    e && (wr(), _$$S3("annotations"), t ? (HandoffBindingsCpp.setEnableZoomToSelection(!1), Dh([e]), HandoffBindingsCpp.setEnableZoomToSelection(!0)) : Dh([e]));
   };
   let F = useRef(l);
   F.current = l;
   useEffect(() => () => {
-    F.current && Ez5?.editorState().focusedAnnotationId.set(null);
+    F.current && AppStateTsApi?.editorState().focusedAnnotationId.set(null);
   }, []);
   useEffect(() => {
-    C && (Ez5?.editorState().focusedAnnotationId.set(null), j(null));
+    C && (AppStateTsApi?.editorState().focusedAnnotationId.set(null), j(null));
   }, [C, j]);
   let z = _$$v_(`annotationDisplay-${e}`, "keydown", useCallback(e => {
-    !I && l && null === b && L === AD && ("Backspace" === e.key || "Delete" === e.key ? T && (k(nodeId, annotationIndex), w.current?.blur()) : "Enter" === e.key ? T && (e.preventDefault(), j(annotationIndex)) : "Escape" === e.key ? w.current?.blur() : f7(e));
+    !I && l && null === b && L === defaultSessionLocalIDString && ("Backspace" === e.key || "Delete" === e.key ? T && (k(nodeId, annotationIndex), w.current?.blur()) : "Enter" === e.key ? T && (e.preventDefault(), j(annotationIndex)) : "Escape" === e.key ? w.current?.blur() : f7(e));
   }, [annotationIndex, k, b, l, I, nodeId, L, j, T]));
   useEffect(() => (document.addEventListener("keydown", z), () => document.removeEventListener("keydown", z)), [z]);
   let V = useCallback(() => {
@@ -3810,7 +3810,7 @@ let ao = memo(function ({
 let as = parsePxNumber("220px");
 let ar = parsePxNumber(RHC);
 function ad(e, t, n, a, i, l, s, r, d) {
-  let c = Ez5.isFullscreenYScrollbarNeeded();
+  let c = AppStateTsApi.isFullscreenYScrollbarNeeded();
   return i ? Math.min(r ? s + n * t - 8 : s - 8, Math.max(0, -e / 2 - l + a + d.left + 4)) : Math.max(r ? -s - n * t + 8 : -s + 8, Math.min(0, e / 2 - l - a - d.right - (c ? ar : 4)));
 }
 function ac(e, t, n = !0) {
@@ -3826,7 +3826,7 @@ function ac(e, t, n = !0) {
     zoomScale,
     width: _width
   } = t;
-  let p = Ez5.isFullscreenYScrollbarNeeded();
+  let p = AppStateTsApi.isFullscreenYScrollbarNeeded();
   let h = Math.min(20 * zoomScale, 20);
   let f = _x + width;
   let g = (_x - offsetX) * zoomScale + _width / 2 > as + h + 8;
@@ -3955,7 +3955,7 @@ function aj() {
     t || b(null);
   }, [t, b]);
   useEffect(() => {
-    c !== NLJ.ANNOTATE && b(null);
+    c !== DesignGraphElements.ANNOTATE && b(null);
   }, [c, b]);
   useEffect(() => {
     null !== y && e(UU());
@@ -3970,7 +3970,7 @@ function aj() {
     let a = LO();
     let c = useAtomWithSubscription(_$$m);
     let p = NW();
-    let f = J2(Ez5.uiState().filterAnnotationCategoryId);
+    let f = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
     let g = Fk((e, t) => kh(e, t || "")?.guid || t || void 0, n);
     let {
       allAnnotations,
@@ -3979,7 +3979,7 @@ function aj() {
       topLevelOrSelfNodeId: e
     }) {
       let t = dH();
-      let n = J2(Ez5.annotationObserver().annotationInfoByTlf);
+      let n = getObservableOrFallback(AppStateTsApi.annotationObserver().annotationInfoByTlf);
       let a = v([...n.keys()]);
       let i = useAtomWithSubscription(_$$m);
       let l = uQ();
@@ -3993,7 +3993,7 @@ function aj() {
       } = k9(() => {
         let e = [...a];
         let l = null;
-        h && f && !n.has(f) && (t === NLJ.ANNOTATE || null !== i) && e.push(f);
+        h && f && !n.has(f) && (t === DesignGraphElements.ANNOTATE || null !== i) && e.push(f);
         return {
           tlfsWithNodes: e.reduce((e, t) => {
             let n = p.get(t);
@@ -4367,7 +4367,7 @@ function aj() {
   let V = annotationsBeingViewed.length;
   let H = annotationsBeingViewed.reduce((e, t) => e + t.numNodes, 0);
   useEffect(() => {
-    V && c === NLJ.SELECT && z("showing_annotations_for_tlfs", {
+    V && c === DesignGraphElements.SELECT && z("showing_annotations_for_tlfs", {
       topLevelFrameCount: V,
       nodesWithAnnotationsCount: H
     });
@@ -4456,8 +4456,8 @@ function aj() {
 function aw() {
   return !function () {
     let e = dH();
-    let t = J2(Ez5.annotationObserver().annotationInfoByTlf);
-    return v(useMemo(() => Array.from(t.keys()), [t])).length > 0 || !!getFeatureFlags().dt_component_annotations || !!getFeatureFlags().dt_ccv2_on_canvas || !!getFeatureFlags().cheddar_annotations || e === NLJ.ANNOTATE;
+    let t = getObservableOrFallback(AppStateTsApi.annotationObserver().annotationInfoByTlf);
+    return v(useMemo(() => Array.from(t.keys()), [t])).length > 0 || !!getFeatureFlags().dt_component_annotations || !!getFeatureFlags().dt_ccv2_on_canvas || !!getFeatureFlags().cheddar_annotations || e === DesignGraphElements.ANNOTATE;
   }() ? null : jsx(_$$p, {
     forceNoScroll: !0,
     children: jsx(aj, {})
@@ -4466,7 +4466,7 @@ function aw() {
 export function $$aN0() {
   let e = iW();
   return (useEffect(() => {
-    !e && (atomStoreManager.set(_$$m, null), Ez5 && Ez5.editorState().focusedAnnotationId.set(null));
+    !e && (atomStoreManager.set(_$$m, null), AppStateTsApi && AppStateTsApi.editorState().focusedAnnotationId.set(null));
   }, [e]), e) ? jsx(aw, {}) : null;
 }
 export const b = $$aN0;

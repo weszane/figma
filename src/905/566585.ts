@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { sH } from "../905/871411";
+import { parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
-import { Y5 } from "../figma_app/455680";
-import { gl, bU, hS, E7, oV } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue, isMixedArray, isValidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
 import { F } from "../905/258517";
 import { TK } from "../905/129660";
@@ -18,7 +18,7 @@ export function $$_4() {
   return useCallback((n, r, a) => {
     getFeatureFlags().ce_properties_panel_tracking && t !== n && e("editor_type_panel_change", {
       key: "autoResize",
-      value: gl(n) ? "mixed" : n,
+      value: isInvalidValue(n) ? "mixed" : n,
       source: r
     });
     i(n, a);
@@ -52,7 +52,7 @@ export function $$y3({
       versionsForStyles: a
     });
     let t = [];
-    e?.variationAxes && !bU(i) && (t = i.map(t => {
+    e?.variationAxes && !isMixedArray(i) && (t = i.map(t => {
       let i = e.variationAxes?.find(e => e.tag === El(t.axisTag));
       return {
         axisTag: t.axisTag,
@@ -65,17 +65,17 @@ export function $$y3({
   $$b7(o, n, s);
 }
 export function $$b7(e, t, i) {
-  if (hS(t.lineHeight)) {
+  if (isValidValue(t.lineHeight)) {
     let i = TK(t, t.lineHeight);
     i !== t.lineHeight && (e.lineHeight = i);
   }
-  Y5.updateSelectionProperties(e, {
+  fullscreenValue.updateSelectionProperties(e, {
     shouldCommit: i
   });
 }
 export function $$v1(e) {
-  let t = E7(e.fontFamily);
-  let i = E7(e.fontStyle);
+  let t = normalizeValue(e.fontFamily);
+  let i = normalizeValue(e.fontStyle);
   if (!t) return;
   let n = !1;
   if (i || (i = Object.keys(e.versionsForStyles[t] ?? {})?.[0], n = !0), !i) return;
@@ -88,7 +88,7 @@ export function $$v1(e) {
     let t = {
       ...e
     };
-    t.value = oV;
+    t.value = MIXED_MARKER;
     return t;
   }), o = `${t}-MIXED`);
   return {
@@ -98,7 +98,7 @@ export function $$v1(e) {
 }
 export function $$I6(e, t) {
   let i = (e, i) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textCase: e,
       fontVariantCaps: i
     }, {
@@ -129,7 +129,7 @@ export function $$E0(e) {
 }
 export function $$x2(e, t, i) {
   let n = {};
-  if (gl(e) || !i || !t) return n;
+  if (isInvalidValue(e) || !i || !t) return n;
   for (let e in i) {
     let r = t[i[e]]?.styles[e];
     r?.variationAxes?.forEach(e => {
@@ -147,7 +147,7 @@ export function $$S8(e, t) {
     if (r) {
       let e = i.getStyleNodeByRef(r);
       let n = {
-        guid: sH(e?.styleId.guid)
+        guid: parseSessionLocalID(e?.styleId.guid)
       };
       if (bi({
         library: t,

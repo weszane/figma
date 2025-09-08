@@ -4,15 +4,15 @@ import { getI18nString } from "../905/303541";
 import { AC, Pg } from "../figma_app/777551";
 import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { A } from "../905/482208";
 import { LR } from "../figma_app/120210";
 import { TA } from "../905/372672";
 import { M } from "../figma_app/170366";
-import { YQ } from "../figma_app/300692";
+import { getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { m3 } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
-import { ho, k0, ZQ } from "../figma_app/155287";
+import { ManifestErrorType, manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { KM } from "../figma_app/224019";
 import { H } from "../figma_app/441663";
 import { cq } from "../905/794154";
@@ -29,7 +29,7 @@ export function $$I1(e) {
   return {
     displayText: t,
     callback: () => {
-      r(to({
+      r(showModalHandler({
         type: H,
         data: {
           plugin: e
@@ -63,12 +63,12 @@ export function $$v2(e, t) {
   let r = useDispatch();
   if (!e || !t) return null;
   switch (e) {
-    case ho.LOAD:
+    case ManifestErrorType.LOAD:
       return {
         action: () => {
           let e = t.localFileId;
           r(JZ({
-            resourceType: k0(t) ? "widget" : "plugin",
+            resourceType: manifestContainsWidget(t) ? "widget" : "plugin",
             localFileIdToRemove: e
           }));
         },
@@ -76,11 +76,11 @@ export function $$v2(e, t) {
         buttonText: getI18nString("universal_insert.locate"),
         displayText: getI18nString("universal_insert.locate_missing_manifest")
       };
-    case ho.VALIDATE:
-    case ho.PARSE:
+    case ManifestErrorType.VALIDATE:
+    case ManifestErrorType.PARSE:
       return {
         action: () => {
-          r(to({
+          r(showModalHandler({
             type: K,
             data: {
               localPlugin: t
@@ -105,7 +105,7 @@ export function $$A5(e, t, r, i = k2.EDITOR) {
     callback: () => {
       r && r();
       close();
-      let n = e && ZQ(e) ? e.localFileId : void 0;
+      let n = e && hasLocalFileId(e) ? e.localFileId : void 0;
       s(_$$r({
         localFileId: n,
         publishedPluginId: t?.id,
@@ -118,7 +118,7 @@ export function $$A5(e, t, r, i = k2.EDITOR) {
 export function $$x4(e) {
   let t = M();
   return e ? {
-    displayText: A(YQ()),
+    displayText: A(getPluginsMenuOpenDirectory()),
     callback: () => {
       t && t.openExtensionDirectory(e.localFileId);
     }
@@ -141,7 +141,7 @@ export function $$C6(e) {
     displayText: getI18nString("qa.extensions.locate_local_version"),
     callback: () => {
       s(JZ({
-        resourceType: k0(extension) ? "widget" : "plugin"
+        resourceType: manifestContainsWidget(extension) ? "widget" : "plugin"
       }));
     }
   };

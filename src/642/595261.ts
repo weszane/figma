@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, forwardRef, useId } from "react";
 import { useDispatch } from "../vendor/514228";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { Yi } from "../figma_app/933328";
-import { _W, gl } from "../905/216495";
+import { valueOrFallback, isInvalidValue } from "../905/216495";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { Ib } from "../905/129884";
 import { VZ } from "../905/959568";
@@ -158,7 +158,7 @@ export function $$w0({
         initialPosition
       } = D;
       let s = G(corner);
-      let n = _W(s.value, 0);
+      let n = valueOrFallback(s.value, 0);
       return jsx(I, {
         corner,
         initialPosition,
@@ -193,7 +193,7 @@ let T = forwardRef(({
   let w = useId();
   return jsx(sJ, {
     ref: f,
-    currentFieldValue: _W(t, 0),
+    currentFieldValue: valueOrFallback(t, 0),
     disableEntryPoint: a,
     hideIcon: p,
     children: jsx($j, {
@@ -210,7 +210,7 @@ let T = forwardRef(({
       recordingKey: l,
       scrubMultiplier: .1 * scrubMultiplier,
       smallNudgeAmount,
-      value: gl(t) ? t : t ?? 0,
+      value: isInvalidValue(t) ? t : t ?? 0,
       wheelMultiplier,
       children: jsx("div", {
         className: _$$k,
@@ -234,7 +234,7 @@ function N({
   let a = MH(consumedVariable);
   let o = _$$u(a ?? void 0);
   let d = !!o && eF(o);
-  let [u, p, h] = JV(e, rXF.FLOAT);
+  let [u, p, h] = JV(e, VariableResolvedDataType.FLOAT);
   return jsx(_$$p.Provider, {
     value: {
       boundVariableId: a,
@@ -262,13 +262,13 @@ function I({
     e ? c(Yi({
       item: e,
       callback: e => {
-        updateVariableConsumption(y$(rXF.FLOAT, e));
+        updateVariableConsumption(y$(VariableResolvedDataType.FLOAT, e));
       }
     })) : clearVariableConsumption();
   }, [c, updateVariableConsumption, clearVariableConsumption]);
   return jsx(jp, {
     fields: [cv(e)],
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     initialPosition: t,
     currentFieldValue: s,
     onVariableSelected: h,

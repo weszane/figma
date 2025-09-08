@@ -1,11 +1,11 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { MEW, glU } from "../figma_app/763686";
+import { PerfResult, Fullscreen } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Jr } from "../figma_app/624361";
 import { U_ } from "../905/327855";
 import { FEditorType } from "../figma_app/53721";
@@ -46,7 +46,7 @@ export function $$A0(e, t, i, r) {
 export async function $$y1(e, t, i, o) {
   if (atomStoreManager.get(D)) throw new OL.PdfImportBlocked();
   let h = new Uint8Array(await i.arrayBuffer());
-  Y5.resetLoadedFigFile();
+  fullscreenValue.resetLoadedFigFile();
   await U_(e, FEditorType.Whiteboard);
   let A = await IY.convertPdf({
     pdfBytes: h,
@@ -54,13 +54,13 @@ export async function $$y1(e, t, i, o) {
   });
   let y = A.status;
   switch (y) {
-    case MEW.SUCCESS:
+    case PerfResult.SUCCESS:
       break;
-    case MEW.ERROR_TEXT_SIZE:
+    case PerfResult.ERROR_TEXT_SIZE:
       throw new OL.IncompatibleFontSizes();
-    case MEW.TIMEOUT:
+    case PerfResult.TIMEOUT:
       throw new OL.Timeout();
-    case MEW.ERROR_OTHER:
+    case PerfResult.ERROR_OTHER:
       throw new OL.GenericPdfError(o);
     default:
       throwTypeError(y);
@@ -76,13 +76,13 @@ export async function $$y1(e, t, i, o) {
         nodeId: t,
         imageHash: e.sha1Hash
       }))).reduce((e, t) => e.concat(t), []);
-      glU.populatePdfImagesWithImageHashes(t);
+      Fullscreen.populatePdfImagesWithImageHashes(t);
     }(images);
   } catch (e) {
     I = !0;
     reportError(_$$e.FIGJAM, e);
   }
-  let E = glU.getScene();
+  let E = Fullscreen.getScene();
   images.forEach(e => {
     Jr().forgetImage(e.sha1Hash);
   });

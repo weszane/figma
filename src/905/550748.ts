@@ -1,4 +1,4 @@
-import { qE, xN } from "../figma_app/492908";
+import { clamp, nearlyEqual } from "../figma_app/492908";
 export class $$r0 {
   defaultSelection(e) {
     return this.getSelection(e, {
@@ -23,11 +23,11 @@ export class $$r0 {
     let t = {
       ...e
     };
-    for (let i in e) t[i] = qE(e[i], 0, 1);
+    for (let i in e) t[i] = clamp(e[i], 0, 1);
     return t;
   }
   isEqual(e, t) {
-    return xN(e.r, t.r) && xN(e.g, t.g) && xN(e.b, t.b) && xN(e.a, t.a);
+    return nearlyEqual(e.r, t.r) && nearlyEqual(e.g, t.g) && nearlyEqual(e.b, t.b) && nearlyEqual(e.a, t.a);
   }
   normalize(e) {
     return e / 255;

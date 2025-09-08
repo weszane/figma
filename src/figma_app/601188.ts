@@ -1,22 +1,22 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { z as _$$z, Ip } from "../905/239603";
 import { reportError } from "../905/11";
-import { YV, Rq, td } from "../figma_app/181241";
+import { createMetaValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { H } from "../figma_app/324237";
 import { S } from "../figma_app/701107";
 import { Q3, Y9, _s, Bn } from "../figma_app/306946";
 import { M4 } from "../905/713695";
-import { Lz } from "../figma_app/155287";
+import { PluginDetailsSchema } from "../figma_app/155287";
 var $$_1 = (e => (e.HOMEPAGE = "homepage", e.CATEGORY = "category", e.PROFILE = "profile", e.PLUGINS = "plugins", e.RESOURCE_LANDING_PAGE = "resource_landing_page", e.SUGGESTED_EXTENSIONS = "suggested_extensions", e.RESOURCE_HUB = "resource_hub", e.COOPER_TEMPLATE_PICKER = "cooper_template_picker", e.SITES_TEMPLATE_PICKER = "sites_template_picker", e.EDITOR_COMMUNITY_VIEW = "editor_community_view", e))($$_1 || {});
 let h = _$$z.object({
   resource: Q3.optional(),
-  private_plugin: Ip.ignore(Lz).optional()
+  private_plugin: Ip.ignore(PluginDetailsSchema).optional()
 });
 let $$m0 = new class {
   constructor() {
-    this.ResourceWithContentIDSchemaValidator = YV("ResourceWithContentIDSchemaValidator", h, null, !0);
-    this.CommunityResourcesSchemaValidator = Rq("CommunityResourcesSchemaValidator", Y9, null, !0);
+    this.ResourceWithContentIDSchemaValidator = createMetaValidator("ResourceWithContentIDSchemaValidator", h, null, !0);
+    this.CommunityResourcesSchemaValidator = createPaginatedValidator("CommunityResourcesSchemaValidator", Y9, null, !0);
     this.ResourcesPaginatedQuery = M4.PaginatedQuery({
       fetch: async (e, {
         pageParam: t
@@ -25,7 +25,7 @@ let $$m0 = new class {
           let r = await this.CommunityResourcesSchemaValidator.validate(async ({
             xr: r
           }) => {
-            let n = td.toAPIParameters({
+            let n = APIParameterUtils.toAPIParameters({
               sort_by: H(),
               ...e,
               resourceType: e.resourceType && e.resourceType.join(","),
@@ -47,8 +47,8 @@ let $$m0 = new class {
         }
       }
     });
-    this.AdminResourceRecommendationsSchemaValidator = YV("CommunityAdminResourceRecommendationsSchema", _s, null);
-    this.CommunityHomeShelfContentSchemaValidator = YV("CommunityHomeShelfContentSchema", Bn, null);
+    this.AdminResourceRecommendationsSchemaValidator = createMetaValidator("CommunityAdminResourceRecommendationsSchema", _s, null);
+    this.CommunityHomeShelfContentSchemaValidator = createMetaValidator("CommunityHomeShelfContentSchema", Bn, null);
     this.getHomeShelfContent = M4.Query({
       fetch: ({
         seenResourceIds: e
@@ -56,7 +56,7 @@ let $$m0 = new class {
         xr: t
       }) => {
         try {
-          return await t.get("/api/resources/home_shelf", td.toAPIParameters({
+          return await t.get("/api/resources/home_shelf", APIParameterUtils.toAPIParameters({
             seenResourceIds: e?.join(",")
           }), {
             timeout: 1e4
@@ -78,7 +78,7 @@ let $$m0 = new class {
         skipRelatedContent,
         includeFullCategory
       } = e;
-      return await t.get(`/api/resources/${S[resourceType]}/${contentId}`, td.toAPIParameters({
+      return await t.get(`/api/resources/${S[resourceType]}/${contentId}`, APIParameterUtils.toAPIParameters({
         skipRelatedContent,
         includeFullCategory
       }));

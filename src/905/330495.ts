@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { Egt } from "../figma_app/763686";
+import { SceneGraphHelpers } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { k9 } from "../905/19536";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { B9 } from "../figma_app/722362";
 import { _S } from "../figma_app/516028";
 import { lm } from "../figma_app/745458";
@@ -28,17 +28,17 @@ export function $$h0(e) {
     backingSymbolGUID,
     backingStateGroupGUID
   } = nD(f, h);
-  let y = useMemo(() => gl(backingSymbolGUID) || null === backingSymbolGUID ? null : h.get(backingSymbolGUID), [backingSymbolGUID, h]);
-  let b = useMemo(() => gl(backingStateGroupGUID) || null === backingStateGroupGUID ? null : h.get(backingStateGroupGUID), [backingStateGroupGUID, h]);
+  let y = useMemo(() => isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID ? null : h.get(backingSymbolGUID), [backingSymbolGUID, h]);
+  let b = useMemo(() => isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID ? null : h.get(backingStateGroupGUID), [backingStateGroupGUID, h]);
   let v = useMemo(() => !!y && y.isSubscribedAsset && y.sourceLibraryKey !== g, [y, g]);
   let I = useMemo(() => !!b && b.isSubscribedAsset && b.sourceLibraryKey !== g, [b, g]);
-  let E = useMemo(() => !!(y && Egt.nodeIsSoftDeleted(y.guid)), [y]);
-  let x = useMemo(() => !!(b && Egt.nodeIsSoftDeleted(b.guid)), [b]);
+  let E = useMemo(() => !!(y && SceneGraphHelpers.nodeIsSoftDeleted(y.guid)), [y]);
+  let x = useMemo(() => !!(b && SceneGraphHelpers.nodeIsSoftDeleted(b.guid)), [b]);
   let S = useMemo(() => {
     if (b) return b;
     if (!y) return null;
     if (E) {
-      let e = Egt.findBestAncestorInRestorePath(y.guid);
+      let e = SceneGraphHelpers.findBestAncestorInRestorePath(y.guid);
       let t = "" === e ? null : h.get(e);
       if (t?.isStateGroup) return t;
     }

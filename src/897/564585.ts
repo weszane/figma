@@ -1,4 +1,4 @@
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { hD } from "../897/602108";
 export class $$a6 {}
 $$a6.MAX_W0 = 1e3;
@@ -25,7 +25,7 @@ function l({
   frequency: e,
   zeta: t
 }, n) {
-  let o = n[hD.MASS] > 0 ? qE(n[hD.MASS], $$a6.MIN_MASS, $$a6.MAX_MASS) : 1;
+  let o = n[hD.MASS] > 0 ? clamp(n[hD.MASS], $$a6.MIN_MASS, $$a6.MAX_MASS) : 1;
   let s = e * e * o;
   let l = 2 * t * Math.sqrt(s * o);
   let c = n.slice();
@@ -41,14 +41,14 @@ export function $$c3(e) {
   }) {
     return {
       x: Math.max(Math.PI / e, 0),
-      y: 2 - 2 * Math.pow(qE(t, 0, 1), .87)
+      y: 2 - 2 * Math.pow(clamp(t, 0, 1), .87)
     };
   }(s(e));
 }
 export function $$p5(e, t) {
   return l({
-    frequency: qE(Math.PI / Math.max(o, e.x), $$a6.MIN_W0, $$a6.MAX_W0),
-    zeta: qE(Math.pow((2 - e.y) / 2, 1.1494252873563218), $$a6.MIN_ZETA, $$a6.MAX_ZETA)
+    frequency: clamp(Math.PI / Math.max(o, e.x), $$a6.MIN_W0, $$a6.MAX_W0),
+    zeta: clamp(Math.pow((2 - e.y) / 2, 1.1494252873563218), $$a6.MIN_ZETA, $$a6.MAX_ZETA)
   }, t);
 }
 export let $$u4 = 3;

@@ -15,7 +15,7 @@ import { X_ } from "../figma_app/777551";
 import { hJ, XY } from "../905/506641";
 import { vt } from "../figma_app/306946";
 import { cx } from "../figma_app/558929";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Yo } from "../figma_app/543529";
 import { ll, U6 } from "../figma_app/844435";
 import { kc } from "../figma_app/740025";
@@ -24,7 +24,7 @@ import { TA } from "../905/372672";
 import { U3 } from "../figma_app/412189";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { T5, D6, j_ } from "../figma_app/465071";
-import { Ar, lT, Rt } from "../figma_app/300692";
+import { getCurrentPluginVersion, pluginMetadata, hasOrgRole } from "../figma_app/300692";
 import { Ib } from "../905/129884";
 import { X } from "../5430/785696";
 import { o as _$$o } from "../5430/992445";
@@ -47,9 +47,9 @@ export function $$M0({
   let V = j_(U).unwrapOr(!1);
   let W = kc();
   let G = xQ(e);
-  let $ = Ar(e) || lT;
+  let $ = getCurrentPluginVersion(e) || pluginMetadata;
   let z = _$$o(U.unwrapOr(null), M, $, t ? mapFileTypeToEditorType(t) : void 0);
-  let Q = Rt(e);
+  let Q = hasOrgRole(e);
   let Z = !!W?.org_id;
   let q = F && (G ? B : D);
   j = _$$I() ? "right" : r === aL.DETAIL ? "center" : "left";
@@ -63,7 +63,7 @@ export function $$M0({
   let et = Jm();
   if (U3("scroll", () => {
     (r === aL.PLUGIN_ROW || r === aL.REDESIGNED_PLUGIN_ROW) && toggleSwitchEditorDropdown(ee, !1);
-  }), $ === lT) return null;
+  }), $ === pluginMetadata) return null;
   let er = m3(e);
   return V && Z && !er && H && q && !Q ? jsx(O, {
     resource: e,
@@ -99,7 +99,7 @@ export function $$M0({
             return;
           }
           if (BrowserInfo.mobile) {
-            S(to({
+            S(showModalHandler({
               type: _$$x,
               data: {
                 dispatch: S

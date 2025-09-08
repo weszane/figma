@@ -1,4 +1,4 @@
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { nD } from "../905/92359";
 import { te } from "../figma_app/97042";
 export function $$s0(e, t, i) {
@@ -13,7 +13,7 @@ export function $$s0(e, t, i) {
   } = nD(new Set([(s?.type === "INSTANCE" ? s?.symbolId : s?.guid) ?? ""]), t);
   let d = null;
   let c = null;
-  if (gl(backingSymbolGUID) || null === backingSymbolGUID || (d = t.get(backingSymbolGUID)), gl(backingStateGroupGUID) || null === backingStateGroupGUID || (c = t.get(backingStateGroupGUID)), "INSTANCE" === s.type && s.symbolId) {
+  if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID || (d = t.get(backingSymbolGUID)), isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID || (c = t.get(backingStateGroupGUID)), "INSTANCE" === s.type && s.symbolId) {
     let e = t.get(s.symbolId);
     if (e?.isState) {
       let e = c?.sourceLibraryKey;

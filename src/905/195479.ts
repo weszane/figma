@@ -1,9 +1,9 @@
 import { isDevEnvironment, getInitialOptions, isLocalCluster, isStagingCluster } from "../figma_app/169182";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { WJ } from "../figma_app/671547";
 import { j } from "../905/813868";
 import { U } from "../905/424668";
@@ -35,7 +35,7 @@ async function m(e, t) {
       nodeID: widgetNodeID
     };
   } catch (e) {
-    glU.deleteNode(widgetNodeID);
+    Fullscreen.deleteNode(widgetNodeID);
     return {
       status: "error",
       error: e,
@@ -70,7 +70,7 @@ async function h(e, t) {
   let {
     widgetNodeID,
     widgetRunPromise
-  } = l7.user("paste-widget", () => j({
+  } = permissionScopeHandler.user("paste-widget", () => j({
     pluginID: e.pluginID,
     widgetName: e.widgetName,
     pluginVersionID: n,
@@ -98,7 +98,7 @@ async function h(e, t) {
     };
   }
 }
-let g = nF(async (e, {
+let g = createOptimistThunk(async (e, {
   widgetInfo: t,
   fallbackInfo: i,
   url: a,
@@ -112,7 +112,7 @@ let g = nF(async (e, {
       isTextIframe: !1,
       entrypoint: WJ.PASTE
     });
-    if (c.nodeID && (glU.deleteNode(c.nodeID), e.dispatch(F.dequeue({
+    if (c.nodeID && (Fullscreen.deleteNode(c.nodeID), e.dispatch(F.dequeue({
       matchType: "plugins-status"
     }))), getFeatureFlags().widgets_paste_local_on_fail && isDevEnvironment() && i) {
       "error" === (await m(i, a)).status && e.dispatch(t);

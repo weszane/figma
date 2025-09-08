@@ -1,14 +1,14 @@
 import { z } from "../905/239603";
-import { vh, YV, td, _5 } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
 import { WU } from "../figma_app/35887";
 var $$s1 = (e => (e.DEV_MODE_BETA_SUGGESTED_UPGRADES = "dev_mode_beta_suggested_upgrades", e.MEMBERS_TAB = "members_tab", e.FILE_PERMISSIONS_MODAL = "file_permissions_modal", e))($$s1 || {});
 export let $$o0 = new class {
   constructor() {
-    this.GuestResourcesSchemaValidator = vh();
-    this.OrgUserSchemaValidator = YV("OrgUserSchemaValidator", WU, null, !1);
-    this.UpdateOrgUsersSchemaValidator = YV("UpdateOrgUsersSchemaValidator", z.array(WU), null, !1);
-    this.CreateStarterTeamSchemaValidator = vh();
-    this.requestUpgradeSchemaValidator = vh();
+    this.GuestResourcesSchemaValidator = createNoOpValidator();
+    this.OrgUserSchemaValidator = createMetaValidator("OrgUserSchemaValidator", WU, null, !1);
+    this.UpdateOrgUsersSchemaValidator = createMetaValidator("UpdateOrgUsersSchemaValidator", z.array(WU), null, !1);
+    this.CreateStarterTeamSchemaValidator = createNoOpValidator();
+    this.requestUpgradeSchemaValidator = createNoOpValidator();
   }
   getGuestResources(e) {
     return this.GuestResourcesSchemaValidator.validate(async ({
@@ -22,7 +22,7 @@ export let $$o0 = new class {
     } = e;
     return this.OrgUserSchemaValidator.validate(({
       xr: e
-    }) => e.put(`/api/org_users/${id}`, td.toAPIParameters(changes)));
+    }) => e.put(`/api/org_users/${id}`, APIParameterUtils.toAPIParameters(changes)));
   }
   updateOrgUsers(e) {
     let {
@@ -31,7 +31,7 @@ export let $$o0 = new class {
     } = e;
     return this.UpdateOrgUsersSchemaValidator.validate(({
       xr: t
-    }) => t.put(`/api/orgs/${e.orgId}/org_users`, td.toAPIParameters(r)));
+    }) => t.put(`/api/orgs/${e.orgId}/org_users`, APIParameterUtils.toAPIParameters(r)));
   }
   createStarterTeam() {
     return this.CreateStarterTeamSchemaValidator.validate(({
@@ -43,7 +43,7 @@ export let $$o0 = new class {
       orgUserId,
       flags
     } = e;
-    return _5.validate(({
+    return defaultValidator.validate(({
       xr: e
     }) => e.post(`/api/org_users/${orgUserId}/flags`, {
       flags
@@ -55,7 +55,7 @@ export let $$o0 = new class {
     }) => await t.post(`/api/orgs/${e.org_id}/org_users/request_upgrade`, e));
   }
   getMemberCSVExport(e) {
-    return _5.validate(({
+    return defaultValidator.validate(({
       xr: t
     }) => t.post(`/api/orgs/${e.orgId}/export_members`));
   }

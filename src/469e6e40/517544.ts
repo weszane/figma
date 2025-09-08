@@ -1,6 +1,6 @@
 import { b } from "../905/275748";
 import { then } from "../ead0c34b/698412";
-import { Ij, Ju } from "../905/102752";
+import { createModalConfig, registerModal } from "../905/102752";
 let n;
 let s;
 let r = new b({
@@ -12,10 +12,10 @@ let r = new b({
   sideEffects: !1
 });
 function l() {
-  return n ??= r.createLazyComponent(() => then(e => e.PurchaseAiCreditsModal), Ij("PurchaseAiCreditsModal"));
+  return n ??= r.createLazyComponent(() => then(e => e.PurchaseAiCreditsModal), createModalConfig("PurchaseAiCreditsModal"));
 }
 export function $$o0() {
-  return s ??= Ju(l(), "PurchaseAiCreditsModal");
+  return s ??= registerModal(l(), "PurchaseAiCreditsModal");
 }
 export function $$d1() {
   l().preload();

@@ -1,10 +1,10 @@
 import { c2 } from "../905/382883";
 import { _7 } from "../figma_app/562352";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { logError } from "../905/714362";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { JL } from "../figma_app/690664";
 import { Zr } from "../figma_app/114522";
 import { Y3 } from "../figma_app/346422";
@@ -128,7 +128,7 @@ export class $$f1 {
       if (!t) return null;
       {
         let r = e.containingCodeInstanceId;
-        return r !== AD ? {
+        return r !== defaultSessionLocalIDString ? {
           fiberNodeGuid: e.guid,
           figmaFiberId: t,
           codeInstanceGuid: r
@@ -289,7 +289,7 @@ export function $$E0(e, t) {
       return r && void 0 !== r[e] ? r[e] : t.elementInfo?.computedStyles[e];
     }(t);
     if (void 0 !== n) {
-      if (void 0 === r) r = n;else if (r !== n) return oV;
+      if (void 0 === r) r = n;else if (r !== n) return MIXED_MARKER;
     }
   }
   return r;

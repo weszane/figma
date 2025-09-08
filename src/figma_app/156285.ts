@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { lQ } from "../905/934246";
-import { plo, Vzr, rrT, glU } from "../figma_app/763686";
-import { AD, dI, Hr, sH } from "../905/871411";
+import { DistributionType, Thumbnail, NodePropertyCategory, Fullscreen } from "../figma_app/763686";
+import { defaultSessionLocalIDString, sessionLocalIDToString, defaultSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -13,8 +13,8 @@ import { getFilteredFeatureFlags } from "../905/717445";
 import { buildUploadUrl } from "../figma_app/169182";
 import { GI, Vi } from "../905/125333";
 import { Dc } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
-import { C8, HE } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { toArray, normalizeMixedValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { Wh } from "../figma_app/615482";
 import { wA, Fk } from "../figma_app/167249";
@@ -42,9 +42,9 @@ export function $$L8(e) {
   return useAtomWithSubscription(t);
 }
 export let $$P4 = {
-  guid: AD,
+  guid: defaultSessionLocalIDString,
   name: "Solid",
-  type: plo.STRETCH,
+  type: DistributionType.STRETCH,
   sizeX: 0,
   sizeY: 0,
   isSoftDeleted: !1
@@ -55,8 +55,8 @@ export function $$D0({
   sizeY: r,
   upSample: n
 }) {
-  if (!Vzr) return;
-  let [i, s] = Vzr.generateThumbnailForNode(e, t * n, r * n, n, {
+  if (!Thumbnail) return;
+  let [i, s] = Thumbnail.generateThumbnailForNode(e, t * n, r * n, n, {
     useAbsoluteBounds: !0
   });
   return URL.createObjectURL(new Blob([s], {
@@ -71,7 +71,7 @@ let k = e => {
   t && atomStoreManager.set(w(e.previewName), t);
 };
 let M = e => {
-  if (!Vzr) return;
+  if (!Thumbnail) return;
   let {
     guid,
     previewName,
@@ -93,7 +93,7 @@ let M = e => {
 export function $$F1() {
   return wA(e => {
     let t = e.getInternalCanvas();
-    return t && getFilteredFeatureFlags().ce_il_strokes ? t.childrenNodes.filter(e => "BRUSH" === e.type && (e.brushType !== plo.SCATTER || getFilteredFeatureFlags().ce_il_scatter)).map(e => {
+    return t && getFilteredFeatureFlags().ce_il_strokes ? t.childrenNodes.filter(e => "BRUSH" === e.type && (e.brushType !== DistributionType.SCATTER || getFilteredFeatureFlags().ce_il_scatter)).map(e => {
       let t = {
         guid: e.guid,
         name: e.name,
@@ -101,27 +101,27 @@ export function $$F1() {
         sizeY: e.size.y,
         isSoftDeleted: e.isSoftDeleted
       };
-      return e.brushType === plo.SCATTER ? {
+      return e.brushType === DistributionType.SCATTER ? {
         ...t,
-        type: plo.SCATTER,
+        type: DistributionType.SCATTER,
         settings: e.scatterStrokeSettings
       } : {
         ...t,
-        type: plo.STRETCH
+        type: DistributionType.STRETCH
       };
     }) : [];
   });
 }
 export function $$j3() {
   let e = $$F1();
-  let t = C8(Gt("strokeBrushGuid")).map(e => dI(e));
+  let t = toArray(Gt("strokeBrushGuid")).map(e => sessionLocalIDToString(e));
   let r = e.filter(e => t.includes(e.guid));
-  return 0 === r.length ? null : r.every(e => e.type === plo.SCATTER) ? plo.SCATTER : r.every(e => e.type === plo.STRETCH) ? plo.STRETCH : null;
+  return 0 === r.length ? null : r.every(e => e.type === DistributionType.SCATTER) ? DistributionType.SCATTER : r.every(e => e.type === DistributionType.STRETCH) ? DistributionType.STRETCH : null;
 }
 export function $$U10(e) {
   let t = $$F1();
   let r = useAtomWithSubscription(e);
-  let n = t.find(e => e.guid && e.guid === dI(r.strokeBrushGuid));
+  let n = t.find(e => e.guid && e.guid === sessionLocalIDToString(r.strokeBrushGuid));
   return n ? n.type : null;
 }
 let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
@@ -163,13 +163,13 @@ export function $$V9() {
   let [e, t] = useAtomValueAndSetter(Vi);
   let r = useAtomWithSubscription($$G6);
   useEffect(() => {
-    r && (void 0 === e.strokeBrushGuid || e.strokeBrushGuid === Hr) && t(e => ({
+    r && (void 0 === e.strokeBrushGuid || e.strokeBrushGuid === defaultSessionLocalID) && t(e => ({
       ...e,
       strokeBrushGuid: r
     }));
-    Y5.updateAppModel({
+    fullscreenValue.updateAppModel({
       currentSelectedProperty: {
-        type: rrT.STROKE_PRESET,
+        type: NodePropertyCategory.STROKE_PRESET,
         indices: [0]
       }
     });
@@ -180,32 +180,32 @@ export function $$H2() {
   let [t, r] = useAtomValueAndSetter($$N11);
   let [i, c] = useAtomValueAndSetter($$G6);
   let u = $$F1();
-  let p = useMemo(() => u.filter(e => !e.isSoftDeleted && t.includes(e.guid) && e.guid !== AD), [t, u]);
+  let p = useMemo(() => u.filter(e => !e.isSoftDeleted && t.includes(e.guid) && e.guid !== defaultSessionLocalIDString), [t, u]);
   let _ = Xr(Vi);
   useEffect(() => {
     if (p.length && !i) {
-      let e = p.filter(e => e.type === plo.STRETCH);
-      let t = sH(e[0]?.guid);
+      let e = p.filter(e => e.type === DistributionType.STRETCH);
+      let t = parseSessionLocalID(e[0]?.guid);
       t && c(t);
     }
   }, [i, p, c]);
   useEffect(() => {
     if (!getFilteredFeatureFlags().ce_il_strokes || !e || p.length) return;
     let t = [{
-      type: plo.STRETCH,
+      type: DistributionType.STRETCH,
       resourceString: "a3480b63cd4ac2a8976c8a48aaa5b88a88810ce3"
     }];
     getFeatureFlags().ce_il_scatter && t.push({
-      type: plo.SCATTER,
+      type: DistributionType.SCATTER,
       resourceString: "3ffada8f593e3755bf1920e37ad656804aa53250"
     });
     Promise.all(t.map(({
       resourceString: e,
       type: t
     }) => fetch(buildUploadUrl(e)).then(e => e.arrayBuffer()).then(e => {
-      if (glU) return glU.insertBrushesFromBuffer(new Uint8Array(e), t);
+      if (Fullscreen) return Fullscreen.insertBrushesFromBuffer(new Uint8Array(e), t);
     }).catch(() => []))).then(([e = [], t = []]) => {
-      let n = sH(e[0]);
+      let n = parseSessionLocalID(e[0]);
       n && (c(n), _(e => ({
         ...e,
         strokeBrushGuid: n
@@ -219,10 +219,10 @@ export function $$H2() {
     B();
     let r = useMemo(() => e.filter(e => !e.isSoftDeleted), [e]);
     let [i] = iM(Vi, "strokeBrushGuid");
-    let l = HE(i);
+    let l = normalizeMixedValue(i);
     useEffect(() => {
-      if (!getFilteredFeatureFlags().ce_il_strokes || !glU) return;
-      let e = glU.generatePreviewNodesForDrawStrokes();
+      if (!getFilteredFeatureFlags().ce_il_strokes || !Fullscreen) return;
+      let e = Fullscreen.generatePreviewNodesForDrawStrokes();
       t.getInternalCanvas() && ["pencils", "brushes"].forEach(r => {
         let n = e[r];
         let i = "pencils" === r;
@@ -243,7 +243,7 @@ export function $$H2() {
             sizeX: n.size.x,
             sizeY: n.size.y
           };
-          !i && l && n.strokeBrushGuid === dI(l) ? k(u) : i ? setTimeout(() => M({
+          !i && l && n.strokeBrushGuid === sessionLocalIDToString(l) ? k(u) : i ? setTimeout(() => M({
             ...u,
             config: n.dynamicStrokeSettings,
             optionIndexForMenu: r

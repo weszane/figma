@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, MoD } from "../figma_app/763686";
+import { Fullscreen, ImageExportType } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { delay } from "../905/236856";
 import { analyticsEventManager } from "../905/449184";
@@ -47,8 +47,8 @@ function S(e) {
   let [h, m] = useState(!1);
   let [_, g] = useAtomValueAndSetter($$C2);
   let f = useCallback(() => {
-    let t = glU.generatePlaygroundThumbnail(e ?? null);
-    let a = glU.getPlaygroundNodeData();
+    let t = Fullscreen.generatePlaygroundThumbnail(e ?? null);
+    let a = Fullscreen.getPlaygroundNodeData();
     t.pixels?.length > 0 ? (n({
       src: Pv(t.pixels, new Point(t.width, t.height)),
       width: t.width / t.scale,
@@ -91,7 +91,7 @@ function S(e) {
     }), [n, o]);
   }(f);
   useEffect(() => k(v), [v]);
-  useEffect(() => () => glU.clearPlaygroundScene(), []);
+  useEffect(() => () => Fullscreen.clearPlaygroundScene(), []);
   useEffect(() => {
     h && setTimeout(() => {
       f();
@@ -131,7 +131,7 @@ export function $$T1({
   let L = u !== t || !playgroundNodeData || "loading" === e.status;
   let [R, D] = useState(null);
   let O = useCallback(() => {
-    glU.clearPlaygroundScene();
+    Fullscreen.clearPlaygroundScene();
     setPlaygroundNodeData(void 0);
   }, [setPlaygroundNodeData]);
   let j = useCallback(async (e = !0) => {
@@ -161,9 +161,9 @@ export function $$T1({
       return;
     }
     let l = t.type !== PW.STATE_GROUP || t.isLocal ? null : t.default_state_key;
-    if (n ? glU.setPlaygroundSceneFromBuffer(t.node_id, n, e, l, t.library_key) : glU.setPlaygroundSceneFromLocalAsset(t.node_id)) {
+    if (n ? Fullscreen.setPlaygroundSceneFromBuffer(t.node_id, n, e, l, t.library_key) : Fullscreen.setPlaygroundSceneFromLocalAsset(t.node_id)) {
       setHasChangesToReset(!1);
-      setPlaygroundNodeData(glU.getPlaygroundNodeData());
+      setPlaygroundNodeData(Fullscreen.getPlaygroundNodeData());
       p(t);
       analyticsEventManager.trackDefinedEvent("playground.set_scene", {
         duration: Date.now() - a,
@@ -172,9 +172,9 @@ export function $$T1({
         assetKey: u2(t)
       });
       onResetTracker();
-      Jr().loadAllImagesUnder(["0:0"], MoD.NON_ANIMATED_ONLY, "playground.initialLoad", (e, t) => {
+      Jr().loadAllImagesUnder(["0:0"], ImageExportType.NON_ANIMATED_ONLY, "playground.initialLoad", (e, t) => {
         onSetPercentImagesLoaded((t - e) / t);
-      }, glU.getPlaygroundScene());
+      }, Fullscreen.getPlaygroundScene());
       return;
     }
     if (e) {
@@ -239,8 +239,8 @@ export function $$L3() {
   } = S();
   let u = useCallback(() => {
     let e = !1;
-    r ? e = glU.setPlaygroundSceneFromDetachedInfo(r.dataComponentId, "temp-scene" === r.dataLocation) : t && (e = glU.setPlaygroundSceneFromSelection());
-    e || (glU.clearPlaygroundScene(), setPlaygroundNodeData(void 0));
+    r ? e = Fullscreen.setPlaygroundSceneFromDetachedInfo(r.dataComponentId, "temp-scene" === r.dataLocation) : t && (e = Fullscreen.setPlaygroundSceneFromSelection());
+    e || (Fullscreen.clearPlaygroundScene(), setPlaygroundNodeData(void 0));
   }, [t, r, setPlaygroundNodeData]);
   useEffect(() => {
     u();

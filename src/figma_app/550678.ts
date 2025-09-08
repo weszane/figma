@@ -1,4 +1,4 @@
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { XHR } from "../905/910117";
 export function $$a0(e, t, r) {
   null == r && (r = "image/png");
@@ -6,7 +6,7 @@ export function $$a0(e, t, r) {
     rawBody: !0,
     params: {
       purpose: e,
-      sha1: Et(t)
+      sha1: sha1Hex(t)
     },
     headers: {
       ...XHR.requiredHeaders,

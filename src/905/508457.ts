@@ -1,12 +1,12 @@
 import { atom, setupSubscriptionAtom, createAtomWithEquality, atomStoreManager } from "../figma_app/27355";
 import r from "../vendor/128080";
 import { Md, z2 } from "../figma_app/187925";
-import { w } from "../905/924253";
+import { fullscreenReadyAtom } from "../905/924253";
 import { Wh } from "../figma_app/615482";
-import { lu, _n } from "../figma_app/84367";
+import { subscribeObservable, isObservableAlive } from "../figma_app/84367";
 var a = r;
 let c = atom(e => {
-  let t = e(w);
+  let t = e(fullscreenReadyAtom);
   let i = e(Md);
   return t || i.status === z2.LOADED;
 });
@@ -14,7 +14,7 @@ export function $$u0(e) {
   let t = "function" == typeof e ? e : () => e;
   return Wh(() => setupSubscriptionAtom({
     get: () => t().getCopy(),
-    subscribe: e => lu(t(), {
+    subscribe: e => subscribeObservable(t(), {
       onChangeDeferred: e
     })
   }));
@@ -24,7 +24,7 @@ export function $$p3(e, t) {
   return atom(n => {
     n(c);
     let r = e();
-    return r && _n(r) ? n(i) : t;
+    return r && isObservableAlive(r) ? n(i) : t;
   });
 }
 export var $$m2 = (e => (e[e.RESET_VALUE_ON_FILE_CHANGE = 0] = "RESET_VALUE_ON_FILE_CHANGE", e[e.KEEP_SEPARATE_VALUE_FOR_EACH_FILE = 1] = "KEEP_SEPARATE_VALUE_FOR_EACH_FILE", e[e.SHARE_SAME_VALUE_FOR_ALL_FILES = 2] = "SHARE_SAME_VALUE_FOR_ALL_FILES", e))($$m2 || {});

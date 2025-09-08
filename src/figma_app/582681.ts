@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { d as _$$d } from "../905/49800";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { G as _$$G } from "../905/289770";
 import { getFeatureFlags } from "../905/601108";
@@ -21,16 +21,16 @@ import { fK } from "../905/469533";
 import { lg } from "../figma_app/976749";
 import { y as _$$y } from "../905/810168";
 import { FFileType } from "../figma_app/191312";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { F2 } from "../905/826900";
-export let $$C0 = Ju(function ({
+export let $$C0 = registerModal(function ({
   open: e,
   onClose: t
 }) {
   let [r, x] = _$$y();
   let [C, w] = useAtomValueAndSetter(Fj);
   let O = Xr(jI);
-  let R = X();
+  let R = setupAutofocusHandler();
   let L = useDispatch();
   let P = useSelector(e => e.screenreader.errorType);
   let D = lg();
@@ -79,7 +79,7 @@ export let $$C0 = Ju(function ({
               });
               x(e);
             },
-            label: jsx(J, {
+            label: jsx(Label, {
               children: renderI18nText("fullscreen.accessibility_settings.enable_screenreader_label")
             }),
             ref: R,
@@ -104,7 +104,7 @@ export let $$C0 = Ju(function ({
                 userInitiated: !0
               }));
             },
-            label: jsx(J, {
+            label: jsx(Label, {
               children: renderI18nText("fullscreen.accessibility_settings.enhanced_contrast_label")
             }),
             ref: R,
@@ -125,7 +125,7 @@ export let $$C0 = Ju(function ({
               className: "x78zum5 xdt5ytf x1gskr33",
               children: [jsx("span", {
                 className: "x1ihwiht",
-                children: jsx(J, {
+                children: jsx(Label, {
                   htmlFor: "spotlight-notification-duration-input",
                   children: getI18nString("collaboration.spotlight.set_delay_label")
                 })
@@ -138,5 +138,5 @@ export let $$C0 = Ju(function ({
       })]
     })
   });
-}, "ACCESSIBILITY_SETTINGS", ZU.YES);
+}, "ACCESSIBILITY_SETTINGS", ModalSupportsBackground.YES);
 export const L = $$C0;

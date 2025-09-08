@@ -18,13 +18,13 @@ import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
-import { $O, Lo } from "../905/156213";
+import { showModal, popModalStack } from "../905/156213";
 import { $$do, F1, Nw, ui, LN, Kq } from "../905/941249";
 import { S as _$$S } from "../1e926454/283343";
 import { C1 } from "../figma_app/12796";
 import { e6 } from "../905/557142";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Cf } from "../905/504727";
 import { b8 } from "../figma_app/926061";
 import { A as _$$A } from "../2854/769773";
@@ -56,7 +56,7 @@ let $$L0 = connect(e => ({
   }), [dispatch, teamId, initialInviteLevel]);
   let _ = e.teamPermissions.canEdit && !!e.teamJoinLinks?.url && e.includeCopyLinkButton;
   let p = useCallback(() => {
-    dispatch($O({
+    dispatch(showModal({
       type: U,
       data: {
         resetLink: () => {
@@ -249,7 +249,7 @@ function B(e) {
   });
 }
 let U = "RESET_LINKS_CONFIRMATION_MODAL";
-Ju(function (e) {
+registerModal(function (e) {
   let t = useDispatch();
   let r = hS(e);
   return jsx(bL, {
@@ -266,13 +266,13 @@ Ju(function (e) {
         children: jsxs(jk, {
           children: [jsx($z, {
             variant: "secondary",
-            onClick: () => t(Lo()),
+            onClick: () => t(popModalStack()),
             children: renderI18nText("team_join_links.cancel")
           }), jsx($z, {
             variant: "destructive",
             onClick: () => {
               e.resetLink();
-              t(Lo());
+              t(popModalStack());
             },
             children: renderI18nText("team_join_links.reset_links")
           })]

@@ -23,7 +23,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { useState, useEffect } from "react";
 import { FPlanNameType, FOrganizationLevelType, FUserTypeClassification, FMemberRoleType, FProductAccessType } from "../figma_app/191312";
 import { X$, D6, S2, px, Ty } from "../figma_app/465071";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { sZ } from "../905/845253";
 import { ud } from "../905/513035";
 import { w as _$$w } from "../figma_app/171404";
@@ -340,8 +340,8 @@ function L() {
 }
 let B = new class {
   constructor() {
-    this.TotalActiveDevModeUsersSchemaValidator = vh();
-    this.ActiveDevModeUserAvatarsSchemaValidator = vh();
+    this.TotalActiveDevModeUsersSchemaValidator = createNoOpValidator();
+    this.ActiveDevModeUserAvatarsSchemaValidator = createNoOpValidator();
   }
   getTotalActiveDevModeUsers(e) {
     return this.TotalActiveDevModeUsersSchemaValidator.validate(async ({
@@ -354,7 +354,7 @@ let B = new class {
   getActiveDevModeUserAvatars(e) {
     return this.ActiveDevModeUserAvatarsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/dev_handoff/social_proof/active_user_avatars", td.toAPIParameters(e)));
+    }) => await t.get("/api/dev_handoff/social_proof/active_user_avatars", APIParameterUtils.toAPIParameters(e)));
   }
 }();
 let z = {

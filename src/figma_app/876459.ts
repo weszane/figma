@@ -32,13 +32,13 @@ const popoutAPIInstance = (() => {
  * Checks if running inside Figma Desktop by user agent.
  * @returns {boolean}
  */
-const isFigmaDesktopUA = !!navigator.userAgent.match(/Figma\//) // $$p3
+export const isFigmaDesktopUA = !!navigator.userAgent.match(/Figma\//) // $$p3
 
 /**
  * Gets the bellFeedAPI from the global window object.
  * @returns {any | null}
  */
-const bellFeedAPIInstance = window.bellFeedAPI ? window.bellFeedAPI : null // $$_2
+export const bellFeedAPIInstance = window.bellFeedAPI ? window.bellFeedAPI : null // $$_2
 
 /**
  * Returns the bellFeedAPI if its version is at least the required version.

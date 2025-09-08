@@ -1,12 +1,12 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { jO } from "../905/573265";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
 import { o as _$$o, M$ } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
@@ -19,7 +19,7 @@ export function $$y3(e, t) {
     ...t,
     dispatch: e,
     onSuccess: () => {
-      Ez5?.canvasGrid().updateSourceLibraryKey(t.libraryKey);
+      AppStateTsApi?.canvasGrid().updateSourceLibraryKey(t.libraryKey);
       atomStoreManager.set(UM, {
         state: F4.PUBLISH_TEMPLATE_COMPLETED
       });
@@ -28,7 +28,7 @@ export function $$y3(e, t) {
         message: t.isPublishedTemplate ? getI18nString("slides.templates.publish_actions.toast.update_success") : getI18nString("slides.templates.publish_actions.toast.publish_success"),
         icon: zX.CHECK
       }));
-      e(Ce());
+      e(hideModal());
     },
     onFailure: t => {
       let i = atomStoreManager.get(_g);

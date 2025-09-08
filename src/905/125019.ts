@@ -1,92 +1,196 @@
-function n(e, t, i) {
-  for (let t = 0; t < 16; t = t + 1 | 0) e[t] = i[t << 2] << 24 | i[(t << 2) + 1 | 0] << 16 | i[(t << 2) + 2 | 0] << 8 | i[(t << 2) + 3 | 0];
-  for (let t = 16; t < 80; t = t + 1 | 0) {
-    let i = e[t - 3 | 0] ^ e[t - 8 | 0] ^ e[t - 14 | 0] ^ e[t - 16 | 0];
-    e[t] = i << 1 | i >>> 31;
+/**
+ * SHA1 core transformation function.
+ * @param words - Int32Array of working words.
+ * @param hash - Int32Array of hash state.
+ * @param block - Uint8Array of 64-byte block.
+ * (Original name: n)
+ */
+function sha1Transform(words: Int32Array, hash: Int32Array, block: Uint8Array): void {
+  // Prepare message schedule
+  for (let i = 0; i < 16; i++) {
+    words[i]
+      = (block[i << 2] << 24)
+        | (block[(i << 2) + 1] << 16)
+        | (block[(i << 2) + 2] << 8)
+        | (block[(i << 2) + 3])
   }
-  let n = t[0];
-  let r = t[1];
-  let a = t[2];
-  let s = t[3];
-  let o = t[4];
-  for (let t = 0; t < 80; t = t + 1 | 0) {
-    let i = ((n << 5 | n >>> 27) + o | 0) + e[t] | 0;
-    i = t < 20 ? (i + (r & a | ~r & s) | 0) + 0x5a827999 | 0 : t < 40 ? (i + (r ^ a ^ s) | 0) + 0x6ed9eba1 | 0 : t < 60 ? (i + (r & a | r & s | a & s) | 0) + 0x8f1bbcdc | 0 : (i + (r ^ a ^ s) | 0) + 0xca62c1d6 | 0;
-    o = s;
-    s = a;
-    a = r << 30 | r >>> 2;
-    r = n;
-    n = i;
+  for (let i = 16; i < 80; i++) {
+    const temp = words[i - 3] ^ words[i - 8] ^ words[i - 14] ^ words[i - 16]
+    words[i] = (temp << 1) | (temp >>> 31)
   }
-  t[0] = t[0] + n | 0;
-  t[1] = t[1] + r | 0;
-  t[2] = t[2] + a | 0;
-  t[3] = t[3] + s | 0;
-  t[4] = t[4] + o | 0;
-}
-export function $$r1(e) {
-  let t = new Uint8Array(20);
-  let i = new Int32Array(80);
-  let r = new Uint8Array(64);
-  let a = new Int32Array([0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0]);
-  let s = 0;
-  let o = 0;
-  let l = e.length;
-  for (; l > 0;) {
-    l = l - 1 | 0;
-    r[o] = e[s];
-    s = s + 1 | 0;
-    64 == (o = o + 1 | 0) && (n(i, a, r), o = 0);
-  }
-  if (r[o] = 128, (o = o + 1 | 0) > 56) {
-    for (; o < 64;) {
-      r[o] = 0;
-      o = o + 1 | 0;
+
+  // Initialize working variables
+  let a = hash[0]
+  let b = hash[1]
+  let c = hash[2]
+  let d = hash[3]
+  let e = hash[4]
+
+  // Main loop
+  for (let i = 0; i < 80; i++) {
+    let f: number, k: number
+    if (i < 20) {
+      f = (b & c) | (~b & d)
+      k = 0x5A827999
     }
-    n(i, a, r);
-    o = 0;
+    else if (i < 40) {
+      f = b ^ c ^ d
+      k = 0x6ED9EBA1
+    }
+    else if (i < 60) {
+      f = (b & c) | (b & d) | (c & d)
+      k = 0x8F1BBCDC
+    }
+    else {
+      f = b ^ c ^ d
+      k = 0xCA62C1D6
+    }
+    const temp = (((a << 5) | (a >>> 27)) + e + words[i] + f + k) | 0
+    e = d
+    d = c
+    c = (b << 30) | (b >>> 2)
+    b = a
+    a = temp
   }
-  for (let e = o; e < 56; e = e + 1 | 0) r[e] = 0;
-  let d = s << 3;
-  for (let e = 7; e >= 0; e = e - 1 | 0) {
-    r[56 + e | 0] = 255 & d;
-    d >>>= 8;
-  }
-  o = 64;
-  n(i, a, r);
-  for (let e = 0; e < 5; e = e + 1 | 0) {
-    let i = a[e];
-    for (let n = 3; n >= 0; n = n - 1 | 0) {
-      t[(e << 2) + n | 0] = 255 & i;
-      i >>>= 8;
+
+  // Update hash state
+  hash[0] = (hash[0] + a) | 0
+  hash[1] = (hash[1] + b) | 0
+  hash[2] = (hash[2] + c) | 0
+  hash[3] = (hash[3] + d) | 0
+  hash[4] = (hash[4] + e) | 0
+}
+
+/**
+ * Computes SHA1 hash of a Uint8Array.
+ * @param input - Input data as Uint8Array.
+ * @returns SHA1 hash as hex string.
+ * (Original name: $$r1)
+ */
+export function sha1Hex(input: Uint8Array): string {
+  const digest = new Uint8Array(20)
+  const words = new Int32Array(80)
+  const block = new Uint8Array(64)
+  const hash = new Int32Array([
+    0x67452301,
+    0xEFCDAB89,
+    0x98BADCFE,
+    0x10325476,
+    0xC3D2E1F0,
+  ])
+  let offset = 0
+  let blockOffset = 0
+  let remaining = input.length
+
+  // Process input blocks
+  while (remaining > 0) {
+    block[blockOffset] = input[offset]
+    offset++
+    blockOffset++
+    remaining--
+    if (blockOffset === 64) {
+      sha1Transform(words, hash, block)
+      blockOffset = 0
     }
   }
-  let c = [];
-  for (var u = 0; u < t.length; u++) c.push((256 | t[u]).toString(16).slice(1));
-  return c.join("");
+
+  // Padding
+  block[blockOffset++] = 128
+  if (blockOffset > 56) {
+    while (blockOffset < 64) block[blockOffset++] = 0
+    sha1Transform(words, hash, block)
+    blockOffset = 0
+  }
+  while (blockOffset < 56) block[blockOffset++] = 0
+
+  // Append length (in bits)
+  let bitLen = offset << 3
+  for (let i = 7; i >= 0; i--) {
+    block[56 + i] = bitLen & 0xFF
+    bitLen >>>= 8
+  }
+  sha1Transform(words, hash, block)
+
+  // Output digest as hex
+  for (let i = 0; i < 5; i++) {
+    let val = hash[i]
+    for (let j = 3; j >= 0; j--) {
+      digest[(i << 2) + j] = val & 0xFF
+      val >>>= 8
+    }
+  }
+  return Array.from(digest).map(b => (256 | b).toString(16).slice(1)).join('')
 }
-export function $$a4(e) {
-  return $$r1(new TextEncoder().encode(e));
+
+/**
+ * Computes SHA1 hash of a string.
+ * @param str - Input string.
+ * @returns SHA1 hash as hex string.
+ * (Original name: $$a4)
+ */
+export function sha1HexFromString(str: string): string {
+  return sha1Hex(new TextEncoder().encode(str))
 }
-export function $$s3(e) {
-  (function (e) {
-    if (20 !== e.length) throw Error("Invalid SHA1 hash");
-  })(e);
-  return $$l0(e);
+
+/**
+ * Validates and converts a SHA1 hash Uint8Array to hex string.
+ * @param hash - SHA1 hash as Uint8Array.
+ * @returns SHA1 hash as hex string.
+ * (Original name: $$s3)
+ */
+export function sha1HexFromBytes(hash: Uint8Array): string {
+  validateSha1Bytes(hash)
+  return bytesToHex(hash)
 }
-export function $$o2(e) {
-  !function (e) {
-    if (!/^[0-9A-Fa-f]{40}$/.test(e)) throw Error("Invalid SHA1 hash");
-  }(e);
-  let t = new Uint8Array(20);
-  for (let i = 0; i < 40; i += 2) t[i / 2] = parseInt(e.slice(i, i + 2), 16);
-  return t;
+
+/**
+ * Validates and converts a SHA1 hash hex string to Uint8Array.
+ * @param hex - SHA1 hash as hex string.
+ * @returns SHA1 hash as Uint8Array.
+ * (Original name: $$o2)
+ */
+export function sha1BytesFromHex(hex: string): Uint8Array {
+  validateSha1Hex(hex)
+  const bytes = new Uint8Array(20)
+  for (let i = 0; i < 40; i += 2) {
+    bytes[i / 2] = parseInt(hex.slice(i, i + 2), 16)
+  }
+  return bytes
 }
-export function $$l0(e) {
-  return [].map.call(e, e => (256 | e).toString(16).slice(1)).join("");
+
+/**
+ * Converts a Uint8Array to hex string.
+ * @param bytes - Input bytes.
+ * @returns Hex string.
+ * (Original name: $$l0)
+ */
+export function bytesToHex(bytes: Uint8Array): string {
+  return Array.from(bytes).map(b => (256 | b).toString(16).slice(1)).join('')
 }
-export const B9 = $$l0;
-export const Et = $$r1;
-export const aD = $$o2;
-export const nj = $$s3;
-export const yS = $$a4;
+
+/**
+ * Validates SHA1 hash bytes.
+ * @param bytes - Input bytes.
+ * @throws Error if invalid length.
+ */
+function validateSha1Bytes(bytes: Uint8Array): void {
+  if (bytes.length !== 20)
+    throw new Error('Invalid SHA1 hash')
+}
+
+/**
+ * Validates SHA1 hash hex string.
+ * @param hex - Input hex string.
+ * @throws Error if invalid format.
+ */
+function validateSha1Hex(hex: string): void {
+  if (!/^[0-9A-F]{40}$/i.test(hex))
+    throw new Error('Invalid SHA1 hash')
+}
+
+// Exported aliases (refactored import/export names)
+export const B9 = bytesToHex
+export const Et = sha1Hex
+export const aD = sha1BytesFromHex
+export const nj = sha1HexFromBytes
+export const yS = sha1HexFromString

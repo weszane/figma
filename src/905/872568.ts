@@ -3,7 +3,7 @@ import { A } from "../905/970762";
 import { Ye } from "../905/75000";
 import { j3, hM } from "../905/581923";
 import { Au } from "../905/327738";
-import { lKz } from "../figma_app/763686";
+import { Confirmation } from "../figma_app/763686";
 import { c as _$$c } from "../905/94678";
 export function $$c0(e, t, i, n = {}) {
   let s = Ye(t, {
@@ -38,7 +38,7 @@ export const Y = function e(t, i) {
     "mainComponent" in t && (p[t.mainComponent] = e.visible);
   });
   let m = {};
-  for (let [e, i] of Object.entries(t.componentProperties(lKz.YES))) m[j3(e)] = i;
+  for (let [e, i] of Object.entries(t.componentProperties(Confirmation.YES))) m[j3(e)] = i;
   let h = {};
   function g({
     devFriendlyProp: e,

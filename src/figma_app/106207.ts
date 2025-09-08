@@ -1,8 +1,8 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { hKj, zkO, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { CustomPosition, SourceType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { J as _$$J } from "../905/931050";
@@ -11,7 +11,7 @@ import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Cx, yH } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
 import { Hx } from "../figma_app/147952";
@@ -168,16 +168,16 @@ async function G(e) {
   let {
     userTriggered = !0,
     cloneLocalStylesAndVariablesForTemplate,
-    templateInsertionDirection = hKj.RIGHT,
+    templateInsertionDirection = CustomPosition.RIGHT,
     templateCustomPosition,
     selectTemplateAfterInsertion
   } = e;
   let l = e.editScopeType;
-  l || (l = userTriggered ? zkO.USER : zkO.SYSTEM);
+  l || (l = userTriggered ? SourceType.USER : SourceType.SYSTEM);
   await $$U2({
     insert: async () => await $$B1(e).then(e => {
-      let d = glU;
-      return !!d && (l7(l, "insert-figjam-template", () => d.insertTemplateInCanvas(e, !!cloneLocalStylesAndVariablesForTemplate, templateInsertionDirection, selectTemplateAfterInsertion ?? userTriggered, !templateCustomPosition, templateCustomPosition ? templateCustomPosition.x : null, templateCustomPosition ? templateCustomPosition.y : null)), !0);
+      let d = Fullscreen;
+      return !!d && (permissionScopeHandler(l, "insert-figjam-template", () => d.insertTemplateInCanvas(e, !!cloneLocalStylesAndVariablesForTemplate, templateInsertionDirection, selectTemplateAfterInsertion ?? userTriggered, !templateCustomPosition, templateCustomPosition ? templateCustomPosition.x : null, templateCustomPosition ? templateCustomPosition.y : null)), !0);
     }),
     ...e
   });
@@ -289,7 +289,7 @@ async function W({
 function K(e) {
   return `DUPLICATE_FIGJAM_TEMPLATE_${e}`;
 }
-export let $$Y0 = nF((e, t) => {
+export let $$Y0 = createOptimistThunk((e, t) => {
   let r = K(t.templateIdentifier.file_key);
   let {
     dispatch

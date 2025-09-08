@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { Hu } from "../figma_app/516028";
 import { zt } from "../figma_app/84580";
@@ -24,7 +24,7 @@ export function $$y0() {
   let i = useDispatch();
   let y = !useAtomWithSubscription(Hu);
   let b = useCallback(() => {
-    i(to({
+    i(showModalHandler({
       type: Y,
       data: {
         titleText: getI18nString("upsell.move_file_videos.move_file_to_upload_videos_title"),

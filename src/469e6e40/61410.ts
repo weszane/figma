@@ -1,6 +1,6 @@
 import { A } from "../905/920142";
 import { Zy, vn, Ph } from "../figma_app/109538";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { mt } from "../figma_app/345997";
 if (443 == require.j) {}
 var $$$$l1 = (e => (e.ADD_ANNUAL_PLAN = "add_annual_plan", e.ADJUST_COTERM_SEATS = "adjust_coterm_seats", e.ADJUST_RENEWAL_SEATS = "adjust_renewal_seats", e.TRIAL_READ_ONLY = "trial_read_only", e))($$$$l1 || {});
@@ -12,7 +12,7 @@ export function $$o0(e) {
     perform: ({
       dispatch: e
     }) => {
-      e(to({
+      e(showModalHandler({
         type: Zy
       }));
     }
@@ -26,7 +26,7 @@ export function $$o0(e) {
     perform: ({
       dispatch: e
     }) => {
-      e(to({
+      e(showModalHandler({
         type: vn,
         data: {
           renewalDate: A(t.current_period_end).toDate()
@@ -38,7 +38,7 @@ export function $$o0(e) {
     perform: ({
       dispatch: e
     }) => {
-      e(to({
+      e(showModalHandler({
         type: Ph
       }));
     }

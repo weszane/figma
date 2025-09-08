@@ -1,8 +1,8 @@
 import { getComponentInfoById, getTypeInfoCached } from "../figma_app/664063";
 import { G1, Iu } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { XJn, NfO, mKm, AZ4, Egt, oVz, juq } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { FirstDraftHelpers, PluginHelpers, LayoutSizingMode, AssetSource, SceneGraphHelpers, DraftState, FileSourceType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -44,8 +44,8 @@ export async function $$C12(e, t) {
   let n = t.createNewSitesWebpage ? {
     x: 0,
     y: 0
-  } : XJn.getInsertionLocation(e.size.x);
-  l7.ai("first-draft-position-node", () => {
+  } : FirstDraftHelpers.getInsertionLocation(e.size.x);
+  permissionScopeHandler.ai("first-draft-position-node", () => {
     e.relativeTransform = {
       ...e.relativeTransform,
       m02: n.x,
@@ -53,16 +53,16 @@ export async function $$C12(e, t) {
     };
   });
   e.removeLocalOpacity();
-  let i = NfO.getViewportZoomScale();
+  let i = PluginHelpers.getViewportZoomScale();
   let a = await QZ({
     nodeId: e.guid,
     alwaysPan: !0,
     maxScale: 1
   });
-  if (a && ("inline" !== t.insertBehavior && (t.skipSelection || l7.ai("first-draft-select-node", () => {
+  if (a && ("inline" !== t.insertBehavior && (t.skipSelection || permissionScopeHandler.ai("first-draft-select-node", () => {
     let t = r.getCurrentPage();
     t && (t.directlySelectedNodes = [e]);
-  }), NfO.setViewportCenter({
+  }), PluginHelpers.setViewportCenter({
     x: a.centerX,
     y: a.centerY
   })), t.insertBehavior?.endsWith("-ease"))) {
@@ -72,29 +72,29 @@ export async function $$C12(e, t) {
       toVal: e,
       duration: 300,
       mutateFn: e => {
-        NfO.setViewportZoomScale(e);
+        PluginHelpers.setViewportZoomScale(e);
       }
     });
   }
 }
 export function $$w11(e) {
   let t = getSingletonSceneGraph().get(e);
-  if (t && ("FRAME" === t.type && "VStack" !== t.getSharedPluginData("jsx", "type") && 1 === t.childCount && "VStack" === t.childrenNodes[0].getSharedPluginData("jsx", "type") && (t = t.childrenNodes[0]), "FRAME" === t.type && "VStack" === t.getSharedPluginData("jsx", "type") && t.stackVerticalLayoutSize === mKm.HUG_CONTENT)) {
+  if (t && ("FRAME" === t.type && "VStack" !== t.getSharedPluginData("jsx", "type") && 1 === t.childCount && "VStack" === t.childrenNodes[0].getSharedPluginData("jsx", "type") && (t = t.childrenNodes[0]), "FRAME" === t.type && "VStack" === t.getSharedPluginData("jsx", "type") && t.stackVerticalLayoutSize === LayoutSizingMode.HUG_CONTENT)) {
     let e = t.childrenNodes.find(e => "true" === e.getSharedPluginData("jsx", "fillContainerHeight"));
     if (!e) return;
-    l7.ai("first-draft-fill-main-content-container", () => {
-      t.stackVerticalLayoutSize = mKm.FIXED;
+    permissionScopeHandler.ai("first-draft-fill-main-content-container", () => {
+      t.stackVerticalLayoutSize = LayoutSizingMode.FIXED;
       e.stackChildAlignSelf = "STRETCH";
-      e.stackVerticalLayoutSize = mKm.FILL_CONTAINER;
+      e.stackVerticalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
       t.update();
       e.minHeight = e.size.y;
-      t.stackVerticalLayoutSize = mKm.HUG_CONTENT;
-      e.stackVerticalLayoutSize = mKm.HUG_CONTENT;
+      t.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
+      e.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
     });
   }
 }
 function O(e) {
-  return "TEXT" === e.type && !0 === e.visible && ("HEIGHT" === e.textAutoResize || e.stackHorizontalLayoutSize === mKm.FILL_CONTAINER);
+  return "TEXT" === e.type && !0 === e.visible && ("HEIGHT" === e.textAutoResize || e.stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER);
 }
 function R(e) {
   if (e.stackLeftPadding > 0 && e.stackRightPadding > 0) return !0;
@@ -106,13 +106,13 @@ export function $$L14(e, t, r) {
   let n;
   let i = _F(e, ["FRAME", "INSTANCE"]);
   n = "LOCAL" === t.type ? {
-    type: AZ4.LOCAL,
-    key: XJn.getKitKey(t.pageId) || ""
+    type: AssetSource.LOCAL,
+    key: FirstDraftHelpers.getKitKey(t.pageId) || ""
   } : {
-    type: AZ4.LIBRARY,
+    type: AssetSource.LIBRARY,
     key: t.key
   };
-  l7.ai("first-draft-set-native-field", () => {
+  permissionScopeHandler.ai("first-draft-set-native-field", () => {
     for (let e of i) e.firstDraftData = {
       generationId: r ?? "",
       kit: n
@@ -149,7 +149,7 @@ function M(e) {
 }
 export function $$F13(e) {
   let t = _F(e, ["TEXT"]);
-  l7.ai("first-draft-rename-text-nodes-to-characters", () => {
+  permissionScopeHandler.ai("first-draft-rename-text-nodes-to-characters", () => {
     for (let e of t) e.name = e.characters;
   });
 }
@@ -309,7 +309,7 @@ function B(e) {
       continue;
     }
     if (o) {
-      if (!Egt.getAssetKeyForPublish(o.guid)) {
+      if (!SceneGraphHelpers.getAssetKeyForPublish(o.guid)) {
         let e = getComponentInfoById(o?.guid ?? "", {
           enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
         });
@@ -405,9 +405,9 @@ let V = _$$n(async function ({
   if (!(i = await Eo.getCanvas({
     canvas_url: h
   }))) return;
-  let g = NfO.deserializeProductComponentFromBuffer(key, i);
+  let g = PluginHelpers.deserializeProductComponentFromBuffer(key, i);
   let f = d.get(g);
-  f && "SYMBOL" === f.type && l7.ai("first-draft-swap-grouped-component", () => {
+  f && "SYMBOL" === f.type && permissionScopeHandler.ai("first-draft-swap-grouped-component", () => {
     t.swapComponent(f);
     $$L14(t, e, n);
   });
@@ -422,7 +422,7 @@ async function H({
     key,
     version = null
   } = (await Gh.getFirstDraftMatchGroup({
-    kit_key: XJn.getKitKey(e.pageId) ?? "",
+    kit_key: FirstDraftHelpers.getKitKey(e.pageId) ?? "",
     is_local: !0,
     group_name: C,
     description: r
@@ -432,7 +432,7 @@ async function H({
     let i = __(r);
     for (let r of _$$B([...i], {
       followInstances: !1
-    })) if (e === Egt.getAssetKeyForPublish(r.guid) && !t || t === Uk(r)) try {
+    })) if (e === SceneGraphHelpers.getAssetKeyForPublish(r.guid) && !t || t === Uk(r)) try {
       return getTypeInfoCached(r, {
         enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
       });
@@ -453,7 +453,7 @@ async function H({
   });
   if (_) {
     let r = getSingletonSceneGraph().get(_.defaultNodeId);
-    r && "SYMBOL" === r.type && l7.ai("first-draft-swap-grouped-component", () => {
+    r && "SYMBOL" === r.type && permissionScopeHandler.ai("first-draft-swap-grouped-component", () => {
       t.swapComponent(r);
       $$L14(t, e, i);
     });
@@ -580,7 +580,7 @@ export function $$$6({
       t && t.length > 0 && t.every(e => !e.visible) && n.add(e.guid);
     }
   }
-  l7.ai("first-draft-hide-empty-grid-rows", () => {
+  permissionScopeHandler.ai("first-draft-hide-empty-grid-rows", () => {
     for (let e of n) {
       let r = t.get(e);
       r && (r.visible = !1);
@@ -597,7 +597,7 @@ let X = _$$n(async function (e, t) {
 });
 export async function $$q10(e, t, r, n) {
   if ("LOCAL" === e.type || "USER_LIBRARY" === e.type || !t) return;
-  let i = r === oVz.CURRENT ? getSingletonSceneGraph() : new ReduxSceneGraph(juq.FIRST_DRAFT);
+  let i = r === DraftState.CURRENT ? getSingletonSceneGraph() : new ReduxSceneGraph(FileSourceType.FIRST_DRAFT);
   let c = i.get(t);
   if (c) {
     if (getFeatureFlags().first_draft_partial_detach) {
@@ -606,7 +606,7 @@ export async function $$q10(e, t, r, n) {
       for (let e of n) {
         let t = e.symbolId ? i.get(e.symbolId) : null;
         if (t) {
-          if (r === oVz.FIRST_DRAFT) {
+          if (r === DraftState.FIRST_DRAFT) {
             let e = t.isState ? t.parentNode?.stateGroupKey : t.componentKey;
             if (e) {
               l.add(e);
@@ -615,7 +615,7 @@ export async function $$q10(e, t, r, n) {
           } else {
             let e = t.isState ? t.parentGuid : t.guid;
             if (!e) continue;
-            let r = Egt.getAssetKeyForPublish(e);
+            let r = SceneGraphHelpers.getAssetKeyForPublish(e);
             if (!r) continue;
             l.add(r);
           }
@@ -624,30 +624,30 @@ export async function $$q10(e, t, r, n) {
       if (0 === l.size) return;
       try {
         let n = await X(e, Array.from(l));
-        l7.ai("first-draft-detach-generation", () => {
-          XJn.detachGeneratedDesignPartial(t, n, r);
+        permissionScopeHandler.ai("first-draft-detach-generation", () => {
+          FirstDraftHelpers.detachGeneratedDesignPartial(t, n, r);
         });
       } catch (e) {
         reportError(_$$e.AI_GENERATION, e);
       }
-    } else l7.ai("first-draft-detach-generation", () => {
-      XJn.detachGeneratedDesign(t, r);
+    } else permissionScopeHandler.ai("first-draft-detach-generation", () => {
+      FirstDraftHelpers.detachGeneratedDesign(t, r);
     });
-    n.detachVariables && l7.ai("first-draft-detach-variables", () => {
-      XJn.detachVariablesInGeneration(t, r);
+    n.detachVariables && permissionScopeHandler.ai("first-draft-detach-variables", () => {
+      FirstDraftHelpers.detachVariablesInGeneration(t, r);
     });
   }
 }
 export function $$J8(e) {
   let t = getSingletonSceneGraph().get(e);
-  t && l7.ai("first-draft-lock-node", () => {
+  t && permissionScopeHandler.ai("first-draft-lock-node", () => {
     t.locked = !0;
   });
 }
 export function $$Z15(e) {
   if (!e) return;
   let t = getSingletonSceneGraph().get(e);
-  t && l7.ai("first-draft-unlock-node", () => {
+  t && permissionScopeHandler.ai("first-draft-unlock-node", () => {
     t.locked = !1;
   });
 }
@@ -672,7 +672,7 @@ export const Ms = $$Y0;
 export const nY = $$W1;
 export const _Y = $$Q2;
 export const WY = function e(t) {
-  l7.ai("first-draft-optimize-auto-layout", () => {
+  permissionScopeHandler.ai("first-draft-optimize-auto-layout", () => {
     if (t.childCount > 0 && "NONE" !== t.stackMode) {
       "FRAME" === t.type && t.parentNode && "CANVAS" !== t.parentNode.type && (t.frameMaskDisabled = !0);
       t.update();
@@ -713,18 +713,18 @@ export const WY = function e(t) {
           symbolIds,
           includesAllChildren
         } = n;
-        let i = t.stackLeftPadding + t.stackRightPadding + t.stackSpacing * (t.childCount - 1) + t.childrenNodes.reduce((e, t) => t.stackHorizontalLayoutSize !== mKm.FILL_CONTAINER ? e + t.size.x : e, 0);
+        let i = t.stackLeftPadding + t.stackRightPadding + t.stackSpacing * (t.childCount - 1) + t.childrenNodes.reduce((e, t) => t.stackHorizontalLayoutSize !== LayoutSizingMode.FILL_CONTAINER ? e + t.size.x : e, 0);
         "HORIZONTAL" === t.stackMode && i >= 0.5 * t.size.x && (i <= t.size.x || t.childrenNodes.every(e => e.minWidth)) && t.childrenNodes.forEach(t => {
-          (includesAllChildren || "INSTANCE" === t.type && t.symbolId && symbolIds.has(t.symbolId)) && (t.stackHorizontalLayoutSize = mKm.FILL_CONTAINER);
+          (includesAllChildren || "INSTANCE" === t.type && t.symbolId && symbolIds.has(t.symbolId)) && (t.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER);
         });
       }
       t.childrenNodes.forEach(n => {
         switch (r) {
-          case mKm.FILL_CONTAINER:
-          case mKm.FIXED:
+          case LayoutSizingMode.FILL_CONTAINER:
+          case LayoutSizingMode.FIXED:
             switch (n.type) {
               case "FRAME":
-                n.stackHorizontalLayoutSize !== mKm.FILL_CONTAINER && (R(n) || n.childrenNodes.some(O)) && (n.stackHorizontalLayoutSize = mKm.FILL_CONTAINER);
+                n.stackHorizontalLayoutSize !== LayoutSizingMode.FILL_CONTAINER && (R(n) || n.childrenNodes.some(O)) && (n.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER);
                 e(n);
                 break;
               case "INSTANCE":
@@ -732,13 +732,13 @@ export const WY = function e(t) {
                   let e = n;
                   for (; e.parentNode && "CANVAS" !== e.parentNode.type;) {
                     let t = (e = e.parentNode).stackHorizontalLayoutSize;
-                    if (e.stackHorizontalLayoutSize = mKm.HUG_CONTENT, t === mKm.FIXED) break;
+                    if (e.stackHorizontalLayoutSize = LayoutSizingMode.HUG_CONTENT, t === LayoutSizingMode.FIXED) break;
                   }
-                } else "VERTICAL" === t.stackMode && R(n) && "NONE" !== n.stackMode && n.size.x > 0.5 * t.size.x && ("MIN" === t.stackCounterAlignItems || "MAX" === t.stackCounterAlignItems || n.size.x > t.size.x) ? n.stackHorizontalLayoutSize = mKm.FILL_CONTAINER : n.childCount > 0 && n.childrenNodes.every(O) && (n.stackHorizontalLayoutSize = mKm.FILL_CONTAINER);
+                } else "VERTICAL" === t.stackMode && R(n) && "NONE" !== n.stackMode && n.size.x > 0.5 * t.size.x && ("MIN" === t.stackCounterAlignItems || "MAX" === t.stackCounterAlignItems || n.size.x > t.size.x) ? n.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER : n.childCount > 0 && n.childrenNodes.every(O) && (n.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER);
             }
             break;
-          case mKm.HUG_CONTENT:
-            "TEXT" !== n.type && "NONE" === n.stackMode || "FRAME" === n.type && n.stackHorizontalLayoutSize === mKm.FIXED || (n.stackHorizontalLayoutSize = mKm.HUG_CONTENT);
+          case LayoutSizingMode.HUG_CONTENT:
+            "TEXT" !== n.type && "NONE" === n.stackMode || "FRAME" === n.type && n.stackHorizontalLayoutSize === LayoutSizingMode.FIXED || (n.stackHorizontalLayoutSize = LayoutSizingMode.HUG_CONTENT);
             "INSTANCE" !== n.type && e(n);
         }
       });
@@ -751,35 +751,35 @@ export const fE = $$$6;
 export const us = $$k7;
 export const OJ = $$J8;
 export const tG = function e(t, r) {
-  if (r?.isRecursiveCall || l7.ai("first-draft-auto-fill-parent", () => {
+  if (r?.isRecursiveCall || permissionScopeHandler.ai("first-draft-auto-fill-parent", () => {
     let e = t.parentNode;
     if (e?.getSharedPluginData("jsx", "type") === "VStack") try {
       e.stackReverseZIndex = !0;
       t.stackChildAlignSelf = "STRETCH";
-      t.stackHorizontalLayoutSize = mKm.FILL_CONTAINER;
+      t.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
     } catch (e) {
       reportError(_$$e.AI_GENERATION, e);
     }
     if (e?.getSharedPluginData("jsx", "type") === "HStack") try {
       t.stackChildAlignSelf = "STRETCH";
-      t.stackVerticalLayoutSize = mKm.FILL_CONTAINER;
+      t.stackVerticalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
     } catch (e) {
       reportError(_$$e.AI_GENERATION, e);
     }
-  }), "FRAME" === t.type) for (let r of (l7.ai("first-draft-auto-fill-parent", () => {
+  }), "FRAME" === t.type) for (let r of (permissionScopeHandler.ai("first-draft-auto-fill-parent", () => {
     if ("VStack" === t.getSharedPluginData("jsx", "type")) {
       t.stackReverseZIndex = !0;
       let e = t.childrenNodes[0];
       let r = e?.type === "INSTANCE" && e.symbolId ? getSingletonSceneGraph().get(e.symbolId) : null;
       let n = r?.size.x || null;
       if (n) try {
-        if (e) for (let e of (t.stackHorizontalLayoutSize === mKm.HUG_CONTENT && (t.minWidth = n), t.childrenNodes)) try {
+        if (e) for (let e of (t.stackHorizontalLayoutSize === LayoutSizingMode.HUG_CONTENT && (t.minWidth = n), t.childrenNodes)) try {
           if (e.getSharedPluginData("jsx", "type").startsWith("Component") && "VERTICAL" === e.stackMode) {
             let t = e.size.x;
-            for (let r of e.childrenNodes) r.size.x === t && "ABSOLUTE" !== r.stackPositioning && (r.stackChildAlignSelf = "STRETCH", r.stackHorizontalLayoutSize = mKm.FILL_CONTAINER);
+            for (let r of e.childrenNodes) r.size.x === t && "ABSOLUTE" !== r.stackPositioning && (r.stackChildAlignSelf = "STRETCH", r.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER);
           }
           e.stackChildAlignSelf = "STRETCH";
-          e.stackHorizontalLayoutSize = mKm.FILL_CONTAINER;
+          e.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
         } catch (e) {
           reportError(_$$e.AI_GENERATION, e);
         }
@@ -793,9 +793,9 @@ export const tG = function e(t, r) {
       let r = e?.type === "INSTANCE" && e.symbolId ? getSingletonSceneGraph().get(e.symbolId) : null;
       let n = r?.size.y || null;
       if (n) try {
-        if (e) for (let e of (t.stackVerticalLayoutSize === mKm.HUG_CONTENT && (t.minHeight = n), t.childrenNodes)) try {
+        if (e) for (let e of (t.stackVerticalLayoutSize === LayoutSizingMode.HUG_CONTENT && (t.minHeight = n), t.childrenNodes)) try {
           e.stackChildAlignSelf = "STRETCH";
-          e.stackVerticalLayoutSize = mKm.FILL_CONTAINER;
+          e.stackVerticalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
         } catch (e) {
           reportError(_$$e.AI_GENERATION, e);
         }

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { rcl, glU } from "../figma_app/763686";
+import { Command, Fullscreen } from "../figma_app/763686";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { SK, ez } from "../905/125333";
@@ -119,8 +119,8 @@ export function $$z2(e) {
     let n = Jc.get(shapeWithTextType);
     if (!n) return;
     let a = Qd();
-    let o = a.get(n)?.actionEnum ?? rcl.SET_TOOL_DEFAULT;
-    glU?.triggerActionEnumInUserEditScope(o, {
+    let o = a.get(n)?.actionEnum ?? Command.SET_TOOL_DEFAULT;
+    Fullscreen?.triggerActionEnumInUserEditScope(o, {
       source: e
     });
   }, [i, shapeWithTextType, e]);

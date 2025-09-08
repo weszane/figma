@@ -9,7 +9,7 @@ import { H as _$$H } from "../905/56919";
 import { i as _$$i } from "../905/718764";
 import { N as _$$N } from "../905/130112";
 import { E as _$$E } from "../905/632989";
-import { NLJ, glU, zkO } from "../figma_app/763686";
+import { DesignGraphElements, Fullscreen, SourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { P as _$$P } from "../vendor/348225";
@@ -304,10 +304,10 @@ function eg({
   let S = dH();
   let w = _$$L();
   useEffect(() => {
-    l || S === NLJ.SELECT || S === NLJ.HAND_SELECT || y();
+    l || S === DesignGraphElements.SELECT || S === DesignGraphElements.HAND_SELECT || y();
   }, [S, y, l]);
   useEffect(() => {
-    T && S !== NLJ.SELECT && S !== NLJ.HAND_SELECT && glU?.triggerAction("set-tool-default", null);
+    T && S !== DesignGraphElements.SELECT && S !== DesignGraphElements.HAND_SELECT && Fullscreen?.triggerAction("set-tool-default", null);
   }, [T, S]);
   useLayoutEffect(() => {
     h(e => {
@@ -367,7 +367,7 @@ function eg({
           name: e.name,
           position: i
         }));
-        glU?.triggerAction("set-tool-default", null);
+        Fullscreen?.triggerAction("set-tool-default", null);
         break;
       case "ACTION":
         y();
@@ -741,7 +741,7 @@ function eb(e) {
         let e = p.current;
         if (e) {
           let t = zG(e.getBoundingClientRect());
-          PK(url, stamp.label || "", Math.round(t.x), Math.round(t.y), null, zkO.USER);
+          PK(url, stamp.label || "", Math.round(t.x), Math.round(t.y), null, SourceType.USER);
         }
       }
       u(e => e + 1);

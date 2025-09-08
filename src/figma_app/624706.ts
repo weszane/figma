@@ -25,8 +25,8 @@ import { bL as _$$bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { A as _$$A2 } from "../figma_app/849799";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to as _$$to, Ce } from "../905/156213";
-import { Ju, ZU } from "../905/102752";
+import { showModalHandler, hideModal } from "../905/156213";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Ex, zE } from "../figma_app/919079";
 import { c$, wv as _$$wv, X3 } from "../figma_app/236327";
 import { RW } from "../figma_app/637027";
@@ -45,7 +45,7 @@ import { yJ } from "../figma_app/24841";
 import { b as _$$b2 } from "../905/985254";
 import { Fn } from "../figma_app/976749";
 import { hx } from "../figma_app/290668";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { q5 } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { cBX } from "../figma_app/43951";
@@ -86,8 +86,8 @@ import { I as _$$I } from "../905/641938";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { LN } from "../figma_app/514043";
-import { b as _$$b3 } from "../905/165519";
-import { tY as _$$tY } from "../figma_app/831101";
+import { UpsellModalType } from "../905/165519";
+import { SubscriptionType } from "../figma_app/831101";
 import { hK } from "../5132/334833";
 import { Jn } from "../905/17223";
 import { sx as _$$sx } from "../905/941192";
@@ -108,7 +108,7 @@ import { T as _$$T, e as _$$e3 } from "../905/949616";
 import { W as _$$W } from "../905/423575";
 import { j as _$$j } from "../905/270643";
 import { D as _$$D } from "../905/629114";
-import { glU, KXw } from "../figma_app/763686";
+import { Fullscreen, ColorConversionEnum } from "../figma_app/763686";
 import { Fb } from "../figma_app/819458";
 import { A as _$$A7 } from "../svg/728314";
 import { A as _$$A8 } from "../svg/667065";
@@ -126,7 +126,7 @@ let d = memo(function (e) {
   });
 });
 var h = _;
-let D = Ju(function (e) {
+let D = registerModal(function (e) {
   let t = hS(e);
   return jsx(_$$bL, {
     manager: t,
@@ -485,7 +485,7 @@ let eU = {
     $$css: !0
   }
 };
-let eB = Ju(function (e) {
+let eB = registerModal(function (e) {
   let t = hS(e);
   let r = useSelector(e => e.userFlags);
   return jsx(_$$bL, {
@@ -535,7 +535,7 @@ function eH(...e) {
     }
   };
 }
-let e4 = Ju(function ({
+let e4 = registerModal(function ({
   teamId: e,
   dismissModal: t,
   maxSeenCount: r = 1 / 0
@@ -551,11 +551,11 @@ let e4 = Ju(function ({
   });
   let c = jsx(_$$V, {
     onClick: () => {
-      o(_$$to({
+      o(showModalHandler({
         type: _$$V2,
         data: {
           teamId: e ?? void 0,
-          upsellSource: _$$b3.COLLECTIVE_UPSELLS_MODAL,
+          upsellSource: UpsellModalType.COLLECTIVE_UPSELLS_MODAL,
           openCheckoutInNewTab: !0
         }
       }));
@@ -567,7 +567,7 @@ let e4 = Ju(function ({
     children: jsx(_$$n, {
       ...s,
       dismissModal: () => {
-        t ? t() : o(Ce());
+        t ? t() : o(hideModal());
       },
       secondaryBtn: c,
       clickPrimaryBtn: () => {
@@ -575,12 +575,12 @@ let e4 = Ju(function ({
           teamId: e,
           openInNewTab: !0,
           currency: LN(),
-          billingPeriod: _$$tY.ANNUAL
-        })) : o(_$$to({
+          billingPeriod: SubscriptionType.ANNUAL
+        })) : o(showModalHandler({
           type: dR,
           data: {
             plan: _$$I.PRO,
-            upsellSource: _$$b3.COLLECTIVE_UPSELLS_MODAL
+            upsellSource: UpsellModalType.COLLECTIVE_UPSELLS_MODAL
           }
         }));
       }
@@ -684,14 +684,14 @@ function tr({
       ctaPrimaryText: getI18nString("help_widget.collective_upsells_widget.cta_see_how"),
       imgSrc: tt,
       clickPrimaryBtn: () => {
-        c(_$$to({
+        c(showModalHandler({
           type: e4,
           data: {
             teamId: s,
             editorType: o,
             dismissModal: () => {
               t();
-              c(Ce());
+              c(hideModal());
             }
           }
         }));
@@ -2150,7 +2150,7 @@ function tC({
     })
   });
 }
-let tw = Ju(function () {
+let tw = registerModal(function () {
   let [e, t] = useState(null);
   let [r, a] = useState(!0);
   let s = hS({
@@ -2207,7 +2207,7 @@ let tw = Ju(function () {
       })
     })
   });
-}, "FIGJAM_TRY_FAQ_MODAL", ZU.YES);
+}, "FIGJAM_TRY_FAQ_MODAL", ModalSupportsBackground.YES);
 function tR({
   helpWidgetOnboardingKey: e
 }) {
@@ -2288,12 +2288,12 @@ function tH(e, t) {
       red,
       green,
       blue
-    } = glU.applyConversionToColor({
+    } = Fullscreen.applyConversionToColor({
       red: n,
       green: i,
       blue: a,
       alpha: t
-    }, KXw.DISPLAY_P3_TO_SRGB);
+    }, ColorConversionEnum.DISPLAY_P3_TO_SRGB);
     return {
       r: red,
       g: green,
@@ -2843,11 +2843,11 @@ let t7 = class e extends o6 {
     };
     this.onClickKeyboardShortcuts = () => {
       this.closeDropdownAndLogEvent("showing_keyboard_shortcuts_modal");
-      Y5.isReady() && Y5.triggerAction("toggle-keyboard-shortcuts");
+      fullscreenValue.isReady() && fullscreenValue.triggerAction("toggle-keyboard-shortcuts");
     };
     this.onClickLanguageSelector = () => {
       this.logEvent("help_widget_change_languages");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: kA,
         data: {
           source: IO.HELP
@@ -2855,7 +2855,7 @@ let t7 = class e extends o6 {
       }));
     };
     this.onClickKeyboardLayoutSelector = () => {
-      Y5.isReady() && (this.props.dispatch(FU({
+      fullscreenValue.isReady() && (this.props.dispatch(FU({
         tab: "layout"
       })), this.onClickKeyboardShortcuts());
     };
@@ -2891,7 +2891,7 @@ let t7 = class e extends o6 {
     };
     this.onClickReportAbuse = () => {
       this.closeDropdownAndLogEvent("help_widget_report_abuse");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: D
       }));
     };
@@ -2899,7 +2899,7 @@ let t7 = class e extends o6 {
       isPerformanceIssue: e
     }) => {
       this.closeDropdownAndLogEvent("help_widget_bug_report");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: e ? cl : bb,
         data: {
           isPerformanceIssue: e
@@ -2909,7 +2909,7 @@ let t7 = class e extends o6 {
     });
     this.onClickChangeFeatureFlags = () => {
       this.closeDropdownAndLogEvent("change_feature_flags");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: qf,
         data: {},
         showModalsBeneath: !0
@@ -2917,7 +2917,7 @@ let t7 = class e extends o6 {
     };
     this.onClickResetUserFlags = () => {
       this.closeDropdownAndLogEvent("reset_user_flags");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: eB,
         data: {},
         showModalsBeneath: !0
@@ -2964,7 +2964,7 @@ let t7 = class e extends o6 {
     };
     this.onClickFigjamTryFAQ = () => {
       this.closeDropdownAndLogEvent("open_figjam_try_faq");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: tw,
         showModalsBeneath: !0
       }));
@@ -2999,7 +2999,7 @@ let t7 = class e extends o6 {
     };
     this.onClickSetCommitSHA = dp(this, Pt("setCommitSHA", "click") || "", () => {
       this.closeDropdownAndLogEvent("help_widget_set_commit_sha");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: _$$H,
         data: {},
         showModalsBeneath: !0
@@ -3176,7 +3176,7 @@ let t7 = class e extends o6 {
       shouldShowUnauth: !1
     }, {
       type: "option",
-      shouldShow: () => Y5.isReady(),
+      shouldShow: () => fullscreenValue.isReady(),
       onClick: this.onClickKeyboardShortcuts,
       label: jsxs(Fragment, {
         children: [renderI18nText("help_widget.menu.keyboard_shortcuts"), jsx(_$$S, {
@@ -3195,7 +3195,7 @@ let t7 = class e extends o6 {
       type: "option",
       shouldShow: () => this.props.showDiscoverMoreOption,
       onClick: () => {
-        this.props.dispatch(_$$to({
+        this.props.dispatch(showModalHandler({
           type: e4,
           data: {
             teamId: this.props.teamId,
@@ -3219,12 +3219,12 @@ let t7 = class e extends o6 {
       })
     }, {
       type: "separator",
-      shouldShow: () => Y5.isReady(),
+      shouldShow: () => fullscreenValue.isReady(),
       shouldShowUnauth: !0
     }, {
       type: "option",
       onClick: this.onClickKeyboardLayoutSelector,
-      shouldShow: () => Y5.isReady(),
+      shouldShow: () => fullscreenValue.isReady(),
       label: renderI18nText("help_widget.menu.change_keyboard_layout")
     }, {
       type: "option",

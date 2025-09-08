@@ -1,4 +1,4 @@
-import { hMR } from "../figma_app/763686";
+import { CorePerfInfo } from "../figma_app/763686";
 import { logDebug } from "../905/714362";
 import { K } from "../905/63322";
 import { o_, aW } from "../figma_app/527873";
@@ -6,8 +6,8 @@ let o = 64 * o_;
 function l() {
   let e = aW();
   if (!e) return null;
-  let t = hMR?.getTotalUsedHeapMemory() || 0;
-  let r = hMR?.getJsBufferMemory() || 0;
+  let t = CorePerfInfo?.getTotalUsedHeapMemory() || 0;
+  let r = CorePerfInfo?.getJsBufferMemory() || 0;
   return e < t ? null : {
     totalJSHeapMemory: e,
     wasmMemory: t,

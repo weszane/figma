@@ -1,9 +1,9 @@
 import { QD } from "../figma_app/153916";
 import { s as _$$s } from "../905/573154";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { J7 } from "../figma_app/650409";
-export let $$o0 = nF((e, t, {
+export let $$o0 = createOptimistThunk((e, t, {
   liveStore: a
 }) => {
   let i = e.getState().currentUserOrgId;
@@ -25,4 +25,4 @@ export let $$o0 = nF((e, t, {
     console.error(e);
   });
 });
-export const Z = $$o0; 
+export const Z = $$o0;

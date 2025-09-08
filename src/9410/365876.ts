@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { glU, rcl } from "../figma_app/763686";
+import { Fullscreen, Command } from "../figma_app/763686";
 import { analyticsEventManager } from "../905/449184";
 import { $v } from "../figma_app/370763";
 import { LR } from "../figma_app/120210";
@@ -9,7 +9,7 @@ export function $$d0() {
   return useCallback(t => {
     analyticsEventManager.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_open", {});
     e();
-    glU && (t?.setToolToDefault ?? !0) && glU.triggerActionEnum(rcl.SET_TOOL_DEFAULT, {});
+    Fullscreen && (t?.setToolToDefault ?? !0) && Fullscreen.triggerActionEnum(Command.SET_TOOL_DEFAULT, {});
   }, [e]);
 }
 export function $$c1() {

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { B9 } from "../figma_app/722362";
 import { $ } from "../905/330495";
 export function $$o0(e) {
@@ -26,7 +26,7 @@ export function $$o0(e) {
       let n = t.get(r.symbolId);
       if (n) {
         if (e) {
-          if (e.guid !== n.guid) return oV;
+          if (e.guid !== n.guid) return MIXED_MARKER;
         } else e = n;
       }
     }

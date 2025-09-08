@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, forwardRef, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { xN } from "../figma_app/492908";
+import { nearlyEqual } from "../figma_app/492908";
 import { d as _$$d } from "../905/976845";
 import { G as _$$G } from "../905/117393";
 import { oB, qN, w_ } from "../figma_app/273493";
-import { NVY, NLJ } from "../figma_app/763686";
+import { ColorFormatEnum, DesignGraphElements } from "../figma_app/763686";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { c2 } from "../figma_app/243213";
@@ -16,7 +16,7 @@ import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { z5, rC } from "../905/713722";
 import { o1 } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { dq } from "../905/845253";
 import { Xo } from "../figma_app/482495";
@@ -51,16 +51,16 @@ export function $$X0(e, t, r) {
     ...t,
     s: e.s
   });
-  let n = xN(e.h, 0) && xN(t.h, 1);
-  let i = xN(e.h, 1) && xN(t.h, 0);
-  (xN(r.r, r.g) && xN(r.r, r.b) || n || i) && (t = {
+  let n = nearlyEqual(e.h, 0) && nearlyEqual(t.h, 1);
+  let i = nearlyEqual(e.h, 1) && nearlyEqual(t.h, 0);
+  (nearlyEqual(r.r, r.g) && nearlyEqual(r.r, r.b) || n || i) && (t = {
     ...t,
     h: e.h
   });
   return t;
 }
 let q = (e, t) => ({
-  hslva: t === NVY.HSL ? oB(e) : qN(e),
+  hslva: t === ColorFormatEnum.HSL ? oB(e) : qN(e),
   rgba: e
 });
 let J = e => {
@@ -187,7 +187,7 @@ export function $$Q2({
       paintPickerTab,
       paintPickerFilter
     } = J(t.paintPickerAnalytics?.paintType);
-    Y5.triggerAction("toggle-dropper", {
+    fullscreenValue.triggerAction("toggle-dropper", {
       canAcceptStyles: t.canAcceptStyles,
       canAcceptVariables: t.canAcceptVariables,
       pickerShown: k?.id,
@@ -197,7 +197,7 @@ export function $$Q2({
     });
   };
   if ("whiteboard" === t.displayType) return (() => {
-    let i = t.currentTool === NLJ.DROPPER_COLOR;
+    let i = t.currentTool === DesignGraphElements.DROPPER_COLOR;
     return jsxs("div", {
       className: BA,
       children: [jsxs("div", {
@@ -259,16 +259,16 @@ export function $$Q2({
       containerRef: t.containerRef,
       recordingKey: e,
       showNewUI: V
-    }), t.colorFormat === NVY.HEX && jsx($$er4, {
+    }), t.colorFormat === ColorFormatEnum.HEX && jsx($$er4, {
       recordingKey: Pt(e, "hexInput"),
       ...et
-    }), t.colorFormat === NVY.RGB && jsx($$en3, {
+    }), t.colorFormat === ColorFormatEnum.RGB && jsx($$en3, {
       recordingKey: Pt(e, "rgbInput"),
       ...et
-    }), t.colorFormat === NVY.CSS && jsx($$ei6, {
+    }), t.colorFormat === ColorFormatEnum.CSS && jsx($$ei6, {
       recordingKey: Pt(e, "cssInput"),
       ...et
-    }), (t.colorFormat === NVY.HSL || t.colorFormat === NVY.HSB) && jsx($$ea5, {
+    }), (t.colorFormat === ColorFormatEnum.HSL || t.colorFormat === ColorFormatEnum.HSB) && jsx($$ea5, {
       value: r.hslva,
       changeCallback: es,
       recordingKey: Pt(e, "hslvInput"),
@@ -293,7 +293,7 @@ export function $$Q2({
             [TD]: V
           }),
           children: V ? jsx(_$$d, {
-            "aria-expanded": t.currentTool === NLJ.DROPPER_COLOR,
+            "aria-expanded": t.currentTool === DesignGraphElements.DROPPER_COLOR,
             "aria-label": getI18nString("fullscreen.properties_panel.color_picker.sample_color"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
@@ -303,7 +303,7 @@ export function $$Q2({
             onClick: ed,
             children: jsx(_$$G, {})
           }) : jsx(YW, {
-            selected: t.currentTool === NLJ.DROPPER_COLOR,
+            selected: t.currentTool === DesignGraphElements.DROPPER_COLOR,
             onMouseDown: ed,
             recordingKey: Pt(e, "dropperButton"),
             "data-tooltip-type": Ib.TEXT,

@@ -1,17 +1,17 @@
 import { useMemo, useCallback, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { tKW } from "../figma_app/763686";
+import { MeasurementUnit } from "../figma_app/763686";
 import s from "../vendor/3757";
 import { debugState } from "../905/407919";
 import { U } from "../figma_app/901889";
 import { getI18nString } from "../905/303541";
 import { v4, AC, QN } from "../figma_app/655139";
-import { MT, uz, LK, NU, p as _$$p, Ap } from "../905/359509";
+import { FIGMA_PROPERTIES, WEB, ANDROID, ANDROID_XML, IOS as _$$p, IOS_UIKIT } from "../905/359509";
 import { D8, ZA, GL, zZ, dW } from "../905/515076";
 import { S0 } from "../figma_app/844435";
 import { d1 } from "../figma_app/603466";
-import { Wt, ZV } from "../figma_app/155287";
-import { X } from "../905/661977";
+import { isActionSchema, isSelectSchema } from "../figma_app/155287";
+import { findCodegenLanguage } from "../905/661977";
 import { ip, kn, Uh } from "../905/762943";
 var o = s;
 export function $$y13(e) {
@@ -44,17 +44,17 @@ export function $$T2() {
 export function $$I7(e) {
   let t = v4();
   let r = e ?? t;
-  let n = $$y13(r.id)?.unit ?? tKW.PIXEL;
-  return "first-party" === r.type && r.id === MT ? tKW.PIXEL : n;
+  let n = $$y13(r.id)?.unit ?? MeasurementUnit.PIXEL;
+  return "first-party" === r.type && r.id === FIGMA_PROPERTIES ? MeasurementUnit.PIXEL : n;
 }
 export function $$S12(e) {
   let t = v4();
   let r = e ?? t;
   let {
-    unit = tKW.PIXEL,
+    unit = MeasurementUnit.PIXEL,
     scaleFactor = 1
   } = $$y13(r.id);
-  return "first-party" === r.type && r.id === MT ? 1 : unit === tKW.SCALED ? scaleFactor : 1;
+  return "first-party" === r.type && r.id === FIGMA_PROPERTIES ? 1 : unit === MeasurementUnit.SCALED ? scaleFactor : 1;
 }
 let v = ({
   preferences: e,
@@ -118,13 +118,13 @@ export function $$L1(e, t) {
 }
 export function $$P11(e) {
   switch (e) {
-    case uz:
+    case WEB:
       return getI18nString("dev_handoff.alternative_units.rem_unit");
-    case LK:
-    case NU:
+    case ANDROID:
+    case ANDROID_XML:
       return getI18nString("dev_handoff.alternative_units.dp_unit");
     case _$$p:
-    case Ap:
+    case IOS_UIKIT:
       return getI18nString("dev_handoff.alternative_units.pt_unit");
     default:
       return getI18nString("dev_handoff.alternative_units.rem_unit");
@@ -143,7 +143,7 @@ export function $$M14(e, t) {
   let n = e ?? r;
   let i = $$I7(n);
   let s = $$L1(n, t);
-  return i === tKW.PIXEL ? kn.pixel : s;
+  return i === MeasurementUnit.PIXEL ? kn.pixel : s;
 }
 export function $$F8({
   localCodeLanguage: e,
@@ -174,8 +174,8 @@ export function $$j5({
 }) {
   let s = [];
   if (!n || "first-party" === r.type || GL(n) !== r.id) return s;
-  for (let o of zZ(n, X(n, r.pluginLanguage))) {
-    e && Wt(o) && s.push({
+  for (let o of zZ(n, findCodegenLanguage(n, r.pluginLanguage))) {
+    e && isActionSchema(o) && s.push({
       name: o.propertyName,
       displayText: o?.label || o.propertyName,
       callback: () => d1.codegenPreferencesChange({
@@ -183,7 +183,7 @@ export function $$j5({
       }),
       recordingKey: o.propertyName
     });
-    t && ZV(o) && s.push({
+    t && isSelectSchema(o) && s.push({
       name: o.propertyName,
       recordingKey: o.propertyName,
       displayText: o?.label ?? o.propertyName,
@@ -209,7 +209,7 @@ export function $$U9() {
   useEffect(() => {
     if (!t) return;
     let r = e.pluginLanguage;
-    r && dW(t, X(t, r));
+    r && dW(t, findCodegenLanguage(t, r));
   }, [e, t]);
 }
 export const $Q = $$N0;

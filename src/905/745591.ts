@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useState, useLayoutEffect } from "react";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 export let $$s0 = forwardRef(({
   children: e,
   role: t = "status",
@@ -12,7 +12,7 @@ export let $$s0 = forwardRef(({
   return jsx("div", {
     ref: o,
     ...i,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...s,
     role: t,
     children: l ? void 0 : e

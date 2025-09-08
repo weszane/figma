@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { i } from "../905/718764";
 import { $n } from "../905/521428";
-import { J0O, glU, rXF } from "../figma_app/763686";
+import { ComponentPropType, Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { X as _$$X } from "../905/606795";
@@ -20,10 +20,10 @@ import { F as _$$F } from "../905/302958";
 import { XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP } from "../figma_app/933328";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { eY } from "../figma_app/722362";
 import { PW } from "../figma_app/633080";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { S as _$$S } from "../905/459477";
 import { D as _$$D, x as _$$x } from "../905/1253";
 import { NO } from "../905/498139";
@@ -35,7 +35,7 @@ import { D as _$$D2 } from "../905/589275";
 import { bL } from "../905/911410";
 import { vo, Y9, nB } from "../figma_app/272243";
 import { p as _$$p } from "../905/185998";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { A as _$$A } from "../vendor/850789";
 import { Ib } from "../905/129884";
 import { u as _$$u } from "../905/419626";
@@ -141,7 +141,7 @@ function K({
       borderBottom: !0,
       entrypointForLogging: _$$S.PreferredValuesPickerEntrypoint.CREATE_COMPONENT_PROP_PICKER,
       onSetComponents: _,
-      propDefType: J0O.SLOT,
+      propDefType: ComponentPropType.SLOT,
       recordingKey: "create-prop-modal-preferred-values-picker",
       removeComponents: e => f(e, Kn.REMOVE),
       swapPickerId: "create-prop-modal-preferred-values-picker",
@@ -175,7 +175,7 @@ function Y({
       onMouseDown: i,
       onPointerDown: i,
       className: "x78zum5 xdt5ytf x167g77z xnm25rq xyfqnmn",
-      children: [jsx(J, {
+      children: [jsx(Label, {
         className: "slot_component_prop_create_modal--formLabel--aGlMC",
         children: e
       }), t]
@@ -185,7 +185,7 @@ function Y({
 let q = "create_component_prop_modal--subheading--TkKeN";
 let $ = "create_component_prop_modal--fieldContainer--PrQC-";
 let Z = "create_component_prop_modal--input--LQ1pB create_component_prop_modal--baseInput--jOOW9 props_panel--input--pkL0- raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u sf_pro--uiFontWithSFProFallback--m-p9V";
-let $$X0 = Ju(function (e) {
+let $$X0 = registerModal(function (e) {
   let {
     propType,
     prePopulatedDefaultValue,
@@ -221,7 +221,7 @@ let $$X0 = Ju(function (e) {
   });
   let [er, ea] = useState(prePopulatedDefaultValue ?? Ql(propType));
   let [es, eo] = i0(prePopulatedDefaultValue, H);
-  let el = useMemo(() => propType === J0O.INSTANCE_SWAP && er ? wd([er], H) : null, [er, propType, H]);
+  let el = useMemo(() => propType === ComponentPropType.INSTANCE_SWAP && er ? wd([er], H) : null, [er, propType, H]);
   let ed = c9({
     propType,
     propName: K,
@@ -235,7 +235,7 @@ let $$X0 = Ju(function (e) {
     });
   };
   let eu = useCallback(() => {
-    U(Ce());
+    U(hideModal());
     U(vq());
   }, [U]);
   let ep = DD({
@@ -244,7 +244,7 @@ let $$X0 = Ju(function (e) {
     preferredProductComponents: es
   });
   let em = useCallback(e => {
-    glU.wouldCreateCycleUnderParent(singleSelectedNode?.guid || "", e) ? (U(_$$F.enqueue({
+    Fullscreen.wouldCreateCycleUnderParent(singleSelectedNode?.guid || "", e) ? (U(_$$F.enqueue({
       message: getI18nString("design_systems.component_properties.choose_default_instance_value_cycle")
     })), ea("")) : (U(_$$F.clearAll()), ea(e));
   }, [U, singleSelectedNode?.guid]);
@@ -263,17 +263,17 @@ let $$X0 = Ju(function (e) {
     return jsx(NO, {
       initialPosition: ey,
       initialVariableValue: WI(e, er),
-      resolvedType: e === rXF.TEXT_DATA ? rXF.STRING : e,
+      resolvedType: e === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : e,
       onCreateVariable: lQ,
       onClose: () => {
-        isInstanceSwapPickerShown ? U(vq()) : U(Ce());
+        isInstanceSwapPickerShown ? U(vq()) : U(hideModal());
         U(XE());
       },
       refField,
       componentPropOnly: !0
     });
   }
-  return getFeatureFlags().dse_slots && propType === J0O.SLOT ? jsx(W, {
+  return getFeatureFlags().dse_slots && propType === ComponentPropType.SLOT ? jsx(W, {
     initialPosition: ey,
     onCreatePropSubmit: ({
       propName: e,
@@ -284,20 +284,20 @@ let $$X0 = Ju(function (e) {
         defaultValue: void 0,
         description: t
       });
-      U(Ce());
+      U(hideModal());
     },
     defaultName: er?.propName ?? defaultPropName,
     defaultDescription: er?.propDescription,
     preferredProductComponents: es,
     onSetPreferredProductComponents: eo,
-    onClose: () => U(Ce())
+    onClose: () => U(hideModal())
   }) : jsxs(Xj, {
     initialWidth: wh,
     contentContainerClassName: "create_component_prop_modal--modal--Ln3y-",
     onClose: isInstanceSwapPickerShown ? () => {
       U(vq());
     } : () => {
-      U(Ce());
+      U(hideModal());
     },
     onClick: isInstanceSwapPickerShown ? () => U(vq()) : void 0,
     initialPosition: eA,
@@ -330,7 +330,7 @@ let $$X0 = Ju(function (e) {
           onKeyUp,
           onMouseLeave,
           onMouseUp,
-          placeholder: propType === J0O.VARIANT ? "Property" : "",
+          placeholder: propType === ComponentPropType.VARIANT ? "Property" : "",
           recordingKey: Pt("componentPropName", xb(propType)),
           value: K
         })]
@@ -338,9 +338,9 @@ let $$X0 = Ju(function (e) {
         className: $,
         children: [jsx("label", {
           className: q,
-          htmlFor: propType === J0O.INSTANCE_SWAP ? _$$D : propType === J0O.VARIANT ? "create-component-prop-variant-input" : void 0,
+          htmlFor: propType === ComponentPropType.INSTANCE_SWAP ? _$$D : propType === ComponentPropType.VARIANT ? "create-component-prop-variant-input" : void 0,
           children: renderI18nText("design_systems.component_properties.default_value")
-        }), propType === J0O.INSTANCE_SWAP && jsx("div", {
+        }), propType === ComponentPropType.INSTANCE_SWAP && jsx("div", {
           className: "create_component_prop_modal--selectInput--Oom9E",
           children: jsx(_$$x, {
             pickerID: "create-prop-modal-instance-swap-picker",
@@ -360,7 +360,7 @@ let $$X0 = Ju(function (e) {
             },
             entrypointForLogging: _$$S.InstancePickerEntrypoint.CREATE_COMPONENT_PROP_PICKER
           })
-        }), propType === J0O.VARIANT && jsx(u2, {
+        }), propType === ComponentPropType.VARIANT && jsx(u2, {
           className: Z,
           id: "create-component-prop-variant-input",
           onChange: e => ea(e.currentTarget.value),
@@ -369,7 +369,7 @@ let $$X0 = Ju(function (e) {
           defaultValue: er || "",
           autoCorrect: "off"
         })]
-      }), propType === J0O.INSTANCE_SWAP && jsx(_$$D2, {
+      }), propType === ComponentPropType.INSTANCE_SWAP && jsx(_$$D2, {
         addComponents: e => eh(e, Kn.ADD),
         borderBottom: !0,
         entrypointForLogging: _$$S.PreferredValuesPickerEntrypoint.CREATE_COMPONENT_PROP_PICKER,

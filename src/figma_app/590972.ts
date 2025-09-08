@@ -56,7 +56,7 @@ import { w as _$$w } from "../905/893785";
 import { J as _$$J3 } from "../905/296347";
 import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { $$in, WX } from "../figma_app/350203";
 import { j6, fu } from "../figma_app/831799";
 import { Yw, Of } from "../905/201596";
@@ -157,7 +157,7 @@ function eO({
   } = j6();
   let X = _$$H(trackEvent);
   let q = useCallback(() => {
-    Y(Ce());
+    Y(hideModal());
     X.current($$in, {
       step: WX.CLOSED
     });
@@ -638,7 +638,7 @@ function eP({
     }), d.current?.("errors_in_form"));
   }, [e, h, d, _]);
   let y = useCallback(() => {
-    l(Ce());
+    l(hideModal());
   }, [l]);
   let [b, T] = useState(_$$X.STOPPED);
   let v = b === _$$X.PLAYING;

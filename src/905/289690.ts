@@ -1,6 +1,6 @@
 import { z, Ip } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { fileEntityModel } from "../905/806985";
 import { WU } from "../figma_app/35887";
@@ -16,12 +16,12 @@ let c = z.object({
 });
 let $$u0 = new class {
   constructor() {
-    this.RecentFilesOrgIdSchemaValidator = YV("RecentFilesOrgIdSchemaValidator", c, null, !1);
+    this.RecentFilesOrgIdSchemaValidator = createMetaValidator("RecentFilesOrgIdSchemaValidator", c, null, !1);
   }
   getRecentFiles(e) {
     return this.RecentFilesOrgIdSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/recent_files", td.toAPIParameters({
+    }) => await t.get("/api/recent_files", APIParameterUtils.toAPIParameters({
       ...e,
       fuid: getInitialOptions().user_data?.id
     })));

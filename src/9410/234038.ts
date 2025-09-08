@@ -1,4 +1,4 @@
-import { xN } from "../figma_app/492908";
+import { nearlyEqual } from "../figma_app/492908";
 import { oB } from "../figma_app/273493";
 import { HD, F_, tK } from "../figma_app/191804";
 import { lH, Yx, lg, Dk } from "../figma_app/18582";
@@ -33,7 +33,7 @@ export function $$d2(e, t) {
     let t = tK(e);
     if (!t) return !1;
     let i = oB(t);
-    return _$$x(i.l, c) && !xN(i.l, p.l, .12);
+    return _$$x(i.l, c) && !nearlyEqual(i.l, p.l, .12);
   });
   if (x) return x;
   let [y, b] = l(content);

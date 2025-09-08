@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { eV } from "../905/889062";
 import { nK } from "../figma_app/599979";
 import { $T } from "../figma_app/12535";
@@ -16,7 +16,7 @@ export function $$c0(e) {
         thumbnailMedium: {
           ...e,
           type: "image",
-          sha1: Et(e.buffer)
+          sha1: sha1Hex(e.buffer)
         },
         isSetByUser: !!i.thumbnailGuid
       };

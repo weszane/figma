@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
@@ -47,7 +47,7 @@ export function $$T0() {
       type: "button",
       label: renderI18nText("rcs.japanese_launch_modal.button"),
       onClick: () => {
-        e(to({
+        e(showModalHandler({
           type: kA,
           data: {
             source: IO.ANNOUNCEMENT_MODAL

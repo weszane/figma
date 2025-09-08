@@ -12,7 +12,7 @@ import { jd, Gi, VA } from "../figma_app/528509";
 import { FFileType, FPaymentHealthStatusType, FPlanLimitationType, FPlanRestrictionType } from "../figma_app/191312";
 import { canEditTeam } from "../figma_app/642025";
 import { ZG } from "../figma_app/736948";
-import { tY, NW } from "../figma_app/831101";
+import { SubscriptionType, BillingCycle } from "../figma_app/831101";
 var s = a;
 let $$y34 = "https://www.figma.com/pricing/#cid-20p4Q0lWSOxIWj30zTY6P2";
 let $$b1 = 2;
@@ -129,17 +129,17 @@ export function $$$28(e, t = new Date()) {
   return r.isAfter(t, "second") ? r.toDate() : null;
 }
 export function $$X26(e, t) {
-  return e === tY.MONTHLY ? 0 : t;
+  return e === SubscriptionType.MONTHLY ? 0 : t;
 }
 export function $$q12(e, t) {
-  return e === tY.MONTHLY ? t : 0;
+  return e === SubscriptionType.MONTHLY ? t : 0;
 }
 export function $$J30(e) {
   switch (e) {
-    case tY.MONTHLY:
-      return NW.MONTH;
-    case tY.ANNUAL:
-      return NW.YEAR;
+    case SubscriptionType.MONTHLY:
+      return BillingCycle.MONTH;
+    case SubscriptionType.ANNUAL:
+      return BillingCycle.YEAR;
     default:
       reportError(_$$e.MONETIZATION_UPGRADES, Error(`Attempted to get BillingInterval from invalid BillingPeriod: ${e}`));
       return null;
@@ -147,10 +147,10 @@ export function $$J30(e) {
 }
 export function $$Z3(e) {
   switch (e) {
-    case NW.MONTH:
-      return tY.MONTHLY;
-    case NW.YEAR:
-      return tY.ANNUAL;
+    case BillingCycle.MONTH:
+      return SubscriptionType.MONTHLY;
+    case BillingCycle.YEAR:
+      return SubscriptionType.ANNUAL;
     default:
       reportError(_$$e.MONETIZATION_UPGRADES, Error(`Attempted to get BillingPeriod from invalid BillingInterval: ${e}`));
       return null;

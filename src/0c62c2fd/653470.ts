@@ -7,8 +7,8 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
-import { J } from "../905/270045";
-import { h62 } from "../figma_app/763686";
+import { Label } from "../905/270045";
+import { WhiteboardIntegrationType } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -20,34 +20,34 @@ export function $$x0({
 }) {
   let [x, b] = useState(void 0);
   let v = useMemo(() => {
-    let e = U(h62).map(e => ({
+    let e = U(WhiteboardIntegrationType).map(e => ({
       key: e,
-      value: h62[e],
+      value: WhiteboardIntegrationType[e],
       label: function (e) {
         switch (e) {
-          case h62.MIRO:
+          case WhiteboardIntegrationType.MIRO:
             return "Miro";
-          case h62.MURAL:
+          case WhiteboardIntegrationType.MURAL:
             return "Mural";
-          case h62.LUCID:
+          case WhiteboardIntegrationType.LUCID:
             return "Lucid";
-          case h62.JAMBOARD:
+          case WhiteboardIntegrationType.JAMBOARD:
             return "Jamboard";
-          case h62.UNKNOWN:
+          case WhiteboardIntegrationType.UNKNOWN:
             return getI18nString("file_browser.file_import_view.select_pdf_source_input_unknown_value");
           default:
             throwTypeError(e);
         }
       }(e)
     }));
-    e.sort((e, t) => e.key === t.key ? 0 : e.key === h62.UNKNOWN ? 1 : t.key === h62.UNKNOWN ? -1 : e.label.localeCompare(t.label));
+    e.sort((e, t) => e.key === t.key ? 0 : e.key === WhiteboardIntegrationType.UNKNOWN ? 1 : t.key === WhiteboardIntegrationType.UNKNOWN ? -1 : e.label.localeCompare(t.label));
     return e;
   }, []);
   let y = useCallback(e => {
     b(e);
   }, []);
   let w = useCallback(() => {
-    x && t(h62[x]);
+    x && t(WhiteboardIntegrationType[x]);
   }, [t, x]);
   let j = hS({
     open: !0,
@@ -77,11 +77,11 @@ export function $$x0({
               onChange: y,
               children: v.map(e => jsx(_$$c, {
                 value: e.value,
-                label: jsx(J, {
+                label: jsx(Label, {
                   className: _$$s.textBodyMedium.$,
                   children: e.label
                 }),
-                children: e.key === h62.UNKNOWN && renderI18nText("file_browser.file_import_view.select_pdf_source_input_unknown_disclaimer")
+                children: e.key === WhiteboardIntegrationType.UNKNOWN && renderI18nText("file_browser.file_import_view.select_pdf_source_input_unknown_disclaimer")
               }, e.key))
             })
           })]

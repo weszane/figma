@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { vh, YV, td } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 var $$i3 = (e => (e.DAILY = "daily", e.WEEKLY = "weekly", e.MONTHLY = "monthly", e))($$i3 || {});
 var $$l2 = (e => (e.ALL_ADMINS = "all_admins", e.SPECIFIC_ADMINS = "specific_admins", e))($$l2 || {});
 var $$n5 = (e => (e.TEAM = "team", e.ORGANIZATION = "organization", e))($$n5 || {});
@@ -18,14 +18,14 @@ let c = z.object({
 }).optional();
 let $$m0 = new class {
   constructor() {
-    this.NotificationSettingsSchemaValidator = vh();
-    this.MaintenancePoc1Validator = YV("MaintenancePoc1", c, null);
-    this.PlanPropertiesSchemaValidator = vh();
+    this.NotificationSettingsSchemaValidator = createNoOpValidator();
+    this.MaintenancePoc1Validator = createMetaValidator("MaintenancePoc1", c, null);
+    this.PlanPropertiesSchemaValidator = createNoOpValidator();
   }
   getNotificationSettings(e) {
     return this.NotificationSettingsSchemaValidator.validate(async ({
       xr: t
-    }) => (await t.get("/api/billing/notification_settings", td.toAPIParameters({
+    }) => (await t.get("/api/billing/notification_settings", APIParameterUtils.toAPIParameters({
       plan_id: e.planId,
       plan_type: e.planType,
       notification_type: e.notificationType
@@ -34,7 +34,7 @@ let $$m0 = new class {
   getPlanProperties(e) {
     return this.PlanPropertiesSchemaValidator.validate(async ({
       xr: t
-    }) => (await t.get(`/api/billing/${e.planType}/${e.planId}/plan_properties`, td.toAPIParameters({
+    }) => (await t.get(`/api/billing/${e.planType}/${e.planId}/plan_properties`, APIParameterUtils.toAPIParameters({
       desired_properties: ["default_paid_status_design", "default_paid_status_whiteboard"].toString()
     }))) ?? null);
   }

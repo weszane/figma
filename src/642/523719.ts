@@ -6,7 +6,7 @@ import { O } from "../905/487602";
 import { Pt } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dG } from "../figma_app/753501";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { fI, nV } from "../figma_app/626177";
 import { n as _$$n } from "../642/950153";
 import { Pf } from "../figma_app/459377";
@@ -29,7 +29,7 @@ export function $$g0({
   let w = useCallback(() => {
     !1 !== s || f || e();
   }, [e, s, f]);
-  let T = s === oV;
+  let T = s === MIXED_MARKER;
   let N = !T && !s;
   null == _ && (_ = !0 === s ? "-" : "+");
   let I = "+" === _ ? jsx(K, {

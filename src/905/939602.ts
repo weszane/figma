@@ -1,5 +1,5 @@
 import { z, Ip } from "../905/239603";
-import { YV, vh, td } from "../figma_app/181241";
+import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { P } from "../905/412913";
 import { fileEntityModel } from "../905/806985";
@@ -9,62 +9,62 @@ import { ZI } from "../figma_app/198712";
 let u = XHR.requiredHeaders;
 let $$p0 = new class {
   constructor() {
-    this.LibraryComponentV2DestinationSchemaValidator = YV("LibraryComponentV2Destination", z.object({
+    this.LibraryComponentV2DestinationSchemaValidator = createMetaValidator("LibraryComponentV2Destination", z.object({
       node_id: ZI,
       file_key: z.string(),
       component: $L,
       component_set: Ko.optional()
     }), "ds_zod_components", !1, !0);
-    this.LibraryPublishedComponentsSchemaValidator = vh();
-    this.CommunityLibraryPublishedComponentsSchemaValidator = vh();
-    this.LibraryPublishedComponentsV2SchemaValidator = YV("LibraryPublishedComponentsV2", z.object({
+    this.LibraryPublishedComponentsSchemaValidator = createNoOpValidator();
+    this.CommunityLibraryPublishedComponentsSchemaValidator = createNoOpValidator();
+    this.LibraryPublishedComponentsV2SchemaValidator = createMetaValidator("LibraryPublishedComponentsV2", z.object({
       components: z.array(XS(P.REST_API).extend($L.shape)),
       state_groups: z.array(XS(P.REST_API).extend(Ko.shape)),
       file: fileEntityModel.nullable(),
       hub_file: Ip.coerce.$$null(NS.nullable())
     }), "ds_zod_components", !1, !0);
-    this.LibraryStylesSchemaValidator = YV("LibraryStylesSchemaValidator", z.object({
+    this.LibraryStylesSchemaValidator = createMetaValidator("LibraryStylesSchemaValidator", z.object({
       styles: z.array(XS(P.REST_API).extend(Vp.shape))
     }), "ds_zod_styles", !1, !0);
-    this.LibraryStyleByKeyValidator = YV("LibraryStyleByKeyValidator", z.object({
+    this.LibraryStyleByKeyValidator = createMetaValidator("LibraryStyleByKeyValidator", z.object({
       style: XS(P.REST_API).extend(Vp.shape),
       file: fileEntityModel
     }), "ds_zod_styles", !1, !0);
-    this.LibraryStyleLogByKeyVersionValidator = vh();
-    this.LibrarySubscribedComponentsEditorTypeSchemaValidator = YV("LibrarySubscribedComponentsEditorType", z.object({
+    this.LibraryStyleLogByKeyVersionValidator = createNoOpValidator();
+    this.LibrarySubscribedComponentsEditorTypeSchemaValidator = createMetaValidator("LibrarySubscribedComponentsEditorType", z.object({
       components: z.array(XS(P.REST_API).extend($L.shape)),
       state_groups: z.array(XS(P.REST_API).extend(Ko.shape)),
       files: fileEntityModel.array(),
       hub_files: NS.array().optional()
     }), "ds_zod_components", !1, !0);
-    this.DefaultLibrariesSchemaValidator = vh();
-    this.DefaultLibraryAttributionSchemaValidator = vh();
-    this.LibraryPublishedComponentsStatsSchemaValidator = vh();
-    this.LibraryComponentV2SchemaValidator = YV("LibraryComponentV2", z.object({
+    this.DefaultLibrariesSchemaValidator = createNoOpValidator();
+    this.DefaultLibraryAttributionSchemaValidator = createNoOpValidator();
+    this.LibraryPublishedComponentsStatsSchemaValidator = createNoOpValidator();
+    this.LibraryComponentV2SchemaValidator = createMetaValidator("LibraryComponentV2", z.object({
       component: XS(P.REST_API).extend($L.shape),
       component_set: XS(P.REST_API).extend(Ko.shape).nullable(),
       state_components: z.array(XS(P.REST_API).extend($L.shape)),
       file: fileEntityModel.nullable()
     }), "ds_zod_components", !1, !0);
-    this.LibraryStateGroupSchemaValidator = YV("LibraryStateGroup", XS(P.REST_API).extend(Ko.shape), "ds_zod_components", !1, !0);
-    this.LibraryPublishedAndMovedComponentsSchemaValidator = YV("LibraryPublishedAndMovedComponents", z.object({
+    this.LibraryStateGroupSchemaValidator = createMetaValidator("LibraryStateGroup", XS(P.REST_API).extend(Ko.shape), "ds_zod_components", !1, !0);
+    this.LibraryPublishedAndMovedComponentsSchemaValidator = createMetaValidator("LibraryPublishedAndMovedComponents", z.object({
       components: z.array(XS(P.REST_API).extend($L.shape)),
       state_groups: z.array(XS(P.REST_API).extend(Ko.shape)),
       files: z.array(fileEntityModel),
       move_remappings: z.record(cI)
     }), "ds_zod_components", !1, !0);
-    this.LibrariesSchemaValidator = vh();
-    this.LibrariesV2SchemaValidator = vh();
-    this.LibraryPublishSchemaValidator = vh();
-    this.UploadPublishParamsSchemaValidator = vh();
-    this.UnpublishedStylesSchemaValidator = YV("UnpublishedStylesSchemaValidator", z.object({
+    this.LibrariesSchemaValidator = createNoOpValidator();
+    this.LibrariesV2SchemaValidator = createNoOpValidator();
+    this.LibraryPublishSchemaValidator = createNoOpValidator();
+    this.UploadPublishParamsSchemaValidator = createNoOpValidator();
+    this.UnpublishedStylesSchemaValidator = createMetaValidator("UnpublishedStylesSchemaValidator", z.object({
       styles: z.array(XS(P.REST_API).extend(Vp.shape))
     }), "ds_zod_styles", !1, !0);
-    this.MissingStylesByLibraryKeySchemaValidator = vh();
-    this.EverPublishedLibrariesSchemaValidator = vh();
-    this.LibrariesByLibraryKeys = vh();
-    this.ValidateCopyValidator = vh();
-    this.EnableSlotsForFileValidator = vh();
+    this.MissingStylesByLibraryKeySchemaValidator = createNoOpValidator();
+    this.EverPublishedLibrariesSchemaValidator = createNoOpValidator();
+    this.LibrariesByLibraryKeys = createNoOpValidator();
+    this.ValidateCopyValidator = createNoOpValidator();
+    this.EnableSlotsForFileValidator = createNoOpValidator();
   }
   getLibraryComponentV2Destination(e) {
     return this.LibraryComponentV2DestinationSchemaValidator.validate(async ({
@@ -79,7 +79,7 @@ let $$p0 = new class {
     } = e;
     return this.LibraryPublishedComponentsSchemaValidator.validate(async ({
       xr: e
-    }) => await e.get(`/api/design_systems/library/${key}/published_components`, td.toAPIParameters({
+    }) => await e.get(`/api/design_systems/library/${key}/published_components`, APIParameterUtils.toAPIParameters({
       includeThumbnail,
       includeRealtime
     }), {
@@ -103,7 +103,7 @@ let $$p0 = new class {
     } = e;
     return this.LibraryPublishedComponentsV2SchemaValidator.validate(async ({
       xr: e
-    }) => await e.get(`/api/design_systems/v2/library/${libraryKey}/published_components`, td.toAPIParameters({
+    }) => await e.get(`/api/design_systems/v2/library/${libraryKey}/published_components`, APIParameterUtils.toAPIParameters({
       includeThumbnail,
       includeRealtime
     }), {
@@ -139,12 +139,12 @@ let $$p0 = new class {
   getDefaultLibraries(e) {
     return this.DefaultLibrariesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/design_systems/default_libraries", td.toAPIParameters(e)));
+    }) => await t.get("/api/design_systems/default_libraries", APIParameterUtils.toAPIParameters(e)));
   }
   getDefaultLibraryAttribution(e) {
     return this.DefaultLibraryAttributionSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/design_systems/default_library_attribution", td.toAPIParameters(e)));
+    }) => await t.get("/api/design_systems/default_library_attribution", APIParameterUtils.toAPIParameters(e)));
   }
   getLibraryPublishedComponentsStats(e) {
     return this.LibraryPublishedComponentsStatsSchemaValidator.validate(async ({
@@ -154,7 +154,7 @@ let $$p0 = new class {
   getLibraryComponentV2(e) {
     return this.LibraryComponentV2SchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/design_systems/library/component_v2/${e.componentKey}`, td.toAPIParameters(e)));
+    }) => await t.get(`/api/design_systems/library/component_v2/${e.componentKey}`, APIParameterUtils.toAPIParameters(e)));
   }
   getLibraryStateGroup(e) {
     return this.LibraryStateGroupSchemaValidator.validate(async ({
@@ -172,12 +172,12 @@ let $$p0 = new class {
   getLibraries(e) {
     return this.LibrariesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/design_systems/libraries", td.toAPIParameters(e)));
+    }) => await t.get("/api/design_systems/libraries", APIParameterUtils.toAPIParameters(e)));
   }
   getLibrariesV2(e) {
     return this.LibrariesV2SchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/design_systems/v2/libraries", td.toAPIParameters(e)));
+    }) => await t.get("/api/design_systems/v2/libraries", APIParameterUtils.toAPIParameters(e)));
   }
   postLibraryPublish({
     fileKey: e,
@@ -250,7 +250,7 @@ let $$p0 = new class {
   }) {
     return this.ValidateCopyValidator.validate(async ({
       xr: n
-    }) => await n.post("/api/design_systems/validate_copy", td.toAPIParameters({
+    }) => await n.post("/api/design_systems/validate_copy", APIParameterUtils.toAPIParameters({
       nodeIds: e,
       fileKey: t,
       copyType: i

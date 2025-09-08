@@ -1,5 +1,5 @@
-import { CeL, pWM, glU, Ez5 } from "../figma_app/763686";
-import { Y5 } from "../figma_app/455680";
+import { FullscreenPerfMetrics, CoverageStatus, Fullscreen, AppStateTsApi } from "../figma_app/763686";
+import { fullscreenValue } from "../figma_app/455680";
 import { R9 } from "../905/977824";
 import { debugState } from "../905/407919";
 export class $$o13 {
@@ -8,7 +8,7 @@ export class $$o13 {
     this._zoomScale = this.getZoomScale();
   }
   getZoomScale() {
-    return Y5.getViewportInfo().zoomScale;
+    return fullscreenValue.getViewportInfo().zoomScale;
   }
   didEventOccur() {
     let e = this.getZoomScale();
@@ -24,10 +24,10 @@ export class $$l1 {
     this._offsetY = this.getOffsetY();
   }
   getOffsetX() {
-    return Y5.getViewportInfo().offsetX;
+    return fullscreenValue.getViewportInfo().offsetX;
   }
   getOffsetY() {
-    return Y5.getViewportInfo().offsetY;
+    return fullscreenValue.getViewportInfo().offsetY;
   }
   didEventOccur() {
     let e = this.getOffsetX();
@@ -39,7 +39,7 @@ export class $$d14 {
   constructor() {
     this._didMouseMove = !1;
     this._panTracker = new $$l1();
-    document.addEventListener("mousemove", (e) => {
+    document.addEventListener("mousemove", e => {
       this._didMouseMove = !0;
     });
   }
@@ -52,7 +52,7 @@ export class $$d14 {
 export class $$c12 {
   constructor() {}
   didEventOccur() {
-    return (CeL?.getRenderTreeStaleTimeMs() ?? 0) > 0;
+    return (FullscreenPerfMetrics?.getRenderTreeStaleTimeMs() ?? 0) > 0;
   }
 }
 export class $$u4 {
@@ -84,7 +84,7 @@ export class $$p5 {
   getIsCursorReactionActive() {
     if (!R9) return !1;
     let e = R9.reactionsBySessionId();
-    return Object.keys(e).some((t) => Object.keys(e[t]).length > 0);
+    return Object.keys(e).some(t => Object.keys(e[t]).length > 0);
   }
   didEventOccur() {
     return this._cursorReactionIsActive;
@@ -92,11 +92,11 @@ export class $$p5 {
 }
 export class $$m6 {
   constructor(e) {
-    this._mode = pWM.DEFINITELY_COVERED_ONLY;
+    this._mode = CoverageStatus.DEFINITELY_COVERED_ONLY;
     this._mode = e;
   }
   getViewportCoverage() {
-    return glU.estimatedViewportRenderCoverage(this._mode);
+    return Fullscreen.estimatedViewportRenderCoverage(this._mode);
   }
   didEventOccur() {
     return .9 > this.getViewportCoverage();
@@ -108,7 +108,7 @@ export class $$h7 {
     this._thresholdMs = e;
   }
   getStalenessMs() {
-    return CeL.getRenderTreeStaleTimeMs();
+    return FullscreenPerfMetrics.getRenderTreeStaleTimeMs();
   }
   didEventOccur() {
     return this.getStalenessMs() > this._thresholdMs;
@@ -148,7 +148,7 @@ export class $$_8 {
   didEventOccur() {
     let e = this._panEventTracker.didEventOccur();
     let t = this._zoomEventTracker.didEventOccur();
-    return !(e || t) && glU.minViewportSharpness() < this._sharpnessThreshold;
+    return !(e || t) && Fullscreen.minViewportSharpness() < this._sharpnessThreshold;
   }
 }
 export class $$A2 {
@@ -161,7 +161,7 @@ export class $$A2 {
   didEventOccur() {
     let e = this._panEventTracker.didEventOccur();
     let t = this._zoomEventTracker.didEventOccur();
-    return !(e || t) && glU.avgViewportSharpness() < this._sharpnessThreshold;
+    return !(e || t) && Fullscreen.avgViewportSharpness() < this._sharpnessThreshold;
   }
 }
 export class $$y0 {
@@ -190,12 +190,12 @@ export class $$b16 {
 }
 export class $$v15 {
   didEventOccur() {
-    return Ez5.isUserTyping();
+    return AppStateTsApi.isUserTyping();
   }
 }
 export class $$I11 {
   didEventOccur() {
-    return Ez5?.isResizingGrid() ?? !1;
+    return AppStateTsApi?.isResizingGrid() ?? !1;
   }
 }
 export class $$E9 {

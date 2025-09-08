@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { bD } from "../figma_app/45218";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { yX } from "../figma_app/918700";
-export let $$d0 = Ju(function ({
+export let $$d0 = registerModal(function ({
   error: e,
   dispatch: t,
   resourceType: i
@@ -18,10 +18,10 @@ export let $$d0 = Ju(function ({
     hideCancel: !0,
     hideOnConfirm: !1,
     onConfirm: () => {
-      t(Lo());
+      t(popModalStack());
     },
     popStack: !0,
     size: "small"
   });
-}, "DevelopmentPluginErrorModal", ZU.YES);
+}, "DevelopmentPluginErrorModal", ModalSupportsBackground.YES);
 export const r = $$d0;

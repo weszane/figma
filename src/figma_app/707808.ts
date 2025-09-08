@@ -1,4 +1,4 @@
-import { tn } from "../figma_app/831101";
+import { UpgradeSteps } from "../figma_app/831101";
 var $$i0 = (e => (e[e.INVITE = 0] = "INVITE", e[e.PUBLISH_COMMUNITY = 1] = "PUBLISH_COMMUNITY", e[e.PUBLISH_TEMPLATE = 2] = "PUBLISH_TEMPLATE", e[e.COLLABORATORS = 3] = "COLLABORATORS", e[e.EMBED_CODE = 4] = "EMBED_CODE", e[e.SHARE_SETTINGS = 5] = "SHARE_SETTINGS", e[e.FOLDER_MEMBERS = 6] = "FOLDER_MEMBERS", e[e.SHARE_GOOGLE_DEVICE_DISCLAIMER = 7] = "SHARE_GOOGLE_DEVICE_DISCLAIMER", e[e.SHARE_TO_GOOGLE_CLASSROOM = 8] = "SHARE_TO_GOOGLE_CLASSROOM", e[e.CONNECTED_PROJECT_USERS = 9] = "CONNECTED_PROJECT_USERS", e[e.UPDATE_SEAT = 10] = "UPDATE_SEAT", e))($$i0 || {});
 var $$a13 = (e => (e.FILE = "file", e.FULLSCREEN_PREVIEW = "fullscreen_preview", e.SETTINGS = "settings", e))($$a13 || {});
 var $$s10 = (e => (e.ACCOUNT = "account", e.PLUGINS = "plugins", e.COMMUNITY = "community", e.NOTIFICATIONS = "notifications", e))($$s10 || {});
@@ -25,7 +25,7 @@ export function $$f17(e) {
   return "upgrade_existing_team" === e;
 }
 export function $$E11(e, t) {
-  return "create" === e && (t === tn.CREATE_TEAM || t === tn.ADD_COLLABORATORS) || t === tn.PLAN_COMPARISON;
+  return "create" === e && (t === UpgradeSteps.CREATE_TEAM || t === UpgradeSteps.ADD_COLLABORATORS) || t === UpgradeSteps.PLAN_COMPARISON;
 }
 let $$y15 = ["deletedFiles", "trashedFolders", "teamCreation", "folder", "addCollaborators", "team", "teamUpgrade", "orgAdminSettings", "licenseGroup", "workspace", "billingGroupDashboard", "search", "user", "promoReview", "eduReview", "teamFeed", "resourceUnavailable", "feed", "teamAdminConsole", "recentsAndSharing", "draftsToMove", "allProjects", "limitedTeamSharedProjects", "orgDomainManagement", "orgIdpManagement", "abandonedDraftFiles", "litmus", "componentBrowserLibrary", "seatRequests", "resourceHub"];
 let $$b3 = ["recentsAndSharing", "folder", "allProjects", "limitedTeamSharedProjects", "team"];

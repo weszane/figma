@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { Qej } from "../figma_app/763686";
+import { MenuType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -390,15 +390,15 @@ export function $$Z16(e, t, r) {
 function Q(e) {
   if (null === e) return "UNKNOWN_SOURCE";
   switch (e) {
-    case Qej.ACTIONS_MENU:
+    case MenuType.ACTIONS_MENU:
       return "ACTIONS_MENU";
-    case Qej.RFD_INITIAL_NUDGE:
+    case MenuType.RFD_INITIAL_NUDGE:
       return "RFD_INITIAL_NUDGE";
-    case Qej.RFD_STATUS_MENU:
+    case MenuType.RFD_STATUS_MENU:
       return "RFD_STATUS_MENU";
-    case Qej.SHARE_MODAL:
+    case MenuType.SHARE_MODAL:
       return "SHARE_MODAL";
-    case Qej.COPY_SELECTION_TOAST:
+    case MenuType.COPY_SELECTION_TOAST:
       return "COPY_SELECTION_TOAST";
     default:
       throwTypeError(e);

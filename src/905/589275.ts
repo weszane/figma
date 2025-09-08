@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { J0O } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ComponentPropType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { Pt } from "../figma_app/806412";
 import { gw, c$ } from "../figma_app/236327";
 import { Qp, JR, Wi } from "../figma_app/162641";
@@ -12,7 +12,7 @@ import { B as _$$B } from "../905/714743";
 import { n as _$$n } from "../905/734251";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { NY } from "../figma_app/646357";
 import { VP } from "../905/18797";
 import { FZ } from "../figma_app/803787";
@@ -237,7 +237,7 @@ function ee({
 }) {
   let i = useDispatch();
   let o = useCallback(() => {
-    i(to({
+    i(showModalHandler({
       type: dD,
       data: {
         initiallyCheckedItemIDs: new Set(e),
@@ -311,19 +311,19 @@ export function $$ei0({
     }));
   }, [k]);
   let N = useCallback((e, t) => {
-    t === Wu.SELECT ? l7.user("add-preferred-prop-values", () => c(e)) : l7.user("remove-preferred-prop-values", () => m(e));
+    t === Wu.SELECT ? permissionScopeHandler.user("add-preferred-prop-values", () => c(e)) : permissionScopeHandler.user("remove-preferred-prop-values", () => m(e));
   }, [c, m]);
   let P = useCallback(e => {
-    l7.user("remove-preferred-prop-values", () => m(e));
+    permissionScopeHandler.user("remove-preferred-prop-values", () => m(e));
   }, [m]);
   let O = useCallback(e => {
-    l7.user("toggle-preferred-prop-value", () => h(e));
+    permissionScopeHandler.user("toggle-preferred-prop-value", () => h(e));
   }, [h]);
   let D = useSelector(FZ);
   let L = useSelector(c5);
   let M = useSelector(dK);
   let j = wS(s);
-  let U = 0 === s.length && E === J0O.INSTANCE_SWAP && x ? NY(x, M, D, L) : void 0;
+  let U = 0 === s.length && E === ComponentPropType.INSTANCE_SWAP && x ? NY(x, M, D, L) : void 0;
   let B = useSelector(e => VP(e.loadingState, _A(e.openFile?.key)));
   return jsxs(Fragment, {
     children: [jsxs("div", {
@@ -363,7 +363,7 @@ export function $$ei0({
         })]
       })]
     }), jsx(J, {
-      onRemove: e => l7.user("remove-preferred-prop-value", () => m([e])),
+      onRemove: e => permissionScopeHandler.user("remove-preferred-prop-value", () => m([e])),
       recordingKeys: fN([_, "context-menu"])
     })]
   });

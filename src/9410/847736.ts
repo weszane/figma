@@ -12,8 +12,8 @@ import { q5, tS as _$$tS, ze, As } from "../figma_app/516028";
 import { JY } from "../9410/236102";
 import { kM, gu, v8, oJ, yx } from "../9410/43627";
 import { tJ, ui, _8 } from "../9410/430140";
-import { Ez5, zMY, Zdr, zkO, kul } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, ThemeMode, SlidesAiBindings, SourceType, SchemaJoinStatus } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { MR, p9, Dh } from "../9410/34183";
 import { FA, AK } from "../9410/356923";
 import { _YF } from "../figma_app/822011";
@@ -32,7 +32,7 @@ import { eE as _$$eE } from "../figma_app/106207";
 import { Cu } from "../figma_app/314264";
 import { FFileType } from "../figma_app/191312";
 import { oh } from "../905/18797";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { TI } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
 import { $A } from "../905/862883";
@@ -49,7 +49,7 @@ import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e3 } from "../905/165054";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { logInfo, logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { F as _$$F } from "../905/302958";
@@ -57,7 +57,7 @@ import { zX } from "../905/576487";
 import { k8 } from "../figma_app/49598";
 import { Nw } from "../figma_app/78808";
 import { yy } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { D as _$$D } from "../7222/938408";
 import { fL } from "../figma_app/784857";
 import { x as _$$x } from "../905/764527";
@@ -70,7 +70,7 @@ import { zF } from "../figma_app/297822";
 import { v0, Hn, Wb, Gd, M0 } from "../9410/341455";
 import { S as _$$S, E as _$$E } from "../figma_app/999099";
 import { getSingletonSceneGraph } from "../905/700578";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { Ay, c6 } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
@@ -108,8 +108,8 @@ function T({
   closePicker: e
 }) {
   let t = t => {
-    l7.user("create-new-slide-with-default-theme", () => {
-      Ez5?.slideThemeLibBindings().insertDefaultLocalTheme(t, null);
+    permissionScopeHandler.user("create-new-slide-with-default-theme", () => {
+      AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(t, null);
     });
     e();
   };
@@ -120,13 +120,13 @@ function T({
       thumbnailHeight: "101px",
       name: getI18nString("slides.templates.light"),
       thumbnailUrl: buildUploadUrl("4a01804a5d4ad3a2d38ea604c0d8d63520e9b97b"),
-      onPointerDown: () => t(zMY.LIGHT)
+      onPointerDown: () => t(ThemeMode.LIGHT)
     }, "light"), jsx(FA, {
       thumbnailWidth: "184px",
       thumbnailHeight: "101px",
       name: getI18nString("slides.templates.dark"),
       thumbnailUrl: buildUploadUrl("01a1fc814ce18d9da3ba738aef79acc82c752ab7"),
-      onPointerDown: () => t(zMY.DARK)
+      onPointerDown: () => t(ThemeMode.DARK)
     }, "dark")]
   });
 }
@@ -309,7 +309,7 @@ function et() {
   let s = J3();
   let l = JU(s);
   let d = s === kN.FILE_IN_DRAFTS;
-  let c = 0 === ut(Ez5?.canvasGrid()?.canvasGridArray, []).length;
+  let c = 0 === getObservableValue(AppStateTsApi?.canvasGrid()?.canvasGridArray, []).length;
   let u = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: $A.Slides
   }));
@@ -601,14 +601,14 @@ async function eJ({
 }) {
   let n = [];
   let a = [];
-  Zdr?.createHiddenFrameForPresets();
+  SlidesAiBindings?.createHiddenFrameForPresets();
   for (let s = 0; s < e.length; s += i) {
     if (t.signal.aborted) return a;
     for (let t of e.slice(s, s + i)) try {
       let e = new Promise(e => {
         Zx({
           module: t,
-          editScopeType: zkO.USER,
+          editScopeType: SourceType.USER,
           editScopeLabel: "use-slides-ai-preset-selection",
           callback: t => {
             a.push(t);
@@ -626,7 +626,7 @@ async function eJ({
     });
     await e0(Promise.allSettled(n), t.signal);
   }
-  t.signal.aborted || Zdr?.selectPresetsFromTemplate();
+  t.signal.aborted || SlidesAiBindings?.selectPresetsFromTemplate();
   return a;
 }
 async function eq({
@@ -635,12 +635,12 @@ async function eq({
   pageGuids: i = [],
   abortController: r
 }) {
-  if (!Zdr) return [];
+  if (!SlidesAiBindings) return [];
   let n = await e0(_$$R({
     fileKey: e,
     selectedGuids: t.slice(0, _$$S)
   }), r.signal);
-  return r.signal.aborted ? [] : JSON.parse(Zdr.getCanvasDataJsonFromBuffer(n, i));
+  return r.signal.aborted ? [] : JSON.parse(SlidesAiBindings.getCanvasDataJsonFromBuffer(n, i));
 }
 class eX {
   constructor(e, t, i) {
@@ -659,15 +659,15 @@ class eX {
     return 0 !== this.intervalId;
   }
   update() {
-    if (!Zdr) return;
+    if (!SlidesAiBindings) return;
     if (this.abortController.signal.aborted || !atomStoreManager.get(ze)) {
       this.cancel();
       return;
     }
     if (this.currentItem || (this.currentItem = this.getNextItem(), !this.currentItem)) return;
-    let e = Zdr.generateSlides(this.currentItem.slideItem);
+    let e = SlidesAiBindings.generateSlides(this.currentItem.slideItem);
     if (!this.abortController.signal.aborted) {
-      if (this.showPlaceholderOverlay(Zdr.getPlaceholderNodeId()), e.length > 0) {
+      if (this.showPlaceholderOverlay(SlidesAiBindings.getPlaceholderNodeId()), e.length > 0) {
         e.unshift(this.lastSlideGuid);
         for (let t = 0; t < e.length - 1; ++t) {
           let i = e[t];
@@ -713,7 +713,7 @@ async function eZ({
       fileKey: atomStoreManager.get(ze) || null,
       fileSeq: atomStoreManager.get(_$$J)?.toString() || null,
       userId: atomStoreManager.get(kS) || null,
-      trackingSessionId: fF()
+      trackingSessionId: getTrackingSessionId()
     });
     if (r.signal.aborted || !atomStoreManager.get(ze)) {
       i.cancel();
@@ -751,7 +751,7 @@ let eQ = _$$n2(e => {
   return i;
 });
 let e$ = _$$n2(e => {
-  l7.user("figjam-to-slide-deck-text-opacity", () => {
+  permissionScopeHandler.user("figjam-to-slide-deck-text-opacity", () => {
     e.forEach(e => {
       e.opacity > 0 || e.setOpacityWithAnimation(1, _E.forLinear(.5), "slides-ai-animate-slide-text");
     });
@@ -773,7 +773,7 @@ async function e0(e, t) {
   return await Promise.race([e, i]);
 }
 function e1(e) {
-  e && l7.user("remove-hidden-preset-nodes", () => {
+  e && permissionScopeHandler.user("remove-hidden-preset-nodes", () => {
     for (let t of e) {
       let e = getSingletonSceneGraph().get(t);
       if (e) try {
@@ -849,9 +849,9 @@ let e3 = async ({
   slidePresetModules?.length || _$$k2.warn("No slide preset modules found...");
   let x = [];
   try {
-    if (Ez5 && Ez5.uiState().leftPanelCollapsedUI3.set(!0), _$$tO(), !Zdr) return;
-    Zdr.showLoadingState();
-    let t = Zdr.getPlaceholderNodeId();
+    if (AppStateTsApi && AppStateTsApi.uiState().leftPanelCollapsedUI3.set(!0), _$$tO(), !SlidesAiBindings) return;
+    SlidesAiBindings.showLoadingState();
+    let t = SlidesAiBindings.getPlaceholderNodeId();
     showPlaceholderOverlay(t);
     let [r, n] = await e0(Promise.allSettled([eq({
       figjamFileKey,
@@ -897,7 +897,7 @@ let e3 = async ({
   } finally {
     removeAllPlaceholderOverlays();
     openFileKey !== atomStoreManager.get(ze) || addFirstPresetToEmptyDeck();
-    Zdr?.finishDeckGeneration();
+    SlidesAiBindings?.finishDeckGeneration();
     e1(x);
   }
 };
@@ -914,7 +914,7 @@ function e8() {
     }), (async () => {
       let e = await u();
       if (!e) return;
-      let t = Zdr?.getPagesFromBuffer(e) ?? [];
+      let t = SlidesAiBindings?.getPagesFromBuffer(e) ?? [];
       let i = t[0];
       i && (o(t.map(e => ({
         guid: e.guid,
@@ -1168,23 +1168,23 @@ function tl({
   if (!_) return null;
   let S = t[0];
   let j = () => {
-    let e = (Ez5?.canvasGrid().canvasGridArray.getCopy() ?? []).length > 0;
+    let e = (AppStateTsApi?.canvasGrid().canvasGridArray.getCopy() ?? []).length > 0;
     let n = {
       row: 0,
       col: 0
     };
-    let a = Ez5?.getInsertGridCoord({
+    let a = AppStateTsApi?.getInsertGridCoord({
       x: -1 / 0,
       y: -1 / 0
     }) ?? n;
-    if (y && y !== AD) {
-      let e = Ez5?.canvasGrid().coordForChild(y) ?? n;
+    if (y && y !== defaultSessionLocalIDString) {
+      let e = AppStateTsApi?.canvasGrid().coordForChild(y) ?? n;
       a = {
         row: e.row,
         col: e.col + 1
       };
     } else a = e ? {
-      row: (Ez5?.canvasGrid().getLastChildCoord() ?? n).row + 1,
+      row: (AppStateTsApi?.canvasGrid().getLastChildCoord() ?? n).row + 1,
       col: 0
     } : n;
     g();
@@ -1194,7 +1194,7 @@ function tl({
       percentageOffset: new Point(),
       insertAsChildOfCanvas: !0,
       afterSlideModulesInsertion: (e, t) => {
-        l7.user("add-all-slides", () => {
+        permissionScopeHandler.user("add-all-slides", () => {
           e.forEach((e, i) => {
             h0({
               module: e,
@@ -1208,12 +1208,12 @@ function tl({
             });
           });
           fL(t[0][0]);
-          Y5.commit();
+          fullscreenValue.commit();
         });
       }
     }));
-    l7.user("add-all-slides", () => {
-      Ez5?.slideThemeLibBindings().setDocumentTemplateLibraryKey(t[0].library_key);
+    permissionScopeHandler.user("add-all-slides", () => {
+      AppStateTsApi?.slideThemeLibBindings().setDocumentTemplateLibraryKey(t[0].library_key);
     });
     !getFeatureFlags().piper_auto_rename && i?.key && S.file_name && !e && i.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && h(Nw({
       file: {
@@ -1503,7 +1503,7 @@ function tT({
   let {
     onShowSeparatorScroll
   } = gH();
-  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let u = null === _$$tS();
   return e === J_.LOADING || !d || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx("div", {
     className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
@@ -1606,7 +1606,7 @@ function tj({
   } = $N();
   let [r, a] = useAtomValueAndSetter(bY);
   let o = !!(r.type === Vf.TEMPLATE_PICKER && r.figjamEntryPointData);
-  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED) || isInteractionPathCheck();
+  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED) || isInteractionPathCheck();
   return jsxs(x, {
     dataTestId: "template-picker-view",
     children: [o ? jsx(tJ, {

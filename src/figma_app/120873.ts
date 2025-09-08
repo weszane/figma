@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import s from "classnames";
 import { rf } from "../figma_app/806412";
 import { TI } from "../905/713722";
@@ -37,7 +37,7 @@ export function $$h1({
   let P = rf(N, "click", e => {
     L && L(e);
   });
-  if (R && "MIXED" !== R && R.resolvedType === rXF.COLOR) {
+  if (R && "MIXED" !== R && R.resolvedType === VariableResolvedDataType.COLOR) {
     let e = TI.format(R.value);
     if (R.value.a < 1) {
       let t = (100 * R.value.a).toLocaleString("en", {
@@ -46,7 +46,7 @@ export function $$h1({
       C = `#${e}, ${t}%`;
     } else C = `#${e}`;
   } else C = Oi(R);
-  let D = (O?.resolvedType || "") === rXF.FLOAT && w !== e;
+  let D = (O?.resolvedType || "") === VariableResolvedDataType.FLOAT && w !== e;
   let k = jsx("div", {
     className: o()(T, {
       [HB]: !0,

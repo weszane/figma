@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { glU, $mk, wzW } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, WhiteboardAiVisualCppBindings, MindmapCppBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -33,15 +33,15 @@ export function $$v0() {
     teamId: t || null,
     fileKey: r,
     userId: S || null,
-    trackingSessionId: fF(),
+    trackingSessionId: getTrackingSessionId(),
     fileSeq: v?.toString() || null
   };
   let w = useCallback(() => N(F.enqueue({
     message: getI18nString("whiteboard.ai_expand_mindmap.generic_error")
   })), [N]);
   let O = e => {
-    for (let t of e) l7.user("expand-figjam-ai-mindmap", () => {
-      glU?.deleteNode(t);
+    for (let t of e) permissionScopeHandler.user("expand-figjam-ai-mindmap", () => {
+      Fullscreen?.deleteNode(t);
     });
   };
   let R = (e, t, r) => {
@@ -71,7 +71,7 @@ export function $$v0() {
       }
     }, C).then(n => {
       r && O(r);
-      let i = l7.user("expand-figjam-ai-mindmap", () => $mk?.expandWithFigjamAiMindmapNodes(n, e) ?? []);
+      let i = permissionScopeHandler.user("expand-figjam-ai-mindmap", () => WhiteboardAiVisualCppBindings?.expandWithFigjamAiMindmapNodes(n, e) ?? []);
       let o = t.stop();
       i.length ? (N(F.enqueue({
         message: getI18nString("whiteboard.ai_expand_mindmap.generation_success"),
@@ -116,7 +116,7 @@ export function $$v0() {
     expandSelectedMindmapNode: () => {
       let e = new PerfTimer(I, {});
       e.start();
-      let t = wzW?.getSingleSelectedDiagramNodeId() ?? "";
+      let t = MindmapCppBindings?.getSingleSelectedDiagramNodeId() ?? "";
       let r = function (e, t) {
         let r = e.get(t);
         if (r) {

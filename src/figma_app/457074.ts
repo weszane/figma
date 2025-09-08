@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { xae } from "../figma_app/763686";
+import { UserInterfaceElements } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { localStorageRef } from "../905/657224";
 import { FP } from "../figma_app/91703";
@@ -25,12 +25,12 @@ export function $$g0(e) {
 let f = "last-used-left-panel-tab";
 let E = "ASSETS_TAB";
 export function $$y1(e) {
-  localStorageRef && localStorageRef.setItem(f, e === xae.ASSETS ? E : "LAYERS_TAB");
+  localStorageRef && localStorageRef.setItem(f, e === UserInterfaceElements.ASSETS ? E : "LAYERS_TAB");
 }
 let b = D(() => {
   if (localStorageRef) {
     let e = localStorageRef.getItem(f);
-    if (e) return e === E ? xae.ASSETS : xae.LAYERS;
+    if (e) return e === E ? UserInterfaceElements.ASSETS : UserInterfaceElements.LAYERS;
   }
   return null;
 });

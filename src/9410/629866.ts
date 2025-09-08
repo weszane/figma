@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import a from "classnames";
 import { UK } from "../figma_app/740163";
 import { T } from "../figma_app/590592";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
 var s = a;
 export let $$u0 = forwardRef(({
@@ -13,7 +13,7 @@ export let $$u0 = forwardRef(({
   floatingWhenExpanded: n,
   children: a
 }, u) => {
-  let p = J2(UK().renderRulers);
+  let p = getObservableOrFallback(UK().renderRulers);
   let h = Ye();
   let m = T();
   return jsx("div", {

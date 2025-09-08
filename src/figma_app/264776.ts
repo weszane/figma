@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import { bwI, glU, iCO } from "../figma_app/763686";
+import { StateGroupErrorType, Fullscreen, StateHierarchy } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { Mz } from "../vendor/925040";
 import { trackEventAnalytics } from "../905/449184";
 import { im } from "../figma_app/828186";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { i as _$$i } from "../figma_app/741237";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { sS, XJ } from "../figma_app/516028";
 import { i_ } from "../figma_app/646357";
 export let $$h14 = "\u2014";
@@ -20,12 +20,12 @@ export function $$g10(e, t, r) {
     let {
       propertyValues
     } = i.stateInfo;
-    if (propertyValues) for (let r of t) r in n && n[r] !== propertyValues[r] ? n[r] = n[r] && propertyValues[r] ? oV : "" : n[r] = propertyValues[r] || "";
+    if (propertyValues) for (let r of t) r in n && n[r] !== propertyValues[r] ? n[r] = n[r] && propertyValues[r] ? MIXED_MARKER : "" : n[r] = propertyValues[r] || "";
   }
   return n;
 }
 export function $$f0(e) {
-  let t = bwI.NONE;
+  let t = StateGroupErrorType.NONE;
   for (let r of e) r.stateInfo.stateError && r.stateInfo.stateError > t && (t = r.stateInfo.stateError);
   return t;
 }
@@ -51,7 +51,7 @@ export function $$y1(e, t, r) {
   for (let t of n) {
     let r = function (e, t) {
       let r = 0;
-      for (let n in e) e[n] !== oV && e[n] !== t[n] && r++;
+      for (let n in e) e[n] !== MIXED_MARKER && e[n] !== t[n] && r++;
       return r;
     }(e, t.propertyValues);
     r < s && (s = r, a = t);
@@ -77,7 +77,7 @@ export function $$b9(e, t, r) {
   for (let t of n) {
     let r = function (e, t) {
       let r = 0;
-      for (let n in e) e[n] !== oV && e[n] !== t[n] && r++;
+      for (let n in e) e[n] !== MIXED_MARKER && e[n] !== t[n] && r++;
       return r;
     }(e, t.stateInfo.propertyValues);
     r < s && (s = r, a = t);
@@ -88,7 +88,7 @@ export function $$T5(e) {
   return e.replace(/[,=]/g, "").trim();
 }
 export function $$I15(e, t, r) {
-  let n = glU.getStateGroupAnalyticsInfo(t);
+  let n = Fullscreen.getStateGroupAnalyticsInfo(t);
   trackEventAnalytics(e, {
     ...n,
     ...(r || {})
@@ -103,7 +103,7 @@ export function $$S4(e, t) {
   }
 }
 export function $$v12(e, t, r, n) {
-  if ("" === (t = $$T5(t)) || e === t || -1 === n.indexOf(e) || !glU) return;
+  if ("" === (t = $$T5(t)) || e === t || -1 === n.indexOf(e) || !Fullscreen) return;
   let a = [...n];
   a[a.indexOf(e)] = t;
   $$S4(() => r.forEach(r => {
@@ -111,11 +111,11 @@ export function $$v12(e, t, r, n) {
     n && (n = {
       ...n
     })[e] && (n[t] = n[e], delete n[e], _$$i(r.symbol.node_id, $$m16(n, a)));
-  }), glU);
-  Y5.commit();
+  }), Fullscreen);
+  fullscreenValue.commit();
 }
 export function $$$$A6(e, t, r, n) {
-  glU && ($$I15("Deleting Property from Variant Component", n), $$S4(() => t.forEach(t => {
+  Fullscreen && ($$I15("Deleting Property from Variant Component", n), $$S4(() => t.forEach(t => {
     let n = t.stateInfo.propertyValues;
     if (!n) return;
     for (let t of (n = {
@@ -124,7 +124,7 @@ export function $$$$A6(e, t, r, n) {
     let i = $$m16(n, r);
     "" === i && (i = "Property 1=Default");
     _$$i(t.symbol.node_id, i);
-  }), glU), Y5.commit());
+  }), Fullscreen), fullscreenValue.commit());
 }
 export function $$x8(e, t, r, n) {
   return {
@@ -140,8 +140,8 @@ export function $$x8(e, t, r, n) {
 export function $$N7(e, t, r, n, a) {
   if (!e) return null;
   let s = e.mode;
-  if (s === iCO.NONE) return null;
-  if (s === iCO.NON_STATE_COMPONENTS) return {
+  if (s === StateHierarchy.NONE) return null;
+  if (s === StateHierarchy.NON_STATE_COMPONENTS) return {
     mode: s,
     numSelectedNonStateComponents: e.numSelectedNonStateComponents
   };
@@ -149,7 +149,7 @@ export function $$N7(e, t, r, n, a) {
   let l = e.stateGroupModel;
   let d = l?.propertySortOrder?.length === 1;
   let c = e.allStates.map(e => $$x8(e, t, r, n));
-  if (s === iCO.STATE_GROUP) return {
+  if (s === StateHierarchy.STATE_GROUP) return {
     mode: s,
     stateGroup: o,
     stateGroupModel: l,
@@ -158,7 +158,7 @@ export function $$N7(e, t, r, n, a) {
   };
   let u = e.selectedStates.map(e => $$x8(e, t, r, n));
   let p = $$g10(u, l.propertySortOrder || [], a);
-  iCO.STATE;
+  StateHierarchy.STATE;
   return {
     mode: s,
     stateGroup: o,

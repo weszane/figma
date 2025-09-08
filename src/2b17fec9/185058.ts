@@ -2,8 +2,8 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback, forwardRef } from "react";
 import { createPortal } from "../vendor/944059";
 import { E as _$$E } from "../905/632989";
-import { NLJ, glU, V5h, VTL, rcl } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { DesignGraphElements, Fullscreen, AlignmentPosition, ConfirmationLevel, Command } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { wp, SK } from "../905/125333";
@@ -12,7 +12,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { F } from "../905/989956";
 import { AW } from "../figma_app/451499";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Pl } from "../figma_app/62612";
 import { Ib } from "../905/129884";
 import { zG, C2, P } from "../figma_app/47958";
@@ -52,7 +52,7 @@ export function $$L0({
     e(i);
   }, [k, R, e, i]);
   let D = U_();
-  let P = "ELBOWED" === O ? NLJ.CONNECTOR_ELBOWED : "CURVED" === O ? NLJ.CONNECTOR_CURVED : NLJ.CONNECTOR_STRAIGHT;
+  let P = "ELBOWED" === O ? DesignGraphElements.CONNECTOR_ELBOWED : "CURVED" === O ? DesignGraphElements.CONNECTOR_CURVED : DesignGraphElements.CONNECTOR_STRAIGHT;
   let {
     dragState,
     onInsertableResourcePointerDown
@@ -61,13 +61,13 @@ export function $$L0({
       if (!x.current) return Promise.resolve();
       let t = zG(x.current.getBoundingClientRect());
       let i = C2(e.e);
-      l7.user("drop-connector-on-canvas", () => glU?.dropDiagramItemOntoCanvas(P, Math.round(t.x), Math.round(t.y), Math.round(i.x), Math.round(i.y), V5h.TOP_LEFT, VTL.NO));
-      Y5.triggerActionEnum(rcl.SET_TOOL_DEFAULT);
+      permissionScopeHandler.user("drop-connector-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(P, Math.round(t.x), Math.round(t.y), Math.round(i.x), Math.round(i.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
+      fullscreenValue.triggerActionEnum(Command.SET_TOOL_DEFAULT);
       return Promise.resolve();
     },
     recordingKey: a
   });
-  let H = useCallback(() => Zt(P, VTL.NO), [P]);
+  let H = useCallback(() => Zt(P, ConfirmationLevel.NO), [P]);
   return j ? jsxs(Fragment, {
     children: [jsx(_$$n.div, {
       onPointerDown: m ? void 0 : onInsertableResourcePointerDown,

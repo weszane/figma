@@ -3,7 +3,7 @@ import { useMemo, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { R as _$$R } from "../905/57445";
 import { RR } from "../figma_app/338442";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import u from "classnames";
@@ -16,7 +16,7 @@ import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { zE } from "../905/8732";
 import { tJ } from "../figma_app/741237";
-import { gl, oV } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { B9 } from "../figma_app/722362";
 import { kH } from "../905/309735";
 import { XV } from "../figma_app/383828";
@@ -158,28 +158,28 @@ export function $$J2({
   let eg = useSelector(e => e.library);
   let [ef, eE] = k9(() => {
     let e = backingStateGroupGUID ?? backingSymbolGUID;
-    if (!e || gl(e)) return [[], null];
+    if (!e || isInvalidValue(e)) return [[], null];
     let {
       selectedItem,
       selectedLibraryKey
     } = XV(e, eg, ee);
     return [selectedItem ? [selectedItem] : [], selectedLibraryKey];
   }, [backingStateGroupGUID, backingSymbolGUID, eg, ee]);
-  let ey = useMemo(() => !!onlyInstanceSublayers && !!backingSymbolOrStateGroupOfContainingInstances && backingSymbolOrStateGroupOfContainingInstances !== oV, [onlyInstanceSublayers, backingSymbolOrStateGroupOfContainingInstances]);
+  let ey = useMemo(() => !!onlyInstanceSublayers && !!backingSymbolOrStateGroupOfContainingInstances && backingSymbolOrStateGroupOfContainingInstances !== MIXED_MARKER, [onlyInstanceSublayers, backingSymbolOrStateGroupOfContainingInstances]);
   let eb = rf(Pt(V.recordingKey, "instanceName", instanceAndSublayerGUIDs.join("-")), "mouseenter", () => {
-    highlightNodesOnHover && Ez5.canvasViewState().temporarilyHoveredNodes.set(instanceAndSublayerGUIDs);
+    highlightNodesOnHover && AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set(instanceAndSublayerGUIDs);
   });
   let eT = rf(Pt(V.recordingKey, "instanceName", instanceAndSublayerGUIDs.join("-")), "mouseleave", () => {
-    highlightNodesOnHover && Ez5.canvasViewState().temporarilyHoveredNodes.set([]);
+    highlightNodesOnHover && AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   });
   let eI = "";
   if (null != backingStateGroupGUID || affiliatedStateGroupId) {
-    if (gl(backingStateGroupGUID)) eI = getI18nString("design_systems.instance_panel.mixed");else {
+    if (isInvalidValue(backingStateGroupGUID)) eI = getI18nString("design_systems.instance_panel.mixed");else {
       let e = backingStateGroupGUID ? ee.get(backingStateGroupGUID) : null;
       let t = affiliatedStateGroupId ? ee.get(affiliatedStateGroupId) : null;
       eI = kH(t?.name || e?.name || "");
     }
-  } else null != backingSymbolGUID ? eI = gl(backingSymbolGUID) ? getI18nString("design_systems.instance_panel.mixed") : kH(ee.get(backingSymbolGUID)?.name || "") : null != backingSymbolOrStateGroupOfContainingInstances && (eI = gl(backingSymbolOrStateGroupOfContainingInstances) ? getI18nString("design_systems.instance_panel.mixed") : kH(backingSymbolOrStateGroupOfContainingInstances.name || ""));
+  } else null != backingSymbolGUID ? eI = isInvalidValue(backingSymbolGUID) ? getI18nString("design_systems.instance_panel.mixed") : kH(ee.get(backingSymbolGUID)?.name || "") : null != backingSymbolOrStateGroupOfContainingInstances && (eI = isInvalidValue(backingSymbolOrStateGroupOfContainingInstances) ? getI18nString("design_systems.instance_panel.mixed") : kH(backingSymbolOrStateGroupOfContainingInstances.name || ""));
   let eS = "";
   if (onlyInstances) {
     let e = ee.get(instanceAndSublayerGUIDs[0])?.name;

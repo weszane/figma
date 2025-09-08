@@ -1,5 +1,5 @@
 import type { NoOpVm } from '../700654'
-import { l7 } from '../189185'
+import { permissionScopeHandler } from '../189185'
 import { fO, VK } from '../452962'
 import { getFeatureFlags } from '../601108'
 import { fb } from '../622391'
@@ -46,8 +46,8 @@ export const AnnotationCategoryAPI = {
    */
   label({
     vm,
-          defineVmProp,
-          getAnnotationCategory,
+    defineVmProp,
+    getAnnotationCategory,
   }, handle) {
     defineVmProp({
       handle,
@@ -70,8 +70,8 @@ export const AnnotationCategoryAPI = {
    */
   color({
     vm,
-          defineVmProp,
-          getAnnotationCategory,
+    defineVmProp,
+    getAnnotationCategory,
   }, handle) {
     defineVmProp({
       handle,
@@ -100,8 +100,8 @@ export const AnnotationCategoryAPI = {
    */
   isPreset({
     vm,
-             defineVmProp,
-             getAnnotationCategory,
+    defineVmProp,
+    getAnnotationCategory,
   }, handle) {
     defineVmProp({
       handle,
@@ -124,9 +124,9 @@ export const AnnotationCategoryAPI = {
    */
   remove({
     vm,
-           defineVmFunction,
-           getAnnotationCategory,
-           sceneGraph,
+    defineVmFunction,
+    getAnnotationCategory,
+    sceneGraph,
   }, handle) {
     defineVmFunction({
       handle,
@@ -156,9 +156,9 @@ export const AnnotationCategoryAPI = {
    */
   setColor({
     vm,
-             defineVmFunction,
-             getAnnotationCategory,
-             sceneGraph,
+    defineVmFunction,
+    getAnnotationCategory,
+    sceneGraph,
   }, handle) {
     defineVmFunction({
       handle,
@@ -181,12 +181,12 @@ export const AnnotationCategoryAPI = {
             return cat.custom === null
               ? cat
               : {
-                  ...cat,
-                  custom: {
-                    ...cat.custom,
-                    color: mapColorName(colorValue),
-                  },
-                }
+                ...cat,
+                custom: {
+                  ...cat.custom,
+                  color: mapColorName(colorValue),
+                },
+              }
           }
           return e
         })
@@ -208,9 +208,9 @@ export const AnnotationCategoryAPI = {
    */
   setLabel({
     vm,
-             defineVmFunction,
-             getAnnotationCategory,
-             sceneGraph,
+    defineVmFunction,
+    getAnnotationCategory,
+    sceneGraph,
   }, handle) {
     defineVmFunction({
       handle,
@@ -233,12 +233,12 @@ export const AnnotationCategoryAPI = {
             return cat.custom === null
               ? cat
               : {
-                  ...cat,
-                  custom: {
-                    ...cat.custom,
-                    label: labelValue,
-                  },
-                }
+                ...cat,
+                custom: {
+                  ...cat.custom,
+                  label: labelValue,
+                },
+              }
           }
           return e
         })
@@ -292,19 +292,19 @@ export class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(e.newString('A Full or Dev seat is required to get annotation categories'))
       : e.registerPromise(iJ(this.sceneGraph)).then((t) => {
-          let r = e.newArray()
-          for (let [i, a] of t.entries()) {
-            let t = this.createAnnotationCategoryHandle(a.id)
-            if (e.isNull(t)) {
-              reject(e.newString('Failed to create annotation category'))
-              return
-            }
-            e.setProp(r, i.toString(), t)
+        let r = e.newArray()
+        for (let [i, a] of t.entries()) {
+          let t = this.createAnnotationCategoryHandle(a.id)
+          if (e.isNull(t)) {
+            reject(e.newString('Failed to create annotation category'))
+            return
           }
-          resolve(r)
-        }).catch((t) => {
-          reject(e.newString(t.message))
-        })
+          e.setProp(r, i.toString(), t)
+        }
+        resolve(r)
+      }).catch((t) => {
+        reject(e.newString(t.message))
+      })
     return promise
   }
 
@@ -318,15 +318,15 @@ export class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(t.newString('A Full or Dev seat is required to get annotation categories'))
       : t.registerPromise(iJ(this.sceneGraph)).then((i) => {
-          let r = i.find(t => t.id === e)
-          if (void 0 === r) {
-            resolve(t.$$null)
-            return
-          }
-          resolve(this.createAnnotationCategoryHandle(r.id))
-        }).catch((e) => {
-          reject(t.newString(e.message))
-        })
+        let r = i.find(t => t.id === e)
+        if (void 0 === r) {
+          resolve(t.$$null)
+          return
+        }
+        resolve(this.createAnnotationCategoryHandle(r.id))
+      }).catch((e) => {
+        reject(t.newString(e.message))
+      })
     return promise
   }
 
@@ -340,31 +340,31 @@ export class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(i.newString('A Full seat is required to create annotation categories'))
       : i.registerPromise(iJ(this.sceneGraph)).then((n) => {
-          let s = fO(this.sceneGraph)
-          let o = {
-            id: s,
-            preset: Bll.NONE,
-            custom: {
-              label: e,
-              color: mapColorName(t),
-            },
+        let s = fO(this.sceneGraph)
+        let o = {
+          id: s,
+          preset: Bll.NONE,
+          custom: {
+            label: e,
+            color: mapColorName(t),
+          },
+        }
+        let l = this.sceneGraph.getRoot()
+        let d = [...n, o]
+        _$$r(() => permissionScopeHandler.plugin('update-annotation-categories', () => {
+          let e = l.setAnnotationCategories(d)
+          if (e !== '') {
+            reject(i.newString(e))
+            return
           }
-          let l = this.sceneGraph.getRoot()
-          let d = [...n, o]
-          _$$r(() => l7.plugin('update-annotation-categories', () => {
-            let e = l.setAnnotationCategories(d)
-            if (e !== '') {
-              reject(i.newString(e))
-              return
-            }
-            let t = this.createAnnotationCategoryHandle(s)
-            if (i.isNull(t)) {
-              reject(i.newString('Failed to create annotation category'))
-              return
-            }
-            resolve(t)
-          }))
-        })
+          let t = this.createAnnotationCategoryHandle(s)
+          if (i.isNull(t)) {
+            reject(i.newString('Failed to create annotation category'))
+            return
+          }
+          resolve(t)
+        }))
+      })
     return promise
   }
 }
@@ -378,7 +378,7 @@ async function iJ(nodeAdapter) {
   // Initialize annotation categories if not already available
   if (annotationCategories === null) {
     await Promise.resolve()
-    l7.plugin('initialize-annotation-categories', () => {
+    permissionScopeHandler.plugin('initialize-annotation-categories', () => {
       const initializationError = rootNode.initializeAnnotationCategories()
       if (initializationError !== '') {
         throw new Error(initializationError)

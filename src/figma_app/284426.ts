@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId } from "react";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
-import { NVY } from "../figma_app/763686";
+import { HiddenLabel } from "../905/270045";
+import { ColorFormatEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Pt } from "../figma_app/806412";
@@ -11,7 +11,7 @@ import { l6, c$ as _$$c$ } from "../905/794875";
 import { NC, DW, O4, Hi, jS } from "../905/698732";
 var c = d;
 export let $$m0 = {
-  format: e => e === NVY.HEX ? "Hex" : NVY[e]
+  format: e => e === ColorFormatEnum.HEX ? "Hex" : ColorFormatEnum[e]
 };
 export function $$g1(e) {
   return getFeatureFlags().eu_fpl_migration_styles_picker_selects ? jsx(E, {
@@ -51,19 +51,19 @@ function f({
     recordingKey: Pt(l, "colorFormatSelect"),
     targetDomNode: s?.current,
     children: [jsx(_$$c$, {
-      value: NVY.HEX,
+      value: ColorFormatEnum.HEX,
       recordingKey: Pt(l, "hexOption")
     }), jsx(_$$c$, {
-      value: NVY.RGB,
+      value: ColorFormatEnum.RGB,
       recordingKey: Pt(l, "rgbOption")
     }), jsx(_$$c$, {
-      value: NVY.CSS,
+      value: ColorFormatEnum.CSS,
       recordingKey: Pt(l, "cssOption")
     }), jsx(_$$c$, {
-      value: NVY.HSL,
+      value: ColorFormatEnum.HSL,
       recordingKey: Pt(l, "hslOption")
     }), jsx(_$$c$, {
-      value: NVY.HSB,
+      value: ColorFormatEnum.HSB,
       recordingKey: Pt(l, "hsvOption")
     })]
   });
@@ -74,7 +74,7 @@ function E({
   selectClassName: r,
   recordingKey: i
 }) {
-  let l = [NVY.HEX, NVY.RGB, NVY.CSS, NVY.HSL, NVY.HSB].map(e => jsx(y, {
+  let l = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.CSS, ColorFormatEnum.HSL, ColorFormatEnum.HSB].map(e => jsx(y, {
     colorFormat: e
   }, e));
   return jsx("div", {
@@ -84,7 +84,7 @@ function E({
       onChange: e => t(Number(e)),
       recordingKey: Pt(i, "colorFormatSelect"),
       children: [jsx(l9, {
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: $$m0.format(e)
         }),
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.color_format.aria_label")

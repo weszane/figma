@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { NVY } from "../figma_app/763686";
+import { ColorFormatEnum } from "../figma_app/763686";
 import { kE, oB } from "../figma_app/273493";
 import { _W, sN } from "../figma_app/191804";
 import { V } from "../905/24905";
@@ -54,9 +54,9 @@ export function $$m2(e, t) {
 function h(e, t, i, n) {
   let s = [];
   e.forEach(e => {
-    let o = n === NVY.HSL ? oB(kE(e)) : e;
+    let o = n === ColorFormatEnum.HSL ? oB(kE(e)) : e;
     let l = o.s;
-    let d = n === NVY.HSL ? o.l : o.v;
+    let d = n === ColorFormatEnum.HSL ? o.l : o.v;
     s.push(s.length ? "L" : "M");
     s.push((l * t).toFixed(2));
     s.push(((1 - d) * i).toFixed(2));

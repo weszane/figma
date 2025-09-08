@@ -3,7 +3,7 @@ import { useId, useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { wv, hE, g8, ZP, Q$, MJ, q7, b as _$$b, bL, mc } from "../figma_app/860955";
 import { q7 as _$$q } from "../905/465888";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { l as _$$l } from "../905/479687";
 import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
@@ -14,7 +14,7 @@ import { gB } from "../905/294543";
 import { Z } from "../905/820720";
 import { aq } from "../figma_app/399472";
 import { sZ } from "../905/845253";
-import { ow } from "../figma_app/155287";
+import { isPluginAllowListed } from "../figma_app/155287";
 import { d as _$$d } from "../905/480825";
 import { _d, mL, ZU, aC } from "../905/79137";
 export function $$I1({
@@ -31,7 +31,7 @@ export function $$I1({
   let c = _$$Pt(d);
   let u = sZ();
   let p = useSelector(e => e.whitelistedPlugins);
-  let _ = ow(d, p, u) ? e : {
+  let _ = isPluginAllowListed(d, p, u) ? e : {
     type: "first-party",
     id: "WEB"
   };
@@ -166,7 +166,7 @@ export function $$x2({
   }) : getI18nString("dev_handoff.code.language");
   return jsxs(bL, {
     manager,
-    children: [jsx(_$$h, {
+    children: [jsx(HiddenLabel, {
       htmlFor: e,
       children: b
     }), jsx(_$$e, {
@@ -207,7 +207,7 @@ export function $$N4({
   }) : getI18nString("dev_handoff.code.options");
   return jsxs(bL, {
     manager,
-    children: [jsx(_$$h, {
+    children: [jsx(HiddenLabel, {
       htmlFor: e,
       children: y
     }), jsx(_$$e, {

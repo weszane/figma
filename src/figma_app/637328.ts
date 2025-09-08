@@ -1,6 +1,6 @@
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 export function $$s1(e, t, r, i, a) {
   e.id && "optimistic-id" !== e.id ? WB()?.optimisticallyUpdate({
     FileBrowserPreferences: {
@@ -31,7 +31,7 @@ export function $$s1(e, t, r, i, a) {
     }
   }, a);
 }
-let $$o2 = nF((e, t) => {
+let $$o2 = createOptimistThunk((e, t) => {
   let r = e.getState().user?.id;
   let n = e.getState().currentUserOrgId;
   let a = e.getState().currentTeamId;
@@ -45,7 +45,7 @@ let $$o2 = nF((e, t) => {
   });
   $$s1(t.prefs, r, n, a, o);
 });
-let $$l0 = nF((e, t) => {
+let $$l0 = createOptimistThunk((e, t) => {
   let r = e.getState().user?.id;
   let n = e.getState().currentTeamId;
   let a = t.teamUser;

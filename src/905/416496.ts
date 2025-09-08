@@ -1,4 +1,4 @@
-import { v8u } from "../figma_app/763686";
+import { FileFormat } from "../figma_app/763686";
 let $$r1 = 1;
 let $$a2 = .76;
 let $$s0 = -1;
@@ -18,12 +18,12 @@ export function $$d5(e, t) {
 }
 export function $$c7(e, t) {
   switch (t) {
-    case v8u.JPEG:
+    case FileFormat.JPEG:
       return $$d5(e, "JPEG");
-    case v8u.PDF:
+    case FileFormat.PDF:
       return $$d5(e, "PDF");
-    case v8u.PNG:
-    case v8u.CSV:
+    case FileFormat.PNG:
+    case FileFormat.CSV:
       return $$s0;
   }
 }
@@ -32,12 +32,12 @@ export function $$u4(e, t) {
 }
 export function $$p6(e, t) {
   switch (t) {
-    case v8u.JPEG:
+    case FileFormat.JPEG:
       return $$u4(e, "JPEG");
-    case v8u.PDF:
+    case FileFormat.PDF:
       return $$u4(e, "PDF");
-    case v8u.PNG:
-    case v8u.CSV:
+    case FileFormat.PNG:
+    case FileFormat.CSV:
       return;
   }
 }

@@ -1,8 +1,8 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$i0 = new class {
   constructor() {
-    this.AutoAcceptResponseValidator = vh();
-    this.UpdateInviteBillableProductKeyValidator = vh();
+    this.AutoAcceptResponseValidator = createNoOpValidator();
+    this.UpdateInviteBillableProductKeyValidator = createNoOpValidator();
   }
   putAcceptInvite(e) {
     return this.AutoAcceptResponseValidator.validate(async ({

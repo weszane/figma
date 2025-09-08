@@ -12,8 +12,8 @@ import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088"
 import { T8 } from "../figma_app/831799";
 import { y as _$$y } from "../figma_app/705249";
 import { k as _$$k2 } from "../figma_app/564183";
-import { Y5 } from "../figma_app/455680";
-import { q as _$$q } from "../905/924253";
+import { fullscreenValue } from "../figma_app/455680";
+import { useFullscreenReady } from "../905/924253";
 import { dH } from "../figma_app/722362";
 import { e0 as _$$e } from "../905/696396";
 import { i$, Z5, uw } from "../figma_app/582377";
@@ -53,8 +53,8 @@ import { h1 } from "../905/986103";
 import { Kq } from "../figma_app/936061";
 import { s as _$$s2 } from "../905/573154";
 import { J as _$$J2 } from "../905/231762";
-import { nF } from "../905/350402";
-import { to as _$$to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler } from "../905/156213";
 import { fr } from "../905/201151";
 import { I_, jp, n6 } from "../905/234821";
 import { E as _$$E2 } from "../905/565019";
@@ -64,8 +64,8 @@ import { A as _$$A3 } from "../1617/325876";
 import { A as _$$A4 } from "../svg/214487";
 import { A as _$$A5 } from "../svg/57544";
 import { A as _$$A6 } from "../1617/505000";
-import { xal, glU, fp8 } from "../figma_app/763686";
-import { x7 } from "../905/871411";
+import { DataLoadStatus, Fullscreen, MentionsCppBindings } from "../figma_app/763686";
+import { defaultSessionLocalIDArrayString } from "../905/871411";
 import { waitForAnimationFrame } from "../905/236856";
 import { globalPerfTimer } from "../905/542194";
 import { Point } from "../905/736624";
@@ -99,7 +99,7 @@ import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { m0 } from "../figma_app/976749";
 import { c1 } from "../figma_app/357047";
-import { sr } from "../905/894881";
+import { notificationAPI } from "../905/894881";
 import { Z as _$$Z2 } from "../905/438683";
 import { A as _$$A7 } from "../svg/343167";
 import { A as _$$A8 } from "../svg/383262";
@@ -248,7 +248,7 @@ function ed(e) {
     children: e.parentName
   });
 }
-let ep = nF((e, t) => {
+let ep = createOptimistThunk((e, t) => {
   let {
     receiptsAPI,
     comment
@@ -263,7 +263,7 @@ let ep = nF((e, t) => {
     }
   });
 });
-let eh = nF((e, t) => {
+let eh = createOptimistThunk((e, t) => {
   let {
     receiptsAPI,
     thread
@@ -317,7 +317,7 @@ function ex(e) {
     copyLink(thread.comments[0]);
   }, [copyLink, thread]);
   let b = useCallback(() => {
-    h(_$$to({
+    h(showModalHandler({
       type: _$$E2,
       data: {
         onConfirm: () => onDeleteThread(thread),
@@ -564,7 +564,7 @@ let eS = memo(function (e) {
 });
 function eJ(e) {
   let t = useSelector(e => e.mirror.appModel.pagesList);
-  return null === e.page || Fy(t, e.page) === xal.LOADED;
+  return null === e.page || Fy(t, e.page) === DataLoadStatus.LOADED;
 }
 let e0 = memo(function (e) {
   let {
@@ -682,13 +682,13 @@ let e0 = memo(function (e) {
           thread: e,
           receiptsAPI: I
         }));
-        let a = x7;
+        let a = defaultSessionLocalIDArrayString;
         e.stablePath ? a = `[${e.stablePath.join(",")}]` : e.nodeId && (a = `[${e.nodeId}]`);
         e.isCanvasMention && e.page && e.page !== N && (await E(e.page), await waitForAnimationFrame());
-        glU.setActiveCommentAnchorData({
+        Fullscreen.setActiveCommentAnchorData({
           stablePath: a
         });
-        fp8.markMentionsAsReadFromStablePath(a);
+        MentionsCppBindings.markMentionsAsReadFromStablePath(a);
         e.stablePath ? t = n.getFromStablePath(e.stablePath) : e.nodeId && (t = n.get(e.nodeId));
         t && j(_$$e2(t, x, "canvas-mentions"), {
           additionalTrackEventParams: {
@@ -705,7 +705,7 @@ let e0 = memo(function (e) {
     let U = useCallback(() => {
       if (A()) return;
       l.current = !0;
-      h && !f && Y5.triggerAction("toggle-show-comments", {
+      h && !f && fullscreenValue.triggerAction("toggle-show-comments", {
         source: "comment_sidebar_list"
       });
       F && F();
@@ -769,7 +769,7 @@ let e0 = memo(function (e) {
       }, [m, o, n, r]),
       onCanvasMentionCopyLink: S,
       openPostDetailModal: useCallback(() => {
-        e.sidebarItemType === kT.FEED_POST && o(_$$to({
+        e.sidebarItemType === kT.FEED_POST && o(showModalHandler({
           type: _$$K,
           data: {
             postUuid: e.feedPostPublicUuid,
@@ -1052,7 +1052,7 @@ let tt = forwardRef((e, t) => {
   });
 });
 tt.displayName = "sidebarSearchBar";
-let tl = nF((e, t) => {
+let tl = createOptimistThunk((e, t) => {
   let n = XHR.put(`/api/file/${t.key}/file_followers`, {
     notification_preference: t.notification_preference
   }).catch(t => {
@@ -1091,7 +1091,7 @@ function tp() {
   let c = useDispatch();
   let m = useSelector(e => e.mirror.appModel.showComments);
   let h = useCallback(() => {
-    Y5.triggerAction("toggle-show-comments", {
+    fullscreenValue.triggerAction("toggle-show-comments", {
       source: "comments_sidebar_setting"
     });
   }, []);
@@ -1122,7 +1122,7 @@ function tp() {
   };
   let C = o => {
     if (o === b) return;
-    let a = sr.updateStatusChangePreferences({
+    let a = notificationAPI.updateStatusChangePreferences({
       fileKey: e,
       optIn: o
     }).catch(e => {
@@ -1391,7 +1391,7 @@ function tk({
   } = useContext(hh);
   let r = !activeQuery || activeQuery && !e.length;
   let l = e.length;
-  let d = _$$q();
+  let d = useFullscreenReady();
   let c = _$$k2();
   return T8(jsxs(Fragment, {
     children: [d && jsx(Mw, {
@@ -1495,7 +1495,7 @@ export function $$tT0(e) {
     className: "comments_sidebar--container--g86FO",
     "data-comments-sidebar": !0,
     onKeyDown: e => {
-      Y5.isReady() && "Escape" === e.key && Y5.triggerAction("set-tool-default");
+      fullscreenValue.isReady() && "Escape" === e.key && fullscreenValue.triggerAction("set-tool-default");
       tP(e);
     },
     onMouseDown: tP,

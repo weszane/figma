@@ -1,14 +1,14 @@
-import { vh, YV } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 import { z } from "../905/239603";
 import { P } from "../905/412913";
 import { XS, Vp } from "../figma_app/633080";
 export let $$o0 = new class {
   constructor() {
-    this.PublishedComponentsStatsSchemaValidator = vh();
-    this.LibraryStylesSchemaValidator = YV("LibraryStylesSchemaValidator", z.object({
+    this.PublishedComponentsStatsSchemaValidator = createNoOpValidator();
+    this.LibraryStylesSchemaValidator = createMetaValidator("LibraryStylesSchemaValidator", z.object({
       styles: z.array(XS(P.REST_API).extend(Vp.shape))
     }), "ds_zod_styles", !1);
-    this.CommunityLibrariesStatSchemaValidator = vh();
+    this.CommunityLibrariesStatSchemaValidator = createNoOpValidator();
   }
   getPublishedComponents(e) {
     return this.PublishedComponentsStatsSchemaValidator.validate(async ({

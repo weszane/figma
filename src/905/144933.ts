@@ -1,8 +1,8 @@
 import { Vt, yG, nK, ey } from "../905/859698";
-import { rXF, j0r } from "../figma_app/763686";
-import { fF } from "../905/471229";
+import { VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
+import { getTrackingSessionId } from "../905/471229";
 import { g as _$$g } from "../905/880308";
-import { vh, YV, td } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { e as _$$e } from "../figma_app/324237";
 import { h as _$$h } from "../905/632544";
@@ -34,8 +34,8 @@ export function $$y4(e) {
     version: nK(e.version),
     sortPosition: e.sort_position,
     variableSetId: e.variable_set_id,
-    resolvedType: rXF[e.variable_type],
-    scopes: e.scopes ? e.scopes.map(e => j0r[e]) : [],
+    resolvedType: VariableResolvedDataType[e.variable_type],
+    scopes: e.scopes ? e.scopes.map(e => PropertyScope[e]) : [],
     subscriptionStatus: "LIBRARY",
     key: ey(e.key),
     variableCollectionKey: yG("")
@@ -46,64 +46,64 @@ export function $$b3(e) {
 }
 export let $$v0 = new class {
   constructor() {
-    this.ComponentsSchemaValidator = vh();
-    this.CanvasAssetsSchemaValidator = vh();
-    this.CommunityLibrariesComponentsSchemaValidator = vh();
-    this.LibraryAssetsSchemaValidator = vh();
-    this.LibraryAssetsByLibraryKeySchemaValidator = vh();
-    this.CommunityLibraryAssetsSchemaValidator = vh();
-    this.CommunityLegacyResourcesQuerySchemaValidator = vh();
-    this.ResourcesQuerySchemaValidator = YV("ResourcesQuerySchemaValidator", to, null, !0);
-    this.HubProfilesSchemaValidator = vh();
+    this.ComponentsSchemaValidator = createNoOpValidator();
+    this.CanvasAssetsSchemaValidator = createNoOpValidator();
+    this.CommunityLibrariesComponentsSchemaValidator = createNoOpValidator();
+    this.LibraryAssetsSchemaValidator = createNoOpValidator();
+    this.LibraryAssetsByLibraryKeySchemaValidator = createNoOpValidator();
+    this.CommunityLibraryAssetsSchemaValidator = createNoOpValidator();
+    this.CommunityLegacyResourcesQuerySchemaValidator = createNoOpValidator();
+    this.ResourcesQuerySchemaValidator = createMetaValidator("ResourcesQuerySchemaValidator", to, null, !0);
+    this.HubProfilesSchemaValidator = createNoOpValidator();
     this.getHubProfiles = e => this.HubProfilesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/hub_profiles", td.toAPIParameters(e), {
+    }) => await t.get("/api/search/hub_profiles", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
-    this.CommunityMentionsSchemaValidator = vh();
-    this.PluginsSearchSchemaValidator = vh();
-    this.PrivatePluginsSearchSchemaValidator = vh();
-    this.WidgetsSearchSchemaValidator = vh();
-    this.PrivateWidgetsSearchSchemaValidator = vh();
-    this.HubFilesSchemaValidator = vh();
+    this.CommunityMentionsSchemaValidator = createNoOpValidator();
+    this.PluginsSearchSchemaValidator = createNoOpValidator();
+    this.PrivatePluginsSearchSchemaValidator = createNoOpValidator();
+    this.WidgetsSearchSchemaValidator = createNoOpValidator();
+    this.PrivateWidgetsSearchSchemaValidator = createNoOpValidator();
+    this.HubFilesSchemaValidator = createNoOpValidator();
     this.getHubFiles = e => this.HubFilesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/hub_files", td.toAPIParameters(e), {
+    }) => await t.get("/api/search/hub_files", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
-    this.ExtensionsSchemaValidator = vh();
+    this.ExtensionsSchemaValidator = createNoOpValidator();
     this.getExtensions = e => this.ExtensionsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/extensions", td.toAPIParameters(e), {
+    }) => await t.get("/api/search/extensions", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
-    this.FullResultsSchemaValidator = vh();
+    this.FullResultsSchemaValidator = createNoOpValidator();
     this.getFullResults = e => this.FullResultsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/full_results", td.toAPIParameters(e, ["creator_ids[]", "folder_ids[]", "team_ids[]", "org_ids[]"]), {
+    }) => await t.get("/api/search/full_results", APIParameterUtils.toAPIParameters(e, ["creator_ids[]", "folder_ids[]", "team_ids[]", "org_ids[]"]), {
       retryStrategyOverride: $$f1
     }));
-    this.PreviewSearchSchemaValidator = vh();
+    this.PreviewSearchSchemaValidator = createNoOpValidator();
     this.getPreviewResults = e => this.PreviewSearchSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/file_browser_preview", td.toAPIParameters(e, ["creator_ids[]", "folder_ids[]", "team_ids[]", "org_ids[]"]), {
+    }) => await t.get("/api/search/file_browser_preview", APIParameterUtils.toAPIParameters(e, ["creator_ids[]", "folder_ids[]", "team_ids[]", "org_ids[]"]), {
       retryStrategyOverride: $$f1
     }));
-    this.CodeSuggestionsResultSchemaValidator = vh();
-    this.CodeSuggestionsBulkResultSchemaValidator = vh();
+    this.CodeSuggestionsResultSchemaValidator = createNoOpValidator();
+    this.CodeSuggestionsBulkResultSchemaValidator = createNoOpValidator();
     this.argsWithQueryIdAndSessionId = e => ({
       ...e,
       queryId: _$$g(),
-      sessionId: fF()
+      sessionId: getTrackingSessionId()
     });
     this.getCodeSuggestions = e => this.CodeSuggestionsResultSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/search/code_suggestions", td.toAPIParameters(e), {
+    }) => await t.post("/api/search/code_suggestions", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
     this.getCodeSuggestionsBulk = e => this.CodeSuggestionsBulkResultSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/search/code_suggestions_bulk", td.toAPIParameters(e), {
+    }) => await t.post("/api/search/code_suggestions_bulk", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
     this.getCodeSuggestions_DEPRECATED = e => {
@@ -120,11 +120,11 @@ export let $$v0 = new class {
         ...i
       } = e;
       return {
-        ...td.toAPIParameters(i),
+        ...APIParameterUtils.toAPIParameters(i),
         thumbnail_b64: thumbnailB64
       };
     };
-    this.FacetSearchSchemaValidator = vh();
+    this.FacetSearchSchemaValidator = createNoOpValidator();
     this.getFacetSearchResults = e => {
       let {
         query,
@@ -134,7 +134,7 @@ export let $$v0 = new class {
       } = e;
       return this.FacetSearchSchemaValidator.validate(async ({
         xr: e
-      }) => await e.get("/api/search/facet_search", td.toAPIParameters({
+      }) => await e.get("/api/search/facet_search", APIParameterUtils.toAPIParameters({
         query,
         facet_type: facetType,
         sort: j9.RELEVANCY,
@@ -146,7 +146,7 @@ export let $$v0 = new class {
         retryStrategyOverride: $$f1
       }));
     };
-    this.FileMoveSearchSchemaValidator = vh();
+    this.FileMoveSearchSchemaValidator = createNoOpValidator();
     this.getFileMoveSearchResults = e => {
       let {
         query,
@@ -155,7 +155,7 @@ export let $$v0 = new class {
       } = e;
       return this.FileMoveSearchSchemaValidator.validate(async ({
         xr: e
-      }) => await e.get("/api/file_move/search", td.toAPIParameters({
+      }) => await e.get("/api/file_move/search", APIParameterUtils.toAPIParameters({
         query,
         sort: j9.RELEVANCY,
         desc: !0,
@@ -169,19 +169,19 @@ export let $$v0 = new class {
   postComponents(e) {
     return this.ComponentsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/search/components", td.toAPIParameters(e), {
+    }) => await t.post("/api/search/components", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
   }
   postComponentsFromFile(e) {
     return this.ComponentsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/search/components_from_file", td.toAPIParameters(e), {
+    }) => await t.post("/api/search/components_from_file", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
   }
   postComponentsFromImage(e, t) {
-    let i = td.toAPIParameters(t);
+    let i = APIParameterUtils.toAPIParameters(t);
     return this.ComponentsSchemaValidator.validate(async ({
       xr: t
     }) => await t.post("/api/search/components_from_image", {
@@ -192,7 +192,7 @@ export let $$v0 = new class {
   getAssetsFromCommunityLibraries(e) {
     return this.CommunityLibrariesComponentsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/community_libraries/assets", td.toAPIParameters(function (e) {
+    }) => await t.get("/api/search/community_libraries/assets", APIParameterUtils.toAPIParameters(function (e) {
       let t = {};
       for (let [i, n] of Object.entries(e ?? {})) "hubFileIds" === i ? t["hub_file_ids[]"] = n : t[i] = n;
       return t;
@@ -203,14 +203,14 @@ export let $$v0 = new class {
   getLibraryAssets(e) {
     return this.LibraryAssetsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/library_assets", td.toAPIParameters(e), {
+    }) => await t.get("/api/search/library_assets", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
   }
   getLibraryAssetsByLibraryKey(e) {
     return this.LibraryAssetsByLibraryKeySchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/library_assets", td.toAPIParameters({
+    }) => await t.get("/api/search/library_assets", APIParameterUtils.toAPIParameters({
       ...e,
       group_by_library_key: !0
     }), {
@@ -220,19 +220,19 @@ export let $$v0 = new class {
   getCommunityLibraryAssets(e) {
     return this.CommunityLibraryAssetsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/community_libraries/library_assets", td.toAPIParameters(e), {
+    }) => await t.get("/api/search/community_libraries/library_assets", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
   }
   getCommunityLegacyResources(e) {
     return this.CommunityLegacyResourcesQuerySchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/community_resources", td.toAPIParameters(e), {
+    }) => await t.get("/api/search/community_resources", APIParameterUtils.toAPIParameters(e), {
       retryStrategyOverride: $$f1
     }));
   }
   getResources(e) {
-    let t = td.toAPIParameters({
+    let t = APIParameterUtils.toAPIParameters({
       ...e,
       resource_type: e.resource_type && e.resource_type.join(",")
     });
@@ -245,7 +245,7 @@ export let $$v0 = new class {
   getCommunityMentions(e) {
     return this.CommunityMentionsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/search/community_mentions", td.toAPIParameters({
+    }) => await t.get("/api/search/community_mentions", APIParameterUtils.toAPIParameters({
       query: e.query
     }), {
       retryStrategyOverride: $$f1
@@ -260,7 +260,7 @@ export let $$v0 = new class {
     };
     let l = this.PluginsSearchSchemaValidator.validate(async ({
       xr: n
-    }) => await n.get("/api/search/community_resources", td.toAPIParameters({
+    }) => await n.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || void 0,
       resource_type: L.BrowseResourceTypes.PLUGINS,
@@ -272,7 +272,7 @@ export let $$v0 = new class {
     }));
     return a ? [l, this.PrivatePluginsSearchSchemaValidator.validate(async ({
       xr: n
-    }) => await n.get("/api/search/community_resources", td.toAPIParameters({
+    }) => await n.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || void 0,
       resource_type: L.BrowseResourceTypes.PLUGINS,
@@ -289,7 +289,7 @@ export let $$v0 = new class {
   getCommunityWidgets(e, t, i, n, r) {
     let a = this.WidgetsSearchSchemaValidator.validate(async ({
       xr: r
-    }) => await r.get("/api/search/community_resources", td.toAPIParameters({
+    }) => await r.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || "",
       resource_type: L.BrowseResourceTypes.WIDGETS,
@@ -301,7 +301,7 @@ export let $$v0 = new class {
     }));
     return r ? [a, this.PrivateWidgetsSearchSchemaValidator.validate(async ({
       xr: r
-    }) => await r.get("/api/search/community_resources", td.toAPIParameters({
+    }) => await r.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || "",
       resource_type: L.BrowseResourceTypes.WIDGETS,

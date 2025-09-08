@@ -3,17 +3,17 @@ import { k } from "../905/651849";
 import { XHR } from "../905/910117";
 import { J } from "../905/231762";
 import { nM as _$$nM, pj as _$$pj, Hx as _$$Hx } from "../905/321397";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Qi } from "../figma_app/559491";
 import { R } from "../905/542113";
 import { n as _$$n } from "../figma_app/740025";
 import { Vi } from "../figma_app/364284";
-import { uF, Sb } from "../figma_app/300692";
+import { getPluginVersion, resolveFrameworkType } from "../figma_app/300692";
 import { gJ, ul } from "../figma_app/190980";
 import { bD, xQ } from "../figma_app/45218";
 import { dB, Lx } from "../905/862883";
 let $$f3 = NC("SET_RECENT_WHITEBOARD_TOOLS");
-let $$E25 = nF((e, t) => {
+let $$E25 = createOptimistThunk((e, t) => {
   let r = gJ(t.storeInRecentsKey, dB.WHITEBOARD_TOOL);
   e.dispatch($$f3({
     storeInRecentsKey: t.storeInRecentsKey,
@@ -22,7 +22,7 @@ let $$E25 = nF((e, t) => {
 });
 let $$y13 = NC("ADD_WHITEBOARD_TOOL_TO_RECENTS");
 let $$b24 = NC("SET_RECENT_FACE_STAMPS");
-let $$T18 = nF((e, t) => {
+let $$T18 = createOptimistThunk((e, t) => {
   let r = gJ(t.storeInRecentsKey, dB.FACE_STAMP);
   e.dispatch($$b24({
     storeInRecentsKey: t.storeInRecentsKey,
@@ -31,7 +31,7 @@ let $$T18 = nF((e, t) => {
 });
 let $$I0 = NC("ADD_FACE_STAMP_TO_RECENTS");
 let $$S11 = NC("SYNC_RECENT_PLUGINS");
-let $$v1 = nF((e, t) => {
+let $$v1 = createOptimistThunk((e, t) => {
   let r = gJ(t.storeInRecentsKey, bD.PLUGIN);
   e.dispatch($$N5({
     storeInRecentsKey: t.storeInRecentsKey,
@@ -45,7 +45,7 @@ let $$v1 = nF((e, t) => {
   e.dispatch($$S11(t));
 });
 let $$A19 = NC("SYNC_RECENT_WIDGETS");
-let $$x12 = nF((e, t) => {
+let $$x12 = createOptimistThunk((e, t) => {
   let r = gJ(t.storeInRecentsKey, bD.WIDGET);
   e.dispatch($$C10({
     storeInRecentsKey: t.storeInRecentsKey,
@@ -65,11 +65,11 @@ let $$O23 = _$$pj;
 let $$R2 = _$$Hx;
 let $$L14 = NC("ADD_FETCHED_PLUGIN_VERSION");
 let $$P15 = NC("ADD_FETCHED_WIDGET_VERSION");
-let $$D9 = nF((e, t) => {
+let $$D9 = createOptimistThunk((e, t) => {
   $$H8(e, t);
 });
 let $$k20 = NC("ADD_PLUGIN_TO_RECENTS");
-let $$M17 = nF((e, t) => {
+let $$M17 = createOptimistThunk((e, t) => {
   e.dispatch($$D9({
     resourceType: bD.PLUGIN,
     resourceIds: [t.id]
@@ -78,7 +78,7 @@ let $$M17 = nF((e, t) => {
   e.dispatch($$k20(t));
 });
 let $$F6 = NC("ADD_WIDGETS_TO_RECENTS");
-let $$j7 = nF((e, t) => {
+let $$j7 = createOptimistThunk((e, t) => {
   e.dispatch($$D9({
     resourceType: bD.WIDGET,
     resourceIds: [t.id]
@@ -105,8 +105,8 @@ let G = (e, t, r, n, o, l, d) => {
   });
 };
 let $$V16 = (e, t) => r => {
-  let n = uF(e);
-  let i = (n.manifest?.editorType ?? []).map(Sb);
+  let n = getPluginVersion(e);
+  let i = (n.manifest?.editorType ?? []).map(resolveFrameworkType);
   let a = xQ(e) ? $$j7 : $$M17;
   i.forEach(i => r(a({
     storeInRecentsKey: i,
@@ -202,4 +202,4 @@ export const lD = $$U21;
 export const nM = $$w22;
 export const pj = $$O23;
 export const v8 = $$b24;
-export const vZ = $$E25; 
+export const vZ = $$E25;

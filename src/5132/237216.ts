@@ -2,7 +2,7 @@ import { useDispatch } from "../vendor/514228";
 import { trackEventAnalytics } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { iZ } from "../905/372672";
 import { U } from "../figma_app/45218";
 import { T } from "../5132/203178";
@@ -18,7 +18,7 @@ export function $$u0(e, l = !1, i = !1, _ = !1) {
       hubFileId: e.id,
       searchSessionId: m
     });
-    h(to({
+    h(showModalHandler({
       type: _$$_,
       data: {
         payload: l

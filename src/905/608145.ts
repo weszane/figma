@@ -1,7 +1,7 @@
 import { PluginMenu } from "../905/791556";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _gJ } from "../figma_app/763686";
+import { IAssertResource } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -18,23 +18,23 @@ import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
 import { EG } from "../figma_app/972736";
 import { s as _$$s } from "../905/58247";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { s0 } from "../figma_app/350203";
 import { A as _$$A } from "../905/482208";
 import { nV } from "../905/625959";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Br, ax, gX } from "../figma_app/741237";
 import { $4 } from "../figma_app/506364";
 import { noop } from "../905/813868";
 import { xG } from "../905/277373";
 import { M as _$$M } from "../figma_app/170366";
-import { T as _$$T, Ar, JT } from "../figma_app/300692";
+import { getFullscreenViewEditorType, getCurrentPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { wY } from "../905/753206";
 import { bD } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { mN, Wh } from "../figma_app/985200";
 import { h as _$$h } from "../figma_app/752483";
 import { nO } from "../905/12045";
@@ -68,7 +68,7 @@ export function $$Y2({
   };
 }
 function q() {
-  Y5.dispatch(_$$F.enqueue({
+  fullscreenValue.dispatch(_$$F.enqueue({
     message: "File must be fully loaded to run plugin.",
     type: "missing-file-key-to-run-plugin",
     error: !0
@@ -89,7 +89,7 @@ export function $$J0(e, t, i) {
     openFile,
     localExtensions
   } = e;
-  let w = _$$T();
+  let w = getFullscreenViewEditorType();
   let O = getFeatureFlags().ext_require_appropriate_seat && !e.userCanRunExtensions;
   let K = `extension-action-${t}`;
   switch (i.type) {
@@ -133,7 +133,7 @@ export function $$J0(e, t, i) {
           return;
         }
         let t = e.publishedWidgets[i.pluginId];
-        let n = Ar(t);
+        let n = getCurrentPluginVersion(t);
         t && n ? noop({
           pluginID: t.id,
           widgetName: n.name,
@@ -158,7 +158,7 @@ export function $$J0(e, t, i) {
           return;
         }
         if (i.parameterOnly && i.parameterEntry) {
-          nO(i, t, Y5.dispatch);
+          nO(i, t, fullscreenValue.dispatch);
           return;
         }
         let r = localExtensions[i.localFileId];
@@ -174,7 +174,7 @@ export function $$J0(e, t, i) {
           });
           return;
         }
-        let s = JT({
+        let s = canRunPlugin({
           plugin: r
         });
         s.canRun ? _$$R.instance.enqueue({
@@ -208,7 +208,7 @@ export function $$J0(e, t, i) {
           return;
         }
         if (i.parameterOnly && i.parameterEntry) {
-          nO(i, t, Y5.dispatch);
+          nO(i, t, fullscreenValue.dispatch);
           return;
         }
         let r = function (e, t) {
@@ -220,10 +220,10 @@ export function $$J0(e, t, i) {
           } = t;
           if (allSavedPlugins[e]) return allSavedPlugins[e];
           if (orgSavedPlugins && orgSavedPlugins[e]) return orgSavedPlugins[e];
-          let s = recentlyUsedPlugins?.find(t => t.plugin_id === e && !ZQ(t));
+          let s = recentlyUsedPlugins?.find(t => t.plugin_id === e && !hasLocalFileId(t));
           if (s) return s;
           let o = publishedPlugins[e];
-          return Ar(o);
+          return getCurrentPluginVersion(o);
         }(i.pluginId, {
           allSavedPlugins: e.allSavedPlugins,
           orgSavedPlugins: e.orgSavedPlugins,
@@ -239,7 +239,7 @@ export function $$J0(e, t, i) {
           });
           return;
         }
-        let s = JT({
+        let s = canRunPlugin({
           plugin: r
         });
         s.canRun ? _$$R.instance.enqueue({
@@ -269,15 +269,15 @@ export function $$J0(e, t, i) {
       return;
     case "run-last":
       if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
-      Y5.triggerAction("plugins-run-last", {
+      fullscreenValue.triggerAction("plugins-run-last", {
         source: "menu"
       });
       return;
     case "manage-widgets":
-      Y5.dispatch(EG({
+      fullscreenValue.dispatch(EG({
         toolType: "widget"
       }));
-      Y5.triggerAction("clear-tool", {
+      fullscreenValue.triggerAction("clear-tool", {
         source: "menu"
       });
       _$$s({
@@ -293,7 +293,7 @@ export function $$J0(e, t, i) {
     case "manage-plugins":
       {
         if ("dev" === w || "inspect" === w) {
-          ax(_gJ.PLUGIN);
+          ax(IAssertResource.PLUGIN);
           atomStoreManager.set(HT, "development");
           mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
           return;
@@ -304,10 +304,10 @@ export function $$J0(e, t, i) {
           mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && wY();
           return;
         }
-        Y5.dispatch(EG({
+        fullscreenValue.dispatch(EG({
           toolType: "plugin"
         }));
-        Y5.triggerAction("clear-tool", {
+        fullscreenValue.triggerAction("clear-tool", {
           source: "menu"
         });
         let e = "figma" === w || "slides" === w;
@@ -326,15 +326,15 @@ export function $$J0(e, t, i) {
       Ay.redirect("/community/plugins", "_blank");
       return;
     case "browse-plugins":
-      if (nV(), Y5.dispatch(EG({
+      if (nV(), fullscreenValue.dispatch(EG({
         toolType: "plugin"
-      })), Y5.triggerAction("clear-tool", {
+      })), fullscreenValue.triggerAction("clear-tool", {
         source: "menu"
       }), trackEventAnalytics(s0.FIND_MORE_PLUGINS, {
         isWidget: !1,
         triggeredFrom: t
       }), "dev" === w || "inspect" === w) {
-        ax(_gJ.PLUGIN);
+        ax(IAssertResource.PLUGIN);
         atomStoreManager.set(HT, "recents_and_saved");
         mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
         return;
@@ -355,14 +355,14 @@ export function $$J0(e, t, i) {
       });
       return;
     case "select-all-widgets":
-      Y5.triggerAction("select-all-widgets");
+      fullscreenValue.triggerAction("select-all-widgets");
       return;
     case "browse-widgets":
       nV();
-      Y5.dispatch(EG({
+      fullscreenValue.dispatch(EG({
         toolType: "widget"
       }));
-      Y5.triggerAction("clear-tool", {
+      fullscreenValue.triggerAction("clear-tool", {
         source: "menu"
       });
       trackEventAnalytics(s0.FIND_MORE_PLUGINS, {
@@ -417,7 +417,7 @@ export function $$J0(e, t, i) {
       }
     case "create-new-plugin":
       if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
-      Y5.dispatch(to({
+      fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
           resourceType: bD.PLUGIN
@@ -426,7 +426,7 @@ export function $$J0(e, t, i) {
       return;
     case "create-new-widget":
       if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
-      Y5.dispatch(to({
+      fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
           resourceType: bD.WIDGET
@@ -435,13 +435,13 @@ export function $$J0(e, t, i) {
       return;
     case "import-widget-from-manifest":
       if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
-      Y5.dispatch(JZ({
+      fullscreenValue.dispatch(JZ({
         resourceType: "widget"
       }));
       return;
     case "import-plugin-from-manifest":
       if (O) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
-      Y5.dispatch(JZ({
+      fullscreenValue.dispatch(JZ({
         resourceType: "plugin"
       }));
       return;
@@ -449,7 +449,7 @@ export function $$J0(e, t, i) {
     case "toggle-console":
       if (!W) return;
       if ("toggle-realms" === i.actualTypeForBackwardsCompatibility) {
-        Y5.triggerAction("toggle-use-realms-for-plugin-dev");
+        fullscreenValue.triggerAction("toggle-use-realms-for-plugin-dev");
         return;
       }
       W.toggleDevTools("bottom");

@@ -7,12 +7,12 @@ import { v as _$$v } from "../905/755077";
 import { renderI18nText } from "../905/303541";
 import { aP, vQ } from "../figma_app/530167";
 import { sf } from "../905/929976";
-import { Lo, Ce } from "../905/156213";
+import { popModalStack, hideModal } from "../905/156213";
 import { s0, ZO } from "../figma_app/350203";
 import { fu } from "../figma_app/831799";
 import { GH, aF } from "../905/18797";
 import { e0 } from "../905/696396";
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 function y() {
   return jsxs("svg", {
@@ -1481,7 +1481,7 @@ let w = class e extends Component {
         profileHandle: this.state.newProfileHandle,
         profileId: this.props.profileId
       }));
-      this.props.dispatch(Lo());
+      this.props.dispatch(popModalStack());
     };
     this.navigateToProfileWithHandle = e => {
       this.props.dispatch(sf({
@@ -1489,7 +1489,7 @@ let w = class e extends Component {
         subView: "handle",
         handle: this.state.newProfileHandle
       }));
-      this.props.dispatch(Ce());
+      this.props.dispatch(hideModal());
     };
     this.state = {
       newProfileHandle: e.existingProfileHandle || "",
@@ -1569,13 +1569,13 @@ let w = class e extends Component {
         children: renderI18nText("community.change_profile_handle_modal.view_profile")
       }), jsx($$, {
         type: "submit",
-        onClick: () => this.props.dispatch(Lo()),
+        onClick: () => this.props.dispatch(popModalStack()),
         className: x,
         children: renderI18nText("general.done")
       })]
     }) : this.props.profileId ? jsxs(Fragment, {
       children: [jsx(nR, {
-        onClick: () => this.props.dispatch(Lo()),
+        onClick: () => this.props.dispatch(popModalStack()),
         children: renderI18nText("general.cancel")
       }), jsx(vd, {
         type: "submit",
@@ -1591,7 +1591,7 @@ let w = class e extends Component {
       })]
     }) : jsxs(Fragment, {
       children: [jsx(nR, {
-        onClick: () => this.props.dispatch(Lo()),
+        onClick: () => this.props.dispatch(popModalStack()),
         children: renderI18nText("general.cancel")
       }), jsx(vd, {
         type: "submit",
@@ -1640,7 +1640,7 @@ let w = class e extends Component {
 };
 export function $$C1(e) {
   let t = e.getState();
-  t.modalShown && t.modalShown.type === $$k0 && e.dispatch(Lo());
+  t.modalShown && t.modalShown.type === $$k0 && e.dispatch(popModalStack());
 }
 w.displayName = "ChangeProfileHandle";
 w.id = "profile-change-handle";
@@ -1651,7 +1651,7 @@ let T = connect((e, t) => ({
   userEmail: e.user?.email
 }))(w);
 let $$k0 = "CHANGE_PROFILE_HANDLE";
-qK($$k0, e => {
+registerLegacyModal($$k0, e => {
   let t = e.modalShown;
   return jsx(T, {
     profileId: t.data.profileId,

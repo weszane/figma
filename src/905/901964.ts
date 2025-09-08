@@ -1,4 +1,4 @@
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ET, qW } from "../905/623179";
 import { reportError } from "../905/11";
@@ -10,7 +10,7 @@ import { EC } from "../figma_app/291892";
 export let $$p5 = 5;
 export async function $$m1(e, t, i, p, m, h, g, f, A) {
   let y = await fetch(m).then(e => e.arrayBuffer()).then(e => new Uint8Array(e));
-  let b = Et(y);
+  let b = sha1Hex(y);
   let {
     thumbnailByteArray,
     dimensionData
@@ -77,7 +77,7 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
     ...dimensionData,
     file_name: A
   };
-  let x = Et(thumbnailByteArray ?? y);
+  let x = sha1Hex(thumbnailByteArray ?? y);
   let S = BL(e) ? J.post(h, b, x, f, E) : _$$l.post(g, h, b, x, f, E);
   let w = BL(e) ? _$$e.WAYFINDING : _$$e.FEEDBACK;
   return S.then(n => {

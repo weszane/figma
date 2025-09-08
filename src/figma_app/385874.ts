@@ -2,15 +2,15 @@ import { kiwiParserCodec } from "../905/294864";
 import { debug } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { qN, kE } from "../figma_app/273493";
-import { eVK, glU } from "../figma_app/763686";
+import { AnchorPosition, Fullscreen } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
 import d from "../vendor/415955";
 import { FN } from "../figma_app/191804";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ug } from "../905/706046";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 var c = d;
 let $$f16 = {
   r: 196 / 255,
@@ -101,7 +101,7 @@ export function $$w20(e) {
   return "IMAGE" !== e.type && "VIDEO" !== e.type ? null : e;
 }
 export function $$O4(e) {
-  return !e || gl(e) ? null : e.map($$w20).filter(isNotNullish);
+  return !e || isInvalidValue(e) ? null : e.map($$w20).filter(isNotNullish);
 }
 export function $$R15(e) {
   return Array.from(e.hash).map(e => (e < 16 ? "0" : "") + e.toString(16)).join("");
@@ -113,51 +113,51 @@ export function $$P9(e) {
   return "NOISE" !== e.type ? null : e;
 }
 export function $$D2(e) {
-  return "CENTER" === e.horizontalAlignment && "CENTER" === e.verticalAlignment ? eVK.MIDDLE_CENTER : "START" === e.horizontalAlignment && "CENTER" === e.verticalAlignment ? eVK.MIDDLE_LEFT : "END" === e.horizontalAlignment && "CENTER" === e.verticalAlignment ? eVK.MIDDLE_RIGHT : "CENTER" === e.horizontalAlignment && "START" === e.verticalAlignment ? eVK.TOP_CENTER : "START" === e.horizontalAlignment && "START" === e.verticalAlignment ? eVK.TOP_LEFT : "END" === e.horizontalAlignment && "START" === e.verticalAlignment ? eVK.TOP_RIGHT : "CENTER" === e.horizontalAlignment && "END" === e.verticalAlignment ? eVK.BOTTOM_CENTER : "START" === e.horizontalAlignment && "END" === e.verticalAlignment ? eVK.BOTTOM_LEFT : "END" === e.horizontalAlignment && "END" === e.verticalAlignment ? eVK.BOTTOM_RIGHT : eVK.TOP_LEFT;
+  return "CENTER" === e.horizontalAlignment && "CENTER" === e.verticalAlignment ? AnchorPosition.MIDDLE_CENTER : "START" === e.horizontalAlignment && "CENTER" === e.verticalAlignment ? AnchorPosition.MIDDLE_LEFT : "END" === e.horizontalAlignment && "CENTER" === e.verticalAlignment ? AnchorPosition.MIDDLE_RIGHT : "CENTER" === e.horizontalAlignment && "START" === e.verticalAlignment ? AnchorPosition.TOP_CENTER : "START" === e.horizontalAlignment && "START" === e.verticalAlignment ? AnchorPosition.TOP_LEFT : "END" === e.horizontalAlignment && "START" === e.verticalAlignment ? AnchorPosition.TOP_RIGHT : "CENTER" === e.horizontalAlignment && "END" === e.verticalAlignment ? AnchorPosition.BOTTOM_CENTER : "START" === e.horizontalAlignment && "END" === e.verticalAlignment ? AnchorPosition.BOTTOM_LEFT : "END" === e.horizontalAlignment && "END" === e.verticalAlignment ? AnchorPosition.BOTTOM_RIGHT : AnchorPosition.TOP_LEFT;
 }
 export function $$k5(e) {
   switch (e) {
-    case eVK.TOP_LEFT:
+    case AnchorPosition.TOP_LEFT:
       return {
         horizontalAlignment: "START",
         verticalAlignment: "START"
       };
-    case eVK.TOP_CENTER:
+    case AnchorPosition.TOP_CENTER:
       return {
         horizontalAlignment: "CENTER",
         verticalAlignment: "START"
       };
-    case eVK.TOP_RIGHT:
+    case AnchorPosition.TOP_RIGHT:
       return {
         horizontalAlignment: "END",
         verticalAlignment: "START"
       };
-    case eVK.MIDDLE_LEFT:
+    case AnchorPosition.MIDDLE_LEFT:
       return {
         horizontalAlignment: "START",
         verticalAlignment: "CENTER"
       };
-    case eVK.MIDDLE_CENTER:
+    case AnchorPosition.MIDDLE_CENTER:
       return {
         horizontalAlignment: "CENTER",
         verticalAlignment: "CENTER"
       };
-    case eVK.MIDDLE_RIGHT:
+    case AnchorPosition.MIDDLE_RIGHT:
       return {
         horizontalAlignment: "END",
         verticalAlignment: "CENTER"
       };
-    case eVK.BOTTOM_LEFT:
+    case AnchorPosition.BOTTOM_LEFT:
       return {
         horizontalAlignment: "START",
         verticalAlignment: "END"
       };
-    case eVK.BOTTOM_CENTER:
+    case AnchorPosition.BOTTOM_CENTER:
       return {
         horizontalAlignment: "CENTER",
         verticalAlignment: "END"
       };
-    case eVK.BOTTOM_RIGHT:
+    case AnchorPosition.BOTTOM_RIGHT:
       return {
         horizontalAlignment: "END",
         verticalAlignment: "END"
@@ -259,8 +259,8 @@ let $$M7 = new class {
 }();
 let F = !1;
 export function $$j14() {
-  F || (F = !0, Y5.onReady().then(() => {
-    let e = glU?.requestDefaultImageStyle();
+  F || (F = !0, fullscreenValue.onReady().then(() => {
+    let e = Fullscreen?.requestDefaultImageStyle();
     let t = e ? kiwiParserCodec.decodeMessage(e) : null;
     t && t.nodeChanges && t.nodeChanges.length > 0 && t.nodeChanges[0].fillPaints && (S = t.nodeChanges[0].fillPaints[0]);
   }));

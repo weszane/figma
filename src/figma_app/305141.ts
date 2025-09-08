@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { A } from "../vendor/90566";
 import { Z } from "../905/521211";
 import { Fk } from "../figma_app/167249";
@@ -33,8 +33,8 @@ export function $$u1({
 }) {
   let r = OG(t ? "title" : "page_title");
   let o = A(t => {
-    l7.user("set-responsive-set-settings", () => {
-      glU?.setResponsiveSetSettings({
+    permissionScopeHandler.user("set-responsive-set-settings", () => {
+      Fullscreen?.setResponsiveSetSettings({
         title: t.trim()
       }, [e]);
     });

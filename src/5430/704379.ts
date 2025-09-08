@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { y1 } from "../figma_app/492908";
+import { range } from "../figma_app/492908";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { N } from "../figma_app/469468";
@@ -59,7 +59,7 @@ export function $$p0({
     "data-testid": "plugin-list",
     children: jsx("div", {
       ...xk("twoColumn" === y ? _.twoColumn : x ? _.oneColumn : void 0),
-      children: d ? y1(p).map(e => jsx(u, {}, e)) : e.map((e, i) => jsx(_$$m, {
+      children: d ? range(p).map(e => jsx(u, {}, e)) : e.map((e, i) => jsx(_$$m, {
         resource: e,
         onIntersectionChange: r => t(e, r.isIntersecting),
         isOrgTeamBrowsing: r,

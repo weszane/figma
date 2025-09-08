@@ -1,7 +1,7 @@
 import { e as _$$e } from "../905/198283";
 import { isNotNullish } from "../figma_app/95419";
 import { aH } from "../figma_app/273493";
-import { Z6A, OQN, r6o } from "../figma_app/763686";
+import { NodeType, BooleanOperationType, SelectionMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { f as _$$f } from "../905/24905";
 import { Yx } from "../figma_app/930338";
@@ -95,18 +95,18 @@ class T {
         targetNodeType: e
       }) => {
         let t = XE(this.store.getState().selectedView);
-        if (e !== Z6A.STAMP) {
-          if (e === Z6A.NONE) return getI18nString("fullscreen.accessibility.tool_unselected");
+        if (e !== NodeType.STAMP) {
+          if (e === NodeType.NONE) return getI18nString("fullscreen.accessibility.tool_unselected");
           {
             let r = this.getNodeTypeName(e);
             return !function (e, t) {
               switch (e) {
-                case Z6A.LINE:
-                case Z6A.VECTOR:
-                case Z6A.CONNECTOR:
-                case Z6A.TABLE:
-                case Z6A.TABLE_CELL:
-                case Z6A.MEDIA:
+                case NodeType.LINE:
+                case NodeType.VECTOR:
+                case NodeType.CONNECTOR:
+                case NodeType.TABLE:
+                case NodeType.TABLE_CELL:
+                case NodeType.MEDIA:
                   return !1;
               }
               switch (t) {
@@ -289,19 +289,19 @@ class T {
         numNodes: t
       }) => {
         switch (e) {
-          case OQN.UNION:
+          case BooleanOperationType.UNION:
             return getI18nString("fullscreen.accessibility_dom.boolean_operation.union", {
               numNodes: t
             });
-          case OQN.INTERSECT:
+          case BooleanOperationType.INTERSECT:
             return getI18nString("fullscreen.accessibility_dom.boolean_operation.intersect", {
               numNodes: t
             });
-          case OQN.SUBTRACT:
+          case BooleanOperationType.SUBTRACT:
             return getI18nString("fullscreen.accessibility_dom.boolean_operation.subtract", {
               numNodes: t
             });
-          case OQN.XOR:
+          case BooleanOperationType.XOR:
             return getI18nString("fullscreen.accessibility_dom.boolean_operation.xor", {
               numNodes: t
             });
@@ -317,7 +317,7 @@ class T {
   }
   getNodeTypeName(e) {
     let t = XE(this.store.getState().selectedView);
-    let r = Z6A[e];
+    let r = NodeType[e];
     return rs(r, t);
   }
   announce(e) {
@@ -342,8 +342,8 @@ class T {
     }));
   }
   showKeyboardSelectionModeChangedToast(e) {
-    let t = e === r6o.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection_activated") : getI18nString("fullscreen.accessibility.keyboard_pick_selection_activated");
-    let r = e === r6o.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection.context") : getI18nString("fullscreen.accessibility.keyboard_pick_selection.context");
+    let t = e === SelectionMode.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection_activated") : getI18nString("fullscreen.accessibility.keyboard_pick_selection_activated");
+    let r = e === SelectionMode.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection.context") : getI18nString("fullscreen.accessibility.keyboard_pick_selection.context");
     this.store.dispatch(F.enqueue({
       type: `${$$E3}-keyboard-selection-mode-changed`,
       message: t,

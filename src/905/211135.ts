@@ -6,15 +6,15 @@ import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { Yu, sp } from "../905/355291";
 import { Ve, MV } from "../905/264101";
 import { Z } from "../905/854480";
 import { iZ, pS } from "../905/372672";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
 import { aY, F4, Hx, G6 } from "../figma_app/639088";
-export let $$y0 = Ju(function (e) {
+export let $$y0 = registerModal(function (e) {
   let {
     open,
     onClose
@@ -71,12 +71,12 @@ export let $$y0 = Ju(function (e) {
               variant: "secondary",
               onClick: e => {
                 e.preventDefault();
-                b(Lo());
+                b(popModalStack());
               },
               children: renderI18nText("auth.two-factor-setup.close")
             }), jsx($n, {
               onClick: () => {
-                b(Lo());
+                b(popModalStack());
                 b(Yu());
               },
               children: renderI18nText("auth.two-factor-setup.sms_settings")

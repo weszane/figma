@@ -8,7 +8,7 @@ import { E as _$$E } from "../905/632989";
 import { R as _$$R } from "../905/621802";
 import { r as _$$r } from "../905/571562";
 import { I as _$$I } from "../905/763478";
-import { rXF, Z_n } from "../figma_app/763686";
+import { VariableResolvedDataType, VariableDataType } from "../figma_app/763686";
 import { Te } from "../vendor/813803";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -521,7 +521,7 @@ function e_({
   valuePreview: r = null,
   variableThumbnail: i
 }) {
-  return r || ("fields" === e && t !== rXF.COLOR ? jsx(Fragment, {
+  return r || ("fields" === e && t !== VariableResolvedDataType.COLOR ? jsx(Fragment, {
     children: Oi(i)
   }) : null);
 }
@@ -772,12 +772,12 @@ function ef({
     let t = Dh.parse(JSON.parse(e.itemField.value));
     T = jsx(LO, {
       value: {
-        type: Z_n.IMAGE,
-        resolvedType: rXF.IMAGE,
+        type: VariableDataType.IMAGE,
+        resolvedType: VariableResolvedDataType.IMAGE,
         value: t
       },
       onColorChitMouseDown: E,
-      resolvedTypeFallback: rXF.STRING,
+      resolvedTypeFallback: VariableResolvedDataType.STRING,
       disabled: !1,
       variableThumbnailIconType: sW.NONE
     });
@@ -795,12 +795,12 @@ function ef({
   }));
   null === T && (T = jsx(LO, {
     value: {
-      type: Z_n.STRING,
-      resolvedType: rXF.STRING,
+      type: VariableDataType.STRING,
+      resolvedType: VariableResolvedDataType.STRING,
       value: b.name
     },
     onColorChitMouseDown: E,
-    resolvedTypeFallback: rXF.STRING,
+    resolvedTypeFallback: VariableResolvedDataType.STRING,
     disabled: !1,
     variableThumbnailIconType: sW.NONE
   }));
@@ -1021,7 +1021,7 @@ function eb({
   let T = useCallback(() => {
     p(e);
   }, [p, e]);
-  if ("MIXED" === thumbnailValue || thumbnailValue?.resolvedType !== rXF.COLOR) return null;
+  if ("MIXED" === thumbnailValue || thumbnailValue?.resolvedType !== VariableResolvedDataType.COLOR) return null;
   {
     let t = thumbnailValue.value;
     return jsx(_$$E, {

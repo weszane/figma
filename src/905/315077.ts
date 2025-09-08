@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { G } from "../905/720066";
 import { Q } from "../905/61477";
 import { EN, AR, K4 } from "../905/182534";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { _6 } from "../figma_app/386952";
 import { yf7 } from "../figma_app/43951";
 import { vj } from "../905/574958";
@@ -38,11 +38,11 @@ export function $$v0({
   let N = G(R, l, C ? e : void 0);
   let P = useCallback(e => {
     e.preventDefault();
-    e.metaKey || 1 === e.button ? Ay.redirect(R, "_blank") : (u(AS()), K4(u, T, _ ?? null, b, v));
+    e.metaKey || 1 === e.button ? Ay.redirect(R, "_blank") : (u(hideModalHandler()), K4(u, T, _ ?? null, b, v));
   }, [R, _, b, v, u, T]);
   let O = useCallback(e => {
     e.preventDefault();
-    u(AS());
+    u(hideModalHandler());
     K4(u, T, _ ?? null, b, v);
   }, [_, b, v, u, T]);
   let D = useCallback(e => {

@@ -1,6 +1,6 @@
-import { Ar } from "../figma_app/300692";
+import { getCurrentPluginVersion } from "../figma_app/300692";
 import { xQ } from "../figma_app/45218";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { jl } from "../905/544659";
 import { ic } from "../905/702716";
 export function $$l2(e, t, i, n) {
@@ -21,7 +21,7 @@ export function $$d10({
   return !!(xQ(e) || t?.manifest.containsWidget);
 }
 export function $$c6(e, t) {
-  return e ? e.manifest : t ? Ar(t)?.manifest : void 0;
+  return e ? e.manifest : t ? getCurrentPluginVersion(t)?.manifest : void 0;
 }
 export function $$u9(e, t) {
   return $$c6(e, t)?.editorType;
@@ -44,7 +44,7 @@ export function $$_0(e, t, i) {
     if ($$p1(e)) return !0;
     let i = e?.creator.id;
     return !!i && i === t.id;
-  }(t, i) || !i.stripe_account_status) ? "payments_api" : e?.manifest?.enableProposedApi ? "proposed_api" : e.manifest.editorType?.includes(FW.INSPECT) ? "inspect_editor_type" : $$h5(e) && (e.manifest.containsWidget || $$p1(t) || t && Ar(t)?.manifest?.documentAccess === "dynamic-page") ? "document_access" : e.error ? ic(e.error) ? "missing_editor_type" : jl(e.error) ? "missing_network_reasoning" : "invalid_manifest" : null : "invalid_id" : null;
+  }(t, i) || !i.stripe_account_status) ? "payments_api" : e?.manifest?.enableProposedApi ? "proposed_api" : e.manifest.editorType?.includes(ManifestEditorType.INSPECT) ? "inspect_editor_type" : $$h5(e) && (e.manifest.containsWidget || $$p1(t) || t && getCurrentPluginVersion(t)?.manifest?.documentAccess === "dynamic-page") ? "document_access" : e.error ? ic(e.error) ? "missing_editor_type" : jl(e.error) ? "missing_network_reasoning" : "invalid_manifest" : null : "invalid_id" : null;
 }
 export function $$A8({
   existingExtension: e,

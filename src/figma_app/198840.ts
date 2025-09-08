@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { X3B, bOM } from "../figma_app/763686";
+import { PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { xf } from "../figma_app/416935";
 import { Ay } from "../905/612521";
 import { Gc } from "../905/63728";
@@ -123,7 +123,7 @@ export function $$C11(e, t, r, n) {
   !n && !r && (e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id) && (a = Tn(e.authedActiveCommunityProfile));
   let y = gO(o, g, e, a);
   let b = r ? o.viewer_mode : $$N15(g.editor_type);
-  !r && o.viewer_mode === FTemplateCategoryType.PROTOTYPE && n && X3B?.firstPagePrototypeStatus() === bOM.VALID && (b = FTemplateCategoryType.PROTOTYPE);
+  !r && o.viewer_mode === FTemplateCategoryType.PROTOTYPE && n && PrototypingTsApi?.firstPagePrototypeStatus() === PresentationValidationStatus.VALID && (b = FTemplateCategoryType.PROTOTYPE);
   let T = {
     ...Rs(),
     tokens: (o.community_publishers ? [...o.community_publishers.accepted, ...(o.community_publishers.pending || [])] : []).reduce((t, r) => {

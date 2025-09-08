@@ -36,7 +36,7 @@ import { c5 as _$$c4, uo as _$$uo8 } from '../905/93909';
 import { i as _$$i5 } from '../905/97346';
 import { bE as _$$bE4, uo as _$$uo5, yH as _$$yH3, yJ as _$$yJ5 } from '../905/98702';
 import { useSprigWithSampling } from '../905/99656';
-import { Ju, ZU } from '../905/102752';
+import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { C as _$$C2 } from '../905/109977';
 import { cZ as _$$cZ2, Xc } from '../905/113138';
 import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
@@ -51,7 +51,7 @@ import { CL } from '../905/148074';
 import { Q as _$$Q3 } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
 import { N as _$$N3 } from '../905/155850';
-import { $O, aZ as _$$aZ, hm as _$$hm, Lo as _$$Lo2, to as _$$to, Ce, ES } from '../905/156213';
+import { showModal, popPrevModal, updateModal, popModalStack, showModalHandler, hideModal, hideSpecificModal } from '../905/156213';
 import { lM as _$$lM, Dx } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
@@ -64,7 +64,7 @@ import { t as _$$t4 } from '../905/181774';
 import { i as _$$i4 } from '../905/182187';
 import { Z as _$$Z4 } from '../905/184216';
 import { i_ as _$$i_, FB, Q5 } from '../905/187165';
-import { l7 as _$$l3 } from '../905/189185';
+import { permissionScopeHandler as _$$l3 } from '../905/189185';
 import { l as _$$l10 } from '../905/190247';
 import { t as _$$t9 } from '../905/192333';
 import { mC as _$$mC, X7 as _$$X5, zq } from '../905/193529';
@@ -74,7 +74,7 @@ import { px as _$$px2 } from '../905/201014';
 import { H as _$$H4 } from '../905/202181';
 import { h as _$$h } from '../905/207101';
 import { x as _$$x3 } from '../905/209285';
-import { Mv as _$$Mv2, oV as _$$oV } from '../905/216495';
+import { createMixedArray, MIXED_MARKER } from '../905/216495';
 import { w as _$$w } from '../905/230422';
 import { J as _$$J } from '../905/231762';
 import { y as _$$y } from '../905/235145';
@@ -108,7 +108,7 @@ import { v as _$$v5 } from '../905/344656';
 import { D6 as _$$D5, Nx } from '../905/345933';
 import { QI as _$$QI } from '../905/346794';
 import { P as _$$P4 } from '../905/347284';
-import { nF as _$$nF2 } from '../905/350402';
+import { createOptimistThunk } from '../905/350402';
 import { E as _$$E8 } from '../905/355220';
 import { l as _$$l5 } from '../905/362016';
 import { iZ as _$$iZ2 } from '../905/372672';
@@ -126,7 +126,7 @@ import { U as _$$U3 } from '../905/402186';
 import { aV as _$$aV } from '../905/405710';
 import { debugState } from '../905/407919';
 import { f as _$$f2, P as _$$P5 } from '../905/412913';
-import { UG } from '../905/414007';
+import { getCookieOrStorage } from '../905/414007';
 import { Ok } from '../905/414069';
 import { t as _$$t6 } from '../905/414363';
 import { performanceMetricsTracker } from '../905/414972';
@@ -177,7 +177,7 @@ import { reactTimerGroup } from '../905/542194';
 import { xH } from '../905/546357';
 import { subscribeAndGetStatus } from '../905/553831';
 import { $B, aL as _$$aL, hT as _$$hT2, Y4 } from '../905/561087';
-import { H as _$$H2, R as _$$R2 } from '../905/561433';
+import { requestDeferredExecution, registerDeferredCallback } from '../905/561433';
 import { i as _$$i2 } from '../905/565139';
 import { nD as _$$nD, uB as _$$uB } from '../905/572991';
 import { s as _$$s2 } from '../905/573154';
@@ -215,7 +215,7 @@ import { S as _$$S4 } from '../905/669334';
 import { measureSyncDuration, measureAsyncDuration } from '../905/670985';
 import { sh as _$$sh, uA as _$$uA, xN, YO } from '../905/672897';
 import { oW as _$$oW } from '../905/675859';
-import { c as _$$c2, r as _$$r4 } from '../905/676456';
+import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
 import { tD as _$$tD, FO, Hj } from '../905/682977';
 import { cZ as _$$cZ, oM as _$$oM, pF as _$$pF, tU as _$$tU } from '../905/683495';
 import { EO } from '../905/691205';
@@ -246,7 +246,7 @@ import { P as _$$P2 } from '../905/724705';
 import { y as _$$y2 } from '../905/725962';
 import { Point } from '../905/736624';
 import { uM as _$$uM, HO } from '../905/738636';
-import { K as _$$K } from '../905/744769';
+import { extractOriginalTextMap } from '../905/744769';
 import { l as _$$l1 } from '../905/745972';
 import { x as _$$x4 } from '../905/749159';
 import { k as _$$k6 } from '../905/749197';
@@ -259,12 +259,12 @@ import { m as _$$m } from '../905/760316';
 import { MV, WB } from '../905/761735';
 import { pP as _$$pP, fW } from '../905/765855';
 import { d1 as _$$d2, xA } from '../905/766303';
-import { e as _$$e2 } from '../905/770460';
+import { handlePropertyState } from '../905/770460';
 import { gD } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
 import { M as _$$M } from '../905/777093';
 import { $A } from '../905/782918';
-import { cL as _$$cL2, FB as _$$FB, ne as _$$ne, p0 as _$$p6, A9, BC, EB, Fm, ke, SR, TO } from '../905/784363';
+import { VERSION_HISTORY_RESET, VERSION_HISTORY_SET_FILE_LAST_SEEN_AT, VERSION_HISTORY_LOADING, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_DOC_HAS_CHANGED, VERSION_HISTORY_APPEND, UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_COMPARE_CHANGES } from '../905/784363';
 import { X as _$$X3 } from '../905/784599';
 import { FullscreenMenu, PluginMenu } from '../905/791556';
 import { L4 as _$$L2, jr } from '../905/792802';
@@ -294,7 +294,7 @@ import { cc as _$$cc, zl as _$$zl, By, qB, RE, vR } from '../905/862321';
 import { RD } from '../905/862913';
 import { w as _$$w2 } from '../905/863010';
 import { xH as _$$xH2 } from '../905/869282';
-import { aI as _$$aI2, AD } from '../905/871411';
+import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
 import { createDeferredPromise } from '../905/874553';
 import { $I as _$$$I, ay as _$$ay, cr as _$$cr, dC as _$$dC, iE as _$$iE2, lx as _$$lx, ow as _$$ow, ru as _$$ru, uo as _$$uo3, yH as _$$yH2, B2, Bn, Cp, gP, Ho, HV, I0, JV, KQ, ku, Ty, U$, UA, WE, xI, Y1 } from '../905/879323';
 import { g as _$$g3 } from '../905/880308';
@@ -309,7 +309,7 @@ import { Au, h8, UK } from '../905/898493';
 import { XHR } from '../905/910117';
 import { F as _$$F6 } from '../905/915030';
 import { A as _$$A5 } from '../905/920142';
-import { q as _$$q6 } from '../905/924253';
+import { useFullscreenReady } from '../905/924253';
 import { cr as _$$cr2, Oo as _$$Oo } from '../905/926523';
 import { E as _$$E5, v as _$$v2 } from '../905/928543';
 import { ab as _$$ab, ho as _$$ho, o7 as _$$o2, oB as _$$oB, os as _$$os, sf as _$$sf, Ts as _$$Ts, Qv } from '../905/929976';
@@ -358,7 +358,7 @@ import { FEditorType, mapEditorTypeToStringWithObfuscated, mapFileTypeToEditorTy
 import { o as _$$o6 } from '../figma_app/54816';
 import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
 import { Eo, qv } from '../figma_app/80990';
-import { lu as _$$lu, TG } from '../figma_app/84367';
+import { subscribeObservable, executeDeferredCallbacks } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { Wl } from '../figma_app/88239';
 import { aK as _$$aK, ho as _$$ho2, il as _$$il, lz as _$$lz, p5 as _$$p3, pj as _$$pj, PQ as _$$PQ, re as _$$re, Uv as _$$Uv, bO, Bs, CN, D9, fG, fk, FP, fy, Gm, JM, Jt, kP, Kx, OB, Qm, R5, Rw, U8, UC, UM, vg, Wk, XE, XQ, Y6, yv, Z1, Z_ } from '../figma_app/91703';
@@ -378,7 +378,7 @@ import { qV } from '../figma_app/165623';
 import { buildUploadUrl, defaultUserConfig, getInitialOptions, isGovCluster, isLocalCluster, isProdCluster, isStagingCluster } from '../figma_app/169182';
 import { P5 as _$$P6 } from '../figma_app/175992';
 import { c0 as _$$c5 } from '../figma_app/176973';
-import { vh } from '../figma_app/181241';
+import { createNoOpValidator } from '../figma_app/181241';
 import { Ni } from '../figma_app/188152';
 import { FPlanAccessType, FTeamAccessPermissionType, FBasicPermissionType, FUserRoleType, FFileType, FAccessLevelType, FProductAccessType, FPublicationStatusType, FOrganizationLevelType, FFeatureAdoptionStatusType, FPermissionLevelType, FPaymentHealthStatusType, FResourceCategoryType, FPlanRestrictionType } from '../figma_app/191312';
 import { K as _$$K3, U2 as _$$U2, bW, Iu, Np, vU, yn } from '../figma_app/193867';
@@ -399,7 +399,7 @@ import { h as _$$h2 } from '../figma_app/275739';
 import { Gk } from '../figma_app/277330';
 import { Rs } from '../figma_app/288654';
 import { wl, y4 } from '../figma_app/298277';
-import { uF as _$$uF } from '../figma_app/300692';
+import { getPluginVersion } from '../figma_app/300692';
 import { g3 } from '../figma_app/304207';
 import { RR } from '../figma_app/307841';
 import { mu as _$$mu, sm as _$$sm, V9 as _$$V4, K6, PU, yc } from '../figma_app/308685';
@@ -428,7 +428,7 @@ import { hg as _$$hg } from '../figma_app/425489';
 import { Do } from '../figma_app/428858';
 import { h0, TP, Y3, zE } from '../figma_app/435872';
 import { PI as _$$PI, s6 as _$$s4, AY } from '../figma_app/443991';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { Cp as _$$Cp } from '../figma_app/457074';
 import { q as _$$q } from '../figma_app/458300';
 import { D6 as _$$D3, Kd as _$$Kd, px as _$$px, j_, S2 } from '../figma_app/465071';
@@ -437,7 +437,7 @@ import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
 import { G as _$$G } from '../figma_app/471068';
 import { Cg, Ug, v7 } from '../figma_app/475303';
 import { $h, Ay as _$$Ay4, eK as _$$eK, Lo as _$$Lo, pv as _$$pv, Qg as _$$Qg, Ts as _$$Ts2, Az, Ef, i, I2, Je, js, M2, MN, Mv, Qe, qU, WG, XS, yy } from '../figma_app/482142';
-import { qE, yT } from '../figma_app/492908';
+import { clamp, randomBetween } from '../figma_app/492908';
 import { isEmptyObject } from '../figma_app/493477';
 import { I2 as _$$I, pk as _$$pk, tb as _$$tb, tp as _$$tp, _X, Il, kb, Um, yk } from '../figma_app/502247';
 import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640';
@@ -464,7 +464,7 @@ import { cX as _$$cX, AT, jg, M$, PW, Qx, Tb, wg, Yu } from '../figma_app/633080
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
 import { _d, J7 } from '../figma_app/650409';
-import { mL as _$$mL, AS } from '../figma_app/661371';
+import { PAGINATION_PREV, PAGINATION_NEXT } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
 import { fl, ye, zw } from '../figma_app/682945';
 import { DI } from '../figma_app/687776';
@@ -486,7 +486,7 @@ import { R_ } from '../figma_app/749805';
 import { cT as _$$cT2, rJ as _$$rJ, t2 as _$$t7, ue as _$$ue, C0, Jh, XU } from '../figma_app/756995';
 import { aU as _$$aU } from '../figma_app/757606';
 import { nx as _$$nx } from '../figma_app/761870';
-import { aTn, Egt, EW4, Ez5, FAf, fZb, glU, H4l, h62, ibQ, kul, Lov, lyf, m1T, Oin, RY1, tvY, vXe, w3z, W8Y, xae, xal, ywP } from '../figma_app/763686';
+import { KeyboardLayout, SceneGraphHelpers, EditAction, AppStateTsApi, DesignWorkspace, perfTimerFrameManagerBindings, Fullscreen, colorManagementStateJs, WhiteboardIntegrationType, ItemType, SchemaJoinStatus, PageViewMode, ViewType, LayoutTabType, UIVisibilitySetting, IMixedValues, BackgroundPattern, Fonts, HandoffBindingsCpp, SessionStatus, UserInterfaceElements, DataLoadStatus, ColorProfileEnum } from '../figma_app/763686';
 import { $0, $M, cL as _$$cL3, Fm as _$$Fm, i4 as _$$i3, js as _$$js, lI as _$$lI, li as _$$li, nb as _$$nb, on as _$$on2, PB as _$$PB2, pD as _$$pD, pI as _$$pI, Q8 as _$$Q5, RI as _$$RI, RO as _$$RO, rW as _$$rW, sQ as _$$sQ, U3 as _$$U5, uy as _$$uy, uz as _$$uz, wg as _$$wg, xH as _$$xH3, y3 as _$$y4, yH as _$$yH4, Df, F8, gi, Jc, k7, NJ, Oo, q4, QD, RP, UU, We, wJ, Z5 } from '../figma_app/770088';
 import { A as _$$A1 } from '../figma_app/776368';
 import { BrowserInfo, isFigmaMobileApp } from '../figma_app/778880';
@@ -498,7 +498,7 @@ import { eu as _$$eu } from '../figma_app/807786';
 import { L4 as _$$L3 } from '../figma_app/819288';
 import { pz as _$$pz, jz } from '../figma_app/825489';
 import { wH } from '../figma_app/828908';
-import { tY as _$$tY } from '../figma_app/831101';
+import { SubscriptionType } from '../figma_app/831101';
 import { tf as _$$tf, fu } from '../figma_app/831799';
 import { V_ } from '../figma_app/841351';
 import { Ay as _$$Ay5 } from '../figma_app/846003';
@@ -606,7 +606,7 @@ let U = {
 };
 function B(e) {
   (async () => {
-    if (desktopAPIInstance && e.getState().selectedView.view === 'fullscreen' && (await Y5.onReady(), Y5.isReady())) {
+    if (desktopAPIInstance && e.getState().selectedView.view === 'fullscreen' && (await fullscreenValue.onReady(), fullscreenValue.isReady())) {
       let t = e.getState();
       !function (e, t, i) {
         if (!desktopAPIInstance || e.view !== 'fullscreen') return;
@@ -687,7 +687,7 @@ class G {
   }
   convertToDesktopActionItem(e) {
     let t = Dz(e);
-    let i = _$$e2(e, t, this.options.appModel);
+    let i = handlePropertyState(e, t, this.options.appModel);
     i && (this.actionCheckedState[t] = i.isChecked);
     return {
       type: 'action-item',
@@ -721,10 +721,10 @@ function z(e) {
   return e.length === 0 ? '' : e[0].toUpperCase() + e.slice(1);
 }
 let H = new Set(['a', 'as', 'in', 'of', 'on', 'to', 'and', 'for', 'the', 'into', 'with']);
-let $ = vv(() => H4l?.documentColorProfile(), null);
+let $ = vv(() => colorManagementStateJs?.documentColorProfile(), null);
 let Z = atom(e => {
   let t = e($);
-  return t == null ? null : t === ywP.DISPLAY_P3 ? 'display-p3' : 'srgb';
+  return t == null ? null : t === ColorProfileEnum.DISPLAY_P3 ? 'display-p3' : 'srgb';
 });
 let X = createReduxSubscriptionAtomWithState(e => e.isOpenFileLoadedFromLiveGraph);
 let Q = _$$tP(atom(e => {
@@ -1374,7 +1374,7 @@ let t_ = e => t => async function (i) {
       XHR.post('/api/session/auth', t).then(async ({
         data: t
       }) => {
-        if (e.getState().communityHub?.pageState?.view === 'communityHub' && UG().set('community_signup_redirect', {
+        if (e.getState().communityHub?.pageState?.view === 'communityHub' && getCookieOrStorage().set('community_signup_redirect', {
           location: _$$Ay.location.pathname,
           action: null
         }), _$$p2('sign_up_user_pass'), _$$g2('sign_up_success', n.auth.origin, {
@@ -1821,30 +1821,30 @@ let i_ = !1;
 let iA = !1;
 let iy = !1;
 function ib() {
-  !ig && (ig = !0, requestAnimationFrame(iv), i_ || (iA && (fZb?.stopRootProfile('no-frame', 100), iA = !1), iy || (iy = fZb?.startRootProfile('request-frame', 100)), ye?.updateLastKnownFrameMs(performance.now())));
+  !ig && (ig = !0, requestAnimationFrame(iv), i_ || (iA && (perfTimerFrameManagerBindings?.stopRootProfile('no-frame', 100), iA = !1), iy || (iy = perfTimerFrameManagerBindings?.startRootProfile('request-frame', 100)), ye?.updateLastKnownFrameMs(performance.now())));
 }
 function iv() {
   i_ = !0;
-  iA && (fZb?.stopRootProfile('no-frame', 100), iA = !1);
-  iy && (fZb?.stopRootProfile('request-frame', 100), iy = !1);
+  iA && (perfTimerFrameManagerBindings?.stopRootProfile('no-frame', 100), iA = !1);
+  iy && (perfTimerFrameManagerBindings?.stopRootProfile('request-frame', 100), iy = !1);
   ye?.onFrameStart();
   ig = !1;
   reactTimerGroup.start('frame');
-  fZb?.startProfile(vV, 100);
+  perfTimerFrameManagerBindings?.startProfile(vV, 100);
   try {
     _$$q.onFrame();
   } catch (e) {}
-  Y5?.onFrame();
+  fullscreenValue?.onFrame();
   getFeatureFlags()?.comments_react || _$$iZ?.onFrame();
-  fZb?.startProfile('redux-frame-handler', 100);
+  perfTimerFrameManagerBindings?.startProfile('redux-frame-handler', 100);
   ec?.();
-  fZb?.stopProfile('redux-frame-handler', 100);
-  fZb?.stopProfile(vV, 100);
+  perfTimerFrameManagerBindings?.stopProfile('redux-frame-handler', 100);
+  perfTimerFrameManagerBindings?.stopProfile(vV, 100);
   reactTimerGroup.stop('frame');
   i_ = !1;
   fl();
   ye?.onFrame();
-  iA = fZb?.startRootProfile('no-frame', 100);
+  iA = perfTimerFrameManagerBindings?.startRootProfile('no-frame', 100);
 }
 let iC = new Set();
 let iP = iN;
@@ -2041,7 +2041,7 @@ let iz = e => t => function (i) {
 };
 let iK = e => t => function (i) {
   if (_$$sf.matches(i)) {
-    e.getState().creatingNewFolder && (e.dispatch(Ce()), e.dispatch(bx()));
+    e.getState().creatingNewFolder && (e.dispatch(hideModal()), e.dispatch(bx()));
   } else if (yH.matches(i)) {
     let n = e.getState();
     let r = [];
@@ -2141,11 +2141,11 @@ let i2 = e => t => function (i) {
             teamName: i.payload.team.name
           })));
           u();
-          e.dispatch(_$$c2(m));
+          e.dispatch(createOptimistCommitAction(m));
         }).then(() => {
           e.dispatch(i$(`/team-${i.payload.team.id}`));
         }).catch(t => {
-          e.dispatch(_$$r4(m));
+          e.dispatch(createOptimistRevertAction(m));
           return t;
         }),
         fallbackError: 'An error occurred while deleting this team.',
@@ -2164,11 +2164,11 @@ let i2 = e => t => function (i) {
             teamName: i.payload.team.name
           })));
           u();
-          e.dispatch(_$$c2(m));
+          e.dispatch(createOptimistCommitAction(m));
         }).then(() => {
           e.dispatch(i$(`/team-${i.payload.team.id}`));
         }).catch(t => {
-          e.dispatch(_$$r4(m));
+          e.dispatch(createOptimistRevertAction(m));
           return t;
         }),
         fallbackError: 'An error occurred while leaving this team.',
@@ -2262,7 +2262,7 @@ let i6 = e => t => function (i) {
       action: i
     });
   } else {
-    Ce.matches(i) && e.dispatch(WJ());
+    hideModal.matches(i) && e.dispatch(WJ());
   }
   return t(i);
 };
@@ -2308,7 +2308,7 @@ let ns = e => t => function (i) {
     } = t;
     let s = !!i.payload.profileTab;
     let o = modalShown?.type && nr.includes(modalShown.type);
-    if (selectedView.view === 'communityHub' && o && !s && e.dispatch(Ce()), i.payload.view === 'communityHub') {
+    if (selectedView.view === 'communityHub' && o && !s && e.dispatch(hideModal()), i.payload.view === 'communityHub') {
       if (e.dispatch(Ad(i.payload)), e.dispatch(WY({
         redirectUrl: Np(t, i.payload)
       })), i.payload.subView === 'hubFile' || i.payload.subView === 'plugin' || i.payload.subView === 'widget') {
@@ -2353,9 +2353,9 @@ let ng = e => t => function (i) {
       url: e
     }) => {
       e && qv(e);
-    }), e.dispatch(HV()), bd(), e.dispatch(_$$Q4.clearAll()), n.modalShown && e.dispatch(Ce()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), Y5.onReady().then(() => {
+    }), e.dispatch(HV()), bd(), e.dispatch(_$$Q4.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
       e.dispatch(H1({
-        votingStage: W8Y.NO_SESSION
+        votingStage: SessionStatus.NO_SESSION
       }));
     }), Eo.clearCache(), _$$e$(), _$$J3(e.dispatch), UB(), e.dispatch(_$$iE2({
       type: PW.COMPONENT
@@ -2369,7 +2369,7 @@ let ng = e => t => function (i) {
 };
 let nx = new class {
   constructor() {
-    this.ProtoSchemaValidator = vh();
+    this.ProtoSchemaValidator = createNoOpValidator();
   }
   getProto(e) {
     return this.ProtoSchemaValidator.validate(async ({
@@ -2558,7 +2558,7 @@ let nS = e => t => function (i) {
   }
   return t(i);
 };
-let nK = Ju(e => {
+let nK = registerModal(e => {
   let t;
   let i = _$$hS2(e);
   return jsx(bL, {
@@ -2597,16 +2597,16 @@ let nK = Ju(e => {
   });
 }, 'webgl-error-modal');
 function nq(e) {
-  'devModeFocusId' in e && e.devModeFocusId ? w3z?.setDevModeFocusViewNodeId(e.devModeFocusId, null) : w3z?.setDevModeFocusViewNodeId(null, null);
+  'devModeFocusId' in e && e.devModeFocusId ? HandoffBindingsCpp?.setDevModeFocusViewNodeId(e.devModeFocusId, null) : HandoffBindingsCpp?.setDevModeFocusViewNodeId(null, null);
 }
 function n$(e) {
-  'showOverview' in e && e.showOverview ? w3z?.setOverviewMode(!0) : w3z?.setOverviewMode(!1);
+  'showOverview' in e && e.showOverview ? HandoffBindingsCpp?.setOverviewMode(!0) : HandoffBindingsCpp?.setOverviewMode(!1);
 }
 function nZ(e) {
-  e.view === 'fullscreen' && e.showDevModeVariablesTable ? w3z?.setDevVariablesTableView(!0) : w3z?.setDevVariablesTableView(!1);
+  e.view === 'fullscreen' && e.showDevModeVariablesTable ? HandoffBindingsCpp?.setDevVariablesTableView(!0) : HandoffBindingsCpp?.setDevVariablesTableView(!1);
 }
 function nX(e) {
-  e.view === 'fullscreen' && e.showDevModeComponentBrowser ? w3z?.setDevComponentBrowser(!0) : w3z?.setDevComponentBrowser(!1);
+  e.view === 'fullscreen' && e.showDevModeComponentBrowser ? HandoffBindingsCpp?.setDevComponentBrowser(!0) : HandoffBindingsCpp?.setDevComponentBrowser(!1);
 }
 let nQ = e => t => function (i) {
   if (_$$sf.matches(i)) {
@@ -2624,7 +2624,7 @@ let nQ = e => t => function (i) {
       return t(i);
     }
     let s = t(i);
-    if (a.view === 'fullscreen' && a.fileKey && !(r.view === 'fullscreen' && r.fileKey === a.fileKey) && _$$tG().getAllVideoUrls(), a.view === 'fullscreen' && (Y5.isReady() ? (nq(a), n$(a), nZ(a), nX(a)) : Y5.onReady().then(() => {
+    if (a.view === 'fullscreen' && a.fileKey && !(r.view === 'fullscreen' && r.fileKey === a.fileKey) && _$$tG().getAllVideoUrls(), a.view === 'fullscreen' && (fullscreenValue.isReady() ? (nq(a), n$(a), nZ(a), nX(a)) : fullscreenValue.onReady().then(() => {
       nq(a);
       n$(a);
       nZ(a);
@@ -2636,7 +2636,7 @@ let nQ = e => t => function (i) {
         n.user && !desktopAPIInstance && e.dispatch(_$$sf({
           view: 'recentsAndSharing'
         }));
-        e.dispatch(_$$to({
+        e.dispatch(showModalHandler({
           type: nK,
           data: {
             result: _$$dK2()
@@ -2692,7 +2692,7 @@ let nQ = e => t => function (i) {
           U_(e, editorType, !0).then(() => {
             Sp(e, u, null).then(n => {
               OZ(e, n, editorType).then(() => {
-                Y5.onReady().then(() => {
+                fullscreenValue.onReady().then(() => {
                   _$$l3.user('try-plugin', () => {
                     e.dispatch(_$$$2({
                       tryPluginId,
@@ -2724,32 +2724,32 @@ let nQ = e => t => function (i) {
         throw new Error('selectView(...) was called with { view: \'fullscreen\', fileKey: undefined } while a file was already open. We don\'t handle this case.');
       } else if (r.editorType !== a.editorType) {
         let t = e.getState().mirror.appModel.currentTool === _$$ec.tool;
-        if (_$$L(), setLastUsedEditorType(a.editorType), Y5.isReady()) {
-          glU?.setEditorType(mapEditorTypeToYF(a.editorType));
+        if (_$$L(), setLastUsedEditorType(a.editorType), fullscreenValue.isReady()) {
+          Fullscreen?.setEditorType(mapEditorTypeToYF(a.editorType));
           let e = n.theme.visibleTheme;
-          glU?.setEditorTheme(e || '');
+          Fullscreen?.setEditorTheme(e || '');
         }
-        a.editorType === FEditorType.DevHandoff ? (e.dispatch(KE()), e.dispatch(Ce()), t && Y5.onReady().then(() => Y5.triggerAction('set-tool-comments'))) : (a.editorType === FEditorType.Design && (r.editorType === FEditorType.Illustration || r.editorType === FEditorType.DevHandoff) || a.editorType === FEditorType.Illustration && (r.editorType === FEditorType.Design || r.editorType === FEditorType.DevHandoff)) && (e.dispatch(Ce()), Y5.onReady().then(() => {
-          t && Y5.triggerAction('set-tool-comments');
+        a.editorType === FEditorType.DevHandoff ? (e.dispatch(KE()), e.dispatch(hideModal()), t && fullscreenValue.onReady().then(() => fullscreenValue.triggerAction('set-tool-comments'))) : (a.editorType === FEditorType.Design && (r.editorType === FEditorType.Illustration || r.editorType === FEditorType.DevHandoff) || a.editorType === FEditorType.Illustration && (r.editorType === FEditorType.Design || r.editorType === FEditorType.DevHandoff)) && (e.dispatch(hideModal()), fullscreenValue.onReady().then(() => {
+          t && fullscreenValue.triggerAction('set-tool-comments');
           let i = e.getState();
           let n = !!i.openFile?.canEdit;
-          let r = Ez5?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? FAf.DESIGN;
-          let a = n ? [FAf.DESIGN, FAf.PROTOTYPE] : [FAf.INSPECT, FAf.EXPORT];
+          let r = AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? DesignWorkspace.DESIGN;
+          let a = n ? [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE] : [DesignWorkspace.INSPECT, DesignWorkspace.EXPORT];
           if (t) {
-            NT(FAf.COMMENT);
+            NT(DesignWorkspace.COMMENT);
           } else if (!a.includes(r)) {
-            let e = n ? FAf.DESIGN : FAf.INSPECT;
+            let e = n ? DesignWorkspace.DESIGN : DesignWorkspace.INSPECT;
             NT(e);
           }
         }));
       } else {
-        z4.getIsExtension() && r.editorType === FEditorType.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && Egt?.setSelectedNodeAndCanvas(a.nodeId, !1);
+        z4.getIsExtension() && r.editorType === FEditorType.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && SceneGraphHelpers?.setSelectedNodeAndCanvas(a.nodeId, !1);
       }
       if (a.commentThreadId) {
         let e = Jj();
-        e ? Y5.onReady().then(() => {
-          e.updateCommentsMode && (Y5.triggerAction('set-tool-comments'), e.updateCommentsMode(!0));
-        }) : Y5.onReady().then(() => Y5.triggerAction('set-tool-comments'));
+        e ? fullscreenValue.onReady().then(() => {
+          e.updateCommentsMode && (fullscreenValue.triggerAction('set-tool-comments'), e.updateCommentsMode(!0));
+        }) : fullscreenValue.onReady().then(() => fullscreenValue.triggerAction('set-tool-comments'));
       }
     }
     return s;
@@ -3412,7 +3412,7 @@ let ar = () => ({
   [_$$X2.WIDGETS]: getI18nString('org_view.widgets')
 });
 class aa extends _$$o5 {}
-let as = Ju(e => {
+let as = registerModal(e => {
   let t = useDispatch();
   let i = _6();
   let r = _$$sZ();
@@ -3422,13 +3422,13 @@ let as = Ju(e => {
   let c = j_(l).unwrapOr(!1);
   let u = _$$Kd(l);
   if (useEffect(() => {
-    c && e.tab === _$$X2.FONTS && (t(Ce()), t(_$$sf({
+    c && e.tab === _$$X2.FONTS && (t(hideModal()), t(_$$sf({
       view: 'orgAdminSettings',
       orgAdminSettingsViewTab: J7.RESOURCES,
       orgAdminSettingsViewSecondaryTab: _d.SHARED_FONTS
     })));
   }, [c, e.tab, t]), useEffect(() => {
-    u.status !== 'loaded' || u.data || t(Ce());
+    u.status !== 'loaded' || u.data || t(hideModal());
   }, [u, t]), _$$h(() => {
     r && _$$y3.loadSharedFonts(t);
   }), !r || u.status === 'loading') {
@@ -3468,7 +3468,7 @@ let as = Ju(e => {
         });
       })(),
       onClose: () => {
-        t(Ce());
+        t(hideModal());
         i.view === 'org' && t(_$$sf({
           view: 'org',
           orgId: r.id,
@@ -3502,7 +3502,7 @@ let as = Ju(e => {
       })
     })
   });
-}, _$$C3, ZU.YES);
+}, _$$C3, ModalSupportsBackground.YES);
 let ao = e => t => function (i) {
   if (Qv.matches(i)) {
     t(i);
@@ -3517,17 +3517,17 @@ let ao = e => t => function (i) {
     }));
     return;
   }
-  _$$sf.matches(i) && (i.payload.view === 'org' ? (i.payload.orgViewTab === 'libraries' && e.dispatch(_$$to({
+  _$$sf.matches(i) && (i.payload.view === 'org' ? (i.payload.orgViewTab === 'libraries' && e.dispatch(showModalHandler({
     type: as,
     data: {
       tab: _$$X2.LIBRARIES
     }
-  })), i.payload.orgViewTab === 'fonts' && e.dispatch(_$$to({
+  })), i.payload.orgViewTab === 'fonts' && e.dispatch(showModalHandler({
     type: as,
     data: {
       tab: _$$X2.FONTS
     }
-  }))) : i.payload.view === 'orgAdminSettings' && i.payload.teamsTabAssetTransferRequest && e.dispatch(_$$to({
+  }))) : i.payload.view === 'orgAdminSettings' && i.payload.teamsTabAssetTransferRequest && e.dispatch(showModalHandler({
     type: _$$S3(),
     data: {
       selectedAssetTransferRequest: i.payload.teamsTabAssetTransferRequest
@@ -3543,11 +3543,11 @@ let ac = e => t => function (i) {
       _$$p5(n.selectedView, n.payment) ? e.dispatch(_$$Ts2({
         numDesignEditors: 0,
         numWhiteboardEditors: 0,
-        billingPeriod: _$$tY.MONTHLY
+        billingPeriod: SubscriptionType.MONTHLY
       })) : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod ? e.dispatch(_$$Lo({
         billingPeriod: i.payload.billingPeriod
       })) : i.payload.view === 'eduReview' && e.dispatch(_$$Lo({
-        billingPeriod: _$$tY.STUDENT
+        billingPeriod: SubscriptionType.STUDENT
       }));
       t(i);
       return;
@@ -3556,8 +3556,8 @@ let ac = e => t => function (i) {
     if (n.selectedView == null || n.selectedView.view !== 'teamUpgrade' || n.selectedView.teamId !== r) {
       let t = n.teamUserByTeamId[r] || {};
       let s = Object.keys(t).filter(e => t[e]?.whiteboard_paid_status === FPlanRestrictionType.FULL).length;
-      let o = _$$tY.ANNUAL;
-      i.payload.view === 'promoReview' ? o = _$$tY.MONTHLY : i.payload.view === 'eduReview' ? o = _$$tY.STUDENT : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod && (o = i.payload.billingPeriod);
+      let o = SubscriptionType.ANNUAL;
+      i.payload.view === 'promoReview' ? o = SubscriptionType.MONTHLY : i.payload.view === 'eduReview' ? o = SubscriptionType.STUDENT : i.payload.view === 'teamUpgrade' && i.payload.billingPeriod && (o = i.payload.billingPeriod);
       e.dispatch(_$$Ts2({
         numDesignEditors: a.editors ?? 0,
         numWhiteboardEditors: s,
@@ -3626,7 +3626,7 @@ let aT = new _$$H6({
     return i;
   }(i.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -3758,7 +3758,7 @@ let aj = new _$$H6({
     return s;
   }(n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -3803,7 +3803,7 @@ let aU = new _$$H6({
     return a;
   }(n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -3854,7 +3854,7 @@ let aB = new _$$H6({
     return s;
   }(n.store, i, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => e.getState().selectedView.view === 'fullscreen',
@@ -3973,7 +3973,7 @@ let az = new _$$H6({
     return s;
   }(n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4018,7 +4018,7 @@ let aH = new _$$H6({
     return a;
   }(n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4069,7 +4069,7 @@ let aW = new _$$H6({
     return s;
   }(n.store, i, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => e.getState().selectedView.view === 'fullscreen',
@@ -4080,7 +4080,7 @@ function aZ(e, t) {
     switch (t.method) {
       case 'post':
       case 'put':
-        Y5.isReady() && vXe && vXe.addToFontList({
+        fullscreenValue.isReady() && Fonts && Fonts.addToFontList({
           list: [RG(t.font_file)],
           localizedToUnlocalized: [],
           renames: {
@@ -4465,7 +4465,7 @@ let si = new _$$H6({
     return n;
   }(n.store, e, i),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? yT(500, 9e4) : yT(500, 2e3),
+  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? randomBetween(500, 9e4) : randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4493,7 +4493,7 @@ let sn = new _$$H6({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? yT(500, 9e4) : yT(500, 2e3),
+  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? randomBetween(500, 9e4) : randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4522,7 +4522,7 @@ let sr = new _$$H6({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !0,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4551,7 +4551,7 @@ let sa = new _$$H6({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !0,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4688,7 +4688,7 @@ let sm = new _$$H6({
     return n;
   }(i, n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4862,7 +4862,7 @@ let sf = new _$$H6({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !0,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -4926,7 +4926,7 @@ let s_ = new _$$H6({
     return r;
   }(i, n.store, e, t),
   periodicallyResubscribe: !0,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
@@ -5924,7 +5924,7 @@ let sq = e => t => function (i) {
     }
     return;
   }
-  if ($O.matches(i)) {
+  if (showModal.matches(i)) {
     let t = e.getState();
     if (i.payload.type === _$$W.type) {
       let n = t.folders[i.payload.data.folderId];
@@ -6540,7 +6540,7 @@ let ob = e => t => function (i) {
     let r = n.selectedView && _$$U2(n.selectedView);
     let a = t(i);
     let s = e.getState();
-    (s.selectedView && _$$U2(s.selectedView)) !== r && e.dispatch(_$$cL2());
+    (s.selectedView && _$$U2(s.selectedView)) !== r && e.dispatch(VERSION_HISTORY_RESET());
     return a;
   }
   return t(i);
@@ -7542,7 +7542,7 @@ function lp(e, t) {
     files: {},
     isProcessingFile: !1,
     failedOnFileLimit: !1,
-    selectedPdfType: h62.UNKNOWN
+    selectedPdfType: WhiteboardIntegrationType.UNKNOWN
   };
   if (!e) {
     lc = 0;
@@ -8348,7 +8348,7 @@ let lz = {
   error: null,
   errorCode: null,
   currencyToSwitch: null,
-  billingPeriod: _$$tY.UNSPECIFIED,
+  billingPeriod: SubscriptionType.UNSPECIFIED,
   numDesignEditors: 0,
   submitPending: !1,
   upgradingNewTeam: !1,
@@ -9097,7 +9097,7 @@ function dc(e = {}, t) {
   return e;
 }
 function du(e = !1, t) {
-  return !(_$$sf.matches(t) || $O.matches(t) || _$$Ts.matches(t)) && (!!PY.matches(t) || !_I.matches(t) && e);
+  return !(_$$sf.matches(t) || showModal.matches(t) || _$$Ts.matches(t)) && (!!PY.matches(t) || !_I.matches(t) && e);
 }
 function dp(e = null, t) {
   return _$$sf2.matches(t) ? t.payload : bx.matches(t) ? null : e;
@@ -9177,40 +9177,40 @@ function df() {
 HY(df());
 let dA = HY({
   folderSearchQuery(e = '', t) {
-    return hq.matches(t) ? t.payload.query : bO.matches(t) || Ce.matches(t) ? '' : e;
+    return hq.matches(t) ? t.payload.query : bO.matches(t) || hideModal.matches(t) ? '' : e;
   },
   folderRenaming(e = null, t) {
-    return JG.matches(t) ? t.payload.folderId : Mn.matches(t) || bO.matches(t) || Ce.matches(t) ? null : e;
+    return JG.matches(t) ? t.payload.folderId : Mn.matches(t) || bO.matches(t) || hideModal.matches(t) ? null : e;
   },
   focusedIndex(e = -1, t) {
-    return TL.matches(t) ? e === t.payload.upperBound - 1 ? e : e + 1 : zv.matches(t) ? e === 0 || e === -1 ? e : e - 1 : Dp.matches(t) ? t.payload.indexAt : _$$xH4.matches(t) || bO.matches(t) || Ce.matches(t) ? -1 : e;
+    return TL.matches(t) ? e === t.payload.upperBound - 1 ? e : e + 1 : zv.matches(t) ? e === 0 || e === -1 ? e : e - 1 : Dp.matches(t) ? t.payload.indexAt : _$$xH4.matches(t) || bO.matches(t) || hideModal.matches(t) ? -1 : e;
   },
   indexCount(e = null, t) {
-    return CU.matches(t) ? t.payload.indexCount : bO.matches(t) || Ce.matches(t) ? null : e;
+    return CU.matches(t) ? t.payload.indexCount : bO.matches(t) || hideModal.matches(t) ? null : e;
   },
   indexOffsets(e = {}, t) {
-    return _$$t8.matches(t) ? t.payload.indexOffsets : bO.matches(t) || Ce.matches(t) ? {} : e;
+    return _$$t8.matches(t) ? t.payload.indexOffsets : bO.matches(t) || hideModal.matches(t) ? {} : e;
   },
   folderRows(e = [], t) {
-    return OT.matches(t) ? t.payload.rows : bO.matches(t) || Ce.matches(t) ? [] : e;
+    return OT.matches(t) ? t.payload.rows : bO.matches(t) || hideModal.matches(t) ? [] : e;
   },
   teamOrder(e = [], t) {
-    return Mi.matches(t) ? t.payload.teamIds : bO.matches(t) || Ce.matches(t) ? [] : e;
+    return Mi.matches(t) ? t.payload.teamIds : bO.matches(t) || hideModal.matches(t) ? [] : e;
   },
   foldersByTeamId(e = {}, t) {
-    return Pb.matches(t) ? t.payload.foldersByTeamId : bO.matches(t) || Ce.matches(t) ? {} : e;
+    return Pb.matches(t) ? t.payload.foldersByTeamId : bO.matches(t) || hideModal.matches(t) ? {} : e;
   },
   isSearchResult(e = !1, t) {
-    return EN.matches(t) ? t.payload.isSearchResult : !Ce.matches(t) && e;
+    return EN.matches(t) ? t.payload.isSearchResult : !hideModal.matches(t) && e;
   },
   isSearchFocused(e = !1, t) {
-    return _$$YG.matches(t) ? t.payload.isSearchFocused : !(Ce.matches(t) || zv.matches(t) || TL.matches(t)) && (!!hq.matches(t) || e);
+    return _$$YG.matches(t) ? t.payload.isSearchFocused : !(hideModal.matches(t) || zv.matches(t) || TL.matches(t)) && (!!hq.matches(t) || e);
   },
   upDownKeyPressed(e = !1, t) {
-    return !!(zv.matches(t) || TL.matches(t)) || !(qM.matches(t) || bO.matches(t) || Ce.matches(t)) && e;
+    return !!(zv.matches(t) || TL.matches(t)) || !(qM.matches(t) || bO.matches(t) || hideModal.matches(t)) && e;
   },
   canMouseFocus(e = !0, t) {
-    return Ww.matches(t) ? t.payload.canFocus : !!(bO.matches(t) || Ce.matches(t)) || e;
+    return Ww.matches(t) ? t.payload.canFocus : !!(bO.matches(t) || hideModal.matches(t)) || e;
   },
   userTeamCount(e = null, t) {
     return w3.matches(t) ? t.payload.userTeamCount : e;
@@ -9353,7 +9353,7 @@ let dB = {
   compareId: void 0
 };
 function dV(e = dB, t) {
-  if (_$$cL2.matches(t)) {
+  if (VERSION_HISTORY_RESET.matches(t)) {
     return {
       ...dB,
       docHasChanged: e.docHasChanged,
@@ -9361,7 +9361,7 @@ function dV(e = dB, t) {
       lastViewed: e.lastViewed
     };
   }
-  if (_$$p6.matches(t)) {
+  if (VERSION_HISTORY_RESET_VERSIONS.matches(t)) {
     return {
       ...dB,
       activeId: e.activeId,
@@ -9372,10 +9372,10 @@ function dV(e = dB, t) {
       lastViewed: e.lastViewed
     };
   }
-  if (BC.matches(t)) {
+  if (VERSION_HISTORY_APPEND.matches(t)) {
     let i = t.payload.history.versions;
     let n = t.payload.direction;
-    if (n === _$$mL && i.length === 1) {
+    if (n === PAGINATION_PREV && i.length === 1) {
       let t = i[0].id;
       if (e.versions.find(e => e.id === t)) {
         return {
@@ -9387,36 +9387,36 @@ function dV(e = dB, t) {
     return {
       ...e,
       ...t.payload.history,
-      versions: n === AS ? e.versions.concat(i) : i.concat(e.versions),
+      versions: n === PAGINATION_NEXT ? e.versions.concat(i) : i.concat(e.versions),
       loading: !1,
       isLoadingPage: !1
     };
   }
-  if (SR.matches(t)) {
+  if (VERSION_HISTORY_PAGE_LOADING.matches(t)) {
     return {
       ...e,
       isLoadingPage: t.payload.isLoadingPage
     };
   }
-  if (_$$ne.matches(t)) {
+  if (VERSION_HISTORY_LOADING.matches(t)) {
     return {
       ...e,
       loading: t.payload.loading
     };
   }
-  if (EB.matches(t)) {
+  if (UPDATE_FETCHED_PAGE_IDS.matches(t)) {
     return {
       ...e,
       fetchedPageIds: t.payload.fetchedPageIds
     };
   }
-  if (ke.matches(t)) {
+  if (VERSION_HISTORY_SET_LINKED_VERSION.matches(t)) {
     return {
       ...e,
       linkedVersion: t.payload.version,
       activeId: t.payload.version.id
     };
-  } else if (Fm.matches(t)) {
+  } else if (VERSION_HISTORY_SET_ACTIVE.matches(t)) {
     let i = new Set();
     return {
       ...e,
@@ -9424,12 +9424,12 @@ function dV(e = dB, t) {
       compareId: void 0,
       fetchedPageIds: i
     };
-  } else if (TO.matches(t)) {
+  } else if (VERSION_HISTORY_COMPARE_CHANGES.matches(t)) {
     return {
       ...e,
       compareId: t.payload.fromVersionId
     };
-  } else if (A9.matches(t)) {
+  } else if (VERSION_HISTORY_SET_DOC_HAS_CHANGED.matches(t)) {
     return {
       ...e,
       docHasChanged: t.payload.status
@@ -9455,7 +9455,7 @@ function dV(e = dB, t) {
         description
       })
     };
-  } else if (_$$FB.matches(t)) {
+  } else if (VERSION_HISTORY_SET_FILE_LAST_SEEN_AT.matches(t)) {
     let {
       lastEdited,
       lastViewed
@@ -9523,8 +9523,8 @@ let dG = HY({
 let dW = {
   query: '',
   filters: {},
-  scope: Lov.ACTIVE_PAGE,
-  mode: EW4.FIND
+  scope: PageViewMode.ACTIVE_PAGE,
+  mode: EditAction.FIND
 };
 function dK(e, t) {
   if (!e || _$$cL5.matches(t)) return dW;
@@ -9995,15 +9995,15 @@ let cE = HY({
           let t = e.guid ? e.guid.localID : null;
           for (let i in e) {
             if (i !== 'guid') {
-              switch (t === RY1.MIXED_VALUES_FIRST && (r[i] = _$$Mv2()), t) {
-                case RY1.PRESENT:
+              switch (t === IMixedValues.MIXED_VALUES_FIRST && (r[i] = createMixedArray()), t) {
+                case IMixedValues.PRESENT:
                   r[i] = e[i];
                   break;
-                case RY1.MIXED:
-                  r[i] = _$$oV;
+                case IMixedValues.MIXED:
+                  r[i] = MIXED_MARKER;
                   break;
-                case RY1.MIXED_VALUES_FIRST:
-                case RY1.MIXED_VALUES_NEXT:
+                case IMixedValues.MIXED_VALUES_FIRST:
+                case IMixedValues.MIXED_VALUES_NEXT:
                   r[i].push(e[i]);
                   break;
                 default:
@@ -10014,7 +10014,7 @@ let cE = HY({
         }
       }
       for (let e in i.derivedProperties.changes) r[e] = i.derivedProperties.changes[e] ?? void 0;
-      for (let e in i.derivedProperties.mixed) r[e] = _$$oV;
+      for (let e in i.derivedProperties.mixed) r[e] = MIXED_MARKER;
       return r;
     }
     return e;
@@ -10022,7 +10022,7 @@ let cE = HY({
   selectedStyleProperties(e = {}, t) {
     if (fk.matches(t)) {
       let i = t.payload.selectedStyleProperties || {};
-      return _$$aI2(i.guid, e.guid) ? {
+      return areSessionLocalIDsEqual(i.guid, e.guid) ? {
         ...i,
         url: e.url
       } : i;
@@ -10168,23 +10168,23 @@ function cj(e = !1, t) {
   return kP.matches(t) ? t.payload.needsUpgrade : e;
 }
 function cU(e = {
-  mode: Oin.OFF,
+  mode: UIVisibilitySetting.OFF,
   type: _$$lF2.BAR
 }, t) {
   let i = e;
   _$$Ts.matches(t) ? i = {
-    mode: getInitialOptions().editing_file ? Oin.HIDE_UI : Oin.OFF
+    mode: getInitialOptions().editing_file ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF
   } : HO.matches(t) ? i = {
     mode: t.payload.progressBarMode
   } : _$$ho2.matches(t) ? i = {
-    mode: Oin.HIDE_UI
-  } : _$$o8.matches(t) && e.mode !== Oin.ON_AND_LOCKED ? i = {
-    mode: Oin.OFF
+    mode: UIVisibilitySetting.HIDE_UI
+  } : _$$o8.matches(t) && e.mode !== UIVisibilitySetting.ON_AND_LOCKED ? i = {
+    mode: UIVisibilitySetting.OFF
   } : Y6.matches(t) && (i = {
     mode: t.payload.mode,
     type: t.payload.type
   });
-  i !== e && Y5.isReady() && glU.showingProgressBar(i.mode);
+  i !== e && fullscreenValue.isReady() && Fullscreen.showingProgressBar(i.mode);
   return i;
 }
 function cB(e = !1, t) {
@@ -10229,7 +10229,7 @@ function cY(e = !1, t) {
 }
 function cq(e, t) {
   return e == null ? {
-    activeTab: xae.LAYERS,
+    activeTab: UserInterfaceElements.LAYERS,
     shouldFocusSearchBar: !1
   } : FP.matches(t) ? (t.payload.persist && _$$Cp(t.payload.tab), {
     ...e,
@@ -11077,7 +11077,7 @@ let pi = 'local_user_analytics_data';
 let pn = e => btoa(JSON.stringify(e));
 let pr = e => JSON.parse(atob(e));
 function pa(e) {
-  let t = UG();
+  let t = getCookieOrStorage();
   if (t) {
     try {
       let i = {};
@@ -11217,17 +11217,17 @@ let pg = {
     return _$$s2.removeAll.matches(t) ? {} : e;
   },
   modalShown(e = null, t) {
-    return (getFeatureFlags().datadog_rum_modal_shown_action && ($O.matches(t) || _$$Lo2.matches(t) || Ce.matches(t) || ES.matches(t) || _$$hm.matches(t) || _$$aZ.matches(t)) && datadogRum?.addAction('modalAction', {
+    return (getFeatureFlags().datadog_rum_modal_shown_action && (showModal.matches(t) || popModalStack.matches(t) || hideModal.matches(t) || hideSpecificModal.matches(t) || updateModal.matches(t) || popPrevModal.matches(t)) && datadogRum?.addAction('modalAction', {
       action: t.type,
       modalType: t.payload?.type
-    }), $O.matches(t)) ? e ? {
+    }), showModal.matches(t)) ? e ? {
       prevModal: e.optOutOfPrevModal ? e.prevModal : e,
       ...t.payload
-    } : t.payload : _$$Lo2.matches(t) ? e && e.prevModal || null : Ce.matches(t) ? null : ES.matches(t) ? e && t.payload.type === e.type ? null : e : _$$hm.matches(t) && e ? {
+    } : t.payload : popModalStack.matches(t) ? e && e.prevModal || null : hideModal.matches(t) ? null : hideSpecificModal.matches(t) ? e && t.payload.type === e.type ? null : e : updateModal.matches(t) && e ? {
       prevModal: e.prevModal,
       type: e.type,
       data: t.payload.data
-    } : _$$aZ.matches(t) && e ? {
+    } : popPrevModal.matches(t) && e ? {
       ...e,
       prevModal: e.prevModal?.prevModal
     } : e;
@@ -12044,8 +12044,8 @@ let pg = {
     useCases: []
   }, t) {
     return _$$s3.matches(t) ? {
-      plugins: t.payload.plugins.map(e => _$$uF(e)),
-      widgets: t.payload.widgets.map(e => _$$uF(e)),
+      plugins: t.payload.plugins.map(e => getPluginVersion(e)),
+      widgets: t.payload.widgets.map(e => getPluginVersion(e)),
       templates: t.payload.templates,
       components: t.payload.components,
       useCases: t.payload.use_cases
@@ -13291,7 +13291,7 @@ function p3(e) {
   return t.selectedView.view === 'fullscreen' ? 'fullscreen' : QB(t.selectedView) ? 'file_browser' : t.selectedView.view === 'desktopNewTab' ? 'desktop_new_tab' : 'other';
 }
 let p6 = null;
-let md = _$$nF2((e, {
+let md = createOptimistThunk((e, {
   changes: t,
   previousAppModel: i
 }) => {
@@ -13316,11 +13316,11 @@ let md = _$$nF2((e, {
   let a = t.multiplayerSessionState;
   void 0 !== a && function (e, t, i) {
     _$$QI(t, i);
-    i === kul.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === kul.JOINED && e.dispatch(D9());
+    i === SchemaJoinStatus.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === SchemaJoinStatus.JOINED && e.dispatch(D9());
   }(e, r, a);
   void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(_$$mu());
 });
-let mp = _$$nF2((e, t) => {
+let mp = createOptimistThunk((e, t) => {
   let i = e.getState().mirror.appModel;
   e.dispatch(mm(t));
   e.dispatch(_$$p3(t));
@@ -13329,23 +13329,23 @@ let mp = _$$nF2((e, t) => {
     previousAppModel: i
   }));
 });
-let mm = _$$nF2((e, t) => {
+let mm = createOptimistThunk((e, t) => {
   let i = t.appModelChanges;
   let n = t.appModelChangesShouldIgnoreUserPrefs;
   let r = e.getState();
   let a = r.mirror && r.mirror.appModel || null;
   let s = !a.isReadOnly;
-  let o = Ez5.propertiesPanelState().shownPropertiesPanels.getCopy();
+  let o = AppStateTsApi.propertiesPanelState().shownPropertiesPanels.getCopy();
   if (t.selection) {
     let t = r.pickerShown;
-    t ? o && o[ibQ.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(XE()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(_$$Uv());
+    t ? o && o[ItemType.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(XE()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(_$$Uv());
     r.instanceSwapPickerShown.isShown && e.dispatch(_$$vq());
-    r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), glU.selectStyle(_$$n2.INVALID, IA.INVALID));
+    r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), Fullscreen.selectStyle(_$$n2.INVALID, IA.INVALID));
     Tm.clearCache();
   } else {
-    r.stylePickerShown.isShown && (o && o[ibQ.FILL_ITEM] || e.dispatch(_$$Uv()));
+    r.stylePickerShown.isShown && (o && o[ItemType.FILL_ITEM] || e.dispatch(_$$Uv()));
   }
-  if (i && (a.isInitialized && e.getState().progressBarState.mode === Oin.OFF && function (e, t, i, n) {
+  if (i && (a.isInitialized && e.getState().progressBarState.mode === UIVisibilitySetting.OFF && function (e, t, i, n) {
     if (Ok()) {
       for (let r in i) {
         let a = mf.get(r);
@@ -13357,7 +13357,7 @@ let mm = _$$nF2((e, t) => {
           ...t,
           ...i
         }, e);
-        if (!(!l || t.activeCanvasEditModeType === m1T.DEV_HANDOFF && r === 'hideMultiplayerCursors') && !n?.[r]) {
+        if (!(!l || t.activeCanvasEditModeType === LayoutTabType.DEV_HANDOFF && r === 'hideMultiplayerCursors') && !n?.[r]) {
           e.dispatch(_$$F.enqueue({
             type: 'settings_changed',
             ...l
@@ -13372,11 +13372,11 @@ let mm = _$$nF2((e, t) => {
     t && !n && e.dispatch(XE());
   }
 });
-let mh = _$$nF2((e, t) => {
+let mh = createOptimistThunk((e, t) => {
   let i = e.getState();
   desktopAPIInstance && function (e, t) {
     if (V || !t.isInitialized || (V = !0, e.view !== 'fullscreen')) return;
-    let i = _$$K(t.keyboardShortcuts);
+    let i = extractOriginalTextMap(t.keyboardShortcuts);
     desktopAPIInstance?.updateFullscreenMenuState({
       actionShortcuts: i
     });
@@ -13392,7 +13392,7 @@ let mh = _$$nF2((e, t) => {
   e.dispatch(Ed());
   t.selection && t.selection.userTriggered && e.dispatch(mg());
 });
-let mg = _$$nF2(e => {
+let mg = createOptimistThunk(e => {
   let t = e.getState();
   t.selectedView.view === 'fullscreen' && atomStoreManager.set(_$$hg, {
     type: 'HANDLE_EDITOR_SELECTION_CHANGED',
@@ -13410,7 +13410,7 @@ let mf = new Map([['hideMultiplayerCursors', e => ({
     action: e => {
       e.stopPropagation();
       i.dispatch(_$$F.dequeue({}));
-      Ez5.editorPreferences().showFrameGrids.set(!1);
+      AppStateTsApi.editorPreferences().showFrameGrids.set(!1);
     }
   }
 }) : {
@@ -13421,9 +13421,9 @@ async function my(e) {
     let t = await _$$dO(e);
     !function (e, t) {
       let i = v7();
-      let n = Object.entries(aTn).find(([e, t]) => t === i)?.[0];
+      let n = Object.entries(KeyboardLayout).find(([e, t]) => t === i)?.[0];
       let r = _$$ZN(t);
-      let a = Object.entries(aTn).find(([e, t]) => t === r)?.[0];
+      let a = Object.entries(KeyboardLayout).find(([e, t]) => t === r)?.[0];
       let s = {
         layoutJSON: t.layoutJSON ? JSON.stringify(t.layoutJSON) : null,
         detectedLayouts: t.detectedLayouts ? JSON.stringify(t.detectedLayouts) : null,
@@ -13800,7 +13800,7 @@ let hc = e => t => function (i) {
 };
 let hm = _$$ck4();
 let hh = e => e => hm ? function (t) {
-  return $O.matches(t) && t.payload.type === _$$x4 ? window.self.origin !== window.parent.origin ? e(t) : void _$$m3({
+  return showModal.matches(t) && t.payload.type === _$$x4 ? window.self.origin !== window.parent.origin ? e(t) : void _$$m3({
     action: 'showAuthModal',
     payload: {
       type: 'auth'
@@ -13812,7 +13812,7 @@ let hh = e => e => hm ? function (t) {
 let hv = 'frontend_commit_preview_tooltip--header--Lahum';
 let hI = 'frontend_commit_preview_tooltip--separator--JUjSs';
 function hE() {
-  UG().$$delete(H_, {
+  getCookieOrStorage().$$delete(H_, {
     includeDotDomainPrefix: !0
   });
   let e = new URLSearchParams(_$$Ay.location.search);
@@ -13825,7 +13825,7 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
 }) => {
   let i = useDispatch();
   let r = function () {
-    let e = UG().get(H_);
+    let e = getCookieOrStorage().get(H_);
     return e != null && typeof e == 'object' && e.feature_flags && e.sha ? e : null;
   }();
   let a = e => {
@@ -13943,8 +13943,8 @@ function hk(e) {
         };
       },
       onDrag(e) {
-        let t = qE(e.clientX, 0, window.innerWidth);
-        let r = qE(e.clientY, 0, window.innerHeight);
+        let t = clamp(e.clientX, 0, window.innerWidth);
+        let r = clamp(e.clientY, 0, window.innerHeight);
         let a = n.current;
         let s = t - a.left;
         i(function ({
@@ -13979,10 +13979,10 @@ function hk(e) {
       let r = {
         ...e
       };
-      'top' in r && (r.top = qE(r.top, 0, i));
-      'bottom' in r && (r.bottom = qE(r.bottom, 0, i));
-      'left' in r && (r.left = qE(r.left, 0, n));
-      'right' in r && (r.right = qE(r.right, 0, n));
+      'top' in r && (r.top = clamp(r.top, 0, i));
+      'bottom' in r && (r.bottom = clamp(r.bottom, 0, i));
+      'left' in r && (r.left = clamp(r.left, 0, n));
+      'right' in r && (r.right = clamp(r.right, 0, n));
       return r;
     }(t, e), [t, e]), r];
   }();
@@ -14054,7 +14054,7 @@ function hM(e) {
   } = getInitialOptions();
   return i18n_desktop_version_support?.[e];
 }
-let hj = Ju(e => {
+let hj = registerModal(e => {
   let t = _$$hS2(e);
   let i = getI18nState()?.getPrimaryLocale(!1);
   let r = useDispatch();
@@ -14090,13 +14090,13 @@ let hj = Ju(e => {
               variant: 'secondary',
               onClick: () => {
                 d();
-                r(_$$Lo2());
+                r(popModalStack());
               },
               children: renderI18nText('desktop_version_support.close')
             }), jsx(hF, {
               onClick: () => {
                 d();
-                r(_$$Lo2());
+                r(popModalStack());
               },
               href: `https://figma.com/${i}/downloads`,
               newTab: !0,
@@ -14110,7 +14110,7 @@ let hj = Ju(e => {
 }, 'DesktopLanguageSupportModal');
 function hV() {
   if (!getFeatureFlags().svg_composite_layer) return null;
-  let e = _$$q6();
+  let e = useFullscreenReady();
   useEffect(() => {
     if (e) {
       let e = _$$l10();
@@ -14129,7 +14129,7 @@ export async function $$hz0(e, t, d = {
       return;
     }
     TH(_$$Ay.location.search);
-    _$$R2(ib);
+    registerDeferredCallback(ib);
     performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
     xK.start('createStoreStart');
     let c = !!new URLSearchParams(_$$Ay.location.search).get('reduxDebug');
@@ -14186,7 +14186,7 @@ export async function $$hz0(e, t, d = {
         };
       }(e => {
         ec = n;
-        _$$H2();
+        requestDeferredExecution();
         i = e;
       });
     }(hW, hK));
@@ -14482,7 +14482,7 @@ export async function $$hz0(e, t, d = {
               if (e) {
                 let i = {};
                 t.source && (i.source = t.source);
-                Y5.isReady() && Y5.triggerActionInUserEditScope(e, i);
+                fullscreenValue.isReady() && fullscreenValue.triggerActionInUserEditScope(e, i);
               }
             } else {
               document.execCommand(t.pageCommand);
@@ -14657,7 +14657,7 @@ export async function $$hz0(e, t, d = {
               files: t.files,
               orgId: b.getState().currentUserOrgId
             };
-            b.dispatch(_$$to({
+            b.dispatch(showModalHandler({
               type: _$$J2(),
               data: e
             }));
@@ -14720,7 +14720,7 @@ export async function $$hz0(e, t, d = {
           let e = {};
           let i = b.getState();
           t.source && (e.source = t.source);
-          t.action === 'save-as' ? (Dc(_$$hV2.SaveLocalFile, i.saveAsState, b.dispatch, t.action, ['0:0'], t.action), _$$ce2()) : t.action === 'export-all-frames-to-pdf' ? Dc(_$$hV2.Export, i.saveAsState, b.dispatch, t.action, [i.mirror.appModel.currentPage], t.action) : Y5.triggerActionInUserEditScope(t.action, e);
+          t.action === 'save-as' ? (Dc(_$$hV2.SaveLocalFile, i.saveAsState, b.dispatch, t.action, ['0:0'], t.action), _$$ce2()) : t.action === 'export-all-frames-to-pdf' ? Dc(_$$hV2.Export, i.saveAsState, b.dispatch, t.action, [i.mirror.appModel.currentPage], t.action) : fullscreenValue.triggerActionInUserEditScope(t.action, e);
         }
       });
       desktopAPIInstance && desktopAPIInstance.setLocales(getI18nState().locales);
@@ -14745,7 +14745,7 @@ export async function $$hz0(e, t, d = {
         if (!t || !desktopAPIInstance) return;
         let i = hM(t);
         let n = t && hD[t];
-        (!n || !e.getState().userFlags[n]) && i && i > desktopAPIInstance.getVersion() && e.dispatch(_$$to({
+        (!n || !e.getState().userFlags[n]) && i && i > desktopAPIInstance.getVersion() && e.dispatch(showModalHandler({
           type: hj
         }));
       })(b);
@@ -14799,24 +14799,24 @@ export async function $$hz0(e, t, d = {
                 (function (t, i) {
                   if (!t) throw new Error('No guid');
                   let n = m(e.getState().mirror.sceneGraph.guidFromDeveloperFriendlyId(t));
-                  n ? (w3z.selectAndPanToNode(n.guid), i && setTimeout(() => {
-                    glU.triggerAction('zoom-to-selection', void 0);
+                  n ? (HandoffBindingsCpp.selectAndPanToNode(n.guid), i && setTimeout(() => {
+                    Fullscreen.triggerAction('zoom-to-selection', void 0);
                   }, 100)) : console.error('no node matching guid');
                 })(t.data.guid, t.data.zoomToSelection);
                 break;
               case 'EXPAND_LAYER':
                 (function () {
                   if (!o) return;
-                  let e = w3z?.getAssetInfo(o.guid);
+                  let e = HandoffBindingsCpp?.getAssetInfo(o.guid);
                   if (o?.childrenGuids && o.childCount > 0 && !vY(e, !0)) {
                     let e = o.childrenDisplayOrder === _$$k6.DESIGN ? o.childCount - 1 : 0;
                     let t = o?.childrenGuids[e];
-                    w3z.selectAndPanToNode(t);
+                    HandoffBindingsCpp.selectAndPanToNode(t);
                   }
                 })();
                 break;
               case 'SELECT_PARENT_LAYER':
-                l !== null && c !== null && w3z.selectAndPanToNode(l.guid);
+                l !== null && c !== null && HandoffBindingsCpp.selectAndPanToNode(l.guid);
                 break;
               case 'SELECT_NEXT_LAYER':
                 (function () {
@@ -14826,12 +14826,12 @@ export async function $$hz0(e, t, d = {
                     e = c;
                     let t = p ? e - 1 : e + 1;
                     let i = l.childrenGuids[t];
-                    w3z.selectAndPanToNode(i);
+                    HandoffBindingsCpp.selectAndPanToNode(i);
                   } else if (l !== null && d !== null && u !== null && v(u, d) && l.guid !== _()) {
                     t = u;
                     let e = p ? t - 1 : t + 1;
                     let i = d.childrenGuids[e];
-                    w3z.selectAndPanToNode(i);
+                    HandoffBindingsCpp.selectAndPanToNode(i);
                   }
                 })();
                 break;
@@ -14847,7 +14847,7 @@ export async function $$hz0(e, t, d = {
                       i = c;
                       let e = p ? i + 1 : i - 1;
                       let t = l.childrenGuids[e];
-                      w3z.selectAndPanToNode(t);
+                      HandoffBindingsCpp.selectAndPanToNode(t);
                     }
                   }
                 })();
@@ -14880,7 +14880,7 @@ export async function $$hz0(e, t, d = {
                   let a = i.searchParams.get('node-id');
                   if (a) {
                     let t = e.subscribe(() => {
-                      e.getState().mirror.sceneGraphSelection !== r && (w3z.selectAndFocusOnNode(a, !0), t());
+                      e.getState().mirror.sceneGraphSelection !== r && (HandoffBindingsCpp.selectAndFocusOnNode(a, !0), t());
                     });
                   }
                 })(t.data.href);
@@ -14900,7 +14900,7 @@ export async function $$hz0(e, t, d = {
                   let i = m(e);
                   if (!i) return;
                   t = i.size.x < i.size.y ? new Point(248, 248 * (i.size.y / i.size.x)) : new Point(248 * (i.size.x / i.size.y), 248);
-                  let n = _G(t, e, !0, tvY.TRANSPARENT);
+                  let n = _G(t, e, !0, BackgroundPattern.TRANSPARENT);
                   if (!n) {
                     console.error(`Error getting thumbnail for node ${e}`);
                     return;
@@ -14912,10 +14912,10 @@ export async function $$hz0(e, t, d = {
                 })(t.data.nodeId);
                 break;
               case 'SET_FOCUS_NODE':
-                w3z.setFocusNodeId(t.data.nodeId);
+                HandoffBindingsCpp.setFocusNodeId(t.data.nodeId);
                 break;
               case 'SET_FOCUS_MODE_ENABLED':
-                w3z.setFocusModeEnabled(t.data.enabled);
+                HandoffBindingsCpp.setFocusModeEnabled(t.data.enabled);
                 break;
               case 'REQUEST_MAPPING_SUGGESTION':
                 h(t.data);
@@ -14969,22 +14969,22 @@ export async function $$hz0(e, t, d = {
             let c;
             let u = e.getState();
             let p = u.mirror;
-            if (p.appModel.topLevelMode !== lyf.DEV_HANDOFF) return;
+            if (p.appModel.topLevelMode !== ViewType.DEV_HANDOFF) return;
             let m = p.appModel.devHandoffCodeLanguage;
             let h = p.appModel.devHandoffPreferences.codeExtensionPreferences[m.id];
             s = p.sceneGraph;
-            let g = Ez5.devHandoffState().currentNodeId.getCopy();
+            let g = AppStateTsApi.devHandoffState().currentNodeId.getCopy();
             let _ = Object.keys(p.sceneGraphSelection);
             let y = _.length > 0 ? _[0] : null;
             let b = i !== y;
-            g !== a && (c = s, g !== null && g !== AD && (_$$px2(c).rebuildNodeCache(), function (e, t) {
+            g !== a && (c = s, g !== null && g !== defaultSessionLocalIDString && (_$$px2(c).rebuildNodeCache(), function (e, t) {
               let i = {};
               let n = [[e, 0]];
               for (; n.length > 0;) {
                 let [e, r] = n.pop();
                 let a = t.get(e);
                 if (a) {
-                  let s = w3z?.getAssetInfo(a.guid);
+                  let s = HandoffBindingsCpp?.getAssetInfo(a.guid);
                   let o = q1.includes(a.type) ? void 0 : vY(s, !0) ? 'asset' : a.type === 'SYMBOL' || a.type === 'INSTANCE' ? 'symbol' : a.isStack ? 'stack' : a.type === 'TEXT' ? 'text' : 'generic';
                   if (!o) continue;
                   let l = a.devToolsOrderedVisibleChildren;
@@ -15009,12 +15009,12 @@ export async function $$hz0(e, t, d = {
             let I = u.openFile;
             if (I && !rv()(I.name, n) && (GD(I.name), n = I.name, t = I.key), !d) {
               let e = p.appModel.pagesList;
-              Fy(e, v) === xal.LOADED && (_$$rx(), d = !0);
+              Fy(e, v) === DataLoadStatus.LOADED && (_$$rx(), d = !0);
             }
           };
           e.subscribe(c);
-          Y5.onReady().then(() => {
-            _$$lu(Ez5.devHandoffState().currentNodeId, {
+          fullscreenValue.onReady().then(() => {
+            subscribeObservable(AppStateTsApi.devHandoffState().currentNodeId, {
               onChangeImmediate: c
             });
           });
@@ -15079,7 +15079,7 @@ export async function $$hz0(e, t, d = {
           });
         }
         async function f(t, i) {
-          if (!t || t === AD) {
+          if (!t || t === defaultSessionLocalIDString) {
             _$$oF(void 0);
             _$$mX(void 0);
             l = null;
@@ -15098,10 +15098,10 @@ export async function $$hz0(e, t, d = {
           _$$oF(e.getState().mirror.selectionProperties.nodeText);
         }
         function _() {
-          return Ez5.devHandoffState().currentNodeId.getCopy();
+          return AppStateTsApi.devHandoffState().currentNodeId.getCopy();
         }
         async function A(t, i) {
-          if (!t || t === AD) return;
+          if (!t || t === defaultSessionLocalIDString) return;
           let n = e.getState();
           let r = n.mirror.sceneGraph;
           let a = _$$S7(n);
@@ -15311,7 +15311,7 @@ export async function $$hz0(e, t, d = {
     getSingletonSceneGraph().setChangeListenersConfig({
       getCurrentTimeMs: () => Date.now(),
       getTimeBudgetMs: () => 10,
-      deferFn: e => (iC.add(e), _$$H2(), () => iC.$$delete(e))
+      deferFn: e => (iC.add(e), requestDeferredExecution(), () => iC.$$delete(e))
     });
   });
 }
@@ -15329,7 +15329,7 @@ function hW() {
   reactTimerGroup.start('react-render');
   let e = XP();
   Object.keys(e).length > 0 && debugState.dispatch(mp(e));
-  TG();
+  executeDeferredCallbacks();
   (function () {
     if (iC.size === 0) return;
     let e = [...iC];

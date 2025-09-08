@@ -1,5 +1,5 @@
 import { useState, useId, useMemo, useCallback, useEffect } from "react";
-import { Ju } from "../905/955878";
+import { preventAndStopEvent } from "../905/955878";
 import { sj } from "../905/875826";
 import { uv } from "../905/36803";
 import { nD, Kq, aM, eR } from "../905/336566";
@@ -35,7 +35,7 @@ export function $$c0(e, t, i, d) {
   }, [e, t, p, m]);
   let g = useCallback(e => {
     if (!l[e.key] || e.getModifierState("Alt") || e.getModifierState("Control") || e.getModifierState("CapsLock")) return;
-    Ju(e);
+    preventAndStopEvent(e);
     let i = p.indexOf(t);
     let n = l[e.key]?.(i, c) ?? i;
     let s = p.length;

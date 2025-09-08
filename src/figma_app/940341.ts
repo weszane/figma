@@ -5,9 +5,9 @@ import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { K } from "../905/443068";
 import { i as _$$i } from "../905/22844";
 import { n3, IA } from "../905/859698";
-import { glU } from "../figma_app/763686";
-import { nc } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { k as _$$k } from "../905/582200";
@@ -40,18 +40,18 @@ export function $$w1() {
     stylePreviewShown: e.stylePreviewShown,
     selectedStyleProperties: e.mirror.selectedStyleProperties
   }));
-  let D = dI(selectedStyleProperties.guid);
+  let D = sessionLocalIDToString(selectedStyleProperties.guid);
   let k = Fk((e, t) => {
     let r = e.get(t);
     return r?.name || "";
   }, D);
   if (!stylePreviewShown.isShown || stylePreviewShown.isCreating || !selectedStyleProperties && !inheritTextStyleKey && !styleIdForText && !D) return null;
   let M = () => {
-    glU?.selectStyle(n3.INVALID, IA.INVALID);
+    Fullscreen?.selectStyle(n3.INVALID, IA.INVALID);
     e(sw());
   };
   let F = Zv(IW(stylePreviewShown), selectedStyleProperties, k);
-  let j = nc.user("slides-delete-style", () => {
+  let j = scopeAwareFunction.user("slides-delete-style", () => {
     stylePreviewShown.style.isLocal && Nr(stylePreviewShown.style, r);
     M();
   });

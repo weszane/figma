@@ -1,4 +1,4 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { qO } from "../905/165290";
 import { H } from "../905/240327";
 import { debugState } from "../905/407919";
@@ -83,7 +83,7 @@ export function $$p3(e) {
       let a = (debugState.getState().fonts || {})[e] || [];
       for (let s in a) {
         let l = a[s].styles;
-        a[s].source === jXp.GOOGLE || getFalseValue() || console.warn(`Font '${e}' is not loaded from Google fonts. The font may be a shared font or installed locally.`);
+        a[s].source === FontSourceType.GOOGLE || getFalseValue() || console.warn(`Font '${e}' is not loaded from Google fonts. The font may be a shared font or installed locally.`);
         let d = Object.keys(l).filter(e => l[e].italic === i && l[e].weight === t).sort((e, t) => Math.abs(l[e].stretch || qO - qO) - Math.abs(l[t].stretch || qO - qO)).pop();
         if (d) return d;
       }

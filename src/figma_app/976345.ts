@@ -10,9 +10,9 @@ import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { q_ } from "../figma_app/997907";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { oB, os, j7, sf } from "../905/929976";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { e5, Mk } from "../figma_app/297957";
 import { uE, k1 } from "../figma_app/314264";
 import { d9 } from "../figma_app/740025";
@@ -24,7 +24,7 @@ import { Np, xS } from "../figma_app/193867";
 import { Y9 } from "../figma_app/502247";
 import { Qn } from "../figma_app/415217";
 import { lH } from "../905/316062";
-import { tn } from "../figma_app/831101";
+import { UpgradeSteps } from "../figma_app/831101";
 import { SC, gu } from "../figma_app/707808";
 import { y as _$$y } from "../905/235145";
 import { H } from "../905/202181";
@@ -32,8 +32,8 @@ import { p as _$$p } from "../905/494706";
 import { V } from "../905/190576";
 import { m as _$$m } from "../905/298920";
 import { DE, pB, pg } from "../905/34809";
-let $$F24 = nF((e, t) => {
-  e.getState().modalShown?.type != null && e.dispatch(Ce());
+let $$F24 = createOptimistThunk((e, t) => {
+  e.getState().modalShown?.type != null && e.dispatch(hideModal());
   e.getState().dropdownShown?.type != null && e.dispatch(oB());
   e.dispatch(DE({
     show: !0
@@ -45,7 +45,7 @@ let $$F24 = nF((e, t) => {
   });
   q_.addDependency("FILE_BROWSER_SET_LOADING", t?.until || "pending");
 });
-let $$j18 = nF(e => {
+let $$j18 = createOptimistThunk(e => {
   H.getState().then(t => {
     e.dispatch(os(t.data.meta));
     e.dispatch($$U23(t.data.meta));
@@ -57,10 +57,10 @@ let $$j18 = nF(e => {
     }));
   });
 });
-let $$U23 = nF((e, t) => {
+let $$U23 = createOptimistThunk((e, t) => {
   new _$$P().sendToOtherTabs(_$$y, t);
 });
-let $$B11 = nF((e, t) => {
+let $$B11 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.view || {
     view: "recentsAndSharing"
@@ -120,7 +120,7 @@ let $$B11 = nF((e, t) => {
     fuid: t.workspace.userId
   })), d());
 });
-let $$G26 = nF(e => {
+let $$G26 = createOptimistThunk(e => {
   XHR.post("/api/session/app_auth", {
     app_type: "desktop"
   }).then(({
@@ -142,14 +142,14 @@ let $$G26 = nF(e => {
     }));
   });
 });
-let $$V21 = nF((e, t) => {
+let $$V21 = createOptimistThunk((e, t) => {
   e.getState().dropdownShown || e.dispatch(j7(t));
 });
-let $$H16 = nF((e, t) => {
+let $$H16 = createOptimistThunk((e, t) => {
   let r = e.getState().dropdownShown;
   r?.type === t.type ? e.dispatch(oB()) : e.dispatch(j7(t));
 });
-let $$z9 = nF((e, t) => {
+let $$z9 = createOptimistThunk((e, t) => {
   _$$T() ? Qn(t.url) : Ay.redirect(t.url, "_blank");
 });
 export function $$W15(e, t = {}) {
@@ -172,7 +172,7 @@ export function $$Y14() {
     view: "limitedTeamSharedProjects"
   });
 }
-let $$$7 = nF((e, {
+let $$$7 = createOptimistThunk((e, {
   index: t
 }) => {
   trackEventAnalytics("Recent File Clicked", {
@@ -181,7 +181,7 @@ let $$$7 = nF((e, {
     forwardToDatadog: !0
   });
 });
-let $$X8 = nF((e, {
+let $$X8 = createOptimistThunk((e, {
   fileKey: t,
   entrypoint: r,
   currentPlanFilter: n,
@@ -197,13 +197,13 @@ let $$X8 = nF((e, {
     viewMode: a
   });
 });
-let $$q4 = nF(e => {
+let $$q4 = createOptimistThunk(e => {
   uE("Font Installer Downloaded", e.getState());
 });
-let $$J5 = nF(e => {
+let $$J5 = createOptimistThunk(e => {
   uE("Font Uninstaller Downloaded", e.getState());
 });
-let $$Z19 = nF((e, {
+let $$Z19 = createOptimistThunk((e, {
   clickedResourceType: t,
   resourceIdOrKey: r
 }) => {
@@ -228,7 +228,7 @@ let $$Q22 = M4.Query({
     })).filter(e => !!e && !!e.trashed_at && !e.deleted_at).sort((e, t) => new Date(e.trashed_at) < new Date(t.trashed_at) ? 1 : -1)
   })
 });
-let $$ee17 = nF((e, {
+let $$ee17 = createOptimistThunk((e, {
   orgId: t,
   teamId: r
 }, {
@@ -249,7 +249,7 @@ let $$ee17 = nF((e, {
     }));
   });
 });
-let $$et3 = nF((e, {
+let $$et3 = createOptimistThunk((e, {
   previousView: t,
   openInNewTab: r,
   onSubmitReturnToPrevView: i,
@@ -276,7 +276,7 @@ let $$et3 = nF((e, {
       view: "teamUpgrade",
       teamFlowType: SC.CREATE_AND_UPGRADE,
       teamId: null,
-      paymentStep: tn.PLAN_COMPARISON,
+      paymentStep: UpgradeSteps.PLAN_COMPARISON,
       previousView: t,
       isEduTeam: a,
       ignoreCurrentPlan: s
@@ -287,7 +287,7 @@ let $$et3 = nF((e, {
     view: "teamUpgrade",
     teamFlowType: SC.CREATE,
     teamId: null,
-    paymentStep: tn.CREATE_TEAM,
+    paymentStep: UpgradeSteps.CREATE_TEAM,
     previousView: t,
     isEduTeam: a,
     ignoreCurrentPlan: s
@@ -306,7 +306,7 @@ export function $$ei12(e, t) {
   return !1;
 }
 let ea = null;
-let $$es10 = nF((e, t) => {
+let $$es10 = createOptimistThunk((e, t) => {
   ea && $$ei12(t.selectedView, ea.additionalViewsToReload) && Ay.reload(ea.reason, ea.metadata);
 });
 export function $$eo25() {
@@ -316,7 +316,7 @@ export function $$el20() {
   ea = null;
 }
 export var $$ed6 = (e => (e[e.DEFAULT = 2e3] = "DEFAULT", e[e.NONE = 0] = "NONE", e))($$ed6 || {});
-let $$ec2 = nF(async (e, t) => {
+let $$ec2 = createOptimistThunk(async (e, t) => {
   await delay(t.delay);
   $$ei12(e.getState().selectedView, t.additionalViewsToReload) ? Ay.reload(t.reason, t.metadata) : ea = {
     reason: t.reason,
@@ -324,7 +324,7 @@ let $$ec2 = nF(async (e, t) => {
     additionalViewsToReload: t.additionalViewsToReload
   };
 });
-let $$eu1 = nF((e, t) => {
+let $$eu1 = createOptimistThunk((e, t) => {
   let r = e.getState().selectedView;
   "orgSelfServe" === r.view ? e.dispatch(sf({
     view: r.view,
@@ -333,11 +333,11 @@ let $$eu1 = nF((e, t) => {
     upsellSource: r.upsellSource
   })) : e.dispatch($$ec2(t));
 });
-let ep = nF(async (e, t) => {
+let ep = createOptimistThunk(async (e, t) => {
   await delay(t.delay);
   Ay.redirect("/");
 });
-let $$e_0 = nF((e, t) => {
+let $$e_0 = createOptimistThunk((e, t) => {
   e.dispatch(_$$s.flash(getI18nString("org_settings.mfa_for_members.member_flash")));
   e.dispatch(ep(t));
 });

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { FAf } from "../figma_app/763686";
+import { DesignWorkspace } from "../figma_app/763686";
 import { WY, cy } from "../figma_app/387100";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -28,7 +28,7 @@ export function $$x0(e, t) {
       let t = [];
       t.push({
         type: HQ.SET_PROPERTIES_PANEL_TAB,
-        tab: FAf.DESIGN
+        tab: DesignWorkspace.DESIGN
       });
       e ? t.push({
         type: HQ.SELECT_SCENE_NODE,

@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ez5, mHF, juq } from "../figma_app/763686";
+import { AppStateTsApi, LinterCppBindings, FileSourceType } from "../figma_app/763686";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -10,7 +10,7 @@ import { w0 } from "../figma_app/594947";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { jf, Vs, qc, QH, pc, LU, Rg } from "../figma_app/407414";
 import { d7 } from "../figma_app/99772";
 import { Lt, Fh, hf } from "../figma_app/210234";
@@ -197,7 +197,7 @@ class L {
     });
   }
   teardownLinter() {
-    Ez5?.uiState()?.showDesignLinter?.set(!1);
+    AppStateTsApi?.uiState()?.showDesignLinter?.set(!1);
     this.designLinterStateManager.resetLinterAbortController();
     this.designLinterStateManager.setStatus(td.INITIALIZED);
     this.clearLinterScene();
@@ -229,7 +229,7 @@ class L {
     return !0;
   }
   countNodesInLintingTarget() {
-    return mHF?.countNodesInLintingTarget() || 0;
+    return LinterCppBindings?.countNodesInLintingTarget() || 0;
   }
   isLayerLimitExceeded(e) {
     let t = !1;
@@ -300,7 +300,7 @@ class L {
   setTopLevelLintingTargetNodes() {
     let e = this.getDirectlySelectedNodes();
     let t = e.map(e => e.guid);
-    mHF?.setLintingTarget(t);
+    LinterCppBindings?.setLintingTarget(t);
     atomStoreManager.set(fY, {
       guids: t
     });
@@ -487,7 +487,7 @@ class L {
           e = !1;
         }
       }
-      t || Y5.commit();
+      t || fullscreenValue.commit();
       this.processFixedViolations(n);
     } catch (e) {
       throw Error("Error fixing violations: " + e);
@@ -526,7 +526,7 @@ class L {
     return new Promise(async (u, p) => {
       try {
         if (c.aborted) throw Error("Signal aborted");
-        let p = new ReduxSceneGraph(juq.LINTER);
+        let p = new ReduxSceneGraph(FileSourceType.LINTER);
         let _ = s.get(n);
         if (!_) throw Error("Guid for node to fix not found in map");
         let h = p.get(_);
@@ -562,7 +562,7 @@ class L {
     return this.designLinterStateManager.isViolationFixed(e);
   }
   clearLinterScene() {
-    mHF?.clearLinterScene();
+    LinterCppBindings?.clearLinterScene();
     atomStoreManager.set(qL, new Map());
   }
   getLinterStatus() {

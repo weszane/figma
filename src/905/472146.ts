@@ -2,7 +2,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { FPlanNameType } from "../figma_app/191312";
 import { WW, Wf } from "../figma_app/345997";
-import { b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
 import { ex } from "../905/524523";
@@ -568,7 +568,7 @@ export function $$N6({
   upsellSource: t,
   buttonText: i
 }) {
-  return (e === FPlanNameType.PRO || e === FPlanNameType.STUDENT) && t === b.CREATE_NEW_PAID_TEAM ? getI18nString("plan_comparison.plans.pro.choose_professional") : e === FPlanNameType.ORG && t === b.CREATE_NEW_PAID_TEAM ? getI18nString("plan_comparison.plans.org.choose_organization") : i();
+  return (e === FPlanNameType.PRO || e === FPlanNameType.STUDENT) && t === UpsellModalType.CREATE_NEW_PAID_TEAM ? getI18nString("plan_comparison.plans.pro.choose_professional") : e === FPlanNameType.ORG && t === UpsellModalType.CREATE_NEW_PAID_TEAM ? getI18nString("plan_comparison.plans.org.choose_organization") : i();
 }
 export const Xj = $$I0;
 export const zS = $$g1;

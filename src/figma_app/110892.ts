@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { IK } from "../905/521428";
-import { QOV } from "../figma_app/763686";
+import { UserActionState } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
@@ -27,7 +27,7 @@ export function $$y0() {
   });
   let v = useSelector(e => e.mirror.appModel.activeUserAction);
   return (useEffect(() => {
-    v === QOV.RESIZING && t(!0);
+    v === UserActionState.RESIZING && t(!0);
   }, [v]), !T || !S.length || I || e) ? null : jsx(fu, {
     name: "Slides conversion properties panel entrypoint",
     children: jsx(Ad, {

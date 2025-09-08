@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { glU, _gJ } from "../figma_app/763686";
+import { Fullscreen, IAssertResource } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -8,22 +8,22 @@ import { YQ } from "../905/502364";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { dX } from "../905/294543";
 import { $n } from "../905/515076";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { W9 } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
 import { TN } from "../figma_app/147952";
 import { IN } from "../905/116101";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ax } from "../figma_app/741237";
 import { noop } from "../905/813868";
 import { cb } from "../figma_app/12796";
-import { _V } from "../figma_app/300692";
+import { isSingleDevWithCodegen } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
-import { qW } from "../905/327571";
+import { isValidPluginId } from "../905/327571";
 import { Rt } from "../figma_app/979658";
 import { bD } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { YR } from "../905/622391";
 import { zM } from "../figma_app/89917";
 import { Sn } from "../905/946805";
@@ -33,8 +33,8 @@ import { C as _$$C } from "../figma_app/959385";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
 import { fK } from "../figma_app/300024";
-export let $$j0 = nF(async (e, t) => {
-  await Y5.onReady();
+export let $$j0 = createOptimistThunk(async (e, t) => {
+  await fullscreenValue.onReady();
   let i = e.getState();
   let m = i.currentUserOrgId;
   let {
@@ -78,7 +78,7 @@ export let $$j0 = nF(async (e, t) => {
     resourceType: bD.PLUGIN,
     resourceIds: [tryPluginId]
   }))[tryPluginId];
-  if ($ && tryPluginParams && qW(tryPluginId) && K) {
+  if ($ && tryPluginParams && isValidPluginId(tryPluginId) && K) {
     _$$R.instance.enqueue({
       runPluginArgs: {
         plugin: $,
@@ -95,11 +95,11 @@ export let $$j0 = nF(async (e, t) => {
   }
   switch (isPlaygroundFile && fullscreenEditorType !== FEditorType.DevHandoff && YQ({
     id: zM
-  }), fullscreenEditorType === FEditorType.DevHandoff && $ && $.manifest.editorType?.includes(FW.FIGMA) && YQ({
+  }), fullscreenEditorType === FEditorType.DevHandoff && $ && $.manifest.editorType?.includes(ManifestEditorType.FIGMA) && YQ({
     id: zM
   }), fullscreenEditorType) {
     case FEditorType.Whiteboard:
-      glU?.triggerAction("clear-tool", {
+      Fullscreen?.triggerAction("clear-tool", {
         source: fK
       });
       _$$s({
@@ -113,7 +113,7 @@ export let $$j0 = nF(async (e, t) => {
       });
       return;
     case FEditorType.Design:
-      glU?.triggerAction("clear-tool", {
+      Fullscreen?.triggerAction("clear-tool", {
         source: fK
       });
       RM() ? $I({
@@ -137,14 +137,14 @@ export let $$j0 = nF(async (e, t) => {
       }));
       return;
     case FEditorType.DevHandoff:
-      if ($ && _V($)) {
+      if ($ && isSingleDevWithCodegen($)) {
         let t = $n($);
         e.dispatch(dX({
           plugin: $,
           codeLanguage: t
         }));
       } else {
-        ax(_gJ.PLUGIN);
+        ax(IAssertResource.PLUGIN);
         _$$s({
           ...Y,
           initialFdResourceTab: _$$s2.PLUGIN,

@@ -1,5 +1,5 @@
 import { D } from "../905/347702";
-import { hMR } from "../figma_app/763686";
+import { CorePerfInfo } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
@@ -239,8 +239,8 @@ export class $$u0 {
       });
       e.total = t ? i : -1;
       e.connectAttemptID = this._lastConnectToID;
-      e.totalUsedHeapMemory = hMR?.getTotalUsedHeapMemory() ?? 0;
-      e.maxUsedHeapMemory = hMR?.getMaxUsedHeapMemory() ?? 0;
+      e.totalUsedHeapMemory = CorePerfInfo?.getTotalUsedHeapMemory() ?? 0;
+      e.maxUsedHeapMemory = CorePerfInfo?.getMaxUsedHeapMemory() ?? 0;
       this.wasViewerLoadReported || this._connectArgs?.entry !== "Prototype" || logError("load", "Unexpected Viewer Rendering First Frames event without Viewer Loaded report");
       let s = this.computeLoadTimeSinceDomContentLoaded();
       let l = {

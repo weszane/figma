@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Xc } from "../figma_app/703447";
-import { xN } from "../figma_app/492908";
-import { nj } from "../905/125019";
+import { nearlyEqual } from "../figma_app/492908";
+import { sha1HexFromBytes } from "../905/125019";
 import { v as _$$v } from "../905/343590";
 import { O as _$$O } from "../905/257268";
 import { e } from "../905/678389";
@@ -18,9 +18,9 @@ import { Q as _$$Q } from "../figma_app/447352";
 import { T as _$$T } from "../905/256551";
 import { sD, _H } from "../figma_app/243058";
 import { ey, nK } from "../905/859698";
-import { $XN, glU } from "../figma_app/763686";
+import { CanvasOperation, Fullscreen } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
-import { AD, Hr, dI } from "../905/871411";
+import { defaultSessionLocalIDString, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -118,10 +118,10 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.set-position-constraints-center"),
-    action: $XN.SET_POSITION_CONSTRAINTS_CENTER
+    action: CanvasOperation.SET_POSITION_CONSTRAINTS_CENTER
   }, {
     label: renderI18nText("sites.lint.remove-rotation"),
-    action: $XN.REMOVE_ROTATION
+    action: CanvasOperation.REMOVE_ROTATION
   }],
   isViolation: e => {
     let t = "STRETCH" === e.horizontalConstraint || "STRETCH" === e.verticalConstraint;
@@ -160,7 +160,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-autolayout"),
-    action: $XN.REMOVE_AUTOLAYOUT
+    action: CanvasOperation.REMOVE_AUTOLAYOUT
   }],
   isViolation: e => "NONE" !== e.stackMode && 0 !== e.childCount && ("RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === e.stackPrimarySizing || "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === e.stackCounterSizing) && e.childrenNodes.every(e => "ABSOLUTE" === e.stackPositioning)
 }, {
@@ -174,7 +174,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-alignment"),
-    action: $XN.REMOVE_BASELINE_ALIGNMENT
+    action: CanvasOperation.REMOVE_BASELINE_ALIGNMENT
   }],
   isViolation: e => {
     if ("HORIZONTAL" !== e.stackMode || "BASELINE" !== e.stackCounterAlignItems) return !1;
@@ -192,10 +192,10 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.set-clip-content"),
-    action: $XN.SET_CLIP_CONTENT
+    action: CanvasOperation.SET_CLIP_CONTENT
   }, {
     label: renderI18nText("sites.lint.remove-scrolling"),
-    action: $XN.REMOVE_SCROLLING
+    action: CanvasOperation.REMOVE_SCROLLING
   }],
   isViolation: e => !e.isBreakpointFrame && "NONE" !== e.scrollDirection && !0 === e.frameMaskDisabled
 }, {
@@ -215,7 +215,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.SET_AUTOLAYOUT_SIZING_FIXED
+    action: CanvasOperation.SET_AUTOLAYOUT_SIZING_FIXED
   }],
   isViolation: e => {
     let t = "ABSOLUTE" === e.stackPositioning;
@@ -236,10 +236,10 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-fill-container"),
-    action: $XN.REMOVE_FILL_CONTAINER
+    action: CanvasOperation.REMOVE_FILL_CONTAINER
   }, {
     label: renderI18nText("sites.lint.remove-rotation"),
-    action: $XN.REMOVE_ROTATION
+    action: CanvasOperation.REMOVE_ROTATION
   }],
   isViolation: e => !!e.parentNode && "NONE" !== e.parentNode.stackMode && "ABSOLUTE" !== e.stackPositioning && ("STRETCH" === e.stackChildAlignSelf || 0 !== e.stackChildPrimaryGrow) && Math.abs(e.rotation) >= 45 && 135 >= Math.abs(e.rotation)
 }, {
@@ -249,7 +249,7 @@ let P = [{
   description: renderI18nText("sites.lint.version-out-of-date-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.set-spacing-auto"),
-    action: $XN.SET_AUTOLAYOUT_SPACING_AUTO
+    action: CanvasOperation.SET_AUTOLAYOUT_SPACING_AUTO
   }],
   isViolation: e => "NONE" !== e.stackMode && "SPACE_EVENLY" === e.stackPrimaryAlignItems
 }, {
@@ -267,10 +267,10 @@ let P = [{
   isViolation: e => "NONE" !== e.stackMode && 0 !== e.childCount && !(("RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" !== e.stackCounterSizing || e.childrenNodes.some(e => "STRETCH" !== e.stackChildAlignSelf && e.visible)) && ("RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" !== e.stackPrimarySizing || e.childrenNodes.some(e => e.visible && 0 === e.stackChildPrimaryGrow))),
   recommendations: [{
     label: renderI18nText("sites.lint.set-autolayout-sizing-fixed"),
-    action: $XN.SET_AUTOLAYOUT_SIZING_FIXED
+    action: CanvasOperation.SET_AUTOLAYOUT_SIZING_FIXED
   }, {
     label: renderI18nText("sites.lint.remove-autolayout"),
-    action: $XN.REMOVE_AUTOLAYOUT
+    action: CanvasOperation.REMOVE_AUTOLAYOUT
   }]
 }, {
   name: "blendmode/plus-darker",
@@ -284,7 +284,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.USE_BLEND_MODE_MULTIPLY
+    action: CanvasOperation.USE_BLEND_MODE_MULTIPLY
   }],
   isViolation: e => {
     let t = "LINEAR_BURN";
@@ -302,7 +302,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.SET_CORNER_SMOOTHING_ZERO
+    action: CanvasOperation.SET_CORNER_SMOOTHING_ZERO
   }],
   isViolation: e => !U(e) && !!e.cornerSmoothing && 0 !== e.cornerRadius
 }, {
@@ -316,7 +316,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-vertical-trim"),
-    action: $XN.REMOVE_VERTICAL_TRIM
+    action: CanvasOperation.REMOVE_VERTICAL_TRIM
   }],
   isViolation: e => "TEXT" === e.type && "CAP_HEIGHT" === e.leadingTrim
 }, {
@@ -326,7 +326,7 @@ let P = [{
   description: renderI18nText("sites.lint.text/stroke-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-stroke"),
-    action: $XN.REMOVE_STROKE
+    action: CanvasOperation.REMOVE_STROKE
   }],
   isViolation: e => "TEXT" === e.type && G(e)
 }, {
@@ -336,7 +336,7 @@ let P = [{
   description: renderI18nText("sites.lint.styles/video-fill-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-video"),
-    action: $XN.REMOVE_VIDEO_FILL
+    action: CanvasOperation.REMOVE_VIDEO_FILL
   }],
   enabled: () => !getFeatureFlags().sts_video,
   isViolation: e => B(e, e => "VIDEO" === e.type)
@@ -347,7 +347,7 @@ let P = [{
   description: renderI18nText("sites.lint.styles/texture-pattern-fill-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-texture"),
-    action: $XN.REMOVE_TEXTURE_PATTERN_FILL
+    action: CanvasOperation.REMOVE_TEXTURE_PATTERN_FILL
   }],
   isViolation: e => !U(e) && B(e, e => "PATTERN" === e.type)
 }, {
@@ -357,7 +357,7 @@ let P = [{
   description: renderI18nText("sites.lint.styles/texture-noise-fill-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-texture"),
-    action: $XN.REMOVE_TEXTURE_NOISE_FILL
+    action: CanvasOperation.REMOVE_TEXTURE_NOISE_FILL
   }],
   isViolation: e => !U(e) && B(e, e => "NOISE" === e.type)
 }, {
@@ -371,7 +371,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.REMOVE_STROKE_BLEND_MODE
+    action: CanvasOperation.REMOVE_STROKE_BLEND_MODE
   }],
   isViolation: e => G(e, e => e.blendMode && "NORMAL" !== e.blendMode)
 }, {
@@ -381,7 +381,7 @@ let P = [{
   description: renderI18nText("sites.lint.styles/strokes-gradient-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-gradient"),
-    action: $XN.REMOVE_STROKE_GRADIENT
+    action: CanvasOperation.REMOVE_STROKE_GRADIENT
   }],
   isViolation: e => !U(e) && G(e, j)
 }, {
@@ -395,7 +395,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.REMOVE_CUSTOM_JOIN
+    action: CanvasOperation.REMOVE_CUSTOM_JOIN
   }],
   isViolation: e => !e.isInImmutableFrame && (e.strokeGeometry?.length > 0 && "MITER" !== e.strokeJoin || 4 !== e.strokeMiterLimit)
 }, {
@@ -405,7 +405,7 @@ let P = [{
   description: renderI18nText("sites.lint.styles/strokes-image-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-image"),
-    action: $XN.REMOVE_STROKE_IMAGE
+    action: CanvasOperation.REMOVE_STROKE_IMAGE
   }],
   isViolation: e => !e.isInImmutableFrame && G(e, e => "IMAGE" === e.type)
 }, {
@@ -415,7 +415,7 @@ let P = [{
   description: renderI18nText("sites.lint.video-stroke-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-video"),
-    action: $XN.REMOVE_VIDEO_STROKE
+    action: CanvasOperation.REMOVE_VIDEO_STROKE
   }],
   isViolation: e => G(e, e => "VIDEO" === e.type)
 }, {
@@ -425,7 +425,7 @@ let P = [{
   description: renderI18nText("sites.lint.styles/texture-dynamic-stroke-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-texture-stroke"),
-    action: $XN.REMOVE_TEXTURE_DYNAMIC_STROKE
+    action: CanvasOperation.REMOVE_TEXTURE_DYNAMIC_STROKE
   }],
   isViolation: e => {
     if (!G(e)) return !1;
@@ -439,11 +439,11 @@ let P = [{
   description: renderI18nText("sites.lint.styles/texture-brush-stroke-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-texture-stroke"),
-    action: $XN.REMOVE_TEXTURE_BRUSH_STROKE
+    action: CanvasOperation.REMOVE_TEXTURE_BRUSH_STROKE
   }],
   isViolation: e => {
     if (!G(e)) return !1;
-    let t = e.strokeBrushGuid !== AD;
+    let t = e.strokeBrushGuid !== defaultSessionLocalIDString;
     return !U(e) && t;
   }
 }, {
@@ -453,7 +453,7 @@ let P = [{
   category: "effects",
   recommendations: [{
     label: renderI18nText("sites.lint.remove-effect"),
-    action: $XN.REMOVE_EFFECTS
+    action: CanvasOperation.REMOVE_EFFECTS
   }],
   isViolation: e => ["FRAME", "RECTANGLE", "ROUNDED_RECTANGLE", "INSTANCE"].includes(e.type) && !B(e) && V(e)
 }, {
@@ -467,7 +467,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-blur"),
-    action: $XN.REMOVE_TEXT_BACKGROUND_BLUR
+    action: CanvasOperation.REMOVE_TEXT_BACKGROUND_BLUR
   }],
   isViolation: e => "TEXT" === e.type && V(e, e => "BACKGROUND_BLUR" === e.type)
 }, {
@@ -481,7 +481,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-shadow"),
-    action: $XN.REMOVE_TEXT_INNER_SHADOW
+    action: CanvasOperation.REMOVE_TEXT_INNER_SHADOW
   }],
   isViolation: e => "TEXT" === e.type && V(e, e => "INNER_SHADOW" === e.type)
 }, {
@@ -495,7 +495,7 @@ let P = [{
   category: "effects",
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.SET_BLEND_MODE_NORMAL
+    action: CanvasOperation.SET_BLEND_MODE_NORMAL
   }],
   isViolation: e => V(e, e => ("DROP_SHADOW" === e.type || "INNER_SHADOW" === e.type) && e.blendMode && "NORMAL" !== e.blendMode)
 }, {
@@ -531,7 +531,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-action"),
-    action: $XN.REMOVE_CLOSE_OVERLAY_ACTIONS
+    action: CanvasOperation.REMOVE_CLOSE_OVERLAY_ACTIONS
   }],
   isViolation: e => H(e, "CLOSE")
 }, {
@@ -545,7 +545,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-action"),
-    action: $XN.REMOVE_OPEN_OVERLAY_ACTIONS
+    action: CanvasOperation.REMOVE_OPEN_OVERLAY_ACTIONS
   }],
   isViolation: e => z(e, "OVERLAY")
 }, {
@@ -559,7 +559,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-action"),
-    action: $XN.REMOVE_SET_VARIABLE_MODE_ACTIONS
+    action: CanvasOperation.REMOVE_SET_VARIABLE_MODE_ACTIONS
   }],
   isViolation: e => H(e, "SET_VARIABLE_MODE")
 }, {
@@ -573,7 +573,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-trigger"),
-    action: $XN.REMOVE_ON_CLICK_ACTIONS
+    action: CanvasOperation.REMOVE_ON_CLICK_ACTIONS
   }],
   isViolation: e => ee(e)
 }, {
@@ -603,7 +603,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.REMOVE_NAVIGATE_ACTIONS_WITH_SMART_ANIMATE
+    action: CanvasOperation.REMOVE_NAVIGATE_ACTIONS_WITH_SMART_ANIMATE
   }],
   isViolation: e => Q(e, "NAVIGATE", "SMART_ANIMATE")
 }, {
@@ -617,7 +617,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-trigger"),
-    action: $XN.REMOVE_GAMEPAD_ACTIONS
+    action: CanvasOperation.REMOVE_GAMEPAD_ACTIONS
   }],
   isViolation: e => Y(e)
 }, {
@@ -631,7 +631,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.replace-trigger"),
-    action: $XN.REMOVE_MOUSE_IN_ACTIONS
+    action: CanvasOperation.REMOVE_MOUSE_IN_ACTIONS
   }],
   isViolation: e => K(e, "MOUSE_IN")
 }, {
@@ -645,7 +645,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.replace-trigger"),
-    action: $XN.REMOVE_MOUSE_OUT_ACTIONS
+    action: CanvasOperation.REMOVE_MOUSE_OUT_ACTIONS
   }],
   isViolation: e => K(e, "MOUSE_OUT")
 }, {
@@ -659,7 +659,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.ADD_AUTOLAYOUT
+    action: CanvasOperation.ADD_AUTOLAYOUT
   }],
   isViolation: e => "FRAME" === e.type && !e.isStack && $(e, Xc.Marquee)
 }, {
@@ -680,10 +680,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.appear_behavior"),
-    action: $XN.REMOVE_APPEAR_BEHAVIOR
+    action: CanvasOperation.REMOVE_APPEAR_BEHAVIOR
   }, {
     label: renderI18nText("sites.code_behaviors.mouse_parallax.name"),
-    action: $XN.REMOVE_CODE_BEHAVIORS
+    action: CanvasOperation.REMOVE_CODE_BEHAVIORS
   }],
   isViolation: e => {
     let t = $(e, Xc.Appear);
@@ -708,10 +708,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.cursor_behavior"),
-    action: $XN.REMOVE_CURSOR_BEHAVIOR
+    action: CanvasOperation.REMOVE_CURSOR_BEHAVIOR
   }, {
     label: renderI18nText("sites.code_behaviors.typewriter.name"),
-    action: $XN.REMOVE_CODE_BEHAVIORS
+    action: CanvasOperation.REMOVE_CODE_BEHAVIORS
   }],
   isViolation: e => {
     let t = $(e, Xc.Cursor);
@@ -736,10 +736,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.cursor_behavior"),
-    action: $XN.REMOVE_CURSOR_BEHAVIOR
+    action: CanvasOperation.REMOVE_CURSOR_BEHAVIOR
   }, {
     label: renderI18nText("sites.code_behaviors.text_scramble.name"),
-    action: $XN.REMOVE_CODE_BEHAVIORS
+    action: CanvasOperation.REMOVE_CODE_BEHAVIORS
   }],
   isViolation: e => {
     let t = $(e, Xc.Cursor);
@@ -764,10 +764,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.appear_behavior"),
-    action: $XN.REMOVE_APPEAR_BEHAVIOR
+    action: CanvasOperation.REMOVE_APPEAR_BEHAVIOR
   }, {
     label: renderI18nText("sites.code_behaviors.typewriter.name"),
-    action: $XN.REMOVE_CODE_BEHAVIORS
+    action: CanvasOperation.REMOVE_CODE_BEHAVIORS
   }],
   isViolation: e => {
     let t = $(e, Xc.Appear);
@@ -792,10 +792,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.appear_behavior"),
-    action: $XN.REMOVE_APPEAR_BEHAVIOR
+    action: CanvasOperation.REMOVE_APPEAR_BEHAVIOR
   }, {
     label: renderI18nText("sites.code_behaviors.text_scramble.name"),
-    action: $XN.REMOVE_CODE_BEHAVIORS
+    action: CanvasOperation.REMOVE_CODE_BEHAVIORS
   }],
   isViolation: e => {
     let t = $(e, Xc.Appear);
@@ -820,10 +820,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.code_behaviors.mouse_parallax.name"),
-    action: $XN.REMOVE_CODE_BEHAVIORS
+    action: CanvasOperation.REMOVE_CODE_BEHAVIORS
   }, {
     label: renderI18nText("sites.panel.interactions_panel.scroll_parallax_behavior"),
-    action: $XN.REMOVE_SCROLL_PARALLAX_BEHAVIOR
+    action: CanvasOperation.REMOVE_SCROLL_PARALLAX_BEHAVIOR
   }],
   isViolation: e => {
     let t = X(e, "MouseParallax");
@@ -848,10 +848,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.appear_behavior"),
-    action: $XN.REMOVE_APPEAR_BEHAVIOR
+    action: CanvasOperation.REMOVE_APPEAR_BEHAVIOR
   }, {
     label: renderI18nText("sites.panel.interactions_panel.scroll_transform_behavior"),
-    action: $XN.REMOVE_SCROLL_TRANSFORM_BEHAVIOR
+    action: CanvasOperation.REMOVE_SCROLL_TRANSFORM_BEHAVIOR
   }],
   isViolation: e => {
     let t = $(e, Xc.Appear);
@@ -876,10 +876,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.panel.interactions_panel.scroll_transform_behavior"),
-    action: $XN.REMOVE_SCROLL_TRANSFORM_BEHAVIOR
+    action: CanvasOperation.REMOVE_SCROLL_TRANSFORM_BEHAVIOR
   }, {
     label: renderI18nText("sites.panel.interactions_panel.scroll_parallax_behavior"),
-    action: $XN.REMOVE_SCROLL_PARALLAX_BEHAVIOR
+    action: CanvasOperation.REMOVE_SCROLL_PARALLAX_BEHAVIOR
   }],
   isViolation: e => {
     let t = $(e, Xc.ScrollTransform);
@@ -904,10 +904,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.lint.behaviors/hover-behavior"),
-    action: $XN.REMOVE_HOVER_BEHAVIOR
+    action: CanvasOperation.REMOVE_HOVER_BEHAVIOR
   }, {
     label: renderI18nText("sites.lint.behaviors/hover-interaction-trigger"),
-    action: $XN.REMOVE_ON_HOVER_ACTIONS
+    action: CanvasOperation.REMOVE_ON_HOVER_ACTIONS
   }],
   isViolation: e => {
     let t = $(e, Xc.Hover);
@@ -932,10 +932,10 @@ let P = [{
   recommendationLabelOverride: renderI18nText("sites.lint.interactions.remove"),
   recommendations: [{
     label: renderI18nText("sites.lint.behaviors/press-behavior"),
-    action: $XN.REMOVE_PRESS_BEHAVIOR
+    action: CanvasOperation.REMOVE_PRESS_BEHAVIOR
   }, {
     label: renderI18nText("sites.lint.behaviors/press-interaction-trigger"),
-    action: $XN.REMOVE_ON_PRESS_ACTIONS
+    action: CanvasOperation.REMOVE_ON_PRESS_ACTIONS
   }],
   isViolation: e => {
     let t = $(e, Xc.Press);
@@ -953,7 +953,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-action"),
-    action: $XN.REMOVE_SWAP_OVERLAY_ACTIONS
+    action: CanvasOperation.REMOVE_SWAP_OVERLAY_ACTIONS
   }],
   isViolation: e => z(e, "SWAP")
 }, {
@@ -967,7 +967,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-trigger"),
-    action: $XN.REMOVE_ON_DRAG_ACTIONS
+    action: CanvasOperation.REMOVE_ON_DRAG_ACTIONS
   }],
   isViolation: e => K(e, "DRAG")
 }, {
@@ -981,7 +981,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-animation"),
-    action: $XN.REMOVE_DISSOLVE_ANIMATIONS
+    action: CanvasOperation.REMOVE_DISSOLVE_ANIMATIONS
   }],
   isViolation: e => W(e, "DISSOLVE")
 }, {
@@ -993,7 +993,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_CONNECTOR
+    action: CanvasOperation.REMOVE_CONNECTOR
   }],
   isViolation: e => "CONNECTOR" === e.type
 }, {
@@ -1005,7 +1005,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_SHAPE_WITH_TEXT
+    action: CanvasOperation.REMOVE_SHAPE_WITH_TEXT
   }],
   isViolation: e => "SHAPE_WITH_TEXT" === e.type
 }, {
@@ -1017,7 +1017,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_STICKY
+    action: CanvasOperation.REMOVE_STICKY
   }],
   isViolation: e => "STICKY" === e.type
 }, {
@@ -1029,7 +1029,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_WASHI_TAPE
+    action: CanvasOperation.REMOVE_WASHI_TAPE
   }],
   isViolation: e => "WASHI_TAPE" === e.type
 }, {
@@ -1041,7 +1041,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_HIGHLIGHT
+    action: CanvasOperation.REMOVE_HIGHLIGHT
   }],
   isViolation: e => "HIGHLIGHT" === e.type
 }, {
@@ -1053,7 +1053,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_STAMP
+    action: CanvasOperation.REMOVE_STAMP
   }],
   isViolation: e => "STAMP" === e.type
 }, {
@@ -1065,7 +1065,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_TABLE
+    action: CanvasOperation.REMOVE_TABLE
   }],
   isViolation: e => "TABLE" === e.type
 }, {
@@ -1077,7 +1077,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-object"),
-    action: $XN.REMOVE_WIDGET
+    action: CanvasOperation.REMOVE_WIDGET
   }],
   isViolation: e => "WIDGET" === e.type && !e.isHTMLWidget
 }, {
@@ -1097,7 +1097,7 @@ let P = [{
   }),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-action"),
-    action: $XN.REMOVE_VECTOR_SET_VARIABLE_ACTIONS
+    action: CanvasOperation.REMOVE_VECTOR_SET_VARIABLE_ACTIONS
   }],
   isViolation: e => {
     let t = e.prototypeInteractions.flatMap(e => e.actions).filter(e => e?.connectionType === "SET_VARIABLE").map(e => e?.targetVariable?.id).filter(e => void 0 !== e);
@@ -1109,8 +1109,8 @@ let P = [{
       t = e.assetRef && e.assetRef.key && e.assetRef.version ? sD.fromRef({
         key: ey(e.assetRef.key),
         version: nK(e.assetRef.version)
-      }) : sD.fromLocalNodeIdObj(e.guid ?? Hr);
-      let r = glU?.transitiveConsumersOfVariable(t);
+      }) : sD.fromLocalNodeIdObj(e.guid ?? defaultSessionLocalID);
+      let r = Fullscreen?.transitiveConsumersOfVariable(t);
       r && (n = n.concat(Array.from(r)));
     }
     let i = t.map(e => {
@@ -1149,7 +1149,7 @@ let P = [{
   description: renderI18nText("sites.lint.effects/grain-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-effect"),
-    action: $XN.REMOVE_GRAIN_EFFECT
+    action: CanvasOperation.REMOVE_GRAIN_EFFECT
   }],
   isViolation: e => !U(e) && V(e, e => "GRAIN" === e.type)
 }, {
@@ -1159,7 +1159,7 @@ let P = [{
   description: renderI18nText("sites.lint.effects/noise-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-effect"),
-    action: $XN.REMOVE_NOISE_EFFECT
+    action: CanvasOperation.REMOVE_NOISE_EFFECT
   }],
   isViolation: e => !U(e) && V(e, e => "NOISE" === e.type)
 }, {
@@ -1169,7 +1169,7 @@ let P = [{
   description: renderI18nText("sites.lint.effects/progressive-blur-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-effect"),
-    action: $XN.REMOVE_PROGRESSIVE_BLUR
+    action: CanvasOperation.REMOVE_PROGRESSIVE_BLUR
   }],
   isViolation: e => !U(e) && V(e, e => ("FOREGROUND_BLUR" === e.type || "BACKGROUND_BLUR" === e.type) && "PROGRESSIVE" === e.blurOpType)
 }, {
@@ -1179,7 +1179,7 @@ let P = [{
   description: renderI18nText("sites.lint.effects/glass-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-effect"),
-    action: $XN.REMOVE_GLASS
+    action: CanvasOperation.REMOVE_GLASS
   }],
   isViolation: e => !U(e) && V(e, e => "GLASS" === e.type)
 }, {
@@ -1189,7 +1189,7 @@ let P = [{
   description: renderI18nText("sites.lint.missing_hyperlink_description"),
   recommendations: [{
     label: renderI18nText("sites.lint.missing_hyperlink.remove_link"),
-    action: $XN.REMOVE_LINKS_TO_DELETED_NODES
+    action: CanvasOperation.REMOVE_LINKS_TO_DELETED_NODES
   }],
   isViolation: e => {
     if (!e.hyperlink) return !1;
@@ -1216,7 +1216,7 @@ let P = [{
   category: "interactions",
   recommendations: [{
     label: renderI18nText("sites.lint.remove-action"),
-    action: $XN.REMOVE_SCROLL_TO_ACTIONS
+    action: CanvasOperation.REMOVE_SCROLL_TO_ACTIONS
   }],
   isViolation: e => e.isInstanceSublayer && z(e, "SCROLL_TO")
 }, {
@@ -1227,14 +1227,14 @@ let P = [{
   description: renderI18nText("sites.lint.appearance/image-adjustments-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-image-adjustments"),
-    action: $XN.REMOVE_IMAGE_ADJUSTMENTS
+    action: CanvasOperation.REMOVE_IMAGE_ADJUSTMENTS
   }],
   isViolation: e => B(e, e => {
     if ("IMAGE" !== e.type || !e.paintFilter) return !1;
     let t = e.paintFilter;
     return !!t && ["exposure", "contrast", "vibrance", "temperature", "tint", "highlights", "shadows"].some(e => {
       let r = t[e];
-      return void 0 !== r && !xN(r, 0);
+      return void 0 !== r && !nearlyEqual(r, 0);
     });
   })
 }, {
@@ -1245,7 +1245,7 @@ let P = [{
   icon: jsx(b, {}),
   recommendations: [{
     label: renderI18nText("sites.lint.appearance/remove-mask-transform"),
-    action: $XN.REMOVE_MASK_TRANSFORM
+    action: CanvasOperation.REMOVE_MASK_TRANSFORM
   }],
   isViolation: e => {
     if (!(e.isGroup && e.childrenNodes.some(e => e.mask))) return !1;
@@ -1258,7 +1258,7 @@ let P = [{
       m11,
       m12
     } = e.relativeTransform;
-    return !(xN(m00, t.m00) && xN(m01, t.m01) && xN(m02, t.m02) && xN(m10, t.m10) && xN(m11, t.m11) && xN(m12, t.m12)) || e.childrenNodes.some(e => {
+    return !(nearlyEqual(m00, t.m00) && nearlyEqual(m01, t.m01) && nearlyEqual(m02, t.m02) && nearlyEqual(m10, t.m10) && nearlyEqual(m11, t.m11) && nearlyEqual(m12, t.m12)) || e.childrenNodes.some(e => {
       let {
         m00,
         m01,
@@ -1267,7 +1267,7 @@ let P = [{
         m11,
         m12
       } = e.relativeTransform;
-      return !xN(m00, t.m00) || !xN(m01, t.m01) || !xN(m02, t.m02) || !xN(m10, t.m10) || !xN(m11, t.m11) || !xN(m12, t.m12);
+      return !nearlyEqual(m00, t.m00) || !nearlyEqual(m01, t.m01) || !nearlyEqual(m02, t.m02) || !nearlyEqual(m10, t.m10) || !nearlyEqual(m11, t.m11) || !nearlyEqual(m12, t.m12);
     });
   }
 }, {
@@ -1277,17 +1277,17 @@ let P = [{
   description: renderI18nText("sites.lint.fills/rotated-image-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-rotation"),
-    action: $XN.REMOVE_IMAGE_ROTATION
+    action: CanvasOperation.REMOVE_IMAGE_ROTATION
   }, {
     label: renderI18nText("sites.lint.fills/remove-fill"),
-    action: $XN.REMOVE_ROTATED_IMAGE_FILL
+    action: CanvasOperation.REMOVE_ROTATED_IMAGE_FILL
   }],
   isViolation: e => B(e, e => {
     if ("IMAGE" !== e.type) return !1;
     if (0 !== e.rotation) return !0;
     if ("STRETCH" === e.imageScaleMode && e.transform) {
       let t = _$$s.fromFigMatrix(e.transform);
-      if (!xN(t.toRadians(), 0)) return !0;
+      if (!nearlyEqual(t.toRadians(), 0)) return !0;
     }
     return !1;
   })
@@ -1299,17 +1299,17 @@ let P = [{
   enabled: () => !!getFeatureFlags().sts_video,
   recommendations: [{
     label: renderI18nText("sites.lint.remove-rotation"),
-    action: $XN.REMOVE_VIDEO_ROTATION
+    action: CanvasOperation.REMOVE_VIDEO_ROTATION
   }, {
     label: renderI18nText("sites.lint.fills/remove-fill"),
-    action: $XN.REMOVE_ROTATED_VIDEO_FILL
+    action: CanvasOperation.REMOVE_ROTATED_VIDEO_FILL
   }],
   isViolation: e => B(e, e => {
     if ("VIDEO" !== e.type) return !1;
     if (0 !== e.rotation) return !0;
     if ("STRETCH" === e.imageScaleMode && e.transform) {
       let t = _$$s.fromFigMatrix(e.transform);
-      if (!xN(t.toRadians(), 0)) return !0;
+      if (!nearlyEqual(t.toRadians(), 0)) return !0;
     }
     return !1;
   })
@@ -1348,7 +1348,7 @@ let P = [{
   enabled: () => !!getFeatureFlags().sts_video,
   recommendations: [{
     label: renderI18nText("sites.lint.fix-issue"),
-    action: $XN.SET_VIDEO_FILL_SCALE_MODE_FILL
+    action: CanvasOperation.SET_VIDEO_FILL_SCALE_MODE_FILL
   }],
   isViolation: e => B(e, e => "VIDEO" === e.type && "TILE" === e.imageScaleMode)
 }, {
@@ -1358,10 +1358,10 @@ let P = [{
   description: renderI18nText("sites.lint.fills/video-settings-controls-autoplay-invalid-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.turn-on-autoplay"),
-    action: $XN.SET_VIDEO_AUTOPLAY
+    action: CanvasOperation.SET_VIDEO_AUTOPLAY
   }, {
     label: renderI18nText("sites.lint.show-controls"),
-    action: $XN.SET_VIDEO_CONTROLS
+    action: CanvasOperation.SET_VIDEO_CONTROLS
   }],
   enabled: () => !!getFeatureFlags().sts_video,
   isViolation: e => B(e, t => {
@@ -1395,7 +1395,7 @@ let P = [{
   description: renderI18nText("sites.lint.layout/fixed-child-outside-of-tlf-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.set-position-absolute"),
-    action: $XN.SET_POSITION_ABSOLUTE
+    action: CanvasOperation.SET_POSITION_ABSOLUTE
   }],
   isViolation: e => {
     if ("FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" !== e.scrollBehavior) return !1;
@@ -1415,7 +1415,7 @@ let P = [{
   description: renderI18nText("sites.lint.fills/video-size-description"),
   recommendations: [{
     label: renderI18nText("sites.lint.remove-video"),
-    action: $XN.REMOVE_VIDEO_FILL
+    action: CanvasOperation.REMOVE_VIDEO_FILL
   }],
   enabled: () => !!getFeatureFlags().sts_video && !!getFeatureFlags().sts_video_size_lint_rule,
   beforeRun: async (e, t) => {
@@ -1485,7 +1485,7 @@ export async function $$M1(e, t, r, n) {
           }
           [...D(node)].flatMap(t => J(t, e => "SWAP_STATE" === e.navigationType).map(t => {
             if (!t.transitionNodeID) return;
-            let r = dI(t.transitionNodeID);
+            let r = sessionLocalIDToString(t.transitionNodeID);
             if (k(e.get(r), e)) return r;
           }).filter(Boolean)).forEach(t => {
             let r = e.get(t);
@@ -1584,7 +1584,7 @@ async function er(e, t) {
   0 !== r.size && (await dk.instance.populateCacheForHashes(e, Array.from(r)));
 }
 function en(e) {
-  return e.fills.filter(e => "VIDEO" === e.type && F(e)).map(e => e.video?.hash ? nj(e.video.hash) : void 0).filter(e => void 0 !== e);
+  return e.fills.filter(e => "VIDEO" === e.type && F(e)).map(e => e.video?.hash ? sha1HexFromBytes(e.video.hash) : void 0).filter(e => void 0 !== e);
 }
 export const uU = $$R0;
 export const N0 = $$M1;

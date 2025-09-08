@@ -13,19 +13,19 @@ import { _6 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
 import { qE } from "../figma_app/152745";
 import { H } from "../905/216861";
-import { EB } from "../figma_app/831101";
-import { Ju } from "../905/102752";
+import { createEmptyAddress } from "../figma_app/831101";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
-export let $$w0 = Ju(function (e) {
+export let $$w0 = registerModal(function (e) {
   let t = useDispatch();
   let r = iZ();
   let g = _6();
   let w = H();
   let [C, L] = useState("");
   let [T, I] = useState("");
-  let [N, E] = useState(EB());
+  let [N, E] = useState(createEmptyAddress());
   let [S, R] = useState("");
   let [k, A] = useState(!0);
   let [P, M] = useState(!1);

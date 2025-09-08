@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, useMemo, useContext } from "react";
 import { useSelector } from "../vendor/514228";
 import { sg } from "../905/859698";
-import { glU, w3z, juq } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { Fullscreen, HandoffBindingsCpp, FileSourceType } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { ReduxSceneGraph } from "../905/700578";
 import { IT } from "../figma_app/566371";
 import { Eo } from "../figma_app/80990";
@@ -49,7 +49,7 @@ let I = M4.Query({
       canvas_url: e.canvasUrl
     });
     if (!i) return {};
-    let a = glU.loadDetachedComponent(t ?? "", n, i, r);
+    let a = Fullscreen.loadDetachedComponent(t ?? "", n, i, r);
     return a ? {
       result: {
         ...e,
@@ -85,7 +85,7 @@ export function $$v3({
     let [h] = IT(T(p));
     let g = h?.data;
     let f = d && u && "loaded" === h.status && g && g.component;
-    let E = g?.nodeId ?? AD;
+    let E = g?.nodeId ?? defaultSessionLocalIDString;
     let y = g?.fileKey ?? "";
     let b = y !== t;
     let S = g?.component;
@@ -93,12 +93,12 @@ export function $$v3({
     let A = S?.component_key ?? n?.componentKey ?? "";
     let x = v?.key ?? A ?? "";
     let N = !!n?.isVariant || !!g?.componentSet;
-    let C = b ? w3z.getGuidByComponentKey(x, A) : {
+    let C = b ? HandoffBindingsCpp.getGuidByComponentKey(x, A) : {
       nodeId: g?.nodeId,
-      parentId: v ? v.node_id ?? AD : AD,
+      parentId: v ? v.node_id ?? defaultSessionLocalIDString : defaultSessionLocalIDString,
       inDetachedComponentsScene: !1
     };
-    let w = f && b && C?.nodeId === AD;
+    let w = f && b && C?.nodeId === defaultSessionLocalIDString;
     let O = {
       nodeId: E,
       fileKey: y,
@@ -180,7 +180,7 @@ export function $$x0(e, t) {
   };
 }
 export function $$N5(e) {
-  return new ReduxSceneGraph(juq.DETACHED_COMPONENTS).get(e);
+  return new ReduxSceneGraph(FileSourceType.DETACHED_COMPONENTS).get(e);
 }
 export function $$C2(e, t) {
   let r = $$A4();

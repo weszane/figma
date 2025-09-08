@@ -78,7 +78,7 @@ import { _W } from "../figma_app/329496";
 import { FRequestsStr } from "../905/384551";
 import { UserRole, GroupType } from "../905/441038";
 import { J0, oU } from "../figma_app/967319";
-import { EB } from "../figma_app/831101";
+import { createEmptyAddress } from "../figma_app/831101";
 import { O as _$$O2 } from "../905/833838";
 import { V0, m2, _C } from "../figma_app/858344";
 import { o0 } from "../905/844131";
@@ -139,15 +139,15 @@ import { f as _$$f2 } from "../figma_app/750432";
 import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
 import { IU } from "../figma_app/421401";
-import { Ce, to as _$$to, $O, Lo } from "../905/156213";
+import { hideModal, showModalHandler, showModal, popModalStack } from "../905/156213";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB as _$$nB, wi, jk, vo } from "../figma_app/272243";
-import { S as _$$S2 } from "../905/274480";
-import { J as _$$J2 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { $z } from "../figma_app/617427";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { g as _$$g4 } from "../469e6e40/136803";
 import { OJ } from "../905/519092";
 import { B as _$$B } from "../905/714743";
@@ -192,7 +192,7 @@ import { yE } from "../469e6e40/471025";
 import { e as _$$e6 } from "../905/86132";
 import { F4 } from "../1881/125927";
 import { IT, M4 } from "../905/713695";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { z as _$$z2 } from "../905/284530";
 import { A as _$$A6 } from "../5724/663128";
 import { eu as _$$eu, zb } from "../469e6e40/418374";
@@ -1804,7 +1804,7 @@ function aa() {
     onComplete: complete
   });
 }
-let aw = Ju(function (e) {
+let aw = registerModal(function (e) {
   let t = useDispatch();
   let a = MX();
   let n = hS(e);
@@ -1874,8 +1874,8 @@ let aw = Ju(function (e) {
             })]
           }), jsx("div", {
             className: "xehsoiq",
-            children: jsx(_$$S2, {
-              label: jsx(_$$J2, {
+            children: jsx(Checkbox, {
+              label: jsx(Label, {
                 children: renderI18nText("billing_groups_table.delete_modal.i_understand_that_this_action_isnt_reversible")
               }),
               checked: _,
@@ -2003,7 +2003,7 @@ function aC({
     })
   });
 }
-let aS = Ju(function (e) {
+let aS = registerModal(function (e) {
   let t = useDispatch();
   let [a, n] = useState(null);
   let l = dq();
@@ -2055,7 +2055,7 @@ let aS = Ju(function (e) {
         licenseGroupId: e.licenseGroup?.id,
         orgId: l
       });
-      t(Ce());
+      t(hideModal());
     },
     onSubmit: () => {
       let a = ({
@@ -2070,7 +2070,7 @@ let aS = Ju(function (e) {
             workspaceName: x
           })
         }));
-        t(Ce());
+        t(hideModal());
         t(yo({
           licenseGroup: e.meta,
           orgId: l
@@ -2107,7 +2107,7 @@ function aN({
     children: [1 === e.length && !!e[0].id && jsxs(Fragment, {
       children: [jsx(IU, {
         onClick: () => {
-          t(_$$to({
+          t(showModalHandler({
             type: aS,
             data: {
               licenseGroup: e[0]
@@ -2128,7 +2128,7 @@ function aN({
         label: getI18nString("billing_groups_table.manage")
       })]
     }), jsx(IU, {
-      onClick: () => t(_$$to({
+      onClick: () => t(showModalHandler({
         type: aw,
         data: {
           licenseGroups: e.filter(e => !!e.id)
@@ -2147,7 +2147,7 @@ function aR({
     dataOnboardingKey: Pz,
     children: [jsx(_$$p3, {
       onClick: () => {
-        t(_$$to({
+        t(showModalHandler({
           type: aS,
           data: {
             licenseGroup: e
@@ -2168,7 +2168,7 @@ function aR({
       children: getI18nString("billing_groups_table.manage")
     }, "license-group-manage-action"), jsx(_$$p3, {
       onClick: () => {
-        t(_$$to({
+        t(showModalHandler({
           type: aw,
           data: {
             licenseGroups: [e]
@@ -2409,7 +2409,7 @@ function a$(e) {
       icon: "plus-32",
       "data-onboarding-key": t,
       onClick: () => {
-        a(_$$to({
+        a(showModalHandler({
           type: aS
         }));
       },
@@ -2623,7 +2623,7 @@ function a3(e) {
     onTrial: v,
     hasNonAdjustableRenewalSeats: !!n.data?.non_adjustable_renewal_seats
   }) ? () => {
-    t(_$$to({
+    t(showModalHandler({
       type: _$$aO,
       data: {
         renewalDate: f
@@ -2850,7 +2850,7 @@ let nx = e => {
       return renderI18nText("workspace.create_confirmation_modal.description.list.libraries");
   }
 };
-let nb = Ju(function ({
+let nb = registerModal(function ({
   onConfirm: e
 }) {
   let t = useDispatch();
@@ -2861,7 +2861,7 @@ let nb = Ju(function ({
       confirmText: renderI18nText("workspace.create_confirmation_modal.confirm"),
       disableClickOutsideToHide: !0,
       onConfirm: () => {
-        t(Ce());
+        t(hideModal());
         e();
       },
       popStack: !0,
@@ -2890,7 +2890,7 @@ let nv = "workspace_edit_modal--adminRow---ltkO workspace_edit_modal--inputRow--
 let nf = "workspace_edit_modal--inputLabel--azeeV";
 let nj = "workspace_edit_modal--adminField--JKgPu";
 let nw = "First Workspace Created";
-let nk = Ju(function (e) {
+let nk = registerModal(function (e) {
   let t = useDispatch();
   let [a, n] = useState(null);
   let l = X$("WorkspaceEditModal").unwrapOr(null);
@@ -2938,7 +2938,7 @@ let nk = Ju(function (e) {
       workspaceId: m?.id,
       orgId: o
     });
-    t(Ce());
+    t(hideModal());
   };
   let C = () => {
     let e = p ? `/api/workspace/${m.id}` : `/api/orgs/${o}/workspaces`;
@@ -2961,7 +2961,7 @@ let nk = Ju(function (e) {
         })
       }));
       n();
-      t(Ce());
+      t(hideModal());
       s && trackEventAnalytics(nw, {
         workspaceId: e.meta?.id,
         orgId: o
@@ -3066,7 +3066,7 @@ let nk = Ju(function (e) {
             children: jsx(vd, {
               className: "workspace_edit_modal--submitButton--Dov4c",
               onClick: () => {
-                u && 0 !== u.length || p ? C() : t($O({
+                u && 0 !== u.length || p ? C() : t(showModal({
                   type: nb.type,
                   data: {
                     onConfirm: C
@@ -3122,14 +3122,14 @@ function nS() {
     userFlagOnShow: nE
   });
 }
-let nL = Ju(function (e) {
+let nL = registerModal(function (e) {
   let t = useDispatch();
   let a = useSelector(e => e.currentUserOrgId);
   let n = _$$q(OK, !0);
   let l = e.workspaces.map(e => e.id);
   let o = e.workspaces.map(e => e.name);
   let d = () => {
-    t(Ce());
+    t(hideModal());
   };
   let [c, _] = useState(!1);
   return jsx(fu, {
@@ -3177,7 +3177,7 @@ let nL = Ju(function (e) {
                 })
               }));
               n();
-              t(Ce());
+              t(hideModal());
             }).catch(e => {
               t(_$$F.enqueue({
                 error: !0,
@@ -3221,7 +3221,7 @@ function nD({
     children: [1 === t.length && !!t[0].id && jsxs(Fragment, {
       children: [jsx(IU, {
         onClick: () => {
-          a(_$$to({
+          a(showModalHandler({
             type: nk,
             data: {
               workspacesData: e,
@@ -3243,7 +3243,7 @@ function nD({
         label: getI18nString("workspace_table.manage")
       })]
     }), jsx(IU, {
-      onClick: () => a(_$$to({
+      onClick: () => a(showModalHandler({
         type: nL,
         data: {
           workspaces: t.filter(e => !!e.id)
@@ -3260,7 +3260,7 @@ function nM({
   let a = useDispatch();
   let n = t.find(t => t.id === e);
   let l = useCallback(() => {
-    a(_$$to({
+    a(showModalHandler({
       type: nk,
       data: {
         workspacesData: t,
@@ -3278,7 +3278,7 @@ function nM({
     }));
   }, [a, n]);
   let d = useCallback(() => {
-    a(_$$to({
+    a(showModalHandler({
       type: nL,
       data: {
         workspaces: [n]
@@ -3392,7 +3392,7 @@ function nq({
 function n$() {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(_$$to({
+    e(showModalHandler({
       type: nk,
       data: {
         workspacesData: []
@@ -3629,7 +3629,7 @@ function nz(e) {
     isReversed: !1
   }, m, x);
   let k = useCallback(() => {
-    t(_$$to({
+    t(showModalHandler({
       type: nk,
       data: {
         workspacesData: _
@@ -3835,14 +3835,14 @@ function n4(e) {
       s === _$$s2 && (s = void 0);
       a({
         isPlanAdmin: !0
-      }) ? t(_$$to({
+      }) ? t(showModalHandler({
         type: _$$e6(),
         data: {
           planType: FOrganizationLevelType.ORG,
           workspaceId: n,
           licenseGroupId: s
         }
-      })) : t(_$$to({
+      })) : t(showModalHandler({
         type: F4,
         data: {
           workspaceId: n,
@@ -3882,7 +3882,7 @@ function n4(e) {
 }
 let n8 = new class {
   constructor() {
-    this.OrgExtensionAnalyticsValidator = vh();
+    this.OrgExtensionAnalyticsValidator = createNoOpValidator();
     this.getExtensionAnalyticsForOrg = async e => {
       let {
         data
@@ -4105,7 +4105,7 @@ function su({
   useEffect(() => {
     if (o) {
       let e = t?.[o];
-      u(_$$to({
+      u(showModalHandler({
         type: _$$W(),
         data: {
           mode: "manage",
@@ -4146,7 +4146,7 @@ function su({
     }), p ? g.map((e, i) => {
       let r = s => {
         let i = t?.[e.extensionId];
-        u(_$$to({
+        u(showModalHandler({
           type: _$$W(),
           data: {
             mode: "manage",
@@ -4365,7 +4365,7 @@ function sb() {
     })
   });
 }
-let sy = Ju(function ({
+let sy = registerModal(function ({
   extension: e,
   isWidget: t,
   declineModalParams: a,
@@ -4390,7 +4390,7 @@ let sy = Ju(function ({
       ...e,
       declineNote: c
     });
-    u(Lo());
+    u(popModalStack());
     l();
   };
   let g = t ? getI18nString("extension_decline_modal.leave_widget_note") : getI18nString("extension_decline_modal.leave_plugin_note");
@@ -4663,7 +4663,7 @@ function sT(e) {
     extensionId
   } = a;
   let _ = () => {
-    t(_$$to({
+    t(showModalHandler({
       type: _$$W(),
       data: {
         mode: "review",
@@ -4688,7 +4688,7 @@ function sT(e) {
       workspaceDetails: void 0,
       declineModalParams: e
     };
-    t(_$$to({
+    t(showModalHandler({
       type: sy,
       data: s
     }));
@@ -4803,12 +4803,12 @@ function sR({
     enabled: c
   });
   let g = useCallback(() => {
-    "plugin" === t ? l(_$$to({
+    "plugin" === t ? l(showModalHandler({
       type: _$$eu,
       data: {
         currentUserOrgId: e
       }
-    })) : l(_$$to({
+    })) : l(showModalHandler({
       type: zb,
       data: {
         currentUserOrgId: e
@@ -4816,7 +4816,7 @@ function sR({
     }));
   }, [l, t, e]);
   let h = useCallback(() => {
-    l(_$$to({
+    l(showModalHandler({
       type: CW,
       data: {
         orgId: e,
@@ -5114,7 +5114,7 @@ function sB(e) {
   let eu = "loading" === el.status;
   let eA = el.data?.invoices;
   let ez = Oq.dict(e => el.data?.billable_seats[e] ?? 0);
-  let eV = el.data?.shipping_address || EB();
+  let eV = el.data?.shipping_address || createEmptyAddress();
   let eW = el.data?.has_billing_address || !1;
   let eH = null;
   let eY = null;

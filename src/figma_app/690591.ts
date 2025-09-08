@@ -16,7 +16,7 @@ import { aq } from "../figma_app/399472";
 import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
 import { yJ } from "../figma_app/78808";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { _z, ky } from "../905/977218";
 import { WX } from "../figma_app/350203";
 import { E$, LR, Im, CI, Dy } from "../figma_app/844435";
@@ -30,7 +30,7 @@ import { Yj } from "../figma_app/951233";
 import { bD } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
 import { S as _$$S } from "../figma_app/787550";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { ey } from "../figma_app/918700";
 import { rw } from "../905/54367";
 import { gr, fV, n6, IW, fp } from "../figma_app/257005";
@@ -246,14 +246,14 @@ function q(e) {
         trackEventAnalytics("community_publish_modal", {
           step: WX.CLOSED
         });
-        t(Ce());
+        t(hideModal());
       }
     })]
   });
 }
 var J = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e.NeverFetched = 2] = "NeverFetched", e))(J || {});
 let Z = [FFileType.DESIGN, FFileType.WHITEBOARD];
-let $$Q0 = Ju(function (e) {
+let $$Q0 = registerModal(function (e) {
   let t = Pc();
   let r = useDispatch();
   let o = useSelector(e => !!e.user);
@@ -305,7 +305,7 @@ let $$Q0 = Ju(function (e) {
       user: t.id,
       step: WX.CLOSED
     });
-    r(Ce());
+    r(hideModal());
   };
   let J = async e => {
     await r(rH({

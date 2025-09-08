@@ -11,13 +11,13 @@ import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { UE } from "../figma_app/345997";
 import { Np } from "../figma_app/193867";
-import { tY, oO, tn } from "../figma_app/831101";
+import { SubscriptionType, mapUpsellModalTypeToSource, UpgradeSteps } from "../figma_app/831101";
 import { SC, Sc } from "../figma_app/707808";
-import { nF } from "../905/350402";
-import { Ce } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { hideModal } from "../905/156213";
 import { yJ } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
-let $$I15 = nF((e, {
+let $$I15 = createOptimistThunk((e, {
   teamId: t,
   showBreadcrumbs: r,
   onCloseOrComplete: n
@@ -29,7 +29,7 @@ let $$I15 = nF((e, {
     onCloseOrComplete: n
   }));
   e.dispatch($$G7({
-    billingPeriod: tY.STUDENT
+    billingPeriod: SubscriptionType.STUDENT
   }));
 });
 let $$S20 = NC("PAYMENT_RESTORE_SAVED_CART");
@@ -37,14 +37,14 @@ let $$v9 = NC("PAYMENT_SET_CURRENCY");
 let $$A16 = NC("PAYMENT_SET_TOKEN");
 let $$x21 = NC("PAYMENT_SET_TAXES");
 let $$N19 = NC("PAYMENT_SET_PROMO");
-let $$C1 = nF((e, t) => {
+let $$C1 = createOptimistThunk((e, t) => {
   t.promo || _H();
   e.dispatch($$N19(t));
 });
 let $$w0 = NC("PAYMENT_SET_VAT_GST_ID");
 let $$O4 = NC("PAYMENT_SET_REGIONAL_VAT_GST_ID");
 let $$R12 = NC("PAYMENT_MAKE_STUDENT_TEAM");
-let $$L11 = nF((e, t) => {
+let $$L11 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user?.id;
   XHR.put(`/api/teams/${t.teamId}/student_team`, {
@@ -76,7 +76,7 @@ let $$L11 = nF((e, t) => {
   });
   e.dispatch($$R12());
 });
-let $$P18 = nF((e, {
+let $$P18 = createOptimistThunk((e, {
   teamId: t
 }) => {
   let r = e.getState().teams[t];
@@ -128,14 +128,14 @@ let $$G7 = NC("PAYMENT_SET_BILLING_PERIOD");
 let $$V24 = NC("PAYMENT_SET_CAMPFIRE_SEATS");
 let $$H14 = NC("PAYMENT_INIT");
 let $$z10 = NC("PAYMENT_START_ORG_UPGRADE_FLOW");
-let $$W3 = nF((e, t) => {
+let $$W3 = createOptimistThunk((e, t) => {
   let {
     openInNewTab,
     newTeamProps,
     entryPoint,
     upsellSource
   } = t;
-  let o = oO({
+  let o = mapUpsellModalTypeToSource({
     upsellSource,
     fallbackEntryPoint: entryPoint
   });
@@ -150,7 +150,7 @@ let $$W3 = nF((e, t) => {
       url: r
     }));
   } else {
-    e.dispatch(Ce());
+    e.dispatch(hideModal());
     e.dispatch(sf({
       view: "orgSelfServe",
       newTeamProps,
@@ -163,7 +163,7 @@ let $$W3 = nF((e, t) => {
   }));
 });
 let $$K23 = NC("PAYMENT_START_PRO_UPGRADE_FLOW");
-let $$Y17 = nF((e, t) => {
+let $$Y17 = createOptimistThunk((e, t) => {
   let {
     teamId,
     billingPeriod,
@@ -171,7 +171,7 @@ let $$Y17 = nF((e, t) => {
     onBillingCompleteRedirectInfo,
     upsellSource
   } = t;
-  let l = oO({
+  let l = mapUpsellModalTypeToSource({
     upsellSource,
     fallbackEntryPoint: entryPoint
   });
@@ -179,7 +179,7 @@ let $$Y17 = nF((e, t) => {
     view: "teamUpgrade",
     teamFlowType: SC.UPGRADE_EXISTING_TEAM,
     teamId,
-    paymentStep: tn.CHOOSE_PLAN,
+    paymentStep: UpgradeSteps.CHOOSE_PLAN,
     billingPeriod,
     planType: Sc.TEAM,
     entryPoint: l,
@@ -198,7 +198,7 @@ let $$Y17 = nF((e, t) => {
     }));
   } else {
     let r = t.openInNewTab ? void 0 : t.selectedView;
-    e.dispatch(Ce());
+    e.dispatch(hideModal());
     d.previousView = r;
     e.dispatch(sf(d));
   }

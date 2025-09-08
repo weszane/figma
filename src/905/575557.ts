@@ -1,18 +1,18 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useContext } from "react";
 import { useDispatch } from "../vendor/514228";
-import { YE } from "../figma_app/492908";
+import { roundToMultiple } from "../figma_app/492908";
 import { assertNotNullish } from "../figma_app/95419";
 import { e as _$$e } from "../905/478588";
-import { glU, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { h7 } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { gl, E7, hS } from "../905/216495";
+import { isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { oZ, LS, TK, F6, UH } from "../905/129660";
 import { zk } from "../figma_app/198712";
@@ -52,10 +52,10 @@ export function $$N0({
         value: e.value,
         units: e.units
       };
-      l7.user("editVariantLineHeightForTextStyleNode", () => glU.editVariantLineHeightForTextStyleNode(dI(s), T, t));
+      permissionScopeHandler.user("editVariantLineHeightForTextStyleNode", () => Fullscreen.editVariantLineHeightForTextStyleNode(sessionLocalIDToString(s), T, t));
       return;
     }
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       lineHeight: e
     }, {
       shouldCommit: i
@@ -67,11 +67,11 @@ export function $$N0({
     if (void 0 !== T) {
       if (e) {
         let t = await N(Oe(e));
-        l7.user("editVariantVCMForTextStyleNode", () => {
-          glU.editVariantVCMForTextStyleNode(dI(s), T, "LINE_HEIGHT", t);
+        permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+          Fullscreen.editVariantVCMForTextStyleNode(sessionLocalIDToString(s), T, "LINE_HEIGHT", t);
         });
-      } else l7.user("editVariantVCMForTextStyleNode", () => {
-        glU.clearVariantVCMFieldForTextStyleNode(dI(s), T, "LINE_HEIGHT");
+      } else permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+        Fullscreen.clearVariantVCMFieldForTextStyleNode(sessionLocalIDToString(s), T, "LINE_HEIGHT");
       });
     }
   }, [N, s, T]);
@@ -79,7 +79,7 @@ export function $$N0({
     condition: !A,
     wrapper: e => jsx(_X, {
       fields: ["LINE_HEIGHT"],
-      resolvedType: rXF.FLOAT,
+      resolvedType: VariableResolvedDataType.FLOAT,
       editingStyleGuid: s,
       responsiveTextStyleVariantIndex: T,
       onVariableSelected: void 0 !== T ? V : void 0,
@@ -113,7 +113,7 @@ export function $$N0({
       onValueChange: U,
       placeholder: M ? null == F ? getI18nString("fullscreen.mixed") : parseFloat(F.toFixed(1)).toString() : void 0,
       recordingKey: h,
-      scrubMultiplier: gl(e) || e?.units === "PIXELS" ? 1 : .01,
+      scrubMultiplier: isInvalidValue(e) || e?.units === "PIXELS" ? 1 : .01,
       shouldClearOnFocus: M,
       smallNudgeAmount,
       value: e,
@@ -196,8 +196,8 @@ class P {
           intrinsicLineHeight,
           fontSize
         } = this.lineHeightInContext;
-        let r = E7(intrinsicLineHeight);
-        if (null == r || !hS(fontSize)) return e ? this.bigPixelNudgeAmount : this.smallPixelNudgeAmount;
+        let r = normalizeValue(intrinsicLineHeight);
+        if (null == r || !isValidValue(fontSize)) return e ? this.bigPixelNudgeAmount : this.smallPixelNudgeAmount;
         return (e ? this.bigPixelNudgeAmount : this.smallPixelNudgeAmount) * 100 / (r * fontSize);
     }
   }
@@ -216,7 +216,7 @@ class P {
   }
   snap(e, t) {
     return {
-      value: "PERCENT" === e.units ? e.value : YE(e.value, t),
+      value: "PERCENT" === e.units ? e.value : roundToMultiple(e.value, t),
       units: e.units
     };
   }

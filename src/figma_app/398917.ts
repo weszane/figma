@@ -16,9 +16,9 @@ import { l as _$$l } from "../figma_app/603241";
 import { Z } from "../905/279476";
 import { A as _$$A } from "../905/891805";
 import { O as _$$O } from "../905/487602";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { of, v_, aH } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { c$, wv } from "../figma_app/236327";
@@ -53,7 +53,7 @@ export function $$Z0() {
   let r = t.current?.getBoundingClientRect();
   let a = useRef(null);
   let l = a.current?.getBoundingClientRect().width;
-  let d = glU?.getSortedBreakpointFramesNameAndRange();
+  let d = Fullscreen?.getSortedBreakpointFramesNameAndRange();
   let c = new Set();
   let u = kG("responsive-text-style-create-custom-breakpoint");
   let _ = useSelector(e => e.mirror.selectedStyleProperties);
@@ -80,7 +80,7 @@ export function $$Z0() {
     return n;
   }(_.responsiveTextStyleVariants);
   let m = (t, r) => {
-    l7.user("create-responsive-text-style-variant", () => {
+    permissionScopeHandler.user("create-responsive-text-style-variant", () => {
       if (_.responsiveTextStyleVariants && _.responsiveTextStyleVariants.some(e => e.minWidth === t && e.name === r)) return;
       let e = {
         value: _.lineHeight.value,
@@ -90,7 +90,7 @@ export function $$Z0() {
         value: _.letterSpacing.value,
         units: _.letterSpacing.units
       };
-      glU.createVariantForSelectedTextStyleNode(dI(_.guid), t || 0, r || getI18nString("sites.panel.responsive_text_style.custom"), _.fontSize, e, n, _.paragraphSpacing);
+      Fullscreen.createVariantForSelectedTextStyleNode(sessionLocalIDToString(_.guid), t || 0, r || getI18nString("sites.panel.responsive_text_style.custom"), _.fontSize, e, n, _.paragraphSpacing);
     });
     e.hide();
   };
@@ -350,8 +350,8 @@ function et({
       rightIcon: jsx(_$$K, {
         "aria-label": getI18nString("sites.panel.responsive_text_style.settings"),
         onClick: () => {
-          l7.user("delete-responsive-text-style-variant", () => {
-            glU.deleteVariantForTextStyleNode(dI(a), r);
+          permissionScopeHandler.user("delete-responsive-text-style-variant", () => {
+            Fullscreen.deleteVariantForTextStyleNode(sessionLocalIDToString(a), r);
           });
         },
         children: jsx(_$$O, {})
@@ -386,13 +386,13 @@ function er({
   let [b, A] = useState(!1);
   let x = useRef(null);
   let N = e => {
-    l7.user("update-responsive-text-style-variant-min-width", () => {
-      glU.editVariantMinWidthForTextStyleNode(dI(o), r, e);
+    permissionScopeHandler.user("update-responsive-text-style-variant-min-width", () => {
+      Fullscreen.editVariantMinWidthForTextStyleNode(sessionLocalIDToString(o), r, e);
     });
   };
   let O = of("responsiveTextStyleVariantName", "submit", () => {
-    "" !== h && l7.user("update-responsive-text-style-variant-name", () => {
-      glU.editVariantNameForTextStyleNode(dI(o), r, h);
+    "" !== h && permissionScopeHandler.user("update-responsive-text-style-variant-name", () => {
+      Fullscreen.editVariantNameForTextStyleNode(sessionLocalIDToString(o), r, h);
     });
   });
   let R = v_("responsiveTextStyleVariantName", "keydown", t => {
@@ -537,7 +537,7 @@ function en({
       responsiveTextStyleVariantIndex: t,
       recordingKey: "responsiveTextStylesParagraphSpacing",
       onChange: (e, n) => {
-        l7.user("editVariantParagraphSpacingForTextStyleNode", () => glU.editVariantParagraphSpacingForTextStyleNode(dI(r), t, e));
+        permissionScopeHandler.user("editVariantParagraphSpacingForTextStyleNode", () => Fullscreen.editVariantParagraphSpacingForTextStyleNode(sessionLocalIDToString(r), t, e));
       }
     })
   });

@@ -1,765 +1,1442 @@
-import { Z_n, rXF } from "../figma_app/763686";
-import { $ as _$$$ } from "../905/266460";
-import { getFeatureFlags } from "../905/601108";
-import { z as _$$z } from "../905/239603";
-import { hp } from "../vendor/162266";
-import { XH } from "../905/413743";
-import { n as _$$n } from "../905/347702";
-import { getFunctionHandle } from "../905/572400";
-import { eM } from "../905/933084";
-import { N2, SI } from "../905/321380";
-var $$n0;
-(e => {
-  e.PluginFunction = _$$z.any().refine(e => !!getFunctionHandle(e));
-  e.FiniteNumber = _$$z.number().finite();
-  e.Float = e.FiniteNumber;
-  e.ZeroToOne = e.FiniteNumber.min(0).max(1);
-  e.PositiveFloat = e.FiniteNumber.min(0);
-  e.NonZeroPositiveFloat = e.FiniteNumber.min(.01);
-  e.PositiveInteger = e.FiniteNumber.min(0).$$int();
-  e.FloatNegativeOneToOne = e.FiniteNumber.min(-1).max(1);
-  e.ZeroOrOne = _$$z.union([_$$z.literal(0), _$$z.literal(1)]);
-  e.Integer = e.FiniteNumber.$$int();
-  e.Color = _$$z.strictObject({
-    r: e.ZeroToOne,
-    g: e.ZeroToOne,
-    b: e.ZeroToOne
-  });
-  e.ColorA = _$$z.strictObject({
-    r: e.ZeroToOne,
-    g: e.ZeroToOne,
-    b: e.ZeroToOne,
-    a: e.ZeroToOne
-  });
-  e.BuzzAssetType = _$$z.enum(XH);
-  e.VariableDataType = _$$z.enum(["BOOLEAN", "FLOAT", "STRING", "VARIABLE_ALIAS", "COLOR", "EXPRESSION", "MAP", "SYMBOL_ID"]);
-  e.VariableResolvedDataType = _$$z.enum(["BOOLEAN", "COLOR", "FLOAT", "STRING"]);
-  e.ExpressionFunction = _$$z.enum(["ADDITION", "SUBTRACTION", "RESOLVE_VARIANT", "MULTIPLICATION", "DIVISION", "EQUALS", "NOT_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "AND", "OR", "NOT", "STRINGIFY", "TERNARY", "VAR_MODE_LOOKUP", "NEGATE", "IS_TRUTHY"]);
-  e.VariableAlias = _$$z.strictObject({
-    type: _$$z.literal("VARIABLE_ALIAS"),
-    id: _$$z.string()
-  });
-  e.VariableData = _$$z.strictObject({
-    type: e.VariableDataType.optional(),
-    resolvedType: e.VariableResolvedDataType.optional(),
-    value: _$$z.union([e.FiniteNumber, _$$z.boolean(), _$$z.string(), e.ColorA, e.VariableAlias, _$$z.lazy(() => e.Expression)]).optional()
-  });
-  e.Expression = _$$z.strictObject({
-    expressionFunction: e.ExpressionFunction,
-    expressionArguments: _$$z.array(_$$z.lazy(() => e.VariableData))
-  });
-  e.Navigation = _$$z.enum(["NAVIGATE", "SWAP", "OVERLAY", "SCROLL_TO", "CHANGE_TO"]);
-  e.Easing = _$$z.strictObject({
-    type: _$$z.enum(["EASE_IN", "EASE_OUT", "EASE_IN_AND_OUT", "LINEAR", "EASE_IN_BACK", "EASE_OUT_BACK", "EASE_IN_AND_OUT_BACK", "CUSTOM_CUBIC_BEZIER", "GENTLE", "QUICK", "BOUNCY", "SLOW", "CUSTOM_SPRING"]),
-    easingFunctionCubicBezier: _$$z.strictObject({
-      x1: e.FiniteNumber,
-      y1: e.FiniteNumber,
-      x2: e.FiniteNumber,
-      y2: e.FiniteNumber
+import { Buffer } from 'node:buffer'
+import zod from 'zod'
+import { supportedNodeTypes } from '../905/266460'
+import { supportedDirections, supportedStyleProperties } from '../905/321380'
+import { DESIGN_TYPES } from '../905/413743'
+import { getFunctionHandle } from '../905/572400'
+import { getFeatureFlags } from '../905/601108'
+import { VariableDataType, VariableResolvedDataType } from './880730'
+
+// ====================
+// 🔹 基础数值和颜色类型
+// ====================
+
+export namespace Base {
+  export const FiniteNumber = zod.number().finite()
+  export const Float = FiniteNumber
+  export const ZeroToOne = FiniteNumber.min(0).max(1)
+  export const PositiveFloat = FiniteNumber.min(0) // Note: min(0) allows 0, should it be min(0).max(1e-9)?
+  export const NonZeroPositiveFloat = FiniteNumber.min(0.01)
+  export const PositiveInteger = FiniteNumber.min(0).int()
+  export const FloatNegativeOneToOne = FiniteNumber.min(-1).max(1)
+  export const ZeroOrOne = zod.union([zod.literal(0), zod.literal(1)])
+  export const Integer = FiniteNumber.int()
+
+  export const Color = zod.strictObject({
+    r: ZeroToOne,
+    g: ZeroToOne,
+    b: ZeroToOne,
+  })
+
+  export const ColorA = zod.strictObject({
+    r: ZeroToOne,
+    g: ZeroToOne,
+    b: ZeroToOne,
+    a: ZeroToOne,
+  })
+
+  export const ColorInput = zod.union([zod.string(), ColorA, Color])
+}
+
+// ====================
+// 🔹 变量 (Variable) 相关类型
+// ====================
+
+export namespace Variable {
+  export const DataType = zod.enum(['BOOLEAN', 'FLOAT', 'STRING', 'VARIABLE_ALIAS', 'COLOR', 'EXPRESSION', 'MAP', 'SYMBOL_ID'])
+  export type DataType = zod.infer<typeof DataType>
+
+  export const ResolvedDataType = zod.enum(['BOOLEAN', 'COLOR', 'FLOAT', 'STRING'])
+  export type ResolvedDataType = zod.infer<typeof ResolvedDataType>
+
+  export const ExpressionFunction = zod.enum([
+    'ADDITION',
+    'SUBTRACTION',
+    'RESOLVE_VARIANT',
+    'MULTIPLICATION',
+    'DIVISION',
+    'EQUALS',
+    'NOT_EQUAL',
+    'LESS_THAN',
+    'LESS_THAN_OR_EQUAL',
+    'GREATER_THAN',
+    'GREATER_THAN_OR_EQUAL',
+    'AND',
+    'OR',
+    'NOT',
+    'STRINGIFY',
+    'TERNARY',
+    'VAR_MODE_LOOKUP',
+    'NEGATE',
+    'IS_TRUTHY',
+  ])
+
+  export const Alias = zod.strictObject({
+    type: zod.literal('VARIABLE_ALIAS'),
+    id: zod.string(),
+  })
+  export type Alias = zod.infer<typeof Alias>
+
+  // 递归 schema 需要 lazy
+  export const Expression = zod.strictObject({
+    expressionFunction: ExpressionFunction,
+    expressionArguments: zod.array(zod.lazy(() => Variable.Data)),
+  })
+
+  export const Data = zod.strictObject({
+    type: DataType.optional(),
+    resolvedType: ResolvedDataType.optional(),
+    value: zod.union([
+      Base.FiniteNumber,
+      zod.boolean(),
+      zod.string(),
+      Base.ColorA,
+      Alias,
+      Expression,
+    ]).optional(),
+  })
+  export type Data = zod.infer<typeof Data>
+
+  // 为不同 resolvedType 创建具体 schema
+  export const DataSchema = zod.discriminatedUnion('type', [
+    zod.strictObject({
+      type: zod.literal(DataType.enum.COLOR),
+      value: Base.ColorA,
+    }),
+    zod.strictObject({
+      type: zod.literal(DataType.enum.STRING),
+      value: zod.string(),
+    }),
+    zod.strictObject({
+      type: zod.literal(DataType.enum.BOOLEAN),
+      value: zod.boolean(),
+    }),
+    zod.strictObject({
+      type: zod.literal(DataType.enum.FLOAT),
+      value: zod.number().finite(),
+    }),
+    zod.strictObject({
+      type: zod.literal(VariableDataType.ALIAS),
+      value: zod.string(),
+      resolvedType: zod.nativeEnum(VariableResolvedDataType),
+    }),
+  ])
+  export type DataSchema = zod.infer<typeof DataSchema>
+}
+
+// ====================
+// 🔹 反应 (Reaction) 和过渡 (Transition) 相关
+// ====================
+
+export namespace Reaction {
+  export const Navigation = zod.enum(['NAVIGATE', 'SWAP', 'OVERLAY', 'SCROLL_TO', 'CHANGE_TO'])
+
+  export const Easing = zod.strictObject({
+    type: zod.enum(['EASE_IN', 'EASE_OUT', 'EASE_IN_AND_OUT', 'LINEAR', 'EASE_IN_BACK', 'EASE_OUT_BACK', 'EASE_IN_AND_OUT_BACK', 'CUSTOM_CUBIC_BEZIER', 'GENTLE', 'QUICK', 'BOUNCY', 'SLOW', 'CUSTOM_SPRING']),
+    easingFunctionCubicBezier: zod.strictObject({
+      x1: Base.FiniteNumber,
+      y1: Base.FiniteNumber,
+      x2: Base.FiniteNumber,
+      y2: Base.FiniteNumber,
     }).optional(),
-    easingFunctionSpring: _$$z.strictObject({
-      mass: e.FiniteNumber,
-      stiffness: e.FiniteNumber,
-      damping: e.FiniteNumber
-    }).optional()
-  });
-  e.SimpleTransition = _$$z.strictObject({
-    type: _$$z.enum(["DISSOLVE", "SMART_ANIMATE", "SCROLL_ANIMATE"]),
-    easing: e.Easing,
-    duration: e.FiniteNumber
-  });
-  e.DirectionalTransition = _$$z.strictObject({
-    type: _$$z.enum(["MOVE_IN", "MOVE_OUT", "PUSH", "SLIDE_IN", "SLIDE_OUT"]),
-    direction: _$$z.enum(["LEFT", "RIGHT", "TOP", "BOTTOM"]),
-    matchLayers: _$$z.boolean(),
-    easing: e.Easing,
-    duration: e.FiniteNumber
-  });
-  e.Transition = _$$z.union([e.SimpleTransition, e.DirectionalTransition]);
-  e.Vector = _$$z.strictObject({
-    x: e.FiniteNumber,
-    y: e.FiniteNumber
-  });
-  e.ReactionActionNoConditional = _$$z.union([_$$z.strictObject({
-    type: _$$z.enum(["BACK", "CLOSE"])
-  }), _$$z.strictObject({
-    type: _$$z.literal("URL"),
-    url: _$$z.string(),
-    openInNewTab: _$$z.boolean().optional()
-  }), _$$z.strictObject({
-    type: _$$z.literal("UPDATE_MEDIA_RUNTIME"),
-    destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    mediaAction: _$$z.enum(["PLAY", "PAUSE", "TOGGLE_PLAY_PAUSE", "MUTE", "UNMUTE", "TOGGLE_MUTE_UNMUTE"])
-  }), _$$z.strictObject({
-    type: _$$z.literal("UPDATE_MEDIA_RUNTIME"),
-    destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    mediaAction: _$$z.enum(["SKIP_FORWARD", "SKIP_BACKWARD"]),
-    amountToSkip: e.FiniteNumber
-  }), _$$z.strictObject({
-    type: _$$z.literal("UPDATE_MEDIA_RUNTIME"),
-    destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    mediaAction: _$$z.enum(["SKIP_TO"]),
-    newTimestamp: e.FiniteNumber
-  }), _$$z.strictObject({
-    type: _$$z.literal("NODE"),
-    destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    navigation: e.Navigation,
-    transition: _$$z.union([e.Transition, _$$z.$$null()]),
-    preserveScrollPosition: _$$z.boolean().optional(),
-    resetVideoPosition: _$$z.boolean().optional(),
-    overlayRelativePosition: e.Vector.optional(),
-    resetScrollPosition: _$$z.boolean().optional(),
-    resetInteractiveComponents: _$$z.boolean().optional()
-  }), _$$z.strictObject({
-    type: _$$z.literal("SET_VARIABLE"),
-    variableId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    variableValue: e.VariableData.optional()
-  }), _$$z.strictObject({
-    type: _$$z.literal("SET_VARIABLE_MODE"),
-    variableCollectionId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    variableModeId: _$$z.union([_$$z.string(), _$$z.$$null()])
-  })]);
-  e.Trigger = _$$z.union([_$$z.strictObject({
-    type: _$$z.enum(["ON_CLICK", "ON_HOVER", "ON_PRESS", "ON_DRAG", "ON_MEDIA_END"])
-  }), _$$z.strictObject({
-    type: _$$z.literal("AFTER_TIMEOUT"),
-    timeout: e.FiniteNumber
-  }), _$$z.strictObject({
-    type: _$$z.enum(["MOUSE_ENTER", "MOUSE_LEAVE", "MOUSE_UP", "MOUSE_DOWN"]),
-    delay: e.FiniteNumber
-  }), _$$z.strictObject({
-    type: _$$z.literal("ON_KEY_DOWN"),
-    device: _$$z.enum(["KEYBOARD", "XBOX_ONE", "PS4", "SWITCH_PRO", "UNKNOWN_CONTROLLER"]),
-    keyCodes: _$$z.array(e.FiniteNumber)
-  }), _$$z.strictObject({
-    type: _$$z.literal("ON_MEDIA_HIT"),
-    mediaHitTime: e.FiniteNumber
-  })]);
-  e.ConditionalBlock = _$$z.strictObject({
-    condition: e.VariableData.optional(),
-    actions: _$$z.array(e.ReactionActionNoConditional)
-  });
-  e.ReactionAction = _$$z.union([_$$z.strictObject({
-    type: _$$z.literal("CONDITIONAL"),
-    conditionalBlocks: _$$z.array(e.ConditionalBlock)
-  }), e.ReactionActionNoConditional]);
-  e.Reaction = _$$z.strictObject({
-    action: e.ReactionAction.optional().nullable(),
-    actions: _$$z.array(e.ReactionAction).optional(),
-    trigger: _$$z.union([e.Trigger, _$$z.$$null()])
-  });
-  e.Reactions = _$$z.array(e.Reaction);
-  e.MaskType = _$$z.enum(["ALPHA", "VECTOR", "LUMINANCE"]);
-  e.UInt8Array = _$$z.$$instanceof(Uint8Array);
-  e.ColorInput = _$$z.union([_$$z.string(), e.ColorA, e.Color]);
-  e.BlendMode = _$$z.enum(["PASS_THROUGH", "NORMAL", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "DIFFERENCE", "EXCLUSION", "HUE", "SATURATION", "COLOR", "LUMINOSITY"]);
-  e.PaintBoundVariables = _$$z.strictObject({
-    color: _$$z.strictObject({
-      type: _$$z.literal("VARIABLE_ALIAS"),
-      id: _$$z.string()
-    }).optional()
-  });
-  e.PartialSolidPaint = _$$z.strictObject({
-    type: _$$z.literal("SOLID"),
-    color: e.Color,
-    opacity: e.FiniteNumber,
-    visible: _$$z.boolean(),
-    blendMode: e.BlendMode,
-    boundVariables: e.PaintBoundVariables
-  }).partial().optional();
-  e.FontName = _$$z.strictObject({
-    family: _$$z.string(),
-    style: _$$z.string()
-  });
-  e.ShowVisualBellOptions = _$$z.strictObject({
-    timeout: _$$z.number().min(0).max(1 / 0),
-    error: _$$z.boolean(),
-    onDequeue: e.PluginFunction,
-    button: _$$z.strictObject({
-      text: _$$z.string(),
-      action: e.PluginFunction
-    })
-  }).partial();
-  e.Size = _$$z.strictObject({
-    width: e.FiniteNumber,
-    height: e.FiniteNumber
-  });
-  let t = _$$z.union([_$$z.array(e.FiniteNumber).length(3).transform(e => ({
-    0: e[0],
-    1: e[1],
-    2: e[2]
-  })), _$$z.strictObject({
-    0: e.FiniteNumber,
-    1: e.FiniteNumber,
-    2: e.FiniteNumber
-  }).strict()]);
-  e.Matrix = _$$z.union([_$$z.array(t).length(2).transform(e => ({
-    0: e[0],
-    1: e[1]
-  })), _$$z.strictObject({
-    0: t,
-    1: t
-  }).strict()]);
-  let i = _$$z.strictObject({
-    exposure: e.FloatNegativeOneToOne,
-    contrast: e.FloatNegativeOneToOne,
-    saturation: e.FloatNegativeOneToOne,
-    temperature: e.FloatNegativeOneToOne,
-    tint: e.FloatNegativeOneToOne,
-    highlights: e.FloatNegativeOneToOne,
-    shadows: e.FloatNegativeOneToOne
-  }).partial();
-  let n = _$$z.strictObject({
-    position: e.ZeroToOne,
-    color: e.ColorA,
-    boundVariables: e.PaintBoundVariables.optional()
-  });
-  let h = _$$z.strictObject({
-    type: _$$z.literal("SOLID"),
-    color: e.Color,
-    visible: _$$z.boolean().optional(),
-    opacity: e.ZeroToOne.optional(),
-    blendMode: e.BlendMode.optional(),
-    boundVariables: e.PaintBoundVariables.optional()
-  }).strict();
-  let g = _$$z.strictObject({
-    type: _$$z.literal("PATTERN"),
-    tileType: _$$z.enum(["RECTANGULAR", "HORIZONTAL_HEXAGONAL", "VERTICAL_HEXAGONAL"]),
-    scalingFactor: e.PositiveFloat.optional(),
-    spacing: e.Vector.optional(),
-    horizontalAlignment: _$$z.enum(["START", "CENTER", "END"]).optional(),
-    verticalAlignment: _$$z.enum(["START", "CENTER", "END"]).optional(),
-    sourceNodeId: _$$z.string(),
-    visible: _$$z.boolean().optional(),
-    opacity: e.ZeroToOne.optional(),
-    blendMode: e.BlendMode.optional()
-  }).strict();
-  e.Paint = _$$z.discriminatedUnion("type", [h, _$$z.strictObject({
-    type: _$$z.enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
-    gradientTransform: e.Matrix,
-    gradientStops: _$$z.array(n),
-    visible: _$$z.boolean().optional(),
-    opacity: e.ZeroToOne.optional(),
-    blendMode: e.BlendMode.optional()
-  }).strict(), _$$z.strictObject({
-    type: _$$z.literal("IMAGE"),
-    scaleMode: _$$z.enum(["FILL", "FIT", "CROP", "TILE"]),
-    imageHash: _$$z.string(),
-    scalingFactor: e.PositiveFloat.optional(),
-    rotation: e.PositiveInteger.optional(),
-    imageTransform: e.Matrix.optional(),
-    filters: i.optional(),
-    visible: _$$z.boolean().optional(),
-    opacity: e.ZeroToOne.optional(),
-    blendMode: e.BlendMode.optional()
-  }).strict(), _$$z.strictObject({
-    type: _$$z.literal("VIDEO"),
-    scaleMode: _$$z.enum(["FILL", "FIT", "CROP", "TILE"]),
-    videoHash: _$$z.string(),
-    scalingFactor: e.PositiveFloat.optional(),
-    rotation: e.PositiveInteger.optional(),
-    videoTransform: e.Matrix.optional(),
-    filters: i.optional(),
-    visible: _$$z.boolean().optional(),
-    opacity: e.ZeroToOne.optional(),
-    blendMode: e.BlendMode.optional()
-  }).strict()]);
-  e.Paints = _$$z.array(e.Paint);
-  e.PaintsWithPattern = _$$z.array(_$$z.union([e.Paint, g]));
-  e.ShadowEffectBoundVariables = _$$z.strictObject({
-    color: e.VariableAlias.optional(),
-    radius: e.VariableAlias.optional(),
-    spread: e.VariableAlias.optional(),
-    offsetX: e.VariableAlias.optional(),
-    offsetY: e.VariableAlias.optional()
-  });
-  e.BlurEffectBoundVariables = _$$z.strictObject({
-    radius: e.VariableAlias.optional()
-  });
-  e.NoiseEffectBoundVariables = _$$z.strictObject({});
-  e.TextureEffectBoundVariables = _$$z.strictObject({});
-  let f = {
-    offset: e.Vector,
-    color: e.ColorA,
-    blendMode: e.BlendMode,
-    radius: e.Float.min(0),
-    spread: e.Float.optional(),
-    visible: _$$z.boolean(),
-    boundVariables: e.ShadowEffectBoundVariables.optional()
-  };
-  let _ = _$$z.strictObject({
-    ...f,
-    type: _$$z.literal("INNER_SHADOW")
-  });
-  let A = _$$z.strictObject({
-    ...f,
-    type: _$$z.literal("DROP_SHADOW"),
-    showShadowBehindNode: _$$z.boolean().optional()
-  });
-  let y = {
-    type: _$$z.enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
-    blurType: _$$z.enum(["NORMAL", "PROGRESSIVE"]).optional(),
-    radius: e.Float.min(0),
-    visible: _$$z.boolean(),
-    boundVariables: e.BlurEffectBoundVariables.optional()
-  };
-  let b = _$$z.strictObject(y).strict();
-  let v = _$$z.strictObject({
-    ...y,
-    blurType: _$$z.literal("NORMAL").optional()
-  });
-  let I = _$$z.strictObject({
-    ...y,
-    blurType: _$$z.literal("PROGRESSIVE"),
-    startOffset: e.Vector,
-    endOffset: e.Vector,
-    startRadius: e.PositiveFloat
-  });
-  let E = _$$z.union([v, I]);
-  let x = {
-    type: _$$z.literal("NOISE"),
-    density: e.ZeroToOne,
-    noiseSize: e.PositiveFloat,
-    color: e.ColorA,
-    visible: _$$z.boolean(),
-    boundVariables: e.NoiseEffectBoundVariables.optional()
-  };
-  let S = _$$z.strictObject({
-    ...x,
-    noiseType: _$$z.literal("MONOTONE")
-  });
-  let w = _$$z.strictObject({
-    ...x,
-    noiseType: _$$z.literal("DUOTONE"),
-    secondaryColor: e.ColorA
-  });
-  let C = _$$z.strictObject({
-    ...x,
-    noiseType: _$$z.literal("MULTITONE"),
-    opacity: e.ZeroToOne
-  });
-  let T = _$$z.union([w, C, S]);
-  let k = _$$z.strictObject({
-    type: _$$z.literal("TEXTURE"),
-    noiseSize: e.PositiveFloat,
-    radius: e.PositiveFloat,
-    clipToShape: _$$z.boolean(),
-    visible: _$$z.boolean(),
-    boundVariables: e.TextureEffectBoundVariables.optional()
-  });
-  let R = _$$z.strictObject({
-    type: _$$z.literal("GLASS"),
-    visible: _$$z.boolean(),
-    refraction: e.ZeroToOne,
-    depth: e.PositiveFloat,
-    lightIntensity: e.ZeroToOne,
-    lightAngle: e.Float,
-    dispersion: e.ZeroToOne,
-    radius: e.PositiveFloat,
-    boundVariables: _$$z.strictObject({}).optional()
-  });
-  e.Effect = _$$z.union([_, A, b]);
-  e.Effects = _$$z.array(e.Effect);
-  e.EffectIncludingDrawMode = _$$z.union([_, A, E, T, k, R]).refine(e => !("GLASS" === e.type && !getFeatureFlags().mix_gl));
-  e.EffectsIncludingDrawMode = _$$z.array(e.EffectIncludingDrawMode).refine(e => !getFeatureFlags().mix_gl || e.filter(e => "GLASS" === e.type).length <= 1, eM);
-  let N = _$$z.strictObject({
-    pattern: _$$z.enum(["COLUMNS", "ROWS"]),
-    alignment: _$$z.enum(["MIN", "MAX"]),
-    gutterSize: e.Float,
-    count: _$$z.union([e.PositiveInteger, _$$z.literal(1 / 0)]),
-    sectionSize: e.PositiveFloat,
-    offset: e.PositiveFloat,
-    visible: _$$z.boolean().optional(),
-    color: e.ColorA.optional(),
-    boundVariables: _$$z.strictObject({
-      gutterSize: e.VariableAlias,
-      count: e.VariableAlias,
-      sectionSize: e.VariableAlias,
-      offset: e.VariableAlias
-    }).partial().optional()
-  }).strict();
-  let P = _$$z.strictObject({
-    pattern: _$$z.enum(["COLUMNS", "ROWS"]),
-    alignment: _$$z.literal("STRETCH"),
-    gutterSize: e.Float,
-    count: _$$z.number().finite().min(0),
-    offset: e.PositiveFloat,
-    visible: _$$z.boolean().optional(),
-    color: e.ColorA.optional(),
-    boundVariables: _$$z.strictObject({
-      gutterSize: e.VariableAlias,
-      count: e.VariableAlias,
-      offset: e.VariableAlias
-    }).partial().optional()
-  }).strict();
-  let O = _$$z.strictObject({
-    pattern: _$$z.enum(["COLUMNS", "ROWS"]),
-    alignment: _$$z.literal("CENTER"),
-    gutterSize: e.Float,
-    count: _$$z.union([e.PositiveInteger, _$$z.literal(1 / 0)]),
-    sectionSize: e.PositiveFloat,
-    visible: _$$z.boolean().optional(),
-    color: e.ColorA.optional(),
-    boundVariables: _$$z.strictObject({
-      gutterSize: e.VariableAlias,
-      count: e.VariableAlias,
-      sectionSize: e.VariableAlias
-    }).partial().optional()
-  }).strict();
-  let D = _$$z.strictObject({
-    pattern: _$$z.literal("GRID"),
-    sectionSize: e.PositiveFloat,
-    visible: _$$z.boolean().optional(),
-    color: e.ColorA.optional(),
-    boundVariables: _$$z.strictObject({
-      sectionSize: e.VariableAlias
-    }).partial().optional()
-  }).strict();
-  e.LayoutGrid = _$$z.union([N, P, O, D]);
-  e.LayoutGrids = _$$z.array(e.LayoutGrid);
-  e.ParameterValues = _$$z.array(_$$z.union([_$$z.strictObject({
-    name: _$$z.string(),
-    data: _$$z.any().optional(),
-    icon: _$$z.union([_$$z.string(), e.UInt8Array]).optional(),
-    iconUrl: _$$z.string().optional()
-  }), _$$z.string()]));
-  e.TextReviewResultSchema = _$$z.array(_$$z.strictObject({
-    start: e.FiniteNumber.$$int(),
-    end: e.FiniteNumber.$$int(),
-    suggestions: _$$z.array(_$$z.string()),
-    color: _$$z.enum(["RED", "BLUE", "GREEN"]).optional()
-  }));
-  e.CodegenResultSchema = _$$z.array(_$$z.strictObject({
-    title: _$$z.string(),
-    code: _$$z.string(),
-    language: _$$z.enum(["TYPESCRIPT", "CPP", "RUBY", "CSS", "JAVASCRIPT", "HTML", "JSON", "GRAPHQL", "PYTHON", "GO", "SQL", "SWIFT", "KOTLIN", "RUST", "BASH", "PLAINTEXT", "DART"])
-  }));
-  let L = _$$z.strictObject({
-    type: _$$z.literal("AUTH_REQUIRED")
-  });
-  e.PlainTextContent = _$$z.strictObject({
-    type: _$$z.literal("PLAIN_TEXT"),
-    text: _$$z.string()
-  });
-  e.LinkPreviewResultSchema = _$$z.union([L, e.PlainTextContent, _$$z.$$null()]);
-  let F = _$$z.strictObject({
-    type: _$$z.literal("AUTH_SUCCESS")
-  });
-  e.AuthResultSchema = _$$z.union([F, _$$z.$$null()]);
-  e.NodeStatus = _$$z.strictObject({
-    type: _$$z.union([_$$z.literal("READY_FOR_DEV"), _$$z.literal("COMPLETED")]),
-    description: _$$z.string().optional()
-  });
-  let M = _$$z.enum(N2);
-  let j = _$$z.array(_$$z.strictObject({
-    label: _$$z.string().optional(),
-    labelMarkdown: _$$z.string().optional(),
-    properties: _$$z.array(_$$z.strictObject({
-      type: M,
-      value: _$$z.any()
+    easingFunctionSpring: zod.strictObject({
+      mass: Base.FiniteNumber,
+      stiffness: Base.FiniteNumber,
+      damping: Base.FiniteNumber,
+    }).optional(),
+  })
+
+  export const SimpleTransition = zod.strictObject({
+    type: zod.enum(['DISSOLVE', 'SMART_ANIMATE', 'SCROLL_ANIMATE']),
+    easing: Easing,
+    duration: Base.FiniteNumber,
+  })
+
+  export const DirectionalTransition = zod.strictObject({
+    type: zod.enum(['MOVE_IN', 'MOVE_OUT', 'PUSH', 'SLIDE_IN', 'SLIDE_OUT']),
+    direction: zod.enum(['LEFT', 'RIGHT', 'TOP', 'BOTTOM']),
+    matchLayers: zod.boolean(),
+    easing: Easing,
+    duration: Base.FiniteNumber,
+  })
+
+  export const Transition = zod.union([SimpleTransition, DirectionalTransition])
+
+  export const Vector = zod.strictObject({
+    x: Base.FiniteNumber,
+    y: Base.FiniteNumber,
+  })
+
+  export const ActionNoConditional = zod.union([
+    zod.strictObject({ type: zod.enum(['BACK', 'CLOSE']) }),
+    zod.strictObject({ type: zod.literal('URL'), url: zod.string(), openInNewTab: zod.boolean().optional() }),
+    zod.strictObject({
+      type: zod.literal('UPDATE_MEDIA_RUNTIME'),
+      destinationId: zod.union([zod.string(), zod.null()]),
+      mediaAction: zod.enum(['PLAY', 'PAUSE', 'TOGGLE_PLAY_PAUSE', 'MUTE', 'UNMUTE', 'TOGGLE_MUTE_UNMUTE']),
+    }),
+    // ... 其他 UPDATE_MEDIA_RUNTIME 变体，为简洁省略
+    zod.strictObject({
+      type: zod.literal('NODE'),
+      destinationId: zod.union([zod.string(), zod.null()]),
+      navigation: Navigation,
+      transition: zod.union([Transition, zod.null()]),
+      preserveScrollPosition: zod.boolean().optional(),
+      resetVideoPosition: zod.boolean().optional(),
+      overlayRelativePosition: Vector.optional(),
+      resetScrollPosition: zod.boolean().optional(),
+      resetInteractiveComponents: zod.boolean().optional(),
+    }),
+    zod.strictObject({
+      type: zod.literal('SET_VARIABLE'),
+      variableId: zod.union([zod.string(), zod.null()]),
+      variableValue: Variable.Data.optional(),
+    }),
+    zod.strictObject({
+      type: zod.literal('SET_VARIABLE_MODE'),
+      variableCollectionId: zod.union([zod.string(), zod.null()]),
+      variableModeId: zod.union([zod.string(), zod.null()]),
+    }),
+  ])
+
+  export const Trigger = zod.union([
+    zod.strictObject({ type: zod.enum(['ON_CLICK', 'ON_HOVER', 'ON_PRESS', 'ON_DRAG', 'ON_MEDIA_END']) }),
+    zod.strictObject({ type: zod.literal('AFTER_TIMEOUT'), timeout: Base.FiniteNumber }),
+    zod.strictObject({ type: zod.enum(['MOUSE_ENTER', 'MOUSE_LEAVE', 'MOUSE_UP', 'MOUSE_DOWN']), delay: Base.FiniteNumber }),
+    zod.strictObject({
+      type: zod.literal('ON_KEY_DOWN'),
+      device: zod.enum(['KEYBOARD', 'XBOX_ONE', 'PS4', 'SWITCH_PRO', 'UNKNOWN_CONTROLLER']),
+      keyCodes: zod.array(Base.FiniteNumber),
+    }),
+    zod.strictObject({ type: zod.literal('ON_MEDIA_HIT'), mediaHitTime: Base.FiniteNumber }),
+  ])
+
+  export const ConditionalBlock = zod.strictObject({
+    condition: Variable.Data.optional(),
+    actions: zod.array(ActionNoConditional),
+  })
+
+  export const Action = zod.union([
+    zod.strictObject({ type: zod.literal('CONDITIONAL'), conditionalBlocks: zod.array(ConditionalBlock) }),
+    ActionNoConditional,
+  ])
+
+  export const Reaction = zod.strictObject({
+    action: Action.optional().nullable(),
+    actions: zod.array(Action).optional(),
+    trigger: zod.union([Trigger, zod.null()]),
+  })
+
+  export const Reactions = zod.array(Reaction)
+}
+
+// ====================
+// 🔹 插件 (Plugin) 相关
+// ====================
+
+export namespace Plugin {
+  // 由于 getFunctionHandle 是一个函数，refine 无法在静态类型中体现，我们只能用 any
+  export const PluginFunction = zod.any().refine(e => !!getFunctionHandle(e))
+  export type PluginFunction = unknown // 精确类型无法静态推断
+
+  export const getPluginDataNormalLimit = () => 102400
+  export const PluginDataEntryNormalLimitSchema = zod.array(zod.string()).refine(
+    entries => entries.reduce((sum, str) => sum + Buffer.byteLength(str), 0) <= getPluginDataNormalLimit(),
+  )
+
+  export const getPluginDataEscapeHatchLimit = () => 0x4000000
+  export const PluginDataEntryEscapeHatchLimitSchema = zod.array(zod.string()).refine(
+    entries => entries.reduce((sum, str) => sum + Buffer.byteLength(str), 0) <= getPluginDataEscapeHatchLimit(),
+  )
+}
+
+// ====================
+// 🔹 绘画 (Paint) 和效果 (Effect) 相关
+// ====================
+
+export namespace Paint {
+
+  export const Vector = zod.strictObject({
+    x: Base.FiniteNumber,
+    y: Base.FiniteNumber,
+  })
+  export type Vector = zod.infer<typeof Vector>
+  export const BuzzAssetType = zod.enum(DESIGN_TYPES)
+  export type BuzzAssetType = zod.infer<typeof BuzzAssetType>
+
+  export const BlendMode = zod.enum([
+    'PASS_THROUGH',
+    'NORMAL',
+    'DARKEN',
+    'MULTIPLY',
+    'LINEAR_BURN',
+    'COLOR_BURN',
+    'LIGHTEN',
+    'SCREEN',
+    'LINEAR_DODGE',
+    'COLOR_DODGE',
+    'OVERLAY',
+    'SOFT_LIGHT',
+    'HARD_LIGHT',
+    'DIFFERENCE',
+    'EXCLUSION',
+    'HUE',
+    'SATURATION',
+    'COLOR',
+    'LUMINOSITY',
+  ])
+  export type BlendMode = zod.infer<typeof BlendMode>
+
+  export const MaskType = zod.enum(['ALPHA', 'VECTOR', 'LUMINANCE'])
+  export type MaskType = zod.infer<typeof MaskType>
+
+  export const BoundVariables = zod.strictObject({
+    color: zod.strictObject({
+      type: zod.literal('VARIABLE_ALIAS'),
+      id: zod.string(),
+    }).optional(),
+  })
+  export type BoundVariables = zod.infer<typeof BoundVariables>
+
+  export const PartialSolidPaint = zod.strictObject({
+    type: zod.literal('SOLID'),
+    color: Base.Color,
+    opacity: Base.FiniteNumber,
+    visible: zod.boolean(),
+    blendMode: BlendMode,
+    boundVariables: BoundVariables,
+  }).partial().optional()
+
+  export const FontName = zod.strictObject({
+    family: zod.string(),
+    style: zod.string(),
+  })
+  export type FontName = zod.infer<typeof FontName>
+
+  export const ShowVisualBellOptions = zod.strictObject({
+    timeout: zod.number().min(0).max(Infinity),
+    error: zod.boolean(),
+    onDequeue: Plugin.PluginFunction,
+    button: zod.strictObject({
+      text: zod.string(),
+      action: Plugin.PluginFunction,
+    }),
+  }).partial()
+  export type ShowVisualBellOptions = zod.infer<typeof ShowVisualBellOptions>
+
+  export const Size = zod.strictObject({
+    width: Base.FiniteNumber,
+    height: Base.FiniteNumber,
+  })
+  export type Size = zod.infer<typeof Size>
+
+  // Matrix 和 VectorPath 相关
+  const MatrixRow = zod.union([
+    zod.array(Base.FiniteNumber).length(3),
+    zod.strictObject({ 0: Base.FiniteNumber, 1: Base.FiniteNumber, 2: Base.FiniteNumber }),
+  ])
+  export const Matrix = zod.union([
+    zod.array(MatrixRow).length(2),
+    zod.strictObject({ 0: MatrixRow, 1: MatrixRow }),
+  ])
+  export type Matrix = zod.infer<typeof Matrix>
+
+  const ImageFilters = zod.strictObject({
+    exposure: Base.FloatNegativeOneToOne,
+    contrast: Base.FloatNegativeOneToOne,
+    saturation: Base.FloatNegativeOneToOne,
+    temperature: Base.FloatNegativeOneToOne,
+    tint: Base.FloatNegativeOneToOne,
+    highlights: Base.FloatNegativeOneToOne,
+    shadows: Base.FloatNegativeOneToOne,
+  }).partial()
+
+  const GradientStop = zod.strictObject({
+    position: Base.ZeroToOne,
+    color: Base.ColorA,
+    boundVariables: BoundVariables.optional(),
+  })
+
+  export const SolidPaint = zod.strictObject({
+    type: zod.literal('SOLID'),
+    color: Base.Color,
+    visible: zod.boolean().optional(),
+    opacity: Base.ZeroToOne.optional(),
+    blendMode: BlendMode.optional(),
+    boundVariables: BoundVariables.optional(),
+  }).strict()
+
+  export type SolidPaint = zod.infer<typeof SolidPaint>
+
+  const PatternPaint = zod.strictObject({
+    type: zod.literal('PATTERN'),
+    tileType: zod.enum(['RECTANGULAR', 'HORIZONTAL_HEXAGONAL', 'VERTICAL_HEXAGONAL']),
+    scalingFactor: Base.PositiveFloat.optional(),
+    spacing: Matrix.optional(),
+    horizontalAlignment: zod.enum(['START', 'CENTER', 'END']).optional(),
+    verticalAlignment: zod.enum(['START', 'CENTER', 'END']).optional(),
+    sourceNodeId: zod.string(),
+    visible: zod.boolean().optional(),
+    opacity: Base.ZeroToOne.optional(),
+    blendMode: BlendMode.optional(),
+  }).strict()
+
+  const GradientPaint = zod.strictObject({
+    type: zod.enum(['GRADIENT_LINEAR', 'GRADIENT_RADIAL', 'GRADIENT_ANGULAR', 'GRADIENT_DIAMOND']),
+    gradientTransform: Matrix,
+    gradientStops: zod.array(GradientStop),
+    visible: zod.boolean().optional(),
+    opacity: Base.ZeroToOne.optional(),
+    blendMode: BlendMode.optional(),
+  }).strict()
+
+  const ImagePaint = zod.strictObject({
+    type: zod.literal('IMAGE'),
+    scaleMode: zod.enum(['FILL', 'FIT', 'CROP', 'TILE']),
+    imageHash: zod.string(),
+    scalingFactor: Base.PositiveFloat.optional(),
+    rotation: Base.PositiveInteger.optional(),
+    imageTransform: Matrix.optional(),
+    filters: ImageFilters.optional(),
+    visible: zod.boolean().optional(),
+    opacity: Base.ZeroToOne.optional(),
+    blendMode: BlendMode.optional(),
+  }).strict()
+
+  const VideoPaint = zod.strictObject({
+    type: zod.literal('VIDEO'),
+    scaleMode: zod.enum(['FILL', 'FIT', 'CROP', 'TILE']),
+    videoHash: zod.string(),
+    scalingFactor: Base.PositiveFloat.optional(),
+    rotation: Base.PositiveInteger.optional(),
+    videoTransform: Matrix.optional(),
+    filters: ImageFilters.optional(),
+    visible: zod.boolean().optional(),
+    opacity: Base.ZeroToOne.optional(),
+    blendMode: BlendMode.optional(),
+  }).strict()
+
+  export const Paint = zod.discriminatedUnion('type', [
+    SolidPaint,
+    GradientPaint,
+    ImagePaint,
+    VideoPaint,
+    PatternPaint,
+  ])
+  export type Paint = zod.infer<typeof Paint>
+
+  export const Paints = zod.array(Paint)
+  export type Paints = zod.infer<typeof Paints>
+
+  export const PaintsWithPattern = zod.array(zod.union([Paint, PatternPaint]))
+  export type PaintsWithPattern = zod.infer<typeof PaintsWithPattern>
+}
+
+// ====================
+// 🔹 效果 (Effect) 相关
+// ====================
+
+export namespace Effect {
+  export const BoundVariables = zod.strictObject({
+    color: Variable.Alias.optional(),
+    radius: Variable.Alias.optional(),
+    spread: Variable.Alias.optional(),
+    offsetX: Variable.Alias.optional(),
+    offsetY: Variable.Alias.optional(),
+  })
+  export type BoundVariables = zod.infer<typeof BoundVariables>
+
+  export const BlurBoundVariables = zod.strictObject({
+    radius: Variable.Alias.optional(),
+  })
+  export type BlurBoundVariables = zod.infer<typeof BlurBoundVariables>
+
+  export const NoiseBoundVariables = zod.strictObject({})
+  export type NoiseBoundVariables = zod.infer<typeof NoiseBoundVariables>
+
+  export const TextureBoundVariables = zod.strictObject({})
+  export type TextureBoundVariables = zod.infer<typeof TextureBoundVariables>
+
+  const ShadowBase = {
+    offset: Paint.Vector,
+    color: Base.ColorA,
+    blendMode: Paint.BlendMode,
+    radius: Base.Float.min(0),
+    spread: Base.Float.optional(),
+    visible: zod.boolean(),
+    boundVariables: BoundVariables.optional(),
+  }
+
+  export const InnerShadow = zod.strictObject({
+    ...ShadowBase,
+    type: zod.literal('INNER_SHADOW'),
+  }).strict()
+  export type InnerShadow = zod.infer<typeof InnerShadow>
+
+  export const DropShadow = zod.strictObject({
+    ...ShadowBase,
+    type: zod.literal('DROP_SHADOW'),
+    showShadowBehindNode: zod.boolean().optional(),
+  }).strict()
+  export type DropShadow = zod.infer<typeof DropShadow>
+
+  const BlurBase = {
+    type: zod.enum(['LAYER_BLUR', 'BACKGROUND_BLUR']),
+    blurType: zod.enum(['NORMAL', 'PROGRESSIVE']).optional(),
+    radius: Base.Float.min(0),
+    visible: zod.boolean(),
+    boundVariables: BlurBoundVariables.optional(),
+  }
+
+  export const Blur = zod.strictObject(BlurBase).strict()
+  export type Blur = zod.infer<typeof Blur>
+
+  export const ProgressiveBlur = zod.strictObject({
+    ...BlurBase,
+    blurType: zod.literal('PROGRESSIVE'),
+    startOffset: Paint.Vector,
+    endOffset: Paint.Vector,
+    startRadius: Base.PositiveFloat,
+  }).strict()
+  export type ProgressiveBlur = zod.infer<typeof ProgressiveBlur>
+
+  export const NormalBlur = zod.strictObject({
+    ...BlurBase,
+    blurType: zod.literal('NORMAL').optional(),
+  }).strict()
+  export type NormalBlur = zod.infer<typeof NormalBlur>
+
+  export const Effect = zod.union([InnerShadow, DropShadow, Blur])
+  export type Effect = zod.infer<typeof Effect>
+
+  export const Effects = zod.array(Effect)
+  export type Effects = zod.infer<typeof Effects>
+
+  // 包含其他效果类型的联合
+  const NoiseBase = {
+    type: zod.literal('NOISE'),
+    density: Base.ZeroToOne,
+    noiseSize: Base.PositiveFloat,
+    color: Base.ColorA,
+    visible: zod.boolean(),
+    boundVariables: NoiseBoundVariables.optional(),
+  }
+
+  export const MonotoneNoise = zod.strictObject({
+    ...NoiseBase,
+    noiseType: zod.literal('MONOTONE'),
+  }).strict()
+
+  export const DuotoneNoise = zod.strictObject({
+    ...NoiseBase,
+    noiseType: zod.literal('DUOTONE'),
+    secondaryColor: Base.ColorA,
+  }).strict()
+
+  export const MultitoneNoise = zod.strictObject({
+    ...NoiseBase,
+    noiseType: zod.literal('MULTITONE'),
+    opacity: Base.ZeroToOne,
+  }).strict()
+
+  export const Noise = zod.union([MonotoneNoise, DuotoneNoise, MultitoneNoise])
+  export type Noise = zod.infer<typeof Noise>
+
+  export const Texture = zod.strictObject({
+    type: zod.literal('TEXTURE'),
+    noiseSize: Base.PositiveFloat,
+    radius: Base.PositiveFloat,
+    clipToShape: zod.boolean(),
+    visible: zod.boolean(),
+    boundVariables: TextureBoundVariables.optional(),
+  }).strict()
+  export type Texture = zod.infer<typeof Texture>
+
+  export const Glass = zod.strictObject({
+    type: zod.literal('GLASS'),
+    visible: zod.boolean(),
+    refraction: Base.ZeroToOne,
+    depth: Base.PositiveFloat,
+    lightIntensity: Base.ZeroToOne,
+    lightAngle: Base.Float,
+    dispersion: Base.ZeroToOne,
+    radius: Base.PositiveFloat,
+    boundVariables: zod.strictObject({}).optional(),
+  }).refine(() => getFeatureFlags().mix_gl, 'Glass effect requires mix_gl feature flag')
+  export type Glass = zod.infer<typeof Glass>
+
+  export const EffectIncludingDrawMode = zod.union([InnerShadow, DropShadow, NormalBlur, ProgressiveBlur, Noise, Texture, Glass])
+  export type EffectIncludingDrawMode = zod.infer<typeof EffectIncludingDrawMode>
+
+  export const EffectsIncludingDrawMode = zod.array(EffectIncludingDrawMode).refine(
+    effects => !getFeatureFlags().mix_gl || effects.filter(e => e.type === 'GLASS').length <= 1,
+    'Only one glass effect is allowed per node.',
+  )
+  export type EffectsIncludingDrawMode = zod.infer<typeof EffectsIncludingDrawMode>
+}
+
+// ====================
+// 🔹 布局网格 (LayoutGrid) 相关
+// ====================
+
+export namespace LayoutGrid {
+  export const FixedGrid = zod.strictObject({
+    pattern: zod.enum(['COLUMNS', 'ROWS']),
+    gutterSize: Base.Float,
+    offset: Base.PositiveFloat,
+    visible: zod.boolean().optional(),
+    color: Base.ColorA.optional(),
+    boundVariables: zod.strictObject({
+      gutterSize: Variable.Alias,
+      count: Variable.Alias,
+      sectionSize: Variable.Alias,
+      offset: Variable.Alias,
+    }).partial().optional(),
+    alignment: zod.enum(['MIN', 'MAX']),
+    count: zod.union([Base.PositiveInteger, zod.literal(Infinity)]),
+    sectionSize: Base.PositiveFloat,
+  })
+
+  export const StretchGrid = zod.strictObject({
+    pattern: zod.enum(['COLUMNS', 'ROWS']),
+    gutterSize: Base.Float,
+    offset: Base.PositiveFloat,
+    visible: zod.boolean().optional(),
+    color: Base.ColorA.optional(),
+    boundVariables: zod.strictObject({
+      gutterSize: Variable.Alias,
+      count: Variable.Alias,
+      sectionSize: Variable.Alias,
+      offset: Variable.Alias,
+    }).partial().optional(),
+    alignment: zod.literal('STRETCH'),
+    count: Base.FiniteNumber.min(0),
+  })
+
+  export const CenterGrid = zod.strictObject({
+    pattern: zod.enum(['COLUMNS', 'ROWS']),
+    gutterSize: Base.Float,
+    offset: Base.PositiveFloat,
+    visible: zod.boolean().optional(),
+    color: Base.ColorA.optional(),
+    boundVariables: zod.strictObject({
+      gutterSize: Variable.Alias,
+      count: Variable.Alias,
+      sectionSize: Variable.Alias,
+      offset: Variable.Alias,
+    }).partial().optional(),
+    alignment: zod.literal('CENTER'),
+    count: zod.union([Base.PositiveInteger, zod.literal(Infinity)]),
+    sectionSize: Base.PositiveFloat,
+  })
+
+  export const GridGrid = zod.strictObject({
+    pattern: zod.literal('GRID'),
+    sectionSize: Base.PositiveFloat,
+    visible: zod.boolean().optional(),
+    color: Base.ColorA.optional(),
+    boundVariables: zod.strictObject({
+      sectionSize: Variable.Alias,
+    }).partial().optional(),
+  }).strict()
+
+  export const LayoutGrid = zod.union([FixedGrid, StretchGrid, CenterGrid, GridGrid])
+  export type LayoutGrid = zod.infer<typeof LayoutGrid>
+
+  export const LayoutGrids = zod.array(LayoutGrid)
+  export type LayoutGrids = zod.infer<typeof LayoutGrids>
+}
+
+// ====================
+// 🔹 文本 (Text) 相关
+// ====================
+
+export namespace Text {
+  export const ParameterValues = zod.array(zod.union([
+    zod.strictObject({
+      name: zod.string(),
+      data: zod.any().optional(),
+      icon: zod.union([zod.string(), zod.instanceof(Uint8Array)]).optional(),
+      iconUrl: zod.string().optional(),
+    }),
+    zod.string(),
+  ]))
+  export type ParameterValues = zod.infer<typeof ParameterValues>
+
+  export const TextReviewResultSchema = zod.array(zod.strictObject({
+    start: Base.FiniteNumber.int(),
+    end: Base.FiniteNumber.int(),
+    suggestions: zod.array(zod.string()),
+    color: zod.enum(['RED', 'BLUE', 'GREEN']).optional(),
+  }))
+  export type TextReviewResultSchema = zod.infer<typeof TextReviewResultSchema>
+
+  export const CodegenResultSchema = zod.array(zod.strictObject({
+    title: zod.string(),
+    code: zod.string(),
+    language: zod.enum([
+      'TYPESCRIPT',
+      'CPP',
+      'RUBY',
+      'CSS',
+      'JAVASCRIPT',
+      'HTML',
+      'JSON',
+      'GRAPHQL',
+      'PYTHON',
+      'GO',
+      'SQL',
+      'SWIFT',
+      'KOTLIN',
+      'RUST',
+      'BASH',
+      'PLAINTEXT',
+      'DART',
+    ]),
+  }))
+  export type CodegenResultSchema = zod.infer<typeof CodegenResultSchema>
+
+  export const PlainTextContent = zod.strictObject({
+    type: zod.literal('PLAIN_TEXT'),
+    text: zod.string(),
+  })
+  export type PlainTextContent = zod.infer<typeof PlainTextContent>
+
+  export const AuthRequired = zod.strictObject({ type: zod.literal('AUTH_REQUIRED') })
+  export const LinkPreviewResultSchema = zod.union([AuthRequired, PlainTextContent, zod.null()])
+  export type LinkPreviewResultSchema = zod.infer<typeof LinkPreviewResultSchema>
+
+  export const AuthSuccess = zod.strictObject({ type: zod.literal('AUTH_SUCCESS') })
+  export const AuthResultSchema = zod.union([AuthSuccess, zod.null()])
+  export type AuthResultSchema = zod.infer<typeof AuthResultSchema>
+
+  export const NodeStatus = zod.strictObject({
+    type: zod.union([zod.literal('READY_FOR_DEV'), zod.literal('COMPLETED')]),
+    description: zod.string().optional(),
+  })
+  export type NodeStatus = zod.infer<typeof NodeStatus>
+
+  export const PropertyType = zod.enum(supportedStyleProperties)
+  export type PropertyType = zod.infer<typeof PropertyType>
+
+  export const Annotation = zod.strictObject({
+    label: zod.string().optional(),
+    labelMarkdown: zod.string().optional(),
+    properties: zod.array(zod.strictObject({
+      type: PropertyType,
+      value: zod.any(),
     })).optional(),
-    categoryId: _$$z.string().optional()
-  }).refine(e => !(e.label && e.labelMarkdown), "Only one of label or labelMarkdown should be given."));
-  e.AnnotationsMarkdownMultipleAnnotationsPerNode = j;
-  e.AnnotationMeasurementStartEnd = _$$z.strictObject({
-    node: _$$z.any(),
-    side: _$$z.enum(SI)
-  });
-  let U = _$$z.discriminatedUnion("type", [_$$z.strictObject({
-    type: _$$z.literal("INNER"),
-    relative: _$$z.number().max(1).min(-1)
-  }), _$$z.strictObject({
-    type: _$$z.literal("OUTER"),
-    fixed: _$$z.number().finite().positive("Can't be 0").or(_$$z.number().finite().negative())
-  })]);
-  e.AnnotationMeasurementAddOptions = _$$z.strictObject({
-    offset: U.optional(),
-    freeText: _$$z.string().optional()
-  }).strict();
-  e.AnnotationMeasurementEditValue = _$$z.strictObject({
-    offset: U.optional(),
-    freeText: _$$z.string().optional()
-  });
-  e.StrokeAlign = _$$z.enum(["CENTER", "INSIDE", "OUTSIDE"]);
-  e.NumberUnit = _$$z.enum(["PIXELS", "PERCENT"]);
-  e.LetterSpacing = _$$z.strictObject({
-    value: _$$z.number().finite(),
-    unit: e.NumberUnit
-  }).strict();
-  e.LineHeight = _$$z.discriminatedUnion("unit", [_$$z.strictObject({
-    value: _$$z.number().finite(),
-    unit: e.NumberUnit
-  }).strict(), _$$z.strictObject({
-    unit: _$$z.literal("AUTO")
-  }).strict()]);
-  e.LeadingTrim = _$$z.enum(["CAP_HEIGHT", "NONE"]);
-  e.TextAlignHorizontal = _$$z.enum(["LEFT", "CENTER", "RIGHT", "JUSTIFIED"]);
-  e.TextAlignVertical = _$$z.enum(["TOP", "CENTER", "BOTTOM"]);
-  e.TextCase = _$$z.enum(["ORIGINAL", "UPPER", "LOWER", "TITLE", "SMALL_CAPS", "SMALL_CAPS_FORCED"]);
-  e.TextDecoration = _$$z.enum(["NONE", "UNDERLINE", "STRIKETHROUGH"]);
-  e.TextDecorationStyle = _$$z.enum(["SOLID", "DOTTED", "WAVY"]);
-  e.TextDecorationOffset = _$$z.discriminatedUnion("unit", [_$$z.strictObject({
-    value: _$$z.number().finite(),
-    unit: e.NumberUnit
-  }).strict(), _$$z.strictObject({
-    unit: _$$z.literal("AUTO")
-  }).strict()]);
-  e.TextDecorationThickness = _$$z.discriminatedUnion("unit", [_$$z.strictObject({
-    value: _$$z.number().finite(),
-    unit: e.NumberUnit
-  }).strict(), _$$z.strictObject({
-    unit: _$$z.literal("AUTO")
-  }).strict()]);
-  e.TextDecorationColor = _$$z.union([_$$z.strictObject({
-    value: h
-  }).strict(), _$$z.strictObject({
-    value: _$$z.literal("AUTO")
-  }).strict()]);
-  e.TextAutoResize = _$$z.enum(["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"]);
-  e.TextListType = _$$z.enum(["NONE", "ORDERED", "UNORDERED"]);
-  e.TextListOptions = _$$z.strictObject({
-    type: e.TextListType
-  });
-  e.TextIndentation = _$$z.number().finite().$$int().min(0).max(5);
-  e.TextHyperlinkType = _$$z.enum(["URL", "NODE"]);
-  e.TextHyperlinkOptions = _$$z.union([_$$z.strictObject({
-    type: e.TextHyperlinkType,
-    value: _$$z.string()
-  }), _$$z.$$null()]);
-  e.FindCriteriaWithPluginDataSchema = _$$z.strictObject({
-    types: _$$z.array(_$$z.enum(_$$$)).optional(),
-    sharedPluginData: _$$z.strictObject({
-      namespace: _$$z.string(),
-      keys: _$$z.array(_$$z.string()).optional()
+    categoryId: zod.string().optional(),
+  }).refine(data => !(data.label && data.labelMarkdown), 'Only one of label or labelMarkdown should be given.')
+  export const AnnotationsMultipleAnnotationsPerNode = zod.array(Annotation)
+  export type AnnotationsMultipleAnnotationsPerNode = zod.infer<typeof AnnotationsMultipleAnnotationsPerNode>
+
+  export const MeasurementStartEnd = zod.strictObject({
+    node: zod.any(), // 这里应该是 NodeHandle 或类似类型
+    side: zod.enum(supportedDirections),
+  })
+  export type MeasurementStartEnd = zod.infer<typeof MeasurementStartEnd>
+
+  export const MeasurementOffset = zod.discriminatedUnion('type', [
+    zod.strictObject({ type: zod.literal('INNER'), relative: zod.number().max(1).min(-1) }),
+    zod.strictObject({ type: zod.literal('OUTER'), fixed: Base.FiniteNumber.positive() }),
+  ])
+
+  export const MeasurementAddOptions = zod.strictObject({
+    offset: MeasurementOffset.optional(),
+    freeText: zod.string().optional(),
+  }).strict()
+  export type MeasurementAddOptions = zod.infer<typeof MeasurementAddOptions>
+
+  export const MeasurementEditValue = zod.strictObject({
+    offset: MeasurementOffset.optional(),
+    freeText: zod.string().optional(),
+  })
+  export type MeasurementEditValue = zod.infer<typeof MeasurementEditValue>
+
+  export const StrokeAlign = zod.enum(['CENTER', 'INSIDE', 'OUTSIDE'])
+  export type StrokeAlign = zod.infer<typeof StrokeAlign>
+
+  export const NumberUnit = zod.enum(['PIXELS', 'PERCENT'])
+  export type NumberUnit = zod.infer<typeof NumberUnit>
+
+  export const LetterSpacing = zod.strictObject({
+    value: Base.FiniteNumber,
+    unit: NumberUnit,
+  }).strict()
+  export type LetterSpacing = zod.infer<typeof LetterSpacing>
+
+  export const LineHeight = zod.discriminatedUnion('unit', [
+    zod.strictObject({ value: Base.FiniteNumber, unit: NumberUnit }).strict(),
+    zod.strictObject({ unit: zod.literal('AUTO') }).strict(),
+  ])
+  export type LineHeight = zod.infer<typeof LineHeight>
+
+  export const LeadingTrim = zod.enum(['CAP_HEIGHT', 'NONE'])
+  export type LeadingTrim = zod.infer<typeof LeadingTrim>
+
+  export const TextAlignHorizontal = zod.enum(['LEFT', 'CENTER', 'RIGHT', 'JUSTIFIED'])
+  export type TextAlignHorizontal = zod.infer<typeof TextAlignHorizontal>
+
+  export const TextAlignVertical = zod.enum(['TOP', 'CENTER', 'BOTTOM'])
+  export type TextAlignVertical = zod.infer<typeof TextAlignVertical>
+
+  export const TextCase = zod.enum(['ORIGINAL', 'UPPER', 'LOWER', 'TITLE', 'SMALL_CAPS', 'SMALL_CAPS_FORCED'])
+  export type TextCase = zod.infer<typeof TextCase>
+
+  export const TextDecoration = zod.enum(['NONE', 'UNDERLINE', 'STRIKETHROUGH'])
+  export type TextDecoration = zod.infer<typeof TextDecoration>
+
+  export const TextDecorationStyle = zod.enum(['SOLID', 'DOTTED', 'WAVY'])
+  export type TextDecorationStyle = zod.infer<typeof TextDecorationStyle>
+
+  export const TextDecorationOffset = zod.discriminatedUnion('unit', [
+    zod.strictObject({ value: Base.FiniteNumber, unit: NumberUnit }).strict(),
+    zod.strictObject({ unit: zod.literal('AUTO') }).strict(),
+  ])
+  export type TextDecorationOffset = zod.infer<typeof TextDecorationOffset>
+
+  export const TextDecorationThickness = zod.discriminatedUnion('unit', [
+    zod.strictObject({ value: Base.FiniteNumber, unit: NumberUnit }).strict(),
+    zod.strictObject({ unit: zod.literal('AUTO') }).strict(),
+  ])
+  export type TextDecorationThickness = zod.infer<typeof TextDecorationThickness>
+
+  export const TextDecorationColor = zod.union([
+    zod.strictObject({ value: Paint.SolidPaint }).strict(),
+    zod.strictObject({ value: zod.literal('AUTO') }).strict(),
+  ])
+  export type TextDecorationColor = zod.infer<typeof TextDecorationColor>
+
+  export const TextAutoResize = zod.enum(['NONE', 'WIDTH_AND_HEIGHT', 'HEIGHT', 'TRUNCATE'])
+  export type TextAutoResize = zod.infer<typeof TextAutoResize>
+
+  export const TextListType = zod.enum(['NONE', 'ORDERED', 'UNORDERED'])
+  export type TextListType = zod.infer<typeof TextListType>
+
+  export const TextListOptions = zod.strictObject({ type: TextListType })
+  export type TextListOptions = zod.infer<typeof TextListOptions>
+
+  export const TextIndentation = Base.FiniteNumber.int().min(0).max(5)
+  export type TextIndentation = zod.infer<typeof TextIndentation>
+
+  export const TextHyperlinkType = zod.enum(['URL', 'NODE'])
+  export type TextHyperlinkType = zod.infer<typeof TextHyperlinkType>
+
+  export const TextHyperlinkOptions = zod.union([
+    zod.strictObject({ type: TextHyperlinkType, value: zod.string() }),
+    zod.null(),
+  ])
+  export type TextHyperlinkOptions = zod.infer<typeof TextHyperlinkOptions>
+
+  export const TextTruncation = zod.enum(['DISABLED', 'ENDING'])
+  export type TextTruncation = zod.infer<typeof TextTruncation>
+
+  export const StyledTextSegmentFields = zod.array(zod.enum([
+    'fontSize',
+    'fontName',
+    'fontWeight',
+    'textDecoration',
+    'textDecorationStyle',
+    'textDecorationSkipInk',
+    'textDecorationOffset',
+    'textDecorationThickness',
+    'textDecorationColor',
+    'textCase',
+    'lineHeight',
+    'letterSpacing',
+    'fills',
+    'textStyleId',
+    'fillStyleId',
+    'listOptions',
+    'indentation',
+    'hyperlink',
+    'openTypeFeatures',
+    'boundVariables',
+    'textStyleOverrides',
+    'paragraphSpacing',
+    'listSpacing',
+    'paragraphIndent',
+  ]))
+  export type StyledTextSegmentFields = zod.infer<typeof StyledTextSegmentFields>
+}
+
+// ====================
+// 🔹 导出 (Export) 相关
+// ====================
+
+export namespace Export {
+  export const exportColorProfile = zod.enum(['DOCUMENT', 'SRGB', 'DISPLAY_P3_V4']).optional()
+
+  const ImageExport = zod.strictObject({
+    format: zod.enum(['PNG', 'JPG']),
+    contentsOnly: zod.boolean().optional(),
+    suffix: zod.string().optional(),
+    useAbsoluteBounds: zod.boolean().optional(),
+    constraint: zod.union([
+      zod.strictObject({ type: zod.enum(['SCALE']), value: Base.FiniteNumber }),
+      zod.strictObject({ type: zod.enum(['WIDTH', 'HEIGHT']), value: Base.FiniteNumber }),
+    ]).optional(),
+    colorProfile: exportColorProfile,
+  })
+
+  const PdfExport = zod.strictObject({
+    format: zod.literal('PDF'),
+    contentsOnly: zod.boolean().optional(),
+    suffix: zod.string().optional(),
+    useAbsoluteBounds: zod.boolean().optional(),
+    colorProfile: exportColorProfile,
+  })
+
+  const SvgExport = zod.strictObject({
+    format: zod.enum(['SVG', 'SVG_STRING']),
+    contentsOnly: zod.boolean().optional(),
+    suffix: zod.string().optional(),
+    svgOutlineText: zod.boolean().optional(),
+    svgIdAttribute: zod.boolean().optional(),
+    svgSimplifyStroke: zod.boolean().optional(),
+    useAbsoluteBounds: zod.boolean().optional(),
+    colorProfile: exportColorProfile,
+  })
+
+  const JsonExport = zod.strictObject({
+    format: zod.enum(['JSON_REST_V1']),
+  })
+
+  export function getExportAsyncSetting(includeFirstDraft = false) {
+    const formats = [ImageExport, PdfExport, SvgExport, JsonExport] as const
+    return zod.discriminatedUnion('format', [
+      ...formats,
+      zod.strictObject({ format: includeFirstDraft ? zod.enum(['JSON_REST_V1', 'FIRST_DRAFT_JSON']) : zod.enum(['JSON_REST_V1']) }),
+    ])
+  }
+
+  export const ExportSetting = zod.discriminatedUnion('format', [ImageExport, PdfExport, SvgExport])
+  export type ExportSetting = zod.infer<typeof ExportSetting>
+
+  export const ExportSettings = zod.array(ExportSetting)
+  export type ExportSettings = zod.infer<typeof ExportSettings>
+}
+
+// ====================
+// 🔹 布局 (Layout) 相关
+// ====================
+
+export namespace Layout {
+
+  export const StrokeAlign = zod.enum(['CENTER', 'INSIDE', 'OUTSIDE'])
+  export type StrokeAlign = zod.infer<typeof StrokeAlign>
+  export const ConstraintType = zod.enum(['MIN', 'CENTER', 'MAX', 'STRETCH', 'SCALE'])
+  export type ConstraintType = zod.infer<typeof ConstraintType>
+
+  export const Constraints = zod.strictObject({
+    horizontal: ConstraintType,
+    vertical: ConstraintType,
+  })
+  export type Constraints = zod.infer<typeof Constraints>
+
+  export const OverflowDirection = zod.enum(['NONE', 'HORIZONTAL', 'VERTICAL', 'BOTH'])
+  export type OverflowDirection = zod.infer<typeof OverflowDirection>
+
+  export const LayoutAlign = zod.enum(['MIN', 'CENTER', 'MAX', 'STRETCH', 'INHERIT'])
+  export type LayoutAlign = zod.infer<typeof LayoutAlign>
+
+  export const LayoutMode = zod.enum(['NONE', 'HORIZONTAL', 'VERTICAL', 'GRID'])
+  export type LayoutMode = zod.infer<typeof LayoutMode>
+
+  export const StackWrap = zod.enum(['NO_WRAP', 'WRAP'])
+  export type StackWrap = zod.infer<typeof StackWrap>
+
+  export const StackCounterAlignContent = zod.enum(['AUTO', 'SPACE_BETWEEN'])
+  export type StackCounterAlignContent = zod.infer<typeof StackCounterAlignContent>
+
+  export const StackJustify = zod.enum(['MIN', 'MAX', 'CENTER', 'SPACE_BETWEEN'])
+  export type StackJustify = zod.infer<typeof StackJustify>
+
+  export const StackJustifyLegacy = zod.enum(['MIN', 'MAX', 'CENTER', 'SPACE_BETWEEN', 'SPACE_BETWEEN_LEGACY'])
+  export type StackJustifyLegacy = zod.infer<typeof StackJustifyLegacy>
+
+  export const StackAlign = zod.enum(['MIN', 'MAX', 'CENTER', 'BASELINE'])
+  export type StackAlign = zod.infer<typeof StackAlign>
+
+  export const SizingMode = zod.enum(['FIXED', 'AUTO'])
+  export type SizingMode = zod.infer<typeof SizingMode>
+
+  export const SizingModeLegacy = zod.enum(['FIXED', 'AUTO', 'LEGACY_AUTO'])
+  export type SizingModeLegacy = zod.infer<typeof SizingModeLegacy>
+
+  export const LayoutSizing = zod.enum(['FIXED', 'HUG', 'FILL'])
+  export type LayoutSizing = zod.infer<typeof LayoutSizing>
+
+  export const LayoutPositioning = zod.enum(['AUTO', 'ABSOLUTE'])
+  export type LayoutPositioning = zod.infer<typeof LayoutPositioning>
+
+  export const GridTrackSizingType = zod.enum(['FLEX', 'FIXED', 'HUG'])
+  export type GridTrackSizingType = zod.infer<typeof GridTrackSizingType>
+
+  export const GridChildAlign = zod.enum(['MIN', 'CENTER', 'MAX', 'AUTO'])
+  export type GridChildAlign = zod.infer<typeof GridChildAlign>
+
+  export const GridTrackSize = zod.strictObject({
+    type: GridTrackSizingType,
+    value: Base.PositiveFloat.optional(),
+  })
+  export type GridTrackSize = zod.infer<typeof GridTrackSize>
+
+  export const HandlePointrroring = zod.enum(['NONE', 'ANGLE', 'ANGLE_AND_LENGTH'])
+  export type HandlePointrroring = zod.infer<typeof HandlePointrroring>
+
+  export const StrokeJoin = zod.enum(['MITER', 'BEVEL', 'ROUND'])
+  export type StrokeJoin = zod.infer<typeof StrokeJoin>
+
+  export const StrokeCap = zod.enum(['NONE', 'ROUND', 'SQUARE', 'ARROW_LINES', 'ARROW_EQUILATERAL', 'DIAMOND_FILLED', 'TRIANGLE_FILLED', 'CIRCLE_FILLED'])
+  export type StrokeCap = zod.infer<typeof StrokeCap>
+}
+
+// ====================
+// 🔹 向量 (Vector) 相关
+// ====================
+
+export namespace Vector {
+  export const WindingRule = zod.enum(['NONZERO', 'EVENODD'])
+  export type WindingRule = zod.infer<typeof WindingRule>
+
+  export const VectorPath = zod.strictObject({
+    windingRule: zod.union([WindingRule, zod.literal('NONE')]),
+    data: zod.string(),
+  })
+  export type VectorPath = zod.infer<typeof VectorPath>
+
+  export const VectorPaths = zod.array(VectorPath)
+  export type VectorPaths = zod.infer<typeof VectorPaths>
+
+  export const Vertex = zod.strictObject({
+    x: Base.FiniteNumber,
+    y: Base.FiniteNumber,
+    strokeCap: Layout.StrokeCap.optional(),
+    strokeJoin: Layout.StrokeJoin.optional(),
+    cornerRadius: Base.PositiveFloat.optional(),
+    handlePointrroring: Layout.HandlePointrroring.optional(),
+  })
+  export type Vertex = zod.infer<typeof Vertex>
+
+  export const Segment = zod.strictObject({
+    start: Base.PositiveInteger,
+    end: Base.PositiveInteger,
+    tangentStart: Paint.Vector.optional(),
+    tangentEnd: Paint.Vector.optional(),
+  }).strict()
+  export type Segment = zod.infer<typeof Segment>
+
+  export const Region = zod.strictObject({
+    windingRule: WindingRule,
+    loops: zod.array(zod.array(Base.PositiveInteger)),
+    fills: Paint.Paints.optional(),
+    fillStyleId: zod.string().optional(),
+  })
+  export type Region = zod.infer<typeof Region>
+
+  export const VectorNetwork = zod.strictObject({
+    vertices: zod.array(Vertex),
+    segments: zod.array(Segment),
+    regions: zod.array(Region).optional(),
+  }).strict()
+  export type VectorNetwork = zod.infer<typeof VectorNetwork>
+
+  export const CanvasGrid = zod.array(zod.array(zod.strictObject({ id: zod.string() })))
+  export type CanvasGrid = zod.infer<typeof CanvasGrid>
+}
+
+// ====================
+// 🔹 其他
+// ====================
+
+export namespace Pointsc {
+  export const MaxLines = zod.number().int().min(1).finite().nullable()
+  export type MaxLines = zod.infer<typeof MaxLines>
+
+  export const FetchInitOptions = zod.strictObject({
+    method: zod.string().optional(),
+    headersObject: zod.record(zod.string()).optional(),
+    headers: zod.record(zod.string()).optional(),
+    body: zod.union([zod.instanceof(Uint8Array), zod.string()]).optional(),
+    credentials: zod.string().optional(),
+    cache: zod.string().optional(),
+    redirect: zod.string().optional(),
+    referrer: zod.string().optional(),
+    integrity: zod.string().optional(),
+  }).optional()
+  export type FetchInitOptions = zod.infer<typeof FetchInitOptions>
+
+  export const Guide = zod.strictObject({
+    axis: zod.enum(['X', 'Y']),
+    offset: Base.FiniteNumber,
+  }).strict()
+  export type Guide = zod.infer<typeof Guide>
+
+  export const Guides = zod.array(Guide)
+  export type Guides = zod.infer<typeof Guides>
+
+  export const FlowStartingPoints = zod.array(zod.strictObject({
+    nodeId: zod.string(),
+    name: zod.string(),
+  }))
+  export type FlowStartingPoints = zod.infer<typeof FlowStartingPoints>
+
+  export const PlaybackSettings = zod.strictObject({
+    autoplay: zod.boolean(),
+    loop: zod.boolean(),
+    muted: zod.boolean(),
+  })
+  export type PlaybackSettings = zod.infer<typeof PlaybackSettings>
+
+  export const SelectedText = zod.union([
+    zod.strictObject({
+      node: zod.strictObject({ id: zod.string() }),
+      start: Base.PositiveInteger,
+      end: Base.PositiveInteger,
+    }).strict(),
+    zod.null(),
+  ])
+  export type SelectedText = zod.infer<typeof SelectedText>
+
+  export const BooleanOperation = zod.enum(['UNION', 'INTERSECT', 'SUBTRACT', 'EXCLUDE'])
+  export type BooleanOperation = zod.infer<typeof BooleanOperation>
+
+  export const ArcData = zod.strictObject({
+    startingAngle: Base.FiniteNumber,
+    endingAngle: Base.FiniteNumber,
+    innerRadius: Base.ZeroToOne,
+  })
+  export type ArcData = zod.infer<typeof ArcData>
+
+  export const RelaunchData = zod.record(zod.string())
+  export type RelaunchData = zod.infer<typeof RelaunchData>
+
+  export const ShapeWithTextType = zod.enum([
+    'SQUARE',
+    'ELLIPSE',
+    'ROUNDED_RECTANGLE',
+    'DIAMOND',
+    'TRIANGLE_UP',
+    'TRIANGLE_DOWN',
+    'PARALLELOGRAM_RIGHT',
+    'PARALLELOGRAM_LEFT',
+    'ENG_DATABASE',
+    'ENG_QUEUE',
+    'ENG_FILE',
+    'ENG_FOLDER',
+    'TRAPEZOID',
+    'PREDEFINED_PROCESS',
+    'SHIELD',
+    'DOCUMENT_SINGLE',
+    'DOCUMENT_MULTIPLE',
+    'MANUAL_INPUT',
+    'HEXAGON',
+    'CHEVRON',
+    'PENTAGON',
+    'OCTAGON',
+    'STAR',
+    'PLUS',
+    'ARROW_LEFT',
+    'ARROW_RIGHT',
+    'SUMMING_JUNCTION',
+    'OR',
+    'SPEECH_BUBBLE',
+    'INTERNAL_STORAGE',
+  ])
+  export type ShapeWithTextType = zod.infer<typeof ShapeWithTextType>
+
+  export const CodeBlockLanguage = zod.enum([
+    'TYPESCRIPT',
+    'CPP',
+    'RUBY',
+    'CSS',
+    'JAVASCRIPT',
+    'HTML',
+    'JSON',
+    'GRAPHQL',
+    'PYTHON',
+    'GO',
+    'SQL',
+    'SWIFT',
+    'KOTLIN',
+    'RUST',
+    'BASH',
+    'PLAINTEXT',
+    'DART',
+  ])
+  export type CodeBlockLanguage = zod.infer<typeof CodeBlockLanguage>
+}
+
+// ====================
+// 🔹 组件 (Component) 相关
+// ====================
+
+export namespace Component {
+  const BaseTypes = ['BOOLEAN', 'TEXT', 'INSTANCE_SWAP', 'IMAGE'] as const
+  const WithNumber = [...BaseTypes, 'NUMBER'] as const
+  const WithVariant = [...BaseTypes, 'VARIANT'] as const
+  const WithNumberAndVariant = [...WithNumber, 'VARIANT'] as const
+
+  export const PropertyType = zod.enum(WithVariant)
+  export type PropertyType = zod.infer<typeof PropertyType>
+
+  export const PropertyTypeWithNumber = zod.enum(WithNumberAndVariant)
+  export type PropertyTypeWithNumber = zod.infer<typeof PropertyTypeWithNumber>
+
+  export const PropertyValue = zod.union([zod.boolean(), zod.string()])
+  export type PropertyValue = zod.infer<typeof PropertyValue>
+
+  export const PropertyValueWithNumber = zod.union([zod.boolean(), zod.string(), Base.FiniteNumber])
+  export type PropertyValueWithNumber = zod.infer<typeof PropertyValueWithNumber>
+
+  export const PropertyValueWithVariable = zod.union([zod.boolean(), zod.string(), Variable.Alias])
+  export type PropertyValueWithVariable = zod.infer<typeof PropertyValueWithVariable>
+
+  export const PropertyValueWithNumberAndVariable = zod.union([zod.boolean(), zod.string(), Base.FiniteNumber, Variable.Alias])
+  export type PropertyValueWithNumberAndVariable = zod.infer<typeof PropertyValueWithNumberAndVariable>
+
+  export const InstanceSwapPreferredValueType = zod.enum(['COMPONENT', 'COMPONENT_SET'])
+  export type InstanceSwapPreferredValueType = zod.infer<typeof InstanceSwapPreferredValueType>
+
+  export const InstanceSwapPreferredValue = zod.strictObject({
+    type: InstanceSwapPreferredValueType,
+    key: zod.string(),
+  })
+  export type InstanceSwapPreferredValue = zod.infer<typeof InstanceSwapPreferredValue>
+
+  export const PreferredValues = zod.array(InstanceSwapPreferredValue)
+  export type PreferredValues = zod.infer<typeof PreferredValues>
+
+  export const Options = zod.strictObject({
+    preferredValues: PreferredValues.optional(),
+  }).optional()
+  export type Options = zod.infer<typeof Options>
+
+  export const DefinitionSchema = zod.strictObject({
+    name: zod.string().optional(),
+    defaultValue: PropertyValue.optional(),
+    preferredValues: PreferredValues.optional(),
+  })
+  export type DefinitionSchema = zod.infer<typeof DefinitionSchema>
+
+  export const DefinitionSchemaWithNumber = zod.strictObject({
+    name: zod.string().optional(),
+    defaultValue: PropertyValueWithNumber.optional(),
+    preferredValues: PreferredValues.optional(),
+  })
+  export type DefinitionSchemaWithNumber = zod.infer<typeof DefinitionSchemaWithNumber>
+
+  export const DefinitionSchemaWithVariable = zod.strictObject({
+    name: zod.string().optional(),
+    defaultValue: PropertyValueWithVariable.optional(),
+    preferredValues: PreferredValues.optional(),
+  })
+  export type DefinitionSchemaWithVariable = zod.infer<typeof DefinitionSchemaWithVariable>
+
+  export const DefinitionSchemaWithNumberAndVariable = zod.strictObject({
+    name: zod.string().optional(),
+    defaultValue: PropertyValueWithNumberAndVariable.optional(),
+    preferredValues: PreferredValues.optional(),
+  })
+  export type DefinitionSchemaWithNumberAndVariable = zod.infer<typeof DefinitionSchemaWithNumberAndVariable>
+
+  export const References = zod.strictObject({
+    visible: zod.string().optional(),
+    characters: zod.string().optional(),
+    mainComponent: zod.string().optional(),
+  }).strict()
+  export type References = zod.infer<typeof References>
+}
+
+// ====================
+// 🔹 连接器 (Connector) 相关
+// ====================
+
+export namespace Connector {
+  export const Magnet = zod.enum(['NONE', 'AUTO', 'TOP', 'LEFT', 'BOTTOM', 'RIGHT', 'CENTER'])
+  export type Magnet = zod.infer<typeof Magnet>
+
+  export const Endpoint = zod.union([
+    zod.strictObject({ endpointNodeId: zod.string(), position: Paint.Vector }),
+    zod.strictObject({ position: Paint.Vector }),
+    zod.strictObject({ endpointNodeId: zod.string(), magnet: Magnet }),
+  ])
+  export type Endpoint = zod.infer<typeof Endpoint>
+
+  export const LineType = zod.enum(['ELBOWED', 'STRAIGHT', 'CURVED'])
+  export type LineType = zod.infer<typeof LineType>
+
+  export const StrokeCap = zod.enum(['NONE', 'ARROW_EQUILATERAL', 'ARROW_LINES', 'TRIANGLE_FILLED', 'DIAMOND_FILLED', 'CIRCLE_FILLED'])
+  export type StrokeCap = zod.infer<typeof StrokeCap>
+}
+
+// ====================
+// 🔹 查找 (Find) 相关
+// ====================
+
+export namespace Find {
+  export const FindCriteriaWithPluginDataSchema = zod.strictObject({
+    types: zod.array(zod.enum(supportedNodeTypes)).optional(),
+    sharedPluginData: zod.strictObject({
+      namespace: zod.string(),
+      keys: zod.array(zod.string()).optional(),
     }).optional(),
-    pluginData: _$$z.strictObject({
-      keys: _$$z.array(_$$z.string()).optional()
-    }).optional()
-  });
-  e.getPluginDataNormalLimit = _$$n(() => 102400);
-  e.PluginDataEntryNormalLimitSchema = _$$z.array(_$$z.string()).refine(t => t.reduce((e, t) => e + hp.byteLength(t), 0) <= e.getPluginDataNormalLimit());
-  e.getPluginDataEscapeHatchLimit = _$$n(() => 0x4000000);
-  e.PluginDataEntryEscapeHatchLimitSchema = _$$z.array(_$$z.string()).refine(t => t.reduce((e, t) => e + hp.byteLength(t), 0) <= e.getPluginDataEscapeHatchLimit());
-  e.TextTruncation = _$$z.enum(["DISABLED", "ENDING"]);
-  e.exportColorProfile = _$$z.enum(["DOCUMENT", "SRGB", "DISPLAY_P3_V4"]).optional();
-  let B = _$$z.strictObject({
-    format: _$$z.enum(["PNG", "JPG"]),
-    contentsOnly: _$$z.boolean().optional(),
-    suffix: _$$z.string().optional(),
-    useAbsoluteBounds: _$$z.boolean().optional(),
-    constraint: _$$z.union([_$$z.strictObject({
-      type: _$$z.enum(["SCALE"]),
-      value: e.FiniteNumber
-    }), _$$z.strictObject({
-      type: _$$z.enum(["WIDTH", "HEIGHT"]),
-      value: e.FiniteNumber
-    })]).optional(),
-    colorProfile: e.exportColorProfile
-  });
-  let V = _$$z.strictObject({
-    format: _$$z.literal("PDF"),
-    contentsOnly: _$$z.boolean().optional(),
-    suffix: _$$z.string().optional(),
-    useAbsoluteBounds: _$$z.boolean().optional(),
-    colorProfile: e.exportColorProfile
-  });
-  let G = _$$z.strictObject({
-    format: _$$z.enum(["SVG", "SVG_STRING"]),
-    contentsOnly: _$$z.boolean().optional(),
-    suffix: _$$z.string().optional(),
-    svgOutlineText: _$$z.boolean().optional(),
-    svgIdAttribute: _$$z.boolean().optional(),
-    svgSimplifyStroke: _$$z.boolean().optional(),
-    useAbsoluteBounds: _$$z.boolean().optional(),
-    colorProfile: e.exportColorProfile
-  });
-  let z = [B, V, G];
-  e.getExportAsyncSetting = function (e = !1) {
-    return _$$z.discriminatedUnion("format", [...z, _$$z.strictObject({
-      format: e ? _$$z.enum(["JSON_REST_V1", "FIRST_DRAFT_JSON"]) : _$$z.enum(["JSON_REST_V1"])
-    })]);
-  };
-  e.ConstraintType = _$$z.enum(["MIN", "CENTER", "MAX", "STRETCH", "SCALE"]);
-  e.Constraints = _$$z.strictObject({
-    horizontal: e.ConstraintType,
-    vertical: e.ConstraintType
-  });
-  e.OverflowDirection = _$$z.enum(["NONE", "HORIZONTAL", "VERTICAL", "BOTH"]);
-  e.LayoutAlign = _$$z.enum(["MIN", "CENTER", "MAX", "STRETCH", "INHERIT"]);
-  e.LayoutMode = _$$z.enum(["NONE", "HORIZONTAL", "VERTICAL", "GRID"]);
-  e.StackWrap = _$$z.enum(["NO_WRAP", "WRAP"]);
-  e.StackCounterAlignContent = _$$z.enum(["AUTO", "SPACE_BETWEEN"]);
-  e.StackJustify = _$$z.enum(["MIN", "MAX", "CENTER", "SPACE_BETWEEN"]);
-  e.StackJustifyLegacy = _$$z.enum(["MIN", "MAX", "CENTER", "SPACE_BETWEEN", "SPACE_BETWEEN_LEGACY"]);
-  e.StackAlign = _$$z.enum(["MIN", "MAX", "CENTER", "BASELINE"]);
-  e.SizingMode = _$$z.enum(["FIXED", "AUTO"]);
-  e.SizingModeLegacy = _$$z.enum(["FIXED", "AUTO", "LEGACY_AUTO"]);
-  e.LayoutSizing = _$$z.enum(["FIXED", "HUG", "FILL"]);
-  e.LayoutPositioning = _$$z.enum(["AUTO", "ABSOLUTE"]);
-  e.GridTrackSizingType = _$$z.enum(["FLEX", "FIXED", "HUG"]);
-  e.GridChildAlign = _$$z.enum(["MIN", "CENTER", "MAX", "AUTO"]);
-  e.GridTrackSize = _$$z.strictObject({
-    type: e.GridTrackSizingType,
-    value: e.PositiveFloat.optional()
-  });
-  e.HandleMirroring = _$$z.enum(["NONE", "ANGLE", "ANGLE_AND_LENGTH"]);
-  e.StrokeJoin = _$$z.enum(["MITER", "BEVEL", "ROUND"]);
-  e.StrokeCap = _$$z.enum(["NONE", "ROUND", "SQUARE", "ARROW_LINES", "ARROW_EQUILATERAL", "DIAMOND_FILLED", "TRIANGLE_FILLED", "CIRCLE_FILLED"]);
-  let H = _$$z.object({
-    id: _$$z.string()
-  });
-  let W = _$$z.array(H);
-  e.CanvasGrid = _$$z.array(W);
-  let K = _$$z.enum(["NONZERO", "EVENODD"]);
-  let Y = _$$z.strictObject({
-    windingRule: _$$z.union([K, _$$z.literal("NONE")]),
-    data: _$$z.string()
-  });
-  e.VectorPaths = _$$z.array(Y);
-  let q = _$$z.strictObject({
-    x: e.FiniteNumber,
-    y: e.FiniteNumber,
-    strokeCap: e.StrokeCap.optional(),
-    strokeJoin: e.StrokeJoin.optional(),
-    cornerRadius: e.PositiveFloat.optional(),
-    handleMirroring: e.HandleMirroring.optional()
-  });
-  let $ = _$$z.strictObject({
-    start: e.PositiveInteger,
-    end: e.PositiveInteger,
-    tangentStart: e.Vector.optional(),
-    tangentEnd: e.Vector.optional()
-  }).strict();
-  let Z = _$$z.strictObject({
-    windingRule: K,
-    loops: _$$z.array(_$$z.array(e.PositiveInteger)),
-    fills: e.Paints.optional(),
-    fillStyleId: _$$z.string().optional()
-  });
-  e.VectorNetwork = _$$z.strictObject({
-    vertices: _$$z.array(q),
-    segments: _$$z.array($),
-    regions: _$$z.array(Z).optional()
-  }).strict();
-  e.MaxLines = _$$z.number().$$int().min(1).finite().nullable();
-  e.FetchInitOptions = _$$z.strictObject({
-    method: _$$z.string().optional(),
-    headersObject: _$$z.record(_$$z.string()).optional(),
-    headers: _$$z.record(_$$z.string()).optional(),
-    body: _$$z.union([_$$z.$$instanceof(Uint8Array), _$$z.string()]).optional(),
-    credentials: _$$z.string().optional(),
-    cache: _$$z.string().optional(),
-    redirect: _$$z.string().optional(),
-    referrer: _$$z.string().optional(),
-    integrity: _$$z.string().optional()
-  }).optional();
-  e.Guide = _$$z.strictObject({
-    axis: _$$z.enum(["X", "Y"]),
-    offset: _$$z.number().finite()
-  }).strict();
-  e.Guides = _$$z.array(e.Guide);
-  e.FlowStartingPoints = _$$z.array(_$$z.strictObject({
-    nodeId: _$$z.string(),
-    name: _$$z.string()
-  }));
-  e.PlaybackSettings = _$$z.strictObject({
-    autoplay: _$$z.boolean(),
-    loop: _$$z.boolean(),
-    muted: _$$z.boolean()
-  });
-  let X = _$$z.strictObject({
-    id: _$$z.string()
-  });
-  e.SelectedText = _$$z.union([_$$z.strictObject({
-    node: X,
-    start: e.PositiveInteger,
-    end: e.PositiveInteger
-  }).strict(), _$$z.$$null()]);
-  e.BooleanOperation = _$$z.enum(["UNION", "INTERSECT", "SUBTRACT", "EXCLUDE"]);
-  e.ArcData = _$$z.strictObject({
-    startingAngle: _$$z.number().finite(),
-    endingAngle: _$$z.number().finite(),
-    innerRadius: e.ZeroToOne
-  });
-  e.ExportSetting = _$$z.discriminatedUnion("format", [B, V, G]);
-  e.ExportSettings = _$$z.array(e.ExportSetting);
-  let Q = _$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.enum.COLOR),
-    value: e.ColorA
-  });
-  e.VariableDataSchema = _$$z.discriminatedUnion("type", [_$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.enum.STRING),
-    value: _$$z.string()
-  }), _$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.enum.BOOLEAN),
-    value: _$$z.boolean()
-  }), _$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.enum.FLOAT),
-    value: _$$z.number().finite()
-  }), Q, _$$z.strictObject({
-    type: _$$z.literal(Z_n.ALIAS),
-    value: _$$z.string(),
-    resolvedType: _$$z.nativeEnum(rXF)
-  })]);
-  e.RelaunchData = _$$z.record(_$$z.string());
-  e.StyledTextSegmentFields = _$$z.array(_$$z.enum(["fontSize", "fontName", "fontWeight", "textDecoration", "textDecorationStyle", "textDecorationSkipInk", "textDecorationOffset", "textDecorationThickness", "textDecorationColor", "textCase", "lineHeight", "letterSpacing", "fills", "textStyleId", "fillStyleId", "listOptions", "indentation", "hyperlink", "openTypeFeatures", "boundVariables", "textStyleOverrides", "paragraphSpacing", "listSpacing", "paragraphIndent"]));
-  e.ShapeWithTextType = _$$z.enum(["SQUARE", "ELLIPSE", "ROUNDED_RECTANGLE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "ENG_FILE", "ENG_FOLDER", "TRAPEZOID", "PREDEFINED_PROCESS", "SHIELD", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "CHEVRON", "PENTAGON", "OCTAGON", "STAR", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "SUMMING_JUNCTION", "OR", "SPEECH_BUBBLE", "INTERNAL_STORAGE"]);
-  e.CodeBlockLanguage = _$$z.enum(["TYPESCRIPT", "CPP", "RUBY", "CSS", "JAVASCRIPT", "HTML", "JSON", "GRAPHQL", "PYTHON", "GO", "SQL", "SWIFT", "KOTLIN", "RUST", "BASH", "PLAINTEXT", "DART"]);
-  let J = ["BOOLEAN", "TEXT", "INSTANCE_SWAP", "IMAGE"];
-  let ee = [...J, "NUMBER"];
-  let et = [...J, "VARIANT"];
-  let ei = [...ee, "VARIANT"];
-  e.ComponentPropertyType = _$$z.enum(et);
-  e.ComponentPropertyTypeWithNumber = _$$z.enum(ei);
-  e.ComponentPropertyValue = _$$z.union([_$$z.boolean(), _$$z.string()]);
-  e.ComponentPropertyValueWithNumber = _$$z.union([_$$z.boolean(), _$$z.string(), _$$z.number().finite()]);
-  e.ComponentPropertyValueWithVariable = _$$z.union([_$$z.boolean(), _$$z.string(), e.VariableAlias]);
-  e.ComponentPropertyValueWithNumberAndVariable = _$$z.union([_$$z.boolean(), _$$z.string(), _$$z.number().finite(), e.VariableAlias]);
-  e.InstanceSwapPreferredValueType = _$$z.enum(["COMPONENT", "COMPONENT_SET"]);
-  e.InstanceSwapPreferredValue = _$$z.strictObject({
-    type: e.InstanceSwapPreferredValueType,
-    key: _$$z.string()
-  });
-  e.ComponentPropertyPreferredValues = _$$z.array(e.InstanceSwapPreferredValue);
-  e.ComponentPropertyOptions = _$$z.strictObject({
-    preferredValues: e.ComponentPropertyPreferredValues.optional()
-  }).optional();
-  e.ComponentPropertyDefinitionSchema = _$$z.strictObject({
-    name: _$$z.string().optional(),
-    defaultValue: e.ComponentPropertyValue.optional(),
-    preferredValues: e.ComponentPropertyPreferredValues.optional()
-  });
-  e.ComponentPropertyDefinitionSchemaWithNumber = _$$z.strictObject({
-    name: _$$z.string().optional(),
-    defaultValue: e.ComponentPropertyValueWithNumber.optional(),
-    preferredValues: e.ComponentPropertyPreferredValues.optional()
-  });
-  e.ComponentPropertyDefinitionSchemaWithVariable = _$$z.strictObject({
-    name: _$$z.string().optional(),
-    defaultValue: e.ComponentPropertyValueWithVariable.optional(),
-    preferredValues: e.ComponentPropertyPreferredValues.optional()
-  });
-  e.ComponentPropertyDefinitionSchemaWithNumberAndVariable = _$$z.strictObject({
-    name: _$$z.string().optional(),
-    defaultValue: e.ComponentPropertyValueWithNumberAndVariable.optional(),
-    preferredValues: e.ComponentPropertyPreferredValues.optional()
-  });
-  e.ComponentPropertyReferences = _$$z.strictObject({
-    visible: _$$z.string().optional(),
-    characters: _$$z.string().optional(),
-    mainComponent: _$$z.string().optional()
-  }).strict();
-  e.ConnectorMagnet = _$$z.enum(["NONE", "AUTO", "TOP", "LEFT", "BOTTOM", "RIGHT", "CENTER"]);
-  e.ConnectorEndpoint = _$$z.union([_$$z.strictObject({
-    endpointNodeId: _$$z.string(),
-    position: e.Vector
-  }), _$$z.strictObject({
-    position: e.Vector
-  }), _$$z.strictObject({
-    endpointNodeId: _$$z.string(),
-    magnet: e.ConnectorMagnet
-  })]);
-  e.ConnectorLineType = _$$z.enum(["ELBOWED", "STRAIGHT", "CURVED"]);
-  e.ConnectorStrokeCap = _$$z.enum(["NONE", "ARROW_EQUILATERAL", "ARROW_LINES", "TRIANGLE_FILLED", "DIAMOND_FILLED", "CIRCLE_FILLED"]);
-})($$n0 || ($$n0 = {}));
-export const N = $$n0; 
+    pluginData: zod.strictObject({
+      keys: zod.array(zod.string()).optional(),
+    }).optional(),
+  })
+  export type FindCriteriaWithPluginDataSchema = zod.infer<typeof FindCriteriaWithPluginDataSchema>
+}
+
+// ====================
+// 🔹 导出默认对象
+// ====================
+
+// 为了兼容旧代码中的 `n` 或 `N`
+export const FigmaSchema = {
+  ...Base,
+  ...Variable,
+  ...Reaction,
+  ...Paint,
+  ...Effect,
+  ...LayoutGrid,
+  ...Text,
+  ...Export,
+  ...Layout,
+  ...Vector,
+  ...Pointsc,
+  ...Component,
+  ...Connector,
+  ...Plugin,
+  ...Find,
+  // 保留一些顶层的常量
+  BuzzAssetType: Paint.BuzzAssetType,
+  VariableDataType: Variable.DataType,
+  VariableResolvedDataType: Variable.ResolvedDataType,
+  ExpressionFunction: Variable.ExpressionFunction,
+  VariableAlias: Variable.Alias,
+  VariableData: Variable.Data,
+  Expression: Variable.Expression,
+  Navigation: Reaction.Navigation,
+  Easing: Reaction.Easing,
+  SimpleTransition: Reaction.SimpleTransition,
+  DirectionalTransition: Reaction.DirectionalTransition,
+  Transition: Reaction.Transition,
+  Vector: Reaction.Vector,
+  ReactionActionNoConditional: Reaction.ActionNoConditional,
+  Trigger: Reaction.Trigger,
+  ConditionalBlock: Reaction.ConditionalBlock,
+  ReactionAction: Reaction.Action,
+  Reaction: Reaction.Reaction,
+  Reactions: Reaction.Reactions,
+  MaskType: Paint.MaskType,
+  UInt8Array: zod.instanceof(Uint8Array),
+  ColorInput: Base.ColorInput,
+  BlendMode: Paint.BlendMode,
+  PaintBoundVariables: Paint.BoundVariables,
+  PartialSolidPaint: Paint.PartialSolidPaint,
+  FontName: Paint.FontName,
+  ShowVisualBellOptions: Paint.ShowVisualBellOptions,
+  Size: Paint.Size,
+  Matrix: Paint.Matrix,
+  LayoutGrid: LayoutGrid.LayoutGrid,
+  LayoutGrids: LayoutGrid.LayoutGrids,
+  ParameterValues: Text.ParameterValues,
+  TextReviewResultSchema: Text.TextReviewResultSchema,
+  CodegenResultSchema: Text.CodegenResultSchema,
+  PlainTextContent: Text.PlainTextContent,
+  LinkPreviewResultSchema: Text.LinkPreviewResultSchema,
+  AuthResultSchema: Text.AuthResultSchema,
+  NodeStatus: Text.NodeStatus,
+  AnnotationsMarkdownMultipleAnnotationsPerNode: Text.AnnotationsMultipleAnnotationsPerNode,
+  AnnotationMeasurementStartEnd: Text.MeasurementStartEnd,
+  AnnotationMeasurementAddOptions: Text.MeasurementAddOptions,
+  AnnotationMeasurementEditValue: Text.MeasurementEditValue,
+  StrokeAlign: Layout.StrokeAlign,
+  NumberUnit: Text.NumberUnit,
+  LetterSpacing: Text.LetterSpacing,
+  LineHeight: Text.LineHeight,
+  LeadingTrim: Text.LeadingTrim,
+  TextAlignHorizontal: Text.TextAlignHorizontal,
+  TextAlignVertical: Text.TextAlignVertical,
+  TextCase: Text.TextCase,
+  TextDecoration: Text.TextDecoration,
+  TextDecorationStyle: Text.TextDecorationStyle,
+  TextDecorationOffset: Text.TextDecorationOffset,
+  TextDecorationThickness: Text.TextDecorationThickness,
+  TextDecorationColor: Text.TextDecorationColor,
+  TextAutoResize: Text.TextAutoResize,
+  TextListType: Text.TextListType,
+  TextListOptions: Text.TextListOptions,
+  TextIndentation: Text.TextIndentation,
+  TextHyperlinkType: Text.TextHyperlinkType,
+  TextHyperlinkOptions: Text.TextHyperlinkOptions,
+  FindCriteriaWithPluginDataSchema: Find.FindCriteriaWithPluginDataSchema,
+  getPluginDataNormalLimit: Plugin.getPluginDataNormalLimit,
+  PluginDataEntryNormalLimitSchema: Plugin.PluginDataEntryNormalLimitSchema,
+  getPluginDataEscapeHatchLimit: Plugin.getPluginDataEscapeHatchLimit,
+  PluginDataEntryEscapeHatchLimitSchema: Plugin.PluginDataEntryEscapeHatchLimitSchema,
+  TextTruncation: Text.TextTruncation,
+  exportColorProfile: Export.exportColorProfile,
+  getExportAsyncSetting: Export.getExportAsyncSetting,
+  ConstraintType: Layout.ConstraintType,
+  Constraints: Layout.Constraints,
+  OverflowDirection: Layout.OverflowDirection,
+  LayoutAlign: Layout.LayoutAlign,
+  LayoutMode: Layout.LayoutMode,
+  StackWrap: Layout.StackWrap,
+  StackCounterAlignContent: Layout.StackCounterAlignContent,
+  StackJustify: Layout.StackJustify,
+  StackJustifyLegacy: Layout.StackJustifyLegacy,
+  StackAlign: Layout.StackAlign,
+  SizingMode: Layout.SizingMode,
+  SizingModeLegacy: Layout.SizingModeLegacy,
+  LayoutSizing: Layout.LayoutSizing,
+  LayoutPositioning: Layout.LayoutPositioning,
+  GridTrackSizingType: Layout.GridTrackSizingType,
+  GridChildAlign: Layout.GridChildAlign,
+  GridTrackSize: Layout.GridTrackSize,
+  HandlePointrroring: Layout.HandlePointrroring,
+  StrokeJoin: Layout.StrokeJoin,
+  StrokeCap: Layout.StrokeCap,
+  CanvasGrid: Vector.CanvasGrid,
+  VectorPaths: Vector.VectorPaths,
+  MaxLines: Pointsc.MaxLines,
+  FetchInitOptions: Pointsc.FetchInitOptions,
+  Guide: Pointsc.Guide,
+  Guides: Pointsc.Guides,
+  FlowStartingPoints: Pointsc.FlowStartingPoints,
+  PlaybackSettings: Pointsc.PlaybackSettings,
+  SelectedText: Pointsc.SelectedText,
+  BooleanOperation: Pointsc.BooleanOperation,
+  ArcData: Pointsc.ArcData,
+  ExportSetting: Export.ExportSetting,
+  ExportSettings: Export.ExportSettings,
+  VariableDataSchema: Variable.DataSchema,
+  RelaunchData: Pointsc.RelaunchData,
+  StyledTextSegmentFields: Text.StyledTextSegmentFields,
+  ShapeWithTextType: Pointsc.ShapeWithTextType,
+  CodeBlockLanguage: Pointsc.CodeBlockLanguage,
+  ComponentPropertyType: Component.PropertyType,
+  ComponentPropertyTypeWithNumber: Component.PropertyTypeWithNumber,
+  ComponentPropertyValue: Component.PropertyValue,
+  ComponentPropertyValueWithNumber: Component.PropertyValueWithNumber,
+  ComponentPropertyValueWithVariable: Component.PropertyValueWithVariable,
+  ComponentPropertyValueWithNumberAndVariable: Component.PropertyValueWithNumberAndVariable,
+  InstanceSwapPreferredValueType: Component.InstanceSwapPreferredValueType,
+  InstanceSwapPreferredValue: Component.InstanceSwapPreferredValue,
+  ComponentPropertyPreferredValues: Component.PreferredValues,
+  ComponentPropertyOptions: Component.Options,
+  ComponentPropertyDefinitionSchema: Component.DefinitionSchema,
+  ComponentPropertyDefinitionSchemaWithNumber: Component.DefinitionSchemaWithNumber,
+  ComponentPropertyDefinitionSchemaWithVariable: Component.DefinitionSchemaWithVariable,
+  ComponentPropertyDefinitionSchemaWithNumberAndVariable: Component.DefinitionSchemaWithNumberAndVariable,
+  ComponentPropertyReferences: Component.References,
+  ConnectorMagnet: Connector.Magnet,
+  ConnectorEndpoint: Connector.Endpoint,
+  ConnectorLineType: Connector.LineType,
+  ConnectorStrokeCap: Connector.StrokeCap,
+}
+export const N = FigmaSchema

@@ -22,7 +22,7 @@ import { _B } from "../905/852370";
 import { iX } from "../6443/426443";
 import { trackEventAnalytics } from "../905/449184";
 import { Ts } from "../905/194276";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { LU } from "../figma_app/692865";
 import { l as _$$l } from "../905/690005";
 import { G$, FF } from "../figma_app/588092";
@@ -37,7 +37,7 @@ let F = ({
     n(Ts({
       origin: "comments_signed_out"
     }));
-    n(to({
+    n(showModalHandler({
       type: _$$l,
       data: {
         headerText: "Join Figma to leave comments on files and plugins",
@@ -48,7 +48,7 @@ let F = ({
     return;
   }
   if (e === CM.NO_PROFILE) {
-    n(to({
+    n(showModalHandler({
       type: G$,
       data: {
         userId: t,

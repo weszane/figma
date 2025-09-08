@@ -1,30 +1,30 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { _gJ } from "../figma_app/763686";
+import { IAssertResource } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import l from "../vendor/128080";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../905/477505";
 import { HT, RB } from "../figma_app/69680";
-import { S8, uz, p as _$$p, Ap, LK, NU } from "../905/359509";
+import { SupportedPlatforms, WEB, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
 import { K6, $n } from "../905/515076";
 import { $1, j8, _P } from "../figma_app/844435";
 import { ax } from "../figma_app/741237";
 import { sZ } from "../905/845253";
-import { pk } from "../figma_app/300692";
-import { ZQ, ow } from "../figma_app/155287";
-import { m as _$$m } from "../905/661977";
+import { isDevModeWithCodegen } from "../figma_app/300692";
+import { hasLocalFileId, isPluginAllowListed } from "../figma_app/155287";
+import { getCodegenLanguages } from "../905/661977";
 import { d as _$$d } from "../905/480825";
 var d = l;
 function E(e, t, i, r = {}) {
   let a = [];
   e.forEach(e => {
-    if (!pk(e)) return;
-    let s = _$$m(e).filter(t => !r.shouldHideLanguagesWithNoAltUnitSupport || !!K6(e, t));
+    if (!isDevModeWithCodegen(e)) return;
+    let s = getCodegenLanguages(e).filter(t => !r.shouldHideLanguagesWithNoAltUnitSupport || !!K6(e, t));
     if (0 === s.length) return;
-    let o = ZQ(e) ? void 0 : jsx("div", {
+    let o = hasLocalFileId(e) ? void 0 : jsx("div", {
       className: _$$s.mr4.$,
       children: jsx(_$$d, {
         plugin: e
@@ -80,12 +80,12 @@ export function $$x0({
   let C = useSelector(e => e.whitelistedPlugins);
   let T = sZ() || null;
   return useMemo(() => {
-    let r = Object.values(I).filter(pk);
+    let r = Object.values(I).filter(isDevModeWithCodegen);
     let a = Object.values(x);
-    T && T.plugins_whitelist_enforced && (a = a.filter(e => ow(e, C, T)));
+    T && T.plugins_whitelist_enforced && (a = a.filter(e => isPluginAllowListed(e, C, T)));
     codegenPlugins.forEach(e => {
       let t = e.current_plugin_version_id ? e.versions[e.current_plugin_version_id] : void 0;
-      t && !x[t.plugin_id] && ow(t, C, T) && a.push(t);
+      t && !x[t.plugin_id] && isPluginAllowListed(t, C, T) && a.push(t);
     });
     Object.keys(x).find(e => e === g?.id) || Object.values(codegenPlugins).find(e => e.id === g?.id) || !w.plugin || a.push(w.plugin);
     let p = E(a, e, t, {
@@ -100,16 +100,16 @@ export function $$x0({
       isChecked: i.id === e.id,
       callback: () => t(i)
     });
-    let k = [A(S8[uz]), {
+    let k = [A(SupportedPlatforms[WEB]), {
       name: getI18nString("dev_handoff.code.lang_ios"),
       displayText: getI18nString("dev_handoff.code.lang_ios"),
-      isChildChecked: e.id === _$$p || e.id === Ap,
-      children: [A(S8[_$$p]), A(S8[Ap])]
+      isChildChecked: e.id === _$$p || e.id === IOS_UIKIT,
+      children: [A(SupportedPlatforms[_$$p]), A(SupportedPlatforms[IOS_UIKIT])]
     }, {
       name: getI18nString("dev_handoff.code.lang_android"),
       displayText: getI18nString("dev_handoff.code.lang_android"),
-      isChildChecked: e.id === LK || e.id === NU,
-      children: [A(S8[LK]), A(S8[NU])]
+      isChildChecked: e.id === ANDROID || e.id === ANDROID_XML,
+      children: [A(SupportedPlatforms[ANDROID]), A(SupportedPlatforms[ANDROID_XML])]
     }];
     if (n) return k;
     let R = k.length > 0 ? {
@@ -129,7 +129,7 @@ export function $$x0({
       name: getI18nString("dev_handoff.code_language.browse"),
       displayText: getI18nString("dev_handoff.code_language.browse"),
       callback: () => {
-        ax(_gJ.PLUGIN);
+        ax(IAssertResource.PLUGIN);
         atomStoreManager.set(HT, "recents_and_saved");
         atomStoreManager.set(RB, !0);
       }

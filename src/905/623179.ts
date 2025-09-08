@@ -1,5 +1,5 @@
 import { reportError } from '../905/11';
-import { aD } from '../905/125019';
+import { sha1BytesFromHex } from '../905/125019';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { encodeBase64 } from '../905/561685';
 export class $$o2 extends Error {
@@ -62,7 +62,7 @@ export async function $$l0(e, t, i, n, r, a) {
   throw new Error(`Failed to upload file: ${i}`);
 }
 export async function $$d1(e, t, i, s, o = _$$e.WAYFINDING) {
-  let c = aD(i.sha1);
+  let c = sha1BytesFromHex(i.sha1);
   let u = encodeBase64(c);
   t['x-amz-checksum-sha1'] = u;
   return await $$l0(o, 'uploadVideoToPresignedPost', e, t, i.bytes, s);

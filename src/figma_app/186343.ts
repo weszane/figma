@@ -1,18 +1,18 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
-import { h3O, dPJ, CeL, Ez5, glU, Egt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD } from "../905/871411";
+import { Multiplayer, AutosaveEventType, FullscreenPerfMetrics, AppStateTsApi, Fullscreen, SceneGraphHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { F } from "../905/302958";
 import { _$ } from "../figma_app/379850";
-import { to } from "../905/156213";
-import { EB, SR } from "../905/784363";
+import { showModalHandler } from "../905/156213";
+import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_PAGE_LOADING } from "../905/784363";
 import { Fr } from "../figma_app/297957";
 import { J } from "../905/445197";
 import { F as _$$F } from "../905/224";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { i as _$$i } from "../figma_app/741237";
 import { IL } from "../figma_app/582924";
 import { QZ } from "../figma_app/62612";
@@ -23,7 +23,7 @@ import { FFileType } from "../figma_app/191312";
 import { KI, J9, LF } from "../figma_app/345997";
 import { F as _$$F2 } from "../905/258517";
 import { Fk } from "../figma_app/167249";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { vw, yH } from "../figma_app/841351";
 import { vL } from "../905/652992";
 import { ZN } from "../figma_app/630077";
@@ -44,7 +44,7 @@ export async function $$M11({
   pageNode: t,
   pageName: r
 }) {
-  return !(!t || !e || KI(e)) && !!$$D5(t, r) && (h3O.isIncrementalSession() && (await IL(t.guid, dPJ.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
+  return !(!t || !e || KI(e)) && !!$$D5(t, r) && (Multiplayer.isIncrementalSession() && (await IL(t.guid, AutosaveEventType.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
 }
 export function $$F7() {
   let e = q5();
@@ -64,7 +64,7 @@ export function $$F7() {
   let s = _$$F.useShouldHideStarterCtaForOpenFile();
   return useCallback(n => {
     if (t && e) {
-      r(to({
+      r(showModalHandler({
         type: DV,
         data: {
           team: e.team,
@@ -74,7 +74,7 @@ export function $$F7() {
           currentPlan: _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.PRO,
           hideUpsellPlanCta: s,
-          upsellSource: _$$b.CREATE_NEW_PAGE
+          upsellSource: UpsellModalType.CREATE_NEW_PAGE
         }
       }));
       return !1;
@@ -84,8 +84,8 @@ export function $$F7() {
         editorType: n
       }
     } : {};
-    Y5.triggerActionInUserEditScope("page-new", i);
-    Y5.commit();
+    fullscreenValue.triggerActionInUserEditScope("page-new", i);
+    fullscreenValue.commit();
     return !0;
   }, [e, r, s, t]);
 }
@@ -109,9 +109,9 @@ export async function $$U2({
     pageNode: a,
     pageName: r
   });
-  a && r !== n && l7.system("set-is-page-divider", () => a.isPageDivider = s);
-  l7.user("set-page-name", () => _$$i(t, r));
-  Y5.commit();
+  a && r !== n && permissionScopeHandler.system("set-is-page-divider", () => a.isPageDivider = s);
+  permissionScopeHandler.user("set-page-name", () => _$$i(t, r));
+  fullscreenValue.commit();
   r !== n && i();
 }
 let B = 0;
@@ -124,25 +124,25 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
     pageSwitchId: B,
     oldPageNodeId: t,
     newPageNodeId: e,
-    isIncremental: h3O.isIncrementalSession(),
+    isIncremental: Multiplayer.isIncrementalSession(),
     isAlreadyLoaded: i,
-    currentNodeCount: CeL?.getFileNodeCount()
+    currentNodeCount: FullscreenPerfMetrics?.getFileNodeCount()
   }, {
     forwardToDatadog: !0
   });
   let T = new Promise(e => {
     f = e;
   });
-  Ez5.currentPageState().requestedPageChange.set(e);
+  AppStateTsApi.currentPageState().requestedPageChange.set(e);
   requestAnimationFrame(() => {
     J(async () => {
       if (await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), t !== e) {
         let i = vw(r);
         let a = P3() >= 75;
         let d = a ? new Set() : r.fetchedPageIds || new Set();
-        if (i && (a && n(EB({
+        if (i && (a && n(UPDATE_FETCHED_PAGE_IDS({
           fetchedPageIds: d
-        })), n(SR({
+        })), n(VERSION_HISTORY_PAGE_LOADING({
           isLoadingPage: !0
         })), n(yH({
           version: i,
@@ -150,10 +150,10 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
           fetchedPageIds: d,
           eventType: "INCREMENTALLY_LOAD_NEW_PAGE"
         }))), h && o && p) {
-          let t = glU.navigateToFirstVisibleOrClosestChangeForPage(e);
-          t === AD ? n(F.dequeue({
+          let t = Fullscreen.navigateToFirstVisibleOrClosestChangeForPage(e);
+          t === defaultSessionLocalIDString ? n(F.dequeue({
             matchType: "view_changes"
-          })) : (Egt.setSelectedNodeAndCanvas(t, !0), o(QZ({
+          })) : (SceneGraphHelpers.setSelectedNodeAndCanvas(t, !0), o(QZ({
             nodeId: t,
             ...ob
           }), kh), p(t));
@@ -163,10 +163,10 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
           newPageNodeId: e,
           pageSwitchIdForTracking: y,
           duration: performance.now() - E,
-          currentNodeCount: CeL?.getFileNodeCount()
+          currentNodeCount: FullscreenPerfMetrics?.getFileNodeCount()
         }, !0);
       }
-      Ez5.currentPageState().requestedPageChange.set("");
+      AppStateTsApi.currentPageState().requestedPageChange.set("");
       f();
     });
   });

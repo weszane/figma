@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { RR } from "../figma_app/338442";
-import { Z_n } from "../figma_app/763686";
+import { VariableDataType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { hS, gl } from "../905/216495";
+import { isValidValue, isInvalidValue } from "../905/216495";
 import { UT } from "../figma_app/95266";
 import { On } from "../figma_app/323320";
 import { u3 } from "../figma_app/152690";
@@ -15,10 +15,10 @@ export function $$p0() {
   let m = i.consumedVariable || p.consumedVariable;
   let h = !!m;
   let g = selectWithShallowEqual(e => UT(e));
-  let f = m && hS(m) && m.type === Z_n.CMS_ALIAS;
-  return gl(g) ? null : h || t ? h ? f ? function (e) {
-    let t = e && hS(e) ? e.value.fieldSchemaId : null;
-    let i = e && hS(e) ? e.value.collectionId : null;
+  let f = m && isValidValue(m) && m.type === VariableDataType.CMS_ALIAS;
+  return isInvalidValue(g) ? null : h || t ? h ? f ? function (e) {
+    let t = e && isValidValue(e) ? e.value.fieldSchemaId : null;
+    let i = e && isValidValue(e) ? e.value.collectionId : null;
     return null == t || null == i ? (sD("Expected fieldSchemaId and collectionId to be present.", {
       fieldSchemaId: t,
       collectionId: i

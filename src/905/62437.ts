@@ -8,7 +8,7 @@ import { oA } from "../905/723791";
 import { s as _$$s } from "../905/573154";
 import { fk } from "../figma_app/618433";
 import { SQ, PF, YW } from "../figma_app/78808";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/852057";
 import { A as _$$A } from "../905/482208";
 import { F as _$$F } from "../905/224";
@@ -16,7 +16,7 @@ import { xp } from "../905/87821";
 import { q5 } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { ZN } from "../figma_app/630077";
@@ -28,7 +28,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { J8 } from "../905/760074";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { DV } from "../905/739964";
 import { y as _$$y } from "../figma_app/504415";
 import { S as _$$S } from "../905/262176";
@@ -85,7 +85,7 @@ function $$D(e) {
         children: jsxs(jk, {
           children: [jsx($n, {
             variant: "secondary",
-            onClick: () => t(Ce()),
+            onClick: () => t(hideModal()),
             children: renderI18nText("collaboration.branching.undo_merge_cancel")
           }), jsx($n, {
             variant: "primary",
@@ -99,8 +99,8 @@ function $$D(e) {
   });
 }
 $$D.displayName = "UndoMergeModal";
-let L = Ju($$D, "UndoMergeModal");
-let F = Ju(function (e) {
+let L = registerModal($$D, "UndoMergeModal");
+let F = registerModal(function (e) {
   let t = hS(e);
   let {
     onClose,
@@ -161,7 +161,7 @@ export function $$B0(e) {
       }));
     });
     let A = r(C.label ? "savepoint-edit" : "savepoint-label", () => {
-      i && k(to({
+      i && k(showModalHandler({
         type: _$$y,
         data: {
           description: C.description || "",
@@ -182,7 +182,7 @@ export function $$B0(e) {
           savedAt: C.touched_at
         });
       };
-      R ? k(to({
+      R ? k(showModalHandler({
         type: F,
         data: {
           onConfirm: e
@@ -191,7 +191,7 @@ export function $$B0(e) {
     });
     let b = r("savepoint-duplicate", () => {
       let e = xp(t, t.project, N);
-      e ? k(to({
+      e ? k(showModalHandler({
         type: DV,
         data: {
           team: e,
@@ -200,7 +200,7 @@ export function $$B0(e) {
           editorType: t.editorType,
           currentPlan: _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.PRO,
-          upsellSource: _$$b.CREATE_NEW_FILE
+          upsellSource: UpsellModalType.CREATE_NEW_FILE
         }
       })) : (k(YW({
         file: t,
@@ -226,7 +226,7 @@ export function $$B0(e) {
       }
     });
     let D = r("savepoint-undo-merge", () => {
-      k(to({
+      k(showModalHandler({
         type: L,
         data: {
           version: C

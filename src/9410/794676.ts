@@ -44,13 +44,13 @@ import { q5, MY } from "../figma_app/516028";
 import { dq, sZ } from "../905/845253";
 import { iZ, TA } from "../905/372672";
 import { Bc } from "../figma_app/615482";
-import { aTn, kul, h3O, P2e, hMR, Ez5, glU } from "../figma_app/763686";
+import { KeyboardLayout, SchemaJoinStatus, Multiplayer, FullscreenPerfInfo, CorePerfInfo, AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { As, CZ, rd, v7 } from "../figma_app/475303";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { FU } from "../905/26824";
 import { b as _$$b } from "../905/985254";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { $$, ZN } from "../figma_app/781852";
 import { pB } from "../905/395919";
 import { d1 } from "../905/766303";
@@ -93,7 +93,7 @@ import { d as _$$d } from "../905/241150";
 import { PG } from "../figma_app/453508";
 import { ZC } from "../figma_app/39751";
 import { S as _$$S } from "../5132/668270";
-import { $O, to as _$$to } from "../905/156213";
+import { showModal, showModalHandler } from "../905/156213";
 import { cq, QA } from "../figma_app/107215";
 import { nF } from "../figma_app/789";
 import { QL } from "../905/609392";
@@ -169,7 +169,7 @@ let ed = (e, t, i) => {
   t && e(FU({
     tab: t
   }));
-  i || Y5.triggerAction("toggle-keyboard-shortcuts");
+  i || fullscreenValue.triggerAction("toggle-keyboard-shortcuts");
 };
 let ec = (e, t, i, r) => {
   e(_$$b({
@@ -218,7 +218,7 @@ let eu = (e, t, i) => {
     onDismiss: () => {}
   }));
   CZ({
-    layout: aTn.UNKNOWN,
+    layout: KeyboardLayout.UNKNOWN,
     detectedLayout: t,
     eventName: "first_generic_detected_supported_keyboard"
   });
@@ -403,7 +403,7 @@ function tm(e) {
     let r = nF();
     let s = r.enabled;
     let o = r.enabled ? r.id : null;
-    let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+    let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
     let c = useSelector(e => e.progressBarState.mode);
     let u = q5()?.isTryFile;
     let p = QL("name");
@@ -430,9 +430,9 @@ function tm(e) {
     useEffect(() => {
       if (s && !_$$T(c) && "loaded" === f.status) {
         let t = localStorage.getItem(_$$K2(o));
-        i ? t ? QA(t) : e($O({
+        i ? t ? QA(t) : e(showModal({
           type: _$$e2
-        })) : f.data?.canEdit || h || e($O({
+        })) : f.data?.canEdit || h || e(showModal({
           type: _$$e2
         }));
       }
@@ -478,7 +478,7 @@ function tm(e) {
     let f = useRef(null);
     let g = useCallback(() => {
       if (!d) {
-        h3O?.reconnect(!1);
+        Multiplayer?.reconnect(!1);
         userCanEditFile || i(!0);
         return;
       }
@@ -487,7 +487,7 @@ function tm(e) {
         formState: qB.SIGN_UP,
         redirectUrl: _$$Ay.location.pathname
       }));
-      r(_$$to({
+      r(showModalHandler({
         type: _$$x3,
         data: {
           headerText: getI18nString("whiteboard.open_sessions.expiry_modal_title", {
@@ -512,7 +512,7 @@ function tm(e) {
       };
     }, [r, p, m, g]);
     useEffect(() => {
-      null != h && p !== h && (p ? h3O?.reconnect(!1) : (f.current && clearTimeout(f.current), g()));
+      null != h && p !== h && (p ? Multiplayer?.reconnect(!1) : (f.current && clearTimeout(f.current), g()));
     }, [r, p, h, g]);
     return {
       showEditFileFooter: t,
@@ -562,18 +562,18 @@ let t5 = memo(({
     d(_J());
     let t = window.FigmaMobile;
     t && (t._get_memory_stats = () => {
-      let e = P2e?.getImageMemory();
-      let t = P2e?.getHeapMemoryBreakdown();
+      let e = FullscreenPerfInfo?.getImageMemory();
+      let t = FullscreenPerfInfo?.getHeapMemoryBreakdown();
       var i = {
-        coreJsBufferMemory: hMR?.getJsBufferMemory() || 0,
-        coreLocalMaxUsedHeapMemory: hMR?.getLocalMaxUsedHeapMemory() || 0,
-        coreMaxUsedHeapMemory: hMR?.getMaxUsedHeapMemory() || 0,
-        coreTotalUsedHeapMemory: hMR?.getTotalUsedHeapMemory() || 0,
+        coreJsBufferMemory: CorePerfInfo?.getJsBufferMemory() || 0,
+        coreLocalMaxUsedHeapMemory: CorePerfInfo?.getLocalMaxUsedHeapMemory() || 0,
+        coreMaxUsedHeapMemory: CorePerfInfo?.getMaxUsedHeapMemory() || 0,
+        coreTotalUsedHeapMemory: CorePerfInfo?.getTotalUsedHeapMemory() || 0,
         fullscreenCompressedImages: e?.compressedImages ?? 0,
         fullscreenUncompressedImagesArrayBuffers: e?.uncompressedArrayBuffer ?? 0,
         fullscreenUncompressedImagesImageBitmap: e?.uncompressedImageBitmap ?? 0
       };
-      let r = hMR?.getMemStatsSummary() ?? void 0;
+      let r = CorePerfInfo?.getMemStatsSummary() ?? void 0;
       if (r) {
         let e = n(t?.mem_pool_current) || 0;
         let i = n(t?.font_files_current) || 0;
@@ -600,7 +600,7 @@ let t5 = memo(({
       return {
         metadata: JSON.parse(JSON.stringify(i)),
         reservedWasmMemory: le() || 0,
-        rendererGpuMemory: n(P2e?.getRendererGpuMemory()) || 0,
+        rendererGpuMemory: n(FullscreenPerfInfo?.getRendererGpuMemory()) || 0,
         rendererBreakdown: function (e) {
           return {
             textures: n(e.textures),
@@ -608,7 +608,7 @@ let t5 = memo(({
             renderBuffers: n(e.renderBuffers),
             uniformBuffers: n(e.uniformBuffers)
           };
-        }(P2e?.getRendererMemoryBreakdown()) ?? void 0,
+        }(FullscreenPerfInfo?.getRendererMemoryBreakdown()) ?? void 0,
         memStats: r
       };
     });
@@ -716,7 +716,7 @@ export function $$t80({
         return null != r && new Date(r).getTime() >= e;
       }, [r]);
       return useCallback((r, n, a, o) => {
-        t.keyboard_user_first_detection || o || !s ? r !== aTn.US_QWERTY || o || n !== aTn.UNKNOWN ? r && n !== aTn.UNKNOWN ? t.keyboard_manual_supported_bell || ec(e, r, n, i) : r && n === aTn.UNKNOWN ? t.keyboard_generic_supported_first_bell || eu(e, r, i) : CZ({
+        t.keyboard_user_first_detection || o || !s ? r !== KeyboardLayout.US_QWERTY || o || n !== KeyboardLayout.UNKNOWN ? r && n !== KeyboardLayout.UNKNOWN ? t.keyboard_manual_supported_bell || ec(e, r, n, i) : r && n === KeyboardLayout.UNKNOWN ? t.keyboard_generic_supported_first_bell || eu(e, r, i) : CZ({
           layout: n,
           detectedLayoutStr: a ?? void 0,
           eventName: "keyboard_change_no_bell"
@@ -745,7 +745,7 @@ export function $$t80({
       }
     }, [o, s]);
     useEffect(() => {
-      Y5.isReady() ? l() : Y5.onReady().then(() => setTimeout(l, 500));
+      fullscreenValue.isReady() ? l() : fullscreenValue.onReady().then(() => setTimeout(l, 500));
     }, []);
   })();
   XS();
@@ -875,7 +875,7 @@ export function $$t80({
     let i = BI();
     let [r, s] = useState(!1);
     let o = useSelector(e => e.multiplayer);
-    let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+    let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
     !function () {
       let e = q5();
       let t = window.FigmaMobile;
@@ -906,12 +906,12 @@ export function $$t80({
       }, [t, e, o]);
       useEffect(() => {
         t && (t._delete_page = e => {
-          Y5.triggerActionInUserEditScope("page-delete", {
+          fullscreenValue.triggerActionInUserEditScope("page-delete", {
             args: {
               nodeId: e
             }
           });
-          Y5.commit();
+          fullscreenValue.commit();
         });
       }, [t]);
       useEffect(() => {
@@ -921,13 +921,13 @@ export function $$t80({
       }, [t, i]);
     }();
     let d = useCallback(t => {
-      h3O?.observeUser(t);
+      Multiplayer?.observeUser(t);
       o && o.observingSessionID !== t && o.sessionID !== t && e(_$$b({
         aware_of_observation_mode: !0
       }));
     }, [o, e]);
     useEffect(() => {
-      t && !r && i?.shouldOptimizeForIpadApp && l && !Ez5?.defaultToolIsHandSelect() && (s(!0), Y5.triggerAction("set-tool-hand", null));
+      t && !r && i?.shouldOptimizeForIpadApp && l && !AppStateTsApi?.defaultToolIsHandSelect() && (s(!0), fullscreenValue.triggerAction("set-tool-hand", null));
     }, [t, i, r, s, l]);
     let c = useSelector(({
       mirror: {
@@ -966,17 +966,17 @@ export function $$t80({
           }));
         };
         u._trigger_undo = () => {
-          h && (Y5.triggerActionInUserEditScope("undo"), t(getI18nString("fullscreen_actions.undo")));
+          h && (fullscreenValue.triggerActionInUserEditScope("undo"), t(getI18nString("fullscreen_actions.undo")));
         };
         u._trigger_redo = () => {
-          m && (Y5.triggerActionInUserEditScope("redo"), t(getI18nString("fullscreen_actions.redo")));
+          m && (fullscreenValue.triggerActionInUserEditScope("redo"), t(getI18nString("fullscreen_actions.redo")));
         };
       }
     }, [i, e, h, m, u]);
     let f = pt();
     useEffect(() => {
       f && (f._set_ui_visibility = e => {
-        e !== c && Y5.triggerAction("toggle-ui");
+        e !== c && fullscreenValue.triggerAction("toggle-ui");
       });
     }, [f, c]);
     let g = Yk();
@@ -1040,25 +1040,25 @@ export function $$t80({
       });
     }, [u, d]);
     u && (u._update_context_menu_visibility = e => {
-      glU?.updateNativeContextMenuVisibility(e);
+      Fullscreen?.updateNativeContextMenuVisibility(e);
     }, u._override_document_visibility_state = _$$R2, u._set_allow_draw_with_touch = e => {
-      glU?.setAllowDrawWithTouch(e);
+      Fullscreen?.setAllowDrawWithTouch(e);
     }, u._unlock_all_objects = () => {
-      Y5.triggerActionInUserEditScope("unlock-all");
+      fullscreenValue.triggerActionInUserEditScope("unlock-all");
     }, u._zoom_reset = () => {
-      Y5.triggerActionInUserEditScope("zoom-reset");
+      fullscreenValue.triggerActionInUserEditScope("zoom-reset");
     }, u._zoom_to_fit = () => {
-      Y5.triggerActionInUserEditScope("zoom-to-fit");
+      fullscreenValue.triggerActionInUserEditScope("zoom-to-fit");
     }, u._present = () => {
-      h3O?.startPresenting();
+      Multiplayer?.startPresenting();
     }, u._find_in_file = () => {
-      Y5.triggerActionInUserEditScope("canvas-search");
+      fullscreenValue.triggerActionInUserEditScope("canvas-search");
     }, u._copy = () => {
-      Y5.triggerActionInUserEditScope("copy");
+      fullscreenValue.triggerActionInUserEditScope("copy");
     }, u._cut = () => {
-      Y5.triggerActionInUserEditScope("cut");
+      fullscreenValue.triggerActionInUserEditScope("cut");
     }, u._paste = () => {
-      Y5.triggerActionInUserEditScope("paste");
+      fullscreenValue.triggerActionInUserEditScope("paste");
     }, u._add_media = e => {
       let t = e.map(e => {
         let {
@@ -1069,9 +1069,9 @@ export function $$t80({
           type: mime_type
         });
       });
-      let i = Y5.fileArrayToString(t);
-      glU?.handleOpenFromJsonString(i, wu.MOBILE_NATIVE_NAVBAR);
-    }, u._get_zoom_scale = () => glU?.getViewportZoomScale() ?? 1);
+      let i = fullscreenValue.fileArrayToString(t);
+      Fullscreen?.handleOpenFromJsonString(i, wu.MOBILE_NATIVE_NAVBAR);
+    }, u._get_zoom_scale = () => Fullscreen?.getViewportZoomScale() ?? 1);
     f && (f._open_timer = () => {
       atomStoreManager.set(Qs, {
         type: "OPEN"
@@ -1095,7 +1095,7 @@ export function $$t80({
     let e = useDispatch();
     let [t, i] = Wz("nux_seat_selection_show_confirmation", null);
     useEffect(() => {
-      t && ("autoApproved" in t && "seatType" in t && e(_$$to({
+      t && ("autoApproved" in t && "seatType" in t && e(showModalHandler({
         type: _$$u2,
         data: {
           ...t

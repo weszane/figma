@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { YV } from "../figma_app/181241";
+import { createMetaValidator } from "../figma_app/181241";
 import { tF } from "../figma_app/306946";
 export let $$r0 = new class {
   constructor() {
-    this.ResourceUseSchemaValidator = YV("ResourceUseSchema", tF, null);
+    this.ResourceUseSchemaValidator = createMetaValidator("ResourceUseSchema", tF, null);
   }
   async addResourceUse(e) {
     try {

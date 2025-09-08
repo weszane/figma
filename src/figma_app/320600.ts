@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, useMemo, Component } from "react";
 import { createPortal } from "../vendor/944059";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { m7W } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { SettingsAction } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { xx } from "../figma_app/815945";
 import { o6 } from "../figma_app/806412";
 import { n as _$$n } from "../figma_app/339971";
@@ -30,16 +30,16 @@ import { Point } from "../905/736624";
 import { cH } from "../figma_app/451396";
 import { Oq } from "../figma_app/478201";
 import { MW } from "../figma_app/570310";
-import { AS, YK, to } from "../905/156213";
-import { Ju } from "../905/102752";
+import { hideModalHandler, showModalConditional, showModalHandler } from "../905/156213";
+import { registerModal } from "../905/102752";
 import { Ao } from "../905/748636";
 import { kL, zN, Pf } from "../905/326616";
 import { b as _$$b } from "../905/985254";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { tS, Cq } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { Ht } from "../figma_app/178475";
 import { uw, i$ } from "../figma_app/582377";
@@ -48,16 +48,16 @@ import { io } from "../figma_app/73698";
 import { W as _$$W } from "../figma_app/467880";
 import { v as _$$v } from "../figma_app/163681";
 import { XHR } from "../905/910117";
-import { m as _$$m } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { OJ } from "../905/519092";
 import { k as _$$k2 } from "../905/284709";
 import { D as _$$D } from "../figma_app/32557";
 import { O as _$$O } from "../figma_app/688952";
 import { jv } from "../905/525678";
-let U = Ju(function () {
+let U = registerModal(function () {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(AS());
+    e(hideModalHandler());
   }, [e]);
   let [r, a] = useAtomValueAndSetter(cH);
   let [o, l] = useAtomValueAndSetter(MW);
@@ -106,7 +106,7 @@ let U = Ju(function () {
 function q(e) {
   let [t, r] = useState(e.initialValue);
   let a = useCallback(e => {
-    gl(e) || r(e.valueOf());
+    isInvalidValue(e) || r(e.valueOf());
   }, [r]);
   let o = useDispatch();
   useEffect(() => {
@@ -131,10 +131,10 @@ function q(e) {
     })
   });
 }
-let J = Ju(function () {
+let J = registerModal(function () {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(AS());
+    e(hideModalHandler());
   }, [e]);
   return jsx(Ao, {
     title: "Comments Debug Settings",
@@ -194,7 +194,7 @@ async function es({
 }) {
   try {
     r("Generating file version...");
-    let n = (await _$$m(t, "Exported to ML account", "", e, !0))?.id;
+    let n = (await maybeCreateSavepoint(t, "Exported to ML account", "", e, !0))?.id;
     if (void 0 === n) throw Error("undefined versionId");
     r(`Exporting file version ${n}...`);
     let {
@@ -229,10 +229,10 @@ async function es({
     r(`${e}`);
   }
 }
-let eo = Ju(function () {
+let eo = registerModal(function () {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(AS());
+    e(hideModalHandler());
   }, [e]);
   let [r, a] = useState([]);
   let o = tS();
@@ -273,7 +273,7 @@ let ec = () => {
     let n = [{
       name: "toggle-comments-debug-settings",
       callback: () => {
-        e(YK({
+        e(showModalConditional({
           type: J,
           data: {}
         }));
@@ -288,7 +288,7 @@ let ec = () => {
     }, {
       name: "toggle-code-connect-debug-tools",
       callback: () => {
-        e(YK({
+        e(showModalConditional({
           type: U,
           data: {}
         }));
@@ -297,7 +297,7 @@ let ec = () => {
     window.INITIAL_OPTIONS?.cluster_name === "local" && n.push({
       name: "debug-ml-export",
       callback: () => {
-        e(YK({
+        e(showModalConditional({
           type: eo,
           data: {}
         }));
@@ -321,7 +321,7 @@ let ec = () => {
     getFeatureFlags().bake_sb && t?.editor_type === FFileType.FIGMAKE && (_$$D && n.push({
       name: "supabase-menu",
       callback: () => {
-        Y5.dispatch(to({
+        fullscreenValue.dispatch(showModalHandler({
           type: _$$D,
           data: {},
           showModalsBeneath: !0
@@ -330,7 +330,7 @@ let ec = () => {
     }), _$$O && n.push({
       name: "foundry-menu",
       callback: () => {
-        _$$O && Y5.dispatch(to({
+        _$$O && fullscreenValue.dispatch(showModalHandler({
           type: _$$O,
           data: {},
           showModalsBeneath: !0
@@ -371,7 +371,7 @@ class e_ extends o6 {
     this.getPathToPreferences = () => [_$$A(ep)];
   }
   componentDidUpdate(e, t) {
-    if (super.componentDidUpdate(e, t), this.props.selectionToUpdate && this.props.selectionToUpdate === m7W.PREFERENCES) {
+    if (super.componentDidUpdate(e, t), this.props.selectionToUpdate && this.props.selectionToUpdate === SettingsAction.PREFERENCES) {
       let e = this.multilevelDropdown && this.multilevelDropdown.getActiveItemAtDepth(0);
       !e || k$(e) || gN(e) || id(e) || !e.name || e.name !== ep ? (this.selectPreferencesMenu(), this.props.dispatch(ho({
         type: pi,
@@ -444,7 +444,7 @@ export class $$em1 extends Component {
       this.multilevelDropdown && this.multilevelDropdown.setActiveItemPath(e);
     };
     this.onSelectItem = (e, t) => {
-      l7.user(`fullscreen-menu-${e.action ?? "non-action"}`, () => {
+      permissionScopeHandler.user(`fullscreen-menu-${e.action ?? "non-action"}`, () => {
         if (e.callback && e.callback(Dz(e), e.args, this.props.dispatch, t), e.action && !e.input) {
           let r = e.action;
           e.loadingIndicatorString ? this.props.dispatch(_$$n.set({

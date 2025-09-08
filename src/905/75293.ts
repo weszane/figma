@@ -3,12 +3,12 @@ import { useState, createRef, memo, useContext, useRef, useCallback, useId, clon
 import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { assertNotNullish } from "../figma_app/465776";
-import { M9 } from "../figma_app/492908";
+import { mapRange } from "../figma_app/492908";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
-import { VD3, e0R, rXF } from "../figma_app/763686";
+import { HiddenLabel } from "../905/270045";
+import { StyleVariableOperation, CopyPasteType, VariableResolvedDataType } from "../figma_app/763686";
 import { sH } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
@@ -26,7 +26,7 @@ import { F as _$$F } from "../figma_app/8833";
 import { TI } from "../905/713722";
 import { X9 } from "../figma_app/975811";
 import { Yl, W3 } from "../905/232641";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
 import { tS } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
@@ -88,7 +88,7 @@ export function $$el2({
   let [y, E] = useState(m);
   let S = qP(o, "close", () => {
     h(XE());
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
   });
   let C = createRef();
   let T = (i, n) => {
@@ -308,7 +308,7 @@ let ec = memo(function ({
       value: t.numSections,
       children: [jsx(Z0, {
         value: _$$F
-      }, "Auto"), jsx(sK, {}, "divider"), M9(12, e => jsx(Z0, {
+      }, "Auto"), jsx(sK, {}, "divider"), mapRange(12, e => jsx(Z0, {
         value: e + 1
       }, e))]
     })
@@ -473,7 +473,7 @@ let eh = memo(function ({
       value: e.type,
       recordingKey: Pt(r, "type"),
       children: [jsx(l9, {
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: getI18nString("fullscreen.grid_panel.layout_guide_type")
         }),
         width: "fill"
@@ -646,7 +646,7 @@ export function $$ey1(e) {
     value: "GRID" === layoutGrid.pattern ? "GRID" : layoutGrid.axis,
     recordingKey: Pt(e, "pattern"),
     children: [jsx(l9, {
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: getI18nString("fullscreen.grid_panel.layout_guide_type")
       }),
       width: "fill",
@@ -711,14 +711,14 @@ function eb({
           alias: n
         }
       };
-      _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+      _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
         l({
           ...s,
           [t]: r
         });
       });
       oz(`GRID_${t.slice(0, -3).toUpperCase()}`, r);
-    } else _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+    } else _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       l({
         ...s,
         [t]: void 0
@@ -739,7 +739,7 @@ function eb({
   }));
   return jsxs(hu, {
     boundVariableId: u,
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: g,
     children: [jsx(V5, {}), _]
   });

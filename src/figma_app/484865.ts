@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { A } from "../905/963262";
 import { qZ } from "../figma_app/451396";
 import { XP } from "../figma_app/655139";
-import { yT } from "../905/359509";
+import { mapPlatformToFramework } from "../905/359509";
 import { r as _$$r } from "../figma_app/821179";
 import { GS } from "../figma_app/314264";
 import { sS, XJ, tS } from "../figma_app/516028";
@@ -88,7 +88,7 @@ async function x(e) {
   let i = debugState.getState();
   let l = i.mirror.appModel.devHandoffCodeLanguage;
   let d = XP(l);
-  let c = yT(d.id);
+  let c = mapPlatformToFramework(d.id);
   let {
     fileKey,
     nodesByLibraryKey,

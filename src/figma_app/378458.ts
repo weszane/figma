@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { y as _$$y } from "../905/661502";
 import { O as _$$O } from "../905/969533";
-import { Ez5, glU } from "../figma_app/763686";
+import { AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import u from "classnames";
 import { _ as _$$_ } from "../905/569825";
@@ -20,13 +20,13 @@ import { oB } from "../905/929976";
 import { E3 } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { VU } from "../905/625959";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { d as _$$d } from "../905/758967";
 import { UK } from "../figma_app/740163";
 import { RF, oQ, DH } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
 import { BK } from "../905/848862";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { c1 } from "../figma_app/357047";
@@ -50,16 +50,16 @@ function z({
     l("View Menu Opened");
   }, [l]);
   let u = E3();
-  let p = J2(_$$d().activeCanvasCurrentZoom);
-  let _ = J2(UK().activeCanvasPixelPreview);
-  let g = J2(_$$d().activeCanvasRetinaMode);
+  let p = getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
+  let _ = getObservableOrFallback(UK().activeCanvasPixelPreview);
+  let g = getObservableOrFallback(_$$d().activeCanvasRetinaMode);
   let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let E = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = useSelector(e => !!e.user);
   let b = useSelector(e => $A(e.selectedView));
   let I = _I();
   let v = XR();
-  let R = J2(Ez5.uiState().filterAnnotationCategoryId);
+  let R = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let D = u === FEditorType.Design;
   let M = u === FEditorType.Slides;
   let U = u === FEditorType.Sites;
@@ -68,17 +68,17 @@ function z({
   let z = "design" === mapEditorTypeToFileType(u);
   let K = "whiteboard" === mapEditorTypeToFileType(u);
   let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
-  let $ = J2(Ez5.editorPreferences().showPropertyLabels);
-  let X = J2(Ez5.editorPreferences().showFrameGrids);
-  let q = J2(_$$d().showFrameGridsViewOnly);
+  let $ = getObservableOrFallback(AppStateTsApi.editorPreferences().showPropertyLabels);
+  let X = getObservableOrFallback(AppStateTsApi.editorPreferences().showFrameGrids);
+  let q = getObservableOrFallback(_$$d().showFrameGridsViewOnly);
   let J = Td();
   let Z = !J;
   let Q = Z ? "showFrameGrids" : "showFrameGridsViewOnly";
-  let ee = J2(getFeatureFlags().figjam_snap_to_dot_grid_reset ? UK().snapToDotGridStagingReset : UK().snapToDotGrid);
-  let et = J2(UK().snapToPixelGrid);
+  let ee = getObservableOrFallback(getFeatureFlags().figjam_snap_to_dot_grid_reset ? UK().snapToDotGridStagingReset : UK().snapToDotGrid);
+  let et = getObservableOrFallback(UK().snapToPixelGrid);
   let er = z ? et : ee;
-  let en = J2(UK().showDotGrid);
-  let ei = J2(UK().renderGrid);
+  let en = getObservableOrFallback(UK().showDotGrid);
+  let ei = getObservableOrFallback(UK().renderGrid);
   let ea = z ? ei : en;
   let es = z ? "renderGrid" : "showDotGrid";
   let eo = b;
@@ -158,7 +158,7 @@ function z({
     shortcut: c1(f, "toggle-rulers"),
     recordingKey: "renderRulers",
     hidden: !z,
-    isChecked: J2(UK().renderRulers),
+    isChecked: getObservableOrFallback(UK().renderRulers),
     disabled: Zr("renderRulers")
   }, {
     type: "OUTLINES_MENU",
@@ -168,17 +168,17 @@ function z({
     children: [{
       type: "OUTLINES",
       shortcut: c1(f, "toggle-outlines"),
-      isChecked: J2(_$$d().showOutlines),
+      isChecked: getObservableOrFallback(_$$d().showOutlines),
       recordingKey: "showOutlines"
     }, {
       type: "separator"
     }, {
       type: "OUTLINES_HIDDEN_LAYERS",
-      isChecked: J2(_$$d().showOutlineHiddenLayers),
+      isChecked: getObservableOrFallback(_$$d().showOutlineHiddenLayers),
       recordingKey: "hiddenLayers"
     }, {
       type: "OUTLINES_OBJECT_BOUNDS",
-      isChecked: J2(_$$d().showOutlineObjectBounds),
+      isChecked: getObservableOrFallback(_$$d().showOutlineObjectBounds),
       recordingKey: "objectBounds"
     }]
   }, {
@@ -250,7 +250,7 @@ function z({
             categoryLabel: t,
             source: "zoom_menu"
           });
-          Ez5?.uiState().filterAnnotationCategoryId.set(e.id);
+          AppStateTsApi?.uiState().filterAnnotationCategoryId.set(e.id);
         },
         recordingKey: `showAnnotationCategory-${t}`
       };
@@ -265,10 +265,10 @@ function z({
     type: "SITES_SEMANTIC_LABELS",
     recordingKey: "sitesA11yAriaAttributes",
     hidden: !U || !getFeatureFlags().sts_a11y_layers_semantic_tags,
-    isChecked: J2(UK().showSemanticTagsOnLayerRows)
+    isChecked: getObservableOrFallback(UK().showSemanticTagsOnLayerRows)
   }];
   let eu = useCallback(e => {
-    glU.setCanvasZoomScale(e / 100);
+    Fullscreen.setCanvasZoomScale(e / 100);
   }, []);
   return jsx($$W1, {
     targetRect: e,
@@ -281,28 +281,28 @@ function z({
     onSelectDropdownItem: (e, t, n) => {
       switch (e) {
         case "ZOOM_IN":
-          Y5.triggerAction("zoom-in", {
+          fullscreenValue.triggerAction("zoom-in", {
             source: "zoom-menu"
           });
           break;
         case "ZOOM_OUT":
-          Y5.triggerAction("zoom-out", {
+          fullscreenValue.triggerAction("zoom-out", {
             source: "zoom-menu"
           });
           break;
         case "ZOOM_TO_FIT":
-          Y5.triggerAction("zoom-to-fit", {
+          fullscreenValue.triggerAction("zoom-to-fit", {
             source: "zoom-menu"
           });
           break;
         case "ZOOM_TO_50":
-          glU.setCanvasZoomScale(.5);
+          Fullscreen.setCanvasZoomScale(.5);
           break;
         case "ZOOM_TO_100":
-          glU.setCanvasZoomScale(1);
+          Fullscreen.setCanvasZoomScale(1);
           break;
         case "ZOOM_TO_200":
-          glU.setCanvasZoomScale(2);
+          Fullscreen.setCanvasZoomScale(2);
           break;
         case "PIXEL_PREVIEW":
           VU.get("toggle-pixel-preview", "toolbar")(t);
@@ -326,7 +326,7 @@ function z({
           VU.get("toggle-multiplayer-cursors", "toolbar")(t);
           break;
         case "PROPERTY_LABELS":
-          Y5.triggerAction("toggle-show-property-labels", {
+          fullscreenValue.triggerAction("toggle-show-property-labels", {
             source: "zoom-menu"
           });
           break;
@@ -353,49 +353,49 @@ function z({
             categoryLabel: "all",
             source: "zoom_menu"
           });
-          Ez5?.uiState().filterAnnotationCategoryId.set(null);
+          AppStateTsApi?.uiState().filterAnnotationCategoryId.set(null);
           break;
         case "SHOW_ANNOTATION_CATEGORY":
           n?.();
           break;
         case "OUTLINES":
-          Y5.triggerAction("toggle-outlines", {
+          fullscreenValue.triggerAction("toggle-outlines", {
             source: "zoom-menu"
           });
           break;
         case "OUTLINES_HIDDEN_LAYERS":
-          Y5.triggerAction("toggle-outline-mode-hidden-layers", {
+          fullscreenValue.triggerAction("toggle-outline-mode-hidden-layers", {
             source: "zoom-menu"
           });
           break;
         case "OUTLINES_OBJECT_BOUNDS":
-          Y5.triggerAction("toggle-outline-mode-object-bounds", {
+          fullscreenValue.triggerAction("toggle-outline-mode-object-bounds", {
             source: "zoom-menu"
           });
           break;
         case "PIXEL_PREVIEW_DISABLED":
-          _ && Y5.triggerAction("toggle-pixel-preview", {
+          _ && fullscreenValue.triggerAction("toggle-pixel-preview", {
             source: "zoom-menu"
           });
           break;
         case "PIXEL_PREVIEW_1X":
-          _ || Y5.triggerAction("toggle-pixel-preview", {
+          _ || fullscreenValue.triggerAction("toggle-pixel-preview", {
             source: "zoom-menu"
           });
-          g && Y5.triggerAction("toggle-retina-mode", {
+          g && fullscreenValue.triggerAction("toggle-retina-mode", {
             source: "zoom-menu"
           });
           break;
         case "PIXEL_PREVIEW_2X":
-          _ || Y5.triggerAction("toggle-pixel-preview", {
+          _ || fullscreenValue.triggerAction("toggle-pixel-preview", {
             source: "zoom-menu"
           });
-          g || Y5.triggerAction("toggle-retina-mode", {
+          g || fullscreenValue.triggerAction("toggle-retina-mode", {
             source: "zoom-menu"
           });
           break;
         case "SITES_SEMANTIC_LABELS":
-          Y5.triggerAction("toggle-show-semantic-tags-on-layer-rows", {
+          fullscreenValue.triggerAction("toggle-show-semantic-tags-on-layer-rows", {
             source: "zoom-menu"
           });
       }
@@ -531,7 +531,7 @@ export let $$K0 = memo(function ({
   recordingKey: e
 }) {
   let t = useRef(null);
-  let r = 100 * J2(_$$d().activeCanvasCurrentZoom);
+  let r = 100 * getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
   let a = BK($$H);
   let [o, d] = useState(null);
   let {

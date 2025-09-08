@@ -3,9 +3,9 @@ import { forwardRef, useRef, useState, useLayoutEffect, useCallback, useEffect }
 import { flushSync } from "../vendor/944059";
 import { A as _$$A } from "../vendor/723372";
 import { i as _$$i } from "../905/97346";
-import { M as _$$M } from "../905/581092";
+import { useExposedRef } from "../905/581092";
 import { Vg, px, GX } from "../905/893109";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 var n = {};
 require.d(n, {
   both: () => y,
@@ -67,7 +67,7 @@ export let $$R0 = forwardRef(({
   onScroll: w,
   ...R
 }, P) => {
-  let O = _$$M(P);
+  let O = useExposedRef(P);
   let D = useRef(null);
   let L = "x" === i || "both" === i;
   let F = "y" === i || "both" === i;
@@ -226,7 +226,7 @@ export let $$R0 = forwardRef(({
       ref: O,
       role: "none",
       ...R,
-      ..._$$r,
+      ...defaultComponentAttribute,
       className: _$$A(f, t.scroll, n[i], {
         [b]: er,
         [T]: x

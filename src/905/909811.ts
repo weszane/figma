@@ -7,7 +7,7 @@ import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { DV } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
 import { j7 } from "../905/929976";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { wr, Dh } from "../figma_app/741237";
 import { Gj } from "../figma_app/646357";
 import { FEditorType } from "../figma_app/53721";
@@ -169,7 +169,7 @@ export function $$D1(e) {
         }
       }
     }));
-    e.sceneGraphSelection && e.sceneGraph && !sp(e.sceneGraph, e.sceneGraphSelection, t.node_id) && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t.node_id), Dh([t.node_id]), Y5.commit());
+    e.sceneGraphSelection && e.sceneGraph && !sp(e.sceneGraph, e.sceneGraphSelection, t.node_id) && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t.node_id), Dh([t.node_id]), fullscreenValue.commit());
   };
   let d = null;
   let v = !1;

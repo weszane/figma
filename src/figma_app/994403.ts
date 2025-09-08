@@ -18,7 +18,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { q } from "../figma_app/277543";
 import { LE } from "../905/71785";
-import { FW, Pe } from "../figma_app/155287";
+import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { $E, cL, is, G, Wv, p2, QF } from "../905/452765";
 import { A as _$$A } from "../6041/844625";
@@ -38,7 +38,7 @@ export function $$k1({
   if (!e) return null;
   let n = $E;
   if (t ? n = cL : r && (n = is), !(e instanceof Array)) return M(e, n, t);
-  if (e.includes(FW.FIGMA) && e.includes(FW.FIGJAM) && Pe(e)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGMA) && e.includes(ManifestEditorType.FIGJAM) && isDevOrInspect(e)) return jsx(_$$B, {
     svg: t ? _$$A7 : _$$A8,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
@@ -46,7 +46,7 @@ export function $$k1({
     "data-tooltip": getI18nString("community.detail_view.universal"),
     dataTestId: "editor-type-badge-universal"
   });
-  if (e.includes(FW.FIGMA) && e.includes(FW.FIGJAM)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGMA) && e.includes(ManifestEditorType.FIGJAM)) return jsx(_$$B, {
     svg: t ? _$$A5 : _$$A6,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
@@ -54,7 +54,7 @@ export function $$k1({
     "data-tooltip": getI18nString("community.detail_view.made_for_figma_design_and_figjam"),
     dataTestId: "editor-type-badge-figma-figjam"
   });
-  if (e.includes(FW.FIGMA) && Pe(e)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGMA) && isDevOrInspect(e)) return jsx(_$$B, {
     svg: t ? _$$A3 : _$$A4,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
@@ -62,7 +62,7 @@ export function $$k1({
     "data-tooltip": getI18nString("community.detail_view.figma_design_and_dev_mode"),
     dataTestId: "editor-type-badge-figma-devmode"
   });
-  if (e.includes(FW.FIGJAM) && Pe(e)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGJAM) && isDevOrInspect(e)) return jsx(_$$B, {
     svg: t ? _$$A : _$$A2,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
@@ -75,7 +75,7 @@ export function $$k1({
 }
 function M(e, t, r) {
   switch (e) {
-    case FW.FIGJAM:
+    case ManifestEditorType.FIGJAM:
     case LE.FIGJAM:
     case q.WHITEBOARD:
       return jsx("div", {
@@ -85,7 +85,7 @@ function M(e, t, r) {
         "data-tooltip": getI18nString("community.detail_view.made_for_fig_jam"),
         children: r ? jsx(j, {}) : jsx(_$$C, {})
       });
-    case FW.FIGMA:
+    case ManifestEditorType.FIGMA:
     case LE.FIGMA:
     case q.DESIGN:
       return jsx("div", {
@@ -95,8 +95,8 @@ function M(e, t, r) {
         "data-tooltip": getI18nString("community.detail_view.made_for_figma_design"),
         children: r ? jsx(H, {}) : jsx(_$$e, {})
       });
-    case FW.INSPECT:
-    case FW.DEV:
+    case ManifestEditorType.INSPECT:
+    case ManifestEditorType.DEV:
     case q.DEV_HANDOFF:
       return jsx("div", {
         className: t,
@@ -107,7 +107,7 @@ function M(e, t, r) {
       });
     case LE.SLIDES:
     case q.SLIDES:
-    case FW.SLIDES:
+    case ManifestEditorType.SLIDES:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-slides",
@@ -131,7 +131,7 @@ function M(e, t, r) {
         "data-tooltip": getI18nString("community.detail_view.made_for_figmake"),
         children: r ? jsx(_$$N, {}) : jsx(_$$o2, {})
       });
-    case FW.BUZZ:
+    case ManifestEditorType.BUZZ:
     case q.COOPER:
       return jsx("div", {
         className: t,

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Wn, mK, NB } from "../vendor/693164";
@@ -53,10 +53,10 @@ export function $$C7() {
   return wj(JT.SLIDES_GENERATE_SPEAKER_NOTES).state === qy.RUNNING;
 }
 export function $$v1() {
-  Ez5?.editorPreferences().speakerNotesHeight.set(0);
+  AppStateTsApi?.editorPreferences().speakerNotesHeight.set(0);
 }
 export function $$E9(e) {
-  Ez5?.editorPreferences().speakerNotesHeight.set(e);
+  AppStateTsApi?.editorPreferences().speakerNotesHeight.set(e);
 }
 export function $$T2(e, t, i, r) {
   let n = e.absoluteTransform.m12 > i && e.absoluteTransform.m12 + e.absoluteBoundingBox.h < r;

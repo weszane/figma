@@ -1,4 +1,4 @@
-import { _g, qE, xN } from "../figma_app/492908";
+import { positiveMod, clamp, nearlyEqual } from "../figma_app/492908";
 import { I0, oq } from "../figma_app/273493";
 let $$a15 = {
   r: 0,
@@ -444,10 +444,10 @@ function W(e) {
   let t = parseFloat(e);
   let r = 0;
   r = e.includes("grad") ? .9 * t : e.includes("rad") ? 180 * t / Math.PI : e.includes("turn") ? 360 * t : t;
-  return (r = _g(r, 360)) / 360;
+  return (r = positiveMod(r, 360)) / 360;
 }
 function K(e) {
-  return qE(e, 0, 1);
+  return clamp(e, 0, 1);
 }
 export function $$Y18(e) {
   return e && !isNaN(e.r) && !isNaN(e.g) && !isNaN(e.b) && e.r >= 0 && e.r <= 1 && e.g >= 0 && e.g <= 1 && e.b >= 0 && e.b <= 1;
@@ -465,7 +465,7 @@ export function $$$4(e, t) {
     b: _b,
     a: _a3
   } = t;
-  return xN(r, _r3) && xN(g, _g) && xN(b, _b) && xN(_a2, _a3);
+  return nearlyEqual(r, _r3) && nearlyEqual(g, _g) && nearlyEqual(b, _b) && nearlyEqual(_a2, _a3);
 }
 export function $$X0(e, t) {
   return !!e && !!t && e.length === t.length && e.every((e, r) => $$$4(e, t[r]));

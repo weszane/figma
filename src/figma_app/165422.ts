@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useSelector } from "../vendor/514228";
 import { J } from "../905/614223";
-import { Oin } from "../figma_app/763686";
+import { UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -55,19 +55,19 @@ export function $$R1() {
 }
 export function $$L2(e) {
   switch (e.progressBarMode) {
-    case Oin.KEEP_UI:
+    case UIVisibilitySetting.KEEP_UI:
       return jsx(P, {
         progressBarType: e.progressBarType,
         left: e.left
       });
-    case Oin.HIDE_UI:
-    case Oin.ON_AND_LOCKED:
+    case UIVisibilitySetting.HIDE_UI:
+    case UIVisibilitySetting.ON_AND_LOCKED:
       return jsx(k, {
         editorType: e.editorType,
         isViewer: e.isViewer,
         shouldNotOverflow: e.shouldNotOverflow
       });
-    case Oin.OFF:
+    case UIVisibilitySetting.OFF:
       return jsx(Fragment, {});
   }
 }

@@ -11,7 +11,7 @@ import { B as _$$B } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { JZ } from "../figma_app/696043";
 import { af } from "../figma_app/559491";
-import { to, Lo } from "../905/156213";
+import { showModalHandler, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { yQ, bh } from "../figma_app/844435";
 import { gn } from "../figma_app/86989";
@@ -20,10 +20,10 @@ import { gR } from "../figma_app/120210";
 import { Um } from "../905/848862";
 import { Kx } from "../figma_app/546509";
 import { oh } from "../905/18797";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { Vq } from "../figma_app/979658";
 import { bD, m3 } from "../figma_app/45218";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r } from "../905/319631";
 import { Cf } from "../905/504727";
 import { f as _$$f } from "../figma_app/58113";
@@ -63,7 +63,7 @@ export function $$G2(e) {
     resourceType: bD.WIDGET
   })) && !l) return jsx(_$$L, {});
   if (!l) return null;
-  let Z = uF(l);
+  let Z = getPluginVersion(l);
   return jsxs(fu, {
     name: "detail",
     properties: {
@@ -114,7 +114,7 @@ export function $$G2(e) {
       propagateCloseClick: !0,
       children: [j?.error || G ? jsx(c$, {
         onClick: () => {
-          j && j.error ? w(to({
+          j && j.error ? w(showModalHandler({
             type: _$$r,
             data: {
               error: j.error,
@@ -122,7 +122,7 @@ export function $$G2(e) {
               resourceType: bD.WIDGET
             },
             showModalsBeneath: !0
-          })) : w(to({
+          })) : w(showModalHandler({
             type: $$V0,
             data: {
               dispatch: w
@@ -157,7 +157,7 @@ export function $$G2(e) {
     })]
   });
 }
-let $$V0 = Ju(function ({
+let $$V0 = registerModal(function ({
   dispatch: e
 }) {
   return jsx(yX, {
@@ -172,12 +172,12 @@ let $$V0 = Ju(function ({
       e(JZ({
         resourceType: "widget"
       }));
-      e(Lo());
+      e(popModalStack());
     },
     popStack: !0,
     size: "small"
   });
-}, "FigjamPublishedDevelopmentWidgetErrorModal", ZU.YES);
+}, "FigjamPublishedDevelopmentWidgetErrorModal", ModalSupportsBackground.YES);
 let $$H1 = "DROPDOWN_TYPE_WIDGET_DETAIL_SUBMENU";
 export const ak = $$V0;
 export const cH = $$H1;

@@ -1,9 +1,9 @@
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { mg, atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { Wh } from "../figma_app/615482";
 import { SG } from "../905/508457";
-SG(() => Ez5.cmsState().bindingCollectionId);
-let o = SG(() => Ez5.cmsState().bindingFieldSchema);
+SG(() => AppStateTsApi.cmsState().bindingCollectionId);
+let o = SG(() => AppStateTsApi.cmsState().bindingFieldSchema);
 let $$l2 = mg(o, e => e?.id);
 let $$d4 = Wh(() => atom(null));
 let $$c7 = atom(new Set());

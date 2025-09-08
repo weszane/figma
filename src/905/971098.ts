@@ -1,11 +1,11 @@
 import { n as _$$n } from "../905/347702";
-import { XJn } from "../figma_app/763686";
+import { FirstDraftHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tS } from "../figma_app/516028";
 import { M4, IT } from "../905/713695";
 import { Gh } from "../figma_app/707567";
 export function $$l2(e) {
-  let t = XJn.getLocalDesignSystemKits();
+  let t = FirstDraftHelpers.getLocalDesignSystemKits();
   let i = [];
   for (let n of t) i.push({
     fileKey: e,

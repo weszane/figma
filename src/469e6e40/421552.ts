@@ -23,7 +23,7 @@ import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
 import { m as _$$m } from "../469e6e40/248185";
 import { K as _$$K } from "../905/628118";
-import { Lo, to as _$$to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { cX } from "../figma_app/12491";
 import { S0 } from "../905/863795";
 import { E as _$$E2 } from "../905/511388";
@@ -41,8 +41,8 @@ import { qq, TG } from "../905/72677";
 import { Hj, A3, tD, FO } from "../905/682977";
 import { fP, mc } from "../905/691059";
 import { K as _$$K2 } from "../905/443068";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { S as _$$S2 } from "../905/711470";
 import { A as _$$A } from "../905/251970";
 import { $z } from "../figma_app/617427";
@@ -57,7 +57,7 @@ import { fu } from "../figma_app/831799";
 import { wJ } from "../figma_app/630951";
 import { iZ } from "../905/372672";
 import { Y as _$$Y2 } from "../905/465068";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { X as _$$X, U as _$$U } from "../905/77000";
 import { Y as _$$Y3 } from "../905/806400";
@@ -212,9 +212,9 @@ function X(e) {
                 })
               }), jsx("fieldset", {
                 "aria-labelledby": l,
-                children: jsx(_$$S, {
+                children: jsx(Checkbox, {
                   checked: enabledFilterIds.has($$tp0),
-                  label: jsx(_$$J, {
+                  label: jsx(Label, {
                     children: jsx(_$$E, {
                       fontWeight: "semi-bold",
                       children: getI18nString("resources_tab.libraries.connected_projects")
@@ -240,8 +240,8 @@ function X(e) {
                 })
               }), jsx("fieldset", {
                 "aria-labelledby": o,
-                children: filters.map(e => jsx(_$$S, {
-                  label: jsx(_$$J, {
+                children: filters.map(e => jsx(Checkbox, {
+                  label: jsx(Label, {
                     children: jsx(_$$E, {
                       children: e.name
                     })
@@ -929,11 +929,11 @@ function e9({
     }), l ? jsx("span", {
       "data-onboarding-key": e5,
       className: "library_subscription_settings--checkboxesContainer--emVQ1",
-      children: e2().map(e => jsx(_$$S, {
+      children: e2().map(e => jsx(Checkbox, {
         checked: B(e),
         onChange: () => G(e),
         disabled: F,
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: e6(e)
         })
       }, e))
@@ -1152,7 +1152,7 @@ let tr = function ({
     })
   });
 };
-let td = Ju(function ({
+let td = registerModal(function ({
   libraryResourceId: e
 }) {
   let t = useDispatch();
@@ -1175,7 +1175,7 @@ let td = Ju(function ({
   let u = useMemo(() => o ? c.transform(gi) : d.transform(Ti), [d, c, o]);
   let m = u.data?.library;
   let p = u.data?.org;
-  let g = useCallback(() => t(Lo()), [t]);
+  let g = useCallback(() => t(popModalStack()), [t]);
   useEffect(() => {
     "errors" !== u.status && ("loaded" !== u.status || m && p) || (t(_$$F2.enqueue({
       error: !0,
@@ -1518,7 +1518,7 @@ export function $$tx1(e) {
   };
   let eh = e => {
     let t = Nf(e) ? e.library_file_key : e.hub_file_id;
-    t && H(_$$to({
+    t && H(showModalHandler({
       type: td,
       data: {
         libraryResourceId: t

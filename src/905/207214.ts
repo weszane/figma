@@ -1,19 +1,19 @@
 import { d as _$$d } from "../905/758967";
-import { lu } from "../figma_app/84367";
+import { subscribeObservable } from "../figma_app/84367";
 import { jsx } from "react/jsx-runtime";
 import { Vm, ks } from "../figma_app/838407";
 function a(e) {
-  return function(t) {
+  return function (t) {
     return t < .5 ? (t / 2 ** (e - 1)) ** (1 / e) : 1 - (2 - 2 * t) ** (1 / e) / 2;
   };
 }
 function s(e) {
-  return function(t) {
+  return function (t) {
     return t ** (1 / e);
   };
 }
 function o(e) {
-  return function(t) {
+  return function (t) {
     return 1 - (1 - t) ** (1 / e);
   };
 }
@@ -117,7 +117,7 @@ class m {
     this.animateIn = this.animateIn.bind(this);
     this.animateOut = this.animateOut.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.resolve = () => { };
+    this.resolve = () => {};
     this.promise = new Promise(e => this.resolve = e);
   }
   animateIn(e) {
@@ -151,7 +151,7 @@ class m {
       let {
         cancel,
         animationFinish
-      } = function(e) {
+      } = function (e) {
         let t = Array.from(e.keys());
         let i = [];
         let n = !1;
@@ -162,7 +162,7 @@ class m {
           let l = void 0 !== s ? s - a : o.reduce((e, t) => Math.max(e, t.duration), 0);
           let d = () => Promise.all([new Promise(e => setTimeout(e, l)), ...o.map(e => {
             n || e.exec();
-          })]).then(() => { });
+          })]).then(() => {});
           i.push(d);
         }
         async function r() {
@@ -171,12 +171,12 @@ class m {
         }
         return {
           animationFinish: r(),
-          cancel: function() {
+          cancel: function () {
             n = !0;
             i = [];
           }
         };
-      }(function(e, t, i) {
+      }(function (e, t, i) {
         let n = new Map();
         let r = Array.from(e.keys());
         let a = r[r.length - 1];
@@ -200,8 +200,8 @@ class m {
           timing
         } = t;
         let a = t.start;
-        for (let t of animations) (function(t) {
-          if (t.start = a, "ANIMATION_STACK" === t.type) e(t, i); else {
+        for (let t of animations) (function (t) {
+          if (t.start = a, "ANIMATION_STACK" === t.type) e(t, i);else {
             let e = i.get(t.start) ?? [];
             i.set(t.start, e);
             e.push(t);
@@ -296,7 +296,7 @@ export function $$g0(e, t) {
     });
     i.cancel();
   }
-  lu(_$$d().activeCanvasCurrentZoom, {
+  subscribeObservable(_$$d().activeCanvasCurrentZoom, {
     onChangeImmediate: i.cancel
   });
   h.forEach(e => {
@@ -307,4 +307,4 @@ export function $$g0(e, t) {
   });
   return i.animate();
 }
-export const z = $$g0; 
+export const z = $$g0;

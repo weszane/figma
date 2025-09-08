@@ -11,7 +11,7 @@ import { on } from "../905/420347";
 import { IT, M4 } from "../905/713695";
 import { H as _$$H } from "../905/216861";
 import { Yu, Tb, ZA } from "../figma_app/633080";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { l as _$$l } from "../905/716947";
@@ -414,7 +414,7 @@ function es(e) {
 let el = "figjam_library_modal--slidingPane--Ex7gt sliding_pane--slidingPane--6OmDU";
 let ed = "figjam_library_modal--slidingPaneLeft--uAaog sliding_pane--slidingPaneLeft--Wrfdy sliding_pane--slidingPane--6OmDU";
 let $$ec1 = "FIGJAM_LIBRARY_MODAL";
-let $$eu0 = Ju(function (e) {
+let $$eu0 = registerModal(function (e) {
   let t = useSelector(e => e.library);
   let i = _$$H();
   let f = hS({
@@ -459,6 +459,6 @@ let $$eu0 = Ju(function (e) {
       })]
     })
   });
-}, $$ec1, ZU.YES);
+}, $$ec1, ModalSupportsBackground.YES);
 export const Vg = $$eu0;
 export const _N = $$ec1;

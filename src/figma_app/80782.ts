@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { y1 } from "../figma_app/492908";
+import { range } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
 import { N as _$$N } from "../905/438674";
@@ -223,7 +223,7 @@ function V({
   shouldFade: e
 }) {
   return jsx(Fragment, {
-    children: y1(3).map(t => {
+    children: range(3).map(t => {
       let r = "normal";
       e && (r = 2 === t ? "lightest" : 1 === t ? "light" : "normal");
       return jsx(G, {

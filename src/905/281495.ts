@@ -1,7 +1,7 @@
 import { asyncMap } from "../figma_app/656233";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { uQ6 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ActionType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { a as _$$a, v as _$$v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -12,7 +12,7 @@ import { ds } from "../figma_app/314264";
 import { Ay as _$$Ay } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { JB } from "../905/843553";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { r8, uK, bK, oZ } from "../figma_app/178273";
 import { z8 } from "../figma_app/862289";
 let b = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH", "THIRTEENTH", "FOURTEENTH", "FIFTEENTH", "SIXTEENTH", "SEVENTEENTH", "EIGHTEENTH", "NINETEENTH", "TWENTIETH", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -41,36 +41,36 @@ let I = e => {
 };
 export function $$E6(e) {
   switch (e) {
-    case uQ6.CONTEXT_MENU:
+    case ActionType.CONTEXT_MENU:
       return "context_menu";
-    case uQ6.QUICK_ACTIONS:
+    case ActionType.QUICK_ACTIONS:
       return "quick_actions";
-    case uQ6.CREATE_COMPONENT:
+    case ActionType.CREATE_COMPONENT:
       return "create_component";
-    case uQ6.CREATE_FRAME:
+    case ActionType.CREATE_FRAME:
       return "create_frame";
-    case uQ6.DRAW_FRAME_AROUND_NODES:
+    case ActionType.DRAW_FRAME_AROUND_NODES:
       return "draw_frame_around_nodes";
-    case uQ6.STACK_SELECTION:
+    case ActionType.STACK_SELECTION:
       return "stack_selection";
-    case uQ6.FIRST_DRAFT_LINT:
+    case ActionType.FIRST_DRAFT_LINT:
       return "First Draft Lint";
-    case uQ6.EXPORT_FRAME:
+    case ActionType.EXPORT_FRAME:
       return "export_frame";
-    case uQ6.EXPORT_PICKER:
+    case ActionType.EXPORT_PICKER:
       return "export_picker";
-    case uQ6.MAGIC_LINK:
+    case ActionType.MAGIC_LINK:
       return "magic-link";
-    case uQ6.READY_FOR_DEV:
+    case ActionType.READY_FOR_DEV:
       return "ready_for_dev";
-    case uQ6.LAYERS_PANEL_ACTION_ROW:
+    case ActionType.LAYERS_PANEL_ACTION_ROW:
       return "layers_panel_action_row";
-    case uQ6.LAYERS_PANEL_OVERFLOW_MENU:
+    case ActionType.LAYERS_PANEL_OVERFLOW_MENU:
       return "layers_panel_overflow_menu";
   }
 }
 var x = (e => (e[e.ALL = 0] = "ALL", e[e.TOP_LEVEL = 1] = "TOP_LEVEL", e))(x || {});
-let S = new Set([uQ6.CREATE_COMPONENT, uQ6.CREATE_FRAME, uQ6.DRAW_FRAME_AROUND_NODES, uQ6.STACK_SELECTION, uQ6.EXPORT_FRAME, uQ6.EXPORT_PICKER]);
+let S = new Set([ActionType.CREATE_COMPONENT, ActionType.CREATE_FRAME, ActionType.DRAW_FRAME_AROUND_NODES, ActionType.STACK_SELECTION, ActionType.EXPORT_FRAME, ActionType.EXPORT_PICKER]);
 export class $$w2 extends JB {
   constructor() {
     super(!1);
@@ -137,7 +137,7 @@ export function $$O5(e, t, i = !1) {
 }
 export let $$D0 = 500;
 function L(e) {
-  l7.ai("rename-layers", () => {
+  permissionScopeHandler.ai("rename-layers", () => {
     for (let [t, {
       name: i,
       autoRename: n
@@ -164,7 +164,7 @@ export let $$F4 = async ({
   let j = null;
   let U = debugState.getState();
   let B = U.openFile?.key;
-  let V = source === uQ6.CREATE_COMPONENT;
+  let V = source === ActionType.CREATE_COMPONENT;
   let G = $$E6(source);
   let z = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   if (customNodeSelection) {
@@ -360,7 +360,7 @@ export let $$F4 = async ({
                 name: node.name,
                 autoRename: node.autoRename
               };
-              l7.ai("rename-layers", () => {
+              permissionScopeHandler.ai("rename-layers", () => {
                 node.name = i;
               });
               Z.set(node.guid, r);
@@ -396,11 +396,11 @@ export let $$F4 = async ({
       source: G,
       clientLifecycleId: f
     });
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
   } catch (e) {
     oZ();
     L(Z);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     reportError(_$$e.AI_PRODUCTIVITY, e, {
       extra: {
         numItemsTotal: W,

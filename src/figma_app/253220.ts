@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { BrowserInfo } from "../figma_app/778880";
 import { uE } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { oi } from "../figma_app/598952";
 import { debugState } from "../905/407919";
@@ -50,10 +50,10 @@ export function $$b3(e) {
   debugState.getState().isFullscreenDocumentLoaded && I(E(e));
 }
 function T(e) {
-  Y5.triggerAction(e ? "set-scroll-wheel-zoom-enabled" : "set-scroll-wheel-zoom-disabled");
+  fullscreenValue.triggerAction(e ? "set-scroll-wheel-zoom-enabled" : "set-scroll-wheel-zoom-disabled");
 }
 function I(e) {
-  Y5.triggerAction(e ? "set-right-click-pan-enabled" : "set-right-click-pan-disabled");
+  fullscreenValue.triggerAction(e ? "set-right-click-pan-enabled" : "set-right-click-pan-disabled");
 }
 export function $$S0() {
   return [{

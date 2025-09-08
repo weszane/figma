@@ -4,7 +4,7 @@ import { d as _$$d } from "../905/976845";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/487602";
-import { V4z, _0v, rrT } from "../figma_app/763686";
+import { TransformModifierBindingsCpp, Axis, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
@@ -18,8 +18,8 @@ import { getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { ey as _$$ey } from "../figma_app/451499";
 import { Dc } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
@@ -36,7 +36,7 @@ import { l6, c$ } from "../905/794875";
 import { Point } from "../905/736624";
 import { Ao } from "../905/748636";
 import { bL, l9, mc, c$ as _$$c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { o as _$$o } from "../905/821217";
 import { bL as _$$bL, RT, c$ as _$$c$2 } from "../905/867927";
 import { q as _$$q } from "../905/932270";
@@ -93,7 +93,7 @@ function X(e) {
     onChange: t => e.onUnitsChange(t, zk.YES),
     children: [jsx(l9, {
       width: "fill",
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: getI18nString("properties_panel.transform_modifiers.repeat.units_label")
       }),
       disabled: e.disabled
@@ -252,8 +252,8 @@ function ee(e) {
       },
       value: e.transformModifier.offset?.x ?? 0,
       onUnitsChange: (t, i) => {
-        if (t !== e.transformModifier.unitType && V4z) {
-          let n = V4z.getOffsetForUnitChange(e.transformModifierIndex, e.transformModifier.offset?.x || 0, "RELATIVE" === t ? 1 : 0, "X" === e.transformModifier.axis ? _0v.X : _0v.Y);
+        if (t !== e.transformModifier.unitType && TransformModifierBindingsCpp) {
+          let n = TransformModifierBindingsCpp.getOffsetForUnitChange(e.transformModifierIndex, e.transformModifier.offset?.x || 0, "RELATIVE" === t ? 1 : 0, "X" === e.transformModifier.axis ? Axis.X : Axis.Y);
           let r = {
             ...e.transformModifier,
             unitType: t,
@@ -338,7 +338,7 @@ function er(e) {
     initialPosition: i,
     onClose: () => {
       e.dispatch(XE());
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     },
     recordingKey: Pt(e, "modal"),
     children: function (e, t) {
@@ -465,9 +465,9 @@ let eO = _$$b();
 export class $$eD0 extends PureComponent {
   constructor() {
     super(...arguments);
-    this.transformModifiersList = xx(e => _W(e, []).map(e_));
+    this.transformModifiersList = xx(e => valueOrFallback(e, []).map(e_));
     this.onTransformModifiersChange = (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         transformModifiers: e
       }, {
         shouldCommit: t
@@ -497,7 +497,7 @@ export class $$eD0 extends PureComponent {
           pickerShown: this.props.pickerShown,
           propertyList: e,
           recordingKey: Pt(this.props, "transformModifiersList"),
-          selectedPropertyType: rrT.TRANSFORM_MODIFIER,
+          selectedPropertyType: NodePropertyCategory.TRANSFORM_MODIFIER,
           smallNudgeAmount: this.props.smallNudgeAmount
         })
       })
@@ -522,10 +522,10 @@ function eL(e) {
   } = e;
   let S = debugState.getState().selectedView;
   let T = Dc(S.editorType);
-  let k = _W(propertyList, []);
+  let k = valueOrFallback(propertyList, []);
   let R = useCallback(() => {
     atomStoreManager.set(eO, k.length);
-    Y5.triggerActionInUserEditScope("add-transform-modifier-to-selection", {
+    fullscreenValue.triggerActionInUserEditScope("add-transform-modifier-to-selection", {
       source: "panel"
     });
     analyticsEventManager.trackDefinedEvent("illustration.web_transform_add_to_layer", {
@@ -536,11 +536,11 @@ function eL(e) {
   let P = useCallback(e => {
     let t = k[e]?.type;
     let i = k.filter((t, i) => i !== e);
-    0 === i.length ? Y5.triggerActionInUserEditScope("ungroup-selection", {
+    0 === i.length ? fullscreenValue.triggerActionInUserEditScope("ungroup-selection", {
       source: "panel"
     }) : onChange(i);
     dispatch(XE());
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
     analyticsEventManager.trackDefinedEvent("illustration.web_transform_delete_from_layer", {
       transformType: t,
       productType: T
@@ -577,7 +577,7 @@ function eL(e) {
     productType: T,
     recordingKey: Pt(F, r),
     selected: a,
-    singletonRow: _W(propertyList, []).length <= 1,
+    singletonRow: valueOrFallback(propertyList, []).length <= 1,
     smallNudgeAmount,
     transformModifier: e,
     useLargePreviewRows
@@ -714,12 +714,12 @@ function eB(e) {
   let ec = useCallback(e => {
     if (e && e.stopPropagation(), Z) {
       dispatch(XE());
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     } else {
       let e = cn(Q.current);
-      Y5.updateAppModel({
+      fullscreenValue.updateAppModel({
         currentSelectedProperty: {
-          type: rrT.TRANSFORM_MODIFIER,
+          type: NodePropertyCategory.TRANSFORM_MODIFIER,
           indices: [index]
         }
       });

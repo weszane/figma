@@ -19,7 +19,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F } from "../figma_app/482495";
 import { Ib } from "../905/129884";
 import { Yh } from "../figma_app/357047";
@@ -416,7 +416,7 @@ let es = memo(function ({
         eventName: "reset",
         source: t.source
       });
-      Y5.commit();
+      fullscreenValue.commit();
       return;
     }
     enqueueRun({

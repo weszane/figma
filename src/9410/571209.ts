@@ -6,7 +6,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { wm } from "../905/19536";
 import { parsePxNumber } from "../figma_app/783094";
 import { uc } from "../905/763714";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { M } from "../905/512402";
 import { lK } from "../figma_app/740163";
 import { ui3RulerMargin } from "../figma_app/786175";
@@ -121,8 +121,8 @@ export function $$E0(e, t = 20) {
   return useCallback((e, r, n) => function (e, t, i, r) {
     let n = function (e, t) {
       if (t.containsIncludingBoundary(e)) return e;
-      let i = e.width() <= t.width() ? qE(e.left(), t.left(), t.right() - e.width()) : e.left();
-      let r = e.height() <= t.height() ? qE(e.top(), t.top(), t.bottom() - e.height()) : e.top();
+      let i = e.width() <= t.width() ? clamp(e.left(), t.left(), t.right() - e.width()) : e.left();
+      let r = e.height() <= t.height() ? clamp(e.top(), t.top(), t.bottom() - e.height()) : e.top();
       return new _$$r(new M(i, r), e.size);
     }(e, t);
     let a = (() => {

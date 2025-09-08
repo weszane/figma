@@ -12,18 +12,18 @@ import { k as _$$k2 } from "../905/582200";
 import { UK } from "../figma_app/740163";
 import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852050";
 import { BK, Um } from "../905/848862";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { zy } from "../figma_app/915202";
 import { GI, Fq, s5, U$ } from "../figma_app/633080";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { P as _$$P } from "../905/201667";
 import { throwTypeError } from "../figma_app/465776";
 import { t } from "../905/150656";
 import { bL, _L } from "../905/911410";
 import { vo, Y9, r1, nB } from "../figma_app/272243";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J, h as _$$h } from "../905/270045";
-import { y0x, rXF, Z_n, CWU, j0r, kR6 } from "../figma_app/763686";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
+import { PlatformType, VariableResolvedDataType, VariableDataType, VariablesBindings, PropertyScope, ColumnInteraction } from "../figma_app/763686";
 import k from "classnames";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { logError } from "../905/714362";
@@ -52,14 +52,14 @@ import { N3, tU as _$$tU, OI, hO } from "../905/616572";
 import { $d, zG, BT } from "../905/901822";
 import { P as _$$P3 } from "../905/884252";
 import { uC, z7, gX, ic as _$$ic, oR, Z_, r$, _h, q7 } from "../905/831801";
-import { l7 } from "../905/189185";
-import { fn, sH } from "../905/871411";
+import { permissionScopeHandler } from "../905/189185";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { useSessionStorageSync, getSessionStorage, useLocalStorageSync } from "../905/657224";
 import { XE } from "../figma_app/91703";
 import { Yf } from "../figma_app/933328";
-import { Lo, to as _$$to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B } from "../905/330741";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { rh } from "../905/309735";
 import { g as _$$g, s as _$$s } from "../905/578436";
 import { RL, Ot } from "../905/850476";
@@ -76,7 +76,7 @@ import { E as _$$E } from "../905/632989";
 import { k as _$$k3 } from "../905/44647";
 import { O as _$$O2 } from "../905/969533";
 import { toggleElement } from "../figma_app/656233";
-import { y1, qE } from "../figma_app/492908";
+import { range, clamp } from "../figma_app/492908";
 import e4 from "../vendor/626715";
 import { Fo } from "../905/63728";
 import { D8 } from "../905/511649";
@@ -160,7 +160,7 @@ function K({
     }) {
       return jsx(c$, {
         disabled: t.hasOwnProperty(e),
-        recordingKey: Pt(i, y0x[e].toLowerCase()),
+        recordingKey: Pt(i, PlatformType[e].toLowerCase()),
         onClick: () => r(e),
         children: lo(e)
       }, e);
@@ -181,26 +181,26 @@ function Y({
     resolvedType: i
   }) {
     switch (e) {
-      case y0x.ANDROID:
+      case PlatformType.ANDROID:
         return function ({
           variableName: e,
           resolvedType: t
         }) {
           switch (t) {
-            case rXF.FLOAT:
-            case rXF.BOOLEAN:
+            case VariableResolvedDataType.FLOAT:
+            case VariableResolvedDataType.BOOLEAN:
               return jsxs(Fragment, {
                 children: [".property(", jsx(q, {
                   children: e
                 }), ")"]
               });
-            case rXF.COLOR:
+            case VariableResolvedDataType.COLOR:
               return jsxs(Fragment, {
                 children: [".property(color = ", jsx(q, {
                   children: e
                 }), ")"]
               });
-            case rXF.STRING:
+            case VariableResolvedDataType.STRING:
               return jsxs(Fragment, {
                 children: ["Text(text = ", jsx(q, {
                   children: e
@@ -213,21 +213,21 @@ function Y({
           variableName: t,
           resolvedType: i
         });
-      case y0x.WEB:
+      case PlatformType.WEB:
         return function ({
           variableName: e,
           resolvedType: t
         }) {
           switch (t) {
-            case rXF.FLOAT:
-            case rXF.BOOLEAN:
-            case rXF.COLOR:
+            case VariableResolvedDataType.FLOAT:
+            case VariableResolvedDataType.BOOLEAN:
+            case VariableResolvedDataType.COLOR:
               return jsxs(Fragment, {
                 children: ["property: ", jsx(q, {
                   children: e
                 }), ";"]
               });
-            case rXF.STRING:
+            case VariableResolvedDataType.STRING:
               return jsxs(Fragment, {
                 children: ["content: ", jsx(q, {
                   children: e
@@ -240,21 +240,21 @@ function Y({
           variableName: t,
           resolvedType: i
         });
-      case y0x.iOS:
+      case PlatformType.iOS:
         return function ({
           variableName: e,
           resolvedType: t
         }) {
           switch (t) {
-            case rXF.FLOAT:
-            case rXF.BOOLEAN:
-            case rXF.COLOR:
+            case VariableResolvedDataType.FLOAT:
+            case VariableResolvedDataType.BOOLEAN:
+            case VariableResolvedDataType.COLOR:
               return jsxs(Fragment, {
                 children: [".property(", jsx(q, {
                   children: e
                 }), ")"]
               });
-            case rXF.STRING:
+            case VariableResolvedDataType.STRING:
               return jsxs(Fragment, {
                 children: ["Text(", jsx(q, {
                   children: e
@@ -334,7 +334,7 @@ function J({
         initialValue: e[r] ?? i,
         resolvedType: a,
         autoFocus: t === r,
-        recordingKey: Pt(o, y0x[r].toLowerCase()),
+        recordingKey: Pt(o, PlatformType[r].toLowerCase()),
         onUpdateToken: c,
         onRemoveTokenClick: u ? () => u(r) : null
       }, r) : null;
@@ -512,15 +512,15 @@ function ed(e) {
   });
   let c = e.variable.modeValues[e.modeID];
   let u = useRef(null);
-  let m = getFeatureFlags().ds_reactive_variables && (variable.modeValues[modeID].type === Z_n.EXPRESSION || variable.modeValues[modeID].type === Z_n.ALIAS) && variable.resolvedType !== rXF.COLOR;
+  let m = getFeatureFlags().ds_reactive_variables && (variable.modeValues[modeID].type === VariableDataType.EXPRESSION || variable.modeValues[modeID].type === VariableDataType.ALIAS) && variable.resolvedType !== VariableResolvedDataType.COLOR;
   let [h, g] = useState(!1);
   let [f, _] = useState(!1);
   let A = () => {
     g(!0);
     _(!0);
   };
-  let y = c && [Z_n.ALIAS, Z_n.EXPRESSION, Z_n.COLOR].includes(c.type);
-  let b = c && [Z_n.ALIAS, Z_n.EXPRESSION].includes(c.type) && !!e.detachAlias;
+  let y = c && [VariableDataType.ALIAS, VariableDataType.EXPRESSION, VariableDataType.COLOR].includes(c.type);
+  let b = c && [VariableDataType.ALIAS, VariableDataType.EXPRESSION].includes(c.type) && !!e.detachAlias;
   t = getFeatureFlags().ds_reactive_variables && (m || f) ? jsx(KN, {
     resolvedType: variable.resolvedType,
     targetVariableData: variable.modeValues[modeID],
@@ -582,7 +582,7 @@ function ed(e) {
   });
 }
 let ec = "EditVariableModal";
-let eu = Ju(function (e) {
+let eu = registerModal(function (e) {
   let {
     modalID,
     initialPosition,
@@ -805,14 +805,14 @@ function em(e) {
       })
     }), jsx("div", {
       className: Z,
-      children: jsx(_$$S, {
+      children: jsx(Checkbox, {
         checked: !variable.isPublishable,
         disabled: !setVariableIsPublishable,
         onChange: () => {
           setVariableIsPublishable?.([variable], !variable.isPublishable);
         },
         recordingKey: Pt(e.recordingKey, "hideFromPublishing.checkBox"),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: getI18nString("variables.edit_modal.hide_from_publishing")
         })
       })
@@ -838,13 +838,13 @@ function eh({
       recordingKey: Pt(s, "scopesPanel")
     }), jsx("div", {
       className: Z,
-      children: jsx(_$$S, {
+      children: jsx(Checkbox, {
         disabled: !i,
         checked: !o,
         mixed: null === o,
         onChange: () => i?.(e, !(o ?? !0)),
         recordingKey: Pt(s, "hideFromPublishing.checkBox"),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: getI18nString("variables.edit_modal.hide_from_publishing")
         })
       })
@@ -877,7 +877,7 @@ function eg(e) {
         }), jsx("div", {
           className: R()({
             [Q]: !0,
-            "edit_variable_modal--modeColorAliasValue--50rTC": l?.type === Z_n.ALIAS && l?.resolvedType === rXF.COLOR
+            "edit_variable_modal--modeColorAliasValue--50rTC": l?.type === VariableDataType.ALIAS && l?.resolvedType === VariableResolvedDataType.COLOR
           }),
           children: jsx(ed, {
             type: _$$$.FORM,
@@ -913,7 +913,7 @@ function ef({
       variables: r,
       variableType: i,
       setVariableScope: e,
-      recordingKey: Pt(t, rXF[i])
+      recordingKey: Pt(t, VariableResolvedDataType[i])
     }, i));
   }
   return jsx(Fragment, {
@@ -929,7 +929,7 @@ function e_(e) {
   } = e;
   let o = useMemo(() => {
     let e = variables.map(e => e.node_id);
-    return CWU?.getVariableScopes(e) ?? {};
+    return VariablesBindings?.getVariableScopes(e) ?? {};
   }, [variables]);
   let l = useMemo(() => Mm(variableType), [variableType]);
   return jsxs("div", {
@@ -953,7 +953,7 @@ function e_(e) {
           });
         case my.SCOPE:
           let i = e.scope;
-          let r = o[j0r[i]];
+          let r = o[PropertyScope[i]];
           return function ({
             scope: e,
             name: i,
@@ -971,15 +971,15 @@ function e_(e) {
                   "edit_variable_modal--scopeRowLabelOnly--sOZpl": !o,
                   "edit_variable_modal--scopeRowIndented--OFqqa": l
                 }),
-                children: [jsx(_$$S, {
+                children: [jsx(Checkbox, {
                   checked: c,
                   mixed: u,
                   disabled: !setVariableScope,
                   onChange: () => {
                     setVariableScope?.(variables, e, u || !c);
                   },
-                  recordingKey: Pt(recordingKey, j0r[e]),
-                  label: jsx(_$$h, {
+                  recordingKey: Pt(recordingKey, PropertyScope[e]),
+                  label: jsx(HiddenLabel, {
                     children: i
                   })
                 }), o ? jsxs("div", {
@@ -1011,24 +1011,24 @@ function eA(e) {
     variableType
   } = e;
   switch (variableType) {
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       t = renderI18nText("variables.scopes.color_scoping_header");
       break;
-    case rXF.FLOAT:
+    case VariableResolvedDataType.FLOAT:
       t = renderI18nText("variables.scopes.number_scoping_header");
       break;
-    case rXF.STRING:
+    case VariableResolvedDataType.STRING:
       t = renderI18nText("variables.scopes.string_scoping_header");
       break;
-    case rXF.BOOLEAN:
-    case rXF.MAP:
-    case rXF.SYMBOL_ID:
-    case rXF.FONT_STYLE:
-    case rXF.TEXT_DATA:
-    case rXF.IMAGE:
-    case rXF.LINK:
-    case rXF.JS_RUNTIME_ALIAS:
-    case rXF.SLOT_CONTENT_ID:
+    case VariableResolvedDataType.BOOLEAN:
+    case VariableResolvedDataType.MAP:
+    case VariableResolvedDataType.SYMBOL_ID:
+    case VariableResolvedDataType.FONT_STYLE:
+    case VariableResolvedDataType.TEXT_DATA:
+    case VariableResolvedDataType.IMAGE:
+    case VariableResolvedDataType.LINK:
+    case VariableResolvedDataType.JS_RUNTIME_ALIAS:
+    case VariableResolvedDataType.SLOT_CONTENT_ID:
       logError("variables", "Unsupported variable type");
       return null;
     default:
@@ -1088,13 +1088,13 @@ function eZ(e) {
     e.onCreateGroup?.(t, i);
   }, [e, i]), !!e.onCreateGroup && Fq(i));
   let o = _$$rN(useCallback(t => {
-    l7.user("delete-variables", () => {
+    permissionScopeHandler.user("delete-variables", () => {
       t.forEach(e => {
-        CWU.deleteVariable(e.node_id);
+        VariablesBindings.deleteVariable(e.node_id);
       });
       e.onDeleteVariables?.(t);
     });
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
   }, [e]), !!e.onDeleteVariables);
   let l = useRef(e.contextMenuData.cellElement);
   let d = _$$rN(useCallback(t => {
@@ -1127,7 +1127,7 @@ function eZ(e) {
   let g = _$$rN(useCallback(() => {
     let t = [];
     if (e.contextMenuData.groupNames.map(t => cv(e.allVariables, t)).reduce((e, t) => e + t) + e.allVariables.length > RL) {
-      Y5.showVisualBellLocalized("variable_limit_in_collection_reached", "variables.variable_limit_in_collection_reached", {
+      fullscreenValue.showVisualBellLocalized("variable_limit_in_collection_reached", "variables.variable_limit_in_collection_reached", {
         variableLimit: RL
       }, !1);
       return;
@@ -1137,15 +1137,15 @@ function eZ(e) {
       let r = om(i, n);
       t.push(r);
       let a = Qo(e.allVariables, n);
-      l7.user("duplicate-variables", () => {
+      permissionScopeHandler.user("duplicate-variables", () => {
         a.forEach(e => {
           let t = r + e.name.replace(n, "");
           i.push(t);
-          CWU.duplicateVariable(e.node_id, t);
+          VariablesBindings.duplicateVariable(e.node_id, t);
         });
       });
     });
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     e.hideContextMenu();
   }, [e]), !!(e.onCreateGroup && e.onDuplicateVariables));
   let f = _$$rN(useCallback(() => {
@@ -1251,8 +1251,8 @@ function eZ(e) {
 function eX(e) {
   let t = !e.variableOverride && e.variable.variableSetId !== e.variableSet.node_id;
   let i = e.variableOverride ? e.variableOverride?.overrideValues[e.modeID] : e.variable.modeValues[e.modeID];
-  let a = i?.type === Z_n.ALIAS;
-  let s = i?.type === Z_n.EXPRESSION;
+  let a = i?.type === VariableDataType.ALIAS;
+  let s = i?.type === VariableDataType.EXPRESSION;
   let o = getFeatureFlags().ds_reactive_variables ? (a || s) && !t : a && !t;
   let [d, c] = Gx(e.variableSet.node_id, e.variable.node_id, e.modeID, i.resolvedType);
   let u = useCallback(() => {
@@ -1312,9 +1312,9 @@ function e8(e) {
           }
           let r = 1 === n.current.length ? n.current[0] : t.current;
           let a = new Set();
-          null != i.current && (a = new Set(y1(r, i.current))).add(i.current);
+          null != i.current && (a = new Set(range(r, i.current))).add(i.current);
           i.current = e;
-          return e3()([...n.current.filter(e => !a.has(e)), ...y1(r, e), e]).sort();
+          return e3()([...n.current.filter(e => !a.has(e)), ...range(r, e), e]).sort();
         }
       default:
         throwTypeError(a);
@@ -1350,14 +1350,14 @@ function tx({
   let [u, p] = useState([]);
   let m = a.reduce((e, t, i) => (u.includes(t) && e.push(i), e), []);
   let h = useCallback((e, t, i) => {
-    l7.user("reorder-variant-prop-values", () => {
-      CWU?.reorderVariableSets(i, e);
+    permissionScopeHandler.user("reorder-variant-prop-values", () => {
+      VariablesBindings?.reorderVariableSets(i, e);
     });
   }, []);
   let f = useCallback(() => {
     let e = UO(i).map(e => e.node_id);
-    l7.user("sort-variable-collections", () => {
-      CWU?.reorderVariableSets("", e);
+    permissionScopeHandler.user("sort-variable-collections", () => {
+      VariablesBindings?.reorderVariableSets("", e);
     });
   }, [i]);
   let _ = new Point(0, 0);
@@ -2307,9 +2307,9 @@ function ie({
   }, [i, F]);
   let W = useCallback(e => {
     e.preventDefault();
-    l7.user("reorder-mode", () => {
+    permissionScopeHandler.user("reorder-mode", () => {
       let e = O4(w, N ?? "", D?.modeID ?? "", D?.position ?? "before");
-      e.indexOf(N ?? "") < I && CWU?.reorderVariableSetModes(C, N, e, kR6.DRAG_AND_DROP);
+      e.indexOf(N ?? "") < I && VariablesBindings?.reorderVariableSetModes(C, N, e, ColumnInteraction.DRAG_AND_DROP);
     });
     F(null);
     P(null);
@@ -2347,9 +2347,9 @@ function ie({
     let e = w.indexOf(i);
     if (e > 0) {
       let t = w[e - 1];
-      l7.user("reorder-mode", () => {
+      permissionScopeHandler.user("reorder-mode", () => {
         let e = O4(w, i, t ?? "", "before");
-        CWU?.reorderVariableSetModes(C, i, e, kR6.MOVE_COLUMN_LEFT);
+        VariablesBindings?.reorderVariableSetModes(C, i, e, ColumnInteraction.MOVE_COLUMN_LEFT);
       });
       R(i);
       hide();
@@ -2359,15 +2359,15 @@ function ie({
     let e = w.indexOf(i);
     if (-1 !== e && e < w.length - 1) {
       let t = w[e + 1];
-      l7.user("reorder-mode", () => {
+      permissionScopeHandler.user("reorder-mode", () => {
         let e = O4(w, i, t ?? "", "after");
-        CWU?.reorderVariableSetModes(C, i, e, kR6.MOVE_COLUMN_RIGHT);
+        VariablesBindings?.reorderVariableSetModes(C, i, e, ColumnInteraction.MOVE_COLUMN_RIGHT);
       });
       R(i);
       hide();
     }
   }, [w, i, C, hide, R]);
-  let er = _$$rN(useCallback(e => !!A?.(i, e) && (Y5.triggerAction("commit"), !0), [i, A]), !!A);
+  let er = _$$rN(useCallback(e => !!A?.(i, e) && (fullscreenValue.triggerAction("commit"), !0), [i, A]), !!A);
   let ea = _$$rN(useCallback(() => {
     h?.(i);
     hide();
@@ -2616,7 +2616,7 @@ function it({
       t && (null != i && Pf(t.name) !== i ? u?.(t.node_id, i) && a.push(t.node_id) : a.push(t.node_id));
     }
     _?.(a, n, r);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
   }, [u, _, O, I]), !!u && !!_);
   let ec = _$$x();
   let eu = yh(w.modes);
@@ -3096,7 +3096,7 @@ let iD = forwardRef((e, t) => {
     _.current && f(_.current.scrollWidth + 48);
   }, [e.query]);
   let A = {
-    width: `${qE(g, 175, 500)}px`
+    width: `${clamp(g, 175, 500)}px`
   };
   let y = e.placeholder ?? getI18nString("general.search");
   return jsxs(Fragment, {
@@ -3699,8 +3699,8 @@ function i2({
     })]
   });
 }
-export let $$i50 = Ju(function () {
-  let e = J2(UK().showGuids);
+export let $$i50 = registerModal(function () {
+  let e = getObservableOrFallback(UK().showGuids);
   let t = useSelector(e => e.modalShown?.type === eu.type);
   let {
     state: {
@@ -3777,42 +3777,42 @@ export let $$i50 = Ju(function () {
     let B = jv();
     let V = mm();
     return useMemo(() => {
-      let e = ez(() => (e, t) => l7.user("rename-variable", () => CWU.renameVariable(e, rh(t))) ? (Y5.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable", {
+      let e = ez(() => (e, t) => permissionScopeHandler.user("rename-variable", () => VariablesBindings.renameVariable(e, rh(t))) ? (fullscreenValue.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable", {
         variableID: e
       }), !1), j, eV, _);
       let r = ez(() => V.setVariableValueForMode, j, eB, _);
       let a = Ot() ? ez(() => V.setVariableOverrideForMode, j, eG, _) : null;
       let s = Ot() ? ez(() => (e, t, i) => a?.(e, t, i, null), j, eG, _) : null;
       let d = ez(() => (e, t) => {
-        let i = l7.user("delete-variable-code-syntax", () => CWU.deleteVariableCodeSyntax(e.node_id, t));
-        i && Y5.triggerAction("commit");
+        let i = permissionScopeHandler.user("delete-variable-code-syntax", () => VariablesBindings.deleteVariableCodeSyntax(e.node_id, t));
+        i && fullscreenValue.triggerAction("commit");
         return i;
       }, j, eB, _);
       let h = ez(() => (e, t, i) => {
         if (0 === i.length) return !1;
-        let n = l7.user("edit-variable-code-syntax", () => CWU.editVariableCodeSyntax(e.node_id, t, i));
-        n && Y5.triggerAction("commit");
+        let n = permissionScopeHandler.user("edit-variable-code-syntax", () => VariablesBindings.editVariableCodeSyntax(e.node_id, t, i));
+        n && fullscreenValue.triggerAction("commit");
         return n;
       }, j, eB, _);
       let g = ez(() => (e, t, i) => {
-        l7.user("edit-variable-scopes", () => {
+        permissionScopeHandler.user("edit-variable-scopes", () => {
           let n = e.map(e => e.node_id);
-          return n.length > 0 && CWU.setVariableScopesBulk(n, t, i);
-        }) && Y5.triggerAction("commit");
+          return n.length > 0 && VariablesBindings.setVariableScopesBulk(n, t, i);
+        }) && fullscreenValue.triggerAction("commit");
       }, j, eV, _);
       let f = ez(() => (e, t) => {
-        let i = l7.user("edit-variable-description", () => CWU.editVariableDescription(e.node_id, t));
-        i && Y5.triggerAction("commit");
+        let i = permissionScopeHandler.user("edit-variable-description", () => VariablesBindings.editVariableDescription(e.node_id, t));
+        i && fullscreenValue.triggerAction("commit");
         return i;
       }, j, eV, _);
       let y = ez(() => (e, t) => {
         let i = !0;
         e.forEach(e => {
-          (i = i && l7.user("toggle-publishable", () => CWU.setVariableIsPublishable(e.node_id, t))) || logError("variables", "Failed to mark variable as publishable", {
+          (i = i && permissionScopeHandler.user("toggle-publishable", () => VariablesBindings.setVariableIsPublishable(e.node_id, t))) || logError("variables", "Failed to mark variable as publishable", {
             variableId: e.node_id
           });
         });
-        i && Y5.triggerAction("commit");
+        i && fullscreenValue.triggerAction("commit");
       }, j, eV, _);
       let b = ez(() => V.detachAlias, j, eB, _);
       return {
@@ -3836,25 +3836,25 @@ export let $$i50 = Ju(function () {
           setIsSidebarOpen: M,
           createMode: ez(() => (e = "Mode") => {
             if (isNullish(u)) return !1;
-            let t = l7.user("add-variable-set-mode", () => CWU.addVariableSetMode(_$$g(_$$s(e), u.modes?.map(e => e.name) ?? []), u.node_id));
-            return !!fn(sH(t)) && (Y5.triggerAction("commit"), L(t), !0);
+            let t = permissionScopeHandler.user("add-variable-set-mode", () => VariablesBindings.addVariableSetMode(_$$g(_$$s(e), u.modes?.map(e => e.name) ?? []), u.node_id));
+            return !!isValidSessionLocalID(parseSessionLocalID(t)) && (fullscreenValue.triggerAction("commit"), L(t), !0);
           }, j, eV, _),
           duplicateMode: ez(() => (e = u?.modes?.[0]?.id, t = "Mode") => {
             if (isNullish(e) || isNullish(u)) return !1;
-            let i = l7.user("duplicate-variable-set-mode", () => CWU.duplicateVariableSetMode(u.node_id, e, _$$g(_$$s(t), u.modes?.map(e => e.name) ?? [])));
-            return !!fn(sH(i)) && (Y5.triggerAction("commit"), L(i), !0);
+            let i = permissionScopeHandler.user("duplicate-variable-set-mode", () => VariablesBindings.duplicateVariableSetMode(u.node_id, e, _$$g(_$$s(t), u.modes?.map(e => e.name) ?? [])));
+            return !!isValidSessionLocalID(parseSessionLocalID(i)) && (fullscreenValue.triggerAction("commit"), L(i), !0);
           }, j, eV, _),
           deleteMode: ez(() => e => {
             let t = u?.node_id;
-            return !!(t && l7.user("delete-variable-set-mode", () => CWU.deleteVariableSetMode(t, e))) && (Y5.triggerAction("commit"), !0);
+            return !!(t && permissionScopeHandler.user("delete-variable-set-mode", () => VariablesBindings.deleteVariableSetMode(t, e))) && (fullscreenValue.triggerAction("commit"), !0);
           }, j, eV, _),
           renameMode: ez(() => (e, t) => {
             let i = u?.node_id;
-            return !!(i && l7.user("rename-variable-set-mode", () => CWU.editVariableSetModeName(i, e, t))) && (Y5.triggerAction("commit"), !0);
+            return !!(i && permissionScopeHandler.user("rename-variable-set-mode", () => VariablesBindings.editVariableSetModeName(i, e, t))) && (fullscreenValue.triggerAction("commit"), !0);
           }, j, eV, _),
           setModeAsDefault: ez(() => e => {
             let t = u?.node_id;
-            return !!(t && l7.user("set-variable-set-mode-as-default", () => CWU.setVariableSetModeAsDefault(t, e))) && (Y5.triggerAction("commit"), !0);
+            return !!(t && permissionScopeHandler.user("set-variable-set-mode-as-default", () => VariablesBindings.setVariableSetModeAsDefault(t, e))) && (fullscreenValue.triggerAction("commit"), !0);
           }, j, eV, _),
           moveVariableToGroup: ez(({
             variableList: e
@@ -3866,7 +3866,7 @@ export let $$i50 = Ju(function () {
             let s = Qo(e, i);
             let o = rh(i + a);
             s.some(e => e.name === o) && (o = _$$g(_$$s(o), s.map(e => e.name)));
-            return l7.user("move-variable-to-group", () => CWU.renameVariable(n.node_id, o));
+            return permissionScopeHandler.user("move-variable-to-group", () => VariablesBindings.renameVariable(n.node_id, o));
           }, j, eV, _),
           moveSelectedGroupsToGroup: ez(({
             variableList: e,
@@ -3876,7 +3876,7 @@ export let $$i50 = Ju(function () {
             let n = t.filter(e => R.includes(e.name));
             if (0 === n.length) return !1;
             let r = t.find(e => e.name === i);
-            return !!r && (k(l7.user("move-variable-groups-to-group", () => function (e, t, i, n) {
+            return !!r && (k(permissionScopeHandler.user("move-variable-groups-to-group", () => function (e, t, i, n) {
               let r = new Set();
               let a = n;
               t.reverse().forEach(t => {
@@ -3885,13 +3885,13 @@ export let $$i50 = Ju(function () {
                 let o = a ? Od(a) : null;
                 n.reverse().forEach(e => {
                   let t = i.name + hF(e, s);
-                  CWU.renameVariable(e.node_id, t);
+                  VariablesBindings.renameVariable(e.node_id, t);
                   r.add(Pf(t));
-                  o && (CWU.insertVariableBetween(e.node_id, "", o?.node_id), o = e);
+                  o && (VariablesBindings.insertVariableBetween(e.node_id, "", o?.node_id), o = e);
                 });
                 a = t;
               });
-              Y5.triggerAction("commit");
+              fullscreenValue.triggerAction("commit");
               return Array.from(r);
             }(e, n, r, n[0]))), !0);
           }, j, eV, _),
@@ -3905,7 +3905,7 @@ export let $$i50 = Ju(function () {
             let o = i.filter(e => e.length > 0).map(e => a[e]).filter(Boolean);
             let {
               newGroupNames
-            } = l7.user("move-variable-groups", () => function (e, t) {
+            } = permissionScopeHandler.user("move-variable-groups", () => function (e, t) {
               let {
                 groupsToMove,
                 direction,
@@ -3922,7 +3922,7 @@ export let $$i50 = Ju(function () {
                   let a = Wx(e.name);
                   r.forEach(e => {
                     let r = t + hF(e, a);
-                    CWU.renameVariable(e.node_id, r) && (i.push(e), n.add(Pf(r)));
+                    VariablesBindings.renameVariable(e.node_id, r) && (i.push(e), n.add(Pf(r)));
                   });
                 });
                 return {
@@ -3959,7 +3959,7 @@ export let $$i50 = Ju(function () {
                   };
                 }
               })();
-              CWU.insertVariablesBetween(movedVariables.map(e => e.node_id), prevVariable?.node_id ?? "", nextVariable?.node_id ?? "");
+              VariablesBindings.insertVariablesBetween(movedVariables.map(e => e.node_id), prevVariable?.node_id ?? "", nextVariable?.node_id ?? "");
               return {
                 newGroupNames: _newGroupNames
               };
@@ -3976,33 +3976,33 @@ export let $$i50 = Ju(function () {
             let n = !1;
             if (!i) return n;
             let r = Qo(e, t);
-            r.length > 0 && (n = l7.user("rename-variables", () => F$(r, t, i)), Y5.triggerAction("commit"));
+            r.length > 0 && (n = permissionScopeHandler.user("rename-variables", () => F$(r, t, i)), fullscreenValue.triggerAction("commit"));
             k(R.map(e => e === t ? i : e));
             return n;
           }, j, eV, _),
           createGroup: ez(() => (e, t) => (t.forEach(t => {
-            if (!l7.user("create-variable-group", () => CWU.renameVariable(t.node_id, US(t.name, e)))) {
+            if (!permissionScopeHandler.user("create-variable-group", () => VariablesBindings.renameVariable(t.node_id, US(t.name, e)))) {
               logError("variables", "Failed to rename variable", {
                 variableID: t.node_id
               });
               return !1;
             }
-          }), k([e]), M(!0), S(t.map(e => e.node_id)), Y5.triggerAction("commit"), !0), j, eV, _),
+          }), k([e]), M(!0), S(t.map(e => e.node_id)), fullscreenValue.triggerAction("commit"), !0), j, eV, _),
           ungroup: ez(({
             variableList: e
-          }) => t => (l7.user("ungroup-variables", () => {
+          }) => t => (permissionScopeHandler.user("ungroup-variables", () => {
             t.forEach(t => {
               !function (e) {
                 e.forEach(e => {
-                  CWU.renameVariable(e.node_id, US(e.name, ""));
+                  VariablesBindings.renameVariable(e.node_id, US(e.name, ""));
                 });
               }(Qo(e, t));
             });
-          }), k(R.filter(e => !t.includes(e))), Y5.triggerAction("commit"), !0), j, eV, _),
+          }), k(R.filter(e => !t.includes(e))), fullscreenValue.triggerAction("commit"), !0), j, eV, _),
           reorderVariables: ez(() => (e, t, i) => {
             let n = t;
-            l7.user("reorder-variables", () => {
-              for (let t of e) CWU.insertVariableBetween(t, n ?? "", i ?? "") && (n = t);
+            permissionScopeHandler.user("reorder-variables", () => {
+              for (let t of e) VariablesBindings.insertVariableBetween(t, n ?? "", i ?? "") && (n = t);
             });
           }, j, eV, _),
           deleteVariables: ez(({
@@ -4023,32 +4023,32 @@ export let $$i50 = Ju(function () {
             let s = null;
             let o = e.map(e => e.name) ?? [];
             if (x.length + e.length > RL) {
-              Y5.showVisualBellLocalized("variable_limit_in_collection_reached", "variables.variable_limit_in_collection_reached", {
+              fullscreenValue.showVisualBellLocalized("variable_limit_in_collection_reached", "variables.variable_limit_in_collection_reached", {
                 variableLimit: RL
               }, !1);
               return;
             }
-            l7.user("duplicate-variables", () => {
+            permissionScopeHandler.user("duplicate-variables", () => {
               x.forEach(n => {
                 let l = e.find(e => e.node_id === n);
                 if (l) {
                   let e = _$$g(_$$s(l.name), o);
-                  s = CWU.duplicateVariable(l.node_id, e);
+                  s = VariablesBindings.duplicateVariable(l.node_id, e);
                   o.push(e);
                   qQ(s, null, Pf(l.name), t);
                   a.push(s);
-                  CWU.insertVariableBetween(s, i, r);
+                  VariablesBindings.insertVariableBetween(s, i, r);
                   i = s;
                 }
               });
             });
             O(s);
             S(a);
-            Y5.triggerAction("commit");
+            fullscreenValue.triggerAction("commit");
           }, j, eV, _),
           copySelectedVariables: ez(() => e => {
-            l7.user("copy-variables", () => {
-              CWU.copyVariables(x, e);
+            permissionScopeHandler.user("copy-variables", () => {
+              VariablesBindings.copyVariables(x, e);
             });
           }, j, eB, _),
           pasteClipboardVariables: ez(({
@@ -4066,35 +4066,35 @@ export let $$i50 = Ju(function () {
             let a = r?.node_id ?? null;
             let s = (e.find(e => e.node_id === i)?.name ?? "").split("/");
             let o = s.length > 1 ? s.slice(0, -1).join("/") + "/" : "";
-            l7.user("paste-variables-into-collection", () => {
-              CWU?.pasteVariablesIntoCollection(n, x.length > 0 ? o : null, i, a, t);
+            permissionScopeHandler.user("paste-variables-into-collection", () => {
+              VariablesBindings?.pasteVariablesIntoCollection(n, x.length > 0 ? o : null, i, a, t);
             });
-            Y5.triggerAction("commit");
+            fullscreenValue.triggerAction("commit");
           }, j, eV, _),
           setVariableValueForMode: r,
           setVariableOverrideForMode: a,
           clearVariableOverrideForMode: s,
           detachAlias: b,
           createVariableSet: ez(() => () => {
-            let e = l7.user("create-variable-set", () => U(n));
+            let e = permissionScopeHandler.user("create-variable-set", () => U(n));
             S([]);
-            Y5.triggerAction("commit");
+            fullscreenValue.triggerAction("commit");
             return e;
           }, j, eB, _),
           createVariableSetExtension: getFeatureFlags().ds_extended_collections ? ez(() => async e => {
             let t = c.find(t => t.node_id === e);
             t && (await Yf(t));
-            return l7.user("create-variable-set-extension", () => B?.(n, e)) ?? "";
+            return permissionScopeHandler.user("create-variable-set-extension", () => B?.(n, e)) ?? "";
           }, j, eB, _) : null,
-          renameVariableSet: ez(() => (e, t) => l7.user("rename-variable-set", () => CWU.editVariableSetName(e, t)) ? (Y5.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable set", {
+          renameVariableSet: ez(() => (e, t) => permissionScopeHandler.user("rename-variable-set", () => VariablesBindings.editVariableSetName(e, t)) ? (fullscreenValue.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable set", {
             variableSetID: e
           }), !1), j, eB, _),
           deleteVariableSet: ez(() => e => {
-            l7.user("delete-variable-set", () => CWU.deleteVariableSet(e));
-            Y5.triggerAction("commit");
+            permissionScopeHandler.user("delete-variable-set", () => VariablesBindings.deleteVariableSet(e));
+            fullscreenValue.triggerAction("commit");
           }, j, eB, _),
           toggleEditVariableModal(n, a) {
-            if (i?.type === ec && (t(Lo()), !n || 0 === n.length || !a)) return;
+            if (i?.type === ec && (t(popModalStack()), !n || 0 === n.length || !a)) return;
             let s = x.length > 1 ? x.join("-") : x[0];
             if (n && (i?.type !== ec || i?.data.modalID !== s)) {
               let i = {
@@ -4103,7 +4103,7 @@ export let $$i50 = Ju(function () {
                 variableIDs: n ?? [],
                 variableSetId: u?.node_id ?? "",
                 onClose: function () {
-                  t(Lo());
+                  t(popModalStack());
                   t(XE());
                   t(_$$B());
                 },
@@ -4116,7 +4116,7 @@ export let $$i50 = Ju(function () {
                 removeCodeSyntaxToken: d,
                 recordingKey: Pt("editVariableModal", n.length > 1 ? n.join("-") : n[0])
               };
-              t(_$$to({
+              t(showModalHandler({
                 type: eu,
                 data: i,
                 showModalsBeneath: !0
@@ -4424,5 +4424,5 @@ export let $$i50 = Ju(function () {
       }), jsx(Q8, {})]
     })
   });
-}, "VariablesModal", ZU.YES);
+}, "VariablesModal", ModalSupportsBackground.YES);
 export const y = $$i50;

@@ -4,7 +4,7 @@ import { createPortal } from "../vendor/944059";
 import s from "classnames";
 import { Point } from "../905/736624";
 import { lg } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { M5 } from "../figma_app/817077";
 import { dx } from "../figma_app/646357";
 import { Do, PW } from "../figma_app/633080";
@@ -20,7 +20,7 @@ export function $$_0(e) {
     let n = e.draggingResource;
     let {
       zoomScale
-    } = Y5.getViewportInfo();
+    } = fullscreenValue.getViewportInfo();
     if (t && "min_node_width" in n) return new Point(n.min_node_width, n.min_node_height).scale(zoomScale);
     if (t && "width" in n) return new Point(n.width, n.height).scale(zoomScale);
     if (!(i && b(n))) return e.draggingThumbSize;

@@ -1,4 +1,4 @@
-import { Osy } from "../figma_app/763686";
+import { SelectionPaintHelpers } from "../figma_app/763686";
 import { FN } from "../figma_app/191804";
 import { Ku } from "../figma_app/740163";
 import { q } from "../figma_app/777660";
@@ -20,9 +20,9 @@ export function $$l1({
   });
   let _ = Ku();
   let h = () => {
-    Osy.highlightOnlySamePaintInSublayers(r);
+    SelectionPaintHelpers.highlightOnlySamePaintInSublayers(r);
   };
-  let m = () => Osy.highlightOnlySamePaintInSublayers("");
+  let m = () => SelectionPaintHelpers.highlightOnlySamePaintInSublayers("");
   let {
     value,
     copyValue

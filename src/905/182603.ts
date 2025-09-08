@@ -1,4 +1,4 @@
-import { mHF } from "../figma_app/763686";
+import { LinterCppBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -409,7 +409,7 @@ export class $$m0 {
       let e = this._groupState.nodeSimilarityRelationships.get(t);
       if (e && e.has(i)) continue;
       await this.checkYield();
-      let a = !!mHF?.areFramesSimilar(t, i);
+      let a = !!LinterCppBindings?.areFramesSimilar(t, i);
       if (this._groupState.updateNodeSimilarityRelationships(t, i, a), a) {
         r.add(i);
         r.add(t);

@@ -3,11 +3,11 @@ import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { E } from "../905/632989";
 import { M } from "../905/850310";
-import { M as _$$M } from "../905/581092";
+import { useExposedRef } from "../905/581092";
 import { w } from "../905/955293";
 import { h as _$$h } from "../905/994594";
 import { p as _$$p } from "../905/185998";
-import { Ju, wo } from "../905/955878";
+import { preventAndStopEvent, preventEvent } from "../905/955878";
 let m = {
   md: void 0,
   lg: "search-input__lg__IYUK0"
@@ -23,7 +23,7 @@ let g = forwardRef(({
   variant: r = "default",
   ...s
 }, o) => {
-  let d = _$$M(o);
+  let d = useExposedRef(o);
   let g = e => {
     s.onChange?.("", {
       event: e,
@@ -47,7 +47,7 @@ let g = forwardRef(({
       enterKeyHint: "search",
       onKeyDown: t => {
         e?.(t);
-        "Escape" === t.key && t.currentTarget.value && (Ju(t), g(t));
+        "Escape" === t.key && t.currentTarget.value && (preventAndStopEvent(t), g(t));
       },
       className: "search-input__search__rJMFk"
     }), !s.disabled && jsx(A, {
@@ -78,7 +78,7 @@ function A({
     "aria-hidden": !0,
     htmlAttributes: {
       tabIndex: -1,
-      onPointerDown: wo
+      onPointerDown: preventEvent
     },
     children: jsx(w, {})
   });

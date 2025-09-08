@@ -9,8 +9,8 @@ import { $n } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { U as _$$U } from "../905/708285";
-import { CWU, G6k, HS4, Z_n, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariablesBindings, VariableCollectionContext, VariableUIContext, VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { useLocalStorageSync } from "../905/657224";
@@ -76,17 +76,17 @@ export function $$W7({
       varName: n,
       varValue: i
     }) {
-      if (!CWU.isValidVariableName(n, r)) {
+      if (!VariablesBindings.isValidVariableName(n, r)) {
         logError("variables", "Attempted to submit variable name that is invalid", {
           varName: n,
           _varSetID: r
         });
         return;
       }
-      l7.user("create-variable", () => {
-        let t = r ?? CWU.createVariableSet(getI18nString("variables.variable_collection"), G6k.AUTOMATIC_FIRST_COLLECTION);
-        let a = CWU.createVariable(n, t, i, HS4.VARIABLE_PICKER);
-        let o = CWU.getLocalVariableInfo(a);
+      permissionScopeHandler.user("create-variable", () => {
+        let t = r ?? VariablesBindings.createVariableSet(getI18nString("variables.variable_collection"), VariableCollectionContext.AUTOMATIC_FIRST_COLLECTION);
+        let a = VariablesBindings.createVariable(n, t, i, VariableUIContext.VARIABLE_PICKER);
+        let o = VariablesBindings.getLocalVariableInfo(a);
         assertNotNullish(o, `variable with id ${a} not found`);
         e(kz(o));
       });
@@ -126,7 +126,7 @@ function K({
   });
 }
 export function $$Y4(e) {
-  let t = BQ(e.type === Z_n.ALIAS ? e.value : void 0);
+  let t = BQ(e.type === VariableDataType.ALIAS ? e.value : void 0);
   return isNotNullish(t) && "MIXED" !== t ? t : null;
 }
 export function $$$3({
@@ -166,7 +166,7 @@ export function $$q5(e, t, r) {
     if (i) {
       let e = await n(Oe(i));
       r(y$(t, e));
-    } else e.type === Z_n.ALIAS && r(WI(t));
+    } else e.type === VariableDataType.ALIAS && r(WI(t));
   }, [n, e, t, r]);
 }
 export function $$J0({
@@ -182,7 +182,7 @@ export function $$J0({
     varValue: t ?? WI(e),
     varSetID: null
   });
-  let d = useMemo(() => CWU.isValidVariableName(o.varName ?? "", o.varSetID ?? null), [o]);
+  let d = useMemo(() => VariablesBindings.isValidVariableName(o.varName ?? "", o.varSetID ?? null), [o]);
   let u = of(r, "submit", () => {
     d && a({
       varName: o.varName,
@@ -239,7 +239,7 @@ export function $$Z1({
 }) {
   let o = yp();
   let l = useId();
-  r === rXF.TEXT_DATA && (r = rXF.STRING);
+  r === VariableResolvedDataType.TEXT_DATA && (r = VariableResolvedDataType.STRING);
   let [d, c] = useLocalStorageSync("last-used-variable-set-bottoms-up", o.length > 0 ? o[0].node_id : null);
   let p = useMemo(() => {
     let e = o.find(e => e.node_id === d);

@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _gJ } from "../figma_app/763686";
+import { IAssertResource } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { delay } from "../905/236856";
@@ -16,17 +16,17 @@ import { zX } from "../905/576487";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { RH, gU } from "../figma_app/147952";
 import { B as _$$B } from "../905/808775";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ax } from "../figma_app/741237";
 import { T as _$$T } from "../905/858738";
 import { Eh, cb } from "../figma_app/12796";
 import { F as _$$F2 } from "../905/827944";
-import { fR, Ms, qH, T as _$$T2, W4, UH, FB, ld, MB, c2, VQ, WC, CA } from "../figma_app/300692";
+import { showVisualBell, joinStringSegments, PluginPermissions, getFullscreenViewEditorType, isValidForCooper, isDevModeWithInspectPanel, isValidForCooperSelectedView, isBuzzPlugin, loadLocalPluginSource, loadPluginManifest, isValidForFullscreenView, clearVisualBell, hasSpecialCapability } from "../figma_app/300692";
 import { C3, SH } from "../figma_app/790714";
 import { m3 } from "../figma_app/45218";
 import { G3 } from "../905/272080";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { d4 } from "../figma_app/474636";
 import { I as _$$I, o8, r_ } from "../905/622391";
 import { createDefaultPluginOptions, createPluginInstance } from "../905/472793";
@@ -116,7 +116,7 @@ async function Z(e) {
       let i = t.startsWith("Error") ? t.replace("Error", "error") : t;
       let n = "";
       ++e > 1 && (n = ` (${e} errors total)`);
-      isWidget ? fR(`Widget ${i}${n}`) : fR(`Plugin ${i}${n}`);
+      isWidget ? showVisualBell(`Widget ${i}${n}`) : showVisualBell(`Plugin ${i}${n}`);
     };
     t = errorHandler ? e => {
       i(e);
@@ -147,7 +147,7 @@ ${" ".repeat(column - 1)}^`;
       noConsoleError || yA(r + o);
       return Error(r);
     }
-    "realms" === vmType && e && e.success && (M = Ms(code, e.rangesToRemove));
+    "realms" === vmType && e && e.success && (M = joinStringSegments(code, e.rangesToRemove));
   }
   let j = null;
   ({
@@ -353,7 +353,7 @@ async function ei(e) {
     isWidget: !1,
     name: "Security Checker",
     openFileKey: "",
-    permissions: qH.none(),
+    permissions: PluginPermissions.none(),
     pluginCounter: -1,
     pluginID: "",
     pluginRunID: "",
@@ -435,7 +435,7 @@ export function $$ea2(e) {
     if (_$$et()) return;
     n && function (e) {
       let t = new NoOpVm();
-      let i = [() => t.destroy(), () => JX, () => Y5.triggerAction("commit")];
+      let i = [() => t.destroy(), () => JX, () => fullscreenValue.triggerAction("commit")];
       let n = () => {
         let e;
         for (let t of i) try {
@@ -487,8 +487,8 @@ export let $$eo4 = _$$n(async e => {
     fileKey: e.openFileKey,
     orgId: _$$I() ?? null,
     pluginRunID: t,
-    editorType: _$$T2(),
-    ...(ZQ(n) ? {
+    editorType: getFullscreenViewEditorType(),
+    ...(hasLocalFileId(n) ? {
       pluginVersionID: "",
       source: "development",
       name: "<local plugin>"
@@ -502,23 +502,23 @@ export let $$eo4 = _$$n(async e => {
     isCancelled
   } = await i.markDuration("waitForAllPagesMs", async () => await _$$y(e));
   if (!isCancelled) {
-    if (W4(e.triggeredFrom)) {
-      if (!UH(e.plugin)) throw Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
+    if (isValidForCooper(e.triggeredFrom)) {
+      if (!isDevModeWithInspectPanel(e.plugin)) throw Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
       atomStoreManager.set(d4, "LOADING");
-      ax(_gJ.PLUGIN);
+      ax(IAssertResource.PLUGIN);
     }
-    if (FB(e.triggeredFrom)) {
-      if (!ld(e.plugin)) throw Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
+    if (isValidForCooperSelectedView(e.triggeredFrom)) {
+      if (!isBuzzPlugin(e.plugin)) throw Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
       atomStoreManager.set(d4, "LOADING");
       atomStoreManager.set(Lk, _$$x.PLUGINS);
     }
     e.isWidget || e.ignoreForRunLastPlugin || C3(e);
     lM(e.plugin);
     qR(e.triggeredFrom);
-    "default" === e.runMode && W4(e.triggeredFrom) && (e.runMode = "inspect");
+    "default" === e.runMode && isValidForCooper(e.triggeredFrom) && (e.runMode = "inspect");
     Kd(e.runMode);
     try {
-      if (ZQ(e.plugin)) try {
+      if (hasLocalFileId(e.plugin)) try {
         let n = await ed(e, i, e.plugin);
         await ec({
           localPlugin: e.plugin,
@@ -589,7 +589,7 @@ export let $$eo4 = _$$n(async e => {
             }(b),
             widgetAction: widgetAction ?? null,
             isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
-            editorType: _$$T2(),
+            editorType: getFullscreenViewEditorType(),
             incrementalMode: "dynamic-page" === e.manifest.documentAccess,
             isVsCode: _$$T(),
             orgId: _$$I() ?? null
@@ -606,7 +606,7 @@ export let $$eo4 = _$$n(async e => {
               code: r,
               name: e.name,
               openFileKey,
-              permissions: qH.forInstalledPlugin(e),
+              permissions: PluginPermissions.forInstalledPlugin(e),
               pluginID: e.plugin_id,
               pluginRunID: n,
               pluginVersionID: e.id,
@@ -635,12 +635,12 @@ export let $$eo4 = _$$n(async e => {
 });
 function el(e, t) {
   let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString("plugins.error_loading_environment_widget") : getI18nString("plugins.error_loading_environment_plugin"));
-  fR(i);
+  showVisualBell(i);
 }
 async function ed(e, t, i) {
-  let n = ZQ(i);
+  let n = hasLocalFileId(i);
   try {
-    Y5.dispatch(_$$F.enqueue({
+    fullscreenValue.dispatch(_$$F.enqueue({
       message: getI18nString("plugins.loading_plugin", {
         pluginName: i.name
       }),
@@ -650,7 +650,7 @@ async function ed(e, t, i) {
       timeoutOverride: 1 / 0
     }));
     let r = n ? r_() : "cppvm";
-    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : MB(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await _$$F2.getAndCache(i, _$$I()))))(), (async () => {
+    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await _$$F2.getAndCache(i, _$$I()))))(), (async () => {
       await t.markDuration("loadSandboxAndRunSecurityChecksMs", async () => {
         try {
           await en(r, e.triggeredFrom);
@@ -666,7 +666,7 @@ async function ed(e, t, i) {
     }
     return a;
   } finally {
-    Y5.dispatch(_$$F.dequeue({
+    fullscreenValue.dispatch(_$$F.dequeue({
       matchType: "loading-plugin"
     }));
   }
@@ -709,7 +709,7 @@ async function ec({
       isWidget,
       widgetAction: widgetAction ?? null,
       isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
-      editorType: _$$T2(),
+      editorType: getFullscreenViewEditorType(),
       incrementalMode: "dynamic-page" === e.manifest.documentAccess,
       isVsCode: _$$T(),
       orgId: _$$I() ?? null
@@ -727,7 +727,7 @@ async function ec({
   };
   isWidget ? debugState.dispatch(RH(_)) : debugState.dispatch(gU(_));
   try {
-    let a = e.testCode ? e.manifest : await c2(e.localFileId, {
+    let a = e.testCode ? e.manifest : await loadPluginManifest(e.localFileId, {
       resourceType: isWidget ? "widget" : "plugin",
       ignoreMissingEditorType: !0,
       isPublishing: !1
@@ -740,7 +740,7 @@ async function ec({
       customOverrides: {
         code: r,
         openFileKey,
-        permissions: qH.forLocalPlugin(e),
+        permissions: PluginPermissions.forLocalPlugin(e),
         enablePrivatePluginApi: !!a.enablePrivatePluginApi,
         pluginID: a.id || "",
         pluginRunID: i,
@@ -756,7 +756,7 @@ async function ec({
       shouldShowVisualBell: !0
     });
     let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
-    fR(e);
+    showVisualBell(e);
   }
 }
 export let $$eu3 = _$$n(({
@@ -765,7 +765,7 @@ export let $$eu3 = _$$n(({
   newTriggeredFrom: "runlast"
 }) => {
   let t = SH();
-  t && VQ(t) && (e && (t.triggeredFrom = e), _$$R.instance.enqueue({
+  t && isValidForFullscreenView(t) && (e && (t.triggeredFrom = e), _$$R.instance.enqueue({
     mode: "run-forever",
     runPluginArgs: t
   }));
@@ -776,7 +776,7 @@ export function $$ep5(e) {
   let t = e.stats;
   t.markTime("timeToRunPluginCodeStartMs");
   let i = e.isWidget ? "widget" : "plugin";
-  WC();
+  clearVisualBell();
   let n = p1();
   Tj(n);
   Yd();
@@ -803,7 +803,7 @@ export function $$ep5(e) {
       iu.currentWidget = void 0;
     }
     try {
-      if (isInteractionPathCheck() && (await en("cppvm", e?.triggeredFrom)), desktopAPIInstance && CA(e.permissions.permissions) && (iu.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (iu.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
+      if (isInteractionPathCheck() && (await en("cppvm", e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (iu.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (iu.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
         t();
         return;
       }
@@ -821,7 +821,7 @@ export function $$ep5(e) {
         });
         r = closePlugin;
         let e = await runResult;
-        e && Y5.dispatch(_$$F.enqueue({
+        e && fullscreenValue.dispatch(_$$F.enqueue({
           type: "plugins-supplied-message",
           message: e
         }));
@@ -837,7 +837,7 @@ export function $$ep5(e) {
   }).catch(t => {
     if (e.noConsoleError || yA(t), e.showLaunchErrors) {
       let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
-      fR(i);
+      showVisualBell(i);
     } else throw t;
   });
   let a = () => {

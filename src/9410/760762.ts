@@ -6,13 +6,13 @@ import { I7 } from "../figma_app/594947";
 import { _Y } from "../figma_app/919079";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { pi } from "../figma_app/314264";
 import { zN } from "../figma_app/579169";
 import { UQ } from "../figma_app/864723";
 import { tS, q5, MY } from "../figma_app/516028";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { QY, xw, Zk } from "../9410/351585";
 import y from "classnames";
 import { fu, $z } from "../figma_app/831799";
@@ -111,16 +111,16 @@ function w({
     onBadgeClick: () => {
       i.showing && i.userFlag && (n({
         showing: !1
-      }), t(Lo()), t(_$$b({
+      }), t(popModalStack()), t(_$$b({
         [i.userFlag]: !0
       })), o[i.userFlag] = {
         fileKey: m || void 0,
         sessionId: h
       });
-      t(to({
+      t(showModalHandler({
         type: _$$V,
         data: {
-          upsellSource: _$$b2.DRAFT_FILE_BADGE,
+          upsellSource: UpsellModalType.DRAFT_FILE_BADGE,
           openCheckoutInNewTab: !0
         }
       }));
@@ -136,10 +136,10 @@ function S({
   return jsx(E, {
     name: _Y.FREE,
     onBadgeClick: () => {
-      t(to({
+      t(showModalHandler({
         type: _$$V,
         data: {
-          upsellSource: _$$b2.DESIGN_DRAFT_FILE_BADGE,
+          upsellSource: UpsellModalType.DESIGN_DRAFT_FILE_BADGE,
           openCheckoutInNewTab: !0
         }
       }));
@@ -163,10 +163,10 @@ function ee(e) {
     teamId
   });
   let l = q5();
-  let c = _$$y(teamId, _$$b2.FILE_TRACKER_MODAL);
+  let c = _$$y(teamId, UpsellModalType.FILE_TRACKER_MODAL);
   let u = E9();
   let p = _$$h.useTrackingContext({
-    trigger: _$$b2.FILE_TRACKER_MODAL
+    trigger: UpsellModalType.FILE_TRACKER_MODAL
   });
   if (!l || "loaded" !== o.status) return null;
   if (u) t = oA(o.data.team?.teamFileCounts?.totalFileCount) ?? 0;else switch (l.editorType) {
@@ -307,11 +307,11 @@ function ei({
             },
             onClick: () => {
               e();
-              i(to({
+              i(showModalHandler({
                 type: _$$V,
                 data: {
                   teamId: t,
-                  upsellSource: _$$b2.PRO_TRIAL_UPSELL_MODAL,
+                  upsellSource: UpsellModalType.PRO_TRIAL_UPSELL_MODAL,
                   openCheckoutInNewTab: !0
                 }
               }));
@@ -408,18 +408,18 @@ function el({
   let p = jn();
   let h = ng.canSeeProTrialExpiryUx(t);
   let m = h ? _Y.PRO_TRIAL_EXPIRED : _Y.LOCKED;
-  let f = h ? _$$b2.PRO_TRIAL_UPSELL_MODAL : _$$b2.LOCKED_TEAM_FILE_BADGE;
+  let f = h ? UpsellModalType.PRO_TRIAL_UPSELL_MODAL : UpsellModalType.LOCKED_TEAM_FILE_BADGE;
   return jsx(E, {
     name: m,
     onBadgeClick: () => {
       if (p) return null;
-      e && !s ? o(to({
+      e && !s ? o(showModalHandler({
         type: _$$t2,
         data: {
           teamId: e,
           canEditTeam: n
         }
-      })) : n && o(to({
+      })) : n && o(showModalHandler({
         type: _$$V,
         data: {
           teamId: e,
@@ -459,7 +459,7 @@ function ec({
   trackingProperties: e,
   teamId: t
 }) {
-  let i = _$$y(t, _$$b2.STARTER_TEAM_FILE_BADGE);
+  let i = _$$y(t, UpsellModalType.STARTER_TEAM_FILE_BADGE);
   return jsx(E, {
     name: _Y.FREE,
     onBadgeClick: () => i(),
@@ -474,7 +474,7 @@ function ep({
   teamId: i
 }) {
   let [n, a] = es();
-  let s = _$$y(i, _$$b2.STARTER_TEAM_FILE_BADGE);
+  let s = _$$y(i, UpsellModalType.STARTER_TEAM_FILE_BADGE);
   return jsxs(Fragment, {
     children: [jsx(E, {
       name: _Y.FREE,
@@ -495,7 +495,7 @@ function eh({
   trackingProperties: e,
   teamId: t
 }) {
-  let i = _$$y(t, _$$b2.STARTER_TEAM_FILE_BADGE);
+  let i = _$$y(t, UpsellModalType.STARTER_TEAM_FILE_BADGE);
   let n = useDispatch();
   let o = useAtomWithSubscription(QY);
   let c = Xr(xw);
@@ -504,7 +504,7 @@ function eh({
     onBadgeClick: () => {
       o.showing && o.userFlag && (c({
         showing: !1
-      }), n(Lo()), n(_$$b({
+      }), n(popModalStack()), n(_$$b({
         [o.userFlag]: !0
       })));
       i();

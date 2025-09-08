@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState, useEffect, useContext, useRef } from "react";
-import { glU, cxo, V5h, VTL, rcl, NLJ, xbm } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, ToolType, AlignmentPosition, ConfirmationLevel, Command, DesignGraphElements, BorderStyle } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { ez, SK, U9, wp } from "../905/125333";
@@ -150,7 +150,7 @@ let ec = memo(function ({
     let {
       actionEnum
     } = Qd().get(t);
-    glU?.triggerActionEnumInUserEditScope(actionEnum, {
+    Fullscreen?.triggerActionEnumInUserEditScope(actionEnum, {
       source: fK
     });
   }, []);
@@ -159,7 +159,7 @@ let ec = memo(function ({
     ("CURVED" !== e || getFeatureFlags().ad_curved_connectors) && (p({
       ...d,
       connectorToolLineStyle: e
-    }), glU?.triggerActionEnumInUserEditScope(tl(e), {
+    }), Fullscreen?.triggerActionEnumInUserEditScope(tl(e), {
       source: fK
     }));
   }, [p, d]);
@@ -176,11 +176,11 @@ let ec = memo(function ({
     let t = function (e) {
       let t = useAtomWithSubscription(_$$B2);
       let i = Yt();
-      let n = s3() && t === cxo.SHAPE_TOOL;
+      let n = s3() && t === ToolType.SHAPE_TOOL;
       return null !== i || n || e;
     }(e);
     let [i, n] = useAtomValueAndSetter(_$$B2);
-    let s = cxo.SHAPE_TOOL;
+    let s = ToolType.SHAPE_TOOL;
     useEffect(() => {
       t && i !== s ? n(s) : t || i !== s || n(_$$y);
     }, [t, s, i, n]);
@@ -412,7 +412,7 @@ function ep({
           if (i) {
             let n = zG(i.getBoundingClientRect());
             let r = C2(t);
-            l7.user("drop-shape-on-canvas", () => glU?.dropDiagramItemOntoCanvas(Jc.get(e), Math.round(n.x), Math.round(n.y), Math.round(r.x), Math.round(r.y), V5h.TOP_LEFT, VTL.NO));
+            permissionScopeHandler.user("drop-shape-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(Jc.get(e), Math.round(n.x), Math.round(n.y), Math.round(r.x), Math.round(r.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
           }
         }
         v(e => e + 1);
@@ -525,18 +525,18 @@ let eT = {
 };
 let eE = {
   ELBOWED: {
-    action: rcl.SET_TOOL_CONNECTOR_ELBOWED,
-    tool: NLJ.CONNECTOR_ELBOWED,
+    action: Command.SET_TOOL_CONNECTOR_ELBOWED,
+    tool: DesignGraphElements.CONNECTOR_ELBOWED,
     Icon: XD
   },
   CURVED: {
-    action: rcl.SET_TOOL_CONNECTOR_CURVED,
-    tool: NLJ.CONNECTOR_CURVED,
+    action: Command.SET_TOOL_CONNECTOR_CURVED,
+    tool: DesignGraphElements.CONNECTOR_CURVED,
     Icon: Mm
   },
   STRAIGHT: {
-    action: rcl.SET_TOOL_CONNECTOR_STRAIGHT,
-    tool: NLJ.CONNECTOR_STRAIGHT,
+    action: Command.SET_TOOL_CONNECTOR_STRAIGHT,
+    tool: DesignGraphElements.CONNECTOR_STRAIGHT,
     Icon: vO
   }
 };
@@ -566,7 +566,7 @@ let eS = memo(function ({
         type: "close",
         source: Yg.ToolSelected
       });
-      glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT, null);
+      Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, null);
       return;
     }
     x ? _({
@@ -575,13 +575,13 @@ let eS = memo(function ({
       type: "open",
       tool: "shape"
     });
-    glU?.triggerActionEnumInUserEditScope(E.actionEnum, {
+    Fullscreen?.triggerActionEnumInUserEditScope(E.actionEnum, {
       source: fK
     });
   }, [L, I, x, _, w, E.actionEnum]);
   let A = state.draggedTool === `shape-tool-${t}`;
   let O = useCallback((e, t) => {
-    l7.user("drop-shape-on-canvas", () => glU?.dropDiagramItemOntoCanvas(h, Math.round(e.x), Math.round(e.y), Math.round(t.x), Math.round(t.y), V5h.TOP_LEFT, VTL.NO));
+    permissionScopeHandler.user("drop-shape-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(h, Math.round(e.x), Math.round(e.y), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
   }, [h]);
   let k = (E.canvasToSvgScale || 1) / i;
   return l ? jsx(_$$I, {
@@ -617,7 +617,7 @@ let eS = memo(function ({
     toolbarIconScale: i,
     shapeStrokeProps: {
       isDragging: A,
-      styleType: void 0 !== T ? T : xbm.NONE,
+      styleType: void 0 !== T ? T : BorderStyle.NONE,
       svgToCanvasScale: k && i ? 1 / (k * i) : 1
     }
   });
@@ -751,7 +751,7 @@ function eN({
         type: "close",
         source: Yg.ToolSelected
       });
-      glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT, null);
+      Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, null);
       return;
     }
     m ? h({
@@ -760,13 +760,13 @@ function eN({
       type: "open",
       tool: "shape"
     });
-    glU?.triggerActionEnumInUserEditScope(eE[x].action, {
+    Fullscreen?.triggerActionEnumInUserEditScope(eE[x].action, {
       source: fK
     });
   }, [w, S, m, h, E, x]);
   let L = "connector" === state.draggedTool;
   let N = useCallback((e, t) => {
-    l7.user("drop-connector-on-canvas", () => glU?.dropDiagramItemOntoCanvas(eE[x].tool, Math.round(e.x), Math.round(e.y + 7 * _$$P2), Math.round(t.x), Math.round(t.y), V5h.TOP_LEFT, VTL.NO));
+    permissionScopeHandler.user("drop-connector-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(eE[x].tool, Math.round(e.x), Math.round(e.y + 7 * _$$P2), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
   }, [x]);
   let A = eE[x].Icon;
   return t ? jsx(_$$I, {
@@ -802,7 +802,7 @@ function eN({
     toolbarIconScale: e,
     shapeStrokeProps: {
       isDragging: L,
-      styleType: xbm.NONE,
+      styleType: BorderStyle.NONE,
       svgToCanvasScale: _$$P2 && e ? 1 / (_$$P2 * e) : 1
     }
   });
@@ -821,7 +821,7 @@ export function $$eA1({
   let _ = Yt();
   let g = bu();
   let v = sT();
-  let E = s3() && s === cxo.SHAPE_TOOL;
+  let E = s3() && s === ToolType.SHAPE_TOOL;
   let S = useAtomWithSubscription(oh);
   let w = "open" === S.state && "shape" === S.tool || E;
   let I = function ({
@@ -835,13 +835,13 @@ export function $$eA1({
           type: "close",
           source: Yg.ToolSelected
         });
-        glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT, null);
+        Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, null);
         return;
       }
       if (e) {
         let t = Qd();
-        let i = t.get(e)?.actionEnum ?? rcl.SET_TOOL_DEFAULT;
-        glU?.triggerActionEnumInUserEditScope(i, {
+        let i = t.get(e)?.actionEnum ?? Command.SET_TOOL_DEFAULT;
+        Fullscreen?.triggerActionEnumInUserEditScope(i, {
           source: fK
         });
       }
@@ -879,7 +879,7 @@ export function $$eA1({
   let [U, F] = useState(!1);
   let H = ar();
   let B = useCallback(() => {
-    glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT, null);
+    Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, null);
     F(!0);
     H();
   }, [H]);

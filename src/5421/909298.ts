@@ -3,7 +3,7 @@ import { useMemo, useCallback, useEffect, useId } from "react";
 import { useDispatch } from "../vendor/514228";
 import { gr } from "../figma_app/243058";
 import { yG } from "../905/859698";
-import { mSn } from "../figma_app/763686";
+import { SceneGraphTsApi } from "../figma_app/763686";
 import d from "../vendor/181640";
 import p from "../vendor/223926";
 import h from "lodash-es/mapValues";
@@ -11,7 +11,7 @@ import x from "../vendor/626715";
 import { Pt } from "../figma_app/806412";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { h6 } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { U as _$$U } from "../905/506188";
@@ -104,7 +104,7 @@ export function $$M1() {
     firstVariableSetMode: N,
     getDefaultNewModeForVariableCollectionKey: f,
     reportAnalyticsEventWhenSelected: e => {
-      let t = mSn.getVariableSetInfoForSetModeAnalytics(e);
+      let t = SceneGraphTsApi.getVariableSetInfoForSetModeAnalytics(e);
       T(Zh({
         name: "prototype.set_mode_select_variable_set",
         params: {
@@ -132,7 +132,7 @@ export function $$V0({
     showAdvancedPrototypingVariablesModal
   } = zt();
   useEffect(() => {
-    if (!n || gl(n)) return;
+    if (!n || isInvalidValue(n)) return;
     let e = allVariableSets.find(e => e.setKey === n);
     e ? (logInfo("SetVariableModeControls", "updating variable set key to non-deprecated id value"), r({
       targetVariableSetKey: void 0,
@@ -142,14 +142,14 @@ export function $$V0({
     }));
   }, [n, allVariableSets, r]);
   let [h, m] = useMemo(() => {
-    let t = gl(e) || void 0 === e ? e : function (e, t) {
+    let t = isInvalidValue(e) || void 0 === e ? e : function (e, t) {
       let n = e.find(e => e.modeData.collectionID === t);
       if (n) return n;
       let o = gr.toRefIfSubscribed(t);
       if (o) return e.find(e => e.setKey === o.key);
     }(allVariableSets, e) || k;
     let n = (() => {
-      if (!gl(t) && void 0 !== t && t !== k) return t;
+      if (!isInvalidValue(t) && void 0 !== t && t !== k) return t;
     })();
     return [t, n];
   }, [e, allVariableSets]);
@@ -226,7 +226,7 @@ function U({
     dispatch: a,
     dropdownShown: l?.type === s ? l : null,
     onChange: e => {
-      gl(e) || void 0 === e || e === k || t(e);
+      isInvalidValue(e) || void 0 === e || e === k || t(e);
     },
     children: allVariableSets.length > 0 ? [localVariableSets.length > 0 && jsx(O, {
       isHeader: !0,
@@ -256,7 +256,7 @@ function $({
     allVariableSets
   } = $$M1();
   let u = useMemo(() => allVariableSets.find(t => t.setKey === e)?.modeData.modeOptions, [e, allVariableSets]);
-  let h = useMemo(() => gl(t) || void 0 === t ? t : u?.find(e => e.modeId.guid === t) || k, [t, u]);
+  let h = useMemo(() => isInvalidValue(t) || void 0 === t ? t : u?.find(e => e.modeId.guid === t) || k, [t, u]);
   return jsx(L, {
     "aria-labelledby": l,
     id: c,
@@ -266,7 +266,7 @@ function $({
     dispatch: s,
     dropdownShown: d?.type === c ? d : null,
     onChange: e => {
-      !e || gl(e) || e === k || n(e.modeId.guid);
+      !e || isInvalidValue(e) || e === k || n(e.modeId.guid);
     },
     children: u && u?.map(K)
   });

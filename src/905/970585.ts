@@ -1,4 +1,4 @@
-import { glU, kul, h3O, ccR, J5D } from "../figma_app/763686";
+import { Fullscreen, SchemaJoinStatus, Multiplayer, SyncError, FileLoadEvent } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
@@ -10,12 +10,12 @@ import { reportError, setSentryTag } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { nA, lp, eH, J4 } from "../figma_app/91703";
 import { x2 } from "../figma_app/714946";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { E as _$$E } from "../905/344656";
-import { A9 } from "../905/784363";
+import { VERSION_HISTORY_SET_DOC_HAS_CHANGED } from "../905/784363";
 import { b2 } from "../figma_app/622574";
 import { Cd, AW } from "../figma_app/582924";
 import { VP } from "../905/18797";
@@ -26,13 +26,13 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { XHR } from "../905/910117";
 import { z as _$$z } from "../905/239603";
-import { qK, Ju } from "../905/102752";
+import { registerLegacyModal, registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { yl, DD, jE, v0 } from "../figma_app/639088";
 import { s_ } from "../905/17223";
@@ -43,7 +43,7 @@ import { qp } from "../905/977779";
 import { J as _$$J } from "../905/915227";
 import { Yq } from "../figma_app/305244";
 import { z4 } from "../905/37051";
-import { g as _$$g } from "../905/412815";
+import { handleSyncEvent } from "../905/412815";
 import { DH } from "../905/327855";
 import { xK } from "../905/125218";
 import { Js, QY, pi } from "../figma_app/139113";
@@ -79,7 +79,7 @@ async function j(e, t) {
       data: e
     }) => e);
     if (!r) throw Error("Empty file buffer");
-    if (!glU.loadFigFileForFallback(r)) throw Error("Failed to load file buffer");
+    if (!Fullscreen.loadFigFileForFallback(r)) throw Error("Failed to load file buffer");
     await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t);
   } catch (e) {
     i = JSON.stringify(e);
@@ -99,9 +99,9 @@ async function j(e, t) {
 let G = "multiplayer-connection-error-modal";
 let z = "multiplayer-too-many-connections";
 function H(e) {
-  let t = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let t = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   useEffect(() => {
-    t && e(Ce());
+    t && e(hideModal());
   }, [e, t]);
 }
 function W(e) {
@@ -121,7 +121,7 @@ function W(e) {
       className: v0,
       children: jsxs($n, {
         onClick: () => {
-          e.dispatch(Ce());
+          e.dispatch(hideModal());
         },
         children: [" ", renderI18nText("multiplayer_connection_error.dismiss_button"), " "]
       })
@@ -133,8 +133,8 @@ function K(e) {
     let t = e.selectedView;
     if ("fullscreen" === t.view) {
       let n = i.nodeId;
-      if (fn(sH(t.nodeId)) && (n = t.nodeId), getFeatureFlags()?.max_connection_load_fallback) {
-        e.dispatch(Ce());
+      if (isValidSessionLocalID(parseSessionLocalID(t.nodeId)) && (n = t.nodeId), getFeatureFlags()?.max_connection_load_fallback) {
+        e.dispatch(hideModal());
         await j(i.signalPayload, n);
       } else {
         let e = `/file/${t.fileKey}/?viewer=1&node-id=${n}`;
@@ -163,13 +163,13 @@ function K(e) {
     })]
   });
 }
-qK(G, e => jsx(W, {
+registerLegacyModal(G, e => jsx(W, {
   ...e
 }));
-qK(z, e => jsx(K, {
+registerLegacyModal(z, e => jsx(K, {
   ...e
 }));
-let Z = Ju(function () {
+let Z = registerModal(function () {
   let e = useDispatch();
   let t = jsx("a", {
     className: Be,
@@ -194,7 +194,7 @@ let Z = Ju(function () {
         className: v0,
         children: jsx(nR, {
           onClick: () => {
-            e(Ce());
+            e(hideModal());
           },
           children: renderI18nText("multiplayer_limit.done_button")
         })
@@ -202,7 +202,7 @@ let Z = Ju(function () {
     })]
   });
 }, "MultiplayerEditorLimitModal");
-let X = Ju(function () {
+let X = registerModal(function () {
   let e = useDispatch();
   let t = jsx("a", {
     className: Be,
@@ -228,14 +228,14 @@ let X = Ju(function () {
       className: v0,
       children: jsx(nR, {
         onClick: () => {
-          e(Ce());
+          e(hideModal());
         },
         children: renderI18nText("multiplayer_limit.done_button")
       })
     })]
   });
 }, "MultiplayerCursorLimitModal");
-export let $$ec1 = nF(e => {
+export let $$ec1 = createOptimistThunk(e => {
   let t = parseQuery(Ay.location.search).flash;
   t && e.dispatch(_$$s.flash(t));
 });
@@ -254,7 +254,7 @@ export class $$eu0 {
     this.dispatch(nA());
   }
   reconnectingSucceeded() {
-    getFeatureFlags()?.fullscreen_send_client_rendered_message ? h3O.sendClientRendered(xK.getClientRenderedMetadata()) : h3O.sendSignal("client-rendered", "");
+    getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer.sendClientRendered(xK.getClientRenderedMetadata()) : Multiplayer.sendSignal("client-rendered", "");
     this.dispatch(lp());
     VP(this.store.getState().loadingState, $5) && this.dispatch(x2({
       key: $5
@@ -265,13 +265,13 @@ export class $$eu0 {
       hasAutosaveChanges: e,
       hasMultiplayerChanges: t
     }, i);
-    this.hasUnsavedChanges() && !this.store.getState().versionHistory.docHasChanged && this.dispatch(A9({
+    this.hasUnsavedChanges() && !this.store.getState().versionHistory.docHasChanged && this.dispatch(VERSION_HISTORY_SET_DOC_HAS_CHANGED({
       status: !0
     }));
     let s = this.store.getState().saveStatus;
-    s && a.equals(s) || (this.dispatch(_$$E(a)), _$$g(a));
+    s && a.equals(s) || (this.dispatch(_$$E(a)), handleSyncEvent(a));
     let o = Js();
-    if (o && o.status === QY.WAITING && !e && !t && i === ccR.NONE) {
+    if (o && o.status === QY.WAITING && !e && !t && i === SyncError.NONE) {
       pi(!1);
       setTimeout(() => this.dispatch(eH()));
       return;
@@ -281,7 +281,7 @@ export class $$eu0 {
     this.dispatch(J4(e));
   }
   restartPresentation(e) {
-    h3O.startPresenting();
+    Multiplayer.startPresenting();
     trackEventAnalytics("Spotlight Restarted After Disconnect", {
       timeElapsedSeconds: e
     });
@@ -305,14 +305,14 @@ export class $$eu0 {
       if (this.hasUnsavedChanges()) {
         let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = getI18nString("unsaved_changes.syncing.too_many_people_in_file");
-        this.dispatch(to({
+        this.dispatch(showModalHandler({
           type: G,
           data: {
             message: t,
             title: e
           }
         }));
-      } else this.dispatch(to({
+      } else this.dispatch(showModalHandler({
         type: z,
         data: {
           nodeId: i,
@@ -332,7 +332,7 @@ export class $$eu0 {
       }, {
         forwardToDatadog: !0
       });
-      this.dispatch(to({
+      this.dispatch(showModalHandler({
         type: G,
         data: {
           message: e,
@@ -343,7 +343,7 @@ export class $$eu0 {
       let e;
       let t;
       this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_not_logged_in")) : (this.dispatch(eH()), t = getI18nString("unsaved_changes.syncing.logged_out"), e = getI18nString("unsaved_changes.syncing.you_have_been_logged_out_of_figma"));
-      this.dispatch(to({
+      this.dispatch(showModalHandler({
         type: G,
         data: {
           message: e,
@@ -354,7 +354,7 @@ export class $$eu0 {
       if (this.hasUnsavedChanges()) {
         let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = getI18nString("unsaved_changes.syncing.app_out_of_date");
-        this.dispatch(to({
+        this.dispatch(showModalHandler({
           type: G,
           data: {
             message: t,
@@ -387,7 +387,7 @@ export class $$eu0 {
     let n = atomStoreManager.get(qp);
     if (t) {
       let r = VO(e, i.library.movedLibraryItems.local, i.library.publishedByLibraryKey.components, n) || void 0;
-      t.canEdit ? this.store.dispatch(to({
+      t.canEdit ? this.store.dispatch(showModalHandler({
         type: _$$l,
         data: {
           nodeId: e,
@@ -409,7 +409,7 @@ export class $$eu0 {
     if (!e) throw Error("buildMultiplayerUrl: fileKey must be defined");
     let m = this.store.getState().selectedView;
     let h = "fullscreen" === m.view ? DH(m.editorType) : void 0;
-    l === J5D.RECONNECT && Hb();
+    l === FileLoadEvent.RECONNECT && Hb();
     let g = new URL(mpGlobal.url({
       fileKey: e,
       role: "editor",
@@ -434,7 +434,7 @@ export class $$eu0 {
       button: {
         text: getI18nString("unsaved_changes.syncing.learn_more"),
         action: () => {
-          this.store.dispatch(to({
+          this.store.dispatch(showModalHandler({
             type: X
           }));
         }
@@ -461,7 +461,7 @@ export class $$eu0 {
       button: {
         text: getI18nString("unsaved_changes.syncing.learn_more"),
         action: () => {
-          this.store.dispatch(to({
+          this.store.dispatch(showModalHandler({
             type: Z
           }));
         }
@@ -474,7 +474,7 @@ export class $$eu0 {
   }
   reconnectSequenceNumberChanged(e) {
     setSentryTag("reconnect_sequence_number", e);
-    null === e || (!1 === atomStoreManager.get(b2) && atomStoreManager.set(b2, !0), atomStoreManager.set(_$$J, e), this.store.getState().versionHistory.docHasChanged || this.dispatch(A9({
+    null === e || (!1 === atomStoreManager.get(b2) && atomStoreManager.set(b2, !0), atomStoreManager.set(_$$J, e), this.store.getState().versionHistory.docHasChanged || this.dispatch(VERSION_HISTORY_SET_DOC_HAS_CHANGED({
       status: !0
     })));
   }

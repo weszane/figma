@@ -47,7 +47,7 @@ import { ServiceCategories } from '../905/165054';
 import { D as _$$D } from '../905/169680';
 import { T as _$$T } from '../905/172092';
 import { p as _$$p3 } from '../905/185998';
-import { l7 as _$$l6 } from '../905/189185';
+import { permissionScopeHandler as _$$l6 } from '../905/189185';
 import { W as _$$W } from '../905/200727';
 import { P as _$$P } from '../905/201667';
 import { h as _$$h } from '../905/207101';
@@ -56,7 +56,7 @@ import { B as _$$B } from '../905/224000';
 import { J as _$$J5 } from '../905/225412';
 import { r as _$$r6 } from '../905/249071';
 import { A as _$$A4 } from '../905/251970';
-import { J as _$$J4 } from '../905/270045';
+import { Label } from '../905/270045';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { O as _$$O5 } from '../905/273186';
 import { tN as _$$tN, Gt, pw } from '../905/275640';
@@ -136,12 +136,12 @@ import { bL as _$$bL3 } from '../905/867927';
 import { FO } from '../905/869235';
 import { g as _$$g4 } from '../905/880308';
 import { C as _$$C3 } from '../905/887158';
-import { W as _$$W4 } from '../905/909715';
+import { ManuallyLabeledCheckbox } from '../905/909715';
 import { XHR } from '../905/910117';
 import { bL as _$$bL, _L } from '../905/911410';
 import { e as _$$e5 } from '../905/916195';
 import { A as _$$A2 } from '../905/920142';
-import { q as _$$q } from '../905/924253';
+import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
 import { q as _$$q5 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
@@ -227,7 +227,7 @@ import { U as _$$U2 } from '../figma_app/65327';
 import { io as _$$io, bo } from '../figma_app/73698';
 import { iT as _$$iT, ys } from '../figma_app/74165';
 import { _J, DL, KL, Tg } from '../figma_app/74668';
-import { J2, ut } from '../figma_app/84367';
+import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { l7 as _$$l, X0, ZO } from '../figma_app/88239';
 import { lM as _$$lM } from '../figma_app/90441';
 import { FP } from '../figma_app/91703';
@@ -287,11 +287,11 @@ import { OM, YU } from '../figma_app/422471';
 import { o5 as _$$o2 } from '../figma_app/433401';
 import { UN as _$$UN, Nf } from '../figma_app/449837';
 import { M_, q3 } from '../figma_app/450829';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { No, px } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { _I, U4 } from '../figma_app/473493';
-import { qE, y1 } from '../figma_app/492908';
+import { clamp, range } from '../figma_app/492908';
 import { t as _$$t4 } from '../figma_app/501766';
 import { ED } from '../figma_app/504823';
 import { tY as _$$tY, SF } from '../figma_app/512532';
@@ -333,7 +333,7 @@ import { Ku, qw, UK } from '../figma_app/740163';
 import { aY as _$$aY, NT as _$$NT } from '../figma_app/741237';
 import { M as _$$M2 } from '../figma_app/749682';
 import { nE as _$$nE, fY, g7, hx, Iy, jq, m7, qL, qp, qZ, u2, ui, Ut, v4, VG, W0 } from '../figma_app/761118';
-import { Egt, Ez5, FAf, hKj, ibQ, juq, lyf, mHF, n1M, NLJ, Oin, QOV, rXF, xae, Z6A, Z_n, zkO } from '../figma_app/763686';
+import { SceneGraphHelpers, AppStateTsApi, DesignWorkspace, CustomPosition, ItemType, FileSourceType, ViewType, LinterCppBindings, MakeBindings, DesignGraphElements, UIVisibilitySetting, UserActionState, VariableResolvedDataType, UserInterfaceElements, NodeType, VariableDataType, SourceType } from '../figma_app/763686';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { zA } from '../figma_app/791586';
 import { Fj } from '../figma_app/793429';
@@ -1025,7 +1025,7 @@ function eU({
   complete: l
 }) {
   _$$h(() => {
-    Egt?.replaceSelection([e], !0);
+    SceneGraphHelpers?.replaceSelection([e], !0);
   });
   return jsxs(NJ, {
     arrowPosition: F_.LEFT_TITLE,
@@ -1776,7 +1776,7 @@ function lw({
     mobile: '',
     desktop: ''
   });
-  let v = _$$q();
+  let v = useFullscreenReady();
   let C = _$$tS();
   let k = d4(e => e.fileVersion);
   let E = d4(e => e.mirror.sceneGraph);
@@ -1786,7 +1786,7 @@ function lw({
   let {
     inProductHelpViewType
   } = A5();
-  let T = ut(Ez5?.uiState().inProductHelpSidePanelWidth, 0);
+  let T = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);
   let I = inProductHelpViewType === 'side_panel' ? T : 0;
   let {
     insertTemplate
@@ -1859,7 +1859,7 @@ function lw({
         selectTemplateAfterCommit: !1,
         moveViewportAfterCommit: !1,
         priority: 'user-visible',
-        editScopeType: zkO.USER
+        editScopeType: SourceType.USER
       }),
       template: {
         template: n,
@@ -1875,9 +1875,9 @@ function lw({
         type: _$$n.HubFile
       },
       userTriggered: !1,
-      editScopeType: zkO.ONBOARDING,
+      editScopeType: SourceType.ONBOARDING,
       triggeredFrom: 'starting-points',
-      templateInsertionDirection: hKj.RIGHT
+      templateInsertionDirection: CustomPosition.RIGHT
     }), l === 'basics' ? YQ({
       id: 'starting_points_basics_template_inserted'
     }) : YQ({
@@ -1910,7 +1910,7 @@ function lw({
         moveViewportAfterPreview: !0,
         priority: 'user-visible',
         previewManager: {
-          nodeType: Z6A.CANVAS
+          nodeType: NodeType.CANVAS
         },
         position: lk,
         viewportOptions: {
@@ -2103,7 +2103,7 @@ function lV() {
   let y = useAtomWithSubscription(_$$dL);
   let _ = jO();
   let b = u?.canEdit;
-  let j = d4(e => e.leftPanel.activeTab === xae.LAYERS);
+  let j = d4(e => e.leftPanel.activeTab === UserInterfaceElements.LAYERS);
   if (_$$E(uniqueId, ['Reset Visual Assets Tooltips', _$$io], () => {
     c && u && a(_$$b2(_$$g3));
   }), useEffect(() => {
@@ -2130,7 +2130,7 @@ function lV() {
       type: 'button',
       onClick: () => {
         a(FP({
-          tab: xae.ASSETS
+          tab: UserInterfaceElements.ASSETS
         }));
         complete();
       },
@@ -3243,7 +3243,7 @@ function nF({
   useSmallVersion: t
 }) {
   return jsx(Fragment, {
-    children: y1(e).map(e => t ? jsx(nP, {}, e) : jsx(n$, {}, e))
+    children: range(e).map(e => t ? jsx(nP, {}, e) : jsx(n$, {}, e))
   });
 }
 function n$() {
@@ -3261,7 +3261,7 @@ function n$() {
         className: 'x1dmp6jm',
         ...nB
       })]
-    }), jsx(_$$W4, {
+    }), jsx(ManuallyLabeledCheckbox, {
       id: 'loading',
       disabled: !0
     })]
@@ -3471,13 +3471,13 @@ function nK({
 }) {
   return jsxs('div', {
     ...Ay.props(nX.listItem, l && nX.selectedListItem),
-    children: [jsx(_$$J4, {
+    children: [jsx(Label, {
       className: 'xgqk73l',
       htmlFor: e,
       children: r
     }), jsx('div', {
       className: 'x8x9d4c',
-      children: jsx(_$$W4, {
+      children: jsx(ManuallyLabeledCheckbox, {
         id: e,
         checked: l,
         onChange: t => {
@@ -4161,7 +4161,7 @@ function i$({
       try {
         let n;
         let i = [];
-        _$$l6(zkO.USER, 'debug-linter-visual-groups', () => {
+        _$$l6(SourceType.USER, 'debug-linter-visual-groups', () => {
           let t = UN();
           let l = t.getCurrentPage();
           (n = t.createNode('SECTION')).fills = [{
@@ -4185,7 +4185,7 @@ function i$({
         let a = t();
         for (let [e, [t, d]] of Array.from(a.entries()).entries()) {
           let a;
-          _$$l6(zkO.USER, 'debug-linter-visual-groups', () => {
+          _$$l6(SourceType.USER, 'debug-linter-visual-groups', () => {
             let o = UN();
             if (e > 0) {
               let e = o.createNode('RECTANGLE');
@@ -4237,7 +4237,7 @@ function i$({
           let x = 0;
           for (let [e, t] of d.entries()) {
             await new Promise(e => setTimeout(e, 0));
-            _$$l6(zkO.USER, 'debug-linter-visual-groups', () => {
+            _$$l6(SourceType.USER, 'debug-linter-visual-groups', () => {
               let l;
               let i = UN();
               let r = i.get(t);
@@ -4275,7 +4275,7 @@ function i$({
           }
           r = Math.max(r, u);
           s = s + c + 120;
-          _$$l6(zkO.USER, 'debug-linter-visual-groups', () => {
+          _$$l6(SourceType.USER, 'debug-linter-visual-groups', () => {
             if (n.size = {
               x: r + 40,
               y: s
@@ -4292,7 +4292,7 @@ function i$({
           });
         }
         let d = UN().getCurrentPage();
-        _$$l6(zkO.USER, 'debug-linter-visual-groups', () => {
+        _$$l6(SourceType.USER, 'debug-linter-visual-groups', () => {
           n && (d?.appendChild(n), function (e, t) {
             let l = UN();
             for (let n of e) {
@@ -4302,7 +4302,7 @@ function i$({
                 y: e.size.y
               });
             }
-          }(i, n.size.x - 80), Egt?.replaceSelection([n.guid], !0), Y5.triggerAction('goto-layer', {
+          }(i, n.size.x - 80), SceneGraphHelpers?.replaceSelection([n.guid], !0), fullscreenValue.triggerAction('goto-layer', {
             args: {
               nodeId: n.guid
             }
@@ -4360,7 +4360,7 @@ function iV() {
       e.forEach(e => {
         let n = l.get(e);
         n && hV(n, e => {
-          let l = String(mHF?.getVisualGroupFieldsHash(e.guid) ?? 0);
+          let l = String(LinterCppBindings?.getVisualGroupFieldsHash(e.guid) ?? 0);
           let n = t.get(l) ?? [];
           t.set(l, [...n, e.guid]);
         });
@@ -4919,7 +4919,7 @@ function rt(e, t) {
       }
       i = i.parentNode;
     }
-    let r = Egt?.getNodePageBackgroundColor(e);
+    let r = SceneGraphHelpers?.getNodePageBackgroundColor(e);
     s(r ? {
       bg: r,
       type: 'color'
@@ -4939,9 +4939,9 @@ function rl(e, t, l) {
     };
   }
   let a = function (e, t) {
-    let l = mHF?.copyNodeToLinterScene(e);
+    let l = LinterCppBindings?.copyNodeToLinterScene(e);
     if (!l) return null;
-    let n = new qo(juq.LINTER).get(l);
+    let n = new qo(FileSourceType.LINTER).get(l);
     if (!n) return null;
     for (let e of n.childrenNodes) e.removeSelfAndChildren();
     n.cornerRadius = 0;
@@ -5363,12 +5363,12 @@ function r_(e, t, l) {
           console.error('Error generating thumbnail: Called showError on delegate');
         };
         if ((n = i ? await rj(t, l, h, violationsWithFixes, m, r.signal) : function (e, t, l, n) {
-          let i = mHF?.copyNodeToLinterScene(e);
+          let i = LinterCppBindings?.copyNodeToLinterScene(e);
           if (!i) throw new Error('Current linter scene guid not found');
           let r = UN().get(e);
           if (!r) throw new Error('Original node not found');
           if (n.aborted) throw new Cu();
-          let s = new qo(juq.LINTER).get(i);
+          let s = new qo(FileSourceType.LINTER).get(i);
           if (!s) throw new Error('Current linter scene node not found');
           let {
             activeToLinterGuidsMap,
@@ -5431,12 +5431,12 @@ function rb(e, t) {
   return `${e}-${t}`;
 }
 async function rj(e, t, l, n, i, r) {
-  let s = mHF?.copyNodeToLinterScene(e);
+  let s = LinterCppBindings?.copyNodeToLinterScene(e);
   if (!s) throw new Error('Suggested linter scene guid not found');
   let a = UN().get(e);
   if (!a) throw new Error('Original node not found');
   if (r.aborted) throw new Cu();
-  let d = new qo(juq.LINTER).get(s);
+  let d = new qo(FileSourceType.LINTER).get(s);
   if (!d) throw new Error('Suggested linter scene node not found');
   let {
     activeToLinterGuidsMap,
@@ -5449,7 +5449,7 @@ async function rj(e, t, l, n, i, r) {
     showError: i
   })();
   if (r.aborted) throw new Cu();
-  mHF?.applyPendingLinterNodeUpdates(s);
+  LinterCppBindings?.applyPendingLinterNodeUpdates(s);
   return {
     thumbnail: x,
     activeToLinterGuidsMap,
@@ -5485,7 +5485,7 @@ function rC(e) {
     let l = null;
     let n = new Map();
     try {
-      let t = mHF?.getUnrotatedLinterNodeBounds(e.guid);
+      let t = LinterCppBindings?.getUnrotatedLinterNodeBounds(e.guid);
       if (!t) throw new Error('Result is undefined or null');
       let i = t.bounds;
       l = {
@@ -5519,7 +5519,7 @@ function rC(e) {
       unrotatedBoundingBox: l,
       childrenUnrotatedBoundingBoxesMap: n,
       cornerRadiusValues: e.cornerRadiusValues,
-      absoluteCornerPoints: mHF?.getLinterNodeAbsoluteCornerPoints(e.guid) ?? null,
+      absoluteCornerPoints: LinterCppBindings?.getLinterNodeAbsoluteCornerPoints(e.guid) ?? null,
       absoluteTransform: e.absoluteTransform,
       stackTopPadding: e.stackTopPadding,
       stackBottomPadding: e.stackBottomPadding,
@@ -7551,10 +7551,10 @@ function sq(e) {
   return 'libraryKey' in e && 'assetType' in e;
 }
 function sW(e) {
-  return !!e && 'resolvedValue' in e && e.resolvedValue.type === Z_n.FLOAT;
+  return !!e && 'resolvedValue' in e && e.resolvedValue.type === VariableDataType.FLOAT;
 }
 function sK(e) {
-  return !!e && 'resolvedValue' in e && e.resolvedValue.type === Z_n.COLOR;
+  return !!e && 'resolvedValue' in e && e.resolvedValue.type === VariableDataType.COLOR;
 }
 function sX(e) {
   return !!e && 'type' in e && e.type === PW.STYLE;
@@ -8123,7 +8123,7 @@ function s8({
     selectedFixes: C?.fixes ?? [],
     cachedFixes: (k?.fixes ?? []).slice(0, OL),
     violatingNodeId: r,
-    type: rXF.FLOAT,
+    type: VariableResolvedDataType.FLOAT,
     scopes: E
   });
   let T = useMemo(() => {
@@ -8258,7 +8258,7 @@ function s6({
     selectedFixes: k?.fixes ?? [],
     cachedFixes: (E?.fixes ?? []).slice(0, EN),
     violatingNodeId: r,
-    type: rXF.COLOR,
+    type: VariableResolvedDataType.COLOR,
     scopes: S
   });
   let I = useMemo(() => {
@@ -8513,7 +8513,7 @@ function or({
     selectedFixes: k ?? [],
     cachedFixes: (E ?? []).slice(0, EN),
     violatingNodeId: s,
-    type: rXF.COLOR,
+    type: VariableResolvedDataType.COLOR,
     scopes: S
   });
   let I = useMemo(() => {
@@ -8907,7 +8907,7 @@ function op({
     selectedFixes: C ?? [],
     cachedFixes: (k ?? []).slice(0, OL),
     violatingNodeId: s,
-    type: rXF.FLOAT,
+    type: VariableResolvedDataType.FLOAT,
     scopes: E
   });
   let T = useMemo(() => {
@@ -9125,7 +9125,7 @@ function ob({
     selectedFixes: E ?? [],
     cachedFixes: (S ?? []).slice(0, EN),
     violatingNodeId: s,
-    type: rXF.COLOR,
+    type: VariableResolvedDataType.COLOR,
     scopes: d$({
       ruleId: t
     })
@@ -9656,7 +9656,7 @@ function oI({
       } catch {
         Rz();
       } finally {
-        t && Y5.commit();
+        t && fullscreenValue.commit();
       }
     }, [])
   };
@@ -9697,7 +9697,7 @@ let oN = memo(() => {
   !function () {
     let e = useAtomWithSubscription(vu);
     useEffect(() => {
-      e.length && Egt?.replaceSelection(e, !0);
+      e.length && SceneGraphHelpers?.replaceSelection(e, !0);
     }, [e]);
   }();
   _$$h(() => {
@@ -9991,12 +9991,12 @@ function oD() {
   }) : null;
 }
 let oH = memo(() => {
-  let e = ut(Ez5?.uiState()?.showDesignLinter, !1);
+  let e = getObservableValue(AppStateTsApi?.uiState()?.showDesignLinter, !1);
   let t = useAtomWithSubscription(pR);
   let l = VK();
   let r = PM();
   return (useEffect(() => () => {
-    Ez5?.uiState()?.showDesignLinter?.set(!1);
+    AppStateTsApi?.uiState()?.showDesignLinter?.set(!1);
   }, []), mr(), vP(), fx(e, t), e) ? r ? jsx(l9, {}) : l ? jsx(nQ, {}) : jsx(oB, {}) : null;
 });
 function oG() {
@@ -10081,15 +10081,15 @@ function ap({
   let s = q5();
   let d = cJ();
   let u = _$$tN('containsResponsiveSets');
-  let c = !i[ibQ.FRAME_PRESETS] && !i[ibQ.PENCIL_TOOL] && !u;
+  let c = !i[ItemType.FRAME_PRESETS] && !i[ItemType.PENCIL_TOOL] && !u;
   return jsxs(Fragment, {
     children: [jsx(VF, {
-      isVisible: i[ibQ.FRAME_PRESETS],
+      isVisible: i[ItemType.FRAME_PRESETS],
       children: () => jsx(_$$nl, {
         recordingKey: 'framePresetPanel'
       }, 'frame-presets')
     }), !d && jsx(VF, {
-      isVisible: i[ibQ.PENCIL_TOOL],
+      isVisible: i[ItemType.PENCIL_TOOL],
       children: () => jsx(_$$q4, {
         id: 'pencilToolPanel',
         recordingKey: 'pencilToolPanel',
@@ -10120,11 +10120,11 @@ function ah({
   let r = l.propertiesPanelTab;
   let s = p8('topLevelMode');
   let a = Dj(l.user);
-  let d = s !== lyf.PREVIEW && (s !== lyf.BRANCHING || !a) && s !== lyf.DEV_HANDOFF && r === FAf.DESIGN;
-  let u = s !== lyf.PREVIEW && s !== lyf.BRANCHING && r === FAf.PROTOTYPE;
-  let c = s === lyf.PREVIEW && !l.userStateLoaded && !i || r === FAf.INSPECT;
-  let x = r === FAf.EXPORT;
-  let p = r === FAf.COMMENT;
+  let d = s !== ViewType.PREVIEW && (s !== ViewType.BRANCHING || !a) && s !== ViewType.DEV_HANDOFF && r === DesignWorkspace.DESIGN;
+  let u = s !== ViewType.PREVIEW && s !== ViewType.BRANCHING && r === DesignWorkspace.PROTOTYPE;
+  let c = s === ViewType.PREVIEW && !l.userStateLoaded && !i || r === DesignWorkspace.INSPECT;
+  let x = r === DesignWorkspace.EXPORT;
+  let p = r === DesignWorkspace.COMMENT;
   return jsxs(Fragment, {
     children: [d && jsx(_$$Y, {
       scrollContainer: e,
@@ -10155,8 +10155,8 @@ function ag(e) {
     let n = _$$ow();
     let s = _$$ax();
     let a = dH();
-    let d = a === NLJ.FRAME || a === NLJ.COMMENTS || a === NLJ.VECTOR_PENCIL;
-    let u = d4(e => e.mirror.appModel.activeUserAction === QOV.DEFAULT);
+    let d = a === DesignGraphElements.FRAME || a === DesignGraphElements.COMMENTS || a === DesignGraphElements.VECTOR_PENCIL;
+    let u = d4(e => e.mirror.appModel.activeUserAction === UserActionState.DEFAULT);
     let c = ys();
     useEffect(() => {
       u && !n && isPropertiesPanelCollapsed && (d || s) && setPropertiesPanelCollapsed(!1);
@@ -10223,13 +10223,13 @@ let a_ = memo(() => {
   let D = _$$k4();
   let H = VP(l, 'edit_button_upgrading_to_edit');
   let G = t || H;
-  let U = ut(_$$aY(), FAf.DESIGN);
-  let q = J2(Ez5.propertiesPanelState().shownPropertiesPanels);
+  let U = getObservableValue(_$$aY(), DesignWorkspace.DESIGN);
+  let q = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels);
   let W = Ku();
   let K = qw();
   let X = _$$s_();
   let Z = !Oo() && X;
-  let Y = J2(UK().renderRulers);
+  let Y = getObservableOrFallback(UK().renderRulers);
   let {
     isRightPanelCollapsed
   } = useContext(_$$t4);
@@ -10239,7 +10239,7 @@ let a_ = memo(() => {
   let ee = yO();
   let et = _$$T4();
   let el = _$$q2();
-  let en = useMemo(() => D ? FAf.COMMENT : U, [U, D]);
+  let en = useMemo(() => D ? DesignWorkspace.COMMENT : U, [U, D]);
   useEffect(() => {
     en !== U && _$$aY()?.set(en);
   }, [en, U]);
@@ -10401,10 +10401,10 @@ function dc({
       setAttachments,
       claimAPendingAttachmentOrMakeOne
     } = _$$_4(e.guid);
-    let a = Ez5?.codeSelection();
-    let d = ut(a?.selectedPromptFrames, []);
+    let a = AppStateTsApi?.codeSelection();
+    let d = getObservableValue(a?.selectedPromptFrames, []);
     let u = useCallback(() => {
-      d && d.length > 0 && t === df.EMPTY && (_$$E0(d[0] || null, l, setAttachments, () => {}, claimAPendingAttachmentOrMakeOne), n1M?.clearSelectedPromptFrames());
+      d && d.length > 0 && t === df.EMPTY && (_$$E0(d[0] || null, l, setAttachments, () => {}, claimAPendingAttachmentOrMakeOne), MakeBindings?.clearSelectedPromptFrames());
     }, [l, setAttachments, claimAPendingAttachmentOrMakeOne, t, d]);
     useEffect(() => {
       attachments.length === 0 && u();
@@ -10569,10 +10569,10 @@ function dy({
     });
     let [n, r] = useAtomValueAndSetter(yq);
     if (n) {
-      let i = qE(n.x, 0, t - n.width);
-      let r = qE(n.y, 0, l - n.height);
-      let s = qE(n.width, 640, t - i);
-      let o = qE(n.height, 480, l - r);
+      let i = clamp(n.x, 0, t - n.width);
+      let r = clamp(n.y, 0, l - n.height);
+      let s = clamp(n.width, 640, t - i);
+      let o = clamp(n.height, 480, l - r);
       e = {
         x: i,
         y: r,
@@ -10580,8 +10580,8 @@ function dy({
         height: o
       };
     } else {
-      let n = qE(t * dj.targetPercentWidth, dj.minWidth, dj.maxWidth - 2 * dj.margin);
-      let i = qE(Math.min(n / dj.aspectRatio, l - 2 * dj.margin), dj.minHeight, dj.maxHeight);
+      let n = clamp(t * dj.targetPercentWidth, dj.minWidth, dj.maxWidth - 2 * dj.margin);
+      let i = clamp(Math.min(n / dj.aspectRatio, l - 2 * dj.margin), dj.minHeight, dj.maxHeight);
       e = {
         x: (t - n) / 2,
         y: (l - i) / 2,
@@ -10788,7 +10788,7 @@ let dN = memo(({
   let t = p8('isReadOnly');
   let l = d4(e => e.progressBarState);
   let p = p8('loadingEmbeds');
-  let h = ut(Ez5?.uiState().showCanvasSearch, !1);
+  let h = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let g = Lk();
   let m = useRef(null);
   let f = d4(e => e.userFlags);
@@ -10802,7 +10802,7 @@ let dN = memo(({
   let v = _$$e3();
   let C = ZO();
   let k = _$$l();
-  let E = ut(UK().enableCodegenMcpServer, !1);
+  let E = getObservableValue(UK().enableCodegenMcpServer, !1);
   let S = $();
   let w = BE();
   let R = jsx(_$$m, {
@@ -10819,7 +10819,7 @@ let dN = memo(({
   });
   return jsxs(oJ, {
     children: [jsx(ED, {}), jsxs(_$$sk, {
-      children: [l.mode !== Oin.OFF && jsx('div', {
+      children: [l.mode !== UIVisibilitySetting.OFF && jsx('div', {
         className: _q
       }), jsxs(pO, {
         initialFilterState: {
@@ -10854,12 +10854,12 @@ let dA = memo(() => {
   let t = _$$ax();
   let l = dH();
   _$$z({
-    topLevelMode: lyf.PREVIEW,
+    topLevelMode: ViewType.PREVIEW,
     eventName: 'Preview Mode Selection Changed',
     teamFilesOnly: !0
   });
   useEffect(() => {
-    t && e === lyf.PREVIEW && l !== NLJ.COMMENTS && _$$NT(FAf.INSPECT);
+    t && e === ViewType.PREVIEW && l !== DesignGraphElements.COMMENTS && _$$NT(DesignWorkspace.INSPECT);
   }, [t, e, l]);
   return jsxs(Fragment, {
     children: [jsx(a_, {}), jsx(dM, {})]

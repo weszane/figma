@@ -1,28 +1,28 @@
 import { useCallback } from "react";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { atom, createLocalStorageAtom, atomStoreManager } from "../figma_app/27355";
 import { rt } from "../figma_app/615482";
 import { SG, vv, hR, hW } from "../905/508457";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 let $$d8 = "code-window-back-to-design";
 let $$c17 = atom(null);
-let $$u25 = SG(() => Ez5.codeSelection().selectedCodeNodeIds);
-let $$p12 = SG(() => Ez5.codeSelection().fullscreenCodeNodeIds);
-let $$_23 = SG(() => Ez5.codeSelection().selectedCodeNodeSize);
-let $$h22 = SG(() => Ez5.codeSelection().fullscreenCodeNodeSize);
-let $$m11 = SG(() => Ez5.codeSelection().selectedCodeNodeBreakpoint);
-let $$g27 = SG(() => Ez5.codeSelection().fullscreenCodeNodeBreakpoint);
-let $$f6 = SG(() => Ez5.codeSelection().selectedCodeNodeClipContents);
-let $$E21 = SG(() => Ez5.codeSelection().fullscreenCodeNodeClipContents);
-let $$y0 = SG(() => Ez5.codeSelection().selectedCodeNodeName);
-let $$b10 = SG(() => Ez5.codeSelection().selectedCanvasNodeIds);
-let $$T14 = vv(() => Ez5?.codeSelection()?.showMainComponent, !1);
+let $$u25 = SG(() => AppStateTsApi.codeSelection().selectedCodeNodeIds);
+let $$p12 = SG(() => AppStateTsApi.codeSelection().fullscreenCodeNodeIds);
+let $$_23 = SG(() => AppStateTsApi.codeSelection().selectedCodeNodeSize);
+let $$h22 = SG(() => AppStateTsApi.codeSelection().fullscreenCodeNodeSize);
+let $$m11 = SG(() => AppStateTsApi.codeSelection().selectedCodeNodeBreakpoint);
+let $$g27 = SG(() => AppStateTsApi.codeSelection().fullscreenCodeNodeBreakpoint);
+let $$f6 = SG(() => AppStateTsApi.codeSelection().selectedCodeNodeClipContents);
+let $$E21 = SG(() => AppStateTsApi.codeSelection().fullscreenCodeNodeClipContents);
+let $$y0 = SG(() => AppStateTsApi.codeSelection().selectedCodeNodeName);
+let $$b10 = SG(() => AppStateTsApi.codeSelection().selectedCanvasNodeIds);
+let $$T14 = vv(() => AppStateTsApi?.codeSelection()?.showMainComponent, !1);
 let $$I24 = createLocalStorageAtom("previouslySelectedInstance", null);
-let $$S1 = vv(() => Ez5?.codeSelection()?.selectedCodeFileNodeId, null);
-let $$v5 = vv(() => Ez5?.codeSelection()?.fullscreenCodeFileNodeId, null);
-vv(() => Ez5?.codeSelection()?.selectedPromptFrames, []);
-let $$A18 = vv(() => Ez5?.codeSelection()?.selectedCodeBehavior, null);
-let $$x4 = vv(() => Ez5?.codeSelection()?.fullscreenCodeBehavior, null);
+let $$S1 = vv(() => AppStateTsApi?.codeSelection()?.selectedCodeFileNodeId, null);
+let $$v5 = vv(() => AppStateTsApi?.codeSelection()?.fullscreenCodeFileNodeId, null);
+vv(() => AppStateTsApi?.codeSelection()?.selectedPromptFrames, []);
+let $$A18 = vv(() => AppStateTsApi?.codeSelection()?.selectedCodeBehavior, null);
+let $$x4 = vv(() => AppStateTsApi?.codeSelection()?.fullscreenCodeBehavior, null);
 let $$N19 = createLocalStorageAtom("codeWindowPanelConfiguration", "chat");
 let $$C29 = createLocalStorageAtom("codeFullViewPanelConfiguration", "chat");
 hR([], {
@@ -37,23 +37,23 @@ export function $$L16(e) {
   }, [e]);
 }
 export function $$P15(e) {
-  Ez5?.openCodeWindowForNode(e.guid);
+  AppStateTsApi?.openCodeWindowForNode(e.guid);
 }
 export function $$D7() {
-  Ez5?.closeCodeWindow();
+  AppStateTsApi?.closeCodeWindow();
 }
 export function $$k26(e) {
-  Ez5?.openFullscreenCodeViewForNode(e.guid);
+  AppStateTsApi?.openFullscreenCodeViewForNode(e.guid);
 }
 export function $$M3(e, t) {
-  Ez5?.openCodeWindowForCodeBehavior(e.guid, t);
+  AppStateTsApi?.openCodeWindowForCodeBehavior(e.guid, t);
 }
 export function $$F20(e, t) {
-  Ez5?.openFullscreenCodeViewForCodeBehavior(e.guid, t);
+  AppStateTsApi?.openFullscreenCodeViewForCodeBehavior(e.guid, t);
 }
 export function $$j9(e) {
-  let t = Ez5.designToCodeState();
-  let r = J2(t.generating);
+  let t = AppStateTsApi.designToCodeState();
+  let r = getObservableOrFallback(t.generating);
   return !!e && r.has(e);
 }
 export const DW = $$y0;

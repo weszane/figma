@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { lyf } from "../figma_app/763686";
+import { ViewType } from "../figma_app/763686";
 import { H } from "../905/620380";
 import { I } from "../figma_app/583780";
 import { ZC } from "../figma_app/39751";
@@ -36,7 +36,7 @@ var $$T1 = (e => (e[e.TRUE = 0] = "TRUE", e[e.FALSE = 1] = "FALSE", e[e.LOADING 
 export function $$I5() {
   let e = _$$g();
   let t = useSelector(e => e.mirror.appModel.showUi);
-  let r = useSelector(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
+  let r = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.LAYOUT);
   let o = useSelector(e => i1(e.selectedView));
   let l = useMemo(() => new Date(), []);
   let {

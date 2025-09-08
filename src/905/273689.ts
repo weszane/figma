@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { w_, Ih } from "../figma_app/273493";
 import { Uz } from "../905/63728";
 import { o6 } from "../figma_app/806412";
@@ -149,11 +149,11 @@ let g = class e extends o6 {
       switch (e.keyCode) {
         case Uz.LEFT_ARROW:
         case Uz.RIGHT_ARROW:
-          i.s = qE(i.s + t / 100, 0, 1);
+          i.s = clamp(i.s + t / 100, 0, 1);
           break;
         case Uz.UP_ARROW:
         case Uz.DOWN_ARROW:
-          "l" in i ? i.l = qE(i.l + t / 100, 0, 1) : i.v = qE(i.v + t / 100, 0, 1);
+          "l" in i ? i.l = clamp(i.l + t / 100, 0, 1) : i.v = clamp(i.v + t / 100, 0, 1);
       }
       this.props.changeCallback(i, !0);
     };

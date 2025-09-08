@@ -1,68 +1,111 @@
-var $$n1;
-var $$r5;
-let s;
-function o(e, t, i) {
-  t in e ? Object.defineProperty(e, t, {
-    value: i,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = i;
-  return e;
+// Types for alignment enums (original: $$n1, $$r5)
+export enum HorizontalAlignment {
+  LEFT = 0,
+  CENTER = 1,
+  RIGHT = 2,
+  JUSTIFIED = 3,
 }
-class l {
-  constructor(e) {
-    o(this, "handle", void 0);
-    this.handle = e;
+
+export enum VerticalAlignment {
+  TOP = 0,
+  CENTER = 1,
+  BOTTOM = 2,
+}
+
+/**
+ * Axis enum (original: Axis)
+ */
+export enum Axis {
+  X = 0,
+  Y = 1,
+}
+
+// Internal state for observable value (original: s)
+let writableObservableValueInternal: any;
+
+/**
+ * Base class for observable value (original: l)
+ */
+export class WritableObservableValue_VectorF_Internal {
+  handle: any;
+
+  /**
+   * @param handle - The handle for the observable value
+   */
+  constructor(handle: any) {
+    this.handle = handle;
   }
 }
-export class $$d0 extends l {
-  getCopy() {
-    return s.getCopy(this.handle);
+
+/**
+ * Mutable observable value class (original: $$d0)
+ */
+export class MutableWritableObservableValue_VectorF extends WritableObservableValue_VectorF_Internal {
+  /**
+   * Returns a copy of the observable value
+   * @returns {any}
+   */
+  getCopy(): any {
+    return writableObservableValueInternal.getCopy(this.handle);
   }
-  set(e) {
-    s.set(this.handle, e);
+
+  /**
+   * Sets the value of the observable
+   * @param value
+   */
+  set(value: any): void {
+    writableObservableValueInternal.set(this.handle, value);
   }
-  subscribeFromJs(e) {
-    return s.subscribeFromJs(this.handle, e);
+
+  /**
+   * Subscribes from JS
+   * @param callback
+   * @returns {any}
+   */
+  subscribeFromJs(callback: any): any {
+    return writableObservableValueInternal.subscribeFromJs(this.handle, callback);
   }
-  unsubscribeFromJs(e) {
-    s.unsubscribeFromJs(this.handle, e);
+
+  /**
+   * Unsubscribes from JS
+   * @param callback
+   */
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValueInternal.unsubscribeFromJs(this.handle, callback);
   }
-  constructor(e) {
-    super(e);
-    o(this, "handle", void 0);
-    this.handle = e;
+
+  /**
+   * @param handle - The handle for the observable value
+   */
+  constructor(handle: any) {
+    super(handle);
+    this.handle = handle;
   }
 }
-export function $$c3(e) {
-  s = e.WritableObservableValue_VectorF__Internal;
-  globalThis.WritableObservableValue_VectorF_ = l;
-  globalThis.MutableWritableObservableValue_VectorF_ = $$d0;
+
+/**
+ * Initializes the observable value system (original: $$c3)
+ * @param e - The object containing WritableObservableValue_VectorF__Internal
+ */
+export function setupWritableObservableValue_VectorF(e: { WritableObservableValue_VectorF__Internal: any }): void {
+  writableObservableValueInternal = e.WritableObservableValue_VectorF__Internal;
+  globalThis.WritableObservableValue_VectorF_ = WritableObservableValue_VectorF_Internal;
+  globalThis.MutableWritableObservableValue_VectorF_ = MutableWritableObservableValue_VectorF;
 }
-export function $$u2() {
+
+/**
+ * Returns the internal writable observable value (original: $$u2)
+ */
+export function getWritableObservableValue_VectorF_Internal(): { writableObservableValue_VectorF__Internal: any } {
   return {
-    writableObservableValue_VectorF__Internal: s
+    writableObservableValue_VectorF__Internal: writableObservableValueInternal,
   };
 }
-!function (e) {
-  e[e.LEFT = 0] = "LEFT";
-  e[e.CENTER = 1] = "CENTER";
-  e[e.RIGHT = 2] = "RIGHT";
-  e[e.JUSTIFIED = 3] = "JUSTIFIED";
-}($$n1 || ($$n1 = {}));
-(function (e) {
-  e[e.TOP = 0] = "TOP";
-  e[e.CENTER = 1] = "CENTER";
-  e[e.BOTTOM = 2] = "BOTTOM";
-})($$r5 || ($$r5 = {}));
-export enum Axis {
-  X = 0
-  Y = 1
-}
-export const Ae = $$d0;
-export const GP = $$n1;
-export const KO = $$u2;
-export const LQ = $$c3;
-export const _0 = Axis;
-export const zb = $$r5;
+
+// Exported variables with refactored names
+export const Ae = MutableWritableObservableValue_VectorF; // original: $$d0
+export const GP = HorizontalAlignment; // original: $$n1
+export const KO = getWritableObservableValue_VectorF_Internal; // original: $$u2
+export const LQ = setupWritableObservableValue_VectorF; // original: $$c3
+export const _0 = Axis; // original: Axis
+export const zb = VerticalAlignment; // original: $$r5

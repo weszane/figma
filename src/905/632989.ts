@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
 import { I } from "../905/494625";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 export let $$l0 = forwardRef(({
   children: e,
   className: t,
@@ -15,7 +15,7 @@ export let $$l0 = forwardRef(({
     ...l
   });
   return jsx("button", {
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...c,
     ref: d,
     type: i,

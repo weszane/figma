@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
@@ -17,7 +17,7 @@ import { f as _$$f } from "../905/335032";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { aV } from "../figma_app/722362";
 import { Ib } from "../905/129884";
@@ -37,7 +37,7 @@ import { d1 } from "../905/766303";
 import { D as _$$D } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { _6 } from "../figma_app/386952";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Yj } from "../figma_app/951233";
 import { dE } from "../figma_app/598018";
 import { m as _$$m2 } from "../905/99004";
@@ -64,7 +64,7 @@ let O = memo(function ({
   let r = Zr("zoom-in");
   let i = useSelector(e => !1 === e.mirror.appModel.showUi);
   let s = aV();
-  return !Y5.isReady() || i ? null : jsx(_$$o, {
+  return !fullscreenValue.isReady() || i ? null : jsx(_$$o, {
     eventListeners: ["onClick"],
     children: jsxs("div", {
       "data-onboarding-key": _$$q,
@@ -95,7 +95,7 @@ function R(e) {
     }),
     disabled: !canZoom,
     onClick: () => {
-      Y5.triggerAction("zoom-in");
+      fullscreenValue.triggerAction("zoom-in");
     },
     htmlAttributes: {
       "data-tooltip-type": Ib.LOOKUP,
@@ -124,7 +124,7 @@ function L(e) {
     }),
     disabled: !canZoom,
     onClick: () => {
-      Y5.triggerAction("zoom-out");
+      fullscreenValue.triggerAction("zoom-out");
     },
     htmlAttributes: {
       "data-tooltip-type": Ib.LOOKUP,
@@ -210,7 +210,7 @@ let $$eh0 = memo(function () {
   let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;
   let U = $$eg1();
   let H = useAtomWithSubscription(P4);
-  let W = ut(Ez5?.uiState().inProductHelpSidePanelWidth, 0);
+  let W = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);
   if (jl() || !_ && j) return null;
   let q = jsxs("div", {
     ref: u,

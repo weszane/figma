@@ -20,6 +20,8 @@ declare global {
     DESKTOP_CHANNEL: string
     DESKTOP_VERSION: string
     DESKTOP_CLIENT_ID: string
+    scheduler: any
+    _fullscreen_:any
   }
 
   interface globalThis {

@@ -5,13 +5,13 @@ import { Pq, _Z, Rc, l5, vj } from "../figma_app/819288";
 import { WB } from "../905/761735";
 import { g } from "../905/880308";
 import { XHR } from "../905/910117";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { Gq } from "../905/380385";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 let h = new class {
   constructor() {
-    this.FeedBellStatesSchemaValidator = vh();
+    this.FeedBellStatesSchemaValidator = createNoOpValidator();
   }
   getFeedBellStates() {
     return this.FeedBellStatesSchemaValidator.validate(async ({
@@ -20,7 +20,7 @@ let h = new class {
   }
 }();
 let $$g7 = NC("REFRESH_FEED");
-let $$f5 = nF((e, t, {
+let $$f5 = createOptimistThunk((e, t, {
   loadingKey: i
 }) => {
   if (!getFeatureFlags().xr_debounce_threshold) return;
@@ -34,7 +34,7 @@ let $$f5 = nF((e, t, {
 });
 let $$_11 = NC("TEAM_FEED_SET_BELL_STATE");
 let $$A10 = NC("TEAM_FEED_SET_INITIAL_BELL_STATES");
-let $$y3 = nF((e, t) => {
+let $$y3 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
   let n = WB();
   let r = t.uuid;
@@ -46,7 +46,7 @@ let $$y3 = nF((e, t) => {
     }
   }, a);
 });
-let $$b4 = nF((e, t) => {
+let $$b4 = createOptimistThunk((e, t) => {
   t.messageMeta = Pq(t.messageMeta);
   let i = e.getState().user;
   let n = WB();
@@ -68,7 +68,7 @@ let $$b4 = nF((e, t) => {
     }
   }, l);
 });
-let $$v6 = nF((e, t) => {
+let $$v6 = createOptimistThunk((e, t) => {
   t.messageMeta = Pq(t.messageMeta);
   let i = e.getState().user;
   let n = WB();
@@ -106,7 +106,7 @@ let $$v6 = nF((e, t) => {
     }
   }, c);
 });
-let $$I8 = nF((e, t) => {
+let $$I8 = createOptimistThunk((e, t) => {
   let {
     commentUuid,
     emoji,
@@ -122,7 +122,7 @@ let $$I8 = nF((e, t) => {
 let E = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => XHR.del(`/api/feed_posts/comments/${e}/reactions`, {
   emoji: t
 }));
-let $$x1 = nF((e, t) => {
+let $$x1 = createOptimistThunk((e, t) => {
   let {
     commentUuid,
     commentId,
@@ -151,7 +151,7 @@ let $$x1 = nF((e, t) => {
 let S = (e, t) => WB().getIdFromUuid("FeedComment", e).then(e => XHR.post(`/api/feed_posts/comments/${e}/reactions`, {
   emoji: t
 }));
-let $$w9 = nF((e, t) => {
+let $$w9 = createOptimistThunk((e, t) => {
   let {
     feedPostUuid,
     emoji,
@@ -167,7 +167,7 @@ let $$w9 = nF((e, t) => {
 let C = (e, t) => XHR.del(`/api/feed_posts/${e}/reactions`, {
   emoji: t
 });
-let $$T2 = nF((e, t) => {
+let $$T2 = createOptimistThunk((e, t) => {
   let {
     feedPostUuid,
     feedPostId,

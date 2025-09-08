@@ -1,36 +1,36 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { rcl, NLJ } from "../figma_app/763686";
+import { Command, DesignGraphElements } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { x } from "../905/749159";
 export function $$u0(e) {
   trackEventAnalytics("show_auth_for_logged_out_file", {
     actionType: function (e) {
       switch (e) {
-        case rcl.SET_TOOL_DEFAULT:
+        case Command.SET_TOOL_DEFAULT:
           return "SET_TOOL_DEFAULT";
-        case rcl.SET_TOOL_COMMENTS:
+        case Command.SET_TOOL_COMMENTS:
           return "SET_TOOL_COMMENTS";
-        case rcl.FOLLOW_PRESENTER:
+        case Command.FOLLOW_PRESENTER:
           return "CLICK_SIDEBAR_AVATAR";
-        case rcl.ENTER_INSPECT_MODE:
+        case Command.ENTER_INSPECT_MODE:
           return "CLICK_SIDEBAR_PROPERTIES";
-        case rcl.SET_TOOL_DEFAULT_DEV_HANDOFF:
+        case Command.SET_TOOL_DEFAULT_DEV_HANDOFF:
           return "CLICK_TOGGLE_DEV_MODE";
-        case rcl.PRESENT_AS_PROTOTYPE:
+        case Command.PRESENT_AS_PROTOTYPE:
           return "CLICK_SIDEBAR_PROTOTYPE";
-        case NLJ.COMMENTS:
+        case DesignGraphElements.COMMENTS:
           return "CLICK_TOOLBELT_COMMENTS";
-        case NLJ.FRAME:
+        case DesignGraphElements.FRAME:
           return "CLICK_TOOLBELT_FRAME";
-        case NLJ.SHAPE_RECTANGLE:
+        case DesignGraphElements.SHAPE_RECTANGLE:
           return "CLICK_TOOLBELT_RECTANGLE";
-        case NLJ.VECTOR_PEN:
+        case DesignGraphElements.VECTOR_PEN:
           return "CLICK_TOOLBELT_PEN";
-        case NLJ.TYPE:
+        case DesignGraphElements.TYPE:
           return "CLICK_TOOLBELT_TEXT";
         case "SELECT_COMMENT_SIDEBAR":
           return "SELECT_COMMENT_SIDEBAR";
@@ -68,7 +68,7 @@ export function $$p1() {
       origin: "signed_out_edit",
       redirectUrl: Ay.location.pathname
     }));
-    e(to({
+    e(showModalHandler({
       type: x,
       data: {
         actionOrTool: t

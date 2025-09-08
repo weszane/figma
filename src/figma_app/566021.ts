@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { glU, iCO, Egt } from "../figma_app/763686";
+import { Fullscreen, StateHierarchy, SceneGraphHelpers } from "../figma_app/763686";
 import { c1, Pt } from "../figma_app/806412";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg } from "../figma_app/967154";
@@ -11,23 +11,23 @@ import { e as _$$e } from "../figma_app/763473";
 import { At } from "../905/973142";
 import { c2 } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
 import { F4 } from "../figma_app/889655";
 import { Lg, od } from "../figma_app/505098";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { fI } from "../figma_app/626177";
 import { u as _$$u } from "../905/419626";
 import { Uz } from "../905/63728";
 import { X as _$$X } from "../905/606795";
 import { L as _$$L } from "../905/408237";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { N as _$$N } from "../905/438674";
 import { v as _$$v } from "../figma_app/258006";
 import { G as _$$G } from "../figma_app/404079";
 import { uA, Wv, Im, kL } from "../figma_app/454622";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { s as _$$s } from "../cssbuilder/589278";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
@@ -77,7 +77,7 @@ function v(e) {
     isViewOnly,
     onSubmitDescription
   } = e;
-  let a = gl(description);
+  let a = isInvalidValue(description);
   let s = A(description);
   let l = useId();
   let d = useCallback((e, r) => {
@@ -106,7 +106,7 @@ function v(e) {
   });
 }
 function A(e) {
-  return gl(e) ? getI18nString("design_systems.component_panel.description_mixed") : e;
+  return isInvalidValue(e) ? getI18nString("design_systems.component_panel.description_mixed") : e;
 }
 let O = /^\w+:/;
 function R(e) {
@@ -136,13 +136,13 @@ function R(e) {
     if (null !== i) {
       if (i.length < 1) {
         onSubmitLinks([]);
-        Y5.commit();
+        fullscreenValue.commit();
         return;
       }
       onSubmitLinks([{
         uri: i.match(O) ? i : `https://${i}`
       }]);
-      Y5.commit();
+      fullscreenValue.commit();
       a(null);
     }
   }, [onSubmitLinks, i, a]);
@@ -211,12 +211,12 @@ function B() {
   });
   return jsx("div", {
     className: _$$s.bSolid.bt1.colorBorder.pt16.pb28.pl12.pr12.$,
-    children: jsxs(_$$S, {
+    children: jsxs(Checkbox, {
       checked: e,
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: getI18nString("design_systems.component_panel.simplify_instances")
       }),
-      onChange: () => l7.user("simplify-instance-panels", () => glU.setSimplifyInstancePanels(!e)),
+      onChange: () => permissionScopeHandler.user("simplify-instance-panels", () => Fullscreen.setSimplifyInstancePanels(!e)),
       recordingKey: "simplifyInstancePanelsCheckbox",
       htmlAttributes: {
         "data-testid": "simplify-instance-panels-checkbox"
@@ -244,7 +244,7 @@ function G(e) {
   let _ = pickerShown.id === uA;
   let h = useSelector(e => "state-group" === menuType ? [od(e)].filter(e => null != e) : F4(e));
   let g = useCallback((e, t) => {
-    l7.user("set-description", () => {
+    permissionScopeHandler.user("set-description", () => {
       for (let r of h) r.setDescriptionRich(e, t);
     });
     let {
@@ -269,7 +269,7 @@ function G(e) {
       componentKeys
     });
   }, [h]);
-  let I = pickerShown?.id === Wv && p !== iCO.STATE;
+  let I = pickerShown?.id === Wv && p !== StateHierarchy.STATE;
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: _ ? "component_controls_menu--descriptionContainerViewOnly--VAeo9 component_controls_menu--descriptionContainer--me8J2" : "component_controls_menu--descriptionContainer--me8J2",
@@ -289,7 +289,7 @@ function G(e) {
 }
 function V(e) {
   let t = e.map(e => e.guid);
-  let r = t.map(e => Egt.getAssetKeyForPublish(e)).filter(isNotNullish).map(e => e.toString());
+  let r = t.map(e => SceneGraphHelpers.getAssetKeyForPublish(e)).filter(isNotNullish).map(e => e.toString());
   return {
     updatedNodeIds: t,
     componentKeys: r
@@ -308,7 +308,7 @@ function X({
   _$$h(() => {
     let e = r?.id === uA;
     let t = _P(u?.uri);
-    let n = d?.map(e => r?.id === Wv ? Egt.getAssetKeyForPublish(e) : r?.id === uA ? Egt.getAssetKeyForPublish(k4([e], s) ?? "") : "").filter(isNotNullish).map(e => e.toString());
+    let n = d?.map(e => r?.id === Wv ? SceneGraphHelpers.getAssetKeyForPublish(e) : r?.id === uA ? SceneGraphHelpers.getAssetKeyForPublish(k4([e], s) ?? "") : "").filter(isNotNullish).map(e => e.toString());
     trackEventAnalytics("Component documentation modal opened", {
       hostname: t,
       selectedNodeIds: d,
@@ -356,7 +356,7 @@ function er({
 }) {
   var d;
   let [c,, u] = _$$t2.useTabs(ee, {
-    defaultActive: (d = t ?? [], !o || gl(e) || e.length > 0 || d.length > 0 ? "selected_variant" : "component_set"),
+    defaultActive: (d = t ?? [], !o || isInvalidValue(e) || e.length > 0 || d.length > 0 ? "selected_variant" : "component_set"),
     recordingKey: l ?? "variantDocumentationMenu"
   });
   let p = !o || (e || t?.length) && (r || a?.length);
@@ -390,7 +390,7 @@ export function $$en0(e) {
   let p = useSelector(e => e.pickerShown);
   let _ = Tg();
   return kL(p) ? jsx(X, {
-    children: u === iCO.STATE || u === iCO.STATE_INSTANCE ? jsx(er, {
+    children: u === StateHierarchy.STATE || u === StateHierarchy.STATE_INSTANCE ? jsx(er, {
       description,
       links: _,
       containingStateGroupDescription,

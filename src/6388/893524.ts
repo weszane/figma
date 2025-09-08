@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { A } from "../905/920165";
 import { Pt } from "../figma_app/806412";
 import { E } from "../905/277716";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 export function $$a0({
   value: e,
   min: t,
@@ -28,12 +28,12 @@ export function $$a0({
           hints: c,
           max: l,
           min: t,
-          mixed: gl(e),
+          mixed: isInvalidValue(e),
           onChange: u,
           rangeAnchor: t,
           recordingKey: Pt(g, "slider"),
           step: a,
-          value: hS(e) ? e : 0
+          value: isValidValue(e) ? e : 0
         })
       })
     }), jsx("div", {

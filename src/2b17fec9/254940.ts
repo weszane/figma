@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { nR } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
 import { RW } from "../figma_app/684168";
 import { q5 } from "../figma_app/516028";
@@ -47,7 +47,7 @@ export function $$_0(e) {
   let v = "figjam_plugin_tile" === variant ? renderI18nText("universal_insert.request") : renderI18nText("universal_insert.request_approval");
   return jsx(nR, {
     onClick: () => {
-      t(to({
+      t(showModalHandler({
         type: S,
         data: y
       }));

@@ -15,7 +15,7 @@ import { F as _$$F } from "../905/302958";
 import { E as _$$E } from "../905/984674";
 import { M9I, KiY } from "../figma_app/43951";
 import { J } from "../905/403084";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { P } from "../905/994270";
 import { tT } from "../905/663269";
 import { Yx } from "../figma_app/930338";
@@ -128,7 +128,7 @@ function T({
     })
   });
 }
-export let $$k0 = Ju(function ({
+export let $$k0 = registerModal(function ({
   extension: e,
   isWidget: t,
   orgId: i,

@@ -13,7 +13,7 @@ import { pW } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { h as _$$h } from "../905/142086";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { up } from "../905/760074";
@@ -29,14 +29,14 @@ import { FPlanNameType, FFileType, FProductAccessType, FPlanAccessType } from ".
 import { pTp, x8f } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { pE } from "../figma_app/630077";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { RR } from "../905/514666";
 import { bP } from "../905/739964";
 import { dD } from "../905/519113";
-export let $$V0 = Ju(function (e) {
+export let $$V0 = registerModal(function (e) {
   let t = q5();
   let {
     team,
@@ -77,7 +77,7 @@ export let $$V0 = Ju(function (e) {
   });
   let y = _6();
   let b = () => {
-    s(to({
+    s(showModalHandler({
       type: dD,
       data: {
         entrypoint: RR.PUBLISH_UPSELL_MODAL
@@ -96,7 +96,7 @@ export let $$V0 = Ju(function (e) {
       fileKey: t.key,
       nodeId: "fullscreen" === y.view && y.nodeId || ""
     },
-    upsellSource: _$$b.LIBRARY_UPSELL_BADGE
+    upsellSource: UpsellModalType.LIBRARY_UPSELL_BADGE
   }) : jsx(G, {
     team,
     afterFileMove,
@@ -156,13 +156,13 @@ function G(e) {
       fileKey: g.key,
       nodeId: E
     },
-    upsellSource: _$$b.LIBRARY_UPSELL_BADGE
+    upsellSource: UpsellModalType.LIBRARY_UPSELL_BADGE
   }) : jsx(Fragment, {});
 }
 function z(e) {
   let t = useDispatch();
   let i = () => {
-    t(Ce());
+    t(hideModal());
   };
   let r = hS({
     onClose: i,

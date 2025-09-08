@@ -12,10 +12,10 @@ import { Vg } from "../figma_app/147952";
 import { nl, cW, ZT } from "../figma_app/844435";
 import { tS } from "../figma_app/516028";
 import { _TC } from "../figma_app/43951";
-import { DM } from "../figma_app/300692";
+import { getPluginByFileId } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
 import { CN } from "../figma_app/915202";
-import { ZQ, SV } from "../figma_app/155287";
+import { hasLocalFileId, SV } from "../figma_app/155287";
 var l = o;
 export let $$I2 = atom([]);
 export function $$S1() {
@@ -93,7 +93,7 @@ export function $$S1() {
           parameterValues
         } = e;
         let p = localFileId?.toString() || extensionId;
-        let h = DM({
+        let h = getPluginByFileId({
           idToSearch: p,
           localExtensionsByFileId: t,
           publishedExtensions: r
@@ -102,9 +102,9 @@ export function $$S1() {
           extensionId in debugState.getState().recentlyUsed.plugins.fetchedResources || s.has(extensionId) || reportError(_$$e.AI_FOR_PRODUCTION, Error(`Published plugin with ID ${extensionId} not fetched`), {});
           return null;
         }
-        if (!h || !ZQ(h) && currentExtensionVersionId !== h.current_plugin_version_id) return null;
+        if (!h || !hasLocalFileId(h) && currentExtensionVersionId !== h.current_plugin_version_id) return null;
         if (!parameterValues) {
-          ZQ(h) ? reportError(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for local plugin with ID ${extensionId}`), {}) : reportError(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for published plugin with ID ${extensionId}`), {});
+          hasLocalFileId(h) ? reportError(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for local plugin with ID ${extensionId}`), {}) : reportError(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for published plugin with ID ${extensionId}`), {});
           return null;
         }
         let m = function (e) {

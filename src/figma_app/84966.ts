@@ -20,7 +20,7 @@ import { JRW } from "../figma_app/43951";
 import { vr } from "../figma_app/514043";
 import { mt } from "../figma_app/345997";
 import { IX } from "../905/712921";
-import { NW } from "../figma_app/831101";
+import { BillingCycle } from "../figma_app/831101";
 import { ud, dA, Gu } from "../905/513035";
 import { N_ } from "../905/332483";
 var d = l;
@@ -127,7 +127,7 @@ function V(e, t, r = {
   let [i] = IT(JRW({
     planParentId: e.parentId,
     planParentType: e.type === FOrganizationLevelType.ORG ? FOrganizationEntityType.ORG : FOrganizationEntityType.TEAM,
-    billingInterval: NW.YEAR
+    billingInterval: BillingCycle.YEAR
   }), {
     enabled: !!e.parentId && r.enabled
   });
@@ -150,7 +150,7 @@ export function $$z7(e) {
   let a = Rs(JRW, {
     planParentId: e?.planKey.parentId ?? "",
     planParentType: e?.planKey.type === FOrganizationLevelType.ORG ? FOrganizationEntityType.ORG : FOrganizationEntityType.TEAM,
-    billingInterval: NW.YEAR
+    billingInterval: BillingCycle.YEAR
   }, {
     enabled: t && i
   });

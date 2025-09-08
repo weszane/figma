@@ -1,4 +1,4 @@
-import { P2e, hMR, aDE, fLc, h3O } from "../figma_app/763686";
+import { FullscreenPerfInfo, CorePerfInfo, TextureType, ImageSourceType, Multiplayer } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -29,30 +29,30 @@ export function $$E2(e, t) {
 }
 export function $$y1() {
   let e = b();
-  if (!P2e) return {
+  if (!FullscreenPerfInfo) return {
     ...e
   };
-  let t = P2e.getHeapMemoryBreakdown();
+  let t = FullscreenPerfInfo.getHeapMemoryBreakdown();
   let r = {};
   for (let e of Object.keys(t)) r[`heap_breakdown_${e}`] = t[e];
-  let i = P2e.getRendererMemoryBreakdown() || {};
+  let i = FullscreenPerfInfo.getRendererMemoryBreakdown() || {};
   function a(e) {
     return "number" == typeof e ? e : parseInt(e);
   }
   return {
     ...e,
-    renderer_gpu_memory: a(P2e.getRendererGpuMemory()),
+    renderer_gpu_memory: a(FullscreenPerfInfo.getRendererGpuMemory()),
     renderer_textures_memory: a(i.textures),
     renderer_vertex_buffers_memory: a(i.vertexBuffers),
     renderer_render_buffers_memory: a(i.renderBuffers),
     renderer_uniform_buffers_memory: a(i.uniformBuffers),
-    image_memory: a(P2e.getTotalImageMemory()),
+    image_memory: a(FullscreenPerfInfo.getTotalImageMemory()),
     ...r
   };
 }
 function b() {
   let e = aW() ?? 0;
-  let t = hMR;
+  let t = CorePerfInfo;
   if (!t) return {
     process_memory: e,
     emscripten_reserved_memory: le()
@@ -67,13 +67,13 @@ function b() {
     alloc_call_count: t.getAllocCallCount(),
     emscripten_reserved_memory: le(),
     indirect_buffer_memory: t.getJsBufferMemory(),
-    texture_image_memory: t.getTextureMemStatsTotal(aDE.IMAGE),
-    texture_tile_atlas_memory: t.getTextureMemStatsTotal(aDE.TILE_ATLAS),
-    texture_tile_stack_memory: t.getTextureMemStatsTotal(aDE.TILE_STACK),
-    texture_glyph_data_memory: t.getTextureMemStatsTotal(aDE.GLYPH_DATA),
-    compressed_images: t.getImageMemStatsTotal(fLc.BITMAP),
-    uncompressed_images_arraybuffer: t.getImageMemStatsTotal(fLc.COMPRESSED),
-    uncompressed_images_imagebitmap: t.getImageMemStatsTotal(fLc.BUFFER)
+    texture_image_memory: t.getTextureMemStatsTotal(TextureType.IMAGE),
+    texture_tile_atlas_memory: t.getTextureMemStatsTotal(TextureType.TILE_ATLAS),
+    texture_tile_stack_memory: t.getTextureMemStatsTotal(TextureType.TILE_STACK),
+    texture_glyph_data_memory: t.getTextureMemStatsTotal(TextureType.GLYPH_DATA),
+    compressed_images: t.getImageMemStatsTotal(ImageSourceType.BITMAP),
+    uncompressed_images_arraybuffer: t.getImageMemStatsTotal(ImageSourceType.COMPRESSED),
+    uncompressed_images_imagebitmap: t.getImageMemStatsTotal(ImageSourceType.BUFFER)
   };
 }
 async function T() {
@@ -85,7 +85,7 @@ async function T() {
 }
 async function I(e, t, r, i, o) {
   let p = "Fullscreen Periodic Metrics" === e;
-  if (!(!hMR || "ok" !== atomStoreManager.get(_$$h) || isInteractionOrEvalMode())) {
+  if (!(!CorePerfInfo || "ok" !== atomStoreManager.get(_$$h) || isInteractionOrEvalMode())) {
     if (p) {
       let a = $$y1();
       r && (a.cpu_usage = await T());
@@ -97,7 +97,7 @@ async function I(e, t, r, i, o) {
         is_hidden: document.hidden,
         product_type: o,
         is64BitBrowser: BrowserInfo.is64BitBrowser,
-        multiplayer_state: h3O && LD(h3O.getSessionState()),
+        multiplayer_state: Multiplayer && LD(Multiplayer.getSessionState()),
         ...a,
         ...s,
         ...c

@@ -1,4 +1,4 @@
-import { kf } from "../905/992467";
+import { setupLazyComponentFactory } from "../905/992467";
 import _require from "../5430/337035";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent, createElement } from "react";
@@ -15,7 +15,7 @@ import { sf } from "../905/929976";
 import { r } from "../905/620668";
 import { FFileType } from "../figma_app/191312";
 import { XG } from "../figma_app/350203";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { aL } from "../figma_app/45218";
 import { dt } from "../figma_app/162807";
 import { XU } from "../figma_app/756995";
@@ -29,7 +29,7 @@ import { h as _$$h } from "../905/971482";
 import { p_, qp, JC, PI, HE, JV, KG, Np, BZ, CK, lG, kw, PY, GA, jN, qV, zB, vQ, Qj, kU, lk } from "../905/573610";
 var n;
 var $$r0;
-let f = kf("lazy_cmty_plugin_try_button", {
+let f = setupLazyComponentFactory("lazy_cmty_plugin_try_button", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await _require).PluginTryButton
@@ -93,7 +93,7 @@ export function $$F1(e, t) {
     render() {
       let e = this.props.plugin;
       if (!e || !e.current_plugin_version_id) return null;
-      let t = uF(e);
+      let t = getPluginVersion(e);
       return t ? jsxs("div", {
         className: this.props.usesTabletOptimizedSidebar ? qp : JC,
         children: [jsxs(_$$_, {

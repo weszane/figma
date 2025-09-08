@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { YE, qE } from "../figma_app/492908";
+import { roundToMultiple, clamp } from "../figma_app/492908";
 import { l as _$$l } from "../905/556594";
 import { O4 } from "../905/777187";
 import { c1 } from "../figma_app/806412";
 import { q, v as _$$v } from "../905/476456";
 import { LS } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { a3, ow, G7 } from "../905/188421";
@@ -51,13 +51,13 @@ let S = new class {
   }
   snap(e, t) {
     return {
-      value: YE(e.value, t),
+      value: roundToMultiple(e.value, t),
       anchorPoint: e.anchorPoint
     };
   }
   clamp(e) {
     return {
-      value: qE(e.value, this.MIN_SCALE, this.MAX_SCALE),
+      value: clamp(e.value, this.MIN_SCALE, this.MAX_SCALE),
       anchorPoint: e.anchorPoint
     };
   }
@@ -99,7 +99,7 @@ let $$w0 = forwardRef((e, t) => {
     },
     onValueChange: (e, t) => {
       onScaleChange(e.value, Yq.Scrub, t);
-      t && Y5.commit();
+      t && fullscreenValue.commit();
     },
     scrubbingDisabled: disabled,
     formatter: S
@@ -128,7 +128,7 @@ let $$w0 = forwardRef((e, t) => {
         id: "scale-input-fullscreen.scale_panel.scale",
         onChange: (e, t, i) => {
           onScaleChange(e.value, i === G7.Input ? Yq.Input : Yq.Select, t ?? zk.NO, e.anchorPoint);
-          t && Y5.commit();
+          t && fullscreenValue.commit();
         },
         onKeyDown: onInputKeyDown,
         onMouseDown: e => {

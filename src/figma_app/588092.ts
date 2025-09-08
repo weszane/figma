@@ -4,12 +4,12 @@ import { tM } from "../figma_app/637027";
 import { Q9 } from "../905/773401";
 import { renderI18nText } from "../905/303541";
 import { h1 } from "../figma_app/530167";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { s0, ZO } from "../figma_app/350203";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Ro } from "../figma_app/805373";
 import { Pn } from "../figma_app/692865";
 import { d_ } from "../figma_app/918700";
@@ -124,7 +124,7 @@ function x() {
   });
 }
 export let $$N1 = "COMMUNITY_OPT_IN";
-Ju(function ({
+registerModal(function ({
   userId: e,
   onFinish: t,
   variations: r
@@ -133,7 +133,7 @@ Ju(function ({
   e = e || h?.id;
   let m = useDispatch();
   let E = () => {
-    m(Ce());
+    m(hideModal());
   };
   let y = () => {
     m(_$$b({

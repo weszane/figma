@@ -44,7 +44,7 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { ci } from "../figma_app/643789";
 import { W as _$$W } from "../905/307631";
 import { h2, $b } from "../905/820960";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { _J } from "../figma_app/314264";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
@@ -375,7 +375,7 @@ function em(e, t) {
     } : () => {},
     onJoin: GR(i, e),
     onLeave: () => {
-      i(_$$to({
+      i(showModalHandler({
         type: _$$p2,
         data: {
           teamId: e

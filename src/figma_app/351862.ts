@@ -3,8 +3,8 @@ import { toCamelCase } from "../figma_app/664063";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ii, F7 } from "../905/859698";
-import { VTL, glU, DV9, rcl, NLJ, V5h, BXd, zol, ZiZ, Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ConfirmationLevel, Fullscreen, WhiteboardTsApi, Command, DesignGraphElements, AlignmentPosition, LibraryPubSub, Confirmation, SceneIdentifier, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import _ from "../vendor/946678";
@@ -16,8 +16,8 @@ import { W6 } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Eo } from "../figma_app/80990";
-import { Y5 } from "../figma_app/455680";
-import { ut } from "../figma_app/84367";
+import { fullscreenValue } from "../figma_app/455680";
+import { getObservableValue } from "../figma_app/84367";
 import { PW } from "../figma_app/633080";
 import { OD, AT, R0 } from "../figma_app/955650";
 import { Rg, Gn } from "../figma_app/204478";
@@ -388,9 +388,9 @@ var h = _;
   };
 })(n || (n = {}));
 export function $$tH1(e, t, r) {
-  if (t === VTL.NO) return;
+  if (t === ConfirmationLevel.NO) return;
   let n = r ?? atomStoreManager.get(Rg);
-  if (t === VTL.YES_WITHOUT_REORDER) {
+  if (t === ConfirmationLevel.YES_WITHOUT_REORDER) {
     let t = atomStoreManager.get(Gn).map(t => t.id === e ? {
       ...t,
       lastAddedAtByUserId: {
@@ -412,30 +412,30 @@ export function $$tH1(e, t, r) {
   atomStoreManager.set(Gn, [s, ...a]);
 }
 export function $$tz14(e, t) {
-  t && (glU?.triggerActionEnumInUserEditScope(t.actionEnum, {
+  t && (Fullscreen?.triggerActionEnumInUserEditScope(t.actionEnum, {
     source: YV
   }), atomStoreManager.set(W6, e));
 }
 export async function $$tW13(e, t, r) {
   try {
     let n = await Eo.getCanvas(e);
-    DV9?.setPlatformShapeSelected(n, $$t$2(e), e.type, e.userFacingVersion.toString(), e.library_key, r);
-    glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_SHAPE_WHITEBOARD_PLATFORM, {});
+    WhiteboardTsApi?.setPlatformShapeSelected(n, $$t$2(e), e.type, e.userFacingVersion.toString(), e.library_key, r);
+    Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_SHAPE_WHITEBOARD_PLATFORM, {});
     atomStoreManager.set(W6, t);
   } catch (e) {
     reportError(_$$e.FIGJAM, e);
   }
 }
 export function $$tK8(e, t) {
-  if (e === NLJ.CONNECTOR_CURVED && !getFeatureFlags().ad_curved_connectors) return;
-  let r = Y5.getViewportInfo();
-  l7.user("drop-shape-on-canvas", () => {
-    glU && glU.dropDiagramItemOntoCanvas(e, Math.round(r.offsetX), Math.round(r.offsetY), 0, 0, V5h.CENTER, t);
+  if (e === DesignGraphElements.CONNECTOR_CURVED && !getFeatureFlags().ad_curved_connectors) return;
+  let r = fullscreenValue.getViewportInfo();
+  permissionScopeHandler.user("drop-shape-on-canvas", () => {
+    Fullscreen && Fullscreen.dropDiagramItemOntoCanvas(e, Math.round(r.offsetX), Math.round(r.offsetY), 0, 0, AlignmentPosition.CENTER, t);
   });
 }
 export function $$tY9(e, t) {
   try {
-    let r = Y5.getViewportInfo();
+    let r = fullscreenValue.getViewportInfo();
     let n = {
       x: r.offsetX,
       y: r.offsetY,
@@ -446,27 +446,27 @@ export function $$tY9(e, t) {
       let i;
       switch (e.type) {
         case PW.COMPONENT:
-          i = l7.system("upsert-shared-symbol", () => BXd?.upsertSharedSymbol(e.component_key ?? ii.INVALID, e.content_hash ?? F7.INVALID, e.library_key, zol.NO, r, ZiZ.ACTIVE_SCENE));
+          i = permissionScopeHandler.system("upsert-shared-symbol", () => LibraryPubSub?.upsertSharedSymbol(e.component_key ?? ii.INVALID, e.content_hash ?? F7.INVALID, e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));
           break;
         case PW.STATE_GROUP:
-          i = l7.system("upsert-shared-state-group", () => BXd?.upsertSharedStateGroup(e.key, e.version, e.library_key, zol.NO, r, ZiZ.ACTIVE_SCENE));
+          i = permissionScopeHandler.system("upsert-shared-state-group", () => LibraryPubSub?.upsertSharedStateGroup(e.key, e.version, e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));
       }
       if (!i || i.fileUpdateRequired || !i.localGUID) throw Error("An error occurred while adding an instance of this component.");
       switch (e.type) {
         case PW.COMPONENT:
-          l7.user("insert-component", () => {
-            glU?.insertInstance(i.localGUID, n, {}, null, !0, !1, !0);
+          permissionScopeHandler.user("insert-component", () => {
+            Fullscreen?.insertInstance(i.localGUID, n, {}, null, !0, !1, !0);
           });
           break;
         case PW.STATE_GROUP:
-          l7.user("insert-state-group", () => {
-            glU?.insertStateGroup(i.localGUID, n, {}, null, !0, e.default_state_key, !1);
+          permissionScopeHandler.user("insert-state-group", () => {
+            Fullscreen?.insertStateGroup(i.localGUID, n, {}, null, !0, e.default_state_key, !1);
           });
           break;
         default:
           throw Error("An error occurred while adding an instance of this component.");
       }
-      glU && (glU.triggerActionEnumInUserEditScope(rcl.COMMIT, {}), glU.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT, {}), (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && $$tH1($$t$2(e), t, getInitialOptions().user_data?.id));
+      Fullscreen && (Fullscreen.triggerActionEnumInUserEditScope(Command.COMMIT, {}), Fullscreen.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, {}), (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && $$tH1($$t$2(e), t, getInitialOptions().user_data?.id));
     }).catch(e => {
       reportError(_$$e.FIGJAM, e);
     });
@@ -478,10 +478,10 @@ export function $$t$2(e) {
   return e.type === PW.COMPONENT ? e.component_key ?? "" : e.key;
 }
 export function $$tX11() {
-  Ez5?.figjamState().isDraggingSidebarItem.set(!1);
+  AppStateTsApi?.figjamState().isDraggingSidebarItem.set(!1);
 }
 export function $$tq12() {
-  Ez5?.figjamState().isDraggingSidebarItem.set(!0);
+  AppStateTsApi?.figjamState().isDraggingSidebarItem.set(!0);
 }
 export function $$tJ6(e) {
   switch (e) {
@@ -776,7 +776,7 @@ export function $$t716({
 }
 export function $$t919() {
   return useCallback(e => {
-    ("CURVED" !== e || getFeatureFlags().ad_curved_connectors) && glU?.triggerActionEnumInUserEditScope("STRAIGHT_NO_ENDPOINTS" === e ? rcl.SET_TOOL_CONNECTOR_STRAIGHT_NO_ENDPOINTS : $$rt15(e), {
+    ("CURVED" !== e || getFeatureFlags().ad_curved_connectors) && Fullscreen?.triggerActionEnumInUserEditScope("STRAIGHT_NO_ENDPOINTS" === e ? Command.SET_TOOL_CONNECTOR_STRAIGHT_NO_ENDPOINTS : $$rt15(e), {
       source: YV
     });
   }, []);
@@ -785,7 +785,7 @@ export function $$re18() {
   let e = OD();
   let t = AT();
   let r = R0();
-  let n = ut(Ez5?.figjamState().straightConnectorNoEndpointSelected, !1);
+  let n = getObservableValue(AppStateTsApi?.figjamState().straightConnectorNoEndpointSelected, !1);
   return useCallback(i => {
     switch (i) {
       case "STRAIGHT":
@@ -804,11 +804,11 @@ export function $$re18() {
 export function $$rt15(e) {
   switch (e) {
     case "ELBOWED":
-      return rcl.SET_TOOL_CONNECTOR_ELBOWED;
+      return Command.SET_TOOL_CONNECTOR_ELBOWED;
     case "STRAIGHT":
-      return rcl.SET_TOOL_CONNECTOR_STRAIGHT;
+      return Command.SET_TOOL_CONNECTOR_STRAIGHT;
     case "CURVED":
-      return rcl.SET_TOOL_CONNECTOR_CURVED;
+      return Command.SET_TOOL_CONNECTOR_CURVED;
     default:
       throwTypeError(e);
   }

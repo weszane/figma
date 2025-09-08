@@ -19,9 +19,9 @@ import { ai, f6 } from "../figma_app/915202";
 import { uH, Rx } from "../figma_app/162807";
 import { vj } from "../905/574958";
 import { QB, bN } from "../figma_app/707808";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Rz, r0, ky } from "../905/977218";
-let x = nF((e, {
+let x = createOptimistThunk((e, {
   viewport: t
 }) => {
   let {
@@ -36,7 +36,7 @@ let x = nF((e, {
     n && desktopAPIInstance?.updateViewport(n, t);
   }
 });
-let $$N6 = nF(e => {
+let $$N6 = createOptimistThunk(e => {
   let t = e.getState();
   let r = $$k5(t);
   e.dispatch(Rz({
@@ -58,7 +58,7 @@ let $$N6 = nF(e => {
 let $$C8 = NC("DESKTOP_NEW_TAB_SET_LOADING_BACKGROUND_COLOR");
 let $$w7 = NC("DESKTOP_NEW_TAB_SET_IS_SEARCH_BAR_FOCUSED");
 let $$O3 = NC("DESKTOP_NEW_TAB_SET_SEARCH_QUERY");
-let $$R0 = nF((e, t) => {
+let $$R0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.result;
   let i = n.model;
@@ -82,7 +82,7 @@ let $$R0 = nF((e, t) => {
     editorType: mapFileTypeToEditorType(i.editor_type ?? FFileType.DESIGN)
   }));
 });
-let $$L2 = nF(async (e, t, {
+let $$L2 = createOptimistThunk(async (e, t, {
   liveStore: r
 }) => {
   let n = await r.fetchFile(t.fileKey);
@@ -97,7 +97,7 @@ let $$L2 = nF(async (e, t, {
     pageId: t.pageId
   }));
 });
-let $$P1 = nF(async (e, t, {
+let $$P1 = createOptimistThunk(async (e, t, {
   liveStore: r
 }) => {
   let n = await r.fetchFile(t.fileKey);
@@ -111,7 +111,7 @@ let $$P1 = nF(async (e, t, {
     editorType: mapFileTypeToEditorType(n.editor_type ?? FFileType.DESIGN)
   }));
 });
-let $$D10 = nF((e, t) => {
+let $$D10 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (!r.desktopNewTab.isCreatingFile) {
     let n = ce() ? ai.SAME_TAB : ai.NEW_TAB;

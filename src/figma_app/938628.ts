@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
-import { Egt, glU, hJs, mKm, V$M, X3B, _0v, Z64, rXF, tS9, Qa7, Ez5, ibQ } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { SceneGraphHelpers, Fullscreen, SnapMode, LayoutSizingMode, ContainerType, PrototypingTsApi, Axis, SocialMediaFormats, VariableResolvedDataType, AspectRatioLockBindings, StackBindingsCpp, AppStateTsApi, ItemType } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import g from "classnames";
@@ -18,13 +18,13 @@ import { k as _$$k2 } from "../905/582200";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cJ } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { gl, oV, hS, E7 } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, isValidValue, normalizeValue } from "../905/216495";
 import { kl, lJ, pw, zj } from "../905/275640";
 import { Um } from "../905/848862";
 import { f4 } from "../figma_app/722362";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Q as _$$Q } from "../figma_app/104130";
 import { Sh, dK } from "../figma_app/889655";
 import { Ib } from "../905/129884";
@@ -41,7 +41,7 @@ import { A as _$$A2 } from "../svg/541014";
 import { LI, QK, xe, sC, BP, hF, wO, Kw, oH, T1, HO, DL, BG, Xq, fm, t5 as _$$t2, PK, eC as _$$eC, r as _$$r, GC, jC, i6 } from "../figma_app/100987";
 import { lQ } from "../905/934246";
 import { bL as _$$bL, l9, mc, c$ as _$$c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { w as _$$w } from "../figma_app/984514";
 import { T as _$$T } from "../figma_app/737897";
 import { Vb } from "../905/151685";
@@ -260,32 +260,32 @@ function q(e, t, r) {
 function J(e, t, r, n, i) {
   let a = getSingletonSceneGraph();
   let s = q(t, r, n);
-  l7.user(`set-sites-position-${t.toLowerCase()}`, () => {
+  permissionScopeHandler.user(`set-sites-position-${t.toLowerCase()}`, () => {
     switch (t) {
       case "TOP":
         a.getDirectlySelectedNodes().forEach(t => {
-          Egt.setNodeRenderTRBLRelativeToParent(t.guid, {
+          SceneGraphHelpers.setNodeRenderTRBLRelativeToParent(t.guid, {
             top: e
           }, "STRETCH" === r);
         });
         break;
       case "BOTTOM":
         a.getDirectlySelectedNodes().forEach(t => {
-          Egt.setNodeRenderTRBLRelativeToParent(t.guid, {
+          SceneGraphHelpers.setNodeRenderTRBLRelativeToParent(t.guid, {
             bottom: e
           }, "STRETCH" === r);
         });
         break;
       case "LEFT":
         a.getDirectlySelectedNodes().forEach(t => {
-          Egt.setNodeRenderTRBLRelativeToParent(t.guid, {
+          SceneGraphHelpers.setNodeRenderTRBLRelativeToParent(t.guid, {
             left: e
           }, "STRETCH" === n);
         });
         break;
       case "RIGHT":
         a.getDirectlySelectedNodes().forEach(t => {
-          Egt.setNodeRenderTRBLRelativeToParent(t.guid, {
+          SceneGraphHelpers.setNodeRenderTRBLRelativeToParent(t.guid, {
             right: e
           }, "STRETCH" === n);
         });
@@ -314,8 +314,8 @@ function Q(e) {
       nodeIds: h.slice(0, 50),
       parentNodeIds: Array.from(m).slice(0, 50),
       ...t
-    }), l7.user("update-sites-position-constraints", () => {
-      Y5.updateSelectionProperties(t);
+    }), permissionScopeHandler.user("update-sites-position-constraints", () => {
+      fullscreenValue.updateSelectionProperties(t);
     }));
   };
   let f = "MIN" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint;
@@ -331,11 +331,11 @@ function Q(e) {
     let a = "horizontal" === t ? l : s;
     let u = "horizontal" === t ? d : o;
     let p = [];
-    r && !gl(a) && void 0 !== a && p.push(a);
-    n && !gl(u) && void 0 !== u && p.push(u);
-    i && !gl(c) && void 0 !== c && p.push("horizontal" === t ? c.x : c.y);
-    (gl(a) || gl(u) || gl(c)) && (p = oV);
-    r || n || i || gl(a) || void 0 === a || (p = [a]);
+    r && !isInvalidValue(a) && void 0 !== a && p.push(a);
+    n && !isInvalidValue(u) && void 0 !== u && p.push(u);
+    i && !isInvalidValue(c) && void 0 !== c && p.push("horizontal" === t ? c.x : c.y);
+    (isInvalidValue(a) || isInvalidValue(u) || isInvalidValue(c)) && (p = MIXED_MARKER);
+    r || n || i || isInvalidValue(a) || void 0 === a || (p = [a]);
     return p;
   };
   let R = (e, t) => {
@@ -347,9 +347,9 @@ function Q(e) {
     i && void 0 !== e[0] ? function (e, t, r, n, i) {
       let a = getSingletonSceneGraph();
       let s = "horizontal" === t ? "centerHorizontal" : "centerVertical";
-      l7.user(`set-sites-position-center-${t}`, () => {
+      permissionScopeHandler.user(`set-sites-position-center-${t}`, () => {
         a.getDirectlySelectedNodes().forEach(t => {
-          Egt?.setNodeRenderTRBLRelativeToParent(t.guid, {
+          SceneGraphHelpers?.setNodeRenderTRBLRelativeToParent(t.guid, {
             [s]: e
           }, !1);
         });
@@ -377,7 +377,7 @@ function Q(e) {
     dispatch: t,
     inputClassName: LI,
     onValueChange: (e, t) => {
-      t === zk.YES && glU.temporarilyHideOverlay(hJs.SELECTION);
+      t === zk.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
       R(e, "horizontal");
     },
     recordingKey: Pt(e.recordingKey, "collapsed-horizontal-constraint-input"),
@@ -396,7 +396,7 @@ function Q(e) {
     dispatch: t,
     inputClassName: LI,
     onValueChange: (e, t) => {
-      t === zk.YES && glU.temporarilyHideOverlay(hJs.SELECTION);
+      t === zk.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
       R(e, "vertical");
     },
     recordingKey: Pt(e.recordingKey, "collapsed-vertical-constraint-input"),
@@ -465,7 +465,7 @@ let eo = new class {
 function el(e) {
   let t = z();
   let r = new X(e.axis, !0);
-  let a = gl(e.constraint) ? [] : [r.getUI3DropdownOverride(e.constraint), r.format(e.constraint)].filter(e => null != e);
+  let a = isInvalidValue(e.constraint) ? [] : [r.getUI3DropdownOverride(e.constraint), r.format(e.constraint)].filter(e => null != e);
   let s = useRef(null);
   let {
     measurementNode,
@@ -475,7 +475,7 @@ function el(e) {
     optionClassname: "",
     inputRef: s
   });
-  if (e.readOnly && hS(e.constraint)) {
+  if (e.readOnly && isValidValue(e.constraint)) {
     let t = new X(e.axis, !0).format(e.constraint);
     return jsxs("div", {
       className: f()(e.className, "constraint_select--flexContainer--a9ZPi"),
@@ -492,7 +492,7 @@ function el(e) {
     className: "constraint_select--iconSecondary--13AAc",
     children: "HORIZONTAL" === e.axis ? jsx(_$$w, {}) : jsx(_$$T, {})
   });
-  let c = hS(e.constraint) ? bestText : void 0;
+  let c = isValidValue(e.constraint) ? bestText : void 0;
   let u = jsx("div", {
     className: "constraint_select--hideMeasurementNode--Of14C",
     children: measurementNode
@@ -514,7 +514,7 @@ function el(e) {
       value: t ? eo.format("AUTO") : r.format(e.constraint),
       recordingKey: Pt(e, "select"),
       children: [jsx(l9, {
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: p
         }),
         width: "fill",
@@ -697,10 +697,10 @@ function e_(e) {
 }
 function eh(e, t = !1) {
   let r = W();
-  if (("HORIZONTAL" === e ? r.stackHorizontalSize : r.stackVerticalSize) === mKm.FILL_CONTAINER || "NONE" !== r.stackMode && ("HORIZONTAL" === e ? r.hasMinOrMaxWidth : r.hasMinOrMaxHeight)) return !0;
-  if (r.scrollBehavior !== oV && (t || "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" !== r.scrollBehavior)) return !1;
+  if (("HORIZONTAL" === e ? r.stackHorizontalSize : r.stackVerticalSize) === LayoutSizingMode.FILL_CONTAINER || "NONE" !== r.stackMode && ("HORIZONTAL" === e ? r.hasMinOrMaxWidth : r.hasMinOrMaxHeight)) return !0;
+  if (r.scrollBehavior !== MIXED_MARKER && (t || "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" !== r.scrollBehavior)) return !1;
   let n = "HORIZONTAL" === e ? r.hasHorizontallyScrollingParent : r.hasVerticallyScrollingParent;
-  return !!E7(n);
+  return !!normalizeValue(n);
 }
 function eg(e) {
   let [t, r] = useState(null);
@@ -1104,10 +1104,10 @@ function eA(e) {
   let [S, v] = useState(!1);
   let [x, R] = useState(!1);
   let L = e => {
-    if (("HORIZONTAL" === e ? u.stackHorizontalSize : u.stackVerticalSize) === mKm.FILL_CONTAINER || "NONE" !== u.stackMode && ("HORIZONTAL" === e ? u.hasMinOrMaxWidth : u.hasMinOrMaxHeight)) return !0;
-    if (u.scrollBehavior !== oV) return !1;
+    if (("HORIZONTAL" === e ? u.stackHorizontalSize : u.stackVerticalSize) === LayoutSizingMode.FILL_CONTAINER || "NONE" !== u.stackMode && ("HORIZONTAL" === e ? u.hasMinOrMaxWidth : u.hasMinOrMaxHeight)) return !0;
+    if (u.scrollBehavior !== MIXED_MARKER) return !1;
     let t = "HORIZONTAL" === e ? u.hasHorizontallyScrollingParent : u.hasVerticallyScrollingParent;
-    return !!E7(t);
+    return !!normalizeValue(t);
   };
   let P = t => {
     u.isNonEditableInstanceSublayerSelected || (trackEventAnalytics("Constraint Changed", {
@@ -1116,8 +1116,8 @@ function eA(e) {
       nodeIds: h.slice(0, 50),
       parentNodeIds: Array.from(m).slice(0, 50),
       ...t
-    }), l7.user("update-sites-position-constraints", () => {
-      Y5.updateSelectionProperties(t);
+    }), permissionScopeHandler.user("update-sites-position-constraints", () => {
+      fullscreenValue.updateSelectionProperties(t);
     }));
   };
   let D = L("HORIZONTAL");
@@ -1131,7 +1131,7 @@ function eA(e) {
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
-      l7.user("blur-sites-position-top", () => {
+      permissionScopeHandler.user("blur-sites-position-top", () => {
         g && P(q("TOP", u.verticalConstraint, u.horizontalConstraint));
       });
       f(!1);
@@ -1145,7 +1145,7 @@ function eA(e) {
     recordingKey: Pt(e.recordingKey, "top-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MIN" === u.verticalConstraint || "STRETCH" === u.verticalConstraint),
-    value: gl(o) ? oV : o
+    value: isInvalidValue(o) ? MIXED_MARKER : o
   });
   let U = jsx(gq, {
     bigNudgeAmount,
@@ -1156,7 +1156,7 @@ function eA(e) {
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
-      l7.user("blur-sites-position-bottom", () => {
+      permissionScopeHandler.user("blur-sites-position-bottom", () => {
         S && P(q("BOTTOM", u.verticalConstraint, u.horizontalConstraint));
         v(!1);
       });
@@ -1170,7 +1170,7 @@ function eA(e) {
     recordingKey: Pt(e.recordingKey, "bottom-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MAX" === u.verticalConstraint || "STRETCH" === u.verticalConstraint),
-    value: gl(d) ? oV : d
+    value: isInvalidValue(d) ? MIXED_MARKER : d
   });
   let G = jsx(gq, {
     bigNudgeAmount,
@@ -1181,7 +1181,7 @@ function eA(e) {
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
-      l7.user("blur-sites-position-left", () => {
+      permissionScopeHandler.user("blur-sites-position-left", () => {
         x && P(q("LEFT", u.verticalConstraint, u.horizontalConstraint));
         R(!1);
       });
@@ -1195,7 +1195,7 @@ function eA(e) {
     recordingKey: Pt(e.recordingKey, "left-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MIN" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint),
-    value: gl(c) ? oV : c
+    value: isInvalidValue(c) ? MIXED_MARKER : c
   });
   let V = jsx(gq, {
     bigNudgeAmount,
@@ -1206,7 +1206,7 @@ function eA(e) {
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
-      l7.user("blur-sites-position-right", () => {
+      permissionScopeHandler.user("blur-sites-position-right", () => {
         y && P(q("RIGHT", u.verticalConstraint, u.horizontalConstraint));
         b(!1);
       });
@@ -1220,7 +1220,7 @@ function eA(e) {
     recordingKey: Pt(e.recordingKey, "right-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MAX" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint),
-    value: gl(l) ? oV : l
+    value: isInvalidValue(l) ? MIXED_MARKER : l
   });
   let H = jsx(_$$E, {
     name: "constraint_selector",
@@ -1313,20 +1313,20 @@ let eF = [{
   groupName: g1.archivedPresets,
   presets: sE.archivedPresets
 }];
-let ej = e => gl(e) ? getI18nString("fullscreen.mixed") : e === V$M.FRAME ? getI18nString("viewer.options_menu.frame") : e === V$M.GROUP ? getI18nString("viewer.options_menu.group") : e === V$M.SECTION ? getI18nString("viewer.options_menu.section") : e;
+let ej = e => isInvalidValue(e) ? getI18nString("fullscreen.mixed") : e === ContainerType.FRAME ? getI18nString("viewer.options_menu.frame") : e === ContainerType.GROUP ? getI18nString("viewer.options_menu.group") : e === ContainerType.SECTION ? getI18nString("viewer.options_menu.section") : e;
 let eU = () => {
-  Y5.triggerActionInUserEditScope("replace-selected-frame-with-section");
+  fullscreenValue.triggerActionInUserEditScope("replace-selected-frame-with-section");
 };
 let eB = () => {
-  Y5.triggerActionInUserEditScope("replace-selected-section-with-frame");
+  fullscreenValue.triggerActionInUserEditScope("replace-selected-section-with-frame");
 };
 let eG = e => {
-  l7.user("change-selection-to-frame-or-group", () => {
-    glU?.changeSelectionToFrameOrGroup(e);
-    X3B?.updateCurrentPagePrototypeDeviceIfNecessary();
+  permissionScopeHandler.user("change-selection-to-frame-or-group", () => {
+    Fullscreen?.changeSelectionToFrameOrGroup(e);
+    PrototypingTsApi?.updateCurrentPagePrototypeDeviceIfNecessary();
   });
 };
-let eV = (e, t) => gl(e) ? oV : e ? V$M.GROUP : t ? V$M.SECTION : V$M.FRAME;
+let eV = (e, t) => isInvalidValue(e) ? MIXED_MARKER : e ? ContainerType.GROUP : t ? ContainerType.SECTION : ContainerType.FRAME;
 function eH(e) {
   let {
     showPresetOptions,
@@ -1349,7 +1349,7 @@ function eH(e) {
     getTriggerProps
   } = _$$b();
   let x = eV(resizeToFit, isSection);
-  let C = gl(width) || gl(height) ? null : fS({
+  let C = isInvalidValue(width) || isInvalidValue(height) ? null : fS({
     width,
     height
   });
@@ -1361,19 +1361,19 @@ function eH(e) {
         deviceName: e.name
       }
     }));
-    l7.user("set-frame-preset", () => {
-      glU?.makeSelectedFramesManuallySized();
-      Y5.updateSelectionProperties({
+    permissionScopeHandler.user("set-frame-preset", () => {
+      Fullscreen?.makeSelectedFramesManuallySized();
+      fullscreenValue.updateSelectionProperties({
         width: e.width,
         height: e.height
       });
-      X3B?.updateCurrentPagePrototypeDeviceIfNecessary();
+      PrototypingTsApi?.updateCurrentPagePrototypeDeviceIfNecessary();
     });
   }, [b]);
   let R = useCallback(e => {
     let t = Number(e);
-    t === V$M.SECTION && eU();
-    t === V$M.FRAME && eV(resizeToFit, isSection) === V$M.SECTION && eB();
+    t === ContainerType.SECTION && eU();
+    t === ContainerType.FRAME && eV(resizeToFit, isSection) === ContainerType.SECTION && eB();
     eG(t);
   }, [isSection, resizeToFit]);
   return jsx(_$$E, {
@@ -1382,24 +1382,24 @@ function eH(e) {
       manager,
       children: [jsxs(_$$E2, {
         "aria-label": getI18nString("presets.selection_trigger_with_selected", {
-          selected: ej(isMixedOverride ? oV : x)
+          selected: ej(isMixedOverride ? MIXED_MARKER : x)
         }),
         className: f()(mJ, triggerClassName),
         disabled,
         recordingKey: Pt(e, "toggleMenu"),
         ...getTriggerProps(),
         children: [jsx("span", {
-          children: ej(isMixedOverride ? oV : x)
+          children: ej(isMixedOverride ? MIXED_MARKER : x)
         }), jsx(_$$r3, {})]
       }), jsx(_$$mc, {
         children: jsxs(_$$o, {
           eventListeners: ["onWheel"],
-          children: [(isMixedOverride || gl(x)) && jsxs(Fragment, {
+          children: [(isMixedOverride || isInvalidValue(x)) && jsxs(Fragment, {
             children: [jsx(H_, {
               checked: !0,
               disabled: !0,
               onChange: lQ,
-              children: ej(oV)
+              children: ej(MIXED_MARKER)
             }), jsx(wv, {})]
           }), jsxs(z6, {
             title: jsx(_$$r2, {
@@ -1409,25 +1409,25 @@ function eH(e) {
             value: x?.toString(),
             recordingKey: Pt(e, "layoutChange"),
             children: [!!showSectionOption && jsx(CU, {
-              value: V$M.SECTION?.toString(),
+              value: ContainerType.SECTION?.toString(),
               disabled: !canBecomeSection,
               children: jsx("span", {
                 className: dj,
-                children: ej(V$M.SECTION)
+                children: ej(ContainerType.SECTION)
               })
             }), jsx(CU, {
-              value: V$M.FRAME?.toString(),
+              value: ContainerType.FRAME?.toString(),
               disabled: !!isOrInInstance || !canBecomeFrame,
               children: jsx("span", {
                 className: dj,
-                children: ej(V$M.FRAME)
+                children: ej(ContainerType.FRAME)
               })
             }), jsx(CU, {
-              value: V$M.GROUP?.toString(),
+              value: ContainerType.GROUP?.toString(),
               disabled: !canBecomeGroup,
               children: jsx("span", {
                 className: dj,
-                children: ej(V$M.GROUP)
+                children: ej(ContainerType.GROUP)
               })
             })]
           }), !!showPresetOptions && !isSection && jsx(ez, {
@@ -1627,7 +1627,7 @@ function tp(e) {
         checked: i,
         disabled: e.disabled,
         htmlAttributes: s,
-        mixed: t === oV,
+        mixed: t === MIXED_MARKER,
         offIcon: jsx(e2, {}),
         onChange: e => {
           getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
@@ -1653,7 +1653,7 @@ function t_(e) {
   });
 }
 function tR(e) {
-  return hS(e) && null != e && e !== mKm.FIXED;
+  return isValidValue(e) && null != e && e !== LayoutSizingMode.FIXED;
 }
 function tL() {
   let e = kl("stackHorizontalSize");
@@ -1694,16 +1694,16 @@ function tj(e, t) {
   return (r, n) => {
     if (r !== By.SYNTAX_UNRECOGNIZED) return;
     let i = _$$v2(n);
-    null != i && (n = _$$q2(n), l7.user(e, () => {
-      t(n, i) !== zk.NO && glU.triggerAction("commit", {});
+    null != i && (n = _$$q2(n), permissionScopeHandler.user(e, () => {
+      t(n, i) !== zk.NO && Fullscreen.triggerAction("commit", {});
     }));
   };
 }
 function tB(e, t) {
-  return tj(e, (e, r) => glU.setNodeSelectionSizeWithAnchor(e, t, r) ? zk.YES : zk.NO);
+  return tj(e, (e, r) => Fullscreen.setNodeSelectionSizeWithAnchor(e, t, r) ? zk.YES : zk.NO);
 }
-let tG = tB("relative-h", _0v.Y);
-let tV = tB("relative-w", _0v.X);
+let tG = tB("relative-h", Axis.Y);
+let tV = tB("relative-w", Axis.X);
 let tH = createContext(null);
 function tz({
   children: e
@@ -1713,7 +1713,7 @@ function tz({
   let [s, o] = lJ("maxHeight");
   let l = {
     key: "height",
-    axis: _0v.Y,
+    axis: Axis.Y,
     dropdownAlignment: "right",
     autolayoutMinMaxIcon: jsx(tD, {}),
     removeLimitIcons: XO.removeHeightLimit,
@@ -1762,7 +1762,7 @@ function tW({
   let [s, o] = lJ("maxWidth");
   let l = {
     key: "width",
-    axis: _0v.X,
+    axis: Axis.X,
     dropdownAlignment: "left",
     autolayoutMinMaxIcon: jsx(tk, {}),
     removeLimitIcons: XO.removeWidthLimit,
@@ -1817,34 +1817,34 @@ function tY() {
 }
 function t$() {
   return {
-    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug")]: mKm.HUG_CONTENT,
-    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents")]: mKm.HUG_CONTENT,
-    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container")]: mKm.FILL_CONTAINER,
-    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill")]: mKm.FILL_CONTAINER
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug")]: LayoutSizingMode.HUG_CONTENT,
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents")]: LayoutSizingMode.HUG_CONTENT,
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container")]: LayoutSizingMode.FILL_CONTAINER,
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill")]: LayoutSizingMode.FILL_CONTAINER
   };
 }
 let tX = "dimension_input--dropdownIcon--IaH6E";
 let tq = "dimension_input--comboBoxInput--J0jWQ";
 let tJ = {
   width: {
-    [mKm.FILL_CONTAINER]: _$$G,
-    [mKm.FIXED]: _$$w,
-    [mKm.HUG_CONTENT]: _$$v
+    [LayoutSizingMode.FILL_CONTAINER]: _$$G,
+    [LayoutSizingMode.FIXED]: _$$w,
+    [LayoutSizingMode.HUG_CONTENT]: _$$v
   },
   height: {
-    [mKm.FILL_CONTAINER]: _$$N2,
-    [mKm.FIXED]: _$$T,
-    [mKm.HUG_CONTENT]: _$$C
+    [LayoutSizingMode.FILL_CONTAINER]: _$$N2,
+    [LayoutSizingMode.FIXED]: _$$T,
+    [LayoutSizingMode.HUG_CONTENT]: _$$C
   }
 };
 function tZ(e) {
   switch (e) {
     case "FILL_CONTAINER":
-      return mKm.FILL_CONTAINER;
+      return LayoutSizingMode.FILL_CONTAINER;
     case "HUG_CONTENT":
-      return mKm.HUG_CONTENT;
+      return LayoutSizingMode.HUG_CONTENT;
     case "FIXED":
-      return mKm.FIXED;
+      return LayoutSizingMode.FIXED;
     default:
       return null;
   }
@@ -1860,7 +1860,7 @@ function tQ({
   return jsx("div", {
     className: f()("dimension_input--chevronContainer--CJdqK", {
       "dimension_input--hoveredOverInput--Px1rP": t,
-      "dimension_input--alwaysShowChevron--I-Q8Z": stackSize === mKm.FIXED || gl(stackSize)
+      "dimension_input--alwaysShowChevron--I-Q8Z": stackSize === LayoutSizingMode.FIXED || isInvalidValue(stackSize)
     }),
     children: jsx(r, {
       providedClassName: e
@@ -1898,11 +1898,11 @@ function t2({
   return ea({
     options: useMemo(() => null == t ? [] : function (e, t) {
       switch (e) {
-        case mKm.HUG_CONTENT:
+        case LayoutSizingMode.HUG_CONTENT:
           return [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug"), getI18nString("fullscreen.properties_panel.stack_panel.al.hug_with_value", {
             value: t
           })];
-        case mKm.FILL_CONTAINER:
+        case LayoutSizingMode.FILL_CONTAINER:
           return [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill"), getI18nString("fullscreen.properties_panel.stack_panel.al.fill_with_value", {
             value: t
           })];
@@ -1958,19 +1958,19 @@ function t5({
       }(a, r => {
         let n = t[r];
         return !e.has(n) || (i.add(n), !(i.size > 1));
-      }), 1 === i.size ? mKm[Array.from(i)[0]] : null) : null;
+      }), 1 === i.size ? LayoutSizingMode[Array.from(i)[0]] : null) : null;
     }, [r, e, t]);
   }(function () {
     let e = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
     return useMemo(() => new Set((e ?? t7).map(e => e.size)), [e]);
   }());
-  let _ = useMemo(() => null == stackSize || gl(stackSize) || stackSize === mKm.FIXED ? null : mKm[stackSize], [stackSize]);
+  let _ = useMemo(() => null == stackSize || isInvalidValue(stackSize) || stackSize === LayoutSizingMode.FIXED ? null : LayoutSizingMode[stackSize], [stackSize]);
   let h = useRef(null);
   let {
     measurementNode
   } = t2({
     property: t,
-    stackSize: null != stackSize && stackSize !== mKm.FIXED && hS(stackSize) ? stackSize : null,
+    stackSize: null != stackSize && stackSize !== LayoutSizingMode.FIXED && isValidValue(stackSize) ? stackSize : null,
     inputRef: h
   });
   let g = useMemo(() => function (e, t, r) {
@@ -1989,7 +1989,7 @@ function t5({
     n.incrementBy = (e, t, n) => "number" == typeof r ? r + t : e;
     n.getNudgeAmount = e.getNudgeAmount?.bind(e);
     let s = n.clamp?.bind(n);
-    s && (n.clamp = e => e === mKm[mKm.FILL_CONTAINER] || e === mKm[mKm.HUG_CONTENT] ? e : s(e));
+    s && (n.clamp = e => e === LayoutSizingMode[LayoutSizingMode.FILL_CONTAINER] || e === LayoutSizingMode[LayoutSizingMode.HUG_CONTENT] ? e : s(e));
     n.isEqual = (e, t) => "string" == typeof e || "string" == typeof t ? e === t : i(e) === i(t);
     return n;
   }(s.formatter, u, t), [s.formatter, u, t]);
@@ -1997,17 +1997,17 @@ function t5({
     forwardedRef
   } = s;
   let y = s.shouldUseHoveringFormatterIfCombobox || s.isHoveringOverSelect;
-  let b = (stackSize === mKm.HUG_CONTENT || stackSize === mKm.FILL_CONTAINER) && !y;
-  let T = _ && (y || hS(t));
+  let b = (stackSize === LayoutSizingMode.HUG_CONTENT || stackSize === LayoutSizingMode.FILL_CONTAINER) && !y;
+  let T = _ && (y || isValidValue(t));
   return jsxs("div", {
     className: "dimension_input--inputAndHug--bWNNM",
     children: [jsx(e, {
       ...s,
       outerClassName: f()(tq, {
         "dimension_input--hovering--YOErf": y,
-        "dimension_input--fixedLayout--vOVTA": stackSize === mKm.FIXED,
-        "dimension_input--hugContent---kPR-": stackSize === mKm.HUG_CONTENT,
-        "dimension_input--fillContainer--xnfQH": stackSize === mKm.FILL_CONTAINER
+        "dimension_input--fixedLayout--vOVTA": stackSize === LayoutSizingMode.FIXED,
+        "dimension_input--hugContent---kPR-": stackSize === LayoutSizingMode.HUG_CONTENT,
+        "dimension_input--fillContainer--xnfQH": stackSize === LayoutSizingMode.FILL_CONTAINER
       }),
       formatter: g,
       property: T ? _ : t,
@@ -2020,7 +2020,7 @@ function t5({
           return;
         }
         d(null, axis);
-        c(mKm.FIXED, axis);
+        c(LayoutSizingMode.FIXED, axis);
         r(e);
       },
       forwardedRef: useCallback(e => {
@@ -2031,12 +2031,12 @@ function t5({
       className: "dimension_input--hugFillText--K76mr",
       children: function (e) {
         switch (e) {
-          case mKm.HUG_CONTENT:
+          case LayoutSizingMode.HUG_CONTENT:
             return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug");
-          case mKm.FILL_CONTAINER:
+          case LayoutSizingMode.FILL_CONTAINER:
             return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill");
         }
-      }(stackSize ?? mKm.HUG_CONTENT)
+      }(stackSize ?? LayoutSizingMode.HUG_CONTENT)
     }), jsx("div", {
       className: f()(tq, "dimension_input--hideMeasurementNode--7MP1z"),
       children: measurementNode
@@ -2074,15 +2074,15 @@ function t4(e) {
     hideVariableEntrypoints
   } = useContext(_$$Q);
   let E = useSelector(e => {
-    if (gl(e.mirror.selectionProperties.cooperTemplateData)) return oV;
-    if (!e.mirror.selectionProperties.cooperTemplateData) return Z64.CUSTOM;
+    if (isInvalidValue(e.mirror.selectionProperties.cooperTemplateData)) return MIXED_MARKER;
+    if (!e.mirror.selectionProperties.cooperTemplateData) return SocialMediaFormats.CUSTOM;
     let t = e.mirror.selectionProperties.cooperTemplateData?.type || "CUSTOM";
-    return Z64[t];
+    return SocialMediaFormats[t];
   });
   let {
     hasInstanceSelected
   } = Cl();
-  let b = hasInstanceSelected || E !== Z64.CUSTOM;
+  let b = hasInstanceSelected || E !== SocialMediaFormats.CUSTOM;
   let S = useMemo(() => [variableField], [variableField]);
   return m ? jsx(re, {
     onSizeConstraintClick: e.onSizeConstraintClick,
@@ -2098,8 +2098,8 @@ function t4(e) {
         recordingKey: Pt(e, `${key}InputWrapper`),
         fields: S,
         disabled: e.disabled,
-        resolvedType: rXF.FLOAT,
-        currentFieldValue: hS(value) ? value : void 0,
+        resolvedType: VariableResolvedDataType.FLOAT,
+        currentFieldValue: isValidValue(value) ? value : void 0,
         inputClassName: scrubbableInputClass,
         hideIcon: hideVariableEntrypoints,
         children: t
@@ -2117,9 +2117,9 @@ function t4(e) {
         min: getFeatureFlags().editor_zero_width_input ? ak : void 0,
         noBorderOnHover: !0,
         onEvaluateExpressionError: relativeInputHandler,
-        onScrubBegin: () => tS9?.showAspectRatioLockResizingLines(),
+        onScrubBegin: () => AspectRatioLockBindings?.showAspectRatioLockResizingLines(),
         onScrubEnd: () => {
-          tS9?.hideAspectRatioLockResizingLines();
+          AspectRatioLockBindings?.hideAspectRatioLockResizingLines();
         },
         recordingKey: Pt(e, `${key}Input`),
         tooltipForScreenReadersOnly: !1,
@@ -2140,10 +2140,10 @@ function t8({
     axis
   } = tK();
   let s = aj();
-  let o = useMemo(() => hS(stackSize) && null != stackSize ? stackSize : null, [stackSize]);
+  let o = useMemo(() => isValidValue(stackSize) && null != stackSize ? stackSize : null, [stackSize]);
   return jsx(e, {
     ...t,
-    property: null != o ? mKm[o] : t.property,
+    property: null != o ? LayoutSizingMode[o] : t.property,
     openBelowTarget: !1,
     onOptionFocus: (e, r) => {
       t.onOptionFocus?.(e, r);
@@ -2153,7 +2153,7 @@ function t8({
   });
 }
 function t6(e, t, r) {
-  return !!(r === mKm.FILL_CONTAINER && t === _0v.Y && e && function (e) {
+  return !!(r === LayoutSizingMode.FILL_CONTAINER && t === Axis.Y && e && function (e) {
     let t = new Set([]);
     for (let r of e) {
       let n = getSingletonSceneGraph().get(r);
@@ -2183,8 +2183,8 @@ function t9() {
     return t?.parentGuid;
   });
   return useCallback((r, i) => {
-    l7.user("change-stack-layout-size", () => {
-      Qa7.setStackSizeOnSelection(r, i);
+    permissionScopeHandler.user("change-stack-layout-size", () => {
+      StackBindingsCpp.setStackSizeOnSelection(r, i);
     });
     e("Autolayout sizing changed", {
       axis: i,
@@ -2236,9 +2236,9 @@ function re(e) {
           disabled,
           disabledReason
         } = e;
-        let s = _axis === _0v.X;
-        let o = size === mKm.FILL_CONTAINER;
-        let l = size === mKm.HUG_CONTENT;
+        let s = _axis === Axis.X;
+        let o = size === LayoutSizingMode.FILL_CONTAINER;
+        let l = size === LayoutSizingMode.HUG_CONTENT;
         let d = t6(f, _axis, size);
         let _ = disabled || m && (o || l && s) || d;
         let h = tJ[_key][size];
@@ -2246,12 +2246,12 @@ function re(e) {
         r.push(jsx(_$$c$2, {
           disabled: _,
           additionalStylesClassName: wO,
-          value: mKm[size],
+          value: LayoutSizingMode[size],
           iconToReplaceCheck: jsx(h, {}),
-          dataTestId: `${mKm[size]}-${_0v[_axis]}`,
+          dataTestId: `${LayoutSizingMode[size]}-${Axis[_axis]}`,
           tooltip: g,
           tooltipType: Ib.TEXT
-        }, mKm[size]));
+        }, LayoutSizingMode[size]));
       }), o && r.push(jsx(sK, {}, "ui3-divider")), o && (_minMaxOptions.forEach(t => {
         let [i, a] = XO[t];
         r.push(jsx(_$$c$2, {
@@ -2298,7 +2298,7 @@ function re(e) {
     if ("number" == typeof t) R.onValueChange(t, r);else if (t === minMaxOptions[0]) e.onSizeConstraintClick("min");else if (t === minMaxOptions[1]) e.onSizeConstraintClick("max");else if (t === zg) {
       setMinValue(null, zk.NO);
       setMaxValue(null, zk.NO);
-      Y5.triggerAction("commit");
+      fullscreenValue.triggerAction("commit");
       D({
         ...P,
         [key]: {
@@ -2380,7 +2380,7 @@ function re(e) {
               });
             },
             onMouseEnterNonPropagating: () => {
-              $(hS(stackSize) && null != stackSize ? stackSize : null, axis);
+              $(isValidValue(stackSize) && null != stackSize ? stackSize : null, axis);
             },
             onMouseLeave: () => {
               V("minmax", null);
@@ -2417,7 +2417,7 @@ function rd(e) {
   let r = Um();
   let s = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
   let [o, l] = useState(!1);
-  let d = t6(Tv(), e.axis, mKm.FILL_CONTAINER);
+  let d = t6(Tv(), e.axis, LayoutSizingMode.FILL_CONTAINER);
   let c = useSelector(e => !!e.mirror.selectionProperties.isNonEditableInstanceSublayerSelected);
   let u = am();
   let h = useSelector(Sh);
@@ -2430,30 +2430,30 @@ function rd(e) {
   let b = useMemo(() => new ru(e.axis), [e.axis]);
   let I = kl("width");
   let S = kl("height");
-  let v = useMemo(() => new rp(e.axis, e.axis === _0v.X ? I : S), [e.axis, I, S]);
-  let x = r_(e.axis === _0v.X ? I : S, 2);
+  let v = useMemo(() => new rp(e.axis, e.axis === Axis.X ? I : S), [e.axis, I, S]);
+  let x = r_(e.axis === Axis.X ? I : S, 2);
   let N = useRef(null);
   let C = e.size;
-  let L = null != x && hS(x);
+  let L = null != x && isValidValue(x);
   let P = t2({
     property: L ? `${x}` : "",
-    stackSize: null != C && C !== mKm.FIXED && hS(C) ? C : null,
+    stackSize: null != C && C !== LayoutSizingMode.FIXED && isValidValue(C) ? C : null,
     inputRef: N
   });
   if (null == s) return null;
   let [D, F] = rc(e.axis, e.size);
   let j = function (e, t) {
-    let r = e === _0v.X;
+    let r = e === Axis.X;
     switch (t) {
-      case mKm.HUG_CONTENT:
+      case LayoutSizingMode.HUG_CONTENT:
         return r ? jsx(_$$v, {}) : jsx(_$$C, {});
-      case mKm.FILL_CONTAINER:
+      case LayoutSizingMode.FILL_CONTAINER:
         return r ? jsx(_$$G, {}) : jsx(_$$N2, {});
       default:
         return r ? jsx(_$$w, {}) : jsx(_$$T, {});
     }
   }(e.axis, e.size);
-  if (e.readOnly && hS(e.size)) {
+  if (e.readOnly && isValidValue(e.size)) {
     let t = rh(e.size);
     return jsxs("div", {
       className: f()(e.className, "stack_sizing_select_v5--flexContainer--nrpIK"),
@@ -2468,13 +2468,13 @@ function rd(e) {
     });
   }
   var B = c;
-  for (let e of s) if (e.size === mKm.HUG_CONTENT || e.size === mKm.FILL_CONTAINER) {
+  for (let e of s) if (e.size === LayoutSizingMode.HUG_CONTENT || e.size === LayoutSizingMode.FILL_CONTAINER) {
     B = !1;
     break;
   }
   let G = s.map(t => {
-    let r = mKm[t.size];
-    let i = t.size === mKm.FILL_CONTAINER && d;
+    let r = LayoutSizingMode[t.size];
+    let i = t.size === LayoutSizingMode.FILL_CONTAINER && d;
     let a = t.disabled || i;
     let s = "no-fill-component" === t.disabledReason ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.no_fill_component") : i ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.select_all_fill") : void 0;
     return jsx(_$$c$2, {
@@ -2483,12 +2483,12 @@ function rd(e) {
       disabled: a,
       tooltip: s,
       tooltipType: Ib.TEXT,
-      dataTestId: `${r}-${_0v[e.axis]}`
+      dataTestId: `${r}-${Axis[e.axis]}`
     }, t.size);
   });
   let V = getI18nState()?.getPrimaryLocale(!0);
   let H = c ? 173 : V === languageCodes.EN ? 150 : 210;
-  let z = e.axis === _0v.X ? jsx("span", {
+  let z = e.axis === Axis.X ? jsx("span", {
     className: `${QK} svg`,
     children: renderI18nText("fullscreen.properties_panel.transform_panel.w")
   }) : jsx("span", {
@@ -2520,7 +2520,7 @@ function rd(e) {
       inputClassName: "stack_sizing_select_v5--stackLayoutSizeInput--aB6Pd",
       inputTextRef: N,
       onChange: t => {
-        null != t && (l7.user("set-stack-size", () => Qa7.setStackSizeOnSelection(t, e.axis)), u("Autolayout sizing changed", {
+        null != t && (permissionScopeHandler.user("set-stack-size", () => StackBindingsCpp.setStackSizeOnSelection(t, e.axis)), u("Autolayout sizing changed", {
           axis: e.axis,
           size: t,
           source: "dropdown",
@@ -2533,7 +2533,7 @@ function rd(e) {
         l(!1);
       },
       onMouseEnter: () => {
-        e.onHover(hS(e.size) ? e.size : null, "input");
+        e.onHover(isValidValue(e.size) ? e.size : null, "input");
         l(!0);
       },
       onMouseLeave: () => {
@@ -2543,7 +2543,7 @@ function rd(e) {
       onOptionFocus: (t, r) => e.onHover(t ?? null, r),
       property: e.size,
       recordingKey: Pt(e, "select"),
-      tooltip: e.axis === _0v.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.horizontal_resizing") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.vertical_resizing"),
+      tooltip: e.axis === Axis.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.horizontal_resizing") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.vertical_resizing"),
       truncation: "none",
       children: G
     }), jsx("div", {
@@ -2553,13 +2553,13 @@ function rd(e) {
   });
 }
 function rc(e, t) {
-  let r = e === _0v.X;
+  let r = e === Axis.X;
   switch (t) {
-    case oV:
+    case MIXED_MARKER:
       return r ? [_$$A0] : [_$$A6];
-    case mKm.HUG_CONTENT:
+    case LayoutSizingMode.HUG_CONTENT:
       return r ? [_$$A1] : [_$$A7];
-    case mKm.FILL_CONTAINER:
+    case LayoutSizingMode.FILL_CONTAINER:
       return r ? [_$$A8] : [_$$A4];
     default:
       return r ? [_$$A2, _$$A9] : [_$$A, _$$A5];
@@ -2580,11 +2580,11 @@ class ru {
     return {
       text: function (e, t) {
         switch (t) {
-          case mKm.FIXED:
-            return e === _0v.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed_width") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed_height");
-          case mKm.HUG_CONTENT:
+          case LayoutSizingMode.FIXED:
+            return e === Axis.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed_width") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed_height");
+          case LayoutSizingMode.HUG_CONTENT:
             return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents");
-          case mKm.FILL_CONTAINER:
+          case LayoutSizingMode.FILL_CONTAINER:
             return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container");
         }
       }(this.axis, e) || "",
@@ -2601,11 +2601,11 @@ class rp {
   format(e) {
     return null == e ? "" : function (e, t) {
       switch (e) {
-        case mKm.FIXED:
+        case LayoutSizingMode.FIXED:
           return r_(t, 2);
-        case mKm.HUG_CONTENT:
+        case LayoutSizingMode.HUG_CONTENT:
           return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug");
-        case mKm.FILL_CONTAINER:
+        case LayoutSizingMode.FILL_CONTAINER:
           return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill");
       }
     }(e, this.fixedSize);
@@ -2618,15 +2618,15 @@ class rp {
     return {
       text: function (e, t, r) {
         switch (t) {
-          case mKm.FIXED:
-            return e === _0v.X ? getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.width", {
+          case LayoutSizingMode.FIXED:
+            return e === Axis.X ? getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.width", {
               value: r_(r)
             }) : getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.height", {
               value: r_(r)
             });
-          case mKm.HUG_CONTENT:
+          case LayoutSizingMode.HUG_CONTENT:
             return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents");
-          case mKm.FILL_CONTAINER:
+          case LayoutSizingMode.FILL_CONTAINER:
             return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container");
         }
       }(this.axis, e, this.fixedSize) || "",
@@ -2636,15 +2636,15 @@ class rp {
   }
 }
 function r_(e, t = 0) {
-  return gl(e) ? getI18nString("fullscreen.mixed") : e ? String(parseFloat(e.toFixed(e % 1 == 0 ? 0 : t))) : (logError("UI3 merged autolayout picker StackSizingSelect", "undefined fixedSize of instance sublayer"), "");
+  return isInvalidValue(e) ? getI18nString("fullscreen.mixed") : e ? String(parseFloat(e.toFixed(e % 1 == 0 ? 0 : t))) : (logError("UI3 merged autolayout picker StackSizingSelect", "undefined fixedSize of instance sublayer"), "");
 }
 function rh(e) {
   switch (e) {
-    case mKm.FIXED:
+    case LayoutSizingMode.FIXED:
       return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed");
-    case mKm.HUG_CONTENT:
+    case LayoutSizingMode.HUG_CONTENT:
       return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug");
-    case mKm.FILL_CONTAINER:
+    case LayoutSizingMode.FILL_CONTAINER:
       return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill");
   }
 }
@@ -2657,20 +2657,20 @@ function rm(e) {
   let s = jsx(rd, {
     id: "stack-sizing-width",
     className: oH,
-    axis: _0v.X,
+    axis: Axis.X,
     size: t,
     recordingKey: Pt(e.recordingKey, "widthInput"),
     dropdownAlignment: "left",
-    onHover: e => i(e, _0v.X)
+    onHover: e => i(e, Axis.X)
   });
   let o = jsx(rd, {
     id: "stack-sizing-height",
     className: T1,
-    axis: _0v.Y,
+    axis: Axis.Y,
     size: r,
     recordingKey: Pt(e.recordingKey, "heightInput"),
     dropdownAlignment: "right",
-    onHover: e => i(e, _0v.Y)
+    onHover: e => i(e, Axis.Y)
   });
   return e.renderRow(a, s, o);
 }
@@ -2717,7 +2717,7 @@ function rE() {
 function ry(e) {
   let t = W();
   let r = "HORIZONTAL" === e.axis ? t.horizontalConstraint : t.verticalConstraint;
-  let i = gl(t.horizontalConstraint) || gl(t.verticalConstraint);
+  let i = isInvalidValue(t.horizontalConstraint) || isInvalidValue(t.verticalConstraint);
   if (i || e.disabled) return jsx(rb, {
     selected: i
   });
@@ -2779,7 +2779,7 @@ function rT(e) {
   let t = W();
   let r = "CENTER" === t.horizontalConstraint;
   let i = "CENTER" === t.verticalConstraint;
-  let a = gl(t.horizontalConstraint) || gl(t.verticalConstraint);
+  let a = isInvalidValue(t.horizontalConstraint) || isInvalidValue(t.verticalConstraint);
   return r === i || a || e.disabled ? jsx(rv, {
     selected: !e.disabled && (r || a)
   }) : jsxs("div", {
@@ -2915,11 +2915,11 @@ function rF(e) {
       "data-tooltip": h["data-tooltip"],
       "data-tooltip-type": h["data-tooltip-type"]
     },
-    mixed: gl(i),
+    mixed: isInvalidValue(i),
     offIcon: jsx(rk, {}),
     onChange: () => {
-      l7.user("set-stack-position", () => {
-        "ABSOLUTE" === i ? (s("AUTO"), o("Remove Absolute Position")) : (s("ABSOLUTE", zk.NO), glU.bringSelectionToFrontVisually(), glU.triggerAction("commit", {}), _$$F.trackFromFullscreen("add_absolute_position", {
+      permissionScopeHandler.user("set-stack-position", () => {
+        "ABSOLUTE" === i ? (s("AUTO"), o("Remove Absolute Position")) : (s("ABSOLUTE", zk.NO), Fullscreen.bringSelectionToFrontVisually(), Fullscreen.triggerAction("commit", {}), _$$F.trackFromFullscreen("add_absolute_position", {
           source: "properties_panel",
           parent_node_ids: u
         }));
@@ -2937,7 +2937,7 @@ let rj = memo(function (e) {
     })
   });
 });
-let rV = tj("relative-x", (e, t) => glU?.setNodeSelectionOffsetWithAnchor(e, _0v.X, t) ? zk.YES : zk.NO);
+let rV = tj("relative-x", (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.X, t) ? zk.YES : zk.NO);
 let rH = memo(e => o3(nt.fplScrubbableInput) ? jsx(rW, {
   ...e
 }) : jsx(rz, {
@@ -3003,7 +3003,7 @@ function rW(e) {
     })
   });
 }
-let rK = tj("relative-y", (e, t) => glU?.setNodeSelectionOffsetWithAnchor(e, _0v.Y, t) ? zk.YES : zk.NO);
+let rK = tj("relative-y", (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.Y, t) ? zk.YES : zk.NO);
 let rY = memo(e => o3(nt.fplScrubbableInput) ? jsx(rX, {
   ...e
 }) : jsx(r$, {
@@ -3078,11 +3078,11 @@ export let $$r24 = memo(function (e) {
     enabledTypePanelControls,
     textAutoResize
   } = SA();
-  let c = J2(Ez5.propertiesPanelState().shownPropertiesPanels);
+  let c = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels);
   kl("x");
-  let u = !c[ibQ.TRANSFORM_ITEM];
+  let u = !c[ItemType.TRANSFORM_ITEM];
   let _ = t.framePresetsItem && r.transform;
-  let h = c[ibQ.SITES_POSITION_ITEM];
+  let h = c[ItemType.SITES_POSITION_ITEM];
   let m = useRef(null);
   let g = useSelector(Sh);
   let [f, E] = Xw();
@@ -3215,7 +3215,7 @@ export function $$r48(e) {
         nodeIds: r.slice(0, 50),
         parentNodeIds: Array.from(n).slice(0, 50),
         ...i
-      }), Y5.updateSelectionProperties(i));
+      }), fullscreenValue.updateSelectionProperties(i));
     };
   }(e.openFileKey);
   let [g, f] = useAtomValueAndSetter(useMemo(() => createLocalStorageAtom("has_user_expanded_ui3_constraints_ui", !1), []));
@@ -3575,12 +3575,12 @@ export function $$r96(e) {
   let c = useContext(_$$Q);
   let u = c.showIllustrationSliderInputs ? jsx(_$$U, {
     disabled: !1,
-    useSingleRadiusIcon: gl(o) || o
+    useSingleRadiusIcon: isInvalidValue(o) || o
   }) : jsx(_$$I, {
     disabled: !1,
     isBoundToVariable: !1,
     recordingKey: e.recordingKey,
-    useSingleRadiusIcon: gl(o) || o,
+    useSingleRadiusIcon: isInvalidValue(o) || o,
     noBorderOnHover: !1
   });
   let p = jsx(Fragment, {
@@ -3651,11 +3651,11 @@ function nr(e) {
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.x"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: e.dispatch,
-    mixedMathCallback: nc.user("apply-mixed-method-for-vector-network", e => {
-      Egt.applyMixedMathForSelectedVectorNetwork(_0v.X, e);
+    mixedMathCallback: scopeAwareFunction.user("apply-mixed-method-for-vector-network", e => {
+      SceneGraphHelpers.applyMixedMathForSelectedVectorNetwork(Axis.X, e);
     }),
     onValueChange: (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         x: e
       }, {
         shouldCommit: t
@@ -3676,11 +3676,11 @@ function nr(e) {
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.x"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: e.dispatch,
-    mixedMathCallback: nc.user("apply-mixed-method-for-vector-network", e => {
-      Egt.applyMixedMathForSelectedVectorNetwork(_0v.Y, e);
+    mixedMathCallback: scopeAwareFunction.user("apply-mixed-method-for-vector-network", e => {
+      SceneGraphHelpers.applyMixedMathForSelectedVectorNetwork(Axis.Y, e);
     }),
     onValueChange: (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         y: e
       }, {
         shouldCommit: t
@@ -3703,7 +3703,7 @@ function nr(e) {
     value: e.cornerRadius,
     ...i,
     onValueChange: (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         cornerRadius: e
       }, {
         shouldCommit: t
@@ -3773,12 +3773,12 @@ export function $$ns3(e) {
   let t = useDispatch();
   let r = Um();
   let i = e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       handleMirroring: e
     });
   };
   return getFilteredFeatureFlags().ce_il_root ? jsxs(bL, {
-    value: gl(e.handleMirroring) ? void 0 : e.handleMirroring,
+    value: isInvalidValue(e.handleMirroring) ? void 0 : e.handleMirroring,
     onChange: i,
     recordingKey: e.recordingKey,
     legend: jsx(_$$q, {

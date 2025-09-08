@@ -17,11 +17,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { oB } from "../905/929976";
 import { Rw } from "../figma_app/91703";
 import { BE } from "../figma_app/844435";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Eh, cb } from "../figma_app/12796";
-import { uF, JT } from "../figma_app/300692";
+import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
-import { D as _$$D } from "../905/263346";
+import { createDeferredPromise } from "../905/263346";
 import { R as _$$R } from "../figma_app/612938";
 import { y as _$$y } from "../905/916933";
 import { wY } from "../905/753206";
@@ -247,7 +247,7 @@ class K extends o6 {
           break;
         case Uz.EQUALS:
         case Uz.DASH:
-          i && (e.preventDefault(), "-" === e.key ? Y5.triggerAction("zoom-out") : Y5.triggerAction("zoom-in"));
+          i && (e.preventDefault(), "-" === e.key ? fullscreenValue.triggerAction("zoom-out") : fullscreenValue.triggerAction("zoom-in"));
           break;
         case Uz.R:
         case Uz.S:
@@ -306,10 +306,10 @@ class K extends o6 {
   }
   runPlugin() {
     let e = null;
-    if (this.props.pluginId ? this.props.allSavedPlugins[this.props.pluginId] ? e = this.props.allSavedPlugins[this.props.pluginId] : this.props.publishedPlugins[this.props.pluginId] && (e = uF(this.props.publishedPlugins[this.props.pluginId])) : this.props.pluginLocalFileId && (e = this.props.localExtensions[this.props.pluginLocalFileId]), !e) throw Error("Plugin not runnable");
+    if (this.props.pluginId ? this.props.allSavedPlugins[this.props.pluginId] ? e = this.props.allSavedPlugins[this.props.pluginId] : this.props.publishedPlugins[this.props.pluginId] && (e = getPluginVersion(this.props.publishedPlugins[this.props.pluginId])) : this.props.pluginLocalFileId && (e = this.props.localExtensions[this.props.pluginLocalFileId]), !e) throw Error("Plugin not runnable");
     let {
       canRun
-    } = JT({
+    } = canRunPlugin({
       plugin: e,
       editorType: this.props.editorType
     });
@@ -324,7 +324,7 @@ class K extends o6 {
       deferRunEvent: !0,
       isWidget: !1
     };
-    let i = _$$D();
+    let i = createDeferredPromise();
     _$$R.instance.enqueue({
       mode: "run-forever",
       runPluginArgs: this.runArgs
@@ -534,7 +534,7 @@ class K extends o6 {
           });
           {
             let n = e[i];
-            n || (n = t[i] && uF(t[i]));
+            n || (n = t[i] && getPluginVersion(t[i]));
             return jsx(V, {
               className: nW,
               plugin: n,

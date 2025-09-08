@@ -13,7 +13,7 @@ import { eY } from "../figma_app/722362";
 import { _S } from "../figma_app/516028";
 import { J_J, yUR } from "../figma_app/43951";
 import { HX, ad, xQ } from "../figma_app/97042";
-import { yT } from "../905/359509";
+import { mapPlatformToFramework } from "../905/359509";
 export function $$y1(e, t, r = new Set()) {
   hV(e, e => {
     r.has(e.guid) || "INSTANCE" !== e.type && "SYMBOL" !== e.type || t.push(e);
@@ -26,7 +26,7 @@ export function $$b0() {
   let r = eY();
   let y = useAtomWithSubscription(_S);
   let b = v4();
-  let T = yT(b.id);
+  let T = mapPlatformToFramework(b.id);
   let [I] = useLocalStorageSync("code-connect-selected-language-storage-key", T);
   let [S] = IT(J_J({
     key: t ?? ""

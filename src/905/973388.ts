@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
@@ -8,14 +8,14 @@ import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { c as _$$c } from "../905/32166";
-export let $$g0 = Ju(function (e) {
+export let $$g0 = registerModal(function (e) {
   let t = useDispatch();
   let i = hS(e);
   let g = () => {
-    t(Ce());
+    t(hideModal());
   };
   return jsx(fu, {
     name: "Project Connection Revoke Modal",
@@ -49,7 +49,7 @@ export let $$g0 = Ju(function (e) {
             children: [jsx($n, {
               variant: "secondary",
               onClick: () => {
-                t(Lo());
+                t(popModalStack());
               },
               children: renderI18nText("resource_connection.request_modal.cancel")
             }), jsx($n, {

@@ -33,7 +33,7 @@ import { U8, fG } from "../figma_app/91703";
 import { vq, qX } from "../905/8732";
 import { fi } from "../figma_app/913823";
 import { yH } from "../figma_app/714946";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { jD } from "../905/765855";
 import { b as _$$b } from "../905/985254";
 import { dG } from "../figma_app/753501";
@@ -465,7 +465,7 @@ function eW(e) {
     isEqual: (e, t) => e.type === t.type && (e.type !== iN.FILE || t.type !== iN.FILE || e.libraryKey === t.libraryKey)
   }), [isSearching, e.pickerType, e4, libraryMetadataMap]);
   let tH = useCallback(() => {
-    e8(_$$to({
+    e8(showModalHandler({
       type: _$$T,
       data: {
         initialTab: Wv.LIBRARIES,

@@ -1,66 +1,185 @@
-import { b } from "../905/165519";
-var $$i10 = (e => (e[e.UNSPECIFIED = 0] = "UNSPECIFIED", e[e.ANNUAL = 1] = "ANNUAL", e[e.MONTHLY = 2] = "MONTHLY", e[e.STUDENT = 3] = "STUDENT", e))($$i10 || {});
-var $$a6 = (e => (e[e.UNSPECIFIED = 0] = "UNSPECIFIED", e[e.PLAN_COMPARISON_MODAL = 1] = "PLAN_COMPARISON_MODAL", e[e.NUX = 2] = "NUX", e[e.CONSUMPTION_MODAL = 3] = "CONSUMPTION_MODAL", e[e.PRICING_PAGE = 4] = "PRICING_PAGE", e[e.DEV_MODE_MODAL = 5] = "DEV_MODE_MODAL", e[e.SITES_MODAL = 6] = "SITES_MODAL", e[e.RESOURCE_HUB = 7] = "RESOURCE_HUB", e[e.FIGMAKE_MODAL = 8] = "FIGMAKE_MODAL", e[e.MCP_MODAL = 9] = "MCP_MODAL", e[e.PAGE_TRACKER_UPSELL = 10] = "PAGE_TRACKER_UPSELL", e[e.CODE_CHAT_LIBRARY_IMPORT = 11] = "CODE_CHAT_LIBRARY_IMPORT", e[e.FIGMAKE_METER_LIMIT_TOAST = 12] = "FIGMAKE_METER_LIMIT_TOAST", e[e.FIGMAKE_PUBLISH_SITE = 13] = "FIGMAKE_PUBLISH_SITE", e[e.CREATE_NEW_FILE = 14] = "CREATE_NEW_FILE", e[e.CREATE_NEW_PAGE = 15] = "CREATE_NEW_PAGE", e))($$a6 || {});
-export function $$s9({
-  upsellSource: e,
-  fallbackEntryPoint: t = 0
-}) {
-  if (!e) return t;
-  switch (e) {
-    case b.CREATE_NEW_PAGE:
-      return 15;
-    case b.CREATE_NEW_FILE:
-      return 14;
-    case b.FIGMAKE_PUBLISH_SITE:
-      return 13;
-    case b.FIGMAKE_METER_LIMIT_TOAST:
-      return 12;
-    case b.CODE_CHAT_LIBRARY_IMPORT:
-      return 11;
-    case b.PAGE_TRACKER_UPSELL:
-      return 10;
-    case b.MCP_MODAL:
-      return 9;
+// Refactored from /Users/allen/github/fig/src/figma_app/831101.ts
+
+import { UpsellModalType } from '../905/165519'
+
+/**
+ * Enum for SubscriptionType (original: $$i10)
+ */
+export enum SubscriptionType {
+  UNSPECIFIED = 0,
+  ANNUAL = 1,
+  MONTHLY = 2,
+  STUDENT = 3,
+}
+
+/**
+ * Enum for UpsellSourceType (original: $$a6)
+ */
+export enum UpsellSourceType {
+  UNSPECIFIED = 0,
+  PLAN_COMPARISON_MODAL = 1,
+  NUX = 2,
+  CONSUMPTION_MODAL = 3,
+  PRICING_PAGE = 4,
+  DEV_MODE_MODAL = 5,
+  SITES_MODAL = 6,
+  RESOURCE_HUB = 7,
+  FIGMAKE_MODAL = 8,
+  MCP_MODAL = 9,
+  PAGE_TRACKER_UPSELL = 10,
+  CODE_CHAT_LIBRARY_IMPORT = 11,
+  FIGMAKE_METER_LIMIT_TOAST = 12,
+  FIGMAKE_PUBLISH_SITE = 13,
+  CREATE_NEW_FILE = 14,
+  CREATE_NEW_PAGE = 15,
+}
+
+/**
+ * Maps UpsellModalType to UpsellSourceType value.
+ * @param params - Object containing upsellSource and fallbackEntryPoint
+ * @returns UpsellSourceType value
+ * (original: $$s9)
+ */
+export function mapUpsellModalTypeToSource({
+  upsellSource,
+  fallbackEntryPoint = UpsellSourceType.UNSPECIFIED,
+}: {
+  upsellSource: UpsellModalType | undefined
+  fallbackEntryPoint?: UpsellSourceType
+}): UpsellSourceType {
+  if (!upsellSource)
+    return fallbackEntryPoint
+  switch (upsellSource) {
+    case UpsellModalType.CREATE_NEW_PAGE:
+      return UpsellSourceType.CREATE_NEW_PAGE
+    case UpsellModalType.CREATE_NEW_FILE:
+      return UpsellSourceType.CREATE_NEW_FILE
+    case UpsellModalType.FIGMAKE_PUBLISH_SITE:
+      return UpsellSourceType.FIGMAKE_PUBLISH_SITE
+    case UpsellModalType.FIGMAKE_METER_LIMIT_TOAST:
+      return UpsellSourceType.FIGMAKE_METER_LIMIT_TOAST
+    case UpsellModalType.CODE_CHAT_LIBRARY_IMPORT:
+      return UpsellSourceType.CODE_CHAT_LIBRARY_IMPORT
+    case UpsellModalType.PAGE_TRACKER_UPSELL:
+      return UpsellSourceType.PAGE_TRACKER_UPSELL
+    case UpsellModalType.MCP_MODAL:
+      return UpsellSourceType.MCP_MODAL
     default:
-      return t;
+      return fallbackEntryPoint
   }
 }
-export var $$o4 = (e => (e.MONTH = "month", e.YEAR = "year", e))($$o4 || {});
-export let $$l11 = {
-  UPGRADE_NEW_TEAM: "upgrade_new_team",
-  PLAN_COMPARISON: "plan_comparison",
-  CREATE_TEAM: "create_team",
-  ADD_COLLABORATORS: "add_collaborators",
-  CHOOSE_PLAN: "choose_plan",
-  PAYMENT_AND_ADDRESS: "payment_and_address",
-  CONFIRM_PAY: "confirm_pay"
-};
-export var $$d5 = (e => (e.MONTHLY = "monthly", e.ANNUAL = "annual", e))($$d5 || {});
-let $$c1 = "US";
-let $$u7 = "JP";
-let $$p2 = e => ({
-  line1: "",
-  line2: "",
-  country: e || $$c1,
-  city: "",
-  region: "",
-  postal_code: ""
-});
-export function $$_0(e) {
-  return "" === e.line1 && "" === e.line2 && "" === e.city && "" === e.region && "" === e.postal_code;
+
+/**
+ * Enum for BillingCycle (original: $$o4)
+ */
+export enum BillingCycle {
+  MONTH = 'month',
+  YEAR = 'year',
 }
-var h = (e => (e.PRODUCT_PRO_DESIGN_ANNUAL = "prod_BTrZbmnROhwnmX", e.PRODUCT_PRO_DESIGN_MONTHLY = "prod_BUXN0CamqLCsuF", e.PRODUCT_PRO_FIGJAM_ANNUAL = "figjam_annual_usd_36", e.PRODUCT_PRO_FIGJAM_MONTHLY = "figjam_monthly_usd_5", e))(h || {});
-let $$m8 = ["prod_BTrZbmnROhwnmX", "prod_BUXN0CamqLCsuF"];
-let $$g3 = ["figjam_annual_usd_36", "figjam_monthly_usd_5"];
-export const $V = $$_0;
-export const CO = $$c1;
-export const EB = $$p2;
-export const MC = $$g3;
-export const NW = $$o4;
-export const R$ = $$d5;
-export const TN = $$a6;
-export const UW = $$u7;
-export const Ye = $$m8;
-export const oO = $$s9;
-export const tY = $$i10;
-export const tn = $$l11;
+
+/**
+ * Step names for upgrade flow (original: $$l11)
+ */
+export const UpgradeSteps = {
+  UPGRADE_NEW_TEAM: 'upgrade_new_team',
+  PLAN_COMPARISON: 'plan_comparison',
+  CREATE_TEAM: 'create_team',
+  ADD_COLLABORATORS: 'add_collaborators',
+  CHOOSE_PLAN: 'choose_plan',
+  PAYMENT_AND_ADDRESS: 'payment_and_address',
+  CONFIRM_PAY: 'confirm_pay',
+} as const
+
+/**
+ * Enum for PlanType (original: $$d5)
+ */
+export enum PlanType {
+  MONTHLY = 'monthly',
+  ANNUAL = 'annual',
+}
+
+const DEFAULT_COUNTRY = 'US' // (original: $$c1)
+export const JAPAN_COUNTRY = 'JP' // (original: $$u7)
+
+/**
+ * Address type (used in $$p2 and $$_0)
+ */
+export interface Address {
+  line1: string
+  line2: string
+  country: string
+  city: string
+  region: string
+  postal_code: string
+}
+
+/**
+ * Creates an empty address object with optional country.
+ * @param country - Country code
+ * @returns Address object
+ * (original: $$p2)
+ */
+export function createEmptyAddress(country?: string): Address {
+  return {
+    line1: '',
+    line2: '',
+    country: country || DEFAULT_COUNTRY,
+    city: '',
+    region: '',
+    postal_code: '',
+  }
+}
+
+/**
+ * Checks if an address is empty.
+ * @param address - Address object
+ * @returns true if all fields except country are empty
+ * (original: $$_0)
+ */
+export function isAddressEmpty(address: Address): boolean {
+  return (
+    address.line1 === ''
+    && address.line2 === ''
+    && address.city === ''
+    && address.region === ''
+    && address.postal_code === ''
+  )
+}
+
+/**
+ * Product IDs (original: h)
+ */
+export const ProductIds = {
+  PRODUCT_PRO_DESIGN_ANNUAL: 'prod_BTrZbmnROhwnmX',
+  PRODUCT_PRO_DESIGN_MONTHLY: 'prod_BUXN0CamqLCsuF',
+  PRODUCT_PRO_FIGJAM_ANNUAL: 'figjam_annual_usd_36',
+  PRODUCT_PRO_FIGJAM_MONTHLY: 'figjam_monthly_usd_5',
+} as const
+
+/**
+ * Arrays of product IDs (original: $$m8, $$g3)
+ */
+export const DesignProductIds = [
+  ProductIds.PRODUCT_PRO_DESIGN_ANNUAL,
+  ProductIds.PRODUCT_PRO_DESIGN_MONTHLY,
+]
+
+export const FigJamProductIds = [
+  ProductIds.PRODUCT_PRO_FIGJAM_ANNUAL,
+  ProductIds.PRODUCT_PRO_FIGJAM_MONTHLY,
+]
+
+// Exported variables with refactored names
+export const YJ = mapUpsellModalTypeToSource
+export const tY = SubscriptionType
+export const TN = UpsellSourceType
+export const NW = BillingCycle
+export const tn = UpgradeSteps
+export const R$ = PlanType
+export const CO = DEFAULT_COUNTRY
+export const UW = JAPAN_COUNTRY
+export const EB = createEmptyAddress
+export const $V = isAddressEmpty
+export const Ye = DesignProductIds
+export const MC = FigJamProductIds
+export const oO = mapUpsellModalTypeToSource

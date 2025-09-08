@@ -6,7 +6,7 @@ import { i as _$$i } from "../905/718764";
 import { D as _$$D } from "../905/555681";
 import { O as _$$O } from "../905/969533";
 import { J as _$$J } from "../905/614223";
-import { h3O, rcl } from "../figma_app/763686";
+import { Multiplayer, Command } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
@@ -50,7 +50,7 @@ import { Q as _$$Q } from "../3276/336897";
 import { Cf } from "../905/504727";
 import { rJv } from "../figma_app/27776";
 import { isIpadDevice } from "../figma_app/778880";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { ds } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
 import { FFileType } from "../figma_app/191312";
@@ -99,7 +99,7 @@ function eg(e) {
           name: "Disabled Voice Call Button"
         });
         let r = o === FEditorType.Whiteboard ? FFileType.WHITEBOARD : FFileType.DESIGN;
-        c(to({
+        c(showModalHandler({
           type: DV,
           data: {
             team: e,
@@ -185,7 +185,7 @@ export function $$ew1(e, t, i, r, n, a, s) {
       observingSessionID: t
     }));
   } else {
-    h3O.observeUser(o);
+    Multiplayer.observeUser(o);
     n.observingSessionID !== o && n.sessionID !== o && i(_$$b({
       aware_of_observation_mode: !0
     }));
@@ -778,7 +778,7 @@ let $$eO0 = memo(function (e) {
         hx({
           e,
           onClickHandler: e => {
-            N ? O(rcl.FOLLOW_PRESENTER) : ep(e);
+            N ? O(Command.FOLLOW_PRESENTER) : ep(e);
           },
           onEscapeHandler: () => {
             _?.current?.blur();
@@ -786,7 +786,7 @@ let $$eO0 = memo(function (e) {
         });
       },
       onMouseDownCapture: e => {
-        N ? O(rcl.FOLLOW_PRESENTER) : ep(e);
+        N ? O(Command.FOLLOW_PRESENTER) : ep(e);
       },
       onMouseLeave: () => {
         G(!1);

@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useEffect } from "react";
-import { q, Z } from "../905/751750";
-import { X } from "../905/128376";
-import { M } from "../905/581092";
-import { r as _$$r } from "../905/577641";
+import { useSelectionProvider, useSelectionContext } from "../905/751750";
+import { setupAutofocusHandler } from "../905/128376";
+import { useExposedRef } from "../905/581092";
+import { defaultComponentAttribute } from "../905/577641";
 import { bq, ae } from "../905/117474";
 import { F } from "../905/768014";
 export let $$u1 = forwardRef(({
@@ -11,8 +11,8 @@ export let $$u1 = forwardRef(({
   htmlAttributes: t,
   ...i
 }, s) => {
-  let u = M(s);
-  let [p, m] = q();
+  let u = useExposedRef(s);
+  let [p, m] = useSelectionProvider();
   let h = function (e, t = {}) {
     let i = useRef(void 0);
     useEffect(() => {
@@ -39,7 +39,7 @@ export let $$u1 = forwardRef(({
   return jsx(m, {
     value: p,
     children: jsx("div", {
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...t,
       ...i,
       ...h,
@@ -58,8 +58,8 @@ export let $$p0 = forwardRef(({
   htmlAttributes: i,
   ...r
 }, o) => {
-  let l = Z();
-  let d = X(o, t);
+  let l = useSelectionContext();
+  let d = setupAutofocusHandler(o, t);
   return jsx("h2", {
     ...i,
     ...r,

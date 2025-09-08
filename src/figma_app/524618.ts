@@ -1,5 +1,5 @@
 import { ii } from "../905/859698";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Av } from "../figma_app/646357";
 import { PW } from "../figma_app/633080";
@@ -72,10 +72,10 @@ export function $$h7(e, t) {
   return [...Object.values(e), ...Object.values(t)].reduce((e, t) => e += t.instanceIdsToUpdate.length, 0);
 }
 export function $$m0(e, t) {
-  return e.component_key && e.content_hash ? glU.getOutdatedComponentInstanceDevIds(e.component_key, e.content_hash, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, t || "") : [];
+  return e.component_key && e.content_hash ? Fullscreen.getOutdatedComponentInstanceDevIds(e.component_key, e.content_hash, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, t || "") : [];
 }
 export function $$g6(e, t) {
-  return glU.getOutdatedStateInstanceDevIds(e.version, e.newStateKeyToOutdatedItems, t || "");
+  return Fullscreen.getOutdatedStateInstanceDevIds(e.version, e.newStateKeyToOutdatedItems, t || "");
 }
 export function $$f2(e) {
   return e.type === PW.COMPONENT ? $$m0(e, void 0).length : $$g6(e, void 0).length;

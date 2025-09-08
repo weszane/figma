@@ -17,14 +17,14 @@ import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { V } from "../905/223767";
 import { dm } from "../figma_app/976345";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu, $z } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { TN } from "../figma_app/211146";
 import { yQw } from "../figma_app/43951";
 import { w5, oc } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { e6 } from "../905/557142";
 import { Ib } from "../905/129884";
 function p(e) {
@@ -107,7 +107,7 @@ function R(e) {
   let G = useRef();
   if (!n || !_) return null;
   let W = e => {
-    t(to({
+    t(showModalHandler({
       type: V,
       data: {
         teamId: _.id,
@@ -159,7 +159,7 @@ function R(e) {
       },
       children: jsx($z, {
         type: "button",
-        onClick: () => W(_$$b.PRO_TRIAL_UPSELL_MODAL),
+        onClick: () => W(UpsellModalType.PRO_TRIAL_UPSELL_MODAL),
         className: _$$s.ml8.noWrap.$,
         trackingProperties: ng.getTrackingProperties("Badge Clicked"),
         children: jsx("span", {
@@ -187,13 +187,13 @@ function R(e) {
     if (M) {
       let e = {
         monetization_surface: _$$h.MonetizationSurface.FILE_BROWSER,
-        monetization_trigger: _$$b.STARTER_TEAM_BADGE
+        monetization_trigger: UpsellModalType.STARTER_TEAM_BADGE
       };
       return jsx("button", {
         onClick: a => {
           a.stopPropagation();
           t(dm(_.id));
-          W(_$$b.STARTER_TEAM_BADGE);
+          W(UpsellModalType.STARTER_TEAM_BADGE);
           trackEventAnalytics("Starter Team Badge Clicked", {
             userId: n.id,
             teamId: _.id,

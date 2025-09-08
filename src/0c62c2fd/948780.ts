@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
-import { Egt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { SceneGraphHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { U } from "../figma_app/901889";
 import { Pe } from "../figma_app/32128";
 export function $$l0(e) {
@@ -32,12 +32,12 @@ export function $$l0(e) {
       insertPosition: s
     });
   }, [d, t]);
-  let g = useCallback(() => !d || !u || t.includes(d.dragOverPageId) ? (p(), !1) : (l7.user("reorder-pages", () => {
+  let g = useCallback(() => !d || !u || t.includes(d.dragOverPageId) ? (p(), !1) : (permissionScopeHandler.user("reorder-pages", () => {
     let r = Pe(e);
     "before" === d.insertPosition ? [...t].sort((e, t) => r[e] - r[t]).forEach(e => {
-      Egt.pageMoveBeforePage(e, d.dragOverPageId);
+      SceneGraphHelpers.pageMoveBeforePage(e, d.dragOverPageId);
     }) : [...t].sort((e, t) => r[t] - r[e]).forEach(e => {
-      Egt.pageMoveAfterPage(e, d.dragOverPageId);
+      SceneGraphHelpers.pageMoveAfterPage(e, d.dragOverPageId);
     });
   }), p(), m("page_reorder", {
     reorderedPageIds: t,

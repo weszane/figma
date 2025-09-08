@@ -3,8 +3,8 @@ import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { k as _$$k } from "../905/443820";
-import { Ez5, uv } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, BuzzCloneHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
@@ -35,8 +35,8 @@ export function $$T1(e) {
     }
   }
   return new Map([...t.entries()].sort(([e, t], [l, o]) => {
-    let n = Ez5?.canvasGrid().coordForChild(e);
-    let s = Ez5?.canvasGrid().coordForChild(l);
+    let n = AppStateTsApi?.canvasGrid().coordForChild(e);
+    let s = AppStateTsApi?.canvasGrid().coordForChild(l);
     return n && s ? n.row === s.row ? n.col - s.col : n.row - s.row : 0;
   }));
 }
@@ -60,7 +60,7 @@ export function $$C0({
         let e = eY();
         return useCallback((t, l, n, s) => {
           let r = new Set(l.keys());
-          let i = uv?.cloneBuzzFrameWithEdits(t, r, n, s) || new Map();
+          let i = BuzzCloneHelpers?.cloneBuzzFrameWithEdits(t, r, n, s) || new Map();
           for (let [t, n] of l) {
             let l = i.get(t);
             if (!l) continue;
@@ -85,7 +85,7 @@ export function $$C0({
                     break;
                   }
                 }
-                l7.user("buzz-add-asset-image", () => {
+                permissionScopeHandler.user("buzz-add-asset-image", () => {
                   t >= 0 ? s.setImageInFillPaint(e, t, l) : s.insertImageInFillPaint(e, "FILL");
                   ks(s.guid);
                 });
@@ -98,7 +98,7 @@ export function $$C0({
       let t = useDispatch();
       let l = useAtomWithSubscription(_$$v);
       return useCallback((o, n, s, r, i, a, c, u, x, g) => {
-        l7.user("buzz-add-asset-progressive-loading", () => {
+        permissionScopeHandler.user("buzz-add-asset-progressive-loading", () => {
           for (let [e, t] of o) {
             let o = n[e] || [];
             let r = Uk(o);
@@ -134,10 +134,10 @@ export function $$C0({
     }();
     return useCallback((e, o, n) => {
       let s = [];
-      i && Ez5?.cooperFocusView().exitFocusedNodeView();
-      l7.user("buzz-add-asset", () => {
+      i && AppStateTsApi?.cooperFocusView().exitFocusedNodeView();
+      permissionScopeHandler.user("buzz-add-asset", () => {
         let i = new Map();
-        let d = Ez5?.canvasGrid();
+        let d = AppStateTsApi?.canvasGrid();
         if (!d) throw Error("Could not find canvas grid");
         let u = [...o.keys()].pop();
         let x = u ? d.coordForChild(u).row + 1 : 0;
@@ -166,7 +166,7 @@ export function $$C0({
       }),
       type: "Buzz bulk create success"
     }));
-    L || Ez5?.cooperFocusView().exitFocusedNodeView();
+    L || AppStateTsApi?.cooperFocusView().exitFocusedNodeView();
     tJ(e);
     A(!1);
     l(w);

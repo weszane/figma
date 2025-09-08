@@ -57,16 +57,16 @@ import { y2 } from "../figma_app/563413";
 import { p as _$$p } from "../469e6e40/348454";
 import { Js, yG } from "../469e6e40/488538";
 import { A as _$$A3 } from "../905/658244";
-import { Ju, Ij } from "../905/102752";
+import { registerModal, createModalConfig } from "../905/102752";
 import { J as _$$J } from "../469e6e40/564885";
 import { v as _$$v } from "../4452/562448";
 import { b as _$$b2 } from "../4452/320061";
 import { B as _$$B } from "../4452/541264";
 import { E as _$$E2 } from "../469e6e40/190466";
 import { s as _$$s2 } from "../905/411990";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { II } from "../figma_app/11182";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { _E, yJ, tk as _$$tk, m$ } from "../figma_app/240735";
 import { z as _$$z } from "../905/595507";
 import { C3, vt } from "../figma_app/297957";
@@ -120,8 +120,8 @@ import { L as _$$L } from "../c5e2cae0/262856";
 import { u as _$$u } from "../469e6e40/510414";
 import { Ti, bQ } from "../figma_app/658324";
 import { d as _$$d3 } from "../7021/966231";
-import { b as _$$b4 } from "../905/165519";
-import { EB } from "../figma_app/831101";
+import { UpsellModalType } from "../905/165519";
+import { createEmptyAddress } from "../figma_app/831101";
 import { OI } from "../figma_app/630077";
 import { Ib } from "../905/129884";
 import { fm } from "../c5e2cae0/453906";
@@ -253,7 +253,7 @@ function B({
   });
 }
 var V = z;
-let eq = Ju(function (e) {
+let eq = registerModal(function (e) {
   let {
     team
   } = e;
@@ -330,15 +330,15 @@ function eJ() {
     trackingContextName: `${Of} flyout tooltip`
   }, "flyout");
 }
-let e0 = nF((e, {
+let e0 = createOptimistThunk((e, {
   member: t,
   team: s
 }) => {
   let {
     id
   } = s;
-  e.dispatch(_$$to({
-    type: n ??= Ju(_$$A3.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), Ij("ConfirmDowngradeEditorsModal")), "ConfirmDowngradeEditorsModal"),
+  e.dispatch(showModalHandler({
+    type: n ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), createModalConfig("ConfirmDowngradeEditorsModal")), "ConfirmDowngradeEditorsModal"),
     data: {
       editors: [t],
       team: s,
@@ -424,7 +424,7 @@ let e5 = kp(function (e) {
         level: newLevel
       }));
     };
-    s && newLevel === _$$e2.OWNER ? dispatch(_$$to({
+    s && newLevel === _$$e2.OWNER ? dispatch(showModalHandler({
       type: _$$b3,
       data: {
         resourceType: s.resource_type,
@@ -453,7 +453,7 @@ let e5 = kp(function (e) {
   }, [u]);
   let b = useCallback(e => {
     let t = e.find(e => e?.team_role?.pending);
-    dispatch(_$$to({
+    dispatch(showModalHandler({
       type: eq,
       data: {
         members: e,
@@ -552,8 +552,8 @@ let e5 = kp(function (e) {
   });
   let R = useCallback(e => !(e.member.team_role?.pending && !e.member.team_user), []);
   let O = useCallback(e => {
-    dispatch(_$$to({
-      type: s ??= Ju(_$$A3.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), Ij("MemberEditAccessModal")), "MemberEditAccessModal"),
+    dispatch(showModalHandler({
+      type: s ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), createModalConfig("MemberEditAccessModal")), "MemberEditAccessModal"),
       data: {
         memberEmail: e.email,
         teamId: team.id,
@@ -668,7 +668,7 @@ let e5 = kp(function (e) {
       variant: "link",
       onClick: t => {
         t.stopPropagation();
-        e.dispatch(_$$to({
+        e.dispatch(showModalHandler({
           type: _$$J,
           data: {
             planType: _$$O.TEAM,
@@ -1161,7 +1161,7 @@ function tG(e) {
     }
   }, !1);
   _$$S(UC, () => {
-    r(_$$to({
+    r(showModalHandler({
       type: _$$q,
       data: {
         planType: fm.TEAM,
@@ -1385,7 +1385,7 @@ let tz = ({
     _.push(jsx(x8, {
       label: u ? getI18nString("settings_table.purchase_professional_plan") : getI18nString("settings_table.upgrade_your_plan"),
       onClick: () => {
-        u ? tJ(t, c) : tK(t, c, _$$b4.BILLING_SETTINGS);
+        u ? tJ(t, c) : tK(t, c, UpsellModalType.BILLING_SETTINGS);
       },
       description: e
     }));
@@ -1407,7 +1407,7 @@ let tz = ({
     onClick: () => {
       t(Bq({
         openInNewTab: !0,
-        upsellSource: _$$b4.TEAM_SETTINGS_VIEW
+        upsellSource: UpsellModalType.TEAM_SETTINGS_VIEW
       }));
     }
   })), plan_canceled || !monthly_subscription) {
@@ -1470,7 +1470,7 @@ let tz = ({
     label: getI18nString("settings_table.cancel_plan"),
     description: getI18nString("settings_table.cancel_your_subscription_of_professional"),
     onClick: () => {
-      t(_$$to({
+      t(showModalHandler({
         type: _$$v3,
         data: {
           teamId: c
@@ -1513,7 +1513,7 @@ let tV = ({
     label: n ? getI18nString("settings_table.display_name.label") : getI18nString("settings_table.names"),
     description: n ? getI18nString("settings_table.change_display_name") : getI18nString("settings_table.change_names"),
     onClick: () => {
-      s(_$$to({
+      s(showModalHandler({
         type: _$$L,
         data: {
           modalTitle: n ? getI18nString("settings_table.update_team_profile") : getI18nString("settings_table.edit_names"),
@@ -1616,11 +1616,11 @@ let tH = ({
   })), d && u.push(jsx(x8, {
     label: getI18nString("team_view.settings_table.update_invoice_details.invoice_details"),
     description: getI18nString("team_view.settings_table.update_invoice_details.update_invoice_details"),
-    onClick: () => a(_$$to({
+    onClick: () => a(showModalHandler({
       type: _$$u,
       data: {
         teamId: n.id,
-        shippingAddress: o || EB(),
+        shippingAddress: o || createEmptyAddress(),
         legalCompanyName: n.legal_name || "",
         canSeeBillingAddressExp: d
       }
@@ -1649,7 +1649,7 @@ let tH = ({
       plan_type: getI18nString("settings_table.team")
     }),
     onClick: () => {
-      a(_$$to({
+      a(showModalHandler({
         type: _$$h2,
         data: {
           planType: fm.TEAM,
@@ -1664,7 +1664,7 @@ let tH = ({
     disabled: !_,
     currentValue: _ ? null : jsx(_$$I, {}),
     onClick: () => {
-      a(_$$to({
+      a(showModalHandler({
         type: _$$q,
         data: {
           planType: fm.TEAM,
@@ -1688,7 +1688,7 @@ let tY = (e, t, a) => {
     dispatch: e,
     teamId: t.id
   });
-  e(_$$to({
+  e(showModalHandler({
     type: _$$E3,
     data: {
       currentContacts: a,
@@ -1708,7 +1708,7 @@ let tJ = (e, t) => {
   }));
 };
 let tK = (e, t, a) => {
-  e(_$$to({
+  e(showModalHandler({
     type: _$$V,
     data: {
       teamId: t,
@@ -1932,7 +1932,7 @@ function aA(e) {
     onTrial: k,
     hasNonAdjustableRenewalSeats: !1
   }) ? () => {
-    t(_$$to({
+    t(showModalHandler({
       type: vn,
       data: {
         renewalDate: E

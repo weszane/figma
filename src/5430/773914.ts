@@ -27,12 +27,12 @@ import { XW, qY, ws, zL, Vm, $9, o_, B2 } from "../figma_app/427318";
 import { Z as _$$Z } from "../905/909123";
 import { jT } from "../figma_app/354658";
 import { Om, tv as _$$tv } from "../figma_app/979714";
-import { to, AS } from "../905/156213";
+import { showModalHandler, hideModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { Ib } from "../905/129884";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { S as _$$S } from "../5430/743953";
 import { Kj, bb, W6 } from "../7222/418961";
 import { Rj, mk } from "../figma_app/999312";
@@ -45,7 +45,7 @@ import { vt } from "../figma_app/306946";
 import { lx } from "../figma_app/558929";
 import { jd } from "../figma_app/106207";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
-import { Ar, lT } from "../figma_app/300692";
+import { getCurrentPluginVersion, pluginMetadata } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
 import { vt as _$$vt } from "../905/862883";
 import { noop } from "../5430/262192";
@@ -53,7 +53,7 @@ import { H as _$$H } from "../5430/992445";
 import { to as _$$to } from "../figma_app/764679";
 import { H as _$$H2 } from "../905/548668";
 let $ = (e, t, r) => {
-  e(to({
+  e(showModalHandler({
     type: Z,
     data: {
       resourceId: t,
@@ -113,7 +113,7 @@ function Q({
     href: t,
     newTab: !0,
     onClick: () => {
-      t ? e(AS()) : reportError(_$$e.COMMUNITY, Error("newTabButton: route is empty"), {
+      t ? e(hideModalHandler()) : reportError(_$$e.COMMUNITY, Error("newTabButton: route is empty"), {
         extra: {
           sharedRouteParams: n
         }
@@ -135,7 +135,7 @@ function Q({
     })
   });
 }
-let Z = Ju(function (e) {
+let Z = registerModal(function (e) {
   let t;
   let r;
   let s = useDispatch();
@@ -185,7 +185,7 @@ let Z = Ju(function (e) {
     if (!shouldUpdateUrl) return;
     let e = () => {
       let e = Ay.location.pathname + Ay.location.search;
-      open && e !== Y && (m.current = !0, s(AS()), bb(J?.id || "", q || ""));
+      open && e !== Y && (m.current = !0, s(hideModalHandler()), bb(J?.id || "", q || ""));
     };
     if (open && Y) return Ay.listen(() => {
       e();
@@ -199,7 +199,7 @@ let Z = Ju(function (e) {
     onClose: ({
       source: e
     }) => {
-      "escape" === e && a ? u(!1) : (s(AS()), bb(J?.id || "", q || ""));
+      "escape" === e && a ? u(!1) : (s(hideModalHandler()), bb(J?.id || "", q || ""));
     }
   });
   let er = eJ();
@@ -298,7 +298,7 @@ export function $$el1(e, t, r) {
     $$ea2(t, r.sharedRouteParams);
     return;
   }
-  if (ws(t)) e(to({
+  if (ws(t)) e(showModalHandler({
     type: Z,
     data: {
       resourceUrl: t.rdp_url,
@@ -309,7 +309,7 @@ export function $$el1(e, t, r) {
     var l;
     a = t.id;
     l = qG[Vm(t)];
-    e(to({
+    e(showModalHandler({
       type: Z,
       data: {
         resourceId: a,
@@ -363,7 +363,7 @@ export function $$ed0(e, t, r, n) {
           });
           return;
         }
-        let o = Ar(n) || lT;
+        let o = getCurrentPluginVersion(n) || pluginMetadata;
         let l = _$$H(r, s, o);
         let c = !!(o.playground_file_version_id || l === FEditorType.DevHandoff);
         _$$to(t.id, c ? "playground" : "new_file", l);

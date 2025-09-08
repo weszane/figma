@@ -1,4 +1,4 @@
-import { mHF, ZiZ, rXF, Egt, Z_n } from "../figma_app/763686";
+import { LinterCppBindings, SceneIdentifier, VariableResolvedDataType, SceneGraphHelpers, VariableDataType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { g as _$$g } from "../905/871474";
@@ -14,7 +14,7 @@ import { sD } from "../figma_app/243058";
 import { TW, sB, d$ } from "../905/958097";
 import { g as _$$g2 } from "../905/880308";
 import { nw } from "../figma_app/194671";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { rO } from "../figma_app/409807";
 import { getSingletonSceneGraph } from "../905/700578";
 import { c_ } from "../905/695660";
@@ -65,7 +65,7 @@ function $$g({
   let o = debugState.dispatch;
   return new Promise(a ? (i, r) => {
     if (t.isLocal) {
-      let e = mHF?.copyLocalStyleToLinterScene(t.node_id);
+      let e = LinterCppBindings?.copyLocalStyleToLinterScene(t.node_id);
       if (!e) {
         r(Error("Failed to copy local style to linter scene"));
         return;
@@ -86,7 +86,7 @@ function $$g({
       onError: () => {
         r(Error("Failed to apply style for preview"));
       },
-      targetUpsertScene: ZiZ.LINTER_SCENE,
+      targetUpsertScene: SceneIdentifier.LINTER_SCENE,
       omitFullscreenCommit: !0
     }));
   } : (n, a) => {
@@ -118,7 +118,7 @@ function v(e, t, i, r) {
   }) {
     let s = TW({
       node: a,
-      resolvedType: rXF.FLOAT,
+      resolvedType: VariableResolvedDataType.FLOAT,
       localVariables: e,
       libraryVariableSetIdToSet: t,
       libraryVariables: i
@@ -138,7 +138,7 @@ function v(e, t, i, r) {
   });
   let l = [...Object.values(o.localVariables), ...Object.values(o.libraryVariables)];
   if (0 === l.length) return null;
-  a = l.filter(e => void 0 !== e.resolvedValue && e.variable.resolvedType === rXF.FLOAT);
+  a = l.filter(e => void 0 !== e.resolvedValue && e.variable.resolvedType === VariableResolvedDataType.FLOAT);
   s = t.numericValue;
   let d = [...a.filter(e => e?.resolvedValue !== "MIXED" && "number" == typeof e?.resolvedValue?.value && e?.resolvedValue?.value > 0)].sort((e, t) => Math.abs(Number(e.resolvedValue.value) - s) - Math.abs(Number(t.resolvedValue.value) - s)).slice(0, 1);
   if (0 === d.length) return null;
@@ -222,7 +222,7 @@ async function T(e, t, i, n, r, a) {
     return !0;
   }
   try {
-    if (l7.user("design-linter-apply-spacing-variable", () => {
+    if (permissionScopeHandler.user("design-linter-apply-spacing-variable", () => {
       e.setBoundVariable("itemSpacing", f);
     }), a) {
       let e = h.variableSetId;
@@ -272,7 +272,7 @@ async function k({
     return !0;
   }
   try {
-    if (l7.user("design-linter-apply-spacing-variable", () => {
+    if (permissionScopeHandler.user("design-linter-apply-spacing-variable", () => {
       "ROW" === t ? e.setBoundVariable("gridRowGap", _) : e.setBoundVariable("gridColumnGap", _);
     }), s) {
       let e = g.variableSetId;
@@ -303,7 +303,7 @@ async function N(e, t, i) {
     let p = t.assetId;
     let g = i.availableVariables[p];
     if ("FILL" === u || "STROKE" === u) {
-      if (g?.resolvedType !== rXF.COLOR) return Promise.resolve(r);
+      if (g?.resolvedType !== VariableResolvedDataType.COLOR) return Promise.resolve(r);
       let t = e.resolveVariable(p);
       let a = await Bw({
         sourceNode: e,
@@ -348,7 +348,7 @@ async function N(e, t, i) {
       });
     } else {
       let t = I(u);
-      if (!t || g?.resolvedType !== rXF.FLOAT) return Promise.resolve(r);
+      if (!t || g?.resolvedType !== VariableResolvedDataType.FLOAT) return Promise.resolve(r);
       let a = e.resolveVariable(p);
       let s = v(e, {
         numericValue: a.value
@@ -448,7 +448,7 @@ let O = {
         let a = getSingletonSceneGraph().get(r ?? "");
         let s = a?.sourceLibraryKey ?? "";
         a?.type === "SYMBOL" && a?.parentNode?.isStateGroup && (r = a.parentNode.guid, s = a.parentNode.sourceLibraryKey ?? "");
-        let o = Egt?.getAssetKey(r ?? "");
+        let o = SceneGraphHelpers?.getAssetKey(r ?? "");
         return o && s && t.has(s) && !i.has(s) ? {
           assetId: o.toString(),
           libraryKey: s
@@ -506,7 +506,7 @@ let O = {
       let r = [];
       let a = ["RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS", "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS", "RECTANGLE_TOP_LEFT_CORNER_RADIUS", "RECTANGLE_TOP_RIGHT_CORNER_RADIUS", "STACK_SPACING", "STACK_PADDING_TOP", "STACK_PADDING_BOTTOM", "STACK_PADDING_LEFT", "STACK_PADDING_RIGHT"];
       for (let [s, o] of Object.entries(e.getVariableConsumptionMap())) {
-        if (!a.includes(s) || !o || !("type" in o) || o.type !== Z_n.ALIAS) continue;
+        if (!a.includes(s) || !o || !("type" in o) || o.type !== VariableDataType.ALIAS) continue;
         let l = sD.fromString(o.value) ?? "";
         let d = t[l];
         if (!(!d || !("library_key" in d) || i.has(d.library_key))) {

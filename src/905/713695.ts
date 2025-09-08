@@ -14,14 +14,14 @@ import { trackEventAnalytics } from '../905/449184';
 import { BO, rI } from '../905/485103';
 import { W as _$$W } from '../905/491061';
 import { Y as _$$Y } from '../905/493958';
-import { p as _$$p } from '../905/621429';
+import { waitForVisibility } from '../905/621429';
 import { logError } from '../905/714362';
 import { j as _$$j } from '../905/745286';
 import { p as _$$p2 } from '../905/844455';
 import { g as _$$g } from '../905/880308';
 import { NU, S8, wQ } from '../905/893701';
 import { shouldSampleRequest, XHR } from '../905/910117';
-import { T as _$$T } from '../905/912096';
+import { getUserPlan } from '../905/912096';
 import { resourceUtils } from '../905/989992';
 import { atomStoreManager, createCustomAtom, createRemovableAtomFamily, setupAtomWithMount, useAtomWithSubscription } from '../figma_app/27355';
 import { getFalseValue } from '../figma_app/897289';
@@ -525,7 +525,7 @@ class z {
         let d = !e.enabled || e.enabled(a);
         let c = new _$$W(() => atomStoreManager.sub(w, () => {}));
         let m = async () => {
-          getFalseValue() || (await _$$p());
+          getFalseValue() || (await waitForVisibility());
           let t = e.fetch(a, s);
           let n = e.key ? i().reporter?.reportQueryRequested(e.key) : null;
           t.then(() => {
@@ -540,7 +540,7 @@ class z {
         let [, h] = function (e, t = e => e(l)) {
           return b(e, t, (e, t) => new _$$$(e, t), async (e, t, i) => {
             if (e.type === 'refetch') {
-              await _$$p();
+              await waitForVisibility();
               return t.refetch({
                 cancelRefetch: !1
               });
@@ -665,7 +665,7 @@ class z {
         }(t => ({
           queryKey: s,
           queryFn: async t => {
-            getFalseValue() || (await _$$p());
+            getFalseValue() || (await waitForVisibility());
             let i = {
               pageParam: t.pageParam,
               ...a
@@ -974,7 +974,7 @@ let et = new class {
   getDefaultTags() {
     return {
       client_visibility: document.visibilityState,
-      user_plan_max: _$$T() || ''
+      user_plan_max: getUserPlan() || ''
     };
   }
   getFigmentTags() {

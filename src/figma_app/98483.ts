@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
-import { m1T, Egt, _0v, nzw, glU, mKm, Ez5 } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { LayoutTabType, SceneGraphHelpers, Axis, DiagramElementType, Fullscreen, LayoutSizingMode, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
@@ -10,10 +10,10 @@ import { eB } from "../905/765855";
 import { dG } from "../figma_app/753501";
 import { vx, OU } from "../figma_app/175258";
 import { sT } from "../figma_app/740163";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { M } from "../figma_app/634148";
 import { kl } from "../905/275640";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Ui, Zj } from "../905/129884";
 import { a2 } from "../figma_app/762558";
 import { Z } from "../figma_app/221818";
@@ -42,16 +42,16 @@ export function $$I3(e) {
     }));
   }, [t, bigNudgeAmount, smallNudgeAmount]);
   let m = function (e) {
-    let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.VECTOR);
+    let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.VECTOR);
     let r = useMemo(() => {
       class t extends M {
         getValueForNode(t) {
-          return Egt.getNodeTransformProperties(t.guid)[e];
+          return SceneGraphHelpers.getNodeTransformProperties(t.guid)[e];
         }
         setValueForNode(t, r) {
-          l7.user(`transform-change-${e}`, () => {
+          permissionScopeHandler.user(`transform-change-${e}`, () => {
             try {
-              Egt.setNodeTransformProperties(t.guid, {
+              SceneGraphHelpers.setNodeTransformProperties(t.guid, {
                 [e]: r
               });
             } catch {}
@@ -61,10 +61,10 @@ export function $$I3(e) {
       return new t();
     }, [e]);
     let l = function (e) {
-      let t = "x" === e ? _0v.X : "y" === e ? _0v.Y : void 0;
+      let t = "x" === e ? Axis.X : "y" === e ? Axis.Y : void 0;
       return useMemo(() => {
-        if (!isNullish(t)) return nc.user("apply-mixed-method-for-vector-network", e => {
-          Egt.applyMixedMathForSelectedVectorNetwork(t, e);
+        if (!isNullish(t)) return scopeAwareFunction.user("apply-mixed-method-for-vector-network", e => {
+          SceneGraphHelpers.applyMixedMathForSelectedVectorNetwork(t, e);
         });
       }, [t]);
     }(e);
@@ -81,7 +81,7 @@ export function $$I3(e) {
     let r = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode);
     return useCallback((n, i) => {
       $$x7(e);
-      r !== nzw.NONE && glU.hideOnCanvasNameEditor();
+      r !== DiagramElementType.NONE && Fullscreen.hideOnCanvasNameEditor();
       t(n, i);
     }, [e, r, t]);
   }(e);
@@ -116,8 +116,8 @@ export function $$v4() {
     return t && vx(t, "TEXT");
   });
   let o = i => {
-    let o = ("VERTICAL" === i ? t : e) !== mKm.FIXED;
-    let l = a && (gl(r) || "WIDTH_AND_HEIGHT" === r || "VERTICAL" === i && "HEIGHT" === r);
+    let o = ("VERTICAL" === i ? t : e) !== LayoutSizingMode.FIXED;
+    let l = a && (isInvalidValue(r) || "WIDTH_AND_HEIGHT" === r || "VERTICAL" === i && "HEIGHT" === r);
     return o || "VERTICAL" === i && n || l;
   };
   return {
@@ -138,15 +138,15 @@ export function $$x7(e) {
   a2(e);
 }
 export function $$N1() {
-  let e = J2(Ez5.propertiesPanelState().shownTransformControls);
+  let e = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownTransformControls);
   return useMemo(() => new Z(e), [e]);
 }
 export function $$C5(e) {
-  let t = J2(Ez5.propertiesPanelState().shownTransformControls);
+  let t = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownTransformControls);
   return useMemo(() => new Z(t).getValue(e), [t, e]);
 }
 export function $$w2() {
-  let e = J2(Ez5.propertiesPanelState().enabledTransformControls);
+  let e = getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTransformControls);
   return useMemo(() => new Z(e), [e]);
 }
 export const AY = $$A0;

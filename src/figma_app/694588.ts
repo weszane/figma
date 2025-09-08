@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
 import { $ } from "../905/455748";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { KH } from "../figma_app/722362";
 import { _6 } from "../figma_app/386952";
@@ -17,7 +17,7 @@ export function $$E0() {
   let [e, t] = lJ("stackCounterAlignItems");
   let r = am();
   let a = useSelector(Sh);
-  let o = T(e, "CENTER", e => !e || gl(e) || "BASELINE" === e);
+  let o = T(e, "CENTER", e => !e || isInvalidValue(e) || "BASELINE" === e);
   return useCallback((e, n) => {
     t(e ? "BASELINE" : o);
     r(e ? "Enable baseline alignment" : "Disable baseline alignment", {
@@ -45,13 +45,13 @@ export function $$b1() {
     selectedChildCount
   } = $$y2();
   let c = Vj(_6());
-  let p = T(e, "CENTER", e => !e || gl(e) || rO(e));
+  let p = T(e, "CENTER", e => !e || isInvalidValue(e) || rO(e));
   return useCallback((e, n, s = zk.YES) => {
     let d = getFeatureFlags().ce_stack_justify_space_between || c ? "SPACE_BETWEEN" : "SPACE_EVENLY";
     let u = e ? d : p;
     t(u, s);
     r("Autolayout spacing mode changed", {
-      mode: gl(u) ? "MIXED" : u,
+      mode: isInvalidValue(u) ? "MIXED" : u,
       source: n,
       selectedGuids: selection,
       selectedCount: selection.length,

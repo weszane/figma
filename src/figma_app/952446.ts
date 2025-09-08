@@ -1,4 +1,4 @@
-import { hMR, glU, Hcu, v4N } from "../figma_app/763686";
+import { CorePerfInfo, Fullscreen, figmaScopeBindings, VariantType } from "../figma_app/763686";
 import { atom, setupAtomWithMount, um, atomStoreManager, setupAtomWithInitialValue } from "../figma_app/27355";
 import { Yc } from "../figma_app/527873";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
@@ -15,7 +15,7 @@ let m = setupAtomWithMount(um({
   heapMemoryLimit: 1 / 0
 }, () => ({
   mallocLevelBytes: Yc(),
-  heapMemoryLimit: hMR.getHeapMemoryLimit()
+  heapMemoryLimit: CorePerfInfo.getHeapMemoryLimit()
 })), ({
   setSelf: e
 }) => {
@@ -46,17 +46,17 @@ let y = atom(e => {
 }, (e, t) => {
   t($$g2);
 });
-let $$b6 = setupAtomWithInitialValue(y, e => glU.setMemoryWarningLevel(e));
+let $$b6 = setupAtomWithInitialValue(y, e => Fullscreen.setMemoryWarningLevel(e));
 export function $$T0(e, t) {
-  return Yc() / t * e / hMR.getHeapMemoryLimit();
+  return Yc() / t * e / CorePerfInfo.getHeapMemoryLimit();
 }
 export function $$I9(e, t, r) {
   let n = 100 * $$T0(e, t);
   return r ? n >= .1 ? `${n.toFixed(1)}%` : "--" : n >= 10 ? `${n.toFixed(1)}%` : `${n.toFixed(2)}%`;
 }
 export function $$S5() {
-  let e = Hcu?.getSubtreeMemoryUsage(["0:2"], v4N.PRIMARY) ?? 0;
-  return Yc() / Hcu.getSubtreeMemoryUsage(["0:0"], v4N.PRIMARY) * e * 100 / hMR.getHeapMemoryLimit();
+  let e = figmaScopeBindings?.getSubtreeMemoryUsage(["0:2"], VariantType.PRIMARY) ?? 0;
+  return Yc() / figmaScopeBindings.getSubtreeMemoryUsage(["0:0"], VariantType.PRIMARY) * e * 100 / CorePerfInfo.getHeapMemoryLimit();
 }
 export const KV = $$T0;
 export const P3 = $$f1;

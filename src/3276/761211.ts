@@ -12,7 +12,7 @@ import { N } from "../905/645480";
 import { x as _$$x } from "../469e6e40/671704";
 import { X$, H3 } from "../figma_app/465071";
 import { F } from "../905/827944";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { p as _$$p } from "../905/42189";
 import { W } from "../3276/776313";
 import { F5, oM } from "../905/192343";
@@ -39,7 +39,7 @@ export function $$y0(e) {
     insertAction: t => {
       if (e.showRequestFlow) return Promise.resolve();
       let n = validatePublishedPluginInOrgAllowlist();
-      if (!ZQ(e.resource) && !n) return Promise.resolve();
+      if (!hasLocalFileId(e.resource) && !n) return Promise.resolve();
       if (M) E();else {
         let {
           e
@@ -58,7 +58,7 @@ export function $$y0(e) {
             },
             triggeredFrom: e.triggeredFrom
           }
-        })) : ZQ(e.resource) ? C() : y();
+        })) : hasLocalFileId(e.resource) ? C() : y();
       }
       w && oM({
         id: e.resource.plugin_id,
@@ -72,9 +72,9 @@ export function $$y0(e) {
       return Promise.resolve();
     },
     dragPreviewPointerPosition: N.CENTERED,
-    getDragPreviewSrc: () => ZQ(e.resource) ? W : e.resource.redirect_icon_url || "",
+    getDragPreviewSrc: () => hasLocalFileId(e.resource) ? W : e.resource.redirect_icon_url || "",
     onPointerDownCallback: () => {
-      e.showRequestFlow || ZQ(e.resource) || M || F.getAndCache(e.resource, n);
+      e.showRequestFlow || hasLocalFileId(e.resource) || M || F.getAndCache(e.resource, n);
     },
     recordingKey: Pt("plugin", e.resource.plugin_id)
   });

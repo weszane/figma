@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 export let $$a0 = new class {
   constructor() {
     this.timer = null;
@@ -55,7 +55,7 @@ export let $$a0 = new class {
       session_expires_at: new Date(this.localSession.expires).toISOString(),
       session_entry_point: this.localSession.entryPoint,
       active_time_spent: Math.round(this.elapsed + performance.now() - this.startTime),
-      fullscreen_is_ready: Y5.isReady()
+      fullscreen_is_ready: fullscreenValue.isReady()
     } : {};
   }
 }();

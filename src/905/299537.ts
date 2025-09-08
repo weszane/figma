@@ -1,10 +1,10 @@
-import { cfv } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { Positioning } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { um } from "../figma_app/27355";
 let s = {
-  positionRelativeToSelection: cfv.ABOVE,
+  positionRelativeToSelection: Positioning.ABOVE,
   currentlySelectedNode: {
-    nodeId: AD,
+    nodeId: defaultSessionLocalIDString,
     ariaLabel: null
   }
 };

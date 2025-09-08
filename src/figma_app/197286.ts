@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { A } from "../905/920142";
 import { XHR } from "../905/910117";
 import { YQ } from "../905/502364";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { v } from "../figma_app/380543";
 import { iZ } from "../905/372672";
 import { J } from "../figma_app/333189";
@@ -46,7 +46,7 @@ export function $$g1(e) {
     f.current = g;
   }, [g, T, b]);
   m(E, useCallback(() => {
-    p && (b && t || (r(to({
+    p && (b && t || (r(showModalHandler({
       type: J
     })), onCanvasExpired?.()), h(p));
   }, [r, onCanvasExpired, p, t, b]));

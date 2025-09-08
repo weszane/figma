@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { x } from "../905/962579";
 var $$n1;
 var c = 0;
@@ -13,7 +13,7 @@ function u(e) {
     }
   }, e.fallback_text);
 }
-let p = nF((e, t) => {
+let p = createOptimistThunk((e, t) => {
   let i = e.getState();
   for (let r in i.flashes) {
     let a = i.flashes[r];
@@ -33,7 +33,7 @@ let p = nF((e, t) => {
   e.dispatch($$n1.add(t));
   return r;
 });
-let $$m0 = nF((e, t) => {
+let $$m0 = createOptimistThunk((e, t) => {
   t.promise.catch(({
     response: i
   }) => {
@@ -58,7 +58,7 @@ let $$m0 = nF((e, t) => {
   e.removeAll = NC("FLASH_REMOVE_ALL");
   e.TIMEOUT = 3e3;
   e.TIMEOUT_SERVER_SIDE = 6e3;
-  e.init = nF(t => {
+  e.init = createOptimistThunk(t => {
     let i = getInitialOptions().flash;
     i && (i.error ? t.dispatch(e.error(u(i.error), e.TIMEOUT_SERVER_SIDE)) : i.warn ? t.dispatch(e.flash(u(i.warn), e.TIMEOUT_SERVER_SIDE)) : i.success && t.dispatch(e.flash(u(i.success), e.TIMEOUT_SERVER_SIDE)));
   });

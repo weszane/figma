@@ -21,10 +21,10 @@ import { TA } from "../905/372672";
 import { FUnitType, FOverrideType, FPluginType, FPublicationStatusType } from "../figma_app/191312";
 import { JuA } from "../figma_app/43951";
 import { X$, H3 } from "../figma_app/465071";
-import { pk } from "../figma_app/300692";
-import { Y3 } from "../figma_app/455620";
+import { isDevModeWithCodegen } from "../figma_app/300692";
+import { getMappedPluginId } from "../figma_app/455620";
 import { throwTypeError } from "../figma_app/465776";
-import { tKW } from "../figma_app/763686";
+import { MeasurementUnit } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Ay as _$$Ay } from "../vendor/159563";
 let L = {
@@ -239,9 +239,9 @@ class P {
   }
   localUnitToLgUnit(e) {
     switch (e) {
-      case tKW.PIXEL:
+      case MeasurementUnit.PIXEL:
         return FUnitType.PIXEL;
-      case tKW.SCALED:
+      case MeasurementUnit.SCALED:
         return FUnitType.SCALED;
       default:
         return null;
@@ -250,9 +250,9 @@ class P {
   lgUnitToLocalUnit(e) {
     switch (e) {
       case FUnitType.PIXEL:
-        return tKW.PIXEL;
+        return MeasurementUnit.PIXEL;
       case FUnitType.SCALED:
-        return tKW.SCALED;
+        return MeasurementUnit.SCALED;
       default:
         return;
     }
@@ -521,7 +521,7 @@ export function $$U2() {
     let a = useMemo(() => {
       if (!e) return null;
       let t = r[e];
-      return t && t.hubFileId ? Y3(t.hubFileId) : null;
+      return t && t.hubFileId ? getMappedPluginId(t.hubFileId) : null;
     }, [r, e]);
     let o = !!a;
     let d = _P(a ?? "", o);
@@ -539,9 +539,9 @@ export function $$U2() {
   let g = _P(p?.id ?? "", _);
   if (!t) {
     if (_loaded3 && plugin) {
-      if (!pk(plugin) || !(e = $n(plugin))) return;
+      if (!isDevModeWithCodegen(plugin) || !(e = $n(plugin))) return;
     } else if (_ && g.loaded && localCodegenSettings) {
-      if (p?.type === "published-plugin" && !g.plugin || g.plugin && !pk(g.plugin)) return;
+      if (p?.type === "published-plugin" && !g.plugin || g.plugin && !isDevModeWithCodegen(g.plugin)) return;
       e = p;
     } else localCodegenSettings?.language.type === "first-party" && (e = p);
     e && (!plugin && localCodegenSettings && u(e, g.plugin ?? null, localCodegenSettings.preferences), bw(e), r(!0));

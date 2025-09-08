@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { V } from "../905/21985";
-import { e as _$$e, u as _$$u } from "../905/786321";
-import { q } from "../905/751750";
+import { Description } from "../905/21985";
+import { generateInputId, generateDescId } from "../905/786321";
+import { useSelectionProvider } from "../905/751750";
 import { b as _$$b, c as _$$c } from "../905/618904";
 import { UX, zr, h_ } from "../905/434007";
 export let $$c0 = forwardRef(function ({
@@ -27,9 +27,9 @@ export let $$u1 = forwardRef(function ({
   ...r
 }, c) {
   let u = !!t;
-  let [p, m] = q();
-  let h = _$$e(p);
-  let g = u ? _$$u(p) : void 0;
+  let [p, m] = useSelectionProvider();
+  let h = generateInputId(p);
+  let g = u ? generateDescId(p) : void 0;
   return jsx(m, {
     value: p,
     children: jsxs("div", {
@@ -40,7 +40,7 @@ export let $$u1 = forwardRef(function ({
         htmlAttributes: i,
         "aria-describedby": g,
         ref: c
-      }), e, u && jsx(V, {
+      }), e, u && jsx(Description, {
         className: h_,
         children: t
       })]

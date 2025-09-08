@@ -1,16 +1,16 @@
 import { throwTypeError } from "../figma_app/465776";
-import { Nfd } from "../figma_app/763686";
+import { PanelType } from "../figma_app/763686";
 export function $$a0(e) {
   switch (e) {
-    case Nfd.FILE:
+    case PanelType.FILE:
       return "FILE";
-    case Nfd.CODE:
+    case PanelType.CODE:
       return "CODE";
-    case Nfd.DAKOTA:
+    case PanelType.DAKOTA:
       return "DAKOTA";
-    case Nfd.SETTINGS:
+    case PanelType.SETTINGS:
       return "SETTINGS";
-    case Nfd.INSERT:
+    case PanelType.INSERT:
       return "INSERT";
     default:
       throwTypeError(e);

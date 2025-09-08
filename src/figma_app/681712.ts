@@ -9,7 +9,7 @@ import { c as _$$c } from "../905/370443";
 import { m as _$$m } from "../figma_app/160942";
 import { FFileType } from "../figma_app/191312";
 import { vr } from "../figma_app/514043";
-import { tY, Ye, MC } from "../figma_app/831101";
+import { SubscriptionType, DesignProductIds, FigJamProductIds } from "../figma_app/831101";
 import { of, vg, hy, sH, q9, qS } from "../figma_app/81441";
 var s = a;
 export function $$f3({
@@ -72,13 +72,13 @@ function y({
   } = _$$m({
     currency: a
   });
-  return e === tY.STUDENT ? null : jsx(b, {
-    isAnnual: e === tY.ANNUAL,
+  return e === SubscriptionType.STUDENT ? null : jsx(b, {
+    isAnnual: e === SubscriptionType.ANNUAL,
     numEditors: t,
     noCents: r,
     unitCost: getDesignUnitCost(e),
     currency: a,
-    monthlyUnitCostForStrikethrough: i ? getDesignUnitCost(tY.MONTHLY) : void 0
+    monthlyUnitCostForStrikethrough: i ? getDesignUnitCost(SubscriptionType.MONTHLY) : void 0
   });
 }
 function b({
@@ -128,12 +128,12 @@ function T({
     currency: a
   });
   return jsx(b, {
-    isAnnual: e === tY.ANNUAL,
+    isAnnual: e === SubscriptionType.ANNUAL,
     numEditors: t,
     unitCost: getWhiteboardUnitCost(e),
     noCents: r,
     currency: a,
-    monthlyUnitCostForStrikethrough: i ? getWhiteboardUnitCost(tY.MONTHLY) : void 0
+    monthlyUnitCostForStrikethrough: i ? getWhiteboardUnitCost(SubscriptionType.MONTHLY) : void 0
   });
 }
 export function $$I1(e, t) {
@@ -147,7 +147,7 @@ function S({
 }) {
   let s = useSelector(e => e.payment.billingPeriod);
   let o = useSelector(e => e.payment.numWhiteboardEditors);
-  return s === tY.STUDENT ? null : jsx(T, {
+  return s === SubscriptionType.STUDENT ? null : jsx(T, {
     currentBillingPeriod: s,
     numEditors: a || o,
     noCents: e,
@@ -167,7 +167,7 @@ function v({
   } = _$$m({
     currency: r
   });
-  n = "design" === e ? estimatedDesignCost(t, tY.MONTHLY) : estimatedWhiteboardCost(t, tY.MONTHLY);
+  n = "design" === e ? estimatedDesignCost(t, SubscriptionType.MONTHLY) : estimatedWhiteboardCost(t, SubscriptionType.MONTHLY);
   let s = new vr(r);
   return renderI18nText("edu.cost_per_month", {
     cost: s.formatMoney(n)
@@ -255,7 +255,7 @@ function x({
   let {
     editorType
   } = a;
-  "design" === editorType ? (o = e.numDesignEditors, l = N(Ye, e.taxes?.lines) ?? estimatedDesignCost(o, e.billingPeriod), s = renderI18nText("pro_cart.info.figma_design_editors.seat_rename", {
+  "design" === editorType ? (o = e.numDesignEditors, l = N(DesignProductIds, e.taxes?.lines) ?? estimatedDesignCost(o, e.billingPeriod), s = renderI18nText("pro_cart.info.figma_design_editors.seat_rename", {
     numEditors: o
   }), u = i ? jsx(v, {
     editorType,
@@ -266,7 +266,7 @@ function x({
     numEditors: e.numDesignEditors,
     noCents: !1,
     currency: t
-  }))) : (o = a.numPaidFigjamEditors, l = N(MC, e.taxes?.lines) ?? estimatedWhiteboardCost(o, e.billingPeriod), d = !i && !a.hasCartStickerShock && jsx(S, {
+  }))) : (o = a.numPaidFigjamEditors, l = N(FigJamProductIds, e.taxes?.lines) ?? estimatedWhiteboardCost(o, e.billingPeriod), d = !i && !a.hasCartStickerShock && jsx(S, {
     noCents: !1,
     currency: t,
     numEditors: o

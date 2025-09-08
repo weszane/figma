@@ -1,5 +1,5 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { B9 } from "../905/125019";
+import { bytesToHex } from "../905/125019";
 import { E as _$$E } from "../905/632989";
 import s from "classnames";
 import { o6, C0, cZ } from "../figma_app/806412";
@@ -9,12 +9,12 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { MJ } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { HT, jS, Pv } from "../905/619652";
 import { QH } from "../905/405710";
 import { M as _$$M } from "../905/771870";
 import { forwardRef } from "react";
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { F as _$$F } from "../905/989956";
 import { LN } from "../figma_app/975811";
 import { yM } from "../905/640017";
@@ -74,7 +74,7 @@ let T = forwardRef(function ({
       stops: n,
       background: s += ")"
     };
-  }(o === RYP.DISPLAY_P3 && _$$Pv() ? "display-p3" : "srgb", e);
+  }(o === ColorSpaceEnum.DISPLAY_P3 && _$$Pv() ? "display-p3" : "srgb", e);
   if (!l) return null;
   let {
     background
@@ -119,9 +119,9 @@ export function $$$$D1(e) {
 class L extends o6 {
   constructor(e) {
     super(e);
-    this.getPaint = () => "paint" in this.props ? E7(this.props.paint) : null;
-    this.getColor = () => "color" in this.props ? E7(this.props.color) : null;
-    this.getOpacity = () => "color" in this.props ? E7(this.props.opacity) : null;
+    this.getPaint = () => "paint" in this.props ? normalizeValue(this.props.paint) : null;
+    this.getColor = () => "color" in this.props ? normalizeValue(this.props.color) : null;
+    this.getOpacity = () => "color" in this.props ? normalizeValue(this.props.opacity) : null;
     this.getStyle = () => "fillStyle" in this.props ? this.props.fillStyle : null;
     this.onKeyDown = C0(this, "keydown", e => {
       13 === e.keyCode && (this.props.onMouseDown && this.props.onMouseDown(e), this.props.onClick && this.props.onClick(e));
@@ -269,7 +269,7 @@ class F extends o6 {
     this.setState({
       src: e
     });
-    !e && this.props.paint.imageThumbnail?.hash && this.imageManager.loadImageByHash(B9(this.props.paint.imageThumbnail.hash)).then(() => {
+    !e && this.props.paint.imageThumbnail?.hash && this.imageManager.loadImageByHash(bytesToHex(this.props.paint.imageThumbnail.hash)).then(() => {
       this.setState({
         src: M(this.props.paint)
       });

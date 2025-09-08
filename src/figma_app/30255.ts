@@ -3,7 +3,7 @@ import { memo, useContext, useState, useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
-import { glU, KWd, xbm } from "../figma_app/763686";
+import { Fullscreen, TransactionCommand, BorderStyle } from "../figma_app/763686";
 import d from "classnames";
 import { d as _$$d } from "../vendor/456530";
 import { N as _$$N } from "../vendor/930821";
@@ -178,10 +178,10 @@ export let $$x0 = memo(function ({
             tool: e
           });
           q.current = !1;
-          glU?.triggerActionInUserEditScope("set-tool-default", {
+          Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
             source: fK
           });
-          oW.trigger("action", KWd.CLEAR);
+          oW.trigger("action", TransactionCommand.CLEAR);
           G(jD());
           let n = et.current;
           if (n) {
@@ -243,7 +243,7 @@ export let $$x0 = memo(function ({
           stickyAnimationState: D,
           shapeStrokeProps: {
             isDragging: V,
-            styleType: void 0 !== F ? F : xbm.NONE,
+            styleType: void 0 !== F ? F : BorderStyle.NONE,
             svgToCanvasScale: R && O ? 1 / (R * O) : 1
           }
         }) : w

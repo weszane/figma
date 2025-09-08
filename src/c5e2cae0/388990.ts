@@ -13,7 +13,7 @@ import { B as _$$B } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { kp } from "../figma_app/831799";
 import { vK, vu, ic, Fq, jv } from "../905/84777";
@@ -165,7 +165,7 @@ function U(e) {
   let M = I.data;
   let O = useDispatch();
   let B = () => {
-    O(Ce());
+    O(hideModal());
   };
   let L = new vr(_);
   return jsx(ey, {

@@ -1,5 +1,5 @@
-import { Z6A, DV9, glU } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { NodeType, WhiteboardTsApi, Fullscreen } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getI18nString } from "../905/303541";
 var o = (e => (e.HEART = "heart", e.STAR = "star", e.PLUS_ONE = "+1", e.THUMBS_UP = "thumbs up", e.THUMBS_DOWN = "thumbs down", e.QUESTION = "question", e.PROFILE = "profile", e.DOT = "dot", e.OTHER = "other", e))(o || {});
@@ -41,7 +41,7 @@ let l = {
     nodeNameOnCanvas: "Other"
   }
 };
-let d = [Z6A.STICKY, Z6A.TEXT, Z6A.SHAPE_WITH_TEXT];
+let d = [NodeType.STICKY, NodeType.TEXT, NodeType.SHAPE_WITH_TEXT];
 export function $$c7(e) {
   return e ? e.textSublayer ? e.textSublayer.textContent : e.textContent ? e.textContent : null : null;
 }
@@ -62,16 +62,16 @@ let _ = (e, t, r) => {
   return a;
 };
 let h = e => {
-  if (!DV9) return {};
-  let t = DV9.getStampsOnNodes(e);
+  if (!WhiteboardTsApi) return {};
+  let t = WhiteboardTsApi.getStampsOnNodes(e);
   let r = {};
   for (let [e, n] of t) r[e] = Object.fromEntries(n);
   return r;
 };
 export function $$m6(e) {
   let t = function (e) {
-    if (!glU) return [];
-    let t = glU.searchForNodesInSelection(d);
+    if (!Fullscreen) return [];
+    let t = Fullscreen.searchForNodesInSelection(d);
     let r = [];
     for (let n of t) {
       let t = e.get(n);
@@ -92,8 +92,8 @@ export function $$m6(e) {
 }
 export function $$g0(e) {
   let t = function (e) {
-    if (!glU) return [];
-    let t = glU.getStickyThreadsFromSelection();
+    if (!Fullscreen) return [];
+    let t = Fullscreen.getStickyThreadsFromSelection();
     let r = [];
     for (let n of t) {
       let t = !1;
@@ -128,9 +128,9 @@ export function $$g0(e) {
   };
 }
 export function $$f1() {
-  if (!glU || !DV9) return [];
-  let e = glU.searchForNodesInSelection([Z6A.STICKY]);
-  let t = DV9.getStickyClustersByAuthor(e);
+  if (!Fullscreen || !WhiteboardTsApi) return [];
+  let e = Fullscreen.searchForNodesInSelection([NodeType.STICKY]);
+  let t = WhiteboardTsApi.getStickyClustersByAuthor(e);
   let r = [];
   for (let e of t) r.push({
     clusterName: e[0],
@@ -139,9 +139,9 @@ export function $$f1() {
   return r;
 }
 export function $$E2() {
-  if (!glU || !DV9) return [];
-  let e = glU.searchForNodesInSelection([Z6A.STICKY]);
-  let t = DV9.getStickyClusterByColor(e);
+  if (!Fullscreen || !WhiteboardTsApi) return [];
+  let e = Fullscreen.searchForNodesInSelection([NodeType.STICKY]);
+  let t = WhiteboardTsApi.getStickyClusterByColor(e);
   let r = [];
   for (let e of t) r.push({
     clusterName: "",
@@ -150,9 +150,9 @@ export function $$E2() {
   return r;
 }
 export function $$y3() {
-  if (!glU || !DV9) return [];
-  let e = glU.searchForNodesInSelection([Z6A.STICKY]);
-  let t = DV9.getStickyClusterByStampCount(e);
+  if (!Fullscreen || !WhiteboardTsApi) return [];
+  let e = Fullscreen.searchForNodesInSelection([NodeType.STICKY]);
+  let t = WhiteboardTsApi.getStickyClusterByStampCount(e);
   let r = [];
   for (let e of t) r.push({
     clusterName: e[0],
@@ -162,8 +162,8 @@ export function $$y3() {
   return r;
 }
 let b = e => {
-  if (!DV9) return [];
-  let t = DV9.getStickyClusterByStampType(e);
+  if (!WhiteboardTsApi) return [];
+  let t = WhiteboardTsApi.getStickyClusterByStampType(e);
   let r = [];
   t.forEach((e, t) => {
     let n = "No stamps" === t ? null : function (e) {
@@ -187,8 +187,8 @@ let T = (e, t, r) => {
   return n;
 };
 export function $$I4() {
-  if (!glU) return [];
-  let e = b(glU.searchForNodesInSelection([Z6A.STICKY]));
+  if (!Fullscreen) return [];
+  let e = b(Fullscreen.searchForNodesInSelection([NodeType.STICKY]));
   let t = getSingletonSceneGraph();
   let r = [];
   for (let n of e) {
@@ -234,7 +234,7 @@ export function $$S5(e, t) {
   if (!n) return null;
   let a = [];
   let s = r.diagramParentId;
-  for (; s && s !== AD;) {
+  for (; s && s !== defaultSessionLocalIDString;) {
     let t = e.get(s);
     if (!t) break;
     let r = $$c7(t);

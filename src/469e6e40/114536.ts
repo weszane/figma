@@ -21,7 +21,7 @@ import { Ph } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Pc } from "../905/372672";
 import { Ib } from "../905/129884";
 import { lQ } from "../905/934246";
@@ -31,7 +31,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { F as _$$F } from "../905/302958";
 import { Eh } from "../figma_app/617654";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { l as _$$l } from "../469e6e40/774192";
 import { J as _$$J } from "../905/129695";
 import { a as _$$a2 } from "../905/5627";
@@ -76,7 +76,7 @@ function D() {
     })
   });
 }
-let F = Ju(function (e) {
+let F = registerModal(function (e) {
   let t = hS(e);
   let a = useDispatch();
   let [r, l] = useState(!1);
@@ -184,7 +184,7 @@ function $(e) {
   let r = !e.enabled && e.allDomainsVerified ? "button" : "div";
   return jsx(r, {
     onClick: "button" === r ? () => {
-      a(to({
+      a(showModalHandler({
         type: F,
         data: {
           orgId: e.orgId,
@@ -351,7 +351,7 @@ function H(e) {
     }, e))
   });
 }
-let Y = Ju(function (e) {
+let Y = registerModal(function (e) {
   let t = hS(e);
   return jsx(bL, {
     manager: t,
@@ -453,25 +453,25 @@ function J(e, t, a, n) {
         }) : getI18nString("domain_management.successfully_added_domains", {
           domainCount: r
         })
-      })) : unverified_domains.length > 0 ? s(to({
+      })) : unverified_domains.length > 0 ? s(showModalHandler({
         type: Y,
         data: {
           failedDomains: o,
           actionType: a ? "VERIFY" : "ADD"
         }
-      })) : (domain_captured_domains || []).length > 0 ? s(to({
+      })) : (domain_captured_domains || []).length > 0 ? s(showModalHandler({
         type: Y,
         data: {
           failedDomains: domain_captured_domains || [],
           actionType: "DOMAIN_CAPTURED_DOMAINS"
         }
-      })) : (resource_connected_domains || []).length > 0 ? s(to({
+      })) : (resource_connected_domains || []).length > 0 ? s(showModalHandler({
         type: Y,
         data: {
           failedDomains: resource_connected_domains || [],
           actionType: "RESOURCE_CONNECTED_DOMAINS"
         }
-      })) : s(to({
+      })) : s(showModalHandler({
         type: Y,
         data: {
           failedDomains: invalid_domains,
@@ -482,7 +482,7 @@ function J(e, t, a, n) {
       s(_$$F.dequeue({
         matchType: "self-serve-domain-management"
       }));
-      s(to({
+      s(showModalHandler({
         type: Y,
         data: {
           failedDomains: t,
@@ -492,7 +492,7 @@ function J(e, t, a, n) {
     }));
   };
 }
-let Q = Ju(function (e) {
+let Q = registerModal(function (e) {
   var t;
   var a;
   var r;
@@ -629,7 +629,7 @@ function et(e) {
 function ea(e) {
   let t = useDispatch();
   let a = useCallback(() => {
-    t(to({
+    t(showModalHandler({
       type: Q,
       data: {
         domainCaptureEnabled: e.domainCaptureEnabled,
@@ -815,7 +815,7 @@ function eE({
   let a = useDispatch();
   return jsx("button", {
     onClick: () => {
-      a(to({
+      a(showModalHandler({
         type: F,
         data: {
           orgId: e,
@@ -926,7 +926,7 @@ let eS = {
     });
   }
 };
-let eO = Ju(function (e) {
+let eO = registerModal(function (e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
   let l = hS(e);
@@ -1036,7 +1036,7 @@ let eO = Ju(function (e) {
     })
   });
 }, "REMOVE_DOMAIN_MODAL");
-let eL = Ju(function (e) {
+let eL = registerModal(function (e) {
   let t = hS(e);
   let a = function (e, t) {
     let a = _$$z.verifyOrgDomains;
@@ -1211,7 +1211,7 @@ function eF({
     children: !t.verifiedAt && jsx($n, {
       onClick: n => {
         n.stopPropagation();
-        r(to({
+        r(showModalHandler({
           type: eL,
           data: {
             domains: [t],
@@ -1237,7 +1237,7 @@ function eq({
 }) {
   let l = useDispatch();
   let o = useCallback(() => {
-    l(to({
+    l(showModalHandler({
       type: eO,
       data: {
         domainIds: [t.id],
@@ -1305,7 +1305,7 @@ function e$(e) {
         className: el()("org_domain_management_page_view--unverifiedHover--9SaqO", _$$s.colorTextTertiary.bgTransparent.$),
         onClick: n => {
           n.stopPropagation();
-          s(to({
+          s(showModalHandler({
             type: eL,
             data: {
               domains: [e],
@@ -1408,7 +1408,7 @@ function e$(e) {
             domainCount: e.length
           }),
           onClick: () => {
-            s(to({
+            s(showModalHandler({
               type: eL,
               data: {
                 domains: l,
@@ -1444,7 +1444,7 @@ function e$(e) {
         }), jsx(IU, {
           label: getI18nString("domain_management.remove_domain"),
           onClick: () => {
-            s(to({
+            s(showModalHandler({
               type: eO,
               data: {
                 domainIds: e.map(({

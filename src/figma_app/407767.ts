@@ -1,4 +1,4 @@
-import { lyf, glU } from "../figma_app/763686";
+import { ViewType, Fullscreen } from "../figma_app/763686";
 import { hV } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/675871";
@@ -290,9 +290,9 @@ export function $$P14() {
   let e = getFeatureFlags().anticipation;
   let t = C7();
   let r = q5()?.canEdit;
-  let i = p8("topLevelMode") === lyf.LAYOUT;
+  let i = p8("topLevelMode") === ViewType.LAYOUT;
   let s = cJ();
-  return e && t && r && i && !!glU && !s;
+  return e && t && r && i && !!Fullscreen && !s;
 }
 var D = (e => (e.ASSET_NOT_FOUND = "asset_not_found", e.STATE_TO_STATE_GROUP = "state_to_state_group", e))(D || {});
 export function $$k4(e) {

@@ -1,8 +1,8 @@
 import { Gu } from "../figma_app/262240";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, luZ } from "../figma_app/763686";
-import { sH } from "../905/871411";
+import { Fullscreen, AnimationTriggerType } from "../figma_app/763686";
+import { parseSessionLocalID } from "../905/871411";
 import { reportError } from "../905/11";
 var $$r2;
 var $$c1 = (e => (e.SECTION_HEADER = "section header", e.ANIMATION = "animation", e))($$c1 || {});
@@ -16,7 +16,7 @@ export function $$p3(e) {
   let t = "CUSTOM_CUBIC";
   let i = [.17, 0, .2, 1];
   function r(e, t) {
-    let i = t ?? sH(glU?.generateUniqueID());
+    let i = t ?? parseSessionLocalID(Fullscreen?.generateUniqueID());
     if (!i) throw Error("Failed to generate unique ID for object animation interaction");
     return {
       id: i,
@@ -48,13 +48,13 @@ export function $$p3(e) {
         }), r.push({
           type: "animation",
           action: t,
-          startCondition: luZ.TRIGGER,
+          startCondition: AnimationTriggerType.TRIGGER,
           interactionId: e,
           interactionIndex: n
         })) : r.push({
           type: "animation",
           action: t,
-          startCondition: luZ.AFTER_PREVIOUS,
+          startCondition: AnimationTriggerType.AFTER_PREVIOUS,
           interactionId: e,
           interactionIndex: n
         });
@@ -89,17 +89,17 @@ export function $$p3(e) {
           }
         }), null) : (t.add(i), e) : null;
       }).filter(isNotNullish).map((e, t) => {
-        if (0 === t && e.startCondition !== luZ.TRIGGER) {
-          let t = sH(glU?.generateUniqueID());
+        if (0 === t && e.startCondition !== AnimationTriggerType.TRIGGER) {
+          let t = parseSessionLocalID(Fullscreen?.generateUniqueID());
           if (!t) throw Error("Failed to generate unique ID for object animation interaction");
           return {
             ...e,
-            startCondition: luZ.TRIGGER,
+            startCondition: AnimationTriggerType.TRIGGER,
             interactionId: t,
             interactionIndex: 0
           };
         }
-        if (e.startCondition !== luZ.TRIGGER) return e;
+        if (e.startCondition !== AnimationTriggerType.TRIGGER) return e;
         {
           let t = Gu(e.interactionId);
           if (!(!t || i.has(t))) {
@@ -107,7 +107,7 @@ export function $$p3(e) {
             return e;
           }
           {
-            let t = sH(glU?.generateUniqueID());
+            let t = parseSessionLocalID(Fullscreen?.generateUniqueID());
             if (!t) throw Error("Failed to generate unique ID for object animation interaction");
             return {
               ...e,
@@ -116,7 +116,7 @@ export function $$p3(e) {
           }
         }
       });
-    }(e)) if (c.startCondition === luZ.TRIGGER) {
+    }(e)) if (c.startCondition === AnimationTriggerType.TRIGGER) {
       i = r([c.action], c.interactionId);
       t.push(i);
     } else {
@@ -129,7 +129,7 @@ export function $$p3(e) {
   e.createTestAction = function (e) {
     return {
       connectionType: "OBJECT_ANIMATION",
-      transitionNodeID: sH(e),
+      transitionNodeID: parseSessionLocalID(e),
       transitionDuration: .3,
       animationType: "FADE",
       animationPhase: "IN",

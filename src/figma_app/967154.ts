@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { iCO } from "../figma_app/763686";
+import { StateHierarchy } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { oB } from "../905/929976";
 import { XE, u1, Uv } from "../figma_app/91703";
@@ -57,8 +57,8 @@ export function $$b6() {
       pickerShown: e.pickerShown,
       stateGroupSelectionMode: t,
       containingProductComponent: r,
-      containingStateGroupDescription: t === iCO.STATE ? r?.description : void 0,
-      containingStateGroupLinks: t === iCO.STATE ? r?.symbolLinks : void 0,
+      containingStateGroupDescription: t === StateHierarchy.STATE ? r?.description : void 0,
+      containingStateGroupLinks: t === StateHierarchy.STATE ? r?.symbolLinks : void 0,
       componentDescription: cv(e)
     };
   });

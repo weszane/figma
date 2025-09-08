@@ -14,7 +14,7 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { Eh } from "../figma_app/617654";
 import { V } from "../905/223084";
 import { $ } from "../905/834575";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { az } from "../figma_app/805373";
 import { lM } from "../figma_app/392626";
 let s;
@@ -96,6 +96,6 @@ function I(e) {
   });
 }
 export function $$E0() {
-  return s ??= Ju(I, "AssetTransferAdminListModal");
+  return s ??= registerModal(I, "AssetTransferAdminListModal");
 }
 export const Y = $$E0;

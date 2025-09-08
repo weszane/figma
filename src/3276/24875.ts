@@ -16,7 +16,7 @@ import { yF } from "../figma_app/386952";
 import { lrh } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { q as _$$q } from "../905/202542";
-import { _5 } from "../figma_app/181241";
+import { defaultValidator } from "../figma_app/181241";
 import { Cf } from "../905/504727";
 import { Bj, ic } from "../3276/565493";
 import { D as _$$D } from "../905/261307";
@@ -25,12 +25,12 @@ import { PK, YG } from "../905/223565";
 import { i as _$$i } from "../905/46262";
 let C = new class {
   notifyViewerRestrictedDraftShared(e) {
-    return _5.validate(({
+    return defaultValidator.validate(({
       xr: t
     }) => t.put(`/api/viewer_restricted_draft/${e}/notify`));
   }
   dismissViewerRestrictedDraftShared(e) {
-    return _5.validate(({
+    return defaultValidator.validate(({
       xr: t
     }) => t.put(`/api/viewer_restricted_draft/${e}/dismiss`));
   }

@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { t } from "../905/150656";
 import { T as _$$T } from "../905/336775";
 import { s as _$$s } from "../905/551945";
-import { Egt } from "../figma_app/763686";
+import { SceneGraphHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager, Xr } from "../figma_app/27355";
@@ -409,7 +409,7 @@ function em() {
   _$$z();
   let l = useCallback(() => {
     i(null);
-    getFeatureFlags().fragment_search_tweaks && Egt?.clearSelection();
+    getFeatureFlags().fragment_search_tweaks && SceneGraphHelpers?.clearSelection();
   }, [i]);
   return jsxs("div", {
     className: _$$s2.flex.itemsCenter.justifyBetween.px8.py12.$$if(eh() > 1, _$$s2.bSolid.bb1.colorBorder).$,

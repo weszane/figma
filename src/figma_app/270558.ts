@@ -7,15 +7,15 @@ import { vo, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 import { M } from "../905/456042";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { b } from "../905/791493";
 import { planPickerModalBody, workspaceSelectorModalInner } from "../figma_app/727769";
-export let $$f0 = Ju(function (e) {
+export let $$f0 = registerModal(function (e) {
   let t = useDispatch();
   let r = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let {
     payload

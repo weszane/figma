@@ -7,7 +7,7 @@ import { i as _$$i } from '../905/50151';
 import { q as _$$q2 } from '../905/70772';
 import { Ib } from '../905/129884';
 import { fP, mr, o1, OX, q9, Sg, U0, xu } from '../905/149906';
-import { to } from '../905/156213';
+import { showModalHandler } from '../905/156213';
 import { h as _$$h } from '../905/207101';
 import { F as _$$F } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -74,7 +74,7 @@ function J(e) {
     attachments
   } = e;
   let i = e => {
-    t(to({
+    t(showModalHandler({
       type: _$$q2,
       data: {
         attachments,

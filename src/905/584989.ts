@@ -3,12 +3,12 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Sc } from "../905/18797";
 import { N } from "../905/696711";
 import { $ } from "../905/834575";
 import { tc } from "../905/15667";
-let $$m0 = nF((e, {
+let $$m0 = createOptimistThunk((e, {
   licenseType: t,
   seatTypeKey: i,
   fileKey: n,
@@ -56,7 +56,7 @@ let $$m0 = nF((e, {
     u?.();
   });
 });
-let $$h1 = nF((e, {
+let $$h1 = createOptimistThunk((e, {
   teamId: t
 }, {
   loadingKey: i

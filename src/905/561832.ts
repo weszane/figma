@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
-import { kul } from "../figma_app/763686";
+import { SchemaJoinStatus } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { k as _$$k } from "../905/651849";
 import { Ay } from "../905/612521";
@@ -17,14 +17,14 @@ import { zX } from "../905/576487";
 import { sf } from "../905/929976";
 import { Cp } from "../905/292918";
 import { Nu, ie, ov, E as _$$E } from "../905/300250";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { HJ } from "../905/760074";
 import { oJ } from "../905/346794";
 import { FEditorType } from "../figma_app/53721";
 import { PW, Kn } from "../905/535806";
 import { e0 } from "../905/696396";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Ao } from "../905/748636";
 import { ss } from "../905/746499";
 var $$P1 = (e => (e[e.TIMED_OUT = 0] = "TIMED_OUT", e[e.COULD_NOT_START = 1] = "COULD_NOT_START", e[e.BRANCH_ARCHIVED = 2] = "BRANCH_ARCHIVED", e[e.STALE_BRANCH_POINT = 3] = "STALE_BRANCH_POINT", e[e.COULD_NOT_COMPLETE = 4] = "COULD_NOT_COMPLETE", e))($$P1 || {});
@@ -42,7 +42,7 @@ let O = async (e, t, i) => {
       file_merge_id: e.failureInfo.file_merge_id
     }));
   });
-  await oJ(kul.JOINED).then(() => {
+  await oJ(SchemaJoinStatus.JOINED).then(() => {
     e.dispatch(_$$F.enqueue({
       message: i,
       icon: zX.CHECK,
@@ -59,7 +59,7 @@ let D = async (e, t, i) => {
     type: "file-merge-submit"
   }));
   await XHR.del(`/api/file_merge/${e.failureInfo.file_merge_id}`);
-  await oJ(kul.JOINED).then(() => {
+  await oJ(SchemaJoinStatus.JOINED).then(() => {
     e.dispatch(_$$F.enqueue({
       message: i,
       icon: zX.CHECK,
@@ -196,7 +196,7 @@ function M(e) {
             variant: "secondary",
             href: secondaryLinkButton.href,
             onClick: () => {
-              h(Ce());
+              h(hideModal());
               h(_$$E({}));
             },
             children: secondaryLinkButton.text
@@ -205,7 +205,7 @@ function M(e) {
             children: jsx($n, {
               variant: "secondary",
               onClick: () => {
-                h(Ce());
+                h(hideModal());
                 h(_$$E({}));
                 secondaryAction({
                   mergeParams: e.mergeParams,
@@ -220,7 +220,7 @@ function M(e) {
             children: jsx($n, {
               variant: "primary",
               onClick: () => {
-                h(Ce());
+                h(hideModal());
                 h(_$$E({}));
                 i.primaryAction({
                   mergeParams: e.mergeParams,
@@ -237,6 +237,6 @@ function M(e) {
   });
 }
 M.displayName = "MergeErrorModal";
-export let $$j0 = Ju(M, "MergeErrorModal", ZU.YES);
+export let $$j0 = registerModal(M, "MergeErrorModal", ModalSupportsBackground.YES);
 export const my = $$j0;
 export const RK = $$P1;

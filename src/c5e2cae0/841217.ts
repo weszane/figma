@@ -11,9 +11,9 @@ import { sx } from "../figma_app/307841";
 import { Ik } from "../figma_app/297957";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { L } from "../c5e2cae0/262856";
-import { $V, tn, tY } from "../figma_app/831101";
+import { isAddressEmpty, UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { p as _$$p, m as _$$m } from "../figma_app/160942";
 import { vr, _Z } from "../figma_app/514043";
 import { HX, PT, Bo, TV, pV, Gn, fK, S as _$$S2 } from "../figma_app/81441";
@@ -26,7 +26,7 @@ function v(e) {
 }
 function y(e) {
   let t = e.canSeeBillingAddressExp && e.billingAddress;
-  let a = e.canSeeBillingAddressExp && e.shippingAddress && !$V(e.shippingAddress);
+  let a = e.canSeeBillingAddressExp && e.shippingAddress && !isAddressEmpty(e.shippingAddress);
   return jsxs("div", {
     children: [jsx(S, {
       subtitle: renderI18nText(e.canSeeBillingAddressExp ? "org_self_serve.review_step.details" : "org_self_serve.review_step.organization_details")
@@ -68,7 +68,7 @@ function j(e) {
   let t = useDispatch();
   let a = useSelector(e => e.selectedView);
   let r = e.canSeeBillingAddressExp && e.billingAddress;
-  let l = e.canSeeBillingAddressExp && e.shippingAddress && !$V(e.shippingAddress);
+  let l = e.canSeeBillingAddressExp && e.shippingAddress && !isAddressEmpty(e.shippingAddress);
   return jsxs("div", {
     children: [jsx(S, {
       subtitle: renderI18nText("pro_cart.review.details")
@@ -88,10 +88,10 @@ function j(e) {
       onClick: e.canSeeBillingAddressExp ? () => {
         t(sf({
           ...a,
-          paymentStep: tn.PAYMENT_AND_ADDRESS
+          paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
         }));
       } : () => {
-        t(to({
+        t(showModalHandler({
           type: L,
           data: {
             modalTitle: getI18nString("pro_cart.review.edit_details_modal_header"),
@@ -146,7 +146,7 @@ export function $$E0(e) {
   let S = Ik();
   let T = x.displayName || j;
   let N = x.legalName || j;
-  let E = x.billingPeriod === tY.STUDENT;
+  let E = x.billingPeriod === SubscriptionType.STUDENT;
   let A = !!_$$p(e.selectedView, x);
   let I = A || E;
   let k = x.submitPending || !A && !t;
@@ -195,7 +195,7 @@ export function $$E0(e) {
       children: [jsx("div", {
         className: TV,
         "data-testid": "review-step-upgrade-title",
-        children: renderI18nText(E ? "edu.checkout_team_name" : S ? x.billingPeriod === tY.ANNUAL ? "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_yearly" : "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_monthly" : "pro_cart.review.upgrade_team_name_to_a_professional_team", {
+        children: renderI18nText(E ? "edu.checkout_team_name" : S ? x.billingPeriod === SubscriptionType.ANNUAL ? "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_yearly" : "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_monthly" : "pro_cart.review.upgrade_team_name_to_a_professional_team", {
           teamName: j
         })
       }), (!P || !I) && jsx($c, {

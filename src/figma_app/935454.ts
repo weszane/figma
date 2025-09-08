@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect } from "react";
-import { Nfd } from "../figma_app/763686";
+import { PanelType } from "../figma_app/763686";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { O1, KD } from "../figma_app/317394";
 import { _4 } from "../figma_app/32128";
@@ -29,7 +29,7 @@ export function $$d0() {
     h($e.FIND);
   };
   useEffect(() => {
-    t && e(Nfd.FILE);
+    t && e(PanelType.FILE);
   }, [t]);
   let f = useCallback(() => !!t && (p(), !0), [t, p]);
   O1(f, KD.SITES_NON_DEFAULT_LEFT_RAIL_VIEW);

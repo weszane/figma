@@ -1,4 +1,4 @@
-import { mSn, Ez5, Nfd } from "../figma_app/763686";
+import { SceneGraphTsApi, AppStateTsApi, PanelType } from "../figma_app/763686";
 import { Tq } from "../figma_app/243058";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -11,7 +11,7 @@ export function $$d2(e, t) {
   if (!r || !Tq.fromLocalNodeIdStr(r)) return null;
   let o = Tq.fromLocalNodeIdStr(r);
   if (!o) return null;
-  let l = t ? mSn?.getPrimaryCodeInstanceFromLayerLikeCodeFile(s.scene, o) : mSn?.getPrimaryCodeInstanceFromCodeFile(s.scene, o);
+  let l = t ? SceneGraphTsApi?.getPrimaryCodeInstanceFromLayerLikeCodeFile(s.scene, o) : SceneGraphTsApi?.getPrimaryCodeInstanceFromCodeFile(s.scene, o);
   return l ? s.get(l) : null;
 }
 export function $$c0(e, t, r, i) {
@@ -19,8 +19,8 @@ export function $$c0(e, t, r, i) {
   let a = $$d2(e, !0);
   xB(a ?? e);
   let o = atomStoreManager.get(Jl);
-  o && Ez5?.codeSelection().fullscreenCodeFileNodeId.set(o);
-  i(Nfd.CODE);
+  o && AppStateTsApi?.codeSelection().fullscreenCodeFileNodeId.set(o);
+  i(PanelType.CODE);
   let c = e.isCodeFile ? e.guid : e.exportedFromCodeFile?.guid;
   c && atomStoreManager.set(b5, c);
 }
@@ -35,10 +35,10 @@ export function $$u1({
   }
   let i = getSingletonSceneGraph();
   let d = i.get(e.overrideKey);
-  let c = mSn?.findMainComponentLikeCodeInstance(i.scene, e.guid);
+  let c = SceneGraphTsApi?.findMainComponentLikeCodeInstance(i.scene, e.guid);
   let u = c ? i.get(c) : null;
   e.isInstanceSublayer && d ? (atomStoreManager.set(qQ, e.guid), tJ([d.id]), Zr(d)) : u ? (atomStoreManager.set(qQ, e.guid), tJ([u.id]), Zr(u)) : t || Zr(e);
-  Ez5?.codeSelection().showMainComponent.set(!0);
+  AppStateTsApi?.codeSelection().showMainComponent.set(!0);
 }
 export const Pu = $$c0;
 export const Py = $$u1;

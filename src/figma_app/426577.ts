@@ -6,7 +6,7 @@ import { N as _$$N } from "../905/778966";
 import { z as _$$z } from "../905/828520";
 import { v as _$$v } from "../905/717395";
 import { A as _$$A } from "../905/251970";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getFilteredFeatureFlags } from "../905/717445";
@@ -163,17 +163,17 @@ export function $$z0({
   let w = AP();
   let O = vn();
   let R = getFilteredFeatureFlags().ce_il_root ? () => {
-    t(NLJ.SELECT);
+    t(DesignGraphElements.SELECT);
   } : void 0;
   let L = getFilteredFeatureFlags().ce_il_vem_move && jsx(_$$N2, {
     recordingKey: "toolbarView.toolVemMove",
-    toolId: NLJ.SELECT,
+    toolId: DesignGraphElements.SELECT,
     icon: jsx(a, {}),
     onActivateTool: t,
     secondary: !0,
     activeToolId: e,
     tooltipText: getI18nString("fullscreen_actions.set-tool-default"),
-    tooltipShortcut: r(NLJ.SELECT),
+    tooltipShortcut: r(DesignGraphElements.SELECT),
     disabled: !w
   });
   let P = jsx(_$$N2, {
@@ -184,8 +184,8 @@ export function $$z0({
     onDeactivateTool: R,
     recordingKey: "toolbarView.toolBend",
     secondary: !0,
-    toolId: NLJ.VECTOR_BEND,
-    tooltipShortcut: r(NLJ.VECTOR_BEND),
+    toolId: DesignGraphElements.VECTOR_BEND,
+    tooltipShortcut: r(DesignGraphElements.VECTOR_BEND),
     tooltipText: getI18nString("fullscreen_actions.bend-tool-tooltip")
   });
   let D = il();
@@ -197,9 +197,9 @@ export function $$z0({
     disabled: M,
     icon: jsx(o, {}),
     onActivateTool: () => {
-      e === NLJ.VECTOR_VAR_WIDTH_POINT ? (t(NLJ.SELECT), analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_mode_untoggle", {
+      e === DesignGraphElements.VECTOR_VAR_WIDTH_POINT ? (t(DesignGraphElements.SELECT), analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_mode_untoggle", {
         productType: F
-      })) : (t(NLJ.VECTOR_VAR_WIDTH_POINT), analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_mode_toggle", {
+      })) : (t(DesignGraphElements.VECTOR_VAR_WIDTH_POINT), analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_mode_toggle", {
         productType: F
       }));
     },
@@ -212,8 +212,8 @@ export function $$z0({
     onboardingKey: hg,
     recordingKey: "toolbarView.toolVarWidthPoint",
     secondary: !0,
-    toolId: NLJ.VECTOR_VAR_WIDTH_POINT,
-    tooltipShortcut: r(NLJ.VECTOR_VAR_WIDTH_POINT),
+    toolId: DesignGraphElements.VECTOR_VAR_WIDTH_POINT,
+    tooltipShortcut: r(DesignGraphElements.VECTOR_VAR_WIDTH_POINT),
     tooltipText: k
   });
   let U = jsx(_$$N2, {
@@ -224,20 +224,20 @@ export function $$z0({
     onDeactivateTool: R,
     recordingKey: "toolbarView.toolPaintBucket",
     secondary: !0,
-    toolId: NLJ.VECTOR_PAINT_BUCKET,
-    tooltipShortcut: r(NLJ.VECTOR_PAINT_BUCKET),
+    toolId: DesignGraphElements.VECTOR_PAINT_BUCKET,
+    tooltipShortcut: r(DesignGraphElements.VECTOR_PAINT_BUCKET),
     tooltipText: getI18nString("fullscreen_actions.set-tool-paint-bucket")
   });
   let B = jsx(_$$N2, {
     recordingKey: "toolbarView.toolVectorLasso",
-    toolId: NLJ.VECTOR_LASSO,
+    toolId: DesignGraphElements.VECTOR_LASSO,
     icon: jsx(_$$N, {}),
     onActivateTool: t,
     secondary: !0,
     onDeactivateTool: R,
     activeToolId: e,
     tooltipText: getI18nString("fullscreen_actions.set-tool-vector-lasso"),
-    tooltipShortcut: r(NLJ.VECTOR_LASSO)
+    tooltipShortcut: r(DesignGraphElements.VECTOR_LASSO)
   });
   let G = getFilteredFeatureFlags().ce_il_vem_cut_tool && jsx(_$$N2, {
     activeToolId: e,
@@ -247,8 +247,8 @@ export function $$z0({
     onDeactivateTool: R,
     recordingKey: "toolbarView.toolCut",
     secondary: !0,
-    toolId: NLJ.VECTOR_CUT,
-    tooltipShortcut: r(NLJ.VECTOR_CUT),
+    toolId: DesignGraphElements.VECTOR_CUT,
+    tooltipShortcut: r(DesignGraphElements.VECTOR_CUT),
     tooltipText: getI18nString("fullscreen_actions.set-tool-cut")
   });
   let z = jsx(_$$N2, {
@@ -260,8 +260,8 @@ export function $$z0({
     onboardingKey: zk,
     recordingKey: "toolbarView.toolShapeBuilder",
     secondary: !0,
-    toolId: NLJ.SHAPE_BUILDER,
-    tooltipShortcut: r(NLJ.SHAPE_BUILDER),
+    toolId: DesignGraphElements.SHAPE_BUILDER,
+    tooltipShortcut: r(DesignGraphElements.SHAPE_BUILDER),
     tooltipText: getI18nString("fullscreen_actions.shape_builder_tool")
   });
   let W = jsxs(Fragment, {
@@ -278,7 +278,7 @@ export function $$z0({
   });
   return getFilteredFeatureFlags().ce_il_pen_palette || w ? jsxs(_$$a, {
     ariaLabel: O ? getI18nString("fullscreen.toolbar.aria-label-pen") : getI18nString("fullscreen.toolbar.vector_editing_aria_label"),
-    children: [O && !w && e === NLJ.VECTOR_PEN && jsxs(Fragment, {
+    children: [O && !w && e === DesignGraphElements.VECTOR_PEN && jsxs(Fragment, {
       children: [jsx(_$$c, {
         atom: _o
       }), jsx(X, {})]

@@ -1,13 +1,13 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.OrgWhitelistSchemaValidator = vh();
-    this.VersionsSchemaValidator = vh();
-    this.WidgetsSchemaValidator = vh();
-    this.ProfileSchemaValidator = vh();
-    this.OrgSchemaValidator = vh();
-    this.InstallStatusSchemaValidator = vh();
-    this.UnpublishedWidgetsSchemaValidator = vh();
+    this.OrgWhitelistSchemaValidator = createNoOpValidator();
+    this.VersionsSchemaValidator = createNoOpValidator();
+    this.WidgetsSchemaValidator = createNoOpValidator();
+    this.ProfileSchemaValidator = createNoOpValidator();
+    this.OrgSchemaValidator = createNoOpValidator();
+    this.InstallStatusSchemaValidator = createNoOpValidator();
+    this.UnpublishedWidgetsSchemaValidator = createNoOpValidator();
     this.getUnpublishedWidgets = () => this.UnpublishedWidgetsSchemaValidator.validate(async ({
       xr: e
     }) => await e.get("/api/widgets/unpublished"));
@@ -19,7 +19,7 @@ export let $$r0 = new class {
     } = e;
     return this.OrgWhitelistSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/widgets/org/${e.orgId}/whitelist`, td.toAPIParameters(i)));
+    }) => await t.get(`/api/widgets/org/${e.orgId}/whitelist`, APIParameterUtils.toAPIParameters(i)));
   }
   getVersions(e) {
     return this.VersionsSchemaValidator.validate(async ({
@@ -31,7 +31,7 @@ export let $$r0 = new class {
   getWidgets(e) {
     return this.WidgetsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/widgets", td.toAPIParameters(e)));
+    }) => await t.get("/api/widgets", APIParameterUtils.toAPIParameters(e)));
   }
   getProfile(e) {
     let {
@@ -40,7 +40,7 @@ export let $$r0 = new class {
     } = e;
     return this.ProfileSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/widgets/profile/${e.profileId}`, td.toAPIParameters(i)));
+    }) => await t.get(`/api/widgets/profile/${e.profileId}`, APIParameterUtils.toAPIParameters(i)));
   }
   getOrg(e) {
     return this.OrgSchemaValidator.validate(async ({
@@ -50,7 +50,7 @@ export let $$r0 = new class {
   getInstallStatus(e) {
     return this.InstallStatusSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/widgets/install_status", td.toAPIParameters(e)));
+    }) => await t.get("/api/widgets/install_status", APIParameterUtils.toAPIParameters(e)));
   }
 }();
 export const U = $$r0;

@@ -1,9 +1,9 @@
 import { useSelector } from "../vendor/514228";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { selectWithShallowEqual } from "../905/103090";
 import { vx } from "../figma_app/175258";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { $$ } from "../figma_app/62612";
 import { Fk } from "../figma_app/167249";
 import { Sh } from "../figma_app/889655";
@@ -32,7 +32,7 @@ export function $$g1() {
 export function $$f2() {
   let e = ie();
   let t = l5();
-  return e && e !== AD ? e : t.length > 0 ? t[0] : AD;
+  return e && e !== defaultSessionLocalIDString ? e : t.length > 0 ? t[0] : defaultSessionLocalIDString;
 }
 export function $$E3(e, t, r) {
   let n = getSingletonSceneGraph().get(e);
@@ -64,7 +64,7 @@ export function $$b4() {
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
   let r = WH(inheritTextStyleKey, styleIdForText, "TEXT");
-  return hS(styleIdForText) && null === r;
+  return isValidValue(styleIdForText) && null === r;
 }
 export const CC = $$m0;
 export const _x = $$g1;

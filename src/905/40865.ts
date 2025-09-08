@@ -5,10 +5,10 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { renderI18nText } from "../905/303541";
-import { AS } from "../905/156213";
-import { Ju } from "../905/102752";
+import { hideModalHandler } from "../905/156213";
+import { registerModal } from "../905/102752";
 import { Vq } from "../figma_app/639088";
-export let $$m0 = Ju(function (e) {
+export let $$m0 = registerModal(function (e) {
   let t = useDispatch();
   let i = hS(e);
   let u = e.folder.viewOnlyAt;
@@ -35,7 +35,7 @@ export let $$m0 = Ju(function (e) {
           children: jsx($n, {
             variant: "primary",
             onClick: () => {
-              t(AS());
+              t(hideModalHandler());
             },
             children: renderI18nText("modal.cancel")
           })

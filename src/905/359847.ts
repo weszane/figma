@@ -1,8 +1,8 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 let $$a0 = NC("HUB_FILE_PUT_ALL");
 let $$s1 = NC("HUB_FILE_DEL_ALL");
-let $$o2 = nF((e, {
+let $$o2 = createOptimistThunk((e, {
   hubFiles: t,
   src: i
 }) => {

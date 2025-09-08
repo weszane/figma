@@ -5,7 +5,7 @@ import { r as _$$r } from "../905/571562";
 import o from "classnames";
 import { Pt } from "../figma_app/806412";
 import { GG } from "../905/511649";
-import { gl, E7 } from "../905/216495";
+import { isInvalidValue, normalizeValue } from "../905/216495";
 import { Uq } from "../905/633462";
 import { zk } from "../figma_app/198712";
 var l = o;
@@ -37,7 +37,7 @@ class A {
   }
   incrementValue(e) {
     let t = this.isBigStep ? this.bigStep : this.step;
-    let i = (Math.round((gl(this.value) || null == this.value ? 0 : this.value) / t) + (0 === e ? 1 : -1)) * t;
+    let i = (Math.round((isInvalidValue(this.value) || null == this.value ? 0 : this.value) / t) + (0 === e ? 1 : -1)) * t;
     i = Math.max(i = Math.min(i, this.max), this.min);
     this.onValueChange(i, zk.NO);
   }
@@ -165,7 +165,7 @@ function v(e) {
     w(e);
     k?.(e);
   }, [k, w]);
-  let N = E7(value) ?? 0;
+  let N = normalizeValue(value) ?? 0;
   let P = min ?? -1 / 0;
   let O = max ?? 1 / 0;
   return jsxs("div", {

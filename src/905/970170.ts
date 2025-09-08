@@ -1,4 +1,4 @@
-import { yT } from "../figma_app/492908";
+import { randomBetween } from "../figma_app/492908";
 import { getFeatureFlags } from "../905/601108";
 import { isIOSUA, isFigmaMobileWithoutTripleTaps } from "../figma_app/778880";
 import { yJ, c3, Yp, bE } from "../figma_app/78808";
@@ -85,7 +85,7 @@ let $$f3 = new H({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !0,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => !m(e),
@@ -119,7 +119,7 @@ let $$_1 = new H({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !0,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => !m(e),
@@ -156,7 +156,7 @@ let $$A4 = new H({
     return r ? [r] : [];
   },
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? yT(500, 9e4) : yT(500, 2e3),
+  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? randomBetween(500, 9e4) : randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => !m(e),
@@ -189,7 +189,7 @@ let $$y5 = new H({
     return i;
   }(n.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? yT(500, 9e4) : yT(500, 2e3),
+  delaySubscribeMs: () => getFeatureFlags().livegraph_splay_realtime_views ? randomBetween(500, 9e4) : randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => !m(e),

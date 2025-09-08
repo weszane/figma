@@ -1,9 +1,9 @@
-import { J0O } from "../figma_app/763686";
+import { ComponentPropType } from "../figma_app/763686";
 import { Mz } from "../vendor/925040";
 import { P8 } from "../905/270781";
 import { DV } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { oV, hS } from "../905/216495";
+import { MIXED_MARKER, isValidValue } from "../905/216495";
 import { g as _$$g } from "../905/578436";
 import { Sh, dK, AF } from "../figma_app/889655";
 import { eM, xP, k4, Yi, xb, ZH, wd } from "../figma_app/164212";
@@ -111,7 +111,7 @@ let A = () => P8([C1, dK, (e, t) => t], (e, t, r) => {
   return s;
 });
 let $$x8 = Mz([(e, t) => t, (e, t, r) => r, f, AF], (e, t, r, i) => {
-  if (e === J0O.BOOL && t) {
+  if (e === ComponentPropType.BOOL && t) {
     let e = i?.name ? getI18nString("design_systems.component_properties.boolean_property_default_name", {
       selectedNodeName: i.name
     }) : getI18nString("design_systems.component_properties.boolean_property_default_name_fallback", {
@@ -119,16 +119,16 @@ let $$x8 = Mz([(e, t) => t, (e, t, r) => r, f, AF], (e, t, r, i) => {
     });
     return _$$g(e, r);
   }
-  if (e === J0O.NUMBER && t) {
+  if (e === ComponentPropType.NUMBER && t) {
     let e = getI18nString("design_systems.component_properties.number_property_default_name");
     return _$$g(e, r);
   }
-  if (e === J0O.SLOT) {
+  if (e === ComponentPropType.SLOT) {
     let e = getI18nString("design_systems.component_properties.slot_property_default_name");
     return _$$g(e, r);
   }
   {
-    let t = e === J0O.INSTANCE_SWAP ? getI18nString("design_systems.component_properties.instance_swap_property_default_name") : xb(e);
+    let t = e === ComponentPropType.INSTANCE_SWAP ? getI18nString("design_systems.component_properties.instance_swap_property_default_name") : xb(e);
     return _$$g(t, r);
   }
 });
@@ -140,11 +140,11 @@ export function $$N1() {
       let i = t.defaultValue;
       if (null != r[t.explicitDefID]) {
         let e = r[t.explicitDefID];
-        i = e ? e.isMixed ? oV : e.value : xJ;
+        i = e ? e.isMixed ? MIXED_MARKER : e.value : xJ;
       }
-      if (t.type === J0O.INSTANCE_SWAP && i !== xJ && i !== oV) {
+      if (t.type === ComponentPropType.INSTANCE_SWAP && i !== xJ && i !== MIXED_MARKER) {
         let t = wd([i], e);
-        i = t && hS(t) ? t.name : xJ;
+        i = t && isValidValue(t) ? t.name : xJ;
       }
       return {
         name: t.name,

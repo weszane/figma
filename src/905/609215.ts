@@ -1,4 +1,4 @@
-import { CWU } from "../figma_app/763686";
+import { VariablesBindings } from "../figma_app/763686";
 import { kz, ZI, Dt, Rn } from "../figma_app/633080";
 export class $$a0 {
   constructor(e = !1, t = !1) {
@@ -6,15 +6,15 @@ export class $$a0 {
     this.keepVariableResolvedType = t;
   }
   variableIdToVariable(e) {
-    let t = CWU.getLocalVariableInfo(e);
+    let t = VariablesBindings.getLocalVariableInfo(e);
     if (t) return kz(t);
-    let i = CWU.getSubscribedVariableInfo(e);
+    let i = VariablesBindings.getSubscribedVariableInfo(e);
     if (i) return ZI(i);
   }
   variableCollectionIdToVariableCollection(e) {
-    let t = CWU.getLocalVariableSetInfo(e);
+    let t = VariablesBindings.getLocalVariableSetInfo(e);
     if (t) return Dt(t);
-    let i = CWU.getSubscribedVariableSetInfo(e);
+    let i = VariablesBindings.getSubscribedVariableSetInfo(e);
     if (i) return Rn(i);
   }
 }

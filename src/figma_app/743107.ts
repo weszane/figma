@@ -1,5 +1,5 @@
 import { useMemo, useRef, useEffect } from "react";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
@@ -205,10 +205,10 @@ export function $$A1({
     let e;
     if (getFeatureFlags().aip_flower_garden_shadow_reranker && A && "loaded" === x.status && "loaded" === O.status && R) {
       switch (f.suggestionType) {
-        case rXF.COLOR:
+        case VariableResolvedDataType.COLOR:
           e = "COLOR";
           break;
-        case rXF.FLOAT:
+        case VariableResolvedDataType.FLOAT:
           e = "NUMBER";
       }
       e && analyticsEventManager.trackDefinedMetric("ai_productivity.variable_suggestion_context_collection_time", {
@@ -230,7 +230,7 @@ export function $$A1({
     isValidRerankingContext: d
   }) {
     useEffect(() => {
-      if (!d || !getFeatureFlags().aip_flower_garden_shadow_reranker || e.suggestionType === rXF.FLOAT && !getFeatureFlags().aip_flower_garden_shadow_number_reranker) return;
+      if (!d || !getFeatureFlags().aip_flower_garden_shadow_reranker || e.suggestionType === VariableResolvedDataType.FLOAT && !getFeatureFlags().aip_flower_garden_shadow_number_reranker) return;
       let n = _e(e?.suggestionType);
       if (!r || !n || "loaded" !== t.status || !e.sessionId || !e.modeContext || !e.entryPoint || !e.currentColor && void 0 === e.currentFloat) return;
       let c = _$$g();

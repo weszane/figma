@@ -10,7 +10,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { sf } from "../905/929976";
 import { d as _$$d } from "../905/531325";
-import { sr } from "../905/894881";
+import { notificationAPI } from "../905/894881";
 import { sL } from "../figma_app/50271";
 import { vY, cz } from "../905/579526";
 let E = new Map();
@@ -53,7 +53,7 @@ async function I(e) {
 }
 function S(e, t, r, n) {
   return () => {
-    sr.recordNotificationClicked({
+    notificationAPI.recordNotificationClicked({
       id: t,
       currentView: n,
       medium: "desktoppush"
@@ -89,7 +89,7 @@ function N() {
   if ((getFeatureFlags().desktop_fcm_notifications || getFeatureFlags().desktop_fcm_shadow_mode) && x && x.desktopAppVersion && e) {
     let t = x.getFCMToken(e);
     let r = x.desktopAppVersion;
-    t && (sr.sendDesktopToken({
+    t && (notificationAPI.sendDesktopToken({
       firebaseToken: t,
       version: r
     }), analyticsEventManager.trackDefinedEvent("notification.firebase_token_registered", {}));

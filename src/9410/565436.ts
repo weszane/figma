@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
 import { O } from "../905/587457";
-import { glU, zkO } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, SourceType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { tq, yc } from "../figma_app/671547";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { n as _$$n } from "../9410/774045";
 import { uQ } from "../figma_app/151869";
@@ -44,21 +44,21 @@ let s = memo(function (e) {
 export function $$b1(e) {
   let t = uQ() || "";
   let i = kl("embedData");
-  let r = decodeURIComponent(E7(i)?.originalText || "");
+  let r = decodeURIComponent(normalizeValue(i)?.originalText || "");
   let a = tq(i);
   let s = Xr(_$$n);
   return useCallback(() => {
     r && (a(yc.CONVERT_TO_TEXT), s({
       type: "MINIMIZE"
-    }), l7(e, "convert-embed-to-text", () => glU?.replaceNodeWithText(t, r)));
+    }), permissionScopeHandler(e, "convert-embed-to-text", () => Fullscreen?.replaceNodeWithText(t, r)));
   }, [r, a, s, t, e]);
 }
 export function $$C0(e) {
   let t = useAtomWithSubscription(_$$n);
   let i = uQ() || "";
   let n = kl("embedData");
-  let a = decodeURIComponent(E7(n)?.originalText || "");
-  let l = $$b1(zkO.USER);
+  let a = decodeURIComponent(normalizeValue(n)?.originalText || "");
+  let l = $$b1(SourceType.USER);
   return n && i && a && (!t || e.inModal) ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
     tooltip: getI18nString("whiteboard.embeds.inline_menu.change_back_to_text"),

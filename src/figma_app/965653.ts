@@ -1,4 +1,4 @@
-import { j0r } from "../figma_app/763686";
+import { PropertyScope } from "../figma_app/763686";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import a from "../vendor/128080";
 import { v4, qp, mn, jq } from "../figma_app/761118";
@@ -42,7 +42,7 @@ let $$v5 = createRemovableAtomFamily(e => atom(t => {
   c.forEach(e => {
     _[e.libraryKey] = e.name;
   });
-  let h = Object.values(u).filter(t => t.resolvedType === e.type).filter(t => t.scopes.some(t => e.scopes.includes(t) || t === j0r.ALL_SCOPES));
+  let h = Object.values(u).filter(t => t.resolvedType === e.type).filter(t => t.scopes.some(t => e.scopes.includes(t) || t === PropertyScope.ALL_SCOPES));
   return {
     allVariableListItems: dC({
       variables: h,

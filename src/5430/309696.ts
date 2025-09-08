@@ -5,7 +5,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { nR, $$, N_, Ph } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { jt } from "../figma_app/395505";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { R$ } from "../figma_app/86989";
 import { iZ } from "../905/372672";
 import { Yj } from "../figma_app/951233";
@@ -94,7 +94,7 @@ export function $$w0(e) {
     className: _1,
     trackingEventName: "Detail View - Request Refund",
     onClick: () => {
-      o(to({
+      o(showModalHandler({
         type: bX,
         data: {
           user,

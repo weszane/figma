@@ -7,8 +7,8 @@ import { DP } from "../905/158740";
 import { J } from "../905/341359";
 import { A as _$$A } from "../vendor/723372";
 import { o as _$$o } from "../905/821217";
-import { q } from "../905/751750";
-import { Dm, s7, yM } from "../905/955878";
+import { useSelectionProvider } from "../905/751750";
+import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS } from "../905/955878";
 import { Q } from "../905/586361";
 import { P } from "../905/536340";
 export let $$f0 = createContext(void 0);
@@ -162,14 +162,14 @@ export let $$b3 = forwardRef(({
 }, v) => {
   let I = useContext($$f0);
   let E = "listbox" === t || "menu" === t;
-  let [x, S] = q();
+  let [x, S] = useSelectionProvider();
   let {
     version
   } = DP();
   let {
     fpl_popover_fullscreen_events
   } = Q();
-  let T = fpl_popover_fullscreen_events ? [Dm, s7, yM] : [];
+  let T = fpl_popover_fullscreen_events ? [EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS] : [];
   let k = {
     dialog: "var(--z-index-window)",
     grid: "var(--z-index-window)",

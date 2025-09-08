@@ -29,7 +29,7 @@ import { af } from "../figma_app/559491";
 import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
 import { j7 } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { x2, OX } from "../figma_app/33586";
 import { Cu } from "../figma_app/314264";
@@ -37,7 +37,7 @@ import { Sz } from "../figma_app/12535";
 import { E as _$$E } from "../1556/957507";
 import { k2 } from "../figma_app/10554";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
 import { yX } from "../figma_app/918700";
 function h(e) {
@@ -127,7 +127,7 @@ function E(e) {
   });
 }
 let Y = "MANAGE_RESOURCE_DROPDOWN_TYPE";
-let X = Ju(yX);
+let X = registerModal(yX);
 function V(e) {
   let {
     resource,
@@ -219,7 +219,7 @@ function V(e) {
             text: e,
             trackingContext: e0.COMMUNITY_HUB_FILE
           });
-          r(to({
+          r(showModalHandler({
             type: X,
             data: {
               confirmationTitle: V ? getI18nString("community.hub_files.delist_file_from_community_hub") : getI18nString("community.hub_files.remove_file_from_community_hub"),

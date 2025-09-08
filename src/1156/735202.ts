@@ -1,8 +1,8 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { lV, Li, Us, VH } from "../figma_app/617606";
 import { RM, Hg, o9, mJ, F$ } from "../figma_app/304955";
-import { Hq } from "../905/189185";
+import { AIScopeHandler } from "../905/189185";
 import { assert } from "../figma_app/465776";
 import { Ur } from "../figma_app/735943";
 import { J } from "../figma_app/710077";
@@ -12,15 +12,15 @@ export function $$u0(e, t, n, u, x, m, h) {
   let f = Li(e);
   let y = t.chatMessages || [];
   let _ = [...y, ...f];
-  if (Hq.ai("update-source-code-and-chat-messages", () => {
-    for (let [e, i] of (assert(void 0 !== glU, "Fullscreen must be defined"), t.chatMessages = _, Object.entries(n))) {
+  if (AIScopeHandler.ai("update-source-code-and-chat-messages", () => {
+    for (let [e, i] of (assert(void 0 !== Fullscreen, "Fullscreen must be defined"), t.chatMessages = _, Object.entries(n))) {
       let n = mJ(g, e);
       let {
         codeFile
       } = Ur(p, n, i, h.trackSystemEditedSession);
       codeFile && (codeFile.sourceCode = i, h.setCodeLastEditedBy(t.guid));
     }
-    glU.commit();
+    Fullscreen.commit();
   }), u && Object.keys(n).length > 0) {
     let e = {
       ...Object.fromEntries(Object.entries(p).map(([e, t]) => [F$(g, e), t.sourceCode])),
@@ -34,7 +34,7 @@ export function $$u0(e, t, n, u, x, m, h) {
         createCodeSnapshot: h.createCodeSnapshot
       }
     }).then(e => {
-      Hq.ai("enrich-exchange-messages-with-code-snapshots", () => {
+      AIScopeHandler.ai("enrich-exchange-messages-with-code-snapshots", () => {
         let n = [...y, ...e];
         t.chatMessages = n;
       });

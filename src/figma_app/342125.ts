@@ -1,9 +1,9 @@
 import { NC } from "../905/17179";
 import { s as _$$s } from "../905/573154";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { P } from "../905/746303";
 let $$o0 = NC("ORG_SAML_CONFIG_GET");
-let $$l1 = nF(e => {
+let $$l1 = createOptimistThunk(e => {
   let t = e.getState().currentUserOrgId;
   P.getOrgSamlConfig({
     orgId: t
@@ -20,4 +20,4 @@ let $$l1 = nF(e => {
 let $$d2 = NC("ORG_SAML_CONFIG_SET");
 export const E = $$o0;
 export const Jt = $$l1;
-export const hZ = $$d2; 
+export const hZ = $$d2;

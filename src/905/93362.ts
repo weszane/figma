@@ -1,20 +1,20 @@
-import { vh, td, _5 } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
 import { r as _$$r } from "../905/324611";
 export let $$a0 = new class {
   constructor() {
-    this.UnverifiedSchemaValidator = vh();
-    this.BackupCodesSchemaValidator = vh();
-    this.StateSchemaValidator = vh();
-    this.UserTeamsSchemaValidator = vh();
-    this.TeamsSchemaValidator = vh();
-    this.UserSchemaValidator = vh();
-    this.EmailFeaturesSchemaValidator = vh();
-    this.UserAuthedSchemaValidator = vh();
-    this.ScimProvisionedStatusSchemaValidator = vh();
-    this.DevTokenSchemaValidator = vh();
-    this.PlansSchemaValidator = vh();
-    this.ChatbotMetaValidator = vh();
-    this.PlansForAuthedUsersSchemaValidator = vh();
+    this.UnverifiedSchemaValidator = createNoOpValidator();
+    this.BackupCodesSchemaValidator = createNoOpValidator();
+    this.StateSchemaValidator = createNoOpValidator();
+    this.UserTeamsSchemaValidator = createNoOpValidator();
+    this.TeamsSchemaValidator = createNoOpValidator();
+    this.UserSchemaValidator = createNoOpValidator();
+    this.EmailFeaturesSchemaValidator = createNoOpValidator();
+    this.UserAuthedSchemaValidator = createNoOpValidator();
+    this.ScimProvisionedStatusSchemaValidator = createNoOpValidator();
+    this.DevTokenSchemaValidator = createNoOpValidator();
+    this.PlansSchemaValidator = createNoOpValidator();
+    this.ChatbotMetaValidator = createNoOpValidator();
+    this.PlansForAuthedUsersSchemaValidator = createNoOpValidator();
   }
   getUnverified() {
     return this.UnverifiedSchemaValidator.validate(async ({
@@ -36,7 +36,7 @@ export let $$a0 = new class {
     _$$r();
     return this.StateSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/user/state", td.toAPIParameters({
+    }) => await t.get("/api/user/state", APIParameterUtils.toAPIParameters({
       redact: "org_billing_data",
       ...e
     }), i));
@@ -53,7 +53,7 @@ export let $$a0 = new class {
     } = e;
     return this.TeamsSchemaValidator.validate(async ({
       xr: e
-    }) => await e.get(`/api/user/${userId}/teams`, td.toAPIParameters(i)));
+    }) => await e.get(`/api/user/${userId}/teams`, APIParameterUtils.toAPIParameters(i)));
   }
   getUser(e) {
     return this.UserSchemaValidator.validate(async ({
@@ -66,12 +66,12 @@ export let $$a0 = new class {
     }) => await t.put("/api/user", e.user));
   }
   setOnboardingSignal(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.put("/api/user", e));
   }
   setFileViewHistoryPreference(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.put("/api/user", e));
   }
@@ -129,12 +129,12 @@ export let $$a0 = new class {
     }
   }
   migrateAllPersonalDrafts(e) {
-    return _5.validate(({
+    return defaultValidator.validate(({
       xr: t
     }) => t.post(`/api/user/migrate_personal_drafts/${e}`));
   }
   deleteAllPersonalDrafts() {
-    return _5.validate(({
+    return defaultValidator.validate(({
       xr: e
     }) => e.post("/api/user/delete_all_personal_drafts"));
   }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { f as _$$f } from "../905/809171";
 import { J as _$$J } from "../905/614223";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom } from "../figma_app/27355";
 import { A as _$$A } from "../905/920142";
@@ -37,7 +37,7 @@ import { MY, q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
 import { jN } from "../905/612685";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { S2 } from "../figma_app/465071";
 import { f6 } from "../figma_app/915202";
 import { $A } from "../905/782918";
@@ -497,8 +497,8 @@ export function $$ex0(e) {
   let j = _$$A(w).add(14, "day").isSameOrAfter(_$$A());
   let k = _$$k2();
   let P = WN();
-  let T = useMemo(() => "prototype" === C.view ? void 0 : Ez5, [C.view]);
-  let M = ut(T?.uiState().isRecovery, !1);
+  let T = useMemo(() => "prototype" === C.view ? void 0 : AppStateTsApi, [C.view]);
+  let M = getObservableValue(T?.uiState().isRecovery, !1);
   let E = "developer" === _$$w();
   let S = _I();
   let {

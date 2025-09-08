@@ -1,42 +1,42 @@
-import { Ez5, NVY } from "../figma_app/763686";
+import { AppStateTsApi, ColorFormatEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { kG } from "../figma_app/327588";
 import { _q, bA } from "../905/668764";
 import { m0 } from "../figma_app/976749";
 import { R } from "../figma_app/941983";
-import { ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { d as _$$d } from "../905/758967";
 import { jH, Gk } from "../905/950959";
 import { Mo } from "../905/414069";
 export function $$h5() {
-  return Ez5.editorPreferences();
+  return AppStateTsApi.editorPreferences();
 }
 export function $$m1() {
-  return ut(Ez5?.editorPreferences().hideHelpWidget, !1);
+  return getObservableValue(AppStateTsApi?.editorPreferences().hideHelpWidget, !1);
 }
 export function $$g3() {
   let e = m0();
-  let t = J2($$h5().colorFormat);
-  return t === NVY.CSS && e || t === NVY.UIColor && !e ? NVY.RGB : t;
+  let t = getObservableOrFallback($$h5().colorFormat);
+  return t === ColorFormatEnum.CSS && e || t === ColorFormatEnum.UIColor && !e ? ColorFormatEnum.RGB : t;
 }
 export function $$f8() {
-  return ut(Ez5?.editorPreferences()?.sidebarSplitPosition, R.sidebarSplitPosition);
+  return getObservableValue(AppStateTsApi?.editorPreferences()?.sidebarSplitPosition, R.sidebarSplitPosition);
 }
 export function $$E0() {
   return kG() ? 48 : 0;
 }
 export function $$y6() {
-  return ut(Ez5?.editorPreferences()?.devHandoffInspectSplitPosition, 320);
+  return getObservableValue(AppStateTsApi?.editorPreferences()?.devHandoffInspectSplitPosition, 320);
 }
 export function $$b10() {
-  return ut(Ez5?.editorPreferences()?.propertiesPanelSplitPosition, R.propertiesPanelSplitPosition);
+  return getObservableValue(AppStateTsApi?.editorPreferences()?.propertiesPanelSplitPosition, R.propertiesPanelSplitPosition);
 }
 export function $$T4() {
-  return ut(Ez5?.editorPreferences().bigNudgeAmount, _q);
+  return getObservableValue(AppStateTsApi?.editorPreferences().bigNudgeAmount, _q);
 }
 export function $$I2() {
-  return ut(Ez5?.editorPreferences().smallNudgeAmount, bA);
+  return getObservableValue(AppStateTsApi?.editorPreferences().smallNudgeAmount, bA);
 }
 export function $$S11(e, t) {
   let r = $$I2();
@@ -47,7 +47,7 @@ export function $$S11(e, t) {
   };
 }
 export function $$v9() {
-  return ut(Ez5?.editorPreferences().renderRulers, !1);
+  return getObservableValue(AppStateTsApi?.editorPreferences().renderRulers, !1);
 }
 let A = [{
   getObservable: () => $$h5().activeCanvasPixelPreview,
@@ -94,7 +94,7 @@ let A = [{
       text: getI18nString("visual_bell.show_frame_grids_hide_button"),
       action: e => {
         e.stopPropagation();
-        Ez5.editorPreferences().showFrameGrids.set(!1);
+        AppStateTsApi.editorPreferences().showFrameGrids.set(!1);
       }
     }
   }) : {

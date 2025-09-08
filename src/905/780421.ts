@@ -6,7 +6,7 @@ import { _A, W2 } from "../figma_app/814196";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Z1 } from "../figma_app/91703";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { N } from "../figma_app/240060";
 import { Xj } from "../905/748636";
 import { oVP } from "../figma_app/27776";
@@ -23,7 +23,7 @@ export class $$f0 extends PureComponent {
       _A("shown");
       this.props.dispatch(Z1());
       N.enableAutoOpen();
-      Y5.showVisualBellLocalized("plugins-added-from-file", "desktop_open_views.open_in_desktop_from_now_on_modal.visual_bell", {}, !1);
+      fullscreenValue.showVisualBellLocalized("plugins-added-from-file", "desktop_open_views.open_in_desktop_from_now_on_modal.visual_bell", {}, !1);
     };
   }
   static shouldShowOnce() {

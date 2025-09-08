@@ -2,10 +2,10 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useId, Component } from "react";
 import { connect, useSelector, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Vzr, CNR, glU, X3B, bOM } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Thumbnail, SlideConstantsCppBindings, Fullscreen, PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import h from "classnames";
@@ -38,7 +38,7 @@ import { cO } from "../figma_app/530167";
 import { i9, N4, VS, oO, bk } from "../figma_app/49598";
 import { oB, sf } from "../905/929976";
 import { M3 } from "../figma_app/91703";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/350203";
 import { fu } from "../figma_app/831799";
 import { Wi, sD, IZ, oH, EL, qA, UP } from "../figma_app/740025";
@@ -62,7 +62,7 @@ import { D6 } from "../figma_app/175992";
 import { Rs } from "../figma_app/761870";
 import { e0 as _$$e3 } from "../905/696396";
 import { s as _$$s2 } from "../905/608932";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { pz } from "../figma_app/825489";
 import { OJ } from "../905/519092";
 import { $ as _$$$ } from "../905/241406";
@@ -92,7 +92,7 @@ import { A as _$$A13 } from "../905/794518";
 import { A as _$$A14 } from "../905/81613";
 import { y4I } from "../figma_app/822011";
 import { d as _$$d } from "../905/49800";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { A as _$$A15 } from "../905/118358";
 import { GP, w6 } from "../figma_app/292324";
 import { A as _$$A16 } from "../905/857789";
@@ -106,13 +106,13 @@ var n;
 var g = h;
 async function M() {
   return await Promise.all(rY(atomStoreManager.get(BT)).map(e => scheduler.postTask(() => function (e) {
-    let [t, i] = Vzr.generateThumbnailForNode(e, CNR.slideWidth(), CNR.slideHeight(), 1, {
+    let [t, i] = Thumbnail.generateThumbnailForNode(e, SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight(), 1, {
       useAbsoluteBounds: !0
     });
     return {
       url: URL.createObjectURL(new Blob([i || ""])),
       buffer: i,
-      sha1: Et(i),
+      sha1: sha1Hex(i),
       type: "image"
     };
   }(e))));
@@ -303,7 +303,7 @@ function e6({
         children: [jsx(_$$d, {
           checked: t === y4I.PROTOTYPE,
           disabled: n,
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: renderI18nText("community.publishing.use_a_prototype_preview")
           }),
           onChange: e => {
@@ -631,7 +631,7 @@ class ts extends Component {
         let t = await $x(e, this.state.customThumbnail);
         let i = {
           ...t,
-          sha1: Et(t.buffer),
+          sha1: sha1Hex(t.buffer),
           type: "image"
         };
         this.setState({
@@ -804,8 +804,8 @@ class ts extends Component {
         editorCommunityProfiles: data.meta
       });
     })(), this.setAllCategories()]);
-    this.props.publishingState.metadata.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE && this.props.isFullscreenOpen && l7.system("slides-prepare-modules-for-publish", () => {
-      glU.createSlideModulesForPublish();
+    this.props.publishingState.metadata.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE && this.props.isFullscreenOpen && permissionScopeHandler.system("slides-prepare-modules-for-publish", () => {
+      Fullscreen.createSlideModulesForPublish();
     });
   }
   async setAllCategories() {
@@ -826,7 +826,7 @@ class ts extends Component {
     let n = i ? {
       ...i,
       type: "image",
-      sha1: Et(i.buffer)
+      sha1: sha1Hex(i.buffer)
     } : void 0;
     this.setState({
       canvasThumbnail: n,
@@ -1280,7 +1280,7 @@ let to = connect((e, t) => {
   let s = a && a6(a);
   let o = getExplicitRoleForUserAndFile(fileKey, e);
   let l = o?.level === _$$e2.OWNER;
-  let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== k2.UNIVERSAL_POSTING && X3B.firstPagePrototypeStatus() === bOM.VALID;
+  let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== k2.UNIVERSAL_POSTING && PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID;
   let u = e.publishingHubFiles[fileKey];
   u && u.metadata || (u = {
     status: oH(u),
@@ -1325,7 +1325,7 @@ let to = connect((e, t) => {
     e(N4({
       payload: t,
       onSuccess: t => {
-        e(Ce());
+        e(hideModal());
         i();
       }
     }));
@@ -1334,7 +1334,7 @@ let to = connect((e, t) => {
     t.isEditHubFilePageMode || e(M3({
       view: A5.INVITE
     }));
-    e(Lo());
+    e(popModalStack());
   },
   onPublishingMetadataChanged: (t, i) => {
     e(VS({
@@ -1355,7 +1355,7 @@ let to = connect((e, t) => {
   },
   dispatch: e
 }))(ts);
-let $$tl0 = Ju(function (e) {
+let $$tl0 = registerModal(function (e) {
   let {
     Sprig
   } = useSprigWithSampling();
@@ -1380,7 +1380,7 @@ let $$tl0 = Ju(function (e) {
     setLibraryPublishingMode: l,
     ...e
   }) : null;
-}, "HubFilePublishModal", ZU.YES);
+}, "HubFilePublishModal", ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalSuccessScreen = function (e) {
   let t = useDispatch();
   let i = UP();
@@ -1406,7 +1406,7 @@ let $$tl0 = Ju(function (e) {
     initialStep: e.initialStep
   });
   let h = () => {
-    t(Ce());
+    t(hideModal());
     t(oO({
       id: e.fileKey
     }));

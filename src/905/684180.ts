@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
 import { useDispatch } from "../vendor/514228";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { K } from "../905/443068";
 import { v as _$$v } from "../905/442517";
 import { N as _$$N } from "../905/438674";
 import { B } from "../905/950875";
-import { CeL, Ez5 } from "../figma_app/763686";
+import { FullscreenPerfMetrics, AppStateTsApi } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
@@ -14,12 +14,12 @@ import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { no } from "../figma_app/701001";
 import { Tm, Zz, xk } from "../figma_app/952446";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { GQ } from "../figma_app/32128";
 import { Ao } from "../905/748636";
 function C(e) {
@@ -27,7 +27,7 @@ function C(e) {
   let i = GQ();
   let s = useAtomWithSubscription(Tm);
   let [o, l] = useState(() => Zz());
-  let d = Fk(() => CeL?.getFileNodeCount() ?? 0);
+  let d = Fk(() => FullscreenPerfMetrics?.getFileNodeCount() ?? 0);
   let c = no();
   let A = Math.max(s - o, 0);
   useEffect(() => {
@@ -46,7 +46,7 @@ function C(e) {
     recordingKey: Pt("ManageMemoryModal", "modal"),
     dragHeaderOnly: !0,
     onClose: () => {
-      t(Ce());
+      t(hideModal());
       e.markModalClosed();
     },
     children: jsxs(_$$P, {
@@ -66,7 +66,7 @@ function C(e) {
             new_status: !c,
             memory_used_percent: s
           });
-          Ez5.uiState().showInFileMemoryPercentage.set(!c);
+          AppStateTsApi.uiState().showInFileMemoryPercentage.set(!c);
         },
         isToggleEnabled: c
       }), jsx("div", {
@@ -76,7 +76,7 @@ function C(e) {
   });
 }
 C.displayName = "ManageMemoryModal";
-export let $$T0 = Ju(C, "ManageMemoryModal");
+export let $$T0 = registerModal(C, "ManageMemoryModal");
 function k(e) {
   return jsx("div", {
     className: "manage_memory--usageBarBodyContainer--c1BrW",
@@ -133,7 +133,7 @@ function R(e) {
       }), jsx("div", {
         children: `${e.importedMemoryUsagePercent.toFixed(1)}%`
       })]
-    }), jsxs(J, {
+    }), jsxs(Label, {
       htmlFor: t,
       children: [jsxs("div", {
         className: "manage_memory--toggleMemoryStatsText--zpxbz",

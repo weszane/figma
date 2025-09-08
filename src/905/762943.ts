@@ -1,10 +1,10 @@
-import { tKW } from "../figma_app/763686";
-import { uz, p, Ap, LK, NU } from "../905/359509";
+import { MeasurementUnit } from "../figma_app/763686";
+import { WEB, IOS, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
 import { K6 } from "../905/515076";
 import { debugState } from "../905/407919";
-import { NW, xC, DM } from "../figma_app/300692";
+import { filterEntriesByEditorType, filterEntriesByPluginVersionEditorType, getPluginByFileId } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
-import { X } from "../905/661977";
+import { findCodegenLanguage } from "../905/661977";
 export let $$c0 = {
   scaledWeb: "rem",
   scaledIOS: "pt",
@@ -19,13 +19,13 @@ export function $$u3(e, t) {
   }) {
     let n = function () {
       let e = debugState.getState().localPlugins;
-      return NW(FEditorType.DevHandoff, e);
+      return filterEntriesByEditorType(FEditorType.DevHandoff, e);
     }();
     let r = function () {
       let e = debugState.getState().publishedPlugins;
-      return xC(FEditorType.DevHandoff, e);
+      return filterEntriesByPluginVersionEditorType(FEditorType.DevHandoff, e);
     }();
-    return DM({
+    return getPluginByFileId({
       idToSearch: e,
       localExtensionsByFileId: t ? n : void 0,
       publishedExtensions: i ? r : void 0
@@ -37,7 +37,7 @@ export function $$u3(e, t) {
   return $$p2(e, i, t);
 }
 export function $$p2(e, t, i) {
-  return i === tKW.PIXEL ? $$c0.pixel : $$m1(e, t);
+  return i === MeasurementUnit.PIXEL ? $$c0.pixel : $$m1(e, t);
 }
 export function $$m1(e, t, i) {
   let {
@@ -46,18 +46,18 @@ export function $$m1(e, t, i) {
     pluginLanguage
   } = e;
   if ("first-party" !== type && t) {
-    let e = X(t, pluginLanguage);
+    let e = findCodegenLanguage(t, pluginLanguage);
     let i = K6(t, e);
     if (i) return i.scaledUnit;
   }
   switch (id) {
-    case uz:
+    case WEB:
       return $$c0.scaledWeb;
-    case p:
-    case Ap:
+    case IOS:
+    case IOS_UIKIT:
       return $$c0.scaledIOS;
-    case LK:
-    case NU:
+    case ANDROID:
+    case ANDROID_XML:
       if (i?.isTextProperty) return $$c0.scaledAndroidText;
       return $$c0.scaledAndroid;
     default:

@@ -49,7 +49,7 @@ export function createActionCreator(baseType: string) {
  * Type for the thunk handler function.
  * @original $$d0
  */
-type ThunkHandler<TState = any, TPayload = any, TExtra = Record<string, any>> = (
+type ThunkHandler<TState = any, TPayload = any, TExtra = Record<string, unknown>> = (
   context: { dispatch: Dispatch, getState: () => TState },
   payload: TPayload,
   extra: TExtra
@@ -63,7 +63,7 @@ type ThunkHandler<TState = any, TPayload = any, TExtra = Record<string, any>> = 
  * @returns An async action creator with .matches and .loadingKeyForPayload properties.
  * @original $$d0
  */
-export function createOptimistAction<TState = any, TPayload = any, TExtra extends Record<string, any> = any>(
+export function createOptimistAction<TState = any, TPayload = any, TExtra extends Record<string, unknown> = any>(
   baseType: string,
   handler: ThunkHandler<TState, TPayload, TExtra>,
   loadingKeySelector?: (payload: TPayload) => string,
@@ -73,16 +73,16 @@ export function createOptimistAction<TState = any, TPayload = any, TExtra extend
 
   const asyncActionCreator = (payload: TPayload) => {
     const loadingKey = getLoadingKey(payload)
-    return (dispatch: Dispatch, getState: () => TState, extra = {} as TExtra) => {
+    return (dispatch: Dispatch, getState: () => TState, extra?: TExtra) => {
       const optimistId = generateOptimistId()
       const result = handler(
         { dispatch, getState },
         payload,
-        {
+        ({
           loadingKey,
           optimistId,
           ...(extra || {}),
-        },
+        } as unknown as TExtra),
       )
       dispatch({
         type,

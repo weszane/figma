@@ -12,7 +12,7 @@ import { A as _$$A } from "../5430/1650";
 import { S as _$$S } from "../905/872825";
 import { RA, ed as _$$ed } from "../figma_app/321395";
 import { xn, bL, qL } from "../905/934145";
-import { to as _$$to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { o3, fu } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
 import { g3 } from "../figma_app/707808";
@@ -97,7 +97,7 @@ import { bV, up } from "../figma_app/808294";
 import { Vm, yX, qY } from "../figma_app/427318";
 import { e as _$$e4 } from "../figma_app/324237";
 import { XHR } from "../905/910117";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
 import { N as _$$N3 } from "../905/696711";
 import { Cu } from "../figma_app/314264";
@@ -106,7 +106,7 @@ import { P5, D6, VU } from "../figma_app/175992";
 import { s as _$$s3 } from "../5430/114211";
 import { P as _$$P } from "../905/347284";
 import { C as _$$C2 } from "../905/180";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX as _$$yX } from "../figma_app/918700";
 import { A as _$$A4 } from "../svg/815368";
 import { Hl } from "../905/840929";
@@ -131,7 +131,7 @@ import { s as _$$s4 } from "../cssbuilder/589278";
 import { A as _$$A6 } from "../5430/728674";
 import { ServiceCategories as _$$e5 } from "../905/165054";
 import { reportError } from "../905/11";
-import { ch, td as _$$td, Rq } from "../figma_app/181241";
+import { createMinimalValidator, APIParameterUtils, createPaginatedValidator } from "../figma_app/181241";
 import { Y9 } from "../figma_app/306946";
 import { t as _$$t3 } from "../905/331623";
 import { nf, cI, q3, _M } from "../5430/708619";
@@ -725,7 +725,7 @@ function to({
     })
   });
 }
-let tg = nF(async (e, t, {
+let tg = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
   try {
@@ -747,7 +747,7 @@ let tg = nF(async (e, t, {
     t?.callback(!1);
   }
 });
-let tE = Ju(function () {
+let tE = registerModal(function () {
   let e = useDispatch();
   let t = iZ();
   let [r, s] = useState([]);
@@ -1228,7 +1228,7 @@ function rj({
   });
   let v = () => {
     f(!0);
-    r(_$$to({
+    r(showModalHandler({
       type: _$$s3,
       data: {
         setupStripeCallback: e => {
@@ -1269,7 +1269,7 @@ function rj({
       }), jsx("button", {
         className: "profile_resources_grid--blueLink--WjRaq blue_link--blueLink--9rlnd",
         onClick: () => {
-          r(_$$to({
+          r(showModalHandler({
             type: tE,
             data: {}
           }));
@@ -1417,7 +1417,7 @@ function rA() {
     }));
   };
   let c = () => {
-    e(_$$to({
+    e(showModalHandler({
       type: _$$H2,
       data: {
         onBlock: () => l(r.id),
@@ -1563,11 +1563,11 @@ function rO({
 }
 let r$ = new class {
   constructor() {
-    this.CommunityResourceLegacySavesSchemaValidator = ch();
+    this.CommunityResourceLegacySavesSchemaValidator = createMinimalValidator();
     this.getCommunityLegacyResourceSaves = e => this.CommunityResourceLegacySavesSchemaValidator.validate(({
       xr: t
-    }) => t.getPaginated("/api/resource_saves", _$$td.toAPIParameters(e)));
-    this.CommunityResourceSavesSchemaValidator = Rq("CommunityResourceSavesSchemaValidator", Y9, null, !0);
+    }) => t.getPaginated("/api/resource_saves", APIParameterUtils.toAPIParameters(e)));
+    this.CommunityResourceSavesSchemaValidator = createPaginatedValidator("CommunityResourceSavesSchemaValidator", Y9, null, !0);
     this.PaginatedCommunityResourceSavesQuery = M4.PaginatedQuery({
       fetch: async ({
         pageSize: e
@@ -1577,7 +1577,7 @@ let r$ = new class {
         try {
           let r = await this.CommunityResourceSavesSchemaValidator.validate(async ({
             xr: r
-          }) => await r.getPaginated("/api/community_resource_saves/current_user", _$$td.toAPIParameters({
+          }) => await r.getPaginated("/api/community_resource_saves/current_user", APIParameterUtils.toAPIParameters({
             pageSize: e,
             cursor: t
           })));
@@ -1592,10 +1592,10 @@ let r$ = new class {
         }
       }
     });
-    this.CommunityUserResourceInstallsSchemaValidator = ch();
+    this.CommunityUserResourceInstallsSchemaValidator = createMinimalValidator();
     this.getCommunityUserResourceInstalls = e => this.CommunityUserResourceInstallsSchemaValidator.validate(({
       xr: t
-    }) => t.getPaginated("/api/resources/installed/user", _$$td.toAPIParameters(e)));
+    }) => t.getPaginated("/api/resources/installed/user", APIParameterUtils.toAPIParameters(e)));
     this.PaginatedPrivateExtensionInstallsQuery = M4.PaginatedQuery({
       fetch: async ({
         pageSize: e
@@ -1605,7 +1605,7 @@ let r$ = new class {
         try {
           let r = await this.CommunityUserResourceInstallsSchemaValidator.validate(async ({
             xr: r
-          }) => await r.getPaginated("/api/resources/installed/user", _$$td.toAPIParameters({
+          }) => await r.getPaginated("/api/resources/installed/user", APIParameterUtils.toAPIParameters({
             pageSize: e,
             cursor: t,
             filterOrgPrivate: !0
@@ -1997,7 +1997,7 @@ function se({
   let a = _$$S(t?.profileTab, sr);
   useEffect(() => {
     if (s && a) {
-      o(_$$to({
+      o(showModalHandler({
         type: _$$w,
         data: {
           currentSelectedView: t,
@@ -2008,7 +2008,7 @@ function se({
         }
       }));
       return () => {
-        o(Ce());
+        o(hideModal());
       };
     }
   }, [r, a, s, t, e?.community_profile_id, o]);

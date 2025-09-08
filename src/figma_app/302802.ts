@@ -4,9 +4,9 @@ import { lV, MK } from "../figma_app/617606";
 import { J } from "../figma_app/710077";
 import { RM, F$, es } from "../figma_app/304955";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, Ws0, mNT, Nfd, Ez5, K$p, mSn } from "../figma_app/763686";
+import { Fullscreen, ChangesStagerBindings, UserExperienceMode, PanelType, AppStateTsApi, ChatMessageType, SceneGraphTsApi } from "../figma_app/763686";
 import { Tq, _H } from "../figma_app/243058";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -18,7 +18,7 @@ import { f9 } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
 import { iZ } from "../905/372672";
 import { Wh } from "../figma_app/615482";
-import { J2, lu } from "../figma_app/84367";
+import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { PW } from "../905/497152";
 import { sM, pS } from "../figma_app/346422";
@@ -126,10 +126,10 @@ export async function $$$1({
   shadcn: n,
   noWrapper: i
 }) {
-  if (!e.isAlive || !glU) return null;
+  if (!e.isAlive || !Fullscreen) return null;
   let a = RM(e.codeFileFullPath);
   let s = F$(a, e.codeFileFullPath);
-  let l = glU.deriveFilesystemFromEntrypointNodeIds([e.guid]);
+  let l = Fullscreen.deriveFilesystemFromEntrypointNodeIds([e.guid]);
   let c = es(a, l.codeFilesystem);
   return {
     ...(await pS({
@@ -143,7 +143,7 @@ export async function $$$1({
     })),
     ...l,
     codeFilesystem: c,
-    codeBuildId: glU.generateUniqueID()
+    codeBuildId: Fullscreen.generateUniqueID()
   };
 }
 export function $$X20(e) {
@@ -157,13 +157,13 @@ export function $$X20(e) {
     let a = null;
     !function (e, t) {
       let r;
-      Ws0?.isStagingChanges(e) && (r = Ws0?.openChangesStagerScope());
+      ChangesStagerBindings?.isStagingChanges(e) && (r = ChangesStagerBindings?.openChangesStagerScope());
       try {
         return t();
       } finally {
-        null != r && Ws0?.closeChangesStagerScope(r);
+        null != r && ChangesStagerBindings?.closeChangesStagerScope(r);
       }
-    }(mNT.DESIGN_TO_CODE, () => {
+    }(UserExperienceMode.DESIGN_TO_CODE, () => {
       a = i.createUntrackedCodeInstanceOnInternalCanvas();
     });
     a && n({
@@ -176,22 +176,22 @@ export function $$X20(e) {
 export function $$q3() {
   let [e, t] = useAtomValueAndSetter(s0);
   return useCallback(e => {
-    e && (t(Nfd.FILE), UM(), l7.user("sites-add-code-instance-to-canvas", () => {
-      glU.startInsertingCodeComponentOnCanvas(e.guid);
+    e && (t(PanelType.FILE), UM(), permissionScopeHandler.user("sites-add-code-instance-to-canvas", () => {
+      Fullscreen.startInsertingCodeComponentOnCanvas(e.guid);
     }));
   }, [t]);
 }
 export function $$J18() {
   let e = Object.values(useAtomWithSubscription(Mk[PW.CODE_FILE].local)).filter(e => !e.isSoftDeleted);
   useEffect(() => {
-    if (e.length > 0 && Ez5?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
+    if (e.length > 0 && AppStateTsApi?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
       let t = e[0]?.assetId;
-      t && Ez5.codeSelection().fullscreenCodeNodeIds.set([Tq.toGuidStrIfLocal(t)]);
+      t && AppStateTsApi.codeSelection().fullscreenCodeNodeIds.set([Tq.toGuidStrIfLocal(t)]);
     }
   }, [e]);
 }
 export function $$Z6(e) {
-  let t = J2(Ez5.codeBuildBindings().buildNumberByNodeId);
+  let t = getObservableOrFallback(AppStateTsApi.codeBuildBindings().buildNumberByNodeId);
   return useMemo(() => t.get(e?.guid || "") ?? -1, [t, e]);
 }
 export function $$Q17(e) {
@@ -214,14 +214,14 @@ export function $$et10() {
   useEffect(() => {
     if (e) return;
     let n = debugState.getState().selectedView.codeNodeId;
-    if (!Ez5) return;
-    let i = Ez5.codeSelection();
-    if (t === Nfd.CODE) {
+    if (!AppStateTsApi) return;
+    let i = AppStateTsApi.codeSelection();
+    if (t === PanelType.CODE) {
       let e = i.fullscreenCodeNodeIds;
       r.current && n && l(n);
       r.current = !1;
       ee(e?.getCopy()[0]);
-      return lu(e, {
+      return subscribeObservable(e, {
         onChangeImmediate() {
           e?.getCopy()[0] && ee(e?.getCopy()[0]);
         }
@@ -232,7 +232,7 @@ export function $$et10() {
       r.current && n && s(n);
       r.current = !1;
       ee(e?.getCopy()[0]);
-      return lu(e, {
+      return subscribeObservable(e, {
         onChangeImmediate() {
           ee(e?.getCopy()[0]);
         }
@@ -244,13 +244,13 @@ export function $$et10() {
     if (e || !c || i.current) return;
     i.current = !0;
     let r = getSingletonSceneGraph();
-    if (t === Nfd.CODE) {
+    if (t === PanelType.CODE) {
       let e = r.get(o);
-      e && Ez5?.codeSelection().fullscreenCodeNodeIds.set([e.guid]);
+      e && AppStateTsApi?.codeSelection().fullscreenCodeNodeIds.set([e.guid]);
     } else {
       let e = r.get(a);
       if (e) {
-        Ez5?.codeSelection().selectedCanvasNodeIds.set([e.guid]);
+        AppStateTsApi?.codeSelection().selectedCanvasNodeIds.set([e.guid]);
         let t = VF(e, !1) ?? e;
         (t.isCodeComponent || t.isCodeFile || t.isCodeInstance) && Zr(t);
       }
@@ -260,7 +260,7 @@ export function $$et10() {
 export function $$er12(e) {
   let t = _$$E(e);
   let r = useMemo(() => (t || []).map(e => {
-    if (e.type !== K$p.USER_MESSAGE) return null;
+    if (e.type !== ChatMessageType.USER_MESSAGE) return null;
     let {
       imports
     } = MK(e.textContent);
@@ -287,12 +287,12 @@ export function $$ei11(e, t) {
   let l = a ? o[a.guid] ?? s?.guid ?? null : null;
   let u = l === s?.guid;
   let h = $$X20(l);
-  let m = e ? mSn?.findMainComponentLikeCodeInstance(r.scene, e.guid) : null;
+  let m = e ? SceneGraphTsApi?.findMainComponentLikeCodeInstance(r.scene, e.guid) : null;
   let g = cu();
   let f = h?.guid;
   let E = useMemo(() => f ? [f] : [], [f]);
   let y = useMemo(() => m ? [m] : E, [m, E]);
-  let b = useAtomWithSubscription(ZY) || i === Nfd.CODE || 0 === g.length;
+  let b = useAtomWithSubscription(ZY) || i === PanelType.CODE || 0 === g.length;
   let T = useMemo(() => u ? b ? y : g : E, [u, b, E, y, g]);
   return useMemo(() => {
     let e = getSingletonSceneGraph();

@@ -1,5 +1,5 @@
 import { R } from "../905/531474";
-import { biQ } from "../figma_app/763686";
+import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { Mo } from "../905/913055";
 import { hm } from "../905/487011";
@@ -26,7 +26,7 @@ export function $$c1(e) {
   return {
     setLoadingStateMatchingNode: e => function (e) {
       e.forEach(e => {
-        e && e.isAlive && biQ?.setLoadingStateForTextInSubtree(e.guid);
+        e && e.isAlive && ComponentPropsAiCPPBindings?.setLoadingStateForTextInSubtree(e.guid);
       });
     }(t.get(e) ?? []),
     clearLoadingStateMatchingNode: e => u(t.get(e) ?? []),
@@ -39,7 +39,7 @@ export function $$c1(e) {
 }
 function u(e) {
   e.forEach(e => {
-    e && e.isAlive && biQ?.unsetLoadingStateForTextInSubtree(e.guid);
+    e && e.isAlive && ComponentPropsAiCPPBindings?.unsetLoadingStateForTextInSubtree(e.guid);
   });
 }
 export function $$p3() {

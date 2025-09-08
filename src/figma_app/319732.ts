@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
@@ -13,7 +13,7 @@ import { RK } from "../figma_app/815170";
 import { Dm, Uu } from "../figma_app/8833";
 import { lg } from "../figma_app/976749";
 import { WJ } from "../figma_app/671547";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { F4 } from "../905/691205";
 import { FFileType } from "../figma_app/191312";
 import { UA } from "../905/250387";
@@ -299,7 +299,7 @@ let F = ({
   let i;
   let a;
   let s;
-  let o = Y5.getViewportInfo();
+  let o = fullscreenValue.getViewportInfo();
   e.x < 300 ? i = r.x : (i = t.x) < r.x - e.x / 2 ? i = r.x - e.x / 2 : i > r.x + e.x / 2 && (i = r.x + e.x / 2);
   ((a = r.y) < 50 || n) && (a + e.y > o.height - 50 ? a = t.y : (a += e.y, s = u6));
   let l = {
@@ -364,7 +364,7 @@ export function $$U1(e) {
   let s = useSelector(e => e.mirror.appModel.isReadOnly);
   let l = lg();
   let d = useCallback(() => {
-    r && glU.showHyperlinkEditor(r.position.x, r.position.y + r.size.y / 2, r.guid);
+    r && Fullscreen.showHyperlinkEditor(r.position.x, r.position.y + r.size.y / 2, r.guid);
   }, [r]);
   if (!r) return null;
   let {
@@ -387,8 +387,8 @@ export function $$U1(e) {
         editorType: l,
         urlString: r.urlString,
         canEdit: !s && !r.locked,
-        onMouseEnter: glU.stopDismissingHyperlinkPopup,
-        immediatelyDismissHyperlinkPopup: glU.immediatelyDismissHyperlinkPopup,
+        onMouseEnter: Fullscreen.stopDismissingHyperlinkPopup,
+        immediatelyDismissHyperlinkPopup: Fullscreen.immediatelyDismissHyperlinkPopup,
         getLinkMetadata,
         showHyperlinkEditor: d
       }), jsx("div", {

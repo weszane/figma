@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { Component, createRef } from "react";
 import { debounce } from "../905/915765";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { SelectionState, Modifier, EditorState, convertToRaw, convertFromRaw, KeyBindingUtil, CompositeDecorator, getDefaultKeyBinding, convertFromHTML, ContentState, RichUtils, Editor } from "../vendor/279643";
 import { trackEventAnalytics } from "../905/449184";
@@ -1407,7 +1407,7 @@ export class $$tA0 extends Component {
       if ("ArrowUp" === t.key || "ArrowDown" === t.key || "ArrowLeft" === t.key || "ArrowRight" === t.key || "Tab" === t.key) return this.onNavigationKeyDown(t);
       if (hasCommandModifier(t)) {
         t.stopPropagation();
-        let e = Ez5?.uiState().isUI3.getCopy() ?? !1;
+        let e = AppStateTsApi?.uiState().isUI3.getCopy() ?? !1;
         let n = "k" === t.key && !e || t.shiftKey && "u" === t.key && e;
         if ("z" === t.key && !t.shiftKey) return "handle-undo";
         if ("z" === t.key && t.shiftKey) return "handle-redo";

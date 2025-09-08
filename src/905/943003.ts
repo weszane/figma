@@ -1,14 +1,14 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
-    this.GetExistingProjectsValidator = vh();
-    this.GetProjectValidator = vh();
-    this.GetConnectionValidator = vh();
-    this.GetFileAuthorizedValidator = vh();
-    this.CreateProjectValidator = vh();
-    this.GetLogsValidator = vh();
-    this.DeployEdgeFunctionValidator = vh();
+    this.GetExistingProjectsValidator = createNoOpValidator();
+    this.GetProjectValidator = createNoOpValidator();
+    this.GetConnectionValidator = createNoOpValidator();
+    this.GetFileAuthorizedValidator = createNoOpValidator();
+    this.CreateProjectValidator = createNoOpValidator();
+    this.GetLogsValidator = createNoOpValidator();
+    this.DeployEdgeFunctionValidator = createNoOpValidator();
   }
   getExistingProjects(e) {
     return this.GetExistingProjectsValidator.validate(async ({
@@ -66,7 +66,7 @@ export let $$a0 = new class {
     }));
   }
   createSecret(e) {
-    return XHR.post(`/api/integrations/supabase/${e.fileKey}/secrets`, td.toAPIParameters({
+    return XHR.post(`/api/integrations/supabase/${e.fileKey}/secrets`, APIParameterUtils.toAPIParameters({
       secret_name: e.secretName,
       secret_value: e.secretValue
     }));

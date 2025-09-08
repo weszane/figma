@@ -5,8 +5,8 @@ import { reportError } from '../905/11';
 import { ar } from '../905/71';
 import { _ as _$$_ } from '../905/39853';
 import { useSprigWithSampling } from '../905/99656';
-import { Ju, ZU } from '../905/102752';
-import { Ce } from '../905/156213';
+import { registerModal, ModalSupportsBackground } from '../905/102752';
+import { hideModal } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { O0, Ox, wv } from '../905/247509';
 import { kiwiParserCodec } from '../905/294864';
@@ -31,7 +31,7 @@ import { u as _$$u, qW, Ss, xY } from '../905/720292';
 import { H1, q1 } from '../905/822030';
 import { $8, f as _$$f, rb as _$$rb, S as _$$S, _H, b6, bV, dp, gO, Ik, K9, Kk, Lq, m7, m_, mq, ND, nL, Q9, sh, t4, tH, vF, Wc, wH, xZ, ZJ, Zl } from '../905/850755';
 import { AW, cs, FO } from '../905/869235';
-import { AD, dI } from '../905/871411';
+import { defaultSessionLocalIDString, sessionLocalIDToString } from '../905/871411';
 import { dF, Dx, mH } from '../905/917193';
 import { sf } from '../905/929976';
 import { q as _$$q } from '../905/932270';
@@ -48,7 +48,7 @@ import { tS } from '../figma_app/516028';
 import { HISTORY_DOCUMENT_INDEX } from '../figma_app/518682';
 import { _W, DS, q0, Q4, Qp, R$, t$ } from '../figma_app/571341';
 import { eY } from '../figma_app/722362';
-import { egF, Egt, glU, juq, Oin } from '../figma_app/763686';
+import { DiffImpl, SceneGraphHelpers, Fullscreen, FileSourceType, UIVisibilitySetting } from '../figma_app/763686';
 import { _t, Ht, Nb, tP, V_, w_ } from '../figma_app/841351';
 import { lF } from '../figma_app/915202';
 import { Ib } from '../figma_app/955484';
@@ -57,7 +57,7 @@ let y = E;
 let ea = [2, 3, 6, 13, 25, 50, 75, 100, 200, 300, 1e3];
 function es(e, t, r) {
   if (!r) return !1;
-  let n = t.get(dI(e));
+  let n = t.get(sessionLocalIDToString(e));
   if (!n) return !1;
   let i = n.absoluteBoundingBox;
   return !!i && i.x < r.x + r.w && i.x + i.w > r.x && i.y < r.y + r.h && i.y + i.h > r.y;
@@ -79,9 +79,9 @@ function ed(e) {
   return !!(e?.basis?.styleType || e?.change?.styleType);
 }
 function ec(e, t, r) {
-  let n = e?.basis?.guid ? dI(e.basis.guid) : AD;
+  let n = e?.basis?.guid ? sessionLocalIDToString(e.basis.guid) : defaultSessionLocalIDString;
   let i = ed(e) ? null : el(t.scene, n, !1);
-  let a = e?.change.guid ? dI(e.change.guid) : AD;
+  let a = e?.change.guid ? sessionLocalIDToString(e.change.guid) : defaultSessionLocalIDString;
   let s = e?.state === 'removed' || ed(e) ? null : el(r.scene, a, !1);
   let o = i && t.baseBox ? eo(i, t.baseBox) : null;
   let l = s && r.baseBox ? eo(s, r.baseBox) : null;
@@ -108,11 +108,11 @@ function eu({
 }) {
   let c = eY();
   let [u, p] = useAtomValueAndSetter(Ib);
-  let m = useMemo(() => a ? Egt.getLayerGUIDMapping(t, r.scene, e, c.scene) : void 0, [a, e, t, r.scene, c.scene]);
+  let m = useMemo(() => a ? SceneGraphHelpers.getLayerGUIDMapping(t, r.scene, e, c.scene) : void 0, [a, e, t, r.scene, c.scene]);
   useEffect(() => {
     if (n) return;
-    let i = egF.getNodeTree(t, r.scene, !a);
-    let u = egF.getNodeTree(e, c.scene, !a);
+    let i = DiffImpl.getNodeTree(t, r.scene, !a);
+    let u = DiffImpl.getNodeTree(e, c.scene, !a);
     if (!i || !u) {
       p(new Map());
       d({});
@@ -148,8 +148,8 @@ function eu({
           node: t
         }), f++, t.children)) e(r);
       }(e.tree);
-      let E = d ? r.get(dI(m[0].guid)) : null;
-      let y = p[0] && d ? n.get(dI(p[0].guid)) : null;
+      let E = d ? r.get(sessionLocalIDToString(m[0].guid)) : null;
+      let y = p[0] && d ? n.get(sessionLocalIDToString(p[0].guid)) : null;
       let b = E?.absoluteBoundingBox || null;
       let T = y?.absoluteBoundingBox || null;
       function I(e, t, r) {
@@ -167,7 +167,7 @@ function eu({
         let E = m[S];
         let y = S === 0;
         S++;
-        let v = a ? a.get(t.id) ?? AD : t.id;
+        let v = a ? a.get(t.id) ?? defaultSessionLocalIDString : t.id;
         let x = g.get(v);
         let N = {
           previousChange: x?.change,
@@ -180,7 +180,7 @@ function eu({
             for (let [l, d] of AW) {
               let c = null;
               let u = null;
-              if (ar(l) && (e[l] && e[l].guid && (c = dI(e[l].guid)), t[l] && t[l].guid && (u = dI(t[l].guid))), c || u) {
+              if (ar(l) && (e[l] && e[l].guid && (c = sessionLocalIDToString(e[l].guid)), t[l] && t[l].guid && (u = sessionLocalIDToString(t[l].guid))), c || u) {
                 let p = function (e, t) {
                   if (t) {
                     if (l === 'styleIdForStrokeFill') {
@@ -190,8 +190,8 @@ function eu({
                     for (let r of d) e[r] = t[r];
                   }
                 };
-                let h = u ? egF.getNodeTree(u, n.scene, i)?.nodeChanges : null;
-                let m = c ? egF.getNodeTree(c, r.scene, i)?.nodeChanges : null;
+                let h = u ? DiffImpl.getNodeTree(u, n.scene, i)?.nodeChanges : null;
+                let m = c ? DiffImpl.getNodeTree(c, r.scene, i)?.nodeChanges : null;
                 let g = h ? kiwiParserCodec.decodeMessage(h).nodeChanges?.[0] : null;
                 let f = m ? kiwiParserCodec.decodeMessage(m).nodeChanges?.[0] : null;
                 if (p(t, g), p(e, f), g && !f) {
@@ -241,7 +241,7 @@ function eu({
         }
         for (let r of (E.guid && (N.state || N.changedStyles) && (f = {
           value: N
-        }), p = f || c, f && I(dI(E.guid), f, c), t.children.forEach(t => e(t, p)), x?.node?.children || [])) {
+        }), p = f || c, f && I(sessionLocalIDToString(E.guid), f, c), t.children.forEach(t => e(t, p)), x?.node?.children || [])) {
           g.has(r.id) && function ({
             checkOverlap: e,
             parent: t,
@@ -258,8 +258,8 @@ function eu({
                 }
               }
             };
-            u.has(dI(g.get(r)?.change.guid)) && reportError(_$$e.DEVELOPER_TOOLS, new Error('Error generating deleted nodes'));
-            let s = dI(i?.change.guid);
+            u.has(sessionLocalIDToString(g.get(r)?.change.guid)) && reportError(_$$e.DEVELOPER_TOOLS, new Error('Error generating deleted nodes'));
+            let s = sessionLocalIDToString(i?.change.guid);
             I(s, a, t);
             g.$$delete(s);
           }({
@@ -362,7 +362,7 @@ export function $$em3({
   showError: i
 }) {
   let a;
-  a = r === HISTORY_DOCUMENT_INDEX ? juq.HISTORY : t ? juq.DETACHED_COMPONENTS : n ? juq.LINTER : _$$G;
+  a = r === HISTORY_DOCUMENT_INDEX ? FileSourceType.HISTORY : t ? FileSourceType.DETACHED_COMPONENTS : n ? FileSourceType.LINTER : _$$G;
   let s = new ReduxSceneGraph(a);
   let o = s.get(e)?.absoluteRenderBounds || {
     x: 0,
@@ -474,7 +474,7 @@ export function $$eE2(e) {
   let ev = useAtomValueAndSetter(w1)[1];
   let eA = t$(selectedVersion || null, nodeId) || !!discreteDiffingInput;
   let ex = skipCorrectHistoryCanvasCheck || eA;
-  let eN = useMemo(() => discreteDiffingInput?.sceneGraph ? discreteDiffingInput.sceneGraph : new ReduxSceneGraph(juq.HISTORY), [discreteDiffingInput?.sceneGraph]);
+  let eN = useMemo(() => discreteDiffingInput?.sceneGraph ? discreteDiffingInput.sceneGraph : new ReduxSceneGraph(FileSourceType.HISTORY), [discreteDiffingInput?.sceneGraph]);
   let eC = _$$G2();
   useEffect(() => {
     eh && eh.id !== nodeId && trackEventAnalytics('Diff Modal New Layer Selected', {
@@ -597,14 +597,14 @@ export function $$eE2(e) {
     }
   }, [eM]);
   let ej = useCallback(e => {
-    e ? eT(e.state === 'removed' ? e.beforeNodeId : e.afterNodeId) : eT(AD);
+    e ? eT(e.state === 'removed' ? e.beforeNodeId : e.afterNodeId) : eT(defaultSessionLocalIDString);
   }, [eT]);
   let eU = useCallback(e => eT(e), [eT]);
   let eB = useCallback((e, t) => {
     e === eh?.id ? (em(null), J(null), et(null)) : (em({
       id: e,
       zoomToSelection: !0
-    }), eT(e), J(dI(t.basis.guid)), et(dI(t.change.guid)));
+    }), eT(e), J(sessionLocalIDToString(t.basis.guid)), et(sessionLocalIDToString(t.change.guid)));
   }, [eh?.id, eT]);
   let eG = useMemo(() => eI && kF(eI, FO.LEGO, void 0, O0) || {}, [eI]);
   let eV = !mf(eG);
@@ -738,7 +738,7 @@ export function $$eE2(e) {
       let o = el(a, e, !0);
       let l = [];
       for (let e of n) {
-        let r = lE(i, t => dI(t.change.guid) === e || dI(t.basis.guid) === e);
+        let r = lE(i, t => sessionLocalIDToString(t.change.guid) === e || sessionLocalIDToString(t.basis.guid) === e);
         if (r) {
           let e = ec(r, {
             scene: t,
@@ -1043,7 +1043,7 @@ function eb({
     })]
   });
 }
-let $$eT0 = Ju(e => {
+let $$eT0 = registerModal(e => {
   let {
     nodeId,
     layerName
@@ -1066,7 +1066,7 @@ let $$eT0 = Ju(e => {
   let N = useMemo(() => y ? versions.find(e => e.id === y) ?? null : v ? versions.find(e => e.dev_mode_activity?.some(e => e.id === v)) ?? null : null, [versions, y, v]);
   let C = useCallback(e => {
     !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== V_ && (s(Y6({
-      mode: Oin.KEEP_UI,
+      mode: UIVisibilitySetting.KEEP_UI,
       type: lF.SPINNER
     })), requestAnimationFrame(() => {
       s(Nb({
@@ -1139,7 +1139,7 @@ let $$eT0 = Ju(e => {
     }) => {
       let n = performance.now();
       if (r === O) return;
-      if (!glU.loadPartialHistoryScene(t)) throw new Error('Error loading history canvas');
+      if (!Fullscreen.loadPartialHistoryScene(t)) throw new Error('Error loading history canvas');
       R(r);
       let i = performance.now();
       let a = Math.trunc(n - e);
@@ -1197,11 +1197,11 @@ let $$eT0 = Ju(e => {
   let Z = useCallback(() => {
     m(new Map());
     C(void 0);
-    s(Ce());
+    s(hideModal());
   }, [m, C, s]);
   useEffect(() => () => {
     R('');
-    glU?.closeAllExtraDocuments();
+    Fullscreen?.closeAllExtraDocuments();
   }, [R]);
   return jsx($$eE2, {
     currentImage: K,
@@ -1220,8 +1220,8 @@ let $$eT0 = Ju(e => {
     },
     versions
   });
-}, mH, ZU.YES);
-let $$eI4 = Ju(e => {
+}, mH, ModalSupportsBackground.YES);
+let $$eI4 = registerModal(e => {
   let {
     nodeId,
     detachedInfoStatus,
@@ -1288,13 +1288,13 @@ let $$eI4 = Ju(e => {
     return () => clearTimeout(e);
   }, [nodeId]);
   let C = useCallback(() => {
-    o(Ce());
+    o(hideModal());
   }, [o]);
   let O = getI18nString('collaboration.feedback.compare_changes_modal.header');
   let R = renderI18nText('inspect_panel.node_type.main_component');
   let L = {
-    nodeId: N?.dataComponentId ?? AD,
-    sceneGraph: new ReduxSceneGraph(N?.dataLocation === 'temp-scene' ? juq.DETACHED_COMPONENTS : _$$G)
+    nodeId: N?.dataComponentId ?? defaultSessionLocalIDString,
+    sceneGraph: new ReduxSceneGraph(N?.dataLocation === 'temp-scene' ? FileSourceType.DETACHED_COMPONENTS : _$$G)
   };
   return jsx($$eE2, {
     nodeId,
@@ -1307,8 +1307,8 @@ let $$eI4 = Ju(e => {
     modalError: p,
     discreteDiffingInput: L
   });
-}, dF, ZU.YES);
-let $$eS5 = Ju(e => {
+}, dF, ModalSupportsBackground.YES);
+let $$eS5 = registerModal(e => {
   let {
     changeNodeId,
     basisNodeId,
@@ -1362,7 +1362,7 @@ let $$eS5 = Ju(e => {
     y(r);
   }, [changeNodeId]);
   let v = useCallback(() => {
-    l(Ce());
+    l(hideModal());
   }, [l]);
   let A = getI18nString('collaboration.feedback.compare_changes_modal.header');
   let N = {
@@ -1382,7 +1382,7 @@ let $$eS5 = Ju(e => {
     onCloseModal: v,
     renderLoadingBar: !1
   }) : null;
-}, Dx, ZU.YES);
+}, Dx, ModalSupportsBackground.YES);
 export const EH = $$eT0;
 export const L$ = $$ep1;
 export const PZ = $$eE2;

@@ -17,7 +17,7 @@ import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../469e6e40/619494";
-import { to, Ce, Lo } from "../905/156213";
+import { showModalHandler, hideModal, popModalStack } from "../905/156213";
 import { a as _$$a } from "../469e6e40/234755";
 import { E as _$$E2 } from "../905/632989";
 import { a as _$$a2 } from "../905/964520";
@@ -62,7 +62,7 @@ function E(e) {
           meta
         }
       } = a;
-      t(to({
+      t(showModalHandler({
         type: _$$p,
         data: {
           org: e.org,
@@ -252,16 +252,16 @@ function el(e) {
     }));
   }, [t, idpData.id]);
   let c = useCallback(() => {
-    t(to({
+    t(showModalHandler({
       type: _$$l2(),
       data: {
         dispatch: t,
         onConfirm: () => {
-          t(Ce());
+          t(hideModal());
           d();
         },
         onCancel: () => {
-          t(Ce());
+          t(hideModal());
         }
       }
     }));
@@ -645,21 +645,21 @@ let em = {
         has_scim_token: !!e.idpData.spScimBearerTokenAt,
         domains: e.idpData.domains
       };
-      "idp_details" === r.activeTab ? a(to({
+      "idp_details" === r.activeTab ? a(showModalHandler({
         type: _$$p,
         data: {
           org: e.org,
           orgSamlConfig: t,
           orgDomains: e.orgDomains
         }
-      })) : a(to({
+      })) : a(showModalHandler({
         type: _$$i,
         data: {
           orgDomains: e.orgDomains,
           orgSamlConfig: t,
           onContinue: (n, s) => {
-            a(Lo());
-            a(to({
+            a(popModalStack());
+            a(showModalHandler({
               type: rp,
               data: {
                 domainMappings: n,

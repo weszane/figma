@@ -21,7 +21,7 @@ import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { vr } from "../figma_app/514043";
 import { Ju } from "../905/712921";
-import { NW } from "../figma_app/831101";
+import { BillingCycle } from "../figma_app/831101";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -50,7 +50,7 @@ export function $$E0({
       currency: a,
       tier: l,
       renewalTerm: t,
-      unit: NW.MONTH
+      unit: BillingCycle.MONTH
     }
   });
   let [b, E] = mI(x, N);
@@ -73,7 +73,7 @@ export function $$E0({
     fontSize: 11,
     children: renderI18nText("checkout.review_in_tax_disclaimer")
   });
-  let F = t === NW.YEAR;
+  let F = t === BillingCycle.YEAR;
   return jsx(fu, {
     name: e0.CART_REVIEW_PURCHASE_SUMMARY,
     properties: {

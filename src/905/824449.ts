@@ -13,7 +13,7 @@ import { m as _$$m } from "../905/148147";
 import { E as _$$E } from "../905/375716";
 import { e as _$$e } from "../905/678389";
 import { n as _$$n } from "../905/317686";
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import F from "classnames";
 import { UE, x1, FO, tM, AW } from "../figma_app/191804";
@@ -586,13 +586,13 @@ function ep({
 }
 export function $$em0(e) {
   let t = Ep();
-  return getFeatureFlags().ee_color_management_circle_p3 && t === RYP.DISPLAY_P3 && e.filled ? jsx(ef, {
+  return getFeatureFlags().ee_color_management_circle_p3 && t === ColorSpaceEnum.DISPLAY_P3 && e.filled ? jsx(ef, {
     ...e
   }) : jsx(e_, {
     ...e
   });
 }
-let eh = (e, t) => t === RYP.SRGB ? e : _$$F.format(dy(e), t === RYP.DISPLAY_P3 ? "display-p3" : void 0);
+let eh = (e, t) => t === ColorSpaceEnum.SRGB ? e : _$$F.format(dy(e), t === ColorSpaceEnum.DISPLAY_P3 ? "display-p3" : void 0);
 let eg = e => `calc(calc(100% / 16) * ${e})`;
 function ef(e) {
   let t = Ep();

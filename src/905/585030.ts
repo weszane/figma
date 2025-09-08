@@ -2,7 +2,7 @@ import { useState, useRef, useContext, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { sYL, egF, Xts, BtE, xSx, i0e, _em, dPJ } from "../figma_app/763686";
+import { GitReferenceType, DiffImpl, MergeStatus, PreviewStage, UndoActionStatus, StateTransitionResult, PluginModalType, AutosaveEventType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
@@ -19,12 +19,12 @@ import { Z_, yQ } from "../figma_app/793953";
 import { tG } from "../figma_app/723183";
 import { Qx, SN } from "../905/491806";
 import { PW, Kn } from "../905/535806";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { FT, ss } from "../905/746499";
 import { mT } from "../905/432493";
 let S = new class {
   constructor() {
-    this.FigDiffMinimizeAnalysisValidator = vh();
+    this.FigDiffMinimizeAnalysisValidator = createNoOpValidator();
   }
   enqueueFigDiffAnalysis(e, t, i, n, r) {
     return this.FigDiffMinimizeAnalysisValidator.validate(async ({
@@ -40,13 +40,13 @@ async function T(e, t) {
   } = rY.getExternalMediaFromDiff(e);
   let a = Jr();
   switch (e) {
-    case sYL.SOURCE:
+    case GitReferenceType.SOURCE:
       i = t.sourceKey;
       break;
-    case sYL.BRANCH:
+    case GitReferenceType.BRANCH:
       i = t.branchKey;
       break;
-    case sYL.COMPARE:
+    case GitReferenceType.COMPARE:
       throw Error("Unexpected DiffType: COMPARE");
   }
   await a.recordImages(i, imageShas);
@@ -54,20 +54,20 @@ async function T(e, t) {
   await s.recordVideos(i, videoShas);
 }
 export function $$k6() {
-  let e = egF.recreateBranchPoint();
-  if (e !== Xts.SUCCESS) {
+  let e = DiffImpl.recreateBranchPoint();
+  if (e !== MergeStatus.SUCCESS) {
     let t;
     switch (e) {
-      case Xts.INTERNAL_ERROR:
+      case MergeStatus.INTERNAL_ERROR:
         t = Error("Error recreating branch point: internal error");
         break;
-      case Xts.MISSING_BACKING_SYMBOL:
+      case MergeStatus.MISSING_BACKING_SYMBOL:
         t = Error("Error recreating branch point: missing backing symbol");
         break;
-      case Xts.NO_MERGE_IN_PROGRESS:
+      case MergeStatus.NO_MERGE_IN_PROGRESS:
         t = Error("Error recreating branch point: no merge in progress");
         break;
-      case Xts.VERSION_MISMATCH:
+      case MergeStatus.VERSION_MISMATCH:
         t = Error("Error recreating branch point: version mismatch");
         break;
       default:
@@ -77,42 +77,42 @@ export function $$k6() {
     return t;
   }
 }
-export function $$R5(e, t = BtE.PREVIEW) {
-  let i = egF.applyDiff(e, t);
-  if (i !== Xts.SUCCESS) {
+export function $$R5(e, t = PreviewStage.PREVIEW) {
+  let i = DiffImpl.applyDiff(e, t);
+  if (i !== MergeStatus.SUCCESS) {
     let e;
     switch (i) {
-      case Xts.MISSING_BACKING_SYMBOL:
+      case MergeStatus.MISSING_BACKING_SYMBOL:
         e = new XA("Error merging diff: missing backing symbols for diff");
         break;
-      case Xts.INTERNAL_ERROR:
+      case MergeStatus.INTERNAL_ERROR:
         e = Error("Error merging diff: Unknown merge error");
         break;
-      case Xts.NO_MERGE_IN_PROGRESS:
+      case MergeStatus.NO_MERGE_IN_PROGRESS:
         e = Error("Error merging diff: No merge in progress");
         break;
-      case Xts.VERSION_MISMATCH:
+      case MergeStatus.VERSION_MISMATCH:
         e = Error("Error merging diff: Version mismatch");
         break;
       default:
         throwTypeError(i);
     }
-    t === BtE.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.TO_SOURCE);
+    t === PreviewStage.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.TO_SOURCE);
     return e;
   }
 }
 export function $$N7() {
-  let e = egF.unapplyAllChunks();
-  if (e !== xSx.SUCCESS) {
+  let e = DiffImpl.unapplyAllChunks();
+  if (e !== UndoActionStatus.SUCCESS) {
     let t;
     switch (e) {
-      case xSx.INTERNAL_ERROR:
+      case UndoActionStatus.INTERNAL_ERROR:
         t = Error("Error unapplying chunks: internal error");
         break;
-      case xSx.NO_MERGE_IN_PROGRESS:
+      case UndoActionStatus.NO_MERGE_IN_PROGRESS:
         t = Error("Error unapplying chunks: no merge in progress");
         break;
-      case xSx.UNABLE_TO_UNDO_CHANGES:
+      case UndoActionStatus.UNABLE_TO_UNDO_CHANGES:
         t = Error("Error unapplying chunks: unable to undo changes");
         break;
       default:
@@ -122,45 +122,45 @@ export function $$N7() {
     return t;
   }
 }
-export function $$P3(e, t, i = BtE.PREVIEW) {
-  let n = egF.applyAllChunks(e, t, i);
-  if (n !== i0e.SUCCESS) {
+export function $$P3(e, t, i = PreviewStage.PREVIEW) {
+  let n = DiffImpl.applyAllChunks(e, t, i);
+  if (n !== StateTransitionResult.SUCCESS) {
     let e;
     switch (n) {
-      case i0e.INVALID_STATE_TRANSITION:
+      case StateTransitionResult.INVALID_STATE_TRANSITION:
         e = new rY.InvalidStateTransitionError("Error applying chunks: invalid state transition");
         break;
-      case i0e.INTERNAL_ERROR:
+      case StateTransitionResult.INTERNAL_ERROR:
         e = Error("Error applying chunks: internal error");
         break;
-      case i0e.NO_MERGE_IN_PROGRESS:
+      case StateTransitionResult.NO_MERGE_IN_PROGRESS:
         e = Error("Error applying chunks: no merge in progress");
         break;
-      case i0e.INVALID_INDEX:
+      case StateTransitionResult.INVALID_INDEX:
         e = Error("Error applying chunks: invalid index");
         break;
       default:
         throwTypeError(n);
     }
-    i === BtE.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.FROM_SOURCE);
+    i === PreviewStage.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.FROM_SOURCE);
     return e;
   }
 }
 export function $$O4(e, t, i, n, r) {
   $$k6();
-  $$P3(e.concat(i), t.concat(n).concat(r), BtE.STAGE);
+  $$P3(e.concat(i), t.concat(n).concat(r), PreviewStage.STAGE);
 }
 let D = async (e, t, i, n, r) => {
   let d;
   let p = new URLSearchParams();
   switch (p.set("migration_version", `${n}`), r && p.set("source_checkpoint_key", r), p.set("diff_version", C2().toString()), i) {
-    case sYL.SOURCE:
+    case GitReferenceType.SOURCE:
       d = Kn.FROM_SOURCE;
       break;
-    case sYL.BRANCH:
+    case GitReferenceType.BRANCH:
       d = Kn.TO_SOURCE;
       break;
-    case sYL.COMPARE:
+    case GitReferenceType.COMPARE:
       throw Error("Unexpected DiffType: COMPARE");
     default:
       throwTypeError(i);
@@ -201,7 +201,7 @@ let F = async (e, t, i, n, r, a) => {
     durationMs: performance.now() - s,
     functionName: "fetchDiff",
     branchModalTrackingId: a,
-    diffType: sYL[i]
+    diffType: GitReferenceType[i]
   });
   return {
     checkpointDiff: l,
@@ -245,7 +245,7 @@ let j = async (e, t, i, n) => {
 };
 let U = e => {
   let t = performance.now();
-  return q(_em.BRANCHING_MODAL_OPEN).then(() => {
+  return q(PluginModalType.BRANCHING_MODAL_OPEN).then(() => {
     rY.trackGranularLoadTime({
       durationMs: performance.now() - t,
       functionName: "waitForPagesToLoad",
@@ -282,7 +282,7 @@ export function $$V8(e, t, i, a, s, l, d, c) {
       branchKey: t,
       sourceKey: i,
       branchModalTrackingId: S,
-      diffType: sYL[e]
+      diffType: GitReferenceType[e]
     });
     r.then(async ({
       checkpointDiff: r,
@@ -292,7 +292,7 @@ export function $$V8(e, t, i, a, s, l, d, c) {
         branchKey: t,
         sourceKey: i,
         branchModalTrackingId: S,
-        diffType: sYL[e]
+        diffType: GitReferenceType[e]
       };
       if (x.current !== n || (m(r), await p, c && (await _$$w(d.branchModalTrackingId, a)), x.current !== n)) return;
       M(e, s, d);
@@ -339,15 +339,15 @@ export function $$G9(e, t, i, a, s, l, d) {
           branchKey: t,
           sourceKey: i,
           branchModalTrackingId: E,
-          diffType: sYL[e]
+          diffType: GitReferenceType[e]
         };
         if (I.current !== n) return;
         p(r);
         M(e, a, s);
         let d = rY.getAllGuids(e, s.branchModalTrackingId);
-        if (await $$B10(d, dPJ.BRANCHING_MODAL_OPEN, {
+        if (await $$B10(d, AutosaveEventType.BRANCHING_MODAL_OPEN, {
           ...s,
-          diffType: sYL[e]
+          diffType: GitReferenceType[e]
         }), I.current !== n) return;
         let {
           displayGroups,
@@ -449,7 +449,7 @@ export async function $$W2(e, t, i, n = null, r = null) {
   if (null === t) return;
   n?.commitStart();
   let d = T(l, e);
-  egF.uploadImages();
+  DiffImpl.uploadImages();
   let c = Jr().imageUploadPromise();
   let u = Jr().imageLookupPromise();
   await Promise.all([c, u]);

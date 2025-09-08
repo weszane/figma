@@ -1,8 +1,8 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { h } from "../3973/647885";
 let $$s0 = NC("UPDATE_SAVE_AS");
-let $$o3 = nF((e, t) => {
+let $$o3 = createOptimistThunk((e, t) => {
   if (null != e.getState().saveAsState.startTime) {
     let i = t.totalImages;
     let n = t.pendingImageDownload;

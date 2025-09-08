@@ -13,7 +13,7 @@ import { $n } from "../905/521428";
 import { hS } from "../905/437088";
 import { Z as _$$Z } from "../905/279476";
 import { s as _$$s } from "../905/403855";
-import { IPu, kul, h3O } from "../figma_app/763686";
+import { CooperHelpers, SchemaJoinStatus, Multiplayer } from "../figma_app/763686";
 import { bV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
@@ -40,7 +40,7 @@ import { F as _$$F } from "../905/302958";
 import { T as _$$T, b as _$$b2 } from "../1577/951568";
 import { w as _$$w } from "../1250/922745";
 import { l as _$$l } from "../7021/223482";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu, $z as _$$$z } from "../figma_app/831799";
 import { vK, jv } from "../905/84777";
 import { N_ as _$$N_ } from "../905/332483";
@@ -96,7 +96,7 @@ import { R$ } from "../figma_app/12796";
 import { canAdminTeam, canEditTeam } from "../figma_app/642025";
 import { lg as _$$lg, ng as _$$ng } from "../figma_app/205827";
 import { N as _$$N } from "../figma_app/301442";
-import { b as _$$b4 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { A as _$$A2 } from "../905/638715";
 import { A as _$$A3 } from "../905/389851";
 import { Ay as _$$Ay2 } from "@stylexjs/stylex";
@@ -386,7 +386,7 @@ let tB = {
       let n = bV(e, "0:1");
       if (n.find(e => "cooper_root" === e.name)) return !0;
       let a = n.find(e => "SLIDE_GRID" === e.type);
-      return !!(a && a.childrenNodes.find(e => e.maxWidth !== IPu.gridMaxWidth()));
+      return !!(a && a.childrenNodes.find(e => e.maxWidth !== CooperHelpers.gridMaxWidth()));
     }, [t])) return null;
     {
       let t = {
@@ -554,7 +554,7 @@ let t$ = {
           onClick: () => {
             n?.editorType === "design" ? t(u1({
               id: C9
-            })) : t(_$$to({
+            })) : t(showModalHandler({
               type: _$$B,
               data: {
                 pickerInfo: {
@@ -702,7 +702,7 @@ let tH = {
         lowerUsageLink: jsx("button", {
           onClick: e => {
             e.preventDefault();
-            t?.(_$$to({
+            t?.(showModalHandler({
               type: _$$v,
               data: {
                 teamId: i.id
@@ -802,7 +802,7 @@ let tK = {
                 href: "#",
                 onClick: e => {
                   e.preventDefault();
-                  t?.(_$$to({
+                  t?.(showModalHandler({
                     type: _$$t3,
                     data: {
                       teamId: n,
@@ -853,7 +853,7 @@ let tK = {
                 href: "#",
                 onClick: e => {
                   e.preventDefault();
-                  t?.(_$$to({
+                  t?.(showModalHandler({
                     type: _$$v,
                     data: {
                       teamId: n
@@ -1108,7 +1108,7 @@ function t0(e) {
 let t1 = {
   bannerId: om.MultiplayerSessionUpgrade,
   Banner: function (e) {
-    let t = p8("multiplayerSessionState") !== kul.UNJOINED;
+    let t = p8("multiplayerSessionState") !== SchemaJoinStatus.UNJOINED;
     let n = !p8("isReadOnly");
     let i = useSelector(e => e.showingUpgradeBanner);
     let o = q5()?.editorType;
@@ -1128,7 +1128,7 @@ let t1 = {
           buttonText: n ? getI18nString("banner.multiplayer_session_upgrade.save_and_reload") : getI18nString("banner.multiplayer_session_upgrade.reload"),
           onClick: () => {
             trackEventAnalytics("Upgrade Banner Clicked");
-            h3O.startUpgrade();
+            Multiplayer.startUpgrade();
             d(!0);
           }
         }
@@ -1257,7 +1257,7 @@ let t2 = {
       };
       return {
         onClaim: () => {
-          getFeatureFlags().dtm_deprecation_plan_picker_for_files ? t(_$$to({
+          getFeatureFlags().dtm_deprecation_plan_picker_for_files ? t(showModalHandler({
             type: _$$h2,
             data: {
               payload: {
@@ -1718,7 +1718,7 @@ let nr = {
             button: {
               buttonText: renderI18nText("seat_billing_terms.banner.review_and_accept"),
               onClick: () => {
-                e(_$$to({
+                e(showModalHandler({
                   type: _$$w(),
                   data: {
                     orgId: n.id,
@@ -2024,7 +2024,7 @@ let nd = {
     let i = X$("StarterViewOnlySitesBanner");
     let o = i.unwrapOr(null)?.tier || null;
     let l = o === Agb.STARTER || o === Agb.STUDENT;
-    let d = _$$y(t?.teamId ?? "", _$$b4.STARTER_VIEW_ONLY_BANNER);
+    let d = _$$y(t?.teamId ?? "", UpsellModalType.STARTER_VIEW_ONLY_BANNER);
     if (!(isEligible && n && l)) return null;
     let _ = o === Agb.STUDENT ? renderI18nText("banner.student_view_only") : renderI18nText("banner.starter_view_only.not_available");
     let m = {

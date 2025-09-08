@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useId, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
-import { J as _$$J } from "../905/270045";
-import { S as _$$S } from "../905/274480";
+import { Label } from "../905/270045";
+import { Checkbox } from "../905/274480";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -26,14 +26,14 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { lW } from "../figma_app/11182";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { Um } from "../905/848862";
 import { _6 } from "../figma_app/386952";
 import { f as _$$f } from "../905/940356";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { o as _$$o } from "../905/240151";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/596134";
 import { l6, c$, sK } from "../905/794875";
 import { Ao, uF } from "../905/748636";
@@ -177,7 +177,7 @@ function eu({
   let ev = useRef(0);
   let eA = Xr($$J2);
   let ex = () => {
-    D(Ce());
+    D(hideModal());
   };
   let eN = _$$f("seen_bug_reporter_modal");
   _$$h(() => {
@@ -546,7 +546,7 @@ function ep(e) {
         className: _()(yl, Y && vw),
         children: [!e.isPerformanceIssue && e.supportsTaskUpdates && jsxs("div", {
           className: uu,
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             className: y8,
             children: renderI18nText("bug_reporter.asana_hint")
           }), jsx(ks, {
@@ -565,7 +565,7 @@ function ep(e) {
             maxLength: 150
           })]
         }), e.showTitle && jsxs("div", {
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             className: Pf,
             children: renderI18nText("bug_reporter.modal.title")
           }), jsx(ks, {
@@ -578,7 +578,7 @@ function ep(e) {
             maxLength: 150
           })]
         }), e.severityOptions && jsxs("div", {
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             htmlAttributes: {
               id: ec
             },
@@ -604,7 +604,7 @@ function ep(e) {
             }, e.gid))]
           })]
         }), e.productAreaGroups && jsxs("div", {
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             htmlAttributes: {
               id: eu
             },
@@ -663,7 +663,7 @@ function ep(e) {
             })(eO)
           })]
         }), jsxs("div", {
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             className: Pf,
             children: e.descriptionLabel
           }), jsx(ks, {
@@ -676,7 +676,7 @@ function ep(e) {
             maxLength: 1e3
           })]
         }), jsxs("div", {
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             className: Pf,
             children: renderI18nText("bug_reporter.modal.images_and_videos")
           }), jsx(e_, {
@@ -686,7 +686,7 @@ function ep(e) {
           })]
         }), getFeatureFlags().in_app_performance_profiling && jsx("div", {
           children: jsxs(Fragment, {
-            children: [jsx(_$$J, {
+            children: [jsx(Label, {
               className: Pf,
               children: renderI18nText("bug_reporter.profiler.title")
             }), jsx(_$$J2, {
@@ -695,12 +695,12 @@ function ep(e) {
               }
             }), et && renderI18nText("bug_reporter.profiler.profile_attached")]
           })
-        }), "fullscreen" === e.selectedView.view && jsx(_$$S, {
+        }), "fullscreen" === e.selectedView.view && jsx(Checkbox, {
           checked: B,
           onChange: (e, {
             event: t
           }) => eA(t),
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: jsxs("div", {
               className: HI,
               children: [e.shareFileLabel, jsxs("div", {
@@ -840,11 +840,11 @@ function eh(e) {
     }, e))]
   });
 }
-let $$em0 = Ju(e => jsx(ec, {
+let $$em0 = registerModal(e => jsx(ec, {
   ...e,
   recordingKey: "bugReporter"
 }), "BugReporterModal");
-let $$eg1 = Ju(e => jsx(eu, {
+let $$eg1 = registerModal(e => jsx(eu, {
   ...e,
   descriptionLabel: getI18nString("bug_reporter.modal.description_label_performance"),
   descriptionPlaceholder: getI18nString("bug_reporter.modal.description_placeholder_performance"),

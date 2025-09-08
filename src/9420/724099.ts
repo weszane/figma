@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Lf } from "../figma_app/637027";
@@ -14,7 +14,7 @@ import { sx } from "../905/941192";
 import { wn, dl, Ix } from "../9420/795870";
 import { E as _$$E } from "../905/712094";
 import { d2, lB } from "../905/148137";
-import { $V, EB } from "../figma_app/831101";
+import { isAddressEmpty, createEmptyAddress } from "../figma_app/831101";
 import { X as _$$X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
 import { A as _$$A2 } from "../svg/433566";
@@ -45,7 +45,7 @@ export function $$N0({
   hide: L
 }) {
   let [V, Y] = useState(!1);
-  let [H, z] = useState(!!v && !$V(v));
+  let [H, z] = useState(!!v && !isAddressEmpty(v));
   let [Q, q] = useState(!!b);
   let K = (J === wn.PRO_UPGRADE || J === wn.ORG_UPGRADE) && $;
   let X = {
@@ -149,8 +149,8 @@ export function $$N0({
           marginBottom: "24px"
         }).$,
         "data-testid": "stripe-payment-legal-name-checkbox",
-        children: jsx(_$$S, {
-          label: jsx(_$$J, {
+        children: jsx(Checkbox, {
+          label: jsx(Label, {
             children: jsx("span", {
               className: _$$s.font13.$,
               children: renderI18nText("checkout.i_have_a_different_legal_name")
@@ -172,8 +172,8 @@ export function $$N0({
           marginBottom: "24px"
         }).$,
         "data-testid": "stripe-payment-shipping-address-checkbox",
-        children: jsx(_$$S, {
-          label: jsx(_$$J, {
+        children: jsx(Checkbox, {
+          label: jsx(Label, {
             children: jsx("span", {
               className: _$$s.font13.$,
               children: renderI18nText("checkout.i_have_a_different_shipping_address")
@@ -182,7 +182,7 @@ export function $$N0({
           checked: H,
           onChange: e => {
             z(e);
-            !e && P && P(EB());
+            !e && P && P(createEmptyAddress());
           }
         })
       }), H && jsx(_$$E, {

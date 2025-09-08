@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useRef } from "react";
 import { K } from "../905/443068";
 import { X as _$$X } from "../905/736922";
-import { Z_n, rXF } from "../figma_app/763686";
+import { VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { pR } from "../vendor/330821";
@@ -66,8 +66,8 @@ function A({
   let [S, v] = useState(!1);
   let A = useRef(null);
   let x = oU("TEXT_DATA", {
-    type: Z_n.STRING,
-    resolvedType: rXF.STRING,
+    type: VariableDataType.STRING,
+    resolvedType: VariableResolvedDataType.STRING,
     value: t
   });
   let N = x.variableDisplayName;

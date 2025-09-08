@@ -1,4 +1,4 @@
-import { CWU } from "../figma_app/763686";
+import { VariablesBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -6,7 +6,7 @@ import { Ay } from "../905/612521";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { YE } from "../figma_app/552876";
 export let $$n0;
 class h {
@@ -40,8 +40,8 @@ class h {
           button: {
             text: getI18nString("proto.paste_unpublished_variable_localize_cta"),
             action: () => {
-              let e = CWU.performVariableLocalizationFromPopup(m, t, r);
-              if (Y5.commit(), Object.keys(e).includes("numberOfNewVariables")) {
+              let e = VariablesBindings.performVariableLocalizationFromPopup(m, t, r);
+              if (fullscreenValue.commit(), Object.keys(e).includes("numberOfNewVariables")) {
                 let t = e.numberOfNewVariables;
                 t > 0 && debugState.dispatch(F.enqueue({
                   message: getI18nString("proto.unpublished_variables_localized", {

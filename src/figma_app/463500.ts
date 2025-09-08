@@ -1,5 +1,5 @@
 import { debug } from "../figma_app/465776";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { Oo } from "../905/709171";
 import { ke, In, kH } from "../905/309735";
@@ -118,7 +118,7 @@ export function $$T15(e) {
   return e.type === PW.STYLE ? ke(e.name).length : e.level;
 }
 export function $$I2(e, t) {
-  Oo(e, t) && (glU.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
+  Oo(e, t) && (Fullscreen.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
     styleType: e.style_type,
     from: "styleListContextMenu"
   }));
@@ -216,7 +216,7 @@ export function $$v6(e, t, r, a, s, c, p) {
   let y = m;
   for (let t of e) {
     let e = t => {
-      t.type === PW.STYLE ? (glU.insertStyleBetween(t.node_id, y?.node_id || "", f?.node_id || ""), y = t) : (t.styles.forEach(t => {
+      t.type === PW.STYLE ? (Fullscreen.insertStyleBetween(t.node_id, y?.node_id || "", f?.node_id || ""), y = t) : (t.styles.forEach(t => {
         e(t);
       }), t.subfolders.forEach(t => {
         e(t);
@@ -230,7 +230,7 @@ export function $$v6(e, t, r, a, s, c, p) {
         if (t.type === PW.STYLE) {
           let e = [...r, kH(t.name)].join("/");
           E.set(t.node_id, e);
-          glU.renameNode(t.node_id, e);
+          Fullscreen.renameNode(t.node_id, e);
         } else {
           E.set(t.name, r.join("/"));
           t.styles.forEach(t => {
@@ -266,7 +266,7 @@ let A = (e, t, r) => {
     let a = r.indexOf(t);
     let o = r[a - 1];
     let d = r[a + 1];
-    glU.insertStyleBetween(n.node_id, o?.node_id || "", d?.node_id || "");
+    Fullscreen.insertStyleBetween(n.node_id, o?.node_id || "", d?.node_id || "");
     let c = [...r];
     c.splice(c.indexOf(n), 1);
     c.splice(c.indexOf(o) + 1, 0, n);

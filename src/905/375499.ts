@@ -1,7 +1,7 @@
-import { vh, _5 } from "../figma_app/181241";
+import { createNoOpValidator, defaultValidator } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.FeedCommentAttachmentSchemaValidator = vh();
+    this.FeedCommentAttachmentSchemaValidator = createNoOpValidator();
   }
   post(e, t, i, n, r, a) {
     return this.FeedCommentAttachmentSchemaValidator.validate(async ({
@@ -16,12 +16,12 @@ export let $$r0 = new class {
     }));
   }
   delete(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.del(`/api/feed_comment_attachment/${e}`));
   }
   put(e, t) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: i
     }) => await i.put(`/api/feed_comment_attachment/${e}`, {
       alt_text: t

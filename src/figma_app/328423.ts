@@ -6,8 +6,8 @@ import { w } from "../905/879280";
 import { t } from "../905/54003";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { hS } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { x, l as _$$l } from "../905/457662";
 var $$m1 = (e => (e[e.TOP_LEFT = 0] = "TOP_LEFT", e[e.BOTTOM_LEFT = 1] = "BOTTOM_LEFT", e[e.TOP_RIGHT = 2] = "TOP_RIGHT", e[e.BOTTOM_RIGHT = 3] = "BOTTOM_RIGHT", e))($$m1 || {});
@@ -96,12 +96,12 @@ export function $$S0() {
       corner: e
     }) => e === t);
     e.hasReflection && (n += 2);
-    null != e.angle && hS(e.angle) && (Math.abs(e.angle) >= 135 ? n += 2 : e.angle >= 45 ? n += 3 : e.angle <= -45 && (n += 1));
+    null != e.angle && isValidValue(e.angle) && (Math.abs(e.angle) >= 135 ? n += 2 : e.angle >= 45 ? n += 3 : e.angle <= -45 && (n += 1));
     let i = r[n % 4];
     return {
       value: i.value,
       setter: (e, t = zk.YES) => {
-        Y5.updateSelectionProperties({
+        fullscreenValue.updateSelectionProperties({
           [i.key]: e
         }, {
           shouldCommit: t

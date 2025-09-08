@@ -2,10 +2,10 @@ import { getLocalStorage } from "../905/657224";
 import { NC } from "../905/17179";
 import { logError } from "../905/714362";
 import { QQ } from "../figma_app/808294";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { C } from "../905/180";
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   let {
     payments,
     source
@@ -35,7 +35,7 @@ nF((e, t) => {
   getLocalStorage()?.setItem(d, p);
 });
 let c = "debug_succeeded_payments";
-let $$u3 = nF((e, t, {
+let $$u3 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = C.getBuyerActivePayments();

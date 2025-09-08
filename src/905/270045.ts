@@ -1,38 +1,46 @@
-import { jsx } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { A } from "../vendor/723372";
-import { Z } from "../905/751750";
-import { Ay, q9 } from "../905/865071";
-import { e as _$$e } from "../905/786321";
-import { label, i as _$$i } from "../905/620622";
-export let $$c0 = forwardRef(({
-  className: e,
-  htmlFor: t,
-  variant: i = "primary",
-  ...r
-}, c) => {
-  let u = Z();
-  let p = t ?? _$$e(u);
+import { forwardRef } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { i as _$$i, label } from '../905/620622';
+import { useSelectionContext } from '../905/751750';
+import { generateInputId } from '../905/786321';
+import { Ay, q9 } from '../905/865071';
+import { A } from '../vendor/723372';
+export let Label = forwardRef<HTMLLabelElement, {
+  className?: string;
+  htmlFor?: string;
+  variant?: 'primary' | 'secondary' | string;
+  [key: string]: any;
+}>(({
+  className,
+  htmlFor,
+  // variant = 'primary',
+  ...props
+}, ref) => {
+  let id = useSelectionContext();
+  let labelFor = htmlFor ?? generateInputId(id);
   return jsx(Ay, {
-    ...r,
-    ref: c,
-    className: A(label, _$$i, e),
-    htmlFor: p
+    ...props,
+    ref,
+    className: A(label, _$$i, className),
+    htmlFor: labelFor
   });
 });
-$$c0.displayName = "Label";
-export let $$u1 = forwardRef(({
-  htmlFor: e,
-  ...t
-}, i) => {
-  let r = Z();
-  let a = e ?? _$$e(r);
+Label.displayName = 'Label';
+export let HiddenLabel = forwardRef<HTMLLabelElement, {
+  htmlFor?: string;
+  [key: string]: any;
+}>(({
+  htmlFor,
+  ...props
+}, ref) => {
+  let id = useSelectionContext();
+  let labelFor = htmlFor ?? generateInputId(id);
   return jsx(q9, {
-    ...t,
-    ref: i,
-    htmlFor: a
+    ...props,
+    ref,
+    htmlFor: labelFor
   });
 });
-$$u1.displayName = "HiddenLabel";
-export const J = $$c0;
-export const h = $$u1;
+HiddenLabel.displayName = 'HiddenLabel';
+export const J = Label;
+export const h = HiddenLabel;

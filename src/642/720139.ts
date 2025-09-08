@@ -40,14 +40,14 @@ import { TG } from "../905/72677";
 import { o as _$$o } from "../figma_app/915774";
 import { X as _$$X } from "../905/853613";
 import { tM, Hu } from "../figma_app/361662";
-import { Y5 } from "../figma_app/455680";
-import { J as _$$J2 } from "../905/633914";
+import { fullscreenValue } from "../figma_app/455680";
+import { useSyncedRef } from "../905/633914";
 import { Av, dx } from "../figma_app/646357";
 import { H as _$$H } from "../905/216861";
 import { e_ as _$$e_ } from "../figma_app/803787";
 import { PW, AT } from "../figma_app/633080";
 import { $A } from "../905/862883";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { CK } from "../figma_app/517115";
 import { tM as _$$tM, k1 } from "../figma_app/984498";
 import { _9 } from "../figma_app/76115";
@@ -66,7 +66,7 @@ import { ol } from "../figma_app/598018";
 import { fO } from "../figma_app/329496";
 import { X as _$$X2 } from "../905/257331";
 import { k as _$$k3 } from "../905/443820";
-import { glU, CWU } from "../figma_app/763686";
+import { Fullscreen, VariablesBindings } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { k as _$$k4 } from "../905/582200";
 import { MO } from "../1528/85853";
@@ -584,10 +584,10 @@ function ts({
 }
 let tr = (e, t) => useMemo(() => {
   if (e) return !0;
-  let s = glU?.getPlaygroundScene();
+  let s = Fullscreen?.getPlaygroundScene();
   return !!s && Object.values(t || {}).some(e => {
     let t = e.inheritMode;
-    return "MIXED" !== t && !!t && CWU?.getVariableSetDefaultModeForScene(e.collectionID, s) !== t.guid;
+    return "MIXED" !== t && !!t && VariablesBindings?.getVariableSetDefaultModeForScene(e.collectionID, s) !== t.guid;
   });
 }, [e, t]);
 let tn = {
@@ -619,7 +619,7 @@ function ti({
   let y = useSelector(e => e.fileVersion);
   let _ = ZC(y);
   if (useEffect(() => {
-    f?.state === "LOADED" && f?.currentAssetData?.nodeData?.playgroundGUID && null != _ && _ !== y && (x(), glU.clearPlaygroundScene());
+    f?.state === "LOADED" && f?.currentAssetData?.nodeData?.playgroundGUID && null != _ && _ !== y && (x(), Fullscreen.clearPlaygroundScene());
   }, [y, _, x, e.type, f]), !f) return jsx("div", {
     className: "component_flyout--spinner--c-wap",
     children: jsx(_$$k3, {})
@@ -730,7 +730,7 @@ export function $$tu1({
   let eS = CK();
   let ek = useCallback(() => {
     if ("loaded" !== K.status) return;
-    let r = Y5.getViewportInfo();
+    let r = fullscreenValue.getViewportInfo();
     let n = {
       canvasPosition: {
         x: r.offsetX,
@@ -751,7 +751,7 @@ export function $$tu1({
     })) : e.type === PW.MODULE && ep(Bs({
       item: e,
       ...n,
-      insertionCallback: () => Y5.triggerAction("commit")
+      insertionCallback: () => fullscreenValue.triggerAction("commit")
     }));
     let i = {
       aiResultsEnabled: ev,
@@ -868,7 +868,7 @@ export function $$tu1({
       })]
     })]
   });
-  let [eI, eE, eM] = _$$J2(!1);
+  let [eI, eE, eM] = useSyncedRef(!1);
   let eA = useCallback(() => {
     eI.current && em();
   }, [eI, em]);
@@ -944,6 +944,6 @@ export function $$tu1({
     })
   });
 }
-export let $$tp0 = Ju($$tu1, VI);
+export let $$tp0 = registerModal($$tu1, VI);
 export const m = $$tp0;
 export const w = $$tu1;

@@ -30,7 +30,7 @@ import { OA, rT } from '../figma_app/585126';
 import { canAdminTeam, getPermissionsStateMemoized } from '../figma_app/642025';
 import { G_ as _$$G_, _d, J7, M7, SN } from '../figma_app/650409';
 import { bb, ck, Ft, jX, SC, Sc } from '../figma_app/707808';
-import { tn } from '../figma_app/831101';
+import { UpgradeSteps } from '../figma_app/831101';
 import { dN, Fi, m2, rj, V0 } from '../figma_app/858344';
 import { sy } from '../figma_app/930338';
 import { xw } from '../figma_app/951233';
@@ -150,7 +150,7 @@ let W = {
     hasMissingResource: (e, t) => !getFeatureFlags().redirect_starter_team_loophole && t.teamId === null && jX(t.teamFlowType) || !!t.teamId && !(t.teamId in e.teams),
     missingResourceType: Ft.TEAM,
     areDifferent: (e, t) => e.teamId !== t.teamId || e.paymentStep !== t.paymentStep,
-    skipBrowserHistory: e => e.paymentStep === tn.CONFIRM_PAY
+    skipBrowserHistory: e => e.paymentStep === UpgradeSteps.CONFIRM_PAY
   },
   promoReview: {
     slug: 'promo-review',
@@ -456,7 +456,7 @@ export class $$q1 {
               fromNewTab: !0
             };
           }
-          let l = Object.values(tn).includes(t[4]) ? t[4] : tn.CHOOSE_PLAN;
+          let l = Object.values(UpgradeSteps).includes(t[4]) ? t[4] : UpgradeSteps.CHOOSE_PLAN;
           let d = t[5] || l;
           let c = e.get('planType') ? parseInt(e.get('planType')) : i === SC.UPGRADE_EXISTING_TEAM ? Sc.TEAM : void 0;
           let u = ck(i, d) ? void 0 : c;

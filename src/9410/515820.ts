@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { F as _$$F } from "../905/680873";
 import { Us } from "../figma_app/637027";
 import { V as _$$V2 } from "../905/223767";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Fr } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
@@ -38,7 +38,7 @@ import { FC } from "../figma_app/212807";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { XX, Lj, LF } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { bU } from "../1250/506456";
 import { k3 } from "../9410/695259";
 import { a as _$$a } from "../9410/306437";
@@ -121,7 +121,7 @@ function W({
   let o = m0();
   let l = Fr();
   let u = _$$h.useTrackingContext({
-    trigger: _$$b.PAGE_TRACKER_UPSELL
+    trigger: UpsellModalType.PAGE_TRACKER_UPSELL
   });
   let p = _$$F(e);
   let h = useCallback(e => {
@@ -147,8 +147,8 @@ function W({
   let C = Lj(i);
   if ((C <= 1 || C >= 1 / 0) && !l(i)) return null;
   let v = () => {
-    let e = _$$b.PAGE_TRACKER_UPSELL;
-    t(to({
+    let e = UpsellModalType.PAGE_TRACKER_UPSELL;
+    t(showModalHandler({
       type: _$$V2,
       data: {
         upsellSource: e,

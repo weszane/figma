@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 let a = z.object({
   sha1: z.string(),
   url: z.string(),
@@ -64,14 +64,14 @@ let l = z.object({
 }));
 let $$d0 = new class {
   constructor() {
-    this.postPluginUploadValidator = vh();
+    this.postPluginUploadValidator = createNoOpValidator();
     this.postPluginUpload = async (e, t, i) => {
       let n = await this.postPluginUploadValidator.validate(async ({
         xr: n
       }) => await n.post(`/api/${i ? "widgets" : "plugins"}/${t}/upload`, e));
       return o.parse(n.data.meta);
     };
-    this.postPluginImagesUploadValidator = vh();
+    this.postPluginImagesUploadValidator = createNoOpValidator();
     this.postPluginImagesUpload = async (e, t, i) => {
       let n = await this.postPluginImagesUploadValidator.validate(async ({
         xr: n
@@ -80,15 +80,15 @@ let $$d0 = new class {
       }));
       return l.parse(n.data.meta);
     };
-    this.updateExtensionValidator = vh();
+    this.updateExtensionValidator = createNoOpValidator();
     this.updateExtension = (e, t, i) => this.updateExtensionValidator.validate(async ({
       xr: n
     }) => await n.put(`/api/${i ? "widgets" : "plugins"}/${t}`, e));
-    this.updateExtensionRolesValidator = vh();
+    this.updateExtensionRolesValidator = createNoOpValidator();
     this.updateExtensionRoles = (e, t, i) => this.updateExtensionRolesValidator.validate(async ({
       xr: n
     }) => await n.put(`/api/${i ? "widgets" : "plugins"}/${t}/roles`, e));
-    this.updateExtensionVersionValidator = vh();
+    this.updateExtensionVersionValidator = createNoOpValidator();
     this.updateExtensionVersion = (e, t, i, n) => this.updateExtensionVersionValidator.validate(async ({
       xr: r
     }) => await r.put(`/api/${n ? "widgets" : "plugins"}/${t}/versions/${i}`, e));

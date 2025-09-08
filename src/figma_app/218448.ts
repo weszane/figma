@@ -2,11 +2,11 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useId, memo, useState, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/49800";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { r } from "../905/12476";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { l6, c$ } from "../905/794875";
 import { cS } from "../figma_app/334459";
@@ -55,10 +55,10 @@ function y(e) {
         let w = "TOGGLE" === t.type ? jsx("span", {
           className: extended ? lV : E3,
           children: jsx(_$$d, {
-            label: jsx(J, {
+            label: jsx(Label, {
               children: ""
             }),
-            checked: hS(A) ? A === t.toggleTokenPair[0] : void 0,
+            checked: isValidValue(A) ? A === t.toggleTokenPair[0] : void 0,
             onChange: e => {
               onSelectProperty(property, t.toggleTokenPair[e ? 0 : 1]);
             },

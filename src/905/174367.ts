@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
@@ -92,7 +92,7 @@ function E({
     })
   });
 }
-export let $$x0 = Ju(function ({
+export let $$x0 = registerModal(function ({
   open: e,
   onClose: t,
   projectId: i

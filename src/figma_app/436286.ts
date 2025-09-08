@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { dZ } from "../figma_app/741237";
 import { kl } from "../905/275640";
 import { F } from "../905/258517";
@@ -16,7 +16,7 @@ export function $$p4() {
     dZ(t) && F.trackFromFullscreen("editor-blend-mode-change", {
       blendMode: e
     });
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       blendMode: e,
       visible: !0
     }, {

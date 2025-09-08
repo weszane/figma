@@ -4,14 +4,14 @@ import { useDispatch } from "../vendor/514228";
 import { Et } from "../figma_app/397267";
 import { E as _$$E } from "../905/658074";
 import { W as _$$W } from "../figma_app/462192";
-import { rXF, QeU, glU, hJs, Qa7 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariableResolvedDataType, SpacingMode, Fullscreen, SnapMode, StackBindingsCpp } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import u from "classnames";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { gl, oV, Q8, SX } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { F } from "../905/258517";
 import { zk } from "../figma_app/198712";
@@ -72,51 +72,51 @@ export function $$M0({
   useEffect(() => {
     e && (K.current?.focus(), K.current?.select());
   }, [e]);
-  let Y = "HORIZONTAL" === B || gl(B) ? _$$A : _$$A2;
+  let Y = "HORIZONTAL" === B || isInvalidValue(B) ? _$$A : _$$A2;
   let $ = `stack-spacing-input-icon-${B}`;
-  let X = "HORIZONTAL" === B || gl(B) ? jsx(_$$E, {}) : jsx(_$$W, {});
+  let X = "HORIZONTAL" === B || isInvalidValue(B) ? jsx(_$$E, {}) : jsx(_$$W, {});
   let {
     boundVariable,
     consumedVariable
-  } = _$$O(P, rXF.FLOAT);
+  } = _$$O(P, VariableResolvedDataType.FLOAT);
   useEffect(() => {
-    boundVariable && U === QeU.SPACE_BETWEEN && s$(QeU.PACKED, U);
+    boundVariable && U === SpacingMode.SPACE_BETWEEN && s$(SpacingMode.PACKED, U);
   }, [boundVariable, U]);
   let Z = lW({
     bigNudgeAmount,
     smallNudgeAmount
   });
-  let Q = gl(U) ? oV : U === QeU.SPACE_BETWEEN ? Q8 : G;
-  let ee = U === QeU.SPACE_BETWEEN;
+  let Q = isInvalidValue(U) ? MIXED_MARKER : U === SpacingMode.SPACE_BETWEEN ? AUTO_MARKER : G;
+  let ee = U === SpacingMode.SPACE_BETWEEN;
   let et = "HORIZONTAL" === B ? getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalGap") : "VERTICAL" === B ? getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_verticalGap") : getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_mixedGap");
   let {
     clearVariableConsumption
-  } = _$$O(P, rXF.FLOAT);
+  } = _$$O(P, VariableResolvedDataType.FLOAT);
   let en = useCallback((e, r) => {
     r && (F.trackFromFullscreen("Autolayout Spacing Changed", {
       source: t,
       input: W.current ? "scrub" : "textfield",
-      spacing: SX(e) ? "auto" : e,
-      numericSpacing: SX(e) ? void 0 : e,
-      autoSpacing: SX(e),
+      spacing: isAutoMarker(e) ? "auto" : e,
+      numericSpacing: isAutoMarker(e) ? void 0 : e,
+      autoSpacing: isAutoMarker(e),
       selectedGuids: selection,
       selectedCount: selection.length,
       selectionChildCount: selectedChildCount
-    }), glU.temporarilyHideOverlay(hJs.SELECTION));
-    "number" == typeof e ? l7.user("set-stack-spacing", () => {
-      s$(QeU.PACKED, U);
+    }), Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION));
+    "number" == typeof e ? permissionScopeHandler.user("set-stack-spacing", () => {
+      s$(SpacingMode.PACKED, U);
       V(e, zk.NO);
-    }) : l7.user("unset-stack-spacing", () => {
+    }) : permissionScopeHandler.user("unset-stack-spacing", () => {
       clearVariableConsumption();
-      Qa7.unsyncStackCounterSpacing();
-      s$(QeU.SPACE_BETWEEN, U);
+      StackBindingsCpp.unsyncStackCounterSpacing();
+      s$(SpacingMode.SPACE_BETWEEN, U);
     });
-    r === zk.YES && Y5.triggerAction("commit");
+    r === zk.YES && fullscreenValue.triggerAction("commit");
   }, [clearVariableConsumption, U, selection, selectedChildCount, V, t]);
   let ei = [jsx(c$, {
     value: Et(G) ? G : bigNudgeAmount
   }, "value"), jsx(c$, {
-    value: Q8
+    value: AUTO_MARKER
   }, "auto")];
   let ea = useMemo(() => [P], []);
   return r ? jsx(sA, {
@@ -124,7 +124,7 @@ export function $$M0({
     inputClassName: u.outerClassName,
     fields: ea,
     currentFieldValue: "number" == typeof Q ? Q : void 0,
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     disableEntryPoint: r,
     children: jsx(Se, {
       bigNudgeAmount,

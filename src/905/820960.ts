@@ -12,7 +12,7 @@ import { Y as _$$Y } from "../905/347011";
 import { H as _$$H } from "../905/474029";
 import { DN, ox } from "../figma_app/909778";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { _J } from "../figma_app/314264";
 import { DQ, Pw } from "../figma_app/121751";
 import { u8, A5 } from "../figma_app/391338";
@@ -73,7 +73,7 @@ export function $$O2(e) {
   });
   let [Y, q] = useState(!1);
   let $ = e => {
-    i(to({
+    i(showModalHandler({
       type: _$$$,
       data: {
         team: e

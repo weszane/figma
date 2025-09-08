@@ -12,7 +12,7 @@ import { ms, wv, c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { S as _$$S, le, TH } from "../figma_app/11182";
 import { qP, Fb } from "../figma_app/909778";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { y$ } from "../905/81009";
 import { nk } from "../figma_app/2023";
 import { fA } from "../figma_app/543100";
@@ -241,7 +241,7 @@ let V = e => ({
       id: "share_file",
       text: "Share",
       onClick: () => {
-        i(to({
+        i(showModalHandler({
           type: g_,
           data: {
             fileKey: e.key,
@@ -324,7 +324,7 @@ let z = e => function (t) {
       id: "share_folder",
       text: "Share",
       onClick: () => {
-        t(to({
+        t(showModalHandler({
           type: _$$W,
           data: {
             folderId: e.id
@@ -415,7 +415,7 @@ function ee(e) {
       id: "leave_team_prompt",
       text: "Leave team",
       onClick: () => {
-        t(to({
+        t(showModalHandler({
           type: _$$p,
           data: {
             teamId: e.id

@@ -24,7 +24,7 @@ import { e as _$$e } from "../905/149844";
 import { P as _$$P } from "../905/537307";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { P as _$$P2 } from "../905/347284";
-import { $O } from "../905/156213";
+import { showModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { F as _$$F } from "../905/989956";
 import { z5 } from "../905/713722";
@@ -155,7 +155,7 @@ function W(e) {
       className: "color_palette_picker--header__rightHand--z-7ux",
       children: [jsx(K, {
         onClick: () => {
-          t($O({
+          t(showModal({
             type: dV.type,
             data: {
               theme: "light"
@@ -174,7 +174,7 @@ function W(e) {
         })
       }), jsx(K, {
         onClick: () => {
-          t($O({
+          t(showModal({
             type: _$$j.type,
             data: {
               entryPoint: "whiteboard",

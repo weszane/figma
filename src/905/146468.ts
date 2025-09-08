@@ -4,10 +4,10 @@ import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
-import { _5 } from "../figma_app/181241";
+import { defaultValidator } from "../figma_app/181241";
 let c = new class {
   createResourceConnectionSharingGroupForLibrary(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.post("/api/sharing_groups", {
       resource_type: "file",
@@ -18,7 +18,7 @@ let c = new class {
     }));
   }
   deleteSharingGroupById(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.del(`/api/sharing_groups/${e.sharingGroupId}`));
   }

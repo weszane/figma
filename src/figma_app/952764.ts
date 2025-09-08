@@ -1,13 +1,13 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { sD } from "../figma_app/243058";
-import { Z_n, CWU, rXF, Ez5, m1T } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariableDataType, VariablesBindings, VariableResolvedDataType, AppStateTsApi, LayoutTabType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { Uv, AW } from "../figma_app/191804";
 import { Oe, nh, AV } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
-import { hS, E7, gl, oV, _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { Tm, bn } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { bL } from "../figma_app/852050";
@@ -49,15 +49,15 @@ export function $$A7(e) {
   let r = UZ(t);
   let i = useAtomWithSubscription(E_);
   let a = bL(i?.varId || "", r);
-  return useMemo(() => i && a && a.type === Z_n.COLOR ? $$v4(a.value) : hS(e) ? e : $$v4(Uv), [i, a, e]);
+  return useMemo(() => i && a && a.type === VariableDataType.COLOR ? $$v4(a.value) : isValidValue(e) ? e : $$v4(Uv), [i, a, e]);
 }
 export function $$x0() {
   let [e] = lJ("imageOverlayPaint");
   return useCallback((t, r) => {
     Tm.clearCache();
     let n = [t];
-    e && hS(e) && n.push(e);
-    Y5.updateSelectionProperties({
+    e && isValidValue(e) && n.push(e);
+    fullscreenValue.updateSelectionProperties({
       fillPaints: n
     }, {
       shouldCommit: r
@@ -67,13 +67,13 @@ export function $$x0() {
 export function $$N10(e) {
   let t = useAtomWithSubscription(E_);
   return useCallback((r, n) => {
-    t && r.color ? l7.user("slides-edit-theme-color", () => $$C6(t.varId, t.modeId, r)) : e(r, n);
+    t && r.color ? permissionScopeHandler.user("slides-edit-theme-color", () => $$C6(t.varId, t.modeId, r)) : e(r, n);
   }, [t, e]);
 }
 export function $$C6(e, t, r) {
-  CWU?.setVariableValueForMode(e, t, {
-    type: Z_n.COLOR,
-    resolvedType: rXF.COLOR,
+  VariablesBindings?.setVariableValueForMode(e, t, {
+    type: VariableDataType.COLOR,
+    resolvedType: VariableResolvedDataType.COLOR,
     value: {
       ...r.color,
       a: r.opacity ?? 1
@@ -86,14 +86,14 @@ export function $$w5(e) {
   return useCallback(async n => {
     let i = await t(Oe(n));
     let l = sD.fromString(i);
-    l && (r ? l7.user("slides-edit-theme-color", () => {
-      Ez5?.slideThemeLibBindings().setThemeColorVariableFromSubscribedVariableColorValue(r?.varId || "", r?.modeId || "", i);
+    l && (r ? permissionScopeHandler.user("slides-edit-theme-color", () => {
+      AppStateTsApi?.slideThemeLibBindings().setThemeColorVariableFromSubscribedVariableColorValue(r?.varId || "", r?.modeId || "", i);
     }) : e($$S1(l), zk.YES));
   }, [t, r, e]);
 }
 export function $$O3(e, t, r) {
   let i = WH(t ?? null, r ?? null, e);
-  let a = AH(i?.key ?? null, E7(r));
+  let a = AH(i?.key ?? null, normalizeValue(r));
   return useMemo(() => i?.isLocal ? i : a?.status === "loaded" ? a.data : null, [i, a]);
 }
 export function $$R9(e, t) {
@@ -106,7 +106,7 @@ export function $$R9(e, t) {
       callback: e => {
         let r = s.get(e);
         let n = AW(r?.fills);
-        n && t && l7.user("slides-edit-theme-color", () => t(a.varId || "", a.modeId || "", $$v4(n)));
+        n && t && permissionScopeHandler.user("slides-edit-theme-color", () => t(a.varId || "", a.modeId || "", $$v4(n)));
       }
     })) : r(AV({
       style: n,
@@ -118,17 +118,17 @@ export function $$R9(e, t) {
 export function $$L2() {
   let e = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
-    return gl(t) ? oV : t?.length;
+    return isInvalidValue(t) ? MIXED_MARKER : t?.length;
   });
   let [t] = lJ("imageOverlayPaint");
-  let r = t && hS(t);
-  return _W(e, 0) > (r ? 2 : 1);
+  let r = t && isValidValue(t);
+  return valueOrFallback(e, 0) > (r ? 2 : 1);
 }
 export function $$P8(e) {
-  let t = hS(e) && bn(e?.type);
+  let t = isValidValue(e) && bn(e?.type);
   let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   return useCallback(() => {
-    t && r !== m1T.GRADIENT && Y5.triggerAction("toggle-gradient-edit-mode");
+    t && r !== LayoutTabType.GRADIENT && fullscreenValue.triggerAction("toggle-gradient-edit-mode");
   }, [t, r]);
 }
 export const CK = $$x0;

@@ -27,13 +27,13 @@ import { p as _$$p } from "../figma_app/353099";
 import { xw, IN } from "../3276/297268";
 import { s as _$$s } from "../905/518538";
 import { hh } from "../figma_app/42945";
-import { NLJ, Ez5, m1T, QOV } from "../figma_app/763686";
+import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
 import { A as _$$A } from "../vendor/90566";
 import { j7 } from "../905/929976";
 import { Z7, Dm, Uu } from "../figma_app/8833";
 import { k as _$$k2 } from "../figma_app/564183";
 import { Pl, _X, qc, kE, PD, Z0, HD, $$, th as _$$th, ni as _$$ni } from "../figma_app/62612";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { n as _$$n } from "../3276/582222";
 import { Z5 as _$$Z } from "../figma_app/582377";
 import { LX, xN, Ao, c4 } from "../figma_app/70421";
@@ -59,7 +59,7 @@ import { sP, I as _$$I, Kx, pV } from "../figma_app/819288";
 import { rf, BV, v_ } from "../figma_app/806412";
 import { JD } from "../905/986103";
 import { getI18nString, getI18nStringAlias, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { T as _$$T, w as _$$w } from "../3276/279527";
 import { Vi } from "../figma_app/955650";
 import { Rs } from "../figma_app/288654";
@@ -70,7 +70,7 @@ import { z3, _6 } from "../figma_app/386952";
 import { t0 as _$$t3 } from "../figma_app/198840";
 import { dDF } from "../figma_app/43951";
 import { throwTypeError } from "../figma_app/465776";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { k as _$$k3 } from "../905/443820";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
@@ -103,7 +103,7 @@ import { sO } from "../figma_app/21029";
 import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { Pf } from "../905/590952";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { gX } from "../905/504768";
 import { sZ } from "../905/845253";
 import { FEditorType } from "../figma_app/53721";
@@ -687,8 +687,8 @@ let eS = memo(function ({
       o.style.transform = `translate3d(${a.x}px, ${a.y}px, 0px)`;
     }
   }, [e, t]);
-  useLayoutEffect(() => (r(s.getViewportInfo()), Y5 && Y5.viewport.on("onSetViewport", r), () => {
-    Y5 && Y5.viewport.removeListener("onSetViewport", r);
+  useLayoutEffect(() => (r(s.getViewportInfo()), fullscreenValue && fullscreenValue.viewport.on("onSetViewport", r), () => {
+    fullscreenValue && fullscreenValue.viewport.removeListener("onSetViewport", r);
   }), [r, s]);
   return jsx("div", {
     style: {
@@ -865,7 +865,7 @@ function eL({
   });
 }
 var eR = (e => (e[e.Gradual = 0] = "Gradual", e[e.Jump = 1] = "Jump", e))(eR || {});
-let eO = [NLJ.COMMENTS, NLJ.SELECT, NLJ.SCALE, NLJ.HAND, NLJ.TYPE];
+let eO = [DesignGraphElements.COMMENTS, DesignGraphElements.SELECT, DesignGraphElements.SCALE, DesignGraphElements.HAND, DesignGraphElements.TYPE];
 let eF = (e, t, n, o) => {
   let {
     threads
@@ -906,10 +906,10 @@ let eU = memo(function (e) {
   let m = useDispatch();
   let u = useContext(viewportNavigatorContext);
   let p = useSelector(e => e.mirror.appModel.currentTool);
-  let f = ut(Ez5?.editorState().handToolTemporarilyEnabled, !1);
+  let f = getObservableValue(AppStateTsApi?.editorState().handToolTemporarilyEnabled, !1);
   let _ = useAtomWithSubscription(_$$R);
   let g = BI();
-  let v = useSelector(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT) && (!g || g?.shouldOptimizeForIpadApp && g?.shouldFadeCommentsDuringEdit);
+  let v = useSelector(e => ![LayoutTabType.DESIGN_LAYOUT, LayoutTabType.WHITEBOARD_LAYOUT, LayoutTabType.HISTORY, LayoutTabType.PREVIEW, LayoutTabType.COMMENTS, LayoutTabType.DEV_HANDOFF, LayoutTabType.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== UserActionState.DEFAULT) && (!g || g?.shouldOptimizeForIpadApp && g?.shouldFadeCommentsDuringEdit);
   let x = e.activeThread?.id === hm;
   let y = x ? null : e.activeThread?.id || null;
   let C = useSelector(e => e.comments.emphasizedPinIds);
@@ -1093,7 +1093,7 @@ let eU = memo(function (e) {
       onDragUpdate: ee.onDragUpdate,
       onPinClicked: ee.onPinClicked,
       selectedPinId: y,
-      shouldDisablePointerEvents: !e_ && s?.disableCommentsWhenHandToolEnabled && p === NLJ.HAND || f || void 0 !== Y && Y !== QOV.DEFAULT
+      shouldDisablePointerEvents: !e_ && s?.disableCommentsWhenHandToolEnabled && p === DesignGraphElements.HAND || f || void 0 !== Y && Y !== UserActionState.DEFAULT
     })
   });
 });
@@ -1229,7 +1229,7 @@ function tV(e) {
   let [D, A] = useState(!1);
   let L = _$$t$();
   let R = useCallback(() => {
-    dispatch(_$$to({
+    dispatch(showModalHandler({
       type: _$$K2,
       data: {
         postUuid: feedPost.feedPostPublicUuid,
@@ -1599,10 +1599,10 @@ function nr(e) {
     useLegalBounds
   } = function () {
     let e = sO();
-    let t = ut(Ez5?.singleSlideView().isInFocusedNodeView, !1);
+    let t = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !1);
     let n = dP();
-    let o = ut(Ez5?.editorPreferences().speakerNotesHeight, 0);
-    let a = Ez5?.singleSlideView().bottomToolbeltHeightInViewport() ?? 0;
+    let o = getObservableValue(AppStateTsApi?.editorPreferences().speakerNotesHeight, 0);
+    let a = AppStateTsApi?.singleSlideView().bottomToolbeltHeightInViewport() ?? 0;
     return e && t ? {
       legalLeft: n + nn,
       legalRight: nn,
@@ -1631,12 +1631,12 @@ function nr(e) {
     if (useLegalBounds) {
       let t = legalLeft + nn;
       let n = x + width - legalRight - y - nn;
-      r = qE(r, t, n);
+      r = clamp(r, t, n);
       let d = P.current ? P.current.getBoundingClientRect().height : w;
       let c = e.viewportInfo.y + nn;
       let m = y + height - legalBottom - d - nn;
       !D.current && P.current && (D.current = !0, B(null));
-      l = c > m ? c : qE(l, c, m);
+      l = c > m ? c : clamp(l, c, m);
     }
     return new Point(r, l);
   }, [t, e.viewportInfo, e.useAbsolutePositioning, useLegalBounds, legalLeft, legalRight, legalBottom, y, w, nn]);
@@ -1738,7 +1738,7 @@ function nr(e) {
     });
   }, [updateCommentContent]);
   let eg = o3(_$$nt.commentsA11y);
-  let eb = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
+  let eb = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMMENTS);
   let ey = eg && eb;
   let ew = useCallback(() => {
     ey ? _$$iZ?.focusPinById(ei) : document.getElementById(`accessibility-comment-pin-${ei}`)?.focus();
@@ -3120,7 +3120,7 @@ function nG(e) {
     activeId,
     commentCreationDisabled
   } = e;
-  let v = useSelector(e => e.mirror.appModel.currentTool) === NLJ.COMMENTS && "fullscreen" !== r;
+  let v = useSelector(e => e.mirror.appModel.currentTool) === DesignGraphElements.COMMENTS && "fullscreen" !== r;
   let x = function (e, t, n, o, s) {
     let {
       requestToDeselectCommentPin: _requestToDeselectCommentPin,
@@ -3132,7 +3132,7 @@ function nG(e) {
     let u = pC();
     let p = gu();
     let f = useDispatch();
-    let _ = ut(Ez5?.singleSlideView().focusedNodeId, null);
+    let _ = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, null);
     let v = useRef(_);
     useEffect(() => {
       _ !== v.current && (v.current = _, f(UU()));

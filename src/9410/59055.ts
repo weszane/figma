@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useState, useMemo, useEffect, useRef, forwardRef } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { hS, bL } from "../905/437088";
-import { glU, Ez5, h3O } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { Fullscreen, AppStateTsApi, Multiplayer } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
@@ -13,9 +13,9 @@ import { getI18nString } from "../905/303541";
 import { Ho } from "../figma_app/308685";
 import { EE, lB } from "../figma_app/731583";
 import { _X, Yb } from "../figma_app/62612";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { n as _$$n } from "../9410/774045";
 import { S as _$$S } from "../9410/565436";
 import { p as _$$p } from "../905/673591";
@@ -60,7 +60,7 @@ let $$O1 = memo(function () {
   let e = useSelector(A);
   let t = e?.guid;
   let [i, s] = useState(null);
-  let d = useMemo(() => t && t !== AD ? glU.getEmbedTypeOfTooltipIcon(t) : null, [t]);
+  let d = useMemo(() => t && t !== defaultSessionLocalIDString ? Fullscreen.getEmbedTypeOfTooltipIcon(t) : null, [t]);
   useEffect(() => {
     if (!d || !t) {
       s(null);
@@ -102,7 +102,7 @@ let $$O1 = memo(function () {
   }) : null;
 });
 let $$L0 = memo(function () {
-  let e = J2(Ez5.embedUiState().activeEmbedData);
+  let e = getObservableOrFallback(AppStateTsApi.embedUiState().activeEmbedData);
   let t = useSelector(e => e.mirror.appModel.currentPage ? e.mirror.appModel.currentPage : void 0);
   let i = useSelector(N);
   let n = useAtomWithSubscription(_$$n);
@@ -168,14 +168,14 @@ let R = memo(function (e) {
   useEffect(() => {
     let e = EE("active-embed", [embedThumbnailNodeId], e => {
       if (!e.position) {
-        glU.setActiveEmbed("");
+        Fullscreen.setActiveEmbed("");
         return;
       }
       h.current = e.position;
       P(u, f, h, C, isEmbedMaximized, g);
     });
     let i = e.currentNodePosition[embedThumbnailNodeId]?.position;
-    i ? (h.current = i, P(u, f, h, C, isEmbedMaximized, g)) : glU.setActiveEmbed("");
+    i ? (h.current = i, P(u, f, h, C, isEmbedMaximized, g)) : Fullscreen.setActiveEmbed("");
     return () => {
       lB("active-embed");
     };
@@ -255,7 +255,7 @@ let M = forwardRef(function (e, t) {
         l(!0);
       },
       onMouseOver: () => {
-        h3O?.sendChatMessage("", "");
+        Multiplayer?.sendChatMessage("", "");
         i(Ho());
       },
       src: srcUrl,
@@ -285,6 +285,6 @@ function P(e, t, i, r, n, a) {
     a ? s.style.pointerEvents = "all" : s.style.pointerEvents = "none";
   }
 }
-Ju(R, "EmbedMaximizedModal");
+registerModal(R, "EmbedMaximizedModal");
 export const G = $$L0;
 export const b = $$O1;

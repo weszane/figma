@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useCallback, useRef, useMemo, useState } from "react";
 import { useSelector, useDispatch, useStore } from "../vendor/514228";
-import { NLJ, glU, kul } from "../figma_app/763686";
+import { DesignGraphElements, Fullscreen, SchemaJoinStatus } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { uM } from "../905/738636";
 import { b as _$$b } from "../905/985254";
@@ -73,7 +73,7 @@ function F(e, t) {
         additionalDelay: 600
       }, {
         type: HQ.CHANGE_TOOL,
-        toolType: NLJ.FRAME
+        toolType: DesignGraphElements.FRAME
       }];
       t ? i.push({
         type: HQ.INSERT_NODE,
@@ -163,7 +163,7 @@ function F(e, t) {
 function z(e) {
   let t = useSelector(e => e.isFullscreenDocumentLoaded);
   useEffect(() => {
-    t && glU.triggerAction("set-tool-type", null);
+    t && Fullscreen.triggerAction("set-tool-type", null);
   }, [t]);
   return jsx(_$$b3, {
     disableHighlight: !0,
@@ -227,7 +227,7 @@ function V(e, t, i) {
       });
       i.push({
         type: HQ.CHANGE_TOOL,
-        toolType: NLJ.TYPE,
+        toolType: DesignGraphElements.TYPE,
         additionalDelay: 1200
       });
       t ? i.push({
@@ -250,7 +250,7 @@ function V(e, t, i) {
         additionalDelay: 400
       }, {
         type: HQ.CHANGE_TOOL,
-        toolType: NLJ.TYPE,
+        toolType: DesignGraphElements.TYPE,
         additionalDelay: 300
       }, {
         type: HQ.INSERT_NODE,
@@ -271,7 +271,7 @@ function V(e, t, i) {
         additionalDelay: 400
       }, {
         type: HQ.CHANGE_TOOL,
-        toolType: NLJ.TYPE,
+        toolType: DesignGraphElements.TYPE,
         additionalDelay: 300
       }, {
         type: HQ.INSERT_NODE,
@@ -519,7 +519,7 @@ export function $$eo1() {
   let O = useDispatch();
   let L = useStore();
   let R = useSelector(e => e.isFullscreenDocumentLoaded);
-  let D = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let D = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let M = _$$b2();
   let P = useAtomWithSubscription(a8);
   let B = _$$f("has_cursor_bot_onboarding_v2");

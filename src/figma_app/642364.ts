@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 export let $$a0 = createContext(new class {
   constructor() {
     this.singleTapTouchStartListeners = {};
@@ -118,7 +118,7 @@ export let $$a0 = createContext(new class {
             y: e[0].screenY
           });
           this.multiTouchLongPressCallbacks.get(r)?.(t);
-          Y5 && Y5.cancelPendingGestures && Y5.cancelPendingGestures();
+          fullscreenValue && fullscreenValue.cancelPendingGestures && fullscreenValue.cancelPendingGestures();
         }, 500);
       }
     };

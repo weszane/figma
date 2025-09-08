@@ -9,7 +9,7 @@ import { V_, NS } from "../905/71785";
 import { xK, I7 } from "../figma_app/10554";
 import { PW } from "../figma_app/633080";
 import { ii, UC, PN } from "../905/54385";
-import { Px, R2, HK, Lz, u8, sM } from "../figma_app/155287";
+import { PluginMetadataSchema, R2, EditorType, PluginDetailsSchema, PluginInstallStatus, WidgetDetailsSchema } from "../figma_app/155287";
 import { P1, fE, Fy } from "../figma_app/809727";
 import { i as _$$i } from "../905/186961";
 import { q } from "../figma_app/277543";
@@ -99,7 +99,7 @@ z.object({
 });
 z.object({
   id: z.string(),
-  versions: z.record(Px),
+  versions: z.record(PluginMetadataSchema),
   current_plugin_version_id: z.string().nullable(),
   is_widget: z.coerce.boolean(),
   install_count: z.number(),
@@ -109,12 +109,12 @@ z.object({
   current_user_has_run: z.boolean().optional(),
   current_user_first_ran_at: z.string().optional(),
   unique_run_count: z.number(),
-  editor_type: z.nativeEnum(HK),
+  editor_type: z.nativeEnum(EditorType),
   saved_at: z.string().optional(),
-  related_content: M(z.lazy(() => Lz)),
+  related_content: M(z.lazy(() => PluginDetailsSchema)),
   hide_related_content_by_others: z.boolean().optional(),
-  install_status: z.nativeEnum(u8).optional(),
-  profile_install_status: z.nativeEnum(u8).optional(),
+  install_status: z.nativeEnum(PluginInstallStatus).optional(),
+  profile_install_status: z.nativeEnum(PluginInstallStatus).optional(),
   monetization_status: z.nativeEnum(UC).optional(),
   community_resource_payment: fe.optional(),
   third_party_m10n_status: z.nativeEnum(PN).optional(),
@@ -208,8 +208,8 @@ let v = z.object({
 });
 let A = z.object({
   hub_file: Ip.ignore(NS).optional(),
-  plugin: Ip.ignore(Lz).optional(),
-  widget: Ip.ignore(sM).optional(),
+  plugin: Ip.ignore(PluginDetailsSchema).optional(),
+  widget: Ip.ignore(WidgetDetailsSchema).optional(),
   template: Ip.ignore(v).optional(),
   component_v2: Ip.ignore(S).optional()
 });
@@ -275,4 +275,4 @@ export const UL = $$R6;
 export const Y9 = $$L7;
 export const _s = $$N8;
 export const tF = $$C9;
-export const vt = $$y10; 
+export const vt = $$y10;

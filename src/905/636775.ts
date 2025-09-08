@@ -7,17 +7,17 @@ import { r as _$$r } from "../905/534055";
 import { s as _$$s } from "../905/328136";
 import { Mr } from "../figma_app/795938";
 import { tf } from "../figma_app/831799";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { WM, Wh, dY, sU } from "../905/838765";
 import { YW } from "../figma_app/870683";
 import { dn } from "../figma_app/994403";
 import { BrowserInfo } from "../figma_app/778880";
 import { cx } from "../figma_app/558929";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { k as _$$k } from "../905/882646";
 import { iZ } from "../905/372672";
 import { xQ } from "../figma_app/45218";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { WW } from "../figma_app/764679";
 import { x as _$$x } from "../905/423181";
 import { x8, vE } from "../905/988303";
@@ -37,8 +37,8 @@ function T(e) {
   } = WW(e.resource, "left", e.viewContext);
   let d = useRef(null);
   let c = xQ(e.resource);
-  let u = uF(e.resource);
-  let m = u.manifest.editorType?.[0] ?? FW.FIGMA;
+  let u = getPluginVersion(e.resource);
+  let m = u.manifest.editorType?.[0] ?? ManifestEditorType.FIGMA;
   return e.isDisabled ? jsx(x8, {
     icon: _$$A,
     metric: e.resource.unique_run_count
@@ -52,11 +52,11 @@ function T(e) {
         hoverIcon: _$$A,
         activeIcon: _$$A,
         metric: e.resource.unique_run_count,
-        classNameOverride: dropdownIsShown ? m === FW.FIGMA ? Qe : _y : void 0,
+        classNameOverride: dropdownIsShown ? m === ManifestEditorType.FIGMA ? Qe : _y : void 0,
         onClick: n => {
           if (n.preventDefault(), n.stopPropagation(), i) {
             if (BrowserInfo.mobile) {
-              t(to({
+              t(showModalHandler({
                 type: _$$x,
                 data: {
                   dispatch: t
@@ -91,7 +91,7 @@ function O({
       e?.(t.id);
       i(t, n);
     }, [t, e, i]),
-    version: uF(t)
+    version: getPluginVersion(t)
   };
 }
 export function $$D2({

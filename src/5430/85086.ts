@@ -7,7 +7,7 @@ import { z8, bb } from "../figma_app/399472";
 import { cs } from "../figma_app/740025";
 import { MK, ot } from "../figma_app/599979";
 import { M3 } from "../figma_app/198840";
-import { my } from "../figma_app/300692";
+import { getPluginMetadata } from "../figma_app/300692";
 import { vt, U, xQ, I0 } from "../figma_app/45218";
 import { vR } from "../5430/309696";
 export function $$h0({
@@ -16,7 +16,7 @@ export function $$h0({
   containerClassName: r
 }) {
   let h = useDispatch();
-  let x = useSelector(r => t === vt.HUB_FILE ? M3(e, r.hubFiles) : my(e, r.publishedPlugins));
+  let x = useSelector(r => t === vt.HUB_FILE ? M3(e, r.hubFiles) : getPluginMetadata(e, r.publishedPlugins));
   let f = useSelector(e => e.authedActiveCommunityProfile);
   let y = useSelector(e => MK(e, x));
   let g = useCallback(() => {

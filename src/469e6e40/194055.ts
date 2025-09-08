@@ -13,7 +13,7 @@ import { Y as _$$Y } from "../905/830372";
 import { $ as _$$$ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { XB } from "../figma_app/481749";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { A as _$$A2 } from "../905/72153";
 import { WIy, czu } from "../figma_app/43951";
 import { No, T5, px } from "../figma_app/465071";
@@ -27,7 +27,7 @@ import { z as _$$z } from "../905/284530";
 import { kq } from "../figma_app/563413";
 import { Pf, H8 } from "../905/590952";
 import { q as _$$q } from "../905/749058";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Ef } from "../905/81982";
 import { l as _$$l } from "../469e6e40/774192";
@@ -56,15 +56,15 @@ import { X as _$$X2, b as _$$b } from "../5430/435821";
 import { I as _$$I } from "../905/343721";
 import { aI, JA, lx } from "../figma_app/558929";
 import { nx } from "../figma_app/12796";
-import { Df } from "../figma_app/300692";
+import { mapToEditorType } from "../figma_app/300692";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { j7, oB } from "../905/929976";
 import { Um } from "../905/848862";
 import { UK } from "../figma_app/764679";
 import { Cf, it } from "../905/504727";
 import { qN } from "../905/884637";
-let L = Ju(function ({
+let L = registerModal(function ({
   extensionName: e,
   onConfirm: t,
   orgName: a,
@@ -212,7 +212,7 @@ function q({
     }));
     try {
       await Promise.all(n);
-      o(Lo());
+      o(popModalStack());
       d();
     } catch {
       o(_$$F.enqueue({
@@ -356,7 +356,7 @@ function q({
           variant: "primary",
           onClick: () => {
             if (!j && 0 === H.length) {
-              o(to({
+              o(showModalHandler({
                 type: L,
                 data: {
                   extensionName: e.currentPluginVersion?.name ?? "",
@@ -483,7 +483,7 @@ function ea({
   let l = e.sort((e, t) => e.org_rank - t.org_rank);
   let o = jsx(CY, {
     onClick: () => {
-      s(to({
+      s(showModalHandler({
         type: DV,
         data: {
           team: null,
@@ -1134,7 +1134,7 @@ export function $$eF1(e) {
     resource,
     source
   });
-  let c = d[0] ?? FW.FIGMA;
+  let c = d[0] ?? ManifestEditorType.FIGMA;
   return jsx(e$, {
     extension,
     orgId,
@@ -1189,7 +1189,7 @@ function eq(e) {
               n.preventDefault();
               n.stopPropagation();
               o(oB());
-              let i = Df(s);
+              let i = mapToEditorType(s);
               "community" === l ? o(aI({
                 resource: _,
                 fullscreenEditorType: i
@@ -1255,7 +1255,7 @@ function e$(e) {
   } = e;
   let c = useDispatch();
   let _ = Lq(extension) || resource;
-  let m = Df(manifestEditorType);
+  let m = mapToEditorType(manifestEditorType);
   let p = () => {
     "community" === source ? c(aI({
       resource: _,
@@ -1381,7 +1381,7 @@ function eG(e) {
       } catch (t) {
         e();
       }
-      d(Lo());
+      d(popModalStack());
     },
     children: jsx(_$$E, {
       children: renderI18nText("resources_tab.approved_plugins.modal.approve")
@@ -1428,7 +1428,7 @@ function ez(e) {
           userId: p
         });
       });
-      d(Lo());
+      d(popModalStack());
     },
     children: jsx(_$$E, {
       children: renderI18nText("resources_tab.approved_plugins.modal.remove")
@@ -1476,7 +1476,7 @@ export function $$eV0({
       }
     }(m, I, a),
     maxWidth: 640,
-    onClose: () => C(Lo()),
+    onClose: () => C(popModalStack()),
     closeOnEsc: !0,
     children: jsxs("div", {
       className: _$$s.relative.$,

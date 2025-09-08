@@ -1,7 +1,7 @@
 import { assertNotNullish } from "../figma_app/465776";
-import { A } from "../905/284190";
+import { deepClone } from "../905/284190";
 import { TF, vf, kz } from "../905/18922";
-import { sH } from "../905/871411";
+import { parseSessionLocalID } from "../905/871411";
 import { yX, bW, iZ } from "../905/642476";
 import { dC, wv } from "../905/850029";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -167,7 +167,7 @@ function m(e) {
     t.push({
       windingRule: e.windingRule,
       loops: e.loops.map(e => e.slice()),
-      fillPaints: A(e.fillPaints),
+      fillPaints: deepClone(e.fillPaints),
       fillStyleRef: e.fillStyleRef
     });
   });
@@ -339,7 +339,7 @@ export function $$h3(e, t, i = getSingletonSceneGraph()) {
         styleID: t
       };
       let a = n.styleId;
-      let o = a.guid && sH(a.guid);
+      let o = a.guid && parseSessionLocalID(a.guid);
       if (o) r.styleIdForFill = {
         guid: o
       };else if (a.ref) r.styleIdForFill = {

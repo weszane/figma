@@ -1,53 +1,53 @@
 import { useState, useCallback } from "react";
 import { assertNotNullish } from "../figma_app/465776";
-import { rXF, Z_n, JTp } from "../figma_app/763686";
-import { sH } from "../905/871411";
+import { VariableResolvedDataType, VariableDataType, OperationType } from "../figma_app/763686";
+import { parseSessionLocalID } from "../905/871411";
 import { sH as _$$sH } from "../905/805904";
 import { WI } from "../905/929949";
 function d(e, t, r) {
   let n = WI(t, r);
   let i = function (e) {
     switch (e) {
-      case rXF.BOOLEAN:
+      case VariableResolvedDataType.BOOLEAN:
         return "BOOLEAN";
-      case rXF.FLOAT:
+      case VariableResolvedDataType.FLOAT:
         return "FLOAT";
-      case rXF.STRING:
+      case VariableResolvedDataType.STRING:
         return "STRING";
-      case rXF.COLOR:
+      case VariableResolvedDataType.COLOR:
         return "COLOR";
-      case rXF.MAP:
+      case VariableResolvedDataType.MAP:
         return "MAP";
-      case rXF.SYMBOL_ID:
+      case VariableResolvedDataType.SYMBOL_ID:
         return "SYMBOL_ID";
-      case rXF.TEXT_DATA:
+      case VariableResolvedDataType.TEXT_DATA:
         return "TEXT_DATA";
       default:
         throw Error(`Unexpected resolved type: ${e}`);
     }
   }(t);
-  if (e === Z_n.BOOLEAN) return {
+  if (e === VariableDataType.BOOLEAN) return {
     dataType: "BOOLEAN",
     resolvedDataType: i,
     value: {
       boolValue: n.value
     }
   };
-  if (e === Z_n.FLOAT) return {
+  if (e === VariableDataType.FLOAT) return {
     dataType: "FLOAT",
     resolvedDataType: i,
     value: {
       floatValue: n.value
     }
   };
-  if (e === Z_n.STRING) return {
+  if (e === VariableDataType.STRING) return {
     dataType: "STRING",
     resolvedDataType: i,
     value: {
       textValue: n.value
     }
   };
-  if (e === Z_n.ALIAS) {
+  if (e === VariableDataType.ALIAS) {
     var c;
     var u = null;
     if ("string" == typeof r) {
@@ -67,14 +67,14 @@ function d(e, t, r) {
       }
     };
   }
-  if (e === Z_n.NODE_FIELD_ALIAS) return {
+  if (e === VariableDataType.NODE_FIELD_ALIAS) return {
     dataType: "NODE_FIELD_ALIAS",
     resolvedDataType: i,
     value: {
       nodeFieldAliasValue: "stablePathToNode" in (c = n.value) && "nodeField" in c && "indexOrKey" in c ? {
         stablePathToNode: {
           guids: c.stablePathToNode.map(e => {
-            let t = sH(e);
+            let t = parseSessionLocalID(e);
             return {
               sessionID: t?.sessionID ?? -1,
               localID: t?.localID ?? -1
@@ -86,14 +86,14 @@ function d(e, t, r) {
       } : {}
     }
   };
-  if (e === Z_n.COLOR) return {
+  if (e === VariableDataType.COLOR) return {
     dataType: "COLOR",
     resolvedDataType: i,
     value: {
       colorValue: n.value
     }
   };
-  if (e === Z_n.EXPRESSION) return {
+  if (e === VariableDataType.EXPRESSION) return {
     dataType: "EXPRESSION",
     resolvedDataType: i,
     value: {
@@ -108,17 +108,17 @@ function d(e, t, r) {
         }
         return {
           expressionArguments: r,
-          expressionFunction: JTp[e.expressionFunction]
+          expressionFunction: OperationType[e.expressionFunction]
         };
       }(r)
     }
-  };else if (e === Z_n.MAP) return {
+  };else if (e === VariableDataType.MAP) return {
     dataType: "MAP",
     resolvedDataType: i,
     value: {
       mapValue: n.value
     }
-  };else if (e === Z_n.SYMBOL_ID) return {
+  };else if (e === VariableDataType.SYMBOL_ID) return {
     dataType: "SYMBOL_ID",
     resolvedDataType: i,
     value: {
@@ -146,7 +146,7 @@ export function $$u2(e) {
       r.targetVariableData && (r.targetVariableData = d(r.targetVariableData.type, r.targetVariableData.resolvedType, r.targetVariableData.value));
     } else if ("SET_VARIABLE_MODE" === r.connectionType) {
       assertNotNullish(r.targetVariableModeID, "targetVariableModeID");
-      r.targetVariableModeID = sH(r.targetVariableModeID) || void 0;
+      r.targetVariableModeID = parseSessionLocalID(r.targetVariableModeID) || void 0;
     } else if ("CONDITIONAL" === r.connectionType && r.conditionalActions) {
       var n = [];
       for (var a of r.conditionalActions) {

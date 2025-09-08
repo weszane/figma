@@ -1,4 +1,4 @@
-import { dI } from "../905/871411";
+import { sessionLocalIDToString } from "../905/871411";
 export function $$i0(e, t, r) {
   if (!t) return null;
   let i = (() => {
@@ -10,7 +10,7 @@ export function $$i0(e, t, r) {
       let t = e.library.local.styles[r.node_id];
       if (t?.key !== r.key) return null;
       i = t.node_id;
-    } else i = dI(r.guid);
+    } else i = sessionLocalIDToString(r.guid);
     return i ? e.library.used__LIVEGRAPH.localNodeIdToDestinationKey[i] : null;
   })();
   return e.library.used__LIVEGRAPH.styles[i ?? t] ?? null;

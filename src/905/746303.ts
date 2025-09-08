@@ -1,9 +1,9 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.OrgSamlConfigSchemaValidator = vh();
-    this.ContactsSchemaValidator = vh();
-    this.ExperimentCohortValidator = vh();
+    this.OrgSamlConfigSchemaValidator = createNoOpValidator();
+    this.ContactsSchemaValidator = createNoOpValidator();
+    this.ExperimentCohortValidator = createNoOpValidator();
   }
   getOrgSamlConfig(e) {
     return this.OrgSamlConfigSchemaValidator.validate(async ({
@@ -17,7 +17,7 @@ export let $$r0 = new class {
     } = e;
     return this.ContactsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/org/${e.orgId}/contacts`, td.toAPIParameters(i)));
+    }) => await t.get(`/api/org/${e.orgId}/contacts`, APIParameterUtils.toAPIParameters(i)));
   }
   getExperimentCohort(e) {
     let {
@@ -26,7 +26,7 @@ export let $$r0 = new class {
     } = e;
     return this.ExperimentCohortValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/orgs/${e.orgId}/experiment_cohort`, td.toAPIParameters(i)));
+    }) => await t.get(`/api/orgs/${e.orgId}/experiment_cohort`, APIParameterUtils.toAPIParameters(i)));
   }
 }();
 export const P = $$r0;

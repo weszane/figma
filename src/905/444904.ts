@@ -10,7 +10,7 @@ import { oA } from "../905/723791";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { TA } from "../905/372672";
 import { M9q, NSA } from "../figma_app/43951";
 import { CT } from "../figma_app/736948";
@@ -85,9 +85,9 @@ export function $$I0({
         type: "submit",
         onClick: () => {
           trackEventAnalytics("Two-factor setup started");
-          E ? x(to({
+          E ? x(showModalHandler({
             type: _$$t2
-          })) : x(to({
+          })) : x(showModalHandler({
             type: J
           }));
         },

@@ -1,11 +1,11 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { HTr } from "../figma_app/763686";
+import { GLFailureType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { fF } from "../905/194389";
 import { setSentryTag, reportError, SeverityLevel } from "../905/11";
 import { logInfo } from "../905/714362";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { bY } from "../figma_app/298277";
 import { yV } from "../figma_app/516028";
 import { Lu } from "../figma_app/453508";
@@ -34,7 +34,7 @@ export let $$f0 = new class {
       atomStoreManager.set(_$$h, e);
       let i = window.FigmaMobile;
       i?.dismissMediaLoadingToast && i.dismissMediaLoadingToast();
-      "oom" === e.type && i?.handleAllocationFailure && i.handleAllocationFailure(HTr.WASM_FAILURE);
+      "oom" === e.type && i?.handleAllocationFailure && i.handleAllocationFailure(GLFailureType.WASM_FAILURE);
       let o = bY();
       setSentryTag("fullscreen_status", "has_crashed");
       try {
@@ -83,7 +83,7 @@ export let $$f0 = new class {
   showMemoryCrashModal(e, t, i) {
     if (t) {
       if (!i) throw Error("Trying to dispatch before we've been initialized");
-      i.dispatch(to({
+      i.dispatch(showModalHandler({
         type: Lu,
         data: {
           isBranching: !!e.isBranching

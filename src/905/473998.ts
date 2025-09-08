@@ -1,16 +1,16 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.TemplatesSchemaValidator = vh();
-    this.StartingPointsTemplatesSchemaValidator = vh();
-    this.StartingPointsTemplatesAndAssetsSchemaValidator = vh();
-    this.VersionsSchemaValidator = vh();
-    this.StatusSchemaValidator = vh();
-    this.ProfileSchemaValidator = vh();
-    this.LibrariesSchemaValidator = vh();
-    this.PublishHubFileSchemaValidator = vh();
-    this.UpdateHubFileSchemeValidator = vh();
-    this.HubFileMultiImageUploadSchemaValidator = vh();
+    this.TemplatesSchemaValidator = createNoOpValidator();
+    this.StartingPointsTemplatesSchemaValidator = createNoOpValidator();
+    this.StartingPointsTemplatesAndAssetsSchemaValidator = createNoOpValidator();
+    this.VersionsSchemaValidator = createNoOpValidator();
+    this.StatusSchemaValidator = createNoOpValidator();
+    this.ProfileSchemaValidator = createNoOpValidator();
+    this.LibrariesSchemaValidator = createNoOpValidator();
+    this.PublishHubFileSchemaValidator = createNoOpValidator();
+    this.UpdateHubFileSchemeValidator = createNoOpValidator();
+    this.HubFileMultiImageUploadSchemaValidator = createNoOpValidator();
   }
   getTemplates(e) {
     return this.TemplatesSchemaValidator.validate(async ({

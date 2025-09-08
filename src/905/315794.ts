@@ -5,7 +5,7 @@ import s from "classnames";
 import { s6, nR } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { lT } from "../figma_app/494261";
 import { GR } from "../figma_app/330108";
 import { _6 } from "../figma_app/386952";
@@ -125,7 +125,7 @@ export function $$E2({
       GR(s, t.id, e6.OWNER)();
       return;
     case gO.CLICK_REQUEST:
-      s(to({
+      s(showModalHandler({
         type: $,
         data: {
           team: t

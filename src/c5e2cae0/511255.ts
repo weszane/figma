@@ -16,7 +16,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { sx as _$$sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { kp } from "../figma_app/831799";
 import { jv, SK, Fq } from "../905/84777";
@@ -40,7 +40,7 @@ import { B as _$$B3 } from "../905/261906";
 import { b as _$$b } from "../905/723768";
 import { AG } from "../figma_app/217457";
 import { FPlanNameType } from "../figma_app/191312";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { G8, y3, Q$, gt } from "../c5e2cae0/859355";
 import { A as _$$A2 } from "../6828/7452";
 function X({
@@ -85,7 +85,7 @@ function X({
             children: renderI18nText("plan_comparison.campfire.or_contact_sales", {
               contactSalesLink: jsx("button", {
                 className: _$$s2.colorTextBrand.cursorPointer.$,
-                onClick: () => n(to({
+                onClick: () => n(showModalHandler({
                   type: lk,
                   data: {
                     source: _$$B2.ORG_SELF_SERVE_UPGRADE_MODAL
@@ -163,7 +163,7 @@ function W({
   });
 }
 function J(e) {
-  let t = e.upsellSource === _$$b2.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS;
+  let t = e.upsellSource === UpsellModalType.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS;
   let a = [t ? renderI18nText("plan_comparison.campfire.org.feature.org_connected_projects", {
     orgConnectionsLimit: _$$b[FPlanNameType.ORG]
   }) : null, renderI18nText("plan_comparison.campfire.org.feature.unlimited_teams"), renderI18nText("plan_comparison.campfire.org.feature.branching"), renderI18nText("plan_comparison.campfire.org.feature.security"), renderI18nText("plan_comparison.campfire.org.feature.scim"), renderI18nText("plan_comparison.campfire.org.feature.customizations")].filter(Boolean);
@@ -208,7 +208,7 @@ function et(e) {
 function ea(e) {
   let t = useDispatch();
   let a = () => {
-    t(Ce());
+    t(hideModal());
   };
   let l = _$$sx();
   let d = useMemo(() => [getI18nString("org_upgrade.multi_team.plan_items.shared_design_libraries"), getI18nString("org_upgrade.multi_team.plan_items.shared_fonts_and_styles"), getI18nString("org_upgrade.multi_team.plan_items.centralized_billing_and_admin_controls"), getI18nString("org_upgrade.multi_team.plan_items.single_sign_on_sso_integrations")], []);

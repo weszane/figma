@@ -20,7 +20,7 @@ import { Ak } from "../905/773401";
 import { lR, $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S as _$$S } from "../5132/668270";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { cq } from "../figma_app/107215";
 import { fu } from "../figma_app/831799";
 import { nF } from "../figma_app/789";
@@ -56,7 +56,7 @@ function V({
         formState: qB.SIGN_IN,
         redirectUrl: Ay.location.pathname
       }));
-      r(to({
+      r(showModalHandler({
         type: _$$x,
         data: {
           headerText: "Log In"
@@ -87,7 +87,7 @@ function V({
         userName: p ? s : null,
         fileKey: t?.key
       });
-      r(Ce());
+      r(hideModal());
     },
     onClose: e => {
       e.preventDefault();
@@ -99,7 +99,7 @@ function V({
         userName: s,
         file_key: t.key
       }));
-      r(Ce());
+      r(hideModal());
     }
   };
 }

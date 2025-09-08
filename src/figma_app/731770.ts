@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
@@ -48,7 +48,7 @@ export function $$E0({
       w(_$$b({
         design_panel_step_shown: !0
       }));
-      glU.triggerAction("set-tool-default", null);
+      Fullscreen.triggerAction("set-tool-default", null);
     });
   }), !P) return null;
   let k = N ? _$$b2 : VF;

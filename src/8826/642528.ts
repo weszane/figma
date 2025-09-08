@@ -4,8 +4,8 @@ import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/658074";
 import { W as _$$W } from "../figma_app/462192";
-import { Egt, HV5, CXS, sAE, _0v, RN9, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { SceneGraphHelpers, GridLayoutApi, GridDirection, LayoutSizingType, Axis, SpacingConstants, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
@@ -13,9 +13,9 @@ import { B as _$$B } from "../905/714743";
 import { S as _$$S } from "../905/177206";
 import { N as _$$N } from "../905/696319";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK, sT } from "../figma_app/740163";
-import { hS, gl, SX } from "../905/216495";
+import { isValidValue, isInvalidValue, isAutoMarker } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { Fk } from "../figma_app/167249";
 import { Sh } from "../figma_app/889655";
@@ -24,14 +24,14 @@ import { Ht, $j } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
 import { fn } from "../figma_app/811257";
 import { iZ } from "../figma_app/473914";
-import { M9 } from "../figma_app/492908";
+import { mapRange } from "../figma_app/492908";
 import { fP, mc } from "../905/691059";
 import { E as _$$E2 } from "../905/632989";
 import { i as _$$i } from "../905/718764";
 import { E as _$$E3 } from "../905/172252";
 import T from "classnames";
 import { M as _$$M } from "../figma_app/634148";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { zk } from "../figma_app/198712";
 import { hF, qE, QK } from "../figma_app/960598";
 import { A as _$$A } from "../svg/904889";
@@ -56,8 +56,8 @@ function W({
   let [n, r] = useState(!1);
   let [a, o] = lJ("gridColumnCount");
   let [s, u] = lJ("gridRowCount");
-  let g = a && hS(a) ? a : null;
-  let m = s && hS(s) ? s : null;
+  let g = a && isValidValue(a) ? a : null;
+  let m = s && isValidValue(s) ? s : null;
   let _ = useRef(null);
   let v = Fk(e => {
     let t = e.getDirectlySelectedNodes();
@@ -69,7 +69,7 @@ function W({
     });
   });
   let [C, S] = useState(null);
-  let j = J2(UK().showPropertyLabels);
+  let j = getObservableOrFallback(UK().showPropertyLabels);
   let {
     getTriggerProps,
     getContainerProps
@@ -77,7 +77,7 @@ function W({
     isOpen: n,
     onOpenChange(e) {
       r(e);
-      e ? (Egt && Egt.clearGridTrackOrCellSelection(), S({
+      e ? (SceneGraphHelpers && SceneGraphHelpers.clearGridTrackOrCellSelection(), S({
         mode: "hover",
         hoveredIndex: null
       }), g && m ? _.current = {
@@ -99,12 +99,12 @@ function W({
     if (!(e >= 1 && e <= 100) || !n) return;
     let l = e !== g;
     let i = t !== m;
-    (l || i) && l7.user("grid-panel-empty-grid-immediate-resize", () => {
+    (l || i) && permissionScopeHandler.user("grid-panel-empty-grid-immediate-resize", () => {
       l && o(e, zk.NO);
       i && u(t, zk.NO);
     });
   };
-  let O = !a || !s || gl(a) || gl(s);
+  let O = !a || !s || isInvalidValue(a) || isInvalidValue(s);
   let T = 0;
   let P = 0;
   !O && g && m ? (T = g > 10 ? 10 : g, P = m > 8 ? 8 : m) : O && (T = 2);
@@ -137,10 +137,10 @@ function W({
   let K = (e, t) => {
     let n = null !== e && e >= 1 && e <= 100 && e !== g;
     let l = null !== t && t >= 1 && t <= 100 && t !== m;
-    n || l ? l7.user("grid-panel-commit", () => {
+    n || l ? permissionScopeHandler.user("grid-panel-commit", () => {
       let i = n && !l ? zk.YES : zk.NO;
-      getFeatureFlags().ce_tv_grid_reflow && C?.mode === "hover" ? HV5?.setDimensions(t, e) : (n && o(e, i), l && u(t, zk.YES));
-    }) : l7.user("grid-panel-commit", () => {
+      getFeatureFlags().ce_tv_grid_reflow && C?.mode === "hover" ? GridLayoutApi?.setDimensions(t, e) : (n && o(e, i), l && u(t, zk.YES));
+    }) : permissionScopeHandler.user("grid-panel-commit", () => {
       u(t, zk.YES);
     });
   };
@@ -184,7 +184,7 @@ function W({
         }), jsx("div", {
           className: U()
         })]
-      }) : M9(T * P, e => jsx("div", {
+      }) : mapRange(T * P, e => jsx("div", {
         className: F
       }, e))]
     }), n && jsx(mc, {
@@ -198,7 +198,7 @@ function W({
             let t = _.current.rows;
             let n = g !== e;
             let l = m !== t;
-            (n || l) && l7.user("grid-panel-revert-on-escape", () => {
+            (n || l) && permissionScopeHandler.user("grid-panel-revert-on-escape", () => {
               n && o(e, zk.NO);
               l && u(t, zk.NO);
             });
@@ -274,7 +274,7 @@ class Q extends _$$M {
     return e[this.nodeField] ?? 0;
   }
   setValueForNode(e, t) {
-    l7.user("set-grid-track-count", () => {
+    permissionScopeHandler.user("set-grid-track-count", () => {
       "gridRowCount" === this.nodeField ? e.setGridRowCount(t, !0) : "gridColumnCount" === this.nodeField && e.setGridColumnCount(t, !0);
     });
   }
@@ -512,7 +512,7 @@ let et = memo(function ({
         }
       }
     },
-    children: M9(96, t => {
+    children: mapRange(96, t => {
       let c;
       let d = t % 12;
       let u = Math.floor(t / 12);
@@ -569,16 +569,16 @@ function ec({
     } : null;
   }, t);
   let r = useCallback((e, t) => {
-    l7.user("grid-panel", () => {
-      HV5 && t >= 0 && HV5.setTrackAnchor(e, t);
+    permissionScopeHandler.user("grid-panel", () => {
+      GridLayoutApi && t >= 0 && GridLayoutApi.setTrackAnchor(e, t);
     });
   }, []);
   let o = useCallback((e, n) => {
-    null !== t && l7.user("grid-panel", () => {
+    null !== t && permissionScopeHandler.user("grid-panel", () => {
       let l = getSingletonSceneGraph();
       let i = l.get(t);
       let r = i && i.parentGuid && l.get(i.parentGuid);
-      i && r && n >= 1 && (e === CXS.ROW ? i.gridRowAnchorIndex + n <= r.gridRowCount && (i.gridRowSpan = n) : i.gridColumnAnchorIndex + n <= r.gridColumnCount && (i.gridColumnSpan = n));
+      i && r && n >= 1 && (e === GridDirection.ROW ? i.gridRowAnchorIndex + n <= r.gridRowCount && (i.gridRowSpan = n) : i.gridColumnAnchorIndex + n <= r.gridColumnCount && (i.gridColumnSpan = n));
     });
   }, [t]);
   return wx() ? null : t ? jsxs(Fragment, {
@@ -587,7 +587,7 @@ function ec({
       rightLabel: "Columns",
       leftInput: jsx(Ht, {
         value: n?.rowAnchorIndex ?? void 0,
-        onValueChange: e => r(CXS.ROW, e),
+        onValueChange: e => r(GridDirection.ROW, e),
         recordingKey: Pt(e, "grid-rows"),
         id: "grid-rows",
         dispatch: lQ,
@@ -600,7 +600,7 @@ function ec({
       }),
       rightInput: jsx(Ht, {
         value: n?.columnAnchorIndex ?? void 0,
-        onValueChange: e => r(CXS.COLUMN, e),
+        onValueChange: e => r(GridDirection.COLUMN, e),
         recordingKey: Pt(e, "grid-columns"),
         id: "grid-columns",
         dispatch: lQ,
@@ -617,7 +617,7 @@ function ec({
       rightLabel: "Columns",
       leftInput: jsx(Ht, {
         value: n?.rowSpan,
-        onValueChange: e => o(CXS.ROW, e),
+        onValueChange: e => o(GridDirection.ROW, e),
         recordingKey: Pt(e, "grid-rows"),
         id: "grid-rows",
         dispatch: lQ,
@@ -630,7 +630,7 @@ function ec({
       }),
       rightInput: jsx(Ht, {
         value: n?.columnSpan,
-        onValueChange: e => o(CXS.COLUMN, e),
+        onValueChange: e => o(GridDirection.COLUMN, e),
         recordingKey: Pt(e, "grid-columns"),
         id: "grid-columns",
         dispatch: lQ,
@@ -663,8 +663,8 @@ function ed({
       columnSpan: n.gridColumnSpan,
       maxRowSpan: l.gridRowCount - n.gridRowAnchorIndex,
       maxColumnSpan: l.gridColumnCount - n.gridColumnAnchorIndex,
-      rowSpanEnabled: i.maxSizing.type !== sAE.HUG,
-      columnSpanEnabled: r.maxSizing.type !== sAE.HUG
+      rowSpanEnabled: i.maxSizing.type !== LayoutSizingType.HUG,
+      columnSpanEnabled: r.maxSizing.type !== LayoutSizingType.HUG
     } : null;
   });
   let n = _$$S({
@@ -676,10 +676,10 @@ function ed({
     max: t?.maxRowSpan
   });
   let a = useCallback((e, n, l) => {
-    null !== t && null !== t.gridChildId && l7.user("grid-panel", () => {
+    null !== t && null !== t.gridChildId && permissionScopeHandler.user("grid-panel", () => {
       let i = getSingletonSceneGraph().get(t.gridChildId);
       let r = i && i.parentNode;
-      i && r && (i.setSpanAndUpdateChildPositions(e, n), l && Y5.triggerAction("commit"));
+      i && r && (i.setSpanAndUpdateChildPositions(e, n), l && fullscreenValue.triggerAction("commit"));
     });
   }, [t]);
   return t ? jsx(Fragment, {
@@ -693,7 +693,7 @@ function ed({
         onChange: (e, {
           commit: t
         }) => {
-          a(_0v.X, e, t);
+          a(Axis.X, e, t);
         },
         disabled: !t.columnSpanEnabled,
         icon: jsx(_$$B, {
@@ -710,7 +710,7 @@ function ed({
         onChange: (e, {
           commit: t
         }) => {
-          a(_0v.Y, e, t);
+          a(Axis.Y, e, t);
         },
         disabled: !t.rowSpanEnabled,
         icon: jsx(_$$B, {
@@ -774,8 +774,8 @@ function eg({
   } = sT();
   let [u, h] = lJ("gridColumnGap");
   let g = useCallback((e, t) => {
-    l7.user("grid-panel", () => {
-      SX(e) || h(e, t);
+    permissionScopeHandler.user("grid-panel", () => {
+      isAutoMarker(e) || h(e, t);
     });
   }, [h]);
   let m = jsx($j, {
@@ -787,12 +787,12 @@ function eg({
     inputClassName: hF,
     isTokenizable: !0,
     noBorderOnHover: !0,
-    onBlur: () => t(RN9.SPACING, !1),
-    onFocus: () => t(RN9.SPACING, !0),
-    onMouseEnter: () => n(RN9.SPACING, !0),
-    onMouseLeave: () => n(RN9.SPACING, !1),
-    onScrubBegin: () => t(RN9.SPACING, !0),
-    onScrubEnd: () => t(RN9.SPACING, !1),
+    onBlur: () => t(SpacingConstants.SPACING, !1),
+    onFocus: () => t(SpacingConstants.SPACING, !0),
+    onMouseEnter: () => n(SpacingConstants.SPACING, !0),
+    onMouseLeave: () => n(SpacingConstants.SPACING, !1),
+    onScrubBegin: () => t(SpacingConstants.SPACING, !0),
+    onScrubEnd: () => t(SpacingConstants.SPACING, !1),
     onValueChange: g,
     recordingKey: e,
     smallNudgeAmount,
@@ -803,8 +803,8 @@ function eg({
   });
   return getFeatureFlags().grid_gap_vars ? jsx(sA, {
     fields: eh,
-    resolvedType: rXF.FLOAT,
-    currentFieldValue: hS(u) ? u : void 0,
+    resolvedType: VariableResolvedDataType.FLOAT,
+    currentFieldValue: isValidValue(u) ? u : void 0,
     children: m
   }) : m;
 }
@@ -820,8 +820,8 @@ function e_({
   } = sT();
   let [u, h] = lJ("gridRowGap");
   let g = useCallback((e, t) => {
-    l7.user("grid-panel", () => {
-      SX(e) || h(e, t);
+    permissionScopeHandler.user("grid-panel", () => {
+      isAutoMarker(e) || h(e, t);
     });
   }, [h]);
   let m = jsx($j, {
@@ -833,12 +833,12 @@ function e_({
     inputClassName: hF,
     isTokenizable: !0,
     noBorderOnHover: !0,
-    onBlur: () => t(RN9.COUNTER_SPACING, !1),
-    onFocus: () => t(RN9.COUNTER_SPACING, !0),
-    onMouseEnter: () => n(RN9.COUNTER_SPACING, !0),
-    onMouseLeave: () => n(RN9.COUNTER_SPACING, !1),
-    onScrubBegin: () => t(RN9.COUNTER_SPACING, !0),
-    onScrubEnd: () => t(RN9.COUNTER_SPACING, !1),
+    onBlur: () => t(SpacingConstants.COUNTER_SPACING, !1),
+    onFocus: () => t(SpacingConstants.COUNTER_SPACING, !0),
+    onMouseEnter: () => n(SpacingConstants.COUNTER_SPACING, !0),
+    onMouseLeave: () => n(SpacingConstants.COUNTER_SPACING, !1),
+    onScrubBegin: () => t(SpacingConstants.COUNTER_SPACING, !0),
+    onScrubEnd: () => t(SpacingConstants.COUNTER_SPACING, !1),
     onValueChange: g,
     recordingKey: e,
     smallNudgeAmount,
@@ -849,8 +849,8 @@ function e_({
   });
   return getFeatureFlags().grid_gap_vars ? jsx(sA, {
     fields: em,
-    resolvedType: rXF.FLOAT,
-    currentFieldValue: hS(u) ? u : void 0,
+    resolvedType: VariableResolvedDataType.FLOAT,
+    currentFieldValue: isValidValue(u) ? u : void 0,
     children: m
   }) : m;
 }

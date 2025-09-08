@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
@@ -18,7 +18,7 @@ export function $$_0(e) {
   });
   let t = useSelector(e => e.isFullscreenDocumentLoaded);
   useEffect(() => {
-    t && glU.triggerAction("set-tool-frame", null);
+    t && Fullscreen.triggerAction("set-tool-frame", null);
   }, [t]);
   let r = e.fromCursorBot ? b : VF;
   return jsx("div", {
@@ -34,7 +34,7 @@ export function $$_0(e) {
       }),
       onPrimaryCtaClick: e.onPrimaryCtaClick,
       onSecondaryCtaClick: e.onSecondaryCtaClick ? () => {
-        glU.triggerAction("set-tool-default", null);
+        Fullscreen.triggerAction("set-tool-default", null);
         e.onSecondaryCtaClick && e.onSecondaryCtaClick();
       } : void 0,
       pointsTo: "toolbar",

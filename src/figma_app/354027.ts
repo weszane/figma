@@ -1,10 +1,10 @@
 import { shallowEqual } from "../vendor/514228";
 import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
-import { XQq, xOL } from "../figma_app/763686";
+import { PresetType, RotationType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { L_ } from "../figma_app/349969";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType } from "../figma_app/53721";
 import { uF } from "../905/748636";
 import { $W, is, BX } from "../figma_app/170018";
@@ -24,10 +24,10 @@ let T = (e, t) => {
   let {
     prototypeDevice
   } = r;
-  return prototypeDevice ? prototypeDevice.type === XQq.PRESENTATION ? {
+  return prototypeDevice ? prototypeDevice.type === PresetType.PRESENTATION ? {
     x: e.absoluteBoundingBox.w,
     y: e.absoluteBoundingBox.h
-  } : prototypeDevice.type === XQq.NONE ? null : prototypeDevice.rotation === xOL.NONE ? prototypeDevice.size : {
+  } : prototypeDevice.type === PresetType.NONE ? null : prototypeDevice.rotation === RotationType.NONE ? prototypeDevice.size : {
     x: prototypeDevice.size.y,
     y: prototypeDevice.size.x
   } : null;
@@ -65,7 +65,7 @@ export function $$S9(e, t) {
   }
 }
 export function $$v10(e, t) {
-  return (e.getCurrentPage()?.prototypeDevice?.rotation ?? xOL.NONE) === xOL.NONE ? {
+  return (e.getCurrentPage()?.prototypeDevice?.rotation ?? RotationType.NONE) === RotationType.NONE ? {
     x: $$g1,
     y: $$f3 + (t ? uF : 0)
   } : {
@@ -154,7 +154,7 @@ export function $$N5(e, t, r, a, s) {
   assert(!!o, "expected node to exist");
   let c = $$I2(s, o);
   if (e && shallowEqual(e.breakpoint, c) && !t) return e;
-  let h = Y5.getViewportInfo();
+  let h = fullscreenValue.getViewportInfo();
   let m = h.height - uF - 2 * $$_11;
   let f = Math.max(.5 * h.width, $$g1);
   let E = $W(s);
@@ -222,7 +222,7 @@ export function $$C6(e, t, r, n) {
   };
 }
 export function $$w4(e, t, r) {
-  let n = Y5.getViewportInfo();
+  let n = fullscreenValue.getViewportInfo();
   e.x > .9 * n.width && t(F.enqueue({
     type: "inline-preview-resize-to-actual-size",
     message: getI18nString("inline_preview.resize_to_actual_size_visual_bell"),

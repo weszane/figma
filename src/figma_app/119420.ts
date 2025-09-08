@@ -1,8 +1,8 @@
 import { useCallback, useState, useEffect, useMemo, useRef } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { debounce } from "../905/915765";
-import { FDn, glU, tvY } from "../figma_app/763686";
-import { l7, Hq } from "../905/189185";
+import { InsertErrorType, Fullscreen, BackgroundPattern } from "../figma_app/763686";
+import { permissionScopeHandler, AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -61,25 +61,25 @@ export function $$O9(e) {
     }));
   }
   switch (e) {
-    case FDn.MORE_THAN_ONE_HIGHLEVEL_NODE_FOUND:
+    case InsertErrorType.MORE_THAN_ONE_HIGHLEVEL_NODE_FOUND:
       t(getI18nString("figmake.attachments.attachment_not_in_frame_toast"));
       break;
-    case FDn.INSERTED_NODES_TOO_LARGE:
+    case InsertErrorType.INSERTED_NODES_TOO_LARGE:
       t(getI18nString("figmake.attachments.attachment_too_large_toast"), !1);
       break;
-    case FDn.MAXIMUM_ATTACHMENTS_EXCEEDED:
+    case InsertErrorType.MAXIMUM_ATTACHMENTS_EXCEEDED:
       t(getI18nString("figmake.attachments.too_many_attachments_toast", {
         max_num: $$C12
       }));
       break;
-    case FDn.USER_PASTED_FIGMA_LINK_IN_CHAT:
+    case InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT:
       t(getI18nString("figmake.attachments.cant_read_figma_link_toast"), !1);
       break;
-    case FDn.DESIGN_2_REACT_STATE_GROUP:
+    case InsertErrorType.DESIGN_2_REACT_STATE_GROUP:
       t(getI18nString("figmake.attachments.failure_state_group"));
       break;
-    case FDn.DESIGN_2_REACT_OTHER:
-    case FDn.OTHER:
+    case InsertErrorType.DESIGN_2_REACT_OTHER:
+    case InsertErrorType.OTHER:
       t(getI18nString("figmake.attachments.generic_failed_to_load_attachment_toast"));
       break;
     default:
@@ -110,13 +110,13 @@ export function $$M10() {
   let [e, t] = useAtomValueAndSetter($$S0);
   return useCallback(r => {
     t(e.filter(e => e.uniqueId !== r.uniqueId));
-    $$P7(r) && r.nodeGuid && l7.ai("clean-up-attachments", () => {
+    $$P7(r) && r.nodeGuid && permissionScopeHandler.ai("clean-up-attachments", () => {
       let e = getSingletonSceneGraph().get(r.nodeGuid);
       e && e.removeSelfAndChildren();
       "success" === r.status && "FIGMA_NODE" === r.type && r.codeFiles?.forEach(e => {
-        glU?.deleteCodeFile(e.codeFileGuid);
+        Fullscreen?.deleteCodeFile(e.codeFileGuid);
       });
-      glU?.commit();
+      Fullscreen?.commit();
     });
   }, [t, e]);
 }
@@ -202,13 +202,13 @@ export function $$U6(e) {
   }, [t, r, _]);
   let b = useCallback(e => {
     r(t.filter(t => !$$D8(t, e.nodeGuid)));
-    Hq.system("clean-up-attachments", () => {
+    AIScopeHandler.system("clean-up-attachments", () => {
       let t = getSingletonSceneGraph().get(e.nodeGuid);
       t && t.removeSelfAndChildren();
       "FIGMA_NODE" === e.type && e.codeFiles?.forEach(e => {
-        glU?.deleteCodeFile(e.codeFileGuid);
+        Fullscreen?.deleteCodeFile(e.codeFileGuid);
       });
-      glU?.commit();
+      Fullscreen?.commit();
     });
   }, [r, t]);
   let A = useCallback(() => {
@@ -291,7 +291,7 @@ function B(e) {
 }
 export function $$G1(e) {
   if (!e) return null;
-  let t = _G(new Point(e.size.x, e.size.y), e.guid, !0, tvY.TRANSPARENT);
+  let t = _G(new Point(e.size.x, e.size.y), e.guid, !0, BackgroundPattern.TRANSPARENT);
   return t ? Pv(t.pixels, t.pixelSize) : null;
 }
 export function $$V4(e) {

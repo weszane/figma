@@ -12,7 +12,7 @@ import { IT } from "../figma_app/566371";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
-import { $O } from "../905/156213";
+import { showModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { z5 } from "../905/713722";
 import { TA } from "../905/372672";
@@ -21,7 +21,7 @@ import { cD } from "../figma_app/598018";
 import { fJ } from "../figma_app/616107";
 import { Ib } from "../905/129884";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { RN, In, dq } from "../figma_app/967873";
 import { jE } from "../figma_app/639088";
@@ -29,7 +29,7 @@ import { TS } from "../figma_app/153399";
 import { cd } from "../figma_app/650460";
 import { $v } from "../figma_app/634656";
 import { dV } from "../1577/337708";
-let I = Ju(function ({
+let I = registerModal(function ({
   paletteUuid: e
 }) {
   let t = useDispatch();
@@ -48,7 +48,7 @@ let I = Ju(function ({
     })
   });
 }, "DeleteColorPaletteConfirmationModal");
-let M = Ju(function ({
+let M = registerModal(function ({
   paletteName: e,
   paletteUuid: t
 }) {
@@ -115,7 +115,7 @@ function L({
         children: [!r && jsxs(Fragment, {
           children: [jsx(K, {
             onClick: () => {
-              o($O({
+              o(showModal({
                 type: dV.type,
                 data: {
                   palette: {
@@ -141,7 +141,7 @@ function L({
             children: jsx(_$$L, {})
           }), jsx(K, {
             onClick: () => {
-              o($O({
+              o(showModal({
                 type: I.type,
                 data: {
                   paletteUuid: e.uuid
@@ -164,7 +164,7 @@ function L({
           variant: "secondary",
           disabled: e.isTeamDefault,
           onClick: () => {
-            o($O({
+            o(showModal({
               type: M.type,
               data: {
                 paletteUuid: e.uuid,
@@ -181,7 +181,7 @@ function L({
     })]
   });
 }
-export let $$B0 = Ju(function ({
+export let $$B0 = registerModal(function ({
   showMakeDefaultButton: e,
   entryPoint: t,
   theme: i,
@@ -222,7 +222,7 @@ export let $$B0 = Ju(function ({
             }), jsx($z, {
               variant: "primary",
               onClick: () => {
-                h($O({
+                h(showModal({
                   type: dV.type,
                   data: {
                     theme: i

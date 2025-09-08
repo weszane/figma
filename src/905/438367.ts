@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { sortByWithOptions } from "../figma_app/656233";
-import { rXF, glU } from "../figma_app/763686";
+import { VariableResolvedDataType, Fullscreen } from "../figma_app/763686";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { Ez } from "../figma_app/766708";
@@ -19,7 +19,7 @@ export function $$y2({
 }) {
   let t = useSelector(e => e.library);
   let i = tS();
-  let o = Rb().filter(e => e.resolvedType === rXF.COLOR).length > 0;
+  let o = Rb().filter(e => e.resolvedType === VariableResolvedDataType.COLOR).length > 0;
   let l = ti(t.local.styles, "FILL").length > 0;
   return useMemo(() => {
     let t = [EU];
@@ -34,7 +34,7 @@ export function $$b0() {
   let e = useSelector(e => e.mirror.appModel.currentPage);
   let [t, i] = useMemo(() => {
     let t = function () {
-      let e = glU.getColorsUsedOnCurrentPage();
+      let e = Fullscreen.getColorsUsedOnCurrentPage();
       return e.length > 0 ? function (e) {
         if (null == e.styleSetType) return null;
         let t = {
@@ -62,7 +62,7 @@ export function $$v3() {
   let i = useMemo(() => [...t].sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1), [t]);
   let a = yp();
   let o = useMemo(() => d()(a, e => e.node_id), [a]);
-  let l = useMemo(() => i.filter(e => e.resolvedType === rXF.COLOR).map(e => ({
+  let l = useMemo(() => i.filter(e => e.resolvedType === VariableResolvedDataType.COLOR).map(e => ({
     type: "variable",
     variable: e,
     variableCollection: o[e.variableSetId]
@@ -92,7 +92,7 @@ export function $$I1(e) {
     if (!i || !t) return resourceUtils.loaded([]);
     let e = resourceUtils.all([r, a]).transform(([e, t]) => {
       let i = d()(t, e => e.node_id);
-      return [...e].filter(e => e.resolvedType === rXF.COLOR).sort((e, t) => Ez(e.sortPosition, t.sortPosition)).map(e => ({
+      return [...e].filter(e => e.resolvedType === VariableResolvedDataType.COLOR).sort((e, t) => Ez(e.sortPosition, t.sortPosition)).map(e => ({
         type: "variable",
         variable: e,
         variableCollection: i[e.variableSetId]

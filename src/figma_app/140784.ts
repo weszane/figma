@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect } from "react";
-import { MoD, Vzr } from "../figma_app/763686";
+import { ImageExportType, Thumbnail } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { c6 } from "../figma_app/659187";
@@ -87,8 +87,8 @@ export function $$_1({
         state: "generating",
         version: t
       });
-      await Jr().loadAllImagesUnder([e], MoD.NON_ANIMATED_ONLY, "handoff.assetPreview");
-      let [n, a] = Vzr.generateThumbnailForNode(e, width, height, r, {
+      await Jr().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, "handoff.assetPreview");
+      let [n, a] = Thumbnail.generateThumbnailForNode(e, width, height, r, {
         forceContentsOnly: !0
       });
       a.length > 0 && (y?.state === "valid" && URL.revokeObjectURL(y.url), T({

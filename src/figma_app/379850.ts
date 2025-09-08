@@ -1,4 +1,4 @@
-import { w3z } from "../figma_app/763686";
+import { HandoffBindingsCpp } from "../figma_app/763686";
 import { aH } from "../figma_app/273493";
 import { debugState } from "../905/407919";
 import { Ym } from "../figma_app/806075";
@@ -34,7 +34,7 @@ export function $$h1(e, t, r) {
     let r = e.get(t)?.backgroundColor;
     return r ? F.format(r) : null;
   }(e, r);
-  let s = w3z.backgroundColorOverride(t);
+  let s = HandoffBindingsCpp.backgroundColorOverride(t);
   return s ? F.format(aH(s)) : a;
 }
 export const Ep = $$_0;

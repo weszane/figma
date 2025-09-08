@@ -3,9 +3,9 @@ import { HP } from "../905/482149";
 import { sS, i9 } from "../905/776065";
 import { gS } from "../905/866195";
 import { w as _$$w } from "../905/847865";
-import { glU, X3B } from "../figma_app/763686";
-import { nc } from "../905/189185";
-import { sH, Hr } from "../905/871411";
+import { Fullscreen, PrototypingTsApi } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
+import { parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -130,11 +130,11 @@ export function $$R1(e) {
   return null !== e;
 }
 let L = (e, t) => "BACK" === t ? "BACK" : "CLOSE" === t ? "CLOSE" : "OPEN_POPUP" === e ? "OVERLAY" : e;
-let P = nc.ai("link-new-interaction", e => {
+let P = scopeAwareFunction.ai("link-new-interaction", e => {
   let t = L(e.navigationType, "");
   let r = e.buttonID;
-  let n = sH(r);
-  if (null === n || n === Hr) {
+  let n = parseSessionLocalID(r);
+  if (null === n || n === defaultSessionLocalID) {
     trackEventAnalytics("prototype_interaction_added", {
       magicLinkGenerated: !0,
       magicLinkInteractionRemoved: !0,
@@ -175,11 +175,11 @@ let P = nc.ai("link-new-interaction", e => {
       };
     }
   }
-  let d = sH(s);
+  let d = parseSessionLocalID(s);
   let p = {};
   let m = e.navigationType;
   if ("BACK" === m) p.connectionType = "BACK";else if ("CLOSE" === m) p.connectionType = "CLOSE";else {
-    if (null === d || d === Hr || null === s) {
+    if (null === d || d === defaultSessionLocalID || null === s) {
       trackEventAnalytics("prototype_interaction_added", {
         magicLinkGenerated: !0,
         sourceTlfIds: JSON.stringify([a.guid]),
@@ -206,9 +206,9 @@ let P = nc.ai("link-new-interaction", e => {
     p.transitionType = "INSTANT_TRANSITION";
     "NAVIGATE" === m ? (p.connectionType = "INTERNAL_NODE", (i?.type === "SYMBOL" || i?.type === "INSTANCE") && (e?.type === "SYMBOL" || e?.type === "INSTANCE") ? p.navigationType = "SWAP_STATE" : p.navigationType = "NAVIGATE", a?.overlayBackground.type !== "NONE" && (p.navigationType = "SWAP")) : "OPEN_POPUP" === m && (p.connectionType = "INTERNAL_NODE", p.navigationType = "OVERLAY");
   }
-  let g = glU.generateUniqueID();
+  let g = Fullscreen.generateUniqueID();
   if (!g) return;
-  let f = sH(g);
+  let f = parseSessionLocalID(g);
   if (!f) return;
   let E = {
     id: f,
@@ -336,7 +336,7 @@ export function $$B2() {
 }
 export function $$G4(e) {
   if (!$$B2() || 0 === e.length) return !1;
-  let t = X3B.getMagicLinkSelectionInfo();
+  let t = PrototypingTsApi.getMagicLinkSelectionInfo();
   return !t.onlyNonTopLevelNodesSelected && !(t.topLevelFrameIds.length > 10) && !(t.topLevelFrameIds.length < 2);
 }
 export function $$V10(e, t, r) {

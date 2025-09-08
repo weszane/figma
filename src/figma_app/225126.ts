@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { rXF, mHF } from "../figma_app/763686";
+import { VariableResolvedDataType, LinterCppBindings } from "../figma_app/763686";
 import { sH } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { _W } from "../figma_app/191804";
@@ -28,9 +28,9 @@ export function $$b2(e) {
 }
 export function $$T4(e) {
   switch (e) {
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       return "color";
-    case rXF.FLOAT:
+    case VariableResolvedDataType.FLOAT:
       return "float";
     default:
       return;
@@ -38,9 +38,9 @@ export function $$T4(e) {
 }
 export function $$I3(e) {
   switch (e) {
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       return "COLOR";
-    case rXF.FLOAT:
+    case VariableResolvedDataType.FLOAT:
       return "FLOAT";
     default:
       return;
@@ -88,7 +88,7 @@ let $$A0 = _$$n(async (e, t) => {
   let r = performance.now();
   let n = new Map();
   let a = new Map();
-  getFeatureFlags().aip_flower_garden_shadow_reranker && e && (t.suggestionType !== rXF.FLOAT || getFeatureFlags().aip_flower_garden_shadow_number_reranker) && (n = mHF?.getVariableConsumptionForDocument() ?? new Map(), getFeatureFlags().aip_flower_garden_subtree_variable_count_feat && (await E(), a = mHF?.getVariableConsumptionForHighestNodeContainer(e) ?? new Map(), await E()));
+  getFeatureFlags().aip_flower_garden_shadow_reranker && e && (t.suggestionType !== VariableResolvedDataType.FLOAT || getFeatureFlags().aip_flower_garden_shadow_number_reranker) && (n = LinterCppBindings?.getVariableConsumptionForDocument() ?? new Map(), getFeatureFlags().aip_flower_garden_subtree_variable_count_feat && (await E(), a = LinterCppBindings?.getVariableConsumptionForHighestNodeContainer(e) ?? new Map(), await E()));
   return {
     data: {
       variableConsumptionInDocument: n,
@@ -103,7 +103,7 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
     data: [],
     timing: 0
   };
-  if (!getFeatureFlags().aip_flower_garden_shadow_reranker || u === rXF.FLOAT && !getFeatureFlags().aip_flower_garden_shadow_number_reranker) return b;
+  if (!getFeatureFlags().aip_flower_garden_shadow_reranker || u === VariableResolvedDataType.FLOAT && !getFeatureFlags().aip_flower_garden_shadow_number_reranker) return b;
   let I = $$T4(u);
   if (!I) return b;
   let S = r ?? {};
@@ -128,10 +128,10 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
     if (!d) continue;
     let _ = function (e) {
       if (e && "MIXED" !== e) {
-        if (e.resolvedType === rXF.COLOR) return {
+        if (e.resolvedType === VariableResolvedDataType.COLOR) return {
           color_value: e.value
         };
-        if (e.resolvedType === rXF.FLOAT) return {
+        if (e.resolvedType === VariableResolvedDataType.FLOAT) return {
           number_value: e.value
         };
       }

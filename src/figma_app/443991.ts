@@ -1,4 +1,4 @@
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { NC } from "../905/17179";
 import { Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
@@ -6,7 +6,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../905/395917";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { yJ as _$$yJ2 } from "../figma_app/24841";
@@ -82,7 +82,7 @@ export async function $$T2(e, t, r) {
   }
 }
 let $$I1 = NC("AVATAR_EDITOR_RESET");
-let S = nF((e, t) => {
+let S = createOptimistThunk((e, t) => {
   if (t.entityType === ck.CURRENT_USER) XHR.put("/api/user", {
     img_url: t.smallUrl,
     img_url_500_500: t.largeUrl
@@ -90,7 +90,7 @@ let S = nF((e, t) => {
     data: t
   }) {
     let r = t.meta;
-    r?.img_url && h3O?.setImgUrl(r.img_url);
+    r?.img_url && Multiplayer?.setImgUrl(r.img_url);
     e.dispatch(_$$yJ2({
       user: r,
       userInitiated: !1
@@ -161,7 +161,7 @@ let S = nF((e, t) => {
   }
 });
 let $$v0 = NC("AVATAR_EDITOR_UPLOAD");
-let $$A5 = nF((e, t) => {
+let $$A5 = createOptimistThunk((e, t) => {
   Promise.all([Q("profile", t.small, t.contentType), Q("profile", t.large, t.contentType)]).then(function (r) {
     let n = r[0].data.meta.url;
     let i = r[1].data.meta.url;

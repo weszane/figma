@@ -2,7 +2,7 @@ import { K } from "../905/621139";
 import { O4, By } from "../905/777187";
 import { getI18nString } from "../905/303541";
 import { LS } from "../figma_app/975811";
-import { gl, _W } from "../905/216495";
+import { isInvalidValue, valueOrFallback } from "../905/216495";
 import { zk } from "../figma_app/198712";
 export class $$d0 extends K {
   constructor(e = {}) {
@@ -11,12 +11,12 @@ export class $$d0 extends K {
     this.allowedUnits = "";
   }
   format(e) {
-    return gl(e) ? getI18nString("fullscreen.mixed") : this.formatUnmixed(e);
+    return isInvalidValue(e) ? getI18nString("fullscreen.mixed") : this.formatUnmixed(e);
   }
   parse(e, t) {
     e = this.normalize(e);
     this.allowedUnits && (e = e.replace(RegExp(this.allowedUnits, "g"), ""));
-    let i = O4(e, _W(t, void 0));
+    let i = O4(e, valueOrFallback(t, void 0));
     if (i.error) throw new LS("Could not parse input", i.error.type);
     return i.value;
   }
@@ -27,7 +27,7 @@ export class $$d0 extends K {
     event: a
   }) {
     if (t instanceof LS) {
-      if (t.errorType === By.EVAL_NO_CURRENT_VALUE && gl(i)) {
+      if (t.errorType === By.EVAL_NO_CURRENT_VALUE && isInvalidValue(i)) {
         let {
           mixedMathHandler
         } = this.opts;

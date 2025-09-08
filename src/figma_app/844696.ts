@@ -12,7 +12,7 @@ import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { ro } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { Z, m as _$$m } from "../905/423399";
 import { qg, r5, GZ } from "../figma_app/436286";
@@ -25,7 +25,7 @@ let x = c$;
 function N(e) {
   let t = X7();
   let r = jsx($$C0, {
-    value: E7(e.property),
+    value: normalizeValue(e.property),
     defaultBlendMode: "NORMAL"
   });
   return jsx(l6, {
@@ -35,7 +35,7 @@ function N(e) {
       props: i
     }) => {
       let s = p6;
-      "NORMAL" !== E7(i.property) && (s = DU);
+      "NORMAL" !== normalizeValue(i.property) && (s = DU);
       return t ? jsx(K, {
         onClick: e,
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
@@ -147,7 +147,7 @@ function P({
         },
         ...getTriggerProps(),
         children: jsx($$C0, {
-          value: E7(e),
+          value: normalizeValue(e),
           defaultBlendMode: "NORMAL"
         })
       }), jsx(mc, {

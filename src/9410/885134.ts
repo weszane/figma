@@ -1,6 +1,6 @@
 import { _1, JF, RP } from "../figma_app/257655";
-import { XJn, zuo } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { FirstDraftHelpers, AnimationBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { hV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -15,7 +15,7 @@ import { l9 } from "../9410/234038";
 import { P as _$$P, t as _$$t } from "../9410/636108";
 import { Dk, lH } from "../figma_app/18582";
 import { Jv, oR, gU } from "../figma_app/234690";
-import { uW } from "../905/426868";
+import { loadPluginFont } from "../905/426868";
 import { analyticsEventManager } from "../905/449184";
 import { _F } from "../figma_app/193952";
 import { o$, nV, UO } from "../figma_app/857146";
@@ -24,7 +24,7 @@ import { Vx } from "../9410/141954";
 import { tm } from "../905/261789";
 import { uP, rO, jR, k5 } from "../figma_app/541950";
 function j(e, t, i) {
-  let r = XJn.getCustomizableVariableName(i.guid, e);
+  let r = FirstDraftHelpers.getCustomizableVariableName(i.guid, e);
   if (!r) return;
   let a = tm(r);
   if (a) return t[a];
@@ -36,7 +36,7 @@ let I = {
   topRightRadius: "rectangleTopRightCornerRadius"
 };
 function k(e, t) {
-  l7.ai("first-draft-override-radius", () => {
+  permissionScopeHandler.ai("first-draft-override-radius", () => {
     e.setBoundVariable(t, null);
   });
 }
@@ -48,19 +48,19 @@ let N = {
   paddingRight: "stackRightPadding"
 };
 function A(e, t) {
-  l7.ai("first-draft-override-spacing", () => {
+  permissionScopeHandler.ai("first-draft-override-spacing", () => {
     e.setBoundVariable(t, null);
   });
 }
 function O(e) {
-  l7.ai("first-draft-set-font-name", () => {
+  permissionScopeHandler.ai("first-draft-set-font-name", () => {
     e.setRangeBoundVariable(0, e.characters.length, "fontFamily", null);
     e.setRangeBoundVariable(0, e.characters.length, "fontStyle", null);
     e.setRangeBoundVariable(0, e.characters.length, "fontWeight", null);
   });
 }
 async function L(e, t, i) {
-  let r = XJn.inheritedTextStyleGuid(e.guid);
+  let r = FirstDraftHelpers.inheritedTextStyleGuid(e.guid);
   if (null === r) {
     O(e);
     return;
@@ -73,7 +73,7 @@ async function L(e, t, i) {
   if (!("fontFamily" in s.boundVariablesForStyle)) return;
   let l = s.boundVariablesForStyle.fontFamily;
   let d = function (e, t, i) {
-    let r = XJn.getCustomizableVariableName(t.guid, e);
+    let r = FirstDraftHelpers.getCustomizableVariableName(t.guid, e);
     if (!r) return null;
     let a = tm(r);
     return a ? i[a] ?? null : null;
@@ -83,8 +83,8 @@ async function L(e, t, i) {
     return;
   }
   try {
-    await uW(d.fontName);
-    l7.ai("first-draft-set-font-name", () => {
+    await loadPluginFont(d.fontName);
+    permissionScopeHandler.ai("first-draft-set-font-name", () => {
       e.fontName = d.fontName;
       d.letterSpacing && (e.letterSpacing = d.letterSpacing);
     });
@@ -128,7 +128,7 @@ async function D(e) {
         A(e, i);
         continue;
       }
-      l7.ai("first-draft-override-spacing", () => {
+      permissionScopeHandler.ai("first-draft-override-spacing", () => {
         let t = e[r];
         let i = o$(t);
         e[r] = nV({
@@ -151,7 +151,7 @@ async function D(e) {
         k(e, r);
         continue;
       }
-      l7.ai("first-draft-override-radius", () => {
+      permissionScopeHandler.ai("first-draft-override-radius", () => {
         let i = UO(e, e[n], o, 1);
         e[n] = i;
         t[s.id] = i;
@@ -166,7 +166,7 @@ async function D(e) {
     getNewColor: (e, t) => {
       let r = t.varId && theme ? function (e, t, i) {
         if (!t.variableMaps) return;
-        let r = XJn.getCustomizableVariableName(i.guid, e);
+        let r = FirstDraftHelpers.getCustomizableVariableName(i.guid, e);
         if (!r) return;
         let a = tm(r);
         if (a) return t.variableMaps.colorVariableMap[a];
@@ -182,7 +182,7 @@ async function D(e) {
       modeChanged: d,
       role: Dk(node)
     }
-  }, l7.ai("first-draft-override-paints", () => {
+  }, permissionScopeHandler.ai("first-draft-override-paints", () => {
     oR(t);
   }), node.childCount) {
     let e = gU(node.fills, l ? void 0 : colorOptions.parentFillColor);
@@ -256,7 +256,7 @@ async function U(e, t, i) {
     ignoreOpacity: !0
   });
   let n = rO(e, r);
-  l7.ai("first-draft-override-paints", () => {
+  permissionScopeHandler.ai("first-draft-override-paints", () => {
     let i = t.darkMode ? lH.DARK : lH.LIGHT;
     i !== _$$P(e) && _$$t(e, i);
     let r = tK(t.brandColor);
@@ -267,7 +267,7 @@ async function U(e, t, i) {
       });
     }
   });
-  l7.ai("first-draft-remove-fill", () => {
+  permissionScopeHandler.ai("first-draft-remove-fill", () => {
     e.fills = [];
   });
   await jR(e, k5({
@@ -279,9 +279,9 @@ async function U(e, t, i) {
 async function G(e, t, i) {
   let r = {};
   for (let n of e) {
-    if (l7.ai("first-draft-set-plugin-data", () => {
+    if (permissionScopeHandler.ai("first-draft-set-plugin-data", () => {
       if (i.frameName && n.name !== i.frameName && (n.name = i.frameName), t && n.setSharedPluginData(SV, "jsx", t), i.theme && n.setSharedPluginData(SV, "theme", JSON.stringify(i.theme)), i.sharedPluginData) for (let [e, t] of Object.entries(i.sharedPluginData)) n.setSharedPluginData(SV, e, t);
-    }), i.addWireframeBorder && l7.ai("first-draft-set-wireframe-border", () => {
+    }), i.addWireframeBorder && permissionScopeHandler.ai("first-draft-set-wireframe-border", () => {
       _Y(n);
     }), jZ(n, i.dsKitKey, i.clientLifecycleId), i.directGeneration && getFeatureFlags().first_draft_direct_gen_layout_heuristics ? WY(n) : i.autoFillParent && n && tG(n), await M(n, r, i.theme), i.themeProperties) {
       if (!i.deviceType) throw Error("deviceType must be provided if themeProperties is provided");
@@ -308,7 +308,7 @@ export async function $$K0({
   if (x.skipInvisibleInstanceChildren = !0, !p.prevNodeId) {
     let i = await B(t, g, d.getShareJsxComponentInfoByJSXName());
     if (!i) throw Error("Could not find new node");
-    l7.ai("first-draft-insert-jsx", () => {
+    permissionScopeHandler.ai("first-draft-insert-jsx", () => {
       if (p.parentNodeId) {
         let e = _.get(p.parentNodeId);
         if (!e) {
@@ -365,7 +365,7 @@ export async function $$K0({
     let r = [];
     for (let e of (hV(t, e => {
       "TEXT" === e.type && r.push(e);
-    }), r)) i.has(e.guid) || (us(e) ? (zuo.cancelAllAnimationsForNode(e.guid), i.add(e.guid)) : zuo.isAnimating(e.guid) || e.setOpacityWithAnimation(1, _E.forOpacityOscillation(45, .25, .8, 60), "first-draft-text-layer-opacity"));
+    }), r)) i.has(e.guid) || (us(e) ? (AnimationBindings.cancelAllAnimationsForNode(e.guid), i.add(e.guid)) : AnimationBindings.isAnimating(e.guid) || e.setOpacityWithAnimation(1, _E.forOpacityOscillation(45, .25, .8, 60), "first-draft-text-layer-opacity"));
   }(0, C, p.doneTextLayerIds);
   C.guid !== p.prevNodeId && (await U_(C, p));
   return {

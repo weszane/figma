@@ -7,16 +7,16 @@ import { o as _$$o } from "../905/821217";
 import { e as _$$e } from "../905/149844";
 import { r as _$$r } from "../905/857502";
 import { O as _$$O } from "../905/487602";
-import { glU, X3B } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { Fullscreen, PrototypingTsApi } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import $$m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { rf, Pt, AF, iQ, v_ } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/11182";
-import { Y5 } from "../figma_app/455680";
-import { E7, _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { normalizeValue, valueOrFallback } from "../905/216495";
 import { lJ } from "../905/275640";
 import { Cq } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
@@ -62,15 +62,15 @@ let B = function ({
   let p = uQ();
   let d = useRef(p);
   let c = useCallback(() => {
-    l7.user("submit-prototype-starting-point-description", () => {
-      d.current && glU.updatePrototypeStartingPointDescription(d.current, s.current);
+    permissionScopeHandler.user("submit-prototype-starting-point-description", () => {
+      d.current && Fullscreen.updatePrototypeStartingPointDescription(d.current, s.current);
     });
     e();
   }, [e]);
   useEffect(() => c, [c]);
   let u = useCallback(() => {
-    l7.user("blur-prototype-starting-point-description", () => {
-      d.current && glU.updatePrototypeStartingPointDescription(d.current, s.current);
+    permissionScopeHandler.user("blur-prototype-starting-point-description", () => {
+      d.current && Fullscreen.updatePrototypeStartingPointDescription(d.current, s.current);
     });
   }, []);
   useEffect(() => (window.addEventListener("blur", u), window.addEventListener("focus", u), () => {
@@ -112,10 +112,10 @@ export function $$F1(t) {
   let [e, o] = lJ("prototypeStartingPoint");
   let m = !!selectWithShallowEqual(L);
   let [h, R] = useState(!1);
-  let [S, C] = useState(E7(e)?.name || "");
+  let [S, C] = useState(normalizeValue(e)?.name || "");
   let [D, K] = useState(!1);
   useEffect(() => {
-    let t = E7(e)?.name || "";
+    let t = normalizeValue(e)?.name || "";
     t !== S && (C(t), !S && D && (K(!1), R(!0)));
   }, [e, S, D]);
   let [M, F] = useState(!1);
@@ -134,8 +134,8 @@ export function $$F1(t) {
   useEffect(() => {
     J();
   }, [J, H]);
-  let Z = nc.user("delete-prototype-starting-points", () => {
-    H && glU.deletePrototypeStartingPoints(H);
+  let Z = scopeAwareFunction.user("delete-prototype-starting-points", () => {
+    H && Fullscreen.deletePrototypeStartingPoints(H);
   });
   let W = rf(Pt(t.recordingKey, "minusButton"), "click", t => {
     Z();
@@ -143,17 +143,17 @@ export function $$F1(t) {
   let $ = rf(Pt(t.recordingKey, "nameLabel"), "click", t => {
     R(!0);
   });
-  useEffect(() => (Y5.fromFullscreen.on("focusPrototypeStartingPointPanelToEditName", $), () => {
-    Y5.fromFullscreen.removeListener("focusPrototypeStartingPointPanelToEditName", $);
+  useEffect(() => (fullscreenValue.fromFullscreen.on("focusPrototypeStartingPointPanelToEditName", $), () => {
+    fullscreenValue.fromFullscreen.removeListener("focusPrototypeStartingPointPanelToEditName", $);
   }), [$]);
   let tt = rf(t.recordingKey, "click", t => {
     K(!0);
-    l7.user("add-prototype-starting-point", () => {
-      Y5.triggerAction("add-prototype-starting-point");
+    permissionScopeHandler.user("add-prototype-starting-point", () => {
+      fullscreenValue.triggerAction("add-prototype-starting-point");
     });
   });
   let te = H && H.length > 1;
-  let to = _W(e, {});
+  let to = valueOrFallback(e, {});
   let tn = jsx(Fragment, {
     children: h ? jsx($$z0, {
       defaultValue: S,
@@ -161,9 +161,9 @@ export function $$F1(t) {
         R(!1);
         t ? o({
           name: t,
-          description: E7(e) ? E7(e)?.description : "",
-          position: E7(e) ? E7(e)?.position : ""
-        }) : C(E7(e)?.name || "");
+          description: normalizeValue(e) ? normalizeValue(e)?.description : "",
+          position: normalizeValue(e) ? normalizeValue(e)?.position : ""
+        }) : C(normalizeValue(e)?.name || "");
       },
       recordingKey: Pt(t, "startingPointNameInput")
     }) : jsx(JU, {
@@ -201,7 +201,7 @@ export function $$F1(t) {
         children: !te && jsx(_$$K, {
           disabled: !Y,
           onClick: () => function (t) {
-            let e = X3B.currentDeviceType();
+            let e = PrototypingTsApi.currentDeviceType();
             let o = vp({
               scalingInfo: {
                 viewportScalingMode: qb(e),
@@ -287,7 +287,7 @@ export function $$z0(t) {
   let r = AF(t.recordingKey, "change", t => {
     o(t.target.value);
   });
-  let a = iQ(t.recordingKey, "blur", nc.user("rename-starting-point", () => t.submitRename(e)));
+  let a = iQ(t.recordingKey, "blur", scopeAwareFunction.user("rename-starting-point", () => t.submitRename(e)));
   let l = v_(t.recordingKey, "keydown", o => {
     "Enter" === o.key ? t.submitRename(e) : "Escape" === o.key ? t.submitRename("") : t.shouldListenForTabKeyboardEvent && o.keyCode === Uz.TAB && (o.preventDefault(), t.submitRename(e), t.onTabKeyboardEvent?.(o.shiftKey));
   });

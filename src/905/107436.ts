@@ -1,5 +1,5 @@
 import { useMemo, useState, useRef } from "react";
-import { NVY } from "../figma_app/763686";
+import { ColorFormatEnum } from "../figma_app/763686";
 import { oB, qN } from "../figma_app/273493";
 import { useLocalStorageSync } from "../905/657224";
 import { sN } from "../figma_app/191804";
@@ -173,12 +173,12 @@ export function $$E6(e, t, i, o) {
       originalTop: 0,
       originalLeft: 0
     };
-    let e = i === NVY.HSL ? oB(Q) : qN(Q);
+    let e = i === ColorFormatEnum.HSL ? oB(Q) : qN(Q);
     let n = e.s;
-    let s = i === NVY.HSL ? e.l : e.v;
-    let o = i === NVY.HSL ? oB(foregroundColor) : qN(foregroundColor);
+    let s = i === ColorFormatEnum.HSL ? e.l : e.v;
+    let o = i === ColorFormatEnum.HSL ? oB(foregroundColor) : qN(foregroundColor);
     let l = o.s;
-    let d = i === NVY.HSL ? o.l : o.v;
+    let d = i === ColorFormatEnum.HSL ? o.l : o.v;
     let c = f / 2 + _;
     let u = ZT / 2 - $7;
     return {

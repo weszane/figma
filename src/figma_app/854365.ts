@@ -11,10 +11,10 @@ import { o as _$$o } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
-import { TN } from "../figma_app/831101";
-import { Ju } from "../905/102752";
+import { UpsellSourceType } from "../figma_app/831101";
+import { registerModal } from "../905/102752";
 import { J as _$$J } from "../905/273120";
-let $$y0 = Ju($$T1);
+let $$y0 = registerModal($$T1);
 let b = buildUploadUrl("6d9d43af72441d7be4344d8d679d852139ebfaf7");
 export function $$T1(e) {
   let t = useDispatch();
@@ -65,7 +65,7 @@ export function $$T1(e) {
                 t(WX({
                   teamId: team.id,
                   openInNewTab: !0,
-                  entryPoint: TN.SITES_MODAL
+                  entryPoint: UpsellSourceType.SITES_MODAL
                 }));
                 onClose();
               },

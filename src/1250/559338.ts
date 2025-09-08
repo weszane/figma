@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { K } from "../905/443068";
-import { m1T, CeL, Ez5, hMR } from "../figma_app/763686";
+import { LayoutTabType, FullscreenPerfMetrics, AppStateTsApi, CorePerfInfo } from "../figma_app/763686";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
@@ -18,7 +18,7 @@ import { Wy, xk, P3, Zz, Tm, Vu, eE, pl, im } from "../figma_app/952446";
 import { Wh } from "../figma_app/615482";
 import { FEditorType } from "../figma_app/53721";
 import { $w } from "../figma_app/453508";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { gG } from "../905/684180";
 import { A as _$$A } from "../6828/7452";
 import { A as _$$A2 } from "../5724/965092";
@@ -35,7 +35,7 @@ function O(e) {
   let l;
   let d = useSelector(e => !e.openFile?.canEdit);
   let c = TY();
-  let _ = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
+  let _ = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
   let m = e.warningLevel;
   m === Wy.WARNING ? (l = renderI18nText("fullscreen.pages_panel.memory_usage_try_removing_unneeded_content"), c ? l = renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_warning_edit_access_needed") : d && _ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = renderI18nText("fullscreen.pages_panel.memory_usage_warning_edit_view_version_history"))) : m === Wy.ERROR ? (l = renderI18nText("fullscreen.pages_panel.memory_usage_to_avoid_losing_file_access"), c ? l = renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_error_contact_file_owner") : d && _ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = renderI18nText("fullscreen.pages_panel.memory_usage_error_edit_view_version_history"))) : m === Wy.SAFE && e.hasHadUnsafeWarningLevel && (l = renderI18nText("fullscreen.pages_panel.memory_usage_this_file_has_enough_memory"), c && (l = renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_low_content")));
   let f = l;
@@ -125,10 +125,10 @@ export function $$P1(e) {
       let n = P3();
       trackEventAnalytics("toggle_manage_memory_modal", {
         memoryUsedPercent: n,
-        totalLayers: CeL?.getFileNodeCount(),
+        totalLayers: FullscreenPerfMetrics?.getFileNodeCount(),
         pageContentPct: n - Zz()
       });
-      e ? t(Ce()) : t(to({
+      e ? t(hideModal()) : t(showModalHandler({
         type: gG,
         data: {
           markModalClosed: () => {}
@@ -136,12 +136,12 @@ export function $$P1(e) {
       }));
     }, [t, e]);
     let a = useCallback(() => {
-      e && t(Ce());
+      e && t(hideModal());
     }, [t, e]);
     let o = TY();
     let l = useRef(!1);
     useEffect(() => {
-      !o || e || l.current || (l.current = !0, n(), Ez5?.uiState().showMemoryUsage.set(!0));
+      !o || e || l.current || (l.current = !0, n(), AppStateTsApi?.uiState().showMemoryUsage.set(!0));
     }, [o, e, n]);
     return {
       toggleManageMemoryModal: n,
@@ -214,7 +214,7 @@ export function $$P1(e) {
     useEffect(() => {
       if (n) {
         let e = () => {
-          "hidden" === document.visibilityState && (Ez5.uiState().showMemoryUsage.set(!1), document.removeEventListener("visibilitychange", e));
+          "hidden" === document.visibilityState && (AppStateTsApi.uiState().showMemoryUsage.set(!1), document.removeEventListener("visibilitychange", e));
         };
         document.addEventListener("visibilitychange", e);
         return () => {
@@ -231,8 +231,8 @@ export function $$P1(e) {
   }) {
     useEffect(() => {
       let t = e !== Wy.SAFE;
-      Ez5.uiState().showInFileMemoryPercentage.set(t);
-      t && Ez5.uiState().showMemoryUsage.set(!0);
+      AppStateTsApi.uiState().showInFileMemoryPercentage.set(t);
+      t && AppStateTsApi.uiState().showMemoryUsage.set(!0);
     }, [e]);
   })({
     warningLevel: m
@@ -261,8 +261,8 @@ function D(e) {
       isRecoveryMode: !1
     };
     trackEventAnalytics("exit_recovery_mode", {
-      currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
-      maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
+      currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
+      maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
       fileKey: e.fileKey
     });
     e.dispatch(sf(n));
@@ -293,12 +293,12 @@ function D(e) {
             "aria-label": getI18nString("common.close"),
             onClick: () => {
               trackEventAnalytics("manage_memory_modal_closed", {
-                currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
-                maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
+                currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
+                maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
                 fileKey: e.fileKey
               });
-              Ez5.uiState().showMemoryUsage.set(!1);
-              Ez5.uiState().showInFileMemoryPercentage.set(!1);
+              AppStateTsApi.uiState().showMemoryUsage.set(!1);
+              AppStateTsApi.uiState().showInFileMemoryPercentage.set(!1);
               e.closeManageMemoryModal();
               e.setRecoveryMemDisplay(!1);
             },

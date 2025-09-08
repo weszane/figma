@@ -1,4 +1,4 @@
-import { OR7 } from "../figma_app/763686";
+import { StrokeAlignment } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 export let $$s0 = 12;
@@ -11,7 +11,7 @@ export function $$l2(e, t, i, o, d, c = 0) {
   let p = t.canvasSpaceToViewportSpace(e);
   let m = Math.sqrt(392);
   p.x += c;
-  i.renderFillAndStrokeRoundedRect(new _$$r(new M(p.x, p.y - m / 2 - 4), new M(m, m)), 3, .7853981635, d, o, 0, OR7.INSIDE);
+  i.renderFillAndStrokeRoundedRect(new _$$r(new M(p.x, p.y - m / 2 - 4), new M(m, m)), 3, .7853981635, d, o, 0, StrokeAlignment.INSIDE);
   $$u4(p, i, $$s0, 2, o);
 }
 export function $$d1(e, t, i, n, r, a = 0) {
@@ -23,7 +23,7 @@ export function $$d1(e, t, i, n, r, a = 0) {
 export function $$c5(e, t, i, r, a, o = 0) {
   let l = t.canvasSpaceToViewportSpace(e);
   l.x += o;
-  i.fillAndStrokeCircle(l, $$s0, a, r, 2, OR7.INSIDE);
+  i.fillAndStrokeCircle(l, $$s0, a, r, 2, StrokeAlignment.INSIDE);
   $$u4(l, i, $$s0, 2, r);
 }
 export function $$u4(e, t, i, n, r) {

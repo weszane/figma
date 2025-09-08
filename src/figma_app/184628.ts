@@ -10,8 +10,8 @@ import { R as _$$R } from "../905/256203";
 import { m as _$$m } from "../905/375522";
 import { b as _$$b } from "../905/484176";
 import { V as _$$V } from "../905/802779";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { logInfo } from "../905/714362";
@@ -64,10 +64,10 @@ function $({
     titleTx: jsx(_$$p, {
       fileName: t || "",
       onChange: t => {
-        e && l7.user("edit-code-file-name", () => {
+        e && permissionScopeHandler.user("edit-code-file-name", () => {
           e.setHasBeenManuallyRenamed(!0);
           e.name = t;
-          glU?.commit();
+          Fullscreen?.commit();
         });
       },
       disabled: r || !i,
@@ -157,7 +157,7 @@ export function $$X1({
   let X = useCallback(() => C ? e?.collaborativeSourceCode ?? null : null, [C, e]);
   let q = useMemo(() => C && x ? _$$C(X, W, G) : null, [C, x, X, W, G]);
   let Z = useCallback(t => {
-    x && x.hasNeverBeenEdited() ? (W("Collaborative Text", "Initializing collaborative text"), x.startBatch(), x.createInsertionOp(0, t.length, t, 0), x.endBatch()) : e && (l7.user("edit-code-file-code", () => {
+    x && x.hasNeverBeenEdited() ? (W("Collaborative Text", "Initializing collaborative text"), x.startBatch(), x.createInsertionOp(0, t.length, t, 0), x.endBatch()) : e && (permissionScopeHandler.user("edit-code-file-code", () => {
       e.sourceCode = t;
     }), G());
   }, [e, x, W, G]);

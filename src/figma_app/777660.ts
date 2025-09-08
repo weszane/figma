@@ -1,5 +1,5 @@
-import { NVY } from "../figma_app/763686";
-export let $$n1 = new Set([NVY.HEX]);
+import { ColorFormatEnum } from "../figma_app/763686";
+export let $$n1 = new Set([ColorFormatEnum.HEX]);
 export function $$i0(e, t, r, i) {
   let a = r(e, i);
   return $$n1.has(t) ? {

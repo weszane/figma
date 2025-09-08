@@ -9,8 +9,8 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { H9 } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { Lo, to } from "../905/156213";
-import { Ju, ZU } from "../905/102752";
+import { popModalStack, showModalHandler } from "../905/156213";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { D } from "../6268/819008";
 let f = atom({});
 async function y(e) {
@@ -37,7 +37,7 @@ let _ = () => {
     return s;
   }, [e, t]);
 };
-let b = Ju(function (e) {
+let b = registerModal(function (e) {
   let {
     importNodeGuid
   } = e;
@@ -66,7 +66,7 @@ let b = Ju(function (e) {
   }, [C]);
   let E = hS({
     open: !0,
-    onClose: () => (k(Lo()), !0)
+    onClose: () => (k(popModalStack()), !0)
   });
   return jsx(bL, {
     manager: E,
@@ -110,10 +110,10 @@ let b = Ju(function (e) {
       })]
     })
   });
-}, "FigmakeImportModal", ZU.NO);
+}, "FigmakeImportModal", ModalSupportsBackground.NO);
 export function $$j0() {
   let e = useDispatch();
-  return t => e(to({
+  return t => e(showModalHandler({
     type: b,
     data: {
       importNodeGuid: t

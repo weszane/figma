@@ -1,15 +1,47 @@
-import { createContext, useContext, useMemo } from "react";
-import { D } from "../905/490996";
-let $$a2 = "SKIP_RECORDING";
-let $$s3 = createContext(null);
-export function $$o1() {
-  return !!useContext($$s3);
+import { createContext, useContext, useMemo } from 'react'
+import { D } from '../905/490996'
+
+/**
+ * Constant used to indicate that recording should be skipped
+ * Original name: $$a2
+ */
+const SKIP_RECORDING = 'SKIP_RECORDING'
+
+/**
+ * Context for managing recording state
+ * Original name: $$s3
+ */
+const RecordingContext = createContext<null | ReturnType<typeof D>>(null)
+
+/**
+ * Hook to check if recording is enabled
+ * Original name: $$o1
+ * @returns boolean indicating if recording is active
+ */
+export function useIsRecording(): boolean {
+  return !!useContext(RecordingContext)
 }
-export function $$l0(e, t, i) {
-  let a = (useContext($$s3) || D)(useMemo(() => e, i), t);
-  return e ? a : e;
+
+/**
+ * Hook to handle recording logic with memoization
+ * Original name: $$l0
+ * @param value - The value to be recorded
+ * @param options - Transformation function to apply
+ * @param deps - Dependencies for useMemo
+ * @returns The processed value or original if falsy
+ */
+export function useRecording<T>(
+  value: T,
+  options: any,
+  deps: React.DependencyList,
+): T {
+  const context = useContext(RecordingContext) || D
+  const memoizedValue = useMemo(() => value, deps)
+  const result = context(memoizedValue, options)
+  return value ? result : value
 }
-export const Qv = $$l0;
-export const _c = $$o1;
-export const aH = $$a2;
-export const g5 = $$s3;
+
+export const Qv = useRecording
+export const _c = useIsRecording
+export const aH = SKIP_RECORDING
+export const g5 = RecordingContext

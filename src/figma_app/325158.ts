@@ -8,7 +8,7 @@ import { T as _$$T } from "../905/256551";
 import { R as _$$R } from "../905/649743";
 import { g as _$$g } from "../905/125190";
 import { J } from "../905/614223";
-import { rrT, glU, m1T } from "../figma_app/763686";
+import { NodePropertyCategory, Fullscreen, LayoutTabType } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -17,8 +17,8 @@ import { wv as _$$wv, c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { Y5 } from "../figma_app/455680";
-import { hS, gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue, isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { zk } from "../figma_app/198712";
 import { V } from "../figma_app/144634";
@@ -77,15 +77,15 @@ function U({
   paintIndex: t
 }) {
   let r = () => {
-    Y5.updateAppModel({
+    fullscreenValue.updateAppModel({
       currentSelectedProperty: {
-        type: rrT.FILL,
+        type: NodePropertyCategory.FILL,
         indices: [t]
       }
     });
     let r = e.blendMode || "NORMAL";
     let n = e.opacity || 1;
-    glU?.uploadPaintImage(r, n);
+    Fullscreen?.uploadPaintImage(r, n);
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
@@ -110,12 +110,12 @@ export function $$B2() {
     paintIndex,
     onChange
   } = e;
-  if (t === m1T.RASTER) return jsx(Y, {
+  if (t === LayoutTabType.RASTER) return jsx(Y, {
     paint,
     onChange
   });
   let o = () => {
-    Y5.triggerActionInUserEditScope("crop-image");
+    fullscreenValue.triggerActionInUserEditScope("crop-image");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(Fragment, {
     children: [jsx(U, {
@@ -146,7 +146,7 @@ export function $$G12() {
   return () => {
     t(!e);
     trackEventAnalytics("figjam_image_border_change", {
-      border: hS(e) ? e : "__mixed__"
+      border: isValidValue(e) ? e : "__mixed__"
     });
   };
 }
@@ -239,7 +239,7 @@ function Y({
     u && (u < r && o(u), u > l && d(u));
   }, [r, l, u]);
   let h = () => {
-    Y5.triggerActionInUserEditScope("rotate-image-90-clockwise");
+    fullscreenValue.triggerActionInUserEditScope("rotate-image-90-clockwise");
     c(_$$F.enqueue({
       type: "image-rotated-feedback",
       message: getI18nString("whiteboard.inline_menu.image_rotated_feedback"),
@@ -248,7 +248,7 @@ function Y({
     }));
   };
   let g = () => {
-    Y5.triggerActionInUserEditScope("leave-edit-mode");
+    fullscreenValue.triggerActionInUserEditScope("leave-edit-mode");
   };
   let f = (r, {
     commit: n
@@ -352,7 +352,7 @@ export function $$J9() {
   let r = kl("cornerRadius");
   let n = kl("width");
   let i = kl("height");
-  if (!(!n || !i || gl(e) || gl(t) || gl(n) || gl(i))) return function (e, t, r) {
+  if (!(!n || !i || isInvalidValue(e) || isInvalidValue(t) || isInvalidValue(n) || isInvalidValue(i))) return function (e, t, r) {
     if (t) {
       if (t === r) return "Original";
       for (let [r, n] of $$$0) if (n && .001 > Math.abs(t - n)) {
@@ -361,7 +361,7 @@ export function $$J9() {
       }
       return "Custom";
     }
-  }(!!r && !gl(r) && n === i && r >= n / 2, t, e);
+  }(!!r && !isInvalidValue(r) && n === i && r >= n / 2, t, e);
 }
 export function $$Z8() {
   let e = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
@@ -370,7 +370,7 @@ export function $$Z8() {
 export function $$Q11() {
   let e = $$J9();
   let t = kl("imageOriginalAspectRatio");
-  return gl(t) ? null : r => {
+  return isInvalidValue(t) ? null : r => {
     if (r !== e) {
       let e = function (e, t) {
         switch (e) {
@@ -382,7 +382,7 @@ export function $$Q11() {
             return $$$0.get(e);
         }
       }(r, t);
-      e && Y5.updateSelectionProperties({
+      e && fullscreenValue.updateSelectionProperties({
         imageAspectRatio: e,
         cornerRadius: "Circle" === r ? 65536 : 0
       }, {

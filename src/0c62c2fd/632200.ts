@@ -5,7 +5,7 @@ import n from "classnames";
 import { tM, qM } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { l as _$$l } from "../905/192768";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { Wc } from "../figma_app/482142";
 import { OJ } from "../905/519092";
 import { Dy, v0, hF, pL } from "../905/289198";
@@ -18,7 +18,7 @@ let f = memo(function (e) {
   } = e.modalShown.data;
   let n = e.teams[teamId];
   let f = () => {
-    t(Ce());
+    t(hideModal());
   };
   let g = billingEndDate ? jsxs(Fragment, {
     children: [renderI18nText("confirm_downgrade.team_name_will_be_downgraded_to_our_free_starter_plan", {
@@ -51,7 +51,7 @@ let f = memo(function (e) {
             t(Wc({
               teamId
             }));
-            t(to({
+            t(showModalHandler({
               type: _$$l()
             }));
           },

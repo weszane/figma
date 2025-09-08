@@ -1,12 +1,12 @@
 import { useRef, useMemo, useState, useCallback } from "react";
-import { Hur, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { StickyClusteringCppBindings, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
@@ -45,30 +45,30 @@ export function $$x1() {
     teamId: P || null,
     fileKey: k,
     userId: D || null,
-    trackingSessionId: fF(),
+    trackingSessionId: getTrackingSessionId(),
     fileSeq: M?.toString() || null
   };
   let j = useCallback(e => {
     let r = t.get(e);
-    r?.isAlive && l7.system("remove-cluster-placeholder", () => Hur?.removePlaceholder(e));
+    r?.isAlive && permissionScopeHandler.system("remove-cluster-placeholder", () => StickyClusteringCppBindings?.removePlaceholder(e));
     w.current && (clearInterval(w.current), w.current = void 0);
   }, [w, t]);
   return {
     clusterCanvasSelection: () => {
-      if (!glU) return;
+      if (!Fullscreen) return;
       let n = new PerfTimer(Ux.TIME_TAKEN_TO_COMPLETE, {});
       n.start();
       N(e => !e);
-      let s = glU.getSelectionBounds();
+      let s = Fullscreen.getSelectionBounds();
       let {
         v,
         data,
         characterCount
       } = v.zi(t);
       let u = e.current + ".";
-      let p = l7.system("create-cluster-placeholder", () => {
-        if (!Hur) return;
-        let e = Hur.createPlaceholder(s);
+      let p = permissionScopeHandler.system("create-cluster-placeholder", () => {
+        if (!StickyClusteringCppBindings) return;
+        let e = StickyClusteringCppBindings.createPlaceholder(s);
         _$$i(e, u);
         return e;
       });
@@ -77,7 +77,7 @@ export function $$x1() {
         alwaysPan: !1
       })), w.current = setInterval(() => {
         u.length === e.current.length + 3 ? u = e.current + "." : u += ".";
-        l7.system("update-cluster-placeholder-text", () => _$$i(p, u));
+        permissionScopeHandler.system("update-cluster-placeholder-text", () => _$$i(p, u));
       }, 1e3), Ay.figjam.cluster({
         v,
         data,
@@ -89,7 +89,7 @@ export function $$x1() {
         let u = o?.absoluteRenderBounds;
         let _ = u ? A(u) : s;
         j(p);
-        let [h, m] = l7.user("create-and-place-clusters", () => Hur ? Hur.createAndPlaceClusters(e.clusters, _, d, !1) : [void 0, void 0]);
+        let [h, m] = permissionScopeHandler.user("create-and-place-clusters", () => StickyClusteringCppBindings ? StickyClusteringCppBindings.createAndPlaceClusters(e.clusters, _, d, !1) : [void 0, void 0]);
         Sprig("track", l0);
         N(!1);
         let g = n.stop();
@@ -129,17 +129,17 @@ export function $$N0(e, t = !1) {
   let c = Z("figjam_local_cluster_navigate");
   let u = useCallback(e => {
     let t = r.get(e);
-    t?.isAlive && l7.system("remove-cluster-placeholder", () => Hur?.removePlaceholder(e));
+    t?.isAlive && permissionScopeHandler.system("remove-cluster-placeholder", () => StickyClusteringCppBindings?.removePlaceholder(e));
     d.current && (clearInterval(d.current), d.current = void 0);
   }, [d, r]);
   return {
     cluster: () => {
-      if (!glU) return;
+      if (!Fullscreen) return;
       l(e => !e);
-      let n = glU.getSelectionBounds();
+      let n = Fullscreen.getSelectionBounds();
       let s = e();
-      let o = l7.system("create-cluster-placeholder", () => {
-        if (Hur) return Hur.createPlaceholder(n);
+      let o = permissionScopeHandler.system("create-cluster-placeholder", () => {
+        if (StickyClusteringCppBindings) return StickyClusteringCppBindings.createPlaceholder(n);
       });
       if (!o) return;
       c(QZ({
@@ -152,7 +152,7 @@ export function $$N0(e, t = !1) {
       let _ = d?.absoluteRenderBounds;
       let h = _ ? A(_) : n;
       u(o);
-      l7.system("create-and-place-clusters", () => Hur?.createAndPlaceClusters(s, h, p, t));
+      permissionScopeHandler.system("create-and-place-clusters", () => StickyClusteringCppBindings?.createAndPlaceClusters(s, h, p, t));
       l(!1);
     },
     requestIsPending: o

@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
@@ -11,19 +11,19 @@ import { lk, u3 } from "../figma_app/109538";
 import { B } from "../905/380801";
 import { b as _$$b, A as _$$A } from "../905/723768";
 import { sf } from "../905/929976";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { J7, SN } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
-export let $$v0 = Ju(function (e) {
+export let $$v0 = registerModal(function (e) {
   let {
     plan
   } = e;
   let i = useDispatch();
   let v = () => {
-    i(Ce());
+    i(hideModal());
   };
   let I = hS({
     ...e,
@@ -47,15 +47,15 @@ export let $$v0 = Ju(function (e) {
     children: getI18nString("resource_connection.maximum_connections_modal.disconnect_link_text")
   });
   let x = () => {
-    plan.tier === FPlanNameType.ORG ? i(to({
+    plan.tier === FPlanNameType.ORG ? i(showModalHandler({
       type: lk,
       data: {
         source: B.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS_UPSELL
       }
-    })) : plan.tier === FPlanNameType.PRO && i(to({
+    })) : plan.tier === FPlanNameType.PRO && i(showModalHandler({
       type: u3,
       data: {
-        upsellSource: _$$b2.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS
+        upsellSource: UpsellModalType.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS
       }
     }));
   };

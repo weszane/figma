@@ -1,21 +1,21 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { Ez5, NLJ, glU, rcl } from "../figma_app/763686";
+import { AppStateTsApi, DesignGraphElements, Fullscreen, Command } from "../figma_app/763686";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { yE } from "../905/125333";
 import { V } from "../905/223767";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { q5 } from "../figma_app/516028";
 import { t as _$$t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
 import { TA } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { X$, YY } from "../figma_app/465071";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { PW } from "../figma_app/633080";
 import { ZN } from "../figma_app/630077";
@@ -27,12 +27,12 @@ import { oW, Ai, Hf, Rg, Gn } from "../figma_app/204478";
 import { ko, fT, Ln, UH } from "../figma_app/351862";
 import { Fu } from "../9410/787735";
 export function $$A6() {
-  return ut(Ez5?.figjamState().isShapesSidebarOpen, !1);
+  return getObservableValue(AppStateTsApi?.figjamState().isShapesSidebarOpen, !1);
 }
 export function $$O7() {
   let [e, t] = useAtomValueAndSetter(oh);
   return useCallback(() => {
-    Ez5?.figjamState().isShapesSidebarOpen.set(!0);
+    AppStateTsApi?.figjamState().isShapesSidebarOpen.set(!0);
     t({
       type: "close",
       source: _$$Yg.OpenedShapesSidebar
@@ -53,7 +53,7 @@ export function $$L9() {
     });
     e("");
     t(!1);
-    Ez5?.figjamState().isShapesSidebarOpen.set(!1);
+    AppStateTsApi?.figjamState().isShapesSidebarOpen.set(!1);
   }, [i, n, e, t]);
 }
 export function $$R1() {
@@ -89,7 +89,7 @@ export function $$D4(e, t) {
 }
 export function $$M2(e) {
   let t = useAtomWithSubscription(yE);
-  if (!useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
+  if (!useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
   let i = e.type === PW.COMPONENT ? e.component_key : e.key;
   let r = e.type;
   let l = e.userFacingVersion.toString();
@@ -101,7 +101,7 @@ export function $$P5() {
     if (!t || t.classList.contains("focus-target")) return;
     let i = t.classList.contains(Fu);
     for (; !i && t.parentElement;) i = (t = t.parentElement).classList.contains(Fu);
-    i || glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT_FIGJAM, {});
+    i || Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT_FIGJAM, {});
   }, []);
 }
 export function $$F3({
@@ -111,7 +111,7 @@ export function $$F3({
   return _$$t({
     resource: {},
     clickToInsert_DEPRECATED: !1,
-    onDragStart: () => Y5.triggerActionEnum(rcl.SET_TOOL_DEFAULT)
+    onDragStart: () => fullscreenValue.triggerActionEnum(Command.SET_TOOL_DEFAULT)
   }, {
     insertAction: e,
     getDragPreviewSrc: () => "",
@@ -129,10 +129,10 @@ export function $$U10() {
   let e = q5();
   let t = useDispatch();
   return useCallback(() => {
-    e && t(to({
+    e && t(showModalHandler({
       type: V,
       data: {
-        upsellSource: _$$b.SHAPES_SIDEBAR,
+        upsellSource: UpsellModalType.SHAPES_SIDEBAR,
         teamId: e.team?.id,
         openCheckoutInNewTab: !0
       }
@@ -144,7 +144,7 @@ export function $$G11() {
   let t = useDispatch();
   let i = F.useShouldHideStarterCtaForOpenFile();
   return useCallback(() => {
-    e && t(to({
+    e && t(showModalHandler({
       type: DV,
       data: {
         team: e.team,

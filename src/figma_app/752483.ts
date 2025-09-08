@@ -13,17 +13,17 @@ import { F as _$$F } from "../905/302958";
 import { QF } from "../figma_app/696043";
 import { Qi } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { E3 } from "../figma_app/976749";
 import { M as _$$M } from "../figma_app/170366";
 import { pS } from "../905/588985";
-import { T as _$$T, ou } from "../figma_app/300692";
+import { getFullscreenViewEditorType, generatePluginId } from "../figma_app/300692";
 import { Bs, d_, cj } from "../905/197730";
 import { bD } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { $A } from "../905/782918";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
@@ -56,35 +56,35 @@ function G({
 }) {
   return jsxs(Fragment, {
     children: [e === bD.PLUGIN ? jsx(z, {
-      isSelected: a.includes(FW.FIGMA) && a.includes(FW.FIGJAM) && a.includes(FW.SLIDES),
+      isSelected: a.includes(ManifestEditorType.FIGMA) && a.includes(ManifestEditorType.FIGJAM) && a.includes(ManifestEditorType.SLIDES),
       image: jsx(_$$A.editorTypes.multiProduct, {}),
       titleText: getI18nString("community.plugin_development.plugin_creation_editor_option_multi_product"),
       descriptionText: getI18nString("community.plugin_development.plugin_creation_editor_option_multi_product_description"),
-      onSelect: () => s([FW.FIGMA, FW.FIGJAM, FW.SLIDES])
+      onSelect: () => s([ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM, ManifestEditorType.SLIDES])
     }) : jsx(z, {
-      isSelected: a.includes(FW.FIGMA) && a.includes(FW.FIGJAM),
+      isSelected: a.includes(ManifestEditorType.FIGMA) && a.includes(ManifestEditorType.FIGJAM),
       image: jsx(_$$A.editorTypes.multiProduct, {}),
       titleText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam"),
       descriptionText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam_description"),
-      onSelect: () => s([FW.FIGMA, FW.FIGJAM])
+      onSelect: () => s([ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM])
     }), t && jsx(z, {
-      isSelected: a.includes(FW.FIGMA) && 1 === a.length,
+      isSelected: a.includes(ManifestEditorType.FIGMA) && 1 === a.length,
       image: jsx(_$$A.editorTypes.figmaDesign, {}),
       titleText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design" : "community.plugin_development.plugin_creation_editor_option_figma_design"),
       descriptionText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_description"),
-      onSelect: () => s([FW.FIGMA])
+      onSelect: () => s([ManifestEditorType.FIGMA])
     }), r && jsx(z, {
-      isSelected: a.includes(FW.FIGJAM) && 1 === a.length,
+      isSelected: a.includes(ManifestEditorType.FIGJAM) && 1 === a.length,
       image: jsx(_$$A.editorTypes.figJam, {}),
       titleText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam" : "community.plugin_development.plugin_creation_editor_option_figjam"),
       descriptionText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figjam_description"),
-      onSelect: () => s([FW.FIGJAM])
+      onSelect: () => s([ManifestEditorType.FIGJAM])
     }), i && jsx(z, {
-      isSelected: a.includes(FW.SLIDES) && 1 === a.length,
+      isSelected: a.includes(ManifestEditorType.SLIDES) && 1 === a.length,
       image: jsx(_$$A.editorTypes.slides, {}),
       titleText: getI18nString("community.plugin_development.plugin_creation_editor_option_slides"),
       descriptionText: getI18nString("community.plugin_development.plugin_creation_editor_option_slides_description"),
-      onSelect: () => s([FW.SLIDES])
+      onSelect: () => s([ManifestEditorType.SLIDES])
     })]
   });
 }
@@ -193,7 +193,7 @@ function z({
     })
   });
 }
-export let $$W0 = Ju(function ({
+export let $$W0 = registerModal(function ({
   resourceType: e
 }) {
   let t = useDispatch();
@@ -201,10 +201,10 @@ export let $$W0 = Ju(function ({
   let [b, C] = useState("");
   let [F, U] = useState(-1);
   let [z, W] = _$$l(r ? "choose_template_step" : "choose_editor_type_step", `${e}_create_flow_change_step`, {
-    productType: _$$T() === FW.FIGMA ? "design" : "whiteboard"
+    productType: getFullscreenViewEditorType() === ManifestEditorType.FIGMA ? "design" : "whiteboard"
   });
   let [K, Y] = useState(r ? "tab" : "runOnce");
-  let [$, X] = useState(r ? [FW.DEV] : [FW.FIGMA, FW.FIGJAM]);
+  let [$, X] = useState(r ? [ManifestEditorType.DEV] : [ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM]);
   let [q, J] = useState("simple");
   let [Z, Q] = useState(!1);
   let ee = () => b.replace(/[^0-9a-zA-Z\.\-\+!%&_ =]/g, "_").trim();
@@ -228,7 +228,7 @@ export let $$W0 = Ju(function ({
           [e + "Id"]: r,
           version: pS,
           isWidget: e === bD.WIDGET,
-          productType: _$$T() === FW.FIGMA ? "design" : "whiteboard"
+          productType: getFullscreenViewEditorType() === ManifestEditorType.FIGMA ? "design" : "whiteboard"
         });
         t(QF({
           localFileId: i,
@@ -252,7 +252,7 @@ export let $$W0 = Ju(function ({
     }
     let r = "";
     try {
-      let n = await ou(e);
+      let n = await generatePluginId(e);
       t(Qi({
         publishedPlugins: [n],
         src: "onGenerateNewClick"
@@ -271,10 +271,10 @@ export let $$W0 = Ju(function ({
       resourceId: r,
       template: n(b, r, $)
     });
-    null != i ? (W("success_screen_step"), U(i)) : t(Ce());
+    null != i ? (W("success_screen_step"), U(i)) : t(hideModal());
   };
   let en = () => {
-    t(Ce());
+    t(hideModal());
     _$$s({
       initialX: 0,
       initialY: 0,

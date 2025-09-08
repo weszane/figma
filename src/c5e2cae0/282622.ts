@@ -5,12 +5,12 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { Ju } from "../905/712921";
-import { $V, NW } from "../figma_app/831101";
+import { isAddressEmpty, BillingCycle } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { useState } from "react";
 import { throwError } from "../figma_app/465776";
-import { S as _$$S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { k as _$$k } from "../905/443820";
 import { G } from "../905/800369";
 import { lR } from "../figma_app/617427";
@@ -22,7 +22,7 @@ import { _ as _$$_ } from "../c5e2cae0/57596";
 import { O } from "../c5e2cae0/648208";
 import { f as _$$f } from "../c5e2cae0/279252";
 function _(e) {
-  let t = e.shippingAddress && !$V(e.shippingAddress);
+  let t = e.shippingAddress && !isAddressEmpty(e.shippingAddress);
   return jsxs(_$$x, {
     title: getI18nString("checkout.cart_plan_details.subtitle"),
     dataTestId: "cart-plan-details",
@@ -99,8 +99,8 @@ function A({
 }) {
   let [S, b] = useState(!1);
   let E = u || !S;
-  let A = jsx(_$$S, {
-    label: jsx(J, {
+  let A = jsx(Checkbox, {
+    label: jsx(Label, {
       children: jsx("span", {
         className: _$$s.font13.$,
         children: p === Ju.ORG ? jsx(W, {}) : jsx(Um, {})
@@ -129,7 +129,7 @@ function A({
       })
     }), jsx(I, {
       tier: p,
-      isAnnual: a === NW.YEAR
+      isAnnual: a === BillingCycle.YEAR
     }), jsx(_$$_, {}), jsx("div", {
       className: _$$s.my24.$,
       style: sx.add({

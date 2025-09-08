@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { n as _$$n } from "../905/347702";
 export function $$o2(e) {
   switch (e) {
-    case RYP.SRGB:
+    case ColorSpaceEnum.SRGB:
       return "srgb";
-    case RYP.DISPLAY_P3:
+    case ColorSpaceEnum.DISPLAY_P3:
       return "display-p3";
     default:
       throw Error(`unrecognized color profile: ${e}`);
@@ -14,7 +14,7 @@ export function $$o2(e) {
 }
 let l = e => {
   try {
-    if (e === RYP.SRGB) return !0;
+    if (e === ColorSpaceEnum.SRGB) return !0;
     let t = document.createElement("canvas").getContext("webgl");
     if (!t) throw Error("failed to create webgl canvas context to determine support");
     if (!("drawingBufferColorSpace" in t)) throw Error("webgl context does not contain drawingBufferColorSpace attribute");
@@ -34,7 +34,7 @@ let c = _$$n(e => {
 });
 let u = _$$n(e => {
   try {
-    if (e === RYP.SRGB) return !0;
+    if (e === ColorSpaceEnum.SRGB) return !0;
     let t = document.createElement("canvas");
     let r = $$o2(e);
     let n = t.getContext("2d", {
@@ -97,8 +97,8 @@ let E = () => {
 };
 let y = () => desktopAPIInstance && "unmanaged" === desktopAPIInstance.getColorSpace();
 export function $$b0() {
-  let e = useMemo(() => c(RYP.DISPLAY_P3), []);
-  let t = useMemo(() => u(RYP.DISPLAY_P3), []);
+  let e = useMemo(() => c(ColorSpaceEnum.DISPLAY_P3), []);
+  let t = useMemo(() => u(ColorSpaceEnum.DISPLAY_P3), []);
   let r = useMemo(() => $$p1(), []);
   let s = y();
   let o = f();

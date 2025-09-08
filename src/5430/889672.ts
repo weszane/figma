@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { _6 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
@@ -96,7 +96,7 @@ export function $$E0(e) {
       isLoading: t,
       onClick: () => {
         w(!0);
-        E(to({
+        E(showModalHandler({
           type: _$$s2,
           data: {
             setupStripeCallback: e => {

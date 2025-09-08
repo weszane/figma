@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { fZb } from "../figma_app/763686";
+import { perfTimerFrameManagerBindings } from "../figma_app/763686";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/128080";
 import { reactTimerGroup } from "../905/542194";
@@ -9,7 +9,7 @@ import { Zv } from "../905/760682";
 import { ye } from "../figma_app/682945";
 import { qc, kE } from "../figma_app/62612";
 import { nt } from "../905/226610";
-import { H } from "../905/561433";
+import { requestDeferredExecution } from "../905/561433";
 import { kT, hm } from "../905/380385";
 import { Sw } from "../figma_app/805373";
 import { UU } from "../905/807385";
@@ -213,9 +213,9 @@ let D = class e extends HTMLElement {
     this.hasHighlightedPinnedThreads = !1;
     this.clusterElementsById = new Map();
     this.onFrame = () => {
-      fZb && fZb?.startProfile(z8, 100);
+      perfTimerFrameManagerBindings && perfTimerFrameManagerBindings?.startProfile(z8, 100);
       this.currentViewport && this.lastRenderedViewport && (this.render(this.currentViewport, this.lastRenderedViewport), this._lastRenderedDataset = this.ds, this.lastRenderedViewport = this.currentViewport, this._lastRenderedShouldDisablePointerEvents = this.shouldDisablePointerEvents);
-      fZb && fZb?.stopProfile(z8, 100);
+      perfTimerFrameManagerBindings && perfTimerFrameManagerBindings?.stopProfile(z8, 100);
     };
     this.attachShadow({
       mode: "open"
@@ -248,7 +248,7 @@ let D = class e extends HTMLElement {
   }
   onViewportUpdate(e) {
     this.currentViewport = e;
-    H();
+    requestDeferredExecution();
   }
   set wrapperOffsetFn(e) {
     this.getWrapperOffset = e;
@@ -263,7 +263,7 @@ let D = class e extends HTMLElement {
   }
   set data(e) {
     this.ds = e;
-    H();
+    requestDeferredExecution();
   }
   clusterComesFromFrameMove(e, t) {
     if (!e.anchoredNode) return !1;

@@ -1,11 +1,11 @@
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { MM } from "../905/350402";
+import { createOptimistAction } from "../905/350402";
 import { yJ } from "../905/584989";
 import { Gu } from "../905/513035";
 import { H } from "../figma_app/395012";
-export let $$c0 = MM("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
+export let $$c0 = createOptimistAction("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
   teamId: t,
   deltas: r,
   entryPoint: s,
@@ -34,14 +34,14 @@ export let $$c0 = MM("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
   }).then(function ({
     data: r
   }) {
-    e.dispatch(_$$c(p));
+    e.dispatch(createOptimistCommitAction(p));
     e.dispatch(yJ({
       teamUsers: r.meta,
       teamId: t
     }));
     c?.();
   }).catch(function (t) {
-    e.dispatch(_$$r(p));
+    e.dispatch(createOptimistRevertAction(p));
     e.dispatch(_$$s.error(function (e) {
       let {
         reason

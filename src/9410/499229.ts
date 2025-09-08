@@ -1,8 +1,8 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useCallback, useRef, useState, useMemo, useLayoutEffect, useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { YEY, Lov, Ez5, h3O, _em, dNx, Z6A } from "../figma_app/763686";
-import { Xy, AD } from "../905/871411";
+import { CanvasSearchHelpers, PageViewMode, AppStateTsApi, Multiplayer, PluginModalType, SelectionState, NodeType } from "../figma_app/763686";
+import { zeroSessionLocalIDString, defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription, Xr, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/90566";
@@ -106,9 +106,9 @@ export function $$G5() {
   let e = Z("canvas_search_navigate");
   let t = useSelector(e => e.canvasSearch.scope);
   return useCallback((i, r) => {
-    e(YEY.setActiveResultAndGetViewportSettings(i, r), {
+    e(CanvasSearchHelpers.setActiveResultAndGetViewportSettings(i, r), {
       additionalTrackEventParams: {
-        searchScope: Lov[t]
+        searchScope: PageViewMode[t]
       }
     });
   }, [e, t]);
@@ -127,17 +127,17 @@ export function $$K7() {
   let x = L3();
   let b = p8("pagesList");
   let [C, v] = useState(!1);
-  let [k, N] = useState(Ez5.uiState().isRecovery.getCopy());
+  let [k, N] = useState(AppStateTsApi.uiState().isRecovery.getCopy());
   let [A, O] = useState(!1);
   let D = H();
   let M = am();
   let P = yZ();
-  let F = useMemo(() => P && lH(b), [P, b]) || P && h3O?.isValidatingIncremental();
+  let F = useMemo(() => P && lH(b), [P, b]) || P && Multiplayer?.isValidatingIncremental();
   let B = useMemo(() => !P && lH(b), [P, b]);
   useLayoutEffect(() => {
-    scope !== Lov.ALL_PAGES || A || !F && k ? YEY.setSearchScope(scope) : (O(!0), scheduler.postTask(async () => {
-      F && (await q(_em.FIND_AND_REPLACE));
-      YEY.setSearchScope(scope);
+    scope !== PageViewMode.ALL_PAGES || A || !F && k ? CanvasSearchHelpers.setSearchScope(scope) : (O(!0), scheduler.postTask(async () => {
+      F && (await q(PluginModalType.FIND_AND_REPLACE));
+      CanvasSearchHelpers.setSearchScope(scope);
       N(!0);
     }, {
       priority: "user-blocking"
@@ -150,17 +150,17 @@ export function $$K7() {
       nav,
       resultsByPage
     } = await D(t, r);
-    Object.keys(resultsByPage).filter(e => e !== _ && e !== Xy).length ? v(!0) : v(!1);
+    Object.keys(resultsByPage).filter(e => e !== _ && e !== zeroSessionLocalIDString).length ? v(!0) : v(!1);
     O(!1);
     r && e(nav, {
       additionalTrackEventParams: {
-        searchScope: Lov[scope]
+        searchScope: PageViewMode[scope]
       }
     });
     let l = globalPerfTimer.tryStop("canvas_search_time_to_results");
     l && M("canvas_search_time_to_results", {
       timeElapsedMs: l,
-      searchScope: Lov[scope],
+      searchScope: PageViewMode[scope],
       resultCount: Object.values(resultsByPage).reduce((e, t) => e += t.length, 0)
     });
   }, [_, e, scope, D, M]);
@@ -171,14 +171,14 @@ export function $$K7() {
     G(e, t);
   }, [p, G]);
   useEffect(() => {
-    x && query && (scope !== Lov.ALL_PAGES || !F && k) && U(query, !1);
+    x && query && (scope !== PageViewMode.ALL_PAGES || !F && k) && U(query, !1);
   }, [filters, mode, scope, x, b, k, F]);
   let z = useCallback((t, i) => {
     Uc("");
-    YEY.setHoveredResult(AD, -1);
+    CanvasSearchHelpers.setHoveredResult(defaultSessionLocalIDString, -1);
     let r = !m.current;
     m.current = !1;
-    e(YEY.setNextSearchResultAndGetViewportSettings(t, r), {
+    e(CanvasSearchHelpers.setNextSearchResultAndGetViewportSettings(t, r), {
       additionalTrackEventParams: {
         source: i
       }
@@ -193,7 +193,7 @@ export function $$K7() {
     search: K,
     next: z,
     exit: useCallback(() => {
-      W ? V(void 0) : YEY?.exitSearchMode(dNx.NONE);
+      W ? V(void 0) : CanvasSearchHelpers?.exitSearchMode(SelectionState.NONE);
     }, [W, V]),
     setNavigateNearestOnce: function () {
       m.current = !0;
@@ -220,7 +220,7 @@ function H() {
     if (!n || jN(n)) {
       let {
         nav
-      } = YEY.setSearchResultsAndGetViewportSettings([], h, "", {
+      } = CanvasSearchHelpers.setSearchResultsAndGetViewportSettings([], h, "", {
         categories: [],
         mode
       });
@@ -241,24 +241,24 @@ function H() {
       wholeWords: f
     });
     let y = kH(filters);
-    let b = scope === Lov.ACTIVE_PAGE ? resultsByPage[h] ? [{
+    let b = scope === PageViewMode.ACTIVE_PAGE ? resultsByPage[h] ? [{
       pageId: h,
       results: resultsByPage[h]
     }] : [] : Object.keys(resultsByPage).map(e => ({
       pageId: e,
       results: resultsByPage[e]
     }));
-    if (scope === Lov.ACTIVE_PAGE && resultsByPage[Xy]) {
-      let e = resultsByPage[Xy];
+    if (scope === PageViewMode.ACTIVE_PAGE && resultsByPage[zeroSessionLocalIDString]) {
+      let e = resultsByPage[zeroSessionLocalIDString];
       e.length && b.push({
-        pageId: Xy,
+        pageId: zeroSessionLocalIDString,
         results: e
       });
     }
     if (1 === n.length) {
       let e = 0;
       let t = [];
-      let i = b.findIndex(e => e.pageId === Xy);
+      let i = b.findIndex(e => e.pageId === zeroSessionLocalIDString);
       for (let r of (i > -1 && t.push(b[i]), c)) {
         let i = b.findIndex(e => e.pageId === r.nodeId);
         if (-1 === i) continue;
@@ -278,7 +278,7 @@ function H() {
     let {
       nav,
       ...v
-    } = YEY.setSearchResultsAndGetViewportSettings(b, h, n, {
+    } = CanvasSearchHelpers.setSearchResultsAndGetViewportSettings(b, h, n, {
       categories: y,
       mode
     });
@@ -287,7 +287,7 @@ function H() {
       ...metrics,
       ...v,
       nodeTypes: E,
-      searchScope: Lov[scope],
+      searchScope: PageViewMode[scope],
       matchCase: m,
       wholeWords: f
     });
@@ -299,13 +299,13 @@ function H() {
 }
 export function $$z9() {
   let e = L3();
-  let t = YEY.hasDirtyPrimaryInstances();
+  let t = CanvasSearchHelpers.hasDirtyPrimaryInstances();
   let i = useAtomWithSubscription(Fk);
   let r = useRef([]);
   let a = t && r.current.length;
   let o = useMemo(() => {
     if (!e || !i.total || a) return [];
-    let t = YEY.getSearchResults();
+    let t = CanvasSearchHelpers.getSearchResults();
     let n = [];
     t.forEach(e => {
       let t = e.results.map(e => {
@@ -336,11 +336,11 @@ export function $$W4() {
   } = useSelector(e => e.canvasSearch);
   let i = H();
   return useCallback(r => {
-    let n = YEY.getActiveResult();
-    let a = n.type === Z6A.CANVAS;
+    let n = CanvasSearchHelpers.getActiveResult();
+    let a = n.type === NodeType.CANVAS;
     let o = r || a && n.guid;
     return !!o && (getSingletonSceneGraph().setCurrentPageAsync(o).then(() => {
-      scope === Lov.ACTIVE_PAGE ? i(query, !1, o) : YEY.setActiveResultAndGetViewportSettings(o, 0);
+      scope === PageViewMode.ACTIVE_PAGE ? i(query, !1, o) : CanvasSearchHelpers.setActiveResultAndGetViewportSettings(o, 0);
     }), !0);
   }, [query, scope, i]);
 }

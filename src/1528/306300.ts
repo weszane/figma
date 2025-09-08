@@ -12,10 +12,10 @@ import { logError } from "../905/714362";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Wo } from "../figma_app/933328";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { UK } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Sh } from "../figma_app/889655";
 import { Wv } from "../figma_app/633080";
 import { Ib } from "../905/129884";
@@ -138,7 +138,7 @@ export function $$$0({
   let o = kN();
   let d = iR();
   let c = d2();
-  let u = J2(UK().showGuids);
+  let u = getObservableOrFallback(UK().showGuids);
   let p = useSelector(Sh);
   let m = useMemo(() => JSON.stringify(p), [p]);
   let _ = hZ();
@@ -316,7 +316,7 @@ export function $$W1(e) {
     id: `var-set-mode-${variableSetKey}-${showExplicitOnly}`,
     inputClassName: UZ,
     onChange: e => {
-      e === iw.LEARN_MORE ? Ay.unsafeRedirect(Yc, "_blank") : e === iw.REVIEW_UPDATES ? W(to({
+      e === iw.LEARN_MORE ? Ay.unsafeRedirect(Yc, "_blank") : e === iw.REVIEW_UPDATES ? W(showModalHandler({
         type: _$$T,
         data: {
           initialTab: Wv.UPDATES,

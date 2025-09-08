@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { useMemo, useEffect, useState, useContext } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { lyf } from "../figma_app/763686";
+import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -30,7 +30,7 @@ import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { ie, ov } from "../905/300250";
 import { T as _$$T } from "../figma_app/640519";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { ss } from "../905/746499";
 import { my, RK } from "../905/561832";
 import { q5, l3 } from "../figma_app/516028";
@@ -123,7 +123,7 @@ function j(e) {
       }));
       return;
     }
-    canEdit && modalShown?.type !== $l.type && topLevelMode !== lyf.BRANCHING && j ? (trackEventAnalytics("Branch Update Alert", {
+    canEdit && modalShown?.type !== $l.type && topLevelMode !== ViewType.BRANCHING && j ? (trackEventAnalytics("Branch Update Alert", {
       action: "Shown",
       fileKey: key,
       fileRepoId
@@ -268,7 +268,7 @@ function H({
     if (4 === o.state && l && 1 === l.state && l.mergeFile) {
       let e = o.mergeFile.key === t ? Kn.FROM_SOURCE : Kn.TO_SOURCE;
       u(_$$F.clearAll());
-      u(to({
+      u(showModalHandler({
         type: my,
         data: {
           view: RK.TIMED_OUT,

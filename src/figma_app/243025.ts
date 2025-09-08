@@ -5,17 +5,17 @@ import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
-import { S as _$$S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { A as _$$A } from "../vendor/21595";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
-import { p as _$$p, Ap, LK, NU, uz, A0 } from "../905/359509";
+import { IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML, WEB, CSSBUILDER } from "../905/359509";
 import { V0, ls } from "../figma_app/755395";
 import { $s, aq, gc, Bs } from "../figma_app/120227";
 import { KD } from "../figma_app/975811";
 import { Um } from "../905/848862";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Q7 } from "../905/203369";
 import { l6, c$ } from "../905/794875";
 import { DT, iF, j8, rc, hq, IC, A3, D0 } from "../905/89739";
@@ -67,19 +67,19 @@ export function $$C0({
   let t = $s(e);
   switch (e.id) {
     case _$$p:
-    case Ap:
+    case IOS_UIKIT:
       return renderI18nText("dev_handoff.alternative_units.description_scale_factor_ios");
-    case LK:
-    case NU:
+    case ANDROID:
+    case ANDROID_XML:
       return renderI18nText("dev_handoff.alternative_units.description_scale_factor_android");
-    case uz:
+    case WEB:
       return renderI18nText("dev_handoff.alternative_units.description_scale_factor_web");
   }
   return renderI18nText("dev_handoff.alternative_units.description_scale_factor_third_party", {
     unitName: t
   });
 }
-export let $$w2 = Ju(function (e) {
+export let $$w2 = registerModal(function (e) {
   let t = v4();
   let [r, a] = useState(t);
   let E = aq(r);
@@ -91,8 +91,8 @@ export let $$w2 = Ju(function (e) {
       scaleFactor: e
     });
   }, [r, b, E]);
-  let x = "first-party" === r.type && (r.id === LK || r.id === NU || r.id === _$$p || r.id === Ap);
-  let w = "first-party" === r.type && (r.id === uz || r.id === A0);
+  let x = "first-party" === r.type && (r.id === ANDROID || r.id === ANDROID_XML || r.id === _$$p || r.id === IOS_UIKIT);
+  let w = "first-party" === r.type && (r.id === WEB || r.id === CSSBUILDER);
   let O = _$$A(() => {
     w && b(r, E, {
       customSettings: {
@@ -149,9 +149,9 @@ export let $$w2 = Ju(function (e) {
           children: jsx($$C0, {
             codeLanguage: r
           })
-        }), w && jsx(_$$S, {
+        }), w && jsx(Checkbox, {
           checked: y.customSettings?.onlyText === "true",
-          label: jsx(J, {
+          label: jsx(Label, {
             children: renderI18nText("dev_handoff.alternative_units.only_apply_rem_on_text", {
               rem: jsx("span", {
                 className: D0,

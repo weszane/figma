@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { debug } from "../figma_app/465776";
 import { k } from "../905/749197";
-import { KjJ } from "../figma_app/763686";
+import { ScrollBehavior } from "../figma_app/763686";
 import { F0, rV, PA, nO } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter } from "../figma_app/27355";
@@ -126,7 +126,7 @@ function O(e, t, r, n, i, a, s) {
   return t < r.uiOrderedChildren.length ? n[r.uiOrderedChildren[t]] + ("before" === a ? 0 : i[r.uiOrderedChildren[t]]) : n[r.guid] + y(e, r.guid, i) - s;
 }
 function R(e, t) {
-  return e < t.fixedChildrenCount ? KjJ.FIXED : KjJ.SCROLLS;
+  return e < t.fixedChildrenCount ? ScrollBehavior.FIXED : ScrollBehavior.SCROLLS;
 }
 export function $$L1(e, t, r, n, i, a, l) {
   let d;
@@ -151,7 +151,7 @@ export function $$L1(e, t, r, n, i, a, l) {
   return {
     parentGuid: c,
     index: l,
-    section: void 0 !== l ? R(l, e) : KjJ.SCROLLS,
+    section: void 0 !== l ? R(l, e) : ScrollBehavior.SCROLLS,
     parentTop: u,
     lineTop: void 0 !== l ? O(n, l, e, t, r, "before", a) : void 0,
     lineIndent: (F0(n, c) + 1) * $$S14,
@@ -163,7 +163,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
   let _ = a > 0 ? Math.floor(a / $$S14) : Math.ceil(a / $$S14);
   let h = v(e, t) + _;
   let m = O(e, d, l, r, n, c, p);
-  let g = d < l.fixedChildrenCount ? KjJ.FIXED : KjJ.SCROLLS;
+  let g = d < l.fixedChildrenCount ? ScrollBehavior.FIXED : ScrollBehavior.SCROLLS;
   let f = l;
   let E = null !== u && null !== u.guid && !rV(e, u.guid, l.guid);
   if (E) {
@@ -179,7 +179,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
   let b = F0(e, f.guid) + 1;
   for (; !E && b > h;) {
     let r = function (e, t) {
-      if ("CANVAS" === t.parent.type || "DOCUMENT" === t.parent.type || t.index !== t.parent.uiOrderedChildren.length || t.section === KjJ.FIXED) return t;
+      if ("CANVAS" === t.parent.type || "DOCUMENT" === t.parent.type || t.index !== t.parent.uiOrderedChildren.length || t.section === ScrollBehavior.FIXED) return t;
       let r = PA(e, t.parent.guid);
       debug(null != r, "parent node not in scenegraph");
       let n = r.uiOrderedChildren.indexOf(t.parent.guid);
@@ -202,7 +202,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
       return (debug(null != r, "node not in scenegraph"), nO(r.type) && t.index !== t.parent.fixedChildrenCount && (r.isExpanded || r.isTemporarilyExpanded || !(r.uiOrderedChildren.length > 0))) ? {
         parent: r,
         index: r.uiOrderedChildren.length,
-        section: KjJ.SCROLLS
+        section: ScrollBehavior.SCROLLS
       } : t;
     }(e, y);
     if (!w(e, t, u, r.parent.guid)) break;
@@ -242,7 +242,7 @@ function D(e, t, r, n, a, l, d, c, u, _) {
       return r && w(e, t, u, a) ? {
         parentGuid: a,
         index: r.fixedChildrenCount,
-        section: KjJ.SCROLLS,
+        section: ScrollBehavior.SCROLLS,
         parentTop: m
       } : null;
     }
@@ -264,7 +264,7 @@ export function $$k6(e, t, r, n, a, o, l, d, c, u, _) {
     return t ? {
       parentGuid: d,
       index: t.fixedChildrenCount,
-      section: KjJ.SCROLLS,
+      section: ScrollBehavior.SCROLLS,
       parentTop: "sticky"
     } : null;
   }
@@ -286,7 +286,7 @@ export function $$k6(e, t, r, n, a, o, l, d, c, u, _) {
         var h;
         let l = e.get(a.parentGuid);
         debug(null != l, "parent node not in scenegraph");
-        h = a.type === KjJ.FIXED ? 0 : l.fixedChildrenCount;
+        h = a.type === ScrollBehavior.FIXED ? 0 : l.fixedChildrenCount;
         return P(e, t, r, n, o, l, h, "before", c, u);
       }
     }(e, t, r, n, d, o, l, c, u, _) : h && (m = D(e, t, r, n, h, o, l, c, u, _));

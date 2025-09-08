@@ -10,8 +10,8 @@ import { _6 } from "../figma_app/386952";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { px, j_ } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { Rs } from "../figma_app/288654";
 import { Ex, zE } from "../figma_app/919079";
 import { h1 } from "../905/986103";
@@ -363,12 +363,12 @@ function ee(e) {
           query: l,
           clearSearch: () => o(""),
           placeholder: getI18nString("abandoned_drafts_table.files.search.placeholder")
-        }), jsx(_$$M, {}), jsx(_$$S, {
+        }), jsx(_$$M, {}), jsx(Checkbox, {
           checked: d,
           onChange: () => {
             _(!d);
           },
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: renderI18nText("abandoned_drafts_table.files.show_trashed_files")
           })
         })]

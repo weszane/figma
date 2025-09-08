@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { hW } from "../figma_app/594947";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Dy, pY } from "../figma_app/925970";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { xI, Y1 } from "../905/879323";
 import { eK, w2 } from "../905/977218";
 import { XE } from "../figma_app/976749";
@@ -352,7 +352,7 @@ let $$G0 = new class extends M {
     };
   }
 }();
-let $$z3 = nF((e, {
+let $$z3 = createOptimistThunk((e, {
   ignoreLoadingState: t = !1
 } = {}) => {
   e.getState().search.sessionId || e.dispatch(Dy({

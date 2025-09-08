@@ -1,9 +1,9 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx } from "react/jsx-runtime";
 import { R } from "../905/441305";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { FRequestStatusType } from "../figma_app/191312";
-export let $$o0 = Ju(function (e) {
+export let $$o0 = registerModal(function (e) {
   let {
     onConfirm,
     status,

@@ -6,7 +6,7 @@ import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E } from "../905/984674";
 import { Nn, dx, MZ } from "../figma_app/399472";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 if (443 == require.j) {}
 if (443 == require.j) {}
 function c(e) {
@@ -55,7 +55,7 @@ export function $$m3({
 export function $$x4({
   resource: e
 }) {
-  let i = uF(e);
+  let i = getPluginVersion(e);
   let t = e.creator;
   let s = e.is_widget ? "widget" : "plugin";
   let l = `/community/${s}/${e.id}`;

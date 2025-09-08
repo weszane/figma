@@ -7,7 +7,7 @@ import { Ay } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { FOrganizationLevelType, FLicenseType } from "../figma_app/191312";
 import { D } from "../905/962956";
-import { NW } from "../figma_app/831101";
+import { BillingCycle } from "../figma_app/831101";
 import { g7 } from "../905/513035";
 var s = a;
 var m = (e => (e.ACH_DEBIT = "ach_debit", e.CARD = "card", e.SEPA_DEBIT = "sepa_debit", e.UNKNOWN = "unknown", e))(m || {});
@@ -58,7 +58,7 @@ let $$C1 = z.object({
   period_ends_at: z.string(),
   past_due_at: z.string(),
   plan_parent_type: z.nativeEnum(FOrganizationLevelType),
-  billing_interval: z.nativeEnum(NW),
+  billing_interval: z.nativeEnum(BillingCycle),
   total: z.number(),
   state: z.nativeEnum($$I2),
   subtype: z.nativeEnum($$S3),
@@ -108,16 +108,16 @@ export function $$U7(e) {
   switch (e.plan_parent_type) {
     case FOrganizationLevelType.TEAM:
       switch (e.billing_interval) {
-        case NW.YEAR:
+        case BillingCycle.YEAR:
           return getI18nString("plan_invoices.description.plan_subscription");
-        case NW.MONTH:
+        case BillingCycle.MONTH:
           return getI18nString("plan_invoices.description.monthly_invoice");
         default:
           e.billing_interval;
           return t();
       }
     case FOrganizationLevelType.ORG:
-      if (e.billing_interval === NW.YEAR) switch (e.subtype) {
+      if (e.billing_interval === BillingCycle.YEAR) switch (e.subtype) {
         case "subscription_renewed":
         case "subscription_created":
           return getI18nString("plan_invoices.description.plan_subscription");
@@ -211,7 +211,7 @@ export function $$H18(e) {
   return e.plan_parent_type === FOrganizationLevelType.ORG && ["catch_up", "true_up"].includes(e.subtype);
 }
 export function $$z22(e) {
-  return e.plan_parent_type === FOrganizationLevelType.TEAM && e.billing_interval === NW.MONTH && "catch_up" === e.subtype;
+  return e.plan_parent_type === FOrganizationLevelType.TEAM && e.billing_interval === BillingCycle.MONTH && "catch_up" === e.subtype;
 }
 export function $$W20(e) {
   return e.billable_products_kind === FLicenseType.BUNDLE;
@@ -223,8 +223,8 @@ function K(e, t, r) {
   return r?.reverse ? -a : a;
 }
 function Y(e, t) {
-  let r = e.billing_interval === NW.YEAR ? 1 : 0;
-  let n = (t.billing_interval === NW.YEAR ? 1 : 0) - r;
+  let r = e.billing_interval === BillingCycle.YEAR ? 1 : 0;
+  let n = (t.billing_interval === BillingCycle.YEAR ? 1 : 0) - r;
   if (0 !== n) return n;
   let i = $$H18(e) ? 0 : 1;
   return ($$H18(t) ? 0 : 1) - i;
@@ -252,7 +252,7 @@ export function $$ee17(e) {
   return !e.billing_mechanics || "legacy" === e.billing_mechanics || "true_up" === e.subtype;
 }
 export function $$et19(e) {
-  return e.billing_interval === NW.YEAR && V.has(e.subtype);
+  return e.billing_interval === BillingCycle.YEAR && V.has(e.subtype);
 }
 export function $$er11(e) {
   let t = null;

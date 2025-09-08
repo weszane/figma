@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Component } from "react";
 import { $$ } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
-import { qK } from "../905/102752";
+import { hideModal } from "../905/156213";
+import { registerLegacyModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { yl, _Z, v0, pL } from "../figma_app/639088";
 export let $$u0 = "tile-copy-link-modal";
-qK($$u0, e => jsx(p, {
+registerLegacyModal($$u0, e => jsx(p, {
   ...e
 }));
 class p extends Component {
@@ -17,7 +17,7 @@ class p extends Component {
       e && (e.focus(), e.select());
     };
     this.hideModal = () => {
-      this.props.dispatch(Ce());
+      this.props.dispatch(hideModal());
     };
   }
   render() {

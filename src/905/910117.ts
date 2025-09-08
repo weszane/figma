@@ -1,34 +1,65 @@
-import { delay } from '../905/236856';
+import { addBreadcrumb } from '@sentry/core'
+import { delay } from '../905/236856'
 // import { z } from '../905/239603' // Removed unused import
-import { getWAFChallengeType, wafManager } from '../905/394005';
-import { trackEventAnalytics } from '../905/449184';
-import { fF } from '../905/471229';
-import { h as _$$h } from '../905/551280';
-import { p as _$$p } from '../905/621429';
-import { serializeQuery } from '../905/634134';
-import { logWarning } from '../905/714362';
-import { T } from '../905/912096';
-import { normalizeUrl, normalizeUrlStrict } from '../3973/348894';
-import { fakePath, getInitialOptions } from '../figma_app/169182';
-import { isInteractionPathCheck } from '../figma_app/897289';
-import { removeElement, unshiftUnique, addUnique } from '../figma_app/656233';
-import { addBreadcrumb } from '../vendor/39153';
+import { getWAFChallengeType, wafManager } from '../905/394005'
+import { trackEventAnalytics } from '../905/449184'
+import { getTrackingSessionId } from '../905/471229'
+import { alertOnNumericIds } from '../905/551280'
+import { waitForVisibility } from '../905/621429'
+import { serializeQuery } from '../905/634134'
+import { logWarning } from '../905/714362'
+import { getUserPlan } from '../905/912096'
+import { normalizeUrl, normalizeUrlStrict } from '../3973/348894'
+import { fakePath, getInitialOptions } from '../figma_app/169182'
+import { addUnique, removeElement, unshiftUnique } from '../figma_app/656233'
+import { isInteractionPathCheck } from '../figma_app/897289'
 
+interface XhrRequestSettings {
+  url: string
+  method: XHRMethod
+  params?: Record<string, any>
+  data?: any
+  headers?: Record<string, string>
+  responseType?: XMLHttpRequestResponseType | ''
+  withCredentials?: boolean
+  timeout?: number
+  raw?: boolean
+  rawResponse?: boolean
+  rawBody?: boolean
+  dump?: (data: any) => string
+  load?: (data: string) => any
+  uploadEvents?: Record<string, (xhr?: XMLHttpRequest) => void>
+  downloadEvents?: Record<string, (xhr?: XMLHttpRequest) => void>
+  waitForTabRecentlyVisible?: boolean
+  retryCount?: number
+  retryStrategyOverride?: Record<number, number>
+}
+export interface AjaxResponse<T = any> {
+  cause?: Error
+  status: number
+  response: any
+  contentType: string | null
+  responseType?: XMLHttpRequestResponseType | ''
+  wafChallenge?: any
+  data: T | null
+  url?: string
+  timeout?: number
+}
 /**
  * Adds request data to the log if contentType is JSON.
- * @param e - The request object.
- * @param t - HTTP verb.
- * @param i - Pathname.
+ * @param res - The request object.
+ * @param method - HTTP verb.
+ * @param pathname - Pathname.
  */
-function logRequestData(e, t, i) {
+function logRequestData(res: AjaxResponse, method: XHRMethod, pathname: string) {
   // A
-  if (e.data && e.contentType?.startsWith('application/json')) {
-    _$$h(e.data, {
-      verb: t,
-      pathname: i
-    });
+  if (res.data && res.contentType?.startsWith('application/json')) {
+    alertOnNumericIds(res.data, {
+      verb: method,
+      pathname,
+    })
   }
-  return e;
+  return res
 }
 
 /**
@@ -37,7 +68,7 @@ function logRequestData(e, t, i) {
  * @param xhr - XMLHttpRequest.
  * @param data - Parsed data.
  */
-function formatResponse(url, xhr, data) {
+function formatResponse(url: string, xhr: XMLHttpRequest, data: any): AjaxResponse {
   // y
   return {
     status: xhr.status,
@@ -46,73 +77,84 @@ function formatResponse(url, xhr, data) {
     responseType: xhr.responseType,
     wafChallenge: getWAFChallengeType(xhr),
     data,
-    url
-  };
+    url,
+  }
 }
-let mockServerInstance = null;
+let mockServerInstance: MockServer | null = null
 
 /**
  * XHRRequest class for handling request settings and responses.
  */
-class XHRRequest {
-  // v
-
-  constructor(e) {
-    this.settings = e;
-    this._response = void 0;
+class MockRequest {
+  settings: XhrRequestSettings
+  _response: Promise<AjaxResponse> | 'SEND_REAL_REQUEST' | undefined
+  constructor(e: XhrRequestSettings) {
+    this.settings = e
+    this._response = void 0
   }
 
   /**
    * Parses the URL from settings.
    */
   parsedURL() {
-    let e = document.createElement('a');
-    e.href = this.settings.url || '';
+    let e = document.createElement('a')
+    e.href = this.settings.url || ''
     return {
       host: e.host,
       hostname: e.hostname,
       port: e.port,
       pathname: e.pathname,
-      search: e.search
-    };
+      search: e.search,
+    }
   }
+
   hostname() {
-    return this.parsedURL().hostname;
+    return this.parsedURL().hostname
   }
+
   pathname() {
-    return this.parsedURL().pathname;
+    return this.parsedURL().pathname
   }
+
   pathnameMatches(e) {
-    return !!new RegExp(e).exec(this.pathname());
+    return !!new RegExp(e).exec(this.pathname())
   }
+
   search() {
-    return this.parsedURL().search;
+    return this.parsedURL().search
   }
+
   sendRealRequest() {
-    this._response = 'SEND_REAL_REQUEST';
+    this._response = 'SEND_REAL_REQUEST'
   }
+
   respond(e) {
-    this._response = Promise.resolve(e);
+    this._response = Promise.resolve(e)
   }
+
   respondPromise(e) {
-    this._response = e;
+    this._response = e
   }
+
   failResponse() {
     this._response = Promise.resolve({
       status: 0,
       response: '',
       data: null,
-      contentType: null
-    });
+      contentType: null,
+    })
   }
+
   neverRespond() {
-    this._response = new Promise(() => {});
+    this._response = new Promise(() => {})
   }
+
   response() {
-    return this._response;
+    return this._response
   }
+
   maybeDispatchLoadStart() {
-    this.settings.uploadEvents?.loadstart && this.settings.uploadEvents.loadstart();
+    this.settings.uploadEvents?.loadstart && this.settings.uploadEvents.loadstart()
   }
 }
 
@@ -120,161 +162,256 @@ class XHRRequest {
  * MockServer for handling XHR requests in tests.
  */
 class MockServer {
-  // I
-
+  static SEND_REAL_REQUEST = 'SEND_REAL_REQUEST'
+  private _handlers: Array<(req: MockRequest) => void>
+  areUnitTestsRunning: boolean
   constructor({
-    areUnitTestsRunning
+    areUnitTestsRunning,
+  }: {
+    areUnitTestsRunning: boolean
   }) {
-    this._handlers = [];
-    this.areUnitTestsRunning = areUnitTestsRunning;
+    this._handlers = []
+    this.areUnitTestsRunning = areUnitTestsRunning
   }
-  static install(t) {
+
+  static install(options: {
+    areUnitTestsRunning: boolean
+  }) {
     if (!mockServerInstance) {
-      mockServerInstance = new MockServer(t);
+      mockServerInstance = new MockServer(options)
     }
-    return mockServerInstance;
+    return mockServerInstance
   }
+
   resetHandlers() {
-    this._handlers = [];
+    this._handlers = []
   }
-  addHandler(e, t = false) {
-    t ? unshiftUnique(this._handlers, e) : addUnique(this._handlers, e);
+
+  addHandler(handler: (req: MockRequest) => void, prepend = false) {
+    prepend ? unshiftUnique(this._handlers, handler) : addUnique(this._handlers, handler)
   }
-  removeHandler(e) {
-    removeElement(this._handlers, e);
+
+  removeHandler(handler: (req: MockRequest) => void) {
+    removeElement(this._handlers, handler)
   }
-  handleRequest(e) {
-    for (let t of this._handlers) {
-      let i = new XHRRequest(e);
-      t(i);
-      let n = i.response();
-      if (n) {
-        i.maybeDispatchLoadStart();
-        return n;
+
+  handleRequest(settings: XhrRequestSettings) {
+    for (const handler of this._handlers) {
+      const req = new MockRequest(settings)
+      handler(req)
+      const resp = req.response()
+      if (resp) {
+        req.maybeDispatchLoadStart()
+        return resp
       }
     }
-    isInteractionPathCheck() || this.areUnitTestsRunning || !e.url || e.url.endsWith('realtime_token') || e.url === 'https://api.segment.io/v1/track' || e.url.includes('/api/figment-proxy') || console.warn(`[xr.MockServer]: Ignoring ${e.method} request to ${e.url}`, e);
-    return new Promise((_e, _t) => {});
+    if (!isInteractionPathCheck() && !this.areUnitTestsRunning && settings.url && !settings.url.endsWith('realtime_token') && settings.url !== 'https://api.segment.io/v1/track' && !settings.url.includes('/api/figment-proxy')) {
+      // eslint-disable-next-line no-console
+      console.log(`[xr.MockServer]: Ignoring ${settings.method} request to ${settings.url}`, settings)
+    }
+    return new Promise(() => {})
   }
-  static SEND_REAL_REQUEST = 'SEND_REAL_REQUEST';
 }
-export let XHR;
-(function (_XHR) {
-  let Methods = /*#__PURE__*/function (Methods) {
-    Methods["GET"] = "GET";
-    Methods["POST"] = "POST";
-    Methods["PUT"] = "PUT";
-    Methods["DELETE"] = "DELETE";
-    Methods["PATCH"] = "PATCH";
-    Methods["OPTIONS"] = "OPTIONS";
-    Methods["HEAD"] = "HEAD";
-    return Methods;
-  }({});
-  _XHR.Methods = Methods;
-  let Events = /*#__PURE__*/function (Events) {
-    Events["READY_STATE_CHANGE"] = "readystatechange";
-    Events["LOAD_START"] = "loadstart";
-    Events["PROGRESS"] = "progress";
-    Events["ABORT"] = "abort";
-    Events["ERROR"] = "error";
-    Events["LOAD"] = "load";
-    Events["TIMEOUT"] = "timeout";
-    Events["LOAD_END"] = "loadend";
-    return Events;
-  }({});
-  _XHR.Events = Events;
-  const requiredHeaders = _XHR.requiredHeaders = {
-    'X-Figma-User-ID': getInitialOptions().user_data?.id ?? ''
-  };
-  const defaults = _XHR.defaults = {
-    method: Methods.GET,
-    data: void 0,
+type XHRMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD'
+export const XHR = {
+  Methods: {
+    GET: 'GET' as XHRMethod,
+    POST: 'POST' as XHRMethod,
+    PUT: 'PUT' as XHRMethod,
+    DELETE: 'DELETE' as XHRMethod,
+    PATCH: 'PATCH' as XHRMethod,
+    OPTIONS: 'OPTIONS' as XHRMethod,
+    HEAD: 'HEAD' as XHRMethod,
+  },
+  Events: {
+    READY_STATE_CHANGE: 'readystatechange',
+    LOAD_START: 'loadstart',
+    PROGRESS: 'progress',
+    ABORT: 'abort',
+    ERROR: 'error',
+    LOAD: 'load',
+    TIMEOUT: 'timeout',
+    LOAD_END: 'loadend',
+  },
+  requiredHeaders: {
+    'X-Figma-User-ID': getInitialOptions().user_data?.id ?? '',
+  },
+  defaults: {
+    method: 'GET' as XHRMethod,
+    data: undefined,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'X-Csrf-Bypass': 'yes',
-      'tsid': fF(),
-      'X-Figma-User-Plan-Max': T() ?? '',
-      ...requiredHeaders
+      'tsid': getTrackingSessionId(),
+      'X-Figma-User-Plan-Max': getUserPlan() ?? '',
+      ...(getInitialOptions().user_data?.id && {
+        'X-Figma-User-ID': getInitialOptions().user_data.id,
+      } || {}),
     },
     responseType: '',
     dump: JSON.stringify,
     load: JSON.parse,
     withCredentials: false,
-    timeout: 0
-  };
-  const getDefaults = _XHR.getDefaults = {
-    ...defaults,
-    waitForTabRecentlyVisible: true,
-    retryCount: 3
-  };
-  let RetryStrategy = /*#__PURE__*/function (RetryStrategy) {
-    RetryStrategy[RetryStrategy["NO_RETRY"] = 0] = "NO_RETRY";
-    RetryStrategy[RetryStrategy["JITTERED_EXPONENTIAL_BACKOFF"] = 1] = "JITTERED_EXPONENTIAL_BACKOFF";
-    RetryStrategy[RetryStrategy["LINEAR_BACKOFF"] = 2] = "LINEAR_BACKOFF";
-    return RetryStrategy;
-  }({});
-  _XHR.RetryStrategy = RetryStrategy;
-  const crossOriginDefaults = _XHR.crossOriginDefaults = {
-    ...defaults
-  };
-  delete crossOriginDefaults.headers;
-  const crossOriginGetDefaults = _XHR.crossOriginGetDefaults = {
-    ...crossOriginDefaults,
-    retryCount: 3
-  };
-  function assertSameOrigin(_e) {}
-  _XHR.assertSameOrigin = assertSameOrigin;
-  const put = _XHR.put = putRequest;
-  const post = _XHR.post = postRequest;
-  const patch = _XHR.patch = patchRequest;
-  const del = _XHR.del = deleteRequest;
-  const options = _XHR.options = optionsRequest;
-  const crossOriginGet = _XHR.crossOriginGet = crossOriginGetRequest;
-  const crossOriginGetAny = _XHR.crossOriginGetAny = crossOriginGetAnyRequest;
-  const crossOriginHead = _XHR.crossOriginHead = crossOriginHeadRequest;
-  const crossOriginPut = _XHR.crossOriginPut = crossOriginPutRequest;
-  const crossOriginPost = _XHR.crossOriginPost = crossOriginPostRequest;
-  function shouldTreatStatusCodeAsFailure(e) {
-    return e === 202 || !(e >= 200 && e < 300);
-  }
-  _XHR.shouldTreatStatusCodeAsFailure = shouldTreatStatusCodeAsFailure;
-  function retryStrategyForStatusCode(e, t) {
-    return t && t[e] !== null && void 0 !== t[e] ? t[e] : e === 0 ? RetryStrategy.LINEAR_BACKOFF : e > 0 && e < 200 || e >= 200 && e < 400 || e >= 400 && e < 500 && e !== 429 ? RetryStrategy.NO_RETRY : e === 429 || e >= 500 && e <= 504 ? RetryStrategy.JITTERED_EXPONENTIAL_BACKOFF : RetryStrategy.NO_RETRY;
-  }
-  _XHR.retryStrategyForStatusCode = retryStrategyForStatusCode;
-})(XHR || (XHR = {}));
+    timeout: 0,
+  } as XhrRequestSettings,
+  getDefaults: {} as XhrRequestSettings,
+  crossOriginDefaults: {} as XhrRequestSettings,
+  crossOriginGetDefaults: {} as XhrRequestSettings,
+  assertSameOrigin: (_url?: string) => {},
+  put: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+    const method = XHR.Methods.PUT
+    const response = await sendWithRetry({
+      url,
+      method,
+      data,
+      ...options,
+    })
+    logRequestData(response, method, url)
+    return response
+  },
+  post: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+    const method = XHR.Methods.POST
+    const response = await sendWithRetry({
+      url,
+      method,
+      data,
+      ...options,
+    })
+    logRequestData(response, method, url)
+    return response
+  },
+  patch: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+    const method = XHR.Methods.PATCH
+    const response = await sendWithRetry({
+      url,
+      method,
+      data,
+      ...options,
+    })
+    logRequestData(response, method, url)
+    return response
+  },
+  del: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
+    const method = XHR.Methods.DELETE
+    const response = await sendWithRetry({
+      url,
+      method,
+      data,
+      ...options,
+    })
+    logRequestData(response, method, url)
+    return response
+  },
+  options: async (url: string, options?: Partial<XhrRequestSettings>) => {
+    return await sendWithRetry({
+      url,
+      method: XHR.Methods.OPTIONS,
+      ...options,
+    })
+  },
+  crossOriginGet: async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
+    return await sendWithRetry({
+      url,
+      method: XHR.Methods.GET,
+      params,
+      ...options,
+    }, XHR.crossOriginGetDefaults)
+  },
+  crossOriginGetAny: async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
+    return await XHR.crossOriginGet(url, params, options)
+  },
+  crossOriginHead: async (url: string, params?: Record<string, any>, options?: Partial<XhrRequestSettings>) => {
+    return await sendWithRetry({
+      url,
+      method: XHR.Methods.HEAD,
+      params,
+      ...options,
+    }, XHR.crossOriginDefaults)
+  },
+  crossOriginPut: async (url: string, data: any, options?: Partial<XhrRequestSettings>) => {
+    return await sendWithRetry({
+      url,
+      method: XHR.Methods.PUT,
+      data,
+      ...options,
+    }, XHR.crossOriginDefaults)
+  },
+  crossOriginPost: async (url: string, data: any, options?: Partial<XhrRequestSettings>) => {
+    return await sendWithRetry({
+      url,
+      method: XHR.Methods.POST,
+      data,
+      ...options,
+    }, XHR.crossOriginDefaults)
+  },
+  shouldTreatStatusCodeAsFailure: (status: number) => {
+    return status === 202 || !(status >= 200 && status < 300)
+  },
+  retryStrategyForStatusCode: (status: number, override?: Record<number, number>) => {
+    if (override && override[status] !== null && override[status] !== undefined)
+      return override[status]
+    if (status === 0)
+      return 2
+    if (status > 0 && status < 200 || status >= 200 && status < 400 || status >= 400 && status < 500 && status !== 429)
+      return 0
+    if (status === 429 || status >= 500 && status <= 504)
+      return 1
+    return 0
+  },
+  RetryStrategy: {
+    NO_RETRY: 0,
+    JITTERED_EXPONENTIAL_BACKOFF: 1,
+    LINEAR_BACKOFF: 2,
+  },
+}
+XHR.getDefaults = {
+  ...XHR.defaults,
+  waitForTabRecentlyVisible: true,
+  retryCount: 3,
+}
+XHR.crossOriginDefaults = {
+  ...XHR.defaults,
+}
+delete XHR.crossOriginDefaults.headers
+XHR.crossOriginGetDefaults = {
+  ...XHR.crossOriginDefaults,
+  retryCount: 3,
+}
 /**
  * Custom error for XHR failures.
  */
-export class XHRError extends Error {
-  // $$E1
-
-  constructor(e) {
-    super(Object.prototype.hasOwnProperty.call(e, 'toString') ? e.toString() : 'Unknown XHR error');
-    this.status = e.status;
-    this.response = e.response;
-    this.data = e.data;
-    this.contentType = e.contentType;
-    this.wafChallenge = e.wafChallenge;
+class XHRError extends Error {
+  status: number
+  response: any
+  data: any
+  contentType: string | null
+  wafChallenge: any
+  constructor(response: AjaxResponse) {
+    super(Object.prototype.hasOwnProperty.call(response, 'toString') ? response.toString() : 'Unknown XHR error')
+    this.status = response.status
+    this.response = response.response
+    this.data = response.data
+    this.contentType = response.contentType
+    this.wafChallenge = response.wafChallenge
   }
 }
 
 /**
  * Determines if a request should be sampled for logging.
- * @param e - Timer or similar object.
+ * @param e -  or similar object.
  * @param t - Response URL.
  * @returns Boolean indicating if request should be sampled.
  */
 export function shouldSampleRequest(e, t) {
   // $$x2
-  const excludedPatterns = ['api/web_logger', 's3-alpha-sig.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts-private-production', 'data:image/png;base64'];
+  const excludedPatterns = ['api/web_logger', 's3-alpha-sig.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts-private-production', 'data:image/png;base64']
   for (const pattern of excludedPatterns) {
     if (t && t.includes(pattern)) {
-      return false;
+      return false
     }
   }
-  return Math.random() <= 0.05;
+  return Math.random() <= 0.05
 }
 
 /**
@@ -282,29 +419,31 @@ export function shouldSampleRequest(e, t) {
  * @param url - Original URL.
  * @param method - HTTP method.
  * @param xhr - XMLHttpRequest object.
- * @param timer - Timer instance.
+ * @param timer -  instance.
  * @param attempt - Attempt number.
  * @param requestEvent - Event type.
  */
-function logMetrics(url, method, xhr, timer, attempt, requestEvent) {
+function logAsyncRequest(url: string, method: XHRMethod, xhr: XMLHttpRequest, timer: Timer | null, attempt: number, requestEvent: string) {
   // S
-  if (timer == null) return;
+  if (timer == null)
+    return
   try {
-    const duration = timer.finish();
+    const duration = timer.finish()
     if (shouldSampleRequest(duration, xhr.responseURL)) {
-      const isSlow = duration >= 1000;
-      let sanitizedPath = '';
+      const isSlow = duration >= 1000
+      let sanitizedPath = ''
       try {
-        sanitizedPath = new URL(normalizeUrlStrict(new URL(url, fakePath).toString())).pathname;
-      } catch (error) {
+        sanitizedPath = new URL(normalizeUrlStrict(new URL(url, fakePath).toString())).pathname
+      }
+      catch (error) {
         logWarning('xhr', 'Failed to create a sanitized request path.', {
           requestUrl: url,
-          error
+          error,
         }, {
-          reportAsSentryError: true
-        });
+          reportAsSentryError: true,
+        })
       }
-      const orgId = getInitialOptions().org_id;
+      const orgId = getInitialOptions().org_id
       trackEventAnalytics('web_async_request', {
         url: normalizeUrl(xhr.responseURL),
         requestPath: sanitizedPath,
@@ -319,13 +458,14 @@ function logMetrics(url, method, xhr, timer, attempt, requestEvent) {
         backgrounded: timer.backgrounded,
         source: 'xhr',
         attempt,
-        timeout: xhr.timeout
+        timeout: xhr.timeout,
       }, {
         batchRequest: true,
-        forwardToDatadog: true
-      });
+        forwardToDatadog: true,
+      })
     }
-  } catch {
+  }
+  catch {
     // Ignore errors in logging
   }
 }
@@ -337,155 +477,161 @@ function logMetrics(url, method, xhr, timer, attempt, requestEvent) {
  * @param i - Defaults.
  * @returns Promise resolving to formatted response.
  */
-async function sendXhrRequest(attempt, t, i) {
-  // w
-  const settings = {
-    ...(i ?? XHR.defaults),
-    ...t
-  };
-  if (settings.waitForTabRecentlyVisible) {
-    await _$$p();
+async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings, overrideSettings?: Partial<XhrRequestSettings>): Promise<AjaxResponse<T>> {
+  const mergedSettings: XhrRequestSettings = {
+    ...(overrideSettings ?? XHR.defaults),
+    ...settings,
+  }
+  if (mergedSettings.waitForTabRecentlyVisible) {
+    await waitForVisibility()
   }
   if (mockServerInstance) {
-    const mockResponse = mockServerInstance.handleRequest(t);
+    const mockResponse: any = mockServerInstance.handleRequest(settings)
     if (mockResponse !== MockServer.SEND_REAL_REQUEST) {
-      return mockResponse;
+      return mockResponse
     }
   }
-  const error = new Error('XHR request failed');
-  return new Promise((resolve, reject) => {
-    let sanitizedUrl;
-    const xhr = new XMLHttpRequest();
-    let timer = null;
-    timer = new Timer();
-    sanitizedUrl = settings.url;
-    if (sanitizedUrl != null) {
-      sanitizedUrl = sanitizedUrl.replace(/\?.*$/, '');
-      sanitizedUrl = sanitizedUrl.replace(/^(\/api\/multiplayer\/)\w+(\/create_savepoint)$/, '$1XXX$2');
-      sanitizedUrl = sanitizedUrl.replace(/^(\/component\/)\w+(\/canvas)$/, '$1XXX$2');
-      sanitizedUrl = sanitizedUrl.replace(/^(\/style\/)\w+(\/canvas)$/, '$1XXX$2');
-      sanitizedUrl = sanitizedUrl.replace(/^(https:\/\/s3-alpha\.figma\.com\/checkpoints\/)\w+\/\w+\/\w+\/\w+(\.fig)$/, '$1XXX$2');
-    }
-    const finalUrl = sanitizedUrl || settings.url || '';
-    const rejectWithCause = err => {
-      err.cause = error;
-      reject(err);
-    };
-    const resolveWithError = response => {
-      if (!XHR.shouldTreatStatusCodeAsFailure(response.status)) {
-        console.warn('sendXr: overriding failed result status from', response.status, 'to 0');
-        response.status = 0;
-      }
-      response.toString = () => {
-        if (response.status === 400 || response.status === 402) {
-          if (typeof response.data === 'object' && 'error' in response.data && response.data?.error) {
-            return response.data.message;
-          }
-          if (typeof response.data === 'string') {
-            return response.data;
-          }
-        }
-        return `XHR for "${finalUrl}" failed with status ${response.status}`;
-      };
-      response.cause = error;
-      resolve(response);
-    };
-    xhr.withCredentials = !!settings.withCredentials;
+
+  // eslint-disable-next-line unicorn/error-message
+  const errorStack = new Error()
+  return new Promise<AjaxResponse>((resolve, reject) => {
+    let sanitizedUrl = mergedSettings.url
+    sanitizedUrl = sanitizedUrl.replace(/\?.*$/, '').replace(/^(\/api\/multiplayer\/)\w+(\/create_savepoint)$/, '$1XXX$2').replace(/^(\/component\/)\w+(\/canvas)$/, '$1XXX$2').replace(/^(\/style\/)\w+(\/canvas)$/, '$1XXX$2').replace(/^(https:\/\/s3-alpha\.figma\.com\/checkpoints\/)\w+\/\w+\/\w+\/\w+(\.fig)$/, '$1XXX$2')
+    const urlForRequest = mergedSettings.params ? `${mergedSettings.url.split('?')[0]}?${serializeQuery(mergedSettings.params)}` : mergedSettings.url
+    const xhr = new XMLHttpRequest()
+    let timer: Timer | null = new Timer()
+    xhr.withCredentials = !!mergedSettings.withCredentials
     try {
-      xhr.timeout = settings.timeout;
-      xhr.responseType = settings.responseType;
-    } catch {
-      // Ignore errors in setting timeout/responseType
+      xhr.timeout = mergedSettings.timeout ?? 0
+      xhr.responseType = mergedSettings.responseType ?? ''
     }
-    const urlWithParams = settings.params ? `${settings.url.split('?')[0]}?${serializeQuery(settings.params, '&', '=', '')}` : settings.url;
-    xhr.open(settings.method, urlWithParams, true);
+    catch {}
+    const handleError = (err: any) => {
+      err.cause = errorStack
+      reject(err)
+    }
+    const handleFailure = (resp: AjaxResponse) => {
+      if (!XHR.shouldTreatStatusCodeAsFailure(resp.status)) {
+        console.warn('sendXr: overriding failed result status from', resp.status, 'to 0')
+        resp.status = 0
+      }
+      resp.toString = () => {
+        if (resp.status === 400 || resp.status === 402) {
+          if (typeof resp.data === 'object' && 'error' in resp.data && resp.data?.error)
+            return resp.data.message
+          if (typeof resp.data === 'string')
+            return resp.data
+        }
+        return `XHR for "${sanitizedUrl}" failed with status ${resp.status}`
+      }
+      resp.cause = errorStack
+      resolve(resp)
+    }
+    xhr.open(mergedSettings.method, urlForRequest, true)
+
+    // Set headers
+    if (mergedSettings.headers) {
+      for (const key in mergedSettings.headers) {
+        if (!(key === 'Content-Type' && mergedSettings.data && mergedSettings.data instanceof FormData) && Object.prototype.hasOwnProperty.call(mergedSettings.headers, key)) {
+          xhr.setRequestHeader(key, mergedSettings.headers[key])
+        }
+      }
+    }
+
+    // Upload events
+    if (mergedSettings.uploadEvents) {
+      for (const event in mergedSettings.uploadEvents) {
+        if (Object.prototype.hasOwnProperty.call(mergedSettings.uploadEvents, event)) {
+          xhr.upload.addEventListener(event, mergedSettings.uploadEvents[event].bind(null, xhr), false)
+        }
+      }
+    }
+
+    // Download events
+    if (mergedSettings.downloadEvents) {
+      for (const event in mergedSettings.downloadEvents) {
+        if (Object.prototype.hasOwnProperty.call(mergedSettings.downloadEvents, event)) {
+          xhr.addEventListener(event, mergedSettings.downloadEvents[event].bind(null, xhr), false)
+        }
+      }
+    }
+
+    // XHR event listeners
     xhr.addEventListener(XHR.Events.LOAD, () => {
       try {
-        logMetrics(urlWithParams, settings.method, xhr, timer, attempt, XHR.Events.LOAD);
-        let parsedData = null;
+        logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.LOAD)
+        let data: any = null
         if (xhr.responseType === 'arraybuffer') {
-          parsedData = new Uint8Array(xhr.response);
-        } else if (xhr.responseType === 'blob') {
-          parsedData = xhr.response;
-        } else if (xhr.responseText) {
+          data = new Uint8Array(xhr.response as ArrayBuffer)
+        }
+        else if (xhr.responseType === 'blob') {
+          data = xhr.response
+        }
+        else if (xhr.responseText) {
           try {
-            parsedData = settings.raw || settings.rawResponse ? xhr.responseText : settings.load(xhr.responseText);
-          } catch (parseError) {
+            data = mergedSettings.raw || mergedSettings.rawResponse ? xhr.responseText : mergedSettings.load ? mergedSettings.load(xhr.responseText) : xhr.responseText
+          }
+          catch (err: any) {
             addBreadcrumb({
               category: 'xhr',
-              message: `failed to parse response: ${parseError.message}`,
+              message: `failed to parse response: ${err.message}`,
               data: {
                 responseType: xhr.responseType,
                 responseText: xhr.responseText,
-                url: finalUrl
-              }
-            }, {});
-            logWarning('xhr', `failed to parse response: ${parseError.message}`, {
+                url: sanitizedUrl,
+              },
+            })
+            logWarning('xhr', `failed to parse response: ${err.message}`, {
               responseText: xhr.responseText,
-              url: finalUrl
+              url: sanitizedUrl,
             }, {
-              reportAsSentryError: false
-            });
-            parsedData = parseError instanceof SyntaxError ? xhr.responseText : null;
+              reportAsSentryError: false,
+            })
+            data = err instanceof SyntaxError ? xhr.responseText : null
           }
-        } else {
+        }
+        else {
           addBreadcrumb({
             category: 'xhr',
             message: `unhandled responseType: ${xhr.responseType}`,
             data: {
-              url: finalUrl
-            }
-          }, {});
+              url: sanitizedUrl,
+            },
+          })
         }
         if (XHR.shouldTreatStatusCodeAsFailure(xhr.status)) {
-          resolveWithError(formatResponse(finalUrl, xhr, parsedData));
-        } else {
-          resolve(formatResponse(finalUrl, xhr, parsedData));
+          handleFailure(formatResponse(sanitizedUrl, xhr, data))
         }
-      } catch (err) {
-        rejectWithCause(err);
+        else {
+          resolve(formatResponse(sanitizedUrl, xhr, data))
+        }
       }
-    });
+      catch (err) {
+        handleError(err)
+      }
+    })
     xhr.addEventListener(XHR.Events.ABORT, () => {
-      logMetrics(urlWithParams, settings.method, xhr, timer, attempt, XHR.Events.ABORT);
-      resolveWithError(formatResponse(finalUrl, xhr, null));
-    });
+      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.ABORT)
+      handleFailure(formatResponse(sanitizedUrl, xhr, undefined))
+    })
     xhr.addEventListener(XHR.Events.ERROR, () => {
-      logMetrics(urlWithParams, settings.method, xhr, timer, attempt, XHR.Events.ERROR);
-      resolveWithError(formatResponse(finalUrl, xhr, null));
-    });
+      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.ERROR)
+      handleFailure(formatResponse(sanitizedUrl, xhr, undefined))
+    })
     xhr.addEventListener(XHR.Events.TIMEOUT, () => {
-      logMetrics(urlWithParams, settings.method, xhr, timer, attempt, XHR.Events.TIMEOUT);
-      resolveWithError(formatResponse(finalUrl, xhr, null));
-    });
-    if (settings.headers) {
-      for (const header in settings.headers) {
-        if (!(header === 'Content-Type' && settings.data && settings.data instanceof FormData) && {}.hasOwnProperty.call(settings.headers, header)) {
-          xhr.setRequestHeader(header, settings.headers[header]);
-        }
-      }
+      logAsyncRequest(urlForRequest, mergedSettings.method, xhr, timer, requestId, XHR.Events.TIMEOUT)
+      handleFailure(formatResponse(sanitizedUrl, xhr, undefined))
+    })
+
+    // Prepare data for sending
+    const body = typeof mergedSettings.data !== 'object' || mergedSettings.raw || mergedSettings.rawBody ? mergedSettings.data : mergedSettings.dump ? mergedSettings.dump(mergedSettings.data) : mergedSettings.data
+    if (body !== undefined) {
+      xhr.send(body)
     }
-    if (settings.uploadEvents) {
-      for (const event in settings.uploadEvents) {
-        if ({}.hasOwnProperty.call(settings.uploadEvents, event)) {
-          xhr.upload.addEventListener(event, settings.uploadEvents[event].bind(null, xhr), false);
-        }
-      }
+    else {
+      xhr.send()
     }
-    if (settings.downloadEvents) {
-      for (const event in settings.downloadEvents) {
-        if ({}.hasOwnProperty.call(settings.downloadEvents, event)) {
-          xhr.addEventListener(event, settings.downloadEvents[event].bind(null, xhr), false);
-        }
-      }
-    }
-    const data = typeof settings.data !== 'object' || settings.raw || settings.rawBody ? settings.data : settings.dump(settings.data);
-    if (data !== undefined) {
-      xhr.send(data);
-    } else {
-      xhr.send();
-    }
-  });
+  })
 }
 
 /**
@@ -494,44 +640,44 @@ async function sendXhrRequest(attempt, t, i) {
  * @param t - Defaults.
  * @returns Promise resolving to response.
  */
-async function sendWithRetry(e, t) {
-  // C
-  let response;
-  let attempt = 0;
-  let wafHandled = false;
-  const maxRetries = e.retryCount ?? t?.retryCount ?? 0;
+
+async function sendWithRetry(settings: XhrRequestSettings, overrideSettings?: Partial<XhrRequestSettings>): Promise<AjaxResponse> {
+  let response: AjaxResponse
+  let attempt = 0
+  let handledWafChallenge = false
+  const maxRetries = settings.retryCount ?? overrideSettings?.retryCount ?? 0
   do {
-    response = await sendXhrRequest(attempt, e, t);
-    let retryStrategy = XHR.retryStrategyForStatusCode(response.status, e.retryStrategyOverride);
+    response = await sendXhrRequest(attempt, settings, overrideSettings)
+    let retryStrategy = XHR.retryStrategyForStatusCode(response.status, settings.retryStrategyOverride)
     if (response.wafChallenge) {
-      if (!wafHandled) {
-        attempt = -1;
-        wafHandled = true;
+      if (!handledWafChallenge) {
+        attempt = -1
+        handledWafChallenge = true
       }
-      retryStrategy = XHR.RetryStrategy.LINEAR_BACKOFF;
-      await wafManager.waitForWAFValidation(response.wafChallenge === 'challenge' ? 'challenge' : 'captcha');
+      retryStrategy = XHR.RetryStrategy.LINEAR_BACKOFF
+      await wafManager.waitForWAFValidation(response.wafChallenge === 'challenge' ? 'challenge' : 'captcha')
     }
     if (retryStrategy === XHR.RetryStrategy.NO_RETRY) {
-      if (XHR.shouldTreatStatusCodeAsFailure(response.status)) {
-        throw new XHRError(response);
-      }
-      return response;
+      if (XHR.shouldTreatStatusCodeAsFailure(response.status))
+        throw new XHRError(response)
+      return response
     }
     if (retryStrategy === XHR.RetryStrategy.LINEAR_BACKOFF) {
-      await delay(500 * attempt);
-    } else if (retryStrategy === XHR.RetryStrategy.JITTERED_EXPONENTIAL_BACKOFF) {
-      const baseDelay = Math.min(500 * 2 ** attempt, 300000);
-      const jitter = 0.25 * Math.random() * baseDelay;
-      await delay(baseDelay + jitter);
-    } else {
-      break;
+      await delay(500 * attempt)
     }
-    attempt++;
-  } while (attempt < 1 + maxRetries);
-  if (!XHR.shouldTreatStatusCodeAsFailure(response.status)) {
-    return response;
-  }
-  throw new XHRError(response);
+    else if (retryStrategy === XHR.RetryStrategy.JITTERED_EXPONENTIAL_BACKOFF) {
+      const base = Math.min(500 * 2 ** attempt, 300000)
+      const jitter = 0.25 * Math.random() * base
+      await delay(base + jitter)
+    }
+    else {
+      break
+    }
+    attempt++
+  } while (attempt < 1 + maxRetries)
+  if (!XHR.shouldTreatStatusCodeAsFailure(response.status))
+    return response
+  throw new XHRError(response)
 }
 
 /**
@@ -541,266 +687,124 @@ async function sendWithRetry(e, t) {
  * @param options - Options.
  * @returns Promise resolving to response.
  */
-export async function getRequest(url, params = {}, options) {
-  // $$T3
-  XHR.assertSameOrigin(url);
-  const method = XHR.Methods.GET;
+export async function getRequest<T>(url: string, params: Record<string, any> = {}, options: Partial<XhrRequestSettings> = {}): Promise<AjaxResponse<T>> {
+  XHR.assertSameOrigin(url)
+  const method = XHR.Methods.GET
   const response = await sendWithRetry({
     url,
     method,
     params,
-    ...options
-  }, XHR.getDefaults);
-  logRequestData(response, method, url);
-  return response;
+    ...options,
+  }, XHR.getDefaults)
+  logRequestData(response, method, url)
+  return response
 }
-
-/**
- * PUT request.
- * @param t - URL.
- * @param i - Data.
- * @param n - Options.
- * @returns Promise resolving to response.
- */
-async function putRequest(t, i, n) {
-  // i
-  const method = XHR.Methods.PUT;
-  const response = await sendWithRetry({
-    url: t,
-    method,
-    data: i,
-    ...n
-  }, XHR.defaults);
-  logRequestData(response, method, t);
-  return response;
-}
-
-/**
- * POST request.
- * @param t - URL.
- * @param i - Data.
- * @param n - Options.
- * @returns Promise resolving to response.
- */
-async function postRequest(t, i, n) {
-  // n
-  const method = XHR.Methods.POST;
-  const response = await sendWithRetry({
-    url: t,
-    method,
-    data: i,
-    ...n
-  }, XHR.defaults);
-  logRequestData(response, method, t);
-  return response;
-}
-
-/**
- * PATCH request.
- * @param t - URL.
- * @param i - Data.
- * @param n - Options.
- * @returns Promise resolving to response.
- */
-async function patchRequest(t, i, n) {
-  // r
-  const method = XHR.Methods.PATCH;
-  const response = await sendWithRetry({
-    url: t,
-    method,
-    data: i,
-    ...n
-  }, XHR.defaults);
-  logRequestData(response, method, t);
-  return response;
-}
-
-/**
- * DELETE request.
- * @param t - URL.
- * @param i - Data.
- * @param n - Options.
- * @returns Promise resolving to response.
- */
-async function deleteRequest(t, i, n) {
-  // a
-  const method = XHR.Methods.DELETE;
-  const response = await sendWithRetry({
-    url: t,
-    method,
-    data: i,
-    ...n
-  }, XHR.defaults);
-  logRequestData(response, method, t);
-  return response;
-}
-
-/**
- * OPTIONS request.
- */
-async function optionsRequest(t, i) {
-  // s
-  return await sendWithRetry({
-    url: t,
-    method: XHR.Methods.OPTIONS,
-    ...i
-  }, XHR.defaults);
-}
-
-/**
- * Cross-origin GET request.
- */
-async function crossOriginGetRequest(t, i, n) {
-  // o
-  return await sendWithRetry({
-    url: t,
-    method: XHR.Methods.GET,
-    params: i,
-    ...n
-  }, XHR.crossOriginGetDefaults);
-}
-
-/**
- * Cross-origin GET any request.
- */
-async function crossOriginGetAnyRequest(e, t, i) {
-  // l
-  return await crossOriginGetRequest(e, t, i);
-}
-
-/**
- * Cross-origin HEAD request.
- */
-async function crossOriginHeadRequest(t, i, n) {
-  // d
-  return await sendWithRetry({
-    url: t,
-    method: XHR.Methods.HEAD,
-    params: i,
-    ...n
-  }, XHR.crossOriginDefaults);
-}
-
-/**
- * Cross-origin PUT request.
- */
-async function crossOriginPutRequest(t, i, n) {
-  // u
-  return await sendWithRetry({
-    url: t,
-    method: XHR.Methods.PUT,
-    data: i,
-    ...n
-  }, XHR.crossOriginDefaults);
-}
-
-/**
- * Cross-origin POST request.
- */
-async function crossOriginPostRequest(t, i, n) {
-  // p
-  return await sendWithRetry({
-    url: t,
-    method: XHR.Methods.POST,
-    data: i,
-    ...n
-  }, XHR.crossOriginDefaults);
-}
-
-/**
- * XHR utility namespace.
- */
 
 /**
  * Paginated GET request.
  */
-async function getPaginated(e, t) {
+async function getPaginated<T = any>(url: string, options: Record<string, any> = {}) {
   // N
-  let i = {};
+  let currentParams = {}
   let {
     cursor,
-    ...r
-  } = t || {
-    cursor: void 0
-  };
-  if (t?.cursor) {
-    let n = new URL(t.cursor, document.baseURI);
-    n.pathname !== e && console.error(`Pagination cursor does not match endpoint: ${e} ${t.cursor}`);
-    i = Object.fromEntries(n.searchParams.entries());
+    ...rest
+  } = options || {
+    cursor: void 0,
   }
-  let a = await getRequest(e, {
-    ...r,
-    ...i
-  });
+  if (options?.cursor) {
+    let n = new URL(options.cursor, document.baseURI)
+    n.pathname !== url && console.error(`Pagination cursor does not match endpoint: ${url} ${options.cursor}`)
+    currentParams = Object.fromEntries(n.searchParams.entries())
+  }
+  let res = (await getRequest<T>(url, {
+    ...rest,
+    ...currentParams,
+  })) as any
   return {
-    ...a,
+    ...res,
     data: {
-      ...a.data,
-      pagination: a.data.pagination ? {
-        nextPage: a.data.pagination?.next_page ?? null,
-        prevPage: a.data.pagination?.prev_page ?? null
-      } : {
-        nextPage: null,
-        prevPage: null
-      }
-    }
-  };
+      ...res.data,
+      pagination: res.data!.pagination
+        ? {
+            nextPage: res.data.pagination?.next_page ?? null,
+            prevPage: res.data.pagination?.prev_page ?? null,
+          }
+        : {
+            nextPage: null,
+            prevPage: null,
+          },
+    },
+  }
 }
 
 /**
- * Timer utility for tracking request duration and state.
+ *  utility for tracking request duration and state.
  */
 class Timer {
-  // P
-
-  finish = () => {
-    if (this.finished) console.error('Timer already finished');
-    this._timerId && clearTimeout(this._timerId);
-    this.finished = true;
-    document.removeEventListener('visibilitychange', this.onVisibilityChange);
-    document.removeEventListener('offline', this.onOffline);
-    return Math.round(performance.now() - this._startTime);
-  };
-  onVisibilityChange = () => {
-    document.visibilityState === 'hidden' && (this.backgrounded = true);
-  };
-  onOffline = () => {
-    this.offlined = true;
-  };
-  constructor(e = {}, t) {
-    this._startTime = performance.now();
-    this._timerId = null;
-    this.metadata = null;
-    this.finished = false;
-    this.backgrounded = false;
-    this.offlined = false;
-    this.backgrounded = document.visibilityState === 'hidden';
-    this.offlined = navigator.onLine === false;
-    document.addEventListener('visibilitychange', this.onVisibilityChange);
-    document.addEventListener('offline', this.onOffline);
-    if (t) this.metadata = t;
-    if (e.onTimeout) {
-      if (!e.timeoutMs) throw new Error('onTimeout specified without timeoutMs');
+  private _startTime: number
+  private _timerId: ReturnType<typeof setTimeout> | null
+  metadata: any
+  finished: boolean
+  backgrounded: boolean
+  offlined: boolean
+  finish: () => number
+  onVisibilityChange: () => void
+  onOffline: () => void
+  constructor(options: {
+    onTimeout?: (backgrounded: boolean) => void
+    timeoutMs?: number
+  } = {}, metadata?: any) {
+    this._startTime = performance.now()
+    this._timerId = null
+    this.metadata = null
+    this.finished = false
+    this.backgrounded = document.visibilityState === 'hidden'
+    this.offlined = !navigator.onLine
+    this.finish = () => {
+      if (this.finished)
+        console.error(' already finished')
+      if (this._timerId)
+        clearTimeout(this._timerId)
+      this.finished = true
+      document.removeEventListener('visibilitychange', this.onVisibilityChange)
+      document.removeEventListener('offline', this.onOffline)
+      return Math.round(performance.now() - this._startTime)
+    }
+    this.onVisibilityChange = () => {
+      if (document.visibilityState === 'hidden')
+        this.backgrounded = true
+    }
+    this.onOffline = () => {
+      this.offlined = true
+    }
+    document.addEventListener('visibilitychange', this.onVisibilityChange)
+    document.addEventListener('offline', this.onOffline)
+    if (metadata)
+      this.metadata = metadata
+    if (options.onTimeout) {
+      if (!options.timeoutMs)
+        throw new Error('onTimeout specified without timeoutMs')
       this._timerId = setTimeout(() => {
-        e.onTimeout(this.backgrounded);
-      }, e.timeoutMs);
+        options.onTimeout!(this.backgrounded)
+      }, options.timeoutMs)
     }
   }
 }
 export const API = {
   get: getRequest,
   getPaginated,
-  put: putRequest,
-  post: postRequest,
-  del: deleteRequest,
-  patch: patchRequest,
-  crossOriginGet: crossOriginGetRequest
-};
+  put: XHR.put,
+  post: XHR.post,
+  del: XHR.del,
+  patch: XHR.patch,
+  crossOriginGet: XHR.crossOriginGet,
+}
 // Exported API
-export let $$O0 = XHR;
-export const Ay = XHR;
-export const Dr = XHRError;
-export const Fs = shouldSampleRequest;
-export const GD = getRequest;
-export const IF = API;
-export const k9 = getRequest;
+export let $$O0 = XHR
+export const Ay = XHR
+export const Dr = XHRError
+export const Fs = shouldSampleRequest
+export const GD = getRequest
+export const IF = API
+export const k9 = getRequest

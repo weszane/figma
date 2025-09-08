@@ -3,7 +3,7 @@ import { useEffect, useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { _ as _$$_ } from "../905/862468";
 import { k as _$$k } from "../905/727631";
-import { uQ6, glU } from "../figma_app/763686";
+import { ActionType, Fullscreen } from "../figma_app/763686";
 import { Uz, xH } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -152,7 +152,7 @@ export function $$D0(e) {
   }, [G, close]);
   switch (state) {
     case qy.INITIAL:
-      if (source === uQ6.READY_FOR_DEV) return jsx(P, {
+      if (source === ActionType.READY_FOR_DEV) return jsx(P, {
         actionIcon: jsx(_$$_, {}),
         actionLabel: renderI18nText("auto_rename_layers.rename_layers", {
           numLayers: e.numRenamableNodesForHandoff
@@ -290,7 +290,7 @@ export function $$D0(e) {
         let r = [{
           type: is.UNDO,
           callback: () => {
-            glU.triggerActionInUserEditScope("undo", {});
+            Fullscreen.triggerActionInUserEditScope("undo", {});
             close();
           }
         }];
@@ -304,7 +304,7 @@ export function $$D0(e) {
             ...aiTrackingContext,
             iteration_view_type: $J.DEFAULT_SUCCESS
           },
-          completionString: source === uQ6.READY_FOR_DEV && renderI18nText("auto_rename_layers.renamed_n_layers", {
+          completionString: source === ActionType.READY_FOR_DEV && renderI18nText("auto_rename_layers.renamed_n_layers", {
             n: tasks.filter(e => e.state === z8.SUCCEEDED).length
           }),
           targets: i.tasks.map(e => e.taskId),

@@ -7,7 +7,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { $ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { qD } from "../figma_app/471982";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
 import { XL } from "../figma_app/684168";
 import { Ib } from "../905/129884";
@@ -200,7 +200,7 @@ export function $$S1(e) {
       openedFrom: "community",
       fullscreenEditorType: null
     };
-    l(to({
+    l(showModalHandler({
       type: S,
       data: i
     }));

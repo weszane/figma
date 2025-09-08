@@ -1,4 +1,4 @@
-import { Ifi, YEY, Z6A } from "../figma_app/763686";
+import { MatchCriteria, CanvasSearchHelpers, NodeType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
@@ -25,7 +25,7 @@ export function $$u1(e, t, r) {
     r.matchCase && l.substring(s, o) !== t || r.wholeWords && (s > 0 && p(l[s - 1]) || o < e.value.length && p(l[o])) || i.push({
       start: s,
       end: o,
-      matchType: Ifi.TEXT_MATCH
+      matchType: MatchCriteria.TEXT_MATCH
     });
   }
   return i;
@@ -43,7 +43,7 @@ export let $$_0 = new class {
   }
   initializeIndex() {
     let e = performance.now();
-    let t = YEY.getSearchableNodes(!0).map(c);
+    let t = CanvasSearchHelpers.getSearchableNodes(!0).map(c);
     let r = debugState.getState();
     this.searchLibrary.set(t);
     ds("canvas_search_index_create", r.openFile?.key, r, {
@@ -99,7 +99,7 @@ export let $$_0 = new class {
         let s = $$u1(a, e, t);
         if ("textContent" !== a.key && s.length) {
           let e = s[0];
-          e.matchType = r.item.type === Z6A.CANVAS ? Ifi.PAGE_MATCH : Ifi.LAYER_MATCH;
+          e.matchType = r.item.type === NodeType.CANVAS ? MatchCriteria.PAGE_MATCH : MatchCriteria.LAYER_MATCH;
           i = [e, ...i];
         } else i.push(...s);
       }
@@ -130,7 +130,7 @@ export let $$_0 = new class {
   }
   updateIndex() {
     let e = performance.now();
-    let t = YEY.getSearchableNodes(!1).map(c);
+    let t = CanvasSearchHelpers.getSearchableNodes(!1).map(c);
     if (t.length > 2e3) {
       this.initializeIndex();
       return;

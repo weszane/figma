@@ -5,7 +5,7 @@ import { oA } from "../905/723791";
 import { Us, M7 } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
@@ -13,11 +13,11 @@ import { fu } from "../figma_app/831799";
 import { _6 } from "../figma_app/386952";
 import { bel } from "../figma_app/43951";
 import { WW, Wf } from "../figma_app/345997";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { v0 } from "../figma_app/639088";
 import { A as _$$A } from "../svg/821527";
-export let $$w0 = Ju(function (e) {
+export let $$w0 = registerModal(function (e) {
   let {
     teamId
   } = e;
@@ -34,7 +34,7 @@ export let $$w0 = Ju(function (e) {
   let I = useSelector(e => e.teams[teamId]);
   let A = e => {
     e.preventDefault();
-    n(Lo());
+    n(popModalStack());
   };
   let S = E > WW && !j;
   let N = C > WW && !j;
@@ -88,7 +88,7 @@ export let $$w0 = Ju(function (e) {
           upgradeToProfessional: jsx(Us, {
             onClick: e => {
               e.preventDefault();
-              n(Lo());
+              n(popModalStack());
               n(WX({
                 teamId,
                 selectedView: b

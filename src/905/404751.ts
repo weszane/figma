@@ -7,9 +7,9 @@ import { s as _$$s } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { v as _$$v } from "../905/556792";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Cy } from "../905/844322";
-import { Lo, to, Ce } from "../905/156213";
+import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { wR } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/224";
 import { mE } from "../905/561087";
@@ -25,7 +25,7 @@ import { W as _$$W } from "../905/522628";
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { R as _$$R } from "../905/441305";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { DV } from "../905/739964";
 import { W as _$$W2 } from "../905/442612";
 import { i } from "../figma_app/43065";
@@ -33,7 +33,7 @@ import { M as _$$M } from "../figma_app/854365";
 import { i as _$$i } from "../905/46262";
 import { PE } from "../905/15667";
 var N = (e => (e[e.TEMPLATE_TO_DRAFTS = 0] = "TEMPLATE_TO_DRAFTS", e[e.MOVING_FROM_MULTIPLE_FOLDERS_FROM_TEAM = 1] = "MOVING_FROM_MULTIPLE_FOLDERS_FROM_TEAM", e[e.MOVING_ACROSS_TEAMS = 2] = "MOVING_ACROSS_TEAMS", e[e.MOVING_FROM_MULTIPLE_ORPHANED_ORG_FOLDERS = 3] = "MOVING_FROM_MULTIPLE_ORPHANED_ORG_FOLDERS", e[e.MOVING_FROM_ORPHANED_ORG_FOLDER = 4] = "MOVING_FROM_ORPHANED_ORG_FOLDER", e[e.MOVING_FROM_MULTIPLE_FOLDERS = 5] = "MOVING_FROM_MULTIPLE_FOLDERS", e[e.MOVING_FROM_FOLDER = 6] = "MOVING_FROM_FOLDER", e))(N || {});
-let P = Ju(function (e) {
+let P = registerModal(function (e) {
   let {
     title,
     children,
@@ -178,7 +178,7 @@ let $$z = async (e, t, i, n, r, a) => {
         await G(e, t, i, n, r);
       },
       onError: () => {
-        t.dispatch(Lo());
+        t.dispatch(popModalStack());
         t.dispatch(_$$F.enqueue({
           message: "Encountered an error. Please try again.",
           error: !0
@@ -200,26 +200,26 @@ let H = async (e, t, i, n, r, a) => {
     await $$z(e, t, i, n, r);
     return;
   }
-  t.dispatch(to({
+  t.dispatch(showModalHandler({
     type: P,
     data: {
       modalConfig: a,
       numFilesMoved: i.length,
       onConfirm: () => V(e, t, i, n, r),
-      onClose: () => t.dispatch(Ce())
+      onClose: () => t.dispatch(hideModal())
     }
   }));
 };
 let W = (e, t, i) => {
   let n = [FPermissionDenialReason.FILE_REPO_DENY_CONNECTED_GUEST_CAN_MOVE, FPermissionDenialReason.FILE_DENY_CONNECTED_GUEST_CAN_MOVE];
-  return !!(!e.result && n.some(t => e.publicDenyReasons.includes(t))) && (i.dispatch(to({
+  return !!(!e.result && n.some(t => e.publicDenyReasons.includes(t))) && (i.dispatch(showModalHandler({
     type: _$$v(),
     data: {
       fileKey: t
     }
   })), !0);
 };
-let $$K0 = nF(async (e, t) => {
+let $$K0 = createOptimistThunk(async (e, t) => {
   let {
     files,
     repos,
@@ -287,7 +287,7 @@ let $$K0 = nF(async (e, t) => {
   if (_.teamId && (!T || P || k !== R)) {
     if (team && _.isEditingLockedForUser && !R) {
       let t = files.some(e => e.editor_type === FFileType.FIGMAKE);
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: DV,
         data: {
           team,
@@ -323,17 +323,17 @@ let $$K0 = nF(async (e, t) => {
             reportError(_$$e.WORKFLOW, Error("Team object is null in tryMove"));
             return;
           }
-          c > 0 && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(to({
+          c > 0 && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(showModalHandler({
             type: _$$M,
             data: {
               team
             }
-          })) : u > 0 && _$$W2() ? e.dispatch(to({
+          })) : u > 0 && _$$W2() ? e.dispatch(showModalHandler({
             type: i,
             data: {
               team
             }
-          })) : e.dispatch(to({
+          })) : e.dispatch(showModalHandler({
             type: DV,
             data: {
               team,
@@ -394,7 +394,7 @@ let $$K0 = nF(async (e, t) => {
         await G(t, e, files, repos, _);
       },
       onError: () => {
-        e.dispatch(Lo());
+        e.dispatch(popModalStack());
         e.dispatch(_$$F.enqueue({
           message: "Encountered an error. Please try again.",
           error: !0

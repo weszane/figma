@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { lQ } from "../905/934246";
 import { F } from "../905/768014";
-import { n4 } from "../905/955878";
+import { isFakeTouchEvent } from "../905/955878";
 import { hg } from "../905/705398";
 import { getFeatureFlags } from "../905/601108";
 import { cZ } from "../figma_app/272902";
@@ -32,7 +32,7 @@ function _({
       },
       onPointerDown(r) {
         m(r) || (t.current = "pointer");
-        e.current = n4(r);
+        e.current = isFakeTouchEvent(r);
       },
       onPointerUp(t) {
         let r = t.target;
@@ -73,7 +73,7 @@ function h({
         null !== r && "false" !== r && target.blur();
       });
       r.current = g(e, "pointerdown", e => {
-        d.current = n4(e);
+        d.current = isFakeTouchEvent(e);
       });
       t.current = g(e, "pointerup", e => {
         let {

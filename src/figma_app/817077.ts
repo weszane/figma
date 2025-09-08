@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { ZC } from "../figma_app/39751";
 import { Point } from "../905/736624";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
 import { $$ } from "../figma_app/62612";
 export function $$d2(e) {
-  let t = Y5.getViewportInfo();
+  let t = fullscreenValue.getViewportInfo();
   let r = e ? e.subtract(t) : new Point(t.width / 2, t.height / 2);
   let n = $$(t, r);
   return new Point(n.x, n.y);
@@ -22,7 +22,7 @@ export function $$u0(e, t, r) {
         let {
           width,
           height
-        } = Y5.getViewportInfo();
+        } = fullscreenValue.getViewportInfo();
         return Math.min(width / e * .5, height / t * .5);
       }(...r);
       if (null !== t) {
@@ -30,7 +30,7 @@ export function $$u0(e, t, r) {
           zoomScale,
           offsetX,
           offsetY
-        } = Y5.getViewportInfo();
+        } = fullscreenValue.getViewportInfo();
         t < zoomScale && (u(new Point(...r).scale(t)), setTimeout(() => {
           d({
             centerX: offsetX,

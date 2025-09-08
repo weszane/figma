@@ -5,7 +5,7 @@ import { W } from "../5430/573261";
 import { _ as _$$_ } from "../905/456042";
 import { I } from "../5132/515990";
 import { Vm } from "../figma_app/427318";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
 import { Tm } from "../figma_app/740025";
 import { iZ } from "../905/372672";
@@ -20,7 +20,7 @@ export function $$x0({
   let f = I();
   let y = Object.values(useSelector(e => Tm(e))).filter(t => I0(e) && t.plugins_whitelist_enforced || xQ(e) && t.widgets_whitelist_enforced);
   let g = (e, t) => {
-    r(to({
+    r(showModalHandler({
       type: W(),
       data: {
         extensionId: e.id,
@@ -51,7 +51,7 @@ export function $$x0({
         user: x,
         userId: x?.id || ""
       }));
-      r(to({
+      r(showModalHandler({
         type: _$$_,
         data: {
           payload: {

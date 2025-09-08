@@ -1,14 +1,14 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { J0O, glU, fOf, YIb } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ComponentPropType, Fullscreen, ComponentType, DesignSystemsTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/745972";
 import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { vq } from "../905/8732";
-import { Ce } from "../905/156213";
-import { Y5 } from "../figma_app/455680";
+import { hideModal } from "../905/156213";
+import { fullscreenValue } from "../figma_app/455680";
 import { i as _$$i } from "../figma_app/741237";
 import { sS } from "../figma_app/516028";
 import { CG } from "../figma_app/646357";
@@ -30,7 +30,7 @@ export function $$x3({
     stateGroupPropertySortOrder: OC(i),
     dropdownShown: i.dropdownShown,
     openFileKey: sS(i),
-    defaultPropName: e === J0O.VARIANT ? YH(i) : vS(i, e, t),
+    defaultPropName: e === ComponentPropType.VARIANT ? YH(i) : vS(i, e, t),
     isInstanceSwapPickerShown: i.instanceSwapPickerShown.isShown
   }));
 }
@@ -60,7 +60,7 @@ export function $$C0({
   let l = function () {
     let e = useDispatch();
     return useCallback(() => {
-      e(Ce());
+      e(hideModal());
       e(vq());
     }, [e]);
   }();
@@ -74,15 +74,15 @@ export function $$C0({
   });
   let _ = useCallback((e, t) => {
     let i = stateGroupPropertySortOrder || [];
-    "" !== (e = QV(e)) && (l7.user("add-variant-property", () => {
-      glU && Po(() => allStates?.forEach(n => {
+    "" !== (e = QV(e)) && (permissionScopeHandler.user("add-variant-property", () => {
+      Fullscreen && Po(() => allStates?.forEach(n => {
         let r = n.stateInfo.propertyValues;
         r && _$$i(n.symbol.node_id, zh({
           ...r,
           [e]: t
         }, [...i, e]));
-      }), glU);
-    }), zb("Adding Property to Variant Component", stateGroup?.nodeId), Y5.commit());
+      }), Fullscreen);
+    }), zb("Adding Property to Variant Component", stateGroup?.nodeId), fullscreenValue.commit());
   }, [stateGroupPropertySortOrder, allStates, stateGroup]);
   return useCallback(({
     propName: n,
@@ -94,46 +94,46 @@ export function $$C0({
       switch (e.type) {
         case PW.COMPONENT:
           return {
-            type: fOf.COMPONENT,
+            type: ComponentType.COMPONENT,
             key: CG(e)
           };
         case PW.STATE_GROUP:
           return {
-            type: fOf.STATE_GROUP,
+            type: ComponentType.STATE_GROUP,
             key: CG(e)
           };
         default:
           return;
       }
     })?.filter(e => !!e?.key) ?? [];
-    l7.user("add-prop-def", () => {
+    permissionScopeHandler.user("add-prop-def", () => {
       switch (e) {
-        case J0O.BOOL:
-          glU.addBoolComponentPropDef(n, r, t ?? "", d);
+        case ComponentPropType.BOOL:
+          Fullscreen.addBoolComponentPropDef(n, r, t ?? "", d);
           break;
-        case J0O.TEXT:
-          glU.addTextComponentPropDef(n, r, t ?? "", d);
+        case ComponentPropType.TEXT:
+          Fullscreen.addTextComponentPropDef(n, r, t ?? "", d);
           break;
-        case J0O.INSTANCE_SWAP:
-          glU.addInstanceComponentPropDef(n, r, t ?? "", u);
+        case ComponentPropType.INSTANCE_SWAP:
+          Fullscreen.addInstanceComponentPropDef(n, r, t ?? "", u);
           break;
-        case J0O.VARIANT:
+        case ComponentPropType.VARIANT:
           _(n, r);
           break;
-        case J0O.NUMBER:
+        case ComponentPropType.NUMBER:
           if (d) {
-            glU.addNumberComponentPropDef(n, r, t ?? "", d);
+            Fullscreen.addNumberComponentPropDef(n, r, t ?? "", d);
             break;
           }
           let i = "string" == typeof r;
           if (!i && "number" != typeof r) throw Error("Component props: Default value for Number prop is not a string or number");
           if (i && !Rq(r)) throw Error("Component props: Failed to parse number value");
-          glU.addNumberComponentPropDef(n, i ? T1(r) : r, t ?? "", null);
+          Fullscreen.addNumberComponentPropDef(n, i ? T1(r) : r, t ?? "", null);
           break;
-        case J0O.IMAGE:
+        case ComponentPropType.IMAGE:
           break;
-        case J0O.SLOT:
-          YIb?.addSlotComponentPropDef({
+        case ComponentPropType.SLOT:
+          DesignSystemsTsApi?.addSlotComponentPropDef({
             name: n,
             preferredValues: u,
             description: c

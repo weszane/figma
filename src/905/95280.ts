@@ -1,21 +1,21 @@
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { F } from "../905/241044";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX, Ox } from "../905/576487";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { vF, HF } from "../figma_app/841351";
 import { jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import { HISTORY_DOCUMENT_INDEX } from "../figma_app/518682";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { DS, _W } from "../figma_app/571341";
 import { SI, PZ } from "../figma_app/241341";
-let b = Ju(function (e) {
+let b = registerModal(function (e) {
   let {
     nodeId
   } = e;
@@ -76,7 +76,7 @@ let b = Ju(function (e) {
     return () => clearTimeout(e);
   }, [nodeId]);
   let k = useCallback(() => {
-    i(Ce());
+    i(hideModal());
   }, [i]);
   return jsx(PZ, {
     currentImage: S,
@@ -93,7 +93,7 @@ let b = Ju(function (e) {
     skipCorrectHistoryCanvasCheck: !0,
     versions
   });
-}, "CompareChangesModal", ZU.YES);
+}, "CompareChangesModal", ModalSupportsBackground.YES);
 export function $$v1() {
   let e = useDispatch();
   let t = useSelector(e => e.versionHistory.compareId);
@@ -106,8 +106,8 @@ export function $$v1() {
 export function $$I0(e, t, i, n) {
   if (n) return;
   let r = F(i?.user.handle);
-  if (r && i?.touched_at && glU.getChunkChangeMap().has(e)) {
-    if (!glU.getChangesToCompareFromHistoryChangesState().has(e)) {
+  if (r && i?.touched_at && Fullscreen.getChunkChangeMap().has(e)) {
+    if (!Fullscreen.getChangesToCompareFromHistoryChangesState().has(e)) {
       t(_$$F.dequeue({
         matchType: "view_changes"
       }));
@@ -127,7 +127,7 @@ export function $$I0(e, t, i, n) {
             name: "diffing_modal_cta_clicked",
             entrypoint: "figma_design_version_history"
           });
-          t(to({
+          t(showModalHandler({
             type: b,
             data: {
               nodeId: e

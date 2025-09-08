@@ -61,7 +61,7 @@ import { km } from "../469e6e40/519291";
 import { W as _$$W } from "../469e6e40/695836";
 import { m as _$$m } from "../469e6e40/248185";
 import { K as _$$K } from "../905/628118";
-import { Lo, to as _$$to, Ce } from "../905/156213";
+import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { fu, jm } from "../figma_app/831799";
 import { m as _$$m2 } from "../figma_app/369596";
 import { O as _$$O } from "../figma_app/748328";
@@ -78,11 +78,11 @@ import { CH, rE } from "../figma_app/805373";
 import { r as _$$r2 } from "../469e6e40/505264";
 import { p as _$$p2 } from "../figma_app/353099";
 import { debounce } from "../905/915765";
-import { S as _$$S2 } from "../905/274480";
-import { J as _$$J3 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { $ as _$$$ } from "../905/355181";
 import { xM, c5, ZT, lH } from "../figma_app/330108";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { Cj } from "../905/270084";
 import { Uc } from "../4452/915131";
@@ -253,7 +253,7 @@ function eu(e) {
       throwTypeError(step);
   }
 }
-let eV = Ju(function ({
+let eV = registerModal(function ({
   workspaceId: e,
   onSubmit: t
 }) {
@@ -408,7 +408,7 @@ let eV = Ju(function ({
     })
   }];
   let q = () => {
-    a(Lo());
+    a(popModalStack());
   };
   function $({
     selectedTeams: s
@@ -494,10 +494,10 @@ let eV = Ju(function ({
       }), jsx(_$$Y, {
         height: "hug-contents",
         padding: 8,
-        children: jsx(_$$S2, {
+        children: jsx(Checkbox, {
           checked: b,
           onChange: f,
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: renderI18nText("add_unassigned_teams_modal.without_owners")
           })
         })
@@ -562,7 +562,7 @@ function e7(e, t, a, n) {
       r();
     },
     onDeleteTeam: e => {
-      s(_$$to({
+      s(showModalHandler({
         type: _$$H,
         data: {
           team: e,
@@ -572,7 +572,7 @@ function e7(e, t, a, n) {
       }));
     },
     onJoinRequest: e => {
-      s(_$$to({
+      s(showModalHandler({
         type: _$$$2,
         data: {
           team: e
@@ -582,7 +582,7 @@ function e7(e, t, a, n) {
     onOpenTeam: e => s(dm(e)),
     onRenameTeam: e => {
       s(WC());
-      s(_$$to({
+      s(showModalHandler({
         type: _$$h2(),
         data: {
           team: e
@@ -591,7 +591,7 @@ function e7(e, t, a, n) {
       r();
     },
     onTransferTeam: e => {
-      s(_$$to({
+      s(showModalHandler({
         type: Lg(),
         data: {
           teamId: e.id,
@@ -629,7 +629,7 @@ function e7(e, t, a, n) {
       r();
     },
     onOpenAccessSettings: e => {
-      s(_$$to({
+      s(showModalHandler({
         type: dW,
         data: {
           team: e
@@ -737,7 +737,7 @@ function ta({
     });
   };
   let M = () => {
-    for (let e of S) u(_$$to({
+    for (let e of S) u(showModalHandler({
       type: _$$p3,
       data: {
         teamId: e,
@@ -912,7 +912,7 @@ function tc({
     onOpenAccessSettings
   } = e7(o, l, c, d);
   let D = e => {
-    m(_$$to({
+    m(showModalHandler({
       type: _$$p3,
       data: {
         teamId: e.id,
@@ -1125,7 +1125,7 @@ let tS = (e, t) => t ? {
   ...e,
   workspaceName: t
 } : e;
-let tN = Ju(function (e) {
+let tN = registerModal(function (e) {
   let {
     workspaceId
   } = e;
@@ -1168,7 +1168,7 @@ let tN = Ju(function (e) {
       workspaceId,
       orgId: r
     });
-    a(Ce());
+    a(hideModal());
   };
   let f = jsx("span", {
     className: _$$s.fontSemiBold.$,
@@ -1262,7 +1262,7 @@ let tN = Ju(function (e) {
                   teamIds: m.tokens.map(e => e.content.id)
                 }));
               }
-              a(Ce());
+              a(hideModal());
             },
             disabled: b || !!m.errorMessage,
             children: getI18nString("workspace.save")
@@ -1367,7 +1367,7 @@ function tL(e) {
   let e1 = () => {
     let e;
     e = eY || (filters.workspaceFilter ? filters.workspaceFilter : void 0);
-    en(_$$to({
+    en(showModalHandler({
       type: Uc,
       data: {
         workspaceId: e,
@@ -1377,7 +1377,7 @@ function tL(e) {
     }));
   };
   let e2 = () => {
-    en(_$$to({
+    en(showModalHandler({
       type: eV,
       data: {
         workspaceId: eY,
@@ -1869,7 +1869,7 @@ function tL(e) {
               iconPrefix: jsx(_$$A, {}),
               variant: "ghost",
               onClick: () => {
-                en(_$$to({
+                en(showModalHandler({
                   type: tN,
                   data: {
                     workspaceId: eY

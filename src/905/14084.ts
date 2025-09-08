@@ -14,14 +14,14 @@ import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { tI } from "../figma_app/599327";
-import { ES } from "../905/156213";
+import { hideSpecificModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { ud } from "../905/513035";
 import { q5 } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { w as _$$w } from "../905/281010";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { xx } from "../figma_app/995208";
 import { U } from "../figma_app/65327";
 let k = "cb2673de5dce908e59e849955b564818efb747a6";
@@ -111,7 +111,7 @@ let D = (e, t) => {
       throwTypeError(t);
   }
 };
-let $$L0 = Ju(function (e) {
+let $$L0 = registerModal(function (e) {
   let [t, i] = useState("");
   let {
     color
@@ -123,7 +123,7 @@ let $$L0 = Ju(function (e) {
     e.autoApproved || e.requestId || function (e) {
       if (isDevEnvironment()) throw e;
       reportError(_$$e.ACTIVATION, e);
-      c(ES($$L0));
+      c(hideSpecificModal($$L0));
       c(F.enqueue({
         message: "Something went wrong.",
         error: !0
@@ -143,7 +143,7 @@ let $$L0 = Ju(function (e) {
         n = !0;
       } else n = !0;
     }
-    c(ES($$L0));
+    c(hideSpecificModal($$L0));
     e.seatType === ud.DEVELOPER && A?.editorType === FFileType.DESIGN && u("handoff");
     n && c(F.enqueue({
       message: "Error updating request message.",
@@ -170,7 +170,7 @@ let $$L0 = Ju(function (e) {
           onClick: w,
           ctaTrackingDescriptor: _$$c.CONTINUE
         },
-        onClose: () => c(ES($$L0)),
+        onClose: () => c(hideSpecificModal($$L0)),
         trackingContextName: "Post NUX Seat Request Confirmation Modal",
         description: jsxs(Fragment, {
           children: [O(e.autoApproved, e.seatType), !e.autoApproved && jsx(N, {

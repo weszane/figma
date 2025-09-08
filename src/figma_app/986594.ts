@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { htN, ZEs } from "../figma_app/763686";
-import { fn as _$$fn, sH } from "../905/871411";
+import { CmsRepeaterHelpers, ChildRelationshipStatus } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { reportError } from "../905/11";
 import { c$ } from "../figma_app/618433";
@@ -45,16 +45,16 @@ export function $$I3(e) {
     if (!i) return;
     let s = (r ?? []).find(e => e.id === t);
     let o = s?.name ?? "CMS";
-    let l = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
-    let d = l.length > 0 ? l : htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_CHILDREN) ?? [];
-    d.length > 0 && (htN?.createRepeatersFromValidatedNodesList(d, t, i.length, o, e), n?.());
+    let l = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_IDENTICAL_CHILDREN) ?? [];
+    let d = l.length > 0 ? l : CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_CHILDREN) ?? [];
+    d.length > 0 && (CmsRepeaterHelpers?.createRepeatersFromValidatedNodesList(d, t, i.length, o, e), n?.());
   }, [r, e]);
 }
 export function $$S10(e) {
   if (!_$$e2) return e;
   let t = e.filter(e => e.isInPrimaryBreakpointFrame);
   let r = new Set(t.map(e => e.multiEditGlueId ?? ""));
-  return [...t, ...e.filter(e => !e.isInPrimaryBreakpointFrame && (e.multiEditGlueId && !r.has(e.multiEditGlueId) ? (r.add(e.multiEditGlueId), !0) : !_$$fn(sH(e.multiEditGlueId))))];
+  return [...t, ...e.filter(e => !e.isInPrimaryBreakpointFrame && (e.multiEditGlueId && !r.has(e.multiEditGlueId) ? (r.add(e.multiEditGlueId), !0) : !isValidSessionLocalID(parseSessionLocalID(e.multiEditGlueId))))];
 }
 export function $$v8(e) {
   if (1 === e.length) return e[0];

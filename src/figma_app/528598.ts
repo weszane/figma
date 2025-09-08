@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useEffect, useCallback, useContext } from "react";
-import { Z_n, CWU, Ez5, ibQ, glU, J0O, rrT, rXF, ZiZ, VQu } from "../figma_app/763686";
+import { VariableDataType, VariablesBindings, AppStateTsApi, ItemType, Fullscreen, ComponentPropType, NodePropertyCategory, VariableResolvedDataType, SceneIdentifier, ApprovalStatus } from "../figma_app/763686";
 import { q as _$$q } from "../figma_app/905311";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { flatten } from "../figma_app/656233";
@@ -10,7 +10,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/49800";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
 import { c$, bL, l9, mc } from "../905/493196";
 import { E as _$$E } from "../905/632989";
@@ -19,7 +19,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { K as _$$K2 } from "../figma_app/291291";
 import { yG } from "../905/859698";
 import { RR, Jr } from "../figma_app/338442";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
@@ -40,11 +40,11 @@ import { KD } from "../figma_app/975811";
 import { cJ } from "../figma_app/976749";
 import { A as _$$A2 } from "../905/639174";
 import { dH } from "../figma_app/741237";
-import { hS, gl } from "../905/216495";
+import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { J as _$$J } from "../905/95677";
 import { sS } from "../figma_app/516028";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { PW } from "../figma_app/633080";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -81,7 +81,7 @@ import { c6, zJ, qU, AN, BY, Mj, FG, ID, c1, u8, bq, CS, PQ, ty, aF, n4, K8, Ro,
 import { Xp, O2, FF, Rq, T1, lg, ui } from "../figma_app/164212";
 import { s as _$$s2 } from "../905/583953";
 import { c2 } from "../905/382883";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { xP } from "../figma_app/65182";
 import { u as _$$u2 } from "../figma_app/940920";
 var w = C;
@@ -98,11 +98,11 @@ function eO({
 }) {
   let h = kl("isInstanceSublayerSelected");
   let m = selectWithShallowEqual(UR);
-  let g = e.type === Z_n.ALIAS ? e.value : void 0;
-  let f = e.type === Z_n.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
+  let g = e.type === VariableDataType.ALIAS ? e.value : void 0;
+  let f = e.type === VariableDataType.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
   let E = _$$u(g);
   let y = Px();
-  let b = useMemo(() => CWU.getVariableSetKeyForPublish(E?.variableSetId ?? "") ?? "", [E?.variableSetId]);
+  let b = useMemo(() => VariablesBindings.getVariableSetKeyForPublish(E?.variableSetId ?? "") ?? "", [E?.variableSetId]);
   let T = b in y ? y[yG(b)] : void 0;
   let S = useMemo(() => T ? {
     [yG(b)]: T
@@ -156,7 +156,7 @@ function eD(e) {
       hash: r,
       name: ""
     },
-    animationFrame: hS(e) ? e.animationFrame : void 0,
+    animationFrame: isValidValue(e) ? e.animationFrame : void 0,
     transform: _$$s2.identity().toFigMatrix(),
     scale: 1,
     rotation: 0,
@@ -164,7 +164,7 @@ function eD(e) {
   };
 }
 function ek(e, t) {
-  if (gl(e)) return new Uint8Array();
+  if (isInvalidValue(e)) return new Uint8Array();
   let r = e[t];
   if (!r) return new Uint8Array();
   let n = function (e) {
@@ -222,8 +222,8 @@ function eU(e) {
     minHack,
     behaviorAssignmentInfo
   } = e;
-  let C = ut(Ez5?.propertiesPanelState().shownPropertiesPanels, void 0);
-  let O = C?.[ibQ.INSTANCE_ITEM] ?? !1;
+  let C = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, void 0);
+  let O = C?.[ItemType.INSTANCE_ITEM] ?? !1;
   let R = useDispatch();
   let L = useSelector(e => e.selectedComponentPropDefId);
   let [D, M] = useState(!1);
@@ -245,10 +245,10 @@ function eU(e) {
     requestedTypes: void 0,
     variableScope: void 0
   };
-  let Y = useMemo(() => flatten(guids.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
+  let Y = useMemo(() => flatten(guids.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
   let $ = !!getFeatureFlags().sts_code && !!parameterConfig;
-  let X = !hideBindingButton && !!(typedPropDef.type !== J0O.INSTANCE_SWAP && void 0 !== variableType && void 0 !== requestedTypes);
-  let J = value && "object" == typeof value && "type" in value && value.type === Z_n.ALIAS;
+  let X = !hideBindingButton && !!(typedPropDef.type !== ComponentPropType.INSTANCE_SWAP && void 0 !== variableType && void 0 !== requestedTypes);
+  let J = value && "object" == typeof value && "type" in value && value.type === VariableDataType.ALIAS;
   let [Z, ee, er] = _$$e3(!1);
   let {
     isDragHover,
@@ -261,13 +261,13 @@ function eU(e) {
     codeComponentId: r
   }) {
     let [n, s, o] = _$$e3(!1);
-    return useMemo(() => getFeatureFlags().ds_image_props_sites && e.type === J0O.IMAGE ? {
+    return useMemo(() => getFeatureFlags().ds_image_props_sites && e.type === ComponentPropType.IMAGE ? {
       isDragHover: n,
       onDropImage: n => {
-        let i = Y5.fileArrayToString;
+        let i = fullscreenValue.fileArrayToString;
         if (i) {
           let s = i(Array.from(n.files));
-          glU?.dropImageOnPropThumbnail(s, e.explicitDefID, t, rrT.COMPONENT_PROP_ASSIGNMENT, r);
+          Fullscreen?.dropImageOnPropThumbnail(s, e.explicitDefID, t, NodePropertyCategory.COMPONENT_PROP_ASSIGNMENT, r);
         }
         o();
       },
@@ -288,7 +288,7 @@ function eU(e) {
   let ep = jsx("div", {
     className: w()(zJ, {
       [qU]: containerWidth === O2.RESIZABLE_SIDEBAR,
-      [AN]: typedPropDef.type === J0O.TEXT
+      [AN]: typedPropDef.type === ComponentPropType.TEXT
     }),
     children: jsx("div", {
       ref: B,
@@ -307,17 +307,17 @@ function eU(e) {
       requestedTypes,
       onComponentPropSelected: e => {
         let t = FF(e);
-        l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
+        permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
       },
       onVariableSelected: async e => {
         if (void 0 === e) return;
         let t = await R(Oe(e));
         if (!t) return;
         let n = y$(variableType, t);
-        submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, n, forBubbledProps));
+        submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, n, forBubbledProps));
         onChange?.(guids, typedPropDef.explicitDefID, n, forBubbledProps);
         oz("COMPONENT_PROP_DEF", {
-          type: Z_n.ALIAS,
+          type: VariableDataType.ALIAS,
           resolvedType: e.resolvedType,
           value: t
         });
@@ -335,11 +335,11 @@ function eU(e) {
         ...e
       });
       let t = e.value;
-      if (typedPropDef.type === J0O.BOOL) return jsx(eV, {
+      if (typedPropDef.type === ComponentPropType.BOOL) return jsx(eV, {
         ...e,
         value: t
       });
-      if (typedPropDef.type === J0O.TEXT) return $ && parameterConfig.control === Jr.SELECT && parameterConfig ? jsx(eX, {
+      if (typedPropDef.type === ComponentPropType.TEXT) return $ && parameterConfig.control === Jr.SELECT && parameterConfig ? jsx(eX, {
         ...e,
         value: t,
         selectConfig: parameterConfig.selectConfig
@@ -347,7 +347,7 @@ function eU(e) {
         ...e,
         value: t
       });
-      if (typedPropDef.type === J0O.NUMBER) {
+      if (typedPropDef.type === ComponentPropType.NUMBER) {
         if ($) {
           if (parameterConfig.control === Jr.SLIDER && parameterConfig.sliderConfig && null != parameterConfig.sliderConfig.min && null != parameterConfig.sliderConfig.max && null != parameterConfig.sliderConfig.step) return jsx(eW, {
             ...e,
@@ -374,10 +374,10 @@ function eU(e) {
           value: t
         });
       }
-      return typedPropDef.type === J0O.INSTANCE_SWAP ? jsx(eq, {
+      return typedPropDef.type === ComponentPropType.INSTANCE_SWAP ? jsx(eq, {
         ...e,
         value: t
-      }) : typedPropDef.type === J0O.IMAGE ? jsx(eJ, {
+      }) : typedPropDef.type === ComponentPropType.IMAGE ? jsx(eJ, {
         ...e,
         value: t,
         isDragHover,
@@ -388,14 +388,14 @@ function eU(e) {
       }) : jsx(Fragment, {});
     })()
   });
-  if (typedPropDef.type === J0O.NUMBER && !getFeatureFlags().ds_variable_props_number_asgmnt) return jsx(Fragment, {});
+  if (typedPropDef.type === ComponentPropType.NUMBER && !getFeatureFlags().ds_variable_props_number_asgmnt) return jsx(Fragment, {});
   let ef = () => {
-    l7.user("component-prop-assignment", () => {
-      glU?.removePropImage(typedPropDef.explicitDefID, behaviorAssignmentInfo?.guids ?? guids, behaviorAssignmentInfo?.codeComponentId ?? null);
+    permissionScopeHandler.user("component-prop-assignment", () => {
+      Fullscreen?.removePropImage(typedPropDef.explicitDefID, behaviorAssignmentInfo?.guids ?? guids, behaviorAssignmentInfo?.codeComponentId ?? null);
     });
   };
-  let ey = typedPropDef.type === J0O.IMAGE && getFeatureFlags().ds_image_props_sites;
-  let eb = ey && (gl(e.value) || (e.value?.image ?? "") !== "");
+  let ey = typedPropDef.type === ComponentPropType.IMAGE && getFeatureFlags().ds_image_props_sites;
+  let eb = ey && (isInvalidValue(e.value) || (e.value?.image ?? "") !== "");
   function eI() {
     return hideIcon ? jsx(_$$g, {
       appendedClassName: Mj,
@@ -438,7 +438,7 @@ function eU(e) {
         "aria-label": getI18nString("fullscreen.properties_panel.image_settings.remove_image"),
         recordingKey: Pt("componentPropAssignmentRemoveImage", guids.join("-"), typedPropDef.explicitDefID),
         children: jsx(_$$K2, {})
-      }) : null) ?? (typedPropDef.type !== J0O.INSTANCE_SWAP ? null : jsx(h_, {
+      }) : null) ?? (typedPropDef.type !== ComponentPropType.INSTANCE_SWAP ? null : jsx(h_, {
         instanceAndSublayerGUIDs: Y,
         showAllInstanceOptions: !1
       })) ?? (hideBindingButton || void 0 === variableType || void 0 === requestedTypes ? null : jsx(eO, {
@@ -449,17 +449,17 @@ function eU(e) {
         variableScope,
         onComponentPropSelected: e => {
           let t = FF(e);
-          l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
+          permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
         },
         onVariableSelected: async e => {
           if (assertNotNullish(variableType), void 0 === e) return;
           let t = await R(Oe(e));
           if (!t) return;
           let n = y$(variableType, t);
-          submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, y$(variableType, t), forBubbledProps));
+          submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : permissionScopeHandler.user("component-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, y$(variableType, t), forBubbledProps));
           onChange?.(guids, typedPropDef.explicitDefID, n, forBubbledProps);
           oz("COMPONENT_PROP_ASSIGNMENT", {
-            type: Z_n.ALIAS,
+            type: VariableDataType.ALIAS,
             resolvedType: e.resolvedType,
             value: t
           });
@@ -469,8 +469,8 @@ function eU(e) {
           });
         },
         onClearBinding: e => {
-          clearBehaviorVariableBinding ? clearBehaviorVariableBinding(typedPropDef.explicitDefID, e) : l7.user("component-prop-assignment", () => {
-            glU?.unbindComponentPropAssignment(guids, typedPropDef.explicitDefID, e, forBubbledProps);
+          clearBehaviorVariableBinding ? clearBehaviorVariableBinding(typedPropDef.explicitDefID, e) : permissionScopeHandler.user("component-prop-assignment", () => {
+            Fullscreen?.unbindComponentPropAssignment(guids, typedPropDef.explicitDefID, e, forBubbledProps);
           });
         },
         recordingKey: "typedComponentPropAssignmentRow"
@@ -526,9 +526,9 @@ function eV({
   let p = useDispatch();
   let _ = useSelector(e => e.instanceSwapPickerShown);
   let g = useCallback(e => {
-    let t = WI(rXF.BOOLEAN, e);
-    c ? c(s.explicitDefID, t) : l7.user("toggle-bool-prop-assignment", () => {
-      glU?.setComponentPropAssignmentVariableData(r, s.explicitDefID, t, d);
+    let t = WI(VariableResolvedDataType.BOOLEAN, e);
+    c ? c(s.explicitDefID, t) : permissionScopeHandler.user("toggle-bool-prop-assignment", () => {
+      Fullscreen?.setComponentPropAssignmentVariableData(r, s.explicitDefID, t, d);
     });
     u?.(r, s.explicitDefID, t, d);
     _?.isShown && p(vq());
@@ -539,7 +539,7 @@ function eV({
       className: eG(l),
       children: jsx(_$$d, {
         checked: e,
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: s.name
         }),
         onChange: g,
@@ -552,12 +552,12 @@ function eV({
 function eH({
   value: e
 }) {
-  let t = gl(e);
+  let t = isInvalidValue(e);
   let r = e.value;
   let s = _$$u(r);
   let o = Px();
   let l = useContext(_$$p);
-  let d = useMemo(() => CWU?.getVariableSetKeyForPublish(s?.variableSetId ?? "") ?? "", [s?.variableSetId]);
+  let d = useMemo(() => VariablesBindings?.getVariableSetKeyForPublish(s?.variableSetId ?? "") ?? "", [s?.variableSetId]);
   let c = d in o ? o[yG(d)] : void 0;
   let u = useMemo(() => c ? {
     [yG(d)]: c
@@ -606,22 +606,22 @@ function ez({
     }
   } = _$$X({
     onFocus: () => {
-      gl(e) ? b("") : b(S);
+      isInvalidValue(e) ? b("") : b(S);
     },
     onChange: e => b(e.currentTarget.value)
   });
   let [y, b] = useState(null);
-  let T = gl(e) ? 0 : Number(e);
+  let T = isInvalidValue(e) ? 0 : Number(e);
   let I = useMemo(() => {
     let t = !y || !Rq(y);
-    return gl(e) || t ? T : T1(y);
+    return isInvalidValue(e) || t ? T : T1(y);
   }, [y, e, T]);
-  let S = gl(e) ? getI18nString("design_systems.component_properties.mixed") : lg(T);
+  let S = isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : lg(T);
   let A = () => {
     if (isNotNullish(y)) {
-      let e = WI(rXF.FLOAT, I);
-      c ? c(t.explicitDefID, e) : l7.user("set-number-prop-assignment", () => {
-        glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
+      let e = WI(VariableResolvedDataType.FLOAT, I);
+      c ? c(t.explicitDefID, e) : permissionScopeHandler.user("set-number-prop-assignment", () => {
+        Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
       });
       p?.(r, t.explicitDefID, e, s);
     }
@@ -651,7 +651,7 @@ function ez({
         onKeyUp,
         onMouseLeave,
         onMouseUp,
-        placeholder: gl(e) ? S : void 0,
+        placeholder: isInvalidValue(e) ? S : void 0,
         recordingKey: Pt("componentPropAssignmentNumberInput", r.join("-"), d),
         value: y
       })
@@ -672,7 +672,7 @@ function eW({
   submitBehaviorAssignment: _,
   onChange: h
 }) {
-  let m = gl(e) ? 0 : Number(e);
+  let m = isInvalidValue(e) ? 0 : Number(e);
   let [f, E] = useState(null);
   let y = {
     min: c.value,
@@ -680,8 +680,8 @@ function eW({
     step: p.value
   };
   let b = e => {
-    let n = WI(rXF.FLOAT, e);
-    _ ? _(t.explicitDefID, n) : l7.user("set-number-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
+    let n = WI(VariableResolvedDataType.FLOAT, e);
+    _ ? _(t.explicitDefID, n) : permissionScopeHandler.user("set-number-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
     h?.(r, t.explicitDefID, n, s);
     E(null);
   };
@@ -730,12 +730,12 @@ function eK({
     }
   } = _$$X({
     onFocus: () => {
-      gl(e) ? b("") : b(T);
+      isInvalidValue(e) ? b("") : b(T);
     },
     onChange: e => b(e.currentTarget.value)
   });
   let [y, b] = useState(null);
-  let T = t.type === J0O.TEXT ? gl(e) ? getI18nString("design_systems.component_properties.mixed") : e : null;
+  let T = t.type === ComponentPropType.TEXT ? isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : e : null;
   return jsx("div", {
     className: eB(o),
     children: jsx("div", {
@@ -752,11 +752,11 @@ function eK({
         disableInput: l,
         onBlur: () => {
           if (isNotNullish(y)) {
-            let e = WI(rXF.TEXT_DATA, {
+            let e = WI(VariableResolvedDataType.TEXT_DATA, {
               characters: y
             });
-            c ? c(t.explicitDefID, e) : l7.user("set-text-prop-assignment", () => {
-              glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
+            c ? c(t.explicitDefID, e) : permissionScopeHandler.user("set-text-prop-assignment", () => {
+              Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
             });
             p?.(r, t.explicitDefID, e, s);
           }
@@ -771,7 +771,7 @@ function eK({
         onKeyUp,
         onMouseLeave,
         onMouseUp,
-        placeholder: gl(e) ? T : null,
+        placeholder: isInvalidValue(e) ? T : null,
         recordingKey: Pt("componentPropAssignmentTextInput", r.join("-"), d),
         value: y
       })
@@ -805,13 +805,13 @@ function e$({
   max: h,
   onChange: m
 }) {
-  let g = gl(e) ? 0 : Number(e);
+  let g = isInvalidValue(e) ? 0 : Number(e);
   let f = useDispatch();
   let [E, y] = useState(null);
   let b = useMemo(() => new eY(p), [p]);
   let T = e => {
-    let n = WI(rXF.FLOAT, e);
-    u ? u(t.explicitDefID, n) : l7.user("set-number-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
+    let n = WI(VariableResolvedDataType.FLOAT, e);
+    u ? u(t.explicitDefID, n) : permissionScopeHandler.user("set-number-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
     m?.(r, t.explicitDefID, n, s);
     y(null);
   };
@@ -858,7 +858,7 @@ function eX({
       children: e.label
     }, e.label);
   });
-  let _ = gl(e) ? void 0 : e?.toString();
+  let _ = isInvalidValue(e) ? void 0 : e?.toString();
   let h = t.parameterConfig?.label?.value ?? t.name;
   return jsx("div", {
     className: eB(s),
@@ -868,18 +868,18 @@ function eX({
       children: jsxs(bL, {
         value: _,
         onChange: e => {
-          let n = t.type === J0O.TEXT ? WI(rXF.TEXT_DATA, {
+          let n = t.type === ComponentPropType.TEXT ? WI(VariableResolvedDataType.TEXT_DATA, {
             characters: e
-          }) : WI(rXF.FLOAT, parseFloat(e));
-          d ? d(t.explicitDefID, n) : l7.user("set-select-prop-assignment", () => {
-            glU && glU.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, i);
+          }) : WI(VariableResolvedDataType.FLOAT, parseFloat(e));
+          d ? d(t.explicitDefID, n) : permissionScopeHandler.user("set-select-prop-assignment", () => {
+            Fullscreen && Fullscreen.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, i);
           });
           u?.(r, t.explicitDefID, n, i);
         },
         recordingKey: Pt("componentPropAssignmentSelect", r.join("-"), c),
         children: [jsx(l9, {
-          placeholder: gl(e) ? getI18nString("design_systems.component_properties.mixed") : void 0,
-          label: jsx(_$$h, {
+          placeholder: isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : void 0,
+          label: jsx(HiddenLabel, {
             children: h
           }),
           width: "fill",
@@ -922,13 +922,13 @@ function eq({
     y(uP({
       item: e,
       alwaysFetch: u,
-      targetUpsertScene: u ? ZiZ.PLAYGROUND_SCENE : ZiZ.ACTIVE_SCENE,
+      targetUpsertScene: u ? SceneIdentifier.PLAYGROUND_SCENE : SceneIdentifier.ACTIVE_SCENE,
       callback: t => {
         E ? E(s.explicitDefID, {
-          type: Z_n.SYMBOL_ID,
-          resolvedType: rXF.SYMBOL_ID,
+          type: VariableDataType.SYMBOL_ID,
+          resolvedType: VariableResolvedDataType.SYMBOL_ID,
           value: "SymbolId:" + t
-        }) : l7.user("set-instance-prop-assignment", () => glU?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PW.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? VQu.NOT_APPLICABLE : preferredValues.includes(e) ? VQu.YES : VQu.NO));
+        }) : permissionScopeHandler.user("set-instance-prop-assignment", () => Fullscreen?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PW.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? ApprovalStatus.NOT_APPLICABLE : preferredValues.includes(e) ? ApprovalStatus.YES : ApprovalStatus.NO));
       }
     }));
     dH({
@@ -936,7 +936,7 @@ function eq({
       defID: ""
     });
   }, [y, c, r, b, u, preferredValues, s, E]);
-  flatten(r.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
+  flatten(r.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
   let {
     modalWidth
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
@@ -979,7 +979,7 @@ function eJ({
 }) {
   let h = t.explicitDefID;
   let m = useMemo(() => function (e) {
-    if (gl(e)) return eD(e);
+    if (isInvalidValue(e)) return eD(e);
     let t = ek(e, "image");
     if (t.every(e => 0 === e)) return eD(e);
     let r = ek(e, "imageThumbnail");
@@ -1001,11 +1001,11 @@ function eJ({
   let f = _$$P();
   let y = useRef(null);
   let b = useCallback(() => {
-    glU?.disableImagePropEdit(rrT.COMPONENT_PROP_ASSIGNMENT, h);
+    Fullscreen?.disableImagePropEdit(NodePropertyCategory.COMPONENT_PROP_ASSIGNMENT, h);
     c?.();
   }, [h, c]);
   let T = useCallback(() => {
-    glU?.enableImagePropEdit(rrT.COMPONENT_PROP_ASSIGNMENT, h, p?.guids ?? r, p?.codeComponentId ?? null);
+    Fullscreen?.enableImagePropEdit(NodePropertyCategory.COMPONENT_PROP_ASSIGNMENT, h, p?.guids ?? r, p?.codeComponentId ?? null);
     d?.();
   }, [h, r, d, p]);
   let I = (void 0 !== p ? (_ ?? 240) + 12 : f - 12) / 2;
@@ -1021,7 +1021,7 @@ function eJ({
     o ? b() : T();
   }, [o, b, T, I]);
   let v = useCallback(() => {
-    glU?.uploadPropImage(h, p?.guids ?? r, p?.codeComponentId ?? null);
+    Fullscreen?.uploadPropImage(h, p?.guids ?? r, p?.codeComponentId ?? null);
   }, [h, r, p]);
   let [A, x, N] = _$$e3(!1);
   let C = MB({
@@ -1041,7 +1041,7 @@ function eJ({
           [nt]: o
         }),
         ref: y,
-        children: hS(s) ? jsxs(Fragment, {
+        children: isValidValue(s) ? jsxs(Fragment, {
           children: [jsxs("div", {
             className: R4,
             children: [jsx("div", {
@@ -1143,7 +1143,7 @@ function e0({
               className: mQ,
               children: [jsx("div", {
                 className: ru
-              }), hS(e) ? d.animatedImage ? jsx(_$$Y2, {
+              }), isValidValue(e) ? d.animatedImage ? jsx(_$$Y2, {
                 imagePaint: d,
                 width: 208,
                 height: 208,
@@ -1203,7 +1203,7 @@ export function $$e10({
   behaviorAssignmentInfo: v,
   pickerWidth: A
 }) {
-  let x = useMemo(() => e.filter(e => e.type !== J0O.SLOT), [e]);
+  let x = useMemo(() => e.filter(e => e.type !== ComponentPropType.SLOT), [e]);
   return jsx(_$$q, {
     listItems: x,
     updateSelection: void 0,

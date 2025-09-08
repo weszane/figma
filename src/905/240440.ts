@@ -1,4 +1,4 @@
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 
 /**
  * Interface for published plugin configuration
@@ -44,26 +44,20 @@ interface PluginContext {
  *
  * Original function name: Q
  */
-export function isPluginConfigMatching(
-  pluginConfig: PluginConfig | null | undefined,
-  pluginContext: PluginContext,
-): boolean {
+export function isPluginConfigMatching(pluginConfig: PluginConfig | null | undefined, pluginContext: PluginContext): boolean {
   if (!pluginConfig) {
     return false;
   }
 
   // Check if context represents a local plugin using ZQ helper
-  const isLocalContext = ZQ(pluginContext);
-
+  const isLocalContext = hasLocalFileId(pluginContext);
   if (isLocalContext && pluginConfig.type === "local") {
     // For local plugins, match by localFileId
     return pluginContext.localFileId === pluginConfig.localFileId;
   }
-
   if (!isLocalContext && pluginConfig.type === "published") {
     // For published plugins, match by plugin_id
     return pluginContext.plugin_id === pluginConfig.pluginId;
   }
-
   return false;
 }

@@ -51,7 +51,7 @@ import { v as _$$v } from "../figma_app/899624";
 import { tb } from "../905/848667";
 import { II } from "../figma_app/11182";
 import { sf } from "../905/929976";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { C3, UV } from "../figma_app/297957";
 import { j6 } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
@@ -66,7 +66,7 @@ import { RB } from "../figma_app/428858";
 import { k_ as _$$k_ } from "../1881/866163";
 import { L7 } from "../figma_app/329496";
 import { J7 } from "../figma_app/650409";
-import { NW } from "../figma_app/831101";
+import { BillingCycle } from "../figma_app/831101";
 import { J as _$$J2 } from "../905/298764";
 import { H as _$$H, az } from "../figma_app/805373";
 import { r as _$$r } from "../469e6e40/505264";
@@ -547,10 +547,10 @@ function e$(e) {
   if (eU(e).currentSeatType === Gu.VIEW || e.planType !== FOrganizationLevelType.TEAM || !e.billingInterval) return null;
   let t = null;
   switch (e.billingInterval) {
-    case NW.MONTH:
+    case BillingCycle.MONTH:
       t = renderI18nText("member_flyout_modal.billing_interval.month");
       break;
-    case NW.YEAR:
+    case BillingCycle.YEAR:
       t = renderI18nText("member_flyout_modal.billing_interval.year");
       break;
     default:
@@ -832,11 +832,11 @@ function eY(e) {
     label: getI18nString("member_flyout_modal.billing_interval_select_label"),
     options: [{
       type: "option",
-      key: NW.MONTH,
+      key: BillingCycle.MONTH,
       text: getI18nString("member_flyout_modal.billing_interval.monthly")
     }, {
       type: "option",
-      key: NW.YEAR,
+      key: BillingCycle.YEAR,
       text: getI18nString("member_flyout_modal.billing_interval.annually")
     }],
     selectedOption: e.billingInterval,
@@ -1123,7 +1123,7 @@ function e0(e) {
         variant: "secondary",
         disabled: 0 === o.length,
         onClick: () => {
-          t(Ce());
+          t(hideModal());
           t(sf({
             view: "orgAdminSettings",
             orgAdminSettingsViewTab: J7.ACTIVITY,

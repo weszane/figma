@@ -8,7 +8,7 @@ import { CY } from "../figma_app/637027";
 import { T as _$$T } from "../figma_app/257703";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
-import { to, Lo } from "../905/156213";
+import { showModalHandler, popModalStack } from "../905/156213";
 import { MB } from "../figma_app/996356";
 import { fu } from "../figma_app/831799";
 import { Gu } from "../905/513035";
@@ -19,7 +19,7 @@ import { H_ } from "../figma_app/336853";
 import { d as _$$d } from "../905/44199";
 import { Gv } from "../figma_app/736948";
 import { um } from "../figma_app/761870";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 import { OJ } from "../905/519092";
 import { yX } from "../figma_app/918700";
@@ -113,7 +113,7 @@ export function $$U3({
       if (T.length >= 1) {
         let i = um(e).filter(e => xf(e) && !H_(T, e));
         if ((i = [...new Set(i)]).length > 0) {
-          p(to({
+          p(showModalHandler({
             type: C,
             data: {
               emails: i,
@@ -191,7 +191,7 @@ export function $$M2({
 function S(e, i) {
   return e.invite_whitelist_guest_invite_setting === Gv.REQUIRE_APPROVAL && "licenseGroup" !== i;
 }
-let $$y1 = Ju(function ({
+let $$y1 = registerModal(function ({
   licenseGroupId: e,
   workspaceId: i
 }) {
@@ -206,7 +206,7 @@ let $$y1 = Ju(function ({
     children: jsx(OJ, {
       title: d,
       onClose: () => {
-        a(Lo());
+        a(popModalStack());
         a(cL());
       },
       children: jsx($$M2, {
@@ -217,7 +217,7 @@ let $$y1 = Ju(function ({
     })
   });
 }, "ORG_INVITE_MODAL");
-let C = Ju(function (e) {
+let C = registerModal(function (e) {
   return jsx(yX, {
     confirmationTitle: getI18nString("org_invite.pending_guest_confirmation.title"),
     confirmText: getI18nString("org_invite.pending_guest_confirmation.button"),

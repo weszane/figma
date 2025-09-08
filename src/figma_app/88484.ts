@@ -13,11 +13,11 @@ import { IT } from "../905/713695";
 import { f as _$$f } from "../905/289690";
 import { Ip } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { WU } from "../figma_app/35887";
 let b = new class {
   constructor() {
-    this.RecentPrototypesSchemaValidator = YV("RecentPrototypesSchemaValidator", e => e.object({
+    this.RecentPrototypesSchemaValidator = createMetaValidator("RecentPrototypesSchemaValidator", e => e.object({
       recent_prototypes: Ip.ignore(),
       recent_prototype_repos: Ip.ignore(),
       org_drafts_owners: e.array(WU)
@@ -26,7 +26,7 @@ let b = new class {
   getRecentPrototypes(e) {
     return this.RecentPrototypesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/recent_prototypes", td.toAPIParameters({
+    }) => await t.get("/api/recent_prototypes", APIParameterUtils.toAPIParameters({
       ...e,
       fuid: getInitialOptions().user_data?.id
     })));

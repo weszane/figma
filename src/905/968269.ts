@@ -1,12 +1,47 @@
-export var $$n2 = (e => (e.FETCH = "plugin-iframe-for-fetch", e.INSPECT = "plugin-iframe-in-inspect", e.MODAL = "plugin-iframe-in-modal", e.BUZZ_LEFT_PANEL = "plugin-iframe-in-buzz-left-panel", e))($$n2 || {});
-let $$r4 = 300;
-let $$a3 = 200;
-let $$s0 = "$INTERNAL_DO_NOT_USE$RERUN_PLUGIN$";
-let $$o5 = ["*"];
-let $$l1 = "window.parent.parent.parent";
-export const IN = $$s0;
-export const NO = $$l1;
-export const Wh = $$n2;
-export const Yw = $$a3;
-export const bA = $$r4;
-export const gH = $$o5;
+/**
+ * Enum representing different plugin iframe modes
+ * @enum {string}
+ */
+export enum PluginIframeMode {
+  /** Plugin iframe used for fetch operations */
+  FETCH = 'plugin-iframe-for-fetch',
+  /** Plugin iframe used for inspection */
+  INSPECT = 'plugin-iframe-in-inspect',
+  /** Plugin iframe used in modal context */
+  MODAL = 'plugin-iframe-in-modal',
+  /** Plugin iframe used in buzz left panel */
+  BUZZ_LEFT_PANEL = 'plugin-iframe-in-buzz-left-panel',
+}
+
+/** Internal constant for plugin rerun identifier */
+const INTERNAL_RERUN_PLUGIN_IDENTIFIER = '$INTERNAL_DO_NOT_USE$RERUN_PLUGIN$'
+
+/** Default allowed origins for iframe communication */
+const DEFAULT_ALLOWED_ORIGINS = ['*']
+
+/** Timeout duration in milliseconds for plugin operations */
+const PLUGIN_TIMEOUT_MS = 300
+
+/** Retry delay in milliseconds for plugin operations */
+const PLUGIN_RETRY_DELAY_MS = 200
+
+/** Window reference path for parent context */
+const PARENT_WINDOW_REFERENCE = 'window.parent.parent.parent'
+
+/** Plugin iframe modes enumeration ($$n2) */
+export const Wh = PluginIframeMode
+
+/** Retry delay constant ($$a3) */
+export const Yw = PLUGIN_RETRY_DELAY_MS
+
+/** Timeout duration constant ($$r4) */
+export const bA = PLUGIN_TIMEOUT_MS
+
+/** Internal rerun identifier constant ($$s0) */
+export const IN = INTERNAL_RERUN_PLUGIN_IDENTIFIER
+
+/** Parent window reference constant ($$l1) */
+export const NO = PARENT_WINDOW_REFERENCE
+
+/** Allowed origins constant ($$o5) */
+export const gH = DEFAULT_ALLOWED_ORIGINS

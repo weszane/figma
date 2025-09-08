@@ -4,7 +4,7 @@ import { zp } from "../figma_app/740025";
 import { b as _$$b } from "../figma_app/203891";
 import { sX, GR, F$, gc, B8, w5, tC as _$$tC } from "../figma_app/229710";
 import { isEmptyObject } from "../figma_app/493477";
-import { HV5, Egt, _0v, sAE, Z64, ibQ, m1T } from "../figma_app/763686";
+import { GridLayoutApi, SceneGraphHelpers, Axis, LayoutSizingType, SocialMediaFormats, ItemType, LayoutTabType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck, isEvalViewPathCheck } from "../figma_app/897289";
@@ -16,7 +16,7 @@ import { K as _$$K } from "../905/443068";
 import { bL } from "../905/246123";
 import { fI } from "../905/201252";
 import { fh } from "../905/127493";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K2 } from "../905/621139";
@@ -24,7 +24,7 @@ import { bL as _$$bL2, D0 } from "../905/4410";
 import { A as _$$A } from "../905/251970";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import v from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -39,7 +39,7 @@ import { HH } from "../figma_app/828186";
 import { k as _$$k2 } from "../905/582200";
 import { k as _$$k3 } from "../8618/427799";
 import { Cl } from "../figma_app/334505";
-import { gl, oV, hS, _W } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, isValidValue, valueOrFallback } from "../905/216495";
 import { Zk } from "../figma_app/626177";
 import { Vy } from "../8826/611318";
 import { Wv } from "../figma_app/711157";
@@ -101,7 +101,7 @@ import { b as _$$b2 } from "../905/600173";
 import { n } from "../905/796896";
 import { i as _$$i } from "../905/542104";
 import { Pt } from "../figma_app/806412";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { z as _$$z } from "../905/454433";
 import { lg } from "../figma_app/976749";
 import { rb } from "../figma_app/151869";
@@ -123,7 +123,7 @@ function D() {
   let n = pq("PARENT");
   let r = Fk(e => {
     let t = e.getDirectlySelectedNodes();
-    return 1 === t.length && t[0]?.isGrid && HV5?.getGridTrackSelection() || [];
+    return 1 === t.length && t[0]?.isGrid && GridLayoutApi?.getGridTrackSelection() || [];
   });
   useEffect(() => {
     r.length > 0 && t(new Set(r));
@@ -139,33 +139,33 @@ function D() {
       }), jsx(_$$K, {
         "aria-label": getI18nString("common.close"),
         onClick: () => {
-          n && Egt?.replaceSelection([n], !0);
+          n && SceneGraphHelpers?.replaceSelection([n], !0);
         },
         children: jsx(_$$A, {})
       })]
     }), jsx(K, {
       axis: "COLUMNS",
       titleString: getI18nString("fullscreen.properties_panel.grid.columns"),
-      selectedRows: new Set([...e].filter(e => e.axis === _0v.X).map(e => e.index)),
+      selectedRows: new Set([...e].filter(e => e.axis === Axis.X).map(e => e.index)),
       updateSelectedRows: e => {
         let n = [...e].map(e => ({
           index: e,
-          axis: _0v.X
+          axis: Axis.X
         }));
         t(new Set(n));
-        HV5?.setGridTrackSelection(n);
+        GridLayoutApi?.setGridTrackSelection(n);
       }
     }), jsx(K, {
       axis: "ROWS",
       titleString: getI18nString("fullscreen.properties_panel.grid.rows"),
-      selectedRows: new Set([...e].filter(e => e.axis === _0v.Y).map(e => e.index)),
+      selectedRows: new Set([...e].filter(e => e.axis === Axis.Y).map(e => e.index)),
       updateSelectedRows: e => {
         let n = [...e].map(e => ({
           index: e,
-          axis: _0v.Y
+          axis: Axis.Y
         }));
         t(new Set(n));
-        HV5?.setGridTrackSelection(n);
+        GridLayoutApi?.setGridTrackSelection(n);
       }
     })]
   });
@@ -190,8 +190,8 @@ function K({
       }), jsx(_$$K, {
         "aria-label": "ROWS" === e ? getI18nString("fullscreen.properties_panel.grid.add_row") : getI18nString("fullscreen.properties_panel.grid.add_column"),
         onClick: () => {
-          l7.user("add-grid-track-edit-scope", () => {
-            HV5?.addTrackToGrid("ROWS" === e ? _0v.Y : _0v.X);
+          permissionScopeHandler.user("add-grid-track-edit-scope", () => {
+            GridLayoutApi?.addTrackToGrid("ROWS" === e ? Axis.Y : Axis.X);
           });
         },
         children: jsx(_$$e, {})
@@ -228,8 +228,8 @@ function L({
   let u = jsx(_$$K, {
     "aria-label": "ROWS" === n ? getI18nString("fullscreen.properties_panel.grid.delete_row") : getI18nString("fullscreen.properties_panel.grid.delete_column"),
     onClick: () => {
-      l7.user("delete-grid-track-edit-scope", () => {
-        HV5?.deleteGridTrackSelection();
+      permissionScopeHandler.user("delete-grid-track-edit-scope", () => {
+        GridLayoutApi?.deleteGridTrackSelection();
       });
     },
     children: jsx(_$$O, {})
@@ -244,7 +244,7 @@ function L({
     }), jsx(fh, {
       className: "grid_tracks_panel--leftInput--XRpGB",
       children: jsxs(Fragment, {
-        children: [jsx(_$$h, {
+        children: [jsx(HiddenLabel, {
           htmlFor: "grid-track-size-input",
           children: "ROWS" === n ? getI18nString("fullscreen.properties_panel.grid.row_height") : getI18nString("fullscreen.properties_panel.grid.column_width")
         }), jsx(_$$bL2, {
@@ -275,18 +275,18 @@ function L({
         value: r.toString(),
         children: [jsx(l9, {
           width: "fill",
-          label: jsx(_$$h, {
+          label: jsx(HiddenLabel, {
             children: getI18nString("fullscreen.properties_panel.grid.track_sizing")
           })
         }), jsxs(mc, {
           children: [jsx(c$, {
-            value: sAE.FIXED.toString(),
+            value: LayoutSizingType.FIXED.toString(),
             children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed")
           }), jsx(c$, {
-            value: sAE.FLEX.toString(),
+            value: LayoutSizingType.FLEX.toString(),
             children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill")
           }), jsx(c$, {
-            value: sAE.HUG.toString(),
+            value: LayoutSizingType.HUG.toString(),
             children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug")
           })]
         })]
@@ -307,15 +307,15 @@ function L({
 }
 function q() {
   let e = useSelector(e => {
-    if (gl(e.mirror.selectionProperties.cooperTemplateData)) return oV;
-    if (!e.mirror.selectionProperties.cooperTemplateData) return Z64.CUSTOM;
+    if (isInvalidValue(e.mirror.selectionProperties.cooperTemplateData)) return MIXED_MARKER;
+    if (!e.mirror.selectionProperties.cooperTemplateData) return SocialMediaFormats.CUSTOM;
     let t = e.mirror.selectionProperties.cooperTemplateData?.type || "CUSTOM";
-    return Z64[t];
+    return SocialMediaFormats[t];
   });
   let {
     hasInstanceSelected
   } = Cl();
-  let n = hasInstanceSelected || e !== Z64.CUSTOM;
+  let n = hasInstanceSelected || e !== SocialMediaFormats.CUSTOM;
   return jsxs(Fragment, {
     children: [jsx(_$$k2, {
       name: "cooper_asset_size_panel",
@@ -480,7 +480,7 @@ function tt(e) {
   return jsx(_$$z, {
     recordingKey: Pt(e, "createTemplateSetButton"),
     onClick: () => {
-      Y5.triggerActionInUserEditScope("create-state-group-row");
+      fullscreenValue.triggerActionInUserEditScope("create-state-group-row");
     },
     icon: jsx(_$$b2, {}),
     children: renderI18nText("design_systems.templates.create_template_set")
@@ -497,7 +497,7 @@ function ti(e) {
   return jsx(_$$z, {
     recordingKey: Pt(e, "createTemplateButton"),
     onClick: () => {
-      Y5.triggerActionInUserEditScope("create-symbol");
+      fullscreenValue.triggerActionInUserEditScope("create-symbol");
     },
     icon: jsx(n, {}),
     children: renderI18nText("design_systems.templates.create_template")
@@ -507,7 +507,7 @@ function tr(e) {
   return jsx(_$$z, {
     recordingKey: Pt(e, "createMultipleTemplatesButton"),
     onClick: () => {
-      Y5.triggerActionInUserEditScope("create-multiple-symbols");
+      fullscreenValue.triggerActionInUserEditScope("create-multiple-symbols");
     },
     icon: jsx(_$$i, {}),
     children: renderI18nText("design_systems.templates.create_multiple_templates")
@@ -517,7 +517,7 @@ function to() {
   let e = rb();
   let t = lg();
   let n = useCallback(() => {
-    Y5.triggerAction("edit-make-from-design");
+    fullscreenValue.triggerAction("edit-make-from-design");
   }, []);
   return getFeatureFlags().bake_canvas && "design" === t && "RESPONSIVE_SET" === e ? jsx(_$$z, {
     onClick: n,
@@ -576,7 +576,7 @@ function ty() {
         isInSelectionActionsPanel: !0
       }, "componentProperties")
     }), jsx(VF, {
-      isVisible: r[ibQ.COMPONENT_ITEM],
+      isVisible: r[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c, {
         recordingKey: "componentPanel",
         isInSelectionActionsPanel: !0
@@ -593,7 +593,7 @@ function ty() {
         isInSelectionActionsPanel: !0
       }, "slot")
     }), jsx(VF, {
-      isVisible: r[ibQ.VECTOR_TRANSFORM_UNIFIED_ITEM],
+      isVisible: r[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
         openFileKey: n?.key || null,
@@ -612,7 +612,7 @@ function tS() {
   } : null, []);
   let t = function () {
     let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-    return useCallback(t => e === m1T.VECTOR && t ? getI18nString("fullscreen.properties_panel.layer_header.node_type_vector") : getFeatureFlags().dse_slots && t && t.isSlotReactive ? getI18nString("fullscreen.properties_panel.layer_header.slot") : null, [e]);
+    return useCallback(t => e === LayoutTabType.VECTOR && t ? getI18nString("fullscreen.properties_panel.layer_header.node_type_vector") : getFeatureFlags().dse_slots && t && t.isSlotReactive ? getI18nString("fullscreen.properties_panel.layer_header.slot") : null, [e]);
   }();
   let {
     nodeType,
@@ -726,7 +726,7 @@ function tb({
     children: [0 === Object.keys(j).length && jsx(Mw, {
       panelName: ON.DESIGN
     }), jsx(eD, {
-      panelsShown: b[ibQ.FILL_ITEM] ?? !1
+      panelsShown: b[ItemType.FILL_ITEM] ?? !1
     }), Z ? jsx(tS, {}) : jsx(_i, {
       recordingKey: "toolbarView",
       shouldShowComponentPropertiesPanel: tV(b, stateGroupSelectionInfo),
@@ -734,9 +734,9 @@ function tb({
       shouldShowTransformModifiersPanel: C,
       shouldShowVectorOperationPanel: w,
       shouldShowSlotPanel: Br(b),
-      withBottomBorder: !b[ibQ.VECTOR_TRANSFORM_UNIFIED_ITEM]
+      withBottomBorder: !b[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM]
     }), getFeatureFlags().react_scenegraph && jsx(VF, {
-      isVisible: b[ibQ.JSX_ITEM],
+      isVisible: b[ItemType.JSX_ITEM],
       children: () => jsx(_$$_2, {})
     }), !eh && jsx(VF, {
       isVisible: w,
@@ -753,7 +753,7 @@ function tb({
         recordingKey: "propsPanel"
       }, "componentProperties")
     }), !eh && jsx(VF, {
-      isVisible: b[ibQ.COMPONENT_ITEM],
+      isVisible: b[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c, {
         recordingKey: "componentPanel"
       }, "component")
@@ -769,16 +769,16 @@ function tb({
       isVisible: $,
       children: () => jsx(q, {})
     }), jsx(VF, {
-      isVisible: !$ && (d6(b) || b[ibQ.TRANSFORM_ITEM]),
+      isVisible: !$ && (d6(b) || b[ItemType.TRANSFORM_ITEM]),
       children: () => jsx(zq, {
         recordingKey: "transformPanel",
         propertiesPanelState: E,
         openFileKey: u?.key || null,
         canEditConstraints: GG(b),
-        onlyShowXYInputsRow: E === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && hS(areOnlyResponsiveSetsSelected)) ?? !1)
+        onlyShowXYInputsRow: E === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && isValidValue(areOnlyResponsiveSetsSelected)) ?? !1)
       }, "transform")
     }), !eh && jsx(VF, {
-      isVisible: b[ibQ.VECTOR_TRANSFORM_UNIFIED_ITEM],
+      isVisible: b[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
         openFileKey: u?.key || null,
@@ -790,12 +790,12 @@ function tb({
       children: () => jsx(Vy, {
         recordingKey: "stackPanel",
         onlyShowResizingRow: E === GR.DEFAULT_SIMPLIFIED,
-        onlyStacksAndGridsSelected: !!b[ibQ.STACK_ITEM]
+        onlyStacksAndGridsSelected: !!b[ItemType.STACK_ITEM]
       }, "stack")
     }), jsx(F$, {
-      isVisible: b[ibQ.SCALE_ITEM]
+      isVisible: b[ItemType.SCALE_ITEM]
     }), jsx(VF, {
-      isVisible: b[ibQ.VECTOR_ITEM],
+      isVisible: b[ItemType.VECTOR_ITEM],
       children: () => jsx(VR, {
         isUI3: !0,
         recordingKey: "vectorTransformPanel",
@@ -803,27 +803,27 @@ function tb({
         dropdownShown: n
       }, "vector-transform")
     }), jsx(VF, {
-      isVisible: b[ibQ.MASK_ITEM],
+      isVisible: b[ItemType.MASK_ITEM],
       children: () => jsx(_$$B, {
         recordingKey: "maskPanel",
         maskType
       }, "mask")
     }), jsx(VF, {
-      isVisible: b[ibQ.LAYER_ITEM],
+      isVisible: b[ItemType.LAYER_ITEM],
       children: () => jsx(X2, {
         recordingKey: "appearancePanel"
       })
     }), jsx(VF, {
-      isVisible: b[ibQ.TYPE_ITEM],
+      isVisible: b[ItemType.TYPE_ITEM],
       children: () => jsx(gc, {}, "type")
     }), jsx(VF, {
-      isVisible: b[ibQ.CANVAS_ITEM],
+      isVisible: b[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v, {
         colorFormat: t,
         defaultColor: rC,
         dispatch: I,
         dropdownShown: n,
-        hasExports: !!v && _W(v, []).length > 0,
+        hasExports: !!v && valueOrFallback(v, []).length > 0,
         library: l,
         modalShown: p,
         openFile: u,
@@ -832,15 +832,15 @@ function tb({
         sceneGraphSelection: j
       }, "canvas-background")
     }), jsx(VF, {
-      isVisible: b[ibQ.REMOVE_GROUP_BACKGROUND_ITEM],
+      isVisible: b[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
       children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
     }), jsx(VF, {
-      isVisible: b[ibQ.FILL_ITEM],
+      isVisible: b[ItemType.FILL_ITEM],
       children: () => jsx(B8, {
         variableScopes: P
       }, "fill")
     }), jsx(VF, {
-      isVisible: b[ibQ.STROKE_ITEM],
+      isVisible: b[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: t,
         defaultColor: Em,
@@ -858,7 +858,7 @@ function tb({
         stylePickerShown: f
       }, "stroke")
     }), jsx(VF, {
-      isVisible: b[ibQ.EFFECTS_ITEM],
+      isVisible: b[ItemType.EFFECTS_ITEM],
       children: () => jsx(w5, {}, "effects")
     }), jsx(VF, {
       isVisible: B,
@@ -884,7 +884,7 @@ function tb({
         scrollContainer: S
       }, "local-styles")
     }), jsx(VF, {
-      isVisible: b[ibQ.GRIDS_ITEM],
+      isVisible: b[ItemType.GRIDS_ITEM],
       children: () => jsx(_$$tC, {}, "grids")
     }), jsx(VF, {
       isVisible: P1(b, u),
@@ -929,19 +929,19 @@ function tT(e) {
   return ((isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && !isEvalViewPathCheck() && logError("PropertiesPanel", "Rendering design tab with no shownPropertiesPanels", {
     isEmpty: isEmptyObject(e.shownPanels),
     shouldRenderInspectTab: n
-  }), e.shownPanels[ibQ.FRAME_PRESETS]) ? jsx(VF, {
+  }), e.shownPanels[ItemType.FRAME_PRESETS]) ? jsx(VF, {
     isVisible: !0,
     children: () => jsx(_$$nl, {
       recordingKey: "framePresetPanel"
     }, "frame-presets")
-  }) : e.shownPanels[ibQ.PENCIL_TOOL] ? jsx(VF, {
+  }) : e.shownPanels[ItemType.PENCIL_TOOL] ? jsx(VF, {
     isVisible: !0,
     children: () => jsx(_$$q, {
       recordingKey: "pencilToolPanel",
       id: "pencilToolPanel",
       openFile: e.openFile
     }, "pencilToolPanel")
-  }) : getFeatureFlags().ce_tv_grid_ga && e.shownPanels[ibQ.GRID_TRACKS] ? jsx(D, {}) : jsx(tb, {
+  }) : getFeatureFlags().ce_tv_grid_ga && e.shownPanels[ItemType.GRID_TRACKS] ? jsx(D, {}) : jsx(tb, {
     ...e
   });
 }
@@ -994,7 +994,7 @@ function tw({
       shouldShowSlotPanel: Br(S),
       shouldShowInstancePanel: M0(S)
     }), getFeatureFlags().react_scenegraph && jsx(VF, {
-      isVisible: S[ibQ.JSX_ITEM],
+      isVisible: S[ItemType.JSX_ITEM],
       children: () => jsx(_$$_2, {})
     }), !L && jsx(VF, {
       isVisible: !NR(S),
@@ -1008,10 +1008,10 @@ function tw({
         propertiesPanelState: I,
         openFileKey: u?.key || null,
         canEditConstraints: GG(S),
-        onlyShowXYInputsRow: I === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && hS(areOnlyResponsiveSetsSelected)) ?? !1)
+        onlyShowXYInputsRow: I === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && isValidValue(areOnlyResponsiveSetsSelected)) ?? !1)
       }, "transform")
     }), !L && jsx(VF, {
-      isVisible: S[ibQ.VECTOR_TRANSFORM_UNIFIED_ITEM],
+      isVisible: S[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
         openFileKey: u?.key || null,
@@ -1023,25 +1023,25 @@ function tw({
       children: () => jsx(Vy, {
         recordingKey: "stackPanel",
         onlyShowResizingRow: I === GR.DEFAULT_SIMPLIFIED,
-        onlyStacksAndGridsSelected: !!S[ibQ.STACK_ITEM]
+        onlyStacksAndGridsSelected: !!S[ItemType.STACK_ITEM]
       }, "stack")
     }), jsx(F$, {
-      isVisible: S[ibQ.SCALE_ITEM]
+      isVisible: S[ItemType.SCALE_ITEM]
     }), I === GR.DEFAULT_SIMPLIFIED && jsx(_$$Y2, {
       onExpand: () => E(GR.OVERRIDDEN_EXPANDED)
     }), I === GR.OVERRIDDEN_EXPANDED && jsxs(Fragment, {
       children: [jsx(VF, {
-        isVisible: S[ibQ.LAYER_ITEM],
+        isVisible: S[ItemType.LAYER_ITEM],
         children: () => jsx(X2, {
           recordingKey: "appearancePanel"
         })
       }), !L && jsx(VF, {
-        isVisible: S[ibQ.COMPONENT_ITEM],
+        isVisible: S[ItemType.COMPONENT_ITEM],
         children: () => jsx(_$$c, {
           recordingKey: "componentPanel"
         }, "component")
       }), jsx(VF, {
-        isVisible: S[ibQ.VECTOR_ITEM],
+        isVisible: S[ItemType.VECTOR_ITEM],
         children: () => jsx(VR, {
           isUI3: !0,
           recordingKey: "vectorTransformPanel",
@@ -1049,22 +1049,22 @@ function tw({
           dropdownShown: n
         }, "vector-transform")
       }), jsx(VF, {
-        isVisible: S[ibQ.MASK_ITEM],
+        isVisible: S[ItemType.MASK_ITEM],
         children: () => jsx(_$$B, {
           recordingKey: "maskPanel",
           maskType
         }, "mask")
       }), jsx(VF, {
-        isVisible: S[ibQ.TYPE_ITEM],
+        isVisible: S[ItemType.TYPE_ITEM],
         children: () => jsx(gc, {}, "type")
       }), jsx(VF, {
-        isVisible: S[ibQ.CANVAS_ITEM],
+        isVisible: S[ItemType.CANVAS_ITEM],
         children: () => jsx(_$$v, {
           colorFormat: t,
           defaultColor: rC,
           dispatch: f,
           dropdownShown: n,
-          hasExports: !!k && _W(k, []).length > 0,
+          hasExports: !!k && valueOrFallback(k, []).length > 0,
           library: l,
           modalShown: p,
           openFile: u,
@@ -1073,15 +1073,15 @@ function tw({
           sceneGraphSelection: j
         }, "canvas-background")
       }), jsx(VF, {
-        isVisible: S[ibQ.REMOVE_GROUP_BACKGROUND_ITEM],
+        isVisible: S[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
         children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
       }), jsx(VF, {
-        isVisible: S[ibQ.FILL_ITEM],
+        isVisible: S[ItemType.FILL_ITEM],
         children: () => jsx(B8, {
           variableScopes: w
         }, "fill")
       }), jsx(VF, {
-        isVisible: S[ibQ.STROKE_ITEM],
+        isVisible: S[ItemType.STROKE_ITEM],
         children: () => jsx($p, {
           colorFormat: t,
           defaultColor: Em,
@@ -1099,7 +1099,7 @@ function tw({
           stylePickerShown: T
         }, "stroke")
       }), jsx(VF, {
-        isVisible: S[ibQ.EFFECTS_ITEM],
+        isVisible: S[ItemType.EFFECTS_ITEM],
         children: () => jsx(w5, {}, "effects")
       }), jsx(VF, {
         isVisible: D,
@@ -1116,7 +1116,7 @@ function tw({
           stylePickerListLayout: b
         }, "selection-paints")
       }), jsx(VF, {
-        isVisible: S[ibQ.GRIDS_ITEM],
+        isVisible: S[ItemType.GRIDS_ITEM],
         children: () => jsx(_$$tC, {}, "grids")
       })]
     }), jsx(VF, {

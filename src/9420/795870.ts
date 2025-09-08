@@ -7,7 +7,7 @@ import { reportError, normalizeError } from "../905/11";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
-import { EB, $V } from "../figma_app/831101";
+import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
 import { lX, dT } from "../9420/394825";
 import { LN, bu, ub, B9 } from "../figma_app/514043";
 import { eV, pV, lB } from "../905/148137";
@@ -21,7 +21,7 @@ function m({
   initialAddress: r
 } = {}) {
   let [t, n] = useState({
-    ...EB(e),
+    ...createEmptyAddress(e),
     ...(r ?? {})
   });
   let o = async () => {
@@ -500,7 +500,7 @@ let $$P3 = _$$D(e => {
       }, {
         forwardToDatadog: !0
       });
-      let i = e.canSeeBillingAddressExp && !$V(_address) ? {
+      let i = e.canSeeBillingAddressExp && !isAddressEmpty(_address) ? {
         shipping_line1: _address.line1 || null,
         shipping_line2: _address.line2 || null,
         shipping_country: e.canSeeBillingAddressExp && _address.country || null,

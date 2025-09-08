@@ -1,4 +1,4 @@
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Dk } from "../figma_app/623293";
@@ -22,7 +22,7 @@ export function $$c1(e, t) {
         try {
           l = vU(t, c.pathname, c.search, c.hash);
         } catch (e) {}
-        l && "fullscreen" === l.view && e.fileKey === l.fileKey && (fn(sH(l.nodeId)) && (i = l.nodeId), l.commentThreadId && (a = l.commentThreadId), l.versionId && (s = l.versionId), getFeatureFlags().dakota && l.cmsItemId && (o = l.cmsItemId));
+        l && "fullscreen" === l.view && e.fileKey === l.fileKey && (isValidSessionLocalID(parseSessionLocalID(l.nodeId)) && (i = l.nodeId), l.commentThreadId && (a = l.commentThreadId), l.versionId && (s = l.versionId), getFeatureFlags().dakota && l.cmsItemId && (o = l.cmsItemId));
       }
     }
   }

@@ -1,13 +1,13 @@
 import { NC } from "../905/17179";
 import { Qv as _$$Qv, os as _$$os } from "../905/890368";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { jD } from "../905/765855";
 let $$o1 = NC("INIT");
 let $$l0 = _$$Qv;
 let $$d5 = NC("USER_STATE_LOADED");
 let $$c7 = _$$os;
 let $$u2 = NC("SHOW_DROPDOWN");
-let $$p4 = nF((e, t) => {
+let $$p4 = createOptimistThunk((e, t) => {
   e.dispatch(jD());
   e.dispatch($$u2(t));
 });

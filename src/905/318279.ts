@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { KY } from "../figma_app/492908";
+import { clampOptional } from "../figma_app/492908";
 import { cZ } from "../figma_app/272902";
 import { parsePxNumber } from "../figma_app/783094";
 import { Uz } from "../905/63728";
@@ -13,11 +13,11 @@ export class $$h0 extends Component {
   constructor() {
     super(...arguments);
     this.currentHeight = 0;
-    this.ref = (e) => {
+    this.ref = e => {
       cZ(this.props.innerRef, e);
       e && !this.textarea && (this.textarea = e, this.resizeTextareaToFitValue(this.textarea.value), this.props.enforceStuckToTop && (this.textarea.scrollTop = 0), this.props.selectOnMount && (this.textarea.select(), this.textarea.setSelectionRange(this.textarea.value.length, this.textarea.value.length)));
     };
-    this.resizeTextareaToFitValue = (e) => {
+    this.resizeTextareaToFitValue = e => {
       let t;
       if (this.singleLineHeight || (this.singleLineHeight = this.cloneTextareaAndGetHeight("M")), this.props.calculateAdjustedHeightOnResize) {
         let i = this.cloneTextareaAndGetNode(e);
@@ -31,24 +31,24 @@ export class $$h0 extends Component {
       } else t = this.cloneTextareaAndGetHeight(e);
       t !== this.currentHeight && (this.currentHeight = t, this.textarea.style.height = `${t}px`);
     };
-    this.onKeyDown = (e) => {
+    this.onKeyDown = e => {
       this.props.submit && e.keyCode === Uz.ENTER && (this.props.bypassModifiers && !e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) && (e.stopPropagation(), e.preventDefault(), this.props.preventSubmitOnBlur && this.props.submit(this.textarea.value), this.textarea.blur());
       this.props.onKeyDown?.(e);
       e.keyCode === Uz.ESCAPE && (this.props.onEscape ? this.props.onEscape() : this.textarea.blur());
       this.context && "=" === e.key && (e.preventDefault(), this.context?.showBindingUI(this.textarea));
     };
-    this.onFocus = (e) => {
+    this.onFocus = e => {
       this.props.onFocus?.(e);
       this.props.focusToEnd && e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length);
     };
-    this.onBlur = (e) => {
+    this.onBlur = e => {
       this.props.submit && !this.props.preventSubmitOnBlur && this.props.submit(this.textarea.value);
       this.props.onBlur?.(e);
     };
   }
   componentDidMount() {
     if (this.props.focusOnMount) {
-      let e = new IntersectionObserver((t) => {
+      let e = new IntersectionObserver(t => {
         t[0].isIntersecting && (this.focus(), e.disconnect());
       });
       e.observe(this.textarea);
@@ -66,7 +66,7 @@ export class $$h0 extends Component {
       let n = document.defaultView.getComputedStyle(e, null).getPropertyValue("border-bottom-width");
       n && (t += parsePxNumber(n));
     }
-    return KY(t, this.props.minHeight, this.props.maxHeight);
+    return clampOptional(t, this.props.minHeight, this.props.maxHeight);
   }
   cloneTextareaAndGetHeight(e) {
     let t = this.cloneTextareaAndGetNode(e);

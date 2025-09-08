@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId } from "react";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { l9 } from "../905/408073";
 import { k } from "../905/44647";
 import { r as _$$r } from "../905/571562";
@@ -32,7 +32,7 @@ export function $$x0(e) {
 export function $$b1(e) {
   let t = useId();
   return jsxs(Fragment, {
-    children: [jsx(_$$h, {
+    children: [jsx(HiddenLabel, {
       htmlFor: t,
       children: e.ariaLabel
     }), jsxs(l9, {

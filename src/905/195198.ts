@@ -8,13 +8,13 @@ import { s_ } from "../905/17223";
 import { $$ } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { P as _$$P } from "../905/192768";
-import { to, Lo, ES } from "../905/156213";
+import { showModalHandler, popModalStack, hideSpecificModal } from "../905/156213";
 import { yH } from "../figma_app/240735";
 import { fu } from "../figma_app/831799";
 import { FAccessLevelType, FPaymentHealthStatusType } from "../figma_app/191312";
 import { yQw } from "../figma_app/43951";
 import { getPermissionsState } from "../figma_app/642025";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
 import { Dd } from "../905/519092";
 import { d_ } from "../figma_app/918700";
@@ -28,7 +28,7 @@ let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? renderI18nText("file_br
     height: 16
   }), renderI18nText("file_browser.team.move_files_out_of_team")]
 });
-let $$S0 = Ju(function (e) {
+let $$S0 = registerModal(function (e) {
   let t = useSelector(e => getPermissionsState(e));
   let i = useDispatch();
   let o = t.teams[e.teamId];
@@ -56,7 +56,7 @@ let $$S0 = Ju(function (e) {
     e.onViewerLeaveTeam && e.onViewerLeaveTeam(e.teamId);
   };
   let T = () => {
-    i(to({
+    i(showModalHandler({
       type: _$$P(),
       data: {
         teamId: e.teamId
@@ -64,7 +64,7 @@ let $$S0 = Ju(function (e) {
     }));
   };
   let k = () => {
-    i(Lo());
+    i(popModalStack());
   };
   let R = t.roles.byTeamId[e.teamId];
   let N = Object.keys(R).map(e => R[e]).filter(e => !e.pending);
@@ -132,7 +132,7 @@ let $$S0 = Ju(function (e) {
         }),
         destructive: !0,
         onConfirm: () => {
-          i(ES({
+          i(hideSpecificModal({
             type: "TEAM_SETTINGS_MODAL"
           }));
           t ? T() : C();

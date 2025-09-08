@@ -3,9 +3,9 @@ import { useState, useMemo, useEffect, useCallback, memo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { l as _$$l } from "../6401/369764";
-import { Ez5, xOL, oHM, XQq } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { AppStateTsApi, RotationType, FlappBindings, PresetType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
@@ -18,7 +18,7 @@ import { hY } from "../figma_app/349969";
 import { eo } from "../905/505138";
 import { mr } from "../figma_app/386952";
 import { TA } from "../905/372672";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { I as _$$I } from "../905/537408";
 import { xu, yx } from "../figma_app/778443";
 import { _ as _$$_ } from "../9410/762998";
@@ -40,13 +40,13 @@ export function $$L0(e) {
   } = _$$_2(nodeId);
   let f = !isReadOnly;
   let E = useDispatch();
-  let g = ut(Ez5?.flappData().embeddablePrototypeIdPendingInsertion, "");
+  let g = getObservableValue(AppStateTsApi?.flappData().embeddablePrototypeIdPendingInsertion, "");
   let [v, b] = useState();
   let N = useMemo(() => {
     let t = $$B3(e.configData);
     if (!t) return;
     let i = hY[t.presetIdentifier];
-    let n = t.rotation === xOL.CCW_90;
+    let n = t.rotation === RotationType.CCW_90;
     let {
       x,
       y
@@ -61,7 +61,7 @@ export function $$L0(e) {
     if (!f) return;
     let e = getSingletonSceneGraph().get(nodeId);
     let i = N ?? v;
-    e && i && l7.system("resizing-embed", () => {
+    e && i && permissionScopeHandler.system("resizing-embed", () => {
       let t = e.size.x > 0 ? e.size.x : 400;
       let n = Math.floor(t / i);
       0 === e.size.x && (e.x -= t / 2, e.y -= n / 2);
@@ -76,26 +76,26 @@ export function $$L0(e) {
       icon: zX.SPINNER,
       timeoutOverride: 1 / 0
     })), setActiveEmbed(), setTimeout(() => {
-      nodeId === Ez5?.flappData().embeddablePrototypeIdPendingInsertion.getCopy() && oHM?.embeddablePrototypeLoadFailed();
+      nodeId === AppStateTsApi?.flappData().embeddablePrototypeIdPendingInsertion.getCopy() && FlappBindings?.embeddablePrototypeLoadFailed();
     }, 3e4));
   }, [nodeId, g, E, setActiveEmbed]);
   useEffect(() => {
     let e = e => {
       if (e.origin !== location.origin || e.source && "frameElement" in e.source && null != e.source.frameElement && e.source.frameElement.id !== xu + nodeId) return;
       let n = e.data;
-      if ("EMBED_PROTO_ASPECT_RATIO" === n.type && n.data.aspectRatio && (b(n.data.aspectRatio), nodeId === g && oHM?.embeddablePrototypeLoadSucceeded()), "EMBED_PROTO_DEVICE" === n.type) {
+      if ("EMBED_PROTO_ASPECT_RATIO" === n.type && n.data.aspectRatio && (b(n.data.aspectRatio), nodeId === g && FlappBindings?.embeddablePrototypeLoadSucceeded()), "EMBED_PROTO_DEVICE" === n.type) {
         let e = n.data.device;
-        f && e ? l7.system("set-embed-device-frame-config-data", () => {
+        f && e ? permissionScopeHandler.system("set-embed-device-frame-config-data", () => {
           setConfigData("deviceFrameShown", "" !== e.presetIdentifier && "PRESET" === e.type ? "true" : "false");
           setConfigData("deviceFramePreset", e.presetIdentifier);
           setConfigData("deviceFrameRotation", e.rotation);
-        }) : f && l7.system("set-embed-device-frame-config-data", () => {
+        }) : f && permissionScopeHandler.system("set-embed-device-frame-config-data", () => {
           setConfigData("deviceFrameShown", "false");
           setConfigData("deviceFramePreset", "");
           setConfigData("deviceFrameRotation", "NONE");
         });
       }
-      if ("EMBED_PROTO_FILE_METADATA" === n.type && f && l7.system("embed-file-metatada", () => {
+      if ("EMBED_PROTO_FILE_METADATA" === n.type && f && permissionScopeHandler.system("embed-file-metatada", () => {
         setConfigData("fileName", n.data.fileName);
         setConfigData("pageName", n.data.pageName);
         n.data.activeStartingPointNodeId && setConfigData("activeStartingPointNodeId", n.data.activeStartingPointNodeId);
@@ -125,7 +125,7 @@ export function $$A1(e) {
   let [o, s] = useState(i?.isActiveSlidesEmbeddedPrototype(a) || !1);
   O5(i, "embeddedPrototypeDataChange", useCallback(e => {
     let t = !1;
-    for (let i of e) if (dI(i.nodeId) === a) {
+    for (let i of e) if (sessionLocalIDToString(i.nodeId) === a) {
       t = !0;
       break;
     }
@@ -156,7 +156,7 @@ function C({
   let c = hk();
   let m = $$B3(e);
   let p = useCallback(e => {
-    for (let i of e) if (dI(i.nodeId) === t) {
+    for (let i of e) if (sessionLocalIDToString(i.nodeId) === t) {
       let e = z(t);
       if (e && !c?.isPresenterSession()) {
         e.contentWindow?.postMessage({
@@ -267,7 +267,7 @@ export function $$k5({
   children: t,
   invalidateThumbnail: i
 }) {
-  let r = e?.rotation === xOL.CCW_90 ? {
+  let r = e?.rotation === RotationType.CCW_90 ? {
     x: e?.size.y ?? $.size.y,
     y: e?.size.x ?? $.size.x
   } : {
@@ -278,7 +278,7 @@ export function $$k5({
     className: kL,
     children: jsx(_$$_, {
       initialViewerSize: r,
-      isDeviceFrameShown: null != e && e.type === XQq.PRESET && "" !== e.presetIdentifier,
+      isDeviceFrameShown: null != e && e.type === PresetType.PRESET && "" !== e.presetIdentifier,
       prototypeDevice: e,
       isInlinePreview: !1,
       onDeviceFrameLoaded: i,
@@ -332,9 +332,9 @@ let U = e => {
   switch (e) {
     case "NONE":
     default:
-      return xOL.NONE;
+      return RotationType.NONE;
     case "CCW_90":
-      return xOL.CCW_90;
+      return RotationType.CCW_90;
   }
 };
 export function $$M2(e) {
@@ -344,7 +344,7 @@ export function $$B3(e) {
   return $$M2(e) ? function (e) {
     let t = hY[e.deviceFramePreset ?? ""];
     return t ? {
-      type: XQq.PRESET,
+      type: PresetType.PRESET,
       size: t.framePresetSize,
       presetIdentifier: t.presetIdentifier,
       rotation: U(e.deviceFrameRotation)
@@ -353,13 +353,13 @@ export function $$B3(e) {
 }
 let V = eo[0];
 let $ = {
-  type: XQq.PRESET,
+  type: PresetType.PRESET,
   size: V?.framePresetSize ?? {
     x: 0,
     y: 0
   },
   presetIdentifier: V?.presetIdentifier ?? "",
-  rotation: xOL.NONE
+  rotation: RotationType.NONE
 };
 export const DR = $$L0;
 export const E$ = $$A1;

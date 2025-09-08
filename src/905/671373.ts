@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { Kh } from "../905/989765";
 import { MK } from "../figma_app/120529";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 class d extends Component {
   render() {
@@ -28,5 +28,5 @@ class d extends Component {
     });
   }
 }
-export let $$c0 = Ju(d, "VoiceCaptionDownloadFailedModal");
+export let $$c0 = registerModal(d, "VoiceCaptionDownloadFailedModal");
 export const L = $$c0;

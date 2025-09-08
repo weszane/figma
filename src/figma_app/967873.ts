@@ -1,4 +1,4 @@
-import { Z6A } from "../figma_app/763686";
+import { NodeType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { WB } from "../905/761735";
@@ -99,9 +99,9 @@ export function $$b12(e) {
 }
 export function $$T6(e) {
   switch (e) {
-    case Z6A.STICKY:
+    case NodeType.STICKY:
       return ["sticky"];
-    case Z6A.HIGHLIGHT:
+    case NodeType.HIGHLIGHT:
       return ["highlight"];
     default:
       return ["base", "baseLight"];

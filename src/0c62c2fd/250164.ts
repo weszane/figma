@@ -6,7 +6,7 @@ import { Rs } from "../figma_app/288654";
 import { vd } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { FDomainVerificationStatusType } from "../figma_app/191312";
 import { Wt6, xS7 } from "../figma_app/43951";
 import { OJ } from "../905/519092";
@@ -60,7 +60,7 @@ export let $$b0 = memo(function (e) {
     }
   }, [n, y, F, w?.taxInfo]);
   let L = () => {
-    t(Ce());
+    t(hideModal());
   };
   return jsxs(OJ, {
     onClose: L,

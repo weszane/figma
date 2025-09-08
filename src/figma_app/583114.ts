@@ -1,4 +1,4 @@
-import { qE, Ae } from "../figma_app/492908";
+import { clamp, solvePolynomial } from "../figma_app/492908";
 import { colorToHex } from "../905/436288";
 import { h as _$$h } from "../vendor/771674";
 import { f as _$$f } from "../905/24905";
@@ -165,9 +165,9 @@ let f = {
   }
 };
 let E = e => (e.hsluvToRgb(), {
-  r: qE(e.rgb_r, 0, 1),
-  g: qE(e.rgb_g, 0, 1),
-  b: qE(e.rgb_b, 0, 1),
+  r: clamp(e.rgb_r, 0, 1),
+  g: clamp(e.rgb_g, 0, 1),
+  b: clamp(e.rgb_b, 0, 1),
   a: 1
 });
 let y = e => {
@@ -245,7 +245,7 @@ function S(e) {
   return n;
 }
 function v(e, t) {
-  let r = Ae(f[t].a, f[t].b, f[t].c, f[t].d - e);
+  let r = solvePolynomial(f[t].a, f[t].b, f[t].c, f[t].d - e);
   let i = r.filter(e => 0 < e && e < 10);
   return 1 === i.length ? i[0] : r.length > 1 ? (r.sort(), r[Math.floor(r.length / 2)]) : e < 50 ? 11 : -1;
 }
@@ -290,9 +290,9 @@ let O = (e, t, r) => {
   }));
 };
 let R = e => ({
-  r: qE((e.r - 1) / .55 + 1, 0, 1),
-  g: qE((e.g - 1) / .55 + 1, 0, 1),
-  b: qE((e.b - 1) / .55 + 1, 0, 1),
+  r: clamp((e.r - 1) / .55 + 1, 0, 1),
+  g: clamp((e.g - 1) / .55 + 1, 0, 1),
+  b: clamp((e.b - 1) / .55 + 1, 0, 1),
   a: 1
 });
 let L = e => {

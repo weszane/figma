@@ -5,8 +5,8 @@ import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { s as _$$s2 } from "../905/381752";
 import { Y } from "../figma_app/887000";
-import { nF } from "../905/350402";
-import { to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler } from "../905/156213";
 import { Be as _$$Be } from "../figma_app/920435";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -36,7 +36,7 @@ export function $$E0(e) {
     return e;
   });
 }
-let $$y1 = nF((e, {
+let $$y1 = createOptimistThunk((e, {
   teamId: t
 }, {
   loadingKey: r
@@ -67,7 +67,7 @@ export function $$I2(e) {
     currency,
     canSeeBillingAddressExp
   } = e;
-  dispatch(to({
+  dispatch(showModalHandler({
     type: _$$s2(),
     data: {
       currency,
@@ -157,7 +157,7 @@ export function $$A4(e) {
     });
     return a;
   };
-  dispatch(to({
+  dispatch(showModalHandler({
     type: Y(),
     data: {
       team,

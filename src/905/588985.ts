@@ -1,34 +1,34 @@
-import { FW, Pe } from "../figma_app/155287";
+import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 export let $$r10 = "1.0.0";
 export function $$a8() {
   return "figma.closePlugin();";
 }
 export function $$s2(e) {
-  if (e?.includes(FW.INSPECT)) throw Error("Inspect panel plugins cannot be created without a UI");
+  if (e?.includes(ManifestEditorType.INSPECT)) throw Error("Inspect panel plugins cannot be created without a UI");
   return function (e) {
     if (0 === e.length) return "";
     let t = p + "\n\n";
     1 === e.length && void 0 !== e[0] ? (t += A(e[0])("5") + "\n\n", t += m + "\n") : t += e.map(e => y(e) + "\n" + ("  " + u(A(e)("5"), 2) + "\n\n  " + u(m, 2)) + "\n}\n").join("\n");
     return t;
-  }(e && e.length > 0 ? e : [FW.FIGMA]);
+  }(e && e.length > 0 ? e : [ManifestEditorType.FIGMA]);
 }
 export function $$o5(e) {
   return function (e) {
     if (0 === e.length) return "";
-    if (Pe(e)) return h.inspect;
+    if (isDevOrInspect(e)) return h.inspect;
     let t = "";
     1 === e.length && void 0 !== e[0] ? (t += I(e[0]) + "\n\n", t += p + "\n\n", t += b + "\n\n", t += v(A(e[0])("msg.count")) + "\n") : (t += p + "\n\n", t += e.map(e => y(e) + "\n" + ("  " + u(I(e), 2) + "\n\n  " + u(b, 2) + "\n\n  " + u(v(A(e)("msg.count")), 2)) + "\n}\n").join("\n"));
     return t;
-  }(e && e.length > 0 ? e : [FW.FIGMA]);
+  }(e && e.length > 0 ? e : [ManifestEditorType.FIGMA]);
 }
 export function $$l9(e) {
   return function (e) {
     if (0 === e.length) return "";
-    if (Pe(e)) return E.inspect;
+    if (isDevOrInspect(e)) return E.inspect;
     let t = "Rectangle Creator";
-    1 === e.length && e[0] === FW.FIGJAM ? t = "Shape & Connector Creator" : 1 === e.length && e[0] === FW.SLIDES ? t = "Slide Creator" : e.length > 1 && (t = "Shape Creator");
+    1 === e.length && e[0] === ManifestEditorType.FIGJAM ? t = "Shape & Connector Creator" : 1 === e.length && e[0] === ManifestEditorType.SLIDES ? t = "Slide Creator" : e.length > 1 && (t = "Shape Creator");
     return x(t);
-  }(e && e.length > 0 ? e : [FW.FIGMA]);
+  }(e && e.length > 0 ? e : [ManifestEditorType.FIGMA]);
 }
 export function $$d11(e) {
   return h[e];
@@ -139,13 +139,13 @@ for (let i = 0; i < numberOfSlides; i++) {
 figma.viewport.slidesView = 'grid';
 figma.currentPage.selection = nodes;`;
 function A(e) {
-  return e === FW.FIGMA ? g : e === FW.FIGJAM ? f : e === FW.SLIDES ? _ : e => "";
+  return e === ManifestEditorType.FIGMA ? g : e === ManifestEditorType.FIGJAM ? f : e === ManifestEditorType.SLIDES ? _ : e => "";
 }
 function y(e) {
   let t = "";
-  e === FW.FIGMA && (t += "// Runs this code if the plugin is run in Figma\nif (figma.editorType === 'figma') {");
-  e === FW.FIGJAM && (t += "// Runs this code if the plugin is run in FigJam\nif (figma.editorType === 'figjam') {");
-  e === FW.SLIDES && (t += "// Runs this code if the plugin is run in Slides\nif (figma.editorType === 'slides') {");
+  e === ManifestEditorType.FIGMA && (t += "// Runs this code if the plugin is run in Figma\nif (figma.editorType === 'figma') {");
+  e === ManifestEditorType.FIGJAM && (t += "// Runs this code if the plugin is run in FigJam\nif (figma.editorType === 'figjam') {");
+  e === ManifestEditorType.SLIDES && (t += "// Runs this code if the plugin is run in Slides\nif (figma.editorType === 'slides') {");
   return t;
 }
 let b = `// This shows the HTML page in "ui.html".
@@ -164,9 +164,9 @@ figma.ui.onmessage =  (msg: {type: string, count: number}) => {
 };`;
 function I(e) {
   let t = "// This plugin will open a window to prompt the user to enter a number, and\n";
-  e === FW.FIGMA && (t += "// it will then create that many rectangles on the screen.");
-  e === FW.FIGJAM && (t += "// it will then create that many shapes and connectors on the screen.");
-  e === FW.SLIDES && (t += "// it will then create that many slides on the screen.");
+  e === ManifestEditorType.FIGMA && (t += "// it will then create that many rectangles on the screen.");
+  e === ManifestEditorType.FIGJAM && (t += "// it will then create that many shapes and connectors on the screen.");
+  e === ManifestEditorType.SLIDES && (t += "// it will then create that many slides on the screen.");
   return t;
 }
 let E = {

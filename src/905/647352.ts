@@ -8,13 +8,13 @@ import { Yx } from "../figma_app/930338";
 import { NG } from "../figma_app/709893";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Jl } from "../figma_app/80990";
 import { w5 } from "../figma_app/345997";
 import { cM, MH, dM } from "../figma_app/803787";
 import { Ib } from "../905/129884";
 import { ND } from "../figma_app/76115";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -23,7 +23,7 @@ import { sb } from "../figma_app/519839";
 import { JT } from "../figma_app/173838";
 import { q5 } from "../figma_app/516028";
 import { o as _$$o } from "../figma_app/633080";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { pz } from "../figma_app/825489";
 import { U as _$$U } from "../905/29665";
 import { T as _$$T } from "../905/485734";
@@ -42,7 +42,7 @@ function O() {
   });
 }
 let F = "confirm_unpublish_modal--modalContent--gX17Y modal--modalContent--P643j";
-let M = Ju(function ({
+let M = registerModal(function ({
   libraryModalSessionId: e
 }) {
   let t = useDispatch();
@@ -74,7 +74,7 @@ let M = Ju(function ({
         className: _$$s.mb8.$,
         children: renderI18nText("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
       }), jsx(_$$U, {
-        label: jsx(J, {
+        label: jsx(Label, {
           children: renderI18nText("design_systems.internal_community_library_unpublish")
         })
       }), r === _$$o.HUBFILE && jsx(O, {})]
@@ -109,7 +109,7 @@ export function $$W0(e) {
   let C = useMemo(() => ND(localStateGroups), [localStateGroups]);
   let T = useDispatch();
   let k = useCallback(() => {
-    T(to({
+    T(showModalHandler({
       type: M,
       data: {
         libraryModalSessionId: sessionId

@@ -9,9 +9,9 @@ import { I as _$$I } from "../c5e2cae0/393403";
 import { Lf, VE, Kz, tM, vd } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Lo, to, Ce } from "../905/156213";
+import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
 import { ey } from "../figma_app/918700";
 import { Os, nO } from "../905/734904";
@@ -72,7 +72,7 @@ let C = () => jsxs(Fragment, {
     children: e.name
   }, e.value))]
 });
-let w = Ju(function ({
+let w = registerModal(function ({
   hideModal: e
 }) {
   return jsx(fu, {
@@ -119,13 +119,13 @@ export function $$E0(e) {
     formErrors: {}
   });
   let T = () => {
-    t(Lo());
+    t(popModalStack());
   };
   let b = () => {
-    t(to({
+    t(showModalHandler({
       type: w,
       data: {
-        hideModal: () => t(Ce())
+        hideModal: () => t(hideModal())
       }
     }));
   };

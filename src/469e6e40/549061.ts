@@ -80,7 +80,7 @@ import { b as _$$b } from "../4452/320061";
 import { B as _$$B } from "../4452/541264";
 import { Y as _$$Y2 } from "../figma_app/515088";
 import { B as _$$B2 } from "../905/55104";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { ud, a_ } from "../905/513035";
 import { N_ } from "../905/332483";
 import { Zx } from "../figma_app/217457";
@@ -1001,7 +1001,7 @@ function tu({
     });
   }, tu, e => !e);
   _$$R2(() => {
-    QL("approveAllRequests") && (p(_$$to({
+    QL("approveAllRequests") && (p(showModalHandler({
       type: _$$W,
       data: {
         plan: e,
@@ -1253,7 +1253,7 @@ function tu({
                     t();
                     return;
                   }
-                  p(_$$to({
+                  p(showModalHandler({
                     type: _$$W,
                     data: {
                       plan: e,

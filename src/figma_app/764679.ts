@@ -14,15 +14,15 @@ import { Jm } from "../figma_app/387599";
 import { qD } from "../figma_app/471982";
 import { lx, aI, s0 } from "../figma_app/558929";
 import { oB, j7 } from "../905/929976";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { U3 } from "../figma_app/412189";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { T5 } from "../figma_app/465071";
-import { Rt, uF } from "../figma_app/300692";
+import { hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { zF } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
-import { FW, Pe } from "../figma_app/155287";
+import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { C as _$$C } from "../905/180";
 import { noop } from "../905/834956";
 import { it } from "../905/504727";
@@ -40,7 +40,7 @@ export function $$M2(e, t, r, n) {
   });
 }
 function F(e, t, r, n, i) {
-  r(Rt(e) && n ? lx({
+  r(hasOrgRole(e) && n ? lx({
     extension: e,
     fullscreenEditorType: t
   }) : aI({
@@ -92,22 +92,22 @@ export function $$B0(e) {
     editorType: [e.editorType]
   });
   if (e.fileName) t = e.fileName;else if (e.playgroundFile) t = getI18nString("community.using.playground_file");else switch (e.editorType) {
-    case FW.FIGMA:
+    case ManifestEditorType.FIGMA:
       t = getI18nString("community.duplicate.open_in_figma");
       break;
-    case FW.FIGJAM:
+    case ManifestEditorType.FIGJAM:
       t = getI18nString("community.duplicate.open_in_figjam");
       break;
-    case FW.DEV:
-    case FW.INSPECT:
+    case ManifestEditorType.DEV:
+    case ManifestEditorType.INSPECT:
       t = getI18nString("community.detail_view.plugin_open_devmode");
       break;
-    case FW.SLIDES:
+    case ManifestEditorType.SLIDES:
       t = getI18nString("community.detail_view.plugin_open_slides");
       break;
-    case FW.BUZZ:
+    case ManifestEditorType.BUZZ:
       t = getI18nString("community.detail_view.plugin_open_buzz");
-    case FW.SITES:
+    case ManifestEditorType.SITES:
   }
   return jsx("button", {
     type: "button",
@@ -154,7 +154,7 @@ function G(e) {
       openedFrom: "community",
       fullscreenEditorType: null
     };
-    t(_$$to({
+    t(showModalHandler({
       type: _$$S,
       data: n
     }));
@@ -163,7 +163,7 @@ function G(e) {
     $$M2(resource.id, "existing_file", mapFileTypeToEditorType(e.editor_type), d);
     t(aI({
       resource,
-      fullscreenEditorType: e.editor_type === FFileType.DESIGN && Pe(editorTypes) ? FEditorType.DevHandoff : mapFileTypeToEditorType(e.editor_type),
+      fullscreenEditorType: e.editor_type === FFileType.DESIGN && isDevOrInspect(editorTypes) ? FEditorType.DevHandoff : mapFileTypeToEditorType(e.editor_type),
       fileKey: e.key,
       userId: e.user_id
     }));
@@ -213,7 +213,7 @@ function V({
   resource: i
 }) {
   let s = useDispatch();
-  let o = uF(i);
+  let o = getPluginVersion(i);
   let l = Jm();
   let d = AG();
   return jsx(j, {
@@ -263,25 +263,25 @@ export function $$H1(e, t, r) {
           extension_id: e.id,
           searchSessionId: A
         });
-        L(t.data.meta.filter(t => (!Rt(e) || t.org_id === b) && (t.can_run || t.requests_allowed)).slice(0, 6));
+        L(t.data.meta.filter(t => (!hasOrgRole(e) || t.org_id === b) && (t.can_run || t.requests_allowed)).slice(0, 6));
       }();
     });
-    let D = uF(e);
+    let D = getPluginVersion(e);
     let k = D.manifest.editorType?.sort() ?? [];
     let j = !!D.playground_file_version_id || r === FEditorType.DevHandoff;
     let B = Array.from(new Set(k.map(e => {
       switch (e) {
-        case FW.FIGMA:
-        case FW.DEV:
-        case FW.INSPECT:
+        case ManifestEditorType.FIGMA:
+        case ManifestEditorType.DEV:
+        case ManifestEditorType.INSPECT:
           return r === FEditorType.DevHandoff ? FEditorType.DevHandoff : FEditorType.Design;
-        case FW.FIGJAM:
+        case ManifestEditorType.FIGJAM:
           return h ? null : FEditorType.Whiteboard;
-        case FW.SLIDES:
+        case ManifestEditorType.SLIDES:
           return FEditorType.Slides;
-        case FW.SITES:
+        case ManifestEditorType.SITES:
           return null;
-        case FW.BUZZ:
+        case ManifestEditorType.BUZZ:
           return FEditorType.Cooper;
         default:
           throwTypeError(e);

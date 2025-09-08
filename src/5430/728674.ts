@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { y1 } from "../figma_app/492908";
+import { range } from "../figma_app/492908";
 import n from "classnames";
 import { N } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -39,7 +39,7 @@ function y({
   loadingTileCount: t
 }) {
   return jsx(Fragment, {
-    children: y1(t).map(t => jsx("div", {
+    children: range(t).map(t => jsx("div", {
       className: o()({
         [f]: e
       }, _$$s.p1.$),

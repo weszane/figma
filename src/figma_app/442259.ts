@@ -1,4 +1,4 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { F6, Ho, sp, sm } from "../figma_app/308685";
 import { gR } from "../905/486443";
@@ -35,7 +35,7 @@ class c {
     if ("fullscreen" !== c.selectedView.view || c.selectedView.editorType !== FEditorType.Whiteboard || this._wheelActivatedAtMs > 0) return;
     this._wheelActivatedAtMs = window.performance.now();
     let u = c.multiplayerEmoji;
-    "WHEEL" === u.type ? (e = u.viewportX, t = u.viewportY, n = n ?? u.openedViaHover) : n || glU?.triggerAction("set-tool-default", null);
+    "WHEEL" === u.type ? (e = u.viewportX, t = u.viewportY, n = n ?? u.openedViaHover) : n || Fullscreen?.triggerAction("set-tool-default", null);
     debugState.dispatch(sp({
       wheelType: d && ("STAMP" === d ? "STAMP2" : "REACTION1"),
       isReadonly: c.mirror.appModel.isReadOnly,

@@ -3,7 +3,7 @@ import { k } from "../905/381239";
 import { l as _$$l } from "../905/241412";
 import { x as _$$x } from "../905/587214";
 import { r as _$$r } from "../905/571562";
-import { _YF } from "../figma_app/763686";
+import { WorkspaceType } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -43,7 +43,7 @@ export function $$v0({
       className: b,
       children: jsx(k, {})
     }),
-    callback: () => S(_YF.DESIGN)
+    callback: () => S(WorkspaceType.DESIGN)
   }, {
     displayText: getI18nString("fullscreen.pages_panel.figjam_page"),
     optionHeight: 24,
@@ -54,7 +54,7 @@ export function $$v0({
         svg: A
       })
     }),
-    callback: () => S(_YF.WHITEBOARD)
+    callback: () => S(WorkspaceType.WHITEBOARD)
   }, {
     displayText: getI18nString("fullscreen.pages_panel.slide_deck"),
     optionHeight: 24,
@@ -63,7 +63,7 @@ export function $$v0({
       className: b,
       children: jsx(_$$l, {})
     }),
-    callback: () => S(_YF.SLIDES)
+    callback: () => S(WorkspaceType.SLIDES)
   }];
   let I = 48;
   for (let e = 0; e < j.length; e++) if (j[e].editorType === T) {

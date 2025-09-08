@@ -1,7 +1,7 @@
 import { k } from '../905/93362';
 import { H } from '../905/202181';
 import { g } from '../905/346780';
-import { UG } from '../905/414007';
+import { getCookieOrStorage } from '../905/414007';
 import { BO } from '../905/485103';
 import { O as _$$O } from '../905/833838';
 import { createDeferredPromise } from '../905/874553';
@@ -96,7 +96,7 @@ export function $$P0(e) {
 export function $$D1(e) {
   let t = $$F12();
   let r = s()(t);
-  let n = UG();
+  let n = getCookieOrStorage();
   if (r.communityProfileId = e, !l()(t, r)) {
     try {
       n.set(O, R(r));
@@ -112,7 +112,7 @@ export function $$M4(e, t, r, n, i) {
   if (bellFeedAPIInstance) return;
   let a = $$F12();
   let o = s()(a);
-  let u = UG();
+  let u = getCookieOrStorage();
   if (t ? o.communityUserId = e : o.fileBrowserUserId = e, void 0 !== r && (o.userIdToOrgId || (o.userIdToOrgId = {}), o.userIdToOrgId[e] = r), (void 0 !== r || void 0 !== i) && (o.userIdToPlan || (o.userIdToPlan = {}), r ? o.userIdToPlan[e] = [_$$O.ORG, r] : i && (o.userIdToPlan[e] = [_$$O.TEAM, i])), n && (o.communityProfileId = n), !l()(a, o)) {
     try {
       u.set(O, R(o));
@@ -128,7 +128,7 @@ export function $$F12() {
     fileBrowserUserId: null,
     userIdToOrgId: {}
   };
-  let t = UG();
+  let t = getCookieOrStorage();
   try {
     let r = t.get(O);
     r && (e = L(r));

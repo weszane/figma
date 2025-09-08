@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -16,7 +16,7 @@ import { le } from "../figma_app/415217";
 import { R as _$$R } from "../905/949750";
 import { d as _$$d } from "../905/485888";
 import { Z0 } from "../905/195478";
-import { m as _$$m } from "../905/661977";
+import { getCodegenLanguages } from "../905/661977";
 function I(e, t) {
   let i = "first-party" === t.type ? t.id : "THIRD_PARTY_PLUGIN";
   trackEventAnalytics("dev_handoff.codegen", {
@@ -62,14 +62,14 @@ export function $$E0({
   useEffect(() => {
     let n = !1;
     (async () => {
-      if (!e || e === AD) return;
+      if (!e || e === defaultSessionLocalIDString) return;
       let r = globalPerfTimer.start("dev_handoff.codegen");
       if ("local-plugin" === t.type || "published-plugin" === t.type) {
         let a;
         if (!S) return;
         let s = [];
         let o = t;
-        let l = _$$m(S).map(({
+        let l = getCodegenLanguages(S).map(({
           value: e
         }) => e);
         l.includes(o.pluginLanguage ?? "") || (o = F({

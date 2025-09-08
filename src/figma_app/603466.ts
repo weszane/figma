@@ -1,6 +1,6 @@
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { iIc, NfO } from "../figma_app/763686";
+import { SceneChangeType, PluginHelpers } from "../figma_app/763686";
 import { nM } from "../figma_app/276332";
 import { getSingletonSceneGraph } from "../905/700578";
 import { reportError } from "../905/11";
@@ -59,7 +59,7 @@ let v = new class {
     let r = t.events.find(t => t.type === e.type && t.origin === e.origin);
     if (r) for (let t of e.properties) r.properties.add(t);else {
       let r = getSingletonSceneGraph().get(e.id);
-      r && (e.type === iIc.STYLE_PROPERTY_CHANGE || e.type === iIc.STYLE_CREATE || e.type === iIc.STYLE_DELETE ? r.styleKeyForPublish && t.events.push({
+      r && (e.type === SceneChangeType.STYLE_PROPERTY_CHANGE || e.type === SceneChangeType.STYLE_CREATE || e.type === SceneChangeType.STYLE_DELETE ? r.styleKeyForPublish && t.events.push({
         id: e.id,
         origin: e.origin,
         type: e.type,
@@ -81,15 +81,15 @@ let v = new class {
     let n = getSingletonSceneGraph().get(e.id);
     if (n) {
       if (n.styleKeyForPublish) {
-        let r = t.events.filter(e => e.type === iIc.STYLE_DELETE || e.type === iIc.STYLE_CREATE || e.type === iIc.STYLE_PROPERTY_CHANGE);
+        let r = t.events.filter(e => e.type === SceneChangeType.STYLE_DELETE || e.type === SceneChangeType.STYLE_CREATE || e.type === SceneChangeType.STYLE_PROPERTY_CHANGE);
         this.styleEventByGuid.set(e.id, {
           nodeType: this.publicNodeTypeFromEvent(e),
           events: r
         });
       } else {
-        let r = t.events.filter(e => e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE || e.type === iIc.DELETE).map(e => {
+        let r = t.events.filter(e => e.type === SceneChangeType.CREATE || e.type === SceneChangeType.PROPERTY_CHANGE || e.type === SceneChangeType.DELETE).map(e => {
           let t = "";
-          e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE ? t = n.containingCanvas || "" : e.type === iIc.DELETE && (t = e.oldContainingCanvas?.toString() || "");
+          e.type === SceneChangeType.CREATE || e.type === SceneChangeType.PROPERTY_CHANGE ? t = n.containingCanvas || "" : e.type === SceneChangeType.DELETE && (t = e.oldContainingCanvas?.toString() || "");
           "" === t && reportError(_$$e.EXTENSIBILITY, Error("Containing canvas for nodechange event is empty"));
           return {
             ...e,
@@ -108,7 +108,7 @@ let v = new class {
     return t && t?.type !== "NONE" ? w(t) : "NONE";
   }
   injectTypeIntoEvent(e, t) {
-    return t.type === iIc.CREATE || t.type === iIc.DELETE || t.type === iIc.PROPERTY_CHANGE ? {
+    return t.type === SceneChangeType.CREATE || t.type === SceneChangeType.DELETE || t.type === SceneChangeType.PROPERTY_CHANGE ? {
       ...t,
       nodeType: e.nodeType
     } : t;
@@ -207,7 +207,7 @@ export function $$B42(e) {
   I = I.filter(t => t !== e);
 }
 function G() {
-  m.length || g.length || f.length ? NfO.setIsDocumentChangeCallbackRegistered(!0) : NfO.setIsDocumentChangeCallbackRegistered(!1);
+  m.length || g.length || f.length ? PluginHelpers.setIsDocumentChangeCallbackRegistered(!0) : PluginHelpers.setIsDocumentChangeCallbackRegistered(!1);
 }
 export function $$V14(e) {
   m.push(e);

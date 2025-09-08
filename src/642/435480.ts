@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { U1 } from "../figma_app/343967";
-import { rrT } from "../figma_app/763686";
+import { NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
 import o from "classnames";
@@ -48,7 +48,7 @@ export function $$b1({
 export function $$C2() {
   let e = Gt("numSelectedByType");
   return k9(() => function (e) {
-    if (e) return aZ(rrT.FILL, e);
+    if (e) return aZ(NodePropertyCategory.FILL, e);
   }(e), [e]);
 }
 export const GY = $$_0;

@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { YQ } from "../905/502364";
@@ -13,12 +13,12 @@ import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { Av } from "../figma_app/622881";
 import { jK, it } from "../figma_app/829197";
 import { M } from "../905/366117";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { s as _$$s3 } from "../905/445054";
 import { jH, yF, cd } from "../905/187370";
 let x = (e, t) => {
@@ -71,7 +71,7 @@ let C = {
 };
 let $$w2 = atom(!1);
 let $$O0 = "user_color_profile_modal_closed";
-let R = Ju(function (e) {
+let R = registerModal(function (e) {
   let t = jK();
   let r = function (e) {
     switch (e) {
@@ -125,7 +125,7 @@ let R = Ju(function (e) {
                 className: _$$s2.flex.flexRow.gap20.mb12.$,
                 children: [jsx(_$$c, {
                   value: M.SRGB,
-                  label: jsx(J, {
+                  label: jsx(Label, {
                     children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.srgb.value")
                   }),
                   htmlAttributes: {
@@ -133,7 +133,7 @@ let R = Ju(function (e) {
                   }
                 }), jsx(_$$c, {
                   value: M.DISPLAY_P3,
-                  label: jsx(J, {
+                  label: jsx(Label, {
                     children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.display_p3.value")
                   }),
                   htmlAttributes: {
@@ -195,7 +195,7 @@ export function $$L1() {
     name: "user-color-profile-menu-option",
     displayForQuickCommand: "user-color-profile-quick-action",
     callback: (e, t, r) => {
-      r(to({
+      r(showModalHandler({
         type: R
       }));
     }

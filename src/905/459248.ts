@@ -3,8 +3,8 @@ import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { $n, IK } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { K as _$$K } from "../905/443068";
@@ -12,8 +12,8 @@ import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k2 } from "../905/44647";
-import { vhv, _em, vXe, t8O } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { PageSelectionType, PluginModalType, Fonts, FontHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import v from "classnames";
@@ -39,7 +39,7 @@ import { sx as _$$sx, XE } from "../figma_app/91703";
 import { fu } from "../figma_app/831799";
 import { XE as _$$XE } from "../figma_app/976749";
 import { J as _$$J2 } from "../905/445197";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { h_, Ie, qG, jb, _D, Cj } from "../905/291654";
 import { Kk, Rt } from "../905/777093";
 import { q as _$$q } from "../905/807667";
@@ -48,7 +48,7 @@ import { QR } from "../figma_app/623300";
 import { Ib } from "../905/129884";
 import { pn } from "../905/714538";
 import { e0 as _$$e2 } from "../905/696396";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ay } from "../figma_app/628987";
 import { zz } from "../905/32188";
 import { Ao } from "../905/748636";
@@ -71,7 +71,7 @@ import { iZ } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { TNJ } from "../figma_app/43951";
 import { gg, Rk } from "../905/981217";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { A as _$$A3 } from "../6828/673039";
 import { ms, MM } from "../figma_app/236327";
 import { Kyn } from "../figma_app/27776";
@@ -144,7 +144,7 @@ function ej(e) {
       onClick: () => {
         t(Bq({
           openInNewTab: !0,
-          upsellSource: _$$b2.MISSING_FONTS_UPSELL
+          upsellSource: UpsellModalType.MISSING_FONTS_UPSELL
         }));
       },
       target: "_blank",
@@ -192,16 +192,16 @@ function eV({
     children: [jsx(MM, {
       onClick: () => {
         logInfo("missing fonts", "setting scope to current page");
-        r(vhv.CURRENT_PAGE);
+        r(PageSelectionType.CURRENT_PAGE);
       },
-      checked: i === vhv.CURRENT_PAGE,
+      checked: i === PageSelectionType.CURRENT_PAGE,
       children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.current_page")
     }), jsx(MM, {
       onClick: () => {
         logInfo("missing fonts", "setting scope to all pages");
-        r(vhv.ALL_PAGES);
+        r(PageSelectionType.ALL_PAGES);
       },
-      checked: i === vhv.ALL_PAGES,
+      checked: i === PageSelectionType.ALL_PAGES,
       children: jsx("div", {
         children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.all_pages")
       })
@@ -219,7 +219,7 @@ export let $$eq2 = null;
 export function $$e$1() {
   $$eq2 = null;
 }
-export let $$eZ0 = Ju(function (e) {
+export let $$eZ0 = registerModal(function (e) {
   let {
     isSelectionBased,
     onClose,
@@ -268,7 +268,7 @@ export let $$eZ0 = Ju(function (e) {
     let [d, c] = useState({});
     let [u, p] = useState({});
     let [m, h] = useState(!1);
-    let [g, f] = useState(n && !l ? vhv.CURRENT_SELECTION : vhv.CURRENT_PAGE);
+    let [g, f] = useState(n && !l ? PageSelectionType.CURRENT_SELECTION : PageSelectionType.CURRENT_PAGE);
     let [v, I] = useAtomValueAndSetter(QR);
     useEffect(() => () => {
       I(!1);
@@ -281,17 +281,17 @@ export let $$eZ0 = Ju(function (e) {
       getFeatureFlags().desktop_font_reload_on_focus_ux && x(null);
     }, [t]);
     useEffect(() => {
-      g !== vhv.ALL_PAGES || E || (I(!0), o(_$$F.enqueue({
+      g !== PageSelectionType.ALL_PAGES || E || (I(!0), o(_$$F.enqueue({
         type: "missing-fonts-load-all-pages",
         message: getI18nString("fullscreen.toolbar.missing_fonts_modal.finding_missing_fonts"),
         error: !1,
         icon: zX.IMAGE_BACKED_SPINNER,
         delay: 1500
-      })), _$$q(_em.MISSING_FONTS).then(() => {
+      })), _$$q(PluginModalType.MISSING_FONTS).then(() => {
         new Promise(e => {
-          vXe.fontsAreLoading() ? $$eq2 = e : e();
+          Fonts.fontsAreLoading() ? $$eq2 = e : e();
         }).then(() => {
-          let e = t8O.getMissingFontInfoFromAllPages();
+          let e = FontHelpers.getMissingFontInfoFromAllPages();
           e && e.missingFonts ? x(e) : reportError(_$$e.TEXT_AND_VECTOR, Error("Could not get missing fonts from all pages"));
           I(!1);
           o(_$$F.dequeue({
@@ -300,7 +300,7 @@ export let $$eZ0 = Ju(function (e) {
         });
       }));
     }, [o, E, g, I]);
-    let S = g === vhv.ALL_PAGES && E ? E : {
+    let S = g === PageSelectionType.ALL_PAGES && E ? E : {
       missingFonts: t,
       counts: i
     };
@@ -328,21 +328,21 @@ export let $$eZ0 = Ju(function (e) {
     let C = useCallback(() => {
       h(!0);
       _$$J2(() => {
-        l7.user("replace-missing-fonts", () => {
-          if (t8O) {
+        permissionScopeHandler.user("replace-missing-fonts", () => {
+          if (FontHelpers) {
             for (let e in u) {
               let t = u[e];
-              t && eK(t.newName) && (t8O.replaceFontsInSelection([{
+              t && eK(t.newName) && (FontHelpers.replaceFontsInSelection([{
                 replace: t.oldName,
                 with: t.newName
-              }], g), Y5.commit());
+              }], g), fullscreenValue.commit());
             }
-            t8O.resetMissingFonts();
+            FontHelpers.resetMissingFonts();
           }
         });
         let e = Object.values(u).map(e => e.oldName.family + ":" + e.newName.family);
         let t = "current_page";
-        l && g === vhv.CURRENT_PAGE ? t = "current_selection_fallback" : g === vhv.CURRENT_SELECTION ? t = "current_selection" : g === vhv.ALL_PAGES && (t = "all_pages");
+        l && g === PageSelectionType.CURRENT_PAGE ? t = "current_selection_fallback" : g === PageSelectionType.CURRENT_SELECTION ? t = "current_selection" : g === PageSelectionType.ALL_PAGES && (t = "all_pages");
         o(_$$sx({
           name: "missing_fonts_replaced",
           params: {
@@ -355,9 +355,9 @@ export let $$eZ0 = Ju(function (e) {
       });
     }, [o, a, u, g, l]);
     let T = useCallback((e, t) => {
-      Y5.selectMissingFontNodes(e, t, g);
+      fullscreenValue.selectMissingFontNodes(e, t, g);
     }, [g]);
-    let k = useMemo(() => g === vhv.ALL_PAGES ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.all_pages") : renderI18nText("fullscreen.toolbar.missing_fonts_modal.current_page"), [g]);
+    let k = useMemo(() => g === PageSelectionType.ALL_PAGES ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.all_pages") : renderI18nText("fullscreen.toolbar.missing_fonts_modal.current_page"), [g]);
     return {
       scope: g,
       missingFontsInfoForCurrentScope: S,
@@ -562,7 +562,7 @@ export let $$eZ0 = Ju(function (e) {
             className: I()(_$$s.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.px12.colorTextSecondary.$, ey),
             onClick: () => {
               ex(!1);
-              setScope(vhv.CURRENT_PAGE);
+              setScope(PageSelectionType.CURRENT_PAGE);
             },
             children: [jsx(_$$B, {
               svg: _$$A5,
@@ -575,10 +575,10 @@ export let $$eZ0 = Ju(function (e) {
         })]
       }), jsxs("div", {
         className: _$$s.p12.flex.bt1.bSolid.colorBorder.$$if(e0 || eE, _$$s.justifyBetween, _$$s.justifyEnd).$,
-        children: [eE && jsx(_$$S, {
-          checked: scope === vhv.CURRENT_PAGE,
-          onChange: () => setScope(scope === vhv.CURRENT_PAGE ? vhv.CURRENT_SELECTION : vhv.CURRENT_PAGE),
-          label: jsx(_$$J, {
+        children: [eE && jsx(Checkbox, {
+          checked: scope === PageSelectionType.CURRENT_PAGE,
+          onChange: () => setScope(scope === PageSelectionType.CURRENT_PAGE ? PageSelectionType.CURRENT_SELECTION : PageSelectionType.CURRENT_PAGE),
+          label: jsx(Label, {
             children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_on_the_whole_page")
           })
         }), e0 && !eE && jsxs(Fragment, {
@@ -630,7 +630,7 @@ export let $$eZ0 = Ju(function (e) {
       })]
     })
   });
-}, "MISSING_FONTS_MODAL", ZU.YES);
+}, "MISSING_FONTS_MODAL", ModalSupportsBackground.YES);
 function eX({
   missingFontsInGroup: e,
   recordingKey: t,

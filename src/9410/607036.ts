@@ -9,7 +9,7 @@ import { E as _$$E } from "../905/632989";
 import { $n } from "../905/521428";
 import { C as _$$C } from "../905/520159";
 import { A } from "../905/251970";
-import { DCy } from "../figma_app/763686";
+import { SlidesEmbeddedPrototypeBindings } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
 import { O8 } from "../figma_app/88484";
@@ -22,7 +22,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { Cu } from "../figma_app/314264";
 import { Tc } from "../905/797478";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { pb, zU, Ik, qS } from "../figma_app/831696";
 import { Ib } from "../905/129884";
 import { R } from "../figma_app/53049";
@@ -39,14 +39,14 @@ async function L({
   let i = await R({
     fileKey: e
   });
-  return i && DCy?.getPrototypeFileStructureData(e, i, t) || {};
+  return i && SlidesEmbeddedPrototypeBindings?.getPrototypeFileStructureData(e, i, t) || {};
 }
 export function $$R2() {
   let e = _$$U();
   let [t, i] = useAtomValueAndSetter($$A3);
   let a = useRef(null);
   let s = useCallback((e = !1) => {
-    e && Y5.triggerAction("set-tool-default", null);
+    e && fullscreenValue.triggerAction("set-tool-default", null);
     i(-1);
   }, [i]);
   Y(() => s(!0), {
@@ -69,7 +69,7 @@ export function $$R2() {
     });
   }, [e]);
   let c = useCallback(e => {
-    Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
+    fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
       type: "EMBED",
       url: e
     });
@@ -175,21 +175,21 @@ function F({
       children: [jsx(B, {
         thumbnail: _require,
         title: getI18nString("slides.flapp.embed.widget_poll"),
-        onSelected: () => n(() => Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
+        onSelected: () => n(() => fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "POLL"
         })),
         recordingKey: Pt(a, "poll")
       }), jsx(B, {
         thumbnail: _require2,
         title: getI18nString("slides.flapp.embed.widget_stamps"),
-        onSelected: () => n(() => Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
+        onSelected: () => n(() => fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "FACEPILE"
         })),
         recordingKey: Pt(a, "facepile")
       }), jsx(B, {
         thumbnail: _require3,
         title: getI18nString("slides.flapp.embed.widget_alignment"),
-        onSelected: () => n(() => Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
+        onSelected: () => n(() => fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "ALIGNMENT"
         })),
         recordingKey: Pt(a, "alignment")

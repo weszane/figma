@@ -1,8 +1,8 @@
 import { useRef, useCallback, useState, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { MO, hq, UQ } from "../2824/40443";
-import { glU } from "../figma_app/763686";
-import { l7, zk } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler, zk } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { Xt } from "../figma_app/623293";
@@ -14,12 +14,12 @@ import { Ze } from "../figma_app/540726";
 import { UD, Jr } from "../figma_app/624361";
 import { wr, Dh } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { f3 } from "../figma_app/690664";
 import { k, d as _$$d } from "../5421/548912";
 let b = new class {
   constructor() {
-    this.HtmlToDesignValidator = vh();
+    this.HtmlToDesignValidator = createNoOpValidator();
   }
   convertHtmlToDesign(e) {
     let {
@@ -154,7 +154,7 @@ export function $$S1() {
           let r = i.data.meta.buffer;
           "canvas" === target ? function (e, t, n) {
             let o = Ze(e);
-            o && l7.user("paste-buffer-to-canvas", () => {
+            o && permissionScopeHandler.user("paste-buffer-to-canvas", () => {
               let e = getSingletonSceneGraph().createNode("FRAME");
               e.stackMode = "VERTICAL";
               e.stackPrimarySizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE";
@@ -162,7 +162,7 @@ export function $$S1() {
               let i = getSingletonSceneGraph();
               let r = i.getInternalCanvas();
               if (r) r.appendChild(e);else throw Error("Internal canvas not found");
-              if (!glU?.directlyPasteSuggestion(o, e.parentGuid ?? "", null, e.guid)) {
+              if (!Fullscreen?.directlyPasteSuggestion(o, e.parentGuid ?? "", null, e.guid)) {
                 e.removeSelfAndChildren();
                 return Error("Failed to paste buffer to canvas");
               }
@@ -188,12 +188,12 @@ export function $$S1() {
           });
           await new Promise(e => requestAnimationFrame(() => requestAnimationFrame(e)));
           await Jr().imageUploadPromise();
-          l7(zk.SYSTEM, "copy-frame-to-clipboard", () => {
+          permissionScopeHandler(zk.SYSTEM, "copy-frame-to-clipboard", () => {
             wr();
             Dh([n.guid]);
-            glU?.copyActiveCanvasSelectionToClipboard();
+            Fullscreen?.copyActiveCanvasSelectionToClipboard();
             wr();
-            glU?.deleteNode(n.guid);
+            Fullscreen?.deleteNode(n.guid);
           });
         }
         cleanup();

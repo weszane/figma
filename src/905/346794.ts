@@ -1,5 +1,5 @@
-import { kul, h3O, dTb, Ats, egF } from "../figma_app/763686";
-import { l } from "../905/412815";
+import { SchemaJoinStatus, Multiplayer, DetachStatus, DetachError, DiffImpl } from "../figma_app/763686";
+import { awaitSync } from "../905/412815";
 import { n as _$$n } from "../905/347702";
 let s = null;
 let o = new Map();
@@ -16,54 +16,54 @@ let $$d8 = _$$n(e => e === s ? Promise.resolve() : new Promise(t => {
   let i = o.get(e);
   i ? i.push(t) : o.set(e, [t]);
 }));
-let $$c5 = _$$n(() => s === kul.JOINED);
+let $$c5 = _$$n(() => s === SchemaJoinStatus.JOINED);
 export async function $$u2() {
-  let e = h3O.detach();
+  let e = Multiplayer.detach();
   switch (e) {
-    case dTb.SUCCESS:
+    case DetachStatus.SUCCESS:
       break;
-    case dTb.TRIGGERED_DETACH:
-      await $$d8(kul.DETACHED);
+    case DetachStatus.TRIGGERED_DETACH:
+      await $$d8(SchemaJoinStatus.DETACHED);
       break;
     default:
-      throw Error(`Failed to detach multiplayer: ${dTb[e]}`);
+      throw Error(`Failed to detach multiplayer: ${DetachStatus[e]}`);
   }
 }
 export async function $$p4() {
-  let e = h3O.reattachAndSync();
-  if (e === Ats.INTERNAL_ERROR) throw Error(`Failed to reattach and sync multiplayer: ${Ats[e]}`);
-  await $$d8(kul.JOINED);
-  await l();
+  let e = Multiplayer.reattachAndSync();
+  if (e === DetachError.INTERNAL_ERROR) throw Error(`Failed to reattach and sync multiplayer: ${DetachError[e]}`);
+  await $$d8(SchemaJoinStatus.JOINED);
+  await awaitSync();
 }
 export async function $$m1() {
-  let e = h3O.abandonAndReattach();
-  if (e === Ats.INTERNAL_ERROR) throw Error(`Failed to abandon changes and reattach multiplayer: ${Ats[e]}`);
-  await $$d8(kul.JOINED);
+  let e = Multiplayer.abandonAndReattach();
+  if (e === DetachError.INTERNAL_ERROR) throw Error(`Failed to abandon changes and reattach multiplayer: ${DetachError[e]}`);
+  await $$d8(SchemaJoinStatus.JOINED);
 }
 export async function $$h9(e, t) {
-  let i = egF.enterPreviewDetachedState(e, t);
+  let i = DiffImpl.enterPreviewDetachedState(e, t);
   switch (i) {
-    case dTb.SUCCESS:
+    case DetachStatus.SUCCESS:
       break;
-    case dTb.TRIGGERED_DETACH:
-      await $$d8(kul.DETACHED);
-      egF.enterPreviewDetachedState(e, t);
+    case DetachStatus.TRIGGERED_DETACH:
+      await $$d8(SchemaJoinStatus.DETACHED);
+      DiffImpl.enterPreviewDetachedState(e, t);
       break;
     default:
-      throw Error(`Failed to detach multiplayer: ${dTb[i]}`);
+      throw Error(`Failed to detach multiplayer: ${DetachStatus[i]}`);
   }
 }
 export async function $$g7() {
-  let e = egF.enterMergeDetachedState();
+  let e = DiffImpl.enterMergeDetachedState();
   switch (e) {
-    case dTb.SUCCESS:
+    case DetachStatus.SUCCESS:
       break;
-    case dTb.TRIGGERED_DETACH:
-      await $$d8(kul.DETACHED);
-      egF.enterMergeDetachedState();
+    case DetachStatus.TRIGGERED_DETACH:
+      await $$d8(SchemaJoinStatus.DETACHED);
+      DiffImpl.enterMergeDetachedState();
       break;
     default:
-      throw Error(`Failed to detach multiplayer: ${dTb[e]}`);
+      throw Error(`Failed to detach multiplayer: ${DetachStatus[e]}`);
   }
 }
 export async function $$f6({
@@ -71,15 +71,15 @@ export async function $$f6({
   userId: t,
   allowEmptyMerge: i
 }) {
-  let a = egF.commitBranchingStagedChanges(e, t, i);
-  if (a === Ats.INTERNAL_ERROR) throw Error(`Failed to reattach and sync multiplayer: ${Ats[a]}`);
-  await $$d8(kul.JOINED);
-  await l();
+  let a = DiffImpl.commitBranchingStagedChanges(e, t, i);
+  if (a === DetachError.INTERNAL_ERROR) throw Error(`Failed to reattach and sync multiplayer: ${DetachError[a]}`);
+  await $$d8(SchemaJoinStatus.JOINED);
+  await awaitSync();
 }
 export async function $$_0(e = !0) {
-  let t = egF.abandonBranchingChanges(e);
-  if (t === Ats.INTERNAL_ERROR) throw Error(`Failed to abandon changes and reattach multiplayer: ${Ats[t]}`);
-  await $$d8(kul.JOINED);
+  let t = DiffImpl.abandonBranchingChanges(e);
+  if (t === DetachError.INTERNAL_ERROR) throw Error(`Failed to abandon changes and reattach multiplayer: ${DetachError[t]}`);
+  await $$d8(SchemaJoinStatus.JOINED);
 }
 export const De = $$_0;
 export const IZ = $$m1;

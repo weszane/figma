@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { _YF } from "../figma_app/822011";
-import { uQ6 } from "../figma_app/763686";
+import { ActionType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -44,7 +44,7 @@ export function $$E3(e) {
     moduleToOpen: {
       type: "custom",
       module: jsx(A, {
-        source: uQ6.READY_FOR_DEV,
+        source: ActionType.READY_FOR_DEV,
         numRenamableNodesForHandoff: renamableNodeGuids.length
       }),
       beforeModuleOpen: () => {
@@ -69,7 +69,7 @@ export function $$y1({
       }),
       beforeModuleOpen: () => {
         B3(JT.AUTO_RENAME_LAYERS);
-        e !== uQ6.LAYERS_PANEL_OVERFLOW_MENU && Ag(JT.AUTO_RENAME_LAYERS, Ay, {
+        e !== ActionType.LAYERS_PANEL_OVERFLOW_MENU && Ag(JT.AUTO_RENAME_LAYERS, Ay, {
           source: e,
           overwriteNames: !1
         });
@@ -86,19 +86,19 @@ export function $$b0(e) {
   let t = atomStoreManager.get(yV);
   if (!t?.canEdit || t.editorType !== _YF.DESIGN) return !1;
   switch (e) {
-    case uQ6.READY_FOR_DEV:
+    case ActionType.READY_FOR_DEV:
       return !!getFeatureFlags().aip_rename_layers_ready_for_dev;
-    case uQ6.EXPORT_FRAME:
-    case uQ6.EXPORT_PICKER:
+    case ActionType.EXPORT_FRAME:
+    case ActionType.EXPORT_PICKER:
       return !!getFeatureFlags().ai_prod_rename_layers_dev_export;
-    case uQ6.CREATE_COMPONENT:
-    case uQ6.CREATE_FRAME:
-    case uQ6.DRAW_FRAME_AROUND_NODES:
-    case uQ6.STACK_SELECTION:
+    case ActionType.CREATE_COMPONENT:
+    case ActionType.CREATE_FRAME:
+    case ActionType.DRAW_FRAME_AROUND_NODES:
+    case ActionType.STACK_SELECTION:
       return !!getFeatureFlags().ai_prod_rename_layers_moments;
-    case uQ6.LAYERS_PANEL_ACTION_ROW:
+    case ActionType.LAYERS_PANEL_ACTION_ROW:
       return !!getFeatureFlags().aip_lpe;
-    case uQ6.LAYERS_PANEL_OVERFLOW_MENU:
+    case ActionType.LAYERS_PANEL_OVERFLOW_MENU:
       return !!getFeatureFlags().aip_lpe_overflow;
     default:
       return !1;

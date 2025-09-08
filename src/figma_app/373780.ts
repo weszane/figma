@@ -18,7 +18,7 @@ import { k4 } from "../figma_app/290668";
 import { UK } from "../figma_app/740163";
 import { gf } from "../figma_app/682945";
 import { QZ, _X } from "../figma_app/62612";
-import { ut, lu, J2 } from "../figma_app/84367";
+import { getObservableValue, subscribeObservable, getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { lQ } from "../905/934246";
 import { A as _$$A2 } from "../vendor/90566";
@@ -26,7 +26,7 @@ import { c1 } from "../figma_app/357047";
 import { Q as _$$Q } from "../905/249555";
 import { Td } from "../905/595131";
 import { EO, q4, dl, xR, U3, sh, qJ, ZG, it } from "../figma_app/536669";
-import { AlE, yGz, Zbk, Ez5, r6o, NLJ, VDs, glU, Egt, CUU, UNF, Sie, m1T } from "../figma_app/763686";
+import { documentStateTsApi, AccessibilityHelpers, AppMode, AppStateTsApi, SelectionMode, DesignGraphElements, CustomFocusHelpers, Fullscreen, SceneGraphHelpers, SceneNodeCpp, NodeTsApi, StateSourceType, LayoutTabType } from "../figma_app/763686";
 import { c2 } from "../905/382883";
 import { EventEmitter } from "../905/690073";
 import { isNotNullish } from "../figma_app/95419";
@@ -47,7 +47,7 @@ import { g as _$$g2 } from "../905/388772";
 import { x as _$$x2 } from "../905/520155";
 import { j7 } from "../905/929976";
 import { K9 } from "../figma_app/8833";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
 import { B5, tp, cU, cH, Z3 } from "../figma_app/80462";
 import { s as _$$s2, w as _$$w } from "../figma_app/154255";
@@ -100,12 +100,12 @@ function z({
   let l = useSelector(dK);
   let d = useSelector(Xt);
   let c = Fk(e => e.getCurrentPage()?.guid);
-  let u = c ? AlE.getActiveDocument() : void 0;
+  let u = c ? documentStateTsApi.getActiveDocument() : void 0;
   let p = useRef({});
   let _ = _$$A2(() => {
     if (!c) return;
-    let e = AlE.getActiveDocument();
-    let t = yGz.flushChangedNodes(e);
+    let e = documentStateTsApi.getActiveDocument();
+    let t = AccessibilityHelpers.flushChangedNodes(e);
     for (let e of (s.trigger("invalidate-accessible-nodes", [l, t]), t)) l.get(e) && s.trigger(`node-changed-${e}`, [l]);
   }, 500, {
     leading: !0,
@@ -129,10 +129,10 @@ function z({
   useEffect(_);
   useEffect(() => {
     if (void 0 !== u) {
-      yGz.setMapping(u, t);
+      AccessibilityHelpers.setMapping(u, t);
       return () => {
-        yGz.flushChangedNodes(u);
-        yGz.setMapping(u, Zbk.NONE);
+        AccessibilityHelpers.flushChangedNodes(u);
+        AccessibilityHelpers.setMapping(u, AppMode.NONE);
       };
     }
   }, [u, t]);
@@ -271,8 +271,8 @@ let Z = memo(function ({
       positionAmongSiblings: _positionAmongSiblings
     };
   }(function () {
-    let e = Ez5?.accessibilityState().pickCursorFocusedNode;
-    let t = ut(e, null);
+    let e = AppStateTsApi?.accessibilityState().pickCursorFocusedNode;
+    let t = getObservableValue(e, null);
     let r = useSelector(e => {
       let t = e.mirror.appModel.currentPage;
       return Object.keys(e.mirror.sceneGraphSelection)[0] || t;
@@ -281,8 +281,8 @@ let Z = memo(function ({
   }(), r);
   if (function () {
     let e = p8("currentTool");
-    let t = ut(Ez5?.editorState().keyboardSelectMode, r6o.BOX);
-    return e === NLJ.KEYBOARD_SELECT && t === r6o.BOX;
+    let t = getObservableValue(AppStateTsApi?.editorState().keyboardSelectMode, SelectionMode.BOX);
+    return e === DesignGraphElements.KEYBOARD_SELECT && t === SelectionMode.BOX;
   }()) return null;
   let p = void 0 === positionAmongSiblings ? void 0 : positionAmongSiblings + 1;
   if (!self) return null;
@@ -423,10 +423,10 @@ function eE({
       isPickCursorFocusedOnNode,
       isPickCursorActive
     } = function (e) {
-      let t = Ez5?.accessibilityState().pickCursorFocusedNode;
+      let t = AppStateTsApi?.accessibilityState().pickCursorFocusedNode;
       let r = useCallback(() => t?.getCopy() === e, [t, e]);
       let n = useCallback(() => !!t?.getCopy(), [t]);
-      let a = useCallback(e => t ? lu(t, {
+      let a = useCallback(e => t ? subscribeObservable(t, {
         onChangeImmediate: e
       }) : lQ, [t]);
       let s = useSyncExternalStore(a, r);
@@ -444,7 +444,7 @@ function eE({
   let d = useRef(null);
   let c = _$$s2();
   let u = useCallback(t => {
-    t.target !== t.currentTarget || t.relatedTarget === t.currentTarget || n || (tJ([e]), Y5.commit(), l(QZ({
+    t.target !== t.currentTarget || t.relatedTarget === t.currentTarget || n || (tJ([e]), fullscreenValue.commit(), l(QZ({
       nodeId: e,
       ...B5
     }), tp));
@@ -460,7 +460,7 @@ function eE({
     }));
   }, [s]);
   useLayoutEffect(() => {
-    c.suppressed && document.activeElement !== document.body || !n || VDs?.getExpectingTextInput() || d.current?.focus();
+    c.suppressed && document.activeElement !== document.body || !n || CustomFocusHelpers?.getExpectingTextInput() || d.current?.focus();
   }, [n, c]);
   let h = n ? 0 : -1;
   return useMemo(() => ({
@@ -474,9 +474,9 @@ function eE({
 }
 function ey(e, t) {
   let r = function () {
-    let e = Ez5?.accessibilityState().pickCursorFocusedNode;
+    let e = AppStateTsApi?.accessibilityState().pickCursorFocusedNode;
     let t = useCallback(() => !!e?.getCopy(), [e]);
-    let r = useCallback(t => e ? lu(e, {
+    let r = useCallback(t => e ? subscribeObservable(e, {
       onChangeImmediate: t
     }) : lQ, [e]);
     return useSyncExternalStore(r, t);
@@ -740,7 +740,7 @@ class eA extends ee {
 }
 let ex = memo(function () {
   return jsx(z, {
-    nodeMapping: Zbk.DESIGN,
+    nodeMapping: AppMode.DESIGN,
     navigationTelemetryTag: "design_navigate",
     children: jsx(Z, {
       accessibilityLogAction: _$$h.DESIGN_UPDATE_NODE,
@@ -751,7 +751,7 @@ let ex = memo(function () {
 let eC = memo(function () {
   let e = l7();
   return hA() && !e ? jsx(z, {
-    nodeMapping: Zbk.DESIGN,
+    nodeMapping: AppMode.DESIGN,
     navigationTelemetryTag: "devmode_navigate",
     children: jsx(Z, {
       accessibilityLogAction: _$$h.DEVMODE_UPDATE_NODE,
@@ -761,7 +761,7 @@ let eC = memo(function () {
 });
 class ew extends ee {
   children(e) {
-    return dl(this.graph, e) ? [] : glU.getSortedChildGuids(e.guid).map(e => this.graph.get(e)).filter(isNotNullish);
+    return dl(this.graph, e) ? [] : Fullscreen.getSortedChildGuids(e.guid).map(e => this.graph.get(e)).filter(isNotNullish);
   }
   interpret(e) {
     if (!e) return {
@@ -807,7 +807,7 @@ class ew extends ee {
   }
 }
 function eO(e) {
-  let t = xR(Egt.getNodeTransformProperties(e.guid));
+  let t = xR(SceneGraphHelpers.getNodeTransformProperties(e.guid));
   let r = U3(e);
   let n = sh({
     type: e.type,
@@ -815,7 +815,7 @@ function eO(e) {
   });
   let i = q4(e);
   let a = q4(e.textSublayer);
-  let s = Egt.getStickableFrequencies(e.guid) || {};
+  let s = SceneGraphHelpers.getStickableFrequencies(e.guid) || {};
   let o = e.accessibleLabel;
   let l = "TABLE" === e.type ? qJ(e) : null;
   let d = "SECTION" === e.type && e.sectionContentsHidden;
@@ -848,7 +848,7 @@ function eL({
 }) {
   let i = Fk(e => e.getCurrentPage()?.guid);
   let a = _$$Z(r);
-  let s = J2(UK().accessibilityDomDebug);
+  let s = getObservableOrFallback(UK().accessibilityDomDebug);
   let o = J({
     extractorCtor: t,
     logAction: e
@@ -864,7 +864,7 @@ function eL({
 let eP = memo(function () {
   return jsx(z, {
     navigationTelemetryTag: "figjam_navigate",
-    nodeMapping: Zbk.FIGJAM,
+    nodeMapping: AppMode.FIGJAM,
     children: jsx(eL, {
       accessibilityLogAction: _$$h.FIGJAM_UPDATE_NODE,
       extractorCtor: ew,
@@ -1102,7 +1102,7 @@ class eG extends eA {
     }
   }
   children(e) {
-    return !glU || dl(this.graph, e) ? [] : glU.getSortedChildGuids(e.guid).map(e => this.graph.get(e)).filter(isNotNullish);
+    return !Fullscreen || dl(this.graph, e) ? [] : Fullscreen.getSortedChildGuids(e.guid).map(e => this.graph.get(e)).filter(isNotNullish);
   }
   decide(e) {
     if (!getFeatureFlags().slides_editor_a11y) return super.decide(e);
@@ -1125,7 +1125,7 @@ class eG extends eA {
 }
 let eV = memo(function () {
   return jsx(z, {
-    nodeMapping: Zbk.SLIDES,
+    nodeMapping: AppMode.SLIDES,
     navigationTelemetryTag: "slides_navigate",
     children: jsx(Z, {
       accessibilityLogAction: _$$h.SLIDES_UPDATE_NODE,
@@ -1164,7 +1164,7 @@ function eX({
   children: t
 }) {
   let r = _$$Z("figjam_navigate");
-  let i = J2(UK().accessibilityDomDebug);
+  let i = getObservableOrFallback(UK().accessibilityDomDebug);
   let s = useSelector(e => e.mirror.appModel.showComments);
   return jsx(Z3, {
     nodeId: e,
@@ -1195,7 +1195,7 @@ class eq extends ee {
     }
   }
   children(e) {
-    return dl(this.graph, e) ? [] : glU.getSortedChildGuids(e.guid).map(e => this.graph.get(e)).filter(isNotNullish);
+    return dl(this.graph, e) ? [] : Fullscreen.getSortedChildGuids(e.guid).map(e => this.graph.get(e)).filter(isNotNullish);
   }
   decide(e) {
     return "CANVAS" === e.type ? eX : e$;
@@ -1203,7 +1203,7 @@ class eq extends ee {
 }
 let eJ = memo(function () {
   return jsx(z, {
-    nodeMapping: Zbk.FIGJAM,
+    nodeMapping: AppMode.FIGJAM,
     navigationTelemetryTag: "figjam_navigate",
     children: jsx(Z, {
       accessibilityLogAction: _$$h.FIGJAM_UPDATE_NODE,
@@ -1252,7 +1252,7 @@ function e8() {
       getLastEventWasTab
     } = useContext(eD);
     let n = useSelector(e => 1 === Object.keys(e.mirror.sceneGraphSelection).length ? Object.keys(e.mirror.sceneGraphSelection)[0] : null);
-    let s = useMemo(() => CUU && UNF?.exists(Sie.REDUX) ? CUU.getSelectedTextRange(Sie.REDUX)?.textNodeId : null, []);
+    let s = useMemo(() => SceneNodeCpp && NodeTsApi?.exists(StateSourceType.REDUX) ? SceneNodeCpp.getSelectedTextRange(StateSourceType.REDUX)?.textNodeId : null, []);
     let o = n || s;
     useEffect(() => {
       o && getLastEventWasTab() && t(QZ({
@@ -1333,7 +1333,7 @@ function e6({
     let t = p8("activeCanvasEditModeType");
     let r = KH();
     let n = Object.keys(r);
-    let a = t !== m1T.TEXT || 0 === n.length ? void 0 : n[n.length - 1];
+    let a = t !== LayoutTabType.TEXT || 0 === n.length ? void 0 : n[n.length - 1];
     let {
       textValue,
       selectionStart,
@@ -1406,7 +1406,7 @@ function e6({
   let [p] = _$$A(o, 500, {
     trailing: !0
   });
-  let _ = J2(UK().accessibilityDomDebug);
+  let _ = getObservableOrFallback(UK().accessibilityDomDebug);
   let m = Td();
   gf();
   let f = useDispatch();

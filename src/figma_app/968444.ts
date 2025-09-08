@@ -1,11 +1,11 @@
-import { XpX, glU } from "../figma_app/763686";
+import { FullscreenMode, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { y } from "../905/409121";
 import { dZ, v7 } from "../figma_app/475303";
 let l = "customKeyboardShortcuts";
-let $$d3 = new Map(Object.entries(XpX).map(([e, t]) => [e, t]));
-let c = new Map(Object.entries(XpX).map(([e, t]) => [t, e]));
+let $$d3 = new Map(Object.entries(FullscreenMode).map(([e, t]) => [e, t]));
+let c = new Map(Object.entries(FullscreenMode).map(([e, t]) => [t, e]));
 function u(e, t, r) {
   let n = c.get(t);
   let i = Object.entries(e).find(([e, t]) => t.type === n && t.action === r);
@@ -37,7 +37,7 @@ export function $$p1(e, t, r) {
     shortcuts: d
   });
   localStorageRef?.setItem(l, JSON.stringify(d));
-  glU.reloadKeyboardShortcuts();
+  Fullscreen.reloadKeyboardShortcuts();
 }
 export function $$_0(e, t) {
   if (!getFeatureFlags().ce_custom_keyboard_shortcuts) return;
@@ -62,7 +62,7 @@ export function $$_0(e, t) {
     }
   };
   localStorageRef?.setItem(l, JSON.stringify(r));
-  glU.reloadKeyboardShortcuts();
+  Fullscreen.reloadKeyboardShortcuts();
 }
 function h() {
   let e;

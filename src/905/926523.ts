@@ -4,12 +4,12 @@ import { J } from "../905/231762";
 import { L_, Nr, HZ as _$$HZ } from "../905/890368";
 import { F } from "../905/302958";
 import { hm } from "../figma_app/976345";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 let $$u3 = L_;
 let $$p4 = Nr;
 let $$m2 = _$$HZ;
-let $$h1 = nF((e, {
+let $$h1 = createOptimistThunk((e, {
   email: t,
   profileId: i,
   userId: s
@@ -42,7 +42,7 @@ let $$h1 = nF((e, {
 }, ({
   profileId: e
 }) => `COMMUNITY_HUB_CHANGE_COMMUNITY_PROFILE_PRIMARY_USER_${e}`);
-let $$g0 = nF((e, {
+let $$g0 = createOptimistThunk((e, {
   email: t,
   profileId: i,
   userId: s
@@ -76,7 +76,7 @@ let $$g0 = nF((e, {
 }, ({
   profileId: e
 }) => `COMMUNITY_HUB_REMOVE_COMMUNITY_PROFILE_USER_${e}`);
-let $$f5 = nF((e, {
+let $$f5 = createOptimistThunk((e, {
   primaryUserId: t,
   secondaryUserId: i
 }, {

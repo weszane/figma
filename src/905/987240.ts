@@ -1,20 +1,20 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { bOM, X3B } from "../figma_app/763686";
-import { fn, sH } from "../905/871411";
+import { PresentationValidationStatus, PrototypingTsApi } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
 import { reportNullOrUndefined } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { s4 } from "../figma_app/88239";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { _P, Zh } from "../figma_app/2590";
 import { s6 } from "../905/91038";
 import { hg } from "../figma_app/425489";
 import { xY } from "../figma_app/354027";
 import { s as _$$s } from "../905/291518";
 import { F as _$$F } from "../905/160142";
-export let $$y0 = nF((e, {
+export let $$y0 = createOptimistThunk((e, {
   fileKey: t,
   startingPointNodeId: i,
   shouldOpenAtStartingPoint: p,
@@ -27,8 +27,8 @@ export let $$y0 = nF((e, {
   let x = e.getState();
   reportNullOrUndefined(_$$e.PROTOTYPING, x.mirror.appModel);
   let S = s6(x);
-  let w = "" !== i ? bOM.VALID : X3B.currentPagePrototypeStatus();
-  if (w !== bOM.VALID) {
+  let w = "" !== i ? PresentationValidationStatus.VALID : PrototypingTsApi.currentPagePrototypeStatus();
+  if (w !== PresentationValidationStatus.VALID) {
     let t;
     switch (e.dispatch(_P({
       name: "Prototype Editor Play Button Blocked",
@@ -36,10 +36,10 @@ export let $$y0 = nF((e, {
         isFirstPage: S
       }
     })), w) {
-      case bOM.NO_FRAMES:
+      case PresentationValidationStatus.NO_FRAMES:
         t = v ? getI18nString("proto.status_messages.a_presentation_needs_to_have_at_least_one_slide") : getI18nString("proto.status_messages.a_prototype_needs_to_have_at_least_one_frame");
         break;
-      case bOM.INVALID_START_NODE:
+      case PresentationValidationStatus.INVALID_START_NODE:
         t = getI18nString("proto.status_messages.a_prototype_with_connections_needs_a_valid_top_level_frame_as_the_origin");
         break;
       default:
@@ -52,12 +52,12 @@ export let $$y0 = nF((e, {
     return;
   }
   if (xY(x) && !y) {
-    let t = p ? i : X3B.getInlinePreviewNodeIdOnPreviewOpen();
+    let t = p ? i : PrototypingTsApi.getInlinePreviewNodeIdOnPreviewOpen();
     if (!t) {
       let e = s4(x.selectedView);
       e && (t = e);
     }
-    fn(sH(t)) || (t = _$$s());
+    isValidSessionLocalID(parseSessionLocalID(t)) || (t = _$$s());
     atomStoreManager.set(hg, {
       type: "OPEN_INLINE_PREVIEW",
       payload: {
@@ -80,7 +80,7 @@ export let $$y0 = nF((e, {
       }
     });
   } else {
-    let n = p ? i : X3B.getNodeIdForPresent();
+    let n = p ? i : PrototypingTsApi.getNodeIdForPresent();
     if (!n || n === x.mirror.appModel.currentPage) {
       let e = s4(x.selectedView);
       e && (n = e);

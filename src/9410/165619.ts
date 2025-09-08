@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { useSelector } from "../vendor/514228";
 import { k as _$$k } from "../905/443820";
-import { tHB } from "../figma_app/763686";
+import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { am } from "../figma_app/901889";
@@ -12,7 +12,7 @@ import { EE, lB } from "../figma_app/731583";
 import { _X, Yb } from "../figma_app/62612";
 import { OF } from "../figma_app/562352";
 import { m as _$$m } from "../9410/643761";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Mj } from "../figma_app/624361";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
@@ -43,7 +43,7 @@ async function v(e) {
   return t;
 }
 async function E(e) {
-  let t = (await Mj([e], await Y5.openFilePromise())).s3_urls[e];
+  let t = (await Mj([e], await fullscreenValue.openFilePromise())).s3_urls[e];
   if (!t) throw Error("Couldn't resolve image URL from server");
   return t;
 }
@@ -236,7 +236,7 @@ function P({
   mediaType: t
 }) {
   let i = renderI18nText("whiteboard.gif.failed_to_load");
-  "VIDEO" === t && (i = renderI18nText("whiteboard.video.failed_to_load"), tHB?.isVideoBeingUploaded(e) && (i = renderI18nText("whiteboard.video.still_uploading")));
+  "VIDEO" === t && (i = renderI18nText("whiteboard.video.failed_to_load"), VideoCppBindings?.isVideoBeingUploaded(e) && (i = renderI18nText("whiteboard.video.still_uploading")));
   return jsx("div", {
     className: c()(N, A),
     children: jsx("div", {

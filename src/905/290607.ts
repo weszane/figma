@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
 import { FU, b$, Bs } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { v9 } from "../figma_app/383828";
 import { PW } from "../figma_app/633080";
 import { $A } from "../905/862883";
@@ -28,11 +28,11 @@ export function $$g0({
   return useCallback((n, r, m) => {
     let h = n.altKey;
     if ((e || h && E) && r.type !== PW.MODULE) {
-      t && l7.user("swap-instance", () => v9(r, v, f, g || Object.keys(I), A, !e && h, x, m));
+      t && permissionScopeHandler.user("swap-instance", () => v9(r, v, f, g || Object.keys(I), A, !e && h, x, m));
       _?.(r);
     } else {
       _$$r();
-      let e = Y5.getViewportInfo();
+      let e = fullscreenValue.getViewportInfo();
       let t = {
         canvasPosition: {
           x: e.offsetX,
@@ -57,7 +57,7 @@ export function $$g0({
         item: r,
         ...t,
         insertLogArgsOverride: y,
-        insertionCallback: () => Y5.triggerAction("commit")
+        insertionCallback: () => fullscreenValue.triggerAction("commit")
       }));
     }
   }, [e, t, v, i, y, b, g, _, x, f, I, E, A]);

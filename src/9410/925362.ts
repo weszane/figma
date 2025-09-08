@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useLayoutEffect, useCallback } from "react";
 import { useStore, useDispatch } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { F } from "../905/680873";
 import { d as _$$d } from "../905/86829";
@@ -68,7 +68,7 @@ export function $$j0() {
     };
     let o = !1;
     let l = e.filter(e => {
-      let t = glU.nodeStatusesOnPage(e.nodeId).length > 0;
+      let t = Fullscreen.nodeStatusesOnPage(e.nodeId).length > 0;
       t && (o = !0);
       return t || e.nodeId === a;
     });

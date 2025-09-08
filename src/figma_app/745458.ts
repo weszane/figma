@@ -1,6 +1,6 @@
 import { PK } from "../figma_app/243058";
 import { Xf, sg, ey, yG } from "../905/859698";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, createRemovableAtomFamily, mg, p6 } from "../figma_app/27355";
 import l from "../vendor/983401";
@@ -12,7 +12,7 @@ import { f as _$$f } from "../905/412913";
 import { d1 } from "../905/766303";
 import { dp } from "../905/760074";
 import { z } from "../905/915227";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { U as _$$U } from "../905/722080";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { aD, X7 } from "../figma_app/646357";
@@ -261,7 +261,7 @@ let W = _$$f();
 let K = P8([a3, gJ, d1, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
   let u = {};
   let p = new Set();
-  let _ = glU?.getInternalCanvasNodeId();
+  let _ = Fullscreen?.getInternalCanvasNodeId();
   for (let a of o.keys()) {
     let l = e[ey(a)];
     if (!l || r && dp(r, W(l))) continue;
@@ -508,7 +508,7 @@ let $$eh18 = p6([$$ea4], ({
 let $$em5 = createReduxSubscriptionAtomWithState(e => e.library.libraryUpdatesBannerDismissed);
 export function $$eg16(e, t) {
   let r = dK(e);
-  let i = E7(t);
+  let i = normalizeValue(t);
   let a = i ? PK.fromKiwi(i) : null;
   let s = a ? r.getStyleNode(a) : null;
   if (!s) return null;

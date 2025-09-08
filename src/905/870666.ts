@@ -1,7 +1,7 @@
 import { lQ } from "../905/934246";
 import { SceneGraphUnavailableError } from "../figma_app/518682";
-import { lyf, hMR } from "../figma_app/763686";
-import { fn, sH } from "../905/871411";
+import { ViewType, CorePerfInfo } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -22,7 +22,7 @@ import { cF } from "../figma_app/527873";
 import { EO } from "../905/691205";
 import { Zt } from "../figma_app/617727";
 import { b as _$$b, d as _$$d } from "../905/91820";
-import { zO, Ex } from "../905/327571";
+import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/327571";
 import { Vv } from "../905/32091";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
@@ -74,9 +74,9 @@ export class $$D1 {
         let e = s.viewport.split(",");
         3 !== e.length || isNaN(+e[0]) || isNaN(+e[1]) || isNaN(+e[2]) || (d.viewport = s.viewport);
       }
-      if (("duplicate" === t[4] || s.duplicate) && (d.landingState = "DUPLICATE"), s["try-plugin-id"] && (d.tryPluginId = s["try-plugin-id"]), s["try-plugin-version-id"] && (d.tryPluginVersionId = s["try-plugin-version-id"]), s["try-plugin-name"] && (d.tryPluginName = s["try-plugin-name"]), s["try-plugin-editor-type"] && (d.tryPluginEditorType = zO(s["try-plugin-editor-type"])), s["try-plugin-params"] && (d.tryPluginParams = Ex(s)), "1" === s["is-widget"] && (d.isWidget = !0), "1" === s["is-playground-file"] && (d.isPlaygroundFile = !0), s["try-plugin-file-key"] && (d.tryPluginFileKey = s["try-plugin-file-key"]), s["library-hub-file-id"] && (d.libraryHubFileId = s["library-hub-file-id"]), "1" === s["comments-enabled"] && (d.commentsEnabled = !0), s.source && (d.trackingInfo = {
+      if (("duplicate" === t[4] || s.duplicate) && (d.landingState = "DUPLICATE"), s["try-plugin-id"] && (d.tryPluginId = s["try-plugin-id"]), s["try-plugin-version-id"] && (d.tryPluginVersionId = s["try-plugin-version-id"]), s["try-plugin-name"] && (d.tryPluginName = s["try-plugin-name"]), s["try-plugin-editor-type"] && (d.tryPluginEditorType = mapViewTypeToMainfestEditorType(s["try-plugin-editor-type"])), s["try-plugin-params"] && (d.tryPluginParams = parsePluginParams(s)), "1" === s["is-widget"] && (d.isWidget = !0), "1" === s["is-playground-file"] && (d.isPlaygroundFile = !0), s["try-plugin-file-key"] && (d.tryPluginFileKey = s["try-plugin-file-key"]), s["library-hub-file-id"] && (d.libraryHubFileId = s["library-hub-file-id"]), "1" === s["comments-enabled"] && (d.commentsEnabled = !0), s.source && (d.trackingInfo = {
         source: s.source
-      }), "1" === s["main-component"] && (d.mainComponentLink = !0), s.teamToMoveFileToOnNavigate && (d.teamToMoveFileToOnNavigate = s.teamToMoveFileToOnNavigate), "1" === s["is-freemium-preview"] && (d.isFreemiumPreview = !0), s["google-classroom-open-share-settings"] && (d.showPermissionsModalFromGoogleClassroomIntegration = !0), ("design" === o || "design" === s.mode || "view" === s.mode) && (d.mode = "design"), "auto" === s.m && (d.mode = void 0), s.recovery && "design" === i && BrowserInfo.isWasm4gbSupported && e.mirror.appModel.topLevelMode === lyf.LAYOUT && ((hMR?.getTotalUsedHeapMemory() ?? 0) > 2 * cF || "true" === s.recovery ? (d.isRecoveryMode = !0, console.log("Entering Recovery Mode")) : d.isRecoveryMode = !1), s["prev-plan-id"] && s["prev-plan-type"]) {
+      }), "1" === s["main-component"] && (d.mainComponentLink = !0), s.teamToMoveFileToOnNavigate && (d.teamToMoveFileToOnNavigate = s.teamToMoveFileToOnNavigate), "1" === s["is-freemium-preview"] && (d.isFreemiumPreview = !0), s["google-classroom-open-share-settings"] && (d.showPermissionsModalFromGoogleClassroomIntegration = !0), ("design" === o || "design" === s.mode || "view" === s.mode) && (d.mode = "design"), "auto" === s.m && (d.mode = void 0), s.recovery && "design" === i && BrowserInfo.isWasm4gbSupported && e.mirror.appModel.topLevelMode === ViewType.LAYOUT && ((CorePerfInfo?.getTotalUsedHeapMemory() ?? 0) > 2 * cF || "true" === s.recovery ? (d.isRecoveryMode = !0, console.log("Entering Recovery Mode")) : d.isRecoveryMode = !1), s["prev-plan-id"] && s["prev-plan-type"]) {
         let e = "org" === s["prev-plan-type"] ? _$$O.ORG : _$$O.TEAM;
         debugState.dispatch(c5({
           planId: s["prev-plan-id"],
@@ -181,7 +181,7 @@ export class $$D1 {
         file,
         repo
       } = t.resources || this.DEPRECATED_getDefaultResources(e);
-      if (file ? i = gN(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && fn(sH(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && fn(sH(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && fn(sH(e.nodeId))) try {
+      if (file ? i = gN(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && isValidSessionLocalID(parseSessionLocalID(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId))) try {
         let t = getSingletonSceneGraph().get(e.nodeId)?.type;
         t && ["CANVAS", "DOCUMENT"].includes(t || "") && (p.p = "f");
       } catch (e) {

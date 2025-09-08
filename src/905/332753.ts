@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { A } from "../vendor/90566";
@@ -16,7 +16,7 @@ export function $$m0(e) {
   let t = e.pageId;
   let [i, m] = useAtomValueAndSetter(p(t));
   let h = Fk(e => e.get(t)?.thumbnailInfo);
-  let g = getFeatureFlags().dse_library_pg_thumbnails && h?.nodeID !== AD;
+  let g = getFeatureFlags().dse_library_pg_thumbnails && h?.nodeID !== defaultSessionLocalIDString;
   let f = useCallback(() => {
     requestAnimationFrame(() => {
       if (h) {

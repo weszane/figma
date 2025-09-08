@@ -7,11 +7,11 @@ import { $$ } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { M4, IT, gY } from "../905/713695";
 import { JO, Cn, fm } from "../c5e2cae0/453906";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
 import { OJ } from "../905/519092";
 import { v0 } from "../figma_app/639088";
@@ -67,7 +67,7 @@ let E = M4.Mutation(async (e, {
     }
   });
 });
-let $$C0 = Ju(function (e) {
+let $$C0 = registerModal(function (e) {
   let t = useDispatch();
   let {
     planId,
@@ -157,7 +157,7 @@ let $$C0 = Ju(function (e) {
     name: "Default License Type Setting Modal",
     children: jsx(OJ, {
       title: getI18nString("default_paid_status_modal_v2.manage_default_roles.seat_rename"),
-      onClose: () => t(Ce()),
+      onClose: () => t(hideModal()),
       maxWidth: 310,
       minWidth: 310,
       children: "loaded" !== C.status ? jsx(kt, {
@@ -209,7 +209,7 @@ let $$C0 = Ju(function (e) {
                 });
                 O(!1);
                 t(_$$s.flash(getI18nString("default_paid_status_modal.updated_default_roles.seat_rename")));
-                t(Ce());
+                t(hideModal());
               } catch (e) {
                 O(!1);
                 t(_$$s.flash("An error has occured. Please try again"));

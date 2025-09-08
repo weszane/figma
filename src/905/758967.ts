@@ -1,14 +1,14 @@
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { localStorageRef } from "../905/657224";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Mo } from "../905/414069";
 let s = "outlineModeTriggered";
 function o() {
   return localStorageRef && localStorageRef.getItem(s) || null;
 }
 export function $$c0() {
-  return Ez5.canvasViewState();
+  return AppStateTsApi.canvasViewState();
 }
 let u = [{
   getObservable: () => $$c0().showOutlines,
@@ -34,7 +34,7 @@ let u = [{
       text: getI18nString("visual_bell.cancel"),
       action: e => {
         e.stopPropagation();
-        Y5.triggerAction("toggle-outlines");
+        fullscreenValue.triggerAction("toggle-outlines");
       }
     }
   } : {

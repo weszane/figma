@@ -4,7 +4,7 @@ import { N as _$$N } from "../905/852320";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { SU } from "../figma_app/451499";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { MK } from "../figma_app/844696";
 import { c$, l6, sK } from "../905/794875";
 import { j4, r5 } from "../figma_app/436286";
@@ -24,7 +24,7 @@ export class $$f1 extends PureComponent {
       enablePreview: !0,
       formatter: h,
       icon: this.props.isUI3 ? jsx(_$$N, {}) : jsx(MK, {
-        value: E7(this.props.property),
+        value: normalizeValue(this.props.property),
         defaultBlendMode: this.props.includePassThrough ? "PASS_THROUGH" : "NORMAL"
       }),
       id: $$x0(this.props.id),

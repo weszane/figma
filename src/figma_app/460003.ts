@@ -1,6 +1,6 @@
 import { getComponentInfoById } from "../figma_app/664063";
 import { z_ } from "../figma_app/338442";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { oy } from "../figma_app/964367";
@@ -34,7 +34,7 @@ export async function $$c3(e, t) {
 export function $$u0(e, t, r, l) {
   let d = r.get(e);
   if (d) {
-    l7.user("auto-suggest-component-prop-assignment", () => {
+    permissionScopeHandler.user("auto-suggest-component-prop-assignment", () => {
       try {
         d.setProperties(t.componentProps);
       } catch (e) {

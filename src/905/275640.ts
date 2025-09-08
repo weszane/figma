@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { debug } from "../figma_app/465776";
 import { selectWithShallowEqual } from "../905/103090";
-import { Y5 } from "../figma_app/455680";
-import { oV } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { MIXED_MARKER } from "../905/216495";
 import { zk } from "../figma_app/198712";
 export function $$d10(...e) {
   return selectWithShallowEqual(t => {
@@ -16,7 +16,7 @@ export function $$c4(...e) {
     let i = t.mirror.selectionProperties;
     let n = {};
     for (let t of e) {
-      debug(i[t] !== oV, `Mixed value for ${t} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
+      debug(i[t] !== MIXED_MARKER, `Mixed value for ${t} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
       n[t] = i[t];
     }
     return n;
@@ -36,7 +36,7 @@ export function $$p1(...e) {
     let n = {};
     for (let a of e) {
       i ? n[a] = t.mirror.selectedStyleProperties[a] : n[a] = t.mirror.selectionProperties[a];
-      debug(n[a] !== oV, `Mixed value for ${a} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
+      debug(n[a] !== MIXED_MARKER, `Mixed value for ${a} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
     }
     return n;
   });
@@ -58,13 +58,13 @@ export function $$f8(e) {
 export function $$_3(e) {
   return selectWithShallowEqual(t => {
     let i = t.mirror.selectionProperties[e];
-    debug(i !== oV, `Mixed value for ${e} found in useNonMixedSelectionPropertyValue. Use useSelectionPropertyValue and handle the MIXED value instead.`);
+    debug(i !== MIXED_MARKER, `Mixed value for ${e} found in useNonMixedSelectionPropertyValue. Use useSelectionPropertyValue and handle the MIXED value instead.`);
     return i;
   });
 }
 export function $$A0(e) {
   return useCallback((t, i = zk.YES) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       [e]: t
     }, {
       shouldCommit: i

@@ -1,7 +1,7 @@
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { F } from "../905/302958";
 import { XU } from "../905/576487";
-export let $$a0 = nF((e, t) => {
+export let $$a0 = createOptimistThunk((e, t) => {
   if (!t.fromFileModal) return;
   if (t.onFinishCallback) {
     t.onFinishCallback(t.folderName);

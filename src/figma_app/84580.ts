@@ -1,20 +1,20 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { tHB, oXo, X3B, glU } from "../figma_app/763686";
-import { Hr, dI } from "../905/871411";
+import { VideoCppBindings, StateManagementCPPBindings, PrototypingTsApi, Fullscreen } from "../figma_app/763686";
+import { defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { to } from "../figma_app/828186";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { ow } from "../figma_app/976749";
 import { F as _$$F } from "../905/224";
-import { hS, oV, E7 } from "../905/216495";
+import { isValidValue, MIXED_MARKER, normalizeValue } from "../905/216495";
 import { dq } from "../figma_app/316316";
 import { q5, Hu } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { uQ } from "../figma_app/151869";
 import { zZ } from "../figma_app/299859";
@@ -32,28 +32,28 @@ export function $$P14(e, t, r, n, i, a, s, o, l, d) {
   return {
     behavior: function (e) {
       if (e) {
-        if (!hS(e)) return oV;
+        if (!isValidValue(e)) return MIXED_MARKER;
         if ("INSTANT_TRANSITION" === e) ;else if ("DISSOLVE" === e) return "DISSOLVE";else if ("FADE" === e) return "FADE";else if (e.startsWith("SLIDE_OUT")) return "SLIDE_OUT";else if (e.startsWith("SLIDE")) return "SLIDE";else if (e.startsWith("PUSH")) return "PUSH";else if (e.startsWith("MOVE_OUT")) return "MOVE_OUT";else if (e.startsWith("MOVE")) return "MOVE";else if ("SMART_ANIMATE" === e || "MAGIC_MOVE" === e) return "SMART_ANIMATE";else if ("SCROLL_ANIMATE" === e) return "SCROLL_ANIMATE";
       }
       return "INSTANT";
     }(e),
     direction: function (e) {
-      if (e && hS(e)) {
+      if (e && isValidValue(e)) {
         for (let t of k) if (e.indexOf(t) >= 0) return t;
       }
       return null;
     }(e),
     easing: function (e) {
       if (e) {
-        if (!hS(e)) return oV;
+        if (!isValidValue(e)) return MIXED_MARKER;
         if ("IN_CUBIC" === e) return "EASE_IN";
         if ("OUT_CUBIC" === e) ;else if ("INOUT_CUBIC" === e) return "EASE_IN_AND_OUT";else if ("LINEAR" === e) return "LINEAR";else if ("IN_BACK_CUBIC" === e) return "EASE_IN_BACK";else if ("OUT_BACK_CUBIC" === e) return "EASE_OUT_BACK";else if ("INOUT_BACK_CUBIC" === e) return "EASE_IN_AND_OUT_BACK";else if ("CUSTOM_CUBIC" === e) return "CUSTOM_BEZIER";else if ("GENTLE_SPRING" === e) return "GENTLE";else if ("SPRING_PRESET_ONE" === e) return "QUICK";else if ("SPRING_PRESET_TWO" === e) return "BOUNCY";else if ("SPRING_PRESET_THREE" === e) return "SLOW";else if ("CUSTOM_SPRING" === e) return "CUSTOM_SPRING";
       }
       return "EASE_OUT";
     }(t),
     isSpringTransition: $$M22(t),
-    easingFunction: r ? hS(r) ? r : oV : D,
-    duration: n ? hS(n) ? n : oV : .3,
+    easingFunction: r ? isValidValue(r) ? r : MIXED_MARKER : D,
+    duration: n ? isValidValue(n) ? n : MIXED_MARKER : .3,
     shouldSmartAnimate: F(i, !1),
     preserveScroll: F(a, !1),
     resetVideoPosition: F(s, !1),
@@ -68,13 +68,13 @@ export function $$M22(e) {
   return !!e && ("GENTLE_SPRING" === e || "SPRING_PRESET_ONE" === e || "SPRING_PRESET_TWO" === e || "SPRING_PRESET_THREE" === e || "CUSTOM_SPRING" === e);
 }
 function F(e, t) {
-  return e ? hS(e) ? e : oV : t;
+  return e ? isValidValue(e) ? e : MIXED_MARKER : t;
 }
 export function $$j16(e) {
-  return e.length ? e.reduce((e, t) => e && e !== t.stateManagementVersion || !e && 1 === t.stateManagementVersion ? oV : void 0 === e ? 0 : e, e[0].stateManagementVersion) : void 0;
+  return e.length ? e.reduce((e, t) => e && e !== t.stateManagementVersion || !e && 1 === t.stateManagementVersion ? MIXED_MARKER : void 0 === e ? 0 : e, e[0].stateManagementVersion) : void 0;
 }
 export function $$U17(e) {
-  return $$B20(e) || e === oV;
+  return $$B20(e) || e === MIXED_MARKER;
 }
 export function $$B20(e) {
   return void 0 === e || 0 === e;
@@ -83,24 +83,24 @@ export function $$G5(e) {
   return 1 === e;
 }
 export function $$V2(e, t, r) {
-  if (e === oV) return !0;
-  let n = E7(t);
-  let i = E7(r);
+  if (e === MIXED_MARKER) return !0;
+  let n = normalizeValue(t);
+  let i = normalizeValue(r);
   return !("CLOSE" === n || "URL" === n || "INTERNAL_NODE" === n && "SCROLL_TO" === i || "SET_VARIABLE" === n || "CONDITIONAL" === n || "SET_VARIABLE_MODE" === n || "NONE" === n || "UPDATE_MEDIA_RUNTIME" === n);
 }
 export function $$H19(e) {
   if ("BACK" === e.connectionType) return !0;
-  let t = E7(e.transitionNodeID);
-  if (null == t || t === Hr) return !0;
-  let r = dI(t);
-  return !!tHB.subtreeContainsVideoPaint(r);
+  let t = normalizeValue(e.transitionNodeID);
+  if (null == t || t === defaultSessionLocalID) return !0;
+  let r = sessionLocalIDToString(t);
+  return !!VideoCppBindings.subtreeContainsVideoPaint(r);
 }
 export function $$z3(e) {
   if ("BACK" === e.connectionType) return !0;
-  let t = E7(e.transitionNodeID);
-  if (null == t || t === Hr) return !0;
-  let r = dI(t);
-  return !!oXo.subtreeContainsInteractiveComponent(r);
+  let t = normalizeValue(e.transitionNodeID);
+  if (null == t || t === defaultSessionLocalID) return !0;
+  let r = sessionLocalIDToString(t);
+  return !!StateManagementCPPBindings.subtreeContainsInteractiveComponent(r);
 }
 export function $$W13() {
   let {
@@ -115,7 +115,7 @@ export function $$W13() {
     let {
       viableIds,
       disabledIds
-    } = X3B.getVideoNodesOnSameTlfAsNode(t);
+    } = PrototypingTsApi.getVideoNodesOnSameTlfAsNode(t);
     r = viableIds;
     n = disabledIds;
   }
@@ -141,7 +141,7 @@ export function $$en4({
   showPresetActions: i,
   isLayoutNodeSelected: s
 }) {
-  return (r ? et : n ? ee : Q).filter(n => s ? er.includes(n) : !!("SWAP_STATE_TO" !== n || glU.isSelectionContainedInStateOrStateInstance()) && (n !== q || !!e) && (n !== $$J8 || !!i && !!r) && ("UPDATE_MEDIA_PLAY_PAUSE_OPTIONS" === n || "UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS" === n || "UPDATE_MEDIA_SKIP_TO" === n || "UPDATE_MEDIA_SKIP_BY_OPTIONS" === n ? e : ("CONDITIONAL" !== n || !t) && ("SET_VARIABLE_MODE" !== n || !!getFeatureFlags().prototype_set_mode_action)));
+  return (r ? et : n ? ee : Q).filter(n => s ? er.includes(n) : !!("SWAP_STATE_TO" !== n || Fullscreen.isSelectionContainedInStateOrStateInstance()) && (n !== q || !!e) && (n !== $$J8 || !!i && !!r) && ("UPDATE_MEDIA_PLAY_PAUSE_OPTIONS" === n || "UPDATE_MEDIA_MUTE_UNMUTE_OPTIONS" === n || "UPDATE_MEDIA_SKIP_TO" === n || "UPDATE_MEDIA_SKIP_BY_OPTIONS" === n ? e : ("CONDITIONAL" !== n || !t) && ("SET_VARIABLE_MODE" !== n || !!getFeatureFlags().prototype_set_mode_action)));
 }
 export function $$ei1(e) {
   let t = {
@@ -232,22 +232,22 @@ function ea(e, t) {
   let a = useDispatch();
   switch (e) {
     case Bi.PROTOTYPING_MULTIPLE_ACTIONS:
-      r = _$$b.PROTOTYPING_MULTIPLE_ACTIONS;
+      r = UpsellModalType.PROTOTYPING_MULTIPLE_ACTIONS;
       break;
     case Bi.PROTOTYPING_CONDITIONAL_ACTIONS:
-      r = _$$b.PROTOTYPING_CONDITIONAL_ACTIONS;
+      r = UpsellModalType.PROTOTYPING_CONDITIONAL_ACTIONS;
       break;
     case Bi.PROTOTYPING_VARIABLES:
-      r = _$$b.PROTOTYPING_VARIABLES;
+      r = UpsellModalType.PROTOTYPING_VARIABLES;
       break;
     case Bi.VIDEOS_IN_PROTOTYPES:
-      r = _$$b.ADD_VIDEO;
+      r = UpsellModalType.ADD_VIDEO;
       break;
     default:
       r = void 0;
   }
   return useCallback(() => {
-    a(_$$to({
+    a(showModalHandler({
       type: DV,
       data: {
         team: t,

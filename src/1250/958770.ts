@@ -1,16 +1,16 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 var $$r0 = (e => (e.Connected = "connected", e.NotConnected = "not_connected", e))($$r0 || {});
 var i = (e => (e.Started = "started", e.Requested = "requested", e.Complete = "complete", e))(i || {});
 export let $$o1 = new class {
   constructor() {
-    this.GithubAppSetupSchemaValidator = vh();
-    this.OrgGithubInstallationsSchemaValidator = vh();
-    this.GithubRepositoriesSchemaValidator = vh();
+    this.GithubAppSetupSchemaValidator = createNoOpValidator();
+    this.OrgGithubInstallationsSchemaValidator = createNoOpValidator();
+    this.GithubRepositoriesSchemaValidator = createNoOpValidator();
   }
   startGithubAppSetup(e) {
     return this.GithubAppSetupSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/integrations/github-app/setup", td.toAPIParameters({
+    }) => await t.post("/api/integrations/github-app/setup", APIParameterUtils.toAPIParameters({
       plan_type: e.plan_type,
       plan_parent_id: e.plan_parent_id,
       request_context: e.request_context,
@@ -20,12 +20,12 @@ export let $$o1 = new class {
   getOrgGithubInstallations(e) {
     return this.OrgGithubInstallationsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/integrations/github-app/plans/${e.plan_type}/${e.parent_plan_id}/github-installations`, td.toAPIParameters(e)));
+    }) => await t.get(`/api/integrations/github-app/plans/${e.plan_type}/${e.parent_plan_id}/github-installations`, APIParameterUtils.toAPIParameters(e)));
   }
   getGithubRepositories(e) {
     return this.GithubRepositoriesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/integrations/github-app/plans/${e.plan_type}/${e.plan_parent_id}/github-installations/repositories`, td.toAPIParameters(e)));
+    }) => await t.get(`/api/integrations/github-app/plans/${e.plan_type}/${e.plan_parent_id}/github-installations/repositories`, APIParameterUtils.toAPIParameters(e)));
   }
 }();
 export const K8 = $$r0;

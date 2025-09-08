@@ -30,7 +30,7 @@ import { g as _$$g } from "../905/317997";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { N as _$$N } from "../905/438674";
 import { d as _$$d } from "../905/49800";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import B from "../vendor/946678";
@@ -42,7 +42,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { V as _$$V } from "../905/223767";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { g7, Ev } from "../905/939482";
 import { d1 } from "../905/766303";
@@ -56,7 +56,7 @@ import { q5, Cq } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { gE, DV } from "../905/842072";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { e6 as _$$e2 } from "../905/557142";
 import { p as _$$p } from "../figma_app/353099";
 import { h as _$$h } from "../905/207101";
@@ -975,7 +975,7 @@ function tS(e) {
       className: _$$s.px16.flex.flexShrink0.itemsCenter.colorBorder.bt1.bSolid.borderBox.h48.$,
       children: jsx(_$$d, {
         checked: B,
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: renderI18nText("design_systems.libraries_modal.show_enabled_libraries_filter")
         }),
         onChange: V
@@ -984,7 +984,7 @@ function tS(e) {
       className: _$$s.px16.flex.flexShrink0.itemsCenter.colorBorder.bt1.bSolid.borderBox.h48.$,
       children: jsx(_$$d, {
         checked: K,
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: renderI18nText("design_systems.libraries_modal.show_libraries_added_to_connected_project_filter")
         }),
         onChange: q
@@ -1084,10 +1084,10 @@ function tT({
               upgradePlanText: jsx($z, {
                 variant: "link",
                 onClick: function () {
-                  s(_$$to({
+                  s(showModalHandler({
                     type: _$$V,
                     data: {
-                      upsellSource: _$$b.HISTORY_UPSELL,
+                      upsellSource: UpsellModalType.HISTORY_UPSELL,
                       teamId: e.teamId ?? "",
                       openCheckoutInNewTab: !0
                     }
@@ -1095,7 +1095,7 @@ function tT({
                 },
                 trackingProperties: {
                   trackingDescriptor: _$$c.UPGRADE,
-                  upsellSource: _$$b.LIBRARY_MODAL_UPSELL,
+                  upsellSource: UpsellModalType.LIBRARY_MODAL_UPSELL,
                   canUserAccessProFeature: !1
                 },
                 children: renderI18nText("design_systems.libraries_modal.upgrade_to_professional_plan")

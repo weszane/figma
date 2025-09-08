@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/701278";
 import { K } from "../905/799615";
 import { A as _$$A } from "../905/251970";
-import { Ez5, nQ7 } from "../figma_app/763686";
+import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX, Rw } from "../905/576487";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { kl, Gt } from "../905/275640";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { ZU, Wg } from "../figma_app/986347";
 import { v as _$$v } from "../figma_app/339170";
 import { sO } from "../figma_app/21029";
@@ -63,8 +63,8 @@ function N({
 }
 export function $$w2(e, t) {
   let r = sO();
-  let i = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let a = r && i === nQ7.SELF;
+  let i = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
+  let a = r && i === SelfDesignType.SELF;
   let s = sd();
   return a && s ? jsx(N, {
     rowRef: e,
@@ -89,8 +89,8 @@ export function $$O0({
 export function $$R1() {
   let e = useDispatch();
   let t = sO();
-  let r = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let a = t && r === nQ7.SELF;
+  let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
+  let a = t && r === SelfDesignType.SELF;
   let s = kl("propertiesPanelShouldShowRemoveAutoLayout");
   let d = Gt("numSelectedByType");
   let f = !!d?.CANVAS_ROW;
@@ -98,7 +98,7 @@ export function $$R1() {
     type: ZU.CUSTOM_ACTION,
     customActionType: Wg.DIALOG_TRIGGER_BUTTON,
     onClick: () => {
-      Y5.triggerActionInUserEditScope("ungroup-selection");
+      fullscreenValue.triggerActionInUserEditScope("ungroup-selection");
       e(F.enqueue({
         icon: zX.STACK_SELECTION,
         type: "slides_remove_auto_layout_via_ungroup",
@@ -116,8 +116,8 @@ export function $$L3() {
   let e = _x();
   let t = _$$v();
   let r = sO();
-  let n = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let i = r && n === nQ7.SELF;
+  let n = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
+  let i = r && n === SelfDesignType.SELF;
   return r && (i || e) ? t : null;
 }
 export const aG = $$O0;

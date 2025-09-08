@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { J, O as _$$O } from "../905/223510";
 import { ep, GN, Hd, L_, rB, j3, WG, _j, _e, go, fy, R0, Vv, O7, QJ, hM, xb as _$$xb, Ho, bi } from "../905/581923";
 import { C as _$$C, $x, vR, VV, yu, Se, vh, iR } from "../905/926939";
-import { lKz, XJn, Egt } from "../figma_app/763686";
+import { Confirmation, FirstDraftHelpers, SceneGraphHelpers } from "../figma_app/763686";
 import { k4, Uk } from "../905/327738";
 let u = "CustomImage";
 let $$p3 = `\
@@ -121,7 +121,7 @@ function E(e, t, i) {
   let r = WG(e.name);
   let u = function (e, t, i) {
     let r = function (e, t) {
-      let i = e.componentPropertyDefinitions(lKz.YES);
+      let i = e.componentPropertyDefinitions(Confirmation.YES);
       let r = Object.keys(i);
       r.reverse();
       let a = [];
@@ -301,7 +301,7 @@ function E(e, t, i) {
                 for (let e of i.preferredValues) {
                   let t = function (e, t) {
                     if (b[e] && !t.noTypeInfoCache) return b[e];
-                    let i = XJn.getComponentByAssetKey(e) || XJn.getStateGroupByAssetKey(e);
+                    let i = FirstDraftHelpers.getComponentByAssetKey(e) || FirstDraftHelpers.getStateGroupByAssetKey(e);
                     return i ? $$S4(i, t) : null;
                   }(e.key, s);
                   t && (r.push(t.jsxName), a.push({
@@ -500,8 +500,8 @@ function E(e, t, i) {
   let R = w ? vh : C ?? (T ? "Icon" : "");
   let N = Uk(e);
   let P = "SYMBOL" === e.type ? e.guid : e.defaultVariant?.guid ?? "";
-  let O = k === J.GROUPED_COMPONENT ? Egt.getAssetKeyForPublish(P) : Egt.getAssetKeyForPublish(e.guid);
-  let D = e.componentPropertyDefinitions(lKz.YES);
+  let O = k === J.GROUPED_COMPONENT ? SceneGraphHelpers.getAssetKeyForPublish(P) : SceneGraphHelpers.getAssetKeyForPublish(e.guid);
+  let D = e.componentPropertyDefinitions(Confirmation.YES);
   return {
     componentId: e.guid,
     name: e.name,

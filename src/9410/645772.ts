@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { LH } from "../figma_app/384673";
 import { Kh, uh } from "../figma_app/370763";
@@ -42,7 +42,7 @@ export function $$E1() {
           h();
           break;
         case fo.TOGGLE_COMMENTS:
-          c === NLJ.COMMENTS ? e($o) : e(NLJ.COMMENTS);
+          c === DesignGraphElements.COMMENTS ? e($o) : e(DesignGraphElements.COMMENTS);
           break;
         case fo.TOGGLE_SUBMENU_AND_TOOL:
           {

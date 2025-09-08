@@ -2,10 +2,10 @@ import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { UU } from "../figma_app/397267";
-import { Z_n, VD3, e0R, CWU, rXF, j0r, w3z } from "../figma_app/763686";
+import { VariableDataType, StyleVariableOperation, CopyPasteType, VariablesBindings, VariableResolvedDataType, PropertyScope, HandoffBindingsCpp } from "../figma_app/763686";
 import { yG } from "../905/859698";
-import { l7 } from "../905/189185";
-import { aI } from "../905/871411";
+import { permissionScopeHandler } from "../905/189185";
+import { areSessionLocalIDsEqual } from "../905/871411";
 import { sH, dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
@@ -20,10 +20,10 @@ import { v4, xv } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
 import { Q } from "../905/217916";
 import { hA } from "../figma_app/88239";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { m0 } from "../figma_app/976749";
 import { GS } from "../figma_app/314264";
-import { oV, E7, hS, gl } from "../905/216495";
+import { MIXED_MARKER, normalizeValue, isValidValue, isInvalidValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { A5, lJ, kl } from "../905/275640";
 import { u as _$$u, G6, jI, iC } from "../figma_app/852050";
@@ -50,7 +50,7 @@ let $$J11 = "https://help.figma.com/hc/articles/15343816063383#conflicts";
 export var $$Z19 = (e => (e[e.LEARN_MORE = 0] = "LEARN_MORE", e[e.REVIEW_UPDATES = 1] = "REVIEW_UPDATES", e))($$Z19 || {});
 export function $$Q30(e, t) {
   return {
-    type: Z_n.ALIAS,
+    type: VariableDataType.ALIAS,
     resolvedType: e,
     value: t
   };
@@ -59,14 +59,14 @@ function ee(e) {
   let t = e[0];
   if (!t) return null;
   if (e.length >= 2) {
-    for (let t = 1; t < e.length; t++) if (!c2(e[t], e[0])) return oV;
+    for (let t = 1; t < e.length; t++) if (!c2(e[t], e[0])) return MIXED_MARKER;
   }
-  return t.isMixed ? oV : t;
+  return t.isMixed ? MIXED_MARKER : t;
 }
 export function $$et7() {
   let e = selectWithShallowEqual(e => {
     let t = e.mirror.selectionProperties.variableConsumptionInfo;
-    return E7(t)?.variableConsumptionMap || {};
+    return normalizeValue(t)?.variableConsumptionMap || {};
   });
   let t = A5("variableConsumptionInfo");
   return {
@@ -84,15 +84,15 @@ export function $$er24(e) {
   let a = useCallback(r => {
     for (let n of e) {
       if (!r) {
-        _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
-          l7.user("clear-variant-variable-binding", () => {
+        _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
+          permissionScopeHandler.user("clear-variant-variable-binding", () => {
             t.get(n)?.clearVariableConsumption("VARIANT_PROPERTIES");
           });
         });
         return;
       }
-      _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
-        l7.user("set-variant-variable-binding", () => {
+      _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
+        permissionScopeHandler.user("set-variant-variable-binding", () => {
           t.get(n)?.updateVariableConsumption("VARIANT_PROPERTIES", r);
         });
       });
@@ -102,23 +102,23 @@ export function $$er24(e) {
     variantProperties: void 0,
     setVariantProperties: a
   };
-  let s = ee(e.map(e => E7(r)?.bubbledVariableConsumptionMaps?.[e]?.VARIANT_PROPERTIES ?? null));
+  let s = ee(e.map(e => normalizeValue(r)?.bubbledVariableConsumptionMaps?.[e]?.VARIANT_PROPERTIES ?? null));
   return {
-    variantProperties: s === oV ? {
+    variantProperties: s === MIXED_MARKER ? {
       isMixed: !0
-    } : E7(s),
+    } : normalizeValue(s),
     setVariantProperties: a
   };
 }
 export function $$en2() {
-  return E7(_$$b("variableConsumptionMap")) || {};
+  return normalizeValue(_$$b("variableConsumptionMap")) || {};
 }
 function ei(e) {
   return kl(1 === e ? "focusNodeVariableConsumptionInfo" : "variableConsumptionInfo");
 }
 export function $$ea20(e = 0) {
   let t = ei(e);
-  let r = k9(() => E7(t)?.variableSetKeyToModeData || {}, [t]);
+  let r = k9(() => normalizeValue(t)?.variableSetKeyToModeData || {}, [t]);
   let n = $$ed15(e);
   let i = $$e_18();
   return wm(() => {
@@ -189,7 +189,7 @@ export function $$eo5({
   includeSubtree: e = es
 } = {}) {
   let t = kl("variableConsumptionInfo");
-  return k9(() => (e ? E7(t)?.variableSetKeyToModeIncludingSubtree : E7(t)?.variableSetKeyToMode) ?? {}, [t, e]);
+  return k9(() => (e ? normalizeValue(t)?.variableSetKeyToModeIncludingSubtree : normalizeValue(t)?.variableSetKeyToMode) ?? {}, [t, e]);
 }
 export function $$el31(e) {
   let t = function (e) {
@@ -210,7 +210,7 @@ export function $$el31(e) {
 }
 export function $$ed15(e = 0) {
   let t = ei(e);
-  return k9(() => E7(t)?.variableSetKeyToPageLevelPresetMode || {}, [t]);
+  return k9(() => normalizeValue(t)?.variableSetKeyToPageLevelPresetMode || {}, [t]);
 }
 export function $$ec17(e = 0) {
   let t = useDispatch();
@@ -236,11 +236,11 @@ export function $$ec17(e = 0) {
     let s = u[yG(r)];
     let p = s?.explicitMode;
     let g = c ? E()(Object.values(c)) : 0;
-    l7.user("set-explicit-variable-mode", () => {
-      1 === e ? CWU.setExplicitVariableModeForDevModeFocusNode(r, n === $$Y8 || n === $$$10 ? null : n) : CWU.setExplicitVariableModeForSelection(r, n === $$Y8 || n === $$$10 ? null : n, !0);
+    permissionScopeHandler.user("set-explicit-variable-mode", () => {
+      1 === e ? VariablesBindings.setExplicitVariableModeForDevModeFocusNode(r, n === $$Y8 || n === $$$10 ? null : n) : VariablesBindings.setExplicitVariableModeForSelection(r, n === $$Y8 || n === $$$10 ? null : n, !0);
     });
     let f = s?.modeOptions.find(e => c2(e.modeId, n));
-    c && hS(c) && GS("variables.explicit_mode_changed", m ?? "", h, {
+    c && isValidValue(c) && GS("variables.explicit_mode_changed", m ?? "", h, {
       numSelected: g,
       numSelectedFrames: c.FRAME ?? 0,
       numSelectedInstances: c.INSTANCE ?? 0,
@@ -258,7 +258,7 @@ export function $$ec17(e = 0) {
       button: {
         text: getI18nString("variables.modes.option.review_updates"),
         action: () => {
-          t(to({
+          t(showModalHandler({
             type: _$$T,
             data: {
               initialTab: Wv.UPDATES,
@@ -331,10 +331,10 @@ export function $$ey28(e, t, r) {
   let l = _$$b("guid");
   let d = $$en2();
   let p = _$$b("responsiveTextStyleVariants");
-  let _ = p && !gl(p) && void 0 !== r ? p[r] : void 0;
-  let h = t && hS(l) && aI(t, l);
+  let _ = p && !isInvalidValue(p) && void 0 !== r ? p[r] : void 0;
+  let h = t && isValidValue(l) && areSessionLocalIDsEqual(t, l);
   return {
-    consumedVariable: (i = h && _ ? E7(_.variableConsumptionMap) || {} : h ? d : variableConsumptionMap) && ee(e.map(e => i[e])),
+    consumedVariable: (i = h && _ ? normalizeValue(_.variableConsumptionMap) || {} : h ? d : variableConsumptionMap) && ee(e.map(e => i[e])),
     updateVariableConsumption: useCallback((t, r) => {
       let n = {};
       let a = {
@@ -348,14 +348,14 @@ export function $$ey28(e, t, r) {
       };
       e.forEach(e => {
         let r = i[e];
-        if (r && !r?.isMixed && r.type === Z_n.ALIAS) {
+        if (r && !r?.isMixed && r.type === VariableDataType.ALIAS) {
           let e = sH(r.value);
           a.previousVariableKey = e?.assetRef?.key;
         }
         n[e] = t;
         oz(e, t, a);
       });
-      _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+      _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
         setVariableConsumptionMap(n);
       });
     }, [setVariableConsumptionMap, e, i]),
@@ -364,30 +364,30 @@ export function $$ey28(e, t, r) {
       e.forEach(e => {
         r[e] = null;
       });
-      _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+      _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         setVariableConsumptionMap(r, t);
       });
     }, [setVariableConsumptionMap, e])
   };
 }
 function eb(e) {
-  if (e && hS(e)) {
-    if (e.type === Z_n.EXPRESSION && 1 === e.value.expressionArguments.length) {
+  if (e && isValidValue(e)) {
+    if (e.type === VariableDataType.EXPRESSION && 1 === e.value.expressionArguments.length) {
       let t = e.value.expressionArguments[0];
-      if (t?.type === Z_n.ALIAS) return t.value;
+      if (t?.type === VariableDataType.ALIAS) return t.value;
     }
-    if (e.type === Z_n.FONT_STYLE) {
+    if (e.type === VariableDataType.FONT_STYLE) {
       let t = e.value.asString ?? e.value.asFloat;
-      if (t?.type === Z_n.ALIAS) return t.value;
+      if (t?.type === VariableDataType.ALIAS) return t.value;
     }
-    if (e.type === Z_n.ALIAS) return e.value;
+    if (e.type === VariableDataType.ALIAS) return e.value;
   }
 }
 export function $$eT26(e, t, r, n) {
   return $$eS25(e, function (e, t) {
-    if (!(void 0 === e || 0 === e && !t || gl(e))) return {
-      type: Z_n.FLOAT,
-      resolvedType: rXF.FLOAT,
+    if (!(void 0 === e || 0 === e && !t || isInvalidValue(e))) return {
+      type: VariableDataType.FLOAT,
+      resolvedType: VariableResolvedDataType.FLOAT,
       value: e
     };
   }(t, !0), r, n);
@@ -395,8 +395,8 @@ export function $$eT26(e, t, r, n) {
 export function $$eI16(e, t, r, n) {
   return $$eS25(e, function (e) {
     if (e) return {
-      type: Z_n.STRING,
-      resolvedType: rXF.STRING,
+      type: VariableDataType.STRING,
+      resolvedType: VariableResolvedDataType.STRING,
       value: e
     };
   }(t), r, n);
@@ -411,8 +411,8 @@ export function $$eS25(e, t, r, n) {
   } = $$et7();
   let c = r || variableConsumptionMap;
   let u = eb(c && ee([e].map(e => c[e])) || null);
-  let p = CP[e] ?? j0r.ALL_SCOPES;
-  let _ = !u && s && i && t && !n ? w3z.getIdsOfVariablesWithValue(i, [p], {
+  let p = CP[e] ?? PropertyScope.ALL_SCOPES;
+  let _ = !u && s && i && t && !n ? HandoffBindingsCpp.getIdsOfVariablesWithValue(i, [p], {
     type: t.type,
     value: t.value
   }) : [];
@@ -442,8 +442,8 @@ function ev(e, t, r) {
   };
   if (!color || !r) return {};
   let s = iC(e, Array.from(r), {
-    type: Z_n.COLOR,
-    resolvedType: rXF.COLOR,
+    type: VariableDataType.COLOR,
+    resolvedType: VariableResolvedDataType.COLOR,
     value: {
       ...color,
       a: color.a * (opacity ?? 1)
@@ -453,7 +453,7 @@ function ev(e, t, r) {
     matchingVars: {
       ids: s,
       rawValue: {
-        type: Z_n.COLOR,
+        type: VariableDataType.COLOR,
         value: {
           ...color,
           a: color.a * (opacity ?? 1)
@@ -498,7 +498,7 @@ export function $$ex29(e, t, r, n, i) {
       variable: n,
       variableData: r
     };
-    let i = CWU.getSubscribedVariableInfo(r.variableId);
+    let i = VariablesBindings.getSubscribedVariableInfo(r.variableId);
     return i ? {
       variable: ZI(i),
       variableData: r
@@ -540,12 +540,12 @@ export function $$ew21(e) {
 }
 export function $$eO0(e) {
   return useSelector(t => {
-    let r = E7(t.mirror.selectionProperties.variableConsumptionInfo)?.variableNotMatchingSetValue || {};
+    let r = normalizeValue(t.mirror.selectionProperties.variableConsumptionInfo)?.variableNotMatchingSetValue || {};
     let n = e.map(e => {
       let t = r[e] ?? void 0;
-      return UU(t) && "isMixed" in t ? oV : t;
+      return UU(t) && "isMixed" in t ? MIXED_MARKER : t;
     });
-    return 0 === n.length ? void 0 : 1 === n.length ? n[0] : n.every(e => c2(e, n[0])) ? n[0] : oV;
+    return 0 === n.length ? void 0 : 1 === n.length ? n[0] : n.every(e => c2(e, n[0])) ? n[0] : MIXED_MARKER;
   });
 }
 function eR() {
@@ -569,7 +569,7 @@ function eR() {
     let l = [];
     let d = [];
     let c = [];
-    if (a && !gl(a)) {
+    if (a && !isInvalidValue(a)) {
       let u = new Set(a);
       s = componentUpdatesForCurrentPage.filter(e => u.has(e.component_key ?? ""));
       o = stateGroupUpdatesForCurrentPage.filter(e => u.has(e.key));

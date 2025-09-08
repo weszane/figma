@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { $n } from "../905/521428";
 import { r as _$$r } from "../905/571838";
-import { iCO, bwI } from "../figma_app/763686";
+import { StateHierarchy, StateGroupErrorType } from "../figma_app/763686";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText } from "../905/303541";
@@ -25,14 +25,14 @@ export function $$m1({
       stateGroupError: Hf(e),
       stateGroupSelectionMode: i$(e)
     }));
-    if (stateGroupSelectionMode === iCO.STATE_GROUP) {
+    if (stateGroupSelectionMode === StateHierarchy.STATE_GROUP) {
       let t = () => {
         let t = pg(allStates, stateGroupError).map(e => e.symbol.node_id);
         wr();
         Dh(t);
       };
       switch (stateGroupError) {
-        case bwI.PARSE_ERROR:
+        case StateGroupErrorType.PARSE_ERROR:
           return jsxs(Fragment, {
             children: [renderI18nText("design_systems.states_panel.some_layers_have_invalid_names"), jsx("div", {
               children: jsx("strong", {
@@ -47,7 +47,7 @@ export function $$m1({
               })
             })]
           });
-        case bwI.DUPLICATE_STATE_ERROR:
+        case StateGroupErrorType.DUPLICATE_STATE_ERROR:
           return jsxs(Fragment, {
             children: [renderI18nText("design_systems.states_panel.some_variants_have_the_same_property_values_applied"), jsx("div", {
               className: pV,
@@ -58,7 +58,7 @@ export function $$m1({
               })
             })]
           });
-        case bwI.MISSING_PROPERTIES_ERROR:
+        case StateGroupErrorType.MISSING_PROPERTIES_ERROR:
           return jsxs(Fragment, {
             children: [renderI18nText("design_systems.states_panel.some_variants_are_missing_properties"), jsx("div", {
               className: pV,
@@ -69,13 +69,13 @@ export function $$m1({
               })
             })]
           });
-        case bwI.TOO_MANY_STATES_ERROR:
+        case StateGroupErrorType.TOO_MANY_STATES_ERROR:
           return jsx(Fragment, {
             children: renderI18nText("design_systems.states_panel.components_with_more_than_1000_variants_may_experience_performance_issues")
           });
       }
-    } else if (stateGroupSelectionMode === iCO.STATE || stateGroupSelectionMode === iCO.STATE_INSTANCE) switch (A(selectedStates)) {
-      case bwI.PARSE_ERROR:
+    } else if (stateGroupSelectionMode === StateHierarchy.STATE || stateGroupSelectionMode === StateHierarchy.STATE_INSTANCE) switch (A(selectedStates)) {
+      case StateGroupErrorType.PARSE_ERROR:
         return jsxs(Fragment, {
           children: [renderI18nText("design_systems.states_panel.layer_has_invalid_name", {
             layers: selectedStates.length
@@ -85,13 +85,13 @@ export function $$m1({
             })
           })]
         });
-      case bwI.DUPLICATE_STATE_ERROR:
+      case StateGroupErrorType.DUPLICATE_STATE_ERROR:
         return jsx(Fragment, {
           children: renderI18nText("design_systems.states_panel.the_properties_and_values_of_variant_are_conflicting", {
             variants: selectedStates.length
           })
         });
-      case bwI.MISSING_PROPERTIES_ERROR:
+      case StateGroupErrorType.MISSING_PROPERTIES_ERROR:
         return jsx(Fragment, {
           children: renderI18nText("design_systems.states_panel.variants_are_missing_one_or_more_properties", {
             variants: selectedStates.length

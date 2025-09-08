@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
@@ -20,7 +20,7 @@ import { YE, Aq, sw, tW, pV, a_, Bi, iG, z_, lf, dS } from "../905/427932";
 import { A as _$$A } from "../6828/718668";
 import { A as _$$A2 } from "../figma_app/122760";
 import { workspaceTitleWrapper, avatar, genericSelectorModal, genericSelectorInner, genericSelectorModalCancel } from "../figma_app/727769";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 var y = A;
 function E(e) {
   return jsxs(Fragment, {
@@ -134,10 +134,10 @@ function w(e) {
     options: v
   });
 }
-export let $$T0 = Ju(function (e) {
+export let $$T0 = registerModal(function (e) {
   let t = useDispatch();
   let i = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let s = useMemo(() => function (e) {
     _$$h(() => {

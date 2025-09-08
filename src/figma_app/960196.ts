@@ -3,15 +3,15 @@ import { useContext, useMemo, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
-import { Z_n, rXF, CWU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariableDataType, VariableResolvedDataType, VariablesBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { wv } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
 import { B } from "../905/330741";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { bL, u as _$$u } from "../figma_app/852050";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -247,19 +247,19 @@ function j({
 }) {
   let h = useDispatch();
   let y = bL(e, t);
-  let b = _$$u(y?.type === Z_n.ALIAS ? y?.value : void 0);
+  let b = _$$u(y?.type === VariableDataType.ALIAS ? y?.value : void 0);
   let T = useCallback(() => {
     h(B());
   }, [h]);
   let S = useCallback((r, n) => {
     let i = {
-      type: Z_n.COLOR,
-      resolvedType: rXF.COLOR,
+      type: VariableDataType.COLOR,
+      resolvedType: VariableResolvedDataType.COLOR,
       value: r
     };
-    l7.user("set-color-variable-value", () => CWU.setVariableValueForMode(e, t, i)) && n === zk.YES && Y5.triggerAction("commit");
+    permissionScopeHandler.user("set-color-variable-value", () => VariablesBindings.setVariableValueForMode(e, t, i)) && n === zk.YES && fullscreenValue.triggerAction("commit");
   }, [e, t]);
-  if (y?.resolvedType === rXF.COLOR && y?.type !== Z_n.NODE_FIELD_ALIAS) return jsxs(Fragment, {
+  if (y?.resolvedType === VariableResolvedDataType.COLOR && y?.type !== VariableDataType.NODE_FIELD_ALIAS) return jsxs(Fragment, {
     children: [jsx(_$$I, {
       disabledVariableIds: new Set([e]),
       boundVariable: b,

@@ -8,11 +8,11 @@ import { hN } from "../figma_app/248118";
 import { Rm } from "../figma_app/86989";
 import { M } from "../figma_app/170366";
 import { Eh } from "../figma_app/12796";
-import { M5, _V, JT, _H, VQ, Pl, Oe, YQ } from "../figma_app/300692";
+import { isDevModePlugin, isSingleDevWithCodegen, canRunPlugin, isSamePlugin, isValidForFullscreenView, getMissingEditorTypeError, formatPluginName, getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { m3 } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
-import { ZQ, bH, ho, am, k0 } from "../figma_app/155287";
+import { hasLocalFileId, isPrivatePlugin, ManifestErrorType, manifestErrorMessage, manifestContainsWidget } from "../figma_app/155287";
 import { isPluginConfigMatching } from "../905/240440";
 import { Ah } from "../figma_app/221114";
 import { Zm } from "../figma_app/201703";
@@ -42,7 +42,7 @@ function C(e, t, i) {
   let u = Eh(d);
   let h = [];
   if (!u) return h;
-  for (let a of e) if (!(ZQ(a) || M5(a) && _V(a))) try {
+  for (let a of e) if (!(hasLocalFileId(a) || isDevModePlugin(a) && isSingleDevWithCodegen(a))) try {
     let e = publishedPlugins[a.plugin_id];
     if (m3(e) && Rm(e)) {
       if (!i.showUnpurchased) continue;
@@ -65,15 +65,15 @@ function C(e, t, i) {
     }
     let {
       canRun
-    } = JT({
+    } = canRunPlugin({
       plugin: a,
       editorType: t.editorType
     });
     if (!canRun) continue;
-    let s = isReadOnly && !M5(a);
+    let s = isReadOnly && !isDevModePlugin(a);
     if (!a.manifest.menu || 0 === a.manifest.menu.length || s) {
       let e = _$$c(a.manifest.parameters, a.name);
-      let i = t.currentPlugin && _H(a, t.currentPlugin);
+      let i = t.currentPlugin && isSamePlugin(a, t.currentPlugin);
       h.push({
         type: "run-menu-action",
         name: {
@@ -141,7 +141,7 @@ export function $$T0(e, t) {
       menuAction: {
         type: "run-last"
       },
-      disabled: !VQ(A)
+      disabled: !isValidForFullscreenView(A)
     }));
     v.length > 0 && n.push({
       type: "separator"
@@ -156,7 +156,7 @@ export function $$T0(e, t) {
   }));
   let E = [];
   e.org && (E = function (e, t) {
-    let i = Object.values(e.orgSavedPlugins || {}).filter(e => !bH(e));
+    let i = Object.values(e.orgSavedPlugins || {}).filter(e => !isPrivatePlugin(e));
     let n = e.orgPrivatePlugins ? e.orgPrivatePlugins : [];
     let r = [];
     if (n.length > 0) {
@@ -202,16 +202,16 @@ export function $$T0(e, t) {
           let a = localExtensions[n];
           let {
             canRun
-          } = JT({
+          } = canRunPlugin({
             plugin: a
           });
           if (!canRun) continue;
           let c = a.error;
-          c?.text === Pl() && (c = void 0);
-          let u = Oe(a);
-          if (!(!M5(a) && (isReadOnly || l) || M5(a) && _V(a))) {
+          c?.text === getMissingEditorTypeError() && (c = void 0);
+          let u = formatPluginName(a);
+          if (!(!isDevModePlugin(a) && (isReadOnly || l) || isDevModePlugin(a) && isSingleDevWithCodegen(a))) {
             if (c) {
-              let e = c.type === ho.LOAD;
+              let e = c.type === ManifestErrorType.LOAD;
               o.push({
                 type: "submenu",
                 name: u,
@@ -225,11 +225,11 @@ export function $$T0(e, t) {
                   nameStringKey: "plugins-menu-show-error",
                   menuAction: {
                     type: "toggle-console",
-                    showError: am(c)
+                    showError: manifestErrorMessage(c)
                   },
                   disabled: e
                 }), ft({
-                  nameStringKey: YQ(),
+                  nameStringKey: getPluginsMenuOpenDirectory(),
                   menuAction: {
                     type: "open-dir",
                     localFileId: r
@@ -245,7 +245,7 @@ export function $$T0(e, t) {
               name: u,
               submenu: z(a.manifest.menu, a, [u])
             });else {
-              let t = e.currentPlugin && _H(a, e.currentPlugin);
+              let t = e.currentPlugin && isSamePlugin(a, e.currentPlugin);
               o.push({
                 type: "run-menu-action",
                 name: {
@@ -261,7 +261,7 @@ export function $$T0(e, t) {
         }
         return gy(o);
       }(e);
-      Object.values(e.localExtensions).some(e => !k0(e)) && i.push(N());
+      Object.values(e.localExtensions).some(e => !manifestContainsWidget(e)) && i.push(N());
       i.length > 0 && i.push({
         type: "separator"
       });
@@ -340,18 +340,18 @@ export function $$k1(e, t) {
     let {
       activeTextReviewPlugin
     } = e;
-    for (let i of [...Object.values(e.allSavedPlugins), ...Object.values(e.recentlyUsedPlugins ?? {})]) !i.manifest.capabilities?.some(e => "textreview" === e) || t.has(i.plugin_id) || ZQ(i) || t.set(i.plugin_id, i);
+    for (let i of [...Object.values(e.allSavedPlugins), ...Object.values(e.recentlyUsedPlugins ?? {})]) !i.manifest.capabilities?.some(e => "textreview" === e) || t.has(i.plugin_id) || hasLocalFileId(i) || t.set(i.plugin_id, i);
     for (let i of Object.values(e.localExtensions)) i.manifest.capabilities?.some(e => "textreview" === e) && !t.has(i.localFileId) && t.set(i.localFileId, i);
     if (!t.size) return null;
     let n = Array.from(t.values(), e => ({
       type: "run-menu-action",
       name: {
         type: "plugin-name",
-        plugin: ZQ(e) ? `(dev) ${e.name}` : e.name
+        plugin: hasLocalFileId(e) ? `(dev) ${e.name}` : e.name
       },
       menuAction: {
         type: "set-text-review-plugin",
-        textReviewPluginInfo: ZQ(e) ? {
+        textReviewPluginInfo: hasLocalFileId(e) ? {
           type: "local",
           localFileId: e.localFileId
         } : {

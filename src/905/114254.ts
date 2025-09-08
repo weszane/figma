@@ -1,18 +1,18 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { _YF } from "../figma_app/822011";
-import { Ez5, zMY } from "../figma_app/763686";
+import { AppStateTsApi, ThemeMode } from "../figma_app/763686";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to, ES } from "../905/156213";
+import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { dq } from "../905/845253";
 import { cD } from "../figma_app/598018";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Dd } from "../905/519092";
 import { n as _$$n } from "../905/316557";
 import { s1 } from "../figma_app/226737";
 export function $$f1(e) {
-  return e === _YF.SLIDES && !Ez5?.slideThemeLibBindings().doesSlideDeckUseSameTheme();
+  return e === _YF.SLIDES && !AppStateTsApi?.slideThemeLibBindings().doesSlideDeckUseSameTheme();
 }
 export function $$_0({
   source: e,
@@ -20,22 +20,22 @@ export function $$_0({
   onCancel: i,
   dispatch: n
 }) {
-  n(to({
+  n(showModalHandler({
     type: A,
     data: {
       source: e,
       onSubmit: () => {
-        n(ES(A));
+        n(hideSpecificModal(A));
         t();
       },
       onCancel: () => {
-        n(ES(A));
+        n(hideSpecificModal(A));
         i();
       }
     }
   }));
 }
-let A = Ju(function ({
+let A = registerModal(function ({
   source: e,
   onSubmit: t,
   onCancel: i
@@ -45,7 +45,7 @@ let A = Ju(function ({
   let p = dq();
   let [f, _] = useState(a);
   let A = useCallback(() => {
-    let e = Ez5?.slideThemeLibBindings().insertDefaultLocalTheme(zMY.LIGHT, "Template style");
+    let e = AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(ThemeMode.LIGHT, "Template style");
     e && _(e);
   }, []);
   return jsx(fu, {
@@ -61,7 +61,7 @@ let A = Ju(function ({
       maxWidth: 320,
       confirmText: getI18nString("slides.templates.modal.theme_picker.choose_theme_button"),
       onSubmit: () => {
-        Ez5?.slideThemeLibBindings().detachThemesForTemplatePublish(f);
+        AppStateTsApi?.slideThemeLibBindings().detachThemesForTemplatePublish(f);
         t();
       },
       onCancel: i,

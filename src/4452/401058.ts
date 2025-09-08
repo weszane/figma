@@ -9,7 +9,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { B } from "../905/900597";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { px, Um } from "../figma_app/465071";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -52,7 +52,7 @@ export function $$h0(e) {
         iconPrefix: jsx(_$$e, {}),
         variant: "primary",
         onClick: () => {
-          t(to({
+          t(showModalHandler({
             type: B,
             data: {
               entryPoint: e.entryPoint

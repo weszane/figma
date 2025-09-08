@@ -5,7 +5,7 @@ import { reportError } from '../905/11';
 import { _ as _$$_ } from '../905/144222';
 import { X } from '../905/145028';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { l7 } from '../905/189185';
+import { permissionScopeHandler } from '../905/189185';
 import { getI18nString } from '../905/303541';
 import { Nz } from '../905/417232';
 import { G } from '../905/594445';
@@ -19,8 +19,8 @@ import { sD } from '../905/937198';
 import { hl, lf } from '../figma_app/11329';
 import { zk } from '../figma_app/198712';
 import { p as _$$p } from '../figma_app/304289';
-import { Y5 } from '../figma_app/455680';
-import { Egt, rXF, Z_n } from '../figma_app/763686';
+import { fullscreenValue } from '../figma_app/455680';
+import { SceneGraphHelpers, VariableResolvedDataType, VariableDataType } from '../figma_app/763686';
 import { e6, Ez, hu, kI, TZ } from '../figma_app/766708';
 import { _j, ap, rU } from '../figma_app/843119';
 import { A2 } from '../figma_app/872077';
@@ -365,23 +365,23 @@ export function $$U1(e, t) {
   let a = n[0].fills;
   let s = a.findIndex(t => t.type === 'IMAGE' && t.imageVar?.value?.cmsAliasValue?.collectionId === e);
   s !== -1 ? a[s] = i : a.push(i);
-  l7.user('dakota-set-image-binding', () => {
-    Egt?.clearSelection();
-    Egt?.addToSelection([...new Set((n || []).flatMap(t => t.getNodesForCmsBinding(e).map(e => e.guid)))]);
-    Y5.updateSelectionProperties({
+  permissionScopeHandler.user('dakota-set-image-binding', () => {
+    SceneGraphHelpers?.clearSelection();
+    SceneGraphHelpers?.addToSelection([...new Set((n || []).flatMap(t => t.getNodesForCmsBinding(e).map(e => e.guid)))]);
+    fullscreenValue.updateSelectionProperties({
       fillPaints: a
     }, {
       shouldCommit: zk.YES
     });
-    Egt?.replaceSelection(n?.map(e => e.guid) ?? [], !1);
+    SceneGraphHelpers?.replaceSelection(n?.map(e => e.guid) ?? [], !1);
   });
 }
 export function $$B2(e, t) {
   let r = getSingletonSceneGraph();
   let n = oj(r.getDirectlySelectedNodes());
   let i = {
-    type: Z_n.CMS_ALIAS,
-    resolvedType: rXF.STRING,
+    type: VariableDataType.CMS_ALIAS,
+    resolvedType: VariableResolvedDataType.STRING,
     value: {
       collectionId: e,
       fieldSchemaId: t,
@@ -389,7 +389,7 @@ export function $$B2(e, t) {
       type: 'DATE'
     }
   };
-  l7.user('dakota-set-date-binding', () => {
+  permissionScopeHandler.user('dakota-set-date-binding', () => {
     for (let t of (n || []).flatMap(t => t.getNodesForCmsBinding(e).filter(e => e.type === 'TEXT'))) t.updateVariableConsumption('TEXT_DATA', i);
   });
 }

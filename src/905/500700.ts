@@ -1,4 +1,4 @@
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -15,7 +15,7 @@ export class $$u0 extends _$$k {
     let e = atomStoreManager.get(BT);
     if (!e.length) return !0;
     if (1 === e.length) {
-      let e = Ez5?.canvasGrid().getRowGUID(0) ?? null;
+      let e = AppStateTsApi?.canvasGrid().getRowGUID(0) ?? null;
       return !getSingletonSceneGraph().get(e)?.isCanvasGridStateGroupRow;
     }
     return !1;
@@ -24,10 +24,10 @@ export class $$u0 extends _$$k {
     return !0;
   }
   selectRow(e) {
-    Ez5?.canvasGrid().selectRow(e);
+    AppStateTsApi?.canvasGrid().selectRow(e);
   }
   addOrRemoveRowFromSelection(e) {
-    Ez5?.canvasGrid().addOrRemoveRowFromSelection(e);
+    AppStateTsApi?.canvasGrid().addOrRemoveRowFromSelection(e);
   }
   isStateGroupRowAllowed() {
     return !!getFeatureFlags().buzz_template_sets;

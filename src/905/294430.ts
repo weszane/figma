@@ -4,7 +4,7 @@ import { d as _$$d } from "../905/976845";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/487602";
-import { VD3, e0R, rXF, Ez5, hxu, j0r, goc, m1T, rrT } from "../figma_app/763686";
+import { StyleVariableOperation, CopyPasteType, VariableResolvedDataType, AppStateTsApi, ProcessStage, PropertyScope, AccessLevel, LayoutTabType, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
@@ -18,8 +18,8 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, Uv, u1 } from "../figma_app/91703";
 import { qj } from "../figma_app/451499";
 import { Dc } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { zk } from "../figma_app/198712";
@@ -55,7 +55,7 @@ import { Point } from "../905/736624";
 import { dG } from "../figma_app/753501";
 import { Rk } from "../figma_app/844696";
 import { bL as _$$bL2, l9, mc, c$ } from "../905/493196";
-import { h as _$$h, J as _$$J } from "../905/270045";
+import { HiddenLabel, Label } from "../905/270045";
 import eE from "../vendor/805353";
 import { c$ as _$$c$, l6 } from "../905/794875";
 import { g as _$$g } from "../905/412697";
@@ -63,14 +63,14 @@ import { Ao } from "../905/748636";
 import { Z as _$$Z } from "../905/606826";
 import { Ay } from "@stylexjs/stylex";
 import { yb } from "../905/608681";
-import { qE, YE, xN } from "../figma_app/492908";
+import { clamp, roundToMultiple, nearlyEqual } from "../figma_app/492908";
 import { R as _$$R } from "../905/987929";
 import { Z as _$$Z2 } from "../905/557139";
 import { N as _$$N } from "../905/696319";
 import { i as _$$i } from "../905/97346";
 import { G as _$$G } from "../905/289770";
 import { logError } from "../905/714362";
-import { S as _$$S } from "../905/274480";
+import { Checkbox } from "../905/274480";
 import { m as _$$m } from "../905/357539";
 import { N as _$$N2 } from "../905/720559";
 import { D as _$$D2 } from "../905/225412";
@@ -148,14 +148,14 @@ function ed({
           alias: n
         }
       };
-      _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+      _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
         s({
           ...a,
           [t]: r
         }, zk.YES);
       });
       oz(`EFFECT_${t.slice(0, -3).toUpperCase()}`, r);
-    } else t && _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+    } else t && _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       s({
         ...a,
         [t]: void 0
@@ -165,7 +165,7 @@ function ed({
   let p = useRef(null);
   return jsx(hu, {
     boundVariableId: l,
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: u,
     children: jsx(sJ, {
       inputClassName: i,
@@ -196,15 +196,15 @@ function eu(e) {
     isProgressiveBlur
   } = e;
   let r = e => {
-    isProgressiveBlur && Ez5?.setProgressiveBlurHandleTypeSelection(e);
+    isProgressiveBlur && AppStateTsApi?.setProgressiveBlurHandleTypeSelection(e);
   };
   let a = () => {
-    isProgressiveBlur && Ez5?.setProgressiveBlurHandleTypeSelection(hxu.NONE);
+    isProgressiveBlur && AppStateTsApi?.setProgressiveBlurHandleTypeSelection(ProcessStage.NONE);
   };
   let s = jsx("div", {
-    onFocus: () => r(hxu.START),
+    onFocus: () => r(ProcessStage.START),
     onBlur: a,
-    onMouseEnter: () => r(hxu.START),
+    onMouseEnter: () => r(ProcessStage.START),
     onMouseLeave: a,
     children: jsx(yw, {
       ariaLabel: getI18nString("properties_panel.effects.blur.start_blur"),
@@ -222,9 +222,9 @@ function eu(e) {
     })
   });
   let o = jsx("div", {
-    onFocus: () => r(hxu.END),
+    onFocus: () => r(ProcessStage.END),
     onBlur: a,
-    onMouseEnter: e => r(hxu.END),
+    onMouseEnter: e => r(ProcessStage.END),
     onMouseLeave: a,
     children: jsx(yw, {
       ariaLabel: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("properties_panel.effects.blur_radius"),
@@ -369,7 +369,7 @@ function em(e) {
         })
       }), o]
     }), jsx(rf, {
-      variableScope: j0r.EFFECT_FLOAT
+      variableScope: PropertyScope.EFFECT_FLOAT
     })]
   });
 }
@@ -418,7 +418,7 @@ function eh(e) {
         })
       })
     }), jsx(rf, {
-      variableScope: j0r.EFFECT_FLOAT
+      variableScope: PropertyScope.EFFECT_FLOAT
     })]
   });
 }
@@ -513,7 +513,7 @@ function eP(e) {
     recordingKey,
     children: [jsx(l9, {
       width: "fill",
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: eC.format(currentEffectType)
       })
     }), jsx(mc, {
@@ -550,10 +550,10 @@ class eB extends _$$R {
   }
   parse(e, t) {
     let i = super.parse(e, t);
-    return qE(i, this.min ?? 0, this.max ?? 100);
+    return clamp(i, this.min ?? 0, this.max ?? 100);
   }
   formatUnmixed(e) {
-    let t = qE(e, this.min ?? 0, this.max ?? 100);
+    let t = clamp(e, this.min ?? 0, this.max ?? 100);
     let i = super.formatUnmixed(t);
     return this.hidePercentSign ? i : `${i}%`;
   }
@@ -684,7 +684,7 @@ function eZ({
     expectedRange: "[0,1]",
     actualValue: e
   });
-  let l = qE(e, 0, 1) ** 0.6;
+  let l = clamp(e, 0, 1) ** 0.6;
   let d = "dark" === t.color ? 0.2 : 1;
   let c = (0.1 + 0.9 * l) * d;
   return jsxs("svg", {
@@ -790,7 +790,7 @@ function eJ(e, t, i) {
   let r = t.left + t.width / 2;
   let a = t.top + t.height / 2;
   let s = (n = 180 * Math.atan2(e.clientX - r, -(e.clientY - a)) / Math.PI) < 0 ? n + 360 : n;
-  let o = YE(s, i);
+  let o = roundToMultiple(s, i);
   return e.ctrlKey ? o : e.shiftKey ? eQ(o, 45) : eQ(o, 4);
 }
 function e0(e) {
@@ -1076,7 +1076,7 @@ function e9(e) {
       className: el,
       children: jsx("div", {
         className: "ui3_effects_settings_picker--effectPropertyCheckbox--IhyQI",
-        children: jsx(_$$S, {
+        children: jsx(Checkbox, {
           checked: e.effect.clipToShape,
           onChange: t => {
             let i = {
@@ -1085,7 +1085,7 @@ function e9(e) {
             };
             e.onChange(i, zk.YES);
           },
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: getI18nString("properties_panel.effects.texture.clip_to_shape")
           })
         })
@@ -1134,7 +1134,7 @@ function ta(e) {
           ...e.paint,
           color: t
         };
-        xN(t.a, e.paint.opacity ?? 1) || (i.opacity = t.a, i.visible = !0);
+        nearlyEqual(t.a, e.paint.opacity ?? 1) || (i.opacity = t.a, i.visible = !0);
         e.onChange(i);
       },
       onFocus: e.onInputFocus,
@@ -1326,20 +1326,20 @@ function to(e) {
   });
 }
 function tl(e) {
-  let [t, i] = useState(goc.NONE);
+  let [t, i] = useState(AccessLevel.NONE);
   let [a, s] = useState(new Point(0, 0));
   let {
     showIllustrationSliderInputs
   } = useContext(_$$Q2);
   let l = useRef(null);
   useEffect(() => {
-    Ez5?.setDuotoneNoiseColorTypeSelection(t);
+    AppStateTsApi?.setDuotoneNoiseColorTypeSelection(t);
   }, [t]);
   let c = e => {
     t === e ? u(e) : (s(cn(l.current)), i(e));
   };
   let u = e => {
-    e === t && i(goc.NONE);
+    e === t && i(AccessLevel.NONE);
   };
   let p = (t, i) => {
     let n = {
@@ -1387,7 +1387,7 @@ function tl(e) {
         opacity: e.effect.color?.a,
         type: "SOLID"
       },
-      togglePicker: () => c(goc.PRIMARY),
+      togglePicker: () => c(AccessLevel.PRIMARY),
       onChange: (e, t) => {
         e.color && h({
           ...e.color,
@@ -1405,7 +1405,7 @@ function tl(e) {
         opacity: e.effect.secondaryColor?.a,
         type: "SOLID"
       },
-      togglePicker: () => c(goc.SECONDARY),
+      togglePicker: () => c(AccessLevel.SECONDARY),
       onChange: (e, t) => {
         e.color && g({
           ...e.color,
@@ -1461,18 +1461,18 @@ function tl(e) {
         primaryColorInput: A,
         secondaryColorInput: b
       })]
-    }), t === goc.PRIMARY && jsx(gA, {
+    }), t === AccessLevel.PRIMARY && jsx(gA, {
       initialPosition: a,
       color: e.effect.color,
       onChange: h,
-      onClose: () => u(goc.PRIMARY),
+      onClose: () => u(AccessLevel.PRIMARY),
       recordingKey: Pt(e, "colorPicker"),
       variableData: e.effect.colorVar
-    }), t === goc.SECONDARY && jsx(gA, {
+    }), t === AccessLevel.SECONDARY && jsx(gA, {
       initialPosition: a,
       color: e.effect.secondaryColor ?? e.effect.color,
       onChange: g,
-      onClose: () => u(goc.SECONDARY),
+      onClose: () => u(AccessLevel.SECONDARY),
       recordingKey: Pt(e, "colorPicker"),
       variableData: e.effect.colorVar
     })]
@@ -1738,7 +1738,7 @@ function th(e) {
       ...e.effect,
       colorVar: r
     };
-    _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+    _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
       e.onChange(a, zk.YES);
     });
     oz("EFFECT_COLOR", r);
@@ -1748,7 +1748,7 @@ function th(e) {
       ...e.effect,
       colorVar: void 0
     };
-    _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+    _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       e.onChange(i, zk.YES);
     });
     t.stopPropagation();
@@ -1854,8 +1854,8 @@ function th(e) {
         className: Z()(el, showIllustrationSliderInputs ? "ui3_effects_settings_picker--shadowSlidersSection--yFq-D" : "ui3_effects_settings_picker--shadowScrubbableSection--cEUBq"),
         children: jsx("div", {
           className: "ui3_effects_settings_picker--showBehindTransparentOption--bT-nE",
-          children: jsx(_$$S, {
-            label: jsx(_$$J, {
+          children: jsx(Checkbox, {
+            label: jsx(Label, {
               children: renderI18nText("properties_panel.effects.show_behind_transparent_areas")
             }),
             checked: e.effect.showShadowBehindNode,
@@ -1878,9 +1878,9 @@ function th(e) {
       recordingKey: Pt(e, "colorPicker"),
       variableData: e.effect.colorVar,
       onVariableChange: m,
-      variableScopes: new Set([j0r.EFFECT_COLOR])
+      variableScopes: new Set([PropertyScope.EFFECT_COLOR])
     }), jsx(rf, {
-      variableScope: j0r.EFFECT_FLOAT
+      variableScope: PropertyScope.EFFECT_FLOAT
     })]
   });
 }
@@ -1959,7 +1959,7 @@ function tf(e, t) {
   }
 }
 function t_() {
-  Ez5?.currentEditModeInDesign() === m1T.PROGRESSIVE_BLUR && Y5.triggerAction("toggle-progressive-blur-edit-mode");
+  AppStateTsApi?.currentEditModeInDesign() === LayoutTabType.PROGRESSIVE_BLUR && fullscreenValue.triggerAction("toggle-progressive-blur-edit-mode");
 }
 function tA(e) {
   let t = o3(nt.useGrid);
@@ -1976,7 +1976,7 @@ function tA(e) {
   };
   let l = () => {
     e.dispatch(XE());
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
     t_();
   };
   let d = new Point(e.initialX, e.initialY);
@@ -2162,9 +2162,9 @@ class tM extends PureComponent {
   constructor() {
     super(...arguments);
     this.context = null;
-    this.effectsList = xx(e => _W(this.props.effects, []).map(qq));
+    this.effectsList = xx(e => valueOrFallback(this.props.effects, []).map(qq));
     this.onEffectsChange = (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         effects: e
       }, {
         shouldCommit: t
@@ -2199,7 +2199,7 @@ class tM extends PureComponent {
           pickerShown: this.props.pickerShown,
           propertyList: e,
           recordingKey: Pt(this.props, "effectsList"),
-          selectedPropertyType: rrT.EFFECT,
+          selectedPropertyType: NodePropertyCategory.EFFECT,
           selectionContainsAnyKnockoutShadowEligibleNodes: this.props.selectionContainsAnyKnockoutShadowEligibleNodes,
           selectionContainsOnlySpreadEligibleNodes: this.props.selectionContainsOnlySpreadEligibleNodes,
           smallNudgeAmount: this.props.smallNudgeAmount,
@@ -2221,14 +2221,14 @@ class tU extends PureComponent {
   constructor() {
     super(...arguments);
     this.addConfiguredEffect = e => {
-      let t = _W(this.props.propertyList, []);
+      let t = valueOrFallback(this.props.propertyList, []);
       atomStoreManager.set(tD, t.length);
       let i = UF(e, e.type);
       this.props.onChange(t.concat([{
         ...e,
         ...i
       }]));
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
       trackEventAnalytics("editor-effects-panel-add");
       a2("effects");
       "NOISE" === e.type ? analyticsEventManager.trackDefinedEvent("illustration.web_noise_effect_toggle", {
@@ -2246,13 +2246,13 @@ class tU extends PureComponent {
       this.addConfiguredEffect(IK("DROP_SHADOW"));
     };
     this.removeProperty = e => {
-      let t = _W(this.props.propertyList, []);
-      _$$f(VD3.IGNORE, e0R.UNKNOWN, () => {
+      let t = valueOrFallback(this.props.propertyList, []);
+      _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
         this.props.onChange(t.filter((t, i) => i !== e));
       });
       this.props.dispatch(XE());
       this.props.dispatch(Uv());
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
       trackEventAnalytics("editor-effects-panel-remove");
       a2("effects");
     };
@@ -2287,7 +2287,7 @@ class tU extends PureComponent {
       selected: i,
       selectionContainsAnyKnockoutShadowEligibleNodes: this.props.selectionContainsAnyKnockoutShadowEligibleNodes,
       selectionContainsOnlySpreadEligibleNodes: this.props.selectionContainsOnlySpreadEligibleNodes,
-      singletonRow: _W(this.props.propertyList, []).length <= 1,
+      singletonRow: valueOrFallback(this.props.propertyList, []).length <= 1,
       smallNudgeAmount: this.props.smallNudgeAmount,
       useFPLGrid: this.props.useFPLGrid
     }, this.props.useFPLGrid ? void 0 : `effect-${t}`);
@@ -2360,12 +2360,12 @@ class tV extends PureComponent {
     this.toggleSettings = e => {
       if (e && e.stopPropagation(), t_(), this.settingsPickerShown()) {
         this.props.dispatch(XE());
-        Y5.deselectProperty();
+        fullscreenValue.deselectProperty();
       } else {
         let e = cn(this.rowRef.current);
-        Y5.updateAppModel({
+        fullscreenValue.updateAppModel({
           currentSelectedProperty: {
-            type: rrT.EFFECT,
+            type: NodePropertyCategory.EFFECT,
             indices: [this.props.index]
           }
         });
@@ -2384,14 +2384,14 @@ class tV extends PureComponent {
     };
     this.maybeToggleProgressiveBlurEditMode = e => {
       if (ec() && e) {
-        let e = Ez5?.currentEditModeInDesign();
-        let t = e !== m1T.PROGRESSIVE_BLUR;
+        let e = AppStateTsApi?.currentEditModeInDesign();
+        let t = e !== LayoutTabType.PROGRESSIVE_BLUR;
         let i = "PROGRESSIVE" === this.props.effect.blurOpType;
         let n = "BACKGROUND_BLUR" === this.props.effect.type || "FOREGROUND_BLUR" === this.props.effect.type;
-        let r = e === m1T.PROGRESSIVE_BLUR;
+        let r = e === LayoutTabType.PROGRESSIVE_BLUR;
         let a = "BACKGROUND_BLUR" !== this.props.effect.type && "FOREGROUND_BLUR" !== this.props.effect.type;
         let s = "PROGRESSIVE" !== this.props.effect.blurOpType;
-        (t && i && n || r && (a || s)) && Y5.triggerAction("toggle-progressive-blur-edit-mode");
+        (t && i && n || r && (a || s)) && fullscreenValue.triggerAction("toggle-progressive-blur-edit-mode");
       }
     };
     this.state = {

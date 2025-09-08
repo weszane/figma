@@ -8,7 +8,7 @@ import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/782411";
 import { q5 } from "../figma_app/516028";
@@ -19,7 +19,7 @@ import { IE } from "../figma_app/193867";
 import { p as _$$p } from "../905/763242";
 import { FEditorType } from "../figma_app/53721";
 import { cX, EJ, Wv } from "../figma_app/633080";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { s as _$$s2 } from "../905/715327";
 import { y as _$$y } from "../905/375507";
 import { s as _$$s3 } from "../905/587936";
@@ -35,7 +35,7 @@ function L(e) {
   let o = "fullscreen" !== t.view && r?.view === t.view;
   let l = !("fullscreen" === t.view && r?.view === "fullscreen" && t.fileKey === r.fileKey) && !o;
   useEffect(() => {
-    r && l && n === e && s(Ce());
+    r && l && n === e && s(hideModal());
   }, [s, e, n, l, r]);
 }
 let P = memo(function ({
@@ -86,8 +86,8 @@ let P = memo(function ({
     }) : void 0
   });
 });
-let $$D0 = Ju(P, cX, ZU.YES);
-let $$k1 = Ju(function ({
+let $$D0 = registerModal(P, cX, ModalSupportsBackground.YES);
+let $$k1 = registerModal(function ({
   entrypoint: e
 }) {
   L(EJ);
@@ -99,7 +99,7 @@ let $$k1 = Ju(function ({
     initialTab: Wv.FONTS,
     entrypoint: e
   });
-}, EJ, ZU.YES);
+}, EJ, ModalSupportsBackground.YES);
 function M() {
   let e = _K();
   return jsx(_$$s3, {
@@ -176,7 +176,7 @@ function j({
       className: _$$s.pl4.flex.flexRow.justifyBetween.itemsCenter.gap4.$,
       children: [jsx(K, {
         onClick: () => {
-          r(Lo());
+          r(popModalStack());
         },
         "aria-label": getI18nString("resource_connection.aria_label.button"),
         children: jsx(_$$C, {})

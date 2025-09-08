@@ -2,7 +2,7 @@ import { arraysEqual } from "../figma_app/656233";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
 import { ey, yG } from "../905/859698";
-import { Ez5, CWU } from "../figma_app/763686";
+import { AppStateTsApi, VariablesBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, setupCustomAtom, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
@@ -16,7 +16,7 @@ import { Ez } from "../figma_app/766708";
 import { logError } from "../905/714362";
 import { JB as _$$JB } from "../figma_app/657017";
 import { lR, ku, p9, nT } from "../figma_app/255679";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
 import { Wh } from "../figma_app/615482";
 import { SG } from "../905/508457";
@@ -28,12 +28,12 @@ var p = u;
 var h = _;
 var g = m;
 var E = f;
-let P = SG(() => Ez5.libraryAssets().fileLevelVariableSetsSubscribed);
+let P = SG(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsSubscribed);
 let D = atom(e => e(P).map(Rn));
-let k = SG(() => Ez5.libraryAssets().fileLevelVariableSetsLocal);
+let k = SG(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsLocal);
 let M = atom(e => e(k).map(Dt));
-let F = SG(() => Ez5.libraryAssets().fileLevelVariablesSubscribed);
-let j = SG(() => Ez5.libraryAssets().fileLevelVariablesLocal);
+let F = SG(() => AppStateTsApi.libraryAssets().fileLevelVariablesSubscribed);
+let j = SG(() => AppStateTsApi.libraryAssets().fileLevelVariablesLocal);
 let U = atom(e => e(j).map(kz));
 let B = atom(e => e(F).map(ZI));
 atom(e => ({
@@ -66,9 +66,9 @@ let $$G26 = (() => {
     return {};
   });
   t.onMount = e => {
-    Y5.onReady().then(() => {
+    fullscreenValue.onReady().then(() => {
       e({
-        added: CWU.getLocalVariableSetsInfo()
+        added: VariablesBindings.getLocalVariableSetsInfo()
       });
     });
     let t = Vr(t => {
@@ -308,9 +308,9 @@ let $$ec29 = (() => {
     return {};
   });
   t.onMount = e => {
-    Y5.onReady().then(() => {
+    fullscreenValue.onReady().then(() => {
       e({
-        added: CWU.getSubscribedVariableSetsInfo()
+        added: VariablesBindings.getSubscribedVariableSetsInfo()
       });
     });
     let t = _n(t => {
@@ -347,9 +347,9 @@ let $$eu2 = (() => {
     return {};
   });
   t.onMount = e => {
-    Y5.onReady().then(() => {
+    fullscreenValue.onReady().then(() => {
       e({
-        added: CWU.getLocalVariablesInfo()
+        added: VariablesBindings.getLocalVariablesInfo()
       });
     });
     let t = j2(t => {
@@ -388,9 +388,9 @@ let $$ef21 = (() => {
     return {};
   });
   t.onMount = e => {
-    Y5.onReady().then(() => {
+    fullscreenValue.onReady().then(() => {
       e({
-        added: CWU.getSubscribedVariablesInfo()
+        added: VariablesBindings.getSubscribedVariablesInfo()
       });
     });
     let t = uE(t => {
@@ -406,16 +406,16 @@ let $$ef21 = (() => {
 createRemovableAtomFamily(e => atom(t => t($$ef21)[e] ?? null));
 export let $$eE4 = createRemovableAtomFamily(e => atom(t => t($$eu2)[e] ?? t($$ef21)[e] ?? null));
 export function $$ey1(e, t) {
-  let r = Y5.isReady();
+  let r = fullscreenValue.isReady();
   let n = new Map(Object.entries(t));
-  let i = r && e ? CWU.getVariableResolvedValue(e, n) : null;
+  let i = r && e ? VariablesBindings.getVariableResolvedValue(e, n) : null;
   let a = atom(i);
   e && (a.onMount = t => {
-    r || Y5.onReady().then(() => {
-      t(CWU.getVariableResolvedValue(e, n));
+    r || fullscreenValue.onReady().then(() => {
+      t(VariablesBindings.getVariableResolvedValue(e, n));
     });
     let i = RW(e, () => {
-      t(CWU.getVariableResolvedValue(e, n));
+      t(VariablesBindings.getVariableResolvedValue(e, n));
     });
     return () => {
       i();
@@ -425,12 +425,12 @@ export function $$ey1(e, t) {
   return a;
 }
 export function $$eb9(e) {
-  let t = Y5.isReady();
-  let r = t && e ? CWU.getExplicitModeNames(e) : null;
+  let t = fullscreenValue.isReady();
+  let r = t && e ? VariablesBindings.getExplicitModeNames(e) : null;
   let n = atom(r);
   e && (n.onMount = r => {
-    t || Y5.onReady().then(() => {
-      r(CWU.getExplicitModeNames(e));
+    t || fullscreenValue.onReady().then(() => {
+      r(VariablesBindings.getExplicitModeNames(e));
     });
     let n = Lk(e, e => {
       r(e);
@@ -459,8 +459,8 @@ let eT = (() => {
     return e;
   });
   t.onMount = e => {
-    Y5.onReady().then(() => {
-      let t = CWU?.getLocalVariableOverridesInfo();
+    fullscreenValue.onReady().then(() => {
+      let t = VariablesBindings?.getLocalVariableOverridesInfo();
       t && e({
         added: t
       });
@@ -491,8 +491,8 @@ let eI = (() => {
     return e;
   });
   t.onMount = e => {
-    Y5.onReady().then(() => {
-      let t = CWU?.getSubscribedVariableOverridesInfo();
+    fullscreenValue.onReady().then(() => {
+      let t = VariablesBindings?.getSubscribedVariableOverridesInfo();
       t && e({
         added: t
       });
@@ -525,11 +525,11 @@ let $$eA5 = createRemovableAtomFamily(e => atom(t => {
   return h()(i, e => e.overriddenVariableID);
 }));
 export function $$ex16() {
-  let e = Y5.isReady();
-  let t = e ? CWU.getPageLevelModes() : null;
+  let e = fullscreenValue.isReady();
+  let t = e ? VariablesBindings.getPageLevelModes() : null;
   let r = atom(t);
-  r.onMount = t => (e || Y5.onReady().then(() => {
-    t(CWU.getPageLevelModes());
+  r.onMount = t => (e || fullscreenValue.onReady().then(() => {
+    t(VariablesBindings.getPageLevelModes());
   }), () => {
     t(null);
   });

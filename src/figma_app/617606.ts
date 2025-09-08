@@ -1,10 +1,10 @@
 import { lr, J6, gi, MK, oh, k4, s7 } from "../figma_app/178419";
-import { K$p, glU } from "../figma_app/763686";
-import { A } from "../905/284190";
+import { ChatMessageType, Fullscreen } from "../figma_app/763686";
+import { deepClone } from "../905/284190";
 import { FJ, Ym, kQ, OT, b5 } from "../figma_app/383733";
 import { V } from "../figma_app/365013";
 import { m as _$$m } from "../figma_app/226038";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { z } from "../figma_app/602681";
 import { r } from "../figma_app/208194";
 import { F$ } from "../figma_app/304955";
@@ -43,7 +43,7 @@ export class $$c3 {
         r.add(t.toolCallId);
       }
     }
-    return A(this.exchange);
+    return deepClone(this.exchange);
   }
   getToolCalls() {
     return this.toolCalls;
@@ -62,11 +62,11 @@ export class $$c3 {
     var s;
     var o;
     if (!this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
-    this.activeMessage.type !== K$p.ASSISTANT_MESSAGE && this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE);
+    this.activeMessage.type !== ChatMessageType.ASSISTANT_MESSAGE && this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE);
     let l = lr(this.activeMessage.textContent);
     let d = e.type;
-    if (l.mode && d !== l.mode && (this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE), l = lr(this.activeMessage.textContent)), "code" === e.type) {
-      l && l.codeFilePath && l.codeFilePath !== e.file && (this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE), l = lr(this.activeMessage.textContent));
+    if (l.mode && d !== l.mode && (this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE), l = lr(this.activeMessage.textContent)), "code" === e.type) {
+      l && l.codeFilePath && l.codeFilePath !== e.file && (this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE), l = lr(this.activeMessage.textContent));
       this.activeMessage.textContent = (t = l, this.excludeRedundantCodeFromMessageHistory && e.excludeFromMessageHistory || ((void 0 === t.code || e.reset) && (t.code = ""), t.code += e.code, t.codeFilePath = e.file, t.mode = "code"), J6(t));
     } else {
       let t = e.message;
@@ -78,7 +78,7 @@ export class $$c3 {
   }
   handleReasoningResponse(e) {
     if (!this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
-    this.activeMessage.type !== K$p.ASSISTANT_MESSAGE && this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE);
+    this.activeMessage.type !== ChatMessageType.ASSISTANT_MESSAGE && this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE);
     let t = lr(this.activeMessage.textContent);
     "reasoning" === e.type ? (t.signedReasoning || (t.signedReasoning = {
       text: ""
@@ -90,7 +90,7 @@ export class $$c3 {
   }
   handleCodeDiffVisualization(e, t) {
     if (!this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
-    this.activeMessage.type !== K$p.ASSISTANT_MESSAGE && this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE);
+    this.activeMessage.type !== ChatMessageType.ASSISTANT_MESSAGE && this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE);
     let r = lr(this.activeMessage.textContent);
     if (r.edits || (r.edits = {}), r.edits[e.id] || (r.edits[e.id] = {
       id: e.id,
@@ -125,7 +125,7 @@ export class $$c3 {
   handleToolCall(e, t) {
     if (!this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
     this.currentToolCall = e;
-    this.activeMessage.type !== K$p.ASSISTANT_MESSAGE && this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE);
+    this.activeMessage.type !== ChatMessageType.ASSISTANT_MESSAGE && this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE);
     let r = gi(e);
     this.updateToolArray(this.activeMessage.toolCalls, r, e.toolCallId);
     this.updateToolArray(this.toolCalls, e, e.toolCallId);
@@ -137,7 +137,7 @@ export class $$c3 {
   }
   handleToolResult(e) {
     if (!this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
-    this.activeMessage.type !== K$p.TOOL_MESSAGE && this.setNewActiveMessage(K$p.TOOL_MESSAGE);
+    this.activeMessage.type !== ChatMessageType.TOOL_MESSAGE && this.setNewActiveMessage(ChatMessageType.TOOL_MESSAGE);
     let t = {
       toolCallId: e.toolCallId,
       toolName: e.toolName,
@@ -152,14 +152,14 @@ export class $$c3 {
         let n = e[r];
         if (t(n, r, e)) return n;
       }
-    }(this.exchange, e => e.type === K$p.ASSISTANT_MESSAGE);
+    }(this.exchange, e => e.type === ChatMessageType.ASSISTANT_MESSAGE);
     if (!t) return;
     let r = lr(t.textContent);
     r.providerMetadata = e.providerMetadata;
     t.textContent = J6(r);
   }
   processResponseDelta(e) {
-    if (this.hasProcessedFirstResponse || (this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE), this.hasProcessedFirstResponse = !0), !this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
+    if (this.hasProcessedFirstResponse || (this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE), this.hasProcessedFirstResponse = !0), !this.activeMessage) throw Error("NodeChatExchangeBuilder: No active message");
     switch (e.type) {
       case "modelConfigVersion":
         this.setModelConfigVersion(e.version);
@@ -197,7 +197,7 @@ export class $$c3 {
       case "requestUuid":
         {
           let t = this.exchange[0];
-          if (t && t.type === K$p.USER_MESSAGE) {
+          if (t && t.type === ChatMessageType.USER_MESSAGE) {
             let r = MK(t.textContent);
             r.requestUuid = e.requestId;
             t.textContent = J6(r);
@@ -248,7 +248,7 @@ export class $$c3 {
     }).filter(e => null !== e);
   }
   addUserCodeChatMessage(e) {
-    let t = $$u6(K$p.USER_MESSAGE, this.userId, this.nodeIdGenerator);
+    let t = $$u6(ChatMessageType.USER_MESSAGE, this.userId, this.nodeIdGenerator);
     t.textContent = J6(e.content);
     this.exchange.push(t);
   }
@@ -274,7 +274,7 @@ export class $$c3 {
     this.exchange = e;
     this.userId = t;
     this.nodeIdGenerator = r;
-    n && (this.setNewActiveMessage(K$p.ASSISTANT_MESSAGE), this.hasProcessedFirstResponse = !0);
+    n && (this.setNewActiveMessage(ChatMessageType.ASSISTANT_MESSAGE), this.hasProcessedFirstResponse = !0);
     this.excludeRedundantCodeFromMessageHistory = a;
     this.reportToSentry = s;
   }
@@ -299,7 +299,7 @@ export function $$_21(e, t) {
     summary,
     totalSummarized
   } = t;
-  l7.ai("set-chat-compression-state", () => {
+  permissionScopeHandler.ai("set-chat-compression-state", () => {
     e.chatCompressionState = {
       summary,
       startIndex: totalSummarized
@@ -325,7 +325,7 @@ export async function $$E5({
     prevMessage: t,
     userId: r
   }) {
-    if (!glU || e.type === K$p.TOOL_MESSAGE || !t || t.type !== K$p.ASSISTANT_MESSAGE) return;
+    if (!Fullscreen || e.type === ChatMessageType.TOOL_MESSAGE || !t || t.type !== ChatMessageType.ASSISTANT_MESSAGE) return;
     let a = t.toolCalls;
     if (0 === a.length) return;
     let s = a[0];
@@ -333,8 +333,8 @@ export async function $$E5({
     let o = s.toolName;
     let l = s.toolCallId;
     if (AD.includes(o)) return {
-      id: glU.generateUniqueID(),
-      type: K$p.TOOL_MESSAGE,
+      id: Fullscreen.generateUniqueID(),
+      type: ChatMessageType.TOOL_MESSAGE,
       userId: r,
       textContent: J6({
         plainText: ""
@@ -378,7 +378,7 @@ export async function $$E5({
         startIndex: e,
         summary: ""
       };
-      l7.ai("manual-set-chat-compression-state", () => {
+      permissionScopeHandler.ai("manual-set-chat-compression-state", () => {
         t.chatCompressionState = n;
       });
       return r.slice(e);
@@ -438,7 +438,7 @@ export async function $$S15({
     codeFiles: t
   });
   return s ? e.map(e => {
-    if (e.type === K$p.ASSISTANT_MESSAGE) {
+    if (e.type === ChatMessageType.ASSISTANT_MESSAGE) {
       let t = lr(e.textContent);
       t.codeSnapshot = s;
       e.textContent = J6(t);

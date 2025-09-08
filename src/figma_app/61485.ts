@@ -1,4 +1,4 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -25,7 +25,7 @@ let $$d1 = {
     return M1(c).then(e => {
       if (getFeatureFlags().ce_track_font_fetch_time) {
         let t = "";
-        t = c.source === jXp.LOCAL ? "N/A" : c.id;
+        t = c.source === FontSourceType.LOCAL ? "N/A" : c.id;
         trackEventAnalytics("font_fetch_time", {
           ...c,
           id: t,

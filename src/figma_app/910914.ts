@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { aq } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { $ } from "../905/692618";
-import { _gJ } from "../figma_app/763686";
+import { IAssertResource } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
 import { f as _$$f } from "../figma_app/258006";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -24,7 +24,7 @@ export function $$b1() {
     }));
   }, [t]);
   let c = useCallback(() => {
-    ax(_gJ.PLUGIN);
+    ax(IAssertResource.PLUGIN);
     r();
   }, [r]);
   return e ? jsx("div", {

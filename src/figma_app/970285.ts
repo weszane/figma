@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { getFirstKey } from "../figma_app/493477";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J, h as _$$h } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
@@ -14,7 +14,7 @@ import { J as _$$J2 } from "../905/125993";
 import { O as _$$O } from "../905/487602";
 import { O as _$$O2 } from "../905/969533";
 import { k as _$$k } from "../905/44647";
-import { uQ6, rrT } from "../figma_app/763686";
+import { ActionType, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
@@ -32,14 +32,14 @@ import { sw } from "../figma_app/914957";
 import { C9 } from "../figma_app/8833";
 import { mz } from "../figma_app/975811";
 import { dG } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { A as _$$A } from "../905/51490";
 import { ZH } from "../figma_app/504823";
 import { vk } from "../figma_app/397881";
 import { Tr, Ay } from "../905/281495";
 import { A0, Mc } from "../figma_app/454974";
 import { xY } from "../figma_app/624361";
-import { hS, _W, gl } from "../905/216495";
+import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { WQ, Pv } from "../905/619652";
 import { o3, nt } from "../905/226610";
 import { Pe } from "../figma_app/12796";
@@ -99,7 +99,7 @@ export function $$ev4() {
     let t = e.mirror.selectionProperties.numSelected;
     let r = e.mirror.selectionProperties.exportSettings;
     let n = e.mirror.selectionProperties.name;
-    return 1 === t && r && hS(r) && r.length > 0 && null != n ? n.slice(0, 64) : "";
+    return 1 === t && r && isValidValue(r) && r.length > 0 && null != n ? n.slice(0, 64) : "";
   });
 }
 export function $$eA2() {
@@ -110,22 +110,22 @@ export function $$eA2() {
     let i = n ? t.numSelected : r.numSelected;
     let a = n ? t.exportSettings : r.exportSettings;
     let s = n ? t.name : r.name;
-    return 1 === i && a && hS(a) && a.length > 0 && null != s ? s.slice(0, 64) : "";
+    return 1 === i && a && isValidValue(a) && a.length > 0 && null != s ? s.slice(0, 64) : "";
   });
 }
 let ex = class e extends PureComponent {
   constructor(e) {
     super(e);
-    this.exportList = xx(e => _W(e, []).map(_$$m));
+    this.exportList = xx(e => valueOrFallback(e, []).map(_$$m));
     this.onExportChange = (e, t) => {
       let r = 0 === e.length;
       let n = r ? zk.NO : t;
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         exportSettings: e
       }, {
         shouldCommit: n
       });
-      r && (Y5.updateSelectionProperties({
+      r && (fullscreenValue.updateSelectionProperties({
         exportBackgroundDisabled: !1
       }, {
         shouldCommit: t
@@ -164,7 +164,7 @@ let ex = class e extends PureComponent {
         }));
       } else {
         this.state.isRenameLayersEnabled && (await this.autoRenameFrameOnExport());
-        let e = _W(this.props.exportSettings, []);
+        let e = valueOrFallback(this.props.exportSettings, []);
         let t = e.filter(e => !0 === e.useBicubicSampler);
         let r = e.filter(e => !1 === e.useBicubicSampler);
         analyticsEventManager.trackDefinedEvent("rendering_and_animation.exported_export_setting_bicubic", {
@@ -177,12 +177,12 @@ let ex = class e extends PureComponent {
         this.props.dispatch(rg());
       }
     };
-    this.shouldShowAIRenameLayersCheckbox = e => A0(uQ6.EXPORT_FRAME) && (e > 0 || gl(this.props.exportSettings)) && (this.props.isSelectionRenamable || this.state.isRenameLayersRunning);
+    this.shouldShowAIRenameLayersCheckbox = e => A0(ActionType.EXPORT_FRAME) && (e > 0 || isInvalidValue(this.props.exportSettings)) && (this.props.isSelectionRenamable || this.state.isRenameLayersRunning);
     this.autoRenameFrameOnExport = async () => {
       this.props.isSelectionRenamable && (this.setState({
         isRenameLayersRunning: !0
-      }), atomStoreManager.set(zF, Tr(uQ6.EXPORT_FRAME)), B3(JT.AUTO_RENAME_LAYERS), await Ag(JT.AUTO_RENAME_LAYERS, Ay, {
-        source: uQ6.EXPORT_FRAME,
+      }), atomStoreManager.set(zF, Tr(ActionType.EXPORT_FRAME)), B3(JT.AUTO_RENAME_LAYERS), await Ag(JT.AUTO_RENAME_LAYERS, Ay, {
+        source: ActionType.EXPORT_FRAME,
         overwriteNames: !1,
         ignoreDescendants: !0
       }), this.setState({
@@ -222,7 +222,7 @@ let ex = class e extends PureComponent {
         })
       }, "export-button");
     });
-    this._shouldRenderPreviewThumbnail = () => _W(this.props.exportSettings, []).length > 0;
+    this._shouldRenderPreviewThumbnail = () => valueOrFallback(this.props.exportSettings, []).length > 0;
     this._previewThumbnail = new H4(() => {
       let e = this.props.exportSettings;
       let t = e[0].useAbsoluteBounds || !1;
@@ -231,7 +231,7 @@ let ex = class e extends PureComponent {
         children: ({
           documentExportColorProfile: e
         }) => jsx(eG, {
-          colorProfile: this.props.exportSettings && !gl(this.props.exportSettings) ? _$$A(this.props.exportSettings, e) : e,
+          colorProfile: this.props.exportSettings && !isInvalidValue(this.props.exportSettings) ? _$$A(this.props.exportSettings, e) : e,
           currentPage: this.props.currentPage,
           numSelected: this.props.numSelected,
           panelWidth: this.props.panelWidth,
@@ -298,7 +298,7 @@ let ex = class e extends PureComponent {
               addExportOfType: this.addExportOfType
             }),
             headerClickTriggersAddProperty: this.props.headerClickTriggersAddProperty,
-            isMixed: gl(this.props.exportSettings),
+            isMixed: isInvalidValue(this.props.exportSettings),
             isPanelBodyCollapsedAtom: this.props.isPanelBodyCollapsedAtom,
             onChange: this.onExportChange,
             onHeaderClick: t.length > 0 ? this.props.onHeaderClick : lQ,
@@ -306,16 +306,16 @@ let ex = class e extends PureComponent {
             pickerShown: this.props.pickerShown,
             propertyList: t,
             recordingKey: Pt(this.props, "exportList"),
-            selectedPropertyType: rrT.EXPORT,
+            selectedPropertyType: NodePropertyCategory.EXPORT,
             standalone: this.props.standalone,
             title: this.props.title
           }), jsxs(JH, {
             isPanelBodyCollapsedAtom: this.props.isPanelBodyCollapsedAtom || null,
             children: [this._checkboxAndButtonRow.render({
-              isVisible: t.length > 0 || gl(this.props.exportSettings)
+              isVisible: t.length > 0 || isInvalidValue(this.props.exportSettings)
             }), this.shouldShowAIRenameLayersCheckbox(t.length) && jsx(Ad, {
               label: null,
-              input: jsx(_$$S, {
+              input: jsx(Checkbox, {
                 muted: !0,
                 checked: this.state.isRenameLayersEnabled,
                 onChange: () => {
@@ -323,7 +323,7 @@ let ex = class e extends PureComponent {
                     isRenameLayersEnabled: !this.state.isRenameLayersEnabled
                   });
                 },
-                label: jsx(_$$J, {
+                label: jsx(Label, {
                   children: jsxs("div", {
                     className: oB,
                     children: [renderI18nText("auto_rename_layers.rename_layers", {
@@ -386,12 +386,12 @@ export function $$ew3(e) {
     propertyList
   } = e;
   let c = c1(e);
-  let u = _W(e.propertyList, []).length <= 1;
+  let u = valueOrFallback(e.propertyList, []).length <= 1;
   let p = o3(nt.useGridPart2) && !0;
   let _ = useCallback(e => {
     t(XE());
-    onChange(_W(propertyList, []).filter((t, r) => r !== e));
-    Y5.deselectProperty();
+    onChange(valueOrFallback(propertyList, []).filter((t, r) => r !== e));
+    fullscreenValue.deselectProperty();
   }, [t, onChange, propertyList]);
   let h = useCallback((e, i, a, l, d, h, m, g, f) => jsx(eU, {
     dispatch: t,
@@ -571,7 +571,7 @@ let eF = forwardRef(function ({
       children: [jsx(l9, {
         ref: G,
         width: "fill",
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: getI18nString("fullscreen.properties_panel.export_settings_image_file_type")
         })
       }), jsxs(mc, {
@@ -755,10 +755,10 @@ function eU(e) {
       onToggleModal: r => {
         if (r.stopPropagation(), a()) {
           e.dispatch(XE());
-          Y5.deselectProperty();
+          fullscreenValue.deselectProperty();
         } else {
           let r = cn(t.current, _$$zk);
-          Y5.updateAppModel({
+          fullscreenValue.updateAppModel({
             currentSelectedProperty: {
               type: e.selectedPropertyType,
               indices: [e.index]
@@ -857,10 +857,10 @@ class eG extends PureComponent {
     }), this.updateThumbnailAfterDelay.cancel(), this.updateThumbnail());
   }
   componentDidMount() {
-    Y5.fromFullscreen.on("pingSceneGraphEvent", this.onSceneGraphChange);
+    fullscreenValue.fromFullscreen.on("pingSceneGraphEvent", this.onSceneGraphChange);
   }
   componentWillUnmount() {
-    Y5.fromFullscreen.removeListener("pingSceneGraphEvent", this.onSceneGraphChange);
+    fullscreenValue.fromFullscreen.removeListener("pingSceneGraphEvent", this.onSceneGraphChange);
     this.updateThumbnailAfterDelay.cancel();
   }
   render() {

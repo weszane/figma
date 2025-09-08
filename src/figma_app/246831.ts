@@ -15,9 +15,9 @@ import { E as _$$E } from "../905/375716";
 import { Z as _$$Z } from "../905/498136";
 import { e as _$$e } from "../905/149844";
 import { L as _$$L } from "../905/704296";
-import { Pt4, Krs, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { fn, sH } from "../905/871411";
+import { StylesBindings, TextStyleOverridesBindings, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -32,15 +32,15 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../905/412913";
 import { oB, j7 } from "../905/929976";
 import { Uv, XE, u1, bS } from "../figma_app/91703";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { sw, rk } from "../figma_app/914957";
 import { jD } from "../905/765855";
 import { dG } from "../figma_app/753501";
 import { EF, Oo, eE as _$$eE } from "../905/709171";
 import { P$, Eo } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
-import { Y5 } from "../figma_app/455680";
-import { gl, E7 } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue, normalizeValue } from "../905/216495";
 import { tS, q5 } from "../figma_app/516028";
 import { bO, SS } from "../figma_app/936646";
 import { QT } from "../figma_app/646357";
@@ -147,11 +147,11 @@ let eD = memo(function ({
   let B = useCallback(t => {
     t.stopPropagation();
     debug(null != e.content_hash, "style does not have a hash");
-    let r = e.isLocal ? e.node_id : Pt4.getStyleNodeId(e.key, e.content_hash);
+    let r = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
     _$$F2.trackFromFullscreen("text_style_override_reverted", {
       node_ids: U
     });
-    Krs.clearOverridesOverTextStyleInSelection(r);
+    TextStyleOverridesBindings.clearOverridesOverTextStyleInSelection(r);
   }, [e, U]);
   let G = useContext(_$$h);
   let H = useCallback(() => {
@@ -165,7 +165,7 @@ let eD = memo(function ({
   let K = useRef(null);
   let Y = K ? K.current : null;
   let $ = !!Y && Y.offsetWidth < Y.scrollWidth;
-  let X = "TEXT" === e.style_type && void 0 !== x && (gl(x) || x > 0) && h;
+  let X = "TEXT" === e.style_type && void 0 !== x && (isInvalidValue(x) || x > 0) && h;
   let q = h && !L ? zm : Se;
   let Z = X ? x9 : "";
   if (null === u) {
@@ -391,7 +391,7 @@ export function $$eF1({
   let L = !!R || m;
   let D = je();
   let k = Kq();
-  let U = AH(N, E7(h));
+  let U = AH(N, normalizeValue(h));
   let B = useRef(U);
   let {
     status,
@@ -428,7 +428,7 @@ export function $$eF1({
     T(XE());
   }, [T]);
   let el = useCallback(() => {
-    v ? T(Ce()) : T(to({
+    v ? T(hideModal()) : T(showModalHandler({
       type: _$$T,
       data: {
         initialTab: Wv.LIBRARIES,
@@ -663,9 +663,9 @@ function eG({
       showStyleDetails(e, t, n) {
         if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i();else {
           debug(null != e.content_hash, "style does not have a hash");
-          let i = e.isLocal ? e.node_id : Pt4.getStyleNodeId(e.key, e.content_hash);
-          fn(sH(i)) ? glU.selectStyleByGuid(i) : Eo.getCanvas(e).then(e => {
-            glU.selectExternalStyle(e);
+          let i = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
+          isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(e).then(e => {
+            Fullscreen.selectExternalStyle(e);
           });
           Y(rk({
             style: e,
@@ -689,7 +689,7 @@ function eG({
         }));
       },
       deleteStyle(e) {
-        Oo(e, X) && (l7.user("delete-style", () => glU.deleteNode(e.node_id)), Y5.triggerAction("commit"), trackEventAnalytics("Style Deleted", {
+        Oo(e, X) && (permissionScopeHandler.user("delete-style", () => Fullscreen.deleteNode(e.node_id)), fullscreenValue.triggerAction("commit"), trackEventAnalytics("Style Deleted", {
           styleType: e.style_type,
           from: "stylePickerContextMenu"
         }));
@@ -887,7 +887,7 @@ export function $$eY0({
   selectedLibraries: a
 }) {
   let s = WH(e, t, r)?.key ?? null;
-  let o = AH(s, E7(t));
+  let o = AH(s, normalizeValue(t));
   let l = useRef(o);
   let {
     libraries

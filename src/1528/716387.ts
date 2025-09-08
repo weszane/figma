@@ -12,8 +12,8 @@ import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
 import { l as _$$l } from "../1250/91689";
 import { k as _$$k } from "../905/888808";
-import { Lov, EW4, YEY, dNx, Ifi, h3O, xal } from "../figma_app/763686";
-import { AD, Xy } from "../905/871411";
+import { PageViewMode, EditAction, CanvasSearchHelpers, SelectionState, MatchCriteria, Multiplayer, DataLoadStatus } from "../figma_app/763686";
+import { defaultSessionLocalIDString, zeroSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import I from "classnames";
@@ -35,7 +35,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { to } from "../figma_app/828186";
 import { V2, DI } from "../figma_app/712525";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../figma_app/860474";
 import { gk } from "../figma_app/540726";
 import { Z as _$$Z } from "../905/104740";
@@ -103,13 +103,13 @@ let er = memo(function (e) {
         children: [u, jsx(_$$O, {})]
       }), jsxs(mc, {
         children: [jsx(ei, {
-          option: Lov.ACTIVE_PAGE,
+          option: PageViewMode.ACTIVE_PAGE,
           activeOption: l,
           onClickCallback: e => {
             n(V2(e));
           }
         }), jsx(ei, {
-          option: Lov.ALL_PAGES,
+          option: PageViewMode.ALL_PAGES,
           activeOption: l,
           onClickCallback: e => {
             lH(i) || !allInstancesExpanded ? (t(!0), requestAnimationFrame(() => {
@@ -140,9 +140,9 @@ function ei({
 }
 let es = e => {
   switch (e) {
-    case Lov.ACTIVE_PAGE:
+    case PageViewMode.ACTIVE_PAGE:
       return getI18nString("canvas_search.this_page");
-    case Lov.ALL_PAGES:
+    case PageViewMode.ALL_PAGES:
       return getI18nString("canvas_search.all_pages");
   }
 };
@@ -214,7 +214,7 @@ function ex({
 }) {
   let l = useDispatch();
   let i = useSelector(e => e.canvasSearch.filters);
-  let s = t === EW4.FIND ? D4 : IM;
+  let s = t === EditAction.FIND ? D4 : IM;
   let o = _$$b();
   let d = mapFilter(s, e => i[e] ? jsx(eg, {
     option: e,
@@ -267,9 +267,9 @@ function eR(e, t, n, a) {
       n("canvas_search_multi_hierarchy", {
         order: "down"
       });
-      YEY && e(YEY.moveActiveResultsDownOneLevelAndGetViewportSettings(), {
+      CanvasSearchHelpers && e(CanvasSearchHelpers.moveActiveResultsDownOneLevelAndGetViewportSettings(), {
         additionalTrackEventParams: {
-          searchScope: Lov[t]
+          searchScope: PageViewMode[t]
         }
       });
     }, [e, t, n]);
@@ -284,9 +284,9 @@ function eR(e, t, n, a) {
       n("canvas_search_multi_hierarchy", {
         order: "up"
       });
-      YEY && e(YEY.moveActiveResultsUpOneLevelAndGetViewportSettings(), {
+      CanvasSearchHelpers && e(CanvasSearchHelpers.moveActiveResultsUpOneLevelAndGetViewportSettings(), {
         additionalTrackEventParams: {
-          searchScope: Lov[t]
+          searchScope: PageViewMode[t]
         }
       });
     }, [e, t, n]);
@@ -304,8 +304,8 @@ function eR(e, t, n, a) {
         (l.keyCode !== Uz.N || BrowserInfo.mac && vN(l, xH.CONTROL)) && (e(OP.NEXT, "keyboard"), l.stopPropagation(), l.preventDefault());
         break;
       case Uz.ENTER:
-        if (YEY && Fo(l)) {
-          YEY.exitSearchMode(dNx.SELECT_ACTIVE);
+        if (CanvasSearchHelpers && Fo(l)) {
+          CanvasSearchHelpers.exitSearchMode(SelectionState.SELECT_ACTIVE);
           break;
         }
         if (i()) break;
@@ -314,7 +314,7 @@ function eR(e, t, n, a) {
         l.preventDefault();
         break;
       case Uz.ESCAPE:
-        YEY && YEY.exitSearchMode(dNx.NONE);
+        CanvasSearchHelpers && CanvasSearchHelpers.exitSearchMode(SelectionState.NONE);
         l.preventDefault();
         l.stopPropagation();
         break;
@@ -338,16 +338,16 @@ function eO(e) {
   switch (e.keyCode) {
     case Uz.DELETE:
     case Uz.BACKSPACE:
-      if (YEY) return YEY.getNextResultForActiveResultRemoval();
+      if (CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
       break;
     case Uz.X:
-      if (Te(e) && YEY) return YEY.getNextResultForActiveResultRemoval();
+      if (Te(e) && CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
       break;
     case Uz.H:
     case Uz.R:
-      if (Fo(e) && e.shiftKey && YEY) return YEY.getNextResultForActiveResultRemoval();
+      if (Fo(e) && e.shiftKey && CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
   }
-  return AD;
+  return defaultSessionLocalIDString;
 }
 export let $$eF0 = memo(function ({
   showFilter: e
@@ -413,7 +413,7 @@ export let $$eF0 = memo(function ({
           break;
         case Uz.C:
         case Uz.X:
-          Te(e) && window.getSelection && !window.getSelection().toString() && (Y5.triggerAction(e.keyCode === Uz.C ? "copy" : "cut"), e.preventDefault(), e.stopPropagation(), e.keyCode === Uz.X && t.current?.focus());
+          Te(e) && window.getSelection && !window.getSelection().toString() && (fullscreenValue.triggerAction(e.keyCode === Uz.C ? "copy" : "cut"), e.preventDefault(), e.stopPropagation(), e.keyCode === Uz.X && t.current?.focus());
           break;
         case Uz.V:
         case Uz.Z:
@@ -421,7 +421,7 @@ export let $$eF0 = memo(function ({
         default:
           i(e);
       }
-      YEY && !n && l !== AD && a(YEY.setActiveResultAndGetViewportSettings(l, 0), {
+      CanvasSearchHelpers && !n && l !== defaultSessionLocalIDString && a(CanvasSearchHelpers.setActiveResultAndGetViewportSettings(l, 0), {
         delay: 300
       });
     }, [n, i, t, a]);
@@ -448,7 +448,7 @@ export let $$eF0 = memo(function ({
       onKeyUp: et,
       innerRef: inputRef,
       onPasteCapture: e => {
-        gk(e) && (Y5.triggerActionInUserEditScope("paste"), e.preventDefault(), L.current?.focus());
+        gk(e) && (fullscreenValue.triggerActionInUserEditScope("paste"), e.preventDefault(), L.current?.focus());
       },
       editorType: _Y.DESIGN
     })]
@@ -458,7 +458,7 @@ export let $$eF0 = memo(function ({
       "data-testid": "search-sidebar",
       className: G$,
       onBlurCapture: e => {
-        e.relatedTarget && !e.currentTarget.contains(e.relatedTarget) && (YEY.setOverlayVisible(!1), setNavigateNearestOnce(), W(en.NONE));
+        e.relatedTarget && !e.currentTarget.contains(e.relatedTarget) && (CanvasSearchHelpers.setOverlayVisible(!1), setNavigateNearestOnce(), W(en.NONE));
       },
       children: [jsxs("div", {
         className: PP,
@@ -487,13 +487,13 @@ export let $$eF0 = memo(function ({
           })]
         }), getFeatureFlags().eu_fpl_search_result_chips && jsx(eh, {
           recordingKey: "figma_design_search.filterChips",
-          options: mode === EW4.FIND ? D4 : IM,
-          short: mode === EW4.REPLACE
+          options: mode === EditAction.FIND ? D4 : IM,
+          short: mode === EditAction.REPLACE
         }), !getFeatureFlags().eu_fpl_search_result_chips && jsx(ex, {
           mode,
-          short: mode === EW4.REPLACE,
+          short: mode === EditAction.REPLACE,
           recordingKey: "figma_design_search.filterPills"
-        }), mode === EW4.REPLACE && jsx(_$$a, {
+        }), mode === EditAction.REPLACE && jsx(_$$a, {
           query,
           value: y,
           onChange: C,
@@ -518,7 +518,7 @@ export let $$eF0 = memo(function ({
         missingResultsOnSomePages,
         navigate: j,
         onNext: J,
-        replacement: mode === EW4.REPLACE ? y : void 0,
+        replacement: mode === EditAction.REPLACE ? y : void 0,
         resultInputHandlerRef: L,
         resultsOnOtherPages,
         setHoverSelectMode: W,
@@ -550,7 +550,7 @@ function eM({
   let P = p8("currentPage");
   let M = useRef(null);
   let B = useSelector(e => e.canvasSearch.scope);
-  let U = YEY.hasDirtyPrimaryInstances();
+  let U = CanvasSearchHelpers.hasDirtyPrimaryInstances();
   let K = useAtomWithSubscription(Fk);
   let V = useAtomWithSubscription(Ch);
   let W = useAtomWithSubscription(Wy);
@@ -566,12 +566,12 @@ function eM({
     let i = am();
     let o = useContext(EA);
     let d = useCallback(l => {
-      if (!YEY) return;
+      if (!CanvasSearchHelpers) return;
       let {
         nav,
         numNewNodes,
         numNewTextMatches
-      } = YEY.addActiveResultsAndGetViewportSettings(l);
+      } = CanvasSearchHelpers.addActiveResultsAndGetViewportSettings(l);
       e && i("canvas_search_enter_multi_select", {
         numberOfNodes: numNewNodes,
         numberOfTextMatches: numNewTextMatches,
@@ -580,7 +580,7 @@ function eM({
       });
       n(nav, {
         additionalTrackEventParams: {
-          searchScope: Lov[a]
+          searchScope: PageViewMode[a]
         }
       });
     }, [t, n, a, i, e]);
@@ -591,9 +591,9 @@ function eM({
     let t = useSelector(e => e.canvasSearch.scope);
     let n = useContext(EA);
     let a = useCallback((n, a, l) => {
-      YEY && e(YEY.removeActiveResultAndGetViewportSettings(n, a, l), {
+      CanvasSearchHelpers && e(CanvasSearchHelpers.removeActiveResultAndGetViewportSettings(n, a, l), {
         additionalTrackEventParams: {
-          searchScope: Lov[t]
+          searchScope: PageViewMode[t]
         }
       });
     }, [e, t]);
@@ -607,15 +607,15 @@ function eM({
         [e]: t
       } : n);
     }, [])];
-  }(Xy, P);
+  }(zeroSessionLocalIDString, P);
   let eo = useRef({});
   let ed = useMemo(() => {
     let e = [];
-    let t = j.find(e => e.pageId === Xy);
-    let n = B === Lov.ALL_PAGES || !!t;
+    let t = j.find(e => e.pageId === zeroSessionLocalIDString);
+    let n = B === PageViewMode.ALL_PAGES || !!t;
     let a = j.find(e => e.pageId === P);
     let l = j;
-    B === Lov.ACTIVE_PAGE && (l = [], t && l.push(t), a && l.push(a));
+    B === PageViewMode.ACTIVE_PAGE && (l = [], t && l.push(t), a && l.push(a));
     let r = 0;
     for (let {
       pageId,
@@ -677,8 +677,8 @@ function eM({
     for (let e = l; e <= r; e++) "result" === ed[e].type && a.push(ed[e].data);
     return a;
   };
-  let eh = useCallback(e => !!Z && "header" !== e.type && (!!m || I !== en.NONE) && (e.data.textMatch.matchType === Ifi.TEXT_MATCH && Y.has(e.data.resultGuid) && !W.has(e.data.resultGuid) || q.has(e.data.resultGuid)), [W, Z, Y, I, q, m]);
-  let em = useCallback(e => "header" !== e.type && (Z ? e.data.textMatch.matchType === Ifi.PAGE_MATCH ? e.data.index === V?.index && e.data.pageId === V?.pageId : e.data.textMatch.matchType === Ifi.LAYER_MATCH ? Y.has(e.data.resultGuid) && !W.get(e.data.resultGuid) : W.get(e.data.resultGuid)?.has(e.data.matchIndex) ?? !1 : e.data.index === V?.index && e.data.pageId === V?.pageId), [V?.index, V?.pageId, W, Z, Y]);
+  let eh = useCallback(e => !!Z && "header" !== e.type && (!!m || I !== en.NONE) && (e.data.textMatch.matchType === MatchCriteria.TEXT_MATCH && Y.has(e.data.resultGuid) && !W.has(e.data.resultGuid) || q.has(e.data.resultGuid)), [W, Z, Y, I, q, m]);
+  let em = useCallback(e => "header" !== e.type && (Z ? e.data.textMatch.matchType === MatchCriteria.PAGE_MATCH ? e.data.index === V?.index && e.data.pageId === V?.pageId : e.data.textMatch.matchType === MatchCriteria.LAYER_MATCH ? Y.has(e.data.resultGuid) && !W.get(e.data.resultGuid) : W.get(e.data.resultGuid)?.has(e.data.matchIndex) ?? !1 : e.data.index === V?.index && e.data.pageId === V?.pageId), [V?.index, V?.pageId, W, Z, Y]);
   let e_ = useCallback((e, t, n) => {
     let a = e + n;
     let l = t + n;
@@ -704,15 +704,15 @@ function eM({
     return a;
   }, [eh, em, ed]);
   let [eg, ef] = useMemo(() => {
-    let e = p?.nodeGuid ?? AD;
+    let e = p?.nodeGuid ?? defaultSessionLocalIDString;
     let t = V?.pageId != null ? eo.current[V.pageId] : null;
-    if (Z && I !== en.NONE && p && e !== AD && p.pageId === V?.pageId && null != t) {
+    if (Z && I !== en.NONE && p && e !== defaultSessionLocalIDString && p.pageId === V?.pageId && null != t) {
       let n = p.index;
       let a = p.matchIndex;
-      if ((I === en.SINGLE || V?.index == null) && eE(n, t)) return [n, YEY.getSingleHoveredSelectionEndIndex(e, a)];
+      if ((I === en.SINGLE || V?.index == null) && eE(n, t)) return [n, CanvasSearchHelpers.getSingleHoveredSelectionEndIndex(e, a)];
       if (I === en.MULTI && V?.index != null && V.index !== p.index) {
         let l = n > V.index ? V.index : n;
-        return ex(l, n > V.index ? n : V.index, t) ? e_(l, YEY.getMultiHoveredSelectionEndIndex(e, a), t) : [null, null];
+        return ex(l, n > V.index ? n : V.index, t) ? e_(l, CanvasSearchHelpers.getMultiHoveredSelectionEndIndex(e, a), t) : [null, null];
       }
     }
     return [null, null];
@@ -756,19 +756,19 @@ function eM({
         searchResultType: t.textMatch.matchType
       }]);
     };
-    t.pageId === Xy ? (k(t.guid), es(t.guid), C(!1)) : Z && t.pageId === V?.pageId ? e.shiftKey && V?.index == null ? (a || l(), C(!0)) : e.shiftKey ? ((() => {
+    t.pageId === zeroSessionLocalIDString ? (k(t.guid), es(t.guid), C(!1)) : Z && t.pageId === V?.pageId ? e.shiftKey && V?.index == null ? (a || l(), C(!0)) : e.shiftKey ? ((() => {
       let e = eu(n);
       let t = [];
       e.forEach(e => {
         let n = t.length ? t[t.length - 1] : void 0;
-        n?.nodeId === e.resultGuid && n?.searchResultType === Ifi.TEXT_MATCH ? n.matchIndices.push(e.matchIndex) : t.push({
+        n?.nodeId === e.resultGuid && n?.searchResultType === MatchCriteria.TEXT_MATCH ? n.matchIndices.push(e.matchIndex) : t.push({
           nodeId: e.resultGuid,
           matchIndices: [e.matchIndex],
           searchResultType: e.textMatch.matchType
         });
       });
       el(t);
-    })(), C(!0)) : Fo(e) && t.textMatch.matchType !== Ifi.PAGE_MATCH ? (l(), C(!0)) : (ee(t.resultGuid, t.matchIndex), C(!1)) : (ee(t.resultGuid, t.matchIndex), C(!1));
+    })(), C(!0)) : Fo(e) && t.textMatch.matchType !== MatchCriteria.PAGE_MATCH ? (l(), C(!0)) : (ee(t.resultGuid, t.matchIndex), C(!1)) : (ee(t.resultGuid, t.matchIndex), C(!1));
   };
   let eC = function (e, t, n, a, i, o, d) {
     let c = function (e, t) {
@@ -777,12 +777,12 @@ function eM({
       let i = am();
       let o = useContext(EA);
       let d = useCallback(() => {
-        if (!YEY) return;
+        if (!CanvasSearchHelpers) return;
         let {
           nav,
           numNewNodes,
           numNewTextMatches
-        } = YEY.setAllResultsAsActiveAndGetViewportSettings();
+        } = CanvasSearchHelpers.setAllResultsAsActiveAndGetViewportSettings();
         e && i("canvas_search_enter_multi_select", {
           numberOfNodes: numNewNodes,
           numberOfTextMatches: numNewTextMatches,
@@ -791,7 +791,7 @@ function eM({
         });
         n(nav, {
           additionalTrackEventParams: {
-            searchScope: Lov[a]
+            searchScope: PageViewMode[a]
           }
         });
       }, [t, n, a, i, e]);
@@ -827,13 +827,13 @@ function eM({
           eL(e);
           break;
         case Uz.C:
-          Te(e) ? (Y5.triggerActionInUserEditScope("copy"), e.stopPropagation()) : eL(e);
+          Te(e) ? (fullscreenValue.triggerActionInUserEditScope("copy"), e.stopPropagation()) : eL(e);
           break;
         case Uz.V:
-          Te(e) ? (Y5.triggerActionInUserEditScope("paste"), e.stopPropagation()) : eL(e);
+          Te(e) ? (fullscreenValue.triggerActionInUserEditScope("paste"), e.stopPropagation()) : eL(e);
           break;
         case Uz.X:
-          Te(e) ? (Y5.triggerActionInUserEditScope("cut"), e.stopPropagation()) : eL(e);
+          Te(e) ? (fullscreenValue.triggerActionInUserEditScope("cut"), e.stopPropagation()) : eL(e);
           break;
         case Uz.DELETE:
         case Uz.BACKSPACE:
@@ -842,7 +842,7 @@ function eM({
         default:
           p(e);
       }
-      YEY && !i && n !== AD && t(YEY.setActiveResultAndGetViewportSettings(n, 0), {
+      CanvasSearchHelpers && !i && n !== defaultSessionLocalIDString && t(CanvasSearchHelpers.setActiveResultAndGetViewportSettings(n, 0), {
         delay: 300
       });
     }, [i, u, p, c, d, t]);
@@ -931,7 +931,7 @@ function eM({
               isInMultiselectMode: m,
               onDoubleClick: () => {
                 ej(void 0);
-                YEY.exitSearchMode(dNx.SELECT_ACTIVE);
+                CanvasSearchHelpers.exitSearchMode(SelectionState.SELECT_ACTIVE);
               },
               onSelect: n => eb(n, t.data, e.index, l),
               replacement: n,
@@ -948,14 +948,14 @@ function eM({
         children: jsx(dW, {
           size: "medium"
         })
-      }), o && B === Lov.ACTIVE_PAGE && jsx(_$$E, {
+      }), o && B === PageViewMode.ACTIVE_PAGE && jsx(_$$E, {
         recordingKey: "figma_design_search.other_pages_button",
         className: N()(fp, AX),
         onClick: () => {
-          D(V2(Lov.ALL_PAGES));
+          D(V2(PageViewMode.ALL_PAGES));
         },
         children: renderI18nText("canvas_search.results_other_pages")
-      }), f && B === Lov.ALL_PAGES && jsx("div", {
+      }), f && B === PageViewMode.ALL_PAGES && jsx("div", {
         className: du,
         children: renderI18nText("canvas_search.results_unavailable_offline")
       })]
@@ -1000,7 +1000,7 @@ function ez({
   numResults: l
 }) {
   let r = eY().get(e);
-  let i = e === Xy ? getI18nString("fullscreen.canvas_search.pages") : r.name;
+  let i = e === zeroSessionLocalIDString ? getI18nString("fullscreen.canvas_search.pages") : r.name;
   return jsxs(GG, {
     className: kQ,
     onClick: () => n(!t),
@@ -1033,11 +1033,11 @@ function eG({
 }) {
   let E = eY();
   let f = p8("currentPage");
-  let v = e.textMatch.matchType === Ifi.TEXT_MATCH;
+  let v = e.textMatch.matchType === MatchCriteria.TEXT_MATCH;
   let I = null != t && v && (E.get(e.guid)?.hasMissingFont || !1);
   let y = !yZ();
   let b = useSelector(e => e.mirror.appModel.pagesList);
-  let R = y && e.textMatch.matchType === Ifi.PAGE_MATCH && h3O.isIncrementalSession() && Fy(b, e.resultGuid) !== xal.LOADED;
+  let R = y && e.textMatch.matchType === MatchCriteria.PAGE_MATCH && Multiplayer.isIncrementalSession() && Fy(b, e.resultGuid) !== DataLoadStatus.LOADED;
   let D = useDispatch();
   let O = N()(V3, {
     [HR]: e.isPurple,
@@ -1076,25 +1076,25 @@ function eG({
       R ? D(_$$F.enqueue({
         type: "offline-page-switch",
         message: getI18nString("fullscreen.pages_panel.unavailable_offline")
-      })) : (l.current?.focus(), p || !i || (BrowserInfo.mac ? t.metaKey : t.ctrlKey) || e.textMatch.matchType === Ifi.PAGE_MATCH ? c(t) : m || YEY.setOverlayVisible(!0));
+      })) : (l.current?.focus(), p || !i || (BrowserInfo.mac ? t.metaKey : t.ctrlKey) || e.textMatch.matchType === MatchCriteria.PAGE_MATCH ? c(t) : m || CanvasSearchHelpers.setOverlayVisible(!0));
       t.preventDefault();
       t.stopPropagation();
     },
     onDoubleClick: p || R ? lQ : u,
     onMouseEnter: () => {
-      e.pageId === Xy || e.pageId !== n ? _(null) : _({
+      e.pageId === zeroSessionLocalIDString || e.pageId !== n ? _(null) : _({
         nodeGuid: e.resultGuid,
         pageId: e.pageId,
         index: e.index,
         matchIndex: e.matchIndex,
         isPurple: e.isPurple
       });
-      v ? YEY.setHoveredResult(e.resultGuid, e.matchIndex) : e.textMatch.matchType === Ifi.LAYER_MATCH && Uc(e.resultGuid);
+      v ? CanvasSearchHelpers.setHoveredResult(e.resultGuid, e.matchIndex) : e.textMatch.matchType === MatchCriteria.LAYER_MATCH && Uc(e.resultGuid);
     },
     onMouseLeave: () => {
       Uc("");
       _(null);
-      YEY.setHoveredResult(AD, -1);
+      CanvasSearchHelpers.setHoveredResult(defaultSessionLocalIDString, -1);
     },
     recordingKey: Pt("figma_design_search", "result", e.pageId, e.index),
     children: [jsx("div", {
@@ -1142,7 +1142,7 @@ function eU({
       match: {
         start: s,
         end: s + query.length,
-        matchType: Ifi.LAYER_MATCH
+        matchType: MatchCriteria.LAYER_MATCH
       },
       multiline: !0
     }) : jsx(ph, {
@@ -1154,7 +1154,7 @@ function eU({
         match: {
           start: i,
           end: i + query.length,
-          matchType: Ifi.LAYER_MATCH
+          matchType: MatchCriteria.LAYER_MATCH
         }
       }) : jsx(ph, {
         text: l

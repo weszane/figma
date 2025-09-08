@@ -5,8 +5,8 @@ import { d as _$$d } from "../905/976845";
 import { m as _$$m } from "../905/367152";
 import { M as _$$M } from "../1528/793871";
 import { e as _$$e } from "../905/149844";
-import { glU, Ez5, J0O, iCO } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, AppStateTsApi, ComponentPropType, StateHierarchy } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { Pt, rf } from "../figma_app/806412";
@@ -15,9 +15,9 @@ import { c$, wv } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { XE, u1 } from "../figma_app/91703";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { wP } from "../9410/845608";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { s as _$$s } from "../figma_app/874592";
 import { Dr, Ct } from "../figma_app/803787";
 import { Ib } from "../905/129884";
@@ -32,8 +32,8 @@ import { Zk } from "../figma_app/626177";
 import { i$ } from "../figma_app/150804";
 import { DE, Ad } from "../figma_app/811257";
 import { pG } from "../figma_app/47085";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { K as _$$K } from "../905/443068";
 import { y as _$$y } from "../905/582657";
 import { f as _$$f } from "../905/335032";
@@ -68,14 +68,14 @@ function ee(e) {
   let h = uQ();
   let f = showUnbubbledPrimaryInstances ? o : o?.filter(e => e.isBubbled);
   let x = e => {
-    l7.user("toggle-props-bubbled", () => glU.togglePropsAreBubbled(e));
-    Ez5.canvasViewState().temporarilyHoveredNodes.set([]);
+    permissionScopeHandler.user("toggle-props-bubbled", () => Fullscreen.togglePropsAreBubbled(e));
+    AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   };
   let _ = e => {
-    Ez5.canvasViewState().temporarilyHoveredNodes.set(e);
+    AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set(e);
   };
   let b = () => {
-    Ez5.canvasViewState().temporarilyHoveredNodes.set([]);
+    AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   };
   let C = 0;
   let j = !showUnbubbledPrimaryInstances && !d && null != f && f.length > 5;
@@ -128,13 +128,13 @@ function et({
 }) {
   return jsxs("div", {
     className: n ? "bubbled_instances_list--checkboxContainerWide--Kdd3u bubbled_instances_list--checkboxContainer--qm3X7" : "bubbled_instances_list--checkboxContainer--qm3X7",
-    children: [jsx(_$$S, {
+    children: [jsx(Checkbox, {
       checked: e.isBubbled,
       onChange: () => {
         e.connectedGUIDs[0] && t(e.connectedGUIDs[0]);
       },
       recordingKey: i,
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: jsx(_$$E, {
           truncate: "line-clamp",
           lineClamp: 2,
@@ -324,7 +324,7 @@ export function $$eg0({
     Pp(d, !1, e, Fv.ICON);
     let t = J.current;
     let r = t ? cn(t, wh) : {};
-    s(to({
+    s(showModalHandler({
       type: _$$n2,
       data: {
         propType: e,
@@ -334,7 +334,7 @@ export function $$eg0({
     }));
   }, [s, d]);
   let et = useCallback(() => {
-    d && (d.isLooseComponent ? Y5.triggerActionInUserEditScope("create-state-group") : Q(J0O.VARIANT));
+    d && (d.isLooseComponent ? fullscreenValue.triggerActionInUserEditScope("create-state-group") : Q(ComponentPropType.VARIANT));
   }, [Q, d]);
   let es = useCallback(() => {
     let e = J.current;
@@ -351,12 +351,12 @@ export function $$eg0({
       components: [d],
       clientLifecycleId: _$$g()
     }))[0];
-    e && l7.user("apply-suggested-props", () => {
+    e && permissionScopeHandler.user("apply-suggested-props", () => {
       apply(e);
     });
   }, [submit, apply, d]);
   let en = d?.isCodeComponent;
-  let ei = [...(getFeatureFlags().ds_variable_props_number_def ? [J0O.NUMBER] : []), J0O.TEXT, J0O.BOOL, ...(en ? [] : [J0O.INSTANCE_SWAP]), ...(getFeatureFlags().dse_slots ? [J0O.SLOT] : [])];
+  let ei = [...(getFeatureFlags().ds_variable_props_number_def ? [ComponentPropType.NUMBER] : []), ComponentPropType.TEXT, ComponentPropType.BOOL, ...(en ? [] : [ComponentPropType.INSTANCE_SWAP]), ...(getFeatureFlags().dse_slots ? [ComponentPropType.SLOT] : [])];
   return d ? jsxs(Zk, {
     ref: J,
     style: t ? {
@@ -384,7 +384,7 @@ export function $$eg0({
       }), !en && jsxs(c$, {
         className: eh,
         onClick: et,
-        recordingKey: Pt("openCreatePropModal", xb(J0O.VARIANT)),
+        recordingKey: Pt("openCreatePropModal", xb(ComponentPropType.VARIANT)),
         children: [jsx(Nu, {
           children: jsx(Fragment, {
             children: jsx(_$$m, {})
@@ -459,7 +459,7 @@ function ef({
     appendedClassName: m()(a ? "props_panel--ui3PanelHeaderRowSAP--ws4dj props_panel--ui3PanelHeaderRow--Ab8Jz" : "props_panel--ui3PanelHeaderRow--Ab8Jz", {
       [yf]: !e
     }),
-    icon: t !== iCO.STATE ? jsx("div", {
+    icon: t !== StateHierarchy.STATE ? jsx("div", {
       ref: s,
       className: "props_panel--addButtonContainer--a58gi",
       children: jsx(_$$d, {

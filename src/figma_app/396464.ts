@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { bV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { k9 } from "../905/19536";
@@ -45,7 +45,7 @@ export function $$h4() {
     Object.keys(e).forEach(e => {
       let r = getSingletonSceneGraph().get(e);
       let n = r?.containingCooperFrameId();
-      n && fn(sH(n)) && t.add(n);
+      n && isValidSessionLocalID(parseSessionLocalID(n)) && t.add(n);
     });
     let r = Array.from(t);
     return 1 === r.length ? r[0] : null;
@@ -58,7 +58,7 @@ export function $$m6() {
     Object.keys(e).forEach(e => {
       let r = getSingletonSceneGraph().get(e);
       let n = r?.containingCooperFrameId();
-      n && fn(sH(n)) && t.add(n);
+      n && isValidSessionLocalID(parseSessionLocalID(n)) && t.add(n);
     });
     return [...t];
   }, [e]);

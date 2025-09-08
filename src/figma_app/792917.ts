@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -16,13 +16,13 @@ import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { vi } from "../figma_app/808294";
 import { c9, oW } from "../figma_app/395505";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { bG, JV } from "../905/54385";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
 import { yX, ey } from "../figma_app/918700";
 import { v0 } from "../figma_app/639088";
-let $$N0 = Ju(function (e) {
+let $$N0 = registerModal(function (e) {
   let {
     name,
     user,
@@ -33,7 +33,7 @@ let $$N0 = Ju(function (e) {
   let [S, x] = useState("");
   let N = useDispatch();
   let O = () => {
-    N(to({
+    N(showModalHandler({
       type: C,
       data: {
         user
@@ -41,7 +41,7 @@ let $$N0 = Ju(function (e) {
     }));
   };
   let R = () => {
-    N(to({
+    N(showModalHandler({
       type: w,
       data: {
         user
@@ -72,7 +72,7 @@ let $$N0 = Ju(function (e) {
           }),
           children: Object.values(bG).map(e => jsx(_$$c, {
             value: e,
-            label: jsx(J, {
+            label: jsx(Label, {
               children: vi(e)
             })
           }, e))
@@ -123,11 +123,11 @@ let $$N0 = Ju(function (e) {
         refund_other_reason_text: S
       }).then(() => {
         h(!1);
-        N(Ce());
+        N(hideModal());
         O();
       }).catch(e => {
         h(!1);
-        N(Ce());
+        N(hideModal());
         R();
       });
     },
@@ -135,7 +135,7 @@ let $$N0 = Ju(function (e) {
     size: "small"
   });
 }, "CommunityRequestRefundModal");
-let C = Ju(function (e) {
+let C = registerModal(function (e) {
   let {
     user
   } = e;
@@ -150,21 +150,21 @@ let C = Ju(function (e) {
       here: jsx($n.Link, {
         onClick: () => {
           c9(user);
-          r(Ce());
+          r(hideModal());
         },
         children: renderI18nText("community.buyer.here")
       })
     }), jsx("div", {
       className: v0,
       children: jsx($z, {
-        onClick: () => r(Ce()),
+        onClick: () => r(hideModal()),
         variant: "secondary",
         children: renderI18nText("general.close")
       })
     })]
   });
 }, "CommunityRefundRequestedSuccessModal");
-let w = Ju(function (e) {
+let w = registerModal(function (e) {
   let {
     user
   } = e;

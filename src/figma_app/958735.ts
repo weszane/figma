@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useStore } from "../vendor/514228";
 import { throttle } from "../905/915765";
-import { QOV, kul, Ez5 } from "../figma_app/763686";
+import { UserActionState, SchemaJoinStatus, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tg } from "../figma_app/933328";
 import { createActionAndReducerWrapper } from "../905/270322";
 import { KQ } from "../figma_app/646357";
-import { lu } from "../figma_app/84367";
+import { subscribeObservable } from "../figma_app/84367";
 let {
   action,
   reducer
@@ -81,16 +81,16 @@ export function $$V11() {
       } = e.getState().mirror.appModel;
       let a = function (e) {
         switch (e) {
-          case QOV.DEFAULT:
-          case QOV.SELECTING_TEXT:
-          case QOV.CLICKING_TO_CHANGE_SELECTION:
+          case UserActionState.DEFAULT:
+          case UserActionState.SELECTING_TEXT:
+          case UserActionState.CLICKING_TO_CHANGE_SELECTION:
             return !1;
-          case QOV.DRAGGING:
-          case QOV.RESIZING:
-          case QOV.ROTATING:
+          case UserActionState.DRAGGING:
+          case UserActionState.RESIZING:
+          case UserActionState.ROTATING:
             return !0;
         }
-      }(activeUserAction) || multiplayerSessionState === kul.DETACHED;
+      }(activeUserAction) || multiplayerSessionState === SchemaJoinStatus.DETACHED;
       "normal" === n && a ? n = "paused" : "paused" !== n || a ? "enqueued" !== n || a || (t(), n = "normal") : n = "normal";
     });
     let {
@@ -98,7 +98,7 @@ export function $$V11() {
       publishableStateGroups,
       publishableStyles,
       publishableModules
-    } = Ez5.libraryAssets();
+    } = AppStateTsApi.libraryAssets();
     let m = H(e, [{
       observable: publishableSymbols,
       action
@@ -124,7 +124,7 @@ export function $$V11() {
     let {
       subscribedSymbols,
       subscribedStateGroups
-    } = Ez5.libraryAssets();
+    } = AppStateTsApi.libraryAssets();
     return H(e, [{
       observable: subscribedSymbols,
       action: _action4
@@ -139,7 +139,7 @@ export function $$V11() {
       directlySubscribedStyles,
       indirectlySubscribedStyles,
       localStylesThatHaveUsages
-    } = Ez5.libraryAssets();
+    } = AppStateTsApi.libraryAssets();
     return H(e, [{
       observable: directlySubscribedStyles,
       action: _action8
@@ -161,7 +161,7 @@ export function $$V11() {
       directlySubscribedStylesOnCurrentPage,
       localSymbolsThatHaveUsagesOnCurrentPage,
       localStylesThatHaveUsagesOnCurrentPage
-    } = Ez5.libraryAssets();
+    } = AppStateTsApi.libraryAssets();
     return H(e, [{
       observable: subscribedSymbolsOnCurrentPage,
       action: _action5
@@ -188,7 +188,7 @@ function H(e, t, r) {
   } of t) {
     e.dispatch(action(observable.getCopy()));
     r?.();
-    n.push(lu(observable, {
+    n.push(subscribeObservable(observable, {
       onChangeDeferred: () => {
         e.dispatch(action(observable.getCopy()));
         r?.();

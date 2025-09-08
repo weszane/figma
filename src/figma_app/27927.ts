@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useRef, useMemo } from "react";
 import { debug } from "../figma_app/465776";
-import { NLJ, rcl } from "../figma_app/763686";
+import { DesignGraphElements, Command } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { YV } from "../figma_app/240545";
 import { KB, hP, H9, BK, il, bp, Wm, nF, iB, cc, P6, VC, b1, Z3, qO, Nm, $W, sb, Vx, Ad, RB, S2, y8, kf, Jo, QF, bE, kd, FJ, Ty } from "../figma_app/801324";
@@ -67,201 +67,201 @@ export function $$_1(e) {
 function h(e, t, r = !0) {
   return e.x >= t.x && e.x <= t.x + t.width && e.y >= t.y && (r || e.y <= t.y + t.height) || r && e.y > t.y + t.height;
 }
-let $$m0 = new Map([["SQUARE", NLJ.SHAPE_WHITEBOARD_SQUARE], ["ELLIPSE", NLJ.SHAPE_WHITEBOARD_ELLIPSE], ["ROUNDED_RECTANGLE", NLJ.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE], ["DIAMOND", NLJ.SHAPE_WHITEBOARD_DIAMOND], ["TRIANGLE_UP", NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP], ["TRIANGLE_DOWN", NLJ.SHAPE_WHITEBOARD_TRIANGLE_DOWN], ["PARALLELOGRAM_RIGHT", NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT], ["PARALLELOGRAM_LEFT", NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT], ["ENG_DATABASE", NLJ.SHAPE_WHITEBOARD_ENG_DATABASE], ["ENG_QUEUE", NLJ.SHAPE_WHITEBOARD_ENG_QUEUE], ["ENG_FILE", NLJ.SHAPE_WHITEBOARD_ENG_FILE], ["ENG_FOLDER", NLJ.SHAPE_WHITEBOARD_ENG_FOLDER], ["TRAPEZOID", NLJ.SHAPE_WHITEBOARD_TRAPEZOID], ["STAR", NLJ.SHAPE_WHITEBOARD_STAR], ["SHIELD", NLJ.SHAPE_WHITEBOARD_SHIELD], ["HEXAGON", NLJ.SHAPE_WHITEBOARD_HEXAGON], ["PENTAGON", NLJ.SHAPE_WHITEBOARD_PENTAGON], ["OCTAGON", NLJ.SHAPE_WHITEBOARD_OCTAGON], ["PLUS", NLJ.SHAPE_WHITEBOARD_PLUS], ["PREDEFINED_PROCESS", NLJ.SHAPE_WHITEBOARD_PREDEFINED_PROCESS], ["MANUAL_INPUT", NLJ.SHAPE_WHITEBOARD_MANUAL_INPUT], ["CHEVRON", NLJ.SHAPE_WHITEBOARD_CHEVRON], ["DOCUMENT_SINGLE", NLJ.SHAPE_WHITEBOARD_DOCUMENT_SINGLE], ["DOCUMENT_MULTIPLE", NLJ.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE], ["ARROW_LEFT", NLJ.SHAPE_WHITEBOARD_ARROW_LEFT], ["ARROW_RIGHT", NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT], ["SUMMING_JUNCTION", NLJ.SHAPE_WHITEBOARD_SUMMING_JUNCTION], ["OR", NLJ.SHAPE_WHITEBOARD_OR], ["SPEECH_BUBBLE", NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE], ["INTERNAL_STORAGE", NLJ.SHAPE_WHITEBOARD_INTERNAL_STORAGE], ["MINDMAP_TREE_NUCLEUS", NLJ.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS]]);
+let $$m0 = new Map([["SQUARE", DesignGraphElements.SHAPE_WHITEBOARD_SQUARE], ["ELLIPSE", DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE], ["ROUNDED_RECTANGLE", DesignGraphElements.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE], ["DIAMOND", DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND], ["TRIANGLE_UP", DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP], ["TRIANGLE_DOWN", DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_DOWN], ["PARALLELOGRAM_RIGHT", DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT], ["PARALLELOGRAM_LEFT", DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT], ["ENG_DATABASE", DesignGraphElements.SHAPE_WHITEBOARD_ENG_DATABASE], ["ENG_QUEUE", DesignGraphElements.SHAPE_WHITEBOARD_ENG_QUEUE], ["ENG_FILE", DesignGraphElements.SHAPE_WHITEBOARD_ENG_FILE], ["ENG_FOLDER", DesignGraphElements.SHAPE_WHITEBOARD_ENG_FOLDER], ["TRAPEZOID", DesignGraphElements.SHAPE_WHITEBOARD_TRAPEZOID], ["STAR", DesignGraphElements.SHAPE_WHITEBOARD_STAR], ["SHIELD", DesignGraphElements.SHAPE_WHITEBOARD_SHIELD], ["HEXAGON", DesignGraphElements.SHAPE_WHITEBOARD_HEXAGON], ["PENTAGON", DesignGraphElements.SHAPE_WHITEBOARD_PENTAGON], ["OCTAGON", DesignGraphElements.SHAPE_WHITEBOARD_OCTAGON], ["PLUS", DesignGraphElements.SHAPE_WHITEBOARD_PLUS], ["PREDEFINED_PROCESS", DesignGraphElements.SHAPE_WHITEBOARD_PREDEFINED_PROCESS], ["MANUAL_INPUT", DesignGraphElements.SHAPE_WHITEBOARD_MANUAL_INPUT], ["CHEVRON", DesignGraphElements.SHAPE_WHITEBOARD_CHEVRON], ["DOCUMENT_SINGLE", DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_SINGLE], ["DOCUMENT_MULTIPLE", DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE], ["ARROW_LEFT", DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT], ["ARROW_RIGHT", DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT], ["SUMMING_JUNCTION", DesignGraphElements.SHAPE_WHITEBOARD_SUMMING_JUNCTION], ["OR", DesignGraphElements.SHAPE_WHITEBOARD_OR], ["SPEECH_BUBBLE", DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE], ["INTERNAL_STORAGE", DesignGraphElements.SHAPE_WHITEBOARD_INTERNAL_STORAGE], ["MINDMAP_TREE_NUCLEUS", DesignGraphElements.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS]]);
 let $$g4 = new Map(Array.from($$m0, ([e, t]) => [t, e]));
 export function $$f5(e) {
   return $$g4.has(e);
 }
-let E = new Map([[NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP, 104], [NLJ.SHAPE_WHITEBOARD_ELLIPSE, 128], [NLJ.SHAPE_WHITEBOARD_SQUARE, 112]]);
+let E = new Map([[DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP, 104], [DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE, 128], [DesignGraphElements.SHAPE_WHITEBOARD_SQUARE, 112]]);
 function y(e) {
   let t = E.get(e);
   return void 0 === t ? 112 : t;
 }
 export function $$b2() {
-  n || (n = new Map([[NLJ.SHAPE_WHITEBOARD_SQUARE, {
+  n || (n = new Map([[DesignGraphElements.SHAPE_WHITEBOARD_SQUARE, {
     action: "set-tool-shape-whiteboard-square",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-square"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_SQUARE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_SQUARE,
     Icon: KB,
-    canvasToSvgScale: 176 / y(NLJ.SHAPE_WHITEBOARD_SQUARE)
-  }], [NLJ.SHAPE_WHITEBOARD_ELLIPSE, {
+    canvasToSvgScale: 176 / y(DesignGraphElements.SHAPE_WHITEBOARD_SQUARE)
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE, {
     action: "set-tool-shape-whiteboard-ellipse",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-ellipse"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ELLIPSE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ELLIPSE,
     Icon: hP,
-    canvasToSvgScale: 176 / y(NLJ.SHAPE_WHITEBOARD_ELLIPSE)
-  }], [NLJ.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE, {
+    canvasToSvgScale: 176 / y(DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE)
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE, {
     action: "set-tool-shape-whiteboard-rounded-rectangle",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-rounded-rectangle"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ROUNDED_RECTANGLE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ROUNDED_RECTANGLE,
     Icon: H9,
     canvasToSvgScale: 160 / 104
-  }], [NLJ.SHAPE_WHITEBOARD_DIAMOND, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND, {
     action: "set-tool-shape-whiteboard-diamond",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-diamond"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_DIAMOND,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_DIAMOND,
     Icon: BK,
     canvasToSvgScale: 176 / 112
-  }], [NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP, {
     action: "set-tool-shape-whiteboard-triangle-up",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-triangle-up"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_TRIANGLE_UP,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_TRIANGLE_UP,
     Icon: il,
-    canvasToSvgScale: 176 / y(NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP)
-  }], [NLJ.SHAPE_WHITEBOARD_TRIANGLE_DOWN, {
+    canvasToSvgScale: 176 / y(DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP)
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_DOWN, {
     action: "set-tool-shape-whiteboard-triangle-down",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-triangle-down"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_TRIANGLE_DOWN,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_TRIANGLE_DOWN,
     Icon: bp,
     canvasToSvgScale: 176 / 104
-  }], [NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT, {
     action: "set-tool-shape-whiteboard-parallelogram-right",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-parallelogram-right"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT,
     Icon: Wm,
     canvasToSvgScale: 176 / 104
-  }], [NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT, {
     action: "set-tool-shape-whiteboard-parallelogram-left",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-parallelogram-left"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT,
     Icon: nF,
     canvasToSvgScale: 176 / 104
-  }], [NLJ.SHAPE_WHITEBOARD_ENG_DATABASE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ENG_DATABASE, {
     action: "set-tool-shape-whiteboard-eng-database",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-eng-database"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ENG_DATABASE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ENG_DATABASE,
     Icon: iB,
     canvasToSvgScale: 1.5446428571428572
-  }], [NLJ.SHAPE_WHITEBOARD_ENG_QUEUE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ENG_QUEUE, {
     action: "set-tool-shape-whiteboard-eng-queue",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-eng-queue"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ENG_QUEUE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ENG_QUEUE,
     Icon: cc,
     canvasToSvgScale: 1.7653061224489797
-  }], [NLJ.SHAPE_WHITEBOARD_ENG_FILE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ENG_FILE, {
     action: "set-tool-shape-whiteboard-eng-file",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-eng-file"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ENG_FILE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ENG_FILE,
     Icon: P6,
     canvasToSvgScale: 1.6634615384615385
-  }], [NLJ.SHAPE_WHITEBOARD_ENG_FOLDER, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ENG_FOLDER, {
     action: "set-tool-shape-whiteboard-eng-folder",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-eng-folder"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ENG_FOLDER,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ENG_FOLDER,
     Icon: VC,
     canvasToSvgScale: 1.6634615384615385
-  }], [NLJ.SHAPE_WHITEBOARD_TRAPEZOID, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_TRAPEZOID, {
     action: "set-tool-shape-whiteboard-trapezoid",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-trapezoid"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_TRAPEZOID,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_TRAPEZOID,
     Icon: b1,
     canvasToSvgScale: 152 / 81.92
-  }], [NLJ.SHAPE_WHITEBOARD_STAR, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_STAR, {
     action: "set-tool-shape-whiteboard-star",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-star"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_STAR,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_STAR,
     Icon: Z3,
     canvasToSvgScale: 240 / 112
-  }], [NLJ.SHAPE_WHITEBOARD_SHIELD, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_SHIELD, {
     action: "set-tool-shape-whiteboard-shield",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-shield"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_SHIELD,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_SHIELD,
     Icon: qO,
     canvasToSvgScale: 212 / 90
-  }], [NLJ.SHAPE_WHITEBOARD_HEXAGON, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_HEXAGON, {
     action: "set-tool-shape-whiteboard-hexagon",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-hexagon"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_HEXAGON,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_HEXAGON,
     Icon: Nm,
     canvasToSvgScale: 152 / 80.5
-  }], [NLJ.SHAPE_WHITEBOARD_PENTAGON, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_PENTAGON, {
     action: "set-tool-shape-whiteboard-pentagon",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-pentagon"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_PENTAGON,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_PENTAGON,
     Icon: $W,
     canvasToSvgScale: 190 / 111
-  }], [NLJ.SHAPE_WHITEBOARD_OCTAGON, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_OCTAGON, {
     action: "set-tool-shape-whiteboard-octagon",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-octagon"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_OCTAGON,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_OCTAGON,
     Icon: sb,
     canvasToSvgScale: 218 / 112
-  }], [NLJ.SHAPE_WHITEBOARD_PLUS, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_PLUS, {
     action: "set-tool-shape-whiteboard-plus",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-plus"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_PLUS,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_PLUS,
     Icon: Vx,
     canvasToSvgScale: 234 / 112
-  }], [NLJ.SHAPE_WHITEBOARD_PREDEFINED_PROCESS, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_PREDEFINED_PROCESS, {
     action: "set-tool-shape-whiteboard-predefined-process",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-predefined-process"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_PREDEFINED_PROCESS,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_PREDEFINED_PROCESS,
     Icon: Ad,
     canvasToSvgScale: 149 / 86.09
-  }], [NLJ.SHAPE_WHITEBOARD_MANUAL_INPUT, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_MANUAL_INPUT, {
     action: "set-tool-shape-whiteboard-manual-input",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-manual-input"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_MANUAL_INPUT,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_MANUAL_INPUT,
     Icon: RB,
     canvasToSvgScale: 152 / 93
-  }], [NLJ.SHAPE_WHITEBOARD_CHEVRON, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_CHEVRON, {
     action: "set-tool-shape-whiteboard-chevron",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-chevron"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_CHEVRON,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_CHEVRON,
     Icon: S2,
     canvasToSvgScale: 168 / 77
-  }], [NLJ.SHAPE_WHITEBOARD_DOCUMENT_SINGLE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_SINGLE, {
     action: "set-tool-shape-whiteboard-document-single",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-document-single"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_DOCUMENT_SINGLE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_DOCUMENT_SINGLE,
     Icon: y8,
     canvasToSvgScale: 188 / 99.08
-  }], [NLJ.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE, {
     action: "set-tool-shape-whiteboard-document-multiple",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-document-multiple"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE,
     Icon: kf,
     canvasToSvgScale: 201 / 100.89
-  }], [NLJ.SHAPE_WHITEBOARD_ARROW_LEFT, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT, {
     action: "set-tool-shape-whiteboard-arrow-left",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-left"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ARROW_LEFT,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ARROW_LEFT,
     Icon: Jo,
     canvasToSvgScale: 212 / 88.97
-  }], [NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT, {
     action: "set-tool-shape-whiteboard-arrow-right",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-right"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_ARROW_RIGHT,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_ARROW_RIGHT,
     Icon: QF,
     canvasToSvgScale: 212 / 88.97
-  }], [NLJ.SHAPE_WHITEBOARD_SUMMING_JUNCTION, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_SUMMING_JUNCTION, {
     action: "set-tool-shape-whiteboard-summing-junction",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-summing-junction"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_SUMMING_JUNCTION,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_SUMMING_JUNCTION,
     Icon: bE,
     canvasToSvgScale: 1
-  }], [NLJ.SHAPE_WHITEBOARD_OR, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_OR, {
     action: "set-tool-shape-whiteboard-or",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-or"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_OR,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_OR,
     Icon: kd,
     canvasToSvgScale: 1
-  }], [NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE, {
     action: "set-tool-shape-whiteboard-speech-bubble",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-speech-bubble"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_SPEECH_BUBBLE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_SPEECH_BUBBLE,
     Icon: FJ,
     canvasToSvgScale: 2
-  }], [NLJ.SHAPE_WHITEBOARD_INTERNAL_STORAGE, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_INTERNAL_STORAGE, {
     action: "set-tool-shape-whiteboard-internal-storage",
     name: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-internal-storage"),
-    actionEnum: rcl.SET_TOOL_SHAPE_WHITEBOARD_INTERNAL_STORAGE,
+    actionEnum: Command.SET_TOOL_SHAPE_WHITEBOARD_INTERNAL_STORAGE,
     Icon: Ty,
     canvasToSvgScale: 149 / 85.52
-  }], [NLJ.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS, {
+  }], [DesignGraphElements.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS, {
     action: "set-tool-mindmap-tree-nucleus",
     name: getI18nString("fullscreen_actions.set_tool_mindmap_tree_nucleus"),
-    actionEnum: rcl.SET_TOOL_MINDMAP_TREE_NUCLEUS,
+    actionEnum: Command.SET_TOOL_MINDMAP_TREE_NUCLEUS,
     Icon: KB,
     canvasToSvgScale: 176 / 112
   }]]));

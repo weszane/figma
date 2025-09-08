@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Pw } from "../905/521428";
 import n from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { UG } from "../905/414007";
+import { getCookieOrStorage } from "../905/414007";
 import { buildUploadUrl } from "../figma_app/169182";
 import { isIOSUA } from "../figma_app/778880";
 import { pW } from "../905/160095";
@@ -20,7 +20,7 @@ export function $$v0(e) {
     isCompact
   } = e;
   let r = isIOSUA ? "https://apps.apple.com/us/app/figma-mirror/id1152747299#" : "https://play.google.com/store/apps/details?id=com.figma.mirror";
-  let n = UG();
+  let n = getCookieOrStorage();
   let g = !isCompact && !!e.renderBlockingPrompt;
   let [v, j] = useState(!g);
   let [T, E] = useState(!g);

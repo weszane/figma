@@ -22,7 +22,7 @@ import { H8, Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
 import { j7, oB } from "../905/929976";
 import { z as _$$z2 } from "../905/404751";
-import { to, AS } from "../905/156213";
+import { showModalHandler, hideModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { lg } from "../figma_app/976749";
 import { F as _$$F2 } from "../905/224";
@@ -34,7 +34,7 @@ import { YN } from "../figma_app/349248";
 import { vL, Bi } from "../905/652992";
 import { ZN } from "../figma_app/630077";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { eg, O0, Lh } from "../figma_app/452252";
 import { s as _$$s2 } from "../figma_app/825649";
 import { RG } from "../figma_app/146384";
@@ -207,7 +207,7 @@ export function $$ee2({
         }
       }
     }));
-    d(to({
+    d(showModalHandler({
       type: er
     }));
   };
@@ -324,7 +324,7 @@ export function $$ee2({
         action: {
           label: getI18nString("rcs.move_drafts_nudge.upgrade_to_continue"),
           onClick: () => {
-            d(to({
+            d(showModalHandler({
               type: DV,
               data: {
                 team: w,
@@ -382,17 +382,17 @@ let et = getFeatureFlags().move_drafts_nudge_v2_recent_files_slim ? function () 
     teamId: e.team_id
   }))), [t]);
 };
-let er = Ju(function () {
+let er = registerModal(function () {
   let e = useDispatch();
   return jsx(OA, {
     targetKey: v4,
     title: "",
     dismissModal: () => {
-      e(AS());
+      e(hideModalHandler());
     },
     ctaText: getI18nString("rcs.move_drafts_nudge.got_it"),
     onClickPrimaryCta: () => {
-      e(AS());
+      e(hideModalHandler());
     },
     width: 268,
     children: jsx("p", {

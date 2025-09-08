@@ -1,17 +1,17 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { F } from "../905/549791";
-import { r as _$$r } from "../905/577641";
+import { CheckboxPrimitive } from "../905/549791";
+import { defaultComponentAttribute } from "../905/577641";
 export let $$l0 = forwardRef(({
   className: e,
   htmlAttributes: t,
   ...i
 }, r) => jsxs("span", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   className: A("manually-labeled-switch__root__sp5fN", e),
   "data-disabled": !!i.disabled || void 0,
-  children: [jsx(F, {
+  children: [jsx(CheckboxPrimitive, {
     ...i,
     ref: r,
     htmlAttributes: t,

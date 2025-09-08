@@ -5,7 +5,7 @@ import { K as _$$K } from "../905/443068";
 import { $n, WW } from "../905/521428";
 import { K as _$$K2 } from "../905/851274";
 import { O as _$$O } from "../905/969533";
-import { hzD, rcl } from "../figma_app/763686";
+import { DocumentColorProfileEnum, Command } from "../figma_app/763686";
 import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { B4 } from "../figma_app/385215";
@@ -17,13 +17,13 @@ import { to, HH } from "../figma_app/828186";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { o as _$$o } from "../1528/709529";
-import { AS, to as _$$to } from "../905/156213";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { q5 } from "../figma_app/516028";
 import { Pe } from "../figma_app/12796";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { h as _$$h } from "../905/791079";
+import { useSingleEffect } from "../905/791079";
 import { k as _$$k2 } from "../905/582200";
 import { $ as _$$$ } from "../1528/660656";
 import { flushSync } from "../vendor/944059";
@@ -32,7 +32,7 @@ import { t9 } from "../figma_app/334505";
 import { hg, u7 } from "../figma_app/425489";
 import { e as _$$e } from "../9410/707590";
 import { eY } from "../figma_app/722362";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Yj, JI } from "../905/416496";
 import { k as _$$k3 } from "../905/443820";
 import { J as _$$J } from "../905/614223";
@@ -45,8 +45,8 @@ import { E as _$$E } from "../905/632989";
 import { g as _$$g } from "../905/687265";
 import { eI as _$$eI, GC } from "../1528/961203";
 import { _j, kV } from "../9410/486658";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J2 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { Um } from "../905/848862";
 import { J5, K8 } from "../905/920793";
 import { Hk, lK, fu, pu } from "../figma_app/123994";
@@ -387,7 +387,7 @@ function ec({
         let a = {
           type: t
         };
-        "PDF Print" === t ? a.colorProfile = hzD.CMYK : s?.colorProfile === hzD.CMYK && (a.colorProfile = hzD.DOCUMENT);
+        "PDF Print" === t ? a.colorProfile = DocumentColorProfileEnum.CMYK : s?.colorProfile === DocumentColorProfileEnum.CMYK && (a.colorProfile = DocumentColorProfileEnum.DOCUMENT);
         n(e, a);
       }
     },
@@ -436,10 +436,10 @@ function ec({
       documentExportColorProfile: t,
       onColorProfileChange: t => {
         e && n(e, {
-          colorProfile: hzD[t]
+          colorProfile: DocumentColorProfileEnum[t]
         });
       },
-      colorProfile: s?.colorProfile !== void 0 ? hzD[s?.colorProfile] : "DOCUMENT",
+      colorProfile: s?.colorProfile !== void 0 ? DocumentColorProfileEnum[s?.colorProfile] : "DOCUMENT",
       inBuzzPrint: !!getFeatureFlags().buzz_print_export && "PDF Print" === eo(s),
       dispatch: l,
       dropdownShown: i,
@@ -451,8 +451,8 @@ function ec({
     children: [jsx("span", {
       className: "xkezfkh",
       children: getI18nString("cooper.toolbar.export_modal.file_type")
-    }), o ? m : h, o ? jsx(_$$S, {
-      label: jsx(_$$J2, {
+    }), o ? m : h, o ? jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("buzz.toolbar.export_modal.include_audio")
       }),
       checked: s.includeAudio ?? !0,
@@ -481,8 +481,8 @@ function ec({
       }), d && jsx("span", {
         className: "x1n0bwc9 x1ah0xmj",
         children: getI18nString("cooper.toolbar.export_modal.color_profile_warning")
-      }), getFeatureFlags().buzz_print_export && d && jsx(_$$S, {
-        label: jsx(_$$J2, {
+      }), getFeatureFlags().buzz_print_export && d && jsx(Checkbox, {
+        label: jsx(Label, {
           children: getI18nString("cooper.toolbar.export_modal.show_print_marks")
         }),
         checked: s?.shouldAddPrintMarks ?? !1,
@@ -616,7 +616,7 @@ function eu({
     let [e, t] = useState(null);
     let [n] = useAtomValueAndSetter(oe);
     let a = useMemo(() => K()(n, e => e.currentVolume), [n]);
-    _$$h(() => {
+    useSingleEffect(() => {
       let e = new $();
       e.setVolumeByNodeId(a);
       t(e);
@@ -687,7 +687,7 @@ function eu({
     })
   });
 }
-let ep = Ju(function (e) {
+let ep = registerModal(function (e) {
   let t = hS(e);
   let n = useDispatch();
   let i = eY();
@@ -710,7 +710,7 @@ let ep = Ju(function (e) {
         type: "CONTENT_SCALE",
         value: 1
       },
-      colorProfile: hzD.DOCUMENT,
+      colorProfile: DocumentColorProfileEnum.DOCUMENT,
       exportQuality: n ? 1 : JI,
       shouldAddPrintMarks: !1,
       includeAudio: !0
@@ -726,7 +726,7 @@ let ep = Ju(function (e) {
       }
     }));
   }, [x]);
-  _$$h(() => {
+  useSingleEffect(() => {
     let e = {};
     h.forEach(t => {
       t && (e[t] = x(t));
@@ -785,7 +785,7 @@ let ep = Ju(function (e) {
                 total: l,
                 isExporting: !0
               });
-              n(AS());
+              n(hideModalHandler());
             },
             disabled: 0 === h.length || _ && !o,
             children: getI18nString("buzz.toolbar.export_modal.export_button_text", {
@@ -808,7 +808,7 @@ function em() {
     children: jsx(WW, {
       variant: "secondary",
       disabled: i || n.isExporting,
-      onClick: () => e(_$$to({
+      onClick: () => e(showModalHandler({
         type: o()
       })),
       children: getI18nString("fullscreen.toolbar.cooper.export")
@@ -867,7 +867,7 @@ function eF(e) {
           dropdownShown: e.dropdownShown,
           multiplayer: b,
           currentUser: C,
-          onUserClick: j ? () => F(rcl.FOLLOW_PRESENTER) : M
+          onUserClick: j ? () => F(Command.FOLLOW_PRESENTER) : M
         })]
       }), (isRightPanelCollapsed || j) && !I && jsx("div", {
         className: wR,
@@ -886,11 +886,11 @@ function eF(e) {
             className: _$$s.flex.flexRow.$,
             children: [jsx(_$$K, {
               "aria-label": getI18nString("fullscreen_actions.present-as-prototype"),
-              onClick: () => F(rcl.PRESENT_AS_PROTOTYPE),
+              onClick: () => F(Command.PRESENT_AS_PROTOTYPE),
               children: jsx(_$$K2, {})
             }), jsx(_$$K, {
               "aria-label": getI18nString("fullscreen.flyout.prototype_view"),
-              onClick: () => F(rcl.PRESENT_AS_PROTOTYPE),
+              onClick: () => F(Command.PRESENT_AS_PROTOTYPE),
               children: jsx(_$$O, {})
             })]
           }), I && jsx(em, {}), j && jsx("div", {

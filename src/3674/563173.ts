@@ -1,10 +1,10 @@
-import { f1$ } from "../figma_app/763686";
+import { WriteInReadonlyScopeBindings } from "../figma_app/763686";
 export function $$i0(e) {
-  let t = f1$?.openWriteInReadonlyScope();
+  let t = WriteInReadonlyScopeBindings?.openWriteInReadonlyScope();
   try {
     return e();
   } finally {
-    null != t && f1$?.closeWriteInReadonlyScope(t);
+    null != t && WriteInReadonlyScopeBindings?.closeWriteInReadonlyScope(t);
   }
 }
 export const n = $$i0;

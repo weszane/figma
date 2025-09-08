@@ -35,11 +35,11 @@ import { a as _$$a } from '../905/860779';
 import { z as _$$z } from '../905/897942';
 import { j as _$$j } from '../905/971516';
 import { Pe, Pq } from '../figma_app/12796';
-import { FW } from '../figma_app/155287';
-import { qH } from '../figma_app/300692';
+import { ManifestEditorType } from '../figma_app/155287';
+import { PluginPermissions } from '../figma_app/300692';
 import { BT, q$ } from '../figma_app/644255';
 import { n8 } from '../figma_app/711907';
-import { glU, KXw, RYP, tKW, Z_n } from '../figma_app/763686';
+import { Fullscreen, ColorConversionEnum, ColorSpaceEnum, MeasurementUnit, VariableDataType } from '../figma_app/763686';
 import { gH } from '../figma_app/985200';
 import d from '../vendor/73823';
 import e1 from '../vendor/415955';
@@ -555,7 +555,7 @@ function H(e, t) {
         s && s.type === 'SOLID' && t && t.length !== 0 && i.push({
           ids: t.map(e => e.id),
           rawValue: {
-            type: Z_n.COLOR,
+            type: VariableDataType.COLOR,
             value: {
               ...s.color,
               a: s.opacity ?? 1
@@ -571,7 +571,7 @@ function H(e, t) {
       i.push({
         ids: a.map(e => e.id),
         rawValue: {
-          type: Z_n.STRING,
+          type: VariableDataType.STRING,
           value: e.textSegments[0].fontName.family.rawValue
         }
       });
@@ -580,7 +580,7 @@ function H(e, t) {
     s && i.push({
       ids: a.map(e => e.id),
       rawValue: {
-        type: Z_n.FLOAT,
+        type: VariableDataType.FLOAT,
         value: s
       }
     });
@@ -819,7 +819,7 @@ async function q(e, t) {
     e.inferredVariables.itemSpacing && itemSpacing && b.push({
       ids: e.inferredVariables.itemSpacing.map(e => e.id),
       rawValue: {
-        type: Z_n.FLOAT,
+        type: VariableDataType.FLOAT,
         value: itemSpacing
       }
     });
@@ -2039,7 +2039,7 @@ function eq(e, t, {
   let {
     fallbackHints,
     fallbackStyleMap
-  } = e.nodeCache.colorProfile === RYP.DISPLAY_P3 ? function ({
+  } = e.nodeCache.colorProfile === ColorSpaceEnum.DISPLAY_P3 ? function ({
     node: e,
     styleMap: t,
     preferences: i
@@ -2047,8 +2047,8 @@ function eq(e, t, {
     let {
       styleMap
     } = eY(e, i, {
-      colorProfile: RYP.SRGB,
-      colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? KXw.NO_CONVERSION : KXw.DISPLAY_P3_TO_SRGB
+      colorProfile: ColorSpaceEnum.SRGB,
+      colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? ColorConversionEnum.NO_CONVERSION : ColorConversionEnum.DISPLAY_P3_TO_SRGB
     });
     return {
       fallbackStyleMap: n = styleMap.difference(t),
@@ -2708,7 +2708,7 @@ async function tp(e, t) {
     let {
       fallbackHints,
       fallbackStyleMap
-    } = l === RYP.DISPLAY_P3 ? function ({
+    } = l === ColorSpaceEnum.DISPLAY_P3 ? function ({
       node: e,
       styleMap: t,
       hints: i,
@@ -2716,20 +2716,20 @@ async function tp(e, t) {
     }) {
       let a = new ek();
       ti(e, a, i, te(e), n, {
-        colorProfile: RYP.SRGB,
-        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? KXw.NO_CONVERSION : KXw.DISPLAY_P3_TO_SRGB
+        colorProfile: ColorSpaceEnum.SRGB,
+        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? ColorConversionEnum.NO_CONVERSION : ColorConversionEnum.DISPLAY_P3_TO_SRGB
       });
       ta(e, a, i, n, {
-        colorProfile: RYP.SRGB,
-        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? KXw.NO_CONVERSION : KXw.DISPLAY_P3_TO_SRGB
+        colorProfile: ColorSpaceEnum.SRGB,
+        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? ColorConversionEnum.NO_CONVERSION : ColorConversionEnum.DISPLAY_P3_TO_SRGB
       });
       tr(e, a, i, n, {
-        colorProfile: RYP.SRGB,
-        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? KXw.NO_CONVERSION : KXw.DISPLAY_P3_TO_SRGB
+        colorProfile: ColorSpaceEnum.SRGB,
+        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? ColorConversionEnum.NO_CONVERSION : ColorConversionEnum.DISPLAY_P3_TO_SRGB
       });
       tn(e, a, i, te(e), n, {
-        colorProfile: RYP.SRGB,
-        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? KXw.NO_CONVERSION : KXw.DISPLAY_P3_TO_SRGB
+        colorProfile: ColorSpaceEnum.SRGB,
+        colorspaceConversion: getFeatureFlags().ee_color_management_lego_assign ? ColorConversionEnum.NO_CONVERSION : ColorConversionEnum.DISPLAY_P3_TO_SRGB
       });
       return {
         fallbackStyleMap: a = a.difference(t),
@@ -3919,7 +3919,7 @@ function tZ(e, t) {
         s && s.type === 'SOLID' && t && t.length !== 0 && i.push({
           ids: t.map(e => e.id),
           rawValue: {
-            type: Z_n.COLOR,
+            type: VariableDataType.COLOR,
             value: {
               ...s.color,
               a: s.opacity ?? 1
@@ -3935,7 +3935,7 @@ function tZ(e, t) {
       i.push({
         ids: a.map(e => e.id),
         rawValue: {
-          type: Z_n.STRING,
+          type: VariableDataType.STRING,
           value: e.textSegments[0].fontName.family.rawValue
         }
       });
@@ -3944,7 +3944,7 @@ function tZ(e, t) {
     s && i.push({
       ids: a.map(e => e.id),
       rawValue: {
-        type: Z_n.FLOAT,
+        type: VariableDataType.FLOAT,
         value: s
       }
     });
@@ -4481,7 +4481,7 @@ class t6 {
   }
 }
 class t8 {
-  constructor(e, t, i = RYP.SRGB) {
+  constructor(e, t, i = ColorSpaceEnum.SRGB) {
     this.nodes = {};
     this.stylesResolver = e;
     this.variableResolver = t;
@@ -4550,11 +4550,11 @@ class ic {
       enableProposedApi: !0,
       enablePrivatePluginApi: !0,
       deferRunEvent: !1,
-      validatedPermissions: qH.forFirstPartyPlugin(),
+      validatedPermissions: PluginPermissions.forFirstPartyPlugin(),
       isLocal: !1,
       capabilities: ['codegen'],
       allowedDomains: gH,
-      editorType: [FW.DEV, FW.INSPECT],
+      editorType: [ManifestEditorType.DEV, ManifestEditorType.INSPECT],
       html: null,
       incrementalSafeApi: !1,
       sceneGraph: this.sceneGraph,
@@ -4602,7 +4602,7 @@ class ic {
       let o = !!a.openFile && Pe(a.openFile);
       return {
         propertiesByLayer: await tA(n, {
-          unit: t?.unit ?? tKW.PIXEL,
+          unit: t?.unit ?? MeasurementUnit.PIXEL,
           scaleFactor: t?.scaleFactor || 1,
           customSettings: t?.customSettings,
           isExportRestricted: o
@@ -4653,7 +4653,7 @@ class ic {
     let {
       nodeCache,
       dispose
-    } = function (e, t, i = RYP.SRGB) {
+    } = function (e, t, i = ColorSpaceEnum.SRGB) {
       let n = new t8(e, t, i);
       let a = ({
         id: e
@@ -4669,9 +4669,9 @@ class ic {
       switch (e) {
         case 'LEGACY':
         case 'SRGB':
-          return RYP.SRGB;
+          return ColorSpaceEnum.SRGB;
         case 'DISPLAY_P3':
-          return RYP.DISPLAY_P3;
+          return ColorSpaceEnum.DISPLAY_P3;
       }
     }(this.figma.root.documentColorProfile ?? 'LEGACY'));
     this.nodeCache = nodeCache;
@@ -4703,7 +4703,7 @@ class ic {
             language: 'xml',
             lines: [n8('\x3C!-- Auto layout, grids, variables, and unit scale are not yet supported --\x3E'), ...t]
           }];
-        }(glU.generateAndroidCodeForNode(e, this.sceneGraph.scene)),
+        }(Fullscreen.generateAndroidCodeForNode(e, this.sceneGraph.scene)),
         autocomplete: []
       };
     }
@@ -4716,7 +4716,7 @@ class ic {
             language: 'swift',
             lines: [n8('// Auto layout, grids, variables, and unit scale are not yet supported'), ...t]
           }];
-        }(glU.generateIOSSwiftCodeForNode(e, this.sceneGraph.scene)),
+        }(Fullscreen.generateIOSSwiftCodeForNode(e, this.sceneGraph.scene)),
         autocomplete: []
       };
     }
@@ -4743,7 +4743,7 @@ class ic {
         sections,
         autocomplete
       } = await o(d, {
-        unit: i?.unit ?? tKW.PIXEL,
+        unit: i?.unit ?? MeasurementUnit.PIXEL,
         scaleFactor: i?.scaleFactor || 1,
         customSettings: i?.customSettings,
         isExportRestricted: m,
@@ -4774,7 +4774,7 @@ _$$P(async e => {
     selectedNodeId: e.guid,
     codegenPluginID: 'CSS',
     preferences: {
-      unit: tKW.PIXEL,
+      unit: MeasurementUnit.PIXEL,
       scaleFactor: 1
     },
     canRunCodegenArgs: i

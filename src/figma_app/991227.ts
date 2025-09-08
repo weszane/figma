@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
@@ -13,9 +13,9 @@ import { xEX } from "../figma_app/27776";
 let m = "fake_cursor--hideCursor--CUrrB";
 export var $$g0 = (e => (e[e.NONE = 0] = "NONE", e[e.EYEDROPPER = 1] = "EYEDROPPER", e[e.CHAT = 2] = "CHAT", e[e.HIGH_FIVE = 3] = "HIGH_FIVE", e))($$g0 || {});
 let f = {
-  [NLJ.SELECT]: "aed6896e6ad35977610fc23bb6590c1484d3ee01",
-  [NLJ.HAND]: "aebe1073b0b9e7ca3907e21cc08ee416d86520c4",
-  [NLJ.DROPPER_COLOR]: "3a904092ca690b41c06a24b8e2dddb724a992c94"
+  [DesignGraphElements.SELECT]: "aed6896e6ad35977610fc23bb6590c1484d3ee01",
+  [DesignGraphElements.HAND]: "aebe1073b0b9e7ca3907e21cc08ee416d86520c4",
+  [DesignGraphElements.DROPPER_COLOR]: "3a904092ca690b41c06a24b8e2dddb724a992c94"
 };
 let E = parsePxInt(xEX);
 export function $$y4(e) {
@@ -57,11 +57,11 @@ export function $$T2(e) {
 }
 let I = e => {
   switch (e) {
-    case NLJ.SELECT:
+    case DesignGraphElements.SELECT:
       return getI18nString("fake_cursor.select_cursor");
-    case NLJ.HAND:
+    case DesignGraphElements.HAND:
       return getI18nString("fake_cursor.hand_cursor");
-    case NLJ.DROPPER_COLOR:
+    case DesignGraphElements.DROPPER_COLOR:
       return getI18nString("fake_cursor.eyedropper_cursor");
     default:
       return getI18nString("fake_cursor.cursor");
@@ -71,7 +71,7 @@ export function $$S3({
   currentToolForCursor: e
 }) {
   let t = "fake_cursor--handCursor--3jlcf fake_cursor--cursor--xDDWs";
-  e === NLJ.SELECT ? t = "fake_cursor--selectCursorUI3--FjJsi fake_cursor--cursor--xDDWs" : e === NLJ.DROPPER_COLOR && (t = "fake_cursor--eyedropperCursor--uXak0 fake_cursor--cursor--xDDWs");
+  e === DesignGraphElements.SELECT ? t = "fake_cursor--selectCursorUI3--FjJsi fake_cursor--cursor--xDDWs" : e === DesignGraphElements.DROPPER_COLOR && (t = "fake_cursor--eyedropperCursor--uXak0 fake_cursor--cursor--xDDWs");
   let r = f[e];
   return r ? jsx(oW, {
     className: t,

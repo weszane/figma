@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { w3z } from "../figma_app/763686";
+import { HandoffBindingsCpp } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { ty, HD } from "../figma_app/191804";
@@ -24,7 +24,7 @@ export function $$m1(e, t) {
     let r = m && ("light" === m || "dark" === m) ? m : "dark";
     if (!e) return g && !ty(g) ? HD(g) ? "dark" : "light" : r;
     globalPerfTimer.start("dev_mode_calculate_component_color");
-    let n = t ? w3z.getApproximatePlaygroundNodeColor() : w3z.getApproximateNodeColor(e);
+    let n = t ? HandoffBindingsCpp.getApproximatePlaygroundNodeColor() : HandoffBindingsCpp.getApproximateNodeColor(e);
     let i = globalPerfTimer.stop("dev_mode_calculate_component_color");
     i && trackEventAnalytics("dev_mode_calculate_component_color", {
       elapsedMs: i

@@ -2,8 +2,8 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { gY } from "../figma_app/566371";
@@ -21,7 +21,7 @@ import { M4, IT } from "../905/713695";
 import { UE } from "../figma_app/345997";
 import { Rs } from "../figma_app/761870";
 import { fm, X4, Cn, by, UI } from "../c5e2cae0/453906";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
 import { lQ } from "../905/934246";
 import { Wi } from "../figma_app/162641";
@@ -195,7 +195,7 @@ let G = M4.Mutation(async (e, {
     recipients
   });
 });
-let $$z0 = Ju(function ({
+let $$z0 = registerModal(function ({
   planType: e,
   planId: t,
   ...a
@@ -235,7 +235,7 @@ let $$z0 = Ju(function ({
       })
     }), jsx(_$$Y, {
       direction: "vertical",
-      children: I.map(e => jsx(_$$S, {
+      children: I.map(e => jsx(Checkbox, {
         disabled: V || "loaded" !== T.status,
         checked: M.has(e),
         onChange: t => {
@@ -243,7 +243,7 @@ let $$z0 = Ju(function ({
           t ? a.add(e) : a.$$delete(e);
           O(a);
         },
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           className: _$$s.fontMedium.$,
           children: $(e).label
         }),

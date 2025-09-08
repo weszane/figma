@@ -1,10 +1,10 @@
-import { xLh, zuo } from "../figma_app/763686";
+import { CurveType, AnimationBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 var $$n1;
 (e => {
   function t(e, t, i) {
     return {
-      type: xLh.SPRING,
+      type: CurveType.SPRING,
       mass: e,
       stiffness: t,
       damping: i
@@ -12,20 +12,20 @@ var $$n1;
   }
   e.forLinear = function (e) {
     return {
-      type: xLh.LINEAR,
+      type: CurveType.LINEAR,
       duration: e
     };
   };
   e.forBezier = function (e, t) {
     return {
-      type: xLh.BEZIER,
+      type: CurveType.BEZIER,
       easingType: e,
       duration: t
     };
   };
   e.forOpacityOscillation = function (e, t, i, n) {
     return {
-      type: xLh.OSCILLATION,
+      type: CurveType.OSCILLATION,
       numOscillations: e,
       lowValue: t,
       hiValue: i,
@@ -34,7 +34,7 @@ var $$n1;
   };
   e.forTransformOscillation = function (e, t, i, n) {
     return {
-      type: xLh.OSCILLATION,
+      type: CurveType.OSCILLATION,
       numOscillations: e,
       lowValueTransform: t,
       hiValueTransform: i,
@@ -44,7 +44,7 @@ var $$n1;
   e.forSpring = t;
   e.forSpringBounciness = function (e, t) {
     return {
-      type: xLh.SPRING,
+      type: CurveType.SPRING,
       bounciness: e,
       duration: t
     };
@@ -96,7 +96,7 @@ export function $$d3(e) {
   });
 }
 export function $$c4() {
-  0 !== s && (zuo.cancelAnimation(s.toString()), s = 0);
+  0 !== s && (AnimationBindings.cancelAnimation(s.toString()), s = 0);
 }
 export const Oo = $$l0;
 export const _E = $$n1;

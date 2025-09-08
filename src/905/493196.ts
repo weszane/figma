@@ -5,9 +5,9 @@ import { J } from "../905/614223";
 import { DP } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { S as _$$S } from "../figma_app/215667";
-import { V } from "../905/21985";
-import { e as _$$e } from "../905/786321";
-import { q } from "../905/751750";
+import { Description } from "../905/21985";
+import { generateInputId } from "../905/786321";
+import { useSelectionProvider } from "../905/751750";
 import { l as _$$l } from "../905/479687";
 import { r as _$$r } from "../905/571562";
 import { a as _$$a } from "../905/339331";
@@ -120,8 +120,8 @@ export let $$V8 = forwardRef(({
   description: t,
   ...i
 }, n) => {
-  let [a, s] = q();
-  let o = _$$e(a);
+  let [a, s] = useSelectionProvider();
+  let o = generateInputId(a);
   return jsx(s, {
     value: a,
     children: jsxs("div", {
@@ -130,7 +130,7 @@ export let $$V8 = forwardRef(({
         id: o,
         ...i,
         ref: n
-      }), t && jsx(V, {
+      }), t && jsx(Description, {
         children: t
       })]
     })

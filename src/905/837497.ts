@@ -1,20 +1,20 @@
 import { NC } from "../905/17179";
 import { logWarning } from "../905/714362";
 import { P, o as _$$o } from "../905/717906";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Cx, x2, of } from "../figma_app/714946";
-import { Gb, n_ } from "../figma_app/155287";
+import { getPluginAllowListKey, getWidgetAllowListKey } from "../figma_app/155287";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 import { Qi } from "../figma_app/559491";
 let $$p1 = P;
 let $$m7 = _$$o;
-let $$h3 = nF((e, t) => {
+let $$h3 = createOptimistThunk((e, t) => {
   let i = t.orgId || e.getState().currentUserOrgId;
   if (!i) return;
   let n = e.getState();
   let a = n.openFile?.key ?? null;
-  let s = Gb(i, a);
+  let s = getPluginAllowListKey(i, a);
   e.dispatch(Cx({
     key: s
   }));
@@ -44,12 +44,12 @@ let $$h3 = nF((e, t) => {
     }));
   });
 });
-let $$g6 = nF(async (e, t) => {
+let $$g6 = createOptimistThunk(async (e, t) => {
   let i = t.orgId || e.getState().currentUserOrgId;
   if (!i) return;
   let n = e.getState();
   let a = n.openFile?.key ?? null;
-  let s = n_(i, a);
+  let s = getWidgetAllowListKey(i, a);
   e.dispatch(Cx({
     key: s
   }));

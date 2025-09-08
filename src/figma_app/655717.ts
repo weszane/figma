@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import a from "../vendor/77708";
 import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { N9, qg } from "../figma_app/385874";
 import { sS } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
@@ -12,7 +12,7 @@ var s = a;
 var $$h11 = (e => (e.TOP = "top", e.RIGHT = "right", e.BOTTOM = "bottom", e.LEFT = "left", e))($$h11 || {});
 var $$m2 = (e => (e.TOP_LEFT = "top_left", e.TOP_RIGHT = "top_right", e.BOTTOM_LEFT = "bottom_left", e.BOTTOM_RIGHT = "bottom_right", e))($$m2 || {});
 function g(e) {
-  return gl(e) ? 0 : e ?? 0;
+  return isInvalidValue(e) ? 0 : e ?? 0;
 }
 function f(e) {
   return "NONE" !== e && "GRID" !== e;
@@ -144,7 +144,7 @@ export function $$I8(e) {
       strokePaints,
       strokeWeight
     } = r;
-    return borderStrokeWeightsIndependent && hS(borderStrokeWeightsIndependent) ? r[`border${s()(e)}Visible`] ? g(r[`border${s()(e)}Weight`]) : 0 : strokePaints && hS(strokePaints) && Array.isArray(strokePaints) && strokePaints.length && (strokePaints.filter(e => !!e && e.visible && (e.opacity ?? 0) > 0) || []).length ? g(strokeWeight) : 0;
+    return borderStrokeWeightsIndependent && isValidValue(borderStrokeWeightsIndependent) ? r[`border${s()(e)}Visible`] ? g(r[`border${s()(e)}Weight`]) : 0 : strokePaints && isValidValue(strokePaints) && Array.isArray(strokePaints) && strokePaints.length && (strokePaints.filter(e => !!e && e.visible && (e.opacity ?? 0) > 0) || []).length ? g(strokeWeight) : 0;
   });
 }
 export function $$S10() {

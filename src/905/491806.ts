@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { sYL } from "../figma_app/763686";
+import { GitReferenceType } from "../figma_app/763686";
 import { Kn } from "../905/535806";
 let s = [];
 export function $$o4(e) {
@@ -15,9 +15,9 @@ export function $$l2() {
 export function $$d1(e) {
   switch (e) {
     case Kn.TO_SOURCE:
-      return sYL.BRANCH;
+      return GitReferenceType.BRANCH;
     case Kn.FROM_SOURCE:
-      return sYL.SOURCE;
+      return GitReferenceType.SOURCE;
     default:
       throwTypeError(e);
   }

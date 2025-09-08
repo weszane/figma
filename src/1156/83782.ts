@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Hg } from "../figma_app/304955";
-import { y1 } from "../figma_app/492908";
+import { range } from "../figma_app/492908";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -15,10 +15,10 @@ import { h as _$$h } from "../905/207101";
 import { dP } from "../figma_app/119475";
 import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
-import { AS, to } from "../905/156213";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { tS } from "../figma_app/516028";
 import { aD } from "../figma_app/646357";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r6 } from "../905/542608";
 import { Tp } from "../905/753512";
 import { m3 } from "../905/66449";
@@ -36,7 +36,7 @@ import { D as _$$D } from "../905/169680";
 import { S1, Bo } from "../1156/867089";
 import { nc } from "../figma_app/570630";
 import { kC, dY, x1 } from "../1156/116225";
-let B = Ju(function (e) {
+let B = registerModal(function (e) {
   let t = hS(e);
   let {
     library,
@@ -59,7 +59,7 @@ let B = Ju(function (e) {
       file_key: u || ""
     });
     createLibraryImport(library);
-    l(AS());
+    l(hideModalHandler());
     onClose();
   }, [createLibraryImport, l, library, onClose, u]);
   return jsx(_$$bL, {
@@ -143,7 +143,7 @@ function G({
   let o = useDispatch();
   let c = tS();
   if ("loading" === allDsImportReadyLibrariesRequestStatus) return jsx(Fragment, {
-    children: y1(3).map(e => jsx(Q, {}, e))
+    children: range(3).map(e => jsx(Q, {}, e))
   });
   let d = allDsImportReadyLibraries || [];
   return 0 === d.length ? null : jsxs("div", {
@@ -180,7 +180,7 @@ function G({
               library_key: n.library_key,
               file_key: c || ""
             });
-            t ? (e(), o(to({
+            t ? (e(), o(showModalHandler({
               type: B,
               data: {
                 library: n
@@ -246,7 +246,7 @@ function H() {
     })
   });
 }
-export let $$W0 = Ju(function (e) {
+export let $$W0 = registerModal(function (e) {
   let {
     defaultPosition,
     onCloseCallback,
@@ -255,7 +255,7 @@ export let $$W0 = Ju(function (e) {
   let l = useDispatch();
   let d = useCallback(() => {
     onCloseCallback();
-    l(AS());
+    l(hideModalHandler());
   }, [l, onCloseCallback]);
   return jsx(bL, {
     defaultPosition,
@@ -279,5 +279,5 @@ export let $$W0 = Ju(function (e) {
       })]
     })
   });
-}, "ChatLibrarySelectorOverlay", ZU.YES);
+}, "ChatLibrarySelectorOverlay", ModalSupportsBackground.YES);
 export const u = $$W0;

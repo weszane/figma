@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import { Ez5, yTM, WXh } from "../figma_app/763686";
+import { AppStateTsApi, DrawingElementType, VisibilityCondition } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { vx } from "../figma_app/175258";
-import { Y5 } from "../figma_app/455680";
-import { _W, oV, gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback, MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { zj, Gt } from "../905/275640";
 import { KH } from "../figma_app/722362";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { zk } from "../figma_app/198712";
 import { a2 } from "../figma_app/762558";
 import { om } from "../figma_app/395097";
@@ -61,14 +61,14 @@ export function $$g13() {
   };
 }
 export function $$f4() {
-  return ut(Ez5?.propertiesPanelState().strokePanelMode, yTM.NONE);
+  return getObservableValue(AppStateTsApi?.propertiesPanelState().strokePanelMode, DrawingElementType.NONE);
 }
 export function $$E2() {
-  return ut(Ez5?.propertiesPanelState().strokePanelTerminalPointCount, 0);
+  return getObservableValue(AppStateTsApi?.propertiesPanelState().strokePanelTerminalPointCount, 0);
 }
 export function $$y0(e, t, r) {
   let n = A8(r);
-  return !(e && vx(e, "TABLE")) && (n || _W(t, []).length > 0 || t === oV);
+  return !(e && vx(e, "TABLE")) && (n || valueOrFallback(t, []).length > 0 || t === MIXED_MARKER);
 }
 export function $$b5() {
   let {
@@ -79,20 +79,20 @@ export function $$b5() {
   return $$y0(numSelectedByType, strokePaints, inheritStyleKey);
 }
 export function $$T11(e, t, r = zk.YES) {
-  let n = _W(e, []);
+  let n = valueOrFallback(e, []);
   if (n.length > 0 && !n.find(e => e.visible)) {
     let e = n.map(e => ({
       ...e,
       visible: !0
     }));
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       strokePaints: e
     }, {
       shouldCommit: zk.NO,
-      overwrite: WXh.ONLY_WHEN_NOT_EMPTY
+      overwrite: VisibilityCondition.ONLY_WHEN_NOT_EMPTY
     });
   }
-  Y5.updateSelectionProperties(t, {
+  fullscreenValue.updateSelectionProperties(t, {
     shouldCommit: r
   });
   a2("strokePaints");
@@ -125,10 +125,10 @@ export function $$v7(e) {
 }
 export let $$A8 = 1e3;
 export function $$x9(e) {
-  return e !== yTM.WASHI_TAPE;
+  return e !== DrawingElementType.WASHI_TAPE;
 }
 export function $$N1(e) {
-  if (gl(e)) return oV;
+  if (isInvalidValue(e)) return MIXED_MARKER;
   switch (e) {
     case "NONE":
     case "ROUND":
@@ -139,10 +139,10 @@ export function $$N1(e) {
   }
 }
 export function $$C10(e) {
-  return e ? gl(e) ? oV : 0 === e.length ? "LINE" : 2 !== e.length ? "CUSTOM_DASH" : 0 === e[0] && 0 === e[1] ? "LINE" : "SIMPLE_DASH" : "LINE";
+  return e ? isInvalidValue(e) ? MIXED_MARKER : 0 === e.length ? "LINE" : 2 !== e.length ? "CUSTOM_DASH" : 0 === e[0] && 0 === e[1] ? "LINE" : "SIMPLE_DASH" : "LINE";
 }
 export function $$w12(e, t, r, n) {
-  return t && e === yTM.VECTOR && "LINE" !== $$C10(n) ? t : r;
+  return t && e === DrawingElementType.VECTOR && "LINE" !== $$C10(n) ? t : r;
 }
 export const Fc = $$y0;
 export const Hd = $$N1;

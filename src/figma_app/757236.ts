@@ -4,7 +4,7 @@ import a, { zw } from "../905/585727";
 import { assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../905/752260";
-import { biQ } from "../figma_app/763686";
+import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
@@ -40,7 +40,7 @@ export function $$D0() {
   } = a;
   let [u, _] = useState("");
   return (useEffect(() => {
-    r.state === _$$w.SELECTION_OK && state === qy.INITIAL ? t(!!(biQ && biQ.repeatedContentFillAvailableBindings())) : r.state !== _$$w.SELECTION_OK && t(!1);
+    r.state === _$$w.SELECTION_OK && state === qy.INITIAL ? t(!!(ComponentPropsAiCPPBindings && ComponentPropsAiCPPBindings.repeatedContentFillAvailableBindings())) : r.state !== _$$w.SELECTION_OK && t(!1);
   }, [r.state, state, s]), r.state === _$$w.SELECTION_OK || state !== qy.INITIAL) ? e ? jsx($$F, {
     prompt: u,
     onChangePrompt: _
@@ -352,7 +352,7 @@ export function $$U1() {
         actionIcon: jsx(_$$c, {}),
         actionLabel: renderI18nText("fullscreen_actions.ai_content_fill.replace_content"),
         onPerform: () => {
-          biQ && biQ.repeatedContentFillAvailableBindings() && start({
+          ComponentPropsAiCPPBindings && ComponentPropsAiCPPBindings.repeatedContentFillAvailableBindings() && start({
             guids: [],
             numExampleRows: 1,
             source: "ACTIONS_MENU"

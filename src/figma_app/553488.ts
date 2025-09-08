@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ez5, Egt, Zdr } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { AppStateTsApi, SceneGraphHelpers, SlidesAiBindings } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { logError } from "../905/714362";
 import { Point } from "../905/736624";
@@ -8,7 +8,7 @@ import { f as _$$f } from "../905/412913";
 import { k8 } from "../figma_app/49598";
 import { Bs } from "../figma_app/933328";
 import { Hx } from "../figma_app/147952";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { $A, vt } from "../905/862883";
 import { Y } from "../figma_app/526287";
 import { q } from "../figma_app/446378";
@@ -19,8 +19,8 @@ function y(e, t) {
 }
 let b = _$$f();
 export function $$T7(e) {
-  l7.system("setup-document-slide-theme", () => {
-    Ez5 && Ez5.slideThemeLibBindings().setDocumentTemplateLibraryKey(e);
+  permissionScopeHandler.system("setup-document-slide-theme", () => {
+    AppStateTsApi && AppStateTsApi.slideThemeLibBindings().setDocumentTemplateLibraryKey(e);
   });
 }
 export function $$I1({
@@ -29,11 +29,11 @@ export function $$I1({
   slideId: r
 }) {
   t();
-  l7.system("setup-slide-theme", () => {
-    if (!Ez5) return;
-    let t = Ez5.slideThemeLibBindings().remapSlideToLocalTheme(r);
-    Xi(t) && Ez5.slideThemeLibBindings().setActiveTheme(t);
-    Ez5?.slideThemeLibBindings().setDocumentTemplateLibraryKey(e);
+  permissionScopeHandler.system("setup-slide-theme", () => {
+    if (!AppStateTsApi) return;
+    let t = AppStateTsApi.slideThemeLibBindings().remapSlideToLocalTheme(r);
+    Xi(t) && AppStateTsApi.slideThemeLibBindings().setActiveTheme(t);
+    AppStateTsApi?.slideThemeLibBindings().setDocumentTemplateLibraryKey(e);
   });
 }
 export function $$S0({
@@ -60,10 +60,10 @@ export function $$S0({
       y: -1 / 0
     });
     let g = d[0];
-    if (!g || !Egt || !Ez5) return;
-    Ez5.canvasGrid()?.insertChildAtCoord(g, row, col, y(t, e.isHubFile));
+    if (!g || !SceneGraphHelpers || !AppStateTsApi) return;
+    AppStateTsApi.canvasGrid()?.insertChildAtCoord(g, row, col, y(t, e.isHubFile));
     let f = getSingletonSceneGraph().get(g);
-    f && (Egt.replaceSelection([f.guid], !0), f.isExpanded = !0);
+    f && (SceneGraphHelpers.replaceSelection([f.guid], !0), f.isExpanded = !0);
     $$I1({
       libraryKey: e.library_key,
       subscribeToLibrary: l,
@@ -73,9 +73,9 @@ export function $$S0({
       hubFileId: b(e)
     }));
     $$A8(a, e);
-    Ez5.singleSlideView().isFocusedNodeViewEnabled() || ["OVERLAY_MODAL", "BOARD_TO_DECK"].includes(t) ? Ez5.singleSlideView().focusNodeInFocusedNodeView(g, !0) : (setTimeout(() => {
-      Ez5?.singleSlideView().isFocusedNodeViewEnabled() || Ez5?.singleSlideView().panToNodeIfOutsideViewport(g, .6);
-    }, 0), Y5.triggerAction("commit"));
+    AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled() || ["OVERLAY_MODAL", "BOARD_TO_DECK"].includes(t) ? AppStateTsApi.singleSlideView().focusNodeInFocusedNodeView(g, !0) : (setTimeout(() => {
+      AppStateTsApi?.singleSlideView().isFocusedNodeViewEnabled() || AppStateTsApi?.singleSlideView().panToNodeIfOutsideViewport(g, .6);
+    }, 0), fullscreenValue.triggerAction("commit"));
   };
 }
 export function $$v6({
@@ -97,7 +97,7 @@ export function $$v6({
     col
   } = a();
   let c = t[0];
-  c && Ez5 && (Ez5.canvasGrid().insertChildAtCoord(c, row, col, y(r, e.isHubFile)), $$I1({
+  c && AppStateTsApi && (AppStateTsApi.canvasGrid().insertChildAtCoord(c, row, col, y(r, e.isHubFile)), $$I1({
     libraryKey: e.library_key,
     subscribeToLibrary: s,
     slideId: c
@@ -125,17 +125,17 @@ export function $$x5({
   editScopeType: n,
   module: s
 }) {
-  let o = nc(n, r, t => {
+  let o = scopeAwareFunction(n, r, t => {
     if (!t.length) return;
     let r = t[0];
     if (!r) return;
-    Zdr?.transferPresetToHiddenFrame(r);
-    let n = Ez5?.slideThemeLibBindings();
+    SlidesAiBindings?.transferPresetToHiddenFrame(r);
+    let n = AppStateTsApi?.slideThemeLibBindings();
     let a = n?.remapSlideToLocalTheme(r);
     a && Xi(a) && n?.setActiveTheme(a);
     n?.setDocumentTemplateLibraryKey(s.library_key);
     e?.(r);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
   });
   t(Bs({
     item: s,

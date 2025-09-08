@@ -8,7 +8,7 @@ import { memo, useState, useCallback, useEffect, useRef, useMemo, createContext,
 import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { i as _$$i } from "../905/718764";
-import { Ez5, NVY, NLJ, XJn, AZ4, glU, biQ, Egt, bbV, ruz, uQ6, Mpt, m1T, CT8 } from "../figma_app/763686";
+import { AppStateTsApi, ColorFormatEnum, DesignGraphElements, FirstDraftHelpers, AssetSource, Fullscreen, ComponentPropsAiCPPBindings, SceneGraphHelpers, UiParserHelpers, ImageToolsBindings, ActionType, DesignToBuzzHelpers, LayoutTabType, ContentFillNudgesStateBindings } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomValueAndSetter, createLocalStorageAtom, createRemovableAtomFamily, useAtomWithSubscription, AY, Xr } from "../figma_app/27355";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { F as _$$F } from "../905/302958";
@@ -77,11 +77,11 @@ import { VU } from "../905/625959";
 import { UK } from "../figma_app/740163";
 import { eY as _$$eY, KH, f4, p8 } from "../figma_app/722362";
 import { sZ as _$$sZ, dq } from "../905/845253";
-import { J2 } from "../figma_app/84367";
-import { nx as _$$nx, qH, DM, AG, Ar } from "../figma_app/300692";
+import { getObservableOrFallback } from "../figma_app/84367";
+import { injectHtmlOrUiFiles, PluginPermissions, getPluginByFileId, filterArrayByEditorType, getCurrentPluginVersion } from "../figma_app/300692";
 import { R as _$$R2 } from "../figma_app/612938";
 import { l as _$$l } from "../905/202425";
-import { FW, bH, ZQ, k0 } from "../figma_app/155287";
+import { ManifestEditorType, isPrivatePlugin, hasLocalFileId, manifestContainsWidget } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { vg, Yh, c1 } from "../figma_app/357047";
@@ -115,7 +115,7 @@ import { isDesignOrIllustration, FEditorType } from "../figma_app/53721";
 import { o8 as _$$o2 } from "../905/622391";
 import { gH } from "../figma_app/985200";
 import { P as _$$P } from "../905/545265";
-import { td as _$$td } from "../figma_app/181241";
+import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { T5, D6, X$ } from "../figma_app/465071";
 import { wo } from "../figma_app/109130";
@@ -135,7 +135,7 @@ import { g as _$$g3 } from "../905/125190";
 import { _ as _$$_2 } from "../7021/243271";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P2 } from "../vendor/348225";
-import { AS, to as _$$to, hm as _$$hm, Lo as _$$Lo } from "../905/156213";
+import { hideModalHandler, showModalHandler, updateModal, popModalStack } from "../905/156213";
 import { iZ as _$$iZ, TA } from "../905/372672";
 import { J as _$$J } from "../905/273120";
 import { r as _$$r } from "../905/189361";
@@ -145,7 +145,7 @@ import { a as _$$a } from "../figma_app/380422";
 import { U as _$$U2 } from "../figma_app/751728";
 import { $n } from "../905/521428";
 import { Point } from "../905/736624";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Ao } from "../905/748636";
 import { V as _$$V4 } from "../905/453354";
 import { ZC } from "../figma_app/39751";
@@ -219,10 +219,10 @@ import { Rz } from "../905/990497";
 import { T as _$$T4 } from "../905/172092";
 import { zY, S6 } from "../figma_app/664693";
 import { G1 } from "../figma_app/691470";
-import { xN } from "../figma_app/492908";
+import { nearlyEqual } from "../figma_app/492908";
 import { t as _$$t3 } from "../905/150656";
 import { oB as _$$oB, qN, w_ } from "../figma_app/273493";
-import { l7 as _$$l2 } from "../905/189185";
+import { permissionScopeHandler as _$$l2 } from "../905/189185";
 import { zN, k9 } from "../905/19536";
 import rF from "classnames";
 import { ei as _$$ei } from "../figma_app/9054";
@@ -234,7 +234,7 @@ import { Pt as _$$Pt } from "../figma_app/806412";
 import { YJ } from "../figma_app/50224";
 import { Db, AR as _$$AR } from "../figma_app/705029";
 import { getSessionStorage } from "../905/657224";
-import { uW } from "../905/426868";
+import { loadPluginFont } from "../905/426868";
 import { z as _$$z2 } from "../figma_app/153551";
 import { YB, nd as _$$nd, $L as _$$$L, uq, oP as _$$oP, HS } from "../figma_app/857146";
 import { tb as _$$tb, l9 as _$$l3, N_ } from "../9410/234038";
@@ -251,7 +251,7 @@ import { Dp, WX, TM } from "../9410/423538";
 import { Vh } from "../9410/671180";
 import { SV, gC } from "../9410/483857";
 import { sF as _$$sF } from "../figma_app/193952";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { KK, h8 } from "../figma_app/144974";
 import { XG, nj as _$$nj } from "../figma_app/360824";
 import { k as _$$k3 } from "../905/788559";
@@ -260,7 +260,7 @@ import { sI as _$$sI } from "../9410/797086";
 import n_ from "../vendor/950573";
 import { bL as _$$bL, c$ } from "../905/867927";
 import { q as _$$q3 } from "../905/932270";
-import { J as _$$J4 } from "../905/270045";
+import { Label } from "../905/270045";
 import { A as _$$A5 } from "../905/920165";
 import { K as _$$K3 } from "../905/443068";
 import { Z as _$$Z2 } from "../905/606826";
@@ -318,7 +318,7 @@ import { y as _$$y3, O as _$$O4 } from "../figma_app/13082";
 import { t as _$$t5 } from "../905/605191";
 import { WS, jp } from "../905/370597";
 import { LZ, oy as _$$oy } from "../figma_app/964367";
-import { nj as _$$nj2 } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { UD } from "../figma_app/624361";
 import { _G, Pv } from "../905/619652";
 import { A as _$$A0 } from "../905/929620";
@@ -455,7 +455,7 @@ async function eZ(e, t, i) {
             ...e
           }, Object.entries(t))) if (void 0 === e[r] || null === e[r]) {
             if (e[r] = n, Array.isArray(e[r])) for (let t of e[r]) delete t.index;
-          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n; else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n; else if (Array.isArray(e[r]) && Array.isArray(n)) {
+          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n;else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n;else if (Array.isArray(e[r]) && Array.isArray(n)) {
             let t = e[r];
             for (let e = 0; e < n.length; e++) {
               let {
@@ -487,7 +487,7 @@ async function eZ(e, t, i) {
 }
 let tr = new class {
   sendFeatureRequest(e) {
-    return XHR.post("/api/ask_figma/request_feature", _$$td.toAPIParameters(e));
+    return XHR.post("/api/ask_figma/request_feature", APIParameterUtils.toAPIParameters(e));
   }
 }();
 var tn = (e => (e.Idle = "idle", e.Loading = "loading", e.Error = "error", e))(tn || {});
@@ -758,7 +758,7 @@ async function ty(e, t) {
     </script>
     <div id="root"></div>
     `;
-  let a = t ? _$$nx(e, n) : e;
+  let a = t ? injectHtmlOrUiFiles(e, n) : e;
   let s = mv();
   _$$iu.currentPluginRunID = s;
   E9({
@@ -777,7 +777,7 @@ async function ty(e, t) {
     isWidget: !1,
     name: "Assistant plugin",
     openFileKey: i,
-    permissions: qH.forFirstPartyPlugin(),
+    permissions: PluginPermissions.forFirstPartyPlugin(),
     pluginID: "",
     pluginRunID: s,
     pluginVersionID: "0",
@@ -787,7 +787,7 @@ async function ty(e, t) {
     titleIconURL: "",
     userID: r,
     vmType: "cppvm",
-    editorType: [FW.FIGMA],
+    editorType: [ManifestEditorType.FIGMA],
     incrementalSafeApi: !1,
     enableNativeJsx: !1,
     enableResponsiveSetHierarchyMutations: !1
@@ -887,7 +887,7 @@ async function tC(e, t, i, r) {
       o.push(t);
     }
     let l = (await eZ(s, o, r)).getReader();
-    for (; ;) {
+    for (;;) {
       let {
         done,
         value
@@ -998,7 +998,7 @@ function t0(e) {
           obj: e,
           depth
         });
-      } catch (e) { }
+      } catch (e) {}
       return obj.startsWith("data:image") ? jsx(t$, {
         url: obj
       }) : obj.length > 300 && obj.match(/^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/) ? jsx(t$, {
@@ -1062,13 +1062,13 @@ function t2({
     })
   });
 }
-let t3 = Ju(function ({
+let t3 = registerModal(function ({
   messages: e
 }) {
   let t = useDispatch();
   return jsx(Ao, {
     onClose: () => {
-      t(AS());
+      t(hideModalHandler());
     },
     initialPosition: new Point(0, 0),
     initialWidth: 400,
@@ -1093,7 +1093,7 @@ let t3 = Ju(function ({
       })]
     })
   });
-}, "AssistantDebugModal", ZU.YES);
+}, "AssistantDebugModal", ModalSupportsBackground.YES);
 function t5() {
   let [e, t] = useState("");
   let [i, r] = useAtomValueAndSetter(ta);
@@ -1102,10 +1102,10 @@ function t5() {
   _$$b();
   let d = useCallback(() => {
     if (l && l.type === t3.type) {
-      o(AS());
+      o(hideModalHandler());
       return;
     }
-    o(_$$to({
+    o(showModalHandler({
       type: t3,
       data: {
         messages: i.messages
@@ -1113,7 +1113,7 @@ function t5() {
     }));
   }, [i.messages, o, l]);
   useEffect(() => {
-    l?.type !== t3.type || o(_$$hm({
+    l?.type !== t3.type || o(updateModal({
       type: t3.type,
       data: {
         messages: i.messages
@@ -1367,7 +1367,7 @@ function it({
   try {
     let i = new DOMParser().parseFromString(e, "text/xml").getElementsByTagName("user_input");
     i.length > 0 && (t = i[0].textContent || "");
-  } catch { }
+  } catch {}
   return jsx("div", {
     children: t.split("\n").map((e, t) => jsxs("span", {
       children: [e, jsx("br", {})]
@@ -1442,7 +1442,7 @@ let iA = [["theme-light-mode", _$$b4.COMMON_SETTINGS], ["theme-dark-mode", _$$b4
 let iO = [["request-to-edit", _$$b4.COLLABORATION_TOOLS], ["set-tool-comments", _$$b4.COLLABORATION_TOOLS], ["present-as-prototype", _$$b4.COLLABORATION_TOOLS], ["zoom-to-fit", _$$b4.VIEWER_TOOLS], ["page-next", _$$b4.VIEWER_TOOLS], ["export-selected-exportables", _$$b4.VIEWER_TOOLS], ["toggle-rulers", _$$b4.VIEWER_TOOLS]];
 var iL = (e => (e.DESIGN_EDITOR_AI = "DESIGN_EDITOR_AI", e.DESIGN_EDITOR_NO_AI = "DESIGN_EDITOR_NO_AI", e.DESIGN_VIEWER = "DESIGN_VIEWER", e.DEV_MODE = "DEV", e.VARIABLES_TABLE = "VARIABLES_TABLE", e.COMPONENT_BROWSER = "COMPONENT_BROWSER", e.NONE = "NONE", e))(iL || {});
 function iR() {
-  let e = Ez5?.singleSlideView().isFocusedNodeViewFocused();
+  let e = AppStateTsApi?.singleSlideView().isFocusedNodeViewFocused();
   let t = Vr();
   let i = useSelector(Sh);
   return (!t || !t.isSlide || !e) && i.length > 0;
@@ -1584,7 +1584,7 @@ async function r$(e, t, i) {
       style: a?.style ?? i.fontName.style
     };
     try {
-      await uW(s);
+      await loadPluginFont(s);
       _$$l2.user("first-draft-theme-modal-adjust-font-family", () => {
         i.fontName = s;
       });
@@ -1594,7 +1594,7 @@ async function r$(e, t, i) {
         style: "Regular"
       };
       try {
-        await uW(e);
+        await loadPluginFont(e);
         _$$l2.user("first-draft-theme-modal-adjust-font-family", () => {
           i.fontName = e;
         });
@@ -1906,7 +1906,7 @@ function nV({
 }) {
   let l = useCallback(() => {
     t(o.color);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
   }, [o.color, t]);
   return jsx(nU, {
     primaryAction: l,
@@ -2003,7 +2003,7 @@ var nX = (e => (e.TITLE = "title", e.BODY = "body", e.LABLE = "label", e))(nX ||
 let nZ = "theme_editor--svgText--yyKtR";
 let nQ = createContext({
   activeTab: nq.COLOR,
-  onTabChange: () => { },
+  onTabChange: () => {},
   recordingKey: void 0
 });
 function n$({
@@ -2035,7 +2035,7 @@ function n$({
   });
 }
 function n6(e, t) {
-  return t === NVY.HSL ? _$$oB(e) : qN(e);
+  return t === ColorFormatEnum.HSL ? _$$oB(e) : qN(e);
 }
 function n7({
   brandColor: e,
@@ -2048,7 +2048,7 @@ function n7({
   let c = useRef(document.getElementById(t || "fullscreen-root"));
   kz(Uz.ESCAPE, r);
   kz(Uz.BACKSPACE, r, document.activeElement?.tagName.toLowerCase() !== "input");
-  let [u, p] = useState(NVY.HEX);
+  let [u, p] = useState(ColorFormatEnum.HEX);
   let [h, m] = useState(n6(e, u));
   let [f, g] = useState({
     left: 0,
@@ -2069,7 +2069,7 @@ function n7({
   _$$wY(c, () => x());
   let b = _$$A4(async (e, t) => {
     await i(e);
-    t && Y5.triggerAction("commit");
+    t && fullscreenValue.triggerAction("commit");
   }, 100);
   let C = useCallback((e, t) => {
     m(e);
@@ -2087,7 +2087,7 @@ function n7({
     hideOpacity: !0,
     colorFormat: u,
     dispatch: o,
-    currentTool: NLJ.CODE_BLOCK,
+    currentTool: DesignGraphElements.CODE_BLOCK,
     dropdownShown: l,
     onColorChange: v,
     canAcceptStyles: !1,
@@ -2121,17 +2121,17 @@ function n7({
             colorFormat: u,
             onColorFormatChange: e => {
               p(e);
-              "l" in h && e !== NVY.HSL ? m(qN(w_(h))) : e !== NVY.HSL || "l" in h || m(_$$oB(w_(h)));
+              "l" in h && e !== ColorFormatEnum.HSL ? m(qN(w_(h))) : e !== ColorFormatEnum.HSL || "l" in h || m(_$$oB(w_(h)));
             },
             dispatch: o,
             dropdownShown: l
-          }), u === NVY.HEX && jsx(_$$dt, {
+          }), u === ColorFormatEnum.HEX && jsx(_$$dt, {
             ...E
-          }), u === NVY.RGB && jsx(VA, {
+          }), u === ColorFormatEnum.RGB && jsx(VA, {
             ...E
-          }), u === NVY.CSS && jsx(he, {
+          }), u === ColorFormatEnum.CSS && jsx(he, {
             ...E
-          }), (u === NVY.HSL || u === NVY.HSB) && jsx(fC, {
+          }), (u === ColorFormatEnum.HSL || u === ColorFormatEnum.HSB) && jsx(fC, {
             ...E
           })]
         })]
@@ -2307,7 +2307,7 @@ let ae = {
       className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
-      }), jsx(_$$J4, {
+      }), jsx(Label, {
         className: _$$s3.opacity0_5.$,
         children: renderI18nText("first_draft.theme_panel.radius")
       }), jsx(_$$A5, {
@@ -2330,7 +2330,7 @@ let ae = {
       className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
-      }), jsx(_$$J4, {
+      }), jsx(Label, {
         className: _$$s3.opacity0_5.$,
         children: renderI18nText("first_draft.theme_panel.spacing")
       }), jsx(_$$A5, {
@@ -2835,7 +2835,7 @@ function af(e) {
       let n = f && f.getSharedPluginData(SV, "userPrompt") || "";
       let a = a_(f);
       let s = "LOCAL" === a.type;
-      let o = s ? XJn.getKitKey(a.pageId) : a.key;
+      let o = s ? FirstDraftHelpers.getKitKey(a.pageId) : a.key;
       let l = allUsableKitEntries.find(e => "key" in e.dsKitKey && e.dsKitKey.key === o);
       Object.assign(r, {
         dsKitType: a.type,
@@ -2888,7 +2888,7 @@ function af(e) {
         if (!r) return [];
         try {
           return _$$z.array(Db).parse(JSON.parse(r));
-        } catch { }
+        } catch {}
         return [];
       }(f.guid);
       let y = function (e) {
@@ -2928,7 +2928,7 @@ function af(e) {
       })(f.guid, _);
       let v = C.getReader();
       let E = [];
-      for (; ;) {
+      for (;;) {
         let {
           done,
           value
@@ -2994,7 +2994,7 @@ function af(e) {
           ax(t, "success");
           instrumentationRef.current.trackFinished("success");
           b(2);
-          Y5.triggerAction("commit");
+          fullscreenValue.triggerAction("commit");
           break;
         }
       }
@@ -3101,7 +3101,7 @@ function af(e) {
         type: _$$is.UNDO_MAKE_CHANGES,
         callback: () => {
           b(0);
-          Y5.triggerAction("undo");
+          fullscreenValue.triggerAction("undo");
           trackEventAnalytics("First Draft: Make Changes Undo", {
             file_key: c,
             clientLifecycleId: i
@@ -3212,7 +3212,7 @@ function ag({
     let e = ah(y?.guid ?? "", {
       pinnedRanges: v.current
     });
-    xN(_$$oB(N).h, _$$oB(e.brandColor).h, .01) && (e.brandColor = N);
+    nearlyEqual(_$$oB(N).h, _$$oB(e.brandColor).h, .01) && (e.brandColor = N);
     let t = U?.lastEditedAt ?? -1 / 0;
     (t > b.current || b.current - t > 1e3) && x({
       type: "EDIT_INFO_UPDATED",
@@ -3232,7 +3232,7 @@ function ag({
   let H = useCallback(e => {
     e !== k && (_$$l2.user("first-draft-switch-color-mode", () => {
       _$$t4(y, e, F_(g.brandColor));
-    }), K(k), Y5.triggerAction("commit"), x({
+    }), K(k), fullscreenValue.triggerAction("commit"), x({
       type: "SET_COLOR_MODE",
       payload: e
     }));
@@ -3241,7 +3241,7 @@ function ag({
   let V = useRef(null);
   let W = useRef(null);
   let Y = useCallback((e, t) => {
-    if (W.current) V.current = [e, W.current]; else {
+    if (W.current) V.current = [e, W.current];else {
       W.current = e;
       let i = F_(t);
       _$$l2.user("first-draft-apply-brand-color", () => {
@@ -3283,7 +3283,7 @@ function ag({
     _$$oP(C.current, e, E.current);
   }, 100);
   let $ = useCallback((e, t) => {
-    t.commit && Y5.triggerAction("commit");
+    t.commit && fullscreenValue.triggerAction("commit");
     e !== A && (Z(e), x({
       type: "SET_RADIUS",
       payload: e
@@ -3304,7 +3304,7 @@ function ag({
     HS(v.current, e, T.current);
   }, 100);
   let er = useCallback((e, t) => {
-    t.commit && Y5.triggerAction("commit");
+    t.commit && fullscreenValue.triggerAction("commit");
     e !== O && (ei(e), x({
       type: "SET_SPACING",
       payload: e
@@ -3325,7 +3325,7 @@ function ag({
   let es = useCallback(async e => {
     await r$(_$$lu.TITLE, e, L);
     en("title", e);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     y && x({
       type: "SET_TITLE_FONTS",
       payload: Mz(y, _$$BY(y)).title
@@ -3334,7 +3334,7 @@ function ag({
   let eo = useCallback(async e => {
     await r$(_$$lu.BODY, e, g.bodyFonts);
     en("body", e);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     y && x({
       type: "SET_BODY_FONTS",
       payload: Mz(y, _$$BY(y)).body
@@ -3343,7 +3343,7 @@ function ag({
   let el = useCallback(async e => {
     await r$(_$$lu.LABEL, e, g.labelFonts);
     en("label", e);
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     y && x({
       type: "SET_LABEL_FONTS",
       payload: Mz(y, _$$BY(y)).label
@@ -3450,11 +3450,11 @@ function ag({
 function a_(e) {
   let t = e.firstDraftData;
   if (t) {
-    if (t.kit.type === AZ4.LOCAL) return {
+    if (t.kit.type === AssetSource.LOCAL) return {
       type: "LOCAL",
-      pageId: XJn.getPageIdFromKitKey(t.kit.key) ?? ""
+      pageId: FirstDraftHelpers.getPageIdFromKitKey(t.kit.key) ?? ""
     };
-    if (t.kit.type === AZ4.LIBRARY) return {
+    if (t.kit.type === AssetSource.LIBRARY) return {
       type: "1P_LIBRARY",
       key: t.kit.key
     };
@@ -3666,7 +3666,7 @@ function ak(e) {
         let o = [];
         for (let l of [a, s]) {
           if (l?.type !== "FRAME" || l.size.x < 100 || l.size.y < 20) continue;
-          let a = XJn.findSimilarNodes(l.guid, e.guid, !1, !1, !0);
+          let a = FirstDraftHelpers.findSimilarNodes(l.guid, e.guid, !1, !1, !0);
           let s = [l, ...a.map(e => getSingletonSceneGraph().get(e)).filter(e => !!e)];
           let c = Array.from(_i(new Set(e.childrenGuids), new Set([l.guid, ...a])));
           if (s.length >= 2 && s.length >= e.childCount - 1 && c.length <= 1) {
@@ -3701,7 +3701,7 @@ function ak(e) {
     suggestedComponentTree,
     node
   } = function (e, t) {
-    let i = XJn.detachDesignForComponentize(e.guid, Object.keys(t));
+    let i = FirstDraftHelpers.detachDesignForComponentize(e.guid, Object.keys(t));
     let r = {};
     for (let [e, n] of Object.entries(t)) {
       let t = i.get(e);
@@ -3753,7 +3753,7 @@ function aN() {
         };
         let n = new Map();
         for (let a of e) {
-          let e = XJn.cloneNodeForComponentize(a.guid);
+          let e = FirstDraftHelpers.cloneNodeForComponentize(a.guid);
           let s = e.get(a.guid);
           if (!s) continue;
           let o = getSingletonSceneGraph().get(s);
@@ -3805,10 +3805,10 @@ function aN() {
                   return e;
                 }(guid, o));
                 if (!e || "FRAME" !== e.type && "INSTANCE" !== e.type || ("FRAME" === e.type && MR(e, t.icons), !e.isAlive)) continue;
-                let c = XJn.findSimilarNodes(e.guid, t.buildingBlocks.guid, !1, !0, !0).concat(XJn.findSimilarNodes(e.guid, t.atoms.guid, !1, !0, !0));
+                let c = FirstDraftHelpers.findSimilarNodes(e.guid, t.buildingBlocks.guid, !1, !0, !0).concat(FirstDraftHelpers.findSimilarNodes(e.guid, t.atoms.guid, !1, !0, !0));
                 let u = c[0] ? i.get(c[0]) : null;
                 if (!u) {
-                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name; else {
+                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name;else {
                     if (!(u = i.get(e.clone()))) throw Error("Failed to clone instance");
                     _$$T6(u);
                   }
@@ -3838,7 +3838,7 @@ function aN() {
           total: t.total
         }));
       }
-      Y5.commit();
+      fullscreenValue.commit();
       return {};
     }, [r]),
     progress: e
@@ -4007,7 +4007,7 @@ function aB(e) {
     close();
   }, [close, stop]);
   let m = useCallback(() => {
-    glU.triggerActionInUserEditScope("undo", {});
+    Fullscreen.triggerActionInUserEditScope("undo", {});
     close();
   }, [close]);
   let f = e.overrides?.state ?? state;
@@ -4104,7 +4104,7 @@ function aG(e) {
     close();
   }, [close, stop]);
   let m = useCallback(() => {
-    glU.triggerActionInUserEditScope("undo", {});
+    Fullscreen.triggerActionInUserEditScope("undo", {});
     close();
   }, [close]);
   let f = e.overrides?.state ?? state;
@@ -4428,26 +4428,26 @@ let aJ = async ({
       blendMode: "NORMAL"
     }];
     let i = getSingletonSceneGraph().createNode("TEXT");
-    for (let r of (i.name = "Results", biQ.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
+    for (let r of (i.name = "Results", ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
-        x: 200,
-        y: 200
-      }, i.fills = i.fills.concat([{
-        type: "SOLID",
-        color: {
-          r: 0,
-          g: 0,
-          b: 0,
-          a: 1
-        },
-        visible: !0,
-        opacity: 1,
-        blendMode: "NORMAL"
-      }]), t.appendChild(i), e.appendChild(t), l)) {
+      x: 200,
+      y: 200
+    }, i.fills = i.fills.concat([{
+      type: "SOLID",
+      color: {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      },
+      visible: !0,
+      opacity: 1,
+      blendMode: "NORMAL"
+    }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!yZ(t.expectedComponents, t.components)) {
-        let i = XJn.cloneNodeForComponentize(t.node.guid);
+        let i = FirstDraftHelpers.cloneNodeForComponentize(t.node.guid);
         let n = getSingletonSceneGraph().get(i.get(t.node.guid));
         if (!n) throw Error("Failed to clone node");
         n.name = t.node.name + ` (FNC: ${r.falseNegativeCount} FPC: ${r.falsePositiveCount} CC: ${r.correctCount})`;
@@ -4622,7 +4622,7 @@ function sc({
             maxLength: 100,
             onChange: e => {
               !function (e) {
-                if (d(e), 0 === e.length) g(null); else {
+                if (d(e), 0 === e.length) g(null);else {
                   let t = e.toLowerCase();
                   g(allUsableKitEntries.filter(e => sp(e).toLowerCase().includes(t)));
                 }
@@ -4825,7 +4825,7 @@ function sf({
         thumbnailUrl: e?.get(i.guid)?.imageURL ?? zs,
         altText: i.name,
         onClick: () => {
-          glU?.panToNode(i.guid, !1);
+          Fullscreen?.panToNode(i.guid, !1);
         },
         isUploading: e?.get(i.guid)?.promise !== null,
         onDelete: () => {
@@ -5112,7 +5112,7 @@ function sg({
   }, [u, s]);
   let _ = Array.from(_$$eb().values());
   let x = useCallback(e => {
-    Egt?.removeFromSelection([e]);
+    SceneGraphHelpers?.removeFromSelection([e]);
   }, []);
   let y = useCallback(() => 0 !== e.prompt.length, [e]);
   let b = getFeatureFlags().first_draft_direct_gen;
@@ -5283,7 +5283,7 @@ let sE = async ({
     skipSelection: WX(e)
   });
   if (o.error) {
-    XJn.clearFDScene();
+    FirstDraftHelpers.clearFDScene();
     return o.error;
   }
   if (o?.success && !o?.nodeId) throw Error(getI18nString("first_draft.no_design_generated"));
@@ -5388,7 +5388,7 @@ function sw({
   let X = _$$eb();
   al(!K && (state === qy.DONE || state === qy.ERROR));
   useEffect(() => () => {
-    XJn.clearFDScene();
+    FirstDraftHelpers.clearFDScene();
   }, []);
   let Z = useCallback(() => C.current, [C]);
   let ee = useCallback(async (e, t, i, r) => {
@@ -5454,8 +5454,8 @@ function sw({
         trackEventAnalytics("First Draft: Multiple Options Selected", {
           preset_name: e.modeId,
           clientLifecycleId: u,
-          isLocal: n === AZ4.LOCAL || null,
-          dsKitType: null !== n ? n === AZ4.LOCAL ? "LOCAL" : "1P_LIBRARY" : null,
+          isLocal: n === AssetSource.LOCAL || null,
+          dsKitType: null !== n ? n === AssetSource.LOCAL ? "LOCAL" : "1P_LIBRARY" : null,
           kitKey: r?.kit?.key ?? null,
           file_key: m
         }, {
@@ -5509,7 +5509,7 @@ function sw({
       },
       timeoutOverride: 6e4,
       aiTrackingContext
-    })), XJn?.clearFDScene(), B3(_$$JT.FIRST_DRAFT), v.current && Egt?.addToSelection([v.current]));
+    })), FirstDraftHelpers?.clearFDScene(), B3(_$$JT.FIRST_DRAFT), v.current && SceneGraphHelpers?.addToSelection([v.current]));
   }, [state, K, _, aiTrackingContext]), state) {
     case qy.INITIAL:
       return jsx(sg, {
@@ -5548,7 +5548,7 @@ function sw({
         if (KK() && !getFeatureFlags().first_draft_use_gemini && r.push({
           type: _$$is.MAKE_CHANGES,
           callback: () => {
-            XJn.clearFDScene();
+            FirstDraftHelpers.clearFDScene();
             z(!0);
           }
         }), ec && _$$A8(V, executionTrace), K) return null;
@@ -5946,7 +5946,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           l = updatedU;
           d = updatedV;
           let c = sink;
-          for (; ;) {
+          for (;;) {
             let e = predecessors[c];
             s[c] = e;
             let i = o[e];
@@ -5999,7 +5999,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           let i = s[t];
           let r = n[e];
           if (r && i?.imageSetForInsertion) {
-            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion); else if (sD(r)) {
+            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion);else if (sD(r)) {
               let e = d.createNode("RECTANGLE");
               e.name = r.name || r.type;
               e.size = {
@@ -6020,7 +6020,7 @@ async function sz(e, t, i, r, n, a, s, o) {
     _$$l2.ai("Removing placeholder image fills", () => {
       i.forEach(e => {
         let t = e.fills;
-        e.fills = t.filter(e => !("IMAGE" === e.type && e.image && e.image.hash && _$$nj2(e.image.hash) === sI));
+        e.fills = t.filter(e => !("IMAGE" === e.type && e.image && e.image.hash && sha1HexFromBytes(e.image.hash) === sI));
       });
     });
     return e;
@@ -6033,7 +6033,7 @@ async function sz(e, t, i, r, n, a, s, o) {
     h.x = t.x;
     h.y = t.y;
     e.setSelectionToSingleNode(h.guid);
-    glU.showSelectionOverlayImmediately();
+    Fullscreen.showSelectionOverlayImmediately();
   });
   return h;
 }
@@ -6205,7 +6205,7 @@ let sZ = async ({
       excludeImageData: !0,
       excludeVectorData: !0
     });
-    let o = await bbV?.generateNodeSegmentationFromWeb(t.node.guid);
+    let o = await UiParserHelpers?.generateNodeSegmentationFromWeb(t.node.guid);
     if (!o) throw Error("UiParserHelpers is undefined, failed to create segmentation for node");
     let m = {
       width: o.width,
@@ -6280,7 +6280,7 @@ function s1({
                     let a = getSingletonSceneGraph();
                     let s = a.getCurrentPage();
                     if (!s) return;
-                    let o = Y5.getViewportInfo();
+                    let o = fullscreenValue.getViewportInfo();
                     let l = new Point(o.offsetX - i / 2, o.offsetY - n / 2);
                     let {
                       base64,
@@ -6288,7 +6288,7 @@ function s1({
                     } = sU(t);
                     let p = await sK(a, s, l, i, n, base64, mimeType, e.name);
                     s.setSelectionToSingleNode(p.guid);
-                    glU.showSelectionOverlayImmediately();
+                    Fullscreen.showSelectionOverlayImmediately();
                   };
                   r.src = t;
                 }
@@ -6966,7 +6966,7 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       if (B3(_$$JT.REMOVE_BACKGROUND), Yh(debugState.getState().mirror.appModel, _$$JT.REMOVE_BACKGROUND)) {
-        let e = ruz?.getNodeImagePairsForEdit() ?? [];
+        let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
         _$$Ag(_$$JT.REMOVE_BACKGROUND, _$$J2, {
           source: "quick-actions",
           targets: e
@@ -6994,7 +6994,7 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       if (B3(_$$JT.UPSCALE_IMAGE), Yh(debugState.getState().mirror.appModel, _$$JT.UPSCALE_IMAGE)) {
-        let e = ruz?.getNodeImagePairsForEdit() ?? [];
+        let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
         _$$Ag(_$$JT.UPSCALE_IMAGE, _$$r3, {
           source: "quick-actions",
           targets: e
@@ -7016,7 +7016,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(_$$A10, {
-        source: uQ6.QUICK_ACTIONS
+        source: ActionType.QUICK_ACTIONS
       }),
       name: Sn.RENAME_LAYERS_TOAST
     },
@@ -7024,7 +7024,7 @@ let oi = [{
     beforeModuleOpen: () => {
       B3(_$$JT.AUTO_RENAME_LAYERS);
       Yh(debugState.getState().mirror.appModel, _$$JT.AUTO_RENAME_LAYERS) && _$$Ag(_$$JT.AUTO_RENAME_LAYERS, _$$Ay2, {
-        source: uQ6.QUICK_ACTIONS,
+        source: ActionType.QUICK_ACTIONS,
         overwriteNames: !1
       });
     }
@@ -7691,19 +7691,19 @@ function oN(e) {
   let a = _$$sZ();
   let s = RW();
   let o = _$$a5(a?.id, extension.plugin_id, s.loaded ? s.data?.workspaceId : void 0);
-  if (bH(extension) && a && a.name) return {
+  if (isPrivatePlugin(extension) && a && a.name) return {
     text: a.name
   };
-  if (ZQ(extension) && publishedExtension && AC(publishedExtension)) return {
+  if (hasLocalFileId(extension) && publishedExtension && AC(publishedExtension)) return {
     text: getI18nString("qa.extensions.in_review"),
     variant: _$$x5.BRAND
   };
-  if (ZQ(extension)) return {
+  if (hasLocalFileId(extension)) return {
     text: getI18nString("qa.extensions.development")
   };
-  if (canRun); else if (o) return {
+  if (canRun) ;else if (o) return {
     text: getI18nString("qa.extensions.approval_pending")
-  }; else if (canRequest) return {
+  };else if (canRequest) return {
     text: getI18nString("qa.extensions.needs_approval")
   };
   return null;
@@ -7741,7 +7741,7 @@ function oO(e) {
   });
 }
 let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
-let oP = () => { };
+let oP = () => {};
 function oF({
   item: e,
   searchQuery: t,
@@ -7759,7 +7759,7 @@ function oF({
   let {
     close
   } = cq();
-  let h = J2(UK().showQuickCommandRankDebug);
+  let h = getObservableOrFallback(UK().showQuickCommandRankDebug);
   let m = V2();
   let f = p8("keyboardShortcuts");
   let _ = useCallback(() => {
@@ -7957,14 +7957,14 @@ function oF({
       icon: function (e) {
         if ("plugins-menu-item" === e.name) {
           let t;
-          return (e.pluginId && (t = DM({
+          return (e.pluginId && (t = getPluginByFileId({
             idToSearch: e.pluginId,
             localExtensionsByFileId: void 0,
             publishedExtensions: {
               ...k,
               ...N
             }
-          })), t && !ZQ(t)) ? jsx(_$$V, {
+          })), t && !hasLocalFileId(t)) ? jsx(_$$V, {
             className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
             plugin: t,
             role: "presentation"
@@ -8073,7 +8073,7 @@ function oB({
             extensionType,
             extensionId
           } = e.extensionInfo;
-          let o = DM({
+          let o = getPluginByFileId({
             idToSearch: extensionId,
             localExtensionsByFileId: {},
             publishedExtensions: {
@@ -8084,8 +8084,8 @@ function oB({
           o && ("plugin" === extensionType ? n.push(o) : a.push(o));
         });
         return {
-          plugins: AG(r, n),
-          widgets: AG(r, a)
+          plugins: filterArrayByEditorType(r, n),
+          widgets: filterArrayByEditorType(r, a)
         };
       }();
       return useMemo(() => _$$M({
@@ -8166,9 +8166,9 @@ function oB({
         }
       }), [i, t]);
       return useMemo(() => {
-        if (!Mpt || !e || !t || !i) return [];
+        if (!DesignToBuzzHelpers || !e || !t || !i) return [];
         let a = o.length > 0;
-        let s = a ? Mpt.getSelectedNodesToSend() : Mpt.getTopLevelFramesToSend();
+        let s = a ? DesignToBuzzHelpers.getSelectedNodesToSend() : DesignToBuzzHelpers.getTopLevelFramesToSend();
         if (0 === s.length) return [];
         if (1 === s.length) {
           let e = r.get(s[0]);
@@ -8325,7 +8325,7 @@ function oB({
               let r = e[0];
               let n = [["add-selection-ready-status", _$$b4.SUGGESTIONS], ["republish-selected-components", _$$b4.SUGGESTIONS], ["publish-changes-to-library", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
               let a = [["select-matching", _$$b4.SUGGESTIONS], ["outline-stroke", _$$b4.SUGGESTIONS], ["mask-selection", _$$b4.SUGGESTIONS], ["flatten-selection", _$$b4.SUGGESTIONS], ["unlock-all", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-              if (t === m1T.VECTOR) return [["flip-horizontal", _$$b4.SUGGESTIONS], ["flip-vertical", _$$b4.SUGGESTIONS], ["align-horizontal-center", _$$b4.SUGGESTIONS], ["align-vertical-center", _$$b4.SUGGESTIONS]];
+              if (t === LayoutTabType.VECTOR) return [["flip-horizontal", _$$b4.SUGGESTIONS], ["flip-vertical", _$$b4.SUGGESTIONS], ["align-horizontal-center", _$$b4.SUGGESTIONS], ["align-vertical-center", _$$b4.SUGGESTIONS]];
               switch (r.type) {
                 case "SYMBOL":
                   return n;
@@ -8440,7 +8440,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? renderI18nText("fullscreen_actions.quick_actions.find-in-community", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
@@ -8478,7 +8478,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? o ? renderI18nText("fullscreen_actions.quick_actions.find-at-plan-file", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
@@ -8534,7 +8534,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-at-plan-file-and-community" : "fullscreen_actions.quick_actions.find-at-plan-file-and-community", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
@@ -8584,7 +8584,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: renderI18nText("fullscreen_actions.assistant-chat-query", {
               query: jsx(_$$E, {
                 color: "secondary",
@@ -8842,12 +8842,12 @@ function la({
     extension,
     publishedExtension
   } = e;
-  if (!ZQ(extension)) return jsx(_$$V, {
+  if (!hasLocalFileId(extension)) return jsx(_$$V, {
     "aria-hidden": t,
     plugin: extension,
     className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$
   });
-  let a = publishedExtension && Ar(publishedExtension);
+  let a = publishedExtension && getCurrentPluginVersion(publishedExtension);
   return a && a.redirect_icon_url ? jsx(_$$V, {
     "aria-hidden": t,
     plugin: a,
@@ -8863,19 +8863,19 @@ function la({
 let l_ = "EXTENSION_OPTIONS_DROPDOWN";
 function lx(e) {
   let t = Um();
-  return ZQ(e) ? t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
+  return hasLocalFileId(e) ? t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
 }
 function ly(e) {
   let t = useDispatch();
   let i = lx(e);
   return useCallback(r => {
-    if (i) t(_$$oB2()); else {
+    if (i) t(_$$oB2());else {
       let i = r.getBoundingClientRect();
       t(j7({
         type: l_,
         data: {
           extensionId: e.plugin_id,
-          localFileId: ZQ(e) ? e.localFileId : null,
+          localFileId: hasLocalFileId(e) ? e.localFileId : null,
           targetRect: i
         }
       }));
@@ -8953,7 +8953,7 @@ function lE(e) {
     localPublishedExtension
   } = t;
   let s = Um();
-  let l = ZQ(extension) ? extension : localPublishedExtension;
+  let l = hasLocalFileId(extension) ? extension : localPublishedExtension;
   let d = NV(l, publishedExtension);
   let c = OX(publishedExtension);
   let u = x2(extension, publishedExtension);
@@ -8971,17 +8971,17 @@ function lE(e) {
   let y = [];
   let b = [];
   let C = !!publishedExtension;
-  !ZQ(extension) && (C ? (d && g && y.push(d), y.push({
+  !hasLocalFileId(extension) && (C ? (d && g && y.push(d), y.push({
     displayText: getI18nString("qa.extensions.view_details"),
     callback: x
   }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Published extension is missing publishedExtension from Redux state"), {
     extra: {
       extensionId: extension.plugin_id,
-      isWidget: k0(extension),
+      isWidget: manifestContainsWidget(extension),
       types: Array.from(augmentedExtension.types).toString()
     }
   }));
-  ZQ(extension) && (d && y.unshift(d), C && u && y.push(u), !extension.error && p && y.push(p), h && b.push(h), c && b.push(c));
+  hasLocalFileId(extension) && (d && y.unshift(d), C && u && y.push(u), !extension.error && p && y.push(p), h && b.push(h), c && b.push(c));
   let v = y.some(Boolean) && b.some(Boolean) ? {
     displayText: "",
     separator: !0
@@ -9005,7 +9005,7 @@ function lT({
   let {
     extension
   } = e;
-  let o = k0(extension) ? jsx(_$$E, {
+  let o = manifestContainsWidget(extension) ? jsx(_$$E, {
     color: "tertiary",
     fontSize: 11,
     children: renderI18nText("qa.extensions.widget")
@@ -9122,7 +9122,7 @@ function lj({
     let c = _$$dR(_extension.plugin_id, "quick-actions");
     let u = Kp(t);
     let p = useCallback(() => {
-      k0(_extension) ? _$$l2.user("insert-widget", () => lr(_extension)) : s && i ? l(i.current) : c();
+      manifestContainsWidget(_extension) ? _$$l2.user("insert-widget", () => lr(_extension)) : s && i ? l(i.current) : c();
       s || u();
       d() && close();
     }, [_extension, s, i, l, c, u, d, close]);
@@ -9283,8 +9283,8 @@ function lk(e) {
     text: getI18nString("whiteboard.inserts.plugin_development_options_new_plugin"),
     svg: _$$e2,
     onAction: () => {
-      t(_$$Lo());
-      Y5.dispatch(_$$to({
+      t(popModalStack());
+      fullscreenValue.dispatch(showModalHandler({
         type: _$$h5,
         data: {
           resourceType: bD.PLUGIN
@@ -9296,8 +9296,8 @@ function lk(e) {
     text: getI18nString("whiteboard.inserts.widget_development_options_new_widget"),
     svg: _$$e2,
     onAction: () => {
-      t(_$$Lo());
-      Y5.dispatch(_$$to({
+      t(popModalStack());
+      fullscreenValue.dispatch(showModalHandler({
         type: _$$h5,
         data: {
           resourceType: bD.WIDGET
@@ -9524,7 +9524,7 @@ function l8({
     extension,
     publishedExtension
   } = e;
-  let r = k0(extension) ? renderI18nText("qa.extensions.widget") : renderI18nText("qa.extensions.plugin");
+  let r = manifestContainsWidget(extension) ? renderI18nText("qa.extensions.widget") : renderI18nText("qa.extensions.plugin");
   let a = publishedExtension?.unique_run_count ?? 0;
   let s = publishedExtension?.like_count ?? 0;
   let o = publishedExtension ? jsx(_$$o5, {
@@ -9780,7 +9780,7 @@ function ds({
       }, [i, e]);
       return {
         loaded: n,
-        extensions: useMemo(() => i.map(e => Ar(e)).filter(e => !!e), [i])
+        extensions: useMemo(() => i.map(e => getCurrentPluginVersion(e)).filter(e => !!e), [i])
       };
     }();
     let n = _extensions.map(e => t(e, Ag.COMMUNITY));
@@ -10099,7 +10099,7 @@ function dv({
   }) {
     let r = Oy();
     return useMemo(() => {
-      let n = (e, t) => e.map(e => Ar(e)).filter(e => !!e).map(e => r(e, t));
+      let n = (e, t) => e.map(e => getCurrentPluginVersion(e)).filter(e => !!e).map(e => r(e, t));
       let a = n(e, Ag.COMMUNITY);
       let s = n(t, Ag.ORG_PRIVATE);
       return [...i.map(e => r(e, Ag.LOCAL)), ...s, ...a];
@@ -10555,7 +10555,7 @@ function dA() {
   });
 }
 function dO(e) {
-  return e === NLJ.SELECT;
+  return e === DesignGraphElements.SELECT;
 }
 function dM(e) {
   let t = _$$A(KY, e.timeoutMs);
@@ -10595,7 +10595,7 @@ function dP() {
   let x = J8(m?.action, p?.payload);
   let y = Hr(m?.action);
   let b = useCallback(() => {
-    f && (Y5.triggerAction(f, p?.payload), KY());
+    f && (fullscreenValue.triggerAction(f, p?.payload), KY());
   }, [f, p?.payload]);
   let C = useAtomWithSubscription(_$$dd);
   let v = vI();
@@ -10630,7 +10630,7 @@ function dP() {
     if (!m) return;
     let e = m?.action;
     let t = [_$$JT.MAGIC_LINK, _$$JT.FIND_INSPIRATION].includes(e);
-    f === _$$JT.CONTENT_FILL && CT8?.dismissContentFillNudge();
+    f === _$$JT.CONTENT_FILL && ContentFillNudgesStateBindings?.dismissContentFillNudge();
     KY({
       dismissedAction: t ? e : void 0
     });
@@ -10777,7 +10777,7 @@ export function $$dG0(e) {
   let i = _$$I();
   let r = PE();
   return (useEffect(() => {
-    glU?.handleHasDesignAIPermissionChange();
+    Fullscreen?.handleHasDesignAIPermissionChange();
   }, [r]), i) ? jsx(_$$tH, {
     boundaryKey: "QuickActionsV2",
     onError: () => {

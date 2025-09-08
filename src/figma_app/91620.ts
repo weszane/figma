@@ -2,7 +2,7 @@ import { useSelector } from "../vendor/514228";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { ow } from "../figma_app/976749";
 import { VF } from "../figma_app/864723";
-import { q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { aV } from "../figma_app/722362";
 import { iZ } from "../905/372672";
 import { L } from "../905/453756";
@@ -15,7 +15,7 @@ export function $$$$_0() {
   let _ = aV();
   let h = iZ();
   let m = useAtomWithSubscription(VF);
-  let g = q();
+  let g = useFullscreenReady();
   let f = useSelector(e => e.mirror?.appModel.isReadOnly);
   let E = z();
   let y = _$$g();

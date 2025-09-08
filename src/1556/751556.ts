@@ -44,7 +44,7 @@ import { reportError } from "../905/11";
 import { _l, rq } from "../figma_app/976345";
 import { e as _$$e2 } from "../905/579755";
 import { sf, j7, oB } from "../905/929976";
-import { Lo, to as _$$to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { ql, S5 } from "../figma_app/24841";
 import { T$, w3 } from "../figma_app/865646";
 import { tO, QF, I2 } from "../figma_app/502247";
@@ -52,7 +52,7 @@ import { O as _$$O2 } from "../905/833838";
 import { s as _$$s2, c as _$$c } from "../905/744710";
 import { G$, FF } from "../figma_app/588092";
 import { $$ } from "../figma_app/637027";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { kL, v0 } from "../figma_app/639088";
 import { nT } from "../1556/690522";
@@ -108,10 +108,10 @@ export function $$R2(e) {
   });
 }
 var S = E;
-let ed = Ju(function () {
+let ed = registerModal(function () {
   let e = useDispatch();
   let t = () => {
-    e(Lo());
+    e(popModalStack());
   };
   return jsx(OJ, {
     onClose: t,
@@ -469,7 +469,7 @@ let eH = (e, t) => e.map(e => {
 let eq = (e, t) => {
   let n = getI18nString("navbar.profile_switcher.create_a_community_profile");
   let l = () => {
-    t(_$$to({
+    t(showModalHandler({
       type: G$,
       data: {
         userId: e.id,
@@ -635,7 +635,7 @@ function eX() {
         let n = "adjust";
         let l = "settings-nav-bar-item";
         let o = () => {
-          e(_$$to({
+          e(showModalHandler({
             type: _$$s2,
             data: {
               tab: _$$c.ACCOUNT
@@ -770,7 +770,7 @@ function eX() {
         let o = "plus";
         let s = nT;
         let a = () => {
-          e >= 10 ? n(_$$to({
+          e >= 10 ? n(showModalHandler({
             type: ed
           })) : t ? n(rq()) : _$$Ay2.redirect("/login?cont=", "_blank");
         };

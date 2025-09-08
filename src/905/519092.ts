@@ -9,7 +9,7 @@ import { qM, vd, tM } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { Dm } from "../figma_app/8833";
 import { ft } from "../figma_app/753501";
 import { K1, CY, Y5, zB, Vw, jT, yl, P9, nd, SM, x7, EJ, EO, UR, xR, qG, JF, Wc, Rh, Jg, eo, fp, hS, TX, R2 } from "../905/634218";
@@ -114,7 +114,7 @@ export function $$v0(e) {
       e.onCancel();
       return;
     }
-    t(Lo());
+    t(popModalStack());
   };
   let s = jsxs(Fragment, {
     children: [e.hideCancel || jsx(tM, {
@@ -129,7 +129,7 @@ export function $$v0(e) {
           e.onSubmit();
           return;
         }
-        t(Lo());
+        t(popModalStack());
         e.onConfirm && e.onConfirm();
       },
       className: EJ,

@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useId, useContext } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
-import { Z_n, rXF, JTp, CWU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariableDataType, VariableResolvedDataType, OperationType, VariablesBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
 import { Yi } from "../figma_app/933328";
 import { C, B } from "../905/330741";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { mm, u as _$$u, bL, BQ } from "../figma_app/852050";
 import { zk } from "../figma_app/198712";
 import { VZ } from "../905/959568";
@@ -19,10 +19,10 @@ import { y$, u3, Ek } from "../figma_app/152690";
 import { Ti, ND } from "../figma_app/960196";
 export function $$I5(e) {
   return {
-    type: Z_n.EXPRESSION,
-    resolvedType: rXF.BOOLEAN,
+    type: VariableDataType.EXPRESSION,
+    resolvedType: VariableResolvedDataType.BOOLEAN,
     value: {
-      expressionFunction: JTp.IS_TRUTHY,
+      expressionFunction: OperationType.IS_TRUTHY,
       expressionArguments: ["variable" in e && "variableId" in e ? y$(e.variable.resolvedType, e.variableId) : e]
     }
   };
@@ -79,7 +79,7 @@ export function $$v1(e, t, r, n) {
       callback: i => {
         setVariableValueOrOverrideForMode(e, t, r, y$(n, i), zk.YES, "alias-variable");
       }
-    })) : l7.user("unalias-variable", () => CWU.detachVariableValueForMode(t, r, null)) && Y5.triggerAction("commit");
+    })) : permissionScopeHandler.user("unalias-variable", () => VariablesBindings.detachVariableValueForMode(t, r, null)) && fullscreenValue.triggerAction("commit");
   }, [m, n, setVariableValueOrOverrideForMode, e, t, r]);
   return [g.isShown && "variable-picker-alias" === g.type && g.variableID === t && g.modeID === r, useCallback((e, i) => {
     let a = e.getBoundingClientRect();
@@ -183,7 +183,7 @@ export function $$C0({
     c.current = new Point(t.left, t.bottom);
     p(!0);
   }, []);
-  let y = a.type === Z_n.ALIAS ? a.value : void 0;
+  let y = a.type === VariableDataType.ALIAS ? a.value : void 0;
   let b = _$$u(y);
   let I = !!b && eF(b);
   let S = useMemo(() => ({
@@ -195,21 +195,21 @@ export function $$C0({
   let v = BQ(y);
   return jsxs(_$$p.Provider, {
     value: S,
-    children: [e, u ? a.resolvedType !== rXF.COLOR ? jsx(Ti, {
+    children: [e, u ? a.resolvedType !== VariableResolvedDataType.COLOR ? jsx(Ti, {
       resolvedType: r,
       onVariableSelected: l,
       onClose: h,
       initialPosition: c.current,
       pickerType: t
-    }) : a.type === Z_n.COLOR ? jsx(_$$h, {
+    }) : a.type === VariableDataType.COLOR ? jsx(_$$h, {
       disabledVariableIds: new Set(),
       color: a.value,
       boundVariable: null,
       initialPosition: c.current,
       recordingKey: "variableBindingsDropdown",
       onChange: e => s({
-        type: Z_n.COLOR,
-        resolvedType: rXF.COLOR,
+        type: VariableDataType.COLOR,
+        resolvedType: VariableResolvedDataType.COLOR,
         value: {
           ...e,
           a: 1
@@ -217,15 +217,15 @@ export function $$C0({
       }),
       onVariableChange: l,
       onClose: h
-    }) : a.type === Z_n.ALIAS ? jsx(_$$h, {
+    }) : a.type === VariableDataType.ALIAS ? jsx(_$$h, {
       disabledVariableIds: new Set(),
       color: v.value,
       boundVariable: b,
       initialPosition: c.current,
       recordingKey: "variableBindingsDropdown",
       onChange: e => s({
-        type: Z_n.COLOR,
-        resolvedType: rXF.COLOR,
+        type: VariableDataType.COLOR,
+        resolvedType: VariableResolvedDataType.COLOR,
         value: {
           ...e,
           a: 1

@@ -1,6 +1,6 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 function s(e) {
   if (e) {
     e.startsWith("/") && (e = e.slice(1));
@@ -17,12 +17,12 @@ export function $$l4(e) {
 let $$d0 = "Attributions.md";
 let $$c2 = `/${$$d0}`;
 export function $$u1(e, t, r, s) {
-  return l7.ai("code-chat", () => {
+  return permissionScopeHandler.ai("code-chat", () => {
     let a = getSingletonSceneGraph();
     let o = e[t];
     let d = !1;
     if (!$$l4(o)) {
-      let e = glU?.createNewCodeFile(t, r, null, !1);
+      let e = Fullscreen?.createNewCodeFile(t, r, null, !1);
       e && (o = a.get(e) || void 0, d = !0);
     }
     o && (e[t] = o, s(o));

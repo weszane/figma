@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { o as _$$o } from "../905/89370";
-import { YEY, rpt, Lov } from "../figma_app/763686";
-import { nc } from "../905/189185";
+import { CanvasSearchHelpers, FilterOption, PageViewMode } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { globalPerfTimer } from "../905/542194";
@@ -44,14 +44,14 @@ export function $$I0({
   let B = e.toLocaleLowerCase() !== t.toLocaleLowerCase();
   let U = am();
   let G = !e || !total;
-  let K = nc.user("canvas-search-replace", i => {
+  let K = scopeAwareFunction.user("canvas-search-replace", i => {
     if (k) {
       let {
         numReplaced,
         timeMs
-      } = YEY.replaceInMultipleResults(t, {
+      } = CanvasSearchHelpers.replaceInMultipleResults(t, {
         preserveCase: B
-      }, rpt.ONLY_ACTIVE);
+      }, FilterOption.ONLY_ACTIVE);
       U("canvas_search_multi_replace", {
         source: i,
         timeMs,
@@ -61,7 +61,7 @@ export function $$I0({
       P(!0);
       return;
     }
-    let r = YEY.replaceInActiveResult(t, {
+    let r = CanvasSearchHelpers.replaceInActiveResult(t, {
       preserveCase: B
     });
     P(!0);
@@ -72,21 +72,21 @@ export function $$I0({
     O(r, {
       delay: 300,
       additionalTrackEventParams: {
-        searchScope: Lov[L]
+        searchScope: PageViewMode[L]
       }
     });
   });
-  let H = nc.user("canvas-search-replace-all", () => {
+  let H = scopeAwareFunction.user("canvas-search-replace-all", () => {
     globalPerfTimer.start("canvas_search_replace_all");
     let {
       numReplaced,
       timeMs
-    } = YEY.replaceInMultipleResults(t, {
+    } = CanvasSearchHelpers.replaceInMultipleResults(t, {
       preserveCase: B
-    }, rpt.ALL);
+    }, FilterOption.ALL);
     numReplaced > 0 && (P(!0), N(_$$F.enqueue({
       type: "canvas-search-replace-all",
-      message: getI18nString(D ? "canvas_search.replace_all_message_figjam" : L === Lov.ACTIVE_PAGE ? "canvas_search.replace_all_message" : "canvas_search.replace_all_message_all_pages", {
+      message: getI18nString(D ? "canvas_search.replace_all_message_figjam" : L === PageViewMode.ACTIVE_PAGE ? "canvas_search.replace_all_message" : "canvas_search.replace_all_message_all_pages", {
         count: numReplaced
       })
     })));

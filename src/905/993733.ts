@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, memo, Component } from "react";
 import { filterNotNullish } from "../figma_app/656233";
 import { E as _$$E } from "../905/632989";
-import { J0O, CWU, mKm, kz3, Dje } from "../figma_app/763686";
-import { fn, dI, aI, AD } from "../905/871411";
+import { ComponentPropType, VariablesBindings, LayoutSizingMode, RelationType, LibraryUpdateStatus } from "../figma_app/763686";
+import { isValidSessionLocalID, sessionLocalIDToString, areSessionLocalIDsEqual, defaultSessionLocalIDString } from "../905/871411";
 import d from "classnames";
 import { g as _$$g } from "../905/880308";
 import { R as _$$R } from "../905/307199";
@@ -12,7 +12,7 @@ import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zy } from "../figma_app/955484";
 import { UK } from "../figma_app/740163";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { UB } from "../figma_app/249941";
 import { fE, zX, wR, de, EY, oZ, FO, yC, b2, Rv } from "../905/869235";
@@ -55,11 +55,11 @@ let N = e => !R(e);
 let P = e => {
   switch (e) {
     case "BOOL":
-      return J0O.BOOL;
+      return ComponentPropType.BOOL;
     case "TEXT":
-      return J0O.TEXT;
+      return ComponentPropType.TEXT;
     case "INSTANCE_SWAP":
-      return J0O.INSTANCE_SWAP;
+      return ComponentPropType.INSTANCE_SWAP;
     default:
       return null;
   }
@@ -201,9 +201,9 @@ function eg(e, t) {
   return wR(e, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (i, n, r) => {
     var a;
     a = t || e;
-    return !fn(n) && fn(r) ? getI18nString("branching.chunk_details.guid_property_applied", {
+    return !isValidSessionLocalID(n) && isValidSessionLocalID(r) ? getI18nString("branching.chunk_details.guid_property_applied", {
       propertyLabel: a()
-    }) : fn(n) && !fn(r) ? getI18nString("branching.chunk_details.guid_property_removed", {
+    }) : isValidSessionLocalID(n) && !isValidSessionLocalID(r) ? getI18nString("branching.chunk_details.guid_property_removed", {
       propertyLabel: a()
     }) : getI18nString("branching.chunk_details.guid_property_modified", {
       propertyLabel: a()
@@ -416,7 +416,7 @@ function ew(e, t, i) {
     for (let r of e.entries) if (r.variableField && r.variableData?.value?.alias) {
       let e = _$$dI(r.variableData?.value?.alias);
       i.add(r.variableField);
-      n[r.variableField] = CWU.getVariableName(e, t);
+      n[r.variableField] = VariablesBindings.getVariableName(e, t);
     }
   }
   return n;
@@ -506,7 +506,7 @@ let eN = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
     let d = [l[i], s[i]].map((e, t) => function (e, t) {
       if (e?.colorVar?.value?.alias) {
         let i = _$$dI(e.colorVar.value.alias);
-        return CWU.getVariableName(i, t);
+        return VariablesBindings.getVariableName(i, t);
       }
       return null;
     }(e, t));
@@ -702,9 +702,9 @@ let eG = EY(() => getI18nString("collaboration.branching_node_treatments.propert
 let ez = de(() => getI18nString("collaboration.branching_node_treatments.property.font_variations"), "", () => getI18nString("collaboration.branching_node_treatments.value.font_variations_edited"));
 let eH = de(() => getI18nString("collaboration.branching_node_treatments.property.widget_metadata"), "", () => getI18nString("collaboration.branching_node_treatments.value.widget_metadata_edited"));
 let eW = {
-  [mKm.FILL_CONTAINER]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fill"),
-  [mKm.FIXED]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fixed"),
-  [mKm.HUG_CONTENT]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.hug")
+  [LayoutSizingMode.FILL_CONTAINER]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fill"),
+  [LayoutSizingMode.FIXED]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fixed"),
+  [LayoutSizingMode.HUG_CONTENT]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.hug")
 };
 let eK = {
   BASELINE: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.baseline"),
@@ -807,7 +807,7 @@ let e$ = (e, t, i, n, r = !1) => {
         break;
       case "stackPrimarySizing":
         {
-          let e = i && "RESIZE_TO_FIT" !== i && "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" !== i ? mKm.FIXED : mKm.HUG_CONTENT;
+          let e = i && "RESIZE_TO_FIT" !== i && "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" !== i ? LayoutSizingMode.FIXED : LayoutSizingMode.HUG_CONTENT;
           "HORIZONTAL" === y ? s = e : "VERTICAL" === y && (a = e);
           break;
         }
@@ -816,7 +816,7 @@ let e$ = (e, t, i, n, r = !1) => {
         break;
       case "stackCounterSizing":
         {
-          let e = "RESIZE_TO_FIT" === i || "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === i ? mKm.HUG_CONTENT : mKm.FIXED;
+          let e = "RESIZE_TO_FIT" === i || "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === i ? LayoutSizingMode.HUG_CONTENT : LayoutSizingMode.FIXED;
           "HORIZONTAL" === y ? a = e : "VERTICAL" === y && (s = e);
           break;
         }
@@ -872,7 +872,7 @@ let e$ = (e, t, i, n, r = !1) => {
   }, c.horizontal_sizing = {
     displayName: _,
     displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill")
-  }) : 1 !== f || a && a !== mKm.HUG_CONTENT ? 1 !== f || s && s !== mKm.HUG_CONTENT ? 1 === f ? (c.vertical_sizing = {
+  }) : 1 !== f || a && a !== LayoutSizingMode.HUG_CONTENT ? 1 !== f || s && s !== LayoutSizingMode.HUG_CONTENT ? 1 === f ? (c.vertical_sizing = {
     displayName: A,
     displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill_or_fixed")
   }, c.horizontal_sizing = {
@@ -950,7 +950,7 @@ let e0 = de(() => getI18nString("collaboration.branching_node_treatments.propert
   prefix: getI18nString("collaboration.branching_node_treatments.property.properties")
 }));
 let e1 = wR(() => getI18nString("collaboration.branching_node_treatments.property.hyperlink"), (e, t, i) => t?.url ? t.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.url ? i.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
-let e2 = wR(() => getI18nString("collaboration.branching_node_treatments.property.mention"), (e, t, i) => t?.id ? dI(t.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.id ? dI(i.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e2 = wR(() => getI18nString("collaboration.branching_node_treatments.property.mention"), (e, t, i) => t?.id ? sessionLocalIDToString(t.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.id ? sessionLocalIDToString(i.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let e5 = (e, t, i) => {
   let r = el("borderTopWeight", e, t, i) ?? 0;
   let a = el("borderBottomWeight", e, t, i) ?? 0;
@@ -1020,13 +1020,13 @@ let tn = e => {
 let tr = wR(() => getI18nString("collaboration.branching_node_treatments.property.dash_pattern"), (e, t, i) => t.length ? tn(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i.length ? tn(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let ta = wR(() => getI18nString("collaboration.branching_node_treatments.property.font_name"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let ts = wR(() => getI18nString("collaboration.branching_node_treatments.property.parent"), (e, t, i, n) => {
-  let r = rY.getImmediateParentHierarchyNodeChange(n, kz3.BASIS_PARENT);
+  let r = rY.getImmediateParentHierarchyNodeChange(n, RelationType.BASIS_PARENT);
   let a = r?.name;
-  return aI(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.empty_dash") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
+  return areSessionLocalIDsEqual(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.empty_dash") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 }, (e, t, i, n) => {
-  let r = rY.getImmediateParentHierarchyNodeChange(n, kz3.PARENT);
+  let r = rY.getImmediateParentHierarchyNodeChange(n, RelationType.PARENT);
   let a = r?.name;
-  return aI(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.node_reordered") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
+  return areSessionLocalIDsEqual(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.node_reordered") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 });
 let to = wR(() => getI18nString("collaboration.branching_node_treatments.property.annotations"), (e, t, i) => {
   let n = Array.isArray(t) ? t.length : 0;
@@ -1610,7 +1610,7 @@ function tb({
           newValue: () => u
         });
       }
-      if (h && h.treatmentType === Rv.RENDER_DISPLAY_NODE_SINGLE_PROPERTY && (c || dI(t.guid) === dI(a.displayNode.guid)) && (p || !u(e[m], t[m]))) {
+      if (h && h.treatmentType === Rv.RENDER_DISPLAY_NODE_SINGLE_PROPERTY && (c || sessionLocalIDToString(t.guid) === sessionLocalIDToString(a.displayNode.guid)) && (p || !u(e[m], t[m]))) {
         let i = h.renderOldValue(m, e[m], t[m]);
         let n = h.renderNewValue(m, e[m], t[m]);
         d[m] = {
@@ -1680,12 +1680,12 @@ export function $$tx1({
   expandedLayers: d,
   setLayerExpanded: u
 }) {
-  let p = J2(UK().showGuids);
+  let p = getObservableOrFallback(UK().showGuids);
   let h = useMemo(() => {
     let t = e => {
       if (e.value) {
         let t = e.value.change.guid || e.value.basis.guid;
-        let i = dI(t) || AD;
+        let i = sessionLocalIDToString(t) || defaultSessionLocalIDString;
         return !!d?.has(i);
       }
       return !0;
@@ -1703,7 +1703,7 @@ export function $$tx1({
       if (value.changesToDisplay.length > 0) {
         let s = !!children && children.length > 0;
         let o = value.change.guid || value.basis.guid;
-        let d = dI(o) || AD;
+        let d = sessionLocalIDToString(o) || defaultSessionLocalIDString;
         n = t(e);
         return {
           result: {
@@ -1732,7 +1732,7 @@ export function $$tx1({
       children: jsx("div", {
         className: "chunk_diff_details--nodeNames--KWP3B",
         children: h.map(e => {
-          let r = dI(e.change.guid) || dI(e.basis.guid) || void 0;
+          let r = sessionLocalIDToString(e.change.guid) || sessionLocalIDToString(e.basis.guid) || void 0;
           let a = v(e.basis, e.change);
           let d = t === r;
           return jsxs("div", {
@@ -1741,7 +1741,7 @@ export function $$tx1({
               i && r && i(r);
             },
             onMouseLeave: () => {
-              i && i(AD);
+              i && i(defaultSessionLocalIDString);
             },
             children: [jsxs(_$$E, {
               onClick: () => {
@@ -1762,7 +1762,7 @@ export function $$tx1({
                   })
                 }), jsx(ph, {
                   className: er,
-                  text: p ? `${a} (${dI(e.change.guid) || dI(e.basis.guid)})` : a,
+                  text: p ? `${a} (${sessionLocalIDToString(e.change.guid) || sessionLocalIDToString(e.basis.guid)})` : a,
                   tooltipPropsWhenTruncated: {
                     "data-tooltip": a,
                     "data-tooltip-type": Ib.TEXT
@@ -2063,7 +2063,7 @@ function tD(e) {
       changesToDisplay: t
     } : null;
   }));
-  if (iM(d) && 0 === s.length || chunk && chunk.phase === Dje.REMOVED) return null;
+  if (iM(d) && 0 === s.length || chunk && chunk.phase === LibraryUpdateStatus.REMOVED) return null;
   let c = jsxs(Fragment, {
     children: [jsx("div", {
       children: jsx(tN, {
@@ -2075,7 +2075,7 @@ function tD(e) {
         basis: e.basis,
         change: e.change,
         changesToDisplay: e.changesToDisplay
-      }, dI(e.change.guid)))
+      }, sessionLocalIDToString(e.change.guid)))
     })]
   });
   return jsx(tP, {
@@ -2092,14 +2092,14 @@ let tL = memo(function (e) {
   let o = useMemo(() => function (e) {
     let t = {};
     (e || []).forEach(e => {
-      e.guid && (t[dI(e.guid)] = e);
+      e.guid && (t[sessionLocalIDToString(e.guid)] = e);
     });
     return t;
   }(basis || []), [basis]);
   if (!changes || !basis) return null;
   let d = changes.map(e => ({
     change: e,
-    basis: o[dI(e.guid)]
+    basis: o[sessionLocalIDToString(e.guid)]
   }));
   return jsxs("div", {
     className: "chunk_diff_details--chunkDiffDetails--jy2yz text--fontPos11--2LvXf text--_fontBase--QdLsd",

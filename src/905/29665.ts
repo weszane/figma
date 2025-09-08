@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { J } from "../905/270045";
-import { S } from "../905/274480";
+import { Label } from "../905/270045";
+import { Checkbox } from "../905/274480";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
@@ -20,7 +20,7 @@ export function $$p1() {
       bottom: 1
     },
     children: jsx($$m0, {
-      label: jsx(J, {
+      label: jsx(Label, {
         children: renderI18nText("design_systems.internal_community_library_mode_label")
       })
     })
@@ -30,7 +30,7 @@ export function $$m0({
   label: e
 }) {
   let [t, i] = useAtomValueAndSetter(pz);
-  return getFeatureFlags().cmty_lib_admin_publish ? jsx(S, {
+  return getFeatureFlags().cmty_lib_admin_publish ? jsx(Checkbox, {
     label: e,
     checked: t === _$$o.HUBFILE,
     onChange: e => {

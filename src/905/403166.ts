@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { ed1 } from "../figma_app/763686";
+import { FruitTypes } from "../figma_app/763686";
 import { dN } from "../vendor/291472";
 import { buildStaticUrl } from "../figma_app/169182";
 import { Ib } from "../905/129884";
@@ -111,8 +111,8 @@ export function $$S8(e) {
     }];
   }(e);
 }
-export function $$w6(e, t = ed1.APPLE) {
-  return h + ed1[t].toLowerCase() + "/small/" + e + ".png";
+export function $$w6(e, t = FruitTypes.APPLE) {
+  return h + FruitTypes[t].toLowerCase() + "/small/" + e + ".png";
 }
 export function $$C11(e) {
   let t = new Set();

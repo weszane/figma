@@ -1,6 +1,6 @@
 import { U } from "../905/807535";
 import { QR } from "../figma_app/273493";
-import { _0v, qmM, gSS, miS } from "../figma_app/763686";
+import { Axis, InteractionCpp, LayoutDirection, HideMode } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 var $$l4 = (e => (e[e.NONE = 0] = "NONE", e[e.REORDER = 1] = "REORDER", e[e.ADD = 2] = "ADD", e[e.APPEND = 3] = "APPEND", e[e.RESIZE = 4] = "RESIZE", e))($$l4 || {});
@@ -8,7 +8,7 @@ var $$d0 = (e => (e[e.INACTIVE = 0] = "INACTIVE", e[e.HOVERED = 1] = "HOVERED", 
 export function $$c2(e, t, i, n, o) {
   for (let l of (e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleHoveredCornerRadius + 2, QR(1, 1, 1)), e.fillRoundedRect(t, $$m1.reorderHandleHoveredCornerRadius, i), $$m1.equalIconOffsets)) {
     let i = new _$$r(l, $$m1.equalIconSize);
-    i = o === _0v.X ? i : i.transpose();
+    i = o === Axis.X ? i : i.transpose();
     e.fillRoundedRect(i.offsetBy(t.topLeft()), $$m1.equalIconCornerRadius, n);
   }
 }
@@ -26,10 +26,10 @@ let p = class e {
     let l = e.cellStrokeWeight * s;
     this._columnPositions = i.reduce((e, t, i) => (e.push(t + e[i]), e), [0]).map((e, t) => 0 === t ? e : e - l);
     this._rowPositions = n.reduce((e, t, i) => (e.push(t + e[i]), e), [0]).map((e, t) => 0 === t ? e : e - l);
-    this._inactiveColor = qmM.getTableNodeColorInactive();
-    this._hoverColorPrimary = qmM.getTableNodeColorHoveredPrimary();
-    this._hoverColorSecondary = qmM.getTableNodeColorHoveredSecondary();
-    this._selectedColor = qmM.getTableNodeColorSelected();
+    this._inactiveColor = InteractionCpp.getTableNodeColorInactive();
+    this._hoverColorPrimary = InteractionCpp.getTableNodeColorHoveredPrimary();
+    this._hoverColorSecondary = InteractionCpp.getTableNodeColorHoveredSecondary();
+    this._selectedColor = InteractionCpp.getTableNodeColorSelected();
     this._whiteColor = QR(1, 1, 1);
     this.numColumns = i.length;
     this.numRows = n.length;
@@ -233,48 +233,48 @@ let p = class e {
       let t = this._addColumnButtonHitTestBounds;
       for (let i = 1; i < t.length; i++) if (t[i].containsPointIncludingBoundary(e)) return {
         element: 2,
-        tableAxis: gSS.COLUMN,
+        tableAxis: LayoutDirection.COLUMN,
         elementIndex: i
       };
       let i = this._addRowButtonHitTestBounds;
       for (let t = 1; t < i.length; t++) if (i[t].containsPointIncludingBoundary(e)) return {
         element: 2,
-        tableAxis: gSS.ROW,
+        tableAxis: LayoutDirection.ROW,
         elementIndex: t
       };
     }
     for (let t = 0; t < this.numColumns; t++) {
-      let i = this.getReorderHandleHitTestBounds(gSS.COLUMN, t);
+      let i = this.getReorderHandleHitTestBounds(LayoutDirection.COLUMN, t);
       if (i && i.containsPointIncludingBoundary(e)) return {
         element: 1,
-        tableAxis: gSS.COLUMN,
+        tableAxis: LayoutDirection.COLUMN,
         elementIndex: t
       };
     }
     for (let t = 0; t < this.numRows; t++) {
-      let i = this.getReorderHandleHitTestBounds(gSS.ROW, t);
+      let i = this.getReorderHandleHitTestBounds(LayoutDirection.ROW, t);
       if (i && i.containsPointIncludingBoundary(e)) return {
         element: 1,
-        tableAxis: gSS.ROW,
+        tableAxis: LayoutDirection.ROW,
         elementIndex: t
       };
     }
     if (this._appendColumnBounds.containsPointIncludingBoundary(e)) return {
       element: 3,
-      tableAxis: gSS.COLUMN
+      tableAxis: LayoutDirection.COLUMN
     };
     if (this._appendRowBounds.containsPointIncludingBoundary(e)) return {
       element: 3,
-      tableAxis: gSS.ROW
+      tableAxis: LayoutDirection.ROW
     };
     for (let t = 0; t < this._columnDividerHitTestBounds.length; t++) if (this._columnDividerHitTestBounds[t].containsPointIncludingBoundary(e)) return {
       element: 4,
-      tableAxis: gSS.COLUMN,
+      tableAxis: LayoutDirection.COLUMN,
       elementIndex: t
     };
     for (let t = 0; t < this._rowDividerHitTestBounds.length; t++) if (this._rowDividerHitTestBounds[t].containsPointIncludingBoundary(e)) return {
       element: 4,
-      tableAxis: gSS.ROW,
+      tableAxis: LayoutDirection.ROW,
       elementIndex: t
     };
     return {
@@ -282,35 +282,35 @@ let p = class e {
     };
   }
   getNearestSpan(e, t) {
-    let i = e === gSS.ROW ? this._addRowButtonPositions : this._addColumnButtonPositions;
-    let n = e === gSS.ROW ? _0v.Y : _0v.X;
+    let i = e === LayoutDirection.ROW ? this._addRowButtonPositions : this._addColumnButtonPositions;
+    let n = e === LayoutDirection.ROW ? Axis.Y : Axis.X;
     for (let e = 0; e < i.length - 1; e++) if (t <= (i[e].component(n) + i[e + 1].component(n)) / 2) return e;
     return i.length - 1;
   }
   getNearestColumn(e) {
-    return this.getNearestSpan(gSS.COLUMN, e);
+    return this.getNearestSpan(LayoutDirection.COLUMN, e);
   }
   getNearestRow(e) {
-    return this.getNearestSpan(gSS.ROW, e);
+    return this.getNearestSpan(LayoutDirection.ROW, e);
   }
   displaceRectForSpan(e, t, i) {
-    let n = qmM.getTableSpanIdAtIndex(e, t);
-    let r = qmM.getViewportTableSpanDisplacement(n);
+    let n = InteractionCpp.getTableSpanIdAtIndex(e, t);
+    let r = InteractionCpp.getViewportTableSpanDisplacement(n);
     i.origin = i.origin.plus(M.fromFigVector(r));
   }
   getSpanThickness(e, t) {
-    return t === gSS.COLUMN ? this._widths[e] / this._canvasScale : this._heights[e] / this._canvasScale;
+    return t === LayoutDirection.COLUMN ? this._widths[e] / this._canvasScale : this._heights[e] / this._canvasScale;
   }
   getReorderHandleHitTestBounds(e, t) {
-    let i = e === gSS.ROW ? this._reorderRowHandleHitTestBounds : this._reorderColumnHandleHitTestBounds;
+    let i = e === LayoutDirection.ROW ? this._reorderRowHandleHitTestBounds : this._reorderColumnHandleHitTestBounds;
     if (t < 0 || t >= i.length) return null;
     let n = i[t].clone();
     this.displaceRectForSpan(e, t, n);
     return n;
   }
   getReorderHandleBounds(e, t, i) {
-    let n = e === gSS.COLUMN ? this._inactiveReorderColumnHandleBounds : this._inactiveReorderRowHandleBounds;
-    let r = e === gSS.COLUMN ? this._hoveredReorderColumnHandleBounds : this._hoveredReorderRowHandleBounds;
+    let n = e === LayoutDirection.COLUMN ? this._inactiveReorderColumnHandleBounds : this._inactiveReorderRowHandleBounds;
+    let r = e === LayoutDirection.COLUMN ? this._hoveredReorderColumnHandleBounds : this._hoveredReorderRowHandleBounds;
     let s = 0 === i ? n : r;
     if (t < 0 || t >= s.length) return null;
     let o = s[t].clone();
@@ -323,14 +323,14 @@ let p = class e {
   }
   renderInactiveAddButton(t, i, n) {
     if (!this.shouldRenderAddButton()) return;
-    let r = i === gSS.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions;
+    let r = i === LayoutDirection.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions;
     if (n < 1 || n >= r.length - 1) return;
     let s = r[n];
     t.fillCircle(s, e.addButtonInactiveRadius + e.borderStrokeWidth, this._whiteColor);
     t.fillCircle(s, e.addButtonInactiveRadius, this._inactiveColor);
   }
   renderHitTestBoundsForDebugging(e) {
-    for (let t = 0; t < Math.max(this.numRows, this.numColumns); ++t) for (let i of [gSS.ROW, gSS.COLUMN]) if (t < (i === gSS.ROW ? this.numRows : this.numColumns)) {
+    for (let t = 0; t < Math.max(this.numRows, this.numColumns); ++t) for (let i of [LayoutDirection.ROW, LayoutDirection.COLUMN]) if (t < (i === LayoutDirection.ROW ? this.numRows : this.numColumns)) {
       let n = this.getReorderHandleHitTestBounds(i, t);
       n && e.fillRoundedRect(n, 0, QR(0, 1, 0));
     }
@@ -341,7 +341,7 @@ let p = class e {
   }
   renderExpandedReorderHandle(e, t, i, n) {
     let r = this.getReorderHandleBounds(t, i, n);
-    if (null !== r) $$c2(e, r, this._getBackgroundColor(n), this._getForegroundColor(n), t === gSS.COLUMN ? _0v.X : _0v.Y);
+    if (null !== r) $$c2(e, r, this._getBackgroundColor(n), this._getForegroundColor(n), t === LayoutDirection.COLUMN ? Axis.X : Axis.Y);
   }
   _renderPlusButton(t, i, n) {
     let r = e.plusIconStrokeWidth;
@@ -357,14 +357,14 @@ let p = class e {
     this._renderPlusButton(t, i, this._getForegroundColor(n));
   }
   renderAppendButton(t, i, n) {
-    let r = i === gSS.COLUMN ? this._appendColumnBounds : this._appendRowBounds;
+    let r = i === LayoutDirection.COLUMN ? this._appendColumnBounds : this._appendRowBounds;
     let s = 0 === n ? this._hoverColorSecondary : this._selectedColor;
     let o = 0 === n ? this._hoverColorPrimary : this._whiteColor;
     t.fillRoundedRect(r, e.appendButtonCornerRadius, s);
     this._renderPlusButton(t, r.center(), o);
   }
   renderDivider(t, i, n, r) {
-    let s = i === gSS.COLUMN ? this._columnDividerRenderBounds : this._rowDividerRenderBounds;
+    let s = i === LayoutDirection.COLUMN ? this._columnDividerRenderBounds : this._rowDividerRenderBounds;
     if (n < 0 || n >= s.length) return;
     let o = s[n];
     let l = this._getBackgroundColor(r);
@@ -372,38 +372,38 @@ let p = class e {
   }
   renderAddButton(e, t, i, n) {
     if (!this.shouldRenderAddButton()) return;
-    let r = t === gSS.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions;
+    let r = t === LayoutDirection.COLUMN ? this._addColumnButtonPositions : this._addRowButtonPositions;
     if (i < 0 || i > r.length) return;
     let s = r[i];
     this.renderExpandedAddButton(e, s, n);
   }
   renderHoveredInactiveElements(e, t) {
-    for (let i of U(gSS)) {
-      let n = t.component(i ? _0v.X : _0v.Y);
+    for (let i of U(LayoutDirection)) {
+      let n = t.component(i ? Axis.X : Axis.Y);
       this.renderInactiveReorderHandle(e, i, n);
       this.renderInactiveAddButton(e, i, n);
       this.renderInactiveAddButton(e, i, n + 1);
     }
   }
   renderAllInactiveElements(e) {
-    for (let t of U(gSS)) {
-      let i = t === gSS.COLUMN ? this.numColumns : this.numRows;
+    for (let t of U(LayoutDirection)) {
+      let i = t === LayoutDirection.COLUMN ? this.numColumns : this.numRows;
       for (let n = 0; n < i; n++) this.renderInactiveReorderHandle(e, t, n);
       for (let n = 1; n < i; n++) this.renderInactiveAddButton(e, t, n);
     }
   }
   renderHoveredInactiveElementsUnderEditModeUI(e, t) {
-    t.x === this.numColumns - 1 && this.renderAppendButton(e, gSS.COLUMN, 0);
-    t.y === this.numRows - 1 && this.renderAppendButton(e, gSS.ROW, 0);
+    t.x === this.numColumns - 1 && this.renderAppendButton(e, LayoutDirection.COLUMN, 0);
+    t.y === this.numRows - 1 && this.renderAppendButton(e, LayoutDirection.ROW, 0);
   }
   renderAllInactiveElementsUnderEditModeUI(e) {
-    for (let t of U(gSS)) this.renderAppendButton(e, t, 0);
+    for (let t of U(LayoutDirection)) this.renderAppendButton(e, t, 0);
   }
   shouldRender() {
-    return !this._bounds.isInvalid() && this._shouldRender !== miS.HIDE;
+    return !this._bounds.isInvalid() && this._shouldRender !== HideMode.HIDE;
   }
   shouldRenderAddButton() {
-    return this.shouldRender() && this._shouldRender === miS.FULL;
+    return this.shouldRender() && this._shouldRender === HideMode.FULL;
   }
   bounds() {
     return this._bounds.scaledBy(1 / this._canvasScale);

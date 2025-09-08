@@ -11,13 +11,13 @@ import { In } from "../905/672640";
 import { c as _$$c } from "../905/370443";
 import { fu, j6 } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { F as _$$F } from "../905/759613";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { J } from "../905/341359";
 import { ZC } from "../figma_app/39751";
-import { Lo, $O } from "../905/156213";
+import { popModalStack, showModal } from "../905/156213";
 import { M as _$$M } from "../905/152487";
 function v(e) {
   let t = useDispatch();
@@ -33,7 +33,7 @@ function v(e) {
     isShowing && l && !o && onClose("different_modal_shown");
   }, [isShowing, l, o, onClose]);
   useEffect(() => {
-    s || !isShowing || o ? s && !isShowing && o && t(Lo()) : t($O({
+    s || !isShowing || o ? s && !isShowing && o && t(popModalStack()) : t(showModal({
       type: modalType,
       optOutOfPrevModal: !0
     }));
@@ -312,7 +312,7 @@ function j(e) {
     })]
   });
 }
-Ju(() => null, A);
+registerModal(() => null, A);
 export const _l = $$x0;
 export const B$ = $$L1;
 export const Jm = $$P2;

@@ -6,16 +6,16 @@ import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { bx } from "../905/34809";
 import { sf } from "../905/929976";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { xr } from "../figma_app/314264";
 import { SS, d as _$$d } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { rq } from "../905/351260";
 import { e6 } from "../905/557142";
 import { G } from "../figma_app/66216";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { bE as _$$bE } from "../905/98702";
-let $$b10 = nF((e, t) => XHR.put(`/api/folders/${t.folderId}/description`, {
+let $$b10 = createOptimistThunk((e, t) => XHR.put(`/api/folders/${t.folderId}/description`, {
   description: t.description
 }).then(({
   data: t
@@ -28,7 +28,7 @@ let $$b10 = nF((e, t) => XHR.put(`/api/folders/${t.folderId}/description`, {
   e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.update_subscription_error")));
 }));
 let $$T6 = NC("FOLDER_UNPIN_FILE");
-let $$I15 = nF((e, t) => {
+let $$I15 = createOptimistThunk((e, t) => {
   let r = e.optimisticDispatch($$T6(t));
   return XHR.del(`/api/folders/${t.fileKey}/pin`).then(() => {
     r.commit();
@@ -38,7 +38,7 @@ let $$I15 = nF((e, t) => {
   });
 });
 let $$S1 = NC("FOLDER_PIN_FILE");
-let $$v8 = nF(async (e, t) => {
+let $$v8 = createOptimistThunk(async (e, t) => {
   let r = e.optimisticDispatch($$S1(t));
   xr("file_browser_folder_pin_file", t.folderId, null, e.getState(), {
     fileKey: t.fileKey
@@ -58,13 +58,13 @@ let $$A5 = NC("FOLDER_SET_PINNED_FILE");
 let $$x2 = NC("FOLDER_DELETE_LG_SHIM");
 let $$N13 = NC("FOLDER_DELETE");
 let $$C3 = NC("FOLDER_CLEAR");
-let $$w11 = nF((e, t) => {
+let $$w11 = createOptimistThunk((e, t) => {
   let r = SS(t.name);
   if (r) {
     e.dispatch(_$$s.error(r));
     return null;
   }
-  if (e.dispatch(Lo()), e.dispatch(bx()), void 0 === t.isInviteOnly && void 0 === t.isViewOnly && void 0 === t.teamAccess) {
+  if (e.dispatch(popModalStack()), e.dispatch(bx()), void 0 === t.isInviteOnly && void 0 === t.isViewOnly && void 0 === t.teamAccess) {
     e.dispatch(_$$s.error("inviteOnly and viewOnly fields or teamAccess field must be defined"));
     return null;
   }
@@ -147,7 +147,7 @@ let $$w11 = nF((e, t) => {
     action: $$k7(n)
   });
 });
-nF((e, {
+createOptimistThunk((e, {
   folderId: t,
   teamId: r,
   isSubscribed: n

@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { jXp, vXe } from "../figma_app/763686";
+import { FontSourceType, Fonts } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { buildStaticUrl } from "../figma_app/169182";
 import { reportError } from "../905/11";
@@ -25,7 +25,7 @@ async function m() {
 export async function $$h1(e) {
   let t = await m();
   Object.entries(e.fonts).forEach(([i, n]) => {
-    if (n.source === jXp.GOOGLE) !function (e, t) {
+    if (n.source === FontSourceType.GOOGLE) !function (e, t) {
       let i = `${u}/${p}/${e.id}/`;
       if (e.url = `${i}${e.id}.woff2`, t) {
         let n = t[e.id];
@@ -42,14 +42,14 @@ export async function $$h1(e) {
         return;
       }
       !function (e, t, i, n) {
-        if (!vXe) throw Error("Fonts module is not available. Ensure you are in an environment that supports it");
+        if (!Fonts) throw Error("Fonts module is not available. Ensure you are in an environment that supports it");
         if (getFeatureFlags().sites_web_fonts) {
-          let r = vXe.fetchFontData(t, i);
+          let r = Fonts.fetchFontData(t, i);
           if (!r) {
             reportError(_$$e.SITES_WEB_RUNTIME, Error(`Failed to fetch font data for ${t}:${i}`));
             return;
           }
-          let o = n.source === jXp.LOCAL ? `${t}:${i}` : n.id;
+          let o = n.source === FontSourceType.LOCAL ? `${t}:${i}` : n.id;
           n.id = o;
           e.files[n.id] = new Blob([r]);
           n.url = n.id;

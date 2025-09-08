@@ -11,11 +11,11 @@ import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { DP } from "../905/640017";
 import { UK } from "../figma_app/740163";
-import { q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { y as _$$y } from "../905/409121";
 import { QU } from "../figma_app/62612";
 import { f as _$$f } from "../905/940356";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { U as _$$U } from "../figma_app/825971";
 import { g as _$$g } from "../figma_app/481637";
 import { Qf } from "../figma_app/202626";
@@ -44,7 +44,7 @@ export function $$L0({
       u(!1);
     }, 1300);
   }, [p, u, c]);
-  let _ = q();
+  let _ = useFullscreenReady();
   let h = useSelector(e => e.mirror.sceneGraph);
   let m = _ && Qf(h);
   let g = !!m && m.childCount > 0;
@@ -159,7 +159,7 @@ function G({
   let t = DP();
   let r = "mouse" === e ? U(t) : M(t);
   let i = `${e} icon`;
-  let a = J2(UK().scrollWheelZoom);
+  let a = getObservableOrFallback(UK().scrollWheelZoom);
   return jsxs("div", {
     className: C,
     children: [jsx("img", {
@@ -183,7 +183,7 @@ function V({
   peripheral: e
 }) {
   let t = DP();
-  let r = J2(UK().rightClickPan);
+  let r = getObservableOrFallback(UK().rightClickPan);
   let i = `${e} icon`;
   return jsxs("div", {
     className: C,

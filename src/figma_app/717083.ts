@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { F } from "../905/549791";
+import { CheckboxPrimitive } from "../905/549791";
 import a from "classnames";
 import { Ib } from "../905/129884";
 var s = a;
@@ -29,7 +29,7 @@ export function $$d1(e) {
       id: $$l0,
       children: [jsx("span", {
         className: "toolbelt_toggle--hiddenCheckbox--aPpTc",
-        children: jsx(F, {
+        children: jsx(CheckboxPrimitive, {
           "aria-label": u,
           checked,
           onChange: onClick,

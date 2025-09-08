@@ -1,5 +1,5 @@
 import { U } from "../905/807535";
-import { YEY, D1Y, EW4, glU, AjQ } from "../figma_app/763686";
+import { CanvasSearchHelpers, GraphicElement, EditAction, Fullscreen, TextCase } from "../figma_app/763686";
 import { A } from "../vendor/292399";
 import { debugState } from "../905/407919";
 import { createEventEmitter } from "../figma_app/516794";
@@ -20,7 +20,7 @@ export function $$E0(e) {
       H1.search(e).then(({
         resultsByPage: e
       }) => {
-        YEY.setSearchResultsAfterSceneGraphChange(Object.keys(e).map(t => ({
+        CanvasSearchHelpers.setSearchResultsAfterSceneGraphChange(Object.keys(e).map(t => ({
           pageId: t,
           results: e[t]
         })), t);
@@ -90,18 +90,18 @@ export function $$E0(e) {
     },
     setCategoryCounts(e) {
       let t = {};
-      for (let r of U(D1Y)) t[r] = e[r];
+      for (let r of U(GraphicElement)) t[r] = e[r];
       yo.syncFromFullscreen(t);
     },
     updateCategoryCounts(e) {
       yo.syncFromFullscreen(t => {
         let r = {};
-        for (let n of U(D1Y)) r[n] = t[n] + e[n];
+        for (let n of U(GraphicElement)) r[n] = t[n] + e[n];
         return r;
       });
     },
     showReplace() {
-      e.dispatch(sV(EW4.REPLACE));
+      e.dispatch(sV(EditAction.REPLACE));
     },
     showMissingFontBell() {
       e.dispatch(F.enqueue({
@@ -110,7 +110,7 @@ export function $$E0(e) {
         button: {
           text: getI18nString("canvas_search.show_missing_fonts"),
           action: () => {
-            glU.findMissingFontsAndShowPopover();
+            Fullscreen.findMissingFontsAndShowPopover();
           }
         }
       }));
@@ -118,22 +118,22 @@ export function $$E0(e) {
     detectTextTransform(e) {
       let t = !1;
       for (let r of e) {
-        if (!RegExp("\\p{Lu}", "u").test(r)) return t ? AjQ.UPPER_FIRST : AjQ.NONE;
+        if (!RegExp("\\p{Lu}", "u").test(r)) return t ? TextCase.UPPER_FIRST : TextCase.NONE;
         t = !0;
       }
-      return AjQ.UPPER_ALL;
+      return TextCase.UPPER_ALL;
     },
     applyTextTransform(e, t) {
       switch (t) {
-        case AjQ.NONE:
+        case TextCase.NONE:
           return e;
-        case AjQ.UPPER_FIRST:
+        case TextCase.UPPER_FIRST:
           {
             let t = String.fromCodePoint(e.codePointAt(0));
             let r = e.substring(t.length);
             return t.toLocaleUpperCase() + r;
           }
-        case AjQ.UPPER_ALL:
+        case TextCase.UPPER_ALL:
           return e.toLocaleUpperCase();
       }
     },

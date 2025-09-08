@@ -4,7 +4,7 @@ import { atom } from "../figma_app/27355";
 import { O5 } from "../figma_app/632319";
 import { mt } from "../figma_app/102712";
 import { getI18nString } from "../905/303541";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { _P } from "../figma_app/2590";
 export var $$p7 = (e => (e[e.PRESENTATION = 0] = "PRESENTATION", e[e.CUSTOM = 1] = "CUSTOM", e[e.LARGE = 2] = "LARGE", e[e.SMALL = 3] = "SMALL", e[e.DEFAULT = 4] = "DEFAULT", e))($$p7 || {});
@@ -66,7 +66,7 @@ export function $$g4(e, t) {
 function f(e) {
   return e && "PRESET" === e;
 }
-nF((e, {
+createOptimistThunk((e, {
   nodeId: t,
   startingPointNodeId: r,
   forceReplaceState: n

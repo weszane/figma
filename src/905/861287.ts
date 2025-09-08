@@ -1,7 +1,6 @@
-import { yS, B9 } from "../905/125019";
-import { Bko } from "../figma_app/763686";
+import { sha1HexFromString, bytesToHex } from "../905/125019";
+import { ImageCppBindings } from "../figma_app/763686";
 import { Zw, fJ } from "../905/419431";
-
 export function $$o0(e) {
   try {
     let t = e.configSettings.markupImageOption;
@@ -54,7 +53,7 @@ export function $$o0(e) {
                 let i = new TextDecoder("utf-8").decode(e.$$export([{
                   imageType: "SVG"
                 }]));
-                let r = yS(i);
+                let r = sha1HexFromString(i);
                 let s = new Blob([i]);
                 let o = new Map();
                 let l = `${r}.svg`;
@@ -70,7 +69,7 @@ export function $$o0(e) {
             }(e, t, i);
             "INSTANCE" === e.type && function (e, t) {
               try {
-                let i = e.mainComponent ? (e.mainComponent) : null;
+                let i = e.mainComponent ? e.mainComponent : null;
                 i && (t.componentKey = i.componentKey ?? "", i.parentNode && i.parentNode.isStateGroup && i.parentNode.componentKey && (t.parentComponentKey = i.parentNode.componentKey));
               } catch (e) {
                 console.warn("Could not get main component:", e);
@@ -91,7 +90,7 @@ export function $$o0(e) {
           }(e, u, d);
           e.annotations && e.annotations.length && function (e, t) {
             for (let i of e.annotations) {
-              let n = i.categoryId ? e.sceneGraph.getRoot().annotationCategories?.find((e) => e?.id === i.categoryId) : null;
+              let n = i.categoryId ? e.sceneGraph.getRoot().annotationCategories?.find(e => e?.id === i.categoryId) : null;
               i.label && (t[`annotation[${n ? n.id : "Default"}]`] = i.label);
             }
           }(e, u);
@@ -141,7 +140,7 @@ export function $$o0(e) {
         let y = void 0 !== i && m >= i;
         if (g.spans) {
           A += ">\n";
-          A += g.spans.map((e) => `${h}  <span ${Object.entries(e).flatMap(([e, t]) => {
+          A += g.spans.map(e => `${h}  <span ${Object.entries(e).flatMap(([e, t]) => {
             if ("content" === e) return [];
             let i = String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
             return `${e}="${i}"`;
@@ -190,7 +189,7 @@ ${o}
     return {
       content: [{
         type: "text",
-        text: ["The following message is an XML representation of the design node. ", r ? "If the node is connected to a code component in the users codebase, the source of the code component will be included in the XML on the codeConnectSrc attribute. The component name will be included in the codeConnectName attribute." : "", o ? "If the node is similar to existing components in your codebase based on name and visual similarity, the top suggested components will be included in the XML on the codebaseSuggestions attribute. It will be an array of objects with the component `name` and `source`, ordered in descending order of similarity." : "", "local" === t ? "Image assets are stored on a local server and can be referenced using the imageSrc attribute in the XML-they will be served from the local server." : ""].filter((e) => !!e).join("\n\n")
+        text: ["The following message is an XML representation of the design node. ", r ? "If the node is connected to a code component in the users codebase, the source of the code component will be included in the XML on the codeConnectSrc attribute. The component name will be included in the codeConnectName attribute." : "", o ? "If the node is similar to existing components in your codebase based on name and visual similarity, the top suggested components will be included in the XML on the codebaseSuggestions attribute. It will be an array of objects with the component `name` and `source`, ordered in descending order of similarity." : "", "local" === t ? "Image assets are stored on a local server and can be referenced using the imageSrc attribute in the XML-they will be served from the local server." : ""].filter(e => !!e).join("\n\n")
       }, {
         type: "text",
         text: i
@@ -255,10 +254,10 @@ async function l(e, t, i, s) {
         let s = $$d(_r, g, b);
         t[`style[fill][${o}]`] = s;
         1 !== a && (t[`style[fillOpacity][${o}]`] = a);
-      } else if ("local" === i.markupImageOption && "IMAGE" === e.type && e.image?.hash && Bko && !1 !== e.visible) try {
-        let i = B9(e.image.hash);
+      } else if ("local" === i.markupImageOption && "IMAGE" === e.type && e.image?.hash && ImageCppBindings && !1 !== e.visible) try {
+        let i = bytesToHex(e.image.hash);
         await s(i);
-        let l = Bko.getCompressedImage(i);
+        let l = ImageCppBindings.getCompressedImage(i);
         if (!l) {
           console.error(`Image data for hash ${i} not found`);
           return;

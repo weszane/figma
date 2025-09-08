@@ -1,6 +1,6 @@
 import { isNullish, isNotNullish } from "../figma_app/95419";
-import { glU } from "../figma_app/763686";
-import { sH } from "../905/871411";
+import { Fullscreen } from "../figma_app/763686";
+import { parseSessionLocalID } from "../905/871411";
 import { cn } from "../figma_app/85384";
 var $$o0;
 function s(e) {
@@ -32,9 +32,9 @@ export function $$c6(e, t) {
   }) {
     let n = e ?? null;
     if (!e) {
-      let e = glU.generateUniqueID();
+      let e = Fullscreen.generateUniqueID();
       if (!e) throw Error("Failed to generate a unique id");
-      n = sH(e);
+      n = parseSessionLocalID(e);
     }
     if (!n) throw Error("No interaction ID");
     return {

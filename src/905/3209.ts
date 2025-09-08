@@ -1,26 +1,26 @@
-import { XHR } from '../905/910117'
-import { td, vh } from '../figma_app/181241'
+import { XHR } from '../905/910117';
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 
 // Types
 interface OrgWhitelistParams {
-  orgId: string
-  [key: string]: any
+  orgId: string;
+  [key: string]: any;
 }
 interface PluginVersionsParams {
-  pluginId: string
+  pluginId: string;
 }
 interface PluginsParams {
-  [key: string]: any
+  [key: string]: any;
 }
 interface ProfileParams {
-  profileId: string
-  [key: string]: any
+  profileId: string;
+  [key: string]: any;
 }
 interface OrgParams {
-  orgId: string
+  orgId: string;
 }
 interface InstallStatusParams {
-  [key: string]: any
+  [key: string]: any;
 }
 
 /**
@@ -28,27 +28,27 @@ interface InstallStatusParams {
  * Handles all plugin-related API endpoints with proper validation
  */
 export class PluginAPIService {
-  private readonly orgWhitelistValidator = vh()
-  private readonly versionsValidator = vh()
-  private readonly pluginsValidator = vh()
-  private readonly profileValidator = vh()
-  private readonly orgValidator = vh()
-  private readonly installStatusValidator = vh()
-  private readonly unpublishedPluginsValidator = vh()
+  private readonly orgWhitelistValidator = createNoOpValidator();
+  private readonly versionsValidator = createNoOpValidator();
+  private readonly pluginsValidator = createNoOpValidator();
+  private readonly profileValidator = createNoOpValidator();
+  private readonly orgValidator = createNoOpValidator();
+  private readonly installStatusValidator = createNoOpValidator();
+  private readonly unpublishedPluginsValidator = createNoOpValidator();
 
   /**
    * Gets the organization whitelist for plugins
    */
   async getOrgWhitelist(params: OrgWhitelistParams) {
     return this.orgWhitelistValidator.validate(async ({
-      xr,
+      xr
     }) => {
       const {
         orgId,
         ...queryParams
-      } = params
-      return await xr.get(`/api/plugins/org/${orgId}/whitelist`, td.toAPIParameters(queryParams))
-    })
+      } = params;
+      return await xr.get(`/api/plugins/org/${orgId}/whitelist`, APIParameterUtils.toAPIParameters(queryParams));
+    });
   }
 
   /**
@@ -56,15 +56,17 @@ export class PluginAPIService {
    */
   async getVersions(params: PluginVersionsParams) {
     return this.versionsValidator.validate(async ({
-      xr,
-    }) => await xr.get(`/api/plugins/${params.pluginId}/ver sions`))
+      xr
+    }) => await xr.get(`/api/plugins/${params.pluginId}/ver sions`));
   }
 
   /**
    * Gets plugins with optional filtering parameters
    */
   async getPlugins(params: PluginsParams) {
-    return this.pluginsValidator.validate(async ({ xr }) => await xr.get('/api/plugins', td.toAPIParameters(params)))
+    return this.pluginsValidator.validate(async ({
+      xr
+    }) => await xr.get('/api/plugins', APIParameterUtils.toAPIParameters(params)));
   }
 
   /**
@@ -74,8 +76,10 @@ export class PluginAPIService {
     const {
       profileId,
       ...queryParams
-    } = params
-    return this.profileValidator.validate(async ({ xr }) => await xr.get(`/api/plugins/profile/${profileId}`, td.toAPIParameters(queryParams)))
+    } = params;
+    return this.profileValidator.validate(async ({
+      xr
+    }) => await xr.get(`/api/plugins/profile/${profileId}`, APIParameterUtils.toAPIParameters(queryParams)));
   }
 
   /**
@@ -83,8 +87,8 @@ export class PluginAPIService {
    */
   async getOrg(params: OrgParams) {
     return this.orgValidator.validate(async ({
-      xr,
-    }) => await xr.get(`/api/plugins/org/${params.orgId}`))
+      xr
+    }) => await xr.get(`/api/plugins/org/${params.orgId}`));
   }
 
   /**
@@ -92,8 +96,8 @@ export class PluginAPIService {
    */
   async getInstallStatus(params: InstallStatusParams) {
     return this.installStatusValidator.validate(async ({
-      xr,
-    }) => await xr.get('/api/plugins/install_status', td.toAPIParameters(params)))
+      xr
+    }) => await xr.get('/api/plugins/install_status', APIParameterUtils.toAPIParameters(params)));
   }
 
   /**
@@ -101,8 +105,8 @@ export class PluginAPIService {
    */
   async getUnpublishedPlugins() {
     return this.unpublishedPluginsValidator.validate(async ({
-      xr,
-    }) => await xr.get('/api/plugins/unpublished'))
+      xr
+    }) => await xr.get('/api/plugins/unpublished'));
   }
 
   /**
@@ -113,16 +117,16 @@ export class PluginAPIService {
   async postPluginsBatch(pluginIds: string[], orgId?: string) {
     return await XHR.post('/api/plugins/batch', {
       ids: pluginIds,
-      org_id: orgId,
-    })
+      org_id: orgId
+    });
   }
 }
 
 // Create and export singleton instance
-export const pluginAPIService = new PluginAPIService()
+export const pluginAPIService = new PluginAPIService();
 
 // Legacy export for backward compatibility
-export const V = pluginAPIService
+export const V = pluginAPIService;
 
 // Named export for better clarity
-export { pluginAPIService as PluginAPI }
+export { pluginAPIService as PluginAPI };

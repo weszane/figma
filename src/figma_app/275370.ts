@@ -1,7 +1,7 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { g } from "../905/880308";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { ze, _S } from "../figma_app/516028";
 var $$d3 = (e => (e[e.RAW_VARIABLES = 0] = "RAW_VARIABLES", e[e.RAW_TEXT_STYLES = 1] = "RAW_TEXT_STYLES", e[e.COMPONENT = 2] = "COMPONENT", e[e.FRAGMENT = 3] = "FRAGMENT", e[e.GENERATED_VARIABLES = 4] = "GENERATED_VARIABLES", e[e.GENERATED_TYPOGRAPHY = 5] = "GENERATED_TYPOGRAPHY", e[e.GUIDELINES_MD = 6] = "GUIDELINES_MD", e[e.GLOBAL_CSS = 7] = "GLOBAL_CSS", e[e.COMPONENTS_LIST_VARIABLES = 8] = "COMPONENTS_LIST_VARIABLES", e[e.COMPONENTS_LIST_TYPOGRAPHY = 9] = "COMPONENTS_LIST_TYPOGRAPHY", e))($$d3 || {});
@@ -37,7 +37,7 @@ export async function $$u1() {
   })).data.meta.components;
 }
 export function $$p2(e) {
-  let t = vh();
+  let t = createNoOpValidator();
   let r = debugState.getState().currentUserOrgId;
   return t.validate(async ({
     xr: t

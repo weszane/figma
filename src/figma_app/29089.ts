@@ -1,5 +1,5 @@
 import { isNotNullish } from "../figma_app/95419";
-import { m1T, NLJ, Ez5, xc1, YnC, F84, dBj } from "../figma_app/763686";
+import { LayoutTabType, DesignGraphElements, AppStateTsApi, SelectionPanelType, SymbolOverrideType, SwitchState, PresentationMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { tn } from "../figma_app/473493";
@@ -17,25 +17,25 @@ export function $$g20(e) {
 export function $$f8(e) {
   return "divider" in e;
 }
-let $$E11 = [m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT, m1T.BUZZ_LAYOUT, m1T.RASTER, m1T.GRADIENT, m1T.TEXT, m1T.COMMENTS];
-let y = $$E11.concat([m1T.VECTOR]);
-let b = $$E11.concat([m1T.VECTOR, m1T.PLACE_IMAGE]);
-let T = [m1T.VECTOR];
-let I = [m1T.PLACE_IMAGE];
-let $$S5 = [m1T.PREVIEW, m1T.BRANCHING, m1T.COMPARE_CHANGES, m1T.HISTORY];
-let v = [m1T.DESIGN_LAYOUT, m1T.SITES_LAYOUT, m1T.TEXT, m1T.RASTER, m1T.GRADIENT, m1T.PREVIEW, m1T.COMMENTS, m1T.BRANCHING, m1T.HISTORY, m1T.COMPARE_CHANGES];
+let $$E11 = [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.WHITEBOARD_LAYOUT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT, LayoutTabType.BUZZ_LAYOUT, LayoutTabType.RASTER, LayoutTabType.GRADIENT, LayoutTabType.TEXT, LayoutTabType.COMMENTS];
+let y = $$E11.concat([LayoutTabType.VECTOR]);
+let b = $$E11.concat([LayoutTabType.VECTOR, LayoutTabType.PLACE_IMAGE]);
+let T = [LayoutTabType.VECTOR];
+let I = [LayoutTabType.PLACE_IMAGE];
+let $$S5 = [LayoutTabType.PREVIEW, LayoutTabType.BRANCHING, LayoutTabType.COMPARE_CHANGES, LayoutTabType.HISTORY];
+let v = [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SITES_LAYOUT, LayoutTabType.TEXT, LayoutTabType.RASTER, LayoutTabType.GRADIENT, LayoutTabType.PREVIEW, LayoutTabType.COMMENTS, LayoutTabType.BRANCHING, LayoutTabType.HISTORY, LayoutTabType.COMPARE_CHANGES];
 let A = {
   type: ZU.FLYOUT,
   name: "move-flyout",
   children: [{
     action: "set-tool-default",
     property: "currentTool",
-    propertyValue: NLJ.SELECT,
+    propertyValue: DesignGraphElements.SELECT,
     recordingKey: "toolDefault"
   }, {
     action: "set-tool-scale",
     property: "currentTool",
-    propertyValue: NLJ.SCALE,
+    propertyValue: DesignGraphElements.SCALE,
     recordingKey: "toolScale"
   }],
   editModes: b,
@@ -49,32 +49,32 @@ let x = {
   children: [{
     action: "set-tool-rectangle",
     property: "currentTool",
-    propertyValue: NLJ.SHAPE_RECTANGLE,
+    propertyValue: DesignGraphElements.SHAPE_RECTANGLE,
     recordingKey: "toolShapeRectangle"
   }, {
     action: "set-tool-line",
     property: "currentTool",
-    propertyValue: NLJ.SHAPE_LINE,
+    propertyValue: DesignGraphElements.SHAPE_LINE,
     recordingKey: "toolShapeLine"
   }, {
     action: "set-tool-arrow",
     property: "currentTool",
-    propertyValue: NLJ.SHAPE_ARROW,
+    propertyValue: DesignGraphElements.SHAPE_ARROW,
     recordingKey: "toolShapeArrow"
   }, {
     action: "set-tool-ellipse",
     property: "currentTool",
-    propertyValue: NLJ.SHAPE_ELLIPSE,
+    propertyValue: DesignGraphElements.SHAPE_ELLIPSE,
     recordingKey: "toolShapeEllipse"
   }, {
     action: "set-tool-regular-polygon",
     property: "currentTool",
-    propertyValue: NLJ.SHAPE_REGULAR_POLYGON,
+    propertyValue: DesignGraphElements.SHAPE_REGULAR_POLYGON,
     recordingKey: "toolShapePolygon"
   }, {
     action: "set-tool-star",
     property: "currentTool",
-    propertyValue: NLJ.SHAPE_STAR,
+    propertyValue: DesignGraphElements.SHAPE_STAR,
     recordingKey: "toolShapeStar"
   }, {
     action: "place",
@@ -90,25 +90,25 @@ let N = {
   children: [{
     action: "set-tool-comments",
     property: "currentTool",
-    propertyValue: NLJ.COMMENTS,
+    propertyValue: DesignGraphElements.COMMENTS,
     recordingKey: "toolComments"
   }, {
     action: "set-tool-annotate",
     property: "currentTool",
-    propertyValue: NLJ.ANNOTATE,
+    propertyValue: DesignGraphElements.ANNOTATE,
     recordingKey: "toolAnnotate"
   }, {
     action: "set-tool-measure",
     property: "currentTool",
-    propertyValue: NLJ.MEASURE,
+    propertyValue: DesignGraphElements.MEASURE,
     recordingKey: "toolMeasure"
   }]
 };
 let $$C22 = {
   type: ZU.TOOL,
-  tool: NLJ.COMMENTS,
+  tool: DesignGraphElements.COMMENTS,
   action: "set-tool-comments",
-  editModes: $$E11.concat([m1T.PREVIEW]),
+  editModes: $$E11.concat([LayoutTabType.PREVIEW]),
   nonEditorsAllowed: !0,
   onboardingKey: "comment",
   recordingKey: "toolComment"
@@ -124,7 +124,7 @@ let O = {
 };
 [{
   type: ZU.TOOL,
-  tool: NLJ.SELECT,
+  tool: DesignGraphElements.SELECT,
   action: "set-tool-default",
   nonEditorsAllowed: !0,
   editModes: $$S5,
@@ -138,17 +138,17 @@ let O = {
   children: [{
     action: "set-tool-frame",
     property: "currentTool",
-    propertyValue: NLJ.FRAME,
+    propertyValue: DesignGraphElements.FRAME,
     recordingKey: "toolFrame"
   }, {
     action: "set-tool-section",
     property: "currentTool",
-    propertyValue: NLJ.SECTION,
+    propertyValue: DesignGraphElements.SECTION,
     recordingKey: "toolSection"
   }, {
     action: "set-tool-slice",
     property: "currentTool",
-    propertyValue: NLJ.SLICE,
+    propertyValue: DesignGraphElements.SLICE,
     recordingKey: "toolSlice"
   }]
 }, x, {
@@ -160,35 +160,35 @@ let O = {
   children: [{
     action: "set-tool-pen",
     property: "currentTool",
-    propertyValue: NLJ.VECTOR_PEN,
+    propertyValue: DesignGraphElements.VECTOR_PEN,
     recordingKey: "toolPen"
   }, {
     action: "set-tool-pencil",
     property: "currentTool",
-    propertyValue: NLJ.VECTOR_PENCIL,
+    propertyValue: DesignGraphElements.VECTOR_PENCIL,
     recordingKey: "toolPencil"
   }]
 }, {
   type: ZU.TOOL,
-  tool: NLJ.VECTOR_BEND,
+  tool: DesignGraphElements.VECTOR_BEND,
   action: "set-tool-bend",
   editModes: T,
   recordingKey: "toolBend"
 }, {
   type: ZU.TOOL,
-  tool: NLJ.VECTOR_PAINT_BUCKET,
+  tool: DesignGraphElements.VECTOR_PAINT_BUCKET,
   action: "set-tool-paint-bucket",
   editModes: T,
   recordingKey: "toolPaintBucket"
 }, {
   type: ZU.TOOL,
-  tool: NLJ.VECTOR_LASSO,
+  tool: DesignGraphElements.VECTOR_LASSO,
   action: "set-tool-vector-lasso",
   editModes: T,
   recordingKey: "toolVectorLasso"
 }, {
   type: ZU.TOOL,
-  tool: NLJ.VECTOR_VAR_WIDTH_POINT,
+  tool: DesignGraphElements.VECTOR_VAR_WIDTH_POINT,
   action: "set-tool-var-width-point",
   editModes: T,
   recordingKey: "toolVarWidthPoint",
@@ -198,40 +198,40 @@ let O = {
   onlyShowInReadOnly: !1
 }, {
   type: ZU.TOOL,
-  tool: NLJ.VECTOR_CUT,
+  tool: DesignGraphElements.VECTOR_CUT,
   action: "set-tool-cut",
   editModes: T,
   recordingKey: "toolCut",
   featureFlags: ["ce_il_vem_cut_tool"]
 }, {
   type: ZU.TOOL,
-  tool: NLJ.OFFSET_PATH,
+  tool: DesignGraphElements.OFFSET_PATH,
   action: "set-tool-offset-path",
   editModes: $$E11,
   recordingKey: "toolOffsetPath",
   featureFlags: ["ce_il_vem_offset_path"]
 }, {
   type: ZU.TOOL,
-  tool: NLJ.SHAPE_BUILDER,
+  tool: DesignGraphElements.SHAPE_BUILDER,
   action: "set-tool-shape-builder",
   editModes: T,
   recordingKey: "toolShapeBuilder"
 }, {
   type: ZU.TOOL,
-  tool: NLJ.SIMPLIFY_VECTOR,
+  tool: DesignGraphElements.SIMPLIFY_VECTOR,
   action: "set-tool-simplify-vector",
   editModes: $$E11,
   recordingKey: "toolSimplify"
 }, {
   type: ZU.TOOL,
-  tool: NLJ.TYPE,
+  tool: DesignGraphElements.TYPE,
   action: "set-tool-type",
   editModes: $$E11,
   recordingKey: "toolType",
   onboardingKey: "tool-type-onboarding"
 }, O, {
   type: ZU.TOOL,
-  tool: NLJ.HAND,
+  tool: DesignGraphElements.HAND,
   action: "set-tool-hand",
   nonEditorsAllowed: !0,
   loggedOutAllowed: !0,
@@ -262,9 +262,9 @@ let O = {
 let R = {
   type: ZU.ACTION,
   action: "focus-mode-component-set-toggle",
-  editModes: [m1T.DESIGN_LAYOUT, m1T.SITES_LAYOUT],
+  editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SITES_LAYOUT],
   recordingKey: "focusModeComponentSetToggle",
-  isActive: () => Ez5.uiState().focusModeState.getCopy() === xc1.COMPONENT_SET,
+  isActive: () => AppStateTsApi.uiState().focusModeState.getCopy() === SelectionPanelType.COMPONENT_SET,
   onboardingKey: "focus-mode-component-set-toggle"
 };
 let L = [{
@@ -276,7 +276,7 @@ let L = [{
 }, {
   type: ZU.ACTION,
   action: "select-matching",
-  editModes: [m1T.DESIGN_LAYOUT, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT],
+  editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT],
   recordingKey: "selectMatching"
 }, R];
 function P(e) {
@@ -315,25 +315,25 @@ let j = {
 let U = {
   type: ZU.ACTION,
   action: "focus-mode-component-set-toggle",
-  editModes: [m1T.DESIGN_LAYOUT, m1T.SITES_LAYOUT],
+  editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SITES_LAYOUT],
   recordingKey: "focusModeComponentSetToggle",
-  isActive: () => Ez5.uiState().focusModeState.getCopy() === xc1.COMPONENT_SET,
+  isActive: () => AppStateTsApi.uiState().focusModeState.getCopy() === SelectionPanelType.COMPONENT_SET,
   onboardingKey: "focus-mode-component-set-toggle"
 };
 let B = {
   type: ZU.ACTION,
   action: "focus-mode-responsive-set",
-  editModes: [m1T.SITES_LAYOUT],
+  editModes: [LayoutTabType.SITES_LAYOUT],
   recordingKey: "autoFocusModeResponsiveSetToggle",
   onboardingKey: "auto-focus-mode-responsive-set-toggle",
-  isActive: () => Ez5.editorPreferences().toggleResponsiveSetAutoFocus.getCopy(),
+  isActive: () => AppStateTsApi.editorPreferences().toggleResponsiveSetAutoFocus.getCopy(),
   isAvailable: e => Yh(e, "focus-mode-responsive-set"),
-  getDisplayAction: () => Ez5.editorPreferences().toggleResponsiveSetAutoFocus.getCopy() ? "focus-mode-responsive-set-disable" : "focus-mode-responsive-set-enable"
+  getDisplayAction: () => AppStateTsApi.editorPreferences().toggleResponsiveSetAutoFocus.getCopy() ? "focus-mode-responsive-set-disable" : "focus-mode-responsive-set-enable"
 };
 let G = e => ({
   type: ZU.ACTION,
   action: "select-matching",
-  editModes: [m1T.DESIGN_LAYOUT, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT, m1T.BUZZ_LAYOUT],
+  editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT, LayoutTabType.BUZZ_LAYOUT],
   recordingKey: "selectMatching",
   isAvailable: e => Yh(e, "select-matching"),
   preventHoisting: eF(e)
@@ -341,7 +341,7 @@ let G = e => ({
 let $$V33 = {
   type: ZU.ACTION,
   action: "select-similar",
-  editModes: [m1T.DESIGN_LAYOUT, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT],
+  editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT],
   recordingKey: "selectSimilar",
   isAvailable: e => Yh(e, "select-similar"),
   featureFlags: ["first_draft_select_similar"]
@@ -359,13 +359,13 @@ export function $$z3() {
 function W(e) {
   let t = [B, U, H, G(e)];
   let r = e.some(e => e.isOrInResponsiveSetOrWebpage && e.isInPrimaryBreakpointFrame);
-  let n = r && Ez5?.editorPreferences().toggleResponsiveSetAutoFocus.getCopy();
+  let n = r && AppStateTsApi?.editorPreferences().toggleResponsiveSetAutoFocus.getCopy();
   return getFeatureFlags().sts_multiedit_toggle && n ? t.filter(e => "select-matching" !== e.action) : getFeatureFlags().sts_multiedit_toggle && !r ? t.filter(e => e !== B) : t;
 }
 let K = {
   type: ZU.ACTION,
   action: "add-selection-ready-status",
-  editModes: [...$$E11, m1T.DEV_HANDOFF],
+  editModes: [...$$E11, LayoutTabType.DEV_HANDOFF],
   recordingKey: "toolAddReadyStatus",
   isActive: () => !1,
   reactKey: "dev-ready-status-toggle"
@@ -373,7 +373,7 @@ let K = {
 let $$Y28 = {
   type: ZU.ACTION,
   action: "remove-selection-status",
-  editModes: [...$$E11, m1T.DEV_HANDOFF],
+  editModes: [...$$E11, LayoutTabType.DEV_HANDOFF],
   isActive: () => !0,
   recordingKey: "toolRemoveStatus",
   reactKey: "dev-ready-status-toggle"
@@ -381,8 +381,8 @@ let $$Y28 = {
 let $$$34 = {
   type: ZU.ACTION,
   action: "text-edit-hyperlink",
-  isActive: () => Ez5.editorState().selectionIsHyperlink.getCopy(),
-  editModes: [m1T.DESIGN_LAYOUT, m1T.TEXT, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT],
+  isActive: () => AppStateTsApi.editorState().selectionIsHyperlink.getCopy(),
+  editModes: [LayoutTabType.DESIGN_LAYOUT, LayoutTabType.TEXT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT],
   recordingKey: "editHyperlink"
 };
 let X = {
@@ -432,84 +432,84 @@ let er = {
   type: ZU.ACTION,
   action: "reset-size",
   recordingKey: "resetSize",
-  isAvailable: P(YnC.SIZE),
+  isAvailable: P(SymbolOverrideType.SIZE),
   preventHoisting: !0
 };
 let en = {
   type: ZU.ACTION,
   action: "reset-exports",
   recordingKey: "resetExports",
-  isAvailable: P(YnC.EXPORTS),
+  isAvailable: P(SymbolOverrideType.EXPORTS),
   preventHoisting: !0
 };
 let ei = {
   type: ZU.ACTION,
   action: "reset-effects",
   recordingKey: "resetEffects",
-  isAvailable: P(YnC.EFFECTS),
+  isAvailable: P(SymbolOverrideType.EFFECTS),
   preventHoisting: !0
 };
 let ea = {
   type: ZU.ACTION,
   action: "reset-layer",
   recordingKey: "resetLayer",
-  isAvailable: P(YnC.LAYER),
+  isAvailable: P(SymbolOverrideType.LAYER),
   preventHoisting: !0
 };
 let es = {
   type: ZU.ACTION,
   action: "reset-visible",
   recordingKey: "resetChanges",
-  isAvailable: P(YnC.VISIBLE),
+  isAvailable: P(SymbolOverrideType.VISIBLE),
   preventHoisting: !0
 };
 let eo = {
   type: ZU.ACTION,
   action: "reset-name",
   recordingKey: "resetName",
-  isAvailable: P(YnC.NAME),
+  isAvailable: P(SymbolOverrideType.NAME),
   preventHoisting: !0
 };
 let el = {
   type: ZU.ACTION,
   action: "reset-fill",
   recordingKey: "resetFill",
-  isAvailable: P(YnC.FILL),
+  isAvailable: P(SymbolOverrideType.FILL),
   preventHoisting: !0
 };
 let ed = {
   type: ZU.ACTION,
   action: "reset-stroke",
   recordingKey: "resetStroke",
-  isAvailable: P(YnC.STROKE),
+  isAvailable: P(SymbolOverrideType.STROKE),
   preventHoisting: !0
 };
 let $$ec = {
   type: ZU.ACTION,
   action: "reset-text",
   recordingKey: "resetText",
-  isAvailable: P(YnC.TEXT),
+  isAvailable: P(SymbolOverrideType.TEXT),
   preventHoisting: !0
 };
 let eu = {
   type: ZU.ACTION,
   action: "reset-text-style",
   recordingKey: "resetStyle",
-  isAvailable: P(YnC.TEXT_STYLE),
+  isAvailable: P(SymbolOverrideType.TEXT_STYLE),
   preventHoisting: !0
 };
 let ep = {
   type: ZU.ACTION,
   action: "reset-prototype-interactions",
   recordingKey: "resetPrototypeInteractions",
-  isAvailable: P(YnC.PROTOTYPE_INTERACTIONS),
+  isAvailable: P(SymbolOverrideType.PROTOTYPE_INTERACTIONS),
   preventHoisting: !0
 };
 let e_ = {
   type: ZU.ACTION,
   action: "reset-overlay",
   recordingKey: "resetOverlay",
-  isAvailable: P(YnC.OVERLAY),
+  isAvailable: P(SymbolOverrideType.OVERLAY),
   preventHoisting: !0
 };
 let $$eh17 = {
@@ -522,7 +522,7 @@ let em = {
   type: ZU.ACTION,
   action: "mask-selection",
   getDisplayAction: _$$P,
-  isActive: () => Ez5.editorState().selectionIsMask.getCopy() === F84.ON,
+  isActive: () => AppStateTsApi.editorState().selectionIsMask.getCopy() === SwitchState.ON,
   editModes: $$E11,
   recordingKey: "toolMaskSelection"
 };
@@ -614,19 +614,19 @@ let $$ex25 = {
 let $$eN0 = {
   type: ZU.ACTION,
   action: "add-variant-to-template-set",
-  editModes: [m1T.BUZZ_LAYOUT],
+  editModes: [LayoutTabType.BUZZ_LAYOUT],
   recordingKey: "addVariantToTemplateSet"
 };
 let $$eC32 = {
   type: ZU.ACTION,
   action: "create-templates-from-row",
-  editModes: [m1T.BUZZ_LAYOUT],
+  editModes: [LayoutTabType.BUZZ_LAYOUT],
   recordingKey: "createMultipleTemplatesFromRow"
 };
 let $$ew26 = {
   type: ZU.ACTION,
   action: "create-state-group-row",
-  editModes: [m1T.BUZZ_LAYOUT],
+  editModes: [LayoutTabType.BUZZ_LAYOUT],
   recordingKey: "createTemplateSet"
 };
 export function $$eO18() {
@@ -723,27 +723,27 @@ export function $$eG2(e) {
   } : em;
 }
 export let $$eV31 = [en, ei, ea, es, eo, el, ed, $$ec, eu, er, ep, e_];
-[ZU.ACTION, ZU.ACTION, ...L, ZU.ACTION, ZU.ACTION, ZU.FLYOUT, ZU.ACTION, ZU.ACTION, (ZU.ACTION, _$$P, () => Ez5.editorState().selectionIsMask.getCopy() === F84.ON), ZU.FLYOUT, ZU.ACTION, (ZU.ACTION, m1T.DESIGN_LAYOUT, m1T.TEXT, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT), ZU.ACTION, (ZU.ACTION, [...$$E11, m1T.DEV_HANDOFF, m1T.PREVIEW], (e, t, r) => r?.canEdit || tn({
+[ZU.ACTION, ZU.ACTION, ...L, ZU.ACTION, ZU.ACTION, ZU.FLYOUT, ZU.ACTION, ZU.ACTION, (ZU.ACTION, _$$P, () => AppStateTsApi.editorState().selectionIsMask.getCopy() === SwitchState.ON), ZU.FLYOUT, ZU.ACTION, (ZU.ACTION, LayoutTabType.DESIGN_LAYOUT, LayoutTabType.TEXT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT), ZU.ACTION, (ZU.ACTION, [...$$E11, LayoutTabType.DEV_HANDOFF, LayoutTabType.PREVIEW], (e, t, r) => r?.canEdit || tn({
   openFile: r
-})), (ZU.ACTION, [...$$E11, m1T.DEV_HANDOFF, m1T.PREVIEW], () => !0)];
+})), (ZU.ACTION, [...$$E11, LayoutTabType.DEV_HANDOFF, LayoutTabType.PREVIEW], () => !0)];
 ZU.TOOL;
-NLJ.SELECT;
-m1T.DEV_HANDOFF;
-m1T.DEV_HANDOFF_HISTORY;
+DesignGraphElements.SELECT;
+LayoutTabType.DEV_HANDOFF;
+LayoutTabType.DEV_HANDOFF_HISTORY;
 _$$A;
 ZU.TOOL;
-NLJ.MEASURE;
-m1T.DEV_HANDOFF;
+DesignGraphElements.MEASURE;
+LayoutTabType.DEV_HANDOFF;
 ZU.TOOL;
-NLJ.ANNOTATE;
-m1T.DEV_HANDOFF;
+DesignGraphElements.ANNOTATE;
+LayoutTabType.DEV_HANDOFF;
 ZU.TOOL;
-NLJ.COMMENTS;
-m1T.DEV_HANDOFF;
+DesignGraphElements.COMMENTS;
+LayoutTabType.DEV_HANDOFF;
 let $$eH6 = {
   type: ZU.FLYOUT,
   name: "prototype-view-flyout",
-  editModes: $$E11.concat([m1T.DEV_HANDOFF, m1T.PREVIEW, m1T.MAGIC_LINK]),
+  editModes: $$E11.concat([LayoutTabType.DEV_HANDOFF, LayoutTabType.PREVIEW, LayoutTabType.MAGIC_LINK]),
   nonEditorsAllowed: !0,
   loggedOutAllowed: !0,
   recordingKey: "prototypeViewFlyout",
@@ -752,13 +752,13 @@ let $$eH6 = {
   children: [{
     action: "present-as-prototype",
     actionOnFlyoutItemClick: "set-prototype-view-present",
-    isActive: () => Ez5.prototypingEditorState().prototypeViewMode.getCopy() === dBj.PRESENT,
+    isActive: () => AppStateTsApi.prototypingEditorState().prototypeViewMode.getCopy() === PresentationMode.PRESENT,
     recordingKey: "prototypeViewPresent",
     onboardingKey: "prototype-view-present-dropdown-option"
   }, {
     action: "toggle-inline-preview",
     actionOnFlyoutItemClick: "set-prototype-view-preview",
-    isActive: () => Ez5.prototypingEditorState().prototypeViewMode.getCopy() === dBj.PREVIEW,
+    isActive: () => AppStateTsApi.prototypingEditorState().prototypeViewMode.getCopy() === PresentationMode.PREVIEW,
     recordingKey: "prototypeViewPreview"
   }],
   onboardingKey: "prototype-view-flyout"
@@ -773,13 +773,13 @@ let $$ez1 = {
   children: [{
     action: "present-sites-full-preview",
     actionOnFlyoutItemClick: "set-sites-full-preview",
-    isActive: () => Ez5.prototypingEditorState().prototypeViewMode.getCopy() === dBj.PRESENT,
+    isActive: () => AppStateTsApi.prototypingEditorState().prototypeViewMode.getCopy() === PresentationMode.PRESENT,
     recordingKey: "sitesFullPreview",
     onboardingKey: Iv
   }, {
     action: "toggle-inline-html-preview",
     actionOnFlyoutItemClick: "set-sites-inline-preview",
-    isActive: () => Ez5.prototypingEditorState().prototypeViewMode.getCopy() === dBj.PREVIEW,
+    isActive: () => AppStateTsApi.prototypingEditorState().prototypeViewMode.getCopy() === PresentationMode.PREVIEW,
     recordingKey: "sitesInlinePreview",
     onboardingKey: Iv
   }]

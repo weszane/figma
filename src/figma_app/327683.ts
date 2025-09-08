@@ -1,6 +1,6 @@
-import { rXF, j0r } from "../figma_app/763686";
+import { VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { sD } from "../figma_app/243058";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
@@ -41,7 +41,7 @@ function A({
 }) {
   let _ = TW({
     node: i,
-    resolvedType: rXF.COLOR,
+    resolvedType: VariableResolvedDataType.COLOR,
     localVariables: e,
     libraryVariableSetIdToSet: t,
     libraryVariables: r
@@ -207,7 +207,7 @@ async function O({
   }) {
     let _ = TW({
       node: i,
-      resolvedType: rXF.COLOR,
+      resolvedType: VariableResolvedDataType.COLOR,
       localVariables: e,
       libraryVariableSetIdToSet: t,
       libraryVariables: r
@@ -228,7 +228,7 @@ async function O({
     [...Object.values(h.libraryVariables), ...Object.values(b)].forEach(e => {
       let t = e.variable;
       let r = e.resolvedValue;
-      if (t.resolvedType !== rXF.COLOR || !r || "MIXED" === r || r.resolvedType !== rXF.COLOR) return;
+      if (t.resolvedType !== VariableResolvedDataType.COLOR || !r || "MIXED" === r || r.resolvedType !== VariableResolvedDataType.COLOR) return;
       if (u) {
         let {
           aaPass
@@ -301,7 +301,7 @@ export async function $$R0({
   let h = [...d$({
     ruleId: a,
     nodeType: e.type
-  }), j0r.ALL_SCOPES];
+  }), PropertyScope.ALL_SCOPES];
   if (getFeatureFlags().aip_flower_garden_rerank) {
     u = "RERANKER";
     let n = await O({
@@ -376,7 +376,7 @@ export async function $$L5(e, t, r, n, s, o, l) {
       }
     }
   };
-  l7.user("design-linter-fix-color-tokens", () => {
+  permissionScopeHandler.user("design-linter-fix-color-tokens", () => {
     if ("FILL" === c ? e.fills = [...e.fills.slice(0, index), d, ...e.fills.slice(index + 1)] : "STROKE" === c && (e.strokePaints = {
       data: [...e.strokePaints.data.slice(0, index), d, ...e.strokePaints.data.slice(index + 1)],
       blobs: e.strokePaints.blobs

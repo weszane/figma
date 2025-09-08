@@ -16,7 +16,7 @@ import { cX, t$, kx } from "../figma_app/920333";
 import { uU, FN } from "../1291/539089";
 import { Ib, Rz } from "../1291/846441";
 import { C as _$$C } from "../1291/839924";
-import { Ez5, NLJ } from "../figma_app/763686";
+import { AppStateTsApi, DesignGraphElements } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Dy } from "../figma_app/925970";
@@ -80,7 +80,7 @@ function C({
         currentTab: tabManager.activeTab,
         scrollContainerRef: i,
         shouldShowTabView: !1,
-        toolbeltHeight: (Ez5?.singleSlideView().bottomToolbeltHeightInViewport() || 72) - 12,
+        toolbeltHeight: (AppStateTsApi?.singleSlideView().bottomToolbeltHeightInViewport() || 72) - 12,
         children: e
       })]
     }), s && o && jsxs(_$$B.TabView, {
@@ -90,7 +90,7 @@ function C({
         currentTab: tabManager.activeTab,
         scrollContainerRef: a,
         shouldShowTabView: y,
-        toolbeltHeight: (Ez5?.singleSlideView().bottomToolbeltHeightInViewport() || 72) - 12,
+        toolbeltHeight: (AppStateTsApi?.singleSlideView().bottomToolbeltHeightInViewport() || 72) - 12,
         children: o
       })]
     })]
@@ -125,7 +125,7 @@ function P() {
       children: [jsx(z, {
         iconPrefix: jsx(_$$s2, {}),
         onClick: () => {
-          activateTool(NLJ.TABLE);
+          activateTool(DesignGraphElements.TABLE);
           e(KE());
         },
         recordingKey: "table-insert-button",
@@ -133,7 +133,7 @@ function P() {
       }), jsx(z, {
         iconPrefix: jsx(_$$I, {}),
         onClick: () => {
-          activateTool(NLJ.CODE_BLOCK);
+          activateTool(DesignGraphElements.CODE_BLOCK);
           e(KE());
         },
         recordingKey: "codeBlockInsertButton",
@@ -141,7 +141,7 @@ function P() {
       }), jsx(z, {
         iconPrefix: jsx(L, {}),
         onClick: () => {
-          activateTool(NLJ.SLIDE_NUMBER);
+          activateTool(DesignGraphElements.SLIDE_NUMBER);
           e(KE());
         },
         recordingKey: "slide-number-insert-button",

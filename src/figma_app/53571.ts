@@ -1,7 +1,7 @@
 import { reportError } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { l7, zk } from '../905/189185';
-import { m as _$$m } from '../905/294113';
+import { permissionScopeHandler, zk } from '../905/189185';
+import { maybeCreateSavepoint } from '../905/294113';
 import { getI18nString } from '../905/303541';
 import { e as _$$e2 } from '../905/365408';
 import { debugState } from '../905/407919';
@@ -17,11 +17,11 @@ import { j } from '../figma_app/172303';
 import { FEventType } from '../figma_app/191312';
 import { ds } from '../figma_app/314264';
 import { S7 } from '../figma_app/379850';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { tn } from '../figma_app/473493';
 import { np } from '../figma_app/544649';
 import { d as _$$d, cR, hv, pc } from '../figma_app/715641';
-import { h3O, SES, w3z, zIx } from '../figma_app/763686';
+import { Multiplayer, SessionOrigin, HandoffBindingsCpp, BuildStatus } from '../figma_app/763686';
 import { zi } from '../figma_app/867292';
 import { d1, hj } from '../figma_app/888478';
 function w({
@@ -58,9 +58,9 @@ async function O(e, t, r, n, d) {
   let h = _.openFile?.key || '';
   let m = d ?? void 0;
   let g = performance.now();
-  if (atomStoreManager.set(pc, !0), t === zIx.BUILD || t === zIx.COMPLETED) {
+  if (atomStoreManager.set(pc, !0), t === BuildStatus.BUILD || t === BuildStatus.COMPLETED) {
     try {
-      let e = await _$$m(h, zi(t) ?? void 0, m, p, !0);
+      let e = await maybeCreateSavepoint(h, zi(t) ?? void 0, m, p, !0);
       u = e?.id;
       h && !u && reportError(_$$e.DEVELOPER_TOOLS, new Error('[Dev mode activity] createSavepoint returned no id'));
     } catch (e) {
@@ -68,7 +68,7 @@ async function O(e, t, r, n, d) {
     }
   }
   let y = !1;
-  l7(zk.SYSTEM, 'store-status-activity', () => {
+  permissionScopeHandler(zk.SYSTEM, 'store-status-activity', () => {
     _$$e2.recordStatusChange({
       fileKey: h,
       nodes: e,
@@ -97,9 +97,9 @@ async function O(e, t, r, n, d) {
 }
 function R(e) {
   switch (e) {
-    case zIx.BUILD:
+    case BuildStatus.BUILD:
       return 'ready_for_dev';
-    case zIx.COMPLETED:
+    case BuildStatus.COMPLETED:
       return 'completed';
     default:
       return 'none';
@@ -139,10 +139,10 @@ export async function $$P0({
   let c = d.mirror.sceneGraph;
   let E = d.openFile?.key ?? '';
   let S = d.user?.id ?? '';
-  let v = w3z.isReadOnly(SES.NODE_STATUS);
+  let v = HandoffBindingsCpp.isReadOnly(SessionOrigin.NODE_STATUS);
   let A = R(t);
   let x = debugState.dispatch;
-  if (t === zIx.BUILD) {
+  if (t === BuildStatus.BUILD) {
     x(_$$b({
       has_marked_ready_for_dev: !0
     }));
@@ -168,7 +168,7 @@ export async function $$P0({
       P.set(r, e.hasBeenEditedSinceLastStatusChange);
       D.set(r, R(n));
       let i = S7(c, r, e.containingCanvas || '');
-      let s = n === zIx.BUILD && t === zIx.BUILD;
+      let s = n === BuildStatus.BUILD && t === BuildStatus.BUILD;
       let o = '';
       if (e.containingCanvas) {
         let t = c.get(e.containingCanvas);
@@ -219,7 +219,7 @@ export async function $$P0({
     setTimeout(() => {
       l || ds('temp_debug_set_status_view_only_failed', s?.key, d, o);
     }, 2e3);
-    h3O.sendSetNodeStatus(e, t, r ?? '', S);
+    Multiplayer.sendSetNodeStatus(e, t, r ?? '', S);
     let [c] = await Promise.all([$$L(k, E), _$$n()]);
     if (l = !0, tn(d)) {
       for (let {
@@ -267,14 +267,14 @@ export async function $$P0({
       });
       return;
     }
-    l7(i, 'set-nodes-status', () => {
+    permissionScopeHandler(i, 'set-nodes-status', () => {
       for (let {
         id
       } of k) {
         let n = c.get(id);
         n && n.setStatus(t, S, r ?? void 0);
       }
-      Y5.triggerAction('commit');
+      fullscreenValue.triggerAction('commit');
     });
     let a = await $$L(k, E);
     for (let {
@@ -319,7 +319,7 @@ export async function $$P0({
     let t = atomStoreManager.get(_$$d);
     let r = atomStoreManager.get(cR);
     let n = atomStoreManager.get(hv)?.data;
-    e !== zIx.BUILD || t || r || n || atomStoreManager.set(_$$d, !0);
+    e !== BuildStatus.BUILD || t || r || n || atomStoreManager.set(_$$d, !0);
   }(t);
 }
 export function $$D1(e, t) {

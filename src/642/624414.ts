@@ -8,12 +8,12 @@ import { tH, H4 } from "../905/751457";
 import { Us } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { q5 } from "../figma_app/516028";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 export function $$_0() {
   let e = useDispatch();
   let t = q5();
@@ -28,10 +28,10 @@ export function $$_0() {
         teamId: _,
         userId: s
       });
-      e(to({
+      e(showModalHandler({
         type: _$$V,
         data: {
-          upsellSource: _$$b2.LIBRARY_UPSELL_BADGE,
+          upsellSource: UpsellModalType.LIBRARY_UPSELL_BADGE,
           teamId: _ ?? void 0,
           openCheckoutInNewTab: !0
         }

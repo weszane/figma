@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { daH } from "../figma_app/763686";
+import { ColorOptions } from "../figma_app/763686";
 import { YU } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { Tn, OF, Zv, L5, QE, B8 } from "../figma_app/728075";
@@ -82,17 +82,17 @@ export function $$_1(e) {
 }
 export function $$h2(e) {
   switch (e) {
-    case daH.CODE_BLOCK_DRACULA:
+    case ColorOptions.CODE_BLOCK_DRACULA:
       return "DRACULA";
-    case daH.CODE_BLOCK_DUOTONE_LIGHT:
+    case ColorOptions.CODE_BLOCK_DUOTONE_LIGHT:
       return "DUOTONE_LIGHT";
-    case daH.CODE_BLOCK_DUOTONE_SEA:
+    case ColorOptions.CODE_BLOCK_DUOTONE_SEA:
       return "DUOTONE_SEA";
-    case daH.CODE_BLOCK_DUOTONE_SPACE:
+    case ColorOptions.CODE_BLOCK_DUOTONE_SPACE:
       return "DUOTONE_SPACE";
-    case daH.CODE_BLOCK_DUOTONE_EARTH:
+    case ColorOptions.CODE_BLOCK_DUOTONE_EARTH:
       return "DUOTONE_EARTH";
-    case daH.CODE_BLOCK_DUOTONE_FOREST:
+    case ColorOptions.CODE_BLOCK_DUOTONE_FOREST:
       return "DUOTONE_FOREST";
     default:
       return "DRACULA";

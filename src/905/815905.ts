@@ -1,14 +1,24 @@
-import { useState, useEffect } from "react";
-export function $$r0(e = 10) {
-  let [t, i] = useState(!1);
+import { useEffect, useState } from 'react'
+/**
+ * useDelayedTrue - Custom hook to set a boolean state to true after a delay.
+ * @param delay - Delay in milliseconds before setting the state to true. Default is 10ms.
+ * @returns Boolean state indicating if the delay has passed.
+ */
+export function useDelayedTrue(delay: number = 10): boolean {
+  const [isTrue, setIsTrue] = useState(false)
+
   useEffect(() => {
-    let t = setTimeout(() => {
-      i(!0);
-    }, e);
+    const timeoutId = setTimeout(() => {
+      setIsTrue(true)
+    }, delay)
+
     return () => {
-      t && clearTimeout(t);
-    };
-  }, [e, i]);
-  return t;
+      clearTimeout(timeoutId)
+    }
+  }, [delay])
+
+  return isTrue
 }
-export const Z = $$r0;
+
+// Original export name: Z
+export const Z = useDelayedTrue

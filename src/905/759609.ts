@@ -10,7 +10,7 @@ import { m as _$$m } from "../905/367152";
 import { j as _$$j } from "../905/519202";
 import { e as _$$e2 } from "../905/916195";
 import { A as _$$A } from "../905/24328";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { xj, Mx, yx } from "../figma_app/851625";
 import { h as _$$h } from "../905/207101";
 import { Uz } from "../905/63728";
@@ -23,11 +23,11 @@ import { dW } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { eS, aD } from "../figma_app/646357";
 import { PW, Wv } from "../figma_app/633080";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/550089";
 import { vL } from "../905/826900";
 import { AX, UX } from "../905/542608";
@@ -51,7 +51,7 @@ function H({
   return jsx(Ao, {
     dragHeaderOnly: !0,
     onClose: () => {
-      i(Ce());
+      i(hideModal());
     },
     onKeyDown: s,
     title: jsx("div", {
@@ -492,7 +492,7 @@ let Q = memo(function ({
 });
 let J = memo(function (e) {
   let t = jX(e);
-  let i = h3O.isIncrementalSession();
+  let i = Multiplayer.isIncrementalSession();
   let [a, o] = useState(!i);
   _$$h(() => {
     if (!i || !t) {
@@ -525,7 +525,7 @@ let ee = memo(function ({
   updateStyle: e,
   selectedOutdatedStyleGUID: t
 }) {
-  let i = h3O.isIncrementalSession();
+  let i = Multiplayer.isIncrementalSession();
   let [a, s] = useState(!i);
   _$$h(() => {
     if (!i) {
@@ -555,7 +555,7 @@ let ee = memo(function ({
     })
   });
 });
-let $$et0 = Ju(J, "ReviewInstanceUpdatesModal");
-let $$ei1 = Ju(ee, "ReviewStyleUpdatesModal");
+let $$et0 = registerModal(J, "ReviewInstanceUpdatesModal");
+let $$ei1 = registerModal(ee, "ReviewStyleUpdatesModal");
 export const F2 = $$et0;
 export const oX = $$ei1;

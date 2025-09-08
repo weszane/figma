@@ -1,5 +1,5 @@
 import { useContext, useState, useCallback } from "react";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { zN } from "../905/19536";
 import { useLocalStorageSync } from "../905/657224";
@@ -21,7 +21,7 @@ export function $$u0({
     lastSelection: n
   }) {
     let a = "list";
-    return (i === rXF.COLOR && (a = t), "SUBSCRIBED_VARIABLES" !== n.type || e.find(e => e.libraryKey === n.libraryKey)) ? {
+    return (i === VariableResolvedDataType.COLOR && (a = t), "SUBSCRIBED_VARIABLES" !== n.type || e.find(e => e.libraryKey === n.libraryKey)) ? {
       ...n,
       layout: a
     } : {

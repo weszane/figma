@@ -1,9 +1,9 @@
 import { useMemo, useContext, useCallback } from "react";
 import { n3, IA } from "../905/859698";
 import { oU } from "../figma_app/273493";
-import { glU, ibQ } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD } from "../905/871411";
+import { Fullscreen, ItemType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { Uv } from "../figma_app/191804";
 import { F } from "../905/989956";
 import { yM } from "../905/640017";
@@ -24,9 +24,9 @@ export function $$g1(e) {
   let t = useContext(lk);
   return useCallback(() => {
     if (e?.current) {
-      l7.user("slides-create-style", () => {
-        glU?.applyStyleToSelection("inheritTextStyleKey", AD, !0);
-        glU?.selectStyle(n3.INVALID, IA.INVALID);
+      permissionScopeHandler.user("slides-create-style", () => {
+        Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
+        Fullscreen?.selectStyle(n3.INVALID, IA.INVALID);
       });
       let r = e.current.getBoundingClientRect();
       t({
@@ -41,7 +41,7 @@ export function $$g1(e) {
 export function $$f2() {
   let e = sd();
   let t = GV();
-  let r = t[ibQ.TYPE_ITEM] || t[ibQ.SLIDE_NUMBER];
+  let r = t[ItemType.TYPE_ITEM] || t[ItemType.SLIDE_NUMBER];
   return !!(e && r);
 }
 export const it = $$m0;

@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useState } from "react";
 import { E } from "../905/632989";
 import { $ } from "../905/61417";
-import { r as _$$r } from "../905/577641";
-import { Ju } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { preventAndStopEvent } from "../905/955878";
 let $$d6 = createContext(null);
 let c = e => !!(e.toggle && !e.setOpen);
 let u = forwardRef(({
@@ -24,7 +24,7 @@ let u = forwardRef(({
       toggle: c(l) ? l.toggle : () => l.setOpen(!e)
     },
     children: jsx("div", {
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...i,
       ...a,
       ref: s
@@ -44,7 +44,7 @@ let p = forwardRef(({
       toggle: () => l(!s)
     },
     children: jsx("div", {
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...t,
       ...r,
       ref: a
@@ -70,7 +70,7 @@ export let $$h3 = forwardRef(({
   ...t
 }, r) => jsx("div", {
   ref: r,
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...e,
   ...t
 }));
@@ -82,12 +82,12 @@ export let $$m0 = forwardRef(({
   let i = $($$d6, "CollapseContext", "Collapse.Root");
   return jsx(E, {
     ref: r,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...e,
     ...t,
     "aria-expanded": i.isOpen,
     onClick: e => {
-      Ju(e);
+      preventAndStopEvent(e);
       t.onClick ? t.onClick(e) : i.toggle();
     }
   });
@@ -97,7 +97,7 @@ export let $$g2 = forwardRef(({
   htmlAttributes: e,
   ...t
 }, r) => jsx("div", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...e,
   ...t,
   ref: r
@@ -109,7 +109,7 @@ export let $$f1 = forwardRef(({
 }, r) => {
   let i = $($$d6, "CollapseContext", "Collapse.Root");
   return jsx("div", {
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...e,
     ...t,
     ref: r,
@@ -121,7 +121,7 @@ export let $$E4 = forwardRef(({
   htmlAttributes: e,
   ...t
 }, r) => jsx("div", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...e,
   ...t,
   ref: r,

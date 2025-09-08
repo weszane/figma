@@ -8,8 +8,8 @@ import { E as _$$E } from "../905/277716";
 import { k as _$$k } from "../905/582200";
 import { getI18nString } from "../905/303541";
 import { A as _$$A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { vm, yU, Zr } from "../figma_app/678782";
 import { kl } from "../905/275640";
 import { BK } from "../905/848862";
@@ -215,7 +215,7 @@ function $(e) {
     hideCheck: !0,
     isChecked: !1,
     onClick: () => {
-      Y5.triggerActionInUserEditScope(action, "tidy-up" === action ? {
+      fullscreenValue.triggerActionInUserEditScope(action, "tidy-up" === action ? {
         source: "panel"
       } : null);
     },
@@ -235,7 +235,7 @@ function X({
 }
 function q() {
   let e = kl("detectableListAxis");
-  let t = G[Zr("arrange-as-grid") ? "arrange-as-grid" : `arrange-as-list-${_W(e, "Y")}`];
+  let t = G[Zr("arrange-as-grid") ? "arrange-as-grid" : `arrange-as-list-${valueOrFallback(e, "Y")}`];
   return t && jsx(t, {});
 }
 function J(e) {
@@ -249,7 +249,7 @@ function J(e) {
     children: jsx(_$$K, {
       disabled: !t,
       onClick: () => {
-        Y5.triggerActionInUserEditScope(e.action);
+        fullscreenValue.triggerActionInUserEditScope(e.action);
       },
       recordingKey: Pt(e, "alignButton", e.action),
       "aria-label": e.action,

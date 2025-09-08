@@ -1,12 +1,12 @@
 import { useSelector } from "../vendor/514228";
 import { arraysEqual } from "../figma_app/656233";
 import { c2 } from "../905/382883";
-import { Egt } from "../figma_app/763686";
-import { dI, AD, sH, aI } from "../905/871411";
+import { SceneGraphHelpers } from "../figma_app/763686";
+import { sessionLocalIDToString, defaultSessionLocalIDString, parseSessionLocalID, areSessionLocalIDsEqual } from "../905/871411";
 import { trackEventAnalytics } from "../905/449184";
 import { d as _$$d, s as _$$s } from "../figma_app/429226";
-import { Y5 } from "../figma_app/455680";
-import { oV, gl, _W, hS } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { MIXED_MARKER, isInvalidValue, valueOrFallback, isValidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { Xt } from "../figma_app/889655";
 import { zk } from "../figma_app/198712";
@@ -108,7 +108,7 @@ export function $$T0(e, t) {
     for (var R = 0; R < e.length; R++) {
       let t = b[R];
       let r = e[R];
-      for (let e in r) t[e] ? S(r, t, e, T) || (t[e] = oV) : t[e] = r[e];
+      for (let e in r) t[e] ? S(r, t, e, T) || (t[e] = MIXED_MARKER) : t[e] = r[e];
     }
   }
   let L = t => function n(s) {
@@ -117,7 +117,7 @@ export function $$T0(e, t) {
       let p = !1;
       let _ = [];
       let f = [];
-      for (let e in o) gl(F[e]) ? (p = !0, _.push(e)) : f.push(e);
+      for (let e in o) isInvalidValue(F[e]) ? (p = !0, _.push(e)) : f.push(e);
       let {
         changes,
         eventChanges,
@@ -203,7 +203,7 @@ export function $$T0(e, t) {
       });
       e === J.NORMAL ? I = [...I, ...i] : e === J.INHERITED_INTERNAL && (I = [...r, ...I]);
       changes.prototypeInteractions = I;
-      Y5.updateSelectionProperties(changes, {
+      fullscreenValue.updateSelectionProperties(changes, {
         shouldCommit: d?.shouldCommit || zk.YES,
         overwrite: d?.overwrite
       });
@@ -216,9 +216,9 @@ export function $$T0(e, t) {
   let P = e => e && null != e.actions ? e.actions[0] : null;
   let D = e => {
     let t = P(e);
-    if (null == t) return dI(e.sourceNodeID);
-    let r = dI(t.transitionNodeID);
-    return r === AD || null === r ? dI(e.sourceNodeID) : r;
+    if (null == t) return sessionLocalIDToString(e.sourceNodeID);
+    let r = sessionLocalIDToString(t.transitionNodeID);
+    return r === defaultSessionLocalIDString || null === r ? sessionLocalIDToString(e.sourceNodeID) : r;
   };
   let k = (e, t) => {
     if (!e.actions || e.actions?.length === 0 || 0 === t.length) return null;
@@ -232,20 +232,20 @@ export function $$T0(e, t) {
     }
   };
   let M = (e, t) => {
-    if (null == t || void 0 === t) return dI(e.sourceNodeID);
-    let r = dI(t.transitionNodeID);
-    return r === AD || null === r ? dI(e.sourceNodeID) : r;
+    if (null == t || void 0 === t) return sessionLocalIDToString(e.sourceNodeID);
+    let r = sessionLocalIDToString(t.transitionNodeID);
+    return r === defaultSessionLocalIDString || null === r ? sessionLocalIDToString(e.sourceNodeID) : r;
   };
   let F = function (e, t) {
     let r = {};
     let n = {};
     for (let i of e) {
       if (!i || !i.event) continue;
-      for (let e in i.event) r[e] ? I(i.event, r, e) || (r[e] = oV) : r[e] = i.event[e];
+      for (let e in i.event) r[e] ? I(i.event, r, e) || (r[e] = MIXED_MARKER) : r[e] = i.event[e];
       let e = i.actions && {
         ...i.actions[0]
       };
-      if (e) for (let r in e) n[r] ? S(e, n, r, t) || (n[r] = oV) : n[r] = e[r];
+      if (e) for (let r in e) n[r] ? S(e, n, r, t) || (n[r] = MIXED_MARKER) : n[r] = e[r];
     }
     return {
       ...r,
@@ -257,7 +257,7 @@ export function $$T0(e, t) {
     let n = [{}];
     for (let a of e) {
       if (!a || !a.event) continue;
-      for (let e in a.event) r[e] ? I(a.event, r, e) || (r[e] = oV) : r[e] = a.event[e];
+      for (let e in a.event) r[e] ? I(a.event, r, e) || (r[e] = MIXED_MARKER) : r[e] = a.event[e];
       if (!a.actions) continue;
       let e = a.actions;
       var i = 0;
@@ -265,7 +265,7 @@ export function $$T0(e, t) {
         for (let e in r) {
           i > n.length - 1 && n.push({});
           let a = n[i];
-          a[e] ? S(r, a, e, t) || (a[e] = oV) : a[e] = r[e];
+          a[e] ? S(r, a, e, t) || (a[e] = MIXED_MARKER) : a[e] = r[e];
         }
         i++;
       }
@@ -277,9 +277,9 @@ export function $$T0(e, t) {
   }(f, T);
   let U = new Set(s.map(e => {
     let t = _$$s(e);
-    return t ? dI(t.nodeID) : "";
+    return t ? sessionLocalIDToString(t.nodeID) : "";
   }).filter(e => "" !== e));
-  let B = a.filter(e => e.sourceNodeID && U.has(dI(e.sourceNodeID)));
+  let B = a.filter(e => e.sourceNodeID && U.has(sessionLocalIDToString(e.sourceNodeID)));
   var G = [...B];
   let V = $$y4();
   if (V.length > 0) for (var v = 0; v < V.length; v++) {
@@ -299,8 +299,8 @@ export function $$T0(e, t) {
         a.forEach(e => {
           let r = k(e, n);
           let i = M(e, r);
-          if (r && i && -1 !== Object.keys(t).indexOf(i) && sH(t[i])) {
-            let d = sH(t[i]);
+          if (r && i && -1 !== Object.keys(t).indexOf(i) && parseSessionLocalID(t[i])) {
+            let d = parseSessionLocalID(t[i]);
             if (d) {
               if (!e.actions) return;
               var a = [];
@@ -347,7 +347,7 @@ export function $$T0(e, t) {
         });
         e === J.NORMAL ? u = [...u, ...i] : e === J.INHERITED_INTERNAL && (u = [...r, ...u]);
         d.prototypeInteractions = u;
-        Y5.updateSelectionProperties(d, {
+        fullscreenValue.updateSelectionProperties(d, {
           shouldCommit: s,
           overwrite: l
         });
@@ -365,8 +365,8 @@ export function $$T0(e, t) {
       let d = [];
       a.forEach(e => {
         let r = D(e);
-        if (r && -1 !== Object.keys(t).indexOf(r) && sH(t[r])) {
-          let n = sH(t[r]);
+        if (r && -1 !== Object.keys(t).indexOf(r) && parseSessionLocalID(t[r])) {
+          let n = parseSessionLocalID(t[r]);
           if (n) {
             if (!e.actions) return;
             let t = e.actions.findIndex(e => "INTERNAL_NODE" === e.connectionType && "SWAP_STATE" === e.navigationType);
@@ -387,7 +387,7 @@ export function $$T0(e, t) {
       });
       e === J.NORMAL ? d = [...d, ...i] : e === J.INHERITED_INTERNAL && (d = [...r, ...d]);
       l.prototypeInteractions = d;
-      Y5.updateSelectionProperties(l, {
+      fullscreenValue.updateSelectionProperties(l, {
         shouldCommit: n,
         overwrite: s
       });
@@ -405,7 +405,7 @@ export function $$T0(e, t) {
 function I(e, t, r) {
   if ("keyTrigger" === r) {
     let n = e[r];
-    let a = _W(t[r], void 0);
+    let a = valueOrFallback(t[r], void 0);
     return arraysEqual(n?.keyCodes || [], a?.keyCodes || []) && n?.triggerDevice === a?.triggerDevice;
   }
   return e[r] === t[r];
@@ -414,8 +414,8 @@ function S(e, t, r, n) {
   switch (r) {
     case "transitionNodeID":
       let i = e[r];
-      let l = _W(t[r], void 0);
-      return aI(i, l);
+      let l = valueOrFallback(t[r], void 0);
+      return areSessionLocalIDsEqual(i, l);
     case "targetVariable":
       let d = e[r];
       let c = t[r];
@@ -427,32 +427,32 @@ function S(e, t, r, n) {
           let t = c.nodeFieldAlias.stablePathToNode;
           let r = e && 1 === e.length ? n.get(e[0]) : null;
           let i = t && 1 === t.length ? n.get(t[0]) : null;
-          if (r && i && r.isState && i.isState && r.containingStateGroupId === i.containingStateGroupId) return Egt.getExplicitPropDefIDBinding(r.guid, d.nodeFieldAlias.indexOrKey) === Egt.getExplicitPropDefIDBinding(i.guid, c.nodeFieldAlias.indexOrKey);
+          if (r && i && r.isState && i.isState && r.containingStateGroupId === i.containingStateGroupId) return SceneGraphHelpers.getExplicitPropDefIDBinding(r.guid, d.nodeFieldAlias.indexOrKey) === SceneGraphHelpers.getExplicitPropDefIDBinding(i.guid, c.nodeFieldAlias.indexOrKey);
           return c2(d.nodeFieldAlias, c.nodeFieldAlias);
         }
       }
       return !1;
     case "overlayRelativePosition":
       let p = e[r];
-      let _ = _W(t[r], void 0);
+      let _ = valueOrFallback(t[r], void 0);
       return p?.x === _?.x && p?.y === _?.y;
     case "easingType":
       let h = e[r];
-      let g = _W(t[r], void 0);
+      let g = valueOrFallback(t[r], void 0);
       if ("CUSTOM_CUBIC" !== h || "CUSTOM_CUBIC" !== g) return h === g;
-      return v(_W(e.easingFunction, void 0), _W(t.easingFunction, void 0));
+      return v(valueOrFallback(e.easingFunction, void 0), valueOrFallback(t.easingFunction, void 0));
     case "easingFunction":
-      return v(e[r], _W(t[r], void 0));
+      return v(e[r], valueOrFallback(t[r], void 0));
     case "extraScrollOffset":
       let f = e[r];
-      let E = _W(t[r], void 0);
+      let E = valueOrFallback(t[r], void 0);
       return f?.x === E?.x && f?.y === E?.y;
     case "targetVariableData":
       return j(e[r], t[r], n);
     case "conditionalActions":
       let y = e[r];
       let b = t[r];
-      if (!hS(b)) return !1;
+      if (!isValidValue(b)) return !1;
       if (!(y && b && 2 === y.length && 2 === b.length && y[0]?.condition && b[0]?.condition && y[0]?.actions && b[0]?.actions && y[1]?.actions && b[1]?.actions)) return c2(e[r], t[r]);
       {
         let e = j(y[0].condition, b[0].condition, n);

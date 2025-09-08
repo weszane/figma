@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { Osy } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { SelectionPaintHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { GP } from "../figma_app/15927";
 import { trackEventAnalytics } from "../905/449184";
 import { uA, dp, Pt } from "../figma_app/806412";
@@ -8,15 +8,15 @@ import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { oU, ah } from "../figma_app/80990";
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { zi } from "../905/824449";
 import { d_ } from "../figma_app/918700";
 import { yl, v0, Lu, pL } from "../figma_app/639088";
 import { A as _$$A } from "../2854/751030";
 export let $$b0 = "PAINT_DATA_STYLES";
-qK($$b0, e => jsx(v, {
+registerLegacyModal($$b0, e => jsx(v, {
   recordingKey: "SelectionColorsStylesModal",
   originalPaint: e.modalShown.data.originalPaint,
   paintDataNodesInPaint: e.modalShown.data.paintDataNodesInPaint,
@@ -34,12 +34,12 @@ class v extends uA {
     this.multiplePaintDatas = this.props.paintDataNodesInPaint.length > 1;
     this.onSelectSamePaintClick = () => {
       let e = GP(this.props.originalPaint);
-      Osy.selectConflictingWithPaint(e);
-      this.props.dispatch(Ce());
+      SelectionPaintHelpers.selectConflictingWithPaint(e);
+      this.props.dispatch(hideModal());
     };
     this.onCancel = e => {
       e.preventDefault();
-      this.props.dispatch(Ce());
+      this.props.dispatch(hideModal());
     };
     this.onSubmit = dp(this, "submit", e => {
       let t;
@@ -59,18 +59,18 @@ class v extends uA {
           console.error("elements.styleName does not exist");
           return;
         }
-        l7.user("create-style-from-selection-paints", () => {
-          void 0 == n.styleName.length ? (l = Osy.createStylesFromPaintDatas(i, Array.of(n.styleName.value)), t = 1) : (l = Osy.createStylesFromPaintDatas(i, Array.from(n.styleName).map(e => e.value)), t = n.styleName.length);
+        permissionScopeHandler.user("create-style-from-selection-paints", () => {
+          void 0 == n.styleName.length ? (l = SelectionPaintHelpers.createStylesFromPaintDatas(i, Array.of(n.styleName.value)), t = 1) : (l = SelectionPaintHelpers.createStylesFromPaintDatas(i, Array.from(n.styleName).map(e => e.value)), t = n.styleName.length);
           l && trackEventAnalytics("Style Created from Selection Paint", {
             styleCount: t
           });
         });
-      } else l7.user("apply-style-to-selection-paints", () => {
-        (l = Osy.applyStyleToPaintDatas(i, d.styleGuid)) && trackEventAnalytics("Apply Style to Selection Paint ", {
+      } else permissionScopeHandler.user("apply-style-to-selection-paints", () => {
+        (l = SelectionPaintHelpers.applyStyleToPaintDatas(i, d.styleGuid)) && trackEventAnalytics("Apply Style to Selection Paint ", {
           count: this.props.paintDataNodesInPaint.length
         });
       });
-      l ? this.props.dispatch(Ce()) : this.setState({
+      l ? this.props.dispatch(hideModal()) : this.setState({
         error: !0
       });
     }, {

@@ -9,7 +9,7 @@ import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { FProductAccessType } from "../figma_app/191312";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { useRef, useEffect } from "react";
 import { Xr } from "../figma_app/27355";
 import { g as _$$g2 } from "../905/871474";
@@ -68,7 +68,7 @@ function I(e) {
     })
   });
 }
-export let $$E0 = Ju(function (e) {
+export let $$E0 = registerModal(function (e) {
   return jsx(fu, {
     name: "Ask To Edit One Click Auto Confirmation Modal",
     children: jsxs(I, {

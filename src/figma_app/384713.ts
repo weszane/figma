@@ -1,4 +1,4 @@
-import { Hr } from "../905/871411";
+import { defaultSessionLocalID } from "../905/871411";
 let $$i5 = {
   frequency: 1,
   wiggle: 0,
@@ -29,7 +29,7 @@ let $$o4 = {
   }
 };
 let $$l6 = {
-  strokeBrushGuid: Hr
+  strokeBrushGuid: defaultSessionLocalID
 };
 let $$d1 = {
   orientation: "FORWARD"

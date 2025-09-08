@@ -9,7 +9,7 @@ import { I as _$$I } from "../905/783004";
 import { _ as _$$_ } from "../905/144222";
 import { l as _$$l } from "../905/479687";
 import { g as _$$g } from "../905/687265";
-import { glU, vhv } from "../figma_app/763686";
+import { Fullscreen, PageSelectionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { gI } from "../figma_app/396464";
@@ -171,7 +171,7 @@ export function $$R0({
   let T = $$L2(t);
   let N = d.size > 0;
   let w = useCallback(() => {
-    E && h && (I && glU?.findMissingFontsAndShowPopoverWithScope(vhv.CURRENT_SELECTION), E.forEach(e => d.add(e.guid)), c(d), r(e, d), wr());
+    E && h && (I && Fullscreen?.findMissingFontsAndShowPopoverWithScope(PageSelectionType.CURRENT_SELECTION), E.forEach(e => d.add(e.guid)), c(d), r(e, d), wr());
   }, [h, r, e, d, E, I]);
   useEffect(() => {
     let e = (E ? E.map(e => e.guid) : []).every(e => d.has(e));

@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { $y } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { N as _$$N } from "../905/438674";
 import { p as _$$p } from "../905/185998";
 import { T as _$$T } from "../905/909590";
-import { S as _$$S } from "../905/274480";
+import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
 import { WW } from "../905/521428";
 import { J as _$$J } from "../905/341359";
@@ -16,7 +16,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { _6 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
 import { z } from "../905/239603";
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 var b = (e => (e[e.ABUSE_TYPE_UNSPECIFIED = 0] = "ABUSE_TYPE_UNSPECIFIED", e[e.ABUSE_TYPE_SPAM = 1] = "ABUSE_TYPE_SPAM", e[e.ABUSE_TYPE_MALWARE = 2] = "ABUSE_TYPE_MALWARE", e[e.ABUSE_TYPE_PHISHING = 3] = "ABUSE_TYPE_PHISHING", e[e.ABUSE_TYPE_FRAUD_SCAM_IMPERSONATION = 4] = "ABUSE_TYPE_FRAUD_SCAM_IMPERSONATION", e[e.ABUSE_TYPE_INAPPROPRIATE_CONTENT = 5] = "ABUSE_TYPE_INAPPROPRIATE_CONTENT", e[e.ABUSE_TYPE_ILLEGAL_CONTENT = 6] = "ABUSE_TYPE_ILLEGAL_CONTENT", e[e.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK = 99] = "ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK", e[e.ABUSE_TYPE_OTHER = 100] = "ABUSE_TYPE_OTHER", e[e.UNRECOGNIZED = -1] = "UNRECOGNIZED", e))(b || {});
 function T(e) {
   switch (e) {
@@ -78,10 +78,10 @@ function I(e) {
 let $$A = z.object({});
 let x = new class {
   constructor() {
-    this.ReportAbuseValidator = YV("ReportAbuseValidator", $$A, "xrv_api_report_abuse", !0);
+    this.ReportAbuseValidator = createMetaValidator("ReportAbuseValidator", $$A, "xrv_api_report_abuse", !0);
     this.reportAbuse = (e, t) => this.ReportAbuseValidator.validate(async ({
       xr: r
-    }) => await r.post("/api/abuse_report/report_abuse", td.toAPIParameters({
+    }) => await r.post("/api/abuse_report/report_abuse", APIParameterUtils.toAPIParameters({
       ...e
     }), {
       retryCount: 0,
@@ -109,7 +109,7 @@ let O = {
 };
 function R(e, t, r) {
   return jsxs("div", {
-    children: [jsx(J, {
+    children: [jsx(Label, {
       className: "form-module--formSectionLabel--eSXJg",
       htmlFor: t,
       children: e
@@ -161,7 +161,7 @@ export let $$L0 = function (e) {
             children: W ? renderI18nText("report_abuse.submission_successful_description") : renderI18nText("report_abuse.submission_failed_description")
           })
         }), !W && jsxs(Fragment, {
-          children: [jsx(J, {
+          children: [jsx(Label, {
             variant: "secondary",
             children: renderI18nText("report_abuse.required_field_info_text", {
               asterisk: w
@@ -239,11 +239,11 @@ export let $$L0 = function (e) {
                   disabled: H
                 })
               })]
-            }), jsx(_$$S, {
+            }), jsx(Checkbox, {
               checked: B,
               onChange: G,
               disabled: H,
-              label: jsxs(J, {
+              label: jsxs(Label, {
                 children: [renderI18nText("report_abuse.confirmation_checkbox_label"), " ", w]
               })
             }), function (e, t, r) {

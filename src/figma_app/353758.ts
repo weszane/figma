@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, createElement } from "react";
 import { Tq } from "../figma_app/243058";
-import { xae, Lxv, FDn } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { UserInterfaceElements, SnapshotStatus, InsertErrorType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
@@ -13,7 +13,7 @@ import { Timer } from "../905/609396";
 import { PN, isInteractionPathCheck } from "../figma_app/897289";
 import { FP } from "../figma_app/91703";
 import { me } from "../figma_app/223206";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../905/955316";
 import { ze } from "../figma_app/516028";
 import { Ts } from "../905/994545";
@@ -192,7 +192,7 @@ export let $$eu0 = new class {
   }
   setLeftPanelTabToCode() {
     debugState.dispatch(FP({
-      tab: xae.CODE
+      tab: UserInterfaceElements.CODE
     }));
   }
   setCodeWindowPanelToChat() {
@@ -242,7 +242,7 @@ export let $$eu0 = new class {
           a.start();
           this.performCodeNodeSnapshot(e, l).then(e => {
             i = e;
-            Y5.clearVisualBellType("code-component-error");
+            fullscreenValue.clearVisualBellType("code-component-error");
           }).catch(t => {
             c = !1;
             let r = t.message || String(t);
@@ -449,10 +449,10 @@ export let $$eu0 = new class {
             });
         }
         _$$r(() => {
-          l7.system("materialize-imported-code-files-references", () => {
+          permissionScopeHandler.system("materialize-imported-code-files-references", () => {
             e.importedCodeFiles = r;
           });
-          l7.system("materialize-imported-images-references", () => {
+          permissionScopeHandler.system("materialize-imported-images-references", () => {
             e.setImageImports(t);
           });
           e.materializeCodeComponents(i.map(e => e.codeExportName), i.map(e => e.displayName ?? e.codeExportName), i.map(e => e.props ?? {}), i.map(e => e.codeBehaviorData ?? {}));
@@ -471,7 +471,7 @@ export let $$eu0 = new class {
       let t = [];
       this._codeNodeGUIDsWithSourceCodeToSync.forEach(r => {
         let n = e.get(r);
-        kv(n) && n.isCodeFile && l7.system("sync-code-file-source-code", () => {
+        kv(n) && n.isCodeFile && permissionScopeHandler.system("sync-code-file-source-code", () => {
           let e = n.collaborativeSourceCode;
           e && t.push({
             fullPath: n.codeFileFullPathWithoutScheme,
@@ -518,10 +518,10 @@ export let $$eu0 = new class {
         type: t
       }));
     };
-    if (a) l(M.SOFT_DELETED);else if (t === Lxv.SNAPSHOT_ERROR) l(M.ERROR);else if (t === Lxv.LLM_IN_PROGRESS) {
+    if (a) l(M.SOFT_DELETED);else if (t === SnapshotStatus.SNAPSHOT_ERROR) l(M.ERROR);else if (t === SnapshotStatus.LLM_IN_PROGRESS) {
       Vm(e, createElement(O, {}));
       this._codeSnapshotOverlays.add(e);
-    } else if (t === Lxv.SNAPSHOTTING || t === Lxv.INITIAL) {
+    } else if (t === SnapshotStatus.SNAPSHOTTING || t === SnapshotStatus.INITIAL) {
       if (this.isCodeSnapshotStale(t, i)) l(M.STALE);else if (Vm(e, createElement(_$$A, {})), this._codeSnapshotOverlays.add(e), i) {
         let t = setTimeout(() => {
           this._staleSnapshotTimers.$$delete(e);
@@ -546,7 +546,7 @@ export let $$eu0 = new class {
     return Math.floor(Date.now() / 1e3);
   }
   isCodeSnapshotStale(e, t) {
-    if (e === Lxv.INITIAL && 0 === t) return !1;
+    if (e === SnapshotStatus.INITIAL && 0 === t) return !1;
     let r = this.getTimestampForCodeSnapshotInvalidatedAt();
     return !!(t && r - t > 20);
   }
@@ -563,7 +563,7 @@ export let $$eu0 = new class {
       } : null;
     }).filter(e => null !== e);
     if (0 === n.length) {
-      this.pushAttachmentError(e, FDn.OTHER);
+      this.pushAttachmentError(e, InsertErrorType.OTHER);
       return;
     }
     let i = {

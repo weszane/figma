@@ -19,7 +19,7 @@ import { Point } from "../905/736624";
 import { yM } from "../905/640017";
 import { Rk } from "../figma_app/483189";
 import { PN, Vm, c7 } from "../figma_app/728075";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { o as _$$o } from "../905/821217";
 import O from "classnames";
 import { _J, my, kM, im, xX, wH, F4 } from "../897/564585";
@@ -365,8 +365,8 @@ let K = "prototype_easing_spring_curve--springvisHandle--0mFVz";
 let W = "prototype_easing_spring_curve--springvisHandleActive--5RaLT";
 function k(e) {
   return {
-    x: qE(e.x, 0, 1),
-    y: qE(e.y, 0, 2)
+    x: clamp(e.x, 0, 1),
+    y: clamp(e.y, 0, 2)
   };
 }
 function z(e, t) {

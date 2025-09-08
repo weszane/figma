@@ -5,14 +5,14 @@ import { q } from "../905/932270";
 import { $ } from "../905/137257";
 import { m as _$$m } from "../905/375522";
 import { V } from "../905/921027";
-import { Ez5, mrc } from "../figma_app/763686";
+import { AppStateTsApi, TextAlignmentOptions } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { vx } from "../figma_app/175258";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { kl } from "../905/275640";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { ae } from "../905/566585";
 import { DE } from "../figma_app/811257";
 export function $$b1() {
@@ -26,8 +26,8 @@ export function $$b1() {
   let r = kl("numSelectedByType");
   return {
     hasSelectedText: !!r && vx(r, "TEXT"),
-    disableFontControls: !Y5?.isFontListLoaded() || !!missingFont,
-    enabledTypePanelControls: J2(Ez5.propertiesPanelState().enabledTypePanelControls),
+    disableFontControls: !fullscreenValue?.isFontListLoaded() || !!missingFont,
+    enabledTypePanelControls: getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls),
     textAutoResize
   };
 }
@@ -37,7 +37,7 @@ export function $$T2({
   textAutoResize: r,
   recordingKey: a
 }) {
-  e = e || !((0 | t) & 1 << mrc.TEXT_AUTO_RESIZE);
+  e = e || !((0 | t) & 1 << TextAlignmentOptions.TEXT_AUTO_RESIZE);
   let s = ae();
   e || debug(null != r, "TypePanel missing textAutoResize");
   let o = jsx($$I0, {

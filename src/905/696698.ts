@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { XJn, CWU } from "../figma_app/763686";
+import { FirstDraftHelpers, VariablesBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zN } from "../905/19536";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { x$, i6, v2 } from "../905/188715";
 import { Au, g5, iR } from "../figma_app/193952";
 import { debugState } from "../905/407919";
@@ -54,7 +54,7 @@ let p = {
     if (!t) return !1;
     let i = getSingletonSceneGraph();
     let n = t.map(e => i.get(e));
-    l7.user("first-draft-clean-numerical-suffixes", () => {
+    permissionScopeHandler.user("first-draft-clean-numerical-suffixes", () => {
       for (let e of n) {
         let t = [e];
         for (; t.length > 0;) {
@@ -87,7 +87,7 @@ let h = {
   warning: "All variables directly consumed should be local and not deleted.",
   category: i6.THEME,
   supportedKitTypes: [v2.FIRST_PARTY],
-  detect: e => XJn.lintLocalNondeletedVariables(e.guid)
+  detect: e => FirstDraftHelpers.lintLocalNondeletedVariables(e.guid)
 };
 let f = {
   key: "CORNER_RADIUS_SHOULD_USE_CUSTOMIZABLE_VARIABLES",
@@ -103,7 +103,7 @@ let f = {
     i.forEach(e => {
       if (e.cornerRadius <= 0) return;
       let i = e.rectangleCornerRadiiIndependent && e.boundVariables.cornerRadius || e.boundVariables.bottomLeftRadius || e.boundVariables.bottomRightRadius || e.boundVariables.topLeftRadius || e.boundVariables.topRightRadius;
-      i && XJn.getCustomizableVariableName(e.guid, i.id) || t.add(e.guid);
+      i && FirstDraftHelpers.getCustomizableVariableName(e.guid, i.id) || t.add(e.guid);
     });
     return {
       guids: [...t],
@@ -132,7 +132,7 @@ let v = {
     };
     let a = [];
     let s = e.pageId;
-    for (let e of XJn.getLocalExamples(s, t)) (await au(n, e.nodeId)) || a.push(e.nodeId);
+    for (let e of FirstDraftHelpers.getLocalExamples(s, t)) (await au(n, e.nodeId)) || a.push(e.nodeId);
     return {
       guids: a,
       meta: {
@@ -156,7 +156,7 @@ let E = {
     if (!i) return Promise.resolve({
       guids: []
     });
-    let n = XJn.getLocalInvalidExamplesForLinting(i, t);
+    let n = FirstDraftHelpers.getLocalInvalidExamplesForLinting(i, t);
     let s = n.map(e => e.nodeId);
     let o = n.reduce((e, t) => [...e, ...t.invalidPrimaryInstanceGuids], []);
     let l = getSingletonSceneGraph();
@@ -219,7 +219,7 @@ let w = {
     if (!t) return !1;
     let i = getSingletonSceneGraph();
     let n = t.map(e => i.get(e));
-    l7.user("first-draft-fix-nested-instances-exposed", () => {
+    permissionScopeHandler.user("first-draft-fix-nested-instances-exposed", () => {
       for (let e of n) e && "INSTANCE" === e.type && !e.isBubbled && e.setPropsAreBubbled(!0);
     });
     return !0;
@@ -258,7 +258,7 @@ let $$C = {
   fix: (e, t) => {
     if (!t) return !1;
     let i = getSingletonSceneGraph().get(e.guid);
-    return !!i && (l7.user("first-draft-fix-optional-non-instance-props-have-visible-props", () => {
+    return !!i && (permissionScopeHandler.user("first-draft-fix-optional-non-instance-props-have-visible-props", () => {
       for (let [e, {
         visiblePropName: n,
         refNodes: r
@@ -299,7 +299,7 @@ let T = {
     if (!t) return !1;
     let i = getSingletonSceneGraph();
     let n = t.map(e => i.get(e));
-    l7.user("first-draft-fix-instance-swap-with-exposed-props", () => {
+    permissionScopeHandler.user("first-draft-fix-instance-swap-with-exposed-props", () => {
       for (let e of n) e && "INSTANCE" === e.type && e.isBubbled && e.setPropsAreBubbled(!1);
     });
     return !0;
@@ -326,7 +326,7 @@ let k = {
           continue;
         }
         let s = `VariableID:${n?.sessionID}:${n?.localID}`;
-        XJn.getCustomizableVariableName(e.guid, s) || (t.add(e.guid), i[e.guid] = "No variable name found for colorVar alias guid");
+        FirstDraftHelpers.getCustomizableVariableName(e.guid, s) || (t.add(e.guid), i[e.guid] = "No variable name found for colorVar alias guid");
       }
     });
     return {
@@ -348,7 +348,7 @@ let N = {
     let n = Au(e.guid, ["TEXT"]);
     let s = getSingletonSceneGraph();
     for (let e of n) {
-      let n = XJn.inheritedTextStyleGuid(e.guid);
+      let n = FirstDraftHelpers.inheritedTextStyleGuid(e.guid);
       if (!n) {
         t.add(e.guid);
         continue;
@@ -366,8 +366,8 @@ let N = {
       }
       let o = a.boundVariablesForStyle.fontFamily;
       let l = a.boundVariablesForStyle.fontStyle;
-      let d = XJn.getCustomizableVariableName(e.guid, o.id);
-      let c = XJn.getCustomizableVariableName(e.guid, l.id);
+      let d = FirstDraftHelpers.getCustomizableVariableName(e.guid, o.id);
+      let c = FirstDraftHelpers.getCustomizableVariableName(e.guid, l.id);
       if (!d || !c) {
         t.add(e.guid);
         i[e.guid] = "No variable name found for fontFamily or fontStyle variables";
@@ -449,7 +449,7 @@ let D = {
       }
     };
   },
-  fix: (e, t) => !!t && !!t.guids && (l7.user("first-draft-detach-nested-instances-with-images-without-props", () => {
+  fix: (e, t) => !!t && !!t.guids && (permissionScopeHandler.user("first-draft-detach-nested-instances-with-images-without-props", () => {
     t.guids.forEach(e => {
       let t = getSingletonSceneGraph().get(e);
       if (!t) return !1;
@@ -525,7 +525,7 @@ let j = {
     if (!t) return Promise.resolve({
       guids: []
     });
-    let i = new Set(CWU.getLocalVariablesInfo().filter(e => e.setID === t.nodeId && !e.isSoftDeleted).map(e => e.name));
+    let i = new Set(VariablesBindings.getLocalVariablesInfo().filter(e => e.setID === t.nodeId && !e.isSoftDeleted).map(e => e.name));
     let n = [];
     if (e.name.toLowerCase().includes("website")) {
       for (let e of Object.values(ZO)) i.has(e) || n.push(e);
@@ -571,10 +571,10 @@ let U = {
   fix: e => {
     let t = _$$_().reduce((e, t) => (e[t.nodeId] = t.name, e), {});
     let i = Object.keys(t);
-    l7.user("first-draft-choose-single-preset", () => {
+    permissionScopeHandler.user("first-draft-choose-single-preset", () => {
       for (let e of i.slice(1)) {
         let n = t[e];
-        CWU.editVariableSetName(e, `${n} ${i.indexOf(e)}`);
+        VariablesBindings.editVariableSetName(e, `${n} ${i.indexOf(e)}`);
       }
     });
     return !0;
@@ -601,13 +601,13 @@ let B = {
     n.forEach(e => {
       if (e.stackSpacing > 0) {
         let n = e.boundVariables.itemSpacing;
-        n ? XJn.getCustomizableVariableName(e.guid, n.id) || (t.add(e.guid), i[e.guid] = "itemSpacing variable is not a customizable variable") : (t.add(e.guid), i[e.guid] = "No itemSpacing variable bound to node");
+        n ? FirstDraftHelpers.getCustomizableVariableName(e.guid, n.id) || (t.add(e.guid), i[e.guid] = "itemSpacing variable is not a customizable variable") : (t.add(e.guid), i[e.guid] = "No itemSpacing variable bound to node");
       }
       for (let n in a) {
         if (e[n] <= 0) continue;
         let s = a[n];
         let o = e.boundVariables[s];
-        o ? XJn.getCustomizableVariableName(e.guid, o.id) || (t.add(e.guid), i[e.guid] = `${s} variable is not a customizable variable`) : (t.add(e.guid), i[e.guid] = `No ${s} variable bound to node`);
+        o ? FirstDraftHelpers.getCustomizableVariableName(e.guid, o.id) || (t.add(e.guid), i[e.guid] = `${s} variable is not a customizable variable`) : (t.add(e.guid), i[e.guid] = `No ${s} variable bound to node`);
       }
     });
     return {
@@ -640,7 +640,7 @@ let V = {
   fix: (e, t) => {
     if (!t) return !1;
     let i = getSingletonSceneGraph();
-    l7.user("first-draft-fix-block-name-collisions", () => {
+    permissionScopeHandler.user("first-draft-fix-block-name-collisions", () => {
       for (let [e, n] of Object.entries(t)) for (let t of n.slice(1)) {
         let r = i.get(t);
         r && (r.name = `${e} ${n.indexOf(t)}`);
@@ -662,14 +662,14 @@ let G = {
       guids: [],
       meta: {}
     });
-    let t = Object.entries(CWU.getLocalVariablesInfo().filter(t => t.setID === e.nodeId && !t.isSoftDeleted).reduce((e, t) => (e[t.name] || (e[t.name] = []), e[t.name].push(t.id), e), {})).filter(([e, t]) => t.length > 1).reduce((e, [t, i]) => (e[t] = i, e), {});
+    let t = Object.entries(VariablesBindings.getLocalVariablesInfo().filter(t => t.setID === e.nodeId && !t.isSoftDeleted).reduce((e, t) => (e[t.name] || (e[t.name] = []), e[t.name].push(t.id), e), {})).filter(([e, t]) => t.length > 1).reduce((e, [t, i]) => (e[t] = i, e), {});
     return Promise.resolve({
       guids: Object.entries(t).flatMap(([e, t]) => t),
       meta: t
     });
   },
-  fix: (e, t) => !!t && (l7.user("first-draft-fix-variable-name-collisions", () => {
-    for (let [e, i] of Object.entries(t)) for (let t of i.slice(1)) CWU.renameVariable(t, `${e} ${i.indexOf(t)}`);
+  fix: (e, t) => !!t && (permissionScopeHandler.user("first-draft-fix-variable-name-collisions", () => {
+    for (let [e, i] of Object.entries(t)) for (let t of i.slice(1)) VariablesBindings.renameVariable(t, `${e} ${i.indexOf(t)}`);
   }), !0)
 };
 let z = [f, $$O, B, k, N, S, w, L, p, D, $$C, h, m, T];
@@ -689,7 +689,7 @@ export function $$q0(e, t = Y) {
     (async () => {
       if (i) try {
         let e = await Gh.getFirstDraftAllKits();
-        let t = XJn.getKitKey(i);
+        let t = FirstDraftHelpers.getKitKey(i);
         let n = e.data.meta.kits.find(e => e.key === t);
         n && c({
           name: n?.name,

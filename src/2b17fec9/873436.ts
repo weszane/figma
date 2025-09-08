@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { gB } from "../905/723791";
 import { renderI18nText } from "../905/303541";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { WZ } from "../905/893645";
 import { F_ } from "../905/858282";
 import { xT } from "../figma_app/195407";
@@ -18,7 +18,7 @@ export function $$j3({
   complete: e
 }) {
   let [t, i] = useAtomValueAndSetter(oh);
-  let j = ut(Ez5?.figjamState().isShapesSidebarOpen, !1);
+  let j = getObservableValue(AppStateTsApi?.figjamState().isShapesSidebarOpen, !1);
   let b = gB({
     shapesSidebarOpen: j
   });

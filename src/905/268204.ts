@@ -1,2 +1,2 @@
-export let $$n0 = "undefined" != typeof window;
-export const A = $$n0;
+export let $$n0 = typeof window != 'undefined'
+export const A = $$n0

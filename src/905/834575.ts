@@ -1,23 +1,23 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { $V } from "../figma_app/831101";
+import { isAddressEmpty } from "../figma_app/831101";
 import { e6 } from "../905/557142";
 export let $$o0 = new class {
   constructor() {
-    this.MembersSchemaValidator = vh();
-    this.TeamUsersSchemaValidator = vh();
-    this.TeamSchemaValidator = vh();
-    this.DeletedSchemaValidator = vh();
-    this.TeamNameSchemaValidator = vh();
-    this.SubscriptionStatusSchemaValidator = vh();
-    this.UsersLastActiveSchemaValidator = vh();
-    this.FoldersSchemaValidator = vh();
-    this.TeamAdminsSchemaValidator = vh();
-    this.TeamDeletionFileCountSchemaValidator = vh();
-    this.HasPublishedSiteSchemaValidator = vh();
-    this.TeamUserInvariantBackfillStatsSchemaValidator = vh();
-    this.TeamRoleRequestSchemaValidator = vh();
-    this.showDanglingTeamUserBackfillBannerSchemaValidator = vh();
+    this.MembersSchemaValidator = createNoOpValidator();
+    this.TeamUsersSchemaValidator = createNoOpValidator();
+    this.TeamSchemaValidator = createNoOpValidator();
+    this.DeletedSchemaValidator = createNoOpValidator();
+    this.TeamNameSchemaValidator = createNoOpValidator();
+    this.SubscriptionStatusSchemaValidator = createNoOpValidator();
+    this.UsersLastActiveSchemaValidator = createNoOpValidator();
+    this.FoldersSchemaValidator = createNoOpValidator();
+    this.TeamAdminsSchemaValidator = createNoOpValidator();
+    this.TeamDeletionFileCountSchemaValidator = createNoOpValidator();
+    this.HasPublishedSiteSchemaValidator = createNoOpValidator();
+    this.TeamUserInvariantBackfillStatsSchemaValidator = createNoOpValidator();
+    this.TeamRoleRequestSchemaValidator = createNoOpValidator();
+    this.showDanglingTeamUserBackfillBannerSchemaValidator = createNoOpValidator();
   }
   getMembers(e) {
     return this.MembersSchemaValidator.validate(async ({
@@ -138,8 +138,8 @@ export let $$o0 = new class {
     return this.TeamSchemaValidator.validate(async ({
       xr: t
     }) => await t.post("/api/validate_address", {
-      billing_address: $V(e.billingAddress) ? null : e.billingAddress,
-      shipping_address: $V(e.shippingAddress) ? null : e.shippingAddress,
+      billing_address: isAddressEmpty(e.billingAddress) ? null : e.billingAddress,
+      shipping_address: isAddressEmpty(e.shippingAddress) ? null : e.shippingAddress,
       team_id: e.teamId,
       is_checkout: e.isCheckout
     }));
@@ -151,8 +151,8 @@ export let $$o0 = new class {
       team_id: e.teamId,
       currency: e.currency,
       is_checkout: e.isCheckout,
-      billing_address: $V(e.billingAddress) ? null : e.billingAddress,
-      shipping_address: $V(e.shippingAddress) ? null : e.shippingAddress
+      billing_address: isAddressEmpty(e.billingAddress) ? null : e.billingAddress,
+      shipping_address: isAddressEmpty(e.shippingAddress) ? null : e.shippingAddress
     }));
   }
 }();

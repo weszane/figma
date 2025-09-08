@@ -1,11 +1,11 @@
 import { lQ } from "../905/934246";
-import { Bx4, aTn, glU } from "../figma_app/763686";
+import { EventTypeEnum, KeyboardLayout, Fullscreen } from "../figma_app/763686";
 import { Fo, Uz, sC, xH, wQ, sN } from "../905/63728";
 import { v7 } from "../figma_app/475303";
 import { BrowserInfo } from "../figma_app/778880";
 import { ny } from "../figma_app/637027";
 import { n as _$$n } from "../905/91142";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 var $$u3 = (e => (e[e.YES = 0] = "YES", e[e.NO = 1] = "NO", e))($$u3 || {});
 var $$p2 = (e => (e[e.YES = 0] = "YES", e[e.NO = 1] = "NO", e))($$p2 || {});
 let _ = lQ;
@@ -16,7 +16,7 @@ export function $$m5(e, t = 0, r = 1) {
   return !!$$g1(e, t, r) && $$E4(e);
 }
 export function $$g1(e, t = 0, r = 1) {
-  return !!(Y5 && Y5.isRootElementVisible()) && !$$f0(e, t, r);
+  return !!(fullscreenValue && fullscreenValue.isRootElementVisible()) && !$$f0(e, t, r);
 }
 export function $$f0(e, t = 1, r = 1) {
   let n = e.keyCode;
@@ -27,14 +27,14 @@ export function $$f0(e, t = 1, r = 1) {
 export function $$E4(e) {
   let t;
   if ("keydown" === e.type) {
-    t = Bx4.KEY_PRESS;
+    t = EventTypeEnum.KEY_PRESS;
     _();
   } else {
     if ("keyup" !== e.type) {
       console.error("Invalid event passed to forwardKeyboardEvent");
       return !1;
     }
-    t = Bx4.KEY_RELEASE;
+    t = EventTypeEnum.KEY_RELEASE;
   }
   let r = v7();
   let n = {
@@ -43,10 +43,10 @@ export function $$E4(e) {
     modifierKeys: sN(e),
     isRepeat: e.repeat,
     code: e.code ?? e.nativeEvent?.code,
-    shouldUseLayoutAndCode: r !== aTn.UNKNOWN,
+    shouldUseLayoutAndCode: r !== KeyboardLayout.UNKNOWN,
     layout: r
   };
-  let o = !!glU && glU.handleKeyboardShortcut(n);
+  let o = !!Fullscreen && Fullscreen.handleKeyboardShortcut(n);
   o && e.preventDefault();
   return o;
 }

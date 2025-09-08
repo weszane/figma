@@ -20,7 +20,7 @@ import { zG, rf } from "../9831/302304";
 import { A as _$$A } from "../vendor/648136";
 import { Y1 } from "../vendor/891888";
 import { mergeSorted } from "../figma_app/656233";
-import { glU, Ez5 } from "../figma_app/763686";
+import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { zN, k9 } from "../905/19536";
 import F from "../vendor/73823";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -246,7 +246,7 @@ function ex({
   let N = (() => {
     if (canSelectInApp?.(g)) return C(() => selectInApp(g));
   })();
-  let I = e => C(() => glU.triggerAction(e, {
+  let I = e => C(() => Fullscreen.triggerAction(e, {
     guid: g.id
   }));
   let k = b?.object.id === g.id;
@@ -352,10 +352,10 @@ let em = memo(function ({
     keyboardNavigationPath: [o],
     onContextMenu: v,
     onMouseEnter: () => {
-      Ez5 && Ez5.editorState().figmaScopeHighlightedNode.set(t);
+      AppStateTsApi && AppStateTsApi.editorState().figmaScopeHighlightedNode.set(t);
     },
     onMouseLeave: () => {
-      Ez5 && Ez5.editorState().figmaScopeHighlightedNode.set("");
+      AppStateTsApi && AppStateTsApi.editorState().figmaScopeHighlightedNode.set("");
     },
     select: () => j(t),
     style: m,

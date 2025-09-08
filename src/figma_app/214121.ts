@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { G } from "../905/289770";
-import { SIf } from "../figma_app/763686";
+import { ColorStateTsApi } from "../figma_app/763686";
 import { b2 } from "../vendor/284505";
 import { A } from "../vendor/382731";
 import { A as _$$A } from "../vendor/862057";
@@ -11,7 +11,7 @@ import { A as _$$A4 } from "../vendor/947527";
 import { reportError, captureMessage } from "../905/11";
 import { VZ } from "../figma_app/930338";
 import { E3 } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { g as _$$g } from "../figma_app/115586";
 let n;
 export function $$y0() {
@@ -25,10 +25,10 @@ export function $$y0() {
     n.current = r;
   }, [r]);
   useEffect(() => {
-    e && SIf && $$b1.updateColorsInFullscreen(SIf.colorTokensState());
+    e && ColorStateTsApi && $$b1.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
   }, [e, r]);
   useEffect(() => addThemeListener(() => {
-    Y5.isReady() && SIf && $$b1.updateColorsInFullscreen(SIf.colorTokensState());
+    fullscreenValue.isReady() && ColorStateTsApi && $$b1.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
   }), [addThemeListener]);
 }
 export let $$b1 = {

@@ -1,11 +1,11 @@
 import { allEqual, arraysEqual } from "../figma_app/656233";
-import { KY, YE } from "../figma_app/492908";
+import { clampOptional, roundToMultiple } from "../figma_app/492908";
 import { mergeNonNull } from "../figma_app/493477";
 import s, { trackEventAnalytics } from "../905/449184";
 import o, { O4 } from "../905/777187";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { Q8, SX } from "../905/216495";
+import { AUTO_MARKER, isAutoMarker } from "../905/216495";
 import { bA, _q } from "../905/668764";
 export class $$p5 extends Error {
   constructor(e, t) {
@@ -43,7 +43,7 @@ export class $$_3 {
     return e + t;
   }
   clamp(e) {
-    return KY(e, this.min(), this.max());
+    return clampOptional(e, this.min(), this.max());
   }
   min() {
     return this.options.min ?? this.defaultMin;
@@ -102,10 +102,10 @@ export class $$g8 {
   parse(e, t) {
     e = e.trim().toLocaleLowerCase();
     let r = getI18nString("fullscreen.auto").toLocaleLowerCase();
-    return (!this.allowEmpty || e.length) && r.startsWith(e) ? Q8 : this.pixelFormatter.parse(e, t);
+    return (!this.allowEmpty || e.length) && r.startsWith(e) ? AUTO_MARKER : this.pixelFormatter.parse(e, t);
   }
   format(e) {
-    if (SX(e)) return getI18nString("fullscreen.properties_panel.stack_panel.auto");
+    if (isAutoMarker(e)) return getI18nString("fullscreen.properties_panel.stack_panel.auto");
     if (this.allowUnformatted) try {
       return this.pixelFormatter.format(e);
     } catch {
@@ -117,10 +117,10 @@ export class $$g8 {
     return this.pixelFormatter.getNudgeAmount(e);
   }
   incrementBy(e, t) {
-    return SX(e) ? Q8 : this.pixelFormatter.incrementBy(e, t);
+    return isAutoMarker(e) ? AUTO_MARKER : this.pixelFormatter.incrementBy(e, t);
   }
   clamp(e) {
-    return SX(e) ? Q8 : this.pixelFormatter.clamp(e);
+    return isAutoMarker(e) ? AUTO_MARKER : this.pixelFormatter.clamp(e);
   }
 }
 export class $$f7 {
@@ -149,7 +149,7 @@ export class $$f7 {
     return e.map(e => this.pixelFormatter.clamp(e));
   }
   snap(e, t) {
-    return e.map(e => YE(e, t));
+    return e.map(e => roundToMultiple(e, t));
   }
   isEqual(e, t) {
     return arraysEqual(e, t);
@@ -431,13 +431,13 @@ export class $$O13 {
   }
   clamp(e) {
     return {
-      value: KY(e.value, this.min, this.max),
+      value: clampOptional(e.value, this.min, this.max),
       units: e.units
     };
   }
   snap(e, t) {
     return {
-      value: YE(e.value, t),
+      value: roundToMultiple(e.value, t),
       units: e.units
     };
   }
@@ -511,7 +511,7 @@ export class $$P17 {
   }
   incrementBy(e, t) {
     return {
-      value: YE(e.value + t, t),
+      value: roundToMultiple(e.value + t, t),
       type: e.type
     };
   }
@@ -525,7 +525,7 @@ export class $$P17 {
   }
   snap(e, t) {
     return {
-      value: YE(e.value, t),
+      value: roundToMultiple(e.value, t),
       type: e.type
     };
   }

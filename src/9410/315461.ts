@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { luZ } from "../figma_app/763686";
+import { AnimationTriggerType } from "../figma_app/763686";
 import { analyticsEventManager } from "../905/449184";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { tS } from "../figma_app/516028";
 import { AF } from "../figma_app/889655";
 import { Jb } from "../figma_app/224338";
@@ -39,7 +39,7 @@ export function $$h6() {
 export function $$m0() {
   let e = u();
   return useCallback((t, i) => {
-    let r = e => void 0 === e ? void 0 : gl(e) ? "MIXED" : e === luZ.TRIGGER ? "TRIGGER" : "AFTER_PREVIOUS";
+    let r = e => void 0 === e ? void 0 : isInvalidValue(e) ? "MIXED" : e === AnimationTriggerType.TRIGGER ? "TRIGGER" : "AFTER_PREVIOUS";
     analyticsEventManager.trackDefinedEvent("slides.modify_object_animation.start_condition", {
       ...e,
       oldValue: r(t),

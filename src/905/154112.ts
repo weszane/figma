@@ -2,13 +2,13 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { Of } from "../905/31837";
 import { yX } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 import { YQ, v_ } from "../figma_app/538002";
 export let $$p0 = "confirm-org-guest-invite-modal";
-qK($$p0, e => jsx(m, {
+registerLegacyModal($$p0, e => jsx(m, {
   ...e.modalShown.data,
   dispatch: e.dispatch
 }));

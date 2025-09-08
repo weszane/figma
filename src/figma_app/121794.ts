@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { JU, tB, tM, qM, vd } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { OJ } from "../905/519092";
 import { Vw, Pf, kv, aV } from "../905/893704";
 function c(e) {
@@ -14,7 +14,7 @@ function c(e) {
 }
 export function $$u1(e) {
   let t = e.onHide || (() => {
-    e.dispatch(Lo());
+    e.dispatch(popModalStack());
   });
   return jsxs(OJ, {
     ...e,

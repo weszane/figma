@@ -6,8 +6,8 @@ import { K as _$$K } from "../905/443068";
 import { o as _$$o } from "../905/821217";
 import { A as _$$A } from "../905/24328";
 import { r as _$$r } from "../905/857502";
-import { X3B, glU, rrT } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { PrototypingTsApi, Fullscreen, NodePropertyCategory } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { Pt } from "../figma_app/806412";
@@ -19,8 +19,8 @@ import { lW } from "../figma_app/11182";
 import { K as _$$K2 } from "../905/987240";
 import { m0 } from "../figma_app/976749";
 import { VU } from "../905/625959";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
 import { eY } from "../figma_app/722362";
 import { sS, q5, Cq } from "../figma_app/516028";
@@ -88,7 +88,7 @@ function F({
     onDoubleClick: () => {
       var t;
       t = i.nodeID;
-      return void (m || T === t || (j(t), X3B.centerViewportOnNodeIfNecessary(t)));
+      return void (m || T === t || (j(t), PrototypingTsApi.centerViewportOnNodeIfNecessary(t)));
     },
     onMouseDown: b,
     onMouseMove: w,
@@ -115,7 +115,7 @@ function F({
           onClick: () => {
             var t;
             t = i.nodeID;
-            return void glU.selectInstances(t, !X3B.isNodeVisibleInViewport(t));
+            return void Fullscreen.selectInstances(t, !PrototypingTsApi.isNodeVisibleInViewport(t));
           },
           "aria-label": getI18nString("proto.flows_panel.select_frame"),
           htmlAttributes: {
@@ -126,7 +126,7 @@ function F({
         }), jsx(V, {
           disabled: !a,
           onClick: () => function (t) {
-            let e = X3B.currentDeviceType();
+            let e = PrototypingTsApi.currentDeviceType();
             let o = vp({
               scalingInfo: {
                 viewportScalingMode: qb(e),
@@ -181,7 +181,7 @@ export let $$L0 = function (t) {
   let w = useDispatch();
   let v = c || t.viewOnly;
   let P = useSelector(t => t.mirror.appModel.prototypeCanvasUiVisible && v);
-  let R = _W(e, []);
+  let R = valueOrFallback(e, []);
   let {
     collapsedInspectionPanelAtom,
     collapseEnabled
@@ -198,9 +198,9 @@ export let $$L0 = function (t) {
   function L(t) {
     let e = t;
     t >= R.length ? e = 0 : t < 0 && (e = R.length - 1);
-    Y5.updateAppModel({
+    fullscreenValue.updateAppModel({
       currentSelectedProperty: {
-        type: rrT.PROTOTOTYPE_STARTING_POINT,
+        type: NodePropertyCategory.PROTOTOTYPE_STARTING_POINT,
         indices: [e]
       }
     });
@@ -208,8 +208,8 @@ export let $$L0 = function (t) {
   }
   function z(t, e) {
     f(null);
-    e && l7.user("update-prototype-starting-point-name", () => {
-      glU.updatePrototypeStartingPointName(t, e);
+    e && permissionScopeHandler.user("update-prototype-starting-point-name", () => {
+      Fullscreen.updatePrototypeStartingPointName(t, e);
     });
   }
   let U = c && collapseEnabled && K;
@@ -232,13 +232,13 @@ export let $$L0 = function (t) {
           let n = t[0].nodeID === o ? "" : t[t.findIndex(t => t.nodeID === o) - 1].nodeID;
           let i = R[p.indices[p.indices.length - 1]].nodeID;
           let r = t[t.length - 1].nodeID === i ? "" : t[t.findIndex(t => t.nodeID === i) + 1].nodeID;
-          l7.user("change-starting-points", () => {
-            glU.insertPrototypeStartingPointsBetween(e, n, r);
+          permissionScopeHandler.user("change-starting-points", () => {
+            Fullscreen.insertPrototypeStartingPointsBetween(e, n, r);
           });
         },
         onDeleteProperty: v ? () => {} : t => {
           let e = R.filter((e, o) => t.has(o)).map(t => t.nodeID);
-          e.length > 0 && glU.deletePrototypeStartingPoints(e);
+          e.length > 0 && Fullscreen.deletePrototypeStartingPoints(e);
         },
         onHeaderClick: collapseEnabled ? V : void 0,
         openFile: l,
@@ -267,7 +267,7 @@ export let $$L0 = function (t) {
           viewOnly: !!v
         }, e),
         reversed: !1,
-        selectedPropertyType: rrT.PROTOTOTYPE_STARTING_POINT,
+        selectedPropertyType: NodePropertyCategory.PROTOTOTYPE_STARTING_POINT,
         shouldIgnoreKeyboardEventDuplicateProperty: !0,
         showVisibleFlowsButton: v && !U,
         stylePickerShown: {

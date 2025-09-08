@@ -1,11 +1,11 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { phr } from "../figma_app/763686";
+import { CSSExportHelpers } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { v4, xv as _$$xv } from "../figma_app/655139";
-import { uz } from "../905/359509";
+import { WEB } from "../905/359509";
 import { t as _$$t2 } from "../905/241707";
 import { sQ } from "../905/191741";
 import { Em, qM } from "../figma_app/120227";
@@ -14,7 +14,7 @@ import { OX } from "../905/232489";
 import { lW } from "../figma_app/11182";
 import { m0 } from "../figma_app/976749";
 import { Ku } from "../figma_app/740163";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { u as _$$u, hg } from "../figma_app/852050";
 import { Fk, g0, dB, hr } from "../figma_app/167249";
@@ -38,7 +38,7 @@ export function $$w13() {
   let e = useSelector(e => e.mirror.selectionProperties?.numSelected === 1);
   let t = useSelector(e => e.mirror.sceneGraphSelection);
   let r = kl("primaryBreakpointFrameGuid") ?? null;
-  return e ? Object.keys(t).find(e => e) || null : r && hS(r) ? r : null;
+  return e ? Object.keys(t).find(e => e) || null : r && isValidValue(r) ? r : null;
 }
 export function $$O10() {
   let e = $$N11();
@@ -67,7 +67,7 @@ export function $$D7() {
 export function $$k9(e) {
   return useSelector(t => {
     let r = e(t);
-    if (null != r && hS(r)) return r;
+    if (null != r && isValidValue(r)) return r;
   });
 }
 export function $$M1(e, t) {
@@ -90,7 +90,7 @@ export function $$F0(e) {
   let a = useAtomWithSubscription(_$$v);
   if (!n) return;
   if (!i || !a) return n.name;
-  let s = t && "first-party" === r.type ? r.id : uz;
+  let s = t && "first-party" === r.type ? r.id : WEB;
   return _$$xv(n, s) ?? n.name;
 }
 export function $$j12(e) {
@@ -160,14 +160,14 @@ export function $$j12(e) {
           return variable ? l(t, variable.name) : t;
         }
         return function (e, t) {
-          let r = phr.convertGradientPaintToCSS(e.encodedPaint);
+          let r = CSSExportHelpers.convertGradientPaintToCSS(e.encodedPaint);
           return (t ? r.replace(/(#[a-f0-9]{6})|(rgba\(\d{1,3}, \d{1,3}, \d{1,3}, \d\.\d{1,2})/gi, e => l(e, t.name)) : null) ?? r;
         }(e, variable);
       case "GRADIENT_LINEAR":
       case "GRADIENT_RADIAL":
       case "GRADIENT_DIAMOND":
       case "GRADIENT_ANGULAR":
-        return phr.convertGradientPaintToCSS(e.encodedPaint);
+        return CSSExportHelpers.convertGradientPaintToCSS(e.encodedPaint);
     }
   };
   function c(e, t) {

@@ -6,8 +6,8 @@ import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { Y } from "../figma_app/887000";
-import { nF } from "../905/350402";
-import { to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler } from "../905/156213";
 import { yJ, F6 } from "../905/395917";
 import { vr } from "../figma_app/475472";
 import { e6 } from "../905/557142";
@@ -16,7 +16,7 @@ import { Eh } from "../figma_app/617654";
 import { bE } from "../905/98702";
 let $$y13 = "team_join_request_submitted";
 let $$b15 = "permission_request_submitted";
-let $$T7 = nF(async (e, t) => {
+let $$T7 = createOptimistThunk(async (e, t) => {
   let r = {
     team_id: t.teamId,
     level: t.level,
@@ -44,14 +44,14 @@ let $$T7 = nF(async (e, t) => {
     e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
-let $$I16 = nF((e, t) => {
+let $$I16 = createOptimistThunk((e, t) => {
   XHR.del(`/api/team_role_requests/${t.requestId}`).then(t => {
     e.dispatch(_$$s.flash(getI18nString("org_actions.request_withdrawn")));
   }).catch(t => {
     e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
-let $$S2 = nF((e, t) => {
+let $$S2 = createOptimistThunk((e, t) => {
   XHR.post(`/api/team_role_requests/${t.requestId}/approve`, {
     level: `${t.level}`
   }).then(({
@@ -65,14 +65,14 @@ let $$S2 = nF((e, t) => {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred")));
   });
 });
-let $$v10 = nF((e, t) => {
+let $$v10 = createOptimistThunk((e, t) => {
   XHR.post(`/team_role_requests/${t.requestId}/deny`).then(t => {
     e.dispatch(_$$s.flash(getI18nString("org_actions.request_denied")));
   }).catch(t => {
     e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
-let $$A19 = nF((e, {
+let $$A19 = createOptimistThunk((e, {
   orgId: t
 }) => {
   XHR.put(`/api/orgs/${t}`, {
@@ -85,7 +85,7 @@ let $$A19 = nF((e, {
     }));
   });
 });
-let $$x22 = nF((e, {
+let $$x22 = createOptimistThunk((e, {
   payload: t,
   successMessage: r
 }) => {
@@ -103,7 +103,7 @@ let $$x22 = nF((e, {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
-let $$N11 = nF((e, {
+let $$N11 = createOptimistThunk((e, {
   orgId: t,
   googleSsoOnly: r,
   mfaRequired: n
@@ -122,7 +122,7 @@ let $$N11 = nF((e, {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
-let $$C14 = nF((e, {
+let $$C14 = createOptimistThunk((e, {
   orgId: t,
   samlSsoOnly: r,
   mfaRequired: n
@@ -139,7 +139,7 @@ let $$C14 = nF((e, {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
-let $$w4 = nF((e, {
+let $$w4 = createOptimistThunk((e, {
   orgId: t,
   attribute: r
 }) => {
@@ -174,7 +174,7 @@ export function $$O1(e) {
     });
     return s;
   };
-  dispatch(to({
+  dispatch(showModalHandler({
     type: Y(),
     data: {
       org,
@@ -182,7 +182,7 @@ export function $$O1(e) {
     }
   }));
 }
-let $$R12 = nF((e, {
+let $$R12 = createOptimistThunk((e, {
   onFailure: t,
   onSuccess: r,
   orgId: n,
@@ -201,7 +201,7 @@ let $$R12 = nF((e, {
     e.dispatch(_$$s.error(J(r) || getI18nString("org_actions.an_error_occurred")));
   });
 });
-let $$L6 = nF((e, {
+let $$L6 = createOptimistThunk((e, {
   orgId: t,
   ipAllowlistEnabled: r,
   ipAllowlistRanges: n,
@@ -223,7 +223,7 @@ let $$L6 = nF((e, {
 }).catch(t => {
   e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred")));
 }));
-let $$P17 = nF((e, {
+let $$P17 = createOptimistThunk((e, {
   orgId: t
 }) => {
   XHR.post(`/api/org/${t}/deletion_request`).then(t => {
@@ -233,7 +233,7 @@ let $$P17 = nF((e, {
     console.error(t);
   });
 });
-let $$D0 = nF((e, {
+let $$D0 = createOptimistThunk((e, {
   orgId: t,
   exportControlSetting: r,
   successMessage: n
@@ -251,7 +251,7 @@ let $$D0 = nF((e, {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
-let $$k3 = nF((e, {
+let $$k3 = createOptimistThunk((e, {
   orgId: t,
   workspaceId: r,
   exportControlSetting: n,
@@ -273,7 +273,7 @@ let $$k3 = nF((e, {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
-let $$M18 = nF((e, {
+let $$M18 = createOptimistThunk((e, {
   orgId: t,
   workspaceId: r,
   exportControlSetting: n,
@@ -295,7 +295,7 @@ let $$M18 = nF((e, {
     e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
-let $$F9 = nF((e, t) => {
+let $$F9 = createOptimistThunk((e, t) => {
   let r = t.successMessage;
   let n = t.autogenPasswordControl;
   let a = t.settingsId;
@@ -332,7 +332,7 @@ let $$F9 = nF((e, t) => {
     }
   }, c);
 });
-let $$j21 = nF((e, t) => {
+let $$j21 = createOptimistThunk((e, t) => {
   XHR.post(`/api/org/${t.orgId}/delete_org_users`, {
     org_user_ids: t.orgUserIds
   }).then(t => {
@@ -342,7 +342,7 @@ let $$j21 = nF((e, t) => {
     console.error(t);
   });
 });
-let $$U20 = nF((e, {
+let $$U20 = createOptimistThunk((e, {
   orgId: t,
   slidesDisabled: r,
   successMessage: n
@@ -360,7 +360,7 @@ let $$U20 = nF((e, {
     n && e.dispatch(_$$s.flash(n));
   });
 });
-let $$B8 = nF((e, {
+let $$B8 = createOptimistThunk((e, {
   orgId: t,
   sitesPublishingDisabled: r,
   successMessage: n
@@ -374,7 +374,7 @@ let $$B8 = nF((e, {
     n && e.dispatch(_$$s.flash(n));
   });
 });
-let $$G5 = nF((e, {
+let $$G5 = createOptimistThunk((e, {
   orgId: t,
   supabaseDisabled: r,
   successMessage: n

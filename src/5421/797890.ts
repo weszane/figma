@@ -6,9 +6,9 @@ import { K as _$$K } from "../905/443068";
 import { i as _$$i } from "../905/97346";
 import { O as _$$O } from "../905/487602";
 import { A as _$$A } from "../905/24328";
-import { iCO, glU, X3B } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { aI, Hr, dI } from "../905/871411";
+import { StateHierarchy, Fullscreen, PrototypingTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import y from "classnames";
@@ -20,9 +20,9 @@ import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { o$ } from "../figma_app/8833";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4 } from "../figma_app/540726";
-import { hS, E7, oV, _W, gl } from "../905/216495";
+import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isInvalidValue } from "../905/216495";
 import { p8 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
 import { I as _$$I } from "../5421/927984";
@@ -67,7 +67,7 @@ import { Ay, HS } from "../figma_app/976110";
 import { dU, sQ, BX, Lp, Gl, Ym, vE, eU as _$$eU } from "../897/934363";
 import { IK, $n } from "../905/521428";
 import { N as _$$N } from "../905/438674";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { k as _$$k2 } from "../905/582200";
 import { F as _$$F } from "../905/302958";
 import { zZ } from "../figma_app/299859";
@@ -187,7 +187,7 @@ function ej(e) {
   let {
     showVideoV2Triggers
   } = selectWithShallowEqual(e => ({
-    allStatesInSelection: e.mirror.selectionProperties.stateGroupSelectionInfo?.mode === iCO.STATE,
+    allStatesInSelection: e.mirror.selectionProperties.stateGroupSelectionInfo?.mode === StateHierarchy.STATE,
     allTopLevelFramesInSelection: !!e.mirror.selectionProperties.allTopLevelFramesInSelection,
     showVideoV2Triggers: dq(e.mirror.selectionProperties)
   }));
@@ -203,10 +203,10 @@ function ej(e) {
       recordingKey: Pt(e, t),
       disabled: !function (t) {
         if ("NONE" === t) return !0;
-        let n = !!e.interactionsOnSelectedNodes && e.interactionsOnSelectedNodes.every(t => e.interactionsOnSelectedNodes && aI(t.sourceNodeID, e.interactionsOnSelectedNodes[0].sourceNodeID)) && !hS(e.property);
+        let n = !!e.interactionsOnSelectedNodes && e.interactionsOnSelectedNodes.every(t => e.interactionsOnSelectedNodes && areSessionLocalIDsEqual(t.sourceNodeID, e.interactionsOnSelectedNodes[0].sourceNodeID)) && !isValidValue(e.property);
         let o = function () {
           if (e.interactionsOnSelectedNodes) return new Set(e.interactionsOnSelectedNodes.map(e => e?.event?.interactionType).filter(e => void 0 !== e));
-        }()?.has(t) && hS(e.property) && e.property !== t;
+        }()?.has(t) && isValidValue(e.property) && e.property !== t;
         return (!n && !o || !!["ON_KEY_DOWN", "DRAG", "ON_VOICE", "ON_MEDIA_HIT"].includes(t)) && ("AFTER_TIMEOUT" === t ? !e.interactionContainsOpenLinkAction : "ON_MEDIA_HIT" === t || "ON_MEDIA_END" === t ? showVideoV2Triggers : (!e.interactionContainsOpenLinkAction || "ON_CLICK" === t || "MOUSE_UP" === t) && (!e.interactionContainsUpdateMediaRuntime || "ON_HOVER" !== t && "ON_PRESS" !== t && "DRAG" !== t) && (!e.interactionOnlyContainsBack || "ON_HOVER" !== t && "ON_PRESS" !== t));
       }(t)
     }, t);
@@ -226,7 +226,7 @@ function ej(e) {
     formatOption: e => e && e.props.value ? f.format(e.props.value) : "",
     getIcon: () => _$$e("AFTER_TIMEOUT")
   });
-  let j = E7(e.property);
+  let j = normalizeValue(e.property);
   return jsxs(Fragment, {
     children: [jsx(e_, {
       ariaLabel: e.ariaLabel,
@@ -276,10 +276,10 @@ function ew(e) {
   } = detailPropsMultipleActions.interactionEvent;
   let h = useAtomWithSubscription(_$$j);
   let m = useMemo(() => new Set(h.map(e => JSON.stringify(e))).size, [h]);
-  let x = useMemo(() => !interactionType && m > 1 || interactionType && m > 0 ? oV : interactionType || "NONE", [interactionType, m]);
+  let x = useMemo(() => !interactionType && m > 1 || interactionType && m > 0 ? MIXED_MARKER : interactionType || "NONE", [interactionType, m]);
   let y = (e, t) => {
     if (e.connectionType === t) return e;
-    if ("CONDITIONAL" === e.connectionType) for (let n of hS(e.conditionalActions) && e.conditionalActions ? e.conditionalActions : []) {
+    if ("CONDITIONAL" === e.connectionType) for (let n of isValidValue(e.conditionalActions) && e.conditionalActions ? e.conditionalActions : []) {
       let e = n.actions ? n.actions.find(e => e.connectionType === t) : void 0;
       if (void 0 !== e) return e;
     }
@@ -297,12 +297,12 @@ function ew(e) {
     let d = YT();
     let c = d === Oz.SINGLE_COL;
     let p = d === Oz.TWO_COL;
-    let u = !0 === E7(e.maintained);
-    let h = E7(e.keyTrigger);
-    let m = "ON_KEY_DOWN" === E7(e.interactionType);
-    let x = "AFTER_TIMEOUT" === E7(e.interactionType);
-    let g = "ON_MEDIA_HIT" === E7(e.interactionType);
-    let y = ["MOUSE_IN", "MOUSE_OUT", "MOUSE_ENTER", "MOUSE_LEAVE", "MOUSE_DOWN", "MOUSE_UP"].indexOf(E7(e.interactionType) || "") > -1;
+    let u = !0 === normalizeValue(e.maintained);
+    let h = normalizeValue(e.keyTrigger);
+    let m = "ON_KEY_DOWN" === normalizeValue(e.interactionType);
+    let x = "AFTER_TIMEOUT" === normalizeValue(e.interactionType);
+    let g = "ON_MEDIA_HIT" === normalizeValue(e.interactionType);
+    let y = ["MOUSE_IN", "MOUSE_OUT", "MOUSE_ENTER", "MOUSE_LEAVE", "MOUSE_DOWN", "MOUSE_UP"].indexOf(normalizeValue(e.interactionType) || "") > -1;
     let f = useId();
     let _ = jsx(ej, {
       ariaLabel: getI18nString("proto.trigger"),
@@ -321,7 +321,7 @@ function ew(e) {
           name: "Prototype Interaction Type Changed",
           params: {
             newType: o,
-            oldType: _W(e.interactionType, "MIXED")
+            oldType: valueOrFallback(e.interactionType, "MIXED")
           }
         }));
         "ON_KEY_DOWN" === o && s(!0);
@@ -475,7 +475,7 @@ function eM(e) {
   }, [expandedRows, setExpandedRows]);
   let N = useCallback(n => {
     var o = n.dropItem;
-    if (gl(o) || qQ(n.dragItem.action)) return;
+    if (isInvalidValue(o) || qQ(n.dragItem.action)) return;
     let i = e.interactionsOnSelectedNodes;
     if (!i || !selectedInteractions) return;
     for (var r = 0; r < selectedInteractions?.length; r++) {
@@ -495,7 +495,7 @@ function eM(e) {
       }
     }
     let a = i.map(e => selectedInteractions.find(t => t.id === e.id) ?? e);
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeInteractions: a
     });
   }, [expandedRows, setExpandedRows, e.interactionsOnSelectedNodes, selectedActionIndex, selectedInteractions, onSelect, h]);
@@ -605,7 +605,7 @@ function e$({
         preserve_scroll_position_value: !!e.preserveScroll
       }), r)) uU(t.stateManagementVersion) && t.id && t.sourceNodeID && zZ.recordInteractionUpgraded(t.id, t.sourceNodeID);
       n({
-        ...(hS(e.preserveScroll) && hS(o) ? {
+        ...(isValidValue(e.preserveScroll) && isValidValue(o) ? {
           transitionResetScrollPosition: !e.preserveScroll
         } : {}),
         stateManagementVersion: 1
@@ -616,7 +616,7 @@ function e$({
         button: {
           text: getI18nString("proto.state_management.visual_bell_update_all"),
           action: () => {
-            Y5.triggerActionInUserEditScope("update-interactions-state-management-on-page");
+            fullscreenValue.triggerActionInUserEditScope("update-interactions-state-management-on-page");
             l(_$$F.enqueue({
               type: "state-management-updated-all",
               message: getI18nString("proto.state_management.visual_bell_update_all_message")
@@ -637,9 +637,9 @@ function e$({
   });
   let h = jsxs("div", {
     className: "prototype_state_management_version_panel--containerUI3--V5tpG",
-    children: [jsx(_$$J, {
+    children: [jsx(Label, {
       children: p
-    }), jsx(_$$J, {
+    }), jsx(Label, {
       children: u
     }), c]
   });
@@ -647,7 +647,7 @@ function e$({
     className: "prototype_state_management_version_panel--containerUI3TwoCol--AAp8u",
     children: [jsx("span", {
       className: "prototype_state_management_version_panel--labelWrapperUI3--37g5A",
-      children: jsx(_$$J, {
+      children: jsx(Label, {
         children: p
       })
     }), jsx("span", {
@@ -741,7 +741,7 @@ function eQ(e, t, n) {
   let [o, i, r] = e.path;
   if (void 0 === o || void 0 === i || void 0 === r) return;
   let a = t[o]?.conditionalActions;
-  if (hS(a)) {
+  if (isValidValue(a)) {
     let e = a?.[i]?.actions?.length ?? 0;
     if (r >= e) {
       if (0 === e) {
@@ -766,9 +766,9 @@ function e0(e, t, n) {
   }
 }
 let e3 = () => {
-  glU?.setSelectedInteractions([]);
-  getFeatureFlags().prototype_ai_magic_link_show_suggestion_toast && Y5.showMagicLinkSuggestedVisualBell("create_node_transition");
-  Y5.deselectProperty();
+  Fullscreen?.setSelectedInteractions([]);
+  getFeatureFlags().prototype_ai_magic_link_show_suggestion_toast && fullscreenValue.showMagicLinkSuggestedVisualBell("create_node_transition");
+  fullscreenValue.deselectProperty();
 };
 let e5 = parsePxNumber("197px");
 let e6 = parsePercentNumber("50%");
@@ -860,8 +860,8 @@ let e7 = memo(function ({
         };
         t.actions = [e];
       }
-      let t = interactionsOnSelectedNodesAndComponents.map(t => e.find(e => aI(e.id, t.id)) ?? t);
-      Y5.updateSelectionProperties({
+      let t = interactionsOnSelectedNodesAndComponents.map(t => e.find(e => areSessionLocalIDsEqual(e.id, t.id)) ?? t);
+      fullscreenValue.updateSelectionProperties({
         prototypeInteractions: t
       });
     }
@@ -963,8 +963,8 @@ let e7 = memo(function ({
                 interactionID: id
               }));
             }
-            l7.user("delete-prototype-interactions", () => glU?.deleteInteractions(e));
-            Y5.deselectProperty();
+            permissionScopeHandler.user("delete-prototype-interactions", () => Fullscreen?.deleteInteractions(e));
+            fullscreenValue.deselectProperty();
           }
           e.accept();
         }
@@ -1007,8 +1007,8 @@ let e7 = memo(function ({
                 l.push(s);
                 o++;
               } else {
-                let e = a.id ? a.id : Hr;
-                td(s.connectionType ? s.connectionType : "NONE", dI(e), ts);
+                let e = a.id ? a.id : defaultSessionLocalID;
+                td(s.connectionType ? s.connectionType : "NONE", sessionLocalIDToString(e), ts);
                 r === a.actions.length - 1 && (t = !0);
                 2 === a.actions.length && (n = !0);
               }
@@ -1018,7 +1018,7 @@ let e7 = memo(function ({
           }
         }
         let r = interactionsOnSelectedNodesAndComponents.map(e => selectedInteractions.find(t => t.id === e.id) ?? e);
-        Y5.updateSelectionProperties({
+        fullscreenValue.updateSelectionProperties({
           prototypeInteractions: r
         });
         n && eI([new Op([0])]);
@@ -1045,7 +1045,7 @@ let e7 = memo(function ({
             let l = t.actions;
             if (!l) return t;
             let s = l[o];
-            s && td(s.connectionType ? s.connectionType : "NONE", dI(r.id ?? Hr), ts, !0);
+            s && td(s.connectionType ? s.connectionType : "NONE", sessionLocalIDToString(r.id ?? defaultSessionLocalID), ts, !0);
             let d = l.filter((e, t) => t !== o);
             e = o === l.length - 1;
             i = 0 === d.length;
@@ -1065,7 +1065,7 @@ let e7 = memo(function ({
         };
       });
       let a = interactionsOnSelectedNodesAndComponents.map(e => r.find(t => t.id === e.id) ?? e);
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         prototypeInteractions: a
       });
       i ? ee(new Op([t])) : !i && e && ee(new Op([t, n, o - 1]));
@@ -1110,7 +1110,7 @@ let e7 = memo(function ({
   tx && (tg = !!tx.actions && tx.actions.length < 2, tx.actions && 1 === tx.actions.length && (A = tx.actions[0]));
   let ty = !A || "NONE" === A.connectionType;
   let tf = tm && tg && ty;
-  var t_ = Hr;
+  var t_ = defaultSessionLocalID;
   let tb = jsx(_$$t2, {
     skipPaywall: tf,
     addButtonPressed: e => {
@@ -1152,10 +1152,10 @@ let e7 = memo(function ({
               o.actions?.splice(n, 0, e);
             }
           } else o.actions?.push(e);
-          t_ = o.id ? o.id : Hr;
+          t_ = o.id ? o.id : defaultSessionLocalID;
         } else {
           o.actions = [e];
-          t_ = o.id ? o.id : Hr;
+          t_ = o.id ? o.id : defaultSessionLocalID;
         }
         if (o.stateManagementVersion = 1, Y) {
           let e = [...X.path];
@@ -1164,7 +1164,7 @@ let e7 = memo(function ({
         } else n = new Op([o.actions.length - 1]);
       }
       let r = interactionsOnSelectedNodesAndComponents.map(e => selectedInteractions.find(t => t.id === e.id) ?? e);
-      if (Y5.updateSelectionProperties({
+      if (fullscreenValue.updateSelectionProperties({
         prototypeInteractions: r
       }), o || Y) {
         var a = [];
@@ -1180,7 +1180,7 @@ let e7 = memo(function ({
         params: {
           action: e.connectionType ? e.connectionType : "NONE",
           source: "panel",
-          connector_id: dI(t_),
+          connector_id: sessionLocalIDToString(t_),
           page_id: ts
         }
       }));
@@ -1387,7 +1387,7 @@ function e4({
     let n = e.path[1];
     let a = e.path[2];
     let s = mergedActions[m];
-    let p = (hS(s.conditionalActions) && s.conditionalActions ? s.conditionalActions : [])[n];
+    let p = (isValidValue(s.conditionalActions) && s.conditionalActions ? s.conditionalActions : [])[n];
     let u = p?.actions?.[a];
     return u ? jsx("div", {
       className: eR,
@@ -1459,7 +1459,7 @@ function te({
       nodeID: e.sourceNodeID,
       interactionID: e.id
     };
-    return (X3B?.getMatchingInteractions(_$$d(t)) ?? []).length;
+    return (PrototypingTsApi?.getMatchingInteractions(_$$d(t)) ?? []).length;
   })();
   let h = getFeatureFlags().prototype_hide_matching_noodles && 1 === selectedInteractions.length && c > 1 && jsx(_$$K, {
     actionOnPointerDown: !0,
@@ -1470,12 +1470,12 @@ function te({
         nodeID: e.sourceNodeID,
         interactionID: e.id
       };
-      let n = X3B?.getMatchingInteractions(_$$d(t)) ?? [];
-      glU?.selectInteractionsAndSourceNodes(n);
+      let n = PrototypingTsApi?.getMatchingInteractions(_$$d(t)) ?? [];
+      Fullscreen?.selectInteractionsAndSourceNodes(n);
       let o = getI18nString("proto.interaction_details.visual_bell.selected_n_matching_interactions", {
         total_num_interactions: n.length
       });
-      Y5.showVisualBellWithUndo("selected-matching-noodles", o, !1);
+      fullscreenValue.showVisualBellWithUndo("selected-matching-noodles", o, !1);
       r(_P({
         name: "prototype_select_matching_interactions",
         params: {
@@ -1495,10 +1495,10 @@ function te({
           nodeID: e.sourceNodeID,
           interactionID: e.id
         };
-        let n = X3B?.getMatchingInteractions(_$$d(t)) ?? [];
-        glU?.hoverInteractions(n);
+        let n = PrototypingTsApi?.getMatchingInteractions(_$$d(t)) ?? [];
+        Fullscreen?.hoverInteractions(n);
       },
-      onMouseLeave: () => glU?.hoverInteractions([]),
+      onMouseLeave: () => Fullscreen?.hoverInteractions([]),
       "data-tooltip": getI18nString("proto.interaction_details.select_n_matching_interactions", {
         total_num_interactions: c
       }),

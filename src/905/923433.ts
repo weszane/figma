@@ -4,8 +4,8 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { d as _$$d } from "../905/49800";
-import { J } from "../905/270045";
-import { Z_n, rXF } from "../figma_app/763686";
+import { Label } from "../905/270045";
+import { VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
@@ -86,8 +86,8 @@ export function $$z2(e) {
   let u = RU();
   let p = EU();
   let m = t => (e.onChange({
-    type: Z_n.STRING,
-    resolvedType: rXF.STRING,
+    type: VariableDataType.STRING,
+    resolvedType: VariableResolvedDataType.STRING,
     value: t
   }, zk.YES), !0);
   let [_, y] = _$$L(e.variableValue, (t, i = zk.NO) => {
@@ -96,7 +96,7 @@ export function $$z2(e) {
   let v = e.isInaccessible ? getI18nString("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0;
   let w = e.isOverridden ? G : _$$Fragment;
   switch (_.type) {
-    case Z_n.STRING:
+    case VariableDataType.STRING:
       return jsx("div", {
         className: h()({
           [M]: i === $.CELL,
@@ -122,7 +122,7 @@ export function $$z2(e) {
           })
         })
       });
-    case Z_n.BOOLEAN:
+    case VariableDataType.BOOLEAN:
       return jsx("div", {
         className: h()("variables_modal_value_input--booleanCell--kwjjI", {
           "variables_modal_value_input--booleanForm--l1Pjp variables_modal_value_input--booleanCell--kwjjI": i === $.FORM,
@@ -139,13 +139,13 @@ export function $$z2(e) {
               checked: _.value,
               id: $$V0,
               recordingKey: Pt(e.recordingKey, "toggleInput"),
-              label: jsx(J, {
+              label: jsx(Label, {
                 children: Oi(_)
               }),
               onChange: t => {
                 e.onChange({
-                  type: Z_n.BOOLEAN,
-                  resolvedType: rXF.BOOLEAN,
+                  type: VariableDataType.BOOLEAN,
+                  resolvedType: VariableResolvedDataType.BOOLEAN,
                   value: t
                 }, zk.YES);
               }
@@ -153,7 +153,7 @@ export function $$z2(e) {
           })
         })
       });
-    case Z_n.FLOAT:
+    case VariableDataType.FLOAT:
       {
         let r = jsx(w, {
           children: jsx(gq, {
@@ -171,8 +171,8 @@ export function $$z2(e) {
             noBorderOnScrub: !0,
             onValueChange: (e, t) => {
               y({
-                type: Z_n.FLOAT,
-                resolvedType: rXF.FLOAT,
+                type: VariableDataType.FLOAT,
+                resolvedType: VariableResolvedDataType.FLOAT,
                 value: e
               }, t ?? zk.NO);
             },
@@ -209,7 +209,7 @@ export function $$z2(e) {
           })
         });
       }
-    case Z_n.COLOR:
+    case VariableDataType.COLOR:
       return jsx(w, {
         children: jsx(H, {
           disabled: e.isInaccessible,
@@ -222,7 +222,7 @@ export function $$z2(e) {
           tooltip: v
         })
       });
-    case Z_n.ALIAS:
+    case VariableDataType.ALIAS:
       return jsx(W, {
         isInaccessible: e.isInaccessible,
         isOverridden: e.isOverridden,
@@ -231,19 +231,19 @@ export function $$z2(e) {
         recordingKey: e.recordingKey,
         contextType: i
       });
-    case Z_n.NODE_FIELD_ALIAS:
-    case Z_n.MAP:
-    case Z_n.FONT_STYLE:
-    case Z_n.EXPRESSION:
-    case Z_n.SYMBOL_ID:
-    case Z_n.TEXT_DATA:
-    case Z_n.MANAGED_STRING_ALIAS:
-    case Z_n.CMS_ALIAS:
-    case Z_n.IMAGE:
-    case Z_n.LINK:
-    case Z_n.JS_RUNTIME_ALIAS:
-    case Z_n.DATE:
-    case Z_n.SLOT_CONTENT_ID:
+    case VariableDataType.NODE_FIELD_ALIAS:
+    case VariableDataType.MAP:
+    case VariableDataType.FONT_STYLE:
+    case VariableDataType.EXPRESSION:
+    case VariableDataType.SYMBOL_ID:
+    case VariableDataType.TEXT_DATA:
+    case VariableDataType.MANAGED_STRING_ALIAS:
+    case VariableDataType.CMS_ALIAS:
+    case VariableDataType.IMAGE:
+    case VariableDataType.LINK:
+    case VariableDataType.JS_RUNTIME_ALIAS:
+    case VariableDataType.DATE:
+    case VariableDataType.SLOT_CONTENT_ID:
       return jsx(Fragment, {});
     default:
       throwTypeError(_, "Unknown VariableDataType");

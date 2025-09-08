@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { vh, YV } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 import { FOrganizationLevelType } from "../figma_app/191312";
 let o = z.object({
   is_eligible: z.boolean(),
@@ -9,8 +9,8 @@ let o = z.object({
 });
 let $$r0 = new class {
   constructor() {
-    this.TermsAcceptanceSchemaValidator = vh();
-    this.NonAdminBillingTermsBannerSchemaValidator = YV("NonAdminBillingTermsBannerSchemaValidator", o, "terms_of_service_may_2025_update");
+    this.TermsAcceptanceSchemaValidator = createNoOpValidator();
+    this.NonAdminBillingTermsBannerSchemaValidator = createMetaValidator("NonAdminBillingTermsBannerSchemaValidator", o, "terms_of_service_may_2025_update");
   }
   updateTermsAcceptance(e) {
     let {
@@ -37,4 +37,4 @@ let $$r0 = new class {
     }));
   }
 }();
-export const w = $$r0; 
+export const w = $$r0;

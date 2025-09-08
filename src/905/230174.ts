@@ -2,11 +2,11 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { bL, l9, mc, wv, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { K } from "../905/443068";
 import { t as _$$t } from "../905/947268";
 import { Z as _$$Z } from "../905/498136";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { j } from "../905/918929";
 import { Pt } from "../figma_app/806412";
@@ -64,7 +64,7 @@ function T({
     onChange: E,
     value: "SUBSCRIBED_VARIABLES" === t.type ? t.libraryKey : t.type,
     children: [jsx(l9, {
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText("variables.binding_ui.variable_set")
       }),
       "data-testid": "variable-set-selector-trigger",
@@ -128,7 +128,7 @@ function P({
   onToggleLayoutIconClick: r,
   disabledReason: s
 }) {
-  if (i !== rXF.COLOR) return null;
+  if (i !== VariableResolvedDataType.COLOR) return null;
   {
     let i = function (e) {
       switch (e) {

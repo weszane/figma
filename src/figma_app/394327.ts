@@ -1,26 +1,26 @@
 import { assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
-import { rXF, Z_n, y0x, J0O, JTp } from "../figma_app/763686";
+import { VariableResolvedDataType, VariableDataType, PlatformType, ComponentPropType, OperationType } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import { YU } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 export function $$u6(e) {
   if ("MIXED" === e) return getI18nString("fullscreen.mixed");
   if (!e) return null;
   switch (e.resolvedType) {
-    case rXF.FLOAT:
+    case VariableResolvedDataType.FLOAT:
       return String(parseFloat(e.value.toFixed(2)));
-    case rXF.BOOLEAN:
+    case VariableResolvedDataType.BOOLEAN:
       return e.value ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false");
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       return TI.format(e.value);
-    case rXF.STRING:
-      if (e.type === Z_n.DATE) return null;
+    case VariableResolvedDataType.STRING:
+      if (e.type === VariableDataType.DATE) return null;
       return e.value;
-    case rXF.IMAGE:
-    case rXF.JS_RUNTIME_ALIAS:
+    case VariableResolvedDataType.IMAGE:
+    case VariableResolvedDataType.JS_RUNTIME_ALIAS:
       return null;
     default:
       return JSON.stringify(e.value);
@@ -46,110 +46,110 @@ export function $$p12(e, t) {
 }
 export function $$_10(e) {
   switch (e) {
-    case rXF.BOOLEAN:
-      return Z_n.BOOLEAN;
-    case rXF.FLOAT:
-      return Z_n.FLOAT;
-    case rXF.STRING:
-      return Z_n.STRING;
-    case rXF.COLOR:
-      return Z_n.COLOR;
-    case rXF.MAP:
-      return Z_n.MAP;
-    case rXF.SYMBOL_ID:
-      return Z_n.SYMBOL_ID;
+    case VariableResolvedDataType.BOOLEAN:
+      return VariableDataType.BOOLEAN;
+    case VariableResolvedDataType.FLOAT:
+      return VariableDataType.FLOAT;
+    case VariableResolvedDataType.STRING:
+      return VariableDataType.STRING;
+    case VariableResolvedDataType.COLOR:
+      return VariableDataType.COLOR;
+    case VariableResolvedDataType.MAP:
+      return VariableDataType.MAP;
+    case VariableResolvedDataType.SYMBOL_ID:
+      return VariableDataType.SYMBOL_ID;
   }
 }
 export function $$h11(e) {
   return "LOCAL" === e.subscriptionStatus && e.isSoftDeleted;
 }
 export let $$m2 = {
-  CORNER_RADIUS: [rXF.FLOAT],
-  STACK_SPACING: [rXF.FLOAT],
-  STACK_PADDING_LEFT: [rXF.FLOAT],
-  STACK_PADDING_TOP: [rXF.FLOAT],
-  STACK_PADDING_RIGHT: [rXF.FLOAT],
-  STACK_PADDING_BOTTOM: [rXF.FLOAT],
-  TEXT_DATA: [rXF.STRING, rXF.FLOAT],
-  WIDTH: [rXF.FLOAT],
-  HEIGHT: [rXF.FLOAT],
-  RECTANGLE_TOP_LEFT_CORNER_RADIUS: [rXF.FLOAT],
-  RECTANGLE_TOP_RIGHT_CORNER_RADIUS: [rXF.FLOAT],
-  RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS: [rXF.FLOAT],
-  RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS: [rXF.FLOAT],
-  STACK_COUNTER_SPACING: [rXF.FLOAT],
-  MIN_WIDTH: [rXF.FLOAT],
-  MAX_WIDTH: [rXF.FLOAT],
-  MIN_HEIGHT: [rXF.FLOAT],
-  MAX_HEIGHT: [rXF.FLOAT],
-  STROKE_WEIGHT: [rXF.FLOAT],
-  OPACITY: [rXF.FLOAT],
-  BORDER_TOP_WEIGHT: [rXF.FLOAT],
-  BORDER_BOTTOM_WEIGHT: [rXF.FLOAT],
-  BORDER_LEFT_WEIGHT: [rXF.FLOAT],
-  BORDER_RIGHT_WEIGHT: [rXF.FLOAT],
+  CORNER_RADIUS: [VariableResolvedDataType.FLOAT],
+  STACK_SPACING: [VariableResolvedDataType.FLOAT],
+  STACK_PADDING_LEFT: [VariableResolvedDataType.FLOAT],
+  STACK_PADDING_TOP: [VariableResolvedDataType.FLOAT],
+  STACK_PADDING_RIGHT: [VariableResolvedDataType.FLOAT],
+  STACK_PADDING_BOTTOM: [VariableResolvedDataType.FLOAT],
+  TEXT_DATA: [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT],
+  WIDTH: [VariableResolvedDataType.FLOAT],
+  HEIGHT: [VariableResolvedDataType.FLOAT],
+  RECTANGLE_TOP_LEFT_CORNER_RADIUS: [VariableResolvedDataType.FLOAT],
+  RECTANGLE_TOP_RIGHT_CORNER_RADIUS: [VariableResolvedDataType.FLOAT],
+  RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS: [VariableResolvedDataType.FLOAT],
+  RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS: [VariableResolvedDataType.FLOAT],
+  STACK_COUNTER_SPACING: [VariableResolvedDataType.FLOAT],
+  MIN_WIDTH: [VariableResolvedDataType.FLOAT],
+  MAX_WIDTH: [VariableResolvedDataType.FLOAT],
+  MIN_HEIGHT: [VariableResolvedDataType.FLOAT],
+  MAX_HEIGHT: [VariableResolvedDataType.FLOAT],
+  STROKE_WEIGHT: [VariableResolvedDataType.FLOAT],
+  OPACITY: [VariableResolvedDataType.FLOAT],
+  BORDER_TOP_WEIGHT: [VariableResolvedDataType.FLOAT],
+  BORDER_BOTTOM_WEIGHT: [VariableResolvedDataType.FLOAT],
+  BORDER_LEFT_WEIGHT: [VariableResolvedDataType.FLOAT],
+  BORDER_RIGHT_WEIGHT: [VariableResolvedDataType.FLOAT],
   MISSING: [],
-  PARAGRAPH_SPACING: [rXF.FLOAT],
-  PARAGRAPH_INDENT: [rXF.FLOAT],
-  VISIBLE: [rXF.BOOLEAN],
-  VARIANT_PROPERTIES: [rXF.SYMBOL_ID],
-  OVERRIDDEN_SYMBOL_ID: [rXF.SYMBOL_ID],
-  FONT_FAMILY: [rXF.STRING],
-  FONT_STYLE: [rXF.STRING, rXF.FLOAT],
-  FONT_VARIATIONS: [rXF.FLOAT],
-  FONT_SIZE: [rXF.FLOAT],
-  LETTER_SPACING: [rXF.FLOAT],
-  LINE_HEIGHT: [rXF.FLOAT],
-  HYPERLINK: [rXF.LINK],
-  CMS_SERIALIZED_RICH_TEXT_DATA: [rXF.JS_RUNTIME_ALIAS],
-  SLOT_CONTENT_ID: [rXF.SLOT_CONTENT_ID],
-  GRID_ROW_GAP: [rXF.FLOAT],
-  GRID_COLUMN_GAP: [rXF.FLOAT]
+  PARAGRAPH_SPACING: [VariableResolvedDataType.FLOAT],
+  PARAGRAPH_INDENT: [VariableResolvedDataType.FLOAT],
+  VISIBLE: [VariableResolvedDataType.BOOLEAN],
+  VARIANT_PROPERTIES: [VariableResolvedDataType.SYMBOL_ID],
+  OVERRIDDEN_SYMBOL_ID: [VariableResolvedDataType.SYMBOL_ID],
+  FONT_FAMILY: [VariableResolvedDataType.STRING],
+  FONT_STYLE: [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT],
+  FONT_VARIATIONS: [VariableResolvedDataType.FLOAT],
+  FONT_SIZE: [VariableResolvedDataType.FLOAT],
+  LETTER_SPACING: [VariableResolvedDataType.FLOAT],
+  LINE_HEIGHT: [VariableResolvedDataType.FLOAT],
+  HYPERLINK: [VariableResolvedDataType.LINK],
+  CMS_SERIALIZED_RICH_TEXT_DATA: [VariableResolvedDataType.JS_RUNTIME_ALIAS],
+  SLOT_CONTENT_ID: [VariableResolvedDataType.SLOT_CONTENT_ID],
+  GRID_ROW_GAP: [VariableResolvedDataType.FLOAT],
+  GRID_COLUMN_GAP: [VariableResolvedDataType.FLOAT]
 };
 export function $$g5({
   variable: e,
   variableDisplayName: t
 }) {
-  return e ? e.codeSyntax?.[y0x.WEB] ? e.codeSyntax[y0x.WEB] : `var(--${(t ?? e.name).replace(/[^a-zA-Z0-9-]/g, "")})` : "";
+  return e ? e.codeSyntax?.[PlatformType.WEB] ? e.codeSyntax[PlatformType.WEB] : `var(--${(t ?? e.name).replace(/[^a-zA-Z0-9-]/g, "")})` : "";
 }
 export function $$f8(e) {
   switch (e) {
-    case rXF.BOOLEAN:
-      return J0O.BOOL;
-    case rXF.FLOAT:
-      return J0O.NUMBER;
-    case rXF.STRING:
-    case rXF.TEXT_DATA:
-      return J0O.TEXT;
+    case VariableResolvedDataType.BOOLEAN:
+      return ComponentPropType.BOOL;
+    case VariableResolvedDataType.FLOAT:
+      return ComponentPropType.NUMBER;
+    case VariableResolvedDataType.STRING:
+    case VariableResolvedDataType.TEXT_DATA:
+      return ComponentPropType.TEXT;
     default:
       throw Error(`Unknown resolved type: ${e}`);
   }
 }
 export function $$E1(e) {
   switch (e) {
-    case rXF.BOOLEAN:
+    case VariableResolvedDataType.BOOLEAN:
       return "boolean";
-    case rXF.FLOAT:
+    case VariableResolvedDataType.FLOAT:
       return "number";
-    case rXF.STRING:
+    case VariableResolvedDataType.STRING:
       return "string";
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       return "color";
-    case rXF.MAP:
+    case VariableResolvedDataType.MAP:
       return "map";
-    case rXF.SYMBOL_ID:
+    case VariableResolvedDataType.SYMBOL_ID:
       return "symbol_id";
-    case rXF.FONT_STYLE:
+    case VariableResolvedDataType.FONT_STYLE:
       return "font_style";
-    case rXF.TEXT_DATA:
+    case VariableResolvedDataType.TEXT_DATA:
       return "text_data";
-    case rXF.IMAGE:
+    case VariableResolvedDataType.IMAGE:
       return "image";
-    case rXF.LINK:
+    case VariableResolvedDataType.LINK:
       return "link";
-    case rXF.JS_RUNTIME_ALIAS:
+    case VariableResolvedDataType.JS_RUNTIME_ALIAS:
       return "js_runtime_alias";
-    case rXF.SLOT_CONTENT_ID:
+    case VariableResolvedDataType.SLOT_CONTENT_ID:
       return "slot_content_id";
   }
 }
@@ -167,13 +167,13 @@ export const Hr = $$E1;
 export const Io = $$m2;
 export const Ip = $$b3;
 export const MH = function e(t) {
-  let r = E7(t);
+  let r = normalizeValue(t);
   if (r) {
     if ("dataType" in r && "ALIAS" === r.dataType && r.value?.alias) return dI(r.value?.alias);
     if ("type" in r) {
-      if (r.type === Z_n.ALIAS) return r.value;
-      if (r.type === Z_n.FONT_STYLE) return e(r.value.asFloat ?? r.value.asString ?? null);
-      if (r?.type === Z_n.EXPRESSION && r.value.expressionFunction === JTp.STRINGIFY && 1 === r.value.expressionArguments.length) return e(r.value.expressionArguments[0]);
+      if (r.type === VariableDataType.ALIAS) return r.value;
+      if (r.type === VariableDataType.FONT_STYLE) return e(r.value.asFloat ?? r.value.asString ?? null);
+      if (r?.type === VariableDataType.EXPRESSION && r.value.expressionFunction === OperationType.STRINGIFY && 1 === r.value.expressionArguments.length) return e(r.value.expressionArguments[0]);
     }
   }
   return null;
@@ -183,7 +183,7 @@ export const Oi = $$u6;
 export const Pr = function e(t) {
   return {
     *[Symbol.iterator]() {
-      if (yield t, t.type === Z_n.EXPRESSION) for (let r of t.value.expressionArguments) yield* e(r);else if (t.type === Z_n.MAP) for (let r of Object.values(t.value)) yield* e(r);
+      if (yield t, t.type === VariableDataType.EXPRESSION) for (let r of t.value.expressionArguments) yield* e(r);else if (t.type === VariableDataType.MAP) for (let r of Object.values(t.value)) yield* e(r);
     }
   }[Symbol.iterator]();
 };

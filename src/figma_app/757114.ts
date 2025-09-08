@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { zw } from "../905/585727";
 import { R } from "../905/531474";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -95,7 +95,7 @@ async function E({
 }) {
   let l = await xF(r, ["*"]);
   let d = await UD(l, "image/png", t);
-  !o.signal.aborted && e.isAlive && l7.ai("editor-ai-fill-image", () => {
+  !o.signal.aborted && e.isAlive && permissionScopeHandler.ai("editor-ai-fill-image", () => {
     let r = R(e);
     if (!r) throw Error("Failed to get topmost visible image fill");
     let s = [...e.fills];

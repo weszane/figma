@@ -1,8 +1,8 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 let $$a13 = "USER_FOLDERS";
 let $$s3 = "USER_DRAFTS";
-let $$o15 = nF((e, t) => {
+let $$o15 = createOptimistThunk((e, t) => {
   let {
     foldersByTeamId,
     teamOrder

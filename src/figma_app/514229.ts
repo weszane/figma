@@ -1,15 +1,15 @@
 import { useMemo } from "react";
-import { ruz, Egt, Ez5, HV5, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ImageToolsBindings, SceneGraphHelpers, AppStateTsApi, GridLayoutApi, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { i2 } from "../905/913055";
 import { KH } from "../figma_app/722362";
 import { zk } from "../figma_app/198712";
 export let $$p2 = e => Uint8Array.from(e.match(/.{1,2}/g).map(e => parseInt(e, 16)));
 export function $$_1() {
   let e = KH();
-  return useMemo(() => !!e && !!ruz?.getGenerateImageTarget(), [e]);
+  return useMemo(() => !!e && !!ImageToolsBindings?.getGenerateImageTarget(), [e]);
 }
 export function $$h0({
   create: e,
@@ -27,11 +27,11 @@ export function $$h0({
   if (!m) throw Error("Something went wrong");
   let g = i2();
   let f = t && t.length > 0;
-  let E = Egt?.hasGridCellSelection();
+  let E = SceneGraphHelpers?.hasGridCellSelection();
   let y = null;
   if (1 === g.length) {
     if ((c = g[0]) && !function (e) {
-      let t = Y5.getViewportInfo();
+      let t = fullscreenValue.getViewportInfo();
       let r = t.width / t.zoomScale;
       let n = t.height / t.zoomScale;
       let i = t.offsetX - r / 2;
@@ -50,18 +50,18 @@ export function $$h0({
         y = h.get(e);
       } else c?.containingCooperFrame() && (y = c.containingCooperFrame());
     }
-    ruz?.getGenerateImageTarget() || (c = void 0);
+    ImageToolsBindings?.getGenerateImageTarget() || (c = void 0);
     c && c.isGrid && E && (_ = c, c = void 0);
   }
-  l7.user("generate image", () => {
+  permissionScopeHandler.user("generate image", () => {
     if (!c && e) {
-      let e = Y5.getViewportInfo();
+      let e = fullscreenValue.getViewportInfo();
       if ((c = h.createNode("RECTANGLE")).size = n, c.x = e.offsetX - c.size.x / 2, c.y = e.offsetY - c.size.y / 2, f) {
         if (!y) {
           let {
             row = 0,
             col = 0
-          } = Ez5?.canvasGrid()?.getClosestGridCoord({
+          } = AppStateTsApi?.canvasGrid()?.getClosestGridCoord({
             x: c.x,
             y: c.y
           }, null) ?? {};
@@ -92,14 +92,14 @@ export function $$h0({
         imageScaleMode: "FILL"
       }];
       let a = !1;
-      E && _ && (a = !0 === HV5?.insertGeneratedImageAtSelectedCell(_.guid, c.guid));
+      E && _ && (a = !0 === GridLayoutApi?.insertGeneratedImageAtSelectedCell(_.guid, c.guid));
       a || m.appendChild(c);
-      r && (m.setSelectionToSingleNode(c.guid), c.isGridChild || Y5.updateSelectionProperties({
+      r && (m.setSelectionToSingleNode(c.guid), c.isGridChild || fullscreenValue.updateSelectionProperties({
         aspectRatioLockToggled: !0
       }, {
         shouldCommit: zk.NO
       }));
-      glU?.showSelectionOverlayImmediately();
+      Fullscreen?.showSelectionOverlayImmediately();
     }
   });
   return c ?? null;

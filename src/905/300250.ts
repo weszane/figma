@@ -1,4 +1,4 @@
-import { sYL, BtE, FAf, h3O, kul, H$z, dPJ } from "../figma_app/763686";
+import { GitReferenceType, PreviewStage, DesignWorkspace, Multiplayer, SchemaJoinStatus, OperationResult, AutosaveEventType } from "../figma_app/763686";
 import { waitForAnimationFrame } from "../905/236856";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
@@ -9,14 +9,14 @@ import { XHR, getRequest } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Nf } from "../figma_app/864378";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { rY, XA } from "../905/985490";
 import { gf, FK, fA, ds, Mt } from "../905/585030";
 import { HJ, cb } from "../905/760074";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { NT } from "../figma_app/741237";
 import { De, eN, oJ, mN, lt } from "../905/346794";
 import { Qx, WO } from "../905/491806";
@@ -38,7 +38,7 @@ async function T(e, t, i) {
     return;
   }
 }
-let k = nF((e, t) => {
+let k = createOptimistThunk((e, t) => {
   let i = t?.message || getI18nString("collaboration.branching.error_merging");
   e.dispatch(F.enqueue({
     message: i,
@@ -46,7 +46,7 @@ let k = nF((e, t) => {
     error: !0
   }));
 });
-let $$R3 = nF(async (e, t) => {
+let $$R3 = createOptimistThunk(async (e, t) => {
   let {
     mergeParams,
     checkpointDiff,
@@ -58,7 +58,7 @@ let $$R3 = nF(async (e, t) => {
   let u = e.getState().openFile;
   let h = u?.key;
   let v = Qx(mergeParams.direction);
-  if (e.dispatch(Ce()), mergeParams.branchModalTrackingId = branchModalTrackingId, !u) {
+  if (e.dispatch(hideModal()), mergeParams.branchModalTrackingId = branchModalTrackingId, !u) {
     e.dispatch(k());
     e.dispatch($$N7({
       hideModal: !1,
@@ -93,7 +93,7 @@ let $$R3 = nF(async (e, t) => {
       type: "file-merge-submit"
     }));
     e.dispatch($$j4({}));
-    mergeParams.direction === Kn.TO_SOURCE && gf(sYL.BRANCH, BtE.STAGE);
+    mergeParams.direction === Kn.TO_SOURCE && gf(GitReferenceType.BRANCH, PreviewStage.STAGE);
     let t = mergeParams.direction === Kn.FROM_SOURCE ? checkpointDiff.to_checkpoint_key : null;
     mergeParams.pickedAllFromBranch = mergeParams.direction === Kn.FROM_SOURCE && conflictResolutionDetails?.nonConflictingGroups === 0 && conflictResolutionDetails?.mainPickGroups === 0 && conflictResolutionDetails?.branchPickGroups > 0;
     try {
@@ -125,8 +125,8 @@ let $$R3 = nF(async (e, t) => {
     }
   }
 });
-let $$N7 = nF((e, t) => {
-  t.hideModal && e.dispatch(Ce());
+let $$N7 = createOptimistThunk((e, t) => {
+  t.hideModal && e.dispatch(hideModal());
   ds().then(() => {
     trackEventAnalytics("Branch Modal Exited", {
       direction: t.mergeParams.direction,
@@ -136,7 +136,7 @@ let $$N7 = nF((e, t) => {
       userInitiated: t.userInitiated,
       reason: t.reason
     });
-    e.getState().openFile?.canEdit ? (NT(FAf.DESIGN), Y5.triggerAction("enter-layout-mode")) : (NT(FAf.INSPECT), Y5.triggerAction("enter-preview-mode"));
+    e.getState().openFile?.canEdit ? (NT(DesignWorkspace.DESIGN), fullscreenValue.triggerAction("enter-layout-mode")) : (NT(DesignWorkspace.INSPECT), fullscreenValue.triggerAction("enter-preview-mode"));
   }).catch(e => {
     let t = new s9("Refreshing due to error in abandonDiff", {
       cause: e
@@ -145,9 +145,9 @@ let $$N7 = nF((e, t) => {
     Ay.reload("Merge cancelled");
   });
 });
-let $$P0 = nF(async (e, t) => {
+let $$P0 = createOptimistThunk(async (e, t) => {
   if (t.mergeParams.mergeOnFileOpen) {
-    if (await waitForAnimationFrame(), eN() || (h3O.updateConnectionStateIfNeeded(!0), await oJ(kul.JOINED)), e.dispatch(F.enqueue({
+    if (await waitForAnimationFrame(), eN() || (Multiplayer.updateConnectionStateIfNeeded(!0), await oJ(SchemaJoinStatus.JOINED)), e.dispatch(F.enqueue({
       message: getI18nString("collaboration.branching.merging"),
       icon: zX.SPINNER,
       type: "file-merge-submit"
@@ -168,33 +168,33 @@ let $$P0 = nF(async (e, t) => {
           responseType: "arraybuffer"
         }).then(e => {
           let a = e.data;
-          rY.setDiff(r, a, t.mergeParams.sourceKey, t.mergeParams.branchKey, -1) === H$z.VERSION_MISMATCH && (i = rY.getDiffMigrationVersion(r));
+          rY.setDiff(r, a, t.mergeParams.sourceKey, t.mergeParams.branchKey, -1) === OperationResult.VERSION_MISMATCH && (i = rY.getDiffMigrationVersion(r));
         });
         await Promise.all([a, s]);
       } else i = rY.getDiffMigrationVersion(r);
       try {
         let e = rY.getAllGuids(r, t.mergeParams.branchModalTrackingId || 0);
         trackEventAnalytics("Branching Incremental To Source Merge", {
-          isIncremental: h3O.isIncrementalSession(),
-          isValidatingIncremental: h3O.isValidatingIncremental(),
+          isIncremental: Multiplayer.isIncrementalSession(),
+          isValidatingIncremental: Multiplayer.isValidatingIncremental(),
           guidCount: e.length,
           branchKey: t.mergeParams.branchKey,
           sourceKey: t.mergeParams.sourceKey
         }, {
           forwardToDatadog: !0
         });
-        await Mt(e, dPJ.BRANCHING_MERGE_TO_MAIN, {
+        await Mt(e, AutosaveEventType.BRANCHING_MERGE_TO_MAIN, {
           branchKey: t.mergeParams.branchKey,
           sourceKey: t.mergeParams.sourceKey,
           branchModalTrackingId: t.mergeParams.branchModalTrackingId || 0
         });
       } catch (e) {
-        if (h3O.isValidatingIncremental()) HJ(new s9("Incremental loading validation failed", {
+        if (Multiplayer.isValidatingIncremental()) HJ(new s9("Incremental loading validation failed", {
           cause: e
         }), PW.ON_MERGE, t.mergeParams.direction);else throw e;
       }
       await mN();
-      gf(r, BtE.STAGE);
+      gf(r, PreviewStage.STAGE);
       let a = new FK({
         mergeParams: t.mergeParams,
         file: t.editingFile,
@@ -258,7 +258,7 @@ let O = async (e, t, i, n, r = null) => {
             file_merge_id: e.data?.failure_info?.file_merge_id
           });
           t(F.clearAll());
-          t(to({
+          t(showModalHandler({
             type: my,
             data: {
               view: RK.COULD_NOT_COMPLETE,
@@ -309,7 +309,7 @@ let O = async (e, t, i, n, r = null) => {
           file_merge_id: e.data.failure_info?.file_merge_id || null
         });
         t(F.clearAll());
-        t(to({
+        t(showModalHandler({
           type: my,
           data: {
             view: r,
@@ -332,7 +332,7 @@ let O = async (e, t, i, n, r = null) => {
         file_merge_id: e.data?.failure_info?.file_merge_id
       });
       t(F.clearAll());
-      t(to({
+      t(showModalHandler({
         type: my,
         data: {
           view: RK.COULD_NOT_START,

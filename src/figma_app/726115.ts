@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { E as _$$E } from "../905/632989";
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
 import { TI } from "../905/713722";
@@ -41,8 +41,8 @@ export let $$f1 = forwardRef(function ({
       }
     })]
   });
-  let A = (y ?? RYP.SRGB) === RYP.DISPLAY_P3 ? p3() ? {
-    backgroundImage: `url(${rl(b, RYP.DISPLAY_P3)})`
+  let A = (y ?? ColorSpaceEnum.SRGB) === ColorSpaceEnum.DISPLAY_P3 ? p3() ? {
+    backgroundImage: `url(${rl(b, ColorSpaceEnum.DISPLAY_P3)})`
   } : {
     backgroundColor: F.format(b, "display-p3")
   } : {

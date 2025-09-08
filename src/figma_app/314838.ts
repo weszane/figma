@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { D } from "../905/412108";
 let o = z.object({
@@ -13,28 +13,28 @@ let o = z.object({
 });
 let $$l0 = new class {
   constructor() {
-    this.ColorPaletteSchemaValidator = YV("ColorPaletteSchemaValidator", D(o), null);
+    this.ColorPaletteSchemaValidator = createMetaValidator("ColorPaletteSchemaValidator", D(o), null);
   }
   createColorPalette(e) {
     return this.ColorPaletteSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/color_palettes", td.toAPIParameters(e)));
+    }) => await t.post("/api/color_palettes", APIParameterUtils.toAPIParameters(e)));
   }
   updateColorPalette(e) {
     return this.ColorPaletteSchemaValidator.validate(async ({
       xr: t
-    }) => await t.put(`/api/color_palettes/${e.uuid}`, td.toAPIParameters(e)));
+    }) => await t.put(`/api/color_palettes/${e.uuid}`, APIParameterUtils.toAPIParameters(e)));
   }
   async deleteColorPalette(e) {
     await XHR.del(`/api/color_palettes/${e}`);
   }
   setUserColorPaletteOverrideForFile(e, t) {
-    return XHR.post(`/api/files/${e}/color_palette`, td.toAPIParameters({
+    return XHR.post(`/api/files/${e}/color_palette`, APIParameterUtils.toAPIParameters({
       colorPaletteUuid: t
     }));
   }
   async setTeamDefaultPalette(e, t) {
-    await XHR.post(`/api/teams/${e}/default_color_palette`, td.toAPIParameters({
+    await XHR.post(`/api/teams/${e}/default_color_palette`, APIParameterUtils.toAPIParameters({
       colorPaletteUuid: t
     }));
   }
@@ -42,4 +42,4 @@ let $$l0 = new class {
     await XHR.del(`/api/teams/${e}/default_color_palette`);
   }
 }();
-export const v = $$l0; 
+export const v = $$l0;

@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useState, memo, useRef, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
-import { Ez5, xae, nQ7, CNR } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, UserInterfaceElements, SelfDesignType, SlideConstantsCppBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import h from "classnames";
@@ -13,11 +13,11 @@ import { l } from "../6388/697965";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Te } from "../1250/12342";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { hq, i as _$$i } from "../figma_app/741237";
 import { aV, p8 } from "../figma_app/722362";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { EA } from "../9410/499229";
 import { f as _$$f } from "../1528/716387";
@@ -63,7 +63,7 @@ import { A as _$$A2 } from "../svg/910906";
 import { R as _$$R2 } from "../9410/430547";
 var p = h;
 function X() {
-  return !ut(Ez5?.uiState().showCanvasSearch, !1);
+  return !getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
 }
 function Z() {
   let e = "pagesPanel";
@@ -71,7 +71,7 @@ function Z() {
   let l = n0();
   let r = X();
   let i = GQ(200, 306);
-  let a = useSelector(e => t ? xae.LAYERS : e.leftPanel.activeTab);
+  let a = useSelector(e => t ? UserInterfaceElements.LAYERS : e.leftPanel.activeTab);
   let c = _$$g2({
     pagesList: l
   });
@@ -106,7 +106,7 @@ function Z() {
       tabPropsMap: b
     }), x && jsx(QU, {
       fileKey: x
-    }), a === xae.LAYERS && jsx(_$$R, {
+    }), a === UserInterfaceElements.LAYERS && jsx(_$$R, {
       isReadOnly: t,
       isOpen,
       onToggle: v,
@@ -115,20 +115,20 @@ function Z() {
       pages: l,
       onPageContextMenu: c,
       onCanvasSearch: u
-    }), a === xae.ASSETS && !t && jsx(_$$g, {
+    }), a === UserInterfaceElements.ASSETS && !t && jsx(_$$g, {
       width: i
     })]
   });
 }
 function ep() {
-  let e = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
+  let e = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let t = tS();
   let l = useCallback(e => {
-    "GRID" === e ? (Y5.triggerAction("exit-focus-view"), Cu({
+    "GRID" === e ? (fullscreenValue.triggerAction("exit-focus-view"), Cu({
       trackingContext: "grid_view_toggle",
       productType: "slides",
       fileKey: t
-    })) : (Y5.triggerAction("enter-focus-view"), Cu({
+    })) : (fullscreenValue.triggerAction("enter-focus-view"), Cu({
       trackingContext: "single_slide_view_toggle",
       productType: "slides",
       fileKey: t
@@ -230,7 +230,7 @@ function eE({
   useEffect(() => {
     let t = t => {
       let l = !!e.current && t.target instanceof Node && e.current.contains(t.target);
-      Ez5?.singleSlideView().isCarouselFocused.set(l);
+      AppStateTsApi?.singleSlideView().isCarouselFocused.set(l);
     };
     window.addEventListener("click", t);
     return () => window.removeEventListener("click", t);
@@ -260,10 +260,10 @@ export let $$eI2 = memo(function () {
   let i = GQ(200, 306);
   let [a, c] = useState(() => UK().slidesLayersPanelHeight.getCopy());
   let [u, h] = useState(() => UK().slidesLayersPanelExpanded.getCopy());
-  let p = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let g = ut(Ez5?.uiState().showCanvasSearch, !1);
+  let p = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
+  let g = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let m = X();
-  let b = p === nQ7.DESIGN && !g;
+  let b = p === SelfDesignType.DESIGN && !g;
   let y = u && b;
   let S = s && !y && !g;
   useEffect(() => {
@@ -273,7 +273,7 @@ export let $$eI2 = memo(function () {
   let C = Jb() ?? null;
   let k = eS(t, window.innerHeight);
   let B = eS(l, 95);
-  let z = CNR?.singleSlideThumbnailPadding() ?? 0;
+  let z = SlideConstantsCppBindings?.singleSlideThumbnailPadding() ?? 0;
   let O = Ye();
   return jsxs(_$$Q, {
     ref: t,
@@ -299,7 +299,7 @@ export let $$eI2 = memo(function () {
         size: k - B - a,
         side: "bottom",
         onResize: e => {
-          c(qE(k - B - e, 40, k - B));
+          c(clamp(k - B - e, 40, k - B));
         },
         disableResizing: !y,
         unsetSizeWhenDisabled: !0,
@@ -323,14 +323,14 @@ export function $$eT3() {
     ref: e
   });
   let t = GQ(200, 306);
-  let l = ut(Ez5?.uiState().showCanvasSearch, !1);
+  let l = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let s = useRef(null);
   let i = eS(e, window.innerHeight);
   let a = eS(s, 95);
-  let c = CNR?.singleSlideThumbnailPadding() ?? 0;
+  let c = SlideConstantsCppBindings?.singleSlideThumbnailPadding() ?? 0;
   let u = p8("isReadOnly");
-  let x = ut(Ez5?.interopToolMode(), nQ7.SELF) === nQ7.DESIGN;
-  let h = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
+  let x = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
+  let h = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let p = X() && h;
   let [g, m] = useState(() => UK().slidesLayersPanelHeight.getCopy());
   let v = Jb();
@@ -354,7 +354,7 @@ export function $$eT3() {
         size: i - a - (b ? g : 0),
         side: "bottom",
         onResize: e => {
-          m(qE(i - a - e, 40, i - a));
+          m(clamp(i - a - e, 40, i - a));
         },
         disableResizing: !1,
         unsetSizeWhenDisabled: !0,
@@ -453,9 +453,9 @@ function eR({
     }) => {
       x(e);
     };
-    Y5.fromFullscreen.on("startRenamingNode", e);
+    fullscreenValue.fromFullscreen.on("startRenamingNode", e);
     return () => {
-      Y5.fromFullscreen.removeListener("startRenamingNode", e);
+      fullscreenValue.fromFullscreen.removeListener("startRenamingNode", e);
     };
   }, [x]);
   return jsx(_$$X, {
@@ -464,7 +464,7 @@ function eR({
     renamingGuid: i,
     startRenaming: x,
     stopRenaming: function (e, t, o) {
-      l || (i && e && (l7.user("set-node-name", () => _$$i(i, t || "")), Y5.commit()), a(null));
+      l || (i && e && (permissionScopeHandler.user("set-node-name", () => _$$i(i, t || "")), fullscreenValue.commit()), a(null));
     },
     thumbnailGuid: null,
     topNodeProperties: u,
@@ -477,10 +477,10 @@ export function $$eA0({
 }) {
   let t = Ye();
   let l = aV();
-  let r = ut(Ez5?.interopToolMode(), nQ7.SELF);
+  let r = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let i = useSelector(e => e.mirror.appModel.showUi);
   let [a, c] = useState(230);
-  return t && !l && r === nQ7.DESIGN && i ? jsx(_$$P, {
+  return t && !l && r === SelfDesignType.DESIGN && i ? jsx(_$$P, {
     onSizeChange: c,
     bottom: 0,
     left: 0,
@@ -516,7 +516,7 @@ function eB({
   let r = p8("currentPage");
   let [i, a] = useState(null);
   let x = useSelector(e => e.versionHistory);
-  let h = ut(Ez5?.canvasGrid().canvasGridArray, [[]]);
+  let h = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, [[]]);
   let p = rY(h);
   let g = Fk((e, t) => {
     let l = e.get(t);
@@ -537,9 +537,9 @@ function eB({
     }) => {
       v(e);
     };
-    Y5.fromFullscreen.on("startRenamingNode", e);
+    fullscreenValue.fromFullscreen.on("startRenamingNode", e);
     return () => {
-      Y5.fromFullscreen.removeListener("startRenamingNode", e);
+      fullscreenValue.fromFullscreen.removeListener("startRenamingNode", e);
     };
   }, [v]);
   let {
@@ -559,7 +559,7 @@ function eB({
       renamingGuid: i,
       startRenaming: v,
       stopRenaming: function (e, t, o) {
-        l || (i && e && (l7.user("set-node-name", () => _$$i(i, t || "")), Y5.commit()), a(null));
+        l || (i && e && (permissionScopeHandler.user("set-node-name", () => _$$i(i, t || "")), fullscreenValue.commit()), a(null));
       },
       topNodeProperties: m,
       versionHistory: x,

@@ -16,8 +16,8 @@ import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { $z } from "../905/599896";
 import { I as _$$I } from "../905/343721";
 import { A as _$$A2 } from "../905/658244";
-import { Ij, qK, Ju } from "../905/102752";
-import { Ce, to } from "../905/156213";
+import { createModalConfig, registerLegacyModal, registerModal } from "../905/102752";
+import { hideModal, showModalHandler } from "../905/156213";
 import { E9 } from "../figma_app/297957";
 import { L0, fu } from "../figma_app/831799";
 import { hj8 } from "../figma_app/43951";
@@ -30,8 +30,8 @@ import { oz } from "../905/561485";
 import { I as _$$I2 } from "../905/597430";
 import { L as _$$L } from "../905/479295";
 let $$v = "team-admin-confirm-downgrade";
-let I = _$$A2.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeModal), Ij("ConfirmDowngradeModal"));
-qK($$v, I);
+let I = _$$A2.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeModal), createModalConfig("ConfirmDowngradeModal"));
+registerLegacyModal($$v, I);
 let L = {
   title: renderI18nText("churn_friction.modal.team_libraries"),
   url: "https://help.figma.com/hc/articles/360041051154-Guide-to-libraries-in-Figma",
@@ -327,7 +327,7 @@ function G({
     })]
   });
 }
-export let $$z0 = Ju(function ({
+export let $$z0 = registerModal(function ({
   teamId: e
 }) {
   let t = Rs(hj8, {
@@ -341,7 +341,7 @@ export let $$z0 = Ju(function ({
   let b = useDispatch();
   let [I, N] = useState(!1);
   let P = () => {
-    b(Ce());
+    b(hideModal());
   };
   if ("loaded" !== t.status) return null;
   let O = t.data?.team?.teamFileCounts?.designFileCount ?? 0;
@@ -483,7 +483,7 @@ export let $$z0 = Ju(function ({
             variant: "secondary",
             innerText: "Continue",
             onClick: () => {
-              b(to({
+              b(showModalHandler({
                 type: $$v,
                 data: {
                   teamId: e,

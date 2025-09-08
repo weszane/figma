@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { atom } from "../figma_app/27355";
 import { Kh, $v, lW, O_ } from "../figma_app/370763";
 import { y } from "../figma_app/873852";
@@ -8,7 +8,7 @@ import { $o } from "../9410/595754";
 import { vE } from "../9410/28761";
 import { zK } from "../9410/307066";
 let p = atom(e => e(Kh), (e, t, i) => {
-  if (i === NLJ.STAMP) {
+  if (i === DesignGraphElements.STAMP) {
     t(vE);
     return;
   }
@@ -37,8 +37,8 @@ let $$f3 = atom(e => {
   let t = e(Kh);
   return t && L(t) ? t : null;
 });
-let $$g0 = atom(e => e(Kh) === NLJ.DROPPER_COLOR);
-let $$_4 = atom(e => e(Kh) === NLJ.STICKY);
+let $$g0 = atom(e => e(Kh) === DesignGraphElements.DROPPER_COLOR);
+let $$_4 = atom(e => e(Kh) === DesignGraphElements.STICKY);
 export const BB = $$g0;
 export const GC = $$h1;
 export const Jn = $$m2;

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { flushSync } from "../vendor/944059";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 let o = {};
 export function $$l0(e, t, r) {
   o[e] = r;
-  return glU.addNodePositionSubscription(e, t);
+  return Fullscreen.addNodePositionSubscription(e, t);
 }
 export function $$d2(e) {
   delete o[e];
-  glU.removeNodePositionSubscription(e);
+  Fullscreen.removeNodePositionSubscription(e);
 }
 export function $$c1(e, t) {
   let r = o[e];

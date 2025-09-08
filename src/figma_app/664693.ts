@@ -9,7 +9,7 @@ import { o as _$$o } from "../905/530496";
 import { C as _$$C } from "../905/520159";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
-import { Egt, glU } from "../figma_app/763686";
+import { SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Y1 } from "../905/143116";
 import { h as _$$h } from "../905/207101";
@@ -23,7 +23,7 @@ import { E as _$$E2 } from "../905/984674";
 import { i6, v2, x$ } from "../905/188715";
 import { C as _$$C2 } from "../905/696698";
 import { rZ } from "../905/971098";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { dh } from "../figma_app/186343";
 import { tS } from "../figma_app/516028";
 import { Ib } from "../905/129884";
@@ -267,7 +267,7 @@ function H({
         let a = n.get(i);
         a && !e.fix(a, t[a.guid]?.meta) && (r = !1);
       }
-      Y5.triggerAction("commit");
+      fullscreenValue.triggerAction("commit");
       return r;
     }
   }, [e, t]);
@@ -309,8 +309,8 @@ function W({
     y(a(e));
   };
   let T = useCallback(e => {
-    Egt.clearSelection();
-    Egt.addToSelection(e);
+    SceneGraphHelpers.clearSelection();
+    SceneGraphHelpers.addToSelection(e);
   }, []);
   let S = useMemo(() => t.map(e => getSingletonSceneGraph().get(e)).filter(Boolean), [t]);
   return (_$$h(() => {
@@ -385,7 +385,7 @@ function K({
   return jsxs(_$$E, {
     className: _$$s.borderBox.h24.flex.px8.gap4.itemsCenter.b1.radiusMedium.maxW150.font11.colorBorder.$,
     onClick: () => {
-      glU.panToNode(e.guid, !1);
+      Fullscreen.panToNode(e.guid, !1);
       let t = getSingletonSceneGraph().getCurrentPage();
       t && (t.directlySelectedNodes = [e]);
     },

@@ -1,6 +1,6 @@
 import { useSelector } from "../vendor/514228";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { Fk } from "../figma_app/167249";
 import { el } from "../figma_app/226737";
 import { P } from "../905/35881";
@@ -15,7 +15,7 @@ export function $$c1() {
 }
 export function $$u0() {
   let e = useSelector(e => e.isFullscreenDocumentLoaded);
-  let t = q();
+  let t = useFullscreenReady();
   let r = Fk(e => null !== e.get("0:0"));
   return e && t && r;
 }

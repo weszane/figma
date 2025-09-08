@@ -1,9 +1,9 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$i0 = new class {
   constructor() {
-    this.FileUsersSchemaValidator = vh();
-    this.TeamSchemaValidator = vh();
-    this.RolesSchemaValidator = vh();
+    this.FileUsersSchemaValidator = createNoOpValidator();
+    this.TeamSchemaValidator = createNoOpValidator();
+    this.RolesSchemaValidator = createNoOpValidator();
   }
   getFileUsers(e) {
     return this.FileUsersSchemaValidator.validate(async ({

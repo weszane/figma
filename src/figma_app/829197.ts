@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { NC } from "../905/17179";
 import { debugState } from "../905/407919";
@@ -41,9 +41,9 @@ export function $$f3(e) {
   switch (e) {
     case M.DEFAULT:
     case M.SRGB:
-      return RYP.SRGB;
+      return ColorSpaceEnum.SRGB;
     case M.DISPLAY_P3:
-      return RYP.DISPLAY_P3;
+      return ColorSpaceEnum.DISPLAY_P3;
   }
 }
 export function $$E1() {

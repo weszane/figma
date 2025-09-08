@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useEffect, useState } from "react";
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { rO } from "../905/535224";
 import { XHR } from "../905/910117";
 import { B, V } from "../905/714743";
@@ -18,7 +18,7 @@ export function $$g0({
   fallbackUnloadedGooglePreview: o
 }) {
   let m = q9() && e.previewPath;
-  e.source === jXp.GOOGLE && !i && o && (m = !1);
+  e.source === FontSourceType.GOOGLE && !i && o && (m = !1);
   let g = useMemo(() => {
     if (!m) return jsx("p", {
       "aria-hidden": !0,
@@ -26,14 +26,14 @@ export function $$g0({
       children: e.family
     });
     switch (e.source) {
-      case jXp.LOCAL:
-      case jXp.SHARED:
+      case FontSourceType.LOCAL:
+      case FontSourceType.SHARED:
         return jsx(_, {
           fontItem: e,
           setPreviewState: t,
           fallbackClass: s
         });
-      case jXp.GOOGLE:
+      case FontSourceType.GOOGLE:
         if (i) {
           if (e.previewSVG && !h(e.previewSVG) && !fj(e.family)) return jsx(B, {
             className: u,
@@ -49,7 +49,7 @@ export function $$g0({
     return jsx(Fragment, {});
   }, [m, e, i, t, s]);
   useEffect(() => {
-    m ? e.source === jXp.GOOGLE && i && (e.previewSVG && !h(e.previewSVG) ? t(1) : t(2)) : t(2);
+    m ? e.source === FontSourceType.GOOGLE && i && (e.previewSVG && !h(e.previewSVG) ? t(1) : t(2)) : t(2);
   }, [m, e.previewSVG, e.source, i, g, t]);
   return g;
 }
@@ -71,7 +71,7 @@ function _({
       return;
     }
     try {
-      (e.source === jXp.LOCAL ? rO(e.previewPath, {
+      (e.source === FontSourceType.LOCAL ? rO(e.previewPath, {
         raw: !0
       }) : XHR.crossOriginGet(e.previewPath, null, {
         raw: !0
@@ -79,7 +79,7 @@ function _({
         let i = Aw(e.family, t.data);
         m(i);
         f[e.previewPath] = i;
-      }).catch(() => { }).$$finally(() => {
+      }).catch(() => {}).$$finally(() => {
         _(!0);
       });
     } catch (e) {
@@ -106,4 +106,4 @@ function _({
   }) : jsx(Fragment, {});
 }
 export const A = $$g0;
-export const O = $$m1; 
+export const O = $$m1;

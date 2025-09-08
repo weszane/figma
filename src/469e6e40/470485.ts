@@ -14,7 +14,7 @@ import { vt } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { FBillingPeriodType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { S2, px } from "../figma_app/465071";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 var o = l;
 export function $$j0(e) {
   let t;
@@ -26,7 +26,7 @@ export function $$j0(e) {
   let k = useCallback(() => {
     a(Bq({
       openInNewTab: !0,
-      upsellSource: _$$b.BILLING_PLAN_TIER
+      upsellSource: UpsellModalType.BILLING_PLAN_TIER
     }));
   }, [a]);
   if (!l || l?.tier === FPlanNameType.STARTER || l?.tier === FPlanNameType.STUDENT || y()) return null;

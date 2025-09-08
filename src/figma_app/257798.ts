@@ -16,7 +16,7 @@ import { Pt } from "../figma_app/806412";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Zr, vm, yU } from "../figma_app/678782";
 import { Xo } from "../figma_app/482495";
 import { Fk } from "../figma_app/167249";
@@ -28,7 +28,7 @@ import { e } from "../905/621515";
 import { UK } from "../figma_app/740163";
 import { iZ } from "../905/372672";
 import { f as _$$f } from "../905/940356";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { N as _$$N } from "../figma_app/268271";
 import { pN } from "../figma_app/433401";
 import { rq } from "../905/425180";
@@ -70,7 +70,7 @@ function G() {
       canShow: () => a
     });
   }, [a, show]);
-  let s = J2(UK().showPropertyLabels);
+  let s = getObservableOrFallback(UK().showPropertyLabels);
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
     description: jsx("span", {
@@ -92,7 +92,7 @@ function G() {
     secondaryCta: {
       type: "button",
       onClick: () => {
-        Y5.triggerAction("toggle-show-property-labels", {
+        fullscreenValue.triggerAction("toggle-show-property-labels", {
           source: "show-labels-curator"
         });
       },
@@ -400,7 +400,7 @@ function er({
     recordingKey: t,
     value: e,
     onChange: e => {
-      Y5.triggerActionInUserEditScope(e);
+      fullscreenValue.triggerActionInUserEditScope(e);
     }
   });
 }
@@ -432,7 +432,7 @@ let ei = () => {
       e?.id.startsWith("paint") && t.stopPropagation();
     },
     onClick: () => {
-      Y5.triggerActionInUserEditScope(t);
+      fullscreenValue.triggerActionInUserEditScope(t);
     },
     recordingKey: t
   }), [e]);

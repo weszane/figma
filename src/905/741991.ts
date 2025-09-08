@@ -1,5 +1,5 @@
 import { noop } from "../figma_app/465776";
-import { xN } from "../figma_app/492908";
+import { nearlyEqual } from "../figma_app/492908";
 import { Ws, GU, PK, sD, Kw, gr, cd, _H, Tq, eJ } from "../figma_app/243058";
 import { sg, Xf, iU } from "../905/859698";
 import { qg } from "../figma_app/385874";
@@ -429,9 +429,9 @@ export class $$g0 extends _$$s {
     let d = m00 * m11 - m01 * m10;
     let c = (() => {
       let e = 180 / Math.PI * Math.atan2(m10, m00);
-      return xN(e, 0, 1e-4) ? 0 : -1 * e;
+      return nearlyEqual(e, 0, 1e-4) ? 0 : -1 * e;
     })();
-    let u = d < 0 ? xN(c, 0, 1e-4) ? "Vertically" : xN(Math.abs(c), 180, 1e-4) ? "Horizontally" : "Yes" : "No";
+    let u = d < 0 ? nearlyEqual(c, 0, 1e-4) ? "Vertically" : nearlyEqual(Math.abs(c), 180, 1e-4) ? "Horizontally" : "Yes" : "No";
     return {
       label: e,
       children: [B_("X", {

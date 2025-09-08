@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { F7 } from "../905/859698";
-import { Egt } from "../figma_app/763686";
+import { SceneGraphHelpers } from "../figma_app/763686";
 import { At } from "../905/973142";
 import { PW } from "../figma_app/633080";
 function d() {
@@ -29,7 +29,7 @@ export function $$c1() {
       };
       n.sharedSymbolVersion && (d.content_hash = n.sharedSymbolVersion);
       n.componentKey && (d.component_key = n.componentKey, d.thumbnail_url = `/component/${n.componentKey}/thumbnail?ver=${d.content_hash}`, d.canvas_url = `/component/${n.componentKey}/canvas?ver=${d.content_hash}`);
-      let c = Egt.getNodeSize(t);
+      let c = SceneGraphHelpers.getNodeSize(t);
       c && (d.min_node_height = c.height, d.min_node_width = c.width);
       return d;
     };

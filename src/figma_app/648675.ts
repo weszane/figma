@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { QOV } from "../figma_app/763686";
-import { gl } from "../905/216495";
+import { UserActionState } from "../figma_app/763686";
+import { isInvalidValue } from "../905/216495";
 import { kl } from "../905/275640";
 export function $$l0() {
   let e = kl("aspectRatioLockToggled");
@@ -21,6 +21,6 @@ export function $$l0() {
       document.removeEventListener("keyup", t);
     };
   }, []);
-  return !!(!(t === QOV.RESIZING && r) && e && !gl(e));
+  return !!(!(t === UserActionState.RESIZING && r) && e && !isInvalidValue(e));
 }
 export const h = $$l0;

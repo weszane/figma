@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { uA } from "../figma_app/806412";
 import { k } from "../905/582200";
 import { renderI18nText } from "../905/303541";
@@ -17,7 +17,7 @@ export class $$c0 extends uA {
         children: jsx(u, {
           title: "Background",
           addProperty: this.noop,
-          removeProperty: glU.clearFillAndStrokePaintsOnSelectedGroups,
+          removeProperty: Fullscreen.clearFillAndStrokePaintsOnSelectedGroups,
           contentsVisibleOrMixed: !0,
           children: jsx(fI, {
             className: "remove_group_fill_and_stroke_panel--labelContainer--ngqjq",

@@ -1,5 +1,5 @@
 import { mapFilter } from "../figma_app/656233";
-import { W2B, uXP } from "../figma_app/763686";
+import { EditChangeMode, ConnectionState } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { sentryEventEmitter } from "../905/11";
@@ -80,7 +80,7 @@ class f {
   }
   addCommit(e) {
     this.currentLog.endTime = Date.now();
-    this.currentLog.autosaveChanges && e.commitPolicy === W2B.ADD_CHANGES && e.reason === this.currentLog.autosaveChanges.commitReason ? this.currentLog.autosaveChanges.commit = function (e, t) {
+    this.currentLog.autosaveChanges && e.commitPolicy === EditChangeMode.ADD_CHANGES && e.reason === this.currentLog.autosaveChanges.commitReason ? this.currentLog.autosaveChanges.commit = function (e, t) {
       let i = {};
       e.changedNodes.forEach(e => i[e.nodeID] = e);
       e.clearedNodes.forEach(e => i[e] = null);
@@ -244,14 +244,14 @@ export class $$y1 {
   recordAutosaveCommit(e, t, i, n) {
     let a;
     let s;
-    if ("online" === this.state.type) a = n.reason === uXP.OFFLINE || n.reason === uXP.LIMBOED_CHANGES ? {
+    if ("online" === this.state.type) a = n.reason === ConnectionState.OFFLINE || n.reason === ConnectionState.LIMBOED_CHANGES ? {
       type: "offline",
       activityTracker: new f(e, t, i),
       cancelFlushTimer: this.startFlushInterval(),
       startTime: Date.now()
     } : {
       type: "online"
-    };else if (n.reason === uXP.SYNCED) {
+    };else if (n.reason === ConnectionState.SYNCED) {
       let {
         activityTracker,
         cancelFlushTimer,

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { A as _$$A } from "../vendor/723372";
-import { wo, NC, dG, Dm } from "../905/955878";
+import { preventEvent, isEventTargetCurrent, stopEventPropagation, EVENT_CAPTURE_CLASS } from "../905/955878";
 import { l as _$$l } from "../905/490996";
 import { v as _$$v } from "../905/475481";
 import { eB, GC } from "../905/914656";
@@ -39,7 +39,7 @@ export function $$h0(e) {
     i.setPointerCapture(t.pointerId);
     i.setAttribute("data-pointer-capture", "");
     document.body.classList.add(p);
-    "mouse" !== t.pointerType && document.addEventListener("touchmove", wo, {
+    "mouse" !== t.pointerType && document.addEventListener("touchmove", preventEvent, {
       passive: !1
     });
     e.onDragStart?.(t, {
@@ -59,7 +59,7 @@ export function $$h0(e) {
         i.current = null;
         return;
       }
-      if (c.current?.removeAttribute("data-pointer-capture"), c.current = null, document.removeEventListener("touchmove", wo), document.body.classList.remove(p), n || window.getSelection()?.empty(), _(!1), i.current = null, n && !t) e.onDragEnd?.({
+      if (c.current?.removeAttribute("data-pointer-capture"), c.current = null, document.removeEventListener("touchmove", preventEvent), document.body.classList.remove(p), n || window.getSelection()?.empty(), _(!1), i.current = null, n && !t) e.onDragEnd?.({
         cancelled: n
       });else {
         let i = b(t);
@@ -103,7 +103,7 @@ export function $$h0(e) {
       i.current = n.pointerId;
       h.current = performance.now();
       let s = r instanceof Element ? r : n.currentTarget;
-      if (e.deadZone && !NC(n) && !n.target.hasAttribute("data-no-dead-zone")) {
+      if (e.deadZone && !isEventTargetCurrent(n) && !n.target.hasAttribute("data-no-dead-zone")) {
         m.current = s;
         return;
       }
@@ -131,8 +131,8 @@ export function $$h0(e) {
     onPointerCancel(e) {
       I(e, !0);
     },
-    onMouseDown: dG,
-    className: _$$A("use-drag__base__YCEp1", Dm, {
+    onMouseDown: stopEventPropagation,
+    className: _$$A("use-drag__base__YCEp1", EVENT_CAPTURE_CLASS, {
       "use-drag__dragging__ZATZH": f
     })
   };

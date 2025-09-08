@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
-import { nj } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -1064,7 +1064,7 @@ function D({
   let {
     washiTapePaint
   } = useAtomWithSubscription(SK);
-  let r = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
+  let r = washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint?.image?.hash);
   let i = r && buildUploadUrl(r);
   let o = r && !_$$B.map(e => e.image).includes(r);
   let c = buildUploadUrl("Big" === e ? "218aca2f646a55ac66806bd9a9d3d5465e4fc4d8" : "8fd9146eb6fddeb39bb39af0939f723729251625");

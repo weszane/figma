@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { _l } from "../figma_app/976345";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf, Qv } from "../905/929976";
 import { x2, of } from "../figma_app/714946";
 import { bE } from "../905/98702";
@@ -22,7 +22,7 @@ import { e6 } from "../905/557142";
 import { SC } from "../figma_app/707808";
 import { G } from "../figma_app/66216";
 import { c as _$$c } from "../905/467776";
-export let $$N1 = nF((e, t) => {
+export let $$N1 = createOptimistThunk((e, t) => {
   let {
     teamName,
     orgAccess,
@@ -149,7 +149,7 @@ export function $$C2(e, t, r) {
     }
   });
 }
-let $$w0 = nF((e, t) => {
+let $$w0 = createOptimistThunk((e, t) => {
   let r = t.team;
   let n = r.id;
   let o = r.name;
@@ -192,7 +192,7 @@ let $$w0 = nF((e, t) => {
     action: $w(t)
   });
 });
-let $$O6 = nF((e, t) => {
+let $$O6 = createOptimistThunk((e, t) => {
   let r = t.team.id;
   _J("Team Share Settings Updated", r, e.getState(), {
     share_settings_type: "share_audience",
@@ -215,7 +215,7 @@ let $$O6 = nF((e, t) => {
     action: aB(t)
   });
 });
-let $$R5 = nF((e, t) => {
+let $$R5 = createOptimistThunk((e, t) => {
   trackEventAnalytics("file-browser-hydrate", {
     location: "team.onJoin"
   });
@@ -250,7 +250,7 @@ let $$R5 = nF((e, t) => {
   });
   e.dispatch(mw(t));
 });
-let $$L4 = nF((e, t) => {
+let $$L4 = createOptimistThunk((e, t) => {
   trackEventAnalytics("file-browser-hydrate", {
     location: "team.onBatchJoin"
   });
@@ -284,7 +284,7 @@ let $$L4 = nF((e, t) => {
   });
   e.dispatch(ii(t));
 });
-let $$P3 = nF(e => {
+let $$P3 = createOptimistThunk(e => {
   let t = e.getState().currentUserOrgId;
   _$$c.getTeamRoleRequestsOrgId({
     orgId: t

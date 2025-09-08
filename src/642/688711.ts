@@ -3,7 +3,7 @@ import { memo, useRef, useContext } from "react";
 import { useSelector } from "../vendor/514228";
 import { K } from "../905/443068";
 import { r as _$$r } from "../905/784543";
-import { iCO } from "../figma_app/763686";
+import { StateHierarchy } from "../figma_app/763686";
 import d from "classnames";
 import { Pt } from "../figma_app/806412";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -40,7 +40,7 @@ export let $$M0 = memo(function (e) {
   let {
     allowLibraryPublish
   } = useContext(s);
-  return stateGroupSelectionMode !== iCO.STATE ? null : containingProductComponent ? containingProductComponent && containingProductComponent.isAlive ? jsxs(Zk, {
+  return stateGroupSelectionMode !== StateHierarchy.STATE ? null : containingProductComponent ? containingProductComponent && containingProductComponent.isAlive ? jsxs(Zk, {
     className: "component_panel--componentPanel--aKD1Q",
     style: e.isInSelectionActionsPanel ? {
       paddingBottom: 0,
@@ -56,7 +56,7 @@ export let $$M0 = memo(function (e) {
       icon: jsx(A, {
         recordingKey: e.recordingKey
       })
-    }), stateGroupSelectionMode === iCO.STATE && jsx(e6, {
+    }), stateGroupSelectionMode === StateHierarchy.STATE && jsx(e6, {
       containerWidth: O2.REGULAR,
       propDimension: OE.DEFINITION,
       guids: [containingProductComponent.guid],

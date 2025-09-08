@@ -1,4 +1,4 @@
-import { Egt } from "../figma_app/763686";
+import { SceneGraphHelpers } from "../figma_app/763686";
 export function $$i0(e) {
   let t = [];
   e.forEach(e => {
@@ -12,7 +12,7 @@ export function $$i0(e) {
 export function $$a1(e, t) {
   return [...new Set(e)].reduce((e, r) => {
     let i = t(r);
-    let a = (Egt?.nodeIsPage(r) ? i?.absoluteRenderBounds : i?.absoluteBoundingBox) ?? null;
+    let a = (SceneGraphHelpers?.nodeIsPage(r) ? i?.absoluteRenderBounds : i?.absoluteBoundingBox) ?? null;
     e[r] = a ? {
       x: a.x,
       y: a.y,

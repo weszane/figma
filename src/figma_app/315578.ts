@@ -5,14 +5,14 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { J } from "../905/125993";
 import { D } from "../905/716990";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { tH } from "../905/751457";
 import { getI18nString } from "../905/303541";
 import { Fj } from "../figma_app/793429";
 import { sf } from "../905/929976";
-import { AS, $O } from "../905/156213";
+import { hideModalHandler, showModal } from "../905/156213";
 import { T as _$$T } from "../905/858738";
 import { _6 } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
@@ -160,16 +160,16 @@ export function $$L1({
             _$$T() ? n(sf({
               ...o,
               variableIdForDetailsPanel: void 0
-            })) : n(AS());
+            })) : n(hideModalHandler());
             return;
           }
           if (_$$T()) n(sf({
             ...o,
             variableIdForDetailsPanel: t
           }));else {
-            l && n(AS());
+            l && n(hideModalHandler());
             let i = cn(e?.current, iB + wR);
-            n($O({
+            n(showModal({
               type: WP,
               data: {
                 position: i,
@@ -197,12 +197,12 @@ export function $$L1({
       toggleMatchingVarsModal: useCallback(i => {
         if (i.stopPropagation(), !e?.current || !t) return;
         if (l) {
-          n(AS());
+          n(hideModalHandler());
           return;
         }
-        o && n(AS());
+        o && n(hideModalHandler());
         let a = cn(e?.current, Gw + wR);
-        n($O({
+        n(showModal({
           type: W8,
           data: {
             vars: t,
@@ -242,10 +242,10 @@ export function $$L1({
             _$$T() ? o(sf({
               ...d,
               styleForDetailsPanel: void 0
-            })) : o(AS());
+            })) : o(hideModalHandler());
             return;
           }
-          if (glU?.selectStyleByGuid(A), _$$T()) o(sf({
+          if (Fullscreen?.selectStyleByGuid(A), _$$T()) o(sf({
             ...d,
             styleForDetailsPanel: {
               styleId: t,
@@ -253,9 +253,9 @@ export function $$L1({
               styleType: style_type ?? n
             }
           }));else {
-            u && o(AS());
+            u && o(hideModalHandler());
             let r = cn(e.current, b6 + wR);
-            o($O({
+            o(showModal({
               type: vl,
               data: {
                 styleId: t,

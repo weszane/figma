@@ -1,4 +1,4 @@
-import { h3O, kul } from "../figma_app/763686";
+import { Multiplayer, SchemaJoinStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -10,10 +10,10 @@ import { F } from "../905/302958";
 import { wZ } from "../figma_app/701982";
 import { ds } from "../figma_app/314264";
 import { G } from "../905/674940";
-import { nF } from "../905/350402";
-import { to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler } from "../905/156213";
 let $$_1 = NC("SET_SAVE_STATUS");
-let $$A0 = nF((e, t) => {
+let $$A0 = createOptimistThunk((e, t) => {
   if (desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab()) {
     let e = !t.hasUnsavedChanges;
     desktopAPIInstance.setSaved(e);
@@ -22,19 +22,19 @@ let $$A0 = nF((e, t) => {
   e.dispatch($$_1(t));
 });
 let y = e => {
-  if (Hh(), h3O) {
+  if (Hh(), Multiplayer) {
     let t = {
       fileKey: e,
-      multiplayer_session_state: h3O.getSessionState(),
-      is_joined: h3O.getSessionState() === kul.JOINED,
-      is_incremental: h3O.isIncrementalSession(),
-      isStagingChanges: h3O.isStagingChanges(),
+      multiplayer_session_state: Multiplayer.getSessionState(),
+      is_joined: Multiplayer.getSessionState() === SchemaJoinStatus.JOINED,
+      is_incremental: Multiplayer.isIncrementalSession(),
+      isStagingChanges: Multiplayer.isStagingChanges(),
       stagedRegisters: getFeatureFlags().use_registers_with_staged_value
     };
     ds("unsaved_changes_bell", e, debugState.getState(), t);
   }
 };
-let b = nF((e, t) => {
+let b = createOptimistThunk((e, t) => {
   let i = e.getState();
   let n = i.openFile;
   n && (i.saveStatus && !i.saveStatus.hasUnsavedChanges && t.hasUnsavedChanges ? G.start(() => {
@@ -45,7 +45,7 @@ let b = nF((e, t) => {
       button: {
         text: getI18nString("save_status.learn_more"),
         action: () => {
-          e.dispatch(to({
+          e.dispatch(showModalHandler({
             type: wZ,
             data: {}
           }));

@@ -25,7 +25,7 @@ import { K as _$$K } from "../figma_app/605682";
 import { J as _$$J } from "../figma_app/553179";
 import { e as _$$e2 } from "../figma_app/278289";
 import { P as _$$P, B as _$$B } from "../figma_app/846647";
-import { glU, xae } from "../figma_app/763686";
+import { Fullscreen, UserInterfaceElements } from "../figma_app/763686";
 import { FP } from "../figma_app/91703";
 import { wr } from "../figma_app/741237";
 import { F_, EL } from "../905/858282";
@@ -42,7 +42,7 @@ import { e as _$$e3 } from "../5132/291975";
 import { aE } from "../figma_app/433401";
 function R(e) {
   useEffect(() => {
-    glU.triggerAction("set-tool-type", null);
+    Fullscreen.triggerAction("set-tool-type", null);
   }, []);
   return jsx(VF, {
     dismissModal: e.onClose,
@@ -56,7 +56,7 @@ function R(e) {
       useLoadingBar: e.useLoadingBar
     }),
     onPrimaryCtaClick: () => {
-      glU.triggerActionInUserEditScope("set-tool-default", null);
+      Fullscreen.triggerActionInUserEditScope("set-tool-default", null);
       e.onNext();
     },
     onSecondaryCtaClick: e.onPrevious,
@@ -88,7 +88,7 @@ function k(e) {
   useEffect(() => {
     wr();
     t(FP({
-      tab: xae.ASSETS
+      tab: UserInterfaceElements.ASSETS
     }));
   }, [t]);
   return jsx(VF, {
@@ -103,7 +103,7 @@ function k(e) {
     onPrimaryCtaClick: e.onPrimaryCtaClick,
     onSecondaryCtaClick: () => {
       t(FP({
-        tab: xae.LAYERS
+        tab: UserInterfaceElements.LAYERS
       }));
       e.onSecondaryCtaClick();
     },
@@ -235,7 +235,7 @@ function z(e) {
   oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
   useEffect(() => {
     t(FP({
-      tab: xae.ASSETS
+      tab: UserInterfaceElements.ASSETS
     }));
   }, [t]);
   return jsx(VF, {
@@ -251,7 +251,7 @@ function z(e) {
     }),
     onPrimaryCtaClick: () => {
       t(FP({
-        tab: xae.LAYERS
+        tab: UserInterfaceElements.LAYERS
       }));
       e.onNext();
     },

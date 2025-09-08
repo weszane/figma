@@ -17,7 +17,7 @@ import { Y as _$$Y } from "../905/830372";
 import { S as _$$S } from "../905/339549";
 import { E as _$$E } from "../905/984674";
 import { mx } from "../figma_app/681712";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { eB } from "../905/765855";
 import { fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
@@ -26,7 +26,7 @@ import { Oq } from "../905/332483";
 import { AG, Zx } from "../figma_app/217457";
 import { vr } from "../figma_app/514043";
 import { Ui, Zj, Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { az } from "../figma_app/805373";
 import { $L, us } from "../figma_app/136698";
 import { OJ, Dd } from "../905/519092";
@@ -171,7 +171,7 @@ export function $$H2(e) {
     })
   });
 }
-Ju(function (e) {
+registerModal(function (e) {
   let t = e.isProTeam ? Oq.exclude([ud.DEV_MODE]) : Oq;
   let [a, i] = useState(t.dict(t => e.seatDataByLicenseType[t]?.currentSeats || 0));
   let [o, c] = useState(null);
@@ -226,7 +226,7 @@ Ju(function (e) {
         void 0 !== r && !1 === s && (r < i || r > 99) && (c(t), s = !0);
       }), s) return;
       let r = t.reduce((e, t) => e + (a[t] || 0), 0);
-      e.minTotalSeats && r < e.minTotalSeats ? c("total") : (e.dispatch(Ce()), e.updateAdditionalSeats(a));
+      e.minTotalSeats && r < e.minTotalSeats ? c("total") : (e.dispatch(hideModal()), e.updateAdditionalSeats(a));
     },
     confirmText: getI18nString("all_carts.save"),
     cancelText: getI18nString("all_carts.cancel"),
@@ -454,7 +454,7 @@ function Z({
     })]
   });
 }
-Ju(function ({
+registerModal(function ({
   users: e,
   updateSelectedEditors: t,
   updateAdditionalEmptySeats: a,
@@ -502,14 +502,14 @@ Ju(function ({
   };
   let k = new vr(i);
   let P = () => {
-    n(Ce());
+    n(hideModal());
   };
   return jsx(fu, {
     name: "Select Editors Modal",
     children: jsxs(ey, {
       size: 864,
       maxHeight: 672,
-      hide: () => n(Ce()),
+      hide: () => n(hideModal()),
       className: "org_self_serve_modals--selectEditorsModal--D0yWS",
       children: [jsxs("div", {
         className: "org_self_serve_modals--selectEditorModalHeader--wPo15 org_self_serve_modals--headerModalText--h0Go9",
@@ -682,7 +682,7 @@ Ju(function ({
             children: getI18nString("general.cancel")
           }), jsx($$, {
             onClick: () => {
-              0 === C && (a(y), t(g), n(Ce()));
+              0 === C && (a(y), t(g), n(hideModal()));
             },
             disabled: 0 !== C,
             children: getI18nString("checkout.update_seats")

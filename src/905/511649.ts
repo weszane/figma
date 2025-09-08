@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { g5 } from "../905/959312";
+import { RecordingContext } from "../905/959312";
 import { tf } from "../figma_app/831799";
 import { o6, cZ, aH, Am, C0, Ht, Z7, Fk, cC, fA } from "../figma_app/806412";
 class l extends o6 {
@@ -114,7 +114,7 @@ export function $$g2({
       return (...e) => n(e);
     }, [i, t.eventName, e, t.recordingKey]);
   } : null, []);
-  return jsx(g5.Provider, {
+  return jsx(RecordingContext.Provider, {
     value: t,
     children: e
   });

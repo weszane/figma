@@ -5,7 +5,7 @@ import { j } from "../905/519202";
 import { _ } from "../905/410717";
 import { getI18nString } from "../905/303541";
 import { dG } from "../figma_app/753501";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { Ib } from "../905/129884";
 export function $$p0({
   visible: e,
@@ -31,9 +31,9 @@ export function $$p0({
         onPointerDown: dG,
         onMouseDown: dG
       },
-      mixed: e === oV,
+      mixed: e === MIXED_MARKER,
       offIcon: jsx(j, {}),
-      onChange: () => t(e === oV || !e),
+      onChange: () => t(e === MIXED_MARKER || !e),
       onIcon: jsx(_, {}),
       recordingKey: p
     })

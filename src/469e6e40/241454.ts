@@ -16,7 +16,7 @@ import { E as _$$E } from "../905/984674";
 import { k as _$$k2 } from "../figma_app/618031";
 import { q as _$$q } from "../905/749058";
 import { Wq } from "../figma_app/481749";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { IJ, uo } from "../figma_app/990058";
 import { fu } from "../figma_app/831799";
 import { ud } from "../905/513035";
@@ -27,9 +27,9 @@ import { cg } from "../figma_app/336853";
 import { N as _$$N } from "../905/696711";
 import { e as _$$e } from "../figma_app/119601";
 import { e6 } from "../905/557142";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { h as _$$h } from "../figma_app/124713";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 import { yX } from "../figma_app/918700";
 import { A as _$$A } from "../1617/755299";
@@ -37,7 +37,7 @@ import { A as _$$A2 } from "../1617/342635";
 import { A as _$$A3 } from "../svg/57540";
 let O = new class {
   constructor() {
-    this.OrgJoinRequestSchemaValidator = vh();
+    this.OrgJoinRequestSchemaValidator = createNoOpValidator();
   }
   getOrgJoinRequest(e) {
     return this.OrgJoinRequestSchemaValidator.validate(async ({
@@ -48,7 +48,7 @@ let O = new class {
 let U = "confirm_org_user_actions--bold--FUp4f";
 let F = "confirm_org_user_actions--spacing--ZBS-Z";
 let q = "confirm_org_user_actions--learnMoreLink--M---Z confirm_org_user_actions--link--kN9aV blue_link--blueLink--9rlnd";
-export let $$z2 = Ju(function (e) {
+export let $$z2 = registerModal(function (e) {
   let t = useDispatch();
   let a = _$$k2();
   let s = e.orgUserIds.length;
@@ -86,14 +86,14 @@ export let $$z2 = Ju(function (e) {
           },
           userInitiated: !0
         }));
-        t(Ce());
+        t(hideModal());
       },
       onHide: () => {
         if (e.onHide) {
           e.onHide();
           return;
         }
-        t(Lo());
+        t(popModalStack());
       },
       disableClickOutsideToHide: !0,
       buttonText: l,
@@ -509,12 +509,12 @@ function V(e) {
     })
   });
 }
-let $$W1 = Ju(function (e) {
+let $$W1 = registerModal(function (e) {
   return jsx(V, {
     ...e
   });
 }, "OrgConfirmAccountChangeModal");
-let $$H3 = Ju(function (e) {
+let $$H3 = registerModal(function (e) {
   let t = useDispatch();
   return jsx(yX, {
     confirmationTitle: getI18nString("confirm_billing_group_change.title"),
@@ -578,7 +578,7 @@ let $$H3 = Ju(function (e) {
     })()
   });
 }, "OrgConfirmLicenseGroupChangeModal");
-let $$Y0 = Ju(function (e) {
+let $$Y0 = registerModal(function (e) {
   let t = e.selectedOrgJoinRequest;
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let r = useSelector(e => e.orgSamlConfig);
@@ -605,7 +605,7 @@ let $$Y0 = Ju(function (e) {
     });
   }, [t, l]);
   let k = () => {
-    l(Lo());
+    l(popModalStack());
   };
   if (!o) return null;
   let E = null;

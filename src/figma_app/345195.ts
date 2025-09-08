@@ -1,7 +1,7 @@
 import { unstable_batchedUpdates } from "../vendor/944059";
 import { EventEmitter } from "../905/690073";
-import { u4j } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { variablesMirrorManager } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 export let $$n0;
 let l = null;
 export function $$d3(e) {
@@ -47,19 +47,19 @@ export function $$y7(e) {
 }
 let b = new EventEmitter("VariableMirrorVariableResolvedValueEmitter");
 export function $$T2(e, t) {
-  u4j.subscribeToLocalVariableResolvedValue(e, AD);
+  variablesMirrorManager.subscribeToLocalVariableResolvedValue(e, defaultSessionLocalIDString);
   b.on(e, t);
   return () => {
-    u4j.unsubscribeFromLocalVariableResolvedValue(e, AD);
+    variablesMirrorManager.unsubscribeFromLocalVariableResolvedValue(e, defaultSessionLocalIDString);
     b.removeListener(e, t);
   };
 }
 let I = new EventEmitter("VariableMirrorExplicitModeEmitter");
 export function $$S1(e, t) {
-  u4j.subscribeToExplicitModeChanges(e);
+  variablesMirrorManager.subscribeToExplicitModeChanges(e);
   I.on(e, t);
   return () => {
-    u4j.unsubscribeFromExplicitModeChanges(e);
+    variablesMirrorManager.unsubscribeFromExplicitModeChanges(e);
     I.removeListener(e, t);
   };
 }

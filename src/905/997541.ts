@@ -1,11 +1,11 @@
 import { getFeatureFlags } from "../905/601108";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { F } from "../905/642505";
 import { K } from "../figma_app/193867";
 import { z } from "../905/875422";
 import { mK } from "../figma_app/681697";
-let $$c0 = nF((e, {
+let $$c0 = createOptimistThunk((e, {
   multiple: t,
   accept: i
 }) => {
@@ -30,7 +30,7 @@ let $$c0 = nF((e, {
   document.body.appendChild(n);
   n.click();
 });
-let $$u = nF((e, t) => {
+let $$u = createOptimistThunk((e, t) => {
   if (!F) return;
   let i = t.target;
   let r = (t, i) => {

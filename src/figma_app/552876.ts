@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { FEditorType } from "../figma_app/53721";
@@ -25,7 +25,7 @@ export function $$m0(e) {
 }
 export function $$g5() {
   return useCallback(() => {
-    glU?.triggerAction("debug-toggle-figmake-mode", {});
+    Fullscreen?.triggerAction("debug-toggle-figmake-mode", {});
   }, []);
 }
 export const B5 = $$m0;

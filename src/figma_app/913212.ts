@@ -6,13 +6,13 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { getI18nString } from "../905/303541";
-import { Ce } from "../905/156213";
-import { Ju } from "../905/102752";
+import { hideModal } from "../905/156213";
+import { registerModal } from "../905/102752";
 import { P } from "../905/932818";
-export let $$h0 = Ju(function () {
+export let $$h0 = registerModal(function () {
   let e = useDispatch();
   let t = P();
-  let r = useCallback(() => e(Ce()), [e]);
+  let r = useCallback(() => e(hideModal()), [e]);
   let p = useCallback(() => {
     r();
     t();

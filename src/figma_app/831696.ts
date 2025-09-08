@@ -1,6 +1,6 @@
 import { isEmptyObject } from "../figma_app/493477";
-import { X3B } from "../figma_app/763686";
-import { fn, sH } from "../905/871411";
+import { PrototypingTsApi } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../905/612521";
 import { parseQuery, serializeQuery } from "../905/634134";
@@ -12,15 +12,15 @@ export function $$u3(e, t, r, n, s) {
   for (let e in u) "" !== e && (c[e] = u[e]);
   e.scalingInfo?.viewportScalingMode && (c.scaling = e.scalingInfo.viewportScalingMode);
   e.scalingInfo?.contentScalingMode && (c["content-scaling"] = e.scalingInfo?.contentScalingMode);
-  e.pageId && fn(sH(e.pageId)) && (c["page-id"] = e.pageId);
-  e.nodeId && fn(sH(e.nodeId)) && (c["node-id"] = EO(e.nodeId));
-  e.startingPointNodeId && fn(sH(e.startingPointNodeId)) && (c["starting-point-node-id"] = e.startingPointNodeId);
+  e.pageId && isValidSessionLocalID(parseSessionLocalID(e.pageId)) && (c["page-id"] = e.pageId);
+  e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (c["node-id"] = EO(e.nodeId));
+  e.startingPointNodeId && isValidSessionLocalID(parseSessionLocalID(e.startingPointNodeId)) && (c["starting-point-node-id"] = e.startingPointNodeId);
   t && r && (c["prev-plan-id"] = t, c["prev-plan-type"] = r);
   e.prevSelectedView && (c["prev-selected-view"] = e.prevSelectedView.view, "recentsAndSharing" === e.prevSelectedView.view ? c["prev-tab"] = e.prevSelectedView.tab : "folder" === e.prevSelectedView.view && (c["folder-id"] = e.prevSelectedView.folderId));
   e.share && (c.share = "1");
   e.disableDefaultKeyboardNav ? c["disable-default-keyboard-nav"] = "1" : delete c["disable-default-keyboard-nav"];
   e.hideUI ? c["hide-ui"] = "1" : delete c["hide-ui"];
-  e.showProtoSidebar || void 0 === e.showProtoSidebar && X3B?.isViewerSidebarShownByDefault() ? c["show-proto-sidebar"] = "1" : delete c["show-proto-sidebar"];
+  e.showProtoSidebar || void 0 === e.showProtoSidebar && PrototypingTsApi?.isViewerSidebarShownByDefault() ? c["show-proto-sidebar"] = "1" : delete c["show-proto-sidebar"];
   null == e.showHotspots || e.showHotspots ? delete c["hotspot-hints"] : c["hotspot-hints"] = "0";
   null == e.showDeviceFrame || e.showDeviceFrame ? delete c["device-frame"] : c["device-frame"] = "0";
   e.inlinePreview ? c["inline-viewer"] = "1" : delete c["inline-viewer"];
@@ -77,7 +77,7 @@ export function $$E8(e) {
     let t = new URL(e).searchParams.get("node-id");
     if (!t) return null;
     let r = decodeURIComponent(t).replace("-", ":");
-    if (!fn(sH(r))) return null;
+    if (!isValidSessionLocalID(parseSessionLocalID(r))) return null;
     return r;
   } catch {
     return null;

@@ -1,7 +1,7 @@
 import { throwError } from "../figma_app/465776";
 import { mW, Pg, ii, F7, q, Rf, IA, n3, ey, nK, yG, Vt } from "../905/859698";
-import { rXF, QjO } from "../figma_app/763686";
-import { sH, Hr } from "../905/871411";
+import { VariableResolvedDataType, TemplateType } from "../figma_app/763686";
+import { parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import { l as _$$l } from "../905/716947";
 import { wL, Hc } from "../905/805904";
 import { wL as _$$wL, Hc as _$$Hc } from "../905/537777";
@@ -301,19 +301,19 @@ export function $$B26(e) {
 export function $$G22(e) {
   switch (e) {
     case "BOOLEAN":
-      return rXF.BOOLEAN;
+      return VariableResolvedDataType.BOOLEAN;
     case "COLOR":
-      return rXF.COLOR;
+      return VariableResolvedDataType.COLOR;
     case "FLOAT":
-      return rXF.FLOAT;
+      return VariableResolvedDataType.FLOAT;
     case "MAP":
-      return rXF.MAP;
+      return VariableResolvedDataType.MAP;
     case "STRING":
-      return rXF.STRING;
+      return VariableResolvedDataType.STRING;
     case "SYMBOL_ID":
-      return rXF.SYMBOL_ID;
+      return VariableResolvedDataType.SYMBOL_ID;
     case "TEXT_DATA":
-      return rXF.TEXT_DATA;
+      return VariableResolvedDataType.TEXT_DATA;
     default:
       throwError(`Unhandled livegraph type: ${e}`);
   }
@@ -324,7 +324,7 @@ function V(e, t) {
 export function $$H1(e, t, r) {
   let n = "";
   let a = "";
-  r ? (n = wL(sH(e.nodeId) ?? Hr), a = _$$wL(sH(e.variableCollection.nodeId) ?? Hr)) : (n = Hc(ey(e.key), nK(e.version)), a = _$$Hc(yG(e.variableCollection.key), Vt(e.variableCollection.version)));
+  r ? (n = wL(parseSessionLocalID(e.nodeId) ?? defaultSessionLocalID), a = _$$wL(parseSessionLocalID(e.variableCollection.nodeId) ?? defaultSessionLocalID)) : (n = Hc(ey(e.key), nK(e.version)), a = _$$Hc(yG(e.variableCollection.key), Vt(e.variableCollection.version)));
   return {
     ...M({
       ...e,
@@ -347,7 +347,7 @@ export function $$H1(e, t, r) {
 }
 export function $$z23(e, t, r) {
   let n = "";
-  n = r ? _$$wL(sH(e.nodeId) ?? Hr) : _$$Hc(yG(e.key), Vt(e.version));
+  n = r ? _$$wL(parseSessionLocalID(e.nodeId) ?? defaultSessionLocalID) : _$$Hc(yG(e.key), Vt(e.version));
   let a = {
     ...M({
       ...e,
@@ -436,13 +436,13 @@ export function $$K27(e, t) {
 let Y = e => {
   switch (e) {
     case "EDITOR_TEMPLATE":
-      return QjO.EDITOR_TEMPLATE;
+      return TemplateType.EDITOR_TEMPLATE;
     case "SLIDES_TEMPLATE":
-      return QjO.SLIDES_TEMPLATE;
+      return TemplateType.SLIDES_TEMPLATE;
     case "SITES_TEMPLATE":
-      return QjO.SITES_TEMPLATE;
+      return TemplateType.SITES_TEMPLATE;
     case "LITE_TEMPLATE":
-      return QjO.LITE_TEMPLATE;
+      return TemplateType.LITE_TEMPLATE;
     default:
       throwError(`Unhandled livegraph module source: ${e}`);
   }

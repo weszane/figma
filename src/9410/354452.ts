@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { n3, IA } from "../905/859698";
-import { Pt4, OmW, glU, Osy } from "../figma_app/763686";
-import { nc, l7 } from "../905/189185";
-import { AD } from "../905/871411";
+import { StylesBindings, EyedropperBindings, Fullscreen, SelectionPaintHelpers } from "../figma_app/763686";
+import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { GP } from "../figma_app/15927";
 import { trackEventAnalytics } from "../905/449184";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 export function $$$$u0({
   inheritStyleKeyField: e,
   initialStyleCreationPaint: t,
@@ -15,14 +15,14 @@ export function $$$$u0({
 }) {
   let [h, m] = useState(null);
   let f = useRef(!1);
-  let g = nc.user("create-style", () => {
+  let g = scopeAwareFunction.user("create-style", () => {
     if (f.current = !0, h) {
       let {
         key,
         version
       } = h;
-      let i = Pt4.getSoftDeletedStyleNodeId(key, version);
-      Y5.restoreSoftDeletedNode(i);
+      let i = StylesBindings.getSoftDeletedStyleNodeId(key, version);
+      fullscreenValue.restoreSoftDeletedNode(i);
       trackEventAnalytics("Style Created", {
         styleType: u.styleType,
         styleKey: h.key,
@@ -32,17 +32,17 @@ export function $$$$u0({
     }
   });
   useEffect(() => {
-    let r = l7.system("create-soft-deleted-style", () => function ({
+    let r = permissionScopeHandler.system("create-soft-deleted-style", () => function ({
       initialStyleCreationPaint: e,
       isCreatingFromSelection: t,
       inheritStyleKeyField: i,
       shouldUseEyedropperStyleCreationFlow: r
     }) {
-      if (r) return OmW.createSoftDeletedStyleForEyedropper();
-      if (!e) return glU.createSoftDeletedStyle(i, "", "", t);
+      if (r) return EyedropperBindings.createSoftDeletedStyleForEyedropper();
+      if (!e) return Fullscreen.createSoftDeletedStyle(i, "", "", t);
       {
         let t = GP(e);
-        return Osy.createSoftDeletedStyleFromPaintData(t, "");
+        return SelectionPaintHelpers.createSoftDeletedStyleFromPaintData(t, "");
       }
     }({
       initialStyleCreationPaint: t,
@@ -56,12 +56,12 @@ export function $$$$u0({
     }
     m(r);
     return () => {
-      glU.selectStyle(n3.INVALID, IA.INVALID);
-      l7.system("style-creation-cleanup", () => {
+      Fullscreen.selectStyle(n3.INVALID, IA.INVALID);
+      permissionScopeHandler.system("style-creation-cleanup", () => {
         if (r && !f.current) {
-          let t = Pt4.getSoftDeletedStyleNodeId(r.key, r.version);
-          glU.applyStyleToSelection(e, AD, !0);
-          glU.hardDeleteSoftDeletedNode(t);
+          let t = StylesBindings.getSoftDeletedStyleNodeId(r.key, r.version);
+          Fullscreen.applyStyleToSelection(e, defaultSessionLocalIDString, !0);
+          Fullscreen.hardDeleteSoftDeletedNode(t);
         }
       });
     };

@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
@@ -14,7 +14,7 @@ import { UX } from "../figma_app/740163";
 import { TZ } from "../figma_app/62612";
 import { T as _$$T } from "../905/858738";
 import { kd } from "../figma_app/546509";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { O as _$$O } from "../905/51985";
 import { N as _$$N } from "../figma_app/910954";
 import { lq } from "../figma_app/630194";
@@ -42,7 +42,7 @@ export function $$P0() {
   let e = ow();
   let t = useAtomWithSubscription(P4);
   let r = useAtomWithSubscription(O);
-  let n = ut(Ez5?.editorPreferences()?.showFigmaScope, !1);
+  let n = getObservableValue(AppStateTsApi?.editorPreferences()?.showFigmaScope, !1);
   let d = UX();
   let u = useSelector(e => e.mirror.appModel.showKeyboardShortcuts);
   let p = lq();

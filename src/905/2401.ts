@@ -2,13 +2,13 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useContext } from "react";
 import { useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/347208";
-import { glU, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { $j } from "../figma_app/178475";
@@ -35,11 +35,11 @@ export function $$I0({
     if (void 0 !== w) {
       if (e) {
         let i = await C(Oe(e));
-        l7.user("editVariantVCMForTextStyleNode", () => {
-          glU.editVariantVCMForTextStyleNode(dI(t), w, "PARAGRAPH_SPACING", i);
+        permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+          Fullscreen.editVariantVCMForTextStyleNode(sessionLocalIDToString(t), w, "PARAGRAPH_SPACING", i);
         });
-      } else l7.user("editVariantVCMForTextStyleNode", () => {
-        glU.clearVariantVCMFieldForTextStyleNode(dI(t), w, "PARAGRAPH_SPACING");
+      } else permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+        Fullscreen.clearVariantVCMFieldForTextStyleNode(sessionLocalIDToString(t), w, "PARAGRAPH_SPACING");
       });
     }
   }, [C, t, w]);
@@ -47,7 +47,7 @@ export function $$I0({
     condition: !S,
     wrapper: r => jsx(_X, {
       fields: ["PARAGRAPH_SPACING"],
-      resolvedType: rXF.FLOAT,
+      resolvedType: VariableResolvedDataType.FLOAT,
       editingStyleGuid: t,
       responsiveTextStyleVariantIndex: w,
       onVariableSelected: void 0 !== w ? k : void 0,
@@ -58,7 +58,7 @@ export function $$I0({
       }) ?? null,
       children: jsx(E, {
         inputClassName: hf,
-        currentFieldValue: gl(e) ? void 0 : e,
+        currentFieldValue: isInvalidValue(e) ? void 0 : e,
         isInStyleModal: !!t,
         rowElementRef: i,
         recordingKey: I,

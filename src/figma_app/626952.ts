@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { J0O, Egt } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { ComponentPropType, SceneGraphHelpers } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
-import { gl, oV } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { dK } from "../figma_app/889655";
 import { Yg, OE, Yi, k4, wd, ZH, aO, m5 } from "../figma_app/164212";
 import { s as _$$s } from "../figma_app/335489";
@@ -28,7 +28,7 @@ export function $$m1(e, t, r) {
     let t = e.reduce((e, t) => {
       let r = o.get(t);
       let n = r?.symbolId;
-      n && n !== AD && e.add(n);
+      n && n !== defaultSessionLocalIDString && e.add(n);
       return e;
     }, new Set());
     return A.filter(e => t.has(e.guid));
@@ -68,12 +68,12 @@ export function $$f0(e, t) {
   if (t !== OE.DEFINITION) return Yi(e, r) || k4(e, r) || "";
   {
     let t = wd(e, r);
-    return t && !gl(t) ? t.guid : "";
+    return t && !isInvalidValue(t) ? t.guid : "";
   }
 }
 function E(e, t, r) {
   let n = ZH(t, r);
-  return aO(e, r).filter(e => !n.has(e.explicitDefID) && !(e.type === J0O.IMAGE && !getFeatureFlags().ds_image_props_sites) && !(e.type === J0O.SLOT && !getFeatureFlags().dse_slots));
+  return aO(e, r).filter(e => !n.has(e.explicitDefID) && !(e.type === ComponentPropType.IMAGE && !getFeatureFlags().ds_image_props_sites) && !(e.type === ComponentPropType.SLOT && !getFeatureFlags().dse_slots));
 }
 function y(e, t, r, n) {
   let i = {};
@@ -84,14 +84,14 @@ function y(e, t, r, n) {
       let t = n[i]?.assignments?.[e.explicitDefID];
       if (t) {
         if (t.isMixed) {
-          s.add(oV);
+          s.add(MIXED_MARKER);
           continue;
         }
         if (t.value && "object" == typeof t.value && "value" in t.value && t.value.value && "object" == typeof t.value.value && "stablePathToNode" in t.value.value && "indexOrKey" in t.value.value) {
           let e = t.value.value.stablePathToNode;
           let n = e && 1 === e.length ? r.get(e[0]) : null;
           if (n && n.isState && n.containingStateGroupId) {
-            let e = Egt.getExplicitPropDefIDBinding(n.guid, t.value.value.indexOrKey);
+            let e = SceneGraphHelpers.getExplicitPropDefIDBinding(n.guid, t.value.value.indexOrKey);
             t.value.value.stablePathToNode = [n.containingStateGroupId];
             t.value.value.indexOrKey = e;
           }

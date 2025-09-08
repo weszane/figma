@@ -4,7 +4,7 @@ import { connect } from "../vendor/514228";
 import { N_ } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { S3 } from "../905/708054";
 import { cI, zc, q3, bv, nf } from "../5430/708619";
 import { A } from "../svg/711642";
@@ -29,7 +29,7 @@ class _ extends Component {
     this.onProfileCreateClick = e => {
       e.stopPropagation();
       e.preventDefault();
-      this.props.user && this.props.dispatch(to({
+      this.props.user && this.props.dispatch(showModalHandler({
         type: S3,
         data: {
           userId: this.props.user.id

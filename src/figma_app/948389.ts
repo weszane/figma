@@ -2,7 +2,7 @@ import { M_, OE, ZO, $L, NZ, PI as _$$PI, g6, rY } from "../905/369755";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, NotImplementedError, OfflineError, MeterExceededError, PayloadTooLargeError } from "../figma_app/316567";
 import { atomStoreManager } from "../figma_app/27355";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { J } from "../905/915227";
 import { B } from "../905/969273";
 import { _s } from "../figma_app/33126";
@@ -15,7 +15,7 @@ export function $$_1() {
     fileKey: atomStoreManager.get(ze) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     userId: atomStoreManager.get(kS) || null,
-    trackingSessionId: fF()
+    trackingSessionId: getTrackingSessionId()
   };
 }
 export function $$h0(e) {

@@ -13,7 +13,7 @@ import { F } from "../905/302958";
 import { KH, nF } from "../figma_app/471982";
 import { Qi } from "../905/172918";
 import { AC } from "../figma_app/777551";
-import { nF as _$$nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { d6 } from "../figma_app/530167";
 import { HZ, Oo } from "../905/926523";
 import { Cx, x2, of } from "../figma_app/714946";
@@ -22,7 +22,7 @@ import { Kg, Ac, Rd, Gf } from "../figma_app/599979";
 import { M4 } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
 import { F as _$$F } from "../905/827944";
-import { wf, oD, c2, MB, ZT, L8, mI } from "../figma_app/300692";
+import { validateExtensionIconImage, validateArtworkImage, loadPluginManifest, loadLocalPluginSource, validatePluginCodeSize, getResourceRoleInfo, getPublishingData } from "../figma_app/300692";
 import { N as _$$N } from "../905/696711";
 import { bD, xQ } from "../figma_app/45218";
 import { aP, kM } from "../figma_app/10554";
@@ -32,7 +32,7 @@ import { U } from "../905/424668";
 import { MZ } from "../905/470594";
 import { UM, Jr } from "../figma_app/940844";
 let $$M6 = NC("PLUGIN_REPLACE_FEATURED");
-let $$F29 = _$$nF((e, t, {
+let $$F29 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   if (!e.getState().user) return;
@@ -78,7 +78,7 @@ let $$U19 = M4.Query({
     return t;
   }
 });
-let $$B16 = _$$nF((e, {
+let $$B16 = createOptimistThunk((e, {
   widgetIDToVersions: t
 }) => {
   let {
@@ -95,7 +95,7 @@ let $$B16 = _$$nF((e, {
     });
   });
 });
-let $$G32 = _$$nF(async (e, {
+let $$G32 = createOptimistThunk(async (e, {
   resourceId: t,
   resourceType: r
 }) => {
@@ -134,7 +134,7 @@ export async function $$W13(e, t) {
   debugState.dispatch($$H33(Object.fromEntries(Object.entries(e).map(([e, t]) => [e, Object.fromEntries(t.map(e => [e, !0]))]))));
   return a;
 }
-let $$K18 = _$$nF(async (e, {
+let $$K18 = createOptimistThunk(async (e, {
   pluginIds: t
 }) => {
   let {
@@ -154,7 +154,7 @@ let $$K18 = _$$nF(async (e, {
     return;
   }
 });
-let $$Y8 = _$$nF(async (e, {
+let $$Y8 = createOptimistThunk(async (e, {
   widgetIds: t
 }) => {
   let {
@@ -177,7 +177,7 @@ let $$Y8 = _$$nF(async (e, {
     return;
   }
 });
-let $$$1 = _$$nF(async (e, {
+let $$$1 = createOptimistThunk(async (e, {
   widgetIDAndVersions: t
 }) => {
   let {
@@ -197,7 +197,7 @@ let $$$1 = _$$nF(async (e, {
     widgetIds: Object.keys(i)
   })));
 });
-let $$X26 = _$$nF((e, t, {
+let $$X26 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = pluginAPIService.getProfile({
@@ -219,7 +219,7 @@ let $$X26 = _$$nF((e, t, {
 }, ({
   profileId: e
 }) => `GET_COMMUNITY_PROFILE_PLUGINS_${e}`);
-_$$nF((e, t, {
+createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = U.getProfile({
@@ -241,7 +241,7 @@ _$$nF((e, t, {
 }, ({
   profileId: e
 }) => `GET_COMMUNITY_PROFILE_WIDGETS_${e}`);
-let $$q7 = _$$nF((e, t, {
+let $$q7 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = pluginAPIService.getOrg({
@@ -259,7 +259,7 @@ let $$q7 = _$$nF((e, t, {
     return r;
   });
 }, e => `GET_ORG_PUBLISHED_PLUGINS_${e}`);
-let $$J14 = _$$nF(async (e, t, {
+let $$J14 = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
   try {
@@ -289,9 +289,9 @@ let $$J14 = _$$nF(async (e, t, {
 async function Z(e, t, r) {
   if (null === e.current_plugin_version_id || !e.id) throw Error(getI18nString("community.actions.resource_is_invalid"));
   let i = 0;
-  t.iconBlob && (i = wf(t.iconBlob));
+  t.iconBlob && (i = validateExtensionIconImage(t.iconBlob));
   let a = 0;
-  t.coverBlob && (a = oD(t.coverBlob));
+  t.coverBlob && (a = validateArtworkImage(t.coverBlob));
   let o = t.carouselMedia;
   let {
     uploadImages,
@@ -396,15 +396,15 @@ async function Z(e, t, r) {
 async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let E;
   if (!e) throw Error(getI18nString("community.actions.plugin_id_is_invalid"));
-  let [y, b] = await Promise.all([c2(t, {
+  let [y, b] = await Promise.all([loadPluginManifest(t, {
     resourceType: nF(g),
     isPublishing: !0
-  }), MB(t)]);
-  let T = ZT(b);
+  }), loadLocalPluginSource(t)]);
+  let T = validatePluginCodeSize(b);
   let v = 0;
-  r.iconBlob && (v = wf(r.iconBlob));
+  r.iconBlob && (v = validateExtensionIconImage(r.iconBlob));
   let A = 0;
-  r.coverBlob && (A = oD(r.coverBlob));
+  r.coverBlob && (A = validateArtworkImage(r.coverBlob));
   let x = r.carouselMedia;
   let {
     uploadImages,
@@ -555,7 +555,7 @@ let {
   clearMetadataAndStatus,
   clearMetadata
 } = $$ee5;
-let $$ea2 = _$$nF(async (e, t) => {
+let $$ea2 = createOptimistThunk(async (e, t) => {
   let {
     pluginVersion,
     localFileId,
@@ -615,7 +615,7 @@ let $$ea2 = _$$nF(async (e, t) => {
     return Error(t);
   }
 });
-let $$es11 = _$$nF(async (e, t) => {
+let $$es11 = createOptimistThunk(async (e, t) => {
   let {
     resource,
     pluginVersion,
@@ -663,7 +663,7 @@ let $$es11 = _$$nF(async (e, t) => {
     return Error(`Failed plugin patchVersion: ${r.message}`);
   }
 });
-let $$eo35 = _$$nF(async (e, {
+let $$eo35 = createOptimistThunk(async (e, {
   pluginId: t,
   role: r,
   agreedToTos: i,
@@ -701,7 +701,7 @@ let $$eo35 = _$$nF(async (e, {
     reportError(_$$e.COMMUNITY, t);
   });
 });
-let $$el10 = _$$nF(async (e, t) => {
+let $$el10 = createOptimistThunk(async (e, t) => {
   let r;
   if (t.authorOrgId && t.authorTeamId) {
     console.error("Attempting to set both authorOrgId and authorTeamId while publishing");
@@ -749,7 +749,7 @@ let $$el10 = _$$nF(async (e, t) => {
     reportError(_$$e.COMMUNITY, t);
   });
 });
-let $$ed17 = _$$nF((e, {
+let $$ed17 = createOptimistThunk((e, {
   resource: t
 }) => {
   XHR.del(`/api/${KH(t, {
@@ -764,7 +764,7 @@ let $$ed17 = _$$nF((e, {
     }));
     trackEventAnalytics("Hub Unpublish Plugin", {
       pluginId: t.id,
-      ...L8(t)
+      ...getResourceRoleInfo(t)
     });
   }).catch(r => {
     e.dispatch(F.enqueue({
@@ -778,7 +778,7 @@ let $$ed17 = _$$nF((e, {
     reportError(_$$e.COMMUNITY, r);
   });
 });
-let $$ec15 = _$$nF((e, {
+let $$ec15 = createOptimistThunk((e, {
   id: t,
   resourceType: r
 }, {
@@ -805,7 +805,7 @@ let $$ec15 = _$$nF((e, {
 }, ({
   id: e
 }) => `GET_PLUGIN_VERSIONS_${e}`);
-let $$eu34 = _$$nF(async (e, t) => {
+let $$eu34 = createOptimistThunk(async (e, t) => {
   let {
     role,
     userId,
@@ -837,7 +837,7 @@ let $$eu34 = _$$nF(async (e, t) => {
     } = s;
     let h = Object.values(localPlugins).find(e => e.plugin_id === resource.id);
     let m = h?.localFileId ?? resource.id;
-    let f = mI({
+    let f = getPublishingData({
       ...getPermissionsState(s),
       currentUserOrgId,
       localPlugins,

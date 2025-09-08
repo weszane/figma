@@ -9,18 +9,18 @@ import { tM, vd } from "../figma_app/637027";
 import { qc } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { zK } from "../figma_app/475472";
 import { dr } from "../4452/405965";
 import { FResourceCategoryType, FPermissionLevelType } from "../figma_app/191312";
 import { Fb } from "../figma_app/630077";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { MF } from "../4452/915131";
 import { _9, J4, Kd, Iz, YU } from "../figma_app/907616";
 import { w } from "../905/733703";
 import { DA, Lq, $2, VA, bV, E_ } from "../figma_app/538002";
-export let $$S0 = Ju(function (e) {
+export let $$S0 = registerModal(function (e) {
   let t = useDispatch();
   let a = dr(e.team.id).data;
   let n = a && a.workspace ? {
@@ -29,7 +29,7 @@ export let $$S0 = Ju(function (e) {
     imgUrl: a.workspace.imgUrl
   } : void 0;
   let d = () => {
-    t(Ce());
+    t(hideModal());
     t(cL());
   };
   let c = hS({

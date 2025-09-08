@@ -1,5 +1,5 @@
 import { assert, assertNotNullish } from "../figma_app/465776";
-import { xOL } from "../figma_app/763686";
+import { RotationType } from "../figma_app/763686";
 import { hY } from "../figma_app/349969";
 export function $$s0(e) {
   let t = e.getCurrentPage();
@@ -42,7 +42,7 @@ export function $$c4(e, t) {
     offset
   } = hY[e];
   let o = d(e);
-  let l = t === xOL.CCW_90;
+  let l = t === RotationType.CCW_90;
   let c = {
     x: o.x - framePresetSize.x - offset.x,
     y: offset.y

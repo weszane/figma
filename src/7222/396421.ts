@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState, useRef, useEffect, createContext, useContext } from "react";
 import { useDispatch } from "../vendor/514228";
-import { Ez5, zMY, zkO, QjO } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { AppStateTsApi, ThemeMode, SourceType, TemplateType } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -55,9 +55,9 @@ export function $$G1(e) {
   }(e);
   return useCallback(() => {
     let _ = getSingletonSceneGraph().get(e);
-    l7.system("slides-remove-source-library-key", () => {
+    permissionScopeHandler.system("slides-remove-source-library-key", () => {
       _ && (_.sourceLibraryKey = _$$l(""));
-      t === r && Ez5?.slideThemeLibBindings().setDocumentTemplateLibraryKey(_$$l(""));
+      t === r && AppStateTsApi?.slideThemeLibBindings().setDocumentTemplateLibraryKey(_$$l(""));
     });
   }, [t, e, r]);
 }
@@ -78,12 +78,12 @@ export function $$F16() {
   return {
     canDismiss: o,
     maybeUseLightTemplateOnDismiss: useCallback(() => {
-      isLocalCluster() ? l7.system(d, () => {
-        Ez5?.slideThemeLibBindings().insertDefaultLocalTheme(zMY.LIGHT, null);
+      isLocalCluster() ? permissionScopeHandler.system(d, () => {
+        AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(ThemeMode.LIGHT, null);
       }) : !a && i && c && (E(c, {
         row: 0,
         col: 0
-      }, zkO.SYSTEM, d, Ji.OVERLAY_MODAL), r(!1));
+      }, SourceType.SYSTEM, d, Ji.OVERLAY_MODAL), r(!1));
     }, [E, a, i, c, r])
   };
 }
@@ -93,7 +93,7 @@ let Q = (e, t) => {
   return isNaN(r) || isNaN(_) ? e.name.localeCompare(t.name) : r - _;
 };
 export function $$X5(e) {
-  let t = uW(new Set(f()([e])), QjO.SLIDES_TEMPLATE);
+  let t = uW(new Set(f()([e])), TemplateType.SLIDES_TEMPLATE);
   return useMemo(() => {
     if (!e) return resourceUtils.loaded([]);
     if (t.status === LOADING_STATUS.LOADING) return resourceUtils.loading();
@@ -126,7 +126,7 @@ export function $$W17(e) {
       percentageOffset: new Point(),
       insertAsChildOfCanvas: !0,
       selectAfterInsert: !0,
-      insertionCallback: nc(u, s, (r, u) => {
+      insertionCallback: scopeAwareFunction(u, s, (r, u) => {
         CH({
           module: e,
           viewType: o,
@@ -160,7 +160,7 @@ export function $$z15() {
     });
     let _ = null;
     if (e) _ = e;else {
-      let e = Ez5?.slideThemeLibBindings().mostUsedTemplateLibraryKey();
+      let e = AppStateTsApi?.slideThemeLibBindings().mostUsedTemplateLibraryKey();
       e && (_ = _$$l(e));
     }
     _ && r({

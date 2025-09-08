@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useId } from "react";
 import { A as _$$A } from "../vendor/723372";
-import { F } from "../905/549791";
-import { J } from "../905/270045";
-import { r as _$$r } from "../905/577641";
+import { CheckboxPrimitive } from "../905/549791";
+import { Label } from "../905/270045";
+import { defaultComponentAttribute } from "../905/577641";
 import { s as _$$s } from "../905/536340";
 var n = {};
 require.d(n, {
@@ -38,10 +38,10 @@ let $$y0 = forwardRef(({
   let v = useId();
   let I = y.checked && !y.mixed ? e : t;
   return jsxs("span", {
-    ..._$$r,
+    ...defaultComponentAttribute,
     "data-disabled": !!y.disabled || void 0,
     className: _$$A(g, A[_]),
-    children: [jsx(F, {
+    children: [jsx(CheckboxPrimitive, {
       className: _$$A(u, n[m]),
       id: v,
       htmlAttributes: h,
@@ -50,7 +50,7 @@ let $$y0 = forwardRef(({
       "data-tooltip-type": "text",
       "data-tooltip-shortcut-key": y?.["data-tooltip-shortcut-key"] ?? h?.["data-tooltip-shortcut-key"],
       ref: b
-    }), jsxs(J, {
+    }), jsxs(Label, {
       htmlFor: v,
       className: p,
       children: [jsx("span", {

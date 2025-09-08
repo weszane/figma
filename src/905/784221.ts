@@ -6,7 +6,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { X } from "../905/859195";
 import { yJ } from "../figma_app/78808";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { q5 } from "../figma_app/516028";
@@ -14,12 +14,12 @@ import { dq } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { cBJ } from "../figma_app/43951";
 import { cD } from "../figma_app/598018";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { r as _$$r } from "../905/149895";
 export function $$I1(e, t) {
   return () => {
-    e(to({
+    e(showModalHandler({
       type: x,
       data: {
         dispatch: e,
@@ -56,7 +56,7 @@ function E({
     })
   });
 }
-let x = Ju(function ({
+let x = registerModal(function ({
   dispatch: e,
   fileKey: t
 }) {
@@ -89,7 +89,7 @@ let x = Ju(function ({
       }));
       return;
     }
-    e(Ce());
+    e(hideModal());
     e(F.enqueue({
       message: getI18nString("templates.unpublishing.bell.success"),
       type: "template-unpublish-success"
@@ -123,6 +123,6 @@ let x = Ju(function ({
     })
   });
 }, "UnpublishConfirmationModal");
-let $$S0 = Ju(E, "TemplateConfirmationModal");
+let $$S0 = registerModal(E, "TemplateConfirmationModal");
 export const X0 = $$S0;
 export const yz = $$I1;

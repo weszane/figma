@@ -18,14 +18,14 @@ import { L as _$$L } from "../3591/956338";
 import { AC, G8 } from "../figma_app/777551";
 import { JZ, qR } from "../figma_app/696043";
 import { j7, oB, sf } from "../905/929976";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { KE } from "../905/116101";
 import { tf } from "../figma_app/831799";
 import { V2, WK } from "../figma_app/844435";
 import { Um } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
-import { YQ, Rt, uF } from "../figma_app/300692";
+import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { R as _$$R2 } from "../figma_app/612938";
 import { bD } from "../figma_app/45218";
 import { Ib } from "../905/129884";
@@ -91,7 +91,7 @@ export function $$ed0(e) {
     children: [jsx(c$, {
       onClick: t => {
         if (t.stopPropagation(), i(KE()), !n) return _$$R2.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
-        i(to({
+        i(showModalHandler({
           type: _$$h,
           data: {
             resourceType: e.resourceType || bD.PLUGIN
@@ -185,7 +185,7 @@ let eu = class e extends PureComponent {
         children: renderI18nText("community.plugins.publish_new_version")
       }), jsx(c$, {
         onClick: this.onRevealLocally,
-        children: ea(YQ())
+        children: ea(getPluginsMenuOpenDirectory())
       }), jsx(wv, {}), jsx(c$, {
         onClick: this.onDelete,
         children: renderI18nText("community.permissions_modal_publish_tab.footer.remove")
@@ -386,7 +386,7 @@ function eg(e) {
     if (AC(e)) return jsx(_$$L, {
       height: "16"
     });
-    if (Rt(e)) {
+    if (hasOrgRole(e)) {
       let i = e.roles.org?.name;
       return jsx(_$$B, {
         svg: _$$A9,
@@ -409,7 +409,7 @@ function eg(e) {
     let n = t?.type === lD && t.data.pluginId === e.plugin.id && t.data.targetRect;
     let s = useDispatch();
     let l = useRef(null);
-    let p = uF(e.plugin);
+    let p = getPluginVersion(e.plugin);
     let d = WK(e.plugin.id);
     let u = useCallback(() => i(e.plugin), [e.plugin])();
     return jsxs(Fragment, {
@@ -452,7 +452,7 @@ function eg(e) {
             subView: "plugin",
             publishedPluginId: e.plugin.id
           }));
-          s(Ce());
+          s(hideModal());
         }
       })]
     });
@@ -460,7 +460,7 @@ function eg(e) {
   e.PluginManagementTitleBadge = i;
 })($$s5 || ($$s5 = {}));
 ($$l4 || ($$l4 = {})).Tile = function (e) {
-  let i = uF(e.plugin);
+  let i = getPluginVersion(e.plugin);
   return jsxs("div", {
     className: e.containerClassName ?? x$,
     children: [jsxs(li.IconAndBadgeContainer, {
@@ -489,7 +489,7 @@ tf(function ({
   className: i,
   onClick: t
 }) {
-  let n = uF(e);
+  let n = getPluginVersion(e);
   let s = useDispatch();
   return jsxs("a", {
     className: i || m6,

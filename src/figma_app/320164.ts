@@ -18,7 +18,7 @@ import { p as _$$p } from "../905/300815";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/347702";
 import { iE } from "../figma_app/416935";
 import { t as _$$t2 } from "../905/897919";
@@ -149,7 +149,7 @@ export async function $$F3(e, {
         origin: a,
         formState: qB.SIGN_IN,
         redirectUrl: debugState?.getState().auth.redirectUrl
-      })), t(to({
+      })), t(showModalHandler({
         type: _$$a,
         data: {}
       })));
@@ -177,7 +177,7 @@ export async function $$F3(e, {
           origin: t,
           formState: qB.SIGN_UP,
           redirectUrl: n
-        })), r(to({
+        })), r(showModalHandler({
           type: _$$a,
           data: {}
         }))) : debugState?.getState()?.modalShown?.type !== _$$a && MZ() && logWarning("authenticate_google_user", "Skipped launching auth modal before arkose verification", {
@@ -244,7 +244,7 @@ export function $$j4({
   e(Qg({
     message: n
   }));
-  e(to({
+  e(showModalHandler({
     type: _$$a,
     data: {}
   }));

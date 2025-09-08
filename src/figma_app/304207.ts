@@ -1,4 +1,4 @@
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
@@ -7,7 +7,7 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
-import { nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { b6, Qi } from "../figma_app/559491";
 import { M5, ZO } from "../figma_app/350203";
 import { N3 } from "../figma_app/844435";
@@ -17,7 +17,7 @@ import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 import { n as _$$n2 } from "../905/347702";
 let $$T1 = NC("SET_SAVED_PLUGIN_VERSIONS");
-let $$I5 = nF((e, t) => {
+let $$I5 = createOptimistThunk((e, t) => {
   let r = {};
   Object.keys(t).forEach(e => {
     r[e] = [t[e].id];
@@ -27,7 +27,7 @@ let $$I5 = nF((e, t) => {
   }));
 });
 export var $$S4 = (e => (e.COMMUNITY_HUB = "community_hub", e.INSERTS_MODAL = "inserts_modal", e))($$S4 || {});
-let $$v0 = _$$n2(MM("SAVE_EXTENSION", (e, {
+let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
   id: t,
   resourceType: r,
   versionId: i,
@@ -67,7 +67,7 @@ let $$v0 = _$$n2(MM("SAVE_EXTENSION", (e, {
   N.then(({
     data: t
   }) => {
-    e.dispatch(_$$c(S));
+    e.dispatch(createOptimistCommitAction(S));
     let i = t.meta;
     let s = r === vt.WIDGET ? {
       publishedPlugins: [i],
@@ -103,7 +103,7 @@ let $$v0 = _$$n2(MM("SAVE_EXTENSION", (e, {
     });
   }).catch(t => {
     b?.();
-    e.dispatch(_$$r(S));
+    e.dispatch(createOptimistRevertAction(S));
     403 === t.data.status ? e.dispatch(F.enqueue({
       message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_save_plugin_error", {
         error: J(t, t.data?.message)
@@ -119,7 +119,7 @@ let $$v0 = _$$n2(MM("SAVE_EXTENSION", (e, {
     }));
   });
 }));
-let $$A3 = MM("UNSAVE_EXTENSION", (e, {
+let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
   id: t,
   resourceType: r,
   orgId: i,
@@ -158,7 +158,7 @@ let $$A3 = MM("UNSAVE_EXTENSION", (e, {
     if (e.dispatch(Qi({
       ...p,
       overrideInstallStatus: !0
-    })), e.dispatch(_$$c(m)), !o) {
+    })), e.dispatch(createOptimistCommitAction(m)), !o) {
       let n = {
         message: (() => {
           if ("inserts_modal" === c) return r === vt.PLUGIN ? getI18nString("community.saves.plugin_removed_from_your_account") : getI18nString("community.saves.widget_removed_from_your_account");
@@ -195,7 +195,7 @@ let $$A3 = MM("UNSAVE_EXTENSION", (e, {
       source: c
     });
   }).catch(t => {
-    e.dispatch(_$$r(m));
+    e.dispatch(createOptimistRevertAction(m));
     console.error(t);
   });
 });
@@ -211,7 +211,7 @@ let x = {
     });
   }
 };
-let N = nF((e, t) => {
+let N = createOptimistThunk((e, t) => {
   let r = {
     plugin_id: t.id
   };
@@ -233,7 +233,7 @@ let N = nF((e, t) => {
     }));
   });
 });
-let $$C2 = nF((e, t) => {
+let $$C2 = createOptimistThunk((e, t) => {
   let {
     orgId,
     id,

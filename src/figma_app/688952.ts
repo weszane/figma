@@ -1,11 +1,11 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { S as _$$S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
@@ -15,7 +15,7 @@ import { E as _$$E } from "../905/984674";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { ze } from "../figma_app/516028";
-export let $$y0 = Ju(function (e) {
+export let $$y0 = registerModal(function (e) {
   let t = hS(e);
   let [r, y] = useState(!1);
   let [b, T] = useState(!1);
@@ -252,10 +252,10 @@ export let $$y0 = Ju(function (e) {
               style: {
                 marginBottom: "16px"
               },
-              children: jsx(_$$S, {
+              children: jsx(Checkbox, {
                 checked: O,
                 onChange: e => R(e),
-                label: jsx(J, {
+                label: jsx(Label, {
                   children: "Force provision new sandbox"
                 })
               })

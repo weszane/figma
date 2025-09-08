@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { logDebug } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { PK } from "../figma_app/124493";
 import { Dm } from "../figma_app/8833";
 import { F as _$$F } from "../905/224";
@@ -15,7 +15,7 @@ import { p8 } from "../figma_app/722362";
 import { q5, yV } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { J9 } from "../figma_app/345997";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { ZN } from "../figma_app/630077";
 import { Q } from "../figma_app/320600";
@@ -95,7 +95,7 @@ export function $$A0({
             isMovePageToNewFile: i,
             page_id: r
           };
-          t(to({
+          t(showModalHandler({
             type: J(),
             data: n
           }));
@@ -117,7 +117,7 @@ export function $$A0({
     })) ? {
       name: "page-duplicate",
       callback: () => {
-        n(to({
+        n(showModalHandler({
           type: DV,
           data: {
             team: a,
@@ -127,7 +127,7 @@ export function $$A0({
             currentPlan: _$$F.Plan.STARTER,
             upsellPlan: _$$F.Plan.PRO,
             hideUpsellPlanCta: l,
-            upsellSource: _$$b.CREATE_NEW_PAGE
+            upsellSource: UpsellModalType.CREATE_NEW_PAGE
           }
         }));
       },

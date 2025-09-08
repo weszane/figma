@@ -2,10 +2,10 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useContext, useEffect, useRef, useMemo, useState, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { allEqual } from "../figma_app/656233";
-import { glU, hJs, rXF } from "../figma_app/763686";
+import { Fullscreen, SnapMode, VariableResolvedDataType } from "../figma_app/763686";
 import o from "classnames";
 import { sT } from "../figma_app/740163";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { ig } from "../figma_app/178475";
@@ -124,7 +124,7 @@ export function $$j0({
         onScrubEnd?.(e);
       },
       onValueChange: (e, t) => {
-        t === zk.YES && glU.temporarilyHideOverlay(hJs.SELECTION);
+        t === zk.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
         k(e, t, {
           source: s,
           input: N.current ? "scrub" : "textfield"
@@ -149,9 +149,9 @@ export function $$j0({
     recordingKey: y.recordingKey,
     fields: L,
     disableEntryPoint: o,
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     inputClassName: y.outerClassName,
-    currentFieldValue: hS(v) && allEqual(v) ? v[0] : void 0,
+    currentFieldValue: isValidValue(v) && allEqual(v) ? v[0] : void 0,
     onClickDetachButton: G,
     onFocus: B,
     onBlur: K,
@@ -167,7 +167,7 @@ export function $$v1() {
   let {
     consumedVariable: _consumedVariable
   } = u3(s);
-  return !hS(consumedVariable) || !hS(_consumedVariable);
+  return !isValidValue(consumedVariable) || !isValidValue(_consumedVariable);
 }
 function S(e) {
   switch (e) {

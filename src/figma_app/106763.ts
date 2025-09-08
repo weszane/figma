@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useStore } from "../vendor/514228";
-import { Egt, lyf } from "../figma_app/763686";
+import { SceneGraphHelpers, ViewType } from "../figma_app/763686";
 import { Ql } from "../figma_app/387100";
 import { selectWithShallowEqual } from "../905/103090";
 import { _I } from "../figma_app/473493";
@@ -67,7 +67,7 @@ export function $$h1(e) {
       } = t.symbolId ? sceneGraph.get(t.symbolId) ?? {} : {};
       x.current = r;
       N.current = N.current + 1;
-      let i = Egt?.getOverridePathForNode(r);
+      let i = SceneGraphHelpers?.getOverridePathForNode(r);
       let s = function (e) {
         for (let t = 0; t < 22; t++) {
           let r = e.parentNode;
@@ -78,7 +78,7 @@ export function $$h1(e) {
       }(t) - 2;
       let o = _ ?? "canvas";
       _ = null;
-      let l = topLevelMode === lyf.DEV_HANDOFF ? S : null;
+      let l = topLevelMode === ViewType.DEV_HANDOFF ? S : null;
       let d = {
         nodeId: r,
         nodeType: t.type,

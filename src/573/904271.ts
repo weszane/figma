@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect, useLayoutEffect, useRef, useMemo, Component, useState, useContext, memo } from "react";
-import { AWq, Egt, glU, xae, m1T, Ez5 } from "../figma_app/763686";
+import { HistoryChangesBindings, SceneGraphHelpers, Fullscreen, UserInterfaceElements, LayoutTabType, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { YQ } from "../905/502364";
@@ -8,7 +8,7 @@ import { A as _$$A } from "../573/289674";
 import { X0 } from "../figma_app/88239";
 import { eY as _$$eY, KH, aV, p8 } from "../figma_app/722362";
 import { tB as _$$tB, q5 } from "../figma_app/516028";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { F9, e_ as _$$e_, MH, dM, Xh } from "../figma_app/803787";
 import { bL, EA } from "../9410/499229";
 import { f as _$$f } from "../1528/716387";
@@ -53,7 +53,7 @@ import { O as _$$O } from "../905/257139";
 import { dP, q_, M3 } from "../figma_app/119475";
 import { kt } from "../figma_app/858013";
 import { cr, gP } from "../905/879323";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Hz } from "../figma_app/591738";
 import { S as _$$S } from "../642/159607";
 import { n1 } from "../figma_app/657017";
@@ -161,11 +161,11 @@ function V() {
   let e = useDispatch();
   let t = useSelector(e => !!e.modalShown);
   let s = useSelector(e => e.versionHistory.compareId);
-  let i = AWq.getChunkChangeCount();
+  let i = HistoryChangesBindings.getChunkChangeCount();
   let o = _$$Z("chunk_change_navigator_navigate");
   let l = _$$E();
   let d = useCallback(e => {
-    Egt.setSelectedNodeAndCanvas(e, !0);
+    SceneGraphHelpers.setSelectedNodeAndCanvas(e, !0);
     o(QZ({
       nodeId: e,
       ...ob
@@ -173,14 +173,14 @@ function V() {
     l(e);
   }, [o, l]);
   let c = useCallback(e => {
-    t || 0 === i || ("ArrowUp" === e.key || "ArrowLeft" === e.key || e.shiftKey && "Tab" === e.key ? d(glU.navigateToNextChange(-1)) : ("ArrowDown" === e.key || "ArrowRight" === e.key || "Tab" === e.key) && d(glU.navigateToNextChange(1)));
+    t || 0 === i || ("ArrowUp" === e.key || "ArrowLeft" === e.key || e.shiftKey && "Tab" === e.key ? d(Fullscreen.navigateToNextChange(-1)) : ("ArrowDown" === e.key || "ArrowRight" === e.key || "Tab" === e.key) && d(Fullscreen.navigateToNextChange(1)));
   }, [t, i, d]);
   return (useEffect(() => {
     e(_$$Q2.dequeue({
       type: _$$_.SEE_WHATS_CHANGED
     }));
   }, [e]), useEffect(() => {
-    s && 0 !== i && d(glU.navigateToFirstVisibleOrClosestChange());
+    s && 0 !== i && d(Fullscreen.navigateToFirstVisibleOrClosestChange());
   }, [i, s, d]), useLayoutEffect(() => {
     if (0 !== i) {
       document.addEventListener("keydown", c);
@@ -200,7 +200,7 @@ function V() {
         svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#000" fill-opacity="1" fill-rule="nonzero" stroke="none" d="M12.292 10.66 13 9.952 8.001 4.746l-5 5.206.708.708 4.292-4.5z"/></svg>',
         onClick: e => {
           e.stopPropagation();
-          d(glU.navigateToNextChange(-1));
+          d(Fullscreen.navigateToNextChange(-1));
         },
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.previous_change"),
@@ -210,7 +210,7 @@ function V() {
         svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#000" fill-opacity="1" fill-rule="nonzero" stroke="none" d="M3.708 5.34 3 6.048l4.999 5.206 5-5.206-.708-.708-4.292 4.5z"/></svg>',
         onClick: e => {
           e.stopPropagation();
-          d(glU.navigateToNextChange(1));
+          d(Fullscreen.navigateToNextChange(1));
         },
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.next_change"),
@@ -231,7 +231,7 @@ function eL({
     activeTab,
     shouldFocusSearchBar
   } = useSelector(e => e.leftPanel);
-  let d = activeTab === xae.ASSETS;
+  let d = activeTab === UserInterfaceElements.ASSETS;
   let c = useRef(null);
   let u = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let h = vb({
@@ -242,7 +242,7 @@ function eL({
   });
   useEffect(() => {
     let e = e => {
-      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && u !== m1T.TEXT && (h(), e.preventDefault());
+      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && u !== LayoutTabType.TEXT && (h(), e.preventDefault());
     };
     document.addEventListener("keydown", e);
     return () => {
@@ -1442,7 +1442,7 @@ function t9({
   }, [K, H]);
   let z = useCallback((e, t, s) => {
     U();
-    c(_$$to({
+    c(showModalHandler({
       type: _$$m,
       data: {
         asset: e,
@@ -1609,7 +1609,7 @@ function se({
     })]
   });
 }
-let sl = vv(() => Ez5?.boxSelectionState().isBoxSelecting, !1);
+let sl = vv(() => AppStateTsApi?.boxSelectionState().isBoxSelecting, !1);
 function sd() {
   let e = useContext(y0).focusSelectedNodes;
   return !!(getFeatureFlags().ce_il_layer_focus && e);
@@ -1637,7 +1637,7 @@ function sS() {
     isComparingChanges
   } = function () {
     let e = n0();
-    let t = useSelector(e => !!getFeatureFlags().version_diffing && e.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES);
+    let t = useSelector(e => !!getFeatureFlags().version_diffing && e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES);
     let s = useSelector(e => e.versionHistory.compareId);
     return useMemo(() => {
       if (!t || !s) return {
@@ -1678,7 +1678,7 @@ function sw({
 }) {
   let g = _$$M();
   let y = q5();
-  let m = useSelector(e => t || !y ? xae.LAYERS : e.leftPanel.activeTab);
+  let m = useSelector(e => t || !y ? UserInterfaceElements.LAYERS : e.leftPanel.activeTab);
   let f = useSelector(e => e.versionHistory);
   let b = dh();
   nn();
@@ -1703,8 +1703,8 @@ function sw({
   } = _$$d3({
     defaultIsOpen: !0
   });
-  let B = m === xae.LAYERS;
-  let q = AWq.getChunkChangeCount();
+  let B = m === UserInterfaceElements.LAYERS;
+  let q = HistoryChangesBindings.getChunkChangeCount();
   let Y = useStore();
   let J = useCallback(e => {
     v.showLayersPanel();
@@ -1883,11 +1883,11 @@ function sw({
       tabProps: el[FV],
       children: ec
     }), jsx(sN, {
-      isInTab: m === xae.ASSETS,
+      isInTab: m === UserInterfaceElements.ASSETS,
       tabProps: el[ay],
       children: eu
     }), jsx(sN, {
-      isInTab: m === xae.CHAT,
+      isInTab: m === UserInterfaceElements.CHAT,
       tabProps: el[n8],
       children: jsx(_$$A, {})
     })]
@@ -1916,7 +1916,7 @@ export let $$sC0 = memo(function () {
   bi();
   let E = X0();
   let S = !!t && e;
-  let w = ut(Ez5?.uiState().showCanvasSearch, !1);
+  let w = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let N = p8("showUi");
   let I = useAtomWithSubscription(_$$G);
   useEffect(() => {

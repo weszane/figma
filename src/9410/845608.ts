@@ -1,6 +1,6 @@
 import { useState, useContext, useCallback } from "react";
 import { Z } from "../905/829242";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import o from "../vendor/267721";
 import { Ay } from "../figma_app/432652";
@@ -9,7 +9,7 @@ import { x as _$$x } from "../9410/392104";
 import { Gs, p0, aj } from "../figma_app/949105";
 import { gC } from "../9410/483857";
 import { sF } from "../figma_app/193952";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 var l = o;
 function g(e) {
   return !!("SYMBOL" === e.type || e.isStateGroup || Gs(e));
@@ -104,7 +104,7 @@ export function $$y0() {
           clientLifecycleId: e
         }), i);
         if (i.aborted) return;
-        l7.user("apply-suggested-props", () => {
+        permissionScopeHandler.user("apply-suggested-props", () => {
           for (let e of s) e && x(e);
         });
         t(e => ({
@@ -112,7 +112,7 @@ export function $$y0() {
           total: e.total
         }));
       }
-      Y5.commit();
+      fullscreenValue.commit();
     }, [o]),
     progress: e
   };
@@ -122,7 +122,7 @@ export function $$b1() {
     submit: useCallback(_, []),
     apply: useCallback(e => {
       x(e);
-      Y5.commit();
+      fullscreenValue.commit();
     }, [])
   };
 }

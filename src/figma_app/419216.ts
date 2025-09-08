@@ -3,7 +3,7 @@ import { useRef, useState, useMemo, useCallback, useEffect, forwardRef, useLayou
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { J } from "../905/614223";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
@@ -41,7 +41,7 @@ export function $$w0(e) {
       width: 0,
       height: 0
     },
-    page: AD
+    page: defaultSessionLocalIDString
   });
   let [a, s] = useState({
     left: 0,

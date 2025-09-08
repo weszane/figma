@@ -7,7 +7,7 @@ import { createPortal } from "../vendor/944059";
 import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
-import { _gJ } from "../figma_app/763686";
+import { IAssertResource } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { U as _$$U } from "../figma_app/901889";
@@ -239,12 +239,12 @@ function U({
       "data-tooltip-type": H || B ? void 0 : Ib.TEXT,
       "data-tooltip": H || B ? void 0 : e.name,
       onClick: t => {
-        _ ? (ax(_gJ.PLUGIN), y(IN({
+        _ ? (ax(IAssertResource.PLUGIN), y(IN({
           fdPreviewResource: {
             id: e.plugin_id,
             type: _$$s2.PLUGIN
           }
-        }))) : C ? D(t) : l && (ax(_gJ.PLUGIN), u !== e.plugin_id && (r(), f("Dev Handoff Ran Pinned Plugin", {
+        }))) : C ? D(t) : l && (ax(IAssertResource.PLUGIN), u !== e.plugin_id && (r(), f("Dev Handoff Ran Pinned Plugin", {
           pluginId: e.plugin_id
         })), s(!1));
       },

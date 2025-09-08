@@ -1,5 +1,5 @@
 import { QR } from "../figma_app/273493";
-import { Ez5, Roq, qmM, NLJ, glU, btW } from "../figma_app/763686";
+import { AppStateTsApi, DuplicateType, InteractionCpp, DesignGraphElements, Fullscreen, SideType } from "../figma_app/763686";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { GJ, kP, Bm, ZR } from "../905/430950";
@@ -66,17 +66,17 @@ function h(e, {
 }
 function g(e, t, i) {
   let a = QR(1, 1, 1);
-  GJ(e, t, i, a, Ez5.getCanvasButton());
+  GJ(e, t, i, a, AppStateTsApi.getCanvasButton());
 }
 function f(e, t, i) {
   let a = QR(1, 1, 1);
-  kP(e, t, i, Ez5.getCanvasButton(), a);
+  kP(e, t, i, AppStateTsApi.getCanvasButton(), a);
 }
 export class $$$$_0 extends j {
   constructor(e) {
     super(e);
     this._state = "inactive";
-    this._insertionType = Roq.DUPLICATE;
+    this._insertionType = DuplicateType.DUPLICATE;
     this._canvasSpaceMousePosition = new M();
     this._hoveredFrameGuid = null;
     this._seriesMeasurementsFromActiveFrame = null;
@@ -85,20 +85,20 @@ export class $$$$_0 extends j {
   }
   _resetState() {
     this._state = "inactive";
-    this._insertionType = Roq.DUPLICATE;
+    this._insertionType = DuplicateType.DUPLICATE;
   }
   _getActiveFrameGuidOrNull() {
     return this._selectedFrameGuid ?? this._hoveredFrameGuid;
   }
   handleMouseLeave(e) {}
   handleMouseMove(e) {
-    if (this._state = "inactive", this._insertionType = Roq.DUPLICATE, this._canvasSpaceMousePosition = M.fromVectorD(e.canvasSpaceMouse()), !qmM || !qmM.isFrameQuickAddEnabled()) return;
+    if (this._state = "inactive", this._insertionType = DuplicateType.DUPLICATE, this._canvasSpaceMousePosition = M.fromVectorD(e.canvasSpaceMouse()), !InteractionCpp || !InteractionCpp.isFrameQuickAddEnabled()) return;
     let t = this._getActiveFrameGuidOrNull();
-    let i = qmM.setHoveredNodeForFrameQuickAdd(e, this._hoveredFrameGuid ?? d);
+    let i = InteractionCpp.setHoveredNodeForFrameQuickAdd(e, this._hoveredFrameGuid ?? d);
     this._hoveredFrameGuid = i === d ? null : i;
-    let n = qmM.getCurrentTool();
-    if (this._hoveredFrameGuid) this._selectedFrameGuid = null;else if (n === NLJ.FRAME && this._previousCurrentTool !== n) {
-      let t = qmM.getSingleSelectedNodeIfEligibleForFrameQuickAdd(e);
+    let n = InteractionCpp.getCurrentTool();
+    if (this._hoveredFrameGuid) this._selectedFrameGuid = null;else if (n === DesignGraphElements.FRAME && this._previousCurrentTool !== n) {
+      let t = InteractionCpp.getSingleSelectedNodeIfEligibleForFrameQuickAdd(e);
       this._selectedFrameGuid = t === d ? null : t;
     }
     this._previousCurrentTool = n;
@@ -107,15 +107,15 @@ export class $$$$_0 extends j {
       let i = getSingletonSceneGraph().get(l);
       if (!i || (t !== l && (this._seriesMeasurementsFromActiveFrame = function (e) {
         let t = getSingletonSceneGraph().get(e);
-        if (!qmM || !t) return null;
+        if (!InteractionCpp || !t) return null;
         let i = t.absoluteBoundingBox;
         let {
           gapWidthsForSourceFrame,
           heightOfShortestFrame,
           medianYPosition
-        } = qmM.getSeriesMeasurements(e);
-        let l = qmM.getDefaultGapWidthForFrameQuickAdd(e);
-        let d = qmM.getDefaultHeightForFrameQuickAdd(e);
+        } = InteractionCpp.getSeriesMeasurements(e);
+        let l = InteractionCpp.getDefaultGapWidthForFrameQuickAdd(e);
+        let d = InteractionCpp.getDefaultHeightForFrameQuickAdd(e);
         return {
           leftGapWidth: gapWidthsForSourceFrame.left,
           rightGapWidth: gapWidthsForSourceFrame.right,
@@ -128,7 +128,7 @@ export class $$$$_0 extends j {
         };
       }(l)), !this._seriesMeasurementsFromActiveFrame)) return;
       let n = i.absoluteBoundingBox;
-      let d = qmM.getMinimumAllowedGapWidthForFrameQuickAdd();
+      let d = InteractionCpp.getMinimumAllowedGapWidthForFrameQuickAdd();
       let c = p(this._seriesMeasurementsFromActiveFrame, d);
       if (!function (e, t, i) {
         let n = e.canvasSpaceViewportRect();
@@ -157,7 +157,7 @@ export class $$$$_0 extends j {
       }(e.viewport(), n, c)) return;
       this._state = this.getBehaviorStateOnMouseMove(e, n, d, c);
       this._insertionType = this.getInsertionTypeFromEvent(e);
-      u.includes(this._state) && (qmM.setEventCursor(e, "blackCursor"), e.accept(this));
+      u.includes(this._state) && (InteractionCpp.setEventCursor(e, "blackCursor"), e.accept(this));
     }
   }
   getBehaviorStateOnMouseMove(e, t, i, n) {
@@ -181,12 +181,12 @@ export class $$$$_0 extends j {
     return g || f ? "hoveredOutside" : this._selectedFrameGuid ? "frameAlreadySelected" : "inactive";
   }
   getInsertionTypeFromEvent(e) {
-    return e.isAltPressed() && "inactive" !== this._state ? Roq.BLANK : Roq.DUPLICATE;
+    return e.isAltPressed() && "inactive" !== this._state ? DuplicateType.BLANK : DuplicateType.DUPLICATE;
   }
   handleMouseDown(e) {
-    if (!qmM || !glU || this._hoveredFrameGuid && qmM.setHoveredNodeForFrameQuickAdd(e, this._hoveredFrameGuid) !== this._hoveredFrameGuid) return;
+    if (!InteractionCpp || !Fullscreen || this._hoveredFrameGuid && InteractionCpp.setHoveredNodeForFrameQuickAdd(e, this._hoveredFrameGuid) !== this._hoveredFrameGuid) return;
     let t = this._getActiveFrameGuidOrNull();
-    t && this._seriesMeasurementsFromActiveFrame && (this._insertionType = this.getInsertionTypeFromEvent(e), "hoveredOverButtonLeft" === this._state ? glU.createFrameFromQuickAdd(t, btW.LEFT, this._insertionType) : "hoveredOverButtonRight" === this._state && glU.createFrameFromQuickAdd(t, btW.RIGHT, this._insertionType), u.includes(this._state) ? e.accept(this) : this._resetState());
+    t && this._seriesMeasurementsFromActiveFrame && (this._insertionType = this.getInsertionTypeFromEvent(e), "hoveredOverButtonLeft" === this._state ? Fullscreen.createFrameFromQuickAdd(t, SideType.LEFT, this._insertionType) : "hoveredOverButtonRight" === this._state && Fullscreen.createFrameFromQuickAdd(t, SideType.RIGHT, this._insertionType), u.includes(this._state) ? e.accept(this) : this._resetState());
   }
   handleMouseDrag(e) {}
   handleMouseUp(e) {}
@@ -195,10 +195,10 @@ export class $$$$_0 extends j {
   reset() {}
   render(e, t) {
     let i = this._getActiveFrameGuidOrNull();
-    if (!i || !this._seriesMeasurementsFromActiveFrame || !qmM) return;
+    if (!i || !this._seriesMeasurementsFromActiveFrame || !InteractionCpp) return;
     let n = getSingletonSceneGraph().get(i);
     if (!n) return;
-    let a = qmM.getMinimumAllowedGapWidthForFrameQuickAdd();
+    let a = InteractionCpp.getMinimumAllowedGapWidthForFrameQuickAdd();
     let o = n.absoluteBoundingBox;
     let l = p(this._seriesMeasurementsFromActiveFrame, a);
     let {
@@ -211,7 +211,7 @@ export class $$$$_0 extends j {
       left: _left2,
       right: _right2
     } = m(o, l);
-    ("hoveredOverButtonLeft" === this._state || "hoveredOverButtonRight" === this._state) && this._insertionType === Roq.DUPLICATE && qmM.renderHoverOutlineAroundFrameForQuickAdd(i, e, t);
+    ("hoveredOverButtonLeft" === this._state || "hoveredOverButtonRight" === this._state) && this._insertionType === DuplicateType.DUPLICATE && InteractionCpp.renderHoverOutlineAroundFrameForQuickAdd(i, e, t);
     "inactive" !== this._state && this.renderHoveredState({
       leftDotOrButtonPosition: _left2,
       rightDotOrButtonPosition: _right2,
@@ -229,10 +229,10 @@ export class $$$$_0 extends j {
     shouldRenderLeftDotOrButton: a,
     shouldRenderRightDotOrButton: s
   }) {
-    if ("inactive" === this._state || !qmM) return;
-    let l = qmM.getIndicatorColorForFrameQuickAdd();
-    "hoveredOverButtonLeft" === this._state ? a && (this._insertionType === Roq.BLANK ? f(e, i, n) : g(e, i, n)) : a && ZR(e, i, n, l, 0);
-    "hoveredOverButtonRight" === this._state ? s && (this._insertionType === Roq.BLANK ? f(t, i, n) : g(t, i, n)) : s && ZR(t, i, n, l, 0);
+    if ("inactive" === this._state || !InteractionCpp) return;
+    let l = InteractionCpp.getIndicatorColorForFrameQuickAdd();
+    "hoveredOverButtonLeft" === this._state ? a && (this._insertionType === DuplicateType.BLANK ? f(e, i, n) : g(e, i, n)) : a && ZR(e, i, n, l, 0);
+    "hoveredOverButtonRight" === this._state ? s && (this._insertionType === DuplicateType.BLANK ? f(t, i, n) : g(t, i, n)) : s && ZR(t, i, n, l, 0);
   }
   renderUnderEditModeUI(e, t) {}
 }

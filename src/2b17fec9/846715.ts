@@ -3,7 +3,7 @@ import { useState, memo, useCallback, useEffect, useMemo, useContext, useRef, us
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
-import { NLJ, glU, lyf, cxo, V5h, VTL, m1T } from "../figma_app/763686";
+import { DesignGraphElements, Fullscreen, ViewType, ToolType, AlignmentPosition, ConfirmationLevel, LayoutTabType } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
@@ -42,7 +42,7 @@ import { Ao } from "../figma_app/751648";
 import { $n } from "../905/521428";
 import { a as _$$a2 } from "../905/948337";
 import { s as _$$s } from "../cssbuilder/589278";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { PE } from "../905/15667";
 import { YG } from "../figma_app/186402";
 import { FL, hv } from "../figma_app/544744";
@@ -98,7 +98,7 @@ import { B as _$$B } from "../figma_app/397954";
 import { bu, ri, s3, sT } from "../figma_app/955650";
 import { i as _$$i } from "../figma_app/109163";
 import { xJ } from "../2b17fec9/446151";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { TS, AF, V_, zS, MV } from "../figma_app/153399";
 import { k as _$$k } from "../905/545760";
 import { bL } from "../905/575478";
@@ -115,7 +115,7 @@ import { n6 } from "../9410/67768";
 import { f7, az } from "../2b17fec9/523222";
 import { s as _$$s4 } from "../2b17fec9/641273";
 import { xI } from "../figma_app/355754";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Yh } from "../figma_app/357047";
 import { ejp, nnJ } from "../figma_app/27776";
 var u = c;
@@ -138,7 +138,7 @@ function Q(e) {
     onClick: () => {
       if (!planUser || !plan) return;
       let e = FProductAccessType.WHITEBOARD;
-      t(_$$to({
+      t(showModalHandler({
         type: YG,
         data: {
           planParentId: plan.key.parentId,
@@ -229,11 +229,11 @@ let ej = {
   offsetY: 0
 };
 function eb() {
-  let e = useSelector(e => e.mirror.appModel.currentTool === NLJ.SELECT);
+  let e = useSelector(e => e.mirror.appModel.currentTool === DesignGraphElements.SELECT);
   let t = LR();
   let i = useCallback(() => {
     t(!1);
-    glU?.triggerActionInUserEditScope("set-tool-default-figjam", {
+    Fullscreen?.triggerActionInUserEditScope("set-tool-default-figjam", {
       source: fK
     });
   }, [t]);
@@ -254,11 +254,11 @@ function eb() {
   });
 }
 function ey() {
-  let e = useSelector(e => e.mirror.appModel.currentTool === NLJ.HAND);
+  let e = useSelector(e => e.mirror.appModel.currentTool === DesignGraphElements.HAND);
   let t = LR();
   let i = useCallback(() => {
     t(!1);
-    glU?.triggerActionInUserEditScope("set-tool-hand", {
+    Fullscreen?.triggerActionInUserEditScope("set-tool-hand", {
       source: fK
     });
   }, [t]);
@@ -475,34 +475,34 @@ function eq() {
     topLevelMode,
     editModeType
   } = rM(lW);
-  let s = topLevelMode === lyf.HISTORY;
+  let s = topLevelMode === ViewType.HISTORY;
   let o = uh();
   let d = _$$z3(editModeType);
   return jsxs(Fragment, {
     children: [d && jsxs(Fragment, {
       children: [jsx(_$$N3, {
-        toolId: NLJ.SELECT,
+        toolId: DesignGraphElements.SELECT,
         icon: jsx(_$$H, {}),
         onActivateTool: activateTool,
         activeToolId,
         tooltipText: getI18nString("fullscreen_actions.set-tool-default"),
-        tooltipShortcut: o(NLJ.SELECT)
+        tooltipShortcut: o(DesignGraphElements.SELECT)
       }), jsx(_$$N3, {
-        toolId: NLJ.HAND,
+        toolId: DesignGraphElements.HAND,
         icon: jsx(_$$t3, {}),
         onActivateTool: activateTool,
         activeToolId,
         tooltipText: getI18nString("fullscreen_actions.set-tool-hand"),
-        tooltipShortcut: o(NLJ.HAND)
+        tooltipShortcut: o(DesignGraphElements.HAND)
       })]
     }), !s && jsx(_$$N3, {
-      toolId: NLJ.COMMENTS,
+      toolId: DesignGraphElements.COMMENTS,
       icon: e > 0 ? jsx(_$$X3, {}) : jsx(_$$f, {}),
       onActivateTool: activateTool,
       activeToolId,
       recordingKey: Pt("toolbarView", "toolComment"),
       tooltipText: getI18nString("fullscreen_actions.comment"),
-      tooltipShortcut: o(NLJ.COMMENTS)
+      tooltipShortcut: o(DesignGraphElements.COMMENTS)
     }), jsx(_$$F, {})]
   });
 }
@@ -515,23 +515,23 @@ let e9 = memo(function ({
   let o = ri();
   let c = s3();
   let p = useAtomWithSubscription(_$$B);
-  let h = c && p === cxo.PENCIL_TOOL;
+  let h = c && p === ToolType.PENCIL_TOOL;
   let m = s || h;
   let [f, _] = useState(!1);
   let {
     paints
   } = useAtomWithSubscription(GI);
-  let [g, j] = useState(NLJ.VECTOR_PENCIL);
-  let [, b] = useState(NLJ.VECTOR_PENCIL);
-  let y = g === NLJ.VECTOR_PENCIL ? "set-tool-pencil" : g === NLJ.HIGHLIGHTER ? "set-tool-highlighter" : g === NLJ.ERASER ? "set-tool-eraser" : g === NLJ.WASHI_TAPE ? "set-tool-washi-tape" : "";
+  let [g, j] = useState(DesignGraphElements.VECTOR_PENCIL);
+  let [, b] = useState(DesignGraphElements.VECTOR_PENCIL);
+  let y = g === DesignGraphElements.VECTOR_PENCIL ? "set-tool-pencil" : g === DesignGraphElements.HIGHLIGHTER ? "set-tool-highlighter" : g === DesignGraphElements.ERASER ? "set-tool-eraser" : g === DesignGraphElements.WASHI_TAPE ? "set-tool-washi-tape" : "";
   useEffect(() => {
     o && o !== g && (b(g), j(o));
   }, [o, g, j, b]);
   let v = useCallback(() => {
     a(!1);
-    s ? glU?.triggerActionInUserEditScope("set-tool-default", {
+    s ? Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
       source: fK
-    }) : (glU?.triggerActionInUserEditScope(y, {
+    }) : (Fullscreen?.triggerActionInUserEditScope(y, {
       source: fK
     }), i({
       type: "open",
@@ -634,7 +634,7 @@ function tu({
   }, [t, closeColorPalettePicker]);
   let h = e => {
     a(e);
-    glU?.triggerActionInUserEditScope("set-tool-sticky", {
+    Fullscreen?.triggerActionInUserEditScope("set-tool-sticky", {
       source: fK
     });
   };
@@ -755,9 +755,9 @@ function th({
   let T = LR();
   let S = useCallback(() => {
     T(!1);
-    i ? glU?.triggerActionInUserEditScope("set-tool-default", {
+    i ? Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
       source: fK
-    }) : (glU?.triggerActionInUserEditScope("set-tool-sticky", {
+    }) : (Fullscreen?.triggerActionInUserEditScope("set-tool-sticky", {
       source: fK
     }), v({
       type: "open",
@@ -774,7 +774,7 @@ function th({
     onTouchEnd
   } = _$$W(S, w, !1);
   let R = useCallback((e, t) => {
-    l7.user("drop-sticky-on-canvas", () => glU?.dropDiagramItemOntoCanvas(NLJ.STICKY, Math.round(e.x), Math.round(e.y), Math.round(t.x), Math.round(t.y), V5h.TOP_LEFT, VTL.NO));
+    permissionScopeHandler.user("drop-sticky-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(DesignGraphElements.STICKY, Math.round(e.x), Math.round(e.y), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
     c(!1);
     h(!1);
     f(_$$k.DEFAULT);
@@ -901,7 +901,7 @@ function tb({
     isDisabled: e,
     isSelected: t,
     onClick: () => {
-      glU?.triggerActionInUserEditScope("toggle-straight-pencil", {
+      Fullscreen?.triggerActionInUserEditScope("toggle-straight-pencil", {
         source: fK
       });
     },
@@ -923,7 +923,7 @@ function tC() {
     isDisabled: !e,
     isSelected: !1,
     onClick: () => {
-      Y5.triggerActionInUserEditScope("undo", {
+      fullscreenValue.triggerActionInUserEditScope("undo", {
         source: fK
       });
     },
@@ -945,7 +945,7 @@ function tT() {
     isDisabled: !e,
     isSelected: !1,
     onClick: () => {
-      Y5.triggerActionInUserEditScope("redo", {
+      fullscreenValue.triggerActionInUserEditScope("redo", {
         source: fK
       });
     },
@@ -1029,11 +1029,11 @@ let tw = memo(function () {
   let er = Yg();
   let ea = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
-    Q === NLJ.SELECT || Q === NLJ.DROPPER_COLOR || _$$L(Q) && "pencil" === en.current || qW(Q) && "shape" === en.current || (Q === NLJ.CONNECTOR_ELBOWED || Q === NLJ.CONNECTOR_STRAIGHT || Q === NLJ.CONNECTOR_CURVED) && "shape" === en.current || Q === NLJ.STICKY && "sticky" === en.current || z({
+    Q === DesignGraphElements.SELECT || Q === DesignGraphElements.DROPPER_COLOR || _$$L(Q) && "pencil" === en.current || qW(Q) && "shape" === en.current || (Q === DesignGraphElements.CONNECTOR_ELBOWED || Q === DesignGraphElements.CONNECTOR_STRAIGHT || Q === DesignGraphElements.CONNECTOR_CURVED) && "shape" === en.current || Q === DesignGraphElements.STICKY && "sticky" === en.current || z({
       type: "close",
       source: _$$Yg.ToolSelected
     });
-    Q === NLJ.SELECT && "pencil" === en.current && z({
+    Q === DesignGraphElements.SELECT && "pencil" === en.current && z({
       type: "close",
       source: _$$Yg.ToolSelected
     });
@@ -1041,14 +1041,14 @@ let tw = memo(function () {
       type: "close",
       source: _$$Yg.ToolSelected
     });
-    !qW(Q) && Q !== NLJ.CONNECTOR_ELBOWED && Q !== NLJ.CONNECTOR_STRAIGHT || er || "shape" === en.current || et || z({
+    !qW(Q) && Q !== DesignGraphElements.CONNECTOR_ELBOWED && Q !== DesignGraphElements.CONNECTOR_STRAIGHT || er || "shape" === en.current || et || z({
       type: "open",
       tool: "shape"
     });
   }, [Q, J, ee, er, W, z, et]);
   useEffect(() => {
     let e = e => {
-      "Escape" === e.key && ea !== m1T.TEXT && z({
+      "Escape" === e.key && ea !== LayoutTabType.TEXT && z({
         type: "close",
         source: _$$Yg.KeyboardEsc
       });
@@ -1072,7 +1072,7 @@ let tw = memo(function () {
   }, [Q, z]);
   let es = useSelector(e => {
     let t = e.mirror.appModel.currentTool;
-    return t !== NLJ.VECTOR_PENCIL && t !== NLJ.HIGHLIGHTER;
+    return t !== DesignGraphElements.VECTOR_PENCIL && t !== DesignGraphElements.HIGHLIGHTER;
   });
   let eo = BI();
   let el = BrowserInfo.isIpad || BrowserInfo.isMeetDevice ? jsx(Fragment, {

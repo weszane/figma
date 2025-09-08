@@ -3,10 +3,10 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { arraysEqual } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
-import { nj } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { NLJ, glU, Ez5, Bko } from "../figma_app/763686";
-import { nc } from "../905/189185";
+import { DesignGraphElements, Fullscreen, AppStateTsApi, ImageCppBindings } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import _ from "../vendor/73823";
 import { A as _$$A } from "../vendor/90566";
@@ -25,7 +25,7 @@ import { A5 } from "../905/275640";
 import { aV, dH } from "../figma_app/722362";
 import { Ef, se, HS, yx } from "../figma_app/546509";
 import { WC, T$, wi } from "../figma_app/792783";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { zk } from "../figma_app/198712";
 import { t as _$$t } from "../905/192333";
 import { Yh } from "../figma_app/357047";
@@ -1017,19 +1017,19 @@ let en = () => {
 };
 let ei = () => en() ? "set-tool-default" : "set-tool-hand";
 export function $$ea2(e) {
-  return e === NLJ.CONNECTOR_ELBOWED || e === NLJ.CONNECTOR_STRAIGHT ? "CONNECTOR" : qW(e) ? "SHAPE" : e === NLJ.VECTOR_PENCIL ? "PENCIL" : e === NLJ.WASHI_TAPE ? "TAPE" : e === NLJ.HAND_SELECT ? "HANDSELECT" : e === NLJ.MULTISELECT ? "MULTISELECT" : NLJ[e];
+  return e === DesignGraphElements.CONNECTOR_ELBOWED || e === DesignGraphElements.CONNECTOR_STRAIGHT ? "CONNECTOR" : qW(e) ? "SHAPE" : e === DesignGraphElements.VECTOR_PENCIL ? "PENCIL" : e === DesignGraphElements.WASHI_TAPE ? "TAPE" : e === DesignGraphElements.HAND_SELECT ? "HANDSELECT" : e === DesignGraphElements.MULTISELECT ? "MULTISELECT" : DesignGraphElements[e];
 }
 export let $$es3 = new Map([["SELECT", "set-tool-default"], ["HAND", "set-tool-hand"], ["HANDSELECT", "set-tool-default"], ["MULTISELECT", "set-tool-multiselect"], ["PENCIL", "set-tool-pencil"], ["HIGHLIGHTER", "set-tool-highlighter"], ["ERASER", "set-tool-eraser"], ["TAPE", "set-tool-washi-tape"], ["LASSO", "set-tool-lasso"]]);
 export function $$eo1(e) {
   return ["PENCIL", "HIGHLIGHTER", "TAPE", "ERASER", "LASSO"].includes(e);
 }
 export function $$el4(e) {
-  glU.triggerActionInUserEditScope(e, {
+  Fullscreen.triggerActionInUserEditScope(e, {
     source: "figma_mobile"
   });
 }
-let ed = nc.user("ios-native-toolbar", e => {
-  glU.nativeToolbarInsertItemOntoCanvas(e);
+let ed = scopeAwareFunction.user("ios-native-toolbar", e => {
+  Fullscreen.nativeToolbarInsertItemOntoCanvas(e);
 });
 function ec(e) {
   if (void 0 !== e) switch (e) {
@@ -1474,7 +1474,7 @@ let e_ = () => {
   let {
     washiTapePaint
   } = useAtomWithSubscription(SK);
-  let r = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
+  let r = washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint?.image?.hash);
   useEffect(() => {
     e || r || Iw(M8(_$$B[0]));
   }, [r, e]);
@@ -1502,7 +1502,7 @@ export function $$em6() {
         n._native_toolbar_confirm_configuration = () => {
           clearTimeout(t);
           l(!0);
-          en() && Ez5?.makeDefaultToolHandSelect();
+          en() && AppStateTsApi?.makeDefaultToolHandSelect();
         };
       }
       t?.nativeToolbarAcceptConfiguration?.(r);
@@ -1559,7 +1559,7 @@ export function $$em6() {
     }, n._native_toolbar_set_tool_image_data = (e, t, r) => {
       if ("TAPE" === e) {
         let e = Vs(r);
-        glU.setCustomWashiTapeImageFromFile(e);
+        Fullscreen.setCustomWashiTapeImageFromFile(e);
       }
     }, n._native_toolbar_activate_submenu_item = e => {
       var t = e;
@@ -1582,10 +1582,10 @@ export function $$em6() {
           $$el4("toggle-straight-pencil");
           break;
         case "ELBOWED":
-          ed(NLJ.CONNECTOR_ELBOWED);
+          ed(DesignGraphElements.CONNECTOR_ELBOWED);
           break;
         case "STRAIGHT":
-          ed(NLJ.CONNECTOR_STRAIGHT);
+          ed(DesignGraphElements.CONNECTOR_STRAIGHT);
           break;
         case "SHAPE_NAME":
           let i = Jc.get(e);
@@ -1624,7 +1624,7 @@ let eg = (e, t = 0) => new Promise((r, n) => {
 let ef = async e => {
   let t;
   let r = _$$B.find(t => t.image === e);
-  if (!(t = r ? await gC(r) : Bko.getCompressedImage(e))) return Promise.resolve(null);
+  if (!(t = r ? await gC(r) : ImageCppBindings.getCompressedImage(e))) return Promise.resolve(null);
   {
     let e = "data:image/png;base64," + H9(t);
     let r = new Image();
@@ -1695,7 +1695,7 @@ export function $$eE0() {
   _$$h(() => {
     y && (e?.nativeToolbarUpdateActiveTool?.(y), e?.nativeToolbarUpdateMultiselectActive?.("MULTISELECT" === y));
   });
-  let b = ut(Ez5?.editorState().selectionEmpty, !0);
+  let b = getObservableValue(AppStateTsApi?.editorState().selectionEmpty, !0);
   let N = useMemo(() => LK("PENCIL"), []);
   let L = useAtomWithSubscription(GI);
   useEffect(() => {
@@ -1729,7 +1729,7 @@ export function $$eE0() {
   useEffect(() => {
     let t = B?.hash;
     if (t) {
-      let r = nj(t);
+      let r = sha1HexFromBytes(t);
       let i = FC.find(e => e.image === r);
       ef(r).then(t => {
         t && eg(jsx(Y, {
@@ -1766,8 +1766,8 @@ export function $$eE0() {
       });
     }
   }, [e, B]);
-  let G = ut(Ez5?.editorState().pencilStraightLine, !1);
-  let H = ut(Ez5?.editorState().shiftStraightLine, !1);
+  let G = getObservableValue(AppStateTsApi?.editorState().pencilStraightLine, !1);
+  let H = getObservableValue(AppStateTsApi?.editorState().shiftStraightLine, !1);
   let z = useMemo(() => {
     let e = [];
     E5.forEach((t, r) => {
@@ -1857,18 +1857,18 @@ export function $$eE0() {
         case "CONNECTOR":
           break;
         case "STICKY":
-          ed(NLJ.STICKY);
+          ed(DesignGraphElements.STICKY);
           break;
         case "TYPE":
-          ed(NLJ.TYPE);
+          ed(DesignGraphElements.TYPE);
           break;
         case "SECTION":
-          b ? ed(NLJ.SECTION) : (glU.triggerActionInUserEditScope("create-section-from-selection", {
+          b ? ed(DesignGraphElements.SECTION) : (Fullscreen.triggerActionInUserEditScope("create-section-from-selection", {
             source: "figma_mobile"
           }), $$el4("set-tool-default"));
           break;
         case "TABLE":
-          ed(NLJ.TABLE);
+          ed(DesignGraphElements.TABLE);
           break;
         case "STAMP":
           Z(r);

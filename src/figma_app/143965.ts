@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { V } from "../1577/311426";
-import { glU, Ez5 } from "../figma_app/763686";
-import { dI, Hr } from "../905/871411";
+import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
+import { sessionLocalIDToString, defaultSessionLocalID } from "../905/871411";
 import u from "classnames";
 import { s as _$$s } from "../figma_app/429226";
 import { getI18nString } from "../905/303541";
@@ -15,7 +15,7 @@ import { RK } from "../figma_app/815170";
 import { el, VG, js, _r, mj, cP } from "../figma_app/451499";
 import { m0 } from "../figma_app/976749";
 import { wr, Dh } from "../figma_app/741237";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
 import { hU, x6 } from "../figma_app/84580";
@@ -29,7 +29,7 @@ class x {
     this.formatter = e;
   }
   format(e) {
-    return !e || gl(e) ? "" : this.formatter.format(e);
+    return !e || isInvalidValue(e) ? "" : this.formatter.format(e);
   }
 }
 let N = () => getI18nString("inspect_panel.property.missing");
@@ -44,7 +44,7 @@ class C {
   getActionValue(e) {
     switch (e.connectionType) {
       case "INTERNAL_NODE":
-        let t = dI(e.transitionNodeID);
+        let t = sessionLocalIDToString(e.transitionNodeID);
         return this.nodeNameFormatter.format(t);
       case "URL":
         if (!e.connectionURL || e.connectionURL?.trim().length === 0) return N();
@@ -58,11 +58,11 @@ class C {
     let t = hU(e.transitionType, e.easingType, e.easingFunction, e.transitionDuration);
     let r = this.prototypeActionFormatter.format(mj(e));
     let n = this.getActionValue(e);
-    let i = dI(e.transitionNodeID) || void 0;
+    let i = sessionLocalIDToString(e.transitionNodeID) || void 0;
     let a = x6(e.easingType);
     let s = t.direction && ` ${t.direction.charAt(0)}${t.direction.toLowerCase().substring(1)}` || "";
     let o = this.behaviorFormatter.format(t.behavior ?? "INSTANT") + s;
-    let l = gl(t.easingFunction) ? [] : t.easingFunction;
+    let l = isInvalidValue(t.easingFunction) ? [] : t.easingFunction;
     let d = "CUSTOM_BEZIER" === t.easing ? l.map(e => parseFloat(e.toFixed(2))).join(", ") : this.sentenceCaseFormatter.format(t.easing);
     a && (l = l.map(e => parseFloat(e.toFixed(2))), d = "Spring");
     return {
@@ -72,7 +72,7 @@ class C {
       animation: o,
       hasAnimation: "INTERNAL_NODE" === e.connectionType,
       curve: "INSTANT" !== t.behavior ? d : void 0,
-      duration: "INSTANT" !== t.behavior && hS(t.duration) ? t.duration : void 0,
+      duration: "INSTANT" !== t.behavior && isValidValue(t.duration) ? t.duration : void 0,
       isSpringTransition: a,
       curveFunction: l,
       type: e.connectionType,
@@ -112,7 +112,7 @@ class C {
       event: t,
       ...this.getEventArgs(e.event),
       action: r,
-      guid: dI(e.id)
+      guid: sessionLocalIDToString(e.id)
     };
   }
 }
@@ -136,7 +136,7 @@ let M = e => {
   let n = D();
   let s = useDispatch();
   let o = useCallback(e => {
-    e && (glU.panToNode(e, !1), wr(), Dh([e]));
+    e && (Fullscreen.panToNode(e, !1), wr(), Dh([e]));
   }, []);
   useEffect(() => {
     let n = r.current;
@@ -207,8 +207,8 @@ function F(e) {
     children: jsx(V, {})
   }) : void 0;
   let b = action?.guid && c ? action.guid : void 0;
-  let T = b ? () => Ez5.canvasViewState().temporarilyHoveredNodes.set([b]) : void 0;
-  let v = b ? () => Ez5.canvasViewState().temporarilyHoveredNodes.set([]) : void 0;
+  let T = b ? () => AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([b]) : void 0;
+  let v = b ? () => AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]) : void 0;
   return action ? jsx(_p, {
     name: action.action,
     value: action.value,
@@ -288,16 +288,16 @@ export function $$U0({
   let u = t.map(e => d.format(e));
   let p = T4.useCopyAllInteractions(u);
   let m = M("instance_panel_return_to_node");
-  let g = s && s.length > 0 ? _$$s(s[0])?.interactionID : Hr;
+  let g = s && s.length > 0 ? _$$s(s[0])?.interactionID : defaultSessionLocalID;
   let f = useCallback((e, t, r, i) => jsx(j, {
     interaction: e,
     onActionClicked: m,
-    highlighted: e.guid === dI(g),
+    highlighted: e.guid === sessionLocalIDToString(g),
     isLast: i
   }), [m, g]);
   if (1 !== r) return null;
   let E = "SCROLLS" !== l || !!o && "NONE" !== o;
-  let y = !(t.length < 1 && hS(t));
+  let y = !(t.length < 1 && isValidValue(t));
   return y || E ? jsxs(VZ, {
     title: getI18nString("inspect_panel.interactions.title"),
     recordingKey: "interactions",

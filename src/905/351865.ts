@@ -1,4 +1,4 @@
-import { htN, ZEs, Ez5 } from "../figma_app/763686";
+import { CmsRepeaterHelpers, ChildRelationshipStatus, AppStateTsApi } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -11,7 +11,7 @@ export class $$c0 extends j {
   }
   render(e, t) {
     if (!atomStoreManager.get(C)) return;
-    let i = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
+    let i = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_IDENTICAL_CHILDREN) ?? [];
     let d = new Set(getSingletonSceneGraph().getDirectlySelectedNodes().map(e => e.id));
     for (let o = 0; o < i.length; o++) for (let l of i[o] ?? []) if (!d.has(l)) {
       let i = getSingletonSceneGraph().get(l);
@@ -21,8 +21,8 @@ export class $$c0 extends j {
         let d = e.canvasSpaceToViewportSpace(l);
         let c = new M(s.w, s.h).multiplyBy(e.canvasScale());
         let u = new _$$r(M.fromVectorD(d), M.fromVectorD(c));
-        if (Ez5) {
-          let e = 0 === o ? Ez5.getBorderFSDesignStrong() : Ez5.getBorderFSDesign();
+        if (AppStateTsApi) {
+          let e = 0 === o ? AppStateTsApi.getBorderFSDesignStrong() : AppStateTsApi.getBorderFSDesign();
           t.strokeRect(u, e, 1);
         }
       }

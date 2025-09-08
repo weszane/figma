@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { TU, xw, zw } from "../905/585727";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { dZ } from "../figma_app/459490";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -73,7 +73,7 @@ export function $$m1({
     value: o,
     onChange: e => t(e),
     children: [jsx(l9, {
-      label: jsx(h, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText("image_ai.model_type")
       })
     }), jsxs(mc, {

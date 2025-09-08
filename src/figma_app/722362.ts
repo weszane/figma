@@ -2,7 +2,7 @@ import { useMemo, useRef, useEffect, createContext, useContext } from "react";
 import { useStore, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { isEmptyObject } from "../figma_app/493477";
-import { juq } from "../figma_app/763686";
+import { FileSourceType } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
 import { selectWithShallowEqual } from "../905/103090";
 import { T } from "../905/868547";
@@ -12,7 +12,7 @@ export function $$_7() {
   return useSelector(u);
 }
 export function $$h3() {
-  return useMemo(() => new ReduxSceneGraph(juq.PLAYGROUND), []);
+  return useMemo(() => new ReduxSceneGraph(FileSourceType.PLAYGROUND), []);
 }
 export let $$m1 = () => useSelector(e => e.mirror.sceneGraphSelection);
 export function $$g5() {

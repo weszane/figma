@@ -2,9 +2,9 @@ import _require from "../svg/764361";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useContext, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
-import { glU, rXF, j0r } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
@@ -12,9 +12,9 @@ import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { Lk } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { TK } from "../905/129660";
 import { Ib } from "../905/129884";
@@ -56,21 +56,21 @@ export function $$M0({
   }, [f]);
   let I = useCallback(async e => {
     void 0 !== g ? await v(e => {
-      l7.user("editVariantVCMForTextStyleNode", () => {
-        glU.editVariantVCMForTextStyleNode(dI(p), g, "FONT_SIZE", e);
+      permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+        Fullscreen.editVariantVCMForTextStyleNode(sessionLocalIDToString(p), g, "FONT_SIZE", e);
       });
     }, () => {
-      l7.user("editVariantVCMForTextStyleNode", () => {
-        glU.clearVariantVCMFieldForTextStyleNode(dI(p), g, "FONT_SIZE");
+      permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+        Fullscreen.clearVariantVCMFieldForTextStyleNode(sessionLocalIDToString(p), g, "FONT_SIZE");
       });
-    }, e) : await v(e => updateVariableConsumption(y$(rXF.FLOAT, e)), clearVariableConsumption, e);
+    }, e) : await v(e => updateVariableConsumption(y$(VariableResolvedDataType.FLOAT, e)), clearVariableConsumption, e);
   }, [g, v, p, clearVariableConsumption, updateVariableConsumption]);
   return jsxs(hu, {
     boundVariableId: b,
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: I,
     children: [jsx(V5, {
-      variableScope: j0r.FONT_SIZE
+      variableScope: PropertyScope.FONT_SIZE
     }), jsx(j, {
       id: e,
       fontSize: t,
@@ -118,7 +118,7 @@ function j({
     } else {
       if (void 0 !== j) {
         if (!P) throw Error("Expected editingStyleGuid to be set when responsiveTextStyleVariantIndex is set");
-        l7.user("editVariantFontSizeForTextStyleNode", () => glU.editVariantFontSizeForTextStyleNode(dI(P), j, e));
+        permissionScopeHandler.user("editVariantFontSizeForTextStyleNode", () => Fullscreen.editVariantFontSizeForTextStyleNode(sessionLocalIDToString(P), j, e));
         return;
       }
       getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
@@ -127,11 +127,11 @@ function j({
       let i = {
         fontSize: e
       };
-      if (hS(K.lineHeight)) {
+      if (isValidValue(K.lineHeight)) {
         let e = TK(K, K.lineHeight);
         e !== K.lineHeight && (i.lineHeight = e);
       }
-      Y5.updateSelectionProperties(i, {
+      fullscreenValue.updateSelectionProperties(i, {
         shouldCommit: t
       });
       a2("fontSize");
@@ -188,7 +188,7 @@ function j({
           smallNudgeAmount,
           tooltipForScreenReadersOnly: !0,
           value: t,
-          willShowDropdown: () => (Y5.commit(), getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-type-panel-dropdown-show", {
+          willShowDropdown: () => (fullscreenValue.commit(), getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-type-panel-dropdown-show", {
             key: "fontSize"
           }), Promise.resolve()),
           children: $

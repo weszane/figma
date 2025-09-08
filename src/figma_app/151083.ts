@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { glU, YnC } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, SymbolOverrideType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { wm } from "../905/19536";
 import c from "../vendor/128080";
@@ -12,9 +12,9 @@ import { Pt } from "../figma_app/806412";
 import { c$, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { p9 } from "../figma_app/864723";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { c as _$$c } from "../905/210851";
 import { yV } from "../figma_app/516028";
 import { eS, aD } from "../figma_app/646357";
@@ -78,7 +78,7 @@ export function $$H1(e) {
       value: "restore-symbol-or-state-group",
       displayText: getI18nString("design_systems.instance_panel.restore_variant"),
       callback: () => {
-        Y5.triggerActionInUserEditScope("restore-symbol-or-state-group");
+        fullscreenValue.triggerActionInUserEditScope("restore-symbol-or-state-group");
       }
     }), onlyInstances && e.push({
       type: "option",
@@ -86,7 +86,7 @@ export function $$H1(e) {
       displayText: getI18nString("fullscreen_actions.detach-instance"),
       shortcut: detachInstanceShortcut,
       callback: () => {
-        l7.user("detach-instances", () => glU.detachInstances(instanceAndSublayerGUIDs, !0));
+        permissionScopeHandler.user("detach-instances", () => Fullscreen.detachInstances(instanceAndSublayerGUIDs, !0));
       }
     }), Yh(appModel, "push-changes-to-main") && 0 === nestedInstances.length && !isBackingSymbolSoftDeleted && (e.length > 0 && e.push({
       type: "separator"
@@ -95,50 +95,50 @@ export function $$H1(e) {
       value: "push-changes-to-main",
       displayText: getI18nString("fullscreen_actions.push-changes-to-main"),
       callback: () => {
-        Y5.triggerActionInUserEditScope("push-changes-to-main");
+        fullscreenValue.triggerActionInUserEditScope("push-changes-to-main");
       }
     })), resettableInstanceOverrides && Object.values(resettableInstanceOverrides).some(e => e)) {
       if (Object.keys(resettableInstanceOverrides).forEach(n => {
         let i = parseInt(n);
-        resettableInstanceOverrides?.[i] && (e.length > 0 && i === YnC.OVERRIDES_FOR_LAYER_AND_SUBLAYERS && e.push({
+        resettableInstanceOverrides?.[i] && (e.length > 0 && i === SymbolOverrideType.OVERRIDES_FOR_LAYER_AND_SUBLAYERS && e.push({
           type: "separator"
         }), e.push({
           type: "option",
           value: i,
           displayText: function (e) {
             switch (e) {
-              case YnC.OVERRIDES_FOR_LAYER_AND_SUBLAYERS:
+              case SymbolOverrideType.OVERRIDES_FOR_LAYER_AND_SUBLAYERS:
                 return getI18nString("design_systems.instance_panel.reset_all_changes");
-              case YnC.EXPORTS:
+              case SymbolOverrideType.EXPORTS:
                 return getI18nString("design_systems.instance_panel.reset_exports");
-              case YnC.EFFECTS:
+              case SymbolOverrideType.EFFECTS:
                 return getI18nString("design_systems.instance_panel.reset_effects");
-              case YnC.LAYER:
+              case SymbolOverrideType.LAYER:
                 return getI18nString("design_systems.instance_panel.reset_others");
-              case YnC.VISIBLE:
+              case SymbolOverrideType.VISIBLE:
                 return getI18nString("design_systems.instance_panel.reset_visibility");
-              case YnC.NAME:
+              case SymbolOverrideType.NAME:
                 return getI18nString("design_systems.instance_panel.reset_name");
-              case YnC.FILL:
+              case SymbolOverrideType.FILL:
                 return getI18nString("design_systems.instance_panel.reset_fill");
-              case YnC.STROKE:
+              case SymbolOverrideType.STROKE:
                 return getI18nString("design_systems.instance_panel.reset_stroke");
-              case YnC.TEXT:
+              case SymbolOverrideType.TEXT:
                 return getI18nString("design_systems.instance_panel.reset_text");
-              case YnC.TEXT_STYLE:
+              case SymbolOverrideType.TEXT_STYLE:
                 return getI18nString("design_systems.instance_panel.reset_text_style");
-              case YnC.SIZE:
+              case SymbolOverrideType.SIZE:
                 return getI18nString("design_systems.instance_panel.reset_size");
-              case YnC.PROTOTYPE_INTERACTIONS:
+              case SymbolOverrideType.PROTOTYPE_INTERACTIONS:
                 return getI18nString("design_systems.instance_panel.reset_interactions");
-              case YnC.OVERLAY:
+              case SymbolOverrideType.OVERLAY:
                 return getI18nString("design_systems.instance_panel.reset_overlay");
-              case YnC.NUM_VALUES:
+              case SymbolOverrideType.NUM_VALUES:
             }
             return "";
           }(i),
           callback: () => {
-            l7.user("reset-overrides", () => glU.resetSymbolOverridesForNodes(instanceAndSublayerGUIDs, i));
+            permissionScopeHandler.user("reset-overrides", () => Fullscreen.resetSymbolOverridesForNodes(instanceAndSublayerGUIDs, i));
           }
         }));
       }), p) for (let t in p) for (let r in p[t]) {
@@ -150,7 +150,7 @@ export function $$H1(e) {
             assignmentName: n.name
           }),
           callback: () => {
-            l7.user("reset-prop-assignments", () => glU.resetComponentPropAssignmentForInstances(n.instanceGUIDs, r));
+            permissionScopeHandler.user("reset-prop-assignments", () => Fullscreen.resetComponentPropAssignmentForInstances(n.instanceGUIDs, r));
           }
         });
       }
@@ -160,7 +160,7 @@ export function $$H1(e) {
       });
       e.push({
         type: "option",
-        value: YnC.OVERRIDES_FOR_LAYER_AND_SUBLAYERS,
+        value: SymbolOverrideType.OVERRIDES_FOR_LAYER_AND_SUBLAYERS,
         displayText: getI18nString("design_systems.instance_panel.no_changes_to_reset"),
         callback: () => {},
         disabled: !0
@@ -275,7 +275,7 @@ export function $$Y3(e) {
   }), [e]);
   let u = jX(c);
   let _ = useCallback(() => {
-    d(to({
+    d(showModalHandler({
       type: $$et0,
       data: c
     }));

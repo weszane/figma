@@ -4,7 +4,7 @@ import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { $ } from "../figma_app/938538";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Tc } from "../905/797478";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Y } from "../905/1768";
 import { qM } from "../9410/607036";
 let $$p1 = atom(-1);
@@ -17,7 +17,7 @@ export function $$m0({
 }) {
   let [f, g] = useAtomValueAndSetter($$p1);
   let _ = useCallback((e = !1) => {
-    e && Y5.triggerAction("set-tool-default", null);
+    e && fullscreenValue.triggerAction("set-tool-default", null);
     g(-1);
   }, [g]);
   let x = useRef(null);

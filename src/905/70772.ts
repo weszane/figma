@@ -10,12 +10,12 @@ import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { $ } from "../905/355181";
 import { j7 } from "../905/929976";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { jD } from "../905/765855";
 import { Dm, DT } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
 import { Ib } from "../905/129884";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { UR } from "../905/301347";
 import { b as _$$b } from "../905/168657";
 import { d_ } from "../figma_app/918700";
@@ -77,7 +77,7 @@ let C = {
   crossOrigin: "use-credentials"
 };
 var T = (e => (e[e.LEFT = -1] = "LEFT", e[e.RIGHT = 1] = "RIGHT", e))(T || {});
-export let $$k0 = Ju(function (e) {
+export let $$k0 = registerModal(function (e) {
   let t = useDispatch();
   let [i, b] = useState(e.selectedIdx);
   let T = useRef(null);
@@ -118,7 +118,7 @@ export let $$k0 = Ju(function (e) {
       U(1);
     }
   };
-  let G = () => (t(Lo()), !0);
+  let G = () => (t(popModalStack()), !0);
   O1(G, KD.FULL_SCREEN_MODAL);
   let z = (e, i) => {
     e.preventDefault();
@@ -233,5 +233,5 @@ export let $$k0 = Ju(function (e) {
       })]
     })
   });
-}, "AttachmentDetailModal", ZU.NO);
+}, "AttachmentDetailModal", ModalSupportsBackground.NO);
 export const q = $$k0;

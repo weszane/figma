@@ -4,16 +4,16 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { B } from "../905/872019";
 import { _ as _$$_ } from "../905/862468";
-import { X3B, FAf, uQ6 } from "../figma_app/763686";
+import { PrototypingTsApi, DesignWorkspace, ActionType } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Uz, xH } from "../905/63728";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tv } from "../figma_app/311375";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ay } from "../905/281495";
 import { aY, NT, tJ } from "../figma_app/741237";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Zh } from "../figma_app/2590";
 import { Yh } from "../figma_app/357047";
 import { d as _$$d } from "../figma_app/550089";
@@ -37,7 +37,7 @@ export function $$M1() {
   });
 }
 function F(e) {
-  return X3B.getMagicLinkSelectionInfo().selectedDisplayAmount;
+  return PrototypingTsApi.getMagicLinkSelectionInfo().selectedDisplayAmount;
 }
 function j() {
   let e = useDispatch();
@@ -52,9 +52,9 @@ function j() {
     close
   } = cq();
   let g = useRef(null);
-  let b = ut(aY(), FAf.DESIGN);
+  let b = getObservableValue(aY(), DesignWorkspace.DESIGN);
   useEffect(() => {
-    state === qy.INITIAL && null === g.current && (g.current = b, NT(FAf.PROTOTYPE));
+    state === qy.INITIAL && null === g.current && (g.current = b, NT(DesignWorkspace.PROTOTYPE));
   }, [state, b]);
   useEffect(() => () => {
     state === qy.INITIAL && null !== g.current && NT(g.current);
@@ -67,7 +67,7 @@ function j() {
     tlfAmount,
     onlyTopLevelNodesSelected,
     topLevelFrameIds
-  } = X3B.getMagicLinkSelectionInfo();
+  } = PrototypingTsApi.getMagicLinkSelectionInfo();
   let G = !onlyTopLevelNodesSelected;
   switch (useEffect(() => {
     if (state === qy.RUNNING && G) {
@@ -112,7 +112,7 @@ function j() {
       });
     case qy.RUNNING:
       T(!1);
-      Y5.triggerAction("start-magic-link");
+      fullscreenValue.triggerAction("start-magic-link");
       return jsx(_$$F, {
         onCancel: () => {
           stop();
@@ -127,7 +127,7 @@ function j() {
         aiTrackingContext
       });
     case qy.ERROR:
-      if (Y5.triggerAction("end-magic-link"), t.error instanceof ft) {
+      if (fullscreenValue.triggerAction("end-magic-link"), t.error instanceof ft) {
         e(Zh({
           name: "prototype.ai_magic_link_custom_error",
           params: {
@@ -163,7 +163,7 @@ function j() {
         aiTrackingContext
       });
     case qy.CANCELLED:
-      Y5.triggerAction("end-magic-link");
+      fullscreenValue.triggerAction("end-magic-link");
       return null;
     default:
       throwTypeError(state);
@@ -179,13 +179,13 @@ function U() {
           moduleToOpen: {
             type: "custom",
             module: jsx(_$$A, {
-              source: uQ6.MAGIC_LINK
+              source: ActionType.MAGIC_LINK
             }),
             name: Sn.RENAME_LAYERS_TOAST,
             beforeModuleOpen: () => {
               cT(JT.MAGIC_LINK);
               Yh(debugState.getState().mirror.appModel, JT.AUTO_RENAME_LAYERS) && Ag(JT.AUTO_RENAME_LAYERS, Ay, {
-                source: uQ6.MAGIC_LINK,
+                source: ActionType.MAGIC_LINK,
                 overwriteNames: !1
               });
             }

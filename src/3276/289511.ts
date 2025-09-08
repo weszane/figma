@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { YQ } from "../905/502364";
 import { jD } from "../905/765855";
 import { KE, En } from "../905/116101";
@@ -12,9 +12,9 @@ export function $$m0(e, t) {
     YQ({
       id: "figjam-saves"
     });
-    e ? (n(KE()), glU?.triggerActionInUserEditScope("set-tool-default", {
+    e ? (n(KE()), Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
       source: fK
-    })) : (glU?.triggerActionInUserEditScope("clear-tool", {
+    })) : (Fullscreen?.triggerActionInUserEditScope("clear-tool", {
       source: fK
     }), n(jD()), n(En({
       initialX: 0,

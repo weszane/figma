@@ -1,4 +1,4 @@
-import { By } from "../905/816730";
+import { PropTypes } from "../905/816730";
 import { InternalError } from "../905/845428";
 function a(e, t) {
   let i = {
@@ -9,171 +9,171 @@ function a(e, t) {
   });
   return i;
 }
-let s = By.exact({
-  vertical: By.$$float.isOptional,
-  horizontal: By.$$float.isOptional
+let s = PropTypes.exact({
+  vertical: PropTypes.$$float.isOptional,
+  horizontal: PropTypes.$$float.isOptional
 });
-let o = By.exact({
-  top: By.$$float.isOptional,
-  left: By.$$float.isOptional,
-  bottom: By.$$float.isOptional,
-  right: By.$$float.isOptional
+let o = PropTypes.exact({
+  top: PropTypes.$$float.isOptional,
+  left: PropTypes.$$float.isOptional,
+  bottom: PropTypes.$$float.isOptional,
+  right: PropTypes.$$float.isOptional
 });
-let l = By.oneOf([By.$$float, o, s]);
-let d = By.oneOf([By.$$float, "fill-parent"]);
-let c = By.oneOf([d, "hug-contents"]);
-let u = By.$$float.isOptional;
-let p = By.oneOf(["center", "start", "end"]);
-let m = By.exact({
-  horizontal: By.oneOf([By.$$float, "auto"]).isOptional,
-  vertical: By.oneOf([By.$$float, "auto"]).isOptional
+let l = PropTypes.oneOf([PropTypes.$$float, o, s]);
+let d = PropTypes.oneOf([PropTypes.$$float, "fill-parent"]);
+let c = PropTypes.oneOf([d, "hug-contents"]);
+let u = PropTypes.$$float.isOptional;
+let p = PropTypes.oneOf(["center", "start", "end"]);
+let m = PropTypes.exact({
+  horizontal: PropTypes.oneOf([PropTypes.$$float, "auto"]).isOptional,
+  vertical: PropTypes.oneOf([PropTypes.$$float, "auto"]).isOptional
 });
 let h = {
-  spacing: By.oneOf([By.$$float, "auto", m]).isOptional,
+  spacing: PropTypes.oneOf([PropTypes.$$float, "auto", m]).isOptional,
   padding: l.isOptional,
-  direction: By.oneOf(["horizontal", "vertical"]).isOptional,
+  direction: PropTypes.oneOf(["horizontal", "vertical"]).isOptional,
   horizontalAlignItems: p.isOptional,
-  verticalAlignItems: By.oneOf([p, "baseline"]).isOptional,
-  wrap: By.bool.isOptional
+  verticalAlignItems: PropTypes.oneOf([p, "baseline"]).isOptional,
+  wrap: PropTypes.bool.isOptional
 };
 let g = {
   width: c.isOptional,
   height: c.isOptional
 };
-let f = By.oneOf([By.exact({
+let f = PropTypes.oneOf([PropTypes.exact({
   type: "top",
-  offset: By.$$float
-}), By.exact({
+  offset: PropTypes.$$float
+}), PropTypes.exact({
   type: "bottom",
-  offset: By.$$float
-}), By.exact({
+  offset: PropTypes.$$float
+}), PropTypes.exact({
   type: "center",
-  offset: By.$$float
-}), By.exact({
+  offset: PropTypes.$$float
+}), PropTypes.exact({
   type: "top-bottom",
-  topOffset: By.$$float,
-  bottomOffset: By.$$float
-}), By.exact({
+  topOffset: PropTypes.$$float,
+  bottomOffset: PropTypes.$$float
+}), PropTypes.exact({
   type: "vertical-scale",
-  topOffsetPercent: By.$$float,
-  bottomOffsetPercent: By.$$float
+  topOffsetPercent: PropTypes.$$float,
+  bottomOffsetPercent: PropTypes.$$float
 })]);
-let _ = By.oneOf([By.exact({
+let _ = PropTypes.oneOf([PropTypes.exact({
   type: "left",
-  offset: By.$$float
-}), By.exact({
+  offset: PropTypes.$$float
+}), PropTypes.exact({
   type: "right",
-  offset: By.$$float
-}), By.exact({
+  offset: PropTypes.$$float
+}), PropTypes.exact({
   type: "center",
-  offset: By.$$float
-}), By.exact({
+  offset: PropTypes.$$float
+}), PropTypes.exact({
   type: "left-right",
-  leftOffset: By.$$float,
-  rightOffset: By.$$float
-}), By.exact({
+  leftOffset: PropTypes.$$float,
+  rightOffset: PropTypes.$$float
+}), PropTypes.exact({
   type: "horizontal-scale",
-  leftOffsetPercent: By.$$float,
-  rightOffsetPercent: By.$$float
+  leftOffsetPercent: PropTypes.$$float,
+  rightOffsetPercent: PropTypes.$$float
 })]);
-let A = By.oneOf(["visible", "hidden", "scroll"]);
-let y = By.oneOf(["pass-through", "normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]);
-let b = By.string;
-let v = By.exact({
-  r: By.$$float,
-  g: By.$$float,
-  b: By.$$float,
-  a: By.$$float
+let A = PropTypes.oneOf(["visible", "hidden", "scroll"]);
+let y = PropTypes.oneOf(["pass-through", "normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]);
+let b = PropTypes.string;
+let v = PropTypes.exact({
+  r: PropTypes.$$float,
+  g: PropTypes.$$float,
+  b: PropTypes.$$float,
+  a: PropTypes.$$float
 });
-let I = By.exact({
-  x: By.$$float,
-  y: By.$$float
+let I = PropTypes.exact({
+  x: PropTypes.$$float,
+  y: PropTypes.$$float
 });
 let E = {
-  x: By.oneOf([By.$$float, _]).isOptional,
-  y: By.oneOf([By.$$float, f]).isOptional
+  x: PropTypes.oneOf([PropTypes.$$float, _]).isOptional,
+  y: PropTypes.oneOf([PropTypes.$$float, f]).isOptional
 };
-let x = By.exact({
+let x = PropTypes.exact({
   type: "drop-shadow",
-  color: By.oneOf([b, v]),
+  color: PropTypes.oneOf([b, v]),
   offset: I,
-  blur: By.$$float,
+  blur: PropTypes.$$float,
   blendMode: y.isOptional,
-  spread: By.$$float.isOptional,
-  visible: By.bool.isOptional,
-  showShadowBehindNode: By.bool.isOptional
+  spread: PropTypes.$$float.isOptional,
+  visible: PropTypes.bool.isOptional,
+  showShadowBehindNode: PropTypes.bool.isOptional
 });
-let S = By.exact({
+let S = PropTypes.exact({
   type: "inner-shadow",
-  color: By.oneOf([b, v]),
+  color: PropTypes.oneOf([b, v]),
   offset: I,
-  blur: By.$$float,
+  blur: PropTypes.$$float,
   blendMode: y.isOptional,
-  spread: By.$$float.isOptional,
-  visible: By.bool.isOptional
+  spread: PropTypes.$$float.isOptional,
+  visible: PropTypes.bool.isOptional
 });
-let w = By.exact({
-  type: By.oneOf(["layer-blur", "background-blur"]),
-  blur: By.$$float,
-  visible: By.bool.isOptional
+let w = PropTypes.exact({
+  type: PropTypes.oneOf(["layer-blur", "background-blur"]),
+  blur: PropTypes.$$float,
+  visible: PropTypes.bool.isOptional
 });
-let C = By.oneOf([x, S, w]);
+let C = PropTypes.oneOf([x, S, w]);
 let T = {
   blendMode: y.isOptional,
-  opacity: By.$$float.isOptional,
-  effect: By.oneOf([C, By.arrayOf(C)]).isOptional,
+  opacity: PropTypes.$$float.isOptional,
+  effect: PropTypes.oneOf([C, PropTypes.arrayOf(C)]).isOptional,
   ...E,
-  name: By.string.isOptional,
-  hidden: By.bool.isOptional
+  name: PropTypes.string.isOptional,
+  hidden: PropTypes.bool.isOptional
 };
 let k = {
-  type: By.oneOf(["image", "solid", "gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
+  type: PropTypes.oneOf(["image", "solid", "gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
   blendMode: y.isOptional,
-  visible: By.bool.isOptional,
-  opacity: By.$$float.isOptional
+  visible: PropTypes.bool.isOptional,
+  opacity: PropTypes.$$float.isOptional
 };
-let R = By.exact({
+let R = PropTypes.exact({
   ...k,
   type: "solid",
-  color: By.oneOf([v, b])
+  color: PropTypes.oneOf([v, b])
 });
-let N = By.exact({
-  position: By.$$float,
+let N = PropTypes.exact({
+  position: PropTypes.$$float,
   color: v
 });
-let P = By.exact({
+let P = PropTypes.exact({
   ...k,
-  type: By.oneOf(["gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
-  gradientHandlePositions: By.arrayOf(I),
-  gradientStops: By.arrayOf(N)
+  type: PropTypes.oneOf(["gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
+  gradientHandlePositions: PropTypes.arrayOf(I),
+  gradientStops: PropTypes.arrayOf(N)
 });
-let O = By.arrayOf(By.arrayOf(By.$$float));
-let D = By.oneOf(["fill", "fit", "tile", "crop"]);
-let L = By.exact({
+let O = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.$$float));
+let D = PropTypes.oneOf(["fill", "fit", "tile", "crop"]);
+let L = PropTypes.exact({
   ...k,
   type: "image",
-  src: By.string.isOptional,
-  imageHash: By.string.isOptional,
-  imageSize: By.exact({
-    width: By.$$float,
-    height: By.$$float
+  src: PropTypes.string.isOptional,
+  imageHash: PropTypes.string.isOptional,
+  imageSize: PropTypes.exact({
+    width: PropTypes.$$float,
+    height: PropTypes.$$float
   }).isOptional,
   scaleMode: D.isOptional,
   imageTransform: O.isOptional,
-  scalingFactor: By.$$float.isOptional,
-  rotation: By.$$float.isOptional,
-  imageRef: By.string.isOptional
+  scalingFactor: PropTypes.$$float.isOptional,
+  rotation: PropTypes.$$float.isOptional,
+  imageRef: PropTypes.string.isOptional
 });
-let F = By.oneOf([R, P, L]);
-let M = By.oneOf(["inside", "outside", "center"]);
-let j = By.arrayOf(By.$$float.min(0));
-let U = By.oneOf([P, R]);
-let B = By.oneOf([b, v, U, By.arrayOf(U)]);
-let V = By.oneOf([b, v, F, By.arrayOf(U)]);
+let F = PropTypes.oneOf([R, P, L]);
+let M = PropTypes.oneOf(["inside", "outside", "center"]);
+let j = PropTypes.arrayOf(PropTypes.$$float.min(0));
+let U = PropTypes.oneOf([P, R]);
+let B = PropTypes.oneOf([b, v, U, PropTypes.arrayOf(U)]);
+let V = PropTypes.oneOf([b, v, F, PropTypes.arrayOf(U)]);
 let G = {
   fill: V.isOptional,
   stroke: B.isOptional,
-  strokeWidth: By.$$float.isOptional,
+  strokeWidth: PropTypes.$$float.isOptional,
   strokeAlign: M.isOptional,
   strokeDashPattern: j.isOptional
 };
@@ -182,31 +182,31 @@ let z = {
   height: d.isOptional
 };
 let H = {
-  rotation: By.$$float.isOptional,
-  flipVertical: By.bool.isOptional
+  rotation: PropTypes.$$float.isOptional,
+  flipVertical: PropTypes.bool.isOptional
 };
 let W = {
-  cornerRadius: By.oneOf([By.$$float, By.exact({
-    topLeft: By.$$float.isOptional,
-    topRight: By.$$float.isOptional,
-    bottomLeft: By.$$float.isOptional,
-    bottomRight: By.$$float.isOptional
+  cornerRadius: PropTypes.oneOf([PropTypes.$$float, PropTypes.exact({
+    topLeft: PropTypes.$$float.isOptional,
+    topRight: PropTypes.$$float.isOptional,
+    bottomLeft: PropTypes.$$float.isOptional,
+    bottomRight: PropTypes.$$float.isOptional
   })]).isOptional
 };
-let K = By.oneOf([100, 200, 300, 400, 500, 600, 700, 800, 900]);
-let Y = By.oneOf(["thin", "extra-light", "light", "normal", "medium", "semi-bold", "bold", "extra-bold", "black"]);
-let q = By.oneOf([K, Y]);
+let K = PropTypes.oneOf([100, 200, 300, 400, 500, 600, 700, 800, 900]);
+let Y = PropTypes.oneOf(["thin", "extra-light", "light", "normal", "medium", "semi-bold", "bold", "extra-bold", "black"]);
+let q = PropTypes.oneOf([K, Y]);
 let $ = {
-  fontFamily: By.string.isOptional,
-  letterSpacing: By.oneOf([By.$$float, By.string]).isOptional,
-  textDecoration: By.oneOf(["none", "strikethrough", "underline"]).isOptional,
-  fontSize: By.$$float.isOptional,
-  italic: By.bool.isOptional,
-  textCase: By.oneOf(["upper", "lower", "title", "original", "small-caps", "small-caps-forced"]).isOptional,
+  fontFamily: PropTypes.string.isOptional,
+  letterSpacing: PropTypes.oneOf([PropTypes.$$float, PropTypes.string]).isOptional,
+  textDecoration: PropTypes.oneOf(["none", "strikethrough", "underline"]).isOptional,
+  fontSize: PropTypes.$$float.isOptional,
+  italic: PropTypes.bool.isOptional,
+  textCase: PropTypes.oneOf(["upper", "lower", "title", "original", "small-caps", "small-caps-forced"]).isOptional,
   fontWeight: q.isOptional,
-  fontPostScriptName: By.string.isOptional,
-  href: By.string.isOptional,
-  fill: By.oneOf([b, v, F, By.arrayOf(F)]).isOptional
+  fontPostScriptName: PropTypes.string.isOptional,
+  href: PropTypes.string.isOptional,
+  fill: PropTypes.oneOf([b, v, F, PropTypes.arrayOf(F)]).isOptional
 };
 let Z = {
   ...T,
@@ -235,7 +235,7 @@ let J = {
   ...H,
   ...a(["strokeAlign"], G),
   length: d.isOptional,
-  strokeCap: By.oneOf(["none", "round", "square", "arrow-lines", "arrow-equilateral"]).isOptional
+  strokeCap: PropTypes.oneOf(["none", "round", "square", "arrow-lines", "arrow-equilateral"]).isOptional
 };
 let ee = {
   ...T,
@@ -243,37 +243,37 @@ let ee = {
   ...H,
   ...$,
   ...a(["fill"], G),
-  paragraphIndent: By.$$float.isOptional,
-  paragraphSpacing: By.$$float.isOptional,
-  horizontalAlignText: By.oneOf(["left", "right", "center", "justified"]).isOptional,
-  verticalAlignText: By.oneOf(["top", "center", "bottom"]).isOptional,
-  lineHeight: By.oneOf([By.$$float, By.string, "auto"]).isOptional,
-  truncate: By.oneOf([By.bool, By.integer]).isOptional
+  paragraphIndent: PropTypes.$$float.isOptional,
+  paragraphSpacing: PropTypes.$$float.isOptional,
+  horizontalAlignText: PropTypes.oneOf(["left", "right", "center", "justified"]).isOptional,
+  verticalAlignText: PropTypes.oneOf(["top", "center", "bottom"]).isOptional,
+  lineHeight: PropTypes.oneOf([PropTypes.$$float, PropTypes.string, "auto"]).isOptional,
+  truncate: PropTypes.oneOf([PropTypes.bool, PropTypes.integer]).isOptional
 };
 a(["fill"], X);
-By.oneOf([By.string, L]);
+PropTypes.oneOf([PropTypes.string, L]);
 let et = {
   ...a(["width", "height"], Z),
   ...h,
   ...g
 };
-let ei = By.oneOf([By.dictionaryOf(By.any), By.arrayOf(By.any), By.string, null, void 0]);
+let ei = PropTypes.oneOf([PropTypes.dictionaryOf(PropTypes.any), PropTypes.arrayOf(PropTypes.any), PropTypes.string, null, void 0]);
 let en = {
-  children: By.oneOf([ei, By.arrayOf(ei)]).isOptional
+  children: PropTypes.oneOf([ei, PropTypes.arrayOf(ei)]).isOptional
 };
 let er = {
-  hoverStyle: By.exact({
+  hoverStyle: PropTypes.exact({
     fill: V.isOptional,
     stroke: B.isOptional,
-    opacity: By.$$float.isOptional
+    opacity: PropTypes.$$float.isOptional
   }).isOptional
 };
 let ea = {
   ...T,
-  onClick: By.any.isOptional,
-  tooltip: By.string.isOptional,
+  onClick: PropTypes.any.isOptional,
+  tooltip: PropTypes.string.isOptional,
   ...er,
-  positioning: By.oneOf(["auto", "absolute"]).isOptional
+  positioning: PropTypes.oneOf(["auto", "absolute"]).isOptional
 };
 let es = {
   minWidth: u,
@@ -285,16 +285,16 @@ let eo = e => ({
   ...ea,
   ...es,
   ...ee,
-  font: By.exact({
-    family: By.string,
-    style: By.string
+  font: PropTypes.exact({
+    family: PropTypes.string,
+    style: PropTypes.string
   }).isOptional
 });
 export function $$el0(e) {
   let t = eo(e);
-  return By.exact({
+  return PropTypes.exact({
     ...t,
-    children: By.any.isOptional
+    children: PropTypes.any.isOptional
   });
 }
 let ed = e => ({
@@ -305,24 +305,24 @@ export function $$ec4(e) {
   let t = a(["minWidth", "minHeight", "maxWidth", "maxHeight"], eo(e));
   let i = ed(e);
   let r = a(["width", "height"], $$em3(e));
-  return By.exact({
+  return PropTypes.exact({
     ...t,
-    placeholder: By.string.isOptional,
-    onTextEditEnd: By.any,
-    value: By.oneOf([By.string, null]),
-    placeholderProps: By.exact(i).isOptional,
+    placeholder: PropTypes.string.isOptional,
+    onTextEditEnd: PropTypes.any,
+    value: PropTypes.oneOf([PropTypes.string, null]),
+    placeholderProps: PropTypes.exact(i).isOptional,
     inputFrameProps: r.isOptional,
     width: d.isOptional,
-    inputBehavior: By.oneOf(["wrap", "truncate", "multiline"]).isOptional
+    inputBehavior: PropTypes.oneOf(["wrap", "truncate", "multiline"]).isOptional
   });
 }
 export function $$eu10(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...en
   });
 }
 export function $$ep1(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...ea,
     ...es,
     ...Z,
@@ -330,7 +330,7 @@ export function $$ep1(e) {
   });
 }
 export function $$em3(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...ea,
     ...es,
     ...et,
@@ -338,26 +338,26 @@ export function $$em3(e) {
   });
 }
 export function $$eh7(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...ea,
     ...es,
     ...Q,
-    arcData: By.exact({
-      startingAngle: By.$$float,
-      endingAngle: By.$$float,
-      innerRadius: By.$$float.range(0, 1)
+    arcData: PropTypes.exact({
+      startingAngle: PropTypes.$$float,
+      endingAngle: PropTypes.$$float,
+      innerRadius: PropTypes.$$float.range(0, 1)
     }).isOptional
   });
 }
 export function $$eg9(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...ea,
     ...es,
     ...X
   });
 }
 export function $$ef5(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...ea,
     ...es,
     ...function (e) {
@@ -369,63 +369,63 @@ export function $$ef5(e) {
       });
       return t;
     }(Z),
-    src: By.string
+    src: PropTypes.string
   });
 }
 export function $$e_8(e) {
-  return By.exact({
+  return PropTypes.exact({
     ...ea,
     ...J
   });
 }
 let eA = {
-  tooltip: By.string,
-  propertyName: By.string
+  tooltip: PropTypes.string,
+  propertyName: PropTypes.string
 };
 let ey = {
-  selectedOption: By.string
+  selectedOption: PropTypes.string
 };
-let eb = By.exact({
+let eb = PropTypes.exact({
   ...eA,
   itemType: "action",
-  icon: By.string.isOptional
+  icon: PropTypes.string.isOptional
 });
-let ev = By.exact({
+let ev = PropTypes.exact({
   ...eA,
   itemType: "toggle",
-  icon: By.string.isOptional,
-  isToggled: By.bool
+  icon: PropTypes.string.isOptional,
+  isToggled: PropTypes.bool
 });
-let eI = By.exact({
+let eI = PropTypes.exact({
   ...eA,
   itemType: "link",
-  icon: By.oneOf([By.string, null]).isOptional,
-  href: By.string
+  icon: PropTypes.oneOf([PropTypes.string, null]).isOptional,
+  href: PropTypes.string
 });
-let eE = By.exact({
+let eE = PropTypes.exact({
   itemType: "separator"
 });
-let ex = By.exact({
-  option: By.string,
-  tooltip: By.string
+let ex = PropTypes.exact({
+  option: PropTypes.string,
+  tooltip: PropTypes.string
 });
-let eS = By.exact({
+let eS = PropTypes.exact({
   ...eA,
   ...ey,
   itemType: "color-selector",
-  options: By.arrayOf(ex)
+  options: PropTypes.arrayOf(ex)
 });
-let ew = By.exact({
-  option: By.string,
-  label: By.string
+let ew = PropTypes.exact({
+  option: PropTypes.string,
+  label: PropTypes.string
 });
-let eC = By.exact({
+let eC = PropTypes.exact({
   ...eA,
   ...ey,
   itemType: "dropdown",
-  options: By.arrayOf(ew)
+  options: PropTypes.arrayOf(ew)
 });
-let $$eT2 = By.arrayOf(By.oneOf([eb, eE, eS, eC, ev, eI]));
+let $$eT2 = PropTypes.arrayOf(PropTypes.oneOf([eb, eE, eS, eC, ev, eI]));
 export function $$ek6(e, t) {
   "color-selector" === e.itemType ? function (e, t) {
     let i = e.options.map(e => e.option);

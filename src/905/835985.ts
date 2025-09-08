@@ -1,12 +1,12 @@
 import { assert, throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { m as _$$m } from "../905/18160";
-import { HzA, ryE } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { TrackType, JSXRendererBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSceneGraphInstance } from "../905/830071";
 import { trackEventAnalytics } from "../905/449184";
 import { widgetErrorTracker } from "../905/250412";
-import { T } from "../figma_app/300692";
+import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { InternalError } from "../905/845428";
 import { MI, _L, BM, $T } from "../905/757052";
 import { $U } from "../905/285398";
@@ -132,7 +132,7 @@ export function $$v0({
   }(i, a.getSceneNodeAdapter(g.guid), a);
   if (f) {
     i = null;
-    let t = "Scene has diverged from the expected state. " + ("figma" === T() ? "This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. " : "This is likely a bug in the widget. Your render function is likely non-deterministic.") + "Here is more info: \n\n";
+    let t = "Scene has diverged from the expected state. " + ("figma" === getFullscreenViewEditorType() ? "This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. " : "This is likely a bug in the widget. Your render function is likely non-deterministic.") + "Here is more info: \n\n";
     let r = new InternalError(t + function (e) {
       switch (e.type) {
         case "more_than_one_root":
@@ -214,7 +214,7 @@ export function $$I1({
   let c = new Set();
   let u = t.getSceneNodeAdapter(i);
   let p = a ? t.getSceneNodeAdapter(a) : null;
-  let m = l7.plugin(l ?? "widget-render", () => S({
+  let m = permissionScopeHandler.plugin(l ?? "widget-render", () => S({
     widgetNodeID: "",
     oldVNode: r ?? null,
     newVNode: n,
@@ -226,7 +226,7 @@ export function $$I1({
     figmaNode: p,
     runtime: t,
     forceReconcileProps: [],
-    tracking: HzA.TRACK,
+    tracking: TrackType.TRACK,
     inputNodes: d,
     textNodes: c
   }));
@@ -240,11 +240,11 @@ function E({
   inputNodes: e,
   textNodes: t
 }) {
-  for (let t of e) l7.plugin("adjust-widget-input-node", () => {
-    ryE.adjustWidgetInputNodeAfterCreation(t);
+  for (let t of e) permissionScopeHandler.plugin("adjust-widget-input-node", () => {
+    JSXRendererBindings.adjustWidgetInputNodeAfterCreation(t);
   });
-  for (let e of t) l7.plugin("adjust-widget-text-node", () => {
-    ryE.adjustTextNodeAfterCreation(e);
+  for (let e of t) permissionScopeHandler.plugin("adjust-widget-text-node", () => {
+    JSXRendererBindings.adjustTextNodeAfterCreation(e);
   });
 }
 function x(e) {
@@ -272,7 +272,7 @@ function S({
 }) {
   var P;
   let O = () => {
-    let t = I.createPluginNode(i, e, T ?? HzA.TRACK, !!k);
+    let t = I.createPluginNode(i, e, T ?? TrackType.TRACK, !!k);
     o.insertChild(d, t.id);
     return I.getSceneNodeAdapter(t.id);
   };

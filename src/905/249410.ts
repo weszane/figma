@@ -6,7 +6,7 @@ import { Jn } from "../905/17223";
 import { tM, rb, Us, vd } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { T8, fu } from "../figma_app/831799";
@@ -15,7 +15,7 @@ import { Ht, WW, Wf } from "../figma_app/345997";
 import { Bi } from "../905/652992";
 import { DashboardSections } from "../905/548208";
 import { pE, ZN } from "../figma_app/630077";
-import { qK, Ju } from "../905/102752";
+import { registerLegacyModal, registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { bP } from "../905/739964";
 import { v0, pL } from "../figma_app/639088";
@@ -27,10 +27,10 @@ function T(e) {
   let t = useDispatch();
   let i = e.modalShown.data.team;
   let r = () => {
-    t(Ce());
+    t(hideModal());
   };
   let s = () => {
-    t(Lo());
+    t(popModalStack());
   };
   let o = !i.subscription;
   let h = i.canEdit;
@@ -113,10 +113,10 @@ function T(e) {
     })]
   });
 }
-qK($$S0, e => jsx(R, {
+registerLegacyModal($$S0, e => jsx(R, {
   ...e
 }));
-qK($$w1, e => {
+registerLegacyModal($$w1, e => {
   let {
     team,
     editorType,
@@ -132,7 +132,7 @@ qK($$w1, e => {
     upsellSource
   });
 });
-qK($$C2, e => {
+registerLegacyModal($$C2, e => {
   let {
     team,
     editorType,
@@ -175,12 +175,12 @@ let k = class e extends PureComponent {
 };
 k.displayName = "AddEditorUpsellModal";
 let R = k;
-Ju(function (e) {
+registerModal(function (e) {
   let t;
   let i;
   let r = useDispatch();
   let c = () => {
-    r(Lo());
+    r(popModalStack());
   };
   let g = e.team;
   g.subscription ? (t = renderI18nText("payments_modal.your_team_is_locked"), i = renderI18nText("payments_modal.your_professional_team_plan_is_no_longer_active_please", {

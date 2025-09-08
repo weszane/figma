@@ -1,15 +1,15 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$s0 = new class {
   constructor() {
-    this.PostOrgSamlConfigSchemaValidator = vh();
+    this.PostOrgSamlConfigSchemaValidator = createNoOpValidator();
     this.postOrgSamlConfig = e => this.PostOrgSamlConfigSchemaValidator.validate(({
       xr: t
     }) => t.post(`/api/org/${e.org_id}/org_saml_config`));
-    this.DeleteOrgSamlConfigSchemaValidator = vh();
+    this.DeleteOrgSamlConfigSchemaValidator = createNoOpValidator();
     this.deleteOrgSamlConfig = e => this.DeleteOrgSamlConfigSchemaValidator.validate(({
       xr: t
     }) => t.del(`/api/org_saml_config/${e.org_saml_config_id}`));
-    this.PutOrgSamlConfigSchemaValidator = vh();
+    this.PutOrgSamlConfigSchemaValidator = createNoOpValidator();
     this.putOrgSamlConfig = e => this.PutOrgSamlConfigSchemaValidator.validate(({
       xr: t
     }) => t.put(`/api/org_saml_config/${e.org_saml_config_id}`, {

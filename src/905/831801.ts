@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { c2 } from "../905/382883";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { renderI18nText } from "../905/303541";
 import { $d, dB } from "../905/901822";
@@ -12,19 +12,19 @@ let $$c2 = {
   },
   COLOR: {
     label: renderI18nText("variables.authoring_modal.filters.colors"),
-    type: rXF.COLOR
+    type: VariableResolvedDataType.COLOR
   },
   FLOAT: {
     label: renderI18nText("variables.authoring_modal.filters.numbers"),
-    type: rXF.FLOAT
+    type: VariableResolvedDataType.FLOAT
   },
   STRING: {
     label: renderI18nText("variables.authoring_modal.filters.strings"),
-    type: rXF.STRING
+    type: VariableResolvedDataType.STRING
   },
   BOOLEAN: {
     label: renderI18nText("variables.authoring_modal.filters.booleans"),
-    type: rXF.BOOLEAN
+    type: VariableResolvedDataType.BOOLEAN
   }
 };
 let $$u4 = {

@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { td } from "../figma_app/181241";
+import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 function o(e, t, r, i) {
   let n = {
@@ -29,7 +29,7 @@ let $$c0 = new class {
     workspaceIds: s
   }) {
     o(e, t, r, s);
-    return XHR.post(`/api/${l[r]}/org/${e}/allowlist/${t}`, td.toAPIParameters({
+    return XHR.post(`/api/${l[r]}/org/${e}/allowlist/${t}`, APIParameterUtils.toAPIParameters({
       workspaceIds: s
     }));
   }
@@ -40,7 +40,7 @@ let $$c0 = new class {
     workspaceIds: s
   }) {
     a(e, t, r, s);
-    return XHR.del(`/api/${l[r]}/org/${e}/allowlist/${t}`, td.toAPIParameters({
+    return XHR.del(`/api/${l[r]}/org/${e}/allowlist/${t}`, APIParameterUtils.toAPIParameters({
       workspaceIds: s
     }));
   }

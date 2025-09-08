@@ -3,7 +3,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { _7 } from "../figma_app/562352";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { IA } from "../905/859698";
-import { Z_n, MoD } from "../figma_app/763686";
+import { VariableDataType, ImageExportType } from "../figma_app/763686";
 import { hasStyleType } from "../905/311324";
 import { sH, dI } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
@@ -12,7 +12,7 @@ import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { I0 } from "../905/879323";
 import { Eo, oU, UE, u0, r8, aV, qv } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
@@ -25,7 +25,7 @@ export function $$x6(e, t, i, n, r) {
   let a = t[e];
   if (!a || !a.variableThumbnails) return null;
   let s = a.variableThumbnails[i] ?? null;
-  for (; s?.type === Z_n.ALIAS;) {
+  for (; s?.type === VariableDataType.ALIAS;) {
     let e = r[s.variableCollectionKey];
     if (e && s.values && s.values[e]) {
       s = s.values[e];
@@ -42,7 +42,7 @@ export function $$x6(e, t, i, n, r) {
   }
   return s;
 }
-export let $$S0 = nF((e, t) => {
+export let $$S0 = createOptimistThunk((e, t) => {
   let {
     variableSet,
     variableId,
@@ -91,7 +91,7 @@ function C(e, t) {
   };
   if (!t || t.content_hash !== e.content_hash || !t.url || t.url === u0 || t.url === r8) {
     let t = O.acquire(e.node_id, e.content_hash);
-    return t ? ("FILL" !== e.style_type ? Promise.resolve() : runWithTimeout(Jr().loadAllImagesUnder([e.node_id], MoD.NON_ANIMATED_ONLY, "style-thumbnail"), () => {
+    return t ? ("FILL" !== e.style_type ? Promise.resolve() : runWithTimeout(Jr().loadAllImagesUnder([e.node_id], ImageExportType.NON_ANIMATED_ONLY, "style-thumbnail"), () => {
       logError("thumbnails", "image manager failed to load", {
         name: e.name,
         key: e.key,
@@ -114,7 +114,7 @@ function C(e, t) {
 }
 let $$T7 = NC("LIBRARY_ADD_THUMBNAIL_FOR_DANGLING_STYLE");
 let $$k8 = NC("LIBRARY_THUMBNAIL_REPLACE_LOCAL_THUMBNAILS");
-let $$R3 = nF((e, t) => {
+let $$R3 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let r = i.library.local.thumbnails;
   let a = i.library.local.components;
@@ -185,7 +185,7 @@ let $$R3 = nF((e, t) => {
     type: PW.STYLE
   }));
 });
-let $$N4 = nF(async (e, t) => {
+let $$N4 = createOptimistThunk(async (e, t) => {
   if (t.styleKind === AT.LOCAL) {
     let i = e.getState().library.local.styles[t.styleNodeId];
     let n = e.getState().library.local.thumbnails[t.styleNodeId];
@@ -223,7 +223,7 @@ let $$N4 = nF(async (e, t) => {
     }
   }
 });
-let $$P1 = nF(async (e, t) => {
+let $$P1 = createOptimistThunk(async (e, t) => {
   let i = e.getState().library.local.styles;
   let n = e.getState().library.local.thumbnails;
   let s = t.styleType;

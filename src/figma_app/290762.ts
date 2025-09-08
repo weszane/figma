@@ -23,527 +23,648 @@ export let writableObservableValue_Array_String_Internal: any
 export let observableValue_Double_Internal: any
 export let observableValue_Map_String_Int_Internal: any
 
+/**
+ * Types for observable value handles.
+ */
+export type ObservableValueHandle = any;
 
-class ObservableValue_Map_Int_AutoLayoutShortcutHint_ {
-  constructor(e) {
-    
-    this.handle = e
+/**
+ * ObservableValue_Map_Int_AutoLayoutShortcutHint_ class
+ * Original: ObservableValue_Map_Int_AutoLayoutShortcutHint_
+ */
+export class ObservableValueMapIntAutoLayoutShortcutHint {
+  handle: ObservableValueHandle;
+
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ extends ObservableValue_Map_Int_AutoLayoutShortcutHint_ {
-  getCopy() {
-    return observableValue_Map_Int_AutoLayoutShortcutHint__Internal.getCopy(this.handle)
+/**
+ * MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ class
+ * Original: MutableObservableValue_Map_Int_AutoLayoutShortcutHint_
+ */
+export class MutableObservableValueMapIntAutoLayoutShortcutHint extends ObservableValueMapIntAutoLayoutShortcutHint {
+  getCopy(): any {
+    return observableValue_Map_Int_AutoLayoutShortcutHint__Internal.getCopy(this.handle);
   }
 
-  subscribeFromJs(e) {
-    return observableValue_Map_Int_AutoLayoutShortcutHint__Internal.subscribeFromJs(this.handle, e)
+  subscribeFromJs(callback: any): any {
+    return observableValue_Map_Int_AutoLayoutShortcutHint__Internal.subscribeFromJs(this.handle, callback);
   }
 
-  unsubscribeFromJs(e) {
-    observableValue_Map_Int_AutoLayoutShortcutHint__Internal.unsubscribeFromJs(this.handle, e)
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Map_Int_AutoLayoutShortcutHint__Internal.unsubscribeFromJs(this.handle, callback);
   }
 
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
-  }
-}
-
-export { MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ as $$z15 }
-
-class WritableObservableValue_Bool {
-  constructor(e) {
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_Bool extends WritableObservableValue_Bool {
-  getCopy() {
-    return writableObservableValue_Bool_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_Bool class
+ * Original: WritableObservableValue_Bool
+ */
+export class WritableObservableValueBool {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_Bool_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_Bool_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_Bool_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_Bool as $$K36 }
+/**
+ * MutableWritableObservableValue_Bool class
+ * Original: MutableWritableObservableValue_Bool
+ */
+export class MutableWritableObservableValueBool extends WritableObservableValueBool {
+  getCopy(): any {
+    return writableObservableValue_Bool_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Array_Bool {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: boolean): void {
+    writableObservableValue_Bool_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_Bool_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_Bool_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Array_Bool extends ObservableValue_Array_Bool {
-  getCopy() {
-    return observableValue_Array_Bool_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Array_Bool class
+ * Original: ObservableValue_Array_Bool
+ */
+export class ObservableValueArrayBool {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Array_Bool_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Array_Bool_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Array_Bool as $$$0 }
+/**
+ * MutableObservableValue_Array_Bool class
+ * Original: MutableObservableValue_Array_Bool
+ */
+export class MutableObservableValueArrayBool extends ObservableValueArrayBool {
+  getCopy(): any {
+    return observableValue_Array_Bool_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Bool {
-  constructor(e) {
-    
-    this.handle = e
+  subscribeFromJs(callback: any): any {
+    return observableValue_Array_Bool_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Array_Bool_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Bool extends ObservableValue_Bool {
-  getCopy() {
-    return observableValue_Bool_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Bool class
+ * Original: ObservableValue_Bool
+ */
+export class ObservableValueBool {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Bool_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Bool_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Bool as $$q6 }
+/**
+ * MutableObservableValue_Bool class
+ * Original: MutableObservableValue_Bool
+ */
+export class MutableObservableValueBool extends ObservableValueBool {
+  getCopy(): any {
+    return observableValue_Bool_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Float {
-  constructor(e) {
-    
-    this.handle = e
+  subscribeFromJs(callback: any): any {
+    return observableValue_Bool_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Bool_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Float extends ObservableValue_Float {
-  getCopy() {
-    return observableValue_Float_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Float class
+ * Original: ObservableValue_Float
+ */
+export class ObservableValueFloat {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Float_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Float_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Float as $$Z4 }
+/**
+ * MutableObservableValue_Float class
+ * Original: MutableObservableValue_Float
+ */
+export class MutableObservableValueFloat extends ObservableValueFloat {
+  getCopy(): any {
+    return observableValue_Float_Internal.getCopy(this.handle);
+  }
 
-class WritableObservableValue_Double {
-  constructor(e) {
-    
-    this.handle = e
+  subscribeFromJs(callback: any): any {
+    return observableValue_Float_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Float_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_Double extends WritableObservableValue_Double {
-  getCopy() {
-    return writableObservableValue_Double_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_Double class
+ * Original: WritableObservableValue_Double
+ */
+export class WritableObservableValueDouble {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_Double_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_Double_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_Double_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_Double as $$ee2 }
+/**
+ * MutableWritableObservableValue_Double class
+ * Original: MutableWritableObservableValue_Double
+ */
+export class MutableWritableObservableValueDouble extends WritableObservableValueDouble {
+  getCopy(): any {
+    return writableObservableValue_Double_Internal.getCopy(this.handle);
+  }
 
-class WritableObservableValue_Int {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: number): void {
+    writableObservableValue_Double_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_Double_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_Double_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_Int extends WritableObservableValue_Int {
-  getCopy() {
-    return writableObservableValue_Int_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_Int class
+ * Original: WritableObservableValue_Int
+ */
+export class WritableObservableValueInt {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_Int_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_Int_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_Int_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_Int as $$er12 }
+/**
+ * MutableWritableObservableValue_Int class
+ * Original: MutableWritableObservableValue_Int
+ */
+export class MutableWritableObservableValueInt extends WritableObservableValueInt {
+  getCopy(): any {
+    return writableObservableValue_Int_Internal.getCopy(this.handle);
+  }
 
-class WritableObservableValue_String {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: number): void {
+    writableObservableValue_Int_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_Int_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_Int_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_String extends WritableObservableValue_String {
-  getCopy() {
-    return writableObservableValue_String_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_String class
+ * Original: WritableObservableValue_String
+ */
+export class WritableObservableValueString {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_String_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_String_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_String_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_String as $$ei9 }
+/**
+ * MutableWritableObservableValue_String class
+ * Original: MutableWritableObservableValue_String
+ */
+export class MutableWritableObservableValueString extends WritableObservableValueString {
+  getCopy(): any {
+    return writableObservableValue_String_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Json {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: string): void {
+    writableObservableValue_String_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_String_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_String_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Json extends ObservableValue_Json {
-  getCopy() {
-    return observableValue_Json_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Json class
+ * Original: ObservableValue_Json
+ */
+export class ObservableValueJson {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Json_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Json_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Json as $$es14 }
+/**
+ * MutableObservableValue_Json class
+ * Original: MutableObservableValue_Json
+ */
+export class MutableObservableValueJson extends ObservableValueJson {
+  getCopy(): any {
+    return observableValue_Json_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Int {
-  constructor(e) {
-    
-    this.handle = e
+  subscribeFromJs(callback: any): any {
+    return observableValue_Json_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Json_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Int extends ObservableValue_Int {
-  getCopy() {
-    return observableValue_Int_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Int class
+ * Original: ObservableValue_Int
+ */
+export class ObservableValueInt {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Int_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Int_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Int as $$el30 }
+/**
+ * MutableObservableValue_Int class
+ * Original: MutableObservableValue_Int
+ */
+export class MutableObservableValueInt extends ObservableValueInt {
+  getCopy(): any {
+    return observableValue_Int_Internal.getCopy(this.handle);
+  }
 
-class WritableObservableValue_Optional_String {
-  constructor(e) {
-    
-    this.handle = e
+  subscribeFromJs(callback: any): any {
+    return observableValue_Int_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Int_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_Optional_String extends WritableObservableValue_Optional_String {
-  getCopy() {
-    return writableObservableValue_Optional_String_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_Optional_String class
+ * Original: WritableObservableValue_Optional_String
+ */
+export class WritableObservableValueOptionalString {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_Optional_String_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_Optional_String_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_Optional_String_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_Optional_String as $$ec28 }
+/**
+ * MutableWritableObservableValue_Optional_String class
+ * Original: MutableWritableObservableValue_Optional_String
+ */
+export class MutableWritableObservableValueOptionalString extends WritableObservableValueOptionalString {
+  getCopy(): any {
+    return writableObservableValue_Optional_String_Internal.getCopy(this.handle);
+  }
 
-class WritableObservableValue_Float {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: string | undefined): void {
+    writableObservableValue_Optional_String_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_Optional_String_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_Optional_String_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_Float extends WritableObservableValue_Float {
-  getCopy() {
-    return writableObservableValue_Float_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_Float class
+ * Original: WritableObservableValue_Float
+ */
+export class WritableObservableValueFloat {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_Float_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_Float_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_Float_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_Float as $$ep19 }
+/**
+ * MutableWritableObservableValue_Float class
+ * Original: MutableWritableObservableValue_Float
+ */
+export class MutableWritableObservableValueFloat extends WritableObservableValueFloat {
+  getCopy(): any {
+    return writableObservableValue_Float_Internal.getCopy(this.handle);
+  }
 
-class WritableObservableValue_Array_String {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: number): void {
+    writableObservableValue_Float_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_Float_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_Float_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableWritableObservableValue_Array_String extends WritableObservableValue_Array_String {
-  getCopy() {
-    return writableObservableValue_Array_String_Internal.getCopy(this.handle)
-  }
+/**
+ * WritableObservableValue_Array_String class
+ * Original: WritableObservableValue_Array_String
+ */
+export class WritableObservableValueArrayString {
+  handle: ObservableValueHandle;
 
-  set(e) {
-    writableObservableValue_Array_String_Internal.set(this.handle, e)
-  }
-
-  subscribeFromJs(e) {
-    return writableObservableValue_Array_String_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    writableObservableValue_Array_String_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableWritableObservableValue_Array_String as $$eh10 }
+/**
+ * MutableWritableObservableValue_Array_String class
+ * Original: MutableWritableObservableValue_Array_String
+ */
+export class MutableWritableObservableValueArrayString extends WritableObservableValueArrayString {
+  getCopy(): any {
+    return writableObservableValue_Array_String_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Double {
-  constructor(e) {
-    
-    this.handle = e
+  set(value: string[]): void {
+    writableObservableValue_Array_String_Internal.set(this.handle, value);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return writableObservableValue_Array_String_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    writableObservableValue_Array_String_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Double extends ObservableValue_Double {
-  getCopy() {
-    return observableValue_Double_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Double class
+ * Original: ObservableValue_Double
+ */
+export class ObservableValueDouble {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Double_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Double_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Double as $$eg17 }
+/**
+ * MutableObservableValue_Double class
+ * Original: MutableObservableValue_Double
+ */
+export class MutableObservableValueDouble extends ObservableValueDouble {
+  getCopy(): any {
+    return observableValue_Double_Internal.getCopy(this.handle);
+  }
 
-class ObservableValue_Map_String_Int {
-  constructor(e) {
-    
-    this.handle = e
+  subscribeFromJs(callback: any): any {
+    return observableValue_Double_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Double_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
   }
 }
 
-class MutableObservableValue_Map_String_Int extends ObservableValue_Map_String_Int {
-  getCopy() {
-    return observableValue_Map_String_Int_Internal.getCopy(this.handle)
-  }
+/**
+ * ObservableValue_Map_String_Int class
+ * Original: ObservableValue_Map_String_Int
+ */
+export class ObservableValueMapStringInt {
+  handle: ObservableValueHandle;
 
-  subscribeFromJs(e) {
-    return observableValue_Map_String_Int_Internal.subscribeFromJs(this.handle, e)
-  }
-
-  unsubscribeFromJs(e) {
-    observableValue_Map_String_Int_Internal.unsubscribeFromJs(this.handle, e)
-  }
-
-  constructor(e) {
-    super(e)
-    
-    this.handle = e
+  constructor(handle: ObservableValueHandle) {
+    this.handle = handle;
   }
 }
 
-export { MutableObservableValue_Map_String_Int as $$eE8 }
-export function $$ey23(e) {
-  bindings = e.Bindings
-  CorePerfInfo = e.CorePerfInfo
-  globalThis.CorePerfInfo = CorePerfInfo
-  perfTimerFrameManagerBindings = e.PerfTimerFrameManagerBindings
-  featureFlagsCppApi = e.FeatureFlagsCppApi
-  fullscreenOptimizationExposureLoggingBinding = e.FullscreenOptimizationExposureLoggingBinding
-  observableValue_Map_Int_AutoLayoutShortcutHint__Internal = e.ObservableValue_Map_Int_AutoLayoutShortcutHint__Internal
-  globalThis.ObservableValue_Map_Int_AutoLayoutShortcutHint_ = ObservableValue_Map_Int_AutoLayoutShortcutHint_
-  globalThis.MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ = MutableObservableValue_Map_Int_AutoLayoutShortcutHint_
-  weakHandleHelpers = e.WeakHandleHelpers
-  webAsyncCallback = e.WebAsyncCallback
-  performanceEventCounters = e.PerformanceEventCounters
-  deprecatedXHRBindings = e.DeprecatedXHRBindings
-  writableObservableValue_Bool_Internal = e.WritableObservableValue_Bool_Internal
-  globalThis.WritableObservableValue_Bool = WritableObservableValue_Bool
-  globalThis.MutableWritableObservableValue_Bool = MutableWritableObservableValue_Bool
-  observableValue_Array_Bool_Internal = e.ObservableValue_Array_Bool_Internal
-  globalThis.ObservableValue_Array_Bool = ObservableValue_Array_Bool
-  globalThis.MutableObservableValue_Array_Bool = MutableObservableValue_Array_Bool
-  observableValue_Bool_Internal = e.ObservableValue_Bool_Internal
-  globalThis.ObservableValue_Bool = ObservableValue_Bool
-  globalThis.MutableObservableValue_Bool = MutableObservableValue_Bool
-  observableValue_Float_Internal = e.ObservableValue_Float_Internal
-  globalThis.ObservableValue_Float = ObservableValue_Float
-  globalThis.MutableObservableValue_Float = MutableObservableValue_Float
-  writableObservableValue_Double_Internal = e.WritableObservableValue_Double_Internal
-  globalThis.WritableObservableValue_Double = WritableObservableValue_Double
-  globalThis.MutableWritableObservableValue_Double = MutableWritableObservableValue_Double
-  writableObservableValue_Int_Internal = e.WritableObservableValue_Int_Internal
-  globalThis.WritableObservableValue_Int = WritableObservableValue_Int
-  globalThis.MutableWritableObservableValue_Int = MutableWritableObservableValue_Int
-  writableObservableValue_String_Internal = e.WritableObservableValue_String_Internal
-  globalThis.WritableObservableValue_String = WritableObservableValue_String
-  globalThis.MutableWritableObservableValue_String = MutableWritableObservableValue_String
-  observableValue_Json_Internal = e.ObservableValue_Json_Internal
-  globalThis.ObservableValue_Json = ObservableValue_Json
-  globalThis.MutableObservableValue_Json = MutableObservableValue_Json
-  observableValue_Int_Internal = e.ObservableValue_Int_Internal
-  globalThis.ObservableValue_Int = ObservableValue_Int
-  globalThis.MutableObservableValue_Int = MutableObservableValue_Int
-  writableObservableValue_Optional_String_Internal = e.WritableObservableValue_Optional_String_Internal
-  globalThis.WritableObservableValue_Optional_String = WritableObservableValue_Optional_String
-  globalThis.MutableWritableObservableValue_Optional_String = MutableWritableObservableValue_Optional_String
-  writableObservableValue_Float_Internal = e.WritableObservableValue_Float_Internal
-  globalThis.WritableObservableValue_Float = WritableObservableValue_Float
-  globalThis.MutableWritableObservableValue_Float = MutableWritableObservableValue_Float
-  writableObservableValue_Array_String_Internal = e.WritableObservableValue_Array_String_Internal
-  globalThis.WritableObservableValue_Array_String = WritableObservableValue_Array_String
-  globalThis.MutableWritableObservableValue_Array_String = MutableWritableObservableValue_Array_String
-  observableValue_Double_Internal = e.ObservableValue_Double_Internal
-  globalThis.ObservableValue_Double = ObservableValue_Double
-  globalThis.MutableObservableValue_Double = MutableObservableValue_Double
-  observableValue_Map_String_Int_Internal = e.ObservableValue_Map_String_Int_Internal
-  globalThis.ObservableValue_Map_String_Int = ObservableValue_Map_String_Int
-  globalThis.MutableObservableValue_Map_String_Int = MutableObservableValue_Map_String_Int
+/**
+ * MutableObservableValue_Map_String_Int class
+ * Original: MutableObservableValue_Map_String_Int
+ */
+export class MutableObservableValueMapStringInt extends ObservableValueMapStringInt {
+  getCopy(): any {
+    return observableValue_Map_String_Int_Internal.getCopy(this.handle);
+  }
+
+  subscribeFromJs(callback: any): any {
+    return observableValue_Map_String_Int_Internal.subscribeFromJs(this.handle, callback);
+  }
+
+  unsubscribeFromJs(callback: any): void {
+    observableValue_Map_String_Int_Internal.unsubscribeFromJs(this.handle, callback);
+  }
+
+  constructor(handle: ObservableValueHandle) {
+    super(handle);
+    this.handle = handle;
+  }
 }
-export function $$eb7() {
+
+// Export aliases for backward compatibility
+export const $$z15 = MutableObservableValueMapIntAutoLayoutShortcutHint;
+export const $$K36 = MutableWritableObservableValueBool;
+export const $$$0 = MutableObservableValueArrayBool;
+export const $$q6 = MutableObservableValueBool;
+export const $$Z4 = MutableObservableValueFloat;
+export const $$ee2 = MutableWritableObservableValueDouble;
+export const $$er12 = MutableWritableObservableValueInt;
+export const $$ei9 = MutableWritableObservableValueString;
+export const $$es14 = MutableObservableValueJson;
+export const $$el30 = MutableObservableValueInt;
+export const $$ec28 = MutableWritableObservableValueOptionalString;
+export const $$ep19 = MutableWritableObservableValueFloat;
+export const $$eh10 = MutableWritableObservableValueArrayString;
+export const $$eg17 = MutableObservableValueDouble;
+export const $$eE8 = MutableObservableValueMapStringInt;
+
+/**
+ * Initializes bindings and global classes.
+ * Original: $$ey23
+ */
+export function initializeBindings(e: any) {
+  bindings = e.Bindings;
+  CorePerfInfo = e.CorePerfInfo;
+  globalThis.CorePerfInfo = CorePerfInfo;
+  perfTimerFrameManagerBindings = e.PerfTimerFrameManagerBindings;
+  featureFlagsCppApi = e.FeatureFlagsCppApi;
+  fullscreenOptimizationExposureLoggingBinding = e.FullscreenOptimizationExposureLoggingBinding;
+  observableValue_Map_Int_AutoLayoutShortcutHint__Internal = e.ObservableValue_Map_Int_AutoLayoutShortcutHint__Internal;
+  globalThis.ObservableValueMapIntAutoLayoutShortcutHint = ObservableValueMapIntAutoLayoutShortcutHint;
+  globalThis.MutableObservableValueMapIntAutoLayoutShortcutHint = MutableObservableValueMapIntAutoLayoutShortcutHint;
+  weakHandleHelpers = e.WeakHandleHelpers;
+  webAsyncCallback = e.WebAsyncCallback;
+  performanceEventCounters = e.PerformanceEventCounters;
+  deprecatedXHRBindings = e.DeprecatedXHRBindings;
+  writableObservableValue_Bool_Internal = e.WritableObservableValue_Bool_Internal;
+  globalThis.WritableObservableValueBool = WritableObservableValueBool;
+  globalThis.MutableWritableObservableValueBool = MutableWritableObservableValueBool;
+  observableValue_Array_Bool_Internal = e.ObservableValue_Array_Bool_Internal;
+  globalThis.ObservableValueArrayBool = ObservableValueArrayBool;
+  globalThis.MutableObservableValueArrayBool = MutableObservableValueArrayBool;
+  observableValue_Bool_Internal = e.ObservableValue_Bool_Internal;
+  globalThis.ObservableValueBool = ObservableValueBool;
+  globalThis.MutableObservableValueBool = MutableObservableValueBool;
+  observableValue_Float_Internal = e.ObservableValue_Float_Internal;
+  globalThis.ObservableValueFloat = ObservableValueFloat;
+  globalThis.MutableObservableValueFloat = MutableObservableValueFloat;
+  writableObservableValue_Double_Internal = e.WritableObservableValue_Double_Internal;
+  globalThis.WritableObservableValueDouble = WritableObservableValueDouble;
+  globalThis.MutableWritableObservableValueDouble = MutableWritableObservableValueDouble;
+  writableObservableValue_Int_Internal = e.WritableObservableValue_Int_Internal;
+  globalThis.WritableObservableValueInt = WritableObservableValueInt;
+  globalThis.MutableWritableObservableValueInt = MutableWritableObservableValueInt;
+  writableObservableValue_String_Internal = e.WritableObservableValue_String_Internal;
+  globalThis.WritableObservableValueString = WritableObservableValueString;
+  globalThis.MutableWritableObservableValueString = MutableWritableObservableValueString;
+  observableValue_Json_Internal = e.ObservableValue_Json_Internal;
+  globalThis.ObservableValueJson = ObservableValueJson;
+  globalThis.MutableObservableValueJson = MutableObservableValueJson;
+  observableValue_Int_Internal = e.ObservableValue_Int_Internal;
+  globalThis.ObservableValueInt = ObservableValueInt;
+  globalThis.MutableObservableValueInt = MutableObservableValueInt;
+  writableObservableValue_Optional_String_Internal = e.WritableObservableValue_Optional_String_Internal;
+  globalThis.WritableObservableValueOptionalString = WritableObservableValueOptionalString;
+  globalThis.MutableWritableObservableValueOptionalString = MutableWritableObservableValueOptionalString;
+  writableObservableValue_Float_Internal = e.WritableObservableValue_Float_Internal;
+  globalThis.WritableObservableValueFloat = WritableObservableValueFloat;
+  globalThis.MutableWritableObservableValueFloat = MutableWritableObservableValueFloat;
+  writableObservableValue_Array_String_Internal = e.WritableObservableValue_Array_String_Internal;
+  globalThis.WritableObservableValueArrayString = WritableObservableValueArrayString;
+  globalThis.MutableWritableObservableValueArrayString = MutableWritableObservableValueArrayString;
+  observableValue_Double_Internal = e.ObservableValue_Double_Internal;
+  globalThis.ObservableValueDouble = ObservableValueDouble;
+  globalThis.MutableObservableValueDouble = MutableObservableValueDouble;
+  observableValue_Map_String_Int_Internal = e.ObservableValue_Map_String_Int_Internal;
+  globalThis.ObservableValueMapStringInt = ObservableValueMapStringInt;
+  globalThis.MutableObservableValueMapStringInt = MutableObservableValueMapStringInt;
+}
+
+/**
+ * Returns all bindings and internals.
+ * Original: $$eb7
+ */
+export function getAllBindings() {
   return {
     bindings,
     corePerfInfo: CorePerfInfo,
@@ -569,73 +690,101 @@ export function $$eb7() {
     writableObservableValue_Array_String_Internal,
     observableValue_Double_Internal,
     observableValue_Map_String_Int_Internal,
-  }
+  };
 }
-export const AH = MutableObservableValue_Array_Bool
-export const Ai = fullscreenOptimizationExposureLoggingBinding
-export const D = MutableWritableObservableValue_Double
-export const D2 = $$p3
-export const Ej = MutableObservableValue_Float
-export const HT = $$_5
-export const IQ = MutableObservableValue_Bool
-export const KO = $$eb7
-export const KT = MutableObservableValue_Map_String_Int
-export const LQ = MutableWritableObservableValue_String
-export const Lp = MutableWritableObservableValue_Array_String
-export const NU = $$m11
-export const P0 = MutableWritableObservableValue_Int
-export const Qt = deprecatedXHRBindings
-export const S_ = MutableObservableValue_Json
-export const U0 = MutableObservableValue_Map_Int_AutoLayoutShortcutHint_
-export const Un = webAsyncCallback
-export const Vt = MutableObservableValue_Double
-export const Xp = $$d18
-export const YL = MutableWritableObservableValue_Float
-export const YO = $$i20
-export const Yy = performanceEventCounters
-export const aD = $$l22
-export const cc = $$ey23
-export const fL = $$o24
-export const fZ = perfTimerFrameManagerBindings
-export const hM = CorePerfInfo
-export const jW = bindings
-export const md = MutableWritableObservableValue_Optional_String
-export const mo = weakHandleHelpers
-export const nK = MutableObservableValue_Int
-export const oe = $$c31
-export const r = $$g32
-export const rC = $$n33
-export const uP = $$f34
-export const w$ = $$u35
-export const yB = MutableWritableObservableValue_Bool
-export enum $$n33 {
+
+// Export refactored names for usage elsewhere
+export const AH = MutableObservableValueArrayBool;
+export const Ai = fullscreenOptimizationExposureLoggingBinding;
+export const D = MutableWritableObservableValueDouble;
+export const Ej = MutableObservableValueFloat;
+export const IQ = MutableObservableValueBool;
+export const KO = getAllBindings;
+export const KT = MutableObservableValueMapStringInt;
+export const LQ = MutableWritableObservableValueString;
+export const Lp = MutableWritableObservableValueArrayString;
+export const P0 = MutableWritableObservableValueInt;
+export const Qt = deprecatedXHRBindings;
+export const S_ = MutableObservableValueJson;
+export const U0 = MutableObservableValueMapIntAutoLayoutShortcutHint;
+export const Un = webAsyncCallback;
+export const Vt = MutableObservableValueDouble;
+export const YL = MutableWritableObservableValueFloat;
+export const Yy = performanceEventCounters;
+export const cc = initializeBindings;
+export const fZ = perfTimerFrameManagerBindings;
+export const hM = CorePerfInfo;
+export const jW = bindings;
+export const md = MutableWritableObservableValueOptionalString;
+export const mo = weakHandleHelpers;
+export const nK = MutableObservableValueInt;
+export const yB = MutableWritableObservableValueBool;
+
+
+
+
+/**
+ * Enums for various internal states and types.
+ * Original enum names preserved in comments for traceability.
+ */
+
+/**
+ * DocumentMode
+ * Original: $$n33
+ */
+export enum DocumentMode {
   LEGACY = 0,
   DEFAULT = 1,
   MERGE_MODAL = 2,
   RECOVERY = 3,
   MAXIMUM = 4,
 }
-export enum $$i20 {
+
+/**
+ * PerfType
+ * Original: $$i20
+ */
+export enum PerfType {
   IMAGE = 0,
   RENDERER = 1,
   JS = 2,
 }
-export enum a {
+
+/**
+ * BufferType
+ * Original: a
+ */
+export enum BufferType {
   BUFFER = 0,
 }
-export enum s {
+
+/**
+ * GLResourceType
+ * Original: s
+ */
+export enum GLResourceType {
   TEXTURE = 0,
   VERTEX_BUFFER = 1,
   INDEX_BUFFER = 2,
   RENDERBUFFER = 3,
   UNIFORM_BUFFER = 4,
 }
-export enum $$o24 {
+
+/**
+ * ImageSourceType
+ * Original: $$o24
+ */
+export enum ImageSourceType {
   COMPRESSED = 0,
   BUFFER = 1,
   BITMAP = 2,
 }
-export enum $$l22 {
+
+/**
+ * TextureType
+ * Original: $$l22
+ */
+export enum TextureType {
   BACKBUFFER = 0,
   EYEDROPPER_BACKBUFFER_COPY = 1,
   EXPORT = 2,
@@ -654,26 +803,51 @@ export enum $$l22 {
   STENCIL = 15,
   CHROME_HACK = 16,
 }
-export enum $$d18 {
+
+/**
+ * FullscreenMode
+ * Original: $$d18
+ */
+export enum FullscreenMode {
   FULLSCREEN = 0,
   NON_FULLSCREEN = 1,
 }
-export enum $$c31 {
+
+/**
+ * AutoLayoutInsertMode
+ * Original: $$c31
+ */
+export enum AutoLayoutInsertMode {
   IGNORE_AUTOLAYOUT = 0,
   FORCE_INSERTION = 1,
   PREVENT_NESTING = 2,
 }
-export enum $$u35 {
+
+/**
+ * GLContextType
+ * Original: $$u35
+ */
+export enum GLContextType {
   None = 0,
   WebGL1 = 1,
   WebGL2 = 2,
   WebGPU = 3,
 }
-export enum $$p3 {
+
+/**
+ * PerfPriority
+ * Original: $$p3
+ */
+export enum PerfPriority {
   LOW = 0,
   HIGH = 1,
 }
-export enum $$_5 {
+
+/**
+ * GLFailureType
+ * Original: $$_5
+ */
+export enum GLFailureType {
   GL_VERTEX_BUFFER_FAILURE = 0,
   GL_TEXTURE_FAILURE = 1,
   GL_RENDERBUFFER_FAILURE = 2,
@@ -681,23 +855,57 @@ export enum $$_5 {
   GL_INDEX_BUFFER_FAILURE = 4,
   WASM_FAILURE = 100,
 }
-export enum h {
+
+/**
+ * GenericType
+ * Original: h
+ */
+export enum GenericType {
   GENERIC = 0,
 }
-export enum $$m11 {
+
+/**
+ * SaveMode
+ * Original: $$m11
+ */
+export enum LogToConsoleMode {
   DEFAULT = 0,
   ALWAYS = 1,
   NEVER = 2,
 }
-export enum $$g32 {
+
+/**
+ * DocumentSaveEvent
+ * Original: $$g32
+ */
+export enum DocumentSaveEvent {
   AFTER_INITIAL_JOIN_END = 0,
   AFTER_FIRST_RENDER = 1,
   DOCUMENT_STARTED_SAVING = 2,
   DOCUMENT_FINISHED_SAVING = 3,
 }
-export enum $$f34 {
+
+/**
+ * PerfQuality
+ * Original: $$f34
+ */
+export enum PerfQuality {
   NONE = 0,
   FAST = 1,
   DEFAULT = 6,
   BEST = 9,
 }
+
+// Export aliases for backward compatibility and usage elsewhere
+export const D2 = PerfPriority;
+export const HT = GLFailureType;
+export const NU = LogToConsoleMode;
+export const Xp = FullscreenMode;
+export const YO = PerfType;
+export const aD = TextureType;
+export const fL = ImageSourceType;
+export const oe = AutoLayoutInsertMode;
+export const r = DocumentSaveEvent;
+export const rC = DocumentMode;
+export const uP = PerfQuality;
+export const w$ = GLContextType;

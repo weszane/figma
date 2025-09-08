@@ -12,7 +12,7 @@ import { oY } from "../905/485103";
 import { qc } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { u as _$$u } from "../1e926454/858319";
 import { dr, eb as _$$eb, oU } from "../4452/405965";
@@ -206,7 +206,7 @@ export function $$ee0(e) {
     }));
   };
   let eg = () => {
-    $(Ce());
+    $(hideModal());
     $(cL());
   };
   let [eh, ex] = useState(initialView || 0);
@@ -295,7 +295,7 @@ export function $$ee0(e) {
               if (er && er.domain_capture && en && en.domains.length > 0) {
                 let t = _$$Z(e).filter(e => xf(e) && !H_(en.domains, e));
                 if (er?.invite_whitelist_guest_invite_setting == null && t.length > 0) {
-                  $(to({
+                  $(showModalHandler({
                     type: _$$F,
                     data: {
                       emails: t,

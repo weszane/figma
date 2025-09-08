@@ -1,7 +1,7 @@
 import { v as _$$v } from "../905/516963";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, Ez5, FAf, jXp, Oin, SIf } from "../figma_app/763686";
-import { fn, sH } from "../905/871411";
+import { Fullscreen, AppStateTsApi, DesignWorkspace, FontSourceType, UIVisibilitySetting, ColorStateTsApi } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
 import { Lb } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -20,11 +20,11 @@ import { DI } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { b as _$$b } from "../905/620668";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { yJ, GZ } from "../figma_app/78808";
 import { z as _$$z } from "../905/404751";
 import { kP, Y6, XQ, ho } from "../figma_app/91703";
-import { to, Ce, AS } from "../905/156213";
+import { showModalHandler, hideModal, hideModalHandler } from "../905/156213";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { c as _$$c } from "../905/370443";
 import { GS, Cu } from "../figma_app/314264";
@@ -42,7 +42,7 @@ import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
 import { d1 } from "../905/766303";
 import { nk } from "../figma_app/2023";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { NT } from "../figma_app/741237";
 import { xK } from "../905/125218";
 import { jN } from "../905/612685";
@@ -73,12 +73,12 @@ import { PureComponent } from "react";
 import { tB, JU, nR, $$ } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { Dm } from "../figma_app/8833";
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { isEditorTypeEnabled, getLastUsedEditorType, setLastUsedEditorType } from "../905/298923";
 import { tn } from "../figma_app/473493";
 import { sf } from "../905/929976";
-import { Df } from "../figma_app/300692";
+import { mapToEditorType } from "../figma_app/300692";
 import { z4 } from "../905/37051";
 import { Jr } from "../figma_app/624361";
 import { Yu } from "../figma_app/139113";
@@ -117,8 +117,8 @@ async function ea(e, t, i) {
     }(l, c);
     null !== e && (await Ay.reloadAndWaitForever(`Feature flag change: ${e}`));
   }
-  await Y5.loadAndStartFullscreenIfNecessary();
-  glU.setEditorType(mapEditorTypeToYF(i));
+  await fullscreenValue.loadAndStartFullscreenIfNecessary();
+  Fullscreen.setEditorType(mapEditorTypeToYF(i));
   let m = s.team;
   m && t.dispatch(_$$yJ({
     team: m,
@@ -138,8 +138,8 @@ async function ea(e, t, i) {
     let e = window.FigmaMobile;
     g = !e || !!e.updateCommentsMode;
   }
-  h?.thumbnail_guid && Ez5.canvasViewState().thumbnailNodeId.set(h.thumbnail_guid);
-  selectedView.showInspectPanel ? NT(FAf.INSPECT) : g || (s.can_edit ? NT(FAf.DESIGN) : NT(FAf.COMMENT));
+  h?.thumbnail_guid && AppStateTsApi.canvasViewState().thumbnailNodeId.set(h.thumbnail_guid);
+  selectedView.showInspectPanel ? NT(DesignWorkspace.INSPECT) : g || (s.can_edit ? NT(DesignWorkspace.DESIGN) : NT(DesignWorkspace.COMMENT));
   selectedView.nodeId && (_ = selectedView.nodeId);
   selectedView.fallbackStateGroupId && (A = selectedView.fallbackStateGroupId);
   selectedView.viewport && (y = selectedView.viewport);
@@ -151,17 +151,17 @@ async function ea(e, t, i) {
       family: {},
       style: {}
     },
-    sources: [jXp.SHARED]
+    sources: [FontSourceType.SHARED]
   };
   getFeatureFlags().ce_new_missing_fonts_logging && e8();
   _$$n(t, I);
   (selectedView.versionId || selectedView.compareVersionId || selectedView.compareLatest) && t.dispatch(Y6({
-    mode: Oin.ON_AND_LOCKED
+    mode: UIVisibilitySetting.ON_AND_LOCKED
   }));
   selectedView.compareLatest && t.dispatch(hZ({
     openFileKey: s.file_key
   }));
-  selectedView.showPermissionsModalFromGoogleClassroomIntegration && selectedView.fileKey && t.dispatch(to({
+  selectedView.showPermissionsModalFromGoogleClassroomIntegration && selectedView.fileKey && t.dispatch(showModalHandler({
     type: g_,
     data: {
       fileKey: selectedView.fileKey,
@@ -176,9 +176,9 @@ async function ea(e, t, i) {
   let x = !!(s.is_team_template && LQ(n));
   desktopAPIInstance?.setIsLibrary(!!s.last_published_at);
   desktopAPIInstance?.setIsTeamTemplate(!!x);
-  glU.setEditorTheme(n.theme.visibleTheme || "");
-  SIf && ky.updateColorsInFullscreen(SIf.colorTokensState());
-  xK.time("openFileWithMetadata", () => glU.openFileWithServerMetadata({
+  Fullscreen.setEditorTheme(n.theme.visibleTheme || "");
+  ColorStateTsApi && ky.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
+  xK.time("openFileWithMetadata", () => Fullscreen.openFileWithServerMetadata({
     metadata: {
       file_key: s.file_key,
       source_file_key: s.source_file_key
@@ -199,7 +199,7 @@ async function ea(e, t, i) {
   S?.updateTrackingSessionId && w && S.updateTrackingSessionId(w);
 }
 let eT = "LICENSE_AGREEMENT_MODAL";
-qK(eT, e => jsx(ek, {
+registerLegacyModal(eT, e => jsx(ek, {
   ...e,
   selectedView: e.selectedView
 }));
@@ -215,7 +215,7 @@ class ek extends PureComponent {
       });
     };
     this.accept = () => {
-      this.props.dispatch(Ce());
+      this.props.dispatch(hideModal());
       let e = d1(this.props);
       let {
         selectedView
@@ -346,7 +346,7 @@ class eR extends PureComponent {
   }
 }
 eR.displayName = "AppleLicenseAgreement";
-let $$ej0 = nF(async (e, {
+let $$ej0 = createOptimistThunk(async (e, {
   newSelectedView: t
 }, {
   liveStore: i
@@ -371,7 +371,7 @@ let $$ej0 = nF(async (e, {
     if (e.tryPluginEditorType) {
       t.dispatch(sf({
         ...e,
-        editorType: Df(e.tryPluginEditorType)
+        editorType: mapToEditorType(e.tryPluginEditorType)
       }));
       let i = t.getState().selectedView;
       if ("fullscreen" !== i.view) throw Error("Redirect new editor type failed.");
@@ -446,7 +446,7 @@ let $$ej0 = nF(async (e, {
   mpGlobal.shouldConnectToMultiplayer || e.dispatch(XQ({
     fileVersion: Ob
   }));
-  Y5.figFileLoaded(n);
+  fullscreenValue.figFileLoaded(n);
   let {
     teamToMoveFileToOnNavigate
   } = a;
@@ -482,8 +482,8 @@ let $$ej0 = nF(async (e, {
     reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
   }
 });
-let eU = nF((e, t) => {
-  if (Y5.resetLoadedFigFile(), clearReportedErrors(), dK() !== xt.SUCCESS) throw Error("webGLSupport() call failed but we're opening fullscreen. Don't dispatch fullscreen.open() directly - use selectView instead.");
+let eU = createOptimistThunk((e, t) => {
+  if (fullscreenValue.resetLoadedFigFile(), clearReportedErrors(), dK() !== xt.SUCCESS) throw Error("webGLSupport() call failed but we're opening fullscreen. Don't dispatch fullscreen.open() directly - use selectView instead.");
   let i = e.getState().user;
   let {
     file,
@@ -510,7 +510,7 @@ let eU = nF((e, t) => {
   }));
   Yu(!1);
   e.dispatch(ho(t));
-  file && "apple" === (file.license || "").toLowerCase() && e.dispatch(to({
+  file && "apple" === (file.license || "").toLowerCase() && e.dispatch(showModalHandler({
     type: eT
   }));
   return null;
@@ -525,7 +525,7 @@ let eV = jW.exec(Ay.location.pathname);
 let eG = null;
 let ez = null;
 eV && (ez = eB(eG = eV[1]));
-let eH = nF(async (e, {
+let eH = createOptimistThunk(async (e, {
   file: t,
   user: i,
   selectedNodeId: o,
@@ -545,7 +545,7 @@ let eH = nF(async (e, {
       state: A
     });
     i ? mu(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
-    let d = fn(sH(o)) ? o : "";
+    let d = isValidSessionLocalID(parseSessionLocalID(o)) ? o : "";
     let v = w2(i_(A.theme.themePreference));
     BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (Jr().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
       logInfo("image", "Failed to generate compressed textures", {
@@ -574,7 +574,7 @@ let eH = nF(async (e, {
     }
     await ea(r, e, c);
     let I = A.theme.visibleTheme;
-    glU?.setEditorTheme(I || "");
+    Fullscreen?.setEditorTheme(I || "");
     BL(t, A, m);
     _$$b(mapEditorTypeToFileType(c));
     setLastUsedEditorType(c);
@@ -630,7 +630,7 @@ export async function $$eW1(e, t, i, n, r) {
       files: [r],
       folder: s,
       team: a,
-      onError: () => n.dispatch(AS())
+      onError: () => n.dispatch(hideModalHandler())
     }));
     let o = getI18nString("visual_bell.main_text", {
       teamName: e.name
@@ -648,7 +648,7 @@ export async function $$eW1(e, t, i, n, r) {
             trackingDescriptor: _$$c.PUBLISH_COMPONENTS_AFTER_TEAM_UPGRADE,
             inPublishDraftExp: !0
           }, "cta_clicked");
-          n.dispatch(to({
+          n.dispatch(showModalHandler({
             type: _$$T,
             data: {
               entrypoint: r6.PUBLISH_MODAL_AFTER_TEAM_UPGRADE

@@ -1,5 +1,5 @@
-import { l7 } from "../905/189185";
-import { uW } from "../905/426868";
+import { permissionScopeHandler } from "../905/189185";
+import { loadPluginFont } from "../905/426868";
 import { analyticsEventManager } from "../905/449184";
 import { F_, tK } from "../figma_app/191804";
 import { _ } from "../figma_app/436731";
@@ -114,7 +114,7 @@ export async function $$f3(e, t, r) {
     let e = g.pop();
     if (!e) continue;
     let t = e.node;
-    colors && l7.ai("first-draft-make-changes-theme-colors", () => {
+    colors && permissionScopeHandler.ai("first-draft-make-changes-theme-colors", () => {
       oR({
         node: t,
         getNewColor: m,
@@ -126,7 +126,7 @@ export async function $$f3(e, t, r) {
         }
       });
     });
-    l7.ai("first-draft-make-changes-theme-radius", () => {
+    permissionScopeHandler.ai("first-draft-make-changes-theme-radius", () => {
       if (!borderRadii || !function (e) {
         let t = e.fills.length > 0;
         let r = e.strokePaints.data.length > 0;
@@ -142,7 +142,7 @@ export async function $$f3(e, t, r) {
         (e = t.cornerRadius) in borderRadii && (t.cornerRadius = borderRadii[e]);
       }
     });
-    l7.ai("first-draft-make-changes-theme-spacing", () => {
+    permissionScopeHandler.ai("first-draft-make-changes-theme-spacing", () => {
       let e;
       spacing && ("HORIZONTAL" === t.stackMode || "VERTICAL" === t.stackMode) && ((e = t.stackSpacing) in spacing && (t.stackSpacing = spacing[e]), (e = t.stackTopPadding) in spacing && (t.stackTopPadding = spacing[e]), (e = t.stackBottomPadding) in spacing && (t.stackBottomPadding = spacing[e]), (e = t.stackLeftPadding) in spacing && (t.stackLeftPadding = spacing[e]), (e = t.stackRightPadding) in spacing && (t.stackRightPadding = spacing[e]));
     });
@@ -160,8 +160,8 @@ export async function $$f3(e, t, r) {
           postscript: ""
         };
         try {
-          await uW(e);
-          l7.ai("first-draft-make-changes-theme-font", () => {
+          await loadPluginFont(e);
+          permissionScopeHandler.ai("first-draft-make-changes-theme-font", () => {
             t.fontName = e;
           });
         } catch (s) {
@@ -170,8 +170,8 @@ export async function $$f3(e, t, r) {
             style: "Regular"
           };
           try {
-            await uW(r);
-            l7.ai("first-draft-make-changes-theme-font", () => {
+            await loadPluginFont(r);
+            permissionScopeHandler.ai("first-draft-make-changes-theme-font", () => {
               t.fontName = r;
             });
           } catch (r) {

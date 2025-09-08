@@ -17,18 +17,18 @@ import { Y as _$$Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
 import { k as _$$k2 } from "../figma_app/618031";
 import { u as _$$u } from "../905/16237";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { Cu } from "../figma_app/314264";
 import { ju } from "../905/389382";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { w as _$$w } from "../figma_app/171404";
 import { T as _$$T } from "../905/434246";
 import { k0, So } from "../905/223565";
-export let $$O0 = Ju(function ({
+export let $$O0 = registerModal(function ({
   licenseType: e,
   onRequest: t,
   onClose: i,
@@ -52,7 +52,7 @@ export let $$O0 = Ju(function ({
     entryPoint: M ?? "admin-auto-upgrade-confirmation-modal"
   });
   let H = () => {
-    U(Lo());
+    U(popModalStack());
   };
   let W = async e => {
     await t(e, H);

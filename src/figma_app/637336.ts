@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { b } from "../905/985254";
 import { h } from "../figma_app/275739";
 export let $$l0 = {
@@ -16,7 +16,7 @@ export function $$d1() {
   return useCallback(function (n) {
     if (n && n.sessionID) {
       try {
-        h3O?.observeUser(n.sessionID);
+        Multiplayer?.observeUser(n.sessionID);
       } catch {
         return;
       }

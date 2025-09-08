@@ -5,7 +5,7 @@ import { hS } from "../905/437088";
 import { nB, vo, Y9, hE, wi, jk } from "../figma_app/272243";
 import { k } from "../905/443820";
 import { bL } from "../905/38914";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { gY } from "../figma_app/566371";
@@ -15,7 +15,7 @@ import { s as _$$s2 } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cm } from "../figma_app/544879";
 import { t as _$$t2 } from "../905/53773";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { Ct } from "../figma_app/199513";
 import { CI } from "../figma_app/528509";
 import { N } from "../905/98916";
@@ -55,7 +55,7 @@ export function $$T0(e) {
 }
 function E(e) {
   let t = useDispatch();
-  let r = X();
+  let r = setupAutofocusHandler();
   let {
     folder,
     numFiles,
@@ -110,7 +110,7 @@ function E(e) {
     }).catch(() => {
       t(_$$s2.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
     });
-    t(Ce());
+    t(hideModal());
   };
   return jsxs(Fragment, {
     children: [jsxs(nB, {

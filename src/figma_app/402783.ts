@@ -1,13 +1,13 @@
 import { useState, useCallback } from "react";
-import { glU, cfv } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, Positioning } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { am } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { g as _$$g } from "../905/880308";
 import { b as _$$b } from "../905/985254";
 import { Ay, nU, c6 } from "../figma_app/432652";
@@ -30,11 +30,11 @@ class w {
   }
 }
 let O = D((e, t, r) => {
-  let n = l7.user("insert-ai-summary-node", () => glU.insertAISummaryInCanvas(t, r));
+  let n = permissionScopeHandler.user("insert-ai-summary-node", () => Fullscreen.insertAISummaryInCanvas(t, r));
   let s = e.get(n);
-  s && (l7.user("set-ai-summary-timestamp", () => {
+  s && (permissionScopeHandler.user("set-ai-summary-timestamp", () => {
     Gw(s, new Date());
-  }), glU.triggerAction("commit", {}));
+  }), Fullscreen.triggerAction("commit", {}));
   return s;
 });
 async function R({
@@ -57,7 +57,7 @@ async function R({
     fileKey: atomStoreManager.get(ze) || null,
     userId: atomStoreManager.get(kS) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
-    trackingSessionId: fF()
+    trackingSessionId: getTrackingSessionId()
   };
   let C = e => {
     let t;
@@ -87,8 +87,8 @@ async function R({
   let k = () => {
     if (!D) {
       let e = u.get(n);
-      e && e.isAlive && l7.system("remove-ai-summary-loading-state", () => {
-        glU.deleteNode(n);
+      e && e.isAlive && permissionScopeHandler.system("remove-ai-summary-loading-state", () => {
+        Fullscreen.deleteNode(n);
         D = !0;
       });
     }
@@ -106,7 +106,7 @@ async function R({
       v = e;
       let t = F % 5 == 0;
       P || (P = await M());
-      t && l7.system("stream-ai-summary", () => {
+      t && permissionScopeHandler.system("stream-ai-summary", () => {
         P && WN(P, v);
       });
       F++;
@@ -115,7 +115,7 @@ async function R({
     C(E$(e, ez.SUMMARIZE));
     return;
   }
-  if (l7.system("stream-ai-summary", () => {
+  if (permissionScopeHandler.system("stream-ai-summary", () => {
     v && P && WN(P, v);
   }), v) {
     let e = _.stop();
@@ -128,7 +128,7 @@ async function R({
       [zp]: !0
     }), c(P.guid, v, L));
   }
-  v && P && glU.triggerAction("commit", {});
+  v && P && Fullscreen.triggerAction("commit", {});
 }
 export function $$L0(e, t = !0, r) {
   let [o] = useState(getSingletonSceneGraph());
@@ -170,10 +170,10 @@ export function $$L0(e, t = !0, r) {
         v,
         data
       } = b7(getSingletonSceneGraph());
-      let u = l7.user("insert-ai-summary-loading-node", () => glU.insertLoadingSummaryInCanvas(e === cfv.BELOW, t));
+      let u = permissionScopeHandler.user("insert-ai-summary-loading-node", () => Fullscreen.insertLoadingSummaryInCanvas(e === Positioning.BELOW, t));
       let E = o.get(u);
       if (!E) return;
-      l7.user("insert-ai-summary-loading-node", () => {
+      permissionScopeHandler.user("insert-ai-summary-loading-node", () => {
         E.setWidgetSyncedState("syncedState:loading", "true");
       });
       _(QZ({
@@ -200,7 +200,7 @@ export function $$L0(e, t = !0, r) {
             source: r
           });
         } catch (e) {
-          o.get(u) && glU.deleteNode(u);
+          o.get(u) && Fullscreen.deleteNode(u);
         } finally {
           Sprig("track", AM);
           p(!1);

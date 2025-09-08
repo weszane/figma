@@ -1,12 +1,12 @@
-import { RYP, KXw, glU } from "../figma_app/763686";
+import { ColorSpaceEnum, ColorConversionEnum, Fullscreen } from "../figma_app/763686";
 import { jg } from "../905/707098";
 import { nk } from "../905/432392";
 import { t2 } from "../905/8035";
 import { Qf } from "../905/248569";
 import { kz } from "../905/77776";
 export let $$d0 = {
-  colorProfile: RYP.SRGB,
-  colorspaceConversion: KXw.NO_CONVERSION
+  colorProfile: ColorSpaceEnum.SRGB,
+  colorspaceConversion: ColorConversionEnum.NO_CONVERSION
 };
 function c(e) {
   return Math.round(255 * e);
@@ -28,14 +28,14 @@ export class $$h2 {
     this.opacity = i;
     this.colorManagement = r;
     this.variableValue = a;
-    if ("colorspaceConversion" in r && void 0 !== r.colorspaceConversion && r.colorspaceConversion !== KXw.NO_CONVERSION && void 0 !== glU && (this.color = function (e) {
+    if ("colorspaceConversion" in r && void 0 !== r.colorspaceConversion && r.colorspaceConversion !== ColorConversionEnum.NO_CONVERSION && void 0 !== Fullscreen && (this.color = function (e) {
       return {
         r: e.red,
         g: e.green,
         b: e.blue,
         a: "alpha" in e && 1 !== e.alpha ? e.alpha : void 0
       };
-    }(glU.applyConversionToColor(function (e) {
+    }(Fullscreen.applyConversionToColor(function (e) {
       return {
         red: e.r,
         green: e.g,
@@ -48,7 +48,7 @@ export class $$h2 {
     return new $$h2(this.color, this.preferences, this.opacity, this.colorManagement);
   }
   get value() {
-    return this.hasResolvedVariable() ? new kz(this.variableValue.name, this.rawColor, this.preferences, this.variableValue?.status === jg.Resolved ? this.variableValue : void 0).value : this.colorManagement.colorProfile === RYP.DISPLAY_P3 ? Qf(this.color, this.opacity) : p(this.color) || 1 !== this.opacity ? function (e, t = 1) {
+    return this.hasResolvedVariable() ? new kz(this.variableValue.name, this.rawColor, this.preferences, this.variableValue?.status === jg.Resolved ? this.variableValue : void 0).value : this.colorManagement.colorProfile === ColorSpaceEnum.DISPLAY_P3 ? Qf(this.color, this.opacity) : p(this.color) || 1 !== this.opacity ? function (e, t = 1) {
       let {
         r: _r,
         g,

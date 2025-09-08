@@ -2,8 +2,8 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createElement, memo, useEffect, useLayoutEffect } from "react";
 import { useSelector, shallowEqual, useStore } from "../vendor/514228";
 import { c2 } from "../905/382883";
-import { qE } from "../figma_app/492908";
-import { m1T, glU, Egt, VDs } from "../figma_app/763686";
+import { clamp } from "../figma_app/492908";
+import { LayoutTabType, Fullscreen, SceneGraphHelpers, CustomFocusHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr } from "../figma_app/27355";
 import u from "classnames";
@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
 import { K9 } from "../figma_app/8833";
 import { E3 } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { wr, Dh } from "../figma_app/741237";
 import { QZ } from "../figma_app/62612";
 import { W } from "../905/898204";
@@ -35,7 +35,7 @@ let $$L4 = {
   jumpOnAbort: !0
 };
 function P(e) {
-  let t = qE(e.headerLevel, 2, 6);
+  let t = clamp(e.headerLevel, 2, 6);
   return e.header ? jsxs(Fragment, {
     children: [jsx("div", {
       role: "heading",
@@ -246,7 +246,7 @@ export function $$j2({
   } : null;
   let eu = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
-    return (e.mirror.appModel.activeCanvasEditModeType !== m1T.TEXT && 1 === t.length ? t[0] : "") === k;
+    return (e.mirror.appModel.activeCanvasEditModeType !== LayoutTabType.TEXT && 1 === t.length ? t[0] : "") === k;
   });
   let {
     groupCommentNodeId,
@@ -264,8 +264,8 @@ export function $$j2({
       s = n ? t.get(n) : void 0;
     }
     if (r) {
-      let t = glU.getSortedChildGuids(r);
-      t.length > 0 && t[t.length - 1] === e ? (i = t.length, n = xR(Egt.getNodeTransformProperties(r))) : r = void 0;
+      let t = Fullscreen.getSortedChildGuids(r);
+      t.length > 0 && t[t.length - 1] === e ? (i = t.length, n = xR(SceneGraphHelpers.getNodeTransformProperties(r))) : r = void 0;
     }
     return {
       groupCommentNodeId: r,
@@ -301,7 +301,7 @@ export function $$j2({
   useLayoutEffect(() => {
     if (W) return;
     let e = document.getElementById(k);
-    e && (eu && !VDs.getExpectingTextInput() ? (e.setAttribute("tabindex", "0"), em.suppressed || e.focus()) : (e.setAttribute("tabindex", "-1"), e.blur()));
+    e && (eu && !CustomFocusHelpers.getExpectingTextInput() ? (e.setAttribute("tabindex", "0"), em.suppressed || e.focus()) : (e.setAttribute("tabindex", "-1"), e.blur()));
   }, [em, k, eu, W]);
   let [eg, ef] = _$$l(M ? [J, o, u, T, x, D, k, eu, j, B, G, H, z, W] : []);
   return jsxs(Fragment, {
@@ -324,7 +324,7 @@ export function $$j2({
         e.preventDefault();
       },
       onFocus: e => {
-        e.target !== e.currentTarget || e.relatedTarget === e.currentTarget || eu || (wr(), Dh([k]), Y5.commit(), F(QZ({
+        e.target !== e.currentTarget || e.relatedTarget === e.currentTarget || eu || (wr(), Dh([k]), fullscreenValue.commit(), F(QZ({
           nodeId: k,
           ...$$R0
         }), $$L4));

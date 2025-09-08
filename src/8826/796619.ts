@@ -11,7 +11,7 @@ import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { Um } from "../905/848862";
 import { Sh } from "../figma_app/889655";
@@ -25,7 +25,7 @@ import { ZC } from "../figma_app/39751";
 import { k as _$$k3 } from "../905/582200";
 import { u1 } from "../figma_app/91703";
 import { jD } from "../905/765855";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
 import { qo } from "../905/959568";
 import { p1 } from "../figma_app/779965";
@@ -48,7 +48,7 @@ function T({
   }, [o.showing, s]);
   useEffect(() => () => d.current?.(), []);
   let u = () => {
-    o.showing && (o.hide(), Y5.deselectProperty());
+    o.showing && (o.hide(), fullscreenValue.deselectProperty());
   };
   let h = Pt(n, "trigger");
   let {
@@ -420,7 +420,7 @@ function q({
       children: [jsx(et, {
         updatePreview: t,
         recordingKey: n
-      }), ("HORIZONTAL" === i || "VERTICAL" === i || gl(i)) && jsxs(Fragment, {
+      }), ("HORIZONTAL" === i || "VERTICAL" === i || isInvalidValue(i)) && jsxs(Fragment, {
         children: [jsx(J, {
           updatePreview: t,
           recordingKey: n
@@ -442,7 +442,7 @@ function J({
   let y = am();
   let S = useSelector(Sh);
   let j = getI18nState()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
-  let b = gl(c);
+  let b = isInvalidValue(c);
   let N = !0 === c;
   let I = useId();
   return jsx(_$$E, {
@@ -571,7 +571,7 @@ function et({
   let [o, c] = lJ("bordersTakeSpace");
   let m = am();
   let k = useSelector(Sh);
-  let y = gl(o);
+  let y = isInvalidValue(o);
   let S = !0 === o;
   let j = useId();
   return jsx(_$$E, {

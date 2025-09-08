@@ -1,6 +1,6 @@
 import { Yp } from "../figma_app/740025";
 import { a6 } from "../figma_app/198840";
-import { Ar } from "../figma_app/300692";
+import { getCurrentPluginVersion } from "../figma_app/300692";
 import { mr } from "../figma_app/45218";
 let $$o0 = 100;
 let $$l1 = {
@@ -11,7 +11,7 @@ let $$l1 = {
     localExtension: i,
     defaultName: n
   }) => t && function (e) {
-    return "name" in e ? e.name : mr(e) ? Ar(e)?.name || "" : a6(e).name;
+    return "name" in e ? e.name : mr(e) ? getCurrentPluginVersion(e)?.name || "" : a6(e).name;
   }(t) || n || i?.manifest.name || e?.name || "",
   validate: ({}, e) => {
     let t = Yp(e);

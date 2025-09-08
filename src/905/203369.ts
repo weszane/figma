@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { _L, mb, ql } from "../905/668764";
 import { LS } from "../figma_app/975811";
 import { jr, W0 } from "../figma_app/896988";
-import { hS, _W, gl, E7 } from "../905/216495";
+import { isValidValue, valueOrFallback, isInvalidValue, normalizeValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { jT } from "../figma_app/626177";
 import { p as _$$p } from "../905/427409";
@@ -28,12 +28,12 @@ export class $$I3 extends PureComponent {
       incrementTargets: null
     };
     this.looksEqual = (e, t) => {
-      let i = !hS(e);
-      return !hS(t) === i && (!!i || (this.props.formatter.isEqual ? this.props.formatter.isEqual(e, t) : this.props.formatter.format(e) === this.props.formatter.format(t)));
+      let i = !isValidValue(e);
+      return !isValidValue(t) === i && (!!i || (this.props.formatter.isEqual ? this.props.formatter.isEqual(e, t) : this.props.formatter.format(e) === this.props.formatter.format(t)));
     };
     this.selectAll = () => {
       let e = this.inputRef.current;
-      if (hS(this.props.property) && this.props.formatter.defaultSelection) {
+      if (isValidValue(this.props.property) && this.props.formatter.defaultSelection) {
         let t = this.props.formatter.defaultSelection(e.value);
         e.setSelectionRange(t.start, t.end);
       } else e.select();
@@ -56,7 +56,7 @@ export class $$I3 extends PureComponent {
         editingValue: null
       });
       let n = e => {
-        let t = this.props.formatter.parse(i, _W(e, void 0));
+        let t = this.props.formatter.parse(i, valueOrFallback(e, void 0));
         return this.props.formatter.clamp?.(t) ?? t;
       };
       try {
@@ -64,7 +64,7 @@ export class $$I3 extends PureComponent {
         null !== t && this.looksEqual(e, t) || this.props.onChange(e);
       } catch (r) {
         if (r instanceof LS) {
-          if (r.errorType === By.SYNTAX_EMPTY && this.props.allowEmpty) this.props.onChange(null);else if (r.errorType === By.EVAL_NO_CURRENT_VALUE && gl(t)) {
+          if (r.errorType === By.SYNTAX_EMPTY && this.props.allowEmpty) this.props.onChange(null);else if (r.errorType === By.EVAL_NO_CURRENT_VALUE && isInvalidValue(t)) {
             if (this.props.mixedMathHandler) {
               let e = this.props.mixedMathHandler.getValue();
               this.props.mixedMathHandler.onChange(e, n, zk.YES);
@@ -98,10 +98,10 @@ export class $$I3 extends PureComponent {
         if (this.context?.boundVariableId || (e.preventDefault(), !this.props.formatter.incrementBy)) return;
         let i = this.props.property;
         try {
-          i = this.props.formatter.parse(t.value || (this.props.placeholder ?? ""), E7(this.props.property) ?? void 0);
+          i = this.props.formatter.parse(t.value || (this.props.placeholder ?? ""), normalizeValue(this.props.property) ?? void 0);
         } catch (e) {}
         if (null == i && !this.props.allowEmpty) return;
-        if (hS(i)) {
+        if (isValidValue(i)) {
           let n = _L(this.props.formatter, t);
           let r = e.shiftKey;
           let a = e.keyCode === Uz.DOWN_ARROW ? -1 : 1;
@@ -153,7 +153,7 @@ export class $$I3 extends PureComponent {
     };
     this.onMouseUp = e => {
       let t = this.inputRef.current;
-      if (!this.state.editingValue && gl(this.props.property) && t.select?.(), !this.needToSelectAll) return aH;
+      if (!this.state.editingValue && isInvalidValue(this.props.property) && t.select?.(), !this.needToSelectAll) return aH;
       t.selectionStart === t.selectionEnd && this.selectAll();
       this.needToSelectAll = !1;
     };
@@ -209,14 +209,14 @@ export class $$I3 extends PureComponent {
   }
   shouldForwardUndo() {
     if (null === this.state.editingValue) return W0.YES;
-    if (hS(this.props.property)) {
+    if (isValidValue(this.props.property)) {
       let e = null == this.props.property ? "" : this.props.formatter.format(this.props.property);
       return this.state.editingValue === e ? W0.YES : W0.NO;
     }
     return W0.YES;
   }
   valueForRender() {
-    return null !== this.state.editingValue ? this.state.editingValue : hS(this.props.property) ? null == this.props.property ? "" : this.props.formatter.format(this.props.property) : getI18nString("fullscreen.mixed");
+    return null !== this.state.editingValue ? this.state.editingValue : isValidValue(this.props.property) ? null == this.props.property ? "" : this.props.formatter.format(this.props.property) : getI18nString("fullscreen.mixed");
   }
   renderVariablePill() {
     if (!this.shouldHandleVariables()) return null;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { encodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { buildUploadUrl } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { logInfo, logWarning } from "../905/714362";
@@ -162,19 +162,19 @@ export async function $$I4(e, t) {
     label: t,
     bytesLength: r?.length
   });
-  glU?.activateStampTool(r, t);
+  Fullscreen?.activateStampTool(r, t);
 }
 export async function $$S2(e, t, r, n, i, a) {
   let l = await T(e, m);
-  l7(a, "drop-stamp", () => glU?.emojiWheelDropStampOntoCanvas(l, t, r, n, i, "wheel"));
+  permissionScopeHandler(a, "drop-stamp", () => Fullscreen?.emojiWheelDropStampOntoCanvas(l, t, r, n, i, "wheel"));
 }
 export async function $$v9(e, t, r, n, i, a) {
   let l = await T(e, m);
-  l7(a, "drop-face", () => glU?.dropFaceOntoCanvas(l, "Face Stamp", t, r, n, i));
+  permissionScopeHandler(a, "drop-face", () => Fullscreen?.dropFaceOntoCanvas(l, "Face Stamp", t, r, n, i));
 }
 export async function $$A8(e, t, r, n) {
   let i = await T(e, m);
-  l7(n, "replace-face", () => glU?.updateFaceForNode(i, t, r));
+  permissionScopeHandler(n, "replace-face", () => Fullscreen?.updateFaceForNode(i, t, r));
 }
 export function $$x5(e, t) {
   if (e.image) return buildUploadUrl(e.image);

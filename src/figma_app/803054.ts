@@ -1,20 +1,20 @@
 import { useSelector } from "../vendor/514228";
-import { ibQ, Ez5, nQ7, iCO } from "../figma_app/763686";
+import { ItemType, AppStateTsApi, SelfDesignType, StateHierarchy } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
 import { OU } from "../figma_app/175258";
 import { isZoomIntegration } from "../figma_app/469876";
-import { gl, oV, _W } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { Gt, kl, ER, pw, zj } from "../905/275640";
 import { ax, p8 } from "../figma_app/722362";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Pe } from "../figma_app/12796";
 import { sO } from "../figma_app/21029";
 import { GV } from "../figma_app/159296";
 import { uj0 } from "../figma_app/27776";
 export let $$f16 = parsePxNumber(uj0);
 export function $$E15(e) {
-  return e[ibQ.TRANSFORM_ITEM] || e[ibQ.VECTOR_ITEM];
+  return e[ItemType.TRANSFORM_ITEM] || e[ItemType.VECTOR_ITEM];
 }
 export function $$y12(e, t, r) {
   let n = t.numSelectedByType && !!t.numSelectedByType.SLIDE;
@@ -27,8 +27,8 @@ export function $$b13() {
   let e = Gt("numSelectedByType");
   let t = ax();
   let r = sO();
-  let n = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  if (!e || !t || r && n !== nQ7.DESIGN) return !1;
+  let n = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
+  if (!e || !t || r && n !== SelfDesignType.DESIGN) return !1;
   let s = ["FRAME", "SYMBOL"];
   getFeatureFlags().dakota_grid_repeaters && s.push("REPEATER");
   return OU(e, s);
@@ -37,14 +37,14 @@ export function $$T6() {
   let e = GV();
   return useSelector(t => {
     let r = t.mirror.selectionPaints;
-    return !!(!$$I4(e) && e[ibQ.SELECTION_COLORS] && (r.styles.length > 0 || r.paints.length > 0 || r.emptyDueToLimitExceeded));
+    return !!(!$$I4(e) && e[ItemType.SELECTION_COLORS] && (r.styles.length > 0 || r.paints.length > 0 || r.emptyDueToLimitExceeded));
   });
 }
 export function $$I4(e) {
-  return !!e[ibQ.SCALE_ITEM] && !getFeatureFlags().ee_scale_tool_show_all_panels;
+  return !!e[ItemType.SCALE_ITEM] && !getFeatureFlags().ee_scale_tool_show_all_panels;
 }
 export function $$S2(e) {
-  return !$$I4(e) && !!e[ibQ.CONSTRAINTS_ITEM];
+  return !$$I4(e) && !!e[ItemType.CONSTRAINTS_ITEM];
 }
 export function $$v8(e, t) {
   return function (e, t, r) {
@@ -61,11 +61,11 @@ export function $$v8(e, t) {
       let o = !!t?.CODE_LAYER;
       return !!(!e && !i && !a && !s && !o && (propertiesPanelShouldShowAddAutoLayout || propertiesPanelShouldShowRemoveAutoLayout));
     }(t);
-    return !n && (a || e[ibQ.STACK_ITEM] || !!(r && e[ibQ.TRANSFORM_ITEM]));
+    return !n && (a || e[ItemType.STACK_ITEM] || !!(r && e[ItemType.TRANSFORM_ITEM]));
   }(e, $$I4(e), t);
 }
 export function $$A5(e, t) {
-  return !!e[ibQ.EXPORT_ITEM] && null !== t && !Pe(t) && !isZoomIntegration();
+  return !!e[ItemType.EXPORT_ITEM] && null !== t && !Pe(t) && !isZoomIntegration();
 }
 export function $$x1(e) {
   let t = p8("showUi");
@@ -73,38 +73,38 @@ export function $$x1(e) {
   return t && !!e && r;
 }
 export function $$N18(e, t) {
-  return !!e[ibQ.COMPONENT_ITEM] && !(!(!t || gl(t)) && t.mode === iCO.STATE);
+  return !!e[ItemType.COMPONENT_ITEM] && !(!(!t || isInvalidValue(t)) && t.mode === StateHierarchy.STATE);
 }
 export function $$C3(e) {
-  return !!e[ibQ.INSTANCE_ITEM];
+  return !!e[ItemType.INSTANCE_ITEM];
 }
 export function $$w9(e) {
   let t = kl("transformModifiers");
-  return !!e[ibQ.TRANSFORM_MODIFIERS_ITEM] && !!t && t !== oV && _W(t, []).length > 0;
+  return !!e[ItemType.TRANSFORM_MODIFIERS_ITEM] && !!t && t !== MIXED_MARKER && valueOrFallback(t, []).length > 0;
 }
 export function $$O11(e) {
-  return !!(e[ibQ.INSTANCE_ITEM] && !e[ibQ.TYPE_ITEM]);
+  return !!(e[ItemType.INSTANCE_ITEM] && !e[ItemType.TYPE_ITEM]);
 }
 export function $$R17(e) {
-  return !!(e[ibQ.SITES_CODE_COMPONENT_ITEM] && !e[ibQ.CODE_INSTANCE_HTML_FIBER]);
+  return !!(e[ItemType.SITES_CODE_COMPONENT_ITEM] && !e[ItemType.CODE_INSTANCE_HTML_FIBER]);
 }
 export function $$L14(e) {
-  return !!e[ibQ.SITES_HTML_WIDGET_ITEM];
+  return !!e[ItemType.SITES_HTML_WIDGET_ITEM];
 }
 export function $$P10(e, t) {
   let r = p8("isReadOnly");
-  return !$$I4(e) && !r && 0 === Object.keys(t).length && !e[ibQ.FRAME_PRESETS];
+  return !$$I4(e) && !r && 0 === Object.keys(t).length && !e[ItemType.FRAME_PRESETS];
 }
 export function $$D19(e, t) {
-  return !$$I4(e) && 0 === Object.keys(t).length && !e[ibQ.FRAME_PRESETS];
+  return !$$I4(e) && 0 === Object.keys(t).length && !e[ItemType.FRAME_PRESETS];
 }
 export function $$k7() {
   let e = Gt("numSelectedByType");
   let t = kl("vectorOperationVersion");
-  return !!getFeatureFlags().ce_vector_ops_use_all_geometry && !!e?.VECTOR_OPERATION && (0 === t || t === oV);
+  return !!getFeatureFlags().ce_vector_ops_use_all_geometry && !!e?.VECTOR_OPERATION && (0 === t || t === MIXED_MARKER);
 }
 export function $$M0(e) {
-  return !!getFeatureFlags().dse_slots && !!e[ibQ.SLOT_ITEM];
+  return !!getFeatureFlags().dse_slots && !!e[ItemType.SLOT_ITEM];
 }
 export const Br = $$M0;
 export const Dj = $$x1;

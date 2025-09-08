@@ -1,4 +1,4 @@
-import { juq, glU } from "../figma_app/763686";
+import { FileSourceType, Fullscreen } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
 import { g } from "../905/566160";
 let s = class e extends Error {
@@ -12,12 +12,12 @@ s.message = "Auto-suggest session is not available";
 export let $$o1 = s;
 class l extends (ReduxSceneGraph ?? class {}) {
   constructor(e, t) {
-    super(juq.AUTO_SUGGEST);
+    super(FileSourceType.AUTO_SUGGEST);
     this.sceneGUID = e;
     this.sessionType = t;
   }
   get scene() {
-    let e = glU?.getAutoSuggestSceneByGUID(this.sceneGUID, this.sessionType);
+    let e = Fullscreen?.getAutoSuggestSceneByGUID(this.sceneGUID, this.sessionType);
     if (!e) throw Error("Scene does not exist");
     return e;
   }
@@ -25,7 +25,7 @@ class l extends (ReduxSceneGraph ?? class {}) {
 export class $$d0 {
   constructor(e, t) {
     this.validateFullScreenAvailable();
-    let i = glU?.startNewAutoSuggestSession(e);
+    let i = Fullscreen?.startNewAutoSuggestSession(e);
     if (!i) throw Error("Failed to reset auto suggest scene");
     this.sessionID = i;
     this.sceneMap = new Map();
@@ -34,7 +34,7 @@ export class $$d0 {
   }
   destroy() {
     this.validation();
-    glU?.endAutoSuggestSession(this.sessionID, this.sessionType);
+    Fullscreen?.endAutoSuggestSession(this.sessionID, this.sessionType);
   }
   async loadBuffertoScene(e, t) {
     let i = new TaskController({
@@ -42,7 +42,7 @@ export class $$d0 {
     });
     let r = new Promise((e, r) => {
       scheduler.postTask(() => {
-        let i = glU?.loadBufferToAutoSuggestScene(this.sessionID, t, this.sessionType);
+        let i = Fullscreen?.loadBufferToAutoSuggestScene(this.sessionID, t, this.sessionType);
         i || r(Error("Failed to load buffer to auto suggest scene"));
         e(i);
       }, {
@@ -68,7 +68,7 @@ export class $$d0 {
   unloadScene(e) {
     let t = this.sceneMap.get(e);
     if (!t) throw Error("Scene does not exist");
-    glU?.unloadAutoSuggestSceneByGUID(this.sessionID, t.sceneGUID, this.sessionType);
+    Fullscreen?.unloadAutoSuggestSceneByGUID(this.sessionID, t.sceneGUID, this.sessionType);
     this.sceneMap.$$delete(e);
   }
   unloadFragment(e) {
@@ -81,10 +81,10 @@ export class $$d0 {
     this.validateSceneAvailable();
   }
   validateFullScreenAvailable() {
-    if (!glU) throw Error("Fullscreen is not initialized");
+    if (!Fullscreen) throw Error("Fullscreen is not initialized");
   }
   validateSceneAvailable() {
-    let e = glU?.getAutoSuggestSessionID(this.sessionType);
+    let e = Fullscreen?.getAutoSuggestSessionID(this.sessionType);
     if (!e || e !== this.sessionID) {
       this.abortController.abort();
       return new $$o1();

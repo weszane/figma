@@ -5,9 +5,9 @@ import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { a as _$$a } from "../905/462280";
-import { j0r, NVY } from "../figma_app/763686";
+import { PropertyScope, ColorFormatEnum } from "../figma_app/763686";
 import _ from "classnames";
 import { b as _$$b } from "../figma_app/517135";
 import { reportError } from "../905/11";
@@ -20,7 +20,7 @@ import { rb } from "../905/711212";
 import { ro } from "../figma_app/451499";
 import { m0 } from "../figma_app/976749";
 import { Ku, UK } from "../figma_app/740163";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { Gp } from "../figma_app/646357";
 import { QH } from "../905/405710";
@@ -69,7 +69,7 @@ export function $$Q0(e) {
     blendMode,
     onError
   } = e;
-  let a = gl(blendMode) || "string" == typeof blendMode;
+  let a = isInvalidValue(blendMode) || "string" == typeof blendMode;
   return (blendMode && !a && (console.error(TypeError(`Expected mixed | string | undefined, got ${typeof blendMode}`)), onError && onError(blendMode), r = void 0), !blendMode || ["NORMAL", "PASS_THROUGH"].includes(blendMode)) ? null : t && !e.layout ? jsx(_p, {
     className: Om,
     copyValue: blendMode.toLowerCase(),
@@ -512,7 +512,7 @@ export function $$ec9(e) {
 export function $$eu10() {
   let e = useSelector(e => e.mirror.selectionProperties.fillPaints);
   let t = _$$rb();
-  let r = useMemo(() => !e || gl(e) ? [] : e, [e]);
+  let r = useMemo(() => !e || isInvalidValue(e) ? [] : e, [e]);
   let n = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKey"));
   let s = useSelector(_$$e_);
   let o = useSelector(e => e.mirror.selectionProperties.inheritFillStyleKey);
@@ -521,15 +521,15 @@ export function $$eu10() {
   let c = t && _$$Ku(t);
   let u = Ig();
   let _ = o ? Gp(o, d ? [d] : [], s) : void 0;
-  let h = r.filter($$ec9).map(e => dc(e, u, c || j0r.ALL_FILLS));
+  let h = r.filter($$ec9).map(e => dc(e, u, c || PropertyScope.ALL_FILLS));
   return _ && n ? [rP(n, _, h)] : h;
 }
 export function $$ep11() {
   let e = useSelector(e => e.mirror.selectionProperties.textDecorationFillPaints);
   let t = useSelector(e => e.mirror.selectionProperties.textDecoration);
-  let r = useMemo(() => "UNDERLINE" !== t || !e || gl(e) ? [] : e, [t, e]);
+  let r = useMemo(() => "UNDERLINE" !== t || !e || isInvalidValue(e) ? [] : e, [t, e]);
   let n = Ig();
-  return r.filter($$ec9).map(e => dc(e, n, j0r.TEXT_FILL));
+  return r.filter($$ec9).map(e => dc(e, n, PropertyScope.TEXT_FILL));
 }
 let e_ = () => {
   let e = jY();
@@ -704,8 +704,8 @@ export function $$ey3() {
     })
   });
 }
-let eb = [NVY.HEX, NVY.RGB, NVY.HSL, NVY.HSB, NVY.UIColor];
-let eT = [NVY.HEX, NVY.RGB, NVY.CSS, NVY.HSL, NVY.HSB];
+let eb = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.HSL, ColorFormatEnum.HSB, ColorFormatEnum.UIColor];
+let eT = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.CSS, ColorFormatEnum.HSL, ColorFormatEnum.HSB];
 export function $$eI1() {
   let e = Ku();
   let t = m0();
@@ -721,7 +721,7 @@ export function $$eI1() {
     onChange: a,
     children: [jsx(l9, {
       width: "fill",
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: _$$F.format(e)
       })
     }), jsx(mc, {
@@ -734,12 +734,12 @@ export function $$eI1() {
 }
 function eS(e = {}) {
   let {
-    format = NVY.HEX,
+    format = ColorFormatEnum.HEX,
     isInGradient,
     isInStyle
   } = e;
   let i = K5;
-  let a = format === NVY.HEX ? "" : cZ;
+  let a = format === ColorFormatEnum.HEX ? "" : cZ;
   let s = isInStyle ? UU : void 0;
   let o = isInGradient ? fz : void 0;
   return h()(i, a, o, s);

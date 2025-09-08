@@ -8,7 +8,7 @@ import { S } from "../905/339549";
 import { yM, DP } from "../905/640017";
 import { E } from "../905/712094";
 import { zY } from "../905/148137";
-import { $V, EB } from "../figma_app/831101";
+import { isAddressEmpty, createEmptyAddress } from "../figma_app/831101";
 import { X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
 import { sq } from "../905/613896";
@@ -112,10 +112,10 @@ function y(e, t, i) {
   })[e];
 }
 function b(e) {
-  let [t, i] = useState(!!e.shippingAddress && !$V(e.shippingAddress));
+  let [t, i] = useState(!!e.shippingAddress && !isAddressEmpty(e.shippingAddress));
   let a = e => {
     i(!t);
-    t && e.onShippingAddressChange && e.onShippingAddressChange(EB());
+    t && e.onShippingAddressChange && e.onShippingAddressChange(createEmptyAddress());
   };
   return jsxs(Fragment, {
     children: [jsxs("div", {

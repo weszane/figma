@@ -1,10 +1,10 @@
 import { debounce } from "../905/915765";
-import { tHB } from "../figma_app/763686";
+import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { XHR } from "../905/910117";
 import { C } from "../905/991119";
 import { S } from "../figma_app/787550";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { xY } from "../figma_app/624361";
 import { thumbnailGenerator } from "../905/435722";
 var p = (e => (e.FILE_KEY = "fileKey", e.LIBRARY_KEY = "libraryKey", e))(p || {});
@@ -55,7 +55,7 @@ class _ {
               success,
               failed
             } = xY.parseFileUpdateResponseForImages(d, e);
-            for (let e of (tHB.markVideoPermissionsCopied(success), failed)) tHB.videoIsMissing(e);
+            for (let e of (VideoCppBindings.markVideoPermissionsCopied(success), failed)) VideoCppBindings.videoIsMissing(e);
             for (let e of d) delete this.pendingPasteRequests[e];
             "fileKey" === a.type ? r[a.fileKey].resolve() : n[a.libraryKey].resolve();
             this.getAllVideoUrls();
@@ -63,7 +63,7 @@ class _ {
           } catch (e) {
             if (e.status >= 400 && e.status < 500) {
               for (let e of d) {
-                tHB.videoIsMissing(e);
+                VideoCppBindings.videoIsMissing(e);
                 delete this.pendingPasteRequests[e];
               }
               "fileKey" === a.type ? r[a.fileKey].resolve() : n[a.libraryKey].resolve();
@@ -134,7 +134,7 @@ class _ {
     return r;
   }
   getEditingFileKey() {
-    return Y5.openFileKeyPromise();
+    return fullscreenValue.openFileKeyPromise();
   }
   contextLost() {
     for (let e of this.contextLostCallbacks.values()) e();
@@ -182,7 +182,7 @@ export let $$h0 = new class {
   async setExternalSource(e, t) {
     let r = await fetch(t);
     let n = new Uint8Array(await r.arrayBuffer());
-    let i = await Y5.openFileKeyPromise();
+    let i = await fullscreenValue.openFileKeyPromise();
     C([{
       sha1: e,
       bytes: n

@@ -1,5 +1,5 @@
 import { bo } from "../figma_app/903114";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 export function $$a0({
   dispatch: e,
   planUser: t,
@@ -8,7 +8,7 @@ export function $$a0({
   nextSeatType: s,
   hideFooter: o
 }) {
-  e(to({
+  e(showModalHandler({
     type: bo,
     data: {
       planUser: t,

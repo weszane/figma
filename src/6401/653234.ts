@@ -7,7 +7,7 @@ import { E as _$$E } from "../905/632989";
 import { l as _$$l } from "../905/103989";
 import { f as _$$f } from "../905/640587";
 import { J as _$$J } from "../905/614223";
-import { nc, l7 } from "../905/189185";
+import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import j from "classnames";
 import { L as _$$L } from "../905/408237";
 import { B as _$$B } from "../905/714743";
@@ -235,12 +235,12 @@ function B({
         let s = JSON.parse(a);
         s.userId === l && (e = s);
         t.push(s);
-      } catch (e) {}
+      } catch (e) { }
       return t;
     }, []).sort((e, t) => e.timestamp - t.timestamp), e] : [[], void 0];
   }, [participantData, l]);
   let g = "true" === configData.resultsShown;
-  let x = nc.user("slides-toggle-alignment-scale-results-shown", () => {
+  let x = scopeAwareFunction.user("slides-toggle-alignment-scale-results-shown", () => {
     setConfigData("resultsShown", (!g).toString());
   });
   let j = aF(configData);
@@ -433,7 +433,7 @@ let z = {
       recordingKey: f(nodeId, "slides-alignment-scale-prompt-input"),
       prompt: configData.prompt,
       setPrompt: e => {
-        l7.user("slides-update-alignment-scale-prompt", () => {
+        permissionScopeHandler.user("slides-update-alignment-scale-prompt", () => {
           setConfigData("prompt", e);
         });
       }
@@ -454,7 +454,7 @@ let z = {
         prompt: configData.prompt
       }),
       onVoteRequest: e => {
-        l7.user("slides-update-alignment-scale-vote", () => {
+        permissionScopeHandler.user("slides-update-alignment-scale-vote", () => {
           setParticipantData(e.userId, JSON.stringify(e));
         });
       }
@@ -543,7 +543,7 @@ function ea({
           let s = JSON.parse(a);
           s.userId === t && (l = !0);
           e.push(s);
-        } catch (e) {}
+        } catch (e) { }
         return e;
       }, []).sort((e, l) => e.userId === t ? -1 : l.userId === t ? 1 : e.timestamp - l.timestamp),
       currentUserStamped: l
@@ -713,7 +713,7 @@ let ep = {
     let l = jsx(et, {
       prompt: configData.prompt,
       setPrompt: e => {
-        l7.user("slides-update-facepile-question", () => {
+        permissionScopeHandler.user("slides-update-facepile-question", () => {
           setConfigData("prompt", e);
         });
       }
@@ -734,7 +734,7 @@ let ep = {
         prompt: configData.prompt
       }),
       onToggleStampRequest: (e, l) => {
-        l7.user("slides-add-user-facepile-stamp", () => {
+        permissionScopeHandler.user("slides-add-user-facepile-stamp", () => {
           setParticipantData(e, JSON.stringify(l));
         });
       }
@@ -768,7 +768,7 @@ function ek({
   } = d();
   let c = useDispatch();
   let u = iZ();
-  let m = nc.system("slides-update-poll-votes", e => {
+  let m = scopeAwareFunction.system("slides-update-poll-votes", e => {
     if (!u) {
       c(_$$s2.error(getI18nString("slides.flapp.poll.vote_failure")));
       return;
@@ -843,13 +843,13 @@ function eF({
   } = p();
   let h = eE(configData);
   let g = e => `option${e}`;
-  let x = nc.user(ev, e => {
+  let x = scopeAwareFunction.user(ev, e => {
     setConfigData(g(o), e);
   });
-  let v = nc.user(ev, e => {
+  let v = scopeAwareFunction.user(ev, e => {
     setConfigData(g(o), e.clipboardData.getData("text"));
   });
-  let j = nc.user(e_, e => {
+  let j = scopeAwareFunction.user(e_, e => {
     o === h.length - 1 && ("Enter" === e.key && h.length < 6 ? (setConfigData(g(o + 1), ""), d(!0)) : h.length > 2 && 0 === h[o].length && ("Backspace" === e.key || "Delete" === e.key) && (deleteConfigData && (deleteConfigData(g(o)), e.preventDefault()), d(!0)));
   });
   let N = t.map(e => ({
@@ -990,7 +990,7 @@ function eL({
     let e = N.current;
     let t = new ResizeObserver(e => {
       let t = getSingletonSceneGraph().get(nodeId);
-      if (t) for (let l of e) l7.system("slides-poll-auto-resize", () => {
+      if (t) for (let l of e) permissionScopeHandler.system("slides-poll-auto-resize", () => {
         let e = getComputedStyle(l.target);
         let a = parseFloat(e.paddingTop);
         let s = a + parseFloat(e.paddingBottom) + parseFloat(e.borderTopWidth) + parseFloat(e.borderBottomWidth);
@@ -1007,7 +1007,7 @@ function eL({
     };
   }, [nodeId, isViewer]);
   let y = e => `option${e}`;
-  let w = nc.user("slides-update-poll-results-visibility", e => {
+  let w = scopeAwareFunction.user("slides-update-poll-results-visibility", e => {
     setConfigData("resultsShown", e ? "true" : "false");
   });
   let {
@@ -1027,7 +1027,7 @@ function eL({
         s.userId === e && (n = s.selectedOption);
         a = a && a.timestamp > s.timestamp || !a ? s : a;
         t.push(s);
-      } catch (e) {}
+      } catch (e) { }
       return t;
     }, []).sort((e, t) => e.timestamp - t.timestamp);
     let r = 0;
@@ -1080,7 +1080,7 @@ function eL({
           votes: groupedVotes[t] ?? []
         }, t);
       }), jsx(eU, {
-        onClick: m.length >= 6 ? void 0 : nc.user(e_, () => {
+        onClick: m.length >= 6 ? void 0 : scopeAwareFunction.user(e_, () => {
           setConfigData(y(m.length), "");
           x(!0);
         }),
@@ -1107,10 +1107,10 @@ function eB() {
     nodeId
   } = p();
   let n = configData.question || "";
-  let i = nc.user(ex, e => {
+  let i = scopeAwareFunction.user(ex, e => {
     setConfigData("question", e);
   });
-  let r = nc.user(ex, e => {
+  let r = scopeAwareFunction.user(ex, e => {
     setConfigData("question", e.clipboardData.getData("text"));
   });
   return isViewer ? jsx("h1", {
@@ -1221,7 +1221,7 @@ let eY = {
       isReadOnly || configData.srcUrl || eR(configData.url).then(async e => {
         if (!e) return;
         let a = getSingletonSceneGraph().get(nodeId);
-        if (a && (l7.system("initializing-youtube", () => {
+        if (a && (permissionScopeHandler.system("initializing-youtube", () => {
           _$$r(() => {
             a.resizeWithConstraints(e.width, e.height);
             a.proportionsConstrained = !0;
@@ -1237,12 +1237,12 @@ let eY = {
         }), e.thumbnailImage)) try {
           let t = new Uint8Array(e.thumbnailImage.data);
           let l = await UD(t, "image/png", e.title);
-          l7.system("initializing-youtube-thumbnail", () => {
+          permissionScopeHandler.system("initializing-youtube-thumbnail", () => {
             _$$r(() => {
               a.insertImageInFillPaint(l);
             });
           });
-        } catch (e) {}
+        } catch (e) { }
       });
     }, [configData.url, configData.srcUrl, nodeId, setConfigData, isReadOnly]), configData.url && !configData.srcUrl) ? jsx("div", {
       className: _$$s.absolute.w48.h48.$,

@@ -7,7 +7,7 @@ import { Ts } from "../905/194276";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { X2, e6 } from "../figma_app/530167";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { s0, ZO } from "../figma_app/350203";
 import { cs } from "../figma_app/740025";
 import { VP, GH, aF } from "../905/18797";
@@ -43,7 +43,7 @@ export function $$v0({
     I(Ts({
       origin: i
     }));
-    I(to({
+    I(showModalHandler({
       type: _$$l,
       data: {
         headerText: e,
@@ -97,7 +97,7 @@ export function $$v0({
         return;
       }
       if (!E.community_profile_id) {
-        I(to({
+        I(showModalHandler({
           type: G$,
           data: {
             userId: E.id,

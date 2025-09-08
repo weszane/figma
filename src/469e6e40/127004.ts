@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { R } from "../905/307199";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { o as _$$o } from "../905/524481";
 import { g } from "../905/763242";
 import { yX } from "../figma_app/918700";
@@ -18,7 +18,7 @@ export function $$p0() {
     }),
     onConfirm: () => {
       e(_$$o());
-      e(Ce());
+      e(hideModal());
     },
     confirmText: getI18nString("shared_fonts.upload_error_modal.okay"),
     hideCancel: !0,

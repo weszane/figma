@@ -1,7 +1,7 @@
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { BrowserInfo } from "../figma_app/778880";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { b } from "../905/985254";
 let l = BrowserInfo.isIpad || BrowserInfo.isIpadNative;
 function d() {
@@ -11,7 +11,7 @@ export function $$c0() {
   let e = d();
   return !!debugState && !!debugState.getState().userFlags[e];
 }
-export let $$u1 = nF((e, t) => {
+export let $$u1 = createOptimistThunk((e, t) => {
   var i;
   let {
     userFlag = d(),

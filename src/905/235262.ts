@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { useUndoRedoAtom, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { sf } from "../905/929976";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { _6 } from "../figma_app/386952";
 import { SW, c1 } from "../905/589717";
 import { E as _$$E } from "../905/694285";
@@ -72,7 +72,7 @@ function S({
     t && m(t.id);
   }, [m, l]);
   useEffect(() => {
-    Y5.setFigmascopeSelectedGuidCallback(A);
+    fullscreenValue.setFigmascopeSelectedGuidCallback(A);
   }, [A]);
   let y = p ? l.getNodeById(p) : null;
   let b = k9(() => y ? w(y) : null, [y]);

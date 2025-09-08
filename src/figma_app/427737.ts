@@ -1,12 +1,12 @@
-import { Msn } from "../figma_app/763686";
+import { SitesBindingsCpp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { rg } from "../figma_app/61758";
 import { _ } from "../905/242661";
 import { Ct } from "../figma_app/205280";
 import { Yf } from "../905/556648";
 function d(e, t = {}) {
-  if (!Msn) throw Error("SitesBindingsCpp is not available in generateJsonCPP");
-  return Msn.generateSitesBundleJson(e, t);
+  if (!SitesBindingsCpp) throw Error("SitesBindingsCpp is not available in generateJsonCPP");
+  return SitesBindingsCpp.generateSitesBundleJson(e, t);
 }
 export async function $$c1(e, t = !1, r = !1, n = !1, i = !1) {
   await rg();

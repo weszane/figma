@@ -1,7 +1,7 @@
 import _require from "../0c62c2fd/653470";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { NUh, h62, glU, MEW } from "../figma_app/763686";
+import { LogToConsoleMode, WhiteboardIntegrationType, Fullscreen, PerfResult } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import d from "../vendor/197638";
 import { trackEventAnalytics } from "../905/449184";
@@ -12,12 +12,12 @@ import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { A as _$$A } from "../905/658244";
-import { Ju, Ij } from "../905/102752";
-import { to, AS } from "../905/156213";
+import { registerModal, createModalConfig } from "../905/102752";
+import { showModalHandler, hideModalHandler } from "../905/156213";
 import { D as _$$D2 } from "../905/758526";
 import { P as _$$P } from "../905/813637";
 import { eg as _$$eg, a4 } from "../figma_app/576669";
-import { Et, aD } from "../905/125019";
+import { sha1Hex, sha1BytesFromHex } from "../905/125019";
 import { logError, logInfo } from "../905/714362";
 import { EC } from "../figma_app/291892";
 let n;
@@ -49,11 +49,11 @@ async function N(e) {
   let r = e.height.baseVal.value;
   let a = await R(i, n, r);
   if (!a) throw Error("Couldn't compress!!");
-  let s = Et(a);
+  let s = sha1Hex(a);
   e.removeAttribute("href");
   e.removeAttribute("xlink:href");
   e.setAttribute("imageHash", s);
-  let o = aD(s);
+  let o = sha1BytesFromHex(s);
   return {
     name: "Image",
     bytes: a,
@@ -1840,7 +1840,7 @@ async function Q(e, t, i) {
       callOnFailure: () => {
         e.current.setStrokeColorN = X;
         logInfo("pdf", `Unsupported stroke, using: ${X}`, void 0, {
-          logToConsole: NUh.ALWAYS
+          logToConsole: LogToConsoleMode.ALWAYS
         });
       }
     }, {
@@ -1849,7 +1849,7 @@ async function Q(e, t, i) {
       callOnFailure: () => {
         e.current.setFillColorN = X;
         logInfo("pdf", `Unsupported fill, using: ${X}`, void 0, {
-          logToConsole: NUh.ALWAYS
+          logToConsole: LogToConsoleMode.ALWAYS
         });
       }
     }, {
@@ -1857,7 +1857,7 @@ async function Q(e, t, i) {
       isErrorOfInterest: e => "invalid format" === e.message,
       callOnFailure: () => {
         logInfo("pdf", "Unsupported image", void 0, {
-          logToConsole: NUh.ALWAYS
+          logToConsole: LogToConsoleMode.ALWAYS
         });
       }
     }, {
@@ -1865,7 +1865,7 @@ async function Q(e, t, i) {
       isErrorOfInterest: e => e.message.startsWith("addFontStyle: No font data available"),
       callOnFailure: () => {
         logInfo("pdf", "Unsupported font", void 0, {
-          logToConsole: NUh.ALWAYS
+          logToConsole: LogToConsoleMode.ALWAYS
         });
       }
     }].forEach(t => {
@@ -2218,7 +2218,7 @@ let em = e => {
     curveSmoothShorthands: !1
   };
   switch (e) {
-    case h62.LUCID:
+    case WhiteboardIntegrationType.LUCID:
       return {
         name: "preset-default",
         params: {
@@ -2229,10 +2229,10 @@ let em = e => {
           }
         }
       };
-    case h62.MIRO:
-    case h62.MURAL:
-    case h62.JAMBOARD:
-    case h62.UNKNOWN:
+    case WhiteboardIntegrationType.MIRO:
+    case WhiteboardIntegrationType.MURAL:
+    case WhiteboardIntegrationType.JAMBOARD:
+    case WhiteboardIntegrationType.UNKNOWN:
     default:
       return {
         name: "preset-default",
@@ -2310,7 +2310,7 @@ async function eb(e, t) {
     let l = a.getViewport({
       scale: s
     });
-    let d = t === h62.LUCID;
+    let d = t === WhiteboardIntegrationType.LUCID;
     let {
       svgElement,
       additionalData: {
@@ -2328,7 +2328,7 @@ async function eb(e, t) {
           e.replaceWith(t);
         }
       });
-    }(svgElement) : t === h62.MIRO && function (e) {
+    }(svgElement) : t === WhiteboardIntegrationType.MIRO && function (e) {
       e.querySelectorAll("image").forEach(e => {
         let t = e.parentElement;
         let i = t?.nextElementSibling;
@@ -2493,10 +2493,10 @@ async function eb(e, t) {
       data
     } = n(ev(svgElement.outerHTML), {
       plugins: function (e, t) {
-        let i = e === h62.LUCID;
-        let n = e === h62.MIRO;
-        let r = e === h62.MURAL;
-        let a = e === h62.JAMBOARD;
+        let i = e === WhiteboardIntegrationType.LUCID;
+        let n = e === WhiteboardIntegrationType.MIRO;
+        let r = e === WhiteboardIntegrationType.MURAL;
+        let a = e === WhiteboardIntegrationType.JAMBOARD;
         let s = !i && !n && !r && !a;
         let l = (n || a || s ? [ec] : []).concat(r || s ? [eu] : []);
         let d = i ? [] : [{
@@ -2514,7 +2514,7 @@ async function eb(e, t) {
         return [...(i ? [] : [en]), er, i ? es : ea, ...(i ? [el] : []), em(e), ed, ...l, ...d, ...(n || a || s ? [ep] : [])];
       }(t, fontIdsToBold)
     });
-    if (t === h62.MURAL && g.length > 0) {
+    if (t === WhiteboardIntegrationType.MURAL && g.length > 0) {
       var _;
       let e = document.createElement("div");
       _ = data;
@@ -2593,22 +2593,22 @@ class eI {
   }
   getPdfSource(e) {
     this.getPdfSourcePromise || (this.getPdfSourcePromise = new Promise(t => {
-      debugState.dispatch(to({
-        type: n ??= Ju(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PdfConfirmationModal), Ij("PdfConfirmationModal"))),
+      debugState.dispatch(showModalHandler({
+        type: n ??= registerModal(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PdfConfirmationModal), createModalConfig("PdfConfirmationModal"))),
         data: {
           fileImportDescription: getI18nString("file_browser.file_import_view.select_pdf_source_description_within_figjam", {
             pdfCount: e
           }),
           onConfirm: e => {
-            debugState.dispatch(AS());
+            debugState.dispatch(hideModalHandler());
             t({
               pdfType: e
             });
           },
           onCancel: () => {
-            debugState.dispatch(AS());
+            debugState.dispatch(hideModalHandler());
             t({
-              pdfType: h62.UNKNOWN,
+              pdfType: WhiteboardIntegrationType.UNKNOWN,
               isCanceled: !0
             });
           }
@@ -2625,7 +2625,7 @@ class eI {
       nodeId: t,
       bytes: e.bytes
     }))).reduce((e, t) => e.concat(t), []);
-    glU.populatePdfImagesWithImageBytes(t);
+    Fullscreen.populatePdfImagesWithImageBytes(t);
   }
   async convertPdfToScene(e, t, i, n) {
     let r;
@@ -2643,7 +2643,7 @@ class eI {
     let d = l.status;
     if (debugState.dispatch(_$$F.dequeue({
       matchType: eh
-    })), d === MEW.SUCCESS) {
+    })), d === PerfResult.SUCCESS) {
       let {
         images,
         hadImageExtractError
@@ -2662,13 +2662,13 @@ class eI {
       return d;
     }
     switch (d) {
-      case MEW.ERROR_TEXT_SIZE:
+      case PerfResult.ERROR_TEXT_SIZE:
         r = getI18nString("fullscreen.file_import.file_contains_text_either_too_big_or_too_small");
         break;
-      case MEW.TIMEOUT:
+      case PerfResult.TIMEOUT:
         r = getI18nString("fullscreen.file_import.file_timed_out");
         break;
-      case MEW.ERROR_OTHER:
+      case PerfResult.ERROR_OTHER:
         r = _$$P(t);
         break;
       default:
@@ -2701,8 +2701,8 @@ class eI {
         let {
           status,
           imagesToImport
-        } = glU.createSceneFromSVG(svgStrings, pdfType, cursorX ?? 0, cursorY ?? 0);
-        if (status !== MEW.SUCCESS) return {
+        } = Fullscreen.createSceneFromSVG(svgStrings, pdfType, cursorX ?? 0, cursorY ?? 0);
+        if (status !== PerfResult.SUCCESS) return {
           status
         };
         let c = images && imagesToImport ? function (e, t) {
@@ -2743,7 +2743,7 @@ class eI {
     let l = Error("PDF Import Error: unknown issue inside convertPDFToScene");
     reportError(_$$e.FIGJAM, l);
     return {
-      status: MEW.ERROR_OTHER
+      status: PerfResult.ERROR_OTHER
     };
   }
 }

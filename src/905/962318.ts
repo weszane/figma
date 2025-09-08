@@ -9,7 +9,7 @@ import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { captureException } from "../vendor/288996";
 import { getFeatureFlags } from "../905/601108";
@@ -23,11 +23,11 @@ import { J as _$$J } from "../905/231762";
 import { getI18nState } from "../figma_app/363242";
 import { fu } from "../figma_app/831799";
 import { aq } from "../figma_app/412189";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { T as _$$T, e as _$$e } from "../905/949616";
 import { TA } from "../905/372672";
 import { k as _$$k2 } from "../905/93362";
-export let $$P0 = Ju(function ({
+export let $$P0 = registerModal(function ({
   open: e,
   onClose: t,
   source: i
@@ -181,7 +181,7 @@ export let $$P0 = Ju(function ({
               V(e);
             },
             children: j.map(e => jsx(_$$c, {
-              label: jsx(J, {
+              label: jsx(Label, {
                 children: e.name
               }),
               value: e.value
@@ -204,7 +204,7 @@ export let $$P0 = Ju(function ({
       })
     })
   });
-}, "LanguageSelectorModal", ZU.YES);
+}, "LanguageSelectorModal", ModalSupportsBackground.YES);
 export function $$O2() {
   let e = useSelector(e => e.user.locale);
   return jsx(Fragment, {

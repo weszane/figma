@@ -1,4 +1,4 @@
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { logInfo } from "../905/714362";
 import { ZG, mu, t } from "../figma_app/840917";
@@ -23,7 +23,7 @@ class d {
       commitPolicy: t,
       fileVersion: r,
       fileKey: n,
-      newSessionID: h3O.currentSessionID(),
+      newSessionID: Multiplayer.currentSessionID(),
       numberOfUncleanRegisters: a,
       reason: s
     }), !0);

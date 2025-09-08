@@ -28,7 +28,7 @@ import { S as _$$S2 } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { XE, u1 } from "../figma_app/91703";
-import { Lo, to as _$$to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B2 } from "../905/330741";
 import { fu } from "../figma_app/831799";
 import { F as _$$F } from "../905/224";
@@ -37,7 +37,7 @@ import { Cj } from "../905/291654";
 import { Kk, Rt } from "../905/777093";
 import { G8, Qr, kF, Km, e2, HP, sp } from "../905/690539";
 import { jB, Uh } from "../905/465941";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { p8 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
@@ -47,7 +47,7 @@ import { FFileType } from "../figma_app/191312";
 import { TNJ } from "../figma_app/43951";
 import { Rk, gg } from "../905/981217";
 import { n0 } from "../figma_app/345997";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -452,9 +452,9 @@ function eL({
       if (!t) return;
       let r = "loaded" === i.status && !!i.data.team?.hasPermission;
       let a = r ? void 0 : jsx(ez, {
-        onClick: () => e(Lo())
+        onClick: () => e(popModalStack())
       });
-      e(_$$to({
+      e(showModalHandler({
         type: DV,
         data: {
           team: t,
@@ -462,7 +462,7 @@ function eL({
           editorType: FFileType.DESIGN,
           currentPlan: n0(Ws(t)) ? _$$F.Plan.PRO : _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.ORG,
-          upsellSource: _$$b.FONT_PICKER_UPSELL,
+          upsellSource: UpsellModalType.FONT_PICKER_UPSELL,
           hideUpsellPlanCta: !r,
           modalFooter: a
         }
@@ -903,7 +903,7 @@ function eH({
   return jsx(We, {
     onChange: r,
     children: jsx(eW, {
-      currentFieldValue: isNullish(t) || gl(t) ? "" : t,
+      currentFieldValue: isNullish(t) || isInvalidValue(t) ? "" : t,
       initialPosition: e ? cn(e, d9) : new Point(0, 0),
       onHidePicker: a,
       recordingKey: Pt(i, "variablePicker")

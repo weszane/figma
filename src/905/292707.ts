@@ -4,11 +4,11 @@ import { Component } from "react";
 import { connect } from "../vendor/514228";
 import { logError } from "../905/714362";
 import { tH, H4 } from "../905/751457";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { l$ } from "../905/766303";
 import { dN } from "../figma_app/345997";
 import { H4 as _$$H, Ud } from "../figma_app/679183";
-import { np } from "../905/102752";
+import { getModal } from "../905/102752";
 import { Lu } from "../figma_app/453508";
 let h = "app_modal--appModalCachedSubtree--FDJSe";
 let g = _$$n;
@@ -18,7 +18,7 @@ class f extends Component {
     this.modalStack = [];
     this.logtimeout = null;
     this.onClose = () => {
-      this.props.dispatch(Lo());
+      this.props.dispatch(popModalStack());
     };
   }
   componentDidUpdate() {
@@ -74,7 +74,7 @@ class f extends Component {
       return null;
     }
     if (e.type === Lu) {
-      let t = np(e.type);
+      let t = getModal(e.type);
       let i = {
         modal: e,
         cachedSubtree: new _$$H(this.renderModal.bind(this, e, t)),
@@ -93,7 +93,7 @@ class f extends Component {
       this.modalStack.pop();
     }
     if (e !== this.modalStack[this.modalStack.length - 1]?.modal) {
-      let t = np(e.type);
+      let t = getModal(e.type);
       t || logError("app_modal", `No modal registered for type ${e.type}`, {}, {
         reportAsSentryError: !0
       });

@@ -1,6 +1,6 @@
 import { b } from "../905/275748";
 import _require from "../b2835def/160846";
-import { H4 } from "../905/992467";
+import { NONE_SYMBOL } from "../905/992467";
 export let $$i0 = new b({
   name: "fullscreen_illustration",
   dependencies: [],
@@ -18,6 +18,6 @@ export let $$i0 = new b({
   friendFiles: []
 }).createLazyComponent(() => Promise.all([]).then(_require).then(e => e.IllustrationView), {
   componentName: "LazyIllustrationView",
-  error: H4.NONE
+  error: NONE_SYMBOL.NONE
 });
 export const C = $$i0;

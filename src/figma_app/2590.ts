@@ -1,32 +1,32 @@
 import { throwTypeError, assertNotNullish, assert } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { bq3 } from "../figma_app/763686";
+import { PresetType } from "../figma_app/763686";
 import { Ay } from "../vendor/159563";
 import { Uz } from "../905/63728";
 import { reportError } from "../905/11";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { hY, qt } from "../figma_app/349969";
 import { ds, GS } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { U2 } from "../figma_app/193867";
 export function $$g9(e) {
   switch (e) {
     case "NONE":
-      return bq3.NONE;
+      return PresetType.NONE;
     case "PRESET":
-      return bq3.PRESET;
+      return PresetType.PRESET;
     case "CUSTOM":
-      return bq3.CUSTOM;
+      return PresetType.CUSTOM;
     case "PRESENTATION":
-      return bq3.PRESENTATION;
+      return PresetType.PRESENTATION;
     default:
       throwTypeError(e);
   }
 }
 export function $$f11(e) {
-  return e === bq3.PRESET || e === bq3.CUSTOM ? "scale-down" : e === bq3.PRESENTATION ? "contain" : "min-zoom";
+  return e === PresetType.PRESET || e === PresetType.CUSTOM ? "scale-down" : e === PresetType.PRESENTATION ? "contain" : "min-zoom";
 }
 export function $$E5(e) {
   return "fixed";
@@ -43,7 +43,7 @@ export function $$T10(e, t) {
 export function $$I3(e) {
   var t;
   return {
-    type: (t = _W(e, {
+    type: (t = valueOrFallback(e, {
       type: "NONE",
       size: {
         x: 0,
@@ -60,7 +60,7 @@ export function $$I3(e) {
 }
 let S = e => "PRESET" === e.type ? e.presetIdentifier : "";
 export function $$v0(e, t) {
-  if ("NONE" === e) Y5.updateSelectionProperties({
+  if ("NONE" === e) fullscreenValue.updateSelectionProperties({
     prototypeDevice: {
       type: "NONE",
       size: {
@@ -69,7 +69,7 @@ export function $$v0(e, t) {
       },
       rotation: "NONE"
     }
-  });else if ("PRESENTATION" === e) Y5.updateSelectionProperties({
+  });else if ("PRESENTATION" === e) fullscreenValue.updateSelectionProperties({
     prototypeDevice: {
       type: "PRESENTATION",
       size: {
@@ -85,7 +85,7 @@ export function $$v0(e, t) {
       y: 500
     });
     let r = "CUSTOM" === t.type ? t.rotation : "NONE";
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeDevice: {
         type: "CUSTOM",
         size: e,
@@ -96,7 +96,7 @@ export function $$v0(e, t) {
     let r = hY[S(t)];
     if (null != r && r.deviceName === e.deviceName) return;
     let n = "PRESET" === t.type && qt(S(t)) === qt(e.presetIdentifier) ? t.rotation : "NONE";
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeDevice: {
         type: "PRESET",
         size: {
@@ -110,7 +110,7 @@ export function $$v0(e, t) {
   }
 }
 let $$A6 = .2;
-let $$x2 = nF((e, t) => {
+let $$x2 = createOptimistThunk((e, t) => {
   if (t.userInitiated) {
     let r = {
       scalingMode: t.viewportScalingMode,
@@ -132,7 +132,7 @@ let $$x2 = nF((e, t) => {
     e.dispatch(sf(n));
   }
 });
-nF((e, {
+createOptimistThunk((e, {
   showHotspots: t
 }) => {
   let r = e.getState().selectedView;
@@ -144,7 +144,7 @@ nF((e, {
     e.dispatch(sf(n));
   }
 });
-nF((e, {
+createOptimistThunk((e, {
   showDeviceFrame: t
 }) => {
   let r = e.getState().selectedView;
@@ -156,7 +156,7 @@ nF((e, {
   };
   e.dispatch(sf(i));
 });
-nF((e, {
+createOptimistThunk((e, {
   newDevice: t
 }) => {
   let r = e.getState().selectedView;
@@ -169,7 +169,7 @@ nF((e, {
   };
   e.dispatch(sf(i));
 });
-nF((e, {
+createOptimistThunk((e, {
   newDevice: t
 }) => {
   let r = e.getState().selectedView;
@@ -181,14 +181,14 @@ nF((e, {
   };
   e.dispatch(sf(i));
 });
-let $$N8 = nF((e, t) => {
+let $$N8 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.params || {};
   let i = U2(r.selectedView);
   ds(t.name, i, r, n);
 });
 let $$C7 = (() => {
-  let e = nF((e, t) => {
+  let e = createOptimistThunk((e, t) => {
     let r = e.getState();
     let n = t.params || {};
     let a = U2(r.selectedView);

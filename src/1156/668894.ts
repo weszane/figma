@@ -25,10 +25,10 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b, c as _$$c } from "../905/308099";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { C as _$$C } from "../905/520159";
-import { to } from "../905/156213";
-import { Ju } from "../905/102752";
+import { showModalHandler } from "../905/156213";
+import { registerModal } from "../905/102752";
 import { kz } from "../figma_app/72338";
 import { lV, cG, mj } from "../1156/395731";
 import { Z as _$$Z } from "../1156/98576";
@@ -52,7 +52,7 @@ function q({
     readonly: !!i,
     children: e.map(e => jsx(_$$c, {
       value: e.id,
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: jsx($, {
           project: e
         })
@@ -155,7 +155,7 @@ let U = {
     $$css: !0
   }
 };
-let G = Ju(function (e) {
+let G = registerModal(function (e) {
   let t = hS({
     ...e
   });
@@ -177,7 +177,7 @@ let G = Ju(function (e) {
           "aria-label": getI18nString("figmake.supabase.pause_project_modal.back"),
           onClick: () => {
             e.onClose();
-            s(to({
+            s(showModalHandler({
               type: _$$Z,
               data: {
                 toolCallId: e.toolCallId,
@@ -230,7 +230,7 @@ function H({
   source: i
 }) {
   let s = useDispatch();
-  return () => s(to({
+  return () => s(showModalHandler({
     type: G,
     data: {
       toolCallId: e,
@@ -248,7 +248,7 @@ let W = {
     $$css: !0
   }
 };
-let V = Ju(function (e) {
+let V = registerModal(function (e) {
   let t = hS(e);
   let n = h5({
     toolCallId: e.toolCallId,
@@ -335,7 +335,7 @@ export function $$X0({
       source: r
     }) {
       let i = useDispatch();
-      return () => i(to({
+      return () => i(showModalHandler({
         type: V,
         data: {
           toolCallId: e,

@@ -2,14 +2,14 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, memo } from "react";
 import { d as _$$d } from "../905/976845";
 import { Q } from "../figma_app/447352";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { E } from "../905/277716";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
 import { Sh } from "../figma_app/889655";
 import { E as _$$E } from "../642/160266";
@@ -32,11 +32,11 @@ export function $$_0({
   let C = i.cornerRadius;
   let j = i.rectangleCornerRadii;
   useEffect(() => {
-    p(!!glU && glU.getCornerRadiusToolPreferencesForFile() && h && _ && C && j);
+    p(!!Fullscreen && Fullscreen.getCornerRadiusToolPreferencesForFile() && h && _ && C && j);
   }, [selectedGUIDs, h, _, C, j]);
   let v = useCallback(() => {
     o.hide();
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
   }, [o]);
   let S = null;
   h && _ ? S = jsx($$b1, {
@@ -68,7 +68,7 @@ export let $$b1 = memo(function ({
       actionOnPointerDown: !0,
       "aria-expanded": e,
       onClick: () => {
-        glU && glU.setCornerRadiusToolPreferencesForFile(!e);
+        Fullscreen && Fullscreen.setCornerRadiusToolPreferencesForFile(!e);
         t(!e);
         getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
           key: "rectangleCornerRadiiIndependent",

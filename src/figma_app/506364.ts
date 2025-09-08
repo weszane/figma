@@ -3,7 +3,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { Dc } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UV } from "../905/283918";
 import { f } from "../905/666831";
 import { LJ, N_, oz, LE, x5, Ev } from "../905/543054";
@@ -94,7 +94,7 @@ export async function $$E2(e) {
 }
 export async function $$y3(e) {
   await $$E2(Ev(e));
-  Y5 && Y5.isReady() && Y5.triggerAction("redo-spell-checking");
+  fullscreenValue && fullscreenValue.isReady() && fullscreenValue.triggerAction("redo-spell-checking");
 }
 export let $$b0 = g;
 export const $4 = $$b0;

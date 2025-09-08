@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { g as _$$g } from "../905/125190";
-import { xae } from "../figma_app/763686";
+import { UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
@@ -169,7 +169,7 @@ function j({
         });
         let t = e.libraryKey;
         $N(e.library.publishedByLibraryKey.components, t).length > 0 && e.dispatch(FP({
-          tab: xae.ASSETS
+          tab: UserInterfaceElements.ASSETS
         }));
       } else trackEventAnalytics("Library File Disabled", {
         fileKey: r.key,

@@ -4,8 +4,8 @@ import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
 import { ch, DE } from "../figma_app/571325";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { cus, QOV } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { UnitType, UserActionState } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -202,17 +202,17 @@ export function $$Z14(e) {
             case "RAW":
               return {
                 value: e.value,
-                units: cus.RAW
+                units: UnitType.RAW
               };
             case "PERCENT":
               return {
                 value: e.value,
-                units: cus.PERCENT
+                units: UnitType.PERCENT
               };
             case "PIXELS":
               return {
                 value: e.value,
-                units: cus.PIXELS
+                units: UnitType.PIXELS
               };
           }
         }(a) : null,
@@ -232,21 +232,21 @@ export function $$Z14(e) {
     let a = n.lineHeight;
     let s = n.textStyle;
     let o = r.characters.length;
-    l7.ai(e, () => {
+    permissionScopeHandler.ai(e, () => {
       i && r.fontSize !== i && r.setRangeFontSize(0, o, i);
       a && !m()(r.lineHeightOrMixed, a) && r.setRangeLineHeight(0, o, function (e) {
         switch (e.units) {
-          case cus.RAW:
+          case UnitType.RAW:
             return {
               value: e.value,
               units: "RAW"
             };
-          case cus.PERCENT:
+          case UnitType.PERCENT:
             return {
               value: e.value,
               units: "PERCENT"
             };
-          case cus.PIXELS:
+          case UnitType.PIXELS:
             return {
               value: e.value,
               units: "PIXELS"
@@ -376,7 +376,7 @@ export function $$Q9(e) {
 }
 export function $$ee11(e, t) {
   let r = $(Tv().join(","));
-  let a = $(useSelector(e => e.mirror.appModel.activeUserAction === QOV.SELECTING_TEXT));
+  let a = $(useSelector(e => e.mirror.appModel.activeUserAction === UserActionState.SELECTING_TEXT));
   let s = r || a;
   let o = $(useSelector(() => nl()?.characters));
   let l = e === qy.RUNNING;
@@ -417,7 +417,7 @@ export function $$en7(e, t) {
       nodeText
     } of e.values()) {
       let e = getSingletonSceneGraph().get(nodeId);
-      e?.isAlive && l7.ai(o2, () => {
+      e?.isAlive && permissionScopeHandler.ai(o2, () => {
         e.characters = nodeText;
         t(e);
       });
@@ -431,7 +431,7 @@ export function $$en7(e, t) {
   let a = n.selectionRange?.start ?? 0;
   let s = n.selectionRange?.end ?? i.characters.length;
   let o = r.effectiveText;
-  l7.ai(o2, () => {
+  permissionScopeHandler.ai(o2, () => {
     i.spliceCharacters(a, s, o, "BEFORE");
     t(i);
   });

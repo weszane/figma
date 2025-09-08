@@ -2,8 +2,8 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useMemo, useCallback, useEffect, useLayoutEffect, PureComponent, Component, createRef } from "react";
 import { z } from "../vendor/999105";
 import { lQ } from "../905/934246";
-import { S as _$$S } from "../905/274480";
-import { h as _$$h } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
 import u from "classnames";
@@ -207,8 +207,8 @@ function P(e) {
     };
     let _ = jsx("div", {
       className: a ? void 0 : c,
-      children: jsx(_$$S, {
-        label: jsx(_$$h, {
+      children: jsx(Checkbox, {
+        label: jsx(HiddenLabel, {
           children: function () {
             let t = "name" in e && e.name ? e.name : void 0;
             return t ? a ? getI18nString("multi_select_list.checkbox_aria_label_deselect", {
@@ -295,8 +295,8 @@ function P(e) {
     let i = e.length > 0;
     let r = 0 === e.length;
     let a = eI().length > 0 && !selectAllDisabled;
-    let s = jsx(_$$S, {
-      label: jsx(_$$h, {
+    let s = jsx(Checkbox, {
+      label: jsx(HiddenLabel, {
         children: i ? getI18nString("multi_select_list.deselect_all") : getI18nString("multi_select_list.select_all")
       }),
       checked: i,
@@ -665,8 +665,8 @@ class j extends Component {
           className: p()(E0, this.props.styleOverrideClassNames?.checkboxColumn),
           children: this.isItemSelectable(e) ? jsx("div", {
             className: r ? void 0 : d,
-            children: jsx(_$$S, {
-              label: jsx(_$$h, {
+            children: jsx(Checkbox, {
+              label: jsx(HiddenLabel, {
                 children: function () {
                   let t = "name" in e && e.name ? e.name : void 0;
                   return t ? r ? getI18nString("multi_select_list.checkbox_aria_label_deselect", {
@@ -764,8 +764,8 @@ class j extends Component {
     let i = e.length > 0;
     let r = 0 === e.length;
     let a = this.selectableItemKeys().length > 0 && !this.props.selectAllDisabled;
-    let s = jsx(_$$S, {
-      label: jsx(_$$h, {
+    let s = jsx(Checkbox, {
+      label: jsx(HiddenLabel, {
         children: i ? getI18nString("multi_select_list.deselect_all") : getI18nString("multi_select_list.select_all")
       }),
       checked: i,

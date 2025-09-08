@@ -1,14 +1,14 @@
 import { Sm, j6 } from "../905/859698";
-import { PWo, IXA } from "../figma_app/763686";
+import { FacetType, assetConsumptionBindings } from "../figma_app/763686";
 import { atom, setupCustomAtom } from "../figma_app/27355";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Wh } from "../figma_app/615482";
 import { e as _$$e } from "../905/566074";
 import { PW } from "../figma_app/633080";
 export let $$n0;
 let u = {
   [PW.CODE_COMPONENT]: {
-    idl: PWo.CODE_COMPONENT,
+    idl: FacetType.CODE_COMPONENT,
     key: Sm(""),
     version: j6("")
   }
@@ -42,16 +42,16 @@ let $$p1 = {
         }
         return "reset" in r ? {} : t;
       });
-      let i = `consumedAssetVersionsByKey(${PWo[t]})`;
+      let i = `consumedAssetVersionsByKey(${FacetType[t]})`;
       n.debugLabel = i;
       n.onMount = r => {
         var n;
         let i = () => {
           _$$e(e) && r({
-            changed: IXA?.getAllSubscribedAssetConsumptions(t) ?? []
+            changed: assetConsumptionBindings?.getAllSubscribedAssetConsumptions(t) ?? []
           });
         };
-        Y5.isReady() ? i() : Y5.onReady().then(i);
+        fullscreenValue.isReady() ? i() : fullscreenValue.onReady().then(i);
         n = e => {
           r(e);
         };
@@ -71,7 +71,7 @@ let $$p1 = {
   }
 };
 let _ = {
-  [PWo.CODE_COMPONENT]: null
+  [FacetType.CODE_COMPONENT]: null
 };
 class h {
   syncChangedSubscribedConsumptions(e, t) {

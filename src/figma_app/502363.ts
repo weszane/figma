@@ -54,14 +54,14 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { hO } from "../figma_app/545293";
-import { to, AS } from "../905/156213";
+import { showModalHandler, hideModalHandler } from "../905/156213";
 import { _6 } from "../figma_app/386952";
 import { z5, L8, q4 } from "../905/124270";
 import { K as _$$K } from "../905/328468";
 import { Y as _$$Y } from "../905/720957";
 import { P as _$$P } from "../905/347284";
 import { ky as _$$ky } from "../figma_app/925970";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { utilityNoop } from "../figma_app/918700";
 import { s as _$$s } from "../figma_app/576667";
 import { n as _$$n } from "../905/914485";
@@ -745,7 +745,7 @@ function ey() {
 }
 let ez = parsePxNumber(RAo);
 let eW = parsePxNumber(aIx);
-let eK = Ju(function () {
+let eK = registerModal(function () {
   let e = useDispatch();
   let t = useSelector(e => e.modalShown);
   let r = useSelector(e => e.search.sessionId);
@@ -851,7 +851,7 @@ export function $$e53({
   let f = useCallback(() => {
     if (!h.current || s?.type === _$$r2) return;
     let n = h.current.getBoundingClientRect();
-    r(to({
+    r(showModalHandler({
       type: eK,
       data: {
         top: n.top - e2,
@@ -870,7 +870,7 @@ export function $$e53({
       e.metaKey && "/" === e.key && !s && f();
     };
     let t = e => {
-      "Tab" === e.key && s?.type === _$$r2 && r(AS());
+      "Tab" === e.key && s?.type === _$$r2 && r(hideModalHandler());
     };
     document.addEventListener("keydown", e);
     document.addEventListener("keydown", t);

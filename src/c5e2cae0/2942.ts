@@ -14,7 +14,7 @@ import { eK, i as _$$i, M2, Lo, $h, yy, Ef, qU, Je, js, Az } from "../figma_app/
 import { Xw } from "../905/584989";
 import { N_ } from "../905/332483";
 import { FFileType } from "../figma_app/191312";
-import { tn, tY } from "../figma_app/831101";
+import { UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { D } from "../905/347702";
 import { lX, nt } from "../9420/394825";
 import { iZ } from "../905/372672";
@@ -66,7 +66,7 @@ let $$b2 = D(({
         a(_$$s.error(getI18nString("payments.errors.estimate_calculation_error")));
         a(sf({
           ...y,
-          paymentStep: tn.PAYMENT_AND_ADDRESS
+          paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
         }));
       }
       A(!1);
@@ -99,7 +99,7 @@ let $$b2 = D(({
         }), R) {
           var r;
           r = R.billing_period;
-          let e = tY[tY[r]];
+          let e = SubscriptionType[SubscriptionType[r]];
           let i = t ? {
             billing_address: R.billing_address,
             shipping_address: R.shipping_address || R.billing_address
@@ -131,7 +131,7 @@ let $$b2 = D(({
             ...i
           });
         } else {
-          "teamUpgrade" === y.view && y.paymentStep === tn.CONFIRM_PAY && y.billingPeriod !== tY.STUDENT && analyticsEventManager.trackDefinedEvent("monetization_upgrades.pro_checkout_confirmation_without_payment_flow_data", {
+          "teamUpgrade" === y.view && y.paymentStep === UpgradeSteps.CONFIRM_PAY && y.billingPeriod !== SubscriptionType.STUDENT && analyticsEventManager.trackDefinedEvent("monetization_upgrades.pro_checkout_confirmation_without_payment_flow_data", {
             isCampfireCart: k,
             teamId: e ?? void 0
           });

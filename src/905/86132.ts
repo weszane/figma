@@ -1,6 +1,6 @@
 import { b } from "../905/275748";
 import _require from "../1e926454/954729";
-import { Ju, Ij } from "../905/102752";
+import { registerModal, createModalConfig } from "../905/102752";
 let n;
 let r = new b({
   name: "Browse Shared",
@@ -34,6 +34,6 @@ let r = new b({
   }
 });
 export function $$s0() {
-  return n ??= Ju(r.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PlanInviteModal), Ij("PlanInviteModal")));
+  return n ??= registerModal(r.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PlanInviteModal), createModalConfig("PlanInviteModal")));
 }
 export const e = $$s0;

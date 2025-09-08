@@ -1,5 +1,5 @@
 import { J6, k4, lV } from "../figma_app/617606";
-import { glU, K$p } from "../figma_app/763686";
+import { Fullscreen, ChatMessageType } from "../figma_app/763686";
 import { tS } from "../figma_app/516028";
 import { iZ } from "../905/372672";
 import { Xu } from "../figma_app/588582";
@@ -21,10 +21,10 @@ export function $$x0() {
     toolName: a,
     toolResult: l
   }) => {
-    if (!glU || !n || !codeLibraryInstance) return;
+    if (!Fullscreen || !n || !codeLibraryInstance) return;
     let o = {
-      id: glU.generateUniqueID(),
-      type: K$p.TOOL_MESSAGE,
+      id: Fullscreen.generateUniqueID(),
+      type: ChatMessageType.TOOL_MESSAGE,
       userId: n.id,
       textContent: J6({
         plainText: ""

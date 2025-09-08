@@ -2,12 +2,12 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { M } from "../figma_app/749682";
-import { H4 } from "../905/992467";
+import { NONE_SYMBOL } from "../905/992467";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { Pf } from "../905/590952";
 import { uy, cL, Df, pD } from "../figma_app/770088";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { cx, v6, BC } from "../905/504768";
 import { a as _$$a } from "../905/844092";
 import { HH } from "../figma_app/841415";
@@ -110,8 +110,8 @@ export function $$T0(e) {
           deleteAttachment: w,
           editableTypeaheadClass: "feed_post_details_comments--editableTypeahead--kMhTQ thread_comment_composer--editableTypeahead--9R6Yd text--fontPos13--xW8hS text--_fontBase--QdLsd",
           editingExistingComment: !0,
-          errorFallback: H4.NONE,
-          fallback: H4.NONE,
+          errorFallback: NONE_SYMBOL.NONE,
+          fallback: NONE_SYMBOL.NONE,
           hideSubmitButton: !1,
           mentionables: e.mentionables,
           messageContent: l,
@@ -158,7 +158,7 @@ export function $$T0(e) {
 function I(e) {
   let t = useDispatch();
   let n = useCallback(() => {
-    t(to({
+    t(showModalHandler({
       type: E,
       data: {
         onConfirm: () => {

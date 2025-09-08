@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
-import { j0r } from "../figma_app/763686";
+import { PropertyScope } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import d from "classnames";
 import { getI18nString } from "../905/303541";
@@ -363,12 +363,12 @@ export function $$H5(e, t, r) {
     let d = oI({
       color: e.color,
       colorVar: e.colorVar,
-      variableScope: j0r.EFFECT_COLOR,
+      variableScope: PropertyScope.EFFECT_COLOR,
       displayValue: l
     });
     let c = e.secondaryColor ? oI({
       color: e.secondaryColor,
-      variableScope: j0r.EFFECT_COLOR,
+      variableScope: PropertyScope.EFFECT_COLOR,
       displayValue: l
     }) : void 0;
     let u = uA(d, n, a.id, s, i.inspectionMode);

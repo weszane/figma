@@ -1,7 +1,7 @@
 import { COMPONENT_PREFIX, getComponentJSXName } from "../figma_app/664063";
 import { id } from "../905/648693";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { XJn, NfO } from "../figma_app/763686";
+import { FirstDraftHelpers, PluginHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -60,7 +60,7 @@ async function f(e, t, i) {
     version
   } = n;
   if ("component" === assetType) {
-    let t = XJn.getComponentByKeyAndVersion(key, version);
+    let t = FirstDraftHelpers.getComponentByKeyAndVersion(key, version);
     if (t) return {
       status: "success",
       key,
@@ -70,7 +70,7 @@ async function f(e, t, i) {
     };
   }
   if ("state_group" === assetType) {
-    let t = XJn.getStateGroupByKeyAndVersion(key, version);
+    let t = FirstDraftHelpers.getStateGroupByKeyAndVersion(key, version);
     if (t) return {
       status: "success",
       key,
@@ -87,7 +87,7 @@ async function f(e, t, i) {
       responseType: "arraybuffer"
     });
     let i = new Uint8Array(t.response);
-    let n = NfO.deserializeProductComponentFromBuffer(key, i);
+    let n = PluginHelpers.deserializeProductComponentFromBuffer(key, i);
     let a = getSingletonSceneGraph().get(n);
     if (!a) throw Error("Deserialized component not found in scene graph");
     return {

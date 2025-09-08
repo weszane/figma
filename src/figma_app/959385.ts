@@ -22,7 +22,7 @@ import { X as _$$X } from "../figma_app/514836";
 import { S as _$$S } from "../figma_app/11182";
 import { RK } from "../figma_app/815170";
 import { _P } from "../figma_app/844435";
-import { k0 } from "../figma_app/155287";
+import { manifestContainsWidget } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { ox, ab } from "../figma_app/870683";
 import { HW } from "../figma_app/632248";
@@ -132,12 +132,12 @@ function ee({
   extension: e,
   onGoBack: t
 }) {
-  let r = k0(e);
+  let r = manifestContainsWidget(e);
   let s = r ? getI18nString("qa.extensions.widget") : getI18nString("qa.extensions.plugin");
   let u = e.plugin_id;
   let _ = function (e) {
     let t = useDispatch();
-    let r = k0(e) ? ox(e.plugin_id) : ab(e.plugin_id);
+    let r = manifestContainsWidget(e) ? ox(e.plugin_id) : ab(e.plugin_id);
     return useCallback(() => {
       _$$e2(r) || t(RK({
         rawInput: r
@@ -320,7 +320,7 @@ export function $$ea1({
       reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for a local extension, which should not be possible."), {
         extra: {
           extensionId: e.extension.plugin_id,
-          isWidget: k0(e.extension),
+          isWidget: manifestContainsWidget(e.extension),
           types: Array.from(e.types).toString()
         }
       });
@@ -330,7 +330,7 @@ export function $$ea1({
       reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for an extension without a published extension, which should not be possible."), {
         extra: {
           extensionId: e.extension.plugin_id,
-          isWidget: k0(e.extension),
+          isWidget: manifestContainsWidget(e.extension),
           types: Array.from(e.types).toString()
         }
       });

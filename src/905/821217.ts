@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 let a = e => e.stopPropagation();
 export function $$s0({
   display: e = "block",
@@ -16,7 +16,7 @@ export function $$s0({
     ...o,
     ...i,
     ...s,
-    ..._$$r,
+    ...defaultComponentAttribute,
     style: {
       display: e
     }

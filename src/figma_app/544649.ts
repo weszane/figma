@@ -1,19 +1,19 @@
-import { Ez5, mNT, w3z } from "../figma_app/763686";
+import { AppStateTsApi, UserExperienceMode, HandoffBindingsCpp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 export function $$s3() {
   return !!getFeatureFlags().dt_interactive_inspection && !!getFeatureFlags().changes_stager_rollback_to_syncable_value;
 }
 export function $$o1() {
-  let e = Ez5?.changesStagerState();
-  return ut(e?.activeStagerType, null) === mNT.DEV_MODE_FOCUS_VIEW;
+  let e = AppStateTsApi?.changesStagerState();
+  return getObservableValue(e?.activeStagerType, null) === UserExperienceMode.DEV_MODE_FOCUS_VIEW;
 }
 export function $$l2() {
-  return (Ez5?.changesStagerState()?.activeStagerType.getCopy() || null) === mNT.DEV_MODE_FOCUS_VIEW;
+  return (AppStateTsApi?.changesStagerState()?.activeStagerType.getCopy() || null) === UserExperienceMode.DEV_MODE_FOCUS_VIEW;
 }
 export function $$d0() {
-  let e = w3z?.focusViewInteractiveInspectionState();
-  return ut(e?.isResizing, !1);
+  let e = HandoffBindingsCpp?.focusViewInteractiveInspectionState();
+  return getObservableValue(e?.isResizing, !1);
 }
 export const EG = $$d0;
 export const Kv = $$o1;

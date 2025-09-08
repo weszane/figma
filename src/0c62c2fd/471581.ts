@@ -7,7 +7,7 @@ import { tM, vd } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { lo, wn, dl } from "../9420/795870";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -60,7 +60,7 @@ function w({
   let [B, U] = useState(window.innerHeight);
   let W = useDispatch();
   let $ = error?.code === dl.UNINITIALIZED_STRIPE_ELEMENTS_ERROR;
-  let G = () => W(Ce());
+  let G = () => W(hideModal());
   _$$P(({
     height: e
   }) => {

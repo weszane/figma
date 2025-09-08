@@ -1,5 +1,5 @@
 import { assert } from "../figma_app/465776";
-import { HzA } from "../figma_app/763686";
+import { TrackType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 let s = null;
 let o = "CompareCloneParent";
@@ -15,7 +15,7 @@ export function $$l0(e) {
       let i = e.getInternalCanvas();
       assert(null !== i);
       (t = e.createNode("GROUP", {
-        tracking: HzA.IGNORE
+        tracking: TrackType.IGNORE
       })).name = o;
       s = t.guid;
       i.appendChild(t);

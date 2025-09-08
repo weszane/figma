@@ -4,7 +4,7 @@ import { J } from "../905/614223";
 import { A } from "../vendor/723372";
 import { E } from "../905/632989";
 import { fP, mc as _$$mc, i3 } from "../905/691059";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 export function $$c3(e) {
   let [t, i] = useState(!1);
   let {
@@ -51,7 +51,7 @@ export let $$p0 = forwardRef(({
 }, s) => jsx(J, {
   mode: "dark",
   children: jsxs(_$$mc, {
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...i,
     ...r,
     ref: s,
@@ -74,7 +74,7 @@ export let $$m1 = forwardRef(({
 }, o) => jsx(J, {
   mode: "dark",
   children: jsxs("div", {
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...i,
     ...r,
     ref: o,
@@ -102,7 +102,7 @@ forwardRef(({
   mode: "dark",
   children: jsx("span", {
     ...i,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...e,
     ref: r,
     className: "toggle-tip__shortcutText__M7FjA",
@@ -117,7 +117,7 @@ forwardRef(({
   mode: "dark",
   children: jsx("div", {
     ...i,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...e,
     ref: r,
     className: "toggle-tip__trail__sdb9G",

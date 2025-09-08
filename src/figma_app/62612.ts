@@ -1,13 +1,13 @@
 import { useRef, useEffect, useContext, useMemo } from "react";
 import { flushSync } from "../vendor/944059";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { xx } from "../figma_app/815945";
 import { parsePxNumber } from "../figma_app/783094";
 import { logError } from "../905/714362";
 import { Point } from "../905/736624";
-import { H } from "../905/561433";
+import { requestDeferredExecution } from "../905/561433";
 import { previousViewportRefContext, currentViewportRefContext, defaultViewportState, viewportXContext, frameCountContext, viewportYContext, viewportWidthContext, viewportHeightContext, viewportZoomContext, viewportPanningContext, activeStateContext, viewportOffsetXContext, viewportOffsetYContext, viewportZoomingContext } from "../figma_app/298911";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { lK } from "../figma_app/740163";
 import { rulerThickness } from "../figma_app/786175";
 export let $$n20;
@@ -121,18 +121,18 @@ export function $$w8({
 }
 export function $$O3(e, t) {
   useEffect(() => {
-    Y5?.isReady() && e.subscribeToUpdates_expensive && (t(Y5.getViewportInfo()), H());
+    fullscreenValue?.isReady() && e.subscribeToUpdates_expensive && (t(fullscreenValue.getViewportInfo()), requestDeferredExecution());
   }, [t, e.subscribeToUpdates_expensive]);
   useEffect(() => {
-    if (Y5 && e.subscribeToUpdates_expensive) {
+    if (fullscreenValue && e.subscribeToUpdates_expensive) {
       let e = e => {
         flushSync(() => {
           t(e);
         });
       };
-      Y5.viewport.on("onSetViewport", e);
+      fullscreenValue.viewport.on("onSetViewport", e);
       return () => {
-        Y5.viewport.removeListener("onSetViewport", e);
+        fullscreenValue.viewport.removeListener("onSetViewport", e);
       };
     }
   }, [t, e.subscribeToUpdates_expensive]);
@@ -200,12 +200,12 @@ export function $$B22() {
   $$n20 = void 0;
 }
 export function $$G11(e) {
-  return Y5.onReady().then(() => {
-    if (!glU) return Promise.reject(Error("Fullscreen bindings are not initialized"));
+  return fullscreenValue.onReady().then(() => {
+    if (!Fullscreen) return Promise.reject(Error("Fullscreen bindings are not initialized"));
     let t = new Promise(e => {
       $$n20 = e;
     });
-    glU.computeViewportSettingsForNode__DO_NOT_USE_DIRECTLY(e);
+    Fullscreen.computeViewportSettingsForNode__DO_NOT_USE_DIRECTLY(e);
     return t;
   });
 }

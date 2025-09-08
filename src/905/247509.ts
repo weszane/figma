@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
-import { AD, dI } from "../905/871411";
+import { defaultSessionLocalIDString, sessionLocalIDToString } from "../905/871411";
 import l from "classnames";
 import { Pt } from "../figma_app/806412";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -18,7 +18,7 @@ import { lE } from "../905/945781";
 import { Pp } from "../vendor/330821";
 import { trackEventAnalytics } from "../905/449184";
 import { K } from "../905/918348";
-import { uz } from "../905/359509";
+import { WEB } from "../905/359509";
 import { j5 } from "../figma_app/711907";
 import { qZ } from "../905/201014";
 import { Q } from "../905/346809";
@@ -67,8 +67,8 @@ export function $$O2({
   let m = a?.get(t ?? "") ?? c.get(t ?? "");
   let g = i?.get(e ?? "") ?? c.get(e ?? "");
   let A = m?.type === "TEXT" || g?.type === "TEXT";
-  let b = !t || t === AD;
-  let v = !e || e === AD;
+  let b = !t || t === defaultSessionLocalIDString;
+  let v = !e || e === defaultSessionLocalIDString;
   let I = b ? getI18nString("dev_handoff.compare_changes.banner.added_layer") : getI18nString("dev_handoff.compare_changes.banner.removed_layer");
   let {
     inspectionMode,
@@ -127,7 +127,7 @@ function D({
   layerBasisNodeId: i
 }) {
   let r = useDispatch();
-  let s = lE(e, e => dI(e.basis.guid) === i || dI(e.change.guid) === t)?.changesToDisplay;
+  let s = lE(e, e => sessionLocalIDToString(e.basis.guid) === i || sessionLocalIDToString(e.change.guid) === t)?.changesToDisplay;
   if (!s) return null;
   let l = s.filter(e => "textData" !== e.identifier);
   let d = l.filter(e => "lego-table" !== e.oldValue());
@@ -177,7 +177,7 @@ let L = memo(({
     preferences: o,
     plugin: l
   }) {
-    let d = useMemo(() => s.id === uz && "first-party" === s.type ? {
+    let d = useMemo(() => s.id === WEB && "first-party" === s.type ? {
       id: qZ.CSS,
       type: "first-party"
     } : s, [s]);

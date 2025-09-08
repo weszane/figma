@@ -2,15 +2,15 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { isEmptyObject, sortObjectByKeys } from "../figma_app/493477";
-import { AlE, t8O } from "../figma_app/763686";
+import { documentStateTsApi, FontHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { _r } from "../figma_app/451499";
-import { Y5 } from "../figma_app/455680";
-import { E7, bU, gl, hS, oV } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { normalizeValue, isMixedArray, isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { M6 } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { Lh, D8 } from "../figma_app/242339";
@@ -37,7 +37,7 @@ export function $$N4(e) {
   let j = !!e.fontVariationAxes;
   let U = !e.hideTypographyVariableOptions && M;
   let B = useMemo(() => {
-    let t = E7(e.fontFamily);
+    let t = normalizeValue(e.fontFamily);
     if (!(t && t in e.versionsForStyles)) return [];
     let i = e.versionsForStyles[t] || {};
     return Object.keys(i).map(n => {
@@ -73,7 +73,7 @@ export function $$N4(e) {
     versionsForStyles: e.versionsForStyles
   }), [e.fontStyle, e.fontFamily, e.versionsForStyles, e.fontVariations, e.fontVariationAxes]);
   let z = (0 === i.length || 1 === i.length && !G) && void 0 !== e.fontStyle;
-  let H = U ? !Y5?.isFontListLoaded() : z;
+  let H = U ? !fullscreenValue?.isFontListLoaded() : z;
   let W = useCallback(() => {
     let t;
     let i = (t, i) => jsx(R, {
@@ -88,7 +88,7 @@ export function $$N4(e) {
     let a = [];
     let o = {};
     if (e.fontVariations?.length) {
-      if (bU(e.fontVariations)) t = w;else {
+      if (isMixedArray(e.fontVariations)) t = w;else {
         let i = B.find(t => t.name === e.fontStyle);
         t = Y(e.fontVariations, i)?.name;
       }
@@ -99,7 +99,7 @@ export function $$N4(e) {
       a.push(i(t.name));
       l = t;
     }
-    if (e.fontFamily && !gl(e.fontFamily) && !G) {
+    if (e.fontFamily && !isInvalidValue(e.fontFamily) && !G) {
       for (let e of (o = v, (t || !isEmptyObject(o)) && a.push(jsx(sK, {}, B.length)), Object.keys(v))) a.push(i(e));
       t && t !== w && !o[t] && a.push(i(t));
     }
@@ -122,8 +122,8 @@ export function $$N4(e) {
   let K = useCallback(e => {
     let t = {};
     if (!j) return t;
-    let i = AlE.getActiveDocument();
-    let n = t8O.getFontFamilyVariations(i, e);
+    let i = documentStateTsApi.getActiveDocument();
+    let n = FontHelpers.getFontFamilyVariations(i, e);
     for (let e in n) {
       let i = B.find(t => t.name === e);
       for (let r of n[e]) {
@@ -140,7 +140,7 @@ export function $$N4(e) {
     }));
   }, [j, B]);
   useEffect(() => {
-    e.fontFamily && hS(e.fontFamily) && N(K(e.fontFamily));
+    e.fontFamily && isValidValue(e.fontFamily) && N(K(e.fontFamily));
   }, [e.fontFamily, N, K, e.fontVariations]);
   let Y = (e, t) => {
     let i = [];
@@ -150,7 +150,7 @@ export function $$N4(e) {
       let e = El(a.axisTag);
       let s = a.axisName && "OpticalSize" !== a.axisName ? a.axisName : mI[e] || e;
       let o = t?.variationAxes?.find(t => t.tag === e);
-      if (Math.abs((gl(o?.value) ? 0 : o?.value ?? 0) - (a?.value ?? 0)) > .05 && (r = !1), o?.default === a.value || void 0 === a.value) continue;
+      if (Math.abs((isInvalidValue(o?.value) ? 0 : o?.value ?? 0) - (a?.value ?? 0)) > .05 && (r = !1), o?.default === a.value || void 0 === a.value) continue;
       let l = Math.round(100 * a.value) / 100;
       i.push(`${new _r().format(e)}: ${l}`);
       n.push(`${new _r().format(s)}: ${l}`);
@@ -163,12 +163,12 @@ export function $$N4(e) {
   let q = !1;
   let $ = e.fontVariations;
   if ($?.length) {
-    if (bU($)) t = w;else {
+    if (isMixedArray($)) t = w;else {
       let i = B.find(t => t.name === e.fontStyle);
       t = Y($, i)?.name;
     }
   }
-  if (e.fontFamily && !gl(e.fontFamily) && !G) {
+  if (e.fontFamily && !isInvalidValue(e.fontFamily) && !G) {
     for (let e of Object.keys(P).sort().reverse()) !q && e.length > 25 && (q = !0);
     t && t !== w && !P[t] && !q && t.length > 25 && (q = !0);
   }
@@ -207,7 +207,7 @@ export function $$N4(e) {
     recordingKey: Pt(e, "select"),
     targetDomNode: e.targetDomNode,
     willShowDropdown: () => {
-      Y5.commit();
+      fullscreenValue.commit();
       getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-type-panel-dropdown-show", {
         key: "fontStyle"
       });
@@ -231,7 +231,7 @@ export function $$P3({
   fontVariations: a
 }) {
   if (e === $$C1()) i();else if (e === $$T2()) n();else {
-    if (a) Y5.updateSelectionProperties({
+    if (a) fullscreenValue.updateSelectionProperties({
       fontVariations: a,
       fontStyle: e
     }, {
@@ -247,15 +247,15 @@ export function $$P3({
   }
 }
 export function $$O0(e) {
-  if (!Y5?.isFontListLoaded() || e.fontStyle === oV || e.fontFamily === oV) return !1;
-  let t = E7(e.fontFamily);
+  if (!fullscreenValue?.isFontListLoaded() || e.fontStyle === MIXED_MARKER || e.fontFamily === MIXED_MARKER) return !1;
+  let t = normalizeValue(e.fontFamily);
   if (null == t) return !0;
   let i = e.versionsForStyles[t];
   if (null == i) return !0;
   let n = e.fontVariations;
   let r = !!e.fontVariationAxes;
   if (n?.length && !r) return !0;
-  let a = E7(e.fontStyle);
+  let a = normalizeValue(e.fontStyle);
   return !a || !(a in i);
 }
 export const JB = $$O0;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Children, isValidElement, createRef } from "react";
-import { NfO } from "../figma_app/763686";
+import { PluginHelpers } from "../figma_app/763686";
 import s from "classnames";
 import { Uz } from "../905/63728";
 import { o6, C0, Am, uA } from "../figma_app/806412";
@@ -19,8 +19,8 @@ export class $$u2 extends o6 {
         } : this.props.useWindowAsViewport ? {
           bottom: window.innerHeight - this.props.targetRect.top,
           left: e
-        } : NfO ? {
-          bottom: NfO.getViewportBounds().height - this.props.targetRect.top,
+        } : PluginHelpers ? {
+          bottom: PluginHelpers.getViewportBounds().height - this.props.targetRect.top,
           left: this.props.targetRect.left
         } : {
           top: this.props.targetRect.bottom,

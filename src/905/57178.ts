@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { Gc } from "../905/63728";
@@ -120,7 +120,7 @@ let L = {
     });
     let r = i => {
       i.stopPropagation();
-      h3O && null != e.userSessionID && (h3O.observeUser(e.userSessionID), t(_$$b({
+      Multiplayer && null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(_$$b({
         aware_of_observation_mode: !0
       })));
     };
@@ -138,7 +138,7 @@ let L = {
     let t = HG();
     let i = e => {
       e.stopPropagation();
-      h3O.observeUser(-1);
+      Multiplayer.observeUser(-1);
     };
     return t ? jsx(P, {
       actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_unfollow"),
@@ -170,7 +170,7 @@ let L = {
         e.stopPropagation();
         e.preventDefault();
         t(_$$N.START);
-        "prototype" === i ? hk()?.startPresenting() : h3O.startPresenting();
+        "prototype" === i ? hk()?.startPresenting() : Multiplayer.startPresenting();
       },
       userHandle: e.userHandle
     });
@@ -181,7 +181,7 @@ let L = {
       actionCallback: e => {
         e.stopPropagation();
         e.preventDefault();
-        h3O.stopPresenting();
+        Multiplayer.stopPresenting();
       },
       userHandle: e.userHandle
     });
@@ -192,7 +192,7 @@ let L = {
       actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
       actionCallback: i => {
         i.stopPropagation();
-        null != e.userSessionID && (h3O.observeUser(e.userSessionID), t(_$$b({
+        null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(_$$b({
           aware_of_observation_mode: !0
         })));
       },

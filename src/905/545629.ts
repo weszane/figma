@@ -1,7 +1,7 @@
-import { IPu, Z64, Ez5, GP2, zbP } from "../figma_app/763686";
+import { CooperHelpers, SocialMediaFormats, AppStateTsApi, HorizontalAlignment, VerticalAlignment } from "../figma_app/763686";
 import { R0 } from "../figma_app/273493";
 import { M } from "../905/512402";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -11,7 +11,7 @@ import { C } from "../905/407781";
 import { zw } from "../905/877407";
 import { I } from "../905/120648";
 import { Lk, x } from "../figma_app/639711";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 export class $$_0 extends C {
   getDefaultChildSize() {
     return new M(1080, 1080);
@@ -23,13 +23,13 @@ export class $$_0 extends C {
     }
     let c = atomStoreManager.get(BT);
     let p = null;
-    if ((l = l || c[e]?.[t - 1] || c[e - 1]?.[(c[e - 1]?.length || 0) - 1]) && fn(sH(l))) p = IPu?.duplicateAsBlankCooperAsset(l, e, t, i) ?? null;else {
+    if ((l = l || c[e]?.[t - 1] || c[e - 1]?.[(c[e - 1]?.length || 0) - 1]) && isValidSessionLocalID(parseSessionLocalID(l))) p = CooperHelpers?.duplicateAsBlankCooperAsset(l, e, t, i) ?? null;else {
       let r = M.toVectorD(this.getDefaultChildSize());
-      p = IPu?.createBlankChildAtCoord(e, t, r, i, !0, Z64.CUSTOM) ?? null;
+      p = CooperHelpers?.createBlankChildAtCoord(e, t, r, i, !0, SocialMediaFormats.CUSTOM) ?? null;
     }
-    r && Y5.commit();
+    r && fullscreenValue.commit();
     setTimeout(() => {
-      Ez5?.cooperFocusView().isFocusedNodeViewEnabled() || (Ez5?.cooperFocusView().panToSelectedNodeIfOutsideViewport(.6), atomStoreManager.set(Lk, x.TEMPLATES));
+      AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() || (AppStateTsApi?.cooperFocusView().panToSelectedNodeIfOutsideViewport(.6), atomStoreManager.set(Lk, x.TEMPLATES));
     }, 0);
     return p;
   }
@@ -40,7 +40,7 @@ export class $$_0 extends C {
     return !atomStoreManager.get(I);
   }
   renderEmptyCanvasPlaceholder(e, t) {
-    let i = Ez5?.canvasGrid();
+    let i = AppStateTsApi?.canvasGrid();
     let a = i ? i.rectForCoord({
       row: 0,
       col: 0
@@ -75,7 +75,7 @@ export class $$_0 extends C {
       x: o.x - l / 2,
       y: p.y + l / 2 - 1
     };
-    if (Ez5 && (t.fillRoundedRect({
+    if (AppStateTsApi && (t.fillRoundedRect({
       origin: p,
       size: {
         x: 2,
@@ -93,22 +93,22 @@ export class $$_0 extends C {
         x: o.x,
         y: p.y + l + i
       };
-      t.fillText(a, getI18nString("cooper.templates.canvas_placeholder_button"), Ez5 ? R0(Ez5.getTextPrimary()) : {
+      t.fillText(a, getI18nString("cooper.templates.canvas_placeholder_button"), AppStateTsApi ? R0(AppStateTsApi.getTextPrimary()) : {
         red: 0,
         green: 0,
         blue: 0,
         alpha: 1
-      }, GP2.CENTER, zbP.CENTER, 0);
+      }, HorizontalAlignment.CENTER, VerticalAlignment.CENTER, 0);
     }
   }
   addRowDotVerticalOffset() {
-    return -(Ez5?.canvasGrid().gridRowSpacing() || 600) / 4;
+    return -(AppStateTsApi?.canvasGrid().gridRowSpacing() || 600) / 4;
   }
   getActiveBgColor() {
-    return Ez5?.getBgFSSelected() || 0xffffffff;
+    return AppStateTsApi?.getBgFSSelected() || 0xffffffff;
   }
   getActiveOutlineColor() {
-    return Ez5?.getBorderFSSelected() || 0;
+    return AppStateTsApi?.getBorderFSSelected() || 0;
   }
   isStateGroupRowAllowed() {
     return !!getFeatureFlags().buzz_template_sets;

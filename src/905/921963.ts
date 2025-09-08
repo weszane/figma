@@ -6,7 +6,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/378566";
 import { h as _$$h } from "../905/142086";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Xm } from "../905/760074";
 import { P as _$$P } from "../905/842406";
 import { Um } from "../905/848862";
@@ -112,10 +112,10 @@ export function $$N0(e) {
       let s = e.resource && e.resource.type === FResourceCategoryType.FILE && e.resource.isInDraftsFolder && !e.resource.file.parent_org_id;
       let l = e.role.level === e6.VIEWER && i === e6.EDITOR;
       let p = !!P.dismissed_move_draft_to_project_interstitial_modal;
-      if (i === e6.OWNER) e.isPaidPublished ? t(to({
+      if (i === e6.OWNER) e.isPaidPublished ? t(showModalHandler({
         type: K,
         data: {}
-      })) : t(to({
+      })) : t(showModalHandler({
         type: _$$b,
         data: {
           resourceType: e.role.resource_type,
@@ -135,7 +135,7 @@ export function $$N0(e) {
               seenState: null
             }));
           }
-        }, jsx(_$$t3, {})) : t(to({
+        }, jsx(_$$t3, {})) : t(showModalHandler({
           type: _$$t2(),
           data: {
             file: a,

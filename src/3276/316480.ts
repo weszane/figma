@@ -12,7 +12,7 @@ import { gp } from "../figma_app/973927";
 import { g5 } from "../figma_app/178752";
 import { s as _$$s } from "../905/506024";
 import { M4, IT } from "../905/713695";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { Ph, T0 } from "../figma_app/455620";
 import { X2 } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
@@ -120,7 +120,7 @@ export function $$D1() {
     return useMemo(() => "loaded" !== n.status ? [] : function (e) {
       let t = [];
       e.plugins.forEach(e => {
-        let n = uF(e);
+        let n = getPluginVersion(e);
         t.push({
           type: 2,
           item: n,
@@ -128,7 +128,7 @@ export function $$D1() {
         });
       });
       e.widgets.forEach(e => {
-        let n = uF(e);
+        let n = getPluginVersion(e);
         t.push({
           type: 1,
           item: n,

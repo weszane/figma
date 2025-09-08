@@ -5,7 +5,7 @@ import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { logError, logInfo } from "../905/714362";
 import { u8 } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ze } from "../figma_app/516028";
 import { $p } from "../figma_app/155728";
 import { FEditorType } from "../figma_app/53721";
@@ -132,7 +132,7 @@ export function $$E0() {
   if (!getFeatureFlags().anticipation_suggestions_shadow) return null;
   try {
     let e = getSingletonSceneGraph();
-    let t = Y5.getViewportInfo();
+    let t = fullscreenValue.getViewportInfo();
     let i = fX(t, Z9());
     let r = i ? e.get(i) : null;
     let a = r?.findContainingTopLevelFrameOrSelf();

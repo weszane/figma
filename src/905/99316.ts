@@ -4,7 +4,7 @@ import { E } from "../905/632989";
 import s from "classnames";
 import { At } from "../905/973142";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 var o = s;
 export function $$u0({
   description: e,
@@ -14,7 +14,7 @@ export function $$u0({
 }) {
   let [u, p] = useState(!0);
   let m = useRef(null);
-  let h = useMemo(() => !e || gl(e) ? "" : At(e), [e]);
+  let h = useMemo(() => !e || isInvalidValue(e) ? "" : At(e), [e]);
   let g = useRef(void 0);
   useLayoutEffect(() => {
     let e = g.current;

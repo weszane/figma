@@ -4,7 +4,7 @@ import { A as _$$A } from "../vendor/723372";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { Lh } from "../figma_app/415899";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 import { sW, GS, L4 } from "../905/417626";
 import { y as _$$y } from "../905/842987";
 import { zr, zc, Qs, YE } from "../905/193774";
@@ -25,7 +25,7 @@ export let $$m0 = forwardRef(({
   return jsxs("div", {
     ref: _,
     className: _$$A(zr, GS[h], L4[m]),
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...g,
     ...f,
     children: [null === i ? null : jsx("div", {

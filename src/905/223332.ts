@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { T } from "../figma_app/300692";
+import { getFullscreenViewEditorType } from "../figma_app/300692";
 export let $$a0 = new class {
   constructor() {
     this._interactionStartedAtMs = -1;
@@ -55,7 +55,7 @@ export let $$a0 = new class {
       totalUnwrappingRenderResultMs: this._totalUnwrappingRenderResultMs,
       numReconciliations: this._numReconciliations,
       totalReconciliationMs: this._totalReconciliationMs,
-      editorType: T()
+      editorType: getFullscreenViewEditorType()
     };
     trackEventAnalytics("Widget Interaction Performance", t, {
       forwardToDatadog: !0

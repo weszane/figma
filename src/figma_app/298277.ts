@@ -1,6 +1,6 @@
 import { Kt } from "../figma_app/562352";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { uCV, msz } from "../figma_app/763686";
+import { UserAppType, interactionTestHelpers } from "../figma_app/763686";
 import { jS, eS, N4 } from "../figma_app/762706";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -192,8 +192,8 @@ export async function $$H4(e, t = "fullscreen-app") {
   }
   try {
     G && G !== e && (await Ay.reloadAndWaitForever("tsApisForCpp changed", {
-      from: uCV[G.CommonApp().appType()],
-      to: uCV[e.CommonApp().appType()]
+      from: UserAppType[G.CommonApp().appType()],
+      to: UserAppType[e.CommonApp().appType()]
     }));
     G = e;
     isInteractionPathCheck() && console.log("About to call loadAllForWasmBinaryType");
@@ -214,7 +214,7 @@ export async function $$H4(e, t = "fullscreen-app") {
     });
     isInteractionPathCheck() && console.log("Finished calling initializeWasm");
     V = t;
-    isInteractionPathCheck() && msz.setIsRunningInteractionTests();
+    isInteractionPathCheck() && interactionTestHelpers.setIsRunningInteractionTests();
     let i = $$P3(t);
     trackEventAnalytics("Fullscreen Loaded", {
       ...i

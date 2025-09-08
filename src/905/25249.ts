@@ -24,7 +24,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
 import { le } from "../figma_app/11182";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { xT, Q3 } from "../figma_app/199513";
 import { sZ } from "../905/845253";
@@ -40,10 +40,10 @@ import { getReadOnlyOverrideMessageForFolder } from "../figma_app/642025";
 import { vj } from "../figma_app/465071";
 import { rq } from "../905/351260";
 import { bp, Wj } from "../905/913057";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { e6 } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { e as _$$e2 } from "../905/393279";
 import { Ni, Dp } from "../905/249410";
 import { o6, gy } from "../905/986349";
@@ -387,11 +387,11 @@ function eH(e) {
     })]
   });
 }
-export let $$eK0 = Ju(function (e) {
+export let $$eK0 = registerModal(function (e) {
   let t = hS({
     ...e,
     onClose: () => {
-      ep(Ce());
+      ep(hideModal());
     }
   });
   let {
@@ -417,7 +417,7 @@ export let $$eK0 = Ju(function (e) {
     enabled: !!folderId
   });
   useLayoutEffect(() => {
-    "loaded" === em.status && null === em.data.project && ep(Ce());
+    "loaded" === em.status && null === em.data.project && ep(hideModal());
   }, [em, ep]);
   let {
     Sprig
@@ -491,7 +491,7 @@ export let $$eK0 = Ju(function (e) {
     if (org && org.domain_capture && ek && ek.domains.length > 0) {
       let t = _$$Z(e).filter(e => xf(e) && !H_(ek.domains, e));
       if (null == org.invite_whitelist_guest_invite_setting && t.length > 0) {
-        ep(to({
+        ep(showModalHandler({
           type: _$$F,
           data: {
             emails: t,
@@ -521,7 +521,7 @@ export let $$eK0 = Ju(function (e) {
     ed(2);
   };
   let eY = () => {
-    ep(Ce());
+    ep(hideModal());
     ep(cL());
     e$();
   };
@@ -611,19 +611,19 @@ export let $$eK0 = Ju(function (e) {
           reportError(_$$e.WORKFLOW, Error("Cannot read team when user tries to update team access for starter team"));
           return;
         }
-        e0 === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? ep(to({
+        e0 === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? ep(showModalHandler({
           type: Ni,
           data: {
             team,
             editorType: null,
-            upsellSource: _$$b.FOLDER_PERMISSION_MODAL
+            upsellSource: UpsellModalType.FOLDER_PERMISSION_MODAL
           }
-        })) : e0 === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED && ep(to({
+        })) : e0 === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED && ep(showModalHandler({
           type: Dp,
           data: {
             team,
             editorType: null,
-            upsellSource: _$$b.FOLDER_PERMISSION_MODAL
+            upsellSource: UpsellModalType.FOLDER_PERMISSION_MODAL
           }
         }));
         return;

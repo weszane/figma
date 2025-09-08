@@ -6,8 +6,8 @@ import { QO } from "../905/888985";
 import { PerfTimer } from "../905/609396";
 import { w0 } from "../figma_app/594947";
 import { N } from "../905/972754";
-import { nF } from "../905/350402";
-import { to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler } from "../905/156213";
 import { Eo } from "../figma_app/80990";
 import { M } from "../figma_app/155411";
 import { kd, Rh, oT } from "../905/291654";
@@ -16,7 +16,7 @@ import { fy7 } from "../figma_app/43951";
 import { T } from "../figma_app/856733";
 import { D, n as _$$n } from "../905/347702";
 var $$b1 = (e => (e.PLUGIN_INSERT_COMPONENT = "PLUGIN_INSERT_COMPONENT", e.PLUGIN_INSERT_STATE_GROUP = "PLUGIN_INSERT_STATE_GROUP", e.PLUGIN_INSERT_STYLE = "PLUGIN_INSERT_STYLE", e.LIBRARY_SWAP = "LIBRARY_SWAP", e.LOAD_COMPONENT = "LOAD_COMPONENT", e.SWAP_TO_COMPONENT = "SWAP_TO_COMPONENT", e.INSERT_SHARED_COMPONENT = "INSERT_SHARED_COMPONENT", e.INSERT_SHARED_STATE_GROUP = "INSERT_SHARED_STATE_GROUP", e.LOAD_STYLE = "LOAD_STYLE", e.LOAD_VARIABLE = "LOAD_VARIABLE", e.LOAD_VARIABLE_SET = "LOAD_VARIABLE_SET", e))($$b1 || {});
-export let $$v2 = nF(async (e, {
+export let $$v2 = createOptimistThunk(async (e, {
   assetLibraryKey: t,
   onInsertAsset: i,
   source: n
@@ -68,7 +68,7 @@ async function w(e, t, i, n, r) {
   let h = 0;
   if (d && !(await function (e, t = {}) {
     return new Promise(i => {
-      e(to({
+      e(showModalHandler({
         type: T,
         showModalsBeneath: !0,
         data: {

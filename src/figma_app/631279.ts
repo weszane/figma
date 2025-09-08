@@ -1,4 +1,4 @@
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { logError } from "../905/714362";
 import { D } from "../905/629114";
 import { rp } from "../figma_app/229710";
@@ -36,7 +36,7 @@ export async function $$_7({
 }) {
   try {
     let i = D();
-    let s = l7.onboarding("create-rectangle-for-image", () => i.createRectangle());
+    let s = permissionScopeHandler.onboarding("create-rectangle-for-image", () => i.createRectangle());
     let o = await i.createImageAsync(e);
     let {
       width,
@@ -44,10 +44,10 @@ export async function $$_7({
     } = await o.getSizeAsync();
     let c = void 0 !== t ? t : width;
     let u = void 0 !== r ? r : height;
-    l7.onboarding("resize-rectangle-node-with-image-fill", () => {
+    permissionScopeHandler.onboarding("resize-rectangle-node-with-image-fill", () => {
       s.resize(c, u);
     });
-    l7.onboarding("set-image-fill", () => {
+    permissionScopeHandler.onboarding("set-image-fill", () => {
       s.fills = [{
         type: "IMAGE",
         imageHash: o.hash,

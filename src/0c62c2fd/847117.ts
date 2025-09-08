@@ -23,7 +23,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { h as _$$h, O as _$$O } from "../905/142086";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
@@ -35,7 +35,7 @@ import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { NSA } from "../figma_app/43951";
 import { X$ } from "../figma_app/465071";
 import { K as _$$K } from "../figma_app/193867";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi, vL } from "../905/652992";
 import { Y5, mO, kI, NU } from "../905/163189";
 import { ZN } from "../figma_app/630077";
@@ -198,7 +198,7 @@ export function $$Z0() {
     fileImport: e.fileImport
   }));
   let r = () => {
-    e(Ce());
+    e(hideModal());
     e(cY());
   };
   let s = () => {
@@ -228,7 +228,7 @@ export function $$Z0() {
           onDone: r,
           onCancel: s,
           onMoveToProject: o,
-          onClose: () => e(Ce()),
+          onClose: () => e(hideModal()),
           open: !0
         });
       case Y5.START:
@@ -385,7 +385,7 @@ export function $$et4({
     variant: "primary",
     onClick: () => {
       r();
-      null != s && i(to({
+      null != s && i(showModalHandler({
         type: DV,
         data: {
           team: s,
@@ -395,7 +395,7 @@ export function $$et4({
           multipleResources: n.failedFiles > 1,
           currentPlan: _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.PRO,
-          upsellSource: _$$b.CREATE_NEW_FILE
+          upsellSource: UpsellModalType.CREATE_NEW_FILE
         }
       }));
     },

@@ -3,13 +3,13 @@ import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { E } from "../905/632989";
 import { bL, hE, O6, HG } from "../905/598775";
-import { Qv } from "../905/959312";
+import { useRecording } from "../905/959312";
 import { $ } from "../905/61417";
 import { O } from "../905/969533";
 import { f as _$$f } from "../905/54715";
 import { pk } from "../905/408073";
 import { Lh } from "../figma_app/415899";
-import { Ju } from "../905/955878";
+import { preventAndStopEvent } from "../905/955878";
 var g = "chip__mainButton__8pK6D";
 function f({
   "aria-label": e,
@@ -62,7 +62,7 @@ function f({
   });
 }
 let _ = forwardRef((e, t) => {
-  let i = Qv(e.onClose, {
+  let i = useRecording(e.onClose, {
     eventName: "close",
     recordingKey: e.recordingKey
   }, [e.onClose]);
@@ -74,7 +74,7 @@ let _ = forwardRef((e, t) => {
     htmlAttributes: {
       ...e.htmlAttributes,
       onKeyDown: t => {
-        e.disabled || (i && ("Backspace" === t.key || "Delete" === t.key) && (i(t), Ju(t)), e.htmlAttributes?.onKeyDown?.(t));
+        e.disabled || (i && ("Backspace" === t.key || "Delete" === t.key) && (i(t), preventAndStopEvent(t)), e.htmlAttributes?.onKeyDown?.(t));
       }
     },
     mainButton: r ? jsx(O6, {

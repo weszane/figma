@@ -14,10 +14,10 @@ import { E as _$$E } from "../905/984674";
 import { Q4 } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { A as _$$A } from "../5132/237216";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { X } from "../905/853613";
 import { iZ } from "../905/372672";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ey } from "../figma_app/918700";
 import { sw, tW } from "../905/427932";
 import { A as _$$A2 } from "../6828/718668";
@@ -40,7 +40,7 @@ import { Q } from "../5430/345616";
 import { nu, uD } from "../5430/774694";
 let L = "use_preset_options_modal--presetOptionsModal__optionText--BPEmi";
 let T = "use_preset_options_modal--presetOptionsModal__chevron--dF5v3";
-let E = Ju(function ({
+let E = registerModal(function ({
   hubFile: e,
   inResourceHub: t
 }) {
@@ -55,7 +55,7 @@ let E = Ju(function ({
     });
   });
   let E = useCallback(() => {
-    r(Ce());
+    r(hideModal());
   }, [r]);
   let S = useCallback(() => {
     E();
@@ -68,7 +68,7 @@ let E = Ju(function ({
   }, [E, e, o]);
   let R = useCallback(() => {
     let s = Q4(e => {
-      r(to({
+      r(showModalHandler({
         type: _$$_,
         data: {
           payload: e
@@ -155,7 +155,7 @@ let E = Ju(function ({
       children: getI18nString("community.try.pick_workspace.cancel")
     })]
   });
-}, "USE_PRESET_OPTIONS_MODAL_TYPE", ZU.YES);
+}, "USE_PRESET_OPTIONS_MODAL_TYPE", ModalSupportsBackground.YES);
 function z({
   text: e
 }) {
@@ -195,7 +195,7 @@ export function $$Q0({
   let L = useCallback(() => {
     u(!0);
     let t = () => {
-      TX(e.id) && f && !j ? c(to({
+      TX(e.id) && f && !j ? c(showModalHandler({
         type: E,
         data: {
           hubFile: e,
@@ -203,7 +203,7 @@ export function $$Q0({
         }
       })) : v();
     };
-    mA(e) && !_ ? c(to({
+    mA(e) && !_ ? c(showModalHandler({
       type: _$$F,
       data: {
         hubFileId: e.id,

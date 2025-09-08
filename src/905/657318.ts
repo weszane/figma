@@ -11,9 +11,9 @@ import { A as _$$A } from "../905/891805";
 import { y as _$$y } from "../905/661502";
 import { e as _$$e } from "../905/149844";
 import { n3, IA } from "../905/859698";
-import { VD3, e0R, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD } from "../905/871411";
+import { StyleVariableOperation, CopyPasteType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import v from "classnames";
@@ -27,11 +27,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { Uv, XE, bS } from "../figma_app/91703";
 import { AV, Qn } from "../figma_app/933328";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { sw } from "../figma_app/914957";
 import { jD } from "../905/765855";
-import { Y5 } from "../figma_app/455680";
-import { oV, E7 } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { MIXED_MARKER, normalizeValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { q5, _G } from "../figma_app/516028";
 import { Lh, D8 } from "../figma_app/242339";
@@ -77,7 +77,7 @@ class eA extends o6 {
     this.stopPropagation = e => e.stopPropagation();
     this.toggleShowingStyles = e => {
       if (this.props.onPickerIconClick) {
-        Y5.updateAppModel({
+        fullscreenValue.updateAppModel({
           currentSelectedProperty: {
             type: this.props.selectedPropertyType,
             indices: []
@@ -121,10 +121,10 @@ class eA extends o6 {
     };
     this.detachStyle = () => {
       this.props.dispatch(jD());
-      l7.user("detach-style", () => {
-        _$$f(VD3.STYLE_DETACH, e0R.DIRECT, () => {
-          glU.applyStyleToSelection(this.props.inheritStyleKeyField, AD, !0);
-          glU.selectStyle(n3.INVALID, IA.INVALID);
+      permissionScopeHandler.user("detach-style", () => {
+        _$$f(StyleVariableOperation.STYLE_DETACH, CopyPasteType.DIRECT, () => {
+          Fullscreen.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !0);
+          Fullscreen.selectStyle(n3.INVALID, IA.INVALID);
         });
       });
       trackEventAnalytics("Style Detached", {
@@ -185,7 +185,7 @@ class eA extends o6 {
     })));
   }
   toggleReviewUpdatesModal(e, t) {
-    e && this.props.dispatch(to({
+    e && this.props.dispatch(showModalHandler({
       type: $$ei1,
       data: {
         updateStyle: e,
@@ -246,7 +246,7 @@ class eA extends o6 {
     let t = v2(this.props.styleUpdates, this.props.versionedStyleInfo);
     let i = V9(T7(t, this.props.directlySubscribedStyles), t ?? void 0, this.props.versionedStyleInfo ? this.props.versionedStyleInfo.GUID : void 0);
     let r = Object.keys(this.props.sceneGraphSelection);
-    let a = r.length > 0 && r.every(e => this.props.versionedStyleInfo && glU.isDirectStyleConsumer(this.props.versionedStyleInfo.GUID, this.props.inheritStyleKeyField, e));
+    let a = r.length > 0 && r.every(e => this.props.versionedStyleInfo && Fullscreen.isDirectStyleConsumer(this.props.versionedStyleInfo.GUID, this.props.inheritStyleKeyField, e));
     let s = [{
       value: "update-selected-style",
       displayText: getI18nString("design_systems.styles.update_selected_style"),
@@ -311,7 +311,7 @@ class eA extends o6 {
     let {
       mainStyle
     } = this.props;
-    !(oz() && getFeatureFlags().sites_responsive_text_styles && mw(this.props.sceneGraphSelection, this.props.library) && _$$c(this.props.sceneGraphSelection)) && (this.props.inheritStyleKey === oV || null != E7(this.props.inheritStyleKey) && this.props.hasMixedProperties && mainStyle) ? (t = 1, i = this.props.addProperty) : mainStyle ? t = 0 : (t = 2, i = this.props.addProperty);
+    !(oz() && getFeatureFlags().sites_responsive_text_styles && mw(this.props.sceneGraphSelection, this.props.library) && _$$c(this.props.sceneGraphSelection)) && (this.props.inheritStyleKey === MIXED_MARKER || null != normalizeValue(this.props.inheritStyleKey) && this.props.hasMixedProperties && mainStyle) ? (t = 1, i = this.props.addProperty) : mainStyle ? t = 0 : (t = 2, i = this.props.addProperty);
     let c = RC(this.props);
     let u = zb(this.props);
     let p = 0 === t && !this.props.hasMixedProperties;
@@ -520,7 +520,7 @@ export let $$ey0 = memo(e => {
     styleUpdates: useAtomWithSubscription(j_)
   };
   let s = useDispatch();
-  let o = E7(_$$b("guid"));
+  let o = normalizeValue(_$$b("guid"));
   let l = WH(e.inheritStyleKey, e.inheritStyleID, e.styleType);
   let d = sO();
   return jsx(eA, {

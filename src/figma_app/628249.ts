@@ -1,11 +1,11 @@
 import { selectWithShallowEqual } from "../905/103090";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { A5 } from "../905/275640";
 export function $$s0() {
   let e = A5("fillPaints");
   return selectWithShallowEqual(t => {
     let r = t.mirror.selectionProperties.fillPaints;
-    if (!r || gl(r)) return null;
+    if (!r || isInvalidValue(r)) return null;
     let n = r.findIndex(e => "IMAGE" === e.type);
     return n < 0 ? null : {
       paint: r[n],

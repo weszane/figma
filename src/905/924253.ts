@@ -1,23 +1,56 @@
-import { useState, useEffect } from "react";
-import { t_, atom } from "../figma_app/27355";
-import { Y5 } from "../figma_app/455680";
-export function $$s0() {
-  let [e, t] = useState(void 0 !== Y5 && Y5.isReady());
+import { atom } from 'jotai'
+import { atomWithDefault } from 'jotai/utils'
+import { useEffect, useState } from 'react'
+import { fullscreenValue } from '../figma_app/455680'
+/**
+ * Checks if fullscreenValue is ready and subscribes to its readiness.
+ * Original function: $$s0
+ * @returns {boolean} readiness state
+ */
+export function useFullscreenReady(): boolean {
+  const [isReady, setIsReady] = useState(
+    fullscreenValue !== undefined && fullscreenValue.isReady(),
+  )
+
   useEffect(() => {
-    void 0 === Y5 || Y5.isReady() || Y5.onReady().then(() => {
-      t(Y5.isReady());
-    });
-  }, []);
-  return e;
+    if (
+      fullscreenValue === undefined
+      || fullscreenValue.isReady()
+    ) {
+      return
+    }
+    fullscreenValue.onReady().then(() => {
+      setIsReady(fullscreenValue.isReady())
+    })
+  }, [])
+
+  return isReady
 }
-export let $$o1 = (() => {
-  let e = t_(() => void 0 !== Y5 && Y5.isReady());
-  e.onMount = e => {
-    void 0 === Y5 || Y5.isReady() || Y5.onReady().then(() => {
-      e(Y5.isReady());
-    });
-  };
-  return atom(t => t(e));
-})();
-export const q = $$s0;
-export const w = $$o1;
+
+/**
+ * Atom that tracks fullscreenValue readiness.
+ * Original variable: $$o1
+ */
+export const fullscreenReadyAtom = (() => {
+  const baseAtom = atomWithDefault(
+    () => fullscreenValue !== undefined && fullscreenValue.isReady(),
+  )
+
+  baseAtom.onMount = (setAtom) => {
+    if (
+      fullscreenValue === undefined
+      || fullscreenValue.isReady()
+    ) {
+      return
+    }
+    fullscreenValue.onReady().then(() => {
+      setAtom(fullscreenValue.isReady())
+    })
+  }
+
+  return atom(get => get(baseAtom))
+})()
+
+// Export refactored names for external usage
+export const q = useFullscreenReady
+export const w = fullscreenReadyAtom

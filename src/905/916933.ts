@@ -1,4 +1,4 @@
-import { h3O, _em, xal, DPQ } from "../figma_app/763686";
+import { Multiplayer, PluginModalType, DataLoadStatus, IPagePlugin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -7,10 +7,10 @@ import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../905/807667";
-import { Ru } from "../figma_app/300692";
-import { k0, ZQ } from "../figma_app/155287";
+import { hasTextReviewCapability } from "../figma_app/300692";
+import { manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { s6, nc } from "../figma_app/474636";
 import { getPluginConnectionState } from "../905/816197";
 import { $A } from "../905/782918";
@@ -38,27 +38,27 @@ async function $$E() {
   }
 }
 async function x(e, t) {
-  if (!h3O.isIncrementalSession()) {
-    h3O.isValidatingIncremental() && (await q(_em.PLUGIN_VALIDATION));
+  if (!Multiplayer.isIncrementalSession()) {
+    Multiplayer.isValidatingIncremental() && (await q(PluginModalType.PLUGIN_VALIDATION));
     return !1;
   }
   let i = e?.plugin_id || null;
   let n = e?.manifest.documentAccess || null;
-  return !(!i || e && Ru(e) || $A(debugState.getState().selectedView)) && !t && (!!getFeatureFlags().plugins_force_load_all_pages || (n ? "dynamic-page" !== n : !(await $$E()).has(i)));
+  return !(!i || e && hasTextReviewCapability(e) || $A(debugState.getState().selectedView)) && !t && (!!getFeatureFlags().plugins_force_load_all_pages || (n ? "dynamic-page" !== n : !(await $$E()).has(i)));
 }
 export let $$S0 = _$$n(async (e, t, i) => {
-  let n = debugState.getState().mirror.appModel.pagesList.filter(e => e.status === xal.NOT_LOADED).length;
+  let n = debugState.getState().mirror.appModel.pagesList.filter(e => e.status === DataLoadStatus.NOT_LOADED).length;
   if (0 === n) return {
     isCancelled: !1
   };
   atomStoreManager.set(s6, !0);
-  let a = e && k0(e) ? getI18nString("plugins.loading_pages_for_widget", {
+  let a = e && manifestContainsWidget(e) ? getI18nString("plugins.loading_pages_for_widget", {
     numUnloadedPages: n
   }) : getI18nString("plugins.loading_pages_for_plugin", {
     numUnloadedPages: n
   });
   let d = () => {
-    Y5.dispatch(F.dequeue({
+    fullscreenValue.dispatch(F.dequeue({
       matchType: "loading-pages-for-plugin"
     }));
   };
@@ -68,10 +68,10 @@ export let $$S0 = _$$n(async (e, t, i) => {
     atomStoreManager.set(nc, !0);
     y = e;
   });
-  e && k0(e) && t?.widgetAction === "insert" && Y5.dispatch(F.dequeue({
+  e && manifestContainsWidget(e) && t?.widgetAction === "insert" && fullscreenValue.dispatch(F.dequeue({
     matchType: "plugins-status"
   }));
-  Y5.dispatch(F.enqueue({
+  fullscreenValue.dispatch(F.enqueue({
     message: a,
     icon: zX.IMAGE_BACKED_SPINNER,
     type: "loading-pages-for-plugin",
@@ -94,7 +94,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
             fileKey: e?.openFileKey,
             pluginID: t?.plugin_id,
             ...(i ? i.getTimingMarks() : {}),
-            ...(t ? ZQ(t) ? {
+            ...(t ? hasLocalFileId(t) ? {
               pluginVersionID: "",
               source: "development",
               name: "<local plugin>"
@@ -110,7 +110,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
     }
   }));
   let I = q(i);
-  getPluginConnectionState() ? h3O.resolveSceneGraphQueryForTest("0:0", DPQ.DEFAULT) : (await Promise.race([I, b]), d(), atomStoreManager.set(s6, !1));
+  getPluginConnectionState() ? Multiplayer.resolveSceneGraphQueryForTest("0:0", IPagePlugin.DEFAULT) : (await Promise.race([I, b]), d(), atomStoreManager.set(s6, !1));
   return {
     isCancelled: g
   };
@@ -118,7 +118,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
 export async function $$w1(e) {
   let t = e?.plugin ?? hw();
   let i = e?.queryMode ?? !1;
-  return (await x(t, i)) ? iu.stats ? await iu.stats.markDuration("waitForAllPagesForPluginMs", async () => await $$S0(t, e, _em.LEGACY_PLUGIN)) : await $$S0(t, e, _em.LEGACY_PLUGIN) : {
+  return (await x(t, i)) ? iu.stats ? await iu.stats.markDuration("waitForAllPagesForPluginMs", async () => await $$S0(t, e, PluginModalType.LEGACY_PLUGIN)) : await $$S0(t, e, PluginModalType.LEGACY_PLUGIN) : {
     isCancelled: !1
   };
 }

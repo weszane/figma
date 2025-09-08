@@ -1,4 +1,4 @@
-import { h62 } from "../figma_app/763686";
+import { WhiteboardIntegrationType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { P } from "../905/813637";
 var $$n1;
@@ -40,7 +40,7 @@ class u extends $$d2 {}
   };
   e.PdfImportBlocked = class extends $$c6 {
     constructor() {
-      super(P(h62.UNKNOWN), "pdf_import_blocked");
+      super(P(WhiteboardIntegrationType.UNKNOWN), "pdf_import_blocked");
     }
   };
   e.InvalidPermissions = class extends $$c6 {

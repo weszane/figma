@@ -1,9 +1,9 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { DS } from "../figma_app/387100";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { I2 } from "../905/70369";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Aw } from "../figma_app/383828";
 let c = "return_to_variant";
 let u = null;
@@ -20,9 +20,9 @@ export function $$m0(e, t, i) {
       sourceStates: r
     };
   }
-  glU.selectInstances(Object.keys(u.selectedSwappedNodeIds).join(","), !1);
+  Fullscreen.selectInstances(Object.keys(u.selectedSwappedNodeIds).join(","), !1);
 }
-export let $$h1 = nF(e => {
+export let $$h1 = createOptimistThunk(e => {
   let t = e.getState();
   let i = Object.keys(t.mirror.sceneGraphSelection);
   I2(t.visualBell, c) ? function (e) {
@@ -66,7 +66,7 @@ function _() {
   for (let t of Object.keys(u.selectedSwappedNodeIds)) {
     let i = u.selectedSwappedNodeIds[t].slice(1, -1);
     if (i.split(",").length < 1) e.push(t);else {
-      let r = glU.getInstanceSublayerNodeId(t, i);
+      let r = Fullscreen.getInstanceSublayerNodeId(t, i);
       if (!r) return [];
       e.push(r);
     }
@@ -77,7 +77,7 @@ function A() {
   if (u) {
     Aw(u.sourceStates);
     let e = _();
-    glU.selectInstances(e.join(","), !1);
+    Fullscreen.selectInstances(e.join(","), !1);
     u = null;
   }
 }

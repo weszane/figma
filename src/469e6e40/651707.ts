@@ -14,9 +14,9 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E } from "../905/984674";
 import { d as _$$d } from "../905/44199";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
-let $$j0 = Ju(function (e) {
+let $$j0 = registerModal(function (e) {
   let t = hS(e);
   let a = useDispatch();
   let [v, j] = useState({

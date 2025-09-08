@@ -8,12 +8,12 @@ import { $n } from "../905/521428";
 import { J } from "../905/341359";
 import { Ay } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 export function $$h0({
   title: e
 }) {
   let t = useDispatch();
-  let i = useCallback(() => t(Ce()), [t]);
+  let i = useCallback(() => t(hideModal()), [t]);
   let h = hS({
     open: !0,
     onClose: i

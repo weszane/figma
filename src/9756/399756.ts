@@ -3,7 +3,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { S as _$$S, V } from "../905/802325";
-import { zk, l7 } from "../905/189185";
+import { zk, permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { j as _$$j } from "../figma_app/602140";
@@ -55,7 +55,7 @@ async function d({
   let p = x.node;
   if (!p) throw Error("Couldn't parse jsx");
   let b = u.handleNodesForRoot(p);
-  l7.ai("make-edits", () => {
+  permissionScopeHandler.ai("make-edits", () => {
     if (e.firstDraftData) {
       p.firstDraftData = e.firstDraftData;
       let t = e.getSharedPluginData(l, "userPrompt");
@@ -76,7 +76,7 @@ export async function $$E1(e) {
   });
   let a = "";
   let n = r.getReader();
-  for (;;) {
+  for (; ;) {
     let {
       done,
       value
@@ -135,7 +135,7 @@ export function $$y0() {
         jsx: r.jsx,
         clientLifecycleId: l,
         nodeHandlerManager: t,
-        transformCustomJSX: r1 ?? (() => {})
+        transformCustomJSX: r1 ?? (() => { })
       });
       e(_$$F.enqueue({
         type: "FIRST_DRAFT_FINE_TUNE_JSX",

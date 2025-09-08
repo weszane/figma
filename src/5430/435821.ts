@@ -12,11 +12,11 @@ import { Us } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { sx as _$$sx } from "../905/941192";
 import { FRequestStatusType } from "../figma_app/191312";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { g as _$$g } from "../905/356410";
 import { utilityNoop } from "../figma_app/918700";
 import { A } from "../5724/663128";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Ib } from "../905/129884";
 import { A as _$$A } from "../1617/230645";
 let $$b = {
@@ -54,7 +54,7 @@ function j({
     })
   }) : null;
 }
-let w = Ju(function ({
+let w = registerModal(function ({
   securityFormResponse: e,
   isWidget: t
 }) {
@@ -259,7 +259,7 @@ export function $$P1({
       className: "community_detail" === t ? u ? "extension_security_response--communitySecurityText24x24--IyRkA extension_security_response--extensionSecurityText--kCA-d" : "extension_security_response--communitySecurityText--8N545 extension_security_response--extensionSecurityText--kCA-d" : "extension_security_response--adminSecurityText--xRb4T extension_security_response--extensionSecurityText--kCA-d",
       "data-testid": "extension-trust-security-response-button",
       onClick: () => {
-        m(to({
+        m(showModalHandler({
           type: w,
           data: {
             securityFormResponse: e,

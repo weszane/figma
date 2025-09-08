@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Dw } from "../figma_app/976345";
-import { Lo, Ce, to } from "../905/156213";
+import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { e5 } from "../figma_app/297957";
 import { TA } from "../905/372672";
 import { f as _$$f } from "../905/940356";
@@ -18,9 +18,9 @@ import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { F } from "../905/224";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Pj } from "../905/652992";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import w from "classnames";
 import { d_ } from "../figma_app/918700";
 import { DV } from "../905/739964";
@@ -118,29 +118,29 @@ function O({
     })]
   });
 }
-let D = Ju(function (e) {
+let D = registerModal(function (e) {
   let t = useDispatch();
   let i = useRef(null);
   let [r, s] = useState(550);
   let o = _$$h.useTrackingContext({
-    trigger: _$$b2.TEAM_CREATION_SPEED_BUMP
+    trigger: UpsellModalType.TEAM_CREATION_SPEED_BUMP
   });
   let l = () => {
-    t(Lo());
+    t(popModalStack());
   };
   let d = () => {
-    t(Ce());
+    t(hideModal());
   };
   let p = () => {
     l();
-    t(to({
+    t(showModalHandler({
       type: DV,
       data: {
         resource: Pj.TEAM_CREATION_SPEED_BUMP,
         currentPlan: F.Plan.STARTER,
         upsellPlan: F.Plan.PRO,
         editorType: e.editorType,
-        upsellSource: _$$b2.TEAM_CREATION_SPEED_BUMP
+        upsellSource: UpsellModalType.TEAM_CREATION_SPEED_BUMP
       }
     }));
   };
@@ -245,7 +245,7 @@ export function $$L0() {
     userId: e,
     teams: Object.values(c),
     rolesByTeamId: u
-  }) ? () => t(to({
+  }) ? () => t(showModalHandler({
     type: D,
     data: {
       user: p,

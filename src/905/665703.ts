@@ -1,16 +1,16 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { vh, Rq, td } from "../figma_app/181241";
+import { createNoOpValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
 import { z } from "../905/239603";
 import { M4 } from "../905/713695";
 import { nn } from "../figma_app/45218";
 export let $$d0 = new class {
   constructor() {
-    this.CommunityShelvesSchemaValidator = vh();
+    this.CommunityShelvesSchemaValidator = createNoOpValidator();
     this.getCommunityShelfById = e => this.CommunityShelvesSchemaValidator.validate(async ({
       xr: t
     }) => await t.get(`/api/community_shelves/id/${e.categoryId}`));
-    this.CommunityShelfV2SchemaValidator = Rq("CommunityShelfV2SchemaValidator", z.array(nn), null, !0);
+    this.CommunityShelfV2SchemaValidator = createPaginatedValidator("CommunityShelfV2SchemaValidator", z.array(nn), null, !0);
     this.ShelfContentPaginatedQuery = M4.PaginatedQuery({
       fetch: async (e, {
         pageParam: t
@@ -24,7 +24,7 @@ export let $$d0 = new class {
               includeContent,
               pageSize
             } = e;
-            let o = td.toAPIParameters({
+            let o = APIParameterUtils.toAPIParameters({
               include_content: includeContent,
               page_size: pageSize,
               cursor: t
@@ -49,7 +49,7 @@ export let $$d0 = new class {
     let t = e?.urlSlug ? `/${e.urlSlug}` : "";
     return this.CommunityShelvesSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/community_shelves${t}`, td.toAPIParameters(e || {})));
+    }) => await i.get(`/api/community_shelves${t}`, APIParameterUtils.toAPIParameters(e || {})));
   }
 }();
 export const A = $$d0;

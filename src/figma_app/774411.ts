@@ -1,7 +1,7 @@
 import { QP } from "../vendor/202832";
 import { v4, W1, t1, IT, Fm, vW, B9, bP, Pw, Fg, Hg, km, k$, BM, Eu, gW, Cv, vQ } from "../figma_app/17669";
 import { AD, Zx } from "../figma_app/197743";
-import { mKm } from "../figma_app/763686";
+import { LayoutSizingMode } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { hN } from "../905/532366";
 import { Lo, QW } from "../figma_app/941074";
@@ -84,14 +84,14 @@ export function $$h0(e, t, r) {
     try {
       switch (e) {
         case "width":
-          "fill-parent" === t && (n.stackHorizontalLayoutSize = mKm.FILL_CONTAINER);
-          "hug-contents" === t && (n.stackHorizontalLayoutSize = mKm.HUG_CONTENT);
-          "number" == typeof t && (n.stackHorizontalLayoutSize = mKm.FIXED, n.resizeWithConstraints(t, n.size.y));
+          "fill-parent" === t && (n.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER);
+          "hug-contents" === t && (n.stackHorizontalLayoutSize = LayoutSizingMode.HUG_CONTENT);
+          "number" == typeof t && (n.stackHorizontalLayoutSize = LayoutSizingMode.FIXED, n.resizeWithConstraints(t, n.size.y));
           break;
         case "height":
-          "fill-parent" === t && (n.stackVerticalLayoutSize = mKm.FILL_CONTAINER);
-          "hug-contents" === t && (n.stackVerticalLayoutSize = mKm.HUG_CONTENT);
-          "number" == typeof t && (n.stackVerticalLayoutSize = mKm.FIXED, n.resizeWithConstraints(n.size.x, t));
+          "fill-parent" === t && (n.stackVerticalLayoutSize = LayoutSizingMode.FILL_CONTAINER);
+          "hug-contents" === t && (n.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT);
+          "number" == typeof t && (n.stackVerticalLayoutSize = LayoutSizingMode.FIXED, n.resizeWithConstraints(n.size.x, t));
           break;
         case "hidden":
           n.visible = !t;

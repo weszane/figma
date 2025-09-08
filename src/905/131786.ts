@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { FS } from "../figma_app/930338";
 import { nh, jD } from "../figma_app/933328";
@@ -38,7 +38,7 @@ export function $$m0(e, t, i, n) {
     n(nh({
       style: t,
       callback: t => {
-        l7.user("replace-libraries", () => glU.swapAllUsesOfStyle(e.key, t, i)) ? s() : o();
+        permissionScopeHandler.user("replace-libraries", () => Fullscreen.swapAllUsesOfStyle(e.key, t, i)) ? s() : o();
       },
       omitFullscreenCommit: !0
     }));
@@ -47,8 +47,8 @@ export function $$m0(e, t, i, n) {
 export async function $$h2(e, t) {
   let i = await jD(t);
   let n = i?.newSymbolOrStateGroupGuid;
-  n && l7.user("replace-libraries", () => {
-    glU.swapAllInstancesOfComponentOrStateGroup(e, n, t.type === PW.COMPONENT ? "" : t.default_state_key);
+  n && permissionScopeHandler.user("replace-libraries", () => {
+    Fullscreen.swapAllInstancesOfComponentOrStateGroup(e, n, t.type === PW.COMPONENT ? "" : t.default_state_key);
   });
 }
 export function $$g6(e, t) {

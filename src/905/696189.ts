@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { vh, YV } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 import { g7 } from "../905/513035";
 import { D } from "../905/962956";
 let o = z.object({
@@ -11,11 +11,11 @@ let o = z.object({
 });
 let $$l0 = new class {
   constructor() {
-    this.TeamSummarySchemaValidator = vh();
-    this.PreviewAddProratedAnnualSeatsValidator = YV("PreviewAddProratedAnnualSeatsValidator", z.object({
+    this.TeamSummarySchemaValidator = createNoOpValidator();
+    this.PreviewAddProratedAnnualSeatsValidator = createMetaValidator("PreviewAddProratedAnnualSeatsValidator", z.object({
       estimate_context_by_billable_product: g7(o)
     }), null);
-    this.HostedInvoicesPageSchemaValidator = vh();
+    this.HostedInvoicesPageSchemaValidator = createNoOpValidator();
   }
   getTeamSummary(e) {
     return this.TeamSummarySchemaValidator.validate(async ({

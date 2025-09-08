@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useMemo, useEffect, useLayoutEffect, useRef } from "react";
-import { Ez5, CNR, NLJ } from "../figma_app/763686";
+import { AppStateTsApi, SlideConstantsCppBindings, DesignGraphElements } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
@@ -22,7 +22,7 @@ import { tc } from "../figma_app/334505";
 import { F1, U3, Vx } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
 import { p8 } from "../figma_app/722362";
-import { J2, ut } from "../figma_app/84367";
+import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { l5 } from "../figma_app/224338";
 import { A7 } from "../1528/961203";
 import { gU, po, cm } from "../9410/486658";
@@ -31,7 +31,7 @@ import { gr } from "../6388/685012";
 import { BK } from "../905/848862";
 import { B as _$$B } from "../905/295520";
 import { O as _$$O } from "../905/164014";
-import { J as _$$J } from "../905/633914";
+import { useSyncedRef } from "../905/633914";
 import { T as _$$T } from "../1528/606183";
 var d = a;
 function v({
@@ -47,7 +47,7 @@ function v({
   let u = useCallback(() => {
     let t = l(c);
     if (!t) return;
-    Ez5.singleSlideView().isCarouselFocused.set(!0);
+    AppStateTsApi.singleSlideView().isCarouselFocused.set(!0);
     let o = j(c, e);
     o !== c && r(o);
     t.current && i(t.current);
@@ -148,7 +148,7 @@ function K(e) {
     toggleCollapsed
   } = Q;
   let Z = "boolean" != typeof isCarouselFocused || isCarouselFocused;
-  let ee = J2(UK().showGuids);
+  let ee = getObservableOrFallback(UK().showGuids);
   let et = p8("isReadOnly");
   useLayoutEffect(() => {
     Q.selectedItemIds.forEach(e => {
@@ -176,7 +176,7 @@ function K(e) {
     onDragEnd,
     scrollToCarouselItem
   } = function (e) {
-    let [t, l, o] = _$$J(!1);
+    let [t, l, o] = useSyncedRef(!1);
     let s = useRef(e);
     s.current = e;
     let {
@@ -271,11 +271,11 @@ function K(e) {
   g = Q.detachedCarouselItemGuids;
   m = Q.isDraggingCarouselItems;
   let ep = useMemo(() => (m ? g : h).filter(e => !!x[e] && !!el.get(e)), [x, h, g, m, el]);
-  let eg = CNR?.singleSlideThumbnailPadding() ?? 0;
+  let eg = SlideConstantsCppBindings?.singleSlideThumbnailPadding() ?? 0;
   let ef = onMouseDownItemOverride || Q.onMouseDownItem;
   let em = useCallback((e, t) => {
     t && "function" == typeof t.stopPropagation && t.stopPropagation();
-    Ez5 && Ez5.singleSlideView && Ez5.singleSlideView().isCarouselFocused.set(!0);
+    AppStateTsApi && AppStateTsApi.singleSlideView && AppStateTsApi.singleSlideView().isCarouselFocused.set(!0);
     let l = getSingletonSceneGraph().get(e);
     l && (l.isExpanded ? q.current?.add(e) : q.current?.delete(e), toggleCollapsed(e));
   }, [toggleCollapsed, q]);
@@ -382,10 +382,10 @@ function $$G() {
   var e;
   let t = po();
   let l = ie();
-  let r = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
+  let r = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let a = l5();
-  let d = Ez5?.singleSlideView().focusNodeInFocusedNodeView ?? (() => {});
-  let c = ut(Ez5?.singleSlideView().isCarouselFocused, !0);
+  let d = AppStateTsApi?.singleSlideView().focusNodeInFocusedNodeView ?? (() => {});
+  let c = getObservableValue(AppStateTsApi?.singleSlideView().isCarouselFocused, !0);
   let u = {
     shouldIndentChildren: !0,
     focusedItemId: l,
@@ -406,7 +406,7 @@ function $$G() {
     wrappedOnMouseDownItem
   } = {
     wrappedOnMouseDownItem: useCallback((t, l) => {
-      activeToolId === NLJ.COMMENTS && activateTool(NLJ.SELECT);
+      activeToolId === DesignGraphElements.COMMENTS && activateTool(DesignGraphElements.SELECT);
       e(t, l);
     }, [activeToolId, activateTool, e])
   };

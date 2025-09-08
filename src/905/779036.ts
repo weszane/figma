@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useCallback } from "react";
 import { o as _$$o } from "../905/821217";
 import { K } from "../905/443068";
-import { S } from "../905/274480";
-import { h as _$$h } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { HiddenLabel } from "../905/270045";
 import { f as _$$f } from "../905/54715";
 import { M3 } from "../figma_app/119475";
 import { L } from "../905/408237";
@@ -117,10 +117,10 @@ export function $$v1({
     path: s,
     rowHeight: CO.SHORT,
     rowStyle: yY.CHECKBOX,
-    sideElement: jsx(S, {
+    sideElement: jsx(Checkbox, {
       onChange: u,
       checked: i,
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: c
       })
     }),

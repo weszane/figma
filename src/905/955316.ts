@@ -1,10 +1,10 @@
-import { jot } from "../figma_app/763686";
+import { IgnoreUndoRedoBindings } from "../figma_app/763686";
 export function $$$$r0(e) {
-  let t = jot?.openIgnoreUndoRedoScope();
+  let t = IgnoreUndoRedoBindings?.openIgnoreUndoRedoScope();
   try {
     return e();
   } finally {
-    null != t && jot?.closeIgnoreUndoRedoScope(t);
+    null != t && IgnoreUndoRedoBindings?.closeIgnoreUndoRedoScope(t);
   }
 }
 export const r = $$$$r0;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { $$default } from "../5609/597604";
 import { YD, tk } from "../048e062c/444406";
 export function $$d0({
@@ -15,7 +15,7 @@ export function $$d0({
   let [i, g] = useState("");
   let h = tk(e);
   let m = () => {
-    null !== o && l7.user("chart-updateHeader", () => {
+    null !== o && permissionScopeHandler.user("chart-updateHeader", () => {
       h(a, o, 0, i);
     });
     c(null);
@@ -68,7 +68,7 @@ export function $$d0({
         let c = s && o ? Math.round(s / o) : 0;
         let i = [...rowData];
         i[u] || (i[u] = {});
-        l7.user("chart-updateCell", () => {
+        permissionScopeHandler.user("chart-updateCell", () => {
           h(a, c, u + 1, newValue);
         });
       },

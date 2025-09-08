@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useSelector } from "../vendor/514228";
-import { NLJ, glU } from "../figma_app/763686";
+import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { UE } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { BI, m0, pI } from "../figma_app/546509";
 import { xN } from "../figma_app/1722";
-let $$u0 = [NLJ.VECTOR_PENCIL, NLJ.HIGHLIGHTER, NLJ.WASHI_TAPE, NLJ.ERASER, NLJ.LASSO];
-let p = new Map([[NLJ.VECTOR_PENCIL, "set-tool-pencil"], [NLJ.HIGHLIGHTER, "set-tool-highlighter"], [NLJ.WASHI_TAPE, "set-tool-washi-tape"]]);
+let $$u0 = [DesignGraphElements.VECTOR_PENCIL, DesignGraphElements.HIGHLIGHTER, DesignGraphElements.WASHI_TAPE, DesignGraphElements.ERASER, DesignGraphElements.LASSO];
+let p = new Map([[DesignGraphElements.VECTOR_PENCIL, "set-tool-pencil"], [DesignGraphElements.HIGHLIGHTER, "set-tool-highlighter"], [DesignGraphElements.WASHI_TAPE, "set-tool-washi-tape"]]);
 export function $$_1() {
   let e = BI();
   let t = m0();
@@ -15,7 +15,7 @@ export function $$_1() {
   let _ = useSelector(e => e.mirror.appModel.currentTool);
   useEffect(() => {
     e?.shouldAllowNativeGestures && t && (t._allow_native_gestures_on_points = e => e.every(e => !UE(document.elementFromPoint(e.x, e.y))), t._allow_web_gestures = e => {
-      Y5.allowWebGestures && Y5.allowWebGestures(e ? 1 : 0);
+      fullscreenValue.allowWebGestures && fullscreenValue.allowWebGestures(e ? 1 : 0);
     });
   }, [e, t]);
   useEffect(() => {
@@ -23,7 +23,7 @@ export function $$_1() {
       t._auto_draw_with_pencil = e;
     });
   }, [t]);
-  let h = useRef(NLJ.VECTOR_PENCIL);
+  let h = useRef(DesignGraphElements.VECTOR_PENCIL);
   useEffect(() => {
     t?._auto_draw_with_pencil && _ && p.get(_) && (h.current = _);
   }, [_, t]);
@@ -32,9 +32,9 @@ export function $$_1() {
     if (e?.suppliesPencilSamples && t) {
       var r = !1;
       t._take_pencil_samples = (e, n) => {
-        if (Y5.takePencilSample && n.length > 0) {
+        if (fullscreenValue.takePencilSample && n.length > 0) {
           let d = (e, t) => {
-            Y5.takePencilSample?.(e, t.x, t.y, t.modifierKeys ?? 0);
+            fullscreenValue.takePencilSample?.(e, t.x, t.y, t.modifierKeys ?? 0);
           };
           switch (e) {
             case xN.BEGAN:
@@ -46,11 +46,11 @@ export function $$_1() {
                   multiplayerEmoji
                 } = debugState.getState();
                 let n = "REACTING_OR_CHATTING" === multiplayerEmoji.type && !!multiplayerEmoji.imageUrl;
-                let i = _ === NLJ.MULTISELECT;
+                let i = _ === DesignGraphElements.MULTISELECT;
                 let o = p.get(h.current);
-                !o || e || n || !r || i || m || (glU?.triggerActionInUserEditScope(o, {
+                !o || e || n || !r || i || m || (Fullscreen?.triggerActionInUserEditScope(o, {
                   source: "figma_mobile"
-                }), _ = NLJ.VECTOR_PENCIL);
+                }), _ = DesignGraphElements.VECTOR_PENCIL);
               }
               if (r && (r = $$u0.includes(_)), r) {
                 d(xN.BEGAN, g);
@@ -85,7 +85,7 @@ export function $$_1() {
   }, [m, e, t]);
   useEffect(() => {
     r && (r._take_indirect_pinch_gesture = (e, t, r, n) => {
-      Y5.takeIndirectPinchGesture && !UE(document.elementFromPoint(r.x, r.y)) && Y5.takeIndirectPinchGesture(e, t, r.x, r.y, n);
+      fullscreenValue.takeIndirectPinchGesture && !UE(document.elementFromPoint(r.x, r.y)) && fullscreenValue.takeIndirectPinchGesture(e, t, r.x, r.y, n);
     });
   }, [r]);
   return null;

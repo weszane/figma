@@ -6,7 +6,7 @@ import { debugState } from '../905/407919';
 import { getSingletonSceneGraph } from '../905/700578';
 import { getSceneGraphInstance } from '../905/830071';
 import { IL } from '../figma_app/582924';
-import { dPJ, DPQ, h3O, kul, xal } from '../figma_app/763686';
+import { AutosaveEventType, IPagePlugin, Multiplayer, SchemaJoinStatus, DataLoadStatus } from '../figma_app/763686';
 
 /**
  * Utility messages for incremental and page loading warnings/errors.
@@ -29,7 +29,7 @@ const getTimeoutSeconds = createMemoized(() => 10);
  * Memoized function to check if the session state is JOINED.
  * (variable: S)
  */
-const isSessionJoined = createMemoized(() => h3O.getSessionState() === kul.JOINED);
+const isSessionJoined = createMemoized(() => Multiplayer.getSessionState() === SchemaJoinStatus.JOINED);
 
 /**
  * Memoized function to get the plugin connection state.
@@ -171,9 +171,9 @@ export function checkIncrementalUnsafeMember(allowUnsafe: boolean, oldApi: strin
  * (function: _)
  */
 function loadSceneGraph(nodeId: string): any {
-  const result = IL(nodeId, dPJ.PLUGIN, DPQ.PLUGIN);
+  const result = IL(nodeId, AutosaveEventType.PLUGIN, IPagePlugin.PLUGIN);
   if (isSessionJoined() && getPluginConnectionState()) {
-    h3O.resolveSceneGraphQueryForTest(nodeId, DPQ.PLUGIN);
+    Multiplayer.resolveSceneGraphQueryForTest(nodeId, IPagePlugin.PLUGIN);
   }
   return result;
 }
@@ -184,7 +184,7 @@ function loadSceneGraph(nodeId: string): any {
  */
 async function ensurePageLoaded(nodeId: string, tracker: DocumentAccessState): Promise<void> {
   if ((!isSessionJoined() || !getPluginConnectionState()) && (await Promise.race([(async () => {
-    await oJ(kul.JOINED);
+    await oJ(SchemaJoinStatus.JOINED);
     return false;
   })(), (async () => {
     await new Promise(resolve => setTimeout(resolve, 1000 * getTimeoutSeconds()));
@@ -212,7 +212,7 @@ export function markPageLoaded(nodeId: string, tracker: DocumentAccessState, opt
       tracker.addLoadedPageIds([containingCanvas]);
     } else {
       const page = debugState.getState().mirror.appModel.pagesList.find(p => p.nodeId === containingCanvas);
-      if (page && page.status === xal.LOADED) {
+      if (page && page.status === DataLoadStatus.LOADED) {
         tracker.addLoadedPageIds([containingCanvas]);
       } else {
         reportError(ServiceCategoriesExtensibility.EXTENSIBILITY, new Error('Cannot call markPageLoaded without having loaded the page first.'));

@@ -27,7 +27,7 @@ import { FC } from "../figma_app/212807";
 import { Pc } from "../905/372672";
 import { vU } from "../figma_app/193867";
 import { gN, X2, Zo, td } from "../figma_app/273118";
-import { sr } from "../905/894881";
+import { notificationAPI } from "../905/894881";
 import { fD } from "../905/807385";
 import { a as _$$a, j as _$$j } from "../1577/143479";
 import { IK } from "../905/521428";
@@ -553,7 +553,7 @@ function eL(e) {
     let i = c + "_quickreply";
     toggleQuickReply(t, x, async () => {
       if (getFeatureFlags().notif_new_read_api) try {
-        await sr.markNotificationAsRead({
+        await notificationAPI.markNotificationAsRead({
           notification_id: x.notification_id,
           currentView: i
         });
@@ -588,7 +588,7 @@ function eL(e) {
     j(t);
     let n = onClick(x);
     if (getFeatureFlags().notif_new_read_api) try {
-      await sr.markNotificationAsRead({
+      await notificationAPI.markNotificationAsRead({
         notification_id: x.notification_id,
         currentView: c
       });
@@ -617,7 +617,7 @@ function eL(e) {
     s(!0);
     e.onHide && e.onHide();
   };
-  let C = (e, t = c) => sr.updateNotification({
+  let C = (e, t = c) => notificationAPI.updateNotification({
     notification_id: x.notification_id,
     notification_action: e,
     currentView: t
@@ -632,12 +632,12 @@ function eL(e) {
       notification_filter: e.currentNotificationFilter
     }), t) {
       case "resolve":
-        return sr.acceptNotification({
+        return notificationAPI.acceptNotification({
           notification_id: x.notification_id,
           currentView: i
         });
       case "reject":
-        return sr.rejectNotification({
+        return notificationAPI.rejectNotification({
           notification_id: x.notification_id,
           currentView: i
         });
@@ -851,7 +851,7 @@ export function $$eY4(e, t) {
         isBellStateHigh: !1,
         userInitiated: !0,
         profileId: n
-      })), sr.getCommunityServerDriven({
+      })), notificationAPI.getCommunityServerDriven({
         currentView: u
       }).then(({
         data: e
@@ -864,7 +864,7 @@ export function $$eY4(e, t) {
           error: !0
         }));
         i(oB());
-      })) : (Zo(!1, td, a), sr.getServerDrivenPlan({
+      })) : (Zo(!1, td, a), notificationAPI.getServerDrivenPlan({
         currentPlanId: t,
         currentView: u,
         isPlanOrg: c

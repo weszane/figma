@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Z } from '../905/116724';
 import { s as _$$s } from '../905/139639';
-import { l7 } from '../905/189185';
+import { permissionScopeHandler } from '../905/189185';
 import { F as _$$F2 } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
@@ -10,14 +10,14 @@ import { F as _$$F } from '../905/680873';
 import { getSingletonSceneGraph } from '../905/700578';
 import { atom, useAtomValueAndSetter, createRemovableAtomFamily } from '../figma_app/27355';
 import { ZC } from '../figma_app/39751';
-import { ut } from '../figma_app/84367';
+import { getObservableValue } from '../figma_app/84367';
 import { L3 } from '../figma_app/385215';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { Wh } from '../figma_app/615482';
 import { p8 } from '../figma_app/722362';
 import { dP, UK } from '../figma_app/740163';
 import { i as _$$i, BH, hq } from '../figma_app/741237';
-import { Ez5, lyf, xae, xc1 } from '../figma_app/763686';
+import { AppStateTsApi, ViewType, UserInterfaceElements, SelectionPanelType } from '../figma_app/763686';
 import { tu } from '../figma_app/779249';
 import { parseMsNumber } from '../figma_app/783094';
 import { d as _$$d, W as _$$W } from '../figma_app/833988';
@@ -44,8 +44,8 @@ function F(e, t, r) {
   return Math.max(t, Math.min(r, e || 0));
 }
 export function $$j3() {
-  ut(Ez5?.editorPreferences()?.showSidebar, R.showSidebar);
-  return ut(Ez5?.uiState()?.leftPanelCollapsedUI3, !R.showSidebar);
+  getObservableValue(AppStateTsApi?.editorPreferences()?.showSidebar, R.showSidebar);
+  return getObservableValue(AppStateTsApi?.uiState()?.leftPanelCollapsedUI3, !R.showSidebar);
 }
 export function $$U9() {
   return useMemo(() => parseMsNumber(getComputedStyle(document.body).getPropertyValue('--duration-md')) / 1e3, []);
@@ -74,16 +74,16 @@ export function $$G7() {
     let r = ZC(e);
     let i = useRef();
     useEffect(() => {
-      e !== r && void 0 !== r && (e ? t ? i.current = !1 : (Y5.triggerAction('toggle-sidebar', {
+      e !== r && void 0 !== r && (e ? t ? i.current = !1 : (fullscreenValue.triggerAction('toggle-sidebar', {
         source: 'spotlight-following'
-      }), i.current = !0) : i.current && t && Y5.triggerAction('toggle-sidebar', {
+      }), i.current = !0) : i.current && t && fullscreenValue.triggerAction('toggle-sidebar', {
         source: 'spotlight-following'
       }));
     }, [e, r, t]);
   }(useSelector(e => L3(e.multiplayer)));
 }
 export function $$V8() {
-  return useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  return useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === ViewType.HISTORY);
 }
 export function $$H12() {
   return p8('pagesList');
@@ -93,7 +93,7 @@ export function $$z2() {
   let r = _$$F(e);
   let l = U();
   let d = $$V8();
-  let c = useSelector(e => e.openFile ? e.leftPanel.activeTab : xae.LAYERS);
+  let c = useSelector(e => e.openFile ? e.leftPanel.activeTab : UserInterfaceElements.LAYERS);
   let p = _$$F(c);
   let _ = useDispatch();
   let {
@@ -110,7 +110,7 @@ export function $$z2() {
       }));
       return;
     }
-    !r?.isReactFiber && (p.current !== xae.LAYERS && p.current !== xae.CODE && l.showLayersPanel(), setIsLayersOpen(!0), t(e), r?.parentGuid && hq(r.parentGuid));
+    !r?.isReactFiber && (p.current !== UserInterfaceElements.LAYERS && p.current !== UserInterfaceElements.CODE && l.showLayersPanel(), setIsLayersOpen(!0), t(e), r?.parentGuid && hq(r.parentGuid));
   }, [p, _, d, l, setIsLayersOpen]);
   let S = useCallback((e, n, i) => {
     if (d) return;
@@ -118,9 +118,9 @@ export function $$z2() {
     if (l && e) {
       let e = getSingletonSceneGraph().get(l);
       let t = n || '';
-      let r = Ez5.uiState().focusModeState.getCopy();
-      e?.isCodeFile ? (t = tu(t), (!n || T(e.codeFilePath, i, t)) && (t = e.name), l7.user('set-node-name', () => _$$i(l, t))) : e?.isResponsiveSetOrWebpage || e?.isBreakpointFrame || e?.isDerivedWebpageBreakpoint ? (t ||= e?.name, l7.user('set-node-name', () => _$$i(l, t))) : xc1.RESPONSIVE_SET === r || xc1.COMPONENT_SET === r ? l7.user('set-node-name', () => BH(t)) : l7.user('set-node-name', () => _$$i(l, t));
-      Y5.commit();
+      let r = AppStateTsApi.uiState().focusModeState.getCopy();
+      e?.isCodeFile ? (t = tu(t), (!n || T(e.codeFilePath, i, t)) && (t = e.name), permissionScopeHandler.user('set-node-name', () => _$$i(l, t))) : e?.isResponsiveSetOrWebpage || e?.isBreakpointFrame || e?.isDerivedWebpageBreakpoint ? (t ||= e?.name, permissionScopeHandler.user('set-node-name', () => _$$i(l, t))) : SelectionPanelType.RESPONSIVE_SET === r || SelectionPanelType.COMPONENT_SET === r ? permissionScopeHandler.user('set-node-name', () => BH(t)) : permissionScopeHandler.user('set-node-name', () => _$$i(l, t));
+      fullscreenValue.commit();
       t !== i && e?.type && ['FRAME', 'SECTION'].includes(e.type) && (y({
         newTitle: t,
         nodeType: e.type
@@ -139,9 +139,9 @@ export function $$z2() {
     }) => {
       I(e);
     };
-    Y5.fromFullscreen.on('startRenamingNode', e);
+    fullscreenValue.fromFullscreen.on('startRenamingNode', e);
     return () => {
-      Y5.fromFullscreen.removeListener('startRenamingNode', e);
+      fullscreenValue.fromFullscreen.removeListener('startRenamingNode', e);
     };
   }, [I]);
   return useMemo(() => ({
@@ -171,7 +171,7 @@ export function $$Y5() {
   let e = U();
   return useCallback(() => {
     e.showLayersPanel();
-    Y5.triggerAction('canvas-search', {
+    fullscreenValue.triggerAction('canvas-search', {
       source: 'toolbar'
     });
   }, [e]);

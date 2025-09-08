@@ -1,5 +1,5 @@
-import { Z_n } from "../figma_app/763686";
-import { hS } from "../905/216495";
+import { VariableDataType } from "../figma_app/763686";
+import { isValidValue } from "../905/216495";
 import { u } from "../figma_app/852050";
 import { mv } from "../figma_app/164212";
 import { e4 } from "../figma_app/394327";
@@ -8,7 +8,7 @@ export function $$d2(e) {
   let {
     consumedVariable
   } = u3(e);
-  let r = consumedVariable && hS(consumedVariable) && consumedVariable.type === Z_n.ALIAS ? consumedVariable.value : void 0;
+  let r = consumedVariable && isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS ? consumedVariable.value : void 0;
   let s = u(r);
   return {
     boundVariableId: r,
@@ -17,7 +17,7 @@ export function $$d2(e) {
 }
 export function $$c0(e, t, r, i) {
   return i && t ? {
-    type: Z_n.ALIAS,
+    type: VariableDataType.ALIAS,
     resolvedType: e,
     value: i
   } : r ? {

@@ -6,11 +6,11 @@ import { renderI18nText } from "../905/303541";
 import { B } from "../905/759157";
 import { A as _$$A } from "../905/351112";
 import { Xt } from "../figma_app/399472";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { QE } from "../figma_app/831799";
 import { Yo } from "../figma_app/543529";
 import { Cu } from "../figma_app/314264";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { XU } from "../figma_app/756995";
 import { H } from "../figma_app/441663";
 import { Ce, Xg } from "../figma_app/878651";
@@ -64,7 +64,7 @@ function x({
   }, [s]);
   let T = useMemo(() => e.map(e => ({
     plugin: e,
-    version: uF(e)
+    version: getPluginVersion(e)
   })), [e]);
   let S = useCallback(({
     version: e
@@ -82,7 +82,7 @@ function x({
   let A = useCallback(e => {
     if (1 !== e.length) return;
     let t = e[0].plugin;
-    s(to({
+    s(showModalHandler({
       type: H,
       data: {
         plugin: t

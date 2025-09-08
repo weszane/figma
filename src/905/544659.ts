@@ -1,6 +1,6 @@
 import { k } from "../905/651849";
 import { buildStaticUrl } from "../figma_app/169182";
-import { ho } from "../figma_app/155287";
+import { ManifestErrorType } from "../figma_app/155287";
 let s = RegExp("^(?:(https?:|wss?:)(?:[/][/]))?((?:[*][.])?(?:(?:(?:[-a-z\\d])+)[.])+[a-z]{2,})((?:[/][-a-zA-Z\\d%_.~+@]*)*$)");
 let o = RegExp("^(?:(https?:|wss?:)(?:[/][/]))?((?:[*][.])?(?:(?:(?:[-a-z\\d])+)[.])+[a-z]{2,}|localhost)(?:[:](\\d+))?((?:[/][-a-zA-Z\\d%_.~+@]*)*$)");
 let l = RegExp("^(?:(https?:|wss?:)(?:[/][/]))");
@@ -37,7 +37,7 @@ function c(e) {
 let u = 'Invalid value for networkAccess. If you want to allow all domains, please add a "reasoning" field to the networkAccess object.';
 let p = 'Invalid value for networkAccess. If you want to allow localhost, please add a "reasoning" field to the networkAccess object. If you only need to access localhost for development, please add a "devAllowedDomains" field instead.';
 export function $$m0(e) {
-  return e.type === ho.VALIDATE && (e.text === u || e.text === p);
+  return e.type === ManifestErrorType.VALIDATE && (e.text === u || e.text === p);
 }
 export function $$h2(e) {
   let {

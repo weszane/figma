@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { c2 } from "../905/382883";
-import { hS, ZX, gl, oV } from "../905/216495";
+import { isValidValue, arrayOrMixed, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { kl } from "../905/275640";
 import { Xb, f3, P6, ac } from "../figma_app/641313";
 import { R1 } from "../figma_app/152690";
@@ -38,7 +38,7 @@ export function $$c2() {
       mixedMathHandler: ac
     }];
     let p = u.findIndex(e => e.side === n);
-    if (hS(t) && t && (n === kF.TOP || n === kF.BOTTOM) && (p = (p + 2) % 4), void 0 !== e && hS(e)) {
+    if (isValidValue(t) && t && (n === kF.TOP || n === kF.BOTTOM) && (p = (p + 2) % 4), void 0 !== e && isValidValue(e)) {
       let i = s || t ? -1 * e : e;
       Math.abs(i) >= 135 ? p += 2 : i >= 45 ? p += 3 : i <= -45 && (p += 1);
     }
@@ -53,8 +53,8 @@ export function $$p3(e = !0) {
   let o = kl("borderRightVisible");
   let l = $$c2();
   return useMemo(() => {
-    let n = ZX([t, i, r, o]);
-    if (gl(n)) return oV;
+    let n = arrayOrMixed([t, i, r, o]);
+    if (isInvalidValue(n)) return MIXED_MARKER;
     let s = [];
     let c = t => {
       s.push(e ? l(t, !0).side : t);
@@ -71,11 +71,11 @@ export function $$m4() {
   let e = $$p3(!1);
   let t = kl("borderSharedWeight");
   let i = kl("borderStrokeWeightsIndependent");
-  if (gl(e)) return om.MIXED;
+  if (isInvalidValue(e)) return om.MIXED;
   if (0 === e.length) return om.ALL;
   if (1 === e.length) return e[0];
   if (4 === e.length) {
-    let e = hS(t);
+    let e = isValidValue(t);
     if (!1 === i || e) return om.ALL;
   }
   return om.CUSTOM;

@@ -11,14 +11,14 @@ import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../0c62c2fd/277163";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { Nr } from "../figma_app/199513";
 import { FC } from "../figma_app/212807";
 import { AbW } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { bL } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { e0 } from "../905/696396";
@@ -52,7 +52,7 @@ export function $$M0(e) {
     ...P.data.currentUser
   } : null;
   let z = _$$h.useTrackingContext({
-    trigger: _$$b.FOLDER_MOVE_MODAL
+    trigger: UpsellModalType.FOLDER_MOVE_MODAL
   });
   let H = {};
   let K = [];
@@ -73,7 +73,7 @@ export function $$M0(e) {
     t = a?.find(e => e?.isMainWorkspace)?.workspaceId;
   }
   let J = () => {
-    n(Ce());
+    n(hideModal());
   };
   let q = (e, t) => {
     W(e);
@@ -91,7 +91,7 @@ export function $$M0(e) {
       workspaceId: e ?? UNASSIGNED,
       onSubmitReturnToPrevView: !1
     };
-    n(to({
+    n(showModalHandler({
       type: Uc,
       data: t
     }));

@@ -10,14 +10,14 @@ import { Ih } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Y } from "../905/830372";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { Aqu } from "../figma_app/43951";
 import { WW, Wf, h as _$$h, PX } from "../figma_app/345997";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { $Y } from "../905/918620";
 import { K } from "../905/376298";
@@ -157,7 +157,7 @@ export function $$N0(e) {
     })
   });
 }
-export let $$C1 = Ju(function (e) {
+export let $$C1 = registerModal(function (e) {
   let t = useDispatch();
   return jsx(d_, {
     size: 500,
@@ -169,7 +169,7 @@ export let $$C1 = Ju(function (e) {
       children: jsx(x, {
         ...e,
         width: 452,
-        onClose: () => t(Lo()),
+        onClose: () => t(popModalStack()),
         noPaddingOrBorder: !0
       })
     })

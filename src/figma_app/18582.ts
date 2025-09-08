@@ -1,4 +1,4 @@
-import { xN } from "../figma_app/492908";
+import { nearlyEqual } from "../figma_app/492908";
 var $$i4 = (e => (e.LIGHT = "light", e.DARK = "dark", e))($$i4 || {});
 var a = (e => (e.DEFAULT = "default", e.BRAND = "brand", e))(a || {});
 var $$s5 = (e => (e.BG = "bg", e.CONTENT = "content", e.BORDER = "border", e))($$s5 || {});
@@ -134,9 +134,9 @@ let u = {
 export function $$p1(e, t, r, i, a) {
   for (let s in l[t]) {
     let o = l[t][s][r];
-    if (xN(e.l, o.l, .005) && (a || xN(e.a, o.a, .005))) return l[t][s][i];
+    if (nearlyEqual(e.l, o.l, .005) && (a || nearlyEqual(e.a, o.a, .005))) return l[t][s][i];
   }
-  if ("bg" === t && xN(e.l, u[r].l, .005) && xN(e.a, u[r].a, .005)) {
+  if ("bg" === t && nearlyEqual(e.l, u[r].l, .005) && nearlyEqual(e.a, u[r].a, .005)) {
     let {
       l,
       a

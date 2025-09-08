@@ -1,10 +1,10 @@
-import { Qv } from "../905/959312";
+import { useRecording } from "../905/959312";
 export function $$r0({
   onChange: e,
   recordingKey: t,
   ...i
 }) {
-  let r = Qv(e, {
+  let r = useRecording(e, {
     eventName: "change",
     recordingKey: t
   }, [e, i.disabled]);

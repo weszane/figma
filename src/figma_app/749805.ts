@@ -6,7 +6,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { P as _$$P } from "../905/724705";
 import { XHR } from "../905/910117";
 import { U2 } from "../figma_app/545293";
-import { ES, to } from "../905/156213";
+import { hideSpecificModal, showModalHandler } from "../905/156213";
 import { Pg } from "../figma_app/314264";
 import { z4 } from "../905/37051";
 import { $g } from "../figma_app/415217";
@@ -70,7 +70,7 @@ function A(e, t, r, i, l, A) {
   let U = () => {
     I && clearTimeout(I);
     T && clearTimeout(T);
-    !M() || document.hasFocus() || desktopAPIInstance || A?.dispatch(ES(eN));
+    !M() || document.hasFocus() || desktopAPIInstance || A?.dispatch(hideSpecificModal(eN));
     let r = parseInt(localStorage.getItem(x)) + t - j();
     T = setTimeout(() => {
       _$$N.getIdleTimeoutPrecheck({
@@ -83,7 +83,7 @@ function A(e, t, r, i, l, A) {
       });
     }, 1e3 * r);
     w || (I = setTimeout(() => {
-      M() || A?.dispatch(to({
+      M() || A?.dispatch(showModalHandler({
         type: eN,
         data: {
           orgName: i,

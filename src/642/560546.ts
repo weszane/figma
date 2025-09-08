@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
-import { m1T } from "../figma_app/763686";
+import { LayoutTabType } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
@@ -12,8 +12,8 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { TI } from "../905/713722";
-import { Y5 } from "../figma_app/455680";
-import { hS, gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue, isInvalidValue } from "../905/216495";
 import { bn, sb } from "../figma_app/385874";
 import { u as _$$u } from "../figma_app/852050";
 import { cn } from "../905/959568";
@@ -127,7 +127,7 @@ export function $$F0({
 }) {
   let m = useSelector(e => e.pickerShown && e.pickerShown.id === d ? e.pickerShown : null);
   let g = useRef(null);
-  let x = !!e && hS(e) && bn(e.type);
+  let x = !!e && isValidValue(e) && bn(e.type);
   let {
     openColorPicker,
     closeColorPicker
@@ -153,7 +153,7 @@ export function $$F0({
         }
       }, [t, s, a, r, l, c]),
       closeColorPicker: useCallback(() => {
-        d === m1T.GRADIENT && Y5.triggerAction("leave-edit-mode");
+        d === LayoutTabType.GRADIENT && fullscreenValue.triggerAction("leave-edit-mode");
         a(XE());
       }, [a, d])
     };
@@ -202,16 +202,16 @@ function B({
   recordingKey: C
 }) {
   let j = Gc();
-  let w = !!e && hS(e) && bn(e.type);
-  let T = !!e && hS(e) && sb(e.type);
+  let w = !!e && isValidValue(e) && bn(e.type);
+  let T = !!e && isValidValue(e) && sb(e.type);
   let N = Mg("FILL", s, o);
   let I = _$$e(e);
   let E = (() => {
-    if (gl(e)) return null;
+    if (isInvalidValue(e)) return null;
     let t = e?.colorVar?.value?.alias;
     return t ? dI(t) : null;
   })();
-  let M = () => gl(e) || gl(i) ? getI18nString("fullscreen.mixed") : i || (j ? getI18nString("slides.properties_panel.color_picker.multiple") : w ? getI18nString("slides.properties_panel.fill.fill_type_gradient") : TI.format(I[0]));
+  let M = () => isInvalidValue(e) || isInvalidValue(i) ? getI18nString("fullscreen.mixed") : i || (j ? getI18nString("slides.properties_panel.color_picker.multiple") : w ? getI18nString("slides.properties_panel.fill.fill_type_gradient") : TI.format(I[0]));
   let A = useMemo(() => j ? jsx(a, {}) : N ? jsx(zi, {
     dsStyle: N,
     disableTooltip: !0

@@ -1,6 +1,6 @@
 import { isEmptyObject } from "../figma_app/493477";
 import { hV, DS } from "../figma_app/387100";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { j } from "../905/496937";
 import { Nf } from "../figma_app/357047";
 import { y2, YI } from "../figma_app/678300";
@@ -38,7 +38,7 @@ export function $$u1(e, t, r, n) {
     title: a
   };
 }
-export let $$p0 = nF(e => {
+export let $$p0 = createOptimistThunk(e => {
   let t = e.getState();
   let r = [];
   let a = [];

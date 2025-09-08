@@ -1,20 +1,20 @@
-import { throwTypeError } from "../figma_app/465776";
-import { isNotNullish } from "../figma_app/95419";
-import { xal, v4N, Hcu, Egt, Uze, J0O, SoG } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { w } from "../905/5147";
-import { zS } from "../figma_app/930338";
-import { KV } from "../figma_app/952446";
-import { Fy } from "../figma_app/623300";
-import { throwTypeError } from "../figma_app/164212";
-import { E as _$$E } from "../905/142894";
-import { y as _$$y } from "../905/829723";
-import { dB, c1, SW } from "../905/589717";
-import { QB, B_, $7, o8, U1, Sv } from "../905/258397";
-import { X } from "../905/776923";
-import { $ } from "../905/819786";
-import { m as _$$m } from "../905/168176";
-import { H } from "../figma_app/23564";
+import { w } from '../905/5147';
+// import { throwTypeError } from "../figma_app/164212";
+import { E as _$$E } from '../905/142894';
+import { m as _$$m } from '../905/168176';
+import { $7, B_, o8, QB, Sv, U1 } from '../905/258397';
+import { c1, dB, SW } from '../905/589717';
+import { getFeatureFlags } from '../905/601108';
+import { X } from '../905/776923';
+import { $ } from '../905/819786';
+import { y as _$$y } from '../905/829723';
+import { H } from '../figma_app/23564';
+import { isNotNullish } from '../figma_app/95419';
+import { throwTypeError } from '../figma_app/465776';
+import { Fy } from '../figma_app/623300';
+import { SceneGraphHelpers, figmaScopeBindings, ComponentPropType, SymbolInstanceType, FromToDirection, VariantType, DataLoadStatus } from '../figma_app/763686';
+import { zS } from '../figma_app/930338';
+import { KV } from '../figma_app/952446';
 export class $$b0 extends $ {
   constructor({
     name: e,
@@ -37,7 +37,7 @@ export class $$b0 extends $ {
   }
   get metadata() {
     return {
-      "Migration version": this.migrationVersion?.toString()
+      'Migration version': this.migrationVersion?.toString()
     };
   }
   setSceneGraphValidationInfo(e) {
@@ -53,23 +53,23 @@ export class $$b0 extends $ {
       let r = this.scene.getNodeById(e);
       let n = r?.isPage ? r : r?.containingPage;
       t.push({
-        label: "Dynamic page loading info",
-        children: QB([r && n && r !== n && this.scene.generateNodeLinkItem("Containing page", n.guid), n && B_("Page status", (() => {
+        label: 'Dynamic page loading info',
+        children: QB([r && n && r !== n && this.scene.generateNodeLinkItem('Containing page', n.guid), n && B_('Page status', (() => {
           switch (Fy(this.pagesList, n.guid)) {
-            case xal.REQUESTED:
+            case DataLoadStatus.REQUESTED:
               return {
-                type: "error",
-                value: "Page loading in progress"
+                type: 'error',
+                value: 'Page loading in progress'
               };
-            case xal.NOT_LOADED:
+            case DataLoadStatus.NOT_LOADED:
               return {
-                type: "error",
-                value: "Page not loaded due to incremental loading"
+                type: 'error',
+                value: 'Page not loaded due to incremental loading'
               };
             default:
               return {
-                type: "nonUserText",
-                value: "Page loaded"
+                type: 'nonUserText',
+                value: 'Page loaded'
               };
           }
         })())])
@@ -77,31 +77,31 @@ export class $$b0 extends $ {
     }
     let n = this.nodeWarnings?.get(e);
     (n?.length ?? 0) > 0 && t.push($7({
-      label: "Runtime warnings",
+      label: 'Runtime warnings',
       list: n ?? [],
       generateChild: (e, t) => ({
         label: e,
         value: {
-          type: "error",
+          type: 'error',
           value: t.message
         },
-        children: QB([B_("Severity", {
-          type: "nonUserText",
+        children: QB([B_('Severity', {
+          type: 'nonUserText',
           value: t.severity
-        }), B_("Message", {
-          type: "nonUserText",
+        }), B_('Message', {
+          type: 'nonUserText',
           value: t.message
-        }), void 0 !== t.timestamp && B_("Time", {
-          type: "timestamp",
+        }), void 0 !== t.timestamp && B_('Time', {
+          type: 'timestamp',
           value: t.timestamp
-        }), t.filePath && B_("File path", {
-          type: "nonUserText",
-          value: `${t.filePath}${t.lineNumber ? `:${t.lineNumber}` : ""}`
+        }), t.filePath && B_('File path', {
+          type: 'nonUserText',
+          value: `${t.filePath}${t.lineNumber ? `:${t.lineNumber}` : ''}`
         }), t.data && o8({
-          label: "Data",
+          label: 'Data',
           object: t.data,
           generateChild: (e, t) => B_(e, {
-            type: "nonUserText",
+            type: 'nonUserText',
             value: String(t)
           })
         })])
@@ -114,27 +114,29 @@ export class $$b0 extends $ {
     let r = this.sceneGraphValidationInfo?.generateBadges(e);
     r && t.push(...r);
     let n = this.scene.getNodeById(e);
-    if (n?.isPage && this.pagesList) switch (Fy(this.pagesList, n.guid)) {
-      case xal.LOADED:
-        break;
-      case xal.REQUESTED:
-        t.push({
-          type: "warning",
-          value: "LOADING",
-          title: "Page loading in progress"
-        });
-        break;
-      case xal.NOT_LOADED:
-        t.push({
-          type: "warning",
-          value: "NOT LOADED",
-          title: "Page not loaded due to incremental loading"
-        });
+    if (n?.isPage && this.pagesList) {
+      switch (Fy(this.pagesList, n.guid)) {
+        case DataLoadStatus.LOADED:
+          break;
+        case DataLoadStatus.REQUESTED:
+          t.push({
+            type: 'warning',
+            value: 'LOADING',
+            title: 'Page loading in progress'
+          });
+          break;
+        case DataLoadStatus.NOT_LOADED:
+          t.push({
+            type: 'warning',
+            value: 'NOT LOADED',
+            title: 'Page not loaded due to incremental loading'
+          });
+      }
     }
     let i = this.nodeWarnings?.get(e);
     let s = i?.length ?? 0;
     s > 0 && t.push({
-      type: "warning",
+      type: 'warning',
       value: `${s} WARNINGS`
     });
     return t;
@@ -149,8 +151,8 @@ export class $$T1 extends $ {
       name: e,
       sensitiveTextPolicy: t
     });
-    this.type = "standalone";
-    this.scene = new I(this, v4N.SECONDARY);
+    this.type = 'standalone';
+    this.scene = new I(this, VariantType.SECONDARY);
   }
   getSearch() {
     return this.scene.getSearch();
@@ -160,7 +162,7 @@ export class $$T1 extends $ {
   }
 }
 class I extends X {
-  constructor(e, t = v4N.PRIMARY) {
+  constructor(e, t = VariantType.PRIMARY) {
     super();
     this.resource = e;
     this.nodesById = new Map();
@@ -186,75 +188,75 @@ class I extends X {
     return this.pages.find(e => e.nodeChange.internalOnly) ?? null;
   }
   get rootNodes() {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getRootNodes(this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getRootNodes(this.sceneType) ?? []);
   }
   getNodeById(e) {
-    return this.getNodeFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getNode(A(e), this.sceneType) ?? null);
+    return this.getNodeFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getNode(A(e), this.sceneType) ?? null);
   }
   getNodeByGuid(e) {
-    return this.fetchNodeFromFullscreen(() => Hcu?.getNodeByGuid(e, this.sceneType) ?? null);
+    return this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getNodeByGuid(e, this.sceneType) ?? null);
   }
   getChildrenByParentGuid(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getChildrenByParentGuid(e, this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getChildrenByParentGuid(e, this.sceneType) ?? []);
   }
   getStyleByStyleId(e) {
-    return this.getStyleFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getStyle(e, this.sceneType) ?? null);
+    return this.getStyleFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getStyle(e, this.sceneType) ?? null);
   }
   getVariableByVariableId(e) {
-    return this.getVariableFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getVariable(e, this.sceneType) ?? null);
+    return this.getVariableFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getVariable(e, this.sceneType) ?? null);
   }
   getVariableOverrideByVariableOverrideId(e) {
-    return this.getVariableOverrideFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getVariableOverride(e, this.sceneType) ?? null);
+    return this.getVariableOverrideFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getVariableOverride(e, this.sceneType) ?? null);
   }
   getVariableCollectionByCollectionId(e) {
-    return this.getVariableCollectionFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getVariableCollection(e, this.sceneType) ?? null);
+    return this.getVariableCollectionFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getVariableCollection(e, this.sceneType) ?? null);
   }
   getCodeComponentById(e) {
-    return this.getCodeComponentFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getCodeComponent(e, this.sceneType) ?? null);
+    return this.getCodeComponentFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getCodeComponent(e, this.sceneType) ?? null);
   }
   getCodeFileById(e) {
-    return this.getCodeFileFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getCodeFile(e, this.sceneType) ?? null);
+    return this.getCodeFileFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getCodeFile(e, this.sceneType) ?? null);
   }
   getCodeLibraryById(e) {
-    return this.getCodeLibraryFromCache(e) || this.fetchNodeFromFullscreen(() => Hcu?.getCodeLibrary(e, this.sceneType) ?? null);
+    return this.getCodeLibraryFromCache(e) || this.fetchNodeFromFullscreen(() => figmaScopeBindings?.getCodeLibrary(e, this.sceneType) ?? null);
   }
   getStyleConsumers(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getStyleConsumers(e, this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getStyleConsumers(e, this.sceneType) ?? []);
   }
   getConsumedStyles(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getConsumedStyles(A(e), this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getConsumedStyles(A(e), this.sceneType) ?? []);
   }
   getConsumedVariables(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getConsumedVariables(A(e), this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getConsumedVariables(A(e), this.sceneType) ?? []);
   }
   getVariablesInCollection(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getVariablesInCollection(e, this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getVariablesInCollection(e, this.sceneType) ?? []);
   }
   getVariableOverridesInExtendedCollection(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getVariableOverridesInExtendedCollection(e, this.sceneType) || []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getVariableOverridesInExtendedCollection(e, this.sceneType) || []);
   }
   getNodesWithExplicitModeForVariableSet(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getNodesWithExplicitModeForVariableSet(e, this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getNodesWithExplicitModeForVariableSet(e, this.sceneType) ?? []);
   }
   getVariableConsumers(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getVariableConsumers(e, this.sceneType) || []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getVariableConsumers(e, this.sceneType) || []);
   }
   getDsaComponentCounts(e) {
-    let t = Hcu.getDsaComponentCounts(A(e), this.sceneType);
+    let t = figmaScopeBindings.getDsaComponentCounts(A(e), this.sceneType);
     return {
       all: this.convertDsaAssetCounts(t.all),
       unnested: this.convertDsaAssetCounts(t.unnested)
     };
   }
   getDsaStyleCounts(e) {
-    let t = Hcu.getDsaStyleCounts(A(e), this.sceneType);
+    let t = figmaScopeBindings.getDsaStyleCounts(A(e), this.sceneType);
     return {
       all: this.convertDsaAssetCounts(t.all),
       unnested: this.convertDsaAssetCounts(t.unnested)
     };
   }
   getDsaVariableCounts(e) {
-    let t = Hcu.getDsaVariableCounts(A(e), this.sceneType);
+    let t = figmaScopeBindings.getDsaVariableCounts(A(e), this.sceneType);
     return {
       all: this.convertDsaAssetCounts(t.all),
       unnested: this.convertDsaAssetCounts(t.unnested)
@@ -273,33 +275,33 @@ class I extends X {
     return t;
   }
   getDirectVariableDependenciesToVariable(e) {
-    return this.fetchNodesFromFullscreen(() => Hcu?.getDirectVariableDependenciesToVariable(e, this.sceneType) ?? []);
+    return this.fetchNodesFromFullscreen(() => figmaScopeBindings?.getDirectVariableDependenciesToVariable(e, this.sceneType) ?? []);
   }
   getPropDefs(e) {
-    return Hcu?.getPropDefs(A(e), this.sceneType) ?? [];
+    return figmaScopeBindings?.getPropDefs(A(e), this.sceneType) ?? [];
   }
   getCombinedPropAssignments(e) {
-    return Hcu?.getCombinedPropAssignments(A(e), this.sceneType) ?? [];
+    return figmaScopeBindings?.getCombinedPropAssignments(A(e), this.sceneType) ?? [];
   }
   getTransitiveDependencyPaths(e, t) {
-    return Hcu?.getTransitiveDependencyPaths(A(e), t, this.sceneType) ?? [];
+    return figmaScopeBindings?.getTransitiveDependencyPaths(A(e), t, this.sceneType) ?? [];
   }
   getAllOverridesForLayer(e) {
-    let t = Hcu?.getLayerOverrides(A(e), this.sceneType);
+    let t = figmaScopeBindings?.getLayerOverrides(A(e), this.sceneType);
     return t ? t.map(e => ({
       ...e,
       fields: w.decodeMessage(e.fields).nodeChanges[0]
     })) : [];
   }
   getDSDOverridesForLayer(e) {
-    let t = Hcu?.getLayerDSDOverrides(A(e), this.sceneType);
+    let t = figmaScopeBindings?.getLayerDSDOverrides(A(e), this.sceneType);
     if (t && t.length) return w.decodeMessage(t).nodeChanges?.[0];
   }
   getAllSublayerInfoForImmutableFrame(e) {
-    return Hcu?.getImmutableFrameSubLayerInfo(A(e), this.sceneType) ?? new Map();
+    return figmaScopeBindings?.getImmutableFrameSubLayerInfo(A(e), this.sceneType) ?? new Map();
   }
   getOverrideStash(e) {
-    let t = Hcu?.getOverrideStash(A(e), this.sceneType);
+    let t = figmaScopeBindings?.getOverrideStash(A(e), this.sceneType);
     return t ? t.map(e => ({
       ...e,
       overrides: e.overrides.map(e => ({
@@ -310,15 +312,15 @@ class I extends X {
   }
   getTextInsertionStyle(e) {
     let t;
-    let r = Hcu?.getTextInsertionStyle(A(e), this.sceneType);
-    if (!r || 0 === r.length) return null;
+    let r = figmaScopeBindings?.getTextInsertionStyle(A(e), this.sceneType);
+    if (!r || r.length === 0) return null;
     try {
       t = w.decodeMessage(r).nodeChanges;
     } catch (e) {
-      console.warn("FigmaScope: error decoding node changes", e);
+      console.warn('FigmaScope: error decoding node changes', e);
       return null;
     }
-    return t ? t.length > 1 ? (console.warn("FigmaScope: more than one node change found for text insertion style"), null) : t[0] : (console.warn("FigmaScope: buffer did not contain node changes"), null);
+    return t ? t.length > 1 ? (console.warn('FigmaScope: more than one node change found for text insertion style'), null) : t[0] : (console.warn('FigmaScope: buffer did not contain node changes'), null);
   }
   getBlobByIndex(e) {
     return _$$y;
@@ -329,12 +331,12 @@ class I extends X {
   }
   get supportsNodePreviews() {
     switch (this.resource.type) {
-      case "editor":
+      case 'editor':
         return !0;
-      case "viewer":
+      case 'viewer':
         return !1;
-      case "standalone":
-        return "hide" !== this.resource.sensitiveTextPolicy;
+      case 'standalone':
+        return this.resource.sensitiveTextPolicy !== 'hide';
     }
   }
   getNodeFromCache(e) {
@@ -366,7 +368,7 @@ class I extends X {
     try {
       t = e();
     } catch (e) {
-      console.error("FigmaScope: error fetching nodes");
+      console.error('FigmaScope: error fetching nodes');
     }
     return t ? this.createAndCacheNode(t) : null;
   }
@@ -375,7 +377,7 @@ class I extends X {
     try {
       t = e();
     } catch (e) {
-      console.error("FigmaScope: error fetching nodes");
+      console.error('FigmaScope: error fetching nodes');
     }
     return t.map(e => this.createAndCacheNode(e)).filter(isNotNullish);
   }
@@ -384,7 +386,7 @@ class I extends X {
     try {
       t = w.decodeNodeChange(e.nodeChange);
     } catch (e) {
-      console.error("FigmaScope: error decoding node changes", e);
+      console.error('FigmaScope: error decoding node changes', e);
       return null;
     }
     let r = dB.fromStrings(e.stablePath);
@@ -404,7 +406,7 @@ class I extends X {
     s.isCodeFileAsset && s.codeFileId && this.codeFilesById.set(s.codeFileId, s);
     s.isCodeLibraryAsset && s.codeLibraryId && this.codeLibrariesById.set(s.codeLibraryId, s);
     s.isCodeComponentAsset && s.codeComponentId && this.codeComponentsById.set(s.codeComponentId, s);
-    "standalone" === this.resource.type && s.isPrimaryInstance && Hcu?.materializeInstance(s.guid, this.sceneType);
+    this.resource.type === 'standalone' && s.isPrimaryInstance && figmaScopeBindings?.materializeInstance(s.guid, this.sceneType);
     return s;
   }
   getSearch(e) {
@@ -436,7 +438,7 @@ class S extends _$$E {
     this.scene = r;
   }
   get type() {
-    return this.isNestedInstance ? "NESTED_INSTANCE" : super.type;
+    return this.isNestedInstance ? 'NESTED_INSTANCE' : super.type;
   }
   get parent() {
     return this.parentGuid ? this.scene.getNodeByGuid(this.parentGuid) : null;
@@ -457,7 +459,7 @@ class S extends _$$E {
     return this.scene.getConsumedVariables(this.id);
   }
   get key() {
-    return super.key ?? Egt?.getAssetKeyForPublish(this.guid) ?? null;
+    return super.key ?? SceneGraphHelpers?.getAssetKeyForPublish(this.guid) ?? null;
   }
   get stablePath() {
     return this.data.stablePath;
@@ -475,7 +477,7 @@ class S extends _$$E {
     return this.isInstance && (this.isTracked || this.isAssignedSlotPrimaryInstance);
   }
   get isAssignedSlotPrimaryInstance() {
-    return this.data.derivedProperties.jsonSerialized["is-assigned-slot-primary-instance"];
+    return this.data.derivedProperties.jsonSerialized['is-assigned-slot-primary-instance'];
   }
   get containingInstance() {
     return this.findAncestor(e => e.isInstance);
@@ -487,29 +489,29 @@ class S extends _$$E {
     return this.findAncestor(e => e.isImmutableFrame);
   }
   get isInstanceSublayer() {
-    return null != this.containingInstance;
+    return this.containingInstance != null;
   }
   get isImmutableFrameSublayer() {
-    return null != this.containingImmutableFrame;
+    return this.containingImmutableFrame != null;
   }
   get isNestedInstance() {
     return this.isInstance && this.isInstanceSublayer && !this.isAssignedSlotPrimaryInstance;
   }
   get isSwappedNestedInstance() {
-    return this.isNestedInstance && null != this.nodeChange.overriddenSymbolID;
+    return this.isNestedInstance && this.nodeChange.overriddenSymbolID != null;
   }
   get ownMemoryUsage() {
-    return (this._ownMemoryUsage = this._ownMemoryUsage ?? Hcu?.getNodeMemoryUsage(this.stablePath, this.scene.sceneType)) ?? 0;
+    return (this._ownMemoryUsage = this._ownMemoryUsage ?? figmaScopeBindings?.getNodeMemoryUsage(this.stablePath, this.scene.sceneType)) ?? 0;
   }
   get treeMemoryUsage() {
-    return (this._treeMemoryUsage = this._treeMemoryUsage ?? Hcu?.getSubtreeMemoryUsage(this.stablePath, this.scene.sceneType)) ?? 0;
+    return (this._treeMemoryUsage = this._treeMemoryUsage ?? figmaScopeBindings?.getSubtreeMemoryUsage(this.stablePath, this.scene.sceneType)) ?? 0;
   }
   secondaryId() {
     return this.stablePath.length > 1 ? dB.format(this.stablePath.slice(1)) : this.overrideKey ? c1.format(this.overrideKey) : this.overriddenVariableId ? this.overriddenVariableId : null;
   }
   generateDisplayProperties() {
     let e = super.generateDisplayProperties();
-    let t = e.leftBadges.map(e => "type" === e.type ? {
+    let t = e.leftBadges.map(e => e.type === 'type' ? {
       ...e,
       tracked: this.isTracked
     } : e);
@@ -522,22 +524,22 @@ class S extends _$$E {
   }
   generateRawProperties() {
     return [{
-      label: "Tracked fields",
+      label: 'Tracked fields',
       children: super.generateRawProperties(),
       expandByDefault: !0
     }, {
-      label: "Untracked fields",
+      label: 'Untracked fields',
       children: this.generateNonKiwiFieldProperties(this.data.untrackedFields),
       expandByDefault: !0
     }, {
-      label: "Derived properties",
+      label: 'Derived properties',
       children: this.generateNonKiwiFieldProperties(this.data.derivedProperties),
       expandByDefault: !0
     }];
   }
   generateTrackingInfoItem() {
-    return B_("Node tracked", {
-      type: "boolean",
+    return B_('Node tracked', {
+      type: 'boolean',
       value: this.isTracked,
       sensitive: !1
     });
@@ -549,18 +551,20 @@ class S extends _$$E {
     let r = [];
     let n = [];
     for (let [t, n] of Object.entries(e)) r.push(this.scene.generateNodeFieldItem(zS(t), n));
-    for (let [e, r] of Object.entries(t)) n.push({
-      label: zS(e),
-      value: {
-        type: "error",
-        value: "No toJson() support"
-      },
-      children: [B_("Debug string", {
-        type: "nonUserText",
-        value: r,
-        sensitive: !1
-      })]
-    });
+    for (let [e, r] of Object.entries(t)) {
+      n.push({
+        label: zS(e),
+        value: {
+          type: 'error',
+          value: 'No toJson() support'
+        },
+        children: [B_('Debug string', {
+          type: 'nonUserText',
+          value: r,
+          sensitive: !1
+        })]
+      });
+    }
     return QB(r).concat(QB(n));
   }
   generateComputedProperties() {
@@ -571,67 +575,67 @@ class S extends _$$E {
   }
   generateMemoryUsageItem() {
     return {
-      label: "Memory usage",
-      children: [B_("Own data", {
-        type: "numeric",
+      label: 'Memory usage',
+      children: [B_('Own data', {
+        type: 'numeric',
         value: this.ownMemoryUsage
-      }), B_("Tree data", {
-        type: "numeric",
+      }), B_('Tree data', {
+        type: 'numeric',
         value: this.treeMemoryUsage
       })],
       expandByDefault: !0
     };
   }
   generateGeometryInfo(e) {
-    return 0 === e.segments.length ? [] : [$7({
-      label: "vertices",
+    return e.segments.length === 0 ? [] : [$7({
+      label: 'vertices',
       list: e.vertices,
       generateChild: (e, t) => U1(e, t)
     }), $7({
-      label: "segments",
+      label: 'segments',
       list: e.segments,
       generateChild: (e, t) => U1(e, t)
     }), $7({
-      label: "regions",
+      label: 'regions',
       list: e.regions,
       generateChild: (e, t) => U1(e, t)
     })];
   }
   generateGeometrySection() {
-    let e = Hcu?.getGeometryInfo(A(this.id), this.scene.sceneType);
+    let e = figmaScopeBindings?.getGeometryInfo(A(this.id), this.scene.sceneType);
     return e ? {
-      label: "Geometry",
-      children: QB([B_("fillGeometryInFileMatchesCacheGeometry", {
-        type: "boolean",
+      label: 'Geometry',
+      children: QB([B_('fillGeometryInFileMatchesCacheGeometry', {
+        type: 'boolean',
         value: e.fillGeometryInFileMatchesCacheGeometry
       }), {
-        label: "fillGeometryField",
+        label: 'fillGeometryField',
         children: this.generateGeometryInfo(e.fillGeometryField)
       }, {
-        label: "fillGeometryCacheValue",
+        label: 'fillGeometryCacheValue',
         children: this.generateGeometryInfo(e.fillGeometryCacheValue)
-      }, B_("strokeGeometryInFileMatchesCacheGeometry", {
-        type: "boolean",
+      }, B_('strokeGeometryInFileMatchesCacheGeometry', {
+        type: 'boolean',
         value: e.strokeGeometryInFileMatchesCacheGeometry
       }), {
-        label: "strokeGeometryField",
+        label: 'strokeGeometryField',
         children: this.generateGeometryInfo(e.strokeGeometryField)
       }, {
-        label: "strokeGeometryCacheValue",
+        label: 'strokeGeometryCacheValue',
         children: this.generateGeometryInfo(e.strokeGeometryCacheValue)
       }])
     } : null;
   }
   generateDesignSystemsInfoItem() {
-    return Sv(super.generateDesignSystemsInfoItem(), [this.generateVariableOverridesInExtendedCollectionItem(), this.generateComponentPropDefsItem(), this.generateComponentPropAssignmentsItem(), this.generateSymbolDependencyPathsItem(Uze.FROM), this.generateSymbolDependencyPathsItem(Uze.TO), this.generateLayerOverridesSection(), this.generateLayerDSDOverridesSection(), this.generateDsaSection(), this.generateInstanceDataItem()]);
+    return Sv(super.generateDesignSystemsInfoItem(), [this.generateVariableOverridesInExtendedCollectionItem(), this.generateComponentPropDefsItem(), this.generateComponentPropAssignmentsItem(), this.generateSymbolDependencyPathsItem(FromToDirection.FROM), this.generateSymbolDependencyPathsItem(FromToDirection.TO), this.generateLayerOverridesSection(), this.generateLayerDSDOverridesSection(), this.generateDsaSection(), this.generateInstanceDataItem()]);
   }
   generateTextInfoItem() {
-    if ("TEXT" !== this.type) return null;
+    if (this.type !== 'TEXT') return null;
     let e = this.scene.getTextInsertionStyle(this.id);
     return {
-      label: "Text info",
+      label: 'Text info',
       children: QB([e && o8({
-        label: "Text insertion style",
+        label: 'Text insertion style',
         object: e,
         generateChild: this.scene.generateNodeFieldItem,
         showChildCount: !0
@@ -640,9 +644,9 @@ class S extends _$$E {
   }
   generateNodePreviewItem() {
     return this.scene.supportsNodePreviews && this.isRenderingNode && !this.isStateGroup ? {
-      label: "Node preview",
-      children: [B_("", {
-        type: "nodeThumbnail",
+      label: 'Node preview',
+      children: [B_('', {
+        type: 'nodeThumbnail',
         value: this.guidObj
       })]
     } : null;
@@ -652,7 +656,7 @@ class S extends _$$E {
     return {
       ...super.generateOverrideItem(e, t),
       value: r ? {
-        type: "nodeGuid",
+        type: 'nodeGuid',
         value: r.guid,
         scene: this.scene
       } : void 0
@@ -660,14 +664,14 @@ class S extends _$$E {
   }
   generateVariableOverridesInExtendedCollectionItem() {
     return this.isExtendedVariableCollection ? {
-      label: "Variable overrides in extended collection",
+      label: 'Variable overrides in extended collection',
       children: this.scene.getVariableOverridesInExtendedCollection(this.variableCollectionId).map(e => ({
         variable: e.overriddenVariableId ? this.scene.getVariableByVariableId(e.overriddenVariableId) : null,
         varOverride: e
-      })).sort((e, t) => (e.variable?.name ?? "").localeCompare(t.variable?.name ?? "")).map(({
+      })).sort((e, t) => (e.variable?.name ?? '').localeCompare(t.variable?.name ?? '')).map(({
         variable: e,
         varOverride: t
-      }) => this.scene.generateVariableOverrideLinkItem(e?.name ?? "<unknown>", t.variableOverrideId))
+      }) => this.scene.generateVariableOverrideLinkItem(e?.name ?? '<unknown>', t.variableOverrideId))
     } : null;
   }
   generateComponentPropDefsItem() {
@@ -675,18 +679,18 @@ class S extends _$$E {
     let e = this.scene.getPropDefs(this.id);
     let t = this.isState ? this.parentGuid : null;
     return {
-      label: "Component prop defs",
+      label: 'Component prop defs',
       children: e.map(e => ({
         label: c1.format(e.defID),
         value: {
-          type: "userInputtedText",
+          type: 'userInputtedText',
           value: e.name,
           scene: this.scene
         },
-        children: [B_("Is explicit", {
-          type: "boolean",
+        children: [B_('Is explicit', {
+          type: 'boolean',
           value: e.isExplicit
-        }), B_("Default value", this.generateComponentPropValue(e.propType, e.defaultValue)), ...this.generateComponentPropProperties(e, t)]
+        }), B_('Default value', this.generateComponentPropValue(e.propType, e.defaultValue)), ...this.generateComponentPropProperties(e, t)]
       }))
     };
   }
@@ -695,16 +699,16 @@ class S extends _$$E {
     let e = this.scene.getCombinedPropAssignments(this.id);
     let t = this.backingStateGroup?.guid ?? null;
     return {
-      label: "Component prop assignments (combined)",
+      label: 'Component prop assignments (combined)',
       children: e.map(e => ({
         label: c1.format(e.assignmentID),
         value: {
-          type: "userInputtedText",
+          type: 'userInputtedText',
           value: e.name,
           scene: this.scene
         },
-        children: [B_("Value", this.generateComponentPropValue(e.propType, e.assignmentValue)), B_("Is mixed", {
-          type: "boolean",
+        children: [B_('Value', this.generateComponentPropValue(e.propType, e.assignmentValue)), B_('Is mixed', {
+          type: 'boolean',
           value: e.isMixed
         }), ...this.generateComponentPropProperties(e, t)]
       }))
@@ -717,57 +721,57 @@ class S extends _$$E {
       explicitDefID,
       refNodes
     } = e;
-    return QB([!!error && B_("Error", {
-      type: "error",
+    return QB([!!error && B_('Error', {
+      type: 'error',
       value: error
-    }), !!propType && B_("Prop type", {
-      type: "nonUserText",
+    }), !!propType && B_('Prop type', {
+      type: 'nonUserText',
       value: throwTypeError(propType)
-    }), !!explicitDefID && B_("Explicit def ID", {
-      type: "genericGuid",
+    }), !!explicitDefID && B_('Explicit def ID', {
+      type: 'genericGuid',
       value: c1.fromString(explicitDefID)
-    }), t && this.scene.generateNodeLinkItem("Containing state group", t), $7({
-      label: "Ref Nodes",
+    }), t && this.scene.generateNodeLinkItem('Containing state group', t), $7({
+      label: 'Ref Nodes',
       list: refNodes,
       generateChild: (e, t) => this.generateRefNodeItem(e, t)
     })]);
   }
   generateComponentPropValue(e, t) {
     switch (e) {
-      case J0O.BOOL:
+      case ComponentPropType.BOOL:
         return {
-          type: "boolean",
+          type: 'boolean',
           value: t.boolValue
         };
-      case J0O.TEXT:
+      case ComponentPropType.TEXT:
         return {
-          type: "userInputtedText",
+          type: 'userInputtedText',
           value: t.textValue
         };
-      case J0O.INSTANCE_SWAP:
+      case ComponentPropType.INSTANCE_SWAP:
         return {
-          type: "nodeGuid",
+          type: 'nodeGuid',
           value: c1.fromString(t.instanceSwapValue),
           scene: this.scene
         };
       default:
         return t.untypedValue ? {
-          type: "nonUserText",
+          type: 'nonUserText',
           value: t.untypedValue
         } : {
-          type: "error",
-          value: "Unknown prop type"
+          type: 'error',
+          value: 'Unknown prop type'
         };
     }
   }
   generateRefNodeItem(e, t) {
     return {
       label: e,
-      children: QB([this.scene.generateNodeLinkItem("Ref node", c1.fromString(t.refNodeGuid)), B_("Ref field", {
-        type: "nonUserText",
+      children: QB([this.scene.generateNodeLinkItem('Ref node', c1.fromString(t.refNodeGuid)), B_('Ref field', {
+        type: 'nonUserText',
         value: t.nodeField
-      }), null != t.paintIndex && B_("Ref paint index", {
-        type: "numeric",
+      }), t.paintIndex != null && B_('Ref paint index', {
+        type: 'numeric',
         value: t.paintIndex
       })]),
       expandByDefault: !0
@@ -775,22 +779,22 @@ class S extends _$$E {
   }
   generateSymbolDependencyPathsItem(e) {
     return this.isPrimaryInstance || this.isSymbol ? $7({
-      label: e === Uze.FROM ? "Symbol Dependencies" : "Symbol Dependents",
+      label: e === FromToDirection.FROM ? 'Symbol Dependencies' : 'Symbol Dependents',
       list: this.scene.getTransitiveDependencyPaths(this.id, e),
       generateChild: (t, {
         edges: r
       }) => ({
         label: t,
         value: {
-          type: "nodeGuid",
-          value: c1.fromString(e === Uze.FROM ? r[r.length - 1].toGuid : r[0].fromGuid),
+          type: 'nodeGuid',
+          value: c1.fromString(e === FromToDirection.FROM ? r[r.length - 1].toGuid : r[0].fromGuid),
           scene: this.scene
         },
-        children: 1 === r.length ? this.generateSymbolDependencyProperties(r[0], !1) : [B_("Type", {
-          type: "nonUserText",
-          value: "Transitive"
+        children: r.length === 1 ? this.generateSymbolDependencyProperties(r[0], !1) : [B_('Type', {
+          type: 'nonUserText',
+          value: 'Transitive'
         }), $7({
-          label: "Edges",
+          label: 'Edges',
           list: r,
           generateChild: (e, t) => ({
             label: e,
@@ -801,13 +805,13 @@ class S extends _$$E {
         })]
       })
     }) : this.isStateGroup ? $7({
-      label: e === Uze.FROM ? "Symbol dependencies by state" : "Symbol dependents by state",
+      label: e === FromToDirection.FROM ? 'Symbol dependencies by state' : 'Symbol dependents by state',
       list: this.children,
       generateChild: (t, r) => ({
         ...r.generateSymbolDependencyPathsItem(e),
         label: `State ${t}`,
         value: {
-          type: "nodeGuid",
+          type: 'nodeGuid',
           value: r.guid,
           scene: this.scene
         }
@@ -821,61 +825,61 @@ class S extends _$$E {
     pathToOverride: i,
     propDefId: s
   }, o) {
-    let l = [B_("Type", {
-      type: "nonUserText",
+    let l = [B_('Type', {
+      type: 'nonUserText',
       value: (() => {
         switch (r) {
-          case SoG.PRIMARY_INSTANCE_BACKED_BY_SYMBOL:
-            return "Primary instance backed by symbol";
-          case SoG.PRIMARY_INSTANCE_WITH_NESTED_SWAP_TO_SYMBOL:
-            return "Primary instance with nested swap to symbol";
-          case SoG.PRIMARY_INSTANCE_WITH_TOP_LEVEL_PROP_ASSIGNMENT_TO_SYMBOL:
-            return "Primary instance with top level prop assignment to symbol";
-          case SoG.PRIMARY_INSTANCE_WITH_NESTED_PROP_ASSIGNMENT_TO_SYMBOL:
-            return "Primary instance with nested prop assignment to symbol";
-          case SoG.PRODUCT_COMPONENT_WITH_PROP_DEF_TO_SYMBOL:
-            return "Product component with prop def to symbol";
-          case SoG.STATE_WITH_PROP_DEF_TO_SYMBOL:
-            return "State with prop def to symbol";
-          case SoG.SYMBOL_CONTAINING_PRIMARY_INSTANCE:
-            return "Symbol containing primary instance";
-          case SoG.INVALID:
-            return "Invalid";
+          case SymbolInstanceType.PRIMARY_INSTANCE_BACKED_BY_SYMBOL:
+            return 'Primary instance backed by symbol';
+          case SymbolInstanceType.PRIMARY_INSTANCE_WITH_NESTED_SWAP_TO_SYMBOL:
+            return 'Primary instance with nested swap to symbol';
+          case SymbolInstanceType.PRIMARY_INSTANCE_WITH_TOP_LEVEL_PROP_ASSIGNMENT_TO_SYMBOL:
+            return 'Primary instance with top level prop assignment to symbol';
+          case SymbolInstanceType.PRIMARY_INSTANCE_WITH_NESTED_PROP_ASSIGNMENT_TO_SYMBOL:
+            return 'Primary instance with nested prop assignment to symbol';
+          case SymbolInstanceType.PRODUCT_COMPONENT_WITH_PROP_DEF_TO_SYMBOL:
+            return 'Product component with prop def to symbol';
+          case SymbolInstanceType.STATE_WITH_PROP_DEF_TO_SYMBOL:
+            return 'State with prop def to symbol';
+          case SymbolInstanceType.SYMBOL_CONTAINING_PRIMARY_INSTANCE:
+            return 'Symbol containing primary instance';
+          case SymbolInstanceType.INVALID:
+            return 'Invalid';
           default:
             throwTypeError(r);
         }
       })()
     })];
-    o && (l.push(this.scene.generateNodeLinkItem("From", c1.fromString(e))), l.push(this.scene.generateNodeLinkItem("To", c1.fromString(t))));
-    i.length > 1 && l.push(B_("Path to override", {
-      type: "guidPath",
+    o && (l.push(this.scene.generateNodeLinkItem('From', c1.fromString(e))), l.push(this.scene.generateNodeLinkItem('To', c1.fromString(t))));
+    i.length > 1 && l.push(B_('Path to override', {
+      type: 'guidPath',
       value: dB.fromStrings(i)
     }));
-    s && c1.isValid(s) && l.push(B_("Prop def id", {
-      type: "genericGuid",
+    s && c1.isValid(s) && l.push(B_('Prop def id', {
+      type: 'genericGuid',
       value: c1.fromString(s)
     }));
     return l;
   }
   generateBackingLayerItem() {
     if (!this.isInstance && !this.isInstanceSublayer) return null;
-    let e = Hcu?.getBackingLayerId(A(this.id), this.scene.sceneType);
-    return e ? this.scene.generateNodeLinkItem("Backing layer", c1.fromString(e)) : null;
+    let e = figmaScopeBindings?.getBackingLayerId(A(this.id), this.scene.sceneType);
+    return e ? this.scene.generateNodeLinkItem('Backing layer', c1.fromString(e)) : null;
   }
   generateInstanceDataItem() {
     if (!this.isInstance && !this.isInstanceSublayer) return null;
-    let e = Hcu?.getInstanceData(A(this.id), this.scene.sceneType);
+    let e = figmaScopeBindings?.getInstanceData(A(this.id), this.scene.sceneType);
     if (!e) return null;
-    let t = [this.scene.generateNodeLinkItem("Backing layer", c1.fromString(e.backingLayerId)), this.scene.generateNodeLinkItem("Primary instance", c1.fromString(e.primaryId)), B_("Path", {
-      type: "guidPath",
+    let t = [this.scene.generateNodeLinkItem('Backing layer', c1.fromString(e.backingLayerId)), this.scene.generateNodeLinkItem('Primary instance', c1.fromString(e.primaryId)), B_('Path', {
+      type: 'guidPath',
       value: dB.fromStrings(e.path)
     })];
-    e.overridePath && t.push(B_("Override path", {
-      type: "guidPath",
+    e.overridePath && t.push(B_('Override path', {
+      type: 'guidPath',
       value: dB.fromStrings(e.overridePath)
     }));
     return $7({
-      label: "Instance data",
+      label: 'Instance data',
       list: t,
       expandByDefault: !1,
       generateChild: (e, t) => t
@@ -891,18 +895,20 @@ class S extends _$$E {
       fields,
       savedLevel,
       inheritanceLevel
-    } of e) for (let [e, o] of Object.entries(fields)) {
-      t[e] = t[e] || [];
-      t[e][inheritanceLevel] = {
-        primaryInstanceId,
-        containingSymbolId,
-        value: o,
-        savedLevel
-      };
+    } of e) {
+      for (let [e, o] of Object.entries(fields)) {
+        t[e] = t[e] || [];
+        t[e][inheritanceLevel] = {
+          primaryInstanceId,
+          containingSymbolId,
+          value: o,
+          savedLevel
+        };
+      }
     }
     let r = Object.keys(t).sort();
-    return 0 === r.length ? null : $7({
-      label: "Layer overrides",
+    return r.length === 0 ? null : $7({
+      label: 'Layer overrides',
       list: r,
       expandByDefault: !1,
       generateChild: (e, r) => {
@@ -912,15 +918,15 @@ class S extends _$$E {
         return {
           label: r,
           value: {
-            type: "metadata",
-            value: 0 === a ? "Direct override" : "Inherited override"
+            type: 'metadata',
+            value: a === 0 ? 'Direct override' : 'Inherited override'
           },
           expandByDefault: !1,
           children: [{
             ...this.scene.generateNodeFieldItem(r, s),
-            label: "Resolved value"
+            label: 'Resolved value'
           }, {
-            label: "Sources",
+            label: 'Sources',
             expandByDefault: !1,
             children: QB(n.map(({
               primaryInstanceId: e,
@@ -928,20 +934,20 @@ class S extends _$$E {
               value: n,
               savedLevel: i
             }, a) => ({
-              label: 0 === a ? "Direct override" : "Inherited from",
+              label: a === 0 ? 'Direct override' : 'Inherited from',
               key: `Level ${a}`,
               value: t ? {
-                type: "nodeGuid",
+                type: 'nodeGuid',
                 value: c1.fromString(t),
                 scene: this.scene
               } : void 0,
               children: QB([{
                 ...this.scene.generateNodeFieldItem(r, n),
-                label: "Value"
-              }, i > 0 && B_("Saved level", {
-                type: "numeric",
+                label: 'Value'
+              }, i > 0 && B_('Saved level', {
+                type: 'numeric',
                 value: i
-              }), this.scene.generateNodeLinkItem("Primary instance", c1.fromString(e))])
+              }), this.scene.generateNodeLinkItem('Primary instance', c1.fromString(e))])
             })))
           }]
         };
@@ -955,7 +961,7 @@ class S extends _$$E {
     let t = {};
     for (let [r, n] of Object.entries(e)) t[r] = n;
     return $7({
-      label: "Layer DSD overrides",
+      label: 'Layer DSD overrides',
       list: Object.keys(t),
       expandByDefault: !1,
       generateChild: (e, r) => this.scene.generateNodeFieldItem(r, t[r])
@@ -967,32 +973,32 @@ class S extends _$$E {
     let t = this.scene.getDsaStyleCounts(this.id);
     let r = this.scene.getDsaVariableCounts(this.id);
     return {
-      label: "Design system analyltics",
+      label: 'Design system analyltics',
       children: [{
-        label: "Components",
+        label: 'Components',
         children: [{
-          label: "All",
+          label: 'All',
           children: this.generateDsaComponentCounts(e.all)
         }, {
-          label: "Unnested",
+          label: 'Unnested',
           children: this.generateDsaComponentCounts(e.unnested)
         }]
       }, {
-        label: "Styles",
+        label: 'Styles',
         children: [{
-          label: "All",
+          label: 'All',
           children: this.generateDsaStyleCounts(t.all)
         }, {
-          label: "Unnested",
+          label: 'Unnested',
           children: this.generateDsaStyleCounts(t.unnested)
         }]
       }, {
-        label: "Variables",
+        label: 'Variables',
         children: [{
-          label: "All",
+          label: 'All',
           children: this.generateDsaVariableCounts(r.all)
         }, {
-          label: "Unnested",
+          label: 'Unnested',
           children: this.generateDsaVariableCounts(r.unnested)
         }]
       }]
@@ -1008,11 +1014,11 @@ class S extends _$$E {
       label: e.name,
       key: e.id,
       value: {
-        type: "metadata",
+        type: 'metadata',
         value: t
       },
-      children: [this.scene.generateNodeLinkItem("node", e.guid), B_("count", {
-        type: "numeric",
+      children: [this.scene.generateNodeLinkItem('node', e.guid), B_('count', {
+        type: 'numeric',
         value: t
       })]
     }));
@@ -1027,11 +1033,11 @@ class S extends _$$E {
       label: e.name,
       key: e.id,
       value: {
-        type: "metadata",
+        type: 'metadata',
         value: t
       },
-      children: [this.scene.generateStyleLinkItem("style", e.styleId), B_("count", {
-        type: "numeric",
+      children: [this.scene.generateStyleLinkItem('style', e.styleId), B_('count', {
+        type: 'numeric',
         value: t
       })]
     }));
@@ -1046,18 +1052,18 @@ class S extends _$$E {
       label: e.name,
       key: e.id,
       value: {
-        type: "metadata",
+        type: 'metadata',
         value: t
       },
-      children: [this.scene.generateVariableLinkItem("var", e.variableId), B_("count", {
-        type: "numeric",
+      children: [this.scene.generateVariableLinkItem('var', e.variableId), B_('count', {
+        type: 'numeric',
         value: t
       })]
     }));
   }
   generateRenderTreeItem() {
-    let e = Hcu?.getRenderTree(this.stablePath, this.scene.sceneType);
-    return e ? this.generateRenderTreeNodeItem("Render tree", e) : null;
+    let e = figmaScopeBindings?.getRenderTree(this.stablePath, this.scene.sceneType);
+    return e ? this.generateRenderTreeNodeItem('Render tree', e) : null;
   }
   generateRenderTreeNodeItem(e, t) {
     let {
@@ -1068,14 +1074,14 @@ class S extends _$$E {
     let a = o8({
       label: e,
       value: {
-        type: "nonUserText",
+        type: 'nonUserText',
         value: op
       },
       object: i,
       generateChild: this.scene.generateNodeFieldItem
     });
     Array.isArray(children) && children.length > 0 && a.children.push($7({
-      label: "children",
+      label: 'children',
       list: children,
       generateChild: (e, t) => this.generateRenderTreeNodeItem(e, t)
     }));
@@ -1083,10 +1089,10 @@ class S extends _$$E {
   }
 }
 function v(e) {
-  return SW.fromString(e.join(";"));
+  return SW.fromString(e.join(';'));
 }
 function A(e) {
-  return dB.fromStrings(e.split(";"));
+  return dB.fromStrings(e.split(';'));
 }
 export const G2 = $$b0;
 export const lX = $$T1;

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 function o({
   children: e,
   display: t,
@@ -17,7 +17,7 @@ function o({
   let h = !t || i !== r.activeTab;
   return h && !u ? null : jsx("div", {
     ref: m,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...d,
     className: A(c, {
       "tabs-primitive__tabPanelHidden__4RMiV": h

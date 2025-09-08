@@ -1,10 +1,10 @@
 import { NC } from '../905/17179';
 import { d as _$$d } from '../905/91820';
-import { to } from '../905/156213';
+import { showModalHandler } from '../905/156213';
 import { F } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { n as _$$n } from '../905/347702';
-import { nF } from '../905/350402';
+import { createOptimistThunk } from '../905/350402';
 import { OpenTarget } from '../905/380844';
 import { subscribeAndAwaitData } from '../905/553831';
 import { s as _$$s2 } from '../905/573154';
@@ -17,7 +17,7 @@ import { o as _$$o } from '../905/721794';
 import { oA } from '../905/723791';
 import { Xm } from '../905/760074';
 import { WB } from '../905/761735';
-import { FB } from '../905/784363';
+import { VERSION_HISTORY_SET_FILE_LAST_SEEN_AT } from '../905/784363';
 import { XHR } from '../905/910117';
 import { debounce } from '../905/915765';
 import { zCd } from '../figma_app/43951';
@@ -28,7 +28,7 @@ import { Lb } from '../figma_app/323326';
 import { Ns, TP, yT } from '../figma_app/349248';
 import { Dk, wY } from '../figma_app/623293';
 import { d6 } from '../figma_app/687776';
-import { Ez5 } from '../figma_app/763686';
+import { AppStateTsApi } from '../figma_app/763686';
 import { S as _$$S } from '../figma_app/787550';
 import { Ul } from '../figma_app/841351';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -43,10 +43,10 @@ export function $$U1(e, t) {
   return XHR.put(`/api/files/${e}/thumbnail_guid`, {
     thumbnail_guid: t
   }).then(() => {
-    Ez5?.canvasViewState().thumbnailNodeId.set(t);
+    AppStateTsApi?.canvasViewState().thumbnailNodeId.set(t);
   });
 }
-let $$B18 = nF((e, t) => {
+let $$B18 = createOptimistThunk((e, t) => {
   t.file.created_at && console.error('It looks like you are PUT-ting to the API with the entire file object; please only pass the key and file permission attributes');
   let r = _$$S.putFile(t).then(() => {
     t.onSuccess?.();
@@ -68,7 +68,7 @@ let $$B18 = nF((e, t) => {
   a && WB().optimisticallyCreate(a, r);
 });
 let $$G20 = NC('FILE_PERMISSIONS_PUT');
-let $$V11 = nF(async (e, t) => {
+let $$V11 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let i = {};
   let a = t.file;
@@ -116,7 +116,7 @@ let $$V11 = nF(async (e, t) => {
     e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_copy_error')));
   });
 });
-let $$H14 = nF((e, t) => {
+let $$H14 = createOptimistThunk((e, t) => {
   let r = t.file_key;
   r && (e.getState().fileByKey[r] || _$$S.getFiles({
     fileKey: r
@@ -124,12 +124,12 @@ let $$H14 = nF((e, t) => {
     file: t.data.meta
   }))));
 });
-let $$z19 = nF(async (e, t) => {
+let $$z19 = createOptimistThunk(async (e, t) => {
   try {
     await XHR.del(`/api/files/${t.file_key}/workshop`);
   } catch (e) {}
 });
-let $$W7 = nF(async (e, t, {
+let $$W7 = createOptimistThunk(async (e, t, {
   liveStore: r
 }) => {
   let n = await r.fetchFile(t.fileKey);
@@ -168,7 +168,7 @@ let $$W7 = nF(async (e, t, {
     }, i);
   }
 });
-let $$K2 = nF(async (e, t) => {
+let $$K2 = createOptimistThunk(async (e, t) => {
   await XHR.post(`/api/files/${t.fileKey}/view`).then(({
     data: r
   }) => {
@@ -176,7 +176,7 @@ let $$K2 = nF(async (e, t) => {
       last_view_at,
       last_edit_at
     } = r.meta;
-    e.dispatch(FB({
+    e.dispatch(VERSION_HISTORY_SET_FILE_LAST_SEEN_AT({
       lastViewed: last_view_at,
       lastEdited: last_edit_at
     }));
@@ -190,7 +190,7 @@ let $$K2 = nF(async (e, t) => {
     });
   });
 });
-let $$Y0 = nF((e, t) => {
+let $$Y0 = createOptimistThunk((e, t) => {
   $$U1(t.file_key, t.thumbnail_guid).then(() => {
     let r = getFeatureFlags().dse_library_pg_thumbnails ? t.thumbnail_guid ? getI18nString('file_browser.file_browser_actions.file_thumbnail_set') : getI18nString('file_browser.file_browser_actions.default_file_thumbnail_restored') : t.thumbnail_guid ? getI18nString('file_browser.file_browser_actions.thumbnail_set') : getI18nString('file_browser.file_browser_actions.default_thumbnail_restored');
     e.dispatch(F.enqueue({
@@ -204,7 +204,7 @@ let $$Y0 = nF((e, t) => {
   });
 });
 let $$$6 = NC('FILE_RESTORE');
-let $$X9 = nF((e, t) => {
+let $$X9 = createOptimistThunk((e, t) => {
   let {
     fileKey,
     version
@@ -221,7 +221,7 @@ let $$X9 = nF((e, t) => {
     versionId: s.id
   })) : e.dispatch(_$$s2.error('Unable to find version to restore'));
 });
-let $$q12 = nF((e, t) => {
+let $$q12 = createOptimistThunk((e, t) => {
   Dk(t.embedCode).then(() => {
     ds('Embed Code Copied', t.fileKey, e.getState());
     e.dispatch(F.enqueue({
@@ -249,7 +249,7 @@ function J(e, t) {
   };
   e.dispatch(F.enqueue(r));
 }
-let $$Z8 = _$$n(nF((e, t) => {
+let $$Z8 = _$$n(createOptimistThunk((e, t) => {
   let r;
   let n = t.url;
   let i = t.label;
@@ -269,7 +269,7 @@ let $$Z8 = _$$n(nF((e, t) => {
     });
     t.skipVisualBell || J(e, t);
   }).catch(() => {
-    t.showVisualBellOnErrorForInteractionTests && isInteractionOrEvalMode() ? J(e, t) : e.dispatch(to({
+    t.showVisualBellOnErrorForInteractionTests && isInteractionOrEvalMode() ? J(e, t) : e.dispatch(showModalHandler({
       type: _$$o,
       data: {
         link: n
@@ -278,7 +278,7 @@ let $$Z8 = _$$n(nF((e, t) => {
   });
 }));
 let Q = e => e.replace(/[\r\n]+/g, ' ');
-let $$ee4 = nF((e, t) => {
+let $$ee4 = createOptimistThunk((e, t) => {
   let r = Q(t.name);
   if (r.length <= 100) {
     let n = {
@@ -329,7 +329,7 @@ let eo = debounce((e, t) => {
     }(e.meta.active_file_users, t, !0);
   }).catch(e => {});
 }, 1e3);
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   eo(t.fileKeys, e);
 });
 let $$el16 = NC('FILE_CLEAR_ACTIVE_USERS');

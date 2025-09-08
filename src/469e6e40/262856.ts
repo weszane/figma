@@ -9,10 +9,10 @@ import { s as _$$s2 } from "../905/573154";
 import { R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { J } from "../905/231762";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { yy } from "../figma_app/482142";
 import { $ } from "../905/834575";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { v0, hF, pL } from "../905/289198";
 var l = r;
@@ -29,7 +29,7 @@ let j = memo(function (e) {
     withLoading
   } = R();
   let C = () => {
-    t(Ce());
+    t(hideModal());
   };
   let S = async a => {
     a.preventDefault();
@@ -127,5 +127,5 @@ let j = memo(function (e) {
     })
   });
 });
-let $$y0 = Ju(j, "UpdateCompanyDetailsModal");
+let $$y0 = registerModal(j, "UpdateCompanyDetailsModal");
 export const L = $$y0;

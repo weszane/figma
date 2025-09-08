@@ -1,8 +1,8 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.SongsSchemaValidator = vh();
-    this.ActiveSchemaValidator = vh();
+    this.SongsSchemaValidator = createNoOpValidator();
+    this.ActiveSchemaValidator = createNoOpValidator();
   }
   getSongs() {
     return this.SongsSchemaValidator.validate(async ({

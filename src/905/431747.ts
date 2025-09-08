@@ -3,7 +3,7 @@ import { _Z } from "../figma_app/819288";
 import { Yx } from "../figma_app/930338";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Of } from "../905/31837";
 import { yX } from "../figma_app/918700";
 import { W } from "../figma_app/54182";
@@ -40,7 +40,7 @@ function f(e) {
     }, e.id))
   });
 }
-export let $$_0 = Ju(function (e) {
+export let $$_0 = registerModal(function (e) {
   let t = Of();
   let i = e.usersWithoutAccess.map(e => e.handle);
   let s = e.externalUsersWithoutAccess.map(e => e.handle);

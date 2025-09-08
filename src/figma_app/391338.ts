@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { shallowEqual } from "../vendor/514228";
 import { noop } from "../figma_app/465776";
-import { D2E } from "../figma_app/763686";
+import { PerfPriority } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { DD, k9 } from "../905/19536";
 import d from "../vendor/529640";
@@ -475,9 +475,9 @@ class B {
         ...t,
         severity: function (e) {
           switch (e) {
-            case D2E.HIGH:
+            case PerfPriority.HIGH:
               return "high";
-            case D2E.LOW:
+            case PerfPriority.LOW:
               return "low";
             default:
               noop(e);

@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { S as _$$S } from "../905/274480";
-import { h as _$$h, J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { HiddenLabel, Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { trackEventAnalytics } from "../905/449184";
@@ -40,11 +40,11 @@ import { Cj } from "../905/270084";
 import { hP } from "../figma_app/527041";
 import { A as _$$A } from "../6828/493300";
 import { sf } from "../905/929976";
-import { to, Lo } from "../905/156213";
+import { showModalHandler, popModalStack } from "../905/156213";
 import { oN } from "../905/777093";
 import { FC } from "../figma_app/212807";
 import { X as _$$X2 } from "../905/698965";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A as _$$A2 } from "../svg/562672";
 import { A as _$$A3 } from "../svg/57540";
 import { throwTypeError } from "../figma_app/465776";
@@ -590,8 +590,8 @@ function eR(e) {
         className: eS,
         children: [jsx(A3, {
           className: eI,
-          children: j && jsx(_$$S, {
-            label: jsx(_$$h, {
+          children: j && jsx(Checkbox, {
+            label: jsx(HiddenLabel, {
               children: renderI18nText("design_systems.shared_fonts.checkbox_select_all_fonts")
             }),
             checked: Object.keys(sharedFonts.fontsToDelete).length > 0,
@@ -833,8 +833,8 @@ class eN extends PureComponent {
         className: this.props.shouldShowCheckbox ? eI : "shared_fonts_modal_content--actionColumnInactive--kFWMk shared_fonts_modal_content--actionColumn--NUqAH table--column--974RA",
         children: this.props.canCheck && jsx(_$$o, {
           eventListeners: ["onClick"],
-          children: jsx(_$$S, {
-            label: jsx(_$$h, {
+          children: jsx(Checkbox, {
+            label: jsx(HiddenLabel, {
               children: renderI18nText("design_systems.shared_fonts.checkbox_select_font")
             }),
             checked: this.props.isChecked,
@@ -968,7 +968,7 @@ let eM = class e extends uA {
       this.props.dispatch(_$$X.dismissFontWarning());
     };
     this.showDeleteFontsModal = () => {
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: eV,
         showModalsBeneath: !0
       }));
@@ -1056,7 +1056,7 @@ let eM = class e extends uA {
       block: "start"
     });
     let i = this.props.sharedFonts.collisions[0];
-    i && this.currentVisibleCollision !== i && (this.currentVisibleCollision = i, i.overwritten_fonts?.length ? this.props.dispatch(to({
+    i && this.currentVisibleCollision !== i && (this.currentVisibleCollision = i, i.overwritten_fonts?.length ? this.props.dispatch(showModalHandler({
       type: eU,
       data: {
         collision: i,
@@ -1068,7 +1068,7 @@ let eM = class e extends uA {
         }
       },
       showModalsBeneath: !0
-    })) : i.existing && this.props.dispatch(to({
+    })) : i.existing && this.props.dispatch(showModalHandler({
       type: eG,
       data: {
         collision: i,
@@ -1082,7 +1082,7 @@ let eM = class e extends uA {
       showModalsBeneath: !0
     })));
     let n = this.props.sharedFonts.warnings[0];
-    !this.isShowingWarning && !this.currentVisibleCollision && n && n.collisions.filter(e => e.teamId && this.props.permissionsState.teams[e.teamId]).map(e => this.props.permissionsState.teams[e.teamId]).map(e => e.name).length && (this.isShowingWarning = !0, this.props.dispatch(to({
+    !this.isShowingWarning && !this.currentVisibleCollision && n && n.collisions.filter(e => e.teamId && this.props.permissionsState.teams[e.teamId]).map(e => this.props.permissionsState.teams[e.teamId]).map(e => e.name).length && (this.isShowingWarning = !0, this.props.dispatch(showModalHandler({
       type: eB,
       data: {
         onWarningDismissed: () => {
@@ -1159,7 +1159,7 @@ eM.displayName = "SharedFonts";
 eM.fontLoadPromise = null;
 eM.loadedFonts = !1;
 let $$ej0 = eM;
-let eU = Ju(function (e) {
+let eU = registerModal(function (e) {
   let t = hS({
     ...e,
     preventUserClose: !0
@@ -1183,7 +1183,7 @@ let eU = Ju(function (e) {
       I(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
-    I(Lo());
+    I(popModalStack());
   }, [_, v.collisions, I, onCollisionResolved]);
   let x = useCallback(() => {
     (_ ? v.collisions : [v.collisions[0]]).forEach(e => {
@@ -1199,7 +1199,7 @@ let eU = Ju(function (e) {
       I(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
-    I(Lo());
+    I(popModalStack());
   }, [_, v.collisions, I, resourceType, resourceId, onCollisionResolved]);
   return jsx(bL, {
     manager: t,
@@ -1219,8 +1219,8 @@ let eU = Ju(function (e) {
           className: "shared_fonts--control--W-DlW",
           children: v.collisions.length > 1 && jsx("div", {
             className: eD,
-            children: jsx(_$$S, {
-              label: jsx(_$$J, {
+            children: jsx(Checkbox, {
+              label: jsx(Label, {
                 children: renderI18nText("design_systems.shared_fonts.apply_to_all_remaining_uploads", {
                   numRemainingUploads: v.collisions.length - 1
                 })
@@ -1244,7 +1244,7 @@ let eU = Ju(function (e) {
     })
   });
 });
-let eB = Ju(function (e) {
+let eB = registerModal(function (e) {
   let {
     onWarningDismissed
   } = e;
@@ -1256,7 +1256,7 @@ let eB = Ju(function (e) {
   let h = useCallback(() => {
     m(_$$X.dismissFontWarning());
     onWarningDismissed();
-    m(Lo());
+    m(popModalStack());
   }, [m, onWarningDismissed]);
   if (!p) return null;
   let g = p.collisions.filter(e => e.teamId && c.teams[e.teamId]).map(e => c.teams[e.teamId]).map(e => e.name);
@@ -1294,16 +1294,16 @@ let eB = Ju(function (e) {
     })
   }) : null;
 });
-let eV = Ju(function (e) {
+let eV = registerModal(function (e) {
   let t = hS(e);
   let i = useDispatch();
   let d = Object.keys(useSelector(e => e.sharedFonts).fontsToDelete).length;
   let c = useCallback(() => {
     i(_$$X.deleteFonts());
-    i(Lo());
+    i(popModalStack());
   }, [i]);
   let p = useCallback(() => {
-    i(Lo());
+    i(popModalStack());
   }, [i]);
   return jsx(bL, {
     manager: t,
@@ -1332,7 +1332,7 @@ let eV = Ju(function (e) {
     })
   });
 });
-let eG = Ju(function (e) {
+let eG = registerModal(function (e) {
   let t = hS({
     ...e,
     preventUserClose: !0
@@ -1356,7 +1356,7 @@ let eG = Ju(function (e) {
       E(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
-    E(Lo());
+    E(popModalStack());
   }, [A, I.collisions, E, onCollisionResolved]);
   let S = useCallback(() => {
     (A ? I.collisions : [I.collisions[0]]).forEach(e => {
@@ -1372,7 +1372,7 @@ let eG = Ju(function (e) {
       E(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
-    E(Lo());
+    E(popModalStack());
   }, [A, I.collisions, E, resourceType, resourceId, onCollisionResolved]);
   return jsx(bL, {
     manager: t,
@@ -1421,8 +1421,8 @@ let eG = Ju(function (e) {
           className: "shared_fonts--applyAll--44Pm2",
           children: jsx("div", {
             className: eD,
-            children: jsx(_$$S, {
-              label: jsx(_$$J, {
+            children: jsx(Checkbox, {
+              label: jsx(Label, {
                 children: renderI18nText("design_systems.shared_fonts.apply_to_all_remaining_uploads", {
                   numRemainingUploads: I.collisions.length
                 })

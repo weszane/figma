@@ -2,7 +2,7 @@ import { createContext, useState, useRef, useLayoutEffect, useMemo } from "react
 import { cq, rm, SV } from "../vendor/516565";
 import { $ } from "../905/61417";
 import { R } from "../905/457273";
-import { Ju } from "../905/955878";
+import { preventAndStopEvent } from "../905/955878";
 import { Q } from "../905/586361";
 let $$d2 = createContext(null);
 let $$c0 = ({
@@ -56,15 +56,15 @@ let $$c0 = ({
             return;
           }
           i || I.current || !allowSelection || n(e);
-          Ju(e);
+          preventAndStopEvent(e);
         },
         onKeyDown: e => {
           if (" " === e.key && u) {
             i || n(e);
-            Ju(e);
+            preventAndStopEvent(e);
             return;
           }
-          (" " === e.key || "Enter" === e.key) && (i || n(e), Ju(e));
+          (" " === e.key || "Enter" === e.key) && (i || n(e), preventAndStopEvent(e));
           E(listRef.current.length, activeIndex, e);
         },
         onPointerLeave: () => {
@@ -73,7 +73,7 @@ let $$c0 = ({
         onPointerUp: e => {
           if (u && !I.current) {
             n(e);
-            Ju(e);
+            preventAndStopEvent(e);
             return;
           }
           0 === e.button && !i && allowSelection && (I.current = !0, n(e));

@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { cgc, h3O } from "../figma_app/763686";
+import { FullscreenWebSocketTsApi, Multiplayer } from "../figma_app/763686";
 import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -14,14 +14,14 @@ let m = 0;
 let g = 0;
 function f() {
   II();
-  cgc.connectFinished();
+  FullscreenWebSocketTsApi.connectFinished();
 }
 export function $$E1() {
   return h?.bufferedAmount || 0;
 }
 function y(e) {
   II();
-  cgc.receive(e);
+  FullscreenWebSocketTsApi.receive(e);
 }
 function b(e, t) {
   let r = new URL(e);
@@ -41,7 +41,7 @@ function T(e) {
     } catch (e) {}
     h = null;
     II();
-    cgc.disconnect(e);
+    FullscreenWebSocketTsApi.disconnect(e);
   }
 }
 let I = !1;
@@ -54,7 +54,7 @@ export function $$S2() {
   }
 }
 export function $$v3(e = !1) {
-  h || (I = !1, h3O.reconnect(e), console.log(`unbreakMultiplayerWebsocketForTesting: reconnected to ${h ? h.url : null}`));
+  h || (I = !1, Multiplayer.reconnect(e), console.log(`unbreakMultiplayerWebsocketForTesting: reconnected to ${h ? h.url : null}`));
 }
 export let $$A0 = {
   connect: function (e) {
@@ -91,7 +91,7 @@ export let $$A0 = {
         urlLength: e.length,
         connectAttemptId: m,
         isReconnect: !!ReduxSceneGraph && -1 !== getSingletonSceneGraph().scene,
-        isIncremental: h3O?.isIncrementalSession()
+        isIncremental: Multiplayer?.isIncrementalSession()
       }), null !== t) {
         if (!b(t.url, e) && (logWarning("multiplayer", "Preconnect URL doesn't match URL", {
           preconnectUrl: t.url,

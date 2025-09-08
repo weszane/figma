@@ -4,9 +4,9 @@ import { E as _$$E } from "../905/465157";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { gl, BI, hS } from "../905/216495";
+import { isInvalidValue, getCommonFromArray, isValidValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { om, ui } from "../figma_app/395097";
 import { Ms, Er } from "../905/873331";
@@ -23,11 +23,11 @@ import { eN } from "../905/331848";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { useDispatch } from "../vendor/514228";
-import { Ez5, yTM } from "../figma_app/763686";
+import { AppStateTsApi, DrawingElementType } from "../figma_app/763686";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { Xo } from "../figma_app/482495";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { cn } from "../905/959568";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
@@ -87,7 +87,7 @@ let w = memo(function (e) {
 });
 function O(e) {
   return jsxs(bL, {
-    value: gl(e.value) ? void 0 : e.value,
+    value: isInvalidValue(e.value) ? void 0 : e.value,
     onChange: e.onChange,
     legend: jsx(q, {
       children: getI18nString("fullscreen.properties_panel.stroke.position")
@@ -122,7 +122,7 @@ function $(e) {
   let s = Xo();
   let l = Jt();
   let d = Gt("strokeBrushGuid");
-  let c = BI(d);
+  let c = getCommonFromArray(d);
   let p = Kt();
   return jsx(_2, {
     arcRadius: i.arcRadius,
@@ -200,8 +200,8 @@ export function $$J0(e) {
     let e = V0();
     let t = tB();
     let r = Jt();
-    let n = ut(Ez5?.propertiesPanelState().isVertexSelectionAndHasEndpoints, !1);
-    return (e === yTM.ENDPOINT || e === yTM.VECTOR && r > 0 || n) && t;
+    let n = getObservableValue(AppStateTsApi?.propertiesPanelState().isVertexSelectionAndHasEndpoints, !1);
+    return (e === DrawingElementType.ENDPOINT || e === DrawingElementType.VECTOR && r > 0 || n) && t;
   }();
   let F = kW(A);
   let j = R8();
@@ -273,7 +273,7 @@ export function $$J0(e) {
         onChange: e => {
           if (r(e), e === om.CUSTOM) return;
           let t = e6(e);
-          Y5.updateSelectionProperties(t, {
+          fullscreenValue.updateSelectionProperties(t, {
             shouldCommit: zk.YES
           });
         },
@@ -304,7 +304,7 @@ export function $$J0(e) {
       icon: jsx(X, {
         forwardedRef: e.forwardedRef,
         recordingKey: e.recordingKey,
-        disabled: gl(V)
+        disabled: isInvalidValue(V)
       })
     }), jsx(fn, {
       "data-testid": "stroke-cap-profile-row",
@@ -313,7 +313,7 @@ export function $$J0(e) {
       rightLabel: getFeatureFlags().ce_il_var_width_points ? getI18nString("fullscreen.properties_panel.width_profile.label") : null,
       rightInput: getFeatureFlags().ce_il_var_width_points ? J : null,
       icon: getFeatureFlags().ce_il_var_width_points ? Z : null
-    }), B && hS(V) && jsx($, {
+    }), B && isValidValue(V) && jsx($, {
       strokeType: V,
       recordingKey: e.recordingKey
     })]

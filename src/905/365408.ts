@@ -1,4 +1,4 @@
-import { zIx } from "../figma_app/763686";
+import { BuildStatus } from "../figma_app/763686";
 import { XHR } from "../905/910117";
 import { FEventType, FBuildStatusType } from "../figma_app/191312";
 export let $$s0 = new class {
@@ -10,11 +10,11 @@ export let $$s0 = new class {
         type: FEventType.STATUS_CHANGE,
         status: function (e) {
           switch (e) {
-            case zIx.BUILD:
+            case BuildStatus.BUILD:
               return FBuildStatusType.BUILD;
-            case zIx.NONE:
+            case BuildStatus.NONE:
               return FBuildStatusType.NONE;
-            case zIx.COMPLETED:
+            case BuildStatus.COMPLETED:
               return FBuildStatusType.COMPLETED;
           }
         }(e.status),

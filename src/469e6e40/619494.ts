@@ -10,16 +10,16 @@ import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { mW } from "../469e6e40/182832";
-import { to, Lo } from "../905/156213";
+import { showModalHandler, popModalStack } from "../905/156213";
 import { _g } from "../figma_app/336853";
 import { Ct } from "../figma_app/736948";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { wz, Vq, tp, FK, jE, Yy } from "../469e6e40/442006";
 function j(e) {
   let t = useDispatch();
   let a = useCallback(() => {
-    t(to({
+    t(showModalHandler({
       type: mW,
       data: {
         dispatch: t,
@@ -153,13 +153,13 @@ function j(e) {
     })]
   });
 }
-export let $$y0 = Ju(function (e) {
+export let $$y0 = registerModal(function (e) {
   let t = useDispatch();
   let a = e.org;
   let s = e.orgSamlConfig;
   let r = e.orgDomains;
   let d = !s || 0 == r.length;
-  let c = () => t(Lo());
+  let c = () => t(popModalStack());
   return jsx(OJ, {
     title: getI18nString("org_settings.sso.saml_sso"),
     onClose: c,
@@ -179,7 +179,7 @@ export let $$y0 = Ju(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: () => {
-              t(to({
+              t(showModalHandler({
                 type: mW,
                 data: {
                   dispatch: t,

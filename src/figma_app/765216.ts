@@ -3,9 +3,9 @@ import { Pt } from "../figma_app/806412";
 import { Bu, d3 } from "../figma_app/156285";
 import { useMemo, useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { j0r, rrT, glU, plo } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD, sH, Hr } from "../905/871411";
+import { PropertyScope, NodePropertyCategory, Fullscreen, DistributionType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString, parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import { s4 } from "../figma_app/276332";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
@@ -15,7 +15,7 @@ import { Y as _$$Y } from "../905/506207";
 import { u1, XE } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
 import { W3 } from "../905/232641";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Tm, Em } from "../figma_app/385874";
 import { SK } from "../905/619652";
 import { J } from "../905/225412";
@@ -31,7 +31,7 @@ import { N as _$$N } from "../figma_app/908785";
 import { i as _$$i } from "../905/382332";
 import { yl } from "../figma_app/947348";
 var h = _;
-let C = new Set([j0r.STROKE]);
+let C = new Set([PropertyScope.STROKE]);
 let w = "brush-paint-picker-secondary-toolbelt";
 let O = {
   type: "SOLID",
@@ -51,9 +51,9 @@ function R({
     styleId = null
   } = useAtomWithSubscription(t);
   let [a, _] = w1(t, "paints");
-  let R = rrT.STROKE_PRESET;
+  let R = NodePropertyCategory.STROKE_PRESET;
   let L = useDispatch();
-  let P = Tm.getId(0, rrT.STROKE_PRESET, "paint");
+  let P = Tm.getId(0, NodePropertyCategory.STROKE_PRESET, "paint");
   let D = function (e) {
     let t = WH(e ?? null, null, s4.STROKE);
     return useMemo(() => {
@@ -72,11 +72,11 @@ function R({
   let [j, U] = useState(!1);
   let B = useRef(null);
   useEffect(() => () => {
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
   }, []);
   let G = useCallback(() => {
-    styleId && l7.user("detach-style", () => {
-      glU.applyStyleToSelection("inheritFillStyleKeyForStroke", AD, !0);
+    styleId && permissionScopeHandler.user("detach-style", () => {
+      Fullscreen.applyStyleToSelection("inheritFillStyleKeyForStroke", defaultSessionLocalIDString, !0);
     });
   }, [styleId]);
   let V = useCallback(() => {
@@ -86,7 +86,7 @@ function R({
   }, [L]);
   let H = useCallback(() => {
     L(XE());
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
   }, [L]);
   let z = useCallback(() => {
     if (!F) {
@@ -101,21 +101,21 @@ function R({
   }, [G, _]);
   let K = useCallback(e => {
     if (G(), U(!1), !D) return;
-    let t = Y5.fileArrayToString;
+    let t = fullscreenValue.fileArrayToString;
     if (t) {
       let r = t(Array.from(e.files));
-      glU.dropImageOnPaintThumbnail(D.blendMode || "NORMAL", D.opacity || 1, r, 0, R);
+      Fullscreen.dropImageOnPaintThumbnail(D.blendMode || "NORMAL", D.opacity || 1, r, 0, R);
     }
   }, [G, D, R]);
   let Y = useCallback((e, t, r) => {
     G();
-    let n = Y5.fileArrayToString;
+    let n = fullscreenValue.fileArrayToString;
     if (n) {
       let i = n(Array.from(r.files));
-      glU.dropImageOnPaintThumbnail(e, t, i, 0, R);
+      Fullscreen.dropImageOnPaintThumbnail(e, t, i, 0, R);
     }
   }, [G, R]);
-  let $ = useCallback((e, t) => l7.user("update-gif-image", () => SK(e, t, R)), [R]);
+  let $ = useCallback((e, t) => permissionScopeHandler.user("update-gif-image", () => SK(e, t, R)), [R]);
   return jsxs("div", {
     children: [jsx(_$$Y, {
       isDragTarget: () => !0,
@@ -212,8 +212,8 @@ function G({
   let u = Bu();
   let p = useRef(null);
   let _ = useCallback(e => {
-    let t = sH(e.guid);
-    t && (o(t), e.type === plo.SCATTER && d(e.settings));
+    let t = parseSessionLocalID(e.guid);
+    t && (o(t), e.type === DistributionType.SCATTER && d(e.settings));
   }, [o, d]);
   return jsx("div", {
     ref: p,
@@ -221,7 +221,7 @@ function G({
       brushInputClassName: "brush_guid_picker--brushInputButton--auCyb",
       brushList: u,
       onChange: _,
-      value: r ?? Hr,
+      value: r ?? defaultSessionLocalID,
       positioningProps: {
         positionRelativeTo: p,
         align: {

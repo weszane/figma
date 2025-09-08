@@ -2,13 +2,13 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
-import { S as _$$S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { a as _$$a } from "../905/5627";
 import { V as _$$V } from "../1577/311426";
-import { Z_n, rcl, glU, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { Hr, dI, sH } from "../905/871411";
+import { VariableDataType, Command, Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalID, sessionLocalIDToString, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { U as _$$U } from "../figma_app/901889";
@@ -17,11 +17,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VC } from "../figma_app/565242";
 import { X } from "../905/190511";
 import { _j } from "../figma_app/843119";
-import { E7, gl, oV } from "../905/216495";
+import { normalizeValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { R1, u3 } from "../figma_app/152690";
 import { RK } from "../figma_app/815170";
 import { fu } from "../figma_app/831799";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { kl, lJ } from "../905/275640";
 import { KH, eY } from "../figma_app/722362";
 import { UA } from "../905/250387";
@@ -41,7 +41,7 @@ function E(e) {
   let t = getSingletonSceneGraph().get(e);
   if (!t) return null;
   let n = t?.getVariableConsumptionMap()?.HYPERLINK;
-  return !n || n.isMixed || n.type !== Z_n.CMS_ALIAS ? null : n.value.fieldSchemaId;
+  return !n || n.isMixed || n.type !== VariableDataType.CMS_ALIAS ? null : n.value.fieldSchemaId;
 }
 function j(e) {
   let t = getSingletonSceneGraph().get(e);
@@ -92,22 +92,22 @@ export function $$z0({
   let f = () => {
     _({
       ...Bs("SCROLL_TO"),
-      transitionNodeID: Hr,
+      transitionNodeID: defaultSessionLocalID,
       simpleLink: !0
     });
   };
   let _ = e => {
-    l7.user(Tl, () => {
+    permissionScopeHandler.user(Tl, () => {
       for (let t of Object.keys(a)) {
         let n = l.get(t);
         n && qe(n, e);
       }
-      Y5.commit();
+      fullscreenValue.commit();
     });
     s(e.connectionType);
   };
   let b = (e, t, n) => {
-    l7.user("dakota-set-link-binding", () => {
+    permissionScopeHandler.user("dakota-set-link-binding", () => {
       for (let o of Object.keys(a)) {
         let i = l.get(o);
         i && i.getNodesForCmsBinding(e).forEach(e => e.setDakotaLinkFieldBindingOnPrototypeAction(t, n));
@@ -118,7 +118,7 @@ export function $$z0({
     transitionNodeID: e,
     extraScrollOffset: t
   }) => {
-    l7.user(Tl, () => {
+    permissionScopeHandler.user(Tl, () => {
       for (let n of Object.keys(a)) {
         let o = l.get(n);
         if (o) {
@@ -136,7 +136,7 @@ export function $$z0({
               }
             }))
           };
-          Y5.updateSelectionProperties(l);
+          fullscreenValue.updateSelectionProperties(l);
         }
       }
     });
@@ -152,35 +152,35 @@ export function $$z0({
   let T = () => {
     let e = N(a, j);
     if (e) {
-      Y5.triggerActionEnumInUserEditScope(rcl.UNBIND_SELECTION, {
+      fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
         fieldSchemaId: e,
         fieldType: _j.LINK,
         removeBoundData: !0
       });
       return;
     }
-    l7.user(Tl, () => {
+    permissionScopeHandler.user(Tl, () => {
       for (let e of Object.keys(a)) {
         let t = l.get(e);
         t && RZ(t) && Ve(t);
       }
-      Y5.commit();
+      fullscreenValue.commit();
     });
   };
   let S = () => {
     let e = N(a, E);
     if (e) {
-      Y5.triggerActionEnumInUserEditScope(rcl.UNBIND_SELECTION, {
+      fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
         fieldSchemaId: e,
         fieldType: _j.LINK,
         removeBoundData: !0
       });
       return;
     }
-    l7.user(Tl, () => {
-      glU?.setHyperlinkOnCurrentSelection("", null);
+    permissionScopeHandler.user(Tl, () => {
+      Fullscreen?.setHyperlinkOnCurrentSelection("", null);
       P();
-      Y5.commit();
+      fullscreenValue.commit();
     });
   };
   let P = () => {
@@ -194,7 +194,7 @@ export function $$z0({
     addBackLinkPreset: y,
     addCMSAliasLinkAction: b,
     addCMSRepeaterToItemPageBindingAction: (e, t) => {
-      e && l7.user("dakota-set-repeater-item-page-binding", () => {
+      e && permissionScopeHandler.user("dakota-set-repeater-item-page-binding", () => {
         for (let n of Object.keys(a)) {
           let o = l.get(n);
           o && o.getNodesForCmsBinding(e).forEach(e => {
@@ -205,7 +205,7 @@ export function $$z0({
     },
     addLinkAction: _,
     addRegularNodeToItemPageLinkAction: (e, t, n) => {
-      l7.user("dakota-set-cms-item-page-link-binding", () => {
+      permissionScopeHandler.user("dakota-set-cms-item-page-link-binding", () => {
         for (let o of Object.keys(a)) {
           let i = l.get(o);
           i && i.setCmsItemPageLinkOnHyperlink(e, t, n);
@@ -225,7 +225,7 @@ export function $$z0({
     addBackLinkPreset: y,
     addCMSAliasLinkAction: b,
     addCMSRepeaterToItemPageBindingAction: (e, t) => {
-      e && l7.user("dakota-set-repeater-item-page-binding", () => {
+      e && permissionScopeHandler.user("dakota-set-repeater-item-page-binding", () => {
         for (let n of Object.keys(a)) {
           let o = l.get(n);
           o && o.getNodesForCmsBinding(e).forEach(e => {
@@ -236,7 +236,7 @@ export function $$z0({
     },
     addLinkAction: _,
     addRegularNodeToItemPageLinkAction: (e, t, n) => {
-      l7.user("dakota-set-cms-item-page-link-binding", () => {
+      permissionScopeHandler.user("dakota-set-cms-item-page-link-binding", () => {
         for (let o of Object.keys(a)) {
           let i = l.get(o);
           i && i.setCmsItemPageLinkOnPrototypeInteraction(e, t, n);
@@ -301,7 +301,7 @@ function W({
       openInNewTab: e.openUrlInNewTab ?? !0
     } : e?.connectionType === "INTERNAL_NODE" && e?.transitionNodeID ? {
       type: "internal",
-      id: dI(e.transitionNodeID)
+      id: sessionLocalIDToString(e.transitionNodeID)
     } : null;
   }(v);
   let C = o => {
@@ -317,13 +317,13 @@ function W({
     } else if ("internal" === o.type) {
       e({
         connectionType: "INTERNAL_NODE",
-        transitionNodeID: sH(o.id) ?? Hr,
+        transitionNodeID: parseSessionLocalID(o.id) ?? defaultSessionLocalID,
         navigationType: "NAVIGATE"
       });
       return;
     } else "cms_link_field_alias" === o.type ? a(o.collectionId, {
-      type: Z_n.CMS_ALIAS,
-      resolvedType: rXF.LINK,
+      type: VariableDataType.CMS_ALIAS,
+      resolvedType: VariableResolvedDataType.LINK,
       value: {
         collectionId: o.collectionId,
         fieldSchemaId: o.fieldId
@@ -382,13 +382,13 @@ function Z({
     setVariableConsumptionMap
   } = R1();
   let S = function (e, t) {
-    let n = E7(e);
+    let n = normalizeValue(e);
     let o = n?.cmsTarget ?? null;
     let i = VC(function (e) {
       let {
         consumedVariable
       } = u3([e]);
-      return !consumedVariable || gl(consumedVariable) || consumedVariable.type !== Z_n.CMS_ALIAS || consumedVariable.resolvedType !== rXF.LINK ? "" : consumedVariable.value.collectionId;
+      return !consumedVariable || isInvalidValue(consumedVariable) || consumedVariable.type !== VariableDataType.CMS_ALIAS || consumedVariable.resolvedType !== VariableResolvedDataType.LINK ? "" : consumedVariable.value.collectionId;
     }("HYPERLINK"));
     let r = t?.value.fieldSchemaId;
     let a = t?.value.collectionId;
@@ -405,13 +405,13 @@ function Z({
       openInNewTab: n.openInNewTab
     } : n && void 0 !== n.guid ? {
       type: "internal",
-      id: dI(n.guid)
-    } : gl(e) ? oV : null);
+      id: sessionLocalIDToString(n.guid)
+    } : isInvalidValue(e) ? MIXED_MARKER : null);
   }(v, function (e) {
     let t = e?.HYPERLINK;
-    return t && !t.isMixed && t.type === Z_n.CMS_ALIAS ? t : null;
+    return t && !t.isMixed && t.type === VariableDataType.CMS_ALIAS ? t : null;
   }(variableConsumptionMap));
-  let P = gl(S) || gl(v);
+  let P = isInvalidValue(S) || isInvalidValue(v);
   return jsx(G, {
     contentsVisibleOrMixed: d,
     disableOpenInNewTabCheckbox: P,
@@ -426,10 +426,10 @@ function Z({
     onLinkChange: e => {
       if (e?.type === "internal_cms_item_page") i(e.collectionId, e.id);else if (e?.type === "cms_link_field_alias") {
         if (!e.collectionId) return;
-        l7.user("dakota-set-link-binding", () => {
+        permissionScopeHandler.user("dakota-set-link-binding", () => {
           let t = {
-            type: Z_n.CMS_ALIAS,
-            resolvedType: rXF.LINK,
+            type: VariableDataType.CMS_ALIAS,
+            resolvedType: VariableResolvedDataType.LINK,
             value: {
               collectionId: e.collectionId,
               fieldSchemaId: e.fieldId
@@ -450,19 +450,19 @@ function Z({
             e.updateVariableConsumption("HYPERLINK", t);
           });
         });
-      } else e?.type === "internal_cms_item_page_item" ? r(e.id, e.itemId, e.fieldSchemaId) : e?.type === "back" ? (g && (FD() || nh()) && g(), t()) : e?.type === "anchor_link" ? n() : l7.user(Tl, () => {
-        null === e ? glU?.setHyperlinkOnCurrentSelection("", null) : "url" === e.type ? (glU?.setHyperlinkOnCurrentSelection(xT(e.url), e.openInNewTab ?? null), s && s()) : "internal" === e.type && (glU?.setHyperlinkOnCurrentSelection(Y5.generateLinkToNode(e.id), null), s && s());
-        glU?.hideHyperlinkEditor();
+      } else e?.type === "internal_cms_item_page_item" ? r(e.id, e.itemId, e.fieldSchemaId) : e?.type === "back" ? (g && (FD() || nh()) && g(), t()) : e?.type === "anchor_link" ? n() : permissionScopeHandler.user(Tl, () => {
+        null === e ? Fullscreen?.setHyperlinkOnCurrentSelection("", null) : "url" === e.type ? (Fullscreen?.setHyperlinkOnCurrentSelection(xT(e.url), e.openInNewTab ?? null), s && s()) : "internal" === e.type && (Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(e.id), null), s && s());
+        Fullscreen?.hideHyperlinkEditor();
       });
     },
     onOpenInNewTabChange: e => {
-      !gl(S) && (S?.type === "cms_link_field_alias" ? (E({
+      !isInvalidValue(S) && (S?.type === "cms_link_field_alias" ? (E({
         ...v,
         openInNewTab: e
       }), getFeatureFlags().ds_enable_pdmo || setVariableConsumptionMap({
         HYPERLINK: {
-          type: Z_n.CMS_ALIAS,
-          resolvedType: rXF.LINK,
+          type: VariableDataType.CMS_ALIAS,
+          resolvedType: VariableResolvedDataType.LINK,
           value: {
             collectionId: S.collectionId,
             fieldSchemaId: S.fieldId
@@ -495,15 +495,15 @@ function G({
   recordingKey: C
 }) {
   let E = useDispatch();
-  let j = e && !gl(e) && ("url" === e.type || "cms_link_field_alias" === e.type);
-  let N = e && !gl(e) && e?.type === "url" && (e?.url.startsWith("mailto:") || e?.url.startsWith("tel:"));
+  let j = e && !isInvalidValue(e) && ("url" === e.type || "cms_link_field_alias" === e.type);
+  let N = e && !isInvalidValue(e) && e?.type === "url" && (e?.url.startsWith("mailto:") || e?.url.startsWith("tel:"));
   let A = useCallback(t => {
-    !e || gl(e) || e?.type !== "url" || (N ? UA(E, e.url, "sites-link-panel") : E(RK({
+    !e || isInvalidValue(e) || e?.type !== "url" || (N ? UA(E, e.url, "sites-link-panel") : E(RK({
       rawInput: e.url,
       event: t
     })));
   }, [E, N, e]);
-  let w = () => !e || gl(e) || e?.type !== "url" ? null : jsx(_$$K, {
+  let w = () => !e || isInvalidValue(e) || e?.type !== "url" ? null : jsx(_$$K, {
     onClick: A,
     children: N ? jsx(_$$a, {}) : jsx(_$$V, {}),
     "aria-label": N ? getI18nString("sites.panel.copy_link") : getI18nString("sites.panel.open_link_new_tab")
@@ -521,8 +521,8 @@ function G({
       }),
       icon: w()
     }), j && jsx(TN, {
-      children: jsx(_$$S, {
-        label: jsx(J, {
+      children: jsx(Checkbox, {
+        label: jsx(Label, {
           children: renderI18nText("proto.action_open_url_in_new_tab")
         }),
         onChange: h,
@@ -530,7 +530,7 @@ function G({
         checked: e.openInNewTab,
         disabled: g
       })
-    }), t && !gl(e) && e?.type === "anchor_link" && jsx(_$$k2, {
+    }), t && !isInvalidValue(e) && e?.type === "anchor_link" && jsx(_$$k2, {
       action: t,
       recordingKey: C,
       interactionType: "ON_CLICK",

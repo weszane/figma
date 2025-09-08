@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { rXF, Z_n, CWU, mHF } from "../figma_app/763686";
-import { dI } from "../905/871411";
+import { VariableResolvedDataType, VariableDataType, VariablesBindings, LinterCppBindings } from "../figma_app/763686";
+import { sessionLocalIDToString } from "../905/871411";
 import { dI as _$$dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -18,29 +18,29 @@ import { Ev, Eo } from "../figma_app/216057";
 import { y as _$$y, v as _$$v } from "../905/456837";
 function T(e) {
   switch (e) {
-    case rXF.BOOLEAN:
+    case VariableResolvedDataType.BOOLEAN:
       return "boolean";
-    case rXF.FLOAT:
+    case VariableResolvedDataType.FLOAT:
       return "float";
-    case rXF.STRING:
+    case VariableResolvedDataType.STRING:
       return "string";
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       return "color";
-    case rXF.MAP:
+    case VariableResolvedDataType.MAP:
       return "map";
-    case rXF.SYMBOL_ID:
+    case VariableResolvedDataType.SYMBOL_ID:
       return "symbol_id";
-    case rXF.FONT_STYLE:
+    case VariableResolvedDataType.FONT_STYLE:
       return "font_style";
-    case rXF.TEXT_DATA:
+    case VariableResolvedDataType.TEXT_DATA:
       return "text_data";
-    case rXF.IMAGE:
+    case VariableResolvedDataType.IMAGE:
       return "image";
-    case rXF.LINK:
+    case VariableResolvedDataType.LINK:
       return "link";
-    case rXF.JS_RUNTIME_ALIAS:
+    case VariableResolvedDataType.JS_RUNTIME_ALIAS:
       return "js_runtime_alias";
-    case rXF.SLOT_CONTENT_ID:
+    case VariableResolvedDataType.SLOT_CONTENT_ID:
       return "slot_content_id";
   }
 }
@@ -86,7 +86,7 @@ function v(e) {
 }
 export function $$A2(e, t, r) {
   try {
-    if (v(t) ? t.type === Z_n.ALIAS : "ALIAS" === t.dataType) {
+    if (v(t) ? t.type === VariableDataType.ALIAS : "ALIAS" === t.dataType) {
       let d = v(t) ? t.value : _$$dI(t.value?.alias);
       let u = v(t) ? T(t.resolvedType) : t.resolvedDataType;
       let p = debugState.getState();
@@ -96,19 +96,19 @@ export function $$A2(e, t, r) {
       let I = atomStoreManager.get(Ev(d));
       let S = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.node_id : null;
       let A = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.sortPosition : null;
-      let x = CWU.getSubscribedVariableInfo(d);
+      let x = VariablesBindings.getSubscribedVariableInfo(d);
       let N = ZR(I ?? O8(x), p.openFile);
       let C = X(N);
       let w = p.mirror.selectedStyleProperties.guid;
-      w && (_ = [dI(w)]);
+      w && (_ = [sessionLocalIDToString(w)]);
       let O = function () {
-        if (getFeatureFlags().aip_flower_garden_design_logging && mHF) return JSON.stringify(Object.fromEntries(mHF.getVariableSetConsumptionForDocument()));
+        if (getFeatureFlags().aip_flower_garden_design_logging && LinterCppBindings) return JSON.stringify(Object.fromEntries(LinterCppBindings.getVariableSetConsumptionForDocument()));
       }();
       let R = _$$y(d);
       for (let t of (_$$v(d), _)) {
         var n;
         let a = function (e) {
-          if (getFeatureFlags().aip_flower_garden_design_logging && mHF) return JSON.stringify(Object.fromEntries(mHF.getVariableSetConsumptionForHighestNodeContainer(e)));
+          if (getFeatureFlags().aip_flower_garden_design_logging && LinterCppBindings) return JSON.stringify(Object.fromEntries(LinterCppBindings.getVariableSetConsumptionForHighestNodeContainer(e)));
         }(t);
         ds("ds_variable_reference_set", f, p, {
           userId: E,
@@ -141,7 +141,7 @@ export function $$A2(e, t, r) {
           forwardToDatadog: !0
         });
       }
-    } else if (v(t) && t.type === Z_n.FONT_STYLE) {
+    } else if (v(t) && t.type === VariableDataType.FONT_STYLE) {
       let r = t.value.asString ?? t.value.asFloat;
       let n = debugState.getState();
       let s = Object.keys(n.mirror.sceneGraphSelection);
@@ -150,11 +150,11 @@ export function $$A2(e, t, r) {
       let u = atomStoreManager.get(Ev(r?.value));
       let p = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.node_id : null;
       let _ = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.sortPosition : null;
-      let f = CWU.getSubscribedVariableInfo(r?.value);
+      let f = VariablesBindings.getSubscribedVariableInfo(r?.value);
       let E = ZR(u ?? O8(f), n.openFile);
       let b = X(E);
       let I = n.mirror.selectedStyleProperties.guid;
-      for (let t of (I && (s = [dI(I)]), s)) ds("ds_variable_reference_set", o, n, {
+      for (let t of (I && (s = [sessionLocalIDToString(I)]), s)) ds("ds_variable_reference_set", o, n, {
         userId: d,
         variable_id: r?.value,
         collection_id: p,
@@ -186,7 +186,7 @@ export function $$x3(e, t) {
     let a = r.openFile?.key;
     let s = r.user && r.user.id;
     let o = atomStoreManager.get(Ev(e));
-    let d = CWU.getSubscribedVariableInfo(e);
+    let d = VariablesBindings.getSubscribedVariableInfo(e);
     let u = ZR(o ?? O8(d), r.openFile);
     let p = X(u);
     for (let i of n) ds("ds_variable_reference_set", a, r, {

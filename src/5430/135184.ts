@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { dx, Nn, MZ } from "../figma_app/399472";
 import { A, jT } from "../figma_app/711113";
-import { my } from "../figma_app/300692";
+import { getPluginMetadata } from "../figma_app/300692";
 import { xQ, I0 } from "../figma_app/45218";
 import { vR } from "../5430/309696";
 export function $$m0({
@@ -12,7 +12,7 @@ export function $$m0({
   containerClassName: t
 }) {
   let r = useDispatch();
-  let m = useSelector(t => my(e, t.publishedPlugins));
+  let m = useSelector(t => getPluginMetadata(e, t.publishedPlugins));
   let _ = useSelector(e => A(e, m));
   return void 0 !== _ && jT(_) ? jsx("div", {
     className: t,

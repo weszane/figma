@@ -1,11 +1,11 @@
-import { dI, Hr, sH } from "../905/871411";
+import { sessionLocalIDToString, defaultSessionLocalID, parseSessionLocalID } from "../905/871411";
 export let $$n1;
 export let $$a2 = new class {
   constructor() {
     this.upgradedInteractions = new Set();
   }
   getGUIDString(e) {
-    return dI(e) ?? dI(Hr);
+    return sessionLocalIDToString(e) ?? sessionLocalIDToString(defaultSessionLocalID);
   }
   recordInteractionUpgraded(e, t) {
     return this.upgradedInteractions.add(`${this.getGUIDString(e)},${this.getGUIDString(t)}`);
@@ -27,7 +27,7 @@ export let $$a2 = new class {
 }();
 class s {
   recordInteractionUpgraded(e, t) {
-    $$a2.recordInteractionUpgraded(sH(e), sH(t));
+    $$a2.recordInteractionUpgraded(parseSessionLocalID(e), parseSessionLocalID(t));
   }
 }
 export function $$o0() {

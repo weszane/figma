@@ -1,11 +1,11 @@
-import { zIx } from "../figma_app/763686";
+import { BuildStatus } from "../figma_app/763686";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   getStatusType(e) {
     switch (e) {
-      case zIx.BUILD:
+      case BuildStatus.BUILD:
         return "build";
-      case zIx.COMPLETED:
+      case BuildStatus.COMPLETED:
         return "completed";
       default:
         return "none";

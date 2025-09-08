@@ -31,7 +31,7 @@ import { Ki } from "../figma_app/328188";
 import { f as _$$f } from "../905/287602";
 import { sf } from "../905/929976";
 import { z as _$$z } from "../905/404751";
-import { to, Lo, ES, Ce } from "../905/156213";
+import { showModalHandler, popModalStack, hideSpecificModal, hideModal } from "../905/156213";
 import { $V } from "../figma_app/990058";
 import { PE } from "../905/15667";
 import { Nu } from "../905/584989";
@@ -45,14 +45,14 @@ import { FAccessLevelType, FProductAccessType, FFileType, FOrganizationLevelType
 import { vtM, tWm, gk5, Y9I, o6H } from "../figma_app/43951";
 import { jB, xd, LU } from "../figma_app/722141";
 import { fm, Y9 } from "../figma_app/680166";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Kq } from "../figma_app/713624";
 import { Ib } from "../905/129884";
 import { e0 as _$$e } from "../905/696396";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { $W } from "../905/144933";
 import { k as _$$k3 } from "../905/93362";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Q as _$$Q2 } from "../figma_app/113686";
 import { r as _$$r2, f as _$$f2 } from "../905/136283";
 import { OJ } from "../905/519092";
@@ -81,14 +81,14 @@ var X = (e => (e.BASE_TAB = "base_tab", e.ALL_TEAM = "all_team", e.STARRED_TEAM 
 var Q = (e => (e.SUGGESTED = "Suggested", e.STARRED = "Starred", e.ALL = "All", e))(Q || {});
 let en = new class {
   constructor() {
-    this.FileMoveSuggestedSchemaValidator = vh();
+    this.FileMoveSuggestedSchemaValidator = createNoOpValidator();
     this.getFileMoveSuggestedResults = e => {
       let {
         orgId
       } = e;
       return this.FileMoveSuggestedSchemaValidator.validate(async ({
         xr: e
-      }) => await e.get("/api/file_move/suggested", td.toAPIParameters({
+      }) => await e.get("/api/file_move/suggested", APIParameterUtils.toAPIParameters({
         org_id: orgId
       })));
     };
@@ -365,7 +365,7 @@ function eC(e) {
     onTeamCreate
   } = e;
   let n = useCallback(() => {
-    t(to({
+    t(showModalHandler({
       type: eT,
       data: {
         onTeamCreate
@@ -381,11 +381,11 @@ function eC(e) {
     }), renderI18nText("file_browser.file_move.new_team")]
   });
 }
-let eT = Ju(function (e) {
+let eT = registerModal(function (e) {
   let t = useDispatch();
   let [i, n] = useState("");
   let r = useCallback(() => {
-    t(Lo());
+    t(popModalStack());
   }, [t]);
   let {
     onTeamCreate
@@ -404,7 +404,7 @@ let eT = Ju(function (e) {
       onSuccessNoRedirect: d,
       ignoreCurrentPlan: !0
     }));
-    t(Lo());
+    t(popModalStack());
   }, [t, i, d]);
   return jsx(OJ, {
     title: jsx("div", {
@@ -470,7 +470,7 @@ let ek = (e, t) => {
       return null;
   }
 };
-let eR = Ju(function (e) {
+let eR = registerModal(function (e) {
   let t = useDispatch();
   let i = _$$s2();
   let n = _$$k2();
@@ -504,7 +504,7 @@ let eR = Ju(function (e) {
   let [eH, eW] = useState(null);
   let [eK, eY] = useState(!1);
   let eq = _$$h.useTrackingContext({
-    trigger: _$$b.FILE_MOVE_MODAL
+    trigger: UpsellModalType.FILE_MOVE_MODAL
   });
   let e$ = useCallback(e => {
     (ew(null), e) ? eW([...(e ? e.filter(e => e.model.is_editable) : []), ...(e ? e.filter(e => !e.model.is_editable) : [])]) : eW(null);
@@ -685,7 +685,7 @@ let eR = Ju(function (e) {
   let tC = xd(tA);
   let tT = ey.editor_type === FFileType.FIGMAKE && requiresUpgrade && !getFeatureFlags().bake_monetization_plan;
   let tk = useCallback(() => {
-    t(ES({
+    t(hideSpecificModal({
       type: eR.type
     }));
   }, [t]);
@@ -1109,10 +1109,10 @@ let eR = Ju(function (e) {
     })
   });
 }, "FileMoveModalV2");
-let eU = Ju(function (e) {
+let eU = registerModal(function (e) {
   let t = useDispatch();
   let i = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let n = Rs(o6H, {
     fileKey: e.fileKey
@@ -1169,7 +1169,7 @@ function eB(e, t, i, a, s, o, l = !1) {
   if (!getFeatureFlags().ps_draft_move_modal || e.team_id || e.parent_org_id || t?.parent_org_id) {
     let n = e?.parent_org_id ?? t?.parent_org_id ?? void 0;
     let r = t ? null : e;
-    i(to({
+    i(showModalHandler({
       type: eR,
       data: {
         files: r ? [r] : [],
@@ -1181,13 +1181,13 @@ function eB(e, t, i, a, s, o, l = !1) {
         restoreFiles: l
       }
     }));
-  } else i(to({
+  } else i(showModalHandler({
     type: _$$K2,
     data: {
       reposToMove: t ? [t] : [],
       draftsToMove: e && !t ? [fileEntityDataMapper.toLiveGraph(e)] : [],
       onMoveSuccess: a?.handlesVisualBell ? a.callback : void 0,
-      onClose: () => i(Ce()),
+      onClose: () => i(hideModal()),
       setSynchronousFileTransferInProgress: lQ
     }
   }));
@@ -1205,7 +1205,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
     canMoveWithReasons
   } = a;
   if (canMoveWithReasons && !canMoveWithReasons.result && (canMoveWithReasons.publicDenyReasons.includes(FPermissionDenialReason.FILE_DENY_CONNECTED_GUEST_CAN_MOVE) || canMoveWithReasons.publicDenyReasons.includes(FPermissionDenialReason.FILE_REPO_DENY_CONNECTED_GUEST_CAN_MOVE))) {
-    i(to({
+    i(showModalHandler({
       type: _$$v(),
       data: {
         fileKey: e.key
@@ -1218,7 +1218,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
     var m;
     p = e.name;
     m = e.key;
-    i(to({
+    i(showModalHandler({
       type: eU,
       data: {
         fileName: p,
@@ -1304,7 +1304,7 @@ export function $$eG1(e, t, i, n, r = !1) {
       orgId: ""
     };
   }(e, t);
-  canMove && i(to({
+  canMove && i(showModalHandler({
     type: eR,
     data: {
       files: e,

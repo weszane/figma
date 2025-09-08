@@ -3,7 +3,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { dk } from "../figma_app/789";
 import { F } from "../905/224";
 import { t as _$$t2 } from "../figma_app/579169";
@@ -29,14 +29,14 @@ export function $$y1(e) {
     origin: "open_session_video_upload",
     redirectUrl: Ay.location.pathname,
     signedUpFromOpenSession: !0
-  })), e.dispatch(to({
+  })), e.dispatch(showModalHandler({
     type: _$$x,
     data: {
       headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
     }
   }))) : t || i ? (() => {
     let t = $$b0(y, v, h);
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: DV,
       data: {
         team: E,
@@ -49,7 +49,7 @@ export function $$y1(e) {
     trackEventAnalytics("prototype.payment_upsell_modal_shown", {
       paywallFeature: t
     });
-  })() : e.dispatch(to({
+  })() : e.dispatch(showModalHandler({
     type: Y,
     data: {
       titleText: getI18nString("upsell.move_file_videos.move_file_to_upload_videos_title"),

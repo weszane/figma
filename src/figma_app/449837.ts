@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, createContext, useMemo, useState, useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { assertNotNullish } from "../figma_app/95419";
 import { k } from "../905/443820";
 import { K } from "../905/443068";
@@ -46,7 +46,7 @@ function L(e, t) {
   return r;
 }
 function P(e, t) {
-  return qE(e, t[0] || 10, t[t.length - 1] || 400);
+  return clamp(e, t[0] || 10, t[t.length - 1] || 400);
 }
 function D(e, t, r) {
   return e ? P(t, r) : Math.min(t, 100);
@@ -143,8 +143,8 @@ export function $$k3(e) {
     m(i => ({
       ...i,
       position: {
-        x: qE(i.position.x, xmin, xmax),
-        y: qE(i.position.y, ymin, ymax)
+        x: clamp(i.position.x, xmin, xmax),
+        y: clamp(i.position.y, ymin, ymax)
       }
     }));
   }, [zoomPercentage, M]);
@@ -185,8 +185,8 @@ export function $$k3(e) {
             return {
               zoomPercentage: i,
               position: {
-                x: qE(r.x + l, xmin, xmax),
-                y: qE(r.y + d, ymin, ymax)
+                x: clamp(r.x + l, xmin, xmax),
+                y: clamp(r.y + d, ymin, ymax)
               }
             };
           }
@@ -211,8 +211,8 @@ export function $$k3(e) {
       return {
         zoomPercentage: r,
         position: {
-          x: qE(t.x - e.deltaX, xmin, xmax),
-          y: qE(t.y - e.deltaY, ymin, ymax)
+          x: clamp(t.x - e.deltaX, xmin, xmax),
+          y: clamp(t.y - e.deltaY, ymin, ymax)
         }
       };
     });
@@ -271,8 +271,8 @@ export function $$k3(e) {
               ymax
             } = M(zoomPercentage);
             b({
-              x: qE(e.clientX - A.x, xmin, xmax),
-              y: qE(e.clientY - A.y, ymin, ymax)
+              x: clamp(e.clientX - A.x, xmin, xmax),
+              y: clamp(e.clientY - A.y, ymin, ymax)
             });
           }
         }

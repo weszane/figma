@@ -9,8 +9,8 @@ import { t as _$$t } from "../905/398894";
 import { h as _$$h } from "../905/104000";
 import { a as _$$a } from "../905/361302";
 import { J as _$$J } from "../905/341359";
-import { plo, Ez5, yTM, glU, NLJ } from "../figma_app/763686";
-import { nc } from "../905/189185";
+import { DistributionType, AppStateTsApi, DrawingElementType, Fullscreen, DesignGraphElements } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
@@ -26,11 +26,11 @@ import { XE } from "../figma_app/91703";
 import { c2 } from "../905/382883";
 import { W3 } from "../905/232641";
 import { vx } from "../figma_app/175258";
-import { Y5 } from "../figma_app/455680";
-import { gl, oV, hS } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { ax } from "../figma_app/722362";
-import { ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { $j, M4 } from "../figma_app/178475";
@@ -44,7 +44,7 @@ import { l6, c$ as _$$c$, sK } from "../905/794875";
 import { cS } from "../figma_app/334459";
 import { v as _$$v } from "../905/439487";
 import { o as _$$o2 } from "../905/89370";
-import { sH, Hr } from "../905/871411";
+import { parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import { i as _$$i } from "../905/382332";
 import { Bu, Gx, T6, UH } from "../figma_app/156285";
 import { E as _$$E } from "../905/658074";
@@ -378,26 +378,26 @@ function eS(e) {
   } = e;
   let i = Bu();
   let a = useCallback((e, i) => {
-    let n = sH(e.guid);
+    let n = parseSessionLocalID(e.guid);
     if (!n) return;
     let r = {
       strokeBrushGuid: n
     };
-    e.type === plo.SCATTER && (r.scatterStrokeSettings = e.settings);
+    e.type === DistributionType.SCATTER && (r.scatterStrokeSettings = e.settings);
     onChange(r, i);
   }, [onChange]);
   return jsxs(Fragment, {
     children: [jsx(_$$i, {
       brushList: i,
       onChange: a,
-      value: e.strokeBrushGuid ?? Hr,
+      value: e.strokeBrushGuid ?? defaultSessionLocalID,
       brushInputClassName: "advanced_stroke--newBrushButton--sca9V",
       recordingKey: Pt(e.recordingKey, "brushDropdownTrigger"),
       positioningProps: e.positioningProps
-    }), e.brushType === plo.STRETCH && jsx(ew, {
+    }), e.brushType === DistributionType.STRETCH && jsx(ew, {
       defaultStyleAtom: e.defaultStyleAtom,
       recordingKey: Pt(e.recordingKey, "stretchBrushSettings")
-    }), e.brushType === plo.SCATTER && jsx(ex, {
+    }), e.brushType === DistributionType.SCATTER && jsx(ex, {
       defaultStyleAtom: e.defaultStyleAtom,
       recordingKey: Pt(e.recordingKey, "scatterBrushSettings")
     })]
@@ -409,7 +409,7 @@ function ew(e) {
     setOrientation
   } = hl(e.defaultStyleAtom);
   let r = jsxs(bL, {
-    value: gl(orientation) ? void 0 : orientation,
+    value: isInvalidValue(orientation) ? void 0 : orientation,
     onChange: setOrientation,
     legend: jsx(_$$q, {
       children: getI18nString("fullscreen.properties_panel.direction")
@@ -452,7 +452,7 @@ function eN(e) {
     strokePanelTerminalPointCount
   } = e;
   let s = Um();
-  let o = ut(Ez5?.propertiesPanelState().isVertexSelectionAndHasEndpoints, !1);
+  let o = getObservableValue(AppStateTsApi?.propertiesPanelState().isVertexSelectionAndHasEndpoints, !1);
   return jsxs(Fragment, {
     children: [jsx(eI, {
       config: _$$i2("frequency", e.defaultStyleAtom),
@@ -508,7 +508,7 @@ class eU {
 }
 function eB(e) {
   if (e) {
-    if (gl(e)) return oV;
+    if (isInvalidValue(e)) return MIXED_MARKER;
     if (2 === e.length) return e[0];
   }
 }
@@ -532,12 +532,12 @@ function eV(e) {
   let k = eB(dashPattern);
   let R = function (e) {
     if (e) {
-      if (gl(e)) return oV;
+      if (isInvalidValue(e)) return MIXED_MARKER;
       if (2 === e.length) return e[1];
     }
   }(dashPattern);
   let P = () => {
-    if (!dashPattern || gl(dashPattern) || 2 !== dashPattern.length) return;
+    if (!dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length) return;
     x(!0);
     let t = dashPattern[0];
     e.onChange({
@@ -563,12 +563,12 @@ function eV(e) {
     }
   }, [dashPattern, b, j, F]);
   let z = Hd(e.dashCap);
-  let W = strokePanelMode === yTM.VERTEX || strokePanelMode === yTM.ENDPOINT;
+  let W = strokePanelMode === DrawingElementType.VERTEX || strokePanelMode === DrawingElementType.ENDPOINT;
   let K = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
   let Z = vx(K, "CONNECTOR");
   let X = S ?? b;
   let Q = jsxs(bL, {
-    value: hS(connectorLineStyle) ? connectorLineStyle : void 0,
+    value: isValidValue(connectorLineStyle) ? connectorLineStyle : void 0,
     onChange: t => {
       e.onChange({
         connectorLineStyle: t
@@ -670,7 +670,7 @@ function eV(e) {
     min: 0,
     onValueChange: t => {
       let i;
-      if (D.current = "NONE", !dashPattern || gl(dashPattern) || 2 !== dashPattern.length) i = [t, t];else {
+      if (D.current = "NONE", !dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length) i = [t, t];else {
         let e = dashPattern[0];
         let n = dashPattern[1];
         i = E && e === n ? [t, t] : [t, n];
@@ -699,16 +699,16 @@ function eV(e) {
       let i;
       D.current = "NONE";
       x(!1);
-      i = !dashPattern || gl(dashPattern) || 2 !== dashPattern.length ? [t, t] : [dashPattern[0], t];
+      i = !dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length ? [t, t] : [dashPattern[0], t];
       e.onChange({
         dashPattern: i
       });
     },
-    placeholder: void 0 !== R && hS(R) && E && k === R ? String(parseFloat(R.toFixed(2))) : void 0,
+    placeholder: void 0 !== R && isValidValue(R) && E && k === R ? String(parseFloat(R.toFixed(2))) : void 0,
     recordingKey: Pt(e, "gap"),
     smallNudgeAmount: 1,
     tooltipForScreenReadersOnly: !0,
-    value: void 0 !== R && hS(R) && E && k === R ? void 0 : R
+    value: void 0 !== R && isValidValue(R) && E && k === R ? void 0 : R
   });
   let ei = jsx(nA, {
     forwardedRef: F,
@@ -748,7 +748,7 @@ function eV(e) {
       label: renderI18nText("fullscreen.properties_panel.stroke_settings.stroke_style"),
       appendedClassName: eD,
       input: J
-    }), ("SIMPLE_DASH" === X || X === oV) && jsxs(Fragment, {
+    }), ("SIMPLE_DASH" === X || X === MIXED_MARKER) && jsxs(Fragment, {
       children: [jsx(cS, {
         label: renderI18nText("fullscreen.properties_panel.stroke_settings.dash"),
         appendedClassName: eD,
@@ -762,7 +762,7 @@ function eV(e) {
       label: renderI18nText("fullscreen.properties_panel.stroke_settings.dashes"),
       appendedClassName: eD,
       input: ei
-    }), (strokePanelMode === yTM.VECTOR || strokePanelMode === yTM.LINE) && ("SIMPLE_DASH" === X || "CUSTOM_DASH" === X) && void 0 !== z && jsx(cS, {
+    }), (strokePanelMode === DrawingElementType.VECTOR || strokePanelMode === DrawingElementType.LINE) && ("SIMPLE_DASH" === X || "CUSTOM_DASH" === X) && void 0 !== z && jsx(cS, {
       label: renderI18nText("fullscreen.properties_panel.stroke_settings.dash_cap"),
       appendedClassName: eD,
       input: en
@@ -824,7 +824,7 @@ export function $$ez0(e) {
     Sprig
   } = useSprigWithSampling();
   let c = useRef(null);
-  let u = J2(Ez5.propertiesPanelState().isVertexSelectionAndHasEndpoints);
+  let u = getObservableOrFallback(AppStateTsApi.propertiesPanelState().isVertexSelectionAndHasEndpoints);
   let p = Tv();
   let {
     strokePanelMode,
@@ -843,8 +843,8 @@ export function $$ez0(e) {
   } = rM(_$$u);
   let [W] = lJ("variableWidthPoints");
   let q = useCallback(e => {
-    switch (("Dynamic" === e || "Brush" === e) && p && nc.user("advanced-stroke-set-seed", () => {
-      for (let e of p) glU?.initializeStrokeSeed(e);
+    switch (("Dynamic" === e || "Brush" === e) && p && scopeAwareFunction.user("advanced-stroke-set-seed", () => {
+      for (let e of p) Fullscreen?.initializeStrokeSeed(e);
     })(), getFeatureFlags().ce_il_sprig_tracking && ("Dynamic" === e || "Brush" === e) && Sprig("setAttribute", "is_assets_visual_style_user", !0), e) {
       case "Basic":
         onChange({
@@ -862,7 +862,7 @@ export function $$ez0(e) {
         UH(null, p || []);
         break;
       case "Dynamic":
-        let t = W && hS(W) && W.length > 0;
+        let t = W && isValidValue(W) && W.length > 0;
         if (onChange({
           strokeBrushGuid: lN.strokeBrushGuid,
           dynamicStrokeSettings: Y4,
@@ -871,16 +871,16 @@ export function $$ez0(e) {
           variableWidthPoints: t ? [] : W
         }), t) {
           let e = getI18nString("visual_bell.dynamic_stroke_vector_network_warning");
-          Y5.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
+          fullscreenValue.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
         }
-        activeToolId === NLJ.VECTOR_VAR_WIDTH_POINT && activateTool(NLJ.SELECT);
+        activeToolId === DesignGraphElements.VECTOR_VAR_WIDTH_POINT && activateTool(DesignGraphElements.SELECT);
     }
   }, [activeToolId, activateTool, O, onChange, p, W, Sprig]);
   if (!e.pickerShown) return null;
   let $ = new Point(e.pickerShown.initialX, e.pickerShown.initialY);
-  let Z = strokePanelMode === yTM.ENDPOINT || strokePanelMode === yTM.VECTOR && strokePanelTerminalPointCount > 0 || u;
-  let X = strokePanelMode !== yTM.PENCIL;
-  let Q = strokePanelMode === yTM.VECTOR && 0 === strokePanelTerminalPointCount;
+  let Z = strokePanelMode === DrawingElementType.ENDPOINT || strokePanelMode === DrawingElementType.VECTOR && strokePanelTerminalPointCount > 0 || u;
+  let X = strokePanelMode !== DrawingElementType.PENCIL;
+  let Q = strokePanelMode === DrawingElementType.VECTOR && 0 === strokePanelTerminalPointCount;
   let J = Q && numSelectedByType && 1 === Object.keys(numSelectedByType).length && numSelectedByType.ELLIPSE && 1 === arcRadius && 0 !== arcSweep;
   let et = Q && !J && !u;
   let ei = x4(e.strokePanelMode, e.terminalCap, e.strokeCap, e.dashPattern);
@@ -1004,7 +1004,7 @@ export function $$ez0(e) {
     },
     onClose: () => {
       t(XE());
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     },
     recordingKey: er,
     width: eF,

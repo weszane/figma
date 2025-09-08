@@ -8,11 +8,11 @@ import { bL } from "../905/38914";
 import { M, getFeatureFlags } from "../905/601108";
 import { Ay } from "../905/612521";
 import { F } from "../905/302958";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { section, sectionTitle, description, jsonInput, error, complementNote, currentState, flagList, flagItem, history, historyHeader, historyItem, historySubset, historyResult, culpritFlag } from "../905/912407";
 let m = "figma_ff_bisector_state";
 let $$g1 = "FeatureFlagBisectorModal";
-let $$f0 = Ju(function (e) {
+let $$f0 = registerModal(function (e) {
   let t = hS(e);
   let r = useDispatch();
   let [_, g] = useState("");

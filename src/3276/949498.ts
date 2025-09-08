@@ -10,7 +10,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { _I } from "../figma_app/473493";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
 import { RC } from "../3276/926297";
@@ -258,7 +258,7 @@ function A({
       },
       trackingEventName: "Edit Request Tooltip - Open Share Modal",
       onClick: () => {
-        s && n(to({
+        s && n(showModalHandler({
           type: g_,
           data: {
             fileKey: s,

@@ -1,7 +1,7 @@
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 export function $$o1(e) {
   if (e.isBackground) return;
   let t = function (e) {
@@ -14,7 +14,7 @@ export function $$o1(e) {
       plugin: t
     });
   }(e);
-  Y5.dispatch(F.enqueue({
+  fullscreenValue.dispatch(F.enqueue({
     type: "plugins-status",
     message: t,
     icon: e.isBackground ? zX.NONE : e.shouldShowCheck ? zX.CHECK : zX.SPINNER,
@@ -30,7 +30,7 @@ export function $$o1(e) {
   }));
 }
 export function $$l2(e) {
-  Y5 && Y5.isReady() && e.shouldShowVisualBell && Y5.dispatch(F.dequeue({
+  fullscreenValue && fullscreenValue.isReady() && e.shouldShowVisualBell && fullscreenValue.dispatch(F.dequeue({
     matchType: "plugins-status"
   }));
 }

@@ -6,14 +6,14 @@ import { BV, Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { jD } from "../905/765855";
 import { O1, KD } from "../figma_app/317394";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { wr } from "../figma_app/741237";
 import { $$, Z0 } from "../figma_app/62612";
 import { L as _$$L } from "../figma_app/608876";
 import { T } from "../905/645480";
 import { M, Y } from "../figma_app/822893";
 import { Nq, zR } from "../figma_app/817077";
-import { J } from "../905/633914";
+import { useSyncedRef } from "../905/633914";
 import { nS } from "../figma_app/274383";
 export function $$b0(e, t) {
   let i = useStore();
@@ -22,7 +22,7 @@ export function $$b0(e, t) {
   let I = useRef(!1);
   let E = useRef(void 0);
   let x = useRef([]);
-  let [S, w, C] = J(null);
+  let [S, w, C] = useSyncedRef(null);
   let {
     state,
     dispatch
@@ -86,14 +86,14 @@ export function $$b0(e, t) {
       dragPosition: a,
       isDraggingOverCanvas: s
     };
-    I.current && r.dragPosition && E.current && E.current.distanceTo(a) > Nq && (n && o && (wr(), Y5.commit(), b(jD())), e.onDragStart?.(), I.current = !1);
+    I.current && r.dragPosition && E.current && E.current.distanceTo(a) > Nq && (n && o && (wr(), fullscreenValue.commit(), b(jD())), e.onDragStart?.(), I.current = !1);
     C(e => ({
       ...e,
       ...c
     }));
   }, {
     recordMetadata: e => {
-      let t = Y5.getViewportInfo();
+      let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
       let n = new Point(e.clientX, e.clientY).subtract(i);
       let r = $$(t, n);
@@ -104,7 +104,7 @@ export function $$b0(e, t) {
       };
     },
     playbackMetadata: e => {
-      let t = Y5.getViewportInfo();
+      let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
       let n = Z0(t, e.canvasPosition);
       let r = Point.add(n, i);
@@ -141,7 +141,7 @@ export function $$b0(e, t) {
     document.removeEventListener("pointermove", O);
   }, {
     recordMetadata: e => {
-      let t = Y5.getViewportInfo();
+      let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
       let n = new Point(e.clientX, e.clientY).subtract(i);
       let r = $$(t, n);
@@ -152,7 +152,7 @@ export function $$b0(e, t) {
       };
     },
     playbackMetadata: e => {
-      let t = Y5.getViewportInfo();
+      let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
       let n = Z0(t, e.canvasPosition);
       let r = Point.add(n, i);

@@ -26,9 +26,9 @@ import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { dG } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { jr } from "../figma_app/896988";
-import { hS, oV, E7, SX } from "../905/216495";
+import { isValidValue, MIXED_MARKER, normalizeValue, isAutoMarker } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { D as _$$D } from "../905/225412";
@@ -57,7 +57,7 @@ function Z(e) {
 }
 function X(e) {
   let t;
-  t = e.dropdownOverride ? e.dropdownOverride : hS(e.property) ? e.formatter.format(e.property) : e.customMixedText || $();
+  t = e.dropdownOverride ? e.dropdownOverride : isValidValue(e.property) ? e.formatter.format(e.property) : e.customMixedText || $();
   let [i, a] = useState(!1);
   let s = h()({
     [hF]: !e.isDisabled,
@@ -196,7 +196,7 @@ class et extends o6 {
     this.dropdownShown = () => this.isDropdownShown(this.props);
     this.formattedSelectedValue = () => {
       let e = this.props.focusedOption || this.props.property;
-      return hS(e) ? this.props.formatter.format(e) : this.props.customMixedText || $();
+      return isValidValue(e) ? this.props.formatter.format(e) : this.props.customMixedText || $();
     };
     this.childPositionByIndex = {};
     this.optionIndexByFormattedValue = {};
@@ -209,7 +209,7 @@ class et extends o6 {
       this.childPositionByIndex = Object.create(null);
       this.optionIndexByFormattedValue = Object.create(null);
       this.optionValueByIndex = Object.create(null);
-      (e.property === oV || this.state.previousPreviewValue === oV) && (t += 24, 0 !== Children.count(this.props.children) && (t += 17));
+      (e.property === MIXED_MARKER || this.state.previousPreviewValue === MIXED_MARKER) && (t += 24, 0 !== Children.count(this.props.children) && (t += 17));
       let i = 0;
       Children.forEach(e.children, n => {
         if (null == n) return null;
@@ -283,7 +283,7 @@ class et extends o6 {
       let i = -t;
       let n = this.dropdownContentHeight;
       let a = () => i + n;
-      let s = E7(this.props.property);
+      let s = normalizeValue(this.props.property);
       let o = null !== s ? this.props.formatter.format(s) : this.props.customMixedText || $();
       let l = () => this.containerRect.top + a();
       let d = null != this.props.minTop ? this.props.minTop : this.getDropdownMarginTop();
@@ -350,7 +350,7 @@ class et extends o6 {
       let m = "function" == typeof this.props.dropdownAlignment ? this.props.dropdownAlignment(this.containerRect.left) : "left" === this.props.dropdownAlignment ? this.containerRect.left : void 0;
       this.props.targetDomNode && (p -= this.props.targetDomNode.getBoundingClientRect().top, m && (m -= this.props.targetDomNode.getBoundingClientRect().left));
       this.setState({
-        focusedOptionValue: E7(this.props.property),
+        focusedOptionValue: normalizeValue(this.props.property),
         dropdownScreenTop: p,
         dropdownScreenLeft: m,
         dropdownScreenRight: "right" === this.props.dropdownAlignment ? window.innerWidth - this.containerRect.right : void 0,
@@ -373,7 +373,7 @@ class et extends o6 {
       this.props.keepDropdownOpenOnSubmit || this.hideDropdown(!0);
     };
     this.clearPreview = () => {
-      void 0 !== this.state.previousPreviewValue && (Y5.triggerActionInUserEditScope("undo"), this.setState({
+      void 0 !== this.state.previousPreviewValue && (fullscreenValue.triggerActionInUserEditScope("undo"), this.setState({
         previousPreviewValue: void 0
       }), this.props.onPreview?.(void 0));
     };
@@ -488,7 +488,7 @@ class et extends o6 {
       }
     });
     this.onFocus = Ht(this, "focus", () => {
-      let e = E7(this.props.property);
+      let e = normalizeValue(this.props.property);
       null != e && this.props.onOptionFocus?.(e, "input");
     });
     this.onBlur = Ht(this, "blur", () => {
@@ -542,9 +542,9 @@ class et extends o6 {
       }
       let c = this.keyRecycler.getKeyForId(e.key);
       let u = this.state.previousPreviewValue ?? this.props.property;
-      let p = n(E7(u), e.props.value);
+      let p = n(normalizeValue(u), e.props.value);
       this.props.multipleSelections?.forEach(t => {
-        !p && n(E7(t), e.props.value || null) && (p = !0);
+        !p && n(normalizeValue(t), e.props.value || null) && (p = !0);
       });
       let m = this.props.formatter.formatExtended?.(e.props.value);
       let h = m?.text ?? this.props.formatter.format(e.props.value);
@@ -552,7 +552,7 @@ class et extends o6 {
         svg,
         fallbackSvg
       } = m || {};
-      let _ = SX(e.props.value) ? "auto" : e.props.value;
+      let _ = isAutoMarker(e.props.value) ? "auto" : e.props.value;
       return cloneElement(e, {
         key: c,
         selected: p,
@@ -571,7 +571,7 @@ class et extends o6 {
       });
     };
     this.state = {
-      focusedOptionValue: E7(this.props.property),
+      focusedOptionValue: normalizeValue(this.props.property),
       showTopScrollIndicator: !1,
       showBottomScrollIndicator: !1,
       windowHeight: window.innerHeight,
@@ -606,7 +606,7 @@ class et extends o6 {
         currentDropdownAccepted: !1
       }) : this.props.onCancel?.(), this.props.onOptionFocus) {
         if (document.activeElement !== this.hiddenInput) this.props.onOptionFocus(void 0, "input");else {
-          let e = E7(this.props.property);
+          let e = normalizeValue(this.props.property);
           null != e && this.props.onOptionFocus(e, "input");
         }
       }
@@ -749,7 +749,7 @@ class et extends o6 {
         t && e++;
         return i;
       }) || [];
-      (this.props.property === oV || this.state.previousPreviewValue === oV) && (0 !== Children.count(this.props.children) && s.unshift(jsx($$ea3, {
+      (this.props.property === MIXED_MARKER || this.state.previousPreviewValue === MIXED_MARKER) && (0 !== Children.count(this.props.children) && s.unshift(jsx($$ea3, {
         style: {
           top: 32
         }

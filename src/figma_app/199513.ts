@@ -2,7 +2,7 @@ import { unstable_batchedUpdates } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { z as _$$z } from "../905/239603";
 import { WB } from "../905/761735";
 import { Jl } from "../figma_app/566371";
@@ -12,11 +12,11 @@ import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { sf } from "../905/34809";
 import { p as _$$p } from "../905/282607";
-import { nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { sf as _$$sf } from "../905/929976";
 import { uo } from "../figma_app/78808";
 import { yJ, bE, Kc } from "../figma_app/598926";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { nX } from "../905/466026";
 import { uo as _$$uo } from "../905/98702";
 import { xr } from "../figma_app/314264";
@@ -27,7 +27,7 @@ import { FFolderType } from "../figma_app/191312";
 import { m0h, hYX } from "../figma_app/43951";
 import { M4, IT } from "../905/713695";
 import { rR, sK } from "../figma_app/598018";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { W$ } from "../905/970170";
 import { Y7 } from "../905/438864";
 import { vL } from "../905/652992";
@@ -42,7 +42,7 @@ import { $ as _$$$ } from "../905/834575";
 import { z as _$$z3 } from "../905/40865";
 import { DV } from "../905/739964";
 import { o as _$$o } from "../905/29370";
-let Y = nF((e, {
+let Y = createOptimistThunk((e, {
   folderId: t,
   folderData: r
 }) => {
@@ -245,7 +245,7 @@ let $$J0 = M4.PaginatedQuery({
   schema: q,
   syncObjects: !0
 });
-let $$Z10 = nF(async (e, {
+let $$Z10 = createOptimistThunk(async (e, {
   folderId: t,
   loadedFolders: r
 }) => {
@@ -430,70 +430,70 @@ let $$ei12 = M4.Mutation(({
   }, a);
   return a;
 });
-let $$ea9 = MM("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
+let $$ea9 = createOptimistAction("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
   optimistId: r
 }) => {
   let n = XHR.put(`/api/folders/${t.folderId}`, {
     is_invite_only: t.isInviteOnly,
     is_view_only: t.isViewOnly
   }).then(() => {
-    e.dispatch(_$$c(r));
+    e.dispatch(createOptimistCommitAction(r));
   }).catch(() => {
-    e.dispatch(_$$r(r));
+    e.dispatch(createOptimistRevertAction(r));
   });
   Q({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_access")
   });
 });
-let $$es4 = MM("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, t, {
+let $$es4 = createOptimistAction("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, t, {
   optimistId: r
 }) => {
   let n = _$$W.updateFolderSharingAudienceControls({
     folderId: t.folder.id,
     sharingAudienceControl: t.sharingAudienceControl
   }).then(() => {
-    e.dispatch(_$$c(r));
+    e.dispatch(createOptimistCommitAction(r));
     xr("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
       share_settings_type: "sharing_audience",
       oldSharingAudienceControl: t.folder.sharing_audience_control,
       newSharingAudienceControl: t.sharingAudienceControl
     });
   }).catch(() => {
-    e.dispatch(_$$r(r));
+    e.dispatch(createOptimistRevertAction(r));
   });
   Q({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_sharing_audience_control")
   });
 });
-let $$eo13 = MM("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
+let $$eo13 = createOptimistAction("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
   optimistId: r
 }) => {
   let n = _$$W.updatedFolderTeamAccess({
     folderId: t.folder.id,
     teamAccess: t.teamAccess
   }).then(() => {
-    e.dispatch(_$$c(r));
+    e.dispatch(createOptimistCommitAction(r));
     xr("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
       share_settings_type: "team_access",
       oldTeamAccess: t.folder.team_access,
       newTeamAccess: t.teamAccess
     });
   }).catch(() => {
-    e.dispatch(_$$r(r));
+    e.dispatch(createOptimistRevertAction(r));
   });
   Q({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_team_access")
   });
 });
-let $$el3 = nF(async (e, t) => {
+let $$el3 = createOptimistThunk(async (e, t) => {
   let r = t.folder;
   let n = t.team;
   let i = Ws(n);
   if (r.inviteOnlyAt || r.viewOnlyAt) {
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: _$$z3,
       data: {
         folder: r
@@ -507,7 +507,7 @@ let $$el3 = nF(async (e, t) => {
       folderId: r.id
     });
   } catch (t) {
-    t.data?.failure_info?.code === "ERR_FILE_LIMIT" || t.data?.failure_info?.code === "ERR_PROJECT_LIMIT" ? e.dispatch(to({
+    t.data?.failure_info?.code === "ERR_FILE_LIMIT" || t.data?.failure_info?.code === "ERR_PROJECT_LIMIT" ? e.dispatch(showModalHandler({
       type: DV,
       data: {
         team: i,
@@ -516,13 +516,13 @@ let $$el3 = nF(async (e, t) => {
         currentPlan: _$$F2.Plan.STARTER,
         upsellPlan: _$$F2.Plan.PRO,
         editorType: null,
-        upsellSource: _$$b.FOLDER_MOVE_MODAL
+        upsellSource: UpsellModalType.FOLDER_MOVE_MODAL
       }
     })) : e.dispatch(_$$s.error(t.data?.message));
     return;
   }
   if (r.teamId && i) {
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: _$$o,
       data: {
         folder: r,
@@ -587,7 +587,7 @@ let ed = M4.Mutation((e, {
   }));
   return s;
 });
-let $$ec6 = nF((e, t) => {
+let $$ec6 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.where;
   let i = t.team.id;
@@ -599,14 +599,14 @@ let $$ec6 = nF((e, t) => {
     }) ? (e.dispatch(sf({
       where: n,
       teamId: i
-    })), e.dispatch(to({
+    })), e.dispatch(showModalHandler({
       type: _$$p(),
       data: {
         teamId: s.id,
         modalShown: r.modalShown,
         onFolderCreated: t.onFolderCreated
       }
-    }))) : e.dispatch(to({
+    }))) : e.dispatch(showModalHandler({
       type: DV,
       data: {
         team: s,

@@ -1,15 +1,15 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { n as _$$n } from "../905/240327";
 import { Ts } from "../905/929976";
 import { nN } from "../figma_app/91703";
 import { X } from "../905/784599";
 function l(e) {
   switch (e.source) {
-    case jXp.SHARED:
+    case FontSourceType.SHARED:
       return e.teamId ? 3 : 4;
-    case jXp.LOCAL:
+    case FontSourceType.LOCAL:
       return 2;
-    case jXp.GOOGLE:
+    case FontSourceType.GOOGLE:
       return 1;
     default:
       return 0;
@@ -41,7 +41,7 @@ export function $$u3(e) {
   }
   return t;
 }
-let p = (e, t) => e.source === t.source && (e.source !== jXp.SHARED || !!e.teamId == !!t.teamId && !!e.orgId == !!t.orgId);
+let p = (e, t) => e.source === t.source && (e.source !== FontSourceType.SHARED || !!e.teamId == !!t.teamId && !!e.orgId == !!t.orgId);
 function m(e) {
   return {
     weight: e.weight,

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { analyticsEventManager } from "../905/449184";
 import { HB, VA, ZS } from "../3973/538504";
 import { ks } from "../figma_app/637027";
@@ -12,14 +12,14 @@ import { yJ } from "../figma_app/24841";
 import { Cu } from "../figma_app/314264";
 import { Um } from "../905/848862";
 import { e0 } from "../905/696396";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { l6, c$ } from "../905/794875";
 import { Lt } from "../figma_app/639088";
-export let $$b0 = Ju(function (e) {
+export let $$b0 = registerModal(function (e) {
   return jsx(I, {
     ...e
   });
-}, "CHANGE_JOB_TITLE_MODAL", ZU.YES);
+}, "CHANGE_JOB_TITLE_MODAL", ModalSupportsBackground.YES);
 function v(e) {
   return "other" === e || "something_else" === e;
 }
@@ -60,7 +60,7 @@ function I(e) {
       prevJobTitle: E
     });
   };
-  let N = X();
+  let N = setupAutofocusHandler();
   return jsxs(_$$R, {
     ...e,
     title: getI18nString("settings.account_settings.change_job_title_modal_title"),

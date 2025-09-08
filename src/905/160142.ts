@@ -1,11 +1,11 @@
 import { n as _$$n } from "../905/347702";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { X3B } from "../figma_app/763686";
+import { PrototypingTsApi } from "../figma_app/763686";
 import { FJ } from "../905/508367";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportNullOrUndefined } from "../905/11";
 import { XHR } from "../905/910117";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Q9 } from "../905/70982";
 import { z4 } from "../905/37051";
@@ -15,7 +15,7 @@ import { _P, Zh, qb, Rv } from "../figma_app/2590";
 import { vp } from "../figma_app/831696";
 import { s6 } from "../905/91038";
 import { Qn } from "../figma_app/415217";
-let $$y0 = _$$n(nF(async (e, t, {
+let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   liveStore: i
 }) => {
   let {
@@ -48,7 +48,7 @@ let $$y0 = _$$n(nF(async (e, t, {
       devicePreset: N
     }
   }));
-  let P = X3B.currentDeviceType();
+  let P = PrototypingTsApi.currentDeviceType();
   let O = {
     viewportScalingMode: scalingInfo?.viewportScalingMode ?? qb(P),
     contentScalingMode: scalingInfo?.contentScalingMode ?? Rv(P)

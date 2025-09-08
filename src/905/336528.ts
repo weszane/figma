@@ -5,7 +5,7 @@ import { q } from "../905/932270";
 import { f as _$$f } from "../905/335032";
 import { r as _$$r } from "../905/11924";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { L } from "../905/158054";
 export function $$p0({
   label: e,
@@ -18,8 +18,8 @@ export function $$p0({
   labelInactive: f,
   ..._
 }) {
-  let A = gl(t) ? "MIXED" : t ? "ON" : "OFF";
-  let y = gl(t) ? void 0 : t ? "ON" : "OFF";
+  let A = isInvalidValue(t) ? "MIXED" : t ? "ON" : "OFF";
+  let y = isInvalidValue(t) ? void 0 : t ? "ON" : "OFF";
   let b = useCallback(e => {
     m?.("ON" === A, "mouseenter" === e.type ? "ENTER" : "LEAVE");
   }, [A, m]);

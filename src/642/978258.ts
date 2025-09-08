@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { QOV, Ez5, cfv, glU } from "../figma_app/763686";
+import { UserActionState, AppStateTsApi, Positioning, Fullscreen } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
@@ -10,7 +10,7 @@ import { FQ } from "../9410/571209";
 import { lg } from "../figma_app/976749";
 import { kl } from "../905/275640";
 import { _X, Yb, $$, ZT } from "../figma_app/62612";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { f as _$$f } from "../905/299537";
 import { Al, tJ, T1, DH, Dl, Yh, lM } from "../figma_app/90441";
 import { LP, JI, C_, v2, iv } from "../9410/43374";
@@ -37,7 +37,7 @@ export function $$_0({
     mirror: {
       appModel: e
     }
-  }) => [QOV.DEFAULT, QOV.SELECTING_TEXT, QOV.CLICKING_TO_CHANGE_SELECTION].includes(e.activeUserAction));
+  }) => [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT, UserActionState.CLICKING_TO_CHANGE_SELECTION].includes(e.activeUserAction));
   let T = useSelector(({
     mirror: {
       appModel: e
@@ -46,14 +46,14 @@ export function $$_0({
   let N = _X({
     subscribeToUpdates_expensive: t
   });
-  let I = J2(Ez5.canvasViewState().selectionBoundingRect);
-  let E = J2(Ez5.canvasViewState().inlineMenuTarget);
+  let I = getObservableOrFallback(AppStateTsApi.canvasViewState().selectionBoundingRect);
+  let E = getObservableOrFallback(AppStateTsApi.canvasViewState().inlineMenuTarget);
   let M = l || E?.boundingBox || I;
   let A = JI();
   let P = useSelector(e => e.mirror.sceneGraphSelection);
   let L = kl("isTableSublayerSelected");
-  f = cfv.ABOVE;
-  E?.preferredPosition ? f = E.preferredPosition : L && (f = cfv.BELOW);
+  f = Positioning.ABOVE;
+  E?.preferredPosition ? f = E.preferredPosition : L && (f = Positioning.BELOW);
   let R = f;
   let O = !!A || !N || !M || !w || T && !o || !t;
   useEffect(() => {
@@ -124,7 +124,7 @@ function b({
         x: i,
         y: l - n / window.devicePixelRatio
       });
-      glU.figjamInlineMenuPositionUpdate(o.x, o.y, r.height);
+      Fullscreen.figjamInlineMenuPositionUpdate(o.x, o.y, r.height);
     }
     j({
       x: e + r.width / 2,
@@ -138,13 +138,13 @@ function b({
   }, [t, j, D, I, N, g]);
   let B = useCallback((e, t, s) => {
     switch (s) {
-      case cfv.ABOVE:
+      case Positioning.ABOVE:
         return [Al(e, t), i ? tJ(e, t) : T1(e, t, P)];
-      case cfv.BELOW:
+      case Positioning.BELOW:
         return [Al(e, t), i ? tJ(e, t) : DH(e, t, P)];
-      case cfv.LEFT:
+      case Positioning.LEFT:
         return [Dl(e, t, 20), i ? tJ(e, t) : e.y];
-      case cfv.RIGHT:
+      case Positioning.RIGHT:
         return [Yh(e, 20), i ? tJ(e, t) : e.y];
       default:
         throwTypeError(s);
@@ -154,7 +154,7 @@ function b({
     let [r, n] = B(e, t, s);
     return _$$r.fromOriginAndSize(r, n, t.width, t.height);
   }, [B]);
-  let G = useCallback((e, t, s, r, n) => !i && s === cfv.ABOVE && r.top() > n.top() ? K(e, t, cfv.BELOW) : !i && s === cfv.BELOW && r.top() < n.top() ? K(e, t, cfv.ABOVE) : s === cfv.LEFT && r.left() > n.left() ? K(e, t, cfv.RIGHT) : s === cfv.RIGHT && r.left() < n.left() ? K(e, t, cfv.LEFT) : r, [K, i]);
+  let G = useCallback((e, t, s, r, n) => !i && s === Positioning.ABOVE && r.top() > n.top() ? K(e, t, Positioning.BELOW) : !i && s === Positioning.BELOW && r.top() < n.top() ? K(e, t, Positioning.ABOVE) : s === Positioning.LEFT && r.left() > n.left() ? K(e, t, Positioning.RIGHT) : s === Positioning.RIGHT && r.left() < n.left() ? K(e, t, Positioning.LEFT) : r, [K, i]);
   let H = useCallback((e, s, r, n) => {
     let i = _$$r.fromOriginAndSize(t.x, t.y, t.width, t.height);
     let l = K(e, s, g);

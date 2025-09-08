@@ -1,10 +1,10 @@
-import { oUq } from "../figma_app/763686";
+import { DSACppBindings } from "../figma_app/763686";
 export function $$r0(e, t, i) {
-  oUq.startDSAAction(e, t);
+  DSACppBindings.startDSAAction(e, t);
   try {
     i();
   } finally {
-    oUq.endDSAAction();
+    DSACppBindings.endDSAAction();
   }
 }
 export const f = $$r0;

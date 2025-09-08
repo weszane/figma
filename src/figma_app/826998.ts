@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo, useMemo } from "react";
 import { E as _$$E } from "../905/632989";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import o from "classnames";
 import { G } from "../905/750789";
 import { Yq, J3, $Q } from "../figma_app/315578";
 import { wf } from "../figma_app/975811";
 import { m0 } from "../figma_app/976749";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { u as _$$u, t8 } from "../figma_app/852050";
 import { Fk } from "../figma_app/167249";
@@ -301,7 +301,7 @@ export let $$V9 = memo(e => {
       }) : null]
     });
   }
-  if (!e.variableId && (!e.value || L.has(e.value)) || e.value && gl(e.value)) return null;
+  if (!e.variableId && (!e.value || L.has(e.value)) || e.value && isInvalidValue(e.value)) return null;
   let W = jsxs(Fragment, {
     children: [e.indent && jsx("div", {}), e.name ? jsx("span", {
       className: v,
@@ -760,7 +760,7 @@ export function $$ea8({
     name: e,
     value: u,
     copyName: t,
-    variableId: p?.variable?.resolvedType === rXF.FLOAT ? p?.variable?.node_id : void 0,
+    variableId: p?.variable?.resolvedType === VariableResolvedDataType.FLOAT ? p?.variable?.node_id : void 0,
     matchingVars: p?.matchingVars,
     subPropertyRow: l,
     disableDetailModalEntry: c

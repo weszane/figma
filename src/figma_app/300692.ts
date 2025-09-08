@@ -1,84 +1,393 @@
-import { useSelector } from "../vendor/514228";
-import { sortByCreatedAt } from "../figma_app/656233";
-import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { getFeatureFlags } from "../905/601108";
-import { k as _$$k2 } from "../905/651849";
-import { xf } from "../figma_app/416935";
-import { debugState } from "../905/407919";
-import { BrowserInfo } from "../figma_app/778880";
-import { ZB as _$$ZB } from "../905/491152";
-import { reportError } from "../905/11";
-import { logInfo } from "../905/714362";
-import { YH, gU } from "../figma_app/930338";
-import { isInteractionPathCheck, Lg } from "../figma_app/897289";
-import { XHR } from "../905/910117";
-import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { N6 } from "../figma_app/471982";
-import { vf, Yp, mZ, F8, Mj, WD } from "../figma_app/808294";
-import { AC } from "../figma_app/777551";
-import { J as _$$J } from "../905/896954";
-import { XE } from "../figma_app/976749";
-import { Dd, Wl, l8, En, Ii, xw, vC } from "../figma_app/599979";
-import { Y5 } from "../figma_app/455680";
-import { C8 } from "../905/216495";
-import { Ni } from "../figma_app/188152";
-import { FFileType } from "../figma_app/191312";
-import { Eh } from "../figma_app/12796";
-import { eZ, xp, HB } from "../figma_app/455620";
-import { d as _$$d } from "../905/44199";
-import { FEditorType } from "../figma_app/53721";
-import { o1, aP } from "../figma_app/10554";
-import { PN } from "../905/54385";
-import { am, FW, Ye, UX, Kd, XS, pR, ho, Av, xg, Dk, Pe, MP, Wt, ZV, Lu, k0, ZQ, bH, f5, Q7, u8 } from "../figma_app/155287";
-import { $A } from "../905/862883";
-import { ib, hb, Vf, _O } from "../905/488349";
-import { pI } from "../905/544659";
-import { MG } from "../905/816730";
-import { pN } from "../905/571565";
-import { Rs } from "../figma_app/761870";
-import { $A as _$$$A } from "../905/782918";
-import { Hc, yO, n as _$$n, Yp as _$$Yp, Lg as _$$Lg } from "../figma_app/740025";
-import { jY, Ro } from "../figma_app/564095";
-import { DK } from "../figma_app/291892";
-import { T as _$$T } from "../905/858738";
-import { ZY, Qx as _$$Qx } from "../905/764747";
-import { M as _$$M } from "../figma_app/170366";
-export async function $$q53(e, {
-  ignoreMissingEditorType: t,
-  resourceType: r,
-  isPublishing: n
-}) {
-  let i = await $$eg71(e, {
-    resourceType: r
-  });
-  if (t && i.error?.text === $$el27()) return i.manifest;
-  if (i.error) throw Error(am(i.error));
-  return i.manifest;
+import { useSelector } from 'react-redux';
+import { reportError } from '../905/11';
+import { d as _$$d } from '../905/44199';
+import { PN } from '../905/54385';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { C8 } from '../905/216495';
+import { F as _$$F } from '../905/302958';
+import { getI18nString } from '../905/303541';
+import { debugState } from '../905/407919';
+import { pluginManifestPropType, capabilitiesPropType, editorTypePropType, widgetManifestPropType } from '../905/488349';
+import { ZB as _$$ZB } from '../905/491152';
+import { pI } from '../905/544659';
+import { pN } from '../905/571565';
+import { getFeatureFlags } from '../905/601108';
+import { k as _$$k2 } from '../905/651849';
+import { logInfo } from '../905/714362';
+import { Qx as _$$Qx, ZY } from '../905/764747';
+import { $A as _$$$A } from '../905/782918';
+import { validateWithNoOpVm } from '../905/816730';
+import { T as _$$T } from '../905/858738';
+import { $A } from '../905/862883';
+import { J as _$$J } from '../905/896954';
+import { XHR } from '../905/910117';
+import { aP, o1 } from './10554';
+import { Eh } from './12796';
+import { FEditorType } from './53721';
+import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from './155287';
+import { M as _$$M } from './170366';
+import { Ni } from './188152';
+import { FFileType } from './191312';
+import { DK } from './291892';
+import { xf } from './416935';
+import { eZ, HB, xp } from './455620';
+import { Y5 } from './455680';
+import { throwTypeError } from './465776';
+import { N6 } from './471982';
+import { jY, Ro } from './564095';
+import { Dd, En, Ii, l8, vC, Wl, xw } from './599979';
+import { sortByCreatedAt } from './656233';
+import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from './740025';
+import { Rs } from './761870';
+import { AC } from './777551';
+import { BrowserInfo } from './778880';
+import { F8, Mj, mZ, vf, WD, Yp } from './808294';
+import { isInteractionPathCheck, Lg } from './897289';
+import { gU, YH } from './930338';
+import { XE } from './976749';
+
+/**
+ * Error types for plugin operations
+ */
+export type PluginErrorType = 'LOAD' | 'PARSE' | 'VALIDATE';
+
+/**
+ * Plugin error structure
+ */
+export interface PluginError {
+  type: PluginErrorType;
+  text: string;
 }
-function J({
-  parameters: e,
-  parameterOnly: t
-}, r) {
-  if (e && function (e, t) {
-    if (!e.length) throw Error(`Expected "${t}.parameters" to have non-empty parameter list.`);
-    let r = new Set();
-    e.forEach(e => {
-      if (r.has(e.key)) throw Error(`Expected "${t}.parameters" to have unique keys, but got more than one parameter with key: "${e.key}"`);
-      r.add(e.key);
+
+/**
+ * Plugin manifest structure
+ */
+export interface PluginManifest {
+  id: string;
+  name: string;
+  api: string;
+  main: string;
+  editorType?: string[];
+  capabilities?: string[];
+  permissions?: string[];
+  relaunchButtons?: Array<{
+    command: string;
+    name: string;
+    multipleSelection?: boolean;
+  }>;
+  containsWidget?: boolean;
+  widgetApi?: string;
+  networkAccess?: any;
+  relatedLinkDomains?: string[];
+  devResourceDomains?: string[];
+  codegenLanguages?: Array<{
+    value: string;
+  }>;
+  codegenPreferences?: any[];
+  monetized_resource_metadata?: {
+    price?: number;
+    is_subscription?: boolean;
+    annual_discount_percentage?: number;
+    annual_discount_active_at?: boolean;
+    can_increase_price?: boolean;
+  };
+  playground_fig_file?: any;
+  parameters?: Array<{
+    key: string;
+    optional?: boolean;
+  }>;
+  menu?: any[];
+}
+
+/**
+ * Plugin relaunch button structure
+ */
+export interface PluginRelaunchButton {
+  pluginID: string;
+  command: string;
+  name: string;
+  description: string | symbol;
+}
+
+/**
+ * Plugin publishing data structure
+ */
+export interface PluginPublishingData {
+  name?: string;
+  tagline?: string;
+  description?: string;
+  supportContact?: string;
+  iconSrc?: string;
+  categoryId?: string;
+  price?: number;
+  isPaid?: boolean;
+  hasPaymentsApi?: boolean;
+  annualDiscount?: number;
+  isAnnualDiscountActive?: boolean;
+  playgroundFigFile?: any;
+  widgetSnapshotImageSrc?: string;
+  carouselMedia?: any;
+  freemiumRequiredForMigrating?: string;
+  isSubscription?: boolean;
+  newVersionReleaseNotes?: string;
+  creatorPolicy?: string;
+  iconImageError?: string;
+  coverImageError?: string;
+  currentVersionReleaseNotes?: string;
+  coverImageSrc?: string;
+  widgetSnapshotImageError?: string | null;
+  author: {
+    user_id: string;
+  };
+  twoFactorAuthDisabledError?: string | null;
+  emailNotVerifiedError?: string | null;
+  widgetSnapshotImageBlob?: Blob | null;
+  accountDetailsChangedError?: string | null;
+  commentsSetting?: any;
+  creators?: Array<{
+    user_id: string;
+  }>;
+  publishers?: {
+    inputValue: string;
+    tokens: Array<{
+      id: string;
+      name: string;
+      img_url: string;
+    }>;
+    errorMessage: string;
+  };
+  blockPublishingOnToS?: boolean;
+  playgroundFilePublishType?: any;
+}
+
+/**
+ * Plugin data structure
+ */
+export interface PluginData {
+  id?: string;
+  plugin_id: string;
+  name: string;
+  manifest: PluginManifest;
+  localFileId: string;
+  localFilePath: string;
+  error: PluginError | null;
+}
+
+/**
+ * Resource type for plugin operations
+ */
+type ResourceType = 'plugin' | 'widget' | 'unknown';
+
+/**
+ * Options for plugin loading
+ */
+interface PluginLoadOptions {
+  ignoreMissingEditorType?: boolean;
+  resourceType: ResourceType;
+  isPublishing?: boolean;
+}
+
+/**
+ * Plugin manifest source data
+ */
+export interface PluginManifestSource {
+  error?: string;
+  manifest?: string;
+  path?: string;
+  cachedContainsWidget?: boolean;
+  lastKnownName?: string;
+  resourceType?: ResourceType;
+}
+
+// Default manifest for widget (original: eT)
+const defaultWidgetManifest: PluginManifest = {
+  id: '',
+  name: '',
+  api: '',
+  main: '',
+  containsWidget: true,
+  widgetApi: ''
+};
+
+// Default manifest for plugin (original: eb)
+const defaultPluginManifest: PluginManifest = {
+  id: '',
+  name: '',
+  api: '',
+  main: ''
+};
+
+// Default plugin metadata (original: pluginMetadata)
+const pluginMetadata = {
+  id: '',
+  plugin_id: '',
+  manifest: {
+    ...defaultPluginManifest
+  },
+  name: '',
+  version: '',
+  release_notes: '',
+  installed_by: 'user',
+  description: '',
+  tagline: '',
+  creator_policy: '',
+  created_at: '',
+  redirect_icon_url: '',
+  redirect_cover_image_url: '',
+  redirect_code_url: '',
+  is_private: false
+};
+
+// Default published plugin structure (original: eS)
+const defaultPublishedPlugin = {
+  id: '',
+  publisher: {
+    is_restricted_by_current_user: false,
+    id: '',
+    name: '',
+    img_url: '',
+    img_urls: {},
+    profile_handle: '',
+    primary_user_id: null,
+    current_user_is_following: false,
+    current_user_is_followed: false,
+    location: null,
+    follower_count: 0,
+    following_count: 0,
+    entity_type: o1.USER,
+    badges: [],
+    description: ''
+  },
+  creator: {
+    id: '',
+    handle: '',
+    img_url: ''
+  },
+  category_id: null,
+  versions: {},
+  install_count: 0,
+  unique_run_count: 0,
+  view_count: 0,
+  like_count: 0,
+  comment_count: 0,
+  unpublished_at: null,
+  current_plugin_version_id: '',
+  roles: {},
+  realtime_token: '',
+  support_contact: '',
+  created_at: '',
+  org_id: null,
+  redirect_thumbnail_url: null,
+  thumbnail_url: null,
+  community_publishers: {
+    accepted: [],
+    pending: []
+  },
+  comments_setting: Ni.ENABLED,
+  is_widget: false,
+  editor_type: 'design_and_whiteboard',
+  publishing_status: null,
+  badges: []
+};
+
+// Default published widget structure (original: ev)
+const defaultPublishedWidget = {
+  ...defaultPublishedPlugin,
+  is_widget: true
+};
+
+// Default publishing data (original: eA)
+const defaultPublishingData: PluginPublishingData = {
+  name: '',
+  currentVersionReleaseNotes: '',
+  newVersionReleaseNotes: '',
+  description: '',
+  tagline: '',
+  creatorPolicy: '',
+  categoryId: '',
+  iconSrc: '',
+  coverImageSrc: '',
+  widgetSnapshotImageSrc: '',
+  widgetSnapshotImageError: null,
+  supportContact: '',
+  iconImageError: null,
+  coverImageError: null,
+  author: {
+    user_id: ''
+  },
+  twoFactorAuthDisabledError: null,
+  emailNotVerifiedError: null,
+  accountDetailsChangedError: null,
+  freemiumRequiredForMigrating: null,
+  commentsSetting: Ni.ENABLED,
+  creators: [],
+  publishers: {
+    inputValue: '',
+    tokens: [],
+    errorMessage: ''
+  },
+  blockPublishingOnToS: false,
+  playgroundFigFile: null,
+  playgroundFilePublishType: _$$J.Actions.NOOP
+};
+
+/**
+ * Loads and validates a plugin manifest from a local file.
+ * @param fileId - The local file ID.
+ * @param options - Plugin load options.
+ * @returns The validated PluginManifest.
+ * @throws Error if manifest is invalid or cannot be loaded.
+ */
+export async function loadPluginManifest(fileId: string, options: PluginLoadOptions): Promise<PluginManifest> {
+  const manifestResult = await getLocalPluginManifest(fileId, {
+    resourceType: options.resourceType
+  });
+  if (options.ignoreMissingEditorType && manifestResult.error?.text === getMissingEditorTypeError()) return manifestResult.manifest;
+  if (manifestResult.error) throw new Error(formatPluginError(manifestResult.error));
+  return manifestResult.manifest;
+}
+
+/**
+ * Validates plugin parameters for uniqueness and ordering.
+ * @param manifest - PluginManifest containing parameters.
+ * @param manifestName - Name for error context.
+ * @throws Error if parameters are invalid.
+ */
+function validatePluginParameters({
+  parameters,
+  parameterOnly
+}: {
+  parameters?: Array<{
+    key: string;
+    optional?: boolean;
+  }>;
+  parameterOnly?: boolean;
+}, manifestName: string): void {
+  if (parameters) {
+    // Ensure non-empty and unique keys
+    if (!parameters.length) throw new Error(`Expected "${manifestName}.parameters" to have non-empty parameter list.`);
+    const keySet = new Set<string>();
+    parameters.forEach(param => {
+      if (keySet.has(param.key)) throw new Error(`Expected "${manifestName}.parameters" to have unique keys, but got more than one parameter with key: "${param.key}"`);
+      keySet.add(param.key);
     });
-    let n = !1;
-    for (let {
+    // Ensure optional parameters are last
+    let foundOptional = false;
+    for (const {
       key,
       optional
-    } of e) {
-      if (n && !optional) throw Error(`Optional parameters must be listed last in the parameter list. ${key} not marked as optional.`);
-      optional && (n = !0);
+    } of parameters) {
+      if (foundOptional && !optional) throw new Error(`Optional parameters must be listed last in the parameter list. ${key} not marked as optional.`);
+      if (optional) foundOptional = true;
     }
-  }(e, r), t && !e) throw Error(`Expected parameters to be defined for "${r}" marked as parameterOnly.`);
+  }
+  if (parameterOnly && !parameters) throw new Error(`Expected parameters to be defined for "${manifestName}" marked as parameterOnly.`);
 }
-let Z = {
+
+/**
+ * Maps FEditorType to FW type.
+ */
+const editorTypeToFW: Record<FEditorType, string> = {
   [FEditorType.Design]: FW.FIGMA,
   [FEditorType.DevHandoff]: FW.DEV,
   [FEditorType.Whiteboard]: FW.FIGJAM,
@@ -88,10 +397,19 @@ let Z = {
   [FEditorType.Cooper]: FW.BUZZ,
   [FEditorType.Illustration]: FW.FIGMA
 };
-export function $$Q12(e) {
-  return Z[e];
+
+/**
+ * Returns FW type for a given FEditorType.
+ * @param editorType - The editor type.
+ */
+export function convertEditorTypeToFileType(editorType: FEditorType): string {
+  return editorTypeToFW[editorType];
 }
-let ee = {
+
+/**
+ * Maps FW type to FEditorType.
+ */
+const fwToEditorType: Record<string, FEditorType> = {
   [FW.FIGMA]: FEditorType.Design,
   [FW.DEV]: FEditorType.DevHandoff,
   [FW.INSPECT]: FEditorType.DevHandoff,
@@ -100,11 +418,21 @@ let ee = {
   [FW.SITES]: FEditorType.Sites,
   [FW.BUZZ]: FEditorType.Cooper
 };
-export function $$et8(e) {
-  return ee[e];
+
+/**
+ * Returns FEditorType for a given FW type.
+ * @param fwType - The FW type.
+ */
+export function mapToEditorType(fwType: string): FEditorType {
+  return fwToEditorType[fwType];
 }
-export function $$er28(e) {
-  switch (e) {
+
+/**
+ * Maps FW type to FFileType.
+ * @param fwType - The FW type.
+ */
+export function mapToFileType(fwType: string): FFileType {
+  switch (fwType) {
     case FW.FIGMA:
     case FW.DEV:
     case FW.INSPECT:
@@ -118,11 +446,16 @@ export function $$er28(e) {
     case FW.BUZZ:
       return FFileType.COOPER;
     default:
-      throwTypeError(e);
+      throwTypeError(fwType);
   }
 }
-export function $$en36(e) {
-  switch (e) {
+
+/**
+ * Maps FW type to $A type.
+ * @param fwType - The FW type.
+ */
+export function resolveFrameworkType(fwType: string) {
+  switch (fwType) {
     case FW.FIGMA:
       return $A.Design;
     case FW.FIGJAM:
@@ -137,1117 +470,1824 @@ export function $$en36(e) {
     case FW.BUZZ:
       return $A.Cooper;
     default:
-      throwTypeError(e);
+      throwTypeError(fwType);
   }
 }
-export function $$ei15() {
-  return useSelector(e => "fullscreen" === e.selectedView.view ? Z[e.selectedView.editorType] : void 0);
+
+/**
+ * Returns the FW type for the current fullscreen selected view.
+ */
+export function selectorFullScreenViewEditorType() {
+  return useSelector<{
+    selectedView: Record<string, any>;
+  }>(state => state.selectedView.view === 'fullscreen' ? editorTypeToFW[state.selectedView.editorType] : undefined);
 }
-export function $$ea37() {
-  let e = debugState.getState().selectedView;
-  if ("fullscreen" === e.view) return Z[e.editorType];
+
+/**
+ * Returns the FW type for the current fullscreen selected view from debugState.
+ */
+export function getFullscreenViewEditorType(): string | undefined {
+  const view = debugState.getState().selectedView;
+  if (view.view === 'fullscreen') return editorTypeToFW[view.editorType];
 }
-export function $$es9(e, t) {
-  return Array.isArray(t) ? t.includes(e) : e === FW.FIGMA;
+
+/**
+ * Checks if the editorType matches the FW type.
+ * @param fwType - The FW type.
+ * @param editorType - The editorType array.
+ */
+export function isEditorTypeMatch(fwType: string, editorType?: string[]): boolean {
+  return Array.isArray(editorType) ? editorType.includes(fwType) : fwType === FW.FIGMA;
 }
-class eo extends Error {
-  constructor(e, t) {
-    super(e);
-    this.message = e;
-    this.manifest = t;
+
+/**
+ * Custom error for manifest validation.
+ */
+class ManifestValidationError extends Error {
+  manifest?: PluginManifest;
+  constructor(message: string, manifest?: PluginManifest) {
+    super(message);
+    this.message = message;
+    this.manifest = manifest;
   }
 }
-export function $$el27() {
-  return `Missing editorType in manifest.  ${ed()}`;
+
+/**
+ * Returns the error message for missing editorType in manifest.
+ */
+export function getMissingEditorTypeError(): string {
+  return `Missing editorType in manifest.  ${getEditorTypeHint()}`;
 }
-function ed() {
-  let e = Ye.filter(e => e !== FW.INSPECT);
-  getFeatureFlags().buzz_plugins_publishing || (e = e.filter(e => e !== FW.BUZZ));
-  return `Specify a combination of [${e.map(e => `"${e}"`).join(", ")}]`;
+
+/**
+ * Returns a hint string for valid editorType values.
+ */
+function getEditorTypeHint(): string {
+  let validTypes = Ye.filter(e => e !== FW.INSPECT);
+  if (!getFeatureFlags().buzz_plugins_publishing) validTypes = validTypes.filter(e => e !== FW.BUZZ);
+  return `Specify a combination of [${validTypes.map(e => `"${e}"`).join(', ')}]`;
 }
-function ec(e, t) {
-  let r = new Set(UX);
-  return e.filter(e => !r.has(e) || t?.has(e));
+
+/**
+ * Filters capabilities, removing those not in UX unless allowed.
+ * @param capabilities - Array of capabilities.
+ * @param allowedSet - Optional set of allowed capabilities.
+ */
+function filterCapabilities(capabilities: string[], allowedSet?: Set<string>): string[] {
+  const uxSet = new Set(UX);
+  return capabilities.filter(c => !uxSet.has(c) || allowedSet?.has(c));
 }
-export function $$eu5(e) {
-  return Kd.some(t => e.includes(t));
+
+/**
+ * Checks if any capability in Kd is present.
+ * @param capabilities - Array of capabilities.
+ */
+export function hasSpecialCapability(capabilities: string[]): boolean {
+  return Kd.some(c => capabilities.includes(c));
 }
-export class $$ep70 {
-  constructor(e, t) {
-    this.permissions = e;
-    this.trustedPluginOrigin = t;
+
+/**
+ * PluginPermissions class (original: $$ep70).
+ */
+export class PluginPermissions {
+  permissions: string[];
+  trustedPluginOrigin: string | undefined;
+  constructor(permissions: string[], trustedPluginOrigin?: string) {
+    this.permissions = permissions;
+    this.trustedPluginOrigin = trustedPluginOrigin;
   }
-  static none() {
-    return new $$ep70([], void 0);
+  static none(): PluginPermissions {
+    return new PluginPermissions([], undefined);
   }
-  static forTest(e) {
-    return new $$ep70(e || XS, void 0);
+  static forTest(permissions?: string[]): PluginPermissions {
+    return new PluginPermissions(permissions || XS, undefined);
   }
-  static forConsoleGlobal() {
-    let e = [...pR];
-    getFeatureFlags().first_draft_debug && e.push("firstdraft");
-    return new $$ep70(e, void 0);
+  static forConsoleGlobal(): PluginPermissions {
+    const perms = [...pR];
+    if (getFeatureFlags().first_draft_debug) perms.push('firstdraft');
+    return new PluginPermissions(perms, undefined);
   }
-  static forFirstPartyPlugin() {
-    return new $$ep70(XS, void 0);
+  static forFirstPartyPlugin(): PluginPermissions {
+    return new PluginPermissions(XS, undefined);
   }
-  static forLocalPlugin(e) {
-    let t = e.manifest.permissions || [];
-    if (logInfo("ValidatedPluginPermissions", "Validating permissions for local plugin", {
-      pluginID: e.manifest.id,
-      requestedPermissions: t
-    }), getFeatureFlags().plugins_internal_apis) return new $$ep70(t, "*");
-    let r = ec(t);
-    r.length < t.length && reportError(_$$e.EXTENSIBILITY, Error("Untrusted local plugin denied internal api permissions"));
-    return new $$ep70(r, void 0);
+  static forLocalPlugin(plugin: PluginData): PluginPermissions {
+    const perms = plugin.manifest.permissions || [];
+    logInfo('ValidatedPluginPermissions', 'Validating permissions for local plugin', {
+      pluginID: plugin.manifest.id,
+      requestedPermissions: perms
+    });
+    if (getFeatureFlags().plugins_internal_apis) {
+      return new PluginPermissions(perms, '*');
+    }
+    const filtered = filterCapabilities(perms);
+    if (filtered.length < perms.length) reportError(_$$e.EXTENSIBILITY, new Error('Untrusted local plugin denied internal api permissions'));
+    return new PluginPermissions(filtered, undefined);
   }
-  static forInstalledPlugin(e) {
-    let t = e.manifest.permissions || [];
-    if (logInfo("ValidatedPluginPermissions", "Validating permissions for installed plugin", {
-      pluginID: e.plugin_id,
-      requestedPermissions: t
-    }), eZ(e.plugin_id)) return new $$ep70(ec(t, xp(e.plugin_id)), HB(e.plugin_id));
-    let r = ec(t);
-    r.length < t.length && reportError(_$$e.UNOWNED, Error("Untrusted installed plugin denied internal api permissions"));
-    return new $$ep70(r, void 0);
+  static forInstalledPlugin(plugin: PluginData): PluginPermissions {
+    const perms = plugin.manifest.permissions || [];
+    logInfo('ValidatedPluginPermissions', 'Validating permissions for installed plugin', {
+      pluginID: plugin.plugin_id,
+      requestedPermissions: perms
+    });
+    if (eZ(plugin.plugin_id)) {
+      return new PluginPermissions(filterCapabilities(perms, xp(plugin.plugin_id)), HB(plugin.plugin_id));
+    }
+    const filtered = filterCapabilities(perms);
+    if (filtered.length < perms.length) reportError(_$$e.UNOWNED, new Error('Untrusted installed plugin denied internal api permissions'));
+    return new PluginPermissions(filtered, undefined);
   }
 }
-export function $$e_73(e) {
+
+/**
+ * Validates a URL pattern.
+ * @param pattern - The URL pattern string.
+ */
+export function validateURLPattern(pattern: string): URLPattern | null {
   try {
-    return new URLPattern(e);
-  } catch (e) {
+    return new URLPattern(pattern);
+  } catch {
     return null;
   }
 }
-export function $$eh24(e, t) {
-  let r = [];
-  let n = 0;
-  for (let [i, a] of t) {
-    r.push(e.substring(n, i));
-    n = a;
+
+/**
+ * Joins string segments based on index pairs.
+ * @param str - The string to segment.
+ * @param pairs - Array of [start, end] index pairs.
+ */
+export function joinStringSegments(str: string, pairs: Array<[number, number]>): string {
+  const segments: string[] = [];
+  let lastIndex = 0;
+  for (const [start, end] of pairs) {
+    segments.push(str.substring(lastIndex, start));
+    lastIndex = end;
   }
-  r.push(e.substring(n, e.length));
-  return r.join("");
+  segments.push(str.substring(lastIndex));
+  return segments.join('');
 }
-export function $$em60(e, t, r) {
-  var n;
-  var i;
-  var a;
-  let s;
-  let o;
-  let l;
-  let d;
-  let c;
-  let u = "widget" === r.resourceType || !!t.cachedContainsWidget;
-  if ("error" in t) o = {
-    type: ho.LOAD,
-    text: t.error
-  };else try {
-    l = JSON.parse(t.manifest);
-  } catch (e) {
-    o = {
-      type: ho.PARSE,
-      text: e.message
+
+/**
+ * Loads and validates a plugin manifest from a manifest source.
+ * @param fileId - The local file ID.
+ * @param manifestSource - The manifest source object.
+ * @param options - Plugin load options.
+ * @returns PluginData object.
+ */
+export function getLocalPluginManifest(fileId: string, manifestSource: PluginManifestSource, options = {} as PluginLoadOptions): PluginData {
+  let editorType: string[] | undefined;
+  let capabilities: string[] | undefined;
+  let manifest: PluginManifest | undefined;
+  let error: PluginError | undefined;
+  let validatedManifest: PluginManifest | undefined;
+  let isWidget = options.resourceType === 'widget' || !!manifestSource.cachedContainsWidget;
+
+  // Parse manifest
+  if ('error' in manifestSource) {
+    error = {
+      type: ho.LOAD,
+      text: manifestSource.error!
     };
-  }
-  if ("unknown" === r.resourceType) {
-    if (l) u = l.containsWidget;else if ("manifest" in t) try {
-      u = !!/containsWidget/.test(t.manifest);
-    } catch {}
-  }
-  if (l) {
+  } else {
     try {
-      MG(l.editorType, ib, "manifest.editorType");
-      d = l.editorType;
-    } catch {}
-    try {
-      MG(l.capabilities, hb, "manifest.capabilities");
-      c = l.capabilities;
-    } catch {}
+      manifest = JSON.parse(manifestSource.manifest!);
+    } catch (e: any) {
+      error = {
+        type: ho.PARSE,
+        text: e.message
+      };
+    }
   }
-  let p = _$$M();
-  if ("manifest" in t && p?.updateCachedContainsWidget({
-    id: e,
-    cachedContainsWidget: u
-  }), !o) try {
-    s = function (e, t) {
+
+  // Determine widget status for unknown resourceType
+  if (options.resourceType === 'unknown') {
+    if (manifest) {
+      isWidget = manifest.containsWidget!;
+    } else if ('manifest' in manifestSource) {
       try {
-        MG(e, "widget" === t.resourceType ? Vf : _O, "manifest");
-      } catch (e) {
-        if (e instanceof Error) throw Error(function (e) {
-          let t = "but got additional property";
-          let r = e.lastIndexOf(t);
-          if (-1 !== r) {
-            let n = e.substring(r + t.length).replace(/"/g, "").trim();
-            return `Manifest has unexpected extra property: ${n}`;
-          }
-          return e;
-        }(e.message));
-        throw e;
-      }
-      if ("plugin" === t.resourceType) {
-        if (e.relaunchButtons) {
-          let t = new Set();
-          e.relaunchButtons.forEach(r => {
-            if (t.has(r.command)) throw new eo(`Expected "manifest.relaunchButtons" to have unique commands, but got more than one button with command: "${r.command}"`, e);
-            t.add(r.command);
-          });
-        }
-        !function (e) {
-          if (J(e, "manifest"), e.menu) {
-            if (e.parameters) throw Error("manifest.parameters should not be specified when menu items are defined");
-            !function e(t) {
-              for (let r of t) Av(r) ? J(r, r.name) : xg(r) && e(r.menu);
-            }(e.menu);
-          }
-        }(e);
-      }
-      if (!function (e) {
-        if (!("editorType" in e)) throw new eo($$el27(), e);
-        if (e.editorType.some(e => !Ye.includes(e)) || e.editorType.length < 1 || e.editorType.length > Ye.length) throw Error(`Invalid editorType in manifest.  ${ed()}`);
-      }(e), !function (e) {
-        if (e.permissions) {
-          let t = e.permissions.find(e => !XS.includes(e));
-          if (void 0 !== t) throw new eo(`Invalid permission specified: ${t}`, e);
-        }
-      }(e), !function (e) {
-        if (e.capabilities) for (let t of e.capabilities) {
-          if (Dk.includes(t) || function (e, t) {
-            throw new eo(`Invalid capability specified: ${t}`, e);
-          }(e, t), "panel" === t || "inspect" === t || "codegen" === t || "linkpreview" === t || "vscode" === t) {
-            if (!Pe(e.editorType)) throw new eo(`Capability "${t}" requires "editorType" to include "dev"`, e);
-            if (e.containsWidget) throw new eo(`Capability "${t}" is not supported for widgets`, e);
-          }
-          if (_$$T() && !e.capabilities.includes("vscode")) throw new eo('Manifest must include "vscode" capability to run in Figma for VS Code Extension', e);
-        }
-      }(e), !function (e) {
-        if (!e.capabilities?.includes("codegen")) {
-          if (e.codegenLanguages) throw new eo("codegenLanguages only supported for codegen plugins", e);
-          if (e.codegenPreferences) throw new eo("codegenPreferences only supported for codegen plugins", e);
-          return;
-        }
-        if (!e.codegenLanguages || 0 === e.codegenLanguages.length) throw new eo("codegen plugins must define at least one language in codegenLanguages", e);
-        if (!e.codegenPreferences) return;
-        let t = e.codegenLanguages?.map(e => e.value) ?? [];
-        let r = [];
-        let n = new Set();
-        for (let i = 0; i < e.codegenPreferences.length; i++) {
-          let a = e.codegenPreferences[i];
-          for (let r of a.includedLanguages ?? []) if (!t.includes(r)) throw new eo(`Unknown language "${r}" in codegenPreferences[${i}].includedLanguages`, e);
-          if (MP(a) && r.push(a), Wt(a)) {
-            if (n.has(a.propertyName)) throw new eo('codegenPreferences "action" itemType settings must have unique propertyName values', e);
-            n.add(a.propertyName);
-          }
-          if (ZV(a)) {
-            let t = 0;
-            if (a.options) for (let e of a.options) e.isDefault && (t += 1);
-            if (1 !== t) throw new eo('codegenPreferences itemType: "select" should have exactly one default option', e);
-          }
-        }
-        if (r.length > 1) throw new eo('codegenPreferences should have at most one itemType: "unit"', e);
-      }(e), "widget" === t.resourceType && e.containsWidget && (function (e) {
-        if (e.widgetApi && e.editorType?.includes(FW.SLIDES)) throw new eo("Widgets are not supported in Figma Slides", e);
-      }(e), "1.0.0" !== e.widgetApi)) throw new eo("Widgets must specify the 'widgetApi' manifest field. The latest version is '1.0.0'", e);
-      if (e.networkAccess) {
-        let t = pI(e.networkAccess);
-        if (!t.isValid) throw new eo(t.validationErr, e);
-      }
-      if (e.relatedLinkDomains) {
-        if (!Pe(e.editorType)) throw new eo("'relatedLinkDomains' is only supported for plugins with 'editorType' containing 'dev'", e);
-        for (let t of e.relatedLinkDomains) {
-          if (!t.startsWith("https://") || t.startsWith("http://")) throw new eo(`Invalid domain '${t}' in 'relatedLinkDomains'. Domains must start with 'https:// or 'http://'`, e);
-          if (!$$e_73(t)) throw new eo(`Invalid domain '${t}' in 'relatedLinkDomains'.`, e);
-        }
-      }
-      if (e.devResourceDomains) {
-        if (!Pe(e.editorType)) throw new eo("'devResourceDomains' is only supported for plugins with 'editorType' containing 'dev'", e);
-        for (let t of e.devResourceDomains) {
-          if (!t.startsWith("https://") || t.startsWith("http://")) throw new eo(`Invalid domain '${t}' in 'devResourceDomains'. Domains must start with 'https:// or 'http://'`, e);
-          if (!$$e_73(t)) throw new eo(`Invalid domain '${t}' in 'devResourceDomains'.`, e);
-        }
-      }
-      return e;
-    }(l, {
-      resourceType: u ? "widget" : "plugin"
-    });
-  } catch (e) {
-    o = {
-      type: ho.VALIDATE,
-      text: e.message
-    };
-    e.manifest && (s = e.manifest);
+        isWidget = !!/containsWidget/.test(manifestSource.manifest!);
+      } catch {}
+    }
   }
-  let _ = u ? (n = d, {
-    ...eT,
-    editorType: n || void 0
-  }) : (i = d, a = c, {
-    ...eb,
-    editorType: i || void 0,
-    capabilities: a || void 0
-  });
+
+  // Validate manifest fields
+  if (manifest) {
+    try {
+      validateWithNoOpVm(manifest.editorType, editorTypePropType, 'manifest.editorType');
+      editorType = manifest.editorType;
+    } catch {}
+    try {
+      validateWithNoOpVm(manifest.capabilities, capabilitiesPropType, 'manifest.capabilities');
+      capabilities = manifest.capabilities;
+    } catch {}
+  }
+
+  // Update cached widget status
+  const desktopApi = _$$M();
+  if ('manifest' in manifestSource && desktopApi?.updateCachedContainsWidget) {
+    desktopApi.updateCachedContainsWidget({
+      id: fileId,
+      cachedContainsWidget: isWidget
+    });
+  }
+
+  // Validate manifest structure
+  if (!error) {
+    try {
+      validatedManifest = function validateManifest(manifest: PluginManifest, opts: PluginLoadOptions) {
+        try {
+          validateWithNoOpVm(manifest, opts.resourceType === 'widget' ? widgetManifestPropType : pluginManifestPropType, 'manifest');
+        } catch (e: any) {
+          if (e instanceof Error) {
+            throw new TypeError(formatManifestErrorMessage(e.message));
+          }
+          throw e;
+        }
+        // Plugin-specific validation
+        if (opts.resourceType === 'plugin') {
+          if (manifest.relaunchButtons) {
+            const commandSet = new Set<string>();
+            manifest.relaunchButtons.forEach(button => {
+              if (commandSet.has(button.command)) throw new ManifestValidationError(`Expected "manifest.relaunchButtons" to have unique commands, but got more than one button with command: "${button.command}"`, manifest);
+              commandSet.add(button.command);
+            });
+          }
+          // Validate parameters and menu
+          (function validateParametersAndMenu(manifest: PluginManifest) {
+            validatePluginParameters(manifest, 'manifest');
+            if (manifest.menu) {
+              if (manifest.parameters) throw new Error('manifest.parameters should not be specified when menu items are defined');
+              (function validateMenu(menu: any[]) {
+                for (const item of menu) {
+                  Av(item) ? validatePluginParameters(item, item.name) : xg(item) && validateMenu(item.menu);
+                }
+              })(manifest.menu);
+            }
+          })(manifest);
+        }
+        // EditorType validation
+        (function validateEditorType(manifest: PluginManifest) {
+          if (!('editorType' in manifest)) throw new ManifestValidationError(getMissingEditorTypeError(), manifest);
+          if (manifest.editorType!.some(e => !Ye.includes(e)) || manifest.editorType!.length < 1 || manifest.editorType!.length > Ye.length) {
+            throw new Error(`Invalid editorType in manifest.  ${getEditorTypeHint()}`);
+          }
+        })(manifest);
+
+        // Permissions validation
+        (function validatePermissions(manifest: PluginManifest) {
+          if (manifest.permissions) {
+            const invalid = manifest.permissions.find(p => !XS.includes(p));
+            if (invalid !== undefined) throw new ManifestValidationError(`Invalid permission specified: ${invalid}`, manifest);
+          }
+        })(manifest);
+
+        // Capabilities validation
+        (function validateCapabilities(manifest: PluginManifest) {
+          if (manifest.capabilities) {
+            for (const cap of manifest.capabilities) {
+              // throw new ManifestValidationError(`Invalid capability specified: ${cap}`, manifest)
+
+              if (Dk.includes(cap) || cap === 'panel' || cap === 'inspect' || cap === 'codegen' || cap === 'linkpreview' || cap === 'vscode') {
+                if (!Pe(manifest.editorType)) throw new ManifestValidationError(`Capability "${cap}" requires "editorType" to include "dev"`, manifest);
+                if (manifest.containsWidget) throw new ManifestValidationError(`Capability "${cap}" is not supported for widgets`, manifest);
+              }
+              if (_$$T() && !manifest.capabilities.includes('vscode')) throw new ManifestValidationError('Manifest must include "vscode" capability to run in Figma for VS Code Extension', manifest);
+            }
+          }
+        })(manifest);
+
+        // Codegen validation
+        (function validateCodegen(manifest: PluginManifest) {
+          if (!manifest.capabilities?.includes('codegen')) {
+            if (manifest.codegenLanguages) throw new ManifestValidationError('codegenLanguages only supported for codegen plugins', manifest);
+            if (manifest.codegenPreferences) throw new ManifestValidationError('codegenPreferences only supported for codegen plugins', manifest);
+            return;
+          }
+          if (!manifest.codegenLanguages || manifest.codegenLanguages.length === 0) throw new ManifestValidationError('codegen plugins must define at least one language in codegenLanguages', manifest);
+          if (!manifest.codegenPreferences) return;
+          const languageValues = manifest.codegenLanguages?.map(l => l.value) ?? [];
+          const unitItems: any[] = [];
+          const propertyNames = new Set<string>();
+          for (let i = 0; i < manifest.codegenPreferences.length; i++) {
+            const pref = manifest.codegenPreferences[i];
+            for (const lang of pref.includedLanguages ?? []) {
+              if (!languageValues.includes(lang)) throw new ManifestValidationError(`Unknown language "${lang}" in codegenPreferences[${i}].includedLanguages`, manifest);
+            }
+            if (MP(pref)) unitItems.push(pref);
+            if (Wt(pref)) {
+              if (propertyNames.has(pref.propertyName)) throw new ManifestValidationError('codegenPreferences "action" itemType settings must have unique propertyName values', manifest);
+              propertyNames.add(pref.propertyName);
+            }
+            if (ZV(pref)) {
+              let defaultCount = 0;
+              if (pref.options) {
+                for (const opt of pref.options) {
+                  if (opt.isDefault) defaultCount += 1;
+                }
+              }
+              if (defaultCount !== 1) throw new ManifestValidationError('codegenPreferences itemType: "select" should have exactly one default option', manifest);
+            }
+          }
+          if (unitItems.length > 1) throw new ManifestValidationError('codegenPreferences should have at most one itemType: "unit"', manifest);
+        })(manifest);
+
+        // Widget-specific validation
+        if (opts.resourceType === 'widget' && manifest.containsWidget && (function validateWidgetApi(manifest: PluginManifest) {
+          if (manifest.widgetApi && manifest.editorType?.includes(FW.SLIDES)) throw new ManifestValidationError('Widgets are not supported in Figma Slides', manifest);
+        }(manifest), manifest.widgetApi !== '1.0.0')) {
+          throw new ManifestValidationError('Widgets must specify the \'widgetApi\' manifest field. The latest version is \'1.0.0\'', manifest);
+        }
+
+        // Network access validation
+        if (manifest.networkAccess) {
+          const result = pI(manifest.networkAccess);
+          if (!result.isValid) throw new ManifestValidationError(result.validationErr!, manifest);
+        }
+
+        // Related link domains validation
+        if (manifest.relatedLinkDomains) {
+          if (!Pe(manifest.editorType)) throw new ManifestValidationError('\'relatedLinkDomains\' is only supported for plugins with \'editorType\' containing \'dev\'', manifest);
+          for (const domain of manifest.relatedLinkDomains) {
+            if (!domain.startsWith('https://') || domain.startsWith('http://')) throw new ManifestValidationError(`Invalid domain '${domain}' in 'relatedLinkDomains'. Domains must start with 'https:// or 'http://'`, manifest);
+            if (!validateURLPattern(domain)) throw new ManifestValidationError(`Invalid domain '${domain}' in 'relatedLinkDomains'.`, manifest);
+          }
+        }
+
+        // Dev resource domains validation
+        if (manifest.devResourceDomains) {
+          if (!Pe(manifest.editorType)) throw new ManifestValidationError('\'devResourceDomains\' is only supported for plugins with \'editorType\' containing \'dev\'', manifest);
+          for (const domain of manifest.devResourceDomains) {
+            if (!domain.startsWith('https://') || domain.startsWith('http://')) throw new ManifestValidationError(`Invalid domain '${domain}' in 'devResourceDomains'. Domains must start with 'https:// or 'http://'`, manifest);
+            if (!validateURLPattern(domain)) throw new ManifestValidationError(`Invalid domain '${domain}' in 'devResourceDomains'.`, manifest);
+          }
+        }
+        return manifest;
+      }(manifest!, {
+        resourceType: isWidget ? 'widget' : 'plugin'
+      });
+    } catch (e: any) {
+      error = {
+        type: ho.VALIDATE,
+        text: e.message
+      };
+      if (e.manifest) validatedManifest = e.manifest;
+    }
+  }
+
+  // Fallback manifest for error cases
+  const fallbackManifest = isWidget ? {
+    ...defaultWidgetManifest,
+    editorType
+  } : {
+    ...defaultPluginManifest,
+    editorType,
+    capabilities
+  };
   return {
-    plugin_id: s && s.id || "",
-    name: function (e, t) {
-      if (e) return e.name;
-      if (t.lastKnownName) return t.lastKnownName;
-      if (!t.path) return "Error";
-      {
-        let e = t.path.split(/\/|\\/);
-        return e.length >= 2 ? e[e.length - 2] : t.path;
-      }
-    }(s, t),
-    manifest: s ?? _,
-    localFileId: e,
-    localFilePath: t.path,
-    error: o
+    plugin_id: validatedManifest?.id || '',
+    name: getManifestName(validatedManifest, manifestSource),
+    manifest: validatedManifest ?? fallbackManifest,
+    localFileId: fileId,
+    localFilePath: manifestSource.path!,
+    error: error!
   };
 }
-export async function $$eg71(e, t) {
-  let r = _$$M();
+
+/**
+ * Formats manifest error messages for extra properties.
+ * @param message - The error message.
+ */
+function formatManifestErrorMessage(message: string): string {
+  const extraPropText = 'but got additional property';
+  const idx = message.lastIndexOf(extraPropText);
+  if (idx !== -1) {
+    const prop = message.substring(idx + extraPropText.length).replace(/"/g, '').trim();
+    return `Manifest has unexpected extra property: ${prop}`;
+  }
+  return message;
+}
+
+/**
+ * Formats a PluginError object to string.
+ * @param error - The PluginError object.
+ */
+function formatPluginError(error: PluginError) {
+  return am(error);
+}
+
+/**
+ * Gets the manifest name from manifest or manifestSource.
+ * @param manifest - The PluginManifest object.
+ * @param manifestSource - The PluginManifestSource object.
+ */
+function getManifestName(manifest: PluginManifest | undefined, manifestSource: PluginManifestSource): string {
+  if (manifest) return manifest.name;
+  if (manifestSource.lastKnownName) return manifestSource.lastKnownName;
+  if (!manifestSource.path) return 'Error';
+  const parts = manifestSource.path.split(/\/|\\/);
+  return parts.length >= 2 ? parts[parts.length - 2] : manifestSource.path;
+}
+
+/**
+ * Loads local plugin manifest using Desktop API.
+ * Original name: $$eg71
+ * @param fileId - The local file ID.
+ * @param options - PluginLoadOptions.
+ * @returns PluginData object.
+ */
+export async function loadLocalPluginManifest(fileId: string, options: PluginLoadOptions): Promise<PluginData> {
+  const desktopApi = _$$M();
   try {
-    if (!r) throw Error("desktopApp not available");
-    let n = await r.getLocalFileExtensionManifest(e);
-    return $$em60(e, n, t);
-  } catch (r) {
+    if (!desktopApi) throw new Error('desktopApp not available');
+    const manifestSource = await desktopApi.getLocalFileExtensionManifest(fileId);
+    return getLocalPluginManifest(fileId, manifestSource, options);
+  } catch (err: any) {
     return {
-      plugin_id: "",
-      name: "Error",
-      manifest: "widget" === t.resourceType ? eT : eb,
-      localFileId: e,
-      localFilePath: "",
+      plugin_id: '',
+      name: 'Error',
+      manifest: options.resourceType === 'widget' ? defaultWidgetManifest : defaultPluginManifest,
+      localFileId: fileId,
+      localFilePath: '',
       error: {
         type: ho.LOAD,
-        text: r.message
+        text: err.message
       }
     };
   }
 }
-export function $$ef65(e, t) {
-  let r = e => JSON.stringify(e).split(/(<!--|-->|\bimport)/g).map((e, t) => 1 & t ? e.slice(0, 2) + '"+"' + e.slice(2) : e).join("");
-  if ("string" == typeof t) return `const __html__ = ${r(t)};${e}`;
-  let n = Object.entries(t).map(([e, t]) => `[${r(e)}]:${r(t)}`).join(",");
-  return `const __uiFiles__ = {${n}};${e}`;
+
+/**
+ * Injects HTML or UI files into plugin code string.
+ * Original name: $$ef65
+ * @param code - The plugin code string.
+ * @param htmlOrUi - HTML string or UI files object.
+ * @returns Modified code string.
+ */
+export function injectHtmlOrUiFiles(code: string, htmlOrUi: string | Record<string, string>): string {
+  const serialize = (input: string) => JSON.stringify(input).split(/(<!--|-->|\bimport)/g).map((segment, idx) => idx % 2 ? `${segment.slice(0, 2)}"+"${segment.slice(2)}` : segment).join('');
+  if (typeof htmlOrUi === 'string') return `const __html__ = ${serialize(htmlOrUi)};${code}`;
+  const uiEntries = Object.entries(htmlOrUi).map(([key, value]) => `[${serialize(key)}]:${serialize(value)}`).join(',');
+  return `const __uiFiles__ = {${uiEntries}};${code}`;
 }
-export async function $$eE21(e) {
-  let t;
-  let r = _$$M();
+
+/**
+ * Loads local plugin source code using Desktop API.
+ * Original name: $$eE21
+ * @param fileId - The local file ID.
+ * @returns Source code string.
+ * @throws Error if unable to load or build code.
+ */
+export async function loadLocalPluginSource(fileId: string): Promise<string> {
+  const desktopApi = _$$M();
+  let sourceData;
   try {
-    if (!r) throw Error("desktopApp not available");
-    t = await r.getLocalFileExtensionSource(e);
-  } catch (e) {
-    throw Error(`Unable to load code: ${e}`);
+    if (!desktopApi) throw new Error('desktopApp not available');
+    sourceData = await desktopApi.getLocalFileExtensionSource(fileId);
+  } catch (err: any) {
+    throw new Error(`Unable to load code: ${err}`);
   }
-  if (t.buildErrCode) throw Error("Build error: " + t.stderr + "\nPath was: " + t.path);
-  let n = t.source;
-  t.html && (n = $$ef65(n, t.html));
-  return n;
+  if (sourceData.buildErrCode) throw new Error(`Build error: ${sourceData.stderr}\nPath was: ${sourceData.path}`);
+  let code = sourceData.source;
+  if (sourceData.html) code = injectHtmlOrUiFiles(code, sourceData.html);
+  return code;
 }
-export function $$ey26(e) {
-  return e.error?.text === $$el27() ? e.name : `${e.error ? `\u26A0  ` : ""}${e.name}`;
+
+/**
+ * Formats plugin name for display, including error state.
+ * Original name: $$ey26
+ * @param pluginData - PluginData object.
+ * @returns Formatted name string.
+ */
+export function formatPluginName(pluginData: PluginData): string {
+  return pluginData.error?.text === getMissingEditorTypeError() ? pluginData.name : `${pluginData.error ? `\u26A0  ` : ''}${pluginData.name}`;
 }
-let eb = {
-  id: "",
-  name: "",
-  api: "",
-  main: ""
-};
-let eT = {
-  id: "",
-  name: "",
-  api: "",
-  main: "",
-  containsWidget: !0,
-  widgetApi: ""
-};
-let $$eI57 = {
-  id: "",
-  plugin_id: "",
-  manifest: {
-    ...eb
-  },
-  name: "",
-  version: "",
-  release_notes: "",
-  installed_by: "user",
-  description: "",
-  tagline: "",
-  creator_policy: "",
-  created_at: "",
-  redirect_icon_url: "",
-  redirect_cover_image_url: "",
-  redirect_code_url: "",
-  is_private: !1
-};
-let eS = {
-  id: "",
-  publisher: {
-    is_restricted_by_current_user: !1,
-    id: "",
-    name: "",
-    img_url: "",
-    img_urls: {},
-    profile_handle: "",
-    primary_user_id: null,
-    current_user_is_following: !1,
-    current_user_is_followed: !1,
-    location: null,
-    follower_count: 0,
-    following_count: 0,
-    entity_type: o1.USER,
-    badges: [],
-    description: ""
-  },
-  creator: {
-    id: "",
-    handle: "",
-    img_url: ""
-  },
-  category_id: null,
-  versions: {},
-  install_count: 0,
-  unique_run_count: 0,
-  view_count: 0,
-  like_count: 0,
-  comment_count: 0,
-  unpublished_at: null,
-  current_plugin_version_id: "",
-  roles: {},
-  realtime_token: "",
-  support_contact: "",
-  created_at: "",
-  org_id: null,
-  redirect_thumbnail_url: null,
-  thumbnail_url: null,
-  community_publishers: {
-    accepted: [],
-    pending: []
-  },
-  comments_setting: Ni.ENABLED,
-  is_widget: !1,
-  editor_type: "design_and_whiteboard",
-  publishing_status: null,
-  badges: []
-};
-let ev = {
-  ...eS,
-  is_widget: !0
-};
-let eA = {
-  name: "",
-  currentVersionReleaseNotes: "",
-  newVersionReleaseNotes: "",
-  description: "",
-  tagline: "",
-  creatorPolicy: "",
-  categoryId: "",
-  iconSrc: "",
-  coverImageSrc: "",
-  widgetSnapshotImageSrc: "",
-  widgetSnapshotImageError: null,
-  supportContact: "",
-  iconImageError: null,
-  coverImageError: null,
-  author: {
-    user_id: ""
-  },
-  twoFactorAuthDisabledError: null,
-  emailNotVerifiedError: null,
-  accountDetailsChangedError: null,
-  freemiumRequiredForMigrating: null,
-  commentsSetting: Ni.ENABLED,
-  creators: [],
-  publishers: {
-    inputValue: "",
-    tokens: [],
-    errorMessage: ""
-  },
-  blockPublishingOnToS: !1,
-  playgroundFigFile: null,
-  playgroundFilePublishType: _$$J.Actions.NOOP
-};
-export function $$ex3(e) {
-  if (!e || !e.versions) return null;
-  let t = e.current_plugin_version_id;
-  return t && e.versions[t] || null;
+
+/**
+ * Gets the current plugin version object from published plugin.
+ * Original name: $$ex3
+ * @param publishedPlugin - Published plugin object.
+ * @returns Current plugin version object or null.
+ */
+export function getCurrentPluginVersion(publishedPlugin: any): any | null {
+  if (!publishedPlugin || !publishedPlugin.versions) return null;
+  const versionId = publishedPlugin.current_plugin_version_id;
+  return versionId && publishedPlugin.versions[versionId] || null;
 }
-export function $$eN75(e) {
-  let t = $$ex3(e);
-  return t;
+
+/**
+ * Gets the current plugin version from published plugin.
+ * Original name: $$eN75
+ * @param publishedPlugin - Published plugin object.
+ * @returns Current plugin version object.
+ */
+export function getPluginVersion(publishedPlugin: any): any {
+  return getCurrentPluginVersion(publishedPlugin);
 }
-export function $$eC31(e, t) {
-  if (ZY(t)) return _$$Qx(t);
-  let r = e[t] ?? {};
-  for (let e in r) return r[e].current_plugin_version_id;
+
+/**
+ * Gets the current plugin version ID from plugin map.
+ * Original name: $$eC31
+ * @param pluginsMap - Plugins map.
+ * @param pluginId - Plugin ID.
+ * @returns Current plugin version ID.
+ */
+export function getCurrentPluginVersionId(pluginsMap: any, pluginId: string) {
+  if (ZY(pluginId)) return _$$Qx(pluginId);
+  const pluginObj = pluginsMap[pluginId] ?? {};
+  // eslint-disable-next-line no-unreachable-loop
+  for (const key in pluginObj) return pluginObj[key].current_plugin_version_id;
 }
-let ew = e => e?.containsWidget ? ev : eS;
-export function $$eO6(e, t, r, n) {
-  if (r?.manifest?.id) {
-    if (e && e[r?.manifest?.id]) return e[r?.manifest?.id];
-    if (t && t[r?.manifest?.id]) return t[r?.manifest?.id];
+
+/**
+ * Returns default published plugin or widget structure based on manifest.
+ * Original name: ew
+ * @param manifest - PluginManifest object.
+ * @returns Default published plugin or widget structure.
+ */
+function getDefaultPublishedResource(manifest?: PluginManifest) {
+  return manifest?.containsWidget ? defaultPublishedWidget : defaultPublishedPlugin;
+}
+
+/**
+ * Gets published plugin or widget by manifest or ID.
+ * Original name: $$eO6
+ * @param plugins - Published plugins map.
+ * @param widgets - Published widgets map.
+ * @param localPlugin - Local plugin object.
+ * @param id - Optional plugin/widget ID.
+ * @returns Published plugin/widget object.
+ */
+export function getPublishedResource(plugins: any, widgets: any, localPlugin?: any, id?: string): any {
+  if (localPlugin?.manifest?.id) {
+    if (plugins && plugins[localPlugin.manifest.id]) return plugins[localPlugin.manifest.id];
+    if (widgets && widgets[localPlugin.manifest.id]) return widgets[localPlugin.manifest.id];
   }
-  if (n) {
-    if (e && e[n]) return e[n];
-    if (t && t[n]) return t[n];
+  if (id) {
+    if (plugins && plugins[id]) return plugins[id];
+    if (widgets && widgets[id]) return widgets[id];
   }
-  return ew(r?.manifest);
+  return getDefaultPublishedResource(localPlugin?.manifest);
 }
-export function $$eR40(e, t, r) {
-  if (r?.manifest?.id) {
-    if (e && e[r?.manifest?.id]) return e[r?.manifest?.id];
-    if (t && t[r?.manifest?.id]) return t[r?.manifest?.id];
+
+/**
+ * Gets published plugin or widget by manifest or ID, returns null if not found.
+ * Original name: $$eR40
+ * @param plugins - Published plugins map.
+ * @param widgets - Published widgets map.
+ * @param localPlugin - Local plugin object.
+ * @returns Published plugin/widget object or null.
+ */
+export function getPublishedResourceOrNull(plugins: any, widgets: any, localPlugin?: any): any | null {
+  if (localPlugin?.manifest?.id) {
+    if (plugins && plugins[localPlugin.manifest.id]) return plugins[localPlugin.manifest.id];
+    if (widgets && widgets[localPlugin.manifest.id]) return widgets[localPlugin.manifest.id];
   }
   return null;
 }
-export function $$eL62(e, t) {
-  return Hc(e, t, eS);
+
+/**
+ * Gets plugin metadata using fallback.
+ * Original name: $$eL62
+ * @param plugin - Plugin object.
+ * @param fallback - Fallback object.
+ * @returns Plugin metadata object.
+ */
+export function getPluginMetadata(plugin: any, fallback: any): any {
+  return Hc(plugin, fallback, defaultPublishedPlugin);
 }
-export function $$eP32(e, t) {
-  return Hc(e, t, ev);
+
+/**
+ * Gets widget metadata using fallback.
+ * Original name: $$eP32
+ * @param widget - Widget object.
+ * @param fallback - Fallback object.
+ * @returns Widget metadata object.
+ */
+export function getWidgetMetadata(widget: any, fallback: any): any {
+  return Hc(widget, fallback, defaultPublishedWidget);
 }
-export function $$eD18(e, t) {
-  let r = {};
-  Object.keys(e).forEach(n => {
-    (function (e, t) {
-      let r = e.roles.org && e.roles.org.id === t.id;
-      let n = e.roles.is_public && e.publisher.id === t.community_profile_id;
-      return !!(r || n);
-    })(e[n], t) && (r[n] = e[n]);
+/**
+ * Filters resources by org or public publisher.
+ * Original name: $$eD18
+ * @param resources - Resource map.
+ * @param org - Org object.
+ * @returns Filtered resource map.
+ */
+export function filterResourcesByOrgOrPublisher(resources: Record<string, any>, org: any): Record<string, any> {
+  const result: Record<string, any> = {};
+  Object.keys(resources).forEach(key => {
+    const resource = resources[key];
+    const isOrgMatch = resource.roles.org && resource.roles.org.id === org.id;
+    const isPublicPublisher = resource.roles.is_public && resource.publisher.id === org.community_profile_id;
+    if (isOrgMatch || isPublicPublisher) {
+      result[key] = resource;
+    }
   });
-  return r;
+  return result;
 }
-export function $$ek30(e, t) {
-  let r = {};
-  Object.keys(e).forEach(n => {
-    let i = e[n];
-    i.roles.org && i.roles.org.id === t && (r[i.id] = i);
+
+/**
+ * Filters resources by org id.
+ * Original name: $$ek30
+ * @param resources - Resource map.
+ * @param orgId - Org id.
+ * @returns Filtered resource map.
+ */
+export function filterResourcesByOrgId(resources: Record<string, any>, orgId: string): Record<string, any> {
+  const result: Record<string, any> = {};
+  Object.keys(resources).forEach(key => {
+    const resource = resources[key];
+    if (resource.roles.org && resource.roles.org.id === orgId) {
+      result[resource.id] = resource;
+    }
   });
-  return r;
+  return result;
 }
-export function $$eM52(e, t) {
-  let r = {};
-  Object.keys(e).forEach(n => {
-    let i = e[n];
-    $$es9(t, $$eN75(i).manifest.editorType) && (r[i.id] = i);
+
+/**
+ * Filters resources by editor type match.
+ * Original name: $$eM52
+ * @param resources - Resource map.
+ * @param editorType - Editor type.
+ * @returns Filtered resource map.
+ */
+export function filterResourcesByEditorType(resources: Record<string, any>, editorType: string): Record<string, any> {
+  const result: Record<string, any> = {};
+  Object.keys(resources).forEach(key => {
+    const resource = resources[key];
+    if (isEditorTypeMatch(editorType, getPluginVersion(resource).manifest.editorType)) {
+      result[resource.id] = resource;
+    }
   });
-  return r;
+  return result;
 }
-export function $$eF33(e) {
-  return !!e?.roles?.org;
+
+/**
+ * Checks if resource has org role.
+ * Original name: $$eF33
+ * @param resource - Resource object.
+ * @returns True if org role exists.
+ */
+export function hasOrgRole(resource: any): boolean {
+  return !!resource?.roles?.org;
 }
-export function $$ej56(e, t, r = !0) {
-  let n = {};
-  Object.keys(e).forEach(i => {
-    let a = e[i];
-    let s = r ? jY : Ro;
-    (Dd(a, t) || s(a, t)) && (n[i] = e[i]);
+
+/**
+ * Filters resources by Dd or jY/Ro match.
+ * Original name: $$ej56
+ * @param resources - Resource map.
+ * @param value - Value to match.
+ * @param useJY - Use jY (default true) or Ro.
+ * @returns Filtered resource map.
+ */
+export function filterResourcesByMatch(resources: Record<string, any>, value: any, useJY: boolean = true): Record<string, any> {
+  const result: Record<string, any> = {};
+  Object.keys(resources).forEach(key => {
+    const resource = resources[key];
+    const matcher = useJY ? jY : Ro;
+    if (Dd(resource, value) || matcher(resource, value)) {
+      result[key] = resource;
+    }
   });
-  return n;
+  return result;
 }
-export function $$eU29(e) {
-  return sortByCreatedAt(Object.keys(e).map(t => $$eN75(e[t]))).map(t => e[t.plugin_id]);
+
+/**
+ * Sorts resources by createdAt.
+ * Original name: $$eU29
+ * @param resources - Resource map.
+ * @returns Sorted array of resources.
+ */
+export function sortResourcesByCreatedAt(resources: Record<string, any>): any[] {
+  return sortByCreatedAt(Object.keys(resources).map(key => getPluginVersion(resources[key]))).map(item => resources[item.plugin_id]);
 }
-export function $$eB10(e, t) {
-  let r = e.roles;
-  let n = !t.is_public && AC(e);
-  return !!r.is_public != !!t.is_public || r.org?.id !== t.org?.id || n;
+
+/**
+ * Checks if roles or org id/public status changed.
+ * Original name: $$eB10
+ * @param resource - Resource object.
+ * @param roleObj - Role object.
+ * @returns True if changed.
+ */
+export function hasRoleOrOrgChanged(resource: any, roleObj: any): boolean {
+  const roles = resource.roles;
+  const isNotPublicAndAC = !roleObj.is_public && AC(resource);
+  return !!roles.is_public !== !!roleObj.is_public || roles.org?.id !== roleObj.org?.id || isNotPublicAndAC;
 }
-export function $$eG49(e) {
-  if (!e) throw Error("Code string cannot be empty");
-  let t = YH(e).length;
-  if (t > yO) throw Error(`plugin code exceeds max size of ${Math.floor(yO / 1e6)}MB`);
-  return t;
+
+/**
+ * Validates plugin code size.
+ * Original name: $$eG49
+ * @param code - Code string.
+ * @returns Code length.
+ * @throws Error if code is empty or exceeds max size.
+ */
+export function validatePluginCodeSize(code: string): number {
+  if (!code) throw new Error('Code string cannot be empty');
+  const length = YH(code).length;
+  if (length > yO) throw new Error(`plugin code exceeds max size of ${Math.floor(yO / 1e6)}MB`);
+  return length;
 }
-export function $$eV78(e) {
-  return Wl(e, getI18nString("community.publishing.extension_icon_image"));
+
+/**
+ * Validates extension icon image.
+ * Original name: $$eV78
+ * @param file - File object.
+ * @returns Result of Wl.
+ */
+export function validateExtensionIconImage(file: any): any {
+  return Wl(file, getI18nString('community.publishing.extension_icon_image'));
 }
-export async function $$eH77(e, t, r) {
-  $$eV78(e);
-  return await eK(e, {
+
+/**
+ * Validates and resizes icon image.
+ * Original name: $$eH77
+ * @param file - File object.
+ * @param param2 - Param2.
+ * @param param3 - Param3.
+ * @returns Resized file.
+ */
+export async function validateAndResizeIconImage(file: any, param2: any, param3: any): Promise<any> {
+  validateExtensionIconImage(file);
+  return await resizeImage(file, {
     width: DK,
     height: DK
-  }, t, getI18nString("community.publishing.error_icon_image_dimensions"), r);
+  }, param2, getI18nString('community.publishing.error_icon_image_dimensions'), param3);
 }
-export function $$ez66(e) {
-  return Wl(e, "Artwork image");
+
+/**
+ * Validates artwork image.
+ * Original name: $$ez66
+ * @param file - File object.
+ * @returns Result of Wl.
+ */
+export function validateArtworkImage(file: any): any {
+  return Wl(file, 'Artwork image');
 }
-export function $$eW63(e) {
-  let t = e?.[0];
-  if (!t) throw Error(getI18nString("community.publishing.error_file_not_found"));
-  return t;
+
+/**
+ * Gets first file from array, throws if not found.
+ * Original name: $$eW63
+ * @param files - Array of files.
+ * @returns First file.
+ * @throws Error if not found.
+ */
+export function getFirstFileOrThrow(files: any[]): any {
+  const file = files?.[0];
+  if (!file) throw new Error(getI18nString('community.publishing.error_file_not_found'));
+  return file;
 }
-async function eK(e, t, r, n, i) {
-  let {
+
+/**
+ * Resizes image to given dimensions.
+ * Original name: eK
+ * @param file - File object.
+ * @param dimensions - {width, height}.
+ * @param allowMultiple - Allow multiple.
+ * @param errorMsg - Error message.
+ * @param skipCheck - Skip check.
+ * @returns Resized file.
+ */
+async function resizeImage(file: File, dimensions: {
+  width: number;
+  height: number;
+}, allowMultiple: boolean, errorMsg: string, skipCheck?: boolean): Promise<File> {
+  const {
     width,
     height
-  } = t;
-  let o = URL.createObjectURL(e);
-  let l = await l8(o);
+  } = dimensions;
+  const objectUrl = URL.createObjectURL(file);
+  const image = await l8(objectUrl);
   try {
-    if (!i && !function (e, t, r) {
-      let {
-        width,
-        height
-      } = t;
-      return e.width === width && e.height === height || r && e.width % width == 0 && e.height % height == 0 && e.width / width == e.height / height;
-    }(l, t, r)) throw Error(n);
-    if (l.width === width && l.height === height) return e;
-    let o = await new Promise((e, t) => {
-      let r = document.createElement("canvas");
+    if (!skipCheck && !isImageSizeValid(image, dimensions, allowMultiple)) {
+      throw new Error(errorMsg);
+    }
+    if (image.width === width && image.height === height) return file;
+    const blob: Blob = await new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
       try {
-        r.width = width;
-        r.height = height;
-        r.getContext("2d").drawImage(l, 0, 0, width, height);
-        r.toBlob(r => r ? e(r) : t(Error("Failed to resize image")));
-      } catch (e) {
-        t(e);
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d')!.drawImage(image, 0, 0, width, height);
+        canvas.toBlob(b => b ? resolve(b) : reject(new Error('Failed to resize image')));
+      } catch (err) {
+        reject(err);
       } finally {
-        r.remove();
+        canvas.remove();
       }
     });
-    return new File([o], e.name, {
-      type: o.type
+    return new File([blob], file.name, {
+      type: blob.type
     });
   } finally {
-    URL.revokeObjectURL(o);
-    l.remove();
+    URL.revokeObjectURL(objectUrl);
+    image.remove();
   }
 }
-export async function $$eY68(e) {
-  let t = (await XHR.post(`/api/${_$$n(e)}`)).data.meta;
-  if (!t.id) throw Error("cannot generate plugin ID");
-  return t;
+
+/**
+ * Checks if image size is valid.
+ * Original name: (inline in eK)
+ * @param image - Image object.
+ * @param dimensions - {width, height}.
+ * @param allowMultiple - Allow multiple.
+ * @returns True if valid.
+ */
+function isImageSizeValid(image: any, dimensions: {
+  width: number;
+  height: number;
+}, allowMultiple: boolean): boolean {
+  const {
+    width,
+    height
+  } = dimensions;
+  return image.width === width && image.height === height || allowMultiple && image.width % width === 0 && image.height % height === 0 && image.width / width === image.height / height;
 }
-export function $$e$74(e, t, r) {
-  return e?.roles.org ?? (t && r ? {
-    id: t.id,
-    name: t.name,
-    img_url: t.img_url
+
+/**
+ * Generates plugin ID via XHR.
+ * Original name: $$eY68
+ * @param value - Value.
+ * @returns Plugin meta.
+ * @throws Error if cannot generate ID.
+ */
+export async function generatePluginId(value: any): Promise<any> {
+  const meta = (await XHR.post(`/api/${_$$n(value)}`)).data.meta;
+  if (!meta.id) throw new Error('cannot generate plugin ID');
+  return meta;
+}
+
+/**
+ * Gets org role from resource or fallback.
+ * Original name: $$e$74
+ * @param resource - Resource object.
+ * @param org - Org object.
+ * @param publisher - Publisher object.
+ * @returns Org role or null.
+ */
+export function getOrgRole(resource: any, org: any, publisher: any): any {
+  return resource?.roles.org ?? (org && publisher ? {
+    id: org.id,
+    name: org.name,
+    img_url: org.img_url
   } : null);
 }
-export function $$eX72(e, t) {
-  return t === Lu.ORG ? e ? {
-    org: e
-  } : (_$$k2.error("publishing a private plugin without a valid org entity."), null) : {
-    is_public: !0
+
+/**
+ * Gets role object for publishing.
+ * Original name: $$eX72
+ * @param org - Org object.
+ * @param type - Type string.
+ * @returns Role object or null.
+ */
+export function getPublishingRole(org: any, type: string): any {
+  return type === Lu.ORG ? org ? {
+    org
+  } : (_$$k2.error('publishing a private plugin without a valid org entity.'), null) : {
+    is_public: true
   };
 }
-export function $$eq16(e) {
-  return e.name === eA.name && e.newVersionReleaseNotes === eA.newVersionReleaseNotes && e.supportContact === eA.supportContact && e.description === eA.description && e.iconSrc === eA.iconSrc && e.coverImageSrc === eA.coverImageSrc && null == e.iconBlob && null == e.coverImageBlob;
+
+/**
+ * Checks if publishing data is default.
+ * Original name: $$eq16
+ * @param data - Publishing data.
+ * @returns True if default.
+ */
+export function isDefaultPublishingData(data: any): boolean {
+  return data.name === defaultPublishingData.name && data.newVersionReleaseNotes === defaultPublishingData.newVersionReleaseNotes && data.supportContact === defaultPublishingData.supportContact && data.description === defaultPublishingData.description && data.iconSrc === defaultPublishingData.iconSrc && data.coverImageSrc === defaultPublishingData.coverImageSrc && data.iconBlob == null && data.coverImageBlob == null;
 }
-export function $$eJ59(e, t, r, n, i) {
-  let a;
-  let s = void 0 !== t ? e.localPlugins[t] : void 0;
-  let o = s && s.manifest;
-  let l = $$eO6(e.publishedPlugins, e.publishedWidgets, s, r);
-  let d = $$eN75(l);
-  let c = o?.permissions?.includes("payments");
+
+/**
+ * Gets publishing data for plugin.
+ * Original name: $$eJ59
+ * @param state - State object.
+ * @param pluginId - Plugin id.
+ * @param resourceId - Resource id.
+ * @param snapshotUrl - Snapshot url.
+ * @param snapshotBlob - Snapshot blob.
+ * @returns Publishing data object.
+ */
+export function getPublishingData(state: any, pluginId: string, resourceId: string, snapshotUrl: any, snapshotBlob: any): any {
+  let author;
+  const localPlugin = pluginId !== undefined ? state.localPlugins[pluginId] : undefined;
+  const manifest = localPlugin && localPlugin.manifest;
+  const publishedResource = getPublishedResource(state.publishedPlugins, state.publishedWidgets, localPlugin, resourceId);
+  const pluginVersion = getPluginVersion(publishedResource);
+  const hasPaymentsApi = manifest?.permissions?.includes('payments');
   try {
-    a = En(l, e);
-  } catch (e) {
-    throw Error("Unable to get Plugin Data. You might be trying to act on a personal plugin in an Org space.");
+    author = En(publishedResource, state);
+  } catch {
+    throw new Error('Unable to get Plugin Data. You might be trying to act on a personal plugin in an Org space.');
   }
-  let {
+  const {
     accepted,
     pending
-  } = l.community_publishers;
-  let _ = {
+  } = publishedResource.community_publishers;
+  const publishers = {
     ...Rs(),
-    tokens: (l.community_publishers ? [...accepted.map(e => ({
+    tokens: (publishedResource.community_publishers ? [...accepted.map((e: any) => ({
       ...e,
-      isPending: !1
-    })), ...(pending?.map(e => ({
+      isPending: false
+    })), ...(pending?.map((e: any) => ({
       ...e,
-      isPending: !0
-    })) || [])] : []).reduce((t, r) => Ii(e.authedProfilesById[r.id], a) ? t : t.concat([{
+      isPending: true
+    })) || [])] : []).reduce((arr: any[], item: any) => Ii(state.authedProfilesById[item.id], author) ? arr : arr.concat([{
       state: _$$d.OK,
-      content: r
+      content: item
     }]), [])
   };
   return {
-    name: d.name || o && o.name || eA.name,
-    currentVersionReleaseNotes: d.release_notes || eA.newVersionReleaseNotes,
-    newVersionReleaseNotes: eA.newVersionReleaseNotes,
-    tags: l.tags,
-    tagsV2: l.tags_v2 && Object.keys(l.tags_v2),
-    supportContact: l.support_contact || e.user?.email || eA.supportContact,
-    description: d.description || eA.description,
-    tagline: d.tagline || eA.tagline,
-    creatorPolicy: d.creator_policy ?? eA.creatorPolicy,
-    iconSrc: d.redirect_icon_url || eA.iconSrc,
-    widgetSnapshotImageSrc: n || d.redirect_snapshot_url || eA.widgetSnapshotImageSrc,
-    widgetSnapshotImageBlob: i || eA.widgetSnapshotImageBlob,
-    coverImageSrc: d.redirect_cover_image_url || eA.coverImageSrc,
-    iconImageError: eA.iconImageError,
-    coverImageError: eA.coverImageError,
-    widgetSnapshotImageError: eA.widgetSnapshotImageError,
-    twoFactorAuthDisabledError: eA.twoFactorAuthDisabledError,
-    emailNotVerifiedError: eA.emailNotVerifiedError,
-    accountDetailsChangedError: eA.accountDetailsChangedError,
-    freemiumRequiredForMigrating: eA.freemiumRequiredForMigrating,
-    author: a,
-    publishers: _,
-    creators: accepted.map(e => ({
+    name: pluginVersion.name || manifest && manifest.name || defaultPublishingData.name,
+    currentVersionReleaseNotes: pluginVersion.release_notes || defaultPublishingData.newVersionReleaseNotes,
+    newVersionReleaseNotes: defaultPublishingData.newVersionReleaseNotes,
+    tags: publishedResource.tags,
+    tagsV2: publishedResource.tags_v2 && Object.keys(publishedResource.tags_v2),
+    supportContact: publishedResource.support_contact || state.user?.email || defaultPublishingData.supportContact,
+    description: pluginVersion.description || defaultPublishingData.description,
+    tagline: pluginVersion.tagline || defaultPublishingData.tagline,
+    creatorPolicy: pluginVersion.creator_policy ?? defaultPublishingData.creatorPolicy,
+    iconSrc: pluginVersion.redirect_icon_url || defaultPublishingData.iconSrc,
+    widgetSnapshotImageSrc: snapshotUrl || pluginVersion.redirect_snapshot_url || defaultPublishingData.widgetSnapshotImageSrc,
+    widgetSnapshotImageBlob: snapshotBlob || defaultPublishingData.widgetSnapshotImageBlob,
+    coverImageSrc: pluginVersion.redirect_cover_image_url || defaultPublishingData.coverImageSrc,
+    iconImageError: defaultPublishingData.iconImageError,
+    coverImageError: defaultPublishingData.coverImageError,
+    widgetSnapshotImageError: defaultPublishingData.widgetSnapshotImageError,
+    twoFactorAuthDisabledError: defaultPublishingData.twoFactorAuthDisabledError,
+    emailNotVerifiedError: defaultPublishingData.emailNotVerifiedError,
+    accountDetailsChangedError: defaultPublishingData.accountDetailsChangedError,
+    freemiumRequiredForMigrating: defaultPublishingData.freemiumRequiredForMigrating,
+    author,
+    publishers,
+    creators: accepted.map((e: any) => ({
       ...e,
-      isPending: !1
-    })).concat((pending ?? []).map(e => ({
+      isPending: false
+    })).concat((pending ?? []).map((e: any) => ({
       ...e,
-      isPending: !0
-    }))).filter(t => !Ii(e.authedProfilesById[t.id], a) && t.entity_type === o1.USER),
-    commentsSetting: l.comments_setting || eA.commentsSetting,
-    categoryId: l.category_id || eA.categoryId,
-    blockPublishingOnToS: xw(e),
-    playgroundFigFile: d.playground_fig_file,
+      isPending: true
+    }))).filter((item: any) => !Ii(state.authedProfilesById[item.id], author) && item.entity_type === o1.USER),
+    commentsSetting: publishedResource.comments_setting || defaultPublishingData.commentsSetting,
+    categoryId: publishedResource.category_id || defaultPublishingData.categoryId,
+    blockPublishingOnToS: xw(state),
+    playgroundFigFile: pluginVersion.playground_fig_file,
     playgroundFilePublishType: _$$J.Actions.NOOP,
-    isPaid: !!l.monetized_resource_metadata || c,
-    price: vf(l.monetized_resource_metadata),
-    isSubscription: l.monetized_resource_metadata?.is_subscription,
-    hasPaymentsApi: c,
-    annualDiscount: l.monetized_resource_metadata?.annual_discount_percentage,
-    isAnnualDiscountActive: !!l.monetized_resource_metadata?.annual_discount_active_at,
-    carouselMedia: N6(l)
+    isPaid: !!publishedResource.monetized_resource_metadata || hasPaymentsApi,
+    price: vf(publishedResource.monetized_resource_metadata),
+    isSubscription: publishedResource.monetized_resource_metadata?.is_subscription,
+    hasPaymentsApi,
+    annualDiscount: publishedResource.monetized_resource_metadata?.annual_discount_percentage,
+    isAnnualDiscountActive: !!publishedResource.monetized_resource_metadata?.annual_discount_active_at,
+    carouselMedia: N6(publishedResource)
   };
 }
-export function $$eZ64(e) {
-  return !!$$eN75(e).id && !e.unpublished_at;
+
+/**
+ * Checks if plugin version is published.
+ * Original name: $$eZ64
+ * @param resource - Resource object.
+ * @returns True if published.
+ */
+export function isPluginVersionPublished(resource: any): boolean {
+  return !!getPluginVersion(resource).id && !resource.unpublished_at;
 }
-export function $$eQ55(e) {
-  if (!e) return {};
-  let t = {};
-  e.forEach(e => {
-    $$eZ64(e) && (t[e.id] = e);
+
+/**
+ * Filters published resources.
+ * Original name: $$eQ55
+ * @param resources - Array of resources.
+ * @returns Filtered resource map.
+ */
+export function filterPublishedResources(resources: any[]): Record<string, any> {
+  if (!resources) return {};
+  const result: Record<string, any> = {};
+  resources.forEach(resource => {
+    if (isPluginVersionPublished(resource)) {
+      result[resource.id] = resource;
+    }
   });
-  return t;
+  return result;
 }
-export function $$e035(e, t, r, n) {
-  let i = {};
-  (e.email_validated_at || (i.emailNotVerifiedError = getI18nString("community.publishing.please_verify_your_email_address_to_publish")), n || (e.saml_sso_only || e.google_sso_only || e.two_factor_app_enabled || e.phone_number) && (t.code !== aP.FAILURE || t.error !== getI18nString("community.publishing.you_must_enable_two_factor_authentication_to_publish"))) ? !n && (e.plugin_publishing_blocked_at || e.community_blocked_at || t.code === aP.FAILURE && t.error === getI18nString("community.publishing.you_must_verify_your_account_details_to_publish")) ? i.accountDetailsChangedError = getI18nString("community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin") : t.code === aP.FAILURE && t.error && (i.other = t.error) : i.twoFactorAuthDisabledError = r ? getI18nString("community.publishing.please_enable_two_factor_authentication_to_publish_this_widget") : getI18nString("community.publishing.please_enable_two_factor_authentication_to_publish_this_plugin");
-  return i;
+
+/**
+ * Validates publishing errors for user account.
+ * Original name: $$e035
+ * @param user - User object.
+ * @param status - Status object.
+ * @param isWidget - Is widget.
+ * @param isVerified - Is verified.
+ * @returns Error object.
+ */
+export function getPublishingErrors(user: any, status: any, isWidget: boolean, isVerified: boolean): Record<string, any> {
+  const errors: Record<string, any> = {};
+  if (!user.email_validated_at) {
+    errors.emailNotVerifiedError = getI18nString('community.publishing.please_verify_your_email_address_to_publish');
+  }
+  if (isVerified || (user.saml_sso_only || user.google_sso_only || user.two_factor_app_enabled || user.phone_number) && (status.code !== aP.FAILURE || status.error !== getI18nString('community.publishing.you_must_enable_two_factor_authentication_to_publish'))) {
+    if (!isVerified && (user.plugin_publishing_blocked_at || user.community_blocked_at || status.code === aP.FAILURE && status.error === getI18nString('community.publishing.you_must_verify_your_account_details_to_publish'))) {
+      errors.accountDetailsChangedError = getI18nString('community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin');
+    } else if (status.code === aP.FAILURE && status.error) {
+      errors.other = status.error;
+    }
+  } else {
+    errors.twoFactorAuthDisabledError = isWidget ? getI18nString('community.publishing.please_enable_two_factor_authentication_to_publish_this_widget') : getI18nString('community.publishing.please_enable_two_factor_authentication_to_publish_this_plugin');
+  }
+  return errors;
 }
-export function $$e147(e, t, r, n) {
-  if (!e) return {};
-  let i = {};
-  0 === _$$Yp(e.name).length && (i.name = getI18nString("community.publishing.name_must_not_be_empty"));
-  0 === _$$Yp(e.tagline).length && (i.tagline = getI18nString("community.publishing.add_a_tagline"));
-  _$$ZB(e.description) && (i.description = getI18nString("community.publishing.add_a_description"));
-  let a = _$$Yp(e.supportContact);
-  if (0 === a.length ? i.supportContact = getI18nString("community.publishing.support_contact_must_not_be_empty") : xf(a) || gU(a) || (i.supportContact = getI18nString("community.publishing.support_contact_must_be_a_valid_email_or_url")), 0 === _$$Yp(e.iconSrc).length && (i.iconImageError = getI18nString("community.publishing.icon_cant_be_empty")), i.carouselMedia = vC(e.carouselMedia), e.categoryId || (i.categoryId = getI18nString("community.publishing.category_cant_be_empty")), void 0 === e.price || t.permissions?.includes("payments") || n?.third_party_m10n_status !== PN.FLAGGED || (i.freemiumRequiredForMigrating = getI18nString("community.seller.freemium_required_for_migration")), e.playgroundFigFile && t.editorType?.length === 1) {
-    let n = t.editorType[0];
-    let a = e.playgroundFigFile.editor_type;
-    if (n === FW.FIGMA && "design" !== a || n === FW.FIGJAM && "whiteboard" !== a) {
-      let e = n === FW.FIGMA ? getI18nString("community.publishing.playground_file.figma") : getI18nString("community.publishing.playground_file.figjam");
-      i.playgroundFigFile = r ? getI18nString("community.publishing.widget_playground_file_editor_type_error", {
-        editorType: e
-      }) : getI18nString("community.publishing.plugin_playground_file_editor_type_error", {
-        editorType: e
+/**
+ * Validates publishing data for required fields and constraints.
+ * Original name: $$e147
+ * @param data - Publishing data object.
+ * @param manifest - PluginManifest object.
+ * @param isWidget - Is widget.
+ * @param publishedResource - Published resource object.
+ * @returns Validation errors object.
+ */
+export function validatePublishingData(data: any, manifest: PluginManifest, isWidget: boolean, publishedResource: any): Record<string, any> {
+  if (!data) return {};
+  const errors: Record<string, any> = {};
+  if (_$$Yp(data.name).length === 0) errors.name = getI18nString('community.publishing.name_must_not_be_empty');
+  if (_$$Yp(data.tagline).length === 0) errors.tagline = getI18nString('community.publishing.add_a_tagline');
+  if (_$$ZB(data.description)) errors.description = getI18nString('community.publishing.add_a_description');
+  const supportContact = _$$Yp(data.supportContact);
+  if (supportContact.length === 0) {
+    errors.supportContact = getI18nString('community.publishing.support_contact_must_not_be_empty');
+  } else if (xf(supportContact) || gU(supportContact)) {
+    // valid
+  } else {
+    errors.supportContact = getI18nString('community.publishing.support_contact_must_be_a_valid_email_or_url');
+  }
+  if (_$$Yp(data.iconSrc).length === 0) errors.iconImageError = getI18nString('community.publishing.icon_cant_be_empty');
+  errors.carouselMedia = vC(data.carouselMedia);
+  if (!data.categoryId) errors.categoryId = getI18nString('community.publishing.category_cant_be_empty');
+  if (data.price === undefined || manifest.permissions?.includes('payments') || publishedResource?.third_party_m10n_status !== PN.FLAGGED) {
+    // skip freemiumRequiredForMigrating
+  } else {
+    errors.freemiumRequiredForMigrating = getI18nString('community.seller.freemium_required_for_migration');
+  }
+  if (data.playgroundFigFile && manifest.editorType?.length === 1) {
+    const manifestEditorType = manifest.editorType[0];
+    const playgroundEditorType = data.playgroundFigFile.editor_type;
+    if (manifestEditorType === FW.FIGMA && playgroundEditorType !== 'design' || manifestEditorType === FW.FIGJAM && playgroundEditorType !== 'whiteboard') {
+      const editorTypeStr = manifestEditorType === FW.FIGMA ? getI18nString('community.publishing.playground_file.figma') : getI18nString('community.publishing.playground_file.figjam');
+      errors.playgroundFigFile = isWidget ? getI18nString('community.publishing.widget_playground_file_editor_type_error', {
+        editorType: editorTypeStr
+      }) : getI18nString('community.publishing.plugin_playground_file_editor_type_error', {
+        editorType: editorTypeStr
       });
     }
   }
-  r && 0 === _$$Yp(e.widgetSnapshotImageSrc).length && (i.widgetSnapshotImageError = getI18nString("community.publishing.snapshot_must_not_be_empty"));
-  let s = function (e, t) {
-    if (!e.isPaid || e.hasPaymentsApi) return null;
-    if (!e.price) return getI18nString("community.publishing.price_is_required_for_paid_resources");
-    if (Yp(e.price)) return e.price < mZ ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err");
-    if (F8(e.price)) return getI18nString("community.seller.prices_must_follow_format");
-    if (!t || AC(t)) return null;
-    let r = t?.monetized_resource_metadata?.price;
-    return e.isSubscription && r && Mj(r / 100, e.price) ? getI18nString("community.seller.price_increase_limit") : !t?.monetized_resource_metadata?.can_increase_price && r && WD(r / 100, e.price) ? getI18nString("community.seller.price_can_only_be_increased_once_every_thirty_days") : null;
-  }(e, n);
-  s && (i.price = s);
-  let o = e.isPaid && e.annualDiscount && e.isAnnualDiscountActive ? Number.isInteger(e.annualDiscount) ? null : getI18nString("community.seller.discount_must_follow_format") : null;
-  o && (i.annualDiscount = o);
-  return i;
+  if (isWidget && _$$Yp(data.widgetSnapshotImageSrc).length === 0) errors.widgetSnapshotImageError = getI18nString('community.publishing.snapshot_must_not_be_empty');
+
+  // Price validation (inline from $$e147)
+  const priceError = (() => {
+    if (!data.isPaid || data.hasPaymentsApi) return null;
+    if (!data.price) return getI18nString('community.publishing.price_is_required_for_paid_resources');
+    if (Yp(data.price)) {
+      return data.price < mZ ? getI18nString('community.seller.paid_resource_minimum_err') : getI18nString('community.seller.paid_resource_maximum_err');
+    }
+    if (F8(data.price)) return getI18nString('community.seller.prices_must_follow_format');
+    if (!publishedResource || AC(publishedResource)) return null;
+    const prevPrice = publishedResource?.monetized_resource_metadata?.price;
+    if (data.isSubscription && prevPrice && Mj(prevPrice / 100, data.price)) {
+      return getI18nString('community.seller.price_increase_limit');
+    }
+    if (!publishedResource?.monetized_resource_metadata?.can_increase_price && prevPrice && WD(prevPrice / 100, data.price)) {
+      return getI18nString('community.seller.price_can_only_be_increased_once_every_thirty_days');
+    }
+    return null;
+  })();
+  if (priceError) errors.price = priceError;
+
+  // Annual discount validation (inline from $$e147)
+  const discountError = data.isPaid && data.annualDiscount && data.isAnnualDiscountActive ? Number.isInteger(data.annualDiscount) ? null : getI18nString('community.seller.discount_must_follow_format') : null;
+  if (discountError) errors.annualDiscount = discountError;
+  return errors;
 }
-export function $$e20(e) {
-  if (!e) return {};
-  let t = {};
-  let r = _$$Yp(e.name).length;
-  r < 4 ? t.name = getI18nString("community.publishing.name_must_be_4_characters_long") : r > 100 && (t.name = getI18nString("community.publishing.name_must_be_at_most_100_characters_long"));
-  _$$Yp(e.description).length > 1e4 && (t.description = getI18nString("community.publishing.description_must_be_at_most_10000_characters_long"));
-  _$$Yp(e.newVersionReleaseNotes).length > 1e4 && (t.newVersionReleaseNotes = getI18nString("community.publishing.release_notes_must_be_at_most_10000_characters_long"));
-  _$$Yp(e.creatorPolicy).length > 1e4 && (t.creatorPolicy = getI18nString("community.publishing.creator_policy_must_be_at_most_10000_characters_long"));
-  let n = _$$Lg(e.tagline);
-  n && (t.tagline = n);
-  _$$Yp(e.supportContact).length > 100 && (t.supportContact = getI18nString("community.publishing.support_contact_must_be_at_most_100_characters_long"));
-  e.iconImageError && (t.iconImageError = e.iconImageError);
-  e.coverImageError && (t.coverImageError = e.coverImageError);
-  return t;
+
+/**
+ * Validates publishing data for length constraints.
+ * Original name: $$e20
+ * @param data - Publishing data object.
+ * @returns Validation errors object.
+ */
+export function validatePublishingDataLengths(data: any): Record<string, any> {
+  if (!data) return {};
+  const errors: Record<string, any> = {};
+  const nameLen = _$$Yp(data.name).length;
+  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long');else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
+  if (_$$Yp(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
+  if (_$$Yp(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
+  if (_$$Yp(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');
+  const taglineError = _$$Lg(data.tagline);
+  if (taglineError) errors.tagline = taglineError;
+  if (_$$Yp(data.supportContact).length > 100) errors.supportContact = getI18nString('community.publishing.support_contact_must_be_at_most_100_characters_long');
+  if (data.iconImageError) errors.iconImageError = data.iconImageError;
+  if (data.coverImageError) errors.coverImageError = data.coverImageError;
+  return errors;
 }
-export function $$e522(e) {
-  return k0(e.plugin);
+
+/**
+ * Checks if plugin is a widget.
+ * Original name: $$e522
+ * @param plugin - PluginData object.
+ * @returns True if widget.
+ */
+export function isWidgetPlugin(plugin: any): boolean {
+  return k0(plugin);
 }
-export function $$e313(e) {
-  let t;
-  let {
+
+/**
+ * Gets widget version data from debugState.
+ * Original name: $$e313
+ * @param params - Params object.
+ * @returns Widget version data or undefined.
+ */
+export function getWidgetVersionData(params: any): any | undefined {
+  let result;
+  const {
     localPlugins,
     publishedCanvasWidgetVersions,
     publishedWidgets
   } = debugState.getState();
-  let a = !e.widgetVersionId;
-  let o = e.widgetId;
-  if (o) {
-    if (a) {
-      let e = Object.values(localPlugins).filter(e => e.plugin_id === o);
-      e.length > 1 && $$ti54(getI18nString("community.publishing.found_multiple_local_widgets_with_the_same_manifest_id"));
-      1 === e.length && (t = e[0]);
+  const isLocal = !params.widgetVersionId;
+  const widgetId = params.widgetId;
+  if (widgetId) {
+    if (isLocal) {
+      const matches = Object.values(localPlugins as Record<string, PluginData>).filter(p => p.plugin_id === widgetId);
+      if (matches.length > 1) showVisualBell(getI18nString('community.publishing.found_multiple_local_widgets_with_the_same_manifest_id'));
+      if (matches.length === 1) result = matches[0];
     } else {
-      if (!(t = publishedCanvasWidgetVersions[o]?.[e.widgetVersionId] || publishedWidgets[o] && $$eN75(publishedWidgets[o]))) return;
-      t.id === e.widgetVersionId || isInteractionPathCheck() || Lg() || reportError(_$$e.UNOWNED, Error(`plugin versionId=${t?.id} doesn't match node.widgetVersionId=${e.widgetVersionId}`));
+      result = publishedCanvasWidgetVersions[widgetId]?.[params.widgetVersionId] || publishedWidgets[widgetId] && getPluginVersion(publishedWidgets[widgetId]);
+      if (!result) return;
+      if (result.id === params.widgetVersionId || isInteractionPathCheck() || Lg()) {
+        // ok
+      } else {
+        reportError(_$$e.UNOWNED, new Error(`plugin versionId=${result?.id} doesn't match node.widgetVersionId=${params.widgetVersionId}`));
+      }
     }
-    return t;
+    return result;
   }
 }
-export function $$e414(e) {
-  let t = e.canRunPluginState ? e.canRunPluginState : debugState.getState();
-  if (!Eh(t)) return {
-    canRun: !1,
-    message: "Cannot run plugin because canViewPlugins returned false"
-  };
-  if (!$$e84(t, e.plugin)) return {
-    canRun: !1,
-    message: "Cannot run plugin within org"
-  };
-  let {
+
+/**
+ * Checks if plugin can run in current state.
+ * Original name: $$e414
+ * @param params - Params object.
+ * @returns Can run result.
+ */
+export function canRunPlugin(params: any): {
+  canRun: boolean;
+  message?: string;
+} {
+  const state = params.canRunPluginState || debugState.getState();
+  if (!Eh(state)) {
+    return {
+      canRun: false,
+      message: 'Cannot run plugin because canViewPlugins returned false'
+    };
+  }
+  if (!canRunPluginWithinOrg(state, params.plugin)) {
+    return {
+      canRun: false,
+      message: 'Cannot run plugin within org'
+    };
+  }
+  const {
     plugin,
     editorType
-  } = e;
-  if (ZQ(plugin)) return k0(plugin) ? {
-    canRun: !1,
-    message: "Cannot run local widget"
-  } : {
-    canRun: !0
-  };
-  if (editorType) {
-    if (!$$es9(Z[editorType], plugin.manifest.editorType)) return {
-      canRun: !1,
-      message: "Cannot run plugin with invalid editor type"
-    };
-    if (editorType === FEditorType.DevHandoff && !$$to20(plugin)) return {
-      canRun: !1,
-      message: "Cannot run non-devmode plugin in dev mode"
-    };
-    if (editorType === FEditorType.Slides && !tm(plugin)) return {
-      canRun: !1,
-      message: "Cannot run non-slides plugin in slides mode"
+  } = params;
+  if (ZQ(plugin)) {
+    return k0(plugin) ? {
+      canRun: false,
+      message: 'Cannot run local widget'
+    } : {
+      canRun: true
     };
   }
+  if (editorType) {
+    if (!isEditorTypeMatch(Z[editorType], plugin.manifest.editorType)) {
+      return {
+        canRun: false,
+        message: 'Cannot run plugin with invalid editor type'
+      };
+    }
+    if (editorType === FEditorType.DevHandoff && !isDevModePlugin(plugin)) {
+      return {
+        canRun: false,
+        message: 'Cannot run non-devmode plugin in dev mode'
+      };
+    }
+    if (editorType === FEditorType.Slides && !isSlidesPlugin(plugin)) {
+      return {
+        canRun: false,
+        message: 'Cannot run non-slides plugin in slides mode'
+      };
+    }
+  }
   return {
-    canRun: !0
+    canRun: true
   };
 }
-export function $$e84(e, t) {
-  if (!e.currentUserOrgId) return !0;
-  let r = e.orgById[e.currentUserOrgId];
-  if (!r || ZQ(t) || bH(t)) return !0;
-  if (!r.public_plugins_allowed) return !1;
-  let n = k0(t);
-  return (n ? !r.widgets_whitelist_enforced : !r.plugins_whitelist_enforced) || !!(n ? e.whitelistedWidgets : e.whitelistedPlugins)[t.plugin_id];
+
+/**
+ * Checks if plugin can run within org.
+ * Original name: $$e84
+ * @param state - State object.
+ * @param plugin - PluginData object.
+ * @returns True if can run.
+ */
+export function canRunPluginWithinOrg(state: any, plugin: any): boolean {
+  if (!state.currentUserOrgId) return true;
+  const org = state.orgById[state.currentUserOrgId];
+  if (!org || ZQ(plugin) || bH(plugin)) return true;
+  if (!org.public_plugins_allowed) return false;
+  const isWidget = k0(plugin);
+  return (isWidget ? !org.widgets_whitelist_enforced : !org.plugins_whitelist_enforced) || !!(isWidget ? state.whitelistedWidgets : state.whitelistedPlugins)[plugin.plugin_id];
 }
-export function $$e667({
-  canAssociatedUserPurchaseThisResource: e,
-  resource: t
-}) {
-  return f5(t) && t.current_user_has_run && !t.community_resource_payment && e;
+
+/**
+ * Checks if associated user can purchase resource.
+ * Original name: $$e667
+ * @param params - Params object.
+ * @returns True if can purchase.
+ */
+export function canAssociatedUserPurchaseResource({
+  canAssociatedUserPurchaseThisResource,
+  resource
+}: {
+  canAssociatedUserPurchaseThisResource: boolean;
+  resource: any;
+}): boolean {
+  return f5(resource) && resource.current_user_has_run && !resource.community_resource_payment && canAssociatedUserPurchaseThisResource;
 }
-export function $$e717(e) {
-  return e.roles.is_public ? {
-    role: "public"
-  } : e.roles.org ? {
-    role: "org",
-    roleOrgId: e.roles.org.id
+
+/**
+ * Gets resource role info.
+ * Original name: $$e717
+ * @param resource - Resource object.
+ * @returns Role info object.
+ */
+export function getResourceRoleInfo(resource: any): any {
+  return resource.roles.is_public ? {
+    role: 'public'
+  } : resource.roles.org ? {
+    role: 'org',
+    roleOrgId: resource.roles.org.id
   } : {
-    role: "private"
+    role: 'private'
   };
 }
-export function $$e980(e) {
-  let t = e.match(/\/community\/widget\/(\d+)(\/.*)?$/);
-  return t && t[1] ? t[1] : null;
+
+/**
+ * Extracts widget ID from URL.
+ * Original name: $$e980
+ * @param url - URL string.
+ * @returns Widget ID or null.
+ */
+export function extractWidgetIdFromUrl(url: string): string | null {
+  const match = url.match(/\/community\/widget\/(\d+)(\/.*)?$/);
+  return match && match[1] ? match[1] : null;
 }
-export function $$te48(e) {
-  let t = e.match(/\/community\/plugin\/(\d+)(\/.*)?$/);
-  return t && t[1] ? t[1] : null;
+
+/**
+ * Extracts plugin ID from URL.
+ * Original name: $$te48
+ * @param url - URL string.
+ * @returns Plugin ID or null.
+ */
+export function extractPluginIdFromUrl(url: string): string | null {
+  const match = url.match(/\/community\/plugin\/(\d+)(\/.*)?$/);
+  return match && match[1] ? match[1] : null;
 }
-function tt(e, t, r) {
-  if (!e.manifest.relaunchButtons) return [];
-  let n = [];
-  for (let i of e.manifest.relaunchButtons) {
-    if (r > 1 && !i.multipleSelection) continue;
-    let a = function (e, t, r) {
-      let n = null;
-      for (let i of r) {
-        let r = !1;
-        for (let {
+
+/**
+ * Gets relaunch buttons for plugin.
+ * Original name: tt
+ * @param plugin - PluginData object.
+ * @param relaunchGroups - Relaunch groups.
+ * @param selectionCount - Selection count.
+ * @returns Array of relaunch buttons.
+ */
+function getRelaunchButtons(plugin: any, relaunchGroups: any[], selectionCount: number): PluginRelaunchButton[] {
+  if (!plugin.manifest.relaunchButtons) return [];
+  const result: PluginRelaunchButton[] = [];
+  for (const button of plugin.manifest.relaunchButtons) {
+    if (selectionCount > 1 && !button.multipleSelection) continue;
+    const relaunchButton = (() => {
+      let found: PluginRelaunchButton | null = null;
+      for (const group of relaunchGroups) {
+        let matched = false;
+        for (const {
           pluginID,
           command,
           message
-        } of i) if (pluginID === e && command === t.command) {
-          r = !0;
-          n ? message !== n.description && (n.description = Q7) : n = {
-            pluginID: e,
-            command: t.command,
-            name: t.name,
-            description: message || ""
-          };
-          break;
+        } of group) {
+          if (pluginID === plugin.plugin_id && command === button.command) {
+            matched = true;
+            if (found) {
+              if (message !== found.description) found.description = Q7;
+            } else {
+              found = {
+                pluginID: plugin.plugin_id,
+                command: button.command,
+                name: button.name,
+                description: message || ''
+              };
+            }
+            break;
+          }
         }
-        if (!r) return null;
+        if (!matched) return null;
       }
-      return n;
-    }(e.plugin_id, i, t);
-    a && n.push(a);
+      return found;
+    })();
+    if (relaunchButton) result.push(relaunchButton);
   }
-  return n;
+  return result;
 }
-export function $$tr23(e, t) {
-  return t?.localFileId || e?.id || "";
+
+/**
+ * Gets local file ID for plugin.
+ * Original name: $$tr23
+ * @param plugin - PluginData object.
+ * @param localPlugin - Local plugin object.
+ * @returns Local file ID string.
+ */
+export function getLocalFileId(plugin: any, localPlugin: any): string {
+  return localPlugin?.localFileId || plugin?.id || '';
 }
-export function $$tn76(e, t, r, n, i, a, s) {
-  let o = [];
-  let l = C8(e);
-  for (let e of function (e) {
-    if (0 === e.length) return [];
-    let t = new Set();
-    for (let {
+
+/**
+ * Gets relaunchable plugins for selection.
+ * Original name: $$tn76
+ * @param pluginsMap - Plugins map.
+ * @param publishedPlugins - Published plugins map.
+ * @param localPlugins - Local plugins map.
+ * @param org - Org object.
+ * @param selectionCount - Selection count.
+ * @param setMissing - Set missing callback.
+ * @param editorType - Editor type.
+ * @returns Array of relaunchable plugins.
+ */
+export function getRelaunchablePlugins(pluginsMap: any, publishedPlugins: any, localPlugins: any, org: any, selectionCount: number, setMissing: (id: string, missing: boolean) => void, editorType: string): any[] {
+  const result: any[] = [];
+  const relaunchGroups = C8(pluginsMap);
+  const pluginIds = (() => {
+    if (relaunchGroups.length === 0) return [];
+    const ids = new Set<string>();
+    for (const {
       pluginID
-    } of e[0]) t.add(pluginID || "");
-    return Array.from(t).reverse();
-  }(l)) if (function (e, t) {
-    let r = [];
-    for (let n in e) e[n].plugin_id === t && r.push(e[n]);
-    return r;
-  }(r, e).filter(e => $$es9(s, e.manifest.editorType)).forEach((t, r) => {
-    for (let n of tt(t, l, i)) o.push({
-      type: "local",
-      pluginTypeAndID: `local-${e}-${r + 1}`,
-      plugin: t,
-      relaunchButton: n
-    });
-  }), e in t) {
-    let r = t[e];
-    let d = $$eN75(r);
-    if (!$$es9(s, d.manifest.editorType)) continue;
-    let c = tt(d, l, i);
-    if (!n || r.roles.org && r.roles.org.id === n.id || r.install_status !== u8.PUBLIC_PLUGINS_DISALLOWED && r.install_status !== u8.PLUGIN_NOT_ORG_APPROVED) for (let t of c) o.push({
-      type: "published",
-      pluginTypeAndID: `installed-${e}`,
-      plugin: d,
-      publishedPlugin: r,
-      relaunchButton: t
-    });
-    a(e, !1);
-  } else a(e, !0);
-  return o;
-}
-export function $$ti54(e) {
-  pN({
-    shouldShowVisualBell: !0
-  });
-  let t = _$$M();
-  Y5.dispatch(_$$F.enqueue({
-    type: "plugins-runtime-error",
-    message: e,
-    button: t ? {
-      text: "Show/Hide console",
-      action: () => {
-        t.toggleDevTools("bottom");
+    } of relaunchGroups[0]) ids.add(pluginID || '');
+    return Array.from(ids).reverse();
+  })();
+  for (const pluginId of pluginIds) {
+    // Local plugins
+    const localMatches = Object.values(localPlugins).filter((p: any) => p.plugin_id === pluginId);
+    localMatches.filter((p: any) => isEditorTypeMatch(editorType, p.manifest.editorType)).forEach((plugin: any, idx: number) => {
+      for (const relaunchButton of getRelaunchButtons(plugin, relaunchGroups, selectionCount)) {
+        result.push({
+          type: 'local',
+          pluginTypeAndID: `local-${pluginId}-${idx + 1}`,
+          plugin,
+          relaunchButton
+        });
       }
-    } : void 0,
-    error: !0
+    });
+
+    // Published plugins
+    if (pluginId in publishedPlugins) {
+      const published = publishedPlugins[pluginId];
+      const version = getPluginVersion(published);
+      if (!isEditorTypeMatch(editorType, version.manifest.editorType)) continue;
+      const relaunchButtons = getRelaunchButtons(version, relaunchGroups, selectionCount);
+      if (!org || published.roles.org && published.roles.org.id === org.id || published.install_status !== u8.PUBLIC_PLUGINS_DISALLOWED && published.install_status !== u8.PLUGIN_NOT_ORG_APPROVED) {
+        for (const relaunchButton of relaunchButtons) {
+          result.push({
+            type: 'published',
+            pluginTypeAndID: `installed-${pluginId}`,
+            plugin: version,
+            publishedPlugin: published,
+            relaunchButton
+          });
+        }
+      }
+      setMissing(pluginId, false);
+    } else {
+      setMissing(pluginId, true);
+    }
+  }
+  return result;
+}
+
+/**
+ * Shows visual bell for plugin error.
+ * Original name: $$ti54
+ * @param message - Error message.
+ */
+export function showVisualBell(message: string): void {
+  pN({
+    shouldShowVisualBell: true
+  });
+  const desktopApi = _$$M();
+  Y5.dispatch(_$$F.enqueue({
+    type: 'plugins-runtime-error',
+    message,
+    button: desktopApi ? {
+      text: 'Show/Hide console',
+      action: () => {
+        desktopApi.toggleDevTools('bottom');
+      }
+    } : undefined,
+    error: true
   }));
 }
-export function $$ta44() {
+
+/**
+ * Clears plugin error visual bell.
+ * Original name: $$ta44
+ */
+export function clearVisualBell(): void {
   Y5.dispatch(_$$F.dequeue({
-    matchType: "plugins-runtime-error"
+    matchType: 'plugins-runtime-error'
   }));
 }
-export function $$ts50(e, t) {
-  return e.plugin_id === t?.plugin_id && e?.id === t?.id;
+
+/**
+ * Checks if two plugins are the same.
+ * Original name: $$ts50
+ * @param a - PluginData object.
+ * @param b - PluginData object.
+ * @returns True if same.
+ */
+export function isSamePlugin(a: any, b: any): boolean {
+  return a.plugin_id === b?.plugin_id && a?.id === b?.id;
 }
-export function $$to20(e, t) {
-  return !!(!_$$T() || e.manifest.capabilities?.includes("vscode") || t?.allowNonVsCodePluginsInVsCode) && Pe(e.manifest.editorType) && !k0(e);
+
+/**
+ * Checks if plugin is devmode plugin.
+ * Original name: $$to20
+ * @param plugin - PluginData object.
+ * @param options - Options object.
+ * @returns True if devmode.
+ */
+export function isDevModePlugin(plugin: any, options?: any): boolean {
+  return !!(!_$$T() || plugin.manifest.capabilities?.includes('vscode') || options?.allowNonVsCodePluginsInVsCode) && Pe(plugin.manifest.editorType) && !k0(plugin);
 }
-export function $$tl41(e) {
-  return $$to20(e) && $$tC1(e.manifest.capabilities);
+
+/**
+ * Checks if plugin is devmode and has inspect/panel capability.
+ * Original name: $$tl41
+ * @param plugin - PluginData object.
+ * @returns True if devmode with inspect/panel.
+ */
+export function isDevModeWithInspectPanel(plugin: any): boolean {
+  return isDevModePlugin(plugin) && hasInspectOrPanelCapability(plugin.manifest.capabilities);
 }
-export function $$td69(e) {
-  return $$to20(e) && e.manifest?.capabilities?.includes("codegen");
+
+/**
+ * Checks if plugin is devmode and has codegen capability.
+ * Original name: $$td69
+ * @param plugin - PluginData object.
+ * @returns True if devmode with codegen.
+ */
+export function isDevModeWithCodegen(plugin: any): boolean {
+  return isDevModePlugin(plugin) && plugin.manifest?.capabilities?.includes('codegen');
 }
-export function $$tc34(e) {
-  return e.manifest?.capabilities?.includes("textreview");
+
+/**
+ * Checks if plugin has textreview capability.
+ * Original name: $$tc34
+ * @param plugin - PluginData object.
+ * @returns True if textreview.
+ */
+export function hasTextReviewCapability(plugin: any): boolean {
+  return plugin.manifest?.capabilities?.includes('textreview');
 }
-export function $$tu25(e, t, r) {
-  return Object.fromEntries(Object.entries(t).filter(([t, n]) => th(e, n, r)));
+
+/**
+ * Filters object entries by editor type.
+ * Original name: $$tu25
+ * @param editorType - Editor type.
+ * @param obj - Object to filter.
+ * @param options - Options.
+ * @returns Filtered object.
+ */
+export function filterEntriesByEditorType(editorType: string, obj: Record<string, any>, options?: any): Record<string, any> {
+  return Object.fromEntries(Object.entries(obj).filter(([_, value]) => editorTypeFilter(editorType, value, options)));
 }
-export function $$tp2(e, t) {
-  return t.filter(t => th(e, t));
+
+/**
+ * Filters array by editor type.
+ * Original name: $$tp2
+ * @param editorType - Editor type.
+ * @param arr - Array to filter.
+ * @returns Filtered array.
+ */
+export function filterArrayByEditorType(editorType: string, arr: any[]): any[] {
+  return arr.filter(item => editorTypeFilter(editorType, item));
 }
-export function $$t_79(e, t) {
-  return Object.fromEntries(Object.entries(t).filter(([t, r]) => th(e, $$eN75(r))));
+
+/**
+ * Filters object entries by plugin version editor type.
+ * Original name: $$t_79
+ * @param editorType - Editor type.
+ * @param obj - Object to filter.
+ * @returns Filtered object.
+ */
+export function filterEntriesByPluginVersionEditorType(editorType: string, obj: Record<string, any>): Record<string, any> {
+  return Object.fromEntries(Object.entries(obj).filter(([_, value]) => editorTypeFilter(editorType, getPluginVersion(value))));
 }
-function th(e, t, r) {
-  if (!e) return !0;
-  switch (e) {
+
+/**
+ * Editor type filter helper.
+ * Original name: th
+ * @param editorType - Editor type.
+ * @param plugin - PluginData object.
+ * @param options - Options.
+ * @returns True if matches.
+ */
+function editorTypeFilter(editorType: any, plugin: any, options?: any): boolean {
+  if (!editorType) return true;
+  switch (editorType) {
     case FEditorType.Whiteboard:
     case FEditorType.Design:
     case FEditorType.Illustration:
-      return $$es9(Z[e], t.manifest.editorType);
+      return isEditorTypeMatch(Z[editorType], plugin.manifest.editorType);
     case FEditorType.DevHandoff:
-      return $$to20(t, r);
+      return isDevModePlugin(plugin, options);
     case FEditorType.Slides:
-      return tm(t);
+      return isSlidesPlugin(plugin);
     case FEditorType.Cooper:
-      return $$tg58(t);
+      return isBuzzPlugin(plugin);
     case FEditorType.Figmake:
     case FEditorType.Sites:
-      return !1;
+      return false;
     default:
-      throwTypeError(e);
+      throwTypeError(editorType);
   }
 }
-function tm(e) {
-  return $$es9(FW.SLIDES, e.manifest.editorType) && !k0(e);
+
+/**
+ * Checks if plugin is slides plugin.
+ * Original name: tm
+ * @param plugin - PluginData object.
+ * @returns True if slides plugin.
+ */
+function isSlidesPlugin(plugin: any): boolean {
+  return isEditorTypeMatch(FW.SLIDES, plugin.manifest.editorType) && !k0(plugin);
 }
-export function $$tg58(e) {
-  return $$es9(FW.BUZZ, e.manifest.editorType);
+
+/**
+ * Checks if plugin is buzz plugin.
+ * Original name: $$tg58
+ * @param plugin - PluginData object.
+ * @returns True if buzz plugin.
+ */
+export function isBuzzPlugin(plugin: any): boolean {
+  return isEditorTypeMatch(FW.BUZZ, plugin.manifest.editorType);
 }
-export function $$tf43(e) {
-  if (!tN(e)) return !1;
-  let t = debugState.getState().selectedView;
-  return _$$$A(t);
+
+/**
+ * Checks if plugin is valid for Cooper editor type.
+ * Original name: $$tf43
+ * @param pluginType - Plugin type.
+ * @returns True if valid.
+ */
+export function isValidForCooper(pluginType: string): boolean {
+  if (!isValidPluginType(pluginType)) return false;
+  const view = debugState.getState().selectedView;
+  return _$$$A(view);
 }
-export function $$tE11(e) {
-  return !!tN(e) && $$ty38(debugState.getState().selectedView);
+
+/**
+ * Checks if plugin is valid for Cooper editor type and selected view.
+ * Original name: $$tE11
+ * @param pluginType - Plugin type.
+ * @returns True if valid.
+ */
+export function isValidForCooperSelectedView(pluginType: string): boolean {
+  return !!isValidPluginType(pluginType) && isCooperSelectedView(debugState.getState().selectedView);
 }
-export function $$ty38(e) {
-  return XE(e) === FEditorType.Cooper;
+
+/**
+ * Checks if selected view is Cooper.
+ * Original name: $$ty38
+ * @param view - Selected view.
+ * @returns True if Cooper.
+ */
+export function isCooperSelectedView(view: any): boolean {
+  return XE(view) === FEditorType.Cooper;
 }
-export function $$tb45(e) {
-  return e?.manifest.editorType?.length === 1 && Pe(e.manifest.editorType);
+
+/**
+ * Checks if plugin is devmode with single editorType: dev.
+ * Original name: $$tb45
+ * @param plugin - PluginData object.
+ * @returns True if devmode with single editorType.
+ */
+export function isSingleDevEditorType(plugin: any): boolean {
+  return plugin?.manifest.editorType?.length === 1 && Pe(plugin.manifest.editorType);
 }
-function tT(e) {
-  let t = function (e) {
-    let t = ["vscode"];
-    return e.filter(e => !t.includes(e));
-  }(e.manifest.capabilities ?? []);
-  return 1 === t.length && "codegen" === t[0];
+
+/**
+ * Checks if plugin is devmode with only codegen capability.
+ * Original name: tT
+ * @param plugin - PluginData object.
+ * @returns True if only codegen capability.
+ */
+function hasOnlyCodegenCapability(plugin: any): boolean {
+  const capabilities = (plugin.manifest.capabilities ?? []).filter((cap: string) => cap !== 'vscode');
+  return capabilities.length === 1 && capabilities[0] === 'codegen';
 }
-export function $$tI51(e) {
-  return $$tb45(e) && tT(e);
+
+/**
+ * Checks if plugin is devmode with only codegen capability and single dev editorType.
+ * Original name: $$tI51
+ * @param plugin - PluginData object.
+ * @returns True if devmode with only codegen.
+ */
+export function isSingleDevWithCodegen(plugin: any): boolean {
+  return isSingleDevEditorType(plugin) && hasOnlyCodegenCapability(plugin);
 }
-export function $$tS19(e) {
-  return Pe(e.manifest.editorType) && tT(e);
+
+/**
+ * Checks if plugin is devmode with only codegen capability.
+ * Original name: $$tS19
+ * @param plugin - PluginData object.
+ * @returns True if devmode with only codegen.
+ */
+export function isDevWithOnlyCodegen(plugin: any): boolean {
+  return Pe(plugin.manifest.editorType) && hasOnlyCodegenCapability(plugin);
 }
-export function $$tv61(e) {
-  let t = debugState.getState().selectedView;
-  return _$$$A(t) && $$tS19(e);
+
+/**
+ * Checks if plugin is valid for Cooper selected view and devmode/codegen.
+ * Original name: $$tv61
+ * @param plugin - PluginData object.
+ * @returns True if valid.
+ */
+export function isValidForCooperDevCodegen(plugin: any): boolean {
+  const view = debugState.getState().selectedView;
+  return _$$$A(view) && isDevWithOnlyCodegen(plugin);
 }
-export function $$tA39(e, t, r) {
-  let n = debugState.getState().selectedView;
-  let i = t?.plugins_whitelist_enforced;
-  let a = i && r && !!r[e.plugin_id] || !i;
-  return _$$$A(n) && !$$tI51(e) && a;
+
+/**
+ * Checks if plugin is valid for selected view and org/plugin whitelist.
+ * Original name: $$tA39
+ * @param plugin - PluginData object.
+ * @param org - Org object.
+ * @param whitelist - Whitelist object.
+ * @returns True if valid.
+ */
+export function isValidForSelectedViewAndWhitelist(plugin: any, org: any, whitelist: any): boolean {
+  const view = debugState.getState().selectedView;
+  const whitelistEnforced = org?.plugins_whitelist_enforced;
+  const isWhitelisted = whitelistEnforced && whitelist && !!whitelist[plugin.plugin_id];
+  const allowed = isWhitelisted || !whitelistEnforced;
+  return _$$$A(view) && !isSingleDevWithCodegen(plugin) && allowed;
 }
-export function $$tx7({
-  idToSearch: e,
-  localExtensionsByFileId: t,
-  publishedExtensions: r
-}) {
-  let n = t && t[e];
-  if (n) return n;
-  let i = r?.[e];
-  return i ? $$ex3(i) : null;
+
+/**
+ * Gets plugin by file ID from local or published extensions.
+ * Original name: $$tx7
+ * @param params - Params object.
+ * @returns PluginData object or null.
+ */
+export function getPluginByFileId({
+  idToSearch,
+  localExtensionsByFileId,
+  publishedExtensions
+}: {
+  idToSearch: string;
+  localExtensionsByFileId: Record<string, any>;
+  publishedExtensions: Record<string, any>;
+}): any {
+  const local = localExtensionsByFileId && localExtensionsByFileId[idToSearch];
+  if (local) return local;
+  const published = publishedExtensions?.[idToSearch];
+  return published ? getCurrentPluginVersion(published) : null;
 }
-function tN(e) {
-  return "related-link-preview" !== e && "codegen" !== e;
+
+/**
+ * Checks if plugin type is valid.
+ * Original name: tN
+ * @param type - Plugin type.
+ * @returns True if valid.
+ */
+function isValidPluginType(type: string): boolean {
+  return type !== 'related-link-preview' && type !== 'codegen';
 }
-export function $$tC1(e) {
-  return !!(e?.includes("inspect") || e?.includes("panel"));
+
+/**
+ * Checks if capabilities include inspect or panel.
+ * Original name: $$tC1
+ * @param capabilities - Capabilities array.
+ * @returns True if includes inspect/panel.
+ */
+export function hasInspectOrPanelCapability(capabilities: string[]): boolean {
+  return !!(capabilities?.includes('inspect') || capabilities?.includes('panel'));
 }
-export function $$tw42(e) {
-  let t = $$ea37();
-  let r = e && e?.plugin && $$tI51(e?.plugin);
-  return e && t && $$es9(t, e.plugin.manifest.editorType) && ("dev" !== t || $$to20(e.plugin)) && ("slides" !== t || tm(e.plugin)) && !r;
+
+/**
+ * Checks if plugin is valid for fullscreen view and editor type.
+ * Original name: $$tw42
+ * @param params - Params object.
+ * @returns True if valid.
+ */
+export function isValidForFullscreenView(params: any): boolean {
+  const editorType = getFullscreenViewEditorType();
+  const withCodegen = params && params?.plugin && isSingleDevWithCodegen(params?.plugin);
+  return params && editorType && isEditorTypeMatch(editorType, params.plugin.manifest.editorType) && (editorType !== 'dev' || isDevModePlugin(params.plugin)) && (editorType !== 'slides' || isSlidesPlugin(params.plugin)) && !withCodegen;
 }
-export function $$tO46() {
-  return _$$T() ? "plugins-menu-open-directory-vscode" : BrowserInfo.mac ? "plugins-menu-open-directory-mac" : "plugins-menu-open-directory-win";
+
+/**
+ * Gets plugins menu open directory string.
+ * Original name: $$tO46
+ * @returns Directory string.
+ */
+export function getPluginsMenuOpenDirectory(): string {
+  return _$$T() ? 'plugins-menu-open-directory-vscode' : BrowserInfo.mac ? 'plugins-menu-open-directory-mac' : 'plugins-menu-open-directory-win';
 }
-export const $H = $$e20;
-export const $u = $$tC1;
-export const AG = $$tp2;
-export const Ar = $$ex3;
-export const Bw = $$e84;
-export const CA = $$eu5;
-export const CB = $$eO6;
-export const DM = $$tx7;
-export const Df = $$et8;
-export const EK = $$es9;
-export const EY = $$eB10;
-export const FB = $$tE11;
-export const GX = $$Q12;
-export const Gc = $$e313;
-export const JT = $$e414;
-export const K$ = $$ei15;
-export const L1 = $$eq16;
-export const L8 = $$e717;
-export const LH = $$eD18;
-export const LW = $$tS19;
-export const M5 = $$to20;
-export const MB = $$eE21;
-export const MH = $$e522;
-export const Mi = $$tr23;
-export const Ms = $$eh24;
-export const NW = $$tu25;
-export const Oe = $$ey26;
-export const Pl = $$el27;
-export const Pz = $$er28;
-export const Q4 = $$eU29;
-export const Qt = $$ek30;
-export const Qx = $$eC31;
-export const Rd = $$eP32;
-export const Rt = $$eF33;
-export const Ru = $$tc34;
-export const SW = $$e035;
-export const Sb = $$en36;
-export const T = $$ea37;
-export const TZ = $$ty38;
-export const Th = $$tA39;
-export const Tk = $$eR40;
-export const UH = $$tl41;
-export const VQ = $$tw42;
-export const W4 = $$tf43;
-export const WC = $$ta44;
-export const YG = $$tb45;
-export const YQ = $$tO46;
-export const ZB = $$e147;
-export const ZI = $$te48;
-export const ZT = $$eG49;
-export const _H = $$ts50;
-export const _V = $$tI51;
-export const _w = $$eM52;
-export const c2 = $$q53;
-export const fR = $$ti54;
-export const i8 = $$eQ55;
-export const ky = $$ej56;
-export const lT = $$eI57;
-export const ld = $$tg58;
-export const mI = $$eJ59;
-export const mm = $$em60;
-export const mx = $$tv61;
-export const my = $$eL62;
-export const nW = $$eW63;
-export const nf = $$eZ64;
-export const nx = $$ef65;
-export const oD = $$ez66;
-export const og = $$e667;
-export const ou = $$eY68;
-export const pk = $$td69;
-export const qH = $$ep70;
-export const t3 = $$eg71;
-export const tH = $$eX72;
-export const tk = $$e_73;
-export const u0 = $$e$74;
-export const uF = $$eN75;
-export const vA = $$tn76;
-export const vj = $$eH77;
-export const wf = $$eV78;
-export const xC = $$t_79;
-export const yx = $$e980;
+
+// Exported names mapping (refactored as per instructions)
+export const $H = validatePublishingDataLengths; // $$e20
+export const $u = hasInspectOrPanelCapability; // $$tC1
+export const AG = filterArrayByEditorType; // $$tp2
+export const Ar = getCurrentPluginVersion; // getCurrentPluginVersion
+export const Bw = canRunPluginWithinOrg; // $$e84
+export const CA = hasSpecialCapability; // hasSpecialCapability
+export const CB = getPublishedResource; // getPublishedResource
+export const DM = getPluginByFileId; // $$tx7
+export const Df = mapToEditorType; // mapToEditorType
+export const EK = isEditorTypeMatch; // isEditorTypeMatch
+export const EY = hasRoleOrOrgChanged; // hasRoleOrOrgChanged
+export const FB = isValidForCooperSelectedView; // $$tE11
+export const GX = convertEditorTypeToFileType; // convertEditorTypeToFileType
+export const Gc = getWidgetVersionData; // $$e313
+export const JT = canRunPlugin; // $$e414
+export const K$ = selectorFullScreenViewEditorType; // selectorFullScreenViewEditorType
+export const L1 = isDefaultPublishingData; // isDefaultPublishingData
+export const L8 = getResourceRoleInfo; // $$e717
+export const LH = filterResourcesByOrgOrPublisher; // filterResourcesByOrgOrPublisher
+export const LW = isDevWithOnlyCodegen; // $$tS19
+export const M5 = isDevModePlugin; // $$to20
+export const MB = loadLocalPluginSource; // loadLocalPluginSource
+export const MH = isWidgetPlugin; // $$e522
+export const Mi = getLocalFileId; // $$tr23
+export const Ms = joinStringSegments; // joinStringSegments
+export const NW = filterEntriesByEditorType; // $$tu25
+export const Oe = formatPluginName; // formatPluginName
+export const Pl = getMissingEditorTypeError; // getMissingEditorTypeError
+export const Pz = mapToFileType; // mapToFileType
+export const Q4 = sortResourcesByCreatedAt; // sortResourcesByCreatedAt
+export const Qt = filterResourcesByOrgId; // filterResourcesByOrgId
+export const Qx = getCurrentPluginVersionId; // getCurrentPluginVersionId
+export const Rd = getWidgetMetadata; // getWidgetMetadata
+export const Rt = hasOrgRole; // hasOrgRole
+export const Ru = hasTextReviewCapability; // $$tc34
+export const SW = getPublishingErrors; // getPublishingErrors
+export const Sb = resolveFrameworkType; // resolveFrameworkType
+export const T = getFullscreenViewEditorType; // getFullscreenViewEditorType
+export const TZ = isCooperSelectedView; // $$ty38
+export const Th = isValidForSelectedViewAndWhitelist; // $$tA39
+export const Tk = getPublishedResourceOrNull; // getPublishedResourceOrNull
+export const UH = isDevModeWithInspectPanel; // $$tl41
+export const VQ = isValidForFullscreenView; // $$tw42
+export const W4 = isValidForCooper; // $$tf43
+export const WC = clearVisualBell; // $$ta44
+export const YG = isSingleDevEditorType; // $$tb45
+export const YQ = getPluginsMenuOpenDirectory; // $$tO46
+export const ZB = validatePublishingData; // $$e147
+export const ZI = extractPluginIdFromUrl; // $$te48
+export const ZT = validatePluginCodeSize; // validatePluginCodeSize
+export const _H = isSamePlugin; // $$ts50
+export const _V = isSingleDevWithCodegen; // $$tI51
+export const _w = filterEntriesByPluginVersionEditorType; // $$t_79
+export const c2 = loadPluginManifest; // loadPluginManifest
+export const fR = showVisualBell; // $$ti54
+export const i8 = filterPublishedResources; // filterPublishedResources
+export const ky = filterResourcesByMatch; // filterResourcesByMatch
+export const lT = pluginMetadata; // pluginMetadata
+export const ld = isBuzzPlugin; // $$tg58
+export const mI = getPublishingData; // getPublishingData
+export const mm = getLocalPluginManifest; // getLocalPluginManifest
+export const mx = isValidForCooperDevCodegen; // $$tv61
+export const my = getPluginMetadata; // getPluginMetadata
+export const nW = getFirstFileOrThrow; // getFirstFileOrThrow
+export const nf = isPluginVersionPublished; // isPluginVersionPublished
+export const nx = injectHtmlOrUiFiles; // injectHtmlOrUiFiles
+export const oD = validateArtworkImage; // validateArtworkImage
+export const og = canAssociatedUserPurchaseResource; // $$e667
+export const ou = generatePluginId; // generatePluginId
+export const pk = isDevModeWithCodegen; // $$td69
+export const qH = PluginPermissions; // PluginPermissions
+export const t3 = loadLocalPluginManifest; // loadLocalPluginManifest
+export const tH = getPublishingRole; // getPublishingRole
+export const tk = validateURLPattern; // validateURLPattern
+export const u0 = getOrgRole; // getOrgRole
+export const uF = getPluginVersion; // getPluginVersion
+export const vA = getRelaunchablePlugins; // $$tn76
+export const vj = validateAndResizeIconImage; // validateAndResizeIconImage
+export const wf = validateExtensionIconImage; // validateExtensionIconImage
+export const xC = filterEntriesByPluginVersionEditorType; // $$t_79
+export const yx = extractWidgetIdFromUrl; // $$e980

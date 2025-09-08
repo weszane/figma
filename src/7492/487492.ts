@@ -6,7 +6,7 @@ import { assertNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
 import { s as _$$s } from "../905/403855";
 import { J as _$$J } from "../905/125993";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import g from "classnames";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { $J } from "../905/491152";
@@ -38,9 +38,9 @@ import { j as _$$j } from "../905/813868";
 import { Um } from "../905/848862";
 import { sZ } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
-import { uF, pk, lT } from "../figma_app/300692";
+import { getPluginVersion, isDevModeWithCodegen, pluginMetadata } from "../figma_app/300692";
 import { vt } from "../figma_app/45218";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { bE } from "../figma_app/78725";
 import { V as _$$V } from "../905/480825";
@@ -240,7 +240,7 @@ function e_({
   let i = b4()[e];
   let t = cW()[e];
   let l = tw(t);
-  return i ? ZQ(i) ? jsx(eN, {
+  return i ? hasLocalFileId(i) ? jsx(eN, {
     localFileId: i.localFileId.toString(),
     isRecentTile: !0
   }) : l ? null : jsx(eR, {
@@ -251,7 +251,7 @@ function e_({
 function eb(e) {
   let i = cW()[e.pluginId];
   if (e.plugin && (i = e.plugin), !i) return null;
-  let t = uF(i);
+  let t = getPluginVersion(i);
   let {
     description,
     tagline
@@ -309,7 +309,7 @@ function eC(e) {
     t(oB());
   }, [t]);
   if (!i) return null;
-  let d = uF(i);
+  let d = getPluginVersion(i);
   let {
     description,
     tagline
@@ -345,7 +345,7 @@ let eR = memo(function (e) {
   let t = i.plugins[e.pluginId] || i.orgPlugins[e.pluginId];
   let s = b4()[e.pluginId];
   let r = cW()[e.pluginId];
-  let d = useMemo(() => "recent" === e.type ? s : "org_private" === e.type ? uF(r) : t, [t, e.type, r, s]);
+  let d = useMemo(() => "recent" === e.type ? s : "org_private" === e.type ? getPluginVersion(r) : t, [t, e.type, r, s]);
   let a = Um();
   let o = a?.type === _n && a.data.pluginId === e.pluginId && a.data.targetRect && a.data.viewType === e.type;
   let u = $$eG6(e.pluginId, e.type);
@@ -456,7 +456,7 @@ function eN(e) {
   let a = kd({
     includePendingPublishers: !1
   }).find(e => e.id === d);
-  let o = a ? uF(a) : void 0;
+  let o = a ? getPluginVersion(a) : void 0;
   let u = Um();
   let {
     viewPluginDetails
@@ -593,8 +593,8 @@ function eP(e) {
   let x = j6();
   let R = ul(e.pluginId);
   let F = Object.values($1()).find(i => String(i.plugin_id) === e.pluginId);
-  let N = uF(R);
-  let k = pk(N);
+  let N = getPluginVersion(R);
+  let k = isDevModeWithCodegen(N);
   let B = EO(R) && !F;
   let E = OY(R);
   let D = gn(R) && !F;
@@ -743,7 +743,7 @@ function eE(e) {
   let i = YO()[e.widgetId];
   let t = ZT()[e.widgetId];
   let l = tw(t);
-  return i ? ZQ(i) ? jsx(eS, {
+  return i ? hasLocalFileId(i) ? jsx(eS, {
     localFileId: i.localFileId.toString(),
     isRecentTile: !0
   }) : l ? null : jsx(eA, {
@@ -759,7 +759,7 @@ function eA(e) {
   let r = ZT()[e.widgetId];
   let d = Be().widgets[e.widgetId];
   let a = YO()[e.widgetId];
-  let o = "recent" === e.type ? a : "org_private" === e.type ? uF(r) : d;
+  let o = "recent" === e.type ? a : "org_private" === e.type ? getPluginVersion(r) : d;
   let u = Um();
   let g = u?.type === _n && u.data.widgetId === e.widgetId && u.data.targetRect && u.data.viewType === e.type;
   let p = Ud(e.widgetId);
@@ -796,7 +796,7 @@ function eA(e) {
     });
   }, [o, e.widgetId]);
   let T = useCallback(e => {
-    j ? _(e) : l7.user("insert-published-widget", () => {
+    j ? _(e) : permissionScopeHandler.user("insert-published-widget", () => {
       b();
     });
   }, [b, _, j]);
@@ -812,7 +812,7 @@ function eA(e) {
     }));
   }, [g, i, e.widgetId, e.type]);
   if (!o) return null;
-  if (ZQ(o)) return jsx(eS, {
+  if (hasLocalFileId(o)) return jsx(eS, {
     localFileId: o.localFileId.toString()
   });
   let R = w.current?.getBoundingClientRect();
@@ -902,7 +902,7 @@ function eS(e) {
     publishedResource: u
   });
   let j = u && AC(u);
-  let h = u && uF(u).redirect_snapshot_url || e.localFileId && d[e.localFileId] && d[e.localFileId].metadata.widgetSnapshotImageSrc || _$$J2;
+  let h = u && getPluginVersion(u).redirect_snapshot_url || e.localFileId && d[e.localFileId] && d[e.localFileId].metadata.widgetSnapshotImageSrc || _$$J2;
   let w = u && !j ? u.roles.is_public ? _$$A3 : _$$A5 : void 0;
   return jsxs(Fragment, {
     children: [jsx(eM, {
@@ -933,7 +933,7 @@ function eO(e) {
   } = e;
   let t = ZT()[widgetId] ?? null;
   if (!t) return null;
-  let l = uF(t);
+  let l = getPluginVersion(t);
   let {
     redirect_snapshot_url,
     manifest
@@ -955,7 +955,7 @@ function eO(e) {
 function eV(e) {
   let i = J$(e.widgetId);
   if (!i) return null;
-  let t = uF(i);
+  let t = getPluginVersion(i);
   let l = fO(i);
   let s = jsxs(Fragment, {
     children: [jsx("div", {
@@ -1012,7 +1012,7 @@ function eL({
   });
 }
 let eM = memo(function (e) {
-  let i = e.localWidget ?? e.widget ?? lT;
+  let i = e.localWidget ?? e.widget ?? pluginMetadata;
   let {
     viewWidgetDetails,
     keyboardNavigationPath,
@@ -1026,7 +1026,7 @@ let eM = memo(function (e) {
   let c = ZT()[e.widgetId];
   let g = EO(c);
   let v = gn(c);
-  let I = c ? uF(c) : null;
+  let I = c ? getPluginVersion(c) : null;
   let m = i.name;
   I?.name && I?.name !== "" && (m = I?.name);
   let x = sZ();
@@ -1242,7 +1242,7 @@ export function $$eH1(e) {
     }
   }, [i, e.widgetId, g, o]);
   let x = useCallback(() => {
-    let e = uF(t);
+    let e = getPluginVersion(t);
     _$$j({
       pluginID: e.plugin_id,
       widgetName: e.name,
@@ -1251,7 +1251,7 @@ export function $$eH1(e) {
     });
   }, [t]);
   let h = useCallback(e => {
-    o ? I(e) : l7.user("insert-published-widget", () => {
+    o ? I(e) : permissionScopeHandler.user("insert-published-widget", () => {
       x();
     });
   }, [x, I, o]);

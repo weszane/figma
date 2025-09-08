@@ -7,7 +7,7 @@ import { h as _$$h } from "../905/207101";
 import { M3 } from "../figma_app/119475";
 import { IW, Lp } from "../figma_app/563413";
 import { ky, Dy } from "../figma_app/925970";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { q5 } from "../figma_app/516028";
 import { k as _$$k } from "../905/540025";
@@ -52,7 +52,7 @@ export function $$y1(e) {
     selectOnFocus,
     ref: k
   });
-  let F = useCallback(e => !!(e.altKey && Y5.isReady()) && f7(e), []);
+  let F = useCallback(e => !!(e.altKey && fullscreenValue.isReady()) && f7(e), []);
   _$$h(() => {
     function e() {
       R(ky());

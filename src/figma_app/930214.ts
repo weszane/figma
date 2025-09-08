@@ -6,8 +6,8 @@ import { Dd } from "../figma_app/599979";
 import { FP, Y8 } from "../figma_app/86989";
 import { sZ } from "../905/845253";
 import { TA } from "../905/372672";
-import { nf } from "../figma_app/300692";
-import { ZQ, bH, k0 } from "../figma_app/155287";
+import { isPluginVersionPublished } from "../figma_app/300692";
+import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget } from "../figma_app/155287";
 import { BY } from "../905/946805";
 import { Ag } from "../905/235578";
 export function $$m4() {
@@ -44,13 +44,13 @@ export function $$m4() {
       publishedExtension: h,
       key: function (e) {
         let t = e.plugin_id;
-        return ZQ(e) ? `${t}-${e.localFileId}` : t;
+        return hasLocalFileId(e) ? `${t}-${e.localFileId}` : t;
       }(e),
-      lastUsedTimestamp: d[ZQ(e) ? e.localFileId : e.plugin_id],
+      lastUsedTimestamp: d[hasLocalFileId(e) ? e.localFileId : e.plugin_id],
       localPublishedExtension: _
     };
-    if (ZQ(e)) {
-      h && !nf(h) && (m.publishedExtension = void 0);
+    if (hasLocalFileId(e)) {
+      h && !isPluginVersionPublished(h) && (m.publishedExtension = void 0);
       return {
         ...m,
         extension: e,
@@ -58,7 +58,7 @@ export function $$m4() {
         canRequest: !1
       };
     }
-    if (bH(e) || !t) return {
+    if (isPrivatePlugin(e) || !t) return {
       ...m,
       extension: e,
       canRun: !0,
@@ -69,7 +69,7 @@ export function $$m4() {
     let E = t.widgets_whitelist_enforced;
     let y = t.plugin_requests_allowed;
     let b = t.widget_requests_allowed;
-    let T = k0(e);
+    let T = manifestContainsWidget(e);
     if (!g) return {
       ...m,
       extension: e,
@@ -136,9 +136,9 @@ export function $$T8(e) {
     case BY.ALL:
       return () => !0;
     case BY.PLUGINS:
-      return e => !k0(e.extension);
+      return e => !manifestContainsWidget(e.extension);
     case BY.WIDGETS:
-      return e => k0(e.extension);
+      return e => manifestContainsWidget(e.extension);
     case BY.FROM_ORG:
       return e => e.types.has(Ag.ORG_PRIVATE);
     case BY.DEVELOPMENT:
@@ -160,7 +160,7 @@ export function $$S2(e) {
   let {
     extension
   } = e;
-  return ZQ(extension);
+  return hasLocalFileId(extension);
 }
 export function $$v1(e) {
   return !!e && e.length > 50;

@@ -4,7 +4,7 @@ import { Uz, sC, xH } from "../905/63728";
 import { GG } from "../905/511649";
 import { dG } from "../figma_app/753501";
 import { f7 } from "../figma_app/896988";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Ib } from "../905/129884";
 var i = s;
 function u(e) {
@@ -36,8 +36,8 @@ function p({
   role: w,
   dataTestId: k
 }) {
-  let E = () => !!gl(e) || !e;
-  let C = gl(e) ? "mixed" : e;
+  let E = () => !!isInvalidValue(e) || !e;
+  let C = isInvalidValue(e) ? "mixed" : e;
   return jsx(GG, {
     "aria-checked": "switch" === w ? C : void 0,
     "aria-describedby": v,
@@ -61,7 +61,7 @@ function p({
     recordingKey: h,
     role: w,
     type: "button",
-    children: gl(e) ? jsx("div", {
+    children: isInvalidValue(e) ? jsx("div", {
       className: "toggle--toggleMixed--8rhV- toggle--_toggleState--AqpC3",
       children: jsx("div", {
         className: "toggle--toggleMixedBar--n0xuj"

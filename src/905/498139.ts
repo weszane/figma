@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useId, useState, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { Z_n, rXF, J0O, CWU } from "../figma_app/763686";
+import { VariableDataType, VariableResolvedDataType, ComponentPropType, VariablesBindings } from "../figma_app/763686";
 import { WI } from "../905/929949";
 import { parsePxNumber } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
@@ -41,7 +41,7 @@ function D({
     s.current?.select();
   });
   let l = e => {
-    e.type === Z_n.ALIAS && e.resolvedType === rXF.STRING && (e.resolvedType = rXF.TEXT_DATA);
+    e.type === VariableDataType.ALIAS && e.resolvedType === VariableResolvedDataType.STRING && (e.resolvedType = VariableResolvedDataType.TEXT_DATA);
     t({
       propName: i.propName,
       varValue: e
@@ -198,7 +198,7 @@ function U({
       return n?.textContent ?? "";
     });
     let n = kl("visible");
-    let r = WB(e) === J0O.BOOL;
+    let r = WB(e) === ComponentPropType.BOOL;
     return WI(e, r ? n : i);
   }(i);
   let [G, z] = useState({
@@ -211,11 +211,11 @@ function U({
     varValue: H,
     varSetID: null
   });
-  let Y = useMemo(() => M() && G ? G.propName.length > 0 : !!W.varName && CWU.isValidVariableName(W.varName, W.varSetID ?? null), [G, M, W.varName, W.varSetID]);
+  let Y = useMemo(() => M() && G ? G.propName.length > 0 : !!W.varName && VariablesBindings.isValidVariableName(W.varName, W.varSetID ?? null), [G, M, W.varName, W.varSetID]);
   let q = of(A, "submit", e => {
     e?.preventDefault();
-    M() && G ? (b(G), G.varValue.type === Z_n.ALIAS && oz("component_prop_def", {
-      type: Z_n.ALIAS,
+    M() && G ? (b(G), G.varValue.type === VariableDataType.ALIAS && oz("component_prop_def", {
+      type: VariableDataType.ALIAS,
       resolvedType: G.varValue.resolvedType,
       value: G.varValue.value
     })) : W && w({

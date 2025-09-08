@@ -1,4 +1,4 @@
-import { yT } from "../figma_app/492908";
+import { randomBetween } from "../figma_app/492908";
 import { serializeJSON } from "../905/251556";
 import { getFalseValue } from "../figma_app/897289";
 export class $$s0 {
@@ -55,7 +55,7 @@ export class $$s0 {
           r = setTimeout(() => {
             a && a();
             s();
-          }, 864e5 + yT(0, 36e5));
+          }, 864e5 + randomBetween(0, 36e5));
         };
         s();
         return () => {

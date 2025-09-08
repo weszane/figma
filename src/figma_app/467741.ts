@@ -6,7 +6,7 @@ import { _i } from "../figma_app/120210";
 import { TA } from "../905/372672";
 import { U_ } from "../figma_app/190980";
 import { vt } from "../figma_app/45218";
-import { k0, ZQ } from "../figma_app/155287";
+import { manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { cq } from "../905/794154";
 import { zX } from "../figma_app/882116";
 import { Ag, r7 } from "../905/235578";
@@ -27,7 +27,7 @@ export function $$g0(e) {
           let {
             extension
           } = e;
-          r((k0(extension) ? RH : gU)({
+          r((manifestContainsWidget(extension) ? RH : gU)({
             storeInRecentsKey: a,
             id: extension.plugin_id,
             version: e.extension.id,
@@ -62,7 +62,7 @@ function E(e) {
   let r = zX({
     extensionId: extension.plugin_id
   });
-  return _i(extension.plugin_id, k0(extension) ? vt.WIDGET : vt.PLUGIN, e.publishedExtension, r);
+  return _i(extension.plugin_id, manifestContainsWidget(extension) ? vt.WIDGET : vt.PLUGIN, e.publishedExtension, r);
 }
 function y(e) {
   let t = useDispatch();
@@ -75,11 +75,11 @@ function y(e) {
     unsave
   } = E(e);
   if (!(e.types.has(Ag.RECENT) || e.types.has(Ag.USER_SAVED) || e.types.has(Ag.LOCAL))) return;
-  let p = !!(ZQ(extension) && e.publishedExtension);
+  let p = !!(hasLocalFileId(extension) && e.publishedExtension);
   return {
     displayText: p ? getI18nString("universal_insert.remove_local_version") : getI18nString("universal_insert.remove"),
     callback: () => {
-      !(types.has(Ag.LOCAL) && ZQ(extension) && (t(qR(extension.localFileId)), p)) && (types.has(Ag.RECENT) && r && t((k0(extension) ? Kq : lD)({
+      !(types.has(Ag.LOCAL) && hasLocalFileId(extension) && (t(qR(extension.localFileId)), p)) && (types.has(Ag.RECENT) && r && t((manifestContainsWidget(extension) ? Kq : lD)({
         storeInRecentsKey: r,
         resourceId: extension.plugin_id
       })), types.has(Ag.USER_SAVED) && unsave());

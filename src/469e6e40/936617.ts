@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { uQ } from "../figma_app/311375";
 import { M } from "../469e6e40/302359";
 import { V } from "../469e6e40/782251";
-import { kTx } from "../figma_app/763686";
+import { SelectionStylesHelpers } from "../figma_app/763686";
 import { q6 } from "../figma_app/793429";
 import { fu } from "../figma_app/831799";
 import { Fk } from "../figma_app/167249";
@@ -73,10 +73,10 @@ function b({
     styleNodeId: e.node_id,
     styleType: e.style_type,
     onMouseEnter: () => {
-      kTx?.highlightOnlySameStyleInSublayers(e.guids);
+      SelectionStylesHelpers?.highlightOnlySameStyleInSublayers(e.guids);
     },
     onMouseLeave: () => {
-      kTx?.highlightOnlySameStyleInSublayers([]);
+      SelectionStylesHelpers?.highlightOnlySameStyleInSublayers([]);
     },
     className: "selection_styles_panel--styleRow--t--sj",
     children: jsx(s0, {

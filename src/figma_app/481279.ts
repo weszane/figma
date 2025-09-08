@@ -6,7 +6,7 @@ import { Z } from "../905/357899";
 import { e } from "../905/478588";
 import { y as _$$y } from "../905/292472";
 import { o as _$$o } from "../905/347208";
-import { rXF, rrT, j0r, Z6A } from "../figma_app/763686";
+import { VariableResolvedDataType, NodePropertyCategory, PropertyScope, NodeType } from "../figma_app/763686";
 import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../2854/374356";
@@ -17,30 +17,30 @@ import { A as _$$A5 } from "../2854/598494";
 import { A as _$$A6 } from "../2854/77351";
 import { A as _$$A7 } from "../svg/844984";
 var $$T9 = (e => (e.SCOPE = "scope", e.LABEL = "label", e))($$T9 || {});
-let I = new Set([rXF.FLOAT, rXF.COLOR, rXF.STRING]);
-let S = new Set([rrT.FILL, rrT.STROKE, rrT.EFFECT]);
-let v = new Set([j0r.FRAME_FILL, j0r.SHAPE_FILL, j0r.TEXT_FILL]);
+let I = new Set([VariableResolvedDataType.FLOAT, VariableResolvedDataType.COLOR, VariableResolvedDataType.STRING]);
+let S = new Set([NodePropertyCategory.FILL, NodePropertyCategory.STROKE, NodePropertyCategory.EFFECT]);
+let v = new Set([PropertyScope.FRAME_FILL, PropertyScope.SHAPE_FILL, PropertyScope.TEXT_FILL]);
 let A = [{
   type: "scope",
-  scope: j0r.ALL_SCOPES,
+  scope: PropertyScope.ALL_SCOPES,
   name: renderI18nText("variables.scopes.all_properties")
 }, {
   type: "scope",
-  scope: j0r.CORNER_RADIUS,
+  scope: PropertyScope.CORNER_RADIUS,
   name: renderI18nText("variables.scopes.corner_radius"),
   iconElement: jsx(B, {
     svg: _$$A
   })
 }, {
   type: "scope",
-  scope: j0r.WIDTH_HEIGHT,
+  scope: PropertyScope.WIDTH_HEIGHT,
   name: renderI18nText("variables.scopes.width_height"),
   iconElement: jsx(B, {
     svg: _$$A5
   })
 }, {
   type: "scope",
-  scope: j0r.GAP,
+  scope: PropertyScope.GAP,
   name: renderI18nText("variables.scopes.gap"),
   iconElement: jsx(B, {
     svg: _$$A3
@@ -48,26 +48,26 @@ let A = [{
   subLabel: renderI18nText("variables.scopes.auto_layout")
 }, {
   type: "scope",
-  scope: j0r.TEXT_CONTENT,
+  scope: PropertyScope.TEXT_CONTENT,
   name: renderI18nText("variables.scopes.text_content"),
   iconElement: jsx(B, {
     svg: _$$A7
   })
 }, {
   type: "scope",
-  scope: j0r.STROKE_FLOAT,
+  scope: PropertyScope.STROKE_FLOAT,
   name: renderI18nText("variables.scopes.stroke"),
   iconElement: jsx(B, {
     svg: _$$A6
   })
 }, {
   type: "scope",
-  scope: j0r.OPACITY,
+  scope: PropertyScope.OPACITY,
   name: renderI18nText("variables.scopes.layer_opacity"),
   iconElement: jsx(_$$N, {})
 }, {
   type: "scope",
-  scope: j0r.EFFECT_FLOAT,
+  scope: PropertyScope.EFFECT_FLOAT,
   name: renderI18nText("variables.scopes.effects"),
   iconElement: jsx(B, {
     svg: _$$A2
@@ -78,32 +78,32 @@ let A = [{
   label: renderI18nText("fullscreen.type_panel.typography")
 }, {
   type: "scope",
-  scope: j0r.FONT_STYLE,
+  scope: PropertyScope.FONT_STYLE,
   name: renderI18nText("variables.scopes.font_weight"),
   iconElement: jsx(j, {})
 }, {
   type: "scope",
-  scope: j0r.FONT_SIZE,
+  scope: PropertyScope.FONT_SIZE,
   name: renderI18nText("variables.scopes.font_size"),
   iconElement: jsx(Z, {})
 }, {
   type: "scope",
-  scope: j0r.LINE_HEIGHT,
+  scope: PropertyScope.LINE_HEIGHT,
   name: renderI18nText("variables.scopes.line_height"),
   iconElement: jsx(e, {})
 }, {
   type: "scope",
-  scope: j0r.LETTER_SPACING,
+  scope: PropertyScope.LETTER_SPACING,
   name: renderI18nText("variables.scopes.letter_spacing"),
   iconElement: jsx(_$$y, {})
 }, {
   type: "scope",
-  scope: j0r.PARAGRAPH_SPACING,
+  scope: PropertyScope.PARAGRAPH_SPACING,
   name: renderI18nText("variables.scopes.paragraph_spacing"),
   iconElement: jsx(_$$o, {})
 }, {
   type: "scope",
-  scope: j0r.PARAGRAPH_INDENT,
+  scope: PropertyScope.PARAGRAPH_INDENT,
   name: renderI18nText("variables.scopes.paragraph_indent"),
   iconElement: jsx(B, {
     svg: _$$A4
@@ -111,58 +111,58 @@ let A = [{
 }];
 let x = [{
   type: "scope",
-  scope: j0r.ALL_SCOPES,
+  scope: PropertyScope.ALL_SCOPES,
   name: renderI18nText("variables.scopes.all_properties")
 }, {
   type: "scope",
-  scope: j0r.ALL_FILLS,
+  scope: PropertyScope.ALL_FILLS,
   name: renderI18nText("variables.scopes.all_fills")
 }, {
   type: "scope",
-  scope: j0r.FRAME_FILL,
+  scope: PropertyScope.FRAME_FILL,
   name: renderI18nText("variables.scopes.frame_fill"),
   devModeName: renderI18nText("variables.scopes.frame_fill_dev_mode"),
   indented: !0
 }, {
   type: "scope",
-  scope: j0r.SHAPE_FILL,
+  scope: PropertyScope.SHAPE_FILL,
   name: renderI18nText("variables.scopes.shape_fill"),
   devModeName: renderI18nText("variables.scopes.shape_fill_dev_mode"),
   indented: !0
 }, {
   type: "scope",
-  scope: j0r.TEXT_FILL,
+  scope: PropertyScope.TEXT_FILL,
   name: renderI18nText("variables.scopes.text_fill"),
   devModeName: renderI18nText("variables.scopes.text_fill_dev_mode"),
   indented: !0
 }, {
   type: "scope",
-  scope: j0r.STROKE,
+  scope: PropertyScope.STROKE,
   name: renderI18nText("variables.scopes.stroke")
 }, {
   type: "scope",
-  scope: j0r.EFFECT_COLOR,
+  scope: PropertyScope.EFFECT_COLOR,
   name: renderI18nText("variables.scopes.effects")
 }];
 let N = [{
   type: "scope",
-  scope: j0r.ALL_SCOPES,
+  scope: PropertyScope.ALL_SCOPES,
   name: renderI18nText("variables.scopes.all_properties")
 }, {
   type: "scope",
-  scope: j0r.TEXT_CONTENT,
+  scope: PropertyScope.TEXT_CONTENT,
   name: renderI18nText("variables.scopes.text_content"),
   iconElement: jsx(B, {
     svg: _$$A7
   })
 }, {
   type: "scope",
-  scope: j0r.FONT_FAMILY,
+  scope: PropertyScope.FONT_FAMILY,
   name: renderI18nText("variables.scopes.font_family"),
   iconElement: jsx(Z, {})
 }, {
   type: "scope",
-  scope: j0r.FONT_STYLE,
+  scope: PropertyScope.FONT_STYLE,
   name: renderI18nText("variables.scopes.font_weight_or_style"),
   iconElement: jsx(j, {})
 }];
@@ -176,7 +176,7 @@ export function $$O6(e, {
 export function $$R2(e) {
   let t;
   if (e?.length === 0) return renderI18nText("variables.scopes.no_supported_properties");
-  if (e.includes(j0r.ALL_SCOPES)) return renderI18nText("variables.scopes.all_properties_label");
+  if (e.includes(PropertyScope.ALL_SCOPES)) return renderI18nText("variables.scopes.all_properties_label");
   for (let r of mapFilter(e, e => $$O6(e))) t = t ? jsx(Fragment, {
     children: renderI18nText("variables.scopes.scope_list", {
       scope1: t,
@@ -186,40 +186,40 @@ export function $$R2(e) {
   return t ?? renderI18nText("variables.scopes.no_supported_properties");
 }
 export let $$L3 = {
-  CORNER_RADIUS: j0r.CORNER_RADIUS,
-  STACK_SPACING: j0r.GAP,
-  STACK_PADDING_LEFT: j0r.GAP,
-  STACK_PADDING_TOP: j0r.GAP,
-  STACK_PADDING_RIGHT: j0r.GAP,
-  STACK_PADDING_BOTTOM: j0r.GAP,
-  TEXT_DATA: j0r.TEXT_CONTENT,
-  WIDTH: j0r.WIDTH_HEIGHT,
-  HEIGHT: j0r.WIDTH_HEIGHT,
-  RECTANGLE_TOP_LEFT_CORNER_RADIUS: j0r.CORNER_RADIUS,
-  RECTANGLE_TOP_RIGHT_CORNER_RADIUS: j0r.CORNER_RADIUS,
-  RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS: j0r.CORNER_RADIUS,
-  RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS: j0r.CORNER_RADIUS,
-  STACK_COUNTER_SPACING: j0r.GAP,
-  GRID_ROW_GAP: j0r.GAP,
-  GRID_COLUMN_GAP: j0r.GAP,
-  MIN_WIDTH: j0r.WIDTH_HEIGHT,
-  MAX_WIDTH: j0r.WIDTH_HEIGHT,
-  MIN_HEIGHT: j0r.WIDTH_HEIGHT,
-  MAX_HEIGHT: j0r.WIDTH_HEIGHT,
-  STROKE_WEIGHT: j0r.STROKE_FLOAT,
-  BORDER_TOP_WEIGHT: j0r.STROKE_FLOAT,
-  BORDER_BOTTOM_WEIGHT: j0r.STROKE_FLOAT,
-  BORDER_LEFT_WEIGHT: j0r.STROKE_FLOAT,
-  BORDER_RIGHT_WEIGHT: j0r.STROKE_FLOAT,
-  OPACITY: j0r.OPACITY,
-  PARAGRAPH_SPACING: j0r.PARAGRAPH_SPACING,
-  PARAGRAPH_INDENT: j0r.PARAGRAPH_INDENT,
-  FONT_FAMILY: j0r.FONT_FAMILY,
-  FONT_STYLE: j0r.FONT_STYLE,
-  FONT_VARIATIONS: j0r.PARAGRAPH_SPACING,
-  FONT_SIZE: j0r.PARAGRAPH_SPACING,
-  LETTER_SPACING: j0r.LETTER_SPACING,
-  LINE_HEIGHT: j0r.LINE_HEIGHT,
+  CORNER_RADIUS: PropertyScope.CORNER_RADIUS,
+  STACK_SPACING: PropertyScope.GAP,
+  STACK_PADDING_LEFT: PropertyScope.GAP,
+  STACK_PADDING_TOP: PropertyScope.GAP,
+  STACK_PADDING_RIGHT: PropertyScope.GAP,
+  STACK_PADDING_BOTTOM: PropertyScope.GAP,
+  TEXT_DATA: PropertyScope.TEXT_CONTENT,
+  WIDTH: PropertyScope.WIDTH_HEIGHT,
+  HEIGHT: PropertyScope.WIDTH_HEIGHT,
+  RECTANGLE_TOP_LEFT_CORNER_RADIUS: PropertyScope.CORNER_RADIUS,
+  RECTANGLE_TOP_RIGHT_CORNER_RADIUS: PropertyScope.CORNER_RADIUS,
+  RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS: PropertyScope.CORNER_RADIUS,
+  RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS: PropertyScope.CORNER_RADIUS,
+  STACK_COUNTER_SPACING: PropertyScope.GAP,
+  GRID_ROW_GAP: PropertyScope.GAP,
+  GRID_COLUMN_GAP: PropertyScope.GAP,
+  MIN_WIDTH: PropertyScope.WIDTH_HEIGHT,
+  MAX_WIDTH: PropertyScope.WIDTH_HEIGHT,
+  MIN_HEIGHT: PropertyScope.WIDTH_HEIGHT,
+  MAX_HEIGHT: PropertyScope.WIDTH_HEIGHT,
+  STROKE_WEIGHT: PropertyScope.STROKE_FLOAT,
+  BORDER_TOP_WEIGHT: PropertyScope.STROKE_FLOAT,
+  BORDER_BOTTOM_WEIGHT: PropertyScope.STROKE_FLOAT,
+  BORDER_LEFT_WEIGHT: PropertyScope.STROKE_FLOAT,
+  BORDER_RIGHT_WEIGHT: PropertyScope.STROKE_FLOAT,
+  OPACITY: PropertyScope.OPACITY,
+  PARAGRAPH_SPACING: PropertyScope.PARAGRAPH_SPACING,
+  PARAGRAPH_INDENT: PropertyScope.PARAGRAPH_INDENT,
+  FONT_FAMILY: PropertyScope.FONT_FAMILY,
+  FONT_STYLE: PropertyScope.FONT_STYLE,
+  FONT_VARIATIONS: PropertyScope.PARAGRAPH_SPACING,
+  FONT_SIZE: PropertyScope.PARAGRAPH_SPACING,
+  LETTER_SPACING: PropertyScope.LETTER_SPACING,
+  LINE_HEIGHT: PropertyScope.LINE_HEIGHT,
   MISSING: null,
   VISIBLE: null,
   VARIANT_PROPERTIES: null,
@@ -228,23 +228,23 @@ export let $$L3 = {
   CMS_SERIALIZED_RICH_TEXT_DATA: null,
   SLOT_CONTENT_ID: null
 };
-Object.keys(Z6A).filter(e => isNaN(Number(e)));
+Object.keys(NodeType).filter(e => isNaN(Number(e)));
 let P = {
-  FRAME: j0r.FRAME_FILL,
-  SECTION: j0r.FRAME_FILL,
-  SYMBOL: j0r.FRAME_FILL,
-  INSTANCE: j0r.FRAME_FILL,
-  VECTOR: j0r.SHAPE_FILL,
-  BRUSH: j0r.SHAPE_FILL,
-  STAR: j0r.SHAPE_FILL,
-  LINE: j0r.SHAPE_FILL,
-  ELLIPSE: j0r.SHAPE_FILL,
-  RECTANGLE: j0r.SHAPE_FILL,
-  REGULAR_POLYGON: j0r.SHAPE_FILL,
-  ROUNDED_RECTANGLE: j0r.SHAPE_FILL,
-  TEXT: j0r.TEXT_FILL,
-  TEXT_PATH: j0r.TEXT_FILL,
-  VECTOR_OPERATION: j0r.SHAPE_FILL,
+  FRAME: PropertyScope.FRAME_FILL,
+  SECTION: PropertyScope.FRAME_FILL,
+  SYMBOL: PropertyScope.FRAME_FILL,
+  INSTANCE: PropertyScope.FRAME_FILL,
+  VECTOR: PropertyScope.SHAPE_FILL,
+  BRUSH: PropertyScope.SHAPE_FILL,
+  STAR: PropertyScope.SHAPE_FILL,
+  LINE: PropertyScope.SHAPE_FILL,
+  ELLIPSE: PropertyScope.SHAPE_FILL,
+  RECTANGLE: PropertyScope.SHAPE_FILL,
+  REGULAR_POLYGON: PropertyScope.SHAPE_FILL,
+  ROUNDED_RECTANGLE: PropertyScope.SHAPE_FILL,
+  TEXT: PropertyScope.TEXT_FILL,
+  TEXT_PATH: PropertyScope.TEXT_FILL,
+  VECTOR_OPERATION: PropertyScope.SHAPE_FILL,
   NONE: null,
   DOCUMENT: null,
   CANVAS: null,
@@ -291,7 +291,7 @@ export function $$D4(e) {
   return P[e];
 }
 export function $$k5(e) {
-  return e === rXF.FLOAT ? A : e === rXF.COLOR ? x : e === rXF.STRING ? N : [];
+  return e === VariableResolvedDataType.FLOAT ? A : e === VariableResolvedDataType.COLOR ? x : e === VariableResolvedDataType.STRING ? N : [];
 }
 export function $$M8(e) {
   let t = new Set();
@@ -308,11 +308,11 @@ export function $$F1(e, t) {
     r = !0;
     break;
   }
-  for (let n of e.scopes) if (t.has(n) || n === j0r.ALL_SCOPES || n === j0r.ALL_FILLS && r) return !0;
+  for (let n of e.scopes) if (t.has(n) || n === PropertyScope.ALL_SCOPES || n === PropertyScope.ALL_FILLS && r) return !0;
   return !1;
 }
 export function $$j0() {
-  return [rXF.FLOAT, rXF.COLOR, rXF.STRING];
+  return [VariableResolvedDataType.FLOAT, VariableResolvedDataType.COLOR, VariableResolvedDataType.STRING];
 }
 export function $$U10(e, t) {
   return [...(t ?? []), e].some(e => I.has(e));
@@ -321,18 +321,18 @@ export function $$B7(e, t) {
   if (!e || !t || !S.has(e)) return;
   let r = new Set();
   switch (e) {
-    case rrT.STROKE:
-    case rrT.STROKE_PRESET:
-      r.add(j0r.STROKE);
+    case NodePropertyCategory.STROKE:
+    case NodePropertyCategory.STROKE_PRESET:
+      r.add(PropertyScope.STROKE);
       break;
-    case rrT.FILL:
+    case NodePropertyCategory.FILL:
       for (let e in t) {
         let t = P[e];
         t && r.add(t);
       }
       break;
-    case rrT.EFFECT:
-      r.add(j0r.EFFECT_COLOR);
+    case NodePropertyCategory.EFFECT:
+      r.add(PropertyScope.EFFECT_COLOR);
   }
   return r.size ? r : void 0;
 }

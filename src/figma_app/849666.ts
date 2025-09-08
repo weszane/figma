@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { Oin } from "../figma_app/763686";
+import { UIVisibilitySetting } from "../figma_app/763686";
 import { ty, Rm, Y2, DT } from "../figma_app/320164";
 import { BrowserInfo } from "../figma_app/778880";
 import { B as _$$B, N as _$$N } from "../figma_app/659940";
@@ -41,7 +41,7 @@ import { qB } from "../905/862321";
 import { g as _$$g } from "../905/248178";
 import { lR, $z } from "../figma_app/617427";
 import { f as _$$f } from "../figma_app/908415";
-import { AS, Ce, to } from "../905/156213";
+import { hideModalHandler, hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { E3 } from "../figma_app/976749";
 import { H as _$$H } from "../figma_app/423008";
@@ -60,7 +60,7 @@ import { il } from "../figma_app/637027";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A as _$$A2, Uw, bO, JD } from "../905/219868";
 import { V as _$$V } from "../905/670859";
 import { FS, DX, Kc, _2, cC, mV, NJ, ZQ, Fx } from "../905/989426";
@@ -158,7 +158,7 @@ function k() {
 }
 k.displayName = "ArchivedBranchFooter";
 var ea = ei;
-let eE = Ju(function (e) {
+let eE = registerModal(function (e) {
   let t = useDispatch();
   let [r, s] = useState("");
   let [o, d] = useState(!1);
@@ -173,7 +173,7 @@ let eE = Ju(function (e) {
       trackEventAnalytics("google_meet_claim_email_modal_closed", {
         fileKey: c
       });
-      t(AS());
+      t(hideModalHandler());
     }
   });
   return jsx(fu, {
@@ -257,7 +257,7 @@ let eE = Ju(function (e) {
     })
   });
 }, "GOOGLE_DEVICE_TRY_FILE_CLAIM_MODAL");
-let eb = Ju(function (e) {
+let eb = registerModal(function (e) {
   let {
     email,
     onChangeEmail
@@ -307,7 +307,7 @@ let eb = Ju(function (e) {
             onClick: e => {
               e.preventDefault();
               e.stopPropagation();
-              i(Ce());
+              i(hideModal());
             },
             children: renderI18nText("google_device_try_file_modal.got_mail.close")
           }), jsx(_$$k2, {
@@ -413,7 +413,7 @@ function ex({
 function eN() {
   let e = useDispatch();
   let t = t => {
-    e(to({
+    e(showModalHandler({
       type: eb,
       data: {
         email: t,
@@ -423,7 +423,7 @@ function eN() {
     }));
   };
   let r = () => {
-    e(to({
+    e(showModalHandler({
       type: eE,
       data: {
         onSubmitEmail: ({
@@ -456,7 +456,7 @@ function eN() {
       "data-test-id": "meet-btn"
     },
     onClick: () => {
-      e(to({
+      e(showModalHandler({
         type: eE,
         data: {
           onSubmitEmail: ({
@@ -670,7 +670,7 @@ export function $$ek0() {
     v();
   }, [v]), T) ? null : y && BrowserInfo.isMeetDevice && !I ? jsx(ex, {
     isFigJamTry: b
-  }) : t ? Kz(e) && e.trashedAt && E === Oin.OFF ? jsx(k, {}) : null : y || I || BrowserInfo.isMeetDevice || A || x ? null : S ? jsxs("div", {
+  }) : t ? Kz(e) && e.trashedAt && E === UIVisibilitySetting.OFF ? jsx(k, {}) : null : y || I || BrowserInfo.isMeetDevice || A || x ? null : S ? jsxs("div", {
     className: cI,
     children: [jsx(eD, {
       isFigJamTry: b

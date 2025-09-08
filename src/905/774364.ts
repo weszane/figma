@@ -1,9 +1,9 @@
 import { WB } from "../905/761735";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$s0 = new class {
   constructor() {
-    this.TeamsSchemaValidator = vh();
+    this.TeamsSchemaValidator = createNoOpValidator();
     this.updateImage = e => {
       let {
         workspaceId,
@@ -88,7 +88,7 @@ export let $$s0 = new class {
   getTeams(e) {
     return this.TeamsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/workspace/${e.workspaceId}/teams`, td.toAPIParameters({
+    }) => await t.get(`/api/workspace/${e.workspaceId}/teams`, APIParameterUtils.toAPIParameters({
       includeSecretTeams: e.includeSecretTeams
     })));
   }

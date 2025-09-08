@@ -4,7 +4,7 @@ import { useSelector } from "../vendor/514228";
 import { u as _$$u } from "../905/911813";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Fk } from "../figma_app/167249";
 import { UT } from "../figma_app/95266";
 import { Tv } from "../figma_app/151869";
@@ -28,7 +28,7 @@ export function $$g0() {
     return !1;
   }, f);
   let y = useSelector(e => UT(e) ?? "");
-  let b = gl(y) ? getI18nString("fullscreen.mixed") : y;
+  let b = isInvalidValue(y) ? getI18nString("fullscreen.mixed") : y;
   if (E) return {
     type: ZU.CUSTOM_ACTION,
     customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,

@@ -7,11 +7,11 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/632989";
-import { S as _$$S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { t as _$$t } from "../905/117577";
 import { a as _$$a } from "../905/964520";
-import { hzD, glU } from "../figma_app/763686";
+import { DocumentColorProfileEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
 import { Pt } from "../figma_app/806412";
@@ -21,18 +21,18 @@ import { F as _$$F } from "../905/302958";
 import { LU, kG } from "../figma_app/327588";
 import { Pc, gI, dS } from "../figma_app/396464";
 import { rg } from "../figma_app/401069";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { ZH } from "../figma_app/504823";
 import { tJ } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { eY } from "../figma_app/722362";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { JI, Yj } from "../905/416496";
 import { J5, K8, F4, vl } from "../905/920793";
 import { W as _$$W, B } from "../905/72930";
 import { Hk, fu, pu } from "../figma_app/123994";
 import { eD } from "../905/257620";
-export let $$M0 = Ju(function (e) {
+export let $$M0 = registerModal(function (e) {
   let [t, i] = useState(!1);
   let u = hS(e);
   let p = useDispatch();
@@ -129,7 +129,7 @@ export let $$M0 = Ju(function (e) {
             variant: "primary",
             onClick: () => {
               i(!0);
-              let e = hzD.DOCUMENT;
+              let e = DocumentColorProfileEnum.DOCUMENT;
               function t(e) {
                 let t = !0;
                 setTimeout(() => {
@@ -143,20 +143,20 @@ export let $$M0 = Ju(function (e) {
                   } finally {
                     i(!1);
                   }
-                  t && (p(AS()), p(_$$F.enqueue({
+                  t && (p(hideModalHandler()), p(_$$F.enqueue({
                     message: getI18nString("cooper.toolbar.export_modal.visual_bell.exported_assets", {
                       assetCount: Q
                     })
                   })));
                 }, 0);
               }
-              if ("SRGB" === H ? e = hzD.SRGB : "DISPLAY_P3_V4" === H ? e = hzD.DISPLAY_P3_V4 : "CMYK" === H && (e = hzD.CMYK), "PDF" === q || "PDF Print" === q) {
+              if ("SRGB" === H ? e = DocumentColorProfileEnum.SRGB : "DISPLAY_P3_V4" === H ? e = DocumentColorProfileEnum.DISPLAY_P3_V4 : "CMYK" === H && (e = DocumentColorProfileEnum.CMYK), "PDF" === q || "PDF Print" === q) {
                 let i = "PDF Print" === q ? 1 : G;
                 t(() => {
-                  glU?.exportSelectedCooperFramesToPdf(N, i, e, K);
+                  Fullscreen?.exportSelectedCooperFramesToPdf(N, i, e, K);
                 });
               } else t(() => {
-                glU?.exportSelectedCooperFramesToImg(N, q, Z.type, Z.value, e, G);
+                Fullscreen?.exportSelectedCooperFramesToImg(N, q, Z.type, Z.value, e, G);
               });
               p(rg());
             },
@@ -298,8 +298,8 @@ function U({
     }), "PDF Print" === s && jsx("span", {
       className: "x1n0bwc9 x1ah0xmj",
       children: getI18nString("cooper.toolbar.export_modal.color_profile_warning")
-    }), getFeatureFlags().buzz_print_export && "PDF Print" === s && jsx(_$$S, {
-      label: jsx(J, {
+    }), getFeatureFlags().buzz_print_export && "PDF Print" === s && jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("cooper.toolbar.export_modal.show_print_marks")
       }),
       checked: o,

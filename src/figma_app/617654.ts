@@ -1,5 +1,5 @@
 import { z, Ip } from "../905/239603";
-import { vh, YV, td, _5 } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { M4 } from "../905/713695";
 import { _ as _$$_, P } from "../905/242077";
@@ -32,27 +32,27 @@ let m = z.object({
 });
 let $$g0 = new class {
   constructor() {
-    this.IdpUsersSchemaValidator = vh();
-    this.LicenseGroupsSchemaValidator = vh();
-    this.BillingDataSchemaValidator = YV("BillingDataSchemaValidator", pd.nullable(), null);
-    this.UpdateOrgSchemaValidator = vh();
-    this.TeamsSchemaValidator = vh();
-    this.TeamSchemaValidator = vh();
-    this.EligibleUpgradesFigjamSchemaValidator = vh();
-    this.OrgNameSchemaValidator = vh();
-    this.DomainsSchemaValidator = vh();
-    this.AdminsSchemaValidator = YV("AdminsSchemaValidator", e => e.array(WU), null, !1);
-    this.OrgUsersPaginatedSchemaValidator = YV("OrgUsersPaginatedSchemaValidator", m, null, !1);
-    this.OrgUsersPaginatedSchemaValidatorPassthrough = vh();
-    this.UserSchemaValidator = YV("UserSchemaValidator", WU, null, !1);
-    this.OauthConnectionsSchemaValidator = vh();
-    this.ShowVatGstSchemaValidator = vh();
-    this.LicenseGroupsMembersCountsSchemaValidator = vh();
-    this.WorkspaceTeamsCountsSchemaValidator = vh();
-    this.OrgUsersCountSchemaValidator = vh();
-    this.OrgUsersFilterCountsSchemaValidator = vh();
-    this.OrgTeamsFilterCountsSchemaValidator = vh();
-    this.OrgAdminsSchemaValidator = vh();
+    this.IdpUsersSchemaValidator = createNoOpValidator();
+    this.LicenseGroupsSchemaValidator = createNoOpValidator();
+    this.BillingDataSchemaValidator = createMetaValidator("BillingDataSchemaValidator", pd.nullable(), null);
+    this.UpdateOrgSchemaValidator = createNoOpValidator();
+    this.TeamsSchemaValidator = createNoOpValidator();
+    this.TeamSchemaValidator = createNoOpValidator();
+    this.EligibleUpgradesFigjamSchemaValidator = createNoOpValidator();
+    this.OrgNameSchemaValidator = createNoOpValidator();
+    this.DomainsSchemaValidator = createNoOpValidator();
+    this.AdminsSchemaValidator = createMetaValidator("AdminsSchemaValidator", e => e.array(WU), null, !1);
+    this.OrgUsersPaginatedSchemaValidator = createMetaValidator("OrgUsersPaginatedSchemaValidator", m, null, !1);
+    this.OrgUsersPaginatedSchemaValidatorPassthrough = createNoOpValidator();
+    this.UserSchemaValidator = createMetaValidator("UserSchemaValidator", WU, null, !1);
+    this.OauthConnectionsSchemaValidator = createNoOpValidator();
+    this.ShowVatGstSchemaValidator = createNoOpValidator();
+    this.LicenseGroupsMembersCountsSchemaValidator = createNoOpValidator();
+    this.WorkspaceTeamsCountsSchemaValidator = createNoOpValidator();
+    this.OrgUsersCountSchemaValidator = createNoOpValidator();
+    this.OrgUsersFilterCountsSchemaValidator = createNoOpValidator();
+    this.OrgTeamsFilterCountsSchemaValidator = createNoOpValidator();
+    this.OrgAdminsSchemaValidator = createNoOpValidator();
     this.OrgAdminsQuery = M4.Query({
       fetch: async ({
         orgId: e
@@ -60,9 +60,9 @@ let $$g0 = new class {
         orgId: e
       })).data.meta
     });
-    this.OrgTeamsCountSchemaValidator = vh();
-    this.SetDomainCaptureSchemaValidator = vh();
-    this.EligibleUpgradesSchemaValidator = YV("EligibleUpgradesSchemaValidator", e => e.object({
+    this.OrgTeamsCountSchemaValidator = createNoOpValidator();
+    this.SetDomainCaptureSchemaValidator = createNoOpValidator();
+    this.EligibleUpgradesSchemaValidator = createMetaValidator("EligibleUpgradesSchemaValidator", e => e.object({
       eligible_teams: e.array(_$$_),
       eligible_team_users: e.array(P)
     }), null, !1);
@@ -125,7 +125,7 @@ let $$g0 = new class {
         orgId,
         ...n
       } = e;
-      return await t.get(`/api/orgs/${e.orgId}/teams`, td.toAPIParameters(n));
+      return await t.get(`/api/orgs/${e.orgId}/teams`, APIParameterUtils.toAPIParameters(n));
     });
   }
   getTeam(e) {
@@ -156,7 +156,7 @@ let $$g0 = new class {
   getAdmins(e) {
     return this.AdminsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/orgs/${e.orgId}/admins`, td.toAPIParameters({
+    }) => await t.get(`/api/orgs/${e.orgId}/admins`, APIParameterUtils.toAPIParameters({
       include_license_admins: e.includeLicenseAdmins
     })));
   }
@@ -172,7 +172,7 @@ let $$g0 = new class {
     } = e;
     return this.OrgUsersPaginatedSchemaValidatorPassthrough.validate(async ({
       xr: e
-    }) => await e.get(`/api/v2/orgs/${orgId}/org_users`, td.toAPIParameters({
+    }) => await e.get(`/api/v2/orgs/${orgId}/org_users`, APIParameterUtils.toAPIParameters({
       ...l,
       ...(filter || {}),
       ...(sort || {}),
@@ -215,7 +215,7 @@ let $$g0 = new class {
     "" === e.searchQuery && delete e.searchQuery;
     return this.OrgUsersFilterCountsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/orgs/${e.orgId}/org_users/filter_counts`, td.toAPIParameters({
+    }) => await t.get(`/api/orgs/${e.orgId}/org_users/filter_counts`, APIParameterUtils.toAPIParameters({
       searchQuery: e.searchQuery,
       licenseGroupId: e.licenseGroupId,
       workspaceId: e.workspaceId,
@@ -319,12 +319,12 @@ let $$g0 = new class {
     }) => await e.get("/api/orgs/eligible_upgrade_data"));
   }
   scheduleCancellation(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.post(`/api/orgs/${e.orgId}/scheduled_cancellation`));
   }
   unscheduleCancellation(e) {
-    return _5.validate(async ({
+    return defaultValidator.validate(async ({
       xr: t
     }) => await t.del(`/api/orgs/${e.orgId}/scheduled_cancellation`));
   }

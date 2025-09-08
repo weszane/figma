@@ -13,7 +13,7 @@ import { Al } from "../9420/394825";
 import { iZ } from "../905/372672";
 import { OI, Mt } from "../c5e2cae0/2942";
 import { Ju } from "../905/712921";
-import { tY, tn } from "../figma_app/831101";
+import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
 import { SC, Sc, h5, ck, jX } from "../figma_app/707808";
 import { Nd, N6 } from "../figma_app/81441";
 if (443 == require.j) {}
@@ -31,7 +31,7 @@ function j(e) {
 }
 var S = (e => (e[e.PLAN_COMPARISON = 0] = "PLAN_COMPARISON", e[e.CREATE_TEAM = 1] = "CREATE_TEAM", e[e.ADD_COLLABORATORS = 2] = "ADD_COLLABORATORS", e[e.ADJUST_EDITORS = 3] = "ADJUST_EDITORS", e[e.SET_EDITORS = 4] = "SET_EDITORS", e[e.PAYMENT_AND_ADDRESS = 5] = "PAYMENT_AND_ADDRESS", e[e.CONFIRM_PAY = 6] = "CONFIRM_PAY", e))(S || {});
 function T(e, t, a, s) {
-  let r = t === tY.STUDENT;
+  let r = t === SubscriptionType.STUDENT;
   let l = [];
   switch (e) {
     case SC.CREATE_AND_UPGRADE:
@@ -57,37 +57,37 @@ function T(e, t, a, s) {
     switch (e) {
       case 0:
         return {
-          step: tn.PLAN_COMPARISON,
+          step: UpgradeSteps.PLAN_COMPARISON,
           text: getI18nString("pro_cart.breadcrumbs.choose_plan")
         };
       case 1:
         return {
-          step: tn.CREATE_TEAM,
+          step: UpgradeSteps.CREATE_TEAM,
           text: getI18nString("pro_cart.breadcrumbs.create_team")
         };
       case 2:
         return {
-          step: tn.ADD_COLLABORATORS,
+          step: UpgradeSteps.ADD_COLLABORATORS,
           text: getI18nString("pro_cart.breadcrumbs.add_team_members")
         };
       case 3:
         return {
-          step: tn.CHOOSE_PLAN,
+          step: UpgradeSteps.CHOOSE_PLAN,
           text: getI18nString("pro_cart.breadcrumbs.adjust_editors.seat_rename")
         };
       case 4:
         return {
-          step: tn.CHOOSE_PLAN,
+          step: UpgradeSteps.CHOOSE_PLAN,
           text: getI18nString("pro_cart.breadcrumbs.set_editors.seat_rename")
         };
       case 5:
         return {
-          step: tn.PAYMENT_AND_ADDRESS,
+          step: UpgradeSteps.PAYMENT_AND_ADDRESS,
           text: getI18nString("pro_cart.breadcrumbs.payment_information")
         };
       case 6:
         return {
-          step: tn.CONFIRM_PAY,
+          step: UpgradeSteps.CONFIRM_PAY,
           text: getI18nString("pro_cart.breadcrumbs.review")
         };
     }
@@ -154,9 +154,9 @@ export function $$b1(e) {
         _(sf({
           ...selectedView,
           paymentStep: r.step,
-          billingPeriod: u === tY.UNSPECIFIED ? void 0 : u,
+          billingPeriod: u === SubscriptionType.UNSPECIFIED ? void 0 : u,
           planType: ck(teamFlowType, r.step) ? Sc.UNDETERMINED : selectedView.planType,
-          teamFlowType: jX(teamFlowType) && r.step === tn.PLAN_COMPARISON ? SC.CREATE_AND_UPGRADE : selectedView.teamFlowType
+          teamFlowType: jX(teamFlowType) && r.step === UpgradeSteps.PLAN_COMPARISON ? SC.CREATE_AND_UPGRADE : selectedView.teamFlowType
         }));
       }
     }, r.text))]

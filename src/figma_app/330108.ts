@@ -7,7 +7,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../figma_app/240735";
 import { UM, vr } from "../figma_app/475472";
 import { n1, p9 } from "../figma_app/88768";
@@ -16,7 +16,7 @@ import { Eh } from "../figma_app/617654";
 import { u as _$$u } from "../905/774364";
 import { Cx, of } from "../figma_app/714946";
 var s = a;
-nF(async (e, t) => {
+createOptimistThunk(async (e, t) => {
   let r = t.team.id;
   try {
     let n = (await XHR.put(`/api/teams/${r}`, {
@@ -29,7 +29,7 @@ nF(async (e, t) => {
     e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_changing_team_s_org_access"))));
   }
 });
-let $$T7 = nF(async (e, t) => {
+let $$T7 = createOptimistThunk(async (e, t) => {
   let r = {};
   if (t.teams.forEach(e => {
     let t = e.workspace_id;
@@ -53,7 +53,7 @@ let $$T7 = nF(async (e, t) => {
     e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_unassigning_team_s_from_a_workspace"))));
   }
 });
-let $$I10 = nF(async (e, t) => {
+let $$I10 = createOptimistThunk(async (e, t) => {
   let r = t.teams.map(e => e.id);
   let n = t.workspaceId;
   try {
@@ -71,7 +71,7 @@ let $$I10 = nF(async (e, t) => {
     e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_assigning_team_s_to_a_workspace"))));
   }
 });
-nF(async (e, t) => {
+createOptimistThunk(async (e, t) => {
   let r = t.workspaceId;
   e.dispatch($$C4("loading"));
   try {
@@ -88,7 +88,7 @@ nF(async (e, t) => {
     e.dispatch($$C4("errors"));
   }
 });
-let $$S6 = nF((e, t) => {
+let $$S6 = createOptimistThunk((e, t) => {
   let r = e.getState().currentUserOrgId;
   let n = t.teamIds;
   let i = {
@@ -111,7 +111,7 @@ let $$S6 = nF((e, t) => {
     }));
   });
 });
-let v = nF((e, t) => {
+let v = createOptimistThunk((e, t) => {
   let r = e.getState().currentUserOrgId;
   let n = t.teamId;
   let i = {
@@ -134,7 +134,7 @@ let v = nF((e, t) => {
     }));
   });
 });
-let $$A2 = nF((e, t, {
+let $$A2 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = e.getState().currentUserOrgId;
@@ -160,7 +160,7 @@ let $$A2 = nF((e, t, {
   teamId: e
 }) => `ORG_FETCH_TEAM_${e}`);
 let $$x0 = NC("ORG_FETCH_DISCOVERABLE_TEAMS");
-let $$N3 = nF((e, t) => {
+let $$N3 = createOptimistThunk((e, t) => {
   let r = e.getState().currentUserOrgId;
   let {
     includeProjectCount,

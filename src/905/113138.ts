@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { atom } from "../figma_app/27355";
 import { createReduxSubscriptionAtom } from "../905/111321";
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC, MM } from "../905/17179";
 import { j } from "../905/848904";
 import { ET, F5 } from "../905/284406";
@@ -86,7 +86,7 @@ export class $$m0 {
       updates: e
     }));
     return e => {
-      "COMMIT" === e ? t(_$$c(i)) : "REJECT" === e ? t(_$$r(i)) : throwTypeError(e);
+      "COMMIT" === e ? t(createOptimistCommitAction(i)) : "REJECT" === e ? t(createOptimistRevertAction(i)) : throwTypeError(e);
     };
   }
   createAtom(e) {

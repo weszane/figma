@@ -1,10 +1,10 @@
-import { MM } from "../905/350402";
-import { r as _$$r, c } from "../905/676456";
+import { createOptimistAction } from "../905/350402";
+import { createOptimistRevertAction, createOptimistCommitAction } from "../905/676456";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
-export let $$l0 = MM("REPO_RESTORE", (e, {
+export let $$l0 = createOptimistAction("REPO_RESTORE", (e, {
   reposById: t,
   userInitiated: i
 }, {
@@ -14,7 +14,7 @@ export let $$l0 = MM("REPO_RESTORE", (e, {
     repo_ids: Object.keys(t)
   }).then(i => {
     if (207 === i.status) {
-      e.dispatch(_$$r(d));
+      e.dispatch(createOptimistRevertAction(d));
       try {
         let n = Object.keys(i.data?.meta?.success);
         let r = {};
@@ -37,13 +37,13 @@ export let $$l0 = MM("REPO_RESTORE", (e, {
       }
     } else {
       let t = getI18nString("collaboration.branching.files_restored");
-      e.dispatch(c(d));
+      e.dispatch(createOptimistCommitAction(d));
       e.dispatch(F.enqueue({
         message: t
       }));
     }
   }).catch(t => {
-    e.dispatch(_$$r(d));
+    e.dispatch(createOptimistRevertAction(d));
     e.dispatch(F.enqueue({
       message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
       error: !0

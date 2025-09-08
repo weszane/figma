@@ -7,7 +7,7 @@ import { SceneNode } from '../905/499575';
 import { sceneDocumentType } from '../905/582379';
 import { o as runWithResolve } from '../905/757420';
 import { parseInteger } from '../905/833686';
-import { AD as INVALID_GUID } from '../905/871411';
+import { defaultSessionLocalIDString } from '../905/871411';
 import { documentStateTsApi } from '../905/880730';
 import { WI as normalizeOptions } from '../905/929949';
 import { Q as ChangeListenerQueue, P as ChangeListeners } from '../905/931498';
@@ -410,7 +410,7 @@ export class TSSceneGraph {
   getVariableFacetInternal(id, setUnstable) {
     if (!id) return null;
     let apis = getApis();
-    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE) ?? INVALID_GUID;
+    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE) ?? defaultSessionLocalIDString;
     let n = parseInteger(guid, 0);
     let s = parseInteger(guid, guid.indexOf(':') + 1);
     if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, s, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {
@@ -428,7 +428,7 @@ export class TSSceneGraph {
   getVariableCollectionFacetInternal(id, setUnstable) {
     if (!id) return null;
     let apis = getApis();
-    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE_SET) ?? INVALID_GUID;
+    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE_SET) ?? defaultSessionLocalIDString;
     let n = parseInteger(guid, 0);
     let s = parseInteger(guid, guid.indexOf(':') + 1);
     if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, s, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {
@@ -446,7 +446,7 @@ export class TSSceneGraph {
   getStyleFacetInternal(id, setUnstable) {
     if (!id) return null;
     let apis = getApis();
-    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.STYLE) ?? INVALID_GUID;
+    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.STYLE) ?? defaultSessionLocalIDString;
     let n = parseInteger(guid, 0);
     let s = parseInteger(guid, guid.indexOf(':') + 1);
     if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, s, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {

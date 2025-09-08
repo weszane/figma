@@ -4,7 +4,7 @@ import { Pw } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -15,7 +15,7 @@ import { c as _$$c2 } from "../905/370443";
 import { tf } from "../figma_app/831799";
 import { Um } from "../905/848862";
 import { _Z, B9 } from "../figma_app/514043";
-import { NW } from "../figma_app/831101";
+import { BillingCycle } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { _ as _$$_2 } from "../c5e2cae0/57596";
 import { O as _$$O } from "../c5e2cae0/648208";
@@ -99,8 +99,8 @@ export function $$b0({
             value: i,
             onChange: e => I(e),
             children: [jsx(_$$c, {
-              value: NW.YEAR,
-              label: jsxs(J, {
+              value: BillingCycle.YEAR,
+              label: jsxs(Label, {
                 className: _$$s.flex.itemsCenter.gap16.$,
                 children: [renderI18nText("checkout.sidebar.annual"), " ", jsx("b", {
                   className: _$$s.colorTextSuccess.fontSemiBold.colorBgSuccessTertiary.bRadius2.px4.block.$,
@@ -111,8 +111,8 @@ export function $$b0({
                 })]
               })
             }), jsx(_$$c, {
-              value: NW.MONTH,
-              label: jsx(J, {
+              value: BillingCycle.MONTH,
+              label: jsx(Label, {
                 children: renderI18nText("checkout.sidebar.monthly")
               })
             })]

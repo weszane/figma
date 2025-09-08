@@ -12,7 +12,7 @@ import { renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { N as _$$N } from "../905/73189";
 import { r as _$$r } from "../905/393328";
 export function $$b1({
@@ -116,6 +116,6 @@ export function $$b1({
     })
   });
 }
-export let $$$$T0 = Ju($$b1, "APPLE_EULA_MODAL_TYPE", ZU.YES);
+export let $$$$T0 = registerModal($$b1, "APPLE_EULA_MODAL_TYPE", ModalSupportsBackground.YES);
 export const T = $$$$T0;
 export const x = $$b1;

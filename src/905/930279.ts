@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { Agb } from "../figma_app/822011";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { lyf, kul } from "../figma_app/763686";
+import { ViewType, SchemaJoinStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
@@ -101,7 +101,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
     viewBranchDiff: (A = e?.sourceFile || null, e ? Kz(e) ? e.canView ? A?.canView ? d ? {
       status: "hidden",
       reason: "Recovery mode"
-    } : r !== lyf.BRANCHING && n !== Wy.SAFE ? {
+    } : r !== ViewType.BRANCHING && n !== Wy.SAFE ? {
       status: "disabled",
       reason: "Low memory"
     } : {
@@ -142,12 +142,12 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         status: "hidden",
         reason: "Recovery mode"
       };
-      if (n !== lyf.BRANCHING) {
+      if (n !== ViewType.BRANCHING) {
         if (i !== Wy.SAFE) return {
           status: "disabled",
           reason: "Low memory"
         };
-        if (r !== kul.JOINED) return {
+        if (r !== SchemaJoinStatus.JOINED) return {
           status: "disabled",
           reason: "Offline"
         };
@@ -200,12 +200,12 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
           reason: "No changes"
         };
       }
-      if (r !== lyf.BRANCHING) {
+      if (r !== ViewType.BRANCHING) {
         if (n !== Wy.SAFE) return {
           status: "disabled",
           reason: "Low memory"
         };
-        if (a !== kul.JOINED) return {
+        if (a !== SchemaJoinStatus.JOINED) return {
           status: "disabled",
           reason: "Offline"
         };
@@ -289,12 +289,12 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
           };
         }
       }
-      if (r !== lyf.BRANCHING) {
+      if (r !== ViewType.BRANCHING) {
         if (n !== Wy.SAFE) return {
           status: "disabled",
           reason: "Low memory"
         };
-        if (a !== kul.JOINED) return {
+        if (a !== SchemaJoinStatus.JOINED) return {
           status: "disabled",
           reason: "Offline"
         };

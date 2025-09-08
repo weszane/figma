@@ -1,5 +1,5 @@
 import { debug } from "../figma_app/465776";
-import { Ez5, glU, zMY } from "../figma_app/763686";
+import { AppStateTsApi, Fullscreen, ThemeMode } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -51,7 +51,7 @@ export function $$x2(e, t, r = !1) {
     let c = l.getDirectlySelectedNodes();
     let u = [];
     if (r && c.length) u = l.getDirectlySelectedNodes().filter(e => _$$o(e)).map(e => e.guid);else {
-      let e = Ez5?.slideLikeNodeObserverState();
+      let e = AppStateTsApi?.slideLikeNodeObserverState();
       e && (u = [...e.slideLikeNodeIdsOnCanvas.getCopy()]);
     }
     let p = l.getCurrentPage()?.guid;
@@ -81,7 +81,7 @@ async function N({
     fileKey: e,
     selectedGuids: t
   });
-  glU?.applyNodesFromBuffer(r, e, t, !1);
+  Fullscreen?.applyNodesFromBuffer(r, e, t, !1);
 }
 export function $$C1() {
   let e = EI();
@@ -90,8 +90,8 @@ export function $$C1() {
   let [a, d] = useAtomValueAndSetter($K);
   return R(() => {
     debug(!!r, "slideCreationData is undefined. This should never happen");
-    Ez5?.slideThemeLibBindings().insertDefaultLocalTheme(zMY.LIGHT, "Template style");
-    Ez5?.uiState().leftPanelCollapsedUI3.set(!0);
+    AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(ThemeMode.LIGHT, "Template style");
+    AppStateTsApi?.uiState().leftPanelCollapsedUI3.set(!0);
     debugState.dispatch(F.enqueue({
       message: getI18nString("slides.general.copying_slides_over"),
       type: "design-to-slides-load",
@@ -103,7 +103,7 @@ export function $$C1() {
       selectedNodeIds: r.selectedNodeIds
     }).then(() => {
       d(Ut);
-      Ez5?.uiState().leftPanelCollapsedUI3.set(!1);
+      AppStateTsApi?.uiState().leftPanelCollapsedUI3.set(!1);
       debugState.dispatch(F.dequeue({
         matchType: "design-to-slides-load"
       }));

@@ -6,8 +6,8 @@ import { A } from "../905/920165";
 import { Pt } from "../figma_app/806412";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { LN } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
 import { zk } from "../figma_app/198712";
 import { Q7 } from "../905/203369";
@@ -38,7 +38,7 @@ function y({
   recordingKey: e
 }) {
   let t = useMemo(() => new LN(), []);
-  let s = _W(kl("cornerSmoothing"), 0);
+  let s = valueOrFallback(kl("cornerSmoothing"), 0);
   return jsxs("div", {
     className: "corner_smoothing--root--tqWdN",
     children: [jsx("div", {
@@ -78,7 +78,7 @@ function y({
 }
 function _(e, t) {
   e = Math.round(100 * e) / 100;
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     cornerSmoothing: e
   }, {
     shouldCommit: t ? zk.YES : zk.NO

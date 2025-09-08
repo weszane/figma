@@ -1,7 +1,7 @@
 import { useRef, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { oU } from "../figma_app/273493";
-import { daH, DV9 } from "../figma_app/763686";
+import { ColorOptions, WhiteboardTsApi } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
 import { tK, DA } from "../figma_app/191804";
 import { Eg } from "../figma_app/583114";
@@ -117,7 +117,7 @@ export function $$R1(e) {
 }
 export function $$L8(e, t) {
   let r = $$w7();
-  return !!e && (r.type === Yv.CUSTOM ? 0 > r.variations[t].findIndex(t => DA(e, t)) : zS(e, t) === daH.CUSTOM);
+  return !!e && (r.type === Yv.CUSTOM ? 0 > r.variations[t].findIndex(t => DA(e, t)) : zS(e, t) === ColorOptions.CUSTOM);
 }
 export function $$P6(e, t) {
   return e && t;
@@ -149,9 +149,9 @@ export function $$M9() {
     }), d(n6), u(ns), p(T7), h(function () {
       let e = Math.floor(Math.random() * Ku().length);
       return BV(Ku()[e], "sticky") || E$();
-    }()), DV9.setSectionToolColor(oU(function () {
+    }()), WhiteboardTsApi.setSectionToolColor(oU(function () {
       let e = Math.floor(Math.random() * Qe().length);
-      return BV(Qe()[e], "baseLight") || BV(daH.BLUE_LIGHT, "baseLight");
+      return BV(Qe()[e], "baseLight") || BV(ColorOptions.BLUE_LIGHT, "baseLight");
     }()))) : r && (i({
       paints: [{
         type: "SOLID",
@@ -162,7 +162,7 @@ export function $$M9() {
         type: "SOLID",
         color: r.highlighterColor
       }]
-    }), d(r.shapeColor), h(r.stickyColor), DV9.setSectionToolColor(oU(r.sectionColor))));
+    }), d(r.shapeColor), h(r.stickyColor), WhiteboardTsApi.setSectionToolColor(oU(r.sectionColor))));
   }, [e, t, r, i, l, d, u, p, h]);
 }
 export function $$F0(e) {

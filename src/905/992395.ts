@@ -1,4 +1,4 @@
-import { W8Y } from "../figma_app/763686";
+import { SessionStatus } from "../figma_app/763686";
 import { um, createCustomAtom } from "../figma_app/27355";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 var $$s2 = (e => (e.VOTING = "VOTING", e.TIMER = "TIMER", e.MUSIC = "MUSIC", e))($$s2 || {});
@@ -42,7 +42,7 @@ let d = createReduxSubscriptionAtomWithState(e => e.mirror.appModel.votingSessio
 let $$c0 = createCustomAtom(l, e => {
   let t = e(l);
   let i = e(d);
-  return "PAST_VOTES" === t.view && (i === W8Y.JOINED || i === W8Y.NOT_JOINED) ? {
+  return "PAST_VOTES" === t.view && (i === SessionStatus.JOINED || i === SessionStatus.NOT_JOINED) ? {
     ...t,
     view: "DEFAULT"
   } : t;

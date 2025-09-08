@@ -7,22 +7,22 @@ import { bL, Rq } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { N as _$$N } from "../905/438674";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { hp } from "../vendor/565136";
 import { R as _$$R } from "../905/441305";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Yu } from "../905/355291";
 import { yJ } from "../figma_app/24841";
 import { qC, lJ, vJ } from "../905/264101";
 import { Z } from "../905/854480";
 import { iZ, pS } from "../905/372672";
 import { ed, r6 } from "../905/990455";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
 import { J } from "../905/211135";
 import { p_, Hx, G6, KA, aY, _Z, z3 } from "../figma_app/639088";
-let $$C0 = Ju(function (e) {
+let $$C0 = registerModal(function (e) {
   let {
     open,
     onClose
@@ -94,7 +94,7 @@ function k() {
           variant: "primary",
           onClick: () => {
             t();
-            e(to({
+            e(showModalHandler({
               type: J,
               showModalsBeneath: !0
             }));
@@ -173,7 +173,7 @@ function R() {
 function N() {
   let e = useDispatch();
   let t = Z();
-  let i = X();
+  let i = setupAutofocusHandler();
   let s = T();
   let [o, u] = useState(!0);
   let h = () => {

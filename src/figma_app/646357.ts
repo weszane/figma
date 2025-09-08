@@ -5,7 +5,7 @@ import { throwTypeError, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { n3, F7, Rf, Pg, IA } from "../905/859698";
-import { bwI, uXg, glU, HG$, Egt } from "../figma_app/763686";
+import { StateGroupErrorType, VariableSetErrorType, Fullscreen, VariableErrorType, SceneGraphHelpers } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
@@ -622,8 +622,8 @@ export function $$eQ26(e, t, r, n, i) {
     width: r?.width || t.min_node_width,
     height: r?.height || t.min_node_height,
     key: t.key || void 0,
-    stateGroupError: r?.stateGroupError || bwI.NONE,
-    componentPropDefError: r?.componentPropDefError || uXg.NONE,
+    stateGroupError: r?.stateGroupError || StateGroupErrorType.NONE,
+    componentPropDefError: r?.componentPropDefError || VariableSetErrorType.NONE,
     fill_color: r?.fill_color || t?.fill_color,
     default_state_key: r?.default_state_key || t?.default_state_key,
     old_key: r?.oldKey || void 0
@@ -749,7 +749,7 @@ export async function $$tn62(e, t = [], r, n, i, a, s) {
   let o = {};
   for (let r of t) {
     let t = e.get(r);
-    t && t.styleKeyForPublish && 0 !== glU.getNumUsagesOfStyle(t.styleKeyForPublish, !0) && (o[t.styleKeyForPublish] = r);
+    t && t.styleKeyForPublish && 0 !== Fullscreen.getNumUsagesOfStyle(t.styleKeyForPublish, !0) && (o[t.styleKeyForPublish] = r);
   }
   let l = Object.keys(o).map(n3);
   let p = await M4.fetch(_x.UnpublishedStylesQuery({
@@ -871,7 +871,7 @@ export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
         let r = e.get(t)?.componentKey;
         return r && !o[r];
       })) continue;
-      let n = glU.getDefaultStateForLocalStateGroup(t);
+      let n = Fullscreen.getDefaultStateForLocalStateGroup(t);
       let s = e.get(n);
       let [l, u] = s ? [s.size.x, s.size.y] : [0, 0];
       o[m] = {
@@ -1011,11 +1011,11 @@ export function $$ty80(e, t) {
   }(e, t) || getFeatureFlags().dse_module_publish && t.modules[e] && t.modules[e] || null;
 }
 export function $$tb107(e) {
-  let t = e.type === PW.STATE_GROUP && !!(e.stateGroupError && e.stateGroupError !== bwI.TOO_MANY_STATES_ERROR);
-  return !!(e.componentPropDefError && (e.componentPropDefError === uXg.CONFLICTING_NAMES_ERROR || e.componentPropDefError === uXg.CONFLICTING_NAMES_WITH_VARIANT_ERROR || e.componentPropDefError === uXg.UNUSED_DEF_ERROR) || t);
+  let t = e.type === PW.STATE_GROUP && !!(e.stateGroupError && e.stateGroupError !== StateGroupErrorType.TOO_MANY_STATES_ERROR);
+  return !!(e.componentPropDefError && (e.componentPropDefError === VariableSetErrorType.CONFLICTING_NAMES_ERROR || e.componentPropDefError === VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR || e.componentPropDefError === VariableSetErrorType.UNUSED_DEF_ERROR) || t);
 }
 export function $$tT43(e) {
-  return e.variableSetError !== HG$.NONE;
+  return e.variableSetError !== VariableErrorType.NONE;
 }
 let $$tI27 = () => {};
 let $$tS36 = new Promise(e => {
@@ -1171,7 +1171,7 @@ export function $$tz63(e) {
   return YJ.includes(e.type);
 }
 export function $$tW5(e) {
-  return e.isLocal ? Egt.getAssetKeyForPublish(e.node_id) : $$eo3(e);
+  return e.isLocal ? SceneGraphHelpers.getAssetKeyForPublish(e.node_id) : $$eo3(e);
 }
 export function $$tK8(e) {
   return e.containing_frame?.containingStateGroup?.nodeId ?? null;

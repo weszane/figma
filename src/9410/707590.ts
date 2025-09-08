@@ -2,13 +2,13 @@ import { hg } from "../figma_app/425489";
 import { A as _$$A } from "../905/991888";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useState, useContext, useMemo, useEffect } from "react";
-import { Oin } from "../figma_app/763686";
+import { UIVisibilitySetting } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import d from "classnames";
 import { logWarning } from "../905/714362";
 import { PN } from "../figma_app/897289";
 import { zn, Ns } from "../figma_app/768070";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Kw } from "../905/612685";
 import { yw, Bm } from "../figma_app/617727";
 import { FFileType } from "../figma_app/191312";
@@ -90,12 +90,12 @@ let v = forwardRef(function ({
       e();
       A(!1);
     };
-  }, [i, k, e, I]), useEffect(() => { }, [P, e, O]), useEffect(() => {
+  }, [i, k, e, I]), useEffect(() => {}, [P, e, O]), useEffect(() => {
     let e = I.current;
     if (!e) return;
     let t = () => {
       E(!1);
-      Y5.triggerAction("inline-preview-iframe-focus-state-changed", {
+      fullscreenValue.triggerAction("inline-preview-iframe-focus-state-changed", {
         isFocused: !1
       });
     };
@@ -119,7 +119,7 @@ let v = forwardRef(function ({
       shouldNotOverflow: !0,
       isViewer: !0,
       editorType: FFileType.DESIGN,
-      progressBarMode: Oin.HIDE_UI
+      progressBarMode: UIVisibilitySetting.HIDE_UI
     })]
   });
 });

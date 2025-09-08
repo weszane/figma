@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { PcT, q6_, RYP } from "../figma_app/763686";
+import { webGPUBindings, GpuErrorType, ColorSpaceEnum } from "../figma_app/763686";
 import { iL } from "../figma_app/762706";
 import { zD } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
@@ -285,7 +285,7 @@ class _ {
   async initialize() {
     if (this._device) return;
     let e = () => {
-      this._shouldFallbackToWebGLOnDeviceCreateFailure() && PcT?.requestFallbackToWebGL(q6_.REQUEST_DEVICE_FAILURE);
+      this._shouldFallbackToWebGLOnDeviceCreateFailure() && webGPUBindings?.requestFallbackToWebGL(GpuErrorType.REQUEST_DEVICE_FAILURE);
     };
     let t = null;
     try {
@@ -362,13 +362,13 @@ class _ {
         message: e.message,
         reason: e.reason
       });
-      PcT?.reportDeviceLost();
+      webGPUBindings?.reportDeviceLost();
       this._device = null;
       this._deviceIdForEmscripten = null;
-      "destroyed" !== e.reason ? (await this.initialize(), this.isDeviceInitialized() ? (logWarning("GPU", "WebGPU device was re-initialized."), PcT?.reportDeviceRestored()) : (logWarning("GPU", "WebGPU device was lost and failed to re-initialize."), this._shouldFallbackToWebGLOnDeviceCreateFailure() && PcT?.requestFallbackToWebGL(q6_.REQUEST_DEVICE_FAILURE)), this._recreateDeviceOnNextDestroy = !1) : this._recreateDeviceOnNextDestroy && !this._recreateDeviceOnNextDestroyTimeoutId && (this._recreateDeviceOnNextDestroyTimeoutId = setTimeout(async () => {
+      "destroyed" !== e.reason ? (await this.initialize(), this.isDeviceInitialized() ? (logWarning("GPU", "WebGPU device was re-initialized."), webGPUBindings?.reportDeviceRestored()) : (logWarning("GPU", "WebGPU device was lost and failed to re-initialize."), this._shouldFallbackToWebGLOnDeviceCreateFailure() && webGPUBindings?.requestFallbackToWebGL(GpuErrorType.REQUEST_DEVICE_FAILURE)), this._recreateDeviceOnNextDestroy = !1) : this._recreateDeviceOnNextDestroy && !this._recreateDeviceOnNextDestroyTimeoutId && (this._recreateDeviceOnNextDestroyTimeoutId = setTimeout(async () => {
         await this.initialize();
         logWarning("GPU", "WebGPU device was re-initialized after timeout.");
-        PcT?.reportDeviceRestored();
+        webGPUBindings?.reportDeviceRestored();
         this._recreateDeviceOnNextDestroy = !1;
         this._recreateDeviceOnNextDestroyTimeoutId = null;
       }, 3e3));
@@ -478,9 +478,9 @@ class _ {
   }
   colorProfileToString(e) {
     switch (e) {
-      case RYP.SRGB:
+      case ColorSpaceEnum.SRGB:
         return "srgb";
-      case RYP.DISPLAY_P3:
+      case ColorSpaceEnum.DISPLAY_P3:
         return "display-p3";
     }
   }
@@ -573,17 +573,17 @@ class _ {
     }
     if (e.jsErrorsToReport) for (; e.jsErrorsToReport.length > 0;) {
       let t = e.jsErrorsToReport.shift();
-      t && (reportError(_$$e.RENDERING_AND_ANIMATION, t), this._shouldFallbackWebGLOnJSError() && PcT?.requestFallbackToWebGL(q6_.JS_ERROR));
+      t && (reportError(_$$e.RENDERING_AND_ANIMATION, t), this._shouldFallbackWebGLOnJSError() && webGPUBindings?.requestFallbackToWebGL(GpuErrorType.JS_ERROR));
     }
   }
   async _testCompositeTilePipeline() {
-    if (this._device && PcT) {
+    if (this._device && webGPUBindings) {
       this._device.pushErrorScope("internal");
       this._device.pushErrorScope("validation");
       this._device.pushErrorScope("out-of-memory");
       try {
-        let e = PcT.getWGSLShader("COMPOSITE_TILE_VERTEX");
-        let t = PcT.getWGSLShader("COMPOSITE_TILE_FRAGMENT");
+        let e = webGPUBindings.getWGSLShader("COMPOSITE_TILE_VERTEX");
+        let t = webGPUBindings.getWGSLShader("COMPOSITE_TILE_FRAGMENT");
         let i = this._device.createShaderModule({
           code: e
         });
@@ -667,13 +667,13 @@ class _ {
     }
   }
   async _testBicubicSamplerPipeline() {
-    if (this._device && PcT) {
+    if (this._device && webGPUBindings) {
       this._device.pushErrorScope("internal");
       this._device.pushErrorScope("validation");
       this._device.pushErrorScope("out-of-memory");
       try {
-        let e = PcT.getWGSLShader("IMAGE_BICUBIC_SAMPLER_VERTEX");
-        let t = PcT.getWGSLShader("IMAGE_BICUBIC_SAMPLER_FRAGMENT");
+        let e = webGPUBindings.getWGSLShader("IMAGE_BICUBIC_SAMPLER_VERTEX");
+        let t = webGPUBindings.getWGSLShader("IMAGE_BICUBIC_SAMPLER_FRAGMENT");
         let i = this._device.createShaderModule({
           code: e
         });
@@ -884,7 +884,7 @@ class _ {
       await Promise.all([this._testCompositeTilePipeline(), this._testBicubicSamplerPipeline(), this._testBasicRendering()]);
     } catch (t) {
       this.logWebGPUCompabilityEvent("exception", "general", t);
-      this._shouldFallbackToWebGLOnCompatibilityTestFailure(e) && PcT?.requestFallbackToWebGL(q6_.COMPATIBILITY_TEST_FAILURE);
+      this._shouldFallbackToWebGLOnCompatibilityTestFailure(e) && webGPUBindings?.requestFallbackToWebGL(GpuErrorType.COMPATIBILITY_TEST_FAILURE);
     }
     this.logWebGPUCompabilityEvent("none", "none", "");
   }

@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { Y } from "../905/912236";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { k9 } from "../905/19536";
 import { KH } from "../figma_app/722362";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 export function $$_0() {
   let e = useSelector(e => e.mirror.sceneGraphSelection);
@@ -15,7 +15,7 @@ export function $$_0() {
     Object.keys(e).forEach(e => {
       let r = getSingletonSceneGraph().get(e);
       let n = r?.containingSlideId;
-      n && fn(sH(n)) && t.add(n);
+      n && isValidSessionLocalID(parseSessionLocalID(n)) && t.add(n);
     });
     let r = Array.from(t);
     return 1 === r.length ? r[0] : null;
@@ -59,7 +59,7 @@ export function $$g4() {
   }, [e]);
 }
 export function $$f2() {
-  let e = ut(Ez5?.canvasGrid().canvasGridArray, []).flat();
+  let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat();
   return Fk((e, t) => {
     for (let r of t) {
       let t = e.get(r);
@@ -70,7 +70,7 @@ export function $$f2() {
 }
 export function $$E3() {
   let e = function () {
-    let e = ut(Ez5?.canvasGrid().canvasGridArray, []).flat();
+    let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat();
     let t = new Set($$m5());
     if (!e.length || !t.size) return [];
     let r = [];

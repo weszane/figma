@@ -1,5 +1,5 @@
 import { c2 } from "../905/382883";
-import { Osy, rXF } from "../figma_app/763686";
+import { SelectionPaintHelpers, VariableResolvedDataType } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { gq } from "../905/125333";
@@ -112,7 +112,7 @@ export class $$g1 {
     let t = this.store.getState().currentSelectionPaintInPicker;
     if (null == t.originalPaint) return !1;
     let r = K(e);
-    return null == r ? (console.error(`Failed to apply paint: ${e}`), !1) : (Osy?.updatePaint(GP(t.originalPaint), e, !0, null), this.store.dispatch(oI({
+    return null == r ? (console.error(`Failed to apply paint: ${e}`), !1) : (SelectionPaintHelpers?.updatePaint(GP(t.originalPaint), e, !0, null), this.store.dispatch(oI({
       ...t,
       updatedPaintFromDropper: r.paint
     })), !0);
@@ -126,7 +126,7 @@ export class $$g1 {
   }
   colorPickerSelectedVariable() {
     let e = this.store.getState().variablePickerShown;
-    if (e.isShown && e.resolvedType === rXF.COLOR && "variable-picker-alias" === e.type) return {
+    if (e.isShown && e.resolvedType === VariableResolvedDataType.COLOR && "variable-picker-alias" === e.type) return {
       varId: e.variableID,
       modeId: e.modeID
     };

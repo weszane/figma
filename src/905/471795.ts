@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { flatten, mapFilter } from "../figma_app/656233";
-import { Z_n } from "../figma_app/763686";
+import { VariableDataType } from "../figma_app/763686";
 import { k9 } from "../905/19536";
 import o from "../vendor/728460";
 import { F_ } from "../figma_app/191804";
@@ -31,7 +31,7 @@ export function $$g1({
   let h = useMemo(() => function (e) {
     let t = new Set();
     e.filter(e => "variable" === e.type).forEach(e => {
-      Object.values(e.variable.modeValues).filter(e => e.type === Z_n.ALIAS).forEach(e => t.add(e.value));
+      Object.values(e.variable.modeValues).filter(e => e.type === VariableDataType.ALIAS).forEach(e => t.add(e.value));
     });
     return Array.from(t);
   }(u), [u]);
@@ -49,17 +49,17 @@ export function $$g1({
         for (let s of t) {
           let t = e.modeValues[s.id];
           switch (t?.type) {
-            case Z_n.STRING:
+            case VariableDataType.STRING:
               n = t.value;
               break;
-            case Z_n.BOOLEAN:
-            case Z_n.FLOAT:
+            case VariableDataType.BOOLEAN:
+            case VariableDataType.FLOAT:
               n = String(t.value);
               break;
-            case Z_n.COLOR:
+            case VariableDataType.COLOR:
               n = F_(t.value);
               break;
-            case Z_n.ALIAS:
+            case VariableDataType.ALIAS:
               let o = i[t.value];
               o && (n = o.name);
           }

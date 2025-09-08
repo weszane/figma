@@ -50,7 +50,7 @@ import { H as _$$H2 } from "../905/66320";
 import { i as _$$i3 } from "../905/542104";
 import { b as _$$b2 } from "../905/600173";
 import { K as _$$K3 } from "../figma_app/104888";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { V as _$$V4, y as _$$y2 } from "../905/898539";
 import { A as _$$A3 } from "../4711/244951";
 import { A as _$$A4 } from "../4711/863187";
@@ -466,306 +466,306 @@ export function $$tB2(e) {
 }
 export function $$tG1(e) {
   switch (e) {
-    case NLJ.NONE:
+    case DesignGraphElements.NONE:
       break;
-    case NLJ.SELECT:
+    case DesignGraphElements.SELECT:
       return {
         svg: _$$A81,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.HAND:
+    case DesignGraphElements.HAND:
       return {
         svg: _$$A79,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.COMMENTS:
+    case DesignGraphElements.COMMENTS:
       return {
         svg: _$$A76,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.DROPPER_COLOR:
+    case DesignGraphElements.DROPPER_COLOR:
       break;
-    case NLJ.FRAME:
+    case DesignGraphElements.FRAME:
       return {
         svg: _$$A78,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.STACK:
+    case DesignGraphElements.STACK:
       return {
         svg: _$$A86,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SLICE:
+    case DesignGraphElements.SLICE:
       return {
         svg: _$$A85,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SECTION:
+    case DesignGraphElements.SECTION:
       return {
         svg: _$$A83,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_STAR:
+    case DesignGraphElements.SHAPE_STAR:
       return {
         svg: _$$A69,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_LINE:
+    case DesignGraphElements.SHAPE_LINE:
       return {
         svg: _$$A55,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_ARROW:
+    case DesignGraphElements.SHAPE_ARROW:
       return {
         svg: _$$A41,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_ELLIPSE:
+    case DesignGraphElements.SHAPE_ELLIPSE:
       return {
         svg: _$$A48,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_RECTANGLE:
+    case DesignGraphElements.SHAPE_RECTANGLE:
       return {
         svg: _$$A64,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_REGULAR_POLYGON:
+    case DesignGraphElements.SHAPE_REGULAR_POLYGON:
       return {
         svg: _$$A65,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_SQUARE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SQUARE:
       return {
         svg: _$$A64,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ELLIPSE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE:
       return {
         svg: _$$A48,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_DIAMOND:
+    case DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND:
       return {
         svg: _$$A45,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP:
+    case DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP:
       return {
         svg: _$$A65,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_TRIANGLE_DOWN:
+    case DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_DOWN:
       return {
         svg: _$$A72,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE:
       return {
         svg: _$$A66,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT:
       return {
         svg: _$$A60,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT:
       return {
         svg: _$$A59,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ENG_DATABASE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_DATABASE:
       return {
         svg: _$$A49,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ENG_QUEUE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_QUEUE:
       return {
         svg: _$$A52,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ENG_FILE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_FILE:
       return {
         svg: _$$A50,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ENG_FOLDER:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_FOLDER:
       return {
         svg: _$$A51,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_TRAPEZOID:
+    case DesignGraphElements.SHAPE_WHITEBOARD_TRAPEZOID:
       return {
         svg: _$$A71,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_SHIELD:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SHIELD:
       return {
         svg: _$$A67,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_HEXAGON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_HEXAGON:
       return {
         svg: _$$A53,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_PENTAGON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PENTAGON:
       return {
         svg: _$$A61,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_OCTAGON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_OCTAGON:
       return {
         svg: _$$A57,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_PLUS:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PLUS:
       return {
         svg: _$$A62,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_PREDEFINED_PROCESS:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PREDEFINED_PROCESS:
       return {
         svg: _$$A63,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_MANUAL_INPUT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_MANUAL_INPUT:
       return {
         svg: _$$A56,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_CHEVRON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_CHEVRON:
       return {
         svg: _$$A44,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_DOCUMENT_SINGLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_SINGLE:
       return {
         svg: _$$A47,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE:
       return {
         svg: _$$A46,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ARROW_LEFT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT:
       return {
         svg: _$$A42,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT:
       return {
         svg: _$$A43,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_SUMMING_JUNCTION:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SUMMING_JUNCTION:
       return {
         svg: _$$A70,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_OR:
+    case DesignGraphElements.SHAPE_WHITEBOARD_OR:
       return {
         svg: _$$A58,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE:
       return {
         svg: _$$A68,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_WHITEBOARD_INTERNAL_STORAGE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_INTERNAL_STORAGE:
       return {
         svg: _$$A54,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.VECTOR_PEN:
+    case DesignGraphElements.VECTOR_PEN:
       return {
         svg: _$$A93,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.VECTOR_PENCIL:
+    case DesignGraphElements.VECTOR_PENCIL:
       return {
         svg: _$$A94,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.ERASER:
+    case DesignGraphElements.ERASER:
       return {
         svg: _$$A77,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.VECTOR_BEND:
+    case DesignGraphElements.VECTOR_BEND:
       return {
         svg: _$$A90,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.VECTOR_CUT:
+    case DesignGraphElements.VECTOR_CUT:
       return {
         svg: _$$A91,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.VECTOR_PAINT_BUCKET:
+    case DesignGraphElements.VECTOR_PAINT_BUCKET:
       return {
         svg: _$$A92,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SHAPE_BUILDER:
+    case DesignGraphElements.SHAPE_BUILDER:
       return {
         svg: _$$A84,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.TYPE:
+    case DesignGraphElements.TYPE:
       return {
         svg: _$$A89,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.SCALE:
+    case DesignGraphElements.SCALE:
       return {
         svg: _$$A82,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.STICKY:
+    case DesignGraphElements.STICKY:
       return {
         svg: _$$A87,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.STAMP:
+    case DesignGraphElements.STAMP:
       return {
         svg: _$$A74,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.CONNECTOR_ELBOWED:
+    case DesignGraphElements.CONNECTOR_ELBOWED:
       return {
         svg: _$$A96,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.CONNECTOR_STRAIGHT:
+    case DesignGraphElements.CONNECTOR_STRAIGHT:
       return {
         svg: _$$A97,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.CODE_BLOCK:
+    case DesignGraphElements.CODE_BLOCK:
       return {
         svg: _$$A78,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.WASHI_TAPE:
+    case DesignGraphElements.WASHI_TAPE:
       return {
         svg: _$$A95,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.TABLE:
+    case DesignGraphElements.TABLE:
       return {
         svg: _$$A88,
         ui3Icon: jsx(_$$V, {})
       };
-    case NLJ.ANNOTATE:
+    case DesignGraphElements.ANNOTATE:
       return {
         svg: _$$A75,
         ui3Icon: jsx(_$$K3, {})
       };
-    case NLJ.MEASURE:
+    case DesignGraphElements.MEASURE:
       return {
         svg: _$$A80,
         ui3Icon: jsx(_$$V, {})

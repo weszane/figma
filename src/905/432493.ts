@@ -1,6 +1,6 @@
 import { filterNotNullish } from "../figma_app/656233";
-import { Vzr, kz3, MoD, Dje, Egt } from "../figma_app/763686";
-import { dI } from "../905/871411";
+import { Thumbnail, RelationType, ImageExportType, LibraryUpdateStatus, SceneGraphHelpers } from "../figma_app/763686";
+import { sessionLocalIDToString } from "../905/871411";
 import s from "../vendor/267721";
 import l from "../vendor/946678";
 import c from "../vendor/626715";
@@ -44,7 +44,7 @@ export function $$k2({
   return e.map(e => {
     let a;
     e.isStyle || (a = e.backgroundColor ?? $$D20);
-    let [s, o] = Vzr.generateThumbnailForNode(e.id, t || 0, i || 0, 2, {
+    let [s, o] = Thumbnail.generateThumbnailForNode(e.id, t || 0, i || 0, 2, {
       scale: n ?? (t && i ? void 0 : 2),
       type: "UNCOMPRESSED",
       clearColor: a,
@@ -58,10 +58,10 @@ export function $$k2({
   });
 }
 export function $$R1(e) {
-  let t = rY.getImmediateParentHierarchyNodeChange(e, kz3.PARENT);
+  let t = rY.getImmediateParentHierarchyNodeChange(e, RelationType.PARENT);
   if (t) return t;
   {
-    let t = rY.getImmediateParentHierarchyNodeChange(e, kz3.BASIS_PARENT);
+    let t = rY.getImmediateParentHierarchyNodeChange(e, RelationType.BASIS_PARENT);
     if (t) return t;
   }
 }
@@ -73,7 +73,7 @@ let N = async (e, t) => {
       e();
     }, t);
   });
-  let a = Jr().loadAllImagesUnder([e], MoD.NON_ANIMATED_ONLY, "merge.waitForImagesToLoad");
+  let a = Jr().loadAllImagesUnder([e], ImageExportType.NON_ANIMATED_ONLY, "merge.waitForImagesToLoad");
   await Promise.race([n, a]);
   clearTimeout(i);
 };
@@ -81,7 +81,7 @@ let P = (e, t, i, n) => {
   let a = performance.now();
   let s = async e => {
     await N(e.id, 3e4);
-    let [t, a] = Vzr.generateThumbnailForNode(e.id, i || 0, n || 0, 2, {
+    let [t, a] = Thumbnail.generateThumbnailForNode(e.id, i || 0, n || 0, 2, {
       scale: i && n ? void 0 : 2,
       type: "PNG"
     });
@@ -101,7 +101,7 @@ let P = (e, t, i, n) => {
   return Promise.all(e.map(s));
 };
 export async function $$O5(e, t, i, n, s) {
-  let [l, c] = d()(e, e => e.mainChunk.phase === Dje.REMOVED);
+  let [l, c] = d()(e, e => e.mainChunk.phase === LibraryUpdateStatus.REMOVED);
   let u = function (e) {
     let {
       direction,
@@ -124,13 +124,13 @@ export async function $$O5(e, t, i, n, s) {
   }({
     direction: Kn.FROM_SOURCE,
     fileKey: t,
-    nodeIds: l.map(e => dI(e.mainChunk.displayNode.guid)),
+    nodeIds: l.map(e => sessionLocalIDToString(e.mainChunk.displayNode.guid)),
     checkpointKey: n,
     resolution: mg.SUMMARY,
     maxChunksPerRequest: 50
   });
   let p = await P(c.map(e => ({
-    id: dI(e.mainChunk.displayNode.guid),
+    id: sessionLocalIDToString(e.mainChunk.displayNode.guid),
     styleType: e.mainChunk.displayNode.styleType
   })), {
     branchKey: t,
@@ -139,7 +139,7 @@ export async function $$O5(e, t, i, n, s) {
   }, 2 * parsePxInt(vPu), 2 * parsePxInt(kLz));
   let h = {};
   p.forEach((e, t) => {
-    let i = dI(c[t].mainChunk.displayNode.guid);
+    let i = sessionLocalIDToString(c[t].mainChunk.displayNode.guid);
     i && e && (h[i] = e);
   });
   let g = Promise.all(u).then(e => {
@@ -172,8 +172,8 @@ export function $$U7(e) {
 }
 export function $$B4(e) {
   if ("SYMBOL" !== e.displayNode.type) return !1;
-  let t = e.basisParentHierarchyGuids.map(t => rY.getParentHierarchyNodeChange(e.diffType, t, kz3.BASIS_PARENT));
-  for (let t of e.parentHierarchyGuids.map(t => rY.getParentHierarchyNodeChange(e.diffType, t, kz3.PARENT))) if (t.isStateGroup) return !0;
+  let t = e.basisParentHierarchyGuids.map(t => rY.getParentHierarchyNodeChange(e.diffType, t, RelationType.BASIS_PARENT));
+  for (let t of e.parentHierarchyGuids.map(t => rY.getParentHierarchyNodeChange(e.diffType, t, RelationType.PARENT))) if (t.isStateGroup) return !0;
   for (let e of t) if (e.isStateGroup) return !0;
   return !1;
 }
@@ -211,14 +211,14 @@ export function $$H10(e) {
     e.displayNode.internalOnly && (e.displayNode.name = "Other");
     return rY.parseParentHierarchyNodeChange(e.displayNode);
   }
-  let t = rY.getImmediateParentHierarchyNodeChange(e, kz3.PARENT);
-  let i = rY.getTopLevelParentHierarchyNodeChange(e, kz3.PARENT);
-  let n = rY.getImmediateParentHierarchyNodeChange(e, kz3.BASIS_PARENT);
-  let s = rY.getTopLevelParentHierarchyNodeChange(e, kz3.BASIS_PARENT);
+  let t = rY.getImmediateParentHierarchyNodeChange(e, RelationType.PARENT);
+  let i = rY.getTopLevelParentHierarchyNodeChange(e, RelationType.PARENT);
+  let n = rY.getImmediateParentHierarchyNodeChange(e, RelationType.BASIS_PARENT);
+  let s = rY.getTopLevelParentHierarchyNodeChange(e, RelationType.BASIS_PARENT);
   if (t && !t.internalOnly && i) return i;
   if (n && !n.internalOnly && s) return s;
   let o = t ?? n;
-  if (!o) throw Error(`Chunk ${dI(e.displayNode.guid)} should have a page`);
+  if (!o) throw Error(`Chunk ${sessionLocalIDToString(e.displayNode.guid)} should have a page`);
   o.name = "Other";
   return o;
 }
@@ -256,7 +256,7 @@ let Y = e => {
   Object.keys(e).forEach(i => {
     for (let n of e[i]) {
       let e = n.mainChunk;
-      let a = rY.getTopLevelParentHierarchyNodeChange(e, kz3.PARENT)?.parentIndexPosition;
+      let a = rY.getTopLevelParentHierarchyNodeChange(e, RelationType.PARENT)?.parentIndexPosition;
       if (a) {
         t[a] = i;
         break;
@@ -282,7 +282,7 @@ export function $$q16(e, t, i, n) {
         return;
       }
       if ("variable-collection" === e.type && $$j12(t)) {
-        let i = dI(t.displayNode.guid);
+        let i = sessionLocalIDToString(t.displayNode.guid);
         if (null == i) return;
         d[i] || (d[i] = []);
         d[i].push(e);
@@ -294,7 +294,7 @@ export function $$q16(e, t, i, n) {
         c[n].push(e);
         return;
       }
-      if (s[t.canvasId] || (s[t.canvasId] = []), s[t.canvasId].push(e), !o[t.canvasId] || t.phase !== Dje.REMOVED) {
+      if (s[t.canvasId] || (s[t.canvasId] = []), s[t.canvasId].push(e), !o[t.canvasId] || t.phase !== LibraryUpdateStatus.REMOVED) {
         let e = $$H10(t);
         let i = e.backgroundColor;
         let n = e.name;
@@ -309,7 +309,7 @@ export function $$q16(e, t, i, n) {
         };
       }
     }), n === Kn.FROM_SOURCE) for (let e of Object.keys(o)) {
-      let t = Egt.getNodePageBackgroundColor(e);
+      let t = SceneGraphHelpers.getNodePageBackgroundColor(e);
       t && (o[e] = {
         ...o[e],
         backgroundColor: t
@@ -362,11 +362,11 @@ export function $$q16(e, t, i, n) {
 }
 export function $$$14(e) {
   return {
-    modifiedVariants: e.variantChunks.filter(e => e.mainChunk.phase !== Dje.UNMODIFIED).map((e, t) => ({
+    modifiedVariants: e.variantChunks.filter(e => e.mainChunk.phase !== LibraryUpdateStatus.UNMODIFIED).map((e, t) => ({
       ...e,
       index: t
     })),
-    unmodifiedVariants: e.variantChunks.filter(e => e.mainChunk.phase === Dje.UNMODIFIED).map((e, t) => ({
+    unmodifiedVariants: e.variantChunks.filter(e => e.mainChunk.phase === LibraryUpdateStatus.UNMODIFIED).map((e, t) => ({
       ...e,
       index: t
     }))

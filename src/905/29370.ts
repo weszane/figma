@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Vq } from "../figma_app/639088";
 export let $$d0 = "team-folder-move-confirm-modal";
-qK($$d0, e => jsx(c, {
+registerLegacyModal($$d0, e => jsx(c, {
   ...e
 }));
 class c extends Component {

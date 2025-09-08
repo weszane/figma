@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { z } from "../905/239603";
 import { debugState } from "../905/407919";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { tf, Rd, Q6, $5 } from "../905/295427";
 import { U2 } from "../figma_app/193867";
@@ -30,29 +30,29 @@ z.union([z.object({
 })]);
 export let $$_0 = new class {
   constructor() {
-    this.FirstDraftKitStatusSchemaValidator = vh();
-    this.FirstDraftPublishStatusSchemaValidator = vh();
-    this.FirstDraftAllKitsSchemaValidator = vh();
-    this.FirstDraftMatchGroupSchemaValidator = vh();
-    this.FirstDraftKitKeyFromLibraryKeySchemaValidator = vh();
+    this.FirstDraftKitStatusSchemaValidator = createNoOpValidator();
+    this.FirstDraftPublishStatusSchemaValidator = createNoOpValidator();
+    this.FirstDraftAllKitsSchemaValidator = createNoOpValidator();
+    this.FirstDraftMatchGroupSchemaValidator = createNoOpValidator();
+    this.FirstDraftKitKeyFromLibraryKeySchemaValidator = createNoOpValidator();
     this.getFirstDraftKitKeyFromLibraryKey = _$$n(({
       libraryKey: e
     }) => this.FirstDraftKitKeyFromLibraryKeySchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/first_draft/kit_key_from_library_key", td.toAPIParameters({
+    }) => await t.get("/api/first_draft/kit_key_from_library_key", APIParameterUtils.toAPIParameters({
       file_key: U2(debugState?.getState().selectedView),
       library_key: e
     }), {
       headers: this.buildHeaders()
     })));
-    this.FirstDraftMatchPresetModesSchemaValidator = vh();
-    this.FirstDraftPublishLocalKitSchemaValidator = vh();
-    this.FirstDraftUpdataMetadataSchemaValidator = vh();
-    this.FirstDraftGenerateThemeV5SchemaValidator = vh();
-    this.FirstDraftAllEvalSetsSchemaValidator = vh();
-    this.FirstDraftRunEvalsSchemaValidator = vh();
-    this.FirstDraftEvalStatusSchemaValidator = vh();
-    this.FirstDraftGetRetrievedExamplesSchemaValidator = vh();
+    this.FirstDraftMatchPresetModesSchemaValidator = createNoOpValidator();
+    this.FirstDraftPublishLocalKitSchemaValidator = createNoOpValidator();
+    this.FirstDraftUpdataMetadataSchemaValidator = createNoOpValidator();
+    this.FirstDraftGenerateThemeV5SchemaValidator = createNoOpValidator();
+    this.FirstDraftAllEvalSetsSchemaValidator = createNoOpValidator();
+    this.FirstDraftRunEvalsSchemaValidator = createNoOpValidator();
+    this.FirstDraftEvalStatusSchemaValidator = createNoOpValidator();
+    this.FirstDraftGetRetrievedExamplesSchemaValidator = createNoOpValidator();
   }
   buildHeaders() {
     return {
@@ -106,7 +106,7 @@ export let $$_0 = new class {
     });
     return this.FirstDraftAllKitsSchemaValidator.validate(async ({
       xr: e
-    }) => await e.get("/api/first_draft/all_kits", td.toAPIParameters(i), {
+    }) => await e.get("/api/first_draft/all_kits", APIParameterUtils.toAPIParameters(i), {
       headers: this.buildHeaders()
     }));
   }
@@ -114,7 +114,7 @@ export let $$_0 = new class {
     let t = U2(debugState?.getState().selectedView);
     return this.FirstDraftMatchGroupSchemaValidator.validate(async ({
       xr: r
-    }) => await r.get("/api/first_draft/match_group", td.toAPIParameters({
+    }) => await r.get("/api/first_draft/match_group", APIParameterUtils.toAPIParameters({
       file_key: t,
       ...e
     }), {

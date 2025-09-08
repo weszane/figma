@@ -1,4 +1,4 @@
-import { hKj } from "../figma_app/763686";
+import { CustomPosition } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { lg } from "../figma_app/976749";
 import { Fz } from "../figma_app/106207";
@@ -33,7 +33,7 @@ export function $$u0(e) {
     });
     return await insertTemplate({
       template: e.resource,
-      templateInsertionDirection: isClick ? hKj.RIGHT : hKj.CUSTOM_POSITION,
+      templateInsertionDirection: isClick ? CustomPosition.RIGHT : CustomPosition.CUSTOM_POSITION,
       templateCustomPosition: isClick ? void 0 : dropPosition,
       triggeredFrom: e.triggeredFrom
     });

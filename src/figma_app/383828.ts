@@ -1,6 +1,6 @@
 import { sortByWithOptions } from "../figma_app/656233";
-import { iCO, glU } from "../figma_app/763686";
-import { nc, l7 } from "../905/189185";
+import { StateHierarchy, Fullscreen } from "../figma_app/763686";
+import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { uO } from "../figma_app/933328";
@@ -14,12 +14,12 @@ import { cP, kz, zb } from "../figma_app/264776";
 import { Oo } from "../905/709171";
 import { qp } from "../905/977779";
 import { QL } from "../905/557338";
-export function $$y1(e, t, r, s, o, l, d, c, p = iCO.NONE, _, g) {
-  let f = nc.user("swap-to-related-symbol", (e, n) => {
+export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
+  let f = scopeAwareFunction.user("swap-to-related-symbol", (e, n) => {
     n?.componentOrStateGroup && $$S2(n.componentOrStateGroup, t, r, d, "Related Symbol Dropdown Menu", !1, _);
   });
   let E = [];
-  p === iCO.NONE ? E = function (e, t, r, i) {
+  p === StateHierarchy.NONE ? E = function (e, t, r, i) {
     let {
       selectedItem,
       relatedItems
@@ -38,9 +38,9 @@ export function $$y1(e, t, r, s, o, l, d, c, p = iCO.NONE, _, g) {
     }));
     sortByWithOptions(o, e => `${e.displayText}-${e.args.componentOrStateGroup?.node_id || ""}`);
     return o;
-  }(e, o, l, f) : p === iCO.STATE_INSTANCE && (E = function (e, t, r, n, s, o, l) {
+  }(e, o, l, f) : p === StateHierarchy.STATE_INSTANCE && (E = function (e, t, r, n, s, o, l) {
     let d = cP(e, t, r, o);
-    if (!d || d.mode !== iCO.STATE_INSTANCE) return [];
+    if (!d || d.mode !== StateHierarchy.STATE_INSTANCE) return [];
     let {
       allStates,
       stateGroup,
@@ -72,7 +72,7 @@ export function $$y1(e, t, r, s, o, l, d, c, p = iCO.NONE, _, g) {
         }
         0 !== Object.keys(e).length && (zb("Swapping A Variant", stateGroup.nodeId, {
           source: "context_menu"
-        }), l7.user("swap-related-symbol", () => $$A0(e)));
+        }), permissionScopeHandler.user("swap-related-symbol", () => $$A0(e)));
       }
     };
     let y = stateGroupModel.propertySortOrder || [];
@@ -160,12 +160,12 @@ export function $$v4(e, t, r, n, a, s, d, c) {
     if (Oo(e, r)) {
       if (e.type === PW.COMPONENT) {
         let t = e.node_id;
-        glU.replaceSymbolBackingInstances({
+        Fullscreen.replaceSymbolBackingInstances({
           [t]: n
         }, s);
       } else {
-        let t = glU.getSimilarStates(n, e.node_id, "");
-        glU.replaceSymbolBackingInstances(t, s);
+        let t = Fullscreen.getSimilarStates(n, e.node_id, "");
+        Fullscreen.replaceSymbolBackingInstances(t, s);
       }
       trackEventAnalytics("Instance Swapped To Local Component", {
         source: a,
@@ -183,7 +183,7 @@ export function $$v4(e, t, r, n, a, s, d, c) {
   }
 }
 export function $$A0(e) {
-  glU.replaceSymbolBackingInstances(e, !1);
+  Fullscreen.replaceSymbolBackingInstances(e, !1);
 }
 export const Aw = $$A0;
 export const SY = $$y1;

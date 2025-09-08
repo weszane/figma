@@ -1,6 +1,6 @@
 import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
-import { lyf, Ez5 } from "../figma_app/763686";
+import { ViewType, AppStateTsApi } from "../figma_app/763686";
 import { oz, o5, hx, dZ } from "../905/292918";
 import { j, l as _$$l } from "../905/618243";
 import { Kn } from "../905/535806";
@@ -39,7 +39,7 @@ export function $$d1(e, t, i) {
         trackingContextName: t
       }));
     }
-  } : null, "hidden" !== e.viewBranches.status && i !== lyf.BRANCHING ? {
+  } : null, "hidden" !== e.viewBranches.status && i !== ViewType.BRANCHING ? {
     name: "view-branches",
     flags: ["design"],
     disabled: "disabled" === e.viewBranches.status,
@@ -51,7 +51,7 @@ export function $$d1(e, t, i) {
   } : null]);
 }
 export function $$c0(e, t, i, r) {
-  return i === lyf.BRANCHING || Ez5.uiState().isRecovery.getCopy() ? [] : filterNotNullish(["hidden" !== e.viewBranchDiff.status && "hidden" === e.mergeBranch.status ? {
+  return i === ViewType.BRANCHING || AppStateTsApi.uiState().isRecovery.getCopy() ? [] : filterNotNullish(["hidden" !== e.viewBranchDiff.status && "hidden" === e.mergeBranch.status ? {
     name: "view-branch-diff",
     flags: ["design"],
     disabled: "disabled" === e.viewBranchDiff.status,

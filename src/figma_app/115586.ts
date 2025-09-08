@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { t_, useAtomWithSubscription } from "../figma_app/27355";
-import { Y5 } from "../figma_app/455680";
-let s = t_(() => Y5.isReady() || Y5.onReady());
+import { fullscreenValue } from "../figma_app/455680";
+let s = t_(() => fullscreenValue.isReady() || fullscreenValue.onReady());
 export function $$o0() {
   useAtomWithSubscription(s);
 }
 export function $$l1() {
   let [e, t] = useState(!1);
   useEffect(() => {
-    if (Y5.isReady()) {
+    if (fullscreenValue.isReady()) {
       t(!0);
       return;
     }
     let e = !1;
-    Y5.onReady().then(() => {
+    fullscreenValue.onReady().then(() => {
       e || t(!0);
     });
     return () => {

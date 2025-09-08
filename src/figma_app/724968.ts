@@ -11,7 +11,7 @@ import { q as _$$q } from "../905/932270";
 import { s as _$$s } from "../905/551945";
 import { T as _$$T } from "../905/632137";
 import { a as _$$a } from "../905/964520";
-import { ruz } from "../figma_app/763686";
+import { ImageToolsBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -23,7 +23,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { BT } from "../905/618447";
 import { to } from "../figma_app/828186";
 import { zD } from "../figma_app/109758";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UD } from "../figma_app/624361";
 import { Mo } from "../905/913055";
 import { sZ } from "../905/845253";
@@ -419,7 +419,7 @@ function eg({
         componentPropDefId: "componentPropDefId" in en ? en.componentPropDefId : void 0,
         action: JT.GENERATE_IMAGE
       });
-    }), Y5.triggerAction("commit"), "fillIndex" in en && void 0 === en.fillIndex && ea({
+    }), fullscreenValue.triggerAction("commit"), "fillIndex" in en && void 0 === en.fillIndex && ea({
       guid: n.guid,
       fillIndex: n.fills.length - 1
     }));
@@ -663,7 +663,7 @@ function ef({
         originalFill: fill,
         action: JT.EDIT_IMAGE
       });
-    }), Y5.triggerAction("commit"));
+    }), fullscreenValue.triggerAction("commit"));
   }, [es, ed, t, r, ev, d, aiTrackingContext]);
   let eC = useCallback((e, t) => {
     eN(e);
@@ -680,7 +680,7 @@ function ef({
     B3(JT.EDIT_IMAGE);
   }, [stop]);
   let ew = _$$s2(JT.EDIT_IMAGE);
-  let eO = useCallback(() => (ruz?.getNodeImagePairsForEdit().length ?? 0) > 1 ? renderI18nText("image_ai.background_remove.only_one_image") : renderI18nText("image_ai.background_remove.instruction"), []);
+  let eO = useCallback(() => (ImageToolsBindings?.getNodeImagePairsForEdit().length ?? 0) > 1 ? renderI18nText("image_ai.background_remove.only_one_image") : renderI18nText("image_ai.background_remove.instruction"), []);
   let eR = useMemo(() => {
     if (state !== qy.INITIAL) return ed ? {
       state: "SUCCESS",

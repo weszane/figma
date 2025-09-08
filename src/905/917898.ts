@@ -1,10 +1,10 @@
-import { NfO } from "../figma_app/763686";
+import { PluginHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { I as _$$I } from "../905/117966";
 import { w0 } from "../figma_app/594947";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { z as _$$z } from "../905/223332";
 import { qC } from "../figma_app/603466";
 import { nB, AK } from "../905/642684";
@@ -17,8 +17,8 @@ import { reportError } from "../905/11";
 import { PluginError, PluginWrapper, PLUGIN_CLOSED_ERROR } from "../905/572400";
 import { n as _$$n2 } from "../905/823050";
 import { z as _$$z2 } from "../905/239603";
-import { u as _$$u, Kb } from "../905/816730";
-import { N as _$$N } from "../905/125137";
+import { validateWithZSchema, mergeDefaults } from "../905/816730";
+import { FigmaSchema } from "../905/125137";
 import { createPluginInstance, defineAlertFunction } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import K from "../905/536567";
@@ -1330,7 +1330,7 @@ let $$eu1 = _$$n(async e => {
       });
       q(() => M.destroy());
       disableSilenceConsole || q(() => AK());
-      q(() => Y5.triggerAction("commit"));
+      q(() => fullscreenValue.triggerAction("commit"));
       defineAlertFunction(M, stats, name);
       (function (e, t, i) {
         if (!e.isEqual(e.undefined, e.getProp(e.global, "setTimeout"))) return;
@@ -1426,19 +1426,19 @@ let $$eu1 = _$$n(async e => {
       (function (e, t, i) {
         e.isEqual(e.undefined, e.getProp(e.global, "fetch")) && e.setProp(e.global, "fetch", e.newFunction("fetch", (n, r) => {
           null !== t && t.increment("fetch");
-          let a = _$$u({
+          let a = validateWithZSchema({
             vm: e,
             handle: n,
             zSchema: _$$z2.string(),
             property: "url"
           });
-          let s = _$$u({
+          let s = validateWithZSchema({
             vm: e,
             handle: r,
-            zSchema: _$$N.FetchInitOptions,
+            zSchema: FigmaSchema.FetchInitOptions,
             property: "init"
           }) || {};
-          let o = Kb(s, {
+          let o = mergeDefaults(s, {
             body: null,
             headersObject: {}
           });
@@ -1571,7 +1571,7 @@ let $$eu1 = _$$n(async e => {
           });
           return;
         }
-        securityCheckReporter || (NfO.prepareToRunPlugin(), q(() => NfO.finishedRunningPlugin()));
+        securityCheckReporter || (PluginHelpers.prepareToRunPlugin(), q(() => PluginHelpers.finishedRunningPlugin()));
         try {
           if (i = M.evalTopLevelCode(ee), isWidget && isLocal) {
             if (X.hasRegisteredWidget()) testMessageHandler?.widgetRegistered && testMessageHandler.widgetRegistered();else throw Error("widget missing call to figma.widget.register");

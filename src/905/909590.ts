@@ -3,9 +3,9 @@ import { forwardRef, useState, useMemo, createContext, useContext, useCallback, 
 import { A as _$$A } from "../vendor/723372";
 import { M } from "../905/850310";
 import { o as _$$o } from "../905/695226";
-import { Qv } from "../905/959312";
-import { M as _$$M } from "../905/581092";
-import { r as _$$r } from "../905/577641";
+import { useRecording } from "../905/959312";
+import { useExposedRef } from "../905/581092";
+import { defaultComponentAttribute } from "../905/577641";
 let u = forwardRef(({
   htmlAttributes: e = {},
   children: t,
@@ -22,7 +22,7 @@ let u = forwardRef(({
     value: m,
     children: jsx("div", {
       ...i,
-      ..._$$r,
+      ...defaultComponentAttribute,
       ref: a,
       onPointerDown: h,
       "data-fpl-disabled": s || void 0,
@@ -48,12 +48,12 @@ let m = Object.assign(forwardRef(({
   ...y
 }, b) => {
   let v = useContext(p);
-  let I = _$$M(b);
+  let I = useExposedRef(b);
   let E = useCallback((...e) => {
     u?.(...e);
     i && I.current && h(I.current);
   }, [i, u, I]);
-  let x = Qv(E, {
+  let x = useRecording(E, {
     eventName: "change",
     recordingKey: m
   }, [E]);
@@ -67,7 +67,7 @@ let m = Object.assign(forwardRef(({
   return jsx("textarea", {
     ...y,
     ...s,
-    ..._$$r,
+    ...defaultComponentAttribute,
     rows: g,
     className: _$$A("textarea-reset__textareaReset__SBluM", e),
     style: {

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useCallback } from "react";
 import { lV, lr, U1 } from "../figma_app/617606";
 import { V, Yg, Hg, o9, F$ } from "../figma_app/304955";
-import { K$p } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ChatMessageType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Pp } from "../vendor/330821";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { q5, tS } from "../figma_app/516028";
 import { H } from "../905/457575";
 import { Nm } from "../figma_app/202307";
@@ -66,12 +66,12 @@ export function $$S0(e, t, n) {
       let t;
       for (let n = e.length - 1; n >= 0; n--) {
         let r = e[n];
-        if (r.type === K$p.ASSISTANT_MESSAGE) {
+        if (r.type === ChatMessageType.ASSISTANT_MESSAGE) {
           let e = lr(r.textContent || "");
           t = e.codeSnapshot?.codeSnapshotKey;
           break;
         }
-        if (r.type === K$p.SYSTEM_MESSAGE) {
+        if (r.type === ChatMessageType.SYSTEM_MESSAGE) {
           let e = U1(r.textContent || "");
           t = e?.type === "manual_edit" || e?.type === "restore" ? e?.codeSnapshot?.codeSnapshotKey : void 0;
           break;
@@ -213,7 +213,7 @@ export function $$N1({
           console.error("No baseline content found for file:", r);
           return;
         }
-        l7.user("restore-individual-file", () => {
+        permissionScopeHandler.user("restore-individual-file", () => {
           let e = ei(t, a);
           let n = t === lV.FIGMAKE ? Hg(nc) : (getFeatureFlags().multi_file_code_layers || getFeatureFlags().bake_canvas) && a.codeFilePath ? Hg(nc, e) : o9(a, nc);
           let l = F$(e, r);
@@ -221,7 +221,7 @@ export function $$N1({
             codeFile
           } = Ur(n, e, l, u);
           codeFile && (codeFile.sourceCode = u, atomStoreManager.set(Nm(a.guid), "user"));
-          Y5.commit();
+          fullscreenValue.commit();
         });
       };
     }, [n.files, n.codeSnapshotKey, e, t, a])

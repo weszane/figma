@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { k } from "../905/582200";
 import { renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ue } from "../figma_app/139805";
 import { Q } from "../905/346809";
 import { z } from "../905/454433";
@@ -32,7 +32,7 @@ export function $$g0(e) {
       type: "Merge",
       numVariants: e
     });
-    Y5.triggerActionInUserEditScope(r ? "create-state-group-row" : "create-state-group");
+    fullscreenValue.triggerActionInUserEditScope(r ? "create-state-group-row" : "create-state-group");
   };
   return jsx(z, {
     recordingKey: Pt(e, "mergeButton"),

@@ -1,7 +1,7 @@
 import { Dg } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { WB } from "../905/761735";
-import { m } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { z } from "../905/931953";
 export async function $$l0(e, {
   fileKey: t,
@@ -34,7 +34,7 @@ export async function $$l0(e, {
 async function d(e, t) {
   let i = null;
   try {
-    i = await m(t, void 0, void 0, e, !0);
+    i = await maybeCreateSavepoint(t, void 0, void 0, e, !0);
   } catch (e) {
     throw Error(`error creating savepoint: ${e}`);
   }

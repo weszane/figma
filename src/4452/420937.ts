@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
@@ -7,19 +7,19 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { OL } from "../figma_app/421473";
 import { e0 } from "../905/696396";
-export let $$h0 = Ju(function (e) {
+export let $$h0 = registerModal(function (e) {
   let t;
   let a = hS(e);
   let h = useDispatch();
   let x = Xf(e.plan.key.parentId, e.plan.key.type !== OL.TEAM);
   let f = useSelector(e => e.teamBilling);
   let v = e.plan.key.type === OL.TEAM ? f.summary.currency : x.data?.currency;
-  let b = () => h(Ce());
+  let b = () => h(hideModal());
   t = !v || e.isELA ? e.filteredRowCount !== e.numRequestsToApprove ? jsx("p", {
     children: renderI18nText(1 === e.numRequestsToApprove ? "admin_dashboard.seat_requests.approve_all_modal.body.filtered_requests.single" : "admin_dashboard.seat_requests.approve_all_modal.body.filtered_requests.multiple", {
       numFilteredRequests: e.numRequestsToApprove - e.filteredRowCount,

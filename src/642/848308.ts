@@ -3,7 +3,7 @@ import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { n5, zE, HF } from "../figma_app/646357";
 import { Sh } from "../figma_app/889655";
 import { PW } from "../figma_app/633080";
@@ -23,7 +23,7 @@ function g() {
   }, [e, t]);
   let r = useDispatch();
   let l = useCallback(() => {
-    r(to({
+    r(showModalHandler({
       type: dD,
       data: {
         initiallyCheckedItemIDs: s,

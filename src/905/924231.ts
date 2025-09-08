@@ -7,9 +7,9 @@ import { Rw } from "../figma_app/91703";
 import { E3 } from "../figma_app/976749";
 import { cW, $1 } from "../figma_app/844435";
 import { q5 } from "../figma_app/516028";
-import { uF, JT } from "../figma_app/300692";
+import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
-import { D as _$$D } from "../905/263346";
+import { createDeferredPromise } from "../905/263346";
 import { R as _$$R } from "../figma_app/612938";
 import { y as _$$y } from "../905/916933";
 import { wY } from "../905/753206";
@@ -37,10 +37,10 @@ export function $$E0({
   let P = useDispatch();
   let O = useCallback(async () => {
     let n = null;
-    if (e ? T[e] ? n = T[e] : C[e] && (n = uF(C[e])) : t && (n = k[t]), !n) throw Error("Plugin not runnable");
+    if (e ? T[e] ? n = T[e] : C[e] && (n = getPluginVersion(C[e])) : t && (n = k[t]), !n) throw Error("Plugin not runnable");
     let {
       canRun
-    } = JT({
+    } = canRunPlugin({
       plugin: n,
       editorType: R
     });
@@ -55,7 +55,7 @@ export function $$E0({
       deferRunEvent: !0,
       isWidget: !1
     };
-    let s = _$$D();
+    let s = createDeferredPromise();
     _$$R.instance.enqueue({
       mode: "run-forever",
       runPluginArgs: a
@@ -114,7 +114,7 @@ function x(e, t, i, r = nW) {
   });
   {
     let a = e[i];
-    a || (a = t[i] && uF(t[i]));
+    a || (a = t[i] && getPluginVersion(t[i]));
     return jsx(V, {
       className: r,
       plugin: a,

@@ -1,7 +1,7 @@
 import { useSelector } from "../vendor/514228";
-import { Ez5, nQ7 } from "../figma_app/763686";
+import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 export function $$l2(e) {
   return e?.view === "fullscreen" && e?.editorType === FEditorType.Cooper;
@@ -17,7 +17,7 @@ export function $$u0() {
 }
 export function $$p1() {
   let e = $$c4();
-  return ut(Ez5?.interopToolMode(), nQ7.SELF) === nQ7.DESIGN && e;
+  return getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN && e;
 }
 export const HH = $$u0;
 export const Oe = $$p1;

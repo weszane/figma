@@ -1,11 +1,11 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$r0 = new class {
   constructor() {
-    this.AssetTransferSchemaValidator = vh();
-    this.OrgTeamTransfersSchemaValidator = vh();
-    this.TeamTransferSchemaValidator = vh();
-    this.FolderTransferSchemaValidator = vh();
+    this.AssetTransferSchemaValidator = createNoOpValidator();
+    this.OrgTeamTransfersSchemaValidator = createNoOpValidator();
+    this.TeamTransferSchemaValidator = createNoOpValidator();
+    this.FolderTransferSchemaValidator = createNoOpValidator();
   }
   getAssetTransfer(e) {
     return this.AssetTransferSchemaValidator.validate(async ({

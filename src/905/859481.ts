@@ -6,8 +6,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { hS, gl, BI } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue, isInvalidValue, getCommonFromArray } from "../905/216495";
 import { Gt } from "../905/275640";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -21,8 +21,8 @@ import { dL } from "../figma_app/473914";
 import { useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { F as _$$F } from "../905/427107";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { o as _$$o } from "../905/96108";
 import { dG } from "../figma_app/753501";
 import { bC, kC, Ey } from "../figma_app/789050";
@@ -38,10 +38,10 @@ let M = new EN();
 function j(e) {
   let t = useDispatch();
   let i = bC();
-  let r = e.leftEndCap === e.rightEndCap && hS(e.leftEndCap) && -1 !== Gp.indexOf(e.leftEndCap);
-  let a = !!e.leftEndCap && !!e.rightEndCap && hS(e.leftEndCap) && hS(e.rightEndCap) && e.leftEndCap !== e.rightEndCap;
+  let r = e.leftEndCap === e.rightEndCap && isValidValue(e.leftEndCap) && -1 !== Gp.indexOf(e.leftEndCap);
+  let a = !!e.leftEndCap && !!e.rightEndCap && isValidValue(e.leftEndCap) && isValidValue(e.rightEndCap) && e.leftEndCap !== e.rightEndCap;
   let s = t => {
-    if (!gl(t)) return e.isUI3 ? M.format(t) : " ";
+    if (!isInvalidValue(t)) return e.isUI3 ? M.format(t) : " ";
   };
   let o = Sp(e.leftEndCap, "left");
   let d = jsx("span", {
@@ -99,8 +99,8 @@ function j(e) {
   let u = jsx(K, {
     recordingKey: Pt(e, "swapCap"),
     onClick: () => {
-      l7.user("swap-stroke-end-caps", () => {
-        glU && (glU.swapStrokeEndCaps(), glU.commit());
+      permissionScopeHandler.user("swap-stroke-end-caps", () => {
+        Fullscreen && (Fullscreen.swapStrokeEndCaps(), Fullscreen.commit());
       });
     },
     "aria-label": getI18nString("fullscreen.properties_panel.fill.swap_start_and_end_points"),
@@ -186,7 +186,7 @@ function V(e) {
   let d = (t, i = zk.YES) => {
     if (e.setIndividualBorderOption(t), t === om.CUSTOM) return;
     let n = e6(t);
-    Y5.updateSelectionProperties(n, {
+    fullscreenValue.updateSelectionProperties(n, {
       shouldCommit: i
     });
     a2("strokePaints");
@@ -289,13 +289,13 @@ export function $$H0(e) {
   let a = Jt();
   let s = CL();
   let o = Gt("strokeBrushGuid");
-  let d = BI(o);
+  let d = getCommonFromArray(o);
   let c = Kt();
   return jsxs(Fragment, {
     children: [jsx(V, {
       ...e,
       forwardedRef: i ? void 0 : e.forwardedRef,
-      disableAdvancedSettings: gl(s)
+      disableAdvancedSettings: isInvalidValue(s)
     }), t && e.individualBorderOption === om.CUSTOM && jsx(Er, {
       onChange: e.onNonPaintsChange
     }), i && jsx(z, {
@@ -312,7 +312,7 @@ export function $$H0(e) {
       syncState: e.syncState,
       toggleSettings: e.toggleSettings,
       updateSyncState: e.updateSyncState
-    }), e.showStrokePicker && hS(s) && jsx(_2, {
+    }), e.showStrokePicker && isValidValue(s) && jsx(_2, {
       arcRadius: e.arcRadius,
       arcSweep: e.arcSweep,
       brushType: c,

@@ -6,12 +6,12 @@ import { jk } from "../1006/969977";
 import { x as _$$x } from "../1006/523157";
 import { IA } from "../905/291714";
 import { W1 } from "../figma_app/439493";
-import { Ez5, RN9, Qa7, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, SpacingConstants, StackBindingsCpp, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import m from "classnames";
 import { Uz } from "../905/63728";
 import { gk } from "../figma_app/540726";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { fI } from "../figma_app/626177";
 import { q } from "../642/649844";
 import { s as _$$s } from "../642/632766";
@@ -23,15 +23,15 @@ let C = "stack_controls--scrubbableControl--b1ChI";
 let E = "stack_controls--inputSvg--wFizL";
 let S = "stack_controls--stackSpacingRow--Uus3H";
 function N() {
-  let e = J2(Ez5.canvasViewState().focusedStackRegion);
+  let e = getObservableOrFallback(AppStateTsApi.canvasViewState().focusedStackRegion);
   if (!e) return null;
   let {
     region,
     focus
   } = e;
-  return region === RN9.SPACING ? jsx(A, {
+  return region === SpacingConstants.SPACING ? jsx(A, {
     focusOnMount: focus
-  }) : region === RN9.COUNTER_SPACING ? jsx(T, {
+  }) : region === SpacingConstants.COUNTER_SPACING ? jsx(T, {
     focusOnMount: focus
   }) : jsx(I, {
     stackRegion: region,
@@ -43,7 +43,7 @@ let w = e => {
     e.preventDefault();
     e.currentTarget.blur();
     let t = e.shiftKey;
-    Qa7.tabActiveStackRegion(t);
+    StackBindingsCpp.tabActiveStackRegion(t);
   }
 };
 function A({
@@ -56,7 +56,7 @@ function A({
       inputClassName: k,
       inputTestId: "stackSpacingControl",
       noBorderOnFocus: !0,
-      onBlur: Qa7.clearActiveStackRegion,
+      onBlur: StackBindingsCpp.clearActiveStackRegion,
       onCanvasUI: !0,
       onKeyDown: w,
       onPaste: L,
@@ -77,7 +77,7 @@ function T({
       inputClassName: k,
       inputTestId: "stackCounterSpacingControl",
       noBorderOnFocus: !0,
-      onBlur: Qa7.clearActiveStackRegion,
+      onBlur: StackBindingsCpp.clearActiveStackRegion,
       onCanvasUI: !0,
       onKeyDown: w,
       onPaste: L,
@@ -94,7 +94,7 @@ function I({
 }) {
   let [n] = HF(e);
   let i = Array.isArray(n) ? n.length : 0;
-  return e === RN9.SPACING ? null : jsx(fI, {
+  return e === SpacingConstants.SPACING ? null : jsx(fI, {
     className: h()("stack_controls--stackPaddingRow--40WUa", {
       "stack_controls--large--bJFUN": i > 3
     }),
@@ -104,7 +104,7 @@ function I({
       inputClassName: k,
       inputTestId: "stackPaddingControl",
       noBorderOnFocus: !0,
-      onBlur: Qa7.clearActiveStackRegion,
+      onBlur: StackBindingsCpp.clearActiveStackRegion,
       onKeyDown: w,
       onPaste: L,
       outerClassName: C,
@@ -116,8 +116,8 @@ function I({
   });
 }
 function L(e) {
-  gk(e) && (e.preventDefault(), e.currentTarget.blur(), l7.user("paste-in-stack", () => {
-    glU.triggerAction("paste", {});
+  gk(e) && (e.preventDefault(), e.currentTarget.blur(), permissionScopeHandler.user("paste-in-stack", () => {
+    Fullscreen.triggerAction("paste", {});
   }));
 }
 export let $$z0 = memo(function () {

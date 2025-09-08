@@ -1,16 +1,16 @@
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
-import { nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { hm } from "../905/380385";
 let $$u10 = NC("GENERIC_COMMENT_COMMIT_CREATED_COMMENT");
 let $$p8 = NC("GENERIC_COMMENT_COMMIT_EDITED_COMMENT");
 let $$_5 = NC("GENERIC_COMMENT_COMMIT_DELETED_COMMENT");
 let $$h1 = NC("GENERIC_COMMENT_COMMIT_HIDE_COMMENT");
-let $$m0 = nF(async (e, t) => {
+let $$m0 = createOptimistThunk(async (e, t) => {
   let {
     authorId,
     removeCommentsCallback
@@ -36,7 +36,7 @@ let $$g9 = NC("GENERIC_COMMENT_SET_SHOW_RESOLVED");
 NC("GENERIC_COMMENT_SAVE_PAGE_SCROLL_POSITION");
 let $$f3 = NC("GENERIC_COMMENT_RESET_COMMENT_STATUS");
 let $$E11 = NC("GENERIC_COMMENT_SUBMIT");
-let $$y7 = nF(async (e, t) => {
+let $$y7 = createOptimistThunk(async (e, t) => {
   let {
     messageMeta,
     resourceId,
@@ -82,7 +82,7 @@ let $$y7 = nF(async (e, t) => {
 }, ({
   resourceId: e
 }) => `GENERIC_COMMENT_SUBMIT_${e}`);
-let $$b2 = MM("GENERIC_COMMENT_EDIT", async (e, t, {
+let $$b2 = createOptimistAction("GENERIC_COMMENT_EDIT", async (e, t, {
   optimistId: r
 }) => {
   let {
@@ -97,20 +97,20 @@ let $$b2 = MM("GENERIC_COMMENT_EDIT", async (e, t, {
   }).then(({
     data: t
   }) => {
-    e.dispatch(_$$c(r));
+    e.dispatch(createOptimistCommitAction(r));
     callback(t.meta);
     e.dispatch($$p8({
       comment: t.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$r(r));
+    e.dispatch(createOptimistRevertAction(r));
     e.dispatch(F.enqueue({
       message: getI18nString("community.comments.failed_to_edit_comment"),
       error: !0
     }));
   });
 });
-let $$T4 = nF((e, t, {
+let $$T4 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let {
@@ -145,7 +145,7 @@ let $$T4 = nF((e, t, {
 }, ({
   commentId: e
 }) => `GENERIC_COMMENT_DELETE_${e}`);
-let $$I6 = nF((e, t) => {
+let $$I6 = createOptimistThunk((e, t) => {
   let r;
   let {
     commentId,

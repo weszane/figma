@@ -1,4 +1,4 @@
-import { sH, fn, dI } from "../905/871411";
+import { parseSessionLocalID, isValidSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
@@ -55,13 +55,13 @@ export class $$y0 {
       s && (A.commentThreadId = s);
       let y = c["node-id"];
       if (y) {
-        let e = sH(y);
-        fn(e) && (A.nodeId = dI(e));
+        let e = parseSessionLocalID(y);
+        isValidSessionLocalID(e) && (A.nodeId = sessionLocalIDToString(e));
       }
       let b = c["starting-point-node-id"];
       if (b) {
-        let e = sH(b);
-        fn(e) && (A.startingPointNodeId = dI(e));
+        let e = parseSessionLocalID(b);
+        isValidSessionLocalID(e) && (A.startingPointNodeId = sessionLocalIDToString(e));
       }
       if ("1" === c["show-proto-sidebar"] && (A.showProtoSidebar = !0), "1" === c["disable-default-keyboard-nav"] && (A.disableDefaultKeyboardNav = !0), ("1" === c["comments-enabled"] || "1" === c["allow-comments"]) && (A.commentsEnabled = !0), c["prev-plan-id"] && c["prev-plan-type"] && debugState.dispatch(c5({
         planId: c["prev-plan-id"],

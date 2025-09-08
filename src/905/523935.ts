@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { glU, Pt4, IPu } from "../figma_app/763686";
+import { Fullscreen, StylesBindings, CooperHelpers } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -17,7 +17,7 @@ import { Eo } from "../figma_app/80990";
 import { o as _$$o } from "../figma_app/915774";
 import { X as _$$X } from "../905/853613";
 import { Ew } from "../figma_app/361662";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { _G } from "../figma_app/516028";
 import { t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
@@ -66,7 +66,7 @@ export function $$$$j0(e) {
     } = n;
     let o = (t, i, n) => {
       e.insertionCallback?.(t, i, n);
-      Y5.triggerAction("commit");
+      fullscreenValue.triggerAction("commit");
     };
     let d = pointerPercentageOffset || (e.useSmartPositioning ? new Point(.5, .5) : new Point());
     if (V.type === PW.STATE_GROUP) i(b$({
@@ -195,11 +195,11 @@ export function $$$$j0(e) {
       let i = function (e) {
         switch (e.type) {
           case PW.COMPONENT:
-            return glU?.getSymbolNodeId(e.component_key, e.content_hash);
+            return Fullscreen?.getSymbolNodeId(e.component_key, e.content_hash);
           case PW.STATE_GROUP:
-            return glU?.getStateGroupNodeId(e.key, e.version);
+            return Fullscreen?.getStateGroupNodeId(e.key, e.version);
           case PW.STYLE:
-            return Pt4?.getStyleNodeId(e.key, e.content_hash);
+            return StylesBindings?.getStyleNodeId(e.key, e.content_hash);
           case PW.VARIABLE:
           case PW.VARIABLE_SET:
           case PW.MODULE:
@@ -220,13 +220,13 @@ export function $$$$j0(e) {
       })), V.type === PW.STATE_GROUP && V.key && i(D6({
         stateGroupKey: V.key
       }))));
-      glU?.setShowCanvasDragAndDropOutlines(!0);
-      glU?.setComponentDragAssetType(V.type);
-      IPu?.setAllowDroppingOnLockedTemplate(e.allowDroppingOnLockedTemplate || !1);
+      Fullscreen?.setShowCanvasDragAndDropOutlines(!0);
+      Fullscreen?.setComponentDragAssetType(V.type);
+      CooperHelpers?.setAllowDroppingOnLockedTemplate(e.allowDroppingOnLockedTemplate || !1);
     },
     onPointerUpCallback: () => {
-      glU?.setShowCanvasDragAndDropOutlines(!1);
-      glU?.setComponentDragAssetType("none");
+      Fullscreen?.setShowCanvasDragAndDropOutlines(!1);
+      Fullscreen?.setComponentDragAssetType("none");
       e.onPointerUp?.();
     },
     onPointerUpWithoutInsert: e.onPointerUpWithoutInsert,

@@ -25,7 +25,7 @@ import { XHR } from '../905/910117';
 import { ConnectionAttemptTypes, FileOperationTypes, PriorityLevels } from '../905/957591';
 import { $kt, apG, DSh, ehp, ib2, w2r, wZi, XRH } from '../figma_app/43951';
 import { getLaunchDarklyFlagsExport } from '../figma_app/169182';
-import { td as _$$td, YV } from '../figma_app/181241';
+import { APIParameterUtils, createMetaValidator } from '../figma_app/181241';
 import { isInteractionPathCheck, getFalseValue, isInteractionOrEvalMode } from '../figma_app/897289';
 import { gP as _$$gP } from '../figma_app/594947';
 import { Go1, QKp, TOI } from '../figma_app/822011';
@@ -93051,19 +93051,19 @@ let Nv = _$$z.object({
 });
 let NI = new class {
   constructor() {
-    this.UpdateSloSchemaValidator = YV('LGUpdateSloSchemaValidator', _$$D(Nv), null);
+    this.UpdateSloSchemaValidator = createMetaValidator('LGUpdateSloSchemaValidator', _$$D(Nv), null);
   }
   createLGUpdateSloData(e) {
     return this.UpdateSloSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post('/api/lg_update_slo_data', _$$td.toAPIParameters({
+    }) => await t.post('/api/lg_update_slo_data', APIParameterUtils.toAPIParameters({
       key: e
     })));
   }
   updateLGUpdateSloData(e, t) {
     return this.UpdateSloSchemaValidator.validate(async ({
       xr: i
-    }) => await i.put(`/api/lg_update_slo_data/${e}`, _$$td.toAPIParameters({
+    }) => await i.put(`/api/lg_update_slo_data/${e}`, APIParameterUtils.toAPIParameters({
       key: t
     })));
   }

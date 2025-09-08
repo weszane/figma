@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId, PureComponent } from "react";
 import { useDispatch } from "../vendor/514228";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { A as _$$A } from "../figma_app/121266";
@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { _r, el } from "../figma_app/451499";
 import { cJ } from "../figma_app/976749";
 import { EU } from "../figma_app/740163";
-import { hS, E7, _W, gl } from "../905/216495";
+import { isValidValue, normalizeValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { Um as _$$Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
 import { zk } from "../figma_app/198712";
@@ -198,7 +198,7 @@ function X(e, t) {
         easingFunction: [.7, -.4, .4, 1.4]
       };
     case "CUSTOM_BEZIER":
-      return !hS(e.easingFunction) || t ? {
+      return !isValidValue(e.easingFunction) || t ? {
         easingFunction: [0, 0, .58, 1]
       } : {
         easingFunction: e.easingFunction
@@ -220,7 +220,7 @@ function X(e, t) {
         easingFunction: [1, 80, 20, 0]
       };
     case "CUSTOM_SPRING":
-      return !hS(e.easingFunction) || t ? {
+      return !isValidValue(e.easingFunction) || t ? {
         easingFunction: [1, 100, 15, 0]
       } : {
         easingFunction: w_(e.easingFunction)
@@ -230,17 +230,17 @@ function X(e, t) {
   }
 }
 function Y(e, t) {
-  if (hS(e.easing)) {
+  if (isValidValue(e.easing)) {
     if ($(e.easing)) {
       let n = X(e, t).easingFunction;
-      if (n && hS(n)) return {
+      if (n && isValidValue(n)) return {
         transitionDuration: J5(n)
       };
     } else if (t) return {
       transitionDuration: .3
     };
   }
-  if (hS(e.duration)) return e.duration ? {
+  if (isValidValue(e.duration)) return e.duration ? {
     transitionDuration: e.duration
   } : {};
 }
@@ -259,7 +259,7 @@ export function $$q2({
   let w = useAtomWithSubscription(_$$x);
   let P = (t, n) => {
     let i = e.easingFunction;
-    if (hS(i)) {
+    if (isValidValue(i)) {
       let e = PQ(t, w_(i));
       let r = J5(e);
       _({
@@ -276,12 +276,12 @@ export function $$q2({
       }));
     }
   };
-  let B = E7(e.behavior);
-  let G = E7(n);
+  let B = normalizeValue(e.behavior);
+  let G = normalizeValue(n);
   let K = "NAVIGATE" === G;
   let k = "INSTANT" !== e.behavior && "DISSOLVE" !== e.behavior && "SMART_ANIMATE" !== e.behavior && "SCROLL_ANIMATE" !== e.behavior;
   let q = cJ();
-  let Z = "INSTANT" !== e.behavior && W(t, G, E7(e.behavior), q);
+  let Z = "INSTANT" !== e.behavior && W(t, G, normalizeValue(e.behavior), q);
   let J = Z && !w;
   let Q = !e.isSpringTransition || "INSTANT" === e.behavior;
   let ee = "INSTANT" === e.behavior;
@@ -304,7 +304,7 @@ export function $$q2({
         easing: t
       };
       let i = e.easing;
-      let r = !hS(i) || $(t) !== $(i);
+      let r = !isValidValue(i) || $(t) !== $(i);
       _({
         ...H(n),
         ...X(n, r),
@@ -343,7 +343,7 @@ export function $$q2({
       value: e.duration,
       wheelMultiplier: T / 10,
       children: jsx(_$$A, {})
-    }), !ee && hS(e.easing) && $(e.easing) && hS(e.easingFunction) && jsx(_$$y.Consumer, {
+    }), !ee && isValidValue(e.easing) && $(e.easing) && isValidValue(e.easingFunction) && jsx(_$$y.Consumer, {
       children: ([e]) => jsx(W4, {
         className: Lp,
         "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
@@ -383,8 +383,8 @@ export function $$q2({
         name: "Prototype Transition Type Changed",
         params: {
           newType: t,
-          oldType: _W(e.behavior, "MIXED"),
-          smartAnimateMatchingLayers: _W(e.shouldSmartAnimate, null)
+          oldType: valueOrFallback(e.behavior, "MIXED"),
+          smartAnimateMatchingLayers: valueOrFallback(e.shouldSmartAnimate, null)
         }
       }));
       let n = {
@@ -397,12 +397,12 @@ export function $$q2({
         ...X(n),
         ...Y(n),
         ...function (e, t) {
-          if (hS(e.preserveScroll) && 1 !== t) return {
+          if (isValidValue(e.preserveScroll) && 1 !== t) return {
             transitionPreserveScroll: e.preserveScroll
           };
         }(n, u),
         ...function (e) {
-          if (hS(e.resetVideoPosition)) return {
+          if (isValidValue(e.resetVideoPosition)) return {
             transitionResetVideoPosition: e.resetVideoPosition
           };
         }(n)
@@ -417,7 +417,7 @@ export function $$q2({
         name: "Prototype Transition Direction Changed",
         params: {
           newDirection: t,
-          oldDirection: _W(e.direction, "MIXED")
+          oldDirection: valueOrFallback(e.direction, "MIXED")
         }
       }));
       _({
@@ -448,9 +448,9 @@ export function $$q2({
     label: getI18nString("proto.direction"),
     input: ep
   });
-  let ed = jsx(_$$S, {
+  let ed = jsx(Checkbox, {
     onChange: t => {
-      let n = E7(e.behavior);
+      let n = normalizeValue(e.behavior);
       d(_P({
         name: "Smart Animate Changed",
         params: {
@@ -460,7 +460,7 @@ export function $$q2({
       }));
       _({
         ...function (e) {
-          if (hS(e.shouldSmartAnimate)) return {
+          if (isValidValue(e.shouldSmartAnimate)) return {
             transitionShouldSmartAnimate: e.shouldSmartAnimate
           };
         }({
@@ -470,9 +470,9 @@ export function $$q2({
       });
     },
     checked: !0 === e.shouldSmartAnimate,
-    mixed: gl(e.shouldSmartAnimate),
+    mixed: isInvalidValue(e.shouldSmartAnimate),
     recordingKey: Pt(l, "transition-should-smart-animate"),
-    label: jsx(_$$J, {
+    label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.animate_matching_layers")
     })
   });
@@ -482,8 +482,8 @@ export function $$q2({
   return jsxs(Zk, {
     className: xy,
     children: [eu, Z && !ee && K && ("MOVE" == B || "MOVE_OUT" == B || "PUSH" == B || "SLIDE" == B || "SLIDE_OUT" == B) && eh, e_, jsxs(_$$O, {
-      easingFunction: hS(e.easingFunction) ? e.easingFunction : null,
-      children: [Z && !ee && es, Z && !ee && ("CUSTOM_BEZIER" === e.easing || "CUSTOM_SPRING" === e.easing) && hS(e.easingFunction) && jsx(_$$R, {
+      easingFunction: isValidValue(e.easingFunction) ? e.easingFunction : null,
+      children: [Z && !ee && es, Z && !ee && ("CUSTOM_BEZIER" === e.easing || "CUSTOM_SPRING" === e.easing) && isValidValue(e.easingFunction) && jsx(_$$R, {
         easingType: e.easing,
         easingFunction: e.easingFunction,
         duration: e.duration,
@@ -607,7 +607,7 @@ export class $$eo3 extends PureComponent {
     return jsxs(bL, {
       onChange: this.props.onChange,
       recordingKey: this.props.recordingKey,
-      value: hS(this.props.property) ? this.props.property ?? "LEFT" : void 0,
+      value: isValidValue(this.props.property) ? this.props.property ?? "LEFT" : void 0,
       legend: jsx(q, {
         children: getI18nString("proto.animation_panel.transition_direction")
       }),

@@ -1,8 +1,8 @@
 import { zS } from "../figma_app/479760";
 import { jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { SmY } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { EmojiCppBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { lg } from "../figma_app/976749";
@@ -29,11 +29,11 @@ export function $$f0() {
       } = e;
       if (emojis && index >= 0 && index < emojis.length) {
         let e = _Q(emojis[index]);
-        e && l7.user("insert-emoji", () => {
+        e && permissionScopeHandler.user("insert-emoji", () => {
           trackEventAnalytics("inserted_editor_emoji", {
             emoji: e
           });
-          SmY?.replaceCurrentShortcodeWithEmoji(e);
+          EmojiCppBindings?.replaceCurrentShortcodeWithEmoji(e);
         });
       }
     }

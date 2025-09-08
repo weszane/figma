@@ -1,13 +1,13 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _em, glU, Oin, lyf, m1T, w3z, Nfd, Ez5, Egt } from "../figma_app/763686";
-import { Xy } from "../905/871411";
+import { PluginModalType, Fullscreen, UIVisibilitySetting, ViewType, LayoutTabType, HandoffBindingsCpp, PanelType, AppStateTsApi, SceneGraphHelpers } from "../figma_app/763686";
+import { zeroSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { q as _$$q } from "../905/196201";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { debugState } from "../905/407919";
-import { En, mL } from "../figma_app/661371";
+import { fetchPaginatedData, PAGINATION_PREV } from "../figma_app/661371";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { g as _$$g } from "../905/880308";
@@ -16,10 +16,10 @@ import { s as _$$s } from "../905/573154";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { F as _$$F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
-import { SR, EB, ne, BC, p0, Fm, ke as _$$ke, TO } from "../905/784363";
+import { VERSION_HISTORY_PAGE_LOADING, UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_LOADING, VERSION_HISTORY_APPEND, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION, VERSION_HISTORY_COMPARE_CHANGES } from "../905/784363";
 import { C2 } from "../905/760074";
 import { tJ } from "../figma_app/741237";
 import { FEditorType, mapEditorTypeToStringWithError } from "../figma_app/53721";
@@ -30,7 +30,7 @@ import { W } from "../905/985740";
 import { Vj } from "../905/561485";
 import { s0 } from "../figma_app/115923";
 import { n as _$$n } from "../905/815475";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { W5 } from "../figma_app/582924";
 import { C as _$$C } from "../905/703182";
 import { M4 } from "../905/713695";
@@ -128,7 +128,7 @@ async function q(e, t, r) {
   if (!n.signed_url) return "Error viewing what's changed between file versions.";
   let a = !!t.getState().openFile?.canEdit;
   let s = new Date().getTime();
-  let [o] = await Promise.all([$(n.signed_url), W5(_em.DEBUG_TOOL)]);
+  let [o] = await Promise.all([$(n.signed_url), W5(PluginModalType.DEBUG_TOOL)]);
   let l = new Date().getTime();
   return (trackEventAnalytics("versioning_performance_metrics", {
     name: "download_diff_and_load_pages",
@@ -136,7 +136,7 @@ async function q(e, t, r) {
     isEditor: a
   }, {
     forwardToDatadog: !0
-  }), glU.loadHistoryChangesState(o)) ? "" : "Error loading HistoryChangesState into memory.";
+  }), Fullscreen.loadHistoryChangesState(o)) ? "" : "Error loading HistoryChangesState into memory.";
 }
 export function $$J1(e, t) {
   if (e) return t.versions.find(t => t.id === e);
@@ -158,10 +158,10 @@ export async function $$Z13(e, t) {
   }
   return {
     elapsedTime: s,
-    numPagesWithChanges: glU.getPagesWithChanges().length
+    numPagesWithChanges: Fullscreen.getPagesWithChanges().length
   };
 }
-let $$Q11 = nF(async (e, t) => {
+let $$Q11 = createOptimistThunk(async (e, t) => {
   let r;
   let n;
   let a = e.getState();
@@ -173,12 +173,12 @@ let $$Q11 = nF(async (e, t) => {
   };
   let l = () => {
     e.dispatch(Y6({
-      mode: Oin.OFF
+      mode: UIVisibilitySetting.OFF
     }));
     o();
   };
   let d = a.user;
-  if (!getFeatureFlags().version_diffing || !getFeatureFlags().xr_debounce_threshold || !d || "fullscreen" !== a.selectedView.view || a.selectedView.editorType === FEditorType.Whiteboard || a.mirror.appModel.topLevelMode === lyf.HISTORY || a.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES) return l();
+  if (!getFeatureFlags().version_diffing || !getFeatureFlags().xr_debounce_threshold || !d || "fullscreen" !== a.selectedView.view || a.selectedView.editorType === FEditorType.Whiteboard || a.mirror.appModel.topLevelMode === ViewType.HISTORY || a.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES) return l();
   let {
     openFileKey
   } = t;
@@ -214,10 +214,10 @@ let $$Q11 = nF(async (e, t) => {
     fromVersionId: T.id
   }));
 });
-let $$ee4 = nF(async (e, t) => {
+let $$ee4 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let n = r.user;
-  if (!getFeatureFlags().version_diffing || !n || "fullscreen" !== r.selectedView.view || r.selectedView.editorType === FEditorType.Whiteboard || r.mirror.appModel.topLevelMode === lyf.HISTORY || r.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES) return;
+  if (!getFeatureFlags().version_diffing || !n || "fullscreen" !== r.selectedView.view || r.selectedView.editorType === FEditorType.Whiteboard || r.mirror.appModel.topLevelMode === ViewType.HISTORY || r.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES) return;
   let {
     openFileKey
   } = t;
@@ -271,21 +271,21 @@ export function $$et15() {
   let r = $$X17(t);
   let n = t.fetchedPageIds || new Set();
   let i = e.getState().mirror.appModel.currentPage;
-  return r && r.id !== $$B5 ? en(r, e, n, i, Xy) : Promise.reject("Version history inactive");
+  return r && r.id !== $$B5 ? en(r, e, n, i, zeroSessionLocalIDString) : Promise.reject("Version history inactive");
 }
 let er = null;
 function en(e, t, r, n, s, l) {
   return new Promise((d, c) => {
     let u = e.canvas_url;
     u || c("Couldn't get canvas URL for version.");
-    let p = s === Xy;
+    let p = s === zeroSessionLocalIDString;
     let _ = !p && r.size > 0;
     let h = s ?? n;
     let m = t.getState().mirror.appModel.currentPage;
     "LOAD_NEW_VERSION" === l && m && !s && (h = m);
     let g = !t.getState().mirror.appModel.pagesList.every(e => r.has(e.nodeId)) && !r.has(h);
     if (!g) {
-      t.dispatch(SR({
+      t.dispatch(VERSION_HISTORY_PAGE_LOADING({
         isLoadingPage: !1
       }));
       return d();
@@ -298,23 +298,23 @@ function en(e, t, r, n, s, l) {
         var a;
         er = null;
         let s = t.getState().selectedView.editorType;
-        if ((a = t.getState().mirror.appModel.topLevelMode) === lyf.HISTORY || a === lyf.DEV_HANDOFF) {
+        if ((a = t.getState().mirror.appModel.topLevelMode) === ViewType.HISTORY || a === ViewType.DEV_HANDOFF) {
           let a;
-          if (_) glU.applyFileToCurrentScene(e);else if (atomStoreManager.set($$V14, ""), !glU.loadFigFileForPreview(e)) return c("Error loading this version into memory.");
+          if (_) Fullscreen.applyFileToCurrentScene(e);else if (atomStoreManager.set($$V14, ""), !Fullscreen.loadFigFileForPreview(e)) return c("Error loading this version into memory.");
           _$$C.markVersionHistoryLoadEnd();
           let l = t.getState().selectedView.fileKey;
           a = s === FEditorType.Whiteboard ? "figjam" : s === FEditorType.Design || s === FEditorType.Slides ? mapEditorTypeToStringWithError(s) : "unknown";
           let u = t.getState().selectedView.devModeFocusId ? "focus_view" : "version_history";
           _$$C.report(l, a, u);
-          g && (p ? t.getState().mirror.appModel.pagesList.forEach(e => r.add(e.nodeId)) : r.add(h), t.dispatch(EB({
+          g && (p ? t.getState().mirror.appModel.pagesList.forEach(e => r.add(e.nodeId)) : r.add(h), t.dispatch(UPDATE_FETCHED_PAGE_IDS({
             fetchedPageIds: r
-          })), t.dispatch(SR({
+          })), t.dispatch(VERSION_HISTORY_PAGE_LOADING({
             isLoadingPage: !1
           })), d());
           f.nodeId && f.nodeId !== n && tJ([f.nodeId]);
-          f.devModeFocusId && w3z.focusOnNode(f.devModeFocusId, !1);
+          f.devModeFocusId && HandoffBindingsCpp.focusOnNode(f.devModeFocusId, !1);
           t.dispatch(Y6({
-            mode: Oin.OFF
+            mode: UIVisibilitySetting.OFF
           }));
         }
       }
@@ -322,7 +322,7 @@ function en(e, t, r, n, s, l) {
     er = E;
   });
 }
-let ei = nF(async (e, t) => {
+let ei = createOptimistThunk(async (e, t) => {
   let r;
   let n;
   let {
@@ -370,51 +370,51 @@ let ei = nF(async (e, t) => {
     }
   }));
 });
-let $$ea7 = nF((e, {
+let $$ea7 = createOptimistThunk((e, {
   direction: t
 }) => {
   let r = e.getState();
   let n = U2(r.selectedView);
-  n && !r.versionHistory.loading && (e.dispatch(ne({
+  n && !r.versionHistory.loading && (e.dispatch(VERSION_HISTORY_LOADING({
     loading: !0
-  })), En(`/api/versions/${n}`, 30, r.versionHistory, t).then(r => {
-    n === U2(e.getState().selectedView) && e.dispatch(BC({
+  })), fetchPaginatedData(`/api/versions/${n}`, 30, r.versionHistory, t).then(r => {
+    n === U2(e.getState().selectedView) && e.dispatch(VERSION_HISTORY_APPEND({
       history: r,
       direction: t
     }));
   }));
 });
-let es = nF(e => {
-  e.dispatch(p0());
+let es = createOptimistThunk(e => {
+  e.dispatch(VERSION_HISTORY_RESET_VERSIONS());
   e.dispatch($$ea7({
-    direction: mL
+    direction: PAGINATION_PREV
   }));
 });
-let $$eo6 = nF((e, t) => {
-  Y5.triggerAction("enter-history-mode");
-  Y5.triggerAction("deselect-all");
+let $$eo6 = createOptimistThunk((e, t) => {
+  fullscreenValue.triggerAction("enter-history-mode");
+  fullscreenValue.triggerAction("deselect-all");
   e.dispatch(es());
-  Vj(e.getState().selectedView) && atomStoreManager.set(s0, Nfd.FILE);
-  Ez5?.uiState().showPropertiesPanel.set(!0);
+  Vj(e.getState().selectedView) && atomStoreManager.set(s0, PanelType.FILE);
+  AppStateTsApi?.uiState().showPropertiesPanel.set(!0);
   trackEventAnalytics("Toggle Version History", {
     source: t?.source || null
   });
 });
-let $$el0 = nF(e => {
+let $$el0 = createOptimistThunk(e => {
   e.dispatch($$ed9());
   e.dispatch(_$$F.dequeue({
     matchType: "versions"
   }));
-  glU.exitVersionHistoryMode(e.getState().openFile?.canEdit ?? !1);
+  Fullscreen.exitVersionHistoryMode(e.getState().openFile?.canEdit ?? !1);
 });
-let $$ed9 = nF(e => {
+let $$ed9 = createOptimistThunk(e => {
   e.dispatch($$ec3({
     id: $$B5
   }));
   e.dispatch($$ep16({
     fromVersionId: void 0
   }));
-  Egt.clearSelection();
+  SceneGraphHelpers.clearSelection();
   e.dispatch(_$$F.dequeue({
     matchType: "comparing"
   }));
@@ -422,25 +422,25 @@ let $$ed9 = nF(e => {
     matchType: "view_changes"
   }));
   e.dispatch(Y6({
-    mode: Oin.OFF
+    mode: UIVisibilitySetting.OFF
   }));
 });
-let $$ec3 = nF(async (e, t) => {
+let $$ec3 = createOptimistThunk(async (e, t) => {
   if (t.id === $$B5) {
     atomStoreManager.set($$V14, "");
-    glU.loadFigFileForPreview(new Uint8Array());
+    Fullscreen.loadFigFileForPreview(new Uint8Array());
     let r = e.getState();
     e.dispatch(sf({
       ...r.selectedView,
       versionId: void 0,
       compareVersionId: void 0
     }));
-    e.dispatch(Fm({
+    e.dispatch(VERSION_HISTORY_SET_ACTIVE({
       id: t.id
     }));
     return;
   }
-  e.dispatch(Fm({
+  e.dispatch(VERSION_HISTORY_SET_ACTIVE({
     id: t.id
   }));
   let r = e.getState();
@@ -461,12 +461,12 @@ let $$ec3 = nF(async (e, t) => {
     e.dispatch(_$$s.error(t));
   });
 });
-let $$eu19 = nF((e, t) => {
+let $$eu19 = createOptimistThunk((e, t) => {
   let r = t.version;
   let i = t.currentPageNodeId;
   let a = t.fetchedPageIds;
   let s = t.eventType;
-  en(r, e, a, i, void 0, s).then(() => e.dispatch(_$$ke({
+  en(r, e, a, i, void 0, s).then(() => e.dispatch(VERSION_HISTORY_SET_LINKED_VERSION({
     version: t.version
   }))).catch(t => {
     let r = `[${s}] Failed load fig file for preview: ${t}`;
@@ -474,9 +474,9 @@ let $$eu19 = nF((e, t) => {
     e.dispatch(_$$s.error(t));
   });
 });
-let $$ep16 = nF(async (e, t) => {
+let $$ep16 = createOptimistThunk(async (e, t) => {
   if (!getFeatureFlags().version_diffing) {
-    e.dispatch(TO(t));
+    e.dispatch(VERSION_HISTORY_COMPARE_CHANGES(t));
     return;
   }
   let r = t.fromVersionId;
@@ -502,16 +502,16 @@ let $$ep16 = nF(async (e, t) => {
   }, {
     forwardToDatadog: !0
   }), n.canvas_url) {
-    let e = glU.getChangesToCompareFromHistoryChangesState();
+    let e = Fullscreen.getChangesToCompareFromHistoryChangesState();
     if (e.size > 0) {
       let t = Array.from(e).join(",");
       let r = `${n.canvas_url}&nodes_to_extract=${t}`;
       _$$n(r).then(([e]) => {
-        glU.loadPartialHistoryScene(e);
+        Fullscreen.loadPartialHistoryScene(e);
       });
     }
   }
-  let p = glU.startComparingChanges() ? "" : "Error starting history compare";
+  let p = Fullscreen.startComparingChanges() ? "" : "Error starting history compare";
   if (p) {
     e.dispatch(_$$s.error(p));
     return;
@@ -525,7 +525,7 @@ let $$ep16 = nF(async (e, t) => {
   trackEventAnalytics("Version History Compare Start", {
     fromVersionId: r
   });
-  e.dispatch(TO(t));
+  e.dispatch(VERSION_HISTORY_COMPARE_CHANGES(t));
 });
 export const Eg = $$el0;
 export const HF = $$J1;

@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { ZC } from "../figma_app/39751";
 import { Uz } from "../905/63728";
-import { H4 } from "../905/992467";
+import { NONE_SYMBOL } from "../905/992467";
 import { Rs } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { w4 } from "../905/445814";
@@ -18,7 +18,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Pf, H8 } from "../905/590952";
 import { $M, nb } from "../figma_app/770088";
 import { sf } from "../905/929976";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { gX } from "../905/504768";
 import { o8 } from "../figma_app/12220";
 import { E as _$$E } from "../905/881732";
@@ -31,7 +31,7 @@ import { M8 } from "../905/772425";
 import { Dr } from "../905/530837";
 import { Ib } from "../905/129884";
 import { J as _$$J } from "../905/375499";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { p as _$$p } from "../figma_app/353099";
 import { Op, nr, rn } from "../figma_app/903573";
 import { S as _$$S } from "../figma_app/420927";
@@ -216,12 +216,12 @@ function eC() {
     children: getI18nString("fig_feed.post_dne")
   });
 }
-export let $$eb0 = Ju(function (e) {
+export let $$eb0 = registerModal(function (e) {
   let t = useDispatch();
   let n = dq();
   let u = _6();
   useEffect(() => {
-    "teamFeed" !== u.view && "user" !== u.view && ("fullscreen" === u.view && e.inFileView || t(Ce()));
+    "teamFeed" !== u.view && "user" !== u.view && ("fullscreen" === u.view && e.inFileView || t(hideModal()));
   }, [t, u, e.inFileView]);
   let f = useRef({
     selectedView: u,
@@ -296,7 +296,7 @@ export let $$eb0 = Ju(function (e) {
       });
     case "loaded":
       t(_$$s.error(getI18nString("fig_feed.post_dne")));
-      t(Ce());
+      t(hideModal());
       return null;
     default:
       throwTypeError(b);
@@ -342,13 +342,13 @@ export let $$eb0 = Ju(function (e) {
       children: jsx(eo, {})
     })]
   });
-}, _$$E, ZU.YES);
+}, _$$E, ModalSupportsBackground.YES);
 function eT(e) {
   let t = useDispatch();
   let n = iZ();
   let a = dq();
   let d = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let {
     fileData,
@@ -556,7 +556,7 @@ function eI(e) {
         deleteAttachment: y,
         editableTypeaheadClass: "feed_post_detail_modal--editableTypeahead--4ZMRF thread_comment_composer--editableTypeahead--9R6Yd text--fontPos13--xW8hS text--_fontBase--QdLsd",
         editingExistingComment: !1,
-        errorFallback: H4.NONE,
+        errorFallback: NONE_SYMBOL.NONE,
         fallback: null,
         hideSubmitButton: !1,
         mentionables: j,

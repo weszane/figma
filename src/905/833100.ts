@@ -1,11 +1,11 @@
-import { X3B, bOM } from "../figma_app/763686";
-import { nF } from "../905/350402";
-import { AS, to } from "../905/156213";
+import { PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
+import { createOptimistThunk } from "../905/350402";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { ow } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { F0 } from "../905/820492";
 import { VS } from "../figma_app/49598";
-export let $$c0 = nF(async (e, {
+export let $$c0 = createOptimistThunk(async (e, {
   fileKey: t,
   entryPoint: i,
   isEditHubFilePageMode: r = !1,
@@ -16,14 +16,14 @@ export let $$c0 = nF(async (e, {
   liveStore: m
 }) => {
   let h = e.getState();
-  h.modalShown?.type === F0.type && e.dispatch(AS());
+  h.modalShown?.type === F0.type && e.dispatch(hideModalHandler());
   let g = h.publishingHubFiles[t];
   if (null == t || g) {
     let i = {
       ...g?.metadata
     };
     let a = await m.fetchFile(t);
-    a?.editor_type === "whiteboard" ? i.viewerMode = FTemplateCategoryType.WHITEBOARD : r || g?.metadata?.viewerMode !== FTemplateCategoryType.PROTOTYPE || X3B.firstPagePrototypeStatus() === bOM.VALID || (i.viewerMode = FTemplateCategoryType.CANVAS);
+    a?.editor_type === "whiteboard" ? i.viewerMode = FTemplateCategoryType.WHITEBOARD : r || g?.metadata?.viewerMode !== FTemplateCategoryType.PROTOTYPE || PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID || (i.viewerMode = FTemplateCategoryType.CANVAS);
     e.dispatch(VS({
       id: t,
       metadata: i
@@ -32,7 +32,7 @@ export let $$c0 = nF(async (e, {
     id: t,
     metadata: ow(h, t, r, c)
   }));
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: F0,
     data: {
       fileKey: t,

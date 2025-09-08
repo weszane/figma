@@ -3,11 +3,11 @@ import { useState, useEffect, useMemo } from "react";
 import { debounce } from "../905/915765";
 import { c2 } from "../905/382883";
 import { c$, bL, l9, mc, wv } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { K } from "../905/443068";
 import { W } from "../905/63398";
 import { J as _$$J } from "../905/614223";
-import { Ez5, Vzr, glU, rcl, plo } from "../figma_app/763686";
+import { AppStateTsApi, Thumbnail, Fullscreen, Command, DistributionType } from "../figma_app/763686";
 import { oY } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -20,9 +20,9 @@ import { Qp } from "../figma_app/162641";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { DP } from "../905/640017";
 import { Dc } from "../figma_app/314264";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -39,7 +39,7 @@ function M(e, t) {
 }
 function j(e) {
   let t = e ?? [];
-  if (gl(t)) return "MIXED";
+  if (isInvalidValue(t)) return "MIXED";
   for (let [e, i] of Object.entries(U)) if (M(t, i.controlPoints) || M(t, z(i.controlPoints))) return e;
   return "CUSTOM";
 }
@@ -151,7 +151,7 @@ export function $$G1(e) {
   let _ = j(d);
   let v = kl("strokeCap");
   let L = "dark" === DP();
-  let F = ut(Ez5?.widthProfilePreviewState().widthProfilePreviewNodeId, void 0);
+  let F = getObservableValue(AppStateTsApi?.widthProfilePreviewState().widthProfilePreviewNodeId, void 0);
   let [M, G] = useState();
   let z = Fk(e => {
     let t = e.getDirectlySelectedNodes();
@@ -159,15 +159,15 @@ export function $$G1(e) {
   });
   useEffect(() => {
     if (getFeatureFlags().ce_il_vws_custom_preview && "CUSTOM" === j(f)) {
-      if (f && hS(f)) {
+      if (f && isValidValue(f)) {
         let e = f.filter(e => void 0 !== e.ascent && void 0 !== e.descent && void 0 !== e.position).map(e => ({
           ...e,
           segmentId: 0
         }));
-        Ez5?.widthProfilePreviewState().updateCustomWidthProfilePreviewNode(e);
+        AppStateTsApi?.widthProfilePreviewState().updateCustomWidthProfilePreviewNode(e);
       }
       G(function (e) {
-        if (!Vzr || !e) return;
+        if (!Thumbnail || !e) return;
         let t = getSingletonSceneGraph().get(e);
         if (!t) return;
         let i = 10 / t.size.y;
@@ -202,7 +202,7 @@ export function $$G1(e) {
     property: _,
     onChange: (t, i = zk.YES) => {
       if ("EDIT" === t) {
-        getFeatureFlags().ce_il_vws_custom_preview && z && (glU?.triggerActionEnumInUserEditScope(rcl.REQUEST_EDIT_MODE_VIA_TOOLBAR, {}), glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_VAR_WIDTH_POINT, {}));
+        getFeatureFlags().ce_il_vws_custom_preview && z && (Fullscreen?.triggerActionEnumInUserEditScope(Command.REQUEST_EDIT_MODE_VIA_TOOLBAR, {}), Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_VAR_WIDTH_POINT, {}));
         return;
       }
       if (!t || "CUSTOM" === t || "MIXED" === t) return;
@@ -213,13 +213,13 @@ export function $$G1(e) {
         controlPointCount: r.controlPoints.length,
         productType: n,
         profileName: t,
-        brushType: s === plo.SCATTER ? "scatter" : s === plo.STRETCH ? "stretch" : "none"
+        brushType: s === DistributionType.SCATTER ? "scatter" : s === DistributionType.STRETCH ? "stretch" : "none"
       });
       r.controlPoints && c(r.controlPoints, i);
     },
     enablePreview: "MIXED" !== _ && "CUSTOM" !== _
   });
-  let $ = gl(valueBeforePreview) ? "MIXED" : valueBeforePreview;
+  let $ = isInvalidValue(valueBeforePreview) ? "MIXED" : valueBeforePreview;
   let Z = "MIXED" === _ || "MIXED" === $;
   let X = "CUSTOM" === _ || "CUSTOM" === $;
   let Q = $ ?? _;
@@ -252,7 +252,7 @@ export function $$G1(e) {
     children: [jsx(l9, {
       disabled: t,
       width: "fill",
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText("fullscreen.properties_panel.width_profile.label")
       }),
       htmlAttributes: {
@@ -296,12 +296,12 @@ export function $$H0(e) {
   return jsx(K, {
     recordingKey: e.recordingKey,
     "aria-label": getI18nString("fullscreen.properties_panel.width_profile.flip_horizonal"),
-    disabled: t || gl(i) || !i || function (e) {
+    disabled: t || isInvalidValue(i) || !i || function (e) {
       let t = z(e);
       return c2(e, t);
     }(i),
     onClick: () => {
-      !gl(i) && i && r(z(i));
+      !isInvalidValue(i) && i && r(z(i));
     },
     children: jsx(W, {})
   });

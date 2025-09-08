@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { nj } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/920165";
 import { p as _$$p } from "../905/951634";
@@ -34,7 +34,7 @@ export function $$E0(e) {
   let R = useDispatch();
   let N = useMemo(() => new f0(duration), [duration]);
   let P = X7();
-  let O = paint.video?.hash ? nj(paint.video?.hash).toLowerCase() : null;
+  let O = paint.video?.hash ? sha1HexFromBytes(paint.video?.hash).toLowerCase() : null;
   let [D, L] = useState(!1);
   let F = useCallback(e => {
     R(_P({

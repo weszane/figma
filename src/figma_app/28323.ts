@@ -8,16 +8,16 @@ import { Sc, VP } from "../905/18797";
 import { gq } from "../905/276025";
 import { A8 } from "../figma_app/465071";
 import { Eh } from "../figma_app/617654";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Cx, x2, of } from "../figma_app/714946";
 let $$m2 = NC("LICENSE_GROUP_DELETE");
 let $$g3 = NC("LICENSE_GROUP_UPDATE");
 let $$f1 = NC("LICENSE_GROUP_SET");
-nF(async (e, t) => {
+createOptimistThunk(async (e, t) => {
   let r = t.orgId;
   r && (await y(e, t, r));
 });
-let $$E0 = nF(async (e, t) => {
+let $$E0 = createOptimistThunk(async (e, t) => {
   let {
     currentUserOrgId
   } = e.getState();

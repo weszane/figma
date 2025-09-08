@@ -20,7 +20,7 @@ import { ms, MM, wv, c$ } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
 import { E as _$$E } from "../905/984674";
 import { oB, j7, sf } from "../905/929976";
-import { to as _$$to, Ce, Lo, ES, hm } from "../905/156213";
+import { showModalHandler, hideModal, popModalStack, hideSpecificModal, updateModal } from "../905/156213";
 import { P as _$$P } from "../905/842406";
 import { Um } from "../905/848862";
 import { Pc } from "../905/372672";
@@ -38,16 +38,16 @@ import { A as _$$A3 } from "../6828/154709";
 import { A as _$$A4 } from "../svg/443105";
 import { trackEventAnalytics } from "../905/449184";
 import { UF, Jd } from "../figma_app/494261";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { um } from "../905/14223";
 import { $z, fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { xN } from "../905/672897";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { kb } from "../figma_app/502247";
 import { ck } from "../905/952832";
 import { DashboardSections, NavigationRoutes } from "../905/548208";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { FL } from "../figma_app/102449";
 import { utilityNoop } from "../figma_app/918700";
 import { i as _$$i } from "../figma_app/4979";
@@ -175,7 +175,7 @@ function ea(e) {
       role: e.teamRole,
       level: a
     }));
-    a === _$$e.OWNER ? t(_$$to({
+    a === _$$e.OWNER ? t(showModalHandler({
       type: _$$b,
       data: {
         resourceType: e.teamRole.resource_type,
@@ -186,7 +186,7 @@ function ea(e) {
     })) : s();
   };
   let g = (a, s) => {
-    e.isModal && t(Ce());
+    e.isModal && t(hideModal());
     t(sf({
       view: "user",
       userId: s.id,
@@ -650,7 +650,7 @@ let tn = {
   aiEnabledSwitch: "ai-settings-data-sharing-enabled-switch",
   aiEnabledButton: "ai-settings-ai-enabled-button"
 };
-let tr = Ju(function () {
+let tr = registerModal(function () {
   let e = useDispatch();
   let t = cD();
   let a = Rs(ZY7, {
@@ -742,7 +742,7 @@ let tr = Ju(function () {
       })]
     }),
     onClose: () => {
-      e(Lo());
+      e(popModalStack());
     },
     fixedTop: !0,
     children: i ? jsx(_$$Y2, {
@@ -885,14 +885,14 @@ function tf(e) {
   if ("loaded" !== m.status) return null;
   let U = () => {
     if (!v?.isProOrStudentTeam) {
-      t(_$$to({
+      t(showModalHandler({
         type: _$$V,
         data: {
           teamId: f?.teamId,
-          upsellSource: _$$b2.TEAM_SETTINGS_MODAL,
+          upsellSource: UpsellModalType.TEAM_SETTINGS_MODAL,
           openCheckoutInNewTab: !0,
           onDone: () => {
-            t(ES({
+            t(hideSpecificModal({
               type: "TEAM_SETTINGS_MODAL"
             }));
           }
@@ -902,11 +902,11 @@ function tf(e) {
     }
     t(Bq({
       openInNewTab: !0,
-      upsellSource: _$$b2.TEAM_SETTINGS_VIEW
+      upsellSource: UpsellModalType.TEAM_SETTINGS_VIEW
     }));
   };
   let G = e => {
-    t(_$$to({
+    t(showModalHandler({
       type: _$$H,
       data: {
         team: i,
@@ -928,7 +928,7 @@ function tf(e) {
           children: jsx("button", {
             className: ti,
             onClick: () => {
-              t(_$$to({
+              t(showModalHandler({
                 type: _$$h2(),
                 data: {
                   team: i
@@ -949,7 +949,7 @@ function tf(e) {
           children: jsx("button", {
             className: ti,
             onClick: () => {
-              t(_$$to({
+              t(showModalHandler({
                 type: _$$r(),
                 data: {
                   team: i
@@ -973,7 +973,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: S3,
               data: {
                 teamId: f?.teamId,
@@ -988,7 +988,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            f?.communityProfileId && f?.communityProfileHandle && t(_$$to({
+            f?.communityProfileId && f?.communityProfileHandle && t(showModalHandler({
               type: _$$M,
               data: {
                 dispatch: t,
@@ -1003,7 +1003,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            f?.communityProfileId && t(_$$to({
+            f?.communityProfileId && t(showModalHandler({
               type: _$$J,
               data: {
                 profileId: f?.communityProfileId || "",
@@ -1026,7 +1026,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: _$$T,
               data: {
                 teamId: f?.teamId,
@@ -1040,7 +1040,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: lN,
               data: {
                 entrypoint: r6.TEAMS_SETTINGS_VIEW_TEAM_FONTS
@@ -1053,7 +1053,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: _$$j,
               data: {
                 showMakeDefaultButton: !0,
@@ -1101,12 +1101,12 @@ function tf(e) {
           tabIndex: 0,
           className: "settings_view--editAccessLink--HOsAC modal--blueLink--9GcJu blue_link--blueLink--9rlnd",
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: dW,
               data: {
                 team: i,
                 goBack: () => {
-                  t(Lo());
+                  t(popModalStack());
                 }
               }
             }));
@@ -1140,7 +1140,7 @@ function tf(e) {
         children: jsx("button", {
           className: ti,
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: tr
             }));
           },
@@ -1162,7 +1162,7 @@ function tf(e) {
             teamId: e.team.id,
             teamAdminConsoleViewTab: DashboardSections.BILLING
           }));
-          t(Lo());
+          t(popModalStack());
         },
         children: renderI18nText("file_browser.team_settings_modal.admin_console_billing_button")
       })]
@@ -1182,7 +1182,7 @@ function tf(e) {
             children: jsx("button", {
               className: tl,
               onClick: () => {
-                B && t(_$$to({
+                B && t(showModalHandler({
                   type: _$$d(),
                   data: {
                     pending: B,
@@ -1198,7 +1198,7 @@ function tf(e) {
           transferTeamLink: jsx("button", {
             className: ti,
             onClick: () => {
-              t(_$$to({
+              t(showModalHandler({
                 type: Lg(),
                 data: {
                   teamId: i.id,
@@ -1217,7 +1217,7 @@ function tf(e) {
             children: jsx("button", {
               className: ti,
               onClick: () => {
-                t(_$$to({
+                t(showModalHandler({
                   type: _$$Y(),
                   data: {
                     planId: i.org_id || i.id,
@@ -1264,7 +1264,7 @@ function tf(e) {
               onClick: U,
               trackingProperties: {
                 trackingDescriptor: _$$c.UPGRADE,
-                upsellSource: _$$b2.TEAM_SETTINGS_MODAL
+                upsellSource: UpsellModalType.TEAM_SETTINGS_MODAL
               },
               children: renderI18nText("upgrade.view_plans")
             })]
@@ -1284,7 +1284,7 @@ function tf(e) {
             onClick: U,
             trackingProperties: {
               trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
-              upsellSource: _$$b2.TEAM_SETTINGS_MODAL
+              upsellSource: UpsellModalType.TEAM_SETTINGS_MODAL
             },
             children: renderI18nText("file_browser.team_settings_modal.upgrade")
           })]
@@ -1295,7 +1295,7 @@ function tf(e) {
 }
 let tb = rw();
 export var $$ty1 = (e => (e.SETTINGS = "SETTINGS", e.MEMBERS = "MEMBERS", e))($$ty1 || {});
-let tj = nF(async (e, {
+let tj = createOptimistThunk(async (e, {
   teamId: t,
   canViewTeam: a
 }) => {
@@ -1354,12 +1354,12 @@ let tE = "TEAM_SETTINGS_MODAL";
 let tS = (e, t, a) => {
   e(sf(a));
 };
-let $$tT0 = Ju(function (e) {
+let $$tT0 = registerModal(function (e) {
   let t = useDispatch();
   let a = useRef(null);
   let [i, o] = useState(-1);
   let c = _$$h.useTrackingContext({
-    trigger: _$$b2.TEAM_SETTINGS_MODAL
+    trigger: UpsellModalType.TEAM_SETTINGS_MODAL
   });
   let {
     canAdmin,
@@ -1411,7 +1411,7 @@ let $$tT0 = Ju(function (e) {
       children: [jsx(tI, {
         selectedTab: e.tab,
         setTab: e => {
-          t(hm({
+          t(updateModal({
             type: tE,
             data: {
               tab: e,
@@ -1471,6 +1471,6 @@ let $$tT0 = Ju(function (e) {
       })]
     })
   });
-}, tE, ZU.YES);
+}, tE, ModalSupportsBackground.YES);
 export const ut = $$tT0;
 export const am = $$ty1;

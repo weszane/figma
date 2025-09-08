@@ -1,10 +1,10 @@
 import { NC } from "../905/17179";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 let $$a5 = NC("TWO_FACTOR_AUTH_SET_CURRENT_ERROR");
 let $$s3 = NC("TWO_FACTOR_AUTH_SET_LOADING");
 let $$o4 = "TwoFactorRecoveryModal";
 export function $$l0() {
-  return to({
+  return showModalHandler({
     type: {
       type: $$o4
     },
@@ -13,7 +13,7 @@ export function $$l0() {
 }
 export let $$d2 = "PhoneSetupModal";
 export function $$c1() {
-  return to({
+  return showModalHandler({
     type: {
       type: $$d2
     },

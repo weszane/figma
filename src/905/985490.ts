@@ -1,6 +1,6 @@
 import { mapFilter } from "../figma_app/656233";
 import { assert, throwTypeError } from "../figma_app/465776";
-import { Det, egF, H$z, Dje, sYL, kz3 } from "../figma_app/763686";
+import { CollectionGroupType, DiffImpl, OperationResult, LibraryUpdateStatus, GitReferenceType, RelationType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { w } from "../905/5147";
@@ -56,7 +56,7 @@ class f extends Error {
     trackEventAnalytics("Branch Modal Load Time", i);
   }
   function n(e, i) {
-    assert(e.type === Det.GENERIC);
+    assert(e.type === CollectionGroupType.GENERIC);
     e.variantChunks.length > 0 && cb(Error("Non-state group chunk with variants"));
     e.variableChunks.length > 0 && cb(Error("Non-variable collection with variable chunks"));
     let {
@@ -73,9 +73,9 @@ class f extends Error {
   }
   function g(i, o) {
     switch (i.type) {
-      case Det.STATE_GROUP:
+      case CollectionGroupType.STATE_GROUP:
         return function (e, i) {
-          assert(e.type === Det.STATE_GROUP);
+          assert(e.type === CollectionGroupType.STATE_GROUP);
           e.variableChunks.length > 0 && cb(Error("Non-variable collection with variable chunks"));
           let {
             basisChunkGuid,
@@ -91,9 +91,9 @@ class f extends Error {
             variantChunks: variantChunks.map(e => n(e, i))
           };
         }(i, o);
-      case Det.VARIABLE_COLLECTION:
+      case CollectionGroupType.VARIABLE_COLLECTION:
         return function (i, n) {
-          assert(i.type === Det.VARIABLE_COLLECTION);
+          assert(i.type === CollectionGroupType.VARIABLE_COLLECTION);
           i.variantChunks.length > 0 && cb(Error("Non-state group chunk with variants"));
           let {
             basisChunkGuid,
@@ -135,27 +135,27 @@ class f extends Error {
             }(i, n))
           };
         }(i, o);
-      case Det.GENERIC:
+      case CollectionGroupType.GENERIC:
         return n(i, o);
       default:
         throwTypeError(i.type);
     }
   }
   function _(e, t, i) {
-    let n = egF.getParentHierarchyNodeChange(e, t, i);
+    let n = DiffImpl.getParentHierarchyNodeChange(e, t, i);
     if (n.error) throw Error(n.error);
     return n.nodeChange;
   }
   e.setDiff = function (e, t, i, n, r) {
-    let o = egF.setDiff(e, t, i, n, r);
-    if (o !== H$z.SUCCESS) switch (o) {
-      case H$z.MERGE_IN_PROGRESS:
+    let o = DiffImpl.setDiff(e, t, i, n, r);
+    if (o !== OperationResult.SUCCESS) switch (o) {
+      case OperationResult.MERGE_IN_PROGRESS:
         throw new f("a merge is already in progress");
-      case H$z.PARSE_ERROR:
+      case OperationResult.PARSE_ERROR:
         throw Error("unable to parse diff");
-      case H$z.VERSION_MISMATCH:
+      case OperationResult.VERSION_MISMATCH:
         break;
-      case H$z.INTERNAL_ERROR:
+      case OperationResult.INTERNAL_ERROR:
         throw Error("could not get fullscreen app instance");
       default:
         throwTypeError(o);
@@ -163,27 +163,27 @@ class f extends Error {
     return o;
   };
   e.getDiffMigrationVersion = function (e) {
-    return egF.getDiffMigrationVersion(e);
+    return DiffImpl.getDiffMigrationVersion(e);
   };
   e.clearDiffs = function () {
-    return egF.clearDiffs();
+    return DiffImpl.clearDiffs();
   };
   e.parseChunk = t;
   e.trackGranularLoadTime = i;
   e.getChunks = function (e) {
-    let i = egF.getChunks(e);
+    let i = DiffImpl.getChunks(e);
     if (i.error) throw Error(i.error);
     let n = [];
     for (let r of i.chunks) n.push(t(r, e));
     return n;
   };
   e.getAllGuids = function (e, t) {
-    let i = egF.getAllGuids(e, t);
+    let i = DiffImpl.getAllGuids(e, t);
     if (i.error) throw Error(i.error);
     return i.guids;
   };
   e.getDisplayGroups = function (e, t) {
-    let n = egF.getDisplayGroups(e, t.branchModalTrackingId);
+    let n = DiffImpl.getDisplayGroups(e, t.branchModalTrackingId);
     if (n.error) throw Error(n.error);
     if (!n.displayGroups) return [];
     let r = performance.now();
@@ -191,20 +191,20 @@ class f extends Error {
     a.forEach(e => {
       let t = e.mainChunk;
       if ("state-group" === e.type && e.variantChunks.length > 0 && e.mainChunk.canvasIsInternal) {
-        let i = e.variantChunks.find(e => e.mainChunk.phase !== Dje.UNMODIFIED) ?? e.variantChunks[0];
+        let i = e.variantChunks.find(e => e.mainChunk.phase !== LibraryUpdateStatus.UNMODIFIED) ?? e.variantChunks[0];
         i && (t.displayNode.guid = i.mainChunk.displayNode.guid);
       }
     });
     i({
       durationMs: performance.now() - r,
       functionName: "getDisplayGroups",
-      diffType: sYL[e],
+      diffType: GitReferenceType[e],
       ...t
     });
     return a;
   };
   e.getChunkChanges = function (e, t) {
-    let i = egF.getChunkChanges(e, t);
+    let i = DiffImpl.getChunkChanges(e, t);
     if (i.error) throw Error(i.error);
     return {
       nodeChanges: (i.nodeChanges && i.nodeChanges.length > 0 ? w.decodeMessage(i.nodeChanges).nodeChanges : []) ?? [],
@@ -230,10 +230,10 @@ class f extends Error {
   e.getImmediateParentHierarchyNodeChange = function (e, t) {
     let i;
     switch (t) {
-      case kz3.BASIS_PARENT:
+      case RelationType.BASIS_PARENT:
         i = e.basisParentHierarchyGuids;
         break;
-      case kz3.PARENT:
+      case RelationType.PARENT:
         i = e.parentHierarchyGuids;
         break;
       default:
@@ -244,10 +244,10 @@ class f extends Error {
   e.getTopLevelParentHierarchyNodeChange = function (e, t) {
     let i;
     switch (t) {
-      case kz3.BASIS_PARENT:
+      case RelationType.BASIS_PARENT:
         i = e.basisParentHierarchyGuids;
         break;
-      case kz3.PARENT:
+      case RelationType.PARENT:
         i = e.parentHierarchyGuids;
         break;
       default:
@@ -260,7 +260,7 @@ class f extends Error {
       error,
       imageShas,
       videoShas
-    } = egF.getExternalImagesFromDiff(e);
+    } = DiffImpl.getExternalImagesFromDiff(e);
     if (error || null === imageShas || null === videoShas) throw Error(error || "Failed to getExternalMediaFromDiff");
     return {
       imageShas,
@@ -270,12 +270,12 @@ class f extends Error {
   e.InvalidStateTransitionError = class extends Error {};
   e.getConflicts = function (e) {
     let n = performance.now();
-    let r = egF.getConflictingChunkGroups(e.branchModalTrackingId);
+    let r = DiffImpl.getConflictingChunkGroups(e.branchModalTrackingId);
     if (r.error) throw Error(r.error);
     let a = r.conflictingChunkGroups.map(e => ({
       id: _$$g(),
-      sourceChunks: e.sourceChunks.map(e => t(e, sYL.SOURCE)),
-      branchChunks: e.branchChunks.map(e => t(e, sYL.BRANCH)),
+      sourceChunks: e.sourceChunks.map(e => t(e, GitReferenceType.SOURCE)),
+      branchChunks: e.branchChunks.map(e => t(e, GitReferenceType.BRANCH)),
       secondarySourceChunkGUIDs: e.sourceChunkParentGUIDs,
       secondaryBranchChunkGUIDs: e.branchChunkParentGUIDs
     }));
@@ -298,7 +298,7 @@ class f extends Error {
     };
   };
   e.updateBranchingStagerDirection = function (e) {
-    egF.updateBranchingStagerDirection(e);
+    DiffImpl.updateBranchingStagerDirection(e);
   };
 })($$n1 || ($$n1 = {}));
 export const XA = $$g0;

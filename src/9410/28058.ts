@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
@@ -17,7 +17,7 @@ import { _o } from "../figma_app/701001";
 import { p8 } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { cS } from "../figma_app/45218";
 import { $A } from "../905/862883";
 import { cd } from "../905/381612";
@@ -107,7 +107,7 @@ export function $$W0() {
   let e = p8("isReadOnly");
   let t = jY();
   let i = !!S7();
-  let n = ut(Ez5?.canvasGrid().canvasGridArray, []).flat().length > 0;
+  let n = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []).flat().length > 0;
   let a = useAtomWithSubscription(q7);
   let l = EI();
   let d = useAtomWithSubscription(_$$D);

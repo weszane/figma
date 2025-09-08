@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, Suspense } from "react";
 import { useDispatch } from "../vendor/514228";
@@ -13,7 +13,7 @@ import { w as _$$w } from "../figma_app/527262";
 import { sx } from "../figma_app/307841";
 import { u as _$$u } from "../905/16237";
 import { oB } from "../905/929976";
-import { Lo, Ce, to } from "../905/156213";
+import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { Bq, WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
@@ -41,7 +41,7 @@ function O(e) {
   });
   let F = _$$u();
   let M = () => {
-    t(Lo());
+    t(popModalStack());
     e.onDone?.();
   };
   let j = _$$s.overflowAuto.$;
@@ -86,7 +86,7 @@ function O(e) {
             className: "upgrade_choose_plan_modal--planModalBody--cFsix",
             children: jsx(_$$O, {
               chooseOrgPlan: () => {
-                t(Ce());
+                t(hideModal());
                 t(Bq({
                   currency: n,
                   upsellSource: e.upsellSource,
@@ -97,13 +97,13 @@ function O(e) {
               chooseProPlan: i => {
                 let r = 1 === D.length ? D[0] : null;
                 let a = e.teamId || g?.teamId || r?.id;
-                a ? (t(Ce()), t(WX({
+                a ? (t(hideModal()), t(WX({
                   teamId: a,
                   billingPeriod: i,
                   currency: n,
                   openInNewTab: e.openCheckoutInNewTab,
                   upsellSource: e.upsellSource
-                })), e.onDone?.()) : t(to({
+                })), e.onDone?.()) : t(showModalHandler({
                   type: dR,
                   data: {
                     plan: _$$I.PRO,
@@ -133,7 +133,7 @@ function O(e) {
     })
   });
 }
-export let $$D0 = Ju(function (e) {
+export let $$D0 = registerModal(function (e) {
   return sx() ? jsx(_$$w, {
     ...e
   }) : jsx(O, {

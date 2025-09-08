@@ -17,14 +17,14 @@ import { R as _$$R } from "../905/621802";
 import { x as _$$x } from "../905/587214";
 import { L as _$$L } from "../905/704296";
 import { S as _$$S } from "../905/711470";
-import { m1T, Oin, AWq, Egt } from "../figma_app/763686";
+import { LayoutTabType, UIVisibilitySetting, HistoryChangesBindings, SceneGraphHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import v from "classnames";
 import x from "../vendor/805353";
 import { trackEventAnalytics } from "../905/449184";
 import { j as _$$j } from "../905/564614";
 import { Uz } from "../905/63728";
-import { AS, u9 } from "../figma_app/661371";
+import { PAGINATION_NEXT, hasMorePages } from "../figma_app/661371";
 import { BrowserInfo } from "../figma_app/778880";
 import { $J } from "../905/491152";
 import { uA, cZ, Pt, C0 } from "../figma_app/806412";
@@ -42,7 +42,7 @@ import { V as _$$V } from "../905/223767";
 import { D0 } from "../figma_app/867292";
 import { sf } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/852057";
 import { Dm } from "../figma_app/8833";
 import { c as _$$c } from "../905/370443";
@@ -51,11 +51,11 @@ import { h as _$$h } from "../905/864281";
 import { l$ } from "../905/766303";
 import { F as _$$F2 } from "../905/224";
 import { ud } from "../905/862913";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { FPlanNameType } from "../figma_app/191312";
 import { cW } from "../figma_app/345997";
 import { hM } from "../905/851937";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { V_, Nb, Eg, vF, _h } from "../figma_app/841351";
 import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
@@ -77,7 +77,7 @@ import { A as _$$A } from "../6828/315990";
 var A = v;
 var N = x;
 export function $$eN0(e) {
-  return e === m1T.HISTORY || e === m1T.COMPARE_CHANGES || e === m1T.DEV_HANDOFF_HISTORY;
+  return e === LayoutTabType.HISTORY || e === LayoutTabType.COMPARE_CHANGES || e === LayoutTabType.DEV_HANDOFF_HISTORY;
 }
 export function $$eC6(e) {
   return e.label ? e.label : e.participating_users_array && e.participating_users_array[0] ? e.participating_users_array[0] : e.user.handle ? e.user.handle : (logError("version", "Verison history got user without a handle", {
@@ -154,7 +154,7 @@ export class $$eR4 extends uA {
           reportError(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
           return;
         }
-        this.props.dispatch(to({
+        this.props.dispatch(showModalHandler({
           type: DV,
           data: {
             team: this.props.team,
@@ -587,7 +587,7 @@ function eD({
   hasRestrictedVersions: r
 }) {
   let i = _$$h.useTrackingContext({
-    trigger: _$$b2.HISTORY_UPSELL
+    trigger: UpsellModalType.HISTORY_UPSELL
   });
   return jsx(fu, {
     name: "Version History Paywall Panel",
@@ -607,7 +607,7 @@ function eD({
               onClick: t,
               trackingProperties: {
                 trackingDescriptor: _$$c.UPGRADE,
-                upsellSource: _$$b2.HISTORY_UPSELL,
+                upsellSource: UpsellModalType.HISTORY_UPSELL,
                 canUserAccessProFeature: !1
               },
               trusted: !0,
@@ -698,7 +698,7 @@ class eM extends uA {
         versionId: e.id
       }));
       this.props.dispatch(Y6({
-        mode: Oin.KEEP_UI,
+        mode: UIVisibilitySetting.KEEP_UI,
         type: lF.SPINNER
       }));
       this.setState({
@@ -784,7 +784,7 @@ class eM extends uA {
     });
     this.startComparingChanges = e => {
       this.props.dispatch(Y6({
-        mode: Oin.KEEP_UI,
+        mode: UIVisibilitySetting.KEEP_UI,
         type: lF.SPINNER
       }));
       this.setState({
@@ -797,8 +797,8 @@ class eM extends uA {
       if (e && e.length > 0 && !this.props.modalShown) {
         let t = this.getVersionByID(e);
         if (!t) return;
-        if (0 === AWq.getChunkChangeCount()) {
-          Egt.clearSelection();
+        if (0 === HistoryChangesBindings.getChunkChangeCount()) {
+          SceneGraphHelpers.clearSelection();
           let e = getI18nString("collaboration.feedback.no_visible_changes");
           e.length > 56 && (e = e.substring(0, 56) + "\u2026");
           this.props.dispatch(_$$F.dequeue({}));
@@ -824,7 +824,7 @@ class eM extends uA {
         loadingCompareId: ""
       });
       this.props.dispatch(Y6({
-        mode: Oin.OFF
+        mode: UIVisibilitySetting.OFF
       }));
     };
     this.compareChangesById = e => {
@@ -856,7 +856,7 @@ class eM extends uA {
     this.loadMore = () => {
       this.expandLast = !0;
       this.props.dispatch(_h({
-        direction: AS
+        direction: PAGINATION_NEXT
       }));
     };
     this.startUpgrade = () => {
@@ -866,10 +866,10 @@ class eM extends uA {
         reportError(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
         return;
       }
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: _$$V,
         data: {
-          upsellSource: _$$b2.HISTORY_UPSELL,
+          upsellSource: UpsellModalType.HISTORY_UPSELL,
           teamId: t.id,
           openCheckoutInNewTab: !0
         }
@@ -884,7 +884,7 @@ class eM extends uA {
       }));
     };
     this.addSavepoint = () => {
-      this.canEditFile() && this.props.dispatch(to({
+      this.canEditFile() && this.props.dispatch(showModalHandler({
         type: _$$y,
         data: {}
       }));
@@ -894,7 +894,7 @@ class eM extends uA {
         let t = this.getVersionByID(e);
         t?.label && (this.label = t.label);
         t?.description && (this.description = t.description);
-        this.props.dispatch(to({
+        this.props.dispatch(showModalHandler({
           type: _$$y,
           data: {
             description: this.description,
@@ -914,7 +914,7 @@ class eM extends uA {
       setTimeout(() => {
         this.isAllowedToChangeVersion() && this.props.versionHistory.compareId && (this.props.dispatch(Nb({
           id: V_
-        })), Egt.clearSelection(), this.props.dispatch(_$$F.dequeue({
+        })), SceneGraphHelpers.clearSelection(), this.props.dispatch(_$$F.dequeue({
           matchType: "comparing"
         })), this.props.dispatch(_$$F.dequeue({
           matchType: "view_changes"
@@ -1029,13 +1029,13 @@ class eM extends uA {
       id: V_
     }));
     document.addEventListener("keydown", this.onKeyDown);
-    Y5.fromFullscreen.on("sceneGraphMirrorUpdate", this.finishedLoadingVersion);
+    fullscreenValue.fromFullscreen.on("sceneGraphMirrorUpdate", this.finishedLoadingVersion);
     _$$j.on("loadedCompareChanges", this.finishedComparingChanges);
   }
   componentWillUnmount() {
     super.componentWillUnmount();
     document.removeEventListener("keydown", this.onKeyDown);
-    Y5.fromFullscreen.removeListener("sceneGraphMirrorUpdate", this.finishedLoadingVersion);
+    fullscreenValue.fromFullscreen.removeListener("sceneGraphMirrorUpdate", this.finishedLoadingVersion);
     _$$j.removeListener("loadedCompareChanges", this.finishedComparingChanges);
   }
   getOpenFile() {
@@ -1058,7 +1058,7 @@ class eM extends uA {
     let a = r.filter(e => e.disabled).slice(0, cW);
     this.hasLabeled = this.hasLabeledVersions(i) || this.hasLabeledVersions(a);
     let s = null;
-    let o = u9(this.props.versionHistory);
+    let o = hasMorePages(this.props.versionHistory);
     let d = e.plan?.tier === FPlanNameType.STARTER;
     let c = !!e.team?.canEdit;
     d && (a.length > 0 || !o) && (s = jsx(eD, {
@@ -1068,7 +1068,7 @@ class eM extends uA {
     }));
     let u = jsx("div", {
       className: UX,
-      children: !this.props.versionHistory.loading && u9(this.props.versionHistory) && jsx(_$$E, {
+      children: !this.props.versionHistory.loading && hasMorePages(this.props.versionHistory) && jsx(_$$E, {
         className: nf,
         onClick: this.loadMore,
         children: renderI18nText("collaboration.feedback.show_older")
@@ -1083,7 +1083,7 @@ class eM extends uA {
     let E = !this.canEditFile();
     let y = i.map(e => AI(e) ? 1 : 0).reduce((e, t) => e + t, 0);
     return jsx("div", {
-      children: this.props.progressBarState.mode !== Oin.ON_AND_LOCKED && jsx(fu, {
+      children: this.props.progressBarState.mode !== UIVisibilitySetting.ON_AND_LOCKED && jsx(fu, {
         name: "Version History Panel",
         properties: {
           teamId: t?.id

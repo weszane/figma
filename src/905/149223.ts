@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { createRef, useContext, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
-import { NLJ, t2E, VD3, e0R, m1T, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { DesignGraphElements, GradientToolApi, StyleVariableOperation, CopyPasteType, LayoutTabType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { sH } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { wm } from "../905/19536";
@@ -15,10 +15,10 @@ import { Point } from "../905/736624";
 import { XE } from "../figma_app/91703";
 import { Yi } from "../figma_app/933328";
 import { Dc } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { Tm, bn, x$ } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { q5 } from "../figma_app/516028";
@@ -53,10 +53,10 @@ class M extends o6 {
     this.paintRef = createRef();
     this.paintPickerSessionId = _$$g();
     this.onClose = dp(this, "close", () => {
-      this.props.currentTool === NLJ.PATTERN_SOURCE_SELECTOR && Y5.triggerAction("set-tool-default", null);
+      this.props.currentTool === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null);
       this.props.onClose ? this.props.onClose() : this.props.dispatch(XE());
       this.paintRef.current && d9(this.paintRef.current, this.paintPickerSessionId);
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     });
     this.onPaintChange = (e, t) => {
       Tm.clearCache(this.props.paintId);
@@ -96,14 +96,14 @@ class M extends o6 {
       let h = "IMAGE" !== paint.type && "IMAGE" === e || "VIDEO" !== paint.type && "VIDEO" === e;
       let g = m || h ? zk.NO : zk.YES;
       this.props.onChange(n, g);
-      bn(paint.type) && "GRADIENT_LINEAR" === e && l7.user("set-gradient-type-to-linear", () => {
-        t2E.resetThirdHandleLocation();
+      bn(paint.type) && "GRADIENT_LINEAR" === e && permissionScopeHandler.user("set-gradient-type-to-linear", () => {
+        GradientToolApi.resetThirdHandleLocation();
       });
-      l && this.props.currentTool === NLJ.PATTERN_SOURCE_SELECTOR && Y5.triggerAction("set-tool-default");
+      l && this.props.currentTool === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default");
     };
     this.onColorVariableChange = e => {
       if (!e) {
-        _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+        _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
           let e = $(this.props.paint);
           this.onPaintChange(e, zk.YES);
         });
@@ -127,7 +127,7 @@ class M extends o6 {
           };
           i.visible = !0;
           this.paintRef.current = i;
-          _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+          _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
             this.onPaintChange(i, zk.YES);
           });
           let n = this.props.paint.colorVar ? hW(this.props.paint.colorVar) : void 0;
@@ -152,19 +152,19 @@ class M extends o6 {
   }
   componentDidMount() {
     super.componentDidMount();
-    bn(this.props.paint.type) && this.props.editModeType !== m1T.GRADIENT ? Y5.triggerAction("toggle-gradient-edit-mode") : "IMAGE" === this.props.paint.type && this.props.editModeType !== m1T.RASTER && Y5.triggerAction("toggle-raster-edit-mode");
+    bn(this.props.paint.type) && this.props.editModeType !== LayoutTabType.GRADIENT ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : "IMAGE" === this.props.paint.type && this.props.editModeType !== LayoutTabType.RASTER && fullscreenValue.triggerAction("toggle-raster-edit-mode");
   }
   componentDidUpdate(e, t) {
     super.componentDidUpdate(e, t);
     let i = !bn(e.paint.type) && bn(this.props.paint.type);
     let n = "IMAGE" !== e.paint.type && "IMAGE" === this.props.paint.type;
     let r = "SOLID" !== e.paint.type && "SOLID" === this.props.paint.type;
-    i && this.props.editModeType !== m1T.GRADIENT ? Y5.triggerAction("toggle-gradient-edit-mode") : n && this.props.editModeType !== m1T.RASTER ? Y5.triggerAction("toggle-raster-edit-mode") : r && (this.props.editModeType === m1T.GRADIENT || this.props.editModeType === m1T.RASTER) && Y5.triggerAction("leave-edit-mode");
-    bn(this.props.paint.type) && e.editModeType === m1T.GRADIENT && (this.props.editModeType === m1T.DESIGN_LAYOUT || this.props.editModeType === m1T.SITES_LAYOUT) && this.onClose();
+    i && this.props.editModeType !== LayoutTabType.GRADIENT ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : n && this.props.editModeType !== LayoutTabType.RASTER ? fullscreenValue.triggerAction("toggle-raster-edit-mode") : r && (this.props.editModeType === LayoutTabType.GRADIENT || this.props.editModeType === LayoutTabType.RASTER) && fullscreenValue.triggerAction("leave-edit-mode");
+    bn(this.props.paint.type) && e.editModeType === LayoutTabType.GRADIENT && (this.props.editModeType === LayoutTabType.DESIGN_LAYOUT || this.props.editModeType === LayoutTabType.SITES_LAYOUT) && this.onClose();
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    (this.props.editModeType === m1T.GRADIENT || this.props.editModeType === m1T.RASTER) && glU.setDefaultEditMode();
+    (this.props.editModeType === LayoutTabType.GRADIENT || this.props.editModeType === LayoutTabType.RASTER) && Fullscreen.setDefaultEditMode();
   }
   render() {
     return jsx(U, {
@@ -276,12 +276,12 @@ export function $$j1({
     return t;
   }, [el, e.color]);
   let ec = {
-    height: (hS(Z) ? Z : null) ?? 1,
-    width: (hS(Q) ? Q : null) ?? 1,
-    angle: (hS(ee) ? ee : null) ?? 0,
-    leftEndCap: hS(ei) ? ei : void 0,
-    rightEndCap: hS(er) ? er : void 0,
-    hasReflection: hS(es) ? es : void 0
+    height: (isValidValue(Z) ? Z : null) ?? 1,
+    width: (isValidValue(Q) ? Q : null) ?? 1,
+    angle: (isValidValue(ee) ? ee : null) ?? 0,
+    leftEndCap: isValidValue(ei) ? ei : void 0,
+    rightEndCap: isValidValue(er) ? er : void 0,
+    hasReflection: isValidValue(es) ? es : void 0
   };
   return jsx(d2.Provider, {
     value: ed,

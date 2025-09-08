@@ -1,5 +1,5 @@
 import { useMemo, useRef, useEffect } from "react";
-import { FAf, glU, X3B } from "../figma_app/763686";
+import { DesignWorkspace, Fullscreen, PrototypingTsApi } from "../figma_app/763686";
 import { Z } from "../905/104740";
 import { NT } from "../figma_app/741237";
 import { eY } from "../figma_app/722362";
@@ -16,10 +16,10 @@ export function $$c0({
   let u = useMemo(() => generatedInteractions.map(e => e.id), [generatedInteractions]);
   let p = useRef(eY());
   useEffect(() => {
-    NT(FAf.PROTOTYPE);
+    NT(DesignWorkspace.PROTOTYPE);
     i(Y(generatedInteractions.map(e => e.mapping), p.current));
-    glU.selectNodesFromNoodles(u);
-    X3B.setMagicLinkIsDone();
+    Fullscreen.selectNodesFromNoodles(u);
+    PrototypingTsApi.setMagicLinkIsDone();
   }, [generatedInteractions, u, i]);
   return x({
     aiTrackingContext: t

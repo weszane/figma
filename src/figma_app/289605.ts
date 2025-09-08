@@ -11,7 +11,7 @@ import { U as _$$U } from "../905/103637";
 import { B as _$$B } from "../905/950875";
 import { Q as _$$Q } from "../905/553231";
 import { f as _$$f } from "../905/257420";
-import { Z_n, j0r } from "../figma_app/763686";
+import { VariableDataType, PropertyScope } from "../figma_app/763686";
 import f from "classnames";
 import { ZC } from "../figma_app/39751";
 import { Uz } from "../905/63728";
@@ -531,7 +531,7 @@ function e_({
     ref,
     ...L
   } = _$$X2(w);
-  let D = "MIXED" !== b && b?.type !== Z_n.COLOR;
+  let D = "MIXED" !== b && b?.type !== VariableDataType.COLOR;
   let k = !D;
   return jsxs(Fragment, {
     children: [jsxs("div", {
@@ -592,7 +592,7 @@ function eh({
   value: e,
   noChain: t
 }) {
-  let r = e?.type === Z_n.FLOAT ? nd(e.value, "") : e?.value?.toString();
+  let r = e?.type === VariableDataType.FLOAT ? nd(e.value, "") : e?.value?.toString();
   let a = Cj(r);
   let s = ON();
   let {
@@ -605,12 +605,12 @@ function eh({
     }));
   }, [a, s]);
   switch (e.type) {
-    case Z_n.STRING:
-    case Z_n.BOOLEAN:
-    case Z_n.FLOAT:
+    case VariableDataType.STRING:
+    case VariableDataType.BOOLEAN:
+    case VariableDataType.FLOAT:
       return jsx(_$$E, {
         onClick: c,
-        className: E()(Uq, e.type === Z_n.STRING && TQ),
+        className: E()(Uq, e.type === VariableDataType.STRING && TQ),
         htmlAttributes: {
           ...d,
           "data-testid": "var-details-value"
@@ -618,7 +618,7 @@ function eh({
         ref,
         children: r
       });
-    case Z_n.COLOR:
+    case VariableDataType.COLOR:
       return jsx(em, {
         value: e,
         noChain: t
@@ -667,7 +667,7 @@ function eg(e, t, r) {
   let n = ec(t, r);
   let a = _$$u(e);
   let s = Xv(e, n);
-  let o = hg((s ?? []).map(e => e.type === Z_n.ALIAS ? e.value : void 0));
+  let o = hg((s ?? []).map(e => e.type === VariableDataType.ALIAS ? e.value : void 0));
   let l = a?.variableSetId;
   return useMemo(() => o.some((e, t) => !!e && t > 0 && e?.variableSetId !== l), [o, l]);
 }
@@ -697,8 +697,8 @@ function ef({
   let b = _[0];
   let T = _[_.length - 1];
   let I = _.length > 1 ? c ? _ : [b, T] : [T];
-  if (1 === _.length && (T.type === Z_n.STRING || T.type === Z_n.BOOLEAN || T.type === Z_n.FLOAT)) {
-    let e = T.type === Z_n.FLOAT ? nd(T.value, "") : T.value.toString();
+  if (1 === _.length && (T.type === VariableDataType.STRING || T.type === VariableDataType.BOOLEAN || T.type === VariableDataType.FLOAT)) {
+    let e = T.type === VariableDataType.FLOAT ? nd(T.value, "") : T.value.toString();
     return jsx(ed, {
       trackingName: "value",
       name: getI18nString("dev_handoff.variables.details_value"),
@@ -712,10 +712,10 @@ function ef({
       className: xZ,
       children: renderI18nText("dev_handoff.variables.details_value")
     }), jsx("div", {
-      className: E()(n8, T.type !== Z_n.COLOR && jl, T.type === Z_n.COLOR && Kv),
+      className: E()(n8, T.type !== VariableDataType.COLOR && jl, T.type === VariableDataType.COLOR && Kv),
       children: I.map((e, t) => {
         let r = t === I.length - 1;
-        return e.type === Z_n.ALIAS ? jsx(e_, {
+        return e.type === VariableDataType.ALIAS ? jsx(e_, {
           canOpenLibrary: o,
           numberOfAliases: _.length,
           onClose: s,
@@ -742,7 +742,7 @@ function eE({
   let r = ON();
   let i = getI18nString("dev_handoff.variables.details_scope");
   let a = _$$X2(i);
-  return t?.scopes && t.scopes.length > 0 && t.scopes[0] !== j0r.ALL_SCOPES ? jsxs(_$$c, {
+  return t?.scopes && t.scopes.length > 0 && t.scopes[0] !== PropertyScope.ALL_SCOPES ? jsxs(_$$c, {
     className: e9,
     onClick: () => r("row_clicked", {
       type: "scopes"

@@ -2,12 +2,12 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { bE } from "../figma_app/375098";
 import { c as _$$c } from "../905/370443";
 import { iZ } from "../905/372672";
 import { S } from "../5885/332447";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { xx } from "../figma_app/995208";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -43,7 +43,7 @@ function v() {
     alt: "An illustration welcoming you to Figma Professional"
   });
 }
-export let $$b0 = Ju(function ({
+export let $$b0 = registerModal(function ({
   teamId: e
 }) {
   let t = iZ();
@@ -60,7 +60,7 @@ export let $$b0 = Ju(function ({
         }
       }]
     }));
-    m(Ce());
+    m(hideModal());
   };
   let f = jsxs(Fragment, {
     children: [renderI18nText("pro_onboarding.you_successfully_upgraded_team_name_to_a_professional_plan", {

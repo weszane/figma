@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { daH, Ez5 } from "../figma_app/763686";
+import { ColorOptions, AppStateTsApi } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
 import { F } from "../905/989956";
 import { xf, JI, Vq, B9, Pi } from "../figma_app/942553";
@@ -7,122 +7,122 @@ import { EC, Pn } from "../figma_app/285009";
 import { BV, sE, Dy, aN, Ku, Cz } from "../figma_app/153399";
 import { B } from "../figma_app/371825";
 let u = [{
-  color: daH.RED,
+  color: ColorOptions.RED,
   palette: "base"
 }, {
-  color: daH.ORANGE,
+  color: ColorOptions.ORANGE,
   palette: "base"
 }, {
-  color: daH.YELLOW,
+  color: ColorOptions.YELLOW,
   palette: "base"
 }, {
-  color: daH.GREEN,
+  color: ColorOptions.GREEN,
   palette: "base"
 }, {
-  color: daH.BLUE,
+  color: ColorOptions.BLUE,
   palette: "base"
 }, {
-  color: daH.VIOLET,
+  color: ColorOptions.VIOLET,
   palette: "base"
 }, {
-  color: daH.RED_LIGHT,
+  color: ColorOptions.RED_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.ORANGE_LIGHT,
+  color: ColorOptions.ORANGE_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.YELLOW_LIGHT,
+  color: ColorOptions.YELLOW_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.GREEN_LIGHT,
+  color: ColorOptions.GREEN_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.BLUE_LIGHT,
+  color: ColorOptions.BLUE_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.VIOLET_LIGHT,
+  color: ColorOptions.VIOLET_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.BLACK,
+  color: ColorOptions.BLACK,
   palette: "base"
 }, {
-  color: daH.GRAY_DARK,
+  color: ColorOptions.GRAY_DARK,
   palette: "base"
 }, {
-  color: daH.GRAY,
+  color: ColorOptions.GRAY,
   palette: "baseLight"
 }, {
-  color: daH.GRAY_LIGHT,
+  color: ColorOptions.GRAY_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.WHITE,
+  color: ColorOptions.WHITE,
   palette: "base"
 }];
 let p = [{
-  color: daH.GREEN,
+  color: ColorOptions.GREEN,
   palette: "base"
 }, {
-  color: daH.TEAL,
+  color: ColorOptions.TEAL,
   palette: "base"
 }, {
-  color: daH.BLUE,
+  color: ColorOptions.BLUE,
   palette: "base"
 }, {
-  color: daH.VIOLET,
+  color: ColorOptions.VIOLET,
   palette: "base"
 }, {
-  color: daH.PINK,
+  color: ColorOptions.PINK,
   palette: "base"
 }, {
-  color: daH.RED,
+  color: ColorOptions.RED,
   palette: "base"
 }, {
-  color: daH.ORANGE,
+  color: ColorOptions.ORANGE,
   palette: "base"
 }, {
-  color: daH.YELLOW,
+  color: ColorOptions.YELLOW,
   palette: "base"
 }, {
-  color: daH.GREEN_LIGHT,
+  color: ColorOptions.GREEN_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.TEAL_LIGHT,
+  color: ColorOptions.TEAL_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.BLUE_LIGHT,
+  color: ColorOptions.BLUE_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.VIOLET_LIGHT,
+  color: ColorOptions.VIOLET_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.PINK_LIGHT,
+  color: ColorOptions.PINK_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.RED_LIGHT,
+  color: ColorOptions.RED_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.ORANGE_LIGHT,
+  color: ColorOptions.ORANGE_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.YELLOW_LIGHT,
+  color: ColorOptions.YELLOW_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.BLACK,
+  color: ColorOptions.BLACK,
   palette: "base"
 }, {
-  color: daH.GRAY_DARK,
+  color: ColorOptions.GRAY_DARK,
   palette: "base"
 }, {
-  color: daH.GRAY,
+  color: ColorOptions.GRAY,
   palette: "baseLight"
 }, {
-  color: daH.GRAY_LIGHT,
+  color: ColorOptions.GRAY_LIGHT,
   palette: "baseLight"
 }, {
-  color: daH.WHITE,
+  color: ColorOptions.WHITE,
   palette: "base"
 }];
-let _ = [daH.HIGHLIGHT_GRAY, daH.HIGHLIGHT_RED, daH.HIGHLIGHT_ORANGE, daH.HIGHLIGHT_YELLOW, daH.HIGHLIGHT_GREEN, daH.HIGHLIGHT_BLUE, daH.HIGHLIGHT_VIOLET];
+let _ = [ColorOptions.HIGHLIGHT_GRAY, ColorOptions.HIGHLIGHT_RED, ColorOptions.HIGHLIGHT_ORANGE, ColorOptions.HIGHLIGHT_YELLOW, ColorOptions.HIGHLIGHT_GREEN, ColorOptions.HIGHLIGHT_BLUE, ColorOptions.HIGHLIGHT_VIOLET];
 let $$h0 = new Map([["pencilStrokeWidth1", EC[0]], ["pencilStrokeWidth2", EC[1]], ["pencilStrokeWidth3", EC[2]], ["pencilStrokeWidth4", EC[3]], ["pencilStrokeWidth5", EC[4]]]);
 let $$m10 = new Map([["highlighterStrokeWidth1", Pn[0]], ["highlighterStrokeWidth2", Pn[1]], ["highlighterStrokeWidth3", Pn[2]], ["highlighterStrokeWidth4", Pn[3]], ["highlighterStrokeWidth5", Pn[4]]]);
 let $$g1 = B;
@@ -136,12 +136,12 @@ export function $$E2(e) {
   switch (e) {
     case "PENCIL":
       {
-        let e = Ez5?.uiState().showUI3Colors.getCopy() ? "pencilUI3" : "base";
+        let e = AppStateTsApi?.uiState().showUI3Colors.getCopy() ? "pencilUI3" : "base";
         t = Dy.map(t => f(t, e));
         break;
       }
     case "WHITEBOARD_COLOR":
-      t = Ez5?.uiState().showUI3Colors.getCopy() ? p.map(({
+      t = AppStateTsApi?.uiState().showUI3Colors.getCopy() ? p.map(({
         color: e,
         palette: t
       }) => f(e, t)) : u.map(({
@@ -150,7 +150,7 @@ export function $$E2(e) {
       }) => f(e, t));
       break;
     case "HIGHLIGHTER":
-      t = (Ez5?.uiState().showUI3Colors.getCopy() ? aN : _).map(e => f(e, "highlight"));
+      t = (AppStateTsApi?.uiState().showUI3Colors.getCopy() ? aN : _).map(e => f(e, "highlight"));
       break;
     case "STICKY":
       t = Ku().map(e => f(e, "sticky"));

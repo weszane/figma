@@ -1,4 +1,4 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { Js } from "../figma_app/916560";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
@@ -214,7 +214,7 @@ export function $$A1({
           break;
         case "convert_to_text":
           $$h2(yc.CONVERT_TO_TEXT, url);
-          glU?.replaceNodeWithText(A, url);
+          Fullscreen?.replaceNodeWithText(A, url);
           break;
         case "vertical":
           $$h2(yc.SWITCH_ORIENTATION_VERTICAL, url);

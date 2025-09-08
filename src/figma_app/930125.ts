@@ -1,12 +1,12 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { R as _$$R } from "../905/57445";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import o from "classnames";
 import { X } from "../905/606795";
 import { Uz } from "../905/63728";
 import { L } from "../905/408237";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { hF, $k, gw, EH, kL } from "../figma_app/956479";
 var l = o;
 export function $$h0({
@@ -49,9 +49,9 @@ export function $$h0({
         className: l()(hF, g),
         dir: "auto",
         onBlur: function () {
-          N.current ? N.current = !1 : y !== e && (l7.user(h, () => {
+          N.current ? N.current = !1 : y !== e && (permissionScopeHandler.user(h, () => {
             E(y);
-          }), Y5.commit());
+          }), fullscreenValue.commit());
         },
         onChange,
         onFocus,

@@ -5,7 +5,7 @@ import { Uz } from "../905/63728";
 import { o6, Ht, C0, Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { t as _$$t } from "../905/331623";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { En } from "../figma_app/613182";
 var s = a;
@@ -29,7 +29,7 @@ class g extends o6 {
     this.selectValueWithOffset = e => {
       let t;
       let i = Children.map(this.props.children || [], e => e.props.value) || [];
-      let n = i.indexOf(E7(this.props.property));
+      let n = i.indexOf(normalizeValue(this.props.property));
       t = -1 !== n ? ((t = n + e) + i.length) % i.length : e > 0 ? 0 : i.length - 1;
       this.onChange(i[t], !1);
     };

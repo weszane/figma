@@ -6,7 +6,7 @@ import { c$ } from "../figma_app/236327";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { qR, JZ } from "../figma_app/696043";
 import { S as _$$S } from "../figma_app/11182";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { m0 } from "../figma_app/976749";
 import { NV, OX, x2, qu, qi } from "../figma_app/33586";
 import { ZT, WK, Ud, ll, $1, B7 } from "../figma_app/844435";
@@ -14,9 +14,9 @@ import { j } from "../905/813868";
 import { LR } from "../figma_app/120210";
 import { Um } from "../905/848862";
 import { sZ } from "../905/845253";
-import { uF, Th } from "../figma_app/300692";
+import { getPluginVersion, isValidForSelectedViewAndWhitelist } from "../figma_app/300692";
 import { bD, vt } from "../figma_app/45218";
-import { ho } from "../figma_app/155287";
+import { ManifestErrorType } from "../figma_app/155287";
 import { bE, aY } from "../figma_app/78725";
 import { VR } from "../figma_app/545541";
 import { r as _$$r } from "../905/319631";
@@ -27,7 +27,7 @@ import { ak } from "../figma_app/212260";
 export function $$w2(e) {
   let t = useDispatch();
   let r = ZT()[e.widgetId];
-  let i = uF(r);
+  let i = getPluginVersion(r);
   let d = WK(e.widgetId);
   let c = Ud(e.widgetId);
   let p = desktopAPIInstance && !!c && !d;
@@ -40,7 +40,7 @@ export function $$w2(e) {
     propagateCloseClick: !0,
     children: [d?.error || p ? jsxs(c$, {
       onClick: () => {
-        d && d.error ? t(to({
+        d && d.error ? t(showModalHandler({
           type: _$$r,
           data: {
             error: d.error,
@@ -48,7 +48,7 @@ export function $$w2(e) {
             resourceType: bD.WIDGET
           },
           showModalsBeneath: !0
-        })) : t(to({
+        })) : t(showModalHandler({
           type: ak,
           data: {
             dispatch: t
@@ -131,7 +131,7 @@ export function $$L1(e) {
     }));
   }, [t, e.resourceType, e.resourceId]);
   let g = [];
-  return (e.resourceType === vt.PLUGIN && (Th(e.plugin, d, u) && o.loaded && g.push(O({
+  return (e.resourceType === vt.PLUGIN && (isValidForSelectedViewAndWhitelist(e.plugin, d, u) && o.loaded && g.push(O({
     pluginId: e.plugin.plugin_id,
     preferences: o
   })), _ && g.push(_)), g.push({
@@ -163,7 +163,7 @@ export function $$D0(e) {
   return (d.push({
     displayText: getI18nString("universal_insert.view_details"),
     callback: e.viewResource
-  }), i && (Th(e.plugin, a, s) && r.loaded && d.push(O({
+  }), i && (isValidForSelectedViewAndWhitelist(e.plugin, a, s) && r.loaded && d.push(O({
     pluginId: e.plugin.plugin_id,
     preferences: r
   })), o && d.push(o)), t) ? i ? jsx($$j6, {
@@ -188,7 +188,7 @@ export function $$M3(e) {
   let s = Object.values($1()).find(t => t.plugin_id === e.publishedResource?.id);
   let o = VR();
   let c = R({
-    plugin: e.publishedResource ? uF(e.publishedResource) : null
+    plugin: e.publishedResource ? getPluginVersion(e.publishedResource) : null
   });
   let u = e.localResource || s;
   let m = B7(u ? u.plugin_id : e.publishedResource.id);
@@ -212,7 +212,7 @@ export function $$M3(e) {
     callback: e.viewResource
   });
   I && P.push(C);
-  u && u.error?.type !== ho.LOAD && P.push(w);
+  u && u.error?.type !== ManifestErrorType.LOAD && P.push(w);
   u || P.push({
     displayText: getI18nString("universal_insert.locate_local_version"),
     callback: () => {

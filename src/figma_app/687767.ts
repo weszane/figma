@@ -1,10 +1,10 @@
 import { useMemo, useCallback } from "react";
-import { xN } from "../figma_app/492908";
+import { nearlyEqual } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
 import { gr } from "../figma_app/243058";
 import { oB } from "../figma_app/273493";
-import { CWU, Ez5, rXF, Z_n, HS4 } from "../figma_app/763686";
-import { sH } from "../905/871411";
+import { VariablesBindings, AppStateTsApi, VariableResolvedDataType, VariableDataType, VariableUIContext } from "../figma_app/763686";
+import { parseSessionLocalID } from "../905/871411";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { DA } from "../figma_app/191804";
 import { Ez } from "../figma_app/766708";
@@ -57,7 +57,7 @@ export function $$v0(e) {
     data
   } = useAtomWithSubscription(t);
   let i = data?.variableSetID || "";
-  return useMemo(() => gr.isValid(i) ? CWU?.getVariableSetDefaultMode(i) ?? "" : "", [i]);
+  return useMemo(() => gr.isValid(i) ? VariablesBindings?.getVariableSetDefaultMode(i) ?? "" : "", [i]);
 }
 function A(e, t) {
   if (!e.color || !t.color) return 0;
@@ -88,16 +88,16 @@ export function $$x5(e) {
     }, {
       ...e.color,
       a: 1
-    }) && xN(t.opacity || t.color.a, e.color.a))).sort(A);
+    }) && nearlyEqual(t.opacity || t.color.a, e.color.a))).sort(A);
   }, [t, r]);
 }
 export function $$N4(e) {
   let t = function (e) {
     let t = S(e);
     return useMemo(() => {
-      let r = Ez5?.slideThemeLibBindings().getBlackColorVariableId(e);
-      let n = Ez5?.slideThemeLibBindings().getWhiteColorVariableId(e);
-      return t.filter(e => e && e.resolvedType === rXF.COLOR).sort((e, t) => {
+      let r = AppStateTsApi?.slideThemeLibBindings().getBlackColorVariableId(e);
+      let n = AppStateTsApi?.slideThemeLibBindings().getWhiteColorVariableId(e);
+      return t.filter(e => e && e.resolvedType === VariableResolvedDataType.COLOR).sort((e, t) => {
         for (let i of [r, n]) {
           if (e.node_id === i) return -1;
           if (t.node_id === i) return 1;
@@ -110,8 +110,8 @@ export function $$N4(e) {
   let i = X_(e);
   return t.map(e => {
     if (!e || 0 === e.length) return;
-    let t = i ? CWU?.getLocalVariableInfo(e) : CWU?.getSubscribedVariableInfo(e);
-    if (t && t.modeValues && t.modeValues[r] && t.modeValues[r].type === Z_n.COLOR && t.modeValues[r].value) {
+    let t = i ? VariablesBindings?.getLocalVariableInfo(e) : VariablesBindings?.getSubscribedVariableInfo(e);
+    if (t && t.modeValues && t.modeValues[r] && t.modeValues[r].type === VariableDataType.COLOR && t.modeValues[r].value) {
       let n = {
         color: t.modeValues[r].value,
         colorVar: {
@@ -119,7 +119,7 @@ export function $$N4(e) {
           resolvedDataType: "COLOR",
           value: {
             alias: {
-              guid: sH(e.replace("VariableID:", "")) || void 0
+              guid: parseSessionLocalID(e.replace("VariableID:", "")) || void 0
             }
           }
         }
@@ -143,10 +143,10 @@ export function $$C2(e) {
   let o = ay();
   return useCallback(e => {
     if (i) {
-      let t = o(i, s, rXF.COLOR, "", HS4.SLIDES_THEME);
-      t && CWU?.setVariableValueForMode(t, a, {
-        type: Z_n.COLOR,
-        resolvedType: rXF.COLOR,
+      let t = o(i, s, VariableResolvedDataType.COLOR, "", VariableUIContext.SLIDES_THEME);
+      t && VariablesBindings?.setVariableValueForMode(t, a, {
+        type: VariableDataType.COLOR,
+        resolvedType: VariableResolvedDataType.COLOR,
         value: e
       });
       return t;

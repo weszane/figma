@@ -21,7 +21,7 @@ import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { NA } from "../905/738636";
-import { Ce, Lo as _$$Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { Gg, go, ZW, bD } from "../figma_app/840917";
 import { cu, Zt } from "../905/25189";
 import { y8 } from "../905/327522";
@@ -159,7 +159,7 @@ function V({
   let r;
   let h = useDispatch();
   let x = o || (() => {
-    h(Ce());
+    h(hideModal());
   });
   let f = Z(s);
   let m = renderI18nText("autosave.has_changes.sync_offline_changes");
@@ -327,7 +327,7 @@ function z(e) {
     }), n = jsx($n, {
       variant: "secondary",
       onClick: () => {
-        s(_$$Lo());
+        s(popModalStack());
       },
       children: renderI18nText("autosave.logout.cancel")
     }), i = jsx($n, {

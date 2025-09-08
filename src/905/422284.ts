@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _YF, glU, kul, dPJ, lyf } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { WorkspaceType, Fullscreen, SchemaJoinStatus, AutosaveEventType, ViewType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { parseAndNormalizeQuery } from "../905/634134";
@@ -11,17 +11,17 @@ import { _l } from "../figma_app/976345";
 import { b as _$$b } from "../905/898378";
 import { Nh } from "../905/560959";
 import { $ as _$$$ } from "../905/532878";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { $ as _$$$2 } from "../905/489647";
 import { sf } from "../905/929976";
 import { kq } from "../905/292918";
 import { Ad } from "../905/300250";
 import { Nf } from "../figma_app/864378";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { PI } from "../905/977218";
 import { yJ } from "../figma_app/240735";
 import { Xg } from "../figma_app/199513";
-import { Y5, lQ } from "../figma_app/455680";
+import { fullscreenValue, fullscreenPromise } from "../figma_app/455680";
 import { IL } from "../figma_app/582924";
 import { oJ } from "../905/346794";
 import { Lp } from "../905/309846";
@@ -34,12 +34,12 @@ import { l as _$$l } from "../905/26554";
 import { on } from "../figma_app/292324";
 import { qp } from "../905/977779";
 import { Dz } from "../figma_app/516028";
-import { Df } from "../figma_app/300692";
+import { mapToEditorType } from "../figma_app/300692";
 import { jr } from "../905/792802";
 import { vU } from "../figma_app/193867";
-import { zO, Ex } from "../905/327571";
+import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/327571";
 import { Nb, _b } from "../figma_app/841351";
-let $$H = nF((e, t, {
+let $$H = createOptimistThunk((e, t, {
   liveStore: i
 }) => {
   let f = e.getState();
@@ -57,7 +57,7 @@ let $$H = nF((e, t, {
     let V = E.mode || E.m || "auto";
     let H = f.selectedView;
     let W = "inspect" === V || "dev" === V;
-    H.editorType === FEditorType.Design && W ? Y5.requestEditorType(_YF.DEV_HANDOFF) : H.editorType !== FEditorType.DevHandoff || W || "auto" === V || Y5.requestEditorType(_YF.DESIGN);
+    H.editorType === FEditorType.Design && W ? fullscreenValue.requestEditorType(WorkspaceType.DEV_HANDOFF) : H.editorType !== FEditorType.DevHandoff || W || "auto" === V || fullscreenValue.requestEditorType(WorkspaceType.DESIGN);
     E["version-id"] && (e.dispatch(Nb({
       id: E["version-id"]
     })), e.dispatch(_b()));
@@ -95,15 +95,15 @@ let $$H = nF((e, t, {
       }
     }
     "1" !== E.vars && atomStoreManager.set(_$$$, null);
-    f.user && E["try-plugin-id"] && l7.user("try-plugin-desktop", () => {
+    f.user && E["try-plugin-id"] && permissionScopeHandler.user("try-plugin-desktop", () => {
       e.dispatch(_$$$2({
         tryPluginId: E["try-plugin-id"],
         tryPluginName: E["try-plugin-name"],
         tryPluginVersionId: E["try-plugin-version-id"],
         isWidget: "1" === E["is-widget"],
-        fullscreenEditorType: Df(zO(E["try-plugin-editor-type"] ?? "")),
+        fullscreenEditorType: mapToEditorType(mapViewTypeToMainfestEditorType(E["try-plugin-editor-type"] ?? "")),
         isPlaygroundFile: "1" === E["is-playground-file"],
-        tryPluginParams: Ex(E),
+        tryPluginParams: parsePluginParams(E),
         fileKey: E["try-plugin-file-key"]
       }));
     });
@@ -112,11 +112,11 @@ let $$H = nF((e, t, {
       let n = "NONE" !== t.styleType;
       let a = "SYMBOL" === t.type;
       let s = t.parentNode;
-      if (n) glU.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) QO.then(async () => {
+      if (n) Fullscreen.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) QO.then(async () => {
         let t = atomStoreManager.get(qp);
         let n = VO(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
         let r = await Dz(e);
-        r?.canEdit ? e.dispatch(to({
+        r?.canEdit ? e.dispatch(showModalHandler({
           type: _$$l,
           data: {
             nodeId: i,
@@ -129,22 +129,22 @@ let $$H = nF((e, t, {
         }));
       });else {
         if (K) return;
-        glU.panToNode(i, !0);
+        Fullscreen.panToNode(i, !0);
       }
     };
     let $ = E["node-id"];
     let Z = $ ? f.mirror.sceneGraph.get($) : null;
     if (null != Z ? q(Z) : null != $ && "fullscreen" === H.view && (async () => {
-      await lQ;
-      await Y5.onReady();
-      await oJ(kul.JOINED);
-      await IL($, dPJ.PAGE_INITIAL_LOAD);
+      await fullscreenPromise;
+      await fullscreenValue.onReady();
+      await oJ(SchemaJoinStatus.JOINED);
+      await IL($, AutosaveEventType.PAGE_INITIAL_LOAD);
       getSingletonSceneGraph().setCurrentPageFromNodeAsync($);
       let e = $ ? f.mirror.sceneGraph.get($) : null;
       e && q(e);
     })(), F) {
       let t = F.slice(1);
-      "fullscreen" === f.selectedView.view && f.mirror.appModel.topLevelMode !== lyf.BRANCHING && "commentPreferences" !== t && f.selectedView?.commentThreadId !== t && e.dispatch(sf({
+      "fullscreen" === f.selectedView.view && f.mirror.appModel.topLevelMode !== ViewType.BRANCHING && "commentPreferences" !== t && f.selectedView?.commentThreadId !== t && e.dispatch(sf({
         ...f.selectedView,
         commentThreadId: t
       }));
@@ -219,7 +219,7 @@ let $$H = nF((e, t, {
     })();
   }
 });
-let W = nF((e, t) => {
+let W = createOptimistThunk((e, t) => {
   let {
     selectedView
   } = e.getState();
@@ -229,7 +229,7 @@ let W = nF((e, t) => {
     r && (r.nodeId !== selectedView.nodeId || r.startingPointNodeId !== selectedView.startingPointNodeId) && (on(), e.dispatch(sf(r)));
   }
 });
-let K = nF((e, t) => {
+let K = createOptimistThunk((e, t) => {
   if (!t.params) return;
   let i = e.getState();
   if ("search" === i.selectedView.view) {
@@ -246,7 +246,7 @@ let K = nF((e, t) => {
     }));
   }
 });
-let $$Y0 = nF((e, t) => {
+let $$Y0 = createOptimistThunk((e, t) => {
   let i = new URL(window.location.href).searchParams;
   let n = new URLSearchParams(t.params);
   let r = Array.from(n.entries()).every(([e, t]) => "node-id" === e ? i.get(e)?.replace("-", ":") === t.replace("-", ":") : i.get(e) === t);

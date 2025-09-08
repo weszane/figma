@@ -8,7 +8,7 @@ import { e0 } from '../905/696396';
 import { O as _$$O } from '../905/791978';
 import { s as _$$s } from '../cssbuilder/589278';
 import { aL, BS, I0, m3, U, xQ, zF } from '../figma_app/45218';
-import { HK } from '../figma_app/155287';
+import { EditorType } from '../figma_app/155287';
 import { FTemplateCategoryType } from '../figma_app/191312';
 import { Dl } from '../figma_app/471982';
 import { e6 } from '../figma_app/617427';
@@ -48,7 +48,7 @@ export function $$S1({
 }) {
   if (!m3(e) && !zF(e)) return null;
   let x = m3(e);
-  let N = !!(U(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || (I0(e) || xQ(e)) && e.editor_type === HK.FIGJAM);
+  let N = !!(U(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || (I0(e) || xQ(e)) && e.editor_type === EditorType.FIGJAM);
   let C = r === aL.DETAIL && BS(e);
   let w = renderI18nText('community.buyer.preview');
   let O = jsx(e6, {

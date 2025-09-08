@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { Ez5, CNR } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
@@ -10,7 +10,7 @@ import { getI18nString } from "../905/303541";
 import { iT } from "../figma_app/74165";
 import { a as _$$a } from "../9410/698287";
 import { qw } from "../figma_app/740163";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { a as _$$a2 } from "../905/518538";
 import { mW, qN } from "../905/123443";
 import { rY } from "../figma_app/524655";
@@ -21,8 +21,8 @@ let v = parsePxNumber(LdP);
 export function $$E0({
   children: e
 }) {
-  let t = ut(Ez5?.singleSlideView().isInFocusedNodeView, !1);
-  let i = ut(Ez5?.canvasGrid().canvasGridArray, []);
+  let t = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !1);
+  let i = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
   let l = rY(i);
   let d = useMemo(() => l.reduce((e, t, i) => (e.set(t, i), e), new Map()), [l]);
   let b = _$$a();
@@ -33,9 +33,9 @@ export function $$E0({
   E = isPropertiesPanelCollapsed ? 0 : E;
   let T = useCallback(e => {
     let t = e.comments[0]?.client_meta?.node_id;
-    if (!t) return AD;
+    if (!t) return defaultSessionLocalIDString;
     let i = getSingletonSceneGraph().get(t);
-    return i ? i.containingSlideId : AD;
+    return i ? i.containingSlideId : defaultSessionLocalIDString;
   }, []);
   let w = _$$R();
   let S = useMemo(() => {
@@ -48,7 +48,7 @@ export function $$E0({
   let k = useCallback(e => {
     let t = T(e);
     let i = d.get(t);
-    return void 0 !== i && t !== AD ? getI18nString("comments.slide_number", {
+    return void 0 !== i && t !== defaultSessionLocalIDString ? getI18nString("comments.slide_number", {
       orderNum: i + 1
     }) : e.pageName;
   }, [T, d]);
@@ -56,10 +56,10 @@ export function $$E0({
   let A = useCallback(e => {
     if (!t) return () => {};
     let i = T(e);
-    return i !== AD ? () => {
+    return i !== defaultSessionLocalIDString ? () => {
       I(i);
     } : () => {
-      Ez5?.singleSlideView().exitFocusedNodeViewAndLeavePanelsOpen();
+      AppStateTsApi?.singleSlideView().exitFocusedNodeViewAndLeavePanelsOpen();
     };
   }, [T, I, t]);
   let O = useMemo(() => ({
@@ -77,12 +77,12 @@ export function $$E0({
       }
     }
   }), [T, d]);
-  let L = ut(Ez5?.editorPreferences().speakerNotesHeight, 0);
+  let L = getObservableValue(AppStateTsApi?.editorPreferences().speakerNotesHeight, 0);
   let R = useMemo(() => {
     let e = 0;
     let i = 0;
     b && (e += v, i += E);
-    t && (e += L + (CNR?.speakerNotesDragHandleHeight() ?? 0) + (CNR?.speakerNotesDragHandlePadding() ?? 0) * 3);
+    t && (e += L + (SlideConstantsCppBindings?.speakerNotesDragHandleHeight() ?? 0) + (SlideConstantsCppBindings?.speakerNotesDragHandlePadding() ?? 0) * 3);
     return {
       maxHeightDelta: -e,
       minBottomMarginDelta: e,

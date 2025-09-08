@@ -7,7 +7,7 @@ import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { f as _$$f } from "../905/412913";
 import { D3 } from "../905/359847";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { uo, yJ } from "../figma_app/78808";
 import { uo as _$$uo, lx, Ho, dC } from "../905/879323";
 import { tg, xZ, VF } from "../figma_app/933328";
@@ -171,7 +171,7 @@ let D = (e, t, r) => {
   }));
 };
 let $$k2 = atom("loading");
-let $$M3 = nF(e => {
+let $$M3 = createOptimistThunk(e => {
   let t = e.getState();
   let r = !!t.user;
   if (!t.openFile?.key) return;
@@ -237,7 +237,7 @@ async function j(e, t) {
   VF(r.data.meta.components, PW.COMPONENT, o, e.dispatch);
   VF(r.data.meta.state_groups, PW.STATE_GROUP, o, e.dispatch);
 }
-export let $$U4 = nF(e => {
+export let $$U4 = createOptimistThunk(e => {
   let t = e.getState().openFile;
   t && R(e, t.key);
 });

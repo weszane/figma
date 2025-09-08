@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { getI18nString } from "../905/303541";
 import { Zc } from "../905/497882";
 import { Ni } from "../figma_app/188152";
@@ -10,8 +10,8 @@ export function $$c0({
 }) {
   return jsx(_$$A, {
     label: getI18nString("community.publishing.comments"),
-    children: jsx(S, {
-      label: jsx(J, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("community.publishing.allow_comments_from_community_members")
       }),
       checked: u(e),

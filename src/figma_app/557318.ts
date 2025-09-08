@@ -1,4 +1,4 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
 export let $$n2;
@@ -28,15 +28,15 @@ export function $$_4(e, t) {
 function h() {
   if (o && l && !d) {
     let e = debugState.getState();
-    let t = new Set(Object.values(e.fonts).map((e) => Object.values(e)).flat().map((e) => e.source));
+    let t = new Set(Object.values(e.fonts).map(e => Object.values(e)).flat().map(e => e.source));
     let r = e.openFile?.key;
     let n = e.figFileDuplicatedFromHubFile;
     let o = !1;
     void 0 !== r && void 0 !== n && (o = null != n[r]);
     ds("has_missing_font", r, e, {
-      has_google_fonts: t.has(jXp.GOOGLE),
-      has_local_fonts: t.has(jXp.LOCAL),
-      has_shared_fonts: t.has(jXp.SHARED),
+      has_google_fonts: t.has(FontSourceType.GOOGLE),
+      has_local_fonts: t.has(FontSourceType.LOCAL),
+      has_shared_fonts: t.has(FontSourceType.SHARED),
       is_community_duplicated_file: o
     });
     d = !0;

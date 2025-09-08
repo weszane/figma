@@ -8,7 +8,7 @@ import { s as _$$s2 } from "../905/411990";
 import { RI, _S } from "../905/315794";
 import { S as _$$S } from "../figma_app/11182";
 import { oB } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
 import { DQ, Pw } from "../figma_app/121751";
 import { A as _$$A } from "../905/654645";
@@ -37,7 +37,7 @@ export function $$C0() {
   }) => {
     let w = () => {
       n(oB());
-      n(to({
+      n(showModalHandler({
         type: _$$p,
         data: {
           teamId: C.id
@@ -47,7 +47,7 @@ export function $$C0() {
     let O = GR(n, C.id);
     let R = GR(n, C.id, e6.ADMIN);
     let L = e => {
-      n(to({
+      n(showModalHandler({
         type: _$$p,
         data: {
           teamId: e.id
@@ -58,7 +58,7 @@ export function $$C0() {
       n(oB());
       let e = !!C.org_id;
       let t = e => {
-        n(to({
+        n(showModalHandler({
           type: H,
           data: {
             team: C,

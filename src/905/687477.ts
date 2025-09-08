@@ -7,20 +7,20 @@ import { decodeBase64, encodeBase64 } from '../905/561685';
 import { getFeatureFlags } from '../905/601108';
 import { logWarning } from '../905/714362';
 import { F2 } from '../905/826900';
-import { EM } from '../905/955878';
+import { isEventProcessed } from '../905/955878';
 import { atomStoreManager } from '../figma_app/27355';
 import { FEditorType } from '../figma_app/53721';
 import { s0 } from '../figma_app/115923';
 import { hH, Q_, qG } from '../figma_app/119420';
 import { H as _$$H } from '../figma_app/358450';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { v7 } from '../figma_app/475303';
 import { gk, tj } from '../figma_app/540726';
 import { YE } from '../figma_app/552876';
 import { gP } from '../figma_app/594947';
 import { I2 } from '../figma_app/603466';
 import { wo } from '../figma_app/753501';
-import { aTn, Bx4, FDn, glU, gmH, Nfd, NLJ, sdu, YVF, zyC } from '../figma_app/763686';
+import { KeyboardLayout, EventTypeEnum, InsertErrorType, Fullscreen, PointerType, PanelType, DesignGraphElements, HTMLWindow, PageNavigation, ClipboardAction } from '../figma_app/763686';
 import { isMobileUA } from '../figma_app/778880';
 import { ty } from '../figma_app/844818';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -50,7 +50,7 @@ let O = function (e, t) {
   return {
     x: t.x - e.x,
     y: t.y - e.y,
-    magnification: Math.log(t.distance / e.distance) / Math.log(glU.pinchToZoomExponent())
+    magnification: Math.log(t.distance / e.distance) / Math.log(Fullscreen.pinchToZoomExponent())
   };
 };
 class D {
@@ -100,8 +100,8 @@ class L {
 }
 function F(e, t, i, n, a) {
   function s(t) {
-    let i = t.type === Bx4.MOUSE_RELEASE;
-    let n = t.type === Bx4.MOUSE_PRESS;
+    let i = t.type === EventTypeEnum.MOUSE_RELEASE;
+    let n = t.type === EventTypeEnum.MOUSE_PRESS;
     let a = n || i;
     e(t.type, t.x, t.y, t.button || (a ? 0 : -1), t.buttons || (n ? 1 : 0), t.clickCount || (a ? 1 : 0), t.modifierKeys || 0, t.deltaX || 0, t.deltaY || 0, t.gestureValue || 0, t.pointerType, t.pointerId || -1, t.timeStamp, -1);
   }
@@ -180,7 +180,7 @@ function F(e, t, i, n, a) {
             let n = P(e);
             let o = e.timeStamp;
             s({
-              type: Bx4.MOUSE_ENTER,
+              type: EventTypeEnum.MOUSE_ENTER,
               x: t.x,
               y: t.y,
               modifierKeys: i,
@@ -188,7 +188,7 @@ function F(e, t, i, n, a) {
               timeStamp: o
             });
             s({
-              type: Bx4.MOUSE_PRESS,
+              type: EventTypeEnum.MOUSE_PRESS,
               x: t.x,
               y: t.y,
               button: 2,
@@ -198,7 +198,7 @@ function F(e, t, i, n, a) {
               timeStamp: o
             });
             s({
-              type: Bx4.MOUSE_RELEASE,
+              type: EventTypeEnum.MOUSE_RELEASE,
               x: t.x,
               y: t.y,
               button: 2,
@@ -208,7 +208,7 @@ function F(e, t, i, n, a) {
               timeStamp: o
             });
             s({
-              type: Bx4.MOUSE_LEAVE,
+              type: EventTypeEnum.MOUSE_LEAVE,
               x: t.x,
               y: t.y,
               modifierKeys: i,
@@ -225,7 +225,7 @@ function F(e, t, i, n, a) {
               next(n) {
                 if (o.handleEvent(n), o.get().length === 0) {
                   i && s({
-                    type: Bx4.MOUSE_SCALE_END,
+                    type: EventTypeEnum.MOUSE_SCALE_END,
                     x: t.x,
                     y: t.y,
                     pointerType: P(n),
@@ -251,7 +251,7 @@ function F(e, t, i, n, a) {
                     e /= i;
                     t /= i;
                     s({
-                      type: Bx4.MOUSE_WHEEL,
+                      type: EventTypeEnum.MOUSE_WHEEL,
                       x: a.x,
                       y: a.y,
                       deltaX: x,
@@ -261,7 +261,7 @@ function F(e, t, i, n, a) {
                     });
                   }
                   i && a.count > 1 && !isNaN(o.magnification) && s({
-                    type: Bx4.MOUSE_SCALE,
+                    type: EventTypeEnum.MOUSE_SCALE,
                     x: a.x,
                     y: a.y,
                     gestureValue: o.magnification,
@@ -291,7 +291,7 @@ function F(e, t, i, n, a) {
       for (let i = 0; i < o.get().length; i++) {
         let a = o.get()[i];
         a.pointerId === e.pointerId && (n = l(a), u = t.timeStamp, s({
-          type: Bx4.MOUSE_MOVE,
+          type: EventTypeEnum.MOUSE_MOVE,
           x: n.x,
           y: n.y,
           modifierKeys: d(t),
@@ -301,7 +301,7 @@ function F(e, t, i, n, a) {
       }
     }
     s({
-      type: Bx4.MOUSE_ENTER,
+      type: EventTypeEnum.MOUSE_ENTER,
       x: n.x,
       y: n.y,
       modifierKeys: d(e),
@@ -309,7 +309,7 @@ function F(e, t, i, n, a) {
       timeStamp: u
     });
     s({
-      type: Bx4.MOUSE_PRESS,
+      type: EventTypeEnum.MOUSE_PRESS,
       x: n.x,
       y: n.y,
       clickCount: a,
@@ -321,7 +321,7 @@ function F(e, t, i, n, a) {
     return {
       next(e) {
         return (o.handleEvent(e), o.get().length === 0) ? (s({
-          type: Bx4.MOUSE_RELEASE,
+          type: EventTypeEnum.MOUSE_RELEASE,
           x: n.x,
           y: n.y,
           clickCount: a,
@@ -329,7 +329,7 @@ function F(e, t, i, n, a) {
           pointerType: P(e),
           timeStamp: e.timeStamp
         }), s({
-          type: Bx4.MOUSE_LEAVE,
+          type: EventTypeEnum.MOUSE_LEAVE,
           x: n.x,
           y: n.y,
           modifierKeys: d(e),
@@ -347,7 +347,7 @@ function B(e) {
 }
 export function $$V1() {
   let e = !document.hidden;
-  sdu?.setIsActive(e);
+  HTMLWindow?.setIsActive(e);
 }
 function G(e) {
   return t => {
@@ -416,15 +416,15 @@ class W {
     e.addEventListener('dragenter', G(wo));
     e.addEventListener('dragover', G(wo));
     window.addEventListener('focus', G(() => {
-      this.lastViewHandleWithFocus !== null && (getFeatureFlags().a11y_design_dom_mirror && this.cppAPI.focusEvent(Bx4.APP_FOCUS_GAINED, this.lastViewHandleWithFocus), this.focusView(this.lastViewHandleWithFocus, !0));
+      this.lastViewHandleWithFocus !== null && (getFeatureFlags().a11y_design_dom_mirror && this.cppAPI.focusEvent(EventTypeEnum.APP_FOCUS_GAINED, this.lastViewHandleWithFocus), this.focusView(this.lastViewHandleWithFocus, !0));
     }));
     window.addEventListener('blur', G(() => {
-      getFeatureFlags().a11y_design_dom_mirror && this.lastViewHandleWithFocus !== null && this.cppAPI.focusEvent(Bx4.APP_FOCUS_LOST, this.lastViewHandleWithFocus);
+      getFeatureFlags().a11y_design_dom_mirror && this.lastViewHandleWithFocus !== null && this.cppAPI.focusEvent(EventTypeEnum.APP_FOCUS_LOST, this.lastViewHandleWithFocus);
     }));
     e.addEventListener('contextmenu', G(e => {
       if (er(e.target)) {
         this.fullscreenExpectsMouseReleaseEvent = !1;
-        this.mouseEvent(e, Bx4.MOUSE_RELEASE);
+        this.mouseEvent(e, EventTypeEnum.MOUSE_RELEASE);
         return;
       }
       e.preventDefault();
@@ -437,8 +437,8 @@ class W {
       let a = Z(e, this.viewElement);
       let s = this.viewHandleFromElement(e.target);
       let o = performance.now();
-      this.cppAPI.contextMenuEvent(Bx4.MOUSE_PRESS, s, a.x, a.y, a.preciseX, a.preciseY, 2, 2, 1, this.modifierKeys(e), 0, 0, 0, gmH.MOUSE, 1, o);
-      this.cppAPI.contextMenuEvent(Bx4.MOUSE_RELEASE, s, a.x, a.y, a.preciseX, a.preciseY, 2, 0, 1, this.modifierKeys(e), 0, 0, 0, gmH.MOUSE, 1, o);
+      this.cppAPI.contextMenuEvent(EventTypeEnum.MOUSE_PRESS, s, a.x, a.y, a.preciseX, a.preciseY, 2, 2, 1, this.modifierKeys(e), 0, 0, 0, PointerType.MOUSE, 1, o);
+      this.cppAPI.contextMenuEvent(EventTypeEnum.MOUSE_RELEASE, s, a.x, a.y, a.preciseX, a.preciseY, 2, 0, 1, this.modifierKeys(e), 0, 0, 0, PointerType.MOUSE, 1, o);
       this.fullscreenExpectsMouseReleaseEvent = !1;
       this.lastMousedownButtonsForContextmenu = null;
       e.preventDefault();
@@ -451,7 +451,7 @@ class W {
         let n = (t ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'z' && e.shiftKey;
         if (i || n) {
           e.preventDefault();
-          Y5.triggerAction(i ? 'undo' : 'redo');
+          fullscreenValue.triggerAction(i ? 'undo' : 'redo');
           this.lastKeydownEventAccepted = !0;
           return;
         }
@@ -467,7 +467,7 @@ class W {
           this.lastKeydown = e.key;
           this.lastKeydownEventForwarded = !0;
           this.isLastKeydownUnreleased = !0;
-          this.cppAPI.keyboardEvent(Bx4.KEY_PRESS, n, e.which, t, a, e.code, ed(), v7()) ? (this.lastKeydownEventAccepted = !0, e.which === 8 && _$$y.isIpad() ? this.isHandlingBackspaceKeyForIPadKoreanInputFix = !0 : e.preventDefault()) : i && (this.cppAPI.focusViewInTabOrder(n, e.shiftKey ? YVF.PREVIOUS : YVF.NEXT), this.lastKeydownEventAccepted = !0, e.preventDefault());
+          this.cppAPI.keyboardEvent(EventTypeEnum.KEY_PRESS, n, e.which, t, a, e.code, ed(), v7()) ? (this.lastKeydownEventAccepted = !0, e.which === 8 && _$$y.isIpad() ? this.isHandlingBackspaceKeyForIPadKoreanInputFix = !0 : e.preventDefault()) : i && (this.cppAPI.focusViewInTabOrder(n, e.shiftKey ? PageNavigation.PREVIOUS : PageNavigation.NEXT), this.lastKeydownEventAccepted = !0, e.preventDefault());
         } catch (t) {
           e.preventDefault();
         }
@@ -478,11 +478,11 @@ class W {
       e.isComposing || (this.lastKeydown = null);
       let t = this.viewHandleFromElement(e.target);
       this.isLastKeydownUnreleased = !1;
-      this.cppAPI.keyboardEvent(Bx4.KEY_RELEASE, t, e.which, this.modifierKeys(e), !1, e.code, ed(), v7()) && e.preventDefault();
+      this.cppAPI.keyboardEvent(EventTypeEnum.KEY_RELEASE, t, e.which, this.modifierKeys(e), !1, e.code, ed(), v7()) && e.preventDefault();
     }), !0);
     document.addEventListener('keydown', G(e => {
       if (!(el(e) || this.lastKeydownEventForwarded || this.isElementOwnedByFullscreen(e.target) || e.code === 'Tab' || !(e.target instanceof HTMLElement) || !e.target.closest('[data-fpl-component],[data-fullscreen-bubble-phase]') || function (e) {
-        if (EM(e)) return !1;
+        if (isEventProcessed(e)) return !1;
         if (e.keyCode === Uz.TAB) return !0;
         let t = e.target;
         if (!(t instanceof HTMLElement)) return !1;
@@ -515,7 +515,7 @@ class W {
         }
       }(e))) {
         let t = this.viewHandleFromElement(e.target);
-        this.cppAPI.keyboardEvent(Bx4.KEY_PRESS, t, e.which, this.modifierKeys(e), e.repeat, e.code, ed(), v7()) && (this.lastKeydownEventAccepted = !0, e.preventDefault());
+        this.cppAPI.keyboardEvent(EventTypeEnum.KEY_PRESS, t, e.which, this.modifierKeys(e), e.repeat, e.code, ed(), v7()) && (this.lastKeydownEventAccepted = !0, e.preventDefault());
       }
     }));
     window.PointerEvent || trackEventAnalytics('No PointerEvent available');
@@ -548,7 +548,7 @@ class W {
       let m = window.devicePixelRatio;
       if (_$$y.isChromePre118() && (t /= m, a /= m, d /= m, c /= m), _$$y.isIpad() && (t /= m, a /= m), _$$y.isChromeOS()) {
         e.ctrlKey && c % 120 == 0 && (a *= 5);
-      } else if (_$$y.isWindows() && (Y5.pinchZoomFixDisabled() || !p) && (_$$y.isChrome() ? (t = d, a = c) : _$$y.isFirefox() && o && (t *= 40, a *= 40), Math.abs(t) >= 99 || Math.abs(a) >= 99)) {
+      } else if (_$$y.isWindows() && (fullscreenValue.pinchZoomFixDisabled() || !p) && (_$$y.isChrome() ? (t = d, a = c) : _$$y.isFirefox() && o && (t *= 40, a *= 40), Math.abs(t) >= 99 || Math.abs(a) >= 99)) {
         t /= 120;
         a /= 120;
         let r = e.timeStamp / 1e3;
@@ -567,7 +567,7 @@ class W {
         l = d;
       }
       let h = Z(e, this.viewElement);
-      this.cppAPI.mouseEvent(Bx4.MOUSE_WHEEL, h.x, h.y, e.button, e.buttons, 0, this.modifierKeys(e), t, a, 0, u ? gmH.TRACKPAD : gmH.MOUSE, -1, e.timeStamp, -1) && e.preventDefault();
+      this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_WHEEL, h.x, h.y, e.button, e.buttons, 0, this.modifierKeys(e), t, a, 0, u ? PointerType.TRACKPAD : PointerType.MOUSE, -1, e.timeStamp, -1) && e.preventDefault();
     }), {
       passive: !1
     }), _$$y.isIpadNative() && this.setupIPadSideChannelEvents(), $$eu0.usingMultiTouchPointerEvents()) {
@@ -586,11 +586,11 @@ class W {
         this.rightButtonPressedLast = es(e);
         (this.middleButtonPressedLast || this.rightButtonPressedLast) && Q(!0);
         this.cppAPI.setIsUsingTouchEvents(!1);
-        this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !0, this.lastMousedownButtonsForContextmenu = e.buttons, this.mouseEvent(e, Bx4.MOUSE_PRESS, n));
+        this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !0, this.lastMousedownButtonsForContextmenu = e.buttons, this.mouseEvent(e, EventTypeEnum.MOUSE_PRESS, n));
       }));
       let s = (e, t) => {
         let i = Z(e, this.viewElement);
-        this.cppAPI.preciseMouseEvent(Bx4.MOUSE_RELEASE, i.x, i.y, i.preciseX, i.preciseY, t, e.buttons, 1, this.modifierKeys(e), 0, 0, 0, gmH.MOUSE, -1, e.timeStamp, -1) && e.preventDefault();
+        this.cppAPI.preciseMouseEvent(EventTypeEnum.MOUSE_RELEASE, i.x, i.y, i.preciseX, i.preciseY, t, e.buttons, 1, this.modifierKeys(e), 0, 0, 0, PointerType.MOUSE, -1, e.timeStamp, -1) && e.preventDefault();
       };
       document.addEventListener(t ? 'pointerenter' : 'mouseenter', G(e => {
         _$$y.isChrome() && !ea(e) && this.middleButtonPressedLast && s(e, 1);
@@ -598,17 +598,17 @@ class W {
       }));
       document.addEventListener(t ? 'pointermove' : 'mousemove', G(e => {
         this.cppAPI.setIsUsingTouchEvents(!1);
-        this.shouldIgnoreMouseEvent(e) || this.mouseEvent(e, Bx4.MOUSE_MOVE);
+        this.shouldIgnoreMouseEvent(e) || this.mouseEvent(e, EventTypeEnum.MOUSE_MOVE);
       }), !0);
       this.viewElement.addEventListener(t ? 'pointerleave' : 'mouseout', G(e => {
-        this.mouseEvent(e, Bx4.MOUSE_LEAVE);
+        this.mouseEvent(e, EventTypeEnum.MOUSE_LEAVE);
       }));
       document.addEventListener(t ? 'pointerup' : 'mouseup', G(e => {
         (this.middleButtonPressedLast || this.rightButtonPressedLast) && Q(!1);
         this.middleButtonPressedLast = ea(e);
         this.rightButtonPressedLast = es(e);
         this.cppAPI.setIsUsingTouchEvents(!1);
-        this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !1, this.lastMousedownButtonsForContextmenu === 2 && e.button === 2 && e.buttons === 0 || (this.lastMousedownButtonsForContextmenu = null), this.mouseEvent(e, Bx4.MOUSE_RELEASE));
+        this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !1, this.lastMousedownButtonsForContextmenu === 2 && e.button === 2 && e.buttons === 0 || (this.lastMousedownButtonsForContextmenu = null), this.mouseEvent(e, EventTypeEnum.MOUSE_RELEASE));
       }), !0);
       this.setupGestureEvents();
       this.viewElement.addEventListener('touchstart', G(e => {
@@ -634,7 +634,7 @@ class W {
       document.addEventListener('touchcancel', G(e => {
         this.touchState && (this.touchState = this.touchState.next(e));
       }));
-      Y5.cancelPendingGestures = () => {
+      fullscreenValue.cancelPendingGestures = () => {
         this.touchState = null;
         this.pointerState = null;
       };
@@ -661,7 +661,7 @@ class W {
       MOVED_COALESCED: 4
     };
     let t = this.viewElement;
-    Y5.takePencilSample = (i, n, a, s) => {
+    fullscreenValue.takePencilSample = (i, n, a, s) => {
       if (!X()) return;
       let o = e => {
         for (let i = t; i !== null; i = i.offsetParent instanceof HTMLElement ? i.offsetParent : null) {
@@ -670,29 +670,29 @@ class W {
         }
         let o = Math.round(n);
         let l = Math.round(a);
-        let d = e === Bx4.MOUSE_PRESS;
-        let c = e === Bx4.MOUSE_RELEASE;
+        let d = e === EventTypeEnum.MOUSE_PRESS;
+        let c = e === EventTypeEnum.MOUSE_RELEASE;
         let u = d || c;
         let p = performance.now();
-        this.cppAPI.preciseMouseEvent(e, o, l, n, a, u ? 0 : -1, d ? 1 : 0, u ? 1 : 0, s, 0, 0, 0, gmH.STYLUS, -1, p, -1);
+        this.cppAPI.preciseMouseEvent(e, o, l, n, a, u ? 0 : -1, d ? 1 : 0, u ? 1 : 0, s, 0, 0, 0, PointerType.STYLUS, -1, p, -1);
       };
       switch (i) {
         case e.BEGAN:
           this.cppAPI.setIsUsingTouchEvents(!1);
-          o(Bx4.MOUSE_PRESS);
+          o(EventTypeEnum.MOUSE_PRESS);
           break;
         case e.MOVED:
           this.cppAPI.setIsUsingTouchEvents(!1);
-          o(Bx4.MOUSE_MOVE);
+          o(EventTypeEnum.MOUSE_MOVE);
           break;
         case e.MOVED_COALESCED:
           this.cppAPI.setIsUsingTouchEvents(!1);
-          o(Bx4.MOUSE_MOVE_COALESCED);
+          o(EventTypeEnum.MOUSE_MOVE_COALESCED);
           break;
         case e.ENDED:
         case e.CANCELLED:
           this.cppAPI.setIsUsingTouchEvents(!1);
-          o(Bx4.MOUSE_RELEASE);
+          o(EventTypeEnum.MOUSE_RELEASE);
       }
     };
     let i = {
@@ -701,13 +701,13 @@ class W {
       ENDED: 2,
       CANCELLED: 3
     };
-    Y5.takeIndirectPinchGesture = (e, t, n, a, s) => {
+    fullscreenValue.takeIndirectPinchGesture = (e, t, n, a, s) => {
       let o = performance.now();
       let l = () => {
         let e = t - this.lastGestureScale;
         this.lastGestureScale = t;
         this.cppAPI.setIsUsingTouchEvents(!1);
-        this.cppAPI.preciseMouseEvent(Bx4.MOUSE_SCALE, n, a, n, a, -1, 0, 0, s, 0, 0, e, gmH.TRACKPAD, 1, o, -1);
+        this.cppAPI.preciseMouseEvent(EventTypeEnum.MOUSE_SCALE, n, a, n, a, -1, 0, 0, s, 0, 0, e, PointerType.TRACKPAD, 1, o, -1);
       };
       switch (e) {
         case i.BEGAN:
@@ -720,25 +720,25 @@ class W {
         case i.ENDED:
         case i.CANCELLED:
           this.cppAPI.setIsUsingTouchEvents(!1);
-          this.cppAPI.preciseMouseEvent(Bx4.MOUSE_SCALE_END, n, a, n, a, -1, 0, 0, s, 0, 0, 0, gmH.TRACKPAD, 1, o, -1);
+          this.cppAPI.preciseMouseEvent(EventTypeEnum.MOUSE_SCALE_END, n, a, n, a, -1, 0, 0, s, 0, 0, 0, PointerType.TRACKPAD, 1, o, -1);
       }
     };
   }
   setupLowLevelPointerEvents() {
     let e = e => {
       this.cppAPI.setIsUsingTouchEvents(!1);
-      this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !0, this.mouseEvent(e, Bx4.MOUSE_PRESS));
+      this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !0, this.mouseEvent(e, EventTypeEnum.MOUSE_PRESS));
     };
     let t = e => {
       this.cppAPI.setIsUsingTouchEvents(!1);
-      this.shouldIgnoreMouseEvent(e) || this.mouseEvent(e, Bx4.MOUSE_MOVE);
+      this.shouldIgnoreMouseEvent(e) || this.mouseEvent(e, EventTypeEnum.MOUSE_MOVE);
     };
     let i = e => {
-      this.mouseEvent(e, Bx4.MOUSE_LEAVE);
+      this.mouseEvent(e, EventTypeEnum.MOUSE_LEAVE);
     };
     let n = e => {
       this.cppAPI.setIsUsingTouchEvents(!1);
-      this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !1, this.mouseEvent(e, Bx4.MOUSE_RELEASE));
+      this.shouldIgnoreMouseEvent(e) || (this.fullscreenExpectsMouseReleaseEvent = !1, this.mouseEvent(e, EventTypeEnum.MOUSE_RELEASE));
     };
     function a(e, t) {
       return function (i) {
@@ -759,7 +759,7 @@ class W {
       } else {
         if (this.shouldIgnoreEvent(e)) return;
         e.preventDefault();
-        this.mouseEvent(e, Bx4.MOUSE_MOVE);
+        this.mouseEvent(e, EventTypeEnum.MOUSE_MOVE);
       }
     })), {
       passive: !1,
@@ -788,10 +788,10 @@ class W {
       capture: !0
     }));
     _$$y.isIpad() || this.setupGestureEvents();
-    Y5.allowWebGestures = e => {
+    fullscreenValue.allowWebGestures = e => {
       this.pointerState && this.pointerState.allow && (this.pointerState = this.pointerState.allow(e));
     };
-    Y5.cancelPendingGestures = () => {
+    fullscreenValue.cancelPendingGestures = () => {
       this.pointerState = null;
       this.touchState = null;
     };
@@ -805,39 +805,39 @@ class W {
     let e = new Set();
     let t = (t, i, n) => {
       let a = t.pointerId;
-      if (i === Bx4.MOUSE_PRESS && (this.shouldIgnoreEvent(t) || n === gmH.STYLUS && X())) {
+      if (i === EventTypeEnum.MOUSE_PRESS && (this.shouldIgnoreEvent(t) || n === PointerType.STYLUS && X())) {
         e.add(a);
         return;
       }
       if (e.has(a)) {
-        (i === Bx4.MOUSE_RELEASE || i === Bx4.MOUSE_CANCEL) && e.$$delete(a);
+        (i === EventTypeEnum.MOUSE_RELEASE || i === EventTypeEnum.MOUSE_CANCEL) && e.$$delete(a);
         return;
       }
-      i === Bx4.MOUSE_PRESS ? this.viewElement.setPointerCapture(a) : (i === Bx4.MOUSE_RELEASE || i === Bx4.MOUSE_CANCEL) && this.viewElement.releasePointerCapture(a);
-      (i === Bx4.MOUSE_PRESS || i === Bx4.MOUSE_MOVE || i === Bx4.MOUSE_RELEASE || i === Bx4.MOUSE_CANCEL) && this.cppAPI.setIsUsingTouchEvents(n === gmH.TOUCH);
-      let s = i === Bx4.MOUSE_PRESS || i === Bx4.MOUSE_RELEASE ? 1 : 0;
+      i === EventTypeEnum.MOUSE_PRESS ? this.viewElement.setPointerCapture(a) : (i === EventTypeEnum.MOUSE_RELEASE || i === EventTypeEnum.MOUSE_CANCEL) && this.viewElement.releasePointerCapture(a);
+      (i === EventTypeEnum.MOUSE_PRESS || i === EventTypeEnum.MOUSE_MOVE || i === EventTypeEnum.MOUSE_RELEASE || i === EventTypeEnum.MOUSE_CANCEL) && this.cppAPI.setIsUsingTouchEvents(n === PointerType.TOUCH);
+      let s = i === EventTypeEnum.MOUSE_PRESS || i === EventTypeEnum.MOUSE_RELEASE ? 1 : 0;
       let o = Z(t, this.viewElement);
       this.cppAPI.preciseMouseEvent(i, o.x, o.y, o.preciseX, o.preciseY, t.button, t.buttons, s, this.modifierKeys(t), 0, 0, 0, n, a, t.timeStamp, -1) && t.preventDefault();
     };
     let i = e => i => {
-      let n = gmH.MOUSE;
-      i.pointerType === 'touch' ? n = gmH.TOUCH : i.pointerType === 'pen' && (n = gmH.STYLUS);
+      let n = PointerType.MOUSE;
+      i.pointerType === 'touch' ? n = PointerType.TOUCH : i.pointerType === 'pen' && (n = PointerType.STYLUS);
       t(i, e, n);
-      n === gmH.TOUCH && e === Bx4.MOUSE_PRESS && this.reportTouchStart();
+      n === PointerType.TOUCH && e === EventTypeEnum.MOUSE_PRESS && this.reportTouchStart();
     };
-    this.viewElement.addEventListener('pointerdown', G(i(Bx4.MOUSE_PRESS)), {
+    this.viewElement.addEventListener('pointerdown', G(i(EventTypeEnum.MOUSE_PRESS)), {
       passive: !1
     });
-    this.viewElement.addEventListener('pointermove', G(i(Bx4.MOUSE_MOVE)), {
+    this.viewElement.addEventListener('pointermove', G(i(EventTypeEnum.MOUSE_MOVE)), {
       passive: !1
     });
-    this.viewElement.addEventListener('pointerout', G(i(Bx4.MOUSE_LEAVE)), {
+    this.viewElement.addEventListener('pointerout', G(i(EventTypeEnum.MOUSE_LEAVE)), {
       passive: !1
     });
-    this.viewElement.addEventListener('pointerup', G(i(Bx4.MOUSE_RELEASE)), {
+    this.viewElement.addEventListener('pointerup', G(i(EventTypeEnum.MOUSE_RELEASE)), {
       passive: !1
     });
-    document.addEventListener('pointercancel', G(i(Bx4.MOUSE_CANCEL)), {
+    document.addEventListener('pointercancel', G(i(EventTypeEnum.MOUSE_CANCEL)), {
       passive: !1
     });
     this.viewElement.addEventListener('touchstart', e => {
@@ -870,7 +870,7 @@ class W {
       let t = e.scale - this.lastGestureScale;
       this.lastGestureScale = e.scale;
       let i = Z(e, this.viewElement);
-      this.cppAPI.mouseEvent(Bx4.MOUSE_SCALE, i.x, i.y, -1, 0, 0, this.modifierKeys(e), 0, 0, t, gmH.MOUSE, -1, e.timeStamp, -1);
+      this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_SCALE, i.x, i.y, -1, 0, 0, this.modifierKeys(e), 0, 0, t, PointerType.MOUSE, -1, e.timeStamp, -1);
     })));
   }
   createInitialTouchState() {
@@ -894,10 +894,10 @@ class W {
     let t = Z(e.touches[0], this.viewElement);
     let i = this.modifierKeys(e);
     let n = e.timeStamp;
-    this.cppAPI.mouseEvent(Bx4.MOUSE_ENTER, t.x, t.y, -1, 0, 0, i, 0, 0, 0, gmH.MOUSE, -1, n, -1);
-    this.cppAPI.mouseEvent(Bx4.MOUSE_PRESS, t.x, t.y, 2, 2, 1, i, 0, 0, 0, gmH.MOUSE, -1, n, -1);
-    this.cppAPI.mouseEvent(Bx4.MOUSE_RELEASE, t.x, t.y, 2, 0, 1, i, 0, 0, 0, gmH.MOUSE, -1, n, -1);
-    this.cppAPI.mouseEvent(Bx4.MOUSE_LEAVE, t.x, t.y, -1, 0, 0, i, 0, 0, 0, gmH.MOUSE, -1, n, -1);
+    this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_ENTER, t.x, t.y, -1, 0, 0, i, 0, 0, 0, PointerType.MOUSE, -1, n, -1);
+    this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_PRESS, t.x, t.y, 2, 2, 1, i, 0, 0, 0, PointerType.MOUSE, -1, n, -1);
+    this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_RELEASE, t.x, t.y, 2, 0, 1, i, 0, 0, 0, PointerType.MOUSE, -1, n, -1);
+    this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_LEAVE, t.x, t.y, -1, 0, 0, i, 0, 0, 0, PointerType.MOUSE, -1, n, -1);
   }
   summarizeTouches(e) {
     let t = 0;
@@ -930,17 +930,17 @@ class W {
     let s = t => {
       for (let s = 0; s < t.touches.length; s++) {
         let o = t.touches[s];
-        o.identifier === e.touches[0].identifier && (a = Z(o, i), this.cppAPI.mouseEvent(Bx4.MOUSE_MOVE, a.x, a.y, -1, 0, 0, n(t), 0, 0, 0, gmH.MOUSE, -1, t.timeStamp, -1));
+        o.identifier === e.touches[0].identifier && (a = Z(o, i), this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_MOVE, a.x, a.y, -1, 0, 0, n(t), 0, 0, 0, PointerType.MOUSE, -1, t.timeStamp, -1));
       }
     };
     let o = this.simulatedClickCount(!0, a.x, a.y, 10);
-    this.cppAPI.mouseEvent(Bx4.MOUSE_ENTER, a.x, a.y, -1, 0, 0, this.modifierKeys(e), 0, 0, 0, gmH.MOUSE, -1, e.timeStamp, -1);
-    this.cppAPI.mouseEvent(Bx4.MOUSE_PRESS, a.x, a.y, 0, 1, o, this.modifierKeys(e), 0, 0, 0, gmH.MOUSE, -1, e.timeStamp, -1);
+    this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_ENTER, a.x, a.y, -1, 0, 0, this.modifierKeys(e), 0, 0, 0, PointerType.MOUSE, -1, e.timeStamp, -1);
+    this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_PRESS, a.x, a.y, 0, 1, o, this.modifierKeys(e), 0, 0, 0, PointerType.MOUSE, -1, e.timeStamp, -1);
     t.forEach(s);
     let l = this.cppAPI;
     return {
       next(e) {
-        return e.touches.length === 0 ? (l.mouseEvent(Bx4.MOUSE_RELEASE, a.x, a.y, 0, 0, o, n(e), 0, 0, 0, gmH.MOUSE, -1, e.timeStamp, -1), l.mouseEvent(Bx4.MOUSE_LEAVE, a.x, a.y, -1, 0, 0, n(e), 0, 0, 0, gmH.MOUSE, -1, e.timeStamp, -1), null) : (s(e), this);
+        return e.touches.length === 0 ? (l.mouseEvent(EventTypeEnum.MOUSE_RELEASE, a.x, a.y, 0, 0, o, n(e), 0, 0, 0, PointerType.MOUSE, -1, e.timeStamp, -1), l.mouseEvent(EventTypeEnum.MOUSE_LEAVE, a.x, a.y, -1, 0, 0, n(e), 0, 0, 0, PointerType.MOUSE, -1, e.timeStamp, -1), null) : (s(e), this);
       }
     };
   }
@@ -953,14 +953,14 @@ class W {
         let a = t(n.touches);
         if (a.count === e.count) {
           let t = a.distance / e.distance;
-          let s = glU ? Math.log(t) / Math.log(glU.pinchToZoomExponent()) : NaN;
+          let s = Fullscreen ? Math.log(t) / Math.log(Fullscreen.pinchToZoomExponent()) : NaN;
           let o = a.x - e.x;
           let l = a.y - e.y;
           let d = window.devicePixelRatio || 1;
           o /= d;
           l /= d;
-          (o || l) && i.mouseEvent(Bx4.MOUSE_WHEEL, a.x, a.y, -1, 0, 0, 0, o, l, 0, gmH.TOUCH, -1, n.timeStamp, -1);
-          a.count > 1 && !isNaN(s) && i.mouseEvent(Bx4.MOUSE_SCALE, a.x, a.y, -1, 0, 0, 0, 0, 0, s, gmH.TOUCH, -1, n.timeStamp, -1);
+          (o || l) && i.mouseEvent(EventTypeEnum.MOUSE_WHEEL, a.x, a.y, -1, 0, 0, 0, o, l, 0, PointerType.TOUCH, -1, n.timeStamp, -1);
+          a.count > 1 && !isNaN(s) && i.mouseEvent(EventTypeEnum.MOUSE_SCALE, a.x, a.y, -1, 0, 0, 0, 0, 0, s, PointerType.TOUCH, -1, n.timeStamp, -1);
         }
         e = a;
         return this;
@@ -979,7 +979,7 @@ class W {
     if (t && document.hasFocus() && a) return;
     let s = this.currentViewHandleWithFocus;
     this.currentViewHandleWithFocus = null;
-    this.cppAPI.focusEvent(Bx4.FOCUS_LOST, s);
+    this.cppAPI.focusEvent(EventTypeEnum.FOCUS_LOST, s);
     let o = $$eu0.maybeTemporarilyDisableFocusEvents();
     this.customFocusElementFor(e)?.focus({
       preventScroll: !0
@@ -989,7 +989,7 @@ class W {
     this.previousComposition = null;
     this.simulatedPreviousComposition = null;
     this.currentViewHandleWithFocus = e;
-    this.cppAPI.focusEvent(Bx4.FOCUS_GAINED, e);
+    this.cppAPI.focusEvent(EventTypeEnum.FOCUS_GAINED, e);
   }
   customFocusElementFor(e) {
     if ($$eu0.customFocusElementReadWrite === null) {
@@ -1029,7 +1029,7 @@ class W {
         }));
         t.addEventListener('focus', G(() => {
           let e = this.pendingViewHandle;
-          e && (this.lastViewHandleWithFocus = e, this.currentViewHandleWithFocus = e, $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite._pointer = e), $$eu0.customFocusElementReadOnly && ($$eu0.customFocusElementReadOnly._pointer = e), $$eu0.focusEventBeingCalled || this.cppAPI.focusEvent(Bx4.FOCUS_GAINED, e));
+          e && (this.lastViewHandleWithFocus = e, this.currentViewHandleWithFocus = e, $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite._pointer = e), $$eu0.customFocusElementReadOnly && ($$eu0.customFocusElementReadOnly._pointer = e), $$eu0.focusEventBeingCalled || this.cppAPI.focusEvent(EventTypeEnum.FOCUS_GAINED, e));
         }));
         t.addEventListener('blur', G(e => {
           let t = this.currentViewHandleWithFocus;
@@ -1038,7 +1038,7 @@ class W {
           $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite._pointer = null);
           $$eu0.customFocusElementReadOnly && ($$eu0.customFocusElementReadOnly._pointer = null);
           let i = !!e.relatedTarget && e.relatedTarget instanceof HTMLElement && e.relatedTarget.getAttribute('data-fullscreen-intercept-dangerously-include-tab');
-          $$eu0.focusEventBeingCalled || i || this.cppAPI.focusEvent(Bx4.FOCUS_LOST, t);
+          $$eu0.focusEventBeingCalled || i || this.cppAPI.focusEvent(EventTypeEnum.FOCUS_LOST, t);
         }));
         let e = () => {
           this.previousComposition = '';
@@ -1089,7 +1089,7 @@ class W {
             }
             if (this.lastKeydown !== a && a.length === 1 && l && s >= 192 && s <= 669) {
               let t = this.viewHandleFromElement(e.target);
-              this.cppAPI.keyboardEvent(Bx4.KEY_PRESS, t, 8, 0, !1, 'Backspace', ed(), v7());
+              this.cppAPI.keyboardEvent(EventTypeEnum.KEY_PRESS, t, 8, 0, !1, 'Backspace', ed(), v7());
             } else {
               _$$y.isIpad() || _$$y.isiOS() ? i && !this.isComposing && (this.simulatedPreviousComposition = n) : e.inputType === 'insertReplacementText' && _$$y.isSafari() && _$$y.isMac() && !_$$y.isIpad() && !_$$y.isIpadNative() && !_$$y.isiOS() && i && !this.isComposing && (this.simulatedPreviousComposition = n);
             }
@@ -1186,16 +1186,16 @@ class W {
   mouseEvent(e, t, i = null) {
     let n = e.detail;
     let s = window.PointerEvent && e instanceof window.PointerEvent;
-    (s || _$$y.isIE() || _$$y.isEdge()) && (t === Bx4.MOUSE_PRESS || t === Bx4.MOUSE_RELEASE) && (n = this.simulatedClickCount(t === Bx4.MOUSE_PRESS, e.pageX, e.pageY, 4));
+    (s || _$$y.isIE() || _$$y.isEdge()) && (t === EventTypeEnum.MOUSE_PRESS || t === EventTypeEnum.MOUSE_RELEASE) && (n = this.simulatedClickCount(t === EventTypeEnum.MOUSE_PRESS, e.pageX, e.pageY, 4));
     let o = e.button;
-    let l = gmH.MOUSE;
+    let l = PointerType.MOUSE;
     let d = -1;
-    if (s && e.pointerType === 'pen' ? l = gmH.STYLUS : s && e.pointerType === 'touch' && !getFeatureFlags().ce_il_disable_touch_events && (l = gmH.TOUCH, d = e.pointerId), (t === Bx4.MOUSE_PRESS || t === Bx4.MOUSE_MOVE || t === Bx4.MOUSE_RELEASE || t === Bx4.MOUSE_CANCEL) && this.cppAPI.setIsUsingTouchEvents(l === gmH.TOUCH), l === gmH.TOUCH) {
-      if (t === Bx4.MOUSE_PRESS && i) {
+    if (s && e.pointerType === 'pen' ? l = PointerType.STYLUS : s && e.pointerType === 'touch' && !getFeatureFlags().ce_il_disable_touch_events && (l = PointerType.TOUCH, d = e.pointerId), (t === EventTypeEnum.MOUSE_PRESS || t === EventTypeEnum.MOUSE_MOVE || t === EventTypeEnum.MOUSE_RELEASE || t === EventTypeEnum.MOUSE_CANCEL) && this.cppAPI.setIsUsingTouchEvents(l === PointerType.TOUCH), l === PointerType.TOUCH) {
+      if (t === EventTypeEnum.MOUSE_PRESS && i) {
         this.pointerState = (this.pointerState || i()).next(e);
         return;
       }
-      if (t === Bx4.MOUSE_CANCEL || t === Bx4.MOUSE_RELEASE) {
+      if (t === EventTypeEnum.MOUSE_CANCEL || t === EventTypeEnum.MOUSE_RELEASE) {
         this.pointerState = null;
         return;
       }
@@ -1204,7 +1204,7 @@ class W {
         return;
       }
     }
-    s || t === Bx4.MOUSE_PRESS || t === Bx4.MOUSE_RELEASE || (o = -1);
+    s || t === EventTypeEnum.MOUSE_PRESS || t === EventTypeEnum.MOUSE_RELEASE || (o = -1);
     let c = Z(e, this.viewElement);
     this.cppAPI.preciseMouseEvent(t, c.x, c.y, c.preciseX, c.preciseY, o, e.buttons, n, this.modifierKeys(e), 0, 0, 0, l, d, e.timeStamp, e instanceof PointerEvent ? e.pressure : -1) && e.preventDefault();
   }
@@ -1234,29 +1234,29 @@ class W {
     };
     function t() {
       let e = debugState.getState().selectedView;
-      return e.view === 'fullscreen' && e.editorType === FEditorType.Sites && atomStoreManager.get(s0) === Nfd.CODE;
+      return e.view === 'fullscreen' && e.editorType === FEditorType.Sites && atomStoreManager.get(s0) === PanelType.CODE;
     }
     document.body.addEventListener('copy', G(i => {
-      t() || e(i, zyC.COPY);
+      t() || e(i, ClipboardAction.COPY);
     }));
     document.body.addEventListener('cut', G(i => {
-      t() || e(i, zyC.CUT);
+      t() || e(i, ClipboardAction.CUT);
     }));
     document.body.addEventListener('paste', H(i => {
       if (!t()) {
         if (YE()) {
           if (!(tj(i) || gk(i))) return;
           if (atomStoreManager.get(qG)) {
-            hH(FDn.MAXIMUM_ATTACHMENTS_EXCEEDED);
+            hH(InsertErrorType.MAXIMUM_ATTACHMENTS_EXCEEDED);
             return;
           }
           {
             atomStoreManager.set(Q_);
             let e = gk(i) && i.clipboardData?.getData('text/html');
-            getFeatureFlags().bake_large_paste_warning && e && e.length > gP('make_large_paste_threshold').get('sizeBytes', 25e4) && hH(FDn.INSERTED_NODES_TOO_LARGE);
+            getFeatureFlags().bake_large_paste_warning && e && e.length > gP('make_large_paste_threshold').get('sizeBytes', 25e4) && hH(InsertErrorType.INSERTED_NODES_TOO_LARGE);
           }
         }
-        e(i, zyC.PASTE);
+        e(i, ClipboardAction.PASTE);
       }
     }));
     this.viewElement.addEventListener('drop', G(e => {
@@ -1264,7 +1264,7 @@ class W {
         e.stopImmediatePropagation();
         return;
       }
-      if (!(Y5 && Y5.handleSketchImportEvent(e))) {
+      if (!(fullscreenValue && fullscreenValue.handleSketchImportEvent(e))) {
         if (e.dataTransfer?.items) {
           let t = [];
           let i = new Map();
@@ -1330,11 +1330,11 @@ class W {
           }
           r || this.importEntries(e, t);
         } else if (e.dataTransfer?.files) {
-          if (!Y5.fileArrayToString) {
+          if (!fullscreenValue.fileArrayToString) {
             logWarning('FileDrop', 'Unable to import files, fileArrayToString is not defined');
             return;
           }
-          this.cppAPI.dropEvent(this.viewHandleFromElement(e.target), e.pageX, e.pageY, this.modifierKeys(e), Y5.fileArrayToString(e.dataTransfer.files));
+          this.cppAPI.dropEvent(this.viewHandleFromElement(e.target), e.pageX, e.pageY, this.modifierKeys(e), fullscreenValue.fileArrayToString(e.dataTransfer.files));
         }
       }
     }));
@@ -1345,11 +1345,11 @@ class W {
     t.forEach(r => {
       r.file(r => {
         if (i.push(r), i.length === t.length) {
-          if (!Y5.fileArrayToString) {
+          if (!fullscreenValue.fileArrayToString) {
             logWarning('FileDrop', 'Unable to import file entries, fileArrayToString is not defined');
             return;
           }
-          n.cppAPI.dropEvent(n.viewHandleFromElement(e.target), e.pageX, e.pageY, n.modifierKeys(e), Y5.fileArrayToString(i));
+          n.cppAPI.dropEvent(n.viewHandleFromElement(e.target), e.pageX, e.pageY, n.modifierKeys(e), fullscreenValue.fileArrayToString(i));
         }
       });
     });
@@ -1381,7 +1381,7 @@ function X() {
   let t = window.FigmaMobile;
   if (e?.suppliesPencilSamples) {
     let e = debugState.getState().mirror.appModel.currentTool;
-    if (debugState.getState().mirror.appModel.isReadOnly) ;else if (t._auto_draw_with_pencil && e !== NLJ.MULTISELECT) return !0;else return _$$H.includes(e);
+    if (debugState.getState().mirror.appModel.isReadOnly) ;else if (t._auto_draw_with_pencil && e !== DesignGraphElements.MULTISELECT) return !0;else return _$$H.includes(e);
   }
   return !1;
 }
@@ -1440,7 +1440,7 @@ function el(e) {
   return !1;
 }
 function ed() {
-  return v7() !== aTn.UNKNOWN;
+  return v7() !== KeyboardLayout.UNKNOWN;
 }
 function ec(e) {
   return e.classList.contains('js-fullscreen-prevent-event-capture-keys') || e.getAttribute('data-fullscreen-prevent-event-capture-keys');
@@ -1457,8 +1457,8 @@ export let $$eu0 = new class {
   }
   initializeGlobalWindowState(e) {
     if (this.globalWindowState != null) throw new Error('Global window state already initialized');
-    if (void 0 === sdu) throw new Error('HTMLWindow cannot initialize without cpp module');
-    let t = new W(e, sdu);
+    if (void 0 === HTMLWindow) throw new Error('HTMLWindow cannot initialize without cpp module');
+    let t = new W(e, HTMLWindow);
     this.globalWindowState = t;
     nB(t.markKeydownEventForwarded);
     return t;
@@ -1488,9 +1488,9 @@ export let $$eu0 = new class {
   }
   initPrefersReducedMotion() {
     let e = window.matchMedia('(prefers-reduced-motion: reduce)');
-    sdu?.updatePrefersReducedMotion(e.matches);
+    HTMLWindow?.updatePrefersReducedMotion(e.matches);
     e.onchange = function (e) {
-      sdu?.updatePrefersReducedMotion(e.matches);
+      HTMLWindow?.updatePrefersReducedMotion(e.matches);
     };
   }
   setTextCaretBounds(e, t, i) {
@@ -1596,11 +1596,11 @@ export let $$eu0 = new class {
         }
       }
       if (e.length > 0) {
-        if (!Y5.fileArrayToString) {
+        if (!fullscreenValue.fileArrayToString) {
           logWarning('Clipboard', 'Unable to read files to clipboard. fileArrayToString is not defined');
           return null;
         }
-        return Y5.fileArrayToString(e);
+        return fullscreenValue.fileArrayToString(e);
       }
     } catch (e) {}
     return null;

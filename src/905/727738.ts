@@ -4,14 +4,14 @@ import { XHR } from "../905/910117";
 import { Q, s as _$$s } from "../905/573154";
 import { F as _$$F } from "../905/302958";
 import { h as _$$h } from "../905/142086";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { NC } from "../905/17179";
-import { to, AS } from "../905/156213";
+import { showModalHandler, hideModalHandler } from "../905/156213";
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { getI18nString } from "../905/303541";
-import { Ju, qK } from "../905/102752";
+import { registerModal, registerLegacyModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { yH, yJ, bE } from "../905/98702";
 import { P as _$$P } from "../905/595507";
@@ -29,7 +29,7 @@ import { oj } from "../905/760074";
 import { M4 } from "../905/713695";
 import { p as _$$p } from "../905/195198";
 import { DQ, Pw } from "../figma_app/121751";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 class A extends Component {
   render() {
     let e;
@@ -50,8 +50,8 @@ class A extends Component {
   }
 }
 A.displayName = "ConfirmRemoveRoleModal";
-let y = Ju(A, "ConfirmRemoveSeenStateModal");
-let b = nF((e, {
+let y = registerModal(A, "ConfirmRemoveSeenStateModal");
+let b = createOptimistThunk((e, {
   fileSeenState: t
 }) => {
   let i = XHR.del(`/api/file_seen_state/${t.id}`);
@@ -68,7 +68,7 @@ let b = nF((e, {
     }
   }, i);
 });
-let v = nF(async (e, {
+let v = createOptimistThunk(async (e, {
   fileSeenState: t
 }, {
   liveStore: i
@@ -78,14 +78,14 @@ let v = nF(async (e, {
     modalShown
   } = e.getState();
   let a = await i.fetchFile(t.file_key);
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: y,
     data: {
       fileSeenState: t,
       onConfirmRemove: () => {
         user && t.user_id === user.id ? e.dispatch(sf({
           view: "recentsAndSharing"
-        })) : modalShown && e.dispatch(to(modalShown));
+        })) : modalShown && e.dispatch(showModalHandler(modalShown));
         e.dispatch(b({
           fileSeenState: t
         }));
@@ -94,7 +94,7 @@ let v = nF(async (e, {
       user,
       dispatch: e.dispatch,
       onCancel: () => {
-        modalShown && e.dispatch(to(modalShown));
+        modalShown && e.dispatch(showModalHandler(modalShown));
       }
     }
   }));
@@ -152,12 +152,12 @@ function j(e) {
     children: t
   });
 }
-qK(M, e => jsx(j, {
+registerLegacyModal(M, e => jsx(j, {
   ...e.modalShown.data,
   ...e,
   user: e.user
 }));
-let G = nF((e, {
+let G = createOptimistThunk((e, {
   role: t
 }) => {
   z_("Role Deleted", t);
@@ -178,7 +178,7 @@ let G = nF((e, {
     }, i);
   } catch (e) {}
 });
-let z = nF((e, {
+let z = createOptimistThunk((e, {
   role: t,
   cascade: i,
   fromDraftsLockdownFileMove: s,
@@ -236,7 +236,7 @@ let z = nF((e, {
     }
   }, d);
 });
-let H = nF((e, {
+let H = createOptimistThunk((e, {
   seenState: t,
   fromDraftsLockdownFileMove: i,
   level: s,
@@ -321,7 +321,7 @@ function W(e, t, i) {
   let n = e.getState();
   if (!i) return !1;
   if (t.data && ("NEEDS_UPGRADE" === t.data.reason || "NEEDS_PAYMENT" === t.data.reason)) {
-    if (DQ(Pw.GROUP_7)) e.dispatch(to({
+    if (DQ(Pw.GROUP_7)) e.dispatch(showModalHandler({
       type: _$$t2,
       data: {
         teamId: i,
@@ -333,12 +333,12 @@ function W(e, t, i) {
         canEdit: hasEditorRoleAccessOnTeam(i, n),
         canAdmin: hasAdminRoleAccessOnTeam(i, n)
       };
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: oE,
         data: {
           team: t,
           editorType: null,
-          upsellSource: _$$b.ADD_EDITOR
+          upsellSource: UpsellModalType.ADD_EDITOR
         }
       }));
     }
@@ -358,26 +358,26 @@ function Y(e, t) {
     user,
     modalShown
   } = e.getState();
-  e.dispatch(AS());
-  e.dispatch(to({
+  e.dispatch(hideModalHandler());
+  e.dispatch(showModalHandler({
     type: M,
     data: {
       roleToRemove: t,
       onConfirmRemove: () => {
         user && t.user_id === user.id ? e.dispatch(sf({
           view: "recentsAndSharing"
-        })) : modalShown && e.dispatch(to(modalShown));
+        })) : modalShown && e.dispatch(showModalHandler(modalShown));
         e.dispatch(G({
           role: t
         }));
       },
       onCancel: () => {
-        modalShown && e.dispatch(to(modalShown));
+        modalShown && e.dispatch(showModalHandler(modalShown));
       }
     }
   }));
 }
-let $$q0 = nF((e, {
+let $$q0 = createOptimistThunk((e, {
   role: t,
   level: i,
   seenState: n,
@@ -405,7 +405,7 @@ let $$q0 = nF((e, {
     role: t
   })) : Y(e, t);
 });
-let $$$2 = nF((e, {
+let $$$2 = createOptimistThunk((e, {
   role: t,
   level: i
 }) => {
@@ -418,7 +418,7 @@ let $$$2 = nF((e, {
     role: t
   })) : Y(e, t);
 });
-let $$Z1 = nF((e, {
+let $$Z1 = createOptimistThunk((e, {
   role: t,
   level: i
 }) => {
@@ -431,7 +431,7 @@ let $$Z1 = nF((e, {
     role: t
   })) : Y(e, t);
 });
-let $$X3 = nF((e, {
+let $$X3 = createOptimistThunk((e, {
   role: t,
   level: i
 }) => {
@@ -443,7 +443,7 @@ let $$X3 = nF((e, {
       ...t,
       level: i
     }
-  })) : !t.pending && user && t.user_id === user.id ? e.dispatch(to({
+  })) : !t.pending && user && t.user_id === user.id ? e.dispatch(showModalHandler({
     type: _$$p,
     data: {
       teamId: t.resource_id_or_key

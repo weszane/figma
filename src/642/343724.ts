@@ -7,7 +7,7 @@ import { f as _$$f } from "../905/257420";
 import { _ as _$$_ } from "../905/821768";
 import { _ as _$$_2 } from "../905/862468";
 import { g as _$$g } from "../905/687265";
-import { glU, rcl, uQ6 } from "../figma_app/763686";
+import { Fullscreen, Command, ActionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
@@ -108,9 +108,9 @@ function A(e) {
   let s = useAtomWithSubscription(X);
   let i = "collapse-layers";
   let l = () => {
-    glU?.triggerActionEnumInUserEditScope(rcl.COLLAPSE_LAYERS, {});
+    Fullscreen?.triggerActionEnumInUserEditScope(Command.COLLAPSE_LAYERS, {});
   };
-  if (A0(uQ6.LAYERS_PANEL_OVERFLOW_MENU)) {
+  if (A0(ActionType.LAYERS_PANEL_OVERFLOW_MENU)) {
     let s = [{
       displayText: _$$A(i),
       callback: l,
@@ -122,7 +122,7 @@ function A(e) {
       displayText: _$$A("auto-rename-layers"),
       callback: () => {
         Br({
-          source: uQ6.LAYERS_PANEL_OVERFLOW_MENU,
+          source: ActionType.LAYERS_PANEL_OVERFLOW_MENU,
           trackingDataSource: "layers_panel_overflow_menu"
         });
       },

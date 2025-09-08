@@ -5,7 +5,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { Rq, wp } from "../905/283918";
 import { V } from "../905/666831";
 import { l9 } from "../905/145989";
@@ -14,7 +14,7 @@ import { SB, hz, QC, fi } from "../905/461516";
 let n;
 let p = new class {
   constructor() {
-    this.SpellCheckWordsSchemaValidator = vh();
+    this.SpellCheckWordsSchemaValidator = createNoOpValidator();
   }
   getSpellCheckWords() {
     return this.SpellCheckWordsSchemaValidator.validate(async ({

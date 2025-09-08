@@ -4,7 +4,7 @@ import { E as _$$E } from "../905/632989";
 import { J } from "../905/614223";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -176,7 +176,7 @@ function B({
   }), [e, p]);
   let b = useAtomWithSubscription(y);
   let v = !_ && (e.value?.ancestorOfSelectedNode || A || !!e.value?.isRootFrame || g);
-  let I = !!a && a !== AD;
+  let I = !!a && a !== defaultSessionLocalIDString;
   let E = useMemo(() => {
     if (aR(e) && e.value.rect) {
       let t = e.value;
@@ -241,8 +241,8 @@ let V = ({
   isSelected: t,
   descendantsCount: 0
 });
-let G = (e, t) => !!t && t !== AD && !!e && (t === e.afterNodeId || t === e.beforeNodeId);
-let z = (e, t) => !!t && t !== AD && !!e && (t === e.afterNodeId || t === e.beforeNodeId);
+let G = (e, t) => !!t && t !== defaultSessionLocalIDString && !!e && (t === e.afterNodeId || t === e.beforeNodeId);
+let z = (e, t) => !!t && t !== defaultSessionLocalIDString && !!e && (t === e.afterNodeId || t === e.beforeNodeId);
 function H(e) {
   let {
     rootBox,

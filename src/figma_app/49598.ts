@@ -1,10 +1,10 @@
 import { ZS } from "../figma_app/519839";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ez5, X3B, bOM } from "../figma_app/763686";
+import { AppStateTsApi, PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
@@ -25,12 +25,12 @@ import { F as _$$F } from "../905/302958";
 import { wr } from "../figma_app/387599";
 import { Sb } from "../905/359847";
 import { m as _$$m } from "../905/909123";
-import { nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { d6 } from "../figma_app/530167";
 import { oB, sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
 import { u as _$$u } from "../905/747030";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Hx } from "../figma_app/147952";
 import { uo } from "../905/98702";
 import { M5 } from "../figma_app/350203";
@@ -45,7 +45,7 @@ import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { aB } from "../905/576221";
 import { N as _$$N2 } from "../905/696711";
-import { m as _$$m2 } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { AC, x6, jO } from "../figma_app/803787";
 import { rR, sK } from "../figma_app/598018";
 import { aP } from "../figma_app/10554";
@@ -78,14 +78,14 @@ let ey = e => {
   e.dispatch(Ts({
     origin
   }));
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: _$$x2,
     data: {
       headerText: t
     }
   }));
 };
-let $$eb16 = nF((e, t, {
+let $$eb16 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = e.getState();
@@ -135,7 +135,7 @@ let $$eb16 = nF((e, t, {
 }, ({
   hubFileId: e
 }) => `DUPLICATE_HUB_FILE_${e}`);
-let $$eT18 = nF((e, t) => {
+let $$eT18 = createOptimistThunk((e, t) => {
   let {
     canRetry = !0
   } = t;
@@ -150,7 +150,7 @@ let $$eT18 = nF((e, t) => {
       type: sK.ADD_FILE,
       editorType: a
     })) {
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: _$$Y,
         data: {
           teamId: i.id,
@@ -213,7 +213,7 @@ let $$eT18 = nF((e, t) => {
     e.dispatch(_$$F.enqueue(i));
   });
 });
-let $$eI20 = nF(async (e, {
+let $$eI20 = createOptimistThunk(async (e, {
   hubFileId: t,
   callback: r
 }, {
@@ -265,7 +265,7 @@ let $$eI20 = nF(async (e, {
 }, ({
   hubFileId: e
 }) => `HUB_FILE_GET_VERSIONS_${e}`);
-let $$eS17 = nF(async (e, {
+let $$eS17 = createOptimistThunk(async (e, {
   fileKey: t
 }) => {
   getInitialOptions().user_data && (await _$$D.getHubFileMetadata({
@@ -309,7 +309,7 @@ let {
   clearMetadataAndStatus,
   clearMetadata
 } = $$ev22;
-let $$ew13 = nF((e, t) => {
+let $$ew13 = createOptimistThunk((e, t) => {
   let r = [];
   let n = t.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE;
   if (n) {
@@ -360,9 +360,9 @@ let $$ew13 = nF((e, t) => {
     if (!n || null === ep) return;
     let s = AC(e.getState());
     let l = Object.values(jO(e.getState(), _$$o.HUBFILE)).map(e => e.node_id);
-    let d = Ez5.slideThemeLibBindings().renameThemeForTemplatePublish(t.name) ? l : s;
+    let d = AppStateTsApi.slideThemeLibBindings().renameThemeForTemplatePublish(t.name) ? l : s;
     if (d.length > 0) {
-      r.library_key && Ez5?.canvasGrid().updateSourceLibraryKey(_$$l(r.library_key));
+      r.library_key && AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(r.library_key));
       let {
         onPublishSuccess,
         onPublishProgress,
@@ -427,8 +427,8 @@ async function eO(e, t) {
     customCarouselThumbnail
   } = t;
   if (authorOrgId && authorTeamId) throw Error(getI18nString("community.actions.attempting_to_set_both_author_org_id_and_author_team_id_while_publishing"));
-  if (viewerMode === FTemplateCategoryType.PROTOTYPE && X3B.firstPagePrototypeStatus() !== bOM.VALID) throw Error(getI18nString("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"));
-  let O = await _$$m2(fileKey, "Published to Community hub", description, e.dispatch).then(e => e.id).catch(e => {
+  if (viewerMode === FTemplateCategoryType.PROTOTYPE && PrototypingTsApi.firstPagePrototypeStatus() !== PresentationValidationStatus.VALID) throw Error(getI18nString("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"));
+  let O = await maybeCreateSavepoint(fileKey, "Published to Community hub", description, e.dispatch).then(e => e.id).catch(e => {
     reportError(_$$e.COMMUNITY, e);
     return Error(e.data?.message || getI18nString("community.actions.could_not_connect_to_the_server"));
   });
@@ -478,7 +478,7 @@ async function eO(e, t) {
     })));
   }
 }
-let $$eR4 = nF(async (e, {
+let $$eR4 = createOptimistThunk(async (e, {
   payload: t,
   onSuccess: r
 }) => {
@@ -571,7 +571,7 @@ let eL = async e => {
     fileKey: t
   });
 };
-let $$eP10 = nF((e, {
+let $$eP10 = createOptimistThunk((e, {
   hubFileId: t,
   redirectLink: r,
   onSuccess: i,
@@ -595,7 +595,7 @@ let $$eP10 = nF((e, {
     a?.();
   });
 });
-let $$eD23 = MM("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
+let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
   hubFileId: t,
   viewContext: r
 }, {
@@ -604,7 +604,7 @@ let $$eD23 = MM("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
   XHR.post(`/api/hub_files/v2/${t}/copy`).then(({
     data: i
   }) => {
-    e.dispatch(_$$c(n));
+    e.dispatch(createOptimistCommitAction(n));
     let a = i.meta;
     let s = _$$to(a);
     s = dR(s, {
@@ -618,7 +618,7 @@ let $$eD23 = MM("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
       searchSessionId: wr(e.getState())
     });
   }).catch(t => {
-    e.dispatch(_$$r(n));
+    e.dispatch(createOptimistRevertAction(n));
     e.dispatch(_$$F.enqueue({
       message: getI18nString("community.actions.unable_to_duplicate", {
         error: _$$J(t, t.data.message)
@@ -640,7 +640,7 @@ let ek = M4.Mutation(({
 }), _$$H.likeHubFile({
   id: e
 })));
-let $$eM24 = nF((e, {
+let $$eM24 = createOptimistThunk((e, {
   hubFileId: t
 }, {
   loadingKey: r
@@ -687,7 +687,7 @@ let eF = M4.Mutation(({
 }), _$$H.unlikeHubFile({
   id: e
 })));
-let $$ej6 = nF((e, {
+let $$ej6 = createOptimistThunk((e, {
   hubFileId: t,
   likeId: r
 }, {
@@ -712,13 +712,13 @@ let $$ej6 = nF((e, {
     }
   }, i);
 }, e => `UNLIKE_HUB_FILE_${e}`);
-let $$eU21 = nF((e, {
+let $$eU21 = createOptimistThunk((e, {
   hubFileId: t
 }) => XHR.post(`/api/hub_files/${t}/view`, {
   hubFileId: t
 }));
 let eB = {};
-let $$eG14 = nF(async (e, {
+let $$eG14 = createOptimistThunk(async (e, {
   hubFileId: t
 }) => {
   let r = e.getState();
@@ -738,7 +738,7 @@ let $$eG14 = nF(async (e, {
     });
   })));
 });
-let $$eV19 = nF((e, t) => {
+let $$eV19 = createOptimistThunk((e, t) => {
   (t === G4.FULLSCREEN || t === G4.FULLSCREEN_WITH_COMMENTS) && (trackEventAnalytics("Context Viewed", {
     name: "hub-file-canvas-enter-fullscreen"
   }), t === G4.FULLSCREEN_WITH_COMMENTS && trackEventAnalytics("CTA Clicked", {

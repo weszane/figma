@@ -18,12 +18,12 @@ import { p as _$$p } from "../905/300815";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { e0 } from "../905/696396";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 class w {
   constructor() {
-    this.AuthOptionsValidator = vh();
+    this.AuthOptionsValidator = createNoOpValidator();
   }
   getAuthMethods(e, t) {
     return this.AuthOptionsValidator.validate(async ({
@@ -38,7 +38,7 @@ let C = null;
 export function $$T2() {
   return null === document.querySelector('[data-component-name="auth-view"]');
 }
-let $$k5 = nF((e, {
+let $$k5 = createOptimistThunk((e, {
   resp: t
 }) => {
   let i;
@@ -88,7 +88,7 @@ let $$k5 = nF((e, {
     invalidInput: n
   }));
 });
-let $$R1 = nF((e, {
+let $$R1 = createOptimistThunk((e, {
   data: t
 }) => {
   let i = e.getState();
@@ -180,7 +180,7 @@ export function $$B0({
   i.searchParams.set("cont", t);
   Ay.redirect(i.toString());
 }
-export let $$V6 = nF((e, {
+export let $$V6 = createOptimistThunk((e, {
   formId: t
 }) => {
   _$$g("sms_recover_attempt", e.getState().auth.origin);

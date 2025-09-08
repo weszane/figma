@@ -1,5 +1,5 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Uv } from "../figma_app/91703";
 import { zK } from "../figma_app/913823";
 import { sw } from "../figma_app/914957";
@@ -8,7 +8,7 @@ import { CX } from "../905/557338";
 import { n as _$$n } from "../905/64411";
 let $$u0 = NC("SHOW_INSTANCE_SWAP_PICKER");
 let $$p1 = NC("HIDE_INSTANCE_SWAP_PICKER");
-let $$m2 = nF((e, t) => {
+let $$m2 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let {
     instanceSwapPickerShown

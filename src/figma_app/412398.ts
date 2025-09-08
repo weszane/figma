@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { XJn, Vzr } from "../figma_app/763686";
+import { FirstDraftHelpers, Thumbnail } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { ET } from "../905/623179";
 import { reportError } from "../905/11";
@@ -29,7 +29,7 @@ function m(e) {
   return e && e !== E8.DELETED && e !== E8.NOT_STAGED;
 }
 export async function $$g0(e, t, r, n, s) {
-  let o = XJn.getKitKey(e);
+  let o = FirstDraftHelpers.getKitKey(e);
   if (!o) return;
   let c = r.publishType;
   let p = c === tf.LOCAL_GENERATION;
@@ -38,7 +38,7 @@ export async function $$g0(e, t, r, n, s) {
   let E = {};
   let y = await vg(e);
   let b = {};
-  let T = XJn.getLocalExamples(e, g);
+  let T = FirstDraftHelpers.getLocalExamples(e, g);
   let I = {};
   let S = pX();
   let v = {};
@@ -157,7 +157,7 @@ async function f(e) {
   if (0 === e.length) return t;
   let r = {};
   for (let t of e) {
-    let [e, n] = Vzr.generateThumbnailForNode(t.nodeId, 768, 768, 1, {});
+    let [e, n] = Thumbnail.generateThumbnailForNode(t.nodeId, 768, 768, 1, {});
     r[t.key] = n;
   }
   let a = (await b.getUploadThumbnailsPresignedPostUrls(Object.keys(r).length)).data.meta.presigned_posts;

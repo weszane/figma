@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createRef, useState, useEffect, memo, useCallback } from "react";
-import { Ez5, lyf } from "../figma_app/763686";
+import { AppStateTsApi, ViewType } from "../figma_app/763686";
 import { tH, H4 } from "../905/751457";
 import { tt, iT } from "../figma_app/74165";
 import { k as _$$k } from "../figma_app/564183";
 import { qw } from "../figma_app/740163";
-import { q as _$$q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { R as _$$R } from "../figma_app/941983";
 import { TY } from "../figma_app/701001";
 import { aV, p8 } from "../figma_app/722362";
@@ -41,8 +41,8 @@ import { A as _$$A2 } from "../b2835def/491732";
 import { oW } from "../905/675859";
 import { sx as _$$sx } from "../905/941192";
 import { FU } from "../905/26824";
-import { to } from "../905/156213";
-import { Y5 } from "../figma_app/455680";
+import { showModalHandler } from "../905/156213";
+import { fullscreenValue } from "../figma_app/455680";
 import { kA, IO } from "../905/962318";
 import { Point } from "../905/736624";
 import { Ao } from "../905/748636";
@@ -52,10 +52,10 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo } from "../figma_app/272243";
 import ey from "../vendor/197638";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { V as _$$V } from "../905/506207";
 import { Dm } from "../figma_app/8833";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { lY } from "../figma_app/779965";
 import { bo } from "../figma_app/447445";
 import { v2 } from "../1528/88743";
@@ -411,14 +411,14 @@ function ea() {
   let t = [{
     label: getI18nString("help_widget.menu.change_keyboard_layout"),
     onClick: function () {
-      Y5.isReady() && (e(FU({
+      fullscreenValue.isReady() && (e(FU({
         tab: "layout"
-      })), Y5.triggerAction("toggle-keyboard-shortcuts"));
+      })), fullscreenValue.triggerAction("toggle-keyboard-shortcuts"));
     }
   }, {
     label: getI18nString("help_widget.menu.change_languages"),
     onClick: function () {
-      e(to({
+      e(showModalHandler({
         type: kA,
         data: {
           source: IO.HELP
@@ -428,7 +428,7 @@ function ea() {
   }, {
     label: getI18nString("help_widget.menu.keyboard_shortcuts"),
     onClick: () => {
-      Y5.isReady() && Y5.triggerAction("toggle-keyboard-shortcuts");
+      fullscreenValue.isReady() && fullscreenValue.triggerAction("toggle-keyboard-shortcuts");
     }
   }].map(e => jsx(el, {
     option: e
@@ -779,7 +779,7 @@ function eA({
   let {
     inProductHelpViewType
   } = A5();
-  let s = J2(Ez5.uiState().inProductHelpSidePanelWidth);
+  let s = getObservableOrFallback(AppStateTsApi.uiState().inProductHelpSidePanelWidth);
   return "side_panel" !== inProductHelpViewType ? null : jsx(_$$V, {
     children: jsx(bo, {
       children: jsx(lY, {
@@ -787,8 +787,8 @@ function eA({
         size: s,
         onResize: e => {
           !function (e) {
-            let t = qE(e, Jm, tL);
-            Ez5?.uiState().inProductHelpSidePanelWidth.set(t);
+            let t = clamp(e, Jm, tL);
+            AppStateTsApi?.uiState().inProductHelpSidePanelWidth.set(t);
           }(e);
         },
         side: "left",
@@ -841,13 +841,13 @@ export function $$eO0({
   children: t
 }) {
   let s = aV();
-  let g = _$$q();
+  let g = useFullscreenReady();
   let f = p8("topLevelMode");
   let x = iZ();
   let y = s ? _$$R.topLevelMode : f;
   let _ = TY();
   let b = _$$k();
-  let C = y === lyf.LAYOUT || y === lyf.BRANCHING || _ || !!x && y === lyf.PREVIEW || y === lyf.HISTORY;
+  let C = y === ViewType.LAYOUT || y === ViewType.BRANCHING || _ || !!x && y === ViewType.PREVIEW || y === ViewType.HISTORY;
   let j = qw();
   tt();
   let {

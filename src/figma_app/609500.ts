@@ -5,9 +5,9 @@ import { renderI18nText } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { A as _$$A } from "../905/351112";
 import { gI } from "../figma_app/399472";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { EL } from "../figma_app/740025";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { XU } from "../figma_app/756995";
 import { aA, Ke } from "../905/636775";
 import { H } from "../figma_app/441663";
@@ -45,7 +45,7 @@ export function $$b0({
   } = Di();
   let E = useMemo(() => e.map(e => ({
     widget: e,
-    version: uF(e)
+    version: getPluginVersion(e)
   })), [e]);
   let y = useCallback(({
     version: e
@@ -56,7 +56,7 @@ export function $$b0({
   let v = useCallback(e => {
     if (1 !== e.length) return;
     let r = e[0].widget;
-    t(to({
+    t(showModalHandler({
       type: H,
       data: {
         plugin: r

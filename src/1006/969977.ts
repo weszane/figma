@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { nc } from "../905/189185";
+import { scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { UJ } from "../figma_app/815945";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -105,7 +105,7 @@ function S({
   item: t
 }) {
   let n = E3();
-  let l = nc.user("widget-select-color", n => {
+  let l = scopeAwareFunction.user("widget-select-color", n => {
     let o = colorToHex(n.option);
     _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, f[o] ?? o);
   });
@@ -155,7 +155,7 @@ function H({
     label: t.tooltip,
     propertyName: t.propertyName,
     icon: t.icon,
-    onClick: nc.user("widget-action", () => {
+    onClick: scopeAwareFunction.user("widget-action", () => {
       _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, null);
     })
   });
@@ -222,7 +222,7 @@ function z({
     propertyName: t.propertyName,
     icon: t.icon,
     active: t.isToggled ? "LOUD" : "NONE",
-    onClick: nc.user("widget-toggle", () => {
+    onClick: scopeAwareFunction.user("widget-toggle", () => {
       _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, null);
     })
   });

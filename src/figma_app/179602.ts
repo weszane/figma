@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { _8, dL } from "../figma_app/530167";
 import { s as _$$s } from "../905/608932";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { y as _$$y } from "../905/617004";
 import { d_ } from "../figma_app/918700";
 import { tB, bV, Iy } from "../905/318500";
@@ -107,7 +107,7 @@ export function $$f1(e) {
     }), x, N]
   });
 }
-export let $$E0 = Ju(function (e) {
+export let $$E0 = registerModal(function (e) {
   return jsx(d_, {
     className: Iy,
     popStack: !0,

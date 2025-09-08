@@ -6,7 +6,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, nB, hE } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { K as _$$K } from "../905/443068";
-import { S as _$$S } from "../905/274480";
+import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
 import { $n } from "../905/521428";
 import { R as _$$R } from "../905/621802";
@@ -656,7 +656,7 @@ function em() {
     className: _$$s.flex.flexColumn.hFull.borderBox.gap16.p16.$,
     children: [jsx("div", {
       className: _$$s.flex.flexRow.gap8.$,
-      children: jsx(_$$S, {
+      children: jsx(Checkbox, {
         checked: e,
         onChange: () => t(!e),
         label: jsx("label", {

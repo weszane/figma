@@ -12,21 +12,21 @@ import { J } from "../905/231762";
 import { H as _$$H } from "../5885/54359";
 import { VB } from "../figma_app/361035";
 import { _l } from "../figma_app/976345";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { _J } from "../figma_app/314264";
 import { P8 } from "../figma_app/475472";
 import { fD, Rq, ne } from "../figma_app/345997";
 import { R_ } from "../5885/399780";
 import { FEditorType } from "../figma_app/53721";
-import { tY, tn } from "../figma_app/831101";
+import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
 import { SC, Sc } from "../figma_app/707808";
 import { C as _$$C } from "../5885/53111";
 import { I2, Je, Lo, Ay as _$$Ay2, Qg, WG } from "../figma_app/482142";
 import { yJ } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
-let $$R2 = nF((e, {
+let $$R2 = createOptimistThunk((e, {
   teamId: t,
   teamName: i,
   previousView: a
@@ -38,7 +38,7 @@ let $$R2 = nF((e, {
     previousView: a
   }));
 });
-let $$N0 = nF((e, t) => {
+let $$N0 = createOptimistThunk((e, t) => {
   let {
     promoCode,
     teamId,
@@ -59,7 +59,7 @@ let $$N0 = nF((e, t) => {
     e.dispatch(_$$s.error(getI18nString("flash.redeem_promo.failure")));
   });
 });
-let $$k1 = nF((e, t) => {
+let $$k1 = createOptimistThunk((e, t) => {
   let {
     teamId,
     surveyResult
@@ -99,7 +99,7 @@ let $$k1 = nF((e, t) => {
     R_.trackInitiationSubmit(surveyResult, !1);
   });
 });
-let $$D3 = nF((e, {
+let $$D3 = createOptimistThunk((e, {
   teamName: t,
   invites: i,
   teamId: h,
@@ -222,7 +222,7 @@ let $$D3 = nF((e, {
           view: "team",
           teamId: a.id
         }));
-        e.dispatch(to({
+        e.dispatch(showModalHandler({
           type: _$$C,
           data: {
             teamId: a.id
@@ -263,7 +263,7 @@ let $$D3 = nF((e, {
       userInitiated: !1
     }));
     a.student_team && e.dispatch(Lo({
-      billingPeriod: tY.UNSPECIFIED
+      billingPeriod: SubscriptionType.UNSPECIFIED
     }));
     F.payment.promo && (_H(), e.dispatch(_$$Ay2({
       promo: null
@@ -316,7 +316,7 @@ let $$D3 = nF((e, {
         view: "teamUpgrade",
         teamFlowType: t ? SC.UPGRADE_EXISTING_TEAM : SC.CREATE_AND_UPGRADE,
         teamId: t || i.freeTeamId || null,
-        paymentStep: tn.PAYMENT_AND_ADDRESS,
+        paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS,
         previousView: X.previousView,
         planType: Sc.TEAM,
         ...(r ? {

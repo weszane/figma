@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { m1T } from "../figma_app/763686";
+import { LayoutTabType } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -11,7 +11,7 @@ import { ZC } from "../figma_app/39751";
 import { LU, jw } from "../figma_app/327588";
 import { Lk, x } from "../figma_app/639711";
 import { gI, Pc } from "../figma_app/396464";
-import { hS, oV } from "../905/216495";
+import { isValidValue, MIXED_MARKER } from "../905/216495";
 import { y7 } from "../figma_app/385874";
 import { KH, eY } from "../figma_app/722362";
 import { uN } from "../figma_app/646357";
@@ -83,15 +83,15 @@ function P(e) {
   let t = getFeatureFlags().buzz_video_export;
   let r = null;
   let n = null;
-  if (hS(r) || null === r) {
+  if (isValidValue(r) || null === r) {
     let i = [null, null];
     e.forEach((e, r) => {
       ("IMAGE" === e.type || t && "VIDEO" === e.type) && (i = [e, r]);
     });
-    i && null === r ? (r = i[0], n = i[1]) : i && r !== i[0] && (r = oV, n = null);
+    i && null === r ? (r = i[0], n = i[1]) : i && r !== i[0] && (r = MIXED_MARKER, n = null);
   }
   return {
-    mediaPaint: r && hS(r) ? y7(r) : r,
+    mediaPaint: r && isValidValue(r) ? y7(r) : r,
     mediaPaintIndex: n
   };
 }
@@ -166,7 +166,7 @@ export function $$U7() {
   }, [t, a, g, f, l, E, r]);
 }
 export function $$B17() {
-  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COOPER_BULK_CREATE);
+  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COOPER_BULK_CREATE);
 }
 export function $$G5(e) {
   return Fk((e, t) => {

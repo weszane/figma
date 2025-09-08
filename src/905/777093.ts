@@ -1,5 +1,5 @@
 import { kiwiParserCodec } from "../905/294864";
-import { jXp, vXe } from "../figma_app/763686";
+import { FontSourceType, Fonts } from "../figma_app/763686";
 import { K, rj, V1, T_, D7, qI, cp } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
@@ -14,20 +14,20 @@ import { logWarning, logError } from "../905/714362";
 import { XHR, getRequest } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { Wl } from "../figma_app/88239";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { $A } from "../905/782918";
 import { D as _$$D } from "../905/347702";
 let n;
 let v = XHR.requiredHeaders;
 let I = new class {
   constructor() {
-    this.FontsSchemaValidator = vh();
-    this.FileSchemaValidator = vh();
+    this.FontsSchemaValidator = createNoOpValidator();
+    this.FileSchemaValidator = createNoOpValidator();
   }
   getFonts(e) {
     return this.FontsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/fonts", td.toAPIParameters(e || {})));
+    }) => await t.get("/api/fonts", APIParameterUtils.toAPIParameters(e || {})));
   }
   getFile(e) {
     let {
@@ -38,7 +38,7 @@ let I = new class {
     return fileHasParentOrg ? this.FileSchemaValidator.validate(async ({
       xr: r
     }) => {
-      let a = await r.get(`/api/fonts/file/${e.fileKey}`, td.toAPIParameters(n), {
+      let a = await r.get(`/api/fonts/file/${e.fileKey}`, APIParameterUtils.toAPIParameters(n), {
         headers: {
           ...v,
           Accept: "text/plain"
@@ -99,7 +99,7 @@ let N = _$$D(() => {
         return (e.styles || []).map(i => {
           let n = i.variationAxisValues && Object.fromEntries(i.variationAxisValues.map(e => [e.tag, e.value]));
           return {
-            source: jXp.GOOGLE,
+            source: FontSourceType.GOOGLE,
             id: `${e.filename}_${e.version}`,
             family: e.family,
             style: i.name,
@@ -160,7 +160,7 @@ async function P() {
   };
 }
 export function $$O11(e) {
-  for (let t of e) if ("Artifakt Element" === t.family && "Thin" === t.style ? t.weight = 100 : "Artifakt Element" === t.family && "Extra Light" === t.style && (t.weight = 200), "Avenir" === t.family && t.source === jXp.LOCAL) switch (t.style) {
+  for (let t of e) if ("Artifakt Element" === t.family && "Thin" === t.style ? t.weight = 100 : "Artifakt Element" === t.family && "Extra Light" === t.style && (t.weight = 200), "Avenir" === t.family && t.source === FontSourceType.LOCAL) switch (t.style) {
     case "Book":
     case "Book Oblique":
       t.weight = 350;
@@ -180,7 +180,7 @@ export function $$O11(e) {
   }(t.style) && (t.italic = !0);
   return e;
 }
-export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
+export async function $$D5(e = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
   let t = {
     localizedToUnlocalized: [],
     sources: [],
@@ -192,7 +192,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
   };
   let i = e.map(e => {
     switch (e) {
-      case jXp.LOCAL:
+      case FontSourceType.LOCAL:
         return function () {
           let e;
           let t = e => (C = `${e.origin}/figma`, console.log("[Local fonts] using agent"), {
@@ -265,7 +265,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
                   italic: l.italic,
                   postscript: l.postscript,
                   id: i,
-                  source: jXp.LOCAL,
+                  source: FontSourceType.LOCAL,
                   useFontOpticalSize: !1,
                   modifiedAt: l.modified_at,
                   userInstalled: l.user_installed
@@ -277,21 +277,21 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
             return {
               list: n,
               localizedToUnlocalized: t,
-              sources: [jXp.LOCAL],
+              sources: [FontSourceType.LOCAL],
               localFontAgentVersion: r,
               localFontsModifiedAt: s,
               localModifiedFonts: c
             };
           }).catch(e => null);
         }().then(e => {
-          null !== e && (t.localizedToUnlocalized = e.localizedToUnlocalized, e.localFontAgentVersion && (t.localFontAgentVersion = e.localFontAgentVersion), e.list && (t.localFontsList = $$O11(e.list)), t.sources.push(jXp.LOCAL), t.localModifiedFonts = e.localModifiedFonts, t.localFontsModifiedAt = e.localFontsModifiedAt, t.timing = {
+          null !== e && (t.localizedToUnlocalized = e.localizedToUnlocalized, e.localFontAgentVersion && (t.localFontAgentVersion = e.localFontAgentVersion), e.list && (t.localFontsList = $$O11(e.list)), t.sources.push(FontSourceType.LOCAL), t.localModifiedFonts = e.localModifiedFonts, t.localFontsModifiedAt = e.localFontsModifiedAt, t.timing = {
             ...t.timing,
             ...e.timing
           });
         }).catch(e => {
           console.error("Error fetching local fonts", e);
         }).then(() => {});
-      case jXp.GOOGLE:
+      case FontSourceType.GOOGLE:
         return N().then(e => {
           if (null === e) {
             if (!n) return [];
@@ -301,7 +301,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
             let i = (e.list || []).filter(e => "Inter" === e.family).map(e => {
               let t = "Semi Bold" === e.style ? "Semibold" : e.style;
               return {
-                source: jXp.GOOGLE,
+                source: FontSourceType.GOOGLE,
                 id: qI,
                 postscript: e.postscript,
                 family: rj,
@@ -316,7 +316,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
             });
             t.indexFakeFontsList = i;
           }
-          t.sources.push(jXp.GOOGLE);
+          t.sources.push(FontSourceType.GOOGLE);
           t.timing = {
             ...t.timing,
             ...e.timing
@@ -324,21 +324,21 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
         }).catch(e => {
           console.error("Error fetching index fonts", e);
         }).then(() => {});
-      case jXp.SHARED:
+      case FontSourceType.SHARED:
         return $$L6().then(e => {
-          null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(jXp.SHARED));
+          null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(FontSourceType.SHARED));
         }).catch(e => {
           console.error("Error fetching shared fonts", e);
         });
       default:
         return $$L6(e.fileKey).then(e => {
-          null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(jXp.SHARED));
+          null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(FontSourceType.SHARED));
         }).catch(t => {
           console.error("Error fetching shared fonts for filekey", t, e.fileKey);
         });
     }
   });
-  if (await Promise.all(i), e.includes(jXp.GOOGLE) && !t.indexFontsList) throw Error("fetchFontList(): no results");
+  if (await Promise.all(i), e.includes(FontSourceType.GOOGLE) && !t.indexFontsList) throw Error("fetchFontList(): no results");
   return t;
 }
 export function $$L6(e = null) {
@@ -366,7 +366,7 @@ export async function $$$$M0() {
     family: "Roboto Mono",
     style: "Regular"
   }];
-  let t = ((await $$D5([jXp.GOOGLE])).indexFontsList || []).filter(t => {
+  let t = ((await $$D5([FontSourceType.GOOGLE])).indexFontsList || []).filter(t => {
     for (let i of e) if (t.family === i.family && t.style === i.style) return !0;
     return !1;
   }).map(async e => {
@@ -390,20 +390,20 @@ export async function $$$$M0() {
 }
 export async function $$j3(e) {
   if (!e.id) throw Error("Invalid font id");
-  if (e.source === jXp.LOCAL && desktopAPIInstance && !getFeatureFlags().desktop_use_agent) return desktopAPIInstance.getFontFile(e.id, e.postscriptName);
+  if (e.source === FontSourceType.LOCAL && desktopAPIInstance && !getFeatureFlags().desktop_use_agent) return desktopAPIInstance.getFontFile(e.id, e.postscriptName);
   let t = null;
   let i = !1;
   switch (e.source) {
-    case jXp.LOCAL:
+    case FontSourceType.LOCAL:
       C && (i = !0, t = `${C}/font-file?file=${encodeURIComponent(e.id)}&freetype_minimum_api_version=20`);
       break;
-    case jXp.GOOGLE:
+    case FontSourceType.GOOGLE:
       i = !0;
       t = cp(e.id, {
         shouldUseLocalFontIndex: !!getFeatureFlags().font_index_use_local
       });
       break;
-    case jXp.SHARED:
+    case FontSourceType.SHARED:
       e.fileKey ? t = `/api/fonts/${e.id}/file/${e.fileKey}` : e.teamId ? t = `/api/fonts/${e.id}/team/${e.teamId}` : e.orgId && (t = `/api/fonts/${e.id}/org/${e.orgId}`);
   }
   if (!t) {
@@ -465,14 +465,14 @@ export function $$U4(e, t, i, n, r) {
       }
     }).then(({
       data: e
-    }) => (vXe.hasInFontList({
+    }) => (Fonts.hasInFontList({
       list: n,
       localizedToUnlocalized: [],
       renames: {
         family: {},
         style: {}
       }
-    }) || vXe.addToFontList({
+    }) || Fonts.addToFontList({
       list: n,
       localizedToUnlocalized: [],
       renames: {
@@ -489,7 +489,7 @@ export function $$V13() {
   S = !0;
 }
 export function $$G7(e) {
-  return (e?.sources || []).includes(jXp.LOCAL) && (e?.localFontsList?.length || 0) > 0;
+  return (e?.sources || []).includes(FontSourceType.LOCAL) && (e?.localFontsList?.length || 0) > 0;
 }
 let $$z2 = {
   list: [],
@@ -573,9 +573,9 @@ export function $$q12(e) {
   let i = (e.localFontsList || []).concat(e.sharedFontsList || []);
   if (e.indexFontsBinary) {
     let n = performance.now();
-    vXe.updateFontListBuffer(e.indexFontsBinary);
+    Fonts.updateFontListBuffer(e.indexFontsBinary);
     let r = performance.now();
-    vXe.updateFontList({
+    Fonts.updateFontList({
       list: i,
       localizedToUnlocalized: e.localizedToUnlocalized
     });
@@ -586,7 +586,7 @@ export function $$q12(e) {
   } else {
     i = i.concat(e.indexFontsList || []);
     let n = performance.now();
-    vXe.updateFontList({
+    Fonts.updateFontList({
       list: i,
       localizedToUnlocalized: e.localizedToUnlocalized,
       renames: e.renames,
@@ -598,7 +598,7 @@ export function $$q12(e) {
       jsonBinding: performance.now() - n
     };
   }
-  e.indexFakeFontsList && e.indexFakeFontsList.length > 0 && vXe.addToFontList({
+  e.indexFakeFontsList && e.indexFakeFontsList.length > 0 && Fonts.addToFontList({
     list: e.indexFakeFontsList,
     localizedToUnlocalized: []
   });

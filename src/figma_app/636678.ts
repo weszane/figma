@@ -5,9 +5,9 @@ import { u as _$$u } from "../905/911813";
 import { A as _$$A } from "../905/891805";
 import { _ as _$$_ } from "../905/607842";
 import { N as _$$N } from "../905/120979";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { RR } from "../figma_app/338442";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
@@ -128,8 +128,8 @@ export function $$w0(e) {
           type: ZU.CUSTOM_ACTION,
           customActionType: Wg.STANDARD_BUTTON,
           onClick: () => {
-            l7.user("reset-slot-assignment", () => {
-              glU?.resetComponentPropAssignmentForInstances([r], e.explicitDefID);
+            permissionScopeHandler.user("reset-slot-assignment", () => {
+              Fullscreen?.resetComponentPropAssignmentForInstances([r], e.explicitDefID);
             });
           },
           icon: jsx(_$$N, {}),

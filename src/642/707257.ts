@@ -2,12 +2,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId } from "react";
 import { debounce } from "../905/915765";
 import { bL, l9, mc, c$, wv } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { Pt } from "../figma_app/806412";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { Q } from "../905/346809";
 import { Zk, fI } from "../figma_app/626177";
@@ -37,7 +37,7 @@ export function $$y0(e) {
   });
 }
 function _(e, t = zk.YES) {
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     maskType: e
   }, {
     shouldCommit: t
@@ -92,11 +92,11 @@ function j({
     property: e,
     onChange: _
   });
-  let h = gl(e) || gl(valueBeforePreview);
+  let h = isInvalidValue(e) || isInvalidValue(valueBeforePreview);
   let m = h ? b : valueBeforePreview ?? e;
   let g = debounce(e => {
     if (e !== b) {
-      if (!e && valueBeforePreview && !gl(valueBeforePreview)) {
+      if (!e && valueBeforePreview && !isInvalidValue(valueBeforePreview)) {
         updatePreview(valueBeforePreview);
         return;
       }
@@ -115,7 +115,7 @@ function j({
     recordingKey: Pt(t, "maskType"),
     children: [jsx(l9, {
       width: "fill",
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText("fullscreen.mask_panel.mask")
       }),
       children: C.format(m)

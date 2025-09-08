@@ -4,7 +4,7 @@ import { IK } from "../905/521428";
 import { T } from "../905/632137";
 import o from "classnames";
 import { renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { GM } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
 import { B3 } from "../figma_app/862289";
@@ -56,7 +56,7 @@ export function $$b0({
                 source: "image_settings_swap_image_generate_new"
               }
             });
-            x(Ce());
+            x(hideModal());
           });
         },
         iconPrefix: jsx(T, {}),

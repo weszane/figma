@@ -1,12 +1,12 @@
 import { NC } from "../905/17179";
 import { k } from "../905/651849";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Q } from "../905/618914";
 import { FMemberRoleType } from "../figma_app/191312";
 import { gq } from "../905/276025";
 import { A8 } from "../figma_app/465071";
 import { Eh } from "../figma_app/617654";
-let $$u1 = nF(async (e, t) => {
+let $$u1 = createOptimistThunk(async (e, t) => {
   let i = e.getState();
   let n = i.orgDomains;
   let a = !1;
@@ -44,4 +44,4 @@ let $$p2 = NC("ORG_DOMAINS_IS_FETCHING");
 let $$m0 = NC("ORG_DOMAIN_SET_ALL");
 export const Au = $$m0;
 export const UK = $$u1;
-export const h8 = $$p2; 
+export const h8 = $$p2;

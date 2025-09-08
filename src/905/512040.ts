@@ -1,4 +1,4 @@
-import { Hyj, zkO } from "../figma_app/763686";
+import { WhiteboardTemplatePreviewCppBindings, SourceType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { bj } from "../figma_app/880974";
 import { j } from "../905/881708";
@@ -7,17 +7,17 @@ export class $$o0 extends j {
     super(e);
   }
   handleMouseMove(e) {
-    Hyj.hitTestTemplatePreview(e);
+    WhiteboardTemplatePreviewCppBindings.hitTestTemplatePreview(e);
   }
   handleMouseDown(e) {
-    Hyj.hitTestTemplatePreview(e) && e.accept(this);
+    WhiteboardTemplatePreviewCppBindings.hitTestTemplatePreview(e) && e.accept(this);
   }
   handleMouseUp(e) {
-    Hyj.hitTestTemplatePreview(e) && atomStoreManager.set(bj, {
+    WhiteboardTemplatePreviewCppBindings.hitTestTemplatePreview(e) && atomStoreManager.set(bj, {
       selectTemplateAfterCommit: !0,
       moveViewportAfterCommit: !1,
       priority: "user-visible",
-      editScopeType: zkO.USER
+      editScopeType: SourceType.USER
     });
   }
   handleMouseLeave(e) {}

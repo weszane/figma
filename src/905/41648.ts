@@ -9,19 +9,19 @@ import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { Ce, to, Lo } from "../905/156213";
+import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { XHR } from "../905/910117";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Lg, Lq } from "../figma_app/392626";
 let _ = new class {
   disconnect(e) {
     return XHR.put(`/api/resource_connection/${e}/disconnect`);
   }
 }();
-let b = Ju(function (e) {
+let b = registerModal(function (e) {
   let t = () => {
-    r(Ce());
+    r(hideModal());
   };
   let i = hS({
     ...e,
@@ -52,7 +52,7 @@ let b = Ju(function (e) {
                 variant: "link",
                 onClick: () => {
                   t();
-                  r(to({
+                  r(showModalHandler({
                     type: Lg(),
                     data: {
                       folderId: e.projectId,
@@ -74,12 +74,12 @@ let b = Ju(function (e) {
     })
   });
 }, "ResourceDisconnectSuccessModal");
-let $$v0 = Ju(function (e) {
+let $$v0 = registerModal(function (e) {
   let t = useDispatch();
   let i = hS(e);
   let [f, A] = useState(!1);
   let y = () => {
-    t(Ce());
+    t(hideModal());
   };
   return jsx(fu, {
     name: "Project Disconnect Modal",
@@ -125,7 +125,7 @@ let $$v0 = Ju(function (e) {
             children: [jsx($n, {
               variant: "secondary",
               onClick: () => {
-                t(Lo());
+                t(popModalStack());
               },
               children: renderI18nText("resource_connection.request_modal.cancel")
             }), f ? jsx($n, {
@@ -138,7 +138,7 @@ let $$v0 = Ju(function (e) {
                 _.disconnect(e.resourceConnectionId).then(() => {
                   A(!1);
                   y();
-                  e.isHostPlanAdmin ? t(to({
+                  e.isHostPlanAdmin ? t(showModalHandler({
                     type: b,
                     data: {
                       resourceConnectionId: e.resourceConnectionId,

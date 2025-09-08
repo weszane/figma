@@ -2,12 +2,12 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { Gu } from "../figma_app/262240";
 import { bL, mc, q7 } from "../figma_app/860955";
-import { luZ } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AnimationTriggerType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
 import { Dm } from "../figma_app/8833";
 import { A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Q } from "../figma_app/320600";
 import { Z4, D0 } from "../9410/315461";
 import { kP, uc, eB, hT } from "../9410/228612";
@@ -113,29 +113,29 @@ function y({
     e && uc(e) && r.push({
       name: "slides-merge-object-animation-with-above",
       callback: () => {
-        l7.user("slides-merge-object-animation-with-above", () => {
+        permissionScopeHandler.user("slides-merge-object-animation-with-above", () => {
           let t = Eo(_, e, x, d);
           t && (c(), n.objectAnimations = t);
         });
       }
     });
   }
-  if (_.startCondition === luZ.TRIGGER && y && eB(y)) {
+  if (_.startCondition === AnimationTriggerType.TRIGGER && y && eB(y)) {
     let e = d[h + 2];
     e && uc(e) && r.push({
       name: "slides-merge-object-animation-with-below",
       callback: () => {
-        l7.user("slides-merge-object-animation-with-below", () => {
+        permissionScopeHandler.user("slides-merge-object-animation-with-below", () => {
           let t = Eo(_, y, e, d);
           t && (c(), n.objectAnimations = t);
         });
       }
     });
   }
-  _.startCondition === luZ.AFTER_PREVIOUS && (!y || eB(y)) && r.push({
+  _.startCondition === AnimationTriggerType.AFTER_PREVIOUS && (!y || eB(y)) && r.push({
     name: "slides-separate-object-animation",
     callback: () => {
-      l7.user("slides-separate-object-animation", () => {
+      permissionScopeHandler.user("slides-separate-object-animation", () => {
         let e = zQ(_, {
           type: hT.SECTION_HEADER,
           interactionIndex: _.interactionIndex + 1
@@ -147,10 +147,10 @@ function y({
   r.push({
     name: "slides-delete-object-animation",
     callback: () => {
-      l7.user("slides-delete-object-animation", () => {
+      permissionScopeHandler.user("slides-delete-object-animation", () => {
         u();
         n.removeObjectAnimation(i);
-        Y5.commit();
+        fullscreenValue.commit();
       });
     },
     recordingKey: "delete"

@@ -4,7 +4,7 @@ import { IK } from "../905/521428";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { o6, cZ } from "../figma_app/806412";
 import { renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Kz } from "../905/760074";
 import { fA, qN, $c, Iy, p9 } from "../figma_app/803787";
 import { Qx, M$ } from "../figma_app/633080";
@@ -15,7 +15,7 @@ class f extends o6 {
   constructor() {
     super(...arguments);
     this.showPublishModal = () => {
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: dD,
         data: {
           entrypoint: this.props.entryPoint,
@@ -26,7 +26,7 @@ class f extends o6 {
     this.showUpsellModal = () => {
       let e = this.props.openFile?.teamId;
       let t = e ? this.props.teams[e] : void 0;
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: $3,
         data: {
           team: t || null,

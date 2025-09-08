@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { t as _$$t } from "../905/150656";
-import { xae } from "../figma_app/763686";
+import { UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
 import { renderI18nText } from "../905/303541";
@@ -10,10 +10,10 @@ import { _6 } from "../figma_app/386952";
 import { pk, Qr } from "../figma_app/598952";
 import { Vj } from "../905/561485";
 import { U } from "../figma_app/964810";
-let $$y0 = xae.ASSETS.toString();
-let $$m1 = xae.CHAT.toString();
-let f = xae.CODE.toString();
-let $$b2 = xae.LAYERS.toString();
+let $$y0 = UserInterfaceElements.ASSETS.toString();
+let $$m1 = UserInterfaceElements.CHAT.toString();
+let f = UserInterfaceElements.CODE.toString();
+let $$b2 = UserInterfaceElements.LAYERS.toString();
 export function $$x3({
   tabManager: e,
   tabPropsMap: t
@@ -61,16 +61,16 @@ export function $$v4(e, t) {
   let E = getFeatureFlags().ai_assistant || !1;
   let S = useCallback(e => {
     switch (parseInt(e)) {
-      case xae.LAYERS:
+      case UserInterfaceElements.LAYERS:
         showLayersPanel();
         break;
-      case xae.CODE:
+      case UserInterfaceElements.CODE:
         showCodePanel();
         break;
-      case xae.ASSETS:
+      case UserInterfaceElements.ASSETS:
         showPublish();
         break;
-      case xae.CHAT:
+      case UserInterfaceElements.CHAT:
         showChat();
         break;
       default:

@@ -1,6 +1,6 @@
 import { EventEmitter } from "../905/690073";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { h3O, rau } from "../figma_app/763686";
+import { Multiplayer, DocumentSaveEvent } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackFullScreenAnalytics, analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { timerEventNames, reactTimerGroup, globalPerfTimer, distributionAnalytics } from "../905/542194";
@@ -145,7 +145,7 @@ export let $$w0 = new class {
   reportDirtyAfterLoad(e) {
     let t = isDevEnvironment();
     trackEventAnalytics("dirty_after_load", {
-      registersDump: h3O?.pendingRegistersDump(t).substring(0, 1e4),
+      registersDump: Multiplayer?.pendingRegistersDump(t).substring(0, 1e4),
       sessionID: e
     });
     f1();
@@ -158,14 +158,14 @@ export let $$w0 = new class {
   }
   reportPerfEvent(e) {
     switch (e) {
-      case rau.AFTER_FIRST_RENDER:
+      case DocumentSaveEvent.AFTER_FIRST_RENDER:
         s$("AFTER_FIRST_RENDER");
         xK.start("AFTER_FIRST_RENDER");
         break;
-      case rau.DOCUMENT_STARTED_SAVING:
+      case DocumentSaveEvent.DOCUMENT_STARTED_SAVING:
         s$("DOCUMENT_STARTED_SAVING");
         break;
-      case rau.DOCUMENT_FINISHED_SAVING:
+      case DocumentSaveEvent.DOCUMENT_FINISHED_SAVING:
         s$("DOCUMENT_FINISHED_SAVING");
     }
   }

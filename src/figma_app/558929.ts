@@ -11,8 +11,8 @@ import { t as _$$t2 } from "../905/706346";
 import { _ as _$$_ } from "../905/456042";
 import { wr, Ux } from "../figma_app/387599";
 import { y as _$$y } from "../905/444931";
-import { nF } from "../905/350402";
-import { Lo, to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { RH, gU } from "../figma_app/147952";
 import { B as _$$B } from "../905/808775";
 import { hb, VT } from "../905/551193";
@@ -20,14 +20,14 @@ import { nm } from "../905/352022";
 import { HE } from "../905/967587";
 import { F as _$$F2 } from "../905/504462";
 import { canMemberOrg } from "../figma_app/642025";
-import { Rt, Ar, uF } from "../figma_app/300692";
+import { hasOrgRole, getCurrentPluginVersion, getPluginVersion } from "../figma_app/300692";
 import { Y9 } from "../figma_app/502247";
 import { xQ, m3 } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { O as _$$O2 } from "../905/833838";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { G as _$$G } from "../figma_app/124713";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { l as _$$l } from "../905/690005";
 import { yX } from "../figma_app/918700";
 import { j as _$$j } from "../905/689815";
@@ -45,13 +45,13 @@ let j = () => async e => {
     e(_$$F.dequeue({
       matchType: t
     }));
-    e(Lo());
+    e(popModalStack());
     return r;
   } catch (r) {
     e(_$$F.dequeue({
       matchType: t
     }));
-    e(Lo());
+    e(popModalStack());
     e(_$$F.enqueue({
       message: getI18nString("general.an_error_occurred"),
       error: !0
@@ -59,9 +59,9 @@ let j = () => async e => {
     return Promise.reject();
   }
 };
-let U = Ju(yX);
+let U = registerModal(yX);
 let B = (e, t, r) => n => {
-  n(to({
+  n(showModalHandler({
     type: U,
     data: {
       confirmationTitle: getI18nString("resources_tab.create_team_modal.modal_title", {
@@ -78,7 +78,7 @@ let B = (e, t, r) => n => {
     }
   }));
 };
-let G = nF(async (e, t) => {
+let G = createOptimistThunk(async (e, t) => {
   let {
     workspaces,
     plans
@@ -97,7 +97,7 @@ let G = nF(async (e, t) => {
     let r = e.orgId && orgById[e.orgId];
     let a = !0;
     let o = !0;
-    if (r && (a = await hb(t.resource, r), o = VT(t.resource, r)), Rt(t.resource) && !canMemberOrg(e.orgId, i, e.userId)) return;
+    if (r && (a = await hb(t.resource, r), o = VT(t.resource, r)), hasOrgRole(t.resource) && !canMemberOrg(e.orgId, i, e.userId)) return;
     let l = _$$y(e, mapFileTypeToEditorType(t.editorType), i, plans);
     l.publicPluginsOrWidgetDisabled = !a;
     l.extensionRequestsAllowed = o;
@@ -111,7 +111,7 @@ let G = nF(async (e, t) => {
     t.onSelectWorkspace(e);
     return;
   }
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: _$$_,
     data: {
       payload: {
@@ -123,7 +123,7 @@ let G = nF(async (e, t) => {
     }
   }));
 });
-let $$V2 = nF((e, t) => {
+let $$V2 = createOptimistThunk((e, t) => {
   if (isMobileUA) {
     window.location.href = "/login";
     return;
@@ -132,7 +132,7 @@ let $$V2 = nF((e, t) => {
   e.dispatch(Ts({
     origin: "plugin_try_signed_out"
   }));
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: _$$l,
     data: {
       headerText: r,
@@ -142,11 +142,11 @@ let $$V2 = nF((e, t) => {
     }
   }));
 });
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   let r = e.getState().user;
   let n = t.extension;
   let i = "isWidget" in n ? !!n.isWidget : !!n.is_widget;
-  let a = "currentPluginVersion" in n ? n.currentPluginVersion : Ar(n);
+  let a = "currentPluginVersion" in n ? n.currentPluginVersion : getCurrentPluginVersion(n);
   if (!a || !r) return;
   let s = "hasPlaygroundFile" in a ? a.hasPlaygroundFile : a.playground_file_version_id;
   let o = t.fullscreenEditorType === FEditorType.DevHandoff;
@@ -172,12 +172,12 @@ nF((e, t) => {
     i ? e.dispatch(RH(s)) : e.dispatch(gU(s));
   })();
 });
-let $$H0 = nF((e, t) => {
+let $$H0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user;
   let i = t.extension;
   let s = "isWidget" in i ? !!i.isWidget : !!i.is_widget;
-  let o = "currentPluginVersion" in i ? i.currentPluginVersion : Ar(i);
+  let o = "currentPluginVersion" in i ? i.currentPluginVersion : getCurrentPluginVersion(i);
   if (!o || !n) return;
   let l = () => {
     let r = {
@@ -216,7 +216,7 @@ let $$H0 = nF((e, t) => {
     }));
     return;
   }
-  1 === p.length ? (Y9(n.id, !1, null, void 0, p[0].teamId ?? null), _$$j(u, null, p[0].teamId ?? null, n.id), l()) : e.dispatch(to({
+  1 === p.length ? (Y9(n.id, !1, null, void 0, p[0].teamId ?? null), _$$j(u, null, p[0].teamId ?? null, n.id), l()) : e.dispatch(showModalHandler({
     type: _$$_,
     data: {
       payload: {
@@ -231,12 +231,12 @@ let $$H0 = nF((e, t) => {
     }
   }));
 });
-let $$z3 = nF((e, t) => {
+let $$z3 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user;
   let i = t.extension;
   let a = "isWidget" in i ? !!i.isWidget : !!i.is_widget;
-  let s = "currentPluginVersion" in i ? i.currentPluginVersion : Ar(i);
+  let s = "currentPluginVersion" in i ? i.currentPluginVersion : getCurrentPluginVersion(i);
   if (!s || !n) return;
   let o = "hasPlaygroundFile" in s ? s.hasPlaygroundFile : s.playground_file_version_id;
   let l = t.fullscreenEditorType === FEditorType.DevHandoff;
@@ -263,7 +263,7 @@ let $$z3 = nF((e, t) => {
     a ? e.dispatch(RH(r)) : e.dispatch(gU(r));
   })();
 });
-let $$W1 = nF(async (e, t) => {
+let $$W1 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let {
     user
@@ -271,7 +271,7 @@ let $$W1 = nF(async (e, t) => {
   let s = wr(r);
   let l = Ux(r);
   let u = xQ(t.resource);
-  let p = uF(t.resource);
+  let p = getPluginVersion(t.resource);
   if (!user) {
     e.dispatch($$V2({
       isWidget: u
@@ -305,7 +305,7 @@ let $$W1 = nF(async (e, t) => {
     tryPluginId: t.resource.id,
     tryPluginVersionId: p.id,
     tryPluginName: p.name,
-    tryPluginEditorType: p.manifest.editorType?.[0] ?? FW.FIGMA,
+    tryPluginEditorType: p.manifest.editorType?.[0] ?? ManifestEditorType.FIGMA,
     isWidget: u,
     isPlaygroundFile: !!t.isPlaygroundFile,
     tryPluginParams: void 0,
@@ -372,7 +372,7 @@ let $$W1 = nF(async (e, t) => {
   }
 });
 export function $$K4(e, t) {
-  e(to({
+  e(showModalHandler({
     type: _$$t2,
     data: {
       onContinue: t

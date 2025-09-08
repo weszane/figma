@@ -1,5 +1,5 @@
 import { sj, uf } from "../figma_app/728005";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { hV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
@@ -29,7 +29,7 @@ async function b(e, t) {
     let i = c.name;
     let u = i.replace(h, "").trim();
     0 === u.length && (u = "Component", console.warn(`[CODEGEN] Frame in section "${s.name}" has no name.`));
-    l7.system("bulk-record-mcp-tool-output", () => {
+    permissionScopeHandler.system("bulk-record-mcp-tool-output", () => {
       c.name = u;
     });
     let f = performance.now();
@@ -40,7 +40,7 @@ async function b(e, t) {
     let N = await _$$r(uf, {
       nodeId: s.data.nodeId
     }, e);
-    c.name !== i && l7.system("bulk-record-mcp-tool-output", () => {
+    c.name !== i && permissionScopeHandler.system("bulk-record-mcp-tool-output", () => {
       c.name = i;
     });
     o.push({

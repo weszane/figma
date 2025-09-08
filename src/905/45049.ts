@@ -8,8 +8,8 @@ import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, d3, eQ, v2, G4 } from "../figma_app/545293";
-import { Lo, AS, to } from "../905/156213";
-import { Y5 } from "../figma_app/455680";
+import { popModalStack, hideModalHandler, showModalHandler } from "../905/156213";
+import { fullscreenValue } from "../figma_app/455680";
 import { $$ } from "../figma_app/62612";
 import { cq } from "../905/794154";
 import { M$ } from "../figma_app/297822";
@@ -27,7 +27,7 @@ import { n as _$$n } from "../905/734251";
 import { sx as _$$sx } from "../905/941192";
 import { Dm } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { kz, s3 } from "../figma_app/171177";
 import { p as _$$p } from "../905/133304";
 import { I as _$$I } from "../905/341245";
@@ -223,7 +223,7 @@ function H({
     })]
   }) : null;
 }
-let K = Ju(function ({
+let K = registerModal(function ({
   fragments: e,
   initialActiveFragment: t,
   onClose: i,
@@ -339,7 +339,7 @@ export function $$$0(e, t, i, y, b) {
         key: Uz.ENTER
       }],
       onAction: async () => {
-        let e = Y5.getViewportInfo();
+        let e = fullscreenValue.getViewportInfo();
         let t = {
           x: e.width / 2,
           y: e.height / 2
@@ -354,8 +354,8 @@ export function $$$0(e, t, i, y, b) {
             fragmentPosition: r
           }
         });
-        w && S(Lo());
-        i === G4.FIGMAKE && S(AS());
+        w && S(popModalStack());
+        i === G4.FIGMAKE && S(hideModalHandler());
         close();
       }
     };
@@ -382,7 +382,7 @@ export function $$$0(e, t, i, y, b) {
         default:
           throwTypeError(e);
       }
-      S(Lo());
+      S(popModalStack());
       t.current?.focus();
     };
     let R = b(!1, n, r);
@@ -408,7 +408,7 @@ export function $$$0(e, t, i, y, b) {
           default:
             throwTypeError(n);
         }
-        S(to({
+        S(showModalHandler({
           type: K,
           data: {
             fragments: u,

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { atom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
-import { ES } from "../905/156213";
+import { hideSpecificModal } from "../905/156213";
 let $$o2 = "ComponentFlyoutModal";
 let $$l0 = "ComponentFlyoutModalContent";
 let d = atom(null);
@@ -18,7 +18,7 @@ export function $$c1() {
   }, [l]);
   let u = useCallback(() => {
     c(null);
-    e(ES({
+    e(hideSpecificModal({
       type: $$o2
     }));
   }, [e, c]);
@@ -33,7 +33,7 @@ export function $$c1() {
 }
 export function $$u3(e) {
   atomStoreManager.set(d, null);
-  e(ES({
+  e(hideSpecificModal({
     type: $$o2
   }));
 }

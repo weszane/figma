@@ -24,16 +24,16 @@ import { bL } from "../905/934145";
 import { C as _$$C2 } from "../figma_app/382445";
 import { s1, uR, oj } from "../figma_app/304207";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { tf } from "../figma_app/831799";
 import { cs, zp } from "../figma_app/740025";
 import { Cn } from "../905/862913";
 import { Ni } from "../figma_app/188152";
 import { iZ } from "../905/372672";
 import { a6 } from "../figma_app/198840";
-import { uF, my } from "../figma_app/300692";
+import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
 import { vt, xQ } from "../figma_app/45218";
-import { u8 } from "../figma_app/155287";
+import { PluginInstallStatus } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { Ro } from "../figma_app/805373";
@@ -107,7 +107,7 @@ function ep(e) {
     selectedView: e
   }) => e).view;
   let n = e.plugin.org_id && t?.[e.plugin.org_id];
-  let i = uF(e.plugin);
+  let i = getPluginVersion(e.plugin);
   let {
     tagline,
     description,
@@ -387,7 +387,7 @@ export function $$eb5({
         f(Ts({
           origin: "plugin_install_signed_out"
         }));
-        f(to({
+        f(showModalHandler({
           type: _$$l,
           data: {
             headerText: getI18nString("community.profiles.save_this_plugin_to_give_you_and_figma_a_boost"),
@@ -446,7 +446,7 @@ export function $$eb5({
 function eT(e, t) {
   let r = useSelector(e => e.authedActiveCommunityProfile);
   let n = zp();
-  return (void 0 === t || t) && e.roles.is_public ? r ? _$$a(r, e) : e.profile_install_status === u8.PLUGIN_INSTALLED_FOR_USER : e.install_status === u8.PLUGIN_INSTALLED_FOR_USER || !!n && e.install_status === u8.PLUGIN_INSTALLED_FOR_ORG;
+  return (void 0 === t || t) && e.roles.is_public ? r ? _$$a(r, e) : e.profile_install_status === PluginInstallStatus.PLUGIN_INSTALLED_FOR_USER : e.install_status === PluginInstallStatus.PLUGIN_INSTALLED_FOR_USER || !!n && e.install_status === PluginInstallStatus.PLUGIN_INSTALLED_FOR_ORG;
 }
 (e => {
   function t(e) {
@@ -673,7 +673,7 @@ function eT(e, t) {
       }));
     },
     onProfileCreate: r => {
-      e(to({
+      e(showModalHandler({
         type: G$,
         data: {
           variations: [FF.OPT_IN],
@@ -688,7 +688,7 @@ function eT(e, t) {
   }))(t);
   e.PluginTile = function (t) {
     let r = useSelector(e => e.publishedPlugins);
-    let n = t.plugin || my(t.pluginId, r);
+    let n = t.plugin || getPluginMetadata(t.pluginId, r);
     return jsx(e.ConnectedPluginTile, {
       ...t,
       plugin: n
@@ -772,7 +772,7 @@ $$ev7.defaultProps = {
       });
     }
     render() {
-      let e = uF(this.props.resource);
+      let e = getPluginVersion(this.props.resource);
       let t = xQ(this.props.resource);
       return jsx("div", {
         className: Yt,

@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect, useMemo, Fragment } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { q as _$$q } from "../905/932270";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -12,7 +12,7 @@ import { g as _$$g } from "../905/880308";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { Sh } from "../figma_app/889655";
 import { Yv } from "../figma_app/616107";
@@ -52,8 +52,8 @@ export function $$H4() {
   let t = !$$U1("HIGHLIGHT");
   let r = !function () {
     for (let e of useSelector(Sh)) {
-      let t = glU?.isPlatformShape(e);
-      let r = glU?.platformShapeHasStrokeControl(e);
+      let t = Fullscreen?.isPlatformShape(e);
+      let r = Fullscreen?.platformShapeHasStrokeControl(e);
       if (t && !r) return !0;
     }
     return !1;
@@ -139,7 +139,7 @@ export function $$W3() {
   });
   let er = 0 === et.length && S;
   let en = useMemo(() => S ? jsx($, {
-    strokeColor: v && hS(v) ? v : void 0,
+    strokeColor: v && isValidValue(v) ? v : void 0,
     setWhiteboardStrokeColor: k,
     onlyShowingColorSwatches: er
   }) : void 0, [S, v, k, er]);

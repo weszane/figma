@@ -1,49 +1,49 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useState, useMemo, useLayoutEffect, useCallback, useRef, useEffect } from "react";
-import { _p, q5 } from "../figma_app/11610";
-import { assert } from "../figma_app/465776";
-import { vNG } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { atom, useAtomValueAndSetter, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { getFigmaCluster, analyticsEventManager } from "../905/449184";
-import { globalPerfTimer } from "../905/542194";
-import { debugState } from "../905/407919";
-import { getInitialOptions } from "../figma_app/169182";
-import { isInteractionPathCheck, isInteractionPathCheck } from "../figma_app/897289";
-import { g as _$$g } from "../905/880308";
-import { f as _$$f, v as _$$v } from "../905/257689";
-import { g as _$$g2 } from "../figma_app/411986";
-import { ze } from "../figma_app/516028";
-import { Td } from "../figma_app/386952";
-import { Wh } from "../figma_app/615482";
-import { z as _$$z } from "../905/931953";
-import { JL } from "../figma_app/690664";
-import { Zr } from "../figma_app/114522";
-import { f as _$$f2 } from "../figma_app/246112";
-import { nC, sF } from "../figma_app/357655";
-import { YE, Oc } from "../figma_app/552876";
-import { MV } from "../figma_app/396372";
-import { Ct, BG } from "../figma_app/205280";
-import { c3, LE } from "../figma_app/427737";
-import { U5 } from "../905/414242";
-import { w as _$$w } from "../figma_app/331365";
-import { useDispatch } from "../vendor/514228";
-import { hS } from "../905/437088";
-import { WW, $n } from "../905/521428";
-import { bL } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { Z } from "../905/279476";
-import { s as _$$s } from "../cssbuilder/589278";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { D as _$$D2 } from "../905/425476";
-import { a as _$$a } from "../905/38236";
-import { HA, _b, q9, Dw, o7 } from "../figma_app/618665";
-import { J as _$$J } from "../905/916681";
-import { g as _$$g3 } from "../905/252386";
-import { X as _$$X } from "../905/578754";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { a as _$$a } from '../905/38236';
+import { bL } from '../905/38914';
+import { permissionScopeHandler } from '../905/189185';
+import { g as _$$g3 } from '../905/252386';
+import { f as _$$f, v as _$$v } from '../905/257689';
+import { Z } from '../905/279476';
+import { F as _$$F } from '../905/302958';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { debugState } from '../905/407919';
+import { U5 } from '../905/414242';
+import { D as _$$D2 } from '../905/425476';
+import { hS } from '../905/437088';
+import { analyticsEventManager, getFigmaCluster } from '../905/449184';
+import { $n, WW } from '../905/521428';
+import { globalPerfTimer } from '../905/542194';
+import { X as _$$X } from '../905/578754';
+import { getFeatureFlags } from '../905/601108';
+import { getSingletonSceneGraph } from '../905/700578';
+import { g as _$$g } from '../905/880308';
+import { J as _$$J } from '../905/916681';
+import { z as _$$z } from '../905/931953';
+import { s as _$$s } from '../cssbuilder/589278';
+import { _p, q5 } from '../figma_app/11610';
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
+import { Zr } from '../figma_app/114522';
+import { getInitialOptions } from '../figma_app/169182';
+import { BG, Ct } from '../figma_app/205280';
+import { f as _$$f2 } from '../figma_app/246112';
+import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { w as _$$w } from '../figma_app/331365';
+import { nC, sF } from '../figma_app/357655';
+import { Td } from '../figma_app/386952';
+import { MV } from '../figma_app/396372';
+import { g as _$$g2 } from '../figma_app/411986';
+import { c3, LE } from '../figma_app/427737';
+import { assert } from '../figma_app/465776';
+import { ze } from '../figma_app/516028';
+import { Oc, YE } from '../figma_app/552876';
+import { Wh } from '../figma_app/615482';
+import { _b, Dw, HA, o7, q9 } from '../figma_app/618665';
+import { JL } from '../figma_app/690664';
+import { MutableSceneGraph } from '../figma_app/763686';
+import { isInteractionPathCheck } from '../figma_app/897289';
 let H = atom([]);
 function z() {
   let {
@@ -61,40 +61,40 @@ function z() {
     open: r,
     onClose: () => a(!1)
   });
-  return getFeatureFlags().sts_error_display && 0 !== errors.length ? jsxs(Fragment, {
-    children: [jsx("div", {
+  return getFeatureFlags().sts_error_display && errors.length !== 0 ? jsxs(Fragment, {
+    children: [jsx('div', {
       style: {
-        position: "absolute",
-        bottom: "20px",
-        right: "20px"
+        position: 'absolute',
+        bottom: '20px',
+        right: '20px'
       },
       children: jsx(WW, {
-        variant: "destructive",
+        variant: 'destructive',
         iconPrefix: jsx(Z, {}),
         onClick: () => a(!0),
-        children: renderI18nText("sites.lint.errors.materialization_error", {
+        children: renderI18nText('sites.lint.errors.materialization_error', {
           errorCount: errors.length
         })
       })
     }), jsx(bL, {
       manager: s,
-      width: "lg",
+      width: 'lg',
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: renderI18nText("sites.lint.errors.materialization_error", {
+            children: renderI18nText('sites.lint.errors.materialization_error', {
               errorCount: errors.length
             })
           })
         }), jsx(nB, {
-          children: jsx("div", {
+          children: jsx('div', {
             className: _$$s.flex.flexColumn.gap8.$,
-            children: errors.map((e, t) => jsxs("div", {
+            children: errors.map((e, t) => jsxs('div', {
               className: _$$s.p8.b1.radiusMedium.textBodyMedium.$,
-              children: [e.nodeId && jsx("div", {
+              children: [e.nodeId && jsx('div', {
                 className: _$$s.textHeadingMedium.mb4.$,
                 children: e.nodeId
-              }), jsx("div", {
+              }), jsx('div', {
                 className: _$$s.preWrap.textBodySmall.$,
                 children: e.errorMessage
               })]
@@ -103,7 +103,7 @@ function z() {
         }), jsx(wi, {
           children: jsxs(jk, {
             children: [jsx($n, {
-              variant: "secondary",
+              variant: 'secondary',
               onClick: () => {
                 let r = {
                   url: window.location.href,
@@ -118,17 +118,17 @@ URL: ${r.url}
 Errors:
 ${r.errors.map(e => `
 Node: ${e.nodeId}
-Error: ${e.message}`).join("\n")}`;
+Error: ${e.message}`).join('\n')}`;
                 navigator.clipboard.writeText(n).then(() => {
                   t(_$$F.enqueue({
-                    message: getI18nString("sites.lint.errors.copied_visual_bell")
+                    message: getI18nString('sites.lint.errors.copied_visual_bell')
                   }));
                 });
               },
-              children: renderI18nText("sites.lint.errors.copy_to_clipboard")
+              children: renderI18nText('sites.lint.errors.copy_to_clipboard')
             }), jsx($n, {
               onClick: () => a(!1),
-              children: renderI18nText("common.close")
+              children: renderI18nText('common.close')
             })]
           })
         })]
@@ -138,10 +138,10 @@ Error: ${e.message}`).join("\n")}`;
 }
 let J = new EventTarget();
 export function $$Z4() {
-  J.dispatchEvent(new CustomEvent("showLayoutDebugStyles"));
+  J.dispatchEvent(new CustomEvent('showLayoutDebugStyles'));
 }
 export let $$Q3 = Wh(() => atom(function () {
-  if (document.baseURI.startsWith("http://localhost:9000/")) return "http://localhost:8045/preview_page_v1.html";
+  if (document.baseURI.startsWith('http://localhost:9000/')) return 'http://localhost:8045/preview_page_v1.html';
   let e = `${_$$g()}-figmaiframepreview`;
   return `https://${e}.${nC()}/preview_page.html`;
 }()));
@@ -166,7 +166,7 @@ export class $$ee0 {
     imageAssetsHolder: d,
     fileKey: c = null
   }) {
-    assert(!this.sitesPreview, "SitesPreview already exists");
+    assert(!this.sitesPreview, 'SitesPreview already exists');
     this.sitesPreview = new ei({
       history: e,
       options: l,
@@ -190,22 +190,22 @@ export class $$ee0 {
   mountIframe(e, t = {}) {
     this._iframe = e;
     this.sitesPreview?.resetIframeInternal(e);
-    let r = getFeatureFlags().sts_component_preview_frame && t.useReactDev ? new URL(Fig.codeComponentsPreviewIFrameURL || "/webpack/code_components_preview_iframe.js", document.baseURI).href : new URL(Fig.previewIframeURL || "/webpack/preview_iframe.js", document.baseURI).href;
+    let r = getFeatureFlags().sts_component_preview_frame && t.useReactDev ? new URL(Fig.codeComponentsPreviewIFrameURL || '/webpack/code_components_preview_iframe.js', document.baseURI).href : new URL(Fig.previewIframeURL || '/webpack/preview_iframe.js', document.baseURI).href;
     e.onload = () => {
       let n = () => {
         e.contentWindow.postMessage({
-          type: "iframe-init",
+          type: 'iframe-init',
           initScriptURL: r,
           previewIframeInitialOptions: function ({
             renderOptions: e
           }) {
             let t = getInitialOptions();
             let r = getFeatureFlags().internal_only_debug_tools ? {
-              "X-Figma-Debug-Log-To-Datadog": "1",
-              "X-Figma-Debug-User-ID": t.user_data?.id,
-              "X-Figma-Debug-User-Email": t.user_data?.email
+              'X-Figma-Debug-Log-To-Datadog': '1',
+              'X-Figma-Debug-User-ID': t.user_data?.id,
+              'X-Figma-Debug-User-Email': t.user_data?.email
             } : void 0;
-            let n = YE() ? "figmake" : "sites";
+            let n = YE() ? 'figmake' : 'sites';
             return {
               cluster_name: t.cluster_name,
               release_manifest_git_commit: t.release_manifest_git_commit,
@@ -227,11 +227,11 @@ export class $$ee0 {
       try {
         n();
       } catch (e) {
-        if ("DataCloneError" === e.name) {
+        if (e.name === 'DataCloneError') {
           this.regenerateMessageChannel();
           this.sitesPreview?.setupMessageChannel(this.messageChannel);
           n();
-          this.sitesPreview?.sendMessage("setLocation", {
+          this.sitesPreview?.sendMessage('setLocation', {
             historyState: {
               url: this.sitesPreview.history.current.url
             }
@@ -334,20 +334,20 @@ export function $$er1({
     N.mountIframe(e);
   }, [N]);
   return jsxs(Fragment, {
-    children: [jsx("iframe", {
-      ref: R,
-      allow: "autoplay",
-      allowFullScreen: !0,
-      "data-iframe-id": A,
-      "data-testid": "site-preview-iframe",
-      id: "rendered-site",
-      src: I,
-      style: {
-        width: "100%",
-        height: "100%",
+    children: [jsx('iframe', {
+      'ref': R,
+      'allow': 'autoplay',
+      'allowFullScreen': !0,
+      'data-iframe-id': A,
+      'data-testid': 'site-preview-iframe',
+      'id': 'rendered-site',
+      'src': I,
+      'style': {
+        width: '100%',
+        height: '100%',
         ...s
       },
-      title: "Sites preview"
+      'title': 'Sites preview'
     }, A), jsx(z, {})]
   });
 }
@@ -367,22 +367,22 @@ export class $$en2 {
       },
       skipSetPreviewedNode: !getFeatureFlags().sts_live_preview
     });
-    let i = this.iframe = document.createElement("iframe");
-    i.style.position = "absolute";
-    i.style.top = "0px";
-    i.style.left = "0px";
+    let i = this.iframe = document.createElement('iframe');
+    i.style.position = 'absolute';
+    i.style.top = '0px';
+    i.style.left = '0px';
     i.style.width = `${t.x}px`;
     i.style.height = `${t.y}px`;
     i.src = atomStoreManager.get($$Q3);
     document.body.appendChild(i);
     n.mountIframe(i);
     this.ready = new Promise(async e => {
-      for (; !(await this.sitesPreview.once("status")).isReady;);
+      for (; !(await this.sitesPreview.once('status')).isReady;);
       e(!0);
     });
   }
   async setWidth(e) {
-    parseFloat(this.iframe.style.width) !== e && (this.iframe.style.width = `${e}px`, await this.sitesPreview.once("resize"));
+    parseFloat(this.iframe.style.width) !== e && (this.iframe.style.width = `${e}px`, await this.sitesPreview.once('resize'));
   }
   unmount() {
     this.sitesPreview.unmount();
@@ -433,7 +433,7 @@ class ei {
     t.skipPreviewUpdateListener || _$$g2(async e => {
       let t = await c3(this.website, e);
       this.website = t;
-      this.sendMessage("pushPageData", {
+      this.sendMessage('pushPageData', {
         website: {
           ...this.website,
           flatteningTypes: void 0
@@ -441,21 +441,21 @@ class ei {
       });
     });
     e.addPopStateListener(e => {
-      this.sendMessage("setLocation", {
+      this.sendMessage('setLocation', {
         historyState: e
       });
     });
     e.addRefreshListener(() => {
-      this.sendMessage("refresh", {});
+      this.sendMessage('refresh', {});
     });
     this.options = t;
-    this.sendMessage("setOptions", {
+    this.sendMessage('setOptions', {
       options: t
     });
     let _ = this.showLayoutDebugStyles.bind(this);
-    J.addEventListener("showLayoutDebugStyles", _);
+    J.addEventListener('showLayoutDebugStyles', _);
     this.removeListeners = () => {
-      J.removeEventListener("showLayoutDebugStyles", _);
+      J.removeEventListener('showLayoutDebugStyles', _);
     };
   }
   set files(e) {
@@ -468,20 +468,20 @@ class ei {
     this.messagePort = e.port1;
     this.sitesMessagePort = new _$$J(this.messagePort, {
       status: e => {
-        this.eventTarget.dispatchEvent(new CustomEvent("status", {
+        this.eventTarget.dispatchEvent(new CustomEvent('status', {
           detail: e
         }));
         e.isReady && (this.onIframeReady?.(), this.startHeartbeat());
-        e.error && (console.error("[SitesPreview] ready: " + e.isReady + (e.error ? ", error: " + e.error : "")), _$$X({
-          name: "status_error",
+        e.error && (console.error(`[SitesPreview] ready: ${e.isReady}${e.error ? `, error: ${e.error}` : ''}`), _$$X({
+          name: 'status_error',
           message: e.error,
-          origin: "status",
+          origin: 'status',
           reduxState: debugState?.getState()
         }));
       },
       getPage: e => this.getPage(e.url),
       pageRendered: e => {
-        e.url && this.eventTarget.dispatchEvent(new CustomEvent("pageRendered", {
+        e.url && this.eventTarget.dispatchEvent(new CustomEvent('pageRendered', {
           detail: e
         }));
       },
@@ -506,19 +506,19 @@ class ei {
       },
       runtimeExpansionError: e => {
         e.missingKeys.forEach(t => {
-          analyticsEventManager.trackDefinedEvent("sites.runtime_expansion_error", {
-            error: "missingKey",
+          analyticsEventManager.trackDefinedEvent('sites.runtime_expansion_error', {
+            error: 'missingKey',
             field: t
           });
           e.extraKeys.forEach(e => {
-            analyticsEventManager.trackDefinedEvent("sites.runtime_expansion_error", {
-              error: "extraKey",
+            analyticsEventManager.trackDefinedEvent('sites.runtime_expansion_error', {
+              error: 'extraKey',
               field: e
             });
           });
           e.differentKeys.forEach(e => {
-            analyticsEventManager.trackDefinedEvent("sites.runtime_expansion_error", {
-              error: "differingKey",
+            analyticsEventManager.trackDefinedEvent('sites.runtime_expansion_error', {
+              error: 'differingKey',
               field: e.key
             });
           });
@@ -528,15 +528,15 @@ class ei {
         this.perfTracker.record(e.eventName);
       },
       timerEvent: e => {
-        "timer_start" === e.eventName ? globalPerfTimer.start(`sites.runtime.${e.timerName}`) : "timer_stop" === e.eventName && globalPerfTimer.stop(`sites.runtime.${e.timerName}`);
+        e.eventName === 'timer_start' ? globalPerfTimer.start(`sites.runtime.${e.timerName}`) : e.eventName === 'timer_stop' && globalPerfTimer.stop(`sites.runtime.${e.timerName}`);
       },
       testingMaterializedNodeProps: e => {
-        this.eventTarget.dispatchEvent(new CustomEvent("testingMaterializedNodeProps", {
+        this.eventTarget.dispatchEvent(new CustomEvent('testingMaterializedNodeProps', {
           detail: e
         }));
       },
       testEventEmitted: e => {
-        this.eventTarget.dispatchEvent(new CustomEvent("testEventEmitted", {
+        this.eventTarget.dispatchEvent(new CustomEvent('testEventEmitted', {
           detail: e
         }));
       },
@@ -545,7 +545,7 @@ class ei {
         _$$X({
           name: e.error.name,
           message: e.error.message,
-          origin: "render-component-error",
+          origin: 'render-component-error',
           reduxState: debugState?.getState()
         });
       },
@@ -554,28 +554,28 @@ class ei {
       },
       handleReactError: e => {
         if (isInteractionPathCheck()) {
-          console.error("Caught error from sites preview", e.error.name, e.error.message);
+          console.error('Caught error from sites preview', e.error.name, e.error.message);
           return e;
         }
         _$$X({
           name: e.error.name,
           message: e.error.message,
-          origin: "handle-react-error",
+          origin: 'handle-react-error',
           boundary: e.boundary,
           reduxState: debugState?.getState()
         });
       },
       focusEvent: async e => {
         let t = atomStoreManager.get(_b);
-        if (!t || "modal" !== t.mode) return;
+        if (!t || t.mode !== 'modal') return;
         let {
           type
         } = e;
         await new Promise(e => requestAnimationFrame(e));
-        "focus" === type ? atomStoreManager.set(q9, Dw.Iframe) : "blur" === type && atomStoreManager.set(q9, Dw.None);
+        type === 'focus' ? atomStoreManager.set(q9, Dw.Iframe) : type === 'blur' && atomStoreManager.set(q9, Dw.None);
       },
       resize: e => {
-        this.eventTarget.dispatchEvent(new CustomEvent("resize", {
+        this.eventTarget.dispatchEvent(new CustomEvent('resize', {
           detail: e
         }));
       },
@@ -591,32 +591,32 @@ class ei {
   }
   fetchMaterializedNodeProps() {
     return this.fetchMaterializedNodePropsPromise ? this.fetchMaterializedNodePropsPromise : new Promise(e => {
-      this.eventTarget.addEventListener("testingMaterializedNodeProps", t => {
+      this.eventTarget.addEventListener('testingMaterializedNodeProps', t => {
         e(t.detail);
         this.fetchMaterializedNodePropsPromise = null;
       }, {
         once: !0
       });
-      this.sendMessage("testingRequestMaterializedNodePropsMessage", {
-        method: "testingRequestMaterializedNodePropsMessage"
+      this.sendMessage('testingRequestMaterializedNodePropsMessage', {
+        method: 'testingRequestMaterializedNodePropsMessage'
       });
     });
   }
   listenForTestEvent(e) {
     return new Promise(t => {
-      this.eventTarget.addEventListener("testEventEmitted", e => {
+      this.eventTarget.addEventListener('testEventEmitted', e => {
         t(e.detail);
       }, {
         once: !0
       });
-      this.sendMessage("listenForTestEvent", {
+      this.sendMessage('listenForTestEvent', {
         eventName: e
       });
     });
   }
   oncePageRendered() {
     this.pageRenderedPromise || (this.pageRenderedPromise = new Promise(e => {
-      this.eventTarget.addEventListener("pageRendered", t => {
+      this.eventTarget.addEventListener('pageRendered', t => {
         this.pageRenderedPromise = null;
         e(t.detail);
       }, {
@@ -636,7 +636,7 @@ class ei {
     });
   }
   debugGetMaterializedTree(e, t) {
-    return this.sendMessage("materializationDebug", {
+    return this.sendMessage('materializationDebug', {
       website: e,
       url: t
     });
@@ -646,81 +646,85 @@ class ei {
   }
   getPage(e) {
     return new Promise(async (t, r) => {
-      if ("/_snapshot" === e || "/_sandbox" === e) return;
+      if (e === '/_snapshot' || e === '/_sandbox') return;
       let {
         id,
         cmsSlug
       } = sF(e, this.options.useGuidUrls);
-      if (!id) return r(Error(`Could not load page. Id for url not found ${e}`));
-      this.perfTracker.record("bundle_generation_start");
+      if (!id) return r(new Error(`Could not load page. Id for url not found ${e}`));
+      this.perfTracker.record('bundle_generation_start');
       let {
         bundle,
         assetInstructions
       } = await LE([id], this.options.neverCombineSVGAndPNG, this.options.onlyFlattenSVGIfVectorLike, void 0, this.options.isMcpGeneration);
-      this.perfTracker.record("bundle_generation_stop");
+      this.perfTracker.record('bundle_generation_stop');
       let u = null;
-      getFeatureFlags().dakota_preview && (u = await _$$f(bundle), await _$$v(bundle, assetInstructions, u, id, cmsSlug), getFeatureFlags().internal_only_debug_tools && console.log("Generated CMS bundle:", u));
+      getFeatureFlags().dakota_preview && (u = await _$$f(bundle), await _$$v(bundle, assetInstructions, u, id, cmsSlug), getFeatureFlags().internal_only_debug_tools && console.log('Generated CMS bundle:', u));
       let p = assetInstructions;
-      if (getFeatureFlags().sts_video && p.find(e => "VIDEO_ASSET" === e.type)) {
-        if (!this.fileKey) return r(Error("No fileKey set. Unable to retrieve video asset URLs."));
-        let e = p.reduce((e, t) => ("VIDEO_ASSET" === t.type && e.push(t.hash), e), []);
+      if (getFeatureFlags().sts_video && p.find(e => e.type === 'VIDEO_ASSET')) {
+        if (!this.fileKey) return r(new Error('No fileKey set. Unable to retrieve video asset URLs.'));
+        let e = p.reduce((e, t) => (t.type === 'VIDEO_ASSET' && e.push(t.hash), e), []);
         if (!MV.instance.hasURLsForHashes(e)) {
           let e = await _$$z.getFileVideos({
             fileKey: this.fileKey
           });
           MV.instance.setURLs(e.data.meta.videos);
         }
-        for (let t of e) if (bundle.assets[t]) {
-          let e = MV.instance.getURLForHash(t);
-          if (!e) {
-            console.error("Missing video URL for video asset", {
-              hash: t
-            });
-            continue;
+        for (let t of e) {
+          if (bundle.assets[t]) {
+            let e = MV.instance.getURLForHash(t);
+            if (!e) {
+              console.error('Missing video URL for video asset', {
+                hash: t
+              });
+              continue;
+            }
+            bundle.assets[t].url = e;
           }
-          bundle.assets[t].url = e;
         }
-        p = p.filter(e => "VIDEO_ASSET" !== e.type);
+        p = p.filter(e => e.type !== 'VIDEO_ASSET');
       }
-      if (this.website = bundle, this.options.generateFullAssets && (this.files = await Ct(p)), getFeatureFlags().internal_only_debug_tools && console.log("Generated site result:", {
+      if (this.website = bundle, this.options.generateFullAssets && (this.files = await Ct(p)), getFeatureFlags().internal_only_debug_tools && console.log('Generated site result:', {
         bundle,
         assetInstructions
-      }), this.skipSetPreviewedNode || new vNG(getSingletonSceneGraph().scene).sitesPreviewObserverReference().setPreviewedNodeID(id), t({
+      }), this.skipSetPreviewedNode || new MutableSceneGraph(getSingletonSceneGraph().scene).sitesPreviewObserverReference().setPreviewedNodeID(id), t({
         website: bundle,
         cmsBundle: u
-      }), this.perfTracker.record("asset_generation_start", {
+      }), this.perfTracker.record('asset_generation_start', {
         totalAssetInstructions: p.length
-      }), !this.options.generateFullAssets) for (let e of BG(p, this.options.ignorePreviewClosedWhenGeneratingAssets ?? !1)) {
-        let t = await e;
-        if (t) {
-          let {
-            files,
-            totals
-          } = t;
-          this.perfTracker.updateStats({
-            totalAssetFiles: Object.keys(files).length,
-            totalAssetCacheHits: totals.cacheHits,
-            totalFillAssets: totals.fillAssets,
-            totalFlattenedFillAssets: totals.flattenedFills,
-            totalGeneratedAssetImages: totals.generatedImages,
-            totalGeneratedAssetSvgs: totals.generatedSvgs
-          });
-          assert(!!this.website, "Website data not set. Unable to add asset files.");
-          this.files = {
-            ...this.website.files,
-            ...files
-          };
-          setTimeout(() => {
-            this.sendMessage("pushAssetData", {
-              files
+      }), !this.options.generateFullAssets) {
+        for (let e of BG(p, this.options.ignorePreviewClosedWhenGeneratingAssets ?? !1)) {
+          let t = await e;
+          if (t) {
+            let {
+              files,
+              totals
+            } = t;
+            this.perfTracker.updateStats({
+              totalAssetFiles: Object.keys(files).length,
+              totalAssetCacheHits: totals.cacheHits,
+              totalFillAssets: totals.fillAssets,
+              totalFlattenedFillAssets: totals.flattenedFills,
+              totalGeneratedAssetImages: totals.generatedImages,
+              totalGeneratedAssetSvgs: totals.generatedSvgs
             });
-          }, 0);
+            assert(!!this.website, 'Website data not set. Unable to add asset files.');
+            this.files = {
+              ...this.website.files,
+              ...files
+            };
+            setTimeout(() => {
+              this.sendMessage('pushAssetData', {
+                files
+              });
+            }, 0);
+          }
         }
       }
-      this.perfTracker.record("asset_generation_stop");
+      this.perfTracker.record('asset_generation_stop');
       o7(this);
       this.onReceiveHTML && setTimeout(async () => {
-        let e = await this.sendMessage("getHTML", {});
+        let e = await this.sendMessage('getHTML', {});
         this.onReceiveHTML && this.onReceiveHTML({
           html: e.html,
           styles: e.styles,
@@ -737,7 +741,7 @@ class ei {
     }, t, r, {
       threshold: 1
     });
-    this.sendMessage("setDebugStyles", {
+    this.sendMessage('setDebugStyles', {
       debugStyles: q5(i)
     });
     n.remove();
@@ -757,15 +761,15 @@ class ei {
     this.sitesMessagePort.cleanup();
   }
   setOptions(e) {
-    this.options !== e && (this.options = e, this.sendMessage("setOptions", {
+    this.options !== e && (this.options = e, this.sendMessage('setOptions', {
       options: e
     }));
   }
   async unsafeEval(e, ...t) {
-    if (!isInteractionPathCheck()) throw Error("unsafeEval is only available in interaction tests");
-    "function" == typeof e && (e = `(${e.toString()}).apply(this, ${JSON.stringify(t)})`);
+    if (!isInteractionPathCheck()) throw new Error('unsafeEval is only available in interaction tests');
+    typeof e == 'function' && (e = `(${e.toString()}).apply(this, ${JSON.stringify(t)})`);
     try {
-      return (await this.sendMessage("unsafeEval", {
+      return (await this.sendMessage('unsafeEval', {
         code: e
       })).data;
     } catch (e) {
@@ -775,11 +779,11 @@ class ei {
   startHeartbeat() {
     this.stopHeartbeat();
     this.heartbeatInterval = setInterval(() => {
-      this.sendMessage("heartbeat", {}, 5e3);
+      this.sendMessage('heartbeat', {}, 5e3);
     }, 5e3);
   }
   stopHeartbeat() {
-    null !== this.heartbeatInterval && (clearInterval(this.heartbeatInterval), this.heartbeatInterval = null);
+    this.heartbeatInterval !== null && (clearInterval(this.heartbeatInterval), this.heartbeatInterval = null);
   }
   snapshotDOMToPNG({
     code: e,
@@ -800,7 +804,7 @@ class ei {
     activeBreakpoint: m,
     isDirectManipulationOnCanvasEnabled: g
   }) {
-    return this.sendMessage("snapshotDOMToPNG", {
+    return this.sendMessage('snapshotDOMToPNG', {
       code: e,
       codeBuildId: t,
       codeInstanceGuid: r,
@@ -824,7 +828,7 @@ class ei {
     maxSnapshotWidth: e,
     maxSnapshotHeight: t
   }) {
-    return this.sendMessage("snapshotPage", {
+    return this.sendMessage('snapshotPage', {
       maxSnapshotWidth: e,
       maxSnapshotHeight: t
     });
@@ -846,7 +850,7 @@ class ei {
     width: _,
     height: h
   }) {
-    return this.sendMessage("renderComponent", {
+    return this.sendMessage('renderComponent', {
       nodeId: n,
       codeExportName: i,
       code: e,
@@ -871,15 +875,15 @@ class ei {
     code: e,
     codeBuildId: t
   }) {
-    return this.sendMessage("analyzeCodeFile", {
+    return this.sendMessage('analyzeCodeFile', {
       code: e,
       codeBuildId: t
     });
   }
   setDirectManipulationEnabled(e) {
-    this.sendMessage("setDirectManipulationElementEnabled", e);
+    this.sendMessage('setDirectManipulationElementEnabled', e);
     this.directManipulationEditor.processEvent({
-      type: "enabledChanged",
+      type: 'enabledChanged',
       enabled: e.enabled
     }, null);
   }
@@ -888,20 +892,20 @@ class ei {
     let {
       elementData,
       windowSize
-    } = await this.sendMessage("getElementLayoutData", {});
+    } = await this.sendMessage('getElementLayoutData', {});
     this.debugCompareLayout(e, elementData, windowSize);
   }
   async snapshotHTML({
     inlineBlobUrls: e = !0,
     selectedElementId: t
   } = {}) {
-    let r = await this.sendMessage("getHTML", {
+    let r = await this.sendMessage('getHTML', {
       inlineBlobUrls: e,
       selectedElementId: t
     });
     return {
       html: function (e) {
-        let t = e.styles.map(e => `    <style>${e.content}</style>`).join("\n");
+        let t = e.styles.map(e => `    <style>${e.content}</style>`).join('\n');
         return `
 <!DOCTYPE html>
 <html>
@@ -920,14 +924,14 @@ ${t}
 }
 class ea {
   constructor(e) {
-    this.clone = l7.system("sites-debug-compare-layout", () => getSingletonSceneGraph().get(getSingletonSceneGraph().get(e).clone()));
+    this.clone = permissionScopeHandler.system('sites-debug-compare-layout', () => getSingletonSceneGraph().get(getSingletonSceneGraph().get(e).clone()));
     setTimeout(() => {
       this.remove();
     }, 1e3);
   }
   remove() {
     this.clone;
-    l7.system("sites-debug-compare-layout", () => {
+    permissionScopeHandler.system('sites-debug-compare-layout', () => {
       this.clone?.removeSelfAndChildren();
     });
     this.clone = null;

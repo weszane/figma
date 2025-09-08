@@ -1,14 +1,14 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { r as _$$r } from "../905/324611";
 export let $$a0 = new class {
   constructor() {
-    this.StateSchemaValidator = vh();
-    this.SsoConfigSchemaValidator = vh();
-    this.LogoutAllUsersValidator = vh();
-    this.LogoutOneUserValidator = vh();
-    this.getSessionsValidator = vh();
-    this.deleteSessionsValidator = vh();
-    this.sendValidationEmailValidator = vh();
+    this.StateSchemaValidator = createNoOpValidator();
+    this.SsoConfigSchemaValidator = createNoOpValidator();
+    this.LogoutAllUsersValidator = createNoOpValidator();
+    this.LogoutOneUserValidator = createNoOpValidator();
+    this.getSessionsValidator = createNoOpValidator();
+    this.deleteSessionsValidator = createNoOpValidator();
+    this.sendValidationEmailValidator = createNoOpValidator();
   }
   getState(e) {
     _$$r();

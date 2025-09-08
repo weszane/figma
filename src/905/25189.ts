@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { W6 } from '../905/327522';
 import { trackEventAnalytics } from '../905/449184';
 import { logInfo, logWarning } from '../905/714362';
-import { NUh } from '../figma_app/763686';
+import { LogToConsoleMode } from '../figma_app/763686';
 import { getFalseValue } from '../figma_app/897289';
 import { P2 } from '../vendor/390973';
 let $$u15 = 'node-changes';
@@ -70,7 +70,7 @@ function b() {
     }).then(e => (e.addEventListener('versionchange', t => {
       t.oldVersion !== A && t.newVersion !== A && W6('Unexpected oldVersion when upgrading DB');
       logInfo('Autosave', `DB version change requested from ${t.oldVersion} to ${t.newVersion} for tab with DB version ${A}`, void 0, {
-        logToConsole: NUh.ALWAYS
+        logToConsole: LogToConsoleMode.ALWAYS
       });
       trackEventAnalytics('autosave db version change', {
         oldVersion: t.oldVersion,

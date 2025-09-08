@@ -3,7 +3,7 @@ import { memo, useContext, useRef, useState, useEffect, useCallback, useMemo } f
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { NLJ, Ez5, m1T, QOV } from "../figma_app/763686";
+import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "../vendor/635";
 import { A as _$$A } from "../vendor/90566";
@@ -27,7 +27,7 @@ import { PD, Z0, HD, ni, D6 } from "../figma_app/62612";
 import { BI } from "../figma_app/546509";
 import { iZ } from "../905/372672";
 import { o3, nt } from "../905/226610";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { hm, kT } from "../905/380385";
 import { v as _$$v } from "../905/99004";
@@ -76,7 +76,7 @@ export function $$ea2({
   u / o.zoomScale < 1.5 && (u *= 1.5);
   return Math.min(u, e.minZoomPercentage / 100 + .5);
 }
-let ei = [NLJ.COMMENTS, NLJ.SELECT, NLJ.SCALE, NLJ.HAND, NLJ.TYPE];
+let ei = [DesignGraphElements.COMMENTS, DesignGraphElements.SELECT, DesignGraphElements.SCALE, DesignGraphElements.HAND, DesignGraphElements.TYPE];
 let es = (e, t, n, o, a, i) => {
   let {
     threads
@@ -114,7 +114,7 @@ let er = memo(function (e) {
   let T = useContext(viewportNavigatorContext);
   let z = useRef(null);
   let J = useSelector(e => e.mirror.appModel.currentTool);
-  let ee = ut(Ez5?.editorState().handToolTemporarilyEnabled, !1);
+  let ee = getObservableValue(AppStateTsApi?.editorState().handToolTemporarilyEnabled, !1);
   let et = BI();
   let eo = e.activeThread?.id === hm;
   let er = eo ? null : e.activeThread?.id || null;
@@ -139,9 +139,9 @@ let er = memo(function (e) {
   let ej = useAtomWithSubscription(ux);
   let ek = useRef(null);
   let eP = useAtomWithSubscription(_$$R);
-  let eI = useSelector(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT);
-  let eT = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
-  let eM = eI && (!et || et?.shouldOptimizeForIpadApp && et?.shouldFadeCommentsDuringEdit) || J === NLJ.MULTISELECT;
+  let eI = useSelector(e => ![LayoutTabType.DESIGN_LAYOUT, LayoutTabType.WHITEBOARD_LAYOUT, LayoutTabType.HISTORY, LayoutTabType.PREVIEW, LayoutTabType.COMMENTS, LayoutTabType.DEV_HANDOFF, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== UserActionState.DEFAULT);
+  let eT = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMMENTS);
+  let eM = eI && (!et || et?.shouldOptimizeForIpadApp && et?.shouldFadeCommentsDuringEdit) || J === DesignGraphElements.MULTISELECT;
   let [eE, eN] = useState({
     viewport: T.getViewportInfo(),
     hasJumped: !1
@@ -154,7 +154,7 @@ let er = memo(function (e) {
   let eA = useSelector(e => e.mirror.appModel.activeUserAction);
   useEffect(() => {
     let e = z.current;
-    e && (e.shouldDisablePointerEvents = !ev && c?.disableCommentsWhenHandToolEnabled && J === NLJ.HAND || ee || void 0 !== eA && eA !== QOV.DEFAULT || J === NLJ.MULTISELECT);
+    e && (e.shouldDisablePointerEvents = !ev && c?.disableCommentsWhenHandToolEnabled && J === DesignGraphElements.HAND || ee || void 0 !== eA && eA !== UserActionState.DEFAULT || J === DesignGraphElements.MULTISELECT);
   }, [z, J, ee, eA, c?.disableCommentsWhenHandToolEnabled, ev]);
   let eL = e.dragDisabledOverride || !ei.includes(J);
   let eR = BK(eD, e.pageId, e.setClientMeta, eL, e.requestToSelectCommentPin, eP);

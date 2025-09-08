@@ -7,7 +7,7 @@ import { O as _$$O2 } from "../905/969533";
 import { j as _$$j } from "../905/519202";
 import { r as _$$r } from "../905/957643";
 import { _ as _$$_ } from "../905/563242";
-import { qmM, CNR, Ez5, v$l, tbx } from "../figma_app/763686";
+import { InteractionCpp, SlideConstantsCppBindings, AppStateTsApi, SlideTransitionType, AnimationEventType } from "../figma_app/763686";
 import { Y as _$$Y } from "../905/912236";
 import { xk, Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -31,14 +31,14 @@ import { Ib } from "../905/129884";
 import { useSelector } from "../vendor/514228";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { B as _$$B } from "../905/714743";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Z7 } from "../9410/626378";
 import { Vi } from "../figma_app/955650";
 import { A as _$$A } from "../b2835def/22707";
 import { go } from "../figma_app/524655";
 import { J as _$$J } from "../905/614223";
 import { g as _$$g } from "../905/687265";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { Fo } from "../905/63728";
 import { b as _$$b } from "../1528/127188";
 import { f7 } from "../figma_app/896988";
@@ -82,10 +82,10 @@ function U(e) {
   let i = useSelector(e => e.mirror.appModel.showComments);
   let s = Vi();
   let o = useCallback(() => {
-    i || Y5.triggerAction("toggle-show-comments", {
+    i || fullscreenValue.triggerAction("toggle-show-comments", {
       source: "comments_sidebar_setting"
     });
-    s || Y5.triggerAction("set-tool-comments", {
+    s || fullscreenValue.triggerAction("set-tool-comments", {
       source: "comments_sidebar_setting"
     });
   }, [i, s]);
@@ -199,7 +199,7 @@ function et({
   let [x, g] = useState(i || "");
   let [v, I] = useState(!0);
   let [y, b] = useState(!1);
-  let C = qmM?.editorTypeConfig().hasSlideRowBeenManuallyRenamed(o);
+  let C = InteractionCpp?.editorTypeConfig().hasSlideRowBeenManuallyRenamed(o);
   useEffect(() => {
     g(i || "");
     C || g("");
@@ -216,7 +216,7 @@ function et({
         e.preventDefault();
         I(!1);
         O(x);
-        Y5.commit();
+        fullscreenValue.commit();
         E(!1);
         break;
       case "=":
@@ -226,7 +226,7 @@ function et({
   });
   let R = useSelector(e => e.mirror.selectionProperties.name);
   let O = e => {
-    R && l7.user("rename-row", () => _$$i(o, e));
+    R && permissionScopeHandler.user("rename-row", () => _$$i(o, e));
   };
   let j = "dark" === DP();
   return jsxs(_$$b, {
@@ -282,7 +282,7 @@ function et({
           autoFocus: !0,
           onBlur: e => {
             E(!1);
-            v && (O(e.target.value), Y5.commit());
+            v && (O(e.target.value), fullscreenValue.commit());
           },
           onChange: T,
           onCompositionEnd: () => b(!1),
@@ -354,10 +354,10 @@ let $$el0 = forwardRef(function ({
   let ex = "dark" === DP();
   let eg = getFeatureFlags().slide_chapters;
   let ef = selectWithShallowEqual(e => Object.keys(e.mirror.sceneGraphSelection));
-  let ev = CNR?.singleSlideThumbnailNumberWidth() ?? 0;
+  let ev = SlideConstantsCppBindings?.singleSlideThumbnailNumberWidth() ?? 0;
   let eI = function (e) {
-    let t = Ez5?.slideAnimationBindings().getSlideTransition(e);
-    let n = null != t && (t.type !== v$l.NONE || t.trigger.type === tbx.AFTER_DELAY);
+    let t = AppStateTsApi?.slideAnimationBindings().getSlideTransition(e);
+    let n = null != t && (t.type !== SlideTransitionType.NONE || t.trigger.type === AnimationEventType.AFTER_DELAY);
     let a = Fk((e, t) => {
       let n = e.get(t);
       return !!n?.objectAnimations?.length;
@@ -471,7 +471,7 @@ let $$el0 = forwardRef(function ({
         className: _$$s.eventsAuto.bgTransparent.relative.wFull.zIndex0.opacity1.$$if(eA, _$$s.zIndex1).$$if(ew, _$$s.opacity0).$$if(J, _$$s.w48.h48.colorBgSecondary).$,
         "data-fullscreen-intercept": !0,
         onFocus: () => {
-          Ez5 && Ez5.singleSlideView().isCarouselFocused.set(!0);
+          AppStateTsApi && AppStateTsApi.singleSlideView().isCarouselFocused.set(!0);
         },
         onMouseDown: R,
         onMouseUp: O,
@@ -508,7 +508,7 @@ let $$el0 = forwardRef(function ({
             style: {
               ...sx.add({
                 width: `${ev}px`,
-                marginRight: `${CNR?.singleSlideThumbnailNumberMargin() ?? 0}px`,
+                marginRight: `${SlideConstantsCppBindings?.singleSlideThumbnailNumberMargin() ?? 0}px`,
                 marginLeft: X ? `${g}px` : "0px"
               }).$
             },

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
-import { nj } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { A as _$$A } from "../905/920165";
 import { K } from "../905/443068";
 import { K as _$$K } from "../905/851274";
@@ -31,7 +31,7 @@ export function $$_0(e) {
   let i = useRef(!1);
   let l = X7();
   function d(i) {
-    let n = e.paint.animatedImage?.hash ? nj(e.paint.animatedImage?.hash).toLowerCase() : null;
+    let n = e.paint.animatedImage?.hash ? sha1HexFromBytes(e.paint.animatedImage?.hash).toLowerCase() : null;
     t(_P({
       name: "Video previewed",
       params: {

@@ -21,7 +21,7 @@ import { Sc } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt, Vq as _$$Vq } from "../figma_app/979658";
 import { G3 } from "../905/272080";
-import { HK } from "../figma_app/155287";
+import { EditorType } from "../figma_app/155287";
 import { $1, yz } from "../figma_app/76115";
 import { yD } from "../905/92359";
 import { wR, E0 } from "../figma_app/293326";
@@ -167,7 +167,7 @@ export function $$U6({
   });
 }
 export function $$B0(e) {
-  return e.filter(e => e.editor_type === HK.UNIVERSAL || e.editor_type === HK.FIGJAM);
+  return e.filter(e => e.editor_type === EditorType.UNIVERSAL || e.editor_type === EditorType.FIGJAM);
 }
 export function $$G2() {
   return H(ZT(), useSelector(e => e.communityPayments));

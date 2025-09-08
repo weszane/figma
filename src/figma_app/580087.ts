@@ -1,17 +1,17 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback, useRef } from "react";
 import { useSelector } from "../vendor/514228";
-import { NLJ, glU } from "../figma_app/763686";
+import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { CB } from "../figma_app/442259";
 import { UM, zW } from "../figma_app/391056";
 let $$d3 = "dlt-banner-chat-shortcut";
 let $$c0 = "dlt-banner-emote-shortcut";
 let $$u4 = memo(function (e) {
-  let t = useSelector(e => e.mirror.appModel.currentTool === NLJ.COMMENTS);
+  let t = useSelector(e => e.mirror.appModel.currentTool === DesignGraphElements.COMMENTS);
   let r = useCallback(() => {
-    t ? glU?.triggerActionInUserEditScope("set-tool-default", {
+    t ? Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
       source: UM
-    }) : glU?.triggerActionInUserEditScope("set-tool-comments", {
+    }) : Fullscreen?.triggerActionInUserEditScope("set-tool-comments", {
       source: UM
     });
   }, [t]);

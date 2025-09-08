@@ -1,6 +1,6 @@
 import type { GridLayoutConfig, ProcessedRegion } from '../types'
 import { N as _$$N } from '../125137'
-import { l7 } from '../189185'
+import { permissionScopeHandler } from '../189185'
 import { Ay as _$$Ay3, jX } from '../281495'
 import { MT } from '../321380'
 import { debugState } from '../407919'
@@ -90,7 +90,7 @@ async function renameLayersForNode(node) {
   }
   try {
     Egt.clearSelection()
-    l7.user('first-draft-lint-rename-layers-temp-lock', () => {
+    permissionScopeHandler.user('first-draft-lint-rename-layers-temp-lock', () => {
       for (const guid of lockGuids) {
         Egt.setNodeLocked(guid, true, false)
       }
@@ -107,7 +107,7 @@ async function renameLayersForNode(node) {
     })
   }
   finally {
-    l7.user('first-draft-lint-rename-layers-temp-unlock', () => {
+    permissionScopeHandler.user('first-draft-lint-rename-layers-temp-unlock', () => {
       for (const guid of lockGuids) {
         Egt.setNodeLocked(guid, false, false)
       }
@@ -325,19 +325,19 @@ export function processWidgetSyncData(vm, state, i) {
     syncedState: vm.isUndefined(state)
       ? void 0
       : _$$u({
-          vm,
-          handle: state,
-          zSchema: _$$z.record(_$$z.any()).optional(),
-          property: 'cloneWidget',
-        }),
+        vm,
+        handle: state,
+        zSchema: _$$z.record(_$$z.any()).optional(),
+        property: 'cloneWidget',
+      }),
     syncedMap: vm.isUndefined(i)
       ? void 0
       : _$$u({
-          vm,
-          handle: i,
-          zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
-          property: 'cloneWidget',
-        }),
+        vm,
+        handle: i,
+        zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
+        property: 'cloneWidget',
+      }),
   }
 }
 
@@ -490,14 +490,14 @@ export function processEffect(effect) {
   const type = convertEffectType(effect.type)
   const baseEffect = effect.type === 'NOISE'
     ? {
-        type,
-        visible: effect.visible,
-      }
+      type,
+      visible: effect.visible,
+    }
     : {
-        type,
-        visible: effect.visible,
-        radius: effect.radius,
-      }
+      type,
+      visible: effect.visible,
+      radius: effect.radius,
+    }
   const boundVariables: any = {}
   if (effect.colorVar?.value?.alias) {
     boundVariables.color = createVariableAlias(effect.colorVar.value.alias)
@@ -1436,7 +1436,7 @@ export const StyleAPI = {
    */
   type({
     vm,
-         getNode,
+    getNode,
   }, handle) {
     vm.defineProp(handle, 'type', {
       enumerable: true,
@@ -1481,7 +1481,7 @@ export const StyleAPI = {
    */
   description({
     vm,
-                getNode,
+    getNode,
   }, handle) {
     vm.defineProp(handle, 'description', {
       enumerable: true,
@@ -1491,7 +1491,7 @@ export const StyleAPI = {
         return vm.newString(At(node.description))
       },
       set(value) {
-        l7.plugin('plugin-description', () => {
+        permissionScopeHandler.plugin('plugin-description', () => {
           getNode(this).description = vm.toString(value)
         })
         return vm.undefined
@@ -1504,7 +1504,7 @@ export const StyleAPI = {
    */
   remote({
     vm,
-           getNode,
+    getNode,
   }, handle) {
     vm.defineProp(handle, 'remote', {
       enumerable: true,
@@ -1520,13 +1520,13 @@ export const StyleAPI = {
    */
   consumers({
     vm,
-              getNodeFactory,
-              defineVmIncrementalProp,
-              incrementalSafeApi,
-              getNode,
-              sceneGraph,
-              documentAccessState,
-              allowIncrementalUnsafeApiCalls,
+    getNodeFactory,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -1597,7 +1597,7 @@ export const StyleAPI = {
    */
   getPublishStatus({
     vm,
-                     getNode,
+    getNode,
   }, handle) {
     vm.defineFunction(handle, 'getPublishStatusAsync', 'style.getPublishStatusAsync', () => {
       const node = getNode(this)
@@ -1618,12 +1618,12 @@ export const StyleAPI = {
    */
   remove({
     vm,
-           getNode,
-           styleManager,
+    getNode,
+    styleManager,
   }, handle) {
     vm.defineFunction(handle, 'remove', 'style.remove', () => {
       const node = getNode(this)
-      l7.plugin('plugin-remove-style', () => {
+      permissionScopeHandler.plugin('plugin-remove-style', () => {
         styleManager.softDeleteStyle(node)
       })
       return vm.undefined
@@ -1642,8 +1642,8 @@ export const StyleAPI = {
    */
   boundVariables({
     vm,
-                   defineVmProp,
-                   getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -1665,8 +1665,8 @@ export const StyleAPI = {
    */
   setBoundVariable({
     vm,
-                     defineVmFunction,
-                     getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,

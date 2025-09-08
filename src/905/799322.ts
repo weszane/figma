@@ -1,16 +1,16 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { Rq } from "../905/38914";
 import { Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { BD, BE } from "../905/264101";
 import { _Z, z3, Hx, G6, bE } from "../figma_app/639088";
 export function $$m0(e) {
   let t = useDispatch();
-  let i = X();
+  let i = setupAutofocusHandler();
   let m = () => {
     t(BD());
   };
@@ -32,7 +32,7 @@ export function $$m0(e) {
   };
   let g = e => {
     e.preventDefault();
-    t(Lo());
+    t(popModalStack());
   };
   return e.fplModal ? jsxs(Rq, {
     onSubmit: h,

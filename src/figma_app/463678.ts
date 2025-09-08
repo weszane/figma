@@ -1,4 +1,4 @@
-import { D1Y } from "../figma_app/763686";
+import { GraphicElement } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { b4, _V, kM } from "../figma_app/421886";
 import { A } from "../3850/868552";
@@ -9,13 +9,13 @@ import { A as _$$A4 } from "../2854/160761";
 import { A as _$$A5 } from "../5724/882384";
 import { A as _$$A6 } from "../svg/370498";
 let $$_5 = {
-  [D1Y.TEXT]: 0,
-  [D1Y.FRAME_OR_GROUP]: 0,
-  [D1Y.COMPONENT]: 0,
-  [D1Y.INSTANCE]: 0,
-  [D1Y.IMAGE]: 0,
-  [D1Y.SHAPE]: 0,
-  [D1Y.OTHER]: 0
+  [GraphicElement.TEXT]: 0,
+  [GraphicElement.FRAME_OR_GROUP]: 0,
+  [GraphicElement.COMPONENT]: 0,
+  [GraphicElement.INSTANCE]: 0,
+  [GraphicElement.IMAGE]: 0,
+  [GraphicElement.SHAPE]: 0,
+  [GraphicElement.OTHER]: 0
 };
 let $$h0 = [...b4, ..._V];
 let $$m1 = _V;

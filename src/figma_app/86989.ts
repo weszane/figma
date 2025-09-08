@@ -14,23 +14,23 @@ import { Dl } from "../figma_app/471982";
 import { QQ, V4, UO, WJ } from "../figma_app/808294";
 import { AC } from "../figma_app/777551";
 import { v as _$$v } from "../905/581647";
-import { $O, to } from "../905/156213";
+import { showModal, showModalHandler } from "../905/156213";
 import { fR } from "../figma_app/147952";
 import { cW, ZT } from "../figma_app/844435";
 import { G } from "../905/11536";
 import { I0, xQ, m3, PM, U, zF } from "../figma_app/45218";
 import { G3 } from "../905/272080";
-import { f5, k0 } from "../figma_app/155287";
+import { isMigratingPlugin, manifestContainsWidget } from "../figma_app/155287";
 import { x as _$$x } from "../905/749159";
 import { h as _$$h } from "../905/193918";
 import { P as _$$P, V } from "../905/837980";
 import { I as _$$I2 } from "../905/750915";
 import { n as _$$n } from "../905/347702";
 import { iZ } from "../905/372672";
-import { uF, my } from "../figma_app/300692";
+import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
 function P(e, t, r, n) {
   return i => {
-    i($O({
+    i(showModal({
       type: _$$h.type,
       data: {
         userId: e.id,
@@ -59,7 +59,7 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
             });
             a();
           }, e => {
-            e($O({
+            e(showModal({
               type: _$$h.type,
               data: {
                 userId: t.id,
@@ -81,7 +81,7 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
             redirectUrl: Ay.location.pathname,
             signedUpFromOpenSession: !0
           }));
-          e(to({
+          e(showModalHandler({
             type: _$$x,
             data: {
               headerText: getI18nString("fullscreen.toolbar.log_in_to_do_more_with_figjam")
@@ -91,13 +91,13 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
         return;
       }
     };
-    s === _$$P.SKIP ? d() : e($O({
+    s === _$$P.SKIP ? d() : e(showModal({
       type: V.type,
       data: {
         type: t ? s || _$$P.PAID_FEATURE : _$$P.LOGGED_OUT,
         onContinue: d,
         onClose: a,
-        plugin: r && uF(r) || n || i,
+        plugin: r && getPluginVersion(r) || n || i,
         monetizedResourceMetadata: r?.monetized_resource_metadata
       }
     }));
@@ -136,7 +136,7 @@ export function $$k10(e) {
       t(P(usersCanPurchase[0], e));
       return;
     }
-    t(to({
+    t(showModalHandler({
       type: _$$I2,
       data: {
         onUserSelect: r => {
@@ -182,7 +182,7 @@ export function $$U17(e, t) {
   return publishers.length > 0;
 }
 function B(e, t, r) {
-  return !(!e || !m3(e) || PM(e) || !U(e) && (f5(e) || zF(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !function (e, t) {
+  return !(!e || !m3(e) || PM(e) || !U(e) && (isMigratingPlugin(e) || zF(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !function (e, t) {
     let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment;
     return r && UO(r);
   }(e, t));
@@ -215,7 +215,7 @@ export function $$q13(e) {
   return X($$G1(), e);
 }
 export function $$J18(e) {
-  let t = useSelector(t => my(e, t.publishedPlugins));
+  let t = useSelector(t => getPluginMetadata(e, t.publishedPlugins));
   let r = $$q13(t);
   return useMemo(() => t ? {
     ...t,
@@ -228,7 +228,7 @@ export function $$Z7({
   publishedWidgets: r,
   communityPaymentsState: n
 }) {
-  let i = (k0(e) ? r : t)[e.plugin_id];
+  let i = (manifestContainsWidget(e) ? r : t)[e.plugin_id];
   if (!i) return;
   let a = X(n, i);
   return {

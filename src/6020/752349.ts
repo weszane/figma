@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { E } from "../905/632989";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ib } from "../905/129884";
 export function $$s0({
   label: t,
@@ -10,7 +10,7 @@ export function $$s0({
   let o = getI18nString("fullscreen_actions.expand-ui");
   return jsx(E, {
     className: "toggle_expanded_sidebar_button--button--brZmz",
-    onClick: () => Y5.triggerAction("toggle-sidebar", {
+    onClick: () => fullscreenValue.triggerAction("toggle-sidebar", {
       source: "left_panel"
     }),
     "aria-label": t ?? o,

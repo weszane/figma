@@ -6,12 +6,12 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J, h as _$$h } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
 import { $n } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { e as _$$e } from "../905/693478";
-import { CWU, glU, bwI, uXg, HG$ } from "../figma_app/763686";
+import { VariablesBindings, Fullscreen, StateGroupErrorType, VariableSetErrorType, VariableErrorType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
@@ -30,7 +30,7 @@ import { IW } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { TS, ZS, iA } from "../figma_app/519839";
-import { Ce, to as _$$to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { d1 } from "../905/766303";
@@ -41,7 +41,7 @@ import { B as _$$B } from "../905/521763";
 import { Ml, bj } from "../905/971098";
 import { s as _$$s } from "../cssbuilder/589278";
 import { d$ } from "../figma_app/664693";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { nN, SR } from "../figma_app/852050";
 import { _G, q5, Cq } from "../figma_app/516028";
 import { nn, zE, vu, lg, RQ, HF, Hb, ad, Cj, Fl } from "../figma_app/646357";
@@ -53,7 +53,7 @@ import { O as _$$O3 } from "../905/566074";
 import { Qx, o as _$$o, PW, E8 } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { Y as _$$Y } from "../905/465068";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
 import { pz } from "../figma_app/825489";
 import { Iq } from "../905/723429";
@@ -104,7 +104,7 @@ import { A as _$$A2 } from "../905/24328";
 import { Z as _$$Z } from "../905/279476";
 import { e as _$$e2 } from "../905/916195";
 import { cd } from "../figma_app/243058";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import td from "classnames";
@@ -387,7 +387,7 @@ function eW(e) {
   return jsx("div", {
     className: "publish_scope_dropdown--root--6MzUS",
     children: getFeatureFlags().dse_fpl_wave_2 ? jsxs(_$$Y2, {
-      children: [jsx(_$$J, {
+      children: [jsx(Label, {
         htmlFor: _,
         children: renderI18nText("design_systems.publishing_modal.publish_to_label")
       }), jsxs(_$$bL, {
@@ -767,9 +767,9 @@ function tF({
     }
   }, [d, k, m, e.status, e.type, l]);
   let j = useCallback(t => {
-    l7.user("set-is-publishable", () => {
+    permissionScopeHandler.user("set-is-publishable", () => {
       let t = !e.isPublishable;
-      e.type === PW.COMPONENT ? G9(e.node_id, t) : e.type === PW.VARIABLE_SET ? CWU.setVariableSetIsPublishable(e.node_id, t) : iT(e.node_id, t);
+      e.type === PW.COMPONENT ? G9(e.node_id, t) : e.type === PW.VARIABLE_SET ? VariablesBindings.setVariableSetIsPublishable(e.node_id, t) : iT(e.node_id, t);
     });
     R();
   }, [R, e.isPublishable, e.node_id, e.type]);
@@ -794,8 +794,8 @@ function tF({
     wr();
     await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e.node_id);
     Dh([e.node_id]);
-    glU.triggerActionInUserEditScope("zoom-to-selection", void 0);
-    x(Ce());
+    Fullscreen.triggerActionInUserEditScope("zoom-to-selection", void 0);
+    x(hideModal());
   }, [x, e.node_id]);
   switch (e.type) {
     case PW.STYLE:
@@ -935,10 +935,10 @@ function tF({
       children: [jsx("div", {
         className: "library_item_row--iconContainer--XLMG7 publishing_modal--iconContainer--WQfaN",
         children: 0 === t && M ? jsx(Fragment, {
-          children: jsx(_$$S, {
+          children: jsx(Checkbox, {
             checked: i,
             onChange: () => s(e.node_id),
-            label: jsx(_$$h, {
+            label: jsx(HiddenLabel, {
               children: getI18nString("design_systems.publishing_modal.include_in_publish", {
                 assetName: e.name
               })
@@ -1001,24 +1001,24 @@ function tF({
         children: jsx(_$$Z, {})
       }), (() => {
         if (e.type === PW.STATE_GROUP && zE(e)) switch (e.stateGroupError) {
-          case bwI.MISSING_PROPERTIES_ERROR:
+          case StateGroupErrorType.MISSING_PROPERTIES_ERROR:
             return renderI18nText("design_systems.publishing_modal.missing_properties");
-          case bwI.DUPLICATE_STATE_ERROR:
+          case StateGroupErrorType.DUPLICATE_STATE_ERROR:
             return renderI18nText("design_systems.publishing_modal.conflicting_property_values");
-          case bwI.PARSE_ERROR:
+          case StateGroupErrorType.PARSE_ERROR:
             return renderI18nText("design_systems.publishing_modal.corrupt_layer_names");
         }
         if ((e.type === PW.STATE_GROUP || e.type === PW.COMPONENT) && zE(e)) switch (e.componentPropDefError) {
-          case uXg.CONFLICTING_NAMES_WITH_VARIANT_ERROR:
-          case uXg.CONFLICTING_NAMES_ERROR:
+          case VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR:
+          case VariableSetErrorType.CONFLICTING_NAMES_ERROR:
             return renderI18nText("design_systems.publishing_modal.conflicting_property_names");
-          case uXg.UNUSED_DEF_ERROR:
+          case VariableSetErrorType.UNUSED_DEF_ERROR:
             return renderI18nText("design_systems.publishing_modal.unused_def_error");
         }
         if (e.type === PW.VARIABLE_SET && RQ(e)) switch (e.variableSetError) {
-          case HG$.TOO_MANY_VARIABLES_ERROR:
+          case VariableErrorType.TOO_MANY_VARIABLES_ERROR:
             return renderI18nText("design_systems.publishing_modal.too_many_variables_error");
-          case HG$.TOO_MANY_MODES_ERROR:
+          case VariableErrorType.TOO_MANY_MODES_ERROR:
             return renderI18nText("design_systems.publishing_modal.too_many_modes_error");
         }
         return "THUMBNAIL" !== e.type && e.old_key && l?.publishType !== "FORCED_COPY" ? e.type === PW.STYLE ? renderI18nText("design_systems.publishing_modal.moved_to_this_file") : jsxs("div", {
@@ -1076,13 +1076,13 @@ function tz({
       className: "publishing_modal--checkboxHeader--O3mui publishing_modal--sectionHeaderWithHover--OJM1Q publishing_modal--sectionHeader--OIVX8",
       onClick: t,
       tabIndex: -1,
-      children: jsx(_$$S, {
-        label: jsx(_$$J, {
+      children: jsx(Checkbox, {
+        label: jsx(Label, {
           className: "publishing_modal--checkboxHeaderLabel--k4vJy",
           children: e
         }),
         checked: !0 === i,
-        mixed: i === oV
+        mixed: i === MIXED_MARKER
       })
     })
   });
@@ -1167,8 +1167,8 @@ function tZ({
   let s = Um();
   let o = `variable-library-item-row-${e.node_id}`;
   let l = useCallback(() => {
-    l7.user("set-is-publishable", () => {
-      CWU.setVariableIsPublishable(e.node_id, !e.isPublishable);
+    permissionScopeHandler.user("set-is-publishable", () => {
+      VariablesBindings.setVariableIsPublishable(e.node_id, !e.isPublishable);
     });
   }, [e.node_id, e.isPublishable]);
   let d = useDispatch();
@@ -1266,7 +1266,7 @@ function tX({
     })]
   });
 }
-export let $$tQ0 = Ju(function (e) {
+export let $$tQ0 = registerModal(function (e) {
   return jsx(fu, {
     name: "Publishing Modal",
     properties: {
@@ -1402,7 +1402,7 @@ function tJ(e) {
   let tn = useCallback(() => {
     ti();
     I(_$$o.LIBRARY);
-    h(Ce());
+    h(hideModal());
   }, [h, I, ti]);
   useEffect(() => {
     eh.publishProgress.state === Qx.UPLOADING && tn();
@@ -1451,7 +1451,7 @@ function tJ(e) {
       let n = t && ey[t] || null;
       return !(!eh.movedLibraryItems.local[e.node_id] || e.status === E8.DELETED || n && (zE(n) || i.has(n.node_id))) && te.has(t || e.node_id);
     }).map(e => e.node_id), ...e6.filter(t => !!e[t.node_id] && t.status !== E8.DELETED && te.has(t.node_id)).map(e => e.node_id)]) {
-      let e = glU.generatePublishableCopy(n);
+      let e = Fullscreen.generatePublishableCopy(n);
       e && te.has(n) && (te.$$delete(n), te.add(e));
     }
   }, [te, ey, eh.used__LIVEGRAPH.localNodeIdToDestinationKey, eh.movedLibraryItems.local, e5, e4, e6]);
@@ -1673,16 +1673,16 @@ function tJ(e) {
           team: tP
         }), tO && jsx(e3, {}), timedOut && jsx(e9, {}), "INVALID_EXAMPLE" === itemsToPublishInvalidReason && jsx(e8, {}), "DESCENDANT_CODE_INSTANCE_OR_CODE_LAYER" === itemsToPublishInvalidReason && jsx(e7, {}), getFeatureFlags().first_draft_publish_ux && jsxs("div", {
           className: "publishing_modal--publishTypeContainer--PeOOJ",
-          children: [jsx(_$$S, {
-            label: jsx(_$$J, {
+          children: [jsx(Checkbox, {
+            label: jsx(Label, {
               children: "Publish as First Draft kit"
             }),
             checked: tg,
             onChange: e => {
               tf(e);
             }
-          }), getFeatureFlags().first_draft_legacy_publish_ux && tg && jsx(_$$S, {
-            label: jsx(_$$J, {
+          }), getFeatureFlags().first_draft_legacy_publish_ux && tg && jsx(Checkbox, {
+            label: jsx(Label, {
               children: "Publish as a legacy kit (no direct generation)"
             }),
             checked: !t_,
@@ -1772,7 +1772,7 @@ function t0({
                   if (analyticsEventManager.trackDefinedEvent("ds_import.publish_button_clicked", {
                     library_key: i
                   }), getFeatureFlags().bake_ds_import_library_guidelines) {
-                    r(_$$to({
+                    r(showModalHandler({
                       type: _$$i
                     }));
                     return;
@@ -1916,7 +1916,7 @@ function t1(e) {
     let y = m.length;
     if (r) {
       let t;
-      if (t = y === r || y > 0 && y < r && oV, $(jsx(tz, {
+      if (t = y === r || y > 0 && y < r && MIXED_MARKER, $(jsx(tz, {
         header: renderI18nText("design_systems.publishing_modal.changes_header_with_count", {
           countString: jsx(tW, {
             count: y,

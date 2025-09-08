@@ -1,18 +1,18 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { z } from "../9410/836234";
-import { Ez5, glU } from "../figma_app/763686";
+import { AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { J as _$$J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
-import { AS } from "../905/156213";
-import { ut } from "../figma_app/84367";
+import { hideModalHandler } from "../905/156213";
+import { getObservableValue } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { CM } from "../905/459248";
 export function $$m1() {
   let e = useSelector(e => e.modalShown);
   let t = e?.type === CM.type;
-  let i = ut(Ez5?.uiState().showMissingFontsButton, !1);
+  let i = getObservableValue(AppStateTsApi?.uiState().showMissingFontsButton, !1);
   let r = U();
   let l = useDispatch();
   return {
@@ -20,7 +20,7 @@ export function $$m1() {
     icon: z,
     label: getI18nString("fullscreen.toolbar.missing_fonts"),
     onClick: () => {
-      t ? l(AS()) : (r("missing_fonts_button_clicked"), glU.findMissingFontsAndShowPopover());
+      t ? l(hideModalHandler()) : (r("missing_fonts_button_clicked"), Fullscreen.findMissingFontsAndShowPopover());
     },
     shouldShow: i
   };

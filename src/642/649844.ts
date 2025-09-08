@@ -3,13 +3,13 @@ import { useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Et } from "../figma_app/397267";
 import { W as _$$W } from "../figma_app/462192";
-import { rXF, glU, hJs } from "../figma_app/763686";
+import { VariableResolvedDataType, Fullscreen, SnapMode } from "../figma_app/763686";
 import d from "classnames";
 import { am } from "../figma_app/901889";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { sT } from "../figma_app/740163";
-import { gl, oV, Q8, SX, hS } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -42,7 +42,7 @@ export function $$M0({
   let [D, F] = lJ("stackCounterAlignContent");
   let B = am();
   let K = useRef(!1);
-  let G = gl(D) ? oV : "SPACE_BETWEEN" === D ? Q8 : L;
+  let G = isInvalidValue(D) ? MIXED_MARKER : "SPACE_BETWEEN" === D ? AUTO_MARKER : L;
   let H = useRef(null);
   useEffect(() => {
     e && (H.current?.focus(), H.current?.select());
@@ -50,13 +50,13 @@ export function $$M0({
   let {
     boundVariable,
     consumedVariable
-  } = _$$O(I, rXF.FLOAT);
+  } = _$$O(I, VariableResolvedDataType.FLOAT);
   useEffect(() => {
     boundVariable && "SPACE_BETWEEN" === D && F("AUTO", zk.NO);
   }, [boundVariable, D, F]);
   let {
     clearVariableConsumption
-  } = _$$O(I, rXF.FLOAT);
+  } = _$$O(I, VariableResolvedDataType.FLOAT);
   let W = lW({
     smallNudgeAmount,
     bigNudgeAmount,
@@ -67,8 +67,8 @@ export function $$M0({
     s && (B("autolayout_counter_spacing_changed", {
       source: t,
       input: K.current ? "scrub" : "textfield",
-      value: SX(e) ? "Auto" : e
-    }), glU.temporarilyHideOverlay(hJs.SELECTION));
+      value: isAutoMarker(e) ? "Auto" : e
+    }), Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION));
     "number" == typeof e || null === e ? (F("AUTO", zk.NO), R(e, s)) : (clearVariableConsumption(), F("SPACE_BETWEEN", s));
   };
   let Y = getI18nString("fullscreen.properties_panel.stack_panel.gap_rows_vertical");
@@ -76,7 +76,7 @@ export function $$M0({
   let q = [jsx(c$, {
     value: Et(L) ? L : bigNudgeAmount
   }, "value"), jsx(c$, {
-    value: Q8
+    value: AUTO_MARKER
   }, "auto")];
   let J = O && "SPACE_BETWEEN" !== D;
   if (!s) {
@@ -116,7 +116,7 @@ export function $$M0({
           onScrubEnd: d.onScrubEnd,
           options: q,
           outerClassName: c()(d.outerClassName, Sz),
-          placeholder: J && hS(G) ? W.format(G) : void 0,
+          placeholder: J && isValidValue(G) ? W.format(G) : void 0,
           recordingKey: d.recordingKey,
           scrubStartValue: J ? G : void 0,
           shiftVariableOptionToAlign: !0,
@@ -133,8 +133,8 @@ export function $$M0({
     recordingKey: d.recordingKey,
     inputClassName: d.outerClassName,
     fields: E,
-    currentFieldValue: hS(L) ? L : void 0,
-    resolvedType: rXF.FLOAT,
+    currentFieldValue: isValidValue(L) ? L : void 0,
+    resolvedType: VariableResolvedDataType.FLOAT,
     disableEntryPoint: s,
     children: jsx(Se, {
       allowEmpty: !0,
@@ -168,7 +168,7 @@ export function $$M0({
         d.onScrubEnd?.(e);
       },
       onValueChange: $,
-      placeholder: J && hS(G) ? W.format(G) : void 0,
+      placeholder: J && isValidValue(G) ? W.format(G) : void 0,
       recordingKey: d.recordingKey,
       scrubMultiplier: smallNudgeAmount,
       scrubStartValue: J ? G : void 0,

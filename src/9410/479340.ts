@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Fo, Uz as _$$Uz } from "../905/63728";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
 import { dh } from "../figma_app/186343";
 import { Pe } from "../figma_app/32128";
@@ -35,7 +35,7 @@ export function $$m0({
           l();
           break;
         case _$$Uz.R:
-          Fo(t) && (1 === c.length ? n(c[0]) : Y5.triggerActionInUserEditScope("batch-page-rename", {
+          Fo(t) && (1 === c.length ? n(c[0]) : fullscreenValue.triggerActionInUserEditScope("batch-page-rename", {
             args: {
               nodeIds: c
             }
@@ -54,7 +54,7 @@ export function $$f1(e) {
   }, [i]);
   let u = useCallback((r, n) => {
     let l = p(n);
-    switch (l && (tJ([]), Y5.commit()), l) {
+    switch (l && (tJ([]), fullscreenValue.commit()), l) {
       case "individual":
         i(t.includes(r) ? t.filter(e => e !== r) : 0 === t.length && a !== r ? [a, r] : [...t, r]);
         return !0;

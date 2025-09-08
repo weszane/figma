@@ -14,10 +14,10 @@ import { B } from "../905/261906";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { ud } from "../905/513035";
-import { TN } from "../figma_app/831101";
-import { Ju } from "../905/102752";
+import { UpsellSourceType } from "../figma_app/831101";
+import { registerModal } from "../905/102752";
 import { J as _$$J } from "../905/273120";
-let $$I1 = Ju($$A0);
+let $$I1 = registerModal($$A0);
 let S = buildUploadUrl("a2151b55cc069625817d2ed13b404e0dd2417f1c");
 let v = "https://help.figma.com/hc/articles/31722591905559-Figma-Make-FAQs";
 export function $$A0(e) {
@@ -89,7 +89,7 @@ export function $$A0(e) {
                 t(WX({
                   teamId: team.id,
                   openInNewTab: !0,
-                  entryPoint: TN.FIGMAKE_MODAL
+                  entryPoint: UpsellSourceType.FIGMAKE_MODAL
                 }));
                 onClose();
               },

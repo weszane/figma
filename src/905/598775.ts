@@ -5,7 +5,7 @@ import { E } from "../905/632989";
 import { S } from "../905/823680";
 import { $ } from "../905/61417";
 import { _ } from "../figma_app/496441";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 let u = createContext(null);
 let $$p3 = forwardRef(({
   className: e,
@@ -29,7 +29,7 @@ let $$p3 = forwardRef(({
     children: jsx("div", {
       className: A("card-primitive__root__h5a39", e),
       ref: i,
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...t
     })
   });

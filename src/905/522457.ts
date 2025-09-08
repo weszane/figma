@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { u8 } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ze } from "../figma_app/516028";
 import { mapEditorTypeToStringWithError } from "../figma_app/53721";
 import { W } from "../905/632622";
@@ -32,7 +32,7 @@ function g({
   let h = s.get(t);
   let g = h?.parentNode;
   let f = r ? s.get(r) : void 0;
-  let _ = Y5.getViewportInfo();
+  let _ = fullscreenValue.getViewportInfo();
   let A = atomStoreManager.get(ze) ?? void 0;
   let y = atomStoreManager.get(u8);
   let b = y ? mapEditorTypeToStringWithError(y) : void 0;

@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { iZ as _$$iZ, pS, TA } from "../905/372672";
 import { po } from "../figma_app/45218";
-import { Ju, ZU, qK } from "../905/102752";
+import { registerModal, ModalSupportsBackground, registerLegacyModal } from "../905/102752";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import I from "classnames";
@@ -18,9 +18,9 @@ import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
 import { Cg } from "../figma_app/471982";
 import { oB, j7, sf } from "../905/929976";
-import { Lo, to as _$$to, Ce } from "../905/156213";
+import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { sD } from "../figma_app/740025";
-import { EB } from "../figma_app/831101";
+import { createEmptyAddress } from "../figma_app/831101";
 import { C as _$$C } from "../905/180";
 import { S as _$$S } from "../figma_app/179602";
 import { S3 } from "../905/708054";
@@ -63,8 +63,8 @@ import { A as _$$A5 } from "../5724/501642";
 import { kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { a as _$$a } from "../905/329735";
-import { S as _$$S2 } from "../905/274480";
-import { J as _$$J, h as _$$h2 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
 import { J as _$$J2 } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -83,7 +83,7 @@ import { d as _$$d } from "../905/811033";
 import { iX as _$$iX, Ke } from "../905/415545";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { tH as _$$tH, H4 } from "../905/751457";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { b as _$$b2, c as _$$c } from "../905/308099";
 import { BQ } from "../905/865071";
 import { z as _$$z } from "../905/502533";
@@ -101,7 +101,7 @@ import { sx as _$$sx } from "../905/941192";
 import { Yh6, YN5, sMZ, P4, kQI } from "../figma_app/43951";
 import { kA, yK } from "../figma_app/336853";
 import { H as _$$H } from "../905/202181";
-import { X as _$$X3 } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { ec as _$$ec, BD, eu as _$$eu, Ci, qC } from "../905/264101";
 import { _Z, pL, yl, Vq, v0, jE } from "../figma_app/639088";
 import { zd, Bb, B7 } from "../905/651696";
@@ -121,7 +121,7 @@ import { E as _$$E2 } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { reportError } from "../905/11";
 import { k as _$$k3 } from "../905/93362";
-import { nF as _$$nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../figma_app/24841";
 import { Z as _$$Z2 } from "../905/296690";
 import { bL as _$$bL, l9, mc, c$ as _$$c$ } from "../905/493196";
@@ -141,7 +141,7 @@ import { c as _$$c2 } from "../905/370443";
 import { am } from "../905/640017";
 import { T5 } from "../figma_app/465071";
 import { $I } from "../figma_app/865646";
-import { b as _$$b3 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { C_ } from "../905/345933";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -152,7 +152,7 @@ import { u as _$$u } from "../905/834238";
 import { Jt, hZ, Op, as, mN, Gb } from "../vendor/739257";
 import { A as _$$A7 } from "../vendor/723372";
 import { VM, iM as _$$iM, C4 } from "../905/472756";
-import { Qv } from "../905/959312";
+import { useRecording } from "../905/959312";
 import { l as _$$l } from "../905/479687";
 import { a as _$$a2 } from "../905/462280";
 import { R as _$$R3 } from "../905/256203";
@@ -227,7 +227,7 @@ let y = createContext({
   setAccountModalSubViewData: () => {}
 });
 var E = I;
-let z = Ju(function (e) {
+let z = registerModal(function (e) {
   let t = useDispatch();
   let [i, n] = useState(e.vatGstId);
   let [s, o] = useState(e.shippingAddress);
@@ -255,7 +255,7 @@ let z = Ju(function (e) {
         }));
         e.setVatGstId(n);
         e.setShippingAddress(s);
-        t(Lo());
+        t(popModalStack());
       }).catch(e => {
         d(!1);
         logError("Error updating user billing details", e, n, {
@@ -310,7 +310,7 @@ function H(e) {
           tabIndex: 0,
           className: "community_user_address--blueLink--1xHm5 blue_link--blueLink--9rlnd",
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: z,
               data: {
                 vatGstId: i,
@@ -536,7 +536,7 @@ function ey(e) {
       children: jsx($n, {
         variant: "link",
         onClick: () => {
-          i(_$$to({
+          i(showModalHandler({
             type: _$$g
           }));
         },
@@ -583,7 +583,7 @@ let eC = function (e) {
       }
       let i = _$$p(resourceType, resourceId);
       c(sf(i));
-      c(Ce());
+      c(hideModal());
     },
     children: [jsxs("div", {
       className: "community_resource_row--content--Lr2qU",
@@ -813,7 +813,7 @@ function eG(e) {
       name: "Customer Requests Refund"
     }, "cta_clicked");
     o(!1);
-    n(_$$to({
+    n(showModalHandler({
       type: bX,
       data: {
         user: e.user,
@@ -1024,7 +1024,7 @@ function eZ(e) {
   });
 }
 let eX = (e, t) => {
-  e(_$$to({
+  e(showModalHandler({
     type: S3,
     data: {
       userId: t.id,
@@ -1085,7 +1085,7 @@ function eJ(e) {
   let [d, c] = useState();
   let [u, p] = useState(!1);
   let [m, g] = useState("");
-  let [_, A] = useState(EB());
+  let [_, A] = useState(createEmptyAddress());
   let [I, E] = useState("");
   let w = useCallback(() => _$$C.getBuyerPurchases({
     purchaseType: "active",
@@ -1203,7 +1203,7 @@ function eJ(e) {
                   subView: "handle",
                   handle: e.profile.profile_handle
                 }));
-                O(Ce());
+                O(hideModal());
               },
               children: M
             })]
@@ -1243,7 +1243,7 @@ function eJ(e) {
         }), jsx($n, {
           variant: "destructiveLink",
           onClick: () => {
-            e.profile && O(_$$to({
+            e.profile && O(showModalHandler({
               type: _$$M,
               data: {
                 dispatch: O,
@@ -1267,8 +1267,8 @@ function e1(e, t) {
 }
 let tm = new class {
   constructor() {
-    this.FeedIndicatorPreferenceSchemaValidator = vh();
-    this.FeedIndicatorPreferenceSchemaValidatorOnUpdate = vh();
+    this.FeedIndicatorPreferenceSchemaValidator = createNoOpValidator();
+    this.FeedIndicatorPreferenceSchemaValidatorOnUpdate = createNoOpValidator();
   }
   getFeedIndicatorPreference(e) {
     return this.FeedIndicatorPreferenceSchemaValidator.validate(async ({
@@ -1338,10 +1338,10 @@ function tA() {
     children: [jsx("h3", {
       className: th,
       children: renderI18nText("fig_feed.feed")
-    }), jsx(_$$S2, {
+    }), jsx(Checkbox, {
       checked: i.data.enabled,
       onChange: s,
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: getI18nString("fig_feed.indicator_for_new_feed_posts")
       })
     }, "sendMeNotifications_indicatorForNewFeedPosts")]
@@ -1370,20 +1370,20 @@ function tE(e) {
     }),
     children: Object.entries(e.radioGroupSettings.options).map(([e, t]) => jsx(_$$c, {
       value: e,
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: t
       })
     }, e))
   });
 }
 function tx(e) {
-  return jsx(_$$S2, {
+  return jsx(Checkbox, {
     checked: !e.disabled && e.checkboxSettings.stateValue,
     onChange: t => {
       e.toggle(e.checkboxSettings.policyType, t);
     },
     disabled: e.disabled,
-    label: jsx(_$$J, {
+    label: jsx(Label, {
       children: e.checkboxSettings.labelText
     })
   }, e.checkboxSettings.policyType);
@@ -1568,10 +1568,10 @@ function tk(e) {
       children: e.headerText
     }), jsxs("div", {
       ..._$$Ay.props(tR.optionsContainer, e.infoText ? tR.optionsContainerWithInfoText : null),
-      children: [jsx(_$$S2, {
+      children: [jsx(Checkbox, {
         checked: i.data.sendMeNotifications,
         onChange: p,
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: e.sendMeNotificationsText
         }),
         children: e.infoText
@@ -1623,9 +1623,9 @@ function tN() {
     children: [jsx("h3", {
       className: th,
       children: renderI18nText("notification_settings_modal.product_tips_and_news")
-    }), jsx(_$$S2, {
+    }), jsx(Checkbox, {
       checked: t,
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: renderI18nText("notification_settings_modal.send_me_occasional_emails_with_updates_and_promotions")
       }),
       onChange: i
@@ -1727,10 +1727,10 @@ function tD() {
   });
 }
 var tq = (e => (e[e.Unknown = 0] = "Unknown", e[e.Mobile = 1] = "Mobile", e[e.Desktop = 2] = "Desktop", e))(tq || {});
-let tJ = Ju(function (e) {
+let tJ = registerModal(function (e) {
   let t = useDispatch();
   let i = hS(e);
-  let n = _$$X3();
+  let n = setupAutofocusHandler();
   return jsx(bL, {
     manager: i,
     width: "md",
@@ -1784,8 +1784,8 @@ let tJ = Ju(function (e) {
       })]
     })
   });
-}, "CHANGE_PASSWORD_MODAL", ZU.YES);
-let t4 = Ju(function (e) {
+}, "CHANGE_PASSWORD_MODAL", ModalSupportsBackground.YES);
+let t4 = registerModal(function (e) {
   let t = _$$iZ();
   let i = _$$Z();
   let n = useDispatch();
@@ -1814,7 +1814,7 @@ let t4 = Ju(function (e) {
     })
   }) : null;
 }, "DisableTwoFactorModal");
-let iu = _$$nF((e, {
+let iu = createOptimistThunk((e, {
   id: t
 }) => {
   if (!e.getState().user) return;
@@ -1831,7 +1831,7 @@ let iu = _$$nF((e, {
     userInitiated: !1
   }));
 });
-let ip = _$$nF(async (e, t) => {
+let ip = createOptimistThunk(async (e, t) => {
   if (!e.getState().user) return;
   let i = e.getState().user;
   try {
@@ -1890,7 +1890,7 @@ function ib({
     })]
   });
 }
-let iv = Ju(function (e) {
+let iv = registerModal(function (e) {
   let [t, i] = useState("");
   let [n, o] = useState(30);
   let [d, u] = useState({
@@ -1962,7 +1962,7 @@ let iv = Ju(function (e) {
                 e && o(Number(e));
               },
               children: [jsx(l9, {
-                label: jsx(_$$h2, {
+                label: jsx(HiddenLabel, {
                   children: renderI18nText("tokens.settings.dev_token_modal.expiration_header")
                 }),
                 description: y
@@ -2047,7 +2047,7 @@ let iv = Ju(function (e) {
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
-            onClick: () => _(Lo()),
+            onClick: () => _(popModalStack()),
             variant: "secondary",
             children: renderI18nText("tokens.settings.dev_token_modal.cancel")
           }), jsx($n, {
@@ -2062,7 +2062,7 @@ let iv = Ju(function (e) {
                   days: n
                 }).asSeconds()
               }));
-              _(Lo());
+              _(popModalStack());
             },
             children: renderI18nText("tokens.settings.dev_token_modal.cta")
           })]
@@ -2239,7 +2239,7 @@ function iT(e) {
     }), jsx($n, {
       variant: "link",
       onClick: () => {
-        n(_$$to({
+        n(showModalHandler({
           type: iv,
           data: {
             org: i
@@ -2446,11 +2446,11 @@ function iM({
   let o = a || s;
   let l = e.google_sso_only || e.saml_sso_only;
   let d = n && !s;
-  let c = () => t(_$$to({
+  let c = () => t(showModalHandler({
     type: _$$J3,
     showModalsBeneath: !0
   }));
-  let u = () => t(_$$to({
+  let u = () => t(showModalHandler({
     type: _$$t3,
     showModalsBeneath: !0
   }));
@@ -2461,7 +2461,7 @@ function iM({
         children: renderI18nText("settings.account_settings.password_section_header")
       }), jsx($n, {
         variant: "link",
-        onClick: () => t(_$$to({
+        onClick: () => t(showModalHandler({
           type: tJ,
           showModalsBeneath: !0
         })),
@@ -2488,7 +2488,7 @@ function iM({
           children: renderI18nText("auth.two-factor-setup.authenticator_apps_are_enabled")
         }), jsx($n, {
           variant: "link",
-          onClick: () => t(_$$to({
+          onClick: () => t(showModalHandler({
             type: t4,
             showModalsBeneath: !0
           })),
@@ -2527,7 +2527,7 @@ function iM({
         className: J,
         children: jsx($n, {
           variant: "link",
-          onClick: () => t(_$$to({
+          onClick: () => t(showModalHandler({
             type: _$$J4,
             showModalsBeneath: !0
           })),
@@ -2701,13 +2701,13 @@ function iH({
     })]
   });
 }
-let nt = _$$nF((e, t) => {
+let nt = createOptimistThunk((e, t) => {
   let i = PG(t);
   if (i.message) return e.dispatch(_$$s2.error(i.message));
   let n = XHR.put("/api/user", t);
   n.then(() => {
     let i = e.getState();
-    i.modalShown && i.modalShown.type === ni.type && e.dispatch(Lo());
+    i.modalShown && i.modalShown.type === ni.type && e.dispatch(popModalStack());
     e.dispatch(_$$s2.flash(getI18nString("api_user.verify-email-message", {
       email: t.email
     })));
@@ -2720,7 +2720,7 @@ let nt = _$$nF((e, t) => {
   }));
   return n;
 });
-let ni = Ju(function (e) {
+let ni = registerModal(function (e) {
   let t = useDispatch();
   return jsx(nr, {
     ...e,
@@ -2778,7 +2778,7 @@ function nr({
       u((await _$$k3.getEmailFeatures()).data.meta);
     })();
   }, []);
-  let p = _$$X3();
+  let p = setupAutofocusHandler();
   return jsxs(_$$R2, {
     open: e,
     onClose: t,
@@ -2914,7 +2914,7 @@ function nG({
     recordingKey: t,
     ...i
   }) {
-    let n = Qv(e, {
+    let n = useRecording(e, {
       eventName: "submit",
       recordingKey: t
     }, [e]);
@@ -3331,14 +3331,14 @@ nQ.displayName = "Input";
 let nJ = Object.assign(nQ, {
   Root: _$$p3.Root
 });
-let n1 = Ju(function (e) {
+let n1 = registerModal(function (e) {
   let t = hS(e);
   let i = useDispatch();
   let n = getFeatureFlags().fpl_username_form_migration;
   let o = useSelector(e => e.user);
   let [d, u] = useState(o.name);
   let [m, g] = useState(!1);
-  let f = _$$X3();
+  let f = setupAutofocusHandler();
   let _ = _$$z4.object({
     name: _$$z4.string({
       required_error: getI18nString("settings.account_settings.change_name_required")
@@ -3367,7 +3367,7 @@ let n1 = Ju(function (e) {
           },
           userInitiated: !0
         }));
-        i(Lo());
+        i(popModalStack());
       },
       children: jsxs(vo, {
         children: [jsx(Y9, {
@@ -3415,7 +3415,7 @@ let n1 = Ju(function (e) {
           },
           userInitiated: !0
         }));
-        i(Lo());
+        i(popModalStack());
       },
       children: [jsx(Y9, {
         children: jsx(hE, {
@@ -3450,10 +3450,10 @@ let n1 = Ju(function (e) {
       })]
     })
   });
-}, "CHANGE_NAME_MODAL", ZU.YES);
+}, "CHANGE_NAME_MODAL", ModalSupportsBackground.YES);
 let n6 = () => getI18nString("settings.delete_user_account.delete_my_account");
 let n7 = "DELETE_USER_ACCOUNT_MODAL";
-qK(n7, e => jsx(n8, {
+registerLegacyModal(n7, e => jsx(n8, {
   ...e
 }));
 class n8 extends PureComponent {
@@ -3475,7 +3475,7 @@ class n8 extends PureComponent {
     };
     this.cancel = e => {
       e.preventDefault();
-      this.props.dispatch(Lo());
+      this.props.dispatch(popModalStack());
     };
     this.state = {
       confirmUserDeleteInput: ""
@@ -3565,7 +3565,7 @@ class n8 extends PureComponent {
   }
 }
 n8.displayName = "DeleteUserAccountModal";
-let rt = Ju(function (e) {
+let rt = registerModal(function (e) {
   let t = hS(e);
   let i = TA();
   let [n, o] = useState(e.fileViewHistoryDisabled.toString());
@@ -3607,13 +3607,13 @@ let rt = Ju(function (e) {
               o(e);
             },
             children: [jsx(_$$c, {
-              label: jsx(_$$J, {
+              label: jsx(Label, {
                 children: renderI18nText("settings.account_settings.file_view_history_modal.enabled_label")
               }),
               value: (!1).toString(),
               children: renderI18nText("settings.account_settings.file_view_history_modal.turn_on_description")
             }, (!1).toString()), jsx(_$$c, {
-              label: jsx(_$$J, {
+              label: jsx(Label, {
                 children: renderI18nText("settings.account_settings.file_view_history_modal.disabled_label")
               }),
               value: (!0).toString(),
@@ -3642,7 +3642,7 @@ let rt = Ju(function (e) {
     })
   });
 }, "FileViewHistoryPreferenceModal");
-let ra = Ju(rs, "FONT_MODAL");
+let ra = registerModal(rs, "FONT_MODAL");
 function rs({
   open: e,
   onClose: t
@@ -3710,7 +3710,7 @@ function ro() {
     };
   }, []), desktopAPIInstance) return null;
   let n = () => {
-    e(_$$to({
+    e(showModalHandler({
       type: ra,
       showModalsBeneath: !0
     }));
@@ -3804,7 +3804,7 @@ function rg() {
           source: "user_settings"
         });
       },
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: renderI18nText("settings.account_settings.enable_closed_captioning_when_using_audio")
       })
     })
@@ -3818,7 +3818,7 @@ function rf() {
     e && _$$nN(t) && (HJ(i, !1), trackEventAnalytics("voice_caption_download_error", {
       error_code: t,
       source: "user_settings"
-    }), i(_$$to({
+    }), i(showModalHandler({
       type: _$$L3,
       data: {
         dispatch: i,
@@ -4004,7 +4004,7 @@ function rD(e) {
     } : void 0
   });
   let p = (e, i) => {
-    t(_$$to({
+    t(showModalHandler({
       type: rN,
       data: {
         orgId: e,
@@ -4205,15 +4205,15 @@ function rF({
     let t = Object.values(a.orgById).filter(e => e.domain_capture).map(e => e.id);
     return 0 === a.orgDomains.domains.filter(e => t.includes(e.org_id)).filter(t => zN(e.email) === t.domain).length;
   };
-  let A = () => t(_$$to({
+  let A = () => t(showModalHandler({
     type: _$$u,
     showModalsBeneath: !0
   }));
-  let y = () => t(_$$to({
+  let y = () => t(showModalHandler({
     type: _$$J3,
     showModalsBeneath: !0
   }));
-  let I = () => t(_$$to({
+  let I = () => t(showModalHandler({
     type: _$$t3,
     showModalsBeneath: !0
   }));
@@ -4241,7 +4241,7 @@ function rF({
         }), jsx("div", {
           children: jsx($n, {
             variant: "link",
-            onClick: () => t(_$$to({
+            onClick: () => t(showModalHandler({
               type: n1,
               showModalsBeneath: !0
             })),
@@ -4259,7 +4259,7 @@ function rF({
         }), !w && jsx("div", {
           children: jsx($n, {
             variant: "link",
-            onClick: () => t(_$$to({
+            onClick: () => t(showModalHandler({
               type: ni,
               showModalsBeneath: !0
             })),
@@ -4298,7 +4298,7 @@ function rF({
               children: renderI18nText("settings.account_settings.password_section_header")
             }), jsx($n, {
               variant: "link",
-              onClick: () => t(_$$to({
+              onClick: () => t(showModalHandler({
                 type: tJ,
                 showModalsBeneath: !0
               })),
@@ -4325,7 +4325,7 @@ function rF({
                 children: renderI18nText("auth.two-factor-setup.authenticator_apps_are_enabled")
               }), jsx($n, {
                 variant: "link",
-                onClick: () => t(_$$to({
+                onClick: () => t(showModalHandler({
                   type: t4,
                   showModalsBeneath: !0
                 })),
@@ -4361,7 +4361,7 @@ function rF({
               className: J,
               children: jsx($n, {
                 variant: "link",
-                onClick: () => t(_$$to({
+                onClick: () => t(showModalHandler({
                   type: _$$J4,
                   showModalsBeneath: !0
                 })),
@@ -4388,10 +4388,10 @@ function rF({
               className: _$$s.mt16.$,
               children: jsx($z, {
                 onClick: () => {
-                  t(_$$to({
+                  t(showModalHandler({
                     type: _$$V2,
                     data: {
-                      upsellSource: _$$b3.SETTINGS_VIEW
+                      upsellSource: UpsellModalType.SETTINGS_VIEW
                     }
                   }));
                 },
@@ -4425,7 +4425,7 @@ function rF({
               trackingContext: _$$e.USER_SETTINGS,
               text: "Change Languages"
             });
-            t(_$$to({
+            t(showModalHandler({
               type: _$$kA,
               showModalsBeneath: !0,
               data: {
@@ -4455,7 +4455,7 @@ function rF({
           })),
           children: [jsx(l9, {
             width: "fill",
-            label: jsx(_$$h2, {
+            label: jsx(HiddenLabel, {
               children: $I(i)
             })
           }), jsx(mc, {
@@ -4469,7 +4469,7 @@ function rF({
         "data-fpl-ui3-override": !0,
         className: "account_settings_modal--toggleContainer--fstwW",
         children: jsx(_$$d2, {
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: getI18nString("settings.account_settings.enhanced_contrast.label")
           }),
           checked: enhancedContrast,
@@ -4496,7 +4496,7 @@ function rF({
         children: renderI18nText("settings.account_settings.enable_libraries_for_drafts", {
           enableLibrariesLink: jsx($n.Link, {
             onClick: () => {
-              t(_$$to({
+              t(showModalHandler({
                 type: _$$T,
                 data: {
                   entrypoint: r6.ACCOUNT_SETTINGS_ENABLE_LIBRARIES_LINK
@@ -4537,7 +4537,7 @@ function rF({
               trackingContext: _$$e.USER_SETTINGS,
               text: "Change File View History Preference"
             });
-            t(_$$to({
+            t(showModalHandler({
               type: rt,
               data: {
                 fileViewHistoryDisabled: o
@@ -4560,7 +4560,7 @@ function rF({
       }), jsx("div", {
         children: jsx($n, {
           variant: "destructiveLink",
-          onClick: () => t(_$$to({
+          onClick: () => t(showModalHandler({
             type: n7,
             showModalsBeneath: !0
           })),
@@ -4570,7 +4570,7 @@ function rF({
     })]
   });
 }
-qK(rN, e => jsx(rP, {
+registerLegacyModal(rN, e => jsx(rP, {
   ...e.modalShown.data
 }));
 export var $$rM1 = (e => (e.ACCOUNT = "ACCOUNT", e.COMMUNITY = "COMMUNITY", e.NOTIFICATIONS = "NOTIFICATIONS", e.SESSIONS = "SESSIONS", e.SECURITY = "SECURITY", e))($$rM1 || {});
@@ -4712,7 +4712,7 @@ let rU = {
   SESSIONS: () => getI18nString("settings.account_setting.sessions"),
   SECURITY: () => getI18nString("settings.account_setting.security")
 };
-let $$rB0 = Ju(function (e) {
+let $$rB0 = registerModal(function (e) {
   let t = hS(e);
   let i = getFeatureFlags().user_settings_tab;
   let {
@@ -4784,6 +4784,6 @@ let $$rB0 = Ju(function (e) {
       })
     })
   });
-}, "ACCOUNT_SETTINGS_MODAL", ZU.YES);
+}, "ACCOUNT_SETTINGS_MODAL", ModalSupportsBackground.YES);
 export const s = $$rB0;
 export const c = $$rM1;

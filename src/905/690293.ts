@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { c1 } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { gl, oV } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { Ib } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { Xs } from "../figma_app/98483";
@@ -34,7 +34,7 @@ function f({
   let v = "width" === u ? Yq.Width : Yq.Height;
   let I = useDispatch();
   let E = Xs();
-  let x = gl(t) ? g : {};
+  let x = isInvalidValue(t) ? g : {};
   let S = c1(A);
   return jsx($j, {
     className: z,
@@ -46,7 +46,7 @@ function f({
     floatingPointFormat: void 0,
     forwardedRef: y,
     inputClassName: hF,
-    min: gl(t) ? sI : 1,
+    min: isInvalidValue(t) ? sI : 1,
     mixedMathHandler: {
       getValue: () => i,
       onChange: (e, t, i) => {
@@ -57,7 +57,7 @@ function f({
     noBorderOnHover: !0,
     onKeyDown: b,
     onValueChange: (e, i) => {
-      !Number.isNaN(e) && t && t !== oV && _(e, i);
+      !Number.isNaN(e) && t && t !== MIXED_MARKER && _(e, i);
     },
     recordingKey: S(`${u}Input.input`),
     tooltipForScreenReadersOnly: !0,

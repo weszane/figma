@@ -1,8 +1,8 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { nj } from "../905/125019";
-import { tHB } from "../figma_app/763686";
+import { sha1HexFromBytes } from "../905/125019";
+import { VideoCppBindings } from "../figma_app/763686";
 import { k as _$$k } from "../905/651849";
 import { ZC } from "../figma_app/39751";
 import { Point } from "../905/736624";
@@ -46,7 +46,7 @@ export function $$$$A0(e) {
       srcWithHLS: null,
       downloadHash: null
     };
-    let t = nj(e);
+    let t = sha1HexFromBytes(e);
     return {
       srcWithHLS: `/api/files/${openFileKey}/videos/${t}/manifest`,
       downloadHash: t
@@ -113,11 +113,11 @@ export function $$$$A0(e) {
       let t = e => new Promise(t => setTimeout(t, e));
       let i = 0;
       let n = 1e3;
-      let r = tHB.isVideoBeingUploaded(e);
+      let r = VideoCppBindings.isVideoBeingUploaded(e);
       for (; r && i++ < 7;) {
         await t(n);
         n *= 2;
-        r = tHB.isVideoBeingUploaded(e);
+        r = VideoCppBindings.isVideoBeingUploaded(e);
       }
     }
   };
@@ -126,7 +126,7 @@ export function $$$$A0(e) {
       srcWithHLS,
       downloadHash
     } = P(e);
-    let n = e ? nj(e) : null;
+    let n = e ? sha1HexFromBytes(e) : null;
     try {
       await U(srcWithHLS, !0, n);
     } catch (t) {

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { c0k } from "../figma_app/763686";
+import { BreakpointFrameHelpersBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Tv } from "../figma_app/151869";
 function o(e) {
   return e.map(e => getSingletonSceneGraph().get(e)).filter(e => !!e);
 }
 export function $$l2() {
-  return o(c0k?.getSelectedNodesWithinSingleBreakpointFrame() ?? []);
+  return o(BreakpointFrameHelpersBindings?.getSelectedNodesWithinSingleBreakpointFrame() ?? []);
 }
 export function $$d1(e, t) {
-  return o(c0k?.getMatchingNodesToUpdateForQuery(e.guid, t) ?? []);
+  return o(BreakpointFrameHelpersBindings?.getMatchingNodesToUpdateForQuery(e.guid, t) ?? []);
 }
 export function $$c0() {
   let [e, t] = useState([]);

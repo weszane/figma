@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { m0 } from "../figma_app/976749";
 import { mf, YN } from "../figma_app/844435";
 import { tS } from "../figma_app/516028";
@@ -11,7 +11,7 @@ import { iZ } from "../905/372672";
 import { FInheritanceType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { Sc8 } from "../figma_app/43951";
 import { T5, H3, X$ } from "../figma_app/465071";
-import { UH } from "../figma_app/300692";
+import { isDevModeWithInspectPanel } from "../figma_app/300692";
 import { R } from "../figma_app/612938";
 import { Lx } from "../figma_app/474636";
 import { s as _$$s } from "../figma_app/961559";
@@ -22,9 +22,9 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 var C = (e => (e.STOP_AUTO_RUN_FROM_USER = "stop-auto-run-from-user", e.STOP_AUTO_RUN_FROM_ORG = "stop-auto-run-from-org", e.CONFIRM_REPLACE = "confirm-replace", e.ENABLE_AUTO_RUN = "enable-auto-run", e))(C || {});
-let w = Ju(function ({
+let w = registerModal(function ({
   commonShowModalArgs: e,
   newPluginName: t,
   autoRunModalType: r,
@@ -35,9 +35,9 @@ let w = Ju(function ({
   let d = useDispatch();
   let c = () => {
     _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.NONE);
-    d(Lo());
+    d(popModalStack());
   };
-  let u = () => d(Lo());
+  let u = () => d(popModalStack());
   let p = T5("AutoRunConfirmModal").unwrapOr(null);
   let h = p?.key.type === FOrganizationLevelType.ORG ? p.name : void 0;
   let g = {
@@ -87,7 +87,7 @@ let w = Ju(function ({
               variant: "primary",
               onClick: () => {
                 c();
-                d(to({
+                d(showModalHandler({
                   type: w,
                   data: {
                     commonShowModalArgs: e,
@@ -119,7 +119,7 @@ let w = Ju(function ({
               variant: "primary",
               onClick: () => {
                 _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.INHERIT);
-                d(Lo());
+                d(popModalStack());
               },
               children: getI18nString("dev_handoff.autorun_confirm_modal.enable_auto_run")
             })]
@@ -145,7 +145,7 @@ let w = Ju(function ({
               variant: "primary",
               onClick: () => {
                 _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.OVERRIDE);
-                d(Lo());
+                d(popModalStack());
               },
               children: getI18nString("dev_handoff.autorun_confirm_modal.replace")
             })]
@@ -197,7 +197,7 @@ let w = Ju(function ({
   }
   let N = hS({
     open: n,
-    onClose: () => d(Lo())
+    onClose: () => d(popModalStack())
   });
   return jsx(bL, {
     manager: N,
@@ -240,7 +240,7 @@ export function $$O3(e) {
           _$$s.updateUserAutoRunPluginId(t, FInheritanceType.OVERRIDE);
           break;
         case FInheritanceType.OVERRIDE:
-          t !== o.plugin?.plugin_id ? _$$s.updateUserAutoRunPluginId(t, FInheritanceType.OVERRIDE) : c.autoRunPrefs ? g(to({
+          t !== o.plugin?.plugin_id ? _$$s.updateUserAutoRunPluginId(t, FInheritanceType.OVERRIDE) : c.autoRunPrefs ? g(showModalHandler({
             type: w,
             data: {
               commonShowModalArgs: n,
@@ -249,14 +249,14 @@ export function $$O3(e) {
           })) : _$$s.updateUserAutoRunPluginId(t, FInheritanceType.NONE);
           break;
         case FInheritanceType.INHERIT:
-          c.autoRunPrefs ? t !== c.autoRunPrefs.autoRunPluginId ? g(to({
+          c.autoRunPrefs ? t !== c.autoRunPrefs.autoRunPluginId ? g(showModalHandler({
             type: w,
             data: {
               commonShowModalArgs: n,
               newPluginName: r,
               autoRunModalType: C.CONFIRM_REPLACE
             }
-          })) : g(to({
+          })) : g(showModalHandler({
             type: w,
             data: {
               commonShowModalArgs: n,
@@ -271,7 +271,7 @@ export function $$O3(e) {
   };
 }
 export function $$R0(e) {
-  return e && UH(e);
+  return e && isDevModeWithInspectPanel(e);
 }
 function L() {
   let e = P();

@@ -11,7 +11,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { reportError } from "../905/11";
-import { Ce, to as _$$to, AS } from "../905/156213";
+import { hideModal, showModalHandler, hideModalHandler } from "../905/156213";
 import { iZ as _$$iZ, TA } from "../905/372672";
 import { N as _$$N } from "../figma_app/469468";
 import { LA, Yo } from "../figma_app/637027";
@@ -34,7 +34,7 @@ import { FFileType } from "../figma_app/191312";
 import { mC } from "../905/18797";
 import { _q } from "../figma_app/242339";
 import { LE } from "../905/71785";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { F as _$$F } from "../5430/926195";
 import { OJ } from "../905/519092";
 import { g as _$$g, rd, dO, qh } from "../vendor/130505";
@@ -59,7 +59,7 @@ import { vt, cS, U as _$$U } from "../figma_app/45218";
 import { bo } from "../figma_app/10554";
 import { M4, IT as _$$IT } from "../905/713695";
 import { getRequest } from "../905/910117";
-import { vh, td as _$$td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { Xy, O7 } from "../figma_app/578832";
 import { lW, qD, Qo, _t, N6, eD as _$$eD2 } from "../figma_app/471982";
 import { A as _$$A3 } from "../905/665703";
@@ -198,7 +198,7 @@ import { S as _$$S5 } from "../5430/743953";
 import { R as _$$R } from "../5430/129716";
 import { H as _$$H } from "../5430/816957";
 import { X6 } from "../5430/28597";
-import { qE as _$$qE, y1 } from "../figma_app/492908";
+import { clamp, range } from "../figma_app/492908";
 import { N as _$$N3 } from "../vendor/930821";
 import { P as _$$P3, Mf, F5 } from "../5430/367577";
 import { A as _$$A31 } from "../figma_app/882803";
@@ -457,7 +457,7 @@ function M(e) {
     })
   });
 }
-let $ = Ju(function (e) {
+let $ = registerModal(function (e) {
   let t = useSelector(e => e.user?.email);
   let i = useDispatch();
   let n = useSelector(t => t.hubFiles[e.hubFileId]);
@@ -466,7 +466,7 @@ let $ = Ju(function (e) {
   }));
   let c = _6();
   let d = () => {
-    i(Ce());
+    i(hideModal());
   };
   useEffect(() => {
     n || i(_$$ts({
@@ -476,7 +476,7 @@ let $ = Ju(function (e) {
   let m = _$$N(`(max-width: ${YW}px)`);
   if (!n) return null;
   let p = m ? () => {
-    i(_$$to({
+    i(showModalHandler({
       type: _$$s2,
       data: {
         dispatch: i,
@@ -488,7 +488,7 @@ let $ = Ju(function (e) {
       signed_up_from_community: !0
     }));
     let e = u5(e => {
-      i(_$$to({
+      i(showModalHandler({
         type: _$$_,
         data: {
           payload: e
@@ -503,7 +503,7 @@ let $ = Ju(function (e) {
       signed_up_from_community: !0
     }));
     let t = gE(e => {
-      i(_$$to({
+      i(showModalHandler({
         type: _$$_,
         data: {
           payload: e
@@ -776,7 +776,7 @@ function eT(e, t, i) {
 }
 let eA = new class {
   constructor() {
-    this.CollectionPageSchemaValidator = vh();
+    this.CollectionPageSchemaValidator = createNoOpValidator();
   }
   getCollectionPageByUrlSlug(e, t) {
     return this.CollectionPageSchemaValidator.validate(async ({
@@ -786,7 +786,7 @@ let eA = new class {
 }();
 let eR = new class {
   constructor() {
-    this.CollectionPageSchemaValidator = vh();
+    this.CollectionPageSchemaValidator = createNoOpValidator();
   }
   getCollectionPageByUrlSlug(e) {
     return this.CollectionPageSchemaValidator.validate(async ({
@@ -796,7 +796,7 @@ let eR = new class {
   updateCollectionPageByUrlSlug(e) {
     return this.CollectionPageSchemaValidator.validate(async ({
       xr: t
-    }) => await t.put(`/api/admin/collection_pages/${e.urlSlug}`, _$$td.toAPIParameters(e.collectionPage || {})));
+    }) => await t.put(`/api/admin/collection_pages/${e.urlSlug}`, APIParameterUtils.toAPIParameters(e.collectionPage || {})));
   }
   deleteCollectionPageByUrlSlug(e) {
     return this.CollectionPageSchemaValidator.validate(async ({
@@ -806,7 +806,7 @@ let eR = new class {
   createCollectionPage(e) {
     return this.CollectionPageSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/admin/collection_pages", _$$td.toAPIParameters(e.collectionPage || {})));
+    }) => await t.post("/api/admin/collection_pages", APIParameterUtils.toAPIParameters(e.collectionPage || {})));
   }
 }();
 let eP = M4.Query({
@@ -5817,7 +5817,7 @@ function a5({
   });
   let [x, _] = _$$P3(u);
   let y = e => {
-    let t = _$$qE(n + e, 0, c.length - 1);
+    let t = clamp(n + e, 0, c.length - 1);
     r(t);
     t > m[1] ? (g(e => [e[0] + 1, e[1] + 1]), h(p - 10)) : t < m[0] && (g(e => [e[0] - 1, e[1] - 1]), h(p + 10));
   };
@@ -5916,7 +5916,7 @@ function a5({
         style: {
           transform: `translateX(${-p}px)`
         },
-        children: y1(c.length).filter(e => e <= m[1] + 3 && e >= m[0] - 3).map(e => {
+        children: range(c.length).filter(e => e <= m[1] + 3 && e >= m[0] - 3).map(e => {
           let t = [`translateX(${p}px)`, ...a0(e, m)].join(" ");
           return jsx("div", {
             className: e9()("mobile_media_carousel--carouselDot--kqCx2", {
@@ -6279,13 +6279,13 @@ export function $$sd0() {
     let n = QL("after-auth-duplicate-file-id");
     let a = QL("show_eula");
     let s = QL("editor_type");
-    n && (a ? e(_$$to({
+    n && (a ? e(showModalHandler({
       type: _$$F,
       data: {
         hubFileId: n,
         inResourceHub: !1
       }
-    })) : i || e(_$$to({
+    })) : i || e(showModalHandler({
       type: $,
       data: {
         hubFileId: n,
@@ -6293,7 +6293,7 @@ export function $$sd0() {
       }
     })));
   }(e, i), () => {
-    e(AS());
+    e(hideModalHandler());
   })), useEffect(() => {
     let e = document.getElementById("filebrowser-loading-page");
     e && "none" !== e.style.display && "none" !== e.style.display && setTimeout(() => {

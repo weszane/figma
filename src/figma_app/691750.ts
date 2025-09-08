@@ -7,11 +7,11 @@ import { U } from "../905/103637";
 import { U as _$$U } from "../905/275247";
 import { l as _$$l } from "../905/509505";
 import { E as _$$E2 } from "../905/235326";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import _ from "classnames";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { dT } from "../figma_app/889655";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
@@ -78,7 +78,7 @@ export function $$A0(e) {
       children: jsx(_$$E, {
         className: "ui3_instance_attribution_button--ui3DescriptionButton--ikoS6",
         onClick: function () {
-          glU && (backingSymbolGUID && !gl(backingSymbolGUID) ? glU.goToSymbolOrStateGroupById(backingSymbolGUID, !0) : backingStateGroupGUID && !gl(backingStateGroupGUID) && glU.goToSymbolOrStateGroupById(backingStateGroupGUID, !0));
+          Fullscreen && (backingSymbolGUID && !isInvalidValue(backingSymbolGUID) ? Fullscreen.goToSymbolOrStateGroupById(backingSymbolGUID, !0) : backingStateGroupGUID && !isInvalidValue(backingStateGroupGUID) && Fullscreen.goToSymbolOrStateGroupById(backingStateGroupGUID, !0));
         },
         recordingKey: Pt(e.recordingKey, "instanceAttributionButton"),
         htmlAttributes: {

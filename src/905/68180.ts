@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 var o = "selection__selectionToggle__wuups";
 forwardRef(({
   children: e,
@@ -11,7 +11,7 @@ forwardRef(({
   style: l,
   variant: d = "bg-selected"
 }, c) => jsx("div", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...i,
   style: l,
   className: A({
@@ -31,7 +31,7 @@ export let $$l0 = forwardRef(({
   variant: d = "bg-selected",
   ...c
 }, u) => jsx("div", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...i,
   ...c,
   style: l,

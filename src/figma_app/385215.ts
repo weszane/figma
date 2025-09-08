@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { HW } from "../figma_app/976749";
@@ -30,13 +30,13 @@ export function $$_5() {
   let t = HW();
   return useCallback(() => {
     e(N.START);
-    t ? hk()?.startPresenting() : h3O.startPresenting();
+    t ? hk()?.startPresenting() : Multiplayer.startPresenting();
   }, [t, e]);
 }
 export function $$h1() {
   let e = HW();
   return useCallback(() => {
-    e ? hk()?.stopPresenting() : h3O.stopPresenting();
+    e ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
   }, [e]);
 }
 export function $$m9() {
@@ -71,7 +71,7 @@ export function $$E10() {
   }, [e]);
 }
 function y(e, t, r, n) {
-  r ? r.nominatePresenter(e) : h3O.nominatePresenter(e);
+  r ? r.nominatePresenter(e) : Multiplayer.nominatePresenter(e);
   let i = t.allUsers.find(t => t.sessionID === e);
   if (i?.name) {
     let e = getI18nString("collaboration.spotlight.visual_bell.nominated_user_to_spotlight", {
@@ -89,7 +89,7 @@ function y(e, t, r, n) {
   });
 }
 export function $$b6(e, t) {
-  t ? t.cancelPresenterNomination(e) : h3O.cancelPresenterNomination(e);
+  t ? t.cancelPresenterNomination(e) : Multiplayer.cancelPresenterNomination(e);
 }
 function T(e, t, r, n) {
   $$b6(e, r);
@@ -107,7 +107,7 @@ function T(e, t, r, n) {
   });
 }
 function I(e, t) {
-  t ? t.startPresenting() : h3O.startPresenting();
+  t ? t.startPresenting() : Multiplayer.startPresenting();
   let r = e.sessionsNominatingCurrentUser[0];
   let n = e.allUsers.find(e => e.sessionID === r);
   trackEventAnalytics("Spotlight Nomination Accepted", {
@@ -126,7 +126,7 @@ export function $$S2(e, t, r, n) {
   });
 }
 function v(e, t) {
-  t ? hk()?.setObservingSessionID(-1) : h3O.observeUser(-1);
+  t ? hk()?.setObservingSessionID(-1) : Multiplayer.observeUser(-1);
   trackEventAnalytics("Spotlight Stop Following", {
     ...p(e)
   });

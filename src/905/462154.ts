@@ -2,7 +2,7 @@ import { Sh, rq, FI } from "../figma_app/262240";
 import { e_ } from "../905/866195";
 import { Ac, bc } from "../905/499389";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { X3B } from "../figma_app/763686";
+import { PrototypingTsApi } from "../figma_app/763686";
 import { kh } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -10,7 +10,7 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logDebug } from "../905/714362";
 import { hW } from "../figma_app/594947";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { QZ } from "../figma_app/62612";
 import { Zh } from "../figma_app/2590";
 import { bA, kC, k9, Pe, dT, LI, ft } from "../figma_app/365713";
@@ -89,7 +89,7 @@ export let $$C1 = async ({
     let e = i.get(P[0]);
     e && "SECTION" === e.type && (P = e.childrenNodes.filter(e => e.isTopLevelFrame()).map(e => e.guid));
   }
-  P = (P = P.filter(e => e && X3B.isValidNodeForMagicLink(e))).flatMap(e => kh(i, e)?.guid ?? []);
+  P = (P = P.filter(e => e && PrototypingTsApi.isValidNodeForMagicLink(e))).flatMap(e => kh(i, e)?.guid ?? []);
   let {
     TEXT,
     ICON,
@@ -136,7 +136,7 @@ export let $$C1 = async ({
     let b = await Promise.race([m, h]);
     if (b.errorMessage) {
       if ("aborted" === b.errorMessage) {
-        Y5.triggerAction("end-magic-link");
+        fullscreenValue.triggerAction("end-magic-link");
         return b;
       }
       if ("All frames were filtered out" === b.errorMessage) throw new ft();

@@ -14,13 +14,13 @@ import { sx } from "../905/941192";
 import { lk } from "../figma_app/109538";
 import { B } from "../905/380801";
 import { D as _$$D } from "../905/251759";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { _Z, B9 } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
-import { tY } from "../figma_app/831101";
+import { SubscriptionType } from "../figma_app/831101";
 import { Ib } from "../905/129884";
 import { hK } from "../figma_app/211706";
 import { qC, Wb, pr, Qu, j_ } from "../905/948828";
@@ -50,7 +50,7 @@ function R() {
         paddingTop: "3px",
         paddingBottom: "3px"
       }).$,
-      onClick: () => e(to({
+      onClick: () => e(showModalHandler({
         type: lk,
         data: {
           source: B.PLAN_COMPARISON
@@ -67,12 +67,12 @@ function N({
   return jsxs("div", {
     className: _$$s.colorBgSecondary.bRadius7.bSolid.b1.colorBorder.inlineBlock.p2.$,
     children: [jsx("button", {
-      className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== tY.MONTHLY, _$$s.colorBgSecondary.colorTextSecondary).$,
-      onClick: () => t(tY.MONTHLY),
+      className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.MONTHLY, _$$s.colorBgSecondary.colorTextSecondary).$,
+      onClick: () => t(SubscriptionType.MONTHLY),
       children: renderI18nText("plan_comparison.campfire.monthly")
     }), jsx("button", {
-      className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== tY.ANNUAL, _$$s.colorBgSecondary.colorTextSecondary).$,
-      onClick: () => t(tY.ANNUAL),
+      className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== SubscriptionType.ANNUAL, _$$s.colorBgSecondary.colorTextSecondary).$,
+      onClick: () => t(SubscriptionType.ANNUAL),
       children: renderI18nText("plan_comparison.campfire.annual")
     })]
   });
@@ -89,7 +89,7 @@ export function $$P0({
   teamPlan: f,
   withUpgradeExistingTeamOption: _
 }) {
-  let [y, b] = useState(tY.ANNUAL);
+  let [y, b] = useState(SubscriptionType.ANNUAL);
   let v = useSelector(e => e.dropdownShown);
   let w = useSelector(e => e.user);
   let k = !!getFeatureFlags().edu_plan_comparison;
@@ -252,7 +252,7 @@ function O({
             children: renderI18nText("plan_comparison.campfire.or_contact_sales", {
               contactSalesLink: jsx("button", {
                 className: _$$s.colorTextBrand.$,
-                onClick: () => u(to({
+                onClick: () => u(showModalHandler({
                   type: lk,
                   data: {
                     source: B.PLAN_COMPARISON
@@ -347,16 +347,16 @@ function M({
     children: e ? jsx(fu, {
       name: "Pricing Component",
       properties: {
-        prices: (a = i === tY.MONTHLY && r ? r : e, JSON.stringify(t.reduce((e, t) => ({
+        prices: (a = i === SubscriptionType.MONTHLY && r ? r : e, JSON.stringify(t.reduce((e, t) => ({
           ...e,
           [t.seatType]: a[t.seatType]?.priceKey
         }), {})))
       },
       children: t.map(t => {
-        let a = i === tY.MONTHLY && r ? r[t.seatType] : e[t.seatType];
+        let a = i === SubscriptionType.MONTHLY && r ? r[t.seatType] : e[t.seatType];
         return isNullish(a) ? null : jsxs("div", {
           className: _$$s.font13.lh24.flex.justifyBetween.$,
-          "data-testid": `${i === tY.MONTHLY && r ? "monthly" : "yearly"}-prices`,
+          "data-testid": `${i === SubscriptionType.MONTHLY && r ? "monthly" : "yearly"}-prices`,
           children: [jsxs("div", {
             className: _$$s.flex.itemsCenter.gap4.$,
             children: [t.icon, t.name]

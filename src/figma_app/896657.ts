@@ -1,18 +1,18 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { Ul } from "../figma_app/777551";
 import { p4 } from "../905/448740";
 import { T as _$$T } from "../905/594474";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Qi, fy } from "../figma_app/559491";
-import { $O, to } from "../905/156213";
+import { showModal, showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { uE } from "../figma_app/314264";
 import { cb } from "../figma_app/12796";
 import { getPermissionsState } from "../figma_app/642025";
-import { mI } from "../figma_app/300692";
+import { getPublishingData } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { m3 } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
@@ -21,7 +21,7 @@ import { U as _$$U } from "../905/424668";
 import { o as _$$o } from "../905/938553";
 import { KM, x5 } from "../figma_app/224019";
 import { O as _$$O } from "../905/166544";
-export let $$x0 = nF(async (e, {
+export let $$x0 = createOptimistThunk(async (e, {
   localFileId: t,
   publishedPluginId: r,
   entryPoint: c,
@@ -59,7 +59,7 @@ export let $$x0 = nF(async (e, {
   let U = (r ? publishedPlugins[r] : void 0) || (r ? publishedWidgets[r] : void 0);
   let B = null != t ? localPlugins[t] : void 0;
   if (U && !m3(U) && Ul(U) && B && B.manifest.permissions?.includes("payments") && user && !user.has_passed_visual_compliance) {
-    e.dispatch($O({
+    e.dispatch(showModal({
       type: _$$O.type
     }));
     return;
@@ -84,7 +84,7 @@ export let $$x0 = nF(async (e, {
       }));
       return;
     } else if (void 0 === t && r && U) try {
-      let t = mI({
+      let t = getPublishingData({
         ...getPermissionsState(R),
         currentUserOrgId,
         localPlugins,
@@ -104,7 +104,7 @@ export let $$x0 = nF(async (e, {
       return;
     }
   } else try {
-    let n = mI({
+    let n = getPublishingData({
       ...getPermissionsState(R),
       currentUserOrgId,
       localPlugins,
@@ -123,7 +123,7 @@ export let $$x0 = nF(async (e, {
     }));
     return;
   }
-  if (glU && glU.triggerAction("set-tool-default", null), uE("show_publish_plugin_modal", R, {
+  if (Fullscreen && Fullscreen.triggerAction("set-tool-default", null), uE("show_publish_plugin_modal", R, {
     entryPoint: c,
     userId: R.user?.id,
     orgId: R.currentUserOrgId,
@@ -133,7 +133,7 @@ export let $$x0 = nF(async (e, {
   }), getFeatureFlags().ext_plugin_publish_rearch) {
     if (!B && !U) return;
     if (x === KM.PERMISSIONS) {
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: _$$o,
         data: {
           localFileId: t,
@@ -146,7 +146,7 @@ export let $$x0 = nF(async (e, {
       }));
       return;
     }
-    !B && U ? e.dispatch(to({
+    !B && U ? e.dispatch(showModalHandler({
       type: _$$T,
       data: {
         localFileId: void 0,
@@ -158,7 +158,7 @@ export let $$x0 = nF(async (e, {
         }),
         widgetNodeId: O
       }
-    })) : t && e.dispatch(to({
+    })) : t && e.dispatch(showModalHandler({
       type: _$$T,
       data: {
         localFileId: t,
@@ -171,7 +171,7 @@ export let $$x0 = nF(async (e, {
         widgetNodeId: O
       }
     }));
-  } else e.dispatch(to({
+  } else e.dispatch(showModalHandler({
     type: _$$o,
     data: {
       localFileId: t,

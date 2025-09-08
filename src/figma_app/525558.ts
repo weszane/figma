@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect, useState, useContext, createContext, useMemo } from "react";
 import { Uz } from "../905/63728";
 import { M3, dP } from "../figma_app/119475";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { ON, Yv } from "../figma_app/644808";
 import { sN, Qk, t7 } from "../figma_app/188908";
@@ -51,7 +51,7 @@ function f({
   } = wV();
   let E = useCallback(e => {
     if (Qk(e.target) || e.keyCode !== Uz.BACKSPACE) {
-      if (e.altKey && [Uz.KEY_1, Uz.KEY_2, Uz.KEY_3].includes(e.keyCode) && Y5.isReady() && e.target !== inputRef.current?.searchInput) return f7(e);
+      if (e.altKey && [Uz.KEY_1, Uz.KEY_2, Uz.KEY_3].includes(e.keyCode) && fullscreenValue.isReady() && e.target !== inputRef.current?.searchInput) return f7(e);
     } else {
       clickBackButton();
       focusBackButton();

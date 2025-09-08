@@ -1,19 +1,19 @@
-import { sYL, lyf, kul } from "../figma_app/763686";
+import { GitReferenceType, ViewType, SchemaJoinStatus } from "../figma_app/763686";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { d1 } from "../905/766303";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { oJ } from "../905/346794";
 import f, { Stx, dDF } from "../figma_app/43951";
 import { wY } from "../905/753206";
-import A, { m as _$$m } from "../905/294113";
+import A, { maybeCreateSavepoint } from "../905/294113";
 import { FEditorType } from "../figma_app/53721";
 import { Wo, Kn } from "../905/535806";
 import { e0 } from "../905/696396";
@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/807535";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import N from "../vendor/73823";
 import O from "../vendor/946678";
@@ -35,7 +35,7 @@ import { zZ, n6 } from "../905/585030";
 import { cb } from "../905/760074";
 import { nX } from "../905/617744";
 import { Pc } from "../905/372672";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ue, tF } from "../905/61300";
 import { G as _$$G } from "../905/702115";
 import { d_, yX } from "../figma_app/918700";
@@ -65,7 +65,7 @@ function q(e) {
     })
   });
 }
-let $ = Ju(function (e) {
+let $ = registerModal(function (e) {
   let {
     branchKey,
     sourceKey
@@ -82,11 +82,11 @@ let $ = Ju(function (e) {
   let {
     diffInfo,
     error
-  } = zZ(sYL.BRANCH, e.branchKey, e.sourceKey, e.direction, p, m, null, !0);
+  } = zZ(GitReferenceType.BRANCH, e.branchKey, e.sourceKey, e.direction, p, m, null, !0);
   let {
     diffInfo: _diffInfo,
     error: _error
-  } = zZ(sYL.SOURCE, e.branchKey, e.sourceKey, e.direction, p, m, null, !1);
+  } = zZ(GitReferenceType.SOURCE, e.branchKey, e.sourceKey, e.direction, p, m, null, !1);
   let [v, I] = useState(!1);
   let [N, O] = useState(null);
   useEffect(() => {
@@ -239,14 +239,14 @@ let $ = Ju(function (e) {
       }),
       children: [jsx(_$$c, {
         value: Wo.MAIN,
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: jsx(q, {
             value: Wo.MAIN
           })
         })
       }), jsx(_$$c, {
         value: Wo.BRANCH,
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: jsx(q, {
             value: Wo.BRANCH
           })
@@ -254,9 +254,9 @@ let $ = Ju(function (e) {
       })]
     })]
   }) : null;
-}, "BranchForceMergeModal", ZU.YES);
+}, "BranchForceMergeModal", ModalSupportsBackground.YES);
 var ee = J;
-let el = Ju(function ({
+let el = registerModal(function ({
   sourceKey: e,
   currentFileKey: t,
   onCheckpointSelected: i
@@ -342,7 +342,7 @@ let el = Ju(function ({
     minWidth: 528,
     fixedCenter: !0,
     onClose: () => {
-      n(Ce());
+      n(hideModal());
     },
     onConfirm: () => {
       if (null === l) return;
@@ -360,8 +360,8 @@ let el = Ju(function ({
       })
     })
   });
-}, "IncrementalUpdateModal", ZU.YES);
-let $$ed0 = nF(async (e, t) => {
+}, "IncrementalUpdateModal", ModalSupportsBackground.YES);
+let $$ed0 = createOptimistThunk(async (e, t) => {
   try {
     let i = await _$$S.getSourceFileUpdatedInfo({
       branchFileKey: t.branchFileKey
@@ -373,10 +373,10 @@ let $$ed0 = nF(async (e, t) => {
     console.error("Error fetching source file");
   }
 });
-let $$ec5 = nF(async (e, t) => {
-  if (e.getState().mirror.appModel.topLevelMode !== lyf.BRANCHING) {
-    if (Y5.triggerAction("enter-branching-mode"), Y5.triggerAction("show-design-panel"), await oJ(kul.JOINED), t.force) {
-      e.dispatch(to({
+let $$ec5 = createOptimistThunk(async (e, t) => {
+  if (e.getState().mirror.appModel.topLevelMode !== ViewType.BRANCHING) {
+    if (fullscreenValue.triggerAction("enter-branching-mode"), fullscreenValue.triggerAction("show-design-panel"), await oJ(SchemaJoinStatus.JOINED), t.force) {
+      e.dispatch(showModalHandler({
         type: $,
         data: {
           branchKey: t.branchKey,
@@ -387,7 +387,7 @@ let $$ec5 = nF(async (e, t) => {
       }));
       return;
     }
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: $l,
       data: {
         branchKey: t.branchKey,
@@ -401,7 +401,7 @@ let $$ec5 = nF(async (e, t) => {
     }));
   }
 });
-let $$eu2 = nF(async (e, t) => {
+let $$eu2 = createOptimistThunk(async (e, t) => {
   let i = e.getState();
   let {
     openFile
@@ -432,11 +432,11 @@ let $$eu2 = nF(async (e, t) => {
   let p = [];
   if (c.file?.hasPermission) {
     let i = t.branchKey === openFile.key;
-    p.push(_$$m(t.branchKey, "", "", e.dispatch, i));
+    p.push(maybeCreateSavepoint(t.branchKey, "", "", e.dispatch, i));
   }
   if (u.file?.hasPermission) {
     let i = t.sourceKey === openFile.key;
-    p.push(_$$m(t.sourceKey, "", "", e.dispatch, i));
+    p.push(maybeCreateSavepoint(t.sourceKey, "", "", e.dispatch, i));
   }
   if (p.length > 0) {
     e.dispatch(_$$F.enqueue({
@@ -474,7 +474,7 @@ let $$eu2 = nF(async (e, t) => {
   };
   e.dispatch($$ec5(m));
 });
-let $$ep3 = nF((e, {
+let $$ep3 = createOptimistThunk((e, {
   direction: t,
   trackingContextName: i,
   force: n,
@@ -497,11 +497,11 @@ let $$ep3 = nF((e, {
     sourceCheckpointKey: a
   }));
 });
-let $$em1 = nF(e => {
+let $$em1 = createOptimistThunk(e => {
   let {
     openFile
   } = e.getState();
-  openFile && openFile.sourceFileKey && openFile.sourceCheckpointId && e.dispatch(to({
+  openFile && openFile.sourceFileKey && openFile.sourceCheckpointId && e.dispatch(showModalHandler({
     type: el,
     data: {
       sourceKey: openFile.sourceFileKey,
@@ -516,7 +516,7 @@ let $$em1 = nF(e => {
     }
   }));
 });
-let $$eh4 = nF((e, {
+let $$eh4 = createOptimistThunk((e, {
   trackingContextName: t
 }) => {
   let i = e.getState().openFile;
@@ -533,12 +533,12 @@ let $$eh4 = nF((e, {
     fileRepoId: n.fileRepoId
   });
 });
-let $$eg6 = nF((e, {
+let $$eg6 = createOptimistThunk((e, {
   trackingContextName: t
 }) => {
   let i = e.getState();
   let n = d1(i);
-  n && (e.dispatch(to({
+  n && (e.dispatch(showModalHandler({
     type: jS
   })), trackEventAnalytics("View Branches Clicked", {
     trackingContext: t,

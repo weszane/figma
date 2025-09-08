@@ -11,7 +11,7 @@ import { H as _$$H } from "../905/999677";
 import { T as _$$T } from "../905/2124";
 import { D as _$$D } from "../1156/759811";
 import { T as _$$T2 } from "../905/256551";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
@@ -25,7 +25,7 @@ import { EJ, jN, gU } from "../figma_app/930338";
 import { Y as _$$Y } from "../905/506207";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { O1, Zl, uQ, Tv } from "../figma_app/311375";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { eY as _$$eY } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
 import { xp } from "../905/966582";
@@ -56,7 +56,7 @@ import { W as _$$W2 } from "../9410/92046";
 import { d as _$$d } from "../1006/820986";
 import { Tj } from "../figma_app/342207";
 import { g as _$$g } from "../905/687265";
-import { Egt, FDn, K$p } from "../figma_app/763686";
+import { SceneGraphHelpers, InsertErrorType, ChatMessageType } from "../figma_app/763686";
 import { A as _$$A2 } from "../vendor/454088";
 import { A as _$$A3 } from "../905/920142";
 import { ZC } from "../figma_app/39751";
@@ -75,7 +75,7 @@ import { X$ } from "../905/612685";
 import { FPlanNameType, FProductAccessType, FFileType } from "../figma_app/191312";
 import { No, X$ as _$$X$, YY } from "../figma_app/465071";
 import { wH, mT } from "../figma_app/680166";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Ig, co, xD } from "../figma_app/350332";
 import { _t, JT } from "../figma_app/632248";
 import { RJ } from "../figma_app/869006";
@@ -568,7 +568,7 @@ function ta({
     icon: i,
     label: s,
     variant: t,
-    onRemove: "prompt" === t ? () => Egt?.clearSelection() : void 0
+    onRemove: "prompt" === t ? () => SceneGraphHelpers?.clearSelection() : void 0
   });
 }
 let tl = (e, t) => {
@@ -1042,7 +1042,7 @@ function tq() {
   let i = Oc();
   let s = n?.teamId ?? "";
   let a = $Y(s);
-  let l = i ? _$$b.FIGMAKE_METER_LIMIT_TOAST : _$$b.LIVING_DESIGNS_METER_LIMIT_TOAST;
+  let l = i ? UpsellModalType.FIGMAKE_METER_LIMIT_TOAST : UpsellModalType.LIVING_DESIGNS_METER_LIMIT_TOAST;
   let o = _$$y(s, l);
   return t === FPlanNameType.STARTER && getFeatureFlags().bake_starter_limit && a ? jsx($z, {
     variant: "primary",
@@ -1739,7 +1739,7 @@ function t0({
                 }
                 return !1;
               }(e)) > -1);
-            })(t) && hH(FDn.USER_PASTED_FIGMA_LINK_IN_CHAT);
+            })(t) && hH(InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT);
           } catch {}
         },
         placeholder: b,
@@ -2192,7 +2192,7 @@ function nw({
         children: [jsx(WW, {
           variant: "primary",
           onClick: () => {
-            l(_$$to({
+            l(showModalHandler({
               type: _$$Z3,
               data: {
                 toolCallId: e,
@@ -2285,7 +2285,7 @@ function nL({
         children: [jsx(WW, {
           variant: "primary",
           onClick: () => {
-            l(_$$to({
+            l(showModalHandler({
               type: AP,
               data: {
                 toolCallId: e,
@@ -4429,7 +4429,7 @@ function iy({
   useEffect(() => {
     if (e) return;
     let t = Hg(_$$nc);
-    t[dY] || t[x1] || l7.ai("code-chat", () => {
+    t[dY] || t[x1] || permissionScopeHandler.ai("code-chat", () => {
       Fullscreen?.createNewCodeFile(dY, "", null, !1);
     });
   }, [e]);
@@ -4460,7 +4460,7 @@ function iy({
   let z = _ && getFeatureFlags().bake_starter_limit;
   let M = () => {
     if (z) {
-      N(_$$to({
+      N(showModalHandler({
         type: DV,
         data: {
           team: m?.team ?? null,
@@ -4468,7 +4468,7 @@ function iy({
           currentPlan: _$$F4.Plan.STARTER,
           upsellPlan: _$$F4.Plan.PRO,
           editorType: FFileType.FIGMAKE,
-          upsellSource: _$$b.CODE_CHAT_LIBRARY_IMPORT
+          upsellSource: UpsellModalType.CODE_CHAT_LIBRARY_IMPORT
         }
       }));
       return;
@@ -4482,7 +4482,7 @@ function iy({
     let n = e.getBoundingClientRect();
     let r = new Point(n.left, n.top);
     v(!0);
-    N(_$$to({
+    N(showModalHandler({
       type: _$$u,
       data: {
         defaultPosition: {
@@ -4701,7 +4701,7 @@ function ik({
   }, [A, F]);
   let U = e ? jsx(_$$K, {
     onClick: () => {
-      k(_$$to({
+      k(showModalHandler({
         type: _$$H2,
         data: {
           chatMessagesNodeGuid: u
@@ -4947,7 +4947,7 @@ export function $$iC0({
         let s = e.filter(e => "success" === e.status && "FIGMA_NODE" === e.type).map(e => {
           let i = e.codeFiles.map(e => {
             let t = r.get(e.codeFileGuid);
-            return t ? (l7.ai("set-code-file-path", () => {
+            return t ? (permissionScopeHandler.ai("set-code-file-path", () => {
               let e = getFeatureFlags().multi_file_code_layers || getFeatureFlags().bake_canvas;
               t.codeFilePath = e && n ? `${n}/${zM}` : zM;
               t.isEntrypointCodeFile = !1;
@@ -4986,7 +4986,7 @@ export function $$iC0({
             if (n = n.replace(/^(?!export\s)(async\s+)?function\s+(\w+)/gm, e => (r = !0, `export ${e}`)), r && e.fullFilePath) {
               let t = atomStoreManager.get(_$$nM);
               let r = _$$W(t, NJ, e.fullFilePath);
-              r && r.sourceCode !== n && l7.ai("export-functions", () => {
+              r && r.sourceCode !== n && permissionScopeHandler.ai("export-functions", () => {
                 r.sourceCode = n;
               });
             }
@@ -5007,7 +5007,7 @@ export default function App() {
 }`;
           let r = atomStoreManager.get(_$$nM);
           let i = _$$W(r, NJ, "/App.tsx");
-          i && l7.ai("update-app-tsx", () => {
+          i && permissionScopeHandler.ai("update-app-tsx", () => {
             i.sourceCode = n;
           });
           J(!0);
@@ -5100,7 +5100,7 @@ export default function App() {
         e.preventDefault();
         e.returnValue = !0;
         let i = exchange.messages[0];
-        i && i.type === K$p.USER_MESSAGE && (r = MK(i.textContent).requestUuid);
+        i && i.type === ChatMessageType.USER_MESSAGE && (r = MK(i.textContent).requestUuid);
         analyticsEventManager.trackDefinedEvent("ai_for_production.unsaved_changes_warning_shown", {
           fileKey: l,
           featureType: t,

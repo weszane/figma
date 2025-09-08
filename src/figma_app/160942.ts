@@ -1,11 +1,11 @@
 import { mI } from "../figma_app/566371";
 import { SK, Fq, vu } from "../905/84777";
 import { Ju, IX } from "../905/712921";
-import { tn, tY } from "../figma_app/831101";
+import { UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { ud } from "../905/513035";
 import { Oq } from "../905/332483";
 export function $$d1(e, t) {
-  return "promoReview" === e.view || "teamUpgrade" === e.view && e.paymentStep === tn.CONFIRM_PAY && t.promo;
+  return "promoReview" === e.view || "teamUpgrade" === e.view && e.paymentStep === UpgradeSteps.CONFIRM_PAY && t.promo;
 }
 export function $$c0({
   currency: e
@@ -39,22 +39,22 @@ export function $$c0({
   let y = m.data[ud.FIGJAM].amount;
   let b = e => {
     switch (e) {
-      case tY.ANNUAL:
+      case SubscriptionType.ANNUAL:
         return g;
-      case tY.MONTHLY:
+      case SubscriptionType.MONTHLY:
         return E;
-      case tY.STUDENT:
+      case SubscriptionType.STUDENT:
         return 0;
     }
     throw Error(`Unknown plan type: ${e}`);
   };
   let T = e => {
     switch (e) {
-      case tY.ANNUAL:
+      case SubscriptionType.ANNUAL:
         return f;
-      case tY.MONTHLY:
+      case SubscriptionType.MONTHLY:
         return y;
-      case tY.STUDENT:
+      case SubscriptionType.STUDENT:
         return 0;
     }
     throw Error(`Unknown plan type: ${e}`);
@@ -62,8 +62,8 @@ export function $$c0({
   return {
     getDesignUnitCost: b,
     getWhiteboardUnitCost: T,
-    estimatedDesignCost: (e, t) => e * b(t) * (t === tY.ANNUAL ? 12 : 1),
-    estimatedWhiteboardCost: (e, t) => e * T(t) * (t === tY.ANNUAL ? 12 : 1)
+    estimatedDesignCost: (e, t) => e * b(t) * (t === SubscriptionType.ANNUAL ? 12 : 1),
+    estimatedWhiteboardCost: (e, t) => e * T(t) * (t === SubscriptionType.ANNUAL ? 12 : 1)
   };
 }
 export const m = $$c0;

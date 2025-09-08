@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { processInstancesAndGenerateCode } from "../905/100887";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { reportError } from "../905/11";
@@ -32,7 +32,7 @@ export function $$E0(e, t, r) {
   let a = Vr() ?? null;
   let d = eY();
   let _ = T3();
-  let f = glU.getPlaygroundNodeData();
+  let f = Fullscreen.getPlaygroundNodeData();
   r && (a = (d = _).get(f?.playgroundGUID ?? ""));
   let E = !!getFeatureFlags().dt_code_connect_inline_instances;
   let y = useAtomWithSubscription($$g1);

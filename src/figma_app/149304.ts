@@ -1,4 +1,4 @@
-import { w$P } from "../figma_app/763686";
+import { GLContextType } from "../figma_app/763686";
 import { zD, j9 } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
@@ -13,7 +13,7 @@ import { D } from "../905/347702";
 import { l as _$$l } from "../905/190247";
 var $$g9 = (e => (e[e.SUCCESS = 0] = "SUCCESS", e[e.NO_WEBGL = 1] = "NO_WEBGL", e[e.STENCIL_TEST_FAILURE = 2] = "STENCIL_TEST_FAILURE", e))($$g9 || {});
 export let $$f2 = D(() => {
-  if ($$A0() !== w$P.WebGPU) {
+  if ($$A0() !== GLContextType.WebGPU) {
     if (BrowserInfo.safari || BrowserInfo.firefox || isMobilePlatform || getIsLinux() && !PN()) return !1;
     if (BrowserInfo.chrome) {
       let e = gP("webgpu_platform_device_config").get("minimum_chromium_version", 0);
@@ -25,11 +25,11 @@ export let $$f2 = D(() => {
 export function $$E7() {
   if (!$$f2()) return !1;
   let e = $$A0();
-  return e !== w$P.WebGL2 && e !== w$P.WebGL1 && (!!$$v4() || (getIsMac() ? !!getFeatureFlags().use_webgpu : getIsWindows() || getIsChromeOS() ? !!getFeatureFlags().use_webgpu_windows_chromeos : !!(getIsLinux() && PN()) && (!!getFeatureFlags().use_webgpu || !!getFeatureFlags().use_webgpu_windows_chromeos)));
+  return e !== GLContextType.WebGL2 && e !== GLContextType.WebGL1 && (!!$$v4() || (getIsMac() ? !!getFeatureFlags().use_webgpu : getIsWindows() || getIsChromeOS() ? !!getFeatureFlags().use_webgpu_windows_chromeos : !!(getIsLinux() && PN()) && (!!getFeatureFlags().use_webgpu || !!getFeatureFlags().use_webgpu_windows_chromeos)));
 }
 export function $$y5() {
   let e = I.getInstance().graphicsBackendOverride();
-  return e === w$P.WebGL2 || e !== w$P.WebGL1 && X.isWebGL2Supported();
+  return e === GLContextType.WebGL2 || e !== GLContextType.WebGL1 && X.isWebGL2Supported();
 }
 export function $$b3() {
   return X.isWebGL2Supported();
@@ -42,7 +42,7 @@ export function $$T6() {
         let e = document.createElement("canvas");
         try {
           return e.getContext("webgl");
-        } catch (e) { }
+        } catch (e) {}
         return null;
       }();
       t || (e = 1);
@@ -55,17 +55,17 @@ export function $$T6() {
         };
         Rh("page_load", n).catch(e => console.error("Error trying to send tags", n, e));
       }(t);
-    } catch (e) { }
+    } catch (e) {}
     return e;
   }());
   return window.webGLTestResult;
 }
 class I {
   constructor() {
-    this._graphicsBackendOverride = w$P.None;
-    if (getFeatureFlags().webgl2_override) this._graphicsBackendOverride = w$P.WebGL2; else if (getFeatureFlags().webgl1_override) this._graphicsBackendOverride = w$P.WebGL1; else if (getFeatureFlags().webgpu_override) this._graphicsBackendOverride = w$P.WebGPU; else if (getFeatureFlags().webgpu_webgl_url_param && Ay.location) {
+    this._graphicsBackendOverride = GLContextType.None;
+    if (getFeatureFlags().webgl2_override) this._graphicsBackendOverride = GLContextType.WebGL2;else if (getFeatureFlags().webgl1_override) this._graphicsBackendOverride = GLContextType.WebGL1;else if (getFeatureFlags().webgpu_override) this._graphicsBackendOverride = GLContextType.WebGPU;else if (getFeatureFlags().webgpu_webgl_url_param && Ay.location) {
       let e = new URLSearchParams(Ay.location.search);
-      "1" === e.get("force-webgpu") ? this._graphicsBackendOverride = w$P.WebGPU : "1" === e.get("force-webgl2") ? this._graphicsBackendOverride = w$P.WebGL2 : "1" === e.get("force-webgl1") && (this._graphicsBackendOverride = w$P.WebGL1);
+      "1" === e.get("force-webgpu") ? this._graphicsBackendOverride = GLContextType.WebGPU : "1" === e.get("force-webgl2") ? this._graphicsBackendOverride = GLContextType.WebGL2 : "1" === e.get("force-webgl1") && (this._graphicsBackendOverride = GLContextType.WebGL1);
     }
   }
   graphicsBackendOverride() {
@@ -106,7 +106,7 @@ class S {
 }
 let $$v4 = D(() => {
   try {
-    return S.getInstance().mustUseWebGPU() || I.getInstance().graphicsBackendOverride() === w$P.WebGPU;
+    return S.getInstance().mustUseWebGPU() || I.getInstance().graphicsBackendOverride() === GLContextType.WebGPU;
   } catch (e) {
     logError("Error checking if we must use WebGPU", e?.message ?? "Unknown error", {
       reportAsSentryError: !0

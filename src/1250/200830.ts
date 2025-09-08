@@ -96,11 +96,11 @@ import { Y as _$$Y } from "../905/830372";
 import { In } from "../905/672640";
 import { B as _$$B } from "../905/714743";
 import { A as _$$A2 } from "../svg/831814";
-import { Ce, to as _$$to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { bE } from "../figma_app/375098";
 import { WW, Wf, w5 } from "../figma_app/345997";
 import { Mm, iX, bo, h3, $Q, TB, PG, NN } from "../5885/399780";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A as _$$A3 } from "../svg/219958";
 import { A as _$$A4 } from "../svg/638742";
 import { s as _$$s2 } from "../905/573154";
@@ -110,7 +110,7 @@ import { nl as _$$nl } from "../905/590952";
 import { P as _$$P3 } from "../905/566881";
 import { WX } from "../figma_app/482142";
 import { X as _$$X2 } from "../5885/331878";
-import { UG } from "../905/414007";
+import { getCookieOrStorage } from "../905/414007";
 import { Bq, lc } from "../figma_app/598111";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Hj } from "../figma_app/336229";
@@ -147,7 +147,7 @@ import { q as _$$q } from "../figma_app/712384";
 import { V as _$$V } from "../905/223767";
 import { I as _$$I2 } from "../905/641938";
 import { dR } from "../figma_app/109538";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 var l = s;
 function m(e) {
   return jsx("div", {
@@ -1372,12 +1372,12 @@ function t0() {
     }, o))
   });
 }
-let t1 = Ju(function ({
+let t1 = registerModal(function ({
   teamId: e
 }) {
   let t = useDispatch();
   let n = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let r = useCallback(() => {
     n();
@@ -1671,7 +1671,7 @@ function nn(e) {
     })]
   });
 }
-let na = Ju(function () {
+let na = registerModal(function () {
   let [e, t] = useState(iX.SELECT_TEAM);
   let [n, r] = useState();
   let [i, o] = useState();
@@ -1681,7 +1681,7 @@ let na = Ju(function () {
   let p = xX();
   let g = useDispatch();
   let f = useCallback(() => p.find(e => e.id === n)?.name ?? getI18nString("pro_trials_v3.pro_trial_initiation_modal.your_team"), [p, n]);
-  let h = useCallback(() => g(Ce()), [g]);
+  let h = useCallback(() => g(hideModal()), [g]);
   let b = getI18nString("payments.pro_trial.start_pro_trial_error");
   useEffect(() => {
     _(shuffle(TB));
@@ -1755,7 +1755,7 @@ function no(e) {
   let i = jsx(_$$nD, {
     onClick: () => {
       hideModal();
-      n(_$$to({
+      n(showModalHandler({
         type: na
       }));
     },
@@ -1839,7 +1839,7 @@ function nl(e) {
   });
   let s = jsx($9, {
     onClick: () => {
-      r(_$$to({
+      r(showModalHandler({
         type: t1,
         data: {
           teamId
@@ -2051,7 +2051,7 @@ function np() {
   });
 }
 let nb = atom(() => {
-  let e = UG();
+  let e = getCookieOrStorage();
   try {
     return e.get(Bq);
   } catch (e) {
@@ -2379,7 +2379,7 @@ function n6() {
     o.show({
       canShow: (e, t, n) => !mW(e, "seen_edu_offboarding_modal") && x$(t, n) !== 1 / 0,
       onShow: () => {
-        r(_$$to({
+        r(showModalHandler({
           type: ZL,
           data: {
             teamId: a?.id
@@ -2420,7 +2420,7 @@ function an() {
       }
     }) : a === ae.value && e.show({
       onShow: () => {
-        t(_$$to({
+        t(showModalHandler({
           type: _$$q
         }));
         EM(ae.key);
@@ -2488,10 +2488,10 @@ function a_() {
             let t = {
               dispatch: e,
               plan: _$$I2.PRO,
-              upsellSource: _$$b2.UNIVERSAL_UPGRADE_SEQUENCE_MACHINE,
+              upsellSource: UpsellModalType.UNIVERSAL_UPGRADE_SEQUENCE_MACHINE,
               entryPoint: a ? parseInt(a) : void 0
             };
-            e(_$$to({
+            e(showModalHandler({
               type: dR,
               data: {
                 ...t
@@ -2505,10 +2505,10 @@ function a_() {
         n.show({
           canShow: e => e === qo.PERSONAL,
           onShow: () => {
-            e(_$$to({
+            e(showModalHandler({
               type: _$$V,
               data: {
-                upsellSource: _$$b2.DEEPLINK
+                upsellSource: UpsellModalType.DEEPLINK
               }
             }));
             n.complete();

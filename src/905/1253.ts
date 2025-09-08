@@ -12,7 +12,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { zE } from "../905/8732";
 import { dG } from "../figma_app/753501";
-import { hS, gl } from "../905/216495";
+import { isValidValue, isInvalidValue } from "../905/216495";
 import { kH } from "../905/309735";
 import { VZ, TS } from "../905/959568";
 import { MB } from "../figma_app/525558";
@@ -42,7 +42,7 @@ export function $$k1(e) {
     entrypointForLogging,
     getInstanceSwapPickerPosition
   } = e;
-  let U = instanceSwapNode && hS(instanceSwapNode) ? instanceSwapNode.guid : "";
+  let U = instanceSwapNode && isValidValue(instanceSwapNode) ? instanceSwapNode.guid : "";
   let B = useMemo(_$$g, []);
   let V = useSelector(e => B(e, U, sceneGraph));
   let G = useSelector(e => e.instanceSwapPickerShown);
@@ -88,11 +88,11 @@ export function $$k1(e) {
       children: [jsx("span", {
         className: "instance_swap_toggle--instanceIcon--I3hqd",
         children: jsx(_$$y, {})
-      }), instanceSwapNode && (gl(instanceSwapNode) || instanceSwapNode.isAlive) ? jsx("div", {
+      }), instanceSwapNode && (isInvalidValue(instanceSwapNode) || instanceSwapNode.isAlive) ? jsx("div", {
         className: c()("instance_swap_toggle--pickerButtonContent--wSQrI ellipsis--ellipsis--Tjyfa", {
           [S]: fill
         }),
-        children: gl(instanceSwapNode) ? renderI18nText("design_systems.instance_swap_picker.mixed") : kH(instanceSwapNode.name)
+        children: isInvalidValue(instanceSwapNode) ? renderI18nText("design_systems.instance_swap_picker.mixed") : kH(instanceSwapNode.name)
       }) : jsx("div", {
         className: c()("instance_swap_toggle--pickerButtonPlaceholder--OIjte instance_swap_toggle--pickerButtonContent--wSQrI ellipsis--ellipsis--Tjyfa", {
           [S]: fill

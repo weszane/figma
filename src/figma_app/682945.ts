@@ -1,6 +1,6 @@
 import { isNotNullish } from "../figma_app/95419";
 import { flattenObjectToTarget } from "../figma_app/493477";
-import { i6g, CeL, AiE, yuz, fZb, Ez5, pWM } from "../figma_app/763686";
+import { AutosaveHelpers, FullscreenPerfMetrics, fullscreenOptimizationExposureLoggingBinding, gpuMetricsLoggingBinding, perfTimerFrameManagerBindings, AppStateTsApi, CoverageStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -12,7 +12,7 @@ import { q, l as _$$l } from "../905/190247";
 import { N as _$$N } from "../905/200059";
 import { s as _$$s } from "../905/817498";
 import { Dc } from "../figma_app/314264";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ds } from "../905/87821";
 import { f as _$$f } from "../905/70820";
 import { Jr } from "../figma_app/624361";
@@ -65,9 +65,9 @@ export function $$K4(e, t) {
   let r = getInitialOptions().editing_file;
   1 === x && r && trackEventAnalytics("Cold Boot Document Load", {
     fileKey: A,
-    fileVersion: i6g && i6g.currentFileVersion() || 0,
+    fileVersion: AutosaveHelpers && AutosaveHelpers.currentFileVersion() || 0,
     loadedTime: N,
-    fileNodeCount: CeL && CeL.getFileNodeCount() || 0,
+    fileNodeCount: FullscreenPerfMetrics && FullscreenPerfMetrics.getFileNodeCount() || 0,
     fileTeamId: r.team_id,
     fileParentOrgId: getInitialOptions().org_id
   });
@@ -181,7 +181,7 @@ function eb(e) {
 }
 function eT(...e) {}
 export function $$eI18() {
-  if (!Y5?.isReady()) return;
+  if (!fullscreenValue?.isReady()) return;
   let e = {};
   let t = reactTimerGroup.report();
   let r = 0;
@@ -200,19 +200,19 @@ export function $$eI18() {
   }
   !function () {
     if (r / 1e3 < .2) return;
-    let [t, n] = null === A || null === N ? [null, []] : CeL ? [{
+    let [t, n] = null === A || null === N ? [null, []] : FullscreenPerfMetrics ? [{
       gpuDeviceInfo: _$$l(),
       fileKey: A,
-      fileNodeCount: CeL.getFileNodeCount(),
+      fileNodeCount: FullscreenPerfMetrics.getFileNodeCount(),
       multiplayerUserCount: S,
       ongoingSpotlight: v,
-      nodeTypeHistogram: CeL.getNodeTypeHistogram(),
-      recentInteractions: CeL.getRecentInteractions(),
+      nodeTypeHistogram: FullscreenPerfMetrics.getNodeTypeHistogram(),
+      recentInteractions: FullscreenPerfMetrics.getRecentInteractions(),
       secondsSinceLoaded: (performance.now() - N) / 1e3,
       version: 1,
       randomID: ds(),
       reportCount: C
-    }, CeL.getSlowInteractions()] : [{
+    }, FullscreenPerfMetrics.getSlowInteractions()] : [{
       gpuDeviceInfo: _$$l(),
       fileKey: A,
       fileNodeCount: 0,
@@ -276,7 +276,7 @@ export function $$eI18() {
       return t += e[2];
     }(l) : ((d = d.sort((e, t) => e.duration - t.duration)).forEach(eb), C++);
   }();
-  CeL && (CeL.clearNodeTypeHistogram(), CeL.clearSlowInteractions());
+  FullscreenPerfMetrics && (FullscreenPerfMetrics.clearNodeTypeHistogram(), FullscreenPerfMetrics.clearSlowInteractions());
 }
 function eS(e) {
   let t = 0;
@@ -295,7 +295,7 @@ function eS(e) {
 export function $$ev14() {
   if (!$$R31 && getFeatureFlags().frame_distribution_tracker_edit) {
     let e = e => {
-      let t = AiE && AiE.getAndClearHistogramBatchFields();
+      let t = fullscreenOptimizationExposureLoggingBinding && fullscreenOptimizationExposureLoggingBinding.getAndClearHistogramBatchFields();
       if (!t || 0 === t.size) return;
       let r = new Map();
       t.forEach((e, t) => {
@@ -306,29 +306,29 @@ export function $$ev14() {
     ($$R31 = new AH("editor_frame_distributions", eS, 2, !0, new _$$s(), t => {
       e(t);
     }, !1, (e, t = !1) => {
-      if (AiE) {
+      if (fullscreenOptimizationExposureLoggingBinding) {
         let t = new Map();
-        AiE.getAndClearSlowFrameTrackerFields().forEach((e, r) => {
+        fullscreenOptimizationExposureLoggingBinding.getAndClearSlowFrameTrackerFields().forEach((e, r) => {
           t.set(r, e > 0);
         });
         e[_$$N.optimizationExposuresKey] = JSON.stringify(Object.fromEntries(t));
       }
-      yuz && (e[_$$N.gpuMetricsCurrentFrameKey] = yuz.getFullscreenCurrentFrameGpuMetricsJSON().toString());
-      fZb && (e[_$$N.cpuTimerTreeCurrentFrameKey] = fZb.getCurrentFrameCpuTimerTreeJSON().toString());
-      t && (yuz && (e[_$$N.gpuMetricsPreviousFrameKey] = yuz.getFullscreenPreviousFrameGpuMetricsJSON().toString()), fZb && (e[_$$N.cpuTimerTreePreviousFrameKey] = fZb.getPreviousFrameCpuTimerTreeJSON().toString()));
-      let r = Ez5 && Ez5.activeRunningAnimations() || [];
+      gpuMetricsLoggingBinding && (e[_$$N.gpuMetricsCurrentFrameKey] = gpuMetricsLoggingBinding.getFullscreenCurrentFrameGpuMetricsJSON().toString());
+      perfTimerFrameManagerBindings && (e[_$$N.cpuTimerTreeCurrentFrameKey] = perfTimerFrameManagerBindings.getCurrentFrameCpuTimerTreeJSON().toString());
+      t && (gpuMetricsLoggingBinding && (e[_$$N.gpuMetricsPreviousFrameKey] = gpuMetricsLoggingBinding.getFullscreenPreviousFrameGpuMetricsJSON().toString()), perfTimerFrameManagerBindings && (e[_$$N.cpuTimerTreePreviousFrameKey] = perfTimerFrameManagerBindings.getPreviousFrameCpuTimerTreeJSON().toString()));
+      let r = AppStateTsApi && AppStateTsApi.activeRunningAnimations() || [];
       e[_$$N.activeAnimationsKey] = r;
       let n = atomStoreManager.get(_$$f);
       n > 0 && (e[_$$N.numberOfDevAnnotationsVisibleKey] = n);
     }, e => {
-      AiE && AiE.clearSlowFrameTrackerFields();
-      yuz && yuz.nextFrame(e);
-      fZb?.nextFrame(e);
+      fullscreenOptimizationExposureLoggingBinding && fullscreenOptimizationExposureLoggingBinding.clearSlowFrameTrackerFields();
+      gpuMetricsLoggingBinding && gpuMetricsLoggingBinding.nextFrame(e);
+      perfTimerFrameManagerBindings?.nextFrame(e);
     })).addEventTracker("selectionChanged", new l$());
     $$R31.addEventTracker("zoomActive", new vu());
     $$R31.addEventTracker("panActive", new _$$H());
-    $$R31.addEventTracker("viewportHasGaps", new as(pWM.DEFINITELY_COVERED_ONLY));
-    $$R31.addEventTracker("viewportIncludingOutdatedHasGaps", new as(pWM.DEFINITELY_COVERED_AND_OUTDATED));
+    $$R31.addEventTracker("viewportHasGaps", new as(CoverageStatus.DEFINITELY_COVERED_ONLY));
+    $$R31.addEventTracker("viewportIncludingOutdatedHasGaps", new as(CoverageStatus.DEFINITELY_COVERED_AND_OUTDATED));
     $$R31.addEventTracker("multipleMultiplayerUsersInFile", new nc(2, () => S));
     $$R31.addEventTracker("multipleMultiplayerUsersInFileAndPanningOrZooming", new Pn(2, () => S));
     $$R31.addEventTracker("viewportHasBlurryRegions", new eO(1));

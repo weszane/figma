@@ -2,9 +2,9 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Q } from "../1250/220026";
-import { KWd } from "../figma_app/763686";
+import { TransactionCommand } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { Ce, $O } from "../905/156213";
+import { hideModal, showModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { oW } from "../figma_app/247611";
 import { RD } from "../figma_app/198840";
@@ -16,7 +16,7 @@ export function $$_1() {
   let e = useDispatch();
   let t = useSelector(e => e.modalShown?.type === PH.type);
   let i = useCallback(() => {
-    t ? e(Ce()) : (oW.trigger("action", KWd.CLEAR), e($O({
+    t ? e(hideModal()) : (oW.trigger("action", TransactionCommand.CLEAR), e(showModal({
       type: PH.type,
       data: {
         triggeredFrom: "toolbar",

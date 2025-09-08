@@ -3,7 +3,7 @@ import { dG, xD, gf } from "../vendor/395562";
 import { desktopAPIInstance, bellFeedAPIInstance, isFigmaDesktopUA } from "../figma_app/876459";
 import { getInitialOptions } from "../figma_app/169182";
 import { isAnyMobile } from "../figma_app/778880";
-import { sr } from "../905/894881";
+import { notificationAPI } from "../905/894881";
 import { analyticsEventManager } from "../905/449184";
 import { iX, Ke, _F, Jr } from "../905/415545";
 class c {
@@ -151,7 +151,7 @@ export class $$p0 {
       vapidKey: this.vapidKey,
       serviceWorkerRegistration: e
     });
-    sr.sendFirebaseToken({
+    notificationAPI.sendFirebaseToken({
       firebaseToken: t
     });
     c.trackTokenRegistered(iX.INTERNAL);
@@ -230,7 +230,7 @@ export class $$p0 {
     try {
       let i = await t.requestPermission(e);
       if (i.status === Ke) {
-        sr.sendFirebaseToken({
+        notificationAPI.sendFirebaseToken({
           firebaseToken: i.token
         });
         c.trackTokenRegistered(e);

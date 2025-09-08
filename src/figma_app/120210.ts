@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
-import { glU, NLJ } from "../figma_app/763686";
+import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { NX } from "../figma_app/243213";
 import { Point } from "../905/736624";
@@ -64,12 +64,12 @@ export function $$b5(e, t = 552, r = 320) {
 export function $$T1() {
   let e = useDispatch();
   return useCallback((t = !0) => {
-    glU && t && glU.triggerAction("set-tool-default", null);
+    Fullscreen && t && Fullscreen.triggerAction("set-tool-default", null);
     e(KE());
   }, [e]);
 }
 export function $$I0(e, t, r) {
-  let a = useSelector(e => e.mirror.appModel.currentTool === NLJ.CODE_BLOCK);
+  let a = useSelector(e => e.mirror.appModel.currentTool === DesignGraphElements.CODE_BLOCK);
   let o = useSelector(e => e.modalShown);
   let d = useSelector(e => e.mirror.appModel.showUi);
   let c = $$T1();
@@ -98,7 +98,7 @@ export function $$I0(e, t, r) {
   }, [r, u, e, t, d]);
 }
 export function $$S4(e) {
-  return e.mirror.appModel.currentTool === NLJ.NONE && e.universalInsertModal.showing && e.universalInsertModal.pinned === t.NOT_PINNED;
+  return e.mirror.appModel.currentTool === DesignGraphElements.NONE && e.universalInsertModal.showing && e.universalInsertModal.pinned === t.NOT_PINNED;
 }
 export function $$v2(e, t, r, a) {
   let s = useDispatch();

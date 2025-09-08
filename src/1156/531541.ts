@@ -1,10 +1,10 @@
 import { z } from "../905/239603";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 let s = z.record(z.string(), z.string());
 let a = new class {
   constructor() {
-    this.CreateCodeSnapshotValidator = vh();
-    this.GetCodeSnapshotValidator = vh();
+    this.CreateCodeSnapshotValidator = createNoOpValidator();
+    this.GetCodeSnapshotValidator = createNoOpValidator();
   }
   createCodeSnapshot(e) {
     return this.CreateCodeSnapshotValidator.validate(async ({

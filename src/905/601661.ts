@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { bOM } from "../figma_app/763686";
+import { PresentationValidationStatus } from "../figma_app/763686";
 import { iX } from "../figma_app/471982";
 import { a6, x0 } from "../figma_app/198840";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
@@ -8,7 +8,7 @@ function l({
   createNewVersionOnSubmit: t,
   figFilePrototypeStatus: i
 }) {
-  return t ? i === bOM.VALID : !!e && a6(e).valid_prototype;
+  return t ? i === PresentationValidationStatus.VALID : !!e && a6(e).valid_prototype;
 }
 export let $$d0 = {
   displayName: "ViewerModeField",

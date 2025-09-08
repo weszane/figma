@@ -8,10 +8,10 @@ import { d6 } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Rh } from "../905/844322";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { i as _$$i } from "../905/182187";
 import { an } from "../905/81009";
 import { ak } from "../figma_app/314264";
@@ -22,7 +22,7 @@ import { FFileType } from "../figma_app/191312";
 import { M5e } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { R5, mx } from "../figma_app/598018";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi, vL } from "../905/652992";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ZN } from "../figma_app/630077";
@@ -32,7 +32,7 @@ import { W } from "../905/442612";
 import { i as _$$i2 } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 var s = a;
-export let $$F1 = nF(async (e, t) => {
+export let $$F1 = createOptimistThunk(async (e, t) => {
   let {
     fileKeys,
     repoIds
@@ -44,17 +44,17 @@ export let $$F1 = nF(async (e, t) => {
       let s = t.teams[n];
       let o = new Set(a.map(e => e.editor_type));
       let l = o.size > 1 ? null : o.has(FFileType.WHITEBOARD) ? FFileType.WHITEBOARD : FFileType.DESIGN;
-      o.has(FFileType.SITES) && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(to({
+      o.has(FFileType.SITES) && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(showModalHandler({
         type: _$$M,
         data: {
           team: s
         }
-      })) : o.has(FFileType.FIGMAKE) && W() ? e.dispatch(to({
+      })) : o.has(FFileType.FIGMAKE) && W() ? e.dispatch(showModalHandler({
         type: _$$i2,
         data: {
           team: s
         }
-      })) : e.dispatch(to({
+      })) : e.dispatch(showModalHandler({
         type: DV,
         data: {
           team: s,
@@ -64,7 +64,7 @@ export let $$F1 = nF(async (e, t) => {
           multipleResources: fileKeys.length > 1,
           currentPlan: _$$F2.Plan.STARTER,
           upsellPlan: _$$F2.Plan.PRO,
-          upsellSource: _$$b.CREATE_NEW_FILE
+          upsellSource: UpsellModalType.CREATE_NEW_FILE
         }
       }));
     } else e.dispatch(Rh({
@@ -128,7 +128,7 @@ async function j({
     editorTypes: l
   };
 }
-let $$U3 = nF(async (e, t) => {
+let $$U3 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let a = r.user?.id;
   let s = r.user?.personal_drafts_folder_id;
@@ -155,17 +155,17 @@ let $$U3 = nF(async (e, t) => {
   if (A) {
     let t = r.teams[A];
     let n = editorTypes.size > 1 ? null : editorTypes.has(FFileType.WHITEBOARD) ? FFileType.WHITEBOARD : FFileType.DESIGN;
-    editorTypes.has(FFileType.SITES) && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(to({
+    editorTypes.has(FFileType.SITES) && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(showModalHandler({
       type: _$$M,
       data: {
         team: t
       }
-    })) : editorTypes.has(FFileType.FIGMAKE) && W() ? e.dispatch(to({
+    })) : editorTypes.has(FFileType.FIGMAKE) && W() ? e.dispatch(showModalHandler({
       type: _$$i2,
       data: {
         team: t
       }
-    })) : e.dispatch(to({
+    })) : e.dispatch(showModalHandler({
       type: DV,
       data: {
         team: t,
@@ -175,7 +175,7 @@ let $$U3 = nF(async (e, t) => {
         multipleResources: copyFiles.length > 1,
         currentPlan: _$$F2.Plan.STARTER,
         upsellPlan: _$$F2.Plan.PRO,
-        upsellSource: _$$b.CREATE_NEW_FILE
+        upsellSource: UpsellModalType.CREATE_NEW_FILE
       }
     }));
     return;
@@ -245,12 +245,12 @@ let $$U3 = nF(async (e, t) => {
     }
   });
 });
-let $$B2 = nF(e => {
+let $$B2 = createOptimistThunk(e => {
   e.dispatch($$U3({
     toDraft: !0
   }));
 });
-let $$G0 = nF((e, t) => {
+let $$G0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user?.drafts_folder_id;
   return XHR.post(`/api/multiplayer/${t.file.key}/copy?${serializeQuery({

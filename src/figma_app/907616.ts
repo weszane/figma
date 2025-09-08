@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h, J } from "../905/270045";
+import { HiddenLabel, Label } from "../905/270045";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { Y } from "../905/185567";
@@ -167,7 +167,7 @@ export function $$M1(e) {
         value: e.value,
         onChange: e.onChange,
         children: [jsx(l9, {
-          label: jsx(_$$h, {
+          label: jsx(HiddenLabel, {
             children: getI18nString("permissions.audience_selector.aria_label")
           }),
           disabled: !!r || e.disabled,
@@ -216,14 +216,14 @@ export function $$F3(e) {
     children: [jsx(_$$c, {
       value: "view",
       readonly: e.disabled || void 0,
-      label: jsx(J, {
+      label: jsx(Label, {
         className: A,
         children: renderI18nText("team_creation.view")
       })
     }, "view-only"), jsx(_$$c, {
       value: "edit",
       readonly: e.disabled || e.disableEdit || void 0,
-      label: jsx(J, {
+      label: jsx(Label, {
         className: A,
         children: e.teamCanAccess ? renderI18nText("permissions.level_name_capitalized.can_access") : renderI18nText("team_creation.edit")
       })

@@ -9,7 +9,7 @@ import { x } from "../905/404412";
 import { memo, useRef, useCallback, useEffect, useMemo, createContext } from "react";
 import { Lh } from "../figma_app/415899";
 import { $ } from "../905/61417";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 import { y as _$$y } from "../905/658036";
 import { T } from "../905/745591";
 let p = memo(function (e) {
@@ -68,7 +68,7 @@ function _({
   return jsx(A.Provider, {
     value: l,
     children: jsx("div", {
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...a,
       ...s,
       role: "presentation",

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "../vendor/514228";
 import { selectWithShallowEqual } from "../905/103090";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { cW, Be, $1 } from "../figma_app/844435";
-import { uF, LW, T } from "../figma_app/300692";
+import { getPluginVersion, isDevWithOnlyCodegen, getFullscreenViewEditorType } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
 import { r as _$$r } from "../905/319631";
 import { jv } from "../905/525678";
@@ -19,12 +19,12 @@ export function $$$$p1(e, t, a) {
   }));
   let h = useDispatch();
   let x = cW()[e];
-  let b = uF(x);
+  let b = getPluginVersion(x);
   let v = Be();
   let f = v.plugins[e] || v.orgPlugins[e] || b;
   let j = Object.values($1()).find(t => t.plugin_id === e);
-  let y = j?.manifest.menu && j.manifest.menu.length > 0 && !LW(j) ? z(j.manifest.menu, j) : [];
-  let w = f.manifest.menu && f.manifest.menu.length > 0 && !LW(f) ? z(f.manifest.menu, f) : [];
+  let y = j?.manifest.menu && j.manifest.menu.length > 0 && !isDevWithOnlyCodegen(j) ? z(j.manifest.menu, j) : [];
+  let w = f.manifest.menu && f.manifest.menu.length > 0 && !isDevWithOnlyCodegen(f) ? z(f.manifest.menu, f) : [];
   let k = jv(w.map(e => q(e, e => () => t(e))), {
     appModel,
     selectedView
@@ -39,7 +39,7 @@ export function $$$$p1(e, t, a) {
   j.error ? C.push({
     displayText: "\u26A0 In-development version",
     callback: () => {
-      h(to({
+      h(showModalHandler({
         type: _$$r,
         data: {
           dispatch: h,
@@ -55,7 +55,7 @@ export function $$$$p1(e, t, a) {
       children: E
     } : {
       callback: () => {
-        "figma" === T() && (h(_$$b({
+        "figma" === getFullscreenViewEditorType() && (h(_$$b({
           seen_published_plugin_onboarding_modal: !0
         })), h(_$$b({
           seen_development_plugin_onboarding_modal: !0
@@ -70,7 +70,7 @@ export function $$$$p1(e, t, a) {
       children: k
     } : {
       callback: () => {
-        "figma" === T() && (h(_$$b({
+        "figma" === getFullscreenViewEditorType() && (h(_$$b({
           seen_published_plugin_onboarding_modal: !0
         })), h(_$$b({
           seen_development_plugin_onboarding_modal: !0
@@ -85,7 +85,7 @@ export function $$g0(e, t) {
   let a = useSelector(e => e.mirror.appModel);
   let s = useSelector(e => e.selectedView);
   let i = cW()[e];
-  let r = uF(i);
+  let r = getPluginVersion(i);
   let d = r.manifest.menu && r.manifest.menu.length > 0 ? z(r.manifest.menu, r) : [];
   return jv(d.map(e => q(e, e => () => t(e))), {
     appModel: a,

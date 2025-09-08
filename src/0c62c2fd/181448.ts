@@ -8,7 +8,7 @@ import { l as _$$l } from "../905/241412";
 import { g as _$$g } from "../905/125190";
 import { O as _$$O } from "../905/501876";
 import { A as _$$A } from "../905/215698";
-import { _YF, xal, h3O, kul, Ez5, glU, zIx } from "../figma_app/763686";
+import { WorkspaceType, DataLoadStatus, Multiplayer, SchemaJoinStatus, AppStateTsApi, Fullscreen, BuildStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import g from "classnames";
@@ -21,7 +21,7 @@ import { $ as _$$$ } from "../0c62c2fd/637169";
 import { lg } from "../figma_app/976749";
 import { pr } from "../figma_app/952446";
 import { Fy } from "../figma_app/623300";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
 import { l as _$$l2 } from "../0c62c2fd/624465";
@@ -91,13 +91,13 @@ function M({
   editorType: e
 }) {
   switch (e) {
-    case _YF.DESIGN:
+    case WorkspaceType.DESIGN:
       return jsx(_$$k, {});
-    case _YF.WHITEBOARD:
+    case WorkspaceType.WHITEBOARD:
       return jsx(_$$B, {
         svg: _$$A3
       });
-    case _YF.SLIDES:
+    case WorkspaceType.SLIDES:
       return jsx(_$$l, {});
     default:
       return null;
@@ -157,9 +157,9 @@ export function $$U1({
   let en = useAtomWithSubscription(Yh);
   let eo = Fk((e, t, r) => getFeatureFlags().gate_memory_usage_computations && !r ? null : e.get(t)?.nodeMemoryUsage, r, z);
   let el = Fk((e, t, r) => getFeatureFlags().gate_memory_usage_computations && !r ? null : e.get(t)?.rootMemoryUsage, r, z);
-  let ed = useMemo(() => Fy(X, r) === xal.LOADED, [r, X]);
-  let ec = h3O.getSessionState() === kul.JOINED;
-  let eu = useMemo(() => H && !ec && !ed && h3O.isIncrementalSession(), [H, ed, ec]);
+  let ed = useMemo(() => Fy(X, r) === DataLoadStatus.LOADED, [r, X]);
+  let ec = Multiplayer.getSessionState() === SchemaJoinStatus.JOINED;
+  let eu = useMemo(() => H && !ec && !ed && Multiplayer.isIncrementalSession(), [H, ed, ec]);
   let em = Pt("pagesPanel", "row", Q) || "";
   let e_ = rf(em, "contextmenu", e => {
     e.preventDefault();
@@ -325,10 +325,10 @@ export function $$W0({
   fallback: r = null,
   hideBackground: s = !1
 }) {
-  let i = J2(Ez5.currentSceneState().numReadyNodesByPage);
-  let n = J2(Ez5.currentSceneState().numCompletedNodesByPage);
-  let o = i.has(e) ? i.get(e) > 0 : glU.nodeStatusesOnPage(e).includes(zIx.BUILD);
-  let l = n.has(e) ? n.get(e) > 0 : glU.nodeStatusesOnPage(e).includes(zIx.COMPLETED);
+  let i = getObservableOrFallback(AppStateTsApi.currentSceneState().numReadyNodesByPage);
+  let n = getObservableOrFallback(AppStateTsApi.currentSceneState().numCompletedNodesByPage);
+  let o = i.has(e) ? i.get(e) > 0 : Fullscreen.nodeStatusesOnPage(e).includes(BuildStatus.BUILD);
+  let l = n.has(e) ? n.get(e) > 0 : Fullscreen.nodeStatusesOnPage(e).includes(BuildStatus.COMPLETED);
   return l && !o ? jsx(_$$g, {
     className: "pages_panel_row--pageCompleted--gzdWd",
     "data-tooltip-type": Ib.TEXT,

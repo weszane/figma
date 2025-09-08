@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { lyf, FAf, NLJ } from "../figma_app/763686";
+import { ViewType, DesignWorkspace, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
@@ -27,7 +27,7 @@ export function $$S1(e) {
     topLevelMode
   } = rM(_$$u);
   let r = _$$N();
-  return topLevelMode !== lyf.DEV_HANDOFF && !e && r === Q.REQUEST_NEEDED;
+  return topLevelMode !== ViewType.DEV_HANDOFF && !e && r === Q.REQUEST_NEEDED;
 }
 export function $$v0(e) {
   let t = ZC(e);
@@ -46,11 +46,11 @@ export function $$x4() {
 }
 function N(e, t) {
   let r;
-  if ("design" === e) r = t.isReadOnly ? FAf.COMMENT : FAf.DESIGN;else {
+  if ("design" === e) r = t.isReadOnly ? DesignWorkspace.COMMENT : DesignWorkspace.DESIGN;else {
     if ("illustration" !== e) return;
-    r = t.isReadOnly ? FAf.COMMENT : FAf.ILLUSTRATION;
+    r = t.isReadOnly ? DesignWorkspace.COMMENT : DesignWorkspace.ILLUSTRATION;
   }
-  atomStoreManager.get(Kh) !== NLJ.COMMENTS && NT(r);
+  atomStoreManager.get(Kh) !== DesignGraphElements.COMMENTS && NT(r);
 }
 export function $$C2() {
   let e = useAtomWithSubscription(w4);

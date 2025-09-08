@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { K } from "../905/851274";
-import { m1T } from "../figma_app/763686";
+import { LayoutTabType } from "../figma_app/763686";
 import d from "classnames";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
@@ -23,7 +23,7 @@ let $$v1 = "slides-presentation-flyout";
 let $$A0 = {
   type: ZU.FLYOUT,
   name: $$v1,
-  editModes: LB.concat([m1T.SLIDE_LAYOUT, m1T.PREVIEW]),
+  editModes: LB.concat([LayoutTabType.SLIDE_LAYOUT, LayoutTabType.PREVIEW]),
   nonEditorsAllowed: !0,
   loggedOutAllowed: !0,
   recordingKey: "slidesPresentationFlyout",

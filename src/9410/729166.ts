@@ -3,7 +3,7 @@ import { useState, useRef, useCallback, useEffect, forwardRef, useMemo, memo, us
 import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Z_n, rXF, zIx, Ez5, glU, w3z, xOL, XQq, X3B, Oin, nQ7, h3O, PcT, CeL } from "../figma_app/763686";
+import { VariableDataType, VariableResolvedDataType, BuildStatus, AppStateTsApi, Fullscreen, HandoffBindingsCpp, RotationType, PresetType, PrototypingTsApi, UIVisibilitySetting, SelfDesignType, Multiplayer, webGPUBindings, FullscreenPerfMetrics } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { ZC } from "../figma_app/39751";
@@ -63,7 +63,7 @@ import { reportError } from "../905/11";
 import { ON, oy, gs } from "../figma_app/31103";
 import { Ku, UK, dP } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, yp } from "../figma_app/852050";
-import { J2, ut } from "../figma_app/84367";
+import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { rh as _$$rh, np } from "../figma_app/803932";
 import { Cj } from "../figma_app/151869";
 import { nd, sD } from "../figma_app/826998";
@@ -75,7 +75,7 @@ import { e as _$$e4, y as _$$y } from "../905/871724";
 import { a as _$$a } from "../figma_app/289605";
 import { R6, vo, eb as _$$eb, bE, A8, i_ as _$$i_, EB, zL } from "../figma_app/617506";
 import { $ as _$$$ } from "../905/532878";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { i as _$$i } from "../905/97346";
 import { Gyo, Wsk, a_Q, bTb, wxr, Evg, RtY, m8f } from "../figma_app/27776";
 import { sf } from "../905/929976";
@@ -94,7 +94,7 @@ import { N as _$$N } from "../905/438674";
 import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
 import { _ as _$$_ } from "../figma_app/496441";
 import { bL as _$$bL, l9, mc as _$$mc, WL, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { C as _$$C } from "../905/520159";
 import { O as _$$O } from "../905/501876";
 import { A as _$$A4 } from "../905/408320";
@@ -160,7 +160,7 @@ import { m0, ow, Em } from "../figma_app/976749";
 import { Ou, fq } from "../figma_app/953049";
 import { pi } from "../figma_app/314264";
 import { d1 } from "../905/766303";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ap } from "../figma_app/149304";
 import { dX } from "../figma_app/837840";
 import { xK } from "../905/125218";
@@ -717,44 +717,44 @@ function eK({
     }
   }, [h, p, u]), h) return null;
   switch (p.type) {
-    case Z_n.STRING:
-    case Z_n.FLOAT:
+    case VariableDataType.STRING:
+    case VariableDataType.FLOAT:
       return jsx(eH, {
         value: p.value,
         isCopyable: i,
         recordingKey: `dev_handoff.variables_table.cell.copy-${e.name}-${t}`
       });
-    case Z_n.BOOLEAN:
+    case VariableDataType.BOOLEAN:
       return jsx(eH, {
         value: Oi(p),
         isCopyable: i,
         variableTypeForTracking: a
       });
-    case Z_n.COLOR:
+    case VariableDataType.COLOR:
       return jsx(ez, {
         value: p,
         isCopyable: i
       });
-    case Z_n.ALIAS:
+    case VariableDataType.ALIAS:
       return jsx(eV, {
         value: p,
         resolvedValue: u,
         isCopyable: i,
         variableTypeForTracking: a
       });
-    case Z_n.SYMBOL_ID:
-    case Z_n.NODE_FIELD_ALIAS:
-    case Z_n.EXPRESSION:
-    case Z_n.FONT_STYLE:
-    case Z_n.TEXT_DATA:
-    case Z_n.MAP:
-    case Z_n.MANAGED_STRING_ALIAS:
-    case Z_n.CMS_ALIAS:
-    case Z_n.JS_RUNTIME_ALIAS:
-    case Z_n.IMAGE:
-    case Z_n.LINK:
-    case Z_n.SLOT_CONTENT_ID:
-    case Z_n.DATE:
+    case VariableDataType.SYMBOL_ID:
+    case VariableDataType.NODE_FIELD_ALIAS:
+    case VariableDataType.EXPRESSION:
+    case VariableDataType.FONT_STYLE:
+    case VariableDataType.TEXT_DATA:
+    case VariableDataType.MAP:
+    case VariableDataType.MANAGED_STRING_ALIAS:
+    case VariableDataType.CMS_ALIAS:
+    case VariableDataType.JS_RUNTIME_ALIAS:
+    case VariableDataType.IMAGE:
+    case VariableDataType.LINK:
+    case VariableDataType.SLOT_CONTENT_ID:
+    case VariableDataType.DATE:
       return null;
     default:
       throwTypeError(p);
@@ -824,14 +824,14 @@ function eV({
       variableType: a
     });
   }, [o, d, a]);
-  return t.resolvedType === rXF.COLOR ? jsx(np, {
+  return t.resolvedType === VariableResolvedDataType.COLOR ? jsx(np, {
     color: t.value,
     variable: s,
     label: s?.name ?? getI18nString("variables.missing_name"),
     onClick: s && i ? c : void 0,
     selected: i
   }) : jsx("div", {
-    className: P()("variable_cell_content--aliasWrapper--mHIWi", e.resolvedType === rXF.COLOR && "variable_cell_content--shiftLeft--x6CPr"),
+    className: P()("variable_cell_content--aliasWrapper--mHIWi", e.resolvedType === VariableResolvedDataType.COLOR && "variable_cell_content--shiftLeft--x6CPr"),
     children: jsx(wG, {
       thumbnailValue: t,
       text: s?.name ?? getI18nString("variables.missing_name"),
@@ -849,7 +849,7 @@ function eW({
   isSelected: a = !1,
   variableTypeForTracking: s
 }) {
-  let o = J2(UK().showGuids) && t ? `${e} (${t})` : e;
+  let o = getObservableOrFallback(UK().showGuids) && t ? `${e} (${t})` : e;
   let l = sD(o);
   useEffect(() => {
     a && l.current?.scrollIntoView({
@@ -883,7 +883,7 @@ function e0({
       s.current = i ?? parsePxNumber(r);
     },
     onDrag(t) {
-      let r = qE(s.current + t.delta.x, 50, 500);
+      let r = clamp(s.current + t.delta.x, 50, 500);
       i(t => e ? {
         ...t,
         valueColumnWidths: {
@@ -1427,11 +1427,11 @@ function iE({
 function iT(e, t, i) {
   if (!e || i) return null;
   switch (e.status) {
-    case zIx.BUILD:
+    case BuildStatus.BUILD:
       return jsx(ie, {
         className: P()(t ? iC : "overview--readyIcon--A94uc", ib)
       });
-    case zIx.COMPLETED:
+    case BuildStatus.COMPLETED:
       return jsx(_$$l, {
         className: P()(t ? iC : "overview--completedIcon--9Nbjl", ib)
       });
@@ -1510,7 +1510,7 @@ function iS({
     isFallbackForLegacyStatus: a,
     onClick: s
   });
-  let m = o.status === zIx.BUILD && (o.status === o.prevStatus || !!o.description);
+  let m = o.status === BuildStatus.BUILD && (o.status === o.prevStatus || !!o.description);
   let f = u && _$$y2(o, u);
   let g = m ? renderI18nText("dev_handoff.workflows.edit_info.updated_design", {
     user: t.handle,
@@ -1663,12 +1663,12 @@ function iZ() {
   let t = useSelector(e => e.mirror.appModel.pagesList[0]);
   let i = function () {
     let e = useSelector(e => e.mirror.appModel.pagesList);
-    let t = J2(Ez5.currentSceneState().numReadyNodesByPage);
-    let i = J2(Ez5.currentSceneState().numCompletedNodesByPage);
+    let t = getObservableOrFallback(AppStateTsApi.currentSceneState().numReadyNodesByPage);
+    let i = getObservableOrFallback(AppStateTsApi.currentSceneState().numCompletedNodesByPage);
     return useMemo(() => e.filter(e => {
       let r = e.nodeId;
-      let n = t.has(r) ? t.get(r) > 0 : glU.nodeStatusesOnPage(r).includes(zIx.BUILD);
-      let a = i.has(r) ? i.get(r) > 0 : glU.nodeStatusesOnPage(r).includes(zIx.COMPLETED);
+      let n = t.has(r) ? t.get(r) > 0 : Fullscreen.nodeStatusesOnPage(r).includes(BuildStatus.BUILD);
+      let a = i.has(r) ? i.get(r) > 0 : Fullscreen.nodeStatusesOnPage(r).includes(BuildStatus.COMPLETED);
       return n || a;
     }), [e, t, i]);
   }()[0];
@@ -1715,7 +1715,7 @@ function iQ() {
   let c = _6();
   let u = useDispatch();
   _$$O3();
-  let p = J2(Ez5.currentSceneState().nodesWithStatusForFile);
+  let p = getObservableOrFallback(AppStateTsApi.currentSceneState().nodesWithStatusForFile);
   let f = useRef(null);
   let [g, _] = useAtomValueAndSetter(gk);
   let [x, y] = useAtomValueAndSetter(iX);
@@ -1759,8 +1759,8 @@ function iQ() {
       searchActive: e.length > 0
     };
   }();
-  let A = useMemo(() => p.filter(e => e.status === zIx.BUILD && searchFilter(e)), [p, searchFilter]);
-  let O = useMemo(() => p.filter(e => e.status === zIx.COMPLETED && searchFilter(e)), [p, searchFilter]);
+  let A = useMemo(() => p.filter(e => e.status === BuildStatus.BUILD && searchFilter(e)), [p, searchFilter]);
+  let O = useMemo(() => p.filter(e => e.status === BuildStatus.COMPLETED && searchFilter(e)), [p, searchFilter]);
   let L = useMemo(() => {
     switch (T) {
       case oz.ALL:
@@ -2167,7 +2167,7 @@ function i2({
     let s = Ak(a);
     return a ? s : null;
   }(nodeId, e.hasBeenEditedSinceLastStatusChange);
-  let v = useMemo(() => e.hasBeenEditedSinceLastStatusChange ? renderI18nText("dev_handoff.workflows.edit_info.changed") : e.status === zIx.COMPLETED ? renderI18nText("dev_handoff.status.completed") : e.status === zIx.BUILD ? e.description ? renderI18nText("dev_handoff.workflows.edit_info.new version") : renderI18nText("dev_handoff.status.ready_for_dev") : renderI18nText("dev_handoff.workflows.edit_info.changed"), [e.description, e.hasBeenEditedSinceLastStatusChange, e.status]);
+  let v = useMemo(() => e.hasBeenEditedSinceLastStatusChange ? renderI18nText("dev_handoff.workflows.edit_info.changed") : e.status === BuildStatus.COMPLETED ? renderI18nText("dev_handoff.status.completed") : e.status === BuildStatus.BUILD ? e.description ? renderI18nText("dev_handoff.workflows.edit_info.new version") : renderI18nText("dev_handoff.status.ready_for_dev") : renderI18nText("dev_handoff.workflows.edit_info.changed"), [e.description, e.hasBeenEditedSinceLastStatusChange, e.status]);
   let {
     getTriggerProps,
     manager
@@ -2355,7 +2355,7 @@ function i4({
     version: i,
     reason: "workflows.overview.thumbnail",
     regenerateAfterImagesLoaded: !0,
-    isDevModeBlendedSection: w3z.canBeBlendedSection(e)
+    isDevModeBlendedSection: HandoffBindingsCpp.canBeBlendedSection(e)
   });
   let y = function () {
     let [e, t] = useAtomValueAndSetter(iM);
@@ -2425,7 +2425,7 @@ function i7({
     value: e,
     onChange: t,
     children: [jsx(l9, {
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: getI18nString("dev_handoff.workflows.overview.sort_by")
       })
     }), jsxs(_$$mc, {
@@ -2691,11 +2691,11 @@ let r0 = memo(function ({
     showing
   } = BK(t.overflowDropdownType);
   let M = _$$Z();
-  let F = J2(Ez5.singleSlideView().isInFocusedNodeView);
+  let F = getObservableOrFallback(AppStateTsApi.singleSlideView().isInFocusedNodeView);
   let [B, U] = useState(!1);
   let G = useCallback(() => {
     U(!0);
-    Y5.triggerAction("inline-preview-iframe-focus-state-changed", {
+    fullscreenValue.triggerAction("inline-preview-iframe-focus-state-changed", {
       isFocused: !0
     });
   }, [U]);
@@ -2796,7 +2796,7 @@ let r0 = memo(function ({
         alwaysPan: !0,
         maxScale: .6
       });
-      K ? h === bi.OPEN && (M(t), F && Ez5.singleSlideView().focusNodeInFocusedNodeView(e, !0)) : M(t);
+      K ? h === bi.OPEN && (M(t), F && AppStateTsApi.singleSlideView().focusNodeInFocusedNodeView(e, !0)) : M(t);
     }
   }, [M, K, F, h]);
   useEffect(() => {
@@ -2813,7 +2813,7 @@ let r0 = memo(function ({
   }, [W]);
   let et = useMemo(() => {
     if (R && hY[O].inlinePreviewInfo?.hitTargetSvgUrl) return function (e) {
-      let t = A.rotation === xOL.CCW_90;
+      let t = A.rotation === RotationType.CCW_90;
       return jsx(rG, {
         ...e,
         mirrorResizeHorizontally: !1,
@@ -2855,7 +2855,7 @@ let r0 = memo(function ({
     let {
       width,
       height
-    } = Y5.getViewportInfo();
+    } = fullscreenValue.getViewportInfo();
     let r = e.x / width;
     let n = e.y / height;
     x(Zh({
@@ -2921,7 +2921,7 @@ let r0 = memo(function ({
         let r = Y();
         return _$$o2(t.x, r.x, 1e-4) && _$$o2(t.y, r.y, 1e-4);
       },
-      isPrototypeDeviceSet: !!A && A.type !== XQq.NONE,
+      isPrototypeDeviceSet: !!A && A.type !== PresetType.NONE,
       onToggleShowDeviceFrame: ei,
       openFileKey: s || void 0,
       resizeToActualSize: () => {
@@ -3045,7 +3045,7 @@ function r1({
     w(_$$F2({
       fileKey: o,
       nodeId: j,
-      startingPointNodeId: X3B.getActivePrototypeStartingPointNodeIdOnCurrentPage(),
+      startingPointNodeId: PrototypingTsApi.getActivePrototypeStartingPointNodeIdOnCurrentPage(),
       source: "inline_viewer",
       scalingInfo: x ? i ? {
         contentScalingMode: "responsive",
@@ -3267,11 +3267,11 @@ function r5() {
   let r = useSelector(e => pi({
     editorType: d1(e)?.editor_type
   }));
-  let o = i !== Oin.HIDE_UI && i !== Oin.ON_AND_LOCKED;
+  let o = i !== UIVisibilitySetting.HIDE_UI && i !== UIVisibilitySetting.ON_AND_LOCKED;
   let p = q5();
   let m = jY();
   let f = BI();
-  let g = ut(Ez5?.interopToolMode(), nQ7.SELF);
+  let g = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   useEffect(() => (document.body.setAttribute("data-editor-theme", ju(e, g)), () => {
     document.body.removeAttribute("data-editor-theme");
   }), [e, g]);
@@ -3280,8 +3280,8 @@ function r5() {
   _$$_3();
   _$$c2();
   useEffect(() => {
-    o && t && m && Y5.onReady().then(() => {
-      getFeatureFlags()?.fullscreen_send_client_rendered_message ? h3O?.sendClientRendered(xK.getClientRenderedMetadata()) : h3O?.sendSignal("client-rendered", "");
+    o && t && m && fullscreenValue.onReady().then(() => {
+      getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer?.sendClientRendered(xK.getClientRenderedMetadata()) : Multiplayer?.sendSignal("client-rendered", "");
       window.requestAnimationFrame(() => {
         desktopAPIInstance?.addTabAnalyticsMetadata({
           reactFullscreenViewRenderTime: window.performance.now()
@@ -3290,12 +3290,12 @@ function r5() {
         xK.report(t, r);
         getFeatureFlags()?.fullscreen_use_threaded_rendering || function () {
           let e = dX("fullscreen");
-          if (!e || PcT?.usingWebGPU()) return;
+          if (!e || webGPUBindings?.usingWebGPU()) return;
           let t = ap() ? e.getContext("webgl2") : e.getContext("webgl");
           if (!t || !window.expectedWebGLContextAttributes) return;
           let i = t.getContextAttributes();
           if (!i) return;
-          let r = CeL?.getGpuDeviceInfo() ?? {
+          let r = FullscreenPerfMetrics?.getGpuDeviceInfo() ?? {
             vendor: "",
             renderer: "",
             version: ""
@@ -3358,7 +3358,7 @@ function r5() {
   }, [f, I]);
   let k = o3(nt.customKeyboardShortcuts);
   useEffect(() => {
-    getFeatureFlags().ce_custom_keyboard_shortcuts && glU?.reloadKeyboardShortcuts();
+    getFeatureFlags().ce_custom_keyboard_shortcuts && Fullscreen?.reloadKeyboardShortcuts();
   }, [k]);
   let N = useSelector(e => e.multiplayer.allUsers);
   let A = useSelector(e => e.multiplayer.observingSessionID);
@@ -3394,7 +3394,7 @@ function r5() {
     let o = _$$U2("permission", !0);
     let d = e && !r && !i && !_$$T();
     useEffect(() => {
-      t || (w3z.setCanAccessDevMode(r), w3z.setCanEnterDevMode(i), w3z.setShowWorkflowsControls(s), w3z.setIsUsingDevModeDemoFile(a));
+      t || (HandoffBindingsCpp.setCanAccessDevMode(r), HandoffBindingsCpp.setCanEnterDevMode(i), HandoffBindingsCpp.setShowWorkflowsControls(s), HandoffBindingsCpp.setIsUsingDevModeDemoFile(a));
     }, [r, i, s, t, a]);
     useEffect(() => {
       d && o("design");

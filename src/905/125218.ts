@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { CeL, i6g, hMR } from "../figma_app/763686";
+import { FullscreenPerfMetrics, AutosaveHelpers, CorePerfInfo } from "../figma_app/763686";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { getEnvironmentInfo } from "../905/883621";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -7,7 +7,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { l as _$$l } from "../905/190247";
 import { reportError } from "../905/11";
 import { startPerformanceSpan, endPerformanceSpan } from "../905/670985";
-import { fF, EG } from "../905/471229";
+import { getTrackingSessionId, incrementSessionCounter } from "../905/471229";
 import { ys, QM, Nq } from "../figma_app/314264";
 import { ds } from "../905/87821";
 import { dd, PH } from "../905/550523";
@@ -257,13 +257,13 @@ let $$y1 = new class {
     return !this.timeEvents.editorPreloaded && !this.timeEvents.androidProtoEditorPreloaded && !this.timeEvents.mobileFileViewerPreloaded && 1 === this.numTimesLoaded && !!getInitialOptions().editing_file;
   }
   getFilePerfMetadata() {
-    let e = CeL?.getFileNodeCount();
-    let t = CeL?.getUserPageCount();
-    let i = CeL?.getMpMsgNodeChangesCount();
-    let n = CeL?.getMpMsgUserChangesCount();
-    let a = CeL?.getServerSideLoadTimeMetadata() || {};
-    let s = i6g?.fileIsReadOnly();
-    let l = i6g?.currentFileVersion();
+    let e = FullscreenPerfMetrics?.getFileNodeCount();
+    let t = FullscreenPerfMetrics?.getUserPageCount();
+    let i = FullscreenPerfMetrics?.getMpMsgNodeChangesCount();
+    let n = FullscreenPerfMetrics?.getMpMsgUserChangesCount();
+    let a = FullscreenPerfMetrics?.getServerSideLoadTimeMetadata() || {};
+    let s = AutosaveHelpers?.fileIsReadOnly();
+    let l = AutosaveHelpers?.currentFileVersion();
     let d = desktopAPIInstance?.getConcurrentLoadingTabsCount();
     return {
       coldBoot: this.isColdBoot,
@@ -388,7 +388,7 @@ let $$y1 = new class {
         let e = -1;
         let t = "Figma Desktop" === getEnvironmentInfo().browser_name;
         this.isColdBoot ? t && i.editorPreloaded ? "number" == typeof i.editorPreloaded && (e = i.documentIsLoaded - i.editorPreloaded) : e = i.documentIsLoaded : "number" == typeof i.openFileActionStart && (e = i.documentIsLoaded - i.openFileActionStart);
-        console.log(`[Fullscreen] loadtime=${(e / 1e3).toFixed(2)}s ${hMR ? `maxmem=${hMR.getMaxUsedHeapMemory()}` : ""}`);
+        console.log(`[Fullscreen] loadtime=${(e / 1e3).toFixed(2)}s ${CorePerfInfo ? `maxmem=${CorePerfInfo.getMaxUsedHeapMemory()}` : ""}`);
       }
     }));
   }
@@ -397,8 +397,8 @@ let $$y1 = new class {
     return {
       loadID: this._loadID ?? "",
       reconnectId: Nq(),
-      trackingSessionId: fF(),
-      trackingSessionSequenceId: EG()
+      trackingSessionId: getTrackingSessionId(),
+      trackingSessionSequenceId: incrementSessionCounter()
     };
   }
 }();

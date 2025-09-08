@@ -11,7 +11,7 @@ import { iZ } from "../905/372672";
 import { useRef, useEffect, useState, useCallback, cloneElement, useMemo } from "react";
 import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
-import { u9 } from "../figma_app/661371";
+import { hasMorePages } from "../figma_app/661371";
 import { kt } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { a as _$$a } from "../905/925868";
@@ -47,15 +47,15 @@ import { ky } from "../figma_app/99826";
 import { F as _$$F } from "../905/302958";
 import { Xu } from "../figma_app/354658";
 import { lW } from "../figma_app/11182";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { E as _$$E2 } from "../905/565019";
 import { H as _$$H } from "../5430/304640";
 import { CY } from "../figma_app/637027";
 import { H8, Pf } from "../905/590952";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { zC, RZ } from "../5430/39369";
-import { kf } from "../905/992467";
+import { setupLazyComponentFactory } from "../905/992467";
 import { A as _$$A } from "../svg/724030";
 function p(e) {
   let t = useRef(null);
@@ -214,7 +214,7 @@ let ee = {
   },
   ANIMATION_LENGTH: 400
 };
-let ep = Ju(function (e) {
+let ep = registerModal(function (e) {
   let t = e.reportType === nI.REPORT_AND_HIDE;
   let r = t ? getI18nString("community.comments.report_and_hide_author_name_s_comment", {
     authorName: e.comment.author.name
@@ -288,7 +288,7 @@ function ef(e) {
     e.onEdit?.();
   };
   let d = () => {
-    e.onDelete && t(to({
+    e.onDelete && t(showModalHandler({
       type: _$$E2,
       data: {
         onConfirm: () => e.onDelete()
@@ -361,7 +361,7 @@ function ef(e) {
       profileIdToAdminResourceAs
     } = e;
     let s = e.comment?.author.id;
-    profileIdToAdminResourceAs && s && t(to({
+    profileIdToAdminResourceAs && s && t(showModalHandler({
       type: _$$H,
       data: {
         onBlock: () => _(profileIdToAdminResourceAs, s),
@@ -387,7 +387,7 @@ function ef(e) {
     }));
   };
   let b = e => {
-    t(to({
+    t(showModalHandler({
       type: ep,
       data: {
         comment: e,
@@ -397,7 +397,7 @@ function ef(e) {
     }));
   };
   let w = e => {
-    t(to({
+    t(showModalHandler({
       type: ep,
       data: {
         comment: e,
@@ -499,25 +499,25 @@ function eb(e) {
     resourceType: e.resourceType
   });
 }
-let ew = kf("lazy_create_comment_composer", {
+let ew = setupLazyComponentFactory("lazy_create_comment_composer", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await Promise.all([]).then(_require2)).CreateCommentComposer
   })
 });
-let eC = kf("lazy_edit_comment_composer", {
+let eC = setupLazyComponentFactory("lazy_edit_comment_composer", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await Promise.all([]).then(_require3)).EditCommentComposer
   })
 });
-let eL = kf("lazy_reply_comment_composer", {
+let eL = setupLazyComponentFactory("lazy_reply_comment_composer", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await Promise.all([]).then(_require4)).ReplyCommentComposer
   })
 });
-kf("lazy_comment_editable_typeahead", {
+setupLazyComponentFactory("lazy_comment_editable_typeahead", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await Promise.all([]).then(_require)).CommentEditableTypeahead
@@ -945,7 +945,7 @@ function eA(e) {
   useEffect(() => {
     r(cO());
   }, [resource.id]);
-  let X = () => q && u9({
+  let X = () => q && hasMorePages({
     pagination
   }) && Q();
   let J = feed.filter(e => e !== pagination?.selected_comment?.id);
@@ -1004,7 +1004,7 @@ function eA(e) {
           className: k,
           children: () => jsx(h, {
             onScrollToBottom: X,
-            showLoader: a && u9({
+            showLoader: a && hasMorePages({
               pagination
             }),
             children: jsx(eS, {
@@ -1026,7 +1026,7 @@ function eA(e) {
               commentType: e.commentType,
               resource,
               profileIdToAdminResourceAs: e.profileIdToAdminResourceAs
-            }), u9({
+            }), hasMorePages({
               pagination
             }) && jsx("div", {
               className: "comments_view--mobileLoadMore--tqxIs",

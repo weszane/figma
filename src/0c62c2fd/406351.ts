@@ -9,7 +9,7 @@ import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { E9 } from "../figma_app/314264";
 import { fileEntityDataMapper } from "../905/943101";
 import { wtK } from "../figma_app/43951";
@@ -39,13 +39,13 @@ export function $$y0({
   } = j.data;
   if (!file) {
     reportError(_$$e.WAYFINDING, Error("AddPinModal unable to lookup file by ID"));
-    _(Lo());
+    _(popModalStack());
     return null;
   }
   let I = file.computedWorkspace?.workspace;
   if (!I) {
     reportError(_$$e.WAYFINDING, Error("AddPinModal opened for file with no workspace"));
-    _(Lo());
+    _(popModalStack());
     return null;
   }
   let N = fileEntityDataMapper.toSinatra(file);

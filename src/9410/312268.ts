@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { E as _$$E } from "../905/632989";
 import { O } from "../905/969533";
 import { e as _$$e } from "../905/149844";
-import { nc } from "../905/189185";
+import { scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -24,7 +24,7 @@ let $$C1 = forwardRef(function ({
     closeTemplatePicker
   } = uu();
   let C = useAtomWithSubscription(Ei);
-  let E = nc.user("ssv-carousel", () => {
+  let E = scopeAwareFunction.user("ssv-carousel", () => {
     closeTemplatePicker();
     let e = getSingletonSceneGraph();
     oY(e, "carousel_add_slide_button");

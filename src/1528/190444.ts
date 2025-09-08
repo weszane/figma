@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { O as _$$O } from "../905/487602";
-import { NfO } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { PluginHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import o from "classnames";
 import { A as _$$A } from "../905/920142";
 import { Pt, o6, cZ } from "../figma_app/806412";
@@ -16,12 +16,12 @@ import { af } from "../figma_app/559491";
 import { Q7 } from "../905/15667";
 import { fu } from "../figma_app/831799";
 import { K } from "../905/135526";
-import { JT, vA } from "../figma_app/300692";
+import { canRunPlugin, getRelaunchablePlugins } from "../figma_app/300692";
 import { O as _$$O2 } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
 import { bD } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
-import { FW, ZQ, Q7 as _$$Q } from "../figma_app/155287";
+import { ManifestEditorType, hasLocalFileId, relaunchMixedDescription } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { Fr } from "../905/622391";
 import { V } from "../905/480825";
@@ -35,7 +35,7 @@ let P = class e extends PureComponent {
   constructor() {
     super(...arguments);
     this.onRemoveRelaunchData = e => {
-      l7.user("remove-plugin-relaunch-data", () => NfO.removeRelaunchDataFromSelection(e));
+      permissionScopeHandler.user("remove-plugin-relaunch-data", () => PluginHelpers.removeRelaunchDataFromSelection(e));
     };
     this.onRelaunch = async e => {
       let t = this.props.openFileKey;
@@ -46,7 +46,7 @@ let P = class e extends PureComponent {
       }
       let {
         canRun
-      } = JT({
+      } = canRunPlugin({
         plugin: e.plugin,
         editorType: this.props.editorType ?? FEditorType.Design
       });
@@ -89,7 +89,7 @@ let P = class e extends PureComponent {
     };
   }
   render() {
-    let t = vA(this.props.pluginRelaunchData, this.props.publishedPlugins, this.props.localPlugins, this.props.orgEntity, this.props.numSelected, (t, n) => e.refreshCache.debounceRefresh(t, this.fetchPlugin.bind(this), n), FW.FIGMA);
+    let t = getRelaunchablePlugins(this.props.pluginRelaunchData, this.props.publishedPlugins, this.props.localPlugins, this.props.orgEntity, this.props.numSelected, (t, n) => e.refreshCache.debounceRefresh(t, this.fetchPlugin.bind(this), n), ManifestEditorType.FIGMA);
     if (0 === t.length) return null;
     let n = this.props.title ?? getI18nString("properties_panel.plugin.title");
     return this.props.isDevHandoff ? jsx(_$$k, {
@@ -137,7 +137,7 @@ function B(e) {
     plugin,
     relaunchButton
   } = e.relaunchData;
-  let l = ZQ(plugin) ? jsx("div", {
+  let l = hasLocalFileId(plugin) ? jsx("div", {
     className: "plugin_panel--pluginIconLocal--44TyG",
     children: jsx(t, {
       svg: _$$A2,
@@ -198,7 +198,7 @@ function B(e) {
       className: d()("plugin_panel--relaunchDescription--TmxcU", e.collapsibleStyling && "plugin_panel--relaunchDescriptionPadded--G2-Tl"),
       children: jsx("pre", {
         className: "plugin_panel--relaunchDescriptionText--8x1PM ellipsis--ellipsisAfter3Lines--h405C ellipsis--_ellipsisAfterNLines--LzI7k",
-        children: relaunchButton.description === _$$Q ? renderI18nText("properties_panel.plugin.mixed_descriptions") : relaunchButton.description
+        children: relaunchButton.description === relaunchMixedDescription ? renderI18nText("properties_panel.plugin.mixed_descriptions") : relaunchButton.description
       })
     })]
   });

@@ -5,9 +5,9 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { qr, YA, hM } from "../figma_app/827447";
 import { renderI18nText } from "../905/303541";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 let $$u1 = "IDLE_TIMEOUT_WARNING_MODAL";
-let $$p0 = Ju(function (e) {
+let $$p0 = registerModal(function (e) {
   let t = hS(e);
   let [i, c] = qr(e.duration);
   let u = YA(c, i);

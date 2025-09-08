@@ -1,5 +1,5 @@
 import { Tl, tb, lY } from "../figma_app/703447";
-import { t8O, jXp } from "../figma_app/763686";
+import { FontHelpers, FontSourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -251,16 +251,16 @@ async function A(e, t) {
 }
 let x = Wh(() => atom({}));
 export async function $$N0() {
-  let e = t8O?.getLocalTextStyleFontInfo();
+  let e = FontHelpers?.getLocalTextStyleFontInfo();
   if (!e) return "";
   let t = new Set();
   let r = getFeatureFlags().bake_ds_import_plan_enabled;
   return (await Promise.all(e.filter(e => {
-    if (e.source !== jXp.GOOGLE && !r) return !1;
+    if (e.source !== FontSourceType.GOOGLE && !r) return !1;
     let n = `${e.id}|${e.family}|${e.style}`;
     return !t.has(n) && (t.add(n), !0);
   }).map(async e => {
-    if (e.source === jXp.GOOGLE) {
+    if (e.source === FontSourceType.GOOGLE) {
       let t = `${FF}/${e.id}`;
       return [tb({
         family: `${e.family}:${e.style}`,

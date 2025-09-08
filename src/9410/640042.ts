@@ -4,7 +4,7 @@ import { k } from "../905/651849";
 import { m as _$$m, y as _$$y } from "../9410/643761";
 import { PN } from "../figma_app/897289";
 import { Fe, uz } from "../905/284552";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { qc, _X } from "../figma_app/62612";
 import { wA } from "../figma_app/167249";
 import { S } from "../figma_app/787550";
@@ -22,7 +22,7 @@ async function _(e) {
   return t;
 }
 async function x(e) {
-  let t = await Y5.openFilePromise();
+  let t = await fullscreenValue.openFilePromise();
   if ("figFile" !== t.type) throw Error("Unsupported file");
   try {
     let i = await S.getVideosDownload({
@@ -102,7 +102,7 @@ export async function $$E3(e, t, i) {
         a.on("ready", () => {
           a.volume(r);
         });
-        let t = await Y5.openFilePromise();
+        let t = await fullscreenValue.openFilePromise();
         if ("figFile" !== t.type) throw Error("Unsupported file");
         let n = `/api/files/${t.fileKey}/videos/${i}/manifest`;
         await uz(n, !0, a);

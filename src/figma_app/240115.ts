@@ -2,12 +2,12 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { A } from "../905/891805";
-import { Ez5, iCO, ibQ } from "../figma_app/763686";
+import { AppStateTsApi, StateHierarchy, ItemType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { E as _$$E } from "../905/277716";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { K } from "../figma_app/566021";
 import { Wv } from "../figma_app/454622";
 import { z6, h$ } from "../figma_app/967154";
@@ -53,11 +53,11 @@ function v() {
   let {
     stateGroupSelectionMode
   } = z6();
-  let t = ut(Ez5?.propertiesPanelState().shownPropertiesPanels, []);
+  let t = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, []);
   let {
     count
   } = _$$u();
-  return 0 !== t.length && (stateGroupSelectionMode === iCO.STATE || !(count > 1)) && t[ibQ.COMPONENT_ITEM];
+  return 0 !== t.length && (stateGroupSelectionMode === StateHierarchy.STATE || !(count > 1)) && t[ItemType.COMPONENT_ITEM];
 }
 export function $$A0() {
   return !function () {
@@ -66,7 +66,7 @@ export function $$A0() {
       stateGroupSelectionMode,
       containingProductComponent
     } = z6();
-    return !!J2(Ez5.propertiesPanelState().shownPropertiesPanels)[ibQ.COMPONENT_ITEM] && !containingProductComponent && stateGroupSelectionMode === iCO.NON_STATE_COMPONENTS && e > 1;
+    return !!getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels)[ItemType.COMPONENT_ITEM] && !containingProductComponent && stateGroupSelectionMode === StateHierarchy.NON_STATE_COMPONENTS && e > 1;
   }() ? null : jsx(_$$E, {
     name: "layer_component_panel_button",
     children: jsx("div", {

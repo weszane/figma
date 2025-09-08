@@ -1,24 +1,24 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { T as _$$T } from "../905/909590";
 import { E as _$$E } from "../905/632989";
 import { $n } from "../905/521428";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
-import { lyf } from "../figma_app/763686";
+import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { uA, P_, Pt } from "../figma_app/806412";
 import { logError } from "../905/714362";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fk } from "../figma_app/618433";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { D, m as _$$m } from "../905/852057";
 import { q5 } from "../figma_app/516028";
 import { _b } from "../figma_app/841351";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { B } from "../905/867899";
 import { u as _$$u, R } from "../905/375517";
 let x = class e extends uA {
@@ -48,7 +48,7 @@ let x = class e extends uA {
       this.clearSavedInputs();
     };
     this.hideModal = () => {
-      this.props.dispatch(Lo());
+      this.props.dispatch(popModalStack());
     };
     this.onSubmit = P_(this, "submit", () => {
       this.onConfirmSavepointModal(this.state.label, this.state.description);
@@ -118,7 +118,7 @@ let x = class e extends uA {
       children: [jsxs(nB, {
         children: [jsxs("div", {
           className: _$$u,
-          children: [this.props.isEditingMergeSavepoint && jsx(J, {
+          children: [this.props.isEditingMergeSavepoint && jsx(Label, {
             htmlFor: "savepoint-modal-title",
             children: renderI18nText("collaboration.feedback.save_modal.merge_name_placeholder")
           }), jsx(_$$p, {
@@ -135,7 +135,7 @@ let x = class e extends uA {
           })]
         }), jsxs("div", {
           className: _$$u,
-          children: [this.props.isEditingMergeSavepoint && jsx(J, {
+          children: [this.props.isEditingMergeSavepoint && jsx(Label, {
             htmlFor: "savepoint-modal-description",
             children: renderI18nText("fullscreen.savepoint_modal.give_this_merge_a_description")
           }), jsx(_$$T, {
@@ -185,11 +185,11 @@ x.displayName = "SavepointModal";
 x.keepSavepointModalInput = !1;
 x.savedLabelInput = "";
 x.savedDescriptionInput = "";
-let $$C1 = Ju(function (e) {
+let $$C1 = registerModal(function (e) {
   let t = hS(e);
   let r = q5();
   let s = useDispatch();
-  let o = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let o = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let l = e.description || "";
   let d = e.label || "";
   let c = e.savepointID;
@@ -224,7 +224,7 @@ let $$C1 = Ju(function (e) {
     reportAsSentryError: !0
   }), null);
 });
-let $$w0 = Ju(function (e) {
+let $$w0 = registerModal(function (e) {
   let t = q5();
   let r = useDispatch();
   let s = hS(e);

@@ -10,7 +10,7 @@ import { bj } from "../905/420347";
 import { e6, _x, qE } from "../905/404538";
 import { dK } from "../figma_app/889655";
 import { C9, jf, MH } from "../figma_app/141508";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { p as _$$p } from "../figma_app/288654";
 import { tS } from "../figma_app/516028";
 import { L } from "../905/348758";
@@ -34,7 +34,7 @@ let E = D(() => {
     let i = new Set();
     t.forEach(t => {
       let n = e.get(t);
-      n && n.styleKeyForPublish && 0 !== glU.getNumUsagesOfStyle(n.styleKeyForPublish, !0) && i.add(n.styleKeyForPublish);
+      n && n.styleKeyForPublish && 0 !== Fullscreen.getNumUsagesOfStyle(n.styleKeyForPublish, !0) && i.add(n.styleKeyForPublish);
     });
     return i;
   }, [t, e]);

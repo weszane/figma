@@ -2,23 +2,23 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { l as _$$l } from "../469e6e40/229084";
-import { nF } from "../905/350402";
-import { to, Ce } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler, hideModal } from "../905/156213";
 import { hZ } from "../figma_app/342125";
-let $$c0 = nF((e, {
+let $$c0 = createOptimistThunk((e, {
   orgSamlConfigId: t
 }) => {
   XHR.post(`/api/org_saml_config/${t}/scim_api_token`).then(t => {
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: _$$l(),
       data: {
         dispatch: e.dispatch,
         provisioningApiToken: t.data.meta.scim_api_token,
         onConfirm: () => {
-          e.dispatch(Ce());
+          e.dispatch(hideModal());
         },
         onCancel: () => {
-          e.dispatch(Ce());
+          e.dispatch(hideModal());
         }
       }
     }));
@@ -30,7 +30,7 @@ let $$c0 = nF((e, {
     console.error(t);
   });
 });
-let $$_1 = nF((e, {
+let $$_1 = createOptimistThunk((e, {
   orgSamlConfigId: t
 }) => {
   XHR.del(`/api/org_saml_config/${t}/scim_api_token`).then(({

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useId } from "react";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { v } from "../905/442517";
 import { Ph } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
@@ -153,7 +153,7 @@ export function $$k2(e) {
     "data-testid": e.testId,
     children: [jsxs("div", {
       className: "x78zum5 xdt5ytf x1db2dqx",
-      children: [jsx(J, {
+      children: [jsx(Label, {
         htmlFor: l,
         children: e.label
       }), jsx("span", {

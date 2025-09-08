@@ -7,7 +7,7 @@ import { E as _$$E } from "../905/375716";
 import { m as _$$m } from "../905/148147";
 import { Y as _$$Y } from "../905/762765";
 import { O as _$$O } from "../905/487602";
-import { Ez5, rrT, VD3, e0R } from "../figma_app/763686";
+import { AppStateTsApi, NodePropertyCategory, StyleVariableOperation, CopyPasteType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
@@ -19,9 +19,9 @@ import { getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { F as _$$F } from "../figma_app/8833";
 import { dG } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { c6 } from "../905/950959";
-import { _W } from "../905/216495";
+import { valueOrFallback } from "../905/216495";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q } from "../figma_app/104130";
 import { Ib } from "../905/129884";
@@ -163,7 +163,7 @@ class en extends PureComponent {
     super(...arguments);
     this.context = null;
     this.layoutGrids = xx(e => {
-      let t = _W(e, []);
+      let t = valueOrFallback(e, []);
       let i = F(this.props.bigNudgeAmount);
       return t.map(e => function (e, t) {
         if (!e.pattern) throw Error("unknown layout grid pattern");
@@ -174,8 +174,8 @@ class en extends PureComponent {
       }(e, i));
     });
     this.onGridsChange = (e, t) => {
-      this.props.showFrameGrids || (c6(), Ez5.editorPreferences().showFrameGrids.set(!0));
-      Y5.updateSelectionProperties({
+      this.props.showFrameGrids || (c6(), AppStateTsApi.editorPreferences().showFrameGrids.set(!0));
+      fullscreenValue.updateSelectionProperties({
         layoutGrids: e
       }, {
         shouldCommit: t
@@ -198,7 +198,7 @@ class en extends PureComponent {
           pickerShown: this.props.pickerShown,
           propertyList: this.layoutGrids(this.props.layoutGrids),
           recordingKey: Pt(this.props, "list"),
-          selectedPropertyType: rrT.LAYOUT_GRID,
+          selectedPropertyType: NodePropertyCategory.LAYOUT_GRID,
           showFrameGrids: this.props.showFrameGrids,
           smallNudgeAmount: this.props.smallNudgeAmount,
           ...e,
@@ -241,24 +241,24 @@ class ea extends PureComponent {
             pattern: "STRIPES"
           };
       }
-      let i = _W(this.props.propertyList, []);
+      let i = valueOrFallback(this.props.propertyList, []);
       atomStoreManager.set(et, i.length);
       this.props.onChange(i.concat([t]));
     };
     this.removeProperty = e => {
-      let t = _W(this.props.propertyList, []);
+      let t = valueOrFallback(this.props.propertyList, []);
       trackEventAnalytics("editor-layout-guide-removed", {
         fileKey: this.props.openFile?.key || "",
         nodeIds: Object.keys(this.props.sceneGraphSelection).slice(0, 50),
         layoutType: t?.[e] ? t[e]?.pattern === "GRID" ? "grid" : t[e]?.axis === "X" ? "columns" : "rows" : null
       });
-      _$$f(VD3.IGNORE, e0R.UNKNOWN, () => {
+      _$$f(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
         this.props.onChange(t.filter((t, i) => i !== e));
       });
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     };
     this.onToggleGridStyleVisibility = e => {
-      Ez5.editorPreferences().showFrameGrids.set(e);
+      AppStateTsApi.editorPreferences().showFrameGrids.set(e);
     };
     this.renderProperty = (e, t, i, r, a, s, o, l, d) => jsx(es, {
       bigNudgeAmount: this.props.bigNudgeAmount,
@@ -277,7 +277,7 @@ class ea extends PureComponent {
       pickerShown: this.props.pickerShown,
       recordingKey: Pt(this.props, "grid", t),
       selected: i,
-      singletonRow: _W(this.props.propertyList, []).length <= 1,
+      singletonRow: valueOrFallback(this.props.propertyList, []).length <= 1,
       smallNudgeAmount: this.props.smallNudgeAmount,
       useFPLGrid: this.props.useFPLGrid,
       version: this.props.version
@@ -332,12 +332,12 @@ class es extends PureComponent {
     this.toggleSettings = e => {
       if (e && e.stopPropagation(), this.settingsPickerShown()) {
         this.props.dispatch(XE());
-        Y5.deselectProperty();
+        fullscreenValue.deselectProperty();
       } else {
         let e = cn("ui3" === this.props.version ? this.ui3RowRef.current : this.rowRef.current);
-        Y5.updateAppModel({
+        fullscreenValue.updateAppModel({
           currentSelectedProperty: {
-            type: rrT.LAYOUT_GRID,
+            type: NodePropertyCategory.LAYOUT_GRID,
             indices: [this.props.index]
           }
         });

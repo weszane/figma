@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
 import { aH, sq } from "../figma_app/594947";
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 let o = z.record(z.string(), z.boolean());
 let l = z.record(z.string(), z.string());
 let d = z.object({
@@ -10,11 +10,11 @@ let d = z.object({
 });
 let $$c0 = new class {
   constructor() {
-    this.StatsigInitializeResponseValidator = YV("StatsigInitializeResponseValidator", aH, null);
-    this.StatsigInitializeResponseBatchedValidator = YV("StatsigInitializeResponseBatchedValidator", sq, null);
-    this.StatsigFlagStatusForUserValidator = YV("StatsigFlagStatusForUserValidator", o, null);
-    this.StatsigFlagDescriptionsValidator = YV("StatsigFlagDescriptionsValidator", l, null);
-    this.StatsigUpdateOverridesValidator = YV("StatsigUpdateOverridesValidator", d, null);
+    this.StatsigInitializeResponseValidator = createMetaValidator("StatsigInitializeResponseValidator", aH, null);
+    this.StatsigInitializeResponseBatchedValidator = createMetaValidator("StatsigInitializeResponseBatchedValidator", sq, null);
+    this.StatsigFlagStatusForUserValidator = createMetaValidator("StatsigFlagStatusForUserValidator", o, null);
+    this.StatsigFlagDescriptionsValidator = createMetaValidator("StatsigFlagDescriptionsValidator", l, null);
+    this.StatsigUpdateOverridesValidator = createMetaValidator("StatsigUpdateOverridesValidator", d, null);
   }
   getStatsigRelayProxyBootstrap({
     orgId: e,
@@ -23,7 +23,7 @@ let $$c0 = new class {
     prefetch: i
   } = {}) {
     let n = getInitialOptions().integration_host;
-    let a = td.toAPIParameters({
+    let a = APIParameterUtils.toAPIParameters({
       orgId: e,
       teamId: t,
       integrationHost: n
@@ -45,7 +45,7 @@ let $$c0 = new class {
   } = {}) {
     let n = getInitialOptions().integration_host;
     let a = null != t && t.length > 0 ? t.join(",") : void 0;
-    let o = td.toAPIParameters({
+    let o = APIParameterUtils.toAPIParameters({
       orgId: e,
       teamIds: a,
       integrationHost: n
@@ -75,4 +75,4 @@ let $$c0 = new class {
     }) => await t.post("/api/statsig/update_overrides", e));
   }
 }();
-export const m = $$c0; 
+export const m = $$c0;

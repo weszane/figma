@@ -1,6 +1,6 @@
-import { BJw, Pir } from "../figma_app/763686";
+import { AccessibilityAttributes, MixedBlockType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 var $$s0 = (e => (e.AUTO = "AUTO", e.DIV = "DIV", e.SPAN = "SPAN", e.P = "P", e.H1 = "H1", e.H2 = "H2", e.H3 = "H3", e.H4 = "H4", e.H5 = "H5", e.H6 = "H6", e.ARTICLE = "ARTICLE", e.ASIDE = "ASIDE", e.FOOTER = "FOOTER", e.HEADER = "HEADER", e.MAIN = "MAIN", e.NAV = "NAV", e.SECTION = "SECTION", e.IMG = "IMG", e.VIDEO = "VIDEO", e.BUTTON = "BUTTON", e.FIGURE = "FIGURE", e.IFRAME = "IFRAME", e.OL = "OL", e.UL = "UL", e))($$s0 || {});
 let o = {
   value: "DIV"
@@ -69,8 +69,8 @@ let I = {
   value: "IFRAME"
 };
 export function $$k1(e, t, i) {
-  switch ((!e || gl(e)) && (e = BJw.NONE), t) {
-    case Pir.MIXED:
+  switch ((!e || isInvalidValue(e)) && (e = AccessibilityAttributes.NONE), t) {
+    case MixedBlockType.MIXED:
       return {
         category: t,
         tagDefaultValue: "AUTO",
@@ -78,7 +78,7 @@ export function $$k1(e, t, i) {
         tagEditable: !1,
         labelType: e
       };
-    case Pir.TEXT:
+    case MixedBlockType.TEXT:
       let s = y;
       getFeatureFlags().sts_a11y_aria_attributes && ("UNORDERED_LIST" === i ? s = $$_ : "ORDERED_LIST" === i && (s = g));
       return {
@@ -90,7 +90,7 @@ export function $$k1(e, t, i) {
         tagEditable: !0,
         labelType: e
       };
-    case Pir.BLOCK:
+    case MixedBlockType.BLOCK:
       return {
         category: t,
         tagDefaultValue: o.value,
@@ -100,7 +100,7 @@ export function $$k1(e, t, i) {
         tagEditable: !0,
         labelType: e
       };
-    case Pir.BLOCK_WITH_IMAGE:
+    case MixedBlockType.BLOCK_WITH_IMAGE:
       return {
         category: t,
         tagDefaultValue: getFeatureFlags().sts_a11y_aria_attributes ? S.value : o.value,
@@ -110,7 +110,7 @@ export function $$k1(e, t, i) {
         tagEditable: !0,
         labelType: e
       };
-    case Pir.BLOCK_WITH_VIDEO:
+    case MixedBlockType.BLOCK_WITH_VIDEO:
       return {
         category: t,
         tagDefaultValue: getFeatureFlags().sts_a11y_aria_attributes ? j.value : o.value,
@@ -120,7 +120,7 @@ export function $$k1(e, t, i) {
         tagEditable: !0,
         labelType: e
       };
-    case Pir.IFRAME:
+    case MixedBlockType.IFRAME:
       return {
         category: t,
         tagDefaultValue: I.value,
@@ -130,7 +130,7 @@ export function $$k1(e, t, i) {
       };
     default:
       return {
-        category: Pir.NONE,
+        category: MixedBlockType.NONE,
         tagDefaultValue: "AUTO",
         tagOptions: [],
         tagEditable: !1,

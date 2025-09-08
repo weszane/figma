@@ -1,23 +1,23 @@
-import { NLJ, Ez5 } from "../figma_app/763686";
+import { DesignGraphElements, AppStateTsApi } from "../figma_app/763686";
 import { BrowserInfo } from "../figma_app/778880";
 export function $$a3(e) {
-  return e === NLJ.VECTOR_PENCIL || e === NLJ.ERASER || e === NLJ.HIGHLIGHTER || e === NLJ.WASHI_TAPE;
+  return e === DesignGraphElements.VECTOR_PENCIL || e === DesignGraphElements.ERASER || e === DesignGraphElements.HIGHLIGHTER || e === DesignGraphElements.WASHI_TAPE;
 }
 export function $$s0(e) {
-  return !!$$a3(e) && (e === NLJ.VECTOR_PENCIL || e === NLJ.HIGHLIGHTER);
+  return !!$$a3(e) && (e === DesignGraphElements.VECTOR_PENCIL || e === DesignGraphElements.HIGHLIGHTER);
 }
 export function $$o2() {
   return !BrowserInfo.isMeetDevice;
 }
 export function $$l1(e) {
-  let t = Ez5?.uiState().showUI3Colors.getCopy();
+  let t = AppStateTsApi?.uiState().showUI3Colors.getCopy();
   switch (e) {
-    case NLJ.HIGHLIGHTER:
+    case DesignGraphElements.HIGHLIGHTER:
       return "highlight";
-    case NLJ.VECTOR_PENCIL:
-    case NLJ.ERASER:
+    case DesignGraphElements.VECTOR_PENCIL:
+    case DesignGraphElements.ERASER:
       return t ? "pencilUI3" : "base";
-    case NLJ.STICKY:
+    case DesignGraphElements.STICKY:
       return "sticky";
     default:
       return "base";

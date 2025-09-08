@@ -60,7 +60,7 @@ import { C2, Gx, J3 } from "../figma_app/699310";
 import { _ as _$$_ } from "../905/574895";
 import { A as _$$A3 } from "../905/72153";
 import { FRequestStatusType, FTemplateCategoryType } from "../figma_app/191312";
-import { pk, uF } from "../figma_app/300692";
+import { isDevModeWithCodegen, getPluginVersion } from "../figma_app/300692";
 import { ZA as _$$ZA } from "../figma_app/994403";
 import { u as _$$u } from "../905/952696";
 import { b as _$$b2, X as _$$X2 } from "../5430/435821";
@@ -629,7 +629,7 @@ function eF({
     });
   }(e);
   let i = BQ(e) && jsx(eH, {});
-  let n = YI(e) && pk(qD(t)) && jsx(eU, {});
+  let n = YI(e) && isDevModeWithCodegen(qD(t)) && jsx(eU, {});
   let o = e.community_publishers.accepted.reduce((e, t) => e.concat(t.badges), []);
   let a = [...new Set(e.badges.concat(o))];
   let l = C2({
@@ -1279,7 +1279,7 @@ function tA({
   let {
     versions
   } = n;
-  let a = uF(n);
+  let a = getPluginVersion(n);
   return jsxs("div", {
     className: "version_history--versionHistory--yOsFW text--fontPos14--OL9Hp text--_fontBase--QdLsd",
     children: [jsxs("div", {

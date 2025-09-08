@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { Ez5 } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { AppStateTsApi } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import d from "../vendor/128080";
 import { Py, H3 } from "../905/403166";
@@ -17,7 +17,7 @@ import { F$ } from "../figma_app/12220";
 import { kC } from "../905/428519";
 import { UP } from "../figma_app/740025";
 import { TA } from "../905/372672";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { kT } from "../905/380385";
 import { Qv } from "../figma_app/45218";
 import { Ld } from "../905/301347";
@@ -98,8 +98,8 @@ export function $$V5(e) {
   let C = e.currentNode || v;
   let w = TA() || void 0;
   let O = useSelector(e => e.selectedView.commentThreadId);
-  let R = ut(Ez5?.singleSlideView().focusedNodeId, AD);
-  let P = ut(Ez5?.cooperFocusView().focusedNodeId, AD);
+  let R = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, defaultSessionLocalIDString);
+  let P = getObservableValue(AppStateTsApi?.cooperFocusView().focusedNodeId, defaultSessionLocalIDString);
   let j = hA();
   let V = Ld();
   let [z, W] = useState("creationDate");
@@ -125,8 +125,8 @@ export function $$V5(e) {
     currentSlide: e => {
       let t = e.comments[0].client_meta?.node_id;
       let r = t ? getSingletonSceneGraph().get(t) : void 0;
-      let n = r ? r.containingSlideId : AD;
-      return R === AD || n === AD || n === R;
+      let n = r ? r.containingSlideId : defaultSessionLocalIDString;
+      return R === defaultSessionLocalIDString || n === defaultSessionLocalIDString || n === R;
     },
     currentDevModeFocus: e => {
       let t = j ? getSingletonSceneGraph().get(j) : null;
@@ -138,8 +138,8 @@ export function $$V5(e) {
     currentAsset: e => {
       let t = e.comments[0].client_meta?.node_id;
       let r = t ? getSingletonSceneGraph().get(t) : void 0;
-      let n = r ? r.containingCooperFrameId() : AD;
-      return P === AD || n === AD || n === P;
+      let n = r ? r.containingCooperFrameId() : defaultSessionLocalIDString;
+      return P === defaultSessionLocalIDString || n === defaultSessionLocalIDString || n === P;
     },
     currentTest: () => !0,
     currentBuild: () => !0

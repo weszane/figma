@@ -13,10 +13,10 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { J } from "../905/231762";
 import { Be } from "../figma_app/920435";
 import { E as _$$E } from "../905/712094";
-import { EB, $V } from "../figma_app/831101";
+import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
 import { Eh } from "../figma_app/617654";
 import { $ } from "../905/834575";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 let y = memo(function ({
   canSeeBillingAddressExp: e,
   shippingAddress: t,
@@ -35,7 +35,7 @@ let y = memo(function ({
     isLoading,
     withLoading
   } = _$$R();
-  let [I, T] = useState(t || EB());
+  let [I, T] = useState(t || createEmptyAddress());
   let [A, R] = useState(a || "");
   let O = SM(y || "");
   let L = async t => {
@@ -43,7 +43,7 @@ let y = memo(function ({
     await withLoading(async () => {
       try {
         if (j) {
-          if (!I || $V(I) || !A || "" === A.trim()) throw Error(getI18nString("team_view.settings_table.update_invoice_details.error.legal_name_and_shipping_address_required"));
+          if (!I || isAddressEmpty(I) || !A || "" === A.trim()) throw Error(getI18nString("team_view.settings_table.update_invoice_details.error.legal_name_and_shipping_address_required"));
           await $.updateShippingAddress({
             teamId: j,
             shippingAddress: I,
@@ -55,7 +55,7 @@ let y = memo(function ({
             teamId: j
           }));
         } else if (y) {
-          if (!I || $V(I)) throw Error(getI18nString("org_admin_settings.settings_tab.billing.update_invoice_details.shipping_address_required_error"));
+          if (!I || isAddressEmpty(I)) throw Error(getI18nString("org_admin_settings.settings_tab.billing.update_invoice_details.shipping_address_required_error"));
           await Eh.changeShippingAddress({
             orgId: y,
             shippingAddress: I
@@ -113,5 +113,5 @@ let y = memo(function ({
     })
   });
 });
-let $$w0 = Ju(y, "UpdateShippingAddressModal");
+let $$w0 = registerModal(y, "UpdateShippingAddressModal");
 export const u = $$w0;

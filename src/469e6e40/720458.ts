@@ -9,7 +9,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { R as _$$R } from "../905/304671";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { S as _$$S } from "../4452/747039";
@@ -178,7 +178,7 @@ export function $$I0(e) {
     }
   };
   let H = () => {
-    t(Lo());
+    t(popModalStack());
   };
   let Y = R ? jsx(vd, {
     disabled: !0,

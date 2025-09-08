@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { l7 } from '../905/189185';
-import { gl, oV } from '../905/216495';
+import { permissionScopeHandler } from '../905/189185';
+import { isInvalidValue, MIXED_MARKER } from '../905/216495';
 import { getI18nString } from '../905/303541';
 import { bj } from '../905/420347';
 import { YQ } from '../905/502364';
@@ -9,7 +9,7 @@ import { j as _$$j } from '../905/521149';
 import { oA } from '../905/663269';
 import { getSingletonSceneGraph } from '../905/700578';
 import { l as _$$l } from '../905/716947';
-import { fn, sH } from '../905/871411';
+import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411';
 import { qA } from '../1250/182479';
 import { go } from '../1250/447088';
 import { Z } from '../1250/621895';
@@ -24,7 +24,7 @@ import { e as _$$e } from '../figma_app/324237';
 import { LU } from '../figma_app/327588';
 import { Qp } from '../figma_app/349248';
 import { gI, Wn } from '../figma_app/396464';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { EV, X$ } from '../figma_app/465071';
 import { tS } from '../figma_app/516028';
 import { IT } from '../figma_app/566371';
@@ -33,7 +33,7 @@ import { Gi, qY } from '../figma_app/622574';
 import { eY } from '../figma_app/722362';
 import { sq } from '../figma_app/741237';
 import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
-import { Egt, Ez5, fZl, glU, IPu, Z64 } from '../figma_app/763686';
+import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
 import { U as _$$U } from '../figma_app/901889';
 import { ky } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
@@ -185,15 +185,15 @@ export function $$ee13(e) {
       source: e
     });
     i && l(ky());
-    l7.user('Create blank template', () => {
-      let e = Z64.CUSTOM;
-      let n = fZl?.getCooperTemplateTypeSize(e);
+    permissionScopeHandler.user('Create blank template', () => {
+      let e = SocialMediaFormats.CUSTOM;
+      let n = CooperTemplateTypesTsBindings?.getCooperTemplateTypeSize(e);
       if (!n) {
         console.error('No size found for Cooper template type', e);
         return;
       }
-      let a = IPu?.createBlankChildAtCoord(0, 0, n, 'start_from_scratch', !0, e);
-      a && (Y5.triggerAction('enter-focus-view'), glU?.panToNode(a, !1));
+      let a = CooperHelpers?.createBlankChildAtCoord(0, 0, n, 'start_from_scratch', !0, e);
+      a && (fullscreenValue.triggerAction('enter-focus-view'), Fullscreen?.panToNode(a, !1));
       t(!1);
     });
   }, [t, n, e, i, l]);
@@ -203,7 +203,7 @@ export function $$et11() {
   let t = Xr(Hk);
   let n = tS();
   return useCallback(() => {
-    n && (t(!0), e(!1), Ez5?.cooperFocusView().exitFocusedNodeView(), Ez5?.cooperFocusView().zoomToGrid(0));
+    n && (t(!0), e(!1), AppStateTsApi?.cooperFocusView().exitFocusedNodeView(), AppStateTsApi?.cooperFocusView().zoomToGrid(0));
   }, [e, n, t]);
 }
 export function $$en6({
@@ -250,8 +250,8 @@ export function $$en6({
       row: 0,
       col: 0
     };
-    (Ez5?.canvasGrid().canvasGridArray.getCopy() ?? []).length > 0 && (r = {
-      row: (Ez5?.canvasGrid().getLastChildCoord() ?? r).row + 1,
+    (AppStateTsApi?.canvasGrid().canvasGridArray.getCopy() ?? []).length > 0 && (r = {
+      row: (AppStateTsApi?.canvasGrid().getLastChildCoord() ?? r).row + 1,
       col: 0
     });
     a.forEach((t, n) => {
@@ -286,15 +286,15 @@ export function $$ea12({
   return (a, r, l) => {
     if (a.length === 0) return;
     if (t) {
-      let e = l7.user('cooper-detach-instances', () => glU?.detachInstances(a, !1));
+      let e = permissionScopeHandler.user('cooper-detach-instances', () => Fullscreen?.detachInstances(a, !1));
       if (!e || e.length === 0) return;
       a = e;
     }
     let d = a.map(e => getSingletonSceneGraph().get(e)).filter(isNotNullish);
     let c = a[0];
-    let u = IPu?.getNodeToReplace();
+    let u = CooperHelpers?.getNodeToReplace();
     if (u) {
-      Ez5?.canvasGrid().replaceChildInGrid(c, u);
+      AppStateTsApi?.canvasGrid().replaceChildInGrid(c, u);
     } else {
       let {
         row,
@@ -303,16 +303,16 @@ export function $$ea12({
         x: -1 / 0,
         y: -1 / 0
       });
-      let a = Ez5?.canvasGrid();
+      let a = AppStateTsApi?.canvasGrid();
       a?.insertChildAtCoord(c, row, col, 'cooper-add-template-panel');
     }
     if (n) {
       let e = getSingletonSceneGraph().get(c);
-      e && Egt?.replaceSelection([e.guid], !0);
+      e && SceneGraphHelpers?.replaceSelection([e.guid], !0);
       d.length === 1 && d[0] ? (d[0].isInstance && YQ({
         id: qA
-      }), Ez5?.cooperFocusView().isFocusedNodeViewEnabled() ? Ez5?.cooperFocusView().focusSelectedNodeInFocusedNodeView(!0) : setTimeout(() => {
-        Ez5?.cooperFocusView().panToSelectedNodeIfOutsideViewport(0.6);
+      }), AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() ? AppStateTsApi?.cooperFocusView().focusSelectedNodeInFocusedNodeView(!0) : setTimeout(() => {
+        AppStateTsApi?.cooperFocusView().panToSelectedNodeIfOutsideViewport(0.6);
       }, 0)) : console.warn('Expected exactly one node to be inserted, but found', d.length);
     }
     sq(c, !0);
@@ -386,10 +386,10 @@ export function $$ei9(e) {
 export function $$eo8() {
   let e = useMemo(() => e => {
     let t = e.mirror.selectionProperties.cooperTemplateData;
-    if (gl(t)) return oV;
-    if (!t) return Z64.CUSTOM;
+    if (isInvalidValue(t)) return MIXED_MARKER;
+    if (!t) return SocialMediaFormats.CUSTOM;
     let n = t.type || 'CUSTOM';
-    return Z64[n];
+    return SocialMediaFormats[n];
   }, []);
   return useSelector(e);
 }
@@ -397,8 +397,8 @@ export function $$es2() {
   let e = $$eo8();
   let t = ef();
   return useMemo(() => {
-    if (gl(e) || !t) return null;
-    for (let t of fZl?.getAllExceptCustomTemplateGroups() || []) {
+    if (isInvalidValue(e) || !t) return null;
+    for (let t of CooperTemplateTypesTsBindings?.getAllExceptCustomTemplateGroups() || []) {
       let n = t.types.find(t => t.type === e);
       if (n) return n.name;
     }
@@ -408,7 +408,7 @@ export function $$es2() {
 export function $$el16(e) {
   return useMemo(() => {
     if (!e) return null;
-    for (let t of fZl?.getAllExceptCustomTemplateGroups() || []) {
+    for (let t of CooperTemplateTypesTsBindings?.getAllExceptCustomTemplateGroups() || []) {
       let n = t.types.find(t => t.type === e);
       if (n) return n.name;
     }
@@ -427,9 +427,9 @@ function ec(e, t) {
     tags_text: void 0,
     tags_slug: void 0
   };
-  if (!e || gl(e)) return n;
+  if (!e || isInvalidValue(e)) return n;
   try {
-    return t[Z64[e]] || n;
+    return t[SocialMediaFormats[e]] || n;
   } catch (e) {
     console.error('Error getting asset type fields:', e);
     return n;
@@ -457,9 +457,9 @@ export function $$em21(e) {
 export function $$ep15() {
   let e = LU();
   return useCallback(() => {
-    l7.user('Duplicate as blank cooper asset', () => {
+    permissionScopeHandler.user('Duplicate as blank cooper asset', () => {
       let t = null;
-      let n = Ez5?.getInsertGridCoord({
+      let n = AppStateTsApi?.getInsertGridCoord({
         x: -1 / 0,
         y: -1 / 0
       });
@@ -467,8 +467,8 @@ export function $$ep15() {
         console.error('No insert grid coordinate found for duplicating cooper asset', n);
         return;
       }
-      t = fn(sH(e)) ? IPu?.duplicateAsBlankCooperAsset(e, n.row, n.col, 'duplicate_as_blank_cooper_asset') : IPu?.createBlankChildAtCoord(n.row, n.col, new _$$M(1080, 1080), 'duplicate_as_blank_cooper_asset', !0, Z64.INSTA_POST_SQUARE) ?? null;
-      Ez5?.cooperFocusView().isFocusedNodeViewEnabled() && t && Ez5?.cooperFocusView().focusNodeInFocusedNodeView(t, !0);
+      t = isValidSessionLocalID(parseSessionLocalID(e)) ? CooperHelpers?.duplicateAsBlankCooperAsset(e, n.row, n.col, 'duplicate_as_blank_cooper_asset') : CooperHelpers?.createBlankChildAtCoord(n.row, n.col, new _$$M(1080, 1080), 'duplicate_as_blank_cooper_asset', !0, SocialMediaFormats.INSTA_POST_SQUARE) ?? null;
+      AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() && t && AppStateTsApi?.cooperFocusView().focusNodeInFocusedNodeView(t, !0);
     });
   }, [e]);
 }
@@ -492,30 +492,30 @@ function ef() {
   return useSelector(e => e.mirror.selectionProperties.numSelected || 0) === 1;
 }
 let eh = () => ({
-  [Z64.BANNER_STANDARD]: getI18nString('cooper.templates.banner_standard_pretty'),
-  [Z64.BANNER_ULTRAWIDE]: getI18nString('cooper.templates.banner_ultrawide_pretty'),
-  [Z64.BANNER_WIDE]: getI18nString('cooper.templates.banner_wide_pretty'),
-  [Z64.CARD_HORIZONTAL]: getI18nString('cooper.templates.card_horizontal_pretty'),
-  [Z64.CARD_VERTICAL]: getI18nString('cooper.templates.card_vertical_pretty'),
-  [Z64.FACEBOOK_AD_PORTRAIT]: getI18nString('cooper.templates.facebook_ad_portrait_pretty'),
-  [Z64.FACEBOOK_AD_SQUARE]: getI18nString('cooper.templates.facebook_ad_square_pretty'),
-  [Z64.INSTA_POST_PORTRAIT]: getI18nString('cooper.templates.instagram_post_portrait_pretty'),
-  [Z64.INSTA_POST_SQUARE]: getI18nString('cooper.templates.instagram_post_square_pretty'),
-  [Z64.LINKEDIN_AD_LANDSCAPE]: getI18nString('cooper.templates.linked_in_ad_landscape_pretty'),
-  [Z64.LINKEDIN_AD_SQUARE]: getI18nString('cooper.templates.linked_in_ad_square_pretty'),
-  [Z64.LINKEDIN_AD_VERTICAL]: getI18nString('cooper.templates.linked_in_ad_vertical_pretty'),
-  [Z64.LINKEDIN_POST_LANDSCAPE]: getI18nString('cooper.templates.linked_in_post_landscape_pretty'),
-  [Z64.LINKEDIN_POST_PORTRAIT]: getI18nString('cooper.templates.linked_in_post_portrait_pretty'),
-  [Z64.LINKEDIN_POST_SQUARE]: getI18nString('cooper.templates.linked_in_post_square_pretty'),
-  [Z64.NAME_TAG_LANDSCAPE]: getI18nString('cooper.templates.name_tag_landscape_pretty'),
-  [Z64.NAME_TAG_PORTRAIT]: getI18nString('cooper.templates.name_tag_portrait_pretty'),
-  [Z64.PRINT_US_LETTER]: getI18nString('cooper.templates.print_us_letter_pretty')
+  [SocialMediaFormats.BANNER_STANDARD]: getI18nString('cooper.templates.banner_standard_pretty'),
+  [SocialMediaFormats.BANNER_ULTRAWIDE]: getI18nString('cooper.templates.banner_ultrawide_pretty'),
+  [SocialMediaFormats.BANNER_WIDE]: getI18nString('cooper.templates.banner_wide_pretty'),
+  [SocialMediaFormats.CARD_HORIZONTAL]: getI18nString('cooper.templates.card_horizontal_pretty'),
+  [SocialMediaFormats.CARD_VERTICAL]: getI18nString('cooper.templates.card_vertical_pretty'),
+  [SocialMediaFormats.FACEBOOK_AD_PORTRAIT]: getI18nString('cooper.templates.facebook_ad_portrait_pretty'),
+  [SocialMediaFormats.FACEBOOK_AD_SQUARE]: getI18nString('cooper.templates.facebook_ad_square_pretty'),
+  [SocialMediaFormats.INSTA_POST_PORTRAIT]: getI18nString('cooper.templates.instagram_post_portrait_pretty'),
+  [SocialMediaFormats.INSTA_POST_SQUARE]: getI18nString('cooper.templates.instagram_post_square_pretty'),
+  [SocialMediaFormats.LINKEDIN_AD_LANDSCAPE]: getI18nString('cooper.templates.linked_in_ad_landscape_pretty'),
+  [SocialMediaFormats.LINKEDIN_AD_SQUARE]: getI18nString('cooper.templates.linked_in_ad_square_pretty'),
+  [SocialMediaFormats.LINKEDIN_AD_VERTICAL]: getI18nString('cooper.templates.linked_in_ad_vertical_pretty'),
+  [SocialMediaFormats.LINKEDIN_POST_LANDSCAPE]: getI18nString('cooper.templates.linked_in_post_landscape_pretty'),
+  [SocialMediaFormats.LINKEDIN_POST_PORTRAIT]: getI18nString('cooper.templates.linked_in_post_portrait_pretty'),
+  [SocialMediaFormats.LINKEDIN_POST_SQUARE]: getI18nString('cooper.templates.linked_in_post_square_pretty'),
+  [SocialMediaFormats.NAME_TAG_LANDSCAPE]: getI18nString('cooper.templates.name_tag_landscape_pretty'),
+  [SocialMediaFormats.NAME_TAG_PORTRAIT]: getI18nString('cooper.templates.name_tag_portrait_pretty'),
+  [SocialMediaFormats.PRINT_US_LETTER]: getI18nString('cooper.templates.print_us_letter_pretty')
 });
 export function $$eb1(e, {
   usePrettyName: t
 }) {
   let n = useMemo(eh, []);
-  let r = useMemo(() => (fZl?.getAllExceptCustomTemplateGroups() || []).flatMap(e => e.types), []);
+  let r = useMemo(() => (CooperTemplateTypesTsBindings?.getAllExceptCustomTemplateGroups() || []).flatMap(e => e.types), []);
   let i = ed();
   let s = useCallback(e => e ? t ? n[e.type] ?? e.name : e.name : null, [n, t]);
   return useMemo(() => {
@@ -542,7 +542,7 @@ export function $$eb1(e, {
           let t = null;
           if (categorySlug) {
             for (let n of e) {
-              let e = Z64[n.type];
+              let e = SocialMediaFormats[n.type];
               if (!e) continue;
               let r = i[e];
               if (r && r.category_slug === categorySlug) {

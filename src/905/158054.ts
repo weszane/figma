@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { Ay } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
@@ -22,7 +22,7 @@ export function $$m0({
       [wh]: m,
       [fR]: o
     });
-    let c = jsx(J, {
+    let c = jsx(Label, {
       htmlFor: t,
       variant: "secondary",
       children: e

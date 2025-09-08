@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { CWU, Z_n, rXF, JTp } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { VariablesBindings, VariableDataType, VariableResolvedDataType, OperationType } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { analyticsEventManager } from "../905/449184";
 import { logWarning } from "../905/714362";
 import { ff } from "../figma_app/933328";
@@ -64,7 +64,7 @@ export function $$k4(e) {
 }
 export function $$M17(e, t) {
   if (!e || 0 === e.length || !t) return;
-  let r = CWU.getComponentPropForVariableAlias(e, t);
+  let r = VariablesBindings.getComponentPropForVariableAlias(e, t);
   if (0 !== Object.keys(r).length) return r;
 }
 export function $$F9(e) {
@@ -79,8 +79,8 @@ export function $$j18(e, t, r) {
   return "COMPONENT_PROP_ASSIGNMENTS" === t ? `StablePathToNode:${JSON.stringify(e)}$$$NodeField:${t}$$$IndexOrKey:${r}` : (logWarning("Invalid node field when parsing for node field alias", t), "");
 }
 export function $$U0(e) {
-  if (e && e.varValue.type === Z_n.ALIAS) return CWU.getVariableResolvedValue(e.varValue.value, new Map());
-  if (e && e.varValue.type === Z_n.NODE_FIELD_ALIAS) {
+  if (e && e.varValue.type === VariableDataType.ALIAS) return VariablesBindings.getVariableResolvedValue(e.varValue.value, new Map());
+  if (e && e.varValue.type === VariableDataType.NODE_FIELD_ALIAS) {
     let {
       stablePathToNode,
       indexOrKey
@@ -88,23 +88,23 @@ export function $$U0(e) {
     let n = $$M17(stablePathToNode, indexOrKey);
     return n ? $$U0(n) : function (e) {
       switch (e.varValue.resolvedType) {
-        case rXF.STRING:
-        case rXF.TEXT_DATA:
+        case VariableResolvedDataType.STRING:
+        case VariableResolvedDataType.TEXT_DATA:
           return {
-            type: Z_n.STRING,
-            resolvedType: rXF.STRING,
+            type: VariableDataType.STRING,
+            resolvedType: VariableResolvedDataType.STRING,
             value: ""
           };
-        case rXF.BOOLEAN:
+        case VariableResolvedDataType.BOOLEAN:
           return {
-            type: Z_n.BOOLEAN,
-            resolvedType: rXF.BOOLEAN,
+            type: VariableDataType.BOOLEAN,
+            resolvedType: VariableResolvedDataType.BOOLEAN,
             value: !1
           };
-        case rXF.FLOAT:
+        case VariableResolvedDataType.FLOAT:
           return {
-            type: Z_n.FLOAT,
-            resolvedType: rXF.FLOAT,
+            type: VariableDataType.FLOAT,
+            resolvedType: VariableResolvedDataType.FLOAT,
             value: 0
           };
       }
@@ -114,20 +114,20 @@ export function $$U0(e) {
   switch (typeof t) {
     case "string":
       return {
-        type: Z_n.STRING,
-        resolvedType: rXF.STRING,
+        type: VariableDataType.STRING,
+        resolvedType: VariableResolvedDataType.STRING,
         value: t
       };
     case "boolean":
       return {
-        type: Z_n.BOOLEAN,
-        resolvedType: rXF.BOOLEAN,
+        type: VariableDataType.BOOLEAN,
+        resolvedType: VariableResolvedDataType.BOOLEAN,
         value: t
       };
     case "number":
       return {
-        type: Z_n.FLOAT,
-        resolvedType: rXF.FLOAT,
+        type: VariableDataType.FLOAT,
+        resolvedType: VariableResolvedDataType.FLOAT,
         value: t
       };
   }
@@ -152,7 +152,7 @@ export function $$V3(e) {
   return null;
 }
 export function $$H10(e) {
-  return useMemo(() => e === rXF.BOOLEAN ? [rXF.BOOLEAN, rXF.STRING, rXF.FLOAT] : e === rXF.STRING ? [rXF.STRING, rXF.FLOAT] : [e], [e]);
+  return useMemo(() => e === VariableResolvedDataType.BOOLEAN ? [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT] : e === VariableResolvedDataType.STRING ? [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT] : [e], [e]);
 }
 export function $$z31(e, t, r, i) {
   let a = Rb();
@@ -204,27 +204,27 @@ export function $$K13(e) {
   };
 }
 export function $$Y6(e, t) {
-  e?.type === Z_n.EXPRESSION && e?.value.expressionFunction === JTp.IS_TRUTHY && e.value.expressionArguments[0] && (e = e.value.expressionArguments[0]);
-  e?.type === Z_n.EXPRESSION && e?.value.expressionFunction === JTp.RESOLVE_VARIANT && e?.value.expressionArguments[0]?.type === Z_n.MAP && t && e.value.expressionArguments[0].value[t] && (e = e.value.expressionArguments[0].value[t]);
-  e?.type === Z_n.EXPRESSION && e?.value.expressionFunction === JTp.STRINGIFY && (e = e.value.expressionArguments[0]);
+  e?.type === VariableDataType.EXPRESSION && e?.value.expressionFunction === OperationType.IS_TRUTHY && e.value.expressionArguments[0] && (e = e.value.expressionArguments[0]);
+  e?.type === VariableDataType.EXPRESSION && e?.value.expressionFunction === OperationType.RESOLVE_VARIANT && e?.value.expressionArguments[0]?.type === VariableDataType.MAP && t && e.value.expressionArguments[0].value[t] && (e = e.value.expressionArguments[0].value[t]);
+  e?.type === VariableDataType.EXPRESSION && e?.value.expressionFunction === OperationType.STRINGIFY && (e = e.value.expressionArguments[0]);
   return e;
 }
 export function $$$12(e) {
   return $$X29(e) ? {
-    type: Z_n.STRING,
-    resolvedType: rXF.STRING,
-    value: AD
-  } : e === rXF.BOOLEAN ? {
-    type: Z_n.BOOLEAN,
-    resolvedType: rXF.BOOLEAN,
+    type: VariableDataType.STRING,
+    resolvedType: VariableResolvedDataType.STRING,
+    value: defaultSessionLocalIDString
+  } : e === VariableResolvedDataType.BOOLEAN ? {
+    type: VariableDataType.BOOLEAN,
+    resolvedType: VariableResolvedDataType.BOOLEAN,
     value: !0
-  } : e === rXF.FLOAT ? {
-    type: Z_n.FLOAT,
-    resolvedType: rXF.FLOAT,
+  } : e === VariableResolvedDataType.FLOAT ? {
+    type: VariableDataType.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     value: 0
-  } : e === rXF.JS_RUNTIME_ALIAS ? {
-    type: Z_n.CMS_ALIAS,
-    resolvedType: rXF.JS_RUNTIME_ALIAS,
+  } : e === VariableResolvedDataType.JS_RUNTIME_ALIAS ? {
+    type: VariableDataType.CMS_ALIAS,
+    resolvedType: VariableResolvedDataType.JS_RUNTIME_ALIAS,
     value: {
       collectionId: "",
       fieldSchemaId: ""
@@ -232,7 +232,7 @@ export function $$$12(e) {
   } : null;
 }
 export function $$X29(e) {
-  return e === rXF.STRING || e === rXF.TEXT_DATA;
+  return e === VariableResolvedDataType.STRING || e === VariableResolvedDataType.TEXT_DATA;
 }
 export function $$q2(e, t, r, n) {
   let a = new _$$o(!0);
@@ -252,7 +252,7 @@ export function $$q2(e, t, r, n) {
       mode_id: r
     };
   });
-  let p = Object.keys(rXF)[Object.values(rXF).indexOf(r)].toLowerCase();
+  let p = Object.keys(VariableResolvedDataType)[Object.values(VariableResolvedDataType).indexOf(r)].toLowerCase();
   "float" !== p && "string" !== p && "boolean" !== p && (p = "invalid");
   let _ = {
     status: t,

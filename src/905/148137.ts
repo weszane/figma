@@ -4,7 +4,7 @@ import { k0 } from "../figma_app/623293";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nState } from "../figma_app/363242";
 import { z } from "../905/239603";
-import { vh, YV } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 import { D } from "../905/347702";
 var r = n;
 let u = z.object({
@@ -13,8 +13,8 @@ let u = z.object({
 });
 let p = new class {
   constructor() {
-    this.SetupIntentSecretSchemaValidator = vh();
-    this.SetupIntentSchemaValidator = YV("SetupIntentSchemaValidator", u, null, !0);
+    this.SetupIntentSecretSchemaValidator = createNoOpValidator();
+    this.SetupIntentSchemaValidator = createMetaValidator("SetupIntentSchemaValidator", u, null, !0);
   }
   getSetupIntentSecret(e) {
     return this.SetupIntentSecretSchemaValidator.validate(async ({

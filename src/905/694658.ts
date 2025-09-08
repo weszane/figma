@@ -8,7 +8,7 @@ import { getInitialOptions, isDevEnvironment } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { getFalseValue } from "../figma_app/897289";
 import { z as _$$z } from "../905/239603";
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { getI18nState } from "../figma_app/363242";
 import { D as _$$D } from "../905/347702";
 let n;
@@ -18,7 +18,7 @@ let g = _$$z.object({
 });
 let f = new class {
   constructor() {
-    this.ArkoseIsOnValidator = YV("ArkoseIsOnValidator", g, "xrv_api_arkose_is_on", !0);
+    this.ArkoseIsOnValidator = createMetaValidator("ArkoseIsOnValidator", g, "xrv_api_arkose_is_on", !0);
     this.isArkoseOn = e => {
       let {
         captcha_action,
@@ -30,7 +30,7 @@ let f = new class {
       };
       return this.ArkoseIsOnValidator.validate(async ({
         xr: e
-      }) => await e.post("/api/arkose/on_for_user", td.toAPIParameters({
+      }) => await e.post("/api/arkose/on_for_user", APIParameterUtils.toAPIParameters({
         ...n
       }), {
         retryCount: 10

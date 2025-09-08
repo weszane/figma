@@ -1,43 +1,45 @@
-import { tKW } from "../figma_app/763686";
-import { debugState } from "../905/407919";
-import { MT } from "../905/359509";
-import { aB } from "../figma_app/741237";
-import { ZQ, MP, ZV } from "../figma_app/155287";
-import { m, X } from "../905/661977";
-let $$d8 = [tKW.PIXEL, tKW.SCALED];
-let c = [MT];
+import { FIGMA_PROPERTIES } from '../905/359509';
+import { debugState } from '../905/407919';
+import { getCodegenLanguages, findCodegenLanguage } from '../905/661977';
+import { hasLocalFileId, isSelectSchema, isUnitSchema } from '../figma_app/155287';
+import { aB } from '../figma_app/741237';
+import { MeasurementUnit } from '../figma_app/763686';
+let $$d8 = [MeasurementUnit.PIXEL, MeasurementUnit.SCALED];
+let c = [FIGMA_PROPERTIES];
 export function $$u2(e) {
-  return ZQ(e) ? `${e.localFileId}` : `${e.plugin_id}`;
+  return hasLocalFileId(e) ? `${e.localFileId}` : `${e.plugin_id}`;
 }
 export function $$p0(e, t) {
-  let i = ZQ(e) ? "local-plugin" : "published-plugin";
+  let i = hasLocalFileId(e) ? 'local-plugin' : 'published-plugin';
   let n = $$u2(e);
-  if (t) return {
-    type: i,
-    id: n,
-    pluginLanguage: t.value
-  };
+  if (t) {
+    return {
+      type: i,
+      id: n,
+      pluginLanguage: t.value
+    };
+  }
   let a = debugState.getState().mirror.appModel.devHandoffCodeLanguage;
-  let s = m(e).map(({
+  let s = getCodegenLanguages(e).map(({
     value: e
   }) => e);
-  return a.id === n && "first-party" !== a.type && s.includes(a.pluginLanguage) ? a : {
+  return a.id === n && a.type !== 'first-party' && s.includes(a.pluginLanguage) ? a : {
     type: i,
     id: n,
-    pluginLanguage: s[0] ?? ""
+    pluginLanguage: s[0] ?? ''
   };
 }
 export function $$m7(e, t) {
-  return e ? (e.manifest?.codegenPreferences ?? []).filter((e) => !t?.value || !("includedLanguages" in e) || e.includedLanguages?.includes(t.value)) : [];
+  return e ? (e.manifest?.codegenPreferences ?? []).filter(e => !t?.value || !('includedLanguages' in e) || e.includedLanguages?.includes(t.value)) : [];
 }
 export function $$h3(e, t) {
-  return $$m7(e, t).find(MP) ?? null;
+  return $$m7(e, t).find(isUnitSchema) ?? null;
 }
 export function $$g4(e, t) {
   if (!e) return !1;
-  if ("first-party" === e.type) return !c.includes(e.id);
+  if (e.type === 'first-party') return !c.includes(e.id);
   if (!t) return !1;
-  let i = X(t, e.pluginLanguage);
+  let i = findCodegenLanguage(t, e.pluginLanguage);
   return !!$$h3(t, i);
 }
 export function $$f1(e, t, i) {
@@ -60,20 +62,20 @@ export function $$_6(e, t) {
   let l = $$h3(e, t);
   let d = !1;
   let c = !1;
-  "unit" in a && "scaleFactor" in a || (s.unit = l?.default ? tKW.SCALED : tKW.PIXEL, s.scaleFactor = l?.defaultScaleFactor ? l.defaultScaleFactor : 1, d = !0, c = !0);
-  t || l || a.unit !== tKW.SCALED || (s.unit = tKW.PIXEL, s.scaleFactor = 1, d = !0, c = !0);
-  d || !t || a.unit !== tKW.SCALED || l || (s.unit = l ? tKW.SCALED : tKW.PIXEL, d = !0);
+  'unit' in a && 'scaleFactor' in a || (s.unit = l?.default ? MeasurementUnit.SCALED : MeasurementUnit.PIXEL, s.scaleFactor = l?.defaultScaleFactor ? l.defaultScaleFactor : 1, d = !0, c = !0);
+  t || l || a.unit !== MeasurementUnit.SCALED || (s.unit = MeasurementUnit.PIXEL, s.scaleFactor = 1, d = !0, c = !0);
+  d || !t || a.unit !== MeasurementUnit.SCALED || l || (s.unit = l ? MeasurementUnit.SCALED : MeasurementUnit.PIXEL, d = !0);
   let p = !1;
-  let g = $$m7(e, t).filter(ZV);
+  let g = $$m7(e, t).filter(isSelectSchema);
   let f = a.customSettings ?? {};
   let _ = {};
   for (let e of g) {
     let t = f[e.propertyName];
-    if (t && e.options.some((e) => e.value === t)) {
+    if (t && e.options.some(e => e.value === t)) {
       _[e.propertyName] = t;
       continue;
     }
-    _[e.propertyName] = e.options.find((e) => e.isDefault)?.value ?? e.options[0].value;
+    _[e.propertyName] = e.options.find(e => e.isDefault)?.value ?? e.options[0].value;
     p = !0;
   }
   (p || Object.keys(f).length !== Object.keys(_).length) && (s.customSettings = _);
@@ -87,7 +89,7 @@ export function $$_6(e, t) {
     shouldUpdateAltUnit: d,
     preferences: {
       ...A,
-      scaleFactor: A.unit === tKW.PIXEL ? 1 : A.scaleFactor
+      scaleFactor: A.unit === MeasurementUnit.PIXEL ? 1 : A.scaleFactor
     }
   };
 }

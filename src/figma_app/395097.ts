@@ -16,7 +16,7 @@ import { l as _$$l2 } from "../905/489485";
 import { x } from "../905/402740";
 import { A as _$$A2 } from "../905/891805";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 var $$I4 = (e => (e.ALL = "All", e.TOP = "Top", e.BOTTOM = "Bottom", e.LEFT = "Left", e.RIGHT = "Right", e.CUSTOM = "Custom", e.MIXED = "Mixed", e))($$I4 || {});
 var $$S3 = (e => (e.TOP = "Top", e.BOTTOM = "Bottom", e.LEFT = "Left", e.RIGHT = "Right", e))($$S3 || {});
 let v = {
@@ -74,7 +74,7 @@ export function $$x2(e) {
   }
 }
 export function $$N0(e, t) {
-  return gl(e) ? jsx(x, {}) : 0 === e.length ? ((null == t || "Custom" === t) && (t = "All"), $$x2(t)) : v[e.join("")];
+  return isInvalidValue(e) ? jsx(x, {}) : 0 === e.length ? ((null == t || "Custom" === t) && (t = "All"), $$x2(t)) : v[e.join("")];
 }
 export function $$C5(e) {
   switch (e) {

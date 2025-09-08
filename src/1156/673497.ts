@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useId } from "react";
-import { F } from "../905/549791";
-import { J } from "../905/270045";
+import { CheckboxPrimitive } from "../905/549791";
+import { Label } from "../905/270045";
 import o from "classnames";
 var r = {};
 require.d(r, {
@@ -36,7 +36,7 @@ let $$$$y0 = forwardRef(({
   return jsxs("span", {
     "data-disabled": !!h.disabled || void 0,
     className: p,
-    children: [jsx(F, {
+    children: [jsx(CheckboxPrimitive, {
       className: c()(u, r[o]),
       id: y,
       htmlAttributes: m,
@@ -45,7 +45,7 @@ let $$$$y0 = forwardRef(({
       "data-tooltip-type": "text",
       "data-tooltip-shortcut-key": h?.["data-tooltip-shortcut-key"] ?? m?.["data-tooltip-shortcut-key"],
       ref: g
-    }), jsxs(J, {
+    }), jsxs(Label, {
       htmlFor: y,
       className: x,
       children: [jsx("span", {

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useContext, useRef, useEffect, useState, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { N as _$$N } from "../vendor/930821";
@@ -302,7 +302,7 @@ function $(e) {
     let p = z3();
     let h = useCallback(() => {
       u(_$$N2.STOP);
-      "prototype" === p ? hk()?.stopPresenting() : h3O.stopPresenting();
+      "prototype" === p ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
     }, [u, p]);
     let m = useCallback(() => !!c && (h(), !0), [h, c]);
     O1(m, KD.MULTIPLAYER_SPOTLIGHT);

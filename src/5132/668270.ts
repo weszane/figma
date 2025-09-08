@@ -10,8 +10,8 @@ import { jmg } from "../figma_app/43951";
 import { N } from "../905/696711";
 import { Uy } from "../figma_app/685921";
 import { L } from "../905/92291";
-import { nF } from "../905/350402";
-let $$f0 = nF(async (e, l, {
+import { createOptimistThunk } from "../905/350402";
+let $$f0 = createOptimistThunk(async (e, l, {
   loadingKey: i
 }) => {
   let s = !1;
@@ -66,7 +66,7 @@ let $$f0 = nF(async (e, l, {
     e.dispatch(_$$s.error("Unable to save file. Please try again later."));
   }
 });
-let $$g1 = nF(async (e, {
+let $$g1 = createOptimistThunk(async (e, {
   userName: l,
   file_key: i
 }, {

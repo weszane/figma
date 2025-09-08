@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { id } from "../905/648693";
 import { Lq } from "../905/926939";
 import { wn } from "../905/581923";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 function c(e, t) {
   if ("string" == typeof e && 1 === t.parsedDefs.length) {
     let i = t.parsedDefs[0].devFriendlyProp;
@@ -107,7 +107,7 @@ export const A = function e(t, i, p, m) {
       case "INSTANCE_SWAP":
         {
           var f;
-          if ("string" == typeof (f = A) && fn(sH(f))) {
+          if ("string" == typeof (f = A) && isValidSessionLocalID(parseSessionLocalID(f))) {
             h.componentProps[_.rawProp] = A;
             break;
           }

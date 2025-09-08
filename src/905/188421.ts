@@ -3,7 +3,7 @@ import { PureComponent, Children } from "react";
 import a from "classnames";
 import { Pt } from "../figma_app/806412";
 import { j7, oB } from "../905/929976";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { b } from "../905/181535";
 import { p_ } from "../905/203369";
@@ -81,7 +81,7 @@ export class $$b1 extends PureComponent {
     return null == e || null == t ? null == e == (null == t) : this.props.formatter.isEqual ? this.props.formatter.isEqual(e, t) : e === t;
   }
   render() {
-    let e = E7((this.props.enablePreview ? this.state.previousPreviewValue : null) ?? this.props.property);
+    let e = normalizeValue((this.props.enablePreview ? this.state.previousPreviewValue : null) ?? this.props.property);
     let t = [];
     let i = !0;
     Children.forEach(this.props.children, t => {

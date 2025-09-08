@@ -6,7 +6,7 @@ import { K } from "../905/443068";
 import { s as _$$s } from "../905/551945";
 import { e as _$$e } from "../905/149844";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { xp } from "../905/966582";
 import { wj } from "../1156/721826";
 import { H } from "../1156/461363";
@@ -46,7 +46,7 @@ export function $$y0({
   }, [b]);
   let N = e ? jsxs(q7, {
     onClick: () => {
-      v(to({
+      v(showModalHandler({
         type: H,
         data: {
           chatMessagesNodeGuid: _

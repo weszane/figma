@@ -7,8 +7,8 @@ import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { U as _$$U } from "../905/708285";
 import { RR } from "../figma_app/338442";
-import { J0O, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ComponentPropType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import h from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
@@ -101,13 +101,13 @@ export function $$H0(e) {
   let et = useRef(null);
   let er = _$$R(et);
   if (!def) return null;
-  def.type === J0O.BOOL ? t = "BOOLEAN" : def.type === J0O.TEXT ? t = "STRING" : def.type === J0O.NUMBER && (t = "FLOAT");
+  def.type === ComponentPropType.BOOL ? t = "BOOLEAN" : def.type === ComponentPropType.TEXT ? t = "STRING" : def.type === ComponentPropType.NUMBER && (t = "FLOAT");
   let en = jsxs(_$$a, {
     className: m()({
       [Q_]: selectionHasInstanceSublayer,
       [LC]: !selectionHasInstanceSublayer,
       [RH]: dropdownShown?.type === X,
-      [YM]: def.type === J0O.INSTANCE_SWAP
+      [YM]: def.type === ComponentPropType.INSTANCE_SWAP
     }),
     onClick: J,
     pillRef: q,
@@ -209,7 +209,7 @@ function W(e) {
     nodeField
   } = e;
   let r = useCallback(() => {
-    l7.user("delete-prop-ref", () => glU.deleteComponentPropRef(nodeField));
+    permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(nodeField));
   }, [nodeField]);
   return jsx(_$$K, {
     onClick: r,
@@ -256,7 +256,7 @@ function K(e) {
     children: ui3SecondButton ? jsx(pG, {
       dataTestId: "component-prop-pill",
       appendedClassName: m()(t$, {
-        [uZ]: def.type === J0O.INSTANCE_SWAP,
+        [uZ]: def.type === ComponentPropType.INSTANCE_SWAP,
         [fd]: nodeField === RR.TEXT
       }),
       label,
@@ -266,7 +266,7 @@ function K(e) {
     }) : jsx(DE, {
       dataTestId: "component-prop-pill",
       appendedClassName: m()(t$, {
-        [uZ]: def.type === J0O.INSTANCE_SWAP,
+        [uZ]: def.type === ComponentPropType.INSTANCE_SWAP,
         [fd]: nodeField === RR.TEXT
       }),
       input,

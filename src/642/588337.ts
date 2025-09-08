@@ -7,12 +7,12 @@ import { E as _$$E } from "../905/632989";
 import { k as _$$k } from "../905/443820";
 import { _L } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
-import { s_, H4 } from "../905/992467";
+import { setupAdvancedLazyLoader, NONE_SYMBOL } from "../905/992467";
 import { oW } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { zR } from "../figma_app/817077";
@@ -101,7 +101,7 @@ export function $$I0({
     v.current?.click();
   };
   let V = (e, t, s, r) => {
-    l7.user("chart-createChartOnSlide", () => {
+    permissionScopeHandler.user("chart-createChartOnSlide", () => {
       let n = e.createNode("JSX");
       n.resizeWithConstraints(800, 480);
       let i = t.size;
@@ -121,7 +121,7 @@ export function $$I0({
       let s = e.get(t);
       if (s && "SLIDE" === s.type) return s;
     }
-    let s = Ez5?.canvasGrid();
+    let s = AppStateTsApi?.canvasGrid();
     if (s) {
       let t = zR();
       let r = s.getClosestGridCoord(t, null);
@@ -142,7 +142,7 @@ export function $$I0({
       if (K) {
         if (getSingletonSceneGraph().get(K)) {
           let e = G?.chartType || I;
-          e && l7.user("chart-updateExistingChart", () => {
+          e && permissionScopeHandler.user("chart-updateExistingChart", () => {
             $H(K, {
               ...ZN(csv),
               chartType: e
@@ -298,9 +298,9 @@ let E = {
     $$css: !0
   }
 };
-let M = s_("LazyTable", () => Promise.all([]).then(_require).then(e => e.DataTable), {
+let M = setupAdvancedLazyLoader("LazyTable", () => Promise.all([]).then(_require).then(e => e.DataTable), {
   componentName: "LazyTable",
-  error: H4.NONE
+  error: NONE_SYMBOL.NONE
 });
 export const nh = $$I0;
 export const oH = $$T1;

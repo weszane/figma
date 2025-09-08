@@ -4,7 +4,7 @@ import { assert } from "../figma_app/465776";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { bL, l9, mc, c$, wv } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { k as _$$k } from "../905/443820";
 import { ox } from "../905/163832";
 import { bL as _$$bL } from "../905/911410";
@@ -13,7 +13,7 @@ import { Uk } from "../905/691059";
 import { y7 } from "../figma_app/343967";
 import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -22,11 +22,11 @@ import { c$ as _$$c$ } from "../figma_app/236327";
 import { _ as _$$_ } from "../figma_app/658134";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
 import { BK } from "../905/848862";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Jz } from "../905/504727";
 import { uh } from "../figma_app/410518";
 import { uU } from "../figma_app/547638";
@@ -77,10 +77,10 @@ export function $$G2({
 }
 let V = e => {
   tJ(e);
-  glU.triggerAction("zoom-to-selection", void 0);
+  Fullscreen.triggerAction("zoom-to-selection", void 0);
 };
 let H = (e, t) => {
-  "function" == typeof e ? e() : (Y5.triggerActionInUserEditScope("sites-fix-issue", {
+  "function" == typeof e ? e() : (fullscreenValue.triggerActionInUserEditScope("sites-fix-issue", {
     fix: e,
     nodeIds: t
   }), V(t));
@@ -249,7 +249,7 @@ export function $$K1({
         onChange: e => u(e),
         recordingKey: generateRecordingKey(e, "category-filter"),
         children: [jsx(l9, {
-          label: jsx(_$$h, {
+          label: jsx(HiddenLabel, {
             children: getI18nString("sites.panel.sites_issues.issue_type")
           }),
           children: "all" === c ? getI18nString("sites.panel.sites_issues.all_properties") : o[c].label
@@ -312,7 +312,7 @@ function $(e) {
     onlyShowResponsiveSetGuids
   });
 }
-let $$X0 = Ju(function ({
+let $$X0 = registerModal(function ({
   open: e,
   onClose: t
 }) {
@@ -374,7 +374,7 @@ let $$X0 = Ju(function ({
     container: "#lint-error-container",
     children: c
   });
-}, "LINT_ERROR_MODAL", ZU.YES);
+}, "LINT_ERROR_MODAL", ModalSupportsBackground.YES);
 let $$q4 = createReduxSubscriptionAtomWithState(e => e.modalShown?.type === $$X0.type);
 export const bA = $$X0;
 export const F8 = $$K1;

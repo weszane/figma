@@ -1,4 +1,4 @@
-import { l7 } from '../905/189185';
+import { permissionScopeHandler } from '../905/189185';
 import { $$ab4, $$av5 } from '../905/472793';
 import { subscribeAndAwaitData } from '../905/553831';
 import { getFeatureFlags } from '../905/601108';
@@ -8,8 +8,8 @@ import { Po } from '../905/859698';
 import { atomStoreManager } from '../figma_app/27355';
 import { k_1 } from '../figma_app/43951';
 import { Ay } from '../figma_app/432652';
-import { Y5 } from '../figma_app/455680';
-import { vlL } from '../figma_app/763686';
+import { fullscreenValue } from '../figma_app/455680';
+import { WhiteboardAiTemplatePreviewCppBindings } from '../figma_app/763686';
 import { F9, LX } from '../figma_app/862108';
 async function f(e, t) {
   let i = '';
@@ -41,8 +41,8 @@ export async function $$_0({
     prompt: e,
     mode: Wc.DESCRIPTION
   }, h);
-  await Y5.onReady();
-  vlL.resetInsertionLocation();
+  await fullscreenValue.onReady();
+  WhiteboardAiTemplatePreviewCppBindings.resetInsertionLocation();
   let b = A.getReader();
   let v = [];
   async function I() {
@@ -51,7 +51,7 @@ export async function $$_0({
     for (; performance.now() - e < 32;) {
       let e = v.shift();
       if (!e) break;
-      let t = l7.system('ai-add-template', () => vlL.handleFigJamTemplateStreamMessage(e));
+      let t = permissionScopeHandler.system('ai-add-template', () => WhiteboardAiTemplatePreviewCppBindings.handleFigJamTemplateStreamMessage(e));
       logInfo('handleTextToTemplate', 'Create or update response message', {
         message: t
       });
@@ -121,7 +121,7 @@ export async function $$_0({
     e.trace = y;
     return e;
   } finally {
-    l7.system('ai-add-template-commit', () => vlL.commitPreview());
+    permissionScopeHandler.system('ai-add-template-commit', () => WhiteboardAiTemplatePreviewCppBindings.commitPreview());
     b.releaseLock();
   }
   return y;

@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { EK } from "../figma_app/396432";
 import { dR, lk } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
-import { Lo, Ce, to } from "../905/156213";
+import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { WX, Bq } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { VG } from "../905/389382";
@@ -19,19 +19,19 @@ import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { kQI } from "../figma_app/43951";
 import { WW, Wf, LF } from "../figma_app/345997";
 import { vL, Bi, Pj } from "../905/652992";
-import { oO, TN } from "../figma_app/831101";
+import { mapUpsellModalTypeToSource, UpsellSourceType } from "../figma_app/831101";
 import { ZN } from "../figma_app/630077";
 import { wR } from "../figma_app/765689";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 var $$n0;
 (e => {
   e.useModalControls = function (e) {
     let t = useDispatch();
     let i = () => {
-      t(Lo());
+      t(popModalStack());
     };
     let n = () => {
-      t(Ce());
+      t(hideModal());
     };
     return {
       cancel: i,
@@ -39,9 +39,9 @@ var $$n0;
       startProUpgradeFlow: (r, a) => {
         if (e) {
           n();
-          let i = oO({
+          let i = mapUpsellModalTypeToSource({
             upsellSource: a,
-            fallbackEntryPoint: TN.CONSUMPTION_MODAL
+            fallbackEntryPoint: UpsellSourceType.CONSUMPTION_MODAL
           });
           t(WX({
             teamId: e,
@@ -57,11 +57,11 @@ var $$n0;
           }));
         } else {
           i();
-          t(to({
+          t(showModalHandler({
             type: dR,
             data: {
               plan: _$$I.PRO,
-              upsellSource: _$$b.UNSET,
+              upsellSource: UpsellModalType.UNSET,
               ...(r ? {
                 onBillingCompleteRedirectInfo: r
               } : {})
@@ -73,9 +73,9 @@ var $$n0;
         upsellSource: e
       }) => {
         n();
-        let i = oO({
+        let i = mapUpsellModalTypeToSource({
           upsellSource: e,
-          fallbackEntryPoint: TN.CONSUMPTION_MODAL
+          fallbackEntryPoint: UpsellSourceType.CONSUMPTION_MODAL
         });
         t(Bq({
           openInNewTab: !0,
@@ -85,7 +85,7 @@ var $$n0;
       },
       startEnterpriseUpgradeFlow: e => {
         n();
-        t(to({
+        t(showModalHandler({
           type: lk,
           data: {
             source: e

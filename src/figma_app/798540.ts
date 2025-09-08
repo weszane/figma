@@ -1,9 +1,9 @@
 import { useCallback, useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { n3, IA } from "../905/859698";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD } from "../905/871411";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { reportError } from "../905/11";
 import { HH } from "../figma_app/3776";
@@ -48,7 +48,7 @@ export function $$E0(e, t) {
       let p = n.get(e.guid);
       p && cancelAnimationFrame(p);
       let _ = requestAnimationFrame(() => {
-        l7.ai(t, () => {
+        permissionScopeHandler.ai(t, () => {
           (function (e) {
             let t = e.containingSlideId;
             let r = getSingletonSceneGraph().get(t);
@@ -81,7 +81,7 @@ export function $$E0(e, t) {
             let p = e.absoluteTransform.m12;
             if (p < n + 16 || p + u > o - 16) {
               let t;
-              e.inheritedTextStyle && (glU?.applyStyleToSelection("inheritTextStyleKey", AD, !1), glU?.selectStyle(n3.INVALID, IA.INVALID));
+              e.inheritedTextStyle && (Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !1), Fullscreen?.selectStyle(n3.INVALID, IA.INVALID));
               let r = Math.max(0, n + 16 - p);
               let d = Math.max(0, p + u - (o - 16));
               let _ = e.lineHeightOrMixed;
@@ -112,7 +112,7 @@ export function $$y2(e) {
     i.current.clear();
   }, []);
   let s = useCallback(() => {
-    l7.ai(e, () => {
+    permissionScopeHandler.ai(e, () => {
       for (let [e, t] of i.current) {
         let r = getSingletonSceneGraph().get(e);
         r && HH(r, t.x, t.y);
@@ -129,7 +129,7 @@ export function $$y2(e) {
   return {
     shiftAllNodesOutOfSlideMargins: useCallback(() => {
       r.forEach(e => {
-        l7.ai(o2, () => {
+        permissionScopeHandler.ai(o2, () => {
           let t = e.containingSlideId;
           let r = getSingletonSceneGraph().get(t);
           if (!r) return;

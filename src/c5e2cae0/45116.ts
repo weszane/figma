@@ -25,9 +25,9 @@ import { A as _$$A } from "../905/891805";
 import { s as _$$s2, K as _$$K2 } from "../c5e2cae0/341232";
 import { $z } from "../figma_app/617427";
 import { Y as _$$Y } from "../905/830372";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { AG } from "../figma_app/217457";
-import { Ju as _$$Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { $$ } from "../c5e2cae0/705272";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
@@ -38,7 +38,7 @@ import { az as _$$az } from "../figma_app/805373";
 import { m as _$$m } from "../905/602189";
 import { j as _$$j } from "../905/584270";
 import { Gu } from "../905/513035";
-let R = _$$Ju(function (e) {
+let R = registerModal(function (e) {
   let {
     seatTypes,
     additionalSeatCounts,
@@ -143,7 +143,7 @@ function O({
     },
     trackingOptions: l,
     onClick: () => {
-      i(to({
+      i(showModalHandler({
         type: R,
         data: {
           seatTypes: e,
@@ -157,7 +157,7 @@ function O({
     children: renderI18nText("checkout.additional_seats.add_seats_to_assign_later")
   });
 }
-let H = _$$Ju(function (e) {
+let H = registerModal(function (e) {
   let t = _$$u();
   let {
     user,
@@ -240,7 +240,7 @@ function Z({
   let c = Dj();
   let u = i === Ju.PRO && c();
   let p = () => {
-    n(to({
+    n(showModalHandler({
       type: H,
       data: {
         user: e,

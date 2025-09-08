@@ -8,17 +8,17 @@ import { L } from "../905/408237";
 import { nt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { Ce, to, Lo } from "../905/156213";
+import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { yH } from "../figma_app/240735";
 import { fu } from "../figma_app/831799";
 import { s as _$$s } from "../905/573154";
 import { $ } from "../905/834575";
 import { Ib } from "../905/129884";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Dd, OJ } from "../905/519092";
 import { v as _$$v } from "../905/621749";
 import { kL, Vq, _Z, v0, pL } from "../figma_app/639088";
-export let $$E0 = Ju(function (e) {
+export let $$E0 = registerModal(function (e) {
   let [t, i] = useState("");
   let y = useDispatch();
   let E = useSelector(e => e.teams);
@@ -98,7 +98,7 @@ export let $$E0 = Ju(function (e) {
   });
   let P = e => {
     e.preventDefault();
-    y(Ce());
+    y(hideModal());
   };
   if (!e.team.org_id && e.subscriptionStatus) return jsx(fu, {
     name: "Blocked Pro Team Delete Modal",
@@ -106,7 +106,7 @@ export let $$E0 = Ju(function (e) {
       title: getI18nString("team_delete_modal.pro_plan_cancel_modal_header"),
       confirmText: getI18nString("team_delete_modal.proceed_to_cancel"),
       onConfirm: () => {
-        y(to({
+        y(showModalHandler({
           type: _$$v,
           data: {
             teamId: e.team.id
@@ -214,7 +214,7 @@ export let $$E0 = Ju(function (e) {
               userInitiated: !0,
               teamDelete: !0
             }));
-            y(Lo());
+            y(popModalStack());
             i("");
           },
           children: [jsx("div", {

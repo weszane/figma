@@ -1,5 +1,5 @@
 import { c2 } from "../905/382883";
-import { Y8A } from "../figma_app/763686";
+import { RevisionNumberAccessor } from "../figma_app/763686";
 import a from "../vendor/128080";
 function s(e, t, i) {
   t in e ? Object.defineProperty(e, t, {
@@ -17,7 +17,7 @@ export class $$l1 {
   checkForUpdates(e) {
     var t;
     let i = this.scene !== this.lastSceneInstance;
-    let a = "function" == typeof (t = this.scene).getRevisionNumber ? t.getRevisionNumber() : Y8A && "function" == typeof Y8A.getRevisionNumber ? Y8A.getRevisionNumber() : 0;
+    let a = "function" == typeof (t = this.scene).getRevisionNumber ? t.getRevisionNumber() : RevisionNumberAccessor && "function" == typeof RevisionNumberAccessor.getRevisionNumber ? RevisionNumberAccessor.getRevisionNumber() : 0;
     if (null === this.lastRevision || this.lastRevision !== a || !o(e, this.lastArgs || null) || i) {
       if (null !== this.lastValue && !this.scene.hasValidScene()) return;
       this.lastSceneInstance = this.scene;

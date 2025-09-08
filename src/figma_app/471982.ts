@@ -1,6 +1,6 @@
 import { B6 } from "../vendor/130505";
 import { throwTypeError } from "../figma_app/465776";
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/128080";
 import { Ay } from "../905/612521";
@@ -19,8 +19,8 @@ import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { vt as _$$vt, H0, U, I0, xQ, bD } from "../figma_app/45218";
 import { LE } from "../905/71785";
 import { o1 } from "../figma_app/10554";
-import { EB } from "../figma_app/831101";
-import { FW } from "../figma_app/155287";
+import { createEmptyAddress } from "../figma_app/831101";
+import { ManifestEditorType } from "../figma_app/155287";
 import { Z4 } from "../figma_app/809727";
 import { z4, P5 } from "../figma_app/175992";
 import { C as _$$C } from "../905/237873";
@@ -94,8 +94,8 @@ export function $$H31(e, t) {
       if (!e.versions || !r) return !1;
       let n = e.versions[r];
       if (!n) return !1;
-      if (t === _$$k.Editors.DEV_MODE && n.manifest.editorType?.includes(FW.DEV)) return !0;
-      let i = _$$S(t, FW);
+      if (t === _$$k.Editors.DEV_MODE && n.manifest.editorType?.includes(ManifestEditorType.DEV)) return !0;
+      let i = _$$S(t, ManifestEditorType);
       return (i && n.manifest.editorType?.includes(i)) ?? !1;
     }
   }(e, t.editor_type)));
@@ -241,7 +241,7 @@ export function $$eu21(e, t, r) {
   return e + co <= t && r > $2;
 }
 export function $$ep3(e) {
-  return l()(e, EB());
+  return l()(e, createEmptyAddress());
 }
 export function $$e_27() {
   let e = _$$N(`(max-width: ${YW - 1}px)`);
@@ -255,7 +255,7 @@ export async function $$eh10(e) {
     return {
       type: "image",
       url: e,
-      sha1: Et(r),
+      sha1: sha1Hex(r),
       buffer: r
     };
   } catch {

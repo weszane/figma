@@ -31,7 +31,7 @@ import { On } from "../9420/975542";
 import { tf, fu } from "../figma_app/831799";
 import { Ju, IX } from "../905/712921";
 import { X1 } from "../figma_app/736948";
-import { tn, NW, EB, $V, tY } from "../figma_app/831101";
+import { UpgradeSteps, BillingCycle, createEmptyAddress, isAddressEmpty, SubscriptionType } from "../figma_app/831101";
 import { SC } from "../figma_app/707808";
 import { Nd, li, Uu, kH, K6, ER, i9, $y, uD, Bb } from "../c5e2cae0/763339";
 import { x as _$$x } from "../c5e2cae0/907085";
@@ -43,7 +43,7 @@ import { W as _$$W } from "../c5e2cae0/300137";
 import { UR } from "../figma_app/307841";
 import { u as _$$u } from "../905/16237";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { MN } from "../figma_app/482142";
 import { b as _$$b } from "../905/985254";
 import { Mh } from "../figma_app/297957";
@@ -65,7 +65,7 @@ import { e0 } from "../905/696396";
 import { Eh } from "../figma_app/617654";
 import { V as _$$V } from "../905/57562";
 import { n as _$$n } from "../905/861286";
-import { F as _$$F } from "../905/549791";
+import { CheckboxPrimitive } from "../905/549791";
 import { g as _$$g } from "../905/125190";
 import { Lf } from "../figma_app/637027";
 import { nl } from "../905/590952";
@@ -185,11 +185,11 @@ function U(e) {
           let a = function (e) {
             switch (e) {
               case X1.ChoosePlan:
-                return tn.PLAN_COMPARISON;
+                return UpgradeSteps.PLAN_COMPARISON;
               case X1.AddCollaborators:
-                return tn.ADD_COLLABORATORS;
+                return UpgradeSteps.ADD_COLLABORATORS;
               case X1.PseudoCreateTeam:
-                return tn.CREATE_TEAM;
+                return UpgradeSteps.CREATE_TEAM;
               default:
                 return null;
             }
@@ -235,7 +235,7 @@ function eb({
 }) {
   return jsxs("div", {
     "data-testid": `select_team--${e.id}`,
-    children: [jsx(_$$F, {
+    children: [jsx(CheckboxPrimitive, {
       className: _$$Q,
       checked: t,
       onChange: () => a(e.id),
@@ -577,7 +577,7 @@ export class $$eM2 extends Component {
       });
     };
     this.contactSales = () => {
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: lk,
         data: {
           source: _$$B2.ORG_SELF_SERVE_UPGRADE_MODAL
@@ -596,7 +596,7 @@ export class $$eM2 extends Component {
     this.renderPurchaseSummary = () => {
       let e = this.effectiveStep() === X1.TeamSelect ? null : O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts);
       return jsx(_$$z, {
-        billingInterval: NW.YEAR,
+        billingInterval: BillingCycle.YEAR,
         buttonText: this.getNextButtonText(),
         canEnforcePaidSeatMinimum: this.effectiveStep() === X1.SeatSelect,
         countByBillableProductKey: e,
@@ -650,7 +650,7 @@ export class $$eM2 extends Component {
       payment: {
         card: null,
         last4: null,
-        address: EB(aE())
+        address: createEmptyAddress(aE())
       },
       apiPending: !1,
       stripeCustomerId: null,
@@ -663,7 +663,7 @@ export class $$eM2 extends Component {
       },
       paymentError: null,
       currency: this.props.currency,
-      shippingAddress: EB(aE()),
+      shippingAddress: createEmptyAddress(aE()),
       nameOnPaymentMethod: "",
       vatId: null,
       regionalVatId: null,
@@ -807,7 +807,7 @@ export class $$eM2 extends Component {
       if (!t.error && t.token) return To(t.token.id, this.getSubtotal(), this.state.currency).then(t => this.props.canSeeBillingAddressExp ? XHR.post("/api/orgs/validate_payment", {
         payment_method: t.payment_method,
         billing_address: e,
-        shipping_address: $V(this.state.shippingAddress) ? null : this.state.shippingAddress,
+        shipping_address: isAddressEmpty(this.state.shippingAddress) ? null : this.state.shippingAddress,
         selected_currency: this.state.currency,
         vat_gst_id: this.state.vatId,
         regional_vat_gst_id: this.state.regionalVatId || null
@@ -922,7 +922,7 @@ export class $$eM2 extends Component {
       let t = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || {};
       e = jsx(_$$j, {
         billingAddress: this.state.payment.address,
-        billingInterval: NW.YEAR,
+        billingInterval: BillingCycle.YEAR,
         countByBillableProductKey: t,
         currency: this.state.currency,
         displayName: this.state.orgDetails.orgName || this.state.orgDetails.legalOrgName,
@@ -1193,7 +1193,7 @@ export function $$eO0({
       className: _$$s.colorTextSecondary.font13.mt8.$,
       children: a
     }), UR() && jsx(_$$W, {
-      billingPeriod: tY.ANNUAL,
+      billingPeriod: SubscriptionType.ANNUAL,
       isCampfireCart: !0
     })]
   }) : null;

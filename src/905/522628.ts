@@ -1,19 +1,19 @@
-import { YV, vh, td } from "../figma_app/181241";
+import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { lH } from "../905/316062";
 export let $$a0 = new class {
   constructor() {
-    this.FolderSchemaValidator = YV("FolderSchemaValidator", lH, null);
-    this.FilesSchemaValidator = vh();
-    this.CanMoveSchemaValidator = vh();
-    this.ContributorsSchemaValidator = vh();
-    this.CanMoveFilesSchemaValidator = vh();
-    this.PermanentlyDeleteFolderSchemaValidator = vh();
-    this.BatchDeleteFolderSchemaValidator = vh();
-    this.TrashFolderSchemaValidator = vh();
-    this.RestoreFolderSchemaValidator = vh();
-    this.UpdateFolderSharingAudienceControlSchemaValidator = vh();
-    this.UpdateFolderTeamAccessSchemaValidator = vh();
-    this.UpdateFolderNameSchemaValidator = vh();
+    this.FolderSchemaValidator = createMetaValidator("FolderSchemaValidator", lH, null);
+    this.FilesSchemaValidator = createNoOpValidator();
+    this.CanMoveSchemaValidator = createNoOpValidator();
+    this.ContributorsSchemaValidator = createNoOpValidator();
+    this.CanMoveFilesSchemaValidator = createNoOpValidator();
+    this.PermanentlyDeleteFolderSchemaValidator = createNoOpValidator();
+    this.BatchDeleteFolderSchemaValidator = createNoOpValidator();
+    this.TrashFolderSchemaValidator = createNoOpValidator();
+    this.RestoreFolderSchemaValidator = createNoOpValidator();
+    this.UpdateFolderSharingAudienceControlSchemaValidator = createNoOpValidator();
+    this.UpdateFolderTeamAccessSchemaValidator = createNoOpValidator();
+    this.UpdateFolderNameSchemaValidator = createNoOpValidator();
   }
   getFolder(e) {
     return this.FolderSchemaValidator.validate(async ({
@@ -23,7 +23,7 @@ export let $$a0 = new class {
   getFiles(e) {
     return this.FilesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/folders/${e.folderId}/files`, td.toAPIParameters({
+    }) => await t.get(`/api/folders/${e.folderId}/files`, APIParameterUtils.toAPIParameters({
       fetch_only_trashed_with_folder_files: !!e.shouldShowOnlyTrashedFiles
     })));
   }
@@ -34,7 +34,7 @@ export let $$a0 = new class {
     } = e;
     return this.CanMoveSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/folders/${e.folderId}/can_move`, td.toAPIParameters(i)));
+    }) => await t.get(`/api/folders/${e.folderId}/can_move`, APIParameterUtils.toAPIParameters(i)));
   }
   getContributors(e) {
     return this.ContributorsSchemaValidator.validate(async ({
@@ -49,7 +49,7 @@ export let $$a0 = new class {
         destFolderId,
         ...r
       } = e;
-      return await t.get(`/api/folders/${e.destFolderId}/can_move_files`, td.toAPIParameters(r));
+      return await t.get(`/api/folders/${e.destFolderId}/can_move_files`, APIParameterUtils.toAPIParameters(r));
     });
   }
   permanentlyDelete(e) {

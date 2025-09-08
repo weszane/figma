@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import { nt, d6 } from "../figma_app/687776";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { le } from "../905/904854";
 import { F } from "../905/642505";
 import { GR } from "../905/81459";
@@ -13,7 +13,7 @@ import { Mk } from "../905/163189";
 import { z } from "../905/875422";
 import { MS } from "../905/615657";
 import { Gc, TA } from "../905/769";
-export let $$E2 = nF((e, t) => {
+export let $$E2 = createOptimistThunk((e, t) => {
   F && (MS(), F.extractFilesFromDropEvent(t, (t, r) => {
     getFeatureFlags().internal_only_debug_tools && t.endsWith(".repo") ? $$T3(e, t, r) : e.dispatch(z({
       name: t,

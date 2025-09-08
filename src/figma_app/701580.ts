@@ -19,7 +19,7 @@ import { a6, Ve, RD } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
 import { cS } from "../figma_app/45218";
 import { vt } from "../905/862883";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { $n } from "../905/521428";
 import { fG } from "../figma_app/973927";
 import { FFileType } from "../figma_app/191312";
@@ -692,7 +692,7 @@ function eg(e) {
     })
   });
 }
-export let $$ef0 = Ju(function (e) {
+export let $$ef0 = registerModal(function (e) {
   let t = _$$tS();
   return jsx(fu, {
     name: "template_modal_shown",

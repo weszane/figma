@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { Ez5, ywP, RYP, glU } from "../figma_app/763686";
+import { AppStateTsApi, ColorProfileEnum, ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { oA } from "../905/663269";
@@ -21,7 +21,7 @@ import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
 import { U1, kj } from "../905/191601";
 import { vg } from "../figma_app/91703";
-import { to as _$$to2 } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
 import { n6 } from "../905/234821";
 import { fu } from "../figma_app/831799";
@@ -36,7 +36,7 @@ import { $n } from "../905/930279";
 import { F as _$$F } from "../905/300562";
 import { T0, gV, t$ as _$$t$ } from "../figma_app/863319";
 import { cU } from "../figma_app/528509";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { R6 } from "../figma_app/504823";
 import { jK, hP } from "../figma_app/829197";
 import { ck } from "../905/87821";
@@ -50,7 +50,7 @@ import { dTR, iY3 } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { fA, p9, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Eg, _b } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
 import { o1 } from "../figma_app/10554";
@@ -149,7 +149,7 @@ export function $$eO1({
     enabled: !!eM
   });
   let tc = GI("filename-context-menu");
-  let tu = !!Ez5 && Ez5.uiState().isRecovery.getCopy();
+  let tu = !!AppStateTsApi && AppStateTsApi.uiState().isRecovery.getCopy();
   let tp = useMemo(() => e8 ? e4 ? "publish" : "show_upsell_modal" : "disabled", [e4, e8]);
   let t_ = R6();
   let {
@@ -157,7 +157,7 @@ export function $$eO1({
   } = jK();
   let tm = hP(colorProfilePreference);
   let tg = _$$h.useTrackingContext({
-    trigger: _$$b.FILE_DUPLICATE
+    trigger: UpsellModalType.FILE_DUPLICATE
   });
   let tf = useMemo(() => "disabled" !== tp || e0 || !!tr, [tp, e0, tr]);
   let tE = !1;
@@ -263,7 +263,7 @@ export function $$eO1({
     }] : [];
   };
   let t4 = () => {
-    z(_$$to2({
+    z(showModalHandler({
       type: dD,
       data: {
         entrypoint: RR.FILENAME_VIEW_DROPDOWN
@@ -272,7 +272,7 @@ export function $$eO1({
   };
   let t8 = () => {
     let e = eM.teamId && eG[eM.teamId];
-    z(_$$to2({
+    z(showModalHandler({
       type: $3,
       data: {
         afterFileMove: t4,
@@ -292,7 +292,7 @@ export function $$eO1({
     e ? z(qP(r)) : z(Fb(r));
   };
   let t7 = e => {
-    z(_$$to2({
+    z(showModalHandler({
       type: _$$l(),
       data: {
         pinnedFileId: e
@@ -300,7 +300,7 @@ export function $$eO1({
     }));
   };
   let t9 = e => {
-    z(_$$to2({
+    z(showModalHandler({
       type: _$$I(),
       data: {
         pinnedFileId: e
@@ -381,7 +381,7 @@ export function $$eO1({
       recordingKey: "viewFileAnalytics",
       displayText: getI18nString("fullscreen.filename_view.file_analytics"),
       callback: () => {
-        z(_$$to2({
+        z(showModalHandler({
           type: _$$e3,
           data: {
             fileKey: eM.key,
@@ -396,7 +396,7 @@ export function $$eO1({
     displayText: getI18nString("fullscreen.filename_view.export"),
     shortcut: eL.keyboardShortcuts && c1(eL.keyboardShortcuts, "export-selected-exportables"),
     callback: () => {
-      Y5.triggerAction("export-selected-exportables", {
+      fullscreenValue.triggerAction("export-selected-exportables", {
         source: "toolbar"
       });
     }
@@ -422,10 +422,10 @@ export function $$eO1({
     displayText: getI18nString("fullscreen.filename_view.color_management.file_color_profile"),
     children: function (e, t) {
       switch (e) {
-        case ywP.LEGACY:
+        case ColorProfileEnum.LEGACY:
           return [{
             displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
-              colorProfile: t === RYP.DISPLAY_P3 ? getI18nString("fullscreen.properties_panel.export_settings_color_profile.p3") : getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb")
+              colorProfile: t === ColorSpaceEnum.DISPLAY_P3 ? getI18nString("fullscreen.properties_panel.export_settings_color_profile.p3") : getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb")
             }),
             isChecked: !0
           }, {
@@ -433,17 +433,17 @@ export function $$eO1({
               color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")
             }),
             callback: () => {
-              glU.triggerAction("change-document-color-profile-to-srgb", {});
+              Fullscreen.triggerAction("change-document-color-profile-to-srgb", {});
             }
           }, {
             displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
               color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
             }),
             callback: () => {
-              glU.triggerAction("change-document-color-profile-to-display-p3", {});
+              Fullscreen.triggerAction("change-document-color-profile-to-display-p3", {});
             }
           }];
-        case ywP.SRGB:
+        case ColorProfileEnum.SRGB:
           return [{
             displayText: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb"),
             isChecked: !0
@@ -452,10 +452,10 @@ export function $$eO1({
               color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
             }),
             callback: () => {
-              glU.triggerAction("change-document-color-profile-to-display-p3", {});
+              Fullscreen.triggerAction("change-document-color-profile-to-display-p3", {});
             }
           }];
-        case ywP.DISPLAY_P3:
+        case ColorProfileEnum.DISPLAY_P3:
           return [{
             displayText: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3"),
             isChecked: !0
@@ -464,7 +464,7 @@ export function $$eO1({
               color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")
             }),
             callback: () => {
-              glU.triggerAction("change-document-color-profile-to-srgb", {});
+              Fullscreen.triggerAction("change-document-color-profile-to-srgb", {});
             }
           }];
       }
@@ -553,7 +553,7 @@ export function $$eO1({
     displayText: getI18nString("fullscreen.filename_view.delete-branch"),
     callback: () => {
       z(oB());
-      z(_$$to2({
+      z(showModalHandler({
         type: _$$e2,
         data: {
           fileName: eM.name,

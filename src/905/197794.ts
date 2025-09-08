@@ -1,4 +1,4 @@
-import { bpS, jXp, KO7, jWk } from "../figma_app/763686";
+import { prototypeInternal, FontSourceType, initializeFigmaServices, bindings } from "../figma_app/763686";
 import { jS } from "../figma_app/762706";
 import { createDeferredPromise } from "../905/874553";
 import { getFeatureFlags } from "../905/601108";
@@ -49,9 +49,9 @@ export async function $$v0(e, t) {
       requireInteractionForFocus: !1,
       requestVariableMirroring: !1,
       requestAssetMirroring: !1
-    }), await A(), !bpS) throw Error("PrototypeLib: error during initialization");
+    }), await A(), !prototypeInternal) throw Error("PrototypeLib: error during initialization");
     let e = Q.getLoadTimeTracker();
-    let t = [jXp.LOCAL, jXp.GOOGLE];
+    let t = [FontSourceType.LOCAL, FontSourceType.GOOGLE];
     let i = yF(t).then(t => {
       e && e.handleFontListLoaded((t.indexFontsList?.length || 0) + (t.localFontsList?.length || 0));
       LQ(t);
@@ -61,10 +61,10 @@ export async function $$v0(e, t) {
     console.debug("[prototype lib] Ready for interactions", performance.now());
     e && (e.fullscreenEvents.fullscreenIsReady = Math.round(performance.now()));
     _$$r.loadTimer.report();
-    return KO7();
-  })() : jWk && !isInteractionPathCheck() ? jS({
+    return initializeFigmaServices();
+  })() : bindings && !isInteractionPathCheck() ? jS({
     callMain: () => {
-      jWk.refreshJsCppBindings();
+      bindings.refreshJsCppBindings();
     },
     tsApisForCpp: $$K0,
     registerRefreshCallback: e => {

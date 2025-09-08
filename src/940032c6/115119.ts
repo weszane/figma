@@ -62,7 +62,7 @@ import { n as _$$n10 } from '../905/79930';
 import { o as _$$o1 } from '../905/89370';
 import { c as _$$c3 } from '../905/90943';
 import { useSprigWithSampling } from '../905/99656';
-import { Ju, ZU } from '../905/102752';
+import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { h as _$$h } from '../905/104000';
 import { Z as _$$Z7 } from '../905/104740';
 import { R as _$$R9 } from '../905/105002';
@@ -70,10 +70,10 @@ import { E as _$$E2 } from '../905/105281';
 import { t as _$$t6 } from '../905/117577';
 import { m as _$$m } from '../905/118468';
 import { h as _$$h0 } from '../905/123399';
-import { Et } from '../905/125019';
+import { sha1Hex } from '../905/125019';
 import { J as _$$J5 } from '../905/125993';
 import { A as _$$A3 } from '../905/126947';
-import { X as _$$X5 } from '../905/128376';
+import { setupAutofocusHandler } from '../905/128376';
 import { w as _$$w3, y as _$$y1 } from '../905/129046';
 import { Ib } from '../905/129884';
 import { MM } from '../905/136701';
@@ -82,12 +82,12 @@ import { Q as _$$Q4 } from '../905/149004';
 import { Av } from '../905/149328';
 import { x as _$$x2 } from '../905/149501';
 import { e as _$$e9 } from '../905/149844';
-import { $O, Ce as _$$Ce, to as _$$to, AS, Lo, YK } from '../905/156213';
+import { showModal, hideModal, showModalHandler, hideModalHandler, popModalStack, showModalConditional } from '../905/156213';
 import { pW as _$$pW } from '../905/160095';
 import { ServiceCategories as _$$e2 } from '../905/165054';
 import { R as _$$R6 } from '../905/165069';
 import { Of as _$$Of, ol as _$$ol2, w2 as _$$w6 } from '../905/165465';
-import { b as _$$b6 } from '../905/165519';
+import { UpsellModalType } from '../905/165519';
 import { f as _$$f9 } from '../905/167712';
 import { E as _$$E7 } from '../905/172252';
 import { F as _$$F9 } from '../905/172964';
@@ -96,7 +96,7 @@ import { lk as _$$lk } from '../905/182453';
 import { p as _$$p5 } from '../905/185998';
 import { a3 as _$$a15, ow as _$$ow } from '../905/188421';
 import { d as _$$d10 } from '../905/189168';
-import { l7 as _$$l, zk } from '../905/189185';
+import { permissionScopeHandler as _$$l, zk } from '../905/189185';
 import { My } from '../905/194276';
 import { m as _$$m8 } from '../905/194327';
 import { h as _$$h2 } from '../905/200386';
@@ -106,7 +106,7 @@ import { Q7 } from '../905/203369';
 import { h as _$$h3 } from '../905/207101';
 import { O as _$$O9 } from '../905/208152';
 import { N2 } from '../905/213527';
-import { _W as _$$_W, C8 as _$$C9, gl as _$$gl, hS as _$$hS2, oV as _$$oV } from '../905/216495';
+import { valueOrFallback, toArray, isInvalidValue, isValidValue, MIXED_MARKER } from '../905/216495';
 import { b as _$$b14 } from '../905/217163';
 import { y as _$$y } from '../905/225297';
 import { J as _$$J9 } from '../905/231762';
@@ -121,10 +121,10 @@ import { z as _$$z6 } from '../905/252950';
 import { R as _$$R4 } from '../905/256203';
 import { T as _$$T2 } from '../905/256551';
 import { F as _$$F8 } from '../905/258517';
-import { h as _$$h6, J as _$$J7 } from '../905/270045';
+import { HiddenLabel, Label } from '../905/270045';
 import { m as _$$m3 } from '../905/270214';
 import { O as _$$O3 } from '../905/273186';
-import { S as _$$S6 } from '../905/274480';
+import { Checkbox } from '../905/274480';
 import { U as _$$U3 } from '../905/275247';
 import { Gt as _$$Gt, kl as _$$kl, lJ as _$$lJ2, tN as _$$tN, A5, DQ, zj } from '../905/275640';
 import { b as _$$b } from '../905/275748';
@@ -132,7 +132,7 @@ import { E as _$$E11 } from '../905/277716';
 import { j4 as _$$j9, G5 } from '../905/278499';
 import { Z as _$$Z5 } from '../905/279476';
 import { G as _$$G4 } from '../905/289770';
-import { J as _$$J11 } from '../905/294113';
+import { createSavepoint } from '../905/294113';
 import { a as _$$a8, G as _$$G5 } from '../905/298663';
 import { $ as _$$$ } from '../905/302575';
 import { F as _$$F } from '../905/302958';
@@ -285,7 +285,7 @@ import { qB } from '../905/862321';
 import { h as _$$h7 } from '../905/864281';
 import { Ay as _$$Ay7 } from '../905/865071';
 import { bL as _$$bL, c$ as _$$c$2, RT } from '../905/867927';
-import { AD as _$$AD, dI as _$$dI, fn as _$$fn, sH as _$$sH2, Hr } from '../905/871411';
+import { defaultSessionLocalIDString, sessionLocalIDToString, isValidSessionLocalID, parseSessionLocalID, defaultSessionLocalID } from '../905/871411';
 import { b as _$$b11 } from '../905/874849';
 import { g as _$$g5 } from '../905/880308';
 import { d as _$$d6 } from '../905/884707';
@@ -293,7 +293,7 @@ import { k as _$$k9 } from '../905/888808';
 import { DM } from '../905/889062';
 import { A as _$$A20 } from '../905/891805';
 import { Z as _$$Z2 } from '../905/909123';
-import { W as _$$W4 } from '../905/909715';
+import { ManuallyLabeledCheckbox } from '../905/909715';
 import { XHR, XHRError } from '../905/910117';
 import { _L as _$$_L, bL as _$$bL2 } from '../905/911410';
 import { F as _$$F5 } from '../905/911981';
@@ -329,7 +329,7 @@ import { E as _$$E1 } from '../905/984674';
 import { b as _$$b10 } from '../905/985254';
 import { h1 as _$$h5 } from '../905/986103';
 import { resourceUtils } from '../905/989992';
-import { H4 as _$$H5 } from '../905/992467';
+import { NONE_SYMBOL as _$$H5 } from '../905/992467';
 import { h as _$$h12 } from '../905/994594';
 import { X as _$$X3 } from '../905/999307';
 import { H as _$$H8 } from '../905/999677';
@@ -504,7 +504,7 @@ import { $g, _X as _$$_X, QZ } from '../figma_app/62612';
 import { Q as _$$Q13 } from '../figma_app/67145';
 import { p7 as _$$p8, Ut as _$$Ut } from '../figma_app/72338';
 import { Nw } from '../figma_app/78808';
-import { ut as _$$ut, J2 } from '../figma_app/84367';
+import { getObservableValue, getObservableOrFallback } from '../figma_app/84367';
 import { $5 } from '../figma_app/84580';
 import { o0 as _$$o6, u3 as _$$u6, Kd } from '../figma_app/85384';
 import { bS as _$$bS, u1 as _$$u7, FP, Uv, XE } from '../figma_app/91703';
@@ -637,7 +637,7 @@ import { D as _$$D7 } from '../figma_app/446411';
 import { Q as _$$Q10 } from '../figma_app/447352';
 import { cP as _$$cP, dg as _$$dg, vX as _$$vX } from '../figma_app/451499';
 import { o3 as _$$o3, O0 } from '../figma_app/452252';
-import { w8 as _$$w, Y5 } from '../figma_app/455680';
+import { additionalValue, fullscreenValue } from '../figma_app/455680';
 import { iW as _$$iW, S2 as _$$S3, No, X$, YY } from '../figma_app/465071';
 import { assert, throwTypeError, debug } from '../figma_app/465776';
 import { _ as _$$_2 } from '../figma_app/467504';
@@ -647,7 +647,7 @@ import { NP } from '../figma_app/473317';
 import { D as _$$D2, o as _$$o4 } from '../figma_app/478029';
 import { kG as _$$kG, Xo } from '../figma_app/482495';
 import { P as _$$P } from '../figma_app/483257';
-import { xN as _$$xN, qE } from '../figma_app/492908';
+import { nearlyEqual, clamp } from '../figma_app/492908';
 import { _ as _$$_5 } from '../figma_app/496441';
 import { t as _$$t8 } from '../figma_app/501766';
 import { y as _$$y5 } from '../figma_app/504415';
@@ -732,7 +732,7 @@ import { aY as _$$aY, dZ as _$$dZ, i as _$$i, tJ as _$$tJ, D$, Dh, NT, Uc, Yu } 
 import { s as _$$s9 } from '../figma_app/749682';
 import { wo as _$$wo } from '../figma_app/753501';
 import { c as _$$c5 } from '../figma_app/763535';
-import { $au, BJw, BS2, btW, CMm, Egt, Ez5, FAf, glU, gRN, h3O, hKj, HzA, ibQ, J0O, jXp, K$p, KjJ, kQG, lyf, MoD, Msn, Nfd, NLJ, Oin, Pir, PMF, rcl, rrT, rXF, t8O, TsU, UNF, X3B, xae, xal, xc1, z6l, Z_n } from '../figma_app/763686';
+import { CmsHelpers, AccessibilityAttributes, EqualityType, SideType, GraphicObjectTypes, SceneGraphHelpers, AppStateTsApi, DesignWorkspace, Fullscreen, TextBlockType, Multiplayer, CustomPosition, TrackType, ItemType, ComponentPropType, FontSourceType, ChatMessageType, ScrollBehavior, MatchType, ViewType, ImageExportType, SitesBindingsCpp, PanelType, DesignGraphElements, UIVisibilitySetting, MixedBlockType, SquareShapes, Command, NodePropertyCategory, VariableResolvedDataType, FontHelpers, InsertSourceType, NodeTsApi, PrototypingTsApi, UserInterfaceElements, DataLoadStatus, SelectionPanelType, CodeComponentHelper, VariableDataType } from '../figma_app/763686';
 import { C as _$$C } from '../figma_app/765025';
 import { e6 as _$$e1, hu as _$$hu, kI as _$$kI, TZ as _$$TZ, Ez } from '../figma_app/766708';
 import { K2 } from '../figma_app/777551';
@@ -911,7 +911,7 @@ function E({
   let x = useCallback(() => {
     let e = getSingletonSceneGraph().get(n);
     e && _$$l.user('dakota-set-collection-binding', () => {
-      e.setDakotaSelectorCollection('', TsU.CMS_CONNECT_MODE);
+      e.setDakotaSelectorCollection('', InsertSourceType.CMS_CONNECT_MODE);
     });
   }, [n]);
   let m = useCallback(() => {
@@ -949,7 +949,7 @@ function A({
   let s = (_$$uE(e) ?? []).find(e => e.id === t);
   let o = useCallback(() => {
     let e = s?.fieldType;
-    e && Egt && (Egt.clearSelection(), Egt.addToSelection([n]), Y5.triggerActionEnumInUserEditScope(rcl.UNBIND_SELECTION, {
+    e && SceneGraphHelpers && (SceneGraphHelpers.clearSelection(), SceneGraphHelpers.addToSelection([n]), fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
       fieldSchemaId: t,
       fieldType: e,
       removeBoundData: !1
@@ -1059,8 +1059,8 @@ let K = memo(({
 });
 function H() {
   let e = getSingletonSceneGraph();
-  let t = J2(Ez5.dakotaBindings().nodeIdToSelectorMap);
-  let i = J2(Ez5.dakotaBindings().nodeIdToAliasMap);
+  let t = getObservableOrFallback(AppStateTsApi.dakotaBindings().nodeIdToSelectorMap);
+  let i = getObservableOrFallback(AppStateTsApi.dakotaBindings().nodeIdToAliasMap);
   let n = [];
   let a = [];
   for (let [t, n] of i) {
@@ -1180,17 +1180,17 @@ function ei(e, t) {
     let e = i.get(t.fieldSchemaId);
     if (e === _$$_j.RICH_TEXT) {
       let e = function (e) {
-        if (_$$w === null) throw new Error('variablesJsRuntimeAliasTsBindings is null');
+        if (additionalValue === null) throw new Error('variablesJsRuntimeAliasTsBindings is null');
         let t = {
-          type: Z_n.STRING,
-          resolvedType: rXF.STRING,
+          type: VariableDataType.STRING,
+          resolvedType: VariableResolvedDataType.STRING,
           value: e
         };
         return {
-          type: Z_n.JS_RUNTIME_ALIAS,
-          resolvedType: rXF.STRING,
+          type: VariableDataType.JS_RUNTIME_ALIAS,
+          resolvedType: VariableResolvedDataType.STRING,
           value: {
-            lookupKey: _$$w.storeVariableData(t)
+            lookupKey: additionalValue.storeVariableData(t)
           }
         };
       }(t.value || '');
@@ -1201,8 +1201,8 @@ function ei(e, t) {
           let t = _$$se.parse(JSON.parse(e));
           if (t) {
             return {
-              type: Z_n.LINK,
-              resolvedType: rXF.LINK,
+              type: VariableDataType.LINK,
+              resolvedType: VariableResolvedDataType.LINK,
               value: t
             };
           }
@@ -1220,8 +1220,8 @@ function ei(e, t) {
             let t = _$$Cg.parse(JSON.parse(e));
             if (t) {
               return {
-                type: Z_n.IMAGE,
-                resolvedType: rXF.IMAGE,
+                type: VariableDataType.IMAGE,
+                resolvedType: VariableResolvedDataType.IMAGE,
                 value: (({
                   fileName: e,
                   ...t
@@ -1264,16 +1264,16 @@ function ei(e, t) {
           }
         }
         return {
-          type: Z_n.DATE,
-          resolvedType: rXF.STRING,
+          type: VariableDataType.DATE,
+          resolvedType: VariableResolvedDataType.STRING,
           value: t
         };
       }(t.value ?? '');
       e && (n[t.fieldSchemaId] = e);
     } else {
       n[t.fieldSchemaId] = {
-        type: Z_n.STRING,
-        resolvedType: rXF.STRING,
+        type: VariableDataType.STRING,
+        resolvedType: VariableResolvedDataType.STRING,
         value: t.value || ''
       };
     }
@@ -1352,7 +1352,7 @@ function el({
   return null;
 }
 function ea() {
-  let e = J2(Ez5.dakotaBindings().nodeIdToSelectorMap);
+  let e = getObservableOrFallback(AppStateTsApi.dakotaBindings().nodeIdToSelectorMap);
   return jsx(Fragment, {
     children: Array.from(e).map(([e, t]) => {
       let {
@@ -1360,9 +1360,9 @@ function ea() {
       } = t;
       let n = function (e) {
         let t = e.filterCriteria;
-        if (t.matchType !== kQG.MATCH_ALL || t.filters.length !== 1) return null;
+        if (t.matchType !== MatchType.MATCH_ALL || t.filters.length !== 1) return null;
         let i = t.filters[0];
-        return i.fieldId !== 'itemId' || i.op !== BS2.EQUALS ? null : i.comparisonValue;
+        return i.fieldId !== 'itemId' || i.op !== EqualityType.EQUALS ? null : i.comparisonValue;
       }(t);
       return jsx('div', {
         children: n ? jsx(en, {
@@ -1454,8 +1454,8 @@ function tz() {
   } = LH();
   let c = _$$n3();
   let p = _$$aV();
-  let x = topLevelMode === lyf.LAYOUT;
-  let m = topLevelMode === lyf.HISTORY;
+  let x = topLevelMode === ViewType.LAYOUT;
+  let m = topLevelMode === ViewType.HISTORY;
   let h = _$$z(editModeType);
   let f = useAtomWithSubscription(_$$wg);
   let _ = useAtomWithSubscription(Bu);
@@ -1463,57 +1463,57 @@ function tz() {
   _$$C_(b, p);
   let y = AE();
   let v = _$$uh();
-  let j = _$$ut(_$$aY(), FAf.DESIGN);
+  let j = getObservableValue(_$$aY(), DesignWorkspace.DESIGN);
   let k = Oc();
   let S = _$$iZ();
   if (useEffect(() => {
-    j !== FAf.PROTOTYPE && activeToolId === NLJ.SITES_LINK && (activateTool(NLJ.SELECT), glU.setDefaultEditMode());
+    j !== DesignWorkspace.PROTOTYPE && activeToolId === DesignGraphElements.SITES_LINK && (activateTool(DesignGraphElements.SELECT), Fullscreen.setDefaultEditMode());
   }, [activeToolId, j, activateTool]), useEffect(() => {
-    activeToolId === NLJ.IMAGE_OR_VIDEO ? setActiveSecondaryToolbeltId('ImageOrVideoTool') : setActiveSecondaryToolbeltId(null);
+    activeToolId === DesignGraphElements.IMAGE_OR_VIDEO ? setActiveSecondaryToolbeltId('ImageOrVideoTool') : setActiveSecondaryToolbeltId(null);
   }, [activeToolId, editModeType, setActiveSecondaryToolbeltId]), p || k) {
     return jsx(Fragment, {});
   }
   let C = [{
-    toolId: NLJ.SECTION,
+    toolId: DesignGraphElements.SECTION,
     text: getI18nString('fullscreen_actions.set-tool-section'),
-    shortcutText: v(NLJ.SECTION),
+    shortcutText: v(DesignGraphElements.SECTION),
     icon: jsx(_$$P, {}),
     smallIcon: jsx(_$$c3, {}),
     recordingKey: 'toolSection'
   }];
   C.push({
-    toolId: NLJ.SITES_RESPONSIVE_SET,
+    toolId: DesignGraphElements.SITES_RESPONSIVE_SET,
     text: getI18nString('fullscreen_actions.set-tool-sites-responsive-set'),
-    shortcutText: v(NLJ.SITES_RESPONSIVE_SET),
+    shortcutText: v(DesignGraphElements.SITES_RESPONSIVE_SET),
     icon: jsx(_$$k3, {}),
     smallIcon: jsx(eD, {}),
     recordingKey: 'toolLayoutSet'
   });
   getFeatureFlags().sts_responsive_node_sets && (C.push({
-    toolId: NLJ.SITES_WEBPAGE,
+    toolId: DesignGraphElements.SITES_WEBPAGE,
     text: `${getI18nString('fullscreen_actions.set-tool-sites-webpage')} (RNS)`,
     icon: jsx(_$$k3, {}),
     smallIcon: jsx(eD, {}),
     recordingKey: 'toolWebpage'
   }), C.push({
-    toolId: NLJ.SITES_RESPONSIVE_NODE_SET,
+    toolId: DesignGraphElements.SITES_RESPONSIVE_NODE_SET,
     text: getI18nString('fullscreen_actions.set-tool-sites-responsive-node-set'),
-    shortcutText: v(NLJ.SITES_RESPONSIVE_NODE_SET),
+    shortcutText: v(DesignGraphElements.SITES_RESPONSIVE_NODE_SET),
     icon: jsx(_$$k3, {}),
     smallIcon: jsx(eD, {}),
     recordingKey: 'toolResponsiveNodeSet'
   }));
   C.push({
-    toolId: NLJ.FRAME,
+    toolId: DesignGraphElements.FRAME,
     text: getI18nString('fullscreen_actions.set-tool-frame'),
-    shortcutText: v(NLJ.FRAME),
+    shortcutText: v(DesignGraphElements.FRAME),
     icon: jsx(_$$v2, {}),
     smallIcon: jsx(_$$q, {}),
     recordingKey: 'toolFrame'
   });
   let T = jsx(_$$I, {
     activeToolId,
-    initialToolId: NLJ.SITES_RESPONSIVE_SET,
+    initialToolId: DesignGraphElements.SITES_RESPONSIVE_SET,
     items: C,
     onActivateTool: activateTool,
     onboardingKey: 'frame',
@@ -1522,41 +1522,41 @@ function tz() {
     tooltipText: getI18nString('fullscreen.flyout.region_tools')
   });
   let I = [{
-    toolId: NLJ.SHAPE_RECTANGLE,
+    toolId: DesignGraphElements.SHAPE_RECTANGLE,
     text: getI18nString('fullscreen_actions.set-tool-rectangle'),
-    shortcutText: v(NLJ.SHAPE_RECTANGLE),
+    shortcutText: v(DesignGraphElements.SHAPE_RECTANGLE),
     icon: jsx(_$$n2, {}),
     smallIcon: jsx(_$$y, {}),
     recordingKey: 'toolShapeRectangle'
   }, {
-    toolId: NLJ.SHAPE_LINE,
+    toolId: DesignGraphElements.SHAPE_LINE,
     text: getI18nString('fullscreen_actions.set-tool-line'),
-    shortcutText: v(NLJ.SHAPE_LINE),
+    shortcutText: v(DesignGraphElements.SHAPE_LINE),
     icon: jsx(_$$W2, {}),
     smallIcon: jsx(_$$h, {}),
     recordingKey: 'toolShapeLine'
   }, {
-    toolId: NLJ.SHAPE_ARROW,
+    toolId: DesignGraphElements.SHAPE_ARROW,
     text: getI18nString('fullscreen_actions.set-tool-arrow'),
-    shortcutText: v(NLJ.SHAPE_ARROW),
+    shortcutText: v(DesignGraphElements.SHAPE_ARROW),
     icon: jsx(_$$F2, {}),
     smallIcon: jsx(_$$E2, {}),
     recordingKey: 'toolShapeArrow'
   }, {
-    toolId: NLJ.SHAPE_ELLIPSE,
+    toolId: DesignGraphElements.SHAPE_ELLIPSE,
     text: getI18nString('fullscreen_actions.set-tool-ellipse'),
-    shortcutText: v(NLJ.SHAPE_ELLIPSE),
+    shortcutText: v(DesignGraphElements.SHAPE_ELLIPSE),
     icon: jsx(_$$m, {}),
     smallIcon: jsx(_$$B, {}),
     recordingKey: 'toolShapeEllipse'
   }, {
-    toolId: NLJ.SHAPE_REGULAR_POLYGON,
+    toolId: DesignGraphElements.SHAPE_REGULAR_POLYGON,
     text: getI18nString('fullscreen_actions.set-tool-regular-polygon'),
     icon: jsx(_$$o, {}),
     smallIcon: jsx(_$$h2, {}),
     recordingKey: 'toolShapePolygon'
   }, {
-    toolId: NLJ.SHAPE_STAR,
+    toolId: DesignGraphElements.SHAPE_STAR,
     text: getI18nString('fullscreen_actions.set-tool-star'),
     icon: jsx(_$$e3, {}),
     smallIcon: jsx(_$$Z, {}),
@@ -1564,7 +1564,7 @@ function tz() {
   }];
   let E = jsx(_$$I, {
     activeToolId,
-    initialToolId: NLJ.SHAPE_RECTANGLE,
+    initialToolId: DesignGraphElements.SHAPE_RECTANGLE,
     items: I,
     onActivateTool: activateTool,
     overlayId: 'ShapeAndMediaTools',
@@ -1574,20 +1574,20 @@ function tz() {
   let N = getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan;
   let R = jsx(_$$I, {
     activeToolId,
-    initialToolId: N ? NLJ.CODE_COMPONENT : NLJ.SITES_EMBED,
+    initialToolId: N ? DesignGraphElements.CODE_COMPONENT : DesignGraphElements.SITES_EMBED,
     items: [{
-      toolId: NLJ.SITES_EMBED,
+      toolId: DesignGraphElements.SITES_EMBED,
       text: getI18nString('fullscreen_actions.set-tool-sites-embed'),
       icon: jsx(eQ, {}),
       smallIcon: jsx(e0, {}),
-      shortcutText: v(NLJ.SITES_EMBED),
+      shortcutText: v(DesignGraphElements.SITES_EMBED),
       recordingKey: 'toolSitesEmbed'
     }, {
-      toolId: NLJ.CODE_COMPONENT,
+      toolId: DesignGraphElements.CODE_COMPONENT,
       text: N ? getI18nString('fullscreen_actions.set-tool-code-component') : getI18nString('fullscreen_actions.create-code-layer-from-design-disabled'),
       icon: jsx(_$$C, {}),
       smallIcon: jsx(_$$t2, {}),
-      shortcutText: N ? v(NLJ.CODE_COMPONENT) : void 0,
+      shortcutText: N ? v(DesignGraphElements.CODE_COMPONENT) : void 0,
       recordingKey: 'toolCodeComponent',
       onboardingKey: _$$N4,
       disabled: !N
@@ -1603,16 +1603,16 @@ function tz() {
     recordingKey: Pt(tD, 'penFlyout'),
     tooltipText: getI18nString('fullscreen.flyout.drawing_tools'),
     items: [{
-      toolId: NLJ.VECTOR_PEN,
+      toolId: DesignGraphElements.VECTOR_PEN,
       text: getI18nString('fullscreen_actions.set-tool-pen'),
-      shortcutText: v(NLJ.VECTOR_PEN),
+      shortcutText: v(DesignGraphElements.VECTOR_PEN),
       icon: jsx(_$$N2, {}),
       smallIcon: jsx(_$$k4, {}),
       recordingKey: 'toolPen'
     }, {
-      toolId: NLJ.VECTOR_PENCIL,
+      toolId: DesignGraphElements.VECTOR_PENCIL,
       text: getI18nString('fullscreen_actions.set-tool-pencil'),
-      shortcutText: v(NLJ.VECTOR_PENCIL),
+      shortcutText: v(DesignGraphElements.VECTOR_PENCIL),
       icon: jsx(_$$L, {}),
       smallIcon: jsx(_$$A3, {}),
       recordingKey: 'toolPencil'
@@ -1633,23 +1633,23 @@ function tz() {
               recordingKey: Pt(tD, 'moveFlyout'),
               tooltipText: getI18nString('fullscreen.flyout.move_tools'),
               items: [{
-                toolId: NLJ.SELECT,
+                toolId: DesignGraphElements.SELECT,
                 text: getI18nString('fullscreen_actions.set-tool-default'),
-                shortcutText: v(NLJ.SELECT),
+                shortcutText: v(DesignGraphElements.SELECT),
                 icon: jsx(_$$H, {}),
                 smallIcon: jsx(_$$y2, {}),
                 recordingKey: 'toolDefault'
               }, {
-                toolId: NLJ.HAND,
+                toolId: DesignGraphElements.HAND,
                 text: getI18nString('fullscreen_actions.set-tool-hand'),
-                shortcutText: v(NLJ.HAND),
+                shortcutText: v(DesignGraphElements.HAND),
                 icon: jsx(_$$t3, {}),
                 smallIcon: jsx(_$$O, {}),
                 recordingKey: 'toolHand'
               }, {
-                toolId: NLJ.SCALE,
+                toolId: DesignGraphElements.SCALE,
                 text: getI18nString('fullscreen_actions.set-tool-scale'),
-                shortcutText: v(NLJ.SCALE),
+                shortcutText: v(DesignGraphElements.SCALE),
                 icon: jsx(_$$a2, {}),
                 smallIcon: jsx(_$$l3, {}),
                 recordingKey: 'toolScale'
@@ -1658,45 +1658,45 @@ function tz() {
               onActivateTool: activateTool
             }), h && jsxs(Fragment, {
               children: [jsx(_$$N3, {
-                toolId: NLJ.SELECT,
+                toolId: DesignGraphElements.SELECT,
                 icon: jsx(_$$H, {}),
                 onActivateTool: activateTool,
                 activeToolId,
                 tooltipText: getI18nString('fullscreen_actions.set-tool-default'),
-                tooltipShortcut: v(NLJ.SELECT)
+                tooltipShortcut: v(DesignGraphElements.SELECT)
               }), jsx(_$$N3, {
-                toolId: NLJ.HAND,
+                toolId: DesignGraphElements.HAND,
                 icon: jsx(_$$t3, {}),
                 onActivateTool: activateTool,
                 activeToolId,
                 tooltipText: getI18nString('fullscreen_actions.set-tool-hand'),
-                tooltipShortcut: v(NLJ.HAND)
+                tooltipShortcut: v(DesignGraphElements.HAND)
               })]
             }), x && T, x && R, x && E, x && A, x && jsx(_$$N3, {
-              toolId: NLJ.IMAGE_OR_VIDEO,
+              toolId: DesignGraphElements.IMAGE_OR_VIDEO,
               icon: jsx(_$$T2, {}),
               onActivateTool: activateTool,
               activeToolId,
               tooltipText: getFeatureFlags().sts_video ? getI18nString('fullscreen_actions.place_image_or_video') : getI18nString('fullscreen_actions.place_image'),
-              tooltipShortcut: v(NLJ.IMAGE_OR_VIDEO),
+              tooltipShortcut: v(DesignGraphElements.IMAGE_OR_VIDEO),
               recordingKey: Pt(tD, 'image-tool')
             }), x && jsx(_$$N3, {
-              toolId: NLJ.TYPE,
+              toolId: DesignGraphElements.TYPE,
               icon: jsx(_$$B2, {}),
               onActivateTool: activateTool,
               activeToolId,
               recordingKey: Pt(tD, 'toolType'),
               tooltipText: getI18nString('fullscreen_actions.set-tool-type'),
-              tooltipShortcut: v(NLJ.TYPE),
+              tooltipShortcut: v(DesignGraphElements.TYPE),
               onboardingKey: 'tool-type-onboarding'
             }), !m && jsx(_$$N3, {
-              toolId: NLJ.COMMENTS,
+              toolId: DesignGraphElements.COMMENTS,
               icon: c > 0 ? jsx(_$$X2, {}) : jsx(_$$f3, {}),
-              onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
+              onActivateTool: activeToolId === DesignGraphElements.COMMENTS ? () => activateTool(DesignGraphElements.SELECT) : activateTool,
               activeToolId,
               recordingKey: Pt(tD, 'toolComment'),
               tooltipText: getI18nString('fullscreen_actions.comment'),
-              tooltipShortcut: v(NLJ.COMMENTS)
+              tooltipShortcut: v(DesignGraphElements.COMMENTS)
             }), x && jsx(_$$N3, {
               toolId: _$$y3,
               icon: jsx(_$$_2, {}),
@@ -1854,7 +1854,7 @@ function ij({
     chatMessagesNodeGuid: e?.guid ?? '',
     codeInstanceGuid: t,
     emptyState: jsx(iv, {
-      isDefaultCode: !!e?.sourceCode && e?.sourceCode === z6l.getDefaultCode(),
+      isDefaultCode: !!e?.sourceCode && e?.sourceCode === CodeComponentHelper.getDefaultCode(),
       onClickSuggestion: s
     }),
     enableImageAttachment: d,
@@ -2024,7 +2024,7 @@ function iF({
   let C = getSingletonSceneGraph().get(S);
   let T = useAtomWithSubscription(_$$T_);
   let I = getSingletonSceneGraph().get(T);
-  let E = (useAtomWithSubscription(_$$s3) === Nfd.CODE ? I : C) ?? x;
+  let E = (useAtomWithSubscription(_$$s3) === PanelType.CODE ? I : C) ?? x;
   let N = useMemo(() => {
     let e = x?.codeFilePath || void 0;
     return jsx(_$$S, {
@@ -2111,12 +2111,12 @@ let iM = ({
     Pu(e, i, n, l);
   }, [n, i, e, l]);
   let m = useCallback(() => {
-    Y5.triggerActionEnumInUserEditScope(rcl.RESTORE_DESIGN_IN_PLACE_FROM_CODE, {
+    fullscreenValue.triggerActionEnumInUserEditScope(Command.RESTORE_DESIGN_IN_PLACE_FROM_CODE, {
       targetCodeSelection: !0
     });
   }, []);
   let h = useCallback(() => {
-    Y5.triggerActionEnumInUserEditScope(rcl.COPY_OUT_DESIGN_FROM_CODE, {
+    fullscreenValue.triggerActionEnumInUserEditScope(Command.COPY_OUT_DESIGN_FROM_CODE, {
       targetCodeSelection: !0
     });
   }, []);
@@ -2145,7 +2145,7 @@ function iD({
   let n = useAtomWithSubscription(_$$f4);
   let d = useDispatch();
   useEffect(() => {
-    e && z6l?.convertToMultiFileCodeLayer(e.guid);
+    e && CodeComponentHelper?.convertToMultiFileCodeLayer(e.guid);
   }, [e]);
   let c = useCallback(e => {
     e.source !== 'outside' && (UM(), t?.(), getFeatureFlags().sts_sprig_targeted_feedback && n && Sprig('track', 'sites_code_layer_edit'));
@@ -2160,10 +2160,10 @@ function iD({
     });
     let [n, l] = useAtomValueAndSetter(_$$yq);
     if (n) {
-      let l = qE(n.x, 0, t - n.width);
-      let a = qE(n.y, 0, i - n.height);
-      let s = qE(n.width, 640, t - l);
-      let r = qE(n.height, 480, i - a);
+      let l = clamp(n.x, 0, t - n.width);
+      let a = clamp(n.y, 0, i - n.height);
+      let s = clamp(n.width, 640, t - l);
+      let r = clamp(n.height, 480, i - a);
       e = {
         x: l,
         y: a,
@@ -2171,8 +2171,8 @@ function iD({
         height: r
       };
     } else {
-      let n = qE(t * iB.targetPercentWidth, iB.minWidth, iB.maxWidth - 2 * iB.margin);
-      let l = qE(Math.min(n / iB.aspectRatio, i - 2 * iB.margin), iB.minHeight, iB.maxHeight);
+      let n = clamp(t * iB.targetPercentWidth, iB.minWidth, iB.maxWidth - 2 * iB.margin);
+      let l = clamp(Math.min(n / iB.aspectRatio, i - 2 * iB.margin), iB.minHeight, iB.maxHeight);
       e = {
         x: (t - n) / 2,
         y: (i - l) / 2,
@@ -2320,7 +2320,7 @@ let iB = {
 function ni(e, t, i) {
   let n = _$$qE(e, t?.guid || '');
   let l = Pd(e, t?.guid || '', i.id);
-  return i.type !== K$p.USER_MESSAGE ? {
+  return i.type !== ChatMessageType.USER_MESSAGE ? {
     persistentEntityId: n,
     clientLifecycleId: l
   } : {
@@ -2838,7 +2838,7 @@ function nq() {
     return e ? () => {
       i(_$$f6.FILE);
     } : () => {
-      t(Nfd.FILE);
+      t(PanelType.FILE);
     };
   }();
   return jsx(_$$K2, {
@@ -3160,7 +3160,7 @@ function as({
   let m = `label-${useId()}`;
   return d ? jsxs('div', {
     className: _$$s4.h48.flex.flexRow.itemsCenter.$,
-    children: [jsx(_$$W4, {
+    children: [jsx(ManuallyLabeledCheckbox, {
       'htmlAttributes': {
         'data-testid': `${d}-checkbox`
       },
@@ -3172,7 +3172,7 @@ function as({
     }), jsx('div', {
       className: _$$s4.ml4.$,
       children: n ? jsx(_$$I2, {}) : jsx(_$$g3, {})
-    }), jsx(_$$J7, {
+    }), jsx(Label, {
       htmlAttributes: {
         id: m
       },
@@ -3309,7 +3309,7 @@ function am({
         description,
         id
       } = e.siteBundle?.fileVersion ?? {};
-      id && x(_$$to({
+      id && x(showModalHandler({
         type: _$$y5,
         data: {
           label: label ?? void 0,
@@ -3629,7 +3629,7 @@ function aR() {
   });
 }
 function aA() {
-  return Oc() && (t8O?.getLocalTextStyleFontInfo() || []).filter(e => e.source !== jXp.GOOGLE).length !== 0 ? jsxs('div', {
+  return Oc() && (FontHelpers?.getLocalTextStyleFontInfo() || []).filter(e => e.source !== FontSourceType.GOOGLE).length !== 0 ? jsxs('div', {
     className: 'x78zum5 x1q0g3np x1jnr06f',
     children: [jsx(_$$B3, {
       style: {
@@ -4030,11 +4030,11 @@ function st() {
   let [e] = useAtomValueAndSetter(lZ);
   let t = _$$ol();
   let i = _$$h7.useTrackingContext({
-    trigger: _$$b6.FIGMAKE_PUBLISH_SITE
+    trigger: UpsellModalType.FIGMAKE_PUBLISH_SITE
   });
   let n = _$$S3();
   let a = YY(n);
-  let s = _$$y6(t?.id || '', _$$b6.FIGMAKE_PUBLISH_SITE);
+  let s = _$$y6(t?.id || '', UpsellModalType.FIGMAKE_PUBLISH_SITE);
   return e || !a.data ? null : jsx('div', {
     children: renderI18nText('sites.toolbar.publish_modal.allow_others_to_remix_on_community.description', {
       upgradePlanLink: jsx(Us, {
@@ -4062,7 +4062,7 @@ let si = {
     $$css: !0
   }
 };
-let sr = Ju(({
+let sr = registerModal(({
   figFileKey: e,
   entryPoint: t
 }) => {
@@ -4346,7 +4346,7 @@ function sp({
       orgId: R?.id,
       entryPoint: _$$k8.SITES_PUBLISH_MODAL,
       editorType: _$$_Y.FIGMAKE
-    }), k(AS()), k(_$$to({
+    }), k(hideModalHandler()), k(showModalHandler({
       type: sr,
       data: {
         figFileKey: e,
@@ -4404,7 +4404,7 @@ function sp({
             children: [j && !j.hasCustomDomain && jsx(IK, {
               'variant': 'secondary',
               'onClick': () => {
-                I ? k(_$$to({
+                I ? k(showModalHandler({
                   type: DV,
                   data: {
                     team: E,
@@ -4412,7 +4412,7 @@ function sp({
                     editorType: _$$_Y.SITES,
                     currentPlan: _$$F4.Plan.STARTER,
                     upsellPlan: _$$F4.Plan.PRO,
-                    upsellSource: _$$b6.SITES_PUBLISH_MODAL
+                    upsellSource: UpsellModalType.SITES_PUBLISH_MODAL
                   }
                 })) : (n(), t());
               },
@@ -4504,7 +4504,7 @@ function sm({
       throwTypeError(e);
   }
 }
-let sh = Ju(e => {
+let sh = registerModal(e => {
   let t = function (e) {
     let {
       fileKey,
@@ -4557,7 +4557,7 @@ let sh = Ju(e => {
     ...t,
     ...e
   }) : null;
-}, MM, ZU.YES);
+}, MM, ModalSupportsBackground.YES);
 let sy = e => e.length === 1 && e[0] === QK.FILE_DENY_PUBLISH_SITE_LACKS_LICENSE ? 'must-upgrade' : e.includes(QK.FILE_DENY_PUBLISH_SITE_ORG_DISABLED_PUBLISHING) ? 'disabled-for-org' : e.includes(QK.FILE_DENY_EDIT_SITE_FILE_STUDENT) || e.includes(QK.FILE_DENY_EDIT_FIGMAKE_FILE_STUDENT) ? 'student-team' : e.includes(QK.FILE_DENY_PUBLISH_SITE_USER_RESTRICTED) ? 'disabled-for-user' : void 0;
 function sv(e) {
   let t = e.key;
@@ -4654,7 +4654,7 @@ function sv(e) {
   if (j) {
     return {
       handlePublish: () => {
-        i(_$$to({
+        i(showModalHandler({
           type: DV,
           data: {
             team: e.team,
@@ -4662,7 +4662,7 @@ function sv(e) {
             currentPlan: _$$F4.Plan.STARTER,
             upsellPlan: _$$F4.Plan.PRO,
             editorType: o ? _$$_Y.SITES : _$$_Y.FIGMAKE,
-            upsellSource: r ? _$$b6.FIGMAKE_PUBLISH_SITE : _$$b6.UNSET
+            upsellSource: r ? UpsellModalType.FIGMAKE_PUBLISH_SITE : UpsellModalType.UNSET
           }
         }));
       }
@@ -4695,7 +4695,7 @@ function sv(e) {
   }
   return {
     handlePublish: () => {
-      i(YK({
+      i(showModalConditional({
         type: sh,
         data: {
           fileKey: t
@@ -4916,7 +4916,7 @@ function sJ({
     duplicateFile
   } = _$$tz();
   let i = sY();
-  let n = sq(rcl.PAGE_DUPLICATE, _$$ty.FIGMA_REV_LOGGED_OUT_HEADER);
+  let n = sq(Command.PAGE_DUPLICATE, _$$ty.FIGMA_REV_LOGGED_OUT_HEADER);
   return i ? jsx(_$$WW, {
     variant: 'secondary',
     onClick: e ? n : duplicateFile,
@@ -4964,7 +4964,7 @@ function sQ() {
 function s0() {
   let e = Gu();
   let t = useCallback(() => {
-    Y5.triggerActionEnumInUserEditScope(rcl.COPY_MAKE_FOR_DESIGN);
+    fullscreenValue.triggerActionEnumInUserEditScope(Command.COPY_MAKE_FOR_DESIGN);
   }, []);
   if (!getFeatureFlags().bake_canvas) return null;
   let i = getI18nString('figmake.copy-make-for-design');
@@ -6034,7 +6034,7 @@ let rX = {
     $$css: !0
   }
 };
-let rQ = Ju(({
+let rQ = registerModal(({
   fontFileIds: e,
   fontName: t,
   open: i,
@@ -6042,7 +6042,7 @@ let rQ = Ju(({
 }) => {
   let r = useDispatch();
   let [o, d] = useState(!1);
-  let c = _$$X5();
+  let c = setupAutofocusHandler();
   let x = async () => {
     d(!0);
     let t = 0;
@@ -6138,7 +6138,7 @@ function r5({
   let i = useDispatch();
   return jsx(_$$K2, {
     'aria-label': getI18nString('sites.metadata.fonts.delete_font'),
-    'onClick': () => i(_$$to({
+    'onClick': () => i(showModalHandler({
       type: rQ,
       data: {
         fontFileIds: e,
@@ -6513,7 +6513,7 @@ let o_ = atom(e => e(of), (e, t) => {
   try {
     let i = function () {
       try {
-        let e = t8O?.aggregateCustomFontsInSite()?.fonts;
+        let e = FontHelpers?.aggregateCustomFontsInSite()?.fonts;
         if (!e) return null;
         let t = {};
         let i = {
@@ -6616,7 +6616,7 @@ function ob() {
       d.triggerFileInput();
     }, [d]);
     let f = useCallback(e => {
-      c !== _$$p6.FONTS || m !== Nfd.SETTINGS ? (h(Nfd.SETTINGS), x(_$$p6.FONTS)) : (d.setUploadTarget(e), d.triggerFileInput());
+      c !== _$$p6.FONTS || m !== PanelType.SETTINGS ? (h(PanelType.SETTINGS), x(_$$p6.FONTS)) : (d.setUploadTarget(e), d.triggerFileInput());
     }, [d, c, x, h, m]);
     let _ = useCallback((e, t, i) => {
       let n = {
@@ -7195,7 +7195,7 @@ let oV = () => {
   let i = Math.floor(1e8 * Math.random());
   return `${e}-${t}-${i.toString().padStart(8, '0')}`;
 };
-let oG = Ju(e => {
+let oG = registerModal(e => {
   let t = _$$hS({
     ...e,
     onClose: () => {
@@ -7475,13 +7475,13 @@ function oY({
         f(!1);
         return;
       }
-      n(_$$to({
+      n(showModalHandler({
         type: oG,
         data: {
           onSubmit: () => {
             i(!0);
             t();
-            n(AS());
+            n(hideModalHandler());
             let e = _$$z8.updateSubdomain({
               fileKey: d,
               new_base_domain: `${c}${o}`
@@ -7829,7 +7829,7 @@ function dt({
           children: getI18nString('sites.metadata.domains.subdomain_redirect_description')
         })]
       }), jsx(_$$d5, {
-        label: jsx(_$$h6, {
+        label: jsx(HiddenLabel, {
           children: getI18nString('sites.metadata.domains.add_subdomain_redirect')
         }),
         checked: n,
@@ -7846,7 +7846,7 @@ function dt({
           e && Object.values(de).includes(e) ? i(e) : i(null);
         },
         children: [jsx(_$$l7, {
-          label: jsx(_$$h6, {
+          label: jsx(HiddenLabel, {
             children: getI18nString('sites.metadata.domains.redirect_direction')
           }),
           size: 'lg'
@@ -8019,7 +8019,7 @@ function dl({
       'variant': 'secondary',
       'disabled': _,
       'onClick': () => {
-        p.unwrapOr(!1) && g ? r(_$$to({
+        p.unwrapOr(!1) && g ? r(showModalHandler({
           type: DV,
           data: {
             team: x,
@@ -8027,7 +8027,7 @@ function dl({
             editorType: m,
             currentPlan: _$$F4.Plan.STARTER,
             upsellPlan: _$$F4.Plan.PRO,
-            upsellSource: _$$b6.SITES_DOMAIN_SETTINGS
+            upsellSource: UpsellModalType.SITES_DOMAIN_SETTINGS
           }
         })) : d(!0);
       },
@@ -8045,7 +8045,7 @@ function dl({
     })
   });
 }
-let ds = Ju(e => {
+let ds = registerModal(e => {
   let {
     fileKey
   } = e;
@@ -8075,7 +8075,7 @@ let ds = Ju(e => {
         children: jsxs(_$$jk, {
           children: [jsx($n, {
             variant: 'secondary',
-            onClick: () => n(AS()),
+            onClick: () => n(hideModalHandler()),
             children: renderI18nText('general.cancel')
           }), jsx($n, {
             onClick: () => {
@@ -8096,7 +8096,7 @@ let ds = Ju(e => {
               }).catch(e => {
                 e instanceof XHRError ? n(_$$s5.error(e.data.message)) : n(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
               }).$$finally(() => {
-                n(AS());
+                n(hideModalHandler());
               });
             },
             children: h
@@ -8186,7 +8186,7 @@ function dp({
   let t = useDispatch();
   return jsx(_$$c$4, {
     onClick: () => {
-      t(_$$to({
+      t(showModalHandler({
         type: ds,
         data: {
           fileKey: e
@@ -8959,7 +8959,7 @@ function dz({
       className: 'x78zum5 x1qughib x1cy8zhl x1i71x30',
       children: [jsxs('div', {
         className: 'x78zum5 xdt5ytf xg2d0mh x98rzlu',
-        children: [jsx(_$$J7, {
+        children: [jsx(Label, {
           htmlFor: 'password-protection',
           children: jsx('strong', {
             ..._$$xk(dB.labelText),
@@ -8982,7 +8982,7 @@ function dz({
         className: 'x78zum5 xdt5ytf xg2d0mh x98rzlu',
         children: [g && jsxs('div', {
           className: 'x78zum5 x1qughib x6s0dn4 x1ah0xmj',
-          children: [jsx(_$$J7, {
+          children: [jsx(Label, {
             htmlFor: 'password-input',
             children: jsx('span', {
               ..._$$xk(dB.labelText),
@@ -9342,10 +9342,10 @@ function d8({
     recordingKey: g('imageSelector'),
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf xg2d0mh',
-      children: [x ? jsx(_$$h6, {
+      children: [x ? jsx(HiddenLabel, {
         htmlFor: v,
         children: c
-      }) : jsx(_$$J7, {
+      }) : jsx(Label, {
         htmlFor: v,
         children: c
       }), jsx(d6, {
@@ -9486,7 +9486,7 @@ function d9(e) {
     };
   });
 }
-let ct = Ju(({
+let ct = registerModal(({
   onClose: e
 }) => {
   let t = Oc();
@@ -9512,7 +9512,7 @@ let ct = Ju(({
     onClose: e,
     onUnpublish: a
   });
-}, 'SITES_UNPUBLISH_MODAL', ZU.YES);
+}, 'SITES_UNPUBLISH_MODAL', ModalSupportsBackground.YES);
 function ci({
   fileKey: e,
   onClose: t,
@@ -9615,7 +9615,7 @@ function ca({
         let i = e.currentTarget.value;
         i ? o(i) : o(null);
         _$$l.user('set-responsive-set-settings', () => {
-          glU?.setResponsiveSetSettings({
+          Fullscreen?.setResponsiveSetSettings({
             description: i?.trim() ?? void 0
           }, [t]);
         });
@@ -9651,7 +9651,7 @@ function cr({
         let i = e.currentTarget.value;
         i ? o(i) : o(null);
         _$$l.user('set-responsive-set-settings', () => {
-          glU?.setResponsiveSetSettings({
+          Fullscreen?.setResponsiveSetSettings({
             lang: i?.trim() ?? void 0
           }, [t]);
         });
@@ -9679,8 +9679,8 @@ function co({
   let c = useCallback(() => {
     if (t && codeLibraryInstance && codeLibraryInstance.type === 'CODE_LIBRARY' && codeLibraryInstance.chatMessages) {
       let e = {
-        id: glU?.generateUniqueID() ?? '',
-        type: K$p.SYSTEM_MESSAGE,
+        id: Fullscreen?.generateUniqueID() ?? '',
+        type: ChatMessageType.SYSTEM_MESSAGE,
         userId: t.id,
         textContent: JSON.stringify({
           type: 'deleted_chat_history',
@@ -9693,7 +9693,7 @@ function co({
         toolResults: [],
         sentAt64: Date.now().toString()
       };
-      let i = codeLibraryInstance.chatMessages.filter(e => e.type === K$p.SYSTEM_MESSAGE && U1(e.textContent || '')?.type === 'deleted_chat_history');
+      let i = codeLibraryInstance.chatMessages.filter(e => e.type === ChatMessageType.SYSTEM_MESSAGE && U1(e.textContent || '')?.type === 'deleted_chat_history');
       if (!(i.length < codeLibraryInstance.chatMessages.length)) return;
       let l = codeLibraryInstance.chatMessages.length - i.length;
       let a = i.length;
@@ -9773,7 +9773,7 @@ function cc({
         let i = e.currentTarget.value;
         i ? o(i) : o(null);
         _$$l.user('set-responsive-set-settings', () => {
-          glU?.setResponsiveSetSettings({
+          Fullscreen?.setResponsiveSetSettings({
             googleAnalyticsID: i?.trim() ?? void 0
           }, [t]);
         });
@@ -9804,9 +9804,9 @@ function cu({
   let h = useMemo(() => x ? getI18nString('figmake.metadata.controls.no_indexing_site.label') : i ? getI18nString('sites.metadata.controls.no_indexing_site.label') : getI18nString('sites.metadata.controls.no_indexing_page.label'), [i, x]);
   return jsx('div', {
     className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
-    children: jsx(_$$S6, {
+    children: jsx(Checkbox, {
       disabled: o,
-      label: jsxs(_$$J7, {
+      label: jsxs(Label, {
         className: 'x78zum5',
         children: [h, o && jsx('span', {
           'data-tooltip': getI18nString('sites.metadata.controls.no_indexing_page.disabled_hover_tooltip'),
@@ -9818,7 +9818,7 @@ function cu({
       onChange: e => {
         c(e);
         _$$l.user('set-responsive-set-settings', () => {
-          glU?.setResponsiveSetSettings({
+          Fullscreen?.setResponsiveSetSettings({
             blockSearchIndexing: e ?? void 0
           }, m);
         });
@@ -9838,15 +9838,15 @@ function cp({
   let o = OG('bypass_link');
   return jsx('div', {
     className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
-    children: jsx(_$$S6, {
-      label: jsx(_$$J7, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         className: 'x78zum5',
         children: getI18nString('sites.metadata.controls.bypass_link_site.label')
       }),
       onChange: e => {
         s(e);
         _$$l.user('set-responsive-set-settings', () => {
-          glU?.setResponsiveSetSettings({
+          Fullscreen?.setResponsiveSetSettings({
             addBypassLinks: e ?? void 0
           }, [t]);
         });
@@ -9867,8 +9867,8 @@ function cx({
   let o = OG('ignore_reduced_motion');
   return jsx('div', {
     className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
-    children: jsx(_$$S6, {
-      label: jsx(_$$J7, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         className: 'x78zum5',
         children: getI18nString('sites.metadata.controls.reduced_motion.label')
       }),
@@ -9876,7 +9876,7 @@ function cx({
         let i = !e;
         s(i);
         _$$l.user('set-responsive-set-settings', () => {
-          glU?.setResponsiveSetSettings({
+          Fullscreen?.setResponsiveSetSettings({
             ignoreReducedMotion: i ?? void 0
           }, [t]);
         });
@@ -9909,7 +9909,7 @@ function cm({
   });
   let c = t => {
     _$$l.user('set-responsive-set-settings', () => {
-      glU?.setResponsiveSetSettings({
+      Fullscreen?.setResponsiveSetSettings({
         faviconID: t ?? void 0
       }, [e]);
     });
@@ -9944,8 +9944,8 @@ function cm({
     children: jsx(d8, {
       addImage: () => {
         _$$l.user('create-favicon-frame', () => {
-          let e = glU?.createFrame('Favicon', 48, 48, btW.LEFT, !0);
-          e && _$$fn(_$$sH2(e)) && (c(e), cg(), t?.());
+          let e = Fullscreen?.createFrame('Favicon', 48, 48, SideType.LEFT, !0);
+          e && isValidSessionLocalID(parseSessionLocalID(e)) && (c(e), cg(), t?.());
         });
       },
       base64String: p,
@@ -9984,7 +9984,7 @@ function ch({
   });
   let c = t => {
     _$$l.user('set-responsive-set-settings', () => {
-      glU?.setResponsiveSetSettings({
+      Fullscreen?.setResponsiveSetSettings({
         socialImageID: t ?? void 0
       }, [e]);
     });
@@ -10018,8 +10018,8 @@ function ch({
     children: jsx(d8, {
       addImage: () => {
         _$$l.user('create-social-image-frame', () => {
-          let e = glU?.createFrame('Social image', 1200, 630, btW.LEFT, !0);
-          e && _$$fn(_$$sH2(e)) && (c(e), cg(), t?.());
+          let e = Fullscreen?.createFrame('Social image', 1200, 630, SideType.LEFT, !0);
+          e && isValidSessionLocalID(parseSessionLocalID(e)) && (c(e), cg(), t?.());
         });
       },
       base64String: p,
@@ -10038,13 +10038,13 @@ function ch({
   });
 }
 function cg() {
-  Y5.updateAppModel({
+  fullscreenValue.updateAppModel({
     currentSelectedProperty: {
-      type: rrT.FILL,
+      type: NodePropertyCategory.FILL,
       indices: [0]
     }
   });
-  glU && glU.uploadPaintImage('NORMAL', 1);
+  Fullscreen && Fullscreen.uploadPaintImage('NORMAL', 1);
 }
 function cf({
   page: e
@@ -10060,7 +10060,7 @@ function cf({
   let f = OG('custom_code_body_end');
   let _ = t => {
     _$$l.user('set-responsive-set-settings', () => {
-      glU?.setResponsiveSetSettings(t, [e]);
+      Fullscreen?.setResponsiveSetSettings(t, [e]);
     });
   };
   return jsxs(Fragment, {
@@ -10158,7 +10158,7 @@ function cb({
     }), jsx('div', {
       className: _$$s4.flex.gap4.$,
       children: o ? jsx($n, {
-        onClick: () => a(YK({
+        onClick: () => a(showModalConditional({
           type: ct
         })),
         variant: 'destructiveSecondary',
@@ -10296,7 +10296,7 @@ function cj({
       recordingKey: e
     })]
   });
-  return t && _$$fn(_$$sH2(t)) ? jsxs('div', {
+  return t && isValidSessionLocalID(parseSessionLocalID(t)) ? jsxs('div', {
     className: v()(_$$s4.flex.flexColumn.gap24.$, {
       [Qx]: n
     }),
@@ -10347,7 +10347,7 @@ function ck({
       closeModal: i
     }, `social-image-${t}`)]
   });
-  return t && _$$fn(_$$sH2(t)) ? jsxs('div', {
+  return t && isValidSessionLocalID(parseSessionLocalID(t)) ? jsxs('div', {
     className: v()(_$$s4.flex.flexColumn.gap24.$, {
       [Qx]: n
     }),
@@ -10579,7 +10579,7 @@ async function cO(e, t, i) {
   }
   let s = getSingletonSceneGraph();
   let o = _$$is(s.getInternalCanvas(), e => e && e.isCodeFile);
-  await Jr().loadAllImagesUnder(o.map(e => e.id), MoD.ALL, 'sites.assetGeneration');
+  await Jr().loadAllImagesUnder(o.map(e => e.id), ImageExportType.ALL, 'sites.assetGeneration');
   let d = {};
   o.forEach(e => {
     e.imageImports.forEach(e => {
@@ -10780,7 +10780,7 @@ function c5() {
         let i = t.getBoundingClientRect();
         let l = new Mi(i.left, i.bottom + 4);
         r(!0);
-        c(_$$to({
+        c(showModalHandler({
           type: _$$u5,
           data: {
             defaultPosition: l,
@@ -11813,11 +11813,11 @@ function uX() {
       if (!t) return null;
       for (let e = t.length - 1; e >= 0; e--) {
         let i = t[e];
-        if (i?.type === K$p.USER_MESSAGE) return i;
+        if (i?.type === ChatMessageType.USER_MESSAGE) return i;
       }
       return null;
     }(e);
-    let d = n?.filter(e => e.type === K$p.USER_MESSAGE).length;
+    let d = n?.filter(e => e.type === ChatMessageType.USER_MESSAGE).length;
     return {
       onBuild: useCallback(() => {
         if (i !== 'assistant' || void 0 === d || !l || !s || !e?.guid) return;
@@ -12067,9 +12067,9 @@ function uY({
     exchange
   } = $W(codeLibraryInstance?.guid);
   let p = _$$rh(e);
-  let x = c?.filter(e => e.type === K$p.USER_MESSAGE && !H5(e.textContent).hidden);
+  let x = c?.filter(e => e.type === ChatMessageType.USER_MESSAGE && !H5(e.textContent).hidden);
   let m = c?.[c.length - 1];
-  let h = m?.type === K$p.ASSISTANT_MESSAGE && m.toolCalls.some(e => AD.includes(e.toolName));
+  let h = m?.type === ChatMessageType.ASSISTANT_MESSAGE && m.toolCalls.some(e => AD.includes(e.toolName));
   let g = x?.length === 1 && !exchange?.messages.length && !h;
   let f = useMemo(() => jsx(_$$m2, {
     chatNodeId: t,
@@ -12207,7 +12207,7 @@ async function u5({
     fileKey: e,
     selectedGuids: i
   });
-  glU?.applyNodesFromBuffer(n, e, i, !1);
+  Fullscreen?.applyNodesFromBuffer(n, e, i, !1);
 }
 function u2(e) {
   let t = getSingletonSceneGraph();
@@ -12216,7 +12216,7 @@ function u2(e) {
   let n = i.defaultResponsiveSetId;
   debug(!!n, 'existingDefaultResponsiveSetId invalid.');
   i.setSelectionToSingleNode(e);
-  Y5.triggerActionEnum(rcl.SET_AS_DEFAULT_RESPONSIVE_SET);
+  fullscreenValue.triggerActionEnum(Command.SET_AS_DEFAULT_RESPONSIVE_SET);
   let l = t.get(n);
   debug(!!l, 'existingDefaultResponsiveSet not found.');
   l.removeSelfAndChildren();
@@ -12404,7 +12404,7 @@ function pk(e, t) {
   i.$$delete(t);
   return i;
 }
-let pw = Ju(e => {
+let pw = registerModal(e => {
   let t = _$$hS(e);
   let i = (() => {
     switch (e.type) {
@@ -12529,7 +12529,7 @@ async function xe(e, t, i) {
 let xt = e => e.arrayBuffer();
 async function xi(e, t) {
   let i = new Uint8Array(await xt(t));
-  let n = Et(i);
+  let n = sha1Hex(i);
   await _$$x4({
     collection: e,
     contentType: t.type,
@@ -12677,7 +12677,7 @@ function xa({
         },
         children: [jsx(_$$l7, {
           width: 'fill',
-          label: jsx(_$$h6, {
+          label: jsx(HiddenLabel, {
             children: getI18nString('dakota.rich_text_editor.toolbar.text_style.select_label')
           })
         }), jsxs(_$$mc2, {
@@ -13092,8 +13092,8 @@ function xj(e) {
   let n = e.api.getSelectedRows();
   let a = !t && n.length > 0 && n.length !== i;
   let s = !t && n.length > 0 && n.length === i;
-  return jsx(_$$S6, {
-    label: jsx(_$$h6, {
+  return jsx(Checkbox, {
+    label: jsx(HiddenLabel, {
       children: getI18nString('dakota.table_view.select_all')
     }),
     checked: s,
@@ -13128,8 +13128,8 @@ function xk(e) {
         className: 'dakota_table--dragger--w0UIu',
         ref: t,
         children: jsx(_$$B5, {})
-      }), jsx(_$$S6, {
-        label: jsx(_$$h6, {
+      }), jsx(Checkbox, {
+        label: jsx(HiddenLabel, {
           children: getI18nString('dakota.table_view.select_row')
         }),
         checked: i,
@@ -13276,7 +13276,7 @@ let xE = memo(({
             clientX,
             clientY,
             deleteItemOrItems: () => {
-              l($O({
+              l(showModal({
                 type: pw.type,
                 data: {
                   type: e.length === 1 ? pS.ITEM : pS.ITEMS,
@@ -13437,7 +13437,7 @@ let xE = memo(({
       });
       return;
     }
-    Ez5.cmsState().bindingFieldSchema.set({
+    AppStateTsApi.cmsState().bindingFieldSchema.set({
       id: n.id,
       type: colDef.headerComponentParams.fieldType
     });
@@ -13681,7 +13681,7 @@ function x$({
 }) {
   return jsxs('fieldset', {
     className: 'x78zum5 xdt5ytf x1nfngrj',
-    children: [jsx(_$$J7, {
+    children: [jsx(Label, {
       htmlFor: t,
       className: 'cms_fieldset--label--lGgLU',
       children: i
@@ -14872,7 +14872,7 @@ function mj({
   focusedFieldSchemaId: i
 }) {
   let n;
-  n = useAtomWithSubscription(_$$s3) === Nfd.DAKOTA ? 'connect_mode' : 'properties_panel';
+  n = useAtomWithSubscription(_$$s3) === PanelType.DAKOTA ? 'connect_mode' : 'properties_panel';
   return jsx(_$$fu, {
     name: 'CMS View',
     properties: {
@@ -14993,7 +14993,7 @@ function mI({
   }), null) : jsxs(_$$wV, {
     className: 'dakota_table_item_panel--itemPanel--MvyPa',
     onResize: t => {
-      i(t = qE(t, mC, e));
+      i(t = clamp(t, mC, e));
     },
     defaultSize: 480,
     size: t,
@@ -15391,7 +15391,7 @@ function mV({
           dateType: n
         });
       },
-      label: jsx(_$$h6, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText('dakota.collection_field_editor.property.include_time')
       })
     })
@@ -15423,7 +15423,7 @@ function mG({
     })]
   });
 }
-let mW = Ju(({
+let mW = registerModal(({
   open: e,
   onClose: t,
   collectionId: i,
@@ -15435,7 +15435,7 @@ let mW = Ju(({
     onClose: ({
       source: e
     }) => {
-      e === 'button' && b(_$$Ce());
+      e === 'button' && b(hideModal());
     }
   });
   let [c, p] = useAtomValueAndSetter(_$$lT);
@@ -15509,7 +15509,7 @@ let mW = Ju(({
       _$$sD('fileKey not null invariant violated in CollectionFieldEditorModal');
     }
     p(!1);
-    b(_$$Ce());
+    b(hideModal());
   }, [collectionFields, i, _, b, n, p, y, submitFieldChanges]);
   let B = collectionFields.find(e => e.id === O);
   return jsx(_$$fu, {
@@ -15585,8 +15585,8 @@ let mW = Ju(({
       })
     })
   });
-}, 'CollectionFieldEditorModal', ZU.YES);
-let mY = Ju(e => {
+}, 'CollectionFieldEditorModal', ModalSupportsBackground.YES);
+let mY = registerModal(e => {
   let t = useDispatch();
   let i = _$$hS({
     open: e.open,
@@ -15596,7 +15596,7 @@ let mY = Ju(e => {
       t === 'button' && e.onClose();
     }
   });
-  let n = _$$X5();
+  let n = setupAutofocusHandler();
   let [r, o] = useState(e.placeholder);
   return jsx(_$$fu, {
     name: 'CMS New Collection Modal',
@@ -15605,7 +15605,7 @@ let mY = Ju(e => {
       width: 'md',
       children: jsxs(Rq, {
         onSubmit: () => {
-          t(_$$to({
+          t(showModalHandler({
             type: mW,
             data: {
               collectionName: r,
@@ -15618,7 +15618,7 @@ let mY = Ju(e => {
             children: renderI18nText('dakota.new_collection_modal.new_collection')
           })
         }), jsx(_$$nB, {
-          children: jsxs(_$$J7, {
+          children: jsxs(Label, {
             htmlFor: 'collectionName',
             children: [renderI18nText('dakota.new_collection_modal.name'), jsx('br', {}), jsx(_$$jT, {
               value: r,
@@ -15639,13 +15639,13 @@ let mY = Ju(e => {
       })
     })
   });
-}, 'CMSNewCollectionModal', ZU.YES);
+}, 'CMSNewCollectionModal', ModalSupportsBackground.YES);
 function mJ() {
   let e = useDispatch();
   let t = _$$tS();
   let i = _$$c$(t);
   let n = (i.data?.length ?? 0) + 1;
-  return () => e(_$$to({
+  return () => e(showModalHandler({
     type: mY,
     data: {
       placeholder: `Collection ${n}`,
@@ -15830,7 +15830,7 @@ function ht({
     ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.flex1, _$$A16.gap24, _$$A16.p24),
     children: [jsxs('div', {
       ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap4),
-      children: [jsx(_$$J7, {
+      children: [jsx(Label, {
         htmlFor: 'collectionName',
         children: renderI18nText('dakota.new_collection_modal.name')
       }), jsx(_$$jT, {
@@ -15841,15 +15841,15 @@ function ht({
       })]
     }), jsxs('div', {
       ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap8),
-      children: [jsx(_$$J7, {
+      children: [jsx(Label, {
         htmlFor: 'collectionFields',
         children: renderI18nText('dakota.import_csv_modal.labels.fields')
       }), jsxs('div', {
         className: 'xrvj5dj xc26acl x6s0dn4 xl56j7k x18573h1 xkh65bq',
         children: [jsx('span', {
-          children: jsx(_$$S6, {
+          children: jsx(Checkbox, {
             checked: !0,
-            label: jsx(_$$h6, {
+            label: jsx(HiddenLabel, {
               children: renderI18nText('dakota.import_csv_modal.labels.included')
             })
           })
@@ -15872,8 +15872,8 @@ function hi({
   onUpdateMeta: t
 }) {
   return jsxs(Fragment, {
-    children: [jsx(_$$S6, {
-      label: jsx(_$$h6, {
+    children: [jsx(Checkbox, {
+      label: jsx(HiddenLabel, {
         children: getI18nString('dakota.import_csv_modal.labels.included')
       }),
       checked: e.included,
@@ -15910,7 +15910,7 @@ function hn({
     onChange: i,
     children: [jsx(_$$l7, {
       disabled: t,
-      label: jsx(_$$h6, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText('dakota.import_csv_modal.labels.type')
       }),
       width: 'fill'
@@ -16127,14 +16127,14 @@ function ho({
     })
   });
 }
-let hd = Ju(e => {
+let hd = registerModal(e => {
   let t = useDispatch();
   let i = _$$hS({
     ...e,
     onClose: ({
       source: e
     }) => {
-      e !== 'outside' && t(_$$Ce());
+      e !== 'outside' && t(hideModal());
     }
   });
   let [n, r] = useState(null);
@@ -16274,7 +16274,7 @@ let hd = Ju(e => {
       })
     })
   });
-}, 'ImportCsvModal', ZU.YES);
+}, 'ImportCsvModal', ModalSupportsBackground.YES);
 function hc({
   step: e,
   label: t,
@@ -16421,7 +16421,7 @@ function hp() {
       icon: zX.EXCLAMATION
     }));
   };
-  return () => e(_$$to({
+  return () => e(showModalHandler({
     type: hd,
     data: {
       onSubmit: async a => {
@@ -17031,7 +17031,7 @@ function hO({
           iconPrefix: jsx(_$$I4, {}),
           variant: 'secondary',
           onClick() {
-            r && n(_$$to({
+            r && n(showModalHandler({
               type: mW,
               data: {
                 collectionId: r.id
@@ -17106,7 +17106,7 @@ function h0(e) {
   let d = useDispatch();
   let c = A$();
   let p = useSelector(e => e.versionHistory);
-  let x = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== lyf.HISTORY);
+  let x = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== ViewType.HISTORY);
   let m = !x;
   let {
     windowInnerHeight
@@ -17181,7 +17181,7 @@ function h0(e) {
     let {
       topLevelObjectRowHeight: _topLevelObjectRowHeight
     } = useContext(_$$y0);
-    let b = _$$ut(Ez5?.codeSelection().fullscreenCodeNodeIds, []);
+    let b = getObservableValue(AppStateTsApi?.codeSelection().fullscreenCodeNodeIds, []);
     let y = useMemo(() => b[0] ? getSingletonSceneGraph().get(b[0])?.exportedFromCodeFile?.guid ?? b[0] : null, [b]);
     let v = useCallback(e => {
       let t = {
@@ -17255,19 +17255,19 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) glU.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) glU.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) glU.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
-            Y5.triggerAction('commit');
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            fullscreenValue.triggerAction('commit');
           });
         },
         renameItem: () => {
-          Y5.fromFullscreen.trigger('startRenamingNode', {
+          fullscreenValue.fromFullscreen.trigger('startRenamingNode', {
             nodeId: e
           });
         },
         selectOnCanvas: () => {
           _$$l.user('select-code-layer-on-canvas', () => {
-            P(Nfd.FILE);
-            i && (glU?.panToNode(e, !0), Y5.triggerAction('commit'));
+            P(PanelType.FILE);
+            i && (Fullscreen?.panToNode(e, !0), fullscreenValue.triggerAction('commit'));
           });
         }
       }
@@ -17325,7 +17325,7 @@ function h0(e) {
             let t = getSingletonSceneGraph().get(e);
             t && _$$iI(t, {
               targetNodeId: null,
-              exampleObject: PMF.SIMPLE_SQUARE
+              exampleObject: SquareShapes.SIMPLE_SQUARE
             });
           },
           panelType: _$$g$.CodeComponent,
@@ -17430,10 +17430,10 @@ function h5(e) {
         _$$J0(() => {
           _$$l.user('create-new-code-file', () => {
             let e = '';
-            getFeatureFlags().multi_file_code_layers && (e = z6l?.createCodeFilePathName() ?? '');
-            let t = glU?.createNewCodeFile(e, null, 'layers_panel', !0);
+            getFeatureFlags().multi_file_code_layers && (e = CodeComponentHelper?.createCodeFilePathName() ?? '');
+            let t = Fullscreen?.createNewCodeFile(e, null, 'layers_panel', !0);
             if (t) {
-              Y5.triggerAction('commit');
+              fullscreenValue.triggerAction('commit');
               let e = getSingletonSceneGraph().get(t);
               e && (_$$xB(e), a(!0));
             }
@@ -17463,13 +17463,13 @@ function h2({
         e.stopPropagation();
         _$$J0(() => {
           _$$l.user('create-new-code-interaction', () => {
-            let e = glU?.createNewCodeInteraction('layers_panel');
+            let e = Fullscreen?.createNewCodeInteraction('layers_panel');
             if (e) {
-              Y5.triggerAction('commit');
+              fullscreenValue.triggerAction('commit');
               let t = getSingletonSceneGraph().get(e);
               t && _$$iI(t, {
                 targetNodeId: null,
-                exampleObject: PMF.SIMPLE_SQUARE
+                exampleObject: SquareShapes.SIMPLE_SQUARE
               });
             }
           });
@@ -17535,10 +17535,10 @@ function h8() {
   let t = () => {
     _$$l.user('create-new-code-file', () => {
       let e = '';
-      getFeatureFlags().multi_file_code_layers && (e = z6l?.createCodeFilePathName() ?? '');
-      let t = glU?.createNewCodeFile(e, null, 'empty_state', !0);
+      getFeatureFlags().multi_file_code_layers && (e = CodeComponentHelper?.createCodeFilePathName() ?? '');
+      let t = Fullscreen?.createNewCodeFile(e, null, 'empty_state', !0);
       if (t) {
-        Y5.triggerAction('commit');
+        fullscreenValue.triggerAction('commit');
         let e = getSingletonSceneGraph().get(t);
         e && _$$xB(e);
       }
@@ -17558,19 +17558,19 @@ function h8() {
         videoSrc: buildUploadUrl('101e51ab608cec2f92e68b4e92682cea84fd94bd'),
         cardLabel: getI18nString('left_rail.code_view_empty_state.gradient_shader'),
         onClick: () => {
-          glU && (glU.createGradientShaderStarterComponent(), e('chat'));
+          Fullscreen && (Fullscreen.createGradientShaderStarterComponent(), e('chat'));
         }
       }), jsx(h3, {
         videoSrc: buildUploadUrl('a8c2a634bcd399c9cc56f4b776e47ab36f4a14af'),
         cardLabel: getI18nString('left_rail.code_view_empty_state.card_carousel'),
         onClick: () => {
-          glU && (glU.createCardCarouselStarterComponent(), e('chat'));
+          Fullscreen && (Fullscreen.createCardCarouselStarterComponent(), e('chat'));
         }
       }), jsx(h3, {
         videoSrc: buildUploadUrl('2aa4ed6f3a933cb59934c296f5ffdf852baed204'),
         cardLabel: getI18nString('left_rail.code_view_empty_state.animated_text'),
         onClick: () => {
-          glU && (glU.createAnimatedTextStarterComponent(), e('chat'));
+          Fullscreen && (Fullscreen.createAnimatedTextStarterComponent(), e('chat'));
         }
       })]
     }), jsx('div', {
@@ -17631,7 +17631,7 @@ function h9() {
   let x = _$$C2();
   XW();
   useEffect(() => {
-    n && z6l?.convertToMultiFileCodeLayer(n.guid);
+    n && CodeComponentHelper?.convertToMultiFileCodeLayer(n.guid);
   }, [n]);
   useEffect(() => () => {
     d(null);
@@ -17650,7 +17650,7 @@ function h9() {
       button: {
         text: getI18nString('sites.panel.code_view_back_to_design'),
         action: () => {
-          t(Nfd.FILE);
+          t(PanelType.FILE);
         }
       },
       timeoutOverride: 1 / 0
@@ -17695,20 +17695,20 @@ function gl() {
       let t = atomStoreManager.get(_$$iO);
       switch (e) {
         case pf.CONNECT:
-          $au?.enterCmsBindingEditMode();
-          Egt?.clearSelection();
-          t && (atomStoreManager.set(gt(t), !0), atomStoreManager.set(_$$iO, null), Ez5.cmsState().reset());
+          CmsHelpers?.enterCmsBindingEditMode();
+          SceneGraphHelpers?.clearSelection();
+          t && (atomStoreManager.set(gt(t), !0), atomStoreManager.set(_$$iO, null), AppStateTsApi.cmsState().reset());
           break;
         case pf.EDIT:
-          $au?.exitCmsBindingEditMode();
-          Ez5.cmsState().bindingCollectionId.getCopy() && (Ez5.cmsState().bindingCollectionId.set(''), atomStoreManager.set(_$$iO, Ez5.cmsState().bindingCollectionId.getCopy()));
+          CmsHelpers?.exitCmsBindingEditMode();
+          AppStateTsApi.cmsState().bindingCollectionId.getCopy() && (AppStateTsApi.cmsState().bindingCollectionId.set(''), atomStoreManager.set(_$$iO, AppStateTsApi.cmsState().bindingCollectionId.getCopy()));
           break;
         default:
           noop(e);
       }
     }, [e]);
     useEffect(() => () => {
-      $au?.exitCmsBindingEditMode();
+      CmsHelpers?.exitCmsBindingEditMode();
     }, []);
   }();
   return jsx('div', {
@@ -17841,13 +17841,13 @@ function ga() {
 }
 function gs(e) {
   let t = Xr(UU);
-  let i = Ez5.cmsState();
+  let i = AppStateTsApi.cmsState();
   let n = Xr(_$$iO);
   let a = _$$e();
   let {
     type,
     id
-  } = J2(i.bindingFieldSchema);
+  } = getObservableOrFallback(i.bindingFieldSchema);
   let c = id === e.fieldSchemaId && type === e.fieldType;
   let u = a && e.fieldType === _$$_j.SLUG;
   return jsx(mz, {
@@ -17857,7 +17857,7 @@ function gs(e) {
     selected: c,
     Icon: _$$Tu(e.fieldType),
     onClick: () => {
-      Egt?.clearSelection();
+      SceneGraphHelpers?.clearSelection();
       i.bindingFieldSchema.set({
         id: e.fieldSchemaId,
         type: e.fieldType
@@ -17873,8 +17873,8 @@ function gs(e) {
 function gr(e) {
   let t = _$$uE(e.collectionId);
   useEffect(() => () => {
-    Egt?.clearSelection();
-    Ez5.cmsState().bindingFieldSchema.set({
+    SceneGraphHelpers?.clearSelection();
+    AppStateTsApi.cmsState().bindingFieldSchema.set({
       id: '',
       type: ''
     });
@@ -17899,11 +17899,11 @@ function go({
   let u = pL(n, 'leftPanel', d);
   let [p, m] = useAtomValueAndSetter(gt(d));
   let h = _$$e();
-  let f = Ez5.cmsState();
-  let b = J2(f.bindingCollectionId);
+  let f = AppStateTsApi.cmsState();
+  let b = getObservableOrFallback(f.bindingCollectionId);
   let {
     id
-  } = J2(f.bindingFieldSchema);
+  } = getObservableOrFallback(f.bindingFieldSchema);
   let [v, w] = useAtomValueAndSetter(_$$iO);
   let S = Xr(_$$ou);
   let C = BK(V6);
@@ -17930,7 +17930,7 @@ function go({
       nextRowId: t,
       onClick: () => {
         E(new Set());
-        Egt?.clearSelection();
+        SceneGraphHelpers?.clearSelection();
         f.bindingFieldSchema.set({
           id: '',
           type: ''
@@ -17949,7 +17949,7 @@ function go({
             clientX,
             clientY,
             deleteCollection: () => {
-              c($O({
+              c(showModal({
                 type: pw.type,
                 data: {
                   type: pS.COLLECTION,
@@ -18029,7 +18029,7 @@ function gu(e) {
   let i = useAtomWithSubscription(p_);
   let n = Xr(ge);
   return (useEffect(() => () => {
-    $au?.exitCmsBindingEditMode();
+    CmsHelpers?.exitCmsBindingEditMode();
   }, []), _$$U()) ? jsxs(Fragment, {
     children: [i === pf.CONNECT && jsx(gc, {}), jsxs('div', {
       'className': 'x98rzlu',
@@ -18128,7 +18128,7 @@ function gR({
   let j = !!Fk((e, t) => e.get(t)?.isResponsiveSetOrWebpage ?? '', t);
   let k = Fk((e, t) => e.get(t)?.editInfo?.lastEditedAt ?? '-', t);
   let S = useSelector(e => e.mirror.sceneGraphSelection);
-  let C = J2(_$$UK().showGuids);
+  let C = getObservableOrFallback(_$$UK().showGuids);
   let T = _$$OG({
     abbreviatedStateName: null,
     guid: t,
@@ -18393,7 +18393,7 @@ function gL(e) {
   } = e;
   let m = _$$Z7();
   let g = useDispatch();
-  let f = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== lyf.HISTORY);
+  let f = useSelector(e => !e.mirror.appModel.isReadOnly && e.mirror.appModel.topLevelMode !== ViewType.HISTORY);
   let _ = useSelector(e => e.mirror.sceneGraphSelection);
   let y = useRef(null);
   let v = useRef(null);
@@ -18424,8 +18424,8 @@ function gL(e) {
       let c = o.getCurrentPage();
       _$$J0(() => {
         _$$l.user('create-new-webpage', () => {
-          c && c.guid === i ? glU.createResponsiveSet(null) : $P(i, n, l, t, Fy(d, i) === xal.LOADED, a, e).then(() => {
-            glU.createResponsiveSet(null);
+          c && c.guid === i ? Fullscreen.createResponsiveSet(null) : $P(i, n, l, t, Fy(d, i) === DataLoadStatus.LOADED, a, e).then(() => {
+            Fullscreen.createResponsiveSet(null);
           });
         });
       });
@@ -18509,7 +18509,7 @@ function gL(e) {
     _$$S9('panel');
     getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
     _$$tJ([e]);
-    Y5.commit();
+    fullscreenValue.commit();
     M(e);
     i(e);
   };
@@ -18519,7 +18519,7 @@ function gL(e) {
       let n = $.indexOf(t);
       let l = $.slice(Math.min(i, n), Math.max(i, n) + 1);
       Dh(l);
-      Y5.commit();
+      fullscreenValue.commit();
     } else {
       Y(e);
       i(e);
@@ -18527,7 +18527,7 @@ function gL(e) {
   };
   let Z = e => {
     _[e] ? D$([e]) : (Dh([e]), i(e));
-    Y5.commit();
+    fullscreenValue.commit();
   };
   let Q = () => {
     if (!n) return;
@@ -18661,8 +18661,8 @@ function gO() {
     customRowBuilder
   } = function () {
     let e = getSingletonSceneGraph();
-    let t = Ez5.sitesState();
-    let i = J2(t.focusedLayoutSetNodes);
+    let t = AppStateTsApi.sitesState();
+    let i = getObservableOrFallback(t.focusedLayoutSetNodes);
     let n = _$$O6();
     let l = Fk((e, t) => e.get(t)?.uiOrderedChildren, n);
     let s = l?.every(e => i.has(e)) || l?.every(e => !i.has(e));
@@ -18708,7 +18708,7 @@ function gO() {
           getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
           _$$S9('panel');
           _$$tJ([e]);
-          Y5.commit();
+          fullscreenValue.commit();
         },
         onToggleLayers: toggleLayersAction,
         recordingKey: 'sitesLeftPanelContent',
@@ -18741,13 +18741,13 @@ function gO() {
   let E = (() => {
     if (I) return j;
     switch (T) {
-      case Nfd.FILE:
+      case PanelType.FILE:
         return j;
-      case Nfd.CODE:
+      case PanelType.CODE:
         return k;
-      case Nfd.DAKOTA:
+      case PanelType.DAKOTA:
         return S;
-      case Nfd.SETTINGS:
+      case PanelType.SETTINGS:
         return C;
       default:
         return j;
@@ -18880,7 +18880,7 @@ function gK() {
     'data-tooltip-type': Ib.TEXT,
     'data-tooltip-show-above': !0,
     'onClick': () => {
-      e(Nfd.SETTINGS);
+      e(PanelType.SETTINGS);
       t(_$$p6.DOMAINS);
     },
     'children': jsx(_$$Z5, {})
@@ -18962,8 +18962,8 @@ function g7() {
     let [h, g] = useAtomValueAndSetter(_$$s3);
     let f = useDispatch();
     let _ = useCallback(t => {
-      getFeatureFlags().sts_sprig_targeted_feedback && i && h === Nfd.CODE && t === Nfd.FILE && Sprig('track', 'sites_code_layer_edit');
-      t !== h && f(AS());
+      getFeatureFlags().sts_sprig_targeted_feedback && i && h === PanelType.CODE && t === PanelType.FILE && Sprig('track', 'sites_code_layer_edit');
+      t !== h && f(hideModalHandler());
       g(t);
       setTimeout(() => {
         closeOverlay();
@@ -18973,16 +18973,16 @@ function g7() {
     let y = !!getFeatureFlags().sts_code && !!(getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan);
     let v = _$$U();
     let j = [{
-      active: h === Nfd.FILE && !x,
+      active: h === PanelType.FILE && !x,
       hide: !1,
-      key: _$$R9(Nfd.FILE),
+      key: _$$R9(PanelType.FILE),
       label: getI18nString('sites.side_rail.file'),
       icon: _$$g3,
       onClick: () => {
         analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'file'
         });
-        _(Nfd.FILE);
+        _(PanelType.FILE);
       },
       shortcut: 'set-sites-view-file'
     }, {
@@ -19012,13 +19012,13 @@ function g7() {
       shortcut: 'canvas-search'
     }].filter(e => !e.hide);
     let k = [{
-      active: h === Nfd.CODE,
+      active: h === PanelType.CODE,
       disabled: !y,
       hide: !b,
-      key: _$$R9(Nfd.CODE),
+      key: _$$R9(PanelType.CODE),
       label: getI18nString('sites.side_rail.code'),
       icon: _$$t2,
-      onClick: () => _(Nfd.CODE),
+      onClick: () => _(PanelType.CODE),
       shortcut: y ? 'set-sites-view-code' : void 0,
       customTooltip: y ? void 0 : {
         'data-tooltip-type': Ib.TEXT,
@@ -19026,12 +19026,12 @@ function g7() {
         'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
       }
     }, {
-      active: h === Nfd.DAKOTA,
+      active: h === PanelType.DAKOTA,
       disabled: !v,
-      key: _$$R9(Nfd.DAKOTA),
+      key: _$$R9(PanelType.DAKOTA),
       label: getI18nString('sites.side_rail.cms'),
       icon: _$$i5,
-      onClick: () => _(Nfd.DAKOTA),
+      onClick: () => _(PanelType.DAKOTA),
       shortcut: v ? 'set-sites-view-cms' : void 0,
       customTooltip: v ? void 0 : {
         'data-tooltip-type': Ib.TEXT,
@@ -19039,15 +19039,15 @@ function g7() {
         'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.cms.description')
       }
     }, {
-      active: h === Nfd.SETTINGS,
-      key: _$$R9(Nfd.SETTINGS),
+      active: h === PanelType.SETTINGS,
+      key: _$$R9(PanelType.SETTINGS),
       label: getI18nString('sites.side_rail.settings'),
       icon: _$$I4,
       onClick: () => {
         analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'settings'
         });
-        _(Nfd.SETTINGS);
+        _(PanelType.SETTINGS);
       }
     }].filter(e => !e.hide);
     let w = _$$Ty();
@@ -19064,7 +19064,7 @@ function g7() {
         icon: gQ,
         label: a,
         onClick: () => {
-          i ? e(Lo()) : (l('sites_open_lint_modal'), e(_$$to({
+          i ? e(popModalStack()) : (l('sites_open_lint_modal'), e(showModalHandler({
             type: _$$bA
           })));
         },
@@ -19078,7 +19078,7 @@ function g7() {
       initialTabOverride: Wv.UPDATES
     });
     let E = [w, S, C, T, I];
-    O1(() => (!!T.expanded || !!I.expanded || !!C.expanded) && (f(Lo()), !0), KD.OVERLAY);
+    O1(() => (!!T.expanded || !!I.expanded || !!C.expanded) && (f(popModalStack()), !0), KD.OVERLAY);
     return {
       alerts: E,
       canvasViews: j,
@@ -19114,7 +19114,7 @@ function g7() {
         active: e,
         label: i,
         onClick: () => {
-          n !== Nfd.FILE && d(Nfd.FILE);
+          n !== PanelType.FILE && d(PanelType.FILE);
           s?.();
         },
         recordingKey: `sitesLeftRailAlert.${i}`,
@@ -19140,15 +19140,15 @@ let g9 = memo(() => {
   } = useContext(_$$t8);
   let c = _$$q8();
   let x = _$$aV();
-  let m = t && e === Nfd.FILE;
+  let m = t && e === PanelType.FILE;
   let h = (() => {
     if (c || m) return null;
     switch (e) {
-      case Nfd.SETTINGS:
+      case PanelType.SETTINGS:
         return jsx(cC, {});
-      case Nfd.DAKOTA:
+      case PanelType.DAKOTA:
         return jsx(hF, {});
-      case Nfd.CODE:
+      case PanelType.CODE:
         return jsx(h9, {});
       default:
         return null;
@@ -19578,7 +19578,7 @@ function fj() {
   }, [e, complete]);
   let _ = Xr(_$$tM);
   let b = useCallback(() => {
-    _(NLJ.CODE_COMPONENT);
+    _(DesignGraphElements.CODE_COMPONENT);
     f();
   }, [_, f]);
   return isShowing && x ? jsx(fk, {
@@ -19849,7 +19849,7 @@ function fN({
   });
 }
 function fR() {
-  let e = useAtomWithSubscription(_$$Q) === lyf.LAYOUT;
+  let e = useAtomWithSubscription(_$$Q) === ViewType.LAYOUT;
   return ((getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && e) ?? !1;
 }
 function fD({
@@ -20171,7 +20171,7 @@ function f1({
     children: [jsx('div', {
       className: 'xjp7ctv xuvv7d7',
       children: jsx(_$$l7, {
-        label: jsx(_$$h6, {
+        label: jsx(HiddenLabel, {
           children: getI18nString('sites.panel.selectPage')
         }),
         size: 'md',
@@ -20354,11 +20354,11 @@ function _e({
   }, []);
   let E = () => {
     let e = 100 / scale * _ - 44;
-    return requestedWidth !== null ? qE(requestedWidth, 320, e) : qE(c ?? 0, 320, e);
+    return requestedWidth !== null ? clamp(requestedWidth, 320, e) : clamp(c ?? 0, 320, e);
   };
   let N = () => {
     let e = 100 / scale * y - 22;
-    return requestedHeight !== null ? qE(requestedHeight, 320, e) : e;
+    return requestedHeight !== null ? clamp(requestedHeight, 320, e) : e;
   };
   O1(() => {
     let e = f !== null;
@@ -20438,7 +20438,7 @@ function _e({
               children: jsx(z2, {
                 editorType: _$$_Y.SITES,
                 isViewer: !1,
-                progressBarMode: Oin.ON_AND_LOCKED
+                progressBarMode: UIVisibilitySetting.ON_AND_LOCKED
               })
             }), _ !== null && y !== null && jsx(_$$gs2, {
               previewHistory: e,
@@ -21037,7 +21037,7 @@ class _A {
     let e = debugState.getState();
     let t = e.selectedView?.view === 'fullscreen' ? e.selectedView.fileKey : null;
     if (!t) throw new Error('No file key found in state. Cannot save version.');
-    await _$$J11(t, 'Pre-optimization savepoint', 'This savepoint was created before running the Sites Fill Optimizer.', debugState.dispatch);
+    await createSavepoint(t, 'Pre-optimization savepoint', 'This savepoint was created before running the Sites Fill Optimizer.', debugState.dispatch);
   }
   recursivelyFindAllFillsForNodes(e) {
     let t = this.analyzeNodeForFillsToFlatten(e);
@@ -21112,7 +21112,7 @@ class _A {
     } else {
       console.warn('Creating temporary node to use for image export...');
       let e = n.createNode('RECTANGLE', {
-        tracking: HzA.IGNORE
+        tracking: TrackType.IGNORE
       });
       l.appendChild(e);
       e.size = {
@@ -21147,7 +21147,7 @@ class _A {
   }
 }
 function _L(e) {
-  return void 0 !== e && !_$$xN(e, 0);
+  return void 0 !== e && !nearlyEqual(e, 0);
 }
 async function _P(e) {
   let t = new TextEncoder().encode(e);
@@ -21469,11 +21469,11 @@ function _X({
   }, [t.x, t.y, setRequestedWidth, setRequestedHeight, I]);
   let F = () => {
     let e = 100 / scale * width;
-    return requestedWidth !== null ? qE(requestedWidth, _H.x, e) : qE(t.x, _H.x, e);
+    return requestedWidth !== null ? clamp(requestedWidth, _H.x, e) : clamp(t.x, _H.x, e);
   };
   let M = () => {
     let e = (height - _$$uF) * (100 / scale);
-    return requestedHeight !== null ? qE(requestedHeight, _H.y, e) : e;
+    return requestedHeight !== null ? clamp(requestedHeight, _H.y, e) : e;
   };
   let D = e => {
     setRequestedWidth(e);
@@ -21670,7 +21670,7 @@ let bi = () => {
   return {
     onStartFromScratch: () => {
       i(FP({
-        tab: xae.ASSETS,
+        tab: UserInterfaceElements.ASSETS,
         persist: !1
       }));
       YQ({
@@ -21904,7 +21904,7 @@ function bf() {
       'onClick': () => {
         t('sites_template_picker_dismissed');
         n(FP({
-          tab: xae.ASSETS,
+          tab: UserInterfaceElements.ASSETS,
           persist: !1
         }));
         YQ({
@@ -22018,7 +22018,7 @@ function bS({
       'onClick': () => {
         n('sites_template_picker_dismissed');
         c(FP({
-          tab: xae.ASSETS,
+          tab: UserInterfaceElements.ASSETS,
           persist: !1
         }));
         YQ({
@@ -22133,7 +22133,7 @@ let bE = ({
           editScopeType: zk.ONBOARDING,
           triggeredFrom: 'sites-templates-modal',
           cloneLocalStylesAndVariablesForTemplate: !0,
-          templateInsertionDirection: hKj.RIGHT,
+          templateInsertionDirection: CustomPosition.RIGHT,
           onSuccess: () => {
             t();
             noop.addResourceUse({
@@ -22141,7 +22141,7 @@ let bE = ({
             });
             n(!1);
             i(FP({
-              tab: xae.LAYERS,
+              tab: UserInterfaceElements.LAYERS,
               persist: !1
             }));
             YQ({
@@ -22173,14 +22173,14 @@ let bE = ({
         editScopeType: zk.ONBOARDING,
         triggeredFrom: 'sites-templates-modal',
         cloneLocalStylesAndVariablesForTemplate: !0,
-        templateInsertionDirection: hKj.RIGHT,
+        templateInsertionDirection: CustomPosition.RIGHT,
         onSuccess: () => {
           noop.addResourceUse({
             resourceId: e.id
           });
           n(!1);
           i(FP({
-            tab: xae.LAYERS,
+            tab: UserInterfaceElements.LAYERS,
             persist: !1
           }));
           _$$l.user('sites-insert-template', () => {
@@ -22219,7 +22219,7 @@ function bA({
     'size': 900,
     'onHide': () => {
       n(FP({
-        tab: xae.ASSETS,
+        tab: UserInterfaceElements.ASSETS,
         persist: !1
       }));
       YQ({
@@ -22268,7 +22268,7 @@ function bL() {
 }
 function bO() {
   useEffect(() => {
-    NT(FAf.SITE);
+    NT(DesignWorkspace.SITE);
   }, []);
   return jsxs(Fragment, {
     children: [jsx('div', {
@@ -22330,7 +22330,7 @@ function bQ({
           i('FIXED', _$$zk.NO);
           s('FIXED', _$$zk.NO);
       }
-      Y5.commit();
+      fullscreenValue.commit();
     });
   }, [i, s]);
   let d = jsx(NP, {
@@ -22374,26 +22374,26 @@ function b1() {
   }) : null;
 }
 let yt = {
-  [gRN.HEADING1]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [TextBlockType.HEADING1]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 1
   }),
-  [gRN.HEADING2]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [TextBlockType.HEADING2]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 2
   }),
-  [gRN.HEADING3]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [TextBlockType.HEADING3]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 3
   }),
-  [gRN.HEADING4]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [TextBlockType.HEADING4]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 4
   }),
-  [gRN.HEADING5]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [TextBlockType.HEADING5]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 5
   }),
-  [gRN.HEADING6]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [TextBlockType.HEADING6]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 6
   }),
-  [gRN.PARAGRAPH]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_paragraph'),
-  [gRN.LINK]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_link')
+  [TextBlockType.PARAGRAPH]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_paragraph'),
+  [TextBlockType.LINK]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_link')
 };
 function yi({
   inheritTextStyleKey: e,
@@ -22436,7 +22436,7 @@ function yn({
 }
 function yl(e) {
   let t = e.cmsRichTextDescriptor.textStyleId;
-  let i = t.guid !== _$$AD ? PK.fromLocalNodeIdStr(t.guid) : PK.fromRef(t.ref);
+  let i = t.guid !== defaultSessionLocalIDString ? PK.fromLocalNodeIdStr(t.guid) : PK.fromRef(t.ref);
   let n = null;
   let a = null;
   if (i && PK.isValid(i)) {
@@ -22503,7 +22503,7 @@ function ya({
             }
             _$$l.user('update-cms-rich-text-style-mapping', () => {
               i(o, e);
-              Y5.commit();
+              fullscreenValue.commit();
             });
           }
         }));
@@ -22523,7 +22523,7 @@ function ya({
       stylePickerListLayout: !0,
       styleType: _$$s10.TEXT
     }), t.map(e => {
-      if (e.styleClass === gRN.BLOCKQUOTE) return null;
+      if (e.styleClass === TextBlockType.BLOCKQUOTE) return null;
       let t = yt[e.styleClass];
       return jsx(_$$fn2, {
         leftLabel: null,
@@ -22610,7 +22610,7 @@ function yb(e) {
     },
     children: [jsx(_$$l7, {
       width: 'fill',
-      label: jsx(_$$h6, {
+      label: jsx(HiddenLabel, {
         children: getI18nString('dakota.properties_panel.collection_panel.page_collection_label')
       })
     }), jsx(_$$mc2, {
@@ -22624,7 +22624,7 @@ function yb(e) {
 function yy(e) {
   let t = e => {
     _$$l.user('dakota-set-text-binding', () => {
-      getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t?.setDakotaSelectorCollection(e ?? '', TsU.CMS_PROPERTIES_PANEL));
+      getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t?.setDakotaSelectorCollection(e ?? '', InsertSourceType.CMS_PROPERTIES_PANEL));
     });
   };
   let i = jsx(yb, {
@@ -22667,7 +22667,7 @@ function yv({
         'data-tooltip-type': Ib.TEXT
       },
       'onClick': () => {
-        if (i(Nfd.DAKOTA), e?.id == null) {
+        if (i(PanelType.DAKOTA), e?.id == null) {
           reportError(_$$e2.CMS, new Error('CMS Collection ID is null in the properties panel'), {
             extra: {
               currentCollection: e
@@ -22723,7 +22723,7 @@ function yj({
     },
     children: [jsx(_$$l7, {
       width: 'fill',
-      label: jsx(_$$h6, {
+      label: jsx(HiddenLabel, {
         children: getI18nString('dakota.properties_panel.collection_panel.item_switcher_label')
       }),
       disabled: a.length === 0
@@ -22753,7 +22753,7 @@ function yk({
         'data-tooltip': getI18nString('dakota.properties_panel.collection_panel.go_to_component_label'),
         'data-tooltip-type': Ib.TEXT
       },
-      'onClick': () => Y5.triggerActionEnum(rcl.GO_TO_REPEATER_COMPONENT),
+      'onClick': () => fullscreenValue.triggerActionEnum(Command.GO_TO_REPEATER_COMPONENT),
       'children': jsxs('div', {
         className: yf,
         children: [jsxs('div', {
@@ -22812,7 +22812,7 @@ function yw({
     },
     children: [jsx(_$$l7, {
       width: 'fill',
-      label: jsx(_$$h6, {
+      label: jsx(HiddenLabel, {
         children: getI18nString('dakota.properties_panel.collection_panel.limit_label')
       }),
       disabled: status !== 'loaded',
@@ -22907,7 +22907,7 @@ function yq({
         'data-tooltip': d,
         'data-tooltip-type': Ib.TEXT
       },
-      'mixed': !e && s === _$$oV,
+      'mixed': !e && s === MIXED_MARKER,
       'offIcon': jsx(_$$_0, {}),
       'onChange': o,
       'onIcon': jsx(noop, {}),
@@ -23007,7 +23007,7 @@ let yY = forwardRef(({
     'recordingKey': i,
     'scrubMultiplier': 0.1 * scrubMultiplier,
     smallNudgeAmount,
-    'value': _$$gl(e) ? e : e ?? 0,
+    'value': isInvalidValue(e) ? e : e ?? 0,
     wheelMultiplier,
     'children': jsx('div', {
       className: _$$k11,
@@ -23049,7 +23049,7 @@ let yZ = memo(({
     let l = _$$wc('border-bottom-left-radius', e) ?? 0;
     let s = _$$wc('border-bottom-right-radius', e) ?? 0;
     let r = i === n && i === l && i === s;
-    let o = r ? i : _$$oV;
+    let o = r ? i : MIXED_MARKER;
     let [d, c] = useState(!r);
     return {
       borderRadiusValue: o,
@@ -23249,7 +23249,7 @@ function vs({
 }) {
   let r = function (e) {
     let t = _$$CQ('text-align', e);
-    if (t === _$$oV) return t;
+    if (t === MIXED_MARKER) return t;
     switch (t) {
       case 'left':
       default:
@@ -23287,7 +23287,7 @@ function vs({
   }, [t]);
   let d = function (e) {
     let t = _$$CQ('vertical-align', e);
-    if (t === _$$oV) return t;
+    if (t === MIXED_MARKER) return t;
     switch (t) {
       case 'top':
       case 'text-top':
@@ -23611,7 +23611,7 @@ function vq() {
       if (i?.type === 'TEXT' && i.characters) {
         let e = i.getRangeLineType(0, i.characters.length - 1);
         if (e === 'mixed' || t && e !== t) {
-          t = _$$oV;
+          t = MIXED_MARKER;
           break;
         }
         e && (t = e);
@@ -23635,11 +23635,11 @@ function vV(e) {
 }
 function vG(e) {
   switch (e) {
-    case BJw.ARIA:
+    case AccessibilityAttributes.ARIA:
       return 'aria_label';
-    case BJw.ALT_TEXT:
+    case AccessibilityAttributes.ALT_TEXT:
       return 'alt_text';
-    case BJw.TITLE:
+    case AccessibilityAttributes.TITLE:
       return 'title';
     default:
       return 'unknown';
@@ -23653,17 +23653,17 @@ function vW() {
     let t = {};
     if (!e) return [];
     let i = {};
-    let n = _$$C9(e);
+    let n = toArray(e);
     n.forEach(e => {
       e.entries?.forEach(e => {
         let n = e.attribute;
         i[n] = n in i ? i[n] + 1 : 1;
-        n in t ? _$$c6(t[n], e.value) || (t[n] = _$$oV) : t[e.attribute] = e.value;
+        n in t ? _$$c6(t[n], e.value) || (t[n] = MIXED_MARKER) : t[e.attribute] = e.value;
       });
     });
     return Object.keys(t).map(e => ({
       attribute: e,
-      value: i[e] === n.length ? t[e] : _$$oV
+      value: i[e] === n.length ? t[e] : MIXED_MARKER
     }));
   }, [e]);
   let l = useCallback((e, i) => {
@@ -23681,19 +23681,19 @@ function vW() {
       let t = v$[e];
       return t !== vB.BOOLEAN && (t === vB.BOOLEAN_UNDEFINED ? void 0 : t === vB.STRING ? '' : t === vB.FLOAT || t === vB.INTEGER ? 0 : t === vB.TOKEN_LIST ? [] : t === vB.TOKEN ? vU(e)[0] : void 0);
     }(e)), n.find(t => t.attribute === e) || t(e), _$$l.user('sites-accessibility-set-aria-attribute', () => {
-      glU?.setARIAAttribute(e, i);
+      Fullscreen?.setARIAAttribute(e, i);
     }));
   }, [n, t]);
   let s = useCallback(e => {
     _$$l.user('sites-accessibility-remove-aria-attribute', () => {
-      glU?.removeARIAAttribute(e);
+      Fullscreen?.removeARIAAttribute(e);
     });
     i(e);
   }, [i]);
   return [useCallback(e => {
     let t;
     t = n.find(t => t.attribute === e)?.value;
-    let i = _$$gl(t) ? _$$oV : t?.value ? t.type === 'BOOLEAN' ? t.value.boolValue : t.type === 'STRING' ? t.value.stringValue : t.type === 'INT' ? t.value.intValue : t.type === 'FLOAT' ? t.value.floatValue : t.type === 'STRING_LIST' ? t.value.stringArrayValue : null : null;
+    let i = isInvalidValue(t) ? MIXED_MARKER : t?.value ? t.type === 'BOOLEAN' ? t.value.boolValue : t.type === 'STRING' ? t.value.stringValue : t.type === 'INT' ? t.value.intValue : t.type === 'FLOAT' ? t.value.floatValue : t.type === 'STRING_LIST' ? t.value.stringArrayValue : null : null;
     return {
       isSet: i !== null,
       value: i
@@ -23895,7 +23895,7 @@ function jr(e) {
   } = o(ja);
   let [f, _] = useState(!1);
   let b = function () {
-    let e = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'INSTANCE')) && glU?.isSelectionContainedInStateOrStateInstance();
+    let e = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'INSTANCE')) && Fullscreen?.isSelectionContainedInStateOrStateInstance();
     let t = useSelector(_$$Cy);
     let i = t.length === 1 && !!_$$p1(t);
     let n = _$$e11();
@@ -23920,8 +23920,8 @@ function jr(e) {
     toggleDropdown
   } = _$$B6('sites_accessibility_dropdown');
   let [C, T] = useState(0);
-  let I = t.labelType !== BJw.NONE && (f || !!(i || p)) && !c;
-  let E = t.category === Pir.BLOCK_WITH_IMAGE || t.category === Pir.BLOCK_WITH_VIDEO;
+  let I = t.labelType !== AccessibilityAttributes.NONE && (f || !!(i || p)) && !c;
+  let E = t.category === MixedBlockType.BLOCK_WITH_IMAGE || t.category === MixedBlockType.BLOCK_WITH_VIDEO;
   let N = vV('sites_add_accessibility_tag');
   let R = vV('sites_remove_accessibility_tag');
   let A = useCallback((e, t) => ({
@@ -23949,11 +23949,11 @@ function jr(e) {
   } = A(z, 5);
   if (_$$f2(() => {
     _(!1);
-  }), !getFeatureFlags().sites || t.category === Pir.NONE) {
+  }), !getFeatureFlags().sites || t.category === MixedBlockType.NONE) {
     return null;
   }
   let K = [];
-  t.labelType !== BJw.NONE && (K.push({
+  t.labelType !== AccessibilityAttributes.NONE && (K.push({
     displayText: jp(t.labelType),
     isChecked: I,
     disabled: I || !!c,
@@ -24037,7 +24037,7 @@ function jr(e) {
               className: 'styles-module--iconVisibleOnHover--W-hXx',
               children: jsx(ju, {
                 onClick: () => {
-                  NT(FAf.DAKOTA);
+                  NT(DesignWorkspace.DAKOTA);
                 }
               })
             })
@@ -24062,8 +24062,8 @@ function jr(e) {
             children: jsx(_$$L4, {
               className: v4,
               name: 'sites_accessible_label',
-              placeholder: _$$gl(i) ? getI18nString('common.mixed') : void 0,
-              value: _$$gl(i) ? '' : i,
+              placeholder: isInvalidValue(i) ? getI18nString('common.mixed') : void 0,
+              value: isInvalidValue(i) ? '' : i,
               type: 'textarea',
               onChange: e => {
                 n(e.currentTarget.value);
@@ -24167,11 +24167,11 @@ function ju({
 }
 function jp(e) {
   switch (e) {
-    case BJw.ARIA:
+    case AccessibilityAttributes.ARIA:
       return getFeatureFlags().sts_a11y_aria_attributes ? 'aria-label' : getI18nString('sites.panel.accessibility_aria_label_label');
-    case BJw.ALT_TEXT:
+    case AccessibilityAttributes.ALT_TEXT:
       return getI18nString('sites.panel.accessibility_alt_text_label');
-    case BJw.TITLE:
+    case AccessibilityAttributes.TITLE:
       return getFeatureFlags().sts_a11y_aria_attributes ? 'title' : getI18nString('sites.panel.accessibility_title_label');
     default:
       return '';
@@ -24190,7 +24190,7 @@ function jx({
     let n = t;
     n || (n = _$$_11.AUTO);
     e.tagEditable || (n = e.tagDefaultValue);
-    e.category === Pir.MIXED && (n = _$$oV);
+    e.category === MixedBlockType.MIXED && (n = MIXED_MARKER);
     return [n, i];
   }();
   let c = o === _$$_11.AUTO ? i.tagDefaultValue : o;
@@ -24249,7 +24249,7 @@ function jm({
         className: v2,
         children: jsx(_$$d5, {
           onChange: e => i(e),
-          label: jsx(_$$h6, {
+          label: jsx(HiddenLabel, {
             children: getI18nString('sites.panel.accessibility.decorative')
           }),
           checked: !!t,
@@ -24284,7 +24284,7 @@ function jh({
         className: v2,
         children: jsx(_$$d5, {
           onChange: e => s(jn, e),
-          label: jsx(_$$h6, {
+          label: jsx(HiddenLabel, {
             children: jn
           }),
           checked: !!value,
@@ -24496,7 +24496,7 @@ let jj = memo(e => {
 });
 function jw(e) {
   return function (e) {
-    if (void 0 === e || _$$gl(e)) return e;
+    if (void 0 === e || isInvalidValue(e)) return e;
     try {
       return JSON.parse(e);
     } catch (t) {
@@ -24522,7 +24522,7 @@ function jT(e) {
   let [o, d] = useState('');
   useEffect(() => {
     let e = '';
-    _$$gl(value) ? e = 'Mixed' : typeof value == 'number' ? e = value.toString() : value && (e = value);
+    isInvalidValue(value) ? e = 'Mixed' : typeof value == 'number' ? e = value.toString() : value && (e = value);
     d(e);
   }, [value]);
   return jsx(_$$ks2, {
@@ -24632,7 +24632,7 @@ function jD({
   recordingKey: i
 }) {
   let [n, a] = jS(t);
-  return void 0 === n || _$$gl(n) ? null : jsx(_$$d5, {
+  return void 0 === n || isInvalidValue(n) ? null : jsx(_$$d5, {
     checked: n,
     onChange: e => {
       a(e, _$$zk.YES);
@@ -24818,7 +24818,7 @@ function jV(e, t, i) {
   return e;
 }
 function jG(e) {
-  return e && !_$$gl(e);
+  return e && !isInvalidValue(e);
 }
 function jW(e) {
   let [t, i] = jS('htmlWidgetGenericEmbedCodeType');
@@ -24861,7 +24861,7 @@ function jW(e) {
     }
     return i;
   }(g, p) : jO(g, d) : {}, [g, p, d, t]);
-  if (!jG(t) || _$$gl(d) || _$$gl(p) || _$$gl(n) || _$$gl(r)) return null;
+  if (!jG(t) || isInvalidValue(d) || isInvalidValue(p) || isInvalidValue(n) || isInvalidValue(r)) return null;
   let {
     isValid,
     errorMessage
@@ -24888,7 +24888,7 @@ function jW(e) {
     };
   }(r || '') : function (e) {
     let t = e.length > 0 ? KJ(e)?.url : '';
-    return _$$gl(e) || void 0 === t ? {
+    return isInvalidValue(e) || void 0 === t ? {
       isValid: !1,
       errorMessage: getI18nString('sites.panel.generic_embed.invalid_url_input_error')
     } : {
@@ -25110,7 +25110,7 @@ function jQ() {
 function j0() {
   let e = I9();
   let t = jw('htmlWidgetType');
-  if (!e?.length || !t || _$$gl(t)) return null;
+  if (!e?.length || !t || isInvalidValue(t)) return null;
   let i = null;
   switch (t) {
     case _$$hK.MAILCHIMP:
@@ -25207,7 +25207,7 @@ function j8({
     property: t,
     onChange: e => {
       _$$l.user('responsive-set-scaling-mode', () => {
-        glU.setResponsiveSetScalingMode(e);
+        Fullscreen.setResponsiveSetScalingMode(e);
         a('sites_scaling_mode_change', {
           scalingMode: e
         });
@@ -25247,14 +25247,14 @@ function j7({
   property: e
 }) {
   let t = _$$kl(e);
-  _$$gl(t);
+  isInvalidValue(t);
   let i = t;
   return jsx(Q7, {
     property: i,
     formatter: kt,
     onChange: t => {
       _$$l.user(`responsive-set-scaling-${e}`, () => {
-        e === 'responsiveSetScalingMinFontSize' ? glU.setResponsiveSetScalingMinFontSize(t) : glU.setResponsiveSetScalingMaxFontSize(t);
+        e === 'responsiveSetScalingMinFontSize' ? Fullscreen.setResponsiveSetScalingMinFontSize(t) : Fullscreen.setResponsiveSetScalingMaxFontSize(t);
       });
     },
     recordingKey: Pt(j4, e)
@@ -25264,14 +25264,14 @@ function j9({
   property: e
 }) {
   let t = _$$kl(e);
-  _$$gl(t);
+  isInvalidValue(t);
   let i = t;
   return jsx(Q7, {
     property: i,
     formatter: kt,
     onChange: t => {
       _$$l.user(`responsive-set-scaling-${e}`, () => {
-        e === 'responsiveSetScalingMinLayoutWidth' ? glU.setResponsiveSetScalingMinLayoutWidth(t) : glU.setResponsiveSetScalingMaxLayoutWidth(t);
+        e === 'responsiveSetScalingMinLayoutWidth' ? Fullscreen.setResponsiveSetScalingMinLayoutWidth(t) : Fullscreen.setResponsiveSetScalingMaxLayoutWidth(t);
       });
     },
     recordingKey: Pt(j4, e)
@@ -25337,22 +25337,22 @@ function kc(e) {
     switch (e) {
       case 'RELATIVE':
         m('AUTO');
-        _$$l.user('set-scroll-behavior', () => X3B.aggressivelySetScrollBehaviorOfSelection(KjJ.SCROLLS));
+        _$$l.user('set-scroll-behavior', () => PrototypingTsApi.aggressivelySetScrollBehaviorOfSelection(ScrollBehavior.SCROLLS));
         break;
       case 'ABSOLUTE':
         f && !v && m('ABSOLUTE');
-        _$$l.user('set-scroll-behavior', () => X3B.aggressivelySetScrollBehaviorOfSelection(KjJ.SCROLLS));
+        _$$l.user('set-scroll-behavior', () => PrototypingTsApi.aggressivelySetScrollBehaviorOfSelection(ScrollBehavior.SCROLLS));
         break;
       case 'FIXED':
         !y && f && m('ABSOLUTE');
-        _$$l.user('set-scroll-behavior', () => X3B.aggressivelySetScrollBehaviorOfSelection(KjJ.FIXED));
+        _$$l.user('set-scroll-behavior', () => PrototypingTsApi.aggressivelySetScrollBehaviorOfSelection(ScrollBehavior.FIXED));
         break;
       case 'STICKY':
-        _$$l.user('set-scroll-behavior', () => X3B.aggressivelySetScrollBehaviorOfSelection(KjJ.STICKY_SCROLLS));
+        _$$l.user('set-scroll-behavior', () => PrototypingTsApi.aggressivelySetScrollBehaviorOfSelection(ScrollBehavior.STICKY_SCROLLS));
     }
-    Y5.commit();
+    fullscreenValue.commit();
   }, [v, f, m, y]);
-  let k = useMemo(() => _$$gl(x) || _$$gl(g) ? _$$oV : g === 'STICKY_SCROLLS' ? 'STICKY' : g === 'FIXED_WHEN_CHILD_OF_SCROLLING_FRAME' ? 'FIXED' : f ? x === 'AUTO' ? 'RELATIVE' : x === 'ABSOLUTE' ? 'ABSOLUTE' : void debug(!1, 'Do not expect any other conditions to be met') : 'ABSOLUTE', [g, f, x]);
+  let k = useMemo(() => isInvalidValue(x) || isInvalidValue(g) ? MIXED_MARKER : g === 'STICKY_SCROLLS' ? 'STICKY' : g === 'FIXED_WHEN_CHILD_OF_SCROLLING_FRAME' ? 'FIXED' : f ? x === 'AUTO' ? 'RELATIVE' : x === 'ABSOLUTE' ? 'ABSOLUTE' : void debug(!1, 'Do not expect any other conditions to be met') : 'ABSOLUTE', [g, f, x]);
   return jsx(_$$k10, {
     name: 'sites_position_panel',
     children: jsxs(_$$Zk, {
@@ -25467,7 +25467,7 @@ function ku({
       shouldShowSlotPanel: Br(i),
       withBottomBorder: !_$$jd(i) && !_$$cR(i) && !I
     }), getFeatureFlags().react_scenegraph && jsx(VF, {
-      isVisible: i[ibQ.JSX_ITEM],
+      isVisible: i[ItemType.JSX_ITEM],
       children: () => jsx(_$$_10, {})
     }), jsx(VF, {
       isVisible: !!numSelected && areOnlyResponsiveSetsSelected,
@@ -25479,7 +25479,7 @@ function ku({
       isVisible: I,
       children: () => jsx(yS, {})
     }), jsx(VF, {
-      isVisible: i[ibQ.SITES_HTML_WIDGET_ITEM],
+      isVisible: i[ItemType.SITES_HTML_WIDGET_ITEM],
       children: () => jsx(j0, {})
     }), jsx(VF, {
       isVisible: _$$tV2(i, D),
@@ -25487,7 +25487,7 @@ function ku({
         recordingKey: 'propsPanel'
       }, 'componentProperties')
     }), jsx(VF, {
-      isVisible: i[ibQ.COMPONENT_ITEM],
+      isVisible: i[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c0, {
         recordingKey: 'componentPanel'
       }, 'component')
@@ -25502,22 +25502,22 @@ function ku({
         recordingKey: 'codeInstancePanel'
       }, 'codeInstance')
     }), jsx(VF, {
-      isVisible: i[ibQ.CODE_INSTANCE_HTML_FIBER],
+      isVisible: i[ItemType.CODE_INSTANCE_HTML_FIBER],
       children: () => jsx(vu, {
         recordingKey: 'webDirectManipulation'
       })
     }), jsx(VF, {
-      isVisible: i[ibQ.SITES_LINK_ITEM],
+      isVisible: i[ItemType.SITES_LINK_ITEM],
       children: () => jsx(_$$rC2, {
         recordingKey: 'linkPanel'
       })
     }), jsx(VF, {
-      isVisible: i[ibQ.SITES_POSITION_ITEM],
+      isVisible: i[ItemType.SITES_POSITION_ITEM],
       children: () => jsx(kc, {
         recordingKey: 'positionPanel'
       })
     }), jsx(VF, {
-      isVisible: i[ibQ.TRANSFORM_ITEM],
+      isVisible: i[ItemType.TRANSFORM_ITEM],
       children: () => jsx(zq, {
         recordingKey: 'transformPanel',
         openFileKey: j?.key || null,
@@ -25526,7 +25526,7 @@ function ku({
         onlyShowXYInputsRow: v === GR.DEFAULT_SIMPLIFIED || (areOnlyResponsiveSetsSelected ?? !1)
       }, 'transform')
     }), jsx(VF, {
-      isVisible: i[ibQ.VECTOR_TRANSFORM_UNIFIED_ITEM],
+      isVisible: i[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: 'transformPanel',
         openFileKey: j?.key || null,
@@ -25537,7 +25537,7 @@ function ku({
       isVisible: A,
       children: () => jsx(Vy, {
         onlyShowResizingRow: v === GR.DEFAULT_SIMPLIFIED,
-        onlyStacksAndGridsSelected: !!i[ibQ.STACK_ITEM],
+        onlyStacksAndGridsSelected: !!i[ItemType.STACK_ITEM],
         hideToggleButton: I,
         recordingKey: 'stackPanel'
       }, 'stack')
@@ -25545,9 +25545,9 @@ function ku({
       isVisible: E,
       children: () => jsx(b1, {})
     }), jsx(F$, {
-      isVisible: i[ibQ.SCALE_ITEM]
+      isVisible: i[ItemType.SCALE_ITEM]
     }), jsx(VF, {
-      isVisible: i[ibQ.VECTOR_ITEM],
+      isVisible: i[ItemType.VECTOR_ITEM],
       children: () => jsx(VR, {
         recordingKey: 'vectorTransformPanel',
         useContextualSelectionProperties: !0,
@@ -25556,37 +25556,37 @@ function ku({
         isUI3: !0
       }, 'vector-transform')
     }), jsx(VF, {
-      isVisible: i[ibQ.PENCIL_TOOL],
+      isVisible: i[ItemType.PENCIL_TOOL],
       children: () => jsx(_$$q1, {
         id: 'pencilToolPanel',
         recordingKey: 'pencilToolPanel',
         openFile: j
       }, 'pencilToolPanel')
     }), jsx(VF, {
-      isVisible: i[ibQ.MASK_ITEM],
+      isVisible: i[ItemType.MASK_ITEM],
       children: () => jsx(_$$B8, {
         recordingKey: 'maskPanel',
         maskType
       }, 'mask')
     }), jsx(VF, {
-      isVisible: i[ibQ.LAYER_ITEM],
+      isVisible: i[ItemType.LAYER_ITEM],
       children: () => jsx(X2, {
         recordingKey: 'appearancePanel'
       })
     }), jsx(VF, {
-      isVisible: i[ibQ.TYPE_ITEM],
+      isVisible: i[ItemType.TYPE_ITEM],
       children: () => jsx(_$$gc, {}, 'type')
     }), jsx(VF, {
       isVisible: E,
       children: () => jsx(ys, {})
     }), jsx(VF, {
-      isVisible: i[ibQ.CANVAS_ITEM],
+      isVisible: i[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v1, {
         colorFormat: d,
         defaultColor: _$$rC,
         dispatch: y,
         dropdownShown: a,
-        hasExports: !!exportSettings && _$$_W(exportSettings, []).length > 0,
+        hasExports: !!exportSettings && valueOrFallback(exportSettings, []).length > 0,
         library: x,
         modalShown: c,
         openFile: j,
@@ -25595,15 +25595,15 @@ function ku({
         sceneGraphSelection: t
       }, 'canvas-background')
     }), jsx(VF, {
-      isVisible: i[ibQ.REMOVE_GROUP_BACKGROUND_ITEM],
+      isVisible: i[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
       children: () => jsx(_$$C0, {}, 'remove-group-fill-stroke')
     }), jsx(VF, {
-      isVisible: i[ibQ.FILL_ITEM],
+      isVisible: i[ItemType.FILL_ITEM],
       children: () => jsx(B8, {
         variableScopes: N
       }, 'fill')
     }), jsx(VF, {
-      isVisible: i[ibQ.STROKE_ITEM],
+      isVisible: i[ItemType.STROKE_ITEM],
       children: () => jsx($p, {
         colorFormat: d,
         defaultColor: Em,
@@ -25621,7 +25621,7 @@ function ku({
         stylePickerShown: u
       }, 'stroke')
     }), jsx(VF, {
-      isVisible: i[ibQ.EFFECTS_ITEM],
+      isVisible: i[ItemType.EFFECTS_ITEM],
       children: () => jsx(_$$w5, {}, 'effects')
     }), jsx(VF, {
       isVisible: z,
@@ -25638,15 +25638,15 @@ function ku({
         stylePickerListLayout: g
       }, 'selection-paints')
     }), jsx(VF, {
-      isVisible: i[ibQ.GRIDS_ITEM],
+      isVisible: i[ItemType.GRIDS_ITEM],
       children: () => jsx(_$$tC, {}, 'grids')
     }), jsx(VF, {
-      isVisible: i[ibQ.SITES_ACCESSIBILITY_ITEM],
+      isVisible: i[ItemType.SITES_ACCESSIBILITY_ITEM],
       children: () => jsx(jr, {
         recordingKey: 'accessibilityPanel'
       })
     }), jsx(VF, {
-      isVisible: i[ibQ.SITES_RESPONSIVENESS_ITEM],
+      isVisible: i[ItemType.SITES_RESPONSIVENESS_ITEM],
       children: () => jsx(j3, {}, 'responsiveness')
     }), jsx(VF, {
       isVisible: R,
@@ -25672,7 +25672,7 @@ function ku({
         recordingKey: 'pluginPanel'
       }, 'plugin')
     }), jsx(VF, {
-      isVisible: i[ibQ.EXPORT_ITEM],
+      isVisible: i[ItemType.EXPORT_ITEM],
       children: () => jsx(LI, {
         currentPage: S.currentPage,
         currentSelectedProperty: S.currentSelectedProperty,
@@ -25735,7 +25735,7 @@ function kO({
     context: s
   }), useCallback((i, a) => {
     _$$l.user(`sites-behavior-${e}-${t}-change`, () => {
-      if (!r || void 0 === r || _$$gl(r)) {
+      if (!r || void 0 === r || isInvalidValue(r)) {
         !function () {
           let e = n(i, s);
           e && o(e, a);
@@ -25752,7 +25752,7 @@ function kF({
   context: i
 }) {
   let n = _$$kl(e);
-  return _$$gl(n) ? _$$oV : t(n && n || void 0, i);
+  return isInvalidValue(n) ? MIXED_MARKER : t(n && n || void 0, i);
 }
 let k$ = 'styles-module--previewRow--ma294 ui3_modal_rows--_row--x9xQX ui3_rows--_row--DnZFk ui3_rows--_grid--cP2Wu';
 let kU = 'styles-module--previewBackground--kT8lJ';
@@ -25913,7 +25913,7 @@ function k6(e, t) {
     let n = Object.keys(i);
     for (let i of n) {
       let n = getSingletonSceneGraph().get(i);
-      if (!(!n || _$$gl(t) || _$$gl(e)) && (n.behaviorStatePreviewEnabled = !0, e != null && (n.localOpacity = e), t != null)) {
+      if (!(!n || isInvalidValue(t) || isInvalidValue(e)) && (n.behaviorStatePreviewEnabled = !0, e != null && (n.localOpacity = e), t != null)) {
         let e = function (e) {
           let t = _$$s13.fromFigMatrix(e.relativeTransform);
           let i = t.offset();
@@ -25964,7 +25964,7 @@ function wl({
   let n = EU();
   let a = useDispatch();
   return jsx(Fragment, {
-    children: _$$hS2(e) && e != null && t != null && jsx(k5, {
+    children: isValidValue(e) && e != null && t != null && jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.transition_delay'),
       input: jsx(W4, {
         'data-tooltip': getI18nString('sites.panel.interactions_panel.transition_delay'),
@@ -25991,13 +25991,13 @@ function wa({
 }) {
   let o = EU();
   let d = useDispatch();
-  let c = _$$hS2(e) ? wr(e) : e;
+  let c = isValidValue(e) ? wr(e) : e;
   let p = wd(e);
   let x = e => {
-    _$$hS2(t) && r(PQ(e, _$$w_(t)));
+    isValidValue(t) && r(PQ(e, _$$w_(t)));
   };
   return jsx(Fragment, {
-    children: _$$hS2(c) && _$$hS2(t) && (!p || c === 'CUSTOM_SPRING') && jsx(k5, {
+    children: isValidValue(c) && isValidValue(t) && (!p || c === 'CUSTOM_SPRING') && jsx(k5, {
       label: renderI18nText('sites.panel.interactions_panel.transition_duration'),
       input: p ? jsx(_$$y11.Consumer, {
         children: ([e]) => jsx(W4, {
@@ -26089,7 +26089,7 @@ function wo(e) {
   }
 }
 function wd(e) {
-  return !!e && _$$hS2(e) && (e === 'GENTLE_SPRING' || e === 'SPRING' || e === 'SPRING_PRESET_ONE' || e === 'SPRING_PRESET_TWO' || e === 'SPRING_PRESET_THREE' || e === 'CUSTOM_SPRING');
+  return !!e && isValidValue(e) && (e === 'GENTLE_SPRING' || e === 'SPRING' || e === 'SPRING_PRESET_ONE' || e === 'SPRING_PRESET_TWO' || e === 'SPRING_PRESET_THREE' || e === 'CUSTOM_SPRING');
 }
 function wu({
   easingType: e,
@@ -26117,8 +26117,8 @@ function wu({
     setEasingFunction: r,
     recordingKey: c
   });
-  let g = _$$hS2(e) ? wr(e) : e;
-  let f = _$$hS2(g) && _$$hS2(a) && (g === 'CUSTOM_BEZIER' || g === 'CUSTOM_SPRING');
+  let g = isValidValue(e) ? wr(e) : e;
+  let f = isValidValue(g) && isValidValue(a) && (g === 'CUSTOM_BEZIER' || g === 'CUSTOM_SPRING');
   let _ = jsx(_$$Um, {
     className: _$$dR2,
     property: g,
@@ -26131,7 +26131,7 @@ function wu({
   });
   return jsx(k8, {
     children: jsxs(_$$O10, {
-      easingFunction: _$$hS2(a) ? a : null,
+      easingFunction: isValidValue(a) ? a : null,
       children: [jsx(k5, {
         label: renderI18nText('sites.panel.interactions_panel.transition'),
         input: _
@@ -26162,7 +26162,7 @@ function wm({
     let e = KH();
     let t = GW();
     return Fk((e, i) => {
-      let n = _$$e15 && t === xc1.RESPONSIVE_SET;
+      let n = _$$e15 && t === SelectionPanelType.RESPONSIVE_SET;
       if (!i) return [];
       let l = new Set();
       let a = new Set();
@@ -26185,10 +26185,10 @@ function wm({
       return Array.from(l);
     }, e);
   }();
-  let u = !_$$gl(e) && _$$fn(e) ? _$$dI(e) : _$$gl(e) ? _$$oV : null;
-  !u || _$$gl(u) || c.includes(u) || (u = null);
+  let u = !isInvalidValue(e) && isValidSessionLocalID(e) ? sessionLocalIDToString(e) : isInvalidValue(e) ? MIXED_MARKER : null;
+  !u || isInvalidValue(u) || c.includes(u) || (u = null);
   let p = useCallback(e => {
-    t(_$$sH2(e) ?? Hr);
+    t(parseSessionLocalID(e) ?? defaultSessionLocalID);
   }, [t]);
   let x = e => {
     Uc(e);
@@ -26205,7 +26205,7 @@ function wm({
     dispatch: o,
     dropdownShown: d,
     dropdownWidth: 140,
-    icon: u && !_$$gl(u) ? jsx(Bf, {
+    icon: u && !isInvalidValue(u) ? jsx(Bf, {
       guid: u
     }) : null,
     children: c.map(e => jsx(wg, {
@@ -26222,7 +26222,7 @@ function w_({
   onChange: t,
   recordingKey: i
 }) {
-  let n = _$$gl(e) ? 'MIXED' : e ? 'ON' : 'OFF';
+  let n = isInvalidValue(e) ? 'MIXED' : e ? 'ON' : 'OFF';
   let s = useCallback(e => {
     t(e === 'ON');
   }, [t]);
@@ -26380,8 +26380,8 @@ function wj({
     setEasingFunction: r,
     recordingKey: c
   });
-  let f = _$$hS2(e) ? wr(e) : e;
-  let _ = _$$hS2(f) && _$$hS2(a) && (f === 'CUSTOM_BEZIER' || f === 'CUSTOM_SPRING');
+  let f = isValidValue(e) ? wr(e) : e;
+  let _ = isValidValue(f) && isValidValue(a) && (f === 'CUSTOM_BEZIER' || f === 'CUSTOM_SPRING');
   let b = jsx(_$$Um, {
     className: _$$dR2,
     property: f,
@@ -26395,7 +26395,7 @@ function wj({
   let y = renderI18nText('sites.panel.interactions_panel.transition');
   return jsx(k8, {
     children: jsxs(_$$O10, {
-      easingFunction: _$$hS2(a) ? a : null,
+      easingFunction: isValidValue(a) ? a : null,
       children: [_ ? jsx(k4, {
         label: y,
         input: b,
@@ -26457,7 +26457,7 @@ function wk({
         })
       })]
     }), jsx(k8, {
-      children: !_$$gl(r) && jsxs(Fragment, {
+      children: !isInvalidValue(r) && jsxs(Fragment, {
         children: [jsx(ww, {
           stateName: 'enter',
           pushDetailsComponent: e,
@@ -26468,7 +26468,7 @@ function wk({
           recordingKey: t
         })]
       })
-    }), _$$hS2(r) && r !== 'PAGE_LOAD' ? jsx(k8, {
+    }), isValidValue(r) && r !== 'PAGE_LOAD' ? jsx(k8, {
       children: jsx(k5, {
         label: renderI18nText('sites.panel.interactions_panel.replay_label'),
         input: jsx(w_, {
@@ -27081,7 +27081,7 @@ function Sr({
         children: t
       }) : renderI18nText('sites.panel.interactions_panel.code_behavior');
     default:
-      if (_$$gl(e)) return renderI18nText('fullscreen.properties_panel.presets');
+      if (isInvalidValue(e)) return renderI18nText('fullscreen.properties_panel.presets');
       return throwTypeError(e);
   }
 }
@@ -27189,7 +27189,7 @@ function Sv(e) {
   let [p, x] = Sw();
   let m = useCallback(() => {
     if (d === 0 && p === 0) return 'top-left';
-    if (r && _$$hS2(r)) {
+    if (r && isValidValue(r)) {
       let e = getSingletonSceneGraph().get(r);
       if (e && d === e.size.x / 2 && p === e.size.y / 2) return 'center';
     }
@@ -27200,7 +27200,7 @@ function Sv(e) {
     if (f(e), e === 'top-left') {
       c(0);
       x(0);
-    } else if (e === 'center' && r && _$$hS2(r)) {
+    } else if (e === 'center' && r && isValidValue(r)) {
       let e = getSingletonSceneGraph().get(r);
       e && (c(e.size.x / 2), x(e.size.y / 2));
     }
@@ -27209,7 +27209,7 @@ function Sv(e) {
   useEffect(() => {
     v(null);
     (async () => {
-      _$$hS2(r) && v(await c_(r));
+      isValidValue(r) && v(await c_(r));
     })();
   }, [r]);
   let j = useCallback(e => {
@@ -27238,9 +27238,9 @@ function Sv(e) {
         imageCandidates: k,
         label: getI18nString('sites.metadata.image_selector.placeholder'),
         labelHidden: !0,
-        nodeId: _$$hS2(r) && _$$fn(_$$sH2(r)) ? r.toString() : '',
+        nodeId: isValidValue(r) && isValidSessionLocalID(parseSessionLocalID(r)) ? r.toString() : '',
         recordingKey: 'sites.panel.cursor',
-        removeImage: () => j(_$$AD),
+        removeImage: () => j(defaultSessionLocalIDString),
         removeString: getI18nString('sites.panel.interactions_panel.remove_cursor'),
         selectImage: j
       })
@@ -27251,7 +27251,7 @@ function Sv(e) {
         onChange: _,
         children: [jsx(_$$l7, {
           width: 'fill',
-          label: jsx(_$$h6, {
+          label: jsx(HiddenLabel, {
             children: renderI18nText('sites.panel.interactions_panel.hotspot')
           })
         }), jsxs(_$$mc2, {
@@ -27301,9 +27301,9 @@ function Sv(e) {
 let Sj = kR({
   behaviorType: Xc.Cursor,
   editName: 'cursorGuid',
-  get: e => _$$dI(e?.cursorGuid) ?? _$$AD,
+  get: e => sessionLocalIDToString(e?.cursorGuid) ?? defaultSessionLocalIDString,
   update: (e, t) => {
-    e && t && (e.cursorGuid = _$$sH2(t) ?? Hr);
+    e && t && (e.cursorGuid = parseSessionLocalID(t) ?? defaultSessionLocalID);
   }
 });
 let Sk = kR({
@@ -27453,7 +27453,7 @@ function SN(e) {
           legend: jsx(_$$q2, {
             children: getI18nString('sites.panel.interactions_panel.marquee_direction')
           }),
-          value: !_$$gl(c) && c ? 'TRUE' : 'FALSE',
+          value: !isInvalidValue(c) && c ? 'TRUE' : 'FALSE',
           onChange: e => {
             p(e === 'TRUE');
           },
@@ -27642,7 +27642,7 @@ function SH({
   let r = _$$eY();
   let o = _$$kl('opacity');
   let d = useMemo(() => ({
-    opacity: _$$gl(o) ? void 0 : o
+    opacity: isInvalidValue(o) ? void 0 : o
   }), [o]);
   let c = useMemo(() => ({
     x: 32,
@@ -27653,7 +27653,7 @@ function SH({
     y: 0
   }), []);
   if (e.behaviorType === Xc.Cursor) {
-    let t = _$$dI(e.cursorGuid);
+    let t = sessionLocalIDToString(e.cursorGuid);
     let i = t ? r.get(t) : null;
     if (e && i && s.current && i.size) {
       let t = s.current.getBoundingClientRect().width / 2 - 24;
@@ -27754,8 +27754,8 @@ function SH({
       }), F && t(async e => {
         await e('exit', scrollTransformTransition);
       }), hasCursorBehavior) {
-        let t = _$$sH2(cursorBehaviorInfo?.cursorGuid);
-        if (n.current && _$$fn(t)) {
+        let t = parseSessionLocalID(cursorBehaviorInfo?.cursorGuid);
+        if (n.current && isValidSessionLocalID(t)) {
           let t = cursorBehaviorInfo?.cursorGuid;
           let i = l?.hotspot.x ?? 0;
           let a = l?.hotspot.y ?? 0;
@@ -27856,12 +27856,12 @@ function Sq({
   let t = function () {
     let e = _$$kl('numSelectedByType');
     let t = _$$kl('numSelected');
-    return !!(e && _$$hS2(e)) && t !== 0 && _$$OU(e, ['TEXT']);
+    return !!(e && isValidValue(e)) && t !== 0 && _$$OU(e, ['TEXT']);
   }();
   let i = function () {
     let e = _$$kl('numSelectedByType');
     let t = _$$kl('numSelected');
-    return !!(e && _$$hS2(e)) && t !== 0 && _$$OU(e, ['FRAME']);
+    return !!(e && isValidValue(e)) && t !== 0 && _$$OU(e, ['FRAME']);
   }();
   let n = i || !t && !i;
   return t || n ? jsx('div', {
@@ -27956,7 +27956,7 @@ function SV({
   e.behaviorType === Xc.Cursor && (i = e);
   useEffect(() => {
     if (i && i.cursorGuid) {
-      let e = _$$dI(i.cursorGuid);
+      let e = sessionLocalIDToString(i.cursorGuid);
       (async () => {
         let t = await c_(e);
         t ? s(t) : s('');
@@ -28233,7 +28233,7 @@ let S2 = ({
   rotation: l
 }) => {
   let a = [];
-  return _$$gl(e) || _$$gl(t) ? '' : (e > _$$$Y ? a.push(getI18nString('sites.panel.interactions_panel.grow')) : e < _$$$Y && a.push(getI18nString('sites.panel.interactions_panel.shrink')), t !== _$$q10 && a.push(getI18nString('sites.panel.interactions_panel.fade')), (i !== Q5 || n !== Q5) && a.push(getI18nString('sites.panel.interactions_panel.shift')), l !== _$$rb && a.push(getI18nString('sites.panel.interactions_panel.rotate')), a.length > 0 ? a.join(', ') : '');
+  return isInvalidValue(e) || isInvalidValue(t) ? '' : (e > _$$$Y ? a.push(getI18nString('sites.panel.interactions_panel.grow')) : e < _$$$Y && a.push(getI18nString('sites.panel.interactions_panel.shrink')), t !== _$$q10 && a.push(getI18nString('sites.panel.interactions_panel.fade')), (i !== Q5 || n !== Q5) && a.push(getI18nString('sites.panel.interactions_panel.shift')), l !== _$$rb && a.push(getI18nString('sites.panel.interactions_panel.rotate')), a.length > 0 ? a.join(', ') : '');
 };
 let S4 = kR({
   behaviorType: Xc.Hover,
@@ -28514,7 +28514,7 @@ function CU(e) {
         'tooltipForScreenReadersOnly': !0,
         'value': i
       })
-    }), _$$hS2(i) && jsx(k1, {
+    }), isValidValue(i) && jsx(k1, {
       input: jsx(_$$A21, {
         'aria-label': getI18nString('sites.panel.interactions_panel.speed'),
         'value': i,
@@ -28590,7 +28590,7 @@ function CW({
         })
       })]
     }), jsx(k8, {
-      children: !_$$gl(r) && jsxs(Fragment, {
+      children: !isInvalidValue(r) && jsxs(Fragment, {
         children: [jsx(CY, {
           stateName: 'from',
           pushDetailsComponent: e,
@@ -28601,7 +28601,7 @@ function CW({
           recordingKey: t
         })]
       })
-    }), _$$hS2(r) && r !== 'PAGE_HEIGHT' ? jsx(k8, {
+    }), isValidValue(r) && r !== 'PAGE_HEIGHT' ? jsx(k8, {
       children: jsx(k5, {
         label: renderI18nText('sites.panel.interactions_panel.replay_label'),
         input: jsx(w_, {
@@ -28915,7 +28915,7 @@ function Td({
         ...i.assignments
       };
       for (let [t, l] of Object.entries(i.defs)) {
-        if (l.type === J0O.INSTANCE_SWAP) {
+        if (l.type === ComponentPropType.INSTANCE_SWAP) {
           let l = i.assignments[t];
           if (l && typeof l == 'string') {
             let i = [l];
@@ -28927,7 +28927,7 @@ function Td({
       }
       for (let [e, i] of Object.entries(n)) {
         let n = t[e];
-        n ? typeof i == 'object' && typeof n == 'object' && 'image' in t[e] && 'image' in i ? n.image !== i.image ? t[e] = _$$oV : t[e] = i : n !== i && (t[e] = _$$oV) : t[e] = i;
+        n ? typeof i == 'object' && typeof n == 'object' && 'image' in t[e] && 'image' in i ? n.image !== i.image ? t[e] = MIXED_MARKER : t[e] = i : n !== i && (t[e] = MIXED_MARKER) : t[e] = i;
       }
     }
     return t;
@@ -28972,7 +28972,7 @@ function Td({
           behaviorAssignmentInfo: j,
           clearBehaviorVariableBinding: (e, t) => {
             _$$l.user('set-text-prop-assignment-on-preset', () => {
-              for (let i of nodeIds) glU?.unbindCodeBehaviorPropAssignment(i, codeComponentId, e, t);
+              for (let i of nodeIds) Fullscreen?.unbindCodeBehaviorPropAssignment(i, codeComponentId, e, t);
             });
           },
           containerWidth: O2.RESIZABLE_SIDEBAR,
@@ -28986,7 +28986,7 @@ function Td({
           sceneGraph: getSingletonSceneGraph(),
           submitBehaviorAssignment: (e, t) => {
             _$$l.user('set-text-prop-assignment-on-preset', () => {
-              for (let i of nodeIds) glU?.setCodeBehaviorPropAssignment(i, m, e, t);
+              for (let i of nodeIds) Fullscreen?.setCodeBehaviorPropAssignment(i, m, e, t);
             });
           },
           typedPropDefs: v
@@ -29176,11 +29176,11 @@ function Tc({
           recordingKey: n
         }), e === Xc.Marquee && jsx(SN, {
           recordingKey: n
-        }), _$$gl(e) && jsx(k8, {
+        }), isInvalidValue(e) && jsx(k8, {
           children: jsx(k0, {
             label: renderI18nText('fullscreen.mixed')
           })
-        }), !_$$gl(e) && f && jsx(SK, {
+        }), !isInvalidValue(e) && f && jsx(SK, {
           behaviorType: e
         }, 'preview')]
       }, 'body')
@@ -29222,8 +29222,8 @@ function Tx({
   let A = useCallback(({
     source: e
   } = {}) => {
-    e && e === 'outside' || glU?.setSelectedInteractions([]);
-    e === 'outside' && T || (Y5.deselectProperty(), C([]));
+    e && e === 'outside' || Fullscreen?.setSelectedInteractions([]);
+    e === 'outside' && T || (fullscreenValue.deselectProperty(), C([]));
   }, [C, T]);
   let {
     tooltipText,
@@ -29255,12 +29255,12 @@ function Tx({
       'onMouseEnter': () => {
         let e = [];
         Object.keys(b).forEach(t => {
-          let n = _$$sH2(t);
+          let n = parseSessionLocalID(t);
           if (!n) return;
           let l = i === Xc.Code && m;
           let a = _$$d11({
             nodeID: n,
-            interactionID: Hr,
+            interactionID: defaultSessionLocalID,
             behaviorId: l ? {
               behaviorType: Xc.Code,
               codeComponentId: c?.codeComponentId
@@ -29270,11 +29270,11 @@ function Tx({
           });
           e.push(a);
         });
-        glU?.hoverInteractions(e);
+        Fullscreen?.hoverInteractions(e);
         j(!0);
       },
       'onMouseLeave': () => {
-        glU?.hoverInteractions([]);
+        Fullscreen?.hoverInteractions([]);
         j(!1);
       },
       'recordingKey': Pt(g, 'draggable-behavior-row-wrapper'),
@@ -29317,7 +29317,7 @@ function Tx({
                 'data-tooltip-type': Ib.TEXT,
                 'data-tooltip': i,
                 'onMouseEnter': n,
-                'children': t && _$$hS2(t) && jsxs(Fragment, {
+                'children': t && isValidValue(t) && jsxs(Fragment, {
                   children: ['\xA0\xB7\xA0', t]
                 })
               })]
@@ -29498,7 +29498,7 @@ let Ty = (e, t) => {
         ...n.behaviors,
         [Xc.Code]: a
       };
-      UNF?.setBehaviors(e, i.nodeContext);
+      NodeTsApi?.setBehaviors(e, i.nodeContext);
     });
   });
 };
@@ -29530,7 +29530,7 @@ function Tw(e) {
 }
 let TE = [Xc.Cursor];
 let TN = 'interactionsPanel.createActionTrigger';
-let TR = e => e && _$$hS2(e);
+let TR = e => e && isValidValue(e);
 function TA(e) {
   let t = useRef(null);
   let [i, n] = TO();
@@ -29563,7 +29563,7 @@ function TA(e) {
     let [o] = C9('to');
     let [d] = Te('to');
     let c = [];
-    if (_$$gl(e) || _$$gl(t) || _$$gl(a) || _$$gl(s)) return '';
+    if (isInvalidValue(e) || isInvalidValue(t) || isInvalidValue(a) || isInvalidValue(s)) return '';
     let p = s - t;
     p > 0 ? c.push(getI18nString('sites.panel.interactions_panel.fade_in')) : p < 0 && c.push(getI18nString('sites.panel.interactions_panel.fade_out'));
     let x = a - e;
@@ -29643,9 +29643,9 @@ function TA(e) {
       return;
     }
     let l = _$$cn(n, 240);
-    Y5.updateAppModel({
+    fullscreenValue.updateAppModel({
       currentSelectedProperty: {
-        type: rrT.BEHAVIOR,
+        type: NodePropertyCategory.BEHAVIOR,
         indices: []
       }
     });
@@ -29656,23 +29656,23 @@ function TA(e) {
     } : e]);
     let a = [];
     Object.keys(ee).forEach(i => {
-      let n = _$$sH2(i);
+      let n = parseSessionLocalID(i);
       n && a.push(_$$d11({
         nodeID: n,
-        interactionID: Hr,
+        interactionID: defaultSessionLocalID,
         behaviorId: {
           behaviorType: e,
           codeComponentId: t
         }
       }));
     });
-    glU?.setSelectedInteractions(a);
+    Fullscreen?.setSelectedInteractions(a);
   }, [G, ee]);
   useEffect(() => {
     let e = [];
     for (let t of selectedNoodleIds) {
       let i = _$$s12(t);
-      if (i && i.interactionID === Hr && i.behaviorId) {
+      if (i && i.interactionID === defaultSessionLocalID && i.behaviorId) {
         let {
           behaviorType,
           codeComponentId
@@ -29793,17 +29793,17 @@ function TA(e) {
     let a = ef(t, i);
     let s = [];
     Z?.focus();
-    n ? s = a ? V.filter(e => t === Xc.Code && i ? !(typeof e == 'object' && e.type === Xc.Code && e.componentId === i) : e !== t) : [...V, l] : (selectedInteractions.length > 0 && glU?.setSelectedInteractions([]), s = V.length > 1 ? [l] : a ? [] : [l]);
+    n ? s = a ? V.filter(e => t === Xc.Code && i ? !(typeof e == 'object' && e.type === Xc.Code && e.componentId === i) : e !== t) : [...V, l] : (selectedInteractions.length > 0 && Fullscreen?.setSelectedInteractions([]), s = V.length > 1 ? [l] : a ? [] : [l]);
     G(s);
     let o = [];
     s.forEach(e => {
       Object.keys(ee).forEach(t => {
-        let i = _$$sH2(t);
+        let i = parseSessionLocalID(t);
         if (!i) return;
         let n = typeof e == 'object' && e.type === Xc.Code && 'componentId' in e;
         let l = _$$d11({
           nodeID: i,
-          interactionID: Hr,
+          interactionID: defaultSessionLocalID,
           behaviorId: n ? {
             behaviorType: Xc.Code,
             codeComponentId: e.componentId
@@ -29814,14 +29814,14 @@ function TA(e) {
         o.push(l);
       });
     });
-    glU?.setSelectedInteractions([..._$$wU(selectedInteractions), ...o]);
-    s.length !== 1 || n ? Y5.hidePicker() : ex(t, i);
+    Fullscreen?.setSelectedInteractions([..._$$wU(selectedInteractions), ...o]);
+    s.length !== 1 || n ? fullscreenValue.hidePicker() : ex(t, i);
   }, [ef, Z, selectedInteractions, V, G, ex, ee]);
   let ey = function () {
     let e = _$$kl('containsResponsiveSets');
     let t = _$$kl('containsSitesLayouts');
     let i = !e && t;
-    return !0 === i && !_$$gl(i);
+    return !0 === i && !isInvalidValue(i);
   }();
   let ev = function ({
     doesAlreadyHaveBehaviorType: e,
@@ -29853,11 +29853,11 @@ function TA(e) {
     let x = _$$kl('isInFixedScrollingTree');
     let m = _$$kl('isInStickyScrollingTree');
     let g = x || m;
-    let f = !0 === g || _$$gl(g);
+    let f = !0 === g || isInvalidValue(g);
     let _ = [{
       separator: !0,
       displayText: '',
-      hidden: !glU?.isSelectionContainedInStateOrStateInstance()
+      hidden: !Fullscreen?.isSelectionContainedInStateOrStateInstance()
     }, {
       type: Xc.Hover,
       icon: jsx(Ss, {
@@ -29986,8 +29986,8 @@ function TA(e) {
             throwTypeError(t);
         }
       }(i);
-      let d = Tw(i).map(e => CMm[e]);
-      let c = glU?.isCodeBehaviorValidForSelection(d);
+      let d = Tw(i).map(e => GraphicObjectTypes[e]);
+      let c = Fullscreen?.isCodeBehaviorValidForSelection(d);
       !a && c && (y = !1);
       return {
         type: Xc.Code,
@@ -30027,9 +30027,9 @@ function TA(e) {
       displayText: getI18nString('sites.code_behaviors.add_custom_interaction'),
       callback: () => {
         _$$l.user('create-new-code-interaction', () => {
-          let e = glU?.createNewCodeInteraction('interactions_panel');
+          let e = Fullscreen?.createNewCodeInteraction('interactions_panel');
           if (e) {
-            Y5.triggerAction('commit');
+            fullscreenValue.triggerAction('commit');
             let t = getSingletonSceneGraph().get(e);
             if (t) {
               Tv({
@@ -30309,7 +30309,7 @@ function TA(e) {
               let i = [];
               for (let t of (G([]), Object.keys(ee))) {
                 let n = function (e, t, i) {
-                  let n = _$$sH2(glU?.generateUniqueID());
+                  let n = parseSessionLocalID(Fullscreen?.generateUniqueID());
                   if (!n) throw new Error('No interaction ID');
                   let {
                     connectionType,
@@ -30317,7 +30317,7 @@ function TA(e) {
                   } = e;
                   return {
                     id: n,
-                    sourceNodeID: _$$sH2(t) ?? Hr,
+                    sourceNodeID: parseSessionLocalID(t) ?? defaultSessionLocalID,
                     event: {
                       interactionType: _$$a17(i, connectionType, !0)
                     },
@@ -30335,18 +30335,18 @@ function TA(e) {
                 interactionID: e.id
               }));
               if (n.length > 0) {
-                glU?.setSelectedInteractions(n);
+                Fullscreen?.setSelectedInteractions(n);
                 let e = _$$cn(t.current);
                 let i = new Mi(e.x, e.y);
                 _$$dT(i, !1);
               }
               let l = [...X, ...i, ...ea];
-              Y5.updateSelectionProperties({
+              fullscreenValue.updateSelectionProperties({
                 prototypeInteractions: l
               }, {
                 shouldCommit: _$$zk.NO_BUT_TRACK_AS_EDIT
               });
-              Y5.commit();
+              fullscreenValue.commit();
             },
             isNestedInConditional: !1,
             renderButton: !0,
@@ -30502,7 +30502,7 @@ let T$ = kR({
       return {
         hotspotX: 0,
         hotspotY: 0,
-        cursorGuid: Hr
+        cursorGuid: defaultSessionLocalID
       };
     }
   },
@@ -30574,7 +30574,7 @@ let TX = kL({
   get: e => {
     let t = getI18nString('sites.panel.interactions_panel.none');
     if (!e || !e.cursorGuid) return t;
-    let i = getSingletonSceneGraph().get(_$$dI(e.cursorGuid));
+    let i = getSingletonSceneGraph().get(sessionLocalIDToString(e.cursorGuid));
     return i ? i.name : t;
   }
 });
@@ -30618,11 +30618,11 @@ function TY({
   let a = q5();
   let o = useSelector(e => e.userFlags);
   let d = _$$tN('containsResponsiveSets');
-  let c = !n[ibQ.FRAME_PRESETS] && !n[ibQ.PENCIL_TOOL] && !d;
+  let c = !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL] && !d;
   let p = z0();
   let x = Object.keys(i).length > 0 && _$$Yh(p, 'create-code-layer-from-design');
   let m = (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && x;
-  let h = !x && !_$$jd(n) && !n[ibQ.SITES_LINK_ITEM] && !n[ibQ.SITES_INTERACTIONS_ITEM] && !n[ibQ.FRAME_PRESETS] && !n[ibQ.PENCIL_TOOL];
+  let h = !x && !_$$jd(n) && !n[ItemType.SITES_LINK_ITEM] && !n[ItemType.SITES_INTERACTIONS_ITEM] && !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL];
   return jsxs(_$$i7, {
     children: [jsx(VF, {
       isVisible: x,
@@ -30632,7 +30632,7 @@ function TY({
           className: _$$rq2,
           children: jsx(_$$z13, {
             'onClick': () => {
-              Y5.triggerAction('create-code-layer-from-design', {
+              fullscreenValue.triggerAction('create-code-layer-from-design', {
                 source: 'properties_panel'
               });
             },
@@ -30663,22 +30663,22 @@ function TY({
         recordingKey: 'codeInstancePanel'
       }, 'codeInstance')
     }), jsx(VF, {
-      isVisible: n[ibQ.SITES_LINK_ITEM],
+      isVisible: n[ItemType.SITES_LINK_ITEM],
       children: () => jsx(_$$rC2, {
         recordingKey: 'linkPanel'
       })
     }), jsx(VF, {
-      isVisible: n[ibQ.SITES_INTERACTIONS_ITEM],
+      isVisible: n[ItemType.SITES_INTERACTIONS_ITEM],
       children: () => jsx(TA, {
         recordingKey: 'interactionsPanel'
       })
     }), jsx(VF, {
-      isVisible: n[ibQ.FRAME_PRESETS],
+      isVisible: n[ItemType.FRAME_PRESETS],
       children: () => jsx(_$$nl3, {
         recordingKey: 'framePresetPanel'
       }, 'frame-presets')
     }), jsx(VF, {
-      isVisible: n[ibQ.PENCIL_TOOL],
+      isVisible: n[ItemType.PENCIL_TOOL],
       children: () => jsx(_$$q1, {
         id: 'pencilToolPanel',
         recordingKey: 'pencilToolPanel',
@@ -30695,7 +30695,7 @@ function TY({
         userFlags: o
       }, 'prototype')
     }), jsx(VF, {
-      isVisible: n[ibQ.SITES_ACCESSIBILITY_ITEM],
+      isVisible: n[ItemType.SITES_ACCESSIBILITY_ITEM],
       children: () => jsx(jr, {
         recordingKey: 'accessibilityPanel'
       })
@@ -30719,24 +30719,24 @@ function TJ({
   _$$S0();
   let p = useCallback(e => {
     switch (e) {
-      case FAf.DESIGN:
-      case FAf.SITE:
-        return FAf.SITE;
+      case DesignWorkspace.DESIGN:
+      case DesignWorkspace.SITE:
+        return DesignWorkspace.SITE;
       default:
         return e;
     }
   }, []);
   let x = P5({
-    defaultTab: FAf.SITE,
+    defaultTab: DesignWorkspace.SITE,
     getActiveTab: p
   });
   let h = null;
   let g = _$$p2('topLevelMode');
   let f = _$$p2('isReadOnly');
-  let _ = g === lyf.LAYOUT && !f && x === FAf.SITE;
-  let b = g !== lyf.PREVIEW && g !== lyf.BRANCHING && x === FAf.PROTOTYPE;
-  let y = _$$U() && g === lyf.LAYOUT && !f && x === FAf.DAKOTA;
-  let v = x === FAf.COMMENT;
+  let _ = g === ViewType.LAYOUT && !f && x === DesignWorkspace.SITE;
+  let b = g !== ViewType.PREVIEW && g !== ViewType.BRANCHING && x === DesignWorkspace.PROTOTYPE;
+  let y = _$$U() && g === ViewType.LAYOUT && !f && x === DesignWorkspace.DAKOTA;
+  let v = x === DesignWorkspace.COMMENT;
   return jsxs(noop, {
     recordingKey: 'propertiesPanel',
     activeTab: x,
@@ -30817,7 +30817,7 @@ let T2 = memo(({
   let _ = f ? f.key : '';
   let y = _$$p2('showUi');
   let v = useAtomWithSubscription(_$$s3);
-  let j = v === Nfd.DAKOTA;
+  let j = v === PanelType.DAKOTA;
   let k = _$$U();
   let S = useDispatch();
   let C = L3();
@@ -30857,17 +30857,17 @@ let T2 = memo(({
           let i = t.defaultResponsiveSetId;
           debug(!!i, 'existingDefaultResponsiveSetId is undefined. This should never happen');
           t.setSelectionToSingleNode(i);
-          Y5.triggerActionEnum(rcl.TOGGLE_LOCKED_FOR_SELECTED_NODES);
+          fullscreenValue.triggerActionEnum(Command.TOGGLE_LOCKED_FOR_SELECTED_NODES);
           u5(n).then(() => {
             l(Ut);
             let t = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!t, 'newlyCopiedNodeId is undefined. This should never happen');
             _$$i(t, getI18nString('sites.modal.desktop'));
-            Y5.triggerActionEnum(rcl.CREATE_RESPONSIVE_SET);
+            fullscreenValue.triggerActionEnum(Command.CREATE_RESPONSIVE_SET);
             let i = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!i, 'newResponsiveSetId is undefined. This should never happen');
             u2(i);
-            Y5.triggerActionEnum(rcl.ZOOM_TO_SELECTION);
+            fullscreenValue.triggerActionEnum(Command.ZOOM_TO_SELECTION);
             d(_$$F.clearAll());
             debugState.dispatch(_$$F.dequeue({
               matchType: 'design-to-sites-load'
@@ -30920,11 +30920,11 @@ let T2 = memo(({
     let d = s?.find(e => e.status === 'succeeded') || null;
     let c = d?.responsiveSetGuids || [];
     let u = !o || o?.status !== 'published';
-    glU?.setSitePublished(!!(d && !u));
+    Fullscreen?.setSitePublished(!!(d && !u));
     s && c && (t.forEach(e => {
-      c.includes(e) || glU?.setPagePublished(e, !1);
+      c.includes(e) || Fullscreen?.setPagePublished(e, !1);
     }), c.forEach(e => {
-      glU?.setPagePublished(e, !0);
+      Fullscreen?.setPagePublished(e, !0);
     }), !function (e, t) {
       if (e.length !== t.length) return !1;
       for (let i of e) {
@@ -30935,7 +30935,7 @@ let T2 = memo(({
   })(_);
   let D = y && !j && !_$$a8(v);
   useEffect(() => {
-    Y5.isReady() && (h3O && h3O.sendSitesViewState(v), Msn && Msn.notifyUpdateToSitesViewState());
+    fullscreenValue.isReady() && (Multiplayer && Multiplayer.sendSitesViewState(v), SitesBindingsCpp && SitesBindingsCpp.notifyUpdateToSitesViewState());
   }, [v]);
   useEffect(() => {
     A && O && _$$a8(O) ? S(_$$F.enqueue({
@@ -30955,7 +30955,7 @@ let T2 = memo(({
     })));
   }, [I, S, T, E, N]);
   useEffect(() => {
-    h3O && F && M && T && (_$$j$(F.sessionID), S(_$$F.enqueue({
+    Multiplayer && F && M && T && (_$$j$(F.sessionID), S(_$$F.enqueue({
       message: getI18nString('left_rail.ask_to_spotlight_ended_only_available'),
       type: $$T50
     })));
@@ -30966,10 +30966,10 @@ let T2 = memo(({
     });
     if (C) return e;
     switch (v) {
-      case Nfd.SETTINGS:
-      case Nfd.CODE:
+      case PanelType.SETTINGS:
+      case PanelType.CODE:
         return null;
-      case Nfd.DAKOTA:
+      case PanelType.DAKOTA:
         return jsxs(Fragment, {
           children: [t && jsx(TZ, {}), _$$U() && jsx(Y, {})]
         });
@@ -30979,7 +30979,7 @@ let T2 = memo(({
   })();
   return jsxs(eS, {
     children: [jsxs(_$$sk, {
-      children: [i.mode !== Oin.OFF && jsx('div', {
+      children: [i.mode !== UIVisibilitySetting.OFF && jsx('div', {
         className: _$$_q
       }), jsxs(_$$pO, {
         initialFilterState: {

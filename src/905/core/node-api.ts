@@ -13,7 +13,7 @@ import { w as _$$w4 } from '../83498'
 import { aD } from '../125019'
 import { N as _$$N } from '../125137'
 import { ServiceCategories as _$$e } from '../165054'
-import { l7 } from '../189185'
+import { permissionScopeHandler } from '../189185'
 import { MT } from '../321380'
 import { debugState } from '../407919'
 import { Cs } from '../420347'
@@ -301,16 +301,16 @@ export function processGradientPaint(config, visible, opacity, blendMode) {
     transform: arrayToTransformMatrix(config.gradientTransform),
     stopsVar: config.gradientStops.map(e => e.boundVariables?.color?.id && e.boundVariables.color?.type === 'VARIABLE_ALIAS' && _$$fn(e.boundVariables.color.id)
       ? {
-          color: e.color,
-          position: e.position,
-          colorVar: {
-            dataType: 'ALIAS',
-            resolvedDataType: 'COLOR',
-            value: {
-              alias: _$$sH(e.boundVariables.color.id),
-            },
+        color: e.color,
+        position: e.position,
+        colorVar: {
+          dataType: 'ALIAS',
+          resolvedDataType: 'COLOR',
+          value: {
+            alias: _$$sH(e.boundVariables.color.id),
           },
-        }
+        },
+      }
       : Ug(e)),
     stops: config.gradientStops.map(({
       color,
@@ -711,7 +711,7 @@ export function defineGridTrackSizesProperty(dimension, propName, {
                 enumerable: true,
                 get: () => vm.newString(sAE[sizeObj.maxSizing.type]),
                 set(val) {
-                  l7.plugin('plugin-grid-track-size', () => {
+                  permissionScopeHandler.plugin('plugin-grid-track-size', () => {
                     node.setGridTrackType(dimension, idx, sAE[_$$u({
                       vm,
                       handle: val,
@@ -727,7 +727,7 @@ export function defineGridTrackSizesProperty(dimension, propName, {
                 enumerable: true,
                 get: () => vm.newNumber(sizeObj.maxSizing.value),
                 set(val) {
-                  l7.plugin('plugin-grid-track-size', () => {
+                  permissionScopeHandler.plugin('plugin-grid-track-size', () => {
                     node.setGridTrackSize(dimension, idx, _$$u({
                       vm,
                       handle: val,
@@ -747,7 +747,7 @@ export function defineGridTrackSizesProperty(dimension, propName, {
                 zSchema: _$$N.GridTrackSize,
                 property: propName,
               })
-              l7.plugin('plugin-grid-track-size', () => {
+              permissionScopeHandler.plugin('plugin-grid-track-size', () => {
                 node.setGridTrackType(dimension, idx, sAE[parsed.type])
                 if (parsed.type === 'FIXED') {
                   if (!parsed.value) {
@@ -778,7 +778,7 @@ export function defineGridTrackSizesProperty(dimension, propName, {
           const item = parsedArr[idx]
           if (!item)
             throw new Error(`Grid track size is undefined at index ${idx}`)
-          l7.plugin('plugin-grid-track-size', () => {
+          permissionScopeHandler.plugin('plugin-grid-track-size', () => {
             node.setGridTrackType(dimension, idx, sAE[item.type])
             if (item.value)
               node.setGridTrackSize(dimension, idx, item.value)
@@ -801,8 +801,8 @@ export function defineGridTrackSizesProperty(dimension, propName, {
 export function defineMinMaxProperty(propName, boundType) {
   return function ({
     vm,
-                     defineVmProp,
-                     getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -838,8 +838,8 @@ export function defineMinMaxProperty(propName, boundType) {
           }
           getFeatureFlags().dse_min_max_plugin_behavior
             ? Egt?.setNodeTransformProperties(node.guid, {
-                [propName]: parsed,
-              })
+              [propName]: parsed,
+            })
             : node[propName] = parsed
           return vm.undefined
         },
@@ -889,8 +889,8 @@ export function validateResizeDimensions(node, widthHandle, heightHandle, vm) {
 export function defineStrokeWeightProperty(propName, nodeField) {
   return function ({
     vm,
-                     defineVmProp,
-                     getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -1917,7 +1917,7 @@ export const NodeAPI = {
    */
   toString({
     vm,
-             defineVmFunction,
+    defineVmFunction,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1941,10 +1941,10 @@ export const NodeAPI = {
    */
   clone({
     getNodeFactory,
-          editorType,
-          defineVmFunction,
-          getNode,
-          documentAccessState,
+    editorType,
+    defineVmFunction,
+    getNode,
+    documentAccessState,
   }, handle) {
     defineVmFunction({
       handle,
@@ -1979,12 +1979,12 @@ export const NodeAPI = {
   },
   cloneWidget({
     vm: e,
-                pluginID: t,
-                getNodeFactory: i,
-                widgetManager: n,
-                defineVmFunction: r,
-                getNode: a,
-                sceneGraph: s,
+    pluginID: t,
+    getNodeFactory: i,
+    widgetManager: n,
+    defineVmFunction: r,
+    getNode: a,
+    sceneGraph: s,
   }, o) {
     r({
       handle: o,
@@ -2017,11 +2017,11 @@ export const NodeAPI = {
   },
   setWidgetSyncedState({
     vm: e,
-                         pluginID: t,
-                         widgetManager: i,
-                         pluginVersionID: n,
-                         defineVmFunction: r,
-                         getNode: a,
+    pluginID: t,
+    widgetManager: i,
+    pluginVersionID: n,
+    defineVmFunction: r,
+    getNode: a,
   }, s) {
     r({
       handle: s,
@@ -2061,8 +2061,8 @@ export const NodeAPI = {
   },
   remove({
     vm: e,
-           defineVmFunction: t,
-           getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2078,13 +2078,13 @@ export const NodeAPI = {
   },
   exportNode({
     vm,
-               defineVmFunction,
-               getNode,
-               validatedPermissions,
-               documentAccessState,
-               pluginID,
-               editorType,
-               openFileKey,
+    defineVmFunction,
+    getNode,
+    validatedPermissions,
+    documentAccessState,
+    pluginID,
+    editorType,
+    openFileKey,
   }, handle) {
     defineVmFunction({
       handle,
@@ -2225,8 +2225,8 @@ export const NodeAPI = {
   },
   resolvedVariableModes({
     vm: e,
-                          defineVmProp: t,
-                          getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2244,8 +2244,8 @@ export const NodeAPI = {
   },
   explicitVariableModes({
     vm: e,
-                          defineVmProp: t,
-                          getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2263,9 +2263,9 @@ export const NodeAPI = {
   },
   parent({
     vm: e,
-           getNodeFactory: t,
-           defineVmProp: i,
-           getNode: n,
+    getNodeFactory: t,
+    defineVmProp: i,
+    getNode: n,
   }, r) {
     i({
       handle: r,
@@ -2288,10 +2288,10 @@ export const NodeAPI = {
   },
   getTopLevelFrame({
     vm: e,
-                     getNodeFactory: t,
-                     defineVmFunction: i,
-                     getNode: n,
-                     editorType: r,
+    getNodeFactory: t,
+    defineVmFunction: i,
+    getNode: n,
+    editorType: r,
   }, a) {
     i({
       handle: a,
@@ -2310,9 +2310,9 @@ export const NodeAPI = {
   },
   name({
     vm: e,
-         defineVmProp: t,
-         getNode: i,
-         documentAccessState: n,
+    defineVmProp: t,
+    getNode: i,
+    documentAccessState: n,
   }, r) {
     t({
       handle: r,
@@ -2364,8 +2364,8 @@ export const NodeAPI = {
   },
   isPageDivider({
     vm: e,
-                  defineVmProp: t,
-                  getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2383,10 +2383,10 @@ export const NodeAPI = {
   },
   isHomepage({
     vm: e,
-               defineVmProp: t,
-               getNode: i,
-               editorType: n,
-               sceneGraph: r,
+    defineVmProp: t,
+    getNode: i,
+    editorType: n,
+    sceneGraph: r,
   }, a) {
     t({
       handle: a,
@@ -2429,8 +2429,8 @@ export const NodeAPI = {
   },
   visible({
     vm: e,
-            defineVmProp: t,
-            getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2457,8 +2457,8 @@ export const NodeAPI = {
   },
   locked({
     vm: e,
-           defineVmProp: t,
-           getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2486,9 +2486,9 @@ export const NodeAPI = {
   },
   expanded({
     vm: e,
-             editorType: t,
-             defineVmProp: i,
-             getNode: n,
+    editorType: t,
+    defineVmProp: i,
+    getNode: n,
   }, r) {
     i({
       handle: r,
@@ -2515,8 +2515,8 @@ export const NodeAPI = {
   },
   removed({
     vm: e,
-            defineVmProp: t,
-            getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -2542,11 +2542,11 @@ export const NodeAPI = {
   },
   children({
     vm: e,
-             getNodeFactory: t,
-             defineVmProp: i,
-             documentAccessState: n,
-             getNode: r,
-             sceneGraph: a,
+    getNodeFactory: t,
+    defineVmProp: i,
+    documentAccessState: n,
+    getNode: r,
+    sceneGraph: a,
   }, s) {
     i({
       handle: s,
@@ -2592,9 +2592,9 @@ export const NodeAPI = {
   },
   stuckNodes({
     vm: e,
-               getNodeFactory: t,
-               defineVmProp: i,
-               getNode: n,
+    getNodeFactory: t,
+    defineVmProp: i,
+    getNode: n,
   }, r) {
     i({
       handle: r,
@@ -2616,9 +2616,9 @@ export const NodeAPI = {
   },
   stuckTo({
     vm: e,
-            getNodeFactory: t,
-            defineVmProp: i,
-            getNode: n,
+    getNodeFactory: t,
+    defineVmProp: i,
+    getNode: n,
   }, r) {
     i({
       handle: r,
@@ -2637,11 +2637,11 @@ export const NodeAPI = {
   },
   findOne({
     vm: e,
-            getNodeFactory: t,
-            defineVmFunction: i,
-            documentAccessState: n,
-            getNode: r,
-            sceneGraph: a,
+    getNodeFactory: t,
+    defineVmFunction: i,
+    documentAccessState: n,
+    getNode: r,
+    sceneGraph: a,
   }, s) {
     i({
       handle: s,
@@ -2858,11 +2858,11 @@ export const NodeAPI = {
   },
   findChild({
     vm: e,
-              getNodeFactory: t,
-              defineVmFunction: i,
-              getNode: n,
-              sceneGraph: r,
-              documentAccessState: a,
+    getNodeFactory: t,
+    defineVmFunction: i,
+    getNode: n,
+    sceneGraph: r,
+    documentAccessState: a,
   }, s) {
     i({
       handle: s,
@@ -2895,11 +2895,11 @@ export const NodeAPI = {
   },
   findChildren({
     vm,
-                 getNodeFactory,
-                 defineVmFunction,
-                 getNode,
-                 sceneGraph,
-                 documentAccessState,
+    getNodeFactory,
+    defineVmFunction,
+    getNode,
+    sceneGraph,
+    documentAccessState,
   }, handle) {
     defineVmFunction({
       handle,
@@ -2937,11 +2937,11 @@ export const NodeAPI = {
   },
   findWidgetNodesByWidgetId({
     vm,
-                              getNodeFactory,
-                              defineVmFunction,
-                              getNode,
-                              sceneGraph,
-                              documentAccessState,
+    getNodeFactory,
+    defineVmFunction,
+    getNode,
+    sceneGraph,
+    documentAccessState,
   }, handle) {
     defineVmFunction({
       handle,
@@ -2981,9 +2981,9 @@ export const NodeAPI = {
   },
   loadAsync({
     vm,
-              defineVmFunction,
-              documentAccessState,
-              getNode,
+    defineVmFunction,
+    documentAccessState,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -3011,11 +3011,11 @@ export const NodeAPI = {
   },
   appendChild({
     vm,
-                defineVmFunction,
-                getNode,
-                sceneGraph,
-                documentAccessState,
-                enableResponsiveSetHierarchyMutations,
+    defineVmFunction,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+    enableResponsiveSetHierarchyMutations,
   }, handle) {
     defineVmFunction({
       handle,
@@ -3068,8 +3068,8 @@ export const NodeAPI = {
   },
   widgetId({
     vm,
-             defineVmProp,
-             getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -3088,9 +3088,9 @@ export const NodeAPI = {
   },
   widgetSyncedState({
     vm: e,
-                      pluginID: t,
-                      defineVmProp: i,
-                      getNode: n,
+    pluginID: t,
+    defineVmProp: i,
+    getNode: n,
   }, r) {
     i({
       handle: r,
@@ -3109,9 +3109,9 @@ export const NodeAPI = {
   },
   constraints({
     vm: e,
-                defineVmProp: t,
-                stats: i,
-                getNode: n,
+    defineVmProp: t,
+    stats: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -3160,9 +3160,9 @@ export const NodeAPI = {
   },
   layoutAlign({
     vm: e,
-                defineVmProp: t,
-                stats: i,
-                getNode: n,
+    defineVmProp: t,
+    stats: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -3199,10 +3199,10 @@ export const NodeAPI = {
   },
   layoutMode({
     vm,
-               defineVmProp,
-               stats,
-               getNode,
-               enableResponsiveSetHierarchyMutations,
+    defineVmProp,
+    stats,
+    getNode,
+    enableResponsiveSetHierarchyMutations,
   }, handle) {
     defineVmProp({
       handle,
@@ -3246,9 +3246,9 @@ export const NodeAPI = {
   },
   layoutWrap({
     vm,
-               defineVmProp,
-               stats,
-               getNode,
+    defineVmProp,
+    stats,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -3281,9 +3281,9 @@ export const NodeAPI = {
   },
   counterAxisAlignContent({
     vm,
-                            defineVmProp,
-                            stats,
-                            getNode,
+    defineVmProp,
+    stats,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -3313,9 +3313,9 @@ export const NodeAPI = {
   },
   counterAxisSizingMode({
     vm,
-                          defineVmProp,
-                          stats,
-                          getNode,
+    defineVmProp,
+    stats,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -3351,9 +3351,9 @@ export const NodeAPI = {
   },
   primaryAxisSizingMode({
     vm,
-                          defineVmProp,
-                          stats,
-                          getNode,
+    defineVmProp,
+    stats,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -3392,8 +3392,8 @@ export const NodeAPI = {
   },
   primaryAxisAlignItems({
     vm: e,
-                          defineVmProp: t,
-                          getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3439,9 +3439,9 @@ export const NodeAPI = {
   },
   counterAxisAlignItems({
     vm: e,
-                          defineVmProp: t,
-                          stats: i,
-                          getNode: n,
+    defineVmProp: t,
+    stats: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -3474,9 +3474,9 @@ export const NodeAPI = {
   },
   layoutGrow({
     vm: e,
-               defineVmProp: t,
-               stats: i,
-               getNode: n,
+    defineVmProp: t,
+    stats: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -3505,8 +3505,8 @@ export const NodeAPI = {
   },
   layoutSizingHorizontal({
     vm: e,
-                           defineVmProp: t,
-                           getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3535,8 +3535,8 @@ export const NodeAPI = {
   },
   layoutSizingVertical({
     vm: e,
-                         defineVmProp: t,
-                         getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3565,8 +3565,8 @@ export const NodeAPI = {
   },
   horizontalPadding({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3596,8 +3596,8 @@ export const NodeAPI = {
   },
   verticalPadding({
     vm: e,
-                    defineVmProp: t,
-                    getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3627,8 +3627,8 @@ export const NodeAPI = {
   },
   paddingLeft({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3655,8 +3655,8 @@ export const NodeAPI = {
   },
   paddingRight({
     vm: e,
-                 defineVmProp: t,
-                 getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3683,8 +3683,8 @@ export const NodeAPI = {
   },
   paddingTop({
     vm: e,
-               defineVmProp: t,
-               getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3711,8 +3711,8 @@ export const NodeAPI = {
   },
   paddingBottom({
     vm: e,
-                  defineVmProp: t,
-                  getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3739,8 +3739,8 @@ export const NodeAPI = {
   },
   itemSpacing({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3767,8 +3767,8 @@ export const NodeAPI = {
   },
   counterAxisSpacing({
     vm: e,
-                       defineVmProp: t,
-                       getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3795,9 +3795,9 @@ export const NodeAPI = {
   },
   layoutPositioning({
     vm: e,
-                      defineVmProp: t,
-                      stats: i,
-                      getNode: n,
+    defineVmProp: t,
+    stats: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -3836,8 +3836,8 @@ export const NodeAPI = {
   },
   gridRowCount({
     vm: e,
-                 defineVmProp: t,
-                 getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3864,8 +3864,8 @@ export const NodeAPI = {
   },
   gridColumnCount({
     vm: e,
-                    defineVmProp: t,
-                    getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3892,8 +3892,8 @@ export const NodeAPI = {
   },
   gridRowGap({
     vm: e,
-               defineVmProp: t,
-               getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3920,8 +3920,8 @@ export const NodeAPI = {
   },
   gridColumnGap({
     vm: e,
-                  defineVmProp: t,
-                  getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3948,8 +3948,8 @@ export const NodeAPI = {
   },
   gridRowSpan({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -3975,8 +3975,8 @@ export const NodeAPI = {
   },
   gridColumnSpan({
     vm: e,
-                   defineVmProp: t,
-                   getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4074,8 +4074,8 @@ export const NodeAPI = {
   },
   gridRowAnchorIndex({
     vm: e,
-                       defineVmProp: t,
-                       getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4093,8 +4093,8 @@ export const NodeAPI = {
   },
   gridColumnAnchorIndex({
     vm: e,
-                          defineVmProp: t,
-                          getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4112,8 +4112,8 @@ export const NodeAPI = {
   },
   gridChildHorizontalAlign({
     vm: e,
-                             defineVmProp: t,
-                             getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4139,8 +4139,8 @@ export const NodeAPI = {
   },
   gridChildVerticalAlign({
     vm: e,
-                           defineVmProp: t,
-                           getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4166,8 +4166,8 @@ export const NodeAPI = {
   },
   gridRowSizingCSS({
     vm: e,
-                     defineVmProp: t,
-                     getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4185,8 +4185,8 @@ export const NodeAPI = {
   },
   gridColumnSizingCSS({
     vm: e,
-                        defineVmProp: t,
-                        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4204,8 +4204,8 @@ export const NodeAPI = {
   },
   itemReverseZIndex({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4237,8 +4237,8 @@ export const NodeAPI = {
   },
   strokesIncludedInLayout({
     vm: e,
-                            defineVmProp: t,
-                            getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4270,8 +4270,8 @@ export const NodeAPI = {
   },
   relativeTransform({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4301,8 +4301,8 @@ export const NodeAPI = {
   },
   absoluteTransform({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4322,8 +4322,8 @@ export const NodeAPI = {
   },
   rotation({
     vm: e,
-             defineVmProp: t,
-             getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4355,8 +4355,8 @@ export const NodeAPI = {
   },
   x({
     vm: e,
-      defineVmProp: t,
-      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4384,8 +4384,8 @@ export const NodeAPI = {
   },
   y({
     vm: e,
-      defineVmProp: t,
-      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4413,8 +4413,8 @@ export const NodeAPI = {
   },
   width({
     vm: e,
-          defineVmProp: t,
-          getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4432,8 +4432,8 @@ export const NodeAPI = {
   },
   height({
     vm: e,
-           defineVmProp: t,
-           getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4451,8 +4451,8 @@ export const NodeAPI = {
   },
   devStatus({
     vm: e,
-              defineVmProp: t,
-              getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4533,8 +4533,8 @@ export const NodeAPI = {
   maxHeight: defineMinMaxProperty('maxHeight', 'max'),
   absoluteRenderBounds({
     vm: e,
-                         defineVmProp: t,
-                         getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4557,8 +4557,8 @@ export const NodeAPI = {
   },
   absoluteBoundingBox({
     vm: e,
-                        defineVmProp: t,
-                        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4581,10 +4581,10 @@ export const NodeAPI = {
   },
   resizeWithoutConstraints({
     vm: e,
-                             defineVmFunction: t,
-                             stats: i,
-                             getNode: n,
-                             editorType: a,
+    defineVmFunction: t,
+    stats: i,
+    getNode: n,
+    editorType: a,
   }, s) {
     t({
       handle: s,
@@ -4609,10 +4609,10 @@ export const NodeAPI = {
   },
   resizeWithConstraints({
     vm: e,
-                          defineVmFunction: t,
-                          stats: i,
-                          getNode: n,
-                          editorType: a,
+    defineVmFunction: t,
+    stats: i,
+    getNode: n,
+    editorType: a,
   }, s) {
     t({
       handle: s,
@@ -4637,8 +4637,8 @@ export const NodeAPI = {
   },
   rescale({
     vm: e,
-            defineVmFunction: t,
-            getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4667,8 +4667,8 @@ export const NodeAPI = {
   },
   constrainProportions({
     vm: e,
-                         defineVmProp: t,
-                         getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4699,8 +4699,8 @@ export const NodeAPI = {
   },
   targetAspectRatio({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4724,8 +4724,8 @@ export const NodeAPI = {
   },
   lockAspectRatio({
     vm: e,
-                    defineVmFunction: t,
-                    getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4741,8 +4741,8 @@ export const NodeAPI = {
   },
   unlockAspectRatio({
     vm: e,
-                      defineVmFunction: t,
-                      getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4758,8 +4758,8 @@ export const NodeAPI = {
   },
   opacity({
     vm: e,
-            defineVmProp: t,
-            getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4786,8 +4786,8 @@ export const NodeAPI = {
   },
   blendMode({
     vm: e,
-              defineVmProp: t,
-              getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -4814,8 +4814,8 @@ export const NodeAPI = {
   },
   isMask({
     vm,
-           defineVmProp,
-           getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -4842,8 +4842,8 @@ export const NodeAPI = {
   },
   maskType({
     vm,
-             defineVmProp,
-             getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -4872,8 +4872,8 @@ export const NodeAPI = {
   },
   effects({
     vm,
-            defineVmProp,
-            getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -4903,11 +4903,11 @@ export const NodeAPI = {
   },
   effectStyleId({
     vm,
-                  defineVmIncrementalProp,
-                  incrementalSafeApi,
-                  getNode,
-                  documentAccessState,
-                  allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -4945,9 +4945,9 @@ export const NodeAPI = {
   },
   cornerRadius({
     vm: e,
-                 defineVmProp: t,
-                 mixedSentinel: i,
-                 getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -4985,8 +4985,8 @@ export const NodeAPI = {
   },
   cornerSmoothing({
     vm: e,
-                    defineVmProp: t,
-                    getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5027,10 +5027,10 @@ export const NodeAPI = {
    */
   widgetHoverStyle({
     vm,
-                     defineVmProp,
-                     imageStore,
-                     videoStore,
-                     getNode,
+    defineVmProp,
+    imageStore,
+    videoStore,
+    getNode,
   }, handle) {
     // Only allow in ScopedNoOpVm context
     if (!(vm instanceof ScopedNoOpVm))
@@ -5135,7 +5135,7 @@ export const NodeAPI = {
           }
           const blobs = []
           const mappedPaints = mapPaintConfigurations(imageStore, videoStore, paints, blobs)
-          l7.plugin('plugin-set-fills-async', () => node.fillPaintsForPluginOnly = {
+          permissionScopeHandler.plugin('plugin-set-fills-async', () => node.fillPaintsForPluginOnly = {
             data: mappedPaints,
             blobs,
           })
@@ -5151,12 +5151,12 @@ export const NodeAPI = {
   },
   fillStyleId({
     vm: e,
-                defineVmIncrementalProp: t,
-                mixedSentinel: i,
-                incrementalSafeApi: n,
-                getNode: r,
-                documentAccessState: a,
-                allowIncrementalUnsafeApiCalls: s,
+    defineVmIncrementalProp: t,
+    mixedSentinel: i,
+    incrementalSafeApi: n,
+    getNode: r,
+    documentAccessState: a,
+    allowIncrementalUnsafeApiCalls: s,
   }, o) {
     t({
       handle: o,
@@ -5197,12 +5197,12 @@ export const NodeAPI = {
   },
   strokes({
     vm: e,
-            defineVmProp: t,
-            defineVmFunction: i,
-            imageStore: n,
-            videoStore: r,
-            getNode: a,
-            documentAccessState: s,
+    defineVmProp: t,
+    defineVmFunction: i,
+    imageStore: n,
+    videoStore: r,
+    getNode: a,
+    documentAccessState: s,
   }, o) {
     i({
       handle: o,
@@ -5236,7 +5236,7 @@ export const NodeAPI = {
           }
           const blobs = []
           const mappedPaints = mapPaintConfigurations(n, r, paints, blobs)
-          l7.plugin('plugin-set-strokes-async', () => node.strokePaints = {
+          permissionScopeHandler.plugin('plugin-set-strokes-async', () => node.strokePaints = {
             data: mappedPaints,
             blobs,
           })
@@ -5283,8 +5283,8 @@ export const NodeAPI = {
   },
   fillGeometry({
     vm: e,
-                 defineVmProp: t,
-                 getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5305,8 +5305,8 @@ export const NodeAPI = {
   },
   strokeGeometry({
     vm,
-                   defineVmProp,
-                   getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -5327,11 +5327,11 @@ export const NodeAPI = {
   },
   strokeStyleId({
     vm,
-                  defineVmIncrementalProp,
-                  incrementalSafeApi,
-                  getNode,
-                  documentAccessState,
-                  allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -5369,9 +5369,9 @@ export const NodeAPI = {
   },
   strokeWeight({
     vm,
-                 defineVmProp,
-                 mixedSentinel,
-                 getNode,
+    defineVmProp,
+    mixedSentinel,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -5418,8 +5418,8 @@ export const NodeAPI = {
   strokeRightWeight: defineStrokeWeightProperty('strokeRightWeight', 'borderRightWeight'),
   strokeAlign({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5446,9 +5446,9 @@ export const NodeAPI = {
   },
   strokeCap({
     vm: e,
-              defineVmProp: t,
-              mixedSentinel: i,
-              getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -5476,9 +5476,9 @@ export const NodeAPI = {
   },
   strokeJoin({
     vm: e,
-               defineVmProp: t,
-               mixedSentinel: i,
-               getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -5506,9 +5506,9 @@ export const NodeAPI = {
   },
   handleMirroring({
     vm: e,
-                    defineVmProp: t,
-                    mixedSentinel: i,
-                    getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -5536,8 +5536,8 @@ export const NodeAPI = {
   },
   strokeMiterLimit({
     vm: e,
-                     defineVmProp: t,
-                     getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5564,8 +5564,8 @@ export const NodeAPI = {
   },
   dashPattern({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5598,10 +5598,10 @@ export const NodeAPI = {
   },
   backgrounds({
     vm: e,
-                defineVmProp: t,
-                imageStore: i,
-                videoStore: n,
-                getNode: r,
+    defineVmProp: t,
+    imageStore: i,
+    videoStore: n,
+    getNode: r,
   }, a) {
     t({
       handle: a,
@@ -5656,10 +5656,10 @@ export const NodeAPI = {
   },
   prototypeBackgrounds({
     vm: e,
-                         defineVmProp: t,
-                         imageStore: i,
-                         videoStore: n,
-                         getNode: r,
+    defineVmProp: t,
+    imageStore: i,
+    videoStore: n,
+    getNode: r,
   }, a) {
     t({
       handle: a,
@@ -5713,10 +5713,10 @@ export const NodeAPI = {
   },
   backgroundStyleId({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
-                      incrementalSafeApi: n,
-                      allowIncrementalUnsafeApiCalls: r,
+    defineVmProp: t,
+    getNode: i,
+    incrementalSafeApi: n,
+    allowIncrementalUnsafeApiCalls: r,
   }, a) {
     t({
       handle: a,
@@ -5748,8 +5748,8 @@ export const NodeAPI = {
   },
   layoutGrids({
     vm,
-                defineVmProp,
-                getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -5779,11 +5779,11 @@ export const NodeAPI = {
   },
   gridStyleId({
     vm,
-                defineVmIncrementalProp,
-                incrementalSafeApi,
-                getNode,
-                documentAccessState,
-                allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -5820,8 +5820,8 @@ export const NodeAPI = {
   },
   clipsContent({
     vm,
-                 defineVmProp,
-                 getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -5848,8 +5848,8 @@ export const NodeAPI = {
   },
   overflowDirection({
     vm,
-                      defineVmProp,
-                      getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -5876,8 +5876,8 @@ export const NodeAPI = {
   },
   numberOfFixedChildren({
     vm,
-                          defineVmProp,
-                          getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -5909,8 +5909,8 @@ export const NodeAPI = {
   },
   description({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5938,8 +5938,8 @@ export const NodeAPI = {
   },
   descriptionMarkdown({
     vm: e,
-                        defineVmProp: t,
-                        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -5973,8 +5973,8 @@ export const NodeAPI = {
   },
   documentationLinks({
     vm,
-                       defineVmProp,
-                       getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     const self = this
     defineVmProp({
@@ -6033,8 +6033,8 @@ export const NodeAPI = {
    */
   remote({
     vm,
-           defineVmProp,
-           getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6059,7 +6059,7 @@ export const NodeAPI = {
    */
   getPublishStatus({
     vm,
-                     getNode,
+    getNode,
   }, handle) {
     vm.defineFunction(handle, 'getPublishStatusAsync', 'node.getPublishStatusAsync', () => {
       const node = getNode(this)
@@ -6081,8 +6081,8 @@ export const NodeAPI = {
    */
   hiddenFromPublishing({
     vm,
-                         defineVmProp,
-                         getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6119,9 +6119,9 @@ export const NodeAPI = {
    */
   defaultVariant({
     vm,
-                   defineVmProp,
-                   getNodeFactory,
-                   getNode,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6166,14 +6166,14 @@ export const NodeAPI = {
   },
   mainComponent({
     vm: e,
-                  defineVmProp: t,
-                  defineVmIncrementalProp: i,
-                  getNodeFactory: n,
-                  incrementalSafeApi: r,
-                  getNode: a,
-                  sceneGraph: s,
-                  documentAccessState: o,
-                  allowIncrementalUnsafeApiCalls: l,
+    defineVmProp: t,
+    defineVmIncrementalProp: i,
+    getNodeFactory: n,
+    incrementalSafeApi: r,
+    getNode: a,
+    sceneGraph: s,
+    documentAccessState: o,
+    allowIncrementalUnsafeApiCalls: l,
   }, d) {
     i({
       handle: d,
@@ -6224,8 +6224,8 @@ export const NodeAPI = {
   },
   scaleFactor({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6252,8 +6252,8 @@ export const NodeAPI = {
   },
   key({
     vm: e,
-        defineVmProp: t,
-        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6272,8 +6272,8 @@ export const NodeAPI = {
   },
   createInstance({
     defineVmFunction: e,
-                   getNodeFactory: t,
-                   getNode: i,
+    getNodeFactory: t,
+    getNode: i,
   }, n) {
     e({
       handle: n,
@@ -6289,8 +6289,8 @@ export const NodeAPI = {
   },
   swapComponent({
     vm: e,
-                  defineVmFunction: t,
-                  getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6309,8 +6309,8 @@ export const NodeAPI = {
   },
   detachInstance({
     defineVmFunction,
-                   getNodeFactory,
-                   getNode,
+    getNodeFactory,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -6329,8 +6329,8 @@ export const NodeAPI = {
   },
   detachedInfo({
     vm,
-                 defineVmProp,
-                 getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6364,8 +6364,8 @@ export const NodeAPI = {
   },
   tableNumRows({
     vm,
-                 defineVmProp,
-                 getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6383,8 +6383,8 @@ export const NodeAPI = {
   },
   tableNumColumns({
     vm,
-                    defineVmProp,
-                    getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6402,8 +6402,8 @@ export const NodeAPI = {
   },
   tableCellRowIndex({
     vm,
-                      defineVmProp,
-                      getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6421,8 +6421,8 @@ export const NodeAPI = {
   },
   tableCellColumnIndex({
     vm,
-                         defineVmProp,
-                         getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -6440,9 +6440,9 @@ export const NodeAPI = {
   },
   cellAt({
     vm: e,
-           defineVmFunction: t,
-           getNodeFactory: i,
-           getNode: n,
+    defineVmFunction: t,
+    getNodeFactory: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -6475,8 +6475,8 @@ export const NodeAPI = {
   },
   insertRow({
     vm: e,
-              defineVmFunction: t,
-              getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6501,8 +6501,8 @@ export const NodeAPI = {
   },
   insertColumn({
     vm: e,
-                 defineVmFunction: t,
-                 getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6527,8 +6527,8 @@ export const NodeAPI = {
   },
   removeRow({
     vm: e,
-              defineVmFunction: t,
-              getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6553,8 +6553,8 @@ export const NodeAPI = {
   },
   removeColumn({
     vm: e,
-                 defineVmFunction: t,
-                 getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6579,8 +6579,8 @@ export const NodeAPI = {
   },
   moveRow({
     vm: e,
-            defineVmFunction: t,
-            getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6611,8 +6611,8 @@ export const NodeAPI = {
   },
   moveColumn({
     vm,
-               defineVmFunction,
-               getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -6643,8 +6643,8 @@ export const NodeAPI = {
   },
   resizeRow({
     vm,
-              defineVmFunction,
-              getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -6675,8 +6675,8 @@ export const NodeAPI = {
   },
   resizeColumn({
     vm,
-                 defineVmFunction,
-                 getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -6707,12 +6707,12 @@ export const NodeAPI = {
   },
   textStyleId({
     vm,
-                defineVmIncrementalProp,
-                mixedSentinel,
-                incrementalSafeApi,
-                getNode,
-                documentAccessState,
-                allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    mixedSentinel,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -6753,8 +6753,8 @@ export const NodeAPI = {
   },
   characters({
     vm: e,
-               defineVmProp: t,
-               getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6781,8 +6781,8 @@ export const NodeAPI = {
   },
   insertCharacters({
     vm: e,
-                     defineVmFunction: t,
-                     getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6820,8 +6820,8 @@ export const NodeAPI = {
   },
   deleteCharacters({
     vm: e,
-                     defineVmFunction: t,
-                     getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6856,8 +6856,8 @@ export const NodeAPI = {
   },
   hasMissingFont({
     vm: e,
-                   defineVmProp: t,
-                   getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6875,8 +6875,8 @@ export const NodeAPI = {
   },
   autoRename({
     vm: e,
-               defineVmProp: t,
-               getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6910,9 +6910,9 @@ export const NodeAPI = {
   },
   fontSize({
     vm: e,
-             defineVmProp: t,
-             mixedSentinel: i,
-             getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -6940,8 +6940,8 @@ export const NodeAPI = {
   },
   hangingPunctuation({
     vm: e,
-                       defineVmProp: t,
-                       getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6968,8 +6968,8 @@ export const NodeAPI = {
   },
   hangingList({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -6996,9 +6996,9 @@ export const NodeAPI = {
   },
   paragraphIndent({
     vm: e,
-                    defineVmProp: t,
-                    mixedSentinel: i,
-                    getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7026,9 +7026,9 @@ export const NodeAPI = {
   },
   paragraphSpacing({
     vm: e,
-                     defineVmProp: t,
-                     mixedSentinel: i,
-                     getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7056,9 +7056,9 @@ export const NodeAPI = {
   },
   listSpacing({
     vm: e,
-                defineVmProp: t,
-                mixedSentinel: i,
-                getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7086,9 +7086,9 @@ export const NodeAPI = {
   },
   letterSpacing({
     vm: e,
-                  defineVmProp: t,
-                  mixedSentinel: i,
-                  getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7127,8 +7127,8 @@ export const NodeAPI = {
   },
   textAlignHorizontal({
     vm: e,
-                        defineVmProp: t,
-                        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -7155,8 +7155,8 @@ export const NodeAPI = {
   },
   textAlignVertical({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -7183,9 +7183,9 @@ export const NodeAPI = {
   },
   textCase({
     vm: e,
-             defineVmProp: t,
-             mixedSentinel: i,
-             getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7220,9 +7220,9 @@ export const NodeAPI = {
   },
   textDecoration({
     vm: e,
-                   defineVmProp: t,
-                   mixedSentinel: i,
-                   getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7250,9 +7250,9 @@ export const NodeAPI = {
   },
   textDecorationStyle({
     vm: e,
-                        defineVmProp: t,
-                        mixedSentinel: i,
-                        getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7280,9 +7280,9 @@ export const NodeAPI = {
   },
   textDecorationSkipInk({
     vm: e,
-                          defineVmProp: t,
-                          mixedSentinel: i,
-                          getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7310,9 +7310,9 @@ export const NodeAPI = {
   },
   textDecorationOffset({
     vm: e,
-                         defineVmProp: t,
-                         mixedSentinel: i,
-                         getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7346,9 +7346,9 @@ export const NodeAPI = {
   },
   textDecorationThickness({
     vm: e,
-                            defineVmProp: t,
-                            mixedSentinel: i,
-                            getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7382,11 +7382,11 @@ export const NodeAPI = {
   },
   textDecorationColor({
     vm: e,
-                        defineVmProp: t,
-                        mixedSentinel: i,
-                        imageStore: n,
-                        videoStore: r,
-                        getNode: a,
+    defineVmProp: t,
+    mixedSentinel: i,
+    imageStore: n,
+    videoStore: r,
+    getNode: a,
   }, s) {
     t({
       handle: s,
@@ -7434,9 +7434,9 @@ export const NodeAPI = {
   },
   textAutoResize({
     vm,
-                   defineVmProp,
-                   stats,
-                   getNode,
+    defineVmProp,
+    stats,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -7482,9 +7482,9 @@ export const NodeAPI = {
   },
   lineHeight({
     vm,
-               defineVmProp,
-               mixedSentinel,
-               getNode,
+    defineVmProp,
+    mixedSentinel,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -7518,8 +7518,8 @@ export const NodeAPI = {
   },
   leadingTrim({
     vm,
-                defineVmProp,
-                getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -7547,8 +7547,8 @@ export const NodeAPI = {
   },
   textTruncation({
     vm,
-                   defineVmProp,
-                   getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -7577,8 +7577,8 @@ export const NodeAPI = {
   },
   maxLines({
     vm: e,
-             defineVmProp: t,
-             getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -7606,9 +7606,9 @@ export const NodeAPI = {
   },
   hyperlink({
     vm: e,
-              defineVmProp: t,
-              mixedSentinel: i,
-              getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7641,9 +7641,9 @@ export const NodeAPI = {
   },
   fontName({
     vm: e,
-             defineVmProp: t,
-             mixedSentinel: i,
-             getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7678,9 +7678,9 @@ export const NodeAPI = {
   },
   fontWeight({
     vm: e,
-               defineVmProp: t,
-               mixedSentinel: i,
-               getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7699,9 +7699,9 @@ export const NodeAPI = {
   },
   openTypeFeatures({
     vm: e,
-                     defineVmProp: t,
-                     mixedSentinel: i,
-                     getNode: n,
+    defineVmProp: t,
+    mixedSentinel: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -7723,8 +7723,8 @@ export const NodeAPI = {
   },
   canUpgradeToNativeBidiSupport({
     vm: e,
-                                  defineVmProp: t,
-                                  getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -7742,8 +7742,8 @@ export const NodeAPI = {
   },
   useNativeBidiSupport({
     vm: e,
-                         defineVmFunction: t,
-                         getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -7768,8 +7768,8 @@ export const NodeAPI = {
    */
   pointCount({
     vm,
-               defineVmProp,
-               getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -7809,14 +7809,14 @@ export const NodeAPI = {
    */
   vectorNetwork({
     vm,
-                  defineVmIncrementalProp,
-                  incrementalSafeApi,
-                  imageStore,
-                  videoStore,
-                  getNode,
-                  sceneGraph,
-                  documentAccessState,
-                  allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    imageStore,
+    videoStore,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     /**
      * parseVectorNetworkInput - Parse and validate vector network input data
@@ -7975,11 +7975,11 @@ export const NodeAPI = {
   },
   readOnlyVectorNetwork({
     vm: e,
-                          defineVmIncrementalProp: t,
-                          incrementalSafeApi: i,
-                          getNode: n,
-                          documentAccessState: r,
-                          allowIncrementalUnsafeApiCalls: a,
+    defineVmIncrementalProp: t,
+    incrementalSafeApi: i,
+    getNode: n,
+    documentAccessState: r,
+    allowIncrementalUnsafeApiCalls: a,
   }, s) {
     t({
       handle: s,
@@ -8005,9 +8005,9 @@ export const NodeAPI = {
   },
   vectorPaths({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
-                sceneGraph: n,
+    defineVmProp: t,
+    getNode: i,
+    sceneGraph: n,
   }, r) {
     t({
       handle: r,
@@ -8042,8 +8042,8 @@ export const NodeAPI = {
   },
   readOnlyVectorPaths({
     vm: e,
-                        defineVmProp: t,
-                        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8066,8 +8066,8 @@ export const NodeAPI = {
   },
   guides({
     vm: e,
-           defineVmProp: t,
-           getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8108,10 +8108,10 @@ export const NodeAPI = {
   },
   prototypeStartNode({
     vm: e,
-                       defineVmProp: t,
-                       getNodeFactory: i,
-                       getNode: n,
-                       sceneGraph: r,
+    defineVmProp: t,
+    getNodeFactory: i,
+    getNode: n,
+    sceneGraph: r,
   }, a) {
     t({
       handle: a,
@@ -8130,8 +8130,8 @@ export const NodeAPI = {
   },
   flowStartingPoints({
     vm: e,
-                       defineVmProp: t,
-                       getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8165,8 +8165,8 @@ export const NodeAPI = {
   },
   playbackSettings({
     vm: e,
-                     defineVmProp: t,
-                     getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8205,11 +8205,11 @@ export const NodeAPI = {
   },
   reactions({
     vm,
-              allowIncrementalUnsafeApiCalls,
-              defineVmIncrementalProp,
-              documentAccessState,
-              getNode,
-              incrementalSafeApi,
+    allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    documentAccessState,
+    getNode,
+    incrementalSafeApi,
   }, handle) {
     const parseReactions = handleValue => _$$u({
       vm,
@@ -8324,8 +8324,8 @@ export const NodeAPI = {
   },
   overlayPositionType({
     vm,
-                        defineVmProp,
-                        getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8343,8 +8343,8 @@ export const NodeAPI = {
   },
   overlayBackgroundInteraction({
     vm,
-                                 defineVmProp,
-                                 getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8362,8 +8362,8 @@ export const NodeAPI = {
   },
   overlayBackground({
     vm,
-                      defineVmProp,
-                      getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8384,9 +8384,9 @@ export const NodeAPI = {
   },
   selection({
     vm,
-              defineVmProp,
-              getNodeFactory,
-              getNode,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8479,8 +8479,8 @@ export const NodeAPI = {
   },
   booleanOperation({
     vm,
-                     defineVmProp,
-                     getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8513,8 +8513,8 @@ export const NodeAPI = {
   },
   innerRadius({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8541,8 +8541,8 @@ export const NodeAPI = {
   },
   arcData({
     vm: e,
-            defineVmProp: t,
-            getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8571,8 +8571,8 @@ export const NodeAPI = {
   },
   topLeftRadius({
     vm: e,
-                  defineVmProp: t,
-                  getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8604,8 +8604,8 @@ export const NodeAPI = {
   },
   topRightRadius({
     vm: e,
-                   defineVmProp: t,
-                   getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8637,8 +8637,8 @@ export const NodeAPI = {
   },
   bottomLeftRadius({
     vm: e,
-                     defineVmProp: t,
-                     getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8670,8 +8670,8 @@ export const NodeAPI = {
   },
   bottomRightRadius({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -8703,8 +8703,8 @@ export const NodeAPI = {
   },
   exportSettings({
     vm,
-                   defineVmProp,
-                   getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8764,10 +8764,10 @@ export const NodeAPI = {
   },
   pluginData({
     vm,
-               defineVmFunction,
-               pluginID,
-               getNode,
-               isPluginExemptFromPluginDataLimits,
+    defineVmFunction,
+    pluginID,
+    getNode,
+    isPluginExemptFromPluginDataLimits,
   }, handle) {
     defineVmFunction({
       handle,
@@ -8906,9 +8906,9 @@ export const NodeAPI = {
   },
   variableConsumptionMap({
     vm,
-                           defineVmProp,
-                           defineVmFunction,
-                           getNode,
+    defineVmProp,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8951,8 +8951,8 @@ export const NodeAPI = {
   },
   boundVariables({
     vm,
-                   defineVmProp,
-                   getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8970,8 +8970,8 @@ export const NodeAPI = {
   },
   inferredVariables({
     vm,
-                      defineVmProp,
-                      getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -8989,8 +8989,8 @@ export const NodeAPI = {
   },
   availableInferredVariables({
     vm,
-                               defineVmProp,
-                               getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -9008,12 +9008,12 @@ export const NodeAPI = {
   },
   setBoundVariable({
     vm,
-                     defineVmFunction,
-                     incrementalSafeApi,
-                     pluginVersionID,
-                     getNode,
-                     stats,
-                     allowIncrementalUnsafeApiCalls,
+    defineVmFunction,
+    incrementalSafeApi,
+    pluginVersionID,
+    getNode,
+    stats,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmFunction({
       handle,
@@ -9091,11 +9091,11 @@ export const NodeAPI = {
   },
   variableConsumerModes({
     vm: e,
-                          defineVmFunction: t,
-                          getNode: i,
-                          incrementalSafeApi: n,
-                          pluginVersionID: r,
-                          allowIncrementalUnsafeApiCalls: a,
+    defineVmFunction: t,
+    getNode: i,
+    incrementalSafeApi: n,
+    pluginVersionID: r,
+    allowIncrementalUnsafeApiCalls: a,
   }, s) {
     t({
       handle: s,
@@ -9148,10 +9148,10 @@ export const NodeAPI = {
   },
   pluginRelaunchData({
     vm: e,
-                       defineVmFunction: t,
-                       pluginID: i,
-                       isWidget: n,
-                       getNode: r,
+    defineVmFunction: t,
+    pluginID: i,
+    isWidget: n,
+    getNode: r,
   }, a) {
     t({
       handle: a,
@@ -9193,15 +9193,15 @@ export const NodeAPI = {
   },
   textRangeFunctions({
     vm,
-                       defineVmFunction,
-                       defineVmIncrementalMethod,
-                       mixedSentinel,
-                       imageStore,
-                       videoStore,
-                       getNode,
-                       incrementalSafeApi,
-                       documentAccessState,
-                       allowIncrementalUnsafeApiCalls,
+    defineVmFunction,
+    defineVmIncrementalMethod,
+    mixedSentinel,
+    imageStore,
+    videoStore,
+    getNode,
+    incrementalSafeApi,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     const parseRange = (node, startHandle, endHandle) => {
       const start = _$$u({
@@ -10187,10 +10187,10 @@ export const NodeAPI = {
   },
   outlineStroke({
     vm: e,
-                  defineVmFunction: t,
-                  getNodeFactory: i,
-                  getNode: n,
-                  pluginID: r,
+    defineVmFunction: t,
+    getNodeFactory: i,
+    getNode: n,
+    pluginID: r,
   }, a) {
     t({
       handle: a,
@@ -10223,8 +10223,8 @@ export const NodeAPI = {
   },
   shapeWithTextType({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10250,8 +10250,8 @@ export const NodeAPI = {
   },
   authorName({
     vm: e,
-               defineVmProp: t,
-               getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10269,8 +10269,8 @@ export const NodeAPI = {
   },
   authorVisible({
     vm: e,
-                  defineVmProp: t,
-                  getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10297,8 +10297,8 @@ export const NodeAPI = {
   },
   isWideWidth({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10325,8 +10325,8 @@ export const NodeAPI = {
   },
   codeLanguage({
     vm: e,
-                 defineVmProp: t,
-                 getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10358,8 +10358,8 @@ export const NodeAPI = {
   },
   code({
     vm: e,
-         defineVmProp: t,
-         getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10388,8 +10388,8 @@ export const NodeAPI = {
   },
   variantGroupProperties({
     vm: e,
-                           defineVmProp: t,
-                           getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10408,8 +10408,8 @@ export const NodeAPI = {
   },
   variantProperties({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10431,9 +10431,9 @@ export const NodeAPI = {
   },
   componentPropertyDefinitions({
     vm: e,
-                                 defineVmProp: t,
-                                 defineVmFunction: i,
-                                 getNode: n,
+    defineVmProp: t,
+    defineVmFunction: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -10485,23 +10485,23 @@ export const NodeAPI = {
         s = d === 'VARIANT'
           ? o.addVariantComponentPropertyDefinition(l, u)
           : o.addComponentPropertyDefinition(l, (function (e) {
-              switch (e) {
-                case 'BOOLEAN':
-                  return 'BOOL'
-                case 'TEXT':
-                  return 'TEXT'
-                case 'INSTANCE_SWAP':
-                  return 'INSTANCE_SWAP'
-                case 'NUMBER':
-                  return 'NUMBER'
-                case 'IMAGE':
-                  return 'IMAGE'
-                case 'SLOT':
-                  return 'SLOT'
-                default:
-                  return ''
-              }
-            }(d)), u, m)
+            switch (e) {
+              case 'BOOLEAN':
+                return 'BOOL'
+              case 'TEXT':
+                return 'TEXT'
+              case 'INSTANCE_SWAP':
+                return 'INSTANCE_SWAP'
+              case 'NUMBER':
+                return 'NUMBER'
+              case 'IMAGE':
+                return 'IMAGE'
+              case 'SLOT':
+                return 'SLOT'
+              default:
+                return ''
+            }
+          }(d)), u, m)
         return e.newString(s)
       },
       isAllowedInReadOnly: !1,
@@ -10553,8 +10553,8 @@ export const NodeAPI = {
   },
   componentPropertyReferences({
     vm: e,
-                                defineVmProp: t,
-                                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10583,8 +10583,8 @@ export const NodeAPI = {
   },
   componentProperties({
     vm: e,
-                        defineVmProp: t,
-                        getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10603,8 +10603,8 @@ export const NodeAPI = {
   },
   isExposedInstance({
     vm: e,
-                      defineVmProp: t,
-                      getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -10633,9 +10633,9 @@ export const NodeAPI = {
   },
   exposedInstances({
     vm,
-                     defineVmProp,
-                     getNodeFactory,
-                     getNode,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -10664,8 +10664,8 @@ export const NodeAPI = {
   },
   overrides({
     vm,
-              defineVmProp,
-              getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -10691,8 +10691,8 @@ export const NodeAPI = {
   },
   resetOverrides({
     vm,
-                   defineVmFunction,
-                   getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -10708,12 +10708,12 @@ export const NodeAPI = {
   },
   instances({
     vm,
-              defineVmIncrementalProp,
-              getNodeFactory,
-              incrementalSafeApi,
-              getNode,
-              documentAccessState,
-              allowIncrementalUnsafeApiCalls,
+    defineVmIncrementalProp,
+    getNodeFactory,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
   }, handle) {
     defineVmIncrementalProp({
       handle,
@@ -10745,9 +10745,9 @@ export const NodeAPI = {
   },
   textSublayer({
     vm,
-                 defineVmProp,
-                 getNodeFactory,
-                 getNode,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -10766,9 +10766,9 @@ export const NodeAPI = {
   },
   immutableFrameLabel({
     vm: e,
-                        defineVmProp: t,
-                        getNodeFactory: i,
-                        getNode: n,
+    defineVmProp: t,
+    getNodeFactory: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -10793,9 +10793,9 @@ export const NodeAPI = {
    */
   connectorEndpoints({
     vm,
-                       defineVmProp,
-                       getNode,
-                       pluginVersionID,
+    defineVmProp,
+    getNode,
+    pluginVersionID,
   }, handle) {
     /**
      * Defines a connector endpoint property (start or end).
@@ -10870,8 +10870,8 @@ export const NodeAPI = {
    */
   connectorStrokeCap({
     vm,
-                       defineVmProp,
-                       getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     /**
      * Defines a connector stroke cap property.
@@ -10912,8 +10912,8 @@ export const NodeAPI = {
    */
   connectorLineType({
     vm,
-                      defineVmProp,
-                      getNode,
+    defineVmProp,
+    getNode,
   }, handle) {
     defineVmProp({
       handle,
@@ -10940,8 +10940,8 @@ export const NodeAPI = {
   },
   setProperties({
     vm: e,
-                  defineVmFunction: t,
-                  getNode: i,
+    defineVmFunction: t,
+    getNode: i,
   }, r) {
     t({
       handle: r,
@@ -10963,9 +10963,9 @@ export const NodeAPI = {
   },
   attachedConnectors({
     vm: e,
-                       defineVmProp: t,
-                       getNodeFactory: i,
-                       getNode: n,
+    defineVmProp: t,
+    getNodeFactory: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -10989,8 +10989,8 @@ export const NodeAPI = {
   },
   embedData({
     vm: e,
-              defineVmProp: t,
-              getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11008,8 +11008,8 @@ export const NodeAPI = {
   },
   linkUnfurlData({
     vm: e,
-                   defineVmProp: t,
-                   getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11027,8 +11027,8 @@ export const NodeAPI = {
   },
   mediaData({
     vm: e,
-              defineVmProp: t,
-              getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11046,9 +11046,9 @@ export const NodeAPI = {
   },
   getAuthorAsync({
     vm: e,
-                   defineVmFunction: t,
-                   validatedPermissions: i,
-                   getNode: n,
+    defineVmFunction: t,
+    validatedPermissions: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11108,9 +11108,9 @@ export const NodeAPI = {
    */
   annotations({
     vm,
-                defineVmProp,
-                getNode,
-                editorType,
+    defineVmProp,
+    getNode,
+    editorType,
   }, handle) {
     defineVmProp({
       handle,
@@ -11234,12 +11234,12 @@ export const NodeAPI = {
    */
   measurements({
     vm,
-                 defineVmFunction,
-                 getNode,
-                 editorType,
-                 sceneGraph,
-                 getNodeFactory,
-                 documentAccessState,
+    defineVmFunction,
+    getNode,
+    editorType,
+    sceneGraph,
+    getNodeFactory,
+    documentAccessState,
   }, handle) {
     /**
      * Maps a measurement object to a VM object.
@@ -11258,26 +11258,26 @@ export const NodeAPI = {
       const toSide = measurement.toSameSide
         ? fromSide
         : (() => {
-            switch (fromSide) {
-              case 'TOP':
-                return 'BOTTOM'
-              case 'BOTTOM':
-                return 'TOP'
-              case 'LEFT':
-                return 'RIGHT'
-              case 'RIGHT':
-                return 'LEFT'
-            }
-          })()
+          switch (fromSide) {
+            case 'TOP':
+              return 'BOTTOM'
+            case 'BOTTOM':
+              return 'TOP'
+            case 'LEFT':
+              return 'RIGHT'
+            case 'RIGHT':
+              return 'LEFT'
+          }
+        })()
       offsetValue = measurement.outerOffsetFixed === 0
         ? {
-            type: 'INNER',
-            relative: measurement.innerOffsetRelative,
-          }
+          type: 'INNER',
+          relative: measurement.innerOffsetRelative,
+        }
         : {
-            type: 'OUTER',
-            fixed: measurement.outerOffsetFixed,
-          }
+          type: 'OUTER',
+          fixed: measurement.outerOffsetFixed,
+        }
       const startObj = vm.newObject()
       vm.setProp(startObj, 'node', startNode)
       vm.setProp(startObj, 'side', vm.newString(fromSide))
@@ -11502,9 +11502,9 @@ export const NodeAPI = {
   },
   getRelatedLinksAsync({
     vm: e,
-                         defineVmFunction: t,
-                         getNode: i,
-                         sceneGraph: n,
+    defineVmFunction: t,
+    getNode: i,
+    sceneGraph: n,
   }, r) {
     t({
       handle: r,
@@ -11526,9 +11526,9 @@ export const NodeAPI = {
   },
   getDevResourcesAsync({
     vm: e,
-                         defineVmFunction: t,
-                         getNode: i,
-                         sceneGraph: n,
+    defineVmFunction: t,
+    getNode: i,
+    sceneGraph: n,
   }, r) {
     t({
       handle: r,
@@ -11550,9 +11550,9 @@ export const NodeAPI = {
   },
   addRelatedLinkAsync({
     vm: e,
-                        defineVmFunction: t,
-                        pluginID: i,
-                        getNode: n,
+    defineVmFunction: t,
+    pluginID: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11575,9 +11575,9 @@ export const NodeAPI = {
   },
   addDevResourceAsync({
     vm: e,
-                        defineVmFunction: t,
-                        pluginID: i,
-                        getNode: n,
+    defineVmFunction: t,
+    pluginID: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11600,9 +11600,9 @@ export const NodeAPI = {
   },
   editRelatedLinkAsync({
     vm: e,
-                         defineVmFunction: t,
-                         pluginID: i,
-                         getNode: n,
+    defineVmFunction: t,
+    pluginID: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11625,9 +11625,9 @@ export const NodeAPI = {
   },
   editDevResourceAsync({
     vm: e,
-                         defineVmFunction: t,
-                         pluginID: i,
-                         getNode: n,
+    defineVmFunction: t,
+    pluginID: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11650,9 +11650,9 @@ export const NodeAPI = {
   },
   deleteRelatedLinkAsync({
     vm: e,
-                           defineVmFunction: t,
-                           pluginID: i,
-                           getNode: n,
+    defineVmFunction: t,
+    pluginID: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11667,9 +11667,9 @@ export const NodeAPI = {
   },
   deleteDevResourceAsync({
     vm: e,
-                           defineVmFunction: t,
-                           pluginID: i,
-                           getNode: n,
+    defineVmFunction: t,
+    pluginID: i,
+    getNode: n,
   }, r) {
     t({
       handle: r,
@@ -11684,11 +11684,11 @@ export const NodeAPI = {
   },
   setRelatedLinkPreviewAsync({
     vm: e,
-                               defineVmFunction: t,
-                               pluginID: i,
-                               pluginVersionID: n,
-                               apiMode: r,
-                               getNode: a,
+    defineVmFunction: t,
+    pluginID: i,
+    pluginVersionID: n,
+    apiMode: r,
+    getNode: a,
   }, s) {
     t({
       handle: s,
@@ -11713,11 +11713,11 @@ export const NodeAPI = {
   },
   setDevResourcePreviewAsync({
     vm: e,
-                               defineVmFunction: t,
-                               pluginID: i,
-                               pluginVersionID: n,
-                               apiMode: r,
-                               getNode: a,
+    defineVmFunction: t,
+    pluginID: i,
+    pluginVersionID: n,
+    apiMode: r,
+    getNode: a,
   }, s) {
     t({
       handle: s,
@@ -11742,8 +11742,8 @@ export const NodeAPI = {
   },
   inferredAutoLayout({
     vm: e,
-                       defineVmProp: t,
-                       getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11802,11 +11802,11 @@ export const NodeAPI = {
   },
   getCSSAsync({
     vm: e,
-                defineVmFunction: t,
-                getNode: i,
-                pluginID: n,
-                editorType: r,
-                openFileKey: a,
+    defineVmFunction: t,
+    getNode: i,
+    pluginID: n,
+    editorType: r,
+    openFileKey: a,
   }, s) {
     t({
       handle: s,
@@ -11864,8 +11864,8 @@ export const NodeAPI = {
   },
   isAsset({
     vm: e,
-            defineVmProp: t,
-            getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11885,8 +11885,8 @@ export const NodeAPI = {
   },
   documentColorProfile({
     vm: e,
-                         defineVmProp: t,
-                         getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11908,8 +11908,8 @@ export const NodeAPI = {
   },
   sectionContentsHidden({
     vm: e,
-                          defineVmProp: t,
-                          getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11936,8 +11936,8 @@ export const NodeAPI = {
   },
   interactiveSlideElementType({
     vm: e,
-                                defineVmProp: t,
-                                getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -11956,9 +11956,9 @@ export const NodeAPI = {
   },
   focusedSlide({
     vm: e,
-                 defineVmProp: t,
-                 getNode: i,
-                 getNodeFactory: n,
+    defineVmProp: t,
+    getNode: i,
+    getNodeFactory: n,
   }, r) {
     t({
       handle: r,
@@ -11985,9 +11985,9 @@ export const NodeAPI = {
   },
   focusedNode({
     vm: e,
-                defineVmProp: t,
-                getNode: i,
-                getNodeFactory: n,
+    defineVmProp: t,
+    getNode: i,
+    getNodeFactory: n,
   }, r) {
     t({
       handle: r,
@@ -12012,8 +12012,8 @@ export const NodeAPI = {
   },
   isSkippedSlide({
     vm: e,
-                   defineVmProp: t,
-                   getNode: i,
+    defineVmProp: t,
+    getNode: i,
   }, n) {
     t({
       handle: n,
@@ -12041,8 +12041,8 @@ export const NodeAPI = {
   },
   getSlideTransition({
     vm,
-                       defineVmFunction,
-                       getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -12128,12 +12128,12 @@ export const NodeAPI = {
             })(),
             timing: transition.trigger.type === tbx.AFTER_DELAY
               ? {
-                  type: 'AFTER_DELAY',
-                  delay: transition.trigger.delay,
-                }
+                type: 'AFTER_DELAY',
+                delay: transition.trigger.delay,
+              }
               : {
-                  type: 'ON_CLICK',
-                },
+                type: 'ON_CLICK',
+              },
           })
         }
         return vm.$$null
@@ -12144,8 +12144,8 @@ export const NodeAPI = {
   },
   setSlideTransition({
     vm,
-                       defineVmFunction,
-                       getNode,
+    defineVmFunction,
+    getNode,
   }, handle) {
     defineVmFunction({
       handle,
@@ -12244,13 +12244,13 @@ export const NodeAPI = {
             })(),
             trigger: transition.timing.type === 'AFTER_DELAY'
               ? {
-                  type: tbx.AFTER_DELAY,
-                  delay: transition.timing.delay ?? 0,
-                }
+                type: tbx.AFTER_DELAY,
+                delay: transition.timing.delay ?? 0,
+              }
               : {
-                  type: tbx.ON_CLICK,
-                  delay: 0,
-                },
+                type: tbx.ON_CLICK,
+                delay: 0,
+              },
           })
           return vm.undefined
         }

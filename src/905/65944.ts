@@ -7,7 +7,7 @@ import { t as _$$t } from "../905/150656";
 import { K as _$$K } from "../905/443068";
 import { bL } from "../905/911410";
 import { e as _$$e2 } from "../905/149844";
-import { rXF, Pdb, VD3, e0R, vRS, t2E, Vzr, NLJ, rrT, Z_n, j0r, OmW } from "../figma_app/763686";
+import { VariableResolvedDataType, SharedStyle, StyleVariableOperation, CopyPasteType, NoneColor, GradientToolApi, Thumbnail, DesignGraphElements, NodePropertyCategory, VariableDataType, PropertyScope, EyedropperBindings } from "../figma_app/763686";
 import { sH, dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -83,7 +83,7 @@ import { bR, UV, Do, PC } from "../905/438367";
 import { Id, fI, Zk } from "../figma_app/626177";
 import { A as _$$A2 } from "../905/749030";
 import { c$ as _$$c$, bL as _$$bL, l9, mc, wv } from "../905/493196";
-import { h as _$$h3 } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { c$ as _$$c$2, l6, sK } from "../905/794875";
 import { L as _$$L2 } from "../figma_app/297778";
 import { l as _$$l } from "../905/331642";
@@ -95,7 +95,7 @@ import { rW, T7 } from "../905/899866";
 import { R as _$$R } from "../905/649743";
 import { L as _$$L3 } from "../905/210923";
 import { Oe } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { u as _$$u } from "../figma_app/852050";
 import { zk } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
@@ -127,7 +127,7 @@ import { o as _$$o2 } from "../905/89370";
 import { W as _$$W } from "../905/592530";
 import { l as _$$l2 } from "../905/556594";
 import { b as _$$b2 } from "../905/946806";
-import { dI as _$$dI, fn } from "../905/871411";
+import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useSprigWithSampling } from "../905/99656";
 import { EV } from "../figma_app/975811";
@@ -536,7 +536,7 @@ function eJ({
     isLoading
   });
   let l = useMemo(() => {
-    if (isNullish(thumbnailValue) || "MIXED" === thumbnailValue || thumbnailValue.resolvedType !== rXF.COLOR) return null;
+    if (isNullish(thumbnailValue) || "MIXED" === thumbnailValue || thumbnailValue.resolvedType !== VariableResolvedDataType.COLOR) return null;
     let e = thumbnailValue.value;
     return {
       type: "SOLID",
@@ -598,7 +598,7 @@ function e6({
     recordingKey: s,
     children: [jsx(l9, {
       width: "fill",
-      label: jsx(_$$h3, {
+      label: jsx(HiddenLabel, {
         children: u.format(t)
       }),
       "aria-label": getI18nString("fullscreen.properties_panel.library_swatch_select.aria_label")
@@ -622,7 +622,7 @@ function e7({
   recordingKey: t,
   onlySupportCurrentPage: i
 }) {
-  let a = useMemo(() => [rXF.COLOR], []);
+  let a = useMemo(() => [VariableResolvedDataType.COLOR], []);
   let s = _$$A2(a, null);
   let o = _$$tS();
   let l = bR({
@@ -638,12 +638,12 @@ function e7({
   }, [u, i]);
   let h = useCallback(t => {
     if (Oo(t, o)) {
-      let i = Pdb.getColorForFillStyle({
+      let i = SharedStyle.getColorForFillStyle({
         nodeId: t.node_id
       });
       i && e(i);
     } else Eo.getCanvas(t).then(t => {
-      let i = Pdb.getColorForSharedFillStyle(t);
+      let i = SharedStyle.getColorForSharedFillStyle(t);
       i && e(i);
     }).catch(() => {});
   }, [e, o]);
@@ -933,7 +933,7 @@ function tR({
     i(e, t, u.position, void 0, n);
   }, [e, i, u]);
   let O = useCallback(() => {
-    _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+    _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       i(e, u.color, u.position, void 0, zk.YES);
     });
   }, [e, i, u]);
@@ -1026,9 +1026,9 @@ function tN({
   let I = useRef(-1);
   let x = useRef(null);
   let [S, C] = _$$L3(t.index, e => {
-    Y5.updateAppModel({
+    fullscreenValue.updateAppModel({
       currentSelectedGradientStop: {
-        type: vRS.COLOR,
+        type: NoneColor.COLOR,
         index: e
       }
     });
@@ -1122,7 +1122,7 @@ function tN({
     };
     r.splice(S, 1, a);
     oz("FILL_PAINT > GRADIENT_STOP_COLOR", n);
-    _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+    _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
       R({
         stops: k.stops,
         stopsVar: r
@@ -1148,7 +1148,7 @@ function tN({
   });
   let Y = jsx(_$$K, {
     actionOnPointerDown: !0,
-    onClick: t2E.rotateGradient90Degrees,
+    onClick: GradientToolApi.rotateGradient90Degrees,
     "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
@@ -1482,14 +1482,14 @@ function t9(e) {
   let [i, a] = useState(e.paint.patternSpacing.x === e.paint.patternSpacing.y);
   let s = dH();
   let o = _$$eY();
-  let l = _$$dI(e.paint.sourceNodeId);
-  let c = fn(e.paint.sourceNodeId);
+  let l = sessionLocalIDToString(e.paint.sourceNodeId);
+  let c = isValidSessionLocalID(e.paint.sourceNodeId);
   let u = useMemo(() => l && c ? o.get(l) : null, [l, c, o]);
   let [m, g] = useState(null);
   let [f, A] = useState(u && aT(u));
   useEffect(() => {
-    if (l && c && Vzr) {
-      let [e, t] = Vzr.generateThumbnailForNode(l, 208, 208, 32, {
+    if (l && c && Thumbnail) {
+      let [e, t] = Thumbnail.generateThumbnailForNode(l, 208, 208, 32, {
         useRenderTreeWithoutEffects: !0
       });
       if (t) {
@@ -1507,7 +1507,7 @@ function t9(e) {
     u && aT(u) ? A(!0) : A(!1);
   }, [u]);
   let y = useCallback(async () => {
-    u && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(u.guid), Dh([u.guid]), Y5.triggerActionInUserEditScope("zoom-to-selection", void 0), s === NLJ.PATTERN_SOURCE_SELECTOR && Y5.triggerAction("set-tool-default", null));
+    u && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(u.guid), Dh([u.guid]), fullscreenValue.triggerActionInUserEditScope("zoom-to-selection", void 0), s === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null));
   }, [u, s]);
   return jsxs(Id, {
     children: [jsxs("div", {
@@ -1523,17 +1523,17 @@ function t9(e) {
         }
       }), jsx("div", {
         className: _()("pattern_settings_modal--buttonContainer--HgJkZ", {
-          "pattern_settings_modal--buttonContainerShown--jC9-y": !u || s === NLJ.PATTERN_SOURCE_SELECTOR
+          "pattern_settings_modal--buttonContainerShown--jC9-y": !u || s === DesignGraphElements.PATTERN_SOURCE_SELECTOR
         }),
         children: jsx("div", {
           className: "pattern_settings_modal--buttonWrapper---yPaA",
           children: jsx($n, {
             onClick: () => {
-              Y5.triggerAction("set-tool-pattern-source-selector");
+              fullscreenValue.triggerAction("set-tool-pattern-source-selector");
               getFeatureFlags().ce_il_sprig_tracking && Sprig("setAttribute", "is_assets_visual_style_user", !0);
             },
             iconPrefix: jsx(_$$o, {}),
-            variant: s === NLJ.PATTERN_SOURCE_SELECTOR ? "primary" : "secondary",
+            variant: s === DesignGraphElements.PATTERN_SOURCE_SELECTOR ? "primary" : "secondary",
             recordingKey: Pt(e.recordingKey, "selectSource"),
             children: renderI18nText("properties_panel.pattern.select_source")
           })
@@ -1731,7 +1731,7 @@ function t9(e) {
 function ie(e, t, i, n) {
   let a = ZC(e);
   useEffect(() => {
-    e !== a && (e !== NLJ.DROPPER_COLOR || t && t.includes("custom_color"));
+    e !== a && (e !== DesignGraphElements.DROPPER_COLOR || t && t.includes("custom_color"));
   }, [e, i, n, t, a]);
 }
 function it({
@@ -1812,7 +1812,7 @@ export let $$ii1 = forwardRef(function ({
     filteredFieldTypes
   } = ZI();
   let em = cJ();
-  let eh = s6("currentPage", "currentSelectedProperty").currentSelectedProperty.type === rrT.STROKE;
+  let eh = s6("currentPage", "currentSelectedProperty").currentSelectedProperty.type === NodePropertyCategory.STROKE;
   let [eg, ef, e_] = _$$t.useTabs({
     custom_color: !0,
     library: !0,
@@ -1843,13 +1843,13 @@ export let $$ii1 = forwardRef(function ({
     let t = Ou(e);
     let i = x$(e);
     if (t && t.colorVar?.value?.alias) return {
-      type: Z_n.ALIAS,
-      resolvedType: rXF.COLOR,
+      type: VariableDataType.ALIAS,
+      resolvedType: VariableResolvedDataType.COLOR,
       value: dI(t.colorVar.value.alias)
     };
     if (!t && !i) return {
-      type: Z_n.COLOR,
-      resolvedType: rXF.COLOR,
+      type: VariableDataType.COLOR,
+      resolvedType: VariableResolvedDataType.COLOR,
       value: {
         r: 1,
         g: 1,
@@ -1860,8 +1860,8 @@ export let $$ii1 = forwardRef(function ({
     {
       let e = iC(t || i, h);
       return {
-        type: Z_n.COLOR,
-        resolvedType: rXF.COLOR,
+        type: VariableDataType.COLOR,
+        resolvedType: VariableResolvedDataType.COLOR,
         value: e
       };
     }
@@ -1877,9 +1877,9 @@ export let $$ii1 = forwardRef(function ({
     eE(!1);
   }, [eE]);
   useEffect(() => {
-    ec && A === NLJ.DROPPER_COLOR && eE(!1);
+    ec && A === DesignGraphElements.DROPPER_COLOR && eE(!1);
   }, [A, ec]);
-  let eT = new Set([j0r.ALL_SCOPES]);
+  let eT = new Set([PropertyScope.ALL_SCOPES]);
   let ek = sO();
   let eR = useAtomWithSubscription(TN).length > 0;
   let eN = es ? void 0 : jsx(it, {
@@ -1957,7 +1957,7 @@ export let $$ii1 = forwardRef(function ({
         onClose: ({
           source: e
         }) => {
-          "outside" !== e && (OmW?.toggleOffEyedropper(), K());
+          "outside" !== e && (EyedropperBindings?.toggleOffEyedropper(), K());
         },
         width: "sm",
         defaultPosition: eo ? Yl({
@@ -1989,7 +1989,7 @@ export let $$ii1 = forwardRef(function ({
       onClose: eC,
       onCreateStyle: W,
       onCreateVariable: H,
-      resolvedType: rXF.COLOR
+      resolvedType: VariableResolvedDataType.COLOR
     }) : null)]
   });
   return er ? jsx(_$$tH, {
@@ -2195,7 +2195,7 @@ function is({
     onVariableSelected: r,
     pickerType: "color-picker",
     recordingKey: i,
-    resolvedType: rXF.COLOR,
+    resolvedType: VariableResolvedDataType.COLOR,
     selectedItem: e,
     variableScopes: l
   });
@@ -2237,13 +2237,13 @@ export function $$io0({
   let M = useRef(null);
   let [j, V] = useState(!1);
   let G = useRef();
-  let z = rXF.COLOR;
+  let z = VariableResolvedDataType.COLOR;
   let H = useMemo(() => t?.node_id ? {
-    type: Z_n.ALIAS,
+    type: VariableDataType.ALIAS,
     resolvedType: z,
     value: t.node_id
   } : e ? {
-    type: Z_n.COLOR,
+    type: VariableDataType.COLOR,
     resolvedType: z,
     value: e
   } : void 0, [t, e, z]);
@@ -2255,7 +2255,7 @@ export function $$io0({
     V(!0);
   }
   let Y = qP(h || "color_picker", "close", useCallback(() => {
-    OmW?.toggleOffEyedropper();
+    EyedropperBindings?.toggleOffEyedropper();
     _ ? _() : v(XE());
   }, [_, v]));
   ie(C, T, P.setActiveTab, !1);
@@ -2326,7 +2326,7 @@ export function $$io0({
       initialPosition: G.current,
       initialValue: H,
       initialWidth: _$$i,
-      resolvedType: rXF.COLOR,
+      resolvedType: VariableResolvedDataType.COLOR,
       onCreateVariable: f,
       onClose: function () {
         V(!1);

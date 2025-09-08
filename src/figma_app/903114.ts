@@ -42,7 +42,7 @@ import { T5 } from "../figma_app/465071";
 import { Ef } from "../figma_app/428858";
 import { h as _$$h } from "../figma_app/124713";
 import { B as _$$B } from "../figma_app/395012";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { N as _$$N2 } from "../905/809096";
 import { UL, un, kI } from "../figma_app/457899";
 let $$q0 = "https://help.figma.com/hc/articles/360039960434-Manage-seats-in-Figma";
@@ -421,7 +421,7 @@ function er({
     })]
   });
 }
-export let $$en1 = Ju(function (e) {
+export let $$en1 = registerModal(function (e) {
   return jsx(tH, {
     boundaryKey: "ModifyPlanUserSeatModal",
     fallback: H4.DEFAULT_FULL_PAGE,

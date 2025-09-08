@@ -20,14 +20,14 @@ import { E as _$$E } from "../905/375716";
 import { Y as _$$Y } from "../905/762765";
 import { m as _$$m2 } from "../905/148147";
 import { t as _$$t2 } from "../905/398894";
-import { NLJ } from "../figma_app/763686";
-import { Hr } from "../905/871411";
+import { DesignGraphElements } from "../figma_app/763686";
+import { defaultSessionLocalID } from "../905/871411";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { useSprigWithSampling } from "../905/99656";
 import { rM } from "../figma_app/241541";
-import { Y5 } from "../figma_app/455680";
-import { gl, hS } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { A5, lJ } from "../905/275640";
 import { zk } from "../figma_app/198712";
 import { u as _$$u2 } from "../figma_app/110635";
@@ -365,7 +365,7 @@ let $$em4 = ed(function ({
   let v = A5("strokeCap");
   let I = A5("strokeJoin");
   let E = useCallback(() => {
-    if (!f || gl(f)) {
+    if (!f || isInvalidValue(f)) {
       t();
       return;
     }
@@ -384,17 +384,17 @@ let $$em4 = ed(function ({
     Basic: () => {
       E();
       e?.();
-      p(Hr, zk.NO);
+      p(defaultSessionLocalID, zk.NO);
       m(lF, zk.YES);
     },
     Dynamic: () => {
-      if (E(), e?.(), p(Hr, zk.NO), b("CENTER", zk.NO), I("MITER", zk.NO), h && hS(h) && h.length > 0) {
+      if (E(), e?.(), p(defaultSessionLocalID, zk.NO), b("CENTER", zk.NO), I("MITER", zk.NO), h && isValidValue(h) && h.length > 0) {
         g([], zk.NO);
         let e = getI18nString("visual_bell.dynamic_stroke_vector_network_warning");
-        Y5.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
+        fullscreenValue.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
       }
       m(Y4, zk.YES);
-      activeToolId === NLJ.VECTOR_VAR_WIDTH_POINT && activateTool(NLJ.SELECT);
+      activeToolId === DesignGraphElements.VECTOR_VAR_WIDTH_POINT && activateTool(DesignGraphElements.SELECT);
       Sprig("setAttribute", "is_assets_visual_style_user", !0);
     },
     Brush: () => {
@@ -404,7 +404,7 @@ let $$em4 = ed(function ({
       v("NONE", zk.NO);
       b("CENTER", zk.NO);
       m(lF, zk.NO);
-      p(s ?? Hr, zk.YES);
+      p(s ?? defaultSessionLocalID, zk.YES);
       Sprig("setAttribute", "is_assets_visual_style_user", !0);
     }
   }), [s, p, m, g, h, b, v, I, e, E, Sprig, activeToolId, activateTool]);

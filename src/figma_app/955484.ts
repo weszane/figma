@@ -4,8 +4,8 @@ import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
 import { s as _$$s } from "../905/403855";
 import { r as _$$r } from "../905/619088";
-import { Ez5, w3z, Pt4 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, HandoffBindingsCpp, StylesBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
@@ -21,7 +21,7 @@ import { UK } from "../figma_app/740163";
 import { D$, Dh, GL, Uc, Hr } from "../figma_app/741237";
 import { eY } from "../figma_app/722362";
 import { S as _$$S } from "../figma_app/106763";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { PW } from "../figma_app/198712";
 import { Ib as _$$Ib } from "../905/129884";
@@ -69,10 +69,10 @@ function j(e) {
       _$$S("html_tree");
       e.didSelectRow(e.guid);
       let n = Object.keys(selection);
-      if (atomStoreManager.set(_$$m, null), Ez5?.editorState().focusedAnnotationId.set(null), t.metaKey) {
+      if (atomStoreManager.set(_$$m, null), AppStateTsApi?.editorState().focusedAnnotationId.set(null), t.metaKey) {
         var i;
         selection[i = e.guid] ? D$([i]) : Dh([i]);
-      } else t.shiftKey && n.length > 0 ? GL(n[n.length - 1], e.guid) : w3z.selectAndPanToNode(e.guid);
+      } else t.shiftKey && n.length > 0 ? GL(n[n.length - 1], e.guid) : HandoffBindingsCpp.selectAndPanToNode(e.guid);
     },
     onMouseEnter: () => {
       s(!0);
@@ -179,7 +179,7 @@ function K({
     actionOnPointerDown: !0,
     onClick: () => {
       let e = getSingletonSceneGraph().get(t);
-      e && l7.user("set-locked-in-dev-mode", () => {
+      e && permissionScopeHandler.user("set-locked-in-dev-mode", () => {
         e.isLockedInDevMode = !e.isLockedInDevMode;
         let t = debugState.getState();
         let r = t.openFile?.key;
@@ -233,7 +233,7 @@ function $(e) {
   let a = eY();
   let s = e.inheritedTextStyle;
   if (s) {
-    let e = Pt4.getStyleNodeId(s.key, s.version);
+    let e = StylesBindings.getStyleNodeId(s.key, s.version);
     i = a.get(e)?.name;
   }
   let o = e.isInstanceSublayer ? (t = e.name, r = e.textContent, t === r?.trim().replace(/\s+/gm, " ")) : e.autoRename;
@@ -387,8 +387,8 @@ function ee(e) {
   });
 }
 export let $$et1 = memo(e => {
-  let t = J2(UK().showGuids);
-  let r = J2(Ez5.devHandoffState().automaticIconDetection);
+  let t = getObservableOrFallback(UK().showGuids);
+  let r = getObservableOrFallback(AppStateTsApi.devHandoffState().automaticIconDetection);
   let i = e.isAncestorAsset ? void 0 : e.assetInfo;
   let a = eY().get(e.guid);
   if (!a) return null;

@@ -11,8 +11,8 @@ import { g as _$$g } from "../905/880308";
 import { d6, bJ } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { gN } from "../figma_app/976345";
-import { nF } from "../905/350402";
-import { Ce } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { hideModal } from "../905/156213";
 import { F as _$$F } from "../905/642505";
 import { jd } from "../figma_app/528509";
 import { W } from "../905/39853";
@@ -23,7 +23,7 @@ import { cQi } from "../figma_app/43951";
 import { aW, sK } from "../figma_app/598018";
 import { kI, Y5, mO, dv, NU } from "../905/163189";
 zip.workerScriptsPath = "/js/zip/";
-let $$C6 = nF(async e => {
+let $$C6 = createOptimistThunk(async e => {
   if (!_$$F) return;
   let t = e.getState();
   if (t.fileImport.isProcessingFile) return;
@@ -220,7 +220,7 @@ let $$P14 = NC("FILE_IMPORT_FAIL_ON_LIMIT");
 let $$O10 = NC("FILE_IMPORT_UPDATE_ITEM");
 let $$D7 = NC("FILE_IMPORT_ADD_TO_QUEUE");
 let $$L11 = NC("FILE_IMPORT_CLEAR_QUEUE");
-let $$F15 = nF(e => {
+let $$F15 = createOptimistThunk(e => {
   if (!_$$F) return;
   let {
     fileImport
@@ -269,20 +269,20 @@ let $$F15 = nF(e => {
 });
 let $$M5 = NC("FILE_IMPORT_START_PROCESSING_FILE");
 let $$j12 = NC("FILE_IMPORT_DONE_PROCESSING_FILE");
-let U = nF(e => {
+let U = createOptimistThunk(e => {
   e.dispatch($$j12());
   e.getState().fileImport.queue.length > 0 && e.dispatch($$C6());
 });
 let $$B1 = NC("FILE_IMPORT_CONFIRM_IMPORT_PDF");
-let $$V8 = nF((e, t) => {
+let $$V8 = createOptimistThunk((e, t) => {
   e.dispatch($$B1(t));
   e.getState().fileImport.queue.length > 0 && e.dispatch($$C6());
 });
 let $$G2 = NC("FILE_IMPORT_CANCEL_IMPORT_PDF");
-let $$z0 = nF(e => {
+let $$z0 = createOptimistThunk(e => {
   e.dispatch($$G2());
   let t = e.getState();
-  t.fileImport.queue.length > 0 ? e.dispatch($$C6()) : Object.values(t.fileImport.files).every(e => kI(e.name)) && (e.dispatch(Ce()), e.dispatch($$N9()));
+  t.fileImport.queue.length > 0 ? e.dispatch($$C6()) : Object.values(t.fileImport.files).every(e => kI(e.name)) && (e.dispatch(hideModal()), e.dispatch($$N9()));
 });
 export const AU = $$z0;
 export const Fd = $$B1;

@@ -1,4 +1,4 @@
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { B3 } from "../905/709095";
 import { logError } from "../905/714362";
@@ -10,15 +10,15 @@ export let $$d0 = new class {
     this.switchWebglColorSpace = (e, t) => {
       let r = e.drawingBufferColorSpace;
       switch (t) {
-        case RYP.SRGB:
+        case ColorSpaceEnum.SRGB:
           if ("srgb" === r) return;
           e.drawingBufferColorSpace = "srgb";
-          _$$l.setCanvasColorProfile(RYP.SRGB);
+          _$$l.setCanvasColorProfile(ColorSpaceEnum.SRGB);
           break;
-        case RYP.DISPLAY_P3:
+        case ColorSpaceEnum.DISPLAY_P3:
           if ("display-p3" === r) return;
           e.drawingBufferColorSpace = "display-p3";
-          _$$l.setCanvasColorProfile(RYP.DISPLAY_P3);
+          _$$l.setCanvasColorProfile(ColorSpaceEnum.DISPLAY_P3);
           break;
         default:
           logError("color management", "unsupported color space", {

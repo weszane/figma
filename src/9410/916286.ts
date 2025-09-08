@@ -1,13 +1,13 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { glU, Ez5 } from "../figma_app/763686";
+import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import o from "classnames";
 import { Y } from "../905/506207";
 import { co } from "../figma_app/958735";
 import { T as _$$T } from "../905/858738";
 import { dq } from "../905/845253";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { G } from "../1250/269770";
 import { Xr } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -62,7 +62,7 @@ function L(e) {
         return e;
       }, new Map());
       if (t) try {
-        glU.setDeveloperRelatedLinks(t);
+        Fullscreen.setDeveloperRelatedLinks(t);
       } catch {}
     }
   }, [L]);
@@ -168,7 +168,7 @@ export function $$F0({
 }) {
   let c = useSelector(e => e.modalShown);
   let f = _$$T();
-  let g = ut(Ez5?.devHandoffState()?.focusMode, !1);
+  let g = getObservableValue(AppStateTsApi?.devHandoffState()?.focusMode, !1);
   let _ = dq();
   let x = useRef(!1);
   return jsx(_$$d, {

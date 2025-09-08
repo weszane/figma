@@ -1,6 +1,6 @@
-import { Et, aD, nj } from "../905/125019";
+import { sha1Hex, sha1BytesFromHex, sha1HexFromBytes } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { iLo, glU, jXp } from "../figma_app/763686";
+import { SlidePptxImporterBindings, Fullscreen, FontSourceType } from "../figma_app/763686";
 import { delay } from "../905/236856";
 import { trackEventAnalytics } from "../905/449184";
 import { jm } from "../figma_app/416935";
@@ -18,9 +18,9 @@ import { Ec, bT } from "../905/163189";
 import { MZ } from "../905/470594";
 import { OL, lZ, pl, Yw } from "../905/615657";
 import { Lg, Ij } from "../905/902099";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import w from "../vendor/7508";
 import { VS } from "../905/696699";
 import { TF } from "../905/18922";
@@ -844,8 +844,8 @@ let ev = ({
   };
 };
 async function eI(e, t) {
-  let i = Et(t);
-  let r = aD(i);
+  let i = sha1Hex(t);
+  let r = sha1BytesFromHex(i);
   return {
     name: e,
     bytes: t,
@@ -1443,25 +1443,25 @@ eC.SLIDE_MASTER_FILE_PATTERN = RegExp("^ppt/slideMasters/slideMaster[0-9]+.xml$"
 eC.SLIDE_THEME_DIR_PATH = "ppt/theme/";
 eC.KNOWN_NON_VISUAL_NODES = ["p:grpSpPr", "p:nvGrpSpPr"];
 async function eP(e, t, i) {
-  Y5.resetLoadedFigFile();
+  fullscreenValue.resetLoadedFigFile();
   await U_(e, FEditorType.Slides);
   let n = new eC();
   await n.parsePPTX(i);
   let r = n.parseMetadata();
-  let s = iLo?.createSlides(r) ?? [];
+  let s = SlidePptxImporterBindings?.createSlides(r) ?? [];
   if (0 === s.length) throw Error("No slides found in the pptx file");
   let o = await n.parseImages();
   for (let e = 1; e < r.numSlides + 1; e++) n.parseRelationshipsAndThemesForSlide(e);
   n.parseSlideMasterXmls();
   n.parseSlideLayoutXmls();
-  l7.user("pptx-import", () => {
+  permissionScopeHandler.user("pptx-import", () => {
     for (let e = 1; e < s.length + 1; e++) {
       let t = s[e - 1];
       let {
         addedNodes,
         nodeUpdates
       } = n.parseSlideContentXml(e);
-      iLo?.insertContentIntoSlide(t, addedNodes, nodeUpdates);
+      SlidePptxImporterBindings?.insertContentIntoSlide(t, addedNodes, nodeUpdates);
       (function (e, t, i) {
         if (e) try {
           let i = _$$F2(e);
@@ -1476,7 +1476,7 @@ async function eP(e, t, i) {
     }
   });
   Vy.toConsole(zT.IMPORT);
-  let l = glU?.getScene();
+  let l = Fullscreen?.getScene();
   o.images.forEach(e => {
     Jr().forgetImage(e.sha1Hash);
   });
@@ -1676,7 +1676,7 @@ async function eG(e, t, i) {
             c.onabort = () => {
               u = !0;
             };
-            c.open("POST", `/api/upnode/image?purpose=canvas&sha1=${nj(o.sha1Bytes)}&fileKey=${i.fileKey}`);
+            c.open("POST", `/api/upnode/image?purpose=canvas&sha1=${sha1HexFromBytes(o.sha1Bytes)}&fileKey=${i.fileKey}`);
             let m = getInitialOptions().user_data?.id;
             m && c.setRequestHeader("X-Figma-User-ID", m);
             c.setRequestHeader("Content-Type", p);
@@ -1711,7 +1711,7 @@ async function eG(e, t, i) {
   return c;
 }
 function ez(e) {
-  let t = yF([jXp.LOCAL, jXp.GOOGLE, jXp.SHARED]);
+  let t = yF([FontSourceType.LOCAL, FontSourceType.GOOGLE, FontSourceType.SHARED]);
   return {
     getFont: async function (i) {
       let n = await t;

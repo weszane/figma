@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useId, useRef } from "react";
 import { A } from "../vendor/723372";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { R } from "../905/57445";
 import { bL as _$$bL, c$ as _$$c$, Y4 } from "../905/575478";
 var d = "segmented-control__optionRoot__tnGcv";
@@ -54,7 +54,7 @@ export let $$p2 = forwardRef(({
     className: A(d, {
       "segmented-control__optionRootTruncated__KsES5": t
     }),
-    children: jsx(J, {
+    children: jsx(Label, {
       ref: p,
       htmlFor: u,
       className: "segmented-control__text__KfpLV",

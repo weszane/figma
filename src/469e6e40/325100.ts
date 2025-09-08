@@ -12,7 +12,7 @@ import { S as _$$S } from "../905/339549";
 import { E as _$$E } from "../905/984674";
 import { tI } from "../figma_app/599327";
 import { BC } from "../figma_app/149367";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { Z } from "../469e6e40/184197";
 import { fu } from "../figma_app/831799";
 import { Oq } from "../905/332483";
@@ -21,13 +21,13 @@ import { _k } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { FProductAccessType } from "../figma_app/191312";
 import { vr } from "../figma_app/514043";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 function N(e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
   let l = () => {
-    t(AS());
+    t(hideModalHandler());
   };
   return jsx(fu, {
     name: "Finalize Invoice Modal",
@@ -98,7 +98,7 @@ function T({
     })
   });
 }
-export let $$A0 = Ju(function (e) {
+export let $$A0 = registerModal(function (e) {
   let t = useDispatch();
   let a = o0(e.invoice);
   let s = new vr(e.invoice.currency);
@@ -165,7 +165,7 @@ export let $$A0 = Ju(function (e) {
         licenseQuantities: u,
         planInvoiceId: e.invoice.id
       }));
-      t(AS());
+      t(hideModalHandler());
     }
   });
 }, "FINALIZE_INVOICE_CONFIRM_MODAL_V2");

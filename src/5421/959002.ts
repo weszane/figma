@@ -9,14 +9,14 @@ import { Fk } from "../figma_app/167249";
 import { QK, Ns, wy, kv } from "../figma_app/259678";
 import { $W } from "../figma_app/325537";
 import { i as _$$i } from "../905/661697";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { Q } from "../1156/755570";
 import { p as _$$p } from "../905/786248";
 import { Hg } from "../figma_app/304955";
 import b from "../vendor/7508";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { nc } from "../figma_app/570630";
 import { nU, Ql, w_ } from "../figma_app/779249";
 import { r as _$$r } from "../905/571562";
@@ -29,7 +29,7 @@ function E({
 }) {
   return jsx(q7, {
     onClick: () => {
-      l7.user("create-new-code-file", () => {
+      permissionScopeHandler.user("create-new-code-file", () => {
         let t;
         let n = 0;
         let o = "new-file.tsx";
@@ -38,8 +38,8 @@ function E({
           n++;
           o = `new-file-${n}.tsx`;
         } else break;
-        glU?.createNewCodeFile(t, "", "file_context_menu", !1);
-        Y5.commit();
+        Fullscreen?.createNewCodeFile(t, "", "file_context_menu", !1);
+        fullscreenValue.commit();
       });
     },
     children: getI18nString("figmake.filesystem.context_menu.create_new_file")
@@ -61,9 +61,9 @@ function N({
 }) {
   return jsx(q7, {
     onClick: () => {
-      l7.user("delete-code-file", () => {
-        glU?.deleteCodeFile(e.guid);
-        glU?.commit();
+      permissionScopeHandler.user("delete-code-file", () => {
+        Fullscreen?.deleteCodeFile(e.guid);
+        Fullscreen?.commit();
       });
     },
     disabled: t,
@@ -242,10 +242,10 @@ function O({
         fileName: t.name,
         onChange: e => {
           I(!1);
-          C && l7.user("edit-code-file-name", () => {
+          C && permissionScopeHandler.user("edit-code-file-name", () => {
             C.setHasBeenManuallyRenamed(!0);
             C.name = e;
-            glU?.commit();
+            Fullscreen?.commit();
           });
         },
         disabled: d,

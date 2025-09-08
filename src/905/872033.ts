@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useMemo } from "react";
 import { S } from "../905/823680";
 import { $ } from "../905/61417";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 let l = createContext(null);
 let $$d1 = forwardRef(({
   children: e,
@@ -16,7 +16,7 @@ let $$d1 = forwardRef(({
   return jsx(l.Provider, {
     value: d,
     children: jsx("div", {
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...i,
       ...t,
       ref: a,

@@ -5,7 +5,7 @@ import { Rs } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { fileEntityDataMapper } from "../905/943101";
 import { FContainerKindType } from "../figma_app/191312";
 import { vgO } from "../figma_app/43951";
@@ -27,7 +27,7 @@ export function $$g0({
   } = x.data;
   if (!pinnedFile) {
     reportError(_$$e.WAYFINDING, Error("EditPinModal unable to lookup pinned file by ID"));
-    g(Lo());
+    g(popModalStack());
     return null;
   }
   if (pinnedFile.resourceType !== FContainerKindType.WORKSPACE) {
@@ -36,7 +36,7 @@ export function $$g0({
         resourceType: pinnedFile.resourceType
       }
     });
-    g(Lo());
+    g(popModalStack());
     return null;
   }
   let v = pinnedFile.resourceId;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
@@ -25,7 +25,7 @@ export function $$f4() {
   return t ? g : e;
 }
 export function $$E5() {
-  return $$h1(Ez5?.editorPreferences().devHandoffInspectSplitPosition.getCopy() ?? 0);
+  return $$h1(AppStateTsApi?.editorPreferences().devHandoffInspectSplitPosition.getCopy() ?? 0);
 }
 export function $$y6(e) {
   getFeatureFlags().properties_panel_resize_lag_fix && document.documentElement.style.setProperty("--dev-handoff-panel-width", `${e}px`);

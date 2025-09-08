@@ -2,8 +2,8 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, forwardRef } from "react";
 import { createPortal } from "../vendor/944059";
 import { E as _$$E } from "../905/632989";
-import { glU, V5h, rcl } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, AlignmentPosition, Command } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { rf } from "../figma_app/806412";
@@ -12,7 +12,7 @@ import { B } from "../905/714743";
 import { S as _$$S } from "../figma_app/552746";
 import { n as _$$n } from "../905/734251";
 import { F } from "../905/989956";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Pl } from "../figma_app/62612";
 import { Ib } from "../905/129884";
 import { Yt } from "../figma_app/955650";
@@ -71,8 +71,8 @@ export function $$N0({
       if (!N.current) return Promise.resolve();
       let i = zG(N.current.getBoundingClientRect());
       let n = C2(t.e);
-      l7.user("drop-shape-on-canvas", () => glU?.dropDiagramItemOntoCanvas(Jc.get(e), Math.round(i.x), Math.round(i.y), Math.round(n.x), Math.round(n.y), V5h.TOP_LEFT, a));
-      Y5.triggerActionEnum(rcl.SET_TOOL_DEFAULT);
+      permissionScopeHandler.user("drop-shape-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(Jc.get(e), Math.round(i.x), Math.round(i.y), Math.round(n.x), Math.round(n.y), AlignmentPosition.TOP_LEFT, a));
+      fullscreenValue.triggerActionEnum(Command.SET_TOOL_DEFAULT);
       return Promise.resolve();
     },
     recordingKey: m

@@ -8,7 +8,7 @@ import { A as _$$A3 } from '../469e6e40/634763';
 import { V as _$$V, Z as _$$Z } from '../469e6e40/658906';
 import { A as _$$A2 } from '../469e6e40/916829';
 import { Ib } from '../905/129884';
-import { to } from '../905/156213';
+import { showModalHandler } from '../905/156213';
 import { o as _$$o, Ph, pW } from '../905/160095';
 import { E as _$$E } from '../905/172252';
 import { h as _$$h } from '../905/207101';
@@ -45,7 +45,7 @@ import { e6, lR } from '../figma_app/617427';
 import { k as _$$k2 } from '../figma_app/618031';
 import { J7 } from '../figma_app/650409';
 import { RG } from '../figma_app/684446';
-import { NW as _$$NW } from '../figma_app/831101';
+import { BillingCycle } from '../figma_app/831101';
 import { _8, $b, _k, fA, fx, gL, gl, Jv, ly, nm, qH, TQ, Z4, z7, zz } from '../figma_app/934005';
 import { J0 } from '../figma_app/967319';
 import * as N from '../vendor/116389';
@@ -145,13 +145,13 @@ function z(e) {
   let r = useCallback(() => _8(e.invoice) ? {
     heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
     subheading: null
-  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === _$$NW.MONTH && e.invoice.subtype === ly.SUBSCRIPTION_RENEWED && _$$A(e.invoice.issued_at).isAfter(_$$A.utc('2018-05-01')) ? {
+  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH && e.invoice.subtype === ly.SUBSCRIPTION_RENEWED && _$$A(e.invoice.issued_at).isAfter(_$$A.utc('2018-05-01')) ? {
     heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
     subheading: e.invoice.state === qH.PENDING ? getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading.pending', i) : getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading', i)
-  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === _$$NW.MONTH ? {
+  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.MONTH ? {
     heading: getI18nString('plan_invoices.cost_breakdown.monthly_seats_heading'),
     subheading: getI18nString('plan_invoices.cost_breakdown.monthly_seats_subheading', i)
-  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === _$$NW.YEAR ? {
+  } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === BillingCycle.YEAR ? {
     heading: getI18nString('plan_invoices.cost_breakdown.annual_seats_heading'),
     subheading: getI18nString('plan_invoices.cost_breakdown.annual_seats_subheading', i)
   } : {
@@ -504,13 +504,13 @@ function el(e) {
     content: c && o && l === FOrganizationLevelType.ORG && !a && m === fx.REVIEW && jsx(lR, {
       variant: 'secondary',
       onClick: () => {
-        d ? t(to({
+        d ? t(showModalHandler({
           type: _$$A2,
           data: {
             orgId: o,
             invoice: e.invoice
           }
-        })) : t(to({
+        })) : t(showModalHandler({
           type: _$$H,
           data: {
             orgId: o,

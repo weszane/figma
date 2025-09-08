@@ -1,17 +1,17 @@
 import { throwTypeError } from "../figma_app/465776";
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
 import { K2, Pe, Dr, SX, gB, to as _$$to, j4 } from "../figma_app/310688";
 import { WB } from "../905/761735";
 import { XJ, f2, ad, Nc, zb, h7 } from "../figma_app/411744";
-import { td } from "../figma_app/181241";
+import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { ah } from "../figma_app/637328";
-import { nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { mr } from "../905/760074";
 import { D6 } from "../figma_app/863319";
 import { nb } from "../figma_app/543100";
@@ -21,7 +21,7 @@ let $$I17 = NC("SET_FAVORITES_COUNT");
 let $$S6 = NC("UPDATE_EXPANDED_CUSTOM_SECTIONS");
 let $$v21 = NC("SET_MOVING_RESOURCE");
 let $$A19 = NC("SET_NEW_SECTION_INDEX");
-let $$x22 = nF((e, t) => {
+let $$x22 = createOptimistThunk((e, t) => {
   let {
     name,
     orderedFavoriteIds
@@ -48,7 +48,7 @@ let $$x22 = nF((e, t) => {
   }, i);
   t.name && K2(t.sectionId, t.name);
 });
-let $$N11 = nF((e, t) => {
+let $$N11 = createOptimistThunk((e, t) => {
   let r = XHR.del(`/api/user_sidebar_sections/${t.sidebarSectionId}`).catch(t => {
     e.dispatch(F.enqueue({
       message: `${t.msg}`
@@ -61,7 +61,7 @@ let $$N11 = nF((e, t) => {
     }
   }, r);
 });
-let $$C3 = nF((e, t) => {
+let $$C3 = createOptimistThunk((e, t) => {
   let r = {
     favorited_resource_ids: t.favoriteIds,
     team_id: t.teamId
@@ -73,7 +73,7 @@ let $$C3 = nF((e, t) => {
     }));
   });
 });
-let $$w7 = nF((e, t) => {
+let $$w7 = createOptimistThunk((e, t) => {
   let r = {
     section_id: t.sectionId,
     ordered_favorite_ids: t.orderedFavoriteIds
@@ -122,7 +122,7 @@ let $$w7 = nF((e, t) => {
       }, n);
   }
 });
-let $$O24 = nF((e, t) => {
+let $$O24 = createOptimistThunk((e, t) => {
   let r = e.getState().currentUserOrgId ?? null;
   let n = {
     name: t.name,
@@ -170,7 +170,7 @@ let $$O24 = nF((e, t) => {
     ah(s, e.getState().user?.id, r, null, i);
   }
 });
-let $$R9 = nF((e, t) => {
+let $$R9 = createOptimistThunk((e, t) => {
   let r = e.getState().currentUserOrgId ?? null;
   let n = {
     name: t.name,
@@ -210,7 +210,7 @@ let $$R9 = nF((e, t) => {
     ah(o, e.getState().user?.id, r, null, i);
   }
 });
-let $$L5 = MM("BULK_RESOURCE_SET_FAVORITE", (e, t, {
+let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
   optimistId: r,
   liveStore: n
 }) => {
@@ -251,9 +251,9 @@ let $$L5 = MM("BULK_RESOURCE_SET_FAVORITE", (e, t, {
     gB(e.file_key, selectedView, entrypoint, FEntityType.PROTOTYPE, "design", !0);
   });
   let O = XHR.put("/api/bulk_favorite_resources", w).then(() => {
-    e.dispatch(_$$c(r));
+    e.dispatch(createOptimistCommitAction(r));
   }).catch(t => {
-    e.dispatch(_$$r(r));
+    e.dispatch(createOptimistRevertAction(r));
     try {
       e.dispatch(F.enqueue({
         message: t.message
@@ -300,7 +300,7 @@ let $$L5 = MM("BULK_RESOURCE_SET_FAVORITE", (e, t, {
     ah(e, R, orgId, null, O);
   }
 });
-let $$P12 = nF((e, t) => {
+let $$P12 = createOptimistThunk((e, t) => {
   let {
     tile,
     entrypoint,
@@ -340,7 +340,7 @@ let $$P12 = nF((e, t) => {
       throwTypeError(tile);
   }
 });
-let $$D16 = MM("REMOVE_FOLDER_FAVORITE", (e, t, {
+let $$D16 = createOptimistAction("REMOVE_FOLDER_FAVORITE", (e, t, {
   optimistId: r
 }) => {
   let {
@@ -355,7 +355,7 @@ let $$D16 = MM("REMOVE_FOLDER_FAVORITE", (e, t, {
     }
   }, a);
 });
-let $$k1 = nF(async (e, t, {
+let $$k1 = createOptimistThunk(async (e, t, {
   liveStore: r
 }) => {
   let {
@@ -410,7 +410,7 @@ let $$k1 = nF(async (e, t, {
       throwTypeError(tile);
   }
 });
-let $$M4 = MM("ADD_FOLDER_FAVORITE", (e, t, {
+let $$M4 = createOptimistAction("ADD_FOLDER_FAVORITE", (e, t, {
   optimistId: r
 }) => {
   let {
@@ -433,7 +433,7 @@ let $$M4 = MM("ADD_FOLDER_FAVORITE", (e, t, {
     }
   }, a)));
 });
-let $$F15 = nF((e, t) => {
+let $$F15 = createOptimistThunk((e, t) => {
   let {
     workspace
   } = t;
@@ -445,7 +445,7 @@ let $$F15 = nF((e, t) => {
     }
   }, n);
 });
-let $$j10 = nF((e, t) => {
+let $$j10 = createOptimistThunk((e, t) => {
   let {
     workspace,
     sectionId
@@ -466,7 +466,7 @@ let $$j10 = nF((e, t) => {
     }
   }, a));
 });
-let $$U18 = nF((e, t) => {
+let $$U18 = createOptimistThunk((e, t) => {
   let {
     team
   } = t;
@@ -478,7 +478,7 @@ let $$U18 = nF((e, t) => {
     }
   }, n);
 });
-let $$B0 = nF((e, t) => {
+let $$B0 = createOptimistThunk((e, t) => {
   let {
     team,
     sectionId
@@ -499,7 +499,7 @@ let $$B0 = nF((e, t) => {
     }
   }, a));
 });
-let $$G8 = MM("REMOVE_PROTOTYPE_FAVORITE", (e, t, {
+let $$G8 = createOptimistAction("REMOVE_PROTOTYPE_FAVORITE", (e, t, {
   optimistId: r
 }) => {
   let {
@@ -515,7 +515,7 @@ let $$G8 = MM("REMOVE_PROTOTYPE_FAVORITE", (e, t, {
     }
   }, l);
 });
-let $$V14 = MM("ADD_PROTOTYPE_FAVORITE", (e, t, {
+let $$V14 = createOptimistAction("ADD_PROTOTYPE_FAVORITE", (e, t, {
   optimistId: r
 }) => {
   let {
@@ -540,7 +540,7 @@ let $$V14 = MM("ADD_PROTOTYPE_FAVORITE", (e, t, {
     }
   }, u));
 });
-let $$H20 = MM("REMOVE_FILE_FAVORITE", (e, t, {
+let $$H20 = createOptimistAction("REMOVE_FILE_FAVORITE", (e, t, {
   optimistId: r
 }) => {
   let n = e.getState().selectedView.view;
@@ -558,7 +558,7 @@ let $$H20 = MM("REMOVE_FILE_FAVORITE", (e, t, {
   }, d);
 });
 let $$z13 = NC("ADD_FILE_FAVORITE");
-let $$W2 = nF((e, t) => {
+let $$W2 = createOptimistThunk((e, t) => {
   let {
     optimistId
   } = e.optimisticDispatch($$z13(t));
@@ -628,7 +628,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
   page_id: o,
   section_id: s
 }).then(() => {
-  if (a && e(_$$c(a)), l || t !== FEntityType.FILE) {
+  if (a && e(createOptimistCommitAction(a)), l || t !== FEntityType.FILE) {
     let t = r ? getI18nString("sidebar.item_added_bell_message") : getI18nString("sidebar.item_removed_bell_message");
     e(F.enqueue({
       message: t
@@ -637,7 +637,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
 }).catch(t => {
   let n = J(t);
   if (n) {
-    a && e(_$$r(a));
+    a && e(createOptimistRevertAction(a));
     try {
       e(F.enqueue({
         message: n
@@ -648,8 +648,8 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
     }
   }
 });
-let $ = e => (j4(e.favorited_resource_ids), XHR.del("/api/favorited_resources", td.toAPIParameters(e)));
-let $$X23 = nF((e, t) => {
+let $ = e => (j4(e.favorited_resource_ids), XHR.del("/api/favorited_resources", APIParameterUtils.toAPIParameters(e)));
+let $$X23 = createOptimistThunk((e, t) => {
   $({
     favorited_resource_ids: t.favoriteIds
   }).catch(t => {

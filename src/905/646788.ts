@@ -16,7 +16,7 @@ import { wH, fm, KI } from "../figma_app/680166";
 import { FEditorType, mapFileTypeToEditorType, isSlidesOrWhiteboardOrDesignOrIllustration, mapEditorTypeToFileType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { A5 } from "../figma_app/707808";
 import { q as _$$q, J as _$$J } from "../905/202542";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { mK } from "../figma_app/197286";
 import { i as _$$i } from "../905/46262";
 import { MM, jS } from "../905/136701";
@@ -62,9 +62,9 @@ import { Hz as _$$Hz } from "../905/366346";
 import { wD, B1, mu, $Y, $S, h1 } from "../905/918620";
 import { wN as _$$wN, XR, aL as _$$aL, Xh, SV, G2, Ke, Ah, By, py, W2, Em } from "../905/959395";
 import { c as _$$c } from "../905/144429";
-import { X3B, bOM, Qej, Ez5, Egt } from "../figma_app/763686";
+import { PrototypingTsApi, PresentationValidationStatus, MenuType, AppStateTsApi, SceneGraphHelpers } from "../figma_app/763686";
 import { qZ } from "../figma_app/761118";
-import { Lo, to as _$$to, AS, Ce, YK } from "../905/156213";
+import { popModalStack, showModalHandler, hideModalHandler, hideModal, showModalConditional } from "../905/156213";
 import { KV } from "../figma_app/548615";
 import { u as _$$u } from "../905/712485";
 import { A as _$$A } from "../905/389851";
@@ -115,8 +115,8 @@ import { WZ } from "../905/893645";
 import { R as _$$R3 } from "../905/11928";
 import { GCV, KdZ, tzJ, ePo } from "../figma_app/6204";
 import { N as _$$N2 } from "../905/438674";
-import { S as _$$S2 } from "../905/274480";
-import { J as _$$J2, h as _$$h3 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
 import { x as _$$x } from "../905/764527";
 import { E as _$$E2 } from "../figma_app/999099";
 import { $t, HZ } from "../figma_app/29287";
@@ -219,7 +219,7 @@ import { A as _$$A9 } from "../1617/396317";
 import { A as _$$A0 } from "../svg/619883";
 import rr from "classnames";
 import { nR as _$$nR2, vd as _$$vd } from "../figma_app/60079";
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { yy } from "../figma_app/543529";
 import { _R } from "../figma_app/106207";
 import { yz } from "../905/784221";
@@ -566,7 +566,7 @@ function eM({
   });
 }
 function eU() {
-  if (X3B) return X3B.getActivePrototypeStartingPointNodeIdOnCurrentPage() || X3B.findFirstVisuallySortedBaseScreenOnCurrentPage();
+  if (PrototypingTsApi) return PrototypingTsApi.getActivePrototypeStartingPointNodeIdOnCurrentPage() || PrototypingTsApi.findFirstVisuallySortedBaseScreenOnCurrentPage();
 }
 function eZ(e) {
   let {
@@ -609,13 +609,13 @@ function eZ(e) {
     })
   });
 }
-let eX = Ju(function (e) {
+let eX = registerModal(function (e) {
   let {
     fileKey,
     hasPasswordSet
   } = e;
   let s = useDispatch();
-  let o = () => s(Lo());
+  let o = () => s(popModalStack());
   let l = hS({
     ...e,
     onClose: o
@@ -665,12 +665,12 @@ let eX = Ju(function (e) {
     manager: l
   });
 }, "EnableWorkshopConfirmationModal");
-let eQ = Ju(function (e) {
+let eQ = registerModal(function (e) {
   let {
     fileKey
   } = e;
   let i = useDispatch();
-  let s = () => i(Lo());
+  let s = () => i(popModalStack());
   let o = hS({
     ...e,
     onClose: s
@@ -716,7 +716,7 @@ function eJ({
       userId: o,
       canUserAccessProFeature: i
     }), !i) {
-      r(_$$to({
+      r(showModalHandler({
         type: DV,
         data: {
           team: e,
@@ -728,7 +728,7 @@ function eJ({
       }));
       return;
     }
-    r(_$$to({
+    r(showModalHandler({
       type: c.enabled ? eQ : eX,
       data: {
         fileKey: l,
@@ -820,7 +820,7 @@ function ts(e) {
     children: `${e.code.substring(0, e.code.length / 2)} ${e.code.substring(e.code.length / 2, e.code.length)}`
   });
 }
-let to = Ju(function (e) {
+let to = registerModal(function (e) {
   let t = tn(e.fileKey);
   let i = function (e) {
     let t = DG(e);
@@ -835,7 +835,7 @@ let to = Ju(function (e) {
   let s = useDispatch();
   let [o, l] = useState(600);
   let [d, u] = useState(0);
-  let p = () => s(Lo());
+  let p = () => s(popModalStack());
   let m = hS({
     ...e,
     onClose: p
@@ -929,7 +929,7 @@ let to = Ju(function (e) {
                     s(_$$rA({
                       file_key: e.fileKey
                     }));
-                    s(AS());
+                    s(hideModalHandler());
                     s(_$$F2.enqueue({
                       message: getI18nString("file_permissions_modal.share_as.google_device.open_session_ended")
                     }));
@@ -1169,7 +1169,7 @@ function tV(e) {
     userFlagOnShow: tL
   });
 }
-let tW = Ju(function (e) {
+let tW = registerModal(function (e) {
   let t = hS(e);
   let i = useDispatch();
   let [s, o] = useState(!1);
@@ -1191,7 +1191,7 @@ let tW = Ju(function (e) {
           children: [getI18nString("confirm_prototype_share_modal.to_be_able_to_share_your_prototypes_separately_from_your_design_files"), " ", jsx(_$$N2, {
             href: "#",
             onClick: () => {
-              e.team && e.editorType && i(_$$to({
+              e.team && e.editorType && i(showModalHandler({
                 type: DV,
                 data: {
                   team: e.team,
@@ -1206,10 +1206,10 @@ let tW = Ju(function (e) {
           })]
         })]
       }), jsxs(wi, {
-        children: [jsx(_$$S2, {
+        children: [jsx(Checkbox, {
           checked: l,
           onChange: e => d(e),
-          label: jsx(_$$J2, {
+          label: jsx(Label, {
             children: getI18nString("confirm_prototype_share_modal.dont_show_again")
           })
         }), jsx(jk, {
@@ -1268,7 +1268,7 @@ function tK(e) {
     icon: d,
     text: t ? getI18nString("file_permissions_modal.share_as.link_copied") : e.copyLinkString,
     onClick: () => {
-      l() ? s(_$$to({
+      l() ? s(showModalHandler({
         type: tW,
         data: {
           fileKey: e.fileKey,
@@ -1291,8 +1291,8 @@ function tK(e) {
   });
 }
 function tY(e) {
-  let t = "" !== e.nodeID ? bOM.VALID : X3B && X3B.currentPagePrototypeStatus();
-  return e.isFullscreenView && e.file.editor_type === FFileType.DESIGN && t === bOM.VALID;
+  let t = "" !== e.nodeID ? PresentationValidationStatus.VALID : PrototypingTsApi && PrototypingTsApi.currentPagePrototypeStatus();
+  return e.isFullscreenView && e.file.editor_type === FFileType.DESIGN && t === PresentationValidationStatus.VALID;
 }
 function tX({
   fileKey: e
@@ -1643,7 +1643,7 @@ function is({
       trackEventAnalytics("google_device_screenshare_button_clicked", {
         fileKey: o
       });
-      getFeatureFlags().figjam_3p_hardware_integration && c && l === FFileType.WHITEBOARD && p ? d(_$$to({
+      getFeatureFlags().figjam_3p_hardware_integration && c && l === FFileType.WHITEBOARD && p ? d(showModalHandler({
         type: to,
         data: {
           fileKey: o
@@ -1705,12 +1705,12 @@ function is({
     let o = t && i && s && getFeatureFlags().aip_flower_garden_share;
     let l = useDispatch();
     let d = useCallback(() => {
-      l(Ce());
+      l(hideModal());
       _$$u({
-        source: Qej.SHARE_MODAL
+        source: MenuType.SHARE_MODAL
       });
     }, [l]);
-    return (KV(Qej.SHARE_MODAL, !!o), o) ? jsx(_$$sR, {
+    return (KV(MenuType.SHARE_MODAL, !!o), o) ? jsx(_$$sR, {
       icon: jsx(_$$c, {}),
       text: getI18nString("fullscreen_actions.quick_actions.detect-violations"),
       onClick: d
@@ -1873,7 +1873,7 @@ function im(e) {
             value: m,
             onChange: e => g(e ?? t),
             children: [jsx(l9, {
-              label: jsx(_$$h3, {
+              label: jsx(HiddenLabel, {
                 children: " "
               })
             }), jsxs(mc, {
@@ -2009,7 +2009,7 @@ function iM({
   let d = {
     checked: t && !o,
     onChange: () => i(!t),
-    label: jsx(_$$J2, {
+    label: jsx(Label, {
       children: getI18nString("permissions_modal.file_share_settings.viewers_can_copy_save_export")
     }),
     children: l ? jsx(_$$E3, {
@@ -2030,11 +2030,11 @@ function iM({
     className: "x78zum5 x6s0dn4 x167g77z",
     children: jsx(m_, {
       preview: getI18nString("permissions_modal.file_share_settings.viewers_cannot_export_hover"),
-      children: jsx(_$$S2, {
+      children: jsx(Checkbox, {
         ...d
       })
     })
-  }) : jsx(_$$S2, {
+  }) : jsx(Checkbox, {
     ...d
   });
 }
@@ -2768,10 +2768,10 @@ function na({
           className: Fk,
           children: [jsxs("div", {
             className: pi,
-            children: [jsx(_$$S2, {
+            children: [jsx(Checkbox, {
               checked: "unprotected" !== el,
               onChange: ec,
-              label: jsx(_$$J2, {
+              label: jsx(Label, {
                 children: getI18nString("permissions_modal.file_share_settings.password_required")
               }),
               disabled: !ev || Cy(d)
@@ -2811,13 +2811,13 @@ function na({
               userId: I?.id,
               fileKey: key
             })
-          }), ex && jsx(_$$S2, {
+          }), ex && jsx(Checkbox, {
             checked: q,
             onChange: () => {
               let e = !q;
               (!Q3(d) || e) && (q ? X(null) : q || X(eb().toDate()), $(!q));
             },
-            label: jsx(_$$J2, {
+            label: jsx(Label, {
               children: q ? getI18nString("permissions_modal.file_share_settings.link_expires_in") : getI18nString("permissions_modal.file_share_settings.link_expiration")
             }),
             disabled: Q3(d) || !eo
@@ -2846,10 +2846,10 @@ function na({
           children: getI18nString("permissions_modal.file_share_settings.advanced")
         }), jsxs("div", {
           className: Fk,
-          children: [U === _9.ORG && jsx(_$$S2, {
+          children: [U === _9.ORG && jsx(Checkbox, {
             checked: K,
             onChange: () => Y(!K),
-            label: jsx(_$$J2, {
+            label: jsx(Label, {
               children: getI18nString("permissions_modal.file_share_settings.discoverable_via_search")
             }),
             disabled: !x
@@ -2883,7 +2883,7 @@ function na({
                 });
                 return;
               }
-              p(_$$to({
+              p(showModalHandler({
                 type: DV,
                 data: {
                   team: o || null,
@@ -3047,7 +3047,7 @@ function nc(e) {
           children: jsx($z, {
             onClick: () => {
               i(!0);
-              t(Lo());
+              t(popModalStack());
               e.onSubmit();
             },
             children: renderI18nText("file_permissions_modal.google_confirmation_modal.confirm_text")
@@ -3104,9 +3104,9 @@ function nk({
     })]
   });
 }
-let nR = Ju(function () {
+let nR = registerModal(function () {
   let e = useDispatch();
-  let t = useCallback(() => e(Ce()), [e]);
+  let t = useCallback(() => e(hideModal()), [e]);
   let i = useSelector(e => e.currentUserOrgId);
   let [s] = IT(Eh.OrgAdminsQuery({
     orgId: i
@@ -3145,12 +3145,12 @@ let nR = Ju(function () {
     })
   });
 }, "AccessNeededToPublishInOrgModal");
-let nN = Ju(function () {
+let nN = registerModal(function () {
   let e = useDispatch();
   let t = q5();
-  let i = useCallback(() => e(Ce()), [e]);
+  let i = useCallback(() => e(hideModal()), [e]);
   let s = useCallback(() => {
-    t?.key && (i(), e(YK({
+    t?.key && (i(), e(showModalConditional({
       type: {
         type: MM
       },
@@ -3189,7 +3189,7 @@ let nN = Ju(function () {
     })
   });
 }, "SitesPublishRequiredModal");
-let n2 = Ju(function ({
+let n2 = registerModal(function ({
   hubFile: e,
   confirmationTitle: t,
   content: i,
@@ -3212,7 +3212,7 @@ let n2 = Ju(function ({
       atomStoreManager.set(UM, {
         state: F4.UNPUBLISH_HUB_FILE_INITIATED
       });
-      Ez5?.canvasGrid().updateSourceLibraryKey(_$$l(""));
+      AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
       await u(ZS({
         publishingMode: _$$o2.HUBFILE,
         unpublishAll: !0,
@@ -3268,12 +3268,12 @@ let n2 = Ju(function ({
           redirectLink: onUnpublishHubFileRedirectLink,
           onSuccess: async () => {
             await onUnpublishHubFileSuccess?.();
-            u(Ce());
+            u(hideModal());
             g(!1);
           },
           onError: async () => {
             await onUnpublishHubFileError?.();
-            u(Ce());
+            u(hideModal());
             g(!1);
           }
         }));
@@ -3582,7 +3582,7 @@ function re({
       i(M3({
         view: A5.INVITE
       }));
-      i(Lo());
+      i(popModalStack());
     },
     dispatch: i
   }) : a();
@@ -3618,7 +3618,7 @@ class rt extends Component {
       let n = i ? getI18nString("community.hub_files.delist_file_from_community_hub") : this.isSlidesFile() ? getI18nString("community.hub_files.unpublish_template") : getI18nString("community.hub_files.remove_file_from_community_hub");
       let r = i ? getI18nString("community.resource.delisting_this_resource_will_prevent_people_from_discovering_or_purchasing_this_resource") : this.isSlidesFile() ? getI18nString("community.hub_files.unpublish_template_description") : getI18nString("community.hub_files.unpublishing_this_file_will_remove_it_from_the_community_hub_and_prevent_people_from_finding_and_using_this_file");
       let a = i ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish");
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: n2,
         data: {
           hubFile: this.props.editingHubFile,
@@ -4033,10 +4033,10 @@ function rn(e) {
   let E = "NO_ALLOWED_AUTHORS" === reason && b;
   let S = o?.editorType === _YF.SITES && !o?.isPublishedSite;
   return (useLayoutEffect(() => {
-    E ? t(_$$to({
+    E ? t(showModalHandler({
       type: nR,
       data: {}
-    })) : S && t(_$$to({
+    })) : S && t(showModalHandler({
       type: nN,
       data: {}
     }));
@@ -4112,7 +4112,7 @@ function rg({
   } : {
     type: "image",
     ...d,
-    sha1: "buffer" in d ? Et(d.buffer) : void 0
+    sha1: "buffer" in d ? sha1Hex(d.buffer) : void 0
   }, [d, t.thumbnailUrl]);
   return jsx(fu, {
     name: _$$e5.TEMPLATE_DETAILS,
@@ -4577,7 +4577,7 @@ function rG(e) {
       }), r, jsx(_$$Ph, {
         className: MC,
         onClick: () => {
-          i ? _$$h(e.file, e.repo, t, void 0, jsx(_$$t7, {})) : t(_$$to({
+          i ? _$$h(e.file, e.repo, t, void 0, jsx(_$$t7, {})) : t(showModalHandler({
             type: _$$t6(),
             data: {
               file: e.file,
@@ -4629,10 +4629,10 @@ function rZ(e) {
     })
   });
 }
-let r1 = Ju(function (e) {
+let r1 = registerModal(function (e) {
   let t = useDispatch();
   let i = () => {
-    t(Lo());
+    t(popModalStack());
   };
   return jsxs(OJ, {
     title: getI18nString("file_permissions.enable_folder_access.give_access_to_the_folder", {
@@ -4641,7 +4641,7 @@ let r1 = Ju(function (e) {
     headerSize: "small",
     fixedTop: !0,
     onClose: () => {
-      t(Ce());
+      t(hideModal());
     },
     truncateTitleText: !0,
     children: [jsx("p", {
@@ -4682,10 +4682,10 @@ let r1 = Ju(function (e) {
     })]
   });
 }, "ConfirmEnableFolderAccessModal");
-let r2 = Ju(function (e) {
+let r2 = registerModal(function (e) {
   let t = useDispatch();
   let i = () => {
-    t(Lo());
+    t(popModalStack());
   };
   return jsxs(OJ, {
     title: getI18nString("file_permissions.disable_folder_access.remove_folder_names_access", {
@@ -4694,7 +4694,7 @@ let r2 = Ju(function (e) {
     headerSize: "small",
     fixedTop: !0,
     onClose: () => {
-      t(Ce());
+      t(hideModal());
     },
     truncateTitleText: !0,
     children: [jsx("p", {
@@ -4742,7 +4742,7 @@ function r5(e) {
     children: jsx("button", {
       className: sH,
       onClick: () => {
-        t(_$$to({
+        t(showModalHandler({
           type: r1,
           data: {
             folder: {
@@ -5083,7 +5083,7 @@ function aA(e) {
           isStarterTier: e.isStarterTier
         }));
       };
-      t === _$$e4.OWNER ? r(_$$to({
+      t === _$$e4.OWNER ? r(showModalHandler({
         type: _$$b5,
         data: {
           resourceType: FResourceCategoryType.FILE,
@@ -5558,7 +5558,7 @@ function a$({
     });
     return useCallback(r => {
       if (o && e.team_id) {
-        u(_$$to({
+        u(showModalHandler({
           type: _$$t9,
           data: {
             teamId: e.team_id,
@@ -5584,7 +5584,7 @@ function a$({
           });
           return;
         }
-        u(_$$to({
+        u(showModalHandler({
           type: DV,
           data: {
             team: s,
@@ -5600,7 +5600,7 @@ function a$({
       if (i?.invite_whitelist_guest_invite_setting == null && d && d.length > 0) {
         let e = _$$Z(r).filter(e => _$$xf(e) && !H_(d, e));
         if (e.length > 0) {
-          u(_$$to({
+          u(showModalHandler({
             type: _$$F3,
             data: {
               emails: e,
@@ -5851,7 +5851,7 @@ function a2({
         href: "#",
         onClick: n => {
           n.preventDefault();
-          i(_$$to({
+          i(showModalHandler({
             type: DV,
             data: {
               team: t,
@@ -5962,7 +5962,7 @@ function a5({
     case A5.SHARE_GOOGLE_DEVICE_DISCLAIMER:
       return jsx(nc, {
         onSubmit: () => {
-          T(_$$to({
+          T(showModalHandler({
             type: to,
             data: {
               fileKey: e.key
@@ -6100,7 +6100,7 @@ function a9({
     let s = X();
     let o = wD();
     let l = o?.id;
-    let d = useMemo(() => !!l && !!Egt && Egt.nodeIsPage(l), [l]);
+    let d = useMemo(() => !!l && !!SceneGraphHelpers && SceneGraphHelpers.nodeIsPage(l), [l]);
     if (i === FEditorType.Slides) {
       if (n) return getI18nString("file_permissions_modal.share_these_slides");
       if (a) return getI18nString("viewer.menu_bar.share_presentation");
@@ -6160,7 +6160,7 @@ function se({
     children: jsx("button", {
       className: vv,
       onClick: () => {
-        r(_$$to({
+        r(showModalHandler({
           type: r2,
           data: {
             folder: t,
@@ -6378,7 +6378,7 @@ function sp({
       t(M3({
         view: A5.INVITE
       }));
-      t(Ce());
+      t(hideModal());
       t(cL());
       i();
     }, [t, i]);
@@ -6509,7 +6509,7 @@ function sp({
     })
   });
 }
-export let $$sm0 = Ju(function ({
+export let $$sm0 = registerModal(function ({
   fileKey: e,
   source: t,
   isLockedTeam: i = !1
@@ -6535,7 +6535,7 @@ export let $$sm0 = Ju(function ({
   }(), !function (e) {
     let t = useDispatch();
     useEffect(() => {
-      "loaded" === e.status && null === e.data.file && t(Ce());
+      "loaded" === e.status && null === e.data.file && t(hideModal());
     }, [e, t]);
   }(c), s = !!d && "loaded" === c.status, oY(s, e => {
     trackEventAnalytics("share_modal_latency", {

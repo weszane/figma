@@ -1,9 +1,9 @@
 import { vv } from "../905/508457";
 import { isNotNullish } from "../figma_app/95419";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom } from "../figma_app/27355";
-let $$o0 = vv(() => Ez5?.canvasGrid().canvasGridArray, []);
+let $$o0 = vv(() => AppStateTsApi?.canvasGrid().canvasGridArray, []);
 let l = atom(e => {
   let t = e($$o0);
   let i = [];

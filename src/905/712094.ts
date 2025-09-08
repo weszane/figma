@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Lf } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { EB } from "../figma_app/831101";
+import { createEmptyAddress } from "../figma_app/831101";
 import { X } from "../905/33014";
 export function $$l0({
   canSeeBillingAddressExp: e,
@@ -23,7 +23,7 @@ export function $$l0({
       trackingFieldName: "Legal Company Name",
       dataTestId: "legal-company-name"
     }), !!i && jsx(X, {
-      address: t || EB(),
+      address: t || createEmptyAddress(),
       updateAddress: i,
       canSeeBillingAddressExp: e,
       isBillingAddress: !1

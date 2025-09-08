@@ -2,21 +2,21 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { flushSync } from "../vendor/944059";
 import { useSelector } from "../vendor/514228";
-import { glU, Egt } from "../figma_app/763686";
-import { x7, AD } from "../905/871411";
+import { Fullscreen, SceneGraphHelpers } from "../figma_app/763686";
+import { defaultSessionLocalIDArrayString, defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { xx } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { lg } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
-import { q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { Uc } from "../figma_app/741237";
 import { FFileType } from "../figma_app/191312";
-import { J2 } from "../figma_app/84367";
-import { H } from "../905/561433";
+import { getObservableOrFallback } from "../figma_app/84367";
+import { requestDeferredExecution } from "../905/561433";
 import { ViewportNavigator, defaultNavigationConfig, viewportNavigatorContext, ViewportProvider } from "../figma_app/298911";
 import { y9S, IuL, MJh } from "../figma_app/27776";
 let v = new Set(["DOCUMENT", "CANVAS", "NONE"]);
@@ -56,21 +56,21 @@ let O = e => {
 let R = e => e.replace(/[\[\]\s]/g, "").split(",");
 function L(e, t, r) {
   let n;
-  let i = glU.getActiveCommentAnchorData();
-  n = r && i && i.stablePath !== x7 && i.stablePath.length > 0 ? i.stablePath : glU.getCommentAnchorDataAtPosition(e.x, e.y).stablePath;
+  let i = Fullscreen.getActiveCommentAnchorData();
+  n = r && i && i.stablePath !== defaultSessionLocalIDArrayString && i.stablePath.length > 0 ? i.stablePath : Fullscreen.getCommentAnchorDataAtPosition(e.x, e.y).stablePath;
   let a = {
     canvasPosition: e,
     pageId: t,
-    viewport: Y5.getViewportInfo(),
+    viewport: fullscreenValue.getViewportInfo(),
     createdIn: window.FigmaMobile ? "mobileViewer" : "fullscreen"
   };
-  if (null == n || n === x7) return a;
-  let s = Egt.getBoundsForStablePath(n);
+  if (null == n || n === defaultSessionLocalIDArrayString) return a;
+  let s = SceneGraphHelpers.getBoundsForStablePath(n);
   if (!s && r && (trackEventAnalytics("Comment stablePathBounds invalid", {
     usingActiveNode: !0
   }, {
     forwardToDatadog: !0
-  }), s = Egt.getBoundsForStablePath(n)), !s) return (trackEventAnalytics("Comment stablePathBounds invalid", {
+  }), s = SceneGraphHelpers.getBoundsForStablePath(n)), !s) return (trackEventAnalytics("Comment stablePathBounds invalid", {
     usingActiveNode: !1
   }, {
     forwardToDatadog: !0
@@ -95,15 +95,15 @@ function L(e, t, r) {
   };
 }
 function P(e) {
-  let t = J2(UK().renderRulers);
+  let t = getObservableOrFallback(UK().renderRulers);
   let r = useSelector(e => e.mirror.appModel.showUi);
   let c = lg();
-  let u = useRef(Y5.getViewportInfo());
-  let [p, _] = useState(Y5.getViewportInfo());
+  let u = useRef(fullscreenValue.getViewportInfo());
+  let [p, _] = useState(fullscreenValue.getViewportInfo());
   !function (e) {
     let t = useSelector(e => "prototype" === e.selectedView.view || "communityHub" === e.selectedView.view);
     useEffect(() => {
-      !t && Y5.isReady() && (e(Y5.getViewportInfo()), H());
+      !t && fullscreenValue.isReady() && (e(fullscreenValue.getViewportInfo()), requestDeferredExecution());
     }, [e, t]);
     useEffect(() => {
       let t = t => {
@@ -111,9 +111,9 @@ function P(e) {
           e(t);
         });
       };
-      Y5.viewport.on("onSetViewport", t);
+      fullscreenValue.viewport.on("onSetViewport", t);
       return () => {
-        Y5.viewport.removeListener("onSetViewport", t);
+        fullscreenValue.viewport.removeListener("onSetViewport", t);
       };
     }, [e]);
   }(useCallback(e => {
@@ -127,19 +127,19 @@ function P(e) {
       x: 0,
       y: 1
     }),
-    setCanvasSpaceCenter: e => glU.setCanvasSpaceCenter(e.x, e.y),
-    setZoomScale: (e, t) => glU.setCanvasZoomScale(t),
+    setCanvasSpaceCenter: e => Fullscreen.setCanvasSpaceCenter(e.x, e.y),
+    setZoomScale: (e, t) => Fullscreen.setCanvasZoomScale(t),
     setHovering: e => {
       if (!e) {
-        Uc(AD);
+        Uc(defaultSessionLocalIDString);
         return;
       }
-      let t = glU.getCommentAnchorDataAtPosition(e.x, e.y).stablePath;
+      let t = Fullscreen.getCommentAnchorDataAtPosition(e.x, e.y).stablePath;
       let r = t ? getSingletonSceneGraph().getFromStablePath(R(t)) : null;
-      r && !v.has(r.type) ? Uc(r.guid) : Uc(AD);
+      r && !v.has(r.type) ? Uc(r.guid) : Uc(defaultSessionLocalIDString);
     },
     setCurrentPageIdAsync: async e => await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e),
-    pageIdForNodeId: e => glU.getPageIdFromNode(e),
+    pageIdForNodeId: e => Fullscreen.getPageIdFromNode(e),
     getCommentDestinationForCanvasPosition: L,
     getValidCommentsRect: () => null
   }), [t, r, c]);
@@ -156,7 +156,7 @@ function P(e) {
   });
 }
 export function $$D0(e) {
-  return q() ? jsx(P, {
+  return useFullscreenReady() ? jsx(P, {
     children: e.children
   }) : jsx(Fragment, {
     children: e.children

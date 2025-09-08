@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { Uz, xH } from "../905/63728";
 import { getI18nString } from "../905/303541";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/217163";
 import { A as _$$A } from "../905/456912";
 import { q5 } from "../figma_app/516028";
@@ -37,7 +37,7 @@ export function $$f0({
           altKey: !1
         }, e);
         t();
-        I && E(AS());
+        I && E(hideModalHandler());
         close();
       }
     };

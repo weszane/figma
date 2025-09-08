@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
-import { rrT, NLJ, yTM } from "../figma_app/763686";
+import { NodePropertyCategory, DesignGraphElements, DrawingElementType } from "../figma_app/763686";
 import { ri, nc } from "../figma_app/15927";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
@@ -12,9 +12,9 @@ import { GI } from "../905/125333";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1, Y as _$$Y } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ku } from "../figma_app/740163";
-import { E7, BI } from "../905/216495";
+import { normalizeValue, getCommonFromArray } from "../905/216495";
 import { Tm, rC, Em } from "../figma_app/385874";
 import { q5 } from "../figma_app/516028";
 import { Ib } from "../905/129884";
@@ -58,25 +58,25 @@ function B(e) {
       scatterStrokeSettings,
       dynamicStrokeSettings
     } = e;
-    let o = E7(strokeWeight);
+    let o = normalizeValue(strokeWeight);
     o && u({
       strokeWeight: o
     });
-    let s = E7(dashPattern);
+    let s = normalizeValue(dashPattern);
     if (s && u({
       dashPattern: s
     }), strokeBrushGuid) {
-      let e = E7(BI(strokeBrushGuid));
+      let e = normalizeValue(getCommonFromArray(strokeBrushGuid));
       e && u({
         strokeBrushGuid: e
       });
     }
     if (stretchStrokeSettings && u({
-      stretchStrokeSettings: E7(stretchStrokeSettings)
+      stretchStrokeSettings: normalizeValue(stretchStrokeSettings)
     }), scatterStrokeSettings && u({
-      scatterStrokeSettings: E7(scatterStrokeSettings)
+      scatterStrokeSettings: normalizeValue(scatterStrokeSettings)
     }), dynamicStrokeSettings) {
-      let e = E7(BI(dynamicStrokeSettings));
+      let e = normalizeValue(getCommonFromArray(dynamicStrokeSettings));
       e && u({
         dynamicStrokeSettings: {
           interval: e.frequency ?? Y4.frequency,
@@ -154,7 +154,7 @@ function B(e) {
     children: [jsxs(Zk, {
       children: [jsx(W4, {
         addProperty: () => {
-          Y5.triggerAction("add-stroke-to-selection");
+          fullscreenValue.triggerAction("add-stroke-to-selection");
         },
         currentSelectedProperty: e.currentSelectedProperty,
         defaultColor: rC,
@@ -180,12 +180,12 @@ function B(e) {
         removeAllProperties: null,
         renderProperty: (t, n, i, r, a, o, c, d, u) => {
           let h = F() ? "preview-paint" : "paint";
-          let g = Tm.getId(n, rrT.STROKE_PRESET, h);
+          let g = Tm.getId(n, NodePropertyCategory.STROKE_PRESET, h);
           let m = v.slice(0, n).some(e => e.visible);
           return jsx(Gg, {
             colorFormat: e.colorFormat,
             currentSelectedGradientStop: e.currentSelectedGradientStop,
-            currentTool: NLJ.VECTOR_PENCIL,
+            currentTool: DesignGraphElements.VECTOR_PENCIL,
             defaultColor: Em,
             dispatch: w,
             dropdownShown: e.dropdownShown,
@@ -211,14 +211,14 @@ function B(e) {
             recordingKey: Pt(e, n),
             sceneGraphSelection: e.sceneGraphSelection,
             selected: e.stylePickerShown.isShown ? e.pickerShown?.id === g : i,
-            selectedPropertyType: rrT.STROKE_PRESET,
+            selectedPropertyType: NodePropertyCategory.STROKE_PRESET,
             singletonRow: 1 === v.length,
             stylePickerShown: e.stylePickerShown,
             variableScopes: z1
           }, `paint-${n}`);
         },
         sceneGraphSelection: e.sceneGraphSelection,
-        selectedPropertyType: rrT.STROKE_PRESET,
+        selectedPropertyType: NodePropertyCategory.STROKE_PRESET,
         selectedStyleGuid: e.selectedStyleGuid,
         stylePickerListLayout: e.stylePickerListLayout,
         stylePickerShown: e.stylePickerShown,
@@ -252,7 +252,7 @@ function B(e) {
       strokeBrushGuid: $,
       strokeCap: n.strokeCap || "ROUND",
       strokeJoin: "ROUND",
-      strokePanelMode: yTM.PENCIL,
+      strokePanelMode: DrawingElementType.PENCIL,
       strokePanelTerminalPointCount: 2,
       strokeType: X
     })]

@@ -16,7 +16,7 @@ import { DG } from "../9410/60600";
 import { xo } from "../figma_app/473493";
 import { l7 } from "../figma_app/88239";
 import { S as _$$S } from "../figma_app/11182";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { $z } from "../figma_app/831799";
 import { xf } from "../3276/13008";
 import { my } from "../figma_app/976749";
@@ -114,7 +114,7 @@ export function $$et0({
         void 0 !== ec && (ed(_$$S({
           url: ec
         })), t = !0);
-        ed(to({
+        ed(showModalHandler({
           type: _$$p,
           data: {
             fileKey: e.key,
@@ -125,7 +125,7 @@ export function $$et0({
         YQ({
           id: "multiplayer_toolbar_share_button"
         });
-        ed(to({
+        ed(showModalHandler({
           type: g_,
           data: {
             fileKey: e.key,

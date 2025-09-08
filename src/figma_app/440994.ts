@@ -1,4 +1,4 @@
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { FEditorType } from "../figma_app/53721";
 let $$s1 = Symbol("uninteresting");
@@ -58,7 +58,7 @@ export function $$l2(e, t) {
   }
 }
 export function $$d3(e, t) {
-  return e === NLJ.STAMP ? t ? getI18nString("fullscreen.accessibility_dom.current_tool_stamp", {
+  return e === DesignGraphElements.STAMP ? t ? getI18nString("fullscreen.accessibility_dom.current_tool_stamp", {
     stampName: t
   }) : getI18nString("fullscreen.accessibility_dom.current_tool", {
     toolName: getI18nString("fullscreen_actions.set-tool-stamp")

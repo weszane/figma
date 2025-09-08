@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { trackEventAnalytics } from "../905/449184";
 import { g as _$$g } from "../905/880308";
 import { Zn } from "../figma_app/933328";
-import { Lo, Ce, to } from "../905/156213";
+import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { Kz } from "../905/760074";
 import { q5 } from "../figma_app/516028";
 import { LH } from "../905/872904";
@@ -37,14 +37,14 @@ export function $$_0({
     }, {
       forwardToDatadog: !0
     });
-    I ? e === r6.LEFT_RAIL_FOOTER ? _(Lo()) : _(Ce()) : "editor" === t ? (_(to({
+    I ? e === r6.LEFT_RAIL_FOOTER ? _(popModalStack()) : _(hideModal()) : "editor" === t ? (_(showModalHandler({
       type: T,
       data: {
         entrypoint: e,
         initialTab: i ?? Wv.LIBRARIES,
         sessionId: n
       }
-    })), _(Zn())) : _(to({
+    })), _(Zn())) : _(showModalHandler({
       type: Vg,
       data: {
         tab: Wv.LIBRARIES

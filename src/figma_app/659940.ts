@@ -3,7 +3,7 @@ import { dR } from "../905/508367";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { x } from "../905/749159";
 import { ao } from "../figma_app/598952";
 export function $$u0() {
@@ -20,7 +20,7 @@ export function $$u0() {
       }),
       signedUpFromOpenSession: !0
     }));
-    e(to({
+    e(showModalHandler({
       type: x,
       data: {
         headerText: getI18nString("fullscreen.toolbar.to_save_this_board_create_an_account")

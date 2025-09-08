@@ -20,7 +20,7 @@ import { Uz } from '../905/63728';
 import { l as _$$l5 } from '../905/65216';
 import { m as _$$m2 } from '../905/70820';
 import { z as _$$z2 } from '../905/95280';
-import { Ju as _$$Ju, ZU } from '../905/102752';
+import { registerModal, ModalSupportsBackground } from '../905/102752';
 import { e5 as _$$e5 } from '../905/104019';
 import { Z as _$$Z2 } from '../905/104740';
 import { q as _$$q2, w as _$$w3 } from '../905/112768';
@@ -29,24 +29,24 @@ import { u as _$$u } from '../905/117966';
 import { xK as _$$xK } from '../905/125218';
 import { ez as _$$ez, lC as _$$lC, _o, GI, HV, IZ, qL, SK, U9, Vi, W6, wp, yE } from '../905/125333';
 import { J as _$$J5 } from '../905/125483';
-import { X as _$$X3 } from '../905/128376';
+import { setupAutofocusHandler } from '../905/128376';
 import { Ib } from '../905/129884';
 import { g as _$$g2 } from '../905/142432';
 import { hO } from '../905/145989';
 import { n as _$$n4 } from '../905/155450';
-import { $O, to as _$$to, AS, Ce, ES, YK } from '../905/156213';
+import { showModal, showModalHandler, hideModalHandler, hideModal, hideSpecificModal, showModalConditional } from '../905/156213';
 import { Ph } from '../905/160095';
 import { F as _$$F3 } from '../905/162860';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { _ as _$$_ } from '../905/170564';
 import { d as _$$d3 } from '../905/189168';
-import { nc as _$$nc, l7 } from '../905/189185';
+import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
 import { t as _$$t3 } from '../905/192333';
 import { Ts } from '../905/194276';
 import { fF } from '../905/194389';
 import { Cg } from '../905/195479';
 import { g as _$$g3 } from '../905/211118';
-import { E7 } from '../905/216495';
+import { normalizeValue } from '../905/216495';
 import { c as _$$c2 } from '../905/217163';
 import { z as _$$z3 } from '../905/223332';
 import { Xo } from '../905/226610';
@@ -55,13 +55,13 @@ import { delay } from '../905/236856';
 import { T as _$$T4 } from '../905/239551';
 import { ih as _$$ih, UA } from '../905/250387';
 import { R as _$$R2 } from '../905/256203';
-import { h as _$$h3, J as _$$J3 } from '../905/270045';
+import { HiddenLabel, Label } from '../905/270045';
 import { Ji } from '../905/276025';
 import { dM, F9 } from '../905/278499';
 import { Z as _$$Z4 } from '../905/279476';
 import { Ay as _$$Ay8, Tr } from '../905/281495';
 import { i6 as _$$i2, Ie } from '../905/291654';
-import { J as _$$J } from '../905/294113';
+import { createSavepoint } from '../905/294113';
 import { w as _$$w } from '../905/294864';
 import { _N, Vg } from '../905/300621';
 import { F as _$$F } from '../905/302958';
@@ -122,7 +122,7 @@ import { P as _$$P3 } from '../905/545265';
 import { y8 as _$$y6 } from '../905/551193';
 import { subscribeAndAwaitData } from '../905/553831';
 import { $e } from '../905/554703';
-import { H as _$$H3 } from '../905/561433';
+import { requestDeferredExecution } from '../905/561433';
 import { oz as _$$oz } from '../905/561485';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { j as _$$j } from '../905/564614';
@@ -203,7 +203,7 @@ import { m as _$$m3 } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
 import { n3 as _$$n, F7, Rf } from '../905/859698';
 import { $A, ds as _$$ds, vt } from '../905/862883';
-import { sH as _$$sH, AD } from '../905/871411';
+import { parseSessionLocalID, defaultSessionLocalIDString } from '../905/871411';
 import { B as _$$B5 } from '../905/872019';
 import { Bn } from '../905/879323';
 import { g as _$$g } from '../905/880308';
@@ -257,7 +257,7 @@ import { XR } from '../figma_app/67099';
 import { gh } from '../figma_app/76123';
 import { $m } from '../figma_app/78808';
 import { $X, Eo, F1, g4 } from '../figma_app/80990';
-import { J2 } from '../figma_app/84367';
+import { getObservableOrFallback } from '../figma_app/84367';
 import { Rm } from '../figma_app/86989';
 import { s4 as _$$s2, Wl } from '../figma_app/88239';
 import { aK as _$$aK, CN as _$$CN, eH as _$$eH, lz as _$$lz, nN as _$$nN, re as _$$re, Bs, fk, FP, fy, Jt, pj, R5, u1, XE, XQ } from '../figma_app/91703';
@@ -271,7 +271,7 @@ import { H as _$$H } from '../figma_app/147959';
 import { IJ } from '../figma_app/149304';
 import { Dc as _$$Dc, hV } from '../figma_app/151766';
 import { P$ } from '../figma_app/152368';
-import { FW, u8, ZQ } from '../figma_app/155287';
+import { ManifestEditorType, PluginInstallStatus, hasLocalFileId } from '../figma_app/155287';
 import { Fk as _$$Fk } from '../figma_app/167249';
 import { buildStaticUrl, buildUploadUrl, getInitialOptions, getSupportEmail, isDevEnvironment } from '../figma_app/169182';
 import { jx } from '../figma_app/171569';
@@ -279,7 +279,7 @@ import { j as _$$j2 } from '../figma_app/172303';
 import { v as _$$v } from '../figma_app/176476';
 import { XT as _$$XT, _I } from '../figma_app/176634';
 import { Ht, j5 } from '../figma_app/178475';
-import { td as _$$td2, vh } from '../figma_app/181241';
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { tK as _$$tK } from '../figma_app/191804';
 import { LC } from '../figma_app/192142';
 import { zg } from '../figma_app/193867';
@@ -303,7 +303,7 @@ import { Dl as _$$Dl, DK, Nd } from '../figma_app/291892';
 import { pN } from '../figma_app/292212';
 import { e3 as _$$e4 } from '../figma_app/298277';
 import { PR } from '../figma_app/299859';
-import { c2 as _$$c6, T as _$$T3, fR, Gc, MB, MH, qH } from '../figma_app/300692';
+import { loadPluginManifest, getFullscreenViewEditorType, showVisualBell, getWidgetVersionData, loadLocalPluginSource, isWidgetPlugin, PluginPermissions } from '../figma_app/300692';
 import { Z as _$$Z3 } from '../figma_app/301719';
 import { u1 as _$$u2, zi } from '../figma_app/305244';
 import { Tv, Zl } from '../figma_app/311375';
@@ -339,7 +339,7 @@ import { Ay as _$$Ay5 } from '../figma_app/432652';
 import { eY as _$$eY2 } from '../figma_app/442259';
 import { U as _$$U } from '../figma_app/449815';
 import { A0, R4 } from '../figma_app/454974';
-import { $q, lQ as _$$lQ, s$ as _$$s$, _W, fT, QT, uF, XT, Y5, Zi } from '../figma_app/455680';
+import { setFlagValue, fullscreenPromise, setFullscreen, userValue, setSessionValue, setAdditionalValue, setUserValue, setInputValue, fullscreenValue, setModalValue } from '../figma_app/455680';
 import { lt as _$$lt, dZ, y8 } from '../figma_app/459490';
 import { EA } from '../figma_app/462456';
 import { debug, throwTypeError } from '../figma_app/465776';
@@ -406,7 +406,7 @@ import { WJ as _$$WJ, P1, S9 } from '../figma_app/745458';
 import { s as _$$s4 } from '../figma_app/751989';
 import { w as _$$w2 } from '../figma_app/757236';
 import { RA } from '../figma_app/757723';
-import { $DY, AlE, b3I, biQ, Bko, ByZ, cgc, CUU, dPJ, E63, eL2, Ez5, FAf, Fk7, fRZ, glU, h3O, H9y, hMR, hR8, hzD, i6g, idw, iZB, jDJ, jkn, jXp, KAf, KG_, KtY, lyf, m7W, MoD, mSn, msz, Nfd, NLJ, OGQ, P2e, PHu, PKm, ppO, qOu, QOV, rcl, rCR, rrT, RsU, ruz, sbT, Sie, t8O, tEb, Ubo, UNF, uXP, vhv, vXe, Vzr, W2B, WXh, X3B, x7E, xae, yDE, YnC, ywP, yxn, zdR, zkO, zvt } from '../figma_app/763686';
+import { PrototypingFacetTsApiGenerated, documentStateTsApi, ImageFormat, ComponentPropsAiCPPBindings, ImageCppBindings, VectorFacetTsApiGenerated, FullscreenWebSocketTsApi, SceneNodeCpp, AutosaveEventType, SaveConnectionIssues, TextEditAction, AppStateTsApi, DesignWorkspace, NodeTsApiGenerated, LayerFacetTsApiGenerated, Fullscreen, Multiplayer, TextFacetTsApiGenerated, CorePerfInfo, ComponentishFacetTsApiGenerated, DocumentColorProfileEnum, AutosaveHelpers, FigmaSite, ConstraintsFacetTsApiGenerated, FrameFacetTsApiGenerated, TabMode, FontSourceType, EmbedPanelType, WidgetFacetTsApiGenerated, StackFacetTsApiGenerated, ViewType, SettingsAction, ImageExportType, SceneGraphTsApi, interactionTestHelpers, PanelType, DesignGraphElements, CanvasFacetTsApiGenerated, FullscreenPerfInfo, EmailAction, DesignSystemsInternalHelpers, RenderableBaseFacetTsApiGenerated, PolygonFacetTsApiGenerated, UserActionState, Command, DocumentMode, NodePropertyCategory, StyleFacetTsApiGenerated, ImageToolsBindings, BaseNodeTsApiGenerated, StateSourceType, FontHelpers, RenderableRectangleFacetTsApiGenerated, DebuggingHelpers, NodeTsApi, ConnectionState, PageSelectionType, Fonts, Thumbnail, EditChangeMode, VisibilityCondition, PrototypingTsApi, ConnectorFacetTsApiGenerated, UserInterfaceElements, BindingsPerfBench, SymbolOverrideType, ColorProfileEnum, CanvasComponentType, WhiteboardAgendaCppBindings, SourceType, TextModificationAction } from '../figma_app/763686';
 import { isNotMobile, BrowserInfo } from '../figma_app/778880';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { S as _$$S } from '../figma_app/787550';
@@ -465,9 +465,9 @@ let r;
 function d(e) {
   let t = parseInteger(e, 0);
   let i = parseInteger(e, e.indexOf(':') + 1);
-  if (!AlE || !UNF) throw new Error('Bindings are not initialized');
-  let n = AlE.getActiveDocument();
-  if (UNF.setGlobalUnstableNodeByID(n, t, i, Sie.REDUX), !UNF.exists(Sie.REDUX)) throw new Error('Missing node!');
+  if (!documentStateTsApi || !NodeTsApi) throw new Error('Bindings are not initialized');
+  let n = documentStateTsApi.getActiveDocument();
+  if (NodeTsApi.setGlobalUnstableNodeByID(n, t, i, StateSourceType.REDUX), !NodeTsApi.exists(StateSourceType.REDUX)) throw new Error('Missing node!');
 }
 function c(e, t) {
   let i = window.performance.now();
@@ -480,191 +480,191 @@ function c(e, t) {
   }, 8e3);
 }
 getInitialOptions().cluster_name !== 'prod' && (window.runGettersBenchmark = function () {
-  let e = AlE && mSn?.getCurrentPage(Sie.PLUGIN, AlE.getActiveDocument());
+  let e = documentStateTsApi && SceneGraphTsApi?.getCurrentPage(StateSourceType.PLUGIN, documentStateTsApi.getActiveDocument());
   if (!e) throw new Error('Missing active page; run this bench in the editor');
   let t = window.performance.now();
   !function e(t, i) {
-    if (i(t), d(t), !CUU) throw new Error('SceneNodeCpp undefined');
-    for (let t of CUU.getReversedChildren(Sie.REDUX)) e(t, i);
+    if (i(t), d(t), !SceneNodeCpp) throw new Error('SceneNodeCpp undefined');
+    for (let t of SceneNodeCpp.getReversedChildren(StateSourceType.REDUX)) e(t, i);
   }(e, e => {
     (function (e) {
-      if (d(e), !UNF || !sbT || !Fk7 || !CUU || !H9y || !mSn || !AlE || !x7E || !tEb || !KG_ || !OGQ || !hR8 || !KtY || !ByZ || !qOu || !$DY || !ppO || !RsU || !iZB || !fRZ || !jDJ) throw new Error('Bindings undefined');
-      UNF.exists(Sie.REDUX);
-      sbT.getType(Sie.REDUX);
-      UNF.getBooleanOperation(Sie.REDUX);
-      CUU.getFixedChildrenCount(Sie.REDUX);
-      $DY.getOverflowDirection(Sie.REDUX);
-      tEb.getCornerRadius(Sie.REDUX);
-      CUU.getObjectsPanelThumbnailId();
-      RsU.getStyleType(Sie.REDUX);
-      UNF.getStackMode(Sie.REDUX);
-      KtY.getStackPositioning(Sie.REDUX);
-      UNF.getStackPrimaryAlignItems(Sie.REDUX);
-      KtY.getStackCounterAlignItems(Sie.REDUX);
-      jDJ.getResizeToFit(Sie.REDUX);
-      CUU.getHasEnabledStaticImagePaint(Sie.REDUX);
-      CUU.getHasEnabledAnimatedPaint(Sie.REDUX);
-      UNF.getIsInstanceSublayer(Sie.REDUX);
-      hR8.getIsStateGroup(Sie.REDUX);
-      UNF.getIsState(Sie.REDUX);
-      UNF.getStateAbbreviatedName(Sie.REDUX);
-      ppO.getIsFrameClippingDisabled(Sie.REDUX);
-      UNF.getIsExpandable(Sie.REDUX);
-      UNF.getIsSymbolPublishable(Sie.REDUX);
-      UNF.getIsTemporarilyExpanded(Sie.REDUX);
-      UNF.getIsExpanded(Sie.REDUX);
-      UNF.getLocked(Sie.REDUX);
-      Fk7.getIsMask(Sie.REDUX);
-      fRZ.getVisible(Sie.REDUX);
-      UNF.getSimplifyInstancePanels(Sie.REDUX);
-      UNF.getName(Sie.REDUX);
-      UNF.getParent(Sie.REDUX);
-      Fk7.getShapeWithTextType(Sie.REDUX);
-      UNF.getContainingStateGroupId(Sie.REDUX);
-      UNF.getContainingSymbolId(Sie.REDUX);
-      UNF.getSymbolId(Sie.REDUX);
-      UNF.getDescription(Sie.REDUX);
-      UNF.getStateGroupPropertyValueOrder(Sie.REDUX);
-      UNF.getSymbolLinks(Sie.REDUX);
-      UNF.getComponentKey(Sie.REDUX);
-      UNF.getStateGroupKey(Sie.REDUX);
-      UNF.getStyleKey(Sie.REDUX);
-      UNF.getStyleVersionHash(Sie.REDUX);
-      UNF.getSourceLibraryKey(Sie.REDUX);
-      UNF.getSharedSymbolVersion(Sie.REDUX);
-      UNF.getSharedStateGroupVersion(Sie.REDUX);
-      UNF.getPublishID(Sie.REDUX);
-      UNF.getTextContent(Sie.REDUX);
-      UNF.getFontName(Sie.REDUX);
-      UNF.getExportSettings(Sie.REDUX);
-      UNF.getChildren(Sie.REDUX);
-      CUU.getReversedChildren(Sie.REDUX);
-      UNF.getRichMediaInfo(Sie.REDUX);
-      UNF.getStampData(Sie.REDUX);
-      UNF.isFaceStamp(Sie.REDUX);
-      UNF.childrenAreAllGhosts(Sie.REDUX);
-      UNF.tableNumRows(Sie.REDUX);
-      UNF.tableNumColumns(Sie.REDUX);
-      UNF.tableCellRowIndex(Sie.REDUX);
-      UNF.tableCellColumnIndex(Sie.REDUX);
-      UNF.isUnderHiddenSection(Sie.REDUX);
-      UNF.getChildCount(Sie.PLUGIN);
-      CUU.getInstanceScaleFactor(Sie.PLUGIN);
-      UNF.getIsInImmutableFrame(Sie.PLUGIN);
-      UNF.getIsInWidget(Sie.PLUGIN);
-      CUU.getDirectlySelectedNodes(Sie.PLUGIN);
-      CUU.getSelectedTextRange(Sie.PLUGIN);
-      ppO.getOpacity(Sie.PLUGIN);
-      UNF.getCornerRadiusOrMixed(Sie.PLUGIN);
-      tEb.getCornerSmoothing(Sie.PLUGIN);
-      ppO.getStrokeWeight(Sie.PLUGIN);
-      CUU.getCharacters(Sie.PLUGIN);
-      UNF.getVariableDataValues(Sie.PLUGIN);
-      UNF.getVariableSetModesSorted(Sie.PLUGIN);
-      CUU.getEffectivePrototypeStartNodeId(Sie.PLUGIN);
-      CUU.getFlowStartingPoints(Sie.PLUGIN);
-      UNF.getSymbolId(Sie.PLUGIN);
-      OGQ.getIsInternalOnly(Sie.PLUGIN);
-      Fk7.getSize(Sie.PLUGIN);
-      UNF.getAbsoluteRenderBounds(Sie.PLUGIN);
-      UNF.getAbsoluteBoundingBox(Sie.PLUGIN);
-      UNF.getProportionsConstrained(Sie.PLUGIN);
-      Fk7.getAbsoluteTransform(Sie.PLUGIN);
-      UNF.getRelativeTransform(Sie.PLUGIN);
-      iZB.getHorizontalConstraint(Sie.PLUGIN);
-      iZB.getVerticalConstraint(Sie.PLUGIN);
-      KtY.getStackSpacing(Sie.PLUGIN);
-      KtY.getStackCounterSpacing(Sie.PLUGIN);
-      KtY.getStackCounterSizing(Sie.PLUGIN);
-      KtY.getStackChildAlignSelf(Sie.PLUGIN);
-      UNF.getStackLeftPadding(Sie.PLUGIN);
-      UNF.getStackRightPadding(Sie.PLUGIN);
-      UNF.getStackTopPadding(Sie.PLUGIN);
-      UNF.getStackBottomPadding(Sie.PLUGIN);
-      KtY.getStackPrimarySizing(Sie.PLUGIN);
-      KtY.getStackChildPrimaryGrow(Sie.PLUGIN);
-      UNF.getStackReverseZIndex(Sie.PLUGIN);
-      H9y.getTextTruncation(Sie.PLUGIN);
-      tEb.getRectangleTopLeftCornerRadius(Sie.PLUGIN);
-      tEb.getRectangleTopRightCornerRadius(Sie.PLUGIN);
-      tEb.getRectangleBottomLeftCornerRadius(Sie.PLUGIN);
-      tEb.getRectangleBottomRightCornerRadius(Sie.PLUGIN);
-      tEb.getRectangleCornerRadiiIndependent(Sie.PLUGIN);
-      UNF.getStarInnerScale(Sie.PLUGIN);
-      qOu.getCount(Sie.PLUGIN);
-      Fk7.getShapeWithTextType(Sie.PLUGIN);
-      CUU.getAuthorName(Sie.PLUGIN);
-      CUU.getAuthorVisible(Sie.PLUGIN);
-      x7E.getConnectorStart(Sie.PLUGIN);
-      x7E.getConnectorEnd(Sie.PLUGIN);
-      UNF.getConnectorStartCap(Sie.PLUGIN);
-      UNF.getConnectorEndCap(Sie.PLUGIN);
-      UNF.getCodeBlockLanguage(Sie.PLUGIN);
-      UNF.getAutoRename(Sie.PLUGIN);
-      UNF.getJsFillPaints(Sie.PLUGIN);
-      UNF.getJsStrokePaints(Sie.PLUGIN);
-      UNF.getBackgroundPaints(Sie.PLUGIN);
-      UNF.getPrototypeBackgroundColor(Sie.PLUGIN);
-      UNF.getLayoutGrids(Sie.PLUGIN);
-      UNF.getGuides(Sie.PLUGIN);
-      UNF.getJsEffects(Sie.PLUGIN);
-      UNF.getFillGeometry(Sie.PLUGIN);
-      UNF.getStrokeGeometry(Sie.PLUGIN);
-      ppO.getBlendMode(Sie.PLUGIN);
-      ppO.getStrokeAlign(Sie.PLUGIN);
-      UNF.getStrokeCap(Sie.PLUGIN);
-      UNF.getStrokeCapOrMixed(Sie.PLUGIN);
-      UNF.getStrokeJoin(Sie.PLUGIN);
-      UNF.getStrokeJoinOrMixed(Sie.PLUGIN);
-      UNF.getHandleMirroring(Sie.PLUGIN);
-      UNF.getHandleMirroringOrMixed(Sie.PLUGIN);
-      UNF.getStrokeMiterLimit(Sie.PLUGIN);
-      UNF.getDashPattern(Sie.PLUGIN);
-      H9y.getFontSize(Sie.PLUGIN);
-      UNF.getParagraphIndent(Sie.PLUGIN);
-      UNF.getParagraphSpacing(Sie.PLUGIN);
-      UNF.getListSpacing(Sie.PLUGIN);
-      H9y.getTextAlignHorizontal(Sie.PLUGIN);
-      H9y.getTextAlignVertical(Sie.PLUGIN);
-      H9y.getTextDecoration(Sie.PLUGIN);
-      UNF.getTextCase(Sie.PLUGIN);
-      H9y.getTextAutoResize(Sie.PLUGIN);
-      UNF.getLetterSpacing(Sie.PLUGIN);
-      ByZ.getArcData(Sie.PLUGIN);
-      UNF.getVectorData(Sie.PLUGIN);
-      UNF.getPrototypeInteractions(Sie.PLUGIN);
-      $DY.getOverlayPositionType(Sie.PLUGIN);
-      UNF.getOverlayBackgroundAppearance(Sie.PLUGIN);
-      $DY.getOverlayBackgroundInteraction(Sie.PLUGIN);
-      UNF.getSharedSymbolVersion(Sie.PLUGIN);
-      UNF.getSharedStateGroupVersion(Sie.PLUGIN);
-      UNF.getStyleVersion(Sie.PLUGIN);
-      CUU.getTextSublayer(Sie.PLUGIN);
-      CUU.getImmutableFrameLabel(Sie.PLUGIN);
-      UNF.getConnectorLineType(Sie.PLUGIN);
-      UNF.getIsEmbed(Sie.PLUGIN);
-      UNF.getIsLinkPreview(Sie.PLUGIN);
-      UNF.getLinkPreviewData(Sie.PLUGIN);
-      UNF.getEmbedData(Sie.PLUGIN);
-      UNF.getMediaData(Sie.PLUGIN);
-      mSn.getCurrentPage(Sie.PLUGIN, AlE.getActiveDocument());
-      KG_.getWidgetEvents(Sie.PLUGIN);
-      UNF.getWidgetId();
-      UNF.getWidgetVersionId();
-      UNF.getOverriddenInheritedFillStyles(Sie.PLUGIN);
-      UNF.getWidgetName();
-      UNF.getWidgetSyncedState();
-      UNF.getWidgetCachedAncestor();
-      UNF.getRenderedSyncedState();
-      UNF.getWidgetInputBehavior();
-      KG_.getWidgetTooltip(Sie.PLUGIN);
-      UNF.getWidgetInputTextNodeType();
+      if (d(e), !NodeTsApi || !BaseNodeTsApiGenerated || !NodeTsApiGenerated || !SceneNodeCpp || !TextFacetTsApiGenerated || !SceneGraphTsApi || !documentStateTsApi || !ConnectorFacetTsApiGenerated || !RenderableRectangleFacetTsApiGenerated || !WidgetFacetTsApiGenerated || !CanvasFacetTsApiGenerated || !ComponentishFacetTsApiGenerated || !StackFacetTsApiGenerated || !VectorFacetTsApiGenerated || !PolygonFacetTsApiGenerated || !PrototypingFacetTsApiGenerated || !RenderableBaseFacetTsApiGenerated || !StyleFacetTsApiGenerated || !ConstraintsFacetTsApiGenerated || !LayerFacetTsApiGenerated || !FrameFacetTsApiGenerated) throw new Error('Bindings undefined');
+      NodeTsApi.exists(StateSourceType.REDUX);
+      BaseNodeTsApiGenerated.getType(StateSourceType.REDUX);
+      NodeTsApi.getBooleanOperation(StateSourceType.REDUX);
+      SceneNodeCpp.getFixedChildrenCount(StateSourceType.REDUX);
+      PrototypingFacetTsApiGenerated.getOverflowDirection(StateSourceType.REDUX);
+      RenderableRectangleFacetTsApiGenerated.getCornerRadius(StateSourceType.REDUX);
+      SceneNodeCpp.getObjectsPanelThumbnailId();
+      StyleFacetTsApiGenerated.getStyleType(StateSourceType.REDUX);
+      NodeTsApi.getStackMode(StateSourceType.REDUX);
+      StackFacetTsApiGenerated.getStackPositioning(StateSourceType.REDUX);
+      NodeTsApi.getStackPrimaryAlignItems(StateSourceType.REDUX);
+      StackFacetTsApiGenerated.getStackCounterAlignItems(StateSourceType.REDUX);
+      FrameFacetTsApiGenerated.getResizeToFit(StateSourceType.REDUX);
+      SceneNodeCpp.getHasEnabledStaticImagePaint(StateSourceType.REDUX);
+      SceneNodeCpp.getHasEnabledAnimatedPaint(StateSourceType.REDUX);
+      NodeTsApi.getIsInstanceSublayer(StateSourceType.REDUX);
+      ComponentishFacetTsApiGenerated.getIsStateGroup(StateSourceType.REDUX);
+      NodeTsApi.getIsState(StateSourceType.REDUX);
+      NodeTsApi.getStateAbbreviatedName(StateSourceType.REDUX);
+      RenderableBaseFacetTsApiGenerated.getIsFrameClippingDisabled(StateSourceType.REDUX);
+      NodeTsApi.getIsExpandable(StateSourceType.REDUX);
+      NodeTsApi.getIsSymbolPublishable(StateSourceType.REDUX);
+      NodeTsApi.getIsTemporarilyExpanded(StateSourceType.REDUX);
+      NodeTsApi.getIsExpanded(StateSourceType.REDUX);
+      NodeTsApi.getLocked(StateSourceType.REDUX);
+      NodeTsApiGenerated.getIsMask(StateSourceType.REDUX);
+      LayerFacetTsApiGenerated.getVisible(StateSourceType.REDUX);
+      NodeTsApi.getSimplifyInstancePanels(StateSourceType.REDUX);
+      NodeTsApi.getName(StateSourceType.REDUX);
+      NodeTsApi.getParent(StateSourceType.REDUX);
+      NodeTsApiGenerated.getShapeWithTextType(StateSourceType.REDUX);
+      NodeTsApi.getContainingStateGroupId(StateSourceType.REDUX);
+      NodeTsApi.getContainingSymbolId(StateSourceType.REDUX);
+      NodeTsApi.getSymbolId(StateSourceType.REDUX);
+      NodeTsApi.getDescription(StateSourceType.REDUX);
+      NodeTsApi.getStateGroupPropertyValueOrder(StateSourceType.REDUX);
+      NodeTsApi.getSymbolLinks(StateSourceType.REDUX);
+      NodeTsApi.getComponentKey(StateSourceType.REDUX);
+      NodeTsApi.getStateGroupKey(StateSourceType.REDUX);
+      NodeTsApi.getStyleKey(StateSourceType.REDUX);
+      NodeTsApi.getStyleVersionHash(StateSourceType.REDUX);
+      NodeTsApi.getSourceLibraryKey(StateSourceType.REDUX);
+      NodeTsApi.getSharedSymbolVersion(StateSourceType.REDUX);
+      NodeTsApi.getSharedStateGroupVersion(StateSourceType.REDUX);
+      NodeTsApi.getPublishID(StateSourceType.REDUX);
+      NodeTsApi.getTextContent(StateSourceType.REDUX);
+      NodeTsApi.getFontName(StateSourceType.REDUX);
+      NodeTsApi.getExportSettings(StateSourceType.REDUX);
+      NodeTsApi.getChildren(StateSourceType.REDUX);
+      SceneNodeCpp.getReversedChildren(StateSourceType.REDUX);
+      NodeTsApi.getRichMediaInfo(StateSourceType.REDUX);
+      NodeTsApi.getStampData(StateSourceType.REDUX);
+      NodeTsApi.isFaceStamp(StateSourceType.REDUX);
+      NodeTsApi.childrenAreAllGhosts(StateSourceType.REDUX);
+      NodeTsApi.tableNumRows(StateSourceType.REDUX);
+      NodeTsApi.tableNumColumns(StateSourceType.REDUX);
+      NodeTsApi.tableCellRowIndex(StateSourceType.REDUX);
+      NodeTsApi.tableCellColumnIndex(StateSourceType.REDUX);
+      NodeTsApi.isUnderHiddenSection(StateSourceType.REDUX);
+      NodeTsApi.getChildCount(StateSourceType.PLUGIN);
+      SceneNodeCpp.getInstanceScaleFactor(StateSourceType.PLUGIN);
+      NodeTsApi.getIsInImmutableFrame(StateSourceType.PLUGIN);
+      NodeTsApi.getIsInWidget(StateSourceType.PLUGIN);
+      SceneNodeCpp.getDirectlySelectedNodes(StateSourceType.PLUGIN);
+      SceneNodeCpp.getSelectedTextRange(StateSourceType.PLUGIN);
+      RenderableBaseFacetTsApiGenerated.getOpacity(StateSourceType.PLUGIN);
+      NodeTsApi.getCornerRadiusOrMixed(StateSourceType.PLUGIN);
+      RenderableRectangleFacetTsApiGenerated.getCornerSmoothing(StateSourceType.PLUGIN);
+      RenderableBaseFacetTsApiGenerated.getStrokeWeight(StateSourceType.PLUGIN);
+      SceneNodeCpp.getCharacters(StateSourceType.PLUGIN);
+      NodeTsApi.getVariableDataValues(StateSourceType.PLUGIN);
+      NodeTsApi.getVariableSetModesSorted(StateSourceType.PLUGIN);
+      SceneNodeCpp.getEffectivePrototypeStartNodeId(StateSourceType.PLUGIN);
+      SceneNodeCpp.getFlowStartingPoints(StateSourceType.PLUGIN);
+      NodeTsApi.getSymbolId(StateSourceType.PLUGIN);
+      CanvasFacetTsApiGenerated.getIsInternalOnly(StateSourceType.PLUGIN);
+      NodeTsApiGenerated.getSize(StateSourceType.PLUGIN);
+      NodeTsApi.getAbsoluteRenderBounds(StateSourceType.PLUGIN);
+      NodeTsApi.getAbsoluteBoundingBox(StateSourceType.PLUGIN);
+      NodeTsApi.getProportionsConstrained(StateSourceType.PLUGIN);
+      NodeTsApiGenerated.getAbsoluteTransform(StateSourceType.PLUGIN);
+      NodeTsApi.getRelativeTransform(StateSourceType.PLUGIN);
+      ConstraintsFacetTsApiGenerated.getHorizontalConstraint(StateSourceType.PLUGIN);
+      ConstraintsFacetTsApiGenerated.getVerticalConstraint(StateSourceType.PLUGIN);
+      StackFacetTsApiGenerated.getStackSpacing(StateSourceType.PLUGIN);
+      StackFacetTsApiGenerated.getStackCounterSpacing(StateSourceType.PLUGIN);
+      StackFacetTsApiGenerated.getStackCounterSizing(StateSourceType.PLUGIN);
+      StackFacetTsApiGenerated.getStackChildAlignSelf(StateSourceType.PLUGIN);
+      NodeTsApi.getStackLeftPadding(StateSourceType.PLUGIN);
+      NodeTsApi.getStackRightPadding(StateSourceType.PLUGIN);
+      NodeTsApi.getStackTopPadding(StateSourceType.PLUGIN);
+      NodeTsApi.getStackBottomPadding(StateSourceType.PLUGIN);
+      StackFacetTsApiGenerated.getStackPrimarySizing(StateSourceType.PLUGIN);
+      StackFacetTsApiGenerated.getStackChildPrimaryGrow(StateSourceType.PLUGIN);
+      NodeTsApi.getStackReverseZIndex(StateSourceType.PLUGIN);
+      TextFacetTsApiGenerated.getTextTruncation(StateSourceType.PLUGIN);
+      RenderableRectangleFacetTsApiGenerated.getRectangleTopLeftCornerRadius(StateSourceType.PLUGIN);
+      RenderableRectangleFacetTsApiGenerated.getRectangleTopRightCornerRadius(StateSourceType.PLUGIN);
+      RenderableRectangleFacetTsApiGenerated.getRectangleBottomLeftCornerRadius(StateSourceType.PLUGIN);
+      RenderableRectangleFacetTsApiGenerated.getRectangleBottomRightCornerRadius(StateSourceType.PLUGIN);
+      RenderableRectangleFacetTsApiGenerated.getRectangleCornerRadiiIndependent(StateSourceType.PLUGIN);
+      NodeTsApi.getStarInnerScale(StateSourceType.PLUGIN);
+      PolygonFacetTsApiGenerated.getCount(StateSourceType.PLUGIN);
+      NodeTsApiGenerated.getShapeWithTextType(StateSourceType.PLUGIN);
+      SceneNodeCpp.getAuthorName(StateSourceType.PLUGIN);
+      SceneNodeCpp.getAuthorVisible(StateSourceType.PLUGIN);
+      ConnectorFacetTsApiGenerated.getConnectorStart(StateSourceType.PLUGIN);
+      ConnectorFacetTsApiGenerated.getConnectorEnd(StateSourceType.PLUGIN);
+      NodeTsApi.getConnectorStartCap(StateSourceType.PLUGIN);
+      NodeTsApi.getConnectorEndCap(StateSourceType.PLUGIN);
+      NodeTsApi.getCodeBlockLanguage(StateSourceType.PLUGIN);
+      NodeTsApi.getAutoRename(StateSourceType.PLUGIN);
+      NodeTsApi.getJsFillPaints(StateSourceType.PLUGIN);
+      NodeTsApi.getJsStrokePaints(StateSourceType.PLUGIN);
+      NodeTsApi.getBackgroundPaints(StateSourceType.PLUGIN);
+      NodeTsApi.getPrototypeBackgroundColor(StateSourceType.PLUGIN);
+      NodeTsApi.getLayoutGrids(StateSourceType.PLUGIN);
+      NodeTsApi.getGuides(StateSourceType.PLUGIN);
+      NodeTsApi.getJsEffects(StateSourceType.PLUGIN);
+      NodeTsApi.getFillGeometry(StateSourceType.PLUGIN);
+      NodeTsApi.getStrokeGeometry(StateSourceType.PLUGIN);
+      RenderableBaseFacetTsApiGenerated.getBlendMode(StateSourceType.PLUGIN);
+      RenderableBaseFacetTsApiGenerated.getStrokeAlign(StateSourceType.PLUGIN);
+      NodeTsApi.getStrokeCap(StateSourceType.PLUGIN);
+      NodeTsApi.getStrokeCapOrMixed(StateSourceType.PLUGIN);
+      NodeTsApi.getStrokeJoin(StateSourceType.PLUGIN);
+      NodeTsApi.getStrokeJoinOrMixed(StateSourceType.PLUGIN);
+      NodeTsApi.getHandleMirroring(StateSourceType.PLUGIN);
+      NodeTsApi.getHandleMirroringOrMixed(StateSourceType.PLUGIN);
+      NodeTsApi.getStrokeMiterLimit(StateSourceType.PLUGIN);
+      NodeTsApi.getDashPattern(StateSourceType.PLUGIN);
+      TextFacetTsApiGenerated.getFontSize(StateSourceType.PLUGIN);
+      NodeTsApi.getParagraphIndent(StateSourceType.PLUGIN);
+      NodeTsApi.getParagraphSpacing(StateSourceType.PLUGIN);
+      NodeTsApi.getListSpacing(StateSourceType.PLUGIN);
+      TextFacetTsApiGenerated.getTextAlignHorizontal(StateSourceType.PLUGIN);
+      TextFacetTsApiGenerated.getTextAlignVertical(StateSourceType.PLUGIN);
+      TextFacetTsApiGenerated.getTextDecoration(StateSourceType.PLUGIN);
+      NodeTsApi.getTextCase(StateSourceType.PLUGIN);
+      TextFacetTsApiGenerated.getTextAutoResize(StateSourceType.PLUGIN);
+      NodeTsApi.getLetterSpacing(StateSourceType.PLUGIN);
+      VectorFacetTsApiGenerated.getArcData(StateSourceType.PLUGIN);
+      NodeTsApi.getVectorData(StateSourceType.PLUGIN);
+      NodeTsApi.getPrototypeInteractions(StateSourceType.PLUGIN);
+      PrototypingFacetTsApiGenerated.getOverlayPositionType(StateSourceType.PLUGIN);
+      NodeTsApi.getOverlayBackgroundAppearance(StateSourceType.PLUGIN);
+      PrototypingFacetTsApiGenerated.getOverlayBackgroundInteraction(StateSourceType.PLUGIN);
+      NodeTsApi.getSharedSymbolVersion(StateSourceType.PLUGIN);
+      NodeTsApi.getSharedStateGroupVersion(StateSourceType.PLUGIN);
+      NodeTsApi.getStyleVersion(StateSourceType.PLUGIN);
+      SceneNodeCpp.getTextSublayer(StateSourceType.PLUGIN);
+      SceneNodeCpp.getImmutableFrameLabel(StateSourceType.PLUGIN);
+      NodeTsApi.getConnectorLineType(StateSourceType.PLUGIN);
+      NodeTsApi.getIsEmbed(StateSourceType.PLUGIN);
+      NodeTsApi.getIsLinkPreview(StateSourceType.PLUGIN);
+      NodeTsApi.getLinkPreviewData(StateSourceType.PLUGIN);
+      NodeTsApi.getEmbedData(StateSourceType.PLUGIN);
+      NodeTsApi.getMediaData(StateSourceType.PLUGIN);
+      SceneGraphTsApi.getCurrentPage(StateSourceType.PLUGIN, documentStateTsApi.getActiveDocument());
+      WidgetFacetTsApiGenerated.getWidgetEvents(StateSourceType.PLUGIN);
+      NodeTsApi.getWidgetId();
+      NodeTsApi.getWidgetVersionId();
+      NodeTsApi.getOverriddenInheritedFillStyles(StateSourceType.PLUGIN);
+      NodeTsApi.getWidgetName();
+      NodeTsApi.getWidgetSyncedState();
+      NodeTsApi.getWidgetCachedAncestor();
+      NodeTsApi.getRenderedSyncedState();
+      NodeTsApi.getWidgetInputBehavior();
+      WidgetFacetTsApiGenerated.getWidgetTooltip(StateSourceType.PLUGIN);
+      NodeTsApi.getWidgetInputTextNodeType();
     })(e);
   });
   let i = window.performance.now();
   console.log(`Getters bench: ${i - t}ms`);
 }, window.runBindingsBenchmark = function () {
-  let e = yDE;
+  let e = BindingsPerfBench;
   if (!e) throw new Error('BindingsPerfBench is not initialized');
   c('10000 x [empty(): void]', () => {
     for (let t = 0; t < 1e4; t++) e.empty();
@@ -774,7 +774,7 @@ async function ti(e, t, i) {
       } = e;
       let a = {};
       for (let e of commit.changedNodes) {
-        let t = i6g ? JSON.parse(i6g.encodeChangesAsJson(e.changes, fileVersion, !1)) : '';
+        let t = AutosaveHelpers ? JSON.parse(AutosaveHelpers.encodeChangesAsJson(e.changes, fileVersion, !1)) : '';
         a[e.nodeID] = {
           changesB64: encodeBase64(e.changes),
           debug: t
@@ -785,8 +785,8 @@ async function ti(e, t, i) {
         changes: t
       }) => [e, encodeBase64(t)]));
       return {
-        commitPolicy: W2B[commitPolicy],
-        commitReason: uXP[commitReason],
+        commitPolicy: EditChangeMode[commitPolicy],
+        commitReason: ConnectionState[commitReason],
         changedNodes: a,
         clearedNodes: commit.clearedNodes,
         imageHashes: commit.imageHashes,
@@ -871,7 +871,7 @@ class t4 {
     if (r) {
       let e = i.getStyleNodeByRef(r);
       let n = {
-        guid: _$$sH(e?.styleId.guid)
+        guid: parseSessionLocalID(e?.styleId.guid)
       };
       return !bi({
         library: t,
@@ -884,12 +884,12 @@ class t4 {
 }
 let id = new class {
   constructor() {
-    this.ClipboardDataUploadSchemaValidator = vh();
+    this.ClipboardDataUploadSchemaValidator = createNoOpValidator();
   }
   getClipboardDataUpload(e) {
     return this.ClipboardDataUploadSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get('/api/clipboard_data_upload', _$$td2.toAPIParameters({
+    }) => await t.get('/api/clipboard_data_upload', APIParameterUtils.toAPIParameters({
       device_type: e.deviceType,
       timestamp_ms: e.timestampMs
     })));
@@ -1013,7 +1013,7 @@ function ik(e) {
     });
     let n = useDispatch();
     useEffect(() => {
-      i !== e && n(ES({
+      i !== e && n(hideSpecificModal({
         type: t
       }));
     }, [n, e, i, t]);
@@ -1108,7 +1108,7 @@ function iR({
     })]
   });
 }
-let iN = _$$Ju(e => {
+let iN = registerModal(e => {
   let t;
   return (t = e.slotNodeId, _$$Fk((e, t) => {
     let i = e.get(t);
@@ -1116,7 +1116,7 @@ let iN = _$$Ju(e => {
   }, t) && getFeatureFlags().dse_slots) ? jsx(ik, {
     ...e
   }) : null;
-}, 'SLOT_PREFERRED_CONTENT_PICKER_MODAL_TYPE', ZU.YES);
+}, 'SLOT_PREFERRED_CONTENT_PICKER_MODAL_TYPE', ModalSupportsBackground.YES);
 let iG = {
   dumpFrecencyData: () => {
     let {
@@ -1147,7 +1147,7 @@ let iG = {
   },
   clearFrecencyData: Zk
 };
-let i0 = _$$Ju(e => {
+let i0 = registerModal(e => {
   let t = useDispatch();
   let i = hS(e);
   return jsx(_$$bL, {
@@ -1164,7 +1164,7 @@ let i0 = _$$Ju(e => {
         children: jsxs(jk, {
           children: [jsx($n, {
             onClick: () => {
-              t(Ce());
+              t(hideModal());
             },
             variant: 'secondary',
             children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.do_it_later')
@@ -1179,7 +1179,7 @@ let i0 = _$$Ju(e => {
   });
 }, 'fullscreen-attempted-sketch-file-drop-modal');
 function nl(e) {
-  cgc?.receive(e);
+  FullscreenWebSocketTsApi?.receive(e);
 }
 let nm = ['#007BE5', '#0087A8', '#009951', '#00B5CE', '#0FA958', '#14AE5C', '#18A0FB', '#1BC47D', '#536383', '#5551FF', '#667799', '#848484', '#8638E5', '#907CFF', '#9747FF', '#D27C2C', '#DC3412', '#EA10AC', '#EBEBEB', '#EE46D3', '#EF5533', '#F24822', '#F24E1E', '#FF24BD', '#FFC21A', '#FFC700', '#FFCD29'];
 let nh = ['Hello world!', 'Collaboration is the key', 'Critical!!!!', 'Can we please iterate on this process', 'This is the most important message of your life', 'I liked it more in the blue color', 'Corporate Accounts Payable, Nina Speaking. JUST A Moment!', 'I Was Told That I Could Listen To The Radio At A Reasonable Volume, From Nine To Eleven', 'Why Does It Say Paper Jam When There Is No Paper Jam!', 'Sounds Like Somebody\u2019s Got A Case Of The Mondays!', 'Oh, And Remember, Next Friday Is Hawaiian Shirt Day!', 'That Means Every Single Day That You See Me, That\u2019s On The Worst Day Of My Life.'];
@@ -1377,8 +1377,8 @@ function nI(e, t) {
   return t[Math.floor(e() * t.length)];
 }
 function nE(e) {
-  UNF.setGlobalUnstableNodeByID(e.sceneGraph.scene, e.sessionID, e.localID, Sie.PLUGIN);
-  UNF.getAbsoluteBoundingBox(Sie.PLUGIN);
+  NodeTsApi.setGlobalUnstableNodeByID(e.sceneGraph.scene, e.sessionID, e.localID, StateSourceType.PLUGIN);
+  NodeTsApi.getAbsoluteBoundingBox(StateSourceType.PLUGIN);
 }
 function nx(e, t, i) {
   e.relativeTransform = {
@@ -1424,12 +1424,12 @@ _$$nc.testSetup('table-typing-scenario', (e, t, i = {}) => {
     _(b += c[e % c.length]);
     let t = nR();
     u.push([nw(n, {
-      guid: _$$sH(m),
+      guid: parseSessionLocalID(m),
       nodeGenerationData: t.nodeGenerationData,
       derivedImmutableFrameData: t.derivedImmutableFrameData,
       size: t.size,
       name: t.name
-    }, nN()), nC(n, [_$$sH(m)], s)]);
+    }, nN()), nC(n, [parseSessionLocalID(m)], s)]);
   }
   u.push(...nT(n, h, y.slice(l), s));
   return {
@@ -1500,14 +1500,14 @@ function nk(e, t, i, n, r) {
   return a;
 }
 function nR() {
-  return _$$w.decodeNodeChange(msz.dumpSelectedNode());
+  return _$$w.decodeNodeChange(interactionTestHelpers.dumpSelectedNode());
 }
 function nN() {
-  return _$$w.decodeMessage(msz.dumpSelectedNode()).blobs;
+  return _$$w.decodeMessage(interactionTestHelpers.dumpSelectedNode()).blobs;
 }
 function nP() {
   let e = getSingletonSceneGraph().getCurrentPage();
-  return _$$sH(e?.guid) || {
+  return parseSessionLocalID(e?.guid) || {
     sessionID: 0,
     localID: 1
   };
@@ -1817,7 +1817,7 @@ function nW() {
           variant: 'secondary',
           type: 'submit',
           onClick: () => {
-            let e = Y5.getViewportInfo();
+            let e = fullscreenValue.getViewportInfo();
             c(e.offsetX);
             m(e.offsetY);
           },
@@ -1858,15 +1858,15 @@ class nQ extends KD {
   }
 }
 function nJ() {
-  let e = J2(_$$d2().editFrameExtraSeconds);
+  let e = getObservableOrFallback(_$$d2().editFrameExtraSeconds);
   let t = useCallback(e => {
     _$$d2().editFrameExtraSeconds.set(e - 0.016);
   }, []);
-  let i = J2(_$$d2().editFrameExtraFramebufferSwitches);
+  let i = getObservableOrFallback(_$$d2().editFrameExtraFramebufferSwitches);
   let n = useCallback(e => {
     _$$d2().editFrameExtraFramebufferSwitches.set(e - 250);
   }, []);
-  let r = J2(_$$d2().maxEditTimeSeconds);
+  let r = getObservableOrFallback(_$$d2().maxEditTimeSeconds);
   let s = useCallback(e => {
     _$$d2().maxEditTimeSeconds.set(e);
   }, []);
@@ -1885,7 +1885,7 @@ function nJ() {
           children: 'TSMER Config'
         })
       }), jsxs(_$$nB, {
-        children: [jsx(_$$J3, {
+        children: [jsx(Label, {
           children: renderI18nText('tsmer_config.modal.levers_label')
         }), jsx(j5, {
           'className': nL,
@@ -1954,7 +1954,7 @@ let rg = rh;
 let rv = parsePxNumber('16px');
 let rI = parsePxNumber('48px');
 let rE = parsePxNumber('41px');
-let rx = _$$Ju(() => {
+let rx = registerModal(() => {
   let e = _$$n5({
     type: rx
   });
@@ -2042,7 +2042,7 @@ let rx = _$$Ju(() => {
       children: r
     })
   });
-}, 'FRAGMENT_INSPECT_MODAL', ZU.YES);
+}, 'FRAGMENT_INSPECT_MODAL', ModalSupportsBackground.YES);
 let rP = [{
   key: 'choice',
   name: 'Pick an option',
@@ -2102,7 +2102,7 @@ function rL() {
                 e && (e.directlySelectedNodes = []);
                 t('select-existing-component');
               } else {
-                e.parameters.choice.data === 'new-component' && (l7.user('create-new-component', () => {
+                e.parameters.choice.data === 'new-component' && (permissionScopeHandler.user('create-new-component', () => {
                   Qy(o, !0);
                 }), close());
               }
@@ -2123,7 +2123,7 @@ function rL() {
           if (t.length === 0) return;
           let n = t[0];
           let r = i.map(e => getSingletonSceneGraph().get(e));
-          l7.user('link-frames-to-component', () => {
+          permissionScopeHandler.user('link-frames-to-component', () => {
             v$(r, n);
           });
           close();
@@ -2144,10 +2144,10 @@ function rL() {
   }
 }
 let r0 = (e, t) => {
-  if (e === ywP.DISPLAY_P3) {
+  if (e === ColorProfileEnum.DISPLAY_P3) {
     if (t === 'convert') return getI18nString('fullscreen.color_management.document_modal.confirm.title.convert_display_p3');
     if (t === 'assign') return getI18nString('fullscreen.color_management.document_modal.confirm.title.assign_display_p3');
-  } else if (e === ywP.SRGB) {
+  } else if (e === ColorProfileEnum.SRGB) {
     if (t === 'convert') return getI18nString('fullscreen.color_management.document_modal.confirm.title.convert_srgb');
     if (t === 'assign') return getI18nString('fullscreen.color_management.document_modal.confirm.title.assign_srgb');
   }
@@ -2157,8 +2157,8 @@ let r0 = (e, t) => {
 let r1 = e => getI18nString('fullscreen.color_management.document_modal.cancel', {
   color_profile: r2(e)
 });
-let r2 = e => e === ywP.DISPLAY_P3 ? getI18nString('fullscreen.filename_view.color_management.color_profile_display_p3') : e === ywP.SRGB ? getI18nString('fullscreen.filename_view.color_management.color_profile_srgb') : (logInfo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfile`), '');
-let r5 = e => e === ywP.DISPLAY_P3 ? getI18nString('fullscreen.color_management.file_history.assign-display-p3') : e === ywP.SRGB ? getI18nString('fullscreen.color_management.file_history.assign-srgb') : (logInfo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfileAssignment`), '');
+let r2 = e => e === ColorProfileEnum.DISPLAY_P3 ? getI18nString('fullscreen.filename_view.color_management.color_profile_display_p3') : e === ColorProfileEnum.SRGB ? getI18nString('fullscreen.filename_view.color_management.color_profile_srgb') : (logInfo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfile`), '');
+let r5 = e => e === ColorProfileEnum.DISPLAY_P3 ? getI18nString('fullscreen.color_management.file_history.assign-display-p3') : e === ColorProfileEnum.SRGB ? getI18nString('fullscreen.color_management.file_history.assign-srgb') : (logInfo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfileAssignment`), '');
 let r4 = (e, t) => {
   switch (t.status) {
     case 'SupportedNatively':
@@ -2172,14 +2172,14 @@ let r4 = (e, t) => {
 };
 let r3 = e => {
   switch (e) {
-    case ywP.SRGB:
+    case ColorProfileEnum.SRGB:
       return getI18nString('fullscreen.color_management.document_modal.options.convert.subtitle.srgb_to_display_p3');
-    case ywP.DISPLAY_P3:
+    case ColorProfileEnum.DISPLAY_P3:
       return getI18nString('fullscreen.color_management.document_modal.options.convert.subtitle.display_p3_to_srgb');
   }
 };
 function r6(e, t, i, n, r) {
-  switch (r && e(t === ywP.LEGACY ? _$$m3({
+  switch (r && e(t === ColorProfileEnum.LEGACY ? _$$m3({
     fileKey: r,
     label: getI18nString('fullscreen.color_management.file_history.label'),
     description: r5(i),
@@ -2190,14 +2190,14 @@ function r6(e, t, i, n, r) {
     description: `${r2(t)} \u2192 ${r2(i)}`,
     hideVisualBell: !0
   })), i) {
-    case ywP.SRGB:
-      n === 'assign' ? glU.triggerAction('assign-document-color-profile-srgb', {}) : n === 'convert' && glU.triggerAction('convert-document-color-profile-srgb', {});
+    case ColorProfileEnum.SRGB:
+      n === 'assign' ? Fullscreen.triggerAction('assign-document-color-profile-srgb', {}) : n === 'convert' && Fullscreen.triggerAction('convert-document-color-profile-srgb', {});
       break;
-    case ywP.DISPLAY_P3:
-      n === 'assign' ? glU.triggerAction('assign-document-color-profile-display-p3', {}) : n === 'convert' && glU.triggerAction('convert-document-color-profile-display-p3', {});
+    case ColorProfileEnum.DISPLAY_P3:
+      n === 'assign' ? Fullscreen.triggerAction('assign-document-color-profile-display-p3', {}) : n === 'convert' && Fullscreen.triggerAction('convert-document-color-profile-display-p3', {});
   }
 }
-let r7 = _$$Ju(({
+let r7 = registerModal(({
   newDocumentColorProfile: e,
   open: t,
   onClose: i
@@ -2206,8 +2206,8 @@ let r7 = _$$Ju(({
   let r = q5();
   let [o, l] = useLocalStorageSync('preferred-document-color-profile-change-option', 'convert');
   let d = Av();
-  let c = e === ywP.DISPLAY_P3 ? r4(o, d) : null;
-  let u = e === ywP.SRGB ? ywP.DISPLAY_P3 : ywP.SRGB;
+  let c = e === ColorProfileEnum.DISPLAY_P3 ? r4(o, d) : null;
+  let u = e === ColorProfileEnum.SRGB ? ColorProfileEnum.DISPLAY_P3 : ColorProfileEnum.SRGB;
   return jsx(fu, {
     name: 'color_management_document_color_profile_modal',
     children: jsxs(_$$R, {
@@ -2232,11 +2232,11 @@ let r7 = _$$Ju(({
         },
         children: [jsx(_$$c4, {
           value: 'convert',
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: getI18nString('fullscreen.color_management.document_modal.options.convert.title')
           }),
           children: jsxs(Fragment, {
-            children: [r3(e), e === ywP.SRGB && o === 'convert' && jsxs('div', {
+            children: [r3(e), e === ColorProfileEnum.SRGB && o === 'convert' && jsxs('div', {
               className: 'document_color_profile_modal--migratedWarning--4bN32',
               children: [jsx(_$$Z4, {}), renderI18nText('fullscreen.color_management.document_modal.warning.clamp.convert'), jsx(Ph, {
                 newTab: !0,
@@ -2248,7 +2248,7 @@ let r7 = _$$Ju(({
           })
         }), jsx(_$$c4, {
           value: 'assign',
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: getI18nString('fullscreen.color_management.document_modal.options.assign.title')
           }),
           children: getI18nString('fullscreen.color_management.document_modal.options.assign.subtitle')
@@ -2270,7 +2270,7 @@ async function ad(e, t) {
   };
   if (!t.id) return i;
   let n = await new Promise(e => {
-    e(Vzr?.generateThumbnailForNode(t.id, t.absoluteRenderBounds.width, t.absoluteRenderBounds.height, 1, {}));
+    e(Thumbnail?.generateThumbnailForNode(t.id, t.absoluteRenderBounds.width, t.absoluteRenderBounds.height, 1, {}));
   });
   if (!n) return;
   let [r, a] = n;
@@ -2696,15 +2696,15 @@ async function aI({
   }
 }
 async function aE(e, t, i) {
-  let n = Ez5?.canvasGrid().canvasGridArray.getCopy() ?? [];
+  let n = AppStateTsApi?.canvasGrid().canvasGridArray.getCopy() ?? [];
   let r = getSingletonSceneGraph();
-  let a = AlE?.getMutableActiveDocument();
+  let a = documentStateTsApi?.getMutableActiveDocument();
   if (!a) {
     console.error('pptx-export', 'No active document');
     return;
   }
   let o = new e();
-  let l = new Set(Bko?.findImagesUnder(a, ['0:0'], MoD.NON_ANIMATED_ONLY));
+  let l = new Set(ImageCppBindings?.findImagesUnder(a, ['0:0'], ImageExportType.NON_ANIMATED_ONLY));
   let [d, c] = await Promise.all([l.size ? Mj([...l], {
     type: 'figFile',
     fileKey: t.key
@@ -2756,7 +2756,7 @@ async function aE(e, t, i) {
 }
 let aN = 'pdf_export_settings_modal--exportSettingsModalRow--Z1ilM';
 let aP = 'pdf_export_settings_modal--exportSettingsModalRowAutoHeight--zCiQR';
-let aO = _$$Ju(e => {
+let aO = registerModal(e => {
   let [t, i] = useState(!1);
   let [n, r] = useState(!1);
   let o = hS({
@@ -2776,14 +2776,14 @@ let aO = _$$Ju(e => {
   let E = async () => {
     r(!1);
     i(!0);
-    let e = hzD.DOCUMENT;
-    v === 'SRGB' ? e = hzD.SRGB : v === 'DISPLAY_P3_V4' && (e = hzD.DISPLAY_P3_V4);
+    let e = DocumentColorProfileEnum.DOCUMENT;
+    v === 'SRGB' ? e = DocumentColorProfileEnum.SRGB : v === 'DISPLAY_P3_V4' && (e = DocumentColorProfileEnum.DISPLAY_P3_V4);
     let t = g === 'selection';
     if (p === 'pdf') {
       setTimeout(() => {
         try {
-          glU.exportAllFramesToPdf(y, e, t);
-          A(AS());
+          Fullscreen.exportAllFramesToPdf(y, e, t);
+          A(hideModalHandler());
         } catch (e) {
           r(!0);
         } finally {
@@ -2796,7 +2796,7 @@ let aO = _$$Ju(e => {
           file: d,
           slideIds: g === 'selection' ? c : void 0
         });
-        A(AS());
+        A(hideModalHandler());
       } catch (e) {
         r(!0);
       } finally {
@@ -2883,7 +2883,7 @@ let aO = _$$Ju(e => {
             },
             value: p,
             children: [jsx(l9, {
-              label: jsx(_$$h3, {
+              label: jsx(HiddenLabel, {
                 children: getI18nString('fullscreen.export.export_file_type')
               }),
               width: 'fill'
@@ -3004,7 +3004,7 @@ class aZ extends PureComponent {
     this.onSequenceStartChange = e => {
       this.updateShouldRefocusReplaceInput();
       this.setState({
-        sequenceStart: E7(e)
+        sequenceStart: normalizeValue(e)
       });
     };
     this.generateLayerNames = () => {
@@ -3051,13 +3051,13 @@ class aZ extends PureComponent {
       e && e.preventDefault();
       let t = this.generateLayerNames();
       let i = !1;
-      l7.user('rename-modal-submit', () => {
+      permissionScopeHandler.user('rename-modal-submit', () => {
         for (let e in t) {
           let n = this.props.getNode(e);
           n && t[e] !== n.name && (_$$i(e, t[e]), i = !0);
         }
       });
-      i && Y5.commit();
+      i && fullscreenValue.commit();
       this.props.onClose();
     };
     this.renderPreview = () => jsxs(Fragment, {
@@ -3236,10 +3236,10 @@ class aZ extends PureComponent {
     });
   }
 }
-let aX = _$$Ju(e => {
+let aX = registerModal(e => {
   let t = hS(e);
   let i = useRef(null);
-  let n = _$$X3(i);
+  let n = setupAutofocusHandler(i);
   let r = useSelector(e => (reportNullOrUndefined(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
   let s = useSelector(e => e.mirror.sceneGraph.get);
   return jsx(aZ, {
@@ -3254,7 +3254,7 @@ let aX = _$$Ju(e => {
 let a4 = {
   templates: ['(?:www\\.)?youtube\\.com/(?:tv#/)?watch\\?(?:[^&]+&)*v=([a-zA-Z0-9_-]+)', 'youtu\\.be/([a-zA-Z0-9_-]+)', 'm\\.youtube\\.com/#/watch\\?(?:[^&]+&)*v=([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/shorts/([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/embed/([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/v/([a-zA-Z0-9_-]+)', 'www\\.youtube\\.com/user/[a-zA-Z0-9_-]+\\?v=([a-zA-Z0-9_-]+)', 'www\\.youtube-nocookie\\.com/v/([a-zA-Z0-9_-]+)']
 };
-let sn = hR(() => zdR?.getAgenda() ?? [], {
+let sn = hR(() => WhiteboardAgendaCppBindings?.getAgenda() ?? [], {
   changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
 });
 let sr = hR(null, {
@@ -3262,12 +3262,12 @@ let sr = hR(null, {
 });
 let s_ = {
   restoreSoftDeletedNode(e) {
-    l7.user('internal-restore-soft-deleted-node', () => {
-      PKm?.restoreSoftDeletedNode(e);
+    permissionScopeHandler.user('internal-restore-soft-deleted-node', () => {
+      DesignSystemsInternalHelpers?.restoreSoftDeletedNode(e);
     });
   },
   getNodesPersistingNode(e) {
-    return PKm?.getNodesPersistingNode(e);
+    return DesignSystemsInternalHelpers?.getNodesPersistingNode(e);
   },
   getUpdatesState() {
     return {
@@ -3368,14 +3368,14 @@ function sP(e) {
         f7(e);
       };
       this.onReady = () => this._readyPromise;
-      this.isReady = () => this._fullscreenIsReady && _$$y4.getFullscreenCrashState() === 'ok' && !!glU;
+      this.isReady = () => this._fullscreenIsReady && _$$y4.getFullscreenCrashState() === 'ok' && !!Fullscreen;
       this.isFontListLoaded = () => this._fontListLoaded;
       this.fromFullscreen.on('console:initialize', () => {
-        _$$lQ.then(() => {
+        fullscreenPromise.then(() => {
           this._osxMessageListener?.initialize();
         });
       });
-      _$$H3();
+      requestDeferredExecution();
       this._readyPromise = new Promise((e, t) => {
         this.isReady() ? e() : this._readyPromiseResolve = e;
       });
@@ -3418,7 +3418,7 @@ function sP(e) {
       setSentryTag(e, t);
     }
     onFrame() {
-      this.isReady() && glU && glU.onFrame();
+      this.isReady() && Fullscreen && Fullscreen.onFrame();
     }
     getViewportInfo() {
       return this._viewportInfo;
@@ -3545,7 +3545,7 @@ async function sq(e, t, i) {
     if (!g) return;
     let f = g.stackMode !== 'NONE';
     let _ = getSingletonSceneGraph();
-    l7.user('smart-paste', () => {
+    permissionScopeHandler.user('smart-paste', () => {
       function o(e, t) {
         let i = function (e, t) {
           let i = new Map();
@@ -3563,7 +3563,7 @@ async function sq(e, t, i) {
           let r = i.get(n);
           if (r) {
             if (!_.get(r)) throw new Error('No node found');
-            biQ.setTextContentOnTextNode(r, e);
+            ComponentPropsAiCPPBindings.setTextContentOnTextNode(r, e);
           }
         });
       }
@@ -3585,7 +3585,7 @@ async function sq(e, t, i) {
         }
       });
       t || d.removeSelfAndChildren();
-      glU.triggerAction('commit', {});
+      Fullscreen.triggerAction('commit', {});
       n.stop();
       let l = n.getElapsedTime();
       ds('ai_smart_paste_completed', a, r, {
@@ -3688,82 +3688,82 @@ class oo {
         }
         break;
       case 'reset-size':
-        this.reset(YnC.SIZE);
+        this.reset(SymbolOverrideType.SIZE);
         break;
       case 'reset-exports':
-        this.reset(YnC.EXPORTS);
+        this.reset(SymbolOverrideType.EXPORTS);
         break;
       case 'reset-effects':
-        this.reset(YnC.EFFECTS);
+        this.reset(SymbolOverrideType.EFFECTS);
         break;
       case 'reset-layer':
-        this.reset(YnC.LAYER);
+        this.reset(SymbolOverrideType.LAYER);
         break;
       case 'reset-visible':
-        this.reset(YnC.VISIBLE);
+        this.reset(SymbolOverrideType.VISIBLE);
         break;
       case 'reset-name':
-        this.reset(YnC.NAME);
+        this.reset(SymbolOverrideType.NAME);
         break;
       case 'reset-fill':
-        this.reset(YnC.FILL);
+        this.reset(SymbolOverrideType.FILL);
         break;
       case 'reset-stroke':
-        this.reset(YnC.STROKE);
+        this.reset(SymbolOverrideType.STROKE);
         break;
       case 'reset-text':
-        this.reset(YnC.TEXT);
+        this.reset(SymbolOverrideType.TEXT);
         break;
       case 'reset-text-style':
-        this.reset(YnC.TEXT_STYLE);
+        this.reset(SymbolOverrideType.TEXT_STYLE);
         break;
       case 'reset-prototype-interactions':
-        this.reset(YnC.PROTOTYPE_INTERACTIONS);
+        this.reset(SymbolOverrideType.PROTOTYPE_INTERACTIONS);
         break;
       case 'reset-overlay':
-        this.reset(YnC.OVERLAY);
+        this.reset(SymbolOverrideType.OVERLAY);
         break;
       case 'text-bold-increase':
-        this._applyTextStylingAction(eL2.INCREASE_BOLD);
+        this._applyTextStylingAction(TextEditAction.INCREASE_BOLD);
         break;
       case 'text-bold-decrease':
-        this._applyTextStylingAction(eL2.DECREASE_BOLD);
+        this._applyTextStylingAction(TextEditAction.DECREASE_BOLD);
         break;
       case 'text-toggle-italic':
-        this._applyTextStylingAction(eL2.TOGGLE_ITALIC);
+        this._applyTextStylingAction(TextEditAction.TOGGLE_ITALIC);
         break;
       case 'text-toggle-underline':
-        this._applyTextStylingAction(eL2.TOGGLE_UNDERLINE);
+        this._applyTextStylingAction(TextEditAction.TOGGLE_UNDERLINE);
         break;
       case 'text-toggle-strikethrough':
-        this._applyTextStylingAction(eL2.TOGGLE_STRIKETHROUGH);
+        this._applyTextStylingAction(TextEditAction.TOGGLE_STRIKETHROUGH);
         break;
       case 'text-remove-decoration':
-        this._applyTextStylingAction(eL2.REMOVE_DECORATION);
+        this._applyTextStylingAction(TextEditAction.REMOVE_DECORATION);
         break;
       case 'text-original-case':
-        this._applyTextStylingAction(eL2.SET_ORIGINAL_CASE);
+        this._applyTextStylingAction(TextEditAction.SET_ORIGINAL_CASE);
         break;
       case 'text-upper-case':
-        this._applyTextStylingAction(eL2.SET_UPPER_CASE);
+        this._applyTextStylingAction(TextEditAction.SET_UPPER_CASE);
         break;
       case 'text-lower-case':
-        this._applyTextStylingAction(eL2.SET_LOWER_CASE);
+        this._applyTextStylingAction(TextEditAction.SET_LOWER_CASE);
         break;
       case 'text-title-case':
-        this._applyTextStylingAction(eL2.SET_TITLE_CASE);
+        this._applyTextStylingAction(TextEditAction.SET_TITLE_CASE);
         break;
       case 'text-line-height-decrease':
-        this._applyTextStylingAction(eL2.DECREASE_LINE_HEIGHT, zvt.TEXT_LINE_HEIGHT);
+        this._applyTextStylingAction(TextEditAction.DECREASE_LINE_HEIGHT, TextModificationAction.TEXT_LINE_HEIGHT);
         break;
       case 'text-line-height-increase':
-        this._applyTextStylingAction(eL2.INCREASE_LINE_HEIGHT, zvt.TEXT_LINE_HEIGHT);
+        this._applyTextStylingAction(TextEditAction.INCREASE_LINE_HEIGHT, TextModificationAction.TEXT_LINE_HEIGHT);
         break;
       case 'text-letter-spacing-decrease':
-        this._applyTextStylingAction(eL2.DECREASE_LETTER_SPACING, zvt.TEXT_LETTER_SPACING);
+        this._applyTextStylingAction(TextEditAction.DECREASE_LETTER_SPACING, TextModificationAction.TEXT_LETTER_SPACING);
         break;
       case 'text-letter-spacing-increase':
-        this._applyTextStylingAction(eL2.INCREASE_LETTER_SPACING, zvt.TEXT_LETTER_SPACING);
+        this._applyTextStylingAction(TextEditAction.INCREASE_LETTER_SPACING, TextModificationAction.TEXT_LETTER_SPACING);
         break;
       case 'present-as-prototype':
         {
@@ -3848,7 +3848,7 @@ class oo {
         break;
       case 'toggle-bold':
         let n = this._state.mirror.appModel.currentTool;
-        _$$XE(this._store.getState().selectedView) === FEditorType.Whiteboard && _$$BG(n) ? this._applyDrawingToolStylingAction(n) : this._applyTextStylingAction(eL2.TOGGLE_BOLD);
+        _$$XE(this._store.getState().selectedView) === FEditorType.Whiteboard && _$$BG(n) ? this._applyDrawingToolStylingAction(n) : this._applyTextStylingAction(TextEditAction.TOGGLE_BOLD);
         break;
       case 'show-prototype-interaction-edit-modal':
         let {
@@ -3861,7 +3861,7 @@ class oo {
           id: isBehaviorsOnly ? uR : _$$o$,
           initialX: x,
           initialY: y,
-          shouldPin: source === yxn.PROPERTIES_PANEL
+          shouldPin: source === CanvasComponentType.PROPERTIES_PANEL
         };
         this._store.dispatch(u1(d));
         break;
@@ -3871,7 +3871,7 @@ class oo {
   }
   reset(e) {
     let t = this.getInstanceAndSublayerGUIDs();
-    t && glU.resetSymbolOverridesForNodes(t, e);
+    t && Fullscreen.resetSymbolOverridesForNodes(t, e);
   }
   getInstanceAndSublayerGUIDs() {
     let e = Object.keys(this._store.getState().mirror.sceneGraphSelection);
@@ -3880,7 +3880,7 @@ class oo {
   }
   _applyTextStylingAction(e, t) {
     let i = this._store.getState().mirror.sceneGraph.get(this._state.mirror.appModel.currentPage);
-    i && (i.applyTextStylingAction(e), t && glU.requestNextCommitMergeWithPrevious(t), glU.triggerAction('commit', {}));
+    i && (i.applyTextStylingAction(e), t && Fullscreen.requestNextCommitMergeWithPrevious(t), Fullscreen.triggerAction('commit', {}));
   }
   _openPrototype({
     source: e,
@@ -3888,7 +3888,7 @@ class oo {
     isSlides: i,
     isPresenterViewWithPopoutAudienceView: n
   }) {
-    let r = X3B.getActivePrototypeStartingPointNodeIdOnCurrentPage();
+    let r = PrototypingTsApi.getActivePrototypeStartingPointNodeIdOnCurrentPage();
     let a = this._store.getState().openFile;
     a && this._store.dispatch(_$$K({
       fileKey: a.key,
@@ -3901,21 +3901,21 @@ class oo {
   }
   _applyDrawingToolStylingAction(e) {
     switch (e) {
-      case NLJ.VECTOR_PENCIL:
+      case DesignGraphElements.VECTOR_PENCIL:
         let t = atomStoreManager.get(GI);
         atomStoreManager.set(GI, {
           ...t,
           strokeWeight: t.strokeWeight === wv ? uM : wv
         });
         return;
-      case NLJ.BRUSH:
+      case DesignGraphElements.BRUSH:
         let i = atomStoreManager.get(Vi);
         atomStoreManager.set(Vi, {
           ...i,
           strokeWeight: i.strokeWeight === wv ? uM : wv
         });
         return;
-      case NLJ.HIGHLIGHTER:
+      case DesignGraphElements.HIGHLIGHTER:
         let n = atomStoreManager.get(IZ);
         atomStoreManager.set(IZ, {
           ...n,
@@ -4293,7 +4293,7 @@ let lw = new class {
       closePlugin,
       noOpVm
     } = _$$e8();
-    addShutdownAction(() => Y5.commit());
+    addShutdownAction(() => fullscreenValue.commit());
     createPluginInstance(noOpVm, {
       stats: new _$$P3(),
       name: 'First Party',
@@ -4314,11 +4314,11 @@ let lw = new class {
       enableProposedApi: !0,
       enablePrivatePluginApi: !0,
       deferRunEvent: !1,
-      validatedPermissions: qH.forFirstPartyPlugin(),
+      validatedPermissions: PluginPermissions.forFirstPartyPlugin(),
       isLocal: !1,
       capabilities: [],
       allowedDomains: gH,
-      editorType: [FW.FIGJAM, FW.FIGMA, FW.SITES],
+      editorType: [ManifestEditorType.FIGJAM, ManifestEditorType.FIGMA, ManifestEditorType.SITES],
       html: null,
       incrementalSafeApi: !1,
       enableNativeJsx: !1,
@@ -4355,7 +4355,7 @@ async function lN({
   if (!c) throw new lR('Widget node does not exist');
   let u = _$$F2();
   if (!u.canRun) {
-    await fR(u.message);
+    await showVisualBell(u.message);
     return;
   }
   if (lj() && ZY(e)) {
@@ -4381,16 +4381,16 @@ async function lN({
   }
   if (!m && h) {
     switch (await _$$y6(p ?? void 0, h)) {
-      case u8.PLUGIN_NOT_ORG_APPROVED:
+      case PluginInstallStatus.PLUGIN_NOT_ORG_APPROVED:
         let A = getI18nString('widgets.this_widget_is_not_allowed_by_your_organization');
         let y = getI18nString('widgets.this_widget_is_not_allowed_by_your_organization_v2', {
           orgName: h.name,
           widgetName: c.widgetName
         });
         let b = getFeatureFlags().widgets_use_new_org_message ? y : A;
-        r !== 'paste_from_url' && (await fR(b));
+        r !== 'paste_from_url' && (await showVisualBell(b));
         return new lR('This widget is not allowed by the user\'s organization');
-      case u8.PLUGIN_INSTALLABLE:
+      case PluginInstallStatus.PLUGIN_INSTALLABLE:
     }
   }
   if (getFeatureFlags().widgets_multiplayer_local) {
@@ -4418,7 +4418,7 @@ async function lN({
         });
         return;
       }
-      r !== 'paste_from_url' && (await fR(getI18nString('widgets.could_not_find_widget_code_to_run')));
+      r !== 'paste_from_url' && (await showVisualBell(getI18nString('widgets.could_not_find_widget_code_to_run')));
       return new lR('Could not find widget code on the node');
     }
     m && lL(t.widgetNodeID, e, p);
@@ -4431,10 +4431,10 @@ async function lN({
         widgetVersionId: c.widgetVersionId
       }
     });
-    r !== 'paste_from_url' && (await fR(getI18nString('widgets.could_not_find_widget_code_to_run')));
+    r !== 'paste_from_url' && (await showVisualBell(getI18nString('widgets.could_not_find_widget_code_to_run')));
     return new lR('Could not find widget code to run');
   }
-  if (MH({
+  if (isWidgetPlugin({
     plugin: p
   })) {
     await bT({
@@ -4453,7 +4453,7 @@ async function lN({
   }
 }
 async function lP(e, t) {
-  return Gc(e) || (!e.widgetId || !e.widgetVersionId || ZY(e.widgetId) ? null : (await $Z(e.widgetId, e.widgetVersionId, t)) ?? null);
+  return getWidgetVersionData(e) || (!e.widgetId || !e.widgetVersionId || ZY(e.widgetId) ? null : (await $Z(e.widgetId, e.widgetVersionId, t)) ?? null);
 }
 async function lO({
   pluginID: e,
@@ -4487,7 +4487,7 @@ async function lO({
       isWidget: !0,
       name: 'Widget Plugin',
       openFileKey: openFile.key,
-      permissions: qH.forTest(),
+      permissions: PluginPermissions.forTest(),
       pluginID: e,
       pluginRunID: o,
       pluginVersionID: i,
@@ -4498,7 +4498,7 @@ async function lO({
       titleIconURL: '',
       userID: s,
       vmType: 'cppvm',
-      editorType: [FW.FIGMA, FW.FIGJAM],
+      editorType: [ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM],
       incrementalSafeApi: !1,
       enableNativeJsx: !1,
       enableResponsiveSetHierarchyMutations: !1
@@ -4513,19 +4513,19 @@ async function lL(e, t, i) {
   let r;
   let a = getSceneGraphInstance().get(e);
   if (a) {
-    if (ZQ(i)) {
-      [n, r] = await Promise.all([_$$c6(i.localFileId, {
+    if (hasLocalFileId(i)) {
+      [n, r] = await Promise.all([loadPluginManifest(i.localFileId, {
         resourceType: 'widget',
         ignoreMissingEditorType: !0,
         isPublishing: !1
-      }), MB(i.localFileId)]);
+      }), loadLocalPluginSource(i.localFileId)]);
     } else {
       n = i.manifest;
       let e = await _$$F5.getAndCache(i, debugState.getState().currentUserOrgId || void 0);
       if (!e) throw new Error(`No code found for ${i} version`);
       r = e;
     }
-    l7.plugin('save-widget-code-setPluginData', () => {
+    permissionScopeHandler.plugin('save-widget-code-setPluginData', () => {
       a.setPluginData(t, lD, JSON.stringify({
         manifest: n,
         code: r
@@ -4563,7 +4563,7 @@ async function lF(e, {
       isWidget: !0,
       name: manifest.name,
       openFileKey: openFile.key,
-      permissions: qH.forLocalPlugin({
+      permissions: PluginPermissions.forLocalPlugin({
         manifest
       }),
       pluginID: manifest.id || '',
@@ -4576,7 +4576,7 @@ async function lF(e, {
       titleIconURL: '',
       userID: o,
       vmType: 'cppvm',
-      editorType: [FW.FIGMA, FW.FIGJAM],
+      editorType: [ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM],
       incrementalSafeApi: !1,
       enableNativeJsx: !1,
       enableResponsiveSetHierarchyMutations: !1
@@ -4584,7 +4584,7 @@ async function lF(e, {
   } catch (t) {
     console.error(t);
     let e = t && t.message || getI18nString('widgets.an_error_occurred_while_running_this_widget');
-    fR(e);
+    showVisualBell(e);
   } finally {
     _$$iu.currentPluginRunID = null;
   }
@@ -4597,7 +4597,7 @@ getFeatureFlags().widgets_multiplayer_local && (window.saveWidgetCodeOnSelectedN
   for (let i of Object.keys(mirror.sceneGraphSelection)) {
     let t = getSceneGraphInstance().get(i);
     if (!t || t.type !== 'WIDGET') continue;
-    let n = Gc(t);
+    let n = getWidgetVersionData(t);
     if (!n) {
       console.warn(`Couldn't fetch plugin for node with id ${t.guid}`);
       continue;
@@ -4718,7 +4718,7 @@ function lU(e, t) {
   if (d.org_id && d.org_id !== currentUserOrgId && c) return lT.OTHER;
   if (d.org_id && !canMemberOrg(currentUserOrgId, debugState.getState())) return lT.ORG_MEMBER_ONLY;
   if (Rm(publishedWidgets[e])) return lT.REQUIRES_PAYMENT;
-  let h = _$$T3();
+  let h = getFullscreenViewEditorType();
   if (h && d.manifest.editorType && !d.manifest.editorType.includes(h)) return h === 'figjam' ? lT.FIGMA_ONLY : lT.FIGJAM_ONLY;
 }
 class lB {
@@ -4730,11 +4730,11 @@ class lB {
       let t = debugState.getState().mirror.appModel.activeUserAction;
       debugState.subscribe(() => {
         t = debugState.getState().mirror.appModel.activeUserAction;
-        [QOV.DEFAULT, QOV.SELECTING_TEXT].includes(t) && i && (e(), i = !1);
+        [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT].includes(t) && i && (e(), i = !1);
       });
       let i = !1;
       return () => {
-        [QOV.DEFAULT, QOV.SELECTING_TEXT].includes(t) ? (e(), i = !1) : i = !0;
+        [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT].includes(t) ? (e(), i = !1) : i = !0;
       };
     }(() => {
       this.runWidgets(this.hostInfoMap, this.stickableInfoMap);
@@ -4950,14 +4950,14 @@ class lV {
     });
     let n = getSceneGraphInstance().get(t);
     this.addWidgetToRecentlyUsed(n?.widgetVersionId, e);
-    _$$T3() === 'figma' && YQ({
+    getFullscreenViewEditorType() === 'figma' && YQ({
       id: 'widget_run_from_figma'
     });
   }
   runPropertyMenuCallback(e, t, i, n) {
     if (!_$$Vi(e) && !Fr()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
     this.didCallTextEditEnd = !1;
-    glU.setDefaultEditMode();
+    Fullscreen.setDefaultEditMode();
     let r = {
       pluginID: e,
       lifecycleCommand: {
@@ -5174,16 +5174,16 @@ export function $$lq1(e, t, i, n) {
       ...e,
       appIsReadOnly: !0
     }));
-    dn === rCR.RECOVERY && a?.editor_type !== 'whiteboard' && _$$g5(e => ({
+    dn === DocumentMode.RECOVERY && a?.editor_type !== 'whiteboard' && _$$g5(e => ({
       ...e,
       appIsRecovery: !0
     }));
-    _$$s$(new $$lQ0(e, t, n));
-    XT(new sB(t));
-    uF(new _$$a3(t));
-    fT(new _$$Z3(t));
-    $q(new _$$L(t));
-    QT(new oq());
+    setFullscreen(new $$lQ0(e, t, n));
+    setInputValue(new sB(t));
+    setUserValue(new _$$a3(t));
+    setSessionValue(new _$$Z3(t));
+    setFlagValue(new _$$L(t));
+    setAdditionalValue(new oq());
     Zb(t);
     gh();
     FR();
@@ -5197,7 +5197,7 @@ export function $$lq1(e, t, i, n) {
     _$$T4(new lV());
     _$$G2();
     _$$a();
-    Zi(new t4(t));
+    setModalValue(new t4(t));
     G_();
     z4();
     fG();
@@ -5244,7 +5244,7 @@ export function $$lq1(e, t, i, n) {
         switch (e) {
           case 'prune-derived-data':
           case 'dump-pending-registers':
-            Y5.triggerActionInUserEditScope(e);
+            fullscreenValue.triggerActionInUserEditScope(e);
             break;
           default:
             console.error(`The action ${e} is disabled in release builds.`);
@@ -5252,13 +5252,13 @@ export function $$lq1(e, t, i, n) {
       }
     };
     window.addEventListener('focus', () => {
-      Y5.isReady() && glU?.onWindowFocus();
+      fullscreenValue.isReady() && Fullscreen?.onWindowFocus();
     });
     window.addEventListener('storage', e => {
-      if (Y5.isReady() && e.key) {
+      if (fullscreenValue.isReady() && e.key) {
         let t = e.key;
         WK(() => {
-          glU?.onStorage(t);
+          Fullscreen?.onStorage(t);
         });
       }
     });
@@ -5268,7 +5268,7 @@ export function $$lq1(e, t, i, n) {
       return i;
     };
   }
-  return Y5;
+  return fullscreenValue;
 }
 getFeatureFlags().ce_aal_enable_debug && (window.AAL_SETTINGS = _$$N, window.resetAALConstants = _$$e3);
 let l$ = null;
@@ -5309,7 +5309,7 @@ let lX = class e extends sP(sN(sR)) {
         e && _$$N3.shouldShowOnce() && this._store.dispatch(_$$aK(_$$kF.FOR_OPEN));
       }), e.prepareSpellCheck(), t && console.log('isMacDebugApp', _$$m), _$$m) {
         await this.onReady();
-        glU?.debugMacAppIsStartingFullscreen();
+        Fullscreen?.debugMacAppIsStartingFullscreen();
         document.body.parentElement.style.backgroundColor = 'transparent';
       } else {
         let e = this._getTsApisForWasm();
@@ -5325,7 +5325,7 @@ let lX = class e extends sP(sN(sR)) {
       _$$W_();
       _$$F4(dn);
     });
-    this._hasSelection = () => !!Ez5 && !Ez5.editorState().selectionEmpty?.getCopy();
+    this._hasSelection = () => !!AppStateTsApi && !AppStateTsApi.editorState().selectionEmpty?.getCopy();
     this._currentFileThumbnail = () => {
       let e = bv(this._store?.getState());
       return e?.thumbnailGuid;
@@ -5338,13 +5338,13 @@ let lX = class e extends sP(sN(sR)) {
     };
     this.updateSelectionProperties = (e, t = {}) => {
       let i = t.shouldCommit ?? zk.YES;
-      let n = t.overwrite ?? WXh.ALWAYS;
-      let r = t.editScopeType ?? zkO.USER;
+      let n = t.overwrite ?? VisibilityCondition.ALWAYS;
+      let r = t.editScopeType ?? SourceType.USER;
       T8(e, this._state.mirror.selectedStyleProperties, r, i, n);
     };
     this.nullCurrentSelectedProperty = {
       currentSelectedProperty: {
-        type: rrT.NONE,
+        type: NodePropertyCategory.NONE,
         indices: []
       }
     };
@@ -5352,8 +5352,8 @@ let lX = class e extends sP(sN(sR)) {
       gX(e);
     };
     this.resetLoadedFigFile = () => {
-      hMR && hMR?.resetLocalMax();
-      _W && _W.resetOOMState();
+      CorePerfInfo && CorePerfInfo?.resetLocalMax();
+      userValue && userValue.resetOOMState();
       this._figFileLoadPromise = new Promise(e => {
         this._figFileLoadPromiseResolve = e;
       });
@@ -5372,7 +5372,7 @@ let lX = class e extends sP(sN(sR)) {
       return null;
     };
     this.triggerActionEnum = (e, t) => {
-      if (e === rcl.ENTER_LAYOUT_MODE) {
+      if (e === Command.ENTER_LAYOUT_MODE) {
         let e = this._store.getState().selectedView;
         this._store.dispatch(_$$sf({
           ...e,
@@ -5380,10 +5380,10 @@ let lX = class e extends sP(sN(sR)) {
         }));
       }
       if (t != null && typeof t != 'object') throw new Error(`Invalid payload for action ${e}`);
-      glU?.triggerActionEnum(e, t);
+      Fullscreen?.triggerActionEnum(e, t);
     };
     this.triggerActionEnumInUserEditScope = (e, t) => {
-      l7.user(rcl[e], () => this.triggerActionEnum(e, t));
+      permissionScopeHandler.user(Command[e], () => this.triggerActionEnum(e, t));
     };
     this.triggerAction = (e, t) => {
       if (e === 'enter-layout-mode') {
@@ -5394,14 +5394,14 @@ let lX = class e extends sP(sN(sR)) {
         }));
       }
       if (t != null && typeof t != 'object') throw new Error(`Invalid payload for action ${e}`);
-      glU?.triggerAction(e, t);
+      Fullscreen?.triggerAction(e, t);
     };
     this.triggerActionInUserEditScope = (e, t) => {
-      l7.user(e, () => this.triggerAction(e, t));
+      permissionScopeHandler.user(e, () => this.triggerAction(e, t));
     };
     this.commit = () => {
-      if (!glU) throw new Error('Fullscreen is not available');
-      return glU.commit();
+      if (!Fullscreen) throw new Error('Fullscreen is not available');
+      return Fullscreen.commit();
     };
     this.getCurrentFileName = () => this._state.openFile?.name || 'Untitled';
     this.isCopyExportRestricted = () => this._state.openFile != null && Pe(this._state.openFile);
@@ -5415,7 +5415,7 @@ let lX = class e extends sP(sN(sR)) {
     };
     this._viewportQueryParamValue = '';
     this.hasUnsavedChanges = () => !!(this._state.saveStatus && this._state.saveStatus.hasUnsavedChanges);
-    this.shouldSuppressUnsavedChangesUI = () => !!(getFeatureFlags().suppress_unsaved_changes_ui && this._state.saveStatus && this._state.saveStatus.tabCloseText === E63.SUPPRESS_UNSAVED_CHANGES_UI);
+    this.shouldSuppressUnsavedChangesUI = () => !!(getFeatureFlags().suppress_unsaved_changes_ui && this._state.saveStatus && this._state.saveStatus.tabCloseText === SaveConnectionIssues.SUPPRESS_UNSAVED_CHANGES_UI);
     this.dispatch = (...e) => {
       if (!this._store) throw new Error('Trying to dispatch before we\'ve been initialized');
       this._store.dispatch(...e);
@@ -5432,7 +5432,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       let t = getI18nString('autosave.unable_to_leave_document.unsaved_changes_save_in_background');
       !1 === navigator.onLine && (t = getI18nString('autosave.unable_to_leave_document.pending_changes'));
-      this.dispatch(_$$to({
+      this.dispatch(showModalHandler({
         type: _$$v2,
         data: {
           message: t
@@ -5440,14 +5440,14 @@ let lX = class e extends sP(sN(sR)) {
       }));
     };
     this.restoreSoftDeletedNode = e => {
-      glU?.restoreSoftDeletedNode(e);
+      Fullscreen?.restoreSoftDeletedNode(e);
     };
     this.handleUpgradeRefresh = () => {
       _$$Ay2.reload('Multiplayer got handleUpgradeRefresh');
     };
     this._writeFilesQueue = [];
     this.toggleMenu = (e, t, i) => {
-      if (e === m7W.SEARCH) {
+      if (e === SettingsAction.SEARCH) {
         Jf(this._state.dropdownShown) ? jD(this.dispatch, this._state.dropdownShown, {
           forceClose: t === 'toolbar'
         }) : $I({
@@ -5458,12 +5458,12 @@ let lX = class e extends sP(sN(sR)) {
         });
         return;
       }
-      if (e === m7W.PREFERENCES) {
+      if (e === SettingsAction.PREFERENCES) {
         if (TY(this._state.dropdownShown)) {
           this.dispatch(ho({
             type: _$$pi,
             data: {
-              selectionToUpdate: m7W.PREFERENCES
+              selectionToUpdate: SettingsAction.PREFERENCES
             }
           }));
         } else {
@@ -5479,12 +5479,12 @@ let lX = class e extends sP(sN(sR)) {
                 width: t,
                 height: t
               },
-              togglePreferences: e === m7W.PREFERENCES
+              togglePreferences: e === SettingsAction.PREFERENCES
             },
             hasOwnEscKeyHandler: !0
           }));
         }
-      } else if (e === m7W.HIDE_UI) {
+      } else if (e === SettingsAction.HIDE_UI) {
         let {
           selectedView,
           mirror
@@ -5534,7 +5534,7 @@ let lX = class e extends sP(sN(sR)) {
         trackingData: {
           source: 'fullscreen_action_make_prototype'
         }
-      }) : e || Y5.triggerAction('end-magic-link');
+      }) : e || fullscreenValue.triggerAction('end-magic-link');
     };
     this.isMagicLinkDone = () => atomStoreManager.get(d_);
     this.isMagicLinkDoneToastShowing = () => atomStoreManager.get(_$$xP);
@@ -5600,7 +5600,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showFragmentSearchSuggestion() {
     let e = this._store.getState().selectedView;
-    e && e.view === 'fullscreen' && e.editorType === FEditorType.Design && Ez5?.uiState().isUI3 && getFeatureFlags().fragment_search_selection_suggest && _$$iP(JT.FIND_INSPIRATION, {
+    e && e.view === 'fullscreen' && e.editorType === FEditorType.Design && AppStateTsApi?.uiState().isUI3 && getFeatureFlags().fragment_search_selection_suggest && _$$iP(JT.FIND_INSPIRATION, {
       fragmentSearchSource: G4.ACTIONS_SUGGESTION
     });
   }
@@ -5662,7 +5662,7 @@ let lX = class e extends sP(sN(sR)) {
     let i = t?.thumbnailInfo;
     i?.nodeID === e?.guid ? t?.clearThumbnailInfo() : t?.setThumbnailInfo({
       nodeID: e?.guid,
-      thumbnailVersion: AD
+      thumbnailVersion: defaultSessionLocalIDString
     });
   }
   setFigmascopeSelectedGuidCallback(e) {
@@ -5673,7 +5673,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   closeManageMemoryModal() {
     let e = this._store.getState().modalShown;
-    e && e.type === gG.type && this._store.dispatch(AS());
+    e && e.type === gG.type && this._store.dispatch(hideModalHandler());
   }
   hasDesktopApp() {
     return this._isDesktopAppRunning;
@@ -5699,7 +5699,7 @@ let lX = class e extends sP(sN(sR)) {
         });
       });
     } else {
-      e === 'get-desktop-app' && (BrowserInfo.mac ? this.navigateToURL('/download/desktop/mac', jkn.NEW_TAB) : BrowserInfo.windows && this.navigateToURL('/download/desktop/win', jkn.NEW_TAB));
+      e === 'get-desktop-app' && (BrowserInfo.mac ? this.navigateToURL('/download/desktop/mac', TabMode.NEW_TAB) : BrowserInfo.windows && this.navigateToURL('/download/desktop/win', TabMode.NEW_TAB));
     }
   }
   deselectProperty() {
@@ -5753,7 +5753,7 @@ let lX = class e extends sP(sN(sR)) {
     trackEventAnalytics('Export Settings Picker Opened', {
       from: 'toolbar-or-keyboard'
     });
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: _$$B,
       data: {
         pickerInfo: {
@@ -5768,32 +5768,32 @@ let lX = class e extends sP(sN(sR)) {
     return Xo(e);
   }
   openPdfExportSettingsModal() {
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: aO
     }));
   }
   openCooperExportModal() {
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: _$$Y
     }));
   }
   openShortcuts() {
-    if (Y5.isReady()) {
+    if (fullscreenValue.isReady()) {
       let e = this._store.getState().selectedView;
       e && e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard && this._store.getState().screenreader.enabled && this.dispatch(FU({
         tab: _$$J2.ACCESSIBILITY
       }));
-      Y5.triggerAction('toggle-keyboard-shortcuts');
+      fullscreenValue.triggerAction('toggle-keyboard-shortcuts');
     }
   }
   toggleBrowseAllResourcesModal() {
-    Y5.triggerAction('clear-tool', {
+    fullscreenValue.triggerAction('clear-tool', {
       source: 'menu'
     });
     let e = this._store.getState().selectedView;
     if (!(e && e.view === 'fullscreen' && (e.editorType === FEditorType.Whiteboard || e.editorType === FEditorType.Slides || e.editorType === FEditorType.Cooper))) return;
     let t = this._store.getState().universalInsertModal;
-    t.showing && t.pinned === _$$t3.NOT_PINNED ? t.pinned === _$$t3.NOT_PINNED ? (Y5.triggerAction('set-tool-default', {
+    t.showing && t.pinned === _$$t3.NOT_PINNED ? t.pinned === _$$t3.NOT_PINNED ? (fullscreenValue.triggerAction('set-tool-default', {
       source: 'menu'
     }), this.dispatch(KE())) : this.dispatch(jy({
       pinned: _$$t3.NOT_PINNED
@@ -5803,7 +5803,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   openPreferencesModal() {
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: _$$T2,
       data: {
         entrypoint: _$$r.QUICK_ACTION
@@ -5842,10 +5842,10 @@ let lX = class e extends sP(sN(sR)) {
     if (!getFeatureFlags().internal_only_debug_tools) return;
     let e = this._store.getState();
     if (e.modalShown?.type === zJ) {
-      this.dispatch(AS());
+      this.dispatch(hideModalHandler());
       return;
     }
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: _$$sF
     }));
   }
@@ -6050,7 +6050,7 @@ let lX = class e extends sP(sN(sR)) {
     } catch (e) {
       console.error('Error writing clipboard data', e);
       this.showVisualBellWithButtonLocalized('copy-as', 'visual_bell.copy_as_png_failed', {}, 'visual_bell.copy_as_png.retry', () => {
-        Y5.triggerAction('copy-as-png');
+        fullscreenValue.triggerAction('copy-as-png');
       }, !1);
       return !1;
     }
@@ -6207,7 +6207,7 @@ let lX = class e extends sP(sN(sR)) {
     this.dispatch(_$$F.enqueue({
       type: e,
       message: t,
-      onDismiss: () => Y5.triggerAction('focus-mode-exit'),
+      onDismiss: () => fullscreenValue.triggerAction('focus-mode-exit'),
       timeoutOverride: 1 / 0
     }));
   }
@@ -6219,7 +6219,7 @@ let lX = class e extends sP(sN(sR)) {
       message: t,
       button: {
         text: i,
-        action: () => Y5.triggerActionInUserEditScope('repair-breakpoint-multiedit')
+        action: () => fullscreenValue.triggerActionInUserEditScope('repair-breakpoint-multiedit')
       }
     }));
   }
@@ -6230,7 +6230,7 @@ let lX = class e extends sP(sN(sR)) {
       message: t,
       button: {
         text: n,
-        action: () => Y5.triggerActionInUserEditScope('undo')
+        action: () => fullscreenValue.triggerActionInUserEditScope('undo')
       },
       error: i
     }));
@@ -6314,7 +6314,7 @@ let lX = class e extends sP(sN(sR)) {
     if (r.length > 0 && r[0]) {
       let e = i.get(r[0]);
       if (e) {
-        let t = biQ?.isColumnwiseTable() ?? !1;
+        let t = ComponentPropsAiCPPBindings?.isColumnwiseTable() ?? !1;
         let {
           autoContentNodes
         } = xK([e], t);
@@ -6336,7 +6336,7 @@ let lX = class e extends sP(sN(sR)) {
     a.quickActionsSessionId = o;
     ds('ai_text_gen_toast_available', this._state.openFile?.key, this._state, {
       nodeId: r,
-      pageId: r[0] && glU ? glU.getPageIdFromNode(r[0]) : '',
+      pageId: r[0] && Fullscreen ? Fullscreen.getPageIdFromNode(r[0]) : '',
       source: t,
       ...a
     });
@@ -6352,16 +6352,16 @@ let lX = class e extends sP(sN(sR)) {
     if (!t) return;
     this.dismissEphemeralVisualBells();
     let i = getSingletonSceneGraph();
-    if ((Ez5?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? FAf.DESIGN) !== FAf.PROTOTYPE || atomStoreManager.get(_$$xP) && atomStoreManager.get(d_)) return;
+    if ((AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? DesignWorkspace.DESIGN) !== DesignWorkspace.PROTOTYPE || atomStoreManager.get(_$$xP) && atomStoreManager.get(d_)) return;
     let n = t?.directlySelectedNodes || [];
     let r = n.map(e => e.guid);
     if (n.length === 1) {
       let e = n[0];
       e && e.type === 'SECTION' && (r = e.childrenNodes.filter(e => e.isTopLevelFrame()).map(e => e.guid));
     }
-    let a = (r = r.filter(e => e && X3B?.isValidNodeForMagicLink(e))).flatMap(e => kh(i, e) ?? []);
+    let a = (r = r.filter(e => e && PrototypingTsApi?.isValidNodeForMagicLink(e))).flatMap(e => kh(i, e) ?? []);
     if (a.map(e => e.guid).length === 0) return;
-    let o = X3B?.getContextFramesForMagicLink(r) ?? [];
+    let o = PrototypingTsApi?.getContextFramesForMagicLink(r) ?? [];
     let l = 0;
     if (e === 'create_node_transition') {
       for (let e of o) {
@@ -6395,11 +6395,11 @@ let lX = class e extends sP(sN(sR)) {
     } : void 0;
     let n = function (e) {
       switch (e) {
-        case KAf.EMBED:
+        case EmbedPanelType.EMBED:
           return getI18nString('bindings.embed_paste_notice');
-        case KAf.LINK_PREVIEW:
+        case EmbedPanelType.LINK_PREVIEW:
           return getI18nString('bindings.link_preview_paste_notice');
-        case KAf.WIDGET:
+        case EmbedPanelType.WIDGET:
           {
             let e = debugState.getState()?.selectedView;
             switch (e?.editorType) {
@@ -6517,7 +6517,7 @@ let lX = class e extends sP(sN(sR)) {
       let t = e.timer.time.timeRemainingMs;
       let i = e.timer.time.lastReceivedSongTimestampMs;
       e.timer.time.isPaused || (t -= performance.now() - e.timer.time.timeOrigin, i += performance.now() - e.timer.time.timeOrigin);
-      h3O?.sendTimer(e.timer.time.totalTimeMs, t, e.timer.time.isPaused, e.timer.time.timerID, e.timer.setBy, e.timer.selectedSongID, i);
+      Multiplayer?.sendTimer(e.timer.time.totalTimeMs, t, e.timer.time.isPaused, e.timer.time.timerID, e.timer.setBy, e.timer.selectedSongID, i);
     }
   }
   setMusic(e, t, i, n, r, a) {
@@ -6537,7 +6537,7 @@ let lX = class e extends sP(sN(sR)) {
     if (e.music?.music) {
       let t = e.music.music.lastReceivedSongTimestampMs;
       e.music.music.isPaused || (t += performance.now() - e.music.music.timeOrigin);
-      h3O?.sendMusic(e.music.music.isPaused, e.music.music.musicMessageID, e.music.music.selectedSongID, t, e.music.music.isStopped);
+      Multiplayer?.sendMusic(e.music.music.isPaused, e.music.music.musicMessageID, e.music.music.selectedSongID, t, e.music.music.isStopped);
     }
   }
   activateVotingStampTool() {
@@ -6563,7 +6563,7 @@ let lX = class e extends sP(sN(sR)) {
     this.dispatch(_$$n2.set({
       message: 'Pasting',
       callback: () => {
-        glU?.handlePaste();
+        Fullscreen?.handlePaste();
       }
     }));
   }
@@ -6597,7 +6597,7 @@ let lX = class e extends sP(sN(sR)) {
           type: _$$_.MOVE_COMPONENTS_PROMPT,
           message: s ? getI18nString('design_systems.updates.to_move_pasted_styles_to_this_file_publish_a_library_update') : getI18nString('design_systems.updates.to_move_pasted_components_to_this_file_publish_a_library_update'),
           acceptCallback: () => {
-            this.dispatch(_$$to({
+            this.dispatch(showModalHandler({
               type: dD,
               data: {
                 initiallyCheckedItemIDs: n,
@@ -6622,9 +6622,9 @@ let lX = class e extends sP(sN(sR)) {
   }
   startRenamingNodes(e) {
     this.dispatch(FP({
-      tab: xae.LAYERS
+      tab: UserInterfaceElements.LAYERS
     }));
-    this.dispatch($O({
+    this.dispatch(showModal({
       type: aX.type,
       data: {
         guids: e,
@@ -6634,15 +6634,15 @@ let lX = class e extends sP(sN(sR)) {
   }
   startRenamingPage(e) {
     this.dispatch(FP({
-      tab: xae.LAYERS
+      tab: UserInterfaceElements.LAYERS
     }));
     atomStoreManager.set(_$$l3, e);
   }
   startRenamingPages(e) {
     this.dispatch(FP({
-      tab: xae.LAYERS
+      tab: UserInterfaceElements.LAYERS
     }));
-    this.dispatch($O({
+    this.dispatch(showModal({
       type: aX.type,
       data: {
         guids: e,
@@ -6731,7 +6731,7 @@ let lX = class e extends sP(sN(sR)) {
     let d = _$$A('link-copied');
     if (n) {
       switch (t) {
-        case idw.SITE:
+        case FigmaSite.SITE:
           let c = _$$oA(n.siteMount);
           let u = c?.siteDomain?.domain;
           if (!u || _$$oA(c?.status) !== 'published') return;
@@ -6741,7 +6741,7 @@ let lX = class e extends sP(sN(sR)) {
           });
           d = getI18nString('sites.fullscreen_actions.external_url_copied');
           break;
-        case idw.FIGMA:
+        case FigmaSite.FIGMA:
           let p = _$$$A(this._state.selectedView);
           let m = Wl(this._state.selectedView);
           let h = _$$s2(this._state.selectedView);
@@ -6830,7 +6830,7 @@ let lX = class e extends sP(sN(sR)) {
       value: performance.now() / 1e3
     }, '*'), window.DebuggingHelpers && (window.DebuggingHelpers.documentIsLoaded = !0), mpGlobal.shouldConnectToMultiplayer) {
       let e = ZG();
-      let t = h3O?.currentSessionID() ?? -1;
+      let t = Multiplayer?.currentSessionID() ?? -1;
       e && !isLocalFileKey(e.fileKey) ? (t < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {
         reportErrorToSentry: !0
       }), await e.onConnect(t), await _$$xK.timeAsync('restoreAutosave', async () => {
@@ -6845,7 +6845,7 @@ let lX = class e extends sP(sN(sR)) {
         mu(e, t.id);
         let i = ZG();
         if (i && !i.session()) {
-          let e = h3O?.currentSessionID() ?? -1;
+          let e = Multiplayer?.currentSessionID() ?? -1;
           e < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {}, {
             reportAsSentryError: !0
           });
@@ -6866,14 +6866,14 @@ let lX = class e extends sP(sN(sR)) {
       }));
     });
     this._memorySpikeOnFileLoadBytes = 0;
-    P2e && (this._memorySpikeOnFileLoadBytes = hMR ? hMR.getLocalMaxUsedHeapMemory() - hMR.getTotalUsedHeapMemory() : 0);
+    FullscreenPerfInfo && (this._memorySpikeOnFileLoadBytes = CorePerfInfo ? CorePerfInfo.getLocalMaxUsedHeapMemory() - CorePerfInfo.getTotalUsedHeapMemory() : 0);
   }
   static async maybeEnterRecoveryMode(e) {
     let t = await Dz(e);
     let i = e.getState().selectedView;
-    t?.canEdit ? t && i.isRecoveryMode && (Ez5?.uiState().isRecovery.set(!0), trackEventAnalytics('enter_recovery_mode', {
-      currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
-      maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
+    t?.canEdit ? t && i.isRecoveryMode && (AppStateTsApi?.uiState().isRecovery.set(!0), trackEventAnalytics('enter_recovery_mode', {
+      currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
+      maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
       fileKey: i.fileKey
     })) : e.dispatch(_$$sf({
       ...i,
@@ -6884,10 +6884,10 @@ let lX = class e extends sP(sN(sR)) {
     return dm();
   }
   setMissingFont(e, t) {
-    glU?.setMissingFontOnSelectedText(e, t);
+    Fullscreen?.setMissingFontOnSelectedText(e, t);
   }
   selectMissingFontNodes(e, t, i) {
-    glU?.selectMissingFontNodes(e, t, i);
+    Fullscreen?.selectMissingFontNodes(e, t, i);
   }
   fullscreenIsReady() {
     if (!this._fullscreenIsReady) {
@@ -6904,7 +6904,7 @@ let lX = class e extends sP(sN(sR)) {
           window.DebuggingHelpers = {};
           return;
         }
-        window.DebuggingHelpers = Ubo;
+        window.DebuggingHelpers = DebuggingHelpers;
         window.DebuggingHelpers.websocket = {
           break: _$$u2,
           unbreak: zi,
@@ -6914,15 +6914,15 @@ let lX = class e extends sP(sN(sR)) {
         window.DebuggingHelpers.setOOM = () => {
           window.dispatchEvent(new Event('oom_trigger'));
         };
-        window.DebuggingHelpers.getMemoryBreakdown = () => P2e && hMR ? {
-          imageMemory: P2e.getImageMemory(),
+        window.DebuggingHelpers.getMemoryBreakdown = () => FullscreenPerfInfo && CorePerfInfo ? {
+          imageMemory: FullscreenPerfInfo.getImageMemory(),
           wasmHeapReserved: _$$le(),
-          jsBuffers: hMR.getJsBufferMemory(),
-          rendererGpuMemory: P2e.getRendererGpuMemory(),
-          memStats: hMR.getMemStatsSummary()
+          jsBuffers: CorePerfInfo.getJsBufferMemory(),
+          rendererGpuMemory: FullscreenPerfInfo.getRendererGpuMemory(),
+          memStats: CorePerfInfo.getMemStatsSummary()
         } : {};
-        let e = Ubo.reportError;
-        let t = Ubo.simulateNullNodeAccess;
+        let e = DebuggingHelpers.reportError;
+        let t = DebuggingHelpers.simulateNullNodeAccess;
         getFeatureFlags().internal_only_debug_tools && (window.DebuggingHelpers.webReport = e => {
           _$$u(() => logError('bindings', `DebuggingHelpers report: ${e}`));
         }, window.DebuggingHelpers.cppReport = t => {
@@ -6949,7 +6949,7 @@ let lX = class e extends sP(sN(sR)) {
         if (!e) throw new Error('You must have the file open');
         ti(t, e, `offline-log-${e}.json`);
       };
-      window.figmaPerfTesting && (window.FigmaAppTimer = reactTimerGroup, window.FigmaPerfInfo = P2e, window.triggerActionForPerfTests = e => {
+      window.figmaPerfTesting && (window.FigmaAppTimer = reactTimerGroup, window.FigmaPerfInfo = FullscreenPerfInfo, window.triggerActionForPerfTests = e => {
         switch (e) {
           case 'insert-lots-of-text':
           case 'zoom-in':
@@ -6957,7 +6957,7 @@ let lX = class e extends sP(sN(sR)) {
           case 'zoom-reset':
           case 'zoom-to-fit':
           case 'zoom-to-selection':
-            Y5.triggerActionInUserEditScope(e);
+            fullscreenValue.triggerActionInUserEditScope(e);
         }
       });
       UK().enableCodegenMcpServer.getCopy() && this.enableCodegenMcpServer(!0);
@@ -7030,8 +7030,8 @@ let lX = class e extends sP(sN(sR)) {
       this._fontListLoaded = !0;
       getFeatureFlags().desktop_font_reload_on_focus && (_$$b2() || PE(Date.now() / 1e3), window.addEventListener('focus', () => {
         let e = this._store.getState().selectedView;
-        e.view === 'fullscreen' && isDesignOrIllustration(e.editorType) && M9(() => yF([jXp.LOCAL]), e => {
-          getFeatureFlags().desktop_font_reload_on_focus_ux && t8O?.resetNeedsMissingFontsCheck();
+        e.view === 'fullscreen' && isDesignOrIllustration(e.editorType) && M9(() => yF([FontSourceType.LOCAL]), e => {
+          getFeatureFlags().desktop_font_reload_on_focus_ux && FontHelpers?.resetNeedsMissingFontsCheck();
           i(this._store.dispatch, e);
         }, e => this.dispatch(_$$F.enqueue(e)));
       }));
@@ -7039,15 +7039,15 @@ let lX = class e extends sP(sN(sR)) {
       e.message === 'fetchFontList(): no results' && getFeatureFlags().ce_font_network_status_ui && MZ(this._store.dispatch, getI18nString('check_network_compatibility.error_bell.fetch_font_list.message'));
     });
     e.interfaceFontPromise != null && e.interfaceFontPromise.then(() => {
-      glU?.interfaceFontLoaded();
+      Fullscreen?.interfaceFontLoaded();
     }, e => {
       console.error('Error loading interface font', e);
     });
-    window.addEventListener('online', () => Ez5?.uiState().isOffline.set(!1));
-    window.addEventListener('offline', () => Ez5?.uiState().isOffline.set(!0));
-    vXe?.updateFontList(_$$eM);
+    window.addEventListener('online', () => AppStateTsApi?.uiState().isOffline.set(!1));
+    window.addEventListener('offline', () => AppStateTsApi?.uiState().isOffline.set(!0));
+    Fonts?.updateFontList(_$$eM);
     this.resolveReadyPromise();
-    glU?.showingProgressBar(this._state.progressBarState.mode);
+    Fullscreen?.showingProgressBar(this._state.progressBarState.mode);
   }
   setIsReady__TEST_ONLY(e) {
     e ? this.resolveReadyPromise() : this._fullscreenIsReady = !1;
@@ -7069,7 +7069,7 @@ let lX = class e extends sP(sN(sR)) {
       redirectUrl: this.generateRedirectLinkForSignedOutEdit(n['node-id'], _$$Ay2.location.hash),
       signedUpFromOpenSession: this.isInWorkshopMode()
     }));
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: _$$x,
       data: {
         headerText: this.isInWorkshopMode() ? getI18nString('bindings.create_a_figjam_account') : void 0,
@@ -7078,7 +7078,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   openSettings() {
-    this._store.getState().user && this.dispatch(_$$to({
+    this._store.getState().user && this.dispatch(showModalHandler({
       type: _$$s7,
       data: {
         tab: _$$c3.ACCOUNT
@@ -7233,7 +7233,7 @@ let lX = class e extends sP(sN(sR)) {
         });
         return;
       }
-      let i = AlE && glU ? glU.selectBrokenFixedScrollingNodesOnPage(AlE.getActiveCanvas(), t) : 0;
+      let i = documentStateTsApi && Fullscreen ? Fullscreen.selectBrokenFixedScrollingNodesOnPage(documentStateTsApi.getActiveCanvas(), t) : 0;
       if (i === 0) {
         this.dispatch(_$$F.enqueue({
           type: 'no_broken_fixed_scrolling_nodes_found',
@@ -7275,7 +7275,7 @@ let lX = class e extends sP(sN(sR)) {
     _$$g2.emit();
   }
   attemptedSketchFileDrop() {
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: i0
     }));
   }
@@ -7330,7 +7330,7 @@ let lX = class e extends sP(sN(sR)) {
     let t = this._store.getState().selectedView;
     if (t.view === 'fullscreen') {
       if (t.editorType === FEditorType.Design || t.editorType === FEditorType.Illustration) {
-        let t = e === xae.ASSETS;
+        let t = e === UserInterfaceElements.ASSETS;
         this.dispatch(FP({
           tab: e,
           persist: !0,
@@ -7339,7 +7339,7 @@ let lX = class e extends sP(sN(sR)) {
       } else {
         let i;
         i = this.dispatch;
-        Y5.triggerAction('clear-tool', {
+        fullscreenValue.triggerAction('clear-tool', {
           source: 'menu'
         });
         i(En({
@@ -7353,12 +7353,12 @@ let lX = class e extends sP(sN(sR)) {
   toggleTeamLibraryModal() {
     let e = this._store.getState().selectedView;
     if (e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard) {
-      this._store.getState().modalShown?.type === _N ? this.dispatch(Ce()) : this.dispatch(_$$to({
+      this._store.getState().modalShown?.type === _N ? this.dispatch(hideModal()) : this.dispatch(showModalHandler({
         type: Vg
       }));
       return;
     }
-    this._store.getState().modalShown?.type === cX ? this.dispatch(Ce()) : this.dispatch(_$$to({
+    this._store.getState().modalShown?.type === cX ? this.dispatch(hideModal()) : this.dispatch(showModalHandler({
       type: _$$T2,
       data: {
         entrypoint: _$$r.QUICK_ACTION
@@ -7366,7 +7366,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   toggleVariablesModal() {
-    this.dispatch(YK({
+    this.dispatch(showModalConditional({
       type: _$$y2
     }));
   }
@@ -7387,13 +7387,13 @@ let lX = class e extends sP(sN(sR)) {
         x,
         y
       } = Nh(this._state.mirror.appModel.showUi);
-      e.universalInsertModal?.showing ? this._state.mirror.appModel.showUi && e.universalInsertModal.pinned !== _$$t3.NOT_PINNED ? (Y5.triggerAction('clear-tool', {
+      e.universalInsertModal?.showing ? this._state.mirror.appModel.showUi && e.universalInsertModal.pinned !== _$$t3.NOT_PINNED ? (fullscreenValue.triggerAction('clear-tool', {
         source: 'menu'
       }), this.dispatch(jy({
         initialX: x,
         initialY: y,
         pinned: _$$t3.NOT_PINNED
-      }))) : (this.dispatch(KE()), glU?.triggerAction('set-tool-default', null)) : (trackEventAnalytics('Inserts menu opened'), Y5.triggerAction('clear-tool', {
+      }))) : (this.dispatch(KE()), Fullscreen?.triggerAction('set-tool-default', null)) : (trackEventAnalytics('Inserts menu opened'), fullscreenValue.triggerAction('clear-tool', {
         source: 'menu'
       }), this.dispatch(En({
         initialX: x,
@@ -7411,7 +7411,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showPublishDialog(e) {
     let t = () => {
-      this.dispatch(_$$to({
+      this.dispatch(showModalHandler({
         type: dD,
         data: {
           initiallyCheckedItemIDs: new Set(e),
@@ -7421,7 +7421,7 @@ let lX = class e extends sP(sN(sR)) {
     };
     let i = this._state.openFile?.teamId;
     let n = i ? this._state.teams[i] : void 0;
-    this.isInDrafts() || !w5(n) ? this.dispatch(_$$to({
+    this.isInDrafts() || !w5(n) ? this.dispatch(showModalHandler({
       type: $3,
       data: {
         team: n || null,
@@ -7442,7 +7442,7 @@ let lX = class e extends sP(sN(sR)) {
       }), this.missingFontPopoverReported = !0);
     }
     Array.isArray(e) || reportError(_$$e.TEXT_AND_VECTOR, new Error('Attempting to show missing fonts dialog when missingFonts is not an array'));
-    let a = n === vhv.CURRENT_SELECTION;
+    let a = n === PageSelectionType.CURRENT_SELECTION;
     if (!i || this._state.modalShown?.type === CM.type) {
       let i = this._store.getState();
       if (getFeatureFlags().dse_sf_pro_font && i.selectedView.view === 'fullscreen') {
@@ -7461,7 +7461,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       this.hidePicker();
       this.hideMissingFontDialog();
-      this.dispatch(_$$to({
+      this.dispatch(showModalHandler({
         type: CM,
         data: {
           isSelectionBased: a,
@@ -7502,7 +7502,7 @@ let lX = class e extends sP(sN(sR)) {
     }
   }
   hideMissingFontDialog() {
-    this._state.modalShown?.type === CM.type && this.dispatch(AS());
+    this._state.modalShown?.type === CM.type && this.dispatch(hideModalHandler());
   }
   afterFontsLoaded() {
     xL && xL();
@@ -7546,11 +7546,11 @@ let lX = class e extends sP(sN(sR)) {
   }
   async createSavepoint(e, t) {
     let i = this.openFileKey();
-    i && (await _$$J(i, e, t, this.dispatch));
+    i && (await createSavepoint(i, e, t, this.dispatch));
     return !0;
   }
   showSavepointModal() {
-    this.dispatch(_$$to({
+    this.dispatch(showModalHandler({
       type: _$$y3,
       data: {}
     }));
@@ -7559,7 +7559,7 @@ let lX = class e extends sP(sN(sR)) {
     alert(e);
   }
   toggleHistoryMode() {
-    this._state.mirror.appModel.topLevelMode === lyf.HISTORY ? this.dispatch(Eg()) : this.dispatch(_b());
+    this._state.mirror.appModel.topLevelMode === ViewType.HISTORY ? this.dispatch(Eg()) : this.dispatch(_b());
   }
   showViewChangesNotification(e) {
     let t = this._store.getState();
@@ -7585,7 +7585,7 @@ let lX = class e extends sP(sN(sR)) {
           return;
         }
       }
-      t === jkn.CURRENT_TAB ? location.href = e : _$$Ay2.redirect(e, '_blank');
+      t === TabMode.CURRENT_TAB ? location.href = e : _$$Ay2.redirect(e, '_blank');
     }
   }
   trimName(e, t) {
@@ -7619,7 +7619,7 @@ let lX = class e extends sP(sN(sR)) {
           _$$lH2(e.appModel.pagesList) ? (o = {
             type: _$$F3.NOT_LOADED,
             text: getI18nString('bindings.hyperlink_popup_link_to_unloaded_from_in_this_file')
-          }, IL(nodeIdInThisFile, dPJ.HYPERLINK_PRELOAD)) : o = {
+          }, IL(nodeIdInThisFile, AutosaveEventType.HYPERLINK_PRELOAD)) : o = {
             type: _$$F3.MISSING,
             text: getI18nString('bindings.hyperlink_popup_link_to_deleted_object')
           };
@@ -7672,7 +7672,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   handleUserClickOnHyperlink(e, t) {
-    t === PHu.COPY_TO_CLIPBOARD && e.startsWith('mailto:') || e.startsWith('tel:') ? UA(this.dispatch, e, 'HyperlinkCanvas') : this._store?.dispatch(RK({
+    t === EmailAction.COPY_TO_CLIPBOARD && e.startsWith('mailto:') || e.startsWith('tel:') ? UA(this.dispatch, e, 'HyperlinkCanvas') : this._store?.dispatch(RK({
       rawInput: e
     }));
   }
@@ -7706,10 +7706,10 @@ let lX = class e extends sP(sN(sR)) {
     _$$Ay2.unsafeRedirect('https://www.youtube.com/figmadesign', '_blank');
   }
   keyboardWillShow() {
-    glU?.keyboardWillShow();
+    Fullscreen?.keyboardWillShow();
   }
   keyboardWillShowWithHeight(e) {
-    glU?.keyboardWillShowWithHeight(e);
+    Fullscreen?.keyboardWillShowWithHeight(e);
   }
   getDefaultOnOTFeatures() {
     return _$$G3.OpenTypeFeatureDefaultOn;
@@ -7792,7 +7792,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   focusPrototypeStartingPointPanelToEditName() {
-    NT(FAf.PROTOTYPE);
+    NT(DesignWorkspace.PROTOTYPE);
     this.fromFullscreen.trigger('focusPrototypeStartingPointPanelToEditName', {});
   }
   handleZoomActionTriggeredToSetOnboardingFlag() {
@@ -7827,7 +7827,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   parseHTMLStringIntoLineDirectionalities(e, t, i) {
     let n = this._parseHTMLLines(e);
-    glU?.applyJSONDataAsLineDataToSelection(n, t, i);
+    Fullscreen?.applyJSONDataAsLineDataToSelection(n, t, i);
     return !0;
   }
   _parseHTMLLines(e) {
@@ -7895,8 +7895,8 @@ let lX = class e extends sP(sN(sR)) {
       message: getI18nString('whiteboard.csv.importing_csv'),
       showLoadingSpinner: !1,
       callback: () => {
-        l7.user('whiteboard.import-csv', () => {
-          glU?.createTableNodesFromCsvData(e, t);
+        permissionScopeHandler.user('whiteboard.import-csv', () => {
+          Fullscreen?.createTableNodesFromCsvData(e, t);
         });
       }
     })), !0);
@@ -7943,11 +7943,11 @@ let lX = class e extends sP(sN(sR)) {
         if (t.match((e.startsWith('^') ? '' : '^(?:www.)?') + e)) return !0;
       }
       return !1;
-    }(e) ? !!Ik(e) && (Y5.triggerActionInUserEditScope('insert-interactive-element-into-active-slide', {
+    }(e) ? !!Ik(e) && (fullscreenValue.triggerActionInUserEditScope('insert-interactive-element-into-active-slide', {
       type: 'EMBED',
       url: e,
       canvasFallbackEnabled: !0
-    }), !0) : (Y5.triggerActionInUserEditScope('insert-interactive-element-into-active-slide', {
+    }), !0) : (fullscreenValue.triggerActionInUserEditScope('insert-interactive-element-into-active-slide', {
       type: 'YOUTUBE',
       url: e,
       canvasFallbackEnabled: !0
@@ -8011,7 +8011,7 @@ let lX = class e extends sP(sN(sR)) {
     let i = e[0];
     _$$ni(i, t);
     let n = debugState.dispatch;
-    debugState.getState().modalShown?.type !== rx.type && n(_$$to({
+    debugState.getState().modalShown?.type !== rx.type && n(showModalHandler({
       type: rx
     }));
   }
@@ -8019,16 +8019,16 @@ let lX = class e extends sP(sN(sR)) {
     let t;
     let i = Object.keys(this._store.getState().mirror.sceneGraphSelection);
     switch (e) {
-      case b3I.PNG:
+      case ImageFormat.PNG:
         t = hV.CopyAsPNG;
         break;
-      case b3I.SVG:
+      case ImageFormat.SVG:
         t = hV.CopyAsSVG;
         break;
-      case b3I.RASTERIZE:
+      case ImageFormat.RASTERIZE:
         t = hV.RasterizeSelection;
     }
-    _$$Dc(t, debugState.getState().saveAsState, this.dispatch, () => e === b3I.RASTERIZE ? l7.user('rasterize', () => glU?.completeExportAction(e)) : glU?.completeExportAction(e), i, 'copy for export');
+    _$$Dc(t, debugState.getState().saveAsState, this.dispatch, () => e === ImageFormat.RASTERIZE ? permissionScopeHandler.user('rasterize', () => Fullscreen?.completeExportAction(e)) : Fullscreen?.completeExportAction(e), i, 'copy for export');
   }
   sendEventToWebEventListener(e) {
     YQ({
@@ -8073,7 +8073,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   changeDocumentColorProfile(e, t) {
     let i = this._store.getState().selectedView;
-    (i && i.view === 'fullscreen' && isDesignOrIllustration(i.editorType) || this._state.openFile?.canEdit) && e !== t && (e === ywP.LEGACY ? r6(this.dispatch, e, t, 'assign', this._state.openFile?.key) : this.dispatch(_$$to({
+    (i && i.view === 'fullscreen' && isDesignOrIllustration(i.editorType) || this._state.openFile?.canEdit) && e !== t && (e === ColorProfileEnum.LEGACY ? r6(this.dispatch, e, t, 'assign', this._state.openFile?.key) : this.dispatch(showModalHandler({
       type: r7,
       data: {
         newDocumentColorProfile: t
@@ -8196,7 +8196,7 @@ let lX = class e extends sP(sN(sR)) {
           source: 'fullscreen-action'
         }),
         beforeModuleOpen: () => {
-          let e = ruz?.getNodeImagePairsForEdit() ?? [];
+          let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
           _$$B3(JT.REMOVE_BACKGROUND);
           Ag(JT.REMOVE_BACKGROUND, _$$J4, {
             source: 'fullscreen-action',
@@ -8220,7 +8220,7 @@ let lX = class e extends sP(sN(sR)) {
           source: t
         }),
         beforeModuleOpen: () => {
-          let i = e ?? ruz?.getNodeImagePairsForEdit() ?? [];
+          let i = e ?? ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
           _$$B3(JT.UPSCALE_IMAGE);
           Ag(JT.UPSCALE_IMAGE, _$$r2, {
             targets: i,
@@ -8323,13 +8323,13 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   setSitesViewFile() {
-    _$$oz() && (atomStoreManager.set(_$$s9, Nfd.FILE), this.closeLeftRailOverlay());
+    _$$oz() && (atomStoreManager.set(_$$s9, PanelType.FILE), this.closeLeftRailOverlay());
   }
   setSitesViewCode() {
-    _$$oz() && (atomStoreManager.set(_$$s9, Nfd.CODE), this.closeLeftRailOverlay());
+    _$$oz() && (atomStoreManager.set(_$$s9, PanelType.CODE), this.closeLeftRailOverlay());
   }
   setSitesViewCms() {
-    _$$oz() && (atomStoreManager.set(_$$s9, Nfd.DAKOTA), this.closeLeftRailOverlay());
+    _$$oz() && (atomStoreManager.set(_$$s9, PanelType.DAKOTA), this.closeLeftRailOverlay());
   }
   closeLeftRailOverlay() {
     atomStoreManager.set(Nl, void 0);
@@ -8354,7 +8354,7 @@ let lX = class e extends sP(sN(sR)) {
       },
       existingOpenModalType: this._state.modalShown?.type
     };
-    getFeatureFlags().dse_slots && (n.existingOpenModalType === iN.type && n.dispatch(ES(iN)), n.dispatch(_$$to({
+    getFeatureFlags().dse_slots && (n.existingOpenModalType === iN.type && n.dispatch(hideSpecificModal(iN)), n.dispatch(showModalHandler({
       type: iN,
       showModalsBeneath: !0,
       data: {

@@ -3,7 +3,7 @@ import { useCallback, useMemo, createContext, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import d from "classnames";
 import { jB, My } from "../vendor/46587";
 import { tH, H4 } from "../905/751457";
@@ -18,9 +18,9 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { je } from "../figma_app/155728";
 import { eT } from "../figma_app/617506";
 import { ON, gs } from "../figma_app/31103";
-import { AS, $O } from "../905/156213";
+import { hideModalHandler, showModal } from "../905/156213";
 import { t8, G6 as _$$G, hg, u as _$$u } from "../figma_app/852050";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Cj } from "../figma_app/151869";
 import { Hr } from "../figma_app/394327";
 import { wG } from "../905/331989";
@@ -118,11 +118,11 @@ function D({
     }, e.variableSetId))
   });
 }
-let L = Ju(function (e) {
+let L = registerModal(function (e) {
   eT();
   let t = useDispatch();
   let i = useCallback(() => {
-    t(AS());
+    t(hideModalHandler());
   }, [t]);
   let o = _$$u(e?.vars?.ids?.[0]);
   let l = o ? Hr(o.resolvedType) : void 0;
@@ -168,12 +168,12 @@ let L = Ju(function (e) {
   });
 }, W8);
 let U = parsePxNumber(ZGX);
-let B = Ju(function (e) {
+let B = registerModal(function (e) {
   eT();
   let t = je();
   let i = useDispatch();
   let o = useCallback(() => {
-    i(AS());
+    i(hideModalHandler());
   }, [i]);
   return "loading" === t.status ? null : jsx(tH, {
     boundaryKey: "varDetails_modal",
@@ -341,7 +341,7 @@ function ee({
         variableIdForDetailsPanel: t
       }));else {
         let e = cn(ref.current, iB + wR);
-        d($O({
+        d(showModal({
           type: B.type,
           data: {
             position: e,
@@ -411,10 +411,10 @@ function et({
         _$$T() ? f(sf({
           ...h,
           styleForDetailsPanel: void 0
-        })) : f(AS());
+        })) : f(hideModalHandler());
         return;
       }
-      if (glU?.selectStyleByGuid(S), _$$T()) f(sf({
+      if (Fullscreen?.selectStyleByGuid(S), _$$T()) f(sf({
         ...h,
         styleForDetailsPanel: {
           styleId: t,
@@ -422,9 +422,9 @@ function et({
           styleType: style_type
         }
       }));else {
-        A && f(AS());
+        A && f(hideModalHandler());
         let e = cn(ref.current, b6 + wR);
-        f($O({
+        f(showModal({
           type: vl,
           data: {
             styleId: t,
@@ -474,7 +474,7 @@ function ei({
   let u = useCallback(() => {
     if (!ref?.current || !d?.current) return;
     let e = cn(ref.current, Gw + wR);
-    i($O({
+    i(showModal({
       type: L.type,
       data: {
         vars: t,

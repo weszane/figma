@@ -12,7 +12,7 @@ import { f as _$$f } from "../905/809171";
 import { P as _$$P } from "../figma_app/178683";
 import { t as _$$t } from "../figma_app/700609";
 import { V } from "../905/291719";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { N } from "../figma_app/176280";
 import { I as _$$I } from "../figma_app/131348";
@@ -42,14 +42,14 @@ let u = memo(function (e) {
 });
 export let $$N0 = {
   SELECT: {
-    toolId: NLJ.SELECT,
+    toolId: DesignGraphElements.SELECT,
     getText: () => getI18nString("fullscreen_actions.set-tool-default-desc-figjam"),
     icon: jsx(H, {}),
     smallIcon: jsx(_$$y, {}),
     recordingKey: hj.SELECT
   },
   HAND: {
-    toolId: NLJ.HAND,
+    toolId: DesignGraphElements.HAND,
     getText: () => getI18nString("fullscreen_actions.set-tool-hand"),
     icon: jsx(t, {}),
     smallIcon: jsx(O, {}),
@@ -57,45 +57,45 @@ export let $$N0 = {
     onboardingKey: _$$N
   },
   STICKY: {
-    toolId: NLJ.STICKY,
+    toolId: DesignGraphElements.STICKY,
     getText: () => getI18nString("fullscreen_actions.set-tool-sticky"),
     recordingKey: hj.STICKY,
     onboardingKey: s2
   },
   SHAPE_COLLAGE: {
-    toolId: NLJ.SHAPE_WHITEBOARD_SQUARE,
+    toolId: DesignGraphElements.SHAPE_WHITEBOARD_SQUARE,
     getText: () => getI18nString("whiteboard.delightful_toolbar.shapes_and_connectors_label"),
     recordingKey: hj.SHAPES,
     onboardingKey: BC
   },
   TEXT: {
-    toolId: NLJ.TYPE,
+    toolId: DesignGraphElements.TYPE,
     getText: () => getI18nString("fullscreen_actions.set-tool-type"),
     icon: jsx(B, {}),
     recordingKey: hj.TEXT
   },
   SECTION: {
-    toolId: NLJ.SECTION,
+    toolId: DesignGraphElements.SECTION,
     getText: () => getI18nString("fullscreen_actions.set-tool-section"),
     icon: jsx(P, {}),
     recordingKey: hj.SECTION,
     onboardingKey: pN
   },
   TABLE: {
-    toolId: NLJ.TABLE,
+    toolId: DesignGraphElements.TABLE,
     getText: () => getI18nString("fullscreen_actions.set-tool-table"),
     icon: jsx(_$$s, {}),
     recordingKey: hj.TABLE
   },
   STAMP: {
-    toolId: NLJ.STAMP,
+    toolId: DesignGraphElements.STAMP,
     getText: () => getI18nString("fullscreen_actions.set-tool-stamp"),
     icon: jsx(u, {}),
     recordingKey: hj.STAMP,
     onboardingKey: E$
   },
   COMMENTS: {
-    toolId: NLJ.COMMENTS,
+    toolId: DesignGraphElements.COMMENTS,
     getText: e => e?.numUnreadComments != null && e.numUnreadComments > 0 ? getI18nString("fullscreen.accessibility.view_comments_with_unreads") : getI18nString("fullscreen.accessibility.view_comments"),
     getIcon: e => e?.numUnreadComments != null && e?.numUnreadComments > 0 ? jsx(X, {}) : jsx(_$$f, {}),
     recordingKey: hj.COMMENT
@@ -140,7 +140,7 @@ export function $$A2({
     onActivateTool: e => {
       e === _$$y2 ? handleToolAction({
         type: fo.TOGGLE_ACTIONS
-      }) : e === NLJ.COMMENTS ? handleToolAction({
+      }) : e === DesignGraphElements.COMMENTS ? handleToolAction({
         type: fo.TOGGLE_COMMENTS
       }) : handleToolAction({
         type: fo.ACTIVATE_TOOL,

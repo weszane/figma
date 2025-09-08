@@ -1,4 +1,4 @@
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { z3, r1 } from "../905/355291";
 import { yJ } from "../figma_app/24841";
 let s = {
@@ -31,7 +31,7 @@ export function $$c0(e = {}, t) {
     ...e,
     loading: !0,
     currentError: null
-  } : Ce.matches(t) ? {
+  } : hideModal.matches(t) ? {
     ...e,
     loading: !1,
     currentError: null

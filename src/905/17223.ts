@@ -4,7 +4,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Uz } from "../905/63728";
 import { GG } from "../905/511649";
 import { getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { tf } from "../figma_app/831799";
 import { $ } from "../905/355607";
 import { Nk, J_ } from "../905/871493";
@@ -55,7 +55,7 @@ let $$g2 = function (e) {
   return jsx($$h1, {
     ...e,
     onClick: () => {
-      e.dispatch(Lo());
+      e.dispatch(popModalStack());
       e.onClose?.();
     }
   });

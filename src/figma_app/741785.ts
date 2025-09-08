@@ -2,12 +2,12 @@ import _require from "../37/800037";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { createContext, useState, useCallback, useEffect, useContext, useMemo, useRef } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { Z_n, JTp, rXF } from "../figma_app/763686";
+import { VariableDataType, OperationType, VariableResolvedDataType } from "../figma_app/763686";
 import { sH } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import u from "../vendor/737647";
-import { kf } from "../905/992467";
+import { setupLazyComponentFactory } from "../905/992467";
 import { Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
@@ -18,7 +18,7 @@ import { q as _$$q } from "../905/417424";
 import { A as _$$A } from "../905/713173";
 import { d as _$$d } from "../905/954754";
 import { o as _$$o } from "../905/609215";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { u as _$$u, G6 } from "../figma_app/852050";
 import { c as _$$c } from "../905/534105";
 import { J } from "../905/225412";
@@ -39,7 +39,7 @@ var p = u;
 let $$B1 = createContext({
   autoCloseOnScroll: !0
 });
-let G = kf("lazy_search_expression_builder", {
+let G = setupLazyComponentFactory("lazy_search_expression_builder", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await _require).ExpressionBuilderSearch
@@ -62,9 +62,9 @@ export function $$V0({
   variantProperty: b
 }) {
   let I = !1;
-  gl(t) && (t = void 0, I = !0);
+  isInvalidValue(t) && (t = void 0, I = !0);
   t = IQ(t, b);
-  t?.type === Z_n.EXPRESSION && t?.value.expressionFunction === JTp.STRINGIFY && (t = t.value.expressionArguments[0]);
+  t?.type === VariableDataType.EXPRESSION && t?.value.expressionFunction === OperationType.STRINGIFY && (t = t.value.expressionArguments[0]);
   let [A, x] = useState(null);
   let N = useCallback(e => {
     null !== e && x(e);
@@ -239,7 +239,7 @@ export function $$z2({
   let A = I && b === _$$P.LEFT;
   let x = I && b === _$$P.RIGHT;
   let O = useMemo(() => e ? _$$A(e, new _$$o(!0, !0)).replace(/\(/g, " ( ").replace(/\)/g, " ) ").split(/\s+(?=(?:(?:[^"]*"){2})*[^"]*$)(?![^{]*})(?![^[]*])/) : [], [e]);
-  if (e && hS(e) && e?.resolvedType === rXF.COLOR) return jsx(J, {
+  if (e && isValidValue(e) && e?.resolvedType === VariableResolvedDataType.COLOR) return jsx(J, {
     color: e.value
   });
   let R = 0 === O.length;

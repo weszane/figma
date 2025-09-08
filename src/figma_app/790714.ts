@@ -1,4 +1,4 @@
-import { JT } from "../figma_app/300692";
+import { canRunPlugin } from "../figma_app/300692";
 let i = null;
 export function $$a0(e) {
   i = e;
@@ -7,7 +7,7 @@ export function $$s1() {
   return i;
 }
 export function $$o2() {
-  i && !JT({
+  i && !canRunPlugin({
     plugin: i.plugin
   }).canRun && (i = null);
 }

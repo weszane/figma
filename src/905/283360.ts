@@ -1,5 +1,5 @@
 import { D2 } from "../905/528903";
-import { mHF, rXF } from "../figma_app/763686";
+import { LinterCppBindings, VariableResolvedDataType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
 import { oy } from "../figma_app/964367";
@@ -12,8 +12,8 @@ import { Hr } from "../figma_app/394327";
 import { cQ } from "../figma_app/225126";
 export async function $$g0(e, t, i, n, s, o, l) {
   if (0 === t.length) return [];
-  let d = mHF?.getVariableConsumptionForDocument() ?? new Map();
-  let m = mHF?.getVariableConsumptionForHighestNodeContainer(e.guid) ?? new Map();
+  let d = LinterCppBindings?.getVariableConsumptionForDocument() ?? new Map();
+  let m = LinterCppBindings?.getVariableConsumptionForHighestNodeContainer(e.guid) ?? new Map();
   let g = {
     entry_point: "linter",
     open_file_key: atomStoreManager.get(ze) ?? "",
@@ -63,7 +63,7 @@ export async function $$f1(e, t, i) {
       let i = t.value;
       return {
         name: e.name,
-        type: Hr(rXF.COLOR),
+        type: Hr(VariableResolvedDataType.COLOR),
         value: colorToHex(i, i.a)
       };
     }),

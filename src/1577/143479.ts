@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
@@ -50,7 +50,7 @@ export function $$R1(e) {
       fileKey: E?.key,
       eventName: "Notification Settings Button Clicked"
     });
-    R(to({
+    R(showModalHandler({
       type: _$$s,
       data: {
         tab: _$$c.NOTIFICATIONS

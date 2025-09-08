@@ -8,7 +8,7 @@ import { Vm } from "../figma_app/427318";
 import { aI } from "../figma_app/558929";
 import { iZ } from "../905/372672";
 import { px, S2 } from "../figma_app/465071";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
 import { C as _$$C } from "../figma_app/198698";
 import { om, x1 } from "../figma_app/465413";
@@ -19,7 +19,7 @@ export function $$f0(e) {
   let i = useDispatch();
   let [f, b] = useState(!0);
   let v = e.resource;
-  let j = uF(v);
+  let j = getPluginVersion(v);
   let w = px().unwrapOr(null);
   let E = S2().unwrapOr(null);
   let L = _$$o(w, E, j, FEditorType.Whiteboard);

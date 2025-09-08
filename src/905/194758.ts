@@ -6,7 +6,7 @@ import { d as _$$d } from "../905/976845";
 import { $ } from "../905/411599";
 import { X } from "../905/647103";
 import { V } from "../905/900932";
-import { ruz } from "../figma_app/763686";
+import { ImageToolsBindings } from "../figma_app/763686";
 import p from "classnames";
 import { reportError } from "../905/11";
 import { a as _$$a } from "../905/29104";
@@ -27,7 +27,7 @@ export function $$C0({
 }) {
   let t = useDispatch();
   let i = BK("AI_IMAGE_TOOLS_DROPDOWN");
-  let p = useMemo(() => !!(e && ruz?.canEditSelectedImage()), [e]);
+  let p = useMemo(() => !!(e && ImageToolsBindings?.canEditSelectedImage()), [e]);
   let m = useMemo(() => [{
     displayText: getI18nString("fullscreen.properties_panel.ai_image_tools.remove_background"),
     icon: jsx(T, {
@@ -42,7 +42,7 @@ export function $$C0({
           source: "image-settings-panel"
         }),
         beforeModuleOpen: () => {
-          let e = ruz?.getNodeImagePairsForEdit() ?? [];
+          let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
           B3(JT.REMOVE_BACKGROUND);
           Ag(JT.REMOVE_BACKGROUND, J, {
             source: "image-settings-panel",
@@ -71,7 +71,7 @@ export function $$C0({
           source: "image-settings-panel"
         }),
         beforeModuleOpen: () => {
-          let e = ruz?.getNodeImagePairsForEdit() ?? [];
+          let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
           B3(JT.UPSCALE_IMAGE);
           Ag(JT.UPSCALE_IMAGE, r6, {
             source: "image-settings-panel",

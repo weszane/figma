@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { isNotNullish } from "../figma_app/95419";
-import { Egt } from "../figma_app/763686";
+import { SceneGraphHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { logError } from "../905/714362";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { dU } from "../figma_app/459717";
 import { xR, EO, l0 } from "../figma_app/536669";
 import { rH } from "../figma_app/404319";
@@ -15,7 +15,7 @@ function p(e, t, i, n, r, a) {
   return s;
 }
 function m(e) {
-  Y5.triggerAction("goto-layer", {
+  fullscreenValue.triggerAction("goto-layer", {
     args: {
       nodeId: e
     }
@@ -98,7 +98,7 @@ export function $$g0(e, t, i) {
           text: d.characters,
           absoluteTransform: l.absoluteTransform,
           dimensions: l.size,
-          pos: xR(Egt.getNodeTransformProperties(s)),
+          pos: xR(SceneGraphHelpers.getNodeTransformProperties(s)),
           hyperlink: d?.hyperlink
         };
         n.push(e);
@@ -109,7 +109,7 @@ export function $$g0(e, t, i) {
   let d = Array.from(Array(o.tableNumRows).keys());
   let p = o.size;
   let m = o.absoluteTransform;
-  let h = xR(Egt.getNodeTransformProperties(t));
+  let h = xR(SceneGraphHelpers.getNodeTransformProperties(t));
   return [jsx("div", {
     role: "rowgroup",
     children: l[0].map((e, t) => {

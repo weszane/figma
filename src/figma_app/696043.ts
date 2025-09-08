@@ -1,20 +1,20 @@
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { s as _$$s } from "../905/58247";
 import { gU, RH } from "../figma_app/147952";
 import { T } from "../905/858738";
 import { M } from "../figma_app/170366";
-import { c2, T as _$$T, Pz, Sb, t3 } from "../figma_app/300692";
+import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolveFrameworkType, loadLocalPluginManifest } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
-import { am, ho } from "../figma_app/155287";
+import { manifestErrorMessage, ManifestErrorType } from "../figma_app/155287";
 import { o8 } from "../905/622391";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
 import { Po, Zy } from "../figma_app/378195";
 let E = M();
-let $$y0 = nF(async (e, {
+let $$y0 = createOptimistThunk(async (e, {
   resourceType: t,
   localFileIdToRemove: r
 }) => {
@@ -32,14 +32,14 @@ let $$y0 = nF(async (e, {
   }, 0);
   let f = added[0] ?? existed[0];
   if (null != f) try {
-    let s = await c2(f, {
+    let s = await loadPluginManifest(f, {
       resourceType: t,
       isPublishing: !1
     });
     "unknown" === t && (t = s.containsWidget ? "widget" : "plugin");
-    let c = _$$T();
-    if (c && !s.editorType?.includes(c)) throw Error(am({
-      type: ho.VALIDATE,
+    let c = getFullscreenViewEditorType();
+    if (c && !s.editorType?.includes(c)) throw Error(manifestErrorMessage({
+      type: ManifestErrorType.VALIDATE,
       text: `The manifest editorType does not include "${c}".`
     }));
     if (trackEventAnalytics("Added new plugin", {
@@ -47,7 +47,7 @@ let $$y0 = nF(async (e, {
       pluginId: s.id,
       version: s.api,
       isWidget: "widget" === t,
-      productType: c ? Pz(c) : null,
+      productType: c ? mapToFileType(c) : null,
       isVsCode: T()
     }), e.dispatch($$b1({
       localFileId: f,
@@ -71,7 +71,7 @@ let $$y0 = nF(async (e, {
     }
     let E = s.editorType;
     E?.forEach(r => {
-      let n = Sb(r);
+      let n = resolveFrameworkType(r);
       t === bD.PLUGIN ? e.dispatch(gU({
         storeInRecentsKey: n,
         id: s.id || "",
@@ -93,16 +93,16 @@ let $$y0 = nF(async (e, {
     }));
   }
 });
-let $$b1 = nF(async (e, {
+let $$b1 = createOptimistThunk(async (e, {
   localFileId: t,
   resourceType: r
 }) => {
-  let n = await t3(t, {
+  let n = await loadLocalPluginManifest(t, {
     resourceType: r
   });
   e.dispatch(Po(n));
 });
-let $$T2 = nF((e, t) => {
+let $$T2 = createOptimistThunk((e, t) => {
   void 0 != t && (E && E.removeLocalFileExtension(t), e.dispatch(Zy(t)));
 });
 export const JZ = $$y0;

@@ -4,7 +4,7 @@ import { j } from "../905/253683";
 import { N as _$$N } from "../905/430294";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ib } from "../905/129884";
 import { V } from "../figma_app/144634";
 import { K0 } from "../figma_app/439493";
@@ -25,7 +25,7 @@ export function $$x0() {
       checked: e,
       offIcon: jsx(j, {}),
       onIcon: jsx(j, {}),
-      onChange: () => Y5.triggerActionInUserEditScope("toggle-bold"),
+      onChange: () => fullscreenValue.triggerActionInUserEditScope("toggle-bold"),
       recordingKey: "bold",
       tooltipShortcutActionKey: "toggle-bold"
     }), jsx(V, {
@@ -35,7 +35,7 @@ export function $$x0() {
       checked: t,
       offIcon: jsx(_$$N, {}),
       onIcon: jsx(_$$N, {}),
-      onChange: () => Y5.triggerActionInUserEditScope("text-toggle-strikethrough"),
+      onChange: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-strikethrough"),
       recordingKey: "strikethrough",
       tooltipShortcutActionKey: "text-toggle-strikethrough"
     })]
@@ -45,7 +45,7 @@ export function $$x0() {
       tooltip: "toggle-bold",
       tooltipType: Ib.LOOKUP,
       active: e ? "LOUD" : void 0,
-      onClick: () => Y5.triggerActionInUserEditScope("toggle-bold"),
+      onClick: () => fullscreenValue.triggerActionInUserEditScope("toggle-bold"),
       recordingKey: "bold",
       role: "switch",
       blurOnClick: !0
@@ -54,7 +54,7 @@ export function $$x0() {
       tooltip: "text-toggle-strikethrough",
       tooltipType: Ib.LOOKUP,
       active: t ? "LOUD" : void 0,
-      onClick: () => Y5.triggerActionInUserEditScope("text-toggle-strikethrough"),
+      onClick: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-strikethrough"),
       recordingKey: "strikethrough",
       role: "switch",
       blurOnClick: !0

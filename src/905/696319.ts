@@ -5,12 +5,12 @@ import { A as _$$A2 } from "../vendor/723372";
 import { mb, ql, Jq, iL, Fi, QT } from "../905/687992";
 import { S as _$$S } from "../905/823680";
 import { p as _$$p } from "../905/185998";
-import { ch, Ju, z_ } from "../905/955878";
+import { addEventlistenerWithCleanup, preventAndStopEvent, createCleanupExecutor } from "../905/955878";
 import { v as _$$v } from "../905/475481";
 import { hs, f2, WQ, T_, i_, TX } from "../905/268491";
 import { createPortal } from "../vendor/944059";
 import { sj, qE } from "../905/875826";
-import { VM } from "../905/881471";
+import { isSafari } from "../905/881471";
 import { M as _$$M } from "../905/97346";
 import { ae, pW } from "../905/117474";
 import { N as _$$N } from "../905/427996";
@@ -56,7 +56,7 @@ function A() {
     }(t.current);
     let n = null;
     let r = f2;
-    return ch(e, "wheel", a => {
+    return addEventlistenerWithCleanup(e, "wheel", a => {
       let s = i(function (e) {
         let t = -e.deltaX;
         let i = e.deltaY;
@@ -93,7 +93,7 @@ function A() {
         clearTimeout(n);
         r = WQ(r, s);
       }
-      Ju(a);
+      preventAndStopEvent(a);
       let o = {
         target: e,
         delta: r,
@@ -117,7 +117,7 @@ function y() {
   m && (m.removeAttribute(p), _(), _ = () => {});
 }
 let b = () => {};
-let x = _$$A && !!document.documentElement.requestPointerLock && !VM;
+let x = _$$A && !!document.documentElement.requestPointerLock && !isSafari;
 async function S(e) {
   let t = e.requestPointerLock();
   t && (await t);
@@ -289,8 +289,8 @@ let H = forwardRef(({
               let o = new AbortController();
               function l() {
                 a.current?.();
-                a.current = ch(document, "keydown", e => {
-                  "Escape" === e.key && (o.abort(), Ju(e));
+                a.current = addEventlistenerWithCleanup(document, "keydown", e => {
+                  "Escape" === e.key && (o.abort(), preventAndStopEvent(e));
                 }, !0);
               }
               if (s(o.signal), x) {
@@ -298,7 +298,7 @@ let H = forwardRef(({
                 S(t).then(() => {
                   e?.(2);
                   n.current?.();
-                  n.current = ch(document, "pointerlockchange", () => {
+                  n.current = addEventlistenerWithCleanup(document, "pointerlockchange", () => {
                     document.pointerLockElement !== t && o.abort();
                   });
                 }).catch(() => {
@@ -432,11 +432,11 @@ let H = forwardRef(({
           f === a && (g.current = n, f = e);
         }, [e]);
         useEffect(() => (0 === h && function () {
-          let e = z_(ch(document, "keydown", e => {
+          let e = createCleanupExecutor(addEventlistenerWithCleanup(document, "keydown", e => {
             "Alt" === e.key && A();
-          }), ch(document, "keyup", e => {
+          }), addEventlistenerWithCleanup(document, "keyup", e => {
             "Alt" === e.key && y();
-          }), ch(window, "blur", y));
+          }), addEventlistenerWithCleanup(window, "blur", y));
           b = () => {
             e();
             b = () => {};

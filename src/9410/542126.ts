@@ -7,7 +7,7 @@ import { d as _$$d } from "../905/976845";
 import { b as _$$b, bL, mc, YJ, Q$, Ov, ME } from "../figma_app/860955";
 import { z6, CU, H_ } from "../905/963340";
 import { A as _$$A } from "../905/891805";
-import { EW4 } from "../figma_app/763686";
+import { EditAction } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
@@ -78,17 +78,17 @@ function D({
   let B = useMemo(() => {
     let e = y ? [] : [jsx(y0, {
       primaryText: getI18nString("canvas_search.search"),
-      checked: L === EW4.FIND,
+      checked: L === EditAction.FIND,
       onClick: () => {
-        d(sV(EW4.FIND));
+        d(sV(EditAction.FIND));
         c.hide();
       },
       recordingKey: Pt(i, "settings.find")
     }, "find"), jsx(y0, {
       primaryText: getI18nString("canvas_search.replace"),
-      checked: L === EW4.REPLACE,
+      checked: L === EditAction.REPLACE,
       onClick: () => {
-        d(sV(EW4.REPLACE));
+        d(sV(EditAction.REPLACE));
         c.hide();
       },
       recordingKey: Pt(i, "settings", "replace")
@@ -105,7 +105,7 @@ function D({
         recordingKey: i
       }, t));
     };
-    if (L === EW4.FIND && !R && !F) {
+    if (L === EditAction.FIND && !R && !F) {
       let n = !b4.some(e => !!A[e]);
       let a = Object.values(N).reduce((e, t) => e + t, 0);
       e.push(jsx(P, {
@@ -126,7 +126,7 @@ function D({
     return e;
   }, [d, c, A, R, F, y, L, N, i]);
   useEffect(() => {
-    y && L === EW4.REPLACE && d(sV(EW4.FIND));
+    y && L === EditAction.REPLACE && d(sV(EditAction.FIND));
   }, [d, y, L]);
   let U = h.current && jsx(Jz, {
     autofocusPrevElementOnEsc: !0,
@@ -230,9 +230,9 @@ function F({
   let A = e => {
     h(DI(e));
   };
-  let L = C === EW4.FIND && i;
+  let L = C === EditAction.FIND && i;
   useEffect(() => {
-    f && C === EW4.REPLACE && h(sV(EW4.FIND));
+    f && C === EditAction.REPLACE && h(sV(EditAction.FIND));
   }, [h, f, C]);
   return jsx(_$$o, {
     eventListeners: ["onClick", "onMouseUp"],
@@ -255,7 +255,7 @@ function F({
             title: null,
             recordingKey: Pt(a, "mode_change"),
             children: [jsx(CU, {
-              value: EW4.FIND.toString(),
+              value: EditAction.FIND.toString(),
               children: jsx("span", {
                 style: {
                   display: "flex",
@@ -268,7 +268,7 @@ function F({
                 children: getI18nString("canvas_search.search")
               })
             }, "find"), jsx(CU, {
-              value: EW4.REPLACE.toString(),
+              value: EditAction.REPLACE.toString(),
               children: jsx("span", {
                 style: {
                   display: "flex",

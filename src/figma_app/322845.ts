@@ -1,4 +1,4 @@
-import { qmM, Ez5 } from "../figma_app/763686";
+import { InteractionCpp, AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
@@ -74,7 +74,7 @@ export function $$M0({
         name: t.name
       }, ...e]);
     }
-    qmM.setDefaultTool();
+    InteractionCpp.setDefaultTool();
     r(F.dequeue({
       matchTimeout: "ephemeral"
     }));
@@ -154,7 +154,7 @@ export function $$z8() {
   return useAtomWithSubscription(P);
 }
 export function $$W9(e) {
-  let t = Ez5.uiState().isUI3.getCopy();
+  let t = AppStateTsApi.uiState().isUI3.getCopy();
   let r = debugState.getState().selectedView;
   let n = JV(r);
   let a = [FEditorType.Figmake];
@@ -162,7 +162,7 @@ export function $$W9(e) {
   return !!(n && !a.includes(n) && (t || e));
 }
 export let $$K4 = n((e, t) => {
-  let r = t?.isUI3 ?? Ez5.uiState().isUI3.getCopy();
+  let r = t?.isUI3 ?? AppStateTsApi.uiState().isUI3.getCopy();
   let n = debugState.getState().selectedView;
   let a = t?.editorType ?? JV(n);
   return !!(a && (a === FEditorType.Design || a === FEditorType.Illustration || a === FEditorType.Slides) && (r || e));

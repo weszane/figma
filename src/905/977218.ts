@@ -7,14 +7,14 @@ import { XHR, XHRError } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { W0 as _$$W, Dy as _$$Dy, ky as _$$ky, NR as _$$NR, Pj as _$$Pj, r0 as _$$r, Je as _$$Je, pY as _$$pY } from "../figma_app/925970";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { FE } from "../figma_app/314264";
 import { zU } from "../figma_app/740025";
 import { N } from "../905/696711";
 import { Or, Lk, Lr, uH, j9, Rr, Rx } from "../figma_app/162807";
 import { vj as _$$vj, Ei } from "../905/574958";
 import { $W } from "../905/144933";
-let $$y28 = nF(async (e, t) => {
+let $$y28 = createOptimistThunk(async (e, t) => {
   let {
     orgId,
     searchQuery,
@@ -29,7 +29,7 @@ let $$y28 = nF(async (e, t) => {
     console.error("Failed to add search history with error: " + e.data.message);
   });
 });
-let $$b22 = nF(async (e, t) => {
+let $$b22 = createOptimistThunk(async (e, t) => {
   let {
     searchQuery,
     previousSearches
@@ -54,7 +54,7 @@ let $$b22 = nF(async (e, t) => {
     console.error("Failed to add search history with error: " + e.message);
   });
 });
-let $$v8 = nF((e, t) => {
+let $$v8 = createOptimistThunk((e, t) => {
   let i = e.getState().search.parameters;
   let n = t.searchTypeBehavior;
   delete t.searchTypeBehavior;
@@ -69,11 +69,11 @@ let $$v8 = nF((e, t) => {
     searchTypeBehavior: n
   }));
 });
-let $$I30 = nF((e, t) => {
+let $$I30 = createOptimistThunk((e, t) => {
   let i = e.getState();
   _$$vj.Session.trackLicenseGroupFilterDropdownClick(i.search, t.clickType);
 });
-let $$E27 = nF(e => {
+let $$E27 = createOptimistThunk(e => {
   null !== e.getState().search.parameters.planFilter && e.dispatch($$L0({
     parameters: {
       planFilter: null,
@@ -82,7 +82,7 @@ let $$E27 = nF(e => {
     precacheInactiveTypes: !0
   }));
 });
-let $$x17 = nF((e, t) => {
+let $$x17 = createOptimistThunk((e, t) => {
   e.getState().search.parameters.planFilter !== t.planFilter && (FE(t.planFilter, "search", void 0), e.dispatch($$L0({
     parameters: {
       ...t,
@@ -92,7 +92,7 @@ let $$x17 = nF((e, t) => {
   })));
 });
 let $$S29 = NC("SEARCH_RESET_FILE_TYPE_FILTER");
-let $$w3 = nF(e => {
+let $$w3 = createOptimistThunk(e => {
   let t = e.getState();
   null !== t.search.parameters.workspaceFilter && (_$$vj.Session.trackWorkspaceFilterChange(t.search, null), e.dispatch($$L0({
     parameters: {
@@ -101,7 +101,7 @@ let $$w3 = nF(e => {
     precacheInactiveTypes: !0
   })));
 });
-let $$C6 = nF((e, t) => {
+let $$C6 = createOptimistThunk((e, t) => {
   let i = e.getState();
   i.search.parameters.workspaceFilter !== t.workspaceFilter && (_$$vj.Session.trackWorkspaceFilterChange(i.search, t.workspaceFilter), e.dispatch($$L0({
     parameters: {
@@ -110,7 +110,7 @@ let $$C6 = nF((e, t) => {
     precacheInactiveTypes: !0
   })));
 });
-let $$T25 = nF((e, t) => {
+let $$T25 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let n = i.search.parameters.sortState;
   if (n && JSON.stringify(n) !== JSON.stringify(t.sortState)) {
@@ -133,7 +133,7 @@ let k = (e, t) => {
   i && (i.sort((e, t) => e.model.owner?.handle.localeCompare(t.model.owner?.handle ?? "") ?? 0), e.files.sortDesc && i.reverse());
 };
 let R = (e, t) => t.files.sortKey === Lk.OWNER && (e.files.sortKey !== t.files.sortKey || e.files.sortDesc !== t.files.sortDesc);
-let $$N9 = nF((e, t) => {
+let $$N9 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let n = () => {
     let n = e => e.trim().split(/\s+/);
@@ -255,7 +255,7 @@ let O = (e, t, i, n, r, a) => {
   });
 };
 let D = e => "search" === e;
-let $$L0 = nF((e, t) => {
+let $$L0 = createOptimistThunk((e, t) => {
   void 0 !== t.parameters && e.dispatch($$en13({
     ...t.parameters
   }));

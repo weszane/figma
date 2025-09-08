@@ -5,14 +5,14 @@ import { dm } from "../905/535224";
 import { nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { b } from "../905/985254";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { sx } from "../figma_app/957070";
 import { yl, DD, jE, v0, Lu, pL } from "../figma_app/639088";
 import { A } from "../4711/667326";
-export let $$_0 = Ju(function () {
+export let $$_0 = registerModal(function () {
   let e = useDispatch();
   useEffect(() => {
     e(b({
@@ -41,7 +41,7 @@ export let $$_0 = Ju(function () {
       children: [jsx(nR, {
         className: Lu,
         onClick: () => {
-          e(Ce());
+          e(hideModal());
         },
         children: renderI18nText("fullscreen.font_settings.do_this_later_in_account_settings")
       }), jsx($$, {

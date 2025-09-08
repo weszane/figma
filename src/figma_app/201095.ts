@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { z0 } from "../figma_app/492908";
+import { roundTo2Decimals } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
-import { glU } from "../figma_app/763686";
-import { nc } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { wA } from "../figma_app/167249";
 import { ZU, Wg } from "../figma_app/986347";
@@ -18,10 +18,10 @@ export function $$g1() {
   let n = useCallback(e => ({
     displayText: e.name,
     sideText: r[e.node_id] ? getI18nString("slides.properties_panel.text.style_description_font_size", {
-      fontSize: z0(r[e.node_id])
+      fontSize: roundTo2Decimals(r[e.node_id])
     }) : void 0,
-    callback: nc.user("replace-text-style", () => {
-      glU?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
+    callback: scopeAwareFunction.user("replace-text-style", () => {
+      Fullscreen?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
     }),
     recordingKey: e.name
   }), [r]);
@@ -44,12 +44,12 @@ export function $$f0() {
       return {
         type: ZU.CUSTOM_ACTION,
         customActionType: Wg.STANDARD_BUTTON,
-        onClick: nc.user("replace-text-style", () => {
-          glU?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
+        onClick: scopeAwareFunction.user("replace-text-style", () => {
+          Fullscreen?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
         }),
         rightIcon: isNullish(t) ? void 0 : jsx("span", {
           className: "x7ey041",
-          children: z0(t)
+          children: roundTo2Decimals(t)
         }),
         preventHoisting: !0,
         getTitle: () => e.name,

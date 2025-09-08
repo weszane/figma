@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import { vXe } from "../figma_app/763686";
+import { Fonts } from "../figma_app/763686";
 export function $$a0() {
   let [e, t] = useState(!1);
   let i = useRef(0);
@@ -13,10 +13,10 @@ export function $$a0() {
     fontsAreLoading: e,
     checkFontsAreLoading: useCallback(() => {
       i.current && s();
-      let e = vXe?.fontsAreLoading() ?? !1;
+      let e = Fonts?.fontsAreLoading() ?? !1;
       t(e);
       e && (i.current = setInterval(() => {
-        let e = vXe?.fontsAreLoading() ?? !1;
+        let e = Fonts?.fontsAreLoading() ?? !1;
         t(e);
         a.current = a.current + 1;
         (!e || a.current >= 600) && s();

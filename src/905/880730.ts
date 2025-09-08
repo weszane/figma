@@ -1,19 +1,17 @@
-
-
 // --- Internal bindings (initialized via LQ/initBindings) ---
-export let documentStateTsApi: any;
-export let figmaScopeBindings: any;
-export let variablesMirrorManager: any;
-export let observableValueArrayIDLSubscribedVariableSetInfoInternal: any;
-export let observableValueArrayIDLSubscribedVariableInfoInternal: any;
-export let observableValueArrayIDLLocalVariableSetInfoInternal: any;
-export let observableValueArrayIDLLocalVariableInfoInternal: any;
-export let sharedDebuggingHelpers: any;
-export let interactionTestHelpers: any;
-export let assetConsumptionBindings: any;
-export let assetBindings: any;
-export let colorTokensStateInternal: any;
-export let writableObservableValueColorTokensInternal: any;
+export let documentStateTsApi: any
+export let figmaScopeBindings: any
+export let variablesMirrorManager: any
+export let observableValueArrayIDLSubscribedVariableSetInfoInternal: any
+export let observableValueArrayIDLSubscribedVariableInfoInternal: any
+export let observableValueArrayIDLLocalVariableSetInfoInternal: any
+export let observableValueArrayIDLLocalVariableInfoInternal: any
+export let sharedDebuggingHelpers: any
+export let interactionTestHelpers: any
+export let assetConsumptionBindings: any
+export let assetBindings: any
+export let colorTokensStateInternal: any
+export let writableObservableValueColorTokensInternal: any
 // --- Enums ---
 /**
  * Enum for AppType (original: $$n20)
@@ -80,7 +78,7 @@ export enum DimensionErrorType {
 /**
  * Enum for ValueType (original: $$d17)
  */
-export enum ValueType {
+export enum VariableResolvedDataType {
   BOOLEAN = 0,
   FLOAT = 1,
   STRING = 2,
@@ -98,7 +96,7 @@ export enum ValueType {
 /**
  * Enum for ExtendedValueType (original: $$c12)
  */
-export enum ExtendedValueType {
+export enum VariableDataType {
   BOOLEAN = 0,
   FLOAT = 1,
   STRING = 2,
@@ -158,7 +156,7 @@ export enum TestType {
 /**
  * Generic handle type for observable values.
  */
-export type Handle = any; // Replace with actual handle type if available
+export type Handle = any // Replace with actual handle type if available
 
 // --- Utility function ---
 /**
@@ -176,11 +174,12 @@ function assignProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]): T {
       enumerable: true,
       configurable: true,
       writable: true,
-    });
-  } else {
-    obj[key] = value;
+    })
   }
-  return obj;
+  else {
+    obj[key] = value
+  }
+  return obj
 }
 
 // --- Observable Value Classes ---
@@ -188,9 +187,9 @@ function assignProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]): T {
  * ObservableValue_Array_IDLSubscribedVariableSetInfo_ (original: C)
  */
 export class ObservableValueArrayIDLSubscribedVariableSetInfo {
-  handle: Handle;
+  handle: Handle
   constructor(handle: Handle) {
-    assignProperty(this, "handle", handle);
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -199,17 +198,20 @@ export class ObservableValueArrayIDLSubscribedVariableSetInfo {
  */
 export class MutableObservableValueArrayIDLSubscribedVariableSetInfo extends ObservableValueArrayIDLSubscribedVariableSetInfo {
   getCopy() {
-    return observableValueArrayIDLSubscribedVariableSetInfoInternal.getCopy(this.handle);
+    return observableValueArrayIDLSubscribedVariableSetInfoInternal.getCopy(this.handle)
   }
+
   subscribeFromJs(cb: any) {
-    return observableValueArrayIDLSubscribedVariableSetInfoInternal.subscribeFromJs(this.handle, cb);
+    return observableValueArrayIDLSubscribedVariableSetInfoInternal.subscribeFromJs(this.handle, cb)
   }
+
   unsubscribeFromJs(cb: any) {
-    observableValueArrayIDLSubscribedVariableSetInfoInternal.unsubscribeFromJs(this.handle, cb);
+    observableValueArrayIDLSubscribedVariableSetInfoInternal.unsubscribeFromJs(this.handle, cb)
   }
+
   constructor(handle: Handle) {
-    super(handle);
-    assignProperty(this, "handle", handle);
+    super(handle)
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -217,9 +219,9 @@ export class MutableObservableValueArrayIDLSubscribedVariableSetInfo extends Obs
  * ObservableValue_Array_IDLSubscribedVariableInfo_ (original: k)
  */
 export class ObservableValueArrayIDLSubscribedVariableInfo {
-  handle: Handle;
+  handle: Handle
   constructor(handle: Handle) {
-    assignProperty(this, "handle", handle);
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -228,17 +230,20 @@ export class ObservableValueArrayIDLSubscribedVariableInfo {
  */
 export class MutableObservableValueArrayIDLSubscribedVariableInfo extends ObservableValueArrayIDLSubscribedVariableInfo {
   getCopy() {
-    return observableValueArrayIDLSubscribedVariableInfoInternal.getCopy(this.handle);
+    return observableValueArrayIDLSubscribedVariableInfoInternal.getCopy(this.handle)
   }
+
   subscribeFromJs(cb: any) {
-    return observableValueArrayIDLSubscribedVariableInfoInternal.subscribeFromJs(this.handle, cb);
+    return observableValueArrayIDLSubscribedVariableInfoInternal.subscribeFromJs(this.handle, cb)
   }
+
   unsubscribeFromJs(cb: any) {
-    observableValueArrayIDLSubscribedVariableInfoInternal.unsubscribeFromJs(this.handle, cb);
+    observableValueArrayIDLSubscribedVariableInfoInternal.unsubscribeFromJs(this.handle, cb)
   }
+
   constructor(handle: Handle) {
-    super(handle);
-    assignProperty(this, "handle", handle);
+    super(handle)
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -246,9 +251,9 @@ export class MutableObservableValueArrayIDLSubscribedVariableInfo extends Observ
  * ObservableValue_Array_IDLLocalVariableSetInfo_ (original: N)
  */
 export class ObservableValueArrayIDLLocalVariableSetInfo {
-  handle: Handle;
+  handle: Handle
   constructor(handle: Handle) {
-    assignProperty(this, "handle", handle);
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -257,17 +262,20 @@ export class ObservableValueArrayIDLLocalVariableSetInfo {
  */
 export class MutableObservableValueArrayIDLLocalVariableSetInfo extends ObservableValueArrayIDLLocalVariableSetInfo {
   getCopy() {
-    return observableValueArrayIDLLocalVariableSetInfoInternal.getCopy(this.handle);
+    return observableValueArrayIDLLocalVariableSetInfoInternal.getCopy(this.handle)
   }
+
   subscribeFromJs(cb: any) {
-    return observableValueArrayIDLLocalVariableSetInfoInternal.subscribeFromJs(this.handle, cb);
+    return observableValueArrayIDLLocalVariableSetInfoInternal.subscribeFromJs(this.handle, cb)
   }
+
   unsubscribeFromJs(cb: any) {
-    observableValueArrayIDLLocalVariableSetInfoInternal.unsubscribeFromJs(this.handle, cb);
+    observableValueArrayIDLLocalVariableSetInfoInternal.unsubscribeFromJs(this.handle, cb)
   }
+
   constructor(handle: Handle) {
-    super(handle);
-    assignProperty(this, "handle", handle);
+    super(handle)
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -275,9 +283,9 @@ export class MutableObservableValueArrayIDLLocalVariableSetInfo extends Observab
  * ObservableValue_Array_IDLLocalVariableInfo_ (original: O)
  */
 export class ObservableValueArrayIDLLocalVariableInfo {
-  handle: Handle;
+  handle: Handle
   constructor(handle: Handle) {
-    assignProperty(this, "handle", handle);
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -286,17 +294,20 @@ export class ObservableValueArrayIDLLocalVariableInfo {
  */
 export class MutableObservableValueArrayIDLLocalVariableInfo extends ObservableValueArrayIDLLocalVariableInfo {
   getCopy() {
-    return observableValueArrayIDLLocalVariableInfoInternal.getCopy(this.handle);
+    return observableValueArrayIDLLocalVariableInfoInternal.getCopy(this.handle)
   }
+
   subscribeFromJs(cb: any) {
-    return observableValueArrayIDLLocalVariableInfoInternal.subscribeFromJs(this.handle, cb);
+    return observableValueArrayIDLLocalVariableInfoInternal.subscribeFromJs(this.handle, cb)
   }
+
   unsubscribeFromJs(cb: any) {
-    observableValueArrayIDLLocalVariableInfoInternal.unsubscribeFromJs(this.handle, cb);
+    observableValueArrayIDLLocalVariableInfoInternal.unsubscribeFromJs(this.handle, cb)
   }
+
   constructor(handle: Handle) {
-    super(handle);
-    assignProperty(this, "handle", handle);
+    super(handle)
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -304,15 +315,17 @@ export class MutableObservableValueArrayIDLLocalVariableInfo extends ObservableV
  * ColorTokensState (original: L)
  */
 export class ColorTokensState {
-  handle: Handle;
+  handle: Handle
   get hasRunTokenSync() {
-    return colorTokensStateInternal.__getProperty_hasRunTokenSync(this.handle);
+    return colorTokensStateInternal.__getProperty_hasRunTokenSync(this.handle)
   }
+
   get currentTokens() {
-    return colorTokensStateInternal.__getProperty_currentTokens(this.handle);
+    return colorTokensStateInternal.__getProperty_currentTokens(this.handle)
   }
+
   constructor(handle: Handle) {
-    assignProperty(this, "handle", handle);
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -321,8 +334,8 @@ export class ColorTokensState {
  */
 export class MutableColorTokensState extends ColorTokensState {
   constructor(handle: Handle) {
-    super(handle);
-    assignProperty(this, "handle", handle);
+    super(handle)
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -330,9 +343,9 @@ export class MutableColorTokensState extends ColorTokensState {
  * WritableObservableValue_ColorTokens_ (original: M)
  */
 export class WritableObservableValueColorTokens {
-  handle: Handle;
+  handle: Handle
   constructor(handle: Handle) {
-    assignProperty(this, "handle", handle);
+    assignProperty(this, 'handle', handle)
   }
 }
 
@@ -341,57 +354,59 @@ export class WritableObservableValueColorTokens {
  */
 export class MutableWritableObservableValueColorTokens extends WritableObservableValueColorTokens {
   getCopy() {
-    return writableObservableValueColorTokensInternal.getCopy(this.handle);
+    return writableObservableValueColorTokensInternal.getCopy(this.handle)
   }
+
   set(value: any) {
-    writableObservableValueColorTokensInternal.set(this.handle, value);
+    writableObservableValueColorTokensInternal.set(this.handle, value)
   }
+
   subscribeFromJs(cb: any) {
-    return writableObservableValueColorTokensInternal.subscribeFromJs(this.handle, cb);
+    return writableObservableValueColorTokensInternal.subscribeFromJs(this.handle, cb)
   }
+
   unsubscribeFromJs(cb: any) {
-    writableObservableValueColorTokensInternal.unsubscribeFromJs(this.handle, cb);
+    writableObservableValueColorTokensInternal.unsubscribeFromJs(this.handle, cb)
   }
+
   constructor(handle: Handle) {
-    super(handle);
-    assignProperty(this, "handle", handle);
+    super(handle)
+    assignProperty(this, 'handle', handle)
   }
 }
-
-
 
 /**
  * Initializes all internal bindings from the provided API object.
  * (original: $$U8)
  */
 export function initBindings(e: any) {
-  documentStateTsApi = e.DocumentStateTsApi;
-  figmaScopeBindings = e.FigmaScopeBindings;
-  variablesMirrorManager = e.VariablesMirrorManager;
-  observableValueArrayIDLSubscribedVariableSetInfoInternal = e.ObservableValue_Array_IDLSubscribedVariableSetInfo__Internal;
-  observableValueArrayIDLSubscribedVariableInfoInternal = e.ObservableValue_Array_IDLSubscribedVariableInfo__Internal;
-  observableValueArrayIDLLocalVariableSetInfoInternal = e.ObservableValue_Array_IDLLocalVariableSetInfo__Internal;
-  observableValueArrayIDLLocalVariableInfoInternal = e.ObservableValue_Array_IDLLocalVariableInfo__Internal;
-  sharedDebuggingHelpers = e.SharedDebuggingHelpers;
-  interactionTestHelpers = e.InteractionTestHelpers;
-  assetConsumptionBindings = e.AssetConsumptionBindings;
-  assetBindings = e.AssetBindings;
-  colorTokensStateInternal = e.ColorTokensState_Internal;
-  writableObservableValueColorTokensInternal = e.WritableObservableValue_ColorTokens__Internal;
+  documentStateTsApi = e.DocumentStateTsApi
+  figmaScopeBindings = e.FigmaScopeBindings
+  variablesMirrorManager = e.VariablesMirrorManager
+  observableValueArrayIDLSubscribedVariableSetInfoInternal = e.ObservableValue_Array_IDLSubscribedVariableSetInfo__Internal
+  observableValueArrayIDLSubscribedVariableInfoInternal = e.ObservableValue_Array_IDLSubscribedVariableInfo__Internal
+  observableValueArrayIDLLocalVariableSetInfoInternal = e.ObservableValue_Array_IDLLocalVariableSetInfo__Internal
+  observableValueArrayIDLLocalVariableInfoInternal = e.ObservableValue_Array_IDLLocalVariableInfo__Internal
+  sharedDebuggingHelpers = e.SharedDebuggingHelpers
+  interactionTestHelpers = e.InteractionTestHelpers
+  assetConsumptionBindings = e.AssetConsumptionBindings
+  assetBindings = e.AssetBindings
+  colorTokensStateInternal = e.ColorTokensState_Internal
+  writableObservableValueColorTokensInternal = e.WritableObservableValue_ColorTokens__Internal
 
   // Expose classes to globalThis for legacy compatibility
-  globalThis.ObservableValue_Array_IDLSubscribedVariableSetInfo_ = ObservableValueArrayIDLSubscribedVariableSetInfo;
-  globalThis.MutableObservableValue_Array_IDLSubscribedVariableSetInfo_ = MutableObservableValueArrayIDLSubscribedVariableSetInfo;
-  globalThis.ObservableValue_Array_IDLSubscribedVariableInfo_ = ObservableValueArrayIDLSubscribedVariableInfo;
-  globalThis.MutableObservableValue_Array_IDLSubscribedVariableInfo_ = MutableObservableValueArrayIDLSubscribedVariableInfo;
-  globalThis.ObservableValue_Array_IDLLocalVariableSetInfo_ = ObservableValueArrayIDLLocalVariableSetInfo;
-  globalThis.MutableObservableValue_Array_IDLLocalVariableSetInfo_ = MutableObservableValueArrayIDLLocalVariableSetInfo;
-  globalThis.ObservableValue_Array_IDLLocalVariableInfo_ = ObservableValueArrayIDLLocalVariableInfo;
-  globalThis.MutableObservableValue_Array_IDLLocalVariableInfo_ = MutableObservableValueArrayIDLLocalVariableInfo;
-  globalThis.ColorTokensState = ColorTokensState;
-  globalThis.MutableColorTokensState = MutableColorTokensState;
-  globalThis.WritableObservableValue_ColorTokens_ = WritableObservableValueColorTokens;
-  globalThis.MutableWritableObservableValue_ColorTokens_ = MutableWritableObservableValueColorTokens;
+  globalThis.ObservableValue_Array_IDLSubscribedVariableSetInfo_ = ObservableValueArrayIDLSubscribedVariableSetInfo
+  globalThis.MutableObservableValue_Array_IDLSubscribedVariableSetInfo_ = MutableObservableValueArrayIDLSubscribedVariableSetInfo
+  globalThis.ObservableValue_Array_IDLSubscribedVariableInfo_ = ObservableValueArrayIDLSubscribedVariableInfo
+  globalThis.MutableObservableValue_Array_IDLSubscribedVariableInfo_ = MutableObservableValueArrayIDLSubscribedVariableInfo
+  globalThis.ObservableValue_Array_IDLLocalVariableSetInfo_ = ObservableValueArrayIDLLocalVariableSetInfo
+  globalThis.MutableObservableValue_Array_IDLLocalVariableSetInfo_ = MutableObservableValueArrayIDLLocalVariableSetInfo
+  globalThis.ObservableValue_Array_IDLLocalVariableInfo_ = ObservableValueArrayIDLLocalVariableInfo
+  globalThis.MutableObservableValue_Array_IDLLocalVariableInfo_ = MutableObservableValueArrayIDLLocalVariableInfo
+  globalThis.ColorTokensState = ColorTokensState
+  globalThis.MutableColorTokensState = MutableColorTokensState
+  globalThis.WritableObservableValue_ColorTokens_ = WritableObservableValueColorTokens
+  globalThis.MutableWritableObservableValue_ColorTokens_ = MutableWritableObservableValueColorTokens
 }
 
 /**
@@ -413,29 +428,29 @@ export function getBindings() {
     observableValue_Array_IDLLocalVariableInfo__Internal: observableValueArrayIDLLocalVariableInfoInternal,
     colorTokensState_Internal: colorTokensStateInternal,
     writableObservableValue_ColorTokens__Internal: writableObservableValueColorTokensInternal,
-  };
+  }
 }
 
 // --- Exported aliases for compatibility ---
-export const Al = documentStateTsApi;
-export const Bb = MutableObservableValueArrayIDLLocalVariableInfo;
-export const F3 = MutableColorTokensState;
-export const HG = VariableErrorType;
-export const Hc = figmaScopeBindings;
-export const IX = assetConsumptionBindings;
-export const JT = OperationType;
-export const KO = getBindings;
-export const LQ = initBindings;
-export const P5 = assetBindings;
-export const So = SymbolInstanceType;
-export const Uz = FromToDirection;
-export const Z_ = ExtendedValueType;
-export const aB = MutableObservableValueArrayIDLSubscribedVariableSetInfo;
-export const ei = DimensionErrorType;
-export const ms = interactionTestHelpers;
-export const on = MutableObservableValueArrayIDLSubscribedVariableInfo;
-export const rX = ValueType;
-export const tX = MutableObservableValueArrayIDLLocalVariableSetInfo;
-export const u4 = variablesMirrorManager;
-export const uC = UserAppType;
-export const v4 = VariantType;
+export const Al = documentStateTsApi
+export const Bb = MutableObservableValueArrayIDLLocalVariableInfo
+export const F3 = MutableColorTokensState
+export const HG = VariableErrorType
+export const Hc = figmaScopeBindings
+export const IX = assetConsumptionBindings
+export const JT = OperationType
+export const KO = getBindings
+export const LQ = initBindings
+export const P5 = assetBindings
+export const So = SymbolInstanceType
+export const Uz = FromToDirection
+export const Z_ = VariableDataType
+export const aB = MutableObservableValueArrayIDLSubscribedVariableSetInfo
+export const ei = DimensionErrorType
+export const ms = interactionTestHelpers
+export const on = MutableObservableValueArrayIDLSubscribedVariableInfo
+export const rX = VariableResolvedDataType
+export const tX = MutableObservableValueArrayIDLLocalVariableSetInfo
+export const u4 = variablesMirrorManager
+export const uC = UserAppType
+export const v4 = VariantType

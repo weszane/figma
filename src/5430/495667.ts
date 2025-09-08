@@ -10,7 +10,7 @@ import { XW, Qc, $3, qY, Vm } from "../figma_app/427318";
 import { Z } from "../905/909123";
 import { zm, Qi } from "../figma_app/49598";
 import { C as _$$C, $ } from "../figma_app/382445";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { s0, M5 } from "../figma_app/350203";
 import { Cu } from "../figma_app/314264";
 import { iZ } from "../905/372672";
@@ -37,7 +37,7 @@ export function $$$$w0(e, t, r, m) {
     let m = e => {
       if (e.stopPropagation(), o) {
         if (!o.community_profile_id) {
-          n(to({
+          n(showModalHandler({
             type: G$,
             data: {
               userId: o.id,
@@ -122,7 +122,7 @@ export function $$$$w0(e, t, r, m) {
     let T = e => {
       if (e.stopPropagation(), p) {
         if (!p.community_profile_id) {
-          _(to({
+          _(showModalHandler({
             type: G$,
             data: {
               userId: p.id,

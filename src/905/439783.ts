@@ -3,16 +3,16 @@ import { useRef, useCallback, useContext } from "react";
 import { useDispatch } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { y as _$$y } from "../905/292472";
-import { glU, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import u from "classnames";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { bA, _q } from "../905/668764";
 import { h7 } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
-import { gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
@@ -47,11 +47,11 @@ export function $$N0({
     if (void 0 !== D) {
       if (e) {
         let t = await L(Oe(e));
-        l7.user("editVariantVCMForTextStyleNode", () => {
-          glU.editVariantVCMForTextStyleNode(dI(i), D, "LETTER_SPACING", t);
+        permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+          Fullscreen.editVariantVCMForTextStyleNode(sessionLocalIDToString(i), D, "LETTER_SPACING", t);
         });
-      } else l7.user("editVariantVCMForTextStyleNode", () => {
-        glU.clearVariantVCMFieldForTextStyleNode(dI(i), D, "LETTER_SPACING");
+      } else permissionScopeHandler.user("editVariantVCMForTextStyleNode", () => {
+        Fullscreen.clearVariantVCMFieldForTextStyleNode(sessionLocalIDToString(i), D, "LETTER_SPACING");
       });
     }
   }, [L, i, D]);
@@ -60,7 +60,7 @@ export function $$N0({
     condition: !E,
     wrapper: t => jsx(_X, {
       fields: ["LETTER_SPACING"],
-      resolvedType: rXF.FLOAT,
+      resolvedType: VariableResolvedDataType.FLOAT,
       editingStyleGuid: i,
       responsiveTextStyleVariantIndex: D,
       onVariableSelected: void 0 !== D ? j : void 0,
@@ -70,7 +70,7 @@ export function $$N0({
         isInStyleModal: U
       }) ?? null,
       children: jsx(P, {
-        currentFieldValue: isNullish(e) || gl(e) ? void 0 : e.value,
+        currentFieldValue: isNullish(e) || isInvalidValue(e) ? void 0 : e.value,
         isInStyleModal: U,
         rowElementRef: u,
         recordingKey: N,
@@ -103,10 +103,10 @@ export function $$N0({
             value: e.value,
             units: e.units
           };
-          l7.user("editVariantLetterSpacingForTextStyleNode", () => glU.editVariantLetterSpacingForTextStyleNode(dI(i), D, t));
+          permissionScopeHandler.user("editVariantLetterSpacingForTextStyleNode", () => Fullscreen.editVariantLetterSpacingForTextStyleNode(sessionLocalIDToString(i), D, t));
           return;
         }
-        Y5.updateSelectionProperties({
+        fullscreenValue.updateSelectionProperties({
           letterSpacing: e
         }, {
           shouldCommit: t

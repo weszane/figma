@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle } from "react";
-import { S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { N } from "../905/438674";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zc, Lz } from "../905/497882";
@@ -19,9 +19,9 @@ export let $$u0 = forwardRef(function ({
   return jsx(A, {
     label: getI18nString("community.publishing.community_terms_of_service"),
     required: !0,
-    children: jsx(S, {
+    children: jsx(Checkbox, {
       ref: i,
-      label: jsx(J, {
+      label: jsx(Label, {
         children: renderI18nText("community.publishing.i_agree_to_the_terms_of_service", {
           termsOfService: jsx(N, {
             href: "https://www.figma.com/tos/",

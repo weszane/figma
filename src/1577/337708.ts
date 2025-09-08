@@ -6,12 +6,12 @@ import { u as _$$u } from "../905/65923";
 import { E as _$$E } from "../905/632989";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { hS } from "../905/437088";
 import { L as _$$L } from "../905/704296";
 import { oB, In } from "../figma_app/273493";
-import { NLJ, cxo } from "../figma_app/763686";
+import { DesignGraphElements, ToolType } from "../figma_app/763686";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import x from "classnames";
 import { colorToHex } from "../905/436288";
@@ -20,7 +20,7 @@ import { g as _$$g } from "../905/880308";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
-import { $O, Lo } from "../905/156213";
+import { showModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { O1, KD } from "../figma_app/317394";
 import { dH } from "../figma_app/722362";
@@ -29,7 +29,7 @@ import { cD } from "../figma_app/598018";
 import { I_ } from "../figma_app/616107";
 import { FEditorType } from "../figma_app/53721";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { B as _$$B } from "../figma_app/397954";
 import { Vk } from "../figma_app/153399";
 import { cd, HL, WW, xY } from "../figma_app/650460";
@@ -64,7 +64,7 @@ function V({
       children: jsx(_$$w, {
         color: e,
         theme: d,
-        currentTool: NLJ.NONE,
+        currentTool: DesignGraphElements.NONE,
         dropdownShown: null,
         onColorChange: t,
         dropperDisabled: u
@@ -122,10 +122,10 @@ function Q({
   let J = Xr(_$$B);
   let K = !$K(O, Q) || r;
   let [X, W] = useState(!1);
-  useEffect(() => (F(-1), Y(O), J(cxo.EDIT_PALETTE_MODAL), () => {
+  useEffect(() => (F(-1), Y(O), J(ToolType.EDIT_PALETTE_MODAL), () => {
     F(-1);
     Y(O);
-    J(cxo.SELECTION);
+    J(ToolType.SELECTION);
   }), [F, Y, J, O]);
   let G = useSelector(e => {
     let t = e.selectedView;
@@ -141,7 +141,7 @@ function Q({
     Y([...Q.slice(0, e), ...Q.slice(e + 1)]);
   };
   let ei = useCallback(e => {
-    x($O({
+    x(showModal({
       type: $$$0.type,
       data: {
         palette: {
@@ -208,7 +208,7 @@ function Q({
         style: {
           overflow: "visible"
         },
-        children: [jsx(_$$J, {
+        children: [jsx(Label, {
           htmlFor: "palette-name-input",
           className: H,
           children: renderI18nText("whiteboard.color_palettes.modal.name")
@@ -289,7 +289,7 @@ function Q({
     })
   });
 }
-export let $$$0 = Ju(function ({
+export let $$$0 = registerModal(function ({
   palette: e,
   theme: t,
   enableSubmitWithNoChanges: i,
@@ -301,9 +301,9 @@ export let $$$0 = Ju(function ({
   let d = hS(r);
   let u = dH();
   let _ = useAtomWithSubscription(_$$B);
-  let f = u === NLJ.DROPPER_COLOR && _ === cxo.EDIT_PALETTE_MODAL;
+  let f = u === DesignGraphElements.DROPPER_COLOR && _ === ToolType.EDIT_PALETTE_MODAL;
   let p = useCallback(() => {
-    l(Lo());
+    l(popModalStack());
   }, [l]);
   return jsx("div", {
     className: k()("edit_color_palette_modal--headerModalTransitionContainer--C-CFV", {

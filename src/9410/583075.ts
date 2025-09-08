@@ -1,5 +1,5 @@
 import { useDispatch } from "../vendor/514228";
-import { nQ7, FAf, NLJ, glU } from "../figma_app/763686";
+import { SelfDesignType, DesignWorkspace, DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { Xr, atomStoreManager } from "../figma_app/27355";
 import { useSprigWithSampling } from "../905/99656";
 import { Kh } from "../figma_app/370763";
@@ -32,14 +32,14 @@ export function $$g0({
     Sprig
   } = useSprigWithSampling();
   return r => {
-    (i || r !== nQ7.DESIGN) && (t(), function (e) {
+    (i || r !== SelfDesignType.DESIGN) && (t(), function (e) {
       let t = atomStoreManager.get(Kh);
-      e === nQ7.DESIGN && (NT(FAf.DESIGN), t === NLJ.COMMENTS && glU?.triggerAction("set-tool-default", null));
-    }(r), r === nQ7.DESIGN ? glU?.triggerAction("enter-slides-design-mode", null) : glU?.triggerAction("enter-slides-mode", null), e && r === nQ7.DESIGN ? (Cu({
+      e === SelfDesignType.DESIGN && (NT(DesignWorkspace.DESIGN), t === DesignGraphElements.COMMENTS && Fullscreen?.triggerAction("set-tool-default", null));
+    }(r), r === SelfDesignType.DESIGN ? Fullscreen?.triggerAction("enter-slides-design-mode", null) : Fullscreen?.triggerAction("enter-slides-mode", null), e && r === SelfDesignType.DESIGN ? (Cu({
       trackingContext: "slides_toggle_back_to_slides",
       productType: "slides",
       fileKey: _
-    }), Sprig("track", "slides_toggle_back_to_slides")) : e && r === nQ7.SELF && Cu({
+    }), Sprig("track", "slides_toggle_back_to_slides")) : e && r === SelfDesignType.SELF && Cu({
       trackingContext: "slides_toggle_design",
       productType: "slides",
       fileKey: _

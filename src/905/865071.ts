@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 import { s as _$$s } from "../905/536340";
 export let $$o0 = forwardRef(({
   htmlAttributes: e,
@@ -8,7 +8,7 @@ export let $$o0 = forwardRef(({
 }, i) => jsx("label", {
   ...t,
   ...e,
-  ..._$$r,
+  ...defaultComponentAttribute,
   ref: i
 }));
 $$o0.displayName = "LabelPrimitive";
@@ -22,7 +22,7 @@ export let $$d1 = forwardRef(({
   htmlAttributes: e,
   ...t
 }, i) => jsx("legend", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...e,
   ...t,
   ref: i

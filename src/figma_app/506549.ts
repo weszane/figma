@@ -2,7 +2,7 @@ import { lQ } from "../905/934246";
 import { getI18nString } from "../905/303541";
 import { z } from "../905/905430";
 import { IK } from "../figma_app/248118";
-import { k0 } from "../figma_app/155287";
+import { manifestContainsWidget } from "../figma_app/155287";
 import { o0 } from "../905/12045";
 import { qs, Im } from "../905/608145";
 import { Nh, pI, bf, S3 } from "../figma_app/567902";
@@ -27,7 +27,7 @@ export function $$p0(e) {
     },
     menuAction: IK(extension),
     disabled: !canRun,
-    isWidget: k0(extension),
+    isWidget: manifestContainsWidget(extension),
     path: []
   };
 }

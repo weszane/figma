@@ -1,7 +1,7 @@
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { h, I } from "../3973/647885";
 let l = "library-update";
 let d = "library-update";
@@ -19,7 +19,7 @@ function u(e) {
     total: 0
   };
 }
-let $$p2 = nF((e, t) => {
+let $$p2 = createOptimistThunk((e, t) => {
   e.dispatch(h({
     key: d,
     progress: 0,
@@ -27,7 +27,7 @@ let $$p2 = nF((e, t) => {
   }));
   c(e.dispatch);
 });
-let $$m3 = nF((e, t) => {
+let $$m3 = createOptimistThunk((e, t) => {
   let i = u(e);
   i.progress + t.delta >= i.total ? e.dispatch($$h1()) : (e.dispatch(h({
     key: d,
@@ -35,7 +35,7 @@ let $$m3 = nF((e, t) => {
     total: i.total
   })), c(e.dispatch));
 });
-let $$h1 = nF(e => {
+let $$h1 = createOptimistThunk(e => {
   let t = u(e);
   e.dispatch(h({
     key: d,
@@ -51,7 +51,7 @@ let $$h1 = nF(e => {
     icon: zX.CHECK
   }));
 });
-let $$g0 = nF(e => {
+let $$g0 = createOptimistThunk(e => {
   e.dispatch(I({
     key: d
   }));

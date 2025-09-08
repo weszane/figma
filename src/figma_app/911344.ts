@@ -8,10 +8,10 @@ import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { F } from "../905/302958";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { T as _$$T } from "../905/858738";
 import { p as _$$p, H } from "../905/216429";
-import { IN, NO, bA, Yw } from "../905/968269";
+import { INTERNAL_RERUN_PLUGIN_IDENTIFIER, PARENT_WINDOW_REFERENCE, PLUGIN_TIMEOUT_MS, PLUGIN_RETRY_DELAY_MS } from "../905/968269";
 import { of } from "../905/544659";
 import { Y } from "../905/696438";
 let y = !!desktopAPIInstance || _$$T();
@@ -20,7 +20,7 @@ let b = `
  document.addEventListener('keydown', (e) => {
    if (e.keyCode === 80 /* P */ && !e.shiftKey && e.altKey && ${BrowserInfo.mac ? "!e.ctrlKey && e.metaKey" : "e.ctrlKey && !e.metaKey"}) {
      // Handle the plugin re-run shortcut
-     window.parent.postMessage('${IN}', '*')
+     window.parent.postMessage('${INTERNAL_RERUN_PLUGIN_IDENTIFIER}', '*')
      e.stopPropagation()
      e.stopImmediatePropagation()
    } else if (${JSON.stringify(y)}) {
@@ -54,7 +54,7 @@ let b = `
 
  window.addEventListener('message', function(event) {
    if (
-     event.source === ${NO} &&
+     event.source === ${PARENT_WINDOW_REFERENCE} &&
      event.data &&
      typeof event.data === 'object' &&
      'figmaMessage' in event.data
@@ -195,7 +195,7 @@ class I {
         requestMicrophone: microphoneAccess
       });
     } catch (e) {
-      desktopAPIInstance && Y5.dispatch(F.enqueue({
+      desktopAPIInstance && fullscreenValue.dispatch(F.enqueue({
         type: "desktop-unsupported",
         error: !0,
         message: "Camera access is only available in the latest version of Figma Desktop"
@@ -228,7 +228,7 @@ class I {
     }
     return "data:text/html;base64," + btoa(`<script>
       onmessage = (event) => {
-        if (event.source === ${NO} && event.origin === "${window.location.origin}") {
+        if (event.source === ${PARENT_WINDOW_REFERENCE} && event.origin === "${window.location.origin}") {
           document.write("<script>" + ${JSON.stringify(b)} + ${JSON.stringify(r)} + ${JSON.stringify(this.getSecurityPolicyViolationDevLogging(t))} + "</" + "script>${_$$p(e)}" + event.data)
         }
       }
@@ -265,8 +265,8 @@ export class $$S0 extends Component {
     this.outerIframeLoaded = !1;
     this.state = {
       visible: !1,
-      width: bA,
-      height: Yw,
+      width: PLUGIN_TIMEOUT_MS,
+      height: PLUGIN_RETRY_DELAY_MS,
       stopPointerEvents: !1
     };
     this.setOuterIframeRef = e => {

@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { glU, NLJ } from "../figma_app/763686";
-import { l7 as _$$l, nc } from "../905/189185";
+import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
+import { permissionScopeHandler as _$$l, scopeAwareFunction } from "../905/189185";
 import { Pt } from "../figma_app/806412";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { qC } from "../figma_app/972736";
-import { ES, $O } from "../905/156213";
+import { hideSpecificModal, showModal } from "../905/156213";
 import { ay } from "../figma_app/147952";
 import { BI } from "../figma_app/546509";
 import { M as _$$M } from "../9410/228122";
@@ -21,7 +21,7 @@ import { b as _$$b } from "../905/635568";
 import { useRef, useCallback, useEffect } from "react";
 import { Tc } from "../905/797478";
 import { ts } from "../figma_app/120210";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Ao, F_ } from "../905/748636";
 import { q } from "../3276/826587";
 import { jT, N1, hQ } from "../3276/770360";
@@ -31,7 +31,7 @@ import { V } from "../9410/365876";
 import { X } from "../figma_app/765161";
 let N = "delightful-toolbar-media-button";
 let A = "InsertMediaModal";
-let O = Ju(function () {
+let O = registerModal(function () {
   let e = useDispatch();
   let t = useSelector(e => !!e.modalShown?.data?.shouldMountCenter);
   let i = useRef(null);
@@ -47,8 +47,8 @@ let O = Ju(function () {
     setModalPosition
   } = ts(s, 157, 320);
   let p = useCallback(() => {
-    glU.triggerAction("set-tool-default", null);
-    e(ES({
+    Fullscreen.triggerAction("set-tool-default", null);
+    e(hideSpecificModal({
       type: A
     }));
   }, [e]);
@@ -81,7 +81,7 @@ let O = Ju(function () {
     isFigJam: !0,
     onClose: p,
     onDragEnd: h,
-    onDragStart: () => glU.triggerActionInUserEditScope("set-tool-default", null),
+    onDragStart: () => Fullscreen.triggerActionInUserEditScope("set-tool-default", null),
     smallArrow: !0,
     title: getI18nString("whiteboard.embeds.insert_embed_modal.title"),
     children: jsx("div", {
@@ -98,21 +98,21 @@ export function $$F11(e) {
   let t = function (e) {
     switch (e) {
       case "Table":
-        return NLJ.TABLE;
+        return DesignGraphElements.TABLE;
       case "CodeBlock":
-        return NLJ.CODE_BLOCK;
+        return DesignGraphElements.CODE_BLOCK;
       case "MindMap":
-        return NLJ.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS;
+        return DesignGraphElements.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS;
       case "Text":
-        return NLJ.TYPE;
+        return DesignGraphElements.TYPE;
       case "Section":
-        return NLJ.SECTION;
+        return DesignGraphElements.SECTION;
       default:
         throw Error(`Unknown tool: ${e}`);
     }
   }(e);
   let i = () => {
-    _$$l.user("click-insert-tool", () => glU.createNodeAtViewportCenterFromTool(t));
+    _$$l.user("click-insert-tool", () => Fullscreen.createNodeAtViewportCenterFromTool(t));
   };
   return {
     insertToolWithDragAction: e => {
@@ -120,7 +120,7 @@ export function $$F11(e) {
         dropPosition,
         isClick
       } = e;
-      isClick ? i() : _$$l.user("drag-insert-tool", () => glU.createNodeFromTool(t, dropPosition.x, dropPosition.y));
+      isClick ? i() : _$$l.user("drag-insert-tool", () => Fullscreen.createNodeFromTool(t, dropPosition.x, dropPosition.y));
     },
     insertToolOnClickAction: i
   };
@@ -165,7 +165,7 @@ function B(e) {
   let S = () => {
     T();
   };
-  e.editScopeLabel && (w = nc.user(e.editScopeLabel, w), S = nc.user(e.editScopeLabel, S));
+  e.editScopeLabel && (w = scopeAwareFunction.user(e.editScopeLabel, w), S = scopeAwareFunction.user(e.editScopeLabel, S));
   let {
     dragState,
     onInsertableResourcePointerDown
@@ -233,7 +233,7 @@ export function $$H1() {
     description: getI18nString("whiteboard.inserts.comments_description"),
     onClick: () => {
       e();
-      glU.triggerActionInUserEditScope("set-tool-comments", {
+      Fullscreen.triggerActionInUserEditScope("set-tool-comments", {
         source: P
       });
     },
@@ -304,8 +304,8 @@ export function $$q2() {
     recordingKey: "images",
     icon: v8(),
     onInsert: () => {
-      glU.triggerAction("set-tool-default", null);
-      glU.triggerAction("place", {
+      Fullscreen.triggerAction("set-tool-default", null);
+      Fullscreen.triggerAction("place", {
         source: "MEDIA_MODAL"
       });
       e(qC({
@@ -324,8 +324,8 @@ export function $$X3() {
     recordingKey: "links",
     icon: Bo(),
     onInsert: () => {
-      glU.triggerAction("set-tool-default", null);
-      e($O({
+      Fullscreen.triggerAction("set-tool-default", null);
+      e(showModal({
         type: O.type,
         data: {
           shouldMountCenter: !0

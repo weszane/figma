@@ -1,5 +1,5 @@
 import { Ed } from "../figma_app/562352";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/116389";
 import { logError, logInfo } from "../905/714362";
@@ -45,7 +45,7 @@ export async function $$_0(e) {
     topLevelNode,
     logger
   } = e;
-  if (!glU) return Promise.resolve({
+  if (!Fullscreen) return Promise.resolve({
     suggestions: []
   });
   let s = getSingletonSceneGraph();

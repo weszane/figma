@@ -2,15 +2,15 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "../vendor/514228";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Lo } from "../905/156213";
-import { Ju } from "../905/102752";
+import { popModalStack } from "../905/156213";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { jE, Vq } from "../figma_app/639088";
 class u extends Component {
   constructor() {
     super(...arguments);
     this.onConfirm = () => {
-      this.props.dispatch(Lo());
+      this.props.dispatch(popModalStack());
       this.props.onConfirmTransfer();
     };
   }
@@ -37,5 +37,5 @@ class u extends Component {
   }
 }
 u.displayName = "ConfirmTransferOwnershipModal";
-export let $$p0 = Ju(connect()(u), "ConfirmTransferOwnershipModal");
+export let $$p0 = registerModal(connect()(u), "ConfirmTransferOwnershipModal");
 export const b = $$p0;

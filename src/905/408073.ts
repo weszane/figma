@@ -6,11 +6,11 @@ import { ll } from "../vendor/542280";
 import { cY, UU, Ej } from "../vendor/343575";
 import { A } from "../vendor/723372";
 import { o as _$$o } from "../905/821217";
-import { Z, q } from "../905/751750";
+import { useSelectionContext, useSelectionProvider } from "../905/751750";
 import { W } from "../905/458642";
 import { Uk } from "../905/691059";
-import { r as _$$r } from "../905/577641";
-import { Dm, s7, yM, Ju } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS, preventAndStopEvent } from "../905/955878";
 import { Q } from "../905/586361";
 function _(e, t) {
   if (e.current) {
@@ -118,7 +118,7 @@ export let $$b5 = forwardRef(({
       g.current = "idle";
       cancelAnimationFrame(f.current);
     },
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...o,
     children: t
   });
@@ -147,7 +147,7 @@ export let $$v0 = forwardRef(({
   let {
     fpl_popover_fullscreen_events
   } = Q();
-  let k = fpl_popover_fullscreen_events ? [Dm, s7, yM] : [];
+  let k = fpl_popover_fullscreen_events ? [EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS] : [];
   let R = jsx(_$$o, {
     display: "contents",
     eventListeners: ["onClick", "onPointerDown", "onMouseDown"],
@@ -156,7 +156,7 @@ export let $$v0 = forwardRef(({
       style: floatingStyles,
       className: A(k),
       children: jsx("ul", {
-        ..._$$r,
+        ...defaultComponentAttribute,
         ...i,
         className: A("select-primitive__container__hpR3l", t),
         ref: w,
@@ -211,7 +211,7 @@ export let $$I7 = forwardRef(({
       type: "button",
       ref: l,
       ...getTriggerProps(),
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...e,
       ...t
     })
@@ -248,7 +248,7 @@ export let $$E3 = forwardRef(({
   }, []);
   let I = !i.disabled && index === activeIndex;
   return jsx("li", {
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...t,
     "aria-selected": index === selectedIndex,
     role: "option",
@@ -258,15 +258,15 @@ export let $$E3 = forwardRef(({
     ref: v,
     ...getItemProps({
       onKeyDown: t => {
-        (" " === t.key || "Enter" === t.key) && (i.disabled || handleSelect(e, t), Ju(t));
+        (" " === t.key || "Enter" === t.key) && (i.disabled || handleSelect(e, t), preventAndStopEvent(t));
       },
       onClick: t => {
         i.disabled || !allowSelection || _.current || handleSelect(e, t);
-        Ju(t);
+        preventAndStopEvent(t);
         _.current = !1;
       },
       onPointerUp: t => {
-        0 === t.button && (!i.disabled && allowSelection && (_.current = !0, handleSelect(e, t)), Ju(t));
+        0 === t.button && (!i.disabled && allowSelection && (_.current = !0, handleSelect(e, t)), preventAndStopEvent(t));
       },
       onPointerLeave: () => {
         _.current = !1;
@@ -278,7 +278,7 @@ export let $$E3 = forwardRef(({
 });
 $$E3.displayName = "SelectPrimitive.Option";
 export let $$x2 = forwardRef((e, t) => {
-  let i = Z();
+  let i = useSelectionContext();
   return jsx("li", {
     id: i,
     ref: t,
@@ -293,11 +293,11 @@ export let $$S1 = forwardRef(({
   htmlAttributes: i,
   ...r
 }, a) => {
-  let [s, o] = q();
+  let [s, o] = useSelectionProvider();
   return jsx(o, {
     value: s,
     children: jsxs("ul", {
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...i,
       ref: a,
       "aria-labelledby": s,

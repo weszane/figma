@@ -1,153 +1,246 @@
-var n;
-var r;
-var a;
-var s;
-var o;
-var l;
-let $$d2;
-let c;
-let u;
-let p;
-let m;
-let h;
-let g;
-let f;
-let _;
-function A(e, t, i) {
-  t in e ? Object.defineProperty(e, t, {
-    value: i,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = i;
-  return e;
+// Enums for various states and modes (original: n, r, a, s, o, l)
+/**
+ * PermissionState
+ */
+export enum PermissionState {
+  ALLOWED = 0,
+  DISALLOWED_CYCLE = 1,
+  DISALLOWED_OTHER = 2,
 }
-class y {
-  getId() {
-    return c.getId(this.handle);
+
+/**
+ * MaterializationMode
+ */
+export enum MaterializationMode {
+  MATERIALIZE_SWAPPED_OUT_TREE = 0,
+  SKIP_MATERIALIZATION = 1,
+}
+
+/**
+ * LoadState
+ */
+export enum LoadState {
+  PENDING_INITIAL_LOAD = 0,
+  PENDING_LOAD_AFTER_RECONNECT = 1,
+  LOADED = 2,
+}
+
+/**
+ * ZoomMode
+ */
+export enum ZoomMode {
+  NONE = 0,
+  CONTAIN = 1,
+  SCALE_DOWN = 2,
+  MIN_ZOOM = 3,
+  FREE = 4,
+  SCALE_DOWN_TO_FIT_WIDTH = 5,
+  FIT_WIDTH = 6,
+  RESPONSIVE = 7,
+}
+
+/**
+ * LayoutMode
+ */
+export enum LayoutMode {
+  FIXED = 0,
+  RESPONSIVE = 1,
+}
+
+/**
+ * FontMissingMode
+ */
+export enum FontMissingMode {
+  MISSING_FONTS_ONLY = 0,
+  MISSING_OR_LOCAL_FONTS = 1,
+}
+
+// Internal bindings and helpers
+export let prototypeInternal: any;
+let GLMaterial_Internal: any;
+let WasmRendererBindings: any;
+let GPUTextureBindings: any;
+let GPUTexture_Internal: any;
+let GPUFramebufferBindings: any;
+let GPUFramebuffer_Internal: any;
+let VertexBufferPoolHelper: any;
+let VertexBufferAreaHelper: any;
+
+/**
+ * GLMaterial class (original: y)
+ */
+export class GLMaterial {
+  handle: any;
+
+  /**
+   * @param handle - Internal handle
+   */
+  constructor(handle: any) {
+    this.handle = handle;
   }
-  constructor(e) {
-    A(this, "handle", void 0);
-    this.handle = e;
+
+  /**
+   * Get the material ID
+   */
+  getId(): any {
+    return GLMaterial_Internal.getId(this.handle);
   }
 }
-class b extends y {
-  bindWithoutTextures(e, t) {
-    c.bindWithoutTextures(this.handle, e, t);
+
+/**
+ * MutableGLMaterial class (original: b)
+ */
+export class MutableGLMaterial extends GLMaterial {
+  /**
+   * @param handle - Internal handle
+   */
+  constructor(handle: any) {
+    super(handle);
   }
-  constructor(e) {
-    super(e);
-    A(this, "handle", void 0);
-    this.handle = e;
-  }
-}
-class v {
-  emscriptenId() {
-    return m.emscriptenId(this.handle);
-  }
-  width() {
-    return m.width(this.handle);
-  }
-  height() {
-    return m.height(this.handle);
-  }
-  sizeInBytes() {
-    return m.sizeInBytes(this.handle);
-  }
-  format() {
-    return m.format(this.handle);
-  }
-  constructor(e) {
-    A(this, "handle", void 0);
-    this.handle = e;
+
+  /**
+   * Bind material without textures
+   */
+  bindWithoutTextures(e: any, t: any): void {
+    GLMaterial_Internal.bindWithoutTextures(this.handle, e, t);
   }
 }
-class I extends v {
-  constructor(e) {
-    super(e);
-    A(this, "handle", void 0);
-    this.handle = e;
+
+/**
+ * GPUTexture class (original: v)
+ */
+export class GPUTexture {
+  handle: any;
+
+  /**
+   * @param handle - Internal handle
+   */
+  constructor(handle: any) {
+    this.handle = handle;
+  }
+
+  /**
+   * Get emscripten ID
+   */
+  emscriptenId(): any {
+    return GPUTexture_Internal.emscriptenId(this.handle);
+  }
+
+  /**
+   * Get texture width
+   */
+  width(): any {
+    return GPUTexture_Internal.width(this.handle);
+  }
+
+  /**
+   * Get texture height
+   */
+  height(): any {
+    return GPUTexture_Internal.height(this.handle);
+  }
+
+  /**
+   * Get texture size in bytes
+   */
+  sizeInBytes(): any {
+    return GPUTexture_Internal.sizeInBytes(this.handle);
+  }
+
+  /**
+   * Get texture format
+   */
+  format(): any {
+    return GPUTexture_Internal.format(this.handle);
   }
 }
-class E {
-  emscriptenId() {
-    return g.emscriptenId(this.handle);
-  }
-  constructor(e) {
-    A(this, "handle", void 0);
-    this.handle = e;
-  }
-}
-class x extends E {
-  constructor(e) {
-    super(e);
-    A(this, "handle", void 0);
-    this.handle = e;
+
+/**
+ * MutableGPUTexture class (original: I)
+ */
+export class MutableGPUTexture extends GPUTexture {
+  /**
+   * @param handle - Internal handle
+   */
+  constructor(handle: any) {
+    super(handle);
   }
 }
-export function $$S1(e) {
-  $$d2 = e.Prototype;
-  globalThis.Prototype = $$d2;
-  c = e.GLMaterial_Internal;
-  globalThis.GLMaterial = y;
-  globalThis.MutableGLMaterial = b;
-  u = e.WasmRendererBindings;
-  p = e.GPUTextureBindings;
-  m = e.GPUTexture_Internal;
-  globalThis.GPUTexture = v;
-  globalThis.MutableGPUTexture = I;
-  h = e.GPUFramebufferBindings;
-  g = e.GPUFramebuffer_Internal;
-  globalThis.GPUFramebuffer = E;
-  globalThis.MutableGPUFramebuffer = x;
-  f = e.VertexBufferPoolHelper;
-  _ = e.VertexBufferAreaHelper;
+
+/**
+ * GPUFramebuffer class (original: E)
+ */
+export class GPUFramebuffer {
+  handle: any;
+
+  /**
+   * @param handle - Internal handle
+   */
+  constructor(handle: any) {
+    this.handle = handle;
+  }
+
+  /**
+   * Get emscripten ID
+   */
+  emscriptenId(): any {
+    return GPUFramebuffer_Internal.emscriptenId(this.handle);
+  }
 }
-export function $$w0() {
+
+/**
+ * MutableGPUFramebuffer class (original: x)
+ */
+export class MutableGPUFramebuffer extends GPUFramebuffer {
+  /**
+   * @param handle - Internal handle
+   */
+  constructor(handle: any) {
+    super(handle);
+  }
+}
+
+/**
+ * Setup function to initialize bindings (original: $$S1)
+ * @param e - Bindings object
+ */
+export function initializeRenderBindings(e: any): void {
+  prototypeInternal = e.Prototype;
+  globalThis.Prototype = prototypeInternal;
+  GLMaterial_Internal = e.GLMaterial_Internal;
+  globalThis.GLMaterial = GLMaterial;
+  globalThis.MutableGLMaterial = MutableGLMaterial;
+  WasmRendererBindings = e.WasmRendererBindings;
+  GPUTextureBindings = e.GPUTextureBindings;
+  GPUTexture_Internal = e.GPUTexture_Internal;
+  globalThis.GPUTexture = GPUTexture;
+  globalThis.MutableGPUTexture = MutableGPUTexture;
+  GPUFramebufferBindings = e.GPUFramebufferBindings;
+  GPUFramebuffer_Internal = e.GPUFramebuffer_Internal;
+  globalThis.GPUFramebuffer = GPUFramebuffer;
+  globalThis.MutableGPUFramebuffer = MutableGPUFramebuffer;
+  VertexBufferPoolHelper = e.VertexBufferPoolHelper;
+  VertexBufferAreaHelper = e.VertexBufferAreaHelper;
+}
+
+/**
+ * Get all internal bindings and helpers (original: $$w0)
+ */
+export function getInternalBindings() {
   return {
-    prototype: $$d2,
-    wasmRendererBindings: u,
-    gPUTextureBindings: p,
-    gPUFramebufferBindings: h,
-    vertexBufferPoolHelper: f,
-    vertexBufferAreaHelper: _,
-    gLMaterial_Internal: c,
-    gPUTexture_Internal: m,
-    gPUFramebuffer_Internal: g
+    prototype: prototypeInternal,
+    wasmRendererBindings: WasmRendererBindings,
+    gPUTextureBindings: GPUTextureBindings,
+    gPUFramebufferBindings: GPUFramebufferBindings,
+    vertexBufferPoolHelper: VertexBufferPoolHelper,
+    vertexBufferAreaHelper: VertexBufferAreaHelper,
+    gLMaterial_Internal: GLMaterial_Internal,
+    gPUTexture_Internal: GPUTexture_Internal,
+    gPUFramebuffer_Internal: GPUFramebuffer_Internal,
   };
 }
-!function (e) {
-  e[e.ALLOWED = 0] = "ALLOWED";
-  e[e.DISALLOWED_CYCLE = 1] = "DISALLOWED_CYCLE";
-  e[e.DISALLOWED_OTHER = 2] = "DISALLOWED_OTHER";
-}(n || (n = {}));
-(function (e) {
-  e[e.MATERIALIZE_SWAPPED_OUT_TREE = 0] = "MATERIALIZE_SWAPPED_OUT_TREE";
-  e[e.SKIP_MATERIALIZATION = 1] = "SKIP_MATERIALIZATION";
-})(r || (r = {}));
-(function (e) {
-  e[e.PENDING_INITIAL_LOAD = 0] = "PENDING_INITIAL_LOAD";
-  e[e.PENDING_LOAD_AFTER_RECONNECT = 1] = "PENDING_LOAD_AFTER_RECONNECT";
-  e[e.LOADED = 2] = "LOADED";
-})(a || (a = {}));
-(function (e) {
-  e[e.NONE = 0] = "NONE";
-  e[e.CONTAIN = 1] = "CONTAIN";
-  e[e.SCALE_DOWN = 2] = "SCALE_DOWN";
-  e[e.MIN_ZOOM = 3] = "MIN_ZOOM";
-  e[e.FREE = 4] = "FREE";
-  e[e.SCALE_DOWN_TO_FIT_WIDTH = 5] = "SCALE_DOWN_TO_FIT_WIDTH";
-  e[e.FIT_WIDTH = 6] = "FIT_WIDTH";
-  e[e.RESPONSIVE = 7] = "RESPONSIVE";
-})(s || (s = {}));
-(function (e) {
-  e[e.FIXED = 0] = "FIXED";
-  e[e.RESPONSIVE = 1] = "RESPONSIVE";
-})(o || (o = {}));
-(function (e) {
-  e[e.MISSING_FONTS_ONLY = 0] = "MISSING_FONTS_ONLY";
-  e[e.MISSING_OR_LOCAL_FONTS = 1] = "MISSING_OR_LOCAL_FONTS";
-})(l || (l = {}));
-export const KO = $$w0;
-export const LQ = $$S1;
-export const bp = $$d2;
+
+// Export refactored names for external usage
+export const KO = getInternalBindings;
+export const LQ = initializeRenderBindings;
+export const bp = prototypeInternal;

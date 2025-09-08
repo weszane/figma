@@ -1,4 +1,4 @@
-import { td } from "../figma_app/181241";
+import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   updateOrgPreferences(e, t) {
@@ -13,7 +13,7 @@ export let $$a0 = new class {
     return XHR.post(`/api/plugin_preferences/org/${e.id}`, a);
   }
   updateUserAutoRunPluginId(e, t) {
-    return XHR.put("/api/plugin_preferences/user", td.toAPIParameters({
+    return XHR.put("/api/plugin_preferences/user", APIParameterUtils.toAPIParameters({
       autoRunBehavior: t,
       autoRunPluginId: e
     }));

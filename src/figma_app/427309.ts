@@ -7,7 +7,7 @@ import { Cf, it } from '../905/504727';
 import { getSingletonSceneGraph } from '../905/700578';
 import { q } from '../905/820062';
 import { BK } from '../905/848862';
-import { AD } from '../905/871411';
+import { defaultSessionLocalIDString } from '../905/871411';
 import { s as _$$s } from '../cssbuilder/589278';
 import { $g, _X } from '../figma_app/62612';
 import { J } from '../figma_app/63663';
@@ -152,7 +152,7 @@ function F({
   }, [r, m]);
   if (!r || !e) return null;
   let y = getSingletonSceneGraph().get(r);
-  let I = AD;
+  let I = defaultSessionLocalIDString;
   let v = null;
   y && y.childrenGuids && y.childCount > 0 && y.childrenGuids[0] && (I = y.childrenGuids[0], v = getSingletonSceneGraph().get(I));
   let O = e => {

@@ -1,12 +1,12 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.PostUserSubscriptionByLibraryKeyValidator = vh();
-    this.PostFileSubscriptionByLibraryKeyValidator = vh();
-    this.PostTeamSubscriptionByLibraryKeyValidator = vh();
-    this.PostWorkspaceSubscriptionByLibraryKeyValidator = vh();
-    this.DeleteWorkspaceSubscriptionByLibraryKeyValidator = vh();
-    this.PostOrgSubscriptionByLibraryKeyValidator = vh();
+    this.PostUserSubscriptionByLibraryKeyValidator = createNoOpValidator();
+    this.PostFileSubscriptionByLibraryKeyValidator = createNoOpValidator();
+    this.PostTeamSubscriptionByLibraryKeyValidator = createNoOpValidator();
+    this.PostWorkspaceSubscriptionByLibraryKeyValidator = createNoOpValidator();
+    this.DeleteWorkspaceSubscriptionByLibraryKeyValidator = createNoOpValidator();
+    this.PostOrgSubscriptionByLibraryKeyValidator = createNoOpValidator();
   }
   postUserSubscriptionByLibraryKey({
     libraryKey: e,

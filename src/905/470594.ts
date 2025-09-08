@@ -16,17 +16,17 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { to } from "../905/156213";
-import { vh } from "../figma_app/181241";
+import { showModalHandler } from "../905/156213";
+import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A as _$$A } from "../6828/289931";
 var x = (e => (e.LibraryPublish = "library_publish", e.CommentAttachment = "comment_attachment", e.Video = "video", e.ExtensionPublish = "extension_publish", e))(x || {});
 var S = (e => (e.FontList = "font_list", e))(S || {});
 var w = (e => (e[e.NONE = 0] = "NONE", e[e.NON_S3_RESPONSE = 1] = "NON_S3_RESPONSE", e[e.OTHER = 2] = "OTHER", e))(w || {});
 let C = new class {
   constructor() {
-    this.GetCheckPresignedPostNetworkCompatibility = vh();
+    this.GetCheckPresignedPostNetworkCompatibility = createNoOpValidator();
   }
   getCheckPresignedPostNetworkCompatibility() {
     return this.GetCheckPresignedPostNetworkCompatibility.validate(({
@@ -44,7 +44,7 @@ let C = new class {
   }
 }();
 let R = decodeBase64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==");
-let N = Ju(function (e) {
+let N = registerModal(function (e) {
   let t = useDispatch();
   let i = hS(e);
   let a = jsxs(Fragment, {
@@ -220,7 +220,7 @@ export function $$D0(e) {
       error: e
     }) => e !== w.NONE) ? (F.dequeue({
       matchType: P
-    }), e(to({
+    }), e(showModalHandler({
       type: N,
       data: {
         results: i

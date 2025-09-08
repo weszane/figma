@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { NLJ, W8Y } from "../figma_app/763686";
+import { DesignGraphElements, SessionStatus } from "../figma_app/763686";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
@@ -35,7 +35,7 @@ let k = `translateY(${O})`;
 let $$R0 = memo(function () {
   let e = useDispatch();
   let t = iT();
-  let i = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.STAMP) || t;
+  let i = useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.STAMP) || t;
   let o = XM();
   let d = hr();
   let c = d > 0;
@@ -43,7 +43,7 @@ let $$R0 = memo(function () {
   let h = bu();
   let L = useCallback(() => {
     o && e(H1({
-      votingStage: W8Y.NOT_JOINED
+      votingStage: SessionStatus.NOT_JOINED
     }));
     e(Ho());
   }, [e, o]);

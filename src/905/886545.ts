@@ -1,19 +1,19 @@
 import { useCallback } from "react";
-import { HS4, CWU, G6k } from "../figma_app/763686";
+import { VariableUIContext, VariablesBindings, VariableCollectionContext } from "../figma_app/763686";
 import { fn } from "../905/805904";
 import { WI } from "../905/929949";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { g } from "../905/578436";
 import { Ot } from "../905/850476";
 import { Wc } from "../905/782020";
 export function $$p0() {
-  return useCallback((e, t, i, n = "", d = HS4.VARIABLES_MODAL) => {
+  return useCallback((e, t, i, n = "", d = VariableUIContext.VARIABLES_MODAL) => {
     let c = Wc(t, i, n);
     let p = WI(i);
-    let m = e ?? CWU.createVariableSet(getI18nString("variables.authoring_modal.default_collection_name"), G6k.AUTOMATIC_FIRST_COLLECTION);
-    let h = CWU.createVariable(c, m, p, d);
-    return fn(h) ? (Y5.triggerAction("commit"), h) : null;
+    let m = e ?? VariablesBindings.createVariableSet(getI18nString("variables.authoring_modal.default_collection_name"), VariableCollectionContext.AUTOMATIC_FIRST_COLLECTION);
+    let h = VariablesBindings.createVariable(c, m, p, d);
+    return fn(h) ? (fullscreenValue.triggerAction("commit"), h) : null;
   }, []);
 }
 export function $$m2() {
@@ -23,8 +23,8 @@ export function $$m2() {
       let n = getI18nString("variables.variable_collection_default_name");
       return g(t + n, i);
     }(e, t);
-    let n = CWU.createVariableSet(i, G6k.VARIABLES_MODAL);
-    Y5.triggerAction("commit");
+    let n = VariablesBindings.createVariableSet(i, VariableCollectionContext.VARIABLES_MODAL);
+    fullscreenValue.triggerAction("commit");
     return n;
   }, []);
 }
@@ -35,8 +35,8 @@ export function $$h1() {
       let n = getI18nString("variables.variable_collection_extension_default_name");
       return g(t + n, i);
     }(e, i);
-    let a = CWU.createVariableSetExtension(n, t);
-    Y5.triggerAction("commit");
+    let a = VariablesBindings.createVariableSetExtension(n, t);
+    fullscreenValue.triggerAction("commit");
     return a;
   }, []);
   return Ot() ? e : null;

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { G1 } from "../figma_app/691470";
-import { B9 } from "../905/125019";
-import { l7 } from "../905/189185";
+import { bytesToHex } from "../905/125019";
+import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { UD } from "../figma_app/624361";
 import { $, b as _$$b } from "../905/776478";
@@ -40,12 +40,12 @@ async function g({
   let c = await UD(d, "image/png", r);
   if (!e.isAlive || !o()) return;
   let p = [...e.fills];
-  l7.ai("first-draft-set-image-fill", () => {
+  permissionScopeHandler.ai("first-draft-set-image-fill", () => {
     e.insertImageInFillPaint(c);
   });
   let _ = e.fills[p.length];
-  let h = B9(_.image?.hash || []);
-  l7.ai("first-draft-set-image-fill", () => {
+  let h = bytesToHex(_.image?.hash || []);
+  permissionScopeHandler.ai("first-draft-set-image-fill", () => {
     _.imageScaleMode = n;
     e.fills = function (e, t) {
       let r = e.findIndex(e => "IMAGE" === e.type);

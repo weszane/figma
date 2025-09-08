@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 import { C7, Jc } from "../905/117474";
 export let $$l0 = forwardRef(({
   children: e,
@@ -26,7 +26,7 @@ export let $$l0 = forwardRef(({
   }(t);
   return jsx("div", {
     ...cellProps,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ref: i,
     children: e
   });

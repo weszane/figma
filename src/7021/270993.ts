@@ -2,9 +2,9 @@ import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Eh } from "../figma_app/617654";
 import { u } from "../905/774364";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../figma_app/990058";
-let $$d1 = nF(async (e, t) => {
+let $$d1 = createOptimistThunk(async (e, t) => {
   let {
     currentUserOrgId
   } = e.getState();
@@ -33,7 +33,7 @@ let $$d1 = nF(async (e, t) => {
     }));
   });
 });
-let $$c0 = nF(async (e, t) => {
+let $$c0 = createOptimistThunk(async (e, t) => {
   try {
     let a = t.workspace.defaultTeams?.map(e => e.teamId) || [];
     let n = a.filter(e => !t.teamIds.includes(e));

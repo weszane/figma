@@ -5,12 +5,12 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { $n, IK } from "../905/521428";
 import { c$, bL, l9, mc } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
 import { R as _$$R } from "../905/649743";
 import { T as _$$T } from "../905/2124";
-import { CUU, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { SceneNodeCpp, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import E from "classnames";
@@ -26,7 +26,7 @@ import { LN } from "../figma_app/975811";
 import { D as _$$D } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
 import { A as _$$A2 } from "../905/639174";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { Jr } from "../figma_app/624361";
 import { y7, Lt } from "../figma_app/385874";
@@ -75,7 +75,7 @@ export async function $$eb0(e) {
   let t = Array.from(e.animatedImage.hash).map(e => e.toString(16).padStart(2, "0")).join("");
   await Jr().loadImageByHash(t);
   let r = Sl(e);
-  return CUU.requestGIFData(r);
+  return SceneNodeCpp.requestGIFData(r);
 }
 export function $$eT3(e) {
   let [, t] = useAtomValueAndSetter($$eg4);
@@ -102,8 +102,8 @@ class eI extends Component {
     super(e);
     this.onRotateClockwiseClick = () => {
       this.props.onChange(Lt(this.props.paint, 90), zk.YES);
-      l7.user("image-rotate-clockwise", () => {
-        glU.repairThumbnails();
+      permissionScopeHandler.user("image-rotate-clockwise", () => {
+        Fullscreen.repairThumbnails();
       });
     };
     this.onScalingFactorChange = e => {
@@ -184,12 +184,12 @@ class eI extends Component {
     this.uploadImagePaint = () => {
       let e = this.props.paint.blendMode;
       let t = this.props.paint.opacity;
-      glU.uploadPaintImage(e, t);
+      Fullscreen.uploadPaintImage(e, t);
     };
     this.uploadMediaPaint = () => {
       let e = this.props.paint.blendMode;
       let t = this.props.paint.opacity;
-      glU.uploadPaintMedia(e, t);
+      Fullscreen.uploadPaintMedia(e, t);
     };
     this.waitingForGIF = !1;
     this.clearGIFContentRequest = () => {
@@ -519,7 +519,7 @@ export let $$eS1 = ["FILL", "FIT", "STRETCH", "TILE"];
 function ev(e) {
   let t = new _$$D();
   let r = t => {
-    "STRETCH" === t ? Y5.triggerActionInUserEditScope("crop-image") : e.onChange({
+    "STRETCH" === t ? fullscreenValue.triggerActionInUserEditScope("crop-image") : e.onChange({
       ...e.paint,
       imageScaleMode: t
     });
@@ -541,7 +541,7 @@ function ev(e) {
       recordingKey: e.recordingKey,
       children: [jsx(l9, {
         width: "fill",
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: getI18nString("fullscreen.properties_panel.image_scale_mode")
         })
       }), jsx(mc, {
@@ -556,7 +556,7 @@ class eA extends PureComponent {
     super(...arguments);
     this.imageScaleModeFormatter = new _$$D();
     this.onImageScaleModeChange = e => {
-      "STRETCH" === e ? Y5.triggerActionInUserEditScope("crop-image") : this.props.onChange({
+      "STRETCH" === e ? fullscreenValue.triggerActionInUserEditScope("crop-image") : this.props.onChange({
         ...this.props.paint,
         imageScaleMode: e
       });
@@ -646,7 +646,7 @@ export function $$eN5({
         hints: [0],
         htmlAttributes: {
           onKeyDownCapture: e => {
-            Y5.isReady() && f7(e);
+            fullscreenValue.isReady() && f7(e);
           }
         },
         max: t,

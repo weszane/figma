@@ -1,6 +1,6 @@
 import { createLocalFileKey, isLocalFileKey } from "../905/657242";
-import { glU, jXp, Oin, SIf, FAf, CWU, xae, btW, X3B } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, FontSourceType, UIVisibilitySetting, ColorStateTsApi, DesignWorkspace, VariablesBindings, UserInterfaceElements, SideType, PrototypingTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -28,7 +28,7 @@ import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
 import { kP, OB, Y6, FP, JM } from "../figma_app/91703";
 import { am } from "../figma_app/430563";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { hZ } from "../figma_app/990058";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { yJ as _$$yJ2 } from "../905/584989";
@@ -38,7 +38,7 @@ import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
 import { ds, f5 } from "../figma_app/314264";
 import { ZG, GT, mu, yn, $3 } from "../figma_app/840917";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UE } from "../905/628874";
 import { ds as _$$ds } from "../905/87821";
 import { NT } from "../figma_app/741237";
@@ -220,9 +220,9 @@ export async function $$ew5(e, t, i, n) {
     tagForLogging: $$eD3(i),
     forceViewOnly: z4.getIsExtension()
   }));
-  await Y5.loadAndStartFullscreenIfNecessary();
-  glU.setEditorType(mapEditorTypeToYF(i));
-  glU.setEditorTheme(r.theme.visibleTheme || "");
+  await fullscreenValue.loadAndStartFullscreenIfNecessary();
+  Fullscreen.setEditorType(mapEditorTypeToYF(i));
+  Fullscreen.setEditorTheme(r.theme.visibleTheme || "");
   let c = (await (n ? (async () => {
     let e = new b(() => _$$m.getFileMetadata({
       fileKey: t
@@ -246,14 +246,14 @@ export async function $$ew5(e, t, i, n) {
       family: {},
       style: {}
     },
-    sources: [jXp.SHARED]
+    sources: [FontSourceType.SHARED]
   };
   _$$n(e, m);
   e.dispatch(kP({
     needsUpgrade: c.needs_upgrade
   }));
-  Y5.figFileLoaded(t);
-  glU.openFileWithServerMetadata({
+  fullscreenValue.figFileLoaded(t);
+  Fullscreen.openFileWithServerMetadata({
     metadata: {
       file_key: c.file_key,
       source_file_key: c.source_file_key
@@ -314,8 +314,8 @@ export async function $$ew5(e, t, i, n) {
     requested: i,
     file: N.editorType
   }), i = mapFileTypeToEditorType(N.editorType));
-  (i === FEditorType.Sites || i === FEditorType.Figmake) && glU.addNewFileDefaultResponsiveSet();
-  i === FEditorType.Figmake && glU?.setEnabledFigmake(!0);
+  (i === FEditorType.Sites || i === FEditorType.Figmake) && Fullscreen.addNewFileDefaultResponsiveSet();
+  i === FEditorType.Figmake && Fullscreen?.setEnabledFigmake(!0);
   e.dispatch(OB({
     file: N,
     fullscreenEditorType: i
@@ -331,17 +331,17 @@ export async function $$ew5(e, t, i, n) {
 }
 export async function $$eC4(e, t, i) {
   e.dispatch(Y6({
-    mode: i ? Oin.HIDE_UI : Oin.OFF
+    mode: i ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF
   }));
-  await Y5.loadAndStartFullscreenIfNecessary();
-  SIf && ky.updateColorsInFullscreen(SIf.colorTokensState());
-  NT(FAf.DESIGN);
+  await fullscreenValue.loadAndStartFullscreenIfNecessary();
+  ColorStateTsApi && ky.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
+  NT(DesignWorkspace.DESIGN);
   getFeatureFlags().ce_new_missing_fonts_logging && e8();
   let n = e.getState().theme.visibleTheme;
-  Y5.updateAppModel({
+  fullscreenValue.updateAppModel({
     themePreference: n
   });
-  glU.openEmptyFile(mapEditorTypeToYF(t));
+  Fullscreen.openEmptyFile(mapEditorTypeToYF(t));
 }
 export function $$eT2(e) {
   let t = {};
@@ -395,7 +395,7 @@ async function ek(e, t, i, r, p) {
   }
   atomStoreManager.set(q7, !1);
   p ? (await p.onConnectNewFile(t), await p.session()?.restoreAutosaveIfNeeded()) : logInfo("new file", "failed to get autosave");
-  (t.nodeId || t.viewport) && glU.restorePageAndViewportFromURL(t.nodeId ?? null, t.viewport ?? null);
+  (t.nodeId || t.viewport) && Fullscreen.restorePageAndViewportFromURL(t.nodeId ?? null, t.viewport ?? null);
   let g = t;
   let f = () => (p?.fileCreationManager?.newFileInfo && (g = p?.fileCreationManager?.newFileInfo), g);
   let A = "slides" !== t.editorType && p?.managerState === "connected" && yp && !w5();
@@ -403,8 +403,8 @@ async function ek(e, t, i, r, p) {
     folderId: t.folder_id
   }).then(e => {
     let t = e.data.meta;
-    for (let e of Object.keys(t)) l7.system("set-default-mode-from-workspace-team", () => {
-      CWU.setExplicitVariableModeForSelection(e, {
+    for (let e of Object.keys(t)) permissionScopeHandler.system("set-default-mode-from-workspace-team", () => {
+      VariablesBindings.setExplicitVariableModeForSelection(e, {
         guid: t[e],
         collectionKey: e,
         extendedCollectionId: null
@@ -487,7 +487,7 @@ async function ek(e, t, i, r, p) {
       forwardToDatadog: !0
     });
     e.dispatch(FP({
-      tab: xae.ASSETS,
+      tab: UserInterfaceElements.ASSETS,
       persist: !0
     }));
     atomStoreManager.set(dL, i);
@@ -595,12 +595,12 @@ export function $$eN8(e, t, i) {
           view: "recentsAndSharing"
         }));
         let i = e.getState().teams[e.getState().currentTeamId ?? ""];
-        i && i.starter_team && "sites" === t.editorType && _$$M ? e.dispatch(to({
+        i && i.starter_team && "sites" === t.editorType && _$$M ? e.dispatch(showModalHandler({
           type: _$$M,
           data: {
             team: i
           }
-        })) : i && i.starter_team && "figmake" === t.editorType && _$$W() && e.dispatch(to({
+        })) : i && i.starter_team && "figmake" === t.editorType && _$$W() && e.dispatch(showModalHandler({
           type: _$$i,
           data: {
             team: i
@@ -672,9 +672,9 @@ export function $$eO7(e) {
   let t = e && $W[e];
   if (t) {
     let e = `${t.name} -`;
-    glU.createFrame(e, t.width, t.height, btW.RIGHT, !0);
-    Y5.triggerAction("zoom-to-fit");
-    X3B.updateCurrentPagePrototypeDeviceIfNecessary();
+    Fullscreen.createFrame(e, t.width, t.height, SideType.RIGHT, !0);
+    fullscreenValue.triggerAction("zoom-to-fit");
+    PrototypingTsApi.updateCurrentPagePrototypeDeviceIfNecessary();
   }
 }
 export function $$eD3(e) {

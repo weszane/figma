@@ -1,4 +1,4 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
@@ -79,7 +79,7 @@ function $$g({
   });
   widget.useEffect(() => {
     widget.waitForTask(new Promise(e => {
-      getFeatureFlags().figjam_embed_auto_activate && glU?.setActiveEmbed(_);
+      getFeatureFlags().figjam_embed_auto_activate && Fullscreen?.setActiveEmbed(_);
       e();
     }));
   });
@@ -245,7 +245,7 @@ function $$g({
     src: Rr,
     onClick: () => {
       M(yc.EMBED_CLICK);
-      glU?.setActiveEmbed(_);
+      Fullscreen?.setActiveEmbed(_);
     }
   }) : e.widget.h(AutoLayout, {
     name: "view-button",
@@ -258,7 +258,7 @@ function $$g({
     fill: "#fff",
     onClick: () => {
       M(yc.EMBED_CLICK);
-      glU?.setActiveEmbed(_);
+      Fullscreen?.setActiveEmbed(_);
     }
   }, e.widget.h(Text, {
     fontSize: 14,
@@ -361,7 +361,7 @@ export function $$_1({
           });
           _widget.useEffect(() => {
             _widget.waitForTask(new Promise(e => {
-              getFeatureFlags().figjam_embed_auto_activate && glU?.setActiveEmbed(A);
+              getFeatureFlags().figjam_embed_auto_activate && Fullscreen?.setActiveEmbed(A);
               e();
             }));
           });
@@ -478,7 +478,7 @@ export function $$_1({
             src: Rr,
             onClick: () => {
               z(yc.EMBED_CLICK);
-              glU?.setActiveEmbed(A);
+              Fullscreen?.setActiveEmbed(A);
             }
           }) : e.widget.h(_AutoLayout, {
             name: "view-button",
@@ -495,7 +495,7 @@ export function $$_1({
                 rawInput: e
               }));
               z(yc.EMBED_CLICK);
-              glU?.setActiveEmbed(A);
+              Fullscreen?.setActiveEmbed(A);
             }
           }, e.widget.h(Text, {
             fontSize: 14,
@@ -665,7 +665,7 @@ export function $$_1({
             }));
             break;
           case "convert_to_text":
-            glU?.replaceNodeWithText(l, p);
+            Fullscreen?.replaceNodeWithText(l, p);
             break;
           default:
             console.error("Unhandled property name for Embed widget: %s", e);

@@ -1,6 +1,6 @@
 import { z, Ip } from "../905/239603";
 import { Ay } from "../905/612521";
-import { YV } from "../figma_app/181241";
+import { createMetaValidator } from "../figma_app/181241";
 import { WU } from "../figma_app/35887";
 let o = z.object({
   script: z.string(),
@@ -27,7 +27,7 @@ let o = z.object({
 });
 let $$l0 = new class {
   constructor() {
-    this.FileMetadataSchemaValidator = YV("FileMetadataSchemaValidator", o, null, !1);
+    this.FileMetadataSchemaValidator = createMetaValidator("FileMetadataSchemaValidator", o, null, !1);
   }
   getFileMetadata(e) {
     let t = new URLSearchParams(Ay.location.search);
@@ -46,4 +46,4 @@ let $$l0 = new class {
     });
   }
 }();
-export const m = $$l0; 
+export const m = $$l0;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
@@ -32,7 +32,7 @@ let $$h0 = memo(function () {
     style: dropdownShown.data.position,
     children: o ? jsx(p, {
       recordingKey: `goToLocalComponent.${i.node_id}`,
-      onClick: () => glU.goToSymbolOrStateGroupById(i.node_id, !1),
+      onClick: () => Fullscreen.goToSymbolOrStateGroupById(i.node_id, !1),
       children: renderI18nText("design_systems.instance_swap_picker.go_to_main_component")
     }) : jsx(p, {
       recordingKey: `goToSubscribedComponent.${i.node_id}`,

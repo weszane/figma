@@ -36,7 +36,7 @@ import { JK } from "../figma_app/514043";
 import { A as _$$A3 } from "../905/27250";
 import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t2 } from "../905/150656";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { bL, DZ, mc, zW, c$ } from "../905/493196";
 import { analyticsEventManager } from "../905/449184";
 import { iZ } from "../905/372672";
@@ -1248,7 +1248,7 @@ function e$({
         })]
       }), m && jsxs("div", {
         className: _$$s.flex.alignCenter.gap8.$,
-        children: [jsx(_$$J, {
+        children: [jsx(Label, {
           className: "library_item_stats_by_asset--dropdownLabel--pciWg text--fontPos11--2LvXf text--_fontBase--QdLsd",
           htmlFor: A,
           children: getI18nString("design_systems.libraries_modal.collection")

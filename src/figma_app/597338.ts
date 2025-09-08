@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { L as _$$L } from "../905/704296";
-import { AWq, Liw } from "../figma_app/763686";
+import { HistoryChangesBindings, ChangeType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { A } from "../905/920142";
@@ -39,7 +39,7 @@ export function $$T2(e, t) {
   });
 }
 function I(e) {
-  return Math.max(AWq.getChangeCountForStatus(e), 0);
+  return Math.max(HistoryChangesBindings.getChangeCountForStatus(e), 0);
 }
 export function $$S0({
   compareId: e,
@@ -49,8 +49,8 @@ export function $$S0({
   let [c, g] = useState(null);
   let [S, v] = useState({});
   let A = useSelector(e => !!e.modalShown);
-  let x = I(Liw.EDITED);
-  let N = x + I(Liw.CREATED) + (I(Liw.LIBRARY_UPDATES) + I(Liw.AFFECTED)) + I(Liw.REMOVED);
+  let x = I(ChangeType.EDITED);
+  let N = x + I(ChangeType.CREATED) + (I(ChangeType.LIBRARY_UPDATES) + I(ChangeType.AFFECTED)) + I(ChangeType.REMOVED);
   let C = [];
   let w = Object.keys(S).length;
   let O = w > 8;

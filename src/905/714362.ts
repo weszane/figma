@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { addBreadcrumb, captureException } from '@sentry/browser'
 import { getSentryConfig } from '../905/256712'
-import { y as _$$y } from '../905/270963'
 import { addToMultiValueMapAtom } from '../905/755472'
 import { getLogLevelName } from '../905/954389'
-import { NUh } from '../figma_app/763686'
+import { LogToConsoleMode } from '../figma_app/290762'
+
 import { withScope } from '../vendor/325489'
 
 /**
@@ -92,7 +92,7 @@ export function setModeEventHandler(handler: ModeEventHandler) {
  * Logging options type.
  */
 export interface LogOptions {
-  logToConsole?: typeof NUh
+  logToConsole?: LogToConsoleMode
   createSentryBreadcrumb?: boolean
   modeEventName?: string
   forwardToDatadog?: boolean
@@ -125,7 +125,7 @@ function logWithLevel(
   options?: Partial<LogOptions>,
 ) {
   const opts: LogOptions = {
-    logToConsole: NUh.DEFAULT,
+    logToConsole: LogToConsoleMode.DEFAULT,
     createSentryBreadcrumb: true,
     modeEventName: '',
     forwardToDatadog: false,
@@ -137,8 +137,8 @@ function logWithLevel(
 
   // Console logging
   if (
-    opts.logToConsole === NUh.ALWAYS
-    || (opts.logToConsole === NUh.DEFAULT && sentryConfig.slogToConsole)
+    opts.logToConsole === LogToConsoleMode.ALWAYS
+    || (opts.logToConsole === LogToConsoleMode.DEFAULT && sentryConfig.slogToConsole)
   ) {
     ({
       debug: console.debug,
@@ -216,11 +216,11 @@ function logWithLevel(
   }
 
   // External logger
-  _$$y?.logger.log(
-    message,
-    data,
-    mapLogLevel(level),
-  )
+  // _$$y?.logger.log(
+  //   message,
+  //   data,
+  //   mapLogLevel(level),
+  // )
 }
 
 /**
@@ -247,7 +247,7 @@ function normalizeModeEventName(eventName: string): string {
  * Maps log level to logger method.
  * @original inline function in y
  */
-function mapLogLevel(level: string): string {
+export function mapLogLevel(level: string): string {
   switch (level) {
     case 'fatal':
     case 'error':

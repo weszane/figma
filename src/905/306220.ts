@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { o6, Am, aH, M5, C0 } from "../figma_app/806412";
 import { Point } from "../905/736624";
@@ -220,11 +220,11 @@ class f extends o6 {
       children: [jsxs("div", {
         ref: this.barRef,
         style: e,
-        children: [this.props.colorProfile === RYP.SRGB ? jsx("canvas", {
+        children: [this.props.colorProfile === ColorSpaceEnum.SRGB ? jsx("canvas", {
           ref: this.srgbCanvasRef,
           width: `${this.canvasWidth()}px`,
           height: `${this.canvasHeight()}px`
-        }) : void 0, this.props.colorProfile === RYP.DISPLAY_P3 ? jsx("canvas", {
+        }) : void 0, this.props.colorProfile === ColorSpaceEnum.DISPLAY_P3 ? jsx("canvas", {
           ref: this.displayP3CanvasRef,
           width: `${this.canvasWidth()}px`,
           height: `${this.canvasHeight()}px`
@@ -296,7 +296,7 @@ export function $$x2({
       t.style.borderColor = "white";
       t.style.borderWidth = `${$$b0}px`;
       let i = x(e);
-      I === RYP.DISPLAY_P3 && p3() ? t.style.backgroundImage = `url(${rl(i, I || RYP.SRGB)})` : t.style.background = E.format(i, VG(I || RYP.SRGB));
+      I === ColorSpaceEnum.DISPLAY_P3 && p3() ? t.style.backgroundImage = `url(${rl(i, I || ColorSpaceEnum.SRGB)})` : t.style.background = E.format(i, VG(I || ColorSpaceEnum.SRGB));
     }
   }, [x, I, "ui3"]);
   let C = $$_3("ui3");

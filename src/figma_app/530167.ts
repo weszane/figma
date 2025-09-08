@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { yr } from "../905/827765";
-import { u9, En, vs, AS } from "../figma_app/661371";
+import { hasMorePages, fetchPaginatedData, DEFAULT_PAGE_SIZE, PAGINATION_NEXT } from "../figma_app/661371";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -12,7 +12,7 @@ import { F } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { HD, Co } from "../figma_app/471982";
 import { Gu } from "../figma_app/640564";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { UU } from "../figma_app/770088";
 import { sf } from "../905/929976";
 import { kE } from "../figma_app/703138";
@@ -31,7 +31,7 @@ import { Oo, HZ, cr } from "../905/926523";
 let $$P2 = NC("COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER");
 let $$D27 = NC("COMMUNITY_HUB_HIDE_ADMIN_PROFILE_BANNER");
 let $$k14 = _$$cR;
-let $$M3 = nF((e, t) => {
+let $$M3 = createOptimistThunk((e, t) => {
   let r;
   let {
     user,
@@ -96,12 +96,12 @@ let K = (e, t) => {
   let r = /\?/.test(e) ? "&" : "?";
   return e + `${r}${t}`;
 };
-let $$Y24 = nF((e, t) => {
-  if (!u9(t)) return;
+let $$Y24 = createOptimistThunk((e, t) => {
+  if (!hasMorePages(t)) return;
   let r = `/api/${_$$n(t.resourceType)}/${t.resourceId}/comments`;
   t.selectedCommentId && t.selectedCommentId !== hm && !t.pagination?.selected_comment && (r = K(r, `selected_comment_id=${t.selectedCommentId}`));
   t.activeFeedType === Qv.ME && (r = K(r, `feed_type=${t.activeFeedType}`), void 0 === t.numCommentsForResource && (r = K(r, "include_total_count=true")));
-  En(r, t.pageSizeOverride ?? vs, t, AS).then(e => {
+  fetchPaginatedData(r, t.pageSizeOverride ?? DEFAULT_PAGE_SIZE, t, PAGINATION_NEXT).then(e => {
     let r = !e.selected_comment || e.comments.find(t => t.id === e.selected_comment?.id);
     let {
       commentsById,
@@ -130,7 +130,7 @@ let $$Y24 = nF((e, t) => {
   });
 });
 let $$$5 = NC("COMMUNITY_HUB_RESTRICT_PROFILE");
-let $$X10 = nF((e, {
+let $$X10 = createOptimistThunk((e, {
   profileId: t,
   blockedProfileId: r,
   onSuccess: n
@@ -156,7 +156,7 @@ let $$X10 = nF((e, {
   }));
 });
 let $$q25 = NC("COMMUNITY_HUB_UNRESTRICT_PROFILE");
-let $$J16 = nF((e, {
+let $$J16 = createOptimistThunk((e, {
   profileId: t,
   blockedProfileId: r,
   onSuccess: n
@@ -182,7 +182,7 @@ let $$J16 = nF((e, {
   }));
 });
 let $$Z20 = NC("COMMUNITY_HUB_SET_COMMENT_STATE");
-let $$Q29 = nF((e, t) => {
+let $$Q29 = createOptimistThunk((e, t) => {
   let {
     id,
     type
@@ -191,7 +191,7 @@ let $$Q29 = nF((e, t) => {
   e.dispatch($$G26(t));
   e.dispatch($$Z20(t));
 });
-nF((e, {
+createOptimistThunk((e, {
   profileId: t,
   on404Redirect: r
 }, {
@@ -208,7 +208,7 @@ nF((e, {
     e.dispatch(sf(e.getState().selectedView));
   }).catch(t => (404 === t.status && r ? r() : e.dispatch(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))), null));
 });
-nF((e, {
+createOptimistThunk((e, {
   handle: t,
   on404Redirect: r
 }, {
@@ -233,7 +233,7 @@ nF((e, {
 }, ({
   handle: e
 }) => `COMMUNITY_HUB_GET_PROFILE_BY_HANDLE_${e}`);
-let $$ee28 = nF((e, t, {
+let $$ee28 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let {
@@ -289,7 +289,7 @@ let $$ee28 = nF((e, t, {
 }, ({
   userId: e
 }) => `COMMUNITY_HUB_CREATE_PROFILE_${e}`);
-let $$et21 = nF((e, t) => {
+let $$et21 = createOptimistThunk((e, t) => {
   XHR.post("/api/profile/generate_handle").then(({
     data: r
   }) => {
@@ -302,7 +302,7 @@ let $$et21 = nF((e, t) => {
     e.dispatch(_$$s.error(t.message));
   });
 });
-let $$er12 = nF((e, t, {
+let $$er12 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let {
@@ -409,7 +409,7 @@ let $$er12 = nF((e, t, {
 }, ({
   profileId: e
 }) => `COMMUNITY_HUB_UPDATE_PROFILE_${e}`);
-let $$en23 = nF((e, t, {
+let $$en23 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let {
@@ -435,7 +435,7 @@ let $$en23 = nF((e, t, {
     e.dispatch(_$$s.error(getI18nString("community.actions.unable_to_delete_profile_please_try_again_later")));
   });
 });
-let $$ei1 = nF(async (e, {
+let $$ei1 = createOptimistThunk(async (e, {
   file: t,
   profileId: r,
   onSuccessCallback: n
@@ -482,7 +482,7 @@ async function ea(e, t, r) {
   };
 }
 let $$es17 = NC("COMMUNTY_HUB_FOLLOW_ENTITY");
-let $$eo18 = nF(async (e, t, {
+let $$eo18 = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
   let n = XHR.put("/api/follows", {
@@ -514,7 +514,7 @@ let $$eo18 = nF(async (e, t, {
   e.dispatch($$es17(t));
 }, e => `COMMUNTY_HUB_FOLLOW_ENTITY_${e}`);
 let $$el19 = NC("COMMUNTY_HUB_UNFOLLOW_ENTITY");
-let $$ed8 = nF((e, t, {
+let $$ed8 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
   let n = XHR.del("/api/follows", {
@@ -547,7 +547,7 @@ export function $$ec15(e) {
     clearMetadataAndStatus: NC(`${e}_CLEAR_PUBLISHING`)
   };
 }
-nF(async (e, t) => {
+createOptimistThunk(async (e, t) => {
   let r;
   let {
     thread,

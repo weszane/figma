@@ -6,7 +6,7 @@ import { iB } from "../figma_app/188671";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { mr } from "../figma_app/45218";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 export function $$p3(e, t) {
   if (t) switch (t) {
     case FTemplateCategoryType.CANVAS:
@@ -32,25 +32,25 @@ export function $$p3(e, t) {
   }
   if (e) switch (e) {
     case FFileType.DESIGN:
-    case FW.FIGMA:
+    case ManifestEditorType.FIGMA:
       return k.Editors.FIGMA;
     case FFileType.WHITEBOARD:
-    case FW.FIGJAM:
+    case ManifestEditorType.FIGJAM:
       return k.Editors.FIGJAM;
     case FFileType.SLIDES:
-    case FW.SLIDES:
+    case ManifestEditorType.SLIDES:
       return k.Editors.SLIDES;
     case FFileType.SITES:
-    case FW.SITES:
+    case ManifestEditorType.SITES:
       return k.Editors.SITES;
-    case FW.INSPECT:
-    case FW.DEV:
+    case ManifestEditorType.INSPECT:
+    case ManifestEditorType.DEV:
       return k.Editors.DEV_MODE;
     case FFileType.COOPER:
       return k.Editors.COOPER;
     case FFileType.FIGMAKE:
       return k.Editors.FIGMAKE;
-    case FW.BUZZ:
+    case ManifestEditorType.BUZZ:
       return k.Editors.COOPER;
     default:
       throwTypeError(e);

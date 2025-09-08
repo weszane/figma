@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
@@ -12,11 +12,11 @@ import { renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { XU } from "../905/576487";
 import { h as _$$h } from "../905/142086";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { up } from "../905/760074";
 import { q5 } from "../figma_app/516028";
-export let $$b0 = Ju(function ({
+export let $$b0 = registerModal(function ({
   titleText: e,
   bodyText: t,
   ...i
@@ -50,7 +50,7 @@ export let $$b0 = Ju(function ({
         children: [jsx($z, {
           variant: "secondary",
           onClick: () => {
-            v(Ce());
+            v(hideModal());
           },
           trackingProperties: {
             trackingDescriptor: _$$c.CANCEL

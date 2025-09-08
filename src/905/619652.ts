@@ -1,6 +1,6 @@
 import { kiwiParserCodec } from "../905/294864";
-import { rrT, Vzr, CUU, tvY } from "../figma_app/763686";
-import { dI, fn } from "../905/871411";
+import { NodePropertyCategory, Thumbnail, SceneNodeCpp, BackgroundPattern } from "../figma_app/763686";
+import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { UE } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { VG } from "../figma_app/622881";
@@ -20,11 +20,11 @@ export function $$u5(e, t) {
     }
   };
   switch (t) {
-    case rrT.STROKE:
-    case rrT.STROKE_PRESET:
+    case NodePropertyCategory.STROKE:
+    case NodePropertyCategory.STROKE_PRESET:
       i.strokePaints = [e];
       break;
-    case rrT.FILL:
+    case NodePropertyCategory.FILL:
     default:
       i.fillPaints = [e];
   }
@@ -36,7 +36,7 @@ export function $$u5(e, t) {
   });
 }
 export function $$p8(e, t, i = UE) {
-  return c(Vzr.generatePaintIcon({
+  return c(Thumbnail.generatePaintIcon({
     width: Math.round(t.x),
     height: Math.round(t.y),
     paint: $$u5(e),
@@ -49,12 +49,12 @@ export function $$p8(e, t, i = UE) {
   }));
 }
 export function $$m0(e, t) {
-  if (!Vzr) return null;
+  if (!Thumbnail) return null;
   let i = XE(e);
   if (!i) return null;
-  let n = dI(i.sourceNodeId);
-  if (!n || !fn(i.sourceNodeId)) return null;
-  let [s, o] = Vzr.generateThumbnailForNode(n, 2 * Math.round(t.x), 2 * Math.round(t.y), 4, {
+  let n = sessionLocalIDToString(i.sourceNodeId);
+  if (!n || !isValidSessionLocalID(i.sourceNodeId)) return null;
+  let [s, o] = Thumbnail.generateThumbnailForNode(n, 2 * Math.round(t.x), 2 * Math.round(t.y), 4, {
     useRenderTreeWithoutEffects: !0
   });
   if (o) {
@@ -68,10 +68,10 @@ export function $$m0(e, t) {
 export function $$h4(e, t, i) {
   let n = $$u5(e, i);
   let a = new Uint8Array(t.buffer);
-  return CUU.updateStillImageAndSelectionPropertiesForGIF(n, a);
+  return SceneNodeCpp.updateStillImageAndSelectionPropertiesForGIF(n, a);
 }
-export function $$g7(e, t, i, n = tvY.CHECKERBOARD, a = !1, s = !1, o = !1, l = !1) {
-  return c(Vzr.generateExportThumbnail({
+export function $$g7(e, t, i, n = BackgroundPattern.CHECKERBOARD, a = !1, s = !1, o = !1, l = !1) {
+  return c(Thumbnail.generateExportThumbnail({
     width: Math.round(e.x),
     height: Math.round(e.y),
     nodeId: t,
@@ -85,7 +85,7 @@ export function $$g7(e, t, i, n = tvY.CHECKERBOARD, a = !1, s = !1, o = !1, l = 
   }));
 }
 export function $$f6(e, t, i, n = !1) {
-  return c(Vzr.generateExportPreview({
+  return c(Thumbnail.generateExportPreview({
     width: Math.round(e.x),
     height: Math.round(e.y),
     useAbsoluteBounds: t,
@@ -94,7 +94,7 @@ export function $$f6(e, t, i, n = !1) {
   }));
 }
 export function $$_1(e) {
-  return Vzr.generateObjectsPanelIcon(e) ?? "";
+  return Thumbnail.generateObjectsPanelIcon(e) ?? "";
 }
 export function $$A3(e, t, i) {
   let n = document.createElement("canvas");

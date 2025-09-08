@@ -7,7 +7,7 @@ import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { gl, oV, hS } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { f4 } from "../figma_app/722362";
 import { zk } from "../figma_app/198712";
@@ -207,8 +207,8 @@ export function $$T1() {
     }
   }), []);
   let [s, r] = useState(() => C(e, l));
-  let u = gl(e) ? oV : e?.[0]?.opacity ?? 0;
-  hS(u) && s && l[s] && (u /= l[s]?.value?.[0]?.opacityMultiplier || 1);
+  let u = isInvalidValue(e) ? MIXED_MARKER : e?.[0]?.opacity ?? 0;
+  isValidValue(u) && s && l[s] && (u /= l[s]?.value?.[0]?.opacityMultiplier || 1);
   f4(() => r(C(e, l)));
   return {
     shadowStylePresetOptions: l,
@@ -217,7 +217,7 @@ export function $$T1() {
     showShadowOpacityControl: !!e,
     onChangeShadowStyleControl: e => {
       let o = l[e].value;
-      let n = hS(u) && u || .25;
+      let n = isValidValue(u) && u || .25;
       t(o ? o.map(e => ({
         offset: {
           x: e.x,
@@ -230,7 +230,7 @@ export function $$T1() {
       r(e);
     },
     onChangeShadowOpacity: o => {
-      if (hS(e) && e) {
+      if (isValidValue(e) && e) {
         let n = s && l[s];
         t(e.map((e, t) => ({
           ...e,
@@ -241,7 +241,7 @@ export function $$T1() {
   };
 }
 function C(e, t) {
-  if (!gl(e)) {
+  if (!isInvalidValue(e)) {
     if (!e) return "NONE";
     if (N(e, t.LIGHT.value) || N(e, t.LIGHT.legacyValue)) return "LIGHT";
     if (N(e, t.MEDIUM.value) || N(e, t.MEDIUM.legacyValue)) return "MEDIUM";

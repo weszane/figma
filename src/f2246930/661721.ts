@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo, useState, useCallback, useRef, PureComponent } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { i as _$$i } from "../905/97346";
-import { Egt, NfO, Hcu } from "../figma_app/763686";
+import { SceneGraphHelpers, PluginHelpers, figmaScopeBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
@@ -20,7 +20,7 @@ import { UK } from "../figma_app/740163";
 import { hq, wr } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { nt } from "../9314/278494";
 import { Xt } from "../figma_app/889655";
 import { G2 } from "../figma_app/314591";
@@ -41,7 +41,7 @@ function O(e, t) {
   }, [e, t]);
 }
 export function $$L0() {
-  let e = J2(UK().showFigmaScope);
+  let e = getObservableOrFallback(UK().showFigmaScope);
   let {
     setIsOpen,
     setClosed
@@ -76,7 +76,7 @@ function F({
   let l = useSelector(J);
   let a = useCallback(e => {
     let l = e.guids[0];
-    l && ("canvas" === e.selectionType && Egt && Egt.setSelectedNodeAndCanvas(l, !1) && (hq(l), NfO && NfO.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (wr(), t(Bn({
+    l && ("canvas" === e.selectionType && SceneGraphHelpers && SceneGraphHelpers.setSelectedNodeAndCanvas(l, !1) && (hq(l), PluginHelpers && PluginHelpers.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (wr(), t(Bn({
       type: e.styleType,
       styleIds: new Set(e.guids),
       folderNames: new Set()
@@ -95,7 +95,7 @@ function I({
 }) {
   let c = _6();
   let m = tS();
-  let f = J2(Hcu.sceneGeneration());
+  let f = getObservableOrFallback(figmaScopeBindings.sceneGeneration());
   let [w] = _$$A(f, 500, {
     trailing: !0
   });
@@ -133,7 +133,7 @@ function I({
     windowInnerHeight
   } = _$$l();
   let [P, K] = useState(window.innerHeight / 2);
-  let Y = useMemo(() => windowInnerHeight - qE(P, parsePxInt("design" === I ? LdP : tui), windowInnerHeight - 32), [P, I, windowInnerHeight]);
+  let Y = useMemo(() => windowInnerHeight - clamp(P, parsePxInt("design" === I ? LdP : tui), windowInnerHeight - 32), [P, I, windowInnerHeight]);
   let B = Xr(_$$O);
   useEffect(() => {
     B(Y);

@@ -1,32 +1,31 @@
-import { atom } from 'jotai'
-import { h0, JJ, zu } from '../figma_app/61403'
-import { z7E } from '../figma_app/763686'
-
-let $$s4 = 2e3
-let $$o6 = 2e3
-let $$l10 = atom($$s4)
-let $$d5 = atom($$o6)
-let $$c12 = atom('')
-let $$u2 = atom(0)
-let $$p11 = atom(!1)
-let $$_1 = atom(null)
-let $$h7 = atom(h0.AWAITING_PLAYBACK)
-let $$m8 = atom(z7E.DEFAULT)
-let $$g3 = atom(zu.DEFAULT)
-let $$f13 = atom(void 0)
-let $$E0 = atom(JJ.CANVAS)
-let $$y9 = atom(0)
-export const $i = $$E0
-export const Dh = $$_1
-export const Ds = $$u2
-export const H7 = $$g3
-export const Lw = $$s4
-export const Sf = $$d5
-export const WW = $$o6
-export const a8 = $$h7
-export const iB = $$m8
-export const jE = $$y9
-export const jr = $$l10
-export const mH = $$p11
-export const nG = $$c12
-export const oO = $$f13
+import { atom } from 'jotai';
+import { h0, JJ, zu } from '../figma_app/61403';
+import { PaintTools } from '../figma_app/763686';
+let $$s4 = 2e3;
+let $$o6 = 2e3;
+let $$l10 = atom($$s4);
+let $$d5 = atom($$o6);
+let $$c12 = atom('');
+let $$u2 = atom(0);
+let $$p11 = atom(!1);
+let $$_1 = atom(null);
+let $$h7 = atom(h0.AWAITING_PLAYBACK);
+let $$m8 = atom(PaintTools.DEFAULT);
+let $$g3 = atom(zu.DEFAULT);
+let $$f13 = atom(void 0);
+let $$E0 = atom(JJ.CANVAS);
+let $$y9 = atom(0);
+export const $i = $$E0;
+export const Dh = $$_1;
+export const Ds = $$u2;
+export const H7 = $$g3;
+export const Lw = $$s4;
+export const Sf = $$d5;
+export const WW = $$o6;
+export const a8 = $$h7;
+export const iB = $$m8;
+export const jE = $$y9;
+export const jr = $$l10;
+export const mH = $$p11;
+export const nG = $$c12;
+export const oO = $$f13;

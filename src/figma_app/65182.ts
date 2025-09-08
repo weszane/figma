@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { uN } from "../figma_app/338442";
-import { J0O, fOf, glU } from "../figma_app/763686";
+import { ComponentPropType, ComponentType, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
 import { Mz } from "../vendor/925040";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { tL } from "../figma_app/933328";
 import { CG, NY } from "../figma_app/646357";
 import { Qp, FZ } from "../figma_app/803787";
@@ -17,7 +17,7 @@ import { pf } from "../905/221848";
 import { n as _$$n } from "../905/347702";
 import { Lg } from "../figma_app/505098";
 export function $$T2(e) {
-  return e === J0O.INSTANCE_SWAP || !!getFeatureFlags().dse_slots && e === J0O.SLOT;
+  return e === ComponentPropType.INSTANCE_SWAP || !!getFeatureFlags().dse_slots && e === ComponentPropType.SLOT;
 }
 let $$I6 = e => ["preferredValuesInstancePicker", ...e];
 let $$S0 = e => ({
@@ -43,7 +43,7 @@ let C = (e, t) => ({
   loadingKey: $$N3(e.getState().openFile?.key),
   callbackForComponent: t
 });
-let w = nF((e, {
+let w = createOptimistThunk((e, {
   stateGroupKeys: t,
   componentKeys: r,
   callback: n
@@ -67,7 +67,7 @@ export function $$L9(e) {
   let t = k9(() => {
     var t;
     var r;
-    return $$T2(e?.type) ? (t = e.type, r = e.preferredValues, $$T2(t) ? r.filter(e => "key" in e && "string" == typeof e.key && "type" in e && e.type in fOf) : []) : [];
+    return $$T2(e?.type) ? (t = e.type, r = e.preferredValues, $$T2(t) ? r.filter(e => "key" in e && "string" == typeof e.key && "type" in e && e.type in ComponentType) : []) : [];
   }, [e]);
   let r = useSelector(aR);
   let o = useMemo(() => t.map(e => {
@@ -91,7 +91,7 @@ export function $$L9(e) {
     let e = [];
     let t = [];
     missingValues.forEach(r => {
-      m.current.has(r.key) || (r.type === fOf.COMPONENT ? e.push(r.key) : t.push(r.key));
+      m.current.has(r.key) || (r.type === ComponentType.COMPONENT ? e.push(r.key) : t.push(r.key));
     });
     e.length > 0 || t.length > 0 ? _(w({
       componentKeys: e,
@@ -111,14 +111,14 @@ export function $$L9(e) {
           let n = a.findIndex(e => e.key === t || r[e.key] === t);
           -1 !== n && "ADD" !== i ? a.splice(n, 1) : -1 === n && "REMOVE" !== i && a.push({
             key: t,
-            type: e.type === PW.COMPONENT ? fOf.COMPONENT : fOf.STATE_GROUP
+            type: e.type === PW.COMPONENT ? ComponentType.COMPONENT : ComponentType.STATE_GROUP
           });
         });
         Object.keys(r).length > 0 && a.forEach((e, t) => {
           let n = r[e.key];
           n && (a[t].key = n);
         });
-        glU.editInstanceSwapPreferredValues(e.explicitDefID, a);
+        Fullscreen.editInstanceSwapPreferredValues(e.explicitDefID, a);
       }
     }, [e, r, t]),
     handleSetPreferredValues: useCallback(t => {
@@ -127,10 +127,10 @@ export function $$L9(e) {
         let t = CG(e);
         return {
           key: r[t] ?? t,
-          type: e.type === PW.COMPONENT ? fOf.COMPONENT : fOf.STATE_GROUP
+          type: e.type === PW.COMPONENT ? ComponentType.COMPONENT : ComponentType.STATE_GROUP
         };
       });
-      glU.editInstanceSwapPreferredValues(e.explicitDefID, n);
+      Fullscreen.editInstanceSwapPreferredValues(e.explicitDefID, n);
     }, [e, r]),
     preferredValuesFetchError: f,
     retryPreferredValuesFetch: I

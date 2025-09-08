@@ -12,19 +12,19 @@ import { js, Z6, cP, _X } from "../figma_app/451499";
 import { Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
 import { c$, bL, l9, mc, wv } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { J as _$$J } from "../905/614223";
-import { glU, rXF } from "../figma_app/763686";
+import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { I7 } from "../figma_app/594947";
-import { E7, gl, hS } from "../905/216495";
+import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
 import { av } from "../figma_app/316316";
 import { ZM } from "../figma_app/505098";
 import { cJ } from "../905/561485";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
-import { aI, Hr, dI } from "../905/871411";
+import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { Y1 } from "../905/143116";
 import { s as _$$s } from "../cssbuilder/589278";
 import { u as _$$u } from "../figma_app/852050";
@@ -93,7 +93,7 @@ function A({
 function w(e) {
   let t = `prototype-action-select-${e.recordingKey}`;
   let n = e.dropdownShown && e.dropdownShown.type === t;
-  let i = E7(e.action);
+  let i = normalizeValue(e.action);
   let a = av(i);
   let l = useSelector(ZM);
   let s = new js(!0, l);
@@ -112,11 +112,11 @@ function w(e) {
           className: "x180r7m8",
           children: a
         }),
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: renderI18nText("proto.action")
         }),
         width: "fill",
-        children: gl(e.action) ? getI18nString("fullscreen.mixed") : null
+        children: isInvalidValue(e.action) ? getI18nString("fullscreen.mixed") : null
       }), jsx(mc, {
         children: function (e, t) {
           let n = cJ();
@@ -133,7 +133,7 @@ function w(e) {
           let a = jsx(S, {
             formatter: t,
             value: "SWAP_STATE_TO",
-            disabled: !glU.isSelectionContainedInStateOrStateInstance()
+            disabled: !Fullscreen.isSelectionContainedInStateOrStateInstance()
           }, "SWAP_STATE_TO");
           let l = jsx(S, {
             formatter: t,
@@ -208,7 +208,7 @@ function w(e) {
             }, "UPDATE_MEDIA_SKIP_BY_OPTIONS")];
             N = N.concat(e);
           }
-          gl(e.action) && (N = [jsx(S, {
+          isInvalidValue(e.action) && (N = [jsx(S, {
             formatter: t,
             value: "MIXED",
             disabled: !0
@@ -236,16 +236,16 @@ function Y({
   let l = useContext(_$$c);
   let s = a && l === _$$P.LEFT;
   let c = t || n;
-  let p = _$$u(hS(e.targetVariable) && e.targetVariable && "id" in e.targetVariable ? e.targetVariable?.id : void 0);
-  let u = hS(e.targetVariable) && e.targetVariable && "nodeFieldAlias" in e.targetVariable ? aA(e.targetVariable.nodeFieldAlias.stablePathToNode, e.targetVariable.nodeFieldAlias.indexOrKey) : void 0;
+  let p = _$$u(isValidValue(e.targetVariable) && e.targetVariable && "id" in e.targetVariable ? e.targetVariable?.id : void 0);
+  let u = isValidValue(e.targetVariable) && e.targetVariable && "nodeFieldAlias" in e.targetVariable ? aA(e.targetVariable.nodeFieldAlias.stablePathToNode, e.targetVariable.nodeFieldAlias.indexOrKey) : void 0;
   let h = p?.name ?? u?.name;
   let g = G();
   let y = new Z6(!0);
   let f = _X(e);
-  let _ = E7(f);
+  let _ = normalizeValue(f);
   let b = av(_);
   let I = e => {
-    if (!e.connectionType || gl(e.connectionType)) return null;
+    if (!e.connectionType || isInvalidValue(e.connectionType)) return null;
     let t = d()({
       [W]: !0,
       [Z]: a
@@ -265,12 +265,12 @@ function Y({
       case "UPDATE_MEDIA_RUNTIME":
         {
           let i = e.transitionNodeID;
-          if (gl(i)) return jsx("div", {
+          if (isInvalidValue(i)) return jsx("div", {
             className: t,
             children: getI18nString("proto.variant_actions.mixed")
           });
-          if (void 0 === i || aI(i, Hr)) return null;
-          let r = dI(i);
+          if (void 0 === i || areSessionLocalIDsEqual(i, defaultSessionLocalID)) return null;
+          let r = sessionLocalIDToString(i);
           let a = g.format(r);
           return jsx("div", {
             className: n,
@@ -281,7 +281,7 @@ function Y({
         {
           let i = e.connectionURL;
           if (!i) return null;
-          if (gl(i)) return jsx("div", {
+          if (isInvalidValue(i)) return jsx("div", {
             className: t,
             children: getI18nString("proto.variant_actions.mixed")
           });
@@ -291,7 +291,7 @@ function Y({
           });
         }
       case "SET_VARIABLE":
-        if (!e.targetVariableData || gl(e.targetVariableData)) return null;
+        if (!e.targetVariableData || isInvalidValue(e.targetVariableData)) return null;
         return jsx("div", {
           className: "prototype_action_verbose_title--setVariablePreviewContainer--6omxy",
           children: jsx(y3, {
@@ -304,7 +304,7 @@ function Y({
         });
       case "CONDITIONAL":
         {
-          if (gl(e) || gl(e.conditionalActions) || !e.conditionalActions) return null;
+          if (isInvalidValue(e) || isInvalidValue(e.conditionalActions) || !e.conditionalActions) return null;
           let t = e.conditionalActions.length > 0 ? e.conditionalActions[0].condition : void 0;
           return jsx(y3, {
             targetVariableData: t,
@@ -343,7 +343,7 @@ function Y({
           [W]: !0,
           [Z]: a
         });
-        if ((gl(e.connectionType) || gl(f)) && (t = getI18nString("fullscreen.mixed")), !e.connectionType || gl(e.connectionType) || "NONE" === e.connectionType || "BACK" === e.connectionType || "CLOSE" === e.connectionType) return jsx(Fragment, {
+        if ((isInvalidValue(e.connectionType) || isInvalidValue(f)) && (t = getI18nString("fullscreen.mixed")), !e.connectionType || isInvalidValue(e.connectionType) || "NONE" === e.connectionType || "BACK" === e.connectionType || "CLOSE" === e.connectionType) return jsx(Fragment, {
           children: jsx("div", {
             className: n,
             children: t
@@ -398,7 +398,7 @@ function Y({
             });
           case "SET_VARIABLE":
             {
-              let r = e.targetVariableData && hS(e.targetVariableData) && e.targetVariableData.resolvedType === rXF.COLOR;
+              let r = e.targetVariableData && isValidValue(e.targetVariableData) && e.targetVariableData.resolvedType === VariableResolvedDataType.COLOR;
               let l = d()({
                 "prototype_action_verbose_title--actionNameInsertionColor--isir- prototype_action_verbose_title--actionNameInsertion--aF4kI": !0,
                 "prototype_action_verbose_title--actionNameInsertionColorUI3--Apj0i": a

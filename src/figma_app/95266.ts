@@ -1,5 +1,5 @@
 import { Mz } from "../vendor/925040";
-import { oV } from "../905/216495";
+import { MIXED_MARKER } from "../905/216495";
 import { F4 } from "../figma_app/889655";
 import { W0, Ee } from "../figma_app/323320";
 import { x1, Cu } from "../figma_app/583247";
@@ -10,7 +10,7 @@ let $$u1 = Mz([F4], e => {
   if (!e.length) return null;
   let t = new Set(e.map(e => e.textContent));
   let [r] = t;
-  return 1 === t.size ? r : oV;
+  return 1 === t.size ? r : MIXED_MARKER;
 });
 export function $$p2() {
   return Mz([Cu(), Ee()], (e, t) => [...e, ...t]);

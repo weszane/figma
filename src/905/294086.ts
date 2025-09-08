@@ -6,7 +6,7 @@ import { r as _$$r } from "../905/571562";
 import { a as _$$a } from "../905/339331";
 import { A } from "../vendor/723372";
 import { px, Vg } from "../905/893109";
-import { wo } from "../905/955878";
+import { preventEvent } from "../905/955878";
 p("stack__row__-rJHV").displayName = "Stack.Row";
 let u = p("stack__col__4xLd-");
 function p(e) {
@@ -69,7 +69,7 @@ export let $$h0 = forwardRef(({
   };
   let f = {
     tabIndex: -1,
-    onPointerDown: wo
+    onPointerDown: preventEvent
   };
   return jsxs(u, {
     ref: c,

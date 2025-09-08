@@ -14,12 +14,12 @@ import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { b as _$$b } from "../905/966382";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
 import { M4 } from "../905/713695";
 import { R as _$$R } from "../905/943003";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { l6, c$ } from "../905/794875";
 import { uF } from "../1156/418246";
 import { TT } from "../figma_app/952035";
@@ -224,7 +224,7 @@ let F = {
     $$css: !0
   }
 };
-let $$O0 = Ju(function (e) {
+let $$O0 = registerModal(function (e) {
   let [t, n] = useState(!1);
   let s = hS({
     ...e,
@@ -379,7 +379,7 @@ export function $$D1({
   source: r
 }) {
   let i = useDispatch();
-  return () => i(to({
+  return () => i(showModalHandler({
     type: $$O0,
     data: {
       toolCallId: e,

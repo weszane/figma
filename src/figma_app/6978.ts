@@ -1,19 +1,19 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { Ib } from "../905/129884";
 import { Ad } from "../figma_app/811257";
 export function $$m0(e) {
   let [t, r] = lJ("frameMaskDisabled");
   let m = kl("marquee");
-  let g = gl(m) || !!m;
+  let g = isInvalidValue(m) || !!m;
   let f = useCallback(e => {
     getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
       key: "clipContent",
@@ -23,13 +23,13 @@ export function $$m0(e) {
   }, [r]);
   return jsx(Ad, {
     label: jsx(Fragment, {}),
-    input: jsx(S, {
+    input: jsx(Checkbox, {
       muted: !0,
-      mixed: gl(t),
+      mixed: isInvalidValue(t),
       checked: !1 === t,
       onChange: f,
       recordingKey: Pt(e, "clipContentCheckbox"),
-      label: jsx(J, {
+      label: jsx(Label, {
         children: renderI18nText("fullscreen.properties_panel.transform_panel.clip_content")
       }),
       disabled: g,

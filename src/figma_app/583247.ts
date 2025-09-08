@@ -1,9 +1,9 @@
 import { uN } from "../figma_app/338442";
-import { J0O, uXg } from "../figma_app/763686";
+import { ComponentPropType, VariableSetErrorType } from "../figma_app/763686";
 import { Mz } from "../vendor/925040";
 import { P8 } from "../905/270781";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { g } from "../905/578436";
 import { dK, Sh } from "../figma_app/889655";
 import { Yi, aO, f3 } from "../figma_app/164212";
@@ -29,9 +29,9 @@ export function $$m0() {
           }
         }
         return !1;
-      }(s.propertyValues[e]) ? J0O.VARIANT : J0O.BOOL;
+      }(s.propertyValues[e]) ? ComponentPropType.VARIANT : ComponentPropType.BOOL;
       let r = d[e] || xJ;
-      return gl(r) ? {
+      return isInvalidValue(r) ? {
         name: e,
         value: getI18nString("inspect_panel.property.mixed"),
         type: t
@@ -63,14 +63,14 @@ export function $$y1(e, t) {
   let a = aO(e, t);
   let s = f3(e, t);
   return r.propertySortOrder.map(e => {
-    let t = s === uXg.CONFLICTING_NAMES_WITH_VARIANT_ERROR && a.some(t => t.name === e);
+    let t = s === VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR && a.some(t => t.name === e);
     let o = r.propertyValues[e];
     return {
       name: e,
       values: o,
-      type: J0O.VARIANT,
+      type: ComponentPropType.VARIANT,
       kind: uN.VARIANT,
-      error: t ? uXg.CONFLICTING_NAMES_WITH_VARIANT_ERROR : uXg.NONE,
+      error: t ? VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR : VariableSetErrorType.NONE,
       uguid: r.propertyUguids[e]
     };
   });

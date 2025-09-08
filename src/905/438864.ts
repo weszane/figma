@@ -1,4 +1,4 @@
-import { yT } from "../figma_app/492908";
+import { randomBetween } from "../figma_app/492908";
 import { getFalseValue } from "../figma_app/897289";
 import { c3 } from "../figma_app/78808";
 import { yJ, bE, HA, yH } from "../figma_app/598926";
@@ -64,7 +64,7 @@ let $$p3 = new H({
     return i;
   }(i.store, e),
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: ({
     store: e
   }) => "communityHub" !== e.getState().selectedView.view,
@@ -109,7 +109,7 @@ let $$h1 = new H({
     return r ? [r] : [];
   },
   periodicallyResubscribe: !1,
-  delaySubscribeMs: () => yT(500, 2e3),
+  delaySubscribeMs: () => randomBetween(500, 2e3),
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });

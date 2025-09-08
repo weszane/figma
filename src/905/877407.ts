@@ -1,8 +1,8 @@
-import { Ez5, gEE, OR7, Egt } from "../figma_app/763686";
+import { AppStateTsApi, Side, StrokeAlignment, SceneGraphHelpers } from "../figma_app/763686";
 import { R0 } from "../figma_app/273493";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { BT } from "../905/618447";
@@ -14,7 +14,7 @@ export function $$m9(e, t, i, r, a) {
     mouse: "ADD_CHILD_AFTER_FINAL_ROW_HOVERED",
     canvasPos: e
   };
-  let l = o?.length ? Ez5.canvasGrid().getClosestGridCoord(e, gEE.RIGHT) : {
+  let l = o?.length ? AppStateTsApi.canvasGrid().getClosestGridCoord(e, Side.RIGHT) : {
     row: 0,
     col: 0
   };
@@ -22,7 +22,7 @@ export function $$m9(e, t, i, r, a) {
     mouse: "INACTIVE"
   };
   let u = $$E3(o, l.row, l.col, r);
-  let m = Ez5.canvasGrid().rectForCoord(l, u, !0);
+  let m = AppStateTsApi.canvasGrid().rectForCoord(l, u, !0);
   let f = e.y >= m.origin.y && e.y <= m.origin.y + m.size.y;
   let _ = e.x >= m.origin.x && e.x <= m.origin.x + m.size.x;
   if (0 === o.length && f && _) return f && _ ? {
@@ -35,15 +35,15 @@ export function $$m9(e, t, i, r, a) {
     if (!r.length) return {
       mouse: "INACTIVE"
     };
-    let a = Ez5.canvasGrid().rowContentBoundsInCanvas(0, !1);
+    let a = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(0, !1);
     let s = a.origin.y + a.size.y;
     if (e.y < s - 300) return {
       mouse: "INACTIVE"
     };
     let o = e.y > s;
     for (let a = 0; a <= r.length; a++) {
-      let r = Ez5.canvasGrid().rowContentBoundsInCanvas(a, !1);
-      let l = r.origin.x - Ez5.canvasGrid().gridPadding();
+      let r = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(a, !1);
+      let l = r.origin.x - AppStateTsApi.canvasGrid().gridPadding();
       let d = r.origin.y;
       let c = r.size.x;
       if (e.x < l - 500 || e.x > l + c + 500) break;
@@ -70,7 +70,7 @@ export function $$m9(e, t, i, r, a) {
   if (o.length && l.row < o.length) {
     let r = o[l.row]?.length || 0;
     if (!i && !_ && l.col > 0 && l.col <= r) {
-      let i = Ez5.canvasGrid().gridChildSpacing();
+      let i = AppStateTsApi.canvasGrid().gridChildSpacing();
       let a = m.origin.y + m.size.y / 2;
       let s = {
         x: m.origin.x - i / 2,
@@ -95,12 +95,12 @@ export function $$m9(e, t, i, r, a) {
   };
 }
 export function $$h4(e, t) {
-  if (!Ez5) return new _$$M(-1, -1);
-  let i = Ez5.canvasGrid().rowContentBoundsInCanvas(e.length - 1, !1);
+  if (!AppStateTsApi) return new _$$M(-1, -1);
+  let i = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(e.length - 1, !1);
   let r = $$x8(e, e.length, t);
-  let a = Ez5.canvasGrid().getRowGUID(e.length - 1) ?? AD;
+  let a = AppStateTsApi.canvasGrid().getRowGUID(e.length - 1) ?? defaultSessionLocalIDString;
   let d = !!getSingletonSceneGraph().get(a)?.isCanvasGridStateGroupRow;
-  return new _$$M(i.origin.x + r.x / 2 + (d ? Ez5.canvasGrid().gridPadding() : 0), i.origin.y + i.size.y + Ez5.canvasGrid().gridRowSpacing() / 2 - (d ? Ez5.canvasGrid().gridPadding() / 2 : 0));
+  return new _$$M(i.origin.x + r.x / 2 + (d ? AppStateTsApi.canvasGrid().gridPadding() : 0), i.origin.y + i.size.y + AppStateTsApi.canvasGrid().gridRowSpacing() / 2 - (d ? AppStateTsApi.canvasGrid().gridPadding() / 2 : 0));
 }
 function g(e, t, i) {
   let n = _$$M.fromVectorD(i.canvasSpaceToViewportSpace(e));
@@ -127,20 +127,20 @@ let f = e => [e.origin, {
   y: e.origin.y + e.size.y
 }, e.origin];
 export function $$_10(e, t, i, o, l, d = 0, c = !1, u = !1, p = !1) {
-  if (!Ez5) return;
+  if (!AppStateTsApi) return;
   let m = t.canvasSpaceToViewportSpace(e.origin);
   let h = {
     x: e.size.x * t.canvasScale(),
     y: e.size.y * t.canvasScale()
   };
   let g = 16 * t.canvasScale();
-  let A = (Ez5.canvasGrid().gridPadding() || 0) * t.canvasScale();
+  let A = (AppStateTsApi.canvasGrid().gridPadding() || 0) * t.canvasScale();
   let y = {
     origin: c ? new _$$M(m.x + 10, m.y) : m,
     size: h
   };
   if (p || (i.fillRoundedRect(y, g, o), i.renderDashedLines(f(y), 8, 8, R0(l), 2)), c) {
-    let e = Ez5.canvasGrid().rowContentBoundsInCanvas(d, !1);
+    let e = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(d, !1);
     let r = t.canvasSpaceToViewportSpace(e.origin);
     let o = {
       x: e.size.x * t.canvasScale(),
@@ -148,7 +148,7 @@ export function $$_10(e, t, i, o, l, d = 0, c = !1, u = !1, p = !1) {
     };
     let l = p ? o.x + 12 + A / 2 : o.x + y.size.x + A + 15;
     let c = new _$$r(new _$$M(r.x, r.y - .5), new _$$M(l, o.y));
-    u ? i.strokeRoundedRect(c, 3, Ez5.getBgAssistiveHover(), 2, OR7.CENTER) : i.strokeRoundedRectWithDash(c, 3, Ez5.getBgAssistiveHover(), 1, 10, 5, OR7.INSIDE);
+    u ? i.strokeRoundedRect(c, 3, AppStateTsApi.getBgAssistiveHover(), 2, StrokeAlignment.CENTER) : i.strokeRoundedRectWithDash(c, 3, AppStateTsApi.getBgAssistiveHover(), 1, 10, 5, StrokeAlignment.INSIDE);
   }
 }
 export function $$A2(e, t, i) {
@@ -160,16 +160,16 @@ export function $$A2(e, t, i) {
   i.renderWrappingIndicator(r);
 }
 export function $$y0(e, t, i, r = 0, a = !1) {
-  Ez5 && (a ? Z5(e, t, i, Ez5.getFSCanvasDefaultFill(), Ez5.getBgAssistiveHover(), r) : GJ(e, t, i, Ez5.getFSCanvasDefaultFill(), Ez5.getCanvasButton(), r));
+  AppStateTsApi && (a ? Z5(e, t, i, AppStateTsApi.getFSCanvasDefaultFill(), AppStateTsApi.getBgAssistiveHover(), r) : GJ(e, t, i, AppStateTsApi.getFSCanvasDefaultFill(), AppStateTsApi.getCanvasButton(), r));
 }
 export function $$b7(e, t, i, r = 0, a = !1) {
-  Ez5 && ZR(e, t, i, a ? Ez5.getBgAssistiveHover() : Ez5.getCanvasButton(), r);
+  AppStateTsApi && ZR(e, t, i, a ? AppStateTsApi.getBgAssistiveHover() : AppStateTsApi.getCanvasButton(), r);
 }
 export function $$v5(e, t) {
   return "INACTIVE" !== t && "ADD_CHILD_AFTER_ROW_HOVERED" !== t && "ADD_CHILD_AFTER_FINAL_ROW_HOVERED" !== t && !("ADD_CHILD_DOT_NEARBY" === e && "ADD_CHILD_DOT_HOVERED" === t || "ADD_ROW_DOT_NEARBY" === e && "ADD_ROW_DOT_HOVERED" === t) && !("ADD_CHILD_DOT_HOVERED" === e && "ADD_CHILD_DOT_NEARBY" === t || "ADD_ROW_DOT_HOVERED" === e && "ADD_ROW_DOT_NEARBY" === t) && "ADD_FIRST_CHILD_HOVERED" !== t && t !== e;
 }
 function I(e) {
-  let t = Egt.getNodeSize(e);
+  let t = SceneGraphHelpers.getNodeSize(e);
   return t ? {
     x: t.width,
     y: t.height

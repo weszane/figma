@@ -1,36 +1,35 @@
-import { useEffect } from 'react'
-import { oA } from '../905/723791'
-import { resourceUtils } from '../905/989992'
-import { a$M } from '../figma_app/43951'
-import { ut } from '../figma_app/84367'
-import { Rs } from '../figma_app/288654'
-import { vu } from '../figma_app/516028'
-import { Ez5, nQ7 } from '../figma_app/763686'
-import { isInteractionOrEvalMode } from '../figma_app/897289'
-import { useSelector } from '../vendor/514228'
-
+import { useEffect } from 'react';
+import { oA } from '../905/723791';
+import { resourceUtils } from '../905/989992';
+import { a$M } from '../figma_app/43951';
+import { getObservableValue } from '../figma_app/84367';
+import { Rs } from '../figma_app/288654';
+import { vu } from '../figma_app/516028';
+import { AppStateTsApi, SelfDesignType } from '../figma_app/763686';
+import { isInteractionOrEvalMode } from '../figma_app/897289';
+import { useSelector } from '../vendor/514228';
 export function $$_1() {
-  return ut(Ez5?.interopToolMode(), nQ7.SELF) === nQ7.SELF
+  return getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.SELF;
 }
 export function $$h0() {
-  return ut(Ez5?.canEnterDesignMode(), !1)
+  return getObservableValue(AppStateTsApi?.canEnterDesignMode(), !1);
 }
 export function $$m2() {
-  let e = (function () {
-    let e = useSelector(vu)
-    let t = e?.key ?? null
+  let e = function () {
+    let e = useSelector(vu);
+    let t = e?.key ?? null;
     let r = Rs(a$M, {
-      key: t ?? '',
+      key: t ?? ''
     }, {
-      enabled: !!t,
-    })
-    let n = resourceUtils.useTransform(r, e => !!oA(e.file)?.hasPermission)
-    return !!isInteractionOrEvalMode() || n.unwrapOr(!1)
-  }())
+      enabled: !!t
+    });
+    let n = resourceUtils.useTransform(r, e => !!oA(e.file)?.hasPermission);
+    return !!isInteractionOrEvalMode() || n.unwrapOr(!1);
+  }();
   useEffect(() => {
-    Ez5?.canEnterDesignMode().set(e)
-  }, [e])
+    AppStateTsApi?.canEnterDesignMode().set(e);
+  }, [e]);
 }
-export const Bk = $$h0
-export const HW = $$_1
-export const VD = $$m2
+export const Bk = $$h0;
+export const HW = $$_1;
+export const VD = $$m2;

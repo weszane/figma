@@ -41,7 +41,7 @@ import { K as _$$K2 } from "../905/659729";
 import { fG } from "../905/772425";
 import { Wn, xp } from "../905/966582";
 import { Ib } from "../905/129884";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { l as _$$l } from "../905/348437";
 import { q as _$$q2 } from "../905/70772";
 import { v as _$$v } from "../905/981847";
@@ -74,7 +74,7 @@ function J(e) {
     attachments
   } = e;
   let i = e => {
-    t(to({
+    t(showModalHandler({
       type: _$$q2,
       data: {
         attachments,

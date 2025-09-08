@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { z } from "../905/239603";
 import { Gw, FB } from "../vendor/149334";
 import { debugState } from "../905/407919";
@@ -71,7 +71,7 @@ async function S(e, t) {
   let {
     publishID
   } = n;
-  let s = fn(sH(publishID));
+  let s = isValidSessionLocalID(parseSessionLocalID(publishID));
   let l = n.sourceLibraryKey;
   let d = (await M4.fetch(Cs.LibrariesByLibraryKeysQuery({
     libraryKeys: [l],
@@ -101,7 +101,7 @@ export async function $$v6(e) {
     } = d;
     let p = l.find(e => e.library_key === d.sourceLibraryKey);
     let _ = null;
-    if (p && (ZA(p) && xA(p) ? _ = p.hub_file_id : "library_file_key" in p && (_ = p.library_file_key)), !_ || !publishID || !fn(sH(publishID)) || _ === e) {
+    if (p && (ZA(p) && xA(p) ? _ = p.hub_file_id : "library_file_key" in p && (_ = p.library_file_key)), !_ || !publishID || !isValidSessionLocalID(parseSessionLocalID(publishID)) || _ === e) {
       r.set(guid, s);
       n.set(guid, o);
       return;

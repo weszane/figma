@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { T as _$$T } from "../905/909590";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { Ay } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -17,7 +17,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { KQ as _$$KQ } from "../figma_app/475472";
 import { iZ } from "../905/372672";
@@ -32,7 +32,7 @@ import { e6 } from "../905/557142";
 import { Fb, qg } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { Z as _$$Z } from "../figma_app/761870";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 import { z6 } from "../figma_app/805373";
 import { j as _$$j, F as _$$F } from "../4452/869669";
@@ -102,7 +102,7 @@ function Q(e) {
 export function $$Y1(e, t) {
   return e === _9.ORG ? t === J4.EDIT ? FPermissionLevelType.ORG_EDIT : FPermissionLevelType.ORG_VIEW : e === _9.WORKSPACE ? t === J4.EDIT ? FPermissionLevelType.WORKSPACE_EDIT : FPermissionLevelType.WORKSPACE_VIEW : FPermissionLevelType.INVITE_ONLY;
 }
-export let $$K0 = Ju(function (e) {
+export let $$K0 = registerModal(function (e) {
   let t = useDispatch();
   let a = useSelector(e => e.currentUserOrgId) ?? "";
   let N = useSelector(e => e.orgById)[a];
@@ -210,7 +210,7 @@ export let $$K0 = Ju(function (e) {
     value: em ?? UNASSIGNED,
     onChange: e => e_(e ?? UNASSIGNED),
     children: [jsx(l9, {
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: getI18nString("team_creation.workspace")
       }),
       size: "lg",
@@ -271,10 +271,10 @@ export let $$K0 = Ju(function (e) {
       inviteLevel: s
     }));
     e.afterSubmit && e.afterSubmit();
-    t(Lo());
+    t(popModalStack());
   }
   function eD() {
-    t(Lo());
+    t(popModalStack());
     t(cL());
   }
   return jsx(fu, {
@@ -364,7 +364,7 @@ export let $$K0 = Ju(function (e) {
                   let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => xf(e) && !H_(k.domains, e)) : [];
                   e.length > 0 ? function (e) {
                     if (N?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
-                      t(to({
+                      t(showModalHandler({
                         type: _$$F2,
                         data: {
                           emails: e,
@@ -388,6 +388,6 @@ export let $$K0 = Ju(function (e) {
       })
     })
   });
-}, "TEAM_CREATION_MODAL", ZU.YES);
+}, "TEAM_CREATION_MODAL", ModalSupportsBackground.YES);
 export const Uc = $$K0;
 export const MF = $$Y1;

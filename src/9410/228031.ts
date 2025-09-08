@@ -8,7 +8,7 @@ import { g as _$$g } from "../1250/701065";
 import { f as _$$f } from "../9410/764883";
 import { r as _$$r } from "../905/857502";
 import { N as _$$N } from "../905/201779";
-import { m1T } from "../figma_app/763686";
+import { LayoutTabType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
@@ -16,14 +16,14 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VC, uE } from "../figma_app/565242";
 import { G as _$$G } from "../905/707993";
 import { J6, qs, fn, WI } from "../figma_app/986594";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { Fk } from "../figma_app/167249";
 import { a3, ow } from "../905/188421";
 import { c$, sK } from "../905/794875";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { c$ as _$$c$, bL, l9, mc } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { reportError } from "../905/11";
 import { B as _$$B } from "../905/714743";
 import { Vp } from "../figma_app/649254";
@@ -107,7 +107,7 @@ function F({
       className: "xjp7ctv x9hn8t9",
       children: jsx(l9, {
         width: "fill",
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: renderI18nText("sites.panel.link_panel.cms_item")
         }),
         disabled: 0 === d.length
@@ -268,7 +268,7 @@ export function $$q0({
     recordingKey: N,
     showCMSLinkFields: j
   });
-  let z = getFeatureFlags().sts_links_v2 && !$$Y2() && A?.editModeType !== m1T.TEXT ? [jsx(G, {
+  let z = getFeatureFlags().sts_links_v2 && !$$Y2() && A?.editModeType !== LayoutTabType.TEXT ? [jsx(G, {
     value: {
       type: "back"
     },
@@ -288,7 +288,7 @@ export function $$q0({
     C && J.current && (J.current.focus(), J.current.select());
   }, [C, J]);
   let q = useMemo(() => ({
-    format: e => gl(e) ? getI18nString("fullscreen.mixed") : e?.type === "header" ? e.name : u3(e, O, cmsItemPages),
+    format: e => isInvalidValue(e) ? getI18nString("fullscreen.mixed") : e?.type === "header" ? e.name : u3(e, O, cmsItemPages),
     parse: e => {
       if (!e) return null;
       let i = e === getI18nString("sites.panel.home") ? "/" : e;
@@ -324,7 +324,7 @@ export function $$q0({
       return {
         type: "url",
         url: i,
-        openInNewTab: !gl(t) && t?.type === "url" && t.openInNewTab
+        openInNewTab: !isInvalidValue(t) && t?.type === "url" && t.openInNewTab
       };
     },
     isEqual: (e, t) => MR(e, t)
@@ -343,10 +343,10 @@ export function $$q0({
       forceInputPlaceholder: null === t,
       formatter: q,
       forwardedRef: J,
-      icon: C ? null : gl(t) || t?.type !== "back" ? gl(t) || t?.type !== "anchor_link" ? gl(t) || t?.type !== "url" ? jsx(_$$N, {}) : t?.url.startsWith("mailto:") ? jsx(_$$f, {}) : t?.url.startsWith("tel:") ? jsx(u, {}) : jsx(_$$r, {}) : jsx(_$$M, {}) : jsx(_$$E, {}),
+      icon: C ? null : isInvalidValue(t) || t?.type !== "back" ? isInvalidValue(t) || t?.type !== "anchor_link" ? isInvalidValue(t) || t?.type !== "url" ? jsx(_$$N, {}) : t?.url.startsWith("mailto:") ? jsx(_$$f, {}) : t?.url.startsWith("tel:") ? jsx(u, {}) : jsx(_$$r, {}) : jsx(_$$M, {}) : jsx(_$$E, {}),
       id: e,
       inputClassName: C ? "link_combo_box--sitesHyperlinkEditor--q6R2y input--darkInput--zfbnG" : "link_combo_box--linkPanelComboBox--lmY7a",
-      omitValueFromDropdown: gl(t) || t?.type === "internal" || null == t,
+      omitValueFromDropdown: isInvalidValue(t) || t?.type === "internal" || null == t,
       onChange: e => {
         e?.type !== "header" && i(e);
       },
@@ -381,7 +381,7 @@ export function $$q0({
         },
         recordingKey: Pt(N, "option", e.name)
       }, e.guid)), ...cmsItemPageLinkOptions, z.length > 0 && [jsx(sK, {}, "link-preset-divider"), ...z]]
-    }), t && !gl(t) && "internal_cms_item_page_item" === t.type && jsx(F, {
+    }), t && !isInvalidValue(t) && "internal_cms_item_page_item" === t.type && jsx(F, {
       targetNodeId: t.id,
       initialSelectedItemId: t.itemId,
       onLinkChange: i,

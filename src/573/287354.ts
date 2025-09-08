@@ -7,10 +7,10 @@ import l from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { UK } from "../figma_app/740163";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { _X, Z0 } from "../figma_app/62612";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { fV } from "../figma_app/198712";
 import { p as _$$p } from "../figma_app/372802";
@@ -22,7 +22,7 @@ let k = parsePxNumber(y9S);
 export function $$E0() {
   let e = [];
   let t = kl("selectionRegions");
-  let s = E7(t);
+  let s = normalizeValue(t);
   s && (e = s);
   let r = useSelector(e => e.mirror.appModel.hoveredNode);
   if (r && getFeatureFlags().ce_offscreen_indicators_for_hovered_nodes) {
@@ -61,7 +61,7 @@ function S({
     transform: `translate(${o}px, ${l}px)`
   };
   let c = useSelector(e => e.mirror?.appModel.showUi);
-  let u = J2(UK().renderRulers) && c ? k : 0;
+  let u = getObservableOrFallback(UK().renderRulers) && c ? k : 0;
   let p = {
     x: -3.5 + u,
     y: -3.5 + u,
@@ -157,7 +157,7 @@ function w({
   l.x -= r / 2;
   l.y -= i / 2;
   let c = useSelector(e => e.mirror?.appModel.showUi);
-  let p = J2(UK().renderRulers) && c ? k : 0;
+  let p = getObservableOrFallback(UK().renderRulers) && c ? k : 0;
   let g = 1 + p;
   let y = Math.max(g, t.width - 1 - r);
   let f = 1 + p;

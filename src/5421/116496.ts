@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { logError } from "../905/714362";
 import { dZ } from "../figma_app/741237";
@@ -102,7 +102,7 @@ export class $$u0 {
     if (u) {
       let t = n.editingInfo.classNameAttribute;
       _$$a(() => {
-        l7.user("direct-manipulation", () => {
+        permissionScopeHandler.user("direct-manipulation", () => {
           switch (t.type) {
             case "static":
               W(u, n.collaborativeSourceCodeVersion, t.valueStartIndex, t.value, e) || (h = !0);

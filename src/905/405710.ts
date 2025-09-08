@@ -1,7 +1,7 @@
 import { assert } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { cd, _H } from "../figma_app/243058";
-import { glU, Vzr } from "../figma_app/763686";
+import { Fullscreen, Thumbnail } from "../figma_app/763686";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { hp } from "../vendor/162266";
 import { logError } from "../905/714362";
@@ -9,8 +9,8 @@ import { Mk } from "../figma_app/31188";
 import { Wh } from "../figma_app/615482";
 import { PW } from "../figma_app/633080";
 export function $$m11(e) {
-  let t = glU.getDefaultStateForLocalStateGroup(e) || e;
-  let [i, n] = Vzr.generateThumbnailForNode(t, 768, 768, 2, {});
+  let t = Fullscreen.getDefaultStateForLocalStateGroup(e) || e;
+  let [i, n] = Thumbnail.generateThumbnailForNode(t, 768, 768, 2, {});
   return n;
 }
 export function $$h7(e) {

@@ -1,5 +1,5 @@
 import { getGlobalThis } from "../905/841449";
-import { LQj } from "../figma_app/763686";
+import { initializeAppBindings } from "../figma_app/763686";
 let a = {};
 export function $$s2() {
   return a;
@@ -56,7 +56,7 @@ export function $$d3({
   let o = getGlobalThis();
   try {
     o.tsapi_init = (e, t) => {
-      LQj(e);
+      initializeAppBindings(e);
       r?.(t);
     };
     o.tsApisForCpp = t;

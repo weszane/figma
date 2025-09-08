@@ -1,6 +1,6 @@
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _em, AlE, Bko, MoD, glU, mSn, Sie } from "../figma_app/763686";
+import { PluginModalType, documentStateTsApi, ImageCppBindings, ImageExportType, Fullscreen, SceneGraphTsApi, StateSourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/656470";
 import { trackEventAnalytics } from "../905/449184";
@@ -15,14 +15,14 @@ import { n as _$$n } from "../figma_app/339971";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { VQ, Dc as _$$Dc, hf, Mt } from "../905/445022";
 import { Jr } from "../figma_app/624361";
 import { xK } from "../905/125218";
 import { VI } from "../figma_app/623300";
 import { h as _$$h } from "../905/44234";
 import { S as _$$S } from "../figma_app/787550";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { q as _$$q } from "../905/807667";
 var l = o;
 export let $$O1 = {
@@ -173,7 +173,7 @@ async function P(e, t, r) {
     trackEventAnalytics("File Export V2 Canceled", D());
   };
   L(_$$h.SaveLocalFile, C, k);
-  let M = _$$q(_em.SAVE_LOCAL_COPY);
+  let M = _$$q(PluginModalType.SAVE_LOCAL_COPY);
   M.catch(() => {
     reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
     h(_$$F.dequeue({
@@ -188,15 +188,15 @@ async function P(e, t, r) {
   h(_$$F.dequeue({
     matchType: "save-as-progress"
   }));
-  let F = AlE.getMutableActiveDocument();
-  let j = Bko.findImagesUnder(F, ["0:0"], MoD.ALL);
+  let F = documentStateTsApi.getMutableActiveDocument();
+  let j = ImageCppBindings.findImagesUnder(F, ["0:0"], ImageExportType.ALL);
   let U = {};
   let B = [];
   for (let e of j) {
-    let t = Bko.getCompressedImage(e);
+    let t = ImageCppBindings.getCompressedImage(e);
     t ? U[e] = t : B.push(e);
   }
-  let G = new Set(Bko.findAllVideos());
+  let G = new Set(ImageCppBindings.findAllVideos());
   if (R = j.length, P = G.size, I) return;
   h(_$$F.enqueue({
     type: "save-as-actual",
@@ -204,13 +204,13 @@ async function P(e, t, r) {
     icon: zX.SPINNER
   }));
   await new Promise(e => setTimeout(e, 0));
-  let V = glU.attemptActiveDocumentSave(t);
+  let V = Fullscreen.attemptActiveDocumentSave(t);
   if (!V) return;
   let H = await c;
   let z = new H.ZipWriter(new H.BlobWriter("application/zip"));
   async function W() {
     if (!V) return;
-    let t = l()(Array.from(glU.getDeveloperRelatedLinks().values()));
+    let t = l()(Array.from(Fullscreen.getDeveloperRelatedLinks().values()));
     for (let r in await z.add("canvas.fig", new H.Uint8ArrayReader(V.canvas), {
       level: 0
     }), await z.add("thumbnail.png", new H.Uint8ArrayReader(V.thumbnail), {
@@ -267,7 +267,7 @@ async function P(e, t, r) {
       let r = new FileReader();
       r.onloadend = () => {
         let t = r.result;
-        let i = Et(new Uint8Array(t));
+        let i = sha1Hex(new Uint8Array(t));
         trackEventAnalytics("Support Share Download", {
           sha1Hash: i,
           internalEmail: e
@@ -277,7 +277,7 @@ async function P(e, t, r) {
     }
   }
   let $ = URL.createObjectURL(Y);
-  let X = glU.fileExtension();
+  let X = Fullscreen.fileExtension();
   let q = `${e.name}${X}`;
   let J = getI18nString("save_as_actions.save_partial_file_name_suffix", {
     date: new Date().toLocaleDateString().replace(/_|\//g, "-")
@@ -299,7 +299,7 @@ async function P(e, t, r) {
   }));
 }
 export function $$D3(e, t, r) {
-  $$k0(_$$h.Export, e, t, r, [mSn?.getCurrentPage(Sie.REDUX, AlE.getActiveDocument()) || ""], "export-all-frames-to-pdf");
+  $$k0(_$$h.Export, e, t, r, [SceneGraphTsApi?.getCurrentPage(StateSourceType.REDUX, documentStateTsApi.getActiveDocument()) || ""], "export-all-frames-to-pdf");
 }
 export async function $$k0(e, t, r, n, o, l, u) {
   logInfo("initiateSaveAs", "begin", {
@@ -333,7 +333,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
     return;
   }
   L(e, n);
-  let E = e === _$$h.SaveLocalFile ? MoD.ALL : MoD.NON_ANIMATED_ONLY;
+  let E = e === _$$h.SaveLocalFile ? ImageExportType.ALL : ImageExportType.NON_ANIMATED_ONLY;
   getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
     stage: "start",
     attemptId: f,
@@ -363,7 +363,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
     reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
   }
 }
-let M = nF((e, t) => {
+let M = createOptimistThunk((e, t) => {
   let r = {
     text: getI18nString("save_as_actions.cancel"),
     action: t.cancelCallback || (() => {
@@ -415,7 +415,7 @@ let M = nF((e, t) => {
     } : r
   }));
 });
-let F = nF((e, t) => {
+let F = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (!r.visualBell.find(e => "save-as-progress" === e.type) || !r.saveAsState?.startTime) return;
   let n = (r.saveAsState.waitTime || 0) + Date.now() - r.saveAsState.startTime;
@@ -427,7 +427,7 @@ let F = nF((e, t) => {
     cancelCallback: t.cancelCallback
   })));
 });
-let j = nF((e, t) => {
+let j = createOptimistThunk((e, t) => {
   e.dispatch(_$$F.clearAllExcept(["plugins-status"]));
   let r = e.getState().saveAsState;
   e.dispatch(_$$n.set({
@@ -447,7 +447,7 @@ let j = nF((e, t) => {
     }(t.mode),
     showLoadingSpinner: !1,
     callback: () => {
-      "string" == typeof t.completeSaveAction ? Y5.triggerAction(t.completeSaveAction, {
+      "string" == typeof t.completeSaveAction ? fullscreenValue.triggerAction(t.completeSaveAction, {
         source: "menu",
         attemptId: r.attemptId,
         settings: t.settings

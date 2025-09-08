@@ -2,11 +2,11 @@ import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { XHR } from "../905/910117";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
 import { N } from "../905/696711";
 import { P5 } from "../figma_app/175992";
-export let $$u0 = nF(async (e, t, {
+export let $$u0 = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
   let a = t.user.stripe_account_status === P5.STARTED_ONBOARDING ? "stripe_onboarding_continue" : "stripe_onboarding_start";

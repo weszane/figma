@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
-import { aD } from "../905/125019";
+import { sha1BytesFromHex } from "../905/125019";
 import { $ } from "../905/953280";
 import { I as _$$I } from "../905/763478";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import c from "classnames";
 import { D } from "../905/225412";
 import { J } from "../905/420117";
@@ -81,7 +81,7 @@ export function $$x1({
     [A]: i
   });
   switch (e.resolvedType) {
-    case rXF.COLOR:
+    case VariableResolvedDataType.COLOR:
       return jsx("div", {
         className: y,
         children: jsx(D, {
@@ -89,20 +89,20 @@ export function $$x1({
           onMouseDown: c
         })
       });
-    case rXF.BOOLEAN:
+    case VariableResolvedDataType.BOOLEAN:
       return jsx("div", {
         className: E,
         children: jsx($, {})
       });
-    case rXF.FLOAT:
-    case rXF.STRING:
+    case VariableResolvedDataType.FLOAT:
+    case VariableResolvedDataType.STRING:
       return jsx(v, {
         resolvedType: e.resolvedType,
         disabled: !!i,
         variableThumbnailIconType: h,
         colorTheme: b
       });
-    case rXF.IMAGE:
+    case VariableResolvedDataType.IMAGE:
       let x = e.value.imageThumbnail;
       let S = {
         type: "IMAGE",
@@ -110,7 +110,7 @@ export function $$x1({
         visible: !0,
         blendMode: "NORMAL",
         imageThumbnail: {
-          hash: x ? aD(x) : void 0
+          hash: x ? sha1BytesFromHex(x) : void 0
         }
       };
       return jsx("div", {
@@ -120,7 +120,7 @@ export function $$x1({
           onMouseDown: c
         })
       });
-    case rXF.JS_RUNTIME_ALIAS:
+    case VariableResolvedDataType.JS_RUNTIME_ALIAS:
       return jsx("div", {
         className: E,
         children: jsx(_$$I, {})

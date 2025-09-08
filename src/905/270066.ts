@@ -1,4 +1,4 @@
-import { RYP } from "../figma_app/763686";
+import { ColorSpaceEnum } from "../figma_app/763686";
 export function $$r0(e) {
   function t(e, t) {
     function i(e) {
@@ -397,7 +397,7 @@ export function $$r0(e) {
               }
             }
           }
-        })) return RYP.SRGB;
+        })) return ColorSpaceEnum.SRGB;
         if (t(i, {
           header: {
             majorVersion: 2
@@ -460,7 +460,7 @@ export function $$r0(e) {
               }
             }
           }
-        })) return RYP.DISPLAY_P3;
+        })) return ColorSpaceEnum.DISPLAY_P3;
         break;
       case 4:
         if (t(i, {
@@ -598,7 +598,7 @@ export function $$r0(e) {
               }
             }
           }
-        })) return RYP.SRGB;
+        })) return ColorSpaceEnum.SRGB;
         if (t(i, {
           header: {
             majorVersion: 4
@@ -734,7 +734,7 @@ export function $$r0(e) {
               }
             }
           }
-        })) return RYP.DISPLAY_P3;
+        })) return ColorSpaceEnum.DISPLAY_P3;
     }
   } catch (e) {
     if (e instanceof Error) throw e;

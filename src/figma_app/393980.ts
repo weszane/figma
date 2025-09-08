@@ -2,9 +2,9 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useRef, useContext, useId, useEffect } from "react";
 import { flushSync } from "../vendor/944059";
 import { useDispatch } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -20,8 +20,8 @@ import { ay } from "../905/879323";
 import { DP } from "../905/640017";
 import { A as _$$A } from "../905/639174";
 import { J_ } from "../figma_app/80990";
-import { Y5 } from "../figma_app/455680";
-import { _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { Um } from "../905/848862";
 import { kH, In } from "../905/309735";
@@ -166,7 +166,7 @@ function X({
   onEnterPressed: h
 }) {
   let [g, y] = useState((r ?? "") + (t ? kH(t) : ""));
-  let [S, v] = useState(_W(u, ""));
+  let [S, v] = useState(valueOrFallback(u, ""));
   let C = useDispatch();
   let w = e.guid;
   let L = e.styleType;
@@ -176,8 +176,8 @@ function X({
     if ("" === g) return;
     let r = t ? In(t) : void 0;
     let n = r ? r + "/" + g : g;
-    l7.user("rename-style", () => glU.renameNode(dI(w), J_(n)));
-    Y5.triggerAction("commit");
+    permissionScopeHandler.user("rename-style", () => Fullscreen.renameNode(sessionLocalIDToString(w), J_(n)));
+    fullscreenValue.triggerAction("commit");
     F();
     trackEventAnalytics("Style Renamed", {
       styleType: e.styleType
@@ -204,14 +204,14 @@ function X({
     }
   });
   let G = () => {
-    l7.user("set-style-description", () => {
-      let e = getSingletonSceneGraph().get(dI(w));
+    permissionScopeHandler.user("set-style-description", () => {
+      let e = getSingletonSceneGraph().get(sessionLocalIDToString(w));
       e && (e.description = S);
     });
     trackEventAnalytics("Style Description Changed", {
       styleType: L,
       length: S.length,
-      guid: dI(w)
+      guid: sessionLocalIDToString(w)
     });
   };
   return jsxs(Y, {

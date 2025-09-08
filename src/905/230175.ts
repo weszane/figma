@@ -1,5 +1,5 @@
 import { lQ } from "../905/934246";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/781591";
 import { Mz } from "../vendor/925040";
@@ -69,8 +69,8 @@ export async function $$y0() {
   } catch (e) {}
 }
 async function b(e = {}) {
-  if (!Ez5) return;
-  let t = Ez5.canvasGrid().canvasGridArray.getCopy();
+  if (!AppStateTsApi) return;
+  let t = AppStateTsApi.canvasGrid().canvasGridArray.getCopy();
   let i = e.limit ?? 1 / 0;
   let n = [];
   for (let r of t) for (let t of r) {

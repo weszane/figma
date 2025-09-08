@@ -3,9 +3,9 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
-import { Lo } from "../905/156213";
-let $$c1 = nF((e, t) => {
+import { createOptimistThunk } from "../905/350402";
+import { popModalStack } from "../905/156213";
+let $$c1 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let {
     emails,
@@ -31,7 +31,7 @@ let $$c1 = nF((e, t) => {
     e.dispatch($$p3({
       creating: !1
     }));
-    e.dispatch(Lo());
+    e.dispatch(popModalStack());
     let i = getI18nString("org_invite.invite_resent");
     if (!isResentInvite) {
       let e = emails.length - r.length;
@@ -60,7 +60,7 @@ let $$c1 = nF((e, t) => {
     }));
   });
 });
-let $$u0 = nF((e, t) => {
+let $$u0 = createOptimistThunk((e, t) => {
   let {
     idpUser
   } = t;

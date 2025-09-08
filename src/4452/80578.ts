@@ -6,7 +6,7 @@ import { oA } from "../905/723791";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { d as _$$d } from "../4452/230712";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { FAccessRequestStatusType } from "../figma_app/191312";
 import { XPZ } from "../figma_app/43951";
 import { T5 } from "../figma_app/465071";
@@ -60,7 +60,7 @@ export function $$h0(e) {
   }, [x]);
   return useCallback(() => {
     if (a && f && h && f?.resourceConnectionInvite.connectingPlanId === h.key.parentId) {
-      if (f?.resourceConnectionInvite.status === FAccessRequestStatusType.PENDING) o(to({
+      if (f?.resourceConnectionInvite.status === FAccessRequestStatusType.PENDING) o(showModalHandler({
         type: _$$d,
         data: f
       }));else {

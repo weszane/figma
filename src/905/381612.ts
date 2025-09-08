@@ -3,7 +3,7 @@ import { localStorageRef } from "../905/657224";
 import a from "../vendor/946678";
 import o from "../vendor/626715";
 import { HY } from "../vendor/156872";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { ts } from "../figma_app/49598";
 import { W9, b6 } from "../figma_app/559491";
 import { PI } from "../figma_app/933328";
@@ -11,7 +11,7 @@ import { Cx, x2 } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
 import { nM, QN, Vu, Kq, jS, f0, jX, Ks, lD, WR, cu, pj, F9, v8, ay, KA } from "../figma_app/147952";
 import { MF } from "../figma_app/646357";
-import { Qx } from "../figma_app/300692";
+import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { gJ, Jl, SO, JG } from "../figma_app/190980";
 import { bD } from "../figma_app/45218";
 import { Yu } from "../figma_app/633080";
@@ -23,7 +23,7 @@ let x = "recent-library-items-design";
 let S = "recent-library-items";
 let w = "recent-library-items-slides";
 let C = "recent-library-items-cooper";
-let T = nF(async (e, t, {
+let T = createOptimistThunk(async (e, t, {
   loadingKey: i
 }) => {
   let n = e.getState();
@@ -87,13 +87,13 @@ let T = nF(async (e, t, {
     key: i
   }));
 });
-let k = nF(async (e, t, {
+let k = createOptimistThunk(async (e, t, {
   loadingKey: i
 }) => {
   let n = e.getState();
   let r = {};
   for (let e of n.recentlyUsed.widgets[t.key]) {
-    let t = Qx(n.publishedCanvasWidgetVersions, e.id);
+    let t = getCurrentPluginVersionId(n.publishedCanvasWidgetVersions, e.id);
     !(t && n.publishedCanvasWidgetVersions[e.id]?.[t]) && e.version && (r[e.id] || (r[e.id] = []), e.version && r[e.id].push(e.version));
   }
   if (e.dispatch(Cx({

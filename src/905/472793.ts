@@ -2,41 +2,41 @@ import type { INoOpVm } from '../905/700654';
 import type { Fn } from '../../types/global';
 import type { TSSceneGraph } from '../figma_app/518682';
 import type { FontInfo, PluginOptions, PluginRuntimeOptions } from './types';
+import md5 from 'md5';
 // Import type definitions
 import { useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { z as _$$z } from 'zod';
 import { reportError } from '../905/11';
 import { WidgetManager } from '../905/2122';
-import { w as _$$w } from '../905/70843';
-import { Ju, ZU } from '../905/102752';
-import { B9 } from '../905/125019';
-import { N as _$$N } from '../905/125137';
-import { to as _$$to, ES } from '../905/156213';
+import { codeSuggestionAPIHandler } from '../905/70843';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
+import { bytesToHex } from '../905/125019';
+import { FigmaSchema } from '../905/125137';
+import { hideSpecificModal, showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { l7 } from '../905/189185';
+import { permissionScopeHandler } from '../905/189185';
 import { h as _$$h } from '../905/193918';
-import { gl, hS } from '../905/216495';
+import { isInvalidValue, isValidValue } from '../905/216495';
 import { isPluginConfigMatching } from '../905/240440';
 import { widgetErrorTracker } from '../905/250412';
 import { DummyUIManager, PluginUIManager } from '../905/261467';
-import { k as getFeatureFlags3 } from '../905/263346';
-import { J as _$$J3 } from '../905/270045';
-import { S as _$$S } from '../905/274480';
-import { E as _$$E3 } from '../905/282455';
-import { A as _$$A } from '../905/284190';
-import { m as _$$m2 } from '../905/294113';
+import { resolveDeferredPromise } from '../905/263346';
+import { Label } from '../905/270045';
+import { Checkbox } from '../905/274480';
+import { getPluginIframeMode } from '../905/282455';
+import { deepClone } from '../905/284190';
+import { maybeCreateSavepoint } from '../905/294113';
 import { K as _$$K } from '../905/301652';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { qW, TP } from '../905/327571';
+import { getDebugPluginParams, isValidPluginId } from '../905/327571';
 import { debugState } from '../905/407919';
-import { n5 as _$$n2, po } from '../905/413743';
-import { F as _$$F } from '../905/422355';
-import { uW } from '../905/426868';
+import { designTypeToIndex, indexToDesignType } from '../905/413743';
+import { loadPluginFont } from '../905/426868';
 import { R as _$$R } from '../905/441305';
 import { trackEventAnalytics } from '../905/449184';
-import { MN as _$$MN, _U, hu, Oi, vH } from '../905/486749';
-import { fK } from '../905/488349';
+import { deleteWidgetSyncedMapEntry, getSyncedMapEntry, getSyncedState, setInitialWidgetSyncedState, setWidgetSyncedMapEntry } from '../905/486749';
+import { dragEventPropType } from '../905/488349';
 import { n_ as _$$n_ } from '../905/515076';
 import { cd as _$$cd, HB, P5 } from '../905/531105';
 import { P as _$$P2 } from '../905/545265';
@@ -49,7 +49,7 @@ import { Ay } from '../905/612521';
 import { I as _$$I, np as _$$np, o8 } from '../905/622391';
 import { k as _$$k2 } from '../905/651849';
 import { e9 as _$$e2, jE } from '../905/656545';
-import { X as _$$X } from '../905/661977';
+import { findCodegenLanguage } from '../905/661977';
 import { createPluginContext, NoOpVm, ScopedNoOpVm } from '../905/700654';
 import { Oo } from '../905/709171';
 import { getFilteredFeatureFlags } from '../905/717445';
@@ -58,7 +58,7 @@ import { MI } from '../905/757052';
 import { ZY } from '../905/764747';
 import { d1 } from '../905/766303';
 import { checkIncrementalUnsafeMember, DocumentAccessState, ensurePluginPageLoaded, loadInternalCanvasMemoized, markPageLoaded } from '../905/816197';
-import { u as _$$u, c0, Kb } from '../905/816730';
+import { validateWithZSchema, c0, mergeDefaults } from '../905/816730';
 import { getSceneGraphInstance } from '../905/830071';
 import { Y as _$$Y } from '../905/830372';
 import { _b } from '../905/835985';
@@ -67,7 +67,7 @@ import { InternalError, RequestError } from '../905/845428';
 import { T as _$$T } from '../905/858738';
 import { n3 as _$$n, IA } from '../905/859698';
 import { qg, xF } from '../905/866640';
-import { fn, sH } from '../905/871411';
+import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411';
 import { nB as _$$nB } from '../905/902840';
 import { XHR } from '../905/910117';
 import { E as _$$E } from '../905/916933';
@@ -80,25 +80,24 @@ import { m3 } from '../figma_app/45218';
 import { DEV_MODE_STRING, FEditorType, SLACK_STRING } from '../figma_app/53721';
 import { $$ } from '../figma_app/62612';
 import { FE, PB } from '../figma_app/78808';
-import { J2 } from '../figma_app/84367';
+import { getObservableOrFallback } from '../figma_app/84367';
 // Import Data Structures and Collections Management - Phase 16
 import { kA, Qj, vl, vT, y1, zH } from '../figma_app/86989';
 import { P$ } from '../figma_app/152368';
-import { FW, ZQ } from '../figma_app/155287';
+import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
 import { getInitialOptions } from '../figma_app/169182';
 import { zg } from '../figma_app/193867';
 import { gr, sD } from '../figma_app/243058';
-import { isInteractionPathCheck } from '../figma_app/897289';
 import { nM as _$$nM, M7 } from '../figma_app/276332';
-import { qH } from '../figma_app/300692';
+import { PluginPermissions } from '../figma_app/300692';
 import { eG as _$$eG, oJ } from '../figma_app/334505';
 import { J9 } from '../figma_app/345997';
 import { J3 } from '../figma_app/360163';
 import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091';
 import { Qn } from '../figma_app/415217';
 import { Ay as _$$Ay2 } from '../figma_app/432652';
-import { Up } from '../figma_app/455620';
-import { Y5 } from '../figma_app/455680';
+import { getOpenExternalPluginIds } from '../figma_app/455620';
+import { fullscreenValue } from '../figma_app/455680';
 import { assert, throwTypeError } from '../figma_app/465776';
 import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636';
 import { tB as _$$tB } from '../figma_app/516028';
@@ -110,9 +109,10 @@ import { WJ } from '../figma_app/671547';
 import { UK } from '../figma_app/740163';
 import { Br } from '../figma_app/741237';
 import { OU } from '../figma_app/757723';
-import { _em, BXd, Egt, Ez5, fHP, fZl, glU, HzA, iIc, IPu, IQ2, NfO, Osy, oVz, rXF, tKW, UcW, XJn, Z64, ZiZ, zol } from '../figma_app/763686';
+import { PluginModalType, LibraryPubSub, SceneGraphHelpers, AppStateTsApi, LogicalOperation, CooperTemplateTypesTsBindings, Fullscreen, TrackType, SceneChangeType, CooperHelpers, SlideViewType, PluginHelpers, SelectionPaintHelpers, DraftState, VariableResolvedDataType, MeasurementUnit, ResourceLocation, FirstDraftHelpers, SocialMediaFormats, SceneIdentifier, Confirmation } from '../figma_app/763686';
 import { AC } from '../figma_app/777551';
 import { desktopAPIInstance } from '../figma_app/876459';
+import { isInteractionPathCheck } from '../figma_app/897289';
 // Import UI Components and Controls Library - Phase 14
 import { KJ } from '../figma_app/916560';
 import { Ky, u7, zn } from '../figma_app/933328';
@@ -130,14 +130,14 @@ import { VariableFactory } from './core/variable-api';
 import { VariableCollectionFactory } from './core/variable-collection-factory';
 import { VideoStore } from './core/video-store';
 import { convertInternalPaintToExternal } from './modules';
-let rp = Ju(({
+let rp = registerModal(({
   resolve: e,
   reject: t,
   pluginName: i,
   ...n
 }) => {
   let [r, a] = useState(!1);
-  let s = J2(UK().spellCheckPreference);
+  let s = getObservableOrFallback(UK().spellCheckPreference);
   let o = () => {
     n.onClose();
     t();
@@ -177,8 +177,8 @@ let rp = Ju(({
             })
           })
         })
-      }), s && jsx(_$$S, {
-        label: jsx(_$$J3, {
+      }), s && jsx(Checkbox, {
+        label: jsx(Label, {
           children: renderI18nText('textreview.also_turn_off_figma_spell_check', {})
         }),
         checked: r,
@@ -186,7 +186,7 @@ let rp = Ju(({
       })]
     })
   });
-}, 'TEXT_REVIEW_REQUEST_MODAL', ZU.NO);
+}, 'TEXT_REVIEW_REQUEST_MODAL', ModalSupportsBackground.NO);
 export function isPromiseLike(vm: NoOpVm, obj: INoOpVm<any>) {
   // r1 - Check if an object is a promise-like object with then/catch methods
   if (!vm.isObject(obj)) {
@@ -304,7 +304,7 @@ export function createEventDataObject(NoOpVm, handler, _eventCommand) {
  * executeEventHandler - Execute event handler function with proper error handling
  */
 export function executeEventHandler(NoOpVm, handler, eventData, eventCommand, editScope) {
-  return l7.plugin(editScope, () => NoOpVm.callFunction(getFunctionHandle(handler.handle), NoOpVm.undefined, eventCommand.name === 'textEditEnd' ? NoOpVm.deepWrap(eventCommand.event) : eventData));
+  return permissionScopeHandler.plugin(editScope, () => NoOpVm.callFunction(getFunctionHandle(handler.handle), NoOpVm.undefined, eventCommand.name === 'textEditEnd' ? NoOpVm.deepWrap(eventCommand.event) : eventData));
 }
 
 /**
@@ -393,7 +393,7 @@ async function updateWidgetProperties({
   // r3 - Execute property change callback for widgets when properties are updated
 
   // Execute the callback function with the property change data
-  const callbackResult = l7.plugin(editScopeLabel, () => vm.callFunction(callbackHandle, vm.undefined, vm.deepWrap({
+  const callbackResult = permissionScopeHandler.plugin(editScopeLabel, () => vm.callFunction(callbackHandle, vm.undefined, vm.deepWrap({
     propertyName,
     propertyValue
   })));
@@ -582,10 +582,10 @@ export function processIndexParameter(indexHandle, operationName, NoOpVm) {
   if (NoOpVm.isUndefined(indexHandle)) {
     return -1;
   }
-  return _$$u({
+  return validateWithZSchema({
     vm: NoOpVm,
     handle: indexHandle,
-    zSchema: _$$N.PositiveInteger,
+    zSchema: FigmaSchema.PositiveInteger,
     property: `${operationName} index`
   });
 }
@@ -640,7 +640,7 @@ class PluginRuntime {
       return t;
     },
     eventName: 'auth',
-    zResultSchema: _$$N.AuthResultSchema,
+    zResultSchema: FigmaSchema.AuthResultSchema,
     rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
     defaultResult: null
   });
@@ -783,7 +783,7 @@ class PluginRuntime {
       throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`);
     }
     const id = vm.toString(idHandle);
-    if (!fn(sH(id))) {
+    if (!isValidSessionLocalID(parseSessionLocalID(id))) {
       throw new Error(`The annotation category id ${JSON.stringify(id)} is not valid`);
     }
     const categories = sceneGraph.getRoot().annotationCategories;
@@ -803,7 +803,7 @@ class PluginRuntime {
       return t;
     },
     eventName: 'textreview',
-    zResultSchema: _$$N.TextReviewResultSchema,
+    zResultSchema: FigmaSchema.TextReviewResultSchema,
     defaultResult: [],
     rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.'
   });
@@ -815,7 +815,7 @@ class PluginRuntime {
       return t;
     },
     eventName: 'codegen',
-    zResultSchema: _$$N.CodegenResultSchema,
+    zResultSchema: FigmaSchema.CodegenResultSchema,
     defaultResult: [],
     rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.'
   });
@@ -828,7 +828,7 @@ class PluginRuntime {
       return t;
     },
     eventName: 'generate',
-    zResultSchema: _$$N.CodegenResultSchema,
+    zResultSchema: FigmaSchema.CodegenResultSchema,
     defaultResult: [],
     rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.'
   });
@@ -839,7 +839,7 @@ class PluginRuntime {
       return t;
     },
     eventName: 'linkpreview',
-    zResultSchema: _$$N.LinkPreviewResultSchema,
+    zResultSchema: FigmaSchema.LinkPreviewResultSchema,
     defaultResult: null,
     rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.'
   });
@@ -896,13 +896,13 @@ class PluginRuntime {
     vm.retainHandle(this.mixedSentinel);
     this.runtimeOptions = getInitialOptions().ext_lego_plugins_runmode ? {
       allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
-      iframeId: _$$E3({
+      iframeId: getPluginIframeMode({
         runMode: this.getRunMode()
       }),
       allowInitiateCheckout: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode())
     } : {
       allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(options.triggeredFrom),
-      iframeId: _$$E3({
+      iframeId: getPluginIframeMode({
         triggeredFrom: options.triggeredFrom
       }),
       allowInitiateCheckout: !options.triggeredFrom || !RESTRICTED_TRIGGERS.NO_UI.has(options.triggeredFrom)
@@ -1119,7 +1119,7 @@ class PluginRuntime {
     }
     this.options.addShutdownAction(e => this.tearDown(e));
     this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid);
-    NfO.resetSelectionCouldBeDirty();
+    PluginHelpers.resetSelectionCouldBeDirty();
     this.createAPI();
   }
 
@@ -1342,7 +1342,7 @@ class PluginRuntime {
           reject
         } = vm.newPromise();
         vm.registerPromise(prepareDocument(element)).then(() => {
-          l7.plugin(key, () => {
+          permissionScopeHandler.plugin(key, () => {
             setValueIncremental(element, parsedValue);
             resolve(vm.undefined);
           });
@@ -1551,7 +1551,7 @@ class PluginRuntime {
           reject
         } = vm.newPromise();
         vm.registerPromise(prepareDocument(thisContext, parsedArgs)).then(() => {
-          resolve(l7.plugin(incrementalSafeApiKey, () => resolveValue(thisContext, parsedArgs)));
+          resolve(permissionScopeHandler.plugin(incrementalSafeApiKey, () => resolveValue(thisContext, parsedArgs)));
         }).catch(error => {
           reject(vm.newString(error.message));
         });
@@ -1840,7 +1840,7 @@ class PluginRuntime {
       key: 'on',
       metricsKey: null,
       cb(e, s) {
-        let o = _$$u({
+        let o = validateWithZSchema({
           vm: r,
           handle: e,
           zSchema: timerAndStateEvents.refine(e => t.includes(e)),
@@ -1859,7 +1859,7 @@ class PluginRuntime {
       key: 'once',
       metricsKey: null,
       cb(e, s) {
-        let o = _$$u({
+        let o = validateWithZSchema({
           vm: r,
           handle: e,
           zSchema: timerAndStateEvents.refine(e => t.includes(e)),
@@ -1878,7 +1878,7 @@ class PluginRuntime {
       key: 'off',
       metricsKey: null,
       cb(e, i) {
-        s(this, _$$u({
+        s(this, validateWithZSchema({
           vm: r,
           handle: e,
           zSchema: timerAndStateEvents.refine(e => t.includes(e)),
@@ -1898,7 +1898,7 @@ class PluginRuntime {
       arraysEqual(this.previousSelection, e) && this.previousSelectedTextRangeJson === t || this.fireEventSync('selectionchange', []);
       this.previousSelection = e;
       this.previousSelectedTextRangeJson = t;
-      NfO.resetSelectionCouldBeDirty();
+      PluginHelpers.resetSelectionCouldBeDirty();
     });
   };
   pageCallback = () => {
@@ -1911,7 +1911,7 @@ class PluginRuntime {
       this.overrideRuntimeOptions({
         allowVisibleIframe: !0,
         defaultIframePosition: 'codegen-default',
-        iframeId: _$$E3({
+        iframeId: getPluginIframeMode({
           triggeredFrom: 'codegen'
         }),
         allowInitiateCheckout: !0
@@ -2020,7 +2020,7 @@ class PluginRuntime {
    * isStyleRelatedChange - Check if change type is style-related
    */
   isStyleRelatedChange(changeType) {
-    return changeType === iIc.STYLE_PROPERTY_CHANGE || changeType === iIc.STYLE_CREATE || changeType === iIc.STYLE_DELETE;
+    return changeType === SceneChangeType.STYLE_PROPERTY_CHANGE || changeType === SceneChangeType.STYLE_CREATE || changeType === SceneChangeType.STYLE_DELETE;
   }
 
   /**
@@ -2078,7 +2078,7 @@ class PluginRuntime {
    * handleStyleChanges - Handle style creation, modification, and deletion
    */
   handleStyleChanges(changeRecord, changeData) {
-    if (changeData.type === iIc.STYLE_DELETE) {
+    if (changeData.type === SceneChangeType.STYLE_DELETE) {
       this.vm.setProp(changeRecord, 'style', this.vm.$$null);
     } else {
       // Handle STYLE_PROPERTY_CHANGE and STYLE_CREATE
@@ -2118,10 +2118,10 @@ class PluginRuntime {
     let t = this.vm.newObject();
     this.vm.setProp(t, 'view', this.vm.newString(this.slidesViewChangeToString(e.view)));
     try {
-      NfO.prepareToRunDocumentChangeCallback();
+      PluginHelpers.prepareToRunDocumentChangeCallback();
       this.fireEventSync('slidesviewchange', [t]);
     } finally {
-      NfO.finishedRunningDocumentChangeCallback();
+      PluginHelpers.finishedRunningDocumentChangeCallback();
     }
   };
   documentChangeCallback = e => {
@@ -2129,10 +2129,10 @@ class PluginRuntime {
     let i = this.vm.newObject();
     this.vm.setProp(i, 'documentChanges', t);
     try {
-      NfO.prepareToRunDocumentChangeCallback();
+      PluginHelpers.prepareToRunDocumentChangeCallback();
       this.fireEventSync('documentchange', [i]);
     } finally {
-      NfO.finishedRunningDocumentChangeCallback();
+      PluginHelpers.finishedRunningDocumentChangeCallback();
     }
   };
   styleChangeCallback = e => {
@@ -2141,10 +2141,10 @@ class PluginRuntime {
     let i = this.vm.newObject();
     this.vm.setProp(i, 'styleChanges', t);
     try {
-      NfO.prepareToRunDocumentChangeCallback();
+      PluginHelpers.prepareToRunDocumentChangeCallback();
       this.fireEventSync('stylechange', [i]);
     } finally {
-      NfO.finishedRunningDocumentChangeCallback();
+      PluginHelpers.finishedRunningDocumentChangeCallback();
     }
   };
   nodeChangeCallback = e => {
@@ -2154,10 +2154,10 @@ class PluginRuntime {
       let n = this.vm.newObject();
       this.vm.setProp(n, 'nodeChanges', e);
       try {
-        NfO.prepareToRunDocumentChangeCallback();
+        PluginHelpers.prepareToRunDocumentChangeCallback();
         this.fireEventSyncForPage('nodechange', t, [n]);
       } finally {
-        NfO.finishedRunningDocumentChangeCallback();
+        PluginHelpers.finishedRunningDocumentChangeCallback();
       }
     }
   };
@@ -2230,10 +2230,10 @@ class PluginRuntime {
    * @returns Array of normalized suggestion objects
    */
   processSuggestions(vm, suggestionsHandle) {
-    const rawSuggestions = _$$u({
+    const rawSuggestions = validateWithZSchema({
       vm,
       handle: suggestionsHandle,
-      zSchema: _$$N.ParameterValues,
+      zSchema: FigmaSchema.ParameterValues,
       property: 'setSuggestions'
     });
     return rawSuggestions.map(suggestion => typeof suggestion === 'string' ? {
@@ -2400,7 +2400,7 @@ class PluginRuntime {
       if (inputData.currentParameter.allowFreeform) {
         throw new Error('setError not supported on allowFreeform parameters');
       }
-      const errorMessage = _$$u({
+      const errorMessage = validateWithZSchema({
         vm,
         handle: errorHandle,
         zSchema: _$$z.string(),
@@ -2416,7 +2416,7 @@ class PluginRuntime {
 
     // Setup loading message function
     vm.defineFunction(resultObject, 'setLoadingMessage', 'result.setLoadingMessage', loadingHandle => {
-      const loadingMessage = _$$u({
+      const loadingMessage = validateWithZSchema({
         vm,
         handle: loadingHandle,
         zSchema: _$$z.string(),
@@ -2444,7 +2444,7 @@ class PluginRuntime {
       this.fireDebouncedEventAsync('run', () => {
         let n = t.newObject();
         t.setProp(n, 'command', t.newString(i));
-        e.command === 'parameters' ? e.parameters ? t.setProp(n, 'parameters', t.deepWrap(transformParameterValues(e.parameters))) : qW(this.options.pluginID) && t.setProp(n, 'parameters', t.deepWrap(TP(this.options.pluginID))) : (e.command === 'open-related-link' || e.command === 'open-dev-resource') && t.setProp(n, 'link', t.deepWrap(e.link));
+        e.command === 'parameters' ? e.parameters ? t.setProp(n, 'parameters', t.deepWrap(transformParameterValues(e.parameters))) : isValidPluginId(this.options.pluginID) && t.setProp(n, 'parameters', t.deepWrap(getDebugPluginParams(this.options.pluginID))) : (e.command === 'open-related-link' || e.command === 'open-dev-resource') && t.setProp(n, 'link', t.deepWrap(e.link));
         t.shallowFreezeObject(n);
         this.fireEventSync('run', [n]);
       });
@@ -2477,7 +2477,7 @@ class PluginRuntime {
 
     // Handle special keyboard trigger message
     if (messageEvent.data === IN) {
-      Y5.triggerAction('plugins-run-last', {
+      fullscreenValue.triggerAction('plugins-run-last', {
         source: 'keyboard'
       });
       return;
@@ -2682,7 +2682,7 @@ class PluginRuntime {
    */
   isValidDropData(dropData) {
     // Check for validation errors
-    const validationErrors = c0(dropData, fK, 'pluginDrop');
+    const validationErrors = c0(dropData, dragEventPropType, 'pluginDrop');
     if (validationErrors.length > 0) {
       return false;
     }
@@ -2710,7 +2710,7 @@ class PluginRuntime {
         return inputEvent;
       },
       eventName: 'textreview',
-      zResultSchema: _$$N.TextReviewResultSchema,
+      zResultSchema: FigmaSchema.TextReviewResultSchema,
       defaultResult: [],
       rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.'
     });
@@ -2728,7 +2728,7 @@ class PluginRuntime {
         return inputEvent;
       },
       eventName: 'codegen',
-      zResultSchema: _$$N.CodegenResultSchema,
+      zResultSchema: FigmaSchema.CodegenResultSchema,
       defaultResult: [],
       rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.'
     });
@@ -2747,7 +2747,7 @@ class PluginRuntime {
         return inputEvent;
       },
       eventName: 'generate',
-      zResultSchema: _$$N.CodegenResultSchema,
+      zResultSchema: FigmaSchema.CodegenResultSchema,
       defaultResult: [],
       rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.'
     });
@@ -2764,7 +2764,7 @@ class PluginRuntime {
         return inputEvent;
       },
       eventName: 'linkpreview',
-      zResultSchema: _$$N.LinkPreviewResultSchema,
+      zResultSchema: FigmaSchema.LinkPreviewResultSchema,
       defaultResult: null,
       rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.'
     });
@@ -2777,7 +2777,7 @@ class PluginRuntime {
         return inputEvent;
       },
       eventName: 'auth',
-      zResultSchema: _$$N.AuthResultSchema,
+      zResultSchema: FigmaSchema.AuthResultSchema,
       rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
       defaultResult: null
     });
@@ -2838,7 +2838,7 @@ class PluginRuntime {
     const runMode = this.getRunMode();
     return {
       allowVisibleIframe: !ar.has(runMode),
-      iframeId: _$$E3({
+      iframeId: getPluginIframeMode({
         runMode
       }),
       allowInitiateCheckout: !ar.has(runMode)
@@ -2852,7 +2852,7 @@ class PluginRuntime {
     const triggeredFrom = this.options.triggeredFrom;
     return {
       allowVisibleIframe: !triggeredFrom || !an.has(triggeredFrom),
-      iframeId: _$$E3({
+      iframeId: getPluginIframeMode({
         triggeredFrom
       }),
       allowInitiateCheckout: !triggeredFrom || !an.has(triggeredFrom)
@@ -2896,7 +2896,7 @@ class PluginRuntime {
   finalizeInitialization() {
     this.options.addShutdownAction(reason => this.tearDown(reason));
     this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(node => node.guid);
-    NfO.resetSelectionCouldBeDirty();
+    PluginHelpers.resetSelectionCouldBeDirty();
     this.createAPI();
   }
   hasRegisteredWidget() {
@@ -2991,7 +2991,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     };
   }
   editScope(e, t) {
-    return l7.plugin(`plugin-${e}`, t);
+    return permissionScopeHandler.plugin(`plugin-${e}`, t);
   }
   conditionalEditScope(e, t, i) {
     return e ? this.editScope(t, i) : i();
@@ -3176,7 +3176,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * executeGroupingOperation - Execute the actual grouping operation
    */
   executeGroupingOperation(operationType, processedNodes, _operationName) {
-    return NfO.groupNodes(operationType, processedNodes.nodeIds, processedNodes.parent.sessionID, processedNodes.parent.localID, processedNodes.index, this.privateSceneGraph.scene);
+    return PluginHelpers.groupNodes(operationType, processedNodes.nodeIds, processedNodes.parent.sessionID, processedNodes.parent.localID, processedNodes.index, this.privateSceneGraph.scene);
   }
 
   /**
@@ -3328,7 +3328,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     return !0;
   }
   windowToCanvasPosition(e) {
-    let t = Y5.getViewportInfo();
+    let t = fullscreenValue.getViewportInfo();
     let i = new Mi(t.x, t.y);
     let n = new Mi(e.x, e.y).subtract(i);
     return $$(t, n);
@@ -3439,7 +3439,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     const {
       parentId,
       relativeTransform
-    } = NfO.pickInsertionLocation(canvasPosition.x, canvasPosition.y);
+    } = PluginHelpers.pickInsertionLocation(canvasPosition.x, canvasPosition.y);
 
     // Create drop event data object
     const dropEventData = {
@@ -3498,7 +3498,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
             shouldRetainResult: true
           }) : (vm.retainHandle(result.handle), Promise.resolve(result.handle));
           return vm.registerPromise(promise).then(handle => {
-            const validatedResult = _$$u({
+            const validatedResult = validateWithZSchema({
               vm,
               handle,
               zSchema: config.zResultSchema,
@@ -3539,33 +3539,33 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   }
   documentChangeTypeToString(e) {
     switch (e) {
-      case iIc.CREATE:
+      case SceneChangeType.CREATE:
         return 'CREATE';
-      case iIc.DELETE:
+      case SceneChangeType.DELETE:
         return 'DELETE';
-      case iIc.PROPERTY_CHANGE:
+      case SceneChangeType.PROPERTY_CHANGE:
         return 'PROPERTY_CHANGE';
-      case iIc.STYLE_PROPERTY_CHANGE:
+      case SceneChangeType.STYLE_PROPERTY_CHANGE:
         return 'STYLE_PROPERTY_CHANGE';
-      case iIc.STYLE_CREATE:
+      case SceneChangeType.STYLE_CREATE:
         return 'STYLE_CREATE';
-      case iIc.STYLE_DELETE:
+      case SceneChangeType.STYLE_DELETE:
         return 'STYLE_DELETE';
     }
   }
   documentChangeOriginToString(e) {
     switch (e) {
-      case UcW.LOCAL:
+      case ResourceLocation.LOCAL:
         return 'LOCAL';
-      case UcW.REMOTE:
+      case ResourceLocation.REMOTE:
         return 'REMOTE';
     }
   }
   slidesViewChangeToString(e) {
     switch (e) {
-      case IQ2.GRID:
+      case SlideViewType.GRID:
         return 'GRID';
-      case IQ2.SINGLE_SLIDE:
+      case SlideViewType.SINGLE_SLIDE:
         return 'SINGLE_SLIDE';
     }
   }
@@ -3770,7 +3770,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   createActiveUsersApi() {
     const vm = this.vm;
-    const allUsers = NfO.getAllUsers();
+    const allUsers = PluginHelpers.getAllUsers();
     const usersArray = vm.newArray();
 
     // Get user info lookup for efficient access
@@ -4050,7 +4050,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: false,
         metricsKey: 'viewport.center',
         get: () => {
-          const viewportBounds = NfO.getViewportBounds();
+          const viewportBounds = PluginHelpers.getViewportBounds();
           const centerObject = vm.newObject();
           vm.setProp(centerObject, 'x', vm.newNumber(viewportBounds.x + viewportBounds.width / 2));
           vm.setProp(centerObject, 'y', vm.newNumber(viewportBounds.y + viewportBounds.height / 2));
@@ -4064,13 +4064,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           const {
             x,
             y
-          } = _$$u({
+          } = validateWithZSchema({
             vm,
             handle: valueHandle,
-            zSchema: _$$N.Vector,
+            zSchema: FigmaSchema.Vector,
             property: 'viewport.center'
           });
-          NfO.setViewportCenter({
+          PluginHelpers.setViewportCenter({
             x,
             y
           });
@@ -4097,7 +4097,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: false,
         metricsKey: 'viewport.bounds',
         get: () => {
-          const viewportBounds = NfO.getViewportBounds();
+          const viewportBounds = PluginHelpers.getViewportBounds();
           const boundsObject = vm.newObject();
           vm.setProp(boundsObject, 'x', vm.newNumber(viewportBounds.x));
           vm.setProp(boundsObject, 'y', vm.newNumber(viewportBounds.y));
@@ -4128,23 +4128,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: false,
         metricsKey: 'viewport.zoom',
         get: () => {
-          const zoomScale = NfO.getViewportZoomScale();
+          const zoomScale = PluginHelpers.getViewportZoomScale();
           return vm.newNumber(zoomScale);
         },
         set: valueHandle => {
           if (isQueryMode()) {
             throw new Error('Cannot modify viewport in queryMode');
           }
-          const zoomValue = _$$u({
+          const zoomValue = validateWithZSchema({
             vm,
             handle: valueHandle,
-            zSchema: _$$N.PositiveFloat,
+            zSchema: FigmaSchema.PositiveFloat,
             property: 'viewport.zoom'
           });
           if (!(zoomValue > 0)) {
             throw new Error('viewport.zoom expects a positive number');
           }
-          NfO.setViewportZoomScale(zoomValue);
+          PluginHelpers.setViewportZoomScale(zoomValue);
           return vm.undefined;
         }
       },
@@ -4180,7 +4180,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           const nodeId = vm.getString(vm.getProp(nodeHandle, 'id'));
           nodeIds.push(nodeId);
         }
-        NfO.scrollAndZoomIntoView(nodeIds);
+        PluginHelpers.scrollAndZoomIntoView(nodeIds);
         return vm.undefined;
       },
       isAllowedInReadOnly: true,
@@ -4203,21 +4203,21 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: true,
         metricsKey: 'viewport.slidesView',
         get: () => {
-          const isInFocusedNodeView = Ez5.singleSlideView().isInFocusedNodeView.getCopy();
+          const isInFocusedNodeView = AppStateTsApi.singleSlideView().isInFocusedNodeView.getCopy();
           return vm.newString(isInFocusedNodeView ? 'single-slide' : 'grid');
         },
         set: valueHandle => {
-          const viewType = _$$u({
+          const viewType = validateWithZSchema({
             vm,
             handle: valueHandle,
             zSchema: _$$z.union([_$$z.literal('grid'), _$$z.literal('single-slide')]),
             property: 'grid or single-slide'
           });
-          const isInFocusedNodeView = Ez5.singleSlideView().isInFocusedNodeView.getCopy();
+          const isInFocusedNodeView = AppStateTsApi.singleSlideView().isInFocusedNodeView.getCopy();
           if (viewType === 'grid' && isInFocusedNodeView) {
-            Ez5.singleSlideView().exitFocusedNodeView();
+            AppStateTsApi.singleSlideView().exitFocusedNodeView();
           } else if (viewType === 'single-slide' && !isInFocusedNodeView) {
-            Y5.triggerAction('enter-single-slide-view');
+            fullscreenValue.triggerAction('enter-single-slide-view');
           }
         }
       },
@@ -4244,16 +4244,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           let isInFocusedNodeView = false;
           switch (this.fullscreenEditorType) {
             case FEditorType.Cooper:
-              isInFocusedNodeView = Ez5?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false;
+              isInFocusedNodeView = AppStateTsApi?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false;
               break;
             case FEditorType.Slides:
-              isInFocusedNodeView = Ez5?.singleSlideView().isInFocusedNodeView.getCopy() ?? false;
+              isInFocusedNodeView = AppStateTsApi?.singleSlideView().isInFocusedNodeView.getCopy() ?? false;
               break;
           }
           return vm.newString(isInFocusedNodeView ? 'single-asset' : 'grid');
         },
         set: valueHandle => {
-          const viewType = _$$u({
+          const viewType = validateWithZSchema({
             vm,
             handle: valueHandle,
             zSchema: _$$z.union([_$$z.literal('grid'), _$$z.literal('single-asset')]),
@@ -4262,21 +4262,21 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           switch (this.fullscreenEditorType) {
             case FEditorType.Cooper:
               {
-                const isInFocusedNodeView = Ez5?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false;
+                const isInFocusedNodeView = AppStateTsApi?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false;
                 if (viewType === 'grid' && isInFocusedNodeView) {
-                  Ez5?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen();
+                  AppStateTsApi?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen();
                 } else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                  Ez5?.cooperFocusView().enterFocusedNodeView();
+                  AppStateTsApi?.cooperFocusView().enterFocusedNodeView();
                 }
                 break;
               }
             case FEditorType.Slides:
               {
-                const isInFocusedNodeView = Ez5?.singleSlideView().isInFocusedNodeView.getCopy() ?? false;
+                const isInFocusedNodeView = AppStateTsApi?.singleSlideView().isInFocusedNodeView.getCopy() ?? false;
                 if (viewType === 'grid' && isInFocusedNodeView) {
-                  Ez5?.singleSlideView().exitFocusedNodeView();
+                  AppStateTsApi?.singleSlideView().exitFocusedNodeView();
                 } else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                  Ez5?.singleSlideView().enterFocusedNodeView();
+                  AppStateTsApi?.singleSlideView().enterFocusedNodeView();
                 }
                 break;
               }
@@ -4311,7 +4311,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
 
     // Setup parameter input event triggers if in plugin mode
     if (this.options.apiMode.type === 'PLUGIN') {
-      getFeatureFlags3({
+      resolveDeferredPromise({
         triggerParameterInputEvent: this.triggerParameterInputEvent,
         triggerRunEvent: this.triggerRunEvent
       });
@@ -4391,7 +4391,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
 
     // Check if dev resources are available
     const isDevResourcesAvailable = (() => {
-      const hasPlugin = Up().has(pluginID);
+      const hasPlugin = getOpenExternalPluginIds().has(pluginID);
       const isLocalWithFlag = (apiMode.type === 'CONSOLE_SHIM' || !pluginVersionID) && getFeatureFlags().plugins_related_links_local;
       return hasPlugin || isLocalWithFlag;
     })();
@@ -4489,7 +4489,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   createTextReviewEnablementPromise(pluginName) {
     return new Promise((resolve, reject) => {
-      debugState.dispatch(_$$to({
+      debugState.dispatch(showModalHandler({
         type: rp,
         data: {
           reject,
@@ -4510,13 +4510,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
 
     // Handle spell check preference
     if (turnOffSpellCheck && UK().spellCheckPreference.getCopy()) {
-      Y5.triggerAction('toggle-spell-check');
+      fullscreenValue.triggerAction('toggle-spell-check');
     }
 
     // Enable the plugin
     const plugin = this.getPlugin();
     if (plugin) {
-      const pluginConfig = ZQ(plugin) ? {
+      const pluginConfig = hasLocalFileId(plugin) ? {
         type: 'local',
         localFileId: plugin.localFileId
       } : {
@@ -4611,13 +4611,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       };
     }
     let t = this.getCodegenLanguage();
-    let i = _$$X(e, t);
+    let i = findCodegenLanguage(e, t);
     let {
       preferences
     } = _$$n_(e, i);
     return {
       ...preferences,
-      unit: preferences.unit === tKW.PIXEL ? 'PIXEL' : 'SCALED',
+      unit: preferences.unit === MeasurementUnit.PIXEL ? 'PIXEL' : 'SCALED',
       scaleFactor: preferences.scaleFactor || 1
     };
   }
@@ -4713,16 +4713,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'resize',
       metricsKey: 'ui.resize',
       cb: (widthHandle, heightHandle) => {
-        const width = _$$u({
+        const width = validateWithZSchema({
           vm,
           handle: widthHandle,
-          zSchema: _$$N.PositiveInteger,
+          zSchema: FigmaSchema.PositiveInteger,
           property: 'resize width'
         });
-        const height = _$$u({
+        const height = validateWithZSchema({
           vm,
           handle: heightHandle,
-          zSchema: _$$N.PositiveInteger,
+          zSchema: FigmaSchema.PositiveInteger,
           property: 'resize height'
         });
         this.uiHandle.setIframeSize(width, height);
@@ -4756,16 +4756,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'reposition',
       metricsKey: 'ui.reposition',
       cb: (xHandle, yHandle) => {
-        const x = _$$u({
+        const x = validateWithZSchema({
           vm,
           handle: xHandle,
-          zSchema: _$$N.FiniteNumber,
+          zSchema: FigmaSchema.FiniteNumber,
           property: 'x'
         });
-        const y = _$$u({
+        const y = validateWithZSchema({
           vm,
           handle: yHandle,
-          zSchema: _$$N.FiniteNumber,
+          zSchema: FigmaSchema.FiniteNumber,
           property: 'y'
         });
         this.uiHandle.setIframePosition(x, y);
@@ -4829,7 +4829,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'postMessage',
       metricsKey: 'ui.postMessage',
       cb: (messageHandle, optionsHandle) => {
-        const options = Kb(_$$u({
+        const options = mergeDefaults(validateWithZSchema({
           vm,
           handle: optionsHandle,
           zSchema: _$$z.object({
@@ -4913,7 +4913,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'getAsync',
       metricsKey: 'clientStorage.getAsync',
       cb: keyHandle => {
-        const key = _$$u({
+        const key = validateWithZSchema({
           vm,
           handle: keyHandle,
           zSchema: _$$z.string(),
@@ -4946,7 +4946,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'setAsync',
       metricsKey: 'clientStorage.setAsync',
       cb: (keyHandle, valueHandle) => {
-        const key = _$$u({
+        const key = validateWithZSchema({
           vm,
           handle: keyHandle,
           zSchema: _$$z.string(),
@@ -4988,7 +4988,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'deleteAsync',
       metricsKey: 'clientStorage.deleteAsync',
       cb: keyHandle => {
-        const key = _$$u({
+        const key = validateWithZSchema({
           vm,
           handle: keyHandle,
           zSchema: _$$z.string(),
@@ -5198,7 +5198,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (!this.options.isLocal && !this.inReviewByCommunityAdmin(extension)) {
           return vm.undefined;
         }
-        const paymentStatus = _$$u({
+        const paymentStatus = validateWithZSchema({
           vm,
           handle: statusHandle,
           zSchema: _$$z.strictObject({
@@ -5269,7 +5269,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (vm.isUndefined(optionsHandle)) {
       return defaultOptions;
     }
-    const userOptions = _$$u({
+    const userOptions = validateWithZSchema({
       vm,
       handle: optionsHandle,
       zSchema: _$$z.object({
@@ -5371,8 +5371,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       // Setup cleanup action for shutdown
       this.options.addShutdownAction(() => {
         if (isActive) {
-          Y5.dispatch(ES(_$$V));
-          Y5.dispatch(ES(_$$h));
+          fullscreenValue.dispatch(hideSpecificModal(_$$V));
+          fullscreenValue.dispatch(hideSpecificModal(_$$h));
         }
       });
 
@@ -5480,10 +5480,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'rgba',
       metricsKey: 'figma.util.rgba',
       cb: colorHandle => {
-        const colorInput = _$$u({
+        const colorInput = validateWithZSchema({
           vm,
           handle: colorHandle,
-          zSchema: _$$N.ColorInput,
+          zSchema: FigmaSchema.ColorInput,
           property: 'color'
         });
         return vm.deepWrap(parseColorInput(colorInput));
@@ -5499,10 +5499,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'rgb',
       metricsKey: 'figma.util.rgb',
       cb: colorHandle => {
-        const colorInput = _$$u({
+        const colorInput = validateWithZSchema({
           vm,
           handle: colorHandle,
-          zSchema: _$$N.ColorInput,
+          zSchema: FigmaSchema.ColorInput,
           property: 'color'
         });
         const rgbaColor = parseColorInput(colorInput);
@@ -5528,16 +5528,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'solidPaint',
       metricsKey: 'figma.util.solidPaint',
       cb: (colorHandle, paintOptionsHandle) => {
-        const colorInput = _$$u({
+        const colorInput = validateWithZSchema({
           vm,
           handle: colorHandle,
-          zSchema: _$$N.ColorInput,
+          zSchema: FigmaSchema.ColorInput,
           property: 'color'
         });
-        const partialPaintOptions = _$$u({
+        const partialPaintOptions = validateWithZSchema({
           vm,
           handle: paintOptionsHandle,
-          zSchema: _$$N.PartialSolidPaint,
+          zSchema: FigmaSchema.PartialSolidPaint,
           property: 'SolidPaint'
         });
 
@@ -5578,7 +5578,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   createSolidPaintObject(colorInput, paintOptions) {
     const normalizedColor = parseColorInput(colorInput);
     return {
-      ..._$$A(paintOptions),
+      ...deepClone(paintOptions),
       type: 'SOLID',
       color: {
         r: normalizedColor.r,
@@ -5598,7 +5598,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'normalizeMarkdown',
       metricsKey: 'figma.util.normalizeMarkdown',
       cb: markdownHandle => {
-        const markdownText = _$$u({
+        const markdownText = validateWithZSchema({
           vm,
           handle: markdownHandle,
           zSchema: _$$z.string(),
@@ -5756,7 +5756,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     let pluginDataHash = null;
     if (this.options.isLocal && this.options.code && !ZY(this.options.pluginID)) {
       const existingData = widgetNode.getPluginData(this.options.pluginID, cz);
-      const newCodeHash = _$$F(this.options.code);
+      const newCodeHash = md5(this.options.code);
       if (existingData !== newCodeHash) {
         pluginDataHash = newCodeHash;
       }
@@ -5884,7 +5884,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     const widgetNodeId = widgetEvent.widgetNodeID;
     if (pluginDataHash) {
       const widgetNode = this.getWidgetNode(widgetNodeId);
-      l7.plugin('widget-code-change-setPluginData', () => {
+      permissionScopeHandler.plugin('widget-code-change-setPluginData', () => {
         widgetNode.setPluginData(this.options.pluginID, cz, pluginDataHash);
       });
     }
@@ -5962,7 +5962,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   handleUseSyncedState(stateKey, defaultValueFunction, vm, widgetManager) {
     const currentWidgetNodeId = widgetManager.getCurrentWidgetNodeId();
-    const validatedStateKey = _$$u({
+    const validatedStateKey = validateWithZSchema({
       vm,
       handle: stateKey,
       zSchema: _$$z.string(),
@@ -5999,11 +5999,11 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     }
     const getCurrentState = () => {
       const renderMode = widgetManager.getRenderMode(widgetNode.guid);
-      const syncedData = _$$MN(renderMode, widgetNode);
+      const syncedData = getSyncedState(renderMode, widgetNode);
       const defaultValue = getDefaultValue();
       if (renderMode === 'current' && !vm.isUndefined(defaultValue) && !Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey)) {
         const unwrappedDefault = vm.deepUnwrap(defaultValue);
-        _U(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, unwrappedDefault);
+        setInitialWidgetSyncedState(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, unwrappedDefault);
       }
       return Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey) ? vm.deepWrap(syncedData[validatedStateKey]) : defaultValue;
     };
@@ -6023,7 +6023,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       })());
 
       // Set the synced state value
-      _U(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, processedValue);
+      setInitialWidgetSyncedState(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, processedValue);
       return vm.undefined;
     });
     const stateArray = vm.newArray();
@@ -6037,7 +6037,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   handleUseSyncedMap(mapKey, vm, widgetManager) {
     const currentWidgetNodeId = widgetManager.getCurrentWidgetNodeId();
-    const validatedMapKey = _$$u({
+    const validatedMapKey = validateWithZSchema({
       vm,
       handle: mapKey,
       zSchema: _$$z.string(),
@@ -6045,24 +6045,24 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     });
     const getCurrentMapData = () => {
       const widgetNode = this.privateSceneGraph.get(currentWidgetNodeId);
-      return hu(widgetManager.getRenderMode(widgetNode?.guid ?? '-1:-1'), widgetNode, validatedMapKey);
+      return getSyncedMapEntry(widgetManager.getRenderMode(widgetNode?.guid ?? '-1:-1'), widgetNode, validatedMapKey);
     };
     const mapObject = vm.newObject();
     vm.defineFunction(mapObject, 'set', 'map.set', (key, value) => {
       if (widgetManager.isRunningWidgetFunction()) throw new Error('Cannot call map.set while widget is rendering.');
-      const validatedKey = _$$u({
+      const validatedKey = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
         property: 'map.key'
       });
       const unwrappedValue = vm.deepUnwrap(value);
-      l7.plugin('widget-set-synced-map-key', () => Oi(this.privateSceneGraph.get(currentWidgetNodeId), validatedMapKey, validatedKey, unwrappedValue));
+      permissionScopeHandler.plugin('widget-set-synced-map-key', () => setWidgetSyncedMapEntry(this.privateSceneGraph.get(currentWidgetNodeId), validatedMapKey, validatedKey, unwrappedValue));
       widgetManager.scheduleRender(currentWidgetNodeId);
       return vm.undefined;
     });
     vm.defineFunction(mapObject, 'get', 'map.get', key => {
-      const validatedKey = _$$u({
+      const validatedKey = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
@@ -6071,7 +6071,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       return vm.deepWrap(getCurrentMapData()[validatedKey]);
     });
     vm.defineFunction(mapObject, 'has', 'map.has', key => {
-      const validatedKey = _$$u({
+      const validatedKey = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
@@ -6081,13 +6081,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     });
     vm.defineFunction(mapObject, 'delete', 'map.delete', key => {
       if (widgetManager.isRunningWidgetFunction()) throw new Error('Cannot call map.delete while widget is rendering.');
-      let a = _$$u({
+      let a = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
         property: 'map.key'
       });
-      vH(this.privateSceneGraph.get(variableDefinitions), NodeAPI, a);
+      deleteWidgetSyncedMapEntry(this.privateSceneGraph.get(variableDefinitions), NodeAPI, a);
       widgetManager.scheduleRender(variableDefinitions);
       return vm.undefined;
     });
@@ -6262,7 +6262,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           let i = e.getStringProp(t, r.toString());
           n.push(i);
         }
-        let r = NfO.matchNodes(n);
+        let r = PluginHelpers.matchNodes(n);
         return e.deepWrap(r);
       },
       isAllowedInReadOnly: !0,
@@ -6320,7 +6320,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       cb: nodeHandle => {
         const node = this.getNode(nodeHandle);
         if (node.isLooseComponent || node.isStateGroup) {
-          const [serializedData, buffer] = NfO.serializeProductComponentForPublish(node.guid);
+          const [serializedData, buffer] = PluginHelpers.serializeProductComponentForPublish(node.guid);
           if (serializedData && buffer) {
             const wrappedData = vm.deepWrap(serializedData);
             vm.setProp(wrappedData, 'buffer', vm.deepWrap(new Uint8Array(buffer)));
@@ -6344,13 +6344,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`);
         }
         const id = vm.toString(idHandle);
-        const buffer = _$$u({
+        const buffer = validateWithZSchema({
           vm,
           handle: bufferHandle,
-          zSchema: _$$N.UInt8Array,
+          zSchema: FigmaSchema.UInt8Array,
           property: 'buffer'
         });
-        const result = NfO.deserializeProductComponentFromBuffer(id, buffer);
+        const result = PluginHelpers.deserializeProductComponentFromBuffer(id, buffer);
         return vm.newString(result);
       },
       isAllowedInReadOnly: true,
@@ -6398,7 +6398,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`);
         }
         const id = vm.toString(idHandle);
-        if (!fn(sH(id))) {
+        if (!isValidSessionLocalID(parseSessionLocalID(id))) {
           return vm.$$null;
         }
         const node = this.privateSceneGraph.get(id);
@@ -6422,7 +6422,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`);
         }
         const id = vm.toString(idHandle);
-        if (!fn(sH(id))) {
+        if (!isValidSessionLocalID(parseSessionLocalID(id))) {
           return vm.$$null;
         }
         const node = this.privateSceneGraph.get(id);
@@ -6467,7 +6467,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (!node) {
           return vm.newBoolean(false);
         }
-        const success = XJn.detachGeneratedDesign(node.guid, oVz.CURRENT);
+        const success = FirstDraftHelpers.detachGeneratedDesign(node.guid, DraftState.CURRENT);
         return vm.newBoolean(success);
       },
       isAllowedInReadOnly: true,
@@ -6485,7 +6485,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (!node) {
           return vm.newBoolean(false);
         }
-        const collectionIds = XJn.consumedVariableCollectionIds(node.guid);
+        const collectionIds = FirstDraftHelpers.consumedVariableCollectionIds(node.guid);
         const resultArray = vm.newArray();
         for (let i = 0; i < collectionIds.length; i++) {
           vm.setProp(resultArray, String(i), vm.newString(collectionIds[i]));
@@ -6579,7 +6579,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       cb: (instanceHandle, targetHandle) => {
         const instanceNode = this.getNode(instanceHandle);
         const targetNode = this.getNode(targetHandle);
-        XJn.applyOverridesToInstanceToMatchNode(instanceNode.guid, targetNode.guid);
+        FirstDraftHelpers.applyOverridesToInstanceToMatchNode(instanceNode.guid, targetNode.guid);
         return vm.$$null;
       },
       isAllowedInReadOnly: false,
@@ -6610,13 +6610,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'track',
       metricsKey: 'analytics.track',
       cb: (nameHandle, propertiesHandle) => {
-        const eventName = _$$u({
+        const eventName = validateWithZSchema({
           vm,
           handle: nameHandle,
           zSchema: _$$z.string(),
           property: 'analytics.track name'
         });
-        const eventProperties = _$$u({
+        const eventProperties = validateWithZSchema({
           vm,
           handle: propertiesHandle,
           zSchema: _$$z.record(_$$z.any()),
@@ -6674,7 +6674,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'cortex.internal.kiwi.getSceneForNode',
       cb: i => {
         let n = e.getNode(i);
-        let r = glU.generateClipboardScene(n.guid);
+        let r = Fullscreen.generateClipboardScene(n.guid);
         return t.newUint8Array(r);
       },
       isAllowedInReadOnly: !0,
@@ -6686,13 +6686,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'applyScene',
       metricsKey: 'cortex.internal.kiwi.applyScene',
       cb: e => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: t,
           handle: e,
-          zSchema: _$$N.UInt8Array,
+          zSchema: FigmaSchema.UInt8Array,
           property: 'applyScene'
         });
-        glU.applyFileToCurrentScene(i);
+        Fullscreen.applyFileToCurrentScene(i);
         return t.undefined;
       },
       isAllowedInReadOnly: !1,
@@ -6722,7 +6722,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       isAllowedInWidgetRender: !1,
       hasEditScope: !1
     });
-    let i = (t, i) => _$$u({
+    let i = (t, i) => validateWithZSchema({
       vm: e,
       handle: i,
       zSchema: _$$z.record(_$$z.any()),
@@ -6837,7 +6837,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
   }
   setQueryMode(e) {
     this.queryMode = e;
-    NfO.runInQueryMode(this.queryMode);
+    PluginHelpers.runInQueryMode(this.queryMode);
     this.uiHandle.setHideVisibleUI(this.queryMode);
   }
 
@@ -6846,7 +6846,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    */
   setSkipInvisibleInstanceChildren(e) {
     this.skipInvisibleInstanceChildren = e;
-    NfO.skipInvisibleInstanceChildren(e);
+    PluginHelpers.skipInvisibleInstanceChildren(e);
   }
 
   /**
@@ -6861,7 +6861,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: () => {
         let e = _$$I();
         if (!e) throw new Error('No org id found');
-        let t = _$$w.getZipUrl(e).then(e => e.data.meta.url);
+        let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => e.data.meta.url);
         return this.wrapPromise(t);
       },
       isAllowedInReadOnly: !0,
@@ -6875,7 +6875,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: () => {
         let e = _$$I();
         if (!e) throw new Error('No org id found');
-        let t = _$$w.getZipUrl(e).then(e => {
+        let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => {
           let t = e.data.meta.url;
           if (!t) throw new Error('No url found');
           // TODO: Phase 18 Refactoring - Replace with:
@@ -6904,7 +6904,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       metricsKey: 'jsx.serialize',
       cb: (t, i) => {
         let n = this.getNode(t);
-        let r = _$$u({
+        let r = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: J3.optional(),
@@ -6923,7 +6923,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: (t, i) => {
         if (!e.isString(t)) throw new Error('jsx not a string');
         let n = e.toString(t);
-        let r = _$$u({
+        let r = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: J3.optional(),
@@ -7037,30 +7037,30 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'createFrame',
               metricsKey: 'figma.buzz.createFrame',
               cb: (rowHandle, colHandle) => {
-                const row = _$$u({
+                const row = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: rowHandle,
                   zSchema: _$$z.number().finite().min(0).int().optional(),
                   property: 'canvasRow'
                 });
-                const col = _$$u({
+                const col = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: colHandle,
                   zSchema: _$$z.number().finite().min(0).int().optional(),
                   property: 'canvasColumn'
                 });
-                const assetType = _$$n2.get('CUSTOM');
+                const assetType = designTypeToIndex.get('CUSTOM');
                 if (assetType === undefined) throw new Error('Invalid asset type');
-                const size = fZl?.getCooperTemplateTypeSize(assetType);
+                const size = CooperTemplateTypesTsBindings?.getCooperTemplateTypeSize(assetType);
                 if (!size) throw new Error('Failed fetching size for asset type');
                 const {
                   row: r,
                   col: c
                 } = getRowColumn(row, col);
-                const guid = IPu?.createBlankChildAtCoord(r, c, size, 'plugin_buzz_create_frame', true, assetType);
+                const guid = CooperHelpers?.createBlankChildAtCoord(r, c, size, 'plugin_buzz_create_frame', true, assetType);
                 if (!guid) throw new Error('Failed to create frame');
                 markPageLoaded(guid, buzzApiConfig.documentAccessState);
-                Ez5?.canvasGrid().recomputeGrid();
+                AppStateTsApi?.canvasGrid().recomputeGrid();
                 return buzzApiConfig.nodeFactory.createNode(guid, 'figma.buzz.createFrame');
               },
               isAllowedInReadOnly: true,
@@ -7074,16 +7074,16 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'createInstance',
               metricsKey: 'figma.buzz.createInstance',
               cb: (nodeHandle, rowHandle, colHandle) => {
-                const row = _$$u({
+                const row = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: rowHandle,
-                  zSchema: _$$N.PositiveInteger.optional(),
+                  zSchema: FigmaSchema.PositiveInteger.optional(),
                   property: 'canvasRow'
                 });
-                const col = _$$u({
+                const col = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: colHandle,
-                  zSchema: _$$N.PositiveInteger.optional(),
+                  zSchema: FigmaSchema.PositiveInteger.optional(),
                   property: 'canvasColumn'
                 });
                 const targetNode = buzzApiConfig.getNode(nodeHandle);
@@ -7094,12 +7094,12 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   row: r,
                   col: c
                 } = getRowColumn(row, col);
-                Ez5?.canvasGrid().moveChildrenToCoord([instanceGuid], {
+                AppStateTsApi?.canvasGrid().moveChildrenToCoord([instanceGuid], {
                   row: r,
                   col: c
                 });
                 markPageLoaded(instanceGuid, buzzApiConfig.documentAccessState);
-                Ez5?.canvasGrid().recomputeGrid();
+                AppStateTsApi?.canvasGrid().recomputeGrid();
                 return nodeObj;
               },
               isAllowedInReadOnly: false,
@@ -7113,10 +7113,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               metricsKey: 'figma.buzz.getBuzzAssetTypeForNode',
               cb: nodeHandle => {
                 const node = buzzApiConfig.getNode(nodeHandle);
-                if (node && fZl) {
-                  const type = fZl.getCooperTemplateType(node.guid);
+                if (node && CooperTemplateTypesTsBindings) {
+                  const type = CooperTemplateTypesTsBindings.getCooperTemplateType(node.guid);
                   if (type != null) {
-                    const label = po.get(type);
+                    const label = indexToDesignType.get(type);
                     return label ? buzzApiConfig.vm.newString(label.toString()) : buzzApiConfig.vm.$$null;
                   }
                 }
@@ -7138,14 +7138,14 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 if (node.isInstance) {
                   throw new Error('Cannot set asset type on Locked Buzz Asset Node');
                 }
-                const assetType = _$$u({
+                const assetType = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: typeHandle,
-                  zSchema: _$$N.BuzzAssetType,
+                  zSchema: FigmaSchema.BuzzAssetType,
                   property: 'buzzAssetType'
                 });
-                const typeValue = _$$n2.get(assetType);
-                if (fZl && typeValue) fZl.setCooperTemplateType(node.guid, typeValue);
+                const typeValue = designTypeToIndex.get(assetType);
+                if (CooperTemplateTypesTsBindings && typeValue) CooperTemplateTypesTsBindings.setCooperTemplateType(node.guid, typeValue);
                 return buzzApiConfig.vm.undefined;
               },
               isAllowedInReadOnly: false,
@@ -7200,21 +7200,21 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 if (node.isInstance) {
                   throw new Error('Cannot smart resize Locked Buzz Asset Nodes');
                 }
-                const width = _$$u({
+                const width = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: widthHandle,
-                  zSchema: _$$N.PositiveFloat,
+                  zSchema: FigmaSchema.PositiveFloat,
                   property: 'width'
                 });
-                const height = _$$u({
+                const height = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: heightHandle,
-                  zSchema: _$$N.PositiveFloat,
+                  zSchema: FigmaSchema.PositiveFloat,
                   property: 'height'
                 });
-                if (fZl) {
-                  fZl.setCooperTemplateType(node.guid, Z64.CUSTOM);
-                  fZl.resizeNode(node.guid, width, height);
+                if (CooperTemplateTypesTsBindings) {
+                  CooperTemplateTypesTsBindings.setCooperTemplateType(node.guid, SocialMediaFormats.CUSTOM);
+                  CooperTemplateTypesTsBindings.resizeNode(node.guid, width, height);
                 }
                 return buzzApiConfig.vm.undefined;
               },
@@ -7249,7 +7249,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   }
                 });
                 vm.defineFunction(obj, 'setValueAsync', 'buzz.textContent.setValueAsync', newValueHandle => {
-                  const newValue = _$$u({
+                  const newValue = validateWithZSchema({
                     vm,
                     handle: newValueHandle,
                     zSchema: _$$z.string(),
@@ -7265,7 +7265,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                       const textNode = nodeMap.get(guid);
                       if (textNode) await loadFontsForTextNode(textNode);
                     }
-                    l7.plugin('plugin-buzz-set-textfield-value', () => {
+                    permissionScopeHandler.plugin('plugin-buzz-set-textfield-value', () => {
                       field.setValue(newValue);
                     });
                     resolve(vm.$$null);
@@ -7295,20 +7295,20 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 mediaPaint,
                 mediaPaintIndex
               } = _$$eG(field);
-              if (!mediaPaint || mediaPaintIndex == null || gl(mediaPaint) || mediaPaint.image?.hash === undefined) {
+              if (!mediaPaint || mediaPaintIndex == null || isInvalidValue(mediaPaint) || mediaPaint.image?.hash === undefined) {
                 return null;
               }
               const obj = vm.newObject();
               // type
               vm.defineProp(obj, 'type', {
                 enumerable: false,
-                get: () => mediaPaint && hS(mediaPaint) ? vm.newString(mediaPaint.type) : vm.$$null
+                get: () => mediaPaint && isValidValue(mediaPaint) ? vm.newString(mediaPaint.type) : vm.$$null
               });
               // hash
               vm.defineProp(obj, 'hash', {
                 enumerable: false,
                 get: () => {
-                  if (!mediaPaint || gl(mediaPaint)) return vm.$$null;
+                  if (!mediaPaint || isInvalidValue(mediaPaint)) return vm.$$null;
                   let hash = null;
                   switch (mediaPaint.type) {
                     case 'IMAGE':
@@ -7318,7 +7318,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                       hash = mediaPaint.video?.hash;
                       break;
                   }
-                  return hash ? vm.newString(B9(hash)) : vm.$$null;
+                  return hash ? vm.newString(bytesToHex(hash)) : vm.$$null;
                 }
               });
               // node
@@ -7329,13 +7329,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               // getMedia
               vm.defineFunction(obj, 'getMedia', 'buzz.mediaContent.getMedia', () => {
                 if (!mediaPaint || mediaPaintIndex == null) throw new Error('No media paint found');
-                if (gl(mediaPaint)) throw new Error('Mixed media paint not supported');
+                if (isInvalidValue(mediaPaint)) throw new Error('Mixed media paint not supported');
                 switch (mediaPaint.type) {
                   case 'IMAGE':
                     {
                       const hash = mediaPaint.image?.hash;
                       if (hash === undefined) throw new Error('Invalid Image paint - no hash found');
-                      const img = imageStore.getImageFromSHA1(B9(hash));
+                      const img = imageStore.getImageFromSHA1(bytesToHex(hash));
                       if (img === null) throw new Error('Could not retrieve image');
                       return createImageProcessor(vm, img);
                     }
@@ -7344,7 +7344,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                       const hash = mediaPaint.video?.hash;
                       if (hash === undefined) throw new Error('Invalid Video paint - no hash found');
                       try {
-                        const vid = videoStore.getPrivateVideoOrThrow(B9(hash));
+                        const vid = videoStore.getPrivateVideoOrThrow(bytesToHex(hash));
                         return createNodeHash(vm, vid);
                       } catch {
                         throw new Error('getMedia is not currently supported for videos not directly created through plugins');
@@ -7356,13 +7356,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               });
               // setMedia
               vm.defineFunction(obj, 'setMedia', 'buzz.mediaContent.setMedia', (hashHandle, typeHandle) => {
-                const hash = _$$u({
+                const hash = validateWithZSchema({
                   vm,
                   handle: hashHandle,
                   zSchema: _$$z.string(),
                   property: 'mediaHash'
                 });
-                const type = _$$u({
+                const type = validateWithZSchema({
                   vm,
                   handle: typeHandle,
                   zSchema: _$$z.enum(['IMAGE', 'VIDEO']),
@@ -7595,7 +7595,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               metricsKey: 'figma.variables.getLocalVariables',
               incrementalSafeApiKey: 'getLocalVariablesAsync',
               incrementalSafeApiMetricsKey: 'figma.variables.getLocalVariablesAsync',
-              parseArg: t => _$$u({
+              parseArg: t => validateWithZSchema({
                 vm: variableApiConfig.vm,
                 handle: t,
                 zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
@@ -7614,7 +7614,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               hasEditScope: false,
               metricsKey: 'figma.variables.getSubscribedVariables',
               cb: t => {
-                const resolvedType = _$$u({
+                const resolvedType = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
@@ -7663,7 +7663,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               hasEditScope: true,
               metricsKey: 'figma.variables.createVariableCollection',
               cb: t => {
-                const name = _$$u({
+                const name = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
@@ -7681,7 +7681,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               hasEditScope: true,
               metricsKey: 'figma.variables.createVariable',
               cb: (nameHandle, collectionHandle, typeHandle) => {
-                const name = _$$u({
+                const name = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: nameHandle,
                   zSchema: _$$z.string(),
@@ -7697,7 +7697,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vmHandle: collectionHandle,
                   allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls
                 });
-                const resolvedType = _$$u({
+                const resolvedType = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: typeHandle,
                   zSchema: variableDefinitions.PublicVariableResolvedType,
@@ -7732,7 +7732,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'createVariableAliasByIdAsync',
               metricsKey: 'figma.variables.createVariableAliasByIdAsync',
               cb: t => {
-                const id = _$$u({
+                const id = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
@@ -7761,7 +7761,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'importVariableByKeyAsync',
               metricsKey: 'figma.variables.importVariableByKeyAsync',
               cb: t => {
-                const key = _$$u({
+                const key = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
@@ -7779,13 +7779,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 key: 'extendLibraryCollectionByKeyAsync',
                 metricsKey: 'figma.variables.extendLibraryCollectionByKeyAsync',
                 cb: (collectionKeyHandle, nameHandle) => {
-                  const collectionKey = _$$u({
+                  const collectionKey = validateWithZSchema({
                     vm: variableApiConfig.vm,
                     handle: collectionKeyHandle,
                     zSchema: _$$z.string(),
                     property: 'collectionKey'
                   });
-                  const name = _$$u({
+                  const name = validateWithZSchema({
                     vm: variableApiConfig.vm,
                     handle: nameHandle,
                     zSchema: _$$z.string(),
@@ -7811,13 +7811,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'setBoundVariableForPaint',
               metricsKey: 'figma.variables.setBoundVariableForPaint',
               cb: (paintHandle, fieldHandle, variableHandle) => {
-                const paint = _$$u({
+                const paint = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: paintHandle,
-                  zSchema: _$$N.Paint,
+                  zSchema: FigmaSchema.Paint,
                   property: 'paintCopy'
                 });
-                const field = _$$u({
+                const field = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: fieldHandle,
                   zSchema: variableDefinitions.VariableBindablePaintField,
@@ -7829,7 +7829,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n));
                 }
                 const variable = variableApiConfig.getVariableNode(variableHandle);
-                if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== rXF.COLOR) {
+                if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== VariableResolvedDataType.COLOR) {
                   throw new Error(`can only bind color variables to ${field}`);
                 }
                 const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, []);
@@ -7852,10 +7852,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'setBoundVariableForEffect',
               metricsKey: 'figma.variables.setBoundVariableForEffect',
               cb: (effectHandle, fieldHandle, variableHandle) => {
-                const effectCopy = _$$u({
+                const effectCopy = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: effectHandle,
-                  zSchema: getFilteredFeatureFlags()?.ce_il_root ? _$$N.EffectIncludingDrawMode : _$$N.Effect,
+                  zSchema: getFilteredFeatureFlags()?.ce_il_root ? FigmaSchema.EffectIncludingDrawMode : FigmaSchema.Effect,
                   property: 'effectCopy'
                 });
                 if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
@@ -7878,10 +7878,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'setBoundVariableForLayoutGrid',
               metricsKey: 'figma.variables.setBoundVariableForLayoutGrid',
               cb: (layoutGridHandle, fieldHandle, variableHandle) => {
-                const layoutGrid = _$$u({
+                const layoutGrid = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: layoutGridHandle,
-                  zSchema: _$$N.LayoutGrid,
+                  zSchema: FigmaSchema.LayoutGrid,
                   property: 'layoutGridCopy'
                 });
                 if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
@@ -7893,18 +7893,18 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   return variableApiConfig.vm.deepWrap(processGridLayout(t));
                 }
                 const variable = variableApiConfig.getVariableNode(variableHandle);
-                if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== rXF.FLOAT) {
+                if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== VariableResolvedDataType.FLOAT) {
                   throw new Error('can only bind float variables to layoutGrids');
                 }
                 const grid = convertGridLayoutConfig(layoutGrid);
                 if (grid.pattern === 'GRID') {
-                  const field = _$$u({
+                  const field = validateWithZSchema({
                     vm: variableApiConfig.vm,
                     handle: fieldHandle,
                     zSchema: variableDefinitions.VariableBindableGridLayoutField,
                     property: 'field'
                   });
-                  if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== rXF.FLOAT) {
+                  if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== VariableResolvedDataType.FLOAT) {
                     throw new Error(`can only bind float variables to ${field}`);
                   }
                   grid.sectionSizeVar = {
@@ -7919,7 +7919,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   switch (grid.type) {
                     case 'MIN':
                     case 'MAX':
-                      field = _$$u({
+                      field = validateWithZSchema({
                         vm: variableApiConfig.vm,
                         handle: fieldHandle,
                         zSchema: variableDefinitions.VariableBindableMinMaxLayoutField,
@@ -7927,7 +7927,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                       });
                       break;
                     case 'CENTER':
-                      field = _$$u({
+                      field = validateWithZSchema({
                         vm: variableApiConfig.vm,
                         handle: fieldHandle,
                         zSchema: variableDefinitions.VariableBindableCenterLayoutField,
@@ -7935,7 +7935,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                       });
                       break;
                     case 'STRETCH':
-                      field = _$$u({
+                      field = validateWithZSchema({
                         vm: variableApiConfig.vm,
                         handle: fieldHandle,
                         zSchema: variableDefinitions.VariableBindableStretchLayoutField,
@@ -8036,7 +8036,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'getVariablesInLibraryCollectionAsync',
               metricsKey: 'figma.teamLibrary.getVariablesInLibraryCollectionAsync',
               cb: variableCollectionKeyHandle => {
-                const key = _$$u({
+                const key = validateWithZSchema({
                   vm: teamLibraryApiConfig.vm,
                   handle: variableCollectionKeyHandle,
                   zSchema: _$$z.string(),
@@ -8090,7 +8090,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'getAnnotationCategoryByIdAsync',
               metricsKey: 'figma.annotations.getAnnotationCategoryByIdAsync',
               cb: idHandle => {
-                const id = _$$u({
+                const id = validateWithZSchema({
                   vm: annotationApiConfig.vm,
                   handle: idHandle,
                   zSchema: _$$z.string(),
@@ -8109,7 +8109,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 if (annotationApiConfig.editorType !== FEditorType.DevHandoff && annotationApiConfig.editorType !== FEditorType.Design && annotationApiConfig.editorType !== FEditorType.Illustration) {
                   throw new Error('Annotations can only be written in Dev Mode and Design Mode');
                 }
-                const input = _$$u({
+                const input = validateWithZSchema({
                   vm: annotationApiConfig.vm,
                   handle: categoryInputHandle,
                   zSchema: i5,
@@ -8178,7 +8178,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               t = 'figma';
               break;
             case FEditorType.DevHandoff:
-              t = this.options.editorType?.includes(FW.DEV) ? 'dev' : 'inspect';
+              t = this.options.editorType?.includes(ManifestEditorType.DEV) ? 'dev' : 'inspect';
               break;
             case FEditorType.Whiteboard:
               t = 'figjam';
@@ -8342,7 +8342,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         metricsKey: 'figma.skipInvisibleInstanceChildren',
         get: () => e.newBoolean(this.skipInvisibleInstanceChildren),
         set: t => {
-          let i = _$$u({
+          let i = validateWithZSchema({
             vm: e,
             handle: t,
             zSchema: _$$z.boolean(),
@@ -8424,20 +8424,20 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: createMethod,
           metricsKey: `figma.${createMethod}`,
           cb: (n, r) => {
-            const numRows = _$$u({
+            const numRows = validateWithZSchema({
               vm: e,
               handle: n,
-              zSchema: _$$N.FiniteNumber.int().min(1).optional(),
+              zSchema: FigmaSchema.FiniteNumber.int().min(1).optional(),
               property: 'options'
             });
-            const numCols = _$$u({
+            const numCols = validateWithZSchema({
               vm: e,
               handle: r,
-              zSchema: _$$N.FiniteNumber.int().min(1).optional(),
+              zSchema: FigmaSchema.FiniteNumber.int().min(1).optional(),
               property: 'options'
             });
             const options = {
-              tracking: HzA.TRACK,
+              tracking: TrackType.TRACK,
               ...(numRows && {
                 tableNumRows: numRows
               }),
@@ -8468,20 +8468,20 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: createMethod,
           metricsKey: `figma.${createMethod}`,
           cb: (e, n) => {
-            const slideRow = _$$u({
+            const slideRow = validateWithZSchema({
               vm: this.vm,
               handle: e,
               zSchema: _$$z.number().finite().min(0).int().optional(),
               property: 'slideRow'
             });
-            const slideCol = _$$u({
+            const slideCol = validateWithZSchema({
               vm: this.vm,
               handle: n,
               zSchema: _$$z.number().finite().min(0).int().optional(),
               property: 'slideCol'
             });
             const options = {
-              tracking: HzA.TRACK,
+              tracking: TrackType.TRACK,
               ...(typeof slideRow === 'number' && {
                 slideRow
               }),
@@ -8511,14 +8511,14 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: createMethod,
           metricsKey: `figma.${createMethod}`,
           cb: e => {
-            const slideRow = _$$u({
+            const slideRow = validateWithZSchema({
               vm: this.vm,
               handle: e,
               zSchema: _$$z.number().finite().min(0).int().optional(),
               property: 'slideRow'
             });
             const options = {
-              tracking: HzA.TRACK,
+              tracking: TrackType.TRACK,
               ...(typeof slideRow === 'number' && {
                 slideRow
               })
@@ -8576,7 +8576,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           getNode: this.getNode,
           enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations
         });
-        let o = NfO.flattenNodes(nodeIds, parent ? parent.sessionID : -1, parent ? parent.localID : -1, index, this.privateSceneGraph.scene);
+        let o = PluginHelpers.flattenNodes(nodeIds, parent ? parent.sessionID : -1, parent ? parent.localID : -1, index, this.privateSceneGraph.scene);
         return this.nodeFactory.createNode(o, 'figma.flatten');
       },
       isAllowedInReadOnly: !1,
@@ -8608,7 +8608,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       handle: y,
       key: 'combineAsVariants',
       metricsKey: 'figma.combineAsVariants',
-      cb: this.makeGroupingOperationFunction('combineAsVariants', fHP.STATE_GROUP),
+      cb: this.makeGroupingOperationFunction('combineAsVariants', LogicalOperation.STATE_GROUP),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0
@@ -8617,7 +8617,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       handle: y,
       key: 'group',
       metricsKey: 'figma.group',
-      cb: this.makeGroupingOperationFunction('group', fHP.GROUP),
+      cb: this.makeGroupingOperationFunction('group', LogicalOperation.GROUP),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0
@@ -8626,7 +8626,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       handle: y,
       key: 'union',
       metricsKey: 'figma.union',
-      cb: this.makeGroupingOperationFunction('union', fHP.UNION),
+      cb: this.makeGroupingOperationFunction('union', LogicalOperation.UNION),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0
@@ -8635,7 +8635,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       handle: y,
       key: 'subtract',
       metricsKey: 'figma.subtract',
-      cb: this.makeGroupingOperationFunction('subtract', fHP.SUBTRACT),
+      cb: this.makeGroupingOperationFunction('subtract', LogicalOperation.SUBTRACT),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0
@@ -8644,7 +8644,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       handle: y,
       key: 'intersect',
       metricsKey: 'figma.intersect',
-      cb: this.makeGroupingOperationFunction('intersect', fHP.INTERSECT),
+      cb: this.makeGroupingOperationFunction('intersect', LogicalOperation.INTERSECT),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0
@@ -8653,7 +8653,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       handle: y,
       key: 'exclude',
       metricsKey: 'figma.exclude',
-      cb: this.makeGroupingOperationFunction('exclude', fHP.XOR),
+      cb: this.makeGroupingOperationFunction('exclude', LogicalOperation.XOR),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0
@@ -8668,7 +8668,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         if (i.isOrInResponsiveSet && !this.options.enableResponsiveSetHierarchyMutations) {
           throw new Error('Cannot ungroup nodes inside a webpage');
         }
-        let n = NfO.ungroupNode(i.guid, this.privateSceneGraph.scene);
+        let n = PluginHelpers.ungroupNode(i.guid, this.privateSceneGraph.scene);
         let r = e.newArray();
         n.forEach((t, i) => {
           let n = this.nodeFactory.createNode(t, 'figma.ungroup');
@@ -8685,7 +8685,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'commitUndo',
       metricsKey: 'figma.commitUndo',
       cb: _t => {
-        Y5.triggerAction('commit');
+        fullscreenValue.triggerAction('commit');
         return e.undefined;
       },
       isAllowedInReadOnly: !1,
@@ -8697,7 +8697,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'triggerUndo',
       metricsKey: 'figma.triggerUndo',
       cb: _t => {
-        Y5.triggerAction('undo');
+        fullscreenValue.triggerAction('undo');
         return e.undefined;
       },
       isAllowedInReadOnly: !1,
@@ -8709,10 +8709,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'createImage',
       metricsKey: 'figma.createImage',
       cb: t => {
-        let i = this.imageStore.createImage(_$$u({
+        let i = this.imageStore.createImage(validateWithZSchema({
           vm: e,
           handle: t,
-          zSchema: _$$N.UInt8Array,
+          zSchema: FigmaSchema.UInt8Array,
           property: 'createImage'
         }));
         return createImageProcessor(e, i);
@@ -8726,7 +8726,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'createImageAsync',
       metricsKey: 'figma.createImageAsync',
       cb: t => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
@@ -8752,7 +8752,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'getImageByHash',
       metricsKey: 'figma.getImageByHash',
       cb: t => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
@@ -8775,10 +8775,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve,
           reject
         } = e.newPromise();
-        e.registerPromise(this.videoStore.createVideoAsync(_$$u({
+        e.registerPromise(this.videoStore.createVideoAsync(validateWithZSchema({
           vm: e,
           handle: t,
-          zSchema: _$$N.UInt8Array,
+          zSchema: FigmaSchema.UInt8Array,
           property: 'createVideo'
         }))).then(t => {
           resolve(createNodeHash(e, t));
@@ -8799,10 +8799,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve,
           reject
         } = e.newPromise();
-        e.registerPromise(this.videoStore.createVideoAsync(_$$u({
+        e.registerPromise(this.videoStore.createVideoAsync(validateWithZSchema({
           vm: e,
           handle: t,
-          zSchema: _$$N.UInt8Array,
+          zSchema: FigmaSchema.UInt8Array,
           property: 'createVideoAsync'
         }))).then(t => {
           resolve(createNodeHash(e, t));
@@ -8843,7 +8843,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           promise,
           resolve
         } = e.newPromise();
-        e.registerPromise(_$$E(null, null, _em.DYNAMIC_PLUGIN_LOAD_ALL)).then(t => resolve(e.deepWrap(t)));
+        e.registerPromise(_$$E(null, null, PluginModalType.DYNAMIC_PLUGIN_LOAD_ALL)).then(t => resolve(e.deepWrap(t)));
         this.documentAccessState.loadedAllPages();
         return promise;
       },
@@ -8861,15 +8861,15 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve,
           reject
         } = e.newPromise();
-        let a = _$$u({
+        let a = validateWithZSchema({
           vm: e,
           handle: t,
-          zSchema: _$$N.FontName,
+          zSchema: FigmaSchema.FontName,
           property: 'loadFontAsync'
         });
         u += 1;
         setTimeout(() => {
-          e.registerPromise(uW(a)).then(() => {
+          e.registerPromise(loadPluginFont(a)).then(() => {
             u -= 1;
             resolve(e.undefined);
           }, () => {
@@ -8889,7 +8889,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       options: {
         enumerable: !1,
         metricsKey: 'hasMissingFont',
-        get: () => e.newBoolean(NfO.documentHasMissingFont())
+        get: () => e.newBoolean(PluginHelpers.documentHasMissingFont())
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
@@ -8936,7 +8936,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       metricsKey: 'figma.getSelectionColors',
       isAllowedInReadOnly: !0,
       cb: () => {
-        Osy.collectPaintsAndSendToWeb();
+        SelectionPaintHelpers.collectPaintsAndSendToWeb();
         let {
           selectionPaints
         } = debugState.getState().mirror;
@@ -8974,7 +8974,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let i = e.toString(t);
         try {
           let e = this.privateSceneGraph.createNodeFromSVG(i, {
-            tracking: HzA.TRACK
+            tracking: TrackType.TRACK
           });
           return this.nodeFactory.createNode(e.guid, 'figma.createNodeFromSvg');
         } catch (e) {
@@ -8996,7 +8996,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve,
           reject
         } = e.newPromise();
-        let a = _$$u({
+        let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
@@ -9031,7 +9031,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve,
           reject
         } = e.newPromise();
-        let a = _$$u({
+        let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
@@ -9056,7 +9056,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve,
           reject
         } = e.newPromise();
-        let a = _$$u({
+        let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
@@ -9076,7 +9076,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'closePlugin',
       metricsKey: 'figma.closePlugin',
       cb: t => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string().optional(),
@@ -9129,16 +9129,16 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
      * extractNotificationData - Extract and validate message and options from VM handles
      */
     function extractNotificationData(messageHandle, optionsHandle, vm) {
-      const message = _$$u({
+      const message = validateWithZSchema({
         vm,
         handle: messageHandle,
         zSchema: _$$z.string(),
         property: 'notify message'
       });
-      const options = optionsHandle && _$$u({
+      const options = optionsHandle && validateWithZSchema({
         vm,
         handle: optionsHandle,
-        zSchema: _$$N.ShowVisualBellOptions.optional(),
+        zSchema: FigmaSchema.ShowVisualBellOptions.optional(),
         property: 'notify options'
       }) || {};
       return {
@@ -9151,7 +9151,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
      * processNotificationOptions - Process and apply defaults to notification options
      */
     function processNotificationOptions(options) {
-      const processedOptions = Kb(options, {
+      const processedOptions = mergeDefaults(options, {
         timeout: null,
         error: false,
         button: undefined
@@ -9316,27 +9316,27 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let n = _$$z.strictObject({
           visible: _$$z.boolean(),
           title: _$$z.string(),
-          width: _$$N.FiniteNumber.min(0).int(),
-          height: _$$N.FiniteNumber.min(0).int(),
+          width: FigmaSchema.FiniteNumber.min(0).int(),
+          height: FigmaSchema.FiniteNumber.min(0).int(),
           position: _$$z.strictObject({
-            x: _$$N.FiniteNumber,
-            y: _$$N.FiniteNumber
+            x: FigmaSchema.FiniteNumber,
+            y: FigmaSchema.FiniteNumber
           }),
           themeColors: _$$z.boolean()
         }).partial().optional();
-        let r = e.isObject(t) && e.getBooleanProp(t, '__html__') && this.options.html ? this.options.html : _$$u({
+        let r = e.isObject(t) && e.getBooleanProp(t, '__html__') && this.options.html ? this.options.html : validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
           property: 'showUI'
         });
-        let a = _$$u({
+        let a = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: n,
           property: 'showUI options'
         });
-        let s = Kb(a || {}, {
+        let s = mergeDefaults(a || {}, {
           visible: !0,
           themeColors: !1
         });
@@ -9366,13 +9366,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'saveVersionHistoryAsync',
       metricsKey: 'figma.saveVersionHistoryAsync',
       cb: (t, i) => {
-        let n = _$$u({
+        let n = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
           property: 'saveVersionHistoryAsync'
         });
-        let r = _$$u({
+        let r = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: _$$z.string().optional(),
@@ -9402,10 +9402,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'base64Encode',
       metricsKey: 'figma.base64Encode',
       cb: t => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
-          zSchema: _$$N.UInt8Array,
+          zSchema: FigmaSchema.UInt8Array,
           property: 'base64Encode'
         });
         return e.deepWrap(encodeBase64(i));
@@ -9419,7 +9419,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'base64Decode',
       metricsKey: 'figma.base64Decode',
       cb: t => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
@@ -9619,7 +9619,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         key: t,
         metricsKey: 'figma.createLinkPreviewAsync',
         cb: n => {
-          let r = _$$u({
+          let r = validateWithZSchema({
             vm: e,
             handle: n,
             zSchema: _$$z.string(),
@@ -9658,13 +9658,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'createGif',
       metricsKey: 'figma.createGif',
       cb: t => {
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
           property: 'createGif'
         });
-        let n = glU.createRichMediaGifNode(i);
+        let n = Fullscreen.createRichMediaGifNode(i);
         if (!n) throw new Error('Failed to create GIF');
         let r = [];
         let a = {
@@ -9848,10 +9848,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           resolve(e.$$null);
           return promise;
         }
-        let i = _$$u({
+        let i = validateWithZSchema({
           vm: e,
           handle: t,
-          zSchema: _$$N.Size.optional(),
+          zSchema: FigmaSchema.Size.optional(),
           property: 'thumbnailSize'
         }) ?? {
           width: 150,
@@ -9875,7 +9875,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'openExternal',
       metricsKey: 'figma.openExternal',
       cb: e => {
-        let t = _$$u({
+        let t = validateWithZSchema({
           vm: this.vm,
           handle: e,
           zSchema: _$$z.string(),
@@ -9930,7 +9930,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         key: 'setSlideGrid',
         metricsKey: 'figma.setSlideGrid',
         cb: nextSlideGridHandle => {
-          const nextSlideGrid = _$$u({
+          const nextSlideGrid = validateWithZSchema({
             vm: this.vm,
             handle: nextSlideGridHandle,
             zSchema: _$$z.array(_$$z.array(_$$z.object({
@@ -9987,10 +9987,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         key: 'setCanvasGrid',
         metricsKey: 'figma.setCanvasGrid',
         cb: nextCanvasGridHandle => {
-          const nextCanvasGrid = _$$u({
+          const nextCanvasGrid = validateWithZSchema({
             vm: this.vm,
             handle: nextCanvasGridHandle,
-            zSchema: _$$N.CanvasGrid,
+            zSchema: FigmaSchema.CanvasGrid,
             property: 'nextCanvasGrid'
           });
           this.privateSceneGraph.setSlideGrid(nextCanvasGrid.map(row => row.map(cell => ({
@@ -10012,13 +10012,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         key: 'createCanvasRow',
         metricsKey: 'figma.createCanvasRow',
         cb: canvasGridRowIndexHandle => {
-          const rowIndex = _$$u({
+          const rowIndex = validateWithZSchema({
             vm: e,
             handle: canvasGridRowIndexHandle,
-            zSchema: _$$N.PositiveInteger.optional(),
+            zSchema: FigmaSchema.PositiveInteger.optional(),
             property: 'canvasGridRowIndex'
           });
-          const canvasGridManager = Ez5?.canvasGrid();
+          const canvasGridManager = AppStateTsApi?.canvasGrid();
           if (!canvasGridManager) {
             throw new Error('Could not find canvas grid');
           }
@@ -10088,7 +10088,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    * @returns VM wrapped effect object with variable binding
    */
   bindShadowEffectVariable(mutableEffect, fieldHandle, variableObject) {
-    const fieldName = _$$u({
+    const fieldName = validateWithZSchema({
       vm: this.vm,
       handle: fieldHandle,
       zSchema: variableDefinitions.VariableBindableShadowEffectField,
@@ -10130,7 +10130,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    * @returns VM wrapped effect object with variable binding
    */
   bindBlurEffectVariable(mutableEffect, fieldHandle, variableObject) {
-    const fieldName = _$$u({
+    const fieldName = validateWithZSchema({
       vm: this.vm,
       handle: fieldHandle,
       zSchema: variableDefinitions.VariableBindableBlurEffectField,
@@ -10138,7 +10138,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
     });
 
     // Validate variable type
-    if (!variableObject || variableObject.type !== 'VARIABLE' || variableObject.variableResolvedType !== rXF.FLOAT) {
+    if (!variableObject || variableObject.type !== 'VARIABLE' || variableObject.variableResolvedType !== VariableResolvedDataType.FLOAT) {
       throw new Error(`can only bind float variables to ${fieldName}`);
     }
 
@@ -10159,12 +10159,12 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
     }
 
     // Validate color field requires color variable
-    if (fieldName === 'color' && variableObject.variableResolvedType !== rXF.COLOR) {
+    if (fieldName === 'color' && variableObject.variableResolvedType !== VariableResolvedDataType.COLOR) {
       throw new Error(`can only bind color variables to ${fieldName}`);
     }
 
     // Validate non-color fields require float variables
-    if (fieldName !== 'color' && variableObject.variableResolvedType !== rXF.FLOAT) {
+    if (fieldName !== 'color' && variableObject.variableResolvedType !== VariableResolvedDataType.FLOAT) {
       throw new Error(`can only bind float variables to ${fieldName}`);
     }
   }
@@ -10175,7 +10175,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    * @returns Variable binding object with proper structure
    */
   createVariableBinding(variableObject) {
-    const resolvedDataType = variableObject.variableResolvedType === rXF.COLOR ? 'COLOR' : 'FLOAT';
+    const resolvedDataType = variableObject.variableResolvedType === VariableResolvedDataType.COLOR ? 'COLOR' : 'FLOAT';
     return {
       value: {
         alias: sD.toKiwi(variableObject.id)
@@ -10257,14 +10257,14 @@ async function listAllFonts() {
 async function createVersionSavepoint(versionTitle, versionDescription) {
   // ah - Create a version savepoint for the current file with title and optional description
 
-  const fileKey = await Y5.openFileKeyPromise();
+  const fileKey = await fullscreenValue.openFileKeyPromise();
   if (!fileKey) {
     throw new Error('File must be open for editing');
   }
   if (!versionTitle) {
     throw new Error('Version title must be non-empty');
   }
-  const savepoint = await _$$m2(fileKey, versionTitle, versionDescription, debugState.dispatch);
+  const savepoint = await maybeCreateSavepoint(fileKey, versionTitle, versionDescription, debugState.dispatch);
   if (savepoint === null) {
     throw new Error('createSavepoint() returned null');
   }
@@ -10321,7 +10321,7 @@ async function a_(_componentKey, styleKey, permissions) {
   }
 
   // Upsert the style in the current scene
-  const upsertResult = l7.system('upsert-shared-style-plugin', () => BXd.getOrCreateSubscribedStyleNodeId(publishedStyle.key, publishedStyle.content_hash ?? 'INVALID', publishedStyle.library_key, downloadedStyle, ZiZ.ACTIVE_SCENE));
+  const upsertResult = permissionScopeHandler.system('upsert-shared-style-plugin', () => LibraryPubSub.getOrCreateSubscribedStyleNodeId(publishedStyle.key, publishedStyle.content_hash ?? 'INVALID', publishedStyle.library_key, downloadedStyle, SceneIdentifier.ACTIVE_SCENE));
   if (upsertResult?.fileUpdateRequired) {
     throw new Error('Can\'t insert style of a different file version');
   }
@@ -10354,7 +10354,7 @@ async function aA(componentData, permissions) {
     }
 
     // Upsert the component in the current scene
-    const upsertResult = l7.system('upsert-shared-symbol-plugin', () => BXd.upsertSharedSymbol(componentData.component_key ?? 'INVALID', componentData.content_hash ?? 'INVALID', componentData.library_key, zol.NO, downloadedComponent, ZiZ.ACTIVE_SCENE));
+    const upsertResult = permissionScopeHandler.system('upsert-shared-symbol-plugin', () => LibraryPubSub.upsertSharedSymbol(componentData.component_key ?? 'INVALID', componentData.content_hash ?? 'INVALID', componentData.library_key, Confirmation.NO, downloadedComponent, SceneIdentifier.ACTIVE_SCENE));
     if (!upsertResult) {
       throw new Error('Couldn\'t insert component');
     }
@@ -10384,7 +10384,7 @@ async function ay(stateGroupData, permissions) {
     }
 
     // Upsert the state group in the current scene
-    const upsertResult = l7.system('upsert-shared-state-group-plugin', () => BXd.upsertSharedStateGroup(stateGroupData.key, stateGroupData.version, stateGroupData.library_key, zol.NO, downloadedStateGroup, ZiZ.ACTIVE_SCENE));
+    const upsertResult = permissionScopeHandler.system('upsert-shared-state-group-plugin', () => LibraryPubSub.upsertSharedStateGroup(stateGroupData.key, stateGroupData.version, stateGroupData.library_key, Confirmation.NO, downloadedStateGroup, SceneIdentifier.ACTIVE_SCENE));
     if (!upsertResult) {
       throw new Error('Couldn\'t insert state group');
     }
@@ -10481,7 +10481,7 @@ export function searchForPublishedComponent(currentState, componentKey) {
 export function validateUnpublishedComponent(currentState, componentKey) {
   for (const localComponent of Object.values(currentState.library.local.components)) {
     const component = localComponent as unknown as any; // Type assertion for unknown component
-    if (!component?.component_key && Egt.getAssetKeyForPublish(component?.node_id) === componentKey) {
+    if (!component?.component_key && SceneGraphHelpers.getAssetKeyForPublish(component?.node_id) === componentKey) {
       throw new Error(`Cannot import component with key "${componentKey}" since it is unpublished`);
     }
   }
@@ -10514,7 +10514,7 @@ async function importComponentFromStateGroup(stateGroup, component, sceneGraphIn
   for (const childGuid of stateGroupNode?.reversedChildrenGuids || []) {
     const childNode = sceneGraphInstance.get(childGuid);
     if (childNode) {
-      const childComponentKey = childNode.componentKey ?? Egt.getAssetKeyForPublish(childNode.guid);
+      const childComponentKey = childNode.componentKey ?? SceneGraphHelpers.getAssetKeyForPublish(childNode.guid);
       if (childComponentKey === component.component_key) {
         return childNode.guid;
       }
@@ -10617,11 +10617,11 @@ export function createDefaultPluginOptions() {
     enableProposedApi: true,
     enablePrivatePluginApi: true,
     deferRunEvent: false,
-    validatedPermissions: qH.forConsoleGlobal(),
+    validatedPermissions: PluginPermissions.forConsoleGlobal(),
     isLocal: true,
     capabilities: [],
     allowedDomains: gH,
-    editorType: [FW.FIGMA, FW.FIGJAM, FW.INSPECT, FW.DEV, FW.SITES, FW.SLIDES],
+    editorType: [ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM, ManifestEditorType.INSPECT, ManifestEditorType.DEV, ManifestEditorType.SITES, ManifestEditorType.SLIDES],
     html: null,
     incrementalSafeApi: false,
     enableNativeJsx: false,

@@ -3,7 +3,7 @@ import { J } from "../905/223510";
 import { __ } from "../figma_app/257655";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { B } from "../905/94678";
-import { CWU } from "../figma_app/763686";
+import { VariablesBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { gZ, oy } from "../figma_app/964367";
@@ -88,7 +88,7 @@ async function T(e, t) {
   }))).filter(Boolean);
 }
 export function $$I1() {
-  return CWU.getLocalVariableSetsInfo().filter(e => !e.isSoftDeleted && n6(e.name, i2)).map(e => ({
+  return VariablesBindings.getLocalVariableSetsInfo().filter(e => !e.isSoftDeleted && n6(e.name, i2)).map(e => ({
     key: e.keyForPublish,
     name: e.name,
     version: e.userFacingVersion,

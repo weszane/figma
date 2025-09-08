@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { g as _$$g } from "../905/749786";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { Rq, bL } from "../905/38914";
 import { hS } from "../905/437088";
 import { oA } from "../905/663269";
@@ -13,14 +13,14 @@ import { zd, Bb, B7 } from "../905/651696";
 import { R as _$$R } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { N$, qk } from "../905/355291";
 import { rH, nm, uN } from "../905/264101";
 import { Z } from "../905/854480";
 import { pS, iZ } from "../905/372672";
 import { Yh6 } from "../figma_app/43951";
 import { Ib } from "../905/129884";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
 import { t as _$$t2 } from "../905/751495";
 import { Hx, G6, _Z, z3 } from "../figma_app/639088";
@@ -85,7 +85,7 @@ function N({
   let r = Z();
   let s = useDispatch();
   let u = k();
-  let p = X();
+  let p = setupAutofocusHandler();
   return jsxs(Rq, {
     onSubmit: e => {
       let t = e.target.elements.namedItem("code");
@@ -137,7 +137,7 @@ function P({
   addPhone: e,
   user: t
 }) {
-  let i = X();
+  let i = setupAutofocusHandler();
   let r = Z();
   let s = useDispatch();
   let u = k();
@@ -168,7 +168,7 @@ function P({
           variant: "link",
           onClick: () => {
             u();
-            s(to({
+            s(showModalHandler({
               type: _$$t2,
               showModalsBeneath: !0
             }));
@@ -241,7 +241,7 @@ function O({
     })
   });
 }
-export let $$D0 = Ju(function (e) {
+export let $$D0 = registerModal(function (e) {
   let t = iZ();
   let i = hS(e);
   return t ? jsx(O, {
@@ -250,5 +250,5 @@ export let $$D0 = Ju(function (e) {
     open: e.open,
     onClose: e.onClose
   }) : null;
-}, qk, ZU.YES);
+}, qk, ModalSupportsBackground.YES);
 export const J = $$D0;

@@ -1,4 +1,4 @@
-import { lyf } from "../figma_app/763686";
+import { ViewType } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
 import { FEditorType } from "../figma_app/53721";
 function s(e) {
@@ -80,7 +80,7 @@ export let $$o0 = new class {
     return this.getLocalStorageValue("properties-panel-split-position", parseFloat) || this.defaultPropertiesPanelSplitPosition[this.editorType];
   }
   get topLevelMode() {
-    return this.loggedIn ? lyf.LAYOUT : lyf.PREVIEW;
+    return this.loggedIn ? ViewType.LAYOUT : ViewType.PREVIEW;
   }
 }();
 export const R = $$o0;

@@ -9,9 +9,9 @@ import { J as _$$J } from "../905/125993";
 import { A as _$$A } from "../905/891805";
 import { A as _$$A2 } from "../905/251970";
 import { n3 } from "../905/859698";
-import { WXh, XpJ, t8O, mrc, m1T, glU, rXF, gdE, rrT } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { VisibilityCondition, TypographySettings, FontHelpers, TextAlignmentOptions, LayoutTabType, Fullscreen, VariableResolvedDataType, TextPathStartHelpers, NodePropertyCategory } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
@@ -29,10 +29,10 @@ import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { h2, AB, Pr } from "../figma_app/8833";
 import { L0 } from "../figma_app/831799";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Kk } from "../905/777093";
 import { m as _$$m, Cy } from "../905/571439";
-import { hS, gl, oV, _W, Q8, SX, C8, bU } from "../905/216495";
+import { isValidValue, isInvalidValue, MIXED_MARKER, valueOrFallback, AUTO_MARKER, isAutoMarker, toArray, isMixedArray } from "../905/216495";
 import { u as _$$u } from "../figma_app/852050";
 import { a6 } from "../905/129660";
 import { Ib } from "../905/129884";
@@ -104,8 +104,8 @@ import { C as _$$C } from "../905/520159";
 import { rj } from "../905/946258";
 import { am } from "../figma_app/901889";
 import { _r } from "../figma_app/451499";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J2 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { s as _$$s } from "../cssbuilder/589278";
 import { A as _$$A4 } from "../6828/523860";
 import { A as _$$A5 } from "../6828/85206";
@@ -299,11 +299,11 @@ class eY extends PureComponent {
   constructor() {
     super(...arguments);
     this.onListStyleChange = e => {
-      "PLAIN" === e ? Y5.triggerActionInUserEditScope("text-clear-list-formatting", {
+      "PLAIN" === e ? fullscreenValue.triggerActionInUserEditScope("text-clear-list-formatting", {
         source: this.props.eventSource
-      }) : "UNORDERED_LIST" === e && "UNORDERED_LIST" !== this.props.textLineType ? Y5.triggerActionInUserEditScope("text-toggle-unordered-list", {
+      }) : "UNORDERED_LIST" === e && "UNORDERED_LIST" !== this.props.textLineType ? fullscreenValue.triggerActionInUserEditScope("text-toggle-unordered-list", {
         source: this.props.eventSource
-      }) : "ORDERED_LIST" === e && "ORDERED_LIST" !== this.props.textLineType && Y5.triggerActionInUserEditScope("text-toggle-ordered-list", {
+      }) : "ORDERED_LIST" === e && "ORDERED_LIST" !== this.props.textLineType && fullscreenValue.triggerActionInUserEditScope("text-toggle-ordered-list", {
         source: this.props.eventSource
       });
     };
@@ -312,7 +312,7 @@ class eY extends PureComponent {
     return jsx("span", {
       className: this.props.className,
       children: jsxs(bL, {
-        value: hS(this.props.textLineType) ? this.props.textLineType : void 0,
+        value: isValidValue(this.props.textLineType) ? this.props.textLineType : void 0,
         onChange: this.onListStyleChange,
         readonly: this.props.disabled,
         legend: jsx(_$$q, {
@@ -476,7 +476,7 @@ let t_ = e => {
   trackEventAnalytics("ce_text_decoration_style_change", {
     style: e
   });
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     textDecorationStyle: e
   });
 };
@@ -485,7 +485,7 @@ function tA(e) {
     children: jsx("div", {
       className: ta,
       children: jsxs(bL, {
-        value: hS(e.textDecorationStyle) && !e.disabled ? e.textDecorationStyle : void 0,
+        value: isValidValue(e.textDecorationStyle) && !e.disabled ? e.textDecorationStyle : void 0,
         onChange: t_,
         readonly: e.disabled,
         legend: jsx(_$$q, {
@@ -529,7 +529,7 @@ let ty = e => {
   analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_skip_ink_toggled", {
     skipInk: t
   });
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     textDecorationSkipInk: t
   }, {
     shouldCommit: zk.YES
@@ -542,7 +542,7 @@ function tb(e) {
       onChange: e => {
         ty(e);
       },
-      value: hS(e.skipInk) && !e.disabled ? e.skipInk ? "TRUE" : "FALSE" : void 0,
+      value: isValidValue(e.skipInk) && !e.disabled ? e.skipInk ? "TRUE" : "FALSE" : void 0,
       legend: jsx(_$$q, {
         children: getI18nString("type_settings.decoration.skip_ink")
       }),
@@ -571,10 +571,10 @@ function tb(e) {
   });
 }
 let tI = e => {
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     textDecoration: e
   });
-  "UNDERLINE" !== e && Y5.updateSelectionProperties({
+  "UNDERLINE" !== e && fullscreenValue.updateSelectionProperties({
     textDecorationSkipInk: !1
   });
   "NONE" !== e && h$(e);
@@ -583,7 +583,7 @@ let tE = function (e) {
   return jsx("span", {
     className: e.drillInChevronShowing ? "type_settings--textDecorationsWithDrillIn--k6Np4" : ta,
     children: jsxs(bL, {
-      value: hS(e.textDecoration) ? e.textDecoration : void 0,
+      value: isValidValue(e.textDecoration) ? e.textDecoration : void 0,
       onChange: tI,
       readonly: e.disabled,
       legend: jsx(_$$q, {
@@ -656,7 +656,7 @@ class tC {
     };
   }
   incrementBy(e, t) {
-    ("RAW" === e.units || gl(e.value)) && (e = this.defaultValue);
+    ("RAW" === e.units || isInvalidValue(e.value)) && (e = this.defaultValue);
     t /= "PERCENT" === e.units || "RAW" === e.units ? 2 : 10;
     return {
       value: e.value + t,
@@ -674,7 +674,7 @@ class tC {
     };
   }
   format(e) {
-    if (gl(e)) return "Mixed";
+    if (isInvalidValue(e)) return "Mixed";
     if (!e || isNaN(e.value)) return "";
     if ("RAW" === e.units) return "Auto";
     let t = parseFloat(e.value.toFixed(2));
@@ -699,45 +699,45 @@ let tN = memo(function (e) {
     opacity: e.isEditingStyle ? 1 : 0,
     type: "SOLID"
   }), [e.isEditingStyle]);
-  let c = useMemo(() => gl(e.textDecorationFillPaints) ? oV : _W(e.textDecorationFillPaints, []), [e.textDecorationFillPaints]);
-  let u = useMemo(() => gl(e.fillPaints) ? oV : _W(e.fillPaints, []), [e.fillPaints]);
+  let c = useMemo(() => isInvalidValue(e.textDecorationFillPaints) ? MIXED_MARKER : valueOrFallback(e.textDecorationFillPaints, []), [e.textDecorationFillPaints]);
+  let u = useMemo(() => isInvalidValue(e.fillPaints) ? MIXED_MARKER : valueOrFallback(e.fillPaints, []), [e.fillPaints]);
   let p = selectWithShallowEqual(e => e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
-  let m = !gl(c) && c.length <= 0;
-  let h = useMemo(() => m ? gl(u) ? {
+  let m = !isInvalidValue(c) && c.length <= 0;
+  let h = useMemo(() => m ? isInvalidValue(u) ? {
     ...u,
-    color: oV,
+    color: MIXED_MARKER,
     type: "SOLID",
     visible: !0
   } : u.length > 0 && u[0]?.colorVar ? u[0] : {
     ...u,
-    color: Q8,
+    color: AUTO_MARKER,
     type: "SOLID",
     visible: !0
-  } : gl(c) || 0 === c.length ? {
+  } : isInvalidValue(c) || 0 === c.length ? {
     ...c,
-    color: oV,
+    color: MIXED_MARKER,
     type: "SOLID",
     visible: !0
   } : c[0], [m, u, c]);
-  let g = useMemo(() => m || gl(c) || !c.length ? !gl(u) && u.length ? u[0] : p.length > 0 ? p[0].paint : d : c[0], [m, c, u, p, d]);
+  let g = useMemo(() => m || isInvalidValue(c) || !c.length ? !isInvalidValue(u) && u.length ? u[0] : p.length > 0 ? p[0].paint : d : c[0], [m, c, u, p, d]);
   let _ = (e, t, i) => {
     if (analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_fill_set", {
       wasAuto: m,
-      toAuto: SX(e.color)
-    }), SX(e.color)) {
-      Y5.updateSelectionProperties({
+      toAuto: isAutoMarker(e.color)
+    }), isAutoMarker(e.color)) {
+      fullscreenValue.updateSelectionProperties({
         textDecorationFillPaints: []
       }, {
         shouldCommit: t,
-        overwrite: i ?? WXh.ALWAYS
+        overwrite: i ?? VisibilityCondition.ALWAYS
       });
       return;
     }
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textDecorationFillPaints: [e]
     }, {
       shouldCommit: t,
-      overwrite: i ?? WXh.ONLY_WHEN_NOT_EMPTY
+      overwrite: i ?? VisibilityCondition.ONLY_WHEN_NOT_EMPTY
     });
     l(!1);
   };
@@ -844,7 +844,7 @@ let tN = memo(function (e) {
     editModeType: e.activeCanvasEditModeType,
     exportBackgroundDisabled,
     fillPaints: l,
-    hasExports: !!exportSettings && _W(exportSettings, []).length > 0,
+    hasExports: !!exportSettings && valueOrFallback(exportSettings, []).length > 0,
     inheritStyleID: styleIdForText || null,
     inheritStyleKey: inheritFillStyleKey || null,
     isEditingStyle: e.isEditingStyle,
@@ -909,13 +909,13 @@ function tj({
     }
   }, [s]);
   useEffect(() => {
-    if (e === XpJ.EMPTY || null === s) {
+    if (e === TypographySettings.EMPTY || null === s) {
       d({
         placeholder: getI18nString("type_settings.preview.preview")
       });
       return;
     }
-    let n = t8O.getPreview(e, t || "", i, s.width, s.viewportHeight);
+    let n = FontHelpers.getPreview(e, t || "", i, s.width, s.viewportHeight);
     if ("placeholder" in n && "No preview available" === n.placeholder) {
       let e = `${n.family}_${n.style}_${t ?? i}`;
       let r = tM.get(e) || 0;
@@ -929,7 +929,7 @@ function tj({
     "svg" in n && (n.svg = tF().sanitize(n.svg));
     d(n);
   }, [s, t, e, i]);
-  let u = e === XpJ.LIST_STYLE_PLAIN || e === XpJ.LIST_STYLE_ORDERED || e === XpJ.LIST_STYLE_UNORDERED || e === XpJ.HANGING_LISTS_ON || e === XpJ.HANGING_LISTS_OFF;
+  let u = e === TypographySettings.LIST_STYLE_PLAIN || e === TypographySettings.LIST_STYLE_ORDERED || e === TypographySettings.LIST_STYLE_UNORDERED || e === TypographySettings.HANGING_LISTS_ON || e === TypographySettings.HANGING_LISTS_OFF;
   let p = jsx("div", {
     className: "type_settings--previewContainer--7JLdy",
     children: jsx("div", {
@@ -1039,11 +1039,11 @@ function tQ({
 }) {
   let p = useDispatch();
   let m = kl("detachOpticalSizeFromFontSize");
-  let h = !gl(m) && !m;
+  let h = !isInvalidValue(m) && !m;
   let g = e.$$default ?? 0;
   let f = t[e.tag]?.value ?? e.value ?? g;
   e.tag !== mz || t[e.tag]?.value !== void 0 || m || (f = l);
-  let _ = gl(f) ? 0 : f;
+  let _ = isInvalidValue(f) ? 0 : f;
   let A = 1;
   let y = 10;
   let b = e.max - e.min;
@@ -1108,7 +1108,7 @@ function tQ({
           hints: v,
           max: e.max,
           min: e.min,
-          mixed: gl(f),
+          mixed: isInvalidValue(f),
           onChange: (t, {
             commit: n
           }) => {
@@ -1125,11 +1125,11 @@ function tQ({
         })
       }), e.tag === mz && jsx("div", {
         className: "variation_axis_slider--variationAxisFPLRow---mC10",
-        children: jsx(_$$S, {
+        children: jsx(Checkbox, {
           checked: h,
           onChange: d,
           recordingKey: "VariableFontSection.OpticalSize",
-          label: jsx(_$$J2, {
+          label: jsx(Label, {
             children: jsx("span", {
               className: _$$s.colorTextSecondary.$,
               children: renderI18nText("type_settings.variable_fonts.set_optical_size_automatically")
@@ -1156,17 +1156,17 @@ function t2({
   fontFamily: l
 }) {
   let d = new _r();
-  let c = gl(l) ? {} : t1[l] ?? {};
+  let c = isInvalidValue(l) ? {} : t1[l] ?? {};
   let u = useCallback(e => c[e.tag?.toLowerCase()] ?? !!e.hidden, [c]);
   let p = H0(e.filter(e => !u(e) && "ital" !== e.tag));
   let m = e.filter(e => u(e));
   let [h, g] = useState(!1);
   let f = useCallback((e, t, i) => {
-    gl(e) || n(e, t, i);
+    isInvalidValue(e) || n(e, t, i);
   }, [n]);
   let _ = am();
   let A = useMemo(() => {
-    if (gl(o)) return o;
+    if (isInvalidValue(o)) return o;
     let t = e.find(e => e.tag === mz);
     return t ? Math.max(Math.min(o, t.max), t.min) : o;
   }, [e, o]);
@@ -1174,9 +1174,9 @@ function t2({
     let t = {
       axisTag: cx(mz),
       axisName: mI[mz],
-      value: e || gl(A) ? void 0 : A
+      value: e || isInvalidValue(A) ? void 0 : A
     };
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       detachOpticalSizeFromFontSize: !e,
       fontVariations: [t]
     });
@@ -1246,14 +1246,14 @@ function t3(e) {
       }), jsx("span", {
         className: tr,
         children: jsxs(bL, {
-          value: hS(o) ? o : void 0,
+          value: isValidValue(o) ? o : void 0,
           onChange: e => {
             let t = {
               textTruncation: e
             };
-            "ENDING" === e && i.current ? t.maxLines = i.current : "DISABLED" === e && l && hS(l) && l > 0 && (i.current = l);
+            "ENDING" === e && i.current ? t.maxLines = i.current : "DISABLED" === e && l && isValidValue(l) && l > 0 && (i.current = l);
             h$("TEXT_TRUNCATION", zk.YES);
-            Y5.updateSelectionProperties(t);
+            fullscreenValue.updateSelectionProperties(t);
           },
           readonly: e.disabled,
           legend: jsx(_$$q, {
@@ -1294,7 +1294,7 @@ function t3(e) {
         inputClassName: tc,
         min: 1,
         onValueChange: (e, t) => {
-          SX(e) || (i.current = e, Y5.updateSelectionProperties({
+          isAutoMarker(e) || (i.current = e, fullscreenValue.updateSelectionProperties({
             maxLines: e
           }, {
             shouldCommit: t
@@ -1303,7 +1303,7 @@ function t3(e) {
         recordingKey: Pt(e, "maxLines"),
         scrubMultiplier: .25,
         smallNudgeAmount,
-        value: l || Q8
+        value: l || AUTO_MARKER
       })]
     })]
   });
@@ -1314,7 +1314,7 @@ function t6(e) {
     smallNudgeAmount,
     bigNudgeAmount
   } = sT();
-  let [o, d] = useState(XpJ.EMPTY);
+  let [o, d] = useState(TypographySettings.EMPTY);
   let [c, u] = useState(null);
   let [p, m] = useState(!1);
   let [h, g] = useState(void 0);
@@ -1326,8 +1326,8 @@ function t6(e) {
   let S = useSelector(e => e.mirror.selectedStyleProperties.guid);
   let w = B9(e.shouldUseSelectedStyleProperties);
   let T = void 0 !== S;
-  let k = !!_W(e.missingFont, !1);
-  let R = (0 | e.enabledTypePanelControls) & 1 << mrc.TEXT_TRUNCATION;
+  let k = !!valueOrFallback(e.missingFont, !1);
+  let R = (0 | e.enabledTypePanelControls) & 1 << TextAlignmentOptions.TEXT_TRUNCATION;
   let O = useRef(null);
   let D = useRef(null);
   let L = useRef(null);
@@ -1335,7 +1335,7 @@ function t6(e) {
   let j = () => {
     t(XE());
   };
-  let B = e.editModeType === m1T.TEXT;
+  let B = e.editModeType === LayoutTabType.TEXT;
   let V = e => e in w.supported;
   let z = e => e in w.applicable;
   let K = useRef();
@@ -1346,14 +1346,14 @@ function t6(e) {
         break;
       case "LEAVE":
         K.current = setTimeout(() => {
-          d(XpJ.EMPTY);
+          d(TypographySettings.EMPTY);
           u(null);
           m(!1);
         }, 300);
     }
   }, []);
   let q = (e, t) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       paragraphIndent: e
     }, {
       shouldCommit: t
@@ -1361,7 +1361,7 @@ function t6(e) {
     h$("PARAGRAPH_INDENT", t);
   };
   let $ = (e, t) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       paragraphSpacing: e
     }, {
       shouldCommit: t
@@ -1369,7 +1369,7 @@ function t6(e) {
     h$("PARAGRAPH_SPACING", t, "settings");
   };
   let Q = (e, t) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       listSpacing: e
     }, {
       shouldCommit: t
@@ -1377,30 +1377,30 @@ function t6(e) {
     h$("LIST_SPACING", t);
   };
   let J = (e, t) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textUnderlineOffset: e
     }, {
       shouldCommit: t
     });
   };
   let ee = (e, t) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textDecorationThickness: e
     }, {
       shouldCommit: t
     });
   };
   let et = e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       leadingTrim: e
     }, {
       shouldCommit: zk.YES,
-      overwrite: WXh.ONLY_WHEN_NOT_DISABLED
+      overwrite: VisibilityCondition.ONLY_WHEN_NOT_DISABLED
     });
     "NONE" !== e && h$(e);
   };
   let ec = e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       hangingPunctuation: e
     }, {
       shouldCommit: zk.YES
@@ -1408,7 +1408,7 @@ function t6(e) {
     e && h$("HANGING_QUOTE");
   };
   let eN = e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       hangingList: e
     }, {
       shouldCommit: zk.YES
@@ -1416,11 +1416,11 @@ function t6(e) {
     e && h$("HANGING_LIST");
   };
   let eU = e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textAlignHorizontal: e
     });
   };
-  let eH = e => Y5.updateSelectionProperties({
+  let eH = e => fullscreenValue.updateSelectionProperties({
     fontVariantPosition: e
   });
   let eW = (e, t) => {
@@ -1429,11 +1429,11 @@ function t6(e) {
       "Style" === tx && x && (i = x.filter(t => t !== e));
       "OFF" === t && i.push(e);
       let n = w.mixed.filter(t => t !== e);
-      T ? Y5.updateSelectionProperties({
+      T ? fullscreenValue.updateSelectionProperties({
         toggledOffOTFeatures: i
       }, {
         shouldCommit: zk.YES
-      }) : Y5.updateSelectionProperties({
+      }) : fullscreenValue.updateSelectionProperties({
         toggledOffOTFeaturesForSelection: i,
         mixedStateOTFeaturesForSelection: n
       }, {
@@ -1444,11 +1444,11 @@ function t6(e) {
       "Style" === tx && I && (i = I.filter(t => t !== e));
       "ON" === t && i.push(e);
       let n = w.mixed.filter(t => t !== e);
-      T ? Y5.updateSelectionProperties({
+      T ? fullscreenValue.updateSelectionProperties({
         toggledOnOTFeatures: i
       }, {
         shouldCommit: zk.YES
-      }) : Y5.updateSelectionProperties({
+      }) : fullscreenValue.updateSelectionProperties({
         toggledOnOTFeaturesForSelection: i,
         mixedStateOTFeaturesForSelection: n
       }, {
@@ -1463,7 +1463,7 @@ function t6(e) {
   let eK = () => {
     let t = "NORMAL" === e.fontVariantNumericSpacing;
     let i = "NORMAL" === e.fontVariantNumericFigure;
-    if (!(hS(e.fontVariantNumericSpacing) && hS(e.fontVariantNumericFigure))) return "MIXED";
+    if (!(isValidValue(e.fontVariantNumericSpacing) && isValidValue(e.fontVariantNumericFigure))) return "MIXED";
     if (t && i) return "ORIGINAL";
     if (t || "PROPORTIONAL" === e.fontVariantNumericSpacing) {
       if (i || "LINING" === e.fontVariantNumericFigure) return "UPPER_PROPORTIONAL";
@@ -1474,29 +1474,29 @@ function t6(e) {
     }
     return "MIXED";
   };
-  let eZ = () => "MIXED" === _W(e.fontVariantNumericFraction, "MIXED") ? "MIXED" : "STACKED" === e.fontVariantNumericFraction ? "ON" : "OFF";
-  let eX = t => "DLIG" === t ? e.fontVariantDiscretionaryLigatures === oV ? "MIXED" : _W(e.fontVariantDiscretionaryLigatures, !1) ? "ON" : "OFF" : "HLIG" === t ? e.fontVariantHistoricalLigatures === oV ? "MIXED" : _W(e.fontVariantHistoricalLigatures, !1) ? "ON" : "OFF" : w.mixed.includes(t) ? "MIXED" : _$$G.OpenTypeFeatureDefaultOn.includes(t) ? "Style" === tx ? x?.includes(t) ? "OFF" : "ON" : w.off.includes(t) ? "OFF" : "ON" : "Style" === tx ? I?.includes(t) ? "ON" : "OFF" : w.on.includes(t) ? "ON" : "OFF";
+  let eZ = () => "MIXED" === valueOrFallback(e.fontVariantNumericFraction, "MIXED") ? "MIXED" : "STACKED" === e.fontVariantNumericFraction ? "ON" : "OFF";
+  let eX = t => "DLIG" === t ? e.fontVariantDiscretionaryLigatures === MIXED_MARKER ? "MIXED" : valueOrFallback(e.fontVariantDiscretionaryLigatures, !1) ? "ON" : "OFF" : "HLIG" === t ? e.fontVariantHistoricalLigatures === MIXED_MARKER ? "MIXED" : valueOrFallback(e.fontVariantHistoricalLigatures, !1) ? "ON" : "OFF" : w.mixed.includes(t) ? "MIXED" : _$$G.OpenTypeFeatureDefaultOn.includes(t) ? "Style" === tx ? x?.includes(t) ? "OFF" : "ON" : w.off.includes(t) ? "OFF" : "ON" : "Style" === tx ? I?.includes(t) ? "ON" : "OFF" : w.on.includes(t) ? "ON" : "OFF";
   let e5 = () => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textUserLayoutVersion: 1
     });
     e3(!1);
   };
   let e4 = () => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textBidiVersion: 1
     });
   };
   let e3 = e => {
-    getFeatureFlags().ce_mixed_text_spacing && glU.upgradeToLatestTextExplicitLayoutVersion(e);
+    getFeatureFlags().ce_mixed_text_spacing && Fullscreen.upgradeToLatestTextExplicitLayoutVersion(e);
   };
   let e6 = () => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       textUserLayoutVersion: 0,
       textExplicitLayoutVersion: 0
     });
   };
-  let e7 = () => 0 === e.textUserLayoutVersion || -1 !== C8(e.textUserLayoutVersion).indexOf(0) ? "upgrade" : 1 === e.textUserLayoutVersion && "downgrade";
+  let e7 = () => 0 === e.textUserLayoutVersion || -1 !== toArray(e.textUserLayoutVersion).indexOf(0) ? "upgrade" : 1 === e.textUserLayoutVersion && "downgrade";
   let e8 = () => jsxs(Fragment, {
     children: [(e7() || ty()) && jsx("div", {
       className: tl
@@ -1535,7 +1535,7 @@ function t6(e) {
       })]
     })]
   });
-  let ty = () => "Style" !== tx && (1 !== e.textExplicitLayoutVersion || -1 !== C8(e.textExplicitLayoutVersion).indexOf(0));
+  let ty = () => "Style" !== tx && (1 !== e.textExplicitLayoutVersion || -1 !== toArray(e.textExplicitLayoutVersion).indexOf(0));
   let tv = () => "upgrade" === e7() ? jsxs(fI, {
     className: tm,
     onMouseDown: e => {
@@ -1543,7 +1543,7 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: th,
-      children: [hS(e.textUserLayoutVersion) ? getI18nString("type_settings.older_text_rendering_method_used") : getI18nString("type_settings.older_text_rendering_method_used_for_part_of_the_selection"), jsx(_$$B, {
+      children: [isValidValue(e.textUserLayoutVersion) ? getI18nString("type_settings.older_text_rendering_method_used") : getI18nString("type_settings.older_text_rendering_method_used_for_part_of_the_selection"), jsx(_$$B, {
         svg: _$$A6,
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": "line-height-update-info",
@@ -1621,7 +1621,7 @@ function t6(e) {
   let tk = () => {
     let t = (e, t) => {
       Y(t);
-      "ENTER" === t && (d("LEFT" === e ? XpJ.ALIGNMENT_LEFT : "CENTER" === e ? XpJ.ALIGNMENT_CENTER : "RIGHT" === e ? XpJ.ALIGNMENT_RIGHT : "JUSTIFIED" === e ? XpJ.ALIGNMENT_JUSTIFIED : XpJ.EMPTY), u(null), m(!1));
+      "ENTER" === t && (d("LEFT" === e ? TypographySettings.ALIGNMENT_LEFT : "CENTER" === e ? TypographySettings.ALIGNMENT_CENTER : "RIGHT" === e ? TypographySettings.ALIGNMENT_RIGHT : "JUSTIFIED" === e ? TypographySettings.ALIGNMENT_JUSTIFIED : TypographySettings.EMPTY), u(null), m(!1));
     };
     let i = tT && !t0;
     return jsx(Fragment, {
@@ -1632,7 +1632,7 @@ function t6(e) {
         }), jsx("span", {
           className: ts,
           children: jsxs(bL, {
-            value: hS(e.textAlignHorizontal) ? e.textAlignHorizontal : void 0,
+            value: isValidValue(e.textAlignHorizontal) ? e.textAlignHorizontal : void 0,
             onChange: eU,
             recordingKey: e.recordingKey,
             legend: jsx(_$$q, {
@@ -1697,7 +1697,7 @@ function t6(e) {
     if (tT) return jsx(t3, {
       textTruncationHoverHandler: (e, t) => {
         Y(t);
-        "ENTER" === t && (m(!0), d("DISABLED" === e ? XpJ.TRUNCATION_DISABLED : XpJ.TRUNCATION_ENABLED));
+        "ENTER" === t && (m(!0), d("DISABLED" === e ? TypographySettings.TRUNCATION_DISABLED : TypographySettings.TRUNCATION_ENABLED));
       },
       disabled: k,
       recordingKey: e.recordingKey
@@ -1705,7 +1705,7 @@ function t6(e) {
   };
   let tN = (e, t) => {
     Y(t);
-    "ENTER" === t && (d("NONE" === e ? XpJ.DECORATION_NONE : "STRIKETHROUGH" === e ? XpJ.DECORATION_STRIKETHROUGH : "UNDERLINE" === e ? XpJ.DECORATION_UNDERLINE : XpJ.EMPTY), u(null), m(!1));
+    "ENTER" === t && (d("NONE" === e ? TypographySettings.DECORATION_NONE : "STRIKETHROUGH" === e ? TypographySettings.DECORATION_STRIKETHROUGH : "UNDERLINE" === e ? TypographySettings.DECORATION_UNDERLINE : TypographySettings.EMPTY), u(null), m(!1));
   };
   let tP = () => {
     let t = tT || tw;
@@ -1757,14 +1757,14 @@ function t6(e) {
       label: getI18nString("type_settings.decoration.paragraph_spacing"),
       input: jsx(_X, {
         fields: ["PARAGRAPH_SPACING"],
-        resolvedType: rXF.FLOAT,
+        resolvedType: VariableResolvedDataType.FLOAT,
         editingStyleGuid: S,
         initialPickerPosition: () => O.current ? cn(O.current, d9) : null,
         children: jsx(eJ, {
           inputRef: D,
           inputClassName: eP()(tu, bO),
           activeInputClassName: eP()(tp, Hn),
-          currentFieldValue: gl(e.paragraphSpacing) ? void 0 : e.paragraphSpacing,
+          currentFieldValue: isInvalidValue(e.paragraphSpacing) ? void 0 : e.paragraphSpacing,
           rowElementRef: O,
           recordingKey: Pt(e.recordingKey, "paragraphSpacing.variableControl"),
           children: jsx(t8, {
@@ -1800,16 +1800,16 @@ function t6(e) {
               let t;
               switch (e) {
                 case "PLAIN":
-                  t = XpJ.LIST_STYLE_PLAIN;
+                  t = TypographySettings.LIST_STYLE_PLAIN;
                   break;
                 case "UNORDERED_LIST":
-                  t = XpJ.LIST_STYLE_UNORDERED;
+                  t = TypographySettings.LIST_STYLE_UNORDERED;
                   break;
                 case "ORDERED_LIST":
-                  t = XpJ.LIST_STYLE_ORDERED;
+                  t = TypographySettings.LIST_STYLE_ORDERED;
                   break;
                 default:
-                  t = XpJ.EMPTY;
+                  t = TypographySettings.EMPTY;
               }
               d(t);
               u(null);
@@ -1833,7 +1833,7 @@ function t6(e) {
   let tU = () => {
     let t = (e, t) => {
       Y(t);
-      "ENTER" === t && (d("CAP_HEIGHT" === e ? XpJ.LEADING_TRIM_CAP_HEIGHT : "NONE" === e ? XpJ.LEADING_TRIM_NONE : XpJ.EMPTY), u(null), m(!0));
+      "ENTER" === t && (d("CAP_HEIGHT" === e ? TypographySettings.LEADING_TRIM_CAP_HEIGHT : "NONE" === e ? TypographySettings.LEADING_TRIM_NONE : TypographySettings.EMPTY), u(null), m(!0));
     };
     return jsx(Fragment, {
       children: tw && jsxs(fI, {
@@ -1843,7 +1843,7 @@ function t6(e) {
         }), jsx("span", {
           className: tr,
           children: jsxs(bL, {
-            value: hS(e.leadingTrim) && !e.leadingTrimDisabled ? e.leadingTrim : void 0,
+            value: isValidValue(e.leadingTrim) && !e.leadingTrimDisabled ? e.leadingTrim : void 0,
             onChange: et,
             readonly: k || e.leadingTrimDisabled,
             legend: jsx(_$$q, {
@@ -1887,7 +1887,7 @@ function t6(e) {
       },
       onHover: (e, t) => {
         Y(t);
-        "ENTER" === t && (d(!0 === e ? XpJ.HANGING_PUNCTUATION_ON : !1 === e ? XpJ.HANGING_PUNCTUATION_OFF : XpJ.EMPTY), u(null), m(!1));
+        "ENTER" === t && (d(!0 === e ? TypographySettings.HANGING_PUNCTUATION_ON : !1 === e ? TypographySettings.HANGING_PUNCTUATION_OFF : TypographySettings.EMPTY), u(null), m(!1));
       }
     })
   });
@@ -1906,7 +1906,7 @@ function t6(e) {
         },
         onHover: (e, t) => {
           Y(t);
-          "ENTER" === t && (d(!0 === e ? XpJ.HANGING_LISTS_ON : !1 === e ? XpJ.HANGING_LISTS_OFF : XpJ.EMPTY), u(null), m(!1));
+          "ENTER" === t && (d(!0 === e ? TypographySettings.HANGING_LISTS_ON : !1 === e ? TypographySettings.HANGING_LISTS_OFF : TypographySettings.EMPTY), u(null), m(!1));
         }
       })
     });
@@ -1922,14 +1922,14 @@ function t6(e) {
       label: getI18nString("type_settings.decoration.paragraph_indent"),
       input: jsx(_X, {
         fields: ["PARAGRAPH_INDENT"],
-        resolvedType: rXF.FLOAT,
+        resolvedType: VariableResolvedDataType.FLOAT,
         editingStyleGuid: S,
         initialPickerPosition: () => L.current ? cn(L.current, d9) : null,
         children: jsx(eJ, {
           inputRef: M,
           inputClassName: eP()(tu, bO),
           activeInputClassName: eP()(tp, Hn),
-          currentFieldValue: gl(e.paragraphIndent) ? void 0 : e.paragraphIndent,
+          currentFieldValue: isInvalidValue(e.paragraphIndent) ? void 0 : e.paragraphIndent,
           rowElementRef: L,
           recordingKey: Pt(e.recordingKey, "paragraphIndent"),
           children: jsx(t8, {
@@ -1950,30 +1950,30 @@ function t6(e) {
   });
   let tz = () => {
     let a = {
-      value: parseFloat((100 * t8O.getDefaultUnderlineOffset()).toFixed(2)),
+      value: parseFloat((100 * FontHelpers.getDefaultUnderlineOffset()).toFixed(2)),
       units: "RAW"
     };
     let s = new tC(a);
-    let o = !e.textUnderlineOffset || hS(e.textUnderlineOffset) && 0 === e.textUnderlineOffset.value && "RAW" === e.textUnderlineOffset.units ? {
-      value: parseFloat((100 * t8O.getDefaultUnderlineOffset()).toFixed(2)),
+    let o = !e.textUnderlineOffset || isValidValue(e.textUnderlineOffset) && 0 === e.textUnderlineOffset.value && "RAW" === e.textUnderlineOffset.units ? {
+      value: parseFloat((100 * FontHelpers.getDefaultUnderlineOffset()).toFixed(2)),
       units: "RAW"
     } : e.textUnderlineOffset;
     let l = {
       min: 0,
-      max: gl(o) || "PIXELS" !== o.units ? 25 : .25 * _W(e.fontSize, 12)
+      max: isInvalidValue(o) || "PIXELS" !== o.units ? 25 : .25 * valueOrFallback(e.fontSize, 12)
     };
     let c = {
-      value: parseFloat((100 * t8O.getDefaultUnderlineThickness()).toFixed(2)),
+      value: parseFloat((100 * FontHelpers.getDefaultUnderlineThickness()).toFixed(2)),
       units: "RAW"
     };
     let p = new tC(c);
-    let h = !e.textDecorationThickness || hS(e.textDecorationThickness) && 0 === e.textDecorationThickness.value && "RAW" === e.textDecorationThickness.units ? {
-      value: parseFloat((100 * t8O.getDefaultUnderlineThickness()).toFixed(2)),
+    let h = !e.textDecorationThickness || isValidValue(e.textDecorationThickness) && 0 === e.textDecorationThickness.value && "RAW" === e.textDecorationThickness.units ? {
+      value: parseFloat((100 * FontHelpers.getDefaultUnderlineThickness()).toFixed(2)),
       units: "RAW"
     } : e.textDecorationThickness;
     let g = {
       min: .5,
-      max: gl(h) || "PIXELS" !== h.units ? 20 : .2 * _W(e.fontSize, 12)
+      max: isInvalidValue(h) || "PIXELS" !== h.units ? 20 : .2 * valueOrFallback(e.fontSize, 12)
     };
     let _ = !v || k;
     return jsxs(Zk, {
@@ -1996,7 +1996,7 @@ function t6(e) {
         }), jsx(tA, {
           decorationHoverHandler: (e, t) => {
             Y(t);
-            "ENTER" === t && ("DOTTED" === e ? d(XpJ.DECORATION_STYLE_DOTTED) : "WAVY" === e ? d(XpJ.DECORATION_STYLE_WAVY) : "SOLID" === e && d(XpJ.DECORATION_STYLE_SOLID), u(null), m(!1));
+            "ENTER" === t && ("DOTTED" === e ? d(TypographySettings.DECORATION_STYLE_DOTTED) : "WAVY" === e ? d(TypographySettings.DECORATION_STYLE_WAVY) : "SOLID" === e && d(TypographySettings.DECORATION_STYLE_SOLID), u(null), m(!1));
           },
           disabled: _,
           recordingKey: Pt(e, "textUnderlineDrillInMenu"),
@@ -2016,9 +2016,9 @@ function t6(e) {
           dispatch: t,
           formatter: p,
           onValueChange: ee,
-          placeholder: `${gl(c) ? "" : c.value}%`,
+          placeholder: `${isInvalidValue(c) ? "" : c.value}%`,
           recordingKey: Pt(e, "underlineThickness"),
-          shouldClearOnFocus: !gl(h) && "RAW" === h.units,
+          shouldClearOnFocus: !isInvalidValue(h) && "RAW" === h.units,
           smallNudgeAmount,
           value: _ ? {
             value: 0,
@@ -2031,15 +2031,15 @@ function t6(e) {
           "aria-labelledby": "underline-thickness-slider",
           min: g.min,
           max: g.max,
-          step: hS(h) && "PERCENT" === h.units ? .5 : .1,
-          bigStep: hS(h) && "PERCENT" === h.units ? 5 : .5,
+          step: isValidValue(h) && "PERCENT" === h.units ? .5 : .1,
+          bigStep: isValidValue(h) && "PERCENT" === h.units ? 5 : .5,
           disabled: _,
-          value: gl(h) || _ ? 0 : h.value,
+          value: isInvalidValue(h) || _ ? 0 : h.value,
           onChange: (t, {
             commit: i
           }) => {
             if (!e.textDecorationThickness) return;
-            let n = gl(e.textDecorationThickness) ? "PERCENT" : e.textDecorationThickness.units;
+            let n = isInvalidValue(e.textDecorationThickness) ? "PERCENT" : e.textDecorationThickness.units;
             ee({
               value: t,
               units: "RAW" === n ? "PERCENT" : n
@@ -2061,9 +2061,9 @@ function t6(e) {
           dispatch: t,
           formatter: s,
           onValueChange: J,
-          placeholder: `${gl(a) ? "" : a.value}%`,
+          placeholder: `${isInvalidValue(a) ? "" : a.value}%`,
           recordingKey: Pt(e, "underlineOffset"),
-          shouldClearOnFocus: !gl(o) && "RAW" === o.units,
+          shouldClearOnFocus: !isInvalidValue(o) && "RAW" === o.units,
           smallNudgeAmount,
           value: _ ? {
             value: 0,
@@ -2076,15 +2076,15 @@ function t6(e) {
           "aria-labelledby": "underline-offset-slider",
           min: l.min,
           max: l.max,
-          step: hS(o) && "PERCENT" === o.units ? .5 : .1,
-          bigStep: hS(o) && "PERCENT" === o.units ? 5 : .5,
+          step: isValidValue(o) && "PERCENT" === o.units ? .5 : .1,
+          bigStep: isValidValue(o) && "PERCENT" === o.units ? 5 : .5,
           disabled: _,
-          value: gl(o) || _ ? 0 : o.value,
+          value: isInvalidValue(o) || _ ? 0 : o.value,
           onChange: (t, {
             commit: i
           }) => {
             if (!e.textUnderlineOffset) return;
-            let n = gl(e.textUnderlineOffset) ? "PERCENT" : e.textUnderlineOffset.units;
+            let n = isInvalidValue(e.textUnderlineOffset) ? "PERCENT" : e.textUnderlineOffset.units;
             J({
               value: t,
               units: "RAW" === n ? "PERCENT" : n
@@ -2100,7 +2100,7 @@ function t6(e) {
         }), jsx(tb, {
           decorationHoverHandler: (e, t) => {
             Y(t);
-            "ENTER" === t && (d(!0 === e ? XpJ.DECORATION_SKIP_INK_ON : XpJ.DECORATION_SKIP_INK_OFF), u(null), m(!1));
+            "ENTER" === t && (d(!0 === e ? TypographySettings.DECORATION_SKIP_INK_ON : TypographySettings.DECORATION_SKIP_INK_OFF), u(null), m(!1));
           },
           recordingKey: Pt(e, "textUnderlineDrillInMenu"),
           skipInk: e.textDecorationSkipInk,
@@ -2124,25 +2124,25 @@ function t6(e) {
         let t;
         switch (e) {
           case "ORIGINAL":
-            t = XpJ.TEXT_CASE_ORIGINAL;
+            t = TypographySettings.TEXT_CASE_ORIGINAL;
             break;
           case "UPPER":
-            t = XpJ.TEXT_CASE_UPPER;
+            t = TypographySettings.TEXT_CASE_UPPER;
             break;
           case "LOWER":
-            t = XpJ.TEXT_CASE_LOWER;
+            t = TypographySettings.TEXT_CASE_LOWER;
             break;
           case "TITLE":
-            t = XpJ.TEXT_CASE_TITLE;
+            t = TypographySettings.TEXT_CASE_TITLE;
             break;
           case "SMALL_CAPS":
-            t = XpJ.TEXT_CASE_SMALL_CAPS;
+            t = TypographySettings.TEXT_CASE_SMALL_CAPS;
             break;
           case "SMALL_CAPS_FORCED":
-            t = XpJ.TEXT_CASE_SMALL_CAPS_FORCED;
+            t = TypographySettings.TEXT_CASE_SMALL_CAPS_FORCED;
             break;
           default:
-            t = XpJ.EMPTY;
+            t = TypographySettings.EMPTY;
         }
         d(t);
         u(null);
@@ -2188,7 +2188,7 @@ function t6(e) {
         }), jsx("span", {
           className: V("C2SC") ? "type_settings--typeDetailsControlSixSegments--6VDYd" : to,
           children: jsxs(bL, {
-            value: hS(t) ? t : void 0,
+            value: isValidValue(t) ? t : void 0,
             onChange: e => i4(e, i ? "settings-details" : "settings-basic"),
             readonly: k,
             legend: jsx(_$$q, {
@@ -2254,7 +2254,7 @@ function t6(e) {
     if (!n) return;
     t = e.fontVariations;
     i = {};
-    let a = bU(t) ? i = t.reduce((e, t, i) => {
+    let a = isMixedArray(t) ? i = t.reduce((e, t, i) => {
       let n = {
         ...e
       };
@@ -2264,10 +2264,10 @@ function t6(e) {
           value: t.value,
           axisName: t.axisName
         } : (delete n[r], e[r] && e[r].value === t.value || (e[r] = {
-          value: oV,
+          value: MIXED_MARKER,
           axisName: t.axisName
         }));
-      }), n) e[r].value = oV;
+      }), n) e[r].value = MIXED_MARKER;
       return e;
     }, {}) : (t.forEach(e => {
       i[El(e.axisTag)] = {
@@ -2286,20 +2286,20 @@ function t6(e) {
           if (i !== mz && n.tag === mz && !e.detachOpticalSize) return;
           i !== mz || e.detachOpticalSize || (o.detachOpticalSizeFromFontSize = !0);
           let r = i === n.tag ? t : a[n.tag]?.value ?? n.value;
-          hS(r) && s.push({
+          isValidValue(r) && s.push({
             axisTag: cx(n.tag),
             axisName: n.name,
             value: r
           });
         });
         o.fontVariations = s;
-        s.length && Y5.updateSelectionProperties(o, {
+        s.length && fullscreenValue.updateSelectionProperties(o, {
           shouldCommit: r
         });
       },
       previewHoverHandler: (e, t) => {
         Y(t);
-        "ENTER" === t && (d(XpJ.FONT_VARIATIONS), u(null), g(e), m(!1));
+        "ENTER" === t && (d(TypographySettings.FONT_VARIATIONS), u(null), g(e), m(!1));
       },
       fontFamily: e.fontFamily,
       fontSize: e.fontSize
@@ -2323,7 +2323,7 @@ function t6(e) {
     let i = z(t);
     let n = (e, i) => {
       Y(i);
-      "ENTER" === i && ("FRAC" === t ? (d("ON" === e ? XpJ.FRACTIONS_ON : XpJ.FRACTIONS_OFF), u(null)) : (d("ON" === e ? XpJ.OPENTYPE_FEATURE_ON : XpJ.OPENTYPE_FEATURE_OFF), u(t)), m(!1));
+      "ENTER" === i && ("FRAC" === t ? (d("ON" === e ? TypographySettings.FRACTIONS_ON : TypographySettings.FRACTIONS_OFF), u(null)) : (d("ON" === e ? TypographySettings.OPENTYPE_FEATURE_ON : TypographySettings.OPENTYPE_FEATURE_OFF), u(t)), m(!1));
     };
     let a = w.supported;
     let s = w.applicable;
@@ -2348,19 +2348,19 @@ function t6(e) {
           value: "FRAC" === t ? eZ() : eX(t),
           onChange: e => {
             if ("FRAC" === t) {
-              Y5.updateSelectionProperties({
+              fullscreenValue.updateSelectionProperties({
                 fontVariantNumericFraction: "ON" === e ? "STACKED" : "NORMAL"
               });
               return;
             }
             switch (t) {
               case "DLIG":
-                Y5.updateSelectionProperties({
+                fullscreenValue.updateSelectionProperties({
                   fontVariantDiscretionaryLigatures: "ON" === e
                 });
                 break;
               case "HLIG":
-                Y5.updateSelectionProperties({
+                fullscreenValue.updateSelectionProperties({
                   fontVariantHistoricalLigatures: "ON" === e
                 });
                 break;
@@ -2400,7 +2400,7 @@ function t6(e) {
   let t$ = () => {
     let t = (e, t) => {
       Y(t);
-      "ENTER" === t && (d("NORMAL" === e ? XpJ.NUMERIC_POSITION_NORMAL : "SUB" === e ? XpJ.NUMERIC_POSITION_SUB : "SUPER" === e ? XpJ.NUMERIC_POSITION_SUPER : XpJ.EMPTY), u(null), m(!1));
+      "ENTER" === t && (d("NORMAL" === e ? TypographySettings.NUMERIC_POSITION_NORMAL : "SUB" === e ? TypographySettings.NUMERIC_POSITION_SUB : "SUPER" === e ? TypographySettings.NUMERIC_POSITION_SUPER : TypographySettings.EMPTY), u(null), m(!1));
     };
     return jsxs(fI, {
       children: [jsx(JU, {
@@ -2409,7 +2409,7 @@ function t6(e) {
       }), jsx("span", {
         className: ta,
         children: jsxs(bL, {
-          value: hS(e.fontVariantPosition) ? e.fontVariantPosition : void 0,
+          value: isValidValue(e.fontVariantPosition) ? e.fontVariantPosition : void 0,
           onChange: eH,
           readonly: k,
           legend: jsx(_$$q, {
@@ -2466,22 +2466,22 @@ function t6(e) {
       let i;
       switch (Y(t), e) {
         case "ORIGINAL":
-          i = XpJ.NUMERIC_STYLE_ORIGINAL;
+          i = TypographySettings.NUMERIC_STYLE_ORIGINAL;
           break;
         case "UPPER_PROPORTIONAL":
-          i = XpJ.NUMERIC_STYLE_UPPER_PROPORTIONAL;
+          i = TypographySettings.NUMERIC_STYLE_UPPER_PROPORTIONAL;
           break;
         case "LOWER_PROPORTIONAL":
-          i = XpJ.NUMERIC_STYLE_LOWER_PROPORTIONAL;
+          i = TypographySettings.NUMERIC_STYLE_LOWER_PROPORTIONAL;
           break;
         case "UPPER_MONOSPACE":
-          i = XpJ.NUMERIC_STYLE_UPPER_MONOSPACE;
+          i = TypographySettings.NUMERIC_STYLE_UPPER_MONOSPACE;
           break;
         case "LOWER_MONOSPACE":
-          i = XpJ.NUMERIC_STYLE_LOWER_MONOSPACE;
+          i = TypographySettings.NUMERIC_STYLE_LOWER_MONOSPACE;
           break;
         default:
-          i = XpJ.EMPTY;
+          i = TypographySettings.EMPTY;
       }
       "ENTER" === t && (d(i), u(null), m(!1));
     };
@@ -2586,9 +2586,9 @@ function t6(e) {
         }), jsx("span", {
           className: 2 === t.length ? tr : 3 === t.length ? ta : 4 === t.length ? ts : to,
           children: jsx(bL, {
-            value: hS(eK()) ? eK() : void 0,
+            value: isValidValue(eK()) ? eK() : void 0,
             onChange: e => {
-              Y5.updateSelectionProperties(l(e));
+              fullscreenValue.updateSelectionProperties(l(e));
             },
             readonly: k,
             legend: jsx(_$$q, {
@@ -2858,12 +2858,12 @@ class ip extends PureComponent {
   constructor() {
     super(...arguments);
     this.onClick = () => {
-      gl(this.props.directionality) || "RTL" === this.props.directionality ? Y5.triggerActionInUserEditScope("text-set-directionality-ltr") : Y5.triggerActionInUserEditScope("text-set-directionality-rtl");
+      isInvalidValue(this.props.directionality) || "RTL" === this.props.directionality ? fullscreenValue.triggerActionInUserEditScope("text-set-directionality-ltr") : fullscreenValue.triggerActionInUserEditScope("text-set-directionality-rtl");
     };
   }
   render() {
     let e;
-    e = gl(this.props.directionality) ? jsx(io, {}) : "LTR" === this.props.directionality ? jsx(il, {}) : jsx(id, {});
+    e = isInvalidValue(this.props.directionality) ? jsx(io, {}) : "LTR" === this.props.directionality ? jsx(il, {}) : jsx(id, {});
     return jsx("span", {
       className: gb,
       children: jsx(K0, {
@@ -2907,10 +2907,10 @@ class iS extends PureComponent {
     this.context = null;
     this.versionsForStyles = {};
     this.showFontAgentCTA = Kk() && !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows) && !BrowserInfo.isMobileBrowser;
-    this.getTickAxisValues = xx(e => gl(e) ? {} : MK(e, this.props.fonts[e], this.versionsForStyles[e]));
+    this.getTickAxisValues = xx(e => isInvalidValue(e) ? {} : MK(e, this.props.fonts[e], this.versionsForStyles[e]));
     this.stopPropagation = e => e.stopPropagation();
     this.onMouseDown = e => {
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
       this.shownSettings() && e.stopPropagation();
     };
     this.alignmentRowRef = createRef();
@@ -3002,16 +3002,16 @@ class iS extends PureComponent {
       e !== nb() && e !== wM() && a2("fontStyle");
     };
     this.onChangeParagraphSpacing = (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         paragraphSpacing: e
       }, {
         shouldCommit: t
       });
       h$("PARAGRAPH_SPACING", t, "panel");
     };
-    this.shouldRenderListSpacing = () => !this.isInStyleModal() && hS(this.props.textLineType) && "PLAIN" !== this.props.textLineType;
+    this.shouldRenderListSpacing = () => !this.isInStyleModal() && isValidValue(this.props.textLineType) && "PLAIN" !== this.props.textLineType;
     this.onChangeListSpacing = (e, t) => {
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         listSpacing: e
       }, {
         shouldCommit: t
@@ -3021,7 +3021,7 @@ class iS extends PureComponent {
     this.renderAdvancedTypePicker = e => {
       let t = this.shownSettings();
       if (!t) return null;
-      let i = !_W(this.props.leadingTrimEnabled, !1);
+      let i = !valueOrFallback(this.props.leadingTrimEnabled, !1);
       let n = LM({
         fontFamily: this.props.fontFamily,
         fontStyle: this.props.fontStyle,
@@ -3171,8 +3171,8 @@ class iS extends PureComponent {
               key: "textPathStart",
               value: "[flip]"
             });
-            l7.user("flip-text-path-orientation", () => {
-              gdE?.flipTextPathStartForSelection();
+            permissionScopeHandler.user("flip-text-path-orientation", () => {
+              TextPathStartHelpers?.flipTextPathStartForSelection();
             });
           },
           children: jsx(m, {})
@@ -3180,7 +3180,7 @@ class iS extends PureComponent {
       })
     });
     this.addProperty = e => {
-      l7.user("add-text-property", () => glU.clobberSelectedTextStyles());
+      permissionScopeHandler.user("add-text-property", () => Fullscreen.clobberSelectedTextStyles());
     };
     this.dismissFontAgentPrompt = () => {
       this.setState({
@@ -3203,7 +3203,7 @@ class iS extends PureComponent {
     };
     this.getStylePanelProps = () => {
       let e = this.getHasMixedProperties();
-      let t = _W(this.props.missingFont, !0);
+      let t = valueOrFallback(this.props.missingFont, !0);
       return yT({
         ...this.props,
         styleType: "TEXT",
@@ -3212,21 +3212,21 @@ class iS extends PureComponent {
         hasMissingFont: t
       });
     };
-    this.getIsStyleConsumer = () => this.props.inheritStyleKey === oV || !!bi({
+    this.getIsStyleConsumer = () => this.props.inheritStyleKey === MIXED_MARKER || !!bi({
       library: this.props.library,
       inheritStyleKey: this.props.inheritStyleKey,
       inheritStyleID: this.props.inheritStyleID
     });
     this.getHasMixedPropertiesInner = (e = !1, t = !1) => {
-      let i = hS(this.props.fontVariantCaps) && hS(this.props.fontVariantDiscretionaryLigatures) && hS(this.props.fontVariantHistoricalLigatures) && hS(this.props.fontVariantNumericFigure) && hS(this.props.fontVariantNumericFraction) && hS(this.props.fontVariantNumericSpacing);
-      let n = hS(this.props.fontFamily) && (e || hS(this.props.fontStyle)) && (t || hS(this.props.fontSize)) && (t || hS(this.props.lineHeight)) && (t || hS(this.props.letterSpacing)) && hS(this.props.paragraphIndent) && (t || hS(this.props.paragraphSpacing)) && hS(this.props.listSpacing);
+      let i = isValidValue(this.props.fontVariantCaps) && isValidValue(this.props.fontVariantDiscretionaryLigatures) && isValidValue(this.props.fontVariantHistoricalLigatures) && isValidValue(this.props.fontVariantNumericFigure) && isValidValue(this.props.fontVariantNumericFraction) && isValidValue(this.props.fontVariantNumericSpacing);
+      let n = isValidValue(this.props.fontFamily) && (e || isValidValue(this.props.fontStyle)) && (t || isValidValue(this.props.fontSize)) && (t || isValidValue(this.props.lineHeight)) && (t || isValidValue(this.props.letterSpacing)) && isValidValue(this.props.paragraphIndent) && (t || isValidValue(this.props.paragraphSpacing)) && isValidValue(this.props.listSpacing);
       return i && n;
     };
     this.getHasMixedProperties = () => {
       let e = this.props.areFontStylesUniformOrOnlyMixedDueToTextStyleOverrides && this.getIsStyleConsumer();
-      return !this.getHasMixedPropertiesInner(e, this.props.validMixedPropertiesForResponsiveTextStyle && hS(this.props.validMixedPropertiesForResponsiveTextStyle));
+      return !this.getHasMixedPropertiesInner(e, this.props.validMixedPropertiesForResponsiveTextStyle && isValidValue(this.props.validMixedPropertiesForResponsiveTextStyle));
     };
-    this.getIsOnlyFontStyleMixed = () => gl(this.props.fontStyle) && this.getHasMixedPropertiesInner(!0);
+    this.getIsOnlyFontStyleMixed = () => isInvalidValue(this.props.fontStyle) && this.getHasMixedPropertiesInner(!0);
     this.state = {
       fontAgentUpdatePromptDismissed: !1,
       activeTab: "Basics"
@@ -3262,7 +3262,7 @@ class iS extends PureComponent {
     e.fonts !== this.props.fonts && this.updateVersionsForStyles(e);
   }
   hideTextStyleControl() {
-    return ((0 | this.props.enabledTypePanelControls) & 1 << mrc.TEXT_STYLE) == 0;
+    return ((0 | this.props.enabledTypePanelControls) & 1 << TextAlignmentOptions.TEXT_STYLE) == 0;
   }
   setActiveTab(e) {
     this.props.tabManager.setActiveTab(e);
@@ -3270,16 +3270,16 @@ class iS extends PureComponent {
   render() {
     let e = this.getHasMixedProperties();
     let t = this.getStylePanelProps();
-    let i = !!Y5?.isFontListLoaded();
-    let n = _W(this.props.missingFont, !1);
+    let i = !!fullscreenValue?.isFontListLoaded();
+    let n = valueOrFallback(this.props.missingFont, !1);
     let a = oz() && getFeatureFlags().sites_responsive_text_styles;
     let s = mw(this.props.sceneGraphSelection, this.props.library);
     let o = a && s && _$$c(this.props.sceneGraphSelection);
-    let l = a && !s && _$$c(this.props.sceneGraphSelection) && this.getHasMixedPropertiesInner(!1, this.props.validMixedPropertiesForResponsiveTextStyle && hS(this.props.validMixedPropertiesForResponsiveTextStyle));
-    let d = !o && (this.props.inheritStyleKey === oV || this.hasMixedStyles() || this.getIsStyleConsumer() && e);
+    let l = a && !s && _$$c(this.props.sceneGraphSelection) && this.getHasMixedPropertiesInner(!1, this.props.validMixedPropertiesForResponsiveTextStyle && isValidValue(this.props.validMixedPropertiesForResponsiveTextStyle));
+    let d = !o && (this.props.inheritStyleKey === MIXED_MARKER || this.hasMixedStyles() || this.getIsStyleConsumer() && e);
     let u = this.showFontAgentCTA && 14 > (this.props.localFontAgentVersion || 0) && !(this.state && this.state.fontAgentUpdatePromptDismissed);
     let p = "ui3" === this.props.version;
-    let m = gl(this.props.textDecoration) || gl(this.props.leadingTrim) || gl(this.props.hangingList) || gl(this.props.hangingPunctuation) || gl(this.props.textCase) || gl(this.props.fontVariantPosition);
+    let m = isInvalidValue(this.props.textDecoration) || isInvalidValue(this.props.leadingTrim) || isInvalidValue(this.props.hangingList) || isInvalidValue(this.props.hangingPunctuation) || isInvalidValue(this.props.textCase) || isInvalidValue(this.props.fontVariantPosition);
     if (!dd(this.props.selectedStyleProperties) || !this.isInStyleModal()) {
       let [a, ...s] = this.renderIconButtons({
         isEditingStyle: !1
@@ -3305,7 +3305,7 @@ class iS extends PureComponent {
                 recordingKey: this.props.recordingKey,
                 removeAllProperties: null,
                 rightButton: this.props.mainStyle ? s[0] : null,
-                selectedPropertyType: rrT.NONE,
+                selectedPropertyType: NodePropertyCategory.NONE,
                 stylePickerListLayout: !0,
                 stylesButtonDataTag: "text-styles",
                 title: "ui3" === this.props.version ? getI18nString("fullscreen.type_panel.typography") : getI18nString("fullscreen.type_panel.text"),
@@ -3390,7 +3390,7 @@ class iS extends PureComponent {
         })
       });
     }
-    let g = dI(this.props.selectedStyleGuid);
+    let g = sessionLocalIDToString(this.props.selectedStyleGuid);
     let _ = !!(g && this.props.library.local.styles[g]) && this.context === zM.EDIT_STYLE;
     let b = this.context === zM.CREATE_STYLE;
     let v = this.renderIconButtons({
@@ -3631,7 +3631,7 @@ function iw(e) {
         ref: e.fontStyleVariablePickerHandleRef,
         rowRef: e.stylePickerRowRef,
         elementRef: e.fontStyleInputRef,
-        currentFieldValue: hS(e.fontStyle) ? e.fontStyle : "",
+        currentFieldValue: isValidValue(e.fontStyle) ? e.fontStyle : "",
         isInStyleModal: e.editingStyle && e.isInStyleModal
       })
     }), !e.isSlides && jsx(fn, {
@@ -3663,7 +3663,7 @@ function iw(e) {
         ref: e.fontStyleVariablePickerHandleRef,
         rowRef: e.stylePickerRowRef,
         elementRef: e.fontStyleInputRef,
-        currentFieldValue: hS(e.fontStyle) ? e.fontStyle : "",
+        currentFieldValue: isValidValue(e.fontStyle) ? e.fontStyle : "",
         isInStyleModal: e.editingStyle && e.isInStyleModal
       })
     }), !e.isSlides && jsxs(Fragment, {

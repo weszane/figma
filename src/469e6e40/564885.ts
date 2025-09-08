@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
@@ -21,7 +21,7 @@ import { E as _$$E } from "../figma_app/126651";
 import { Ib } from "../905/129884";
 import { J as _$$J } from "../905/298764";
 import { $ } from "../905/834575";
-export let $$E0 = Ju(function (e) {
+export let $$E0 = registerModal(function (e) {
   let t = hS(e);
   let a = useDispatch();
   let [r, u] = useState({});

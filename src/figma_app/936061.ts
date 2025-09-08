@@ -1,7 +1,7 @@
 import { useMemo, useRef, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { Fullscreen } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { dA } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -12,7 +12,7 @@ import { Point } from "../905/736624";
 import { hY } from "../figma_app/770088";
 import { y as _$$y } from "../figma_app/705249";
 import { j, N as _$$N } from "../figma_app/261650";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { B_, mo, PN, $r } from "../figma_app/141088";
 import { eY } from "../figma_app/722362";
 import { s as _$$s } from "../905/518538";
@@ -138,21 +138,21 @@ export function $$R1(e, t) {
     o.current[nodeId] = e;
   }, [r, o, l]);
   useEffect(() => {
-    if (t.enabled && glU && d) {
+    if (t.enabled && Fullscreen && d) {
       let {
         currentNodePosition
       } = EE(O, s, c);
       o.current = currentNodePosition;
     }
     return () => {
-      glU && d && lB(O);
+      Fullscreen && d && lB(O);
     };
   }, [s, c, t.enabled, d]);
 }
 export function $$L0() {
   let [e, t] = useState(new Date());
   useEffect(() => {
-    if (Y5) {
+    if (fullscreenValue) {
       if (C) return () => {
         lB("comments");
       };
@@ -168,15 +168,15 @@ export function $$L0() {
     }
   }, [t]);
   let r = useCallback(e => {
-    Y5?.isReady() && (C ? EE("comments", e, e => {
+    fullscreenValue?.isReady() && (C ? EE("comments", e, e => {
       t(new Date());
     }) : PN(new Set(e)));
   }, []);
   let i = useCallback(e => {
-    Y5?.isReady() && $r(new Set(e));
+    fullscreenValue?.isReady() && $r(new Set(e));
   }, []);
   return {
-    anchorPositions: useCallback(xx(t => Y5?.isReady() && e ? glU.getCanvasSpaceCommentLocations(t) : {}), [e]),
+    anchorPositions: useCallback(xx(t => fullscreenValue?.isReady() && e ? Fullscreen.getCanvasSpaceCommentLocations(t) : {}), [e]),
     boundingBoxPositions: useCallback(xx((t, r, n) => {
       if (!_$$y() || !r || !e) return {};
       let i = {};
@@ -266,7 +266,7 @@ export function $$M2(e) {
       if (0 === e.comments.length || !(t = e.comments[0].client_meta?.node_id)) return !0;
       let i = getSingletonSceneGraph().get(t);
       if (!i) return !0;
-      return i.containingSlideId === AD;
+      return i.containingSlideId === defaultSessionLocalIDString;
     default:
       return !1;
   }

@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -68,7 +68,7 @@ export function $$_2() {
 export function $$A5() {
   return selectWithShallowEqual(e => {
     let t = s5(e.selectedView);
-    if (t && t !== AD) {
+    if (t && t !== defaultSessionLocalIDString) {
       let i = e.mirror?.sceneGraph.get(t);
       return {
         id: t,

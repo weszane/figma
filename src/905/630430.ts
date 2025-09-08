@@ -1,11 +1,11 @@
 import { useState, useCallback, useLayoutEffect, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { tKW } from "../figma_app/763686";
+import { MeasurementUnit } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { v4, AC, Pt } from "../figma_app/655139";
-import { S8, uz } from "../905/359509";
+import { SupportedPlatforms, WEB } from "../905/359509";
 import { ZA, zq } from "../905/515076";
 import { $h, OQ } from "../905/191741";
 import { Z } from "../905/820720";
@@ -26,7 +26,7 @@ export function $$g0() {
     });
   }, []);
   useLayoutEffect(() => {
-    "first-party" !== f.type && (_(S8[uz]), "properties" !== t && i("properties"));
+    "first-party" !== f.type && (_(SupportedPlatforms[WEB]), "properties" !== t && i("properties"));
   }, [f, t]);
   let v = useSelector(e => e.mirror.appModel.devHandoffPreferences);
   let [I, E] = useState({
@@ -37,12 +37,12 @@ export function $$g0() {
   let w = useMemo(() => {
     let e = [];
     if (!y) return e;
-    let t = S?.unit || tKW.PIXEL;
+    let t = S?.unit || MeasurementUnit.PIXEL;
     e.push({
       displayText: getI18nString("dev_handoff.alternative_units.dimension_unit"),
       header: !0
     }, ...zq.map(e => {
-      let i = e === tKW.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : x;
+      let i = e === MeasurementUnit.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : x;
       return {
         name: e.toString(),
         displayText: i,
@@ -59,7 +59,7 @@ export function $$g0() {
             }
           });
         },
-        recordingKey: e === tKW.PIXEL ? "pixel" : "scaled"
+        recordingKey: e === MeasurementUnit.PIXEL ? "pixel" : "scaled"
       };
     }));
     return e;

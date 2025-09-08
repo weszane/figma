@@ -1,25 +1,25 @@
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { glU, m1T } from "../figma_app/763686";
+import { Fullscreen, LayoutTabType } from "../figma_app/763686";
 import { m0 } from "../figma_app/546509";
 export function $$o0() {
   let e = m0();
   let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
     e && (e._keyboard_will_show_with_height = e => {
-      glU.keyboardWillShowWithHeight(e);
+      Fullscreen.keyboardWillShowWithHeight(e);
     }, e._keyboard_will_hide = () => {
-      t === m1T.TEXT && glU.setDefaultEditMode();
+      t === LayoutTabType.TEXT && Fullscreen.setDefaultEditMode();
     }, window.FigmaAppObj ? (window.FigmaAppObj.keyboardWillShow = () => {
-      glU.keyboardWillShow();
+      Fullscreen.keyboardWillShow();
     }, window.FigmaAppObj.keyboardWillShowWithHeight = e => {
-      glU.keyboardWillShowWithHeight(e);
+      Fullscreen.keyboardWillShowWithHeight(e);
     }) : window.FigmaAppObj = {
       keyboardWillShow: () => {
-        glU.keyboardWillShow();
+        Fullscreen.keyboardWillShow();
       },
       keyboardWillShowWithHeight: e => {
-        glU.keyboardWillShowWithHeight(e);
+        Fullscreen.keyboardWillShowWithHeight(e);
       }
     });
   }, [e, t]);

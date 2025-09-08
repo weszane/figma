@@ -3,8 +3,8 @@ import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { UD, KQ, LV } from "../figma_app/360163";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J, h as _$$h } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { $n } from "../905/521428";
 import { d as _$$d } from "../905/976845";
@@ -18,7 +18,7 @@ import { MM, wv } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { uQ } from "../figma_app/311375";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { BK } from "../905/848862";
 import { R$ } from "../figma_app/545190";
 import { Jz } from "../905/504727";
@@ -104,7 +104,7 @@ export function $$A0({
   let en = useCallback(async () => {
     if (!t || !Q) return;
     let e = getSingletonSceneGraph().get(Q);
-    e && (await er(e), Y5.triggerAction("commit"));
+    e && (await er(e), fullscreenValue.triggerAction("commit"));
   }, [t, Q, er]);
   async function ei(e) {
     if (!ee) return;
@@ -161,20 +161,20 @@ export function $$A0({
       })]
     }), jsxs("div", {
       className: _$$s.px16.$,
-      children: [jsx(_$$S, {
+      children: [jsx(Checkbox, {
         checked: t,
         onChange: e => s(e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Enabled"
         })
       }), t && jsxs(Fragment, {
-        children: [X && jsx(_$$J, {
+        children: [X && jsx(Label, {
           className: "x172n1ly",
           children: X
         }), jsxs(R$, {
           row: jsx("span", {
             className: _$$s.flex.wFull.py8.$,
-            children: jsx(_$$J, {
+            children: jsx(Label, {
               className: _$$s.fontMedium.$,
               children: "Additional settings"
             })
@@ -182,7 +182,7 @@ export function $$A0({
           isCollapsedByDefault: !0,
           isChevronAlwaysVisible: !0,
           recordingKey: Pt(e, "additionalSettingsCollapsibleRow"),
-          children: [jsx(_$$J, {
+          children: [jsx(Label, {
             children: "JSX Flavor"
           }), jsx(DE, {
             label: null,
@@ -190,7 +190,7 @@ export function $$A0({
               value: G,
               onChange: e => H(e),
               children: [jsx(l9, {
-                label: jsx(_$$h, {
+                label: jsx(HiddenLabel, {
                   children: " "
                 })
               }), jsxs(mc, {
@@ -204,7 +204,7 @@ export function $$A0({
               })]
             }),
             icon: null
-          }), jsx(_$$J, {
+          }), jsx(Label, {
             children: "Focus node guid and max nodes"
           }), jsx(fn, {
             leftLabel: null,
@@ -219,7 +219,7 @@ export function $$A0({
               placeholder: "Max nodes"
             }),
             icon: null
-          }), jsx(_$$J, {
+          }), jsx(Label, {
             children: "Original size"
           }), jsx(fn, {
             leftLabel: null,
@@ -261,10 +261,10 @@ export function $$A0({
           children: [jsx($n, {
             onClick: () => ei(p),
             children: Q ? "Update node" : "Create node"
-          }), jsx(_$$S, {
+          }), jsx(Checkbox, {
             checked: B,
             onChange: e => K(e),
-            label: jsx(_$$J, {
+            label: jsx(Label, {
               children: "Live Update"
             })
           })]

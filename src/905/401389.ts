@@ -11,9 +11,9 @@ import { e as _$$e } from "../905/149844";
 import { J as _$$J } from "../905/125993";
 import { l as _$$l } from "../905/103989";
 import { f as _$$f2 } from "../905/640587";
-import { rrT, VD3, e0R, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { AD, dI } from "../905/871411";
+import { NodePropertyCategory, StyleVariableOperation, CopyPasteType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { defaultSessionLocalIDString, sessionLocalIDToString } from "../905/871411";
 import { useMemoizedAtomValue } from "../figma_app/27355";
 import v from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
@@ -21,9 +21,9 @@ import { Pt, rf, uA, _3 } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, Uv, bS } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4, yH, l7 as _$$l2 } from "../figma_app/540726";
-import { _W, hS, gl, E7, oV } from "../905/216495";
+import { valueOrFallback, isValidValue, isInvalidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
 import { zy } from "../figma_app/915202";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -70,13 +70,13 @@ function $(e) {
     getSelectedIndicesAsSet
   } = e.selection;
   let u = useCallback(() => {
-    let e = _W(propertyList, []);
+    let e = valueOrFallback(propertyList, []);
     let n = onDeleteProperty;
     n || (n = t => onChange(e.filter((e, i) => !t.has(i))));
     getSelectedIndices().length ? (n(getSelectedIndicesAsSet()), setSelectedIndices([])) : (n(new Set([e.length - 1])), onChange(e.slice(0, e.length - 1)));
   }, [getSelectedIndicesAsSet, getSelectedIndices, propertyList, onDeleteProperty, setSelectedIndices, onChange]);
   let p = q();
-  let m = Number(hS(propertyList) && _W(propertyList, []).length);
+  let m = Number(isValidValue(propertyList) && valueOrFallback(propertyList, []).length);
   return jsx(_$$K, {
     recordingKey: Pt(e, "removeButton"),
     disabled: 0 === m,
@@ -184,7 +184,7 @@ export function $$et1(e) {
   let {
     propertyList
   } = e.selection;
-  let i = hS(propertyList) && 0 === _W(propertyList, []).length;
+  let i = isValidValue(propertyList) && 0 === valueOrFallback(propertyList, []).length;
   return jsxs("div", {
     className: U1,
     children: [e.children, jsxs("div", {
@@ -232,13 +232,13 @@ let ei = (e, t, i) => {
       propertyList: t,
       currentSelectedProperty: i
     };
-    let a = _W(r.propertyList, []);
+    let a = valueOrFallback(r.propertyList, []);
     return r.selectedPropertyType === r.currentSelectedProperty?.type ? r.currentSelectedProperty.indices.filter(e => e >= 0 && e < a.length) : [];
   }, [i, e, t]);
   let o = useCallback(() => new Set(n()), [n]);
   let l = useDispatch();
   let d = useCallback(t => {
-    arraysEqual(t, n()) || (0 === t.length ? Y5.deselectProperty() : Y5.updateAppModel({
+    arraysEqual(t, n()) || (0 === t.length ? fullscreenValue.deselectProperty() : fullscreenValue.updateAppModel({
       currentSelectedProperty: {
         type: e,
         indices: t
@@ -266,14 +266,14 @@ function en(e) {
   } = e;
   let l = useCallback(e => {
     onHeaderClick && onHeaderClick(e);
-    headerClickTriggersAddProperty && hS(propertyList) && 0 === _W(propertyList, []).length && !hideAddButton && addProperty(e);
+    headerClickTriggersAddProperty && isValidValue(propertyList) && 0 === valueOrFallback(propertyList, []).length && !hideAddButton && addProperty(e);
   }, [addProperty, propertyList, hideAddButton, onHeaderClick, headerClickTriggersAddProperty]);
   let d = rf(Pt(e, "panelTitle"), "click", l);
   let c = useRef(null);
   let u = useMemoizedAtomValue(!1, e.isPanelBodyCollapsedAtom);
   if (!e.title) return null;
-  let p = 0 === Number(_W(propertyList, []).length);
-  let m = !(e.isMixed || gl(propertyList)) && !e.boldHeaderRow && (p || u);
+  let p = 0 === Number(valueOrFallback(propertyList, []).length);
+  let m = !(e.isMixed || isInvalidValue(propertyList)) && !e.boldHeaderRow && (p || u);
   let h = !e.isPanelBodyCollapsedAtom || u && !p;
   return jsx(fI, {
     ref: c,
@@ -340,25 +340,25 @@ class er extends uA {
     });
     this.clipboardDataType = () => {
       switch (this.props.selectedPropertyType) {
-        case rrT.FILL:
+        case NodePropertyCategory.FILL:
           return "fillPaints";
-        case rrT.STROKE:
-        case rrT.STROKE_PRESET:
+        case NodePropertyCategory.STROKE:
+        case NodePropertyCategory.STROKE_PRESET:
           return "strokePaints";
-        case rrT.EXPORT:
+        case NodePropertyCategory.EXPORT:
           return "exportSettings";
-        case rrT.LAYOUT_GRID:
+        case NodePropertyCategory.LAYOUT_GRID:
           return "layoutGrids";
-        case rrT.EFFECT:
+        case NodePropertyCategory.EFFECT:
           return "effects";
-        case rrT.PROTOTYPE_INTERACTION:
+        case NodePropertyCategory.PROTOTYPE_INTERACTION:
           return "prototypeInteractions";
-        case rrT.PROTOTYPE_INHERITED_INTERNAL_INTERACTION:
+        case NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION:
           return null;
-        case rrT.TRANSFORM_MODIFIER:
+        case NodePropertyCategory.TRANSFORM_MODIFIER:
           return "transformModifiers";
         default:
-          throw Error(`Unexpected: ${rrT[this.props.selectedPropertyType]}`);
+          throw Error(`Unexpected: ${NodePropertyCategory[this.props.selectedPropertyType]}`);
       }
     };
     this.liftInteractionsFromInteractionGroups = e => {
@@ -380,7 +380,7 @@ class er extends uA {
         case zy.COPY:
         case zy.CUT:
           if (r.length) {
-            let a = E7(this.props.propertyList);
+            let a = normalizeValue(this.props.propertyList);
             let s = a ? r.map(e => a[e]) : [];
             "prototypeInteractions" === i && (s = this.liftInteractionsFromInteractionGroups(s));
             let o = fG(this.props.openFile?.key || null, {
@@ -403,7 +403,7 @@ class er extends uA {
               let s = a.pasteFileKey && a.pasteFileKey !== this.props.openFile?.key;
               if (("fillPaints" === i || "strokePaints" === i) && s && (n = n.map(e => _$$$(e))), n && n.length) {
                 let t = r[r.length - 1];
-                let i = _W(this.props.propertyList, []);
+                let i = valueOrFallback(this.props.propertyList, []);
                 i = i.slice(0, t + 1).concat(n).concat(i.slice(t + 1));
                 this.props.onChange(i);
                 let a = n.map((e, i) => t + i + 1);
@@ -415,18 +415,18 @@ class er extends uA {
       }
     };
     this.onPropertyChange = (e, t, i) => {
-      let n = _W(this.props.propertyList, []).slice(0);
+      let n = valueOrFallback(this.props.propertyList, []).slice(0);
       n[e] = t;
       this.props.onChange(n, i);
     };
     this.removeProperty = () => {
-      let e = _W(this.props.propertyList, []);
+      let e = valueOrFallback(this.props.propertyList, []);
       let t = this.props.onDeleteProperty;
       t || (t = t => this.props.onChange(e.filter((e, i) => !t.has(i))));
       this.props.selectionHandler.getSelectedIndices().length && (t(this.props.selectionHandler.getSelectedIndicesAsSet()), this.props.selectionHandler.setSelectedIndices([]));
     };
     this.duplicateProperty = () => {
-      let e = _W(this.props.propertyList, []).slice();
+      let e = valueOrFallback(this.props.propertyList, []).slice();
       if (this.props.selectionHandler.getSelectedIndices().length) {
         let t = this.props.selectionHandler.getSelectedIndices().map(t => e[t]);
         for (let i of t) {
@@ -459,8 +459,8 @@ class er extends uA {
     return i;
   }
   render() {
-    let e = _W(this.props.propertyList, []);
-    let t = this.props.propertyList === oV || this.props.isMixed;
+    let e = valueOrFallback(this.props.propertyList, []);
+    let t = this.props.propertyList === MIXED_MARKER || this.props.isMixed;
     let i = this.props.renderHeader;
     let r = this.props.headerClickTriggersAddProperty ?? !0;
     return jsxs(vL, {
@@ -502,7 +502,7 @@ class er extends uA {
         children: [t && jsx(fI, {
           children: jsx(nV, {
             className: Pf,
-            children: this.props.selectedPropertyType === rrT.EXPORT ? renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_export_settings") : renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
+            children: this.props.selectedPropertyType === NodePropertyCategory.EXPORT ? renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_export_settings") : renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
           })
         }), !t && e.length > 0 && jsx(_$$q, {
           listItems: e,
@@ -545,9 +545,9 @@ export class $$es2 extends uA {
       this.props.dispatch(Uv());
     };
     this.removeAllProperties = () => {
-      A8(this.props.inheritStyleKey) && l7.user("remove-all-properties", () => {
-        _$$f3(VD3.IGNORE, e0R.UNKNOWN, () => {
-          glU?.applyStyleToSelection(this.props.inheritStyleKeyField, AD, !1);
+      A8(this.props.inheritStyleKey) && permissionScopeHandler.user("remove-all-properties", () => {
+        _$$f3(StyleVariableOperation.IGNORE, CopyPasteType.UNKNOWN, () => {
+          Fullscreen?.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !1);
         });
       });
       this.props.onChange([], zk.YES);
@@ -589,8 +589,8 @@ export class $$es2 extends uA {
     return this.context === zM.CREATE_VARIABLE_STYLE;
   }
   render() {
-    let e = this.props.propertyList === oV || this.props.inheritStyleKey === oV;
-    let t = !e && 0 === _W(this.props.propertyList, []).length && !E7(this.props.inheritStyleKey);
+    let e = this.props.propertyList === MIXED_MARKER || this.props.inheritStyleKey === MIXED_MARKER;
+    let t = !e && 0 === valueOrFallback(this.props.propertyList, []).length && !normalizeValue(this.props.inheritStyleKey);
     if (e) {
       let e = zb(this.props);
       return jsxs("div", {
@@ -620,7 +620,7 @@ export class $$es2 extends uA {
       });
     }
     if (this.isInStyleModal()) {
-      let e = dI(this.props.selectedStyleGuid);
+      let e = sessionLocalIDToString(this.props.selectedStyleGuid);
       let t = !!(e && this.props.library.local.styles[e]);
       return jsx("div", {
         className: t || this.isInCreateStyleModal() || this.isInCreateVariableStyleModal() ? wx : Qf,

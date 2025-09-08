@@ -6,7 +6,7 @@ import { zj, Sk } from "../figma_app/448654";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { tT } from "../905/723791";
 import { reportError } from "../905/11";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { hT, YM } from "../905/561087";
 import { nb } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
@@ -16,17 +16,17 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { R as _$$R } from "../905/441305";
 import { renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { $y } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { s as _$$s } from "../cssbuilder/589278";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { vv } from "../figma_app/435872";
 import { an } from "../905/81009";
 import { VK, YK } from "../905/880488";
-let I = Ju(function (e) {
+let I = registerModal(function (e) {
   let {
     numFiles,
     firstFileName,
@@ -195,7 +195,7 @@ function k({
     })]
   });
 }
-let R = Ju(function ({
+let R = registerModal(function ({
   numFiles: e,
   firstFileName: t,
   showUnsyncedFileWarning: i,
@@ -236,7 +236,7 @@ let R = Ju(function ({
     })
   });
   let S = () => {
-    h(Ce());
+    h(hideModal());
   };
   return jsx(_$$R, {
     width: "md",
@@ -309,7 +309,7 @@ export function $$F0(e, t, i) {
     allDrafts: _.length + A.length === y
   };
 }
-let $$M2 = nF(async (e, t, {
+let $$M2 = createOptimistThunk(async (e, t, {
   liveStore: i
 }) => {
   let s = Object.keys(t.filesByKey).length;
@@ -361,7 +361,7 @@ let $$M2 = nF(async (e, t, {
     t.offlineFilesByKey && d > 0 && e.dispatch(vv(t.offlineFilesByKey));
     e.dispatch(an());
   };
-  m === d ? e.dispatch(to({
+  m === d ? e.dispatch(showModalHandler({
     type: I,
     data: {
       numFiles: m,
@@ -369,7 +369,7 @@ let $$M2 = nF(async (e, t, {
       showUnsyncedFileWarning: y,
       onConfirm: v
     }
-  })) : e.dispatch(to({
+  })) : e.dispatch(showModalHandler({
     type: R,
     data: {
       numFiles: m,
@@ -383,10 +383,10 @@ let $$M2 = nF(async (e, t, {
     }
   }));
 });
-let $$j1 = nF((e, t) => {
+let $$j1 = createOptimistThunk((e, t) => {
   e.dispatch(YK(t));
 });
-let $$U3 = nF(async ({
+let $$U3 = createOptimistThunk(async ({
   getState: e,
   dispatch: t
 }, i) => {
@@ -409,7 +409,7 @@ let $$U3 = nF(async ({
   }
   o || reportError(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteSelectedFilesForever"));
   let l = fileKeys.reduce((e, t) => (e[t] = !0, e), {});
-  t(to({
+  t(showModalHandler({
     type: I,
     data: {
       numFiles: s,

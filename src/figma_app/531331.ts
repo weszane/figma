@@ -7,11 +7,11 @@ import { getI18nString } from "../905/303541";
 import { c$ } from "../figma_app/618433";
 import { oB } from "../905/929976";
 import { YW } from "../figma_app/78808";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Kz } from "../905/760074";
 import { F as _$$F } from "../905/224";
 import { hr } from "../905/352022";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { xp } from "../905/87821";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
@@ -19,7 +19,7 @@ import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { iY3, oGE } from "../figma_app/43951";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { F9 } from "../figma_app/803787";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { vL, Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
@@ -120,17 +120,17 @@ export function $$k1() {
       t(oB());
       let n = xp(e, e.project, r);
       if (n) {
-        e?.editorType === FFileType.SITES && _$$M ? t(to({
+        e?.editorType === FFileType.SITES && _$$M ? t(showModalHandler({
           type: _$$M,
           data: {
             team: n
           }
-        })) : e?.editorType === FFileType.FIGMAKE && _$$W() ? t(to({
+        })) : e?.editorType === FFileType.FIGMAKE && _$$W() ? t(showModalHandler({
           type: _$$i,
           data: {
             team: n
           }
-        })) : t(to({
+        })) : t(showModalHandler({
           type: DV,
           data: {
             team: n,
@@ -139,13 +139,13 @@ export function $$k1() {
             editorType: e?.editorType || FFileType.DESIGN,
             currentPlan: _$$F.Plan.STARTER,
             upsellPlan: _$$F.Plan.PRO,
-            upsellSource: _$$b.CREATE_NEW_FILE
+            upsellSource: UpsellModalType.CREATE_NEW_FILE
           }
         }));
         return;
       }
       let i = (t, r) => {
-        Y5.dispatchIfSaved(YW({
+        fullscreenValue.dispatchIfSaved(YW({
           file: e,
           folderId: t,
           checkOssSalesExperiment: y,
@@ -153,7 +153,7 @@ export function $$k1() {
           source: r
         }));
       };
-      Q || !getFeatureFlags().dtm_deprecation_plan_picker_for_files ? i(void 0, "context_menu") : ee && t(to({
+      Q || !getFeatureFlags().dtm_deprecation_plan_picker_for_files ? i(void 0, "context_menu") : ee && t(showModalHandler({
         type: _$$h,
         data: {
           payload: {

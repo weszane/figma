@@ -5,7 +5,7 @@ import { N_ } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { PF } from "../figma_app/78808";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { Ro } from "../figma_app/805373";
 import { Cr } from "../figma_app/221114";
 import { OJ } from "../905/519092";
@@ -70,7 +70,7 @@ export function $$g0(e) {
       fileKey: e.fig.key,
       versionId: r
     });
-    t(Ce());
+    t(hideModal());
     t(PF({
       fileKey: e.fig.key,
       versionId: r
@@ -81,7 +81,7 @@ export function $$g0(e) {
     title: getI18nString("file_restore_from_version_modal.restore_from_version_history"),
     maxWidth: 396,
     onClose: () => {
-      t(Lo());
+      t(popModalStack());
     },
     children: jsx("div", {
       className: "file_restore_from_version_modal--fileRestorePanel--pMNT2",

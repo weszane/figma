@@ -6,7 +6,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
 import { U as _$$U } from "../905/708285";
-import { Ez5, nQ7 } from "../figma_app/763686";
+import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
@@ -25,18 +25,18 @@ import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { XE, Uv, u1 } from "../figma_app/91703";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { J6 } from "../figma_app/8833";
 import { XE as _$$XE } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { O as _$$O } from "../905/291654";
 import { Kk } from "../905/777093";
 import { Cy } from "../905/571439";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { f as _$$f } from "../905/940356";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Lh, D8 as _$$D } from "../figma_app/242339";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
@@ -119,8 +119,8 @@ export function $$em2({
   let eg = useDispatch();
   let ef = Xo();
   let eE = Um();
-  let ey = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let eb = sO() && ey === nQ7.SELF;
+  let ey = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
+  let eb = sO() && ey === SelfDesignType.SELF;
   let eT = to();
   let eI = useSelector(e => e.selectedView);
   let eS = _$$XE(eI);
@@ -160,7 +160,7 @@ export function $$em2({
   };
   let eM = useCallback(() => {
     !K4() || Kk() || eA || el || (el = !0, P6().catch(() => {
-      eg(_$$to({
+      eg(showModalHandler({
         type: _$$x
       }));
     }));
@@ -189,8 +189,8 @@ export function $$em2({
     eD();
   }, [K, ea, e, eD]);
   let eB = [];
-  let eG = E7(e);
-  let eV = Y5?.isFontListLoaded() && isNotNullish(eG) && (_$$O(eG, K, ev, eS) || !K[eG] || 0 === Object.keys(K[eG] ?? {}).length);
+  let eG = normalizeValue(e);
+  let eV = fullscreenValue?.isFontListLoaded() && isNotNullish(eG) && (_$$O(eG, K, ev, eS) || !K[eG] || 0 === Object.keys(K[eG] ?? {}).length);
   for (let e of (!eG || eG in ea || (eB.push(jsx(ec, {
     value: eG,
     disabled: !0,

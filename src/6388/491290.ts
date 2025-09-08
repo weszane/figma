@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Yr } from "../figma_app/8833";
 import { z5 } from "../905/713722";
-import { E7, gl, oV, hS } from "../905/216495";
+import { normalizeValue, isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { Zr } from "../figma_app/678782";
 import { kl, lJ } from "../905/275640";
 import { cn } from "../905/959568";
@@ -49,7 +49,7 @@ export function $$C0({
     ignore: [h, p]
   });
   let f = kl("imageOverlayPaint");
-  let y = E7(f ?? null) || T;
+  let y = normalizeValue(f ?? null) || T;
   return jsxs(Fragment, {
     children: [jsx(_$$E, {
       name: "slides_overlay_input",
@@ -97,7 +97,7 @@ function N({
     onOpacityChange,
     onPaintChange
   } = $$w1();
-  let h = gl(overlayPaint) || overlayPaint && canAddOverlay;
+  let h = isInvalidValue(overlayPaint) || overlayPaint && canAddOverlay;
   return jsxs(k, {
     name: "slides_overlay_controls",
     children: [jsx(K, {
@@ -109,7 +109,7 @@ function N({
         name: "slides_image_overlay_opacity_slider",
         children: jsx(Y, {
           "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),
-          value: h ? oV : overlayPaint?.opacity || 0,
+          value: h ? MIXED_MARKER : overlayPaint?.opacity || 0,
           onValueChange: onOpacityChange,
           dispatch: t
         })
@@ -118,11 +118,11 @@ function N({
       recordingKey: Pt(e, "opacity"),
       sliderTrackableName: "slides_image_overlay_opacity_slider",
       step: .01,
-      value: h ? oV : overlayPaint?.opacity || 0
+      value: h ? MIXED_MARKER : overlayPaint?.opacity || 0
     }), jsx("div", {
       className: _$$s.pt8.pb4.pr8.pl16.$,
       children: jsx(_$$u, {
-        paint: h ? oV : overlayPaint || T,
+        paint: h ? MIXED_MARKER : overlayPaint || T,
         onChange: onPaintChange,
         pickerId: I,
         inheritStyleKeyField: "inheritFillStyleKey",
@@ -142,7 +142,7 @@ export function $$w1() {
     canAddOverlay: e,
     overlayPaint: t,
     onOpacityChange: e => {
-      debug(hS(t), "overlay paint should not be mixed");
+      debug(isValidValue(t), "overlay paint should not be mixed");
       var o = {
         ...(t || T)
       };
@@ -150,7 +150,7 @@ export function $$w1() {
       l(o);
     },
     onPaintChange: e => {
-      debug(hS(t), "overlay paint should not be mixed");
+      debug(isValidValue(t), "overlay paint should not be mixed");
       var o = {
         ...e
       };

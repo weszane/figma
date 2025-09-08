@@ -2,10 +2,10 @@ import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { PK } from "../figma_app/243058";
 import { n3 } from "../905/859698";
-import { Pt4 } from "../figma_app/763686";
-import { fn, dI, sH } from "../905/871411";
+import { StylesBindings } from "../figma_app/763686";
+import { isValidSessionLocalID, sessionLocalIDToString, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
 import { bO, z5 } from "../figma_app/936646";
@@ -24,10 +24,10 @@ export function $$E3(e) {
   });
 }
 export function $$y5(e) {
-  return e && fn(e.guid);
+  return e && isValidSessionLocalID(e.guid);
 }
 export function $$b0(e) {
-  let t = E7(e);
+  let t = normalizeValue(e);
   return t && t !== n3.INVALID;
 }
 export function $$T4({
@@ -36,13 +36,13 @@ export function $$T4({
   inheritStyleID: r
 }) {
   if (!$$b0(t)) return null;
-  let n = E7(t);
+  let n = normalizeValue(t);
   if (!n) return null;
   let i = Object.values(e.local.styles).find(e => e.key === n);
   if (i && !i.is_soft_deleted) return i;
   let a = b({
     library: e
-  }, n, E7(r));
+  }, n, normalizeValue(r));
   return a?.status === "loaded" ? a.data : null;
 }
 export function $$I2(e, t, r) {
@@ -58,10 +58,10 @@ export function $$I2(e, t, r) {
       inheritStyleKey: r,
       inheritStyleID: n
     }) {
-      let i = E7(r);
-      let s = E7(n);
+      let i = normalizeValue(r);
+      let s = normalizeValue(n);
       if (!s || !i) return null;
-      let o = dI(s.guid);
+      let o = sessionLocalIDToString(s.guid);
       let d = Object.values(e.local.styles).find(e => e.node_id === o);
       if (d) return d.is_soft_deleted ? null : d;
       let u = PK.fromKiwi(s);
@@ -120,8 +120,8 @@ export function $$S7(e) {
 }
 export function $$v6(e) {
   if (!e) return;
-  let t = e => fn(sH(e)) ? e : void 0;
-  return t(Pt4.getStyleNodeId(e.key, e.version)) ?? t(Pt4.getSoftDeletedStyleNodeId(e.key, e.version));
+  let t = e => isValidSessionLocalID(parseSessionLocalID(e)) ? e : void 0;
+  return t(StylesBindings.getStyleNodeId(e.key, e.version)) ?? t(StylesBindings.getSoftDeletedStyleNodeId(e.key, e.version));
 }
 export const A8 = $$b0;
 export const OS = $$g1;

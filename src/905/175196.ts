@@ -13,7 +13,7 @@ import { logInfo } from "../905/714362";
 import { setupSentryIntegrations } from "../905/670985";
 import { XHRError } from "../905/910117";
 import { Rf } from "../figma_app/546509";
-import { h as _$$h } from "../905/551280";
+import { alertOnNumericIds } from "../905/551280";
 import { updateEnvironmentInfo } from "../905/883621";
 import { isAppShellEnabled } from "../905/561581";
 import { entrypointVariant } from "../905/709735";
@@ -22,7 +22,7 @@ import { fF, hi } from "../905/194389";
 import { Ay } from "../905/612521";
 import { getSentryConfig } from "../905/256712";
 import { BrowserInfo } from "../figma_app/778880";
-import { T as _$$T, C as _$$C } from "../905/912096";
+import { getUserPlan, setUserPlanTag } from "../905/912096";
 import { errorIgnorePatterns, urlIgnorePatterns, processBreadcrumb, normalizeSentryEventUrls, SeverityLevel, setUserId, setOrgIdTag, setServerReleaseTag, setSentryTag, startSentrySession, reportError } from "../905/11";
 void 0 === self.scheduler && (self.scheduler = new _$$_(), self.TaskController = i, self.TaskPriorityChangeEvent = _$$w);
 let k = new Map();
@@ -134,8 +134,8 @@ if (getSentryConfig().enabled) {
   setSentryTag("entrypoint_variant", entrypointVariant ?? "unknown");
   setSentryTag("entrypoint", window.ENTRY_POINT ?? "unknown");
   (function () {
-    let e = _$$T();
-    e && (_$$C(e), updateEnvironmentInfo({
+    let e = getUserPlan();
+    e && (setUserPlanTag(e), updateEnvironmentInfo({
       user_plan_max: e
     }));
     updateEnvironmentInfo({
@@ -164,7 +164,7 @@ bj({
   service: "figma-web",
   collectErrors: !0
 });
-_$$h(getInitialOptions(), {
+alertOnNumericIds(getInitialOptions(), {
   verb: "INITIAL_OPTIONS",
   pathname: Ay.location.pathname
 });

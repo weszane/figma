@@ -2,8 +2,8 @@ import { useMemo, useEffect } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { gr } from "../figma_app/243058";
 import { ey as _$$ey } from "../905/859698";
-import { CWU, w3z } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariablesBindings, HandoffBindingsCpp } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom, useAtomValueAndSetter, Pj } from "../figma_app/27355";
@@ -25,7 +25,7 @@ import { Gc, L9, Fx, XC, qy, jt, TD, uk, xA, bO, LC, ZG, Eo, JB, Tg, Cg, Ev, BJ,
 import { Ot } from "../905/850476";
 import { pr } from "../905/782020";
 import { n as _$$n } from "../905/347702";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 var m = h;
 var f = g;
 export function $$P32(e) {
@@ -83,7 +83,7 @@ export function $$W3(e) {
   let r = useAtomWithSubscription(t);
   if (r) return r;
   if (!e) return;
-  let i = CWU.getSubscribedVariableSetInfo(e);
+  let i = VariablesBindings.getSubscribedVariableSetInfo(e);
   if (i) return Rn(i);
 }
 export function $$K27(e) {
@@ -103,14 +103,14 @@ export function $$X38(e) {
   return useAtomWithSubscription(r);
 }
 export function $$q34(e) {
-  return $$J35(e)?.name || (e ? CWU.getVariableNameInStyleSelection(e) ?? void 0 : void 0);
+  return $$J35(e)?.name || (e ? VariablesBindings.getVariableNameInStyleSelection(e) ?? void 0 : void 0);
 }
 export function $$J35(e) {
   let t = useMemo(() => e ? Ev(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   if (r) return r;
   if (!e) return null;
-  let i = CWU.getSubscribedVariableInfo(e);
+  let i = VariablesBindings.getSubscribedVariableInfo(e);
   return i ? ZI(i) : null;
 }
 export function $$Z18(e, t) {
@@ -120,7 +120,7 @@ export function $$Z18(e, t) {
     let n = e(Ev(r));
     if (n) return n;
     if (t) {
-      let e = CWU.getSubscribedVariableInfo(r);
+      let e = VariablesBindings.getSubscribedVariableInfo(r);
       if (e) return ZI(e);
     }
     return null;
@@ -156,7 +156,7 @@ export function $$er13(e, t) {
   return useMemo(() => {
     if (!e || !t) return null;
     let r = new Map(Object.entries(t));
-    return CWU.getVariableChainForModes(e, r);
+    return VariablesBindings.getVariableChainForModes(e, r);
   }, [e, t]);
 }
 export function $$en5(e) {
@@ -376,7 +376,7 @@ let eg = _$$n(e => {
   }, [s]);
 });
 export function $$ef19(e, t, r) {
-  if (e) return w3z.getIdsOfVariablesWithValue(e, t, {
+  if (e) return HandoffBindingsCpp.getIdsOfVariablesWithValue(e, t, {
     type: r.type,
     value: r.value
   });
@@ -421,8 +421,8 @@ export function $$eS7() {
 export function $$ev24() {
   let e = Pj();
   function t(e, r, n, i = zk.YES, a = "set-variable-value-for-mode") {
-    let s = l7.user(a, () => CWU?.setVariableValueForMode(e, r, n) ?? !1);
-    s && i === zk.YES && Y5.triggerAction("commit");
+    let s = permissionScopeHandler.user(a, () => VariablesBindings?.setVariableValueForMode(e, r, n) ?? !1);
+    s && i === zk.YES && fullscreenValue.triggerAction("commit");
     return s;
   }
   function r(e, t, n, i, s = zk.YES, o = "set-variable-override-for-mode") {
@@ -447,19 +447,19 @@ export function $$ev24() {
       });
       return;
     }
-    l7.user(o, () => u.setVariableOverrideForMode(t, n, p));
-    s === zk.YES && Y5.triggerAction("commit");
+    permissionScopeHandler.user(o, () => u.setVariableOverrideForMode(t, n, p));
+    s === zk.YES && fullscreenValue.triggerAction("commit");
   }
   function n(e, t) {
-    l7.user("clear-variable-alias", () => CWU?.detachVariableValueForMode(e, t, null)) && Y5.triggerAction("commit");
+    permissionScopeHandler.user("clear-variable-alias", () => VariablesBindings?.detachVariableValueForMode(e, t, null)) && fullscreenValue.triggerAction("commit");
   }
   function i(e, t, r) {
-    l7.user("clear-variable-override-alias", () => {
+    permissionScopeHandler.user("clear-variable-override-alias", () => {
       let n = gr.fromString(r);
-      return n ? CWU?.detachVariableValueForMode(e, t, n) : (logError("variables", "Failed to clear variable override alias. Invalid variable set id.", {
+      return n ? VariablesBindings?.detachVariableValueForMode(e, t, n) : (logError("variables", "Failed to clear variable override alias. Invalid variable set id.", {
         variableSetId: r
       }), !1);
-    }) && Y5.triggerAction("commit");
+    }) && fullscreenValue.triggerAction("commit");
   }
   return {
     setVariableValueForMode: t,
@@ -519,7 +519,7 @@ export function $$ev24() {
           i(t, a, s);
           return;
         }
-        let e = CWU?.getVariableResolvedValue(t, new Map([[cn(l), a]]));
+        let e = VariablesBindings?.getVariableResolvedValue(t, new Map([[cn(l), a]]));
         if (!e) {
           logError("variables", "Failed to resolve alias value for variable in collection ", {
             variableId: t,

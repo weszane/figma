@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { hS } from "../905/437088";
-import { X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -10,15 +10,15 @@ import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A7, EL } from "../905/932769";
 let _ = getInitialOptions().release_manifest_git_commit;
-let $$A0 = Ju(function (e) {
+let $$A0 = registerModal(function (e) {
   let t = hS(e);
   let [i, u] = useState("");
   let [g, A] = useState("");
   let [y, b] = useState("");
-  let v = X();
+  let v = setupAutofocusHandler();
   let I = e => /^[a-f0-9]{40}$/.test(e);
   let E = e => e.split(",").map(e => e.trim()).filter(Boolean).join(",");
   let x = () => {

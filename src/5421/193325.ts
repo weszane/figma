@@ -2,8 +2,8 @@ import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useCallback, PureComponent, useId, useMemo, Fragment as _$$Fragment, memo, useContext } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { Ez5, X3B, rXF, baT, iCO, CWU } from "../figma_app/763686";
-import { dI, AD, sH, Hr } from "../905/871411";
+import { AppStateTsApi, PrototypingTsApi, VariableResolvedDataType, ExportScope, StateHierarchy, VariablesBindings } from "../figma_app/763686";
+import { sessionLocalIDToString, defaultSessionLocalIDString, parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import s from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { d as _$$d } from "../figma_app/429226";
@@ -12,15 +12,15 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Cr, cP, js, Z6, Od } from "../figma_app/451499";
 import { Em, cJ } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
-import { _W, E7, hS, gl, oV } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { valueOrFallback, normalizeValue, isValidValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { Um } from "../905/848862";
 import { _P, Zh } from "../figma_app/2590";
 import { J as _$$J } from "../905/980942";
 import { uQ } from "../figma_app/151869";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J2 } from "../905/270045";
-import { l7 } from "../905/189185";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
+import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
 import { TI } from "../905/713722";
 import { zk } from "../figma_app/198712";
@@ -30,7 +30,7 @@ import { J as _$$J3 } from "../905/225412";
 import { h as _$$h } from "../905/65944";
 import { AN } from "../905/203369";
 import { A as _$$A, F as _$$F } from "../897/590880";
-import { lu } from "../figma_app/84367";
+import { subscribeObservable } from "../figma_app/84367";
 import { Zk, fI, nV } from "../figma_app/626177";
 import { l6, c$, sK } from "../905/794875";
 import { TN, Cm } from "../figma_app/334459";
@@ -93,8 +93,8 @@ import { Ay } from "../figma_app/976110";
 var d = s;
 function R(e) {
   useEffect(() => {
-    let t = Ez5?.prototypingEditorState().colorPickerEyedropperVarData;
-    if (t) return lu(t, {
+    let t = AppStateTsApi?.prototypingEditorState().colorPickerEyedropperVarData;
+    if (t) return subscribeObservable(t, {
       onChangeImmediate() {
         let n = t.getCopy();
         n && e(n);
@@ -144,8 +144,8 @@ function K({
   }, [d, V]);
   let H = useCallback(e => {
     let t = e ? "SOLID_COLOR" : "NONE";
-    l7.user("overlay-background-type-edit-scope", () => {
-      X3B.setOverlayBackgroundType(dI(s), t);
+    permissionScopeHandler.user("overlay-background-type-edit-scope", () => {
+      PrototypingTsApi.setOverlayBackgroundType(sessionLocalIDToString(s), t);
     });
     g(_P({
       name: "Overlay background visible changed",
@@ -156,8 +156,8 @@ function K({
   }, [g, s]);
   let K = useCallback(e => {
     let t = e ? "CLOSE_ON_CLICK_OUTSIDE" : "NONE";
-    l7.user("overlay-background-interaction-edit-scope", () => {
-      X3B.setOverlayBackgroundInteraction(dI(s), t);
+    permissionScopeHandler.user("overlay-background-interaction-edit-scope", () => {
+      PrototypingTsApi.setOverlayBackgroundInteraction(sessionLocalIDToString(s), t);
     });
     g(_P({
       name: "Overlay background interaction changed",
@@ -166,15 +166,15 @@ function K({
       }
     }));
   }, [g, s]);
-  let $ = useCallback(() => _W(destinationOverlayBackgroundColor, {
+  let $ = useCallback(() => valueOrFallback(destinationOverlayBackgroundColor, {
     r: 0,
     g: 0,
     b: 0,
     a: .25
   }), [destinationOverlayBackgroundColor]);
   let z = useCallback((e, t) => {
-    t !== zk.NO && l7.user("overlay-background-color-edit-scope", () => {
-      X3B.setOverlayBackgroundColor(dI(s), e);
+    t !== zk.NO && permissionScopeHandler.user("overlay-background-color-edit-scope", () => {
+      PrototypingTsApi.setOverlayBackgroundColor(sessionLocalIDToString(s), e);
     });
   }, [s]);
   R(e => {
@@ -193,8 +193,8 @@ function K({
     }, t);
   }, [$, z]);
   let Y = useCallback(e => {
-    l7.user("overlay-position-type-edit-scope", () => {
-      X3B.setOverlayPositionType(dI(s), e);
+    permissionScopeHandler.user("overlay-position-type-edit-scope", () => {
+      PrototypingTsApi.setOverlayPositionType(sessionLocalIDToString(s), e);
     });
     g(_P({
       name: "Overlay position changed",
@@ -205,9 +205,9 @@ function K({
   }, [g, s]);
   let q = $();
   let X = $().a;
-  let J = E7(destinationOverlayPositionType);
-  let Q = "CLOSE_ON_CLICK_OUTSIDE" === E7(destinationOverlayBackgroundInteraction);
-  let ee = "SOLID_COLOR" === E7(destinationOverlayBackgroundType);
+  let J = normalizeValue(destinationOverlayPositionType);
+  let Q = "CLOSE_ON_CLICK_OUTSIDE" === normalizeValue(destinationOverlayBackgroundInteraction);
+  let ee = "SOLID_COLOR" === normalizeValue(destinationOverlayBackgroundType);
   let et = jsxs("div", {
     className: "overlay_panel--colorValueContainer--gJtb9 paint_panels--colorValueContainer--DGeSP raw_components--borderFocusWithin--BaipZ paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t",
     children: [jsx(_$$J3, {
@@ -242,8 +242,8 @@ function K({
       onOverlayPositionTypeChange: Y,
       recordingKey: t
     }), !("ON_HOVER" === e || "ON_PRESS" === e) && jsx(F, {
-      children: jsx(_$$S, {
-        label: jsx(_$$J2, {
+      children: jsx(Checkbox, {
+        label: jsx(Label, {
           children: renderI18nText("proto.close_when_clicking_outside")
         }),
         recordingKey: Pt(t, "closeOnClickOutside"),
@@ -251,8 +251,8 @@ function K({
         checked: Q
       })
     }), jsx(F, {
-      children: jsx(_$$S, {
-        label: jsx(_$$J2, {
+      children: jsx(Checkbox, {
+        label: jsx(Label, {
           children: renderI18nText("proto.overlay_panel.background")
         }),
         recordingKey: Pt(t, "addBackgroundBehindOverlay"),
@@ -348,7 +348,7 @@ function ep({
   let y = YT() === Oz.TWO_COL;
   let _ = y ? ea : "prototype_conditional_controls--conditionalRowIf--25FqB prototype_conditional_controls--conditionalRow--u0PaS";
   let b = jsx(KN, {
-    resolvedType: rXF.BOOLEAN,
+    resolvedType: VariableResolvedDataType.BOOLEAN,
     targetVariableData: g,
     updateSelectionProperties: n,
     recordingKey: p.recordingKey,
@@ -407,7 +407,7 @@ function ep({
             }), jsx(_$$Y, {
               direction: "horizontal",
               spacing: 0,
-              children: hS(g) && b
+              children: isValidValue(g) && b
             }), jsx(_$$B, {
               className: "prototype_conditional_controls--icon--JV1i0",
               svg: $$default
@@ -497,7 +497,7 @@ function eh({
     shouldShowAdvancedPrototypingPaywall,
     showAdvancedPrototypingConditionalActionsModal
   } = zt();
-  let S = hS(i.conditionalActions) && i.conditionalActions ? i.conditionalActions : [];
+  let S = isValidValue(i.conditionalActions) && i.conditionalActions ? i.conditionalActions : [];
   let A = e => function (t) {
     var n = [...S];
     n.length > e ? n[e].actions = [...t] : n.push({
@@ -566,7 +566,7 @@ function eh({
     style: E ? {
       position: "relative"
     } : void 0,
-    children: [gl(i.conditionalActions) && jsx(Y1, {
+    children: [isInvalidValue(i.conditionalActions) && jsx(Y1, {
       children: jsx(_$$E, {
         className: "prototype_conditional_controls--mixedConditionalText--6O32b",
         onClick: () => {
@@ -578,7 +578,7 @@ function eh({
         },
         children: getI18nString("fullscreen.properties_panel.click_to_replace_mixed_content")
       })
-    }), hS(i.conditionalActions) && jsxs(Fragment, {
+    }), isValidValue(i.conditionalActions) && jsxs(Fragment, {
       children: [jsx(ep, {
         actionIndexPath: [h[0], 0],
         autoOpenVariablePicker: y,
@@ -655,10 +655,10 @@ function em({
     }), jsx(Ad, {
       appendedClassName: "prototype_conditional_controls--conditionalActionRightPadding--xpK6Z",
       label: null,
-      input: hS(s) ? jsx("div", {
+      input: isValidValue(s) ? jsx("div", {
         className: c,
         children: jsx(KN, {
-          resolvedType: rXF.BOOLEAN,
+          resolvedType: VariableResolvedDataType.BOOLEAN,
           targetVariableData: s,
           updateSelectionProperties: e.appendActionIndex(0),
           recordingKey: r.recordingKey,
@@ -679,7 +679,7 @@ class eb {
     this.scene = t;
     this.format = e => {
       let t = this.nodeFormatter.format(e);
-      if (this.scene && e !== AD && null != e) {
+      if (this.scene && e !== defaultSessionLocalIDString && null != e) {
         let n = this.scene.get(e);
         if (n?.isResponsiveSet) return "/" === t ? getI18nString("sites.panel.home") : t;
       }
@@ -694,16 +694,16 @@ function ew(e) {
   let [n, r] = useState([]);
   let [s, d] = useState([]);
   let c = _$$cJ();
-  let p = e.nodeId === oV ? oV : dI(e.nodeId);
+  let p = e.nodeId === MIXED_MARKER ? MIXED_MARKER : sessionLocalIDToString(e.nodeId);
   let h = n;
-  hS(p) && p !== AD && -1 === h.indexOf(p) && (h = h.concat([p]));
+  isValidValue(p) && p !== defaultSessionLocalIDString && -1 === h.indexOf(p) && (h = h.concat([p]));
   let m = `prototype-destination-select-${e.recordingKey}`;
   let g = "SCROLL_TO" !== e.action ? h.filter(e => t.hasNameForNode(e)).map((t, n) => jsx(eS, {
     value: t,
     recordingKey: Pt(e, `viable-option-${n}`),
     disabled: !1
   }, `enabled-${t}`)) : ((n, i) => {
-    let r = ey()(n.filter(e => t.hasNameForNode(e)), t => t === i && hS(i) ? Ql(e.scene, t)?.guid : e.scene.get(t)?.parentGuid);
+    let r = ey()(n.filter(e => t.hasNameForNode(e)), t => t === i && isValidValue(i) ? Ql(e.scene, t)?.guid : e.scene.get(t)?.parentGuid);
     let a = Object.keys(r);
     X4(a, t.format.bind(t));
     let {
@@ -749,12 +749,12 @@ function ew(e) {
       property: p,
       recordingKey: Pt(e, "select"),
       willShowDropdown: () => {
-        let t = baT.ALL;
-        "SCROLL_TO" === e.action ? t = baT.SCROLL_TO : "SWAP_STATE_TO" === e.action ? t = baT.STATES : "NAVIGATE_TO" === e.action && c && (t = baT.RESPONSIVE_SETS);
+        let t = ExportScope.ALL;
+        "SCROLL_TO" === e.action ? t = ExportScope.SCROLL_TO : "SWAP_STATE_TO" === e.action ? t = ExportScope.STATES : "NAVIGATE_TO" === e.action && c && (t = ExportScope.RESPONSIVE_SETS);
         let {
           viableIds,
           disabledIds
-        } = X3B.getTransitionDestinationsOnActiveCanvas(t);
+        } = PrototypingTsApi.getTransitionDestinationsOnActiveCanvas(t);
         r(viableIds);
         d(disabledIds);
         return Promise.resolve();
@@ -775,7 +775,7 @@ let ek = memo(function (e) {
   let h = useMemo(() => _$$cP(u, t, n, c, e.actionIndexPath), [u, t, n, e.actionIndexPath, c]);
   let m = useMemo(() => _$$cP(l, t, n, c), [l, t, n, c]);
   let x = h || m;
-  if (!x || x.mode !== iCO.STATE_OR_STATE_INSTANCE_SUBLAYER) return null;
+  if (!x || x.mode !== StateHierarchy.STATE_OR_STATE_INSTANCE_SUBLAYER) return null;
   let {
     allStates,
     stateGroupModel,
@@ -823,15 +823,15 @@ function eX({
   let p = useRef(null);
   let x = useDispatch();
   let g = useSelector(e => e.variablePickerShown);
-  let y = tZ(hS(t) && "id" in t ? t.id : void 0);
-  let _ = _$$u(hS(t) && "id" in t ? t.id : void 0);
+  let y = tZ(isValidValue(t) && "id" in t ? t.id : void 0);
+  let _ = _$$u(isValidValue(t) && "id" in t ? t.id : void 0);
   let [v, I] = useState("");
   _$$h2(() => {
     s && !0 === s.current && (E(), s.current = !1);
   });
-  let C = BQ(hS(t) && "id" in t ? t.id : void 0) ?? m9(hS(t) && "nodeFieldAlias" in t ? t.nodeFieldAlias : void 0);
+  let C = BQ(isValidValue(t) && "id" in t ? t.id : void 0) ?? m9(isValidValue(t) && "nodeFieldAlias" in t ? t.nodeFieldAlias : void 0);
   useEffect(() => {
-    void 0 !== e && C && "MIXED" !== C && hS(e) && e.resolvedType !== C.resolvedType && !(tz(e.resolvedType) && tz(C.resolvedType)) && n({
+    void 0 !== e && C && "MIXED" !== C && isValidValue(e) && e.resolvedType !== C.resolvedType && !(tz(e.resolvedType) && tz(C.resolvedType)) && n({
       targetVariableData: void 0
     });
   }, [C, n, e]);
@@ -840,7 +840,7 @@ function eX({
     x(_$$C({
       type: "variable-picker-set-variable-action",
       isShown: !0,
-      resolvedType: rXF.STRING,
+      resolvedType: VariableResolvedDataType.STRING,
       initialPosition: new Point(e.left - 20, e.top),
       key: c.recordingKey,
       onVariableSelected: A
@@ -857,8 +857,8 @@ function eX({
           id: t.node_id
         }
       };
-      let i = CWU.getVariableResolvedValue(t.node_id, new Map());
-      !e && t.resolvedType === rXF.COLOR && i && (o.targetVariableData = i ?? void 0);
+      let i = VariablesBindings.getVariableResolvedValue(t.node_id, new Map());
+      !e && t.resolvedType === VariableResolvedDataType.COLOR && i && (o.targetVariableData = i ?? void 0);
       n(o);
       x(Zh({
         name: "prototype.variable_selected",
@@ -872,7 +872,7 @@ function eX({
     }
   }, [x, e, n]);
   let w = useCallback(e => {
-    e.value.stablePath.map(e => sH(e)) && (n({
+    e.value.stablePath.map(e => parseSessionLocalID(e)) && (n({
       targetVariable: {
         nodeFieldAlias: {
           stablePathToNode: e.value.stablePath,
@@ -895,7 +895,7 @@ function eX({
   let O = "nodeFieldAlias" in t ? aA(t.nodeFieldAlias.stablePathToNode, t.nodeFieldAlias.indexOrKey) : void 0;
   let D = O ? Xx(O.varValue.resolvedType) : null;
   let M = null;
-  if (gl(t)) M = null;else if (C?.resolvedType === rXF.COLOR) M = gl(e) ? jsx("div", {
+  if (isInvalidValue(t)) M = null;else if (C?.resolvedType === VariableResolvedDataType.COLOR) M = isInvalidValue(e) ? jsx("div", {
     className: "prototype_set_variable_controls--targetVariableDataMixedContainer--H6uGu",
     children: getI18nString("fullscreen.mixed")
   }) : jsx(Fragment, {
@@ -911,8 +911,8 @@ function eX({
       innerContainerClassName: "prototype_set_variable_controls--variableColorInputContainer--NaOmp"
     })
   });else {
-    let t = rXF.BOOLEAN;
-    _ ? t = _.resolvedType : O && (t = O.varValue.resolvedType === rXF.TEXT_DATA ? rXF.STRING : O.varValue.resolvedType);
+    let t = VariableResolvedDataType.BOOLEAN;
+    _ ? t = _.resolvedType : O && (t = O.varValue.resolvedType === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : O.varValue.resolvedType);
     M = jsx("div", {
       children: jsx("div", {
         className: eY,
@@ -944,7 +944,7 @@ function eX({
           className: V,
           children: jsx("div", {
             className: eY,
-            children: gl(t) ? jsx("div", {
+            children: isInvalidValue(t) ? jsx("div", {
               className: d()(_$$s.pt2.$, _$$s.pb2.$),
               children: getI18nString("fullscreen.mixed")
             }) : y ? jsx(wG, {
@@ -971,7 +971,7 @@ function eX({
   });
   let F = d()({
     "prototype_set_variable_controls--setVariableToContainerUI3--pGbDe": !0,
-    [eq]: !e && C?.resolvedType !== rXF.COLOR
+    [eq]: !e && C?.resolvedType !== VariableResolvedDataType.COLOR
   });
   let K = jsx("div", {
     className: F,
@@ -1005,7 +1005,7 @@ function eX({
             currentView: k,
             subscribedLibraries: [],
             setControlRightButtons: jsx(_$$f, {
-              resolvedTypes: [rXF.BOOLEAN, rXF.STRING, rXF.FLOAT, rXF.COLOR]
+              resolvedTypes: [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT, VariableResolvedDataType.COLOR]
             }),
             recordingKey: Pt(c.recordingKey, "variablePickerForSelection")
           }),
@@ -1071,7 +1071,7 @@ function te({
   });
   if (_) return null;
   let I = LH(c);
-  let j = jsx(_$$S, {
+  let j = jsx(Checkbox, {
     onChange: t => {
       h(_P({
         name: "Preserve Scroll Changed",
@@ -1081,7 +1081,7 @@ function te({
       }));
       d({
         ...function (e) {
-          if (hS(e.preserveScroll)) return {
+          if (isValidValue(e.preserveScroll)) return {
             transitionPreserveScroll: e.preserveScroll
           };
         }({
@@ -1091,16 +1091,16 @@ function te({
       });
     },
     checked: !0 === e.preserveScroll,
-    mixed: gl(e.preserveScroll),
+    mixed: isInvalidValue(e.preserveScroll),
     recordingKey: Pt(n, "preserve-scroll-check"),
-    label: jsx(_$$J2, {
+    label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.preserve_scroll_position")
     })
   });
   let N = jsx(TN, {
     children: j
   });
-  let T = jsx(_$$S, {
+  let T = jsx(Checkbox, {
     onChange: t => {
       h(_P({
         name: "Reset Scroll Position Changed",
@@ -1111,7 +1111,7 @@ function te({
       }));
       d({
         ...function (e) {
-          if (hS(e.resetScrollPosition)) return {
+          if (isValidValue(e.resetScrollPosition)) return {
             transitionResetScrollPosition: e.resetScrollPosition
           };
         }({
@@ -1121,9 +1121,9 @@ function te({
       });
     },
     checked: !0 === e.resetScrollPosition,
-    mixed: gl(e.resetScrollPosition),
+    mixed: isInvalidValue(e.resetScrollPosition),
     recordingKey: Pt(n, "reset-scroll-position-check"),
-    label: jsx(_$$J2, {
+    label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.reset_scroll_position")
     })
   });
@@ -1153,7 +1153,7 @@ function te({
   let A = jsxs(TN, {
     children: [T, " ", x && S]
   });
-  let w = jsx(_$$S, {
+  let w = jsx(Checkbox, {
     onChange: t => {
       h(_P({
         name: "Reset Component State Changed",
@@ -1164,7 +1164,7 @@ function te({
       }));
       d({
         ...function (e) {
-          if (hS(e.resetInteractiveComponents)) return {
+          if (isValidValue(e.resetInteractiveComponents)) return {
             transitionResetInteractiveComponents: e.resetInteractiveComponents
           };
         }({
@@ -1174,16 +1174,16 @@ function te({
       });
     },
     checked: !0 === e.resetInteractiveComponents,
-    mixed: gl(e.resetInteractiveComponents),
+    mixed: isInvalidValue(e.resetInteractiveComponents),
     recordingKey: Pt(n, "reset-component-state-check"),
-    label: jsx(_$$J2, {
+    label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.reset_component_state")
     })
   });
   let k = jsx(TN, {
     children: w
   });
-  let P = jsx(_$$S, {
+  let P = jsx(Checkbox, {
     onChange: t => {
       h(_P({
         name: "Reset Video Position Changed",
@@ -1193,7 +1193,7 @@ function te({
       }));
       d({
         ...function (e) {
-          if (hS(e.resetVideoPosition)) return {
+          if (isValidValue(e.resetVideoPosition)) return {
             transitionResetVideoPosition: e.resetVideoPosition
           };
         }({
@@ -1203,9 +1203,9 @@ function te({
       });
     },
     checked: !0 === e.resetVideoPosition,
-    mixed: gl(e.resetVideoPosition),
+    mixed: isInvalidValue(e.resetVideoPosition),
     recordingKey: Pt(n, "reset-video-position-check"),
-    label: jsx(_$$J2, {
+    label: jsx(Label, {
       children: LH(c) ? renderI18nText("proto.state_management.reset_video_state") : renderI18nText("proto.animation_panel.reset_video_state")
     })
   });
@@ -1214,7 +1214,7 @@ function te({
   });
   let L = jsxs(Zk, {
     className: `prototype_state_management_panel--stateManagementPanel--sYaaj ${kM(c) && "prototype_state_management_panel--stateManagementPanelWithVersion--AovOP"}`,
-    children: [uU(c) && a && N, l && uU(c) && O, I && A, I && s && k, I && l && O, gl(c) && jsx(_$$Y, {
+    children: [uU(c) && a && N, l && uU(c) && O, I && A, I && s && k, I && l && O, isInvalidValue(c) && jsx(_$$Y, {
       direction: "horizontal",
       padding: {
         horizontal: 12,
@@ -1243,7 +1243,7 @@ function te({
 }
 let tt = c$;
 let tn = l6;
-let to = AD;
+let to = defaultSessionLocalIDString;
 class ti extends cP {
   format(e) {
     return e === to || null === e ? getI18nString("proto.target_video_node_name_formatter.this_video") : super.format(e);
@@ -1285,7 +1285,7 @@ function tr(e) {
     onOptionFocus: e => {
       Uc(e ?? "");
     },
-    property: gl(targetVideoNodeID) ? targetVideoNodeID : dI(targetVideoNodeID),
+    property: isInvalidValue(targetVideoNodeID) ? targetVideoNodeID : sessionLocalIDToString(targetVideoNodeID),
     recordingKey: Pt(e, "select"),
     children: [viableSameFrameVideoIds.filter(e => g.hasNameForNode(e)).map((t, n) => jsx(tt, {
       value: t,
@@ -1313,13 +1313,13 @@ function tl({
     className: "prototype_open_url_action_options--urlInputUI3--H-JfT",
     dataTestId: "url-input",
     placeholder: getI18nString("proto.interaction.example_com"),
-    value: gl(e.connectionURL) ? getI18nString("fullscreen.mixed") : _W(e.connectionURL, ""),
+    value: isInvalidValue(e.connectionURL) ? getI18nString("fullscreen.mixed") : valueOrFallback(e.connectionURL, ""),
     onChange: n,
     recordingKey: Pt(t, "urlTextInput"),
     autoFocus: !1
   });
-  let a = jsx(_$$S, {
-    label: jsx(_$$J2, {
+  let a = jsx(Checkbox, {
+    label: jsx(Label, {
       children: renderI18nText("proto.action_open_url_in_new_tab")
     }),
     onChange: i,
@@ -1369,7 +1369,7 @@ function tc({
       });
     }
   };
-  let h = _W(n, {
+  let h = valueOrFallback(n, {
     x: 0,
     y: 0
   });
@@ -1433,8 +1433,8 @@ function tf({
   recordingKey: l
 }) {
   let s = Od(e);
-  let d = E7(e.mediaAction);
-  let c = "UPDATE_MEDIA_RUNTIME" === E7(e.connectionType);
+  let d = normalizeValue(e.mediaAction);
+  let c = "UPDATE_MEDIA_RUNTIME" === normalizeValue(e.connectionType);
   let p = "SKIP_TO" === d;
   let h = "SKIP_FORWARD" === d || "SKIP_BACKWARD" === d;
   let g = "PLAY" === d || "PAUSE" === d || "TOGGLE_PLAY_PAUSE" === d;
@@ -1607,7 +1607,7 @@ let tb = ({
 }) => {
   let t = useDispatch();
   return useCallback((n, o) => {
-    let i = sH(n);
+    let i = parseSessionLocalID(n);
     i && e(i);
     t(_P({
       name: "Prototype navigation destination changed",
@@ -1645,14 +1645,14 @@ export function $$tv0({
   let L = P === Oz.TWO_COL;
   let D = useContext(_$$c);
   let R = L && D === _$$P2.RIGHT;
-  let M = "SET_VARIABLE" === E7(e.connectionType);
-  let V = "SET_VARIABLE_MODE" === E7(e.connectionType);
-  let B = "CONDITIONAL" === E7(e.connectionType);
-  let H = "INTERNAL_NODE" === E7(e.connectionType);
-  let U = "INTERNAL_NODE" === E7(e.connectionType) && "SWAP_STATE" === E7(e.navigationType);
-  let F = "URL" === E7(e.connectionType);
-  let K = H || "BACK" === E7(e.connectionType) || "CLOSE" === E7(e.connectionType);
-  let $ = "UPDATE_MEDIA_RUNTIME" === E7(e.connectionType);
+  let M = "SET_VARIABLE" === normalizeValue(e.connectionType);
+  let V = "SET_VARIABLE_MODE" === normalizeValue(e.connectionType);
+  let B = "CONDITIONAL" === normalizeValue(e.connectionType);
+  let H = "INTERNAL_NODE" === normalizeValue(e.connectionType);
+  let U = "INTERNAL_NODE" === normalizeValue(e.connectionType) && "SWAP_STATE" === normalizeValue(e.navigationType);
+  let F = "URL" === normalizeValue(e.connectionType);
+  let K = H || "BACK" === normalizeValue(e.connectionType) || "CLOSE" === normalizeValue(e.connectionType);
+  let $ = "UPDATE_MEDIA_RUNTIME" === normalizeValue(e.connectionType);
   let z = useSelector(e => {
     let t = e.mirror.selectionProperties.numSelected;
     let n = e.mirror.selectionProperties.numVideosSelected;
@@ -1665,15 +1665,15 @@ export function $$tv0({
     let {
       viableIds,
       disabledIds
-    } = X3B.getVideoNodesOnSameTlfAsNode(W);
+    } = PrototypingTsApi.getVideoNodesOnSameTlfAsNode(W);
     Z = viableIds;
     Y = disabledIds;
   }
-  let q = dI(E7(e.transitionNodeID));
-  let X = null != q && q !== AD;
-  let J = H && (!hS(e.transitionNodeID) || X) && !(k && !U && "SCROLL_TO" !== E7(e.navigationType));
-  let Q = E7(e.navigationType);
-  let et = H && "OVERLAY" === E7(Q);
+  let q = sessionLocalIDToString(normalizeValue(e.transitionNodeID));
+  let X = null != q && q !== defaultSessionLocalIDString;
+  let J = H && (!isValidValue(e.transitionNodeID) || X) && !(k && !U && "SCROLL_TO" !== normalizeValue(e.navigationType));
+  let Q = normalizeValue(e.navigationType);
+  let et = H && "OVERLAY" === normalizeValue(Q);
   let en = hU(e.transitionType, e.easingType, e.easingFunction, e.transitionDuration, e.transitionShouldSmartAnimate, e.transitionPreserveScroll, e.transitionResetVideoPosition, e.openUrlInNewTab, e.transitionResetScrollPosition, e.transitionResetInteractiveComponents);
   let eo = K && !et && ("INSTANT" === en.behavior || "DISSOLVE" === en.behavior);
   let ei = !$ && oc(e);
@@ -1746,7 +1746,7 @@ export function $$tv0({
     }), $ && jsx(tr, {
       dropdownShown: A,
       scene,
-      targetVideoNodeID: e.transitionNodeID || Hr,
+      targetVideoNodeID: e.transitionNodeID || defaultSessionLocalID,
       recordingKey: Pt(t, "targetVideoDropdown"),
       viableSameFrameVideoIds: Z,
       disabledSameFrameVideoIds: Y,
@@ -1766,7 +1766,7 @@ export function $$tv0({
         dispatch: S,
         isNarrowPanel: T.isNestedInConditional || T.isNarrowPanel,
         isNestedInConditional: T.isNestedInConditional,
-        nodeId: e.transitionNodeID || Hr,
+        nodeId: e.transitionNodeID || defaultSessionLocalID,
         onChange: ec,
         recordingKey: Pt(t, "setVariableControls"),
         targetVariable: e.targetVariable || {
@@ -1790,7 +1790,7 @@ export function $$tv0({
       autoOpenExpressionBuilder: j,
       setAutoOpenExpressionBuilder: N,
       updateSelectionProperties: y,
-      conditionalActions: hS(e.conditionalActions) && e.conditionalActions ? e.conditionalActions : []
+      conditionalActions: isValidValue(e.conditionalActions) && e.conditionalActions ? e.conditionalActions : []
     }) : jsx(eh, {
       action: e,
       actionIndexPath: T.actionIndexPath,
@@ -1812,7 +1812,7 @@ export function $$tv0({
       className: _$$s.ml0.$,
       children: jsx(ek, {
         onChange: ep,
-        nodeId: e.transitionNodeID || Hr,
+        nodeId: e.transitionNodeID || defaultSessionLocalID,
         recordingKey: Pt(t, "consumption"),
         actionIndexPath: T.actionIndexPath
       })
@@ -1861,14 +1861,14 @@ export function $$tI1({
   } = selectWithShallowEqual(e => ({
     scene: e.mirror.sceneGraph
   }));
-  let I = "INTERNAL_NODE" === E7(e.connectionType);
+  let I = "INTERNAL_NODE" === normalizeValue(e.connectionType);
   let C = Od(e);
-  let E = dI(E7(e.transitionNodeID));
-  let j = null != E && E !== AD;
-  let N = I && "OVERLAY" === E7(e.navigationType) && j;
-  let T = E7(e.navigationType);
-  let S = I && "OVERLAY" === E7(T);
-  let A = I && (S || "SWAP" === E7(T));
+  let E = sessionLocalIDToString(normalizeValue(e.transitionNodeID));
+  let j = null != E && E !== defaultSessionLocalIDString;
+  let N = I && "OVERLAY" === normalizeValue(e.navigationType) && j;
+  let T = normalizeValue(e.navigationType);
+  let S = I && "OVERLAY" === normalizeValue(T);
+  let A = I && (S || "SWAP" === normalizeValue(T));
   let w = useId();
   let {
     selectedInteractions
@@ -1887,7 +1887,7 @@ export function $$tI1({
       }
       n ? n({
         transitionNodeID: e
-      }) : Y5.updateSelectionProperties({
+      }) : fullscreenValue.updateSelectionProperties({
         transitionNodeID: e
       });
     }
@@ -1899,7 +1899,7 @@ export function $$tI1({
     dispatch: h,
     dropdownShown: g,
     isUI3: !0,
-    nodeId: e.transitionNodeID || Hr,
+    nodeId: e.transitionNodeID || defaultSessionLocalID,
     onChange: e => O(e, P),
     recordingKey: Pt(s, "destinationDropdown"),
     scene
@@ -1908,16 +1908,16 @@ export function $$tI1({
     action: C,
     showScrollToOptions: "SCROLL_TO" === C,
     extraScrollOffset: e.extraScrollOffset,
-    updateSelectionProperties: n || Y5.updateSelectionProperties,
+    updateSelectionProperties: n || fullscreenValue.updateSelectionProperties,
     recordingKey: Pt(s, "scrollOptionsPanel"),
     setPropertiesForAnchorLink: d
   });
   let M = a ? jsx(K, {
     interactionType: t,
-    updateSelectionProperties: n || Y5.updateSelectionProperties,
+    updateSelectionProperties: n || fullscreenValue.updateSelectionProperties,
     recordingKey: Pt(s, "overlaySettings"),
     actionIndexPath: a,
-    nodeId: e.transitionNodeID || Hr
+    nodeId: e.transitionNodeID || defaultSessionLocalID
   }) : null;
   return jsxs(Fragment, {
     children: [jsx(_$$A, {

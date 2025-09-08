@@ -9,10 +9,10 @@ import { z, Z } from "../905/306088";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { i as _$$i } from "../469e6e40/651707";
-import { Ce, to, Lo } from "../905/156213";
+import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { hZ } from "../figma_app/342125";
 import { a as _$$a } from "../469e6e40/234755";
-import { Ju, qK } from "../905/102752";
+import { registerModal, registerLegacyModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/121794";
 import { OJ } from "../905/519092";
 let f = "configure_saml--section--UuOAE";
@@ -76,17 +76,17 @@ class S extends PureComponent {
       });
     };
     this.onCancel = () => {
-      this.props.dispatch(Ce());
+      this.props.dispatch(hideModal());
     };
     this.onConfirm = () => {
-      this.props.org?.can_use_multi_idp ? this.props.dispatch(to({
+      this.props.org?.can_use_multi_idp ? this.props.dispatch(showModalHandler({
         type: _$$i,
         data: {
           orgDomains: this.props.orgDomains,
           orgSamlConfig: this.props.orgSamlConfig,
           onContinue: (e, t) => {
-            this.props.dispatch(Lo());
-            this.props.dispatch(to({
+            this.props.dispatch(popModalStack());
+            this.props.dispatch(showModalHandler({
               type: $$T0,
               data: {
                 certificate: this.state.certificate,
@@ -103,10 +103,10 @@ class S extends PureComponent {
             }));
           },
           onBack: () => {
-            this.props.dispatch(Lo());
+            this.props.dispatch(popModalStack());
           }
         }
-      })) : this.props.dispatch(to({
+      })) : this.props.dispatch(showModalHandler({
         type: $$T0,
         data: {
           certificate: this.state.certificate,
@@ -220,7 +220,7 @@ class S extends PureComponent {
         }), jsxs("div", {
           className: "configure_saml--buttonBox--c1x8J",
           children: [jsx(nR, {
-            onClick: () => this.props.dispatch(Lo()),
+            onClick: () => this.props.dispatch(popModalStack()),
             children: renderI18nText("modal.cancel")
           }), jsx($$, {
             disabled: e,
@@ -234,7 +234,7 @@ class S extends PureComponent {
 }
 S.displayName = "ConfigureSAMLModal";
 let N = e => e.reduce((e, t, a) => 0 === a ? [t] : [...e, ", ", t], []);
-let $$I1 = Ju(S, "EDIT_SAML_CONFIG_MODAL");
+let $$I1 = registerModal(S, "EDIT_SAML_CONFIG_MODAL");
 let $$T0 = "CONFIGURE_SAML_CONFIRMATION_MODAL";
 function A(e) {
   var t;
@@ -248,7 +248,7 @@ function A(e) {
   d = e.idp_metadata_url;
   let f = "other" === t || "google" === t ? !!a || !!l : !!t && !!d;
   let w = () => {
-    e.dispatch(Ce());
+    e.dispatch(hideModal());
   };
   let S = t => {
     e.org.can_use_multi_idp ? _$$a.putOrgSamlConfig({
@@ -266,7 +266,7 @@ function A(e) {
       w();
     }).catch(t => {
       x(!1);
-      f ? e.dispatch(to({
+      f ? e.dispatch(showModalHandler({
         type: $$I1,
         data: {
           dispatch: e.dispatch,
@@ -277,14 +277,14 @@ function A(e) {
           orgDomains: e.orgDomains,
           orgSamlConfig: e.orgSamlConfig
         }
-      })) : C(e.domainMappings) && e.dispatch(to({
+      })) : C(e.domainMappings) && e.dispatch(showModalHandler({
         type: _$$i,
         data: {
           orgDomains: e.orgDomains,
           orgSamlConfig: e.orgSamlConfig,
           onContinue: (t, a) => {
-            e.dispatch(Lo());
-            e.dispatch(to({
+            e.dispatch(popModalStack());
+            e.dispatch(showModalHandler({
               type: $$T0,
               data: {
                 domainMappings: t,
@@ -317,7 +317,7 @@ function A(e) {
       w();
     }).catch(t => {
       x(!1);
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: $$I1,
         data: {
           dispatch: e.dispatch,
@@ -475,9 +475,9 @@ function A(e) {
         } else S(null);
       },
       onCancel: () => {
-        e.dispatch(Lo());
-        e.dispatch(Lo());
-        f ? e.dispatch(to({
+        e.dispatch(popModalStack());
+        e.dispatch(popModalStack());
+        f ? e.dispatch(showModalHandler({
           type: $$I1,
           data: {
             dispatch: e.dispatch,
@@ -487,14 +487,14 @@ function A(e) {
             orgDomains: e.orgDomains,
             orgSamlConfig: e.orgSamlConfig
           }
-        })) : C(e.domainMappings) && e.dispatch(to({
+        })) : C(e.domainMappings) && e.dispatch(showModalHandler({
           type: _$$i,
           data: {
             orgDomains: e.orgDomains,
             orgSamlConfig: e.orgSamlConfig,
             onContinue: (t, a) => {
-              e.dispatch(Lo());
-              e.dispatch(to({
+              e.dispatch(popModalStack());
+              e.dispatch(showModalHandler({
                 type: $$T0,
                 data: {
                   domainMappings: t,
@@ -521,7 +521,7 @@ function A(e) {
     })]
   });
 }
-qK($$T0, e => jsx(A, {
+registerLegacyModal($$T0, e => jsx(A, {
   dispatch: e.dispatch,
   currentUserOrgId: e.currentUserOrgId,
   ...e.modalShown.data

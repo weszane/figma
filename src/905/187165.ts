@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { nQ7 } from "../figma_app/763686";
+import { SelfDesignType } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
 import { UE, ql } from "../figma_app/191804";
 import { getFalseValue } from "../figma_app/897289";
@@ -22,7 +22,7 @@ export function $$f2() {
   return !1;
 }
 export function $$_4(e, t) {
-  return e ? "fullscreen" === e.view && e.editorType === FEditorType.Whiteboard ? "whiteboard" : "fullscreen" === e.view && (e.editorType === FEditorType.DevHandoff || Wl(e)) ? "dev-handoff" : "prototype" === e.view && e.file?.editor_type === "slides" || "fullscreen" === e.view && e.editorType === FEditorType.Slides && t !== nQ7.DESIGN ? "piper" : "fullscreen" === e.view && e.editorType === FEditorType.Cooper && t !== nQ7.DESIGN ? "cooper" : "fullscreen" === e.view && e.editorType === FEditorType.Illustration ? "sulli" : Vj(e) || Jh(e) ? "seascape" : "design" : "design";
+  return e ? "fullscreen" === e.view && e.editorType === FEditorType.Whiteboard ? "whiteboard" : "fullscreen" === e.view && (e.editorType === FEditorType.DevHandoff || Wl(e)) ? "dev-handoff" : "prototype" === e.view && e.file?.editor_type === "slides" || "fullscreen" === e.view && e.editorType === FEditorType.Slides && t !== SelfDesignType.DESIGN ? "piper" : "fullscreen" === e.view && e.editorType === FEditorType.Cooper && t !== SelfDesignType.DESIGN ? "cooper" : "fullscreen" === e.view && e.editorType === FEditorType.Illustration ? "sulli" : Vj(e) || Jh(e) ? "seascape" : "design" : "design";
 }
 export function $$A3(e) {
   return "undefined" != typeof mpGlobal ? mpGlobal.getVisibleTheme(e) : "light";

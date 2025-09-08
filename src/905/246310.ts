@@ -1,4 +1,4 @@
-import { Z_n } from "../figma_app/763686";
+import { VariableDataType } from "../figma_app/763686";
 import { Q1 } from "../905/721592";
 import { kz } from "../905/77776";
 import { W4, P2 } from "../905/804867";
@@ -392,7 +392,7 @@ export function $$j14(e, t) {
       return a && "SOLID" === a.type && i && 0 !== i.length ? {
         ids: i.map(e => e.id),
         rawValue: {
-          type: Z_n.COLOR,
+          type: VariableDataType.COLOR,
           value: {
             ...a.color,
             a: a.opacity ?? 1
@@ -408,7 +408,7 @@ export function $$j14(e, t) {
     return r && "SOLID" === r.type && i && 0 !== i.length ? [{
       ids: i.map(e => e.id),
       rawValue: {
-        type: Z_n.COLOR,
+        type: VariableDataType.COLOR,
         value: {
           ...r.color,
           a: r.opacity ?? 1
@@ -421,7 +421,7 @@ export function $$j14(e, t) {
   if ("fontFamily" === e) return KH(t) ? [{
     ids: i.map(e => e.id),
     rawValue: {
-      type: Z_n.STRING,
+      type: VariableDataType.STRING,
       value: t.textSegments[0].fontName.family.rawValue
     }
   }] : [];
@@ -429,7 +429,7 @@ export function $$j14(e, t) {
   return r ? [{
     ids: i.map(e => e.id),
     rawValue: {
-      type: Z_n.FLOAT,
+      type: VariableDataType.FLOAT,
       value: r
     }
   }] : [];

@@ -3,7 +3,7 @@ import { useRef, createRef, useMemo, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
@@ -154,7 +154,7 @@ function T({
       children: [jsx(_$$c, {
         active,
         children: jsx(l9, {
-          label: jsx(_$$h, {
+          label: jsx(HiddenLabel, {
             children: renderI18nText("fragment_search.sort_by")
           }),
           children: jsx("div", {

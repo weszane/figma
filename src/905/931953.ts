@@ -1,39 +1,39 @@
 import { z as _$$z } from "../905/239603";
-import { vh, YV } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 export let $$a0 = new class {
   constructor() {
-    this.SitesBundleSchemaValidator = vh();
-    this.SitesCustomDomainDnsRecordsValidator = YV("SitesCustomDomainDnsRecordsValidator", _$$z.array(_$$z.object({
+    this.SitesBundleSchemaValidator = createNoOpValidator();
+    this.SitesCustomDomainDnsRecordsValidator = createMetaValidator("SitesCustomDomainDnsRecordsValidator", _$$z.array(_$$z.object({
       type: _$$z.string(),
       host: _$$z.string(),
       value: _$$z.string()
     })), null);
-    this.SitesActivateCustomDomainValidator = YV("SitesActivateCustomDomainValidator", _$$z.$$void(), null);
-    this.SitesRemoveCustomDomainValidator = YV("SitesRemoveCustomDomainValidator", _$$z.$$void(), null);
-    this.SitesCustomDomainLimitReachedValidator = YV("SitesCustomDomainLimitReachedValidator", _$$z.object({
+    this.SitesActivateCustomDomainValidator = createMetaValidator("SitesActivateCustomDomainValidator", _$$z.$$void(), null);
+    this.SitesRemoveCustomDomainValidator = createMetaValidator("SitesRemoveCustomDomainValidator", _$$z.$$void(), null);
+    this.SitesCustomDomainLimitReachedValidator = createMetaValidator("SitesCustomDomainLimitReachedValidator", _$$z.object({
       limit_reached: _$$z.boolean(),
       num_domains_allowed: _$$z.number(),
       num_domains: _$$z.number()
     }), null);
-    this.SitesUpdateBundleValidator = YV("SitesUpdateBundleValidator", _$$z.$$void(), null);
-    this.SitesUpdateSubdomainValidator = YV("SitesUpdateSubdomainValidator", _$$z.object({
+    this.SitesUpdateBundleValidator = createMetaValidator("SitesUpdateBundleValidator", _$$z.$$void(), null);
+    this.SitesUpdateSubdomainValidator = createMetaValidator("SitesUpdateSubdomainValidator", _$$z.object({
       domain: _$$z.string()
     }), null);
-    this.SitesValidateSubdomainValidator = YV("SitesValidateSubdomainValidator", _$$z.$$void(), null);
-    this.SitesFileKeyVideos = YV("SitesFileKeyVideosValidator", _$$z.object({
+    this.SitesValidateSubdomainValidator = createMetaValidator("SitesValidateSubdomainValidator", _$$z.$$void(), null);
+    this.SitesFileKeyVideos = createMetaValidator("SitesFileKeyVideosValidator", _$$z.object({
       videos: _$$z.record(_$$z.string(), _$$z.string())
     }), null);
-    this.SitesFileKeyVideosSha1Metadata = YV("SitesFileKeyVideosSha1MetadataValidator", _$$z.object({
+    this.SitesFileKeyVideosSha1Metadata = createMetaValidator("SitesFileKeyVideosSha1MetadataValidator", _$$z.object({
       metadata: _$$z.object({
         bytes: _$$z.string().optional(),
         mime: _$$z.string()
       })
     }), null);
-    this.SitesSetPasswordValidator = YV("SitesSetPasswordValidator", _$$z.object({
+    this.SitesSetPasswordValidator = createMetaValidator("SitesSetPasswordValidator", _$$z.object({
       success: _$$z.boolean(),
       password_version: _$$z.number()
     }), null);
-    this.SitesUnsetPasswordValidator = YV("SitesUnsetPasswordValidator", _$$z.object({
+    this.SitesUnsetPasswordValidator = createMetaValidator("SitesUnsetPasswordValidator", _$$z.object({
       success: _$$z.boolean()
     }), null);
   }
@@ -136,4 +136,4 @@ export let $$a0 = new class {
     }) => await t.del(`/api/sites/${e.fileKey}/unset_password`));
   }
 }();
-export const z = $$a0; 
+export const z = $$a0;

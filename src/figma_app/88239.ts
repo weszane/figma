@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useCallback } from "react";
 import { useSelector, useStore, useDispatch } from "../vendor/514228";
-import { Ez5, w3z, dPJ } from "../figma_app/763686";
+import { AppStateTsApi, HandoffBindingsCpp, AutosaveEventType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "../vendor/523035";
 import { U } from "../figma_app/901889";
@@ -11,7 +11,7 @@ import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
 import { Tj } from "../figma_app/582924";
 import { aV } from "../figma_app/722362";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { e6 } from "../figma_app/707808";
 import { $A } from "../905/782918";
@@ -49,25 +49,25 @@ export function $$O13(e) {
 }
 export function $$R3() {
   let e = aV();
-  let t = J2(Ez5.currentSceneState().nodesWithStatusLoaded);
+  let t = getObservableOrFallback(AppStateTsApi.currentSceneState().nodesWithStatusLoaded);
   useEffect(() => {
     if (e || t) return;
-    let r = w3z.getAllNodesWithStatusesByPage();
+    let r = HandoffBindingsCpp.getAllNodesWithStatusesByPage();
     let n = new Set();
     r.forEach(e => {
       e.forEach(e => {
         n.add(e);
       });
     });
-    Tj(n, dPJ.DEV_HANDOFF_STATUS).then(() => {
-      w3z.onAllNodesWithStatusesLoaded(r);
+    Tj(n, AutosaveEventType.DEV_HANDOFF_STATUS).then(() => {
+      HandoffBindingsCpp.onAllNodesWithStatusesLoaded(r);
     });
   }, [e, t]);
   return t;
 }
 export function $$L7() {
-  let e = J2(Ez5.currentSceneState().numReadyNodesByPage);
-  let t = J2(Ez5.currentSceneState().numCompletedNodesByPage);
+  let e = getObservableOrFallback(AppStateTsApi.currentSceneState().numReadyNodesByPage);
+  let t = getObservableOrFallback(AppStateTsApi.currentSceneState().numCompletedNodesByPage);
   return useMemo(() => l()([...e.values(), ...t.values()]), [e, t]);
 }
 export function $$P5() {

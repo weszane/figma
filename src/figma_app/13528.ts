@@ -1,192 +1,183 @@
-let $$t729
-let $$t9245
-let $$re30
-let rt
-let $$rr215
-let $$rn168
-let $$ri234
-let ra
-let rs
-let ro
-let rl
-let rd
-let $$rc58
-let ru
-let rp
-let $$r_112
-let rh
-let rm
-let rg
-let rf
-let rE
-let $$ry107
-let rb
-let $$rT238
-let rI
-let $$rS90
-let $$rv132
-let $$rA12
-let $$rx1
-let $$rN163
-let rC
-let rw
-let rO
-let $$rR219
-let $$rL42
-let $$rP154
-let $$rD61
-let $$rk199
-let rM
-let rF
-let $$rj100
-let $$rU95
-let $$rB72
-let $$rG114
-let rV
-let rH
-let rz
-let $$rW150
-let $$rK193
-let $$rY33
-let r$
-let rX
-let rq
-let rJ
-let rZ
-let rQ
-let r0
-let $$r168
-let $$r291
-let r5
-let r3
-let $$r4109
-let $$r8211
-let $$r6164
-let r7
-let FullscreenPerfInfo
-let $$ne17
-let $$nt138
-let $$nr82
-let $$nn156
-let ni
-let na
-let ns
-let no
-let nl
-let nd
-let nc
-let nu
-let np
-let n_
-let nh
-let nm
-let $$ng226
-let $$nf5
-let nE
-let $$ny88
-let $$nb15
-let nT
-let nI
-let nS
-let nv
-let $$nA200
-let nx
-let $$nN207
-let $$nC9
-let nw
-let nO
-let nR
-let nL
-let nP
-let nD
-let nk
-let nM
-let $$nF183
-let $$nj155
-let $$nU227
-let $$nB159
-let nG
-let $$nV122
-let nH
-let $$nz65
-let nW
-let nK
-let $$nY108
-let n$
-let $$nX235
-let $$nq210
-let $$nJ38
-let $$nZ28
-let $$nQ13
-let $$n069
-let $$n1177
-let n2
-let $$n579
-let n3
-let $$n462
-let n8
-let $$n6195
-let $$n775
-let $$n940
-let ie
-let $$it55
-let $$ir104
-let $$ii131
-let ia
-let is
-let io
-let il
-let id
-let $$ic14
-let $$iu212
-let $$ip243
-let $$i_158
-let $$ih223
-let $$im2
-let $$ig66
-let $$iE41
-let $$iy21
-let $$ib196
-let $$iT35
-let iI
-let $$iS191
-let $$iv115
-let iA
-let ix
-let $$iN19
-let $$iC118
-let iw
-let $$iO93
-let $$iR78
-let $$iL175
-let $$iP171
-let $$iD151
-let ik
-let $$iM97
-let iF
-let ij
-let iU
-let $$iB135
-let iG
-let iV
-let $$iH188
-let $$iz206
+export let Actions;
+export let AnimationBindings;
+export let AppStateTsApi;
+export let ObservableValue_InteropToolMode__Internal;
+export let AspectRatioLockBindings;
+export let AutosaveHelpers;
+export let BindingsPerfBench;
+export let NestedCppObject_Internal;
+export let TestCppObject_Internal;
+export let CppBindingsTestHelpers;
+export let ObservableValue_TestCounter__Internal;
+export let ObservableValue_Array_TestCounter__Internal;
+export let BoundsWatcherCpp;
+export let BoxSelectionState_Internal;
+export let BranchingState_Internal;
+export let CanvasSearchHelpers;
+export let CanvasViewState_Internal;
+export let ObservableValue_BoundingRect__Internal;
+export let WritableObservableValue_Optional_InlineMenuTarget__Internal;
+export let ObservableValue_Optional_FocusedStackRegion__Internal;
+export let ChangesStagerState_Internal;
+export let ChangesStagerBindings;
+export let ObservableValue_Optional_ChangesStagerType__Internal;
+export let CodeComponentHelper;
+export let DesignToCodeState_Internal;
+export let ColorStateTsApi;
+export let ComponentPropsAiCPPBindings;
+export let ContentFillNudgesStateBindings;
+export let CmsHelpers;
+export let CmsRepeaterHelpers;
+export let CmsState_Internal;
+export let WritableObservableValue_CmsBindingFieldSchema__Internal;
+export let CooperState_Internal;
+export let BuzzCloneHelpers;
+export let CooperHelpers;
+export let CooperTemplateTypesTsBindings;
+export let DesignToBuzzHelpers;
+export let CSSExportHelpers;
+export let CurrentPageState_Internal;
+export let CurrentSceneState_Internal;
+export let CustomFocusHelpers;
+export let DebuggingHelpers;
+export let DesignSystemsInternalHelpers;
+export let DesignSystemsTsApi;
+export let DevHandoffState_Internal;
+export let ObservableValue_Array_DevHandoffOverviewNode__Internal;
+export let DevModePropertiesPanelState_Internal;
+export let DiffImpl;
+export let DSACppBindings;
+export let DrawBindingsCpp;
+export let DrawToolsTrackingState_Internal;
+export let EditorState_Internal;
+export let ObservableValue_CommentAnchorData__Internal;
+export let ObservableValue_Optional_LastUsedTopLevelFrameState__Internal;
+export let EmbedUiState_Internal;
+export let EditorPreferences_Internal;
+export let WritableObservableValue_ExportSelectionSettings__Internal;
+export let EyedropperBindings;
+export let EmojiCppBindings;
+export let FigjamState_Internal;
+export let FigmakeState_Internal;
+export let FirstDraftHelpers;
+export let FontHelpers;
+export let FontManualLoader;
+export let FullscreenInteractionTestHelpers;
+export let FullscreenPerfInfo;
+export let FullscreenPerfMetrics;
+export let FullscreenWebSocketTsApi;
+export let StackBindingsCpp;
+export let Fullscreen;
+export let WritableObservableValue_AnchorPoint__Internal;
+export let WritableObservableValue_DevModeActiveTab__Internal;
+export let ObservableValue_Tool__Internal;
+export let ObservableValue_PropertyState__Internal;
+export let WritableObservableValue_PresetType__Internal;
+export let WritableObservableValue_HandoffOutputFormat__Internal;
+export let WritableObservableValue_HandoffPlatformTarget__Internal;
+export let WritableObservableValue_PropertiesPanelTab__Internal;
+export let ObservableValue_StrokePanelMode__Internal;
+export let WritableObservableValue_PrototypeViewMode__Internal;
+export let ObservableValue_AnchorPoint__Internal;
+export let FocusViewInspectionState_Internal;
+export let HandoffBindingsCpp;
+export let HistoryChangesBindings;
+export let HoverState_Internal;
+export let IgnoreSelectionUIHidingBindings;
+export let InsetEditorBindingsCpp;
+export let EditorTypeConfig_Internal;
+export let Viewport_Internal;
+export let MouseBehaviorEvent_Internal;
+export let CanvasContext_Internal;
+export let InteractionCpp;
+export let CanvasSnapper_Internal;
+export let JSXRendererBindings;
+export let LibraryPubSub;
+export let LibraryAssets_Internal;
+export let ObservableValue_Array_PublishableSymbolForWeb__Internal;
+export let ObservableValue_Array_SubscribedSymbolForWeb__Internal;
+export let ObservableValue_Array_PublishableStateGroupForWeb__Internal;
+export let ObservableValue_Array_SubscribedStateGroupForWeb__Internal;
+export let ObservableValue_Array_PublishableStyleForWeb__Internal;
+export let ObservableValue_Array_SubscribedStyleForWeb__Internal;
+export let ObservableValue_Array_PublishableModuleForWeb__Internal;
+export let LinterCppBindings;
+export let MentionsCppBindings;
+export let MindmapCppBindings;
+export let Multiplayer;
+export let OffsetPathState_Internal;
+export let OffsetPathTsApi;
+export let WritableObservableValue_OffsetPathJoinType__Internal;
+export let PluginHelpers;
+export let PropertiesPanelState_Internal;
+export let PrototypingEditorState_Internal;
+export let PrototypingTsApi;
+export let ScaleToolState_Internal;
+export let ScaleToolTsApi;
+export let GradientToolApi;
+export let GridLayoutApi;
+export let SceneGraphHelpers;
+export let SceneNodeCpp;
+export let SelectionPaintHelpers;
+export let SelectionStylesHelpers;
+export let SimplifyVectorToolState_Internal;
+export let SimplifyVectorToolTsApi;
+export let SitesState_Internal;
+export let SitesBindingsCpp;
+export let SlideLikeNodeObserverState_Internal;
+export let StateManagementCPPBindings;
+export let SharedStyle;
+export let StickyClusteringCppBindings;
+export let TestFullscreenMultiplayerDocument;
+export let TextStyleOverridesBindings;
+export let Thumbnail;
+export let UiParserHelpers;
+export let UiState_Internal;
+export let WritableObservableValue_HoveredComponentPropDef__Internal;
+export let ObservableValue_FocusModeState__Internal;
+export let ObservableValue_Optional_ReparentIntoStackInfo__Internal;
+export let UserPreferencesTestHelpers;
+export let VariablesBindings;
+export let VideoCppBindings;
+export let WhiteboardAgendaCppBindings;
+export let WhiteboardStarterKitCppBindings;
+export let WhiteboardAiTemplatePreviewCppBindings;
+export let WhiteboardAiVisualCppBindings;
+export let WhiteboardCanvasAIBindings;
+export let WhiteboardTemplatePreviewCppBindings;
+export let WhiteboardTsApi;
+export let WhiteboardVotingCppBindings;
+export let HitTestBindings;
+export let FlappData_Internal;
+export let FlappBindings;
+export let SlidesObjectAnimationBindings;
+export let SlidesObjectAnimationPreviewManager_Internal;
+export let FocusedNodeView_Internal;
+export let SlidesEmbeddedPrototypeBindings;
+export let SlidesAiBindings;
+export let SlideThemeStylePreview_Internal;
+export let WhiteboardSectionPresetPickerCppBindings;
+export let StylesBindings;
+export let IgnoreUndoRedoBindings;
+export let SlidePptxImporterBindings;
+export let WriteInReadonlyScopeBindings;
+export let StringManagementBindings;
+export let TransformModifierBindingsCpp;
+export let CodeSelection_Internal;
+export let WritableObservableValue_CodeSelectionBreakpoint__Internal;
+export let WritableObservableValue_Optional_CodeBehaviorSelection__Internal;
+export let BreakpointFrameHelpersBindings;
+export let TemplateGenerationBindings;
+export let WidthProfilePreviewState_Internal;
+export let MakeBindings;
+export let ImageToolsBindings;
 
-function iW(e, t, r) {
-  t in e
-    ? Object.defineProperty(e, t, {
-        value: r,
-        enumerable: !0,
-        configurable: !0,
-        writable: !0,
-      })
-    : e[t] = r
-  return e
-}
+export type ObservableValueHandle = any;
 
 export class ObservableValue_InteropToolMode_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -206,18 +197,19 @@ export class MutableObservableValue_InteropToolMode_ extends ObservableValue_Int
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class NestedCppObject {
+  handle: ObservableValueHandle
   get someBool() {
     return NestedCppObject_Internal.__getProperty_someBool(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -233,12 +225,13 @@ export class MutableNestedCppObject extends NestedCppObject {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class TestCppObject {
+  handle: ObservableValueHandle
   get someNumber() {
     return TestCppObject_Internal.__getProperty_someNumber(this.handle)
   }
@@ -248,7 +241,7 @@ export class TestCppObject {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -264,14 +257,15 @@ export class MutableTestCppObject extends TestCppObject {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_TestCounter_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -291,14 +285,15 @@ export class MutableObservableValue_TestCounter_ extends ObservableValue_TestCou
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_TestCounter_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -318,18 +313,19 @@ export class MutableObservableValue_Array_TestCounter_ extends ObservableValue_A
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class BoxSelectionState {
+  handle: ObservableValueHandle
   get isBoxSelecting() {
     return BoxSelectionState_Internal.__getProperty_isBoxSelecting(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -337,14 +333,15 @@ export class BoxSelectionState {
 export class MutableBoxSelectionState extends BoxSelectionState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class BranchingState {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -352,12 +349,13 @@ export class BranchingState {
 export class MutableBranchingState extends BranchingState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class CanvasViewState {
+  handle: ObservableValueHandle
   get showOutlines() {
     return CanvasViewState_Internal.__getProperty_showOutlines(this.handle)
   }
@@ -439,7 +437,7 @@ export class CanvasViewState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -447,14 +445,15 @@ export class CanvasViewState {
 export class MutableCanvasViewState extends CanvasViewState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_BoundingRect_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -474,14 +473,15 @@ export class MutableObservableValue_BoundingRect_ extends ObservableValue_Boundi
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_Optional_InlineMenuTarget_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -505,14 +505,15 @@ export class MutableWritableObservableValue_Optional_InlineMenuTarget_ extends W
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Optional_FocusedStackRegion_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -532,12 +533,13 @@ export class MutableObservableValue_Optional_FocusedStackRegion_ extends Observa
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ChangesStagerState {
+  handle: ObservableValueHandle
   get isStaging() {
     return ChangesStagerState_Internal.__getProperty_isStaging(this.handle)
   }
@@ -547,7 +549,7 @@ export class ChangesStagerState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -555,14 +557,15 @@ export class ChangesStagerState {
 export class MutableChangesStagerState extends ChangesStagerState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Optional_ChangesStagerType_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -582,18 +585,19 @@ export class MutableObservableValue_Optional_ChangesStagerType_ extends Observab
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class DesignToCodeState {
+  handle: ObservableValueHandle
   get generating() {
     return DesignToCodeState_Internal.__getProperty_generating(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -601,7 +605,7 @@ export class DesignToCodeState {
 export class MutableDesignToCodeState extends DesignToCodeState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
@@ -620,9 +624,10 @@ export class CmsState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
+  handle: ObservableValueHandle
 }
 
 export class MutableCmsState extends CmsState {
@@ -632,14 +637,15 @@ export class MutableCmsState extends CmsState {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_CmsBindingFieldSchema_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -663,12 +669,13 @@ export class MutableWritableObservableValue_CmsBindingFieldSchema_ extends Writa
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class CooperState {
+  handle: ObservableValueHandle
   get highlightedNodeId() {
     return CooperState_Internal.__getProperty_highlightedNodeId(this.handle)
   }
@@ -682,7 +689,7 @@ export class CooperState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -690,18 +697,19 @@ export class CooperState {
 export class MutableCooperState extends CooperState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class CurrentPageState {
+  handle: ObservableValueHandle
   get requestedPageChange() {
     return CurrentPageState_Internal.__getProperty_requestedPageChange(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -709,7 +717,7 @@ export class CurrentPageState {
 export class MutableCurrentPageState extends CurrentPageState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
@@ -732,20 +740,22 @@ export class CurrentSceneState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
+  handle: ObservableValueHandle
 }
 
 export class MutableCurrentSceneState extends CurrentSceneState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class DevHandoffState {
+  handle: ObservableValueHandle
   get focusAnimationIsRunning() {
     return DevHandoffState_Internal.__getProperty_focusAnimationIsRunning(this.handle)
   }
@@ -779,7 +789,7 @@ export class DevHandoffState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -787,14 +797,15 @@ export class DevHandoffState {
 export class MutableDevHandoffState extends DevHandoffState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_DevHandoffOverviewNode_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -814,12 +825,13 @@ export class MutableObservableValue_Array_DevHandoffOverviewNode_ extends Observ
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class DevModePropertiesPanelState {
+  handle: ObservableValueHandle
   get selectedTab() {
     return DevModePropertiesPanelState_Internal.__getProperty_selectedTab(this.handle)
   }
@@ -829,7 +841,7 @@ export class DevModePropertiesPanelState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -837,12 +849,13 @@ export class DevModePropertiesPanelState {
 export class MutableDevModePropertiesPanelState extends DevModePropertiesPanelState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class DrawToolsTrackingState {
+  handle: ObservableValueHandle
   get currentToolStrokeCount() {
     return DrawToolsTrackingState_Internal.__getProperty_currentToolStrokeCount(this.handle)
   }
@@ -860,7 +873,7 @@ export class DrawToolsTrackingState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -868,12 +881,13 @@ export class DrawToolsTrackingState {
 export class MutableDrawToolsTrackingState extends DrawToolsTrackingState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class EditorState {
+  handle: ObservableValueHandle
   get selectionEmpty() {
     return EditorState_Internal.__getProperty_selectionEmpty(this.handle)
   }
@@ -939,7 +953,7 @@ export class EditorState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -947,14 +961,15 @@ export class EditorState {
 export class MutableEditorState extends EditorState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_CommentAnchorData_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -974,14 +989,15 @@ export class MutableObservableValue_CommentAnchorData_ extends ObservableValue_C
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Optional_LastUsedTopLevelFrameState_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1001,18 +1017,19 @@ export class MutableObservableValue_Optional_LastUsedTopLevelFrameState_ extends
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class EmbedUiState {
+  handle: ObservableValueHandle
   get activeEmbedData() {
     return EmbedUiState_Internal.__getProperty_activeEmbedData(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1020,12 +1037,13 @@ export class EmbedUiState {
 export class MutableEmbedUiState extends EmbedUiState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class EditorPreferences {
+  handle: ObservableValueHandle
   get activeCanvasPixelPreview() {
     return EditorPreferences_Internal.__getProperty_activeCanvasPixelPreview(this.handle)
   }
@@ -1383,7 +1401,7 @@ export class EditorPreferences {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1391,14 +1409,15 @@ export class EditorPreferences {
 export class MutableEditorPreferences extends EditorPreferences {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_ExportSelectionSettings_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1422,12 +1441,13 @@ export class MutableWritableObservableValue_ExportSelectionSettings_ extends Wri
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class FigjamState {
+  handle: ObservableValueHandle
   get isShapesSidebarOpen() {
     return FigjamState_Internal.__getProperty_isShapesSidebarOpen(this.handle)
   }
@@ -1449,7 +1469,7 @@ export class FigjamState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1457,18 +1477,19 @@ export class FigjamState {
 export class MutableFigjamState extends FigjamState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class FigmakeState {
+  handle: ObservableValueHandle
   get pastedNodeGuid() {
     return FigmakeState_Internal.__getProperty_pastedNodeGuid(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1476,14 +1497,15 @@ export class FigmakeState {
 export class MutableFigmakeState extends FigmakeState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_AnchorPoint_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1507,14 +1529,15 @@ export class MutableWritableObservableValue_AnchorPoint_ extends WritableObserva
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_DevModeActiveTab_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1538,14 +1561,15 @@ export class MutableWritableObservableValue_DevModeActiveTab_ extends WritableOb
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Tool_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1565,14 +1589,15 @@ export class MutableObservableValue_Tool_ extends ObservableValue_Tool_ {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_PropertyState_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1592,14 +1617,15 @@ export class MutableObservableValue_PropertyState_ extends ObservableValue_Prope
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_PresetType_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1623,14 +1649,15 @@ export class MutableWritableObservableValue_PresetType_ extends WritableObservab
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_HandoffOutputFormat_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1654,14 +1681,15 @@ export class MutableWritableObservableValue_HandoffOutputFormat_ extends Writabl
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_HandoffPlatformTarget_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1685,14 +1713,15 @@ export class MutableWritableObservableValue_HandoffPlatformTarget_ extends Writa
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_PropertiesPanelTab_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1716,14 +1745,15 @@ export class MutableWritableObservableValue_PropertiesPanelTab_ extends Writable
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_StrokePanelMode_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1743,14 +1773,15 @@ export class MutableObservableValue_StrokePanelMode_ extends ObservableValue_Str
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_PrototypeViewMode_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1774,14 +1805,15 @@ export class MutableWritableObservableValue_PrototypeViewMode_ extends WritableO
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_AnchorPoint_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1801,18 +1833,19 @@ export class MutableObservableValue_AnchorPoint_ extends ObservableValue_AnchorP
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class FocusViewInspectionState {
+  handle: ObservableValueHandle
   get isResizing() {
     return FocusViewInspectionState_Internal.__getProperty_isResizing(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1820,7 +1853,7 @@ export class FocusViewInspectionState {
 export class MutableFocusViewInspectionState extends FocusViewInspectionState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
@@ -1831,15 +1864,16 @@ export class HoverState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
+  handle: ObservableValueHandle
 }
 
 export class MutableHoverState extends HoverState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
@@ -1866,20 +1900,23 @@ export class EditorTypeConfig {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
+  handle: ObservableValueHandle
 }
 
 export class MutableEditorTypeConfig extends EditorTypeConfig {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
+  handle: ObservableValueHandle
 }
 
 export class Viewport {
+  handle: ObservableValueHandle
   viewportSpaceSelectionBounds() {
     return Viewport_Internal.viewportSpaceSelectionBounds(this.handle)
   }
@@ -1913,7 +1950,7 @@ export class Viewport {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -1925,12 +1962,13 @@ export class MutableViewport extends Viewport {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class MouseBehaviorEvent {
+  handle: ObservableValueHandle
   canvasSpaceMouse() {
     return MouseBehaviorEvent_Internal.canvasSpaceMouse(this.handle)
   }
@@ -1992,7 +2030,7 @@ export class MouseBehaviorEvent {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2016,14 +2054,15 @@ export class MutableMouseBehaviorEvent extends MouseBehaviorEvent {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class CanvasContext {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2107,14 +2146,15 @@ export class MutableCanvasContext extends CanvasContext {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class CanvasSnapper {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2138,12 +2178,13 @@ export class MutableCanvasSnapper extends CanvasSnapper {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class LibraryAssets {
+  handle: ObservableValueHandle
   get publishableSymbols() {
     return LibraryAssets_Internal.__getProperty_publishableSymbols(this.handle)
   }
@@ -2221,7 +2262,7 @@ export class LibraryAssets {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2229,14 +2270,15 @@ export class LibraryAssets {
 export class MutableLibraryAssets extends LibraryAssets {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_PublishableSymbolForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2256,14 +2298,15 @@ export class MutableObservableValue_Array_PublishableSymbolForWeb_ extends Obser
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_SubscribedSymbolForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2283,14 +2326,15 @@ export class MutableObservableValue_Array_SubscribedSymbolForWeb_ extends Observ
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_PublishableStateGroupForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2310,14 +2354,15 @@ export class MutableObservableValue_Array_PublishableStateGroupForWeb_ extends O
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_SubscribedStateGroupForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2337,14 +2382,15 @@ export class MutableObservableValue_Array_SubscribedStateGroupForWeb_ extends Ob
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_PublishableStyleForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2364,14 +2410,15 @@ export class MutableObservableValue_Array_PublishableStyleForWeb_ extends Observ
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_SubscribedStyleForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2391,14 +2438,15 @@ export class MutableObservableValue_Array_SubscribedStyleForWeb_ extends Observa
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Array_PublishableModuleForWeb_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2418,12 +2466,13 @@ export class MutableObservableValue_Array_PublishableModuleForWeb_ extends Obser
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class OffsetPathState {
+  handle: ObservableValueHandle
   get offset() {
     return OffsetPathState_Internal.__getProperty_offset(this.handle)
   }
@@ -2441,7 +2490,7 @@ export class OffsetPathState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2449,14 +2498,15 @@ export class OffsetPathState {
 export class MutableOffsetPathState extends OffsetPathState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_OffsetPathJoinType_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2480,12 +2530,13 @@ export class MutableWritableObservableValue_OffsetPathJoinType_ extends Writable
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class PropertiesPanelState {
+  handle: ObservableValueHandle
   get propertiesPanelTab() {
     return PropertiesPanelState_Internal.__getProperty_propertiesPanelTab(this.handle)
   }
@@ -2523,7 +2574,7 @@ export class PropertiesPanelState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2531,12 +2582,13 @@ export class PropertiesPanelState {
 export class MutablePropertiesPanelState extends PropertiesPanelState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class PrototypingEditorState {
+  handle: ObservableValueHandle
   get activePrototypeDevice() {
     return PrototypingEditorState_Internal.__getProperty_activePrototypeDevice(this.handle)
   }
@@ -2554,7 +2606,7 @@ export class PrototypingEditorState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2562,12 +2614,13 @@ export class PrototypingEditorState {
 export class MutablePrototypingEditorState extends PrototypingEditorState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ScaleToolState {
+  handle: ObservableValueHandle
   get scale() {
     return ScaleToolState_Internal.__getProperty_scale(this.handle)
   }
@@ -2589,7 +2642,7 @@ export class ScaleToolState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2597,18 +2650,19 @@ export class ScaleToolState {
 export class MutableScaleToolState extends ScaleToolState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class SimplifyVectorToolState {
+  handle: ObservableValueHandle
   get threshold() {
     return SimplifyVectorToolState_Internal.__getProperty_threshold(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2616,18 +2670,19 @@ export class SimplifyVectorToolState {
 export class MutableSimplifyVectorToolState extends SimplifyVectorToolState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class SitesState {
+  handle: ObservableValueHandle
   get focusedLayoutSetNodes() {
     return SitesState_Internal.__getProperty_focusedLayoutSetNodes(this.handle)
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2635,12 +2690,13 @@ export class SitesState {
 export class MutableSitesState extends SitesState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class SlideLikeNodeObserverState {
+  handle: ObservableValueHandle
   get slideLikeNodeIdsOnCanvas() {
     return SlideLikeNodeObserverState_Internal.__getProperty_slideLikeNodeIdsOnCanvas(this.handle)
   }
@@ -2650,7 +2706,7 @@ export class SlideLikeNodeObserverState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2658,12 +2714,13 @@ export class SlideLikeNodeObserverState {
 export class MutableSlideLikeNodeObserverState extends SlideLikeNodeObserverState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class UiState {
+  handle: ObservableValueHandle
   get hideMultiplayerCursors() {
     return UiState_Internal.__getProperty_hideMultiplayerCursors(this.handle)
   }
@@ -2785,7 +2842,7 @@ export class UiState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2793,14 +2850,15 @@ export class UiState {
 export class MutableUiState extends UiState {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_HoveredComponentPropDef_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2824,14 +2882,15 @@ export class MutableWritableObservableValue_HoveredComponentPropDef_ extends Wri
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_FocusModeState_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2851,14 +2910,15 @@ export class MutableObservableValue_FocusModeState_ extends ObservableValue_Focu
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class ObservableValue_Optional_ReparentIntoStackInfo_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2878,12 +2938,13 @@ export class MutableObservableValue_Optional_ReparentIntoStackInfo_ extends Obse
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class FlappData {
+  handle: ObservableValueHandle
   get nodeIds() {
     return FlappData_Internal.__getProperty_nodeIds(this.handle)
   }
@@ -2897,7 +2958,7 @@ export class FlappData {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2905,12 +2966,13 @@ export class FlappData {
 export class MutableFlappData extends FlappData {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class SlidesObjectAnimationPreviewManager {
+  handle: ObservableValueHandle
   get animationPreviewSlideId() {
     return SlidesObjectAnimationPreviewManager_Internal.__getProperty_animationPreviewSlideId(this.handle)
   }
@@ -2920,7 +2982,7 @@ export class SlidesObjectAnimationPreviewManager {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -2944,12 +3006,13 @@ export class MutableSlidesObjectAnimationPreviewManager extends SlidesObjectAnim
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class FocusedNodeView {
+  handle: ObservableValueHandle
   get isInFocusedNodeView() {
     return FocusedNodeView_Internal.__getProperty_isInFocusedNodeView(this.handle)
   }
@@ -2983,7 +3046,7 @@ export class FocusedNodeView {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -3051,14 +3114,15 @@ export class MutableFocusedNodeView extends FocusedNodeView {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class SlideThemeStylePreview {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -3070,12 +3134,13 @@ export class MutableSlideThemeStylePreview extends SlideThemeStylePreview {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class CodeSelection {
+  handle: ObservableValueHandle
   get selectedCodeNodeIds() {
     return CodeSelection_Internal.__getProperty_selectedCodeNodeIds(this.handle)
   }
@@ -3141,7 +3206,7 @@ export class CodeSelection {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -3149,14 +3214,15 @@ export class CodeSelection {
 export class MutableCodeSelection extends CodeSelection {
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_CodeSelectionBreakpoint_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -3180,14 +3246,15 @@ export class MutableWritableObservableValue_CodeSelectionBreakpoint_ extends Wri
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
 
 export class WritableObservableValue_Optional_CodeBehaviorSelection_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
+
     this.handle = e
   }
 }
@@ -3211,7 +3278,7 @@ export class MutableWritableObservableValue_Optional_CodeBehaviorSelection_ exte
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
@@ -3222,9 +3289,10 @@ export class WidthProfilePreviewState {
   }
 
   constructor(e) {
-    
+
     this.handle = e
   }
+  handle: ObservableValueHandle
 }
 
 export class MutableWidthProfilePreviewState extends WidthProfilePreviewState {
@@ -3234,183 +3302,11 @@ export class MutableWidthProfilePreviewState extends WidthProfilePreviewState {
 
   constructor(e) {
     super(e)
-    
+
     this.handle = e
   }
 }
-export let Actions;
-export let AnimationBindings;
-export let AppStateTsApi;
-export let ObservableValue_InteropToolMode__Internal;
-export let AspectRatioLockBindings;
-export let AutosaveHelpers;
-export let BindingsPerfBench;
-export let NestedCppObject_Internal;
-export let TestCppObject_Internal;
-export let CppBindingsTestHelpers;
-export let ObservableValue_TestCounter__Internal;
-export let ObservableValue_Array_TestCounter__Internal;
-export let BoundsWatcherCpp;
-export let BoxSelectionState_Internal;
-export let BranchingState_Internal;
-export let CanvasSearchHelpers;
-export let CanvasViewState_Internal;
-export let ObservableValue_BoundingRect__Internal;
-export let WritableObservableValue_Optional_InlineMenuTarget__Internal;
-export let ObservableValue_Optional_FocusedStackRegion__Internal;
-export let ChangesStagerState_Internal;
-export let ChangesStagerBindings;
-export let ObservableValue_Optional_ChangesStagerType__Internal;
-export let CodeComponentHelper;
-export let DesignToCodeState_Internal;
-export let ColorStateTsApi;
-export let ComponentPropsAiCPPBindings;
-export let ContentFillNudgesStateBindings;
-export let CmsHelpers;
-export let CmsRepeaterHelpers;
-export let CmsState_Internal;
-export let WritableObservableValue_CmsBindingFieldSchema__Internal;
-export let CooperState_Internal;
-export let BuzzCloneHelpers;
-export let CooperHelpers;
-export let CooperTemplateTypesTsBindings;
-export let DesignToBuzzHelpers;
-export let CSSExportHelpers;
-export let CurrentPageState_Internal;
-export let CurrentSceneState_Internal;
-export let CustomFocusHelpers;
-export let DebuggingHelpers;
-export let DesignSystemsInternalHelpers;
-export let DesignSystemsTsApi;
-export let DevHandoffState_Internal;
-export let ObservableValue_Array_DevHandoffOverviewNode__Internal;
-export let DevModePropertiesPanelState_Internal;
-export let DiffImpl;
-export let DSACppBindings;
-export let DrawBindingsCpp;
-export let DrawToolsTrackingState_Internal;
-export let EditorState_Internal;
-export let ObservableValue_CommentAnchorData__Internal;
-export let ObservableValue_Optional_LastUsedTopLevelFrameState__Internal;
-export let EmbedUiState_Internal;
-export let EditorPreferences_Internal;
-export let WritableObservableValue_ExportSelectionSettings__Internal;
-export let EyedropperBindings;
-export let EmojiCppBindings;
-export let FigjamState_Internal;
-export let FigmakeState_Internal;
-export let FirstDraftHelpers;
-export let FontHelpers;
-export let FontManualLoader;
-export let FullscreenInteractionTestHelpers;
-export let FullscreenPerfInfo;
-export let FullscreenPerfMetrics;
-export let FullscreenWebSocketTsApi;
-export let StackBindingsCpp;
-export let Fullscreen;
-export let WritableObservableValue_AnchorPoint__Internal;
-export let WritableObservableValue_DevModeActiveTab__Internal;
-export let ObservableValue_Tool__Internal;
-export let ObservableValue_PropertyState__Internal;
-export let WritableObservableValue_PresetType__Internal;
-export let WritableObservableValue_HandoffOutputFormat__Internal;
-export let WritableObservableValue_HandoffPlatformTarget__Internal;
-export let WritableObservableValue_PropertiesPanelTab__Internal;
-export let ObservableValue_StrokePanelMode__Internal;
-export let WritableObservableValue_PrototypeViewMode__Internal;
-export let ObservableValue_AnchorPoint__Internal;
-export let FocusViewInspectionState_Internal;
-export let HandoffBindingsCpp;
-export let HistoryChangesBindings;
-export let HoverState_Internal;
-export let IgnoreSelectionUIHidingBindings;
-export let InsetEditorBindingsCpp;
-export let EditorTypeConfig_Internal;
-export let Viewport_Internal;
-export let MouseBehaviorEvent_Internal;
-export let CanvasContext_Internal;
-export let InteractionCpp;
-export let CanvasSnapper_Internal;
-export let JSXRendererBindings;
-export let LibraryPubSub;
-export let LibraryAssets_Internal;
-export let ObservableValue_Array_PublishableSymbolForWeb__Internal;
-export let ObservableValue_Array_SubscribedSymbolForWeb__Internal;
-export let ObservableValue_Array_PublishableStateGroupForWeb__Internal;
-export let ObservableValue_Array_SubscribedStateGroupForWeb__Internal;
-export let ObservableValue_Array_PublishableStyleForWeb__Internal;
-export let ObservableValue_Array_SubscribedStyleForWeb__Internal;
-export let ObservableValue_Array_PublishableModuleForWeb__Internal;
-export let LinterCppBindings;
-export let MentionsCppBindings;
-export let MindmapCppBindings;
-export let Multiplayer;
-export let OffsetPathState_Internal;
-export let OffsetPathTsApi;
-export let WritableObservableValue_OffsetPathJoinType__Internal;
-export let PluginHelpers;
-export let PropertiesPanelState_Internal;
-export let PrototypingEditorState_Internal;
-export let PrototypingTsApi;
-export let ScaleToolState_Internal;
-export let ScaleToolTsApi;
-export let GradientToolApi;
-export let GridLayoutApi;
-export let SceneGraphHelpers;
-export let SceneNodeCpp;
-export let SelectionPaintHelpers;
-export let SelectionStylesHelpers;
-export let SimplifyVectorToolState_Internal;
-export let SimplifyVectorToolTsApi;
-export let SitesState_Internal;
-export let SitesBindingsCpp;
-export let SlideLikeNodeObserverState_Internal;
-export let StateManagementCPPBindings;
-export let SharedStyle;
-export let StickyClusteringCppBindings;
-export let TestFullscreenMultiplayerDocument;
-export let TextStyleOverridesBindings;
-export let Thumbnail;
-export let UiParserHelpers;
-export let UiState_Internal;
-export let WritableObservableValue_HoveredComponentPropDef__Internal;
-export let ObservableValue_FocusModeState__Internal;
-export let ObservableValue_Optional_ReparentIntoStackInfo__Internal;
-export let UserPreferencesTestHelpers;
-export let VariablesBindings;
-export let VideoCppBindings;
-export let WhiteboardAgendaCppBindings;
-export let WhiteboardStarterKitCppBindings;
-export let WhiteboardAiTemplatePreviewCppBindings;
-export let WhiteboardAiVisualCppBindings;
-export let WhiteboardCanvasAIBindings;
-export let WhiteboardTemplatePreviewCppBindings;
-export let WhiteboardTsApi;
-export let WhiteboardVotingCppBindings;
-export let HitTestBindings;
-export let FlappData_Internal;
-export let FlappBindings;
-export let SlidesObjectAnimationBindings;
-export let SlidesObjectAnimationPreviewManager_Internal;
-export let FocusedNodeView_Internal;
-export let SlidesEmbeddedPrototypeBindings;
-export let SlidesAiBindings;
-export let SlideThemeStylePreview_Internal;
-export let WhiteboardSectionPresetPickerCppBindings;
-export let StylesBindings;
-export let IgnoreUndoRedoBindings;
-export let SlidePptxImporterBindings;
-export let WriteInReadonlyScopeBindings;
-export let StringManagementBindings;
-export let TransformModifierBindingsCpp;
-export let CodeSelection_Internal;
-export let WritableObservableValue_CodeSelectionBreakpoint__Internal;
-export let WritableObservableValue_Optional_CodeBehaviorSelection__Internal;
-export let BreakpointFrameHelpersBindings;
-export let TemplateGenerationBindings;
-export let WidthProfilePreviewState_Internal;
-export let MakeBindings;
-export let ImageToolsBindings;
+
 export function initializeGlobalObjects(e) {
   Actions = e.Actions
   AnimationBindings = e.AnimationBindings
@@ -3741,7 +3637,7 @@ export function initializeGlobalObjects(e) {
   MakeBindings = e.MakeBindings
   ImageToolsBindings = e.ImageToolsBindings
 }
-export function getAllBindings() {
+export function getAllBindingHelpers() {
   return {
     actions: Actions,
     animationBindings: AnimationBindings,
@@ -3918,253 +3814,7 @@ export function getAllBindings() {
     widthProfilePreviewState_Internal: WidthProfilePreviewState_Internal,
   }
 }
-export const $XN = CanvasOperation
-export const $au = CmsHelpers
-export const $mk = WhiteboardAiVisualCppBindings
-export const A$i = VisibilityState
-export const AP3 = EligibilityStatus
-export const AWq = HistoryChangesBindings
-export const AjQ = TextCase
-export const Ats = DetachError
-export const BJw = AccessibilityAttributes
-export const BXd = LibraryPubSub
-export const BtE = PreviewStage
-export const CMm = GraphicObjectTypes
-export const CT8 = ContentFillNudgesStateBindings
-export const CUU = SceneNodeCpp
-export const CWU = VariablesBindings
-export const CX = InsetEditorBindingsCpp
-export const CXS = GridDirection
-export const CeL = FullscreenPerfMetrics
-export const D1Y = GraphicElement
-export const DCy = SlidesEmbeddedPrototypeBindings
-export const DPQ = IPagePlugin
-export const DV9 = WhiteboardTsApi
-export const Det = CollectionGroupType
-export const Dje = LibraryUpdateStatus
-export const E63 = SaveConnectionIssues
-export const EUU = StickyTableConfig
-export const EW4 = EditAction
-export const EYD = DeviceType
-export const Egt = SceneGraphHelpers
-export const En0 = Actions
-export const Ez5 = AppStateTsApi
-export const F84 = SwitchState
-export const FAf = DesignWorkspace
-export const G1O = DrawBindingsCpp
-export const G6k = VariableCollectionContext
-export const GUn = HitTestBindings
-export const H$z = OperationResult
-export const HS4 = VariableUIContext
-export const HV5 = GridLayoutApi
-export const Hdj = WeightLevel
-export const Hur = StickyClusteringCppBindings
-export const Hyj = WhiteboardTemplatePreviewCppBindings
-export const IPu = CooperHelpers
-export const IQ2 = SlideViewType
-export const IcQ = AxisType
-export const Ifi = MatchCriteria
-export const J5D = FileLoadEvent
-export const J6N = SlideAnimation
-export const JA = SnapshotLevel
-export const KAf = EmbedPanelType
-export const KO7 = getAllBindings
-export const KWd = TransactionCommand
-export const KgA = UserInteractionState
-export const KjJ = ScrollBehavior
-export const KpW = CollaborationType
-export const Krs = TextStyleOverridesBindings
-export const LQj = initializeGlobalObjects
-export const Lov = PageViewMode
-export const Lv9 = BoundsWatcherCpp
-export const MEW = PerfResult
-export const MoP = YesNo
-export const Mpt = DesignToBuzzHelpers
-export const Msn = SitesBindingsCpp
-export const NFK = AnimationStatus
-export const NLJ = DesignGraphElements
-export const NfO = PluginHelpers
-export const OhE = WhiteboardCanvasAIBindings
-export const Oin = UIVisibilitySetting
-export const OmW = EyedropperBindings
-export const Osy = SelectionPaintHelpers
-export const P2e = FullscreenPerfInfo
-export const PHu = EmailAction
-export const PKm = DesignSystemsInternalHelpers
-export const PMF = SquareShapes
-export const PVe = FontWeight
-export const Pdb = SharedStyle
-export const Pir = MixedBlockType
-export const Pls = ColorIdentifier
-export const Pt4 = StylesBindings
-export const Q8J = SimplifyVectorToolTsApi
-export const QOV = UserActionState
-export const QOd = BaseColor
-export const Qa7 = StackBindingsCpp
-export const QeU = SpacingMode
-export const Qej = MenuType
-export const QjO = TemplateType
-export const RN9 = SpacingConstants
-export const RY1 = IMixedValues
-export const S2l = IgnoreSelectionUIHidingBindings
-export const SES = SessionOrigin
-export const SIf = ColorStateTsApi
-export const SmY = EmojiCppBindings
-export const Sqb = GeometricValues
-export const T4N = WhiteboardSectionPresetPickerCppBindings
-export const Tcr = WhiteboardFeatures
-export const Ubo = DebuggingHelpers
-export const UcW = ResourceLocation
-export const V4z = TransformModifierBindingsCpp
-export const V5h = AlignmentPosition
-export const VD3 = StyleVariableOperation
-export const VDs = CustomFocusHelpers
-export const VIy = PanelType
-export const VQu = ApprovalStatus
-export const VTL = ConfirmationLevel
-export const Vzr = Thumbnail
-export const W2B = EditChangeMode
-export const W8Y = SessionStatus
-export const Ws0 = ChangesStagerBindings
-export const X3B = PrototypingTsApi
-export const XJn = FirstDraftHelpers
-export const XpJ = TypographySettings
-export const Xts = MergeStatus
-export const YEY = CanvasSearchHelpers
-export const YIO = BranchingOperation
-export const YIb = DesignSystemsTsApi
-export const YdF = SlidesObjectAnimationBindings
-export const Z64 = SocialMediaFormats
-export const ZEs = ChildRelationshipStatus
-export const Zdr = SlidesAiBindings
-export const ZiZ = SceneIdentifier
-export const ZxO = Confirmation
-export const _4o = IVariableStyles
-export const _SS = OffsetPathTsApi
-export const _eX = EmbedType
-export const _em = PluginModalType
-export const _gJ = IAssertResource
-export const _q7 = UnselectedNodesMode
-export const aTl = FileAndBranchTipType
-export const b3I = ImageFormat
-export const bOM = PresentationValidationStatus
-export const bQY = MeasurementType
-export const bbV = UiParserHelpers
-export const biQ = ComponentPropsAiCPPBindings
-export const bk = ContentLoadingState
-export const bq3 = PresetType
-export const c0k = BreakpointFrameHelpersBindings
-export const ccR = SyncError
-export const cfv = Positioning
-export const cgc = FullscreenWebSocketTsApi
-export const cxo = ToolType
-export const dBj = PresentationMode
-export const dNx = SelectionState
-export const dPJ = AutosaveEventType
-export const dTb = DetachStatus
-export const dYj = YesNo
-export const daH = ColorOptions
-export const deU = PluginType
-export const e0R = CopyPasteType
-export const eVK = AnchorPosition
-export const ed1 = FruitTypes
-export const egF = DiffImpl
-export const f1$ = WriteInReadonlyScopeBindings
-export const f2e = UserInteractionButton
-export const fHP = LogicalOperation
-export const fZl = CooperTemplateTypesTsBindings
-export const fp8 = MentionsCppBindings
-export const glU = Fullscreen
-export const goc = AccessLevel
-export const gw5 = WhiteboardStarterKitCppBindings
-export const h3O = Multiplayer
-export const h62 = WhiteboardIntegrationType
-export const hJs = SnapMode
-export const hKj = CustomPosition
-export const htN = CmsRepeaterHelpers
-export const hwI = FontManualLoader
-export const hxu = ProcessStage
-export const i0e = StateTransitionResult
-export const i1K = FitMode
-export const i6g = AutosaveHelpers
-export const iCO = StateHierarchy
-export const iIc = SceneChangeType
-export const iLo = SlidePptxImporterBindings
-export const ibQ = ItemType
-export const idw = FigmaSite
-export const jkn = TabMode
-export const jot = IgnoreUndoRedoBindings
-export const kR6 = ColumnInteraction
-export const kTx = SelectionStylesHelpers
-export const kul = SchemaJoinStatus
-export const kz3 = RelationType
-export const lKz = Confirmation
-export const lyf = ViewType
-export const m7W = SettingsAction
-export const mHF = LinterCppBindings
-export const mNT = UserExperienceMode
-export const miP = Orientation
-export const miS = HideMode
-export const mrc = TextAlignmentOptions
-export const n1M = MakeBindings
-export const nQ7 = SelfDesignType
-export const nzw = DiagramElementType
-export const oHM = FlappBindings
-export const oHs = AbsolutePositionType
-export const oUq = DSACppBindings
-export const oVz = DraftState
-export const oXo = StateManagementCPPBindings
-export const ofk = WhiteboardVotingCppBindings
-export const otU = ComponentPanelTab
-export const pWM = CoverageStatus
-export const phr = CSSExportHelpers
-export const qmM = InteractionCpp
-export const qq = ShapeSidebarMode
-export const rLd = HasPlugin
-export const rVj = PageType
-export const rcl = Command
-export const rpt = FilterOption
-export const ruz = ImageToolsBindings
-export const ryE = JSXRendererBindings
-export const sFD = ColorIdentifier
-export const sYL = GitReferenceType
-export const t2E = GradientToolApi
-export const t8O = FontHelpers
-export const tHB = VideoCppBindings
-export const tIU = JoinType
-export const tKW = MeasurementUnit
-export const tS9 = AspectRatioLockBindings
-export const tvY = BackgroundPattern
-export const uQ6 = ActionType
-export const uXP = ConnectionState
-export const uv = BuzzCloneHelpers
-export const v8u = FileFormat
-export const vRS = NoneColor
-export const vhv = PageSelectionType
-export const vlL = WhiteboardAiTemplatePreviewCppBindings
-export const vmp = Position
-export const vwB = ChartType
-export const w3z = HandoffBindingsCpp
-export const wzW = MindmapCppBindings
-export const xLh = CurveType
-export const xSx = UndoActionStatus
-export const xae = UserInterfaceElements
-export const xal = DataLoadStatus
-export const xbm = BorderStyle
-export const xc1 = SelectionPanelType
-export const yDE = BindingsPerfBench
-export const yFm = ScaleToolTsApi
-export const yTM = DrawingElementType
-export const yxn = CanvasComponentType
-export const z6l = CodeComponentHelper
-export const z7E = PaintTools
-export const z7j = PluginSource
-export const zGX = FeedbackCategory
-export const zd5 = TextBoxType
-export const zdR = WhiteboardAgendaCppBindings
-export const zol = Confirmation
-export const zuo = AnimationBindings
-export const zvt = TextModificationAction
+
 export enum CurveType {
   LINEAR = 0,
   BEZIER = 1,
@@ -6571,3 +6221,256 @@ export enum SlideAnimation {
 export enum SquareShapes {
   SIMPLE_SQUARE = 0,
 }
+export enum IPagePlugin {
+  "DEFAULT" = 0,
+  "CONTAINING_PAGE" = 1,
+  "PLUGIN" = 2,
+}
+
+export const $XN = CanvasOperation
+export const $au = CmsHelpers
+export const $mk = WhiteboardAiVisualCppBindings
+export const A$i = VisibilityState
+export const AP3 = EligibilityStatus
+export const AWq = HistoryChangesBindings
+export const AjQ = TextCase
+export const Ats = DetachError
+export const BJw = AccessibilityAttributes
+export const BXd = LibraryPubSub
+export const BtE = PreviewStage
+export const CMm = GraphicObjectTypes
+export const CT8 = ContentFillNudgesStateBindings
+export const CUU = SceneNodeCpp
+export const CWU = VariablesBindings
+export const CX = InsetEditorBindingsCpp
+export const CXS = GridDirection
+export const CeL = FullscreenPerfMetrics
+export const D1Y = GraphicElement
+export const DCy = SlidesEmbeddedPrototypeBindings
+export const DPQ = IPagePlugin
+export const DV9 = WhiteboardTsApi
+export const Det = CollectionGroupType
+export const Dje = LibraryUpdateStatus
+export const E63 = SaveConnectionIssues
+export const EUU = StickyTableConfig
+export const EW4 = EditAction
+export const EYD = DeviceType
+export const Egt = SceneGraphHelpers
+export const En0 = Actions
+export const Ez5 = AppStateTsApi
+export const F84 = SwitchState
+export const FAf = DesignWorkspace
+export const G1O = DrawBindingsCpp
+export const G6k = VariableCollectionContext
+export const GUn = HitTestBindings
+export const H$z = OperationResult
+export const HS4 = VariableUIContext
+export const HV5 = GridLayoutApi
+export const Hdj = WeightLevel
+export const Hur = StickyClusteringCppBindings
+export const Hyj = WhiteboardTemplatePreviewCppBindings
+export const IPu = CooperHelpers
+export const IQ2 = SlideViewType
+export const IcQ = AxisType
+export const Ifi = MatchCriteria
+export const J5D = FileLoadEvent
+export const J6N = SlideAnimation
+export const JA = SnapshotLevel
+export const KAf = EmbedPanelType
+export const KO7 = getAllBindingHelpers
+export const KWd = TransactionCommand
+export const KgA = UserInteractionState
+export const KjJ = ScrollBehavior
+export const KpW = CollaborationType
+export const Krs = TextStyleOverridesBindings
+export const LQj = initializeGlobalObjects
+export const Lov = PageViewMode
+export const Lv9 = BoundsWatcherCpp
+export const MEW = PerfResult
+export const MoP = YesNo
+export const Mpt = DesignToBuzzHelpers
+export const Msn = SitesBindingsCpp
+export const NFK = AnimationStatus
+export const NLJ = DesignGraphElements
+export const NfO = PluginHelpers
+export const OhE = WhiteboardCanvasAIBindings
+export const Oin = UIVisibilitySetting
+export const OmW = EyedropperBindings
+export const Osy = SelectionPaintHelpers
+export const P2e = FullscreenPerfInfo
+export const PHu = EmailAction
+export const PKm = DesignSystemsInternalHelpers
+export const PMF = SquareShapes
+export const PVe = FontWeight
+export const Pdb = SharedStyle
+export const Pir = MixedBlockType
+export const Pls = ColorIdentifier
+export const Pt4 = StylesBindings
+export const Q8J = SimplifyVectorToolTsApi
+export const QOV = UserActionState
+export const QOd = BaseColor
+export const Qa7 = StackBindingsCpp
+export const QeU = SpacingMode
+export const Qej = MenuType
+export const QjO = TemplateType
+export const RN9 = SpacingConstants
+export const RY1 = IMixedValues
+export const S2l = IgnoreSelectionUIHidingBindings
+export const SES = SessionOrigin
+export const SIf = ColorStateTsApi
+export const SmY = EmojiCppBindings
+export const Sqb = GeometricValues
+export const T4N = WhiteboardSectionPresetPickerCppBindings
+export const Tcr = WhiteboardFeatures
+export const Ubo = DebuggingHelpers
+export const UcW = ResourceLocation
+export const V4z = TransformModifierBindingsCpp
+export const V5h = AlignmentPosition
+export const VD3 = StyleVariableOperation
+export const VDs = CustomFocusHelpers
+export const VIy = IPanelType
+export const VQu = ApprovalStatus
+export const VTL = ConfirmationLevel
+export const Vzr = Thumbnail
+export const W2B = EditChangeMode
+export const W8Y = SessionStatus
+export const Ws0 = ChangesStagerBindings
+export const X3B = PrototypingTsApi
+export const XJn = FirstDraftHelpers
+export const XpJ = TypographySettings
+export const Xts = MergeStatus
+export const YEY = CanvasSearchHelpers
+export const YIO = BranchingOperation
+export const YIb = DesignSystemsTsApi
+export const YdF = SlidesObjectAnimationBindings
+export const Z64 = SocialMediaFormats
+export const ZEs = ChildRelationshipStatus
+export const Zdr = SlidesAiBindings
+export const ZiZ = SceneIdentifier
+export const ZxO = Confirmation
+export const _4o = IVariableStyles
+export const _SS = OffsetPathTsApi
+export const _eX = EmbedType
+export const _em = PluginModalType
+export const _gJ = IAssertResource
+export const _q7 = UnselectedNodesMode
+export const aTl = FileAndBranchTipType
+export const b3I = ImageFormat
+export const bOM = PresentationValidationStatus
+export const bQY = MeasurementType
+export const bbV = UiParserHelpers
+export const biQ = ComponentPropsAiCPPBindings
+export const bk = ContentLoadingState
+export const bq3 = PresetType
+export const c0k = BreakpointFrameHelpersBindings
+export const ccR = SyncError
+export const cfv = Positioning
+export const cgc = FullscreenWebSocketTsApi
+export const cxo = ToolType
+export const dBj = PresentationMode
+export const dNx = SelectionState
+export const dPJ = AutosaveEventType
+export const dTb = DetachStatus
+export const dYj = YesNo
+export const daH = ColorOptions
+export const deU = PluginType
+export const e0R = CopyPasteType
+export const eVK = AnchorPosition
+export const ed1 = FruitTypes
+export const egF = DiffImpl
+export const f1$ = WriteInReadonlyScopeBindings
+export const f2e = UserInteractionButton
+export const fHP = LogicalOperation
+export const fZl = CooperTemplateTypesTsBindings
+export const fp8 = MentionsCppBindings
+export const glU = Fullscreen
+export const goc = AccessLevel
+export const gw5 = WhiteboardStarterKitCppBindings
+export const h3O = Multiplayer
+export const h62 = WhiteboardIntegrationType
+export const hJs = SnapMode
+export const hKj = CustomPosition
+export const htN = CmsRepeaterHelpers
+export const hwI = FontManualLoader
+export const hxu = ProcessStage
+export const i0e = StateTransitionResult
+export const i1K = FitMode
+export const i6g = AutosaveHelpers
+export const iCO = StateHierarchy
+export const iIc = SceneChangeType
+export const iLo = SlidePptxImporterBindings
+export const ibQ = ItemType
+export const idw = FigmaSite
+export const jkn = TabMode
+export const jot = IgnoreUndoRedoBindings
+export const kR6 = ColumnInteraction
+export const kTx = SelectionStylesHelpers
+export const kul = SchemaJoinStatus
+export const kz3 = RelationType
+export const lKz = Confirmation
+export const lyf = ViewType
+export const m7W = SettingsAction
+export const mHF = LinterCppBindings
+export const mNT = UserExperienceMode
+export const miP = Orientation
+export const miS = HideMode
+export const mrc = TextAlignmentOptions
+export const n1M = MakeBindings
+export const nQ7 = SelfDesignType
+export const nzw = DiagramElementType
+export const oHM = FlappBindings
+export const oHs = AbsolutePositionType
+export const oUq = DSACppBindings
+export const oVz = DraftState
+export const oXo = StateManagementCPPBindings
+export const ofk = WhiteboardVotingCppBindings
+export const otU = ComponentPanelTab
+export const pWM = CoverageStatus
+export const phr = CSSExportHelpers
+export const qmM = InteractionCpp
+export const qq = ShapeSidebarMode
+export const rLd = HasPlugin
+export const rVj = PageType
+export const rcl = Command
+export const rpt = FilterOption
+export const ruz = ImageToolsBindings
+export const ryE = JSXRendererBindings
+export const sFD = ColorIdentifier
+export const sYL = GitReferenceType
+export const t2E = GradientToolApi
+export const t8O = FontHelpers
+export const tHB = VideoCppBindings
+export const tIU = JoinType
+export const tKW = MeasurementUnit
+export const tS9 = AspectRatioLockBindings
+export const tvY = BackgroundPattern
+export const uQ6 = ActionType
+export const uXP = ConnectionState
+export const uv = BuzzCloneHelpers
+export const v8u = FileFormat
+export const vRS = NoneColor
+export const vhv = PageSelectionType
+export const vlL = WhiteboardAiTemplatePreviewCppBindings
+export const vmp = Position
+export const vwB = ChartType
+export const w3z = HandoffBindingsCpp
+export const wzW = MindmapCppBindings
+export const xLh = CurveType
+export const xSx = UndoActionStatus
+export const xae = UserInterfaceElements
+export const xal = DataLoadStatus
+export const xbm = BorderStyle
+export const xc1 = SelectionPanelType
+export const yDE = BindingsPerfBench
+export const yFm = ScaleToolTsApi
+export const yTM = DrawingElementType
+export const yxn = CanvasComponentType
+export const z6l = CodeComponentHelper
+export const z7E = PaintTools
+export const z7j = PluginSource
+export const zGX = FeedbackCategory
+export const zd5 = TextBoxType
+export const zdR = WhiteboardAgendaCppBindings
+export const zol = Confirmation
+export const zuo = AnimationBindings
+export const zvt = TextModificationAction

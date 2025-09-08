@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { E } from "../905/172252";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
@@ -44,7 +44,7 @@ let $$d0 = function (e) {
       className: "x1j6dyjg x78zum5 x1q0g3np x1s688f x1qughib",
       children: [jsxs("div", {
         className: "x78zum5 xdt5ytf x1jnr06f xwib8y2",
-        children: [jsx(J, {
+        children: [jsx(Label, {
           htmlFor: labelHtmlFor,
           ...xk(c.label, disabled && c.disabled),
           children: _

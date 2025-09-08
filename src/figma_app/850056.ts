@@ -1,6 +1,6 @@
 import { b } from "../905/275748";
 import _require from "../a88a4c5a/123304";
-import { H4 } from "../905/992467";
+import { NONE_SYMBOL } from "../905/992467";
 export let $$i0 = new b({
   name: "fullscreen_design",
   dependencies: [],
@@ -11,6 +11,6 @@ export let $$i0 = new b({
   routeHints: ["fullscreen_design"]
 }).createLazyComponent(() => Promise.all([]).then(_require).then(e => e.DesignView), {
   componentName: "LazyDesignView",
-  error: H4.NONE
+  error: NONE_SYMBOL.NONE
 });
 export const a = $$i0;

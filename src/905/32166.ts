@@ -1,11 +1,11 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { FAccessRequestStatusType } from "../figma_app/191312";
 import { j9 } from "../figma_app/162807";
 import { Sm } from "../905/144933";
 export let $$l0 = new class {
   constructor() {
-    this.FolderSearchSchemaValidator = vh();
+    this.FolderSearchSchemaValidator = createNoOpValidator();
     this.getFolderSearchResults = e => {
       let {
         query,
@@ -15,7 +15,7 @@ export let $$l0 = new class {
       } = e;
       return this.FolderSearchSchemaValidator.validate(async ({
         xr: e
-      }) => await e.get("/api/resource_connection_invite/folder_search", td.toAPIParameters({
+      }) => await e.get("/api/resource_connection_invite/folder_search", APIParameterUtils.toAPIParameters({
         query,
         sort: j9.RELEVANCY,
         desc: !0,

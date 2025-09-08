@@ -1,4 +1,4 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { rj, V1, T_, D7 } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/946678";
@@ -14,12 +14,12 @@ import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { pi } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { c as _$$c } from "../905/73189";
 var o = s;
 var d = (e => (e.SF_PRO = "SFPro", e.SF_COMPACT = "SFCompact", e))(d || {});
@@ -156,7 +156,7 @@ let T = {
     subtext: renderI18nText("community.eula.subtext.sf_compact_license_agreement")
   }
 };
-let k = Ju(function (e) {
+let k = registerModal(function (e) {
   let t = useDispatch();
   let i = iZ();
   let n = q5();
@@ -263,7 +263,7 @@ let k = Ju(function (e) {
       })]
     })
   });
-}, "APPLE_FONT_EULA_MODAL_TYPE", ZU.YES);
+}, "APPLE_FONT_EULA_MODAL_TYPE", ModalSupportsBackground.YES);
 let R = new Set([FEditorType.Design, FEditorType.Whiteboard, FEditorType.Slides, FEditorType.Cooper]);
 let N = new Set([rj, V1, T_, D7]);
 let $$P0 = {
@@ -283,7 +283,7 @@ let $$P0 = {
 let $$O = Object.fromEntries(Object.values($$P0).flatMap(e => e.fontFamilies.map(t => [t, e])));
 export function $$D7(e, t) {
   let i = If(t[e]);
-  return i?.source === jXp.GOOGLE;
+  return i?.source === FontSourceType.GOOGLE;
 }
 export function $$L2(e, t) {
   if (getFeatureFlags().dse_sf_pro_font && e && $$D7(e, t)) return $$O[e];
@@ -340,7 +340,7 @@ export function $$G8(e, t) {
     trigger: t.trigger
   };
   return new Promise(t => {
-    e(to({
+    e(showModalHandler({
       type: k,
       showModalsBeneath: !0,
       data: {

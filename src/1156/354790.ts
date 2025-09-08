@@ -1,6 +1,6 @@
 import { reportError } from '../905/11';
 import { ServiceCategories as _$$e2 } from '../905/165054';
-import { Hq, l7 } from '../905/189185';
+import { AIScopeHandler, permissionScopeHandler } from '../905/189185';
 import { O as _$$O } from '../905/273186';
 import { getI18nString } from '../905/303541';
 import { noop, throwIf } from '../905/419236';
@@ -32,7 +32,7 @@ import { wi, YZ, Z3 } from '../figma_app/325537';
 import { a5, Ho } from '../figma_app/337924';
 import { u as _$$u } from '../figma_app/353758';
 import { Ay as _$$Ay } from '../figma_app/432652';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { yV, ze } from '../figma_app/516028';
 import { nc, NJ, nM } from '../figma_app/570630';
 import { Wh } from '../figma_app/615482';
@@ -40,7 +40,7 @@ import { H5, J6, jv, L6, Li, lV, MK, P5, U1, yZ } from '../figma_app/617606';
 import { f3 } from '../figma_app/690664';
 import { G1 } from '../figma_app/691470';
 import { e as _$$e, SE } from '../figma_app/735943';
-import { glU, K$p, Lxv } from '../figma_app/763686';
+import { Fullscreen, ChatMessageType, SnapshotStatus } from '../figma_app/763686';
 import { nU } from '../figma_app/779249';
 import { QK } from '../figma_app/883638';
 import { Ay as _$$Ay2 } from '../figma_app/948389';
@@ -208,7 +208,7 @@ async function et({
 }) {
   let C;
   let E;
-  throwIf(void 0 !== glU, 'Fullscreen must be defined');
+  throwIf(void 0 !== Fullscreen, 'Fullscreen must be defined');
   Ic();
   let S = ei(e, t);
   let {
@@ -228,7 +228,7 @@ async function et({
     },
     handlers: {
       handleClearImportData: () => {
-        l7.ai('code-chat-clear-import-data', () => {
+        permissionScopeHandler.ai('code-chat-clear-import-data', () => {
           t.chatMessages = Li(t.chatMessages);
         });
       },
@@ -255,7 +255,7 @@ async function et({
   let q = new P5({
     initialMessages: exchangeInit,
     userId: a.id,
-    nodeIdGenerator: () => (throwIf(void 0 !== glU, 'Fullscreen must be defined'), glU.generateUniqueID()),
+    nodeIdGenerator: () => (throwIf(void 0 !== Fullscreen, 'Fullscreen must be defined'), Fullscreen.generateUniqueID()),
     initializeWithAssistantMessage: !0,
     excludeRedundantCodeFromMessageHistory: !!getFeatureFlags().bake_exclude_code_tag_web,
     reportToSentry: (e, t) => reportError(_$$e2.MAKE, e, t)
@@ -374,7 +374,7 @@ async function et({
             codeFile,
             created
           } = Ur(e, t, n, r.code);
-          codeFile && l7.ai('code-chat', () => {
+          codeFile && permissionScopeHandler.ai('code-chat', () => {
             nU(codeFile);
           });
           codeFile && created && i.push(codeFile);
@@ -517,7 +517,7 @@ export async function $$en0({
       reportErrorToSentry: e => reportError(_$$e2.AI_FOR_PRODUCTION, e),
       regenerateAttributions: $$er2
     });
-    e.type === K$p.USER_MESSAGE && gG(H5(e.textContent)) && px();
+    e.type === ChatMessageType.USER_MESSAGE && gG(H5(e.textContent)) && px();
   }
   wi(n.guid, {
     switchToPreview: !0
@@ -528,7 +528,7 @@ export function $$er2(e) {
   let t = getSingletonSceneGraph();
   if (!t.getInternalCanvas()) return;
   let n = e.map(e => {
-    if (e.type !== K$p.USER_MESSAGE) return null;
+    if (e.type !== ChatMessageType.USER_MESSAGE) return null;
     let {
       imports
     } = MK(e.textContent);
@@ -536,9 +536,9 @@ export function $$er2(e) {
   }).filter(e => !!e).flat().filter((e, t, n) => t === n.findIndex(t => t.hubFileId === e.hubFileId));
   let a = atomStoreManager.get(nM);
   let l = _$$W(a, NJ, _$$e);
-  Hq.system('update-attributions', () => {
+  AIScopeHandler.system('update-attributions', () => {
     if (!l) {
-      let e = glU?.createNewCodeFile(SE, '', null, !1);
+      let e = Fullscreen?.createNewCodeFile(SE, '', null, !1);
       if (!e || !(l = t.get(e))) return;
     }
     let e = getI18nString('figmake.chat.unsplash_attribution.attribution_comment');
@@ -550,7 +550,7 @@ export function $$er2(e) {
       licenseLink: 'https://creativecommons.org/licenses/by/4.0/'
     }) : null).filter(e => !!e)].join('\n\n');
     l.sourceCode = r;
-    Y5.commit();
+    fullscreenValue.commit();
   });
   gC();
   En();
@@ -571,9 +571,9 @@ export async function $$ei1({
   instanceNode: b
 }) {
   try {
-    if (throwIf(void 0 !== glU, 'Fullscreen must be defined'), !t || !n) return;
+    if (throwIf(void 0 !== Fullscreen, 'Fullscreen must be defined'), !t || !n) return;
     let m = qE(c, n?.guid || '');
-    let j = glU.generateUniqueID();
+    let j = Fullscreen.generateUniqueID();
     d && (j = d);
     let v = Pd(c, n?.guid || '', j);
     c && !d && y && y.length > 0 && getFeatureFlags().bake_manual_edits && function ({
@@ -590,9 +590,9 @@ export async function $$ei1({
         return e?.name;
       }();
       let d = xD(e, t, void 0, c);
-      Hq.ai('add-manual-edit-system-message', () => {
+      AIScopeHandler.ai('add-manual-edit-system-message', () => {
         n.chatMessages = [...o, d];
-        Y5.commit();
+        fullscreenValue.commit();
       });
       let u = ei(i, n);
       let m = Object.fromEntries(Object.entries(i === lV.FIGMAKE ? Hg(nc) : (getFeatureFlags().multi_file_code_layers || getFeatureFlags().bake_canvas) && n.codeFilePath ? Hg(nc, u) : o9(n, nc)).map(([e, t]) => [F$(u, e), t.sourceCode]));
@@ -600,7 +600,7 @@ export async function $$ei1({
         fileKey: l,
         codeFiles: m
       }).then(i => {
-        i && Hq.ai('enrich-manual-edit-message-with-code-snapshot', () => {
+        i && AIScopeHandler.ai('enrich-manual-edit-message-with-code-snapshot', () => {
           let s = (n.chatMessages || []).map(n => {
             if (n.id === d.id) {
               let s = U1(n.textContent);
@@ -633,7 +633,7 @@ export async function $$ei1({
     });
     let S = {
       id: j,
-      type: K$p.USER_MESSAGE,
+      type: ChatMessageType.USER_MESSAGE,
       userId: t.id,
       textContent: J6(e),
       sentAt: Date.now(),
@@ -641,7 +641,7 @@ export async function $$ei1({
       toolResults: [],
       sentAt64: Date.now().toString()
     };
-    b && _$$u.updateCodeSnapshotState(b.guid, Lxv.LLM_IN_PROGRESS, !0, 0, !1);
+    b && _$$u.updateCodeSnapshotState(b.guid, SnapshotStatus.LLM_IN_PROGRESS, !0, 0, !1);
     await $$en0({
       newMessage: S,
       user: t,
@@ -687,31 +687,31 @@ async function ea() {
     let a = _$$W(i, NJ, `/${o3}`);
     let l = _$$W(i, NJ, `/${Or}`);
     let o = _$$W(i, NJ, `/${ww}`);
-    Hq.system('create-supabase-starter-files', () => {
+    AIScopeHandler.system('create-supabase-starter-files', () => {
       if (l) {
         (atomStoreManager.get(W) !== e || atomStoreManager.get(V) !== t) && (l.sourceCode = OP(e, t));
       } else {
-        let n = glU?.createNewCodeFile(Or, '', null, !1);
+        let n = Fullscreen?.createNewCodeFile(Or, '', null, !1);
         if (!n) return;
         let i = r.get(n);
         if (!i) return;
         i.sourceCode = OP(e, t);
       }
       if (!a) {
-        let t = glU?.createNewCodeFile(o3, '', null, !1);
+        let t = Fullscreen?.createNewCodeFile(o3, '', null, !1);
         if (!t) return;
         let i = r.get(t);
         if (!i) return;
         i.sourceCode = _u(n, e);
       }
       if (!o) {
-        let e = glU?.createNewCodeFile(ww, '', null, !1);
+        let e = Fullscreen?.createNewCodeFile(ww, '', null, !1);
         if (!e) return;
         let t = r.get(e);
         if (!t) return;
         t.sourceCode = mE(n);
       }
-      Y5.commit();
+      fullscreenValue.commit();
       atomStoreManager.set(W, e);
       atomStoreManager.set(V, t);
     });

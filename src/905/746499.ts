@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useContext, useMemo, useEffect, useLayoutEffect } from "react";
-import { sYL, H$z } from "../figma_app/763686";
+import { GitReferenceType, OperationResult } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -49,8 +49,8 @@ export function $$y1(e) {
   let r = {
     ...n,
     direction: t,
-    diffType: sYL[n.diffType],
-    setDiffResult: H$z[n.setDiffResult],
+    diffType: GitReferenceType[n.diffType],
+    setDiffResult: OperationResult[n.setDiffResult],
     ...metrics
   };
   trackEventAnalytics("Branch Modal setDiff Performance Delta", r, {

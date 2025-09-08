@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { Mpt, glU, Ez5 } from "../figma_app/763686";
+import { DesignToBuzzHelpers, Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription, Xr, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -49,7 +49,7 @@ export function $$I1({
     });
     return Error(i);
   }
-  let i = getSingletonSceneGraph().getDirectlySelectedNodes().length > 0 ? Mpt?.getSelectedNodesToSend() ?? [] : Mpt?.getTopLevelFramesToSend() ?? [];
+  let i = getSingletonSceneGraph().getDirectlySelectedNodes().length > 0 ? DesignToBuzzHelpers?.getSelectedNodesToSend() ?? [] : DesignToBuzzHelpers?.getTopLevelFramesToSend() ?? [];
   if (0 === i.length) {
     let e = "Empty target node ids";
     logError("storeFigmaContentForCooperCreation", e, {}, {
@@ -110,12 +110,12 @@ export function $$k0() {
   }, [e, C, openCooperPublishFlow, t]));
   R(() => {
     (async () => {
-      glU?.applyNodesFromBuffer(await _$$R({
+      Fullscreen?.applyNodesFromBuffer(await _$$R({
         fileKey: t.fileKey,
         selectedGuids: t.sourceNodeIds
       }), t.fileKey, t.sourceNodeIds, !1);
       f(Ut);
-      Ez5?.cooperFocusView().exitFocusedNodeView();
+      AppStateTsApi?.cooperFocusView().exitFocusedNodeView();
       e(F.dequeue({
         matchType: "send-to-buzz-from-design-loading"
       }));

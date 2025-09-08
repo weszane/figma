@@ -3,10 +3,10 @@ import { useState, useCallback, useEffect, useRef, useMemo, useContext } from "r
 import { useDispatch, useSelector } from "../vendor/514228";
 import { noop, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
-import { y1 } from "../figma_app/492908";
+import { range } from "../figma_app/492908";
 import { n3, IA } from "../905/859698";
-import { glU, m1T, NLJ } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, LayoutTabType, DesignGraphElements } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { xx } from "../figma_app/815945";
 import { localStorageRef } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
@@ -22,7 +22,7 @@ import { Bn, ay } from "../905/879323";
 import { GT } from "../905/711212";
 import { Zs, sw, rk, YG } from "../figma_app/914957";
 import { dG, ft } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { p8 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
 import { QT, XV, og, Kw, LX } from "../figma_app/646357";
@@ -134,7 +134,7 @@ function el({
     })
   });
   let G = useHandleKeyboardEvent(R, "keydown", e => {
-    c && !u && (e.keyCode === Uz.BACKSPACE || e.keyCode === Uz.DELETE) ? l() : c && !u && e.keyCode === Uz.G && Fo(e) ? (C(), e.preventDefault()) : !u && "Tab" !== e.key && e.nativeEvent && Y5.forwardKeyboardEvent(e.nativeEvent);
+    c && !u && (e.keyCode === Uz.BACKSPACE || e.keyCode === Uz.DELETE) ? l() : c && !u && e.keyCode === Uz.G && Fo(e) ? (C(), e.preventDefault()) : !u && "Tab" !== e.key && e.nativeEvent && fullscreenValue.forwardKeyboardEvent(e.nativeEvent);
   });
   let Z = useCallback(() => {
     Y(K);
@@ -515,7 +515,7 @@ function em({
   let i = useDispatch();
   let d = useRef(null);
   let c = useCallback(() => {
-    t && Y5.triggerAction("set-tool-default");
+    t && fullscreenValue.triggerAction("set-tool-default");
     let l = _$$Zk(e);
     let n = d.current?.getBoundingClientRect();
     l && n && i(Zs({
@@ -609,8 +609,8 @@ function eC({
   onPasteItems: x
 }) {
   let f = useDispatch();
-  useEffect(() => (glU.computePastableStyleCount(), () => {
-    glU.clearPastableStyleCount();
+  useEffect(() => (Fullscreen.computePastableStyleCount(), () => {
+    Fullscreen.clearPastableStyleCount();
   }), []);
   let g = useSelector(e => e.mirror.appModel.pastableStyleCount);
   let h = !!q5()?.canEdit;
@@ -733,7 +733,7 @@ function eP({
     u ? w() : l && (trackEventAnalytics("editor-local-styles-dropdown-show"), k());
   };
   let E = t => {
-    e && Y5.triggerAction("set-tool-default");
+    e && fullscreenValue.triggerAction("set-tool-default");
     w();
     let n = _$$Zk(t);
     let s = i.current?.getBoundingClientRect();
@@ -843,7 +843,7 @@ function eF({
     onClick(e);
   }, [manager.isOpen, onClick]);
   let g = useCallback(n => {
-    e && Y5.triggerAction("set-tool-default");
+    e && fullscreenValue.triggerAction("set-tool-default");
     let s = _$$Zk(n);
     let o = t.current?.getBoundingClientRect();
     s && o && l({
@@ -937,10 +937,10 @@ function eY({
   let [k, E] = useState(null);
   let T = useRef(null);
   let [R, N] = useState(!1);
-  let B = y === m1T.GRADIENT || y === m1T.RASTER || m === NLJ.DROPPER_COLOR;
+  let B = y === LayoutTabType.GRADIENT || y === LayoutTabType.RASTER || m === DesignGraphElements.DROPPER_COLOR;
   useEffect(() => {
     let e = () => {
-      !B && (a(Bn(null)), i.isShown && (a(sw()), glU.selectStyle(n3.INVALID, IA.INVALID)));
+      !B && (a(Bn(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, IA.INVALID)));
     };
     let t = ft();
     t ? window.addEventListener("pointerdown", e) : window.addEventListener("mousedown", e);
@@ -970,7 +970,7 @@ function eY({
   }, [g]);
   let K = useCallback(e => {
     debug(null != e.content_hash, "style does not have a hash");
-    glU.selectStyleByGuid(e.node_id);
+    Fullscreen.selectStyleByGuid(e.node_id);
     a(ay({
       isRenaming: !1
     }));
@@ -1013,7 +1013,7 @@ function eY({
       let s = null != t ? t : n.length - 1;
       n[s] = l;
       let o = Pc(n.join("/"));
-      l7.user("rename-style", () => glU.renameNode(e.node_id, o));
+      permissionScopeHandler.user("rename-style", () => Fullscreen.renameNode(e.node_id, o));
     };
     if (n.name !== l) {
       if (n.type === PW.STYLE) s(n);else {
@@ -1032,7 +1032,7 @@ function eY({
         });
       }
     }
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     S(null);
     E(null);
   }, [h, O]);
@@ -1160,7 +1160,7 @@ function ez({
     });
     let o = new Set(s);
     let r = t ? l.indexOf(t) : l.length;
-    let a = [...y1(r).filter(e => !o.has(e)), ...s, ...y1(r, l.length).filter(e => !o.has(e))];
+    let a = [...range(r).filter(e => !o.has(e)), ...s, ...range(r, l.length).filter(e => !o.has(e))];
     let d = new Map();
     a.forEach((e, t) => {
       e !== t && d.set(e, t);
@@ -1168,7 +1168,7 @@ function ez({
     return d;
   }, [l]);
   let ea = useCallback(() => {
-    W.isShown && (z(sw()), z(XE()), glU.selectStyle(n3.INVALID, IA.INVALID));
+    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, IA.INVALID));
   }, [z, W.isShown]);
   let ei = useMemo(() => {
     if (!Q) return null;
@@ -1206,7 +1206,7 @@ function ez({
     });
     let c = i.concat(d);
     if (!c.length) return;
-    let y = l7.user("reorder-styles", () => VB(c, s, o, a, l, t, r || !1));
+    let y = permissionScopeHandler.user("reorder-styles", () => VB(c, s, o, a, l, t, r || !1));
     let m = new Set();
     let p = new Set();
     c.forEach(e => {
@@ -1227,7 +1227,7 @@ function ez({
     });
     V(x);
     ea();
-    r || Y5.triggerAction("commit");
+    r || fullscreenValue.triggerAction("commit");
     return er(c, o);
   }, [P, X, ei, er, ea, t, l, e]);
   let ec = useCallback((e, t) => {
@@ -1271,8 +1271,8 @@ function ez({
     let a = (e, t) => {
       if (e.type === PW.STYLE) {
         let l = r + "/" + t + kH(e.name);
-        l7.user("rename-style", () => {
-          glU.renameNode(e.node_id, l);
+        permissionScopeHandler.user("rename-style", () => {
+          Fullscreen.renameNode(e.node_id, l);
         });
       } else {
         let l = t + kH(e.name) + "/";
@@ -1334,15 +1334,15 @@ function ez({
     et(n);
   }, []);
   let eS = useCallback(() => {
-    V(e => l7.user("delete-styles", () => {
+    V(e => permissionScopeHandler.user("delete-styles", () => {
       let t = new Set(e);
       (q ? QA(q, l) : []).forEach(e => {
         "STYLE_FOLDER" === e.type ? (a2(e, U?.key || null), X.$$delete(e.name), KU(e).forEach(e => X.$$delete(e.name))) : Nr(e, U?.key || null);
       });
       return t;
     }));
-    Y5.triggerAction("commit");
-    W.isShown && (z(sw()), z(XE()), glU.selectStyle(n3.INVALID, IA.INVALID));
+    fullscreenValue.triggerAction("commit");
+    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, IA.INVALID));
     P(null);
   }, [W.isShown, P, q, l, U?.key, X, z]);
   let eb = useMemo(() => {
@@ -1350,16 +1350,16 @@ function ez({
     return Ug(e).map(e => e.node_id);
   }, [q, l]);
   let eC = useCallback(() => {
-    l7.user("cut-styles", () => glU && glU.cutStyles(eb));
+    permissionScopeHandler.user("cut-styles", () => Fullscreen && Fullscreen.cutStyles(eb));
   }, [eb]);
   let eE = useCallback(() => {
-    l7.user("copy-styles", () => glU && glU.copyStyles(eb));
+    permissionScopeHandler.user("copy-styles", () => Fullscreen && Fullscreen.copyStyles(eb));
   }, [eb]);
   let ej = useCallback(() => {
-    l7.user("duplicate-styles", () => glU && glU.duplicateStyles(eb));
+    permissionScopeHandler.user("duplicate-styles", () => Fullscreen && Fullscreen.duplicateStyles(eb));
   }, [eb]);
   let ev = useCallback(() => {
-    l7.user("paste-styles", () => glU && glU.pasteStyles());
+    permissionScopeHandler.user("paste-styles", () => Fullscreen && Fullscreen.pasteStyles());
   }, []);
   !function ({
     cutSelectedItems: e,

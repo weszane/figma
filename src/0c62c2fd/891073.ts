@@ -7,7 +7,7 @@ import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { S } from "../4452/747039";
 export function $$f0(e) {
@@ -77,7 +77,7 @@ export function $$f0(e) {
               variant: "destructive",
               onClick: () => {
                 w();
-                g(Lo());
+                g(popModalStack());
               },
               disabled: !canRevokeProjectTransfer,
               children: getI18nString("revoke_transfer_modal.revoke")

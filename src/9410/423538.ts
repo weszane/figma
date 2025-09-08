@@ -2,15 +2,15 @@ import { useRef, useState, useCallback } from "react";
 import { eb } from "../figma_app/257655";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, XJn } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, FirstDraftHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { reportError } from "../905/11";
 import { logWarning } from "../905/714362";
 import { p4 } from "../figma_app/412398";
 import { t_ } from "../9410/141954";
 import { B as _$$B } from "../905/521763";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { wr, Dh } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
 import { S } from "../figma_app/106763";
@@ -88,10 +88,10 @@ export function $$j2({
     onAfterInsertPartialJsx: e => {
       if (O && e) {
         let t = getSingletonSceneGraph().get(e);
-        t?.isBreakpointFrame && (t?.parentNode?.childrenNodes ?? []).length > 1 && (l7.ai("first-draft-sites-page-remove", () => {
+        t?.isBreakpointFrame && (t?.parentNode?.childrenNodes ?? []).length > 1 && (permissionScopeHandler.ai("first-draft-sites-page-remove", () => {
           t.parentNode?.childrenNodes.filter(e => e.guid !== t.guid).forEach(e => e.removeSelfAndChildren());
         }), setTimeout(() => {
-          glU.triggerAction("goto-layer", {
+          Fullscreen.triggerAction("goto-layer", {
             args: {
               nodeId: e
             }
@@ -376,7 +376,7 @@ export function $$j2({
         isLocal: !1,
         isDirectGenerationCompatible: t.metadata?.direct_generation
       };
-      let i = XJn.getKitKey(t.dsKitKey.pageId);
+      let i = FirstDraftHelpers.getKitKey(t.dsKitKey.pageId);
       if (!i) throw Error("Failed to get a kitKey for local kit");
       return {
         userPrompt: e,
@@ -401,10 +401,10 @@ export function $$j2({
       if (e) {
         let t = 1 === e.childCount && e.childrenNodes[0].isResponsiveSet && 1 === e.childrenNodes[0].childCount && e.childrenNodes[0].childrenNodes[0].isBreakpointFrame && 0 === e.childrenNodes[0].childrenNodes[0].childCount;
         let i = null;
-        t ? (wr(), S("panel"), Dh([e.childrenGuids[0]])) : l7.ai("first-draft-sites-page-create", () => {
-          glU.createResponsiveSet(null);
+        t ? (wr(), S("panel"), Dh([e.childrenGuids[0]])) : permissionScopeHandler.ai("first-draft-sites-page-create", () => {
+          Fullscreen.createResponsiveSet(null);
         });
-        i = getSingletonSceneGraph().get(glU.getFirstSelectedNodeIdForCurrentPage());
+        i = getSingletonSceneGraph().get(Fullscreen.getFirstSelectedNodeIdForCurrentPage());
         _.parentNodeId = i?.guid;
         _.createNewSitesWebpage = !0;
         _.frameName = "Primary";
@@ -444,7 +444,7 @@ export function $$j2({
     }
     let b = nodeIdRef.current;
     if (await resetAsync(), b && !getSingletonSceneGraph().get(b)) throw Error("Failed to insert node");
-    Y5.commit();
+    fullscreenValue.commit();
     return {
       nodeId: b,
       success: !r,

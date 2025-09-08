@@ -6,11 +6,11 @@ import { q } from "../905/932270";
 import { Q } from "../905/730680";
 import { J } from "../905/525097";
 import { E } from "../905/267344";
-import { yTM } from "../figma_app/763686";
+import { DrawingElementType } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { bC } from "../figma_app/789050";
 import { sK } from "../905/794875";
 import { cS } from "../figma_app/334459";
@@ -20,7 +20,7 @@ let v = new OH();
 let I = new EN();
 export function $$E0(e) {
   return jsxs(bL, {
-    value: gl(e.value) ? void 0 : e.value,
+    value: isInvalidValue(e.value) ? void 0 : e.value,
     onChange: e.onChange,
     legend: jsx(q, {
       children: e.label
@@ -44,7 +44,7 @@ export function $$E0(e) {
 }
 export function $$$$x1(e) {
   let t = useDispatch();
-  let i = e.strokePanelMode === yTM.ENDPOINT;
+  let i = e.strokePanelMode === DrawingElementType.ENDPOINT;
   let s = 1 === e.strokePanelTerminalPointCount || i;
   let o = bC();
   let l = useId();
@@ -63,7 +63,7 @@ export function $$$$x1(e) {
     blurOnChange: !0,
     disabled: e.disabled,
     dispatch: t,
-    dropdownOverride: gl(e.endPoint) ? void 0 : I.format(e.endPoint),
+    dropdownOverride: isInvalidValue(e.endPoint) ? void 0 : I.format(e.endPoint),
     dropdownShown: e.dropdownShown,
     dropdownWidth: 200,
     formatter: v,

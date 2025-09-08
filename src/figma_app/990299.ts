@@ -1,17 +1,17 @@
-import { nF } from "../905/350402";
-import { to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { showModalHandler } from "../905/156213";
 import { e9 } from "../905/766303";
 import { F } from "../905/224";
 import { F as _$$F } from "../905/642505";
 import { rR, sK } from "../figma_app/598018";
-import { b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { Mk } from "../905/163189";
 import { ZN } from "../figma_app/630077";
 import { O } from "../905/174367";
 import { DV } from "../905/739964";
 import { u as _$$u } from "../905/997541";
-let $$g0 = nF(e => {
+let $$g0 = createOptimistThunk(e => {
   if (!_$$F) return;
   let t = e.getState();
   let r = e9(t);
@@ -19,7 +19,7 @@ let $$g0 = nF(e => {
   n && Mk.every(e => !rR(n, {
     type: sK.ADD_FILE,
     editorType: e
-  })) ? e.dispatch(to({
+  })) ? e.dispatch(showModalHandler({
     type: DV,
     data: {
       team: n,
@@ -28,16 +28,16 @@ let $$g0 = nF(e => {
       currentPlan: F.Plan.STARTER,
       upsellPlan: F.Plan.PRO,
       editorType: null,
-      upsellSource: b.CREATE_NEW_FILE
+      upsellSource: UpsellModalType.CREATE_NEW_FILE
     }
-  })) : e.dispatch(to({
+  })) : e.dispatch(showModalHandler({
     type: O,
     data: {
       projectId: r?.id ?? ""
     }
   }));
 });
-let $$$$f1 = nF(e => {
+let $$$$f1 = createOptimistThunk(e => {
   _$$F && e.dispatch(_$$u({
     multiple: !1,
     accept: ".sketch"

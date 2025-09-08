@@ -1,13 +1,13 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-export let $$u0 = Ju(function (e) {
+import { fullscreenValue } from "../figma_app/455680";
+export let $$u0 = registerModal(function (e) {
   let t = hS({
     open: e.open,
     onClose: e.onClose,
@@ -41,8 +41,8 @@ export let $$u0 = Ju(function (e) {
             children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.cancel")
           }), jsx($n, {
             onClick: () => {
-              l7.user("restore-component", () => {
-                Y5.restoreSoftDeletedNode(e.nodeId);
+              permissionScopeHandler.user("restore-component", () => {
+                fullscreenValue.restoreSoftDeletedNode(e.nodeId);
               });
               e.onClose();
             },

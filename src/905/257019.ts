@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { T9 } from "../figma_app/740025";
-import { Ag } from "../figma_app/155287";
+import { PluginType } from "../figma_app/155287";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 export function $$d0(e, t) {
@@ -13,7 +13,7 @@ class c {
     this.extensionType = e;
   }
   hasAllowlist(e) {
-    return this.extensionType === Ag.Plugin ? !!e?.id && e.plugins_whitelist_enforced : !!e?.id && e.widgets_whitelist_enforced;
+    return this.extensionType === PluginType.Plugin ? !!e?.id && e.plugins_whitelist_enforced : !!e?.id && e.widgets_whitelist_enforced;
   }
   async getAllowlistFromDB(e) {
     let {
@@ -24,7 +24,7 @@ class c {
       authedProfilesById,
       userId: user?.id
     });
-    return (this.extensionType === Ag.Plugin ? await pluginAPIService.getOrgWhitelist({
+    return (this.extensionType === PluginType.Plugin ? await pluginAPIService.getOrgWhitelist({
       orgId: e.id,
       profileId: n?.id
     }) : await U.getOrgWhitelist({
@@ -36,8 +36,8 @@ class c {
     return !!$$d0(e, t.id) || (!e.roles.org || !!getFeatureFlags().community_hub_admin) && (!this.hasAllowlist(t) || !!(await this.getAllowlistFromDB(t)).find(t => t.id === e.id));
   }
 }
-let $$u2 = new c(Ag.Widget);
-let $$p1 = new c(Ag.Plugin);
+let $$u2 = new c(PluginType.Widget);
+let $$p1 = new c(PluginType.Plugin);
 export const $u = $$d0;
 export const E2 = $$p1;
 export const Hr = $$u2;

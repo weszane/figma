@@ -7,7 +7,7 @@ import { Dm } from "../figma_app/8833";
 import { E3 } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { qw, UK } from "../figma_app/740163";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { Ds } from "../1528/88743";
 import { M$q, y9S } from "../figma_app/27776";
@@ -21,7 +21,7 @@ export function $$h0(e) {
     isPropertiesPanelCollapsed
   } = iT();
   let f = useAtomWithSubscription(Ds);
-  let C = J2(UK().renderRulers);
+  let C = getObservableOrFallback(UK().renderRulers);
   t = {
     right: `calc(${h === FEditorType.DevHandoff ? s : n}px + ${parsePxNumber(M$q)}px)`,
     top: `${parsePxNumber(M$q)}px`

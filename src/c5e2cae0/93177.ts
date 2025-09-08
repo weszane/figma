@@ -42,7 +42,7 @@ import { u as _$$u } from "../905/16237";
 import { _l } from "../figma_app/976345";
 import { q as _$$q } from "../figma_app/712384";
 import { sf } from "../905/929976";
-import { to as _$$to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { MN, Lo, Je, I2, Vm, Bq, Nj, Ay as _$$Ay, qU } from "../figma_app/482142";
 import { S_, gk } from "../5885/925885";
 import { b as _$$b } from "../905/985254";
@@ -66,15 +66,15 @@ import { Ud, OI } from "../c5e2cae0/2942";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { D6 } from "../figma_app/465071";
 import { Np } from "../figma_app/193867";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Ju } from "../905/712921";
-import { tn, NW, tY } from "../figma_app/831101";
+import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
 import { SC, Sc, h5 } from "../figma_app/707808";
 import { e0 } from "../905/696396";
 import { V as _$$V } from "../905/223084";
 import { Q as _$$Q } from "../figma_app/113686";
-import { J as _$$J } from "../905/270045";
-import { S as _$$S2 } from "../905/274480";
+import { Label } from "../905/270045";
+import { Checkbox } from "../905/274480";
 import { B as _$$B } from "../905/714743";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { _R } from "../figma_app/314264";
@@ -261,7 +261,7 @@ function eL(e) {
     enableSavedPaymentMethods,
     setEnableSavedPaymentMethods
   } = e;
-  let r = jsx(_$$J, {
+  let r = jsx(Label, {
     children: jsx("span", {
       className: _$$s.font13.$,
       children: getI18nString("checkout.use_saved_payment_method")
@@ -269,7 +269,7 @@ function eL(e) {
   });
   return jsx("div", {
     className: _$$s.mb6.$$if(!enableSavedPaymentMethods, _$$s.mb0).$,
-    children: jsx(_$$S2, {
+    children: jsx(Checkbox, {
       label: r,
       onChange: e => {
         setEnableSavedPaymentMethods(e);
@@ -503,17 +503,17 @@ function eY(e) {
   let eP = e.selectedView.teamId;
   let eM = useSelector(t => Np(t, {
     ...e.selectedView,
-    paymentStep: tn.CONFIRM_PAY
+    paymentStep: UpgradeSteps.CONFIRM_PAY
   }));
   let eR = useSelector(t => Np(t, {
     ...e.selectedView,
-    paymentStep: tn.PAYMENT_AND_ADDRESS
+    paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
   }));
   let eO = Mh();
   let eD = void 0 === x.cartSelections;
   let eB = ZC(eD);
   let eL = N_.dict(e => x.cartSelections?.countBySeatType?.[e] || 0);
-  let e$ = eA && ne(eA) || NW.YEAR;
+  let e$ = eA && ne(eA) || BillingCycle.YEAR;
   let eU = jv({
     billableProductKeys: N_,
     baseQuery: {
@@ -615,7 +615,7 @@ function eY(e) {
   let th = useCallback(() => {
     to(sf({
       ...e.selectedView,
-      paymentStep: tn.CHOOSE_PLAN,
+      paymentStep: UpgradeSteps.CHOOSE_PLAN,
       previousView: e.selectedView.previousView,
       ignoreCurrentPlan,
       billingPeriod: eA
@@ -662,16 +662,16 @@ function eY(e) {
   });
   let [tC, tw] = useState(!1);
   useEffect(() => {
-    R === tn.PAYMENT_AND_ADDRESS && td && th();
+    R === UpgradeSteps.PAYMENT_AND_ADDRESS && td && th();
   });
   useEffect(() => {
-    R === tn.CONFIRM_PAY && !tc && eD && trackEventAnalytics("pro_cart_selections_undefined_on_review_step", {
+    R === UpgradeSteps.CONFIRM_PAY && !tc && eD && trackEventAnalytics("pro_cart_selections_undefined_on_review_step", {
       teamId: eP,
       userId: l
     });
   }, [eD, tc, R, l, eP]);
   useEffect(() => {
-    R === tn.CONFIRM_PAY && eB && !eD && trackEventAnalytics("monetization_upgrades.hydrated_pro_cart_selections", {
+    R === UpgradeSteps.CONFIRM_PAY && eB && !eD && trackEventAnalytics("monetization_upgrades.hydrated_pro_cart_selections", {
       teamId: eP,
       loadingPaidEditors: tc
     });
@@ -679,9 +679,9 @@ function eY(e) {
   let tE = useSelector(e => !!e.user && cn(e.user));
   useEffect(() => {
     tE && e.selectedView.isEduTeam ? to(Lo({
-      billingPeriod: tY.STUDENT
+      billingPeriod: SubscriptionType.STUDENT
     })) : e.selectedView.isEduTeam && to(Lo({
-      billingPeriod: tY.UNSPECIFIED
+      billingPeriod: SubscriptionType.UNSPECIFIED
     }));
   }, [to, e.selectedView.isEduTeam, tE]);
   useEffect(() => {
@@ -694,7 +694,7 @@ function eY(e) {
   useEffect(() => {
     eY[0] && (eQ(eY[0]), eN(!0));
   }, [eY, eQ, eN]);
-  let tI = eA === tY.STUDENT;
+  let tI = eA === SubscriptionType.STUDENT;
   let tk = z.filter(e => e && e.trim()).map(e => e.trim());
   let tP = tk.filter(e => !xf(e));
   let tM = !!a && tk.filter(e => e === a.email).length > 0;
@@ -705,14 +705,14 @@ function eY(e) {
     let r = a.get("onCompleteRedirectNodeId");
     t.currentTarget && t.currentTarget.blur();
     let i = kR(e.selectedView.paymentStep, e.selectedView.teamFlowType, eA, x.promo, e.selectedView.planType || Sc.UNDETERMINED);
-    R === tn.CREATE_TEAM && ($(V.trim()), to(sf({
+    R === UpgradeSteps.CREATE_TEAM && ($(V.trim()), to(sf({
       ...e.selectedView,
       teamId: null,
       paymentStep: i,
       ignoreCurrentPlan,
       billingPeriod: eA
     })));
-    R === tn.ADD_COLLABORATORS && (tP.length ? to(_$$s2.error(getI18nString("pro_cart.add_collaborators.error.email_is_invalid", {
+    R === UpgradeSteps.ADD_COLLABORATORS && (tP.length ? to(_$$s2.error(getI18nString("pro_cart.add_collaborators.error.email_is_invalid", {
       string: tP[0]
     }))) : tM ? to(_$$s2.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(sf({
       ...e.selectedView,
@@ -720,10 +720,10 @@ function eY(e) {
       ignoreCurrentPlan,
       billingPeriod: eA
     })));
-    R === tn.CHOOSE_PLAN ? tI ? to(sf({
+    R === UpgradeSteps.CHOOSE_PLAN ? tI ? to(sf({
       ...e.selectedView,
       paymentStep: i,
-      billingPeriod: tY.STUDENT,
+      billingPeriod: SubscriptionType.STUDENT,
       ignoreCurrentPlan
     })) : (to(Je({
       editorStatusChanges
@@ -738,7 +738,7 @@ function eY(e) {
         }
       } : {}),
       ignoreCurrentPlan
-    }))) : R === tn.PAYMENT_AND_ADDRESS && (to(I2({
+    }))) : R === UpgradeSteps.PAYMENT_AND_ADDRESS && (to(I2({
       submitPending: !0
     })), e_ && eq ? await saveWithPaymentMethod(eq) : await savePayment(), to(I2({
       submitPending: !1
@@ -763,7 +763,7 @@ function eY(e) {
       ...e.selectedView,
       teamFlowType: a,
       teamId: ee[0].id,
-      paymentStep: kR(e.selectedView.paymentStep, a, t || null, x.promo, Sc.TEAM, tn.CHOOSE_PLAN),
+      paymentStep: kR(e.selectedView.paymentStep, a, t || null, x.promo, Sc.TEAM, UpgradeSteps.CHOOSE_PLAN),
       planType: Sc.UNDETERMINED,
       billingPeriod: t,
       ignoreCurrentPlan
@@ -772,11 +772,11 @@ function eY(e) {
     e && to(Lo({
       billingPeriod: e
     }));
-    to(_$$to({
+    to(showModalHandler({
       type: dR,
       data: {
         plan: _$$I.PRO,
-        upsellSource: _$$b2.UPGRADE_EXISTING_FROM_TEAM_CREATION
+        upsellSource: UpsellModalType.UPGRADE_EXISTING_FROM_TEAM_CREATION
       }
     }));
   }));
@@ -808,16 +808,16 @@ function eY(e) {
           padding: "98px 48px 48px",
           maxWidth: "1400px"
         }).$,
-        children: [R !== tn.CREATE_TEAM && jsx(eZ, {
+        children: [R !== UpgradeSteps.CREATE_TEAM && jsx(eZ, {
           step: R,
           teamName: tg ?? "",
           renewalTerm: e$
-        }), R === tn.PLAN_COMPARISON && jsx(F, {
+        }), R === UpgradeSteps.PLAN_COMPARISON && jsx(F, {
           chooseStarterPlan: t ? void 0 : tO,
           chooseEduPlan: () => {
             eP ? to(Vm({
               teamId: eP
-            })) : to(_$$to({
+            })) : to(showModalHandler({
               type: _$$q
             }));
           },
@@ -845,20 +845,20 @@ function eY(e) {
                 inviteEmails: tk,
                 previousView: e.selectedView
               },
-              upsellSource: _$$b2.UPGRADE_NEW_TEAM_V2
+              upsellSource: UpsellModalType.UPGRADE_NEW_TEAM_V2
             }));
           },
           currency: eC,
           updateCurrency: eE,
           upgradeExistingTeam: t
-        }), R === tn.CREATE_TEAM && jsx(_$$y, {
+        }), R === UpgradeSteps.CREATE_TEAM && jsx(_$$y, {
           type: e.selectedView.teamFlowType === SC.CREATE ? _$$I2.STARTER : _$$I2.PRO,
           teamName: V,
           setTeamName: $,
           onNext: tR,
           upgradeExistingTeam: t ? () => t?.(eA) : void 0,
           promo: x.promo
-        }), R === tn.ADD_COLLABORATORS && jsx(D, {
+        }), R === UpgradeSteps.ADD_COLLABORATORS && jsx(D, {
           disableInviteButton: !tk.length,
           collaborators: z,
           setCollaborators: G,
@@ -876,11 +876,11 @@ function eY(e) {
             }
             to(sf({
               ...e.selectedView,
-              paymentStep: tn.PLAN_COMPARISON,
+              paymentStep: UpgradeSteps.PLAN_COMPARISON,
               ignoreCurrentPlan
             }));
           }
-        }), R === tn.CONFIRM_PAY ? jsxs(Fragment, {
+        }), R === UpgradeSteps.CONFIRM_PAY ? jsxs(Fragment, {
           children: [tD && jsx("div", {
             className: _$$s.mxAuto.alignLeft.mb16.$,
             children: jsx(_$$_, {
@@ -899,7 +899,7 @@ function eY(e) {
             navigateToEditDetails: () => {
               to(sf({
                 ...e.selectedView,
-                paymentStep: tn.PAYMENT_AND_ADDRESS,
+                paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS,
                 previousView: e.selectedView.previousView,
                 ignoreCurrentPlan,
                 billingPeriod: eA
@@ -947,7 +947,7 @@ function eY(e) {
                     }));
                     to(sf({
                       ...e.selectedView,
-                      paymentStep: tn.PLAN_COMPARISON,
+                      paymentStep: UpgradeSteps.PLAN_COMPARISON,
                       ignoreCurrentPlan
                     }));
                   }
@@ -1009,7 +1009,7 @@ function eY(e) {
             gridTemplateColumns: "1fr 280px",
             gap: "48px"
           }).$,
-          children: [R === tn.CHOOSE_PLAN && (tc || t_ && !ed ? jsx(_$$f, {}) : jsx(eW, {
+          children: [R === UpgradeSteps.CHOOSE_PLAN && (tc || t_ && !ed ? jsx(_$$f, {}) : jsx(eW, {
             teamId: e.selectedView.teamId ?? "",
             currency: eC,
             renewalTerm: e$,
@@ -1018,7 +1018,7 @@ function eY(e) {
             onUpdateCampfireSeats: e => to(qU({
               cartSelections: e
             }))
-          })), R === tn.PAYMENT_AND_ADDRESS && jsx(eV, {
+          })), R === UpgradeSteps.PAYMENT_AND_ADDRESS && jsx(eV, {
             billingAddress,
             canSeeBillingAddressExp: eO,
             createPaymentElement,
@@ -1043,10 +1043,10 @@ function eY(e) {
             updateNameOnPaymentMethod: setNameOnPaymentMethod,
             updateShippingAddress,
             vatGstId
-          }), [tn.CHOOSE_PLAN, tn.PAYMENT_AND_ADDRESS].includes(R) && jsx(_$$z, {
+          }), [UpgradeSteps.CHOOSE_PLAN, UpgradeSteps.PAYMENT_AND_ADDRESS].includes(R) && jsx(_$$z, {
             billingInterval: e$,
-            buttonText: R === tn.PAYMENT_AND_ADDRESS ? getI18nString("pro_cart.sidebar.next_review") : getI18nString("pro_cart.sidebar.next_payment_information"),
-            canEnforcePaidSeatMinimum: R === tn.CHOOSE_PLAN,
+            buttonText: R === UpgradeSteps.PAYMENT_AND_ADDRESS ? getI18nString("pro_cart.sidebar.next_review") : getI18nString("pro_cart.sidebar.next_payment_information"),
+            canEnforcePaidSeatMinimum: R === UpgradeSteps.CHOOSE_PLAN,
             countByBillableProductKey: eL,
             currency: eC,
             isButtonDisabled: tp,
@@ -1108,29 +1108,29 @@ function eZ({
       className: _$$s.font15.lh24.fontMedium.$,
       children: function (e, t, a) {
         switch (t = t || getI18nString("checkout.select_seats_header.your_team"), e) {
-          case tn.PLAN_COMPARISON:
+          case UpgradeSteps.PLAN_COMPARISON:
             return renderI18nText("pro_cart.choose_plan.choose_a_plan_for_your_new_team");
-          case tn.CHOOSE_PLAN:
+          case UpgradeSteps.CHOOSE_PLAN:
             if (a) return renderI18nText("checkout.select_seats_header_exp", {
               teamName: t
             });
             return renderI18nText("checkout.select_seats_header", {
               teamName: t
             });
-          case tn.PAYMENT_AND_ADDRESS:
+          case UpgradeSteps.PAYMENT_AND_ADDRESS:
             return renderI18nText("checkout.enter_your_payment_details");
-          case tn.CONFIRM_PAY:
+          case UpgradeSteps.CONFIRM_PAY:
             return renderI18nText("checkout.everything_look_good");
           default:
             throwError(e);
         }
       }(e, t, r())
-    }), e === tn.CHOOSE_PLAN && jsx("p", {
+    }), e === UpgradeSteps.CHOOSE_PLAN && jsx("p", {
       className: _$$s.colorTextSecondary.font13.mt8.$,
       children: renderI18nText("checkout.select_seats_table.seat_types_have_been_suggested", {
         learnMoreAboutSeatsLink: i
       })
-    }), e === tn.CONFIRM_PAY && jsx("p", {
+    }), e === UpgradeSteps.CONFIRM_PAY && jsx("p", {
       className: _$$s.colorTextSecondary.font13.mt8.$,
       children: renderI18nText("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set")
     }), UR() && jsx(_$$W, {

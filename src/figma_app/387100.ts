@@ -1,4 +1,4 @@
-import { F } from "../905/266460";
+import { isSpecialNodeType } from "../905/266460";
 import { getFeatureFlags } from "../905/601108";
 import { getSingletonSceneGraph } from "../905/700578";
 export function $$s20(e, t) {
@@ -82,7 +82,7 @@ export function $$y3(e) {
   return "STAMP" === e.type || "ROUNDED_RECTANGLE" === e.type && e.name?.includes("FigJam Stamp Icon");
 }
 function b(e, t) {
-  return t && "CANVAS" === t.type && t.visible && F(e.type) && e.visible;
+  return t && "CANVAS" === t.type && t.visible && isSpecialNodeType(e.type) && e.visible;
 }
 export function $$T16(e, t) {
   let r = [];
@@ -171,7 +171,7 @@ export function $$C21(e, t) {
   let r = null;
   $$d19(e, t, e => {
     let t = e.parentNode;
-    t && t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && F(e.type) && e.visible && "SECTION" !== e.type && (r = e);
+    t && t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && isSpecialNodeType(e.type) && e.visible && "SECTION" !== e.type && (r = e);
   });
   return r;
 }
@@ -251,7 +251,7 @@ export const qT = function e(t, r, i = []) {
   if (!a || !a.childrenNodes) return i;
   for (let r of a.childrenNodes) (function (e) {
     let t = e.parentNode;
-    return !!t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && F(e.type) && e.visible;
+    return !!t && ("CANVAS" === t.type || "SECTION" === t.type) && t.visible && isSpecialNodeType(e.type) && e.visible;
   })(r) && ("SECTION" === r.type ? e(t, r.guid, i) : i.push(r));
   return i;
 };

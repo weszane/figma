@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { languageCodes } from "../905/816253";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { FJ } from "../905/508367";
@@ -24,16 +24,16 @@ export function $$T0() {
   let d = l ? e : "hidden";
   let c = useCallback(() => {
     t("hidden");
-    Ez5?.uiState().inProductHelpSidePanelWidth.set(0);
+    AppStateTsApi?.uiState().inProductHelpSidePanelWidth.set(0);
   }, [t]);
   let p = useCallback(() => {
-    window.innerWidth < 1440 ? (t("floating_modal"), Ez5?.uiState().inProductHelpSidePanelWidth.set(0)) : (t("side_panel"), Ez5?.uiState().inProductHelpSidePanelWidth.set($$E3));
+    window.innerWidth < 1440 ? (t("floating_modal"), AppStateTsApi?.uiState().inProductHelpSidePanelWidth.set(0)) : (t("side_panel"), AppStateTsApi?.uiState().inProductHelpSidePanelWidth.set($$E3));
   }, [t]);
   let m = useCallback(() => {
     l && p();
   }, [l, p]);
   useEffect(() => {
-    "hidden" === d && Ez5?.uiState().inProductHelpSidePanelWidth.set(0);
+    "hidden" === d && AppStateTsApi?.uiState().inProductHelpSidePanelWidth.set(0);
   }, [d]);
   return {
     canShowInProductHelp: l,

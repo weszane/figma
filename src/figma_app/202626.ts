@@ -1,5 +1,5 @@
 import { hV, PA } from "../figma_app/387100";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { wr, Dh } from "../figma_app/741237";
 import { e as _$$e } from "../905/986107";
 import { QZ } from "../figma_app/62612";
@@ -104,7 +104,7 @@ export async function $$y9({
     minSizePx: t ? 200 : 32
   }));
   Dh([r]);
-  Y5.commit();
+  fullscreenValue.commit();
 }
 export const Qf = $$h0;
 export const aD = $$g1;

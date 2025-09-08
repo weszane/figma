@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import a from "classnames";
 import { Pt } from "../figma_app/806412";
 import { Un } from "../figma_app/591738";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { wv, uM, g5, Iz } from "../905/888175";
 import { yF, r6 } from "../figma_app/731560";
 var s = a;
@@ -16,7 +16,7 @@ export function $$m0(e) {
   return Pt($$_3, e);
 }
 export function $$g1(e, t) {
-  if (gl(e)) return e;
+  if (isInvalidValue(e)) return e;
   if ("VECTOR" === t || "CONNECTOR" === t) {
     if (e === wv) return "THIN";
     if (e === uM) return "THICK";

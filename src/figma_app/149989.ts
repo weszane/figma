@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useCallback, useContext, useLayoutEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { k as _$$k } from "../905/443820";
-import { rXF, CWU, Z_n, NLJ } from "../figma_app/763686";
+import { VariableResolvedDataType, VariablesBindings, VariableDataType, DesignGraphElements } from "../figma_app/763686";
 import { s4 } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../figma_app/272902";
@@ -60,7 +60,7 @@ function Z(e, t, r, i) {
         layout: t
       })
     },
-    children: e.length > 0 ? getI18nString("variables.binding_ui.no_search_results") : i === rXF.COLOR ? getI18nString("variables.binding_ui.no_colors_empty_state") : r ? getI18nString("variables.binding_ui.no_variables_props_empty_state") : getI18nString("variables.binding_ui.no_variables_empty_state")
+    children: e.length > 0 ? getI18nString("variables.binding_ui.no_search_results") : i === VariableResolvedDataType.COLOR ? getI18nString("variables.binding_ui.no_colors_empty_state") : r ? getI18nString("variables.binding_ui.no_variables_props_empty_state") : getI18nString("variables.binding_ui.no_variables_empty_state")
   });
 }
 export function $$Q1({
@@ -172,7 +172,7 @@ function ee({
   let b = "loading" === y.status || "loading" === E.status;
   let T = E.data ?? [];
   let I = y.data ?? [];
-  return r === rXF.COLOR && "color-picker" === i && l ? jsx(et, {
+  return r === VariableResolvedDataType.COLOR && "color-picker" === i && l ? jsx(et, {
     fileKey: f,
     selectedStyle: e?.type === PW.STYLE ? e : null,
     render: ({
@@ -262,7 +262,7 @@ export function $$er2({
 }) {
   let b = Rb();
   let T = yp();
-  return i === rXF.COLOR && "color-picker" === a && c ? jsx(ei, {
+  return i === VariableResolvedDataType.COLOR && "color-picker" === a && c ? jsx(ei, {
     styleType: s4.FILL,
     render: o => jsx($$el3, {
       currentView: r,
@@ -360,7 +360,7 @@ function en({
   let C = v.data?.libraryVariableSets;
   let w = useMemo(() => [...I, ...(N ?? [])], [I, N]);
   let O = useMemo(() => [...S, ...(C ?? [])], [S, C]);
-  return a === rXF.COLOR && "color-picker" === s && u ? jsx(es, {
+  return a === VariableResolvedDataType.COLOR && "color-picker" === s && u ? jsx(es, {
     styleType: s4.FILL,
     selectedStyle: e?.type === PW.STYLE ? e : null,
     render: ({
@@ -454,11 +454,11 @@ function ea({
     let e = (() => {
       switch (t) {
         case "set-variable":
-          return getFeatureFlags().ds_variable_props_proto ? CWU.getComponentPropsForSetVariableList() : [];
+          return getFeatureFlags().ds_variable_props_proto ? VariablesBindings.getComponentPropsForSetVariableList() : [];
         case "prop-assignment":
           return [];
         default:
-          return CWU.getComponentPropsForFieldsList();
+          return VariablesBindings.getComponentPropsForFieldsList();
       }
     })();
     let i = [];
@@ -584,7 +584,7 @@ export function $$el3({
     if (n && n[t]?.length) {
       let r = n[t];
       if ("LIBRARY" === e.subscriptionStatus || r && !Object.values(e.modeValues).some(e => {
-        if (e.type === Z_n.STRING) {
+        if (e.type === VariableDataType.STRING) {
           let t = e.value.trim().toLocaleLowerCase();
           return r?.some(e => e === t);
         }
@@ -613,7 +613,7 @@ export function $$el3({
       cmsFields: eD,
       fieldTypes: er?.fieldTypes ?? []
     });
-    if (u === rXF.COLOR) return w$({
+    if (u === VariableResolvedDataType.COLOR) return w$({
       variables: eR,
       variableSets: t,
       styles: eL,
@@ -746,7 +746,7 @@ export function $$el3({
       })
     }), en, jsx(Id, {
       className: p()({
-        [_$$eB]: u !== rXF.COLOR,
+        [_$$eB]: u !== VariableResolvedDataType.COLOR,
         [a2]: !0
       }),
       children: y ? jsx("div", {
@@ -877,7 +877,7 @@ export function $$eu0({
     t();
     e.stopPropagation();
   }, [t]));
-  return dH() === NLJ.DROPPER_COLOR ? null : jsx(_$$n.div, {
+  return dH() === DesignGraphElements.DROPPER_COLOR ? null : jsx(_$$n.div, {
     className: ZA,
     onMouseDown: r
   });

@@ -21,7 +21,7 @@ import { B as _$$B } from "../905/714743";
 import { W } from "../905/95038";
 import { G as _$$G } from "../905/720066";
 import { uF, NE, Xx, e_, hl, KL } from "../905/182534";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { sn$ } from "../figma_app/43951";
 import { cr, yY, CO } from "../905/703676";
 import { a as _$$a } from "../905/682573";
@@ -44,11 +44,11 @@ function N({
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
     t.preventDefault();
-    t.metaKey || 1 === t.button ? Ay.redirect(c, "_blank") : (l(AS()), NE(l, e.model));
+    t.metaKey || 1 === t.button ? Ay.redirect(c, "_blank") : (l(hideModalHandler()), NE(l, e.model));
   }, [c, l, e]);
   let h = useCallback(t => {
     t.preventDefault();
-    l(AS());
+    l(hideModalHandler());
     NE(l, e.model);
   }, [l, e]);
   let f = useCallback(t => {
@@ -111,11 +111,11 @@ function D({
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
     t.preventDefault();
-    t.metaKey || 1 === t.button ? Ay.redirect(c, "_blank") : (l(AS()), e_(l, e.model));
+    t.metaKey || 1 === t.button ? Ay.redirect(c, "_blank") : (l(hideModalHandler()), e_(l, e.model));
   }, [c, l, e]);
   let h = useCallback(t => {
     t.preventDefault();
-    l(AS());
+    l(hideModalHandler());
     e_(l, e.model);
   }, [l, e]);
   let f = useCallback(t => {
@@ -172,11 +172,11 @@ function $$j({
   let f = _$$G(h, i, a);
   let _ = useCallback(e => {
     e.preventDefault();
-    e.metaKey || 1 === e.button ? Ay.redirect(h, "_blank") : (d(AS()), KL(d, a.model));
+    e.metaKey || 1 === e.button ? Ay.redirect(h, "_blank") : (d(hideModalHandler()), KL(d, a.model));
   }, [h, d, a]);
   let A = useCallback(e => {
     e.preventDefault();
-    d(AS());
+    d(hideModalHandler());
     KL(d, a.model);
   }, [d, a]);
   let y = useCallback(e => {

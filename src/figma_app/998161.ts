@@ -9,8 +9,8 @@ import { bL } from "../905/911410";
 import { E as _$$E } from "../905/632989";
 import { R as _$$R } from "../905/649743";
 import { i as _$$i } from "../905/22844";
-import { t2E, CWU, rrT, m1T, rXF } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { GradientToolApi, VariablesBindings, NodePropertyCategory, LayoutTabType, VariableResolvedDataType } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { C as _$$C } from "../905/108595";
 import { Pt } from "../figma_app/806412";
@@ -18,7 +18,7 @@ import { k as _$$k } from "../905/582200";
 import { L as _$$L } from "../905/408237";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
 import { bn, x$, Ou, iC, Tm } from "../figma_app/385874";
@@ -55,7 +55,7 @@ var K = (e => (e[e.COLOR = 0] = "COLOR", e[e.GRADIENT = 1] = "GRADIENT", e))(K |
 function Y() {
   return jsx(_$$K, {
     actionOnPointerDown: !0,
-    onClick: t2E?.rotateGradient90Degrees,
+    onClick: GradientToolApi?.rotateGradient90Degrees,
     "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
@@ -67,8 +67,8 @@ function Y() {
 function $({
   editVar: e
 }) {
-  let t = useCallback(() => l7.user("slides-delete-theme-color", () => {
-    e && CWU?.deleteVariable(e.varId);
+  let t = useCallback(() => permissionScopeHandler.user("slides-delete-theme-color", () => {
+    e && VariablesBindings?.deleteVariable(e.varId);
   }), [e]);
   return e ? jsx(_$$K, {
     onClick: t,
@@ -125,12 +125,12 @@ export function $$J0({
   let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let w = kl("numSelectedByType");
   let O = useMemo(() => {
-    if (w) return aZ(rrT.FILL, w);
+    if (w) return aZ(NodePropertyCategory.FILL, w);
   }, [w]);
   let R = useAtomWithSubscription(E_);
   let L = useMemo(() => new Set(), []);
   let P = useCallback(() => {
-    C === m1T.GRADIENT && Y5.triggerAction("leave-edit-mode");
+    C === LayoutTabType.GRADIENT && fullscreenValue.triggerAction("leave-edit-mode");
     r();
   }, [C, r]);
   let D = "slidesCustomColorPicker";
@@ -179,7 +179,7 @@ export function $$J0({
             ...v.library,
             children: jsx(Rp, {
               selectedItem: null,
-              resolvedType: rXF.COLOR,
+              resolvedType: VariableResolvedDataType.COLOR,
               disabledVariableIds: L,
               pickerType: "color-picker",
               recordingKey: Pt("slidesCustomColorPicker", "libraryColors"),
@@ -223,7 +223,7 @@ function Z({
     children: [!o && r && jsx(Q, {
       panelType: E,
       onPanelTypeChange: e => {
-        E !== e && (C(0 === e ? "SOLID" : "GRADIENT_LINEAR"), y(e), 1 === e ? Y5.triggerAction("toggle-gradient-edit-mode") : m === m1T.GRADIENT && Y5.triggerAction("leave-edit-mode"));
+        E !== e && (C(0 === e ? "SOLID" : "GRADIENT_LINEAR"), y(e), 1 === e ? fullscreenValue.triggerAction("toggle-gradient-edit-mode") : m === LayoutTabType.GRADIENT && fullscreenValue.triggerAction("leave-edit-mode"));
       },
       recordingKey: s
     }), r && 1 === E && T && jsx(vL, {
@@ -306,7 +306,7 @@ function ee({
   }, [r]);
   let o = useRef(null);
   let l = useCallback(() => {
-    CWU?.renameVariable(t?.varId ?? "", rh(a));
+    VariablesBindings?.renameVariable(t?.varId ?? "", rh(a));
   }, [t, a]);
   return t ? jsxs("div", {
     className: _$$s.px16.py12.flex.itemsCenter.bt1.bSolid.colorBorder.$,
@@ -319,7 +319,7 @@ function ee({
       "data-1p-ignore": !0,
       delay: 50,
       name: "variableName",
-      onBlur: nc.user("slides-rename-theme-color", l),
+      onBlur: scopeAwareFunction.user("slides-rename-theme-color", l),
       onChange: e => {
         s(e.target.value);
       },

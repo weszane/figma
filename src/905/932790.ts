@@ -4,8 +4,8 @@ import { LI, qk, xK } from "../905/543466";
 import { zw } from "../905/585727";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { biQ } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ComponentPropsAiCPPBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -189,14 +189,14 @@ async function U(e, t, i, n, s, o, c, u, p) {
     if (0 === e.length) throw new IL("No nodes selected");
     let t = e[0].parentNode;
     if (!t) throw new IL("No container node found for AutoContent Node");
-    if (biQ?.nodeHasTooManyChildrenForRepeatingContent(t.guid)) throw new Lg();
+    if (ComponentPropsAiCPPBindings?.nodeHasTooManyChildrenForRepeatingContent(t.guid)) throw new Lg();
   }(e);
   let m = 1;
   let h = i;
   let f = !1;
   let A = !1;
   for (; !f && m <= 4;) {
-    let i = biQ?.getNumHeaderNodes() ?? 0;
+    let i = ComponentPropsAiCPPBindings?.getNumHeaderNodes() ?? 0;
     let y = LI(e, i, h, t, u);
     if (!y) {
       let e = new SA("Can't regenerate text - no selected nodes");
@@ -255,8 +255,8 @@ export let $$B0 = async ({
   let v = atomStoreManager.get(dd);
   if (numExampleRows < 0) throw new SA("numExampleRows must be zero or higher");
   if ("DUPLICATE_SESSION_TOAST" === source && guids.length <= 1) throw new Aq("No additional duplicate nodes found");
-  let I = (biQ?.getActiveNodeIds() ?? []).map(e => getSingletonSceneGraph().get(e)).filter(e => !!e);
-  if (biQ?.imageFillAvailable()) {
+  let I = (ComponentPropsAiCPPBindings?.getActiveNodeIds() ?? []).map(e => getSingletonSceneGraph().get(e)).filter(e => !!e);
+  if (ComponentPropsAiCPPBindings?.imageFillAvailable()) {
     await Promise.all(I.map(async t => (Vm(t.guid, jsx(_$$A, {
       borderRadiusStyle: _$$b(t)
     })), await xS({
@@ -274,7 +274,7 @@ export let $$B0 = async ({
     };
   }
   let E = new Map();
-  let S = biQ?.isColumnwiseTable() ?? !1;
+  let S = ComponentPropsAiCPPBindings?.isColumnwiseTable() ?? !1;
   let {
     autoContentNodes
   } = xK(I, S);
@@ -354,8 +354,8 @@ export let $$B0 = async ({
       (function (e) {
         for (let [t, i] of e.entries()) {
           let e = getSingletonSceneGraph().get(t);
-          if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && t.visible && !t.locked && l7.ai("content_fill", () => {
-            biQ?.setTextContentOnTextNode(t.guid, i);
+          if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && t.visible && !t.locked && permissionScopeHandler.ai("content_fill", () => {
+            ComponentPropsAiCPPBindings?.setTextContentOnTextNode(t.guid, i);
           });
         }
       })(E);
@@ -363,7 +363,7 @@ export let $$B0 = async ({
         let t = getSingletonSceneGraph();
         for (let i of e) {
           let e = t.get(i);
-          if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && l7.ai("content_fill", () => {
+          if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && permissionScopeHandler.ai("content_fill", () => {
             t.removeSelfAndChildren();
           });
         }

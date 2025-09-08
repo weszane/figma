@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useRef, useEffect } from "react";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { B } from "../905/714743";
 import { Ao, RN } from "../905/676397";
 import { EE, lB } from "../figma_app/731583";
@@ -18,14 +18,14 @@ export let $$c0 = memo(function (e) {
   useEffect(() => {
     let e = EE(`loading-embed-${nodeId}`, [nodeId], e => {
       if (!e.position) {
-        glU.removeLoadingEmbed(nodeId);
+        Fullscreen.removeLoadingEmbed(nodeId);
         return;
       }
       o.current = e.position;
       p(i, s, o);
     });
     let n = e.currentNodePosition[nodeId]?.position;
-    n ? (o.current = n, p(i, s, o)) : glU.removeLoadingEmbed(nodeId);
+    n ? (o.current = n, p(i, s, o)) : Fullscreen.removeLoadingEmbed(nodeId);
     return () => {
       lB(`loading-embed-${nodeId}`);
     };

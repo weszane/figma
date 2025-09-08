@@ -8,7 +8,7 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { XP } from "../figma_app/655139";
 import { tn } from "../figma_app/473493";
-import { yT } from "../905/359509";
+import { mapPlatformToFramework } from "../905/359509";
 import { b as _$$b } from "../905/985254";
 import { GS } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
@@ -426,7 +426,7 @@ export async function $$z1(e, t, i, d) {
   let w = i.getState().mirror.appModel.devHandoffCodeLanguage.id;
   let C = i.getState().mirror.appModel.devHandoffCodeLanguage;
   let T = XP(C);
-  let k = yT(T.id) || "unknown";
+  let k = mapPlatformToFramework(T.id) || "unknown";
   CX(v.toolName);
   globalPerfTimer.start("mcp.tool_call");
   let [R, N] = await W({

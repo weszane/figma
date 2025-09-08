@@ -4,17 +4,17 @@ import { M as _$$M } from "../905/749786";
 import { b as _$$b } from "../905/799737";
 import { m as _$$m } from "../905/494625";
 import { i as _$$i } from "../905/97346";
-import { Qv, _c } from "../905/959312";
+import { useRecording, useIsRecording } from "../905/959312";
 import { bq } from "../905/117474";
 import { F as _$$F } from "../905/768014";
 import { i as _$$i2 } from "../905/718764";
 import { Vg } from "../905/893109";
-import { ch, Ju } from "../905/955878";
+import { addEventlistenerWithCleanup, preventAndStopEvent } from "../905/955878";
 import { qE, KY } from "../905/875826";
 import { LI, t6, LC, f2, TX, Io, WQ, gU, VN, Vu, Re, BB, qE as _$$qE } from "../905/268491";
 import { Kg, DX, PU, U1 } from "../figma_app/343967";
 import { w as _$$w } from "../905/937416";
-import { M as _$$M2 } from "../905/581092";
+import { useExposedRef } from "../905/581092";
 import { R as _$$R } from "../905/987614";
 import { Tv } from "../905/36803";
 var n = {};
@@ -143,7 +143,7 @@ let Y = forwardRef(({
     headerOnly: n,
     refIn: r
   }) {
-    let s = _$$M2(r);
+    let s = useExposedRef(r);
     let [o, l] = useState(null);
     let [c, u] = useState(!1);
     let p = function () {
@@ -290,7 +290,7 @@ let Y = forwardRef(({
       }, function () {
         i = null;
       }];
-      return ch(window, "resize", () => {
+      return addEventlistenerWithCleanup(window, "resize", () => {
         let t = n();
         t && (Object.assign(s.current.style, {
           top: 0,
@@ -390,7 +390,7 @@ let Y = forwardRef(({
       previouslyInteractedMapped: i
     };
   }(e => e.closest(w));
-  let K = Qv(n, {
+  let K = useRecording(n, {
     eventName: "close",
     recordingKey: b
   }, [n]);
@@ -410,7 +410,7 @@ let Y = forwardRef(({
       let i = useRef(null);
       return (useEffect(() => {
         if (!t) return;
-        let n = ch(document, "pointerdown", n => {
+        let n = addEventlistenerWithCleanup(document, "pointerdown", n => {
           if (e.current && e.current.contains(n.target)) return;
           let r = n.target;
           i.current = window.setTimeout(() => {
@@ -471,7 +471,7 @@ let Y = forwardRef(({
                 e.target.closest(w) === ref.current && G();
               },
               onKeyDown: function (e) {
-                "Escape" === e.key && (Ju(e), K({
+                "Escape" === e.key && (preventAndStopEvent(e), K({
                   source: "escape"
                 }));
                 x?.onKeyDown?.(e);
@@ -527,13 +527,13 @@ export function $$q0({
   }(p, t, i, n);
   let w = useRef(null);
   let C = useRef();
-  let R = _c();
+  let R = useIsRecording();
   let N = manager?.private.preventUserResize ?? !1;
   useImperativeHandle(manager?.private.sizeRef, () => ({
     size: E,
     setSize: x
   }), [E, x]);
-  let O = Qv(({
+  let O = useRecording(({
     pos: e,
     size: t
   }) => {
@@ -650,7 +650,7 @@ export function $$q0({
       }
     }
   });
-  useEffect(() => ch(window, "resize", () => {
+  useEffect(() => addEventlistenerWithCleanup(window, "resize", () => {
     let e = k(n);
     x(t => {
       let i = t6(KY(t.x, e.minWidth, e.maxWidth), KY(t.y, e.minHeight, e.maxHeight));

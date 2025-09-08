@@ -5,7 +5,7 @@ import { FPublisherType } from "../figma_app/191312";
 import { bD } from "../figma_app/45218";
 import { FEditorType, isDesignOrIllustration } from "../figma_app/53721";
 import { $A, dB, vt } from "../905/862883";
-import { uF } from "../figma_app/300692";
+import { getPluginVersion } from "../figma_app/300692";
 export function $$u5() {
   let e = my();
   return e === FEditorType.Whiteboard ? $A.FigJam : isDesignOrIllustration(e) ? $A.Design : e === FEditorType.DevHandoff ? $A.Handoff : e === FEditorType.Slides ? $A.Slides : e === FEditorType.Cooper ? $A.Cooper : null;
@@ -65,7 +65,7 @@ export function $$b9(e, t) {
   }));
 }
 export function $$T10(e) {
-  let t = uF(e);
+  let t = getPluginVersion(e);
   let r = e.community_publishers.accepted.map(e => ({
     isPending: !1,
     profile: {

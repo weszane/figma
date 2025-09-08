@@ -2,9 +2,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
-import { Pt4, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { fn, sH } from "../905/871411";
+import { StylesBindings, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { Pt } from "../figma_app/806412";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
@@ -13,7 +13,7 @@ import { sw, rk } from "../figma_app/914957";
 import { EF, Oo, eE } from "../905/709171";
 import { Eo } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
 import { tS, q5 } from "../figma_app/516028";
 export let $$v0 = "variable-picker-style-context-menu";
@@ -58,9 +58,9 @@ export function $$I1() {
       }) {
         if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r();else {
           debug(null != n.content_hash, "style does not have a hash");
-          let i = Oo(n, t) ? n.node_id : Pt4.getStyleNodeId(n.key, n.content_hash);
-          fn(sH(i)) ? glU.selectStyleByGuid(i) : Eo.getCanvas(n).then(e => {
-            glU.selectExternalStyle(e);
+          let i = Oo(n, t) ? n.node_id : StylesBindings.getStyleNodeId(n.key, n.content_hash);
+          isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(n).then(e => {
+            Fullscreen.selectExternalStyle(e);
           });
           e(rk({
             style: n,
@@ -71,7 +71,7 @@ export function $$I1() {
       },
       hideStyleDetails: r,
       deleteStyle: function (e) {
-        Oo(e, t) && (glU.deleteNode(e.node_id), Y5.triggerAction("commit"));
+        Oo(e, t) && (Fullscreen.deleteNode(e.node_id), fullscreenValue.triggerAction("commit"));
       }
     };
   }, [e, t, i, hideStyleContextMenu, showStyleContextMenu]);
@@ -112,7 +112,7 @@ export function $$E2({
         children: renderI18nText("design_systems.styles.edit_style")
       }), jsx(c$, {
         recordingKey: Pt(i, "deleteStyle"),
-        onClick: () => l7.user("delete-style", () => deleteStyle(e)),
+        onClick: () => permissionScopeHandler.user("delete-style", () => deleteStyle(e)),
         children: renderI18nText("design_systems.styles.delete_styles", {
           numStyles: 1
         })

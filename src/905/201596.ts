@@ -1,21 +1,21 @@
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { Rs } from "../figma_app/288654";
 import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { DM } from "../905/889062";
 import { Rv } from "../figma_app/599979";
 import { Jj, bY } from "../figma_app/2023";
 import { $T } from "../figma_app/12535";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { FC } from "../figma_app/212807";
 import { FFileType } from "../figma_app/191312";
 import { FBc } from "../figma_app/43951";
 import { M4 } from "../905/713695";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { p6 } from "../figma_app/803787";
 import { Se } from "../905/71785";
 import { $S } from "../905/918620";
@@ -26,7 +26,7 @@ export function $$C2(e) {
   let t;
   let i = useSelector(e => e.mirror.appModel.pagesList || []);
   let a = i.length > 0 ? i[0].nodeId : "";
-  let o = ut(Ez5?.canvasGrid().canvasGridArray, []);
+  let o = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
   let l = useSelector(p6);
   switch (e?.editorType) {
     case "slides":
@@ -122,13 +122,13 @@ export function $$N0({
       if (!s) return !1;
       switch (l(!0), s.editor_type) {
         case FFileType.COOPER:
-          Y5?.triggerAction("cooper-make-brand-templates", {
+          fullscreenValue?.triggerAction("cooper-make-brand-templates", {
             source: "share-modal-publish-to-community"
           });
           break;
         case FFileType.FIGMAKE:
           if (await $6(s.key)) {
-            t(to({
+            t(showModalHandler({
               type: _$$m,
               data: {}
             }));

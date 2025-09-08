@@ -26,7 +26,7 @@ import { zx, VU } from "../4452/650793";
 import { p as _$$p2 } from "../469e6e40/348454";
 import { K as _$$K } from "../469e6e40/132057";
 import { J } from "../905/844906";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { IU } from "../figma_app/421401";
 import { b as _$$b2 } from "../469e6e40/978552";
 import { oi } from "../figma_app/527041";
@@ -42,7 +42,7 @@ function R(e) {
     }));
   }, [a, t, e.planId, e.planType]);
   let l = useCallback(() => {
-    a(to({
+    a(showModalHandler({
       type: _$$K(),
       data: {
         folders: [t]
@@ -50,7 +50,7 @@ function R(e) {
     }));
   }, [a, t]);
   let o = useCallback(() => {
-    a(to({
+    a(showModalHandler({
       type: J,
       data: {
         folderId: t.id
@@ -90,7 +90,7 @@ function L({
       label: getI18nString("abandoned_drafts_table.open")
     }), t === _$$O2.ORG && jsx(IU, {
       onClick: () => {
-        s(to({
+        s(showModalHandler({
           type: J,
           data: {
             folderId: e[0].id
@@ -101,7 +101,7 @@ function L({
       label: getI18nString("abandoned_drafts_table.move")
     }), jsx(IU, {
       onClick: () => {
-        s(to({
+        s(showModalHandler({
           type: _$$K(),
           data: {
             folders: e

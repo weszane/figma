@@ -2,8 +2,8 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useLayoutEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { nj } from "../905/125019";
-import { NLJ, cxo, glU, rrT } from "../figma_app/763686";
+import { sha1HexFromBytes } from "../905/125019";
+import { DesignGraphElements, ToolType, Fullscreen, NodePropertyCategory } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -12,7 +12,7 @@ import { Pt } from "../figma_app/806412";
 import { GI, IZ, SK } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F2 } from "../905/258517";
 import { Yv } from "../figma_app/616107";
 import { Ib } from "../905/129884";
@@ -61,7 +61,7 @@ let $$K0 = memo(function ({
   let {
     washiTapePaint
   } = useAtomWithSubscription(SK);
-  let Q = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
+  let Q = washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint?.image?.hash);
   let [ee, et] = useState(!1);
   let [er, en] = useState(!1);
   let ei = useSelector(e => e.mirror?.appModel.isReadOnly);
@@ -79,7 +79,7 @@ let $$K0 = memo(function ({
     closeColorPalettePicker();
   }, [e, t, closeColorPalettePicker]);
   useEffect(() => {
-    t && (e === NLJ.VECTOR_PENCIL || e === NLJ.DROPPER_COLOR) ? es(cxo.PENCIL_TOOL) : ea === cxo.PENCIL_TOOL && es(cxo.SELECTION);
+    t && (e === DesignGraphElements.VECTOR_PENCIL || e === DesignGraphElements.DROPPER_COLOR) ? es(ToolType.PENCIL_TOOL) : ea === ToolType.PENCIL_TOOL && es(ToolType.SELECTION);
   }, [e, t, ea, es]);
   useLayoutEffect(() => {
     let e = () => et(!1);
@@ -96,10 +96,10 @@ let $$K0 = memo(function ({
     margin: "4px 0",
     borderRadius: "3px"
   };
-  let ep = e === NLJ.VECTOR_PENCIL;
-  let e_ = e === NLJ.ERASER;
-  let eh = e === NLJ.HIGHLIGHTER;
-  let em = e === NLJ.WASHI_TAPE;
+  let ep = e === DesignGraphElements.VECTOR_PENCIL;
+  let e_ = e === DesignGraphElements.ERASER;
+  let eh = e === DesignGraphElements.HIGHLIGHTER;
+  let em = e === DesignGraphElements.WASHI_TAPE;
   let eg = BG(e);
   let ef = !!eg && (eh ? ed : eo);
   let eE = !!eg && (eh ? ec : el);
@@ -116,7 +116,7 @@ let $$K0 = memo(function ({
     });
     trackEventAnalytics("Drawing Tool Change Thickness", {
       thickness: t,
-      tool: NLJ[e]
+      tool: DesignGraphElements[e]
     });
   }
   function eS(e) {
@@ -148,7 +148,7 @@ let $$K0 = memo(function ({
         recordingKey: ME("tool-small-pencil"),
         isSelected: ep,
         onClick: () => {
-          glU?.triggerActionInUserEditScope("set-tool-pencil", W);
+          Fullscreen?.triggerActionInUserEditScope("set-tool-pencil", W);
         },
         dataTooltip: "set-tool-marker",
         tooltipOffset: {
@@ -166,7 +166,7 @@ let $$K0 = memo(function ({
         recordingKey: ME("tool-highlighter"),
         isSelected: eh,
         onClick: () => {
-          glU?.triggerActionInUserEditScope("set-tool-highlighter", W);
+          Fullscreen?.triggerActionInUserEditScope("set-tool-highlighter", W);
         },
         dataTooltip: "set-tool-highlighter",
         tooltipOffset: {
@@ -182,9 +182,9 @@ let $$K0 = memo(function ({
       }), !s && jsx($$Y1, {
         toolType: "washi-tape",
         recordingKey: ME("tool-washi-tape"),
-        isSelected: e === NLJ.WASHI_TAPE,
+        isSelected: e === DesignGraphElements.WASHI_TAPE,
         onClick: () => {
-          glU?.triggerActionInUserEditScope("set-tool-washi-tape", W);
+          Fullscreen?.triggerActionInUserEditScope("set-tool-washi-tape", W);
         },
         dataTooltip: "set-tool-washi-tape",
         tooltipOffset: {
@@ -199,9 +199,9 @@ let $$K0 = memo(function ({
       }), jsx($$Y1, {
         toolType: "eraser",
         recordingKey: ME("tool-eraser"),
-        isSelected: e === NLJ.ERASER,
+        isSelected: e === DesignGraphElements.ERASER,
         onClick: () => {
-          glU?.triggerActionInUserEditScope("set-tool-eraser", W);
+          Fullscreen?.triggerActionInUserEditScope("set-tool-eraser", W);
         },
         dataTooltip: "set-tool-eraser",
         tooltipOffset: {
@@ -287,13 +287,13 @@ let $$K0 = memo(function ({
             caret: "up",
             isNewSubmenu: !0,
             onClick: () => {
-              Y5.updateAppModel({
+              fullscreenValue.updateAppModel({
                 currentSelectedProperty: {
-                  type: rrT.STROKE_PRESET,
+                  type: NodePropertyCategory.STROKE_PRESET,
                   indices: [0]
                 }
               });
-              glU?.uploadPaintImage("NORMAL", 1);
+              Fullscreen?.uploadPaintImage("NORMAL", 1);
               et(!0);
             },
             onMouseEnter: () => {
@@ -345,7 +345,7 @@ let $$K0 = memo(function ({
         analytics: {
           name: "Drawing Tool Change Color",
           properties: {
-            tool: NLJ[e]
+            tool: DesignGraphElements[e]
           }
         },
         recordingKey: r && Pt(r, "customColorPopover"),
@@ -372,7 +372,7 @@ let $$K0 = memo(function ({
                 _$$F2.trackFromFullscreen("Drawing Tool Change Color", {
                   source: "default",
                   color: _$$F.format(t),
-                  tool: NLJ[e]
+                  tool: DesignGraphElements[e]
                 });
               },
               paletteType: ex,
@@ -412,7 +412,7 @@ let $$K0 = memo(function ({
             analytics: {
               name: "Drawing Tool Change Color",
               properties: {
-                tool: NLJ[e]
+                tool: DesignGraphElements[e]
               }
             },
             recordingKey: r && Pt(r, "customColorPopover")

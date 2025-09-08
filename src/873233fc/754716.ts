@@ -2,11 +2,11 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useState, useEffect, memo } from "react";
 import { useSelector } from "../vendor/514228";
 import { eBU } from "../figma_app/822011";
-import { mKm, Qa7, w3z, Ez5, _gJ, Oin } from "../figma_app/763686";
+import { LayoutSizingMode, StackBindingsCpp, HandoffBindingsCpp, AppStateTsApi, IAssertResource, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { y6 } from "../figma_app/681951";
 import { tH, H4 } from "../905/751457";
-import { Cc, qE } from "../figma_app/492908";
+import { lerp, clamp } from "../figma_app/492908";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
@@ -15,7 +15,7 @@ import { qM } from "../figma_app/120227";
 import { d as _$$d } from "../905/758967";
 import { UK } from "../figma_app/740163";
 import { Hr, wr, Dh, ax } from "../figma_app/741237";
-import { J2, ut } from "../figma_app/84367";
+import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { Bf } from "../figma_app/249941";
 import { MO } from "../3682/618608";
@@ -53,7 +53,7 @@ import { w as _$$w2 } from "../905/129046";
 import { rq } from "../905/425180";
 import { R as _$$R2, Q as _$$Q } from "../905/11928";
 import { F_ } from "../905/748636";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { xT } from "../figma_app/195407";
 import { uI, Ov, gh } from "../figma_app/598952";
 import { X as _$$X } from "../905/482718";
@@ -78,7 +78,7 @@ import { _q, PA } from "../figma_app/957070";
 let k = "dev_handoff_canvas_pill--dimension--WEwpp";
 let j = "dev_handoff_canvas_pill--size--9ZpSZ";
 function N(e) {
-  return e === mKm.HUG_CONTENT ? getI18nString("inspect_panel.properties.hug") : e === mKm.FILL_CONTAINER ? "100%" : e === mKm.FIXED ? getI18nString("inspect_panel.properties.fixed") : "";
+  return e === LayoutSizingMode.HUG_CONTENT ? getI18nString("inspect_panel.properties.hug") : e === LayoutSizingMode.FILL_CONTAINER ? "100%" : e === LayoutSizingMode.FIXED ? getI18nString("inspect_panel.properties.fixed") : "";
 }
 function I(e) {
   return Fk((e, t) => {
@@ -103,8 +103,8 @@ function I(e) {
       isGroup: n.isGroup,
       canHaveStatus: n.canHaveStatus,
       hasStatus: n.hasStatus,
-      horizontalSizeMode: N(Qa7?.stackHorizontalSize(n.guid)),
-      verticalSizeMode: N(Qa7?.stackVerticalSize(n.guid)),
+      horizontalSizeMode: N(StackBindingsCpp?.stackHorizontalSize(n.guid)),
+      verticalSizeMode: N(StackBindingsCpp?.stackVerticalSize(n.guid)),
       size: n.size,
       objectsPanelThumbnailId: n.objectsPanelThumbnailId
     };
@@ -112,12 +112,12 @@ function I(e) {
 }
 function E(e) {
   let t = I(e.guid);
-  let n = J2(UK().showGuids);
+  let n = getObservableOrFallback(UK().showGuids);
   let r = uQ();
   let a = useRef(null);
   let l = useCallback(e => -function (e) {
-    let t = Cc(0, 2, (e - .1) * 5);
-    return qE(t, 0, 2);
+    let t = lerp(0, 2, (e - .1) * 5);
+    return clamp(t, 0, 2);
   }(e), []);
   let d = t && (t.hasStatus || t.canHaveStatus && t.guid === r) ? e => e - 20 : void 0;
   return t && "SECTION" !== t.type ? jsx(MO, {
@@ -166,13 +166,13 @@ function O(e) {
     value: _value
   } = B("HEIGHT", t?.size.y ?? 0);
   let a = function (e) {
-    let t = J2(_$$d().activeCanvasCurrentZoom);
-    return useMemo(() => !!e && w3z?.isTLFCanvasHighlightBoxShown(e, t), [e, t]);
+    let t = getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
+    return useMemo(() => !!e && HandoffBindingsCpp?.isTLFCanvasHighlightBoxShown(e, t), [e, t]);
   }(e.guid);
   let d = useCallback(e => function (e, t) {
     let n = t ? 12 : 2;
-    let o = Cc(0, n, (e - .1) * 5);
-    return qE(o, 0, n);
+    let o = lerp(0, n, (e - .1) * 5);
+    return clamp(o, 0, n);
   }(e, a), [a]);
   return t && t.isUIElement ? jsx(MO, {
     node: t,
@@ -217,8 +217,8 @@ function w() {
       selection: t === Hr ? null : t
     };
   });
-  let n = ut(Ez5?.hoverState().isTLFHighlightHeaderHovered, !1);
-  let r = useMemo(() => !!hoveredNode && w3z?.isTLFCanvasHighlightBoxEligible(hoveredNode) && (n || selection === hoveredNode), [hoveredNode, n, selection]);
+  let n = getObservableValue(AppStateTsApi?.hoverState().isTLFHighlightHeaderHovered, !1);
+  let r = useMemo(() => !!hoveredNode && HandoffBindingsCpp?.isTLFCanvasHighlightBoxEligible(hoveredNode) && (n || selection === hoveredNode), [hoveredNode, n, selection]);
   let [a, d] = useState(!1);
   let s = useCallback(e => {
     e.altKey !== a && d(e.altKey);
@@ -439,7 +439,7 @@ function e_(e) {
   }) || _$$eN(t, "INSTANCE");
   _$$h(() => {
     queueMicrotask(async function () {
-      u && (wr(), Dh([u.guid]), Y5.commit(), await s({
+      u && (wr(), Dh([u.guid]), fullscreenValue.commit(), await s({
         centerX: u.absoluteBoundingBox.x + 165,
         centerY: u.absoluteBoundingBox.y + 50,
         scale: 1.2
@@ -452,7 +452,7 @@ function e_(e) {
         }, 0);
       }(xT(uI)?.offsetTop ?? 0), a(!0));
     });
-    ax(_gJ.PRIMARY);
+    ax(IAssertResource.PRIMARY);
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
@@ -515,7 +515,7 @@ function eC(e) {
         guidToSelect: c.guid
       }), a(!0));
     });
-    ax(_gJ.PRIMARY);
+    ax(IAssertResource.PRIMARY);
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
@@ -805,10 +805,10 @@ let eX = memo(({
   SI();
   Gb(_);
   _$$W();
-  let C = ut(UK().enableCodegenMcpServer, !1);
+  let C = getObservableValue(UK().enableCodegenMcpServer, !1);
   return jsxs(eG, {
     children: [jsx(ED, {}), jsxs(sk, {
-      children: [t.mode !== Oin.OFF && jsx("div", {
+      children: [t.mode !== UIVisibilitySetting.OFF && jsx("div", {
         className: _q
       }), jsxs(pO, {
         initialFilterState: {

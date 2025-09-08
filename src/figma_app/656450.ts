@@ -8,15 +8,15 @@ import { yJ, uW, Z } from "../905/618921";
 import { iZ } from "../905/372672";
 import { VP, aF } from "../905/18797";
 import { k } from "../905/93362";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 let h = new class {
   constructor() {
-    this.BatchedSchemaValidator = vh();
+    this.BatchedSchemaValidator = createNoOpValidator();
   }
   getBatched(e) {
     return this.BatchedSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/users/batched", td.toAPIParameters({
+    }) => await t.get("/api/users/batched", APIParameterUtils.toAPIParameters({
       userIds: e.userIds.join(",")
     })));
   }

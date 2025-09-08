@@ -15,7 +15,7 @@ import { zm, sz, er as _$$er, Tp } from "../905/753512";
 import { S as _$$S } from "../905/612212";
 import { $n, IK } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { AS, to as _$$to } from "../905/156213";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { Px, Pq, b1, Qj, mG, ry, _5, W as _$$W, eS as _$$eS2 } from "../905/825399";
 import { H as _$$H, S as _$$S2 } from "../905/348433";
 import { t as _$$t2 } from "../905/150656";
@@ -25,7 +25,7 @@ import { assert, throwError, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNotNullish } from "../figma_app/95419";
 import { U as _$$U } from "../905/763676";
 import { mq, _w, Ir } from "../905/789781";
-import { y1 } from "../figma_app/492908";
+import { range } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { Rs } from "../figma_app/288654";
 import { Wi, JR, Qp } from "../figma_app/162641";
@@ -70,7 +70,7 @@ import { MB } from "../figma_app/525558";
 import { _ as _$$_ } from "../905/381235";
 import { B as _$$B } from "../905/224000";
 import { d as _$$d2 } from "../905/49800";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { N as _$$N } from "../905/438674";
 import { LOADING_STATUS } from "../905/989992";
 import { IT as _$$IT } from "../figma_app/566371";
@@ -107,11 +107,11 @@ import { Ph } from "../905/160095";
 import { V as _$$V2 } from "../905/223767";
 import { c as _$$c } from "../905/370443";
 import { x as _$$x } from "../905/695363";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { generateRecordingKey } from "../figma_app/878298";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { i as _$$i3 } from "../905/718764";
-import { glU, h3O, _em } from "../figma_app/763686";
+import { Fullscreen, Multiplayer, PluginModalType } from "../figma_app/763686";
 import iC from "../vendor/3757";
 import { globalPerfTimer } from "../905/542194";
 import { $ as _$$$2 } from "../905/455748";
@@ -193,8 +193,8 @@ function x() {
   let e = useDispatch();
   let t = useSelector(e => e.modalShown);
   let i = useCallback(() => {
-    t && (e(AS()), setTimeout(() => {
-      e(_$$to({
+    t && (e(hideModalHandler()), setTimeout(() => {
+      e(showModalHandler({
         ...t,
         type: {
           type: t.type
@@ -385,7 +385,7 @@ function el() {
       })
     }), jsx("div", {
       className: "library_view--loadingComponentContainer--jnhEK component_tiles--componentContainer_v2--cgysm",
-      children: y1(4).map(e => jsx(Qp, {
+      children: range(4).map(e => jsx(Qp, {
         animationType: JR.SHIMMER,
         style: _$$sx.radiusMedium.add({
           width: `${$z}px`,
@@ -707,7 +707,7 @@ function eG({
         column: s,
         sectionForLogging: a,
         positionForLogging: r * t + s + 1
-      }, e.library_key)), e.length < t && y1(e.length - t).map(e => jsx("div", {
+      }, e.library_key)), e.length < t && range(e.length - t).map(e => jsx("div", {
         style: {
           width: `${s}px`
         }
@@ -891,7 +891,7 @@ function eZ({
     column: r
   });
   return jsx(_$$d2, {
-    label: jsx(_$$J, {
+    label: jsx(Label, {
       children: getI18nString("design_systems.libraries_modal.show_libraries_in_this_file")
     }),
     checked: e,
@@ -1400,7 +1400,7 @@ function e9() {
       style: {
         gridTemplateColumns: "repeat(3, minmax(0, 1fr))"
       },
-      children: y1(3).map(e => jsx(Qp, {
+      children: range(3).map(e => jsx(Qp, {
         className: _$$s2.radiusMedium.h16.$,
         style: {
           height: 85
@@ -1644,7 +1644,7 @@ function tc() {
     sessionId
   } = zm();
   let s = useCallback(() => {
-    e(_$$to({
+    e(showModalHandler({
       type: $3,
       data: {
         team: t,
@@ -1887,7 +1887,7 @@ function tO({
 }) {
   let t = useDispatch();
   let i = useCallback(() => {
-    t(_$$to({
+    t(showModalHandler({
       type: _$$i
     }));
   }, [t]);
@@ -1982,7 +1982,7 @@ let tH = () => {
   } = sz() ?? {};
   let n = ol();
   let a = useCallback(() => {
-    e(_$$to({
+    e(showModalHandler({
       type: dD,
       data: {
         entrypoint: RR.LIBRARY_MODAL_OVERVIEW,
@@ -1991,7 +1991,7 @@ let tH = () => {
     }));
   }, [e, sessionId]);
   return useCallback(() => {
-    t ? a() : e(_$$to({
+    t ? a() : e(showModalHandler({
       type: $3,
       data: {
         team: n,
@@ -2160,7 +2160,7 @@ function tZ({
   let t = q5();
   let i = t$();
   return "loaded" !== e.status ? jsx(Fragment, {
-    children: y1(4).map(e => jsx(_$$Q2, {}, e))
+    children: range(4).map(e => jsx(_$$Q2, {}, e))
   }) : jsx(Fragment, {
     children: e.data.map((e, r) => e.library_key === t?.libraryKey ? jsx(tW, {
       openFile: t,
@@ -2342,7 +2342,7 @@ function id() {
     } = zm();
     let n = q5();
     let a = useCallback(() => {
-      t(_$$to({
+      t(showModalHandler({
         type: dD,
         data: {
           entrypoint: RR.LIBRARY_MODAL_UPSELL_UI3,
@@ -2351,7 +2351,7 @@ function id() {
       }));
     }, [t, sessionId]);
     return useCallback(() => {
-      t(_$$to({
+      t(showModalHandler({
         type: $3,
         data: {
           team: e,
@@ -2409,10 +2409,10 @@ function ic() {
       sessionId
     } = zm();
     return useCallback(() => {
-      e(_$$to({
+      e(showModalHandler({
         type: _$$V2,
         data: {
-          upsellSource: _$$b.HISTORY_UPSELL,
+          upsellSource: UpsellModalType.HISTORY_UPSELL,
           teamId: t?.teamId ?? "",
           openCheckoutInNewTab: !0
         }
@@ -2431,7 +2431,7 @@ function ic() {
       onClick: e,
       trackingProperties: {
         trackingDescriptor: _$$c.UPGRADE,
-        upsellSource: _$$b.LIBRARY_MODAL_UPSELL,
+        upsellSource: UpsellModalType.LIBRARY_MODAL_UPSELL,
         canUserAccessProFeature: !1
       },
       children: renderI18nText("design_systems.libraries_modal.upgrade_to_professional_plan")
@@ -2446,7 +2446,7 @@ function iu() {
       trusted: !0,
       trackingProperties: {
         trackingDescriptor: _$$c.LEARN_MORE,
-        upsellSource: _$$b.LIBRARY_MODAL_UPSELL,
+        upsellSource: UpsellModalType.LIBRARY_MODAL_UPSELL,
         canUserAccessProFeature: !1
       },
       children: renderI18nText("design_systems.libraries_modal.learn_more")
@@ -2477,7 +2477,7 @@ function im() {
     children: [jsx("h3", {
       className: t2,
       children: renderI18nText("design_systems.libraries_modal.libraries_added_to_this_file")
-    }), y1(2).map(e => jsx(_$$Q2, {}, e))]
+    }), range(2).map(e => jsx(_$$Q2, {}, e))]
   });
 }
 function ih({
@@ -2721,7 +2721,7 @@ function i0(e, t, i, n) {
     localIdsToUpdate,
     oldSubscribedKeysToUpdate
   } of t) {
-    if (localIdsToUpdate.find(e => glU.doesSymbolHaveInstances(e))) return getI18nString("design_systems.updates.this_file");
+    if (localIdsToUpdate.find(e => Fullscreen.doesSymbolHaveInstances(e))) return getI18nString("design_systems.updates.this_file");
     a = a.concat(oldSubscribedKeysToUpdate);
   }
   if (0 !== a.length) for (let t of a) {
@@ -2755,14 +2755,14 @@ function np({
     return {
       numOutdatedInstances: i && TF(e),
       toggleReviewUpdatesModal: i || n ? i => {
-        no(e) ? t(_$$to({
+        no(e) ? t(showModalHandler({
           type: $$et0,
           data: {
             source: "UPDATES_MODAL",
             asset: e,
             updatesModalScope: i
           }
-        })) : n ? t(_$$to({
+        })) : n ? t(showModalHandler({
           type: $$ei1,
           data: {
             updateStyle: e,
@@ -3086,18 +3086,18 @@ function ny({
   _$$h(() => (trackEventAnalytics("updates_modal_opened", {
     fileKey: U || "null",
     usingFullscreenData: V,
-    isIncremental: h3O?.isIncrementalSession(),
+    isIncremental: Multiplayer?.isIncrementalSession(),
     isShimFFEnabled: !0,
     isSgShimFFEnabled: !0,
     entrypoint: o,
     switchedTabs: l
-  }), globalPerfTimer.start("updates_modal_load"), g(!0), V && _$$q(_em.LIBRARY_UPDATES).then(() => {
+  }), globalPerfTimer.start("updates_modal_load"), g(!0), V && _$$q(PluginModalType.LIBRARY_UPDATES).then(() => {
     let e = globalPerfTimer.get("updates_modal_load")?.getElapsedTime();
     e && K(e);
     globalPerfTimer.resume("updates_modal_load");
     _$$J2(() => {
-      glU.expandInstancesWithStyleOverrides();
-      glU.onFrame();
+      Fullscreen.expandInstancesWithStyleOverrides();
+      Fullscreen.onFrame();
       window.requestAnimationFrame(() => {
         M(!0);
       });
@@ -3120,7 +3120,7 @@ function ny({
         waitForAllPagesTime: W,
         fullLoadTime: e,
         usedFullscreenData: V,
-        isIncremental: !!h3O?.isIncrementalSession(),
+        isIncremental: !!Multiplayer?.isIncrementalSession(),
         isRedesign: c
       }, {
         forwardToDatadog: !0
@@ -3130,10 +3130,10 @@ function ny({
   }, [U, G, Y, V, W, c]);
   let Z = useCallback(() => {
     i(aD.ALL);
-    F || _$$q(_em.LIBRARY_UPDATES).then(() => {
+    F || _$$q(PluginModalType.LIBRARY_UPDATES).then(() => {
       _$$J2(() => {
-        glU.expandInstancesWithStyleOverrides();
-        glU.onFrame();
+        Fullscreen.expandInstancesWithStyleOverrides();
+        Fullscreen.onFrame();
         window.requestAnimationFrame(() => {
           setTimeout(() => M(!0), 250);
         });
@@ -3243,7 +3243,7 @@ function ny({
         elementRef: _ref,
         kbArgs: _kbArgs,
         children: jsx(_$$d2, {
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: renderI18nText("design_systems.updates.show_updates_for_all_pages")
           }),
           checked: E === aD.ALL,

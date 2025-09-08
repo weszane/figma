@@ -1,8 +1,8 @@
-import { Z6A, Hyj } from "../figma_app/763686";
-import { nc } from "../905/189185";
+import { NodeType, WhiteboardTemplatePreviewCppBindings } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
 import { atom, atomStoreManager, createRemovableAtomFamily } from "../figma_app/27355";
 import { dT } from "../figma_app/106207";
-import { w } from "../905/924253";
+import { fullscreenReadyAtom } from "../905/924253";
 import { t as _$$t } from "../905/940050";
 let d = atom(null);
 let c = atom(null);
@@ -36,7 +36,7 @@ let $$I0 = atom(null, async (e, t, r, i) => {
   }));
   let s = b;
   function m(t) {
-    return scheduler.postTask(() => !!(_$$t(r.template, e(c)) && e(w)) && (t(), !0), {
+    return scheduler.postTask(() => !!(_$$t(r.template, e(c)) && e(fullscreenReadyAtom)) && (t(), !0), {
       signal: s.signal
     }).catch(e => {
       if (e === y) return !1;
@@ -48,10 +48,10 @@ let $$I0 = atom(null, async (e, t, r, i) => {
   let f = (async () => {
     try {
       let a = await e($$w1(r));
-      let s = g?.nodeType === Z6A.SECTION ? g.options : null;
+      let s = g?.nodeType === NodeType.SECTION ? g.options : null;
       let o = i?.position || null;
-      if (!(await m(() => Hyj.prepareTemplatePreview(a, s, o))) || !(await m(() => Hyj.insertTemplatePreview(i.moveViewportAfterPreview, i.viewportOptions || null)))) return !1;
-      let l = Hyj.getTemplatePreviewSize();
+      if (!(await m(() => WhiteboardTemplatePreviewCppBindings.prepareTemplatePreview(a, s, o))) || !(await m(() => WhiteboardTemplatePreviewCppBindings.insertTemplatePreview(i.moveViewportAfterPreview, i.viewportOptions || null)))) return !1;
+      let l = WhiteboardTemplatePreviewCppBindings.getTemplatePreviewSize();
       t(u, l);
       t(_, !1);
       return !0;
@@ -68,8 +68,8 @@ let $$S3 = atom(null, async (e, t, r) => {
   if (!a || e(h)) return !1;
   t(h, !0);
   try {
-    if (!(await a) || !e(w)) return !1;
-    await scheduler.postTask(nc(r.editScopeType, "commit-figjam-template-preview", () => Hyj.commitTemplatePreview(r.selectTemplateAfterCommit, r.moveViewportAfterCommit)), {
+    if (!(await a) || !e(fullscreenReadyAtom)) return !1;
+    await scheduler.postTask(scopeAwareFunction(r.editScopeType, "commit-figjam-template-preview", () => WhiteboardTemplatePreviewCppBindings.commitTemplatePreview(r.selectTemplateAfterCommit, r.moveViewportAfterCommit)), {
       priority: r.priority
     });
     t(c, null);
@@ -89,7 +89,7 @@ let A = atom(null, (e, t) => {
   t(p, null);
   t(_, !1);
   t(h, !1);
-  e(w) && Hyj.clearTemplatePreview();
+  e(fullscreenReadyAtom) && WhiteboardTemplatePreviewCppBindings.clearTemplatePreview();
 });
 let $$x2 = atom(null, (e, t) => {
   t(v);
@@ -97,7 +97,7 @@ let $$x2 = atom(null, (e, t) => {
 });
 let $$N7 = atom(null, (e, t) => {
   t(d, null);
-  Hyj.clearSectionPreviewSupport();
+  WhiteboardTemplatePreviewCppBindings.clearSectionPreviewSupport();
 });
 let $$C8 = {
   clearTemplatePreview() {

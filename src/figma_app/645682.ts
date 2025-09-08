@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useCallback, memo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { IK } from "../905/521428";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
@@ -10,8 +10,8 @@ import { Pt } from "../figma_app/806412";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { u1, Uv, XE } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
-import { Y5 } from "../figma_app/455680";
-import { E7, _W, hS } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { normalizeValue, valueOrFallback, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { sS } from "../figma_app/516028";
 import { V4 } from "../figma_app/383828";
@@ -87,7 +87,7 @@ export function $$W1(e) {
   return t && !nestedInstances.length ? void 0 : NA.INSTANCE_SWAP_PICKER;
 }
 export let $$K0 = memo(function (e) {
-  let t = E7(kl("resettableInstanceOverrides"));
+  let t = normalizeValue(kl("resettableInstanceOverrides"));
   let r = useSelector(e => e.pickerShown);
   let s = useSelector(cv);
   let o = useSelector(Sh);
@@ -126,8 +126,8 @@ export let $$K0 = memo(function (e) {
       recordingKey: Pt(e, "restore")
     }), (() => {
       let e = r?.id === uA;
-      let t = _W(s, "");
-      let i = backingSymbolGUID && hS(backingSymbolGUID) ? singleBackingStateGroup?.description ?? "" : void 0;
+      let t = valueOrFallback(s, "");
+      let i = backingSymbolGUID && isValidValue(backingSymbolGUID) ? singleBackingStateGroup?.description ?? "" : void 0;
       return jsxs(Fragment, {
         children: [e ? jsx(K, {
           containingStateGroupLinks: L,
@@ -202,7 +202,7 @@ function Y({
   if ("STATE_GROUP" === restoreType || "SYMBOL_AS_NON_STATE" === restoreType) {
     let t = jsx(_$$z, {
       onClick: function () {
-        Y5.triggerActionInUserEditScope("restore-symbol-or-state-group");
+        fullscreenValue.triggerActionInUserEditScope("restore-symbol-or-state-group");
       },
       recordingKey: Pt(e, "restoreComponentButton"),
       children: renderI18nText("design_systems.instance_panel.restore_component")
@@ -235,7 +235,7 @@ function Y({
               if (!t) return;
               e = library.local.stateGroups[t];
             }
-            l7.user("reset-variant", () => {
+            permissionScopeHandler.user("reset-variant", () => {
               e && V4(e, E, f, sceneGraphSelection, "Reset Variant Button", !1, S);
             });
           }

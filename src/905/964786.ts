@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
 import { trackFullScreenAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -16,16 +16,16 @@ import { x as _$$x } from "../905/239551";
 import { Vi } from "../figma_app/364284";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { Bw, Oe, ky, Qx } from "../figma_app/300692";
+import { canRunPluginWithinOrg, formatPluginName, filterResourcesByMatch, getCurrentPluginVersionId } from "../figma_app/300692";
 import { D as _$$D2 } from "../905/629114";
-import { LX, MN, oj } from "../905/486749";
-import { Y5 } from "../figma_app/455680";
+import { clearWidgetSyncedState, getSyncedState, getSyncedMap } from "../905/486749";
+import { fullscreenValue } from "../figma_app/455680";
 import { widgetErrorTracker } from "../905/250412";
 import { j } from "../905/813868";
 import { ZY, Qx as _$$Qx } from "../905/764747";
 import { Eh } from "../figma_app/12796";
 import { m3 } from "../figma_app/45218";
-import { ZQ, k0, am } from "../figma_app/155287";
+import { hasLocalFileId, manifestContainsWidget, manifestErrorMessage } from "../figma_app/155287";
 import { Zm } from "../figma_app/201703";
 import { q } from "../905/276489";
 import { ft, gy, Im } from "../905/608145";
@@ -39,7 +39,7 @@ function L(e, t, i) {
   i ??= D;
   let a = [];
   let s = debugState.getState();
-  for (let t of e) if (!ZQ(t) && Bw(s, t)) try {
+  for (let t of e) if (!hasLocalFileId(t) && canRunPluginWithinOrg(s, t)) try {
     let e = publishedWidgets ? publishedWidgets[t.plugin_id] : void 0;
     if (m3(e) && Rm(e)) {
       if (!i.showUnpurchased) continue;
@@ -154,9 +154,9 @@ export function $$F0(e, t) {
         for (let e in localExtensions) {
           let n = +e;
           let r = localExtensions[e];
-          if (!k0(r)) continue;
+          if (!manifestContainsWidget(r)) continue;
           let a = r.error;
-          let s = Oe(r);
+          let s = formatPluginName(r);
           if (a) {
             i.push({
               type: "submenu",
@@ -171,7 +171,7 @@ export function $$F0(e, t) {
                 nameStringKey: "widgets-menu-show-error",
                 menuAction: {
                   type: "toggle-console",
-                  showError: am(a)
+                  showError: manifestErrorMessage(a)
                 },
                 disabled: !1
               }), ft({
@@ -198,7 +198,7 @@ export function $$F0(e, t) {
         return gy(i);
       }(e);
       t.push(...i);
-      let n = Object.keys(i).length > 0 || Object.keys(ky(debugState.getState().publishedWidgets, debugState.getState().user?.id || "")).length > 0;
+      let n = Object.keys(i).length > 0 || Object.keys(filterResourcesByMatch(debugState.getState().publishedWidgets, debugState.getState().user?.id || "")).length > 0;
       desktopAPIInstance && n && t.push(ft({
         nameStringKey: "widgets-menu-manage-development",
         menuAction: {
@@ -274,7 +274,7 @@ export function $$M1({
     if (r?.widgetVersionId) {
       var l;
       l = r.widgetVersionId;
-      o = ZY(_pluginID) ? _$$Qx(_pluginID) !== l : !t || !t[_pluginID] || Qx(t, _pluginID) !== l;
+      o = ZY(_pluginID) ? _$$Qx(_pluginID) !== l : !t || !t[_pluginID] || getCurrentPluginVersionId(t, _pluginID) !== l;
     } else o = !1;
   }
   let d = [{
@@ -298,7 +298,7 @@ export function $$M1({
     flags: ["edit"],
     callback: () => {
       let e = getSceneGraphInstance().get(widgetID);
-      e && (LX(e), _$$x.mountWidget(pluginID, widgetID, "menu reset and re-render"), trackFullScreenAnalytics("Reset Widget State", {
+      e && (clearWidgetSyncedState(e), _$$x.mountWidget(pluginID, widgetID, "menu reset and re-render"), trackFullScreenAnalytics("Reset Widget State", {
         pluginId: pluginID,
         widgetId: widgetID
       }));
@@ -315,7 +315,7 @@ export function $$M1({
     },
     flags: ["edit"],
     callback: () => {
-      glU.copyWidgetAsLayers(widgetID);
+      Fullscreen.copyWidgetAsLayers(widgetID);
       trackFullScreenAnalytics("Copy Widget As Layers", {
         pluginId: pluginID,
         widgetId: widgetID
@@ -342,10 +342,10 @@ export function $$M1({
         if (!r) return;
         let s = r.relativeTransform;
         let o = r.widgetVersionId;
-        let l = Qx(t, _pluginID3);
+        let l = getCurrentPluginVersionId(t, _pluginID3);
         if (!l) return;
-        let d = MN("current", r);
-        let c = oj("current", r);
+        let d = getSyncedState("current", r);
+        let c = getSyncedMap("current", r);
         let p = r.widgetName;
         let m = r.parentNode;
         let h = -1;
@@ -383,7 +383,7 @@ export function $$M1({
           let g = t?.[_pluginID3]?.[l];
           let f = g?.redirect_icon_url || n?.redirect_icon_url || "";
           r.removeSelfAndChildren();
-          Y5.dispatch(F.enqueue({
+          fullscreenValue.dispatch(F.enqueue({
             type: "widget-update-success",
             message: getI18nString("widgets.widget_name_updated", {
               widgetName: p
@@ -424,7 +424,7 @@ export function $$M1({
                     let e = getSceneGraphInstance().get(u);
                     e && (e.shouldPreventWidgetAutoUpdate = !0, e.relativeTransform = relativeTransform);
                   }
-                  Y5.dispatch(F.enqueue({
+                  fullscreenValue.dispatch(F.enqueue({
                     type: "widget-update-undo-success",
                     message: `${widgetName} reverted to previous version`,
                     icon: zX.FROM_URL,
@@ -455,7 +455,7 @@ export function $$M1({
             isLocalWidget: !1,
             currentWidgetVersionID: l
           });
-          Y5.dispatch(F.enqueue({
+          fullscreenValue.dispatch(F.enqueue({
             type: "widget-update-error",
             message: `Unable to update widget: ${e}`,
             error: !0

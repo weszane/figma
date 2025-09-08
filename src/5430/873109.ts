@@ -20,7 +20,7 @@ import { e0 } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
 import { T as _$$T } from "../5132/203178";
 import { J3 } from "../figma_app/699310";
-import { Rt } from "../figma_app/300692";
+import { hasOrgRole } from "../figma_app/300692";
 import { E as _$$E } from "../905/53857";
 import { I as _$$I } from "../5430/750114";
 import { J as _$$J } from "../905/125993";
@@ -42,7 +42,7 @@ import { xn } from "../905/934145";
 import { Om, tv } from "../figma_app/979714";
 import { e as _$$e2 } from "../5430/411458";
 import { d6, uR, s1 } from "../figma_app/304207";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
 import { PN2, Ko6, H$B, KC4 } from "../figma_app/43951";
 import { g3 } from "../figma_app/707808";
@@ -84,7 +84,7 @@ function N({
     resource: t
   }) : void 0;
   let n = $9(e);
-  n && (r = Rt(n) ? jsx(L, {
+  n && (r = hasOrgRole(n) ? jsx(L, {
     orgName: n.roles?.org?.name
   }) : void 0);
   return jsxs(Fragment, {
@@ -137,7 +137,7 @@ function et(e, t, r, s) {
         });
       };
       if (!n.authedActiveCommunityProfile?.public_at) {
-        r(to({
+        r(showModalHandler({
           type: G$,
           data: {
             userId: n.user.id,
@@ -197,7 +197,7 @@ function er(e, t, r, s, i) {
       }));
     } else {
       if (!a.authedActiveCommunityProfile?.public_at) {
-        n(to({
+        n(showModalHandler({
           type: G$,
           data: {
             userId: a.user.id,

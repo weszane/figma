@@ -3,8 +3,8 @@ import { useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
-import { Ez5, CNR } from "../figma_app/763686";
-import { nc } from "../905/189185";
+import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
+import { scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { Ay } from "@stylexjs/stylex";
 import { Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
@@ -44,11 +44,11 @@ export function $$P2({
   let h = useDispatch();
   let g = "insert-slide-module";
   let _ = _$$D(e.library_key);
-  let y = nc.user(g, (t, r, n) => {
+  let y = scopeAwareFunction.user(g, (t, r, n) => {
     CH({
       module: e,
       viewType: i,
-      getGridCoord: Ez5?.getInsertGridCoord ?? (() => ({
+      getGridCoord: AppStateTsApi?.getInsertGridCoord ?? (() => ({
         row: 0,
         col: 0
       })),
@@ -72,8 +72,8 @@ export function $$P2({
     },
     selectAfterInsert: !1
   });
-  let E = nc.user(g, onInsertableResourcePointerDown);
-  let j = useMemo(() => c ? new Point(CNR?.singleSlideThumbnailWidth() ?? 0, CNR?.singleSlideThumbnailHeight() ?? 0) : void 0, [c]);
+  let E = scopeAwareFunction.user(g, onInsertableResourcePointerDown);
+  let j = useMemo(() => c ? new Point(SlideConstantsCppBindings?.singleSlideThumbnailWidth() ?? 0, SlideConstantsCppBindings?.singleSlideThumbnailHeight() ?? 0) : void 0, [c]);
   return jsxs("div", {
     className: m()(_$$s.flex.alignCenter.justifyCenter.gap8.$, {
       [e4]: i === Ji.PICKER || i === Ji.OUTLINE_TO_DECK,

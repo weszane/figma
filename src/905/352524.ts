@@ -6,18 +6,18 @@ import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { b as _$$b } from "../905/946806";
-import { v8u, ZRE, EUU, Ez5, glU } from "../figma_app/763686";
+import { FileFormat, FillType, StickyTableConfig, AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { Pt, of } from "../figma_app/806412";
 import { n as _$$n } from "../figma_app/339971";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { rg } from "../figma_app/401069";
-import { Ce } from "../905/156213";
-import { J2 } from "../figma_app/84367";
-import { Ju } from "../905/102752";
+import { hideModal } from "../905/156213";
+import { getObservableOrFallback } from "../figma_app/84367";
+import { registerModal } from "../905/102752";
 import { throwTypeError } from "../figma_app/465776";
 import { BrowserInfo } from "../figma_app/778880";
 import { Ho, JI, GU, t_, dB, Kj } from "../905/416496";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import U from "classnames";
 import { A as _$$A } from "../905/639174";
@@ -26,20 +26,20 @@ import { q as _$$q } from "../905/932270";
 import { Ib } from "../905/129884";
 import { SD, ZF } from "../905/920793";
 let I = {
-  PNG: v8u.PNG,
-  JPG: v8u.JPEG,
-  CSV: v8u.CSV,
-  PDF: v8u.PDF
+  PNG: FileFormat.PNG,
+  JPG: FileFormat.JPEG,
+  CSV: FileFormat.CSV,
+  PDF: FileFormat.PDF
 };
 function E(e) {
   switch (e) {
-    case v8u.PNG:
+    case FileFormat.PNG:
       return "PNG";
-    case v8u.JPEG:
+    case FileFormat.JPEG:
       return "JPG";
-    case v8u.CSV:
+    case FileFormat.CSV:
       return "CSV";
-    case v8u.PDF:
+    case FileFormat.PDF:
       return "PDF";
     default:
       throwTypeError(e);
@@ -47,11 +47,11 @@ function E(e) {
 }
 function x(e) {
   switch (e) {
-    case ZRE.SOLID:
+    case FillType.SOLID:
       return getI18nString("whiteboard.figjam_export.solid");
-    case ZRE.TRANSPARENT:
+    case FillType.TRANSPARENT:
       return getI18nString("whiteboard.figjam_export.transparent");
-    case ZRE.GRID:
+    case FillType.GRID:
       return getI18nString("whiteboard.figjam_export.grid");
     default:
       throwTypeError(e);
@@ -59,9 +59,9 @@ function x(e) {
 }
 function S(e) {
   switch (e) {
-    case EUU.TABLE:
+    case StickyTableConfig.TABLE:
       return getI18nString("whiteboard.figjam_export.table");
-    case EUU.STICKY:
+    case StickyTableConfig.STICKY:
       return getI18nString("whiteboard.figjam_export.sticky");
     default:
       throwTypeError(e);
@@ -79,29 +79,29 @@ function w(e) {
 }
 function C(e) {
   switch (e) {
-    case v8u.CSV:
+    case FileFormat.CSV:
       return [];
-    case v8u.JPEG:
-      return [ZRE.SOLID, ZRE.GRID];
-    case v8u.PNG:
-      return [ZRE.TRANSPARENT, ZRE.SOLID, ZRE.GRID];
-    case v8u.PDF:
-      return [ZRE.SOLID];
+    case FileFormat.JPEG:
+      return [FillType.SOLID, FillType.GRID];
+    case FileFormat.PNG:
+      return [FillType.TRANSPARENT, FillType.SOLID, FillType.GRID];
+    case FileFormat.PDF:
+      return [FillType.SOLID];
     default:
       throwTypeError(e);
   }
 }
 function T() {
-  return [EUU.TABLE, EUU.STICKY];
+  return [StickyTableConfig.TABLE, StickyTableConfig.STICKY];
 }
 function k(e, t) {
   return C(t).includes(e);
 }
 function R(e) {
   switch (e) {
-    case v8u.JPEG:
+    case FileFormat.JPEG:
       return Ho;
-    case v8u.PDF:
+    case FileFormat.PDF:
       return JI;
     default:
       return GU;
@@ -122,11 +122,11 @@ function j(e) {
   let l = useId();
   return jsxs("div", {
     className: o ? O : "figjam_export_pickers--exportAreaPlaceholderRow--G7H-m figjam_export_pickers--selectRow--aTA0S figjam_export_pickers--row--iT7Hm",
-    children: [jsx(_$$J, {
+    children: [jsx(Label, {
       htmlFor: l,
       className: D,
       children: renderI18nText("whiteboard.figjam_export.export_area")
-    }), !o && jsx(_$$J, {
+    }), !o && jsx(Label, {
       className: L,
       children: w("file")
     }), o && jsxs(_$$bL, {
@@ -148,7 +148,7 @@ function j(e) {
   });
 }
 var $$B = U;
-let G = [ZRE.GRID, ZRE.TRANSPARENT, ZRE.SOLID];
+let G = [FillType.GRID, FillType.TRANSPARENT, FillType.SOLID];
 function z(e) {
   let {
     fileType,
@@ -163,11 +163,11 @@ function z(e) {
   let u = useId();
   return jsxs("div", {
     className: O,
-    children: [jsx(_$$J, {
+    children: [jsx(Label, {
       htmlFor: u,
       className: D,
       children: renderI18nText("whiteboard.figjam_export.background")
-    }), !l && jsx(_$$J, {
+    }), !l && jsx(Label, {
       className: L,
       children: c
     }), l && jsxs(_$$bL, {
@@ -203,7 +203,7 @@ function z(e) {
 }
 function H(e) {
   switch (e.background) {
-    case ZRE.TRANSPARENT:
+    case FillType.TRANSPARENT:
       return jsx("div", {
         className: F,
         style: {
@@ -211,11 +211,11 @@ function H(e) {
           backgroundSize: "5px 5px"
         }
       });
-    case ZRE.GRID:
+    case FillType.GRID:
       return jsx("div", {
         className: $$B()("figjam_export_pickers--gridIcon--mPS09 thumbnail_DEPRECATED--lightModeDotGrid--ZUhXy thumbnail_DEPRECATED--thumbnailContainer--xPcsg", F)
       });
-    case ZRE.SOLID:
+    case FillType.SOLID:
       return jsx("div", {
         className: $$B()(F, "figjam_export_pickers--solidIcon--Gt-95")
       });
@@ -232,9 +232,9 @@ function W(e) {
     recordingKey
   } = e;
   let l = useId();
-  return fileType !== v8u.CSV ? null : jsxs("div", {
+  return fileType !== FileFormat.CSV ? null : jsxs("div", {
     className: O,
-    children: [jsx(_$$J, {
+    children: [jsx(Label, {
       htmlFor: l,
       className: D,
       children: renderI18nText("whiteboard.figjam_export.content_type")
@@ -270,7 +270,7 @@ function $(e) {
   let s = E(fileType);
   return jsxs("div", {
     className: "figjam_export_pickers--row--iT7Hm",
-    children: [jsx(_$$J, {
+    children: [jsx(Label, {
       className: D,
       children: renderI18nText("whiteboard.figjam_export.file_type")
     }), jsx(_$$b2, {
@@ -280,7 +280,7 @@ function $(e) {
       value: s,
       onChange: e => onChangeFileType(I[e]),
       recordingKey: Pt(recordingKey, "exportFileTypeRadioGroup"),
-      children: (BrowserInfo.isIpadNative ? [v8u.PNG, v8u.JPEG, v8u.PDF] : [v8u.PNG, v8u.JPEG, v8u.PDF, v8u.CSV]).map(e => {
+      children: (BrowserInfo.isIpadNative ? [FileFormat.PNG, FileFormat.JPEG, FileFormat.PDF] : [FileFormat.PNG, FileFormat.JPEG, FileFormat.PDF, FileFormat.CSV]).map(e => {
         let t = E(e);
         let i = disabledFileTypes.includes(e) ? {
           readonly: !0,
@@ -291,7 +291,7 @@ function $(e) {
         } : {};
         return jsx(_$$c, {
           value: t,
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             children: t
           }),
           htmlAttributes: {
@@ -315,11 +315,11 @@ function X(e) {
   }, [onChangeQuality]);
   let l = dB(quality, fileType);
   let d = useId();
-  if (fileType !== v8u.PDF && fileType !== v8u.JPEG) return null;
+  if (fileType !== FileFormat.PDF && fileType !== FileFormat.JPEG) return null;
   let c = l ?? Kj.HIGH;
   return jsxs("div", {
     className: O,
-    children: [jsx(_$$J, {
+    children: [jsx(Label, {
       htmlFor: d,
       className: D,
       children: renderI18nText("fullscreen.properties_panel.export_settings_quality")
@@ -352,11 +352,11 @@ let J = memo(function (e) {
   let v = pickerInfo.nodeCounts.selectionStickyCount > 0 || pickerInfo.nodeCounts.canvasStickyCount > 0;
   let I = pickerInfo.nodeCounts.selectionTableCount > 0 || pickerInfo.nodeCounts.canvasTableCount > 0;
   let E = [];
-  v || I || E.push(v8u.CSV);
+  v || I || E.push(FileFormat.CSV);
   let x = [];
-  v || x.push(EUU.STICKY);
-  I || x.push(EUU.TABLE);
-  let S = J2(Ez5.editorPreferences().exportSelectionSettings);
+  v || x.push(StickyTableConfig.STICKY);
+  I || x.push(StickyTableConfig.TABLE);
+  let S = getObservableOrFallback(AppStateTsApi.editorPreferences().exportSelectionSettings);
   let [w, C] = useState(S.fileType);
   let [T, N] = useState(S.contentType);
   let [P, O] = useState(S.backgroundType);
@@ -370,15 +370,15 @@ let J = memo(function (e) {
       message: getI18nString("whiteboard.figjam_export.exporting"),
       showLoadingSpinner: !0,
       callback: () => {
-        Ez5.editorPreferences().exportSelectionSettings.set({
+        AppStateTsApi.editorPreferences().exportSelectionSettings.set({
           contentType: T,
           fileType: w,
           backgroundType: P,
           quality: D
         });
-        "selection" === M ? glU.exportSelectionOrCurrentPage(!0, pickerInfo.selectionArea, pickerInfo.nodeCounts.selectionNodeCount) : glU.exportSelectionOrCurrentPage(!1, pickerInfo.canvasArea, pickerInfo.nodeCounts.canvasNodeCount);
+        "selection" === M ? Fullscreen.exportSelectionOrCurrentPage(!0, pickerInfo.selectionArea, pickerInfo.nodeCounts.selectionNodeCount) : Fullscreen.exportSelectionOrCurrentPage(!1, pickerInfo.canvasArea, pickerInfo.nodeCounts.canvasNodeCount);
         b(rg());
-        b(Ce());
+        b(hideModal());
       }
     }));
   });
@@ -397,7 +397,7 @@ let J = memo(function (e) {
           fileType: w,
           onChangeFileType: e => {
             C(e);
-            k(P, e) || O(ZRE.SOLID);
+            k(P, e) || O(FillType.SOLID);
             L(R(e));
           },
           disabledFileTypes: E,
@@ -426,12 +426,12 @@ let J = memo(function (e) {
       }), jsxs(wi, {
         children: [function (e, t, i) {
           switch (e) {
-            case v8u.PNG:
-            case v8u.JPEG:
+            case FileFormat.PNG:
+            case FileFormat.JPEG:
               return ("selection" === t ? i.selectionArea : i.canvasArea) >= 15e7;
-            case v8u.PDF:
+            case FileFormat.PDF:
               return ("selection" === t ? i.nodeCounts.selectionNodeCount : i.nodeCounts.canvasNodeCount) >= 300;
-            case v8u.CSV:
+            case FileFormat.CSV:
               return !1;
             default:
               throwTypeError(e);
@@ -451,5 +451,5 @@ let J = memo(function (e) {
     })
   });
 });
-let $$ee0 = Ju(J, "FIGJAM_EXPORT_SETTINGS_PICKER_MODAL");
+let $$ee0 = registerModal(J, "FIGJAM_EXPORT_SETTINGS_PICKER_MODAL");
 export const B = $$ee0;

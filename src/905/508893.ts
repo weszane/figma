@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useLayoutEffect, useState, useMemo, useCallback, useEffect } from "react";
 import { c2 } from "../905/382883";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import o from "classnames";
 import { A as _$$A } from "../vendor/850789";
 import { YU, H0, Bx } from "../figma_app/191804";
@@ -327,14 +327,14 @@ function en(e, t, i) {
 }
 function er(e = .02, t = 4) {
   return function (i, n) {
-    return qE(e / n, i, t / n);
+    return clamp(e / n, i, t / n);
   };
 }
 function ea(e, t) {
   return {
     ...e,
-    x: qE(t.right, e.x, t.left),
-    y: qE(t.bottom, e.y, t.top)
+    x: clamp(t.right, e.x, t.left),
+    y: clamp(t.bottom, e.y, t.top)
   };
 }
 function es(e, t, i, n) {

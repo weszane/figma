@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { R9 } from "../905/977824";
 import { KP, Ww } from "../figma_app/440875";
@@ -22,7 +22,7 @@ export function $$g2(e) {
     ...t,
     [e.node]: e
   }));
-  h3O?.setNodeChatExchange(e.node, e);
+  Multiplayer?.setNodeChatExchange(e.node, e);
 }
 export function $$f7(e, t) {
   atomStoreManager.set(m, t => {
@@ -32,7 +32,7 @@ export function $$f7(e, t) {
     delete r[e];
     return r;
   });
-  h3O?.clearNodeChatExchange(e);
+  Multiplayer?.clearNodeChatExchange(e);
   t.switchToPreview && atomStoreManager.set(jx, Ic.PREVIEW);
 }
 export function $$E1(e) {

@@ -10,7 +10,7 @@ import { V } from "../905/355181";
 import { aO, vn } from "../figma_app/109538";
 import { k } from "../figma_app/618031";
 import { R } from "../905/304671";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { hs, G6, j2 } from "../figma_app/84966";
 import { sZ } from "../905/845253";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -87,7 +87,7 @@ function N(e) {
   let r = useCallback(() => {
     switch (e.planType) {
       case FOrganizationLevelType.ORG:
-        t(to({
+        t(showModalHandler({
           type: aO,
           data: {
             renewalDate: e.nextRenewalDate
@@ -95,7 +95,7 @@ function N(e) {
         }));
         break;
       case FOrganizationLevelType.TEAM:
-        t(to({
+        t(showModalHandler({
           type: vn,
           data: {
             renewalDate: e.nextRenewalDate

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { CWU, rXF, Z_n } from "../figma_app/763686";
+import { VariablesBindings, VariableResolvedDataType, VariableDataType } from "../figma_app/763686";
 import { n as _$$n } from "../vendor/110313";
 import { a as _$$a } from "../vendor/683966";
 import { A as _$$A } from "../vendor/211731";
@@ -224,8 +224,8 @@ function W(e) {
   let t = e.getAttribute("data-variable-id");
   let r = e.getAttribute("data-variable-collection-id");
   if (null !== t) {
-    let n = CWU.getLocalVariableInfo(t);
-    let i = CWU.getLocalVariableSetsInfo().find(e => e.id === r);
+    let n = VariablesBindings.getLocalVariableInfo(t);
+    let i = VariablesBindings.getLocalVariableSetsInfo().find(e => e.id === r);
     if (n && i) return {
       node: j(kz(n), Dt(i), e.getAttribute("data-mode-id") ?? void 0)
     };
@@ -435,7 +435,7 @@ let el = [{
     type: "OPERATOR",
     name: "Addition",
     value: "+",
-    supports: (e, t) => e === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -443,7 +443,7 @@ let el = [{
     type: "OPERATOR",
     name: "Subtraction",
     value: "-",
-    supports: (e, t) => e === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -451,7 +451,7 @@ let el = [{
     type: "OPERATOR",
     name: "Multiplication",
     value: "*",
-    supports: (e, t) => e === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -459,7 +459,7 @@ let el = [{
     type: "OPERATOR",
     name: "Division",
     value: "/",
-    supports: (e, t) => e === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -475,7 +475,7 @@ let el = [{
     type: "OPERATOR",
     name: "Equal to",
     value: "==",
-    supports: (e, t) => e === rXF.BOOLEAN
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN
   }
 }, {
   type: Yc.EXPRESSION,
@@ -483,7 +483,7 @@ let el = [{
     type: "OPERATOR",
     name: "Not equal to",
     value: "!=",
-    supports: (e, t) => e === rXF.BOOLEAN
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN
   }
 }, {
   type: Yc.EXPRESSION,
@@ -491,7 +491,7 @@ let el = [{
     type: "OPERATOR",
     name: "Greater than",
     value: ">",
-    supports: (e, t) => e === rXF.BOOLEAN && t === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN && t === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -499,7 +499,7 @@ let el = [{
     type: "OPERATOR",
     name: "Greater than or equal to",
     value: ">=",
-    supports: (e, t) => e === rXF.BOOLEAN && t === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN && t === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -507,7 +507,7 @@ let el = [{
     type: "OPERATOR",
     name: "Less than",
     value: "<",
-    supports: (e, t) => e === rXF.BOOLEAN && t === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN && t === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -515,7 +515,7 @@ let el = [{
     type: "OPERATOR",
     name: "Less than or equal to",
     value: "<=",
-    supports: (e, t) => e === rXF.BOOLEAN && t === rXF.FLOAT
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN && t === VariableResolvedDataType.FLOAT
   }
 }, {
   type: Yc.EXPRESSION,
@@ -523,7 +523,7 @@ let el = [{
     type: "OPERATOR",
     name: "And",
     value: "and",
-    supports: (e, t) => e === rXF.BOOLEAN && t === rXF.BOOLEAN
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN && t === VariableResolvedDataType.BOOLEAN
   }
 }, {
   type: Yc.EXPRESSION,
@@ -531,7 +531,7 @@ let el = [{
     type: "OPERATOR",
     name: "Or",
     value: "or",
-    supports: (e, t) => e === rXF.BOOLEAN && t === rXF.BOOLEAN
+    supports: (e, t) => e === VariableResolvedDataType.BOOLEAN && t === VariableResolvedDataType.BOOLEAN
   }
 }];
 function eo(e) {
@@ -572,7 +572,7 @@ let ec = [{
     type: "LITERAL",
     name: "Not",
     value: "Boolean operator",
-    supports: e => e === rXF.BOOLEAN
+    supports: e => e === VariableResolvedDataType.BOOLEAN
   }
 }];
 function ep(e, t) {
@@ -685,7 +685,7 @@ function eh({
             }];
             let n = e.modeValues;
             for (let i in n) {
-              let l = n[i].type === Z_n.EXPRESSION ? "expression" : e.resolvedType === rXF.FLOAT ? String(parseFloat(n[i].value.toFixed(2))) : n[i].value;
+              let l = n[i].type === VariableDataType.EXPRESSION ? "expression" : e.resolvedType === VariableResolvedDataType.FLOAT ? String(parseFloat(n[i].value.toFixed(2))) : n[i].value;
               r.push({
                 type: Yc.EXPRESSION,
                 expressionItem: {
@@ -717,9 +717,9 @@ function eh({
             let s = n(r.getTextContent());
             return ep(e, t).filter(e => e.expressionItem.value.startsWith(s));
           }
-          if (K(r)) return e.anchor.offset === r.getTextContent().length ? ep(r.__text.includes('"') ? rXF.STRING : rXF.BOOLEAN, t) : [];
+          if (K(r)) return e.anchor.offset === r.getTextContent().length ? ep(r.__text.includes('"') ? VariableResolvedDataType.STRING : VariableResolvedDataType.BOOLEAN, t) : [];
           if (kF(r) && K(i)) {
-            let e = i.__text.includes('"') ? rXF.STRING : rXF.BOOLEAN;
+            let e = i.__text.includes('"') ? VariableResolvedDataType.STRING : VariableResolvedDataType.BOOLEAN;
             let l = n(r.getTextContent());
             return ep(e, t).filter(e => e.expressionItem.value.startsWith(l));
           }
@@ -734,7 +734,7 @@ function eh({
           return [];
         }(e, t);
         if (n.length > 0) return n;
-        if (t === rXF.STRING) {
+        if (t === VariableResolvedDataType.STRING) {
           let t = eu(e);
           if (t && t.length > 0) return function (e) {
             if (!e?.trim() || '"' === e.trim()) return [];
@@ -750,11 +750,11 @@ function eh({
               }
             }];
           }(t);
-        } else if (t === rXF.BOOLEAN) return function (e, t) {
+        } else if (t === VariableResolvedDataType.BOOLEAN) return function (e, t) {
           let r = e.getNodes()[0];
           let n = e => {
             let t = e.getPreviousSibling();
-            return K(t) && ("false" === t.getTextContent().toLowerCase() || "true" === t.getTextContent().toLowerCase()) || V(t) && t.__variable?.resolvedType === rXF.BOOLEAN || X(t) && t.__componentProp?.varValue.resolvedType === rXF.BOOLEAN;
+            return K(t) && ("false" === t.getTextContent().toLowerCase() || "true" === t.getTextContent().toLowerCase()) || V(t) && t.__variable?.resolvedType === VariableResolvedDataType.BOOLEAN || X(t) && t.__componentProp?.varValue.resolvedType === VariableResolvedDataType.BOOLEAN;
           };
           if (H(r) && e.anchor.offset > 0 && uX.test(r.__text) && n(r)) return ec;
           let i = e => ec.filter(t => t.expressionItem.name.toLowerCase().startsWith(e.getTextContent().trim().toLowerCase()));
@@ -802,12 +802,12 @@ function eT({
   let p = useCallback(e => {
     let t = e.getTextContent();
     if (t.includes('"') || u(t.trim(), r) || c(t.trim(), n)) return;
-    if (l === rXF.BOOLEAN && sO.test(t)) {
+    if (l === VariableResolvedDataType.BOOLEAN && sO.test(t)) {
       let r = sO.lastIndex - 3;
       ea(Z(t.slice(r, r + 3)), e, [r, r + 3]);
     }
     let i = e.getPreviousSibling();
-    if (H(i) && (">" === i.getTextContent() || "<" === i.getTextContent() || "!" === i.getTextContent()) && t.startsWith("=") && (t = i.getTextContent() + t), l === rXF.BOOLEAN && q2.test(t)) {
+    if (H(i) && (">" === i.getTextContent() || "<" === i.getTextContent() || "!" === i.getTextContent()) && t.startsWith("=") && (t = i.getTextContent() + t), l === VariableResolvedDataType.BOOLEAN && q2.test(t)) {
       let r = q2.lastIndex - 2;
       let n = t.slice(r, r + 2);
       H(i) && (">=" === n || "<=" === n || "!=" === n) && (">" === i.getTextContent() || "<" === i.getTextContent() || "!" === i.getTextContent()) ? (e.setTextContent(e.getTextContent().slice(1)), i.replace(Z(n)), e.selectNext(0, 0)) : ea(Z(n), e, [r, r + 2]);
@@ -818,9 +818,9 @@ function eT({
       ea(Z(t[n]), e, [n, n + 1]);
       t = e.getTextContent();
     };
-    (l === rXF.FLOAT || l === rXF.BOOLEAN) && a1.test(t) && o(a1);
-    l === rXF.BOOLEAN && _$$$$if.test(t) && !t.match(kl) && o(_$$$$if);
-    l === rXF.STRING && DE.test(t) && o(DE);
+    (l === VariableResolvedDataType.FLOAT || l === VariableResolvedDataType.BOOLEAN) && a1.test(t) && o(a1);
+    l === VariableResolvedDataType.BOOLEAN && _$$$$if.test(t) && !t.match(kl) && o(_$$$$if);
+    l === VariableResolvedDataType.STRING && DE.test(t) && o(DE);
     tJ.test(t) && o(tJ);
   }, [n, l, r]);
   let d = useCallback(e => {
@@ -988,7 +988,7 @@ export function $$ev0({
   let ei = TL(r);
   let el = useCallback(() => {
     if (getFeatureFlags().ds_variable_props_proto) {
-      let e = CWU.getComponentPropsForSetVariableList();
+      let e = VariablesBindings.getComponentPropsForSetVariableList();
       if (!e || 0 === Object.keys(e).length || 0 === e.length || null === Q) return [];
       let t = [];
       e.forEach(e => {

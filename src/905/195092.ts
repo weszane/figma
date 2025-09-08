@@ -1,6 +1,6 @@
 import _require from "../5973/625973";
 import { COMPONENT_PREFIX } from "../figma_app/664063";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { analyticsEventManager } from "../905/449184";
 import { Ay } from "../figma_app/432652";
@@ -9,7 +9,7 @@ var n;
 async function o(e, t = 1) {
   let n = getSingletonSceneGraph();
   let r = e.findContainingTopLevelNodeWithWidthConstraint(2e3);
-  r === AD && (r = e.findContainingTopLevelFrameOrSelf());
+  r === defaultSessionLocalIDString && (r = e.findContainingTopLevelFrameOrSelf());
   let c = e && n.get(r);
   if (!c) return;
   let u = 0;

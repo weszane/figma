@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { S as _$$S } from '../905/73063';
-import { J } from '../905/270045';
+import { Label } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { b as _$$b, c as _$$c } from '../905/308099';
 import { o as _$$o } from '../905/382697';
@@ -116,7 +116,7 @@ export function $$F2(e) {
             className: _$$s2.mt8.$,
             children: [jsx(_$$c, {
               value: 'edit',
-              label: jsx(J, {
+              label: jsx(Label, {
                 htmlAttributes: {
                   'data-testid': 'share-to-google-classroom-edit-option'
                 },
@@ -128,7 +128,7 @@ export function $$F2(e) {
               }) : null
             }), jsx(_$$c, {
               value: 'duplicate',
-              label: jsx(J, {
+              label: jsx(Label, {
                 htmlAttributes: {
                   'data-testid': 'share-to-google-classroom-duplicate-option'
                 },

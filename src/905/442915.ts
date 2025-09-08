@@ -1,4 +1,4 @@
-import { YV, td } from "../figma_app/181241";
+import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { z } from "../905/239603";
 import { n as _$$n } from "../905/347702";
 let a = z.enum(["color", "float"]);
@@ -75,13 +75,13 @@ let g = z.object({
 });
 export let $$_0 = new class {
   constructor() {
-    this.RecommendVariablesValidator = YV("RecommendVariablesValidator", g, null, !0);
+    this.RecommendVariablesValidator = createMetaValidator("RecommendVariablesValidator", g, null, !0);
     this.recommendVariables = _$$n(e => {
       let t = h.parse(e);
       return this.RecommendVariablesValidator.validate(async ({
         xr: e
-      }) => await e.post("/api/recommend/variables", td.toAPIParameters(t)));
+      }) => await e.post("/api/recommend/variables", APIParameterUtils.toAPIParameters(t)));
     });
   }
 }();
-export const D = $$_0; 
+export const D = $$_0;

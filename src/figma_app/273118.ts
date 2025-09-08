@@ -2,7 +2,7 @@ import { WB } from "../905/761735";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Q$ } from "../figma_app/934707";
 import { J } from "../figma_app/941287";
 export let $$c3 = "-1";
@@ -23,7 +23,7 @@ export function $$p1(e, t, r) {
     current_org_id: i
   }));
 }
-export let $$_0 = nF((e, t) => {
+export let $$_0 = createOptimistThunk((e, t) => {
   if (!t.userInitiated) {
     e.dispatch(Q$(t));
     return;

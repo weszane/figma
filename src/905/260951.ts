@@ -1,4 +1,4 @@
-import { GUn, f2e, Ez5 } from "../figma_app/763686";
+import { HitTestBindings, UserInteractionButton, AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -16,7 +16,7 @@ export class $$p0 extends j {
     if (!atomStoreManager.get(w)) return;
     let t = e.findHoveredNodeId();
     let i = getSingletonSceneGraph().get(t);
-    if (i && i.isSection && GUn.eventHitTestNameUIBounds(e, t, f2e.SECTION_PRESET_PICKER)) {
+    if (i && i.isSection && HitTestBindings.eventHitTestNameUIBounds(e, t, UserInteractionButton.SECTION_PRESET_PICKER)) {
       this.sectionId = t;
       e.accept(this);
       return;
@@ -27,7 +27,7 @@ export class $$p0 extends j {
       this.sectionId = null;
       return;
     }
-    let t = GUn.eventHitTestNameUIBounds(e, this.sectionId, f2e.SECTION_PRESET_PICKER);
+    let t = HitTestBindings.eventHitTestNameUIBounds(e, this.sectionId, UserInteractionButton.SECTION_PRESET_PICKER);
     let i = getSingletonSceneGraph().get(e.canvasGUID());
     if (t && i) {
       let t = debugState.dispatch;
@@ -44,10 +44,10 @@ export class $$p0 extends j {
     let t = e.findHoveredNodeId();
     let i = getSingletonSceneGraph().get(t);
     if (!i || !i.isSection) {
-      Ez5.clearHoveredSectionPresetPickerNode();
+      AppStateTsApi.clearHoveredSectionPresetPickerNode();
       return;
     }
-    atomStoreManager.get(w) && (GUn.eventHitTestNameUIBounds(e, t, f2e.SECTION_PRESET_PICKER) ? Ez5.setHoveredSectionPresetPickerNode(t) : Ez5.clearHoveredSectionPresetPickerNode());
+    atomStoreManager.get(w) && (HitTestBindings.eventHitTestNameUIBounds(e, t, UserInteractionButton.SECTION_PRESET_PICKER) ? AppStateTsApi.setHoveredSectionPresetPickerNode(t) : AppStateTsApi.clearHoveredSectionPresetPickerNode());
   }
   handleMouseLeave(e) {}
   handleMouseDrag(e) {}

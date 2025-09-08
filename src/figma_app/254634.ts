@@ -2,14 +2,14 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
-import { j0r } from "../figma_app/763686";
+import { PropertyScope } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { b as _$$b } from "../figma_app/517135";
 import { getI18nString } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { Q } from "../905/217916";
 import { m0 } from "../figma_app/976749";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Gp } from "../figma_app/646357";
 import { Fk } from "../figma_app/167249";
@@ -24,7 +24,7 @@ import { VZ, x0 } from "../figma_app/727192";
 import { nd, _p } from "../figma_app/826998";
 export function $$$$N1() {
   let e = useSelector(e => e.mirror.selectionProperties.strokePaints);
-  let t = !e || gl(e) ? [] : e.filter(e => e.visible);
+  let t = !e || isInvalidValue(e) ? [] : e.filter(e => e.visible);
   let r = uQ();
   let n = Q();
   let c = v4();
@@ -34,7 +34,7 @@ export function $$$$N1() {
   let x = Fk((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
   let N = useSelector(e_);
   let w = kl("inheritFillStyleKeyForStroke");
-  let L = w && hS(w) ? Gp(w, x ? [x] : [], N) : void 0;
+  let L = w && isValidValue(w) ? Gp(w, x ? [x] : [], N) : void 0;
   let P = useSelector(e => e.mirror.selectionProperties.borderSharedWeight || e.mirror.selectionProperties.strokeWeight) || 1;
   let D = selectWithShallowEqual(e => ({
     borderTopWeight: e.mirror.selectionProperties.borderTopWeight,
@@ -45,7 +45,7 @@ export function $$$$N1() {
   let k = useSelector(e => e.mirror.selectionProperties.strokeAlign) || "OUTSIDE";
   let M = uQ();
   let F = Ig();
-  let j = t.filter(bm).map(e => dc(e, F, j0r.STROKE));
+  let j = t.filter(bm).map(e => dc(e, F, PropertyScope.STROKE));
   let U = useMemo(() => {
     let e = L && v ? [rP(v, L, j)] : j;
     return QT(e, r, n.inspectionMode, c, b);
@@ -65,7 +65,7 @@ export function $$$$N1() {
 }
 let C = e => {
   let t = e.mirror.selectionProperties;
-  if (!gl(t.borderSharedWeight)) {
+  if (!isInvalidValue(t.borderSharedWeight)) {
     if (!t.borderStrokeWeightsIndependent) return "border";
     if (t.borderTopVisible) return "border-top";
     if (t.borderBottomVisible) return "border-bottom";
@@ -89,7 +89,7 @@ let w = e => {
       return;
   }
 };
-let O = (e, t) => gl(e) ? t.some(e => gl(e)) ? getI18nString("fullscreen.mixed") : t.map(e => nd(e, "px")).join(", ") : `${nd(e, "px")}`;
+let O = (e, t) => isInvalidValue(e) ? t.some(e => isInvalidValue(e)) ? getI18nString("fullscreen.mixed") : t.map(e => nd(e, "px")).join(", ") : `${nd(e, "px")}`;
 let R = e => {
   switch (e) {
     case "OUTSIDE":

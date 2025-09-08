@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
 import { shallowEqual } from "../vendor/514228";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { xk } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
@@ -20,8 +20,8 @@ let $$g = (e, t, i) => ({
   right: Math.max(e.x, t.x) + (i?.left ?? 0)
 });
 let f = (e, t) => ({
-  x: qE(e.clientX - t.left, 0, t.width),
-  y: qE(e.clientY - t.top, 0, t.height)
+  x: clamp(e.clientX - t.left, 0, t.width),
+  y: clamp(e.clientY - t.top, 0, t.height)
 });
 function _(e) {
   let t = useRef(null);
@@ -317,7 +317,7 @@ export function $$I0(e) {
   let [q, $] = useState(void 0);
   let Z = t => {
     let i = y + (numItemsPerRow || 1) * t;
-    return qE(i, 0, e.items.length - 1);
+    return clamp(i, 0, e.items.length - 1);
   };
   let X = useCallback(t => () => {
     b(t);

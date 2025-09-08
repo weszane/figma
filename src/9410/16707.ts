@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, createElement, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { Ez5, nQ7 } from "../figma_app/763686";
+import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { h as _$$h } from "../905/207101";
@@ -16,8 +16,8 @@ import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { d2 } from "../figma_app/579169";
 import { Z } from "../905/296690";
-import { Y5 } from "../figma_app/455680";
-import { ut } from "../figma_app/84367";
+import { fullscreenValue } from "../figma_app/455680";
+import { getObservableValue } from "../figma_app/84367";
 import { Me } from "../figma_app/598018";
 import { N as _$$N } from "../figma_app/268271";
 import { qo } from "../905/696396";
@@ -208,7 +208,7 @@ function z({
   isShowing: i,
   totalSteps: n
 }) {
-  let a = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
+  let a = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   return jsx(rq, {
     arrowPosition: F_.BOTTOM,
     description: renderI18nText("slides.onboarding.new_slide.description"),
@@ -224,7 +224,7 @@ function z({
       label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         e();
-        a && Ez5?.singleSlideView().exitFocusedNodeViewAndLeavePanelsOpen();
+        a && AppStateTsApi?.singleSlideView().exitFocusedNodeViewAndLeavePanelsOpen();
       },
       ctaTrackingDescriptor: _$$c.NEXT
     },
@@ -263,7 +263,7 @@ function V({
       type: "button",
       label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
-        Y5.triggerAction("enter-focus-view");
+        fullscreenValue.triggerAction("enter-focus-view");
         e();
       },
       ctaTrackingDescriptor: _$$c.NEXT
@@ -306,7 +306,7 @@ function W({
       label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         e();
-        a && o(nQ7.DESIGN);
+        a && o(SelfDesignType.DESIGN);
       },
       ctaTrackingDescriptor: _$$c.NEXT
     },
@@ -351,7 +351,7 @@ function Y({
       label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         e();
-        a(nQ7.DESIGN);
+        a(SelfDesignType.DESIGN);
       },
       ctaTrackingDescriptor: _$$c.NEXT
     },

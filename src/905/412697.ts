@@ -3,7 +3,7 @@ import { debounce } from "../905/915765";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { zk } from "../figma_app/198712";
 export function $$c0({
   property: e,
@@ -15,7 +15,7 @@ export function $$c0({
 }) {
   let [m, h] = useState();
   let g = useCallback(() => {
-    void 0 !== m && (Y5.triggerActionInUserEditScope("undo"), h(void 0), i?.(void 0));
+    void 0 !== m && (fullscreenValue.triggerActionInUserEditScope("undo"), h(void 0), i?.(void 0));
   }, [m, i]);
   let f = useMemo(() => debounce(n => {
     if (!p) return;

@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef } from "react";
 import { Nz, h4 } from "../905/720338";
-import { Qv } from "../905/959312";
+import { useRecording } from "../905/959312";
 import { S } from "../905/823680";
 import { $ } from "../905/61417";
 import { q7 } from "../figma_app/860955";
 import { Lh } from "../figma_app/415899";
-import { r as _$$r } from "../905/577641";
-import { Ju, dG } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { preventAndStopEvent, stopEventPropagation } from "../905/955878";
 import { k as _$$k } from "../905/733611";
 import { lO } from "../905/246123";
 let g = () => {
@@ -155,7 +155,7 @@ let $$E1 = forwardRef(({
       onEnd: j,
       onDrop: j
     }));
-    let U = Qv(e => {
+    let U = useRecording(e => {
       if (onPointerDown?.(e), null != w.keyboardDragIndexRef.current || 2 === e.button || e.target instanceof HTMLElement && e.target.closest('[role="gridcell"]')) return;
       S.current = !0;
       let t = gridRef.current;
@@ -183,7 +183,7 @@ let $$E1 = forwardRef(({
       eventName: "pointerdown",
       recordingKey: i
     }, [onPointerDown, gridRef, x, setSelectedRows, lastClickedRow]);
-    let B = Qv(e => {
+    let B = useRecording(e => {
       if (onPointerUp?.(e), S.current && !e.metaKey && !e.shiftKey && !w.newDraggingOrder.current) {
         let e = I(gridRef.current, lO);
         let t = x.current ? e.indexOf(x.current) : -1;
@@ -215,7 +215,7 @@ let $$E1 = forwardRef(({
           keyboardDragIndexRef.current || s.includes(t) || setSelectedRows?.(new Set([t]));
           keyboardDragIndexRef.current = r;
           r === n.length ? V(r - 1, Nz.AFTER) : V(r, Nz.BEFORE);
-          Ju(e);
+          preventAndStopEvent(e);
         },
         onKeyUp: e => {
           onKeyUp?.(e);
@@ -232,7 +232,7 @@ let $$E1 = forwardRef(({
   let g = S(rowRef, i);
   return jsx("div", {
     ...rowProps,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ref: g,
     children: e
   });
@@ -339,7 +339,7 @@ export function $$S0(e) {
     getMenuContainerProps: () => ({
       onPointerMove: H,
       onPointerLeave: onCancelDrag,
-      onPointerDown: dG
+      onPointerDown: stopEventPropagation
     })
   };
 }

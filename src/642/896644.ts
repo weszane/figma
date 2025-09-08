@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { isNotNullish } from "../figma_app/95419";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { KH } from "../figma_app/722362";
 import { wA } from "../figma_app/167249";
 import { useState } from "react";
 import { $n } from "../905/521428";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { J } from "../905/270045";
-import { l7 } from "../905/189185";
+import { Label } from "../905/270045";
+import { permissionScopeHandler } from "../905/189185";
 import { H0, F_ } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { Zk } from "../figma_app/626177";
@@ -24,7 +24,7 @@ function C({
   let [n, i] = useState(!1);
   let l = t.chartType ?? N.BAR_GROUPED;
   let a = s => {
-    l7.user("chart-setChartType", () => {
+    permissionScopeHandler.user("chart-setChartType", () => {
       $H(e, {
         ...t,
         chartType: s
@@ -37,13 +37,13 @@ function C({
       onClick: () => i(!0),
       children: getI18nString("react-scenegraph.chart.edit_data")
     }), h && jsx($n, {
-      onClick: () => l7.user("chart-clearOverrides", () => od(e)),
+      onClick: () => permissionScopeHandler.user("chart-clearOverrides", () => od(e)),
       children: getI18nString("react-scenegraph.chart.clear_overrides")
     }), jsxs(bL, {
       value: l,
       onChange: e => a(e),
       children: [jsx(l9, {
-        label: jsx(J, {
+        label: jsx(Label, {
           children: getI18nString("react-scenegraph.chart.chart_type")
         })
       }), jsxs(mc, {
@@ -107,7 +107,7 @@ function j({
         };
       }(s.color),
       onChange: r => {
-        l7.user("chart-setColor", () => {
+        permissionScopeHandler.user("chart-setColor", () => {
           $H(e, {
             ...t,
             [s.key]: function (e) {
@@ -168,7 +168,7 @@ export function $$k1() {
       };
       let r = t[0]?.containingJSXGuid;
       let l = t[0]?.jsxDrillDownKey;
-      if (!r || !l || r === AD) return {
+      if (!r || !l || r === defaultSessionLocalIDString) return {
         jsxNodeId: null,
         jsxDrillDownKey: null
       };

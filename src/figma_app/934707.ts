@@ -1,4 +1,4 @@
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { NC } from "../905/17179";
 import { analyticsEventManager } from "../905/449184";
 import { XHR } from "../905/910117";
@@ -6,9 +6,9 @@ import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { d1 } from "../905/766303";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { h as _$$h } from "../905/438683";
 import { UU } from "../figma_app/770088";
 let g = e => {
@@ -16,8 +16,8 @@ let g = e => {
   e.dispatch(UU({
     force: !0
   }));
-  t.mirror.appModel.showUi || Y5.triggerAction("toggle-ui");
-  t.mirror.appModel.currentTool !== NLJ.COMMENTS && Y5.triggerAction("set-tool-comments");
+  t.mirror.appModel.showUi || fullscreenValue.triggerAction("toggle-ui");
+  t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction("set-tool-comments");
   requestAnimationFrame(() => {
     _$$h();
   });
@@ -30,7 +30,7 @@ let f = (e, t, r, n) => {
     toast_type: n
   });
 };
-let $$E0 = nF((e, t) => {
+let $$E0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = d1(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
@@ -58,7 +58,7 @@ let y = (e, t) => {
     });
   };
 };
-let $$b3 = nF((e, t) => {
+let $$b3 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = d1(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
@@ -81,7 +81,7 @@ let $$b3 = nF((e, t) => {
     }, 5e3);
   }
 });
-let $$T2 = nF((e, t) => {
+let $$T2 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = d1(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
@@ -99,7 +99,7 @@ let $$T2 = nF((e, t) => {
     }, 5e3);
   }
 });
-let $$I4 = nF((e, t) => {
+let $$I4 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = d1(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {

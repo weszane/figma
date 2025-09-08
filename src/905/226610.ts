@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { zGX } from "../figma_app/763686";
+import { FeedbackCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { createReduxSubscriptionAtom } from "../905/111321";
@@ -258,9 +258,9 @@ let $$x0 = Object.freeze({
 });
 export function $$S1(e) {
   switch (e) {
-    case zGX.PLACEHOLDER:
+    case FeedbackCategory.PLACEHOLDER:
       return !1;
-    case zGX.COMMENTS_A11Y:
+    case FeedbackCategory.COMMENTS_A11Y:
       return $$x0.commentsA11y.getValue();
     default:
       throwTypeError(e);

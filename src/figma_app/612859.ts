@@ -1,8 +1,8 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { sD } from "../figma_app/243058";
-import { juq, Z_n, XJn, mSn, PWo, Vzr, oVz } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { uW } from "../905/426868";
+import { FileSourceType, VariableDataType, FirstDraftHelpers, SceneGraphTsApi, FacetType, Thumbnail, DraftState } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
+import { loadPluginFont } from "../905/426868";
 import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
 import { analyticsEventManager } from "../905/449184";
 import { reportError } from "../905/11";
@@ -10,13 +10,13 @@ import { Point } from "../905/736624";
 import { i2 } from "../905/296461";
 import { oT } from "../figma_app/566517";
 import { Gy } from "../figma_app/193952";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Pv } from "../905/619652";
 import { re } from "../figma_app/234690";
 import { bq, BY } from "../figma_app/541950";
 export let $$y4 = 6;
 export function $$b2(e) {
-  if ("FRAME" === e.type && "true" === e.getSharedPluginData("jsx", "isLayoutNode")) for (let t of e.childrenNodes) "INSTANCE" === t.type && t.fills.filter(e => "SOLID" === e.type).length > 0 && l7.ai("first-draft-override-layout-node", () => {
+  if ("FRAME" === e.type && "true" === e.getSharedPluginData("jsx", "isLayoutNode")) for (let t of e.childrenNodes) "INSTANCE" === t.type && t.fills.filter(e => "SOLID" === e.type).length > 0 && permissionScopeHandler.ai("first-draft-override-layout-node", () => {
     e.fills = t.fills;
   });
 }
@@ -51,10 +51,10 @@ function S(e, t, r, n, i) {
   return null;
 }
 async function v(e, t, r, n) {
-  let i = new ReduxSceneGraph(juq.FIRST_DRAFT);
+  let i = new ReduxSceneGraph(FileSourceType.FIRST_DRAFT);
   let s = i.createNode("FRAME");
   if (s.resizeWithoutConstraints(56, 56), r.bgColor) {
-    let i = S(r.bgColor, e, t, Z_n.COLOR, n);
+    let i = S(r.bgColor, e, t, VariableDataType.COLOR, n);
     i && (s.fills = [{
       type: "SOLID",
       color: i
@@ -72,14 +72,14 @@ async function v(e, t, r, n) {
   };
   let u = async r => {
     if (r) {
-      let i = S(r, e, t, Z_n.STRING, n);
+      let i = S(r, e, t, VariableDataType.STRING, n);
       if (i) {
         let e = {
           ...c.fontName,
           family: i
         };
         try {
-          await uW(e);
+          await loadPluginFont(e);
           c.fontName = e;
         } catch (r) {
           let t = void 0 === r ? "undefined" : r instanceof Error ? r.message : JSON.stringify(r);
@@ -97,7 +97,7 @@ async function v(e, t, r, n) {
     }
   };
   if (await u(r.fontFamilyTitle || r.fontFamilyBody || r.fontFamilyLabel), r.textColor) {
-    let i = S(r.textColor, e, t, Z_n.COLOR, n);
+    let i = S(r.textColor, e, t, VariableDataType.COLOR, n);
     if (i) {
       let e = s.fills[0].color;
       let t = e ? re(i, e) ?? i : i;
@@ -116,21 +116,21 @@ async function v(e, t, r, n) {
       m02: 8,
       m12: 32
     };
-    let l = S(r.bgBrandColor, e, t, Z_n.COLOR, n);
+    let l = S(r.bgBrandColor, e, t, VariableDataType.COLOR, n);
     l && (o.fills = [{
       type: "SOLID",
       color: l
     }]);
     let d = r.cornerRadius ?? r.cornerRadiusFallback;
     if (d) {
-      let r = S(d, e, t, Z_n.FLOAT, n);
+      let r = S(d, e, t, VariableDataType.FLOAT, n);
       null !== r && (o.cornerRadius = r);
     }
   }
   return s;
 }
 function A() {
-  let e = Gy(juq.FIRST_DRAFT).filter(e => e.name === i2);
+  let e = Gy(FileSourceType.FIRST_DRAFT).filter(e => e.name === i2);
   if (e && 0 !== e.length) {
     e.length > 1 && reportError(_$$e.AI_GENERATION, Error("Multiple Presets collections found, returning the first one"), {
       tags: {
@@ -143,9 +143,9 @@ function A() {
 export async function $$x5(e, t, r, s, o = $$y4) {
   let d = getSingletonSceneGraph().get(t);
   if (!d) return [];
-  XJn.clearFDScene();
-  let p = XJn.updateFDSceneFromNode(t, o);
-  let h = new ReduxSceneGraph(juq.FIRST_DRAFT);
+  FirstDraftHelpers.clearFDScene();
+  let p = FirstDraftHelpers.updateFDSceneFromNode(t, o);
+  let h = new ReduxSceneGraph(FileSourceType.FIRST_DRAFT);
   let m = p.map(e => h.get(e));
   if (m.some(e => !e)) {
     reportError(_$$e.AI_GENERATION, Error("Copied node not found"));
@@ -155,7 +155,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   let S = A();
   if (!S || 0 === S.modes.length) return [];
   let N = function (e, t) {
-    let r = new ReduxSceneGraph(juq.FIRST_DRAFT);
+    let r = new ReduxSceneGraph(FileSourceType.FIRST_DRAFT);
     let n = r.getVariableCollectionNode(e.id);
     if (!n) return null;
     let s = {
@@ -170,7 +170,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
     };
     let o = t === bq.Website ? $$T3 : $$I0;
     n.variableIds.forEach(e => {
-      let t = mSn.getGUIDForAssetId(r.scene, sD.fromString(e) ?? sD.INVALID, PWo.VARIABLE);
+      let t = SceneGraphTsApi.getGUIDForAssetId(r.scene, sD.fromString(e) ?? sD.INVALID, FacetType.VARIABLE);
       if (!t) return null;
       let n = r.get(t);
       n && Object.entries(o).forEach(([t, r]) => {
@@ -182,7 +182,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   if (!N) return [];
   let C = function (e, t) {
     let r = getSingletonSceneGraph();
-    let n = new ReduxSceneGraph(juq.FIRST_DRAFT);
+    let n = new ReduxSceneGraph(FileSourceType.FIRST_DRAFT);
     let s = n.getVariableCollectionNode(t.id);
     if (!s) return {};
     let o = {};
@@ -200,7 +200,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
       return r;
     }(n, s);
     for (let t in e) {
-      let n = mSn.getGUIDForAssetId(r.scene, sD.fromString(t) ?? sD.INVALID, PWo.VARIABLE);
+      let n = SceneGraphTsApi.getGUIDForAssetId(r.scene, sD.fromString(t) ?? sD.INVALID, FacetType.VARIABLE);
       if (!n) continue;
       let s = r.get(n);
       s && d[s.name] && (o[d[s.name].id] = e[t]);
@@ -222,7 +222,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
       t > 0 && n && (r.setExplicitVariableModeForCollection(S.id, n), $$b2(r));
       let i = await v(r, n, N, C);
       let s = function (e) {
-        let t = Vzr.generateThumbnailForNode(e.guid, 0, 0, 1, {
+        let t = Thumbnail.generateThumbnailForNode(e.guid, 0, 0, 1, {
           inFirstDraftScene: !0,
           type: "UNCOMPRESSED",
           scale: 184 / e.size.x
@@ -235,7 +235,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
         dataURI: s
       });
       let o = Object.keys(C).length > 0 && "1P_LIBRARY" === e.type;
-      await oT(e, r.guid, oVz.FIRST_DRAFT, {
+      await oT(e, r.guid, DraftState.FIRST_DRAFT, {
         detachVariables: o
       });
       t++;
@@ -247,16 +247,16 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   return f;
 }
 export function $$N1(e, t, r) {
-  if (!new ReduxSceneGraph(juq.FIRST_DRAFT).get(e.attachedNodeId)) throw Error("Attached node not found");
+  if (!new ReduxSceneGraph(FileSourceType.FIRST_DRAFT).get(e.attachedNodeId)) throw Error("Attached node not found");
   if (e.modeId && !A()) throw Error("Preset collection not found");
-  let n = l7.ai("first-draft-apply-theme-preset", () => XJn.insertFromFDScene(e.attachedNodeId));
+  let n = permissionScopeHandler.ai("first-draft-apply-theme-preset", () => FirstDraftHelpers.insertFromFDScene(e.attachedNodeId));
   let i = getSingletonSceneGraph();
   let o = i.get(n);
   if (!o) throw Error("Inserted preset node not found");
-  l7.ai("first-draft-apply-theme-preset", () => {
+  permissionScopeHandler.ai("first-draft-apply-theme-preset", () => {
     o.locked = !1;
   });
-  l7.ai("first-draft-apply-theme-preset", () => {
+  permissionScopeHandler.ai("first-draft-apply-theme-preset", () => {
     let e = i.get(t);
     e && (e.parentNode?.type === "CANVAS" && (o.relativeTransform = e.relativeTransform), e.removeSelfAndChildren());
     r && r.forEach(e => {
@@ -264,7 +264,7 @@ export function $$N1(e, t, r) {
       t && t.removeSelfAndChildren();
     });
   });
-  Y5.commit();
+  fullscreenValue.commit();
   return n;
 }
 export const Cr = $$I0;

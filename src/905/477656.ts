@@ -5,8 +5,8 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
-import { qK } from "../905/102752";
+import { hideModal } from "../905/156213";
+import { registerLegacyModal } from "../905/102752";
 export let $$p0 = "no-shared-instance-in-master-file-if-deleted";
 function m(e) {
   let t = hS({
@@ -28,7 +28,7 @@ function m(e) {
         children: jsx(jk, {
           children: jsx($n, {
             onClick: () => {
-              e.dispatch(Ce());
+              e.dispatch(hideModal());
             },
             variant: "primary",
             children: renderI18nText("design_systems.instance_panel.ok")
@@ -38,7 +38,7 @@ function m(e) {
     })
   });
 }
-qK($$p0, e => jsx(m, {
+registerLegacyModal($$p0, e => jsx(m, {
   ...e
 }));
 export const Q = $$p0;

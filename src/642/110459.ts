@@ -7,8 +7,8 @@ import { RR } from "../figma_app/338442";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { gl, oV } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { Sh } from "../figma_app/889655";
@@ -21,7 +21,7 @@ import { RK } from "../1528/277451";
 let v = Tn();
 export function $$S0(e) {
   let t = useCallback(e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       visible: e
     });
   }, []);
@@ -50,7 +50,7 @@ export function $$S0(e) {
     className: RK,
     children: jsx(JQ, {
       ref: I,
-      currentFieldValue: !!gl(T) || T,
+      currentFieldValue: !!isInvalidValue(T) || T,
       isActive: E,
       disabled: e.disabled || !O,
       onPickerOpen: () => M(I.current),
@@ -66,9 +66,9 @@ export function $$S0(e) {
           "data-tooltip": D,
           "data-tooltip-type": Ib.TEXT
         },
-        mixed: !R && gl(T),
+        mixed: !R && isInvalidValue(T),
         offIcon: jsx(_$$_, {}),
-        onChange: () => t(T === oV || !T),
+        onChange: () => t(T === MIXED_MARKER || !T),
         onIcon: jsx(_$$j, {}),
         recordingKey: Pt(e, "visibleToggle"),
         variant: "highlighted"

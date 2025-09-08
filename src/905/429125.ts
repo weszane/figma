@@ -1,14 +1,14 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { J0O, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ComponentPropType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { a1 } from "../figma_app/23780";
 import { Cf } from "../905/504727";
@@ -35,9 +35,9 @@ export function $$I0({
       containingProductComponent: i ? e.mirror.sceneGraph.get(i) : null,
       containingComponentDefs: I(e, i, t).filter(t => {
         switch (t.type) {
-          case J0O.NUMBER:
+          case ComponentPropType.NUMBER:
             return getFeatureFlags().ds_variable_props_number_def;
-          case J0O.SLOT:
+          case ComponentPropType.SLOT:
             if (!getFeatureFlags().dse_slots) return !1;
             return e.mirror.sceneGraph.getDirectlySelectedNodes().every(e => e.canReferenceExplicitSlotComponentPropertyDefinition(t.explicitDefID));
           default:
@@ -54,7 +54,7 @@ export function $$I0({
   let P = k?.data?.targetRect;
   let O = useCallback(() => {
     Pp(containingProductComponent, !0, eM(t).defaultType, e);
-    T(to({
+    T(showModalHandler({
       type: _$$n,
       data: {
         prePopulatedDefaultValue: o,
@@ -117,7 +117,7 @@ function x({
   ...p
 }) {
   let m = useCallback(() => {
-    "create-prop" === e ? l && l() : l7.user("add-prop-ref", () => glU?.addComponentPropRef(t, a));
+    "create-prop" === e ? l && l() : permissionScopeHandler.user("add-prop-ref", () => Fullscreen?.addComponentPropRef(t, a));
   }, [e, a, t, l]);
   return jsx(a1, {
     text: E(e, i),

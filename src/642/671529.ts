@@ -2,10 +2,10 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Children, useEffect, useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { SupportedLocales } from "../905/631683";
-import { qE } from "../figma_app/492908";
-import { Ez5, FAf, lyf, glU, nQ7, NLJ, rcl } from "../figma_app/763686";
+import { clamp } from "../figma_app/492908";
+import { AppStateTsApi, DesignWorkspace, ViewType, Fullscreen, SelfDesignType, DesignGraphElements, Command } from "../figma_app/763686";
 import { n3, IA } from "../905/859698";
-import { dI, fn } from "../905/871411";
+import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { G as _$$G } from "../figma_app/318030";
@@ -24,13 +24,13 @@ import { B as _$$B } from "../905/330741";
 import { Dm } from "../figma_app/8833";
 import { qw, UK } from "../figma_app/740163";
 import { q as _$$q, T as _$$T } from "../figma_app/590592";
-import { E7, _W } from "../905/216495";
+import { normalizeValue, valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { p8, dH, KH, eY as _$$eY, aV } from "../figma_app/722362";
 import { q5, tS } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
 import R, { VP } from "../905/18797";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { t as _$$t } from "../figma_app/501766";
 import { yU } from "../figma_app/221114";
 import { A5 } from "../figma_app/274104";
@@ -75,7 +75,7 @@ import { vq } from "../905/8732";
 import { ft } from "../figma_app/753501";
 import { m0 } from "../figma_app/976749";
 import { k as _$$k3 } from "../figma_app/564183";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { se } from "../642/171234";
@@ -128,7 +128,7 @@ function ef({
   });
   let w = of(d, "submit", () => {
     let e = createStyle();
-    j && Ez5.slideThemeLibBindings().addStyleToLocalTheme(e || "", b);
+    j && AppStateTsApi.slideThemeLibBindings().addStyleToLocalTheme(e || "", b);
     c(XE());
     g || c(Uv());
     c(sw());
@@ -252,7 +252,7 @@ function e_({
   let a = useDispatch();
   let o = useSelector(e => e.mirror.selectedStyleProperties);
   let d = IW(l);
-  let u = dI(o.guid);
+  let u = sessionLocalIDToString(o.guid);
   let p = p8("isReadOnly");
   let h = !!d || !e || p;
   let m = "";
@@ -262,7 +262,7 @@ function e_({
     let s = e.get(t);
     return [s?.name || "", s?.description || ""];
   }, u);
-  d ? (m = d.name || "", g = d.description_rt ? _$$At(d.description_rt) : d.description || "") : dI(o.guid) && (m = f, g = _$$At(x));
+  d ? (m = d.name || "", g = d.description_rt ? _$$At(d.description_rt) : d.description || "") : sessionLocalIDToString(o.guid) && (m = f, g = _$$At(x));
   return jsx(zK.Provider, {
     value: zM.EDIT_STYLE,
     children: jsx(O8, {
@@ -310,13 +310,13 @@ function eS({
   recordingKey: t
 }) {
   let s = q5();
-  let n = ut(aY(), FAf.DESIGN);
+  let n = getObservableValue(aY(), DesignWorkspace.DESIGN);
   let l = p8("topLevelMode");
   let a = useSelector(e => e.library);
   let d = useSelector(e => e.stylePreviewShown);
   let u = _$$b("guid");
   let p = _$$b("styleType");
-  if (!d.isShown || ![FAf.DESIGN, FAf.SITE, FAf.INSPECT, FAf.ILLUSTRATION].includes(n)) return null;
+  if (!d.isShown || ![DesignWorkspace.DESIGN, DesignWorkspace.SITE, DesignWorkspace.INSPECT, DesignWorkspace.ILLUSTRATION].includes(n)) return null;
   let h = new Point(d.rowLeft - tA, d.rowTop);
   if (d.isCreating) {
     let {
@@ -332,14 +332,14 @@ function eS({
       inheritStyleKeyField
     });
   }
-  let m = E7(u);
-  let g = _W(p, s4.NONE);
+  let m = normalizeValue(u);
+  let g = valueOrFallback(p, s4.NONE);
   if (null === m) return null;
   let f = !_$$eE(d.style, s);
-  let x = dI(m);
+  let x = sessionLocalIDToString(m);
   if (!(a.local.styles[x] && !a.local.styles[x]?.is_soft_deleted) && !f) return null;
   let y = s?.canEdit ?? !1;
-  let _ = f || !y || l === lyf.BRANCHING;
+  let _ = f || !y || l === ViewType.BRANCHING;
   return jsx(zK.Provider, {
     value: zM.EDIT_STYLE,
     children: jsx(Ao, {
@@ -382,7 +382,7 @@ function eS({
           children: () => jsx(e_, {
             recordingKey: Pt(t, "stylePreviewPanel"),
             canEdit: y,
-            isInspectPanel: n === FAf.INSPECT,
+            isInspectPanel: n === DesignWorkspace.INSPECT,
             isRenaming: a.isRenamingSelectedStyle,
             stylePreviewShown: d
           }, "style-preview-panel")
@@ -444,24 +444,24 @@ function eK({
   let _ = cJ();
   let b = !!(m || f?.modal);
   let C = rf(l, "mousedown", () => {
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
     c(XE());
     c(vq());
     c(sw());
     c(Uv());
-    _ && (y([]), glU?.setSelectedInteractions([]));
+    _ && (y([]), Fullscreen?.setSelectedInteractions([]));
   });
   let j = se();
   let v = m0();
-  let S = e === FAf.COMMENT;
+  let S = e === DesignWorkspace.COMMENT;
   let w = sO();
   let T = !s || !b;
   let N = !S && T;
   let I = ft();
   let E = G$();
   d = {
-    tab: FAf[e],
-    topLevelMode: lyf[h],
+    tab: DesignWorkspace[e],
+    topLevelMode: ViewType[h],
     shouldRenderInspectTab: E
   };
   0 === Children.toArray(t).length && logError("PropertiesPanel", "Rendering empty properties panel", d);
@@ -496,79 +496,79 @@ function eK({
 eK.displayName = "PropertiesPanel";
 function eq(e, t) {
   return {
-    [FAf.DESIGN]: {
+    [DesignWorkspace.DESIGN]: {
       label: getI18nString("fullscreen.properties_panel.design"),
-      tab: FAf.DESIGN,
+      tab: DesignWorkspace.DESIGN,
       className: Mf,
       recordingKey: "designTab",
       analyticsName: "design"
     },
-    [FAf.PROTOTYPE]: {
+    [DesignWorkspace.PROTOTYPE]: {
       label: t ? getI18nString("fullscreen.properties_panel.interactive") : getI18nString("fullscreen.properties_panel.prototype"),
-      tab: FAf.PROTOTYPE,
+      tab: DesignWorkspace.PROTOTYPE,
       className: Mf,
       recordingKey: t ? "interactionsTab" : "prototypeTab",
       analyticsName: t ? "interactions" : "prototype"
     },
-    [FAf.INSPECT]: {
+    [DesignWorkspace.INSPECT]: {
       label: getI18nString("fullscreen.properties_panel.properties"),
-      tab: FAf.INSPECT,
+      tab: DesignWorkspace.INSPECT,
       className: Mf,
       recordingKey: "inspectTab",
       analyticsName: "inspect"
     },
-    [FAf.COMMENT]: {
+    [DesignWorkspace.COMMENT]: {
       label: getI18nString("fullscreen.properties_panel.comments"),
-      tab: FAf.COMMENT,
+      tab: DesignWorkspace.COMMENT,
       className: Mf,
       recordingKey: "commentTab",
       analyticsName: "comment"
     },
-    [FAf.EXPORT]: {
+    [DesignWorkspace.EXPORT]: {
       label: getI18nString("fullscreen.properties_panel.export"),
-      tab: FAf.EXPORT,
+      tab: DesignWorkspace.EXPORT,
       className: Mf,
       recordingKey: "exportTab",
       analyticsName: "export"
     },
-    [FAf.SLIDE]: {
+    [DesignWorkspace.SLIDE]: {
       label: getI18nString("fullscreen.properties_panel.design"),
-      tab: FAf.SLIDE,
+      tab: DesignWorkspace.SLIDE,
       className: Mf,
       recordingKey: "designTab",
       analyticsName: "design"
     },
-    [FAf.SLIDE_ANIMATION]: {
+    [DesignWorkspace.SLIDE_ANIMATION]: {
       label: getI18nString("slides.properties_panel.animate"),
-      tab: FAf.SLIDE_ANIMATION,
+      tab: DesignWorkspace.SLIDE_ANIMATION,
       className: Mf,
       recordingKey: "animateTab",
       analyticsName: "animate"
     },
-    [FAf.SITE]: {
+    [DesignWorkspace.SITE]: {
       label: getI18nString("fullscreen.properties_panel.design"),
-      tab: FAf.SITE,
+      tab: DesignWorkspace.SITE,
       className: Mf,
       recordingKey: "sitesTab",
       analyticsName: "sites"
     },
-    [FAf.DAKOTA]: {
+    [DesignWorkspace.DAKOTA]: {
       label: getI18nString("dakota.properties_panel.dakota_panel.tab_title"),
-      tab: FAf.DAKOTA,
+      tab: DesignWorkspace.DAKOTA,
       className: Mf,
       recordingKey: "dakotaTab",
       analyticsName: "dakota"
     },
-    [FAf.ILLUSTRATION]: {
+    [DesignWorkspace.ILLUSTRATION]: {
       label: getI18nString("fullscreen.properties_panel.draw"),
-      tab: FAf.ILLUSTRATION,
+      tab: DesignWorkspace.ILLUSTRATION,
       className: Mf,
       recordingKey: "illustrationTab",
       analyticsName: "illustration"
     },
-    [FAf.COOPER]: {
+    [DesignWorkspace.COOPER]: {
       label: getI18nString("fullscreen.properties_panel.design"),
-      tab: FAf.COOPER,
+      tab: DesignWorkspace.COOPER,
       className: Mf,
       recordingKey: "designTab",
       analyticsName: "design"
@@ -599,38 +599,38 @@ function eJ({
   let _ = useMemo(() => Object.keys(y), [y]);
   let b = _$$eY();
   let [C, S] = useState(!1);
-  let k = ut(Ez5?.interopToolMode(), nQ7.SELF) === nQ7.DESIGN;
+  let k = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
   useEffect(() => {
     if (f) {
       if (_$$D(b, _)?.fieldSchemaStableId) {
         S(!0);
         return;
       }
-      e === FAf.DAKOTA && NT(FAf.SITE);
+      e === DesignWorkspace.DAKOTA && NT(DesignWorkspace.SITE);
       S(!1);
     }
   }, [f, _, b, e]);
   let w = (() => {
-    let t = h || m ? [FAf.COMMENT] : [FAf.COMMENT, FAf.INSPECT];
+    let t = h || m ? [DesignWorkspace.COMMENT] : [DesignWorkspace.COMMENT, DesignWorkspace.INSPECT];
     switch (a) {
-      case lyf.LAYOUT:
+      case ViewType.LAYOUT:
         if (p) return t;
-        if (e === FAf.COMMENT) return [FAf.COMMENT];
-        if (x) return [FAf.ILLUSTRATION];
+        if (e === DesignWorkspace.COMMENT) return [DesignWorkspace.COMMENT];
+        if (x) return [DesignWorkspace.ILLUSTRATION];
         if (m) {
-          if (s) return [FAf.DAKOTA];
-          return C ? [FAf.SITE, FAf.PROTOTYPE, FAf.DAKOTA] : [FAf.SITE, FAf.PROTOTYPE];
+          if (s) return [DesignWorkspace.DAKOTA];
+          return C ? [DesignWorkspace.SITE, DesignWorkspace.PROTOTYPE, DesignWorkspace.DAKOTA] : [DesignWorkspace.SITE, DesignWorkspace.PROTOTYPE];
         }
-        if (h) return [FAf.SLIDE, FAf.SLIDE_ANIMATION];
-        if (g) return [FAf.DESIGN];
-        return l ? [FAf.DESIGN, FAf.PROTOTYPE, FAf.INSPECT] : [FAf.DESIGN, FAf.PROTOTYPE];
-      case lyf.PREVIEW:
-      case lyf.DEV_HANDOFF:
+        if (h) return [DesignWorkspace.SLIDE, DesignWorkspace.SLIDE_ANIMATION];
+        if (g) return [DesignWorkspace.DESIGN];
+        return l ? [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE, DesignWorkspace.INSPECT] : [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE];
+      case ViewType.PREVIEW:
+      case ViewType.DEV_HANDOFF:
         return t;
-      case lyf.BRANCHING:
-        return [FAf.INSPECT];
+      case ViewType.BRANCHING:
+        return [DesignWorkspace.INSPECT];
       default:
-        return [FAf.DESIGN, FAf.PROTOTYPE, FAf.INSPECT];
+        return [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE, DesignWorkspace.INSPECT];
     }
   })();
   let T = w.find(t => t === e);
@@ -665,12 +665,12 @@ function eZ({
     let r = eq(t, u).analyticsName;
     if (trackEventAnalytics("properties-panel-select-tab", {
       tab: r
-    }), p === NLJ.SCALE && t === FAf.PROTOTYPE && Y5.triggerAction("set-tool-default"), t === FAf.INSPECT && s) {
-      n(rcl.ENTER_INSPECT_MODE);
+    }), p === DesignGraphElements.SCALE && t === DesignWorkspace.PROTOTYPE && fullscreenValue.triggerAction("set-tool-default"), t === DesignWorkspace.INSPECT && s) {
+      n(Command.ENTER_INSPECT_MODE);
       return;
     }
     NT(t);
-    h === lyf.PREVIEW && (t === FAf.COMMENT ? Y5.triggerAction("set-tool-comments") : Y5.triggerAction("set-tool-default"));
+    h === ViewType.PREVIEW && (t === DesignWorkspace.COMMENT ? fullscreenValue.triggerAction("set-tool-comments") : fullscreenValue.triggerAction("set-tool-default"));
   }, {
     recordingKey: Pt(t, "tabs")
   });
@@ -711,19 +711,19 @@ export function $$e20({
   let m = useDispatch();
   let g = aV();
   let f = _$$b("guid");
-  let _ = fn(E7(f));
+  let _ = isValidSessionLocalID(normalizeValue(f));
   let b = useCallback(e => {
-    _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), glU?.selectStyle(n3.INVALID, IA.INVALID)) : e.event.keyCode === Uz.F && glU?.selectStyle(n3.INVALID, IA.INVALID));
+    _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), Fullscreen?.selectStyle(n3.INVALID, IA.INVALID)) : e.event.keyCode === Uz.F && Fullscreen?.selectStyle(n3.INVALID, IA.INVALID));
   }, [_]);
   let C = useSelector(e => e.loadingState);
   let j = VP(C, "edit_button_upgrading_to_edit");
   let v = g || j;
   let S = useCallback(() => {
-    glU?.selectStyle(n3.INVALID, IA.INVALID);
+    Fullscreen?.selectStyle(n3.INVALID, IA.INVALID);
     m(sw());
     m(_$$B());
   }, [m]);
-  let T = e === FAf.COMMENT;
+  let T = e === DesignWorkspace.COMMENT;
   let N = useCallback(() => void 0, []);
   let I = function (e) {
     let t = p8("currentPage") || "0:1";
@@ -788,14 +788,14 @@ function e4({
 }) {
   let d = _$$e();
   let m = _$$b("guid");
-  let f = fn(E7(m));
-  let x = e === FAf.COMMENT;
-  let y = p8("topLevelMode") === lyf.HISTORY;
+  let f = isValidSessionLocalID(normalizeValue(m));
+  let x = e === DesignWorkspace.COMMENT;
+  let y = p8("topLevelMode") === ViewType.HISTORY;
   let b = function () {
     let e = qw();
     return "number" != typeof e || e < e9 ? (UK().propertiesPanelSplitPosition.set(e9), e9) : e;
   }();
-  let k = ut(Ez5?.uiState().inProductHelpSidePanelWidth, 0);
+  let k = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);
   let {
     inProductHelpViewType
   } = A5();
@@ -811,7 +811,7 @@ function e4({
   let $ = tS();
   let Y = fk($);
   let X = o3(nt.newResizablePanel);
-  let q = ut(UK().renderRulers, !1);
+  let q = getObservableValue(UK().renderRulers, !1);
   let J = _$$T();
   let Z = getFeatureFlags().properties_panel_resize_lag_fix;
   let Q = Xr(At);
@@ -921,7 +921,7 @@ function e6({
 }) {
   let n = _$$e();
   let i = CA();
-  let l = ut(UK().renderRulers, !1);
+  let l = getObservableValue(UK().renderRulers, !1);
   let a = _$$T();
   return jsx(lY, {
     className: g()(ux, Dm, {
@@ -959,7 +959,7 @@ let e9 = function (e) {
   return t;
 }(uj0);
 function te(e) {
-  let t = qE(e, e9, e7);
+  let t = clamp(e, e9, e7);
   UK().propertiesPanelSplitPosition.set(t);
   getFeatureFlags().properties_panel_resize_lag_fix && document.documentElement.style.setProperty("--properties-panel-width", `${t}px`);
 }

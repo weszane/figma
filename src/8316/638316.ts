@@ -9,10 +9,10 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { E as _$$E } from "../905/632989";
 import { J } from "../905/341359";
 import { l as _$$l } from "../905/745972";
-import { AS, to } from "../905/156213";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
 import { A as _$$A } from "../5132/237216";
 import { V4 } from "../figma_app/808294";
@@ -29,10 +29,10 @@ let w = {
   "ui8.net/": "UI8",
   "lemonsqueezy.com/": "Lemon Squeezy"
 };
-let v = Ju(function (e) {
+let v = registerModal(function (e) {
   let t = useDispatch();
   let n = () => {
-    t(AS());
+    t(hideModalHandler());
   };
   let s = hS({
     ...e,
@@ -120,7 +120,7 @@ export function $$P0({
     lT(e) && (f = !0, u = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked"));
   }
   let j = () => {
-    x(to({
+    x(showModalHandler({
       type: v,
       data: {
         thirdPartyM10nUrl: c

@@ -1,4 +1,4 @@
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
 import { isDevEnvironment } from "../figma_app/169182";
 import { WB } from "../905/761735";
@@ -6,10 +6,10 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
-import { nF as _$$nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { WW, yT, TP } from "../figma_app/349248";
 let $$m6 = NC("REPO_SET_SELECTED_BRANCH");
-let $$h2 = _$$nF((e, {
+let $$h2 = createOptimistThunk((e, {
   repo: t,
   name: i
 }) => {
@@ -21,7 +21,7 @@ let $$h2 = _$$nF((e, {
     userInitiated: !0
   }));
 });
-let $$g10 = _$$nF((e, {
+let $$g10 = createOptimistThunk((e, {
   repo: t,
   onError: i,
   onSuccess: n,
@@ -45,16 +45,16 @@ let $$g10 = _$$nF((e, {
   h && WB().optimisticallyCreate(h, u);
 });
 let $$f0 = NC("REPO_PERMISSIONS_PUT");
-let $$_12 = MM("REPO_PUT", async (e, {
+let $$_12 = createOptimistAction("REPO_PUT", async (e, {
   repo: t,
   userInitiated: i
 }, {
   optimistId: r
 }) => {
   i && (await XHR.put(`/api/repo/${t.id}`, t).then(t => {
-    e.dispatch(_$$c(r));
+    e.dispatch(createOptimistCommitAction(r));
   }).catch(t => {
-    e.dispatch(_$$r(r));
+    e.dispatch(createOptimistRevertAction(r));
     e.dispatch(F.enqueue({
       message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
       error: !0

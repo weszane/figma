@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { _ } from "../905/302698";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 function o({
   children: e,
   manager: t,
@@ -15,7 +15,7 @@ function o({
   return jsx("div", {
     ref: l,
     ...d,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...i,
     className: r,
     role: "tablist",

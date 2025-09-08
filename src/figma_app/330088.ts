@@ -1,4 +1,4 @@
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 function i() {
   return new Date(Date.now() - 6e4);
 }
@@ -6,7 +6,7 @@ export function $$a2(e) {
   return null !== e && e.createdAt > i();
 }
 export function $$s3(e) {
-  return [NLJ.NONE, NLJ.SELECT].includes(e);
+  return [DesignGraphElements.NONE, DesignGraphElements.SELECT].includes(e);
 }
 export function $$o1(e, t) {
   return t === e?.creatorId;

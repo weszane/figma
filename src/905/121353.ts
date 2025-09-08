@@ -49,7 +49,7 @@ import { J as _$$J3 } from "../905/296347";
 import { h as _$$h2 } from "../905/214561";
 import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { $$in, WX } from "../figma_app/350203";
 import { j6, fu } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
@@ -75,7 +75,7 @@ function ep({
   } = j6();
   let Y = _$$H(trackEvent);
   let Q = useCallback(() => {
-    p(Ce());
+    p(hideModal());
     Y.current($$in, {
       step: WX.CLOSED
     });

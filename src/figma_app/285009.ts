@@ -1,4 +1,4 @@
-import { daH, Ez5, xbm } from "../figma_app/763686";
+import { ColorOptions, AppStateTsApi, BorderStyle } from "../figma_app/763686";
 import { F } from "../905/989956";
 import { BV, Mr } from "../figma_app/153399";
 import { uM, wv, Iz, g5 } from "../905/888175";
@@ -20,25 +20,25 @@ let $$c5 = {
 };
 let $$u7 = [{
   type: "SOLID",
-  color: BV(daH.BLACK, "base")
+  color: BV(ColorOptions.BLACK, "base")
 }];
 let $$p12 = wv;
 let $$_13 = 1;
 let $$h0 = [{
   type: "SOLID",
-  color: BV(daH.HIGHLIGHT_YELLOW, "highlight")
+  color: BV(ColorOptions.HIGHLIGHT_YELLOW, "highlight")
 }];
 let $$m3 = [{
   type: "SOLID",
-  color: BV(daH.WHITE, "base")
+  color: BV(ColorOptions.WHITE, "base")
 }];
 export function $$g1() {
-  return BV(Ez5?.uiState().showUI3Colors.getCopy() ? daH.STICKY_GRAY_UI3 : daH.STICKY_GRAY_LIGHT, "sticky");
+  return BV(AppStateTsApi?.uiState().showUI3Colors.getCopy() ? ColorOptions.STICKY_GRAY_UI3 : ColorOptions.STICKY_GRAY_LIGHT, "sticky");
 }
-let $$f10 = F.parse(Mr(daH.WHITE));
-let $$E11 = F.parse(Mr(daH.GRAY_DARK, "rgba(0,0,0,0)"));
-let $$y6 = xbm.SOLID;
-let $$b4 = BV(daH.GRAY, "baseLight");
+let $$f10 = F.parse(Mr(ColorOptions.WHITE));
+let $$E11 = F.parse(Mr(ColorOptions.GRAY_DARK, "rgba(0,0,0,0)"));
+let $$y6 = BorderStyle.SOLID;
+let $$b4 = BV(ColorOptions.GRAY, "baseLight");
 export const Dq = $$h0;
 export const E$ = $$g1;
 export const EC = $$d2;

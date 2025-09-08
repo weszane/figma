@@ -1,10 +1,10 @@
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 let $$i3 = "delightful-toolbar";
 let $$a6 = "Delightful Toolbar";
 let $$s11 = "delightful_toolbar";
 let $$o8 = "delightful-toolbar-submenu";
 let $$l7 = "whiteboard-ui3-toolbelt";
-let $$d12 = NLJ.VECTOR_PENCIL;
+let $$d12 = DesignGraphElements.VECTOR_PENCIL;
 let $$c13 = "sticky";
 let $$u0 = "shapes";
 let $$p9 = "toolbelt-peeking-rectangle";

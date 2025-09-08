@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useMemo } from "react";
-import { M } from "../905/581092";
-import { r as _$$r } from "../905/577641";
-import { qJ, Ju } from "../905/955878";
+import { useExposedRef } from "../905/581092";
+import { defaultComponentAttribute } from "../905/577641";
+import { isEventTargetOutside, preventAndStopEvent } from "../905/955878";
 import { C7 } from "../905/117474";
 import { F } from "../905/768014";
 import { v } from "../905/475481";
@@ -19,17 +19,17 @@ let $$h0 = forwardRef(({
   htmlAttributes: t = {},
   ...i
 }, h) => {
-  let g = M(h);
+  let g = useExposedRef(h);
   let f = useRef(null);
   let _ = useMemo(() => C7(g, {
     criteria: "focusable"
   }), []);
   return jsx("div", {
     ref: g,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...v(t, i, {
       onFocus: e => {
-        if (qJ(e)) return;
+        if (isEventTargetOutside(e)) return;
         let t = g.current;
         if (!t) return;
         let i = !t.contains(e.relatedTarget);
@@ -48,7 +48,7 @@ let $$h0 = forwardRef(({
         g.current.contains(e.relatedTarget) || f.current || (f.current = e.target);
       },
       onKeyDownCapture: t => {
-        if (!qJ(t)) {
+        if (!isEventTargetOutside(t)) {
           switch (t.code) {
             case "Tab":
               f.current = t.target;
@@ -75,11 +75,11 @@ let $$h0 = forwardRef(({
             default:
               return;
           }
-          Ju(t);
+          preventAndStopEvent(t);
         }
       },
       onKeyDown: t => {
-        if (!(qJ(t) || y(t))) {
+        if (!(isEventTargetOutside(t) || y(t))) {
           switch (t.code) {
             case "ArrowRight":
             case "ArrowDown":
@@ -104,7 +104,7 @@ let $$h0 = forwardRef(({
             default:
               return;
           }
-          Ju(t);
+          preventAndStopEvent(t);
         }
       }
     }),

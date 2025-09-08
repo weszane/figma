@@ -1,15 +1,15 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent, useId } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { p as _$$p } from "../905/185998";
-import { RYP, glU } from "../figma_app/763686";
+import { ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -19,9 +19,9 @@ import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE } from "../figma_app/91703";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ZH } from "../figma_app/504823";
-import { _W } from "../905/216495";
+import { valueOrFallback } from "../905/216495";
 import { Ib } from "../905/129884";
 import { fI, JU } from "../figma_app/626177";
 import { dx } from "../figma_app/334459";
@@ -34,7 +34,7 @@ let D = e => ({
     switch (t) {
       case "DOCUMENT":
         return getI18nString("fullscreen.properties_panel.export_settings_color_profile.document", {
-          documentColorProfile: e === RYP.DISPLAY_P3 ? getI18nString("fullscreen.properties_panel.export_settings_color_profile.p3") : getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb")
+          documentColorProfile: e === ColorSpaceEnum.DISPLAY_P3 ? getI18nString("fullscreen.properties_panel.export_settings_color_profile.p3") : getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb")
         });
       case "SRGB":
         return getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb");
@@ -70,10 +70,10 @@ export class $$B5 extends PureComponent {
     super(...arguments);
     this.close = () => {
       this.props.dispatch(XE());
-      Y5.deselectProperty();
+      fullscreenValue.deselectProperty();
     };
     this.onColorProfileChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         colorProfile: e
@@ -84,49 +84,49 @@ export class $$B5 extends PureComponent {
       });
     };
     this.onUseBicubicSamplerChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         useBicubicSampler: e
       });
     };
     this.onContentsOnlyChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         contentsOnly: e
       });
     };
     this.onSVGIDChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         svgIDMode: e ? "ALWAYS" : "IF_NEEDED"
       });
     };
     this.onSVGTextOutlinesChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         svgOutlineText: e
       });
     };
     this.onUseAbsoluteBoundsChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         useAbsoluteBounds: e
       });
     };
     this.onSVGSimplifyStrokeChange = e => {
-      let t = _W(this.props.exportSettings, {});
+      let t = valueOrFallback(this.props.exportSettings, {});
       this.props.onChange({
         ...t,
         svgForceStrokeMasks: !e
       });
     };
     this.onExportQualityChange = (e, t) => {
-      let i = _W(this.props.exportSettings, {});
+      let i = valueOrFallback(this.props.exportSettings, {});
       let n = Yj(e, t);
       this.props.onChange({
         ...i,
@@ -135,16 +135,16 @@ export class $$B5 extends PureComponent {
     };
   }
   render() {
-    let e = _W(this.props.exportSettings, null);
+    let e = valueOrFallback(this.props.exportSettings, null);
     if (!e) return null;
     let t = new Point(this.props.pickerShown?.initialX, this.props.pickerShown?.initialY);
     let i = "SVG" === e.imageType && jsxs("div", {
       children: [jsx(fI, {
         className: nM,
-        children: jsx(_$$S, {
+        children: jsx(Checkbox, {
           checked: "ALWAYS" === e.svgIDMode,
           onChange: this.onSVGIDChange,
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_layer_names_using_id_attributes"),
               "data-tooltip-type": Ib.TEXT
@@ -153,12 +153,12 @@ export class $$B5 extends PureComponent {
           }),
           recordingKey: Pt(this.props, "svgID")
         })
-      }), glU && glU.shouldShowTextNodeExportOptions() && jsx(fI, {
+      }), Fullscreen && Fullscreen.shouldShowTextNodeExportOptions() && jsx(fI, {
         className: nM,
-        children: jsx(_$$S, {
+        children: jsx(Checkbox, {
           checked: !!e.svgOutlineText,
           onChange: this.onSVGTextOutlinesChange,
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_text_as_outlined_path_element"),
               "data-tooltip-type": Ib.TEXT
@@ -167,12 +167,12 @@ export class $$B5 extends PureComponent {
           }),
           recordingKey: Pt(this.props, "svgTextOutlines")
         })
-      }), glU && glU.isStrokeMaskableAsSVG() && jsx(fI, {
+      }), Fullscreen && Fullscreen.isStrokeMaskableAsSVG() && jsx(fI, {
         className: nM,
-        children: jsx(_$$S, {
+        children: jsx(Checkbox, {
           checked: !e.svgForceStrokeMasks,
           onChange: this.onSVGSimplifyStrokeChange,
-          label: jsx(_$$J, {
+          label: jsx(Label, {
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_stroke_as_inlined_path_element"),
               "data-tooltip-type": Ib.TEXT
@@ -222,23 +222,23 @@ export class $$B5 extends PureComponent {
         className: nM,
         children: jsx(_$$E, {
           name: "export_settings_use_contents_only_checkbox",
-          children: jsx(_$$S, {
+          children: jsx(Checkbox, {
             checked: !!e.contentsOnly,
             onChange: this.onContentsOnlyChange,
-            label: jsx(_$$J, {
+            label: jsx(Label, {
               children: renderI18nText("fullscreen.properties_panel.ignore_overlapping_layers")
             }),
             recordingKey: Pt(this.props, "contentsOnly")
           })
         })
-      }), glU && glU.shouldShowTextNodeExportOptions() && jsx(fI, {
+      }), Fullscreen && Fullscreen.shouldShowTextNodeExportOptions() && jsx(fI, {
         className: nM,
         children: jsx(_$$E, {
           name: "export_settings_use_absolute_bounds_checkbox",
-          children: jsx(_$$S, {
+          children: jsx(Checkbox, {
             checked: !!e.useAbsoluteBounds,
             onChange: this.onUseAbsoluteBoundsChange,
-            label: jsx(_$$J, {
+            label: jsx(Label, {
               children: renderI18nText("fullscreen.properties_panel.include_bounding_box")
             }),
             recordingKey: Pt(this.props, "useAbsoluteBounds")
@@ -272,7 +272,7 @@ export class $$B5 extends PureComponent {
   }
 }
 export function $$V6() {
-  return jsx(_$$J, {
+  return jsx(Label, {
     variant: "secondary",
     className: hD,
     htmlFor: $$G10,
@@ -314,7 +314,7 @@ export function $$z2({
 }
 export let $$H0 = "export-settings-quality";
 export function $$W9() {
-  return jsx(_$$J, {
+  return jsx(Label, {
     variant: "secondary",
     className: hD,
     htmlFor: $$H0,
@@ -363,12 +363,12 @@ export function $$Y8({
     onChange: t,
     children: [jsx(_$$c, {
       value: "all",
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: getI18nString("fullscreen.properties_panel.export_settings.slides_content.all")
       })
     }), i > 0 && jsx(_$$c, {
       value: "selection",
-      label: jsx(_$$J, {
+      label: jsx(Label, {
         children: getI18nString("fullscreen.properties_panel.export_settings.slides_content.selected", {
           numSlides: i
         })
@@ -409,7 +409,7 @@ function $({
   return null;
 }
 function Z() {
-  return jsx(_$$J, {
+  return jsx(Label, {
     variant: "secondary",
     className: hD,
     htmlFor: "export-settings-image-sampling",
@@ -477,7 +477,7 @@ function J({
   return jsx(_$$E, {
     name: "export_settings_suffix_text_input",
     children: jsx(dx, {
-      left: jsx(_$$J, {
+      left: jsx(Label, {
         variant: "secondary",
         htmlFor: a,
         className: hD,

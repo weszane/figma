@@ -1,6 +1,6 @@
 import { M3 } from "../figma_app/91703";
-import { Ce, Lo, to as _$$to } from "../905/156213";
-import { Y5 } from "../figma_app/455680";
+import { hideModal, popModalStack, showModalHandler } from "../905/156213";
+import { fullscreenValue } from "../figma_app/455680";
 import { FContainerType, FFileType, FAccessLevelType } from "../figma_app/191312";
 import { A5 } from "../figma_app/707808";
 import { n as _$$n, a as _$$a } from "../905/114254";
@@ -13,12 +13,12 @@ import { $n } from "../905/521428";
 import { N as _$$N } from "../905/551536";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ol, cD } from "../figma_app/598018";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { memo, useMemo, useCallback, useState, useEffect, useRef, useLayoutEffect } from "react";
-import { Et } from "../905/125019";
+import { sha1Hex } from "../905/125019";
 import { k as _$$k } from "../905/443820";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
@@ -98,7 +98,7 @@ import { lg } from "../figma_app/976749";
 import { M4 } from "../905/713695";
 import { B3, $o } from "../905/54042";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { c$ as _$$c$ } from "../figma_app/236327";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { n as _$$n3 } from "../figma_app/537817";
@@ -109,14 +109,14 @@ import { Cf, it } from "../905/504727";
 import { A as _$$A0 } from "../6828/814452";
 import { VJh } from "../figma_app/27776";
 import { A as _$$A1 } from "../svg/619883";
-let y = Ju(function ({
+let y = registerModal(function ({
   open: e
 }) {
   let t = useDispatch();
   let i = ol();
   let n = i?.student_team ? renderI18nText("templates.limit_modal.student") : renderI18nText("templates.limit_modal.professional");
   let a = () => {
-    t(Ce());
+    t(hideModal());
   };
   let s = hS({
     open: e,
@@ -633,7 +633,7 @@ function ta({
   let w = _$$to2();
   let C = useCallback(() => {
     w && draftSubmissionResult?.result === "success" && S();
-    o(Ce());
+    o(hideModal());
     g.current(SS, {
       step: WX.CLOSED
     });
@@ -905,7 +905,7 @@ function tI({
     onChange: i,
     children: [jsx(l9, {
       width: "fill",
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: getI18nString("templates.publishing.scope.label")
       }),
       size: "lg",
@@ -1052,7 +1052,7 @@ function tP({
   let a = t?.editorType === FFileType.SLIDES;
   let [o, l] = useAtomValueAndSetter(pz);
   return (useEffect(() => {
-    a && (l(_$$o.LIBRARY), l7.system("slides-prepare-modules-for-publish", () => glU?.createSlideModulesForPublish()));
+    a && (l(_$$o.LIBRARY), permissionScopeHandler.system("slides-prepare-modules-for-publish", () => Fullscreen?.createSlideModulesForPublish()));
   }, [a, l]), t) ? jsx(tO, {
     file: t,
     org: i,
@@ -1136,7 +1136,7 @@ function tO({
               message: t.isPublishedTemplate ? getI18nString("cooper.templates.template_updates_published") : getI18nString("cooper.templates.template_published"),
               icon: zX.CHECK
             }));
-            e(Ce());
+            e(hideModal());
           },
           onFailure: t => {
             atomStoreManager.set(ee, {
@@ -1172,7 +1172,7 @@ function tO({
     eE(null);
   }, []);
   let eP = () => {
-    y(Ce());
+    y(hideModal());
     y(_$$F.enqueue({
       message: o ? getI18nString("templates.publishing.bell.updated") : getI18nString("templates.publishing.bell.success"),
       type: "template-publish-success"
@@ -1187,7 +1187,7 @@ function tO({
     }));
   };
   let eD = () => {
-    y(Lo());
+    y(popModalStack());
   };
   let eL = useAtomWithSubscription(tR);
   let eF = hS({
@@ -1282,7 +1282,7 @@ function tO({
     type: "image"
   } : n ? "buffer" in n ? {
     ...n,
-    sha1: Et(n.buffer),
+    sha1: sha1Hex(n.buffer),
     type: "image"
   } : {
     ...n,
@@ -1306,7 +1306,7 @@ function tO({
       width: tC,
       children: jsxs(Rq, {
         onSubmit: () => {
-          t && A?.orgAccess === FAccessLevelType.SECRET && !getFeatureFlags().pro_templates_lg ? y(_$$to({
+          t && A?.orgAccess === FAccessLevelType.SECRET && !getFeatureFlags().pro_templates_lg ? y(showModalHandler({
             type: X0,
             data: {
               title: renderI18nText("templates.confirmation.publish.secret.title_v2"),
@@ -1411,7 +1411,7 @@ function tO({
     })
   }) : null;
 }
-let tD = Ju(function ({
+let tD = registerModal(function ({
   fileKey: e,
   source: t,
   open: i
@@ -1425,9 +1425,9 @@ let tD = Ju(function ({
   }) : jsx(tP, {
     source: t
   }) : null;
-}, "TemplatePublishModal", ZU.YES);
+}, "TemplatePublishModal", ModalSupportsBackground.YES);
 export function $$tL2(e, t, i) {
-  e(_$$to({
+  e(showModalHandler({
     type: tD,
     data: {
       fileKey: t,
@@ -1436,7 +1436,7 @@ export function $$tL2(e, t, i) {
   }));
 }
 export function $$tF0(e) {
-  e(_$$to({
+  e(showModalHandler({
     type: y
   }));
 }
@@ -1449,13 +1449,13 @@ export function $$tM1(e, t, i, d) {
         e(M3({
           view: A5.INVITE
         }));
-        e(Lo());
+        e(popModalStack());
       },
       dispatch: e
     });
     return;
   }
-  i === FFileType.COOPER && Y5.triggerAction("cooper-make-brand-templates", {
+  i === FFileType.COOPER && fullscreenValue.triggerAction("cooper-make-brand-templates", {
     source: d
   });
   $$tL2(e, t, d);

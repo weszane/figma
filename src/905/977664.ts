@@ -1,4 +1,4 @@
-import { qmM, _0v } from "../figma_app/763686";
+import { InteractionCpp, Axis } from "../figma_app/763686";
 import { QR } from "../figma_app/273493";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
@@ -11,10 +11,10 @@ export class $$c0 extends j {
     this.state = {
       mouseState: Dv.INACTIVE
     };
-    this._inactiveColor = qmM?.getTableNodeColorInactive() ?? 0;
-    this._selectedColor = qmM?.getTableNodeColorSelected() ?? 0;
-    this._hoverColorPrimary = qmM?.getTableNodeColorHoveredPrimary() ?? 0;
-    this._hoverColorSecondary = qmM?.getTableNodeColorHoveredSecondary() ?? 0;
+    this._inactiveColor = InteractionCpp?.getTableNodeColorInactive() ?? 0;
+    this._selectedColor = InteractionCpp?.getTableNodeColorSelected() ?? 0;
+    this._hoverColorPrimary = InteractionCpp?.getTableNodeColorHoveredPrimary() ?? 0;
+    this._hoverColorSecondary = InteractionCpp?.getTableNodeColorHoveredSecondary() ?? 0;
     this._whiteColor = QR(1, 1, 1);
   }
   handleContextMenuOpen() {}
@@ -144,7 +144,7 @@ export class $$c0 extends j {
         break;
       case Dv.HOVERED:
       case Dv.DRAGGED:
-        dw(t, activeBounds, this._getBackgroundColor(), this._getForegroundColor(), _0v.Y);
+        dw(t, activeBounds, this._getBackgroundColor(), this._getForegroundColor(), Axis.Y);
       case Dv.INACTIVE:
     }
   }

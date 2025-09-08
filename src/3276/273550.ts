@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { E } from "../905/632989";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import s from "classnames";
 import { t as _$$t } from "../905/331623";
 import { ZT } from "../figma_app/844435";
@@ -9,7 +9,7 @@ import { j } from "../905/813868";
 import { E as _$$E } from "../469e6e40/167556";
 import { P } from "../469e6e40/160324";
 import { FFileType } from "../figma_app/191312";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { b as _$$b } from "../905/635568";
 import { J } from "../469e6e40/430781";
 import { cJ, HA, Gb, DJ } from "../905/483312";
@@ -30,7 +30,7 @@ export function $$b0(e) {
     resource: e.widget,
     searchQuery: e.analytics.searchQuery
   });
-  let w = ZQ(e.widget);
+  let w = hasLocalFileId(e.widget);
   return jsxs(Fragment, {
     children: [jsxs(E, {
       className: r()({
@@ -40,7 +40,7 @@ export function $$b0(e) {
         [Gb]: e.context === FFileType.WHITEBOARD
       }),
       onClick: () => {
-        b && l7.user("insert-widget", () => {
+        b && permissionScopeHandler.user("insert-widget", () => {
           j({
             pluginID: e.widget.plugin_id,
             widgetName: e.widget.name,

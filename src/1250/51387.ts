@@ -4,7 +4,7 @@ import { M4 } from "../905/713695";
 import { Fk } from "../figma_app/167249";
 import { Q } from "../905/577205";
 import { $W } from "../905/144933";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 async function i(e) {
   await new Promise(e => setTimeout(e, 500));
   let t = {};
@@ -27,18 +27,18 @@ async function i(e) {
 }
 let _ = new class {
   constructor() {
-    this.SearchCodeSuggestionsSchemaValidator = vh();
-    this.SearchBulkCodeSuggestionsSchemaValidator = vh();
+    this.SearchCodeSuggestionsSchemaValidator = createNoOpValidator();
+    this.SearchBulkCodeSuggestionsSchemaValidator = createNoOpValidator();
   }
   searchCodeSuggestions(e) {
     return this.SearchCodeSuggestionsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/search/code_suggestions", td.toAPIParameters(e)));
+    }) => await t.post("/api/search/code_suggestions", APIParameterUtils.toAPIParameters(e)));
   }
   searchBulkCodeSuggestions(e) {
     return this.SearchBulkCodeSuggestionsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/search/code_suggestions_bulk", td.toAPIParameters(e)));
+    }) => await t.post("/api/search/code_suggestions_bulk", APIParameterUtils.toAPIParameters(e)));
   }
 }();
 let $$u4 = M4.Query({

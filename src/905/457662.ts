@@ -1,5 +1,5 @@
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/128080";
 import $$l from "../vendor/241899";
@@ -14,7 +14,7 @@ function u(e, t, i, n, a) {
   let u = e[c];
   l.every(t => e[t] === u) && (s = u);
   let p = t[n] ? d()(t, l) : t[a];
-  o()(p, s) || (l7.user(`update-${a}`, () => {
+  o()(p, s) || (permissionScopeHandler.user(`update-${a}`, () => {
     "number" == typeof s ? (l.forEach(e => {
       t[e] = s;
     }), t[n] = !1, t[a] = s) : (t[n] = !0, l.forEach(e => {
@@ -59,7 +59,7 @@ export class $$p1 {
       });
       u(a, i, r, this.isDisaggregated, this.aggregatedValue);
     });
-    i !== zk.NO && r.current && glU && glU.triggerAction("commit", {});
+    i !== zk.NO && r.current && Fullscreen && Fullscreen.triggerAction("commit", {});
   }
 }
 export class $$m0 {
@@ -101,7 +101,7 @@ export class $$m0 {
         [this.key]: a
       }, i, r, this.isDisaggregated, this.aggregatedValue);
     });
-    i !== zk.NO && r.current && glU && glU.triggerAction("commit", {});
+    i !== zk.NO && r.current && Fullscreen && Fullscreen.triggerAction("commit", {});
   }
 }
 export const l = $$m0;

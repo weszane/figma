@@ -4,12 +4,12 @@ import { trackEventAnalytics } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { Jm } from "../figma_app/387599";
-import { AS, to } from "../905/156213";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { HI } from "../figma_app/173838";
 import { iZ } from "../905/372672";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { x as _$$x } from "../figma_app/856733";
-export let $$p0 = Ju(function ({
+export let $$p0 = registerModal(function ({
   hubFileId: e,
   inResourceHub: t,
   onUseHubFile: r,
@@ -22,7 +22,7 @@ export let $$p0 = Ju(function ({
   return p ? jsx(_$$x, {
     onAgree: () => {
       if (r) {
-        x(AS());
+        x(hideModalHandler());
         r();
       } else {
         let e = gE(e => {
@@ -30,7 +30,7 @@ export let $$p0 = Ju(function ({
             hubFileId: p.id,
             searchSessionId: h
           });
-          x(to({
+          x(showModalHandler({
             type: _$$_,
             data: {
               payload: e
@@ -40,7 +40,7 @@ export let $$p0 = Ju(function ({
           skipWorkspaceSelection: t,
           userId: f?.id
         });
-        x(AS());
+        x(hideModalHandler());
         x(e({
           id: p.id,
           viewer_mode: p.viewerMode,
@@ -52,5 +52,5 @@ export let $$p0 = Ju(function ({
     },
     ...m
   }) : null;
-}, "APPLE_EULA_MODAL_ON_USE_HUBFILE_TYPE", ZU.YES);
+}, "APPLE_EULA_MODAL_ON_USE_HUBFILE_TYPE", ModalSupportsBackground.YES);
 export const F = $$p0;

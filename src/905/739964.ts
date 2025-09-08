@@ -38,11 +38,11 @@ import { FOrganizationLevelType, FFileType } from "../figma_app/191312";
 import { kQI } from "../figma_app/43951";
 import { vr, LN } from "../figma_app/514043";
 import { X$ } from "../figma_app/465071";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Ju, IX } from "../905/712921";
 import { Bi } from "../905/652992";
 import { E as _$$E } from "../figma_app/126651";
-import { Ju as _$$Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
 import { N as _$$N } from "../905/809096";
 import { utilityNoop } from "../figma_app/918700";
@@ -569,7 +569,7 @@ function ec(e) {
     case _$$F2.Plan.ORG:
       t = () => {
         startOrgUpgradeFlow({
-          upsellSource: upsellSource ?? _$$b.UNSET
+          upsellSource: upsellSource ?? UpsellModalType.UNSET
         });
       };
       break;
@@ -711,6 +711,6 @@ function eu(e) {
     ...r
   });
 }
-export let $$ep0 = _$$Ju($$ed1, "ConsumptionPaywallModalPlansPricing");
+export let $$ep0 = registerModal($$ed1, "ConsumptionPaywallModalPlansPricing");
 export const DV = $$ep0;
 export const bP = $$ed1;

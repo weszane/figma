@@ -4,11 +4,11 @@ import { A } from "../vendor/723372";
 import { i } from "../905/97346";
 import { $ } from "../905/61417";
 import { GX } from "../905/893109";
-import { r as _$$r } from "../905/577641";
-import { Ju } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { preventAndStopEvent } from "../905/955878";
 import { qE, n$, RZ, jN, CP } from "../905/875826";
-import { Bt } from "../905/881471";
-import { Qv } from "../905/959312";
+import { isAppleDevice } from "../905/881471";
+import { useRecording } from "../905/959312";
 function h(e, t, i) {
   return ((e = qE(e, t, i)) - t) / (i - t);
 }
@@ -43,7 +43,7 @@ let $$A2 = forwardRef(function (e, t) {
     recordingKey: t,
     ...i
   }) {
-    let n = Qv(e, {
+    let n = useRecording(e, {
       eventName: "change",
       recordingKey: t
     }, [e]);
@@ -104,7 +104,7 @@ let $$A2 = forwardRef(function (e, t) {
       F.current = !1;
     },
     onDrag(e) {
-      let t = Bt && e.ctrlKey || F.current;
+      let t = isAppleDevice && e.ctrlKey || F.current;
       W(g(function (e, t, i, n) {
         if (!t || 0 === t.length) return e;
         let r = t.map(e => h(e, i, n));
@@ -127,7 +127,7 @@ let $$A2 = forwardRef(function (e, t) {
     children: jsx(_.Provider, {
       value: H,
       children: jsxs("div", {
-        ..._$$r,
+        ...defaultComponentAttribute,
         ...O,
         ...Z,
         ref: D,
@@ -167,21 +167,21 @@ let $$A2 = forwardRef(function (e, t) {
                 break;
               case "Backspace":
               case "Delete":
-                Ju(e);
+                preventAndStopEvent(e);
                 null != defaultValue && (t = defaultValue);
                 break;
               case "KeyS":
-                Ju(e);
+                preventAndStopEvent(e);
                 F.current = !0;
                 return;
               case "Escape":
-                Ju(e);
+                preventAndStopEvent(e);
                 e.currentTarget.blur();
                 return;
               default:
                 return;
             }
-            Ju(e);
+            preventAndStopEvent(e);
             loop && (t = CP(t, min, max, step));
             W(t = qE(t, min, max), e, !0);
           },

@@ -9,16 +9,16 @@ import { h as _$$h2 } from "../905/123399";
 import { b as _$$b } from "../905/874849";
 import { X } from "../905/399133";
 import { z } from "../905/821223";
-import { Ez5, mrc } from "../figma_app/763686";
+import { AppStateTsApi, TextAlignmentOptions } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { oV, _W } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { fI } from "../figma_app/626177";
 import { vK } from "../905/566585";
 import { DE, fn } from "../figma_app/811257";
@@ -33,7 +33,7 @@ export function $$C0(e) {
   let r = jsx(_$$E, {
     name: "text_align_vertical",
     children: jsx($$R1, {
-      textAlignVertical: e.textAlignVertical || oV,
+      textAlignVertical: e.textAlignVertical || MIXED_MARKER,
       recordingKey: Pt(e.recordingKey, "textAlignVertical")
     })
   });
@@ -75,9 +75,9 @@ export function $$O3({
   recordingKey: e,
   loggingCallback: t
 }) {
-  let r = kl("textAlignHorizontal") || oV;
-  let u = _W(kl("missingFont"), !1);
-  let p = !((0 | J2(Ez5.propertiesPanelState().enabledTypePanelControls)) & 1 << mrc.TEXT_ALIGN_HORIZONTAL);
+  let r = kl("textAlignHorizontal") || MIXED_MARKER;
+  let u = valueOrFallback(kl("missingFont"), !1);
+  let p = !((0 | getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls)) & 1 << TextAlignmentOptions.TEXT_ALIGN_HORIZONTAL);
   let _ = vK();
   debug(!!(r || p), "TypePanel missing textAlignHorizontal");
   return jsxs(bL, {
@@ -87,7 +87,7 @@ export function $$O3({
     value: r,
     onChange: e => {
       t && t();
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         textAlignHorizontal: e
       });
     },
@@ -113,15 +113,15 @@ export function $$O3({
   });
 }
 export function $$R1(e) {
-  let t = _W(kl("missingFont"), !1);
-  let r = !((0 | J2(Ez5.propertiesPanelState().enabledTypePanelControls)) & 1 << mrc.TEXT_ALIGN_VERTICAL);
+  let t = valueOrFallback(kl("missingFont"), !1);
+  let r = !((0 | getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls)) & 1 << TextAlignmentOptions.TEXT_ALIGN_VERTICAL);
   let i = vK();
   return jsxs(bL, {
     value: e.textAlignVertical,
     onChange: e => (getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
       key: "textAlignVertical",
       value: e
-    }), Y5.updateSelectionProperties({
+    }), fullscreenValue.updateSelectionProperties({
       textAlignVertical: e
     })),
     readonly: t || r,

@@ -6,7 +6,7 @@ import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Df, Mv, AY, QY } from "../figma_app/770088";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { I_ } from "../905/234821";
 import { iZ } from "../905/372672";
 import { kT } from "../905/380385";
@@ -61,7 +61,7 @@ export function $$y0(e) {
     }));
   };
   let x = () => {
-    i(to({
+    i(showModalHandler({
       type: _$$E,
       data: {
         comment: e.comment,

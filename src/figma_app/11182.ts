@@ -1,11 +1,11 @@
 import { Dk } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Np } from "../figma_app/193867";
 import { o as _$$o } from "../905/721794";
-import { nF } from "../905/350402";
-let $$c3 = nF((e, t) => {
+import { createOptimistThunk } from "../905/350402";
+let $$c3 = createOptimistThunk((e, t) => {
   let r = t.stringToCopy;
   let s = {
     withLineBreaks: !(t.ignoreLineBreaks ?? !0),
@@ -18,7 +18,7 @@ let $$c3 = nF((e, t) => {
     }));
   });
 });
-let $$u0 = nF((e, t) => {
+let $$u0 = createOptimistThunk((e, t) => {
   let r = t.emailList;
   let s = r.length;
   let o = r.join("; ");
@@ -33,7 +33,7 @@ let $$u0 = nF((e, t) => {
   });
 });
 export function $$p2(e) {
-  return nF((e, t) => {
+  return createOptimistThunk((e, t) => {
     let r = t.selector.selectedViewToPath(t.selectedView, t.data);
     if (!r) return;
     let n = new URL(r, document.baseURI).href;
@@ -42,7 +42,7 @@ export function $$p2(e) {
     }));
   })(e);
 }
-let $$_4 = nF((e, t) => {
+let $$_4 = createOptimistThunk((e, t) => {
   let r = new URL(Np(e.getState(), t), document.baseURI).href;
   let n = (() => {
     if ("folder" === t.view) return "project";
@@ -52,7 +52,7 @@ let $$_4 = nF((e, t) => {
     linkType: n
   }));
 });
-let $$h1 = nF(async (e, t) => {
+let $$h1 = createOptimistThunk(async (e, t) => {
   let r;
   let o = t.url;
   switch (t.linkType ?? "selection") {
@@ -80,7 +80,7 @@ let $$h1 = nF(async (e, t) => {
       message: r
     }));
   } catch {
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: _$$o,
       data: {
         link: o

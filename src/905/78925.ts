@@ -1,8 +1,8 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useRef, useCallback } from "react";
 import { lQ } from "../905/934246";
-import { Z_n, rXF, rcl } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariableDataType, VariableResolvedDataType, Command } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { Jo, If } from "../figma_app/565242";
@@ -13,7 +13,7 @@ import { gL } from "../figma_app/618433";
 import { dx } from "../figma_app/649254";
 import { U } from "../905/492359";
 import { wv } from "../figma_app/328825";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { di } from "../figma_app/149989";
 export function $$b0({
   onClose: e,
@@ -68,25 +68,25 @@ export function $$b0({
     if (!collection) return;
     let i = (e, i, n) => {
       let r = {
-        type: Z_n.CMS_ALIAS,
+        type: VariableDataType.CMS_ALIAS,
         resolvedType: e,
         value: {
           collectionId: collection.id,
           fieldSchemaId: t.value.id
         }
       };
-      l7.user(n, () => {
+      permissionScopeHandler.user(n, () => {
         selectedNodes?.forEach(e => e.getNodesForCmsBinding(collection.id).forEach(e => e.updateVariableConsumption(i, r)));
       });
     };
     switch (t.value.fieldType) {
       case _j.RICH_TEXT:
-        selectedNodes?.every(e => "CMS_RICH_TEXT" === e.type) ? i(rXF.JS_RUNTIME_ALIAS, "CMS_SERIALIZED_RICH_TEXT_DATA", "dakota-set-rich-text-binding") : selectedNodes?.every(e => "TEXT" === e.type) && (selectedNodes?.every(e => !e.isInstanceSublayer) ? Y5.triggerActionEnumInUserEditScope(rcl.CREATE_CMS_RICH_TEXT, {
+        selectedNodes?.every(e => "CMS_RICH_TEXT" === e.type) ? i(VariableResolvedDataType.JS_RUNTIME_ALIAS, "CMS_SERIALIZED_RICH_TEXT_DATA", "dakota-set-rich-text-binding") : selectedNodes?.every(e => "TEXT" === e.type) && (selectedNodes?.every(e => !e.isInstanceSublayer) ? fullscreenValue.triggerActionEnumInUserEditScope(Command.CREATE_CMS_RICH_TEXT, {
           args: {
             collectionId: collection.id,
             fieldId: t.value.id
           }
-        }) : getFeatureFlags().cms_rt_instances && selectedNodes?.every(e => e.isInstanceSublayer) && Y5.triggerActionEnumInUserEditScope(rcl.CREATE_CMS_RICH_TEXT_IN_INSTANCE, {
+        }) : getFeatureFlags().cms_rt_instances && selectedNodes?.every(e => e.isInstanceSublayer) && fullscreenValue.triggerActionEnumInUserEditScope(Command.CREATE_CMS_RICH_TEXT_IN_INSTANCE, {
           args: {
             collectionId: collection.id,
             fieldId: t.value.id
@@ -94,7 +94,7 @@ export function $$b0({
         }));
         break;
       case _j.PLAIN_TEXT:
-        i(rXF.STRING, "TEXT_DATA", "dakota-set-text-binding");
+        i(VariableResolvedDataType.STRING, "TEXT_DATA", "dakota-set-text-binding");
         break;
       case _j.DATE:
         Jo(collection.id, t.value.id);

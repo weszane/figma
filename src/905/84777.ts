@@ -5,12 +5,12 @@ import s from "lodash-es/mapValues";
 import { reportError } from "../905/11";
 import { y as _$$y } from "../figma_app/681090";
 import { M4, IT } from "../905/713695";
-import { YV } from "../figma_app/181241";
+import { createMetaValidator } from "../figma_app/181241";
 import { F6 } from "../905/712921";
 var o = s;
 let m = new class {
   constructor() {
-    this.RatesSchemaValidator = YV("RatesSchemaValidator", F6, null);
+    this.RatesSchemaValidator = createMetaValidator("RatesSchemaValidator", F6, null);
   }
   getRates(e) {
     return this.RatesSchemaValidator.validate(async ({

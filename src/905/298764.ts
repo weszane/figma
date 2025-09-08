@@ -1,15 +1,15 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.ActivityLogsSchemaValidator = vh();
-    this.LastEditSchemaValidator = vh();
-    this.RecentSchemaValidator = vh();
+    this.ActivityLogsSchemaValidator = createNoOpValidator();
+    this.LastEditSchemaValidator = createNoOpValidator();
+    this.RecentSchemaValidator = createNoOpValidator();
   }
   getActivityLogs(e) {
     return this.ActivityLogsSchemaValidator.validate(async ({
       xr: t
     }) => {
-      let i = td.toAPIParameters(e);
+      let i = APIParameterUtils.toAPIParameters(e);
       return await t.get("/api/activity_logs", i);
     });
   }
@@ -21,7 +21,7 @@ export let $$r0 = new class {
   getRecent(e) {
     return this.RecentSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/activity_logs/recent/${e.orgUserId}`, td.toAPIParameters({
+    }) => await t.get(`/api/activity_logs/recent/${e.orgUserId}`, APIParameterUtils.toAPIParameters({
       pageSize: e.pageSize
     })));
   }

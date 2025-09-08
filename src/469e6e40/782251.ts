@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { Osy } from "../figma_app/763686";
+import { SelectionPaintHelpers } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { y as _$$y } from "../figma_app/404310";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -52,7 +52,7 @@ export function $$f0({
             trackEventAnalytics("Show Selection Paints For Large Selection", {
               fileKey: g || ""
             });
-            Osy.ignoreLimitWhenCollectingPaints();
+            SelectionPaintHelpers.ignoreLimitWhenCollectingPaints();
           },
           children: renderI18nText("dev_handoff.selection_colors.show_colors")
         })
@@ -78,8 +78,8 @@ function j({
   return jsx(Gz, {
     color: e,
     format: i,
-    onMouseEnter: () => Osy.highlightOnlySameStyleInSublayers(styleGUIDs),
-    onMouseLeave: () => Osy.highlightOnlySameStyleInSublayers([])
+    onMouseEnter: () => SelectionPaintHelpers.highlightOnlySameStyleInSublayers(styleGUIDs),
+    onMouseLeave: () => SelectionPaintHelpers.highlightOnlySameStyleInSublayers([])
   });
 }
 function y({

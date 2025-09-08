@@ -1,6 +1,6 @@
-import { Nfd } from "../figma_app/763686";
+import { PanelType } from "../figma_app/763686";
 import { SceneGraphUnavailableError } from "../figma_app/518682";
-import { fn, sH } from "../905/871411";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../905/612521";
@@ -28,7 +28,7 @@ export function $$g3(e, t, i, n, r, a = !1) {
   return s;
 }
 export function $$f6(e, t) {
-  t && fn(sH(t)) && (e["node-id"] = EO(t));
+  t && isValidSessionLocalID(parseSessionLocalID(t)) && (e["node-id"] = EO(t));
 }
 export function $$_2(e, t) {
   t && (e["version-id"] = t);
@@ -42,7 +42,7 @@ export function $$y10(e, t) {
   return e;
 }
 export function $$b0(e, t) {
-  if (t && fn(sH(t))) try {
+  if (t && isValidSessionLocalID(parseSessionLocalID(t))) try {
     let i = getSingletonSceneGraph().get(t)?.type;
     i && ["CANVAS", "DOCUMENT"].includes(i || "") && (e.p = "f");
   } catch (e) {
@@ -51,18 +51,18 @@ export function $$b0(e, t) {
 }
 export function $$v1(e) {
   switch (e) {
-    case Nfd.CODE:
+    case PanelType.CODE:
       return "code";
-    case Nfd.DAKOTA:
+    case PanelType.DAKOTA:
       return "cms";
-    case Nfd.SETTINGS:
+    case PanelType.SETTINGS:
       return "settings";
-    case Nfd.FILE:
+    case PanelType.FILE:
       return null;
   }
 }
 export function $$I5(e) {
-  return "code" === e && (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) ? Nfd.CODE : "cms" === e && getFeatureFlags().dakota ? Nfd.DAKOTA : "settings" === e ? Nfd.SETTINGS : Nfd.FILE;
+  return "code" === e && (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) ? PanelType.CODE : "cms" === e && getFeatureFlags().dakota ? PanelType.DAKOTA : "settings" === e ? PanelType.SETTINGS : PanelType.FILE;
 }
 export const H_ = $$b0;
 export const Hz = $$v1;

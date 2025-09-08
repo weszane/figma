@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { createContext, useContext, useState, useLayoutEffect, useRef, useCallback } from "react";
 import { createPortal } from "../vendor/944059";
-import { c as _$$c } from "../905/177375";
+import { updateRefOrCallback } from "../905/177375";
 import { A } from "../905/268204";
 import { g } from "../905/319892";
 let d = new Set();
@@ -52,7 +52,7 @@ export function $$g5({
 export function $$f3(e) {
   let t = useRef(null);
   return useCallback(r => {
-    _$$c(e, r);
+    updateRefOrCallback(e, r);
     null == r ? d.$$delete(t.current) : d.add(r);
     t.current = r;
   }, [e]);

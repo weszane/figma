@@ -10,7 +10,7 @@ import { gS } from "../figma_app/740025";
 import { UK } from "../figma_app/740163";
 import { e as _$$e, n as _$$n } from "../figma_app/48514";
 import { td } from "../905/845253";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Eh, cb } from "../figma_app/12796";
 import { mapEditorTypeToFileType, mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 let E = {};
@@ -67,7 +67,7 @@ export function $$T3() {
   };
 }
 export function $$I0() {
-  let e = J2(UK().enableCodegenMcpServer);
+  let e = getObservableOrFallback(UK().enableCodegenMcpServer);
   let t = _I();
   let r = Fc();
   let i = $k();

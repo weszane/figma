@@ -1,6 +1,6 @@
 import { x as _$$x } from "../905/89282";
 import { K } from "../905/591700";
-import { uCV } from "../figma_app/763686";
+import { UserAppType } from "../figma_app/763686";
 import { EU, tz, Rx, rb, CJ, WF, Lz, eZ, jw, TC, tg, nn, A2, V3, qQ, w4, tO, dJ, d1, yy, pG, RU, yR, lM, c2, di, Vm, Ag, sG, d_, p6, rf, k0, IW, l5, ZD, RN, LY, mk, Fe, uH, Z3, vv, qV, b_, Bj, be, wm, Gh, aO, $C, xJ, Ud, Iz, A1, _L, rm, qP, W3, M0, a5, S_, uG, gQ, Bz } from "../figma_app/548577";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -266,7 +266,7 @@ export let $$K0 = {
   CommonApp: () => ({
     ...LO,
     ..._$$N2(),
-    appType: () => uCV.PrototypeLib
+    appType: () => UserAppType.PrototypeLib
   }),
   AccessibleAreasBindings: () => _$$H,
   OOMHelpers: () => new W(),

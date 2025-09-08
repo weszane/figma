@@ -1,7 +1,7 @@
 import { Pe, sU, Lz, Z9, dT, NZ, AZ, sg, oQ, vX, w4, Mg, DH, $w, UY, bu, Ux, yU, t$, Q2, pX } from "../figma_app/770359";
 import { lV } from "../figma_app/617606";
 import { getInitialOptions } from "../figma_app/169182";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Ho, a5 } from "../figma_app/337924";
 import { UM } from "../figma_app/114522";
 import { Ac, c2, uH } from "../figma_app/346422";
@@ -109,10 +109,10 @@ export function $$_0() {
   }]));
   e.push(w4.of([{
     key: "Mod-z",
-    run: () => (Y5.triggerActionInUserEditScope("undo"), !0)
+    run: () => (fullscreenValue.triggerActionInUserEditScope("undo"), !0)
   }, {
     key: "Mod-Shift-z",
-    run: () => (Y5.triggerActionInUserEditScope("redo"), !0)
+    run: () => (fullscreenValue.triggerActionInUserEditScope("redo"), !0)
   }]));
   e.push(Lz.domEventHandlers({
     contextmenu: e => (e.preventDefault(), !0),

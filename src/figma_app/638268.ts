@@ -2,14 +2,14 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef, useState, useContext, useEffect, useMemo, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
-import { tbL } from "../figma_app/763686";
+import { TextDecorationType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { A as _$$A } from "../vendor/850789";
 import { rf } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { Ui } from "../905/709171";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { w$ } from "../figma_app/646357";
 import { kH } from "../905/309735";
@@ -51,18 +51,18 @@ export let $$O0 = memo(function ({
   let V = kl("numTextStyleOverrides");
   let H = kl("textStyleOverrideType");
   let z = kl("anyNonFrameLikesSelected");
-  let W = !!(gl(z) || z);
+  let W = !!(isInvalidValue(z) || z);
   let K = function (e, t) {
-    if (!e || gl(e)) return "";
-    if (1 === e) switch (tbL[t]) {
-      case tbL.SEMANTIC_WEIGHT:
+    if (!e || isInvalidValue(e)) return "";
+    if (1 === e) switch (TextDecorationType[t]) {
+      case TextDecorationType.SEMANTIC_WEIGHT:
         return "B";
-      case tbL.SEMANTIC_ITALIC:
+      case TextDecorationType.SEMANTIC_ITALIC:
         return "I";
     }
     return e.toString();
   }(V, H);
-  let Y = "TEXT" === P && void 0 !== V && !gl(V) && V > 0 && K.length > 0;
+  let Y = "TEXT" === P && void 0 !== V && !isInvalidValue(V) && V > 0 && K.length > 0;
   let $ = AH(L?.key || null, L);
   let X = useMemo(() => L ? Ui(L, t) ? {
     kind: AT.LOCAL,

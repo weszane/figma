@@ -1,9 +1,9 @@
 import { NC } from "../905/17179";
-import { vh } from "../figma_app/181241";
-import { nF } from "../905/350402";
+import { createNoOpValidator } from "../figma_app/181241";
+import { createOptimistThunk } from "../905/350402";
 let a = new class {
   constructor() {
-    this.UsersUserIdsSchemaValidator = vh();
+    this.UsersUserIdsSchemaValidator = createNoOpValidator();
   }
   getUsersUserIds(e) {
     return this.UsersUserIdsSchemaValidator.validate(async ({
@@ -17,7 +17,7 @@ let $$d4 = NC("VOICE_LEAVE_ACTIVE_CALL");
 let $$c1 = NC("VOICE_CLEAR_ACTIVE_CALL");
 NC("VOICE_SHOW_PAYWALL_MODAL");
 let $$u7 = NC("VOICE_SET_VOICE_USERS");
-let $$p2 = nF(async (e, {
+let $$p2 = createOptimistThunk(async (e, {
   userIds: t,
   fileKey: i
 }) => {

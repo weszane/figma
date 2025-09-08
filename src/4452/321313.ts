@@ -4,11 +4,11 @@ import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { N } from "../905/572042";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Dd } from "../905/519092";
-let _ = Ju(function (e) {
+let _ = registerModal(function (e) {
   return jsx(fu, {
     name: "Enable AI Features Modal",
     properties: {
@@ -44,7 +44,7 @@ export function $$$$p0(e) {
     }), jsx(N, {
       href: "#",
       onClick: () => {
-        t(to({
+        t(showModalHandler({
           type: _,
           data: {
             onEnable: () => {

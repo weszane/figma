@@ -1,21 +1,21 @@
 import { debug, assert } from "../figma_app/465776";
-import { xN, qE } from "../figma_app/492908";
-import { mKm } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { nearlyEqual, clamp } from "../figma_app/492908";
+import { LayoutSizingMode } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { X } from "../905/797503";
 export async function $$d1(e, t, r, n) {
-  let i = l7.testSetup("sites-compare-layout", () => {
+  let i = permissionScopeHandler.testSetup("sites-compare-layout", () => {
     let r = g(X(e));
     let n = t.width;
-    let i = r.stackVerticalLayoutSize === mKm.HUG_CONTENT ? r.size.y : t.height;
+    let i = r.stackVerticalLayoutSize === LayoutSizingMode.HUG_CONTENT ? r.size.y : t.height;
     (r.size.x !== n || r.size.y !== i) && r.resizeWithConstraints(n, i);
     return r;
   });
   try {
     return await r(i);
   } finally {
-    l7.testSetup("sites-compare-layout", () => {
+    permissionScopeHandler.testSetup("sites-compare-layout", () => {
       n?.keepClone ? i.name = `cloned: ${i.name}` : i?.removeSelfAndChildren();
     });
   }
@@ -40,7 +40,7 @@ export async function $$c3(e, t, r, i = {}) {
   }
   if (!l) throw Error("node not found");
   await $$d1(l, t.rect, e => {
-    l7.testSetup("sites-compare-layout", () => {
+    permissionScopeHandler.testSetup("sites-compare-layout", () => {
       a = [...$$u0(e, t), ...$$m6(e, t, i).differences];
     });
   }, i);
@@ -54,7 +54,7 @@ export function $$u0(e, t) {
     let {
       node
     } = e;
-    "TEXT" === node.type && ("HEIGHT" === node.textAutoResize ? (xN(e.rect.height, t.rect.height, .1 * e.rect.height) || n.push(p("textsize", e, t)), node.textAutoResize = "NONE", node.resizeWithConstraints(node.size.x, t.rect.height)) : "WIDTH_AND_HEIGHT" === node.textAutoResize && (xN(e.rect.width, t.rect.width, .1 * e.rect.width) && xN(e.rect.height, t.rect.height, .1 * e.rect.height) || n.push(p("textsize", e, t)), node.textAutoResize = "NONE", node.resizeWithConstraints(t.rect.width, t.rect.height)));
+    "TEXT" === node.type && ("HEIGHT" === node.textAutoResize ? (nearlyEqual(e.rect.height, t.rect.height, .1 * e.rect.height) || n.push(p("textsize", e, t)), node.textAutoResize = "NONE", node.resizeWithConstraints(node.size.x, t.rect.height)) : "WIDTH_AND_HEIGHT" === node.textAutoResize && (nearlyEqual(e.rect.width, t.rect.width, .1 * e.rect.width) && nearlyEqual(e.rect.height, t.rect.height, .1 * e.rect.height) || n.push(p("textsize", e, t)), node.textAutoResize = "NONE", node.resizeWithConstraints(t.rect.width, t.rect.height)));
   }, r, t);
   return n;
 }
@@ -87,7 +87,7 @@ export function $$_5(e, t = !1) {
 }
 export function $$h4(e, t, r) {
   let n = E(e);
-  return t ? xN(n.rect.height, t.rect.height, r.threshold) ? [] : [p("size", n, t)] : [p("missing", n, t)];
+  return t ? nearlyEqual(n.rect.height, t.rect.height, r.threshold) ? [] : [p("size", n, t)] : [p("missing", n, t)];
 }
 export function $$m6(e, t, r) {
   let n = E(e);
@@ -107,8 +107,8 @@ export function $$m6(e, t, r) {
     let d = e.rect.y + e.rect.height;
     let c = t.rect.x + t.rect.width;
     let u = t.rect.y + t.rect.height;
-    let _ = !!r?.skipPosition || (xN(e.rect.x, t.rect.x, threshold) || xN(n, c, threshold)) && (xN(e.rect.y, t.rect.y, threshold) || xN(d, u, threshold));
-    let h = xN(e.rect.width, t.rect.width, threshold) && xN(e.rect.height, t.rect.height, threshold);
+    let _ = !!r?.skipPosition || (nearlyEqual(e.rect.x, t.rect.x, threshold) || nearlyEqual(n, c, threshold)) && (nearlyEqual(e.rect.y, t.rect.y, threshold) || nearlyEqual(d, u, threshold));
+    let h = nearlyEqual(e.rect.width, t.rect.width, threshold) && nearlyEqual(e.rect.height, t.rect.height, threshold);
     let m = e.rect.width * e.rect.height;
     let g = function (e, t) {
       let r = Math.min(e.x, t.x);
@@ -124,10 +124,10 @@ export function $$m6(e, t, r) {
     }(e.rect, t.rect);
     let f = g.width * g.height;
     let E = function (e, t) {
-      let r = qE(e.x, t.x, t.x + t.width);
-      let n = qE(e.x + e.width, t.x, t.x + t.width) - r;
-      let a = qE(e.y, t.y, t.y + t.height);
-      let s = qE(e.y + e.height, t.y, t.y + t.height) - a;
+      let r = clamp(e.x, t.x, t.x + t.width);
+      let n = clamp(e.x + e.width, t.x, t.x + t.width) - r;
+      let a = clamp(e.y, t.y, t.y + t.height);
+      let s = clamp(e.y + e.height, t.y, t.y + t.height) - a;
       return {
         x: r,
         y: a,
@@ -261,11 +261,11 @@ function b(e, t, r, n) {
   });
 }
 export async function $$T2(e, t, r) {
-  let n = l7.testSetup("sites-compare-layout", () => g(X(e)));
+  let n = permissionScopeHandler.testSetup("sites-compare-layout", () => g(X(e)));
   try {
     return await t(n);
   } finally {
-    l7.testSetup("sites-compare-layout", () => {
+    permissionScopeHandler.testSetup("sites-compare-layout", () => {
       r?.keepClone ? n.name = `cloned: ${n.name}` : n?.removeSelfAndChildren();
     });
   }

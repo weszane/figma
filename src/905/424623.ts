@@ -1,12 +1,12 @@
 import { useContext, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Qp } from "../figma_app/930338";
 import { Kk, n8, EY, x as _$$x } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { tS } from "../figma_app/516028";
 import { H6B } from "../figma_app/43951";
 import { Qp as _$$Qp, SS, KC } from "../figma_app/349248";
@@ -102,7 +102,7 @@ export function $$S0(e) {
       if (e.type === PW.STYLE) {
         let t = styles.find(t => Qp(t.name, e.name) && t.style_type === e.style_type);
         if (!t) continue;
-        let i = glU.getNumUsagesOfStyle(e.key, r);
+        let i = Fullscreen.getNumUsagesOfStyle(e.key, r);
         if (0 === i) continue;
         _ += i;
         p.push($l(e, t, r, o).then(() => o(Kk({
@@ -117,7 +117,7 @@ export function $$S0(e) {
       let l = e.type === PW.COMPONENT ? e.component_key : e.key;
       let u = e.type === PW.COMPONENT ? e.content_hash : e.version;
       if (!l || !u) continue;
-      let b = glU.getNumInstancesReferencingProductComponent(l);
+      let b = Fullscreen.getNumInstancesReferencingProductComponent(l);
       0 !== b && (A += b, p.push(RJ(l, s).then(() => o(Kk({
         done: b
       })))));
@@ -142,7 +142,7 @@ export function $$S0(e) {
           libraryKeyToSwapTo: l,
           durationMs: window.performance.now() - i
         });
-        Y5.triggerAction("commit");
+        fullscreenValue.triggerAction("commit");
         o(EY());
       }).catch(() => {
         o(_$$x());

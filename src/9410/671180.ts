@@ -3,7 +3,7 @@ import { useRef, useEffect, useCallback } from "react";
 import { yT, eb, Kf, BW, JF, sw } from "../figma_app/257655";
 import { G1, Iu } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { oVz } from "../figma_app/763686";
+import { DraftState } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { A as _$$A } from "../vendor/90566";
@@ -253,7 +253,7 @@ export function $$E1({
     } finally {
       if (t?.(), w.current && (ks(w.current), RY(w.current)), T.current.lastArgs) {
         let e = Object.keys(S.current).length > 0;
-        await oT(T.current.lastArgs.options?.dsKitKey, w.current, oVz.CURRENT, {
+        await oT(T.current.lastArgs.options?.dsKitKey, w.current, DraftState.CURRENT, {
           detachVariables: e
         });
       }

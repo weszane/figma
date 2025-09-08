@@ -1,5 +1,5 @@
 import { Mz } from "../vendor/925040";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { XV } from "../figma_app/383828";
 import { dK } from "../figma_app/889655";
 import { i2 } from "../905/557338";
@@ -20,7 +20,7 @@ export let $$u1 = Mz([d, dK, i2], (e, t, r) => {
     backingSymbolGUID,
     backingStateGroupGUID
   } = nD(new Set(r), t);
-  if (backingStateGroupGUID && hS(backingStateGroupGUID) ? n = backingStateGroupGUID : backingSymbolGUID && hS(backingSymbolGUID) && (n = backingSymbolGUID), !n) return null;
+  if (backingStateGroupGUID && isValidValue(backingStateGroupGUID) ? n = backingStateGroupGUID : backingSymbolGUID && isValidValue(backingSymbolGUID) && (n = backingSymbolGUID), !n) return null;
   let {
     selectedItem
   } = XV(n, e, t);

@@ -1,9 +1,9 @@
 import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776";
-import { X3B } from "../figma_app/763686";
-import { fn, sH } from "../905/871411";
+import { PrototypingTsApi } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { um, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
 import { yw } from "../figma_app/617727";
 import { Zh } from "../figma_app/2590";
@@ -187,11 +187,11 @@ let $$S1 = um(T, (e, t) => {
     case "HANDLE_EDITOR_SELECTION_CHANGED":
       {
         if (0 !== e.modalStatus) break;
-        let r = X3B.getInlinePreviewNodeIdOnSelectionChange();
+        let r = PrototypingTsApi.getInlinePreviewNodeIdOnSelectionChange();
         let {
           sceneGraph
         } = t.payload;
-        o = fn(sH(r)) ? x(e, r) : A(e, sceneGraph);
+        o = isValidSessionLocalID(parseSessionLocalID(r)) ? x(e, r) : A(e, sceneGraph);
         break;
       }
     case "UPDATE_PRESENTED_NODE":
@@ -278,7 +278,7 @@ let $$S1 = um(T, (e, t) => {
     case "HANDLE_VIEWER_LOADED":
       _$$A.setScalingMode(e.scalingInfo, !1);
       _$$A.navigateTo(e.requestedNodeId);
-      Y5.triggerAction("inline-preview-loaded");
+      fullscreenValue.triggerAction("inline-preview-loaded");
       break;
     case "HANDLE_READY_TO_RECEIVE_MESSAGES":
       _$$A.notifyWasModalOpenedSinceViewerLoaded(e.wasModalOpenedSinceViewerLoaded);
@@ -452,7 +452,7 @@ let N = (e, t, r) => {
     type
   } = r;
   let a = e => {
-    Y5.triggerAction("inline-preview-presented-node-changed", {
+    fullscreenValue.triggerAction("inline-preview-presented-node-changed", {
       currentHighlightedNode: e
     });
   };

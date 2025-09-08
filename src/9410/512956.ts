@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { cfv } from "../figma_app/763686";
+import { Positioning } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { logWarning } from "../905/714362";
 import { PX, Uj } from "../9410/659371";
@@ -21,7 +21,7 @@ export function $$g1() {
   let p = function () {
     let {
       summarizeCanvasSelection
-    } = ss(cfv.ABOVE, void 0, "QUICK_ACTION");
+    } = ss(Positioning.ABOVE, void 0, "QUICK_ACTION");
     let t = PX();
     let {
       expandSelectedMindmapNode

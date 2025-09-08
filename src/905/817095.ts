@@ -6,8 +6,8 @@ import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { M4, IT } from "../905/713695";
 import { m as _$$m } from "../905/325034";
-import { Ju } from "../905/102752";
-import { X } from "../905/128376";
+import { registerModal } from "../905/102752";
+import { setupAutofocusHandler } from "../905/128376";
 import { f as _$$f } from "../905/167712";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
@@ -20,7 +20,7 @@ import { ks } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/49800";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { k as _$$k2 } from "../905/443820";
 import { X as _$$X } from "../905/736922";
 import { Z } from "../905/279476";
@@ -41,7 +41,7 @@ let D = memo(function (e) {
         className: _$$s.flex.justifyBetween.itemsCenter.$,
         children: [jsxs("div", {
           className: _$$s.flex.itemsCenter.gap8.$,
-          children: [jsx(J, {
+          children: [jsx(Label, {
             children: e.flagName
           }), jsxs("div", {
             className: _$$s.flex.itemsCenter.gap2.$,
@@ -105,7 +105,7 @@ let L = (e, t, i) => {
   return Object.keys(e).filter(e => n ? n.test(e) : e.toLowerCase().includes(t.toLowerCase())).sort();
 };
 function F(e) {
-  let t = X();
+  let t = setupAutofocusHandler();
   let [i, a] = useState("");
   let [s] = _$$A(i, 100);
   let [d, c] = useState(!1);
@@ -308,7 +308,7 @@ let z = M4.Query({
 let H = M4.Query({
   fetch: async () => (await _$$m.getStatsigFlagDescriptions()).data.meta ?? {}
 });
-let $$W0 = Ju(function (e) {
+let $$W0 = registerModal(function (e) {
   let t = hS(e);
   let [i, c] = IT(z(null));
   let u = useMemo(() => i?.data ?? {}, [i]);

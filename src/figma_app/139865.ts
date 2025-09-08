@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Nfd } from "../figma_app/763686";
+import { PanelType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { s0 } from "../figma_app/115923";
 import { cI, Qe, Xq } from "../figma_app/114522";
@@ -14,7 +14,7 @@ export function $$d0() {
   let e = useAtomWithSubscription(s0);
   let t = useAtomWithSubscription(cI);
   let r = useAtomWithSubscription(Qe);
-  return e === Nfd.CODE ? r : t;
+  return e === PanelType.CODE ? r : t;
 }
 export function $$c1() {
   let e = useAtomWithSubscription(Xq);

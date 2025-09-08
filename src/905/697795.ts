@@ -10,15 +10,15 @@ import { getI18nString } from "../905/303541";
 import { UN, V3 } from "../figma_app/976345";
 import { wr } from "../figma_app/387599";
 import { OE } from "../figma_app/930386";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { VB } from "../figma_app/91703";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { c5, p4 } from "../905/93909";
 import { NR } from "../905/977218";
 import { XE } from "../figma_app/976749";
 import { Xm } from "../905/760074";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
 import { P as _$$P } from "../905/200237";
@@ -105,7 +105,7 @@ export function $$M2(e, t) {
   }
   $$F6(i, XE(t));
 }
-export let $$j1 = nF(e => Ay.listen(t => {
+export let $$j1 = createOptimistThunk(e => Ay.listen(t => {
   "POP" === t && function (t) {
     if (t) {
       let i = e.getState();
@@ -120,7 +120,7 @@ export let $$j1 = nF(e => Ay.listen(t => {
         Ay.reload("Navigating to a state that was pushed by an older version of this application");
         return;
       }
-      if ("fullscreen" === n.view && !Y5.isReady()) {
+      if ("fullscreen" === n.view && !fullscreenValue.isReady()) {
         Ay.reload("User navigated before fullscreen fully initialized");
         return;
       }
@@ -132,7 +132,7 @@ export let $$j1 = nF(e => Ay.listen(t => {
         oldSelectedView: n,
         newSelectedView: s
       }));else {
-        if (e.dispatch(Ce()), "communityHub" === s.view && "searchAndBrowse" === s.subView && OE(s.data)) {
+        if (e.dispatch(hideModal()), "communityHub" === s.view && "searchAndBrowse" === s.subView && OE(s.data)) {
           let t = wr(i);
           t && e.dispatch(NR({
             sessionId: t

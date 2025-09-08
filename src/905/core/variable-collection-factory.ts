@@ -1,7 +1,7 @@
 import type { NoOpVm } from '../700654'
 import type { ComponentInfo, LibraryResult } from '../types'
 import { keyBy } from 'lodash-es'
-import { l7 } from '../189185'
+import { permissionScopeHandler } from '../189185'
 import { oA } from '../419236'
 import { subscribeAndAwaitData } from '../553831'
 import { getFeatureFlags } from '../601108'
@@ -141,7 +141,7 @@ export class VariableCollectionFactory {
    * @returns The id of the created extended variable collection.
    */
   createNewExtendedVariableCollection(collectionId: string, name: string): string {
-    return l7.system('upsert-shared-collection-plugin', () => CUU.createVariableSetExtension(collectionId, name))
+    return permissionScopeHandler.system('upsert-shared-collection-plugin', () => CUU.createVariableSetExtension(collectionId, name))
   }
 
   /**

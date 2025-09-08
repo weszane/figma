@@ -7,7 +7,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
@@ -65,7 +65,7 @@ export function $$v3(e, t, r, n) {
         Pp(containingProductComponent, !0, o, Fv.ICON);
         let n = t.current;
         let i = n ? cn(n, wh) : {};
-        s(to({
+        s(showModalHandler({
           type: _$$n,
           data: {
             prePopulatedDefaultValue: r,

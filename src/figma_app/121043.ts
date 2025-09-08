@@ -11,7 +11,7 @@ import { z as _$$z } from "../905/947624";
 import { m as _$$m } from "../figma_app/203842";
 import { V as _$$V2 } from "../905/751103";
 import { m as _$$m2 } from "../905/270214";
-import { h3O, E63, kul, NLJ, glU } from "../figma_app/763686";
+import { Multiplayer, SaveConnectionIssues, SchemaJoinStatus, DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import E from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
@@ -34,7 +34,7 @@ import { YQ } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { j7, oB } from "../905/929976";
-import { to, ES } from "../905/156213";
+import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { n6 } from "../905/234821";
 import { A as _$$A } from "../905/482208";
 import { $D } from "../figma_app/789";
@@ -42,7 +42,7 @@ import { k as _$$k } from "../figma_app/564183";
 import { ZG } from "../figma_app/840917";
 import { hx } from "../figma_app/290668";
 import { VU } from "../905/625959";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { d as _$$d } from "../905/758967";
 import { isGoogleMeetIntegration } from "../figma_app/469876";
 import { z4 } from "../905/37051";
@@ -50,7 +50,7 @@ import { LW, bs, GG } from "../figma_app/553940";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
 import { EO } from "../905/691205";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
@@ -208,7 +208,7 @@ export function $$ew0(e) {
   });
 }
 export function $$eO4() {
-  return J2(_$$d().showTimeSlicingEditRenderingDot) ? jsx("div", {
+  return getObservableOrFallback(_$$d().showTimeSlicingEditRenderingDot) ? jsx("div", {
     className: e1,
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip": getI18nString("time_sliced_edit_rendering.active"),
@@ -237,7 +237,7 @@ export function $$eR10() {
       }
       let t = e ? 6e3 : 1e4;
       let i = Date.now();
-      if (null != n && i - n > t || null != s && (i - Math.max(s, ZG()?.session()?.getLastCommitTime() ?? 0) > t || i - s > 3e4) || null != o && (i - Math.max(h3O?.lastReceivedAckUnixtime() ?? 0, o) > t || i - o > 3e4)) {
+      if (null != n && i - n > t || null != s && (i - Math.max(s, ZG()?.session()?.getLastCommitTime() ?? 0) > t || i - s > 3e4) || null != o && (i - Math.max(Multiplayer?.lastReceivedAckUnixtime() ?? 0, o) > t || i - o > 3e4)) {
         r(!0);
         return;
       }
@@ -271,27 +271,27 @@ memo(function ({
 });
 let eL = e => {
   switch (e) {
-    case E63.SUPPRESS_UNSAVED_CHANGES_UI:
-    case E63.NONE:
+    case SaveConnectionIssues.SUPPRESS_UNSAVED_CHANGES_UI:
+    case SaveConnectionIssues.NONE:
       return "";
-    case E63.DISCONNECTED_AUTOSAVE_DISABLED:
+    case SaveConnectionIssues.DISCONNECTED_AUTOSAVE_DISABLED:
       return getI18nString("unsaved_changes.disconnected.autosave_disabled");
-    case E63.DISCONNECTED_SERVER_ISSUES:
+    case SaveConnectionIssues.DISCONNECTED_SERVER_ISSUES:
       return getI18nString("unsaved_changes.disconnected.server_issues");
-    case E63.DISCONNECTED_OTHER:
+    case SaveConnectionIssues.DISCONNECTED_OTHER:
       return getI18nString("unsaved_changes.disconnected.other");
-    case E63.SYNCING_AUTOSAVE_DISABLED:
+    case SaveConnectionIssues.SYNCING_AUTOSAVE_DISABLED:
       return getI18nString("unsaved_changes.syncing.autosave_disabled");
-    case E63.SYNCING_SERVER_ISSUES:
+    case SaveConnectionIssues.SYNCING_SERVER_ISSUES:
       return getI18nString("unsaved_changes.syncing.server_issues");
-    case E63.SYNCING_OTHER:
+    case SaveConnectionIssues.SYNCING_OTHER:
       return getI18nString("unsaved_changes.syncing.other");
     default:
       throw Error(`Unhandled tab close text enum value ${e}`);
   }
 };
 export function $$eP9() {
-  let e = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let e = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let t = useSelector(e => e.saveStatus?.tabCloseText);
   let r = Ym() === Dj.CONNECTED || isInteractionOrEvalMode();
   let s = $$eR10();
@@ -367,7 +367,7 @@ export function $$ej5(e) {
   if (!isActive && _.current && _.current === document.activeElement && F2.focusCustomCanvasFocusElement(), !c) return null;
   function h(e) {
     return n => {
-      isEnabled && (isActive && item.tool === NLJ.COMMENTS ? (Y5.triggerAction("set-tool-default"), e && _.current?.focus()) : VU.get(item.action, "toolbar")(n));
+      isEnabled && (isActive && item.tool === DesignGraphElements.COMMENTS ? (fullscreenValue.triggerAction("set-tool-default"), e && _.current?.focus()) : VU.get(item.action, "toolbar")(n));
     };
   }
   return jsxs("div", {
@@ -393,7 +393,7 @@ export function $$ej5(e) {
       role: "button",
       svg: c,
       tabIndex: 0
-    }), !p && numUnreadComments > 0 && item.tool === NLJ.COMMENTS && jsx("div", {
+    }), !p && numUnreadComments > 0 && item.tool === DesignGraphElements.COMMENTS && jsx("div", {
       className: isActive ? TE : Zm
     })]
   }, item.action);
@@ -455,7 +455,7 @@ let $$eU7 = memo(function (e) {
               redirectUrl: Ay.location.pathname,
               signedUpFromOpenSession: u
             }));
-            r(to({
+            r(showModalHandler({
               type: _$$x,
               data: {
                 headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
@@ -476,7 +476,7 @@ let $$eU7 = memo(function (e) {
         }
         return;
       }
-      if (modalShown?.type && ex.includes(modalShown?.type) && r(ES({
+      if (modalShown?.type && ex.includes(modalShown?.type) && r(hideSpecificModal({
         type: modalShown.type
       })), TY(dropdownShown)) r(oB());else if (e) {
         let t = {
@@ -533,7 +533,7 @@ let $$eB8 = memo(function (e) {
           formState: qB.SIGN_IN,
           redirectUrl: n ? `${Ay.location.pathname}?node-id=${encodeURIComponent(EO(n))}` : Ay.location.pathname
         }));
-        s(to({
+        s(showModalHandler({
           type: _$$x,
           data: {
             headerText: e
@@ -561,7 +561,7 @@ memo(function (e) {
     className: Er,
     onClick: () => {
       t("missing_fonts_button_clicked");
-      glU.findMissingFontsAndShowPopover();
+      Fullscreen.findMissingFontsAndShowPopover();
     },
     recordingKey: Pt(e, "missingFontsButton"),
     "data-tooltip-type": Ib.TEXT,

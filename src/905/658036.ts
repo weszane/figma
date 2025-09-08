@@ -1,9 +1,9 @@
-import { Md } from "../905/881471";
+import { isMac } from "../905/881471";
 export function $$r1(e) {
   return e.altKey || e.metaKey || e.shiftKey || e.ctrlKey;
 }
 export function $$a0(e) {
-  return Md ? e.metaKey : e.ctrlKey;
+  return isMac ? e.metaKey : e.ctrlKey;
 }
 export const F = $$a0;
 export const y = $$r1;

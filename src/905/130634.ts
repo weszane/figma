@@ -3,7 +3,7 @@ import { Component } from "react";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { oB } from "../figma_app/530167";
 import { P5 } from "../figma_app/175992";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Hl, hM } from "../905/840929";
 class u extends Component {
@@ -43,5 +43,5 @@ class u extends Component {
     });
   }
 }
-export let $$p0 = Ju(u, "DeleteProfileModal");
+export let $$p0 = registerModal(u, "DeleteProfileModal");
 export const M = $$p0;

@@ -1,16 +1,16 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { DS } from "../figma_app/387100";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { ds } from "../figma_app/314264";
 let u = "return_to_instance";
 let p = null;
 let $$m = !1;
 let h = null;
-let $$g0 = nF((e, t) => {
+let $$g0 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let n = i.openFile?.libraryKey;
   if (!t) return;
@@ -21,7 +21,7 @@ let $$g0 = nF((e, t) => {
     instanceGUIDs: Object.keys(i.mirror.sceneGraphSelection)
   }, $$m = !1);
 });
-let $$f1 = nF(e => {
+let $$f1 = createOptimistThunk(e => {
   let t = e.getState();
   let i = Object.keys(t.mirror.sceneGraphSelection);
   let n = p && 1 === i.length && (i[0] === p.mainComponentGUID || DS(t.mirror.sceneGraph, i[0]).some(e => e.guid === p?.mainComponentGUID));
@@ -66,7 +66,7 @@ function _(e) {
 function A({
   additionalTrackingProperties: e
 } = {}) {
-  p && (glU.selectInstances(p.instanceGUIDs.join(","), !0), p = null, $$m = !1, function ({
+  p && (Fullscreen.selectInstances(p.instanceGUIDs.join(","), !0), p = null, $$m = !1, function ({
     additionalTrackingProperties: e
   } = {}) {
     let t = debugState.getState();

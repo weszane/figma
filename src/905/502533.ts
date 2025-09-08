@@ -1,8 +1,8 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.UserCommunicationPreferenceSchemaValidator = vh();
-    this.UserCommunicationPreferenceSchemaValidatorOnUpdate = vh();
+    this.UserCommunicationPreferenceSchemaValidator = createNoOpValidator();
+    this.UserCommunicationPreferenceSchemaValidatorOnUpdate = createNoOpValidator();
   }
   getUserCommunicationPreference(e) {
     return this.UserCommunicationPreferenceSchemaValidator.validate(async ({

@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { Z } from "../905/829242";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, vXe, Ez5 } from "../figma_app/763686";
+import { Fullscreen, Fonts, AppStateTsApi } from "../figma_app/763686";
 import { k9 } from "../905/19536";
 import { reportError } from "../905/11";
 import { eY } from "../figma_app/722362";
@@ -110,14 +110,14 @@ export function $$g2({
   useEffect(() => {
     let e = new AbortController();
     (async () => {
-      if (fontsAreLoading || !glU || !vXe) return;
-      if (!r || !vXe.fontIsLoaded(r.fontFamily, r.fontStyle)) {
+      if (fontsAreLoading || !Fullscreen || !Fonts) return;
+      if (!r || !Fonts.fontIsLoaded(r.fontFamily, r.fontStyle)) {
         o(null);
         return;
       }
       let i = d.getPreviewHeight(r.fontSize);
       let s = r.name;
-      n.maxWidth && (s = glU.truncateText(r.fontFamily, i, r.lineHeight * (i / r.fontSize), n.maxWidth, 1, s));
+      n.maxWidth && (s = Fullscreen.truncateText(r.fontFamily, i, r.lineHeight * (i / r.fontSize), n.maxWidth, 1, s));
       let u = await Z(f({
         styleId: t,
         textToRender: s,
@@ -150,9 +150,9 @@ let f = async ({
 }) => {
   let s = "";
   for (let o = 1; o <= i; o++) {
-    if (!Ez5) return null;
+    if (!AppStateTsApi) return null;
     try {
-      let i = Ez5.slideThemeStylePreview().generateTextPreview(e, t, r, n.fontFamily, n.fontStyle);
+      let i = AppStateTsApi.slideThemeStylePreview().generateTextPreview(e, t, r, n.fontFamily, n.fontStyle);
       if (i && i.length > 0) return i;
       s = "empty_buffer";
       await new Promise(e => setTimeout(e, a));

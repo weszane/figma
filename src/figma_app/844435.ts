@@ -29,9 +29,9 @@ import { FPublicationStatusType, FPublisherType, FPinStatusType, FUserRoleType }
 import { BB3, k_1 } from "../figma_app/43951";
 import { mn, oh } from "../905/18797";
 import { Eh, cb } from "../figma_app/12796";
-import { xC, i8, Q4, ky, NW, JT, GX, EK, M5, Ar, DM, uF } from "../figma_app/300692";
+import { filterEntriesByPluginVersionEditorType, filterPublishedResources, sortResourcesByCreatedAt, filterResourcesByMatch, filterEntriesByEditorType, canRunPlugin, convertEditorTypeToFileType, isEditorTypeMatch, isDevModePlugin, getCurrentPluginVersion, getPluginByFileId, getPluginVersion } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
-import { k0, pL, FW, Gb, n_, ZQ, LR as _$$LR } from "../figma_app/155287";
+import { manifestContainsWidget, ManifestSchema, ManifestEditorType, getPluginAllowListKey, getWidgetAllowListKey, hasLocalFileId, isPublicPlugin } from "../figma_app/155287";
 import { $W } from "../905/144933";
 import { $A } from "../905/782918";
 import { xy, Ol } from "../figma_app/279454";
@@ -47,7 +47,7 @@ export function $$H41(e) {
     let e = {};
     for (let r in t) {
       let n = t[r];
-      k0(n) || (e[r] = n);
+      manifestContainsWidget(n) || (e[r] = n);
     }
     return e;
   }, [t]);
@@ -58,7 +58,7 @@ export function $$z53() {
     let t = {};
     for (let r in e) {
       let n = e[r];
-      k0(n) && (t[r] = n);
+      manifestContainsWidget(n) && (t[r] = n);
     }
     return t;
   }, [e]);
@@ -83,7 +83,7 @@ export function $$Y37() {
 export function $$$32() {
   let e = useSelector(e => e.publishedPlugins);
   let t = my();
-  return useMemo(() => xC(t, e), [e, t]);
+  return useMemo(() => filterEntriesByPluginVersionEditorType(t, e), [e, t]);
 }
 export function $$X27() {
   let e = useSelector(e => e.publishedWidgets);
@@ -103,8 +103,8 @@ export function $$J38({
   let r = $$$32();
   return useMemo(() => {
     if (!t) return [];
-    let n = i8(Object.values(r));
-    return Q4(ky(n, t, e));
+    let n = filterPublishedResources(Object.values(r));
+    return sortResourcesByCreatedAt(filterResourcesByMatch(n, t, e));
   }, [r, t, e]);
 }
 function Z() {
@@ -167,8 +167,8 @@ export function $$en31({
   let t = TA();
   let r = $$X27();
   if (!t) return [];
-  let n = i8(Object.values(r));
-  return Q4(ky(n, t, e));
+  let n = filterPublishedResources(Object.values(r));
+  return sortResourcesByCreatedAt(filterResourcesByMatch(n, t, e));
 }
 export function $$ei7() {
   let e = TA();
@@ -230,7 +230,7 @@ export function $$ec45(e) {
   try {
     let t = "string" == typeof e ? JSON.parse(e) : e;
     "dynamic-page" !== t.documentAccess && delete t.documentAccess;
-    let r = pL.safeParse(t);
+    let r = ManifestSchema.safeParse(t);
     if (!r.success) {
       reportError(_$$e.EXTENSIBILITY, Error("manifest schema parse error"), {
         extra: {
@@ -304,7 +304,7 @@ export function $$eu13(e, t) {
     hideRelatedContentByOthers: e.hide_related_content_by_others ?? null,
     isPublic: e.publishing_status === FPublicationStatusType.APPROVED_PUBLIC,
     isInspect: "inspect" === e.editor_type,
-    isSlides: r?.manifest.editorType?.includes(FW.SLIDES) || !1,
+    isSlides: r?.manifest.editorType?.includes(ManifestEditorType.SLIDES) || !1,
     widgetsWhitelistEnforced: null,
     pluginsWhitelistEnforced: null,
     monetizedResourceMetadataId: e.monetized_resource_metadata?.id ?? null,
@@ -549,7 +549,7 @@ export function $$eE44() {
       userPlugins: _,
       userWidgets: h
     };
-  }(t => NW(e, t));
+  }(t => filterEntriesByEditorType(e, t));
 }
 export function $$ey43(e) {
   let t = E3();
@@ -567,7 +567,7 @@ export function $$ey43(e) {
     let l = [plugins, widgets, orgPlugins, orgWidgets, userPlugins, userWidgets].map(e => Object.fromEntries(Object.entries(e).filter(([e, r]) => {
       let {
         canRun
-      } = JT({
+      } = canRunPlugin({
         plugin: r,
         editorType: t
       });
@@ -639,14 +639,14 @@ export function $$ev50() {
   let e = useSelector(e => e.selectedView);
   let t = useSelector(e => e.installedPluginVersions);
   if ("fullscreen" !== e.view) return eS;
-  let r = GX(e.editorType);
+  let r = convertEditorTypeToFileType(e.editorType);
   if (!t.loaded) return t;
   let n = {};
-  for (let i of Object.values(t.plugins)) EK(r, i.manifest.editorType) ? n[i.plugin_id] = i : ($A(e) && M5(i) || "figma" === r && M5(i)) && (n[i.plugin_id] = i);
+  for (let i of Object.values(t.plugins)) isEditorTypeMatch(r, i.manifest.editorType) ? n[i.plugin_id] = i : ($A(e) && isDevModePlugin(i) || "figma" === r && isDevModePlugin(i)) && (n[i.plugin_id] = i);
   let a = "fullscreen" === e.view ? e.editorType : null;
   return {
     loaded: !0,
-    plugins: NW(a, n)
+    plugins: filterEntriesByEditorType(a, n)
   };
 }
 export function $$eA14() {
@@ -750,13 +750,13 @@ function eD(e, t, r) {
   let n = Object.keys(e).reduce((e, r) => {
     if (t[r]) {
       let n = t[r];
-      let i = Ar(n);
+      let i = getCurrentPluginVersion(n);
       if (!i) return e;
       e[r] = i;
     }
     return e;
   }, {});
-  return NW(r, n);
+  return filterEntriesByEditorType(r, n);
 }
 function ek(e) {
   let t = sZ()?.id ?? "";
@@ -788,7 +788,7 @@ export function $$eM39() {
   let s = ek("plugin");
   let o = useDispatch();
   let l = tS();
-  let d = Gb(t?.id ?? "", l);
+  let d = getPluginAllowListKey(t?.id ?? "", l);
   let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
     a && !c && o(Vl({}));
@@ -803,7 +803,7 @@ export function $$eF19() {
   let s = ek("widget");
   let o = useDispatch();
   let l = tS();
-  let d = n_(t?.id ?? "", l);
+  let d = getWidgetAllowListKey(t?.id ?? "", l);
   let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
     a && !c && o(mV({}));
@@ -975,7 +975,7 @@ export function $$ez16(e, {
 }) {
   let i = $$V0();
   let a = $$$32();
-  return useMemo(() => DM({
+  return useMemo(() => getPluginByFileId({
     idToSearch: e,
     localExtensionsByFileId: t ? i : void 0,
     publishedExtensions: r ? a : void 0
@@ -989,11 +989,11 @@ export function $$eW35() {
   Object.values(e.plugins).forEach(e => {
     n[e.plugin_id] || (n[e.plugin_id] = e);
   });
-  Object.values(t).map(uF).forEach(e => {
-    n[e.plugin_id] || ZQ(e) || (n[e.plugin_id] = e);
+  Object.values(t).map(getPluginVersion).forEach(e => {
+    n[e.plugin_id] || hasLocalFileId(e) || (n[e.plugin_id] = e);
   });
   r.forEach(e => {
-    n[e.plugin_id] || ZQ(e) || (n[e.plugin_id] = e);
+    n[e.plugin_id] || hasLocalFileId(e) || (n[e.plugin_id] = e);
   });
   return n;
 }
@@ -1018,7 +1018,7 @@ export function $$eY23() {
   return useCallback(n => {
     let {
       canRun
-    } = JT({
+    } = canRunPlugin({
       plugin: n,
       editorType: e,
       canRunPluginState: {
@@ -1090,9 +1090,9 @@ export function $$e036(e) {
   let d = e ? i : r;
   let c = t?.id ?? "";
   let u = tS();
-  let p = oh(e ? n_(c, u) : Gb(c, u));
-  let _ = useCallback(e => d ? e.filter(e => !_$$LR(e) || !!l[e.plugin_id]) : e, [l, d]);
-  let h = useCallback(e => a ? e.filter(e => !_$$LR(e)) : e, [a]);
+  let p = oh(e ? getWidgetAllowListKey(c, u) : getPluginAllowListKey(c, u));
+  let _ = useCallback(e => d ? e.filter(e => !isPublicPlugin(e) || !!l[e.plugin_id]) : e, [l, d]);
+  let h = useCallback(e => a ? e.filter(e => !isPublicPlugin(e)) : e, [a]);
   return {
     publicExtensionsDisallowed: a,
     allowList: l,

@@ -1,4 +1,4 @@
-import { Oin, kul } from "../figma_app/763686";
+import { UIVisibilitySetting, SchemaJoinStatus } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { Y7 } from "../figma_app/553184";
 import { BrowserInfo } from "../figma_app/778880";
@@ -77,8 +77,8 @@ export class $$m1 extends $$p0 {
     });
     Y7({
       ...I,
-      progressBarMode: Oin[this._state.progressBarState.mode],
-      multiplayerSessionState: kul[this._state.mirror.appModel.multiplayerSessionState],
+      progressBarMode: UIVisibilitySetting[this._state.progressBarState.mode],
+      multiplayerSessionState: SchemaJoinStatus[this._state.mirror.appModel.multiplayerSessionState],
       editingFileKey: this.openFileKey(),
       isReadOnly: this._state.mirror.appModel.isReadOnly,
       appType: "editor",

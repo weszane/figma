@@ -5,7 +5,7 @@ import { gI } from "../figma_app/399472";
 import { T9 } from "../figma_app/740025";
 import { D2 } from "../905/18797";
 import { xQ } from "../figma_app/45218";
-import { n_, ZQ, u8 } from "../figma_app/155287";
+import { getWidgetAllowListKey, hasLocalFileId, PluginInstallStatus } from "../figma_app/155287";
 import { $u, Hr, E2 } from "../905/257019";
 async function p(e) {
   let {
@@ -19,7 +19,7 @@ async function p(e) {
     userId: user?.id
   });
   let u = openFile?.key ?? null;
-  let p = n_(e, u);
+  let p = getWidgetAllowListKey(e, u);
   D2(loadingState, p) || (await debugState.dispatch(mV({
     orgId: e,
     profileId: d?.id
@@ -32,7 +32,7 @@ async function m(e) {
   D2(loadingState, a8.loadingKeyForPayload(e)) || (await debugState.dispatch(gI()));
 }
 export function $$h2(e, t) {
-  if (ZQ(e)) return !1;
+  if (hasLocalFileId(e)) return !1;
   let {
     publishedWidgets
   } = debugState.getState();
@@ -49,14 +49,14 @@ async function g(e, t) {
 export async function $$f3(e, t) {
   let i = t && !!t.widgets_whitelist_enforced;
   if (t && i) {
-    if (!e) return u8.PLUGIN_NOT_ORG_APPROVED;
+    if (!e) return PluginInstallStatus.PLUGIN_NOT_ORG_APPROVED;
     let {
       isWhitelisted,
       isOrgPrivate
     } = await g(e, t.id);
-    if (!isOrgPrivate && !isWhitelisted) return u8.PLUGIN_NOT_ORG_APPROVED;
+    if (!isOrgPrivate && !isWhitelisted) return PluginInstallStatus.PLUGIN_NOT_ORG_APPROVED;
   }
-  return u8.PLUGIN_INSTALLABLE;
+  return PluginInstallStatus.PLUGIN_INSTALLABLE;
 }
 export async function $$_1(e, t) {
   return xQ(e) ? await Hr.canRunExtensionInsideOrg(e, t) : await E2.canRunExtensionInsideOrg(e, t);

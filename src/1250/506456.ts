@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { Ez5, lyf, xal } from "../figma_app/763686";
+import { AppStateTsApi, ViewType, DataLoadStatus } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { U, hC } from "../figma_app/901889";
@@ -21,7 +21,7 @@ import { Fy } from "../figma_app/623300";
 import { q5 } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
-import { ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { Jc, c0 } from "../0c62c2fd/239014";
 import { qp } from "../figma_app/932601";
 import { G } from "../0c62c2fd/181448";
@@ -42,8 +42,8 @@ export function $$P2({
   scrollContainer: x,
   shouldUseButtonRows: y
 }) {
-  let T = ut(Ez5?.currentPageState().requestedPageChange, "");
-  let j = J2(Ez5.uiState().showInFileMemoryPercentage);
+  let T = getObservableValue(AppStateTsApi?.currentPageState().requestedPageChange, "");
+  let j = getObservableOrFallback(AppStateTsApi.uiState().showInFileMemoryPercentage);
   let k = dh();
   let E = !wK();
   let I = U();
@@ -51,7 +51,7 @@ export function $$P2({
   let M = useRef(null);
   let P = Ht();
   let F = useSelector(e => e.versionHistory);
-  let B = J2(UK().showGuids);
+  let B = getObservableOrFallback(UK().showGuids);
   let {
     selectedPageIds,
     handleMultiselectClick,
@@ -210,7 +210,7 @@ function D({
 }) {
   let b = useRef(null);
   let [x, y] = useState(!1);
-  let v = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let v = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let w = g && g.dragOverPageId === e ? "before" === g.insertPosition ? l ? iZ : pf : _ ? Vi : IK : null;
   let T = q5();
   let [k, C] = useAtomValueAndSetter(qp);
@@ -261,7 +261,7 @@ export function $$L1({
   let d = _6();
   let _ = dh();
   let u = useSelector(e => e.versionHistory);
-  return useCallback(r => $P(r, _, u, l, Fy(e, r) === xal.LOADED, s, n, a, t, d), [e, n, a, s, l, d, _, u, t]);
+  return useCallback(r => $P(r, _, u, l, Fy(e, r) === DataLoadStatus.LOADED, s, n, a, t, d), [e, n, a, s, l, d, _, u, t]);
 }
 export function $$F0({
   pagesList: e,
@@ -276,7 +276,7 @@ export function $$F0({
   let u = dh(n);
   let m = useSelector(e => e.versionHistory);
   return useCallback(async r => {
-    n && (await $P(r, u, m, d, Fy(e, r) === xal.LOADED, l, a, s, t, _));
+    n && (await $P(r, u, m, d, Fy(e, r) === DataLoadStatus.LOADED, l, a, s, t, _));
   }, [e, a, s, l, d, _, u, m, t, n]);
 }
 export const VS = $$F0;

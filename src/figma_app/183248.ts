@@ -1,6 +1,6 @@
-import { eVK } from "../figma_app/763686";
+import { AnchorPosition } from "../figma_app/763686";
 let $$i0 = 1;
-let $$a1 = eVK.MIDDLE_CENTER;
+let $$a1 = AnchorPosition.MIDDLE_CENTER;
 let $$s5 = .01;
 let $$o4 = 100;
 var $$l3 = (e => (e.TextInput = "text-input", e.Selector = "selector", e))($$l3 || {});

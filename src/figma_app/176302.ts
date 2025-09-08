@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect, useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
-import { glU, Ez5 } from "../figma_app/763686";
+import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr, Ut } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -70,7 +70,7 @@ async function w({
     fileKey: e,
     selectedGuids: r
   });
-  glU?.applyNodesFromBuffer(n, e, r, !0);
+  Fullscreen?.applyNodesFromBuffer(n, e, r, !0);
 }
 export function $$O0({
   totalAttachmentBytes: e,
@@ -152,7 +152,7 @@ export function $$R4() {
   let r = tS();
   let y = useAtomWithSubscription(DM);
   let S = Xr($K);
-  let v = Ez5?.figmakeState();
+  let v = AppStateTsApi?.figmakeState();
   let A = Xr(T);
   let x = Xr(N);
   let C = TA();

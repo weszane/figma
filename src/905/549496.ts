@@ -16,10 +16,10 @@ import { c as _$$c } from "../905/370443";
 import { A as _$$A2 } from "../905/639174";
 import { uW } from "../905/187165";
 import { hv, Pf, ck } from "../905/952832";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Rv } from "../figma_app/728075";
 import { pL } from "../figma_app/639088";
-let $$x0 = Ju(function (e) {
+let $$x0 = registerModal(function (e) {
   let t = useDispatch();
   let i = useContext(uW);
   let o = useSelector(e => e.avatarEditorState);
@@ -34,7 +34,7 @@ let $$x0 = Ju(function (e) {
       dispatch: t
     })
   });
-}, "AVATAR_EDITOR_MODAL", ZU.YES);
+}, "AVATAR_EDITOR_MODAL", ModalSupportsBackground.YES);
 let S = {
   CIRCLE: (e, t) => {
     e.fillStyle = t.colorBg;

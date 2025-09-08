@@ -7,7 +7,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { tq, yc } from "../figma_app/671547";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { n as _$$n } from "../9410/774045";
 import { V as _$$V } from "../figma_app/144634";
@@ -15,7 +15,7 @@ import { K0 } from "../figma_app/439493";
 import { A } from "../svg/305639";
 let x = () => {
   let e = kl("embedData");
-  return decodeURIComponent(E7(e)?.url || E7(e)?.srcUrl || "");
+  return decodeURIComponent(normalizeValue(e)?.url || normalizeValue(e)?.srcUrl || "");
 };
 export function $$y1() {
   let e = useDispatch();

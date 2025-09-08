@@ -1,4 +1,4 @@
-import { IPZ, glU } from "../figma_app/763686";
+import { StickyWidgetType, Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { reactTimerGroup } from "../905/542194";
 import { FPSDistribution } from "../905/609396";
@@ -8,19 +8,19 @@ import { l as _$$l, q } from "../905/190247";
 import { N } from "../905/200059";
 export function $$u1(e) {
   switch (e) {
-    case IPZ.SWT_CREATED:
+    case StickyWidgetType.SWT_CREATED:
       return "shapeWithTextCreated";
-    case IPZ.SWT_EDITED:
+    case StickyWidgetType.SWT_EDITED:
       return "shapeWithTextEdited";
-    case IPZ.SWT_DELETED:
+    case StickyWidgetType.SWT_DELETED:
       return "shapeWithTextDeleted";
-    case IPZ.SWT_RESIZED:
+    case StickyWidgetType.SWT_RESIZED:
       return "shapeWithTextResized";
-    case IPZ.STICKY_EDITED:
+    case StickyWidgetType.STICKY_EDITED:
       return "stickyEdited";
-    case IPZ.STICKY_DELETED:
+    case StickyWidgetType.STICKY_DELETED:
       return "stickyDeleted";
-    case IPZ.STICKY_RESIZED:
+    case StickyWidgetType.STICKY_RESIZED:
       return "stickyResized";
   }
 }
@@ -237,7 +237,7 @@ export class $$p0 {
             let r = [];
             for (let [e, n] of this._eventTrackers) n.didEventOccur() && (r.push(e), this._getOrCreateDistribution(e).add(t));
             let i = performance.now() - e;
-            for (let e of (glU?.updatePerfMode(r), this._singleFrameNamedEvents)) this._getOrCreateDistribution(e).add(t);
+            for (let e of (Fullscreen?.updatePerfMode(r), this._singleFrameNamedEvents)) this._getOrCreateDistribution(e).add(t);
             null !== this._scheduledLogAtMs && this._slowFrameTracker?.checkSlowFrameAndSample(t, r, i, this._fileKey, this._productType);
             this._singleFrameNamedEvents.clear();
           }

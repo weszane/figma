@@ -1,4 +1,4 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 export let $$r3 = "opsz";
 export function $$a1(e) {
   let t = [];
@@ -43,7 +43,7 @@ export function $$c2(e, t) {
       italic: e.italic,
       stretch: e.stretch,
       id: e.id.toString(),
-      source: jXp.SHARED,
+      source: FontSourceType.SHARED,
       teamId: e.team_id ? e.team_id.toString() : void 0,
       orgId: e.org_id ? e.org_id.toString() : void 0,
       version: $$u4(e.version),
@@ -64,7 +64,7 @@ export function $$c2(e, t) {
       italic: e.italic,
       stretch: e.stretch,
       id: `${e.filename}_${e.version}`,
-      source: jXp.GOOGLE,
+      source: FontSourceType.GOOGLE,
       version: e.version.toString(),
       variationAxes: e.variationAxes,
       variationInstances: e.variationInstances,

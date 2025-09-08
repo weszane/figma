@@ -4,11 +4,11 @@ import { useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { Q } from "../figma_app/447352";
 import { a as _$$a } from "../905/558168";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { getI18nString } from "../905/303541";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { u as _$$u, SG } from "../figma_app/852050";
 import { Ib } from "../905/129884";
@@ -42,8 +42,8 @@ export function $$O0(e) {
   let b = f ?? y;
   let x = _$$u(b ?? void 0);
   let N = !!x && eF(x);
-  let [O, L, P] = JV(!f && y ? w : $$C, rXF.FLOAT);
-  let D = isNotNullish(a) && hS(a) ? a : void 0;
+  let [O, L, P] = JV(!f && y ? w : $$C, VariableResolvedDataType.FLOAT);
+  let D = isNotNullish(a) && isValidValue(a) ? a : void 0;
   let k = 0 === (SG($$C)?.data ?? []).length;
   let M = useCallback(() => {
     clearVariableConsumption();

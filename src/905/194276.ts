@@ -4,7 +4,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { qB } from "../905/862321";
 import { g } from "../905/248178";
@@ -17,7 +17,7 @@ let $$A36 = NC("AUTH_RESET_PASSWORD");
 let $$y12 = NC("AUTH_SEND_EMAIL_SAML_START");
 let $$b15 = NC("AUTH_UPDATE_FORM");
 let $$v33 = NC("SET_MINIMAL_MFA_USER");
-let $$I3 = nF((e, t) => {
+let $$I3 = createOptimistThunk((e, t) => {
   g("change_form_state", e.getState().auth.origin, {
     oldFormState: e.getState().auth.formState,
     newFormState: t.formState
@@ -26,7 +26,7 @@ let $$I3 = nF((e, t) => {
   });
   e.dispatch($$b15(t));
 });
-let $$$$E6 = nF((e, {
+let $$$$E6 = createOptimistThunk((e, {
   userId: t
 }) => {
   XHR.defaults.headers = {
@@ -60,7 +60,7 @@ let $$V0 = NC("AUTH_EMAIL_ONLY");
 let $$G35 = NC("AUTH_REDEEM");
 let $$z7 = NC("AUTH_REDEEM_RESET");
 let $$H23 = NC("AUTH_SET_REDIRECT_URL");
-let $$W34 = nF((e, {
+let $$W34 = createOptimistThunk((e, {
   token: t,
   userId: i
 }, {

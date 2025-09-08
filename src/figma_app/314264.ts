@@ -1,4 +1,4 @@
-import { h3O, Ez5 } from "../figma_app/763686";
+import { Multiplayer, AppStateTsApi } from "../figma_app/763686";
 import { clearAnalyticsStorage, trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { NU } from "../905/11";
 import { logInfo } from "../905/714362";
@@ -95,14 +95,14 @@ let S = (e, t, r, i = {}) => {
   s.entrypoint = i.entrypoint;
   s.figmaBasicsExperiment = t?.track_tags?.figma_basics_experiment;
   g && (s.loadID = g, s.reconnectId = $$b9());
-  s.fileIsIncremental = !!h3O?.isIncrementalSession();
-  s.fileIsValidatingIncremental = !!h3O?.isValidatingIncremental();
-  s.isStagingChanges = !!h3O?.isStagingChanges();
+  s.fileIsIncremental = !!Multiplayer?.isIncrementalSession();
+  s.fileIsValidatingIncremental = !!Multiplayer?.isValidatingIncremental();
+  s.isStagingChanges = !!Multiplayer?.isStagingChanges();
   return s;
 };
 export function $$v8(e, t) {
   return e === FFileType.SLIDES && "fullscreen" === t ? {
-    slide_view: Ez5?.singleSlideView()?.isFocusedNodeViewEnabled() ? "ssv" : "grid"
+    slide_view: AppStateTsApi?.singleSlideView()?.isFocusedNodeViewEnabled() ? "ssv" : "grid"
   } : {};
 }
 export function $$A12() {

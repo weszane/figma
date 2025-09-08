@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
 import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880";
@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { e as _$$e } from "../905/383776";
 import { hA, l7, ZO } from "../figma_app/88239";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { J4 } from "../figma_app/91703";
 import { z4 } from "../905/37051";
 import { wr } from "../figma_app/741237";
@@ -22,7 +22,7 @@ import { Oc } from "../figma_app/552876";
 import { z3 } from "../figma_app/386952";
 import { Z } from "../905/116724";
 var $$x2 = (e => (e.INITIAL = "initial", e.NEXT = "next", e))($$x2 || {});
-let $$N10 = nF((e, t) => {
+let $$N10 = createOptimistThunk((e, t) => {
   let r = e.getState().multiplayer.allUsers.find(e => e.sessionID === t.presenterSessionID);
   let n = r?.name ?? "";
   let i = r ? getI18nString("collaboration.spotlight.visual_bell.user_left_the_spotlight", {
@@ -33,7 +33,7 @@ let $$N10 = nF((e, t) => {
     type: "presentation_stopped_alert"
   }));
 });
-let $$C5 = nF((e, t) => {
+let $$C5 = createOptimistThunk((e, t) => {
   e.dispatch(F.dequeue({
     matchType: "presentation_stopped_alert"
   }));
@@ -55,7 +55,7 @@ function O() {
     }));
   }, [r, t]);
   let s = useCallback(e => {
-    h3O.observeUser(e);
+    Multiplayer.observeUser(e);
   }, []);
   return "prototype" === e ? a : s;
 }
@@ -184,7 +184,7 @@ export function $$F7({
   let r = e.presenterSessionID === e.sessionID;
   let i = z3();
   let a = useCallback(() => {
-    "prototype" === i ? hk()?.stopPresenting() : h3O.stopPresenting();
+    "prototype" === i ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
   }, [i]);
   useEffect(() => {
     !t && r && a();

@@ -8,11 +8,11 @@ import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 export function $$v0(e) {
   let a = useDispatch();
   useEffect(() => trackEventAnalytics("New Autosave File Already Open Modal Shown"));
-  let s = () => a(Ce());
+  let s = () => a(hideModal());
   let v = hS({
     open: !0,
     onClose: s

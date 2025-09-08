@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
@@ -12,10 +12,10 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { lW } from "../figma_app/11182";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { M } from "../figma_app/170366";
 import { Ib } from "../905/129884";
-export let $$y0 = Ju(function (e) {
+export let $$y0 = registerModal(function (e) {
   let {
     localPlugin
   } = e;
@@ -75,7 +75,7 @@ export let $$y0 = Ju(function (e) {
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
-            onClick: () => r(Lo()),
+            onClick: () => r(popModalStack()),
             variant: "secondary",
             children: renderI18nText("universal_insert.cancel")
           }), jsx($n, {

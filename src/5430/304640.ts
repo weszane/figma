@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { CY } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { _q } from "../5430/39369";
-export let $$c0 = Ju(function (e) {
+export let $$c0 = registerModal(function (e) {
   return jsx(yX, {
     confirmationTitle: e.confirmationTitle,
     confirmText: e.confirmButtonText,

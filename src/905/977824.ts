@@ -1,5 +1,5 @@
 import { c2 } from "../905/382883";
-import { z7E, h3O } from "../figma_app/763686";
+import { PaintTools, Multiplayer } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer, distributionAnalytics } from "../905/542194";
 import { debugState } from "../905/407919";
@@ -47,7 +47,7 @@ class p {
       isHoveringWidgetWithHiddenCursors: !1,
       chatMessage: [null, null],
       highFiveStatus: !1,
-      cursorType: z7E.DEFAULT,
+      cursorType: PaintTools.DEFAULT,
       lastMouseMoveMs: -1
     };
     this.setInfoBySessionId({
@@ -173,7 +173,7 @@ class p {
     });
   }
   sendHighFiveStatus(e) {
-    h3O?.sendHighFiveStatus(e);
+    Multiplayer?.sendHighFiveStatus(e);
   }
   setVoiceMetadata(e, t) {
     let i = this._voiceMetadataBySessionId.get();
@@ -186,7 +186,7 @@ class p {
     });
   }
   sendVoiceMetadata(e) {
-    h3O?.sendVoiceMetadata(e);
+    Multiplayer?.sendVoiceMetadata(e);
   }
   addReactionForSessionId(e, t, i, n) {
     let r = ++u + "";
@@ -239,10 +239,10 @@ class p {
     clearTimeout(this._reactionTimeout);
   }
   sendReaction(e) {
-    h3O && (h3O.sendReaction(e), this.handleReactionForSession(h3O.currentSessionID(), e));
+    Multiplayer && (Multiplayer.sendReaction(e), this.handleReactionForSession(Multiplayer.currentSessionID(), e));
   }
   handleReactionFromServer(e, t) {
-    e !== h3O?.currentSessionID() && this.handleReactionForSession(e, t);
+    e !== Multiplayer?.currentSessionID() && this.handleReactionForSession(e, t);
   }
   handleReactionForSession(e, t) {
     let i = this._infoBySessionId.get()[e];
@@ -251,7 +251,7 @@ class p {
     if (null == i || null == n || null == r) return null;
     let s = this.addReactionForSessionId(e, t, n, r);
     setTimeout(() => this.removeReactionWithId(e, s), 2500);
-    h3O && e === h3O.currentSessionID() && (this._reactionTimeout = setTimeout(() => {
+    Multiplayer && e === Multiplayer.currentSessionID() && (this._reactionTimeout = setTimeout(() => {
       0 === Object.keys(this._reactionsBySessionId.get()[e + ""] || []).length && debugState.dispatch(mu());
     }, 2500));
     return s;

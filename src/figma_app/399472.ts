@@ -3,16 +3,16 @@ import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { Sb } from "../905/359847";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { Qi } from "../figma_app/559491";
 import { s as _$$s2 } from "../905/58247";
 import { ye } from "../figma_app/314264";
-import { T as _$$T } from "../figma_app/300692";
+import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { R } from "../figma_app/185954";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s3 } from "../figma_app/504088";
 var $$g1 = (e => (e.INVITE_TILE = "invite_tile", e.COMMUNITY_PAGE = "community_page", e))($$g1 || {});
-let $$f7 = nF((e, t) => {
+let $$f7 = createOptimistThunk((e, t) => {
   XHR.put("/api/community_publishers/accept", t).then(({
     data: t
   }) => {
@@ -24,7 +24,7 @@ let $$f7 = nF((e, t) => {
     return Error(`Error updating resource ${r}`);
   });
 });
-let $$E5 = nF((e, t) => {
+let $$E5 = createOptimistThunk((e, t) => {
   let {
     src,
     plugin_id,
@@ -44,7 +44,7 @@ let $$E5 = nF((e, t) => {
       pluginId: plugin_id ?? widget_id,
       isWidget: !!widget_id
     });
-    let i = _$$T();
+    let i = getFullscreenViewEditorType();
     plugin_id ? _$$s2({
       initialX: 0,
       initialY: 0,
@@ -68,7 +68,7 @@ let $$E5 = nF((e, t) => {
     return Error(`Error updating resource ${r}`);
   });
 });
-let $$y4 = nF((e, t) => {
+let $$y4 = createOptimistThunk((e, t) => {
   XHR.del("/api/community_publishers/remove", t).then(({
     data: t
   }) => {
@@ -80,7 +80,7 @@ let $$y4 = nF((e, t) => {
     return Error(`Error updating resource ${r}`);
   });
 });
-let $$b0 = nF((e, t) => {
+let $$b0 = createOptimistThunk((e, t) => {
   XHR.del("/api/plugin_publishers/remove", t).then(({
     data: r
   }) => {
@@ -128,14 +128,14 @@ function T(e) {
     src: "removeCommunityPublisher"
   }) : void 0;
 }
-let $$I3 = nF(e => {
+let $$I3 = createOptimistThunk(e => {
   R.loadPluginsPublishedByUser(e);
   R.loadPluginsAuthoredByCurrentOrg(e);
 });
-let $$S2 = nF(e => {
+let $$S2 = createOptimistThunk(e => {
   R.loadPluginsAuthoredByCurrentOrg(e);
 });
-let $$v6 = nF(async e => {
+let $$v6 = createOptimistThunk(async e => {
   await R.loadWidgetsAuthoredByCurrentOrg(e);
 });
 export const MZ = $$b0;

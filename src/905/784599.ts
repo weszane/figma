@@ -8,11 +8,11 @@ import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { A as _$$A } from "../905/662580";
-import { Ju, Ij } from "../905/102752";
-import { to } from "../905/156213";
+import { registerModal, createModalConfig } from "../905/102752";
+import { showModalHandler } from "../905/156213";
 import { EJ } from "../figma_app/633080";
 import { C as _$$C } from "../905/496700";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { o as _$$o } from "../905/524481";
 let n;
 let y = 0;
@@ -20,7 +20,7 @@ export function $$b0() {
   return y++;
 }
 let v = NC("START_UPLOAD_FONTS");
-let I = nF((e, t) => {
+let I = createOptimistThunk((e, t) => {
   for (let i in e.dispatch(_$$F.enqueue({
     type: "shared-fonts",
     message: getI18nString("shared_fonts.importing_font_files"),
@@ -173,8 +173,8 @@ function E(e, t) {
     button: {
       text: getI18nString("shared_fonts.review_font_upload_errors"),
       action: () => {
-        t(to({
-          type: n ??= Ju(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.FontUploadReviewErrorsModal), Ij("FontUploadReviewErrorsModal")))
+        t(showModalHandler({
+          type: n ??= registerModal(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.FontUploadReviewErrorsModal), createModalConfig("FontUploadReviewErrorsModal")))
         }));
       }
     },
@@ -190,7 +190,7 @@ let C = NC("UPLOAD_FONT_PROGRESS");
 let T = NC("TOGGLE_FONT_TO_DELETE");
 let k = NC("CLEAR_FONTS_TO_DELETE");
 let R = NC("CLEAR_DELETE_RESULT");
-let N = nF(e => {
+let N = createOptimistThunk(e => {
   e.dispatch(R());
   let {
     fontsToDelete

@@ -9,13 +9,13 @@ import { Uz } from "../905/63728";
 import { ks } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 export function $$g0(e) {
   let t = useDispatch();
   return jsx(h, {
     ...e,
     open: !0,
-    onClose: () => t(Lo())
+    onClose: () => t(popModalStack())
   });
 }
 function h(e) {
@@ -36,7 +36,7 @@ function h(e) {
   });
   let S = hS(e);
   let T = () => {
-    y(Lo());
+    y(popModalStack());
   };
   let A = () => !allowEmptyString && "" === j.trim() || j.trim() === initialName.trim();
   let w = () => {

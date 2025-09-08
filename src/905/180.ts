@@ -1,26 +1,26 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
-    this.BuyerPortalSchemaValidator = vh();
-    this.BuyerActivePaymentsSchemaValidator = vh();
-    this.BuyerPaymentMethodsSchemaValidator = vh();
-    this.BuyerTaxSchemaValidator = vh();
-    this.TagsAutocompleteSchemaValidator = vh();
-    this.BuyerPurchasesSchemaValidator = vh();
-    this.BuyerAssociatedPurchasesSchemaValidator = vh();
-    this.RecentFilesSchemaValidator = vh();
+    this.BuyerPortalSchemaValidator = createNoOpValidator();
+    this.BuyerActivePaymentsSchemaValidator = createNoOpValidator();
+    this.BuyerPaymentMethodsSchemaValidator = createNoOpValidator();
+    this.BuyerTaxSchemaValidator = createNoOpValidator();
+    this.TagsAutocompleteSchemaValidator = createNoOpValidator();
+    this.BuyerPurchasesSchemaValidator = createNoOpValidator();
+    this.BuyerAssociatedPurchasesSchemaValidator = createNoOpValidator();
+    this.RecentFilesSchemaValidator = createNoOpValidator();
     this.getRecentFiles = e => this.RecentFilesSchemaValidator.validate(async ({
       xr: t
     }) => e.isWidget ? await t.get(`/api/widgets/${e.extensionId}/recent_files`) : await t.get(`/api/plugins/${e.extensionId}/recent_files`));
-    this.CommunityUserTaxInfoValidator = vh();
+    this.CommunityUserTaxInfoValidator = createNoOpValidator();
     this.getCommunityUserTaxInfo = e => this.CommunityUserTaxInfoValidator.validate(async ({
       xr: t
     }) => await t.get("/api/community/monetization/tax_info", {
       user_id: e.userId
     }));
     this.updateBillingDetails = e => XHR.post("/api/community/monetization/update_user_tax_info", e);
-    this.CmtyCreatorPayoutStatementsSchemaValidator = vh();
+    this.CmtyCreatorPayoutStatementsSchemaValidator = createNoOpValidator();
     this.getCmtyCreatorPayoutStatements = e => this.CmtyCreatorPayoutStatementsSchemaValidator.validate(async ({
       xr: t
     }) => await t.get("/api/community/seller/payout_statements", {
@@ -31,7 +31,7 @@ export let $$a0 = new class {
   getBuyerPortal(e) {
     return this.BuyerPortalSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/community/buyer/portal", td.toAPIParameters(e)));
+    }) => await t.get("/api/community/buyer/portal", APIParameterUtils.toAPIParameters(e)));
   }
   getBuyerActivePayments() {
     return this.BuyerActivePaymentsSchemaValidator.validate(async ({
@@ -48,7 +48,7 @@ export let $$a0 = new class {
   getBuyerTax(e) {
     return this.BuyerTaxSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/community/buyer/${e.resourceId}/tax`, td.toAPIParameters(e)));
+    }) => await t.get(`/api/community/buyer/${e.resourceId}/tax`, APIParameterUtils.toAPIParameters(e)));
   }
   getTagsAutocomplete(e) {
     return this.TagsAutocompleteSchemaValidator.validate(async ({

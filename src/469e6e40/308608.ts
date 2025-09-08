@@ -45,7 +45,7 @@ import { R as _$$R2 } from "../905/298004";
 import { rq } from "../905/425180";
 import { WZ } from "../905/893645";
 import { ONe } from "../figma_app/6204";
-import { Ce, to as _$$to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { PO, Te } from "../figma_app/765689";
 import { q as _$$q } from "../4452/876838";
@@ -62,7 +62,7 @@ import { az } from "../figma_app/805373";
 import { p as _$$p } from "../figma_app/353099";
 import { Cj } from "../905/270084";
 import { Jn } from "../905/17223";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { lb } from "../3973/538504";
 import { oA } from "../905/723791";
@@ -130,14 +130,14 @@ function Z(e) {
     })
   });
 }
-let ev = Ju(function ({
+let ev = registerModal(function ({
   onConfirm: e,
   totalRequestCount: t,
   filteredRequestCount: a
 }) {
   let s = useDispatch();
   let r = () => {
-    s(Ce());
+    s(hideModal());
   };
   let l = t !== a;
   let o = l ? renderI18nText("admin_dashboard.requests.approve_all_modal.body_filtered", {
@@ -276,7 +276,7 @@ function eN({
     })
   });
 }
-let eI = Ju(function ({
+let eI = registerModal(function ({
   request: e,
   planId: t,
   planType: a,
@@ -310,7 +310,7 @@ let eI = Ju(function ({
   let f = b ? oA(x.data?.org)?.baseOrgUserMembersById ?? [] : null;
   let j = l.length > 0 && f ? l.find(e => e.id === f[0]?.licenseGroupMember?.licenseGroupId) ?? null : null;
   let y = () => {
-    _(Ce());
+    _(hideModal());
   };
   return r && (p || !(b || v)) ? jsx(d_, {
     className: _$$s2.cursorDefault.selectNone.$,
@@ -988,7 +988,7 @@ export function $$eD0({
   } = useSprigWithSampling();
   let t$ = t_ || tu;
   let tB = (e, n = Xv.SINGLE, s = eL) => {
-    z(_$$to({
+    z(showModalHandler({
       type: eI,
       data: {
         request: e,
@@ -1192,7 +1192,7 @@ export function $$eD0({
               e();
               return;
             }
-            z(_$$to({
+            z(showModalHandler({
               type: ev,
               data: {
                 onConfirm: e,

@@ -6,15 +6,15 @@ import { vo, nB } from "../figma_app/272243";
 import { E } from "../905/632989";
 import { J } from "../905/341359";
 import { renderI18nText } from "../905/303541";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
-export let $$f0 = Ju(function (e) {
+export let $$f0 = registerModal(function (e) {
   let t = useDispatch();
   let i = () => {
-    t(AS());
+    t(hideModalHandler());
   };
   let h = hS({
     ...e,

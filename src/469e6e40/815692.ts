@@ -30,17 +30,17 @@ import { K as _$$K2 } from '../905/3140';
 import { Jn } from '../905/17223';
 import { bL } from '../905/38914';
 import { Fq, ic, vK } from '../905/84777';
-import { Ju } from '../905/102752';
+import { registerModal } from '../905/102752';
 import { t as _$$t3 } from '../905/117577';
 import { Ib } from '../905/129884';
 import { M as _$$M } from '../905/130634';
 import { P as _$$P } from '../905/143421';
 import { Ey, To } from '../905/148137';
-import { to as _$$to, Ce, Lo } from '../905/156213';
+import { showModalHandler, hideModal, popModalStack } from '../905/156213';
 import { p as _$$p2 } from '../905/185998';
 import { J as _$$J } from '../905/231762';
-import { J as _$$J2 } from '../905/270045';
-import { S as _$$S3 } from '../905/274480';
+import { Label } from '../905/270045';
+import { Checkbox } from '../905/274480';
 import { z as _$$z2 } from '../905/284530';
 import { Z as _$$Z2 } from '../905/296690';
 import { F as _$$F } from '../905/302958';
@@ -50,7 +50,7 @@ import { z as _$$z, Z as _$$Z } from '../905/306088';
 import { b as _$$b, c as _$$c2 } from '../905/308099';
 import { v as _$$v2 } from '../905/318279';
 import { N_ as _$$N_2, Oq } from '../905/332483';
-import { nF as _$$nF } from '../905/350402';
+import { createOptimistThunk } from '../905/350402';
 import { $ as _$$$ } from '../905/355181';
 import { Q as _$$Q } from '../905/363675';
 import { c as _$$c } from '../905/370443';
@@ -135,7 +135,7 @@ import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
 import { yl } from '../figma_app/275462';
 import { Rs } from '../figma_app/288654';
 import { t4 as _$$t2 } from '../figma_app/297957';
-import { _V, M5, pk } from '../figma_app/300692';
+import { isSingleDevWithCodegen, isDevModePlugin, isDevModeWithCodegen } from '../figma_app/300692';
 import { V as _$$V3 } from '../figma_app/312987';
 import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
 import { UE } from '../figma_app/345997';
@@ -144,7 +144,7 @@ import { throwTypeError } from '../figma_app/465776';
 import { Jt } from '../figma_app/481749';
 import { $q, Sm, w_ } from '../figma_app/482728';
 import { _ as _$$_2, S as _$$S5 } from '../figma_app/490799';
-import { y1 } from '../figma_app/492908';
+import { range } from '../figma_app/492908';
 import { $w, hi, Hq, KA, Kc, NL, OT, q4, Sl, Tf, vs, xP, Xw, Y4, ye, yo } from '../figma_app/494261';
 import { aE as _$$aE } from '../figma_app/514043';
 import { c4 } from '../figma_app/518077';
@@ -165,12 +165,12 @@ import { Ct, CT, Gv, OE } from '../figma_app/736948';
 import { dG } from '../figma_app/753501';
 import { ls, V0 } from '../figma_app/755395';
 import { Rs as _$$Rs } from '../figma_app/761870';
-import { tKW } from '../figma_app/763686';
+import { MeasurementUnit } from '../figma_app/763686';
 import { z6 } from '../figma_app/805373';
 import { O as _$$O } from '../figma_app/809387';
 // var r = require('../figma_app/822011');
 import { r as _$$r, hM, N_, qr, Rc, vS } from '../figma_app/827447';
-import { EB } from '../figma_app/831101';
+import { createEmptyAddress } from '../figma_app/831101';
 import { fu } from '../figma_app/831799';
 import { mf } from '../figma_app/844435';
 import { kt, qc } from '../figma_app/858013';
@@ -198,16 +198,16 @@ function B(e) {
     }));
   }, [t, e.orgSamlConfig.id]);
   let r = useCallback(() => {
-    t(_$$to({
+    t(showModalHandler({
       type: _$$l(),
       data: {
         dispatch: t,
         onConfirm: () => {
-          t(Ce());
+          t(hideModal());
           i();
         },
         onCancel: () => {
-          t(Ce());
+          t(hideModal());
         }
       }
     }));
@@ -265,12 +265,12 @@ function B(e) {
     })]
   });
 }
-let G = Ju(() => {
+let G = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = useSelector(e => e.orgSamlConfig);
   let s = !a.config;
-  let r = () => e(Lo());
+  let r = () => e(popModalStack());
   return jsx(OJ, {
     title: getI18nString('org_settings.scim.scim_provisioning'),
     onClose: r,
@@ -353,8 +353,8 @@ function e_(e) {
       style: _$$sx.add({
         borderTop: '1px solid var(--color-border)'
       }).$,
-      children: jsx(_$$S3, {
-        label: jsx(_$$J2, {
+      children: jsx(Checkbox, {
+        label: jsx(Label, {
           children: renderI18nText('org_settings.mfa_for_members.checkbox_title')
         }),
         checked: c,
@@ -407,7 +407,7 @@ function e_(e) {
     })]
   });
 }
-let eu = Ju(() => {
+let eu = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = useSelector(e => e.orgSamlConfig);
@@ -431,7 +431,7 @@ let eu = Ju(() => {
   let h = Number(g.totalMemberCount);
   let b = Number(g.nonMfaMemberCount);
   let v = d && l === Ct.ANY;
-  let f = () => e(Lo());
+  let f = () => e(popModalStack());
   return jsxs(OJ, {
     containerClassName: jT,
     title: getI18nString('org_settings.sign_in_method.authentication'),
@@ -501,9 +501,9 @@ let ef = 'billing_emails_modal--full_width--lstMy';
 let ej = 'billing_emails_modal--icon--KUryt';
 let ey = 'billing_emails_modal--description_section--3-x5B';
 let ew = 'billing_emails_modal--subtitle--AtE9I';
-let eC = Ju(e => {
+let eC = registerModal(e => {
   let t = useDispatch();
-  let s = () => t(Lo());
+  let s = () => t(popModalStack());
   _$$A.extend(r);
   _$$A(e.subscriptionStart).format('Do');
   return jsx(OJ, {
@@ -586,7 +586,7 @@ let eT = atom(e => {
 function eA() {
   return useAtomWithSubscription(eT);
 }
-let te = Ju(e => {
+let te = registerModal(e => {
   let t = useDispatch();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = hS(e);
@@ -606,13 +606,13 @@ let te = Ju(e => {
         children: jsxs(jk, {
           children: [jsx($n, {
             onClick: () => {
-              t(Lo());
+              t(popModalStack());
             },
             variant: 'secondary',
             children: renderI18nText('modal.cancel')
           }), jsx($n, {
             onClick: () => {
-              t(Lo());
+              t(popModalStack());
               t(q4({
                 orgId: a.id
               }));
@@ -625,7 +625,7 @@ let te = Ju(e => {
     })
   });
 }, 'DELETE_ORG_MODAL');
-let tt = Ju(e => {
+let tt = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
   let r = hS(e);
@@ -659,15 +659,15 @@ let tt = Ju(e => {
         children: jsxs(jk, {
           children: [jsx($n, {
             onClick: () => {
-              t(Lo());
+              t(popModalStack());
             },
             variant: 'secondary',
             children: renderI18nText('modal.cancel')
           }), jsx($n, {
             disabled: c,
             onClick: () => {
-              t(Lo());
-              t(_$$to({
+              t(popModalStack());
+              t(showModalHandler({
                 type: ta,
                 data: {
                   orgUsers: l.tokens.map(e => e.content)
@@ -682,7 +682,7 @@ let tt = Ju(e => {
     })
   });
 }, 'DELETE_ORG_USER_MODAL');
-let ta = Ju(e => {
+let ta = registerModal(e => {
   let t = useDispatch();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = hS(e);
@@ -709,13 +709,13 @@ let ta = Ju(e => {
         children: jsxs(jk, {
           children: [jsx($n, {
             onClick: () => {
-              t(Lo());
+              t(popModalStack());
             },
             variant: 'secondary',
             children: renderI18nText('modal.cancel')
           }), jsx($n, {
             onClick: () => {
-              t(Lo());
+              t(popModalStack());
               t(ye({
                 orgId: a.id,
                 orgUserIds: e.orgUsers.map(e => e.id)
@@ -1054,7 +1054,7 @@ let tC = {
     $$css: !0
   }
 };
-let tS = Ju(e => {
+let tS = registerModal(e => {
   let {
     org,
     onClose
@@ -1066,7 +1066,7 @@ let tS = Ju(e => {
   let _ = [...(c?.data?.org?.workspaces ?? [])];
   let u = o ? getI18nString('admin_settings.ai.enable_success') : getI18nString('admin_settings.ai.disable_success');
   let m = useCallback(e => {
-    l(_$$to({
+    l(showModalHandler({
       type: tN,
       data: {
         workspace: e
@@ -1130,7 +1130,7 @@ let tS = Ju(e => {
     })
   });
 }, 'AiControlsModal');
-let tN = Ju(({
+let tN = registerModal(({
   open: e,
   onClose: t,
   workspace: a
@@ -1139,7 +1139,7 @@ let tN = Ju(({
   let l = getI18nString('org_settings.ai_controls.workspace_success');
   let [o, d] = useState(tR(a));
   let c = useCallback(() => {
-    r(_$$to({
+    r(showModalHandler({
       type: tI,
       data: {
         workspace: a,
@@ -1200,7 +1200,7 @@ let tN = Ju(({
     })
   });
 }, 'WorkspaceAiControlsModal');
-let tI = Ju(({
+let tI = registerModal(({
   goBack: e,
   workspace: t
 }) => {
@@ -1274,7 +1274,7 @@ function tA({
     className: 'x78zum5 x1q0g3np x1qughib x6s0dn4 x1vamu9a',
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf',
-      children: [jsx(_$$J2, {
+      children: [jsx(Label, {
         'htmlFor': i,
         'aria-describedby': 'ai-features-note',
         'children': jsx('span', {
@@ -1299,14 +1299,14 @@ function tR(e) {
 }
 let tD = 'autogen_password_controls_modal--radioLabel--tmcmf';
 let tP = e => e ? 'autogen' : 'custom';
-let tU = Ju(() => {
+let tU = registerModal(() => {
   let e = useDispatch();
   let t = getI18nString('org_settings.autogen_password_controls.success');
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let r = Rs(RcX, {
     orgId: a.id
   });
-  let l = () => e(Lo());
+  let l = () => e(popModalStack());
   let [o, d] = useState(r.status === 'loaded' ? tP(r.data?.org?.orgSharedSetting?.autogenPasswordControls) : null);
   useEffect(() => {
     r.status === 'loaded' && d(tP(r.data?.org?.orgSharedSetting?.autogenPasswordControls));
@@ -1383,10 +1383,10 @@ let tU = Ju(() => {
     })
   });
 }, 'AutogenPasswordControlsModal');
-let tF = Ju(() => {
+let tF = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
-  let a = () => e(Lo());
+  let a = () => e(popModalStack());
   return jsx(OJ, {
     title: getI18nString('settings_tab.scim_metadata_modal.member_metadata'),
     onClose: a,
@@ -1698,9 +1698,9 @@ function tX(e) {
     })]
   }, e.token.name);
 }
-let tQ = Ju(e => {
+let tQ = registerModal(e => {
   let t = useDispatch();
-  let a = () => t(Lo());
+  let a = () => t(popModalStack());
   return jsx(OJ, {
     title: getI18nString('settings_tab.connected_apps.revoke_app', {
       appName: e.token.name
@@ -1730,10 +1730,10 @@ let tQ = Ju(e => {
         }), jsx(qZ, {
           className: tH,
           onClick: () => {
-            t(Lo());
+            t(popModalStack());
             XHR.del(`/api/oauth/token/${e.org.id}/${e.token.client_id}`).then(a => {
               t(_$$s2.flash(getI18nString('settings_tab.connected_apps.oauth_token_deleted')));
-              t(Lo());
+              t(popModalStack());
               e.onRevoke();
             }).catch(e => {
               t(_$$s2.error(e.data?.message || getI18nString('settings_tab.connected_apps.an_error_occurred_while_deleting_the_token'), 5e3));
@@ -1746,7 +1746,7 @@ let tQ = Ju(e => {
     })
   });
 }, 'REVOKE_APP_MODAL');
-let tZ = Ju(e => {
+let tZ = registerModal(e => {
   let t = useDispatch();
   let [a, r] = useState([]);
   let [l, o] = useState(!0);
@@ -1776,7 +1776,7 @@ let tZ = Ju(e => {
     children: a.map(s => jsx(tX, {
       token: s,
       onClick: () => {
-        t(_$$to({
+        t(showModalHandler({
           type: t0,
           data: {
             org: e.org,
@@ -1791,7 +1791,7 @@ let tZ = Ju(e => {
   });
   return jsx(OJ, {
     title: getI18nString('settings_tab.connected_apps'),
-    onClose: () => t(Lo()),
+    onClose: () => t(popModalStack()),
     maxWidth: 462,
     minWidth: 462,
     children: jsxs('div', {
@@ -1803,11 +1803,11 @@ let tZ = Ju(e => {
     })
   });
 }, 'ConnectedAppsModal');
-let t0 = Ju(e => {
+let t0 = registerModal(e => {
   let t = useDispatch();
   return jsx(OJ, {
     title: e.token.name,
-    onClose: () => t(Lo()),
+    onClose: () => t(popModalStack()),
     maxWidth: 462,
     minWidth: 462,
     children: jsxs('div', {
@@ -1849,13 +1849,13 @@ let t0 = Ju(e => {
         children: [jsx(_$$nR, {
           className: tH,
           onClick: () => {
-            t(Lo());
+            t(popModalStack());
           },
           children: renderI18nText('general.back')
         }), jsx(qZ, {
           className: tH,
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: tQ,
               data: {
                 org: e.org,
@@ -1890,7 +1890,7 @@ function aj({
           orgId: o ?? '',
           orgViewTab: _$$X.PLUGINS
         }));
-        c(Ce());
+        c(hideModal());
       } else {
         let e = `/files/${o}/plugins`;
         c(V3({
@@ -1970,7 +1970,7 @@ async function aL(e, t, a) {
   let r = mf(n.plugin, t.id, null, null);
   return r ? t.plugins_whitelist_enforced && !a[r.plugin_id] && r.org_id !== t.id ? {
     errorMessage: getI18nString('settings_tab.invalid_url_allowlist')
-  } : r && !M5(r) ? i : {
+  } : r && !isDevModePlugin(r) ? i : {
     pluginId: s,
     plugin: r
   } : i;
@@ -2080,7 +2080,7 @@ function aU({
   let b = async () => {
     if (!t) return;
     let n = await aL(_, t, a);
-    'plugin' in n ? n.plugin ? _V(n.plugin) ? p(getI18nString('settings_tab.pinned_plugins_invalid_url_codegen')) : 'pluginId' in n && (e.pinPlugin(n.pluginId), p(null), u(''), h()) : p(getI18nString('settings_tab.pinned_plugins_invalid_url')) : 'errorMessage' in n && p(n.errorMessage);
+    'plugin' in n ? n.plugin ? isSingleDevWithCodegen(n.plugin) ? p(getI18nString('settings_tab.pinned_plugins_invalid_url_codegen')) : 'pluginId' in n && (e.pinPlugin(n.pluginId), p(null), u(''), h()) : p(getI18nString('settings_tab.pinned_plugins_invalid_url')) : 'errorMessage' in n && p(n.errorMessage);
   };
   return jsxs('div', {
     'className': _$$s.m16.$,
@@ -2258,7 +2258,7 @@ function a$({
     }), jsx('div', {
       className: _$$s.flex.justifyEnd.mr4.$,
       children: jsx(gn, {
-        currentUnit: e || tKW.PIXEL,
+        currentUnit: e || MeasurementUnit.PIXEL,
         onChangeUnit: t
       })
     })]
@@ -2358,7 +2358,7 @@ function az({
           aL(p, t, b).then(t => {
             if ('pluginId' in t && t.plugin) {
               let n = t.plugin;
-              if (pk(n)) {
+              if (isDevModeWithCodegen(n)) {
                 d(null);
                 let t = _$$$n(n);
                 e?.setCodegenSettingsLanguage(t);
@@ -2503,7 +2503,7 @@ function aW() {
     })]
   });
 }
-let aH = Ju(() => {
+let aH = registerModal(() => {
   let e = sZ() || null;
   let t = useDispatch();
   let a = IE();
@@ -2543,7 +2543,7 @@ let aH = Ju(() => {
   let I = iT();
   let A = () => {
     a?.setCodegenSettings(null);
-    t(Lo());
+    t(popModalStack());
   };
   let R = async () => {
     if (e) {
@@ -2565,7 +2565,7 @@ let aH = Ju(() => {
         }));
       }
     }
-    t(Lo());
+    t(popModalStack());
   };
   return jsxs(OJ, {
     title: jsx(aD, {
@@ -2590,7 +2590,7 @@ let aH = Ju(() => {
           children: renderI18nText('settings_tab.upgrade_to_enterprise_plan_text')
         }), jsx(CY, {
           onClick: () => {
-            t(_$$to({
+            t(showModalHandler({
               type: DV,
               data: {
                 team: N,
@@ -2621,7 +2621,7 @@ let aH = Ju(() => {
     })]
   });
 }, 'DevModeModal');
-let aK = Ju(e => {
+let aK = registerModal(e => {
   let [t, a, s] = e.platform === 'win' ? [getI18nString('org_admin_settings.enterprise_installer_label'), 'https://help.figma.com/hc/articles/14172933259287', `https://desktop.figma.com/win/Figma-${e.version}.msi`] : [getI18nString('org_admin_settings.enterprise_installer_label_mac'), 'https://help.figma.com/hc/articles/17686512113175', `https://desktop.figma.com/mac-universal/Figma-${e.version}.pkg`];
   return jsxs(yX, {
     confirmationTitle: t,
@@ -2656,7 +2656,7 @@ function a4({
   let r = [...(a?.data?.org?.workspaces ?? [])];
   sortByPropertyWithOptions(r, 'name');
   let l = useCallback(e => {
-    t(_$$to({
+    t(showModalHandler({
       type: a8,
       data: {
         workspace: e
@@ -2688,7 +2688,7 @@ function a5({
         className: 'xfawy5m'
       }), jsx(_$$c2, {
         value: 'allowed',
-        label: jsx(_$$J2, {
+        label: jsx(Label, {
           children: jsx(_$$E, {
             children: renderI18nText('org_settings.export_controls.by_all_viewers')
           })
@@ -2701,7 +2701,7 @@ function a5({
         className: 'xfawy5m'
       }), jsx(_$$c2, {
         value: 'members_only',
-        label: jsx(_$$J2, {
+        label: jsx(Label, {
           children: jsx(_$$E, {
             children: renderI18nText('org_settings.export_controls.prevent_by_guest_viewers')
           })
@@ -2714,7 +2714,7 @@ function a5({
         className: 'xfawy5m'
       }), jsx(_$$c2, {
         value: 'banned',
-        label: jsx(_$$J2, {
+        label: jsx(Label, {
           children: jsx(_$$E, {
             children: renderI18nText('org_settings.export_controls.prevent_by_all_viewers')
           })
@@ -2729,7 +2729,7 @@ function a5({
     })
   });
 }
-let a3 = Ju(e => {
+let a3 = registerModal(e => {
   let t = useDispatch();
   let a = getI18nString('org_settings.export_controls.success');
   let r = useSelector(e => e.orgById[e.currentUserOrgId]);
@@ -2797,7 +2797,7 @@ let a3 = Ju(e => {
     })
   });
 }, 'ExportControlsModal');
-let a8 = Ju(({
+let a8 = registerModal(({
   open: e,
   onClose: t,
   workspace: a
@@ -2807,7 +2807,7 @@ let a8 = Ju(({
   let o = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [d, c] = useState(a.workspaceSharedSetting?.fileExportSetting ?? o.shared_container_setting?.file_export_setting ?? 'allowed');
   let _ = useCallback(() => {
-    r(_$$to({
+    r(showModalHandler({
       type: a6,
       data: {
         workspace: a
@@ -2884,7 +2884,7 @@ let a8 = Ju(({
     })
   });
 }, 'WorkspaceExportControlsModal');
-let a6 = Ju(({
+let a6 = registerModal(({
   open: e,
   onClose: t,
   workspace: a
@@ -2937,7 +2937,7 @@ let a6 = Ju(({
                 successMessage: r,
                 onClose: () => {
                   t();
-                  s(Lo());
+                  s(popModalStack());
                 }
               }));
             },
@@ -2955,10 +2955,10 @@ let nt = 'external_collaboration_controls_modal--radioLabel--dMvnM';
 let na = 'external_collaboration_controls_modal--listItem--g50IJ';
 let nn = 'external_collaboration_controls_modal--confirmButton---8ryZ';
 let ns = 'external_collaboration_controls_modal--bold--WoY4e';
-let nr = Ju(() => {
+let nr = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
-  let a = () => e(Lo());
+  let a = () => e(popModalStack());
   let [r, l] = useState(t.shared_container_setting?.external_collaboration_controls);
   let o = !!t.shared_container_setting?.external_collaboration_controls;
   return jsx(fu, {
@@ -3081,8 +3081,8 @@ function n_(e) {
       style: _$$sx.add({
         borderTop: '1px solid var(--color-border)'
       }).$,
-      children: jsx(_$$S3, {
-        label: jsx(_$$J2, {
+      children: jsx(Checkbox, {
+        label: jsx(Label, {
           children: renderI18nText('org_settings.guest_control_revamp.require_two_factor_auth_for_guests')
         }),
         checked: c,
@@ -3135,7 +3135,7 @@ function n_(e) {
     })]
   });
 }
-let nu = Ju(e => {
+let nu = registerModal(e => {
   let t = useDispatch();
   return jsx(yX, {
     confirmationTitle: getI18nString('org_settings.guest_control.confirm_title'),
@@ -3153,7 +3153,7 @@ let nu = Ju(e => {
     children: renderI18nText('org_settings.guest_control.no_guest_confirmation')
   });
 }, 'CONFIRM_BAN_GUEST_INVITE_MODAL');
-let nm = Ju(() => {
+let nm = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = _$$M2(t);
@@ -3169,7 +3169,7 @@ let nm = Ju(() => {
   let _ = Number(c.totalGuestCount);
   let u = Number(c.nonMfaGuestCount);
   let m = useSelector(e => e.orgDomains.domains);
-  let p = () => e(Lo());
+  let p = () => e(popModalStack());
   let [g, h] = useState(t.invite_whitelist_guest_invite_setting);
   return jsxs(OJ, {
     containerClassName: 'guest_invite_settings_modal--modalContainer--yxLS6',
@@ -3271,7 +3271,7 @@ let nm = Ju(() => {
               settingString: s
             };
             n && (t.mfaRequiredSetting = o);
-            e(_$$to({
+            e(showModalHandler({
               type: nu,
               data: t
             }));
@@ -3288,18 +3288,18 @@ function nh(e) {
   let t = nv(e);
   return {
     ...(t ? {
-      [vS.MINUTES]: y1(15, 60, 5).map(e => ({
+      [vS.MINUTES]: range(15, 60, 5).map(e => ({
         type: 'option',
         text: e.toString(),
         key: e
       }))
     } : null),
-    [vS.HOURS]: y1(t ? 1 : 12, 24, 1).map(e => ({
+    [vS.HOURS]: range(t ? 1 : 12, 24, 1).map(e => ({
       type: 'option',
       text: e.toString(),
       key: e
     })),
-    [vS.DAYS]: y1(1, 15, 1).map(e => ({
+    [vS.DAYS]: range(1, 15, 1).map(e => ({
       type: 'option',
       text: e.toString(),
       key: e
@@ -3387,7 +3387,7 @@ function nE(e) {
     })
   });
 }
-let nC = Ju(e => {
+let nC = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
   let r = !!a?.security_add_on_enabled_at;
@@ -3466,7 +3466,7 @@ let nC = Ju(e => {
       };
     });
   }, [l]);
-  let f = useCallback(() => t(Lo()), [t]);
+  let f = useCallback(() => t(popModalStack()), [t]);
   let y = useCallback(() => {
     m(!0);
     let a = o === ng.DEFAULT ? null : nb(c);
@@ -3585,9 +3585,9 @@ let nC = Ju(e => {
 function nI(e) {
   return e.split(',').map(e => e.trim()).filter(e => e.length > 0);
 }
-let nT = Ju(e => {
+let nT = registerModal(e => {
   let t = useDispatch();
-  let a = useCallback(() => t(Lo()), [t]);
+  let a = useCallback(() => t(popModalStack()), [t]);
   let [r, l] = useState(e.ipAllowlistEnabled);
   let o = e.ipAllowlistRanges.map(e => e.ipRange);
   let d = o.join(',\n');
@@ -3683,7 +3683,7 @@ function nO(e) {
     })]
   });
 }
-let nL = Ju(({
+let nL = registerModal(({
   goBack: e,
   org: t,
   workspace: a
@@ -3695,7 +3695,7 @@ let nL = Ju(({
   } = Cf(t, a.workspaceSharedSetting?.publicLinkControlsSetting || null, a.workspaceSharedSetting?.publicLinkControlsMaxExpiration ? a.workspaceSharedSetting.publicLinkControlsMaxExpiration : null);
   let c = (e, t) => e === formState.initialPublicLinkControlsSetting && a.workspaceSharedSetting?.publicLinkControlsMaxExpiration && t === a.workspaceSharedSetting.publicLinkControlsMaxExpiration;
   let _ = useCallback(() => {
-    l(_$$to({
+    l(showModalHandler({
       type: nD,
       data: {
         workspace: a,
@@ -3776,7 +3776,7 @@ let nL = Ju(({
     })
   });
 }, 'WorkspacePublicSharingModal');
-let nD = Ju(({
+let nD = registerModal(({
   workspace: e,
   goBack: t
 }) => {
@@ -3837,12 +3837,12 @@ function nM({
   let r = [...(t?.data?.org?.workspaces ?? [])];
   sortByPropertyWithOptions(r, 'name');
   let l = useCallback(t => {
-    a(_$$to({
+    a(showModalHandler({
       type: nL,
       data: {
         org: e,
         workspace: t,
-        goBack: () => a(Lo())
+        goBack: () => a(popModalStack())
       }
     }));
   }, [a, e]);
@@ -3861,14 +3861,14 @@ function nM({
 function nP(e) {
   return !!e.workspaceSharedSetting?.publicLinkControlsSetting;
 }
-let nU = Ju(() => {
+let nU = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let {
     formState,
     formActions
   } = Cf(t, t.shared_container_setting?.public_link_controls_setting, t.shared_container_setting?.public_link_controls_max_expiration);
-  let o = () => e(Lo());
+  let o = () => e(popModalStack());
   let [d, c] = useState(!!t.workshop_enabled);
   let _ = (e, n) => e === formState.initialPublicLinkControlsSetting && !!t.workshop_enabled === d && n === t.shared_container_setting?.public_link_controls_max_expiration;
   let u = t.tier === r.Agb.ENTERPRISE;
@@ -3920,7 +3920,7 @@ let nU = Ju(() => {
               className: 'x78zum5 x1q0g3np x1qughib x6s0dn4',
               children: [jsxs('div', {
                 className: 'x78zum5 xdt5ytf',
-                children: [jsx(_$$J2, {
+                children: [jsx(Label, {
                   'aria-describedby': 'open-sessions-note',
                   'htmlFor': 'open-sessions',
                   'className': 'x1s688f',
@@ -3968,7 +3968,7 @@ let nU = Ju(() => {
                   successMessage: s
                 }));
               };
-              t === w_.BANNED ? e(_$$to({
+              t === w_.BANNED ? e(showModalHandler({
                 type: nF,
                 data: {
                   onConfirm: i,
@@ -3982,12 +3982,12 @@ let nU = Ju(() => {
     })
   });
 }, 'PublicSharingModal');
-let nF = Ju(e => {
+let nF = registerModal(e => {
   let t;
   let a;
   let s;
   let r = useDispatch();
-  let l = () => r(Lo());
+  let l = () => r(popModalStack());
   e.isOpenSessionsEnabled ? (t = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_links_title'), a = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_links_submit'), s = renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_links_description')) : (t = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_title'), a = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_submit'), s = jsxs(Fragment, {
     children: [renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.main'), jsxs('ul', {
       className: 'xtaz4m5 xv2w18j',
@@ -4088,13 +4088,13 @@ function n3(e) {
     tier: nY[t = e.planTier] ?? t
   });
   let d = useDispatch();
-  let [c, _] = useState(EB(e.defaultCountry));
+  let [c, _] = useState(createEmptyAddress(e.defaultCountry));
   let [u, m] = useState(null);
   let [p, g] = useState(!1);
   let [h, x] = useState(null);
   let [b, v] = useState('');
   let f = () => {
-    d(Ce());
+    d(hideModal());
     e.onHide && e.onHide();
   };
   let y = (t, a) => {
@@ -4196,7 +4196,7 @@ function n3(e) {
     })
   });
 }
-let n8 = Ju(e => {
+let n8 = registerModal(e => {
   return jsx(_$$tH, {
     boundaryKey: 'OrgChangePaymentModal',
     fallback: jsx(_$$K2, {}),
@@ -4243,7 +4243,7 @@ function n6({
     label: a ? getI18nString('org_admin_settings.settings_tab.billing.payment_details.label') : getI18nString('org_admin_settings.settings_tab.billing.change_payment_method.label'),
     description: a ? getI18nString('org_admin_settings.settings_tab.billing.payment_details.description') : getI18nString('org_admin_settings.settings_tab.billing.change_payment_method.description'),
     onClick: () => {
-      s(_$$to({
+      s(showModalHandler({
         type: n8,
         data: {
           billableSeats: t,
@@ -4257,14 +4257,14 @@ function n6({
     }
   }, 'change-payment-method');
 }
-let n9 = Ju(e => {
+let n9 = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
   let r = Rs(G7P, {
     orgId: a.id
   });
   let l = oA(r.data?.org) ?? null;
-  let o = () => t(Lo());
+  let o = () => t(popModalStack());
   let d = !!l?.sitesPublishingDisabled;
   let [c, _] = useState(d);
   useEffect(() => {
@@ -4301,12 +4301,12 @@ let n9 = Ju(e => {
             readonly: r.status === 'loading',
             children: [jsx(_$$c2, {
               value: 'false',
-              label: jsx(_$$J2, {
+              label: jsx(Label, {
                 children: renderI18nText('org_settings.sites_publishing_toggle.enable')
               })
             }), jsx(_$$c2, {
               value: 'true',
-              label: jsx(_$$J2, {
+              label: jsx(Label, {
                 children: renderI18nText('org_settings.sites_publishing_toggle.disable')
               })
             })]
@@ -4341,14 +4341,14 @@ let n9 = Ju(e => {
     })
   });
 }, 'SitesPublishingToggleModal');
-let se = Ju(e => {
+let se = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
   let r = Rs(G7P, {
     orgId: a.id
   });
   let l = oA(r.data?.org) ?? null;
-  let o = () => t(Lo());
+  let o = () => t(popModalStack());
   let d = !!l?.supabaseDisabled;
   let [c, _] = useState(d);
   useEffect(() => {
@@ -4392,12 +4392,12 @@ let se = Ju(e => {
             readonly: r.status === 'loading',
             children: [jsx(_$$c2, {
               value: 'false',
-              label: jsx(_$$J2, {
+              label: jsx(Label, {
                 children: renderI18nText('org_settings.supabase_toggle.enable')
               })
             }), jsx(_$$c2, {
               value: 'true',
-              label: jsx(_$$J2, {
+              label: jsx(Label, {
                 children: renderI18nText('org_settings.supabase_toggle.disable')
               })
             })]
@@ -4435,11 +4435,11 @@ let se = Ju(e => {
 let st = 'team_creation_controls_modal--settingLabel--KGHr-';
 let sa = 'team_creation_controls_modal--description--tsaEB';
 let sn = 'team_creation_controls_modal--radioLabel--7XJIQ';
-let ss = Ju(() => {
+let ss = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = c4(t.id).data;
-  let r = () => e(Ce());
+  let r = () => e(hideModal());
   let [l, o] = useState(t.shared_container_setting?.team_creation_controls ? t.shared_container_setting.team_creation_controls : null);
   return jsx(fu, {
     name: 'Team Creation Control Setting Modal',
@@ -4563,7 +4563,7 @@ export function $$sr0(e) {
   let en = !!ee.data;
   let eo = org.tier === r.Agb.ENTERPRISE;
   _$$S(UC, () => {
-    $(_$$to({
+    $(showModalHandler({
       type: _$$q2,
       data: {
         planType: fm.ORGANIZATION,
@@ -4610,7 +4610,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.modify_community_handle_description'),
     currentValue: org.community_profile_handle ? `@${org.community_profile_handle}` : '',
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: S3,
         data: {
           orgId: org.id,
@@ -4624,7 +4624,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.delete_community_label'),
     description: getI18nString('settings_tab.delete_community_description'),
     onClick: () => {
-      org.community_profile_id && org.community_profile_handle && $(_$$to({
+      org.community_profile_id && org.community_profile_handle && $(showModalHandler({
         type: _$$M,
         data: {
           dispatch: $,
@@ -4637,7 +4637,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.community_commenters_label'),
     description: getI18nString('settings_tab.community_commenters_description'),
     onClick: () => {
-      org.community_profile_id && $(_$$to({
+      org.community_profile_id && $(showModalHandler({
         type: _$$J3,
         data: {
           profileId: org.community_profile_id,
@@ -4659,7 +4659,7 @@ export function $$sr0(e) {
       label: getI18nString('settings_tab.team_creation_label'),
       description: getI18nString('settings_tab.team_creation_description'),
       onClick: () => {
-        $(_$$to({
+        $(showModalHandler({
           type: ss
         }));
       }
@@ -4717,7 +4717,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.guest_membership_label'),
     description: getI18nString('settings_tab.guest_membership_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: nm
       }));
     }
@@ -4729,7 +4729,7 @@ export function $$sr0(e) {
     }),
     currentValue: org.shared_container_setting?.external_collaboration_controls ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: nr
       }));
     }
@@ -4748,7 +4748,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.sites_publishing_toggle_description'),
     currentValue: eb?.sitesPublishingDisabled ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: n9
       }));
     }
@@ -4758,7 +4758,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.supabase_toggle_description'),
     currentValue: eb?.supabaseDisabled ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: se
       }));
     }
@@ -4767,7 +4767,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.public_sharing_title'),
     description: getI18nString('settings_tab.public_sharing_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: nU
       }));
     }
@@ -4776,7 +4776,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.section_header.export_controls'),
     description: renderI18nText('settings_tab.export_controls_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: a3
       }));
     }
@@ -4785,7 +4785,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.password_controls_settings_label'),
     description: getI18nString('settings_tab.password_controls_settings_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: tU
       }));
     }
@@ -4842,7 +4842,7 @@ export function $$sr0(e) {
       }
     }(org),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: eu
       }));
     }
@@ -4860,7 +4860,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.saml_description'),
     currentValue: eM,
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: _$$p,
         data: {
           org,
@@ -4876,7 +4876,7 @@ export function $$sr0(e) {
     description: V() ? getI18nString('settings_tab.scim_group_description') : getI18nString('settings_tab.scim_description'),
     currentValue: cg(orgSamlConfig) ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: G
       }));
     }
@@ -4911,7 +4911,7 @@ export function $$sr0(e) {
         canEnable: e
       }),
       onClick: () => {
-        $(_$$to({
+        $(showModalHandler({
           type: nT,
           data: {
             ipAllowlistEnabled: t,
@@ -4936,7 +4936,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.idle_session_timeout_description'),
     currentValue: si(org.shared_container_setting?.idle_timeout_duration_in_secs),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         data: {
           idleTimeoutDurationInSecs: org.shared_container_setting?.idle_timeout_duration_in_secs,
           orgId: org.id
@@ -5001,7 +5001,7 @@ export function $$sr0(e) {
     let l = e => jsx('button', {
       className: _$$nf,
       onClick: () => {
-        $(_$$to({
+        $(showModalHandler({
           type: eC,
           data: {
             subscriptionStart: e
@@ -5037,7 +5037,7 @@ export function $$sr0(e) {
   canSeeBillingAddressExp && ts.settings.push(jsx(x8, {
     label: getI18nString('org_admin_settings.settings_tab.billing.update_invoice_details.label'),
     description: getI18nString('org_admin_settings.settings_tab.billing.update_invoice_details.description'),
-    onClick: () => $(_$$to({
+    onClick: () => $(showModalHandler({
       type: _$$u,
       data: {
         orgId: org.id,
@@ -5085,7 +5085,7 @@ export function $$sr0(e) {
         plan_type: getI18nString('settings_table.organization')
       }),
       onClick: () => {
-        $(_$$to({
+        $(showModalHandler({
           type: _$$h2,
           data: {
             planType: fm.ORGANIZATION,
@@ -5107,7 +5107,7 @@ export function $$sr0(e) {
     currentValue: z ? null : jsx($$so1, {}),
     description: getI18nString('plan_settings.seat_upgrade_digests_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: _$$q2,
         data: {
           planType: fm.ORGANIZATION,
@@ -5162,7 +5162,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.plugin_approval_description'),
     testId: 'plugin-approval-setting-action',
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: CW,
         data: {
           orgId: org.id,
@@ -5175,7 +5175,7 @@ export function $$sr0(e) {
     description: getI18nString('settings_tab.widget_admin_approval_description'),
     testId: 'widget-approval-setting-action',
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: CW,
         data: {
           orgId: org.id,
@@ -5188,7 +5188,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.dev_mode_label'),
     description: getI18nString('settings_tab.dev_mode_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: aH
       }));
     }
@@ -5269,7 +5269,7 @@ export function $$sr0(e) {
     label: getI18nString('org_settings.ai_controls.ai_features'),
     description: getI18nString('org_settings.ai_controls.setting_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: tS,
         data: {
           org
@@ -5423,14 +5423,14 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.member_metadata_label'),
     description: getI18nString('settings_tab.member_metadata_description'),
     currentValue: org.featured_scim_metadata ? du(org.featured_scim_metadata) : '',
-    onClick: () => $(_$$to({
+    onClick: () => $(showModalHandler({
       type: tF
     }))
   }, 'member-metadata')), tp.settings.push(jsx(x8, {
     label: getI18nString('settings_tab.connected_apps'),
     description: getI18nString('settings_tab.connected_apps_description'),
     onClick: () => {
-      $(_$$to({
+      $(showModalHandler({
         type: tZ,
         data: {
           org
@@ -5450,7 +5450,7 @@ export function $$sr0(e) {
       let t = await fetch(e === 'win' ? 'https://desktop.figma.com/win/releases.xml' : 'https://desktop.figma.com/mac-universal/releases.xml');
       let a = await t.text();
       let [n, s] = [a.match(/<title>Figma (\d+\.\d+\.\d+)<\/title>/)?.[1], a.match(/<pubDate>(.*?)<\/pubDate>/)?.[1]];
-      n && s && $(_$$to({
+      n && s && $(showModalHandler({
         type: aK,
         data: {
           version: n,
@@ -5481,14 +5481,14 @@ export function $$sr0(e) {
   let tg = [jsx(x8, {
     label: getI18nString('settings_tab.delete_org_label'),
     description: getI18nString('settings_tab.delete_org_description'),
-    onClick: () => $(_$$to({
+    onClick: () => $(showModalHandler({
       type: te
     }))
   }, 'delete-org')];
   org.domain_capture && tg.push(jsx(x8, {
     label: getI18nString('settings_tab.delete_user_label'),
     description: getI18nString('settings_tab.delete_user_description'),
-    onClick: () => $(_$$to({
+    onClick: () => $(showModalHandler({
       type: tt
     }))
   }, 'delete-user'));
@@ -5519,7 +5519,7 @@ export function $$sr0(e) {
     })]
   });
 }
-let sl = _$$nF((e, t, {
+let sl = createOptimistThunk((e, t, {
   liveStore: a
 }) => {
   let n = e.dispatch;
@@ -5539,7 +5539,7 @@ let sl = _$$nF((e, t, {
     });
     e.dispatch(_$$s2.flash(getI18nString('org_admin_settings.billing_details.billing_contact_updated')));
   };
-  n(_$$to({
+  n(showModalHandler({
     type: _$$E2,
     data: {
       currentContacts: currentContact,

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
@@ -42,7 +42,7 @@ export function $$f1({
       canAcceptVariables: !1,
       color: e,
       colorFormat: 0,
-      currentTool: g ?? NLJ.NONE,
+      currentTool: g ?? DesignGraphElements.NONE,
       dispatch: E,
       displayType: sX.WHITEBOARD,
       dropdownShown: f,
@@ -96,7 +96,7 @@ export function $$E0({
   return jsx(A, {
     target: t,
     onClose: () => {
-      if (currentTool !== NLJ.DROPPER_COLOR) {
+      if (currentTool !== DesignGraphElements.DROPPER_COLOR) {
         let t = x.current?.value ?? "";
         if (z5.format(e) !== t) try {
           let r = z5.parse(t, e);

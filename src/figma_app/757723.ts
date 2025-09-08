@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { isFigmaMobileApp } from "../figma_app/778880";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { q8 } from "../figma_app/459490";
 import { sZ } from "../905/845253";
 import { Ph, T0 } from "../figma_app/455620";
@@ -13,7 +13,7 @@ export function $$c0(e) {
     orgId: e.currentUserOrgId,
     fileKey: t ? t.key : null,
     userId: e.user?.id || null,
-    trackingSessionId: fF(),
+    trackingSessionId: getTrackingSessionId(),
     fileSeq: null
   };
 }

@@ -8,7 +8,7 @@ import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { sJ, Q5, rX } from "../9864/183809";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
@@ -55,7 +55,7 @@ function A(e) {
       label: renderI18nText("es_la_announcement.cta_button"),
       type: "button",
       onClick: () => {
-        t(to({
+        t(showModalHandler({
           type: kA,
           data: {
             source: IO.ANNOUNCEMENT_MODAL

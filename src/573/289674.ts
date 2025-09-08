@@ -3,9 +3,9 @@ import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { lV } from "../figma_app/617606";
 import { throwTypeError } from "../figma_app/465776";
 import { w as _$$w } from "../figma_app/970433";
-import { glU, K$p } from "../figma_app/763686";
+import { Fullscreen, ChatMessageType } from "../figma_app/763686";
 import { ClipboardContentType, ChatRole } from "../figma_app/175377";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { Ns } from "../figma_app/686647";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -521,8 +521,8 @@ function v(e) {
 let T = e => "JSX" === e.type;
 class k {
   appendMessage(e) {
-    if (null == glU) throw Error("Fullscreen not loaded");
-    return l7.ai("append-ai-chat-message", () => {
+    if (null == Fullscreen) throw Error("Fullscreen not loaded");
+    return permissionScopeHandler.ai("append-ai-chat-message", () => {
       let t = this.node.aiChatThread;
       null == t && (t = {
         messages: []
@@ -590,11 +590,11 @@ export function $$X0() {
     let [t, s] = useState([]);
     let n = iZ();
     let r = _$$r(() => function (e, t) {
-      if (null == glU) throw Error("Fullscreen not loaded");
+      if (null == Fullscreen) throw Error("Fullscreen not loaded");
       let s = e.getInternalCanvas();
       if (!s) return null;
       for (let e of s.childrenNodes) if (T(e) && e.name === t) return new k(e);
-      return new k(l7.ai("create-unique-ai-chat", () => {
+      return new k(permissionScopeHandler.ai("create-unique-ai-chat", () => {
         let n = function (e, t) {
           let s = e.createNode("JSX");
           t && (s.name = t);
@@ -822,7 +822,7 @@ function Q(e, t) {
             type: "system",
             message: {
               id: `converted-${s}`,
-              type: K$p.SYSTEM_MESSAGE,
+              type: ChatMessageType.SYSTEM_MESSAGE,
               userId: e.id,
               textContent: JSON.stringify({
                 plainText: n

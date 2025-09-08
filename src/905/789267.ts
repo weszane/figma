@@ -14,7 +14,7 @@ import { F as _$$F } from "../905/302958";
 import { Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
 import { u as _$$u } from "../905/16237";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { tc } from "../905/15667";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -22,11 +22,11 @@ import { R as _$$R } from "../905/263821";
 import { Cu } from "../figma_app/314264";
 import { ju } from "../905/389382";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { w as _$$w } from "../figma_app/171404";
 import { T as _$$T } from "../905/434246";
 import { mV, KL, k0, m3 } from "../905/223565";
-export let $$N0 = Ju(function ({
+export let $$N0 = registerModal(function ({
   licenseType: e,
   onRequest: t,
   onClose: i,
@@ -41,7 +41,7 @@ export let $$N0 = Ju(function ({
   let [M, j] = useState(!1);
   let U = _$$u();
   let B = () => {
-    F(Lo());
+    F(popModalStack());
   };
   let V = _$$R({
     licenseType: e,

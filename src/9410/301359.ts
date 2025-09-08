@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ez5, CNR } from "../figma_app/763686";
+import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { mz } from "../figma_app/456871";
 import { Ay, c6 } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { JT } from "../figma_app/632248";
 import { B3, Ag, cT } from "../figma_app/862289";
 import { zF } from "../figma_app/297822";
@@ -45,7 +45,7 @@ let $$E0 = async ({
   }
   let S = w.getEditorState();
   atomStoreManager.set(TD, S);
-  let j = (Ez5?.editorPreferences().speakerNotesHeight.getCopy() ?? 0) === 0;
+  let j = (AppStateTsApi?.editorPreferences().speakerNotesHeight.getCopy() ?? 0) === 0;
   _$$x({
     eventName: "started",
     fileKey: c,
@@ -56,7 +56,7 @@ let $$E0 = async ({
   try {
     let e;
     $3(T);
-    Ez5?.singleSlideView() && j && ud(CNR?.initialSpeakerNotesHeightInViewport() ?? 0);
+    AppStateTsApi?.singleSlideView() && j && ud(SlideConstantsCppBindings?.initialSpeakerNotesHeightInViewport() ?? 0);
     w.setEditorState(w.getEditorState());
     let r = {
       ..._$$Ay(),
@@ -100,7 +100,7 @@ let $$E0 = async ({
       f += e.delta;
       (f = f.replace(/(.) -/g, "$1\n -")).length > 0 && hp(f, "history-merge");
     }
-    Y5.commit();
+    fullscreenValue.commit();
     _$$x({
       eventName: "finished",
       fileKey: c,

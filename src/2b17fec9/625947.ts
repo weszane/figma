@@ -2,7 +2,7 @@ import { R1 } from "../figma_app/479760";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo, useRef, useId, forwardRef, useLayoutEffect, memo, Fragment as _$$Fragment, createRef, useContext } from "react";
 import { useDispatch, useStore, useSelector } from "../vendor/514228";
-import { fp8, glU, rcl, VTL, qq, xae, NLJ, hKj, $mk, VIy, OhE, AP3, Ez5, QOV, m1T, gEE, qmM, lMj, Oin, A$i, nzw, rrT, zkO, Tcr, daH, DV9, PoC, ruz, YEY, dNx, EW4, W8Y, lyf, $6Y, wzW, KWd, gw5, KpW } from "../figma_app/763686";
+import { MentionsCppBindings, Fullscreen, Command, ConfirmationLevel, ShapeSidebarMode, UserInterfaceElements, DesignGraphElements, CustomPosition, WhiteboardAiVisualCppBindings, IPanelType, WhiteboardCanvasAIBindings, EligibilityStatus, AppStateTsApi, UserActionState, LayoutTabType, Side, InteractionCpp, PointerAction, UIVisibilitySetting, VisibilityState, DiagramElementType, NodePropertyCategory, SourceType, WhiteboardFeatures, ColorOptions, WhiteboardTsApi, ConnectorType, ImageToolsBindings, CanvasSearchHelpers, SelectionState, EditAction, SessionStatus, ViewType, NavigationDirection, MindmapCppBindings, TransactionCommand, WhiteboardStarterKitCppBindings, CollaborationType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription, atom, createLocalStorageAtom, Xr, um as _$$um } from "../figma_app/27355";
 import { isMobileNotFigmaMobile, BrowserInfo, isNotMobile, isIpadDevice, isAnyMobile } from "../figma_app/778880";
@@ -15,7 +15,7 @@ import { aV as _$$aV, p8 as _$$p, eY as _$$eY, KH, dH as _$$dH } from "../figma_
 import { Kx, BI, rN as _$$rN, kM, yx as _$$yx, F4 } from "../figma_app/546509";
 import { IT } from "../905/713695";
 import { W as _$$W } from "../441/503702";
-import { ut as _$$ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../9410/188255";
 import { pO as _$$pO } from "../figma_app/42945";
@@ -28,7 +28,7 @@ import { _X as _$$_X, Yb, ZT, Z0, Pl, kE } from "../figma_app/62612";
 import { E as _$$E } from "../905/486517";
 import { ri as _$$ri, f6 as _$$f } from "../905/337179";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { l7 as _$$l, nc as _$$nc, zk } from "../905/189185";
+import { permissionScopeHandler as _$$l, scopeAwareFunction as _$$nc, zk } from "../905/189185";
 import { U as _$$U, am as _$$am } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { MZ, Dy } from "../figma_app/925970";
@@ -93,7 +93,7 @@ import { getInitialOptions, getLocaleFallbacks, buildUploadUrl } from "../figma_
 import { logError, logDebug } from "../905/714362";
 import { B as _$$B } from "../905/714743";
 import { Eo } from "../figma_app/80990";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { PW } from "../figma_app/633080";
 import { lX as _$$lX } from "../figma_app/588397";
 import { _b as _$$_b } from "../figma_app/162641";
@@ -150,18 +150,18 @@ import { J as _$$J5 } from "../9410/165619";
 import { H as _$$H } from "../2b17fec9/415304";
 import { Ro } from "../figma_app/805373";
 import { d0 as _$$d4, U5 } from "../9410/353422";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { EE, lB as _$$lB } from "../figma_app/731583";
 import { Al, tJ as _$$tJ, T1, DH, lM as _$$lM } from "../figma_app/90441";
 import { A as _$$A4 } from "../905/920142";
 import { Rs } from "../figma_app/288654";
 import { V as _$$V2 } from "../905/223767";
-import { Lo, to as _$$to, $O } from "../905/156213";
+import { popModalStack, showModalHandler, showModal } from "../905/156213";
 import { zN } from "../figma_app/579169";
 import { mW as _$$mW } from "../figma_app/797994";
 import { UQ } from "../figma_app/864723";
 import { bel } from "../figma_app/43951";
-import { b as _$$b3 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { EL } from "../905/858282";
 import { uv as _$$uv, CR } from "../figma_app/419216";
 import { Zk, xw as _$$xw, QY } from "../9410/351585";
@@ -223,7 +223,7 @@ import { xp as _$$xp, EO, gn as _$$gn, lt as _$$lt, aQ as _$$aQ } from "../figma
 import { z as _$$z } from "../3276/638169";
 import { c as _$$c3 } from "../3276/761211";
 import { M as _$$M2 } from "../figma_app/170366";
-import { Ar, lT as _$$lT, uF as _$$uF, Qt, i8 as _$$i3, my as _$$my } from "../figma_app/300692";
+import { getCurrentPluginVersion, pluginMetadata, getPluginVersion, filterResourcesByOrgId, filterPublishedResources, getPluginMetadata } from "../figma_app/300692";
 import { V as _$$V3 } from "../905/480825";
 import { tY as _$$tY } from "../3591/828414";
 import { A as _$$A5 } from "../3591/199070";
@@ -274,7 +274,7 @@ import { c5 as _$$c4 } from "../905/526509";
 import { dQ as _$$dQ, Q6 } from "../2b17fec9/523222";
 import { L as _$$L2 } from "../905/453756";
 import { Kj, hn as _$$hn } from "../2b17fec9/696626";
-import { ZQ, Ag, Gb as _$$Gb, n_ as _$$n_2 } from "../figma_app/155287";
+import { hasLocalFileId, PluginType, getPluginAllowListKey, getWidgetAllowListKey } from "../figma_app/155287";
 import { O9, Ht } from "../figma_app/522930";
 import { B as _$$B3 } from "../1291/448960";
 import { b as _$$b5 } from "../1291/451154";
@@ -289,7 +289,7 @@ import { n as _$$n7 } from "../2b17fec9/3836";
 import { K as _$$K2 } from "../1291/825015";
 import { E2, Hr } from "../905/257019";
 import { bL as _$$bL, l9 as _$$l6, mc as _$$mc, c$ as _$$c$2, wv as _$$wv2 } from "../905/493196";
-import { h as _$$h6 } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { SI } from "../905/116101";
 import { W as _$$W4 } from "../2b17fec9/950005";
@@ -349,7 +349,7 @@ import { P as _$$P3 } from "../vendor/348225";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { Fu as _$$Fu } from "../figma_app/545877";
 import { O1, KD } from "../figma_app/317394";
-import { q as _$$q3 } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { t as _$$t6 } from "../905/181774";
 import { e0 as _$$e8 } from "../905/696396";
 import { p as _$$p3 } from "../figma_app/353099";
@@ -387,7 +387,7 @@ import { bL as _$$bL2 } from "../905/38914";
 import { vo as _$$vo2, Y9, nB as _$$nB, wi } from "../figma_app/272243";
 import { Ay as _$$Ay3 } from "../905/612521";
 import { Lf as _$$Lf } from "../figma_app/564528";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { v as _$$v2 } from "../figma_app/759243";
 import { nG as _$$nG, tT as _$$tT } from "../9410/584673";
 import { A as _$$A16 } from "../svg/16929";
@@ -448,7 +448,7 @@ import { Zr } from "../figma_app/678782";
 import { lJ as _$$lJ2, kl, A5 } from "../905/275640";
 import { p as _$$p5 } from "../905/185998";
 import { J as _$$J0 } from "../905/614223";
-import { gl as _$$gl, oV as _$$oV, hS as _$$hS2, _W as _$$_W2 } from "../905/216495";
+import { isInvalidValue, MIXED_MARKER, isValidValue, valueOrFallback } from "../905/216495";
 import { k as _$$k6 } from "../642/978258";
 import { bo as _$$bo } from "../figma_app/447445";
 import { c2 as _$$c7 } from "../905/382883";
@@ -523,7 +523,7 @@ import { Yv } from "../figma_app/616107";
 import { Z9 } from "../figma_app/634656";
 import { ZE } from "../figma_app/932285";
 import { Wj, HL, WW, xY as _$$xY2, YR, W1 as _$$W6, cd as _$$cd2 } from "../figma_app/650460";
-import { nj as _$$nj2 } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { I9, uQ as _$$uQ3, Tv as _$$Tv } from "../figma_app/151869";
 import { V as _$$V5, v1, cF as _$$cF, QP as _$$QP2 } from "../figma_app/761984";
 import { N as _$$N6, D as _$$D5 } from "../2b17fec9/152433";
@@ -806,7 +806,7 @@ async function Y(e, t, i, n, r, a) {
           }, {
             forwardToDatadog: !0
           });
-          _$$l.user("undo-at-mention", () => fp8.removeMention(i, t));
+          _$$l.user("undo-at-mention", () => MentionsCppBindings.removeMention(i, t));
         }
       }
     }));
@@ -867,7 +867,7 @@ function X() {
       onInsert: useCallback(() => {
         if (i && i.mentions && i.mentions[i.index] && e?.id) {
           let n = i.mentions[i.index];
-          let r = _$$l.user("insert-at-mention", () => fp8.replaceCurrentMentionsQueryWithMention({
+          let r = _$$l.user("insert-at-mention", () => MentionsCppBindings.replaceCurrentMentionsQueryWithMention({
             mentionedUserId: n.id,
             mentionedByUserId: e.id,
             handle: n.handle
@@ -924,7 +924,7 @@ let eW = "DEFAULT_CONTAINING_FRAME_PLACEHOLDER";
 let ez = new Map();
 function eZ(e) {
   if (e.startsWith(_$$yR)) {
-    let t = glU?.getShapeWithTextTypeFromToolString(e);
+    let t = Fullscreen?.getShapeWithTextTypeFromToolString(e);
     if (t) return ez.get(t);
   }
   return ez.get(e);
@@ -1278,7 +1278,7 @@ function tE({
         (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && KE(_$$yw(e), t, getInitialOptions().user_data?.id);
       },
       onDragStart: () => {
-        Y5.triggerActionEnum(rcl.SET_TOOL_DEFAULT);
+        fullscreenValue.triggerActionEnum(Command.SET_TOOL_DEFAULT);
         Ln();
       },
       onPointerUp: UH
@@ -1411,8 +1411,8 @@ let tN = ({
     getTile: i => jsx(tE, {
       item: i,
       metadata: d?.[i.library_key],
-      addToRecentsBehavior: VTL.YES,
-      toolSetSource: qq.SHAPES_SIDEBAR_REGULAR,
+      addToRecentsBehavior: ConfirmationLevel.YES,
+      toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR,
       isLocked: t,
       testId: `${e.title}-${Kv}-${i.id}`
     }, i.id),
@@ -1448,8 +1448,8 @@ function tA({
     children: i.map(e => jsx(tE, {
       item: e,
       metadata: n?.[e.library_key],
-      addToRecentsBehavior: VTL.YES,
-      toolSetSource: qq.SHAPES_SIDEBAR_REGULAR,
+      addToRecentsBehavior: ConfirmationLevel.YES,
+      toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR,
       isLocked: s,
       testId: `${t}-${Kv}-${e.id}`
     }, e.id))
@@ -1498,8 +1498,8 @@ function tM({
       let a = eZ(t);
       return a ? "library" === a.type ? jsx(tE, {
         item: a.item,
-        addToRecentsBehavior: VTL.YES_WITHOUT_REORDER,
-        toolSetSource: qq.SHAPES_SIDEBAR_RECENTS,
+        addToRecentsBehavior: ConfirmationLevel.YES_WITHOUT_REORDER,
+        toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_RECENTS,
         testId: `recents-${Kv}-${a.item.id}`,
         isLocked: r,
         metadata: e?.[a.item.library_key]
@@ -1507,8 +1507,8 @@ function tM({
         shapeType: a.shapeType,
         color: i,
         strokeStyleType: n,
-        addToRecentsBehavior: VTL.YES_WITHOUT_REORDER,
-        toolSetSource: qq.SHAPES_SIDEBAR_RECENTS,
+        addToRecentsBehavior: ConfirmationLevel.YES_WITHOUT_REORDER,
+        toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_RECENTS,
         testId: `recents-${QA}-${a.shapeType}`,
         recordingKey: Pt(_$$eu, `${QA}-${a.shapeType}`)
       }, `recents-${a.shapeType}`) : null;
@@ -1531,8 +1531,8 @@ function tU({
       shapeType: t,
       color: i,
       strokeStyleType: n,
-      addToRecentsBehavior: VTL.YES,
-      toolSetSource: qq.SHAPES_SIDEBAR_REGULAR,
+      addToRecentsBehavior: ConfirmationLevel.YES,
+      toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR,
       testId: `${e}-${QA}-${t}`,
       recordingKey: Pt(Yu, `${QA}-${t}`)
     }, `${e}-${t}`))
@@ -1636,8 +1636,8 @@ function tV({
         let i = eZ(t);
         return i ? "library" === i.type ? jsx(tE, {
           item: i.item,
-          addToRecentsBehavior: VTL.YES_WITHOUT_REORDER,
-          toolSetSource: qq.SHAPES_SIDEBAR_RECENTS,
+          addToRecentsBehavior: ConfirmationLevel.YES_WITHOUT_REORDER,
+          toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_RECENTS,
           testId: `recents-${Kv}-${i.item.id}`,
           isLocked: l,
           metadata: e?.[i.item.library_key]
@@ -1645,8 +1645,8 @@ function tV({
           shapeType: i.shapeType,
           color: r,
           strokeStyleType: a,
-          addToRecentsBehavior: VTL.YES_WITHOUT_REORDER,
-          toolSetSource: qq.SHAPES_SIDEBAR_RECENTS,
+          addToRecentsBehavior: ConfirmationLevel.YES_WITHOUT_REORDER,
+          toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_RECENTS,
           testId: `recents-${QA}-${i.shapeType}`,
           recordingKey: Pt(_$$eu, `${QA}-${i.shapeType}`)
         }, `recents-${i.shapeType}`) : null;
@@ -1675,7 +1675,7 @@ function tV({
         sectionType: s
       },
       getTile: e => "MINDMAP_TREE_NUCLEUS" === e ? jsx(_$$h3, {
-        addToRecentsBehavior: VTL.NO,
+        addToRecentsBehavior: ConfirmationLevel.NO,
         color: t,
         disableDragging: !0,
         recordingKey: Pt(qD, e),
@@ -1683,7 +1683,7 @@ function tV({
         size: "large",
         strokeStyleType: i,
         testId: `${Xi}-${e}`,
-        toolSetSource: qq.SHAPES_SIDEBAR_REGULAR
+        toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR
       }, e) : jsx(_$$W2, {
         isSelected: n(e),
         connectorStyle: e,
@@ -1726,8 +1726,8 @@ function tV({
           shapeType: e,
           color: t,
           strokeStyleType: i,
-          addToRecentsBehavior: VTL.YES,
-          toolSetSource: qq.SHAPES_SIDEBAR_REGULAR,
+          addToRecentsBehavior: ConfirmationLevel.YES,
+          toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR,
           testId: `${a}-${QA}-${e}`,
           recordingKey: Pt(Yu, `${QA}-${e}`)
         }, `${a}-${e}`)
@@ -1874,7 +1874,7 @@ function tK({
     localStorageKey: tG,
     sectionType: tr.Connectors,
     children: e.map(e => "MINDMAP_TREE_NUCLEUS" === e ? jsx(_$$h3, {
-      addToRecentsBehavior: VTL.NO,
+      addToRecentsBehavior: ConfirmationLevel.NO,
       color: t,
       disableDragging: !0,
       recordingKey: Pt(qD, e),
@@ -1882,7 +1882,7 @@ function tK({
       size: "large",
       strokeStyleType: i,
       testId: `${Xi}-${e}`,
-      toolSetSource: qq.SHAPES_SIDEBAR_REGULAR
+      toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR
     }, e) : jsx(_$$W2, {
       isSelected: n(e),
       connectorStyle: e,
@@ -2599,7 +2599,7 @@ function iN({
     if (g) {
       let e = setTimeout(() => {
         j(!1);
-        Y5.triggerAction("toggle-sidebar", {
+        fullscreenValue.triggerAction("toggle-sidebar", {
           source: "figjam-panel"
         });
       }, 200);
@@ -2831,7 +2831,7 @@ function i1() {
     }), jsxs("div", {
       className: "figjam_left_panel_header--rightSide--Kcru4",
       children: [getFeatureFlags().internal_only_debug_tools && jsx(_$$bu, {}), jsx(_$$n2, {}), jsx(En, {}), jsx(_$$J4, {}), jsx(_$$J3, {
-        onClick: () => Y5.triggerAction("toggle-sidebar", {
+        onClick: () => fullscreenValue.triggerAction("toggle-sidebar", {
           source: "figjam-left-panel-header"
         }),
         "aria-label": getI18nString("fullscreen_actions.collapse-figjam-left-panel"),
@@ -2982,7 +2982,7 @@ function i7({
   });
 }
 function ne() {
-  let [e,, t] = BN(xae.LAYERS);
+  let [e,, t] = BN(UserInterfaceElements.LAYERS);
   return jsx(_$$y, {
     withBorder: !0,
     children: jsx(_$$eG, {
@@ -3200,13 +3200,13 @@ function nN({
     let l = i.x + 10;
     let d = i.x + i.width - 10 - t.width;
     let c = Zj.ABOVE;
-    let u = qE(Al(e, t), l, d);
-    u + nI + nL > e.x + e.width ? (u = qE(e.x + e.width + n, l, d), c = Zj.RIGHT) : u + t.width - nI - nL < e.x && (u = qE(e.x - t.width - n, l, d), c = Zj.LEFT);
+    let u = clamp(Al(e, t), l, d);
+    u + nI + nL > e.x + e.width ? (u = clamp(e.x + e.width + n, l, d), c = Zj.RIGHT) : u + t.width - nI - nL < e.x && (u = clamp(e.x - t.width - n, l, d), c = Zj.LEFT);
     c === Zj.LEFT || c === Zj.RIGHT ? r = _$$tJ(e, t) : (r = T1(e, t, n)) < s && (r = DH(e, t, n), c = Zj.BELOW);
     return {
       pos: c,
       x: u,
-      y: qE(r, s, o)
+      y: clamp(r, s, o)
     };
   }, [a, i]);
   let x = useCallback((e, t, i) => _(e, t, i).x, [_]);
@@ -3228,23 +3228,23 @@ function nN({
         switch (i) {
           case Zj.ABOVE:
             return {
-              left: qE(n - nI, nL, a),
+              left: clamp(n - nI, nL, a),
               top: Math.floor(t.height)
             };
           case Zj.BELOW:
             return {
-              left: qE(n - nI, nL, a),
+              left: clamp(n - nI, nL, a),
               top: -nI
             };
           case Zj.RIGHT:
             return {
               left: -nI,
-              top: qE(r - nI, nL, s)
+              top: clamp(r - nI, nL, s)
             };
           case Zj.LEFT:
             return {
               left: Math.floor(t.width),
-              top: qE(r - nI, nL, s)
+              top: clamp(r - nI, nL, s)
             };
         }
       }({
@@ -3534,7 +3534,7 @@ function n5() {
       mainText: n9(t),
       userFlag: t,
       secondaryText: n8(t),
-      upsellSource: _$$b3.FIGJAM_UPSELL_MODAL,
+      upsellSource: UpsellModalType.FIGJAM_UPSELL_MODAL,
       gif: n7(t),
       teamId: "",
       currentSessionId: r,
@@ -3559,7 +3559,7 @@ function n6(e) {
     mainText: n9(l),
     userFlag: l,
     secondaryText: n8(l),
-    upsellSource: _$$b3.FIGJAM_UPSELL_MODAL,
+    upsellSource: UpsellModalType.FIGJAM_UPSELL_MODAL,
     gif: n7(l),
     teamId,
     currentFileKey,
@@ -3585,7 +3585,7 @@ function n4(e) {
     });
   }, [c, userFlag]);
   let m = () => {
-    u(Lo());
+    u(popModalStack());
     u(_$$b({
       [userFlag]: !0
     }));
@@ -3632,7 +3632,7 @@ function n4(e) {
         }), jsx($z, {
           onClick: () => {
             m();
-            u(_$$to({
+            u(showModalHandler({
               type: _$$V2,
               data: {
                 upsellSource,
@@ -3927,7 +3927,7 @@ let av = forwardRef((e, t) => {
 function aC(e) {
   let t = _$$xp(e.pluginId);
   let i = Be().plugins[e.pluginId];
-  let n = useMemo(() => i || e.pluginVersion || Ar(t) || _$$lT, [i, t, e.pluginVersion]);
+  let n = useMemo(() => i || e.pluginVersion || getCurrentPluginVersion(t) || pluginMetadata, [i, t, e.pluginVersion]);
   return jsx(aT, {
     pluginId: e.pluginId,
     pluginVersion: n,
@@ -3976,7 +3976,7 @@ let aT = memo(function (e) {
     resource: plugin,
     validBadges: [_$$op.FREEMIUM, _$$op.OFF_PLATFORM, _$$op.PURCHASED]
   });
-  if (pluginVersion === _$$lT || _$$m4(plugin) && (g?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os)) return null;
+  if (pluginVersion === pluginMetadata || _$$m4(plugin) && (g?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os)) return null;
   let y = x ? jsx(WZ, {
     resource: plugin
   }) : d ? jsx(aE, {
@@ -4277,7 +4277,7 @@ let aG = memo(function (e) {
   let n = useDispatch();
   let r = e.widgetId;
   let a = _$$aQ(e.widgetId);
-  let s = useMemo(() => e.widgetVersion || _$$uF(a), [e.widgetVersion, a]);
+  let s = useMemo(() => e.widgetVersion || getPluginVersion(a), [e.widgetVersion, a]);
   let c = EO(a);
   let p = _$$gn(a);
   let h = _$$sZ();
@@ -4796,7 +4796,7 @@ function s_({
 function sx(e) {
   let t = e.widgetId;
   let i = useSelector(e => e.publishedWidgets[t]);
-  let n = i ? Ar(i) : null;
+  let n = i ? getCurrentPluginVersion(i) : null;
   return i && n ? jsx(sg, {
     widgetVersion: n
   }) : null;
@@ -4981,15 +4981,15 @@ function sA({
   toolId: e
 }) {
   switch (e) {
-    case NLJ.TYPE:
+    case DesignGraphElements.TYPE:
       return jsx(_$$ue, {});
-    case NLJ.SECTION:
+    case DesignGraphElements.SECTION:
       return jsx(Sn, {});
-    case NLJ.TABLE:
+    case DesignGraphElements.TABLE:
       return jsx(_$$vh, {});
-    case NLJ.STAMP:
+    case DesignGraphElements.STAMP:
       return jsx(Ox, {});
-    case NLJ.COMMENTS:
+    case DesignGraphElements.COMMENTS:
       return jsx(v7, {});
     case _$$y2:
       return jsx(Lf, {});
@@ -5029,7 +5029,7 @@ function sk({
   }
 }
 let sM = memo(function (e) {
-  let t = t => ZQ(t) ? jsx(av, {
+  let t = t => hasLocalFileId(t) ? jsx(av, {
     localFileId: t.localFileId,
     view: e.view
   }, "development_plugin_" + t.localFileId) : jsx(aC, {
@@ -5065,7 +5065,7 @@ function sP() {
 let sU = "browse_widgets_view--sectionHeader--rxCOO text--fontPos13--xW8hS text--_fontBase--QdLsd";
 let sF = "browse_widgets_view--widgetTilesGridContainer--t5-lL";
 let sH = memo(function (e) {
-  let t = e => ZQ(e) ? jsx(aV, {
+  let t = e => hasLocalFileId(e) ? jsx(aV, {
     localFileId: e.localFileId,
     tab: _$$p2.RECENTS
   }, e.localFileId) : jsx(aG, {
@@ -5422,7 +5422,7 @@ function s8(e) {
   });
 }
 function os(e) {
-  let t = e.extensionType === Ag.Plugin ? E2 : Hr;
+  let t = e.extensionType === PluginType.Plugin ? E2 : Hr;
   let i = T5("BrowseExtensionsOrgAllowlistView").unwrapOr(null);
   let n = i?.key.type === OL.ORG ? i.key.parentId : void 0;
   return i && n && t.hasAllowlist({
@@ -5440,7 +5440,7 @@ function oo(e) {
     extensionIds,
     extensionType
   } = e;
-  return extensionType === Ag.Plugin ? jsx(Fragment, {
+  return extensionType === PluginType.Plugin ? jsx(Fragment, {
     children: extensionIds.map(e => jsx(aC, {
       pluginId: e,
       view: _$$p2.EXPLORE
@@ -5456,13 +5456,13 @@ function ol(e) {
   let {
     orgId
   } = e;
-  let i = (e.extensionType === Ag.Plugin ? _$$ll : U6)();
+  let i = (e.extensionType === PluginType.Plugin ? _$$ll : U6)();
   let n = useMemo(() => Object.keys(i), [i]);
   let r = _$$tS();
-  let a = (e.extensionType === Ag.Plugin ? _$$Gb : _$$n_2)(orgId, r);
+  let a = (e.extensionType === PluginType.Plugin ? getPluginAllowListKey : getWidgetAllowListKey)(orgId, r);
   let s = _$$mC(a);
   let d = Be();
-  let c = e.extensionType === Ag.Plugin ? d.orgPlugins : d.orgWidgets;
+  let c = e.extensionType === PluginType.Plugin ? d.orgPlugins : d.orgWidgets;
   let u = useMemo(() => e.dedupeOrgSaves ? n.filter(e => !c[e]) : n, [n, e.dedupeOrgSaves, c]);
   return s ? 0 === u.length ? null : jsxs(Fragment, {
     children: [jsx("div", {
@@ -5509,7 +5509,7 @@ function of(e) {
       value: e.currentView,
       recordingKey: "figjam-browse-modal-main-view-select",
       children: [jsx(_$$l6, {
-        label: jsx(_$$h6, {
+        label: jsx(HiddenLabel, {
           children: getI18nString("universal_insert.view_resources_by")
         })
       }), jsxs(_$$mc, {
@@ -5557,7 +5557,7 @@ function ob() {
     children: [e.map(e => jsx(aC, {
       pluginId: e.id,
       view: _$$p2.PLUGINS,
-      pluginVersion: _$$uF(e)
+      pluginVersion: getPluginVersion(e)
     }, e.id)), jsx(_$$Y2, {
       padding: {
         horizontal: 24
@@ -5617,10 +5617,10 @@ function oI({
   });
   let i = !!(e && e.plugins_whitelist_enforced);
   let n = _$$ll();
-  let r = selectWithShallowEqual(i => e && !t ? Qt(_$$i3(H6(Object.values(i.publishedPlugins))), e.id) : {});
+  let r = selectWithShallowEqual(i => e && !t ? filterResourcesByOrgId(filterPublishedResources(H6(Object.values(i.publishedPlugins))), e.id) : {});
   let a = Object.keys(r);
   let s = _$$tS();
-  let c = _$$Gb(e?.id ?? "", s);
+  let c = getPluginAllowListKey(e?.id ?? "", s);
   let u = _$$mC(c);
   let p = LP.loadingKeyForPayload(e?.id ?? "");
   let h = _$$mC(p);
@@ -5656,7 +5656,7 @@ function oI({
         }, t);
       })]
     }), jsx(os, {
-      extensionType: Ag.Plugin,
+      extensionType: PluginType.Plugin,
       dedupeOrgSaves: !0
     })]
   }) : jsx("span", {
@@ -5749,7 +5749,7 @@ function oU() {
       })]
     }), e === oh.RECENT_AND_SAVED && jsxs(Fragment, {
       children: [jsx(oM, {}), i ? jsx(os, {
-        extensionType: Ag.Plugin
+        extensionType: PluginType.Plugin
       }) : jsx(oD, {})]
     }), e === oh.DEVELOPMENT && jsx(oj, {}), e === oh.ORG && jsxs(Fragment, {
       children: [jsx(ow, {}), !i && jsx(oD, {})]
@@ -5777,7 +5777,7 @@ function oF() {
     shelfType: _$$cS.BROWSE_PLUGINS_MODAL
   }));
   let n = _$$tS();
-  let r = _$$oh(_$$Gb(t, n));
+  let r = _$$oh(getPluginAllowListKey(t, n));
   let a = _$$oh(LP.loadingKeyForPayload(t));
   return i || r || a ? jsx(VR, {}) : jsx(_$$fu, {
     name: "plugins",
@@ -5788,12 +5788,12 @@ function oQ(e) {
   let t = useSelector(e => e.universalInsertModal);
   let i = useDispatch();
   let n = $1();
-  let r = useSelector(t => _$$my(e.pluginId, t.publishedPlugins));
+  let r = useSelector(t => getPluginMetadata(e.pluginId, t.publishedPlugins));
   let a = _$$gn(r);
   let s = Object.values(n).find(e => e.plugin_id === r.id);
   let c = !!s;
   let p = !!r.id;
-  let h = Be().plugins[e.pluginId] || _$$uF(r);
+  let h = Be().plugins[e.pluginId] || getPluginVersion(r);
   let {
     isSavedForOrg,
     isSavedForUser,
@@ -5967,7 +5967,7 @@ function oQ(e) {
         s.error ? l.push({
           displayText: "\u26A0 In-development version",
           callback: () => {
-            i(_$$to({
+            i(showModalHandler({
               type: _$$r,
               data: {
                 dispatch: i,
@@ -6154,7 +6154,7 @@ function ln(e) {
               template: r,
               type: _$$n4.HubFile
             },
-            templateInsertionDirection: hKj.RIGHT,
+            templateInsertionDirection: CustomPosition.RIGHT,
             triggeredFrom: _,
             onSuccess: () => {
               j && _$$oM({
@@ -6416,7 +6416,7 @@ function lh() {
 function lm({
   widget: e
 }) {
-  let t = _$$uF(e);
+  let t = getPluginVersion(e);
   let {
     tabManager
   } = _$$cX();
@@ -6479,7 +6479,7 @@ function lb({
   let r = U6();
   let a = _$$h7("widget");
   let s = _$$tS();
-  let d = _$$n_2(e?.id ?? "", s);
+  let d = getWidgetAllowListKey(e?.id ?? "", s);
   let c = _$$mC(d);
   let u = _$$a3.loadingKeyForPayload(e.id ?? "");
   let p = _$$mC(u);
@@ -6519,7 +6519,7 @@ function lb({
         })
       })]
     }), jsx(os, {
-      extensionType: Ag.Widget,
+      extensionType: PluginType.Widget,
       dedupeOrgSaves: !0
     })]
   }) : jsx(_$$L3, {});
@@ -6555,7 +6555,7 @@ function lC() {
       })]
     }), e === oh.RECENT_AND_SAVED && jsxs(Fragment, {
       children: [jsx(lu, {}), i ? jsx(os, {
-        extensionType: Ag.Widget
+        extensionType: PluginType.Widget
       }) : jsx(ly, {})]
     }), e === oh.DEVELOPMENT && jsx(lp, {}), e === oh.ORG && jsxs(Fragment, {
       children: [jsx(lj, {}), !i && jsx(ly, {})]
@@ -6583,7 +6583,7 @@ function lT() {
     shelfType: _$$cS.BROWSE_WIDGETS_MODAL
   }));
   let n = _$$tS();
-  let r = _$$oh(_$$n_2(t, n));
+  let r = _$$oh(getWidgetAllowListKey(t, n));
   let a = _$$oh(_$$a3.loadingKeyForPayload(t));
   let s = _$$mC(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: $A.FigJam
@@ -6634,7 +6634,7 @@ function lk(e) {
   let n = useSelector(e => e.authedActiveCommunityProfile);
   let r = _$$xp(resourceId);
   let a = !!r.id;
-  let s = Be().plugins[resourceId] || _$$uF(r);
+  let s = Be().plugins[resourceId] || getPluginVersion(r);
   let c = useSelector(e => zg(e.selectedView) && !e.user);
   let p = r.community_publishers?.accepted || [];
   let m = useDispatch();
@@ -6752,7 +6752,7 @@ function lD(e) {
   let _ = !!c || f;
   let x = Um();
   let g = x?.type === lP && x.data.widgetId === resourceId;
-  let j = _$$uF(n);
+  let j = getPluginVersion(n);
   let {
     tabManager,
     searchQuery
@@ -7782,7 +7782,7 @@ function dq({
     })]
   });
 }
-let dJ = Ju(function (e) {
+let dJ = registerModal(function (e) {
   let t = _$$hS(e);
   let [i, n] = useState(() => Object.keys(_$$FN())[0] ?? "");
   return jsx(_$$bL2, {
@@ -7869,7 +7869,7 @@ function d1({
         className: h,
         disabled: s.status === _$$c6.LOADING,
         onClick: () => {
-          r(_$$to({
+          r(showModalHandler({
             type: dJ
           }));
         },
@@ -8262,7 +8262,7 @@ function ci({
     });
   };
   function f(e) {
-    e !== r && s && $mk && (a(e), $mk.updateFigjamAiGanttChartType(e, s));
+    e !== r && s && WhiteboardAiVisualCppBindings && (a(e), WhiteboardAiVisualCppBindings.updateFigjamAiGanttChartType(e, s));
   }
   let _ = _$$a6() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");
   return jsx(_$$fu, {
@@ -8299,11 +8299,11 @@ function ci({
             }), jsxs("div", {
               children: [jsx("button", {
                 onClick: () => {
-                  f(VIy.BASIC);
+                  f(IPanelType.BASIC);
                 },
                 className: ex()(_$$s.inline.itemsCenter.py6.px14.b1.colorBorder.fontMedium.lh16.$, {
                   [di]: !0,
-                  [dn]: r === VIy.BASIC
+                  [dn]: r === IPanelType.BASIC
                 }),
                 style: _$$sx2.add({
                   borderRadius: "6px 0px 0px 6px",
@@ -8312,11 +8312,11 @@ function ci({
                 children: renderI18nText("whiteboard.ai_modal.basic")
               }), jsx("button", {
                 onClick: () => {
-                  f(VIy.EXPANDED);
+                  f(IPanelType.EXPANDED);
                 },
                 className: ex()(_$$s.inline.itemsCenter.py6.px14.bSolid.br1.bt1.bb1.colorBorder.fontMedium.lh16.$, {
                   [di]: !0,
-                  [dn]: r === VIy.EXPANDED
+                  [dn]: r === IPanelType.EXPANDED
                 }),
                 style: _$$sx2.add({
                   borderRadius: "0px 6px 6px 0px",
@@ -8333,7 +8333,7 @@ function ci({
 }
 let cn = [buildUploadUrl("25d8a30c44eab356d393ee997bc62cd0c85b4a28"), buildUploadUrl("3d959a21151e0b11ad486bd688e54f88d625c00a"), buildUploadUrl("9e7571f06975aa64d8e90ac0289a1b152dcc4dad")];
 function cr() {
-  let e = _$$q3();
+  let e = useFullscreenReady();
   let t = _$$aV();
   return !!e && !t;
 }
@@ -8492,7 +8492,7 @@ function cu() {
       whileHover: "hover",
       children: jsxs(_$$$z, {
         onClick: () => {
-          t($O({
+          t(showModal({
             type: PH.type,
             data: {
               triggeredFrom: "aiModal",
@@ -8795,7 +8795,7 @@ function c4(e) {
 }
 var c9 = (e => (e.TEXT = "text", e.IMAGE = "image", e.UNSUPPORTED = "unsupported", e))(c9 || {});
 function c8(e, t) {
-  return OhE?.getCanvasAiElibilityForNode(t) === AP3.Eligible;
+  return WhiteboardCanvasAIBindings?.getCanvasAiElibilityForNode(t) === EligibilityStatus.Eligible;
 }
 async function c7(e) {
   try {
@@ -9079,7 +9079,7 @@ let up = _$$um({
 }, (e, t) => {
   switch (t.type) {
     case "RESET":
-      Ez5?.figjamState().currentAICanvasInputNodeIds.set([]);
+      AppStateTsApi?.figjamState().currentAICanvasInputNodeIds.set([]);
       return {
         ...e,
         currentAction: null,
@@ -9243,10 +9243,10 @@ function uw(e) {
   return [e.x + e.width, e.y];
 }
 function uI() {
-  return _$$ut(Ez5?.figjamState().currentAICanvasInputNodeIds, []);
+  return getObservableValue(AppStateTsApi?.figjamState().currentAICanvasInputNodeIds, []);
 }
 function uL(e) {
-  Ez5?.figjamState().currentAICanvasInputNodeIds.set(e);
+  AppStateTsApi?.figjamState().currentAICanvasInputNodeIds.set(e);
 }
 function uN() {
   let {
@@ -9531,7 +9531,7 @@ function uB() {
         pastPrompts,
         generateUserPromptFromTexts: !a.length && !!getFeatureFlags().figjam_ai_canvas_enhance_prompt,
         onGenerationCompleted: (e, t) => {
-          l && l.length > 0 && OhE?.deleteGeneratedNodes(l);
+          l && l.length > 0 && WhiteboardCanvasAIBindings?.deleteGeneratedNodes(l);
           getFeatureFlags().figjam_ai_canvas_enhance_prompt && t && s({
             type: "SET_PROMPT",
             prompt: t
@@ -9539,7 +9539,7 @@ function uB() {
           s({
             type: "SET_GENERATION_RESULT",
             generationResult: function (e, t, i, n, r) {
-              let a = getFeatureFlags().figjam_ai_canvas_noodles ? OhE?.createStickiesFromStringsWithNoodles(e, t) : OhE?.createStickiesFromStrings(e, t);
+              let a = getFeatureFlags().figjam_ai_canvas_noodles ? WhiteboardCanvasAIBindings?.createStickiesFromStringsWithNoodles(e, t) : WhiteboardCanvasAIBindings?.createStickiesFromStrings(e, t);
               if (a?.generatedNodeIds) for (let t of a?.generatedNodeIds) {
                 let r = n.get(t);
                 r && c6(r, {
@@ -9655,7 +9655,7 @@ function uB() {
       });
       let j = qY(g);
       t([...o, g.id]);
-      l && l.length > 0 && OhE?.deleteGeneratedNodes(l);
+      l && l.length > 0 && WhiteboardCanvasAIBindings?.deleteGeneratedNodes(l);
       try {
         await r?.start({
           targetNode: g,
@@ -9812,7 +9812,7 @@ function uB() {
       action: h.action
     }));
   }, [N, g, h.action]), useEffect(() => {
-    N === qy.CANCELLED && ("image" === e && _?.generationType === uu.IMAGE && _.generatedNodeIds.length > 0 && OhE?.deleteGeneratedNodes(_.generatedNodeIds), B3(h.action));
+    N === qy.CANCELLED && ("image" === e && _?.generationType === uu.IMAGE && _.generatedNodeIds.length > 0 && WhiteboardCanvasAIBindings?.deleteGeneratedNodes(_.generatedNodeIds), B3(h.action));
   }, [N, e, h.action, _?.generatedNodeIds, _?.generationType]), !m) return null;
   let R = m.aiTrackingContext;
   switch (N) {
@@ -10054,8 +10054,8 @@ function uY() {
     let i = _$$Fk((e, t) => {
       let i = Object.keys(t);
       let n = i.length > 0;
-      let r = i.map(e => OhE?.getCanvasAiElibilityForNode(e) ?? AP3.Ineligible);
-      return n && r.includes(AP3.Eligible) && !r.includes(AP3.Ineligible);
+      let r = i.map(e => WhiteboardCanvasAIBindings?.getCanvasAiElibilityForNode(e) ?? EligibilityStatus.Ineligible);
+      return n && r.includes(EligibilityStatus.Eligible) && !r.includes(EligibilityStatus.Ineligible);
     }, t);
     let n = uC();
     let r = function (e) {
@@ -10069,7 +10069,7 @@ function uY() {
       mirror: {
         appModel: e
       }
-    }) => [QOV.DEFAULT, QOV.SELECTING_TEXT, QOV.CLICKING_TO_CHANGE_SELECTION].includes(e.activeUserAction));
+    }) => [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT, UserActionState.CLICKING_TO_CHANGE_SELECTION].includes(e.activeUserAction));
     let s = useSelector(({
       mirror: {
         appModel: e
@@ -10077,7 +10077,7 @@ function uY() {
     }) => e.activeCanvasEditModeType);
     let o = _$$Fk((e, t, i) => {
       let n = Object.keys(t);
-      return i === m1T.TEXT && n.some(t => e.get(t)?.isStickyText);
+      return i === LayoutTabType.TEXT && n.some(t => e.get(t)?.isStickyText);
     }, t, s);
     return (!n || !r) && e && (i || o) && a;
   }();
@@ -10137,9 +10137,9 @@ function uX() {
   let u = a?.state ?? qy.INITIAL;
   return (useEffect(() => {
     let e = u === qy.INITIAL || u === qy.DONE && s === uc.SHOW_PROMPT_BOX;
-    null !== r && e ? Ez5?.figjamState().isInCanvasAiMode.set(!0) : Ez5?.figjamState().isInCanvasAiMode.set(!1);
+    null !== r && e ? AppStateTsApi?.figjamState().isInCanvasAiMode.set(!0) : AppStateTsApi?.figjamState().isInCanvasAiMode.set(!1);
   }, [r, u, s]), useEffect(() => {
-    Ez5?.figjamState().isInCanvasAiMode.set(!1);
+    AppStateTsApi?.figjamState().isInCanvasAiMode.set(!1);
   }, [i]), t && n && r) ? u === qy.RUNNING || u === qy.DONE || u === qy.ERROR ? jsx(_$$p4, {
     children: jsx(_$$s6, {
       name: "figjamAICanvas",
@@ -10254,7 +10254,7 @@ function u6(e) {
     "Enter" === e.key && (setIsEditorOpen(!1), h());
   }, [setIsEditorOpen, h]);
   let x = p ? "image_description_editor--popup--l-kiW _overlayBase--_overlayBase--Rkj8l" : "image_description_editor--popupWithExplanation--0XudB image_description_editor--popup--l-kiW _overlayBase--_overlayBase--Rkj8l";
-  let g = n && !_$$gl(n) ? n : "";
+  let g = n && !isInvalidValue(n) ? n : "";
   let j = getI18nString("whiteboard.inline_menu.image_description_placeholder");
   return jsxs(Fragment, {
     children: [!p && jsx("div", {
@@ -10572,7 +10572,7 @@ let p1 = {
 };
 function p8(e) {
   let t = p7(e);
-  t && Y5.triggerAction(t);
+  t && fullscreenValue.triggerAction(t);
 }
 function p7(e) {
   switch (e) {
@@ -10598,7 +10598,7 @@ function he(e) {
 }
 function ht(e) {
   let t = hi(e);
-  t && Y5.triggerAction(t);
+  t && fullscreenValue.triggerAction(t);
 }
 function hi(e) {
   switch (e) {
@@ -10687,7 +10687,7 @@ let h_ = {
     minValue: -1 / 0
   }
 };
-let hx = [...Object.values(h_).map(e => e.minValue), _$$oV];
+let hx = [...Object.values(h_).map(e => e.minValue), MIXED_MARKER];
 let hg = {
   format: e => {
     let t = Object.values(h_).find(t => e >= t.minValue && e <= t.maxValue);
@@ -10747,7 +10747,7 @@ function hT(e) {
 }
 function hE(e) {
   let t = Object.keys(e.mirror.sceneGraphSelection);
-  return 1 !== t.length ? gEE.RIGHT : qmM.getConnectorCardinalDirection(t[0]);
+  return 1 !== t.length ? Side.RIGHT : InteractionCpp.getConnectorCardinalDirection(t[0]);
 }
 function hS(e) {
   let t = hT(e);
@@ -10757,10 +10757,10 @@ function hS(e) {
   let n = e.mirror.sceneGraph;
   let r = n.get(i[0]);
   if (!r) return null;
-  switch (qmM.getQuickAddInteraction()) {
-    case lMj.DRAG:
+  switch (InteractionCpp.getQuickAddInteraction()) {
+    case PointerAction.DRAG:
       return r;
-    case lMj.CLICK:
+    case PointerAction.CLICK:
       {
         let e = n.get(r.connectorStart.endpointNodeID);
         if (!e) return null;
@@ -10773,7 +10773,7 @@ function hw() {
   let t = Um();
   let i = useAtomWithSubscription(_$$n9);
   let n = t && t.type === K9;
-  let r = useSelector(e => e.progressBarState.mode === Oin.HIDE_UI);
+  let r = useSelector(e => e.progressBarState.mode === UIVisibilitySetting.HIDE_UI);
   let a = useSelector(e => e.mirror.selectionProperties.name && -1 !== e.mirror.selectionProperties.name.indexOf("FigJam Stamp Icon") && e.mirror.selectionProperties.numSelectedByType?.ROUNDED_RECTANGLE === 1 && 1 === e.mirror.selectionProperties.numSelected);
   let s = useSelector(e => a || e.mirror.selectionProperties.numSelectedByType?.STAMP === 1 && 1 === e.mirror.selectionProperties.numSelected);
   let o = useSelector(e => {
@@ -10782,7 +10782,7 @@ function hw() {
     return t && t > 0 || i && i > 0;
   });
   let l = useSelector(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected);
-  let u = _$$ut(Ez5?.figjamState().isInCanvasAiMode, !1);
+  let u = getObservableValue(AppStateTsApi?.figjamState().isInCanvasAiMode, !1);
   let m = useSelector(hT);
   let f = _$$d4();
   return !l && !e && !r && (!o || !n) && !m && (s && !isIpadDevice ? f : !i && !u);
@@ -10791,21 +10791,21 @@ let hM = "whiteboard_transparency--icon--LOJ7P";
 let hD = "whiteboard_transparency--separator--t8wmx";
 let hP = wv;
 let hU = {
-  [A$i.VISIBLE]: "VISIBLE",
-  [A$i.TRANSPARENT]: "TRANSPARENT",
-  [A$i.TRANSPARENT_CUSTOM]: "TRANSPARENT_CUSTOM",
-  [A$i.HIDDEN]: "HIDDEN"
+  [VisibilityState.VISIBLE]: "VISIBLE",
+  [VisibilityState.TRANSPARENT]: "TRANSPARENT",
+  [VisibilityState.TRANSPARENT_CUSTOM]: "TRANSPARENT_CUSTOM",
+  [VisibilityState.HIDDEN]: "HIDDEN"
 };
 let hF = {
-  [A$i.VISIBLE]: jsx(_$$H5, {}),
-  [A$i.TRANSPARENT]: jsx(_$$N5, {}),
-  [A$i.TRANSPARENT_CUSTOM]: jsx(_$$N5, {}),
-  [A$i.HIDDEN]: jsx(_$$a9, {})
+  [VisibilityState.VISIBLE]: jsx(_$$H5, {}),
+  [VisibilityState.TRANSPARENT]: jsx(_$$N5, {}),
+  [VisibilityState.TRANSPARENT_CUSTOM]: jsx(_$$N5, {}),
+  [VisibilityState.HIDDEN]: jsx(_$$a9, {})
 };
 var hH = (e => (e[e.NONE = 0] = "NONE", e[e.CONNECTOR = 1] = "CONNECTOR", e[e.SHAPE_WITH_TEXT = 2] = "SHAPE_WITH_TEXT", e[e.PLATFORM_SHAPE = 4] = "PLATFORM_SHAPE", e[e.ALL = 7] = "ALL", e))(hH || {});
 function hB(e, t, i, n, r) {
   2 & t && i(e);
-  1 & t && n(e === A$i.HIDDEN);
+  1 & t && n(e === VisibilityState.HIDDEN);
   4 & t && r(e);
 }
 function hV() {
@@ -10821,11 +10821,11 @@ function hV() {
   return n;
 }
 function hG(e) {
-  return 1 & e ? [A$i.VISIBLE, A$i.HIDDEN] : 2 & e || 4 & e ? [A$i.VISIBLE, A$i.TRANSPARENT, A$i.HIDDEN] : [];
+  return 1 & e ? [VisibilityState.VISIBLE, VisibilityState.HIDDEN] : 2 & e || 4 & e ? [VisibilityState.VISIBLE, VisibilityState.TRANSPARENT, VisibilityState.HIDDEN] : [];
 }
 function hK(e, t, i, n) {
-  if (!(_$$gl(i) || _$$gl(t) || _$$gl(n))) {
-    let r = i ? A$i.HIDDEN : A$i.VISIBLE;
+  if (!(isInvalidValue(i) || isInvalidValue(t) || isInvalidValue(n))) {
+    let r = i ? VisibilityState.HIDDEN : VisibilityState.VISIBLE;
     let a = t ?? n ?? r;
     if ((!(2 & e) || a === t) && (!(4 & e) || a === n) && (!(1 & e) || a === r)) return a;
   }
@@ -10839,10 +10839,10 @@ function hZ({
 }) {
   let [t, i] = _$$lJ2("shapeWithTextFillType");
   let n = {
-    [A$i.VISIBLE]: getI18nString("whiteboard.inline_menu.shape_visibility_visible"),
-    [A$i.TRANSPARENT]: getI18nString("whiteboard.inline_menu.shape_visibility_transparent"),
-    [A$i.TRANSPARENT_CUSTOM]: getI18nString("whiteboard.inline_menu.shape_visibility_transparent"),
-    [A$i.HIDDEN]: getI18nString("whiteboard.inline_menu.shape_visibility_hidden")
+    [VisibilityState.VISIBLE]: getI18nString("whiteboard.inline_menu.shape_visibility_visible"),
+    [VisibilityState.TRANSPARENT]: getI18nString("whiteboard.inline_menu.shape_visibility_transparent"),
+    [VisibilityState.TRANSPARENT_CUSTOM]: getI18nString("whiteboard.inline_menu.shape_visibility_transparent"),
+    [VisibilityState.HIDDEN]: getI18nString("whiteboard.inline_menu.shape_visibility_hidden")
   };
   let [r, a] = _$$lJ2("connectorTextBackgroundTransparent");
   let [s, l] = _$$lJ2("platformShapeFillType");
@@ -10856,11 +10856,11 @@ function hZ({
     children: [jsxs(_$$D4, {
       className: "whiteboard_transparency--connectorFillContainer--yUHqE",
       onPointerUp: e ? () => {
-        a(p !== A$i.HIDDEN);
+        a(p !== VisibilityState.HIDDEN);
       } : void 0,
       role: "button",
       recordingKey: "connectorTextBackgroundVisibility",
-      children: [p === A$i.HIDDEN ? jsx(noop, {
+      children: [p === VisibilityState.HIDDEN ? jsx(noop, {
         className: hM
       }) : jsx(_$$_2, {
         className: hM
@@ -10875,7 +10875,7 @@ function hZ({
     children: [jsx("div", {
       className: "whiteboard_transparency--container---6CxE",
       children: jsx(_$$b9, {
-        value: void 0 === p || _$$gl(p) ? void 0 : hz(p),
+        value: void 0 === p || isInvalidValue(p) ? void 0 : hz(p),
         legend: jsx(_$$q4, {
           children: getI18nString("whiteboard.inline_menu.shape_visibility.legend")
         }),
@@ -11027,10 +11027,10 @@ let hQ = () => {
       i && a(e, o);
       break;
     case "LOCK_UNLOCK":
-      s !== m1T.RASTER && a(e, o);
+      s !== LayoutTabType.RASTER && a(e, o);
       break;
     case "MULTISELECT_MODE":
-      t.currentTool === NLJ.HAND_SELECT && a(e, o);
+      t.currentTool === DesignGraphElements.HAND_SELECT && a(e, o);
       break;
     default:
       a(e, o);
@@ -11072,18 +11072,18 @@ let mt = memo(function (e) {
   });
 });
 function mr() {
-  return useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME);
+  return useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === DiagramElementType.SECTION_NAME);
 }
 function ma() {
   let e = mr();
   return () => {
-    e ? glU?.hideOnCanvasNameEditor() : glU?.triggerActionInUserEditScope("rename-selection", null);
+    e ? Fullscreen?.hideOnCanvasNameEditor() : Fullscreen?.triggerActionInUserEditScope("rename-selection", null);
   };
 }
 function mc() {
   let e = kl("whiteboardColor");
   let t = kl("whiteboardDividedSwatchColors");
-  return _$$gl(t) ? (console.error("whiteboardDividedSwatchColors should never be mixed"), []) : e && _$$hS2(e) ? e : t ?? [];
+  return isInvalidValue(t) ? (console.error("whiteboardDividedSwatchColors should never be mixed"), []) : e && isValidValue(e) ? e : t ?? [];
 }
 function mu() {
   let e = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
@@ -11098,7 +11098,7 @@ function mu() {
   let a = e.SHAPE_WITH_TEXT ?? 0;
   let s = e.CONNECTOR ?? 0;
   let o = a + s + t === i;
-  s === i && (o = (o = r) && n !== m1T.TEXT);
+  s === i && (o = (o = r) && n !== LayoutTabType.TEXT);
   return o;
 }
 let mp = ["alignLeft", "alignHorizontalCenter", "alignRight", "alignTop", "alignVerticalCenter", "alignBottom"];
@@ -11184,7 +11184,7 @@ function mO(e) {
 let mk = new Map([["left", new Map([["NONE", buildUploadUrl("7a9930b1e4aca1b5d06c36b00bd2cc64758c5849")], ["ARROW", buildUploadUrl("deb5540ae4b6484e3bdb0025b52bf8e71a79391c")], ["ARROW_FILLED", buildUploadUrl("fa76c9565eddcf56affd7797c5d393fed72b9028")], ["ARROW_INVERTED", buildUploadUrl("2336592069ee1de7da07da2aa881ff85c1c77989")], ["CIRCLE", buildUploadUrl("7c285e3fcbace487b65e53e626cc2ad2133e9acd")], ["DIAMOND", buildUploadUrl("1ab747ab4697d5f6bf7e5b99160883f70aa4c2a5")]])], ["up", new Map([["NONE", buildUploadUrl("157b46536766087af28320f95b2f0c98f71a1032")], ["ARROW", buildUploadUrl("8c3280098fe09c5e14d57d507f390c3bae24733a")], ["ARROW_FILLED", buildUploadUrl("de8f03cc76289efcb5ae472d7cb53e899a0e8d80")], ["ARROW_INVERTED", buildUploadUrl("465e721389b5e2f23116e26869dd90370cb10f2c")], ["CIRCLE", buildUploadUrl("eaa032fe2bcf35f92d9276227a0f2ac4f32c7edc")], ["DIAMOND", buildUploadUrl("711223c18ed61a1df0e414cc340334133720333d")]])], ["right", new Map([["NONE", buildUploadUrl("7a9930b1e4aca1b5d06c36b00bd2cc64758c5849")], ["ARROW", buildUploadUrl("53332df23dae692567e44b5c3321d0ec811c23d5")], ["ARROW_FILLED", buildUploadUrl("d2d126c19a44a29d01f2c8927ce496c7b4906a5f")], ["ARROW_INVERTED", buildUploadUrl("e644ae782ac2d99dccc8684fc8acf0627fe9bce1")], ["CIRCLE", buildUploadUrl("b272c1b69833952f3054bc74183ca23bd5d6b288")], ["DIAMOND", buildUploadUrl("2959df2f9f7f86724b0dfbdd24718af3742dfb76")]])], ["down", new Map([["NONE", buildUploadUrl("157b46536766087af28320f95b2f0c98f71a1032")], ["ARROW", buildUploadUrl("31d42fe0be5b036376d289ea121d5a1db20d3bc6")], ["ARROW_FILLED", buildUploadUrl("1e60f91397fba49e24f812cc92d52ca98d88e183")], ["ARROW_INVERTED", buildUploadUrl("cf37c05e83fc534cfa16a63f2f6eb49b187fdcd3")], ["CIRCLE", buildUploadUrl("ce81c97a7610b01854553d55585931d67c48b657")], ["DIAMOND", buildUploadUrl("aadf8da4a886c4ddf2950ce9863376fafe05543a")]])]]);
 function mR(e, t, i) {
   let n = mL(e);
-  if (n) return _$$gl(i) ? mk.get("START" === t ? "left" : "right")?.get(n) : mk.get(i)?.get(n);
+  if (n) return isInvalidValue(i) ? mk.get("START" === t ? "left" : "right")?.get(n) : mk.get(i)?.get(n);
 }
 function mM() {
   let e = kl("connectorStartCapForSelection");
@@ -11242,7 +11242,7 @@ function mV() {
 let mG = new Map([["sansSerif", buildUploadUrl("4d90c5e665fa16415b0b261e302696e4c706553a")], ["serif", buildUploadUrl("14457d0d904ce9c5c570f9557fc760a18cde12ea")], ["monospace", buildUploadUrl("a96474304a571c7ef149023afd13beb0c196f764")], ["script", buildUploadUrl("6e257bdd5a3789fd0013eb9611f503d44b1c4a56")]]);
 function mK() {
   let e = kl("whiteboardFontFamilies");
-  if (!(!e || _$$gl(e))) return e;
+  if (!(!e || isInvalidValue(e))) return e;
 }
 let mW = "FONT_SIZE/";
 let mz = "FONT_SIZE/CUSTOM";
@@ -11266,7 +11266,7 @@ function m$() {
 }
 function mY() {
   let e = kl("whiteboardFontSizes");
-  if (e && _$$hS2(e)) return e;
+  if (e && isValidValue(e)) return e;
 }
 let mX = "IMAGE_CROP/";
 function mq() {
@@ -11734,14 +11734,14 @@ function fe() {
     itemStringType: "paletteSelector",
     identifier: "WHITEBOARD_COLOR",
     submenu: {
-      shouldCenterAlignItems: Ez5?.uiState().showUI3Colors.getCopy() ?? !1,
+      shouldCenterAlignItems: AppStateTsApi?.uiState().showUI3Colors.getCopy() ?? !1,
       position: _$$pf2.pinnedToFloatingBar,
       pages: [{
         rowMaxSize: 0,
         items: [{
           itemStringType: "palette",
           identifier: "paletteWhiteboardColor",
-          rowMaxSize: Ez5?.uiState().showUI3Colors.getCopy() ? 8 : 6,
+          rowMaxSize: AppStateTsApi?.uiState().showUI3Colors.getCopy() ? 8 : 6,
           swatches: _$$bE(LK("WHITEBOARD_COLOR"), !0, "base")
         }, {
           itemStringType: "divider",
@@ -12068,7 +12068,7 @@ let fa = memo(function (e) {
 });
 function fl() {
   let e = () => {
-    Y5.triggerActionInUserEditScope("ungroup-selection");
+    fullscreenValue.triggerActionInUserEditScope("ungroup-selection");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -12094,13 +12094,13 @@ function fd() {
 }
 function fp() {
   let e = kl("washiTapePaint");
-  let t = useMemo(() => !e || _$$gl(e) ? null : _$$dG("fillPaints", e), [e]);
+  let t = useMemo(() => !e || isInvalidValue(e) ? null : _$$dG("fillPaints", e), [e]);
   let i = t?.data;
   let n = i && i.length > 0 ? i[0] : void 0;
   let r = e => !!e;
   return [useMemo(() => (i ?? []).map(e => {
     if (e?.type !== "IMAGE" || !e?.image?.hash) return;
-    let t = _$$nj2(e.image.hash);
+    let t = sha1HexFromBytes(e.image.hash);
     return _$$B5.find(e => e.image === t) || {
       image: t,
       name: "w-custom",
@@ -12120,13 +12120,13 @@ function fh({
     s(!1);
   }, [i]);
   let p = () => {
-    Y5.updateAppModel({
+    fullscreenValue.updateAppModel({
       currentSelectedProperty: {
-        type: rrT.STROKE,
+        type: NodePropertyCategory.STROKE,
         indices: [0]
       }
     });
-    glU?.uploadPaintImage("NORMAL", 1);
+    Fullscreen?.uploadPaintImage("NORMAL", 1);
   };
   let h = useMemo(() => _$$g6(), []);
   let m = useMemo(() => _$$g6(), []);
@@ -12169,7 +12169,7 @@ function fh({
     additionalOptionOnChange: p,
     additionalOptions: (e = !1) => _(e),
     onChange: e => {
-      _$$Cs(_$$M4(e), zkO.USER);
+      _$$Cs(_$$M4(e), SourceType.USER);
     },
     onToggleMenuOpen: u,
     optionEquality: (e, t) => !(Array.isArray(e) || Array.isArray(t)) && e.image === t.image,
@@ -12329,8 +12329,8 @@ function fg({
         switch (e.identifier) {
           case "PENCIL_STROKE":
             if (o && l) {
-              let e = _$$gl(o) ? 1 : o;
-              let i = _$$gl(l) ? {
+              let e = isInvalidValue(o) ? 1 : o;
+              let i = isInvalidValue(l) ? {
                 r: 0,
                 g: 0,
                 b: 0,
@@ -12432,19 +12432,19 @@ let fE = () => ({
 let fS = (e, t) => {
   let i = function () {
     let e = h9();
-    return new Map([[Tcr.RESIZE_TO_FIT, ["RESIZE_TO_FIT"]], [Tcr.TEXT_DECORATION, ["TEXT_DECORATION_BOLD", "TEXT_DECORATION_STRIKETHROUGH"]], [Tcr.WHITEBOARD_COLOR, ["WHITEBOARD_COLOR"]], [Tcr.HIGHLIGHT_COLOR, ["HIGHLIGHT_COLOR"]], [Tcr.STICKY_COLOR, ["STICKY_COLOR"]], [Tcr.WASHI_TAPE_PATTERN, ["WASHI_TAPE_PATTERN"]], [Tcr.IMAGE, ["REPLACE_IMAGE", "IMAGE_CONTROLS"]], [Tcr.BORDER, ["IMAGE_BORDER"]], [Tcr.WHITEBOARD_SHAPE, ["WHITEBOARD_SHAPE"]], [Tcr.WHITEBOARD_STROKE, ["WHITEBOARD_STROKE", "PENCIL_STROKE", "HIGHLIGHTER_STROKE"]], [Tcr.FONT_FAMILY, ["FONT_FAMILY"]], [Tcr.WHITEBOARD_TEXT_STYLE, ["WHITEBOARD_TEXT_STYLE"]], [Tcr.TEXT_ALIGN_H, ["TEXT_ALIGN"]], [Tcr.BULLETED_LIST, [e ? "ORDERED_LIST" : "UNORDERED_LIST"]], [Tcr.CONNECTOR_START_CAP, ["CONNECTOR_START_CAP"]], [Tcr.CONNECTOR_END_CAP, ["CONNECTOR_END_CAP"]], [Tcr.CONNECTOR_LINE_STYLE, ["CONNECTOR_LINE_STYLE"]], [Tcr.ADD_TEXT, ["ADD_CONNECTOR_TEXT"]], [Tcr.SECTION_SHOW_HIDE, ["SECTION_SHOW_HIDE"]], [Tcr.SECTION_RENAME, ["SECTION_RENAME"]], [Tcr.EMBED_OPEN_EXTERNAL, ["EMBED_OPEN_EXTERNAL"]], [Tcr.EMBED_CONVERT_TO_TEXT, ["EMBED_CONVERT_TO_TEXT"]], [Tcr.HYPERLINK, ["HYPERLINK"]], [Tcr.AUTHOR_VISIBILITY, ["AUTHOR_VISIBILITY"]], [Tcr.DIVIDER, ["DIVIDER"]]]);
+    return new Map([[WhiteboardFeatures.RESIZE_TO_FIT, ["RESIZE_TO_FIT"]], [WhiteboardFeatures.TEXT_DECORATION, ["TEXT_DECORATION_BOLD", "TEXT_DECORATION_STRIKETHROUGH"]], [WhiteboardFeatures.WHITEBOARD_COLOR, ["WHITEBOARD_COLOR"]], [WhiteboardFeatures.HIGHLIGHT_COLOR, ["HIGHLIGHT_COLOR"]], [WhiteboardFeatures.STICKY_COLOR, ["STICKY_COLOR"]], [WhiteboardFeatures.WASHI_TAPE_PATTERN, ["WASHI_TAPE_PATTERN"]], [WhiteboardFeatures.IMAGE, ["REPLACE_IMAGE", "IMAGE_CONTROLS"]], [WhiteboardFeatures.BORDER, ["IMAGE_BORDER"]], [WhiteboardFeatures.WHITEBOARD_SHAPE, ["WHITEBOARD_SHAPE"]], [WhiteboardFeatures.WHITEBOARD_STROKE, ["WHITEBOARD_STROKE", "PENCIL_STROKE", "HIGHLIGHTER_STROKE"]], [WhiteboardFeatures.FONT_FAMILY, ["FONT_FAMILY"]], [WhiteboardFeatures.WHITEBOARD_TEXT_STYLE, ["WHITEBOARD_TEXT_STYLE"]], [WhiteboardFeatures.TEXT_ALIGN_H, ["TEXT_ALIGN"]], [WhiteboardFeatures.BULLETED_LIST, [e ? "ORDERED_LIST" : "UNORDERED_LIST"]], [WhiteboardFeatures.CONNECTOR_START_CAP, ["CONNECTOR_START_CAP"]], [WhiteboardFeatures.CONNECTOR_END_CAP, ["CONNECTOR_END_CAP"]], [WhiteboardFeatures.CONNECTOR_LINE_STYLE, ["CONNECTOR_LINE_STYLE"]], [WhiteboardFeatures.ADD_TEXT, ["ADD_CONNECTOR_TEXT"]], [WhiteboardFeatures.SECTION_SHOW_HIDE, ["SECTION_SHOW_HIDE"]], [WhiteboardFeatures.SECTION_RENAME, ["SECTION_RENAME"]], [WhiteboardFeatures.EMBED_OPEN_EXTERNAL, ["EMBED_OPEN_EXTERNAL"]], [WhiteboardFeatures.EMBED_CONVERT_TO_TEXT, ["EMBED_CONVERT_TO_TEXT"]], [WhiteboardFeatures.HYPERLINK, ["HYPERLINK"]], [WhiteboardFeatures.AUTHOR_VISIBILITY, ["AUTHOR_VISIBILITY"]], [WhiteboardFeatures.DIVIDER, ["DIVIDER"]]]);
   }();
   let n = function () {
     let e = q8();
     let t = _$$V5();
     let i = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-    return new Map([["TIDY_UP", Zr("tidy-up")], ["GROUP_SELECTION", Zr("group-selection")], ["UNGROUP_SELECTION", fd() ?? !1], ["CREATE_SECTION", Zr("create-section-from-selection")], ["ALIGNMENT", Zr("align-top") && i !== m1T.RASTER], ["AI_QUICK_ACTIONS", !e && t]]);
+    return new Map([["TIDY_UP", Zr("tidy-up")], ["GROUP_SELECTION", Zr("group-selection")], ["UNGROUP_SELECTION", fd() ?? !1], ["CREATE_SECTION", Zr("create-section-from-selection")], ["ALIGNMENT", Zr("align-top") && i !== LayoutTabType.RASTER], ["AI_QUICK_ACTIONS", !e && t]]);
   }();
   let r = function () {
     let e = kl("imageHasNoStroke");
     let t = kl("sectionContentsHidden");
-    let i = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME);
-    let n = _$$ut(Ez5?.editorState().selectionIsHyperlink, !1);
+    let i = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === DiagramElementType.SECTION_NAME);
+    let n = getObservableValue(AppStateTsApi?.editorState().selectionIsHyperlink, !1);
     let r = kl("authorVisibility");
     return new Map([["TEXT_DECORATION_BOLD", useSelector(e => _$$N6(e.mirror.selectionProperties.fontStyle?.toString() || ""))], ["TEXT_DECORATION_STRIKETHROUGH", useSelector(e => "STRIKETHROUGH" === e.mirror.selectionProperties.whiteboardTextDecoration)], ["ORDERED_LIST", h9()], ["UNORDERED_LIST", h4()], ["IMAGE_BORDER", !1 === e], ["SECTION_SHOW_HIDE", !0 === t], ["SECTION_RENAME", i], ["HYPERLINK", !0 === n], ["AUTHOR_VISIBILITY", !0 === r]]);
   }();
@@ -12468,10 +12468,10 @@ let fS = (e, t) => {
           colors: Array.isArray(t) ? t : [t]
         });
       };
-      if (null == e || _$$gl(e)) a();else {
+      if (null == e || isInvalidValue(e)) a();else {
         let t = my.get(i)?.map(t => _$$zS2(e, t));
-        let s = t?.find(e => e !== daH.CUSTOM) ?? daH.CUSTOM;
-        s !== daH.CUSTOM ? r.set(i, {
+        let s = t?.find(e => e !== ColorOptions.CUSTOM) ?? ColorOptions.CUSTOM;
+        s !== ColorOptions.CUSTOM ? r.set(i, {
           itemStringType: "palette",
           paletteIdentifier: n,
           selectionType: Ud.presetColor,
@@ -12491,7 +12491,7 @@ let fS = (e, t) => {
       itemStringType: "palette",
       paletteIdentifier: "paletteWashiTapePattern",
       selectionType: Ud.customImage,
-      imageIdentifier: _$$nj2(s)
+      imageIdentifier: sha1HexFromBytes(s)
     });
     return r;
   }();
@@ -12577,7 +12577,7 @@ let fS = (e, t) => {
       let e = Uq();
       return mq().map(t => "CIRCLE" === t.identifier ? [t.identifier, e] : [t.identifier, !0]);
     }();
-    let u = new Map([["fillTypeVisible", e && t.includes(A$i.VISIBLE)], ["fillTypeTransparent", e && t.includes(A$i.TRANSPARENT)], ["fillTypeHidden", e && t.includes(A$i.HIDDEN)], ["whiteboardStrokeSolid", n], ["whiteboardStrokeDashed", n], ["whiteboardStrokeNone", r], ["whiteboardStrokeThin", i], ["whiteboardStrokeThick", i], ["textAlignLeft", !0], ["textAlignCenter", !0], ["textAlignRight", !0], ...a, ["connectorLineStraight", !0], ["connectorLineElbowed", !0], ["imageCropSlider", !0], ["imageRotate", !0], ...s, ...o, ...l, ...d, ["CONTEXTUAL_PENCIL_OPACITY", !0]]);
+    let u = new Map([["fillTypeVisible", e && t.includes(VisibilityState.VISIBLE)], ["fillTypeTransparent", e && t.includes(VisibilityState.TRANSPARENT)], ["fillTypeHidden", e && t.includes(VisibilityState.HIDDEN)], ["whiteboardStrokeSolid", n], ["whiteboardStrokeDashed", n], ["whiteboardStrokeNone", r], ["whiteboardStrokeThin", i], ["whiteboardStrokeThick", i], ["textAlignLeft", !0], ["textAlignCenter", !0], ["textAlignRight", !0], ...a, ["connectorLineStraight", !0], ["connectorLineElbowed", !0], ["imageCropSlider", !0], ["imageRotate", !0], ...s, ...o, ...l, ...d, ["CONTEXTUAL_PENCIL_OPACITY", !0]]);
     E5.forEach((e, t) => {
       u.set(t, i);
     });
@@ -12640,7 +12640,7 @@ let fS = (e, t) => {
     let f = _$$eX("VECTOR");
     let _ = _$$eX("HIGHLIGHT");
     let x = Ru(s ?? 0, f ? "VECTOR" : _ ? "HIGHLIGHT" : "NONE");
-    let g = new Map([["fillTypeVisible", n && r === A$i.VISIBLE], ["fillTypeTransparent", n && r === A$i.TRANSPARENT], ["fillTypeHidden", n && r === A$i.HIDDEN], ["whiteboardStrokeSolid", "solid" === a], ["whiteboardStrokeDashed", "dashed" === a], ["whiteboardStrokeNone", "none" === a], ["whiteboardStrokeThin", "THIN" === x], ["whiteboardStrokeThick", "THICK" === x], ["textAlignLeft", "LEFT" === o], ["textAlignCenter", "CENTER" === o], ["textAlignRight", "RIGHT" === o], ...l, ["connectorLineStraight", "STRAIGHT" === d], ["connectorLineElbowed", "ELBOWED" === d], ...u, ...p, ...h, ...m]);
+    let g = new Map([["fillTypeVisible", n && r === VisibilityState.VISIBLE], ["fillTypeTransparent", n && r === VisibilityState.TRANSPARENT], ["fillTypeHidden", n && r === VisibilityState.HIDDEN], ["whiteboardStrokeSolid", "solid" === a], ["whiteboardStrokeDashed", "dashed" === a], ["whiteboardStrokeNone", "none" === a], ["whiteboardStrokeThin", "THIN" === x], ["whiteboardStrokeThick", "THICK" === x], ["textAlignLeft", "LEFT" === o], ["textAlignCenter", "CENTER" === o], ["textAlignRight", "RIGHT" === o], ...l, ["connectorLineStraight", "STRAIGHT" === d], ["connectorLineElbowed", "ELBOWED" === d], ...u, ...p, ...h, ...m]);
     E5.forEach((e, t) => {
       g.set(t, s === e);
     });
@@ -12753,7 +12753,7 @@ let fS = (e, t) => {
         });
         return;
       case "imageSelector":
-        j !== m1T.RASTER && N.push(e);
+        j !== LayoutTabType.RASTER && N.push(e);
         return;
       case "divider":
         N.length > 0 && "divider" !== N[N.length - 1].itemStringType && N.push(e);
@@ -12807,8 +12807,8 @@ function fw({
 }
 let fI = (e, t) => {
   let i = hw();
-  let n = J2(Ez5.canvasViewState().selectionBoundingRect);
-  let r = J2(Ez5.canvasViewState().inlineMenuTarget);
+  let n = getObservableOrFallback(AppStateTsApi.canvasViewState().selectionBoundingRect);
+  let r = getObservableOrFallback(AppStateTsApi.canvasViewState().inlineMenuTarget);
   let a = r?.boundingBox || n;
   let s = v2();
   let o = _$$_X({
@@ -12819,7 +12819,7 @@ let fI = (e, t) => {
     mirror: {
       appModel: e
     }
-  }) => [QOV.DEFAULT, QOV.SELECTING_TEXT].includes(e.activeUserAction));
+  }) => [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT].includes(e.activeUserAction));
   let m = WC();
   let f = T$();
   let _ = useSelector(e => e.universalInsertModal);
@@ -12837,8 +12837,8 @@ let fI = (e, t) => {
   let E = useSelector(e => e.mirror.sceneGraphSelection);
   let S = useRef(null);
   let w = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-  let I = w === m1T.RASTER;
-  let L = S.current === m1T.RASTER;
+  let I = w === LayoutTabType.RASTER;
+  let L = S.current === LayoutTabType.RASTER;
   let A = Object.keys(E);
   let k = Object.keys(T.current);
   let R = !(A.length === k.length && k.every(e => A.includes(e)));
@@ -12901,8 +12901,8 @@ function fL({
   return null;
 }
 let fN = () => {
-  let e = J2(Ez5.canvasViewState().selectionBoundingRect);
-  let t = J2(Ez5.canvasViewState().inlineMenuTarget);
+  let e = getObservableOrFallback(AppStateTsApi.canvasViewState().selectionBoundingRect);
+  let t = getObservableOrFallback(AppStateTsApi.canvasViewState().inlineMenuTarget);
   let i = t?.boundingBox || e;
   let n = _$$_X({
     subscribeToUpdates_expensive: !0
@@ -12980,7 +12980,7 @@ function fR() {
     let [t, i] = _$$lJ2("sectionContentsHidden");
     let n = ma();
     let r = _$$f5();
-    let a = _$$o6(zkO.USER);
+    let a = _$$o6(SourceType.USER);
     let [s, o] = _$$lJ2("authorVisibility");
     return new Map([["TEXT_DECORATION_BOLD", () => Jm("toggle-bold")], ["TEXT_DECORATION_STRIKETHROUGH", () => Jm("text-toggle-strikethrough")], ["TIDY_UP", () => Jm("tidy-up")], ["CREATE_SECTION", () => Jm("create-section-from-selection")], ["GROUP_SELECTION", () => Jm("group-selection")], ["UNGROUP_SELECTION", () => Jm("ungroup-selection")], ["RESIZE_TO_FIT", () => Jm("resize-to-fit")], ["DUPLICATE", () => {
       Jm("leave-edit-mode");
@@ -12988,7 +12988,7 @@ function fR() {
     }], ["DELETE", () => {
       Jm("leave-edit-mode");
       Jm("delete-selection");
-    }], ["UNLOCK", () => Jm("unlock-selected-nodes")], ["ORDERED_LIST", () => Jm("text-toggle-ordered-list")], ["UNORDERED_LIST", () => Jm("text-toggle-unordered-list")], ["IMAGE_BORDER", () => e()], ["SECTION_SHOW_HIDE", () => i(!t)], ["SECTION_RENAME", () => n()], ["EMBED_OPEN_EXTERNAL", () => r()], ["EMBED_CONVERT_TO_TEXT", () => a()], ["HYPERLINK", () => Y5.triggerAction("text-edit-hyperlink")], ["AUTHOR_VISIBILITY", () => o(!s)], ["ADD_CONNECTOR_TEXT", () => Jm("add-connector-text")]]);
+    }], ["UNLOCK", () => Jm("unlock-selected-nodes")], ["ORDERED_LIST", () => Jm("text-toggle-ordered-list")], ["UNORDERED_LIST", () => Jm("text-toggle-unordered-list")], ["IMAGE_BORDER", () => e()], ["SECTION_SHOW_HIDE", () => i(!t)], ["SECTION_RENAME", () => n()], ["EMBED_OPEN_EXTERNAL", () => r()], ["EMBED_CONVERT_TO_TEXT", () => a()], ["HYPERLINK", () => fullscreenValue.triggerAction("text-edit-hyperlink")], ["AUTHOR_VISIBILITY", () => o(!s)], ["ADD_CONNECTOR_TEXT", () => Jm("add-connector-text")]]);
   }();
   useEffect(() => {
     e && (e._native_contextual_toolbar_perform_action = e => {
@@ -13013,13 +13013,13 @@ function fR() {
       var t = e;
       switch (_$$U3.includes(e) ? t = "SHAPE_NAME" : mN.includes(e) ? t = "START_CAP_TYPE" : mA.includes(e) ? t = "END_CAP_TYPE" : mp.includes(e) ? t = "ALIGNMENT" : e.startsWith(mF) ? t = "FONT_FAMILY" : e.startsWith(mW) ? t = "FONT_SIZE" : e.startsWith(mX) ? t = "IMAGE_CROP" : _$$k7.includes(e) ? t = "HIGHLIGHTER_STROKE_WIDTH" : X4.includes(e) && (t = "PENCIL_STROKE_WIDTH"), t) {
         case "fillTypeVisible":
-          hB(A$i.VISIBLE, i, r, a, s);
+          hB(VisibilityState.VISIBLE, i, r, a, s);
           break;
         case "fillTypeTransparent":
-          hB(A$i.TRANSPARENT, i, r, a, s);
+          hB(VisibilityState.TRANSPARENT, i, r, a, s);
           break;
         case "fillTypeHidden":
-          hB(A$i.HIDDEN, i, r, a, s);
+          hB(VisibilityState.HIDDEN, i, r, a, s);
           break;
         case "whiteboardStrokeSolid":
           u("solid");
@@ -13090,10 +13090,10 @@ function fR() {
           break;
         case "IMAGE_CROP":
           let C = e.substring(mX.length);
-          C && Id.has(C) && (Y5.triggerActionInUserEditScope("crop-image"), g?.(C));
+          C && Id.has(C) && (fullscreenValue.triggerActionInUserEditScope("crop-image"), g?.(C));
           break;
         case "imageRotate":
-          Y5.triggerActionInUserEditScope("rotate-image-90-clockwise");
+          fullscreenValue.triggerActionInUserEditScope("rotate-image-90-clockwise");
       }
     });
   }, [e, i, f, a, m, g, s, n, r, h, u, p, _, x]);
@@ -13111,7 +13111,7 @@ function fR() {
     }, e._native_toolbar_set_palette_preset = (e, t) => {
       if ("WASHI_TAPE_PATTERN" === e) {
         let e = _$$B5.find(e => e.name === t);
-        e && _$$Cs(_$$M4(e), zkO.USER);
+        e && _$$Cs(_$$M4(e), SourceType.USER);
         return;
       }
       let i = y.get(e)?.get(t);
@@ -13119,13 +13119,13 @@ function fR() {
     }, e._native_toolbar_set_palette_image_data = (e, t, i) => {
       if ("WASHI_TAPE_PATTERN" === e) {
         let e = Vs(i);
-        Y5.updateAppModel({
+        fullscreenValue.updateAppModel({
           currentSelectedProperty: {
-            type: rrT.STROKE,
+            type: NodePropertyCategory.STROKE,
             indices: [0]
           }
         });
-        glU.setCustomWashiTapeImageFromFile(e);
+        Fullscreen.setCustomWashiTapeImageFromFile(e);
       }
     });
   }, [y, e, v]);
@@ -13138,15 +13138,15 @@ function fR() {
         paintIndex
       } = C;
       let a = Vs(i);
-      Y5.updateAppModel({
+      fullscreenValue.updateAppModel({
         currentSelectedProperty: {
-          type: rrT.FILL,
+          type: NodePropertyCategory.FILL,
           indices: [paintIndex]
         }
       });
       let s = paint.blendMode || "NORMAL";
       let o = paint.opacity || 1;
-      glU.replaceImageFromFile({
+      Fullscreen.replaceImageFromFile({
         data: a,
         mimeType: t,
         name: "File"
@@ -13206,12 +13206,12 @@ function fR() {
     mirror: {
       appModel: e
     }
-  }) => e.activeUserAction === QOV.RESIZING);
+  }) => e.activeUserAction === UserActionState.RESIZING);
   useEffect(() => {
     e && (e._native_contextual_toolbar_web_notification = e => {
       switch (e) {
         case "enterCropMode":
-          Y5.triggerActionInUserEditScope("crop-image");
+          fullscreenValue.triggerActionInUserEditScope("crop-image");
           break;
         case "exitCropMode":
           D || Jm("leave-edit-mode");
@@ -13375,13 +13375,13 @@ function fG(e) {
       onMouseEnter: unlockAnimation,
       onMouseLeave: lockAnimation
     },
-    onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
+    onClick: () => fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlockV2",
     variant: "button",
     children: AnimatedLockSvg
   }) : jsx(_$$$n, {
     tooltip: getI18nString("whiteboard.inline_menu.unlock"),
-    onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
+    onClick: () => fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlockV2",
     onMouseEnter: unlockAnimation,
     onMouseLeave: lockAnimation,
@@ -13393,7 +13393,7 @@ function fG(e) {
   }) : getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
     tooltip: getI18nString("whiteboard.inline_menu.unlock"),
-    onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
+    onClick: () => fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlock",
     "data-testid": "unlock-control",
     ariaLabel: getI18nString("whiteboard.inline_menu.unlock"),
@@ -13401,7 +13401,7 @@ function fG(e) {
   }) : jsx(K0, {
     svg: _$$A38,
     tooltip: getI18nString("whiteboard.inline_menu.unlock"),
-    onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
+    onClick: () => fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlock",
     testId: "unlock-control",
     svgStyle: {
@@ -13457,7 +13457,7 @@ function f$() {
   return jsx(_$$E2, {
     className: "lock_control--buttonWrapper--Xlvr9",
     onClick: () => {
-      i ? Y5.triggerActionInUserEditScope("unlock-selected-nodes") : (n(!0), f(e));
+      i ? fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes") : (n(!0), f(e));
     },
     ref: s,
     htmlAttributes: {
@@ -13554,15 +13554,15 @@ function f1({
   });
 }
 function f2(e) {
-  return e ? _$$gl(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.programming_language_label", {
+  return e ? isInvalidValue(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.programming_language_label", {
     currentLanguage: _$$lR.format(e)
   }) : void 0;
 }
 function f3(e) {
-  return e ? _$$gl(e) ? "MIXED" : e : void 0;
+  return e ? isInvalidValue(e) ? "MIXED" : e : void 0;
 }
 function f6(e) {
-  return e ? _$$gl(e) ? "MIXED" : e : void 0;
+  return e ? isInvalidValue(e) ? "MIXED" : e : void 0;
 }
 let _l = {
   ROUND: _$$A43,
@@ -13591,7 +13591,7 @@ let _u = e => function () {
   let h = kl("connectorLineStyleForSelection");
   let m = e => {
     n(e);
-    "STRAIGHT" === h && DV9?.snapshotStraightConnectorCaps();
+    "STRAIGHT" === h && WhiteboardTsApi?.snapshotStraightConnectorCaps();
   };
   let f = _f(i);
   f && (t = "connectorStartCap" === e ? getI18nString("whiteboard.inline_menu.connector_start_point_selector_label", {
@@ -13612,7 +13612,7 @@ let _u = e => function () {
       children: _m(t)
     }),
     label: _f(t),
-    isSelected: !_$$gl(i) && i === t
+    isSelected: !isInvalidValue(i) && i === t
   }));
   let x = useMemo(() => jsx("div", {
     style: {
@@ -13683,7 +13683,7 @@ let _u = e => function () {
   });
 };
 function _p(e, t) {
-  switch (_$$_W2(t, "connectorStartCap" === e ? "left" : "right")) {
+  switch (valueOrFallback(t, "connectorStartCap" === e ? "left" : "right")) {
     case "up":
       return "rotate(-90deg)";
     case "right":
@@ -13813,11 +13813,11 @@ function _I(e) {
   switch (e) {
     case "ELBOWED":
     default:
-      return PoC.ELBOWED;
+      return ConnectorType.ELBOWED;
     case "STRAIGHT":
-      return PoC.STRAIGHT;
+      return ConnectorType.STRAIGHT;
     case "CURVED":
-      return PoC.CURVED;
+      return ConnectorType.CURVED;
   }
 }
 function _O(e) {
@@ -14196,7 +14196,7 @@ function xn({
           case Uz.C:
           case Uz.V:
           case Uz.X:
-            _$$Te(e) && (Y5.triggerAction(e.keyCode === Uz.C ? "copy" : e.keyCode === Uz.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
+            _$$Te(e) && (fullscreenValue.triggerAction(e.keyCode === Uz.C ? "copy" : e.keyCode === Uz.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
             break;
           default:
             _$$f6(e);
@@ -14777,10 +14777,10 @@ let xg = e => {
 function xj(e) {
   let t = function (e) {
     let t = [];
-    let i = e && _$$hS2(e) ? e : void 0;
+    let i = e && isValidValue(e) ? e : void 0;
     if (!i) return t;
     t.push(i);
-    let n = DV9?.getAllShapeWithTextTypesInCanvas();
+    let n = WhiteboardTsApi?.getAllShapeWithTextTypesInCanvas();
     if (!n) return t;
     let r = Array.from(new Map([...n.entries()].sort((e, t) => t[1] - e[1])).keys()).filter(t => t !== e);
     r.length > 0 && t.push(...r);
@@ -14920,7 +14920,7 @@ function xT({
       id: i,
       isFocused: n
     }) => {
-      let r = _$$gl(e) || !e ? "1" : `${xb.format(e)}`;
+      let r = isInvalidValue(e) || !e ? "1" : `${xb.format(e)}`;
       return jsx(K0, {
         active: "NONE",
         ariaLabel: "1" === r ? void 0 : r.toLocaleLowerCase(),
@@ -15002,21 +15002,21 @@ function xE({
 let xS = new _$$J2();
 function xw() {
   let e = _$$nc.user("create-shape-from-inline-quick-add", function (e) {
-    glU?.createShapeFromInlineQuickAdd(e);
+    Fullscreen?.createShapeFromInlineQuickAdd(e);
   });
   let t = getI18nString("whiteboard.inline_menu.change_shape");
   return jsx(xE, {
     onSelect: e,
     showShapePreview: function (e) {
-      glU?.showGhostShapeFromInlineQuickAdd(e);
+      Fullscreen?.showGhostShapeFromInlineQuickAdd(e);
     },
     hideShapePreview: function () {
-      glU?.hideGhostShapeFromInlineQuickAdd();
+      Fullscreen?.hideGhostShapeFromInlineQuickAdd();
     },
     ariaLabel: t
   });
 }
-let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
+let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let e;
   let t = A5("whiteboardColor");
   let i = mc();
@@ -15042,8 +15042,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let y = g > 0;
   let v = s > 0;
   if (u && u > 0 && g + s === u) {
-    let t = null != _ && _ !== A$i.HIDDEN;
-    let n = null != x && x !== A$i.HIDDEN;
+    let t = null != _ && _ !== VisibilityState.HIDDEN;
+    let n = null != x && x !== VisibilityState.HIDDEN;
     (y && t || v && n) && (e = Array.isArray(i) ? i.length > 0 ? i[0].a : void 0 : i.a);
   }
   return p ? jsx(_$$$n, {
@@ -15069,7 +15069,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     customOpacity: e,
     isColorPopoverOpen: n,
     onColorChange: i => {
-      u && (t(i), null == e || _ !== A$i.TRANSPARENT_CUSTOM || j && u > 1 || m(e), null == e || x !== A$i.TRANSPARENT_CUSTOM || b && u > 1 || f(e));
+      u && (t(i), null == e || _ !== VisibilityState.TRANSPARENT_CUSTOM || j && u > 1 || m(e), null == e || x !== VisibilityState.TRANSPARENT_CUSTOM || b && u > 1 || f(e));
     },
     onOpacityChange: null != e ? e => {
       let t = e;
@@ -15083,7 +15083,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     setIsColorPopoverOpen: r,
     value: i
   });
-}], [Tcr.STICKY_COLOR, function () {
+}], [WhiteboardFeatures.STICKY_COLOR, function () {
   let e = A5("whiteboardColor");
   let t = mc();
   let [i, n] = useState(!1);
@@ -15098,7 +15098,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     isColorPopoverOpen: i,
     setIsColorPopoverOpen: n
   });
-}], [Tcr.HIGHLIGHT_COLOR, function () {
+}], [WhiteboardFeatures.HIGHLIGHT_COLOR, function () {
   let e = A5("whiteboardColor");
   let t = mc();
   let [i, n] = useState(!1);
@@ -15112,12 +15112,12 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     isColorPopoverOpen: i,
     setIsColorPopoverOpen: n
   });
-}], [Tcr.PENCIL_COLOR, function () {
+}], [WhiteboardFeatures.PENCIL_COLOR, function () {
   let e = A5("whiteboardColor");
   let t = mc();
   let [i, n] = useState(!1);
   let r = function () {
-    let e = Ez5?.uiState().showUI3Colors.getCopy();
+    let e = AppStateTsApi?.uiState().showUI3Colors.getCopy();
     let t = Z9().type === Yv.CUSTOM;
     return e && !t ? "pencilUI3" : "base";
   }();
@@ -15131,11 +15131,11 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     isColorPopoverOpen: i,
     setIsColorPopoverOpen: n
   });
-}], [Tcr.WHITEBOARD_STROKE, _$$nm], [Tcr.WHITEBOARD_SHAPE, function () {
+}], [WhiteboardFeatures.WHITEBOARD_STROKE, _$$nm], [WhiteboardFeatures.WHITEBOARD_SHAPE, function () {
   let [e, t] = _$$lJ2("shapeWithTextTypeForSelection");
   let i = _$$g6();
   if (!e) return null;
-  let n = _$$gl(e) || !e ? "1" : `${xS.format(e)}`;
+  let n = isInvalidValue(e) || !e ? "1" : `${xS.format(e)}`;
   let r = getI18nString("whiteboard.inline_menu.change_shape");
   let a = "1" !== n ? getI18nString("whiteboard.inline_menu.change_shape_label", {
     currentShape: n.toLocaleLowerCase()
@@ -15166,7 +15166,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       tooltip: r
     })
   }, n);
-}], [Tcr.WHITEBOARD_PLATFORM_SHAPE, function () {
+}], [WhiteboardFeatures.WHITEBOARD_PLATFORM_SHAPE, function () {
   let e = _$$es();
   let t = _$$uQ();
   let i = _$$Fk((e, t) => {
@@ -15233,13 +15233,13 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       tooltip: f
     })
   }, t);
-}], [Tcr.TEXT_DECORATION, _$$D5], [Tcr.HYPERLINK, function () {
-  let e = _$$ut(Ez5?.editorState().selectionIsHyperlink, !1);
+}], [WhiteboardFeatures.TEXT_DECORATION, _$$D5], [WhiteboardFeatures.HYPERLINK, function () {
+  let e = getObservableValue(AppStateTsApi?.editorState().selectionIsHyperlink, !1);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
     tooltip: getI18nString("fullscreen_actions.text-edit-hyperlink"),
     ariaLabel: getI18nString("fullscreen_actions.text-edit-hyperlink"),
-    onClick: () => Y5.triggerAction("text-edit-hyperlink"),
+    onClick: () => fullscreenValue.triggerAction("text-edit-hyperlink"),
     recordingKey: "editHyperlink",
     tooltipShortcutActionKey: "text-edit-hyperlink",
     children: jsx(_$$W7, {})
@@ -15248,11 +15248,11 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     tooltip: "text-edit-hyperlink",
     tooltipType: Ib.LOOKUP,
     active: !0 === e ? "LOUD" : void 0,
-    onClick: () => Y5.triggerAction("text-edit-hyperlink"),
+    onClick: () => fullscreenValue.triggerAction("text-edit-hyperlink"),
     recordingKey: "editHyperlink",
     blurOnClick: !0
   });
-}], [Tcr.BULLETED_LIST, function () {
+}], [WhiteboardFeatures.BULLETED_LIST, function () {
   let e = h4();
   let t = h9();
   return getFeatureFlags().figjam_a11y_inline_toolbar ? t ? jsx(_$$V4, {
@@ -15262,7 +15262,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     checked: t,
     offIcon: jsx(_$$p8, {}),
     onIcon: jsx(_$$p8, {}),
-    onChange: () => Y5.triggerActionInUserEditScope("text-toggle-ordered-list"),
+    onChange: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-ordered-list"),
     recordingKey: "orderedListControl",
     tooltipShortcutActionKey: "text-toggle-ordered-list"
   }) : jsx(_$$V4, {
@@ -15272,7 +15272,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     checked: e,
     offIcon: jsx(_$$Z5, {}),
     onIcon: jsx(_$$Z5, {}),
-    onChange: () => Y5.triggerActionInUserEditScope("text-toggle-unordered-list"),
+    onChange: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-unordered-list"),
     recordingKey: "unorderedListControl",
     tooltipShortcutActionKey: "text-toggle-unordered-list"
   }) : jsx(Fragment, {
@@ -15281,7 +15281,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       tooltip: "text-toggle-ordered-list",
       tooltipType: Ib.LOOKUP,
       active: t ? "LOUD" : void 0,
-      onClick: () => Y5.triggerActionInUserEditScope("text-toggle-ordered-list"),
+      onClick: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-ordered-list"),
       recordingKey: "orderedListControl",
       role: "switch",
       blurOnClick: !0
@@ -15290,13 +15290,13 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       tooltip: "text-toggle-unordered-list",
       tooltipType: Ib.LOOKUP,
       active: e ? "LOUD" : void 0,
-      onClick: () => Y5.triggerActionInUserEditScope("text-toggle-unordered-list"),
+      onClick: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-unordered-list"),
       recordingKey: "unorderedListControl",
       role: "switch",
       blurOnClick: !0
     })
   });
-}], [Tcr.FONT_FAMILY, function () {
+}], [WhiteboardFeatures.FONT_FAMILY, function () {
   let [e, t] = _$$lJ2("whiteboardFontFamilies");
   let i = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let n = isPrimaryLocaleEnglish();
@@ -15305,7 +15305,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     getTriggerProps,
     manager
   } = _$$b7();
-  if (!e || _$$gl(e)) return null;
+  if (!e || isInvalidValue(e)) return null;
   let c = pP(e);
   let p = e => {
     if (e) {
@@ -15478,7 +15478,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       parentComponent: k2.fontFamilyControl
     })]
   });
-}], [Tcr.WHITEBOARD_TEXT_STYLE, function () {
+}], [WhiteboardFeatures.WHITEBOARD_TEXT_STYLE, function () {
   let e = new _$$o5({
     normalizeFactor: 1,
     min: 1,
@@ -15494,8 +15494,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   } = _$$b7();
   let h = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let [m, f] = _$$lJ2("whiteboardFontSizes");
-  if (!m || !_$$hS2(m)) return null;
-  let _ = _$$hS2(m) ? m : [];
+  if (!m || !isValidValue(m)) return null;
+  let _ = isValidValue(m) ? m : [];
   let x = e => {
     e && (f([e]), _$$F5.trackFromFullscreen("figjam_text_style_change", {
       source: "default",
@@ -15609,7 +15609,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
             ...y,
             property: t
           }
-        }, _$$hS2(t) ? t : "__mixed"))
+        }, isValidValue(t) ? t : "__mixed"))
       })
     }), jsx(_$$r5, {
       setMaxWidth: s,
@@ -15669,7 +15669,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       multipleSelections: _,
       onChange: x,
       preventHiddenInput: "until_keydown",
-      property: 1 === _.length ? _[0] : _$$oV,
+      property: 1 === _.length ? _[0] : MIXED_MARKER,
       recordingKey: "whiteboardTextStyle",
       role: "combobox",
       targetDomNode: document.body,
@@ -15705,9 +15705,9 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       }, e))]
     })]
   });
-}], [Tcr.START_MIND_MAP, function () {
+}], [WhiteboardFeatures.START_MIND_MAP, function () {
   let e = () => {
-    Y5.triggerActionInUserEditScope("start-mind-map");
+    fullscreenValue.triggerActionInUserEditScope("start-mind-map");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -15722,7 +15722,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     onClick: e,
     recordingKey: "startMindMapControl"
   });
-}], [Tcr.TEXT_ALIGN_H, function () {
+}], [WhiteboardFeatures.TEXT_ALIGN_H, function () {
   let e = kl("whiteboardTextAlignHorizontal");
   let t = getI18nString("whiteboard.inline_menu.text_alignment");
   let i = _$$nc.user("set-text-align", e => {
@@ -15730,7 +15730,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   });
   let n = useId();
   let [r, a] = useState(!1);
-  let s = e && _$$hS2(e) ? _$$En({
+  let s = e && isValidValue(e) ? _$$En({
     "data-tooltip-type": Ib.LOOKUP,
     "data-tooltip": p7(e)
   }) : "";
@@ -15775,7 +15775,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       ref: s,
       active: l
     }) => {
-      let d = e && _$$hS2(e) ? _$$En({
+      let d = e && isValidValue(e) ? _$$En({
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": p7(e)
       }) : "";
@@ -15830,7 +15830,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     OptionWrapper: SC(t, n),
     onToggleMenuOpen: a
   });
-}], [Tcr.TEXT_ALIGN_V, function () {
+}], [WhiteboardFeatures.TEXT_ALIGN_V, function () {
   let e = kl("whiteboardTextAlignVertical");
   let t = getI18nString("whiteboard.inline_menu.text_alignment_v");
   let i = useId();
@@ -15838,7 +15838,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let a = _$$nc.user("set-text-align-v", e => {
     ht(e);
   });
-  let s = e && _$$hS2(e) ? _$$En({
+  let s = e && isValidValue(e) ? _$$En({
     "data-tooltip-type": Ib.LOOKUP,
     "data-tooltip": hi(e)
   }) : "";
@@ -15882,7 +15882,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       ref: s,
       active: l
     }) => {
-      let d = e && _$$hS2(e) ? _$$En({
+      let d = e && isValidValue(e) ? _$$En({
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": hi(e)
       }) : "";
@@ -15937,13 +15937,13 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     OptionWrapper: SC(t, i),
     onToggleMenuOpen: r
   });
-}], [Tcr.CONNECTOR_LINE_STYLE, function () {
+}], [WhiteboardFeatures.CONNECTOR_LINE_STYLE, function () {
   let e;
   let [t, i] = _$$lJ2("connectorLineStyleForSelection");
   let [n, r] = useState(!1);
   let a = getFeatureFlags().ad_curved_connectors ? ["ELBOWED", "CURVED", "STRAIGHT"] : ["ELBOWED", "STRAIGHT"];
   let s = e => {
-    ("CURVED" !== e || getFeatureFlags().ad_curved_connectors) && (DV9?.handleConnectorLineStyleSwap(_I(t), _I(e)), i(e));
+    ("CURVED" !== e || getFeatureFlags().ad_curved_connectors) && (WhiteboardTsApi?.handleConnectorLineStyleSwap(_I(t), _I(e)), i(e));
   };
   let d = useId();
   let p = _w(t);
@@ -15954,7 +15954,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     value: e,
     content: _E[e],
     label: _w(e),
-    isSelected: !_$$gl(t) && t === e
+    isSelected: !isInvalidValue(t) && t === e
   }));
   let m = useMemo(() => function (e) {
     switch (e) {
@@ -16018,7 +16018,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     OptionWrapper: SC(getI18nString("whiteboard.inline_menu.line_shape"), d),
     onToggleMenuOpen: r
   });
-}], [Tcr.CONNECTOR_START_CAP, __], [Tcr.CONNECTOR_END_CAP, _x], [Tcr.AUTHOR_VISIBILITY, function () {
+}], [WhiteboardFeatures.CONNECTOR_START_CAP, __], [WhiteboardFeatures.CONNECTOR_END_CAP, _x], [WhiteboardFeatures.AUTHOR_VISIBILITY, function () {
   let [e, t] = _$$lJ2("authorVisibility");
   let i = () => {
     t(!e);
@@ -16041,9 +16041,9 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     role: "switch",
     blurOnClick: !0
   });
-}], [Tcr.ADD_TEXT, function () {
+}], [WhiteboardFeatures.ADD_TEXT, function () {
   let e = () => {
-    _$$l.user("add-connector-text", () => Y5.triggerAction("add-connector-text"));
+    _$$l.user("add-connector-text", () => fullscreenValue.triggerAction("add-connector-text"));
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16059,14 +16059,14 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     onClick: e,
     recordingKey: "addTextControl"
   });
-}], [Tcr.DIVIDER, () => jsx(_$$wv4, {})], [Tcr.CODE_BLOCK_LANGUAGE, function () {
+}], [WhiteboardFeatures.DIVIDER, () => jsx(_$$wv4, {})], [WhiteboardFeatures.CODE_BLOCK_LANGUAGE, function () {
   let [e, t] = _$$lJ2("codeBlockLanguage");
   let i = _$$am();
   let {
     getTriggerProps,
     manager
   } = _$$b7();
-  let a = useMemo(() => _$$gl(e) ? getI18nString("whiteboard.code_blocks.mixed") : _$$lR.format(e ?? _$$jW), [e]);
+  let a = useMemo(() => isInvalidValue(e) ? getI18nString("whiteboard.code_blocks.mixed") : _$$lR.format(e ?? _$$jW), [e]);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
     manager,
     children: [jsx(_$$V4, {
@@ -16091,7 +16091,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
           });
           t(n, _$$zk2.YES);
         },
-        value: _$$gl(e) ? void 0 : e ?? _$$jW,
+        value: isInvalidValue(e) ? void 0 : e ?? _$$jW,
         recordingKey: Pt("codeBlockLanguageSelector", "radioOptions"),
         children: _$$ie.map(e => jsx(CU, {
           value: e,
@@ -16126,12 +16126,12 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       recordingKey: `codeBlockLanguageSelector.${e}`
     }, e))
   });
-}], [Tcr.CODE_BLOCK_THEME, function () {
+}], [WhiteboardFeatures.CODE_BLOCK_THEME, function () {
   let [e, t] = _$$lJ2("codeBlockTheme");
   let i = _$$am();
   let [n, r] = useState(!1);
   return jsx(ZE, {
-    ariaLabel: e ? _$$gl(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.code_block_theme", {
+    ariaLabel: e ? isInvalidValue(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.code_block_theme", {
       currentTheme: A$.format(e)
     }) : void 0,
     buttonSize: "small",
@@ -16150,16 +16150,16 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     setIsColorPopoverOpen: r,
     value: _$$mx(_$$jP(e)) ?? []
   });
-}], [Tcr.EMBED_OPEN_EXTERNAL, function () {
+}], [WhiteboardFeatures.EMBED_OPEN_EXTERNAL, function () {
   return jsx(_$$e9, {});
-}], [Tcr.EMBED_MAXIMIZE, function () {
+}], [WhiteboardFeatures.EMBED_MAXIMIZE, function () {
   return jsx(_O, {});
-}], [Tcr.EMBED_CONVERT_TO_TEXT, function () {
+}], [WhiteboardFeatures.EMBED_CONVERT_TO_TEXT, function () {
   return jsx(_$$S3, {});
-}], [Tcr.IMAGE, AZ], [Tcr.REMOVE_IMAGE_BACKGROUND, function () {
+}], [WhiteboardFeatures.IMAGE, AZ], [WhiteboardFeatures.REMOVE_IMAGE_BACKGROUND, function () {
   let e = A5("imageHasNoStroke");
   let t = () => {
-    let t = ruz?.getNodeImagePairsForEdit() ?? [];
+    let t = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
     B3(JT.REMOVE_BACKGROUND);
     _$$Ag(JT.REMOVE_BACKGROUND, _$$J1, {
       source: "fullscreen-action",
@@ -16180,7 +16180,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     svg: _$$A54,
     onClick: t
   });
-}], [Tcr.BORDER, _$$rT], [Tcr.DESCRIPTION, Dz], [Tcr.SECTION_SHOW_HIDE, function () {
+}], [WhiteboardFeatures.BORDER, _$$rT], [WhiteboardFeatures.DESCRIPTION, Dz], [WhiteboardFeatures.SECTION_SHOW_HIDE, function () {
   let [e, t] = _$$lJ2("sectionContentsHidden");
   let i = () => {
     t(!e);
@@ -16207,7 +16207,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     onClick: i,
     recordingKey: "showHideSection"
   });
-}], [Tcr.SECTION_RENAME, function () {
+}], [WhiteboardFeatures.SECTION_RENAME, function () {
   let e = mr();
   let t = ma();
   let i = kl("name");
@@ -16230,15 +16230,15 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     active: e ? "LOUD" : void 0,
     recordingKey: "renameSection"
   });
-}], [Tcr.WASHI_TAPE_PATTERN, function () {
+}], [WhiteboardFeatures.WASHI_TAPE_PATTERN, function () {
   return jsx(fh, {
     recordingKey: "washiTapePatternControl"
   });
-}], [Tcr.RESIZE_TO_FIT, function () {
+}], [WhiteboardFeatures.RESIZE_TO_FIT, function () {
   let e = kl("sectionContentsOverflowing");
   let t = kl("sectionContentsHidden");
   let i = () => {
-    Y5.triggerActionInUserEditScope("resize-to-fit");
+    fullscreenValue.triggerActionInUserEditScope("resize-to-fit");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16257,7 +16257,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     onClick: i,
     recordingKey: "resizeToFitSection"
   });
-}], [Tcr.FACE_STAMP, function () {
+}], [WhiteboardFeatures.FACE_STAMP, function () {
   let e = kl("stampData");
   let {
     label,
@@ -16268,7 +16268,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       loading: _loading2
     } = wW(e?.userId || e?.stampedByUserId || null);
     return {
-      label: e && _$$gl(e) ? getI18nString("whiteboard.face_stamps.mixed") : user?.handle || null,
+      label: e && isInvalidValue(e) ? getI18nString("whiteboard.face_stamps.mixed") : user?.handle || null,
       loading: _loading2
     };
   }(e);
@@ -16320,7 +16320,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       onSelect: () => r(!1)
     })]
   }) : null;
-}], [Tcr.LOCK, function () {
+}], [WhiteboardFeatures.LOCK, function () {
   let e = kl("locked");
   let t = kl("sectionContentsHidden");
   let [i, n] = useState(void 0);
@@ -16330,7 +16330,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     manager
   } = _$$b7();
   let d = () => {
-    e ? Y5.triggerActionInUserEditScope("unlock-selected-nodes") : Y5.triggerActionInUserEditScope("lock-selected-nodes");
+    e ? fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes") : fullscreenValue.triggerActionInUserEditScope("lock-selected-nodes");
   };
   if (!t) {
     var c;
@@ -16353,7 +16353,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
           "aria-label": getI18nString("whiteboard.inline_menu.lock_options"),
           children: [jsx(q7, {
             onClick: () => {
-              Y5.triggerActionInUserEditScope("lock-selected-nodes");
+              fullscreenValue.triggerActionInUserEditScope("lock-selected-nodes");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
             },
             recordingKey: Pt("lockOption", "lock_all"),
@@ -16361,7 +16361,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
             children: getI18nString("whiteboard.inline_menu.lock_all")
           }), jsx(q7, {
             onClick: () => {
-              Y5.triggerActionInUserEditScope("lock-selected-section-only");
+              fullscreenValue.triggerActionInUserEditScope("lock-selected-section-only");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
             },
             recordingKey: Pt("lockOption", "lock_section_background_only"),
@@ -16392,11 +16392,11 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         onChange: e => {
           switch (e) {
             case "lock_all":
-              Y5.triggerActionInUserEditScope("lock-selected-nodes");
+              fullscreenValue.triggerActionInUserEditScope("lock-selected-nodes");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
               break;
             case "lock_section_background_only":
-              Y5.triggerActionInUserEditScope("lock-selected-section-only");
+              fullscreenValue.triggerActionInUserEditScope("lock-selected-section-only");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
           }
         },
@@ -16505,7 +16505,7 @@ let x$ = {
 function xY() {
   let e = ["align-left", "align-horizontal-center", "align-right", "align-top", "align-vertical-center", "align-bottom"];
   let t = e => {
-    Y5.triggerActionInUserEditScope(e);
+    fullscreenValue.triggerActionInUserEditScope(e);
   };
   let i = _$$g6();
   let [n, r] = useState(!1);
@@ -16570,7 +16570,7 @@ function xY() {
 }
 function xJ() {
   let e = () => {
-    Y5.triggerActionInUserEditScope("create-section-from-selection");
+    fullscreenValue.triggerActionInUserEditScope("create-section-from-selection");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16718,7 +16718,7 @@ let x4 = memo(function () {
 });
 function x7() {
   let e = () => {
-    Y5.triggerActionInUserEditScope("tidy-up");
+    fullscreenValue.triggerActionInUserEditScope("tidy-up");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16740,8 +16740,8 @@ function x7() {
 }
 function gn() {
   let e = () => {
-    Y5.triggerActionInUserEditScope("leave-edit-mode");
-    Y5.triggerActionInUserEditScope("delete-selection");
+    fullscreenValue.triggerActionInUserEditScope("leave-edit-mode");
+    fullscreenValue.triggerActionInUserEditScope("delete-selection");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16759,8 +16759,8 @@ function gn() {
 }
 function gs() {
   let e = () => {
-    Y5.triggerActionInUserEditScope("leave-edit-mode");
-    Y5.triggerActionInUserEditScope("duplicate-in-place");
+    fullscreenValue.triggerActionInUserEditScope("leave-edit-mode");
+    fullscreenValue.triggerActionInUserEditScope("duplicate-in-place");
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16778,8 +16778,8 @@ function gs() {
 }
 function gl() {
   let e = e => {
-    Y5.triggerAction("leave-edit-mode");
-    Y5.showSelectionContextMenu(e.clientX, e.clientY);
+    fullscreenValue.triggerAction("leave-edit-mode");
+    fullscreenValue.showSelectionContextMenu(e.clientX, e.clientY);
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
@@ -16866,7 +16866,7 @@ let gm = memo(function ({
   let s = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo?.stateGroup);
   let f = useSelector(e => e.mirror.sceneGraphSelection);
   let _ = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls);
-  let x = !!_?.includes(Tcr.DESCRIPTION);
+  let x = !!_?.includes(WhiteboardFeatures.DESCRIPTION);
   let g = !!kl("locked");
   let [j, b] = useState(!1);
   let [y, v] = useState(g);
@@ -16996,7 +16996,7 @@ let g_ = memo(function ({
   let a = useAtomWithSubscription(_$$f7);
   let s = useSelector(e => e.mirror.sceneGraphSelection);
   let u = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls);
-  let f = !!u?.includes(Tcr.DESCRIPTION);
+  let f = !!u?.includes(WhiteboardFeatures.DESCRIPTION);
   let _ = !!kl("locked");
   let [x, g] = useState(!1);
   let [j, b] = useState(_);
@@ -17163,11 +17163,11 @@ function gb({
     let n = jsx(xL, {
       control: e
     }, `${e}-${i}`);
-    e === Tcr.DESCRIPTION && (n = jsx(Dz, {
+    e === WhiteboardFeatures.DESCRIPTION && (n = jsx(Dz, {
       setIsEditorOpen: t
     }, `${e}-${i}`));
     l.push(n);
-  }) : n && 1 === r && 0 === a ? l.push(jsx(x4, {}, "state-swap-control")) : 1 === e.length && e[0] === Tcr.WIDGET && 1 === r ? (l.push(jsx(_$$jk, {}, "widget-controls")), s = 16) : (d = !0, e.length > 0 && l.push(jsx(gv, {
+  }) : n && 1 === r && 0 === a ? l.push(jsx(x4, {}, "state-swap-control")) : 1 === e.length && e[0] === WhiteboardFeatures.WIDGET && 1 === r ? (l.push(jsx(_$$jk, {}, "widget-controls")), s = 16) : (d = !0, e.length > 0 && l.push(jsx(gv, {
     controls: e
   }, "control-set")));
   return {
@@ -17205,7 +17205,7 @@ let gC = memo(function () {
     let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
     let t = Um();
     let i = t && t.type === K9;
-    let n = useSelector(e => e.progressBarState.mode === Oin.HIDE_UI);
+    let n = useSelector(e => e.progressBarState.mode === UIVisibilitySetting.HIDE_UI);
     let r = hC();
     let a = useSelector(e => e.mirror.selectionProperties.numSelectedByType?.SHAPE_WITH_TEXT === 1 && 1 === e.mirror.selectionProperties.numSelected);
     return !useSelector(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected) && !e && !n && !i && a && r;
@@ -17221,8 +17221,8 @@ let gC = memo(function () {
     let r = kE(130, i);
     let a = kE(40, i);
     let s = kE(4, i);
-    switch (qmM.getQuickAddInteraction()) {
-      case lMj.CLICK:
+    switch (InteractionCpp.getQuickAddInteraction()) {
+      case PointerAction.CLICK:
         {
           let o = {
             x: e.absoluteBoundingBox.x,
@@ -17240,25 +17240,25 @@ let gC = memo(function () {
           let u = o.x + o.width / 2 - n / 2;
           let p = o.y + o.height / 2 - (r - a / 2 - s);
           switch (t) {
-            case gEE.TOP:
+            case Side.TOP:
               d.x = u;
               d.y = o.y + -r;
               return d;
-            case gEE.BOTTOM:
+            case Side.BOTTOM:
               d.x = u;
               d.y = o.y + o.height + -(r - a / 2 - 2 * s - l);
               return d;
-            case gEE.LEFT:
+            case Side.LEFT:
               d.x = o.x + -(n / 2 + l);
               d.y = p;
               return d;
-            case gEE.RIGHT:
+            case Side.RIGHT:
               d.x = o.x + o.width + -(n / 2 - l);
               d.y = p;
               return d;
           }
         }
-      case lMj.DRAG:
+      case PointerAction.DRAG:
         return {
           x: e.connectorEndCanvasPosition.x - n / 2,
           y: e.connectorEndCanvasPosition.y - r + a / 2 + s,
@@ -17343,7 +17343,7 @@ function gP() {
         break;
       case Uz.ENTER:
         if (Fo(e)) {
-          YEY?.exitSearchMode(dNx.SELECT_ACTIVE);
+          CanvasSearchHelpers?.exitSearchMode(SelectionState.SELECT_ACTIVE);
           break;
         }
         next(e.shiftKey ? _$$OP.PREV : _$$OP.NEXT, "keyboard");
@@ -17363,7 +17363,7 @@ function gP() {
         hidden && exit();
       },
       onBlurCapture: e => {
-        e.relatedTarget && !e.currentTarget.contains(e.relatedTarget) && (YEY?.setOverlayVisible(!1), setNavigateNearestOnce());
+        e.relatedTarget && !e.currentTarget.contains(e.relatedTarget) && (CanvasSearchHelpers?.setOverlayVisible(!1), setNavigateNearestOnce());
       },
       onKeyDown: y,
       children: [jsxs("div", {
@@ -17431,7 +17431,7 @@ function gP() {
           },
           children: jsx(_$$A2, {})
         })]
-      }), mode === EW4.REPLACE && jsx(_$$a1, {
+      }), mode === EditAction.REPLACE && jsx(_$$a1, {
         query,
         value: g,
         onChange: j,
@@ -17614,7 +17614,7 @@ class gY {
       this.isMuted = e;
       this.handleVolumeUpdate();
     };
-    this.getCurrentVolume = () => this.isMuted ? 0 : qE(this.externalVolume * this.internalVolumeMultiplier, 0, 1);
+    this.getCurrentVolume = () => this.isMuted ? 0 : clamp(this.externalVolume * this.internalVolumeMultiplier, 0, 1);
     this.handleVolumeUpdate = () => {
       this.audio.volume = this.getCurrentVolume();
     };
@@ -19517,10 +19517,10 @@ function ji(e) {
   let m = useCallback(e => {
     if (!1 === c) {
       let t = e.clientX;
-      r(22 - 22 * (qE(t - a.current, 0, 21) / 21));
+      r(22 - 22 * (clamp(t - a.current, 0, 21) / 21));
     } else {
       let t = e.clientX;
-      r(22 * (qE(a.current - t, 0, 21) / 21));
+      r(22 * (clamp(a.current - t, 0, 21) / 21));
     }
   }, [c, 22, 21]);
   let f = useCallback(e => {
@@ -19529,10 +19529,10 @@ function ji(e) {
     let n = !1 === c;
     if (Date.now() - s.current < 100) n ? onPause() : onResume();else if (n) {
       let i = e.clientX;
-      qE(i - a.current, 0, 21) > 10.5 && onPause();
+      clamp(i - a.current, 0, 21) > 10.5 && onPause();
     } else {
       let t = e.clientX;
-      qE(a.current - t, 0, 21) > 10.5 && onResume();
+      clamp(a.current - t, 0, 21) > 10.5 && onResume();
     }
     a.current = 0;
     r(null);
@@ -21406,7 +21406,7 @@ function bR({
   let t = useDispatch();
   let i = Pd(useCallback(() => {
     t(H1({
-      votingStage: W8Y.JOINED
+      votingStage: SessionStatus.JOINED
     }));
   }, [t]));
   return jsxs("div", {
@@ -21655,24 +21655,24 @@ function bK() {
   let t = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let i = "meetingsPanel";
   switch (t.votingStage) {
-    case W8Y.JOINED:
+    case SessionStatus.JOINED:
       return jsx(bI, {
         votingSessionInfo: e,
         recordingKey: i
       });
-    case W8Y.NOT_JOINED:
+    case SessionStatus.NOT_JOINED:
       return jsx(bR, {
         recordingKey: i
       });
-    case W8Y.NO_SESSION:
-    case W8Y.ENDED:
+    case SessionStatus.NO_SESSION:
+    case SessionStatus.ENDED:
       return jsx(bG, {
         recordingKey: i
       });
   }
 }
 let bZ = "meetings_panel";
-let b$ = Ju(function ({
+let b$ = registerModal(function ({
   votingSessionId: e
 }) {
   let t = useDispatch();
@@ -21700,7 +21700,7 @@ let b$ = Ju(function ({
         votingSessionId: e
       }));
       t(H1({
-        votingStage: W8Y.NO_SESSION
+        votingStage: SessionStatus.NO_SESSION
       }));
       trackEventAnalytics("confirm_delete_voting_session", {
         source: bZ,
@@ -21712,7 +21712,7 @@ let b$ = Ju(function ({
     recordingKey: "deleteVotingSessionModal",
     size: "small"
   });
-}, "DeleteVotingSessionModal", ZU.YES);
+}, "DeleteVotingSessionModal", ModalSupportsBackground.YES);
 function bX({
   recordingKey: e,
   onClick: t
@@ -21777,7 +21777,7 @@ function bq({
         });
         p(H1({
           sessionId: t,
-          votingStage: W8Y.ENDED
+          votingStage: SessionStatus.ENDED
         }));
         u();
       },
@@ -22176,7 +22176,7 @@ function ys() {
   }, [f]);
   let _ = useCallback(() => {
     t ? i(H1({
-      votingStage: W8Y.NO_SESSION
+      votingStage: SessionStatus.NO_SESSION
     })) : n({
       type: "SET_VIEW",
       payload: _$$iN.DEFAULT
@@ -22194,7 +22194,7 @@ function ys() {
     });
   }, [s, e]);
   let j = useCallback(() => {
-    i($O({
+    i(showModal({
       type: b$.type,
       showModalsBeneath: !0,
       data: {
@@ -22619,7 +22619,7 @@ function yF() {
     if (n && r) {
       let e = !0;
       _$$W9("right", () => {
-        e && Y5.triggerAction("set-tool-default");
+        e && fullscreenValue.triggerAction("set-tool-default");
       });
       return () => {
         e = !1;
@@ -22629,7 +22629,7 @@ function yF() {
   let c = useCallback(e => {
     if (!n) return;
     let i = e.nativeEvent instanceof KeyboardEvent;
-    r ? (Y5.triggerAction("set-tool-default"), i && t.current?.focus()) : VU.get(_$$ec2.action, "toolbar")(e);
+    r ? (fullscreenValue.triggerAction("set-tool-default"), i && t.current?.focus()) : VU.get(_$$ec2.action, "toolbar")(e);
   }, [n, r]);
   let u = !s && a > 0;
   return jsx(_$$Z6, {
@@ -22666,7 +22666,7 @@ function yW() {
   }, [e, i, t]);
   let r = getFeatureFlags().figjam_generate_handbrake;
   let a = r ? getI18nString("whiteboard.ai_modal.generate_handbrake") : getI18nString("whiteboard.ai_modal.make");
-  let s = useSelector(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
+  let s = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.LAYOUT);
   useEffect(() => {
     s || i();
   }, [s, i]);
@@ -23074,7 +23074,7 @@ function y8() {
   let s = useMemo(() => n.allUsers.find(e => e.sessionID === n.sessionID) || null, [n.allUsers, n.sessionID]);
   let u = B4();
   let p = _$$aV();
-  let f = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let f = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let _ = !q8() && Uy() && !Cd();
   let x = BrowserInfo.isMeetDevice;
   let g = _$$L2();
@@ -23180,7 +23180,7 @@ let vr = "whiteboard_ui--stackedContainer--2mtV9";
 let va = "whiteboard_ui--rightSidebar--CJHYf";
 let vs = memo(function () {
   let e = Vi();
-  let t = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let t = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let i = _$$p("showUi");
   (function () {
     let e = Kx();
@@ -23280,7 +23280,7 @@ function vl() {
       children: jsx(_$$B7, {
         hidePageName: !0,
         hideResolve: !1,
-        onCloseButton: () => glU.triggerActionInUserEditScope("set-tool-default", null)
+        onCloseButton: () => Fullscreen.triggerActionInUserEditScope("set-tool-default", null)
       })
     })
   });
@@ -23323,7 +23323,7 @@ function vf({
   let h = isInteractionPathCheck() ? 1e3 : u;
   let m = useCallback(e => {
     n(H1({
-      votingStage: W8Y.JOINED
+      votingStage: SessionStatus.JOINED
     }));
     trackEventAnalytics("join_voting_session", {
       source: e,
@@ -23396,14 +23396,14 @@ let vg = memo(function () {
   let t = TA();
   let i = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let n = useSelector(e => e.voting.selectedVotePinId);
-  let r = [W8Y.ENDED, W8Y.JOINED].includes(i.votingStage);
+  let r = [SessionStatus.ENDED, SessionStatus.JOINED].includes(i.votingStage);
   let {
     pageIdForNodeId
   } = useContext(kw);
   let s = _$$Fk(e => e.getCurrentPage()?.guid);
   let u = useMemo(() => {
     var e;
-    return i.votingStage === W8Y.JOINED ? (e = i.votedNodes, t ? e.filter(e => e.userIdToNodeVotes[t]?.length).map(e => ({
+    return i.votingStage === SessionStatus.JOINED ? (e = i.votedNodes, t ? e.filter(e => e.userIdToNodeVotes[t]?.length).map(e => ({
       ...e,
       userIdToNodeVotes: {
         [t]: e.userIdToNodeVotes[t]
@@ -23536,13 +23536,13 @@ function vC() {
     let i = kl("isSingleDiagramNodeSelected");
     let n = kl("locked");
     let r = useSelector(e => e.mirror.appModel.activeUserAction);
-    return !!(i && !n && (e || t) && r !== QOV.DRAGGING && r !== QOV.RESIZING && r !== QOV.ROTATING);
+    return !!(i && !n && (e || t) && r !== UserActionState.DRAGGING && r !== UserActionState.RESIZING && r !== UserActionState.ROTATING);
   }(e, t);
   let a = _$$_X({
     subscribeToUpdates_expensive: r
   });
   let s = function (e) {
-    let t = _$$ut(Ez5?.canvasViewState().selectionBoundingRect, {
+    let t = getObservableValue(AppStateTsApi?.canvasViewState().selectionBoundingRect, {
       x: 0,
       y: 0,
       width: 0,
@@ -23555,25 +23555,25 @@ function vC() {
       y: i.y + e.y
     };
   }(a);
-  let l = i === $6Y.BACKWARD ? -1 : 1;
+  let l = i === NavigationDirection.BACKWARD ? -1 : 1;
   return !r || a.zoomScale < .35 ? null : jsxs(Fragment, {
     children: [e && jsx(vT, {
       selectionBounds: s,
       Icon: vb,
-      onClick: _$$nc.user("quick-add-mindmap", () => wzW?.quickAddMindmapChild(null)),
+      onClick: _$$nc.user("quick-add-mindmap", () => MindmapCppBindings?.quickAddMindmapChild(null)),
       recordingKey: "mindmap-add-child-button",
-      direction: l > 0 ? $6Y.FORWARD : $6Y.BACKWARD,
+      direction: l > 0 ? NavigationDirection.FORWARD : NavigationDirection.BACKWARD,
       includeTooltipKeyboardShortcut: !0
     }), e && n && jsx(vT, {
       selectionBounds: s,
       Icon: vb,
-      onClick: _$$nc.user("quick-add-mindmap", () => wzW?.quickAddMindmapChild($6Y.BACKWARD)),
+      onClick: _$$nc.user("quick-add-mindmap", () => MindmapCppBindings?.quickAddMindmapChild(NavigationDirection.BACKWARD)),
       recordingKey: "mindmap-add-backward-child-button",
-      direction: $6Y.BACKWARD,
+      direction: NavigationDirection.BACKWARD,
       includeTooltipKeyboardShortcut: !1
     }), t && jsx(vE, {
       Icon: vy,
-      onClick: _$$nc.user("quick-add-mindmap", () => wzW?.quickAddMindmapSibling()),
+      onClick: _$$nc.user("quick-add-mindmap", () => MindmapCppBindings?.quickAddMindmapSibling()),
       positionX: Al,
       positionY: DH,
       recordingKey: "mindmap-add-sibling-button",
@@ -23593,7 +23593,7 @@ function vT({
   direction: r,
   includeTooltipKeyboardShortcut: a
 }) {
-  let s = r === $6Y.BACKWARD ? -1 : 1;
+  let s = r === NavigationDirection.BACKWARD ? -1 : 1;
   return jsx(vE, {
     Icon: t,
     onClick: i,
@@ -23603,7 +23603,7 @@ function vT({
     scaleX: s,
     selectionBounds: e,
     tooltip: getI18nString("whiteboard.mindmaps.add-child-tooltip"),
-    tooltipDirection: r === $6Y.BACKWARD ? "left" : "right",
+    tooltipDirection: r === NavigationDirection.BACKWARD ? "left" : "right",
     tooltipShortcutActionKey: a ? "quick-create" : void 0
   });
 }
@@ -23702,7 +23702,7 @@ function vk(e) {
       selected: selectedIndex === t,
       onMouseEnter: () => setSelectedIndex(t),
       onClick: () => {
-        _$$oW3.trigger("action", KWd.COMMIT);
+        _$$oW3.trigger("action", TransactionCommand.COMMIT);
       }
     }, e.key))
   });
@@ -23752,10 +23752,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.STICKY);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.STICKY);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.STICKY);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.STICKY);
     }
   },
   agenda: {
@@ -23791,10 +23791,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.SECTION);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.SECTION);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.SECTION);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.SECTION);
     }
   },
   flow: {
@@ -23818,10 +23818,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.SHAPE_WITH_TEXT);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.SHAPE_WITH_TEXT);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.SHAPE_WITH_TEXT);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.SHAPE_WITH_TEXT);
     }
   },
   bug_bash: {
@@ -23885,10 +23885,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.BUG_BASH);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.BUG_BASH);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.BUG_BASH);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.BUG_BASH);
     }
   },
   design_crit: {
@@ -23911,10 +23911,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.DESIGN_CRIT);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.DESIGN_CRIT);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.DESIGN_CRIT);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.DESIGN_CRIT);
     }
   },
   user_journey: {
@@ -23945,10 +23945,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.USER_JOURNEY);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.USER_JOURNEY);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.USER_JOURNEY);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.USER_JOURNEY);
     }
   },
   standup: {
@@ -23999,10 +23999,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.STANDUP);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.STANDUP);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.STANDUP);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.STANDUP);
     }
   },
   retro: {
@@ -24040,10 +24040,10 @@ let vD = {
       });
     }, {}),
     onSelect() {
-      gw5.showFigjamStarterKitPreview(KpW.RETRO);
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(CollaborationType.RETRO);
     },
     onCommit() {
-      gw5.commitFigjamStarterKitPreview(KpW.RETRO);
+      WhiteboardStarterKitCppBindings.commitFigjamStarterKitPreview(CollaborationType.RETRO);
     }
   },
   templates: {
@@ -24052,10 +24052,10 @@ let vD = {
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.templates"),
     className: "starter_kit_ui--optionTemplates--UEEVb",
     onSelect() {
-      gw5.clearFigjamStarterKitPreview();
+      WhiteboardStarterKitCppBindings.clearFigjamStarterKitPreview();
     },
     onCommit(e) {
-      e($O({
+      e(showModal({
         type: PH.type,
         data: {
           triggeredFrom: "starterKitMore",
@@ -24111,15 +24111,15 @@ function vB({
     b && f(-1);
   }, [b]);
   useEffect(() => {
-    gw5.setFigjamStarterKitEnabled(_);
+    WhiteboardStarterKitCppBindings.setFigjamStarterKitEnabled(_);
     _ && e && f(0);
     _ || f(-1);
   }, [_, e, f]);
   useEffect(() => () => {
-    gw5?.setFigjamStarterKitEnabled(!1);
+    WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!1);
   }, []);
   useEffect(() => {
-    i !== NLJ.SELECT && i !== NLJ.HAND && f(-1);
+    i !== DesignGraphElements.SELECT && i !== DesignGraphElements.HAND && f(-1);
   }, [i]);
   let y = _$$I5(0 === m);
   useEffect(() => {
@@ -24128,12 +24128,12 @@ function vB({
     e && e.focus();
   }, [y, _, m, g]);
   useEffect(() => {
-    _ || gw5.clearFigjamStarterKitPreview();
+    _ || WhiteboardStarterKitCppBindings.clearFigjamStarterKitPreview();
   }, [_]);
   useEffect(() => {
     if (_) {
       if (!g) {
-        gw5.clearFigjamStarterKitPreview();
+        WhiteboardStarterKitCppBindings.clearFigjamStarterKitPreview();
         return;
       }
       "templates" !== g.key && (Cu({
@@ -24158,13 +24158,13 @@ function vB({
     }), [i]);
   }(e => {
     switch (e) {
-      case KWd.PREVIOUS:
+      case TransactionCommand.PREVIOUS:
         f(e => (e - 1 + vP.length) % vP.length);
         break;
-      case KWd.NEXT:
+      case TransactionCommand.NEXT:
         f(e => (e + 1) % vP.length);
         break;
-      case KWd.CLEAR:
+      case TransactionCommand.CLEAR:
         _ && Cu({
           fileKey: n,
           source: h,
@@ -24172,10 +24172,10 @@ function vB({
         }, "starter_kit_alt_user_action");
         f(-1);
         break;
-      case KWd.CANCEL:
+      case TransactionCommand.CANCEL:
         s(!0);
         break;
-      case KWd.COMMIT:
+      case TransactionCommand.COMMIT:
         if (!g) break;
         "templates" !== g.key && (Cu({
           fileKey: n,
@@ -24210,7 +24210,7 @@ function vB({
         "aria-describedby": vH,
         onMouseLeave: () => u.current = !0,
         onMouseEnter: () => {
-          u.current && (gw5.rotateFigjamStarterKitStrings(), u.current = !1);
+          u.current && (WhiteboardStarterKitCppBindings.rotateFigjamStarterKitStrings(), u.current = !1);
         },
         children: jsxs(_$$i8, {
           children: [jsx(_$$E2, {
@@ -24254,8 +24254,8 @@ function vK() {
   let e = useSelector(e => e.multiplayerEmoji);
   let t = _$$p("showUi");
   let i = _$$p("topLevelMode");
-  let n = _$$p("currentTool") === NLJ.COMMENTS;
-  let r = i === lyf.HISTORY;
+  let n = _$$p("currentTool") === DesignGraphElements.COMMENTS;
+  let r = i === ViewType.HISTORY;
   let a = !q8() && Uy();
   let s = getFeatureFlags().figjam_quick_actions_v2;
   let h = Xr(_$$H4);
@@ -24274,7 +24274,7 @@ let vW = memo(({
   let t = _$$p("isReadOnly");
   let i = useSelector(e => e.progressBarState);
   let n = _$$p("loadingEmbeds");
-  let r = _$$ut(Ez5?.uiState().showCanvasSearch, !1);
+  let r = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let a = _$$aV();
   let s = useRef(null);
   let p = useSelector(e => e.openFile);
@@ -24290,7 +24290,7 @@ let vW = memo(({
   return jsx(er, {
     children: jsxs(_$$sk, {
       versionHistoryEnabled: !1,
-      children: [!(BrowserInfo.isIpad || BrowserInfo.isIpadNative) && !t && jsx(vV, {}), i.mode !== Oin.OFF && jsx("div", {
+      children: [!(BrowserInfo.isIpad || BrowserInfo.isIpadNative) && !t && jsx(vV, {}), i.mode !== UIVisibilitySetting.OFF && jsx("div", {
         className: _$$_q
       }), jsxs(_$$pO, {
         initialFilterState: {

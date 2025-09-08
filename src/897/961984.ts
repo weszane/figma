@@ -4,7 +4,7 @@ import { W } from "../905/187396";
 import { EventEmitter } from "../905/690073";
 import { parsePxNumber } from "../figma_app/783094";
 import { n } from "../897/929006";
-import { _W, E7, hS, gl } from "../905/216495";
+import { valueOrFallback, normalizeValue, isValidValue, isInvalidValue } from "../905/216495";
 import { N as _$$N } from "../figma_app/271807";
 import { w_, J5, Zp } from "../897/602108";
 function u() {
@@ -55,7 +55,7 @@ export function $$x1({
       }, [n, s])];
     }(delayBeforeAnimation + J5(a) + delayAfterAnimation);
     return [o < delayBeforeAnimation ? 0 : Zp(a, o - delayBeforeAnimation), o, s, l, c];
-  }(_W(e.easingFunction, [1, 100, 10, 0]), {
+  }(valueOrFallback(e.easingFunction, [1, 100, 10, 0]), {
     delayBeforeAnimation: .1,
     delayAfterAnimation: 1
   });
@@ -133,7 +133,7 @@ let M = class e extends PureComponent {
         status: 1,
         frameIndex: e
       });
-      let t = 1e3 * (0 === this.state.frameIndex ? _W(this.props.transition.duration, 1) : 2);
+      let t = 1e3 * (0 === this.state.frameIndex ? valueOrFallback(this.props.transition.duration, 1) : 2);
       this.executor.scheduleOnce(this.transitionToNextFrame, t);
     };
     this.startAnimation = () => {
@@ -167,7 +167,7 @@ let M = class e extends PureComponent {
         this.setAnimationStateNew(2);
         this.executor.scheduleOnce(() => {
           this.setAnimationStateNew(1);
-        }, 1e3 * _W(this.props.transition.duration, 0) + e.BEZIER_RETURN_TO_START_WAIT_TIME);
+        }, 1e3 * valueOrFallback(this.props.transition.duration, 0) + e.BEZIER_RETURN_TO_START_WAIT_TIME);
       }, e.BEZIER_BEFORE_ANIMATION_WAIT_TIME);
     };
     this.resetAnimationNew = () => {
@@ -546,13 +546,13 @@ let M = class e extends PureComponent {
       case "EASE_IN_AND_OUT_BACK":
         return "cubic-bezier(0.7, -0.4, 0.4, 1.4)";
       case "CUSTOM_BEZIER":
-        let t = E7(e.easingFunction);
+        let t = normalizeValue(e.easingFunction);
         if (t && 4 === t.length) return "cubic-bezier(" + n.format(t) + ")";
     }
     return "";
   }
   cssDuration(e) {
-    return "INSTANT" === e.behavior ? 0 : _W(e.duration, .3);
+    return "INSTANT" === e.behavior ? 0 : valueOrFallback(e.duration, .3);
   }
   rectangleStateToCSSStyle(t, n, i, r, a) {
     let o = this.cssEasingFunction(t);
@@ -565,10 +565,10 @@ let M = class e extends PureComponent {
     };
   }
   isAnyTransitionInfoMixed(e) {
-    let t = !hS(e.behavior);
-    let n = !hS(e.easing);
-    let i = !hS(e.duration);
-    let r = !hS(e.direction);
+    let t = !isValidValue(e.behavior);
+    let n = !isValidValue(e.easing);
+    let i = !isValidValue(e.duration);
+    let r = !isValidValue(e.direction);
     return t || n || i || r;
   }
   UNSAFE_componentWillReceiveProps(e) {
@@ -707,7 +707,7 @@ let M = class e extends PureComponent {
     let e = 0 === this.state.status || 2 === this.state.status ? h : m;
     let t = "PUSH" === this.props.transition.behavior;
     let n = 0 === this.state.status || 2 === this.state.status ? t ? h : "transition_preview--aboveInactive--b8PZf transition_preview--previewFrame--WAa8e transition_preview--_previewItem--o2gce" : t ? m : "transition_preview--aboveActive--Wbtj2 transition_preview--previewFrame--WAa8e transition_preview--_previewItem--o2gce";
-    if (0 === this.state.status || gl(this.props.transition.behavior)) return null;
+    if (0 === this.state.status || isInvalidValue(this.props.transition.behavior)) return null;
     if ("SMART_ANIMATE" === this.props.transition.behavior) return this.renderSmartAnimateTransition(this.props.isNarrowPanel);
     {
       let t = this.buildKeyFramesForNonSmartTransition(this.props.transition)[this.state.frameIndex];

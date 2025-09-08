@@ -12,7 +12,7 @@ import { ZC } from "../figma_app/39751";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { Ru } from "../905/251509";
-import { Vzr } from "../figma_app/763686";
+import { Thumbnail } from "../figma_app/763686";
 import { c1 } from "../905/589717";
 import { HJx, EJM, hVg, k$X } from "../figma_app/27776";
 import { l3, _Y, A9, fQ } from "../905/721983";
@@ -33,7 +33,7 @@ let E = new WeakMap();
 function x(e) {
   let t = E.get(e);
   if (void 0 !== t) return t;
-  let [i, n] = Vzr.generateThumbnailForNode(c1.fromKiwi(e), 4 * I, 4 * v, 4, {
+  let [i, n] = Thumbnail.generateThumbnailForNode(c1.fromKiwi(e), 4 * I, 4 * v, 4, {
     forceContentsOnly: !0,
     isDetatchedComponentScene: !1
   });

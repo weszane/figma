@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { oA } from "../905/663269";
 import { h as _$$h } from "../905/142086";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { QL, EM } from "../905/609392";
 import { nk } from "../figma_app/2023";
 import { aV } from "../figma_app/722362";
@@ -42,7 +42,7 @@ export function $$x0(e) {
         requestType: e6.EDITOR,
         roleRequestId: o
       };
-      t(to({
+      t(showModalHandler({
         type: g_,
         data: {
           fileKey: n.file?.key ?? e.key,

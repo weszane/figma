@@ -1,12 +1,12 @@
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { N } from "../905/696711";
 import { L } from "../905/92291";
 import { $ } from "../905/20253";
-import { nF } from "../905/350402";
-let $$u1 = nF((e, {
+import { createOptimistThunk } from "../905/350402";
+let $$u1 = createOptimistThunk((e, {
   fileKey: t,
   emailAddress: r,
   isResentEmail: s,
@@ -37,7 +37,7 @@ let $$u1 = nF((e, {
     e.dispatch(_$$s.error(getI18nString("google_device_try_file_modal.enter_email.failed_to_send")));
   });
 });
-let $$p0 = nF((e, {
+let $$p0 = createOptimistThunk((e, {
   fileKey: t
 }, {
   loadingKey: r
@@ -47,7 +47,7 @@ let $$p0 = nF((e, {
   });
   N(a, e, r);
   a.then(() => {
-    e.dispatch(to({
+    e.dispatch(showModalHandler({
       type: $,
       data: {}
     }));

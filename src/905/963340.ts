@@ -4,9 +4,9 @@ import { DP } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { l as _$$l } from "../905/479687";
 import { aC, Os, AS, mL, rv, ZU, dl, HI, Dq, WE, pc } from "../905/379736";
-import { q } from "../905/751750";
-import { Qv } from "../905/959312";
-import { r as _$$r } from "../905/577641";
+import { useSelectionProvider } from "../905/751750";
+import { useRecording } from "../905/959312";
+import { defaultComponentAttribute } from "../905/577641";
 import { Os as _$$Os } from "../905/743079";
 import { $ } from "../905/61417";
 let m = createContext({
@@ -24,8 +24,8 @@ let h = forwardRef(({
   recordingKey: l,
   ...p
 }, h) => {
-  let [g, f] = q();
-  let _ = Qv(e, {
+  let [g, f] = useSelectionProvider();
+  let _ = useRecording(e, {
     eventName: "change",
     recordingKey: l
   }, [e]);
@@ -43,7 +43,7 @@ let h = forwardRef(({
     children: jsx(m.Provider, {
       value: A,
       children: jsxs("ul", {
-        ..._$$r,
+        ...defaultComponentAttribute,
         ...s,
         ...p,
         role: "group",
@@ -96,8 +96,8 @@ let A = forwardRef(({
   selectedItems: s = [],
   ...o
 }, l) => {
-  let [u, p] = q();
-  let m = Qv(e, {
+  let [u, p] = useSelectionProvider();
+  let m = useRecording(e, {
     eventName: "change",
     recordingKey: a
   }, [e]);
@@ -164,7 +164,7 @@ let b = forwardRef(({
   htmlAttributes: s,
   ...o
 }, l) => {
-  let d = Qv(e, {
+  let d = useRecording(e, {
     eventName: "change",
     recordingKey: a
   }, [e]);

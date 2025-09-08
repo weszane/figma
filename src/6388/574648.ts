@@ -33,7 +33,7 @@ import { f as _$$f } from "../905/809171";
 import { A as _$$A2 } from "../figma_app/180822";
 import { k as _$$k2 } from "../figma_app/962894";
 import { J as _$$J } from "../905/614223";
-import { lyf, NLJ, m1T, nQ7, Ez5 } from "../figma_app/763686";
+import { ViewType, DesignGraphElements, LayoutTabType, SelfDesignType, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import J from "classnames";
@@ -61,12 +61,12 @@ import { d as _$$d } from "../9410/847929";
 import { xn } from "../figma_app/644079";
 import { k as _$$k4 } from "../figma_app/564183";
 import { VA } from "../figma_app/528509";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { aV } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { wH } from "../figma_app/680166";
 import { m as _$$m2 } from "../905/99004";
 import { Ij } from "../figma_app/433401";
@@ -126,7 +126,7 @@ function e0({
   let a = aV();
   let d = q5();
   let c = VA(d?.project);
-  let u = s === lyf.HISTORY;
+  let u = s === ViewType.HISTORY;
   let h = atomStoreManager.get(_$$o2);
   let {
     getProvisionalAccessBanner
@@ -142,7 +142,7 @@ function e0({
     closeSecondaryToolbelt
   } = LH();
   useEffect(() => {
-    t !== NLJ.VECTOR_BEND && t !== NLJ.VECTOR_PAINT_BUCKET && t !== NLJ.SHAPE_BUILDER && (r === m1T.VECTOR ? setActiveSecondaryToolbeltId("PenTool") : t === NLJ.IMAGE_OR_VIDEO ? setActiveSecondaryToolbeltId("ImageOrVideoTool") : setActiveSecondaryToolbeltId(null));
+    t !== DesignGraphElements.VECTOR_BEND && t !== DesignGraphElements.VECTOR_PAINT_BUCKET && t !== DesignGraphElements.SHAPE_BUILDER && (r === LayoutTabType.VECTOR ? setActiveSecondaryToolbeltId("PenTool") : t === DesignGraphElements.IMAGE_OR_VIDEO ? setActiveSecondaryToolbeltId("ImageOrVideoTool") : setActiveSecondaryToolbeltId(null));
   }, [t, r, setActiveSecondaryToolbeltId]);
   let S = _$$E2({
     logToggle: !0
@@ -161,7 +161,7 @@ function e0({
         modeIcon: jsx(_$$l, {}),
         modeLabel: getI18nString("fullscreen.toolbar.toolbelt_mode_segmented_control.slides"),
         onToggleMode: S,
-        getTooltipShortcut: e => e === nQ7.SELF ? I("enter-slides-mode") : I("enter-slides-design-mode")
+        getTooltipShortcut: e => e === SelfDesignType.SELF ? I("enter-slides-mode") : I("enter-slides-design-mode")
       })]
     }), j && jsx(_$$f2, {
       onClose: () => {
@@ -171,7 +171,7 @@ function e0({
       text: g.text,
       shouldShowCurf: g.shouldShowCurf,
       licenseType: FProductAccessType.SLIDES
-    }), "PenTool" === activeSecondaryToolbeltId && r === m1T.VECTOR && jsx(_$$A3, {
+    }), "PenTool" === activeSecondaryToolbeltId && r === LayoutTabType.VECTOR && jsx(_$$A3, {
       activeToolId: t,
       activateTool: l,
       getShortcutTextForTool: e,
@@ -182,7 +182,7 @@ function e0({
   });
 }
 function e1(e) {
-  return !HW() && e === lyf.LAYOUT;
+  return !HW() && e === ViewType.LAYOUT;
 }
 export function $$e51(e) {
   return e1(useAtomWithSubscription(_$$Q2)) ? `${e}-${eU}` : e;
@@ -200,10 +200,10 @@ function e6(e) {
     topLevelMode,
     areAnyShapesActive,
     showDisabledTools
-  }, nQ7.SELF), jsx(e4, {
+  }, SelfDesignType.SELF), jsx(e4, {
     activateTool,
     topLevelMode
-  }, nQ7.DESIGN)], [activateTool, topLevelMode, areAnyShapesActive, showDisabledTools]);
+  }, SelfDesignType.DESIGN)], [activateTool, topLevelMode, areAnyShapesActive, showDisabledTools]);
   return jsx(Q6, {
     rows: a,
     activeRowIndex: i ? 1 : 0
@@ -226,23 +226,23 @@ function e4(e) {
       overlayId: "Slides-SelectTools",
       tooltipText: getI18nString("fullscreen.flyout.move_tools"),
       items: [{
-        toolId: NLJ.SELECT,
+        toolId: DesignGraphElements.SELECT,
         text: getI18nString("fullscreen_actions.set-tool-default"),
-        shortcutText: x(NLJ.SELECT),
+        shortcutText: x(DesignGraphElements.SELECT),
         icon: jsx(_$$H, {}),
         smallIcon: jsx(_$$y, {}),
         recordingKey: "toolDefault"
       }, {
-        toolId: NLJ.HAND,
+        toolId: DesignGraphElements.HAND,
         text: getI18nString("fullscreen_actions.set-tool-hand"),
-        shortcutText: x(NLJ.HAND),
+        shortcutText: x(DesignGraphElements.HAND),
         icon: jsx(t, {}),
         smallIcon: jsx(_$$O, {}),
         recordingKey: "toolHand"
       }, {
-        toolId: NLJ.SCALE,
+        toolId: DesignGraphElements.SCALE,
         text: getI18nString("fullscreen_actions.set-tool-scale"),
-        shortcutText: x(NLJ.SCALE),
+        shortcutText: x(DesignGraphElements.SCALE),
         icon: jsx(_$$a, {}),
         smallIcon: jsx(_$$l2, {}),
         recordingKey: "toolScale"
@@ -250,9 +250,9 @@ function e4(e) {
       activeToolId,
       onActivateTool: activateTool
     }), jsx(_$$N2, {
-      toolId: NLJ.FRAME,
+      toolId: DesignGraphElements.FRAME,
       tooltipText: getI18nString("fullscreen_actions.set-tool-frame"),
-      tooltipShortcut: x(NLJ.FRAME),
+      tooltipShortcut: x(DesignGraphElements.FRAME),
       icon: jsx(_$$v, {}),
       onActivateTool: activateTool,
       activeToolId
@@ -260,51 +260,51 @@ function e4(e) {
       overlayId: "Slides-ShapeTools",
       tooltipText: getI18nString("fullscreen.flyout.shape_tools"),
       items: [{
-        toolId: NLJ.SHAPE_RECTANGLE,
+        toolId: DesignGraphElements.SHAPE_RECTANGLE,
         text: getI18nString("fullscreen_actions.set-tool-rectangle"),
-        shortcutText: x(NLJ.SHAPE_RECTANGLE),
+        shortcutText: x(DesignGraphElements.SHAPE_RECTANGLE),
         icon: jsx(_$$n, {}),
         smallIcon: jsx(_$$y2, {}),
         recordingKey: "toolShapeRectangle"
       }, {
-        toolId: NLJ.SHAPE_LINE,
+        toolId: DesignGraphElements.SHAPE_LINE,
         text: getI18nString("fullscreen_actions.set-tool-line"),
-        shortcutText: x(NLJ.SHAPE_LINE),
+        shortcutText: x(DesignGraphElements.SHAPE_LINE),
         icon: jsx(_$$W, {}),
         smallIcon: jsx(_$$h, {}),
         recordingKey: "toolShapeLine"
       }, {
-        toolId: NLJ.SHAPE_ARROW,
+        toolId: DesignGraphElements.SHAPE_ARROW,
         text: getI18nString("fullscreen_actions.set-tool-arrow"),
-        shortcutText: x(NLJ.SHAPE_ARROW),
+        shortcutText: x(DesignGraphElements.SHAPE_ARROW),
         icon: jsx(_$$F, {}),
         smallIcon: jsx(_$$E, {}),
         recordingKey: "toolShapeArrow"
       }, {
-        toolId: NLJ.SHAPE_ELLIPSE,
+        toolId: DesignGraphElements.SHAPE_ELLIPSE,
         text: getI18nString("fullscreen_actions.set-tool-ellipse"),
-        shortcutText: x(NLJ.SHAPE_ELLIPSE),
+        shortcutText: x(DesignGraphElements.SHAPE_ELLIPSE),
         icon: jsx(_$$m, {}),
         smallIcon: jsx(_$$B, {}),
         recordingKey: "toolShapeEllipse"
       }, {
-        toolId: NLJ.SHAPE_REGULAR_POLYGON,
+        toolId: DesignGraphElements.SHAPE_REGULAR_POLYGON,
         text: getI18nString("fullscreen_actions.set-tool-regular-polygon"),
         icon: jsx(_$$o, {}),
         smallIcon: jsx(_$$h2, {}),
         recordingKey: "toolShapePolygon"
       }, {
-        toolId: NLJ.SHAPE_STAR,
+        toolId: DesignGraphElements.SHAPE_STAR,
         text: getI18nString("fullscreen_actions.set-tool-star"),
         icon: jsx(_$$e, {}),
         smallIcon: jsx(_$$Z, {}),
         recordingKey: "toolShapeStar"
       }, {
-        toolId: NLJ.IMAGE_OR_VIDEO,
+        toolId: DesignGraphElements.IMAGE_OR_VIDEO,
         text: getI18nString("fullscreen_actions.place_image_or_video"),
         icon: jsx(_$$T, {}),
         smallIcon: jsx(_$$s, {}),
-        shortcutText: x(NLJ.IMAGE_OR_VIDEO),
+        shortcutText: x(DesignGraphElements.IMAGE_OR_VIDEO),
         recordingKey: "image-tool"
       }],
       activeToolId,
@@ -313,16 +313,16 @@ function e4(e) {
       overlayId: "Slides-PenTools",
       tooltipText: getI18nString("fullscreen.flyout.drawing_tools"),
       items: [{
-        toolId: NLJ.VECTOR_PEN,
+        toolId: DesignGraphElements.VECTOR_PEN,
         text: getI18nString("fullscreen_actions.set-tool-pen"),
-        shortcutText: x(NLJ.VECTOR_PEN),
+        shortcutText: x(DesignGraphElements.VECTOR_PEN),
         icon: jsx(_$$N, {}),
         smallIcon: jsx(_$$k, {}),
         recordingKey: "toolPen"
       }, {
-        toolId: NLJ.VECTOR_PENCIL,
+        toolId: DesignGraphElements.VECTOR_PENCIL,
         text: getI18nString("fullscreen_actions.set-tool-pencil"),
-        shortcutText: x(NLJ.VECTOR_PENCIL),
+        shortcutText: x(DesignGraphElements.VECTOR_PENCIL),
         icon: jsx(_$$L, {}),
         smallIcon: jsx(_$$A, {}),
         recordingKey: "toolPencil"
@@ -330,20 +330,20 @@ function e4(e) {
       activeToolId,
       onActivateTool: activateTool
     }), jsx(_$$N2, {
-      toolId: NLJ.TYPE,
+      toolId: DesignGraphElements.TYPE,
       icon: jsx(_$$B2, {}),
       onActivateTool: activateTool,
       activeToolId,
       tooltipText: getI18nString("fullscreen_actions.set-tool-type"),
-      tooltipShortcut: x(NLJ.TYPE),
+      tooltipShortcut: x(DesignGraphElements.TYPE),
       onboardingKey: "tool-type-onboarding"
     }), jsx(_$$N2, {
-      toolId: NLJ.COMMENTS,
+      toolId: DesignGraphElements.COMMENTS,
       icon: l > 0 ? jsx(_$$X, {}) : jsx(_$$f, {}),
-      onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
+      onActivateTool: activeToolId === DesignGraphElements.COMMENTS ? () => activateTool(DesignGraphElements.SELECT) : activateTool,
       activeToolId,
       tooltipText: getI18nString("fullscreen_actions.comment"),
-      tooltipShortcut: x(NLJ.COMMENTS)
+      tooltipShortcut: x(DesignGraphElements.COMMENTS)
     }), jsx(_$$N2, {
       toolId: eW,
       icon: jsx(_$$_, {}),
@@ -366,7 +366,7 @@ function e3(e) {
   } = e;
   let r = n6();
   let i = atomStoreManager.get(_$$o2);
-  let a = topLevelMode === lyf.HISTORY;
+  let a = topLevelMode === ViewType.HISTORY;
   let {
     activeToolId
   } = rM(lW);
@@ -389,22 +389,22 @@ function e3(e) {
   let N = !!iZ();
   let w = _$$k4();
   let R = e => jsx(_$$N2, {
-    toolId: NLJ.TYPE,
+    toolId: DesignGraphElements.TYPE,
     icon: jsx(_$$B2, {}),
     onActivateTool: activateTool,
     activeToolId,
     tooltipText: getI18nString("fullscreen_actions.set-tool-type"),
-    tooltipShortcut: S(NLJ.TYPE),
+    tooltipShortcut: S(DesignGraphElements.TYPE),
     recordingKey: "text-tool",
     disabled: e
   });
   let A = e => jsx(_$$N2, {
-    toolId: NLJ.IMAGE_OR_VIDEO,
+    toolId: DesignGraphElements.IMAGE_OR_VIDEO,
     icon: jsx(_$$T, {}),
     onActivateTool: activateTool,
     activeToolId,
     tooltipText: getI18nString("fullscreen_actions.place_image_or_video"),
-    tooltipShortcut: S(NLJ.IMAGE_OR_VIDEO),
+    tooltipShortcut: S(DesignGraphElements.IMAGE_OR_VIDEO),
     recordingKey: "media-tool",
     disabled: e
   });
@@ -443,42 +443,42 @@ function e3(e) {
   return jsxs(kF, {
     children: [(i || a) && jsxs(Fragment, {
       children: [jsx(_$$N2, {
-        toolId: NLJ.SELECT,
+        toolId: DesignGraphElements.SELECT,
         icon: jsx(_$$H, {}),
         onActivateTool: activateTool,
         activeToolId,
         tooltipText: getI18nString("fullscreen_actions.set-tool-default"),
-        tooltipShortcut: S(NLJ.SELECT)
+        tooltipShortcut: S(DesignGraphElements.SELECT)
       }), jsx(_$$N2, {
-        toolId: NLJ.HAND,
+        toolId: DesignGraphElements.HAND,
         icon: jsx(t, {}),
         onActivateTool: activateTool,
         activeToolId,
         tooltipText: getI18nString("fullscreen_actions.set-tool-hand"),
-        tooltipShortcut: S(NLJ.HAND)
+        tooltipShortcut: S(DesignGraphElements.HAND)
       })]
     }), !i && !a && jsxs(Fragment, {
       children: [jsx(_$$I, {
         overlayId: "Slides-SelectTools",
         tooltipText: getI18nString("fullscreen.flyout.move_tools"),
         items: [{
-          toolId: NLJ.SELECT,
+          toolId: DesignGraphElements.SELECT,
           text: getI18nString("fullscreen_actions.set-tool-default"),
-          shortcutText: S(NLJ.SELECT),
+          shortcutText: S(DesignGraphElements.SELECT),
           icon: jsx(_$$H, {}),
           smallIcon: jsx(_$$y, {}),
           recordingKey: "move-tool"
         }, {
-          toolId: NLJ.HAND,
+          toolId: DesignGraphElements.HAND,
           text: getI18nString("fullscreen_actions.set-tool-hand"),
-          shortcutText: S(NLJ.HAND),
+          shortcutText: S(DesignGraphElements.HAND),
           icon: jsx(t, {}),
           smallIcon: jsx(_$$O, {}),
           recordingKey: "hand-tool"
         }, {
-          toolId: NLJ.SCALE,
+          toolId: DesignGraphElements.SCALE,
           text: getI18nString("fullscreen_actions.set-tool-scale"),
-          shortcutText: S(NLJ.SCALE),
+          shortcutText: S(DesignGraphElements.SCALE),
           icon: jsx(_$$a, {}),
           smallIcon: jsx(_$$l2, {}),
           recordingKey: "scale-tool"
@@ -514,15 +514,15 @@ function e3(e) {
         onClose: () => b(!1)
       })]
     }), !a && (N || w) && jsx(_$$N2, {
-      toolId: NLJ.COMMENTS,
+      toolId: DesignGraphElements.COMMENTS,
       icon: r > 0 ? jsx("div", {
-        className: activeToolId === NLJ.COMMENTS ? _$$u2 : void 0,
+        className: activeToolId === DesignGraphElements.COMMENTS ? _$$u2 : void 0,
         children: jsx(_$$X, {})
       }) : jsx(_$$f, {}),
-      onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
+      onActivateTool: activeToolId === DesignGraphElements.COMMENTS ? () => activateTool(DesignGraphElements.SELECT) : activateTool,
       activeToolId,
       tooltipText: getI18nString("fullscreen_actions.comment"),
-      tooltipShortcut: S(NLJ.COMMENTS),
+      tooltipShortcut: S(DesignGraphElements.COMMENTS),
       recordingKey: "comments-tool"
     }), !i && !a && K(), i || a ? null : jsx("div", {
       "data-element-target": _$$b,
@@ -543,79 +543,79 @@ export function $$e20() {
   let g = e1(topLevelMode);
   let f = useMemo(() => function (e) {
     let t = [{
-      toolId: NLJ.SHAPE_WHITEBOARD_SQUARE,
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_SQUARE,
       text: getI18nString("fullscreen_actions.set-tool-rectangle"),
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_SQUARE),
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_SQUARE),
       icon: jsx(_$$n, {})
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_ELLIPSE,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_ELLIPSE),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-ellipse"),
       icon: jsx(_$$m, {})
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_DIAMOND,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_DIAMOND),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-diamond"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A6
       })
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP),
       text: getI18nString("fullscreen_actions.set-tool-shape-slides-triangle-up"),
       icon: jsx(_$$o, {})
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_STAR,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_STAR),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_STAR,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_STAR),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-star"),
       icon: jsx(_$$e, {})
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_PLUS,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_PLUS),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_PLUS,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_PLUS),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-plus"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A7
       })
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_ARROW_LEFT,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_ARROW_LEFT),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-left"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A4
       })
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-right"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A5
       })
     }, {
-      toolId: NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE,
-      shortcutText: e(NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE),
+      toolId: DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE,
+      shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE),
       text: getI18nString("fullscreen_actions.set-tool-shape-slides-blurb"),
       icon: jsx(_$$B3, {
         className: K()(eO, eH),
         svg: _$$A8
       })
     }, {
-      toolId: NLJ.SHAPE_LINE,
-      shortcutText: e(NLJ.SHAPE_LINE),
+      toolId: DesignGraphElements.SHAPE_LINE,
+      shortcutText: e(DesignGraphElements.SHAPE_LINE),
       text: getI18nString("fullscreen_actions.set-tool-line"),
       icon: jsx(_$$W, {})
     }, {
-      toolId: NLJ.SHAPE_ARROW,
-      shortcutText: e(NLJ.SHAPE_ARROW),
+      toolId: DesignGraphElements.SHAPE_ARROW,
+      shortcutText: e(DesignGraphElements.SHAPE_ARROW),
       text: getI18nString("fullscreen_actions.set-tool-arrow"),
       icon: jsx(_$$F, {})
     }];
     getFeatureFlags().piper_connectors && t.push({
-      toolId: NLJ.CONNECTOR_ELBOWED,
-      shortcutText: e(NLJ.CONNECTOR_ELBOWED),
+      toolId: DesignGraphElements.CONNECTOR_ELBOWED,
+      shortcutText: e(DesignGraphElements.CONNECTOR_ELBOWED),
       text: getI18nString("fullscreen_actions.set-tool-connector-elbowed"),
       icon: jsx(_$$B3, {
         className: K()(eO, eH),
@@ -666,7 +666,7 @@ function e7(e, t) {
   let o = l ? l.left + l.width / 2 : 0;
   let n = atomStoreManager.get(t) > -1;
   atomStoreManager.set(t, n ? -1 : o);
-  Y5.triggerAction("set-tool-default", {
+  fullscreenValue.triggerAction("set-tool-default", {
     source: "menu"
   });
 }
@@ -678,7 +678,7 @@ function e9({
   let n = _$$d();
   let s = n[0] ?? 0;
   let r = n[1] ?? 0;
-  let i = ut(Ez5?.singleSlideView().isInFocusedNodeView, !1);
+  let i = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !1);
   return jsx("div", {
     className: K()(Dm, _$$s2.fixed.flex.justifyCenter.eventsNone.$),
     style: {

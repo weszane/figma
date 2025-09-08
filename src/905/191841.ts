@@ -14,7 +14,7 @@ import { W as _$$W } from "../figma_app/101188";
 import { C as _$$C } from "../905/314082";
 import { mc } from "../905/820960";
 import { sf, oB } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
 import { _J } from "../figma_app/314264";
 import { BK } from "../905/848862";
@@ -55,7 +55,7 @@ export function $$P0(e) {
   }, [show]);
   let U = e => GR(D, e)();
   let B = e => {
-    D(to({
+    D(showModalHandler({
       type: _$$p,
       data: {
         teamId: e.id
@@ -63,7 +63,7 @@ export function $$P0(e) {
     }));
   };
   let V = useCallback(e => {
-    D(to({
+    D(showModalHandler({
       type: _$$h(),
       data: {
         team: e
@@ -79,7 +79,7 @@ export function $$P0(e) {
       let t = e[n.id];
       return !t || t.canView;
     }).unwrapOr(!0)) {
-      D(to({
+      D(showModalHandler({
         type: _$$$,
         data: {
           team: n
@@ -120,7 +120,7 @@ export function $$P0(e) {
     D(oB());
     let i = !!t.org_id;
     let n = e => {
-      D(to({
+      D(showModalHandler({
         type: _$$H,
         data: {
           team: t,

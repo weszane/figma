@@ -13,7 +13,7 @@ import { FPlanNameType } from "../figma_app/191312";
 import { vr, _Z, B9, LN } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
 import { zZ } from "../figma_app/345997";
-import { R$, tY } from "../figma_app/831101";
+import { PlanType, SubscriptionType } from "../figma_app/831101";
 import { DA, $$ as _$$$$, Qw, RO, X9, Q1, SO, Zy, zS, UJ, qT, Lh } from "../905/472146";
 import { Ib } from "../905/129884";
 import { cn } from "../figma_app/141320";
@@ -23,7 +23,7 @@ import { qD } from "../figma_app/314264";
 import { In } from "../905/672640";
 import { lk } from "../figma_app/109538";
 import { B as _$$B2 } from "../905/380801";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
@@ -35,7 +35,7 @@ import { E as _$$E } from "../905/984674";
 import { SK, Fq, vu } from "../905/84777";
 import { ud } from "../905/513035";
 import { Oq } from "../905/332483";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Ju, IX } from "../905/712921";
 import { A as _$$A } from "../6828/871993";
 var o = s;
@@ -54,13 +54,13 @@ function I({
   return jsxs("div", {
     className: "billing_toggle--container--X2E7D",
     children: [jsx(E, {
-      id: R$.MONTHLY,
-      selected: e === R$.MONTHLY,
+      id: PlanType.MONTHLY,
+      selected: e === PlanType.MONTHLY,
       onClick: i,
       children: renderI18nText("plan_comparison.billing_toggle.monthly_billing")
     }), jsx(E, {
-      id: R$.ANNUAL,
-      selected: e === R$.ANNUAL,
+      id: PlanType.ANNUAL,
+      selected: e === PlanType.ANNUAL,
       onClick: i,
       children: renderI18nText("plan_comparison.billing_toggle.yearly_billing", {
         saveMessage: jsx("strong", {
@@ -93,14 +93,14 @@ function E({
 }
 let T = "Plan comparison chart";
 let k = {
-  [tY.UNSPECIFIED]: R$.ANNUAL,
-  [tY.MONTHLY]: R$.MONTHLY,
-  [tY.ANNUAL]: R$.ANNUAL,
-  [tY.STUDENT]: R$.ANNUAL
+  [SubscriptionType.UNSPECIFIED]: PlanType.ANNUAL,
+  [SubscriptionType.MONTHLY]: PlanType.MONTHLY,
+  [SubscriptionType.ANNUAL]: PlanType.ANNUAL,
+  [SubscriptionType.STUDENT]: PlanType.ANNUAL
 };
 let R = {
-  [R$.MONTHLY]: tY.MONTHLY,
-  [R$.ANNUAL]: tY.ANNUAL
+  [PlanType.MONTHLY]: SubscriptionType.MONTHLY,
+  [PlanType.ANNUAL]: SubscriptionType.ANNUAL
 };
 let N = ({
   overrideHighlightedPlan: e,
@@ -122,7 +122,7 @@ let L = ({
   isStudentUser: e,
   payment: t,
   subscriptionPlan: i
-}) => e && t.billingPeriod === tY.STUDENT ? tY.STUDENT : R[i];
+}) => e && t.billingPeriod === SubscriptionType.STUDENT ? SubscriptionType.STUDENT : R[i];
 let F = e => {
   let t = renderI18nText("plan_details.see_all_features");
   return {
@@ -155,7 +155,7 @@ function G() {
       })]
     }), jsx(tM, {
       className: "enterprise_plan_banner--contactSalesCTA--WGqtx",
-      onClick: () => e(to({
+      onClick: () => e(showModalHandler({
         type: lk,
         data: {
           source: _$$B2.PLAN_COMPARISON
@@ -201,7 +201,7 @@ function er({
   let d = _$$s.ml8.fontMedium.font11.colorTextBrand.$;
   let c = useSelector(e => e.isFreeUser);
   if (e === FPlanNameType.STARTER) {
-    if (o === _$$b.CREATE_NEW_PAID_TEAM && c) return jsx("strong", {
+    if (o === UpsellModalType.CREATE_NEW_PAID_TEAM && c) return jsx("strong", {
       className: _$$s.ml8.fontMedium.font11.colorTextSecondary.$,
       children: renderI18nText("plan_comparison.plans.starter.current_plan")
     });
@@ -232,12 +232,12 @@ function ea({
   let {
     hasAnnualOnlyMessage
   } = SO[r];
-  return e !== R$.ANNUAL && hasAnnualOnlyMessage ? jsx("p", {
+  return e !== PlanType.ANNUAL && hasAnnualOnlyMessage ? jsx("p", {
     children: renderI18nText("plan_comparison.plans.org.annual_only_message", {
       billingToggle: jsx("button", {
         "data-testid": "plan-information-toggle-billing",
         className: "plan_information--annualToggleButton--UnCMk blue_link--blueLink--9rlnd",
-        onClick: () => t(R$.ANNUAL),
+        onClick: () => t(PlanType.ANNUAL),
         children: renderI18nText("plan_comparison.plans.button.annual_billing_toggle")
       })
     })
@@ -270,7 +270,7 @@ function es({
         throwTypeError(e);
     }
   }(i);
-  let d = e === R$.ANNUAL ? IX.YEAR : IX.MONTH;
+  let d = e === PlanType.ANNUAL ? IX.YEAR : IX.MONTH;
   let c = IX.MONTH;
   let m = o.dict(e => ({
     currency: t,
@@ -365,7 +365,7 @@ function eo({
   let l = useDispatch();
   let c = useSelector(e => e.teamCreation.loading);
   if (s && !t) {
-    let t = o === _$$b.CREATE_NEW_PAID_TEAM;
+    let t = o === UpsellModalType.CREATE_NEW_PAID_TEAM;
     return jsx($$, {
       className: ei,
       "data-testid": `plan-information-${e}-button`,
@@ -386,13 +386,13 @@ function eo({
     trackingDescriptor
   } = SO[e];
   let h = s && !!t || e === FPlanNameType.ENTERPRISE;
-  let f = e === FPlanNameType.STARTER && o === _$$b.CREATE_NEW_PAID_TEAM && c;
+  let f = e === FPlanNameType.STARTER && o === UpsellModalType.CREATE_NEW_PAID_TEAM && c;
   let _ = {
     [FPlanNameType.STARTER]: t ?? lQ,
     [FPlanNameType.PRO]: i,
     [FPlanNameType.ORG]: r,
     [FPlanNameType.STUDENT]: i,
-    [FPlanNameType.ENTERPRISE]: () => l(to({
+    [FPlanNameType.ENTERPRISE]: () => l(showModalHandler({
       type: lk,
       data: {
         source: _$$B2.PLAN_COMPARISON
@@ -432,7 +432,7 @@ function el({
       children: renderI18nText("plan_comparison.plans.or_contact_sales", {
         contactSalesLink: jsx(Us, {
           className: _$$s.noWrap.cursorDefault.$,
-          onClick: () => i(to({
+          onClick: () => i(showModalHandler({
             type: lk,
             data: {
               source: _$$B2.PLAN_COMPARISON
@@ -479,7 +479,7 @@ export function $$em0({
   let N = useSelector(e => e.dropdownShown);
   let P = useSelector(e => e.user);
   let O = useSelector(e => e.payment);
-  let [D, L] = useState(O.billingPeriod ? k[O.billingPeriod] : R$.ANNUAL);
+  let [D, L] = useState(O.billingPeriod ? k[O.billingPeriod] : PlanType.ANNUAL);
   let {
     highlightedPlan,
     orderedFeatures,

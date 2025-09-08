@@ -1,15 +1,15 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
-    this.SamlSchemaValidator = vh();
-    this.ValidateCodeValidator = vh();
-    this.TwoFactorValidator = vh();
+    this.SamlSchemaValidator = createNoOpValidator();
+    this.ValidateCodeValidator = createNoOpValidator();
+    this.TwoFactorValidator = createNoOpValidator();
   }
   getSaml(e) {
     return this.SamlSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/saml", td.toAPIParameters({
+    }) => await t.get("/api/saml", APIParameterUtils.toAPIParameters({
       email: e.email
     })));
   }

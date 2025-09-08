@@ -7,7 +7,7 @@ import { d as _$$d, k as _$$k2 } from "../5421/548912";
 import { Y_, p_, l6, Xs, xJ, UL, iK, ZY, qQ, Wn } from "../figma_app/114522";
 import { c2 } from "../905/382883";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { $n } from "../905/521428";
 import { f as _$$f } from "../905/167712";
 import { K as _$$K } from "../905/443068";
@@ -15,7 +15,7 @@ import { O as _$$O } from "../905/365108";
 import { x as _$$x } from "../905/149501";
 import { a as _$$a } from "../5421/219397";
 import { Tj } from "../figma_app/342207";
-import { Ez5, Nfd, glU, z6l } from "../figma_app/763686";
+import { AppStateTsApi, PanelType, Fullscreen, CodeComponentHelper } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -54,7 +54,7 @@ import { $ as _$$$ } from "../905/945083";
 import { w as _$$w } from "../905/879280";
 import { t as _$$t2 } from "../905/54003";
 import { ar } from "../7a72fc59/842982";
-import { oV, gl, hS } from "../905/216495";
+import { MIXED_MARKER, isInvalidValue, isValidValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { gq } from "../figma_app/178475";
 import { U1 } from "../figma_app/343967";
@@ -75,7 +75,7 @@ import { S7 } from "../figma_app/259578";
 import { n1 } from "../905/698732";
 import { tb as _$$tb } from "../figma_app/703447";
 import { O as _$$O2 } from "../905/969533";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { h as _$$h2 } from "../905/207101";
 import { u1, XE } from "../figma_app/91703";
 import { Qr } from "../905/690539";
@@ -404,7 +404,7 @@ function eS() {
     classNameEditingController.resetClassNamesForPropertiesAndCommitToCode(eN);
   }, [classNameEditingController]);
   let _ = g["top-left"] === g["top-right"] && g["top-left"] === g["bottom-left"] && g["top-left"] === g["bottom-right"];
-  let b = _ ? g["top-left"] : oV;
+  let b = _ ? g["top-left"] : MIXED_MARKER;
   let [v, I] = useState(!_);
   let N = useMemo(() => jsx(ar, {
     "aria-label": getI18nString("figmake.toolbar.corner_radius.individual_corner_radius"),
@@ -697,7 +697,7 @@ function eF({
   paint: e,
   onChange: t
 }) {
-  let n = e ? gl(e) ? eU : e : eU;
+  let n = e ? isInvalidValue(e) ? eU : e : eU;
   let r = Ou(n);
   let a = Ku();
   let {
@@ -882,7 +882,7 @@ function e9() {
           computedStylesValue: e
         }]
       }], o, "font-family");
-      dZ(o) && l7.user("direct-manipulation", () => {
+      dZ(o) && permissionScopeHandler.user("direct-manipulation", () => {
         HL(i, I);
       });
     }
@@ -1077,12 +1077,12 @@ function ty() {
   };
   let b = f.left === f.right;
   let v = f.top === f.bottom;
-  let I = b ? f.left : oV;
-  let N = v ? f.top : oV;
+  let I = b ? f.left : MIXED_MARKER;
+  let N = v ? f.top : MIXED_MARKER;
   let T = _.left === _.right;
   let S = _.top === _.bottom;
-  let A = T ? _.left : oV;
-  let w = S ? _.top : oV;
+  let A = T ? _.left : MIXED_MARKER;
+  let w = S ? _.top : MIXED_MARKER;
   let [k, P] = useState(!b || !v);
   let [O, L] = useState(!T || !S);
   let D = zV(directManipulationEditor, tx);
@@ -1466,7 +1466,7 @@ function tC() {
       tooltipType: Ib.TEXT,
       showCaret: !0,
       isActive: r,
-      children: s ? gl(s) ? jsx(_$$h3, {}) : a[s].icon() : jsx(_$$h3, {})
+      children: s ? isInvalidValue(s) ? jsx(_$$h3, {}) : a[s].icon() : jsx(_$$h3, {})
     }),
     children: jsx(tE, {
       horizontalAlignment: s,
@@ -1503,7 +1503,7 @@ function tj({
       icon: r
     }]) => jsx(ar, {
       "aria-label": i,
-      isActive: hS(e) && e === t,
+      isActive: isValidValue(e) && e === t,
       onClick: () => n(t),
       children: r()
     }, t))
@@ -1605,9 +1605,9 @@ function tD({
   size: e,
   onSizeChanged: t
 }) {
-  let n = useRef(gl(e) ? null : new tH(e));
+  let n = useRef(isInvalidValue(e) ? null : new tH(e));
   useEffect(() => {
-    gl(e) ? n.current = null : (n.current || (n.current = new tH(e)), n.current.onCurrentValueUpdated(e));
+    isInvalidValue(e) ? n.current = null : (n.current || (n.current = new tH(e)), n.current.onCurrentValueUpdated(e));
   }, [e, n]);
   let r = useCallback(() => {
     n.current && t(n.current.prevValue());
@@ -1622,7 +1622,7 @@ function tD({
     children: [jsx(_$$E, {
       className: "text_size_nudge_input--decrementButton--vmC4E text_size_nudge_input--nudgeButtonBase--ctjk3",
       onClick: r,
-      disabled: gl(e) || e <= tB,
+      disabled: isInvalidValue(e) || e <= tB,
       "aria-label": getI18nString("cooper.inline_menu.decrease_input"),
       recordingKey: `${l}.decrease`,
       children: jsx(_$$f2, {
@@ -1639,7 +1639,7 @@ function tD({
     }), jsx(_$$E, {
       className: "text_size_nudge_input--incrementButton--f85OX text_size_nudge_input--nudgeButtonBase--ctjk3",
       onClick: a,
-      disabled: gl(e),
+      disabled: isInvalidValue(e),
       "aria-label": getI18nString("cooper.inline_menu.increase_input"),
       recordingKey: `${l}.increase`,
       children: jsx(_$$x2, {
@@ -1685,7 +1685,7 @@ function tR({
   });
 }
 function tM(e) {
-  return gl(e) ? getI18nString("common.mixed") : String(Math.round(e));
+  return isInvalidValue(e) ? getI18nString("common.mixed") : String(Math.round(e));
 }
 let tV = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 24, 32, 36, 40, 48, 64, 96, 128];
 let tB = 1;
@@ -2193,7 +2193,7 @@ class nC {
       let f = `${nI}${g}`;
       let _ = !1;
       return (_$$a3(() => {
-        l7.user("direct-manipulation", () => {
+        permissionScopeHandler.user("direct-manipulation", () => {
           let e = !1;
           switch (d.type) {
             case "static":
@@ -3359,7 +3359,7 @@ function nU({
   }, [U]);
   let q = useCallback(() => {
     !F && W && (_$$tJ([W]), Z(null));
-    Ez5?.codeSelection().showMainComponent.set(!1);
+    AppStateTsApi?.codeSelection().showMainComponent.set(!1);
   }, [F, W, Z]);
   let X = getFeatureFlags().code_layers_zoom_controls;
   let {
@@ -3386,7 +3386,7 @@ function nU({
           e && b(e);
         },
         children: [jsx(l9, {
-          label: jsx(_$$h, {
+          label: jsx(HiddenLabel, {
             children: getI18nString("sites.code_component.preview_legend")
           })
         }), jsx(mc, {
@@ -3396,12 +3396,12 @@ function nU({
           }, e.localGuid))
         })]
       }) : jsx(Fragment, {}),
-      children: [G && z === Nfd.FILE && jsx($n, {
+      children: [G && z === PanelType.FILE && jsx($n, {
         variant: "secondary",
         "aria-label": getI18nString("fullscreen_actions.return-to-instance"),
         onClick: q,
         children: getI18nString("fullscreen_actions.return-to-instance")
-      }), !$ && z === Nfd.FILE && jsx($n, {
+      }), !$ && z === PanelType.FILE && jsx($n, {
         variant: "secondary",
         "aria-label": getI18nString("fullscreen_actions.edit-main-component"),
         onClick: Y,
@@ -3534,7 +3534,7 @@ class n$ {
         });
         {
           if (!t.isAlive) return null;
-          let e = glU.deriveFilesystemFromEntrypointNodeIds([t.guid]);
+          let e = Fullscreen.deriveFilesystemFromEntrypointNodeIds([t.guid]);
           if (this.sandbox.state === _$$T2.UNRECOVERABLE) throw this.sandbox.error;
           await this.sandbox.waitForReady();
           let n = await this.sandbox.bundle();
@@ -3563,7 +3563,7 @@ class n$ {
       bundle.files = await Ct(assetInstructions);
       e.record("asset_generation_stop");
       this.referencedWebsiteBundle = bundle;
-      let l = z6l?.getCodeLibrarySizeMetadata();
+      let l = CodeComponentHelper?.getCodeLibrarySizeMetadata();
       e.setBuildMetadata({
         isBuildSuccessful: !0,
         bundleJsLength: o?.esm?.length,
@@ -3578,7 +3578,7 @@ class n$ {
       this.onConsoleClear?.();
       this.onError?.(n, S4.BUILD);
       this.isPreviewDirty && (this.isPreviewDirty = !1, this.onPreviewDirty?.(this.isPreviewDirty));
-      let t = z6l?.getCodeLibrarySizeMetadata();
+      let t = CodeComponentHelper?.getCodeLibrarySizeMetadata();
       e.setBuildMetadata({
         isBuildSuccessful: !1,
         errorMessage: n.toString?.(),

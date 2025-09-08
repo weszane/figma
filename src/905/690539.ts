@@ -1,4 +1,4 @@
-import { jXp } from "../figma_app/763686";
+import { FontSourceType } from "../figma_app/763686";
 import { logError } from "../905/714362";
 import { G5 } from "../figma_app/795674";
 import { Uw, HB } from "../905/698759";
@@ -59,7 +59,7 @@ export function $$I7(e, t) {
   return n && !r ? 1 : !n && r ? -1 : e.family.localeCompare(t.family);
 }
 export function $$E10(e) {
-  if (e.source !== jXp.LOCAL) return !1;
+  if (e.source !== FontSourceType.LOCAL) return !1;
   let t = Math.max.apply(Math, Object.values(e.styles).map(e => e.modifiedAt));
   return G5(7) - t < 0;
 }
@@ -76,13 +76,13 @@ export function $$w6(e, t, i) {
       (Uw.has(d.previewPath || "") || HB.has(d.previewPath || "")) && o.push(d);
       break;
     case "shared_fonts":
-      d.source === jXp.SHARED && o.push(d);
+      d.source === FontSourceType.SHARED && o.push(d);
       break;
     case "user_installed_fonts":
-      d.source === jXp.LOCAL && d.userInstalled && o.push(d);
+      d.source === FontSourceType.LOCAL && d.userInstalled && o.push(d);
       break;
     case "google_fonts":
-      d.source !== jXp.GOOGLE || f.includes(d.family) || o.push(d);
+      d.source !== FontSourceType.GOOGLE || f.includes(d.family) || o.push(d);
       break;
     case "variable_fonts":
       d.isVariableFont && o.push(d);
@@ -125,7 +125,7 @@ export function $$C8(e, t, i) {
     let p = r && n.weight === r.weight && n.stretch === r.stretch && n.italic === r.italic && h.includes(i.toLocaleLowerCase());
     (c || u || p) && (a = l, s = d, r = n, o = i);
   }
-  return i === jXp.LOCAL ? `/font-preview?file=${r?.id}&font_size=12&postscript=${r?.postscript}&family=${e}&style=${o}&v=5` : i === jXp.SHARED ? r?.previewUrl : r?.id;
+  return i === FontSourceType.LOCAL ? `/font-preview?file=${r?.id}&font_size=12&postscript=${r?.postscript}&family=${e}&style=${o}&v=5` : i === FontSourceType.SHARED ? r?.previewUrl : r?.id;
 }
 let $$T0 = '<svg width="100%" height="100%"><pattern id="pattern" x="0" y="0" width="240" height="28" patternUnits="userSpaceOnUse"><rect x="32" width="64" height="9" y="9"></rect></pattern><rect x="0" y="0" width="100%" height="100%" fill="url(#pattern)"></rect></svg>';
 let $$k1 = '<svg width="100%" height="100%"><rect x="24" width="64" height="9" y="9" fill="var(--color-bg)"></rect></svg>';

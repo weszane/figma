@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { jO } from "../905/573265";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
 import { o as _$$o, M$ } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
@@ -26,7 +26,7 @@ export function $$A3(e, t) {
         message: t.isPublishedTemplate ? getI18nString("cooper.templates.template_updates_published") : getI18nString("cooper.templates.template_published"),
         icon: zX.CHECK
       }));
-      e(Ce());
+      e(hideModal());
     },
     onFailure: t => {
       let i = atomStoreManager.get(UV);

@@ -1,10 +1,10 @@
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 export function $$i0(e) {
-  let t = Ez5?.codeBuildBindings().openDoNotBumpCodeNodeBuildNumbersScope();
+  let t = AppStateTsApi?.codeBuildBindings().openDoNotBumpCodeNodeBuildNumbersScope();
   try {
     return e();
   } finally {
-    null != t && Ez5?.codeBuildBindings().closeDoNotBumpCodeNodeBuildNumbersScope(t);
+    null != t && AppStateTsApi?.codeBuildBindings().closeDoNotBumpCodeNodeBuildNumbersScope(t);
   }
 }
 export const a = $$i0;

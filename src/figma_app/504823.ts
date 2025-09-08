@@ -1,14 +1,14 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, createContext, useContext, useMemo, useState, useCallback } from "react";
-import { RYP, ywP, H4l, PcT } from "../figma_app/763686";
+import { ColorSpaceEnum, ColorProfileEnum, colorManagementStateJs, webGPUBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, AtomProvider } from "../figma_app/27355";
 import { ap, WQ } from "../figma_app/149304";
 import { tH, H4 } from "../905/751457";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { l as _$$l } from "../figma_app/773170";
 import { y4 } from "../figma_app/298277";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { dX } from "../figma_app/837840";
 import { H } from "../905/769882";
 import { j } from "../905/51490";
@@ -25,9 +25,9 @@ function y(e) {
   });
 }
 let T = createContext({
-  canvasColorProfile: RYP.SRGB,
-  documentColorProfile: ywP.LEGACY,
-  documentExportColorProfile: RYP.SRGB
+  canvasColorProfile: ColorSpaceEnum.SRGB,
+  documentColorProfile: ColorProfileEnum.LEGACY,
+  documentExportColorProfile: ColorSpaceEnum.SRGB
 });
 export function $$I3() {
   return useContext(T).canvasColorProfile;
@@ -41,7 +41,7 @@ function A(e) {
     children,
     colorManagementStateJs
   } = e;
-  let s = ut(colorManagementStateJs?.documentColorProfile(), ywP.LEGACY);
+  let s = getObservableValue(colorManagementStateJs?.documentColorProfile(), ColorProfileEnum.LEGACY);
   let o = H(s);
   let {
     colorProfilePreference
@@ -59,7 +59,7 @@ function A(e) {
 export function $$x1(e) {
   jK();
   return jsx(A, {
-    colorManagementStateJs: H4l,
+    colorManagementStateJs: colorManagementStateJs,
     children: e.children
   });
 }
@@ -71,7 +71,7 @@ function N({
   let o = useCallback(() => {
     if (getFeatureFlags()?.fullscreen_use_threaded_rendering) return !1;
     if (r) return !0;
-    if (PcT?.usingWebGPU()) return !1;
+    if (webGPUBindings?.usingWebGPU()) return !1;
     let t = dX(e);
     if (t) {
       let r = null;
@@ -93,7 +93,7 @@ function N({
     if (!o()) switch (e) {
       case "fullscreen":
       case "mobile-viewer":
-        Y5.onReady().then(() => {
+        fullscreenValue.onReady().then(() => {
           o();
         });
         break;
@@ -106,7 +106,7 @@ function N({
   }, [o, e, t]);
   let d = $$I3();
   useEffect(() => {
-    if (PcT?.usingWebGPU()) {
+    if (webGPUBindings?.usingWebGPU()) {
       _$$l.setCanvasColorProfile(d);
       return;
     }

@@ -1,4 +1,4 @@
-import { m1T } from "../figma_app/763686";
+import { LayoutTabType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
 import { l7 } from "../figma_app/88239";
@@ -23,7 +23,7 @@ export function $$c0(e) {
   }, r);
   let c = selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType);
   let u = l7();
-  return !!r && (c === m1T.DEV_HANDOFF || c === m1T.DEV_HANDOFF_HISTORY || u) && ("FRAME" === nodeType || isSymbol || "SECTION" === nodeType);
+  return !!r && (c === LayoutTabType.DEV_HANDOFF || c === LayoutTabType.DEV_HANDOFF_HISTORY || u) && ("FRAME" === nodeType || isSymbol || "SECTION" === nodeType);
 }
 export const i = $$c0;
 export const s = $$d1;

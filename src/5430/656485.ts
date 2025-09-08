@@ -27,7 +27,7 @@ import { Z as _$$Z } from "../figma_app/947784";
 import { So } from "../figma_app/209680";
 import { A6 } from "../905/350234";
 import { Uo } from "../figma_app/354658";
-import { HK } from "../figma_app/155287";
+import { EditorType } from "../figma_app/155287";
 import { gz, kJ, GJ } from "../5430/455879";
 import { cz, i8 } from "../905/14017";
 import { trackEventAnalytics } from "../905/449184";
@@ -44,7 +44,7 @@ function M({
   context: t
 }) {
   let r;
-  r = t === aL.REDESIGNED_PLUGIN_ROW ? gz : e.editor_type === HK.FIGJAM || e.editor_type === HK.UNIVERSAL ? kJ : GJ;
+  r = t === aL.REDESIGNED_PLUGIN_ROW ? gz : e.editor_type === EditorType.FIGJAM || e.editor_type === EditorType.UNIVERSAL ? kJ : GJ;
   return jsx(A6, {
     to: UI({
       path: Uo.PLUGIN,

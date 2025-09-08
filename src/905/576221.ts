@@ -1,5 +1,5 @@
 import { throwError } from "../figma_app/465776";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/223926";
 import { lg, Hb, zE, X7 } from "../figma_app/646357";
@@ -157,7 +157,7 @@ export function $$h2(e, t, i, n, r, a, s, o, l, d) {
   return new m().getPendingLibraryUpdates(e, t, i, n, r, a, s, o, l, d);
 }
 function g(e, t, i) {
-  return !i && !(e.status !== E8.CURRENT || t.has(e.node_id)) && (glU.clearLibraryMoveInfo(e.node_id), !0);
+  return !i && !(e.status !== E8.CURRENT || t.has(e.node_id)) && (Fullscreen.clearLibraryMoveInfo(e.node_id), !0);
 }
 export function $$f0(e) {
   return !e.some(e => [E8.CURRENT, E8.CHANGED, E8.NEW].includes(e.status));

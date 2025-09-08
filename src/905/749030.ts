@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { zN } from "../905/19536";
 import { f as _$$f } from "../905/412913";
@@ -38,29 +38,29 @@ export function $$$$A0(e, t, i) {
     if (b.data) for (let t of b.data) (y && Ui(y, t.libraryKey) || m && Ui(m, t.libraryKey) || function (e, t, i) {
       for (let n of new Set((t ?? [null]).reduce((e, t) => (e.push(...function (e, t) {
         switch (e) {
-          case rXF.BOOLEAN:
+          case VariableResolvedDataType.BOOLEAN:
             return ["numVariablesBoolean"];
-          case rXF.COLOR:
+          case VariableResolvedDataType.COLOR:
             {
               let e = [];
               t.some(e => e === ub.STYLE) && e.push("numStylesFill");
               t.some(e => e === ub.VARIABLE) && e.push("numVariablesColor");
               return e;
             }
-          case rXF.FLOAT:
+          case VariableResolvedDataType.FLOAT:
             return ["numVariablesFloat"];
-          case rXF.STRING:
+          case VariableResolvedDataType.STRING:
             return ["numVariablesString"];
-          case rXF.MAP:
-          case rXF.SYMBOL_ID:
-          case rXF.FONT_STYLE:
+          case VariableResolvedDataType.MAP:
+          case VariableResolvedDataType.SYMBOL_ID:
+          case VariableResolvedDataType.FONT_STYLE:
             return ["numVariables"];
-          case rXF.TEXT_DATA:
+          case VariableResolvedDataType.TEXT_DATA:
             return ["numVariablesString"];
-          case rXF.IMAGE:
-          case rXF.LINK:
-          case rXF.JS_RUNTIME_ALIAS:
-          case rXF.SLOT_CONTENT_ID:
+          case VariableResolvedDataType.IMAGE:
+          case VariableResolvedDataType.LINK:
+          case VariableResolvedDataType.JS_RUNTIME_ALIAS:
+          case VariableResolvedDataType.SLOT_CONTENT_ID:
           case null:
             return ["numVariables"];
           default:

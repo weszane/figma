@@ -1,5 +1,5 @@
-import { assertNotNullish, isNotNullish } from '../figma_app/95419'
-import { qE } from '../figma_app/492908'
+import { assertNotNullish, isNotNullish } from '../figma_app/95419';
+import { clamp } from '../figma_app/492908';
 
 // Original: $$a20
 /**
@@ -8,7 +8,7 @@ import { qE } from '../figma_app/492908'
  * @returns An array containing the input.
  */
 export function ensureArray<T>(e: T | T[]): T[] {
-  return Array.isArray(e) ? e : [e]
+  return Array.isArray(e) ? e : [e];
 }
 
 // Original: $$s10
@@ -21,22 +21,16 @@ export function ensureArray<T>(e: T | T[]): T[] {
  * @returns The modified array.
  */
 export function moveElement<T>(e: T[], t: T, r?: T, n?: boolean): T[] {
-  let i = e.indexOf(t, 0)
-  if (i < 0)
-    return e
-  let a = r == null ? -1 : e.indexOf(r)
-  if (a < 0)
-    a = n ? 0 : e.length
-  else if (n && i < a)
-    a -= 1
-  else if (!n && i > a)
-    a += 1
-  let s = e.slice()
+  let i = e.indexOf(t, 0);
+  if (i < 0) return e;
+  let a = r == null ? -1 : e.indexOf(r);
+  if (a < 0) a = n ? 0 : e.length;else if (n && i < a) a -= 1;else if (!n && i > a) a += 1;
+  let s = e.slice();
   if (i > -1 && a !== i) {
-    s.splice(i, 1)
-    s.splice(a, 0, t)
+    s.splice(i, 1);
+    s.splice(a, 0, t);
   }
-  return s
+  return s;
 }
 
 // Original: $$o9
@@ -46,8 +40,7 @@ export function moveElement<T>(e: T[], t: T, r?: T, n?: boolean): T[] {
  * @param t - The element to add.
  */
 export function addUnique<T>(e: T[], t: T): void {
-  if (!e.includes(t))
-    e.push(t)
+  if (!e.includes(t)) e.push(t);
 }
 
 // Original: $$l6
@@ -57,8 +50,7 @@ export function addUnique<T>(e: T[], t: T): void {
  * @param t - The element to add.
  */
 export function unshiftUnique<T>(e: T[], t: T): void {
-  if (!e.includes(t))
-    e.unshift(t)
+  if (!e.includes(t)) e.unshift(t);
 }
 
 // Original: $$d4
@@ -68,9 +60,8 @@ export function unshiftUnique<T>(e: T[], t: T): void {
  * @param t - The element to remove.
  */
 export function removeElement<T>(e: T[], t: T): void {
-  let r = e.indexOf(t)
-  if (r !== -1)
-    e.splice(r, 1)
+  let r = e.indexOf(t);
+  if (r !== -1) e.splice(r, 1);
 }
 
 // Original: $$L21
@@ -81,7 +72,7 @@ export function removeElement<T>(e: T[], t: T): void {
  * @returns The modified array.
  */
 export function toggleElement<T>(e: T[], t: T): T[] {
-  return e.includes(t) ? e.filter(e => e !== t) : e.concat(t)
+  return e.includes(t) ? e.filter(e => e !== t) : e.concat(t);
 }
 
 // Original: $$c26
@@ -92,13 +83,11 @@ export function toggleElement<T>(e: T[], t: T): T[] {
  * @returns True if equal, false otherwise.
  */
 export function arraysEqual<T>(e: T[], t: T[]): boolean {
-  if (e.length !== t.length)
-    return false
+  if (e.length !== t.length) return false;
   for (let r = 0; r < e.length; r++) {
-    if (e[r] !== t[r])
-      return false
+    if (e[r] !== t[r]) return false;
   }
-  return true
+  return true;
 }
 
 // Original: $$u2
@@ -109,10 +98,9 @@ export function arraysEqual<T>(e: T[], t: T[]): boolean {
  */
 export function allEqual<T>(e: T[]): boolean {
   for (let t = 1; t < e.length; t++) {
-    if (e[t] === undefined || e[t] !== e[t - 1])
-      return false
+    if (e[t] === undefined || e[t] !== e[t - 1]) return false;
   }
-  return true
+  return true;
 }
 
 // Original: $$p23
@@ -123,20 +111,18 @@ export function allEqual<T>(e: T[]): boolean {
  * @returns The shuffled array.
  */
 export function shuffle<T>(e: T[], t?: number): T[] {
-  let r: T
-  let n: number
-  let i = e.length
-  const random = t
-    ? (seed: number = Date.now()) => (9301 * seed + 49297) % 233280 / 233280
-    : Math.random
+  let r: T;
+  let n: number;
+  let i = e.length;
+  const random = t ? (seed: number = Date.now()) => (9301 * seed + 49297) % 233280 / 233280 : Math.random;
   while (i !== 0) {
-    n = Math.floor(random(t) * i)
-    i -= 1
-    r = e[i]
-    e[i] = e[n]
-    e[n] = r
+    n = Math.floor(random(t) * i);
+    i -= 1;
+    r = e[i];
+    e[i] = e[n];
+    e[n] = r;
   }
-  return e
+  return e;
 }
 
 // Original: $$_11
@@ -146,7 +132,7 @@ export function shuffle<T>(e: T[], t?: number): T[] {
  * @returns A random element.
  */
 export function randomPick<T>(e: T[]): T {
-  return e[Math.floor(Math.random() * e.length)]
+  return e[Math.floor(Math.random() * e.length)];
 }
 
 // Sorting functions
@@ -159,7 +145,7 @@ export function randomPick<T>(e: T[]): T {
  * @returns The sorted array.
  */
 export function sortByProperty<T>(e: T[], t: keyof T, r: boolean = false): T[] {
-  return sortBy(e, e => e[t], r)
+  return sortBy(e, e => e[t], r);
 }
 
 // Original: $$m22
@@ -175,21 +161,21 @@ export function sortByProperty<T>(e: T[], t: keyof T, r: boolean = false): T[] {
 export function sortBy<T>(e: T[], t: (item: T) => any, r: boolean = false, n?: (item: T) => any, i: boolean = false): T[] {
   e.sort((e, a) => {
     if (t(e) === t(a) && n) {
-      let t = i ? -1 : 1
-      return n(e) < n(a) ? -t : t
+      let t = i ? -1 : 1;
+      return n(e) < n(a) ? -t : t;
     }
-    let s = r ? -1 : 1
-    return t(e) < t(a) ? -s : s
-  })
-  return e
+    let s = r ? -1 : 1;
+    return t(e) < t(a) ? -s : s;
+  });
+  return e;
 }
 
 // Original: $$f14, $$g15
 export const COLLATOR = new Intl.Collator('en', {
   numeric: true,
-  sensitivity: 'base',
-})
-export const MAX_LENGTH = 200
+  sensitivity: 'base'
+});
+export const MAX_LENGTH = 200;
 
 // Original: $$E5
 /**
@@ -198,8 +184,11 @@ export const MAX_LENGTH = 200
  * @param t - The property key.
  * @param r - Options.
  */
-export function sortByPropertyWithOptions<T>(e: T[], t: keyof T, r: { isDescending?: boolean, useExpensiveNaturalComparison?: boolean } = {}): void {
-  sortByWithOptions(e, e => e[t], r)
+export function sortByPropertyWithOptions<T>(e: T[], t: keyof T, r: {
+  isDescending?: boolean;
+  useExpensiveNaturalComparison?: boolean;
+} = {}): void {
+  sortByWithOptions(e, e => e[t], r);
 }
 
 // Original: $$y29
@@ -210,29 +199,31 @@ export function sortByPropertyWithOptions<T>(e: T[], t: keyof T, r: { isDescendi
  * @param r - Options.
  * @param n - Secondary selector.
  */
-export function sortByWithOptions<T>(e: T[], t: (item: T) => any, r: { isDescending?: boolean, useExpensiveNaturalComparison?: boolean, isSecondaryDescending?: boolean } = {}, n?: (item: T) => any): void {
+export function sortByWithOptions<T>(e: T[], t: (item: T) => any, r: {
+  isDescending?: boolean;
+  useExpensiveNaturalComparison?: boolean;
+  isSecondaryDescending?: boolean;
+} = {}, n?: (item: T) => any): void {
   const i = (e: T) => {
-    let r = t(e)
-    return r && r.toLowerCase ? r.toLowerCase() : ''
-  }
+    let r = t(e);
+    return r && r.toLowerCase ? r.toLowerCase() : '';
+  };
   const a = (e: T) => {
-    if (!n)
-      return ''
-    let t = n(e)
-    return t && t.toLowerCase ? t.toLowerCase() : ''
-  }
-  let s = r.isDescending ? -1 : 1
+    if (!n) return '';
+    let t = n(e);
+    return t && t.toLowerCase ? t.toLowerCase() : '';
+  };
+  let s = r.isDescending ? -1 : 1;
   if (r.useExpensiveNaturalComparison) {
-    e.sort((e, t) => COLLATOR.compare(i(e), i(t)) * s)
-  }
-  else {
+    e.sort((e, t) => COLLATOR.compare(i(e), i(t)) * s);
+  } else {
     e.sort((e, t) => {
       if (i(e) === i(t) && n) {
-        let n = r.isSecondaryDescending ? -1 : 1
-        return a(e) < a(t) ? -n : n
+        let n = r.isSecondaryDescending ? -1 : 1;
+        return a(e) < a(t) ? -n : n;
       }
-      return i(e) < i(t) ? -s : s
-    })
+      return i(e) < i(t) ? -s : s;
+    });
   }
 }
 
@@ -247,17 +238,17 @@ export function sortByWithOptions<T>(e: T[], t: (item: T) => any, r: { isDescend
  */
 export function sortBySelectors<T>(e: T[], t: (item: T) => any, r: boolean = false, n?: (item: T) => any, i: boolean = false): void {
   const a = (e: (item: T) => any, t: T) => {
-    let r = e(t)
-    return typeof r == 'string' ? r.toLowerCase() : typeof r == 'number' ? r : ''
-  }
-  let s = r ? -1 : 1
+    let r = e(t);
+    return typeof r == 'string' ? r.toLowerCase() : typeof r == 'number' ? r : '';
+  };
+  let s = r ? -1 : 1;
   e.sort((e, r) => {
     if (a(t, e) === a(t, r) && n) {
-      let t = i ? -1 : 1
-      return a(n, e) < a(n, r) ? -t : t
+      let t = i ? -1 : 1;
+      return a(n, e) < a(n, r) ? -t : t;
     }
-    return a(t, e) < a(t, r) ? -s : s
-  })
+    return a(t, e) < a(t, r) ? -s : s;
+  });
 }
 
 // Original: $$T3
@@ -270,9 +261,9 @@ export function sortBySelectors<T>(e: T[], t: (item: T) => any, r: boolean = fal
  */
 export function sortByDate<T>(e: T[], t: (item: T) => string | Date, r: boolean = false): T[] {
   return e.sort((e, n) => {
-    let i = new Date(t(e)).getTime() < new Date(t(n)).getTime() ? 1 : -1
-    return r ? -i : i
-  })
+    let i = new Date(t(e)).getTime() < new Date(t(n)).getTime() ? 1 : -1;
+    return r ? -i : i;
+  });
 }
 
 // Original: $$I27
@@ -284,7 +275,7 @@ export function sortByDate<T>(e: T[], t: (item: T) => string | Date, r: boolean 
  * @returns The sorted array.
  */
 export function sortByDateProperty<T>(e: T[], t: keyof T, r: boolean = false): T[] {
-  return sortByDate(e, e => e[t as any], r)
+  return sortByDate(e, e => e[t as any], r);
 }
 
 // Original: $$S7
@@ -293,8 +284,10 @@ export function sortByDateProperty<T>(e: T[], t: keyof T, r: boolean = false): T
  * @param e - The array.
  * @returns The sorted array.
  */
-export function sortByCreatedAt<T extends { created_at: string | Date }>(e: T[]): T[] {
-  return sortByDate(e, e => e.created_at)
+export function sortByCreatedAt<T extends {
+  created_at: string | Date;
+}>(e: T[]): T[] {
+  return sortByDate(e, e => e.created_at);
 }
 
 // Original: $$v17
@@ -307,12 +300,11 @@ export function sortByCreatedAt<T extends { created_at: string | Date }>(e: T[])
 export function sortByMultiple<T>(e: T[], ...t: ((a: T, b: T) => number)[]): T[] {
   return e.sort((e, r) => {
     for (let n of t) {
-      let t = n(e, r)
-      if (t !== 0)
-        return t
+      let t = n(e, r);
+      if (t !== 0) return t;
     }
-    return 0
-  })
+    return 0;
+  });
 }
 
 // Filtering and finding functions
@@ -323,7 +315,7 @@ export function sortByMultiple<T>(e: T[], ...t: ((a: T, b: T) => number)[]): T[]
  * @returns The filtered array.
  */
 export function filterNotNullish<T>(e: T[]): NonNullable<T>[] {
-  return e.filter(isNotNullish)
+  return e.filter(isNotNullish);
 }
 
 // Original: $$x8
@@ -336,9 +328,8 @@ export function filterNotNullish<T>(e: T[]): NonNullable<T>[] {
  */
 export function findNext<T>(e: T[], t: number, r: (item: T, index: number) => boolean = isNotNullish): T | undefined {
   for (let n = t + 1; n < e.length; n++) {
-    let t = e[n]
-    if (r(t, n))
-      return t
+    let t = e[n];
+    if (r(t, n)) return t;
   }
 }
 
@@ -352,9 +343,8 @@ export function findNext<T>(e: T[], t: number, r: (item: T, index: number) => bo
  */
 export function findPrevious<T>(e: T[], t: number, r: (item: T, index: number) => boolean = isNotNullish): T | undefined {
   for (let n = t - 1; n >= 0; n--) {
-    let t = e[n]
-    if (r(t, n))
-      return t
+    let t = e[n];
+    if (r(t, n)) return t;
   }
 }
 
@@ -368,18 +358,16 @@ export function findPrevious<T>(e: T[], t: number, r: (item: T, index: number) =
  * @returns The found element or undefined.
  */
 export function findNearest<T>(e: T[], t: number, r: 'left' | 'right' = 'left', a: (item: T, index: number) => boolean = isNotNullish): T | undefined {
-  t = qE(t, 0, e.length - 1)
+  t = clamp(t, 0, e.length - 1);
   for (let n = 0; t - n >= 0 || t + n < e.length; n++) {
-    let [i, s] = r === 'left' ? [t - n, t + n] : [t + n, t - n]
+    let [i, s] = r === 'left' ? [t - n, t + n] : [t + n, t - n];
     if (i >= 0 && i < e.length) {
-      let t = e[i]
-      if (a(t, i))
-        return t
+      let t = e[i];
+      if (a(t, i)) return t;
     }
     if (s >= 0 && s < e.length) {
-      let t = e[s]
-      if (a(t, s))
-        return t
+      let t = e[s];
+      if (a(t, s)) return t;
     }
   }
 }
@@ -392,9 +380,9 @@ export function findNearest<T>(e: T[], t: number, r: 'left' | 'right' = 'left', 
  * @returns Tuple of [rest, last].
  */
 export function popLast<T>(e: T[]): [T[], T] {
-  let t = [...e]
-  let r = assertNotNullish(t.pop(), 'input must be non-empty')
-  return [t, r]
+  let t = [...e];
+  let r = assertNotNullish(t.pop(), 'input must be non-empty');
+  return [t, r];
 }
 
 // Original: $$O13
@@ -405,42 +393,65 @@ export function popLast<T>(e: T[]): [T[], T] {
  * @param r - Key selector.
  * @returns Merged array of objects with hasBoth, left, right.
  */
-export function mergeSorted<T, U>(e: T[], t: U[], r: (item: T | U) => string = String): Array<{ hasBoth: boolean, left?: T, right?: U }> {
-  let n: Record<string, number> = {}
+export function mergeSorted<T, U>(e: T[], t: U[], r: (item: T | U) => string = String): Array<{
+  hasBoth: boolean;
+  left?: T;
+  right?: U;
+}> {
+  let n: Record<string, number> = {};
   t.forEach((e, t) => {
-    n[r(e)] = t
-  })
-  let i = 0
-  let a = 0
-  let s: Array<{ hasBoth: boolean, left?: T, right?: U }> = []
+    n[r(e)] = t;
+  });
+  let i = 0;
+  let a = 0;
+  let s: Array<{
+    hasBoth: boolean;
+    left?: T;
+    right?: U;
+  }> = [];
   for (;;) {
-    let o = e[i]
-    let l = t[a]
+    let o = e[i];
+    let l = t[a];
     if (o === undefined || l === undefined) {
-      if (o === undefined && l === undefined)
-        return s
+      if (o === undefined && l === undefined) return s;
       if (o !== undefined && l === undefined) {
-        s.push({ hasBoth: false, left: o, right: undefined })
-        i++
+        s.push({
+          hasBoth: false,
+          left: o,
+          right: undefined
+        });
+        i++;
+      } else if (o === undefined && l !== undefined) {
+        s.push({
+          hasBoth: false,
+          left: undefined,
+          right: l
+        });
+        a++;
       }
-      else if (o === undefined && l !== undefined) {
-        s.push({ hasBoth: false, left: undefined, right: l })
-        a++
-      }
-    }
-    else {
-      let e = n[r(o)]
+    } else {
+      let e = n[r(o)];
       if (e === undefined || e < a) {
-        s.push({ hasBoth: false, left: o, right: undefined })
-        i++
-      }
-      else if (e === a) {
-        s.push({ hasBoth: true, left: o, right: l })
-        i++
-      }
-      else {
-        s.push({ hasBoth: false, left: undefined, right: l })
-        a++
+        s.push({
+          hasBoth: false,
+          left: o,
+          right: undefined
+        });
+        i++;
+      } else if (e === a) {
+        s.push({
+          hasBoth: true,
+          left: o,
+          right: l
+        });
+        i++;
+      } else {
+        s.push({
+          hasBoth: false,
+          left: undefined,
+          right: l
+        });
+        a++;
       }
     }
   }
@@ -454,13 +465,12 @@ export function mergeSorted<T, U>(e: T[], t: U[], r: (item: T | U) => string = S
  * @returns The mapped and filtered array.
  */
 export function mapFilter<T, U>(e: T[], t: (item: T) => U | null | undefined): U[] {
-  let r: U[] = []
+  let r: U[] = [];
   for (let n of e) {
-    let e = t(n)
-    if (e != null)
-      r.push(e)
+    let e = t(n);
+    if (e != null) r.push(e);
   }
-  return r
+  return r;
 }
 
 // Original: $$P24
@@ -471,8 +481,8 @@ export function mapFilter<T, U>(e: T[], t: (item: T) => U | null | undefined): U
  * @returns The array of results.
  */
 export async function asyncMap<T, U>(e: T[], t: (item: T) => Promise<U>): Promise<U[]> {
-  let r = e.map(t)
-  return await Promise.all(r)
+  let r = e.map(t);
+  return await Promise.all(r);
 }
 
 // Original: Bq (seems like a recursive flatten, but code has 'e' which might be a typo for 'Bq')
@@ -484,40 +494,40 @@ export async function asyncMap<T, U>(e: T[], t: (item: T) => Promise<U>): Promis
  */
 export function flatten<T>(t: (T | T[])[], r: T[] = []): T[] {
   for (let n = 0; n < t.length; n++) {
-    let i = t[n]
-    Array.isArray(i) ? flatten(i, r) : r.push(i)
+    let i = t[n];
+    Array.isArray(i) ? flatten(i, r) : r.push(i);
   }
-  return r
+  return r;
 }
 
 // Aliases (keeping original names for compatibility, but refactored internally)
-export const AM = sortByProperty
-export const Ef = allEqual
-export const GK = sortByDate
-export const Jk = removeElement
-export const KQ = sortByPropertyWithOptions
-export const Kg = unshiftUnique
-export const LN = sortByCreatedAt
-export const M0 = findNext
-export const N9 = addUnique
-export const Pe = moveElement
-export const QP = randomPick
-export const RP = mapFilter
-export const TR = mergeSorted
-export const Tt = COLLATOR
-export const Tw = MAX_LENGTH
-export const Tz = sortBySelectors
-export const Ul = sortByMultiple
-export const Vs = popLast
-export const WI = filterNotNullish
-export const _j = ensureArray
-export const g6 = toggleElement
-export const hR = sortBy
-export const k4 = shuffle
-export const lX = asyncMap
-export const lq = findPrevious
-export const lu = arraysEqual
-export const my = sortByDateProperty
-export const qg = findNearest
-export const v7 = sortByWithOptions
-export const Bq = flatten
+export const AM = sortByProperty;
+export const Ef = allEqual;
+export const GK = sortByDate;
+export const Jk = removeElement;
+export const KQ = sortByPropertyWithOptions;
+export const Kg = unshiftUnique;
+export const LN = sortByCreatedAt;
+export const M0 = findNext;
+export const N9 = addUnique;
+export const Pe = moveElement;
+export const QP = randomPick;
+export const RP = mapFilter;
+export const TR = mergeSorted;
+export const Tt = COLLATOR;
+export const Tw = MAX_LENGTH;
+export const Tz = sortBySelectors;
+export const Ul = sortByMultiple;
+export const Vs = popLast;
+export const WI = filterNotNullish;
+export const _j = ensureArray;
+export const g6 = toggleElement;
+export const hR = sortBy;
+export const k4 = shuffle;
+export const lX = asyncMap;
+export const lq = findPrevious;
+export const lu = arraysEqual;
+export const my = sortByDateProperty;
+export const qg = findNearest;
+export const v7 = sortByWithOptions;
+export const Bq = flatten;

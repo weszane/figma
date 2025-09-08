@@ -1,1528 +1,1460 @@
-export let EditScopeBindings: any;
-export let ObservableValue_Map_GUID_Int_Internal: any;
-export let WritableObservableValue_UGUID_Internal: any;
-export let WritableObservableValue_Array_GUID_Internal: any;
-export let WritableObservableValue_Optional_GUID_Internal: any;
-export let ObservableValue_Set_GUID_Internal: any;
-export let WritableObservableValue_GUID_Internal: any;
-export let ObservableValue_Array_GUID_Internal: any;
-export let ObservableValue_GUID_Internal: any;
-export let ObservableValue_Optional_GUID_Internal: any;
-export let WritableObservableValue_Set_GUID_Internal: any;
-export let ObservableValue_Array_Array_GUID_Internal: any;
-export let ObservableValue_Map_GUID_String_Internal: any;
-export let CollaborativePlainText_Internal: any;
-export let BindingsNode_Internal: any;
-export let NodeTsApi: any;
-export let WritableObservableValue_ActiveEmbedData__Internal: any;
-export let AssistantTools: any;
-export let Fonts: any;
-export let CmsAnalytics: any;
-export let ImageCppBindings: any;
-export let ObservableValue_PrototypeDevice__Internal: any;
-export let PrototypeInteractions_Internal: any;
-export let RevisionNumberAccessor: any;
-export let ImmutableFrameObserver_Internal: any;
-export let SceneGraph_Internal: any;
-export let SceneGraphTsApi: any;
-export let TextData_Internal: any;
-export let DerivedTextData_Internal: any;
-export let TextPathStartHelpers: any;
-export let CompiledVectorData_Internal: any;
-export let AccessibilityState_Internal: any;
-export let AccessibilityHelpers: any;
-export let ObservableValue_KeyboardSelectMode__Internal: any;
-export let CanvasGrid_Internal: any;
-export let CanvasSelection_Internal: any;
-export let SlideConstantsCppBindings: any;
-export let SlideHelpersCppBindings: any;
-export let SlideThemeLibBindings_Internal: any;
-export let SlideAnimationBindings_Internal: any;
-export let SitesPreviewObserver_Internal: any;
-export let AnnotationObserver_Internal: any;
-export let DakotaBindings_Internal: any;
-export let ObservableValue_Map_String_Array_CMSAliasEntry__Internal: any;
-export let ObservableValue_Map_String_DakotaSelector__Internal: any;
-export let CodeBuildBindings_Internal: any;
-export let MaterializeInvisibleChildrenBindings: any;
-export let AccessibilityFacetTsApiGenerated: any;
-export let AnnotationFacetTsApiGenerated: any;
-export let AssetFacetTsApiGenerated: any;
-export let BrushFacetTsApiGenerated: any;
-export let BrushStrokeFacetTsApiGenerated: any;
-export let BuzzFacetTsApiGenerated: any;
-export let CanvasFacetTsApiGenerated: any;
-export let CanvasGridFacetTsApiGenerated: any;
-export let CMSFacetTsApiGenerated: any;
-export let CodeFacetTsApiGenerated: any;
-export let CodeBehaviorFacetTsApiGenerated: any;
-export let CodeComponentFacetTsApiGenerated: any;
-export let CodeFileFacetTsApiGenerated: any;
-export let CodeLibraryFacetTsApiGenerated: any;
-export let ComponentishFacetTsApiGenerated: any;
-export let ComponentPropRefFacetTsApiGenerated: any;
-export let ConnectorFacetTsApiGenerated: any;
-export let ConstraintsFacetTsApiGenerated: any;
-export let DerivedSubtreesFacetTsApiGenerated: any;
-export let DiagramFacetTsApiGenerated: any;
-export let DocumentFacetTsApiGenerated: any;
-export let FirstDraftFacetTsApiGenerated: any;
-export let FrameFacetTsApiGenerated: any;
-export let GeometryFacetTsApiGenerated: any;
-export let GeometryCacheFacetTsApiGenerated: any;
-export let GuidesFacetTsApiGenerated: any;
-export let ImmutableFrameFacetTsApiGenerated: any;
-export let InstanceFacetTsApiGenerated: any;
-export let InteractiveSlideElementFacetTsApiGenerated: any;
-export let JsxFacetTsApiGenerated: any;
-export let LayerFacetTsApiGenerated: any;
-export let LayoutGridFacetTsApiGenerated: any;
-export let ManagedStringFacetTsApiGenerated: any;
-export let ModuleFacetTsApiGenerated: any;
-export let ParameterConsumptionFacetTsApiGenerated: any;
-export let PlatformShapeFacetTsApiGenerated: any;
-export let PluginFacetTsApiGenerated: any;
-export let PolygonFacetTsApiGenerated: any;
-export let PrototypingFacetTsApiGenerated: any;
-export let ResponsiveNodeSetFacetTsApiGenerated: any;
-export let ResponsiveSetFacetTsApiGenerated: any;
-export let RenderableBackgroundFacetTsApiGenerated: any;
-export let RenderableBaseFacetTsApiGenerated: any;
-export let RenderableRectangleFacetTsApiGenerated: any;
-export let RenderTreeFacetTsApiGenerated: any;
-export let StackFacetTsApiGenerated: any;
-export let SlideFacetTsApiGenerated: any;
-export let SlideThemeMapFacetTsApiGenerated: any;
-export let StarFacetTsApiGenerated: any;
-export let StateFacetTsApiGenerated: any;
-export let StateGroupFacetTsApiGenerated: any;
-export let StyleFacetTsApiGenerated: any;
-export let SymbolFacetTsApiGenerated: any;
-export let TableFacetTsApiGenerated: any;
-export let TextFacetTsApiGenerated: any;
-export let TextPathFacetTsApiGenerated: any;
-export let TransformFacetTsApiGenerated: any;
-export let VariableFacetTsApiGenerated: any;
-export let VariableDataFacetTsApiGenerated: any;
-export let VariableModeConsumptionFacetTsApiGenerated: any;
-export let VariableOverrideFacetTsApiGenerated: any;
-export let VariableSetFacetTsApiGenerated: any;
-export let VectorFacetTsApiGenerated: any;
-export let VectorOperationFacetTsApiGenerated: any;
-export let ViewerStateFacetTsApiGenerated: any;
-export let WidgetFacetTsApiGenerated: any;
-export let BaseNodeTsApiGenerated: any;
-export let NodeTsApiGenerated: any;
+export let EditScopeBindings: any
+export let ObservableValue_Map_GUID_Int_Internal: any
+export let WritableObservableValue_UGUID_Internal: any
+export let WritableObservableValue_Array_GUID_Internal: any
+export let WritableObservableValue_Optional_GUID_Internal: any
+export let ObservableValue_Set_GUID_Internal: any
+export let WritableObservableValue_GUID_Internal: any
+export let ObservableValue_Array_GUID_Internal: any
+export let ObservableValue_GUID_Internal: any
+export let ObservableValue_Optional_GUID_Internal: any
+export let WritableObservableValue_Set_GUID_Internal: any
+export let ObservableValue_Array_Array_GUID_Internal: any
+export let ObservableValue_Map_GUID_String_Internal: any
+export let CollaborativePlainText_Internal: any
+export let BindingsNode_Internal: any
+export let NodeTsApi: any
+export let WritableObservableValue_ActiveEmbedData__Internal: any
+export let AssistantTools: any
+export let Fonts: any
+export let CmsAnalytics: any
+export let ImageCppBindings: any
+export let ObservableValue_PrototypeDevice__Internal: any
+export let PrototypeInteractions_Internal: any
+export let RevisionNumberAccessor: any
+export let ImmutableFrameObserver_Internal: any
+export let SceneGraph_Internal: any
+export let SceneGraphTsApi: any
+export let TextData_Internal: any
+export let DerivedTextData_Internal: any
+export let TextPathStartHelpers: any
+export let CompiledVectorData_Internal: any
+export let AccessibilityState_Internal: any
+export let AccessibilityHelpers: any
+export let ObservableValue_KeyboardSelectMode__Internal: any
+export let CanvasGrid_Internal: any
+export let CanvasSelection_Internal: any
+export let SlideConstantsCppBindings: any
+export let SlideHelpersCppBindings: any
+export let SlideThemeLibBindings_Internal: any
+export let SlideAnimationBindings_Internal: any
+export let SitesPreviewObserver_Internal: any
+export let AnnotationObserver_Internal: any
+export let DakotaBindings_Internal: any
+export let ObservableValue_Map_String_Array_CMSAliasEntry__Internal: any
+export let ObservableValue_Map_String_DakotaSelector__Internal: any
+export let CodeBuildBindings_Internal: any
+export let MaterializeInvisibleChildrenBindings: any
+export let AccessibilityFacetTsApiGenerated: any
+export let AnnotationFacetTsApiGenerated: any
+export let AssetFacetTsApiGenerated: any
+export let BrushFacetTsApiGenerated: any
+export let BrushStrokeFacetTsApiGenerated: any
+export let BuzzFacetTsApiGenerated: any
+export let CanvasFacetTsApiGenerated: any
+export let CanvasGridFacetTsApiGenerated: any
+export let CMSFacetTsApiGenerated: any
+export let CodeFacetTsApiGenerated: any
+export let CodeBehaviorFacetTsApiGenerated: any
+export let CodeComponentFacetTsApiGenerated: any
+export let CodeFileFacetTsApiGenerated: any
+export let CodeLibraryFacetTsApiGenerated: any
+export let ComponentishFacetTsApiGenerated: any
+export let ComponentPropRefFacetTsApiGenerated: any
+export let ConnectorFacetTsApiGenerated: any
+export let ConstraintsFacetTsApiGenerated: any
+export let DerivedSubtreesFacetTsApiGenerated: any
+export let DiagramFacetTsApiGenerated: any
+export let DocumentFacetTsApiGenerated: any
+export let FirstDraftFacetTsApiGenerated: any
+export let FrameFacetTsApiGenerated: any
+export let GeometryFacetTsApiGenerated: any
+export let GeometryCacheFacetTsApiGenerated: any
+export let GuidesFacetTsApiGenerated: any
+export let ImmutableFrameFacetTsApiGenerated: any
+export let InstanceFacetTsApiGenerated: any
+export let InteractiveSlideElementFacetTsApiGenerated: any
+export let JsxFacetTsApiGenerated: any
+export let LayerFacetTsApiGenerated: any
+export let LayoutGridFacetTsApiGenerated: any
+export let ManagedStringFacetTsApiGenerated: any
+export let ModuleFacetTsApiGenerated: any
+export let ParameterConsumptionFacetTsApiGenerated: any
+export let PlatformShapeFacetTsApiGenerated: any
+export let PluginFacetTsApiGenerated: any
+export let PolygonFacetTsApiGenerated: any
+export let PrototypingFacetTsApiGenerated: any
+export let ResponsiveNodeSetFacetTsApiGenerated: any
+export let ResponsiveSetFacetTsApiGenerated: any
+export let RenderableBackgroundFacetTsApiGenerated: any
+export let RenderableBaseFacetTsApiGenerated: any
+export let RenderableRectangleFacetTsApiGenerated: any
+export let RenderTreeFacetTsApiGenerated: any
+export let StackFacetTsApiGenerated: any
+export let SlideFacetTsApiGenerated: any
+export let SlideThemeMapFacetTsApiGenerated: any
+export let StarFacetTsApiGenerated: any
+export let StateFacetTsApiGenerated: any
+export let StateGroupFacetTsApiGenerated: any
+export let StyleFacetTsApiGenerated: any
+export let SymbolFacetTsApiGenerated: any
+export let TableFacetTsApiGenerated: any
+export let TextFacetTsApiGenerated: any
+export let TextPathFacetTsApiGenerated: any
+export let TransformFacetTsApiGenerated: any
+export let VariableFacetTsApiGenerated: any
+export let VariableDataFacetTsApiGenerated: any
+export let VariableModeConsumptionFacetTsApiGenerated: any
+export let VariableOverrideFacetTsApiGenerated: any
+export let VariableSetFacetTsApiGenerated: any
+export let VectorFacetTsApiGenerated: any
+export let VectorOperationFacetTsApiGenerated: any
+export let ViewerStateFacetTsApiGenerated: any
+export let WidgetFacetTsApiGenerated: any
+export let BaseNodeTsApiGenerated: any
+export let NodeTsApiGenerated: any
 
 
-
+export type ObservableValueHandle = any;
 export class ObservableValue_Map_GUID_Int {
-  handle: any;
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Map_GUID_Int extends ObservableValue_Map_GUID_Int {
   getCopy() {
-    return ObservableValue_Map_GUID_Int_Internal.getCopy(this.handle);
+    return ObservableValue_Map_GUID_Int_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Map_GUID_Int_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Map_GUID_Int_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Map_GUID_Int_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Map_GUID_Int_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_Map_GUID_Int as $$rC137 };
+export { MutableObservableValue_Map_GUID_Int as $$rC137 }
 
 export class WritableObservableValue_UGUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle;
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableWritableObservableValue_UGUID extends WritableObservableValue_UGUID {
   getCopy() {
-    return WritableObservableValue_UGUID_Internal.getCopy(this.handle);
+    return WritableObservableValue_UGUID_Internal.getCopy(this.handle)
   }
 
   set(e) {
-    WritableObservableValue_UGUID_Internal.set(this.handle, e);
+    WritableObservableValue_UGUID_Internal.set(this.handle, e)
   }
 
   subscribeFromJs(e) {
-    return WritableObservableValue_UGUID_Internal.subscribeFromJs(this.handle, e);
+    return WritableObservableValue_UGUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    WritableObservableValue_UGUID_Internal.unsubscribeFromJs(this.handle, e);
+    WritableObservableValue_UGUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableWritableObservableValue_UGUID as $$rO138 };
+export { MutableWritableObservableValue_UGUID as $$rO138 }
 
 export class WritableObservableValue_Array_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableWritableObservableValue_Array_GUID extends WritableObservableValue_Array_GUID {
   getCopy() {
-    return WritableObservableValue_Array_GUID_Internal.getCopy(this.handle);
+    return WritableObservableValue_Array_GUID_Internal.getCopy(this.handle)
   }
 
   set(e) {
-    WritableObservableValue_Array_GUID_Internal.set(this.handle, e);
+    WritableObservableValue_Array_GUID_Internal.set(this.handle, e)
   }
 
   subscribeFromJs(e) {
-    return WritableObservableValue_Array_GUID_Internal.subscribeFromJs(this.handle, e);
+    return WritableObservableValue_Array_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    WritableObservableValue_Array_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    WritableObservableValue_Array_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableWritableObservableValue_Array_GUID as $$rL17 };
+export { MutableWritableObservableValue_Array_GUID as $$rL17 }
 
 export class WritableObservableValue_Optional_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableWritableObservableValue_Optional_GUID extends WritableObservableValue_Optional_GUID {
   getCopy() {
-    return WritableObservableValue_Optional_GUID_Internal.getCopy(this.handle);
+    return WritableObservableValue_Optional_GUID_Internal.getCopy(this.handle)
   }
 
   set(e) {
-    WritableObservableValue_Optional_GUID_Internal.set(this.handle, e);
+    WritableObservableValue_Optional_GUID_Internal.set(this.handle, e)
   }
 
   subscribeFromJs(e) {
-    return WritableObservableValue_Optional_GUID_Internal.subscribeFromJs(this.handle, e);
+    return WritableObservableValue_Optional_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    WritableObservableValue_Optional_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    WritableObservableValue_Optional_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableWritableObservableValue_Optional_GUID as $$rD125 };
+export { MutableWritableObservableValue_Optional_GUID as $$rD125 }
 
 export class ObservableValue_Set_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Set_GUID extends ObservableValue_Set_GUID {
   getCopy() {
-    return ObservableValue_Set_GUID_Internal.getCopy(this.handle);
+    return ObservableValue_Set_GUID_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Set_GUID_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Set_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Set_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Set_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_Set_GUID as $$rM140 };
+export { MutableObservableValue_Set_GUID as $$rM140 }
 
 export class WritableObservableValue_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableWritableObservableValue_GUID extends WritableObservableValue_GUID {
   getCopy() {
-    return WritableObservableValue_GUID_Internal.getCopy(this.handle);
+    return WritableObservableValue_GUID_Internal.getCopy(this.handle)
   }
 
   set(e) {
-    WritableObservableValue_GUID_Internal.set(this.handle, e);
+    WritableObservableValue_GUID_Internal.set(this.handle, e)
   }
 
   subscribeFromJs(e) {
-    return WritableObservableValue_GUID_Internal.subscribeFromJs(this.handle, e);
+    return WritableObservableValue_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    WritableObservableValue_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    WritableObservableValue_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableWritableObservableValue_GUID as $$rj65 };
+export { MutableWritableObservableValue_GUID as $$rj65 }
 
 export class ObservableValue_Array_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Array_GUID extends ObservableValue_Array_GUID {
   getCopy() {
-    return ObservableValue_Array_GUID_Internal.getCopy(this.handle);
+    return ObservableValue_Array_GUID_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Array_GUID_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Array_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Array_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Array_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_Array_GUID as $$rB22 };
+export { MutableObservableValue_Array_GUID as $$rB22 }
 
 export class ObservableValue_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_GUID extends ObservableValue_GUID {
   getCopy() {
-    return ObservableValue_GUID_Internal.getCopy(this.handle);
+    return ObservableValue_GUID_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_GUID_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_GUID as $$rV122 };
+export { MutableObservableValue_GUID as $$rV122 }
 
 export class ObservableValue_Optional_GUID {
-  constructor(e) {
-    
-    this.handle = e;
+  handle: ObservableValueHandle
+  constructor(e: ObservableValueHandle) {
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Optional_GUID extends ObservableValue_Optional_GUID {
   getCopy() {
-    return ObservableValue_Optional_GUID_Internal.getCopy(this.handle);
+    return ObservableValue_Optional_GUID_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Optional_GUID_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Optional_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Optional_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Optional_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_Optional_GUID as $$rz113 };
+export { MutableObservableValue_Optional_GUID as $$rz113 }
 
 export class WritableObservableValue_Set_GUID {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableWritableObservableValue_Set_GUID extends WritableObservableValue_Set_GUID {
   getCopy() {
-    return WritableObservableValue_Set_GUID_Internal.getCopy(this.handle);
+    return WritableObservableValue_Set_GUID_Internal.getCopy(this.handle)
   }
 
   set(e) {
-    WritableObservableValue_Set_GUID_Internal.set(this.handle, e);
+    WritableObservableValue_Set_GUID_Internal.set(this.handle, e)
   }
 
   subscribeFromJs(e) {
-    return WritableObservableValue_Set_GUID_Internal.subscribeFromJs(this.handle, e);
+    return WritableObservableValue_Set_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    WritableObservableValue_Set_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    WritableObservableValue_Set_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableWritableObservableValue_Set_GUID as $$rK19 };
+export { MutableWritableObservableValue_Set_GUID as $$rK19 }
 
 export class ObservableValue_Array_Array_GUID {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Array_Array_GUID extends ObservableValue_Array_Array_GUID {
   getCopy() {
-    return ObservableValue_Array_Array_GUID_Internal.getCopy(this.handle);
+    return ObservableValue_Array_Array_GUID_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Array_Array_GUID_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Array_Array_GUID_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Array_Array_GUID_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Array_Array_GUID_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class ObservableValue_Map_GUID_String {
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
+  handle: ObservableValueHandle
 }
 
 export class MutableObservableValue_Map_GUID_String extends ObservableValue_Map_GUID_String {
   getCopy() {
-    return ObservableValue_Map_GUID_String_Internal.getCopy(this.handle);
+    return ObservableValue_Map_GUID_String_Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Map_GUID_String_Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Map_GUID_String_Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Map_GUID_String_Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Map_GUID_String_Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class CollaborativePlainText {
-  handle: any;
+  handle: ObservableValueHandle
   getCurrentVersionAsString() {
-    return CollaborativePlainText_Internal.getCurrentVersionAsString(this.handle);
+    return CollaborativePlainText_Internal.getCurrentVersionAsString(this.handle)
   }
 
   textLengthInWideChars() {
-    return CollaborativePlainText_Internal.textLengthInWideChars(this.handle);
+    return CollaborativePlainText_Internal.textLengthInWideChars(this.handle)
   }
 
   hasNeverBeenEdited() {
-    return CollaborativePlainText_Internal.hasNeverBeenEdited(this.handle);
+    return CollaborativePlainText_Internal.hasNeverBeenEdited(this.handle)
   }
 
   adjustWidecharPositionFromPreviousVersion(e, t) {
-    return CollaborativePlainText_Internal.adjustWidecharPositionFromPreviousVersion(this.handle, e, t);
+    return CollaborativePlainText_Internal.adjustWidecharPositionFromPreviousVersion(this.handle, e, t)
   }
 
   isInUnrecoverableBugErrorState() {
-    return CollaborativePlainText_Internal.isInUnrecoverableBugErrorState(this.handle);
+    return CollaborativePlainText_Internal.isInUnrecoverableBugErrorState(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableCollaborativePlainText extends CollaborativePlainText {
   computeCurrentText() {
-    return CollaborativePlainText_Internal.computeCurrentText(this.handle);
+    return CollaborativePlainText_Internal.computeCurrentText(this.handle)
   }
 
   startBatch() {
-    CollaborativePlainText_Internal.startBatch(this.handle);
+    CollaborativePlainText_Internal.startBatch(this.handle)
   }
 
   endBatch() {
-    CollaborativePlainText_Internal.endBatch(this.handle);
+    CollaborativePlainText_Internal.endBatch(this.handle)
   }
 
   createInsertionOp(e, t, r, n) {
-    return CollaborativePlainText_Internal.createInsertionOp(this.handle, e, t, r, n);
+    return CollaborativePlainText_Internal.createInsertionOp(this.handle, e, t, r, n)
   }
 
   createDeletionOp(e, t, r, n) {
-    return CollaborativePlainText_Internal.createDeletionOp(this.handle, e, t, r, n);
+    return CollaborativePlainText_Internal.createDeletionOp(this.handle, e, t, r, n)
   }
 
   replaceRegion(e, t, r, n) {
-    return CollaborativePlainText_Internal.replaceRegion(this.handle, e, t, r, n);
+    return CollaborativePlainText_Internal.replaceRegion(this.handle, e, t, r, n)
   }
 
   replaceSourceCodeRegionWithVersionAdjustment(e, t, r, n, i) {
-    return CollaborativePlainText_Internal.replaceSourceCodeRegionWithVersionAdjustment(this.handle, e, t, r, n, i);
+    return CollaborativePlainText_Internal.replaceSourceCodeRegionWithVersionAdjustment(this.handle, e, t, r, n, i)
   }
 
   addObserver(e) {
-    return CollaborativePlainText_Internal.addObserver(this.handle, e);
+    return CollaborativePlainText_Internal.addObserver(this.handle, e)
   }
 
   removeObserver(e) {
-    CollaborativePlainText_Internal.removeObserver(this.handle, e);
+    CollaborativePlainText_Internal.removeObserver(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableCollaborativePlainText as $$rZ98 };
+export { MutableCollaborativePlainText as $$rZ98 }
 
 export class BindingsNode {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableBindingsNode extends BindingsNode {
+  handle: ObservableValueHandle
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class WritableObservableValue_ActiveEmbedData_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableWritableObservableValue_ActiveEmbedData_ extends WritableObservableValue_ActiveEmbedData_ {
+  handle: ObservableValueHandle
   getCopy() {
-    return WritableObservableValue_ActiveEmbedData__Internal.getCopy(this.handle);
+    return WritableObservableValue_ActiveEmbedData__Internal.getCopy(this.handle)
   }
 
   set(e) {
-    WritableObservableValue_ActiveEmbedData__Internal.set(this.handle, e);
+    WritableObservableValue_ActiveEmbedData__Internal.set(this.handle, e)
   }
 
   subscribeFromJs(e) {
-    return WritableObservableValue_ActiveEmbedData__Internal.subscribeFromJs(this.handle, e);
+    return WritableObservableValue_ActiveEmbedData__Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    WritableObservableValue_ActiveEmbedData__Internal.unsubscribeFromJs(this.handle, e);
+    WritableObservableValue_ActiveEmbedData__Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableWritableObservableValue_ActiveEmbedData_ as $$r245 };
+export { MutableWritableObservableValue_ActiveEmbedData_ as $$r245 }
 
 export class ObservableValue_PrototypeDevice_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_PrototypeDevice_ extends ObservableValue_PrototypeDevice_ {
   getCopy() {
-    return ObservableValue_PrototypeDevice__Internal.getCopy(this.handle);
+    return ObservableValue_PrototypeDevice__Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_PrototypeDevice__Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_PrototypeDevice__Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_PrototypeDevice__Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_PrototypeDevice__Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_PrototypeDevice_ as $$r358 };
+export { MutableObservableValue_PrototypeDevice_ as $$r358 }
 
 export class PrototypeInteractions {
+  handle: ObservableValueHandle
   getOrCreateJsCopy() {
-    return PrototypeInteractions_Internal.getOrCreateJsCopy(this.handle);
+    return PrototypeInteractions_Internal.getOrCreateJsCopy(this.handle)
   }
 
   getOrCreateSkewCopy() {
-    return PrototypeInteractions_Internal.getOrCreateSkewCopy(this.handle);
+    return PrototypeInteractions_Internal.getOrCreateSkewCopy(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutablePrototypeInteractions extends PrototypeInteractions {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class ImmutableFrameObserver {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableImmutableFrameObserver extends ImmutableFrameObserver {
   invalidateConnectorForReparenting(e) {
-    ImmutableFrameObserver_Internal.invalidateConnectorForReparenting(this.handle, e);
+    ImmutableFrameObserver_Internal.invalidateConnectorForReparenting(this.handle, e)
   }
 
   updateImmutableFrameInternal() {
-    ImmutableFrameObserver_Internal.updateImmutableFrameInternal(this.handle);
+    ImmutableFrameObserver_Internal.updateImmutableFrameInternal(this.handle)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class SceneGraph {
+  handle: ObservableValueHandle
   immutableFrameObserverReference() {
-    return SceneGraph_Internal.immutableFrameObserverReference(this.handle);
+    return SceneGraph_Internal.immutableFrameObserverReference(this.handle)
   }
 
   getIncidentConnectorIDsArray(e) {
-    return SceneGraph_Internal.getIncidentConnectorIDsArray(this.handle, e);
+    return SceneGraph_Internal.getIncidentConnectorIDsArray(this.handle, e)
   }
 
   sitesPreviewObserverReference() {
-    return SceneGraph_Internal.sitesPreviewObserverReference(this.handle);
+    return SceneGraph_Internal.sitesPreviewObserverReference(this.handle)
   }
 
   hierarchyDebugString() {
-    return SceneGraph_Internal.hierarchyDebugString(this.handle);
+    return SceneGraph_Internal.hierarchyDebugString(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableSceneGraph extends SceneGraph {
   updateAll() {
-    SceneGraph_Internal.updateAll(this.handle);
+    SceneGraph_Internal.updateAll(this.handle)
   }
 
   updateNode(e) {
-    SceneGraph_Internal.updateNode(this.handle, e);
+    SceneGraph_Internal.updateNode(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableSceneGraph as $$ne128 };
+export { MutableSceneGraph as $$ne128 }
 
 export class TextData {
+  handle: ObservableValueHandle
   getOrCreateSkewCopy() {
-    return TextData_Internal.getOrCreateSkewCopy(this.handle);
+    return TextData_Internal.getOrCreateSkewCopy(this.handle)
   }
 
   getOrCreateJsCopy() {
-    return TextData_Internal.getOrCreateJsCopy(this.handle);
+    return TextData_Internal.getOrCreateJsCopy(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableTextData extends TextData {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class DerivedTextData {
+  handle: ObservableValueHandle
   getOrCreateSkewCopy() {
-    return DerivedTextData_Internal.getOrCreateSkewCopy(this.handle);
+    return DerivedTextData_Internal.getOrCreateSkewCopy(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableDerivedTextData extends DerivedTextData {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class CompiledVectorData {
+  handle: ObservableValueHandle
   getOrCreateSkewCopy() {
-    return CompiledVectorData_Internal.getOrCreateSkewCopy(this.handle);
+    return CompiledVectorData_Internal.getOrCreateSkewCopy(this.handle)
   }
 
   getOrCreateJsCopy() {
-    return CompiledVectorData_Internal.getOrCreateJsCopy(this.handle);
+    return CompiledVectorData_Internal.getOrCreateJsCopy(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableCompiledVectorData extends CompiledVectorData {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class AccessibilityState {
+  handle: ObservableValueHandle
   get pickCursorFocusedNode() {
-    return AccessibilityState_Internal.__getProperty_pickCursorFocusedNode(this.handle);
+    return AccessibilityState_Internal.__getProperty_pickCursorFocusedNode(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableAccessibilityState extends AccessibilityState {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableAccessibilityState as $$nl55 };
+export { MutableAccessibilityState as $$nl55 }
 
 export class ObservableValue_KeyboardSelectMode_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_KeyboardSelectMode_ extends ObservableValue_KeyboardSelectMode_ {
   getCopy() {
-    return ObservableValue_KeyboardSelectMode__Internal.getCopy(this.handle);
+    return ObservableValue_KeyboardSelectMode__Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_KeyboardSelectMode__Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_KeyboardSelectMode__Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_KeyboardSelectMode__Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_KeyboardSelectMode__Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableObservableValue_KeyboardSelectMode_ as $$nc40 };
+export { MutableObservableValue_KeyboardSelectMode_ as $$nc40 }
 
 export class CanvasGrid {
+  handle: ObservableValueHandle
   get canvasGridArray() {
-    return CanvasGrid_Internal.__getProperty_canvasGridArray(this.handle);
+    return CanvasGrid_Internal.__getProperty_canvasGridArray(this.handle)
   }
 
   get canvasGridArrayChanges() {
-    return CanvasGrid_Internal.__getProperty_canvasGridArrayChanges(this.handle);
+    return CanvasGrid_Internal.__getProperty_canvasGridArrayChanges(this.handle)
   }
 
   get isDraggingChildren() {
-    return CanvasGrid_Internal.__getProperty_isDraggingChildren(this.handle);
+    return CanvasGrid_Internal.__getProperty_isDraggingChildren(this.handle)
   }
 
   get slideNumbers() {
-    return CanvasGrid_Internal.__getProperty_slideNumbers(this.handle);
+    return CanvasGrid_Internal.__getProperty_slideNumbers(this.handle)
   }
 
   gridRowSpacing() {
-    return CanvasGrid_Internal.gridRowSpacing(this.handle);
+    return CanvasGrid_Internal.gridRowSpacing(this.handle)
   }
 
   gridChildSpacing() {
-    return CanvasGrid_Internal.gridChildSpacing(this.handle);
+    return CanvasGrid_Internal.gridChildSpacing(this.handle)
   }
 
   gridPadding() {
-    return CanvasGrid_Internal.gridPadding(this.handle);
+    return CanvasGrid_Internal.gridPadding(this.handle)
   }
 
   gridWidth(e) {
-    return CanvasGrid_Internal.gridWidth(this.handle, e);
+    return CanvasGrid_Internal.gridWidth(this.handle, e)
   }
 
   gridHeight(e) {
-    return CanvasGrid_Internal.gridHeight(this.handle, e);
+    return CanvasGrid_Internal.gridHeight(this.handle, e)
   }
 
   rowMaxSize() {
-    return CanvasGrid_Internal.rowMaxSize(this.handle);
+    return CanvasGrid_Internal.rowMaxSize(this.handle)
   }
 
   getLastChildCoord() {
-    return CanvasGrid_Internal.getLastChildCoord(this.handle);
+    return CanvasGrid_Internal.getLastChildCoord(this.handle)
   }
 
   slidesWrappedInModule__TEST_ONLY__() {
-    return CanvasGrid_Internal.slidesWrappedInModule__TEST_ONLY__(this.handle);
+    return CanvasGrid_Internal.slidesWrappedInModule__TEST_ONLY__(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableCanvasGrid extends CanvasGrid {
   coordForChild(e) {
-    return CanvasGrid_Internal.coordForChild(this.handle, e);
+    return CanvasGrid_Internal.coordForChild(this.handle, e)
   }
 
   gridGUID() {
-    return CanvasGrid_Internal.gridGUID(this.handle);
+    return CanvasGrid_Internal.gridGUID(this.handle)
   }
 
   getRowGUID(e) {
-    return CanvasGrid_Internal.getRowGUID(this.handle, e);
+    return CanvasGrid_Internal.getRowGUID(this.handle, e)
   }
 
   setAreChildrenManuallyIndented(e) {
-    CanvasGrid_Internal.setAreChildrenManuallyIndented(this.handle, e);
+    CanvasGrid_Internal.setAreChildrenManuallyIndented(this.handle, e)
   }
 
   getClosestGridCoord(e, t) {
-    return CanvasGrid_Internal.getClosestGridCoord(this.handle, e, t);
+    return CanvasGrid_Internal.getClosestGridCoord(this.handle, e, t)
   }
 
   recomputeGrid() {
-    CanvasGrid_Internal.recomputeGrid(this.handle);
+    CanvasGrid_Internal.recomputeGrid(this.handle)
   }
 
   insertChildAtCoord(e, t, r, n) {
-    CanvasGrid_Internal.insertChildAtCoord(this.handle, e, t, r, n);
+    CanvasGrid_Internal.insertChildAtCoord(this.handle, e, t, r, n)
   }
 
   replaceChildInGrid(e, t) {
-    CanvasGrid_Internal.replaceChildInGrid(this.handle, e, t);
+    CanvasGrid_Internal.replaceChildInGrid(this.handle, e, t)
   }
 
   moveRow(e, t) {
-    CanvasGrid_Internal.moveRow(this.handle, e, t);
+    CanvasGrid_Internal.moveRow(this.handle, e, t)
   }
 
   moveChildrenToCoord(e, t) {
-    CanvasGrid_Internal.moveChildrenToCoord(this.handle, e, t);
+    CanvasGrid_Internal.moveChildrenToCoord(this.handle, e, t)
   }
 
   selectRow(e) {
-    CanvasGrid_Internal.selectRow(this.handle, e);
+    CanvasGrid_Internal.selectRow(this.handle, e)
   }
 
   selectChildrenInRow(e) {
-    CanvasGrid_Internal.selectChildrenInRow(this.handle, e);
+    CanvasGrid_Internal.selectChildrenInRow(this.handle, e)
   }
 
   addOrRemoveRowFromSelection(e) {
-    CanvasGrid_Internal.addOrRemoveRowFromSelection(this.handle, e);
+    CanvasGrid_Internal.addOrRemoveRowFromSelection(this.handle, e)
   }
 
   addOrRemoveRowChildrenFromSelection(e) {
-    CanvasGrid_Internal.addOrRemoveRowChildrenFromSelection(this.handle, e);
+    CanvasGrid_Internal.addOrRemoveRowChildrenFromSelection(this.handle, e)
   }
 
   setGridOrder(e) {
-    return CanvasGrid_Internal.setGridOrder(this.handle, e);
+    return CanvasGrid_Internal.setGridOrder(this.handle, e)
   }
 
   rectForCoord(e, t, r) {
-    return CanvasGrid_Internal.rectForCoord(this.handle, e, t, r);
+    return CanvasGrid_Internal.rectForCoord(this.handle, e, t, r)
   }
 
   rowContentBoundsInCanvas(e, t) {
-    return CanvasGrid_Internal.rowContentBoundsInCanvas(this.handle, e, t);
+    return CanvasGrid_Internal.rowContentBoundsInCanvas(this.handle, e, t)
   }
 
   createRow(e) {
-    return CanvasGrid_Internal.createRow(this.handle, e);
+    return CanvasGrid_Internal.createRow(this.handle, e)
   }
 
   updateSourceLibraryKey(e) {
-    CanvasGrid_Internal.updateSourceLibraryKey(this.handle, e);
+    CanvasGrid_Internal.updateSourceLibraryKey(this.handle, e)
   }
 
   setSlidesWrappedInModule__TEST_ONLY__(e) {
-    CanvasGrid_Internal.setSlidesWrappedInModule__TEST_ONLY__(this.handle, e);
+    CanvasGrid_Internal.setSlidesWrappedInModule__TEST_ONLY__(this.handle, e)
   }
 
   isRowSelected(e) {
-    return CanvasGrid_Internal.isRowSelected(this.handle, e);
+    return CanvasGrid_Internal.isRowSelected(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableCanvasGrid as $$np41 };
+export { MutableCanvasGrid as $$np41 }
 
 export class CanvasSelection {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableCanvasSelection extends CanvasSelection {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class SlideThemeLibBindings {
+  handle: ObservableValueHandle
   getThemeName(e) {
-    return SlideThemeLibBindings_Internal.getThemeName(this.handle, e);
+    return SlideThemeLibBindings_Internal.getThemeName(this.handle, e)
   }
 
   getBlackColorVariableId(e) {
-    return SlideThemeLibBindings_Internal.getBlackColorVariableId(this.handle, e);
+    return SlideThemeLibBindings_Internal.getBlackColorVariableId(this.handle, e)
   }
 
   getWhiteColorVariableId(e) {
-    return SlideThemeLibBindings_Internal.getWhiteColorVariableId(this.handle, e);
+    return SlideThemeLibBindings_Internal.getWhiteColorVariableId(this.handle, e)
   }
 
   themeIdForAsset(e) {
-    return SlideThemeLibBindings_Internal.themeIdForAsset(this.handle, e);
+    return SlideThemeLibBindings_Internal.themeIdForAsset(this.handle, e)
   }
 
   numSlidesUsingTheme(e) {
-    return SlideThemeLibBindings_Internal.numSlidesUsingTheme(this.handle, e);
+    return SlideThemeLibBindings_Internal.numSlidesUsingTheme(this.handle, e)
   }
 
   doesSlideDeckUseSameTheme() {
-    return SlideThemeLibBindings_Internal.doesSlideDeckUseSameTheme(this.handle);
+    return SlideThemeLibBindings_Internal.doesSlideDeckUseSameTheme(this.handle)
   }
 
   mostUsedTemplateLibraryKey() {
-    return SlideThemeLibBindings_Internal.mostUsedTemplateLibraryKey(this.handle);
+    return SlideThemeLibBindings_Internal.mostUsedTemplateLibraryKey(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableSlideThemeLibBindings extends SlideThemeLibBindings {
   addStyleToLocalTheme(e, t) {
-    SlideThemeLibBindings_Internal.addStyleToLocalTheme(this.handle, e, t);
+    SlideThemeLibBindings_Internal.addStyleToLocalTheme(this.handle, e, t)
   }
 
   setThemeColorVariableFromSubscribedVariableColorValue(e, t, r) {
-    return SlideThemeLibBindings_Internal.setThemeColorVariableFromSubscribedVariableColorValue(this.handle, e, t, r);
+    return SlideThemeLibBindings_Internal.setThemeColorVariableFromSubscribedVariableColorValue(this.handle, e, t, r)
   }
 
   setThemeName(e, t) {
-    SlideThemeLibBindings_Internal.setThemeName(this.handle, e, t);
+    SlideThemeLibBindings_Internal.setThemeName(this.handle, e, t)
   }
 
   setActiveTheme(e) {
-    SlideThemeLibBindings_Internal.setActiveTheme(this.handle, e);
+    SlideThemeLibBindings_Internal.setActiveTheme(this.handle, e)
   }
 
   insertDefaultLocalTheme(e, t) {
-    return SlideThemeLibBindings_Internal.insertDefaultLocalTheme(this.handle, e, t);
+    return SlideThemeLibBindings_Internal.insertDefaultLocalTheme(this.handle, e, t)
   }
 
   upsertLocalThemeFromModule(e) {
-    return SlideThemeLibBindings_Internal.upsertLocalThemeFromModule(this.handle, e);
+    return SlideThemeLibBindings_Internal.upsertLocalThemeFromModule(this.handle, e)
   }
 
   deleteTheme(e) {
-    SlideThemeLibBindings_Internal.deleteTheme(this.handle, e);
+    SlideThemeLibBindings_Internal.deleteTheme(this.handle, e)
   }
 
   remapSlideToLocalTheme(e) {
-    return SlideThemeLibBindings_Internal.remapSlideToLocalTheme(this.handle, e);
+    return SlideThemeLibBindings_Internal.remapSlideToLocalTheme(this.handle, e)
   }
 
   setThemeIdOnSelection(e) {
-    SlideThemeLibBindings_Internal.setThemeIdOnSelection(this.handle, e);
+    SlideThemeLibBindings_Internal.setThemeIdOnSelection(this.handle, e)
   }
 
   swapSelectedSlidesToNewTheme(e, t) {
-    return SlideThemeLibBindings_Internal.swapSelectedSlidesToNewTheme(this.handle, e, t);
+    return SlideThemeLibBindings_Internal.swapSelectedSlidesToNewTheme(this.handle, e, t)
   }
 
   detachThemesForTemplatePublish(e) {
-    SlideThemeLibBindings_Internal.detachThemesForTemplatePublish(this.handle, e);
+    SlideThemeLibBindings_Internal.detachThemesForTemplatePublish(this.handle, e)
   }
 
   renameThemeForTemplatePublish(e) {
-    return SlideThemeLibBindings_Internal.renameThemeForTemplatePublish(this.handle, e);
+    return SlideThemeLibBindings_Internal.renameThemeForTemplatePublish(this.handle, e)
   }
 
   setDocumentTemplateLibraryKey(e) {
-    SlideThemeLibBindings_Internal.setDocumentTemplateLibraryKey(this.handle, e);
+    SlideThemeLibBindings_Internal.setDocumentTemplateLibraryKey(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableSlideThemeLibBindings as $$ng97 };
+export { MutableSlideThemeLibBindings as $$ng97 }
 
 export class SlideAnimationBindings {
+  handle: ObservableValueHandle
   getSlideTransition(e) {
-    return SlideAnimationBindings_Internal.getSlideTransition(this.handle, e);
+    return SlideAnimationBindings_Internal.getSlideTransition(this.handle, e)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableSlideAnimationBindings extends SlideAnimationBindings {
   setSlideTransition(e, t) {
-    SlideAnimationBindings_Internal.setSlideTransition(this.handle, e, t);
+    SlideAnimationBindings_Internal.setSlideTransition(this.handle, e, t)
   }
 
   setSlideTransitionForAll(e) {
-    SlideAnimationBindings_Internal.setSlideTransitionForAll(this.handle, e);
+    SlideAnimationBindings_Internal.setSlideTransitionForAll(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableSlideAnimationBindings as $$nE75 };
+export { MutableSlideAnimationBindings as $$nE75 }
 
 export class SitesPreviewObserver {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableSitesPreviewObserver extends SitesPreviewObserver {
   setPreviewedNodeID(e) {
-    SitesPreviewObserver_Internal.setPreviewedNodeID(this.handle, e);
+    SitesPreviewObserver_Internal.setPreviewedNodeID(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class AnnotationObserver {
+  handle: ObservableValueHandle
   get annotationInfoByTlf() {
-    return AnnotationObserver_Internal.__getProperty_annotationInfoByTlf(this.handle);
+    return AnnotationObserver_Internal.__getProperty_annotationInfoByTlf(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableAnnotationObserver extends AnnotationObserver {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableAnnotationObserver as $$nI118 };
+export { MutableAnnotationObserver as $$nI118 }
 
 export class DakotaBindings {
+  handle: ObservableValueHandle
   get nodeIdToAliasMap() {
-    return DakotaBindings_Internal.__getProperty_nodeIdToAliasMap(this.handle);
+    return DakotaBindings_Internal.__getProperty_nodeIdToAliasMap(this.handle)
   }
 
   get nodeIdToSelectorMap() {
-    return DakotaBindings_Internal.__getProperty_nodeIdToSelectorMap(this.handle);
+    return DakotaBindings_Internal.__getProperty_nodeIdToSelectorMap(this.handle)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableDakotaBindings extends DakotaBindings {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableDakotaBindings as $$nv107 };
+export { MutableDakotaBindings as $$nv107 }
 
 export class ObservableValue_Map_String_Array_CMSAliasEntry_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Map_String_Array_CMSAliasEntry_ extends ObservableValue_Map_String_Array_CMSAliasEntry_ {
   getCopy() {
-    return ObservableValue_Map_String_Array_CMSAliasEntry__Internal.getCopy(this.handle);
+    return ObservableValue_Map_String_Array_CMSAliasEntry__Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Map_String_Array_CMSAliasEntry__Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Map_String_Array_CMSAliasEntry__Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Map_String_Array_CMSAliasEntry__Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Map_String_Array_CMSAliasEntry__Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class ObservableValue_Map_String_DakotaSelector_ {
+  handle: ObservableValueHandle
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableObservableValue_Map_String_DakotaSelector_ extends ObservableValue_Map_String_DakotaSelector_ {
   getCopy() {
-    return ObservableValue_Map_String_DakotaSelector__Internal.getCopy(this.handle);
+    return ObservableValue_Map_String_DakotaSelector__Internal.getCopy(this.handle)
   }
 
   subscribeFromJs(e) {
-    return ObservableValue_Map_String_DakotaSelector__Internal.subscribeFromJs(this.handle, e);
+    return ObservableValue_Map_String_DakotaSelector__Internal.subscribeFromJs(this.handle, e)
   }
 
   unsubscribeFromJs(e) {
-    ObservableValue_Map_String_DakotaSelector__Internal.unsubscribeFromJs(this.handle, e);
+    ObservableValue_Map_String_DakotaSelector__Internal.unsubscribeFromJs(this.handle, e)
   }
 
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
 export class CodeBuildBindings {
+  handle: ObservableValueHandle
   get buildNumberByNodeId() {
-    return CodeBuildBindings_Internal.__getProperty_buildNumberByNodeId(this.handle);
+    return CodeBuildBindings_Internal.__getProperty_buildNumberByNodeId(this.handle)
   }
 
   openDoNotBumpCodeNodeBuildNumbersScope() {
-    return CodeBuildBindings_Internal.openDoNotBumpCodeNodeBuildNumbersScope(this.handle);
+    return CodeBuildBindings_Internal.openDoNotBumpCodeNodeBuildNumbersScope(this.handle)
   }
 
   closeDoNotBumpCodeNodeBuildNumbersScope(e) {
-    CodeBuildBindings_Internal.closeDoNotBumpCodeNodeBuildNumbersScope(this.handle, e);
+    CodeBuildBindings_Internal.closeDoNotBumpCodeNodeBuildNumbersScope(this.handle, e)
   }
 
   constructor(e) {
-    
-    this.handle = e;
+    this.handle = e
   }
-
 }
 
 export class MutableCodeBuildBindings extends CodeBuildBindings {
   constructor(e) {
-    super(e);
-    
-    this.handle = e;
-  }
+    super(e)
 
+    this.handle = e
+  }
 }
 
-export { MutableCodeBuildBindings as $$nO2 };
+export { MutableCodeBuildBindings as $$nO2 }
 export function initializeGlobalBindings(e) {
-  EditScopeBindings = e.EditScopeBindings;
-  ObservableValue_Map_GUID_Int_Internal = e.ObservableValue_Map_GUID_Int_Internal;
-  globalThis.ObservableValue_Map_GUID_Int = ObservableValue_Map_GUID_Int;
-  globalThis.MutableObservableValue_Map_GUID_Int = MutableObservableValue_Map_GUID_Int;
-  WritableObservableValue_UGUID_Internal = e.WritableObservableValue_UGUID_Internal;
-  globalThis.WritableObservableValue_UGUID = WritableObservableValue_UGUID;
-  globalThis.MutableWritableObservableValue_UGUID = MutableWritableObservableValue_UGUID;
-  WritableObservableValue_Array_GUID_Internal = e.WritableObservableValue_Array_GUID_Internal;
-  globalThis.WritableObservableValue_Array_GUID = WritableObservableValue_Array_GUID;
-  globalThis.MutableWritableObservableValue_Array_GUID = MutableWritableObservableValue_Array_GUID;
-  WritableObservableValue_Optional_GUID_Internal = e.WritableObservableValue_Optional_GUID_Internal;
-  globalThis.WritableObservableValue_Optional_GUID = WritableObservableValue_Optional_GUID;
-  globalThis.MutableWritableObservableValue_Optional_GUID = MutableWritableObservableValue_Optional_GUID;
-  ObservableValue_Set_GUID_Internal = e.ObservableValue_Set_GUID_Internal;
-  globalThis.ObservableValue_Set_GUID = ObservableValue_Set_GUID;
-  globalThis.MutableObservableValue_Set_GUID = MutableObservableValue_Set_GUID;
-  WritableObservableValue_GUID_Internal = e.WritableObservableValue_GUID_Internal;
-  globalThis.WritableObservableValue_GUID = WritableObservableValue_GUID;
-  globalThis.MutableWritableObservableValue_GUID = MutableWritableObservableValue_GUID;
-  ObservableValue_Array_GUID_Internal = e.ObservableValue_Array_GUID_Internal;
-  globalThis.ObservableValue_Array_GUID = ObservableValue_Array_GUID;
-  globalThis.MutableObservableValue_Array_GUID = MutableObservableValue_Array_GUID;
-  ObservableValue_GUID_Internal = e.ObservableValue_GUID_Internal;
-  globalThis.ObservableValue_GUID = ObservableValue_GUID;
-  globalThis.MutableObservableValue_GUID = MutableObservableValue_GUID;
-  ObservableValue_Optional_GUID_Internal = e.ObservableValue_Optional_GUID_Internal;
-  globalThis.ObservableValue_Optional_GUID = ObservableValue_Optional_GUID;
-  globalThis.MutableObservableValue_Optional_GUID = MutableObservableValue_Optional_GUID;
-  WritableObservableValue_Set_GUID_Internal = e.WritableObservableValue_Set_GUID_Internal;
-  globalThis.WritableObservableValue_Set_GUID = WritableObservableValue_Set_GUID;
-  globalThis.MutableWritableObservableValue_Set_GUID = MutableWritableObservableValue_Set_GUID;
-  ObservableValue_Array_Array_GUID_Internal = e.ObservableValue_Array_Array_GUID_Internal;
-  globalThis.ObservableValue_Array_Array_GUID = ObservableValue_Array_Array_GUID;
-  globalThis.MutableObservableValue_Array_Array_GUID = MutableObservableValue_Array_Array_GUID;
-  ObservableValue_Map_GUID_String_Internal = e.ObservableValue_Map_GUID_String_Internal;
-  globalThis.ObservableValue_Map_GUID_String = ObservableValue_Map_GUID_String;
-  globalThis.MutableObservableValue_Map_GUID_String = MutableObservableValue_Map_GUID_String;
-  CollaborativePlainText_Internal = e.CollaborativePlainText_Internal;
-  globalThis.CollaborativePlainText = CollaborativePlainText;
-  globalThis.MutableCollaborativePlainText = MutableCollaborativePlainText;
-  BindingsNode_Internal = e.BindingsNode_Internal;
-  globalThis.BindingsNode = BindingsNode;
-  globalThis.MutableBindingsNode = MutableBindingsNode;
-  NodeTsApi = e.NodeTsApi;
-  WritableObservableValue_ActiveEmbedData__Internal = e.WritableObservableValue_ActiveEmbedData__Internal;
-  globalThis.WritableObservableValue_ActiveEmbedData_ = WritableObservableValue_ActiveEmbedData_;
-  globalThis.MutableWritableObservableValue_ActiveEmbedData_ = MutableWritableObservableValue_ActiveEmbedData_;
-  AssistantTools = e.AssistantTools;
-  Fonts = e.Fonts;
-  CmsAnalytics = e.CmsAnalytics;
-  ImageCppBindings = e.ImageCppBindings;
-  ObservableValue_PrototypeDevice__Internal = e.ObservableValue_PrototypeDevice__Internal;
-  globalThis.ObservableValue_PrototypeDevice_ = ObservableValue_PrototypeDevice_;
-  globalThis.MutableObservableValue_PrototypeDevice_ = MutableObservableValue_PrototypeDevice_;
-  PrototypeInteractions_Internal = e.PrototypeInteractions_Internal;
-  globalThis.PrototypeInteractions = PrototypeInteractions;
-  globalThis.MutablePrototypeInteractions = MutablePrototypeInteractions;
-  RevisionNumberAccessor = e.RevisionNumberAccessor;
-  ImmutableFrameObserver_Internal = e.ImmutableFrameObserver_Internal;
-  globalThis.ImmutableFrameObserver = ImmutableFrameObserver;
-  globalThis.MutableImmutableFrameObserver = MutableImmutableFrameObserver;
-  SceneGraph_Internal = e.SceneGraph_Internal;
-  globalThis.SceneGraph = SceneGraph;
-  globalThis.MutableSceneGraph = MutableSceneGraph;
-  SceneGraphTsApi = e.SceneGraphTsApi;
-  TextData_Internal = e.TextData_Internal;
-  globalThis.TextData = TextData;
-  globalThis.MutableTextData = MutableTextData;
-  DerivedTextData_Internal = e.DerivedTextData_Internal;
-  globalThis.DerivedTextData = DerivedTextData;
-  globalThis.MutableDerivedTextData = MutableDerivedTextData;
-  TextPathStartHelpers = e.TextPathStartHelpers;
-  CompiledVectorData_Internal = e.CompiledVectorData_Internal;
-  globalThis.CompiledVectorData = CompiledVectorData;
-  globalThis.MutableCompiledVectorData = MutableCompiledVectorData;
-  AccessibilityState_Internal = e.AccessibilityState_Internal;
-  globalThis.AccessibilityState = AccessibilityState;
-  globalThis.MutableAccessibilityState = MutableAccessibilityState;
-  AccessibilityHelpers = e.AccessibilityHelpers;
-  ObservableValue_KeyboardSelectMode__Internal = e.ObservableValue_KeyboardSelectMode__Internal;
-  globalThis.ObservableValue_KeyboardSelectMode_ = ObservableValue_KeyboardSelectMode_;
-  globalThis.MutableObservableValue_KeyboardSelectMode_ = MutableObservableValue_KeyboardSelectMode_;
-  CanvasGrid_Internal = e.CanvasGrid_Internal;
-  globalThis.CanvasGrid = CanvasGrid;
-  globalThis.MutableCanvasGrid = MutableCanvasGrid;
-  CanvasSelection_Internal = e.CanvasSelection_Internal;
-  globalThis.CanvasSelection = CanvasSelection;
-  globalThis.MutableCanvasSelection = MutableCanvasSelection;
-  SlideConstantsCppBindings = e.SlideConstantsCppBindings;
-  SlideHelpersCppBindings = e.SlideHelpersCppBindings;
-  SlideThemeLibBindings_Internal = e.SlideThemeLibBindings_Internal;
-  globalThis.SlideThemeLibBindings = SlideThemeLibBindings;
-  globalThis.MutableSlideThemeLibBindings = MutableSlideThemeLibBindings;
-  SlideAnimationBindings_Internal = e.SlideAnimationBindings_Internal;
-  globalThis.SlideAnimationBindings = SlideAnimationBindings;
-  globalThis.MutableSlideAnimationBindings = MutableSlideAnimationBindings;
-  SitesPreviewObserver_Internal = e.SitesPreviewObserver_Internal;
-  globalThis.SitesPreviewObserver = SitesPreviewObserver;
-  globalThis.MutableSitesPreviewObserver = MutableSitesPreviewObserver;
-  AnnotationObserver_Internal = e.AnnotationObserver_Internal;
-  globalThis.AnnotationObserver = AnnotationObserver;
-  globalThis.MutableAnnotationObserver = MutableAnnotationObserver;
-  DakotaBindings_Internal = e.DakotaBindings_Internal;
-  globalThis.DakotaBindings = DakotaBindings;
-  globalThis.MutableDakotaBindings = MutableDakotaBindings;
-  ObservableValue_Map_String_Array_CMSAliasEntry__Internal = e.ObservableValue_Map_String_Array_CMSAliasEntry__Internal;
-  globalThis.ObservableValue_Map_String_Array_CMSAliasEntry_ = ObservableValue_Map_String_Array_CMSAliasEntry_;
-  globalThis.MutableObservableValue_Map_String_Array_CMSAliasEntry_ = MutableObservableValue_Map_String_Array_CMSAliasEntry_;
-  ObservableValue_Map_String_DakotaSelector__Internal = e.ObservableValue_Map_String_DakotaSelector__Internal;
-  globalThis.ObservableValue_Map_String_DakotaSelector_ = ObservableValue_Map_String_DakotaSelector_;
-  globalThis.MutableObservableValue_Map_String_DakotaSelector_ = MutableObservableValue_Map_String_DakotaSelector_;
-  CodeBuildBindings_Internal = e.CodeBuildBindings_Internal;
-  globalThis.CodeBuildBindings = CodeBuildBindings;
-  globalThis.MutableCodeBuildBindings = MutableCodeBuildBindings;
-  MaterializeInvisibleChildrenBindings = e.MaterializeInvisibleChildrenBindings;
-  AccessibilityFacetTsApiGenerated = e.AccessibilityFacetTsApiGenerated;
-  AnnotationFacetTsApiGenerated = e.AnnotationFacetTsApiGenerated;
-  AssetFacetTsApiGenerated = e.AssetFacetTsApiGenerated;
-  BrushFacetTsApiGenerated = e.BrushFacetTsApiGenerated;
-  BrushStrokeFacetTsApiGenerated = e.BrushStrokeFacetTsApiGenerated;
-  BuzzFacetTsApiGenerated = e.BuzzFacetTsApiGenerated;
-  CanvasFacetTsApiGenerated = e.CanvasFacetTsApiGenerated;
-  CanvasGridFacetTsApiGenerated = e.CanvasGridFacetTsApiGenerated;
-  CMSFacetTsApiGenerated = e.CMSFacetTsApiGenerated;
-  CodeFacetTsApiGenerated = e.CodeFacetTsApiGenerated;
-  CodeBehaviorFacetTsApiGenerated = e.CodeBehaviorFacetTsApiGenerated;
-  CodeComponentFacetTsApiGenerated = e.CodeComponentFacetTsApiGenerated;
-  CodeFileFacetTsApiGenerated = e.CodeFileFacetTsApiGenerated;
-  CodeLibraryFacetTsApiGenerated = e.CodeLibraryFacetTsApiGenerated;
-  ComponentishFacetTsApiGenerated = e.ComponentishFacetTsApiGenerated;
-  ComponentPropRefFacetTsApiGenerated = e.ComponentPropRefFacetTsApiGenerated;
-  ConnectorFacetTsApiGenerated = e.ConnectorFacetTsApiGenerated;
-  ConstraintsFacetTsApiGenerated = e.ConstraintsFacetTsApiGenerated;
-  DerivedSubtreesFacetTsApiGenerated = e.DerivedSubtreesFacetTsApiGenerated;
-  DiagramFacetTsApiGenerated = e.DiagramFacetTsApiGenerated;
-  DocumentFacetTsApiGenerated = e.DocumentFacetTsApiGenerated;
-  FirstDraftFacetTsApiGenerated = e.FirstDraftFacetTsApiGenerated;
-  FrameFacetTsApiGenerated = e.FrameFacetTsApiGenerated;
-  GeometryFacetTsApiGenerated = e.GeometryFacetTsApiGenerated;
-  GeometryCacheFacetTsApiGenerated = e.GeometryCacheFacetTsApiGenerated;
-  GuidesFacetTsApiGenerated = e.GuidesFacetTsApiGenerated;
-  ImmutableFrameFacetTsApiGenerated = e.ImmutableFrameFacetTsApiGenerated;
-  InstanceFacetTsApiGenerated = e.InstanceFacetTsApiGenerated;
-  InteractiveSlideElementFacetTsApiGenerated = e.InteractiveSlideElementFacetTsApiGenerated;
-  JsxFacetTsApiGenerated = e.JsxFacetTsApiGenerated;
-  LayerFacetTsApiGenerated = e.LayerFacetTsApiGenerated;
-  LayoutGridFacetTsApiGenerated = e.LayoutGridFacetTsApiGenerated;
-  ManagedStringFacetTsApiGenerated = e.ManagedStringFacetTsApiGenerated;
-  ModuleFacetTsApiGenerated = e.ModuleFacetTsApiGenerated;
-  ParameterConsumptionFacetTsApiGenerated = e.ParameterConsumptionFacetTsApiGenerated;
-  PlatformShapeFacetTsApiGenerated = e.PlatformShapeFacetTsApiGenerated;
-  PluginFacetTsApiGenerated = e.PluginFacetTsApiGenerated;
-  PolygonFacetTsApiGenerated = e.PolygonFacetTsApiGenerated;
-  PrototypingFacetTsApiGenerated = e.PrototypingFacetTsApiGenerated;
-  ResponsiveNodeSetFacetTsApiGenerated = e.ResponsiveNodeSetFacetTsApiGenerated;
-  ResponsiveSetFacetTsApiGenerated = e.ResponsiveSetFacetTsApiGenerated;
-  RenderableBackgroundFacetTsApiGenerated = e.RenderableBackgroundFacetTsApiGenerated;
-  RenderableBaseFacetTsApiGenerated = e.RenderableBaseFacetTsApiGenerated;
-  RenderableRectangleFacetTsApiGenerated = e.RenderableRectangleFacetTsApiGenerated;
-  RenderTreeFacetTsApiGenerated = e.RenderTreeFacetTsApiGenerated;
-  StackFacetTsApiGenerated = e.StackFacetTsApiGenerated;
-  SlideFacetTsApiGenerated = e.SlideFacetTsApiGenerated;
-  SlideThemeMapFacetTsApiGenerated = e.SlideThemeMapFacetTsApiGenerated;
-  StarFacetTsApiGenerated = e.StarFacetTsApiGenerated;
-  StateFacetTsApiGenerated = e.StateFacetTsApiGenerated;
-  StateGroupFacetTsApiGenerated = e.StateGroupFacetTsApiGenerated;
-  StyleFacetTsApiGenerated = e.StyleFacetTsApiGenerated;
-  SymbolFacetTsApiGenerated = e.SymbolFacetTsApiGenerated;
-  TableFacetTsApiGenerated = e.TableFacetTsApiGenerated;
-  TextFacetTsApiGenerated = e.TextFacetTsApiGenerated;
-  TextPathFacetTsApiGenerated = e.TextPathFacetTsApiGenerated;
-  TransformFacetTsApiGenerated = e.TransformFacetTsApiGenerated;
-  VariableFacetTsApiGenerated = e.VariableFacetTsApiGenerated;
-  VariableDataFacetTsApiGenerated = e.VariableDataFacetTsApiGenerated;
-  VariableModeConsumptionFacetTsApiGenerated = e.VariableModeConsumptionFacetTsApiGenerated;
-  VariableOverrideFacetTsApiGenerated = e.VariableOverrideFacetTsApiGenerated;
-  VariableSetFacetTsApiGenerated = e.VariableSetFacetTsApiGenerated;
-  VectorFacetTsApiGenerated = e.VectorFacetTsApiGenerated;
-  VectorOperationFacetTsApiGenerated = e.VectorOperationFacetTsApiGenerated;
-  ViewerStateFacetTsApiGenerated = e.ViewerStateFacetTsApiGenerated;
-  WidgetFacetTsApiGenerated = e.WidgetFacetTsApiGenerated;
-  BaseNodeTsApiGenerated = e.BaseNodeTsApiGenerated;
-  NodeTsApiGenerated = e.NodeTsApiGenerated;
+  EditScopeBindings = e.EditScopeBindings
+  ObservableValue_Map_GUID_Int_Internal = e.ObservableValue_Map_GUID_Int_Internal
+  globalThis.ObservableValue_Map_GUID_Int = ObservableValue_Map_GUID_Int
+  globalThis.MutableObservableValue_Map_GUID_Int = MutableObservableValue_Map_GUID_Int
+  WritableObservableValue_UGUID_Internal = e.WritableObservableValue_UGUID_Internal
+  globalThis.WritableObservableValue_UGUID = WritableObservableValue_UGUID
+  globalThis.MutableWritableObservableValue_UGUID = MutableWritableObservableValue_UGUID
+  WritableObservableValue_Array_GUID_Internal = e.WritableObservableValue_Array_GUID_Internal
+  globalThis.WritableObservableValue_Array_GUID = WritableObservableValue_Array_GUID
+  globalThis.MutableWritableObservableValue_Array_GUID = MutableWritableObservableValue_Array_GUID
+  WritableObservableValue_Optional_GUID_Internal = e.WritableObservableValue_Optional_GUID_Internal
+  globalThis.WritableObservableValue_Optional_GUID = WritableObservableValue_Optional_GUID
+  globalThis.MutableWritableObservableValue_Optional_GUID = MutableWritableObservableValue_Optional_GUID
+  ObservableValue_Set_GUID_Internal = e.ObservableValue_Set_GUID_Internal
+  globalThis.ObservableValue_Set_GUID = ObservableValue_Set_GUID
+  globalThis.MutableObservableValue_Set_GUID = MutableObservableValue_Set_GUID
+  WritableObservableValue_GUID_Internal = e.WritableObservableValue_GUID_Internal
+  globalThis.WritableObservableValue_GUID = WritableObservableValue_GUID
+  globalThis.MutableWritableObservableValue_GUID = MutableWritableObservableValue_GUID
+  ObservableValue_Array_GUID_Internal = e.ObservableValue_Array_GUID_Internal
+  globalThis.ObservableValue_Array_GUID = ObservableValue_Array_GUID
+  globalThis.MutableObservableValue_Array_GUID = MutableObservableValue_Array_GUID
+  ObservableValue_GUID_Internal = e.ObservableValue_GUID_Internal
+  globalThis.ObservableValue_GUID = ObservableValue_GUID
+  globalThis.MutableObservableValue_GUID = MutableObservableValue_GUID
+  ObservableValue_Optional_GUID_Internal = e.ObservableValue_Optional_GUID_Internal
+  globalThis.ObservableValue_Optional_GUID = ObservableValue_Optional_GUID
+  globalThis.MutableObservableValue_Optional_GUID = MutableObservableValue_Optional_GUID
+  WritableObservableValue_Set_GUID_Internal = e.WritableObservableValue_Set_GUID_Internal
+  globalThis.WritableObservableValue_Set_GUID = WritableObservableValue_Set_GUID
+  globalThis.MutableWritableObservableValue_Set_GUID = MutableWritableObservableValue_Set_GUID
+  ObservableValue_Array_Array_GUID_Internal = e.ObservableValue_Array_Array_GUID_Internal
+  globalThis.ObservableValue_Array_Array_GUID = ObservableValue_Array_Array_GUID
+  globalThis.MutableObservableValue_Array_Array_GUID = MutableObservableValue_Array_Array_GUID
+  ObservableValue_Map_GUID_String_Internal = e.ObservableValue_Map_GUID_String_Internal
+  globalThis.ObservableValue_Map_GUID_String = ObservableValue_Map_GUID_String
+  globalThis.MutableObservableValue_Map_GUID_String = MutableObservableValue_Map_GUID_String
+  CollaborativePlainText_Internal = e.CollaborativePlainText_Internal
+  globalThis.CollaborativePlainText = CollaborativePlainText
+  globalThis.MutableCollaborativePlainText = MutableCollaborativePlainText
+  BindingsNode_Internal = e.BindingsNode_Internal
+  globalThis.BindingsNode = BindingsNode
+  globalThis.MutableBindingsNode = MutableBindingsNode
+  NodeTsApi = e.NodeTsApi
+  WritableObservableValue_ActiveEmbedData__Internal = e.WritableObservableValue_ActiveEmbedData__Internal
+  globalThis.WritableObservableValue_ActiveEmbedData_ = WritableObservableValue_ActiveEmbedData_
+  globalThis.MutableWritableObservableValue_ActiveEmbedData_ = MutableWritableObservableValue_ActiveEmbedData_
+  AssistantTools = e.AssistantTools
+  Fonts = e.Fonts
+  CmsAnalytics = e.CmsAnalytics
+  ImageCppBindings = e.ImageCppBindings
+  ObservableValue_PrototypeDevice__Internal = e.ObservableValue_PrototypeDevice__Internal
+  globalThis.ObservableValue_PrototypeDevice_ = ObservableValue_PrototypeDevice_
+  globalThis.MutableObservableValue_PrototypeDevice_ = MutableObservableValue_PrototypeDevice_
+  PrototypeInteractions_Internal = e.PrototypeInteractions_Internal
+  globalThis.PrototypeInteractions = PrototypeInteractions
+  globalThis.MutablePrototypeInteractions = MutablePrototypeInteractions
+  RevisionNumberAccessor = e.RevisionNumberAccessor
+  ImmutableFrameObserver_Internal = e.ImmutableFrameObserver_Internal
+  globalThis.ImmutableFrameObserver = ImmutableFrameObserver
+  globalThis.MutableImmutableFrameObserver = MutableImmutableFrameObserver
+  SceneGraph_Internal = e.SceneGraph_Internal
+  globalThis.SceneGraph = SceneGraph
+  globalThis.MutableSceneGraph = MutableSceneGraph
+  SceneGraphTsApi = e.SceneGraphTsApi
+  TextData_Internal = e.TextData_Internal
+  globalThis.TextData = TextData
+  globalThis.MutableTextData = MutableTextData
+  DerivedTextData_Internal = e.DerivedTextData_Internal
+  globalThis.DerivedTextData = DerivedTextData
+  globalThis.MutableDerivedTextData = MutableDerivedTextData
+  TextPathStartHelpers = e.TextPathStartHelpers
+  CompiledVectorData_Internal = e.CompiledVectorData_Internal
+  globalThis.CompiledVectorData = CompiledVectorData
+  globalThis.MutableCompiledVectorData = MutableCompiledVectorData
+  AccessibilityState_Internal = e.AccessibilityState_Internal
+  globalThis.AccessibilityState = AccessibilityState
+  globalThis.MutableAccessibilityState = MutableAccessibilityState
+  AccessibilityHelpers = e.AccessibilityHelpers
+  ObservableValue_KeyboardSelectMode__Internal = e.ObservableValue_KeyboardSelectMode__Internal
+  globalThis.ObservableValue_KeyboardSelectMode_ = ObservableValue_KeyboardSelectMode_
+  globalThis.MutableObservableValue_KeyboardSelectMode_ = MutableObservableValue_KeyboardSelectMode_
+  CanvasGrid_Internal = e.CanvasGrid_Internal
+  globalThis.CanvasGrid = CanvasGrid
+  globalThis.MutableCanvasGrid = MutableCanvasGrid
+  CanvasSelection_Internal = e.CanvasSelection_Internal
+  globalThis.CanvasSelection = CanvasSelection
+  globalThis.MutableCanvasSelection = MutableCanvasSelection
+  SlideConstantsCppBindings = e.SlideConstantsCppBindings
+  SlideHelpersCppBindings = e.SlideHelpersCppBindings
+  SlideThemeLibBindings_Internal = e.SlideThemeLibBindings_Internal
+  globalThis.SlideThemeLibBindings = SlideThemeLibBindings
+  globalThis.MutableSlideThemeLibBindings = MutableSlideThemeLibBindings
+  SlideAnimationBindings_Internal = e.SlideAnimationBindings_Internal
+  globalThis.SlideAnimationBindings = SlideAnimationBindings
+  globalThis.MutableSlideAnimationBindings = MutableSlideAnimationBindings
+  SitesPreviewObserver_Internal = e.SitesPreviewObserver_Internal
+  globalThis.SitesPreviewObserver = SitesPreviewObserver
+  globalThis.MutableSitesPreviewObserver = MutableSitesPreviewObserver
+  AnnotationObserver_Internal = e.AnnotationObserver_Internal
+  globalThis.AnnotationObserver = AnnotationObserver
+  globalThis.MutableAnnotationObserver = MutableAnnotationObserver
+  DakotaBindings_Internal = e.DakotaBindings_Internal
+  globalThis.DakotaBindings = DakotaBindings
+  globalThis.MutableDakotaBindings = MutableDakotaBindings
+  ObservableValue_Map_String_Array_CMSAliasEntry__Internal = e.ObservableValue_Map_String_Array_CMSAliasEntry__Internal
+  globalThis.ObservableValue_Map_String_Array_CMSAliasEntry_ = ObservableValue_Map_String_Array_CMSAliasEntry_
+  globalThis.MutableObservableValue_Map_String_Array_CMSAliasEntry_ = MutableObservableValue_Map_String_Array_CMSAliasEntry_
+  ObservableValue_Map_String_DakotaSelector__Internal = e.ObservableValue_Map_String_DakotaSelector__Internal
+  globalThis.ObservableValue_Map_String_DakotaSelector_ = ObservableValue_Map_String_DakotaSelector_
+  globalThis.MutableObservableValue_Map_String_DakotaSelector_ = MutableObservableValue_Map_String_DakotaSelector_
+  CodeBuildBindings_Internal = e.CodeBuildBindings_Internal
+  globalThis.CodeBuildBindings = CodeBuildBindings
+  globalThis.MutableCodeBuildBindings = MutableCodeBuildBindings
+  MaterializeInvisibleChildrenBindings = e.MaterializeInvisibleChildrenBindings
+  AccessibilityFacetTsApiGenerated = e.AccessibilityFacetTsApiGenerated
+  AnnotationFacetTsApiGenerated = e.AnnotationFacetTsApiGenerated
+  AssetFacetTsApiGenerated = e.AssetFacetTsApiGenerated
+  BrushFacetTsApiGenerated = e.BrushFacetTsApiGenerated
+  BrushStrokeFacetTsApiGenerated = e.BrushStrokeFacetTsApiGenerated
+  BuzzFacetTsApiGenerated = e.BuzzFacetTsApiGenerated
+  CanvasFacetTsApiGenerated = e.CanvasFacetTsApiGenerated
+  CanvasGridFacetTsApiGenerated = e.CanvasGridFacetTsApiGenerated
+  CMSFacetTsApiGenerated = e.CMSFacetTsApiGenerated
+  CodeFacetTsApiGenerated = e.CodeFacetTsApiGenerated
+  CodeBehaviorFacetTsApiGenerated = e.CodeBehaviorFacetTsApiGenerated
+  CodeComponentFacetTsApiGenerated = e.CodeComponentFacetTsApiGenerated
+  CodeFileFacetTsApiGenerated = e.CodeFileFacetTsApiGenerated
+  CodeLibraryFacetTsApiGenerated = e.CodeLibraryFacetTsApiGenerated
+  ComponentishFacetTsApiGenerated = e.ComponentishFacetTsApiGenerated
+  ComponentPropRefFacetTsApiGenerated = e.ComponentPropRefFacetTsApiGenerated
+  ConnectorFacetTsApiGenerated = e.ConnectorFacetTsApiGenerated
+  ConstraintsFacetTsApiGenerated = e.ConstraintsFacetTsApiGenerated
+  DerivedSubtreesFacetTsApiGenerated = e.DerivedSubtreesFacetTsApiGenerated
+  DiagramFacetTsApiGenerated = e.DiagramFacetTsApiGenerated
+  DocumentFacetTsApiGenerated = e.DocumentFacetTsApiGenerated
+  FirstDraftFacetTsApiGenerated = e.FirstDraftFacetTsApiGenerated
+  FrameFacetTsApiGenerated = e.FrameFacetTsApiGenerated
+  GeometryFacetTsApiGenerated = e.GeometryFacetTsApiGenerated
+  GeometryCacheFacetTsApiGenerated = e.GeometryCacheFacetTsApiGenerated
+  GuidesFacetTsApiGenerated = e.GuidesFacetTsApiGenerated
+  ImmutableFrameFacetTsApiGenerated = e.ImmutableFrameFacetTsApiGenerated
+  InstanceFacetTsApiGenerated = e.InstanceFacetTsApiGenerated
+  InteractiveSlideElementFacetTsApiGenerated = e.InteractiveSlideElementFacetTsApiGenerated
+  JsxFacetTsApiGenerated = e.JsxFacetTsApiGenerated
+  LayerFacetTsApiGenerated = e.LayerFacetTsApiGenerated
+  LayoutGridFacetTsApiGenerated = e.LayoutGridFacetTsApiGenerated
+  ManagedStringFacetTsApiGenerated = e.ManagedStringFacetTsApiGenerated
+  ModuleFacetTsApiGenerated = e.ModuleFacetTsApiGenerated
+  ParameterConsumptionFacetTsApiGenerated = e.ParameterConsumptionFacetTsApiGenerated
+  PlatformShapeFacetTsApiGenerated = e.PlatformShapeFacetTsApiGenerated
+  PluginFacetTsApiGenerated = e.PluginFacetTsApiGenerated
+  PolygonFacetTsApiGenerated = e.PolygonFacetTsApiGenerated
+  PrototypingFacetTsApiGenerated = e.PrototypingFacetTsApiGenerated
+  ResponsiveNodeSetFacetTsApiGenerated = e.ResponsiveNodeSetFacetTsApiGenerated
+  ResponsiveSetFacetTsApiGenerated = e.ResponsiveSetFacetTsApiGenerated
+  RenderableBackgroundFacetTsApiGenerated = e.RenderableBackgroundFacetTsApiGenerated
+  RenderableBaseFacetTsApiGenerated = e.RenderableBaseFacetTsApiGenerated
+  RenderableRectangleFacetTsApiGenerated = e.RenderableRectangleFacetTsApiGenerated
+  RenderTreeFacetTsApiGenerated = e.RenderTreeFacetTsApiGenerated
+  StackFacetTsApiGenerated = e.StackFacetTsApiGenerated
+  SlideFacetTsApiGenerated = e.SlideFacetTsApiGenerated
+  SlideThemeMapFacetTsApiGenerated = e.SlideThemeMapFacetTsApiGenerated
+  StarFacetTsApiGenerated = e.StarFacetTsApiGenerated
+  StateFacetTsApiGenerated = e.StateFacetTsApiGenerated
+  StateGroupFacetTsApiGenerated = e.StateGroupFacetTsApiGenerated
+  StyleFacetTsApiGenerated = e.StyleFacetTsApiGenerated
+  SymbolFacetTsApiGenerated = e.SymbolFacetTsApiGenerated
+  TableFacetTsApiGenerated = e.TableFacetTsApiGenerated
+  TextFacetTsApiGenerated = e.TextFacetTsApiGenerated
+  TextPathFacetTsApiGenerated = e.TextPathFacetTsApiGenerated
+  TransformFacetTsApiGenerated = e.TransformFacetTsApiGenerated
+  VariableFacetTsApiGenerated = e.VariableFacetTsApiGenerated
+  VariableDataFacetTsApiGenerated = e.VariableDataFacetTsApiGenerated
+  VariableModeConsumptionFacetTsApiGenerated = e.VariableModeConsumptionFacetTsApiGenerated
+  VariableOverrideFacetTsApiGenerated = e.VariableOverrideFacetTsApiGenerated
+  VariableSetFacetTsApiGenerated = e.VariableSetFacetTsApiGenerated
+  VectorFacetTsApiGenerated = e.VectorFacetTsApiGenerated
+  VectorOperationFacetTsApiGenerated = e.VectorOperationFacetTsApiGenerated
+  ViewerStateFacetTsApiGenerated = e.ViewerStateFacetTsApiGenerated
+  WidgetFacetTsApiGenerated = e.WidgetFacetTsApiGenerated
+  BaseNodeTsApiGenerated = e.BaseNodeTsApiGenerated
+  NodeTsApiGenerated = e.NodeTsApiGenerated
 }
 export function registerFigmaServices() {
   return {
@@ -1640,153 +1572,10 @@ export function registerFigmaServices() {
     dakotaBindings_Internal: DakotaBindings_Internal,
     observableValue_Map_String_Array_CMSAliasEntry__Internal: ObservableValue_Map_String_Array_CMSAliasEntry__Internal,
     observableValue_Map_String_DakotaSelector__Internal: ObservableValue_Map_String_DakotaSelector__Internal,
-    codeBuildBindings_Internal: CodeBuildBindings_Internal
-  };
+    codeBuildBindings_Internal: CodeBuildBindings_Internal,
+  }
 }
-export const $6Y = NavigationDirection;
-export const $DY = PrototypingFacetTsApiGenerated;
-export const AKB = MutableCodeBuildBindings;
-export const AZ4 = AssetSource;
-export const BLp = CompiledVectorData_Internal;
-export const BS2 = EqualityType;
-export const Bko = ImageCppBindings;
-export const Bll = IssueCategory;
-export const ByZ = VectorFacetTsApiGenerated;
-export const CNR = SlideConstantsCppBindings;
-export const EBZ = ResponsiveSetFacetTsApiGenerated;
-export const ElO = TextDirection;
-export const FDn = InsertErrorType;
-export const FbN = ClipboardContentType;
-export const Fk7 = NodeTsApiGenerated;
-export const Fzw = CodeFacetTsApiGenerated;
-export const H9y = TextFacetTsApiGenerated;
-export const Hxi = MutableWritableObservableValue_Array_GUID;
-export const HzA = TrackType;
-export const IEt = MutableWritableObservableValue_Set_GUID;
-export const IPZ = StickyWidgetType;
-export const J0O = ComponentPropType;
-export const JwG = MutableObservableValue_Array_GUID;
-export const K$p = ChatMessageType;
-export const KG_ = WidgetFacetTsApiGenerated;
-export const KO7 = registerFigmaServices;
-export const KtY = StackFacetTsApiGenerated;
-export const L5V = NodePropertyType;
-export const LQj = initializeGlobalBindings;
-export const Liw = ChangeType;
-export const Lxv = SnapshotStatus;
-export const M7s = FieldType;
-export const MoD = ImageExportType;
-export const Nfd = PanelType;
-export const O3Z = AssistantTools;
-export const OGQ = CanvasFacetTsApiGenerated;
-export const OQN = BooleanOperationType;
-export const OR7 = StrokeAlignment;
-export const Ocq = LibraryType;
-export const OiN = MaterializeInvisibleChildrenBindings;
-export const PB2 = MutableObservableValue_KeyboardSelectMode_;
-export const PFX = MutableCanvasGrid;
-export const PWo = FacetType;
-export const PoC = ConnectorType;
-export const QCv = PaintType;
-export const QcK = MutableWritableObservableValue_ActiveEmbedData_;
-export const RN1 = ColorPalette;
-export const Roq = DuplicateType;
-export const RsU = StyleFacetTsApiGenerated;
-export const SKs = PrototypeInteractions_Internal;
-export const Sie = StateSourceType;
-export const SpR = AutoLayoutAlignment;
-export const TsU = InsertSourceType;
-export const UNF = NodeTsApi;
-export const V$M = ContainerType;
-export const WAt = MutableAccessibilityState;
-export const WXh = VisibilityCondition;
-export const XQq = PresetType;
-export const XeX = MutableObservableValue_PrototypeDevice_;
-export const Xxv = EditScopeBindings;
-export const Y8A = RevisionNumberAccessor;
-export const YMM = TextData_Internal;
-export const YnC = SymbolOverrideType;
-export const Z6A = NodeType;
-export const ZHy = VerticalPosition;
-export const ZPn = MutableWritableObservableValue_GUID;
-export const ZRE = FillType;
-export const Zbk = AppMode;
-export const _3L = ThemeType;
-export const _YF = WorkspaceType;
-export const baT = ExportScope;
-export const btW = SideType;
-export const bwI = StateGroupErrorType;
-export const cQy = RichTextType;
-export const cTp = ResponsiveNodeSetFacetTsApiGenerated;
-export const cuQ = MutableSlideAnimationBindings;
-export const cus = UnitType;
-export const d8m = UploadStatus;
-export const eL2 = TextEditAction;
-export const eLE = SlideHelpersCppBindings;
-export const fOf = ComponentType;
-export const fQ3 = AnnotationFacetTsApiGenerated;
-export const fRZ = LayerFacetTsApiGenerated;
-export const fWh = InteractiveSlideElementFacetTsApiGenerated;
-export const gEE = Side;
-export const gRN = TextBlockType;
-export const gSS = LayoutDirection;
-export const gdE = TextPathStartHelpers;
-export const gz6 = CanvasGridFacetTsApiGenerated;
-export const hR8 = ComponentishFacetTsApiGenerated;
-export const hyM = JsxFacetTsApiGenerated;
-export const iZB = ConstraintsFacetTsApiGenerated;
-export const j0r = PropertyScope;
-export const jDJ = FrameFacetTsApiGenerated;
-export const jXp = FontSourceType;
-export const juq = FileSourceType;
-export const kQG = MatchType;
-export const kRH = MutableSlideThemeLibBindings;
-export const lIn = MutableCollaborativePlainText;
-export const lMj = PointerAction;
-export const luZ = AnimationTriggerType;
-export const m1T = LayoutTabType;
-export const m33 = AccessibilityFacetTsApiGenerated;
-export const mKm = LayoutSizingMode;
-export const mSn = SceneGraphTsApi;
-export const mgy = EasingType;
-export const oN4 = ChatRole;
-export const pOw = MutableDakotaBindings;
-export const plo = DistributionType;
-export const ppO = RenderableBaseFacetTsApiGenerated;
-export const pxg = ImageFillMode;
-export const qOu = PolygonFacetTsApiGenerated;
-export const qYO = ThemeColorStatus;
-export const qhH = MutableObservableValue_Optional_GUID;
-export const r6o = SelectionMode;
-export const rO6 = FirstDraftFacetTsApiGenerated;
-export const rrT = NodePropertyCategory;
-export const sAE = LayoutSizingType;
-export const sS8 = MutableAnnotationObserver;
-export const sVn = ModuleFacetTsApiGenerated;
-export const sbT = BaseNodeTsApiGenerated;
-export const tEb = RenderableRectangleFacetTsApiGenerated;
-export const tNK = MutableObservableValue_GUID;
-export const tbL = TextDecorationType;
-export const tbx = AnimationEventType;
-export const u3r = MutableWritableObservableValue_Optional_GUID;
-export const uXg = VariableSetErrorType;
-export const v$l = SlideTransitionType;
-export const vNG = MutableSceneGraph;
-export const vSx = BuzzFacetTsApiGenerated;
-export const vXe = Fonts;
-export const vr8 = TextOverflowType;
-export const x4V = SlideFacetTsApiGenerated;
-export const x7E = ConnectorFacetTsApiGenerated;
-export const xMT = InstanceFacetTsApiGenerated;
-export const xOL = RotationType;
-export const y0x = PlatformType;
-export const y1d = MutableObservableValue_Map_GUID_Int;
-export const y6_ = MutableWritableObservableValue_UGUID;
-export const yGz = AccessibilityHelpers;
-export const yNY = MutableObservableValue_Set_GUID;
-export const zIx = BuildStatus;
-export const zMY = ThemeMode;
-export const zkO = SourceType;
+
 /**
  * SourceType (original: $$n143)
  */
@@ -2080,7 +1869,6 @@ export enum ComponentType {
 }
 // $$E80
 
-
 /**
  * UnitType (original: $$T76)
  */
@@ -2371,409 +2159,555 @@ export enum VisibilityCondition {
  * FillType (original: $$z66)
  */
 export enum FillType {
-  "SOLID" = 0,
-  "TRANSPARENT" = 1,
-  "GRID" = 2,
+  SOLID = 0,
+  TRANSPARENT = 1,
+  GRID = 2,
 }
 
 /**
  * WorkspaceType (original: $$W69)
  */
 export enum WorkspaceType {
-  "DESIGN" = 0,
-  "WHITEBOARD" = 1,
-  "SLIDES" = 2,
-  "DEV_HANDOFF" = 3,
-  "SITES" = 4,
-  "COOPER" = 5,
-  "ILLUSTRATION" = 6,
-  "FIGMAKE" = 7,
+  DESIGN = 0,
+  WHITEBOARD = 1,
+  SLIDES = 2,
+  DEV_HANDOFF = 3,
+  SITES = 4,
+  COOPER = 5,
+  ILLUSTRATION = 6,
+  FIGMAKE = 7,
 }
 
 /**
  * ContainerType (original: $$K54)
  */
 export enum ContainerType {
-  "NONE" = 0,
-  "FRAME" = 1,
-  "GROUP" = 2,
-  "STACK" = 3,
-  "SECTION" = 4,
-  "RESPONSIVE_SET" = 5,
-  "TRANSFORM" = 6,
-  "GRID" = 7,
+  NONE = 0,
+  FRAME = 1,
+  GROUP = 2,
+  STACK = 3,
+  SECTION = 4,
+  RESPONSIVE_SET = 5,
+  TRANSFORM = 6,
+  GRID = 7,
 }
 
 /**
  * LayoutSizingMode (original: $$$103)
  */
 export enum LayoutSizingMode {
-  "FIXED" = 0,
-  "HUG_CONTENT" = 1,
-  "FILL_CONTAINER" = 2,
+  FIXED = 0,
+  HUG_CONTENT = 1,
+  FILL_CONTAINER = 2,
 }
 
 /**
  * PointerAction (original: $$X99)
  */
 export enum PointerAction {
-  "CLICK" = 0,
-  "DRAG" = 1,
+  CLICK = 0,
+  DRAG = 1,
 }
 
 /**
  * Side (original: $$q84)
  */
 export enum Side {
-  "TOP" = 0,
-  "RIGHT" = 1,
-  "BOTTOM" = 2,
-  "LEFT" = 3,
+  TOP = 0,
+  RIGHT = 1,
+  BOTTOM = 2,
+  LEFT = 3,
 }
 
 /**
  * LayoutDirection (original: $$J86)
  */
 export enum LayoutDirection {
-  "ROW" = 0,
-  "COLUMN" = 1,
+  ROW = 0,
+  COLUMN = 1,
 }
 
 /**
  * NavigationDirection (original: $$Z0)
  */
 export enum NavigationDirection {
-  "FORWARD" = 0,
-  "BACKWARD" = 1,
+  FORWARD = 0,
+  BACKWARD = 1,
 }
 
 /**
  * DuplicateType (original: $$ee47)
  */
 export enum DuplicateType {
-  "BLANK" = 0,
-  "DUPLICATE" = 1,
+  BLANK = 0,
+  DUPLICATE = 1,
 }
 
 /**
  * LibraryType (original: $$et38)
  */
 export enum LibraryType {
-  "LOCAL" = 0,
-  "SUBSCRIBED" = 1,
+  LOCAL = 0,
+  SUBSCRIBED = 1,
 }
 
 /**
  * FacetType (original: $$er42)
  */
 export enum FacetType {
-  "NONE" = 0,
-  "STATE_GROUP" = 1,
-  "STYLE" = 2,
-  "SYMBOL" = 3,
-  "VARIABLE" = 4,
-  "VARIABLE_SET" = 5,
-  "VARIABLE_OVERRIDE" = 6,
-  "MODULE" = 7,
-  "RESPONSIVE_SET" = 8,
-  "CONSTRAINED_TEMPLATE" = 9,
-  "CODE_LIBRARY" = 10,
-  "CODE_FILE" = 11,
-  "CODE_COMPONENT" = 12,
-  "BRUSH" = 13,
-  "MANAGED_STRING" = 14,
+  NONE = 0,
+  STATE_GROUP = 1,
+  STYLE = 2,
+  SYMBOL = 3,
+  VARIABLE = 4,
+  VARIABLE_SET = 5,
+  VARIABLE_OVERRIDE = 6,
+  MODULE = 7,
+  RESPONSIVE_SET = 8,
+  CONSTRAINED_TEMPLATE = 9,
+  CODE_LIBRARY = 10,
+  CODE_FILE = 11,
+  CODE_COMPONENT = 12,
+  BRUSH = 13,
+  MANAGED_STRING = 14,
 }
 
 /**
  * TextOverflowType (original: $$en131)
  */
 export enum TextOverflowType {
-  "TextOverflow" = 0,
+  TextOverflow = 0,
 }
 
 /**
  * FontSourceType (original: $$ea94)
  */
 export enum FontSourceType {
-  "LOCAL" = 0,
-  "GOOGLE" = 1,
-  "SHARED" = 2,
+  LOCAL = 0,
+  GOOGLE = 1,
+  SHARED = 2,
 }
 
 /**
  * ImageFillMode (original: $$es110)
  */
 export enum ImageFillMode {
-  "FILL" = 0,
-  "FIT" = 1,
-  "STRETCH" = 2,
-  "TILE" = 3,
+  FILL = 0,
+  FIT = 1,
+  STRETCH = 2,
+  TILE = 3,
 }
 
 /**
  * ImageExportType (original: $$eo32)
  */
 export enum ImageExportType {
-  "NON_ANIMATED_ONLY" = 0,
-  "LOW_RES_ONLY" = 1,
-  "ALL" = 2,
+  NON_ANIMATED_ONLY = 0,
+  LOW_RES_ONLY = 1,
+  ALL = 2,
 }
 
 /**
  * UploadStatus (original: $$el77)
  */
 export enum UploadStatus {
-  "SUCCESS" = 0,
-  "UNSUPPORTED_MEDIA" = 1,
-  "OTHER_FAILURE" = 2,
+  SUCCESS = 0,
+  UNSUPPORTED_MEDIA = 1,
+  OTHER_FAILURE = 2,
 }
 
 /**
  * PresetType (original: $$ed57)
  */
 export enum PresetType {
-  "NONE" = 0,
-  "PRESET" = 1,
-  "CUSTOM" = 2,
-  "PRESENTATION" = 3,
+  NONE = 0,
+  PRESET = 1,
+  CUSTOM = 2,
+  PRESENTATION = 3,
 }
 
 /**
  * ExportScope (original: $$ec70)
  */
 export enum ExportScope {
-  "ALL" = 0,
-  "BASE_SCREENS" = 1,
-  "SCROLL_TO" = 2,
-  "STATES" = 3,
-  "RESPONSIVE_SETS" = 4,
+  ALL = 0,
+  BASE_SCREENS = 1,
+  SCROLL_TO = 2,
+  STATES = 3,
+  RESPONSIVE_SETS = 4,
 }
 
 /**
  * RotationType (original: $$eu135)
  */
 export enum RotationType {
-  "NONE" = 0,
-  "CCW_90" = 1,
+  NONE = 0,
+  CCW_90 = 1,
 }
 
 /**
  * AnimationTriggerType (original: $$ep100)
  */
 export enum AnimationTriggerType {
-  "TRIGGER" = 0,
-  "AFTER_PREVIOUS" = 1,
+  TRIGGER = 0,
+  AFTER_PREVIOUS = 1,
 }
 
 /**
  * RichTextType (original: $$e_73)
  */
 export enum RichTextType {
-  "PLAIN" = 0,
-  "ORDERED_LIST" = 1,
-  "UNORDERED_LIST" = 2,
-  "BLOCKQUOTE" = 3,
-  "HEADER" = 4,
+  PLAIN = 0,
+  ORDERED_LIST = 1,
+  UNORDERED_LIST = 2,
+  BLOCKQUOTE = 3,
+  HEADER = 4,
 }
 
 /**
  * TextDirection (original: $$eh11)
  */
 export enum TextDirection {
-  "LTR" = 0,
-  "RTL" = 1,
+  LTR = 0,
+  RTL = 1,
 }
 
 /**
  * TextDecorationType (original: $$em123)
  */
 export enum TextDecorationType {
-  "NONE" = 0,
-  "SEMANTIC_WEIGHT" = 1,
-  "SEMANTIC_ITALIC" = 2,
-  "TEXT_DECORATION" = 3,
-  "HYPERLINK" = 4,
-  "TEXT_DECORATION_THICKNESS" = 5,
-  "TEXT_UNDERLINE_OFFSET" = 6,
-  "TEXT_DECORATION_SKIP_INK" = 7,
-  "TEXT_DECORATION_FILL_PAINT_DATA" = 8,
-  "TEXT_DECORATION_STYLE" = 9,
-  "FONT_VARIANT_POSITION" = 10,
+  NONE = 0,
+  SEMANTIC_WEIGHT = 1,
+  SEMANTIC_ITALIC = 2,
+  TEXT_DECORATION = 3,
+  HYPERLINK = 4,
+  TEXT_DECORATION_THICKNESS = 5,
+  TEXT_UNDERLINE_OFFSET = 6,
+  TEXT_DECORATION_SKIP_INK = 7,
+  TEXT_DECORATION_FILL_PAINT_DATA = 8,
+  TEXT_DECORATION_STYLE = 9,
+  FONT_VARIANT_POSITION = 10,
 }
 
 /**
  * ThemeType (original: $$eg68)
  */
 export enum ThemeType {
-  "FIGJAM_DARK" = 0,
-  "DRACULA" = 1,
-  "DUOTONE_SEA" = 2,
-  "DUOTONE_SPACE" = 3,
-  "DUOTONE_EARTH" = 4,
-  "DUOTONE_FOREST" = 5,
-  "DUOTONE_LIGHT" = 6,
+  FIGJAM_DARK = 0,
+  DRACULA = 1,
+  DUOTONE_SEA = 2,
+  DUOTONE_SPACE = 3,
+  DUOTONE_EARTH = 4,
+  DUOTONE_FOREST = 5,
+  DUOTONE_LIGHT = 6,
 }
 
 /**
  * StrokeAlignment (original: $$ef37)
  */
 export enum StrokeAlignment {
-  "CENTER" = 0,
-  "INSIDE" = 1,
-  "OUTSIDE" = 2,
+  CENTER = 0,
+  INSIDE = 1,
+  OUTSIDE = 2,
 }
 
 /**
  * SelectionMode (original: $$eE114)
  */
 export enum SelectionMode {
-  "BOX" = 0,
-  "PICK" = 1,
+  BOX = 0,
+  PICK = 1,
 }
 
 /**
  * AppMode (original: $$ey67)
  */
 export enum AppMode {
-  "NONE" = 0,
-  "FIGJAM" = 1,
-  "VIEWER" = 2,
-  "DESIGN" = 3,
-  "SLIDES" = 4,
+  NONE = 0,
+  FIGJAM = 1,
+  VIEWER = 2,
+  DESIGN = 3,
+  SLIDES = 4,
 }
 
 /**
  * BooleanOperationType (original: $$eT36)
  */
 export enum BooleanOperationType {
-  "UNION" = 0,
-  "SUBTRACT" = 1,
-  "INTERSECT" = 2,
-  "XOR" = 3,
+  UNION = 0,
+  SUBTRACT = 1,
+  INTERSECT = 2,
+  XOR = 3,
 }
 
 /**
  * ConnectorType (original: $$eI43)
  */
 export enum ConnectorType {
-  "ELBOWED" = 0,
-  "STRAIGHT" = 1,
-  "CURVED" = 2,
+  ELBOWED = 0,
+  STRAIGHT = 1,
+  CURVED = 2,
 }
 
 /**
  * StickyWidgetType (original: $$eS20)
  */
 export enum StickyWidgetType {
-  "SWT_CREATED" = 0,
-  "SWT_DELETED" = 1,
-  "SWT_EDITED" = 2,
-  "SWT_RESIZED" = 3,
-  "STICKY_DELETED" = 4,
-  "STICKY_EDITED" = 5,
-  "STICKY_RESIZED" = 6,
+  SWT_CREATED = 0,
+  SWT_DELETED = 1,
+  SWT_EDITED = 2,
+  SWT_RESIZED = 3,
+  STICKY_DELETED = 4,
+  STICKY_EDITED = 5,
+  STICKY_RESIZED = 6,
 }
 
 /**
  * ThemeMode (original: $$eA142)
  */
 export enum ThemeMode {
-  "LIGHT" = 0,
-  "DARK" = 1,
+  LIGHT = 0,
+  DARK = 1,
 }
 
 /**
  * ThemeColorStatus (original: $$ex112)
  */
 export enum ThemeColorStatus {
-  "NO_THEME_COLORS" = 0,
-  "NONE_AVAILABLE" = 1,
-  "SWAPPED" = 2,
-  "NO_THEME_FOUND" = 3,
+  NO_THEME_COLORS = 0,
+  NONE_AVAILABLE = 1,
+  SWAPPED = 2,
+  NO_THEME_FOUND = 3,
 }
 
 /**
  * AnimationEventType (original: $$eN124)
  */
 export enum AnimationEventType {
-  "ON_CLICK" = 0,
-  "AFTER_DELAY" = 1,
+  ON_CLICK = 0,
+  AFTER_DELAY = 1,
 }
 
 /**
  * SlideTransitionType (original: $$eC127)
  */
 export enum SlideTransitionType {
-  "NONE" = 0,
-  "DISSOLVE" = 1,
-  "SLIDE_FROM_LEFT" = 2,
-  "SLIDE_FROM_RIGHT" = 3,
-  "SLIDE_FROM_TOP" = 4,
-  "SLIDE_FROM_BOTTOM" = 5,
-  "PUSH_FROM_LEFT" = 6,
-  "PUSH_FROM_RIGHT" = 7,
-  "PUSH_FROM_TOP" = 8,
-  "PUSH_FROM_BOTTOM" = 9,
-  "MOVE_FROM_LEFT" = 10,
-  "MOVE_FROM_RIGHT" = 11,
-  "MOVE_FROM_TOP" = 12,
-  "MOVE_FROM_BOTTOM" = 13,
-  "SLIDE_OUT_TO_LEFT" = 14,
-  "SLIDE_OUT_TO_RIGHT" = 15,
-  "SLIDE_OUT_TO_TOP" = 16,
-  "SLIDE_OUT_TO_BOTTOM" = 17,
-  "MOVE_OUT_TO_LEFT" = 18,
-  "MOVE_OUT_TO_RIGHT" = 19,
-  "MOVE_OUT_TO_TOP" = 20,
-  "MOVE_OUT_TO_BOTTOM" = 21,
-  "SMART_ANIMATE" = 22,
+  NONE = 0,
+  DISSOLVE = 1,
+  SLIDE_FROM_LEFT = 2,
+  SLIDE_FROM_RIGHT = 3,
+  SLIDE_FROM_TOP = 4,
+  SLIDE_FROM_BOTTOM = 5,
+  PUSH_FROM_LEFT = 6,
+  PUSH_FROM_RIGHT = 7,
+  PUSH_FROM_TOP = 8,
+  PUSH_FROM_BOTTOM = 9,
+  MOVE_FROM_LEFT = 10,
+  MOVE_FROM_RIGHT = 11,
+  MOVE_FROM_TOP = 12,
+  MOVE_FROM_BOTTOM = 13,
+  SLIDE_OUT_TO_LEFT = 14,
+  SLIDE_OUT_TO_RIGHT = 15,
+  SLIDE_OUT_TO_TOP = 16,
+  SLIDE_OUT_TO_BOTTOM = 17,
+  MOVE_OUT_TO_LEFT = 18,
+  MOVE_OUT_TO_RIGHT = 19,
+  MOVE_OUT_TO_TOP = 20,
+  MOVE_OUT_TO_BOTTOM = 21,
+  SMART_ANIMATE = 22,
 }
 
 /**
  * PanelType (original: $$ew33)
  */
 export enum PanelType {
-  "FILE" = 0,
-  "CODE" = 1,
-  "DAKOTA" = 2,
-  "SETTINGS" = 3,
-  "INSERT" = 4,
+  FILE = 0,
+  CODE = 1,
+  DAKOTA = 2,
+  SETTINGS = 3,
+  INSERT = 4,
 }
 
 /**
  * InsertErrorType (original: )
  */
-export enum  InsertErrorType{
-  "MORE_THAN_ONE_HIGHLEVEL_NODE_FOUND" = 0,
-  "INSERTED_NODES_TOO_LARGE" = 1,
-  "MAXIMUM_ATTACHMENTS_EXCEEDED" = 2,
-  "USER_PASTED_FIGMA_LINK_IN_CHAT" = 3,
-  "DESIGN_2_REACT_OTHER" = 4,
-  "DESIGN_2_REACT_STATE_GROUP" = 5,
-  "OTHER" = 6,
+export enum InsertErrorType {
+  MORE_THAN_ONE_HIGHLEVEL_NODE_FOUND = 0,
+  INSERTED_NODES_TOO_LARGE = 1,
+  MAXIMUM_ATTACHMENTS_EXCEEDED = 2,
+  USER_PASTED_FIGMA_LINK_IN_CHAT = 3,
+  DESIGN_2_REACT_OTHER = 4,
+  DESIGN_2_REACT_STATE_GROUP = 5,
+  OTHER = 6,
 }
 
 /**
  * EqualityType (original: $$eR5)
  */
 export enum EqualityType {
-  "EQUALS" = 0,
+  EQUALS = 0,
 }
 
 /**
  * MatchType (original: $$eL96)
  */
 export enum MatchType {
-  "MATCH_ALL" = 0,
-  "MATCH_ANY" = 1,
+  MATCH_ALL = 0,
+  MATCH_ANY = 1,
 }
 
 /**
  * FieldType (original: $$ej31)
  */
 export enum FieldType {
-  "TEXT" = 0,
-  "DATE" = 1,
-  "TIME" = 2,
-  "NUMBER" = 3,
+  TEXT = 0,
+  DATE = 1,
+  TIME = 2,
+  NUMBER = 3,
 }
+
+
+export const $6Y = NavigationDirection
+export const $DY = PrototypingFacetTsApiGenerated
+export const AKB = MutableCodeBuildBindings
+export const AZ4 = AssetSource
+export const BLp = CompiledVectorData_Internal
+export const BS2 = EqualityType
+export const Bko = ImageCppBindings
+export const Bll = IssueCategory
+export const ByZ = VectorFacetTsApiGenerated
+export const CNR = SlideConstantsCppBindings
+export const EBZ = ResponsiveSetFacetTsApiGenerated
+export const ElO = TextDirection
+export const FDn = InsertErrorType
+export const FbN = ClipboardContentType
+export const Fk7 = NodeTsApiGenerated
+export const Fzw = CodeFacetTsApiGenerated
+export const H9y = TextFacetTsApiGenerated
+export const Hxi = MutableWritableObservableValue_Array_GUID
+export const HzA = TrackType
+export const IEt = MutableWritableObservableValue_Set_GUID
+export const IPZ = StickyWidgetType
+export const J0O = ComponentPropType
+export const JwG = MutableObservableValue_Array_GUID
+export const K$p = ChatMessageType
+export const KG_ = WidgetFacetTsApiGenerated
+export const KO7 = registerFigmaServices
+export const KtY = StackFacetTsApiGenerated
+export const L5V = NodePropertyType
+export const LQj = initializeGlobalBindings
+export const Liw = ChangeType
+export const Lxv = SnapshotStatus
+export const M7s = FieldType
+export const MoD = ImageExportType
+export const Nfd = PanelType
+export const O3Z = AssistantTools
+export const OGQ = CanvasFacetTsApiGenerated
+export const OQN = BooleanOperationType
+export const OR7 = StrokeAlignment
+export const Ocq = LibraryType
+export const OiN = MaterializeInvisibleChildrenBindings
+export const PB2 = MutableObservableValue_KeyboardSelectMode_
+export const PFX = MutableCanvasGrid
+export const PWo = FacetType
+export const PoC = ConnectorType
+export const QCv = PaintType
+export const QcK = MutableWritableObservableValue_ActiveEmbedData_
+export const RN1 = ColorPalette
+export const Roq = DuplicateType
+export const RsU = StyleFacetTsApiGenerated
+export const SKs = PrototypeInteractions_Internal
+export const Sie = StateSourceType
+export const SpR = AutoLayoutAlignment
+export const TsU = InsertSourceType
+export const UNF = NodeTsApi
+export const V$M = ContainerType
+export const WAt = MutableAccessibilityState
+export const WXh = VisibilityCondition
+export const XQq = PresetType
+export const XeX = MutableObservableValue_PrototypeDevice_
+export const Xxv = EditScopeBindings
+export const Y8A = RevisionNumberAccessor
+export const YMM = TextData_Internal
+export const YnC = SymbolOverrideType
+export const Z6A = NodeType
+export const ZHy = VerticalPosition
+export const ZPn = MutableWritableObservableValue_GUID
+export const ZRE = FillType
+export const Zbk = AppMode
+export const _3L = ThemeType
+export const _YF = WorkspaceType
+export const baT = ExportScope
+export const btW = SideType
+export const bwI = StateGroupErrorType
+export const cQy = RichTextType
+export const cTp = ResponsiveNodeSetFacetTsApiGenerated
+export const cuQ = MutableSlideAnimationBindings
+export const cus = UnitType
+export const d8m = UploadStatus
+export const eL2 = TextEditAction
+export const eLE = SlideHelpersCppBindings
+export const fOf = ComponentType
+export const fQ3 = AnnotationFacetTsApiGenerated
+export const fRZ = LayerFacetTsApiGenerated
+export const fWh = InteractiveSlideElementFacetTsApiGenerated
+export const gEE = Side
+export const gRN = TextBlockType
+export const gSS = LayoutDirection
+export const gdE = TextPathStartHelpers
+export const gz6 = CanvasGridFacetTsApiGenerated
+export const hR8 = ComponentishFacetTsApiGenerated
+export const hyM = JsxFacetTsApiGenerated
+export const iZB = ConstraintsFacetTsApiGenerated
+export const j0r = PropertyScope
+export const jDJ = FrameFacetTsApiGenerated
+export const jXp = FontSourceType
+export const juq = FileSourceType
+export const kQG = MatchType
+export const kRH = MutableSlideThemeLibBindings
+export const lIn = MutableCollaborativePlainText
+export const lMj = PointerAction
+export const luZ = AnimationTriggerType
+export const m1T = LayoutTabType
+export const m33 = AccessibilityFacetTsApiGenerated
+export const mKm = LayoutSizingMode
+export const mSn = SceneGraphTsApi
+export const mgy = EasingType
+export const oN4 = ChatRole
+export const pOw = MutableDakotaBindings
+export const plo = DistributionType
+export const ppO = RenderableBaseFacetTsApiGenerated
+export const pxg = ImageFillMode
+export const qOu = PolygonFacetTsApiGenerated
+export const qYO = ThemeColorStatus
+export const qhH = MutableObservableValue_Optional_GUID
+export const r6o = SelectionMode
+export const rO6 = FirstDraftFacetTsApiGenerated
+export const rrT = NodePropertyCategory
+export const sAE = LayoutSizingType
+export const sS8 = MutableAnnotationObserver
+export const sVn = ModuleFacetTsApiGenerated
+export const sbT = BaseNodeTsApiGenerated
+export const tEb = RenderableRectangleFacetTsApiGenerated
+export const tNK = MutableObservableValue_GUID
+export const tbL = TextDecorationType
+export const tbx = AnimationEventType
+export const u3r = MutableWritableObservableValue_Optional_GUID
+export const uXg = VariableSetErrorType
+export const v$l = SlideTransitionType
+export const vNG = MutableSceneGraph
+export const vSx = BuzzFacetTsApiGenerated
+export const vXe = Fonts
+export const vr8 = TextOverflowType
+export const x4V = SlideFacetTsApiGenerated
+export const x7E = ConnectorFacetTsApiGenerated
+export const xMT = InstanceFacetTsApiGenerated
+export const xOL = RotationType
+export const y0x = PlatformType
+export const y1d = MutableObservableValue_Map_GUID_Int
+export const y6_ = MutableWritableObservableValue_UGUID
+export const yGz = AccessibilityHelpers
+export const yNY = MutableObservableValue_Set_GUID
+export const zIx = BuildStatus
+export const zMY = ThemeMode
+export const zkO = SourceType

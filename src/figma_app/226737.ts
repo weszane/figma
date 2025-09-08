@@ -1,4 +1,4 @@
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { Fk } from "../figma_app/167249";
 export function $$s0() {
@@ -11,7 +11,7 @@ export function $$o2() {
 export function $$l1() {
   let e = $$o2();
   let t = $$s0();
-  return e && hS(e) ? e : t;
+  return e && isValidValue(e) ? e : t;
 }
 export const el = $$s0;
 export const s1 = $$l1;

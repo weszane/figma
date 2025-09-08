@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { rXF, mKm } from "../figma_app/763686";
+import { VariableResolvedDataType, LayoutSizingMode } from "../figma_app/763686";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/648761";
 import { rf, Pt } from "../figma_app/806412";
@@ -105,7 +105,7 @@ export function $$C0({
     memoizedProviderValue,
     showBindingUI,
     consumedVariable
-  } = $$N1(b, rXF.FLOAT);
+  } = $$N1(b, VariableResolvedDataType.FLOAT);
   let eb = useCallback((e, t = zk.YES) => {
     e === y8 ? showBindingUI(em.current) : C(e, t);
   }, [C, showBindingUI, em]);
@@ -128,7 +128,7 @@ export function $$C0({
     }
     return i;
   }(Q, eg.length > 0, ed);
-  let eS = kl("WIDTH" === b ? "stackHorizontalSize" : "stackVerticalSize") === mKm.FIXED || !["WIDTH", "HEIGHT"].includes(b);
+  let eS = kl("WIDTH" === b ? "stackHorizontalSize" : "stackVerticalSize") === LayoutSizingMode.FIXED || !["WIDTH", "HEIGHT"].includes(b);
   return jsx(_$$p.Provider, {
     value: eS ? memoizedProviderValue : void 0,
     children: jsx(fl, {

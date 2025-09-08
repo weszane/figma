@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
@@ -25,7 +25,7 @@ import { c as _$$c2 } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { Eh } from "../figma_app/617654";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { I as _$$I } from "../905/597430";
 import { L as _$$L } from "../905/479295";
 import { T1 } from "../figma_app/153916";
@@ -753,8 +753,8 @@ export function $$Y1(e) {
       orgName: t,
       orgId: n
     }) => {
-      e(to({
-        type: s ??= Ju(W, "OrgUnscheduleCancellationModal"),
+      e(showModalHandler({
+        type: s ??= registerModal(W, "OrgUnscheduleCancellationModal"),
         data: {
           orgName: t,
           orgId: n,
@@ -770,8 +770,8 @@ export function $$Y1(e) {
       orgName: t,
       orgId: s
     }) => {
-      e(to({
-        type: n ??= Ju(V, "OrgScheduleCancellationModal"),
+      e(showModalHandler({
+        type: n ??= registerModal(V, "OrgScheduleCancellationModal"),
         data: {
           orgName: t,
           orgId: s,

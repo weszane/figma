@@ -1,16 +1,16 @@
 import { m as _$$m } from '../905/18160';
 import { B as _$$B } from '../905/94678';
 import { D6, Hi } from '../905/117560';
-import { aD, B9, Et, yS } from '../905/125019';
+import { sha1BytesFromHex, bytesToHex, sha1Hex, sha1HexFromString } from '../905/125019';
 import { c as _$$c } from '../905/154079';
-import { l7, zk } from '../905/189185';
+import { permissionScopeHandler, zk } from '../905/189185';
 import { _6, dL, fg, M1, uw, y4, zA } from '../905/321541';
 import { bG, rw } from '../905/333600';
 import { Aw, LV, Mn, Ug } from '../905/340677';
 import { c2 } from '../905/382883';
 import { DI, JQ } from '../905/389786';
 import { cN, gJ, NN } from '../905/409381';
-import { $2, EV, FP, ye } from '../905/426868';
+import { $2, loadNonPluginFont, waitForAllFontsLoaded, getClosestFontName } from '../905/426868';
 import { SceneNode } from '../905/499575';
 import { Cv, fx, pu, sJ, u0, x_, y$ } from '../905/532366';
 import { yX } from '../905/642476';
@@ -21,7 +21,7 @@ import { nl as _$$nl, hA, U3 } from '../905/722575';
 import { k as _$$k } from '../905/749197';
 import { f as _$$f } from '../905/797463';
 import { S as _$$S, V as _$$V, parseJSX } from '../905/802325';
-import { AD, dI, sH } from '../905/871411';
+import { defaultSessionLocalIDString, sessionLocalIDToString, parseSessionLocalID } from '../905/871411';
 import { hp, Lv, SE } from '../905/929949';
 import { PT, SJ } from '../905/946258';
 import { n as _$$n } from '../905/992140';
@@ -34,7 +34,7 @@ import { PK, sD } from '../figma_app/243058';
 import { Ji, MT } from '../figma_app/387100';
 import { throwTypeError } from '../figma_app/465776';
 import { CUSTOM_IMAGE_TYPE_STR, getComponentInfoById, getInstanceIdsForDef, getInstanceNodeProps, getTypeInfoCached, toCamelCase, toTitleCase, usagePropsToRawProps } from '../figma_app/664063';
-import { HzA, lKz, mKm, O3Z, rXF, sAE, vr8, zkO } from '../figma_app/763686';
+import { TrackType, Confirmation, LayoutSizingMode, AssistantTools, VariableResolvedDataType, LayoutSizingType, TextOverflowType, SourceType } from '../figma_app/763686';
 import { QW, si } from '../figma_app/941074';
 import { z as _$$z } from '../vendor/835909';
 let n;
@@ -139,12 +139,12 @@ export function $$w36({
       t.resize(o, a);
     }
     try {
-      n === 'fill-parent' ? t.writeProperty('stackHorizontalLayoutSize', mKm.FILL_CONTAINER) : n === 'hug-contents' && A(e) && t.writeProperty('stackHorizontalLayoutSize', mKm.HUG_CONTENT);
+      n === 'fill-parent' ? t.writeProperty('stackHorizontalLayoutSize', LayoutSizingMode.FILL_CONTAINER) : n === 'hug-contents' && A(e) && t.writeProperty('stackHorizontalLayoutSize', LayoutSizingMode.HUG_CONTENT);
     } catch {
       n === 'fill-parent' ? i === 'HORIZONTAL' ? t.writeProperty('stackChildPrimaryGrow', 1) : i === 'VERTICAL' && (t.writeProperty('stackChildAlignSelf', 'STRETCH'), A(e) && t.writeProperty('stackPrimarySizing', 'FIXED')) : n === 'hug-contents' && A(e) && (e.props.stackMode === 'HORIZONTAL' ? t.writeProperty('stackPrimarySizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE') : e.props.stackMode === 'VERTICAL' && t.writeProperty('stackCounterSizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'));
     }
     try {
-      r === 'fill-parent' ? t.writeProperty('stackVerticalLayoutSize', mKm.FILL_CONTAINER) : r === 'hug-contents' && A(e) && t.writeProperty('stackVerticalLayoutSize', mKm.HUG_CONTENT);
+      r === 'fill-parent' ? t.writeProperty('stackVerticalLayoutSize', LayoutSizingMode.FILL_CONTAINER) : r === 'hug-contents' && A(e) && t.writeProperty('stackVerticalLayoutSize', LayoutSizingMode.HUG_CONTENT);
     } catch {
       r === 'fill-parent' ? i === 'VERTICAL' ? t.writeProperty('stackChildPrimaryGrow', 1) : i === 'HORIZONTAL' && (t.writeProperty('stackChildAlignSelf', 'STRETCH'), A(e) && t.writeProperty('stackPrimarySizing', 'FIXED')) : r === 'hug-contents' && A(e) && (e.props.stackMode === 'HORIZONTAL' ? t.writeProperty('stackCounterSizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE') : e.props.stackMode === 'VERTICAL' && t.writeProperty('stackPrimarySizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'));
     }
@@ -160,8 +160,8 @@ export function $$R33({
   if (t && !(e.numAutoPositionedChildren > 0) && (i || (i = null), t.layoutMetadata?.width === 'hug-contents' && typeof t.layoutMetadata?.fallbackWidthIfHug == 'number' && t.layoutMetadata?.fallbackWidthIfHug !== i?.layoutMetadata?.fallbackWidthIfHug && (n = t.layoutMetadata.fallbackWidthIfHug), t.layoutMetadata?.height === 'hug-contents' && typeof t.layoutMetadata?.fallbackHeightIfHug == 'number' && t.layoutMetadata?.fallbackHeightIfHug !== i?.layoutMetadata?.fallbackHeightIfHug && (r = t.layoutMetadata?.fallbackHeightIfHug), n || r)) {
     let t = e.getSize();
     e.resize(n ?? t.width, r ?? t.height);
-    n && e.writeProperty('stackHorizontalLayoutSize', mKm.HUG_CONTENT);
-    r && e.writeProperty('stackVerticalLayoutSize', mKm.HUG_CONTENT);
+    n && e.writeProperty('stackHorizontalLayoutSize', LayoutSizingMode.HUG_CONTENT);
+    r && e.writeProperty('stackVerticalLayoutSize', LayoutSizingMode.HUG_CONTENT);
   }
 }
 export function $$P32({
@@ -350,19 +350,19 @@ async function D({
       weight
     } = e;
     try {
-      await EV(fontName);
+      await loadNonPluginFont(fontName);
       i.loadedFonts[fontName.family] = i.loadedFonts[fontName.family] || {};
       i.loadedFonts[fontName.family][fontName.style] = !0;
       return;
     } catch {}
-    let r = ye(fontName.family, weight, fontName.style.includes('Italic'));
+    let r = getClosestFontName(fontName.family, weight, fontName.style.includes('Italic'));
     i.fontFallbacks[fontName.family] = i.fontFallbacks[fontName.family] || {};
     try {
       let e = r ?? {
         style: fontName.style,
         family: 'Inter'
       };
-      await EV(e);
+      await loadNonPluginFont(e);
       i.fontFallbacks[fontName.family][fontName.style] = e;
       return;
     } catch {}
@@ -759,7 +759,7 @@ export class $$K15 {
           }
           break;
         case 'componentProperties':
-          typeof t == 'object' && i.setProperties(t, !0, lKz.YES);
+          typeof t == 'object' && i.setProperties(t, !0, Confirmation.YES);
           break;
         case 'sharedPluginData':
           if (typeof t == 'object') {
@@ -926,9 +926,9 @@ export class $$K15 {
                 let a = r.getRangeFontName(start, end);
                 let l = r.getRangeFontWeight(start, end);
                 if (a !== 'mixed' && l !== 'mixed' && n) {
-                  let t = e === 'fontFamily' && n.resolvedType === rXF.STRING ? n.value : a.family;
-                  let i = e === 'fontWeight' && n.resolvedType === rXF.FLOAT ? n.value : l;
-                  let r = ye(t, i, a.style.includes('Italic'));
+                  let t = e === 'fontFamily' && n.resolvedType === VariableResolvedDataType.STRING ? n.value : a.family;
+                  let i = e === 'fontWeight' && n.resolvedType === VariableResolvedDataType.FLOAT ? n.value : l;
+                  let r = getClosestFontName(t, i, a.style.includes('Italic'));
                   r && (await this.runtime.getOrLoadFontName(r));
                 }
               }
@@ -1114,7 +1114,7 @@ export class $$Y13 {
         this.editScopeIsActive = !1;
       }
     };
-    return this.outerEditScopeLabel ? l7(this.outerEditScopeType, this.outerEditScopeLabel, () => l7(zkO.SYSTEM, e, () => i())) : l7(zkO.SYSTEM, e, () => i());
+    return this.outerEditScopeLabel ? permissionScopeHandler(this.outerEditScopeType, this.outerEditScopeLabel, () => permissionScopeHandler(SourceType.SYSTEM, e, () => i())) : permissionScopeHandler(SourceType.SYSTEM, e, () => i());
   }
   getSafeFontNameOrNull(e) {
     return this.resourceStatus.loadedFonts[e.family]?.[e.style] ? e : this.resourceStatus.fontFallbacks[e.family]?.[e.style] ?? null;
@@ -1129,7 +1129,7 @@ export class $$Y13 {
     let t = this.getSafeFontNameOrNull(e);
     if (t) return t;
     try {
-      await EV(e);
+      await loadNonPluginFont(e);
       this.resourceStatus.loadedFonts[e.family] = this.resourceStatus.loadedFonts[e.family] || {};
       this.resourceStatus.loadedFonts[e.family][e.style] = !0;
       return e;
@@ -1137,12 +1137,12 @@ export class $$Y13 {
       return null;
     }
   }
-  createNode(e, t = HzA.TRACK) {
+  createNode(e, t = TrackType.TRACK) {
     if (!e || typeof e != 'object') throw new Error('invalid node passed to createNode');
     let i = e.nodeType;
     return this.createNodeFromType(i, e.requiredProps, t);
   }
-  createNodeFromType(e, t, i = HzA.TRACK) {
+  createNodeFromType(e, t, i = TrackType.TRACK) {
     let n = this.recorder;
     let r = e => {
       let t = this.scene.createNode(e, {
@@ -1247,7 +1247,7 @@ export class $$Y13 {
   constructor({
     resourceStatus: e,
     recorder: t = null,
-    outerEditScopeType: i = zkO.USER,
+    outerEditScopeType: i = SourceType.USER,
     outerEditScopeLabel: n,
     scene: r,
     serializerOptions: o,
@@ -1542,7 +1542,7 @@ async function ee({
         generationRequests: b
       };
     }
-    await FP();
+    await waitForAllFontsLoaded();
     let S = a.get(h.guid);
     if (S?.update(), n.updateDerivedSymbolDataAfterDeserialization) {
       let e = s.getInstanceIdsTouched();
@@ -2560,7 +2560,7 @@ let e_ = ei({
     let r = e.isGroup || e.type === 'BOOLEAN_OPERATION';
     if (e.isInstance) return t.tailwind ? eF(n, !!t.tailwindOnly) : n;
     let o = Ji(e);
-    if (e.type === 'LINE') return (o && e.stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? n.length = 'fill-parent' : r || (n.length = i.maybeNormalizePxValue(e.size.x, 'x')), t.tailwind) ? eF(n, !!t.tailwindOnly) : n;
+    if (e.type === 'LINE') return (o && e.stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? n.length = 'fill-parent' : r || (n.length = i.maybeNormalizePxValue(e.size.x, 'x')), t.tailwind) ? eF(n, !!t.tailwindOnly) : n;
     let a = eB(e, o);
     let l = e.childrenNodes.filter(e => e.stackPositioning === 'AUTO').length;
     let {
@@ -2570,8 +2570,8 @@ let e_ = ei({
       stackVerticalLayoutSize,
       relativeTransform
     } = e;
-    a && (horizontalConstraint === 'STRETCH' || horizontalConstraint === 'SCALE') ? (horizontalConstraint === 'STRETCH' || horizontalConstraint === 'SCALE') && t.forceAbsoluteSize && (n.width = i.maybeNormalizePxValue(e.size.x, 'x')) : o && stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = 'fill-parent' : e.type === 'TEXT' && e.textAutoResize === 'WIDTH_AND_HEIGHT' ? t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = 'hug-contents' : stackHorizontalLayoutSize === mKm.HUG_CONTENT ? (t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = 'hug-contents', l === 0 && (t.ignoreHugContentsOnEmptyFrames ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.fallbackWidthIfHug = i.maybeNormalizePxValue(e.size.x, 'x'))) : r || (t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.width : void 0) ?? i.maybeNormalizePxValue(e.size.x, 'x'));
-    a && (verticalConstraint === 'STRETCH' || verticalConstraint === 'SCALE') ? (horizontalConstraint === 'STRETCH' || horizontalConstraint === 'SCALE') && t.forceAbsoluteSize && (n.height = i.maybeNormalizePxValue(e.size.y, 'y')) : o && stackVerticalLayoutSize === mKm.FILL_CONTAINER ? t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = 'fill-parent' : e.type === 'TEXT' && (e.textAutoResize === 'WIDTH_AND_HEIGHT' || e.textAutoResize === 'HEIGHT') ? t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = 'hug-contents' : stackVerticalLayoutSize === mKm.HUG_CONTENT ? (t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = 'hug-contents', l === 0 && (t.ignoreHugContentsOnEmptyFrames ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.fallbackHeightIfHug = i.maybeNormalizePxValue(e.size.y, 'y'))) : r || (t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.height : void 0) ?? i.maybeNormalizePxValue(e.size.y, 'y'));
+    a && (horizontalConstraint === 'STRETCH' || horizontalConstraint === 'SCALE') ? (horizontalConstraint === 'STRETCH' || horizontalConstraint === 'SCALE') && t.forceAbsoluteSize && (n.width = i.maybeNormalizePxValue(e.size.x, 'x')) : o && stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = 'fill-parent' : e.type === 'TEXT' && e.textAutoResize === 'WIDTH_AND_HEIGHT' ? t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = 'hug-contents' : stackHorizontalLayoutSize === LayoutSizingMode.HUG_CONTENT ? (t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = 'hug-contents', l === 0 && (t.ignoreHugContentsOnEmptyFrames ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.fallbackWidthIfHug = i.maybeNormalizePxValue(e.size.x, 'x'))) : r || (t.forceAbsoluteSize ? n.width = i.maybeNormalizePxValue(e.size.x, 'x') : n.width = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.width : void 0) ?? i.maybeNormalizePxValue(e.size.x, 'x'));
+    a && (verticalConstraint === 'STRETCH' || verticalConstraint === 'SCALE') ? (horizontalConstraint === 'STRETCH' || horizontalConstraint === 'SCALE') && t.forceAbsoluteSize && (n.height = i.maybeNormalizePxValue(e.size.y, 'y')) : o && stackVerticalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = 'fill-parent' : e.type === 'TEXT' && (e.textAutoResize === 'WIDTH_AND_HEIGHT' || e.textAutoResize === 'HEIGHT') ? t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = 'hug-contents' : stackVerticalLayoutSize === LayoutSizingMode.HUG_CONTENT ? (t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = 'hug-contents', l === 0 && (t.ignoreHugContentsOnEmptyFrames ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.fallbackHeightIfHug = i.maybeNormalizePxValue(e.size.y, 'y'))) : r || (t.forceAbsoluteSize ? n.height = i.maybeNormalizePxValue(e.size.y, 'y') : n.height = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.height : void 0) ?? i.maybeNormalizePxValue(e.size.y, 'y'));
     let f = Math.atan2(relativeTransform.m10, relativeTransform.m00);
     let h = Math.cos(-f);
     let m = Math.sin(-f);
@@ -3055,7 +3055,7 @@ function tt(e, t) {
     return te({
       type: 'IMAGE',
       image: {
-        hash: aD(t.imagePlaceholderRef)
+        hash: sha1BytesFromHex(t.imagePlaceholderRef)
       },
       imageScaleMode: 'FILL'
     });
@@ -3134,7 +3134,7 @@ let ti = (e, t, i, n) => {
             }
             i = {
               type: 'image',
-              imageRef: t.excludeImageData ? 'unknown' : B9(e.image.hash)
+              imageRef: t.excludeImageData ? 'unknown' : bytesToHex(e.image.hash)
             };
           }
           i.blendMode = _$$nl(e.blendMode);
@@ -3281,7 +3281,7 @@ let tn = ({
           let i;
           if (void 0 !== e.imageRef && e.imageRef !== 'unknown') {
             try {
-              i = aD(e.imageRef);
+              i = sha1BytesFromHex(e.imageRef);
             } catch {}
           }
           return void 0 === i ? {
@@ -4362,7 +4362,7 @@ let tB = ei({
   fieldGroups: new Set([]),
   outputSchema: () => tX,
   defaults: () => ({}),
-  serialize: (e, t) => e.isSymbolSublayer && e.overrideKey !== AD && e.overrideKey !== e.guid ? {
+  serialize: (e, t) => e.isSymbolSublayer && e.overrideKey !== defaultSessionLocalIDString && e.overrideKey !== e.guid ? {
     overrideKey: e.overrideKey
   } : t.forcePopulateOverrideKey ? {
     overrideKey: e.guid
@@ -4712,7 +4712,7 @@ function iO(e) {
   };
   return e.connectionType === 'INTERNAL_NODE' ? {
     ...t,
-    transitionNodeID: sH(e.transitionNodeID) ?? void 0
+    transitionNodeID: parseSessionLocalID(e.transitionNodeID) ?? void 0
   } : e.connectionType === 'SET_VARIABLE' ? {
     ...t,
     targetVariable: e.targetVariable,
@@ -4727,7 +4727,7 @@ function iO(e) {
 }
 function iA(e) {
   return {
-    id: sH(e.id) ?? void 0,
+    id: parseSessionLocalID(e.id) ?? void 0,
     event: e.event ? function (e) {
       let t = {
         interactionType: e.interactionType
@@ -4774,7 +4774,7 @@ let iR = ei({
   serialize: (e, t, i) => {
     let n = e.prototypeInteractions.map(t => function (e, t, i) {
       return {
-        id: dI(e.id) ?? '-1:-1',
+        id: sessionLocalIDToString(e.id) ?? '-1:-1',
         event: e.event ? function (e, t, i) {
           let n = {
             interactionType: e.interactionType ?? 'NONE',
@@ -4876,7 +4876,7 @@ let i_ = ei({
       data
     } = t;
     if (data !== null) {
-      for (let e of iL) i = iM(data, e.split('/'), dI);
+      for (let e of iL) i = iM(data, e.split('/'), sessionLocalIDToString);
       for (let e of iD) i = iM(data, e.split('/'), Hi);
       return data;
     }
@@ -4902,7 +4902,7 @@ let i_ = ei({
     } = n;
     if (void 0 === data || Object.keys(data).length === 0) return;
     let o = data;
-    for (let e of iL) o = iM(o, e.split('/'), sH);
+    for (let e of iL) o = iM(o, e.split('/'), parseSessionLocalID);
     for (let e of iD) o = iM(o, e.split('/'), D6);
     return {
       props: {
@@ -4992,7 +4992,7 @@ let iW = ei({
     if (t.excludeVectorData || t.inlineVectorData || !e.vectorDataInfo) return;
     let n = function (e) {
       let t = e.vectorDataInfo;
-      let i = Et(t.blobs[t.data.vectorNetworkBlob].bytes);
+      let i = sha1Hex(t.blobs[t.data.vectorNetworkBlob].bytes);
       return `asset:${i.slice(0, 8)}`;
     }(e);
     let o = _$$V({
@@ -5055,7 +5055,7 @@ function iK(e, t, i) {
     let r = n.data;
     if (t.tempExternalPathData) {
       let n = function (e) {
-        let t = yS(e);
+        let t = sha1HexFromString(e);
         return `asset:${t.slice(0, 8)}`;
       }(r);
       let o = i.getAssets()[n];
@@ -6843,7 +6843,7 @@ function n$(e) {
     if (!n) return;
     return {
       minSizing: {
-        type: sAE.FIXED,
+        type: LayoutSizingType.FIXED,
         value: 0
       },
       maxSizing: n
@@ -6854,7 +6854,7 @@ function n$(e) {
     if (!t) return;
     return {
       minSizing: {
-        type: sAE.FIXED,
+        type: LayoutSizingType.FIXED,
         value: 0
       },
       maxSizing: t
@@ -6864,10 +6864,10 @@ function n$(e) {
 function nU(e) {
   let t = parseFloat(e);
   return isNaN(t) ? void 0 : e.match(/.*px\w*/) ? {
-    type: sAE.FIXED,
+    type: LayoutSizingType.FIXED,
     value: t
   } : e.match(/.*fr\w*/) ? {
-    type: sAE.FLEX,
+    type: LayoutSizingType.FLEX,
     value: t
   } : void 0;
 }
@@ -7487,7 +7487,7 @@ let re = ei({
             }
           }
           for (let [i, c] of Object.entries(p)) {
-            if (sH(i)) {
+            if (parseSessionLocalID(i)) {
               let d = function e(t, i) {
                 if (t.overrideKey === i || t.guid === i) return t;
                 for (let n of t.childrenNodes) {
@@ -8032,7 +8032,7 @@ function rf(e, t, i = null) {
   }), t.childrenMetadata.children || [])) typeof n == 'object' && n && rf(e, n, t);
 }
 async function rh(e, t, i) {
-  t && t.type === vr8.TextOverflow || i.trackDeserializeIssue({
+  t && t.type === TextOverflowType.TextOverflow || i.trackDeserializeIssue({
     message: 'Unexpected edit quality issue',
     context: {
       jsxElement: e
@@ -8512,7 +8512,7 @@ export async function $$rz35({
       console.debug('No active scene graph found for self-healing');
       return;
     }
-    let r = i?.guid ? O3Z?.checkEditQualityOfSubtree(n.scene, i.guid) : O3Z?.checkEditQualityOfScene(n.scene);
+    let r = i?.guid ? AssistantTools?.checkEditQualityOfSubtree(n.scene, i.guid) : AssistantTools?.checkEditQualityOfScene(n.scene);
     if (!r || r.length === 0) {
       console.debug('No edit quality issues found for self-healing');
       return;

@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { H3 } from "../figma_app/994725";
 import { Fr } from "../figma_app/314264";
 import { J } from "../905/298764";
@@ -17,14 +17,14 @@ let u = e => {
 export function $$p3() {
   u("fig_file_save_as");
 }
-let $$_6 = nF((e, t) => {
+let $$_6 = createOptimistThunk((e, t) => {
   u("fig_file_export");
 });
-let $$h2 = nF((e, t) => {
+let $$h2 = createOptimistThunk((e, t) => {
   u("fig_file_image_download");
 });
 let $$m0 = NC("GET_ACTIVITY_LOGS");
-let $$g1 = nF((e, t) => {
+let $$g1 = createOptimistThunk((e, t) => {
   let {
     newQuery,
     teamId,
@@ -85,4 +85,4 @@ export const aK = $$h2;
 export const ce = $$p3;
 export const cv = $$f4;
 export const hZ = $$$$E5;
-export const rg = $$_6; 
+export const rg = $$_6;

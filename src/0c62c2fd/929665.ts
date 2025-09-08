@@ -5,7 +5,7 @@ import { Jn } from "../905/17223";
 import { tM, vd } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { h } from "../905/142086";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { d_ } from "../figma_app/918700";
@@ -18,7 +18,7 @@ export function $$h0(e) {
     t(b({
       dismissed_move_draft_to_project_interstitial_modal: !0
     }));
-    t(Lo());
+    t(popModalStack());
   };
   return jsx(fu, {
     name: "MoveDraftToProjectInterstitialModal",

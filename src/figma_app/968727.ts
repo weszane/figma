@@ -2,16 +2,16 @@ import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { $ } from "../905/383708";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { FU } from "../figma_app/933328";
 import { d1 } from "../905/766303";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { $$ } from "../figma_app/62612";
 import { HK } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { n as _$$n } from "../905/64411";
 let m = "\x3c!--(figcomponent)";
-let $$g1 = nF((e, t) => {
+let $$g1 = createOptimistThunk((e, t) => {
   let r = t.dataTransfer?.getData("text/html");
   if (r) {
     let i = r.indexOf(m) + m.length;
@@ -24,7 +24,7 @@ let $$g1 = nF((e, t) => {
           let i = r.fileKey;
           let a = r.nodeId;
           if (i && a) {
-            let r = Y5.getViewportInfo();
+            let r = fullscreenValue.getViewportInfo();
             let s = new Point(r.x, r.y);
             let o = new Point(t.clientX, t.clientY).subtract(s);
             let l = $$(r, o);
@@ -40,7 +40,7 @@ let $$g1 = nF((e, t) => {
     }
   }
 });
-let $$f0 = nF(async (e, t) => {
+let $$f0 = createOptimistThunk(async (e, t) => {
   let {
     fileKey,
     nodeId,

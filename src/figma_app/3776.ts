@@ -1,4 +1,4 @@
-import { GP2, zbP } from "../figma_app/763686";
+import { HorizontalAlignment, VerticalAlignment } from "../figma_app/763686";
 import { R0 } from "../figma_app/273493";
 import { FontWeight, AppStateTsApi, SceneGraphHelpers } from "../figma_app/13528";
 import { r as _$$r } from "../905/249071";
@@ -91,7 +91,7 @@ export function $$f3(e, t, r, l, d, c = !0) {
   e.renderTemplateFillIcon(new M(t.origin.x, t.origin.y - 8 + .5), c ? AppStateTsApi.getBgFS() : AppStateTsApi.getBgAssistiveHover());
   (function (e, t, r, s, o, l = !1) {
     let d = l ? AppStateTsApi?.getFSCanvasDefaultFill() : AppStateTsApi?.getBgAssistiveHover();
-    d && (e.fillTextWithFontWeight(t, r, FontWeight.MEDIUM, R0(d), GP2.LEFT, zbP.CENTER, 0), e.fillTextWithFontWeight(s, o, FontWeight.NORMAL, R0(d), GP2.LEFT, zbP.CENTER, 0));
+    d && (e.fillTextWithFontWeight(t, r, FontWeight.MEDIUM, R0(d), HorizontalAlignment.LEFT, VerticalAlignment.CENTER, 0), e.fillTextWithFontWeight(s, o, FontWeight.NORMAL, R0(d), HorizontalAlignment.LEFT, VerticalAlignment.CENTER, 0));
   })(e, titleOrigin, l, variantsOrigin, r, c);
   errorIconRect && e.renderTemplateInfoIcon(errorIconRect.origin, AppStateTsApi.getBgAssistiveHover(), AppStateTsApi.getBuzzBgSelected());
 }

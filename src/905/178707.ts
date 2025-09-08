@@ -15,7 +15,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { j6 } from "../figma_app/831799";
 import { Ws } from "../figma_app/314264";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 var d = l;
 let _ = forwardRef(function ({
   className: e,
@@ -37,7 +37,7 @@ let _ = forwardRef(function ({
 });
 let E = new class {
   constructor() {
-    this.OrgSamlConfigRequiredSchemaValidator = vh();
+    this.OrgSamlConfigRequiredSchemaValidator = createNoOpValidator();
   }
   getOrgSamlConfigRequired(e) {
     return this.OrgSamlConfigRequiredSchemaValidator.validate(async ({

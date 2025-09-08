@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { qN, oB } from "../figma_app/273493";
-import { NVY } from "../figma_app/763686";
+import { ColorFormatEnum } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
 import { F } from "../905/989956";
 import { TI } from "../905/713722";
@@ -42,7 +42,7 @@ export let $$h0 = (() => {
         maximumFractionDigits: 2
       });
       switch (e) {
-        case NVY.HEX:
+        case ColorFormatEnum.HEX:
           let s = TI.format(t, r?.hexCSSValue ? {
             withAlpha: 1 !== t.a
           } : r?.alphaInPercent ? {
@@ -50,18 +50,18 @@ export let $$h0 = (() => {
             showDot: !0
           } : void 0);
           return `#${s}`;
-        case NVY.RGB:
+        case ColorFormatEnum.RGB:
           return c.rgba(t, n, r?.eyedropperFormat);
-        case NVY.CSS:
+        case ColorFormatEnum.CSS:
           if (r?.eyedropperFormat) return c.rgba(t, n, r?.eyedropperFormat);
           return F.format(t);
-        case NVY.HSB:
+        case ColorFormatEnum.HSB:
           let d = qN(t);
           return c.hsba(d, n, r?.eyedropperFormat);
-        case NVY.HSL:
+        case ColorFormatEnum.HSL:
           let u = oB(t);
           return c.hsla(u, n, r?.eyedropperFormat);
-        case NVY.UIColor:
+        case ColorFormatEnum.UIColor:
           return c.uicolor(t, n, r?.shortform ?? !1);
       }
     }, [e]);

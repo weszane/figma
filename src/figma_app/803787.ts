@@ -21,7 +21,7 @@ import { o as _$$o, E8, PW } from '../figma_app/633080';
 import { c5, qV, ZA } from '../figma_app/645694';
 import { ad, CG, E2, gA, Hb, HF, i_, LB, lg, Lk, MA, pD, Q_, rC, RQ, w8, zE } from '../figma_app/646357';
 import { sortByMultiple } from '../figma_app/656233';
-import { HG$ } from '../figma_app/763686';
+import { VariableErrorType } from '../figma_app/763686';
 import { im } from '../figma_app/828186';
 import { Xt } from '../figma_app/889655';
 import g from '../vendor/149674';
@@ -208,7 +208,7 @@ let $$ep20 = P8([e => {
       file_key: p,
       file_key_source: _$$P.LOCAL_FILE,
       library_key: _,
-      variableSetError: HG$.NONE,
+      variableSetError: VariableErrorType.NONE,
       hasOnlyBeenReordered: !1
     };
     r.isExtension ? h[t] = {

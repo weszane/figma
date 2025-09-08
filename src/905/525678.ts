@@ -9,7 +9,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { _o, k$, gN, id, Dz, TV, WJ, f4 } from "../figma_app/847915";
 import { A as _$$A } from "../905/482208";
 import { VU } from "../905/625959";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ck } from "../905/87821";
 import { FEditorType } from "../figma_app/53721";
 import { Yh, c1 } from "../figma_app/357047";
@@ -30,7 +30,7 @@ export function $$v0(e, t) {
     if (e.flags.indexOf("!edit") > -1) {
       if (i) return !1;
     } else if (e.flags.indexOf("edit") > -1 && !i) return !1;
-    if (e.flags.indexOf("!dev_handoff") > -1 && t.selectedView.editorType === FEditorType.DevHandoff || e.flags.indexOf("!limited_dev_mode") > -1 && t.isLimitedDevMode || e.flags.indexOf("!slides") > -1 && t.selectedView.editorType === FEditorType.Slides || e.flags.indexOf("!sites") > -1 && t.selectedView.editorType === FEditorType.Sites || e.flags.indexOf("!figmake") > -1 && t.selectedView.editorType === FEditorType.Figmake || e.flags.indexOf("!cooper") > -1 && t.selectedView.editorType === FEditorType.Cooper || e.flags.indexOf("!illustration") > -1 && t.selectedView.editorType === FEditorType.Illustration || e.flags.indexOf("view_restricted") > -1 && Y5.isCopyExportRestricted()) return !1;
+    if (e.flags.indexOf("!dev_handoff") > -1 && t.selectedView.editorType === FEditorType.DevHandoff || e.flags.indexOf("!limited_dev_mode") > -1 && t.isLimitedDevMode || e.flags.indexOf("!slides") > -1 && t.selectedView.editorType === FEditorType.Slides || e.flags.indexOf("!sites") > -1 && t.selectedView.editorType === FEditorType.Sites || e.flags.indexOf("!figmake") > -1 && t.selectedView.editorType === FEditorType.Figmake || e.flags.indexOf("!cooper") > -1 && t.selectedView.editorType === FEditorType.Cooper || e.flags.indexOf("!illustration") > -1 && t.selectedView.editorType === FEditorType.Illustration || e.flags.indexOf("view_restricted") > -1 && fullscreenValue.isCopyExportRestricted()) return !1;
     let n = e.flags.includes("design");
     let r = e.flags.includes("whiteboard");
     let a = e.flags.includes("dev_handoff");

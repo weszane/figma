@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef, forwardRef } from "react";
 import { E as _$$E } from "../905/632989";
 import { r as _$$r } from "../905/571562";
-import { dI } from "../905/871411";
+import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import u from "../vendor/241899";
@@ -12,7 +12,7 @@ import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Yl, j4, W3 } from "../905/232641";
 import { DP } from "../905/640017";
-import { E7, gl, hS } from "../905/216495";
+import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
 import { KH } from "../figma_app/722362";
 import { vE, W as _$$W, UH, Lk } from "../figma_app/156285";
 import { h as _$$h } from "../905/207101";
@@ -25,13 +25,13 @@ import { SAW } from "../figma_app/6204";
 import { yl } from "../figma_app/947348";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { glU, plo } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, DistributionType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A } from "../vendor/90566";
 import { parsePxNumber } from "../figma_app/783094";
 import { P as _$$P } from "../905/347284";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { zk } from "../figma_app/198712";
 import { b as _$$b, bL as _$$bL, mc, q7 } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
@@ -95,7 +95,7 @@ function $(e) {
   let [s, o] = useState(brush.name);
   let l = useCallback(() => {
     stopRenaming();
-    s !== brush.name && "" !== s && (l7.user("rename-brush", () => glU.renameNode(brush.guid, s)), Y5.triggerAction("commit"));
+    s !== brush.name && "" !== s && (permissionScopeHandler.user("rename-brush", () => Fullscreen.renameNode(brush.guid, s)), fullscreenValue.triggerAction("commit"));
   }, [brush.guid, brush.name, s, stopRenaming]);
   let d = v_(e.recordingKey, "keydown", e => {
     if ("Tab" === e.key || "Enter" === e.key) l();else {
@@ -232,13 +232,13 @@ function ee(e) {
   let {
     stretchBrushes,
     scatterBrushes
-  } = useMemo(() => brushes.reduce((e, t) => (t.type === plo.SCATTER ? e.scatterBrushes.push(t) : e.stretchBrushes.push(t), e), {
+  } = useMemo(() => brushes.reduce((e, t) => (t.type === DistributionType.SCATTER ? e.scatterBrushes.push(t) : e.stretchBrushes.push(t), e), {
     stretchBrushes: [],
     scatterBrushes: []
   }), [brushes]);
   let [g, y] = useState(selectedBrush);
   let b = useMemo(() => {
-    let e = (g.type === plo.SCATTER ? scatterBrushes : stretchBrushes).findIndex(e => e.guid === g?.guid);
+    let e = (g.type === DistributionType.SCATTER ? scatterBrushes : stretchBrushes).findIndex(e => e.guid === g?.guid);
     -1 === e && (e = 0);
     return e;
   }, [scatterBrushes, stretchBrushes, g]);
@@ -257,9 +257,9 @@ function ee(e) {
     I(e, zk.YES);
   }, [x, y, I]);
   let w = useCallback(e => {
-    l7.user("delete-brush", () => {
+    permissionScopeHandler.user("delete-brush", () => {
       let t = getSingletonSceneGraph().get(e.guid);
-      t && (x(), t.guid === g.guid ? S(Lk) : t.guid === selectedBrush.guid && I(g, zk.NO), t.removeSelfAndChildren(), Y5.commit());
+      t && (x(), t.guid === g.guid ? S(Lk) : t.guid === selectedBrush.guid && I(g, zk.NO), t.removeSelfAndChildren(), fullscreenValue.commit());
     });
   }, [g, x, I, selectedBrush, S]);
   let [C, T] = useState(null);
@@ -285,8 +285,8 @@ function ee(e) {
     }
   }, e.guid), [x, C, w, E, g, onClose, recordingKey, S]);
   let M = useMemo(() => {
-    let e = (g.type === plo.SCATTER ? stretchBrushes.length + b : b) * Q;
-    return getFeatureFlags().ce_il_scatter ? e + (g.type === plo.STRETCH ? 1 : 2) * J - (0 === b ? J : 0) - 30 : e - 30;
+    let e = (g.type === DistributionType.SCATTER ? stretchBrushes.length + b : b) * Q;
+    return getFeatureFlags().ce_il_scatter ? e + (g.type === DistributionType.STRETCH ? 1 : 2) * J - (0 === b ? J : 0) - 30 : e - 30;
   }, [stretchBrushes, g, b]);
   let [V, G] = useState(null);
   let [z, H] = useState(0);
@@ -349,14 +349,14 @@ export function $$et0(e) {
     positioningProps,
     onboardingKey
   } = e;
-  let c = E7(value);
-  let u = useMemo(() => brushList.filter(e => !e.isSoftDeleted || e.guid === dI(c)), [brushList, c]);
+  let c = normalizeValue(value);
+  let u = useMemo(() => brushList.filter(e => !e.isSoftDeleted || e.guid === sessionLocalIDToString(c)), [brushList, c]);
   let g = useRef(null);
   let f = !function () {
     let e = KH();
     return useMemo(() => 0 === Object.keys(e).length, [e]);
   }();
-  let A = useMemo(() => u.find(e => e.guid === dI(c)) ?? Lk, [u, c]);
+  let A = useMemo(() => u.find(e => e.guid === sessionLocalIDToString(c)) ?? Lk, [u, c]);
   let [I, E] = useState(!1);
   let x = useRef(new Point(0, 0));
   let S = useCallback(() => {
@@ -387,7 +387,7 @@ export function $$et0(e) {
       isDropdownOpen: I,
       className: brushInputClassName,
       recordingKey: e.recordingKey,
-      isMixed: gl(value),
+      isMixed: isInvalidValue(value),
       onboardingKey
     }), I && jsx(ee, {
       brushes: u,
@@ -395,7 +395,7 @@ export function $$et0(e) {
       positioningProps,
       onClose: () => E(!1),
       selectedBrush: A,
-      previewEnabled: f && hS(value),
+      previewEnabled: f && isValidValue(value),
       recordingKey: Pt(e.recordingKey, "brushList")
     })]
   });

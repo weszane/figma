@@ -1,4 +1,4 @@
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { P8 } from "../905/270781";
 import { v5, Nb, cf, Nq } from "../figma_app/314264";
@@ -34,9 +34,9 @@ export function $$l1(e) {
   }
   let t = cf();
   null !== t && (e.loadID = t, e.reconnectId = Nq());
-  e.fileIsIncremental = !!h3O?.isIncrementalSession();
-  e.fileIsValidatingIncremental = !!h3O?.isValidatingIncremental();
-  e.isStagingChanges = !!h3O?.isStagingChanges();
+  e.fileIsIncremental = !!Multiplayer?.isIncrementalSession();
+  e.fileIsValidatingIncremental = !!Multiplayer?.isValidatingIncremental();
+  e.isStagingChanges = !!Multiplayer?.isStagingChanges();
   return e;
 }
 export const c = $$o0;

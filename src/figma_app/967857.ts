@@ -11,7 +11,7 @@ import { $ as _$$$ } from "../figma_app/183557";
 import { r } from "../figma_app/6042";
 import { C as _$$C } from "../905/47358";
 import { J } from "../905/614223";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import y from "classnames";
@@ -109,7 +109,7 @@ export function $$ei4() {
           i = expandSelectedMindmapNode;
           a = "ai-quick-action-generate-ideas";
       }
-      l7.user(a, i);
+      permissionScopeHandler.user(a, i);
     }
   };
 }

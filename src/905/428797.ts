@@ -1,10 +1,10 @@
-import { Z_n, rXF, JTp } from "../figma_app/763686";
+import { VariableDataType, VariableResolvedDataType, OperationType } from "../figma_app/763686";
 import { TI } from "../905/713722";
 import { Ub, _z, Hq, bU } from "../figma_app/632975";
 import { zS, j9, rV, lq } from "../905/914241";
 function o(e, t) {
   return {
-    type: Z_n.EXPRESSION,
+    type: VariableDataType.EXPRESSION,
     resolvedType: zS(e, t),
     value: {
       expressionFunction: e,
@@ -16,7 +16,7 @@ function l(e, t, i) {
   return {
     tokenMatch: t,
     parseOperator: t => o(e, t),
-    expressionTypeMatch: Z_n.EXPRESSION,
+    expressionTypeMatch: VariableDataType.EXPRESSION,
     expressionFunctionMatch: [e],
     stringify: e => `${e.stringifyArgument(0)} ${i} ${e.stringifyArgument(1)}`
   };
@@ -32,29 +32,29 @@ export let $$d0 = [[{
 }, {
   tokenMatch: "TOKEN_NUMBER",
   parseToken: e => ({
-    type: Z_n.FLOAT,
-    resolvedType: rXF.FLOAT,
+    type: VariableDataType.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     value: parseFloat(e.current().stringValue)
   }),
-  expressionTypeMatch: Z_n.FLOAT,
+  expressionTypeMatch: VariableDataType.FLOAT,
   stringify: e => String(parseFloat(e.current().value.toFixed(2)))
 }, {
   tokenMatch: "TOKEN_BOOL",
   parseToken: e => ({
-    type: Z_n.BOOLEAN,
-    resolvedType: rXF.BOOLEAN,
+    type: VariableDataType.BOOLEAN,
+    resolvedType: VariableResolvedDataType.BOOLEAN,
     value: "true" === e.current().stringValue || "True" === e.current().stringValue
   }),
-  expressionTypeMatch: Z_n.BOOLEAN,
+  expressionTypeMatch: VariableDataType.BOOLEAN,
   stringify: e => e.current().value.toString()
 }, {
   tokenMatch: "TOKEN_STRING",
   parseToken: e => ({
-    type: Z_n.STRING,
-    resolvedType: rXF.STRING,
+    type: VariableDataType.STRING,
+    resolvedType: VariableResolvedDataType.STRING,
     value: JSON.parse(e.current().stringValue).toString()
   }),
-  expressionTypeMatch: Z_n.STRING,
+  expressionTypeMatch: VariableDataType.STRING,
   stringify: e => JSON.stringify(e.current().value)
 }, {
   tokenMatch: "TOKEN_VARIABLE_WITH_MODE",
@@ -63,18 +63,18 @@ export let $$d0 = [[{
     let s = t.variableIdToVariable(i);
     if (!s) throw Error("Can't find variable/mode while parsing expression");
     let l = s.resolvedType;
-    return o(JTp.VAR_MODE_LOOKUP, [{
-      type: Z_n.ALIAS,
+    return o(OperationType.VAR_MODE_LOOKUP, [{
+      type: VariableDataType.ALIAS,
       resolvedType: l,
       value: i
     }, {
-      type: Z_n.STRING,
-      resolvedType: rXF.STRING,
+      type: VariableDataType.STRING,
+      resolvedType: VariableResolvedDataType.STRING,
       value: r
     }]);
   },
-  expressionTypeMatch: Z_n.EXPRESSION,
-  expressionFunctionMatch: [JTp.VAR_MODE_LOOKUP],
+  expressionTypeMatch: VariableDataType.EXPRESSION,
+  expressionFunctionMatch: [OperationType.VAR_MODE_LOOKUP],
   stringify: (e, t) => {
     let i = e.current().value.expressionArguments;
     let n = i[0].value;
@@ -94,12 +94,12 @@ export let $$d0 = [[{
     if (!r) throw Error("Can't find variable while parsing expression");
     let a = r.resolvedType;
     return {
-      type: Z_n.ALIAS,
+      type: VariableDataType.ALIAS,
       resolvedType: a,
       value: i
     };
   },
-  expressionTypeMatch: Z_n.ALIAS,
+  expressionTypeMatch: VariableDataType.ALIAS,
   stringify: (e, t) => {
     let i = e.current().value;
     if (t.keepAliasId) return i;
@@ -112,7 +112,7 @@ export let $$d0 = [[{
     let [t, i, r, s] = Hq(e.current().stringValue);
     if (!t || !i || !r || void 0 === s) throw Error("Can't find node field alias while parsing expression");
     return {
-      type: Z_n.NODE_FIELD_ALIAS,
+      type: VariableDataType.NODE_FIELD_ALIAS,
       resolvedType: s,
       value: {
         stablePathToNode: t,
@@ -121,7 +121,7 @@ export let $$d0 = [[{
       }
     };
   },
-  expressionTypeMatch: Z_n.NODE_FIELD_ALIAS,
+  expressionTypeMatch: VariableDataType.NODE_FIELD_ALIAS,
   stringify: (e, t) => {
     let i = e.current().value;
     return t.keepAliasId ? bU(i.stablePathToNode, i.nodeField, i.indexOrKey) : i ? "[" + bU(i.stablePathToNode, i.nodeField, i.indexOrKey) + "]" : "[]";
@@ -129,11 +129,11 @@ export let $$d0 = [[{
 }, {
   tokenMatch: "TOKEN_COLOR",
   parseToken: e => ({
-    type: Z_n.COLOR,
-    resolvedType: rXF.COLOR,
+    type: VariableDataType.COLOR,
+    resolvedType: VariableResolvedDataType.COLOR,
     value: JSON.parse(e.current().stringValue).toString()
   }),
-  expressionTypeMatch: Z_n.COLOR,
+  expressionTypeMatch: VariableDataType.COLOR,
   stringify: e => {
     let t = e.current().value;
     return "{" + TI.format(t) + "}";
@@ -153,7 +153,7 @@ export let $$d0 = [[{
     }
     return o(j9(i), t);
   },
-  expressionTypeMatch: Z_n.EXPRESSION,
+  expressionTypeMatch: VariableDataType.EXPRESSION,
   expressionFunctionMatch: rV(),
   stringify: e => {
     let t = e.current();
@@ -162,28 +162,28 @@ export let $$d0 = [[{
 }], [{
   tokenMatch: "TOKEN_NOT",
   parseOperator: e => ({
-    type: Z_n.EXPRESSION,
-    resolvedType: rXF.BOOLEAN,
+    type: VariableDataType.EXPRESSION,
+    resolvedType: VariableResolvedDataType.BOOLEAN,
     value: {
-      expressionFunction: JTp.NOT,
+      expressionFunction: OperationType.NOT,
       expressionArguments: e
     }
   }),
-  expressionTypeMatch: Z_n.EXPRESSION,
-  expressionFunctionMatch: [JTp.NOT],
+  expressionTypeMatch: VariableDataType.EXPRESSION,
+  expressionFunctionMatch: [OperationType.NOT],
   stringify: e => `not ${e.stringifyArgument(0)} `
 }, {
   tokenMatch: "TOKEN_SUBTRACTION",
   parseOperator: e => ({
-    type: Z_n.EXPRESSION,
-    resolvedType: rXF.FLOAT,
+    type: VariableDataType.EXPRESSION,
+    resolvedType: VariableResolvedDataType.FLOAT,
     value: {
-      expressionFunction: JTp.NEGATE,
+      expressionFunction: OperationType.NEGATE,
       expressionArguments: e
     }
   }),
-  expressionTypeMatch: Z_n.EXPRESSION,
-  expressionFunctionMatch: [JTp.NEGATE],
+  expressionTypeMatch: VariableDataType.EXPRESSION,
+  expressionFunctionMatch: [OperationType.NEGATE],
   stringify: e => `- ${e.stringifyArgument(0)} `
-}], [l(JTp.MULTIPLY, "TOKEN_MULTIPLICATION", "*"), l(JTp.DIVIDE, "TOKEN_DIVISION", "/")], [l(JTp.ADDITION, "TOKEN_ADDITION", "+"), l(JTp.SUBTRACTION, "TOKEN_SUBTRACTION", "-")], [l(JTp.EQUALS, "TOKEN_EQUALS", "=="), l(JTp.NOT_EQUAL, "TOKEN_NOT_EQUAL", "!="), l(JTp.LESS_THAN_OR_EQUAL, "TOKEN_LESS_THAN_OR_EQUAL", "<="), l(JTp.LESS_THAN, "TOKEN_LESS_THAN", "<"), l(JTp.GREATER_THAN_OR_EQUAL, "TOKEN_GREATER_THAN_OR_EQUAL", ">="), l(JTp.GREATER_THAN, "TOKEN_GREATER_THAN", ">")], [l(JTp.AND, "TOKEN_AND", "and")], [l(JTp.OR, "TOKEN_OR", "or")]];
+}], [l(OperationType.MULTIPLY, "TOKEN_MULTIPLICATION", "*"), l(OperationType.DIVIDE, "TOKEN_DIVISION", "/")], [l(OperationType.ADDITION, "TOKEN_ADDITION", "+"), l(OperationType.SUBTRACTION, "TOKEN_SUBTRACTION", "-")], [l(OperationType.EQUALS, "TOKEN_EQUALS", "=="), l(OperationType.NOT_EQUAL, "TOKEN_NOT_EQUAL", "!="), l(OperationType.LESS_THAN_OR_EQUAL, "TOKEN_LESS_THAN_OR_EQUAL", "<="), l(OperationType.LESS_THAN, "TOKEN_LESS_THAN", "<"), l(OperationType.GREATER_THAN_OR_EQUAL, "TOKEN_GREATER_THAN_OR_EQUAL", ">="), l(OperationType.GREATER_THAN, "TOKEN_GREATER_THAN", ">")], [l(OperationType.AND, "TOKEN_AND", "and")], [l(OperationType.OR, "TOKEN_OR", "or")]];
 export const b = $$d0;

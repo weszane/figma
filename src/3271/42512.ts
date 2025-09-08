@@ -69,7 +69,7 @@ import { XV, Cs } from "../figma_app/684168";
 import { T as _$$T } from "../905/858738";
 import { E as _$$E } from "../469e6e40/167556";
 import { P as _$$P2 } from "../469e6e40/160324";
-import { uF, og, Th, Qt, i8 } from "../figma_app/300692";
+import { getPluginVersion, canAssociatedUserPurchaseResource, isValidForSelectedViewAndWhitelist, filterResourcesByOrgId, filterPublishedResources } from "../figma_app/300692";
 import { Ro } from "../figma_app/805373";
 import { ab, ox } from "../figma_app/870683";
 import { f as _$$f } from "../figma_app/58113";
@@ -103,7 +103,7 @@ import { tS as _$$tS } from "../figma_app/516028";
 import { FUserRoleType } from "../figma_app/191312";
 import { mC } from "../905/18797";
 import { X$, H3, T5 } from "../figma_app/465071";
-import { n_, Gb } from "../figma_app/155287";
+import { getWidgetAllowListKey, getPluginAllowListKey } from "../figma_app/155287";
 import { A as _$$A8 } from "../svg/987294";
 import { H as _$$H } from "../2b17fec9/68162";
 import { vtl } from "../figma_app/822011";
@@ -420,7 +420,7 @@ function eG(e) {
     dragState,
     onInsertableResourcePointerDown
   } = _$$P2({
-    resource: uF(resource),
+    resource: getPluginVersion(resource),
     clickToInsert_DEPRECATED: !0,
     afterSuccessfulInsert: b,
     triggeredFrom: "universal-insert"
@@ -450,9 +450,9 @@ function eG(e) {
   }, [l]);
   if (!resource) return null;
   resource.community_resource_payment = g;
-  let W = uF(resource);
+  let W = getPluginVersion(resource);
   let Q = Zk(w, x, resource);
-  let G = og({
+  let G = canAssociatedUserPurchaseResource({
     canAssociatedUserPurchaseThisResource: Q,
     resource
   });
@@ -544,7 +544,7 @@ function eG(e) {
                   resourceType: r ? vt.PLUGIN : vt.WIDGET,
                   parentView: nN.DETAIL
                 })
-              }), o && Th(W, E, P) ? jsxs(Fragment, {
+              }), o && isValidForSelectedViewAndWhitelist(W, E, P) ? jsxs(Fragment, {
                 children: [jsx("div", {
                   className: "detail_view--dotsContainer--JdwCt",
                   children: jsx(_$$K, {
@@ -902,7 +902,7 @@ function tM(e) {
   let x = c ? m : _;
   let p = x.length > 0;
   let g = c ? o : l;
-  let h = c ? n_ : Gb;
+  let h = c ? getWidgetAllowListKey : getPluginAllowListKey;
   let v = _$$tS();
   let f = mC(h(currentOrgId, v));
   let j = ll();
@@ -914,7 +914,7 @@ function tM(e) {
   let E = I.orgWidgets;
   let P = I.orgPlugins;
   let k = useSelector(e => e.orgUsersByOrgId[currentOrgId][e.user.id]?.permission === FUserRoleType.GUEST);
-  let R = selectWithShallowEqual(e => k ? {} : Qt(i8(Object.values(e.publishedPlugins)), currentOrgId));
+  let R = selectWithShallowEqual(e => k ? {} : filterResourcesByOrgId(filterPublishedResources(Object.values(e.publishedPlugins)), currentOrgId));
   let M = useMemo(() => {
     let e = Object.values(P).filter(e => !R[e.plugin_id]);
     l && (e = e.filter(e => j[e.plugin_id]));
@@ -1396,7 +1396,7 @@ function st(e) {
   let en = U6();
   let ei = cW();
   let el = ZT();
-  let eo = k9(() => Object.keys(r ? en : ea).map(e => uF((r ? el : ei)[e])), [ea, el, ei, en, r]);
+  let eo = k9(() => Object.keys(r ? en : ea).map(e => getPluginVersion((r ? el : ei)[e])), [ea, el, ei, en, r]);
   useEffect(() => {
     t6.set(Object.values(r ? ee : J));
   }, [J, ee, r]);

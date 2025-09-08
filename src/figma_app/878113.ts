@@ -2,8 +2,8 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { xb } from "../figma_app/651866";
 import { G1 } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, zvt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, TextModificationAction } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
@@ -17,7 +17,7 @@ import { on, Gc } from "../figma_app/456871";
 import { ds } from "../figma_app/314264";
 import { c6 } from "../figma_app/432652";
 import { Ay, Gx } from "../figma_app/948389";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Mo, i2 } from "../905/913055";
 import { Zr } from "../figma_app/462456";
 import { JT } from "../figma_app/632248";
@@ -261,7 +261,7 @@ export async function $$M0({
       let s = a.selectionRange?.start ?? 0;
       let c = a.selectionRange?.end ?? a.node.characters.length;
       let u = a.node;
-      _.has(a) || (l7.ai(editScopeLabel, () => {
+      _.has(a) || (permissionScopeHandler.ai(editScopeLabel, () => {
         for (let e of Mo(u, "text-data")) {
           c > e.characters.length && (c = e.characters.length);
           e.spliceCharacters(s, c, "", "BEFORE");
@@ -272,7 +272,7 @@ export async function $$M0({
         }
       }), _.set(a, s));
       let h = _.get(a);
-      l7.ai(editScopeLabel, () => {
+      permissionScopeHandler.ai(editScopeLabel, () => {
         if (delta && u) {
           var r;
           if (A && (r = a, u.characters === r.effectiveText && u.characters.length !== h)) {
@@ -289,11 +289,11 @@ export async function $$M0({
           _.set(a, h + delta.length);
           X.numLayersAdjusted = _.size;
           a.selectionRange ? getSingletonSceneGraph().getCurrentPage()?.setSelectedTextRange(a.node.guid, a.selectionRange.start, h + delta.length) : 1 === targets.length && 1 === selection.length && $$U8(u.guid);
-          A && (g ? (glU?.requestNextCommitMergeWithPrevious(zvt.AI_TEXT_MANIPULATION_START), g = !1) : glU?.requestNextCommitMergeWithPrevious(zvt.AI_TEXT_MANIPULATION_DELTA), e = Y5.commit());
+          A && (g ? (Fullscreen?.requestNextCommitMergeWithPrevious(TextModificationAction.AI_TEXT_MANIPULATION_START), g = !1) : Fullscreen?.requestNextCommitMergeWithPrevious(TextModificationAction.AI_TEXT_MANIPULATION_DELTA), e = fullscreenValue.commit());
         }
       });
     }
-    A || (e = Y5.commit());
+    A || (e = fullscreenValue.commit());
     let N = Z.filter(e => e.state === z8.FAILED);
     if (N.length > 0 && N[0].state === z8.FAILED) throw q(N[0].error);
     if (X.timeToCompletion = p.getElapsedTime(), ds("ai_text_tools_complete", K, W, X), onSuccess?.(parameters), e) {
@@ -348,7 +348,7 @@ export function $$F1({
   let [g, f] = useAtomValueAndSetter(F3);
   let [y, b] = useAtomValueAndSetter(DZ);
   function T() {
-    l7.ai(c, () => {
+    permissionScopeHandler.ai(c, () => {
       if (g) {
         let e = getSingletonSceneGraph().getCurrentPage();
         for (let {

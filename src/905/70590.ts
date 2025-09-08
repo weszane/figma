@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { Z_n } from "../figma_app/763686";
+import { VariableDataType } from "../figma_app/763686";
 import { h } from "../905/65944";
 export function $$s0({
   disabledVariableIds: e,
@@ -12,7 +12,7 @@ export function $$s0({
   onVariableSelected: c,
   onClose: u
 }) {
-  let p = i.type === Z_n.COLOR ? i.value : {
+  let p = i.type === VariableDataType.COLOR ? i.value : {
     r: 1,
     g: 1,
     b: 1,

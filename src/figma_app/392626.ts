@@ -18,7 +18,7 @@ import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { xr, _J } from "../figma_app/314264";
 import { N as _$$N } from "../905/98916";
@@ -27,7 +27,7 @@ import { mg, nX } from "../figma_app/336853";
 import { HE, Cl, Eq } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { $ as _$$$ } from "../905/834575";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { aI } from "../figma_app/552876";
 import { oz } from "../905/561485";
 import { C2, Cr, p_, Aw, cx, Xu, QL, T as _$$T, Pv, Gu, Kk, Qu, iU } from "../905/566000";
@@ -113,7 +113,7 @@ function B(e) {
   });
   let eb = ep ? renderI18nText("asset_transfers.destination_type.team") : renderI18nText("asset_transfers.destination_type.organization");
   let eT = () => {
-    n(Lo());
+    n(popModalStack());
   };
   useEffect(() => {
     en && (em ? xr("Project transfer error", em, eh, o.getState(), {
@@ -392,7 +392,7 @@ function B(e) {
   });
 }
 export function $$G0() {
-  return n ??= Ju(B, "AssetTransferRequestModal");
+  return n ??= registerModal(B, "AssetTransferRequestModal");
 }
 export const Lg = $$G0;
 export const Lq = $$j1;

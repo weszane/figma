@@ -13,7 +13,7 @@ import { s as _$$s } from "../905/539471";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { memo, useState, useEffect, useMemo } from "react";
 import { W as _$$W } from "../figma_app/304955";
 import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
@@ -34,14 +34,14 @@ import { V as _$$V } from "../905/291719";
 import { g as _$$g2 } from "../905/757007";
 import { U as _$$U } from "../905/275247";
 import { e as _$$e2 } from "../905/483726";
-import { aZ, Lo } from "../905/156213";
+import { popPrevModal, popModalStack } from "../905/156213";
 import { R as _$$R } from "../figma_app/184628";
 import { createPortal } from "../vendor/944059";
 import { gR, bL as _$$bL2 } from "../figma_app/861123";
 import { B as _$$B } from "../905/950875";
 import { f as _$$f } from "../905/555062";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 let k = memo(function (e) {
   return _$$O() ? jsx("svg", {
     width: "24",
@@ -254,8 +254,8 @@ function K({
       }), jsx($n, {
         variant: "secondary",
         onClick: () => {
-          i(aZ());
-          i(Lo());
+          i(popPrevModal());
+          i(popModalStack());
         },
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.go_to_canvas")
       })]
@@ -637,9 +637,9 @@ or initiating processes. They communicate interactivity and should have clear, a
 `
 };
 function ed() {
-  l7.user("create-new-code-file", () => {
+  permissionScopeHandler.user("create-new-code-file", () => {
     let e = atomStoreManager.get(nM);
-    _$$W(e, NJ, R6) || glU?.createNewCodeFile(R6, es["1"] || "", null, !1);
+    _$$W(e, NJ, R6) || Fullscreen?.createNewCodeFile(R6, es["1"] || "", null, !1);
   });
   let [e, t] = useState(jsx("span", {
     ...Ay.props(ec.rightPanelHeaderText),
@@ -725,7 +725,7 @@ let eu = {
     $$css: !0
   }
 };
-let $$ep0 = Ju(function (e) {
+let $$ep0 = registerModal(function (e) {
   let t = hS({
     ...e
   });

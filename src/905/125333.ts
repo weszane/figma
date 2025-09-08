@@ -1,4 +1,4 @@
-import { glU, NLJ, qq } from "../figma_app/763686";
+import { Fullscreen, DesignGraphElements, ShapeSidebarMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { hR, hW, x6 } from "../905/508457";
 import { rA } from "../figma_app/463678";
@@ -43,7 +43,7 @@ let $$A2 = x6({
   strokeWeight: qB,
   strokeOpacity: zQ
 }, e => {
-  glU?.updateDrawingStyle(e, NLJ.VECTOR_PENCIL);
+  Fullscreen?.updateDrawingStyle(e, DesignGraphElements.VECTOR_PENCIL);
 }, {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
@@ -52,7 +52,7 @@ let $$y7 = x6({
   strokeWeight: qB,
   strokeOpacity: zQ
 }, e => {
-  glU?.updateDrawingStyle(e, NLJ.BRUSH);
+  Fullscreen?.updateDrawingStyle(e, DesignGraphElements.BRUSH);
 }, {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
@@ -61,39 +61,39 @@ let $$b10 = x6({
   strokeWeight: qB,
   strokeOpacity: zQ
 }, e => {
-  glU?.updateDrawingStyle(e, NLJ.VECTOR_PEN);
+  Fullscreen?.updateDrawingStyle(e, DesignGraphElements.VECTOR_PEN);
 }, {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
 let $$v4 = x6({
   paints: Dq,
   strokeWeight: g5
-}, e => glU?.updateHighlighterStyle(e), {
+}, e => Fullscreen?.updateHighlighterStyle(e), {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$I16 = x6(E$(), e => glU?.updateToolStyles({
+let $$I16 = x6(E$(), e => Fullscreen?.updateToolStyles({
   stickyColor: e
 }), {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$E11 = x6(n6, e => glU?.updateToolStyles({
+let $$E11 = x6(n6, e => Fullscreen?.updateToolStyles({
   shapeColor: e
 }), {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
 let $$x14 = x6(ns, e => {
-  getFeatureFlags().figjam_track_stroke_color && glU?.updateToolStyles({
+  getFeatureFlags().figjam_track_stroke_color && Fullscreen?.updateToolStyles({
     strokeColor: e
   });
 }, {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$S6 = x6(T7, e => glU?.updateToolStyles({
+let $$S6 = x6(T7, e => Fullscreen?.updateToolStyles({
   shapeStrokeStyleType: e
 }), {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$w17 = x6(LX, e => glU?.updateToolStyles({
+let $$w17 = x6(LX, e => Fullscreen?.updateToolStyles({
   connectorToolColor: e
 }), {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
@@ -102,14 +102,14 @@ let $$C5 = x6({
   shapeWithTextType: "ELLIPSE",
   connectorToolLineStyle: "ELBOWED",
   connectorToolEndCap: "ARROW_LINES"
-}, e => glU?.updateToolStyles(e), {
+}, e => Fullscreen?.updateToolStyles(e), {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
 let $$T18 = hR(null, {
   changeFileBehavior: hW.SHARE_SAME_VALUE_FOR_ALL_FILES
 });
-let $$k8 = x6(qq.NONE, e => {
-  glU?.setCurrentToolSetSource(e);
+let $$k8 = x6(ShapeSidebarMode.NONE, e => {
+  Fullscreen?.setCurrentToolSetSource(e);
 }, {
   changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
 });

@@ -1,8 +1,8 @@
 import { z } from "../905/239603";
-import { YV } from "../figma_app/181241";
+import { createMetaValidator } from "../figma_app/181241";
 export let $$a0 = new class {
   constructor() {
-    this.UploadThumbnailsSchemaValidator = YV("UploadThumbnailsSchemaValidator", z.object({
+    this.UploadThumbnailsSchemaValidator = createMetaValidator("UploadThumbnailsSchemaValidator", z.object({
       presigned_posts: z.array(z.object({
         url: z.string(),
         fields: z.record(z.string())

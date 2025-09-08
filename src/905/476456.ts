@@ -1,4 +1,4 @@
-import { eVK } from "../figma_app/763686";
+import { AnchorPosition } from "../figma_app/763686";
 let r = ["t", "u", "b", "d"];
 let a = ["r", "l"];
 let s = /([rltubdc])([rltubdc]?)\s*$/i;
@@ -13,30 +13,30 @@ let p = (e, t, i) => {
     case "d":
       switch (t) {
         case "l":
-          return eVK.BOTTOM_LEFT;
+          return AnchorPosition.BOTTOM_LEFT;
         case "r":
-          return eVK.BOTTOM_RIGHT;
+          return AnchorPosition.BOTTOM_RIGHT;
         case null:
-          return eVK.BOTTOM_CENTER;
+          return AnchorPosition.BOTTOM_CENTER;
       }
     case "t":
     case "u":
       switch (t) {
         case "l":
-          return eVK.TOP_LEFT;
+          return AnchorPosition.TOP_LEFT;
         case "r":
-          return eVK.TOP_RIGHT;
+          return AnchorPosition.TOP_RIGHT;
         case null:
-          return eVK.TOP_CENTER;
+          return AnchorPosition.TOP_CENTER;
       }
     case null:
       switch (t) {
         case "l":
-          return eVK.MIDDLE_LEFT;
+          return AnchorPosition.MIDDLE_LEFT;
         case "r":
-          return eVK.MIDDLE_RIGHT;
+          return AnchorPosition.MIDDLE_RIGHT;
         case null:
-          if (i) return eVK.MIDDLE_CENTER;
+          if (i) return AnchorPosition.MIDDLE_CENTER;
       }
   }
   return null;

@@ -1,18 +1,18 @@
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
-import { rcl, NLJ } from "../figma_app/763686";
+import { Command, DesignGraphElements } from "../figma_app/763686";
 import { EJ } from "../figma_app/930338";
 import { qB } from "../905/862321";
 import { a as _$$a } from "../905/105502";
 import { Ob } from "../905/191560";
 import { getI18nString } from "../905/303541";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { k } from "../figma_app/564183";
-export let $$f0 = qK(_$$a, e => {
+export let $$f0 = registerLegacyModal(_$$a, e => {
   let t = e.modalShown;
   let i = e.openFile;
   let r = t.data && t.data.headerText;
@@ -44,7 +44,7 @@ function _({
   let b = k();
   let v = hS({
     open: !0,
-    onClose: () => f(Lo()),
+    onClose: () => f(popModalStack()),
     preventUserClose: _
   });
   return jsx(bL, {
@@ -62,21 +62,21 @@ function _({
             modal: !0,
             header: (() => {
               if (y && b) switch (y) {
-                case rcl.SET_TOOL_DEFAULT:
-                case NLJ.FRAME:
-                case NLJ.SHAPE_RECTANGLE:
-                case NLJ.VECTOR_PEN:
-                case NLJ.TYPE:
+                case Command.SET_TOOL_DEFAULT:
+                case DesignGraphElements.FRAME:
+                case DesignGraphElements.SHAPE_RECTANGLE:
+                case DesignGraphElements.VECTOR_PEN:
+                case DesignGraphElements.TYPE:
                   return getI18nString("auth.sign_up_to_edit");
                 case "SELECT_COMMENT_SIDEBAR":
                 case "COMMENT_PIN_CLICK":
-                case rcl.SET_TOOL_COMMENTS:
-                case NLJ.COMMENTS:
+                case Command.SET_TOOL_COMMENTS:
+                case DesignGraphElements.COMMENTS:
                   return getI18nString("auth.sign_up_to_comment");
-                case rcl.FOLLOW_PRESENTER:
+                case Command.FOLLOW_PRESENTER:
                   return getI18nString("auth.sign_up_to_use_multiplayer_tools");
-                case rcl.ENTER_INSPECT_MODE:
-                case rcl.SET_TOOL_DEFAULT_DEV_HANDOFF:
+                case Command.ENTER_INSPECT_MODE:
+                case Command.SET_TOOL_DEFAULT_DEV_HANDOFF:
                   return getI18nString("auth.sign_up_to_use_inspection_tools");
                 default:
                   return getI18nString("auth.sign_up_for_figma");

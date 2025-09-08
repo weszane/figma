@@ -9,8 +9,8 @@ import { A as _$$A } from "../905/891805";
 import { e as _$$e } from "../905/149844";
 import { k as _$$k } from "../905/888808";
 import { Ad, Vm } from "../figma_app/273493";
-import { nc } from "../905/189185";
-import { aI } from "../905/871411";
+import { scopeAwareFunction } from "../905/189185";
+import { areSessionLocalIDsEqual } from "../905/871411";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import E from "classnames";
@@ -27,7 +27,7 @@ import { XE } from "../figma_app/91703";
 import { kX } from "../figma_app/8833";
 import { F as _$$F } from "../905/989956";
 import { z5 } from "../905/713722";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
@@ -163,9 +163,9 @@ function K({
   let [f, E] = useAtomValueAndSetter(E_);
   let y = !!f;
   let T = k1(d);
-  let S = nc.user("slides-add-theme-color", () => {
+  let S = scopeAwareFunction.user("slides-add-theme-color", () => {
     let r = T(function (e, t) {
-      if (hS(e) && e.color) return e.color;
+      if (isValidValue(e) && e.color) return e.color;
       let r = UE;
       if (t.length > 0) {
         let e = t[t.length - 1].paint.color;
@@ -229,7 +229,7 @@ function K({
         variableName: i
       }) => {
         let a = t.colorVar?.value?.alias?.guid;
-        let s = y ? !!f && r === f.varId : aI(a, e?.colorVar?.value?.alias?.guid);
+        let s = y ? !!f && r === f.varId : areSessionLocalIDsEqual(a, e?.colorVar?.value?.alias?.guid);
         let l = jsx(_$$A, {});
         return t.color && a ? jsx($$q2, {
           backgroundString: _$$F.format({

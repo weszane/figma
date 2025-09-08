@@ -9,10 +9,10 @@ import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { AC } from "../figma_app/777551";
 import { Qi } from "../figma_app/559491";
-import { to } from "../905/156213";
-import { uF, Pl, ou } from "../figma_app/300692";
+import { showModalHandler } from "../905/156213";
+import { getPluginVersion, getMissingEditorTypeError, generatePluginId } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
-import { ho, FW } from "../figma_app/155287";
+import { ManifestErrorType, ManifestEditorType } from "../figma_app/155287";
 import { jl } from "../905/544659";
 import { A as _$$A } from "../905/552947";
 import { A as _$$A2 } from "../905/794518";
@@ -58,7 +58,7 @@ export function $$N1({
       localPlugin: t
     })]
   });
-  let h = t?.manifest ?? uF(a).manifest;
+  let h = t?.manifest ?? getPluginVersion(a).manifest;
   return jsx(Fragment, {
     children: jsxs(Fragment, {
       children: [jsxs(_$$A2, {
@@ -127,7 +127,7 @@ function O() {
   });
 }
 export function $$D3(e) {
-  return e.type === ho.VALIDATE && e.text === Pl();
+  return e.type === ManifestErrorType.VALIDATE && e.text === getMissingEditorTypeError();
 }
 function L({
   localPlugin: e
@@ -139,7 +139,7 @@ function L({
     orientation: "horizontal",
     action: {
       onClick: () => {
-        t(to({
+        t(showModalHandler({
           type: K,
           data: {
             localPlugin: e
@@ -163,7 +163,7 @@ function F({
   let l = useDispatch();
   let c = async () => {
     if (!o) return;
-    let e = await ou(i);
+    let e = await generatePluginId(i);
     l(Qi({
       publishedPlugins: [e],
       src: "generatePluginId"
@@ -204,7 +204,7 @@ function M({
   localPlugin: e,
   publishedPlugin: t
 }) {
-  let i = e?.manifest?.editorType ?? uF(t).manifest.editorType;
+  let i = e?.manifest?.editorType ?? getPluginVersion(t).manifest.editorType;
   return e && e.error && $$D3(e.error) || null == i ? jsx(_$$A, {
     suggestion: getI18nString("community.publishing.editor_type_figma"),
     instruction: getI18nString("community.publishing.please_add_this_to_your_manifest", {
@@ -226,28 +226,28 @@ function j({
     children: e.map(e => {
       let t = function (e) {
         switch (e) {
-          case FW.FIGMA:
+          case ManifestEditorType.FIGMA:
             return {
               svgSrc: _$$A5,
               label: getI18nString("community.publishing.for_design")
             };
-          case FW.FIGJAM:
+          case ManifestEditorType.FIGJAM:
             return {
               svgSrc: _$$A4,
               label: getI18nString("community.publishing.for_figjam")
             };
-          case FW.DEV:
-          case FW.INSPECT:
+          case ManifestEditorType.DEV:
+          case ManifestEditorType.INSPECT:
             return {
               svgSrc: _$$A3,
               label: getI18nString("community.publishing.for_dev_mode")
             };
-          case FW.SLIDES:
+          case ManifestEditorType.SLIDES:
             return {
               svgSrc: _$$A8,
               label: getI18nString("community.publishing.for_slides")
             };
-          case FW.BUZZ:
+          case ManifestEditorType.BUZZ:
             return {
               svgSrc: _$$A7,
               label: getI18nString("community.publishing.for_buzz")

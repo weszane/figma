@@ -3,14 +3,14 @@ import { useState, useCallback, useRef, useLayoutEffect, useMemo, useEffect, use
 import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { U as _$$U } from "../905/708285";
 import { uN } from "../figma_app/338442";
-import { glU, J0O, Ez5, rXF, Z_n } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, ComponentPropType, AppStateTsApi, VariableResolvedDataType, VariableDataType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { C as _$$C } from "../figma_app/974443";
@@ -26,7 +26,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP, Oe } from "../figma_app/933328";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { wr, Dh, i as _$$i } from "../figma_app/741237";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Um } from "../905/848862";
@@ -94,7 +94,7 @@ export function $$eE1({
     autoFocus: !0
   });
   let R = useCallback(() => {
-    d && d !== e.name && (e.kind === uN.TYPED ? l7.user("edit-prop-def-name", () => glU.editComponentPropDefName(e.explicitDefID, d)) : l7.user("edit-variant-prop-name", () => q1(e.name, d, r, s)));
+    d && d !== e.name && (e.kind === uN.TYPED ? permissionScopeHandler.user("edit-prop-def-name", () => Fullscreen.editComponentPropDefName(e.explicitDefID, d)) : permissionScopeHandler.user("edit-variant-prop-name", () => q1(e.name, d, r, s)));
   }, [e, d, r, s]);
   let L = useCallback(() => {
     t && l(u1({
@@ -113,7 +113,7 @@ export function $$eE1({
     c(null);
   }, [R]);
   let D = useCallback(t => {
-    Pf(e) && e.description !== t && l7.user("edit-prop-def-description", () => glU?.editComponentPropDefDescription(e.explicitDefID, t));
+    Pf(e) && e.description !== t && permissionScopeHandler.user("edit-prop-def-description", () => Fullscreen?.editComponentPropDefDescription(e.explicitDefID, t));
   }, [e]);
   let {
     preferredValues,
@@ -131,7 +131,7 @@ export function $$eE1({
   let V = useCallback(e => {
     e.stopPropagation();
   }, []);
-  return (getFeatureFlags().ds_variable_props_number_def || e.type !== J0O.NUMBER) && e.type !== J0O.IMAGE && (getFeatureFlags().dse_slots || e.type !== J0O.SLOT) ? jsxs(Ao, {
+  return (getFeatureFlags().ds_variable_props_number_def || e.type !== ComponentPropType.NUMBER) && e.type !== ComponentPropType.IMAGE && (getFeatureFlags().dse_slots || e.type !== ComponentPropType.SLOT) ? jsxs(Ao, {
     title: getI18nString("design_systems.component_properties.edit_component_property", {
       propType: throwTypeError(e.type).toLocaleLowerCase()
     }),
@@ -175,7 +175,7 @@ export function $$eE1({
       }), jsx(_$$u2, {
         description: e.description ?? "",
         onSave: D,
-        placeholder: e.type === J0O.SLOT ? getI18nString("design_systems.component_properties.slot_create_modal.description_placeholder") : getI18nString("design_systems.component_properties.description_placeholder"),
+        placeholder: e.type === ComponentPropType.SLOT ? getI18nString("design_systems.component_properties.slot_create_modal.description_placeholder") : getI18nString("design_systems.component_properties.description_placeholder"),
         namespace: "edit-component-prop-description"
       })]
     }), jsx(eN, {
@@ -213,8 +213,8 @@ function ey({
     let n = null !== _ ? e.values[_] : null;
     y && g(null);
     let i = r?.nodeId;
-    i && t.length === e.values.length && (l7.user("reorder-variant-prop-values", () => {
-      for (let r = 0; r < t.length; r++) t[r] !== e.values[r] && glU.reorderStateGroupPropertyValue(i, e.name, t[r], r);
+    i && t.length === e.values.length && (permissionScopeHandler.user("reorder-variant-prop-values", () => {
+      for (let r = 0; r < t.length; r++) t[r] !== e.values[r] && Fullscreen.reorderStateGroupPropertyValue(i, e.name, t[r], r);
     }), y && (f.current = t.indexOf(n)));
   }, [_, e.values, e.name, y, r?.nodeId]);
   let S = useMemo(() => {
@@ -231,10 +231,10 @@ function ey({
   let v = useCallback(e => {
     wr();
     Dh(S[e] ?? []);
-    Ez5.canvasViewState().temporarilyHoveredNodes.set([]);
+    AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   }, [S]);
   let x = useCallback((r, n) => {
-    t && s && "" !== (n = QV(n)) && (l7.user("rename-variant-prop-value", () => {
+    t && s && "" !== (n = QV(n)) && (permissionScopeHandler.user("rename-variant-prop-value", () => {
       t.forEach(t => {
         let i = t.stateInfo.propertyValues;
         i && i[e.name] === r && _$$i(t.symbol.node_id, zh({
@@ -242,7 +242,7 @@ function ey({
           [e.name]: n
         }, s));
       });
-    }), Y5.commit(), g(null));
+    }), fullscreenValue.commit(), g(null));
   }, [t, e, s]);
   let C = function ({
     currentValues: e,
@@ -264,7 +264,7 @@ function ey({
       let r = "ArrowUp" === t.key ? -1 : 1;
       if (null === _) return;
       let n = [...e.values];
-      let i = qE(0, _ + r, n.length - 1);
+      let i = clamp(0, _ + r, n.length - 1);
       !function (e, t, r) {
         let n = e[t];
         e[t] = e[r];
@@ -312,11 +312,11 @@ function ey({
             let f = _ === r;
             function E() {
               p(r);
-              Ez5.canvasViewState().temporarilyHoveredNodes.set(d);
+              AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set(d);
             }
             function b() {
               p(null);
-              Ez5.canvasViewState().temporarilyHoveredNodes.set([]);
+              AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
             }
             return y ? jsx(lt, {
               cellHtmlAttributes: {
@@ -457,12 +457,12 @@ function eI({
 }) {
   let o = useDispatch();
   let l = useCallback(t => {
-    e.type === J0O.BOOL && t !== dl(J0O.BOOL, e.defaultValue) && l7.user("edit-prop-default-value", () => glU.editBoolComponentPropDefDefaultValue(e.explicitDefID, t));
+    e.type === ComponentPropType.BOOL && t !== dl(ComponentPropType.BOOL, e.defaultValue) && permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editBoolComponentPropDefDefaultValue(e.explicitDefID, t));
   }, [e]);
   return jsx("div", {
     className: eu,
     children: r ? jsx(gJ, {
-      variableValue: s ?? WI(rXF.BOOLEAN, dl(J0O.BOOL, e.defaultValue)),
+      variableValue: s ?? WI(VariableResolvedDataType.BOOLEAN, dl(ComponentPropType.BOOL, e.defaultValue)),
       onChange: e => {
         l(e.value);
       },
@@ -471,7 +471,7 @@ function eI({
     }) : jsxs(l6, {
       ariaLabel: getI18nString("design_systems.component_properties.default_value"),
       id: "edit-component-prop-default-value-select",
-      property: dl(J0O.BOOL, e.defaultValue),
+      property: dl(ComponentPropType.BOOL, e.defaultValue),
       onChange: l,
       dispatch: o,
       formatter: X9,
@@ -490,10 +490,10 @@ function eS({
   componentPropDef: e,
   shouldShowVariableBinding: t
 }) {
-  let [r, a] = useState(e.type === J0O.TEXT ? e.defaultValue : "");
+  let [r, a] = useState(e.type === ComponentPropType.TEXT ? e.defaultValue : "");
   let s = useCallback(() => {
-    e.type === J0O.TEXT && r && r !== e.defaultValue && l7.user("edit-prop-default-value", () => {
-      glU.editTextComponentPropDefDefaultValue(e.explicitDefID, r);
+    e.type === ComponentPropType.TEXT && r && r !== e.defaultValue && permissionScopeHandler.user("edit-prop-default-value", () => {
+      Fullscreen.editTextComponentPropDefDefaultValue(e.explicitDefID, r);
     });
   }, [e, r]);
   return jsx("div", {
@@ -507,7 +507,7 @@ function eS({
       }),
       children: jsx(_$$v, {
         className: eh,
-        onChange: e => l7.user("edit-prop-default-value", () => a(e.currentTarget.value)),
+        onChange: e => permissionScopeHandler.user("edit-prop-default-value", () => a(e.currentTarget.value)),
         onBlur: s,
         onKeyDown: e => {
           e.stopPropagation();
@@ -524,12 +524,12 @@ function ev({
   componentPropDef: e,
   shouldShowVariableBinding: t
 }) {
-  let [r, a] = useState(e.type === J0O.NUMBER ? e.defaultValue : 0);
+  let [r, a] = useState(e.type === ComponentPropType.NUMBER ? e.defaultValue : 0);
   let s = useCallback(e => {
     Rq(e) && a(T1(e));
   }, []);
   let o = useCallback(() => {
-    e.type === J0O.NUMBER && void 0 !== r && r !== e.defaultValue && l7.user("edit-prop-default-value", () => glU.editNumberComponentPropDefDefaultValue(e.explicitDefID, r));
+    e.type === ComponentPropType.NUMBER && void 0 !== r && r !== e.defaultValue && permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editNumberComponentPropDefDefaultValue(e.explicitDefID, r));
   }, [e, r]);
   return jsx("div", {
     className: eu,
@@ -542,7 +542,7 @@ function ev({
       }),
       children: jsx(_$$v, {
         className: eh,
-        onChange: e => l7.user("edit-prop-default-value", () => s(e.currentTarget.value)),
+        onChange: e => permissionScopeHandler.user("edit-prop-default-value", () => s(e.currentTarget.value)),
         onBlur: o,
         onKeyDown: e => {
           e.stopPropagation();
@@ -582,7 +582,7 @@ function eA({
           item: t,
           callback: r => {
             let n = t.type === PW.STATE_GROUP ? ui(t, r, s) : r;
-            l7.user("edit-prop-default-value", () => glU.editInstanceComponentPropDefDefaultValue(e.explicitDefID, n));
+            permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editInstanceComponentPropDefDefaultValue(e.explicitDefID, n));
           }
         }));
       },
@@ -631,7 +631,7 @@ function ex({
 function eN({
   componentPropDef: e
 }) {
-  if (e.type === J0O.SLOT) return null;
+  if (e.type === ComponentPropType.SLOT) return null;
   switch (e.kind) {
     case uN.TYPED:
       return jsx(eC, {
@@ -654,13 +654,13 @@ function eC({
     requestedTypes,
     variableScope
   } = Xp[e.type] ?? {};
-  let c = useMemo(() => e.type !== J0O.INSTANCE_SWAP && isNotNullish(variableType) && isNotNullish(requestedTypes), [e.type, requestedTypes, variableType]);
+  let c = useMemo(() => e.type !== ComponentPropType.INSTANCE_SWAP && isNotNullish(variableType) && isNotNullish(requestedTypes), [e.type, requestedTypes, variableType]);
   let u = useCallback(async n => {
     if (void 0 === n) return;
     assertNotNullish(variableType);
     let i = await t(Oe(n));
-    i && (l7.user("component-prop-def", () => glU.setComponentPropDefVariableData(e.explicitDefID, y$(variableType, i))), oz("component_prop_def", {
-      type: Z_n.ALIAS,
+    i && (permissionScopeHandler.user("component-prop-def", () => Fullscreen.setComponentPropDefVariableData(e.explicitDefID, y$(variableType, i))), oz("component_prop_def", {
+      type: VariableDataType.ALIAS,
       resolvedType: n.resolvedType,
       value: n.node_id
     }));
@@ -697,43 +697,43 @@ function ew({
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
   let o = tS();
   let l = Um();
-  let d = useSelector(t => e?.type === J0O.INSTANCE_SWAP ? wd([e.defaultValue], t.mirror.sceneGraph) : null);
-  let c = useMemo(() => e.type === J0O.BOOL || e.type === J0O.NUMBER || e.type === J0O.TEXT, [e.type]);
-  let u = useMemo(() => c && e.varValue.type === Z_n.ALIAS, [c, e]);
+  let d = useSelector(t => e?.type === ComponentPropType.INSTANCE_SWAP ? wd([e.defaultValue], t.mirror.sceneGraph) : null);
+  let c = useMemo(() => e.type === ComponentPropType.BOOL || e.type === ComponentPropType.NUMBER || e.type === ComponentPropType.TEXT, [e.type]);
+  let u = useMemo(() => c && e.varValue.type === VariableDataType.ALIAS, [c, e]);
   let p = useMemo(() => u ? e.varValue : void 0, [u, e]);
   if (u && t) return jsx(ex, {
     value: e.varValue,
     onClear: t => {
-      l7.user("component-prop-def", () => glU.unbindComponentPropDef(e.explicitDefID, t));
+      permissionScopeHandler.user("component-prop-def", () => Fullscreen.unbindComponentPropDef(e.explicitDefID, t));
     }
   });
   switch (e.type) {
-    case J0O.BOOL:
+    case ComponentPropType.BOOL:
       return jsx(eI, {
         componentPropDef: e,
         dropdownShown: l,
         shouldShowVariableBinding: t,
         boundVariable: p
       });
-    case J0O.TEXT:
+    case ComponentPropType.TEXT:
       return jsx(eS, {
         componentPropDef: e,
         shouldShowVariableBinding: t
       });
-    case J0O.NUMBER:
+    case ComponentPropType.NUMBER:
       return jsx(ev, {
         componentPropDef: e,
         shouldShowVariableBinding: t
       });
-    case J0O.INSTANCE_SWAP:
+    case ComponentPropType.INSTANCE_SWAP:
       return jsx(eA, {
         componentPropDef: e,
         modalWidth,
         instanceSwapDefaultValue: d,
         openFileKey: o
       });
-    case J0O.IMAGE:
-    case J0O.SLOT:
+    case ComponentPropType.IMAGE:
+    case ComponentPropType.SLOT:
       return null;
     default:
       throwTypeError(e.type);

@@ -6,10 +6,10 @@ import { s_ } from "../905/17223";
 import { tM } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { B } from "../905/714743";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { x as _$$x } from "../905/749159";
 import { d_ } from "../figma_app/918700";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A as _$$A } from "../figma_app/722506";
 var n = {};
 require.d(n, {
@@ -39,7 +39,7 @@ class S extends Component {
         formState: qB.SIGN_IN,
         redirectUrl: this.props.redirectPath
       }));
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: _$$x,
         data: {
           headerText: " "
@@ -51,7 +51,7 @@ class S extends Component {
         origin: "community_hub_signed_out_top_bar",
         formState: qB.SIGN_UP
       }));
-      this.props.dispatch(to({
+      this.props.dispatch(showModalHandler({
         type: _$$x,
         data: {
           headerText: " "
@@ -84,5 +84,5 @@ class S extends Component {
   }
 }
 S.displayName = "LoggedOutCommunityActionModal";
-export let $$w0 = Ju(S, "LoggedOutCommunityActionModal");
+export let $$w0 = registerModal(S, "LoggedOutCommunityActionModal");
 export const l = $$w0;

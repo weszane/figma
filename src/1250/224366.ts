@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { w3z, glU } from "../figma_app/763686";
+import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
@@ -65,7 +65,7 @@ export function $$h1(e) {
     o && (await u(o));
     n(sf(t));
     let l = "unknown";
-    "fullscreen" === t.view && (w3z.addToSelectionNoAnimation([r]), glU.panToNode(r, !1), l = t.editorType === FEditorType.Design ? "design_canvas" : "dev_mode_canvas");
+    "fullscreen" === t.view && (HandoffBindingsCpp.addToSelectionNoAnimation([r]), Fullscreen.panToNode(r, !1), l = t.editorType === FEditorType.Design ? "design_canvas" : "dev_mode_canvas");
     a(e, {
       target: l,
       nodeId: r

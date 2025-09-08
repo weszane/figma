@@ -5,7 +5,7 @@ import { q } from "../905/932270";
 import { H } from "../905/740869";
 import { m } from "../905/822676";
 import { getI18nString } from "../905/303541";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 let o = memo(function (e) {
   return jsxs("svg", {
     width: "24",
@@ -28,7 +28,7 @@ let o = memo(function (e) {
 });
 export function $$u0(e) {
   return jsxs(bL, {
-    value: e.disabled && !e.showValueinDisabledStrokeJoin || gl(e.value) ? void 0 : e.value,
+    value: e.disabled && !e.showValueinDisabledStrokeJoin || isInvalidValue(e.value) ? void 0 : e.value,
     onChange: e.onChange,
     legend: jsx(q, {
       children: getI18nString("fullscreen.properties_panel.stroke_settings.join")

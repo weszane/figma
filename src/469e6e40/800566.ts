@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
-import { J } from "../905/270045";
-import { S as _$$S } from "../905/274480";
+import { Label } from "../905/270045";
+import { Checkbox } from "../905/274480";
 import { K } from "../905/443068";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -16,10 +16,10 @@ import { s as _$$s2 } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { WO } from "../469e6e40/418374";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { yo } from "../figma_app/494261";
 import { lgH } from "../figma_app/43951";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 var E = (e => (e.ALLOWLIST = "allowlist", e.PUBLIC = "public", e))(E || {});
 class C {
   constructor(e) {
@@ -84,21 +84,21 @@ function S(e) {
       children: [jsx(_$$c, {
         value: "public",
         "data-test-id": "all-radio-option",
-        label: jsx(J, {
+        label: jsx(Label, {
           children: modalCopy.allRadioText
         })
       }), jsx(_$$c, {
         value: "allowlist",
         "data-test-id": "allowlist-radio-option",
-        label: jsx(J, {
+        label: jsx(Label, {
           children: modalCopy.approvedRadioText
         })
       })]
     }), "allowlist" === extensionsAllowed && jsx("div", {
       className: _$$s2.flex.flexColumn.pt8.mt8.bt1.colorBorder.bSolid.$,
-      children: jsx(_$$S, {
+      children: jsx(Checkbox, {
         checked: extensionRequestsAllowed,
-        label: jsx(J, {
+        label: jsx(Label, {
           children: modalCopy.requestCheckboxText
         }),
         onChange: setExtensionRequestsAllowed
@@ -123,7 +123,7 @@ function N({
     })]
   });
 }
-export let $$I0 = Ju(function (e) {
+export let $$I0 = registerModal(function (e) {
   let {
     orgId,
     extensionType,
@@ -138,8 +138,8 @@ export let $$I0 = Ju(function (e) {
   let g = c.getSettingsText();
   let x = useDispatch();
   let v = () => {
-    hasBackButton && x(Lo());
-    x(Lo());
+    hasBackButton && x(popModalStack());
+    x(popModalStack());
   };
   let [k, E] = useState();
   let [I, T] = useState();
@@ -155,7 +155,7 @@ export let $$I0 = Ju(function (e) {
         children: jsx(hE, {
           children: hasBackButton ? jsx(N, {
             text: g.title,
-            goBack: () => x(Lo())
+            goBack: () => x(popModalStack())
           }) : g.title
         })
       }), jsx(nB, {
@@ -184,7 +184,7 @@ export let $$I0 = Ju(function (e) {
                   successMessage: c.getSuccessMessage(k ?? A)
                 }));
                 v();
-              } else x(to({
+              } else x(showModalHandler({
                 type: WO,
                 data: {
                   org: {

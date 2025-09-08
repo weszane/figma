@@ -16,12 +16,12 @@ import { getI18nString } from "../905/303541";
 import { hA } from "../figma_app/88239";
 import { N as _$$N } from "../figma_app/673778";
 import { Wo } from "../figma_app/933328";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { UK } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { U as _$$U } from "../905/506188";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { Wv } from "../figma_app/633080";
 import { r6 } from "../905/542608";
@@ -48,7 +48,7 @@ export function $$G0(e) {
   } = useSprigWithSampling();
   let _ = function (e, t, r) {
     let o = useDispatch();
-    let d = J2(UK().showGuids);
+    let d = getObservableOrFallback(UK().showGuids);
     let u = t === Jo.FOCUS_NODE;
     let _ = hZ(t);
     let g = useCallback((e, t, r) => {
@@ -142,7 +142,7 @@ export function $$G0(e) {
         recordingKey: "mode-review-update",
         displayText: getI18nString("variables.modes.option.review_updates"),
         callback: () => {
-          o(to({
+          o(showModalHandler({
             type: _$$T,
             data: {
               initialTab: Wv.UPDATES,
@@ -322,7 +322,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
     recordingKey: l === iw.REVIEW_UPDATES ? "mode-review-update" : "mode-learn-more",
     displayText: l === iw.REVIEW_UPDATES ? getI18nString("variables.modes.option.review_updates") : getI18nString("variables.modes.option.learn_more"),
     callback: () => {
-      l === iw.REVIEW_UPDATES ? a(to({
+      l === iw.REVIEW_UPDATES ? a(showModalHandler({
         type: _$$T,
         data: {
           initialTab: Wv.UPDATES,

@@ -1,9 +1,9 @@
 import { Wh } from "../figma_app/615482";
-import { Vzr, MoD } from "../figma_app/763686";
+import { Thumbnail, ImageExportType } from "../figma_app/763686";
 import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { H9 } from "../figma_app/930338";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Jr } from "../figma_app/624361";
 import { wK } from "../figma_app/546509";
 let c = Wh(() => atom({}));
@@ -25,9 +25,9 @@ function h(e, t, r, i, a, d, c = 20, u = {}) {
   let p = !0;
   let _ = t => {
     setTimeout(() => {
-      if (!Y5.isReady() || !p) return;
+      if (!fullscreenValue.isReady() || !p) return;
       p = !t;
-      let l = Vzr?.generateThumbnailForNode(e, i, a, c, u);
+      let l = Thumbnail?.generateThumbnailForNode(e, i, a, c, u);
       if (l && l[0]) {
         let [t, r] = l;
         let n = H9(r);
@@ -49,7 +49,7 @@ function h(e, t, r, i, a, d, c = 20, u = {}) {
       });
     });
   };
-  (t ? Jr().loadAllImagesUnder([e], MoD.LOW_RES_ONLY, "node.thumbnail") : Jr().waitForImagesUnder([e], MoD.LOW_RES_ONLY, "node.thumbnail")).then(({
+  (t ? Jr().loadAllImagesUnder([e], ImageExportType.LOW_RES_ONLY, "node.thumbnail") : Jr().waitForImagesUnder([e], ImageExportType.LOW_RES_ONLY, "node.thumbnail")).then(({
     totalImages: e
   }) => {
     e > 0 && _(!0);

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
 import { oU, aH } from "../figma_app/273493";
-import { NLJ, xbm, DV9 } from "../figma_app/763686";
+import { DesignGraphElements, BorderStyle, WhiteboardTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import d from "classnames";
@@ -338,7 +338,7 @@ function A({
     children: t
   });
 }
-let x = new Map([[NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP, 104], [NLJ.SHAPE_WHITEBOARD_ELLIPSE, 128], [NLJ.SHAPE_WHITEBOARD_SQUARE, 112]]);
+let x = new Map([[DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP, 104], [DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE, 128], [DesignGraphElements.SHAPE_WHITEBOARD_SQUARE, 112]]);
 let N = 2 / 38;
 let C = .5 / 38;
 let w = 8 / 38;
@@ -347,10 +347,10 @@ function O() {
   let t = useAtomWithSubscription(U9);
   return useMemo(() => R(e, t), [t, e]);
 }
-let R = (e, t) => t === xbm.NONE ? "#000000" : F.format(e);
+let R = (e, t) => t === BorderStyle.NONE ? "#000000" : F.format(e);
 function L(e) {
   let t = F.parse(e);
-  let r = DV9?.getShapeWithTextStrokeColorForFill(oU(t));
+  let r = WhiteboardTsApi?.getShapeWithTextStrokeColorForFill(oU(t));
   return r ? F.format(aH(r)) : "#757575";
 }
 function P(e) {
@@ -367,9 +367,9 @@ function D(e, t) {
     return void 0 === t ? 112 : t;
   }(e);
   return {
-    strokeWidth: styleType === xbm.NONE ? i * C : i * N,
-    strokeOpacity: styleType === xbm.NONE ? .2 : 1,
-    strokeDasharray: styleType === xbm.DASHED ? `${i * w} ${i * w}` : "",
+    strokeWidth: styleType === BorderStyle.NONE ? i * C : i * N,
+    strokeOpacity: styleType === BorderStyle.NONE ? .2 : 1,
+    strokeDasharray: styleType === BorderStyle.DASHED ? `${i * w} ${i * w}` : "",
     strokeLinecap: "round",
     className: _$$s.$$if(isDragging, _$$s.hidden).$
   };
@@ -384,16 +384,16 @@ function k(e, t) {
   return t ? {
     stroke: getFeatureFlags().figjam_track_stroke_color ? R(atomStoreManager.get(lC), atomStoreManager.get(U9)) : L(e),
     strokeWidth: function (e, t, r = !1) {
-      return r && (e === xbm.SOLID || e === xbm.DASHED) ? 4 * t : 0;
+      return r && (e === BorderStyle.SOLID || e === BorderStyle.DASHED) ? 4 * t : 0;
     }(styleType, svgToCanvasScale, isDragging),
     strokeDasharray: function (e, t, r = !1) {
-      return r && e === xbm.DASHED ? `${16 * t} ${10 * t}` : "";
+      return r && e === BorderStyle.DASHED ? `${16 * t} ${10 * t}` : "";
     }(styleType, svgToCanvasScale, isDragging),
     strokeLinecap: "round"
   } : {};
 }
 function M(e) {
-  return !!e && e.styleType === xbm.NONE;
+  return !!e && e.styleType === BorderStyle.NONE;
 }
 let $$F46 = forwardRef(({
   color: e = v,
@@ -464,7 +464,7 @@ let $$B40 = forwardRef(({
     }), jsx("path", {
       d: "M130.75 115.992L130.75 115.992C131.134 116.658 131.057 117.364 130.645 117.942C130.223 118.534 129.432 119 128.403 119H15.5971C14.5693 119 13.7776 118.534 13.3555 117.942C12.9431 117.364 12.8659 116.658 13.2503 115.992L13.2503 115.992L69.6533 18.221C70.0992 17.4482 70.9999 17 72.0001 17C73.0004 17 73.9011 17.4482 74.347 18.221L130.75 115.992Z",
       stroke: c,
-      ...D(NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP, r)
+      ...D(DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP, r)
     })]
   });
 });
@@ -494,7 +494,7 @@ let $$G38 = forwardRef(({
       r: "62",
       fill: "none",
       stroke: c,
-      ...D(NLJ.SHAPE_WHITEBOARD_ELLIPSE, r)
+      ...D(DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE, r)
     })]
   });
 });
@@ -569,7 +569,7 @@ let $$z10 = forwardRef(({
       fill: "none",
       rx: "3.23077",
       stroke: c,
-      ...D(NLJ.SHAPE_WHITEBOARD_SQUARE, r)
+      ...D(DesignGraphElements.SHAPE_WHITEBOARD_SQUARE, r)
     })]
   });
 });

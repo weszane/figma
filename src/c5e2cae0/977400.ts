@@ -9,14 +9,14 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { kR } from "../c5e2cae0/894125";
 import { Dw } from "../figma_app/976345";
 import { sf } from "../905/929976";
-import { Ce, Lo } from "../905/156213";
+import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { LN } from "../figma_app/514043";
 import { PS } from "../figma_app/345997";
-import { tn } from "../figma_app/831101";
+import { UpgradeSteps } from "../figma_app/831101";
 import { SC, Sc } from "../figma_app/707808";
 import { ey } from "../figma_app/918700";
 import { debounce } from "../905/915765";
@@ -24,7 +24,7 @@ import { XHR } from "../905/910117";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { L as _$$L } from "../905/408237";
 import { kt } from "../figma_app/858013";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { bE } from "../905/98702";
 import { bE as _$$bE } from "../figma_app/240735";
 import { e5 } from "../figma_app/297957";
@@ -35,7 +35,7 @@ import { G } from "../figma_app/66216";
 import { KV, $g, Eh, DI, u1, GK, b as _$$b } from "../c5e2cae0/62130";
 import { I as _$$I2 } from "../905/641938";
 import { I as _$$I3 } from "../c5e2cae0/718426";
-let L = nF((e, {
+let L = createOptimistThunk((e, {
   teamName: t,
   selectedView: a,
   currency: s,
@@ -82,7 +82,7 @@ function V(e) {
   let [h, g] = useState("");
   let x = LN();
   let f = () => {
-    t(Ce());
+    t(hideModal());
   };
   let y = debounce(() => {
     m(!0);
@@ -150,10 +150,10 @@ export function $$z0(e) {
   let w = useSelector(e => e.payment.promo);
   let E = useSelector(e => e.payment.billingPeriod);
   let A = () => {
-    N(Lo());
+    N(popModalStack());
   };
   let I = () => {
-    N(Ce());
+    N(hideModal());
     e.onDone?.();
   };
   let k = t => {
@@ -161,7 +161,7 @@ export function $$z0(e) {
       ...b,
       teamFlowType: SC.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
-      paymentStep: kR(b.paymentStep, SC.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || Sc.UNDETERMINED, w ? tn.CONFIRM_PAY : tn.CHOOSE_PLAN),
+      paymentStep: kR(b.paymentStep, SC.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || Sc.UNDETERMINED, w ? UpgradeSteps.CONFIRM_PAY : UpgradeSteps.CHOOSE_PLAN),
       billingPeriod: e.billingPeriod || E,
       entryPoint: e.entryPoint
     })) : N(WX({

@@ -17,7 +17,7 @@ import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { u as _$$u } from "../905/16237";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { $V } from "../figma_app/990058";
 import { tc, PE, Q7, i$ } from "../905/15667";
 import { Nu } from "../905/584989";
@@ -38,7 +38,7 @@ import { FEditorType } from "../figma_app/53721";
 import { Sm } from "../figma_app/482728";
 import { e0 } from "../905/696396";
 import { w as _$$w } from "../905/281010";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { w as _$$w2 } from "../figma_app/171404";
 import { T as _$$T } from "../905/434246";
 import { N as _$$N } from "../905/438674";
@@ -54,7 +54,7 @@ import { e as _$$e2 } from "../905/579755";
 import { iq } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { i_ } from "../905/187165";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { OJ } from "../905/519092";
 import { iS, Jo, sp, GW } from "../905/223565";
 import { A as _$$A2 } from "../2854/660288";
@@ -120,12 +120,12 @@ function L(e, t, i, n) {
 }
 let el = new class {
   constructor() {
-    this.CreateProvisionalAccessSchemaValidator = vh();
+    this.CreateProvisionalAccessSchemaValidator = createNoOpValidator();
   }
   create(e, t, i, n) {
     return this.CreateProvisionalAccessSchemaValidator.validate(async ({
       xr: r
-    }) => await r.post(`/api/provisional_access/${e}/${t}`, td.toAPIParameters({
+    }) => await r.post(`/api/provisional_access/${e}/${t}`, APIParameterUtils.toAPIParameters({
       billable_product_key: i,
       file_key: n
     })));
@@ -173,7 +173,7 @@ function eh(e) {
     }
   });
   let T = () => {
-    f(Lo());
+    f(popModalStack());
     onClose?.();
   };
   let R = v && jsxs("div", {
@@ -421,7 +421,7 @@ export function $$eb0(e) {
     i && analyticsEventManager.trackDefinedEvent("activation.request_upgrade_modal_one_click_timeout_triggered", {});
     clearTimeout(Q);
     ex?.();
-    t(Lo());
+    t(popModalStack());
     ei && e.actionOnProvisionalAccessGranted?.();
   }, [Q, e, t, ex, ei]);
   useEffect(() => {
@@ -461,7 +461,7 @@ export function $$eb0(e) {
       trackingContext: eF,
       trackingDescriptor: _$$c.CANCEL
     });
-    er ? ew() : (t(Lo()), ex?.());
+    er ? ew() : (t(popModalStack()), ex?.());
   };
   let eR = _$$u();
   let eN = Rs(kdQ, {
@@ -478,7 +478,7 @@ export function $$eb0(e) {
     title: jsx(Wi, {}),
     maxWidth: 360,
     minWidth: 360,
-    onClose: () => t(Lo()),
+    onClose: () => t(popModalStack()),
     transparentBackground: $,
     children: jsx("div", {
       className: "request_upgrade_modal--loadingContainer--tG4tR",
@@ -576,7 +576,7 @@ export function $$eb0(e) {
                       message: "Error updating request message.",
                       error: !0
                     }));
-                  }), ew()) : (eI(O), t(Lo()));
+                  }), ew()) : (eI(O), t(popModalStack()));
                 },
                 disabled: !er && hasPendingRequest(Z),
                 trackingOptions: eR,
@@ -593,5 +593,5 @@ export function $$eb0(e) {
     })
   });
 }
-Ju($$eb0, "RequestUpgradeModal");
+registerModal($$eb0, "RequestUpgradeModal");
 export const R9 = $$eb0;

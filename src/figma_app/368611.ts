@@ -1,17 +1,17 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { buildUploadUrl } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { T } from "../figma_app/409248";
 let d = Object.create(null);
 export async function $$c1(e) {
   let t = await T(e, d);
-  glU?.setWashiTapePresetPattern(t);
+  Fullscreen?.setWashiTapePresetPattern(t);
 }
 export async function $$u0(e, t) {
   let r = await T(e, d);
-  l7(t, "set-paint-from-washi-tape-preset", () => glU?.setWashiTapePresetPatternAndUpdateSelectedNodes(r));
+  permissionScopeHandler(t, "set-paint-from-washi-tape-preset", () => Fullscreen?.setWashiTapePresetPatternAndUpdateSelectedNodes(r));
 }
 export function $$p2(e) {
   if (e.image) return buildUploadUrl(e.image);

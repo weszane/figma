@@ -4,9 +4,9 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { bL } from '../905/38914';
 import { Ln } from '../905/84777';
-import { Ju } from '../905/102752';
+import { registerModal } from '../905/102752';
 import { Ib } from '../905/129884';
-import { to } from '../905/156213';
+import { showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { V as _$$V } from '../905/223084';
 import { B as _$$B } from '../905/261906';
@@ -433,7 +433,7 @@ function eo() {
     })
   });
 }
-let ed = Ju(e => {
+let ed = registerModal(e => {
   return jsx(tH, {
     boundaryKey: 'AutoApprovalSettingsModal',
     fallback: H4.DEFAULT_FULL_PAGE,
@@ -450,7 +450,7 @@ let ed = Ju(e => {
     })
   });
 });
-let eu = Ju(e => {
+let eu = registerModal(e => {
   let t = S2().unwrapOr(null);
   let a = hS(e);
   return jsx(fu, {
@@ -501,7 +501,7 @@ export function $$e_0({
   isCurfEnabledForMembers: s
 }) {
   return () => {
-    e(to({
+    e(showModalHandler({
       type: ed,
       data: {
         currency: t,
@@ -515,7 +515,7 @@ export function $$ep1({
   dispatch: e
 }) {
   return () => {
-    e(to({
+    e(showModalHandler({
       type: eu,
       data: {}
     }));

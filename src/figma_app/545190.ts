@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { k as _$$k } from "../905/44647";
 import { O as _$$O } from "../905/969533";
 import { uN } from "../figma_app/338442";
-import { glU, uXg, J0O, Z_n, rXF, JTp, CWU, iCO } from "../figma_app/763686";
+import { Fullscreen, VariableSetErrorType, ComponentPropType, VariableDataType, VariableResolvedDataType, OperationType, VariablesBindings, StateHierarchy } from "../figma_app/763686";
 import c from "classnames";
 import { rf, v_, fo, Pt } from "../figma_app/806412";
 import { S as _$$S } from "../figma_app/552746";
@@ -22,9 +22,9 @@ import { Dm, Vg } from "../figma_app/460003";
 import { wh, iz, wd, zn, xb, O2, OE } from "../figma_app/164212";
 import { an, RB } from "../figma_app/626952";
 import { c as _$$c } from "../figma_app/528598";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { ms, c$ } from "../figma_app/236327";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { o3, nt } from "../905/226610";
 import { vL } from "../905/826900";
 import { q as _$$q } from "../figma_app/905311";
@@ -49,7 +49,7 @@ import { oB, j7 } from "../905/929976";
 import { u1, XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { dH, i as _$$i } from "../figma_app/741237";
-import { gl, E7, hS } from "../905/216495";
+import { isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { kH } from "../905/309735";
 import { Sh } from "../figma_app/889655";
 import { zr, Ib } from "../905/129884";
@@ -66,7 +66,7 @@ import { eP as _$$eP } from "../figma_app/613182";
 import { uj0 } from "../figma_app/27776";
 import { isNotNullish } from "../figma_app/95419";
 import { d as _$$d2 } from "../905/49800";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { U as _$$U } from "../905/708285";
 import { yG } from "../905/859698";
 import { k9 } from "../905/19536";
@@ -281,7 +281,7 @@ function ew(e) {
     es && inputRef.current?.select();
   }, [es, inputRef]);
   let eu = () => {
-    G ? (V(null), componentPropDef.kind === uN.TYPED ? l7.user("edit-prop-def-name", () => glU.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === uN.VARIANT && l7.user("edit-variant-prop-name", () => q1(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
+    G ? (V(null), componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user("edit-prop-def-name", () => Fullscreen.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === uN.VARIANT && permissionScopeHandler.user("edit-variant-prop-name", () => q1(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
   };
   let eg = useCallback(() => {
     O(n0({
@@ -388,9 +388,9 @@ function ew(e) {
     preferredValues
   } = xP(componentPropDef);
   let eM = wS(preferredValues).size > 0;
-  let eF = !es && (componentPropDef.error !== uXg.NONE || eM);
+  let eF = !es && (componentPropDef.error !== VariableSetErrorType.NONE || eM);
   let ej = !es && (U || el);
-  return getFeatureFlags().ds_variable_props_number_def || Z !== J0O.NUMBER ? jsx(eO, {
+  return getFeatureFlags().ds_variable_props_number_def || Z !== ComponentPropType.NUMBER ? jsx(eO, {
     isSelected,
     singletonRow,
     isDragging,
@@ -426,7 +426,7 @@ function ew(e) {
     editComponentPropPickerShown: el,
     toggleEditPropPicker: eE,
     onDeleteProp: () => {
-      componentPropDef.kind === uN.TYPED ? l7.user("delete-prop-def", () => glU.deleteComponentPropDefs([componentPropDef.explicitDefID])) : w && l7.user("delete-variant-prop", () => bk([componentPropDef.name], allStates, propertySortOrder, w));
+      componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user("delete-prop-def", () => Fullscreen.deleteComponentPropDefs([componentPropDef.explicitDefID])) : w && permissionScopeHandler.user("delete-variant-prop", () => bk([componentPropDef.name], allStates, propertySortOrder, w));
     },
     shouldShowErrorIcon: eF,
     preferredValuesUnpublishedError: eM,
@@ -524,7 +524,7 @@ function eO({
     if (v.kind === uN.VARIANT) {
       if (M) return Yx(M, "unit");
     } else {
-      if (v.varValue.type === Z_n.ALIAS) {
+      if (v.varValue.type === VariableDataType.ALIAS) {
         let e = sD.fromString(v.varValue.value);
         if (e) {
           let t = er.getVariableNode(e);
@@ -534,16 +534,16 @@ function eO({
           });
         }
       }
-      if (v.varValue.resolvedType === rXF.BOOLEAN) return v.varValue.value ? getI18nString("design_systems.component_properties.boolean_true") : getI18nString("design_systems.component_properties.boolean_false");
-      if (v.varValue.resolvedType === rXF.SLOT_CONTENT_ID) return null;
-      if (v.varValue.resolvedType !== rXF.SYMBOL_ID) return v.defaultValue;
+      if (v.varValue.resolvedType === VariableResolvedDataType.BOOLEAN) return v.varValue.value ? getI18nString("design_systems.component_properties.boolean_true") : getI18nString("design_systems.component_properties.boolean_false");
+      if (v.varValue.resolvedType === VariableResolvedDataType.SLOT_CONTENT_ID) return null;
+      if (v.varValue.resolvedType !== VariableResolvedDataType.SYMBOL_ID) return v.defaultValue;
       {
         let e = wd([v.defaultValue], er);
-        if (e) return gl(e) ? getI18nString("design_systems.instance_swap_picker.mixed") : kH(e.name);
+        if (e) return isInvalidValue(e) ? getI18nString("design_systems.instance_swap_picker.mixed") : kH(e.name);
       }
     }
   }, [v, er, M]);
-  let eT = ey || T === J0O.NUMBER && 0 === ey;
+  let eT = ey || T === ComponentPropType.NUMBER && 0 === ey;
   let eA = useRef(null);
   let ex = useCallback(e => {
     O(e);
@@ -589,7 +589,7 @@ function eO({
     children: [jsx("span", {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": getI18nString("design_systems.component_properties.property_icon_tooltip", {
-        propertyType: xb(T ?? J0O.VARIANT)
+        propertyType: xb(T ?? ComponentPropType.VARIANT)
       }),
       children: T ? zn(T) : jsx(_$$y, {})
     }), jsxs("div", {
@@ -669,7 +669,7 @@ function eP({
   onSelectIndices: s,
   recordingKey: o
 }) {
-  let l = useMemo(() => getFeatureFlags().ds_image_props_sites ? e.filter(e => e.type !== J0O.IMAGE) : e, [e]);
+  let l = useMemo(() => getFeatureFlags().ds_image_props_sites ? e.filter(e => e.type !== ComponentPropType.IMAGE) : e, [e]);
   let c = useSelector(e => e.dropdownShown);
   let u = c?.type === eA;
   let _ = e => (e?.key === "Backspace" || e?.key === "Delete") && (f(), !0);
@@ -682,16 +682,16 @@ function eP({
   let f = useCallback(() => {
     if (!r.length) return;
     let e = r.map(e => l[e].explicitDefID);
-    l7.user("delete-prop-defs", () => glU.deleteComponentPropDefs(e));
+    permissionScopeHandler.user("delete-prop-defs", () => Fullscreen.deleteComponentPropDefs(e));
   }, [l, r]);
   let E = useCallback((e, t, r) => {
     let n = t ? t.explicitDefID : "";
     let i = r ? r.explicitDefID : "";
-    l7.user("reorder-prop-defs", () => e.forEach(e => {
-      glU.insertPropDefBetween(e.explicitDefID, n, i);
+    permissionScopeHandler.user("reorder-prop-defs", () => e.forEach(e => {
+      Fullscreen.insertPropDefBetween(e.explicitDefID, n, i);
       n = e.explicitDefID;
     }));
-    Y5.commit();
+    fullscreenValue.commit();
   }, []);
   let y = o3(nt.useGridPart2);
   let b = useRef(null);
@@ -792,7 +792,7 @@ function $$e6(e) {
         variantProperties: _variantProperties,
         setVariantProperties: _setVariantProperties
       } = mY(e);
-      let n = E7(_variantProperties);
+      let n = normalizeValue(_variantProperties);
       let {
         variableConsumptionMap,
         setVariableConsumptionMap
@@ -817,53 +817,53 @@ function $$e6(e) {
     }(t);
     let l = useSelector(e => e.fileVersion);
     let c = useCallback(t => {
-      let i = consumedVariable && hS(consumedVariable) && !("isMixed" in consumedVariable && consumedVariable.isMixed) && consumedVariable.type === Z_n.EXPRESSION ? consumedVariable.value.expressionArguments[0] : {
-        type: Z_n.MAP,
-        resolvedType: rXF.MAP,
+      let i = consumedVariable && isValidValue(consumedVariable) && !("isMixed" in consumedVariable && consumedVariable.isMixed) && consumedVariable.type === VariableDataType.EXPRESSION ? consumedVariable.value.expressionArguments[0] : {
+        type: VariableDataType.MAP,
+        resolvedType: VariableResolvedDataType.MAP,
         value: {}
       };
       t ? r(Yi({
         item: t,
         callback: r => {
           let n = F$(l, getFeatureFlags().ds_variant_props_write) ? e.uguid : void 0;
-          t.resolvedType === rXF.STRING ? i.value[e.name] = {
-            type: Z_n.ALIAS,
-            resolvedType: rXF.STRING,
+          t.resolvedType === VariableResolvedDataType.STRING ? i.value[e.name] = {
+            type: VariableDataType.ALIAS,
+            resolvedType: VariableResolvedDataType.STRING,
             value: r,
             uguid: n
-          } : (t.resolvedType === rXF.BOOLEAN || t.resolvedType === rXF.FLOAT) && (i.value[e.name] = {
-            type: Z_n.EXPRESSION,
-            resolvedType: rXF.STRING,
+          } : (t.resolvedType === VariableResolvedDataType.BOOLEAN || t.resolvedType === VariableResolvedDataType.FLOAT) && (i.value[e.name] = {
+            type: VariableDataType.EXPRESSION,
+            resolvedType: VariableResolvedDataType.STRING,
             value: {
-              expressionFunction: JTp.STRINGIFY,
+              expressionFunction: OperationType.STRINGIFY,
               expressionArguments: [y$(t.resolvedType, r)]
             },
             uguid: n
           });
           setVariantProperties({
-            type: Z_n.EXPRESSION,
-            resolvedType: rXF.SYMBOL_ID,
+            type: VariableDataType.EXPRESSION,
+            resolvedType: VariableResolvedDataType.SYMBOL_ID,
             value: {
               expressionArguments: [i],
-              expressionFunction: JTp.RESOLVE_VARIANT
+              expressionFunction: OperationType.RESOLVE_VARIANT
             }
           });
           _$$ty(r, t.resolvedType);
         }
       })) : (delete i.value[e.name], setVariantProperties(0 === Object.keys(i.value).length ? null : {
-        type: Z_n.EXPRESSION,
-        resolvedType: rXF.SYMBOL_ID,
+        type: VariableDataType.EXPRESSION,
+        resolvedType: VariableResolvedDataType.SYMBOL_ID,
         value: {
           expressionArguments: [i],
-          expressionFunction: JTp.RESOLVE_VARIANT
+          expressionFunction: OperationType.RESOLVE_VARIANT
         }
       }));
     }, [consumedVariable, setVariantProperties, r, e, l]);
     let u = useMemo(() => {
-      if (consumedVariable && hS(consumedVariable)) try {
+      if (consumedVariable && isValidValue(consumedVariable)) try {
         let t = consumedVariable.value.expressionArguments[0].value[e.name];
         if (!t) return null;
-        if (t.type === Z_n.EXPRESSION && t.value.expressionFunction === JTp.STRINGIFY && (t = t.value.expressionArguments[0]), t?.type === Z_n.ALIAS) return t.value;
+        if (t.type === VariableDataType.EXPRESSION && t.value.expressionFunction === OperationType.STRINGIFY && (t = t.value.expressionArguments[0]), t?.type === VariableDataType.ALIAS) return t.value;
       } catch (e) {
         logError("variables", "error checking variant binding map", {
           message: e.message
@@ -881,8 +881,8 @@ function $$e6(e) {
       variableConsumptionMapValue: variantProperties
     };
   }(e.variantPropDef, guids);
-  let [F, j] = JV(["VARIANT_PROPERTIES"], onExpressionSubmitted && "TOGGLE" === x.type ? rXF.BOOLEAN : rXF.STRING, setBinding, {
-    requestedTypes: "TOGGLE" === x.type ? [rXF.BOOLEAN] : [rXF.STRING, rXF.FLOAT],
+  let [F, j] = JV(["VARIANT_PROPERTIES"], onExpressionSubmitted && "TOGGLE" === x.type ? VariableResolvedDataType.BOOLEAN : VariableResolvedDataType.STRING, setBinding, {
+    requestedTypes: "TOGGLE" === x.type ? [VariableResolvedDataType.BOOLEAN] : [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT],
     metadata: e.variantPropDef.name
   }, onExpressionSubmitted);
   function U(e, t) {
@@ -909,14 +909,14 @@ function $$e6(e) {
       i[t] = (i[t] || []).concat(N[e]);
     }
     if (A) {
-      glU.replaceSymbolBackingInstancesInPlayground(i);
+      Fullscreen.replaceSymbolBackingInstancesInPlayground(i);
       updateHistory(r);
       v?.isShown && I(vq());
       return;
     }
     0 !== Object.keys(i).length && (zb("Swapping A Variant", stateGroupGUID ?? "", {
       source: forBubbledProps ? "bubbled_sidebar" : "sidebar"
-    }), l7.user("change-variant-prop", () => Aw(i)));
+    }), permissionScopeHandler.user("change-variant-prop", () => Aw(i)));
     updateHistory(r);
   }
   let G = statePropertyValues.hasOwnProperty(x.property) ? statePropertyValues[x.property] : void 0;
@@ -926,7 +926,7 @@ function $$e6(e) {
   }
   let z = _$$u(boundVariableId ?? void 0);
   let W = Px();
-  let K = useMemo(() => CWU.getVariableSetKeyForPublish(z?.variableSetId ?? "") ?? "", [z?.variableSetId]);
+  let K = useMemo(() => VariablesBindings.getVariableSetKeyForPublish(z?.variableSetId ?? "") ?? "", [z?.variableSetId]);
   let Y = K in W ? W[yG(K)] : void 0;
   let $ = useMemo(() => Y ? {
     [yG(K)]: Y
@@ -961,8 +961,8 @@ function $$e6(e) {
             isStandalone: !0,
             thumbnailValue: "MIXED" === X || t ? void 0 : X,
             tooltipOverride: t,
-            value: gl(G) ? getI18nString("design_systems.component_properties.mixed") : z.name,
-            variableId: gl(G) ? void 0 : boundVariableId ?? void 0,
+            value: isInvalidValue(G) ? getI18nString("design_systems.component_properties.mixed") : z.name,
+            variableId: isInvalidValue(G) ? void 0 : boundVariableId ?? void 0,
             variablePillContainerClassName: Ro
           })
         }),
@@ -1046,9 +1046,9 @@ function e7({
   recordingKey: a
 }) {
   return jsx(_$$d2, {
-    mixed: gl(t),
+    mixed: isInvalidValue(t),
     checked: t === e.toggleTokenPair[0],
-    label: jsx(_$$h, {
+    label: jsx(HiddenLabel, {
       children: e.label
     }),
     onChange: t => {
@@ -1078,7 +1078,7 @@ function e9({
     }),
     children: i ? jsx("p", {
       className: Me,
-      children: gl(t) ? getI18nString("design_systems.component_properties.mixed") : t
+      children: isInvalidValue(t) ? getI18nString("design_systems.component_properties.mixed") : t
     }) : jsx(l6, {
       ariaLabelledBy: c,
       className: ZE,
@@ -1208,7 +1208,7 @@ function td({
   useEffect(() => {
     if (dropdownShown || !N) return;
     let e = v.current?.[N]?.current;
-    e && (e.select(), Y5.updateAppModel({
+    e && (e.select(), fullscreenValue.updateAppModel({
       statePropertyToFocus: ""
     }));
     x("");
@@ -1218,8 +1218,8 @@ function td({
   }, []);
   let w = useRef(null);
   function O(e, t) {
-    "" !== (t = t.trim()) && selectedStates && (l7.user("rename-variant-prop", () => {
-      glU && Po(() => {
+    "" !== (t = t.trim()) && selectedStates && (permissionScopeHandler.user("rename-variant-prop", () => {
+      Fullscreen && Po(() => {
         for (let r of selectedStates) {
           let n = r.stateInfo.propertyValues || {};
           _$$i(r.symbol.node_id, zh({
@@ -1227,8 +1227,8 @@ function td({
             [e]: t
           }, propertySortOrder || []));
         }
-      }, glU);
-    }), Y5.commit());
+      }, Fullscreen);
+    }), fullscreenValue.commit());
   }
   useEffect(() => {
     S && f.current && (f.current.focus(), f.current.select());
@@ -1252,7 +1252,7 @@ function td({
     defaultValue: G,
     forwardedRef: f,
     onBlur: () => {
-      T && (I(null), l7.user("rename-variant-property", () => q1(G, T, allStates ?? [], propertySortOrder ?? [])));
+      T && (I(null), permissionScopeHandler.user("rename-variant-property", () => q1(G, T, allStates ?? [], propertySortOrder ?? [])));
     },
     onChange: e => I(e.currentTarget.value),
     onContextMenu: e => {
@@ -1309,7 +1309,7 @@ function td({
       icon: jsx(_$$r3, {}),
       id: `states-property-select-${G}`,
       onChange: e => {
-        l7.user("add-variant-property", () => {
+        permissionScopeHandler.user("add-variant-property", () => {
           e !== ti ? O(G, e) : (O(G, getI18nString("design_systems.component_properties.new_value")), x(G));
         });
       },
@@ -1381,17 +1381,17 @@ function tp({
   let T = useCallback(() => {
     if (!r.length || !c) return;
     let t = r.map(t => e[t].name);
-    l7.user("delete-variant-props", () => bk(t, d, u, c));
+    permissionScopeHandler.user("delete-variant-props", () => bk(t, d, u, c));
   }, [d, c, e, u, r]);
   let I = useCallback(e => {
     let t = e.map(e => e.name);
-    l7.user("reorder-variant-props", () => {
+    permissionScopeHandler.user("reorder-variant-props", () => {
       d.forEach(e => {
         let r = e.stateInfo.propertyValues;
         r && _$$i(e.symbol.node_id, zh(r, t));
       });
     });
-    Y5.commit();
+    fullscreenValue.commit();
   }, [d]);
   let S = useRef(null);
   useEffect(() => {
@@ -1587,7 +1587,7 @@ export function $$tE2({
   let [l, c] = useState(void 0);
   let [u, p] = useState([]);
   let [_, m] = useState(!1);
-  let g = useSelector(i$) === iCO.STATE && r === OE.DEFINITION;
+  let g = useSelector(i$) === StateHierarchy.STATE && r === OE.DEFINITION;
   useEffect(() => {
     c(void 0);
     p([]);

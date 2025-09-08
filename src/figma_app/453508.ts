@@ -5,7 +5,7 @@ import { N as _$$N } from "../905/438674";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { hMR, rCR } from "../figma_app/763686";
+import { CorePerfInfo, DocumentMode } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
@@ -16,14 +16,14 @@ import { sf } from "../905/929976";
 import { XE } from "../figma_app/976749";
 import { tS } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
-import { qK } from "../905/102752";
+import { registerLegacyModal } from "../905/102752";
 import { E as _$$E } from "../905/191910";
 import { j } from "../905/349918";
 import { v0, pL } from "../figma_app/639088";
 export function $$A0(e, t = {}) {
   trackEventAnalytics("memory_warning_event", {
-    currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
-    maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
+    currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
+    maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
     ...e,
     ...t
   });
@@ -47,7 +47,7 @@ export function $$C2(e) {
     fileKey: x,
     isRecoveryMode: !0
   };
-  let w = hMR?.getHeapMemoryMode() === rCR.RECOVERY;
+  let w = CorePerfInfo?.getHeapMemoryMode() === DocumentMode.RECOVERY;
   let O = r || w ? "showReload" : BrowserInfo.isWasm4gbSupported ? "showRecoveryMode" : "showBrowserUpgradeAndDesktop";
   let R = jsx(_$$N, {
     href: BrowserInfo.mac ? "/download/desktop/mac" : "/download/desktop/win",
@@ -145,7 +145,7 @@ export function $$C2(e) {
     })
   });
 }
-qK($$N1, e => {
+registerLegacyModal($$N1, e => {
   let {
     isBranching
   } = e.modalShown.data;

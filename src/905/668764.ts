@@ -1,4 +1,4 @@
-import { YE } from "../figma_app/492908";
+import { roundToMultiple } from "../figma_app/492908";
 let $$r2 = 1;
 let $$a1 = 10;
 export function $$s0(e, t) {
@@ -18,7 +18,7 @@ export function $$l4(e, t, i, r = {}) {
   let a = e.incrementBy(t, i, r.incrementTargets ?? null);
   if (r.snap) {
     let i = r.snapResolution || $$o3(e, r.coarse ?? !1, t);
-    e.snap ? a = e.snap(a, i) : "number" == typeof a && (a = YE(a, i));
+    e.snap ? a = e.snap(a, i) : "number" == typeof a && (a = roundToMultiple(a, i));
   }
   return e.clamp?.(a) ?? a;
 }

@@ -1,15 +1,15 @@
 import { createContext, useLayoutEffect, forwardRef, useMemo, useRef, useCallback, useEffect, useId, useState } from "react";
 import { SV } from "../vendor/516565";
-import { Qv } from "../905/959312";
-import { Ju } from "../905/955878";
+import { useRecording } from "../905/959312";
+import { preventAndStopEvent } from "../905/955878";
 import { v as _$$v } from "../905/475481";
 import { jsx } from "react/jsx-runtime";
 import { S as _$$S } from "../905/823680";
-import { M } from "../905/581092";
+import { useExposedRef } from "../905/581092";
 import { $ } from "../905/61417";
 import { fP, mc } from "../905/691059";
 import { P } from "../905/143421";
-import { r as _$$r } from "../905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 import { E as _$$E } from "../905/632989";
 let l = "[role=option]";
 let f = Math.floor(1e3 / 60);
@@ -113,7 +113,7 @@ let v = forwardRef(({
   recordingKey: o,
   ...l
 }, c) => {
-  let m = M(c);
+  let m = useExposedRef(c);
   let {
     activeValue,
     inputMode,
@@ -124,7 +124,7 @@ let v = forwardRef(({
     setActiveValue,
     registerOption
   } = $(_, "ComboboxPrimitiveListContext", "ComboboxPrimitive.List");
-  let S = Qv(t => {
+  let S = useRecording(t => {
     if (i) {
       r?.onPointerDown?.(t);
       return;
@@ -167,7 +167,7 @@ let v = forwardRef(({
     localId: e
   }) : T);
   return jsx("div", {
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...r,
     ...l,
     id: k,
@@ -187,7 +187,7 @@ let I = forwardRef(({
   htmlAttributes: t,
   ...i
 }, n) => jsx("div", {
-  ..._$$r,
+  ...defaultComponentAttribute,
   ...t,
   ...i,
   role: "group",
@@ -365,11 +365,11 @@ export let $$R0 = {
     let G = useCallback(() => {
       !1 !== expandOnFocus && D(!1);
     }, [expandOnFocus, D]);
-    let z = Qv(e => {
+    let z = useRecording(e => {
       if (!O && "ArrowDown" === e.key && e.altKey) {
         j(S(T.current, _.current));
         D(!0);
-        Ju(e);
+        preventAndStopEvent(e);
         return;
       }
       if (O && !e.altKey && !e.ctrlKey && !e.shiftKey && !e.metaKey) switch (e.key) {
@@ -378,7 +378,7 @@ export let $$R0 = {
             top: 0
           });
           j(S(T.current, _.current));
-          Ju(e);
+          preventAndStopEvent(e);
           I("keyboard");
           break;
         case "End":
@@ -386,17 +386,17 @@ export let $$R0 = {
             top: _.current?.offsetHeight
           });
           j(w(T.current, _.current));
-          Ju(e);
+          preventAndStopEvent(e);
           I("keyboard");
           break;
         case "ArrowDown":
           U(e);
-          Ju(e);
+          preventAndStopEvent(e);
           I("keyboard");
           break;
         case "ArrowUp":
           B(e);
-          Ju(e);
+          preventAndStopEvent(e);
           I("keyboard");
       }
     }, {
@@ -406,7 +406,7 @@ export let $$R0 = {
     let H = useCallback(e => {
       "Enter" === e.key && onSelect && M && (onSelect(M, {
         event: e
-      }), Ju(e));
+      }), preventAndStopEvent(e));
     }, [M, onSelect]);
     let W = useCallback(e => (e?.ref && e.ref !== A && y(e.ref), _$$v(e ?? {}, {
       ...e?.htmlAttributes,
@@ -446,7 +446,7 @@ export let $$R0 = {
     }), [M, O, v, D, K, onSelect, popupId, R, selected, j]);
     let q = useCallback(e => {
       D(!O);
-      Ju(e);
+      preventAndStopEvent(e);
     }, [O, D]);
     let $ = useCallback(e => _$$v(e ?? {}, {
       onClick: q,

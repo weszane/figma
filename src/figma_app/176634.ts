@@ -1,4 +1,4 @@
-import { CeL } from "../figma_app/763686";
+import { FullscreenPerfMetrics } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
@@ -10,7 +10,7 @@ let u = "hardware_acceleration_disabled_warning_shown";
 var p = (e => (e[e.UNKNOWN = 0] = "UNKNOWN", e[e.DISABLED = 1] = "DISABLED", e[e.ENABLED = 2] = "ENABLED", e))(p || {});
 export function $$_0() {
   if (desktopAPIInstance) return 0;
-  let e = CeL.getGpuDeviceInfo();
+  let e = FullscreenPerfMetrics.getGpuDeviceInfo();
   return e ? e.vendor.includes("Google Inc.") && e.graphicsCardName.includes("SwiftShader") ? 1 : 2 : 0;
 }
 export function $$h1(e, t) {

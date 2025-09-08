@@ -1,5 +1,5 @@
-import { Oin } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { UIVisibilitySetting } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { NC } from "../905/17179";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s as _$$s } from "../905/573154";
@@ -18,9 +18,9 @@ import { _b, yH, vF } from "../figma_app/841351";
 import { Kn } from "../905/535806";
 import { W } from "../905/985740";
 import { h as _$$h } from "../905/438683";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 let $$x1 = NC("FULLSCREEN_DOCUMENT_LOADED");
-let $$S0 = nF(e => {
+let $$S0 = createOptimistThunk(e => {
   if (desktopAPIInstance) {
     let t = e.getState().selectedView;
     !desktopAPIInstance.isFileBrowserTab() && ("fullscreen" !== t.view || t.fileKey) && desktopAPIInstance.setLoading(!1);
@@ -44,7 +44,7 @@ let $$S0 = nF(e => {
     let i = "missing_authentication" === t.data.reason ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
     e.dispatch(_$$s.error(J(t, i)));
     e.dispatch(Y6({
-      mode: Oin.OFF
+      mode: UIVisibilitySetting.OFF
     }));
   });
   i.fileKey && i.compareVersionId && (e.dispatch(_b()), e.dispatch(vF({
@@ -102,7 +102,7 @@ let $$S0 = nF(e => {
     fileKey,
     tryPluginParams
   } = i;
-  t.user && tryPluginId && tryPluginName && tryPluginVersionId && fileKey && editorType && l7.user("try-plugin", () => {
+  t.user && tryPluginId && tryPluginName && tryPluginVersionId && fileKey && editorType && permissionScopeHandler.user("try-plugin", () => {
     e.dispatch($({
       tryPluginId,
       tryPluginName,

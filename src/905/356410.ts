@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { $ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { FRequestStatusType } from "../figma_app/191312";
 import { IT, M4 } from "../905/713695";
 import { wT, UR, HX, G6, qu } from "../905/671449";
@@ -21,7 +21,7 @@ import { is } from "../905/744076";
 import { R as _$$R } from "../905/240644";
 import { i as _$$i } from "../905/810360";
 import { lQ } from "../905/934246";
-import { A as _$$A } from "../905/284190";
+import { deepClone } from "../905/284190";
 import { A as _$$A2 } from "../1617/755299";
 import { A as _$$A3 } from "../1617/230645";
 var d = l;
@@ -121,7 +121,7 @@ function N(e, t) {
         } = t;
         let r = function (e, t, i) {
           let [n, r, a] = t;
-          let s = _$$A(e);
+          let s = deepClone(e);
           let o = {
             ...s[n]
           };
@@ -437,7 +437,7 @@ function G({
     children: [!x && jsx("button", {
       className: _$$s.bgTransparent.noWrap.$$if(optedOutOfSecurityForm, _$$s.colorTextSecondary, _$$s.colorTextBrand.cursorPointer).$,
       onClick: () => {
-        w(to({
+        w(showModalHandler({
           type: _$$i,
           data: {
             onConfirm: l,

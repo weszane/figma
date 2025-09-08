@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { assertNotNullish } from "../figma_app/465776";
-import { xOL } from "../figma_app/763686";
+import { RotationType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import o from "classnames";
 import { hY } from "../figma_app/349969";
@@ -52,7 +52,7 @@ export function $$g0({
     }
     f = r.url;
     x = c(presetIdentifier);
-    b = rotation === xOL.CCW_90;
+    b = rotation === RotationType.CCW_90;
     let l = r.getI18nDeviceName();
     let d = r.getI18nStyleName();
     g = `${l} (${d})`;

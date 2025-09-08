@@ -13,7 +13,7 @@ import { kt } from "../figma_app/858013";
 import { i as _$$i, C as _$$C } from "../905/64217";
 import { renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
-import { Lo, Ce } from "../905/156213";
+import { popModalStack, hideModal } from "../905/156213";
 import { Dm } from "../figma_app/8833";
 import { j6 } from "../figma_app/831799";
 import { JY, ew, Gx, R7, K1, Y0, CY, Xt, Ir, L4, yl, Er, KJ, HY, pN, DD, jE, v0, _f, LO, FQ, u1, pL, $$ } from "../905/289198";
@@ -148,7 +148,7 @@ export function $$A0(e) {
   let c = properties?.fileKey;
   let u = properties?.productType;
   let p = useCallback(e => {
-    popStack ? t(Lo()) : t(Ce());
+    popStack ? t(popModalStack()) : t(hideModal());
     onHide && onHide();
     trackEventAnalytics("Modal Close", {
       source: e,
@@ -177,7 +177,7 @@ export function $$N2(e) {
     popStack
   } = e;
   let u = useCallback(() => {
-    dontClose || (popStack ? l(Lo()) : l(Ce()));
+    dontClose || (popStack ? l(popModalStack()) : l(hideModal()));
   }, [l, dontClose, popStack]);
   let {
     onCloseButtonClick

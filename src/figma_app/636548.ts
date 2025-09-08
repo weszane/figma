@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { iCO } from "../figma_app/763686";
+import { StateHierarchy } from "../figma_app/763686";
 import { E } from "../905/277716";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -20,7 +20,7 @@ export function $$_0({
     containingProductComponent
   } = z6();
   if (!containingProductComponent) return null;
-  let f = stateGroupSelectionMode === iCO.STATE && !e;
+  let f = stateGroupSelectionMode === StateHierarchy.STATE && !e;
   return jsx(E, {
     name: "component_title_control",
     children: jsx(_$$R, {

@@ -1,8 +1,8 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { wq } from "../905/234821";
 let r = new class {
   constructor() {
-    this.FileCommentPinImpl = vh();
+    this.FileCommentPinImpl = createNoOpValidator();
   }
   setPin(e, t) {
     return this.FileCommentPinImpl.validate(({

@@ -5,16 +5,16 @@ import { fI, R1, bv, Mk, iB, kp, s9, It, lY, C1, rm, SV, $c, cq, ph, P6 } from "
 import { cY, UU, Ej } from "../vendor/343575";
 import { A as _$$A } from "../vendor/723372";
 import { o as _$$o } from "../905/821217";
-import { Z, q } from "../905/751750";
+import { useSelectionContext, useSelectionProvider } from "../905/751750";
 import { iM, If } from "../905/472756";
-import { Qv } from "../905/959312";
+import { useRecording } from "../905/959312";
 import { $ } from "../905/61417";
 import { _ as _$$_ } from "../figma_app/496441";
 import { fP, mc as _$$mc } from "../905/691059";
 import { Lh } from "../figma_app/415899";
 import { R } from "../905/457273";
-import { r as _$$r } from "../905/577641";
-import { Ju } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { preventAndStopEvent } from "../905/955878";
 import { Q } from "../905/586361";
 import { E as _$$E } from "../905/172252";
 import { Os, Uw, Ym } from "../905/743079";
@@ -27,7 +27,7 @@ let E = forwardRef(({
   ...s
 }, o) => {
   let l = iM(["description"]);
-  let d = Qv(e, {
+  let d = useRecording(e, {
     eventName: "click",
     recordingKey: r
   }, [e, i]);
@@ -240,7 +240,7 @@ export function $$T10(e) {
       },
       getContextMenuTriggerProps: () => ({
         onContextMenu: t => {
-          t.shiftKey || (Ju(t), e(t.clientX, t.clientY));
+          t.shiftKey || (preventAndStopEvent(t), e(t.clientX, t.clientY));
         },
         onTouchStart: ({
           touches: t
@@ -332,7 +332,7 @@ export let $$R8 = forwardRef(({
   let P = SV([ref, T, _ref, d]);
   let O = activeIndex === index;
   let D = () => setOpen(!0);
-  let L = Qv(D, {
+  let L = useRecording(D, {
     eventName: "click",
     recordingKey: o
   }, [D, e]);
@@ -346,7 +346,7 @@ export let $$R8 = forwardRef(({
     "aria-disabled": e,
     tabIndex: O ? 0 : -1,
     ...N,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ref: P,
     ...l,
     ...a,
@@ -432,7 +432,7 @@ export let $$P0 = forwardRef(({
         }),
         className: _$$A("menu-primitive__container__5lt-5", i),
         "data-fpl-menu-container": !0,
-        ..._$$r,
+        ...defaultComponentAttribute,
         ...o,
         ...t,
         children: jsx(ph, {
@@ -470,13 +470,13 @@ export let $$D9 = forwardRef(({
   htmlAttributes: e,
   ...t
 }, i) => {
-  let r = Z();
+  let r = useSelectionContext();
   return jsx("li", {
     ref: i,
     id: r,
     role: "none",
     ...e,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...t
   });
 });
@@ -487,7 +487,7 @@ export let $$L1 = forwardRef(({
   htmlAttributes: i,
   ...r
 }, a) => {
-  let [s, o] = q();
+  let [s, o] = useSelectionProvider();
   return t ? jsx(o, {
     value: s,
     children: jsxs("ul", {
@@ -495,14 +495,14 @@ export let $$L1 = forwardRef(({
       "aria-labelledby": s,
       role: "group",
       ...i,
-      ..._$$r,
+      ...defaultComponentAttribute,
       ...r,
       children: [t, e]
     })
   }) : jsx("ul", {
     role: "none",
     ...i,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...r,
     children: e
   });
@@ -577,7 +577,7 @@ let $$j5 = forwardRef(({
       g.current = "idle";
       cancelAnimationFrame(f.current);
     },
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...o,
     children: t
   });

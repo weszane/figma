@@ -17,7 +17,7 @@ import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { bx } from "../905/34809";
 import { vt } from "../figma_app/598926";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
@@ -30,7 +30,7 @@ import { H_ } from "../figma_app/336853";
 import { C1 } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
 import { Wj } from "../905/913057";
-import { b as _$$b3 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { e6 } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
 import { e0 } from "../905/696396";
@@ -94,7 +94,7 @@ export function $$er0(e) {
   let [G, V] = useState(0);
   let z = FTeamAccessPermissionType.TEAM_ACCESS_EDIT;
   let H = _$$h.useTrackingContext({
-    trigger: _$$b3.FOLDER_CREATION_MODAL
+    trigger: UpsellModalType.FOLDER_CREATION_MODAL
   });
   let K = useSelector(e => e.contacts);
   let Y = useSelector(e => e.dropdownShown);
@@ -160,7 +160,7 @@ export function $$er0(e) {
     eb(ef());
   }, [ep, ef]);
   let ew = () => {
-    1 === G ? V(0) : (t(Lo()), t(bx()));
+    1 === G ? V(0) : (t(popModalStack()), t(bx()));
   };
   let ej = e => t9(e, ed, e_);
   let eT = e => {
@@ -170,7 +170,7 @@ export function $$er0(e) {
   let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => xf(e) && !H_(e_.domains, e)) : [];
   let eI = e => {
     if (ed && ed?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
-      t(to({
+      t(showModalHandler({
         type: _$$F,
         data: {
           emails: e,

@@ -19,7 +19,7 @@ import { K as _$$K } from "../905/443068";
 import { N as _$$N2 } from "../905/438674";
 import { Pw, $n } from "../905/521428";
 import { A as _$$A } from "../905/251970";
-import { cfv, xae, gw5, KpW, kul, glU, hKj, m1T } from "../figma_app/763686";
+import { Positioning, UserInterfaceElements, WhiteboardStarterKitCppBindings, CollaborationType, SchemaJoinStatus, Fullscreen, CustomPosition, LayoutTabType } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { a as _$$a } from "../905/29104";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -58,13 +58,13 @@ import { $ as _$$$, N as _$$N3 } from "../figma_app/191390";
 import { useAtomValue } from "../vendor/525001";
 import { buildUploadUrl, isDevEnvironment, buildStaticUrl, getInitialOptions } from "../figma_app/169182";
 import { V as _$$V } from "../905/223767";
-import { to as _$$to, Ce, $O } from "../905/156213";
+import { showModalHandler, hideModal, showModal } from "../905/156213";
 import { hn } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { mp as _$$mp, t as _$$t2, tH as _$$tH, Ot, M$, Fy } from "../figma_app/579169";
 import { r1 as _$$r2, Fu } from "../figma_app/545877";
-import { b as _$$b2 } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { xp, Q1, Xj } from "../905/472146";
 import { IR } from "../figma_app/625596";
 import { w as _$$w, y as _$$y } from "../905/129046";
@@ -153,7 +153,7 @@ import { lQ } from "../905/934246";
 import { YQ } from "../905/502364";
 import { Dv, Du, NJ } from "../figma_app/419216";
 import { O as _$$O } from "../9410/435916";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { O as _$$O2 } from "../9410/241650";
 import { J as _$$J } from "../9410/591377";
 import { N as _$$N5, q as _$$q } from "../figma_app/57000";
@@ -221,12 +221,12 @@ import { Y as _$$Y } from "../905/830372";
 import { lk } from "../figma_app/109538";
 import { B as _$$B3 } from "../905/380801";
 import { Bq } from "../figma_app/482142";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Wk } from "../figma_app/397269";
 import { A as _$$A11 } from "../1250/318790";
 import { logError } from "../905/714362";
-import { q as _$$q2 } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { H as _$$H } from "../figma_app/907304";
 import { w as _$$w6 } from "../figma_app/106955";
 import { m5, rj as _$$rj } from "../9410/983733";
@@ -415,7 +415,7 @@ function q({
   }, []);
   let {
     summarizeCanvasSelection
-  } = _$$ss(cfv.ABOVE, !1, "DISCOVERY_NUDGE");
+  } = _$$ss(Positioning.ABOVE, !1, "DISCOVERY_NUDGE");
   let u = Cb();
   let h = Xr(_$$v2);
   let m = o && l;
@@ -728,10 +728,10 @@ function eD() {
       label: renderI18nText("upsell.advanced_prototyping.see_plans"),
       type: "button",
       onClick: () => {
-        a(_$$to({
+        a(showModalHandler({
           type: _$$V,
           data: {
-            upsellSource: _$$b2.ADVANCED_PROTOTYPING_UPSELL,
+            upsellSource: UpsellModalType.ADVANCED_PROTOTYPING_UPSELL,
             teamId: n?.team?.id,
             openCheckoutInNewTab: !0,
             featureList: xp(Q1.filter(e => e !== Xj.AUDIO_CONVERSATIONS), Xj.ADVANCED_PROTOTYPING)
@@ -1465,7 +1465,7 @@ function ic() {
     if (!isShowing) return;
     let t = i.getState().leftPanel.activeTab;
     e(FP({
-      tab: xae.ASSETS
+      tab: UserInterfaceElements.ASSETS
     }));
     return () => {
       e(FP({
@@ -1493,11 +1493,11 @@ function ic() {
       label: renderI18nText("rcs.upsell_libraries.see_plans"),
       type: "button",
       onClick: () => {
-        e(_$$to({
+        e(showModalHandler({
           type: _$$V,
           data: {
             teamId: t ?? void 0,
-            upsellSource: _$$b2.UPSELL_LIBRARIES_REUSE_COMPONENTS_OVERLAY,
+            upsellSource: UpsellModalType.UPSELL_LIBRARIES_REUSE_COMPONENTS_OVERLAY,
             openCheckoutInNewTab: !0
           }
         }));
@@ -1791,7 +1791,7 @@ iX.displayName = "FigJamOnboardingModal";
 let iQ = buildUploadUrl("07ff49c75c8933ea70ff2e4776503291c31a35ef");
 function i$(e) {
   let t = _$$O2();
-  useEffect(() => (Y5.triggerAction("set-tool-hand", null), () => Y5.triggerAction("set-tool-default", null)), []);
+  useEffect(() => (fullscreenValue.triggerAction("set-tool-hand", null), () => fullscreenValue.triggerAction("set-tool-default", null)), []);
   useEffect(() => (t({
     eventName: "hand_tooltip_shown"
   }), () => t({
@@ -2059,7 +2059,7 @@ function rg() {
           i();
           return;
         }
-        n(_$$to({
+        n(showModalHandler({
           type: g_,
           data: {
             fileKey: a.key,
@@ -2148,7 +2148,7 @@ function rH({
   let a = _$$O2();
   return {
     onNext: useCallback(() => {
-      i && (r(_$$to({
+      i && (r(showModalHandler({
         type: g_,
         data: {
           fileKey: i.key,
@@ -4153,8 +4153,8 @@ let ni = e => {
     d(!1);
   }), [d]);
   let c = _$$g();
-  useEffect(() => (c && gw5?.setFigjamStarterKitEnabled(!0), () => {
-    gw5?.setFigjamStarterKitEnabled(!1);
+  useEffect(() => (c && WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!0), () => {
+    WhiteboardStarterKitCppBindings?.setFigjamStarterKitEnabled(!1);
   }), [c]);
   let u = Xr(Qs);
   useEffect(() => {
@@ -4173,7 +4173,7 @@ let ni = e => {
     a(_$$b({
       figjam_browse_templates_modal_onboarding_item_selected: !0
     }));
-    a(Ce());
+    a(hideModal());
     t(_$$tX2.COMPLETED);
   }, [_, a, t]);
   let y = t => {
@@ -4197,7 +4197,7 @@ let ni = e => {
       hovered: e
     }),
     useCase: fD.BRAINSTORM,
-    previewType: KpW.MAKE_SOMETHING_BRAINSTORM
+    previewType: CollaborationType.MAKE_SOMETHING_BRAINSTORM
   }, {
     headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.team_updates"),
     headerIcon: _$$A10,
@@ -4205,7 +4205,7 @@ let ni = e => {
       hovered: e
     }),
     useCase: fD.UPDATES,
-    previewType: KpW.MAKE_SOMETHING_TEAM_UPDATES
+    previewType: CollaborationType.MAKE_SOMETHING_TEAM_UPDATES
   }, {
     headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.planning_ahead"),
     headerIcon: _$$A0,
@@ -4213,7 +4213,7 @@ let ni = e => {
       hovered: e
     }),
     useCase: fD.PLAN,
-    previewType: KpW.MAKE_SOMETHING_PLANNING
+    previewType: CollaborationType.MAKE_SOMETHING_PLANNING
   }, {
     headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.team_chart"),
     headerIcon: _$$A1,
@@ -4221,7 +4221,7 @@ let ni = e => {
       hovered: e
     }),
     useCase: fD.TEAM,
-    previewType: KpW.MAKE_SOMETHING_TEAM_CHART
+    previewType: CollaborationType.MAKE_SOMETHING_TEAM_CHART
   }];
   function v(e, t) {
     let i = C.findIndex(t => t.useCase === e) + t;
@@ -4245,7 +4245,7 @@ let ni = e => {
       });
     },
     onClickMoreTemplatesButton: () => {
-      a($O({
+      a(showModal({
         type: PH.type,
         data: {
           templateInsertionLocation: e.templateInsertionLocation,
@@ -4292,7 +4292,7 @@ let nn = _$$n2(({
   let i = useDispatch();
   let r = _$$aV();
   let a = _$$g();
-  let o = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let o = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let {
     hubFiles,
     templates,
@@ -4341,7 +4341,7 @@ let nn = _$$n2(({
             figjam_browse_templates_modal_onboarding_item_selected: !0
           }));
           t(_$$tX2.USE_CASE_STEPS);
-          r === fD.PLAN ? glU.setCanvasZoomScale(.8) : r === fD.TEAM && glU.setCanvasZoomScale(1.2);
+          r === fD.PLAN ? Fullscreen.setCanvasZoomScale(.8) : r === fD.TEAM && Fullscreen.setCanvasZoomScale(1.2);
         },
         triggeredFrom: "browse-templates-make-something",
         selectTemplateAfterInsertion: !1
@@ -4459,9 +4459,9 @@ function ns(e) {
       trackUseCaseClick(e);
     },
     onUseCasePreview(e, t) {
-      gw5.clearFigjamStarterKitPreview();
-      gw5.rotateFigjamStarterKitStrings();
-      gw5.showFigjamStarterKitPreview(t);
+      WhiteboardStarterKitCppBindings.clearFigjamStarterKitPreview();
+      WhiteboardStarterKitCppBindings.rotateFigjamStarterKitStrings();
+      WhiteboardStarterKitCppBindings.showFigjamStarterKitPreview(t);
       trackUseCaseHover(e);
     },
     shouldAcceptClickUseCaseTile: () => !l.current,
@@ -4469,7 +4469,7 @@ function ns(e) {
   });
   function y() {
     o(!1);
-    gw5.clearFigjamStarterKitPreview();
+    WhiteboardStarterKitCppBindings.clearFigjamStarterKitPreview();
     setHoveredUseCase(fD.NONE);
   }
   return canInsert ? jsx("div", {
@@ -5361,9 +5361,9 @@ function n8(e) {
       i = e.nodeId;
       n4.createdSticky = i;
     }
-    Y5.fromFullscreen.on("createdSticky", e);
+    fullscreenValue.fromFullscreen.on("createdSticky", e);
     return () => {
-      Y5.fromFullscreen.removeListener("createdSticky", e);
+      fullscreenValue.fromFullscreen.removeListener("createdSticky", e);
     };
   }, [onClickPrimaryCta]);
   let a = _$$L();
@@ -5439,9 +5439,9 @@ function ae(e) {
       i = e.nodeId;
       n4.createdStamp = i;
     }
-    Y5.fromFullscreen.on("createdStamp", e);
+    fullscreenValue.fromFullscreen.on("createdStamp", e);
     return () => {
-      Y5.fromFullscreen.removeListener("createdStamp", e);
+      fullscreenValue.fromFullscreen.removeListener("createdStamp", e);
     };
   }, [onClickPrimaryCta]);
   let s = _$$L();
@@ -5793,9 +5793,9 @@ function ah(e) {
     function e() {
       onClickPrimaryCta();
     }
-    Y5.fromFullscreen.on("finishedEditingText", e);
+    fullscreenValue.fromFullscreen.on("finishedEditingText", e);
     return () => {
-      Y5.fromFullscreen.removeListener("finishedEditingText", e);
+      fullscreenValue.fromFullscreen.removeListener("finishedEditingText", e);
     };
   }, [onClickPrimaryCta]);
   return jsx(vX, {
@@ -5837,9 +5837,9 @@ function am(e) {
     function e() {
       onClickPrimaryCta();
     }
-    Y5.fromFullscreen.on("finishedEditingShapeWithText", e);
+    fullscreenValue.fromFullscreen.on("finishedEditingShapeWithText", e);
     return () => {
-      Y5.fromFullscreen.removeListener("finishedEditingShapeWithText", e);
+      fullscreenValue.fromFullscreen.removeListener("finishedEditingShapeWithText", e);
     };
   }, [onClickPrimaryCta]);
   return jsx(vX, {
@@ -6133,9 +6133,9 @@ function aS(e) {
     function e() {
       onClickPrimaryCta();
     }
-    Y5.fromFullscreen.on("finishedEditingShapeWithText", e);
+    fullscreenValue.fromFullscreen.on("finishedEditingShapeWithText", e);
     return () => {
-      Y5.fromFullscreen.removeListener("finishedEditingShapeWithText", e);
+      fullscreenValue.fromFullscreen.removeListener("finishedEditingShapeWithText", e);
     };
   }, [onClickPrimaryCta]);
   return jsx(vX, {
@@ -6206,9 +6206,9 @@ function aI(e) {
     function e() {
       onClickPrimaryCta();
     }
-    Y5.fromFullscreen.on("quickCreate", e);
+    fullscreenValue.fromFullscreen.on("quickCreate", e);
     return () => {
-      Y5.fromFullscreen.removeListener("quickCreate", e);
+      fullscreenValue.fromFullscreen.removeListener("quickCreate", e);
     };
   }, [onClickPrimaryCta]);
   return jsx(vX, {
@@ -6640,9 +6640,9 @@ function az(e) {
     function e() {
       onClickPrimaryCta();
     }
-    Y5.fromFullscreen.on("finishedEditingSticky", e);
+    fullscreenValue.fromFullscreen.on("finishedEditingSticky", e);
     return () => {
-      Y5.fromFullscreen.removeListener("finishedEditingSticky", e);
+      fullscreenValue.fromFullscreen.removeListener("finishedEditingSticky", e);
     };
   }, [onClickPrimaryCta]);
   return jsx(vX, {
@@ -7034,7 +7034,7 @@ let si = [{
   key: 3,
   elem: renderI18nText("oss_sales_upsell_overlay.feature3")
 }];
-let sr = Ju(function ({
+let sr = registerModal(function ({
   onDismiss: e
 }) {
   let t = useAtomWithSubscription(yV);
@@ -7049,7 +7049,7 @@ let sr = Ju(function ({
     hideOnConfirm: !1,
     isLoading: !t?.teamId,
     onCancel: () => {
-      i(_$$to({
+      i(showModalHandler({
         type: lk,
         data: {
           source: _$$B3.LIBRARY_DUPLICATE_OSS_SALES_UPSELL,
@@ -7061,7 +7061,7 @@ let sr = Ju(function ({
     onConfirm: () => {
       t?.teamId && i(Bq({
         openInNewTab: !0,
-        upsellSource: _$$b2.OSS_SALES_UPSELL_MODAL
+        upsellSource: UpsellModalType.OSS_SALES_UPSELL_MODAL
       }));
     },
     overrideOnHide: e,
@@ -7145,7 +7145,7 @@ function sa({
     modalType: q3.FEATURE_UPDATE,
     element: function (e) {
       _$$h2(() => {
-        i(_$$to({
+        i(showModalHandler({
           type: sr,
           data: {
             onDismiss: e.dismissModal
@@ -7208,7 +7208,7 @@ function s_({
   });
 }
 function sx() {
-  let e = _$$q2();
+  let e = useFullscreenReady();
   let t = useAtomWithSubscription(_$$w6);
   let i = useAtomWithSubscription(m5);
   let a = useAtomWithSubscription(sf);
@@ -7321,7 +7321,7 @@ function sC() {
           i();
           return;
         }
-        n(_$$to({
+        n(showModalHandler({
           type: g_,
           data: {
             fileKey: a.key,
@@ -7831,7 +7831,7 @@ function oo() {
         let i = parseInt(t);
         if (isNaN(i) || i < 0 || i >= e.length) return;
         e.forEach((e, t) => {
-          t !== i && Y5.triggerAction("page-delete", {
+          t !== i && fullscreenValue.triggerAction("page-delete", {
             args: {
               nodeId: e.nodeId,
               skipVisualBell: !0
@@ -7857,7 +7857,7 @@ function oo() {
               type: _$$n.HubFile
             },
             userTriggered: !1,
-            templateInsertionDirection: hKj.ABOVE,
+            templateInsertionDirection: CustomPosition.ABOVE,
             triggeredFrom: "workflow-interop"
           });
         }
@@ -8053,7 +8053,7 @@ function oS() {
     x(!0);
   });
   useEffect(() => {
-    !l || d || c || m || isShowing || !_ || b?.type !== "TEXT" || C !== m1T.DESIGN_LAYOUT || isShowing || show();
+    !l || d || c || m || isShowing || !_ || b?.type !== "TEXT" || C !== LayoutTabType.DESIGN_LAYOUT || isShowing || show();
   }, [b, _, isShowing, show, C, l, d, c, m]);
   let v = !!_$$f(Of(wn.FORMAT_TEXT, !1).tutorialPlayedUserFlag);
   let E = useMemo(() => _$$Z(v, !1), [v]);

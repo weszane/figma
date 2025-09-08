@@ -3,14 +3,14 @@ import { useRef, useEffect, useCallback, useState, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { Pt } from "../figma_app/806412";
 import { MM, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { sT } from "../figma_app/740163";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
 import { f4 } from "../figma_app/722362";
@@ -95,7 +95,7 @@ function P({
     "data-tooltip-type": Ib.TEXT,
     "aria-label": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
     "data-tooltip": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
-    dataTestId: `stroke-button-${gl(a) ? "mixed" : a.join(",")}`,
+    dataTestId: `stroke-button-${isInvalidValue(a) ? "mixed" : a.join(",")}`,
     recordingKey: Pt(r, "borderSide")
   };
   let l = Fz(a, t);
@@ -108,7 +108,7 @@ function P({
     recordingKey: s.recordingKey,
     actionOnPointerDown: !0,
     htmlAttributes: {
-      "data-testid": `stroke-button-${gl(a) ? "mixed" : a.join(",")}`,
+      "data-testid": `stroke-button-${isInvalidValue(a) ? "mixed" : a.join(",")}`,
       "data-tooltip": s["data-tooltip"],
       "data-tooltip-type": s["data-tooltip-type"]
     },
@@ -241,8 +241,8 @@ function L({
     wrapper: t => jsx(sA, {
       recordingKey: Pt(o, "independentStrokeWeightInputWrapper"),
       fields: E,
-      resolvedType: rXF.FLOAT,
-      currentFieldValue: hS(i) ? i : void 0,
+      resolvedType: VariableResolvedDataType.FLOAT,
+      currentFieldValue: isValidValue(i) ? i : void 0,
       noBorder: !0,
       inputClassName: e,
       children: t

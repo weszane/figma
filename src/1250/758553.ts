@@ -5,14 +5,14 @@ import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
-import { AS, to } from "../905/156213";
+import { hideModalHandler, showModalHandler } from "../905/156213";
 import { Y9 } from "../905/504768";
 import { iZ } from "../905/372672";
 import { D6, j_ } from "../figma_app/465071";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { V } from "../7037/903447";
-let h = Ju(function (e) {
+let h = registerModal(function (e) {
   let t = renderI18nText("fig_feed.delete_confirmation");
   e.numComments && e.numReactions ? t = renderI18nText("fig_feed.delete_confirmation_with_comments_and_reactions", {
     numCommentsAndReactions: e.numComments + e.numReactions
@@ -55,7 +55,7 @@ export function $$y1(e) {
   let g = feedPost.comments.length;
   let b = feedPost.reactions.length;
   let y = useCallback(() => {
-    t(AS());
+    t(hideModalHandler());
     XHR.del(`/api/feed_posts/post_uuid/${feedPost.publicUuid}`).then(() => {
       trackEventAnalytics("Team Feed Post Deleted", {
         postUuid: feedPost.publicUuid
@@ -64,7 +64,7 @@ export function $$y1(e) {
     });
   }, [t, feedPost.publicUuid, n]);
   let w = useCallback(() => {
-    t(to({
+    t(showModalHandler({
       type: h,
       data: {
         onConfirm: y,

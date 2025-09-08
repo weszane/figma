@@ -11,7 +11,7 @@ import { _ as _$$_ } from "../905/456042";
 import { vQ } from "../5430/664984";
 import { X_ } from "../figma_app/777551";
 import { vt } from "../figma_app/306946";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { YW } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -32,7 +32,7 @@ export function $$T0({
   let E = iZ();
   let S = useCallback(() => {
     if (I) {
-      T(to({
+      T(showModalHandler({
         type: _$$s,
         data: {
           dispatch: T,
@@ -43,7 +43,7 @@ export function $$T0({
     }
     let t = u5(e => {
       trackEventAnalytics("try_it_out_drafts_picker_menu_opened", r);
-      T(to({
+      T(showModalHandler({
         type: _$$_,
         data: {
           payload: e

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { glU, xal } from "../figma_app/763686";
+import { Fullscreen, DataLoadStatus } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
@@ -25,7 +25,7 @@ export function $$h0(e) {
   let I = Xr(Yh);
   let N = useCallback(e => {
     h(e);
-    glU.triggerActionInUserEditScope("track-page-rename", {
+    Fullscreen.triggerActionInUserEditScope("track-page-rename", {
       args: {
         nodeId: e
       }
@@ -61,14 +61,14 @@ export function $$h0(e) {
         a += 1;
         s = e[a];
       }
-      if (s) J(() => $P(s.nodeId, t, j, y, Fy(e, s.nodeId) === xal.LOADED, T));else {
+      if (s) J(() => $P(s.nodeId, t, j, y, Fy(e, s.nodeId) === DataLoadStatus.LOADED, T));else {
         let a = r - 1;
         let s = e[a];
         for (; s && s.isDivider;) {
           a -= 1;
           s = e[a];
         }
-        s ? J(() => $P(s.nodeId, t, j, y, Fy(e, s.nodeId) === xal.LOADED, T)) : w(null);
+        s ? J(() => $P(s.nodeId, t, j, y, Fy(e, s.nodeId) === DataLoadStatus.LOADED, T)) : w(null);
       }
     }
     h(e => e === r ? null : e);

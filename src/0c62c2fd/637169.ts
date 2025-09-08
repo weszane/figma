@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { J } from "../905/614223";
-import { Egt } from "../figma_app/763686";
+import { SceneGraphHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -126,7 +126,7 @@ export function $$$$A1() {
     }
   });
   async function U() {
-    c && r && Egt && (await getSingletonSceneGraph().setCurrentPageAsync(r), Egt.replaceSelection([c], !0), await F(await QZ({
+    c && r && SceneGraphHelpers && (await getSingletonSceneGraph().setCurrentPageAsync(r), SceneGraphHelpers.replaceSelection([c], !0), await F(await QZ({
       nodeId: c,
       alwaysPan: !0
     }), {

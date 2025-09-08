@@ -7,7 +7,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { tI } from "../figma_app/599327";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { Z } from "../469e6e40/184197";
 import { fu } from "../figma_app/831799";
 import { AG } from "../figma_app/217457";
@@ -17,7 +17,7 @@ import { MX, cI } from "../figma_app/684446";
 import { vr } from "../figma_app/514043";
 import { xS } from "../figma_app/193867";
 import { UserRole, GroupType } from "../905/441038";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 function k(e) {
   let t = useDispatch();
@@ -37,7 +37,7 @@ function k(e) {
           licenseQuantities: e.addedQuantities,
           planInvoiceId: e.planInvoiceId
         }));
-        t(Ce());
+        t(hideModal());
       },
       title: getI18nString("members_table.true_up.freeze_invoice_checkbox_title"),
       disableClickOutsideToHide: !0,
@@ -83,7 +83,7 @@ function k(e) {
     })
   });
 }
-export let $$E0 = Ju(function (e) {
+export let $$E0 = registerModal(function (e) {
   let t = MX();
   let a = o0(e.invoice);
   let r = _k(e.invoice);

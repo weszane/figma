@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { gw5, T4N } from "../figma_app/763686";
+import { WhiteboardStarterKitCppBindings, WhiteboardSectionPresetPickerCppBindings } from "../figma_app/763686";
 import { useAtomWithSubscription, Rq } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText } from "../905/303541";
@@ -10,7 +10,7 @@ import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { mp } from "../figma_app/579169";
 import { Fu } from "../figma_app/545877";
-import { q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { zC, re } from "../figma_app/186343";
 import { Fk } from "../figma_app/167249";
 import { N as _$$N } from "../figma_app/268271";
@@ -33,7 +33,7 @@ export function $$R2() {
   let e = useAtomWithSubscription(_$$P) === iH.TRUE;
   let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((t, i) => zC(t, i) || e && re(t, i), t);
-  let m = q();
+  let m = useFullscreenReady();
   let R = useAtomWithSubscription(Rq(Sb));
   let D = useAtomWithSubscription($$L0);
   let M = useAtomWithSubscription(_$$w2);
@@ -99,8 +99,8 @@ export function $$R2() {
       label: renderI18nText("whiteboard.section_presets_onboarding.feature_announcement.secondary"),
       type: "button",
       onClick: () => {
-        e && gw5.setFigjamStarterKitEnabled(!1);
-        T4N.createSectionForOnboarding();
+        e && WhiteboardStarterKitCppBindings.setFigjamStarterKitEnabled(!1);
+        WhiteboardSectionPresetPickerCppBindings.createSectionForOnboarding();
         complete();
       },
       ctaTrackingDescriptor: _$$c.SECTION_PRESET_PICKER_SHOW_ME

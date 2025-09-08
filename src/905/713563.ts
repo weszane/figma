@@ -6,7 +6,7 @@ import { CZ, l4 } from "../905/124270";
 import { jN } from "../905/171315";
 import { Hv } from "../905/61477";
 import { oB, sf } from "../905/929976";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { nG, qr, Je, PP, PI } from "../905/977218";
 import { WY, $L, uH, Rr } from "../figma_app/162807";
 import { vj } from "../905/574958";
@@ -50,7 +50,7 @@ export function $$A0(e, t, i) {
         view: "search",
         entryPoint: e,
         previousView: v && (QB(v) || bN(v)) ? v : void 0
-      })), d(AS()));
+      })), d(hideModalHandler()));
       let i = o ? Rr.ALL_TYPES_STREAMING : Rr.ALL_TYPES_BLOCKING;
       d(PI({
         query: n,

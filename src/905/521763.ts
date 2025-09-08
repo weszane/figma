@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { yG } from "../905/859698";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { lS } from "../905/296461";
 import { tm } from "../905/261789";
 import { u7, GS } from "../figma_app/846140";
@@ -30,19 +30,19 @@ export function $$p0() {
       switch (t.split("/")[0]) {
         case u7.CORNER_RADIUS:
         case u7.SPACING:
-          i.has(rXF.FLOAT) && (e[t] = {
+          i.has(VariableResolvedDataType.FLOAT) && (e[t] = {
             value: 1,
             rule: `scale factor, must be between ${Xy} and ${Ne} inclusive`
           });
           break;
         case u7.FONT:
-          i.has(rXF.STRING) && (e[u7.FONT] = {
+          i.has(VariableResolvedDataType.STRING) && (e[u7.FONT] = {
             value: GS.DEFAULT,
             rule: `must be one of: ${Object.values(GS).map(e => `"${e}"`).join(", ")}`
           });
           break;
         case u7.COLOR:
-          i.has(rXF.COLOR) && (e[t] = {
+          i.has(VariableResolvedDataType.COLOR) && (e[t] = {
             value: "#FFFFFF"
           });
           break;

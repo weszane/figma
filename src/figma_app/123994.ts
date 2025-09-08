@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useState, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
-import { tvY } from "../figma_app/763686";
+import { BackgroundPattern } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { mz } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { _G, Pv } from "../905/619652";
 import { l6, c$ } from "../905/794875";
 import { eD, SL, cT } from "../905/257620";
@@ -199,7 +199,7 @@ export let $$P4 = forwardRef(function ({
   let [p, _] = useState(null);
   let g = useCallback(() => {
     let n = new Point(t, r ?? t);
-    let i = _G(n, e, !0, tvY.CHECKERBOARD, !1, !1, !0, d);
+    let i = _G(n, e, !0, BackgroundPattern.CHECKERBOARD, !1, !1, !0, d);
     let a = null;
     i && i.pixels && i.pixelSize && i.displaySize && (a = {
       src: Pv(i.pixels, i.pixelSize, o),
@@ -211,8 +211,8 @@ export let $$P4 = forwardRef(function ({
   let E = useCallback(() => {
     null !== e && f();
   }, [e, f]);
-  useEffect(() => (Y5.fromFullscreen.on("pingSceneGraphEvent", E), g(), () => {
-    Y5.fromFullscreen.removeListener("pingSceneGraphEvent", E);
+  useEffect(() => (fullscreenValue.fromFullscreen.on("pingSceneGraphEvent", E), g(), () => {
+    fullscreenValue.fromFullscreen.removeListener("pingSceneGraphEvent", E);
     f.cancel();
   }), [d]);
   return jsx("div", {

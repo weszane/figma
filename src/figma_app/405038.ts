@@ -1,5 +1,5 @@
 import { Nz } from "../905/417232";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 function a(e, t) {
   return void 0 === e && void 0 === t || void 0 !== e && void 0 !== t && JSON.stringify(e) === JSON.stringify(t);
 }
@@ -43,7 +43,7 @@ export function $$d1(e, t, r, d, c) {
     actionIndexPath
   } = d;
   let _ = $$l2(action);
-  if (_ && gl(action) || a(action, o(e, t)) && actionIndexPath.equals(t.path)) return {
+  if (_ && isInvalidValue(action) || a(action, o(e, t)) && actionIndexPath.equals(t.path)) return {
     newActions: void 0,
     newExpandedRows: void 0
   };

@@ -32,8 +32,8 @@ import { LR } from "../figma_app/120210";
 import { AE } from "../9410/757252";
 import { C as _$$C2 } from "../9410/365876";
 import { I1, d6, t1 as _$$t2, Mg, $o } from "../9410/595754";
-import { glU, KWd, xbm, NLJ, rcl, V5h, VTL, qq, rrT, cxo, W8Y, m1T } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen, TransactionCommand, BorderStyle, DesignGraphElements, Command, AlignmentPosition, ConfirmationLevel, ShapeSidebarMode, NodePropertyCategory, ToolType, SessionStatus, LayoutTabType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import F from "classnames";
 import { ez as _$$ez, U9, SK, wp, GI, IZ, qL } from "../905/125333";
 import { LH } from "../figma_app/384673";
@@ -86,11 +86,11 @@ import { vm, Vz, gy } from "../figma_app/431620";
 import { bL, c$ } from "../905/575478";
 import { q as _$$q } from "../905/932270";
 import { XS as _$$XS, BB, nU } from "../9410/999133";
-import { nj, B9 } from "../905/125019";
+import { sha1HexFromBytes, bytesToHex } from "../905/125019";
 import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
 import { o as _$$o } from "../9410/935965";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { jS, Pv } from "../905/619652";
 import { F as _$$F3 } from "../905/258517";
 import { B as _$$B } from "../figma_app/397954";
@@ -494,10 +494,10 @@ let ef = memo(function ({
             tool: e
           });
           N.current = !1;
-          glU?.triggerActionInUserEditScope("set-tool-default", {
+          Fullscreen?.triggerActionInUserEditScope("set-tool-default", {
             source: fK
           });
-          oW.trigger("action", KWd.CLEAR);
+          oW.trigger("action", TransactionCommand.CLEAR);
           v(jD());
           let n = F.current;
           if (n) {
@@ -558,7 +558,7 @@ let ef = memo(function ({
           stickyAnimationState: f,
           shapeStrokeProps: {
             isDragging: A,
-            styleType: void 0 !== g ? g : xbm.NONE,
+            styleType: void 0 !== g ? g : BorderStyle.NONE,
             svgToCanvasScale: p && u ? 1 / (p * u) : 1
           }
         }) : c
@@ -570,9 +570,9 @@ let e_ = ["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROUND
 function eg(e) {
   let t = lx.get(e);
   let i = t && e_.includes(t);
-  let n = e === NLJ.CONNECTOR_ELBOWED;
-  let r = e === NLJ.CONNECTOR_CURVED && getFeatureFlags().ad_curved_connectors;
-  let a = e === NLJ.CONNECTOR_STRAIGHT;
+  let n = e === DesignGraphElements.CONNECTOR_ELBOWED;
+  let r = e === DesignGraphElements.CONNECTOR_CURVED && getFeatureFlags().ad_curved_connectors;
+  let a = e === DesignGraphElements.CONNECTOR_STRAIGHT;
   return i || n || r || a;
 }
 function ej() {
@@ -587,18 +587,18 @@ let eC = YCy;
 let eT = zuZ;
 let eE = {
   ELBOWED: {
-    action: rcl.SET_TOOL_CONNECTOR_ELBOWED,
-    tool: NLJ.CONNECTOR_ELBOWED,
+    action: Command.SET_TOOL_CONNECTOR_ELBOWED,
+    tool: DesignGraphElements.CONNECTOR_ELBOWED,
     Icon: EJ
   },
   CURVED: {
-    action: rcl.SET_TOOL_CONNECTOR_CURVED,
-    tool: NLJ.CONNECTOR_CURVED,
+    action: Command.SET_TOOL_CONNECTOR_CURVED,
+    tool: DesignGraphElements.CONNECTOR_CURVED,
     Icon: Mm
   },
   STRAIGHT: {
-    action: rcl.SET_TOOL_CONNECTOR_STRAIGHT,
-    tool: NLJ.CONNECTOR_STRAIGHT,
+    action: Command.SET_TOOL_CONNECTOR_STRAIGHT,
+    tool: DesignGraphElements.CONNECTOR_STRAIGHT,
     Icon: vO
   }
 };
@@ -654,7 +654,7 @@ let ew = memo(function ({
   let x = `shape-${e.toLowerCase()}`;
   let g = draggedTool === x;
   let j = useCallback((e, t) => {
-    l7.user("drop-shape-on-canvas", () => glU?.dropDiagramItemOntoCanvas(c, Math.round(e.x), Math.round(e.y), Math.round(t.x), Math.round(t.y), V5h.TOP_LEFT, VTL.NO));
+    permissionScopeHandler.user("drop-shape-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(c, Math.round(e.x), Math.round(e.y), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
   }, [c]);
   if (!f) return null;
   let b = (f?.canvasToSvgScale || 1) / t;
@@ -788,7 +788,7 @@ function eO({
   }, [d, t]);
   let h = "connector" === draggedTool;
   let m = useCallback((e, t) => {
-    l7.user("drop-connector-on-canvas", () => glU?.dropDiagramItemOntoCanvas(eE[d].tool, Math.round(e.x), Math.round(e.y + 7 * _$$P), Math.round(t.x), Math.round(t.y), V5h.TOP_LEFT, VTL.NO));
+    permissionScopeHandler.user("drop-connector-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(eE[d].tool, Math.round(e.x), Math.round(e.y + 7 * _$$P), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
   }, [d]);
   let f = eE[d].Icon;
   let _ = "connector";
@@ -1045,8 +1045,8 @@ function e1() {
       let r = Jc.get(shapeWithTextType);
       if (!r) return;
       let a = Qd();
-      let s = a.get(r)?.actionEnum ?? rcl.SET_TOOL_DEFAULT;
-      glU?.triggerActionEnumInUserEditScope(s, {
+      let s = a.get(r)?.actionEnum ?? Command.SET_TOOL_DEFAULT;
+      Fullscreen?.triggerActionEnumInUserEditScope(s, {
         source: e
       });
     }, [i, shapeWithTextType, e]);
@@ -1103,8 +1103,8 @@ function e2() {
         shapeType: t,
         color: UE,
         strokeStyleType: e,
-        addToRecentsBehavior: VTL.YES,
-        toolSetSource: qq.NONE,
+        addToRecentsBehavior: ConfirmationLevel.YES,
+        toolSetSource: ShapeSidebarMode.NONE,
         size: "small",
         disableDragging: "MINDMAP_TREE_NUCLEUS" === t,
         recordingKey: Pt(d6, t)
@@ -1293,7 +1293,7 @@ function to({
     analytics: {
       name: "Drawing Tool Change Color",
       properties: {
-        tool: NLJ[e]
+        tool: DesignGraphElements[e]
       }
     },
     recordingKey: Pt(o, "customColorPopover")
@@ -1377,12 +1377,12 @@ function tE(e) {
   let i = useAtomWithSubscription(IZ);
   if (!e || !BG(e)) return null;
   switch (e) {
-    case NLJ.VECTOR_PENCIL:
+    case DesignGraphElements.VECTOR_PENCIL:
       return t.strokeWeight === uM ? "THICK" : "THIN";
-    case NLJ.HIGHLIGHTER:
+    case DesignGraphElements.HIGHLIGHTER:
       return i.strokeWeight === Iz ? "THICK" : "THIN";
-    case NLJ.WASHI_TAPE:
-    case NLJ.ERASER:
+    case DesignGraphElements.WASHI_TAPE:
+    case DesignGraphElements.ERASER:
     case null:
       return null;
     default:
@@ -1393,20 +1393,20 @@ function tS() {
   let {
     washiTapePaint
   } = useAtomWithSubscription(SK);
-  return washiTapePaint?.image?.hash && nj(washiTapePaint.image.hash);
+  return washiTapePaint?.image?.hash && sha1HexFromBytes(washiTapePaint.image.hash);
 }
 function tw() {
   let e = tS();
   return useMemo(() => !!e && !_$$B2.map(e => e.image).includes(e), [e]);
 }
 function tI() {
-  Y5.updateAppModel({
+  fullscreenValue.updateAppModel({
     currentSelectedProperty: {
-      type: rrT.STROKE_PRESET,
+      type: NodePropertyCategory.STROKE_PRESET,
       indices: [0]
     }
   });
-  glU?.uploadPaintImage("NORMAL", 1);
+  Fullscreen?.uploadPaintImage("NORMAL", 1);
 }
 let tL = atom(null);
 function tN() {
@@ -1419,7 +1419,7 @@ function tN() {
   let s = n?.paintHex;
   useEffect(() => {
     if (!e || !i) return;
-    let n = B9(i);
+    let n = bytesToHex(i);
     n !== s && a({
       paintHex: n,
       imageSrc: function (e) {
@@ -1448,7 +1448,7 @@ function tA() {
     let t = tC();
     let i = tT();
     switch (e) {
-      case NLJ.VECTOR_PENCIL:
+      case DesignGraphElements.VECTOR_PENCIL:
         return {
           currentDrawingTool: e,
           currentColor: t ?? null,
@@ -1456,7 +1456,7 @@ function tA() {
           canApplyCustomColor: !0,
           canEditColor: !0
         };
-      case NLJ.HIGHLIGHTER:
+      case DesignGraphElements.HIGHLIGHTER:
         return {
           currentDrawingTool: e,
           currentColor: i ?? null,
@@ -1464,8 +1464,8 @@ function tA() {
           canApplyCustomColor: !1,
           canEditColor: !0
         };
-      case NLJ.WASHI_TAPE:
-      case NLJ.ERASER:
+      case DesignGraphElements.WASHI_TAPE:
+      case DesignGraphElements.ERASER:
         return {
           currentDrawingTool: e,
           currentColor: null,
@@ -1475,7 +1475,7 @@ function tA() {
         };
       case null:
         return {
-          currentDrawingTool: NLJ.VECTOR_PENCIL,
+          currentDrawingTool: DesignGraphElements.VECTOR_PENCIL,
           currentColor: t ?? null,
           colorSetLegend: null,
           canApplyCustomColor: !1,
@@ -1495,20 +1495,20 @@ function tA() {
         color: r
       }];
       switch (e) {
-        case NLJ.HIGHLIGHTER:
+        case DesignGraphElements.HIGHLIGHTER:
           a({
             ...n,
             paints: s
           });
           break;
-        case NLJ.VECTOR_PENCIL:
+        case DesignGraphElements.VECTOR_PENCIL:
           i({
             ...t,
             paints: s
           });
           break;
-        case NLJ.WASHI_TAPE:
-        case NLJ.ERASER:
+        case DesignGraphElements.WASHI_TAPE:
+        case DesignGraphElements.ERASER:
         case null:
           break;
         default:
@@ -1517,7 +1517,7 @@ function tA() {
       _$$F3.trackFromFullscreen("Drawing Tool Change Color", {
         source: "default",
         color: _$$F2.format(r),
-        tool: e ? NLJ[e] : ""
+        tool: e ? DesignGraphElements[e] : ""
       });
     }, [t, i, n, a, e]);
   }();
@@ -1543,20 +1543,20 @@ function tO() {
     let [n, a] = useAtomValueAndSetter(IZ);
     return useCallback(r => {
       switch (e) {
-        case NLJ.HIGHLIGHTER:
+        case DesignGraphElements.HIGHLIGHTER:
           a({
             ...n,
             strokeWeight: "THIN" === r ? g5 : Iz
           });
           break;
-        case NLJ.VECTOR_PENCIL:
+        case DesignGraphElements.VECTOR_PENCIL:
           i({
             ...t,
             strokeWeight: "THIN" === r ? wv : uM
           });
           break;
-        case NLJ.ERASER:
-        case NLJ.WASHI_TAPE:
+        case DesignGraphElements.ERASER:
+        case DesignGraphElements.WASHI_TAPE:
         case null:
           break;
         default:
@@ -1564,18 +1564,18 @@ function tO() {
       }
       trackEventAnalytics("Drawing Tool Change Thickness", {
         thickness: r,
-        tool: e ? NLJ[e] : ""
+        tool: e ? DesignGraphElements[e] : ""
       });
     }, [e, t, n, i, a]);
   }();
   let i = function () {
     let e = useAtomWithSubscription(_$$XS);
     switch (e) {
-      case NLJ.VECTOR_PENCIL:
-      case NLJ.HIGHLIGHTER:
+      case DesignGraphElements.VECTOR_PENCIL:
+      case DesignGraphElements.HIGHLIGHTER:
         return !0;
-      case NLJ.ERASER:
-      case NLJ.WASHI_TAPE:
+      case DesignGraphElements.ERASER:
+      case DesignGraphElements.WASHI_TAPE:
       case null:
         return !1;
       default:
@@ -3570,23 +3570,23 @@ function tQ() {
 }
 let t0 = "whiteboard_toolbelt--disabled--fxdYS";
 let t1 = {
-  [NLJ.VECTOR_PENCIL]: {
-    toolId: NLJ.VECTOR_PENCIL,
+  [DesignGraphElements.VECTOR_PENCIL]: {
+    toolId: DesignGraphElements.VECTOR_PENCIL,
     getText: () => getI18nString("fullscreen_actions.set-tool-marker"),
     recordingKey: hj.PENCIL
   },
-  [NLJ.HIGHLIGHTER]: {
-    toolId: NLJ.HIGHLIGHTER,
+  [DesignGraphElements.HIGHLIGHTER]: {
+    toolId: DesignGraphElements.HIGHLIGHTER,
     getText: () => getI18nString("fullscreen_actions.set-tool-highlighter"),
     recordingKey: hj.HIGHLIGHER
   },
-  [NLJ.WASHI_TAPE]: {
-    toolId: NLJ.WASHI_TAPE,
+  [DesignGraphElements.WASHI_TAPE]: {
+    toolId: DesignGraphElements.WASHI_TAPE,
     getText: () => getI18nString("fullscreen_actions.set-tool-washi-tape"),
     recordingKey: hj.WASHI_TAPE
   },
-  [NLJ.ERASER]: {
-    toolId: NLJ.ERASER,
+  [DesignGraphElements.ERASER]: {
+    toolId: DesignGraphElements.ERASER,
     getText: () => getI18nString("fullscreen_actions.set-tool-eraser"),
     recordingKey: hj.ERASER
   }
@@ -3596,7 +3596,7 @@ function t2({
 }) {
   let t = function () {
     let e = useAtomWithSubscription(_$$B);
-    let t = useAtomWithSubscription(BB) && e === cxo.PENCIL_TOOL;
+    let t = useAtomWithSubscription(BB) && e === ToolType.PENCIL_TOOL;
     return !!useAtomWithSubscription(_$$XS) || t;
   }();
   let i = function () {
@@ -3659,13 +3659,13 @@ function t3({
   lastActiveDrawingTool: e
 }) {
   switch (e) {
-    case NLJ.VECTOR_PENCIL:
+    case DesignGraphElements.VECTOR_PENCIL:
       return jsx(tV, {});
-    case NLJ.HIGHLIGHTER:
+    case DesignGraphElements.HIGHLIGHTER:
       return jsx(tF, {});
-    case NLJ.ERASER:
+    case DesignGraphElements.ERASER:
       return jsx(tD, {});
-    case NLJ.WASHI_TAPE:
+    case DesignGraphElements.WASHI_TAPE:
       return jsx(tZ, {
         size: tW.TOOLBELT_LARGE
       });
@@ -3673,7 +3673,7 @@ function t3({
       throwTypeError(e);
   }
 }
-let t5 = [NLJ.VECTOR_PENCIL, NLJ.HIGHLIGHTER, NLJ.WASHI_TAPE, NLJ.ERASER];
+let t5 = [DesignGraphElements.VECTOR_PENCIL, DesignGraphElements.HIGHLIGHTER, DesignGraphElements.WASHI_TAPE, DesignGraphElements.ERASER];
 function t6() {
   let {
     activeToolId,
@@ -3690,7 +3690,7 @@ function t6() {
           toolId: i
         });
       },
-      customPaddingTop: i === NLJ.WASHI_TAPE ? 3 : void 0
+      customPaddingTop: i === DesignGraphElements.WASHI_TAPE ? 3 : void 0
     }, i)), jsx(_$$X, {
       extended: !0
     }), jsx(tO, {}), jsx(_$$X, {
@@ -3704,11 +3704,11 @@ function t4({
   activeTool: e
 }) {
   switch (e) {
-    case NLJ.VECTOR_PENCIL:
-    case NLJ.HIGHLIGHTER:
-    case NLJ.ERASER:
+    case DesignGraphElements.VECTOR_PENCIL:
+    case DesignGraphElements.HIGHLIGHTER:
+    case DesignGraphElements.ERASER:
       return jsx(tA, {});
-    case NLJ.WASHI_TAPE:
+    case DesignGraphElements.WASHI_TAPE:
       return jsx(tJ, {});
     default:
       return jsx(tA, {});
@@ -3752,15 +3752,15 @@ function t8({
   toolId: e
 }) {
   switch (e) {
-    case NLJ.VECTOR_PENCIL:
+    case DesignGraphElements.VECTOR_PENCIL:
       return jsx(tG, {});
-    case NLJ.HIGHLIGHTER:
+    case DesignGraphElements.HIGHLIGHTER:
       return jsx(tH, {});
-    case NLJ.WASHI_TAPE:
+    case DesignGraphElements.WASHI_TAPE:
       return jsx(tZ, {
         size: tW.SECONDARY_TOOLBELT_SMALL
       });
-    case NLJ.ERASER:
+    case DesignGraphElements.ERASER:
       return jsx(tP, {});
     default:
       throwTypeError(e);
@@ -3778,7 +3778,7 @@ function ie() {
     e && t(e);
   }, [t]);
   return jsx(ts, {
-    toolId: NLJ.STICKY,
+    toolId: DesignGraphElements.STICKY,
     legend: renderI18nText("whiteboard.delightful_toolbar.sticky.color_selector.legend"),
     color: e,
     onColorChange: i,
@@ -3978,7 +3978,7 @@ function iL({
     activeToolId
   } = t;
   let a = lO(activeToolId);
-  let s = activeToolId === NLJ.STAMP;
+  let s = activeToolId === DesignGraphElements.STAMP;
   let l = _$$iT();
   let d = function (e) {
     let t = XM();
@@ -4000,7 +4000,7 @@ function iL({
       hasRemainingVotes: i > 0,
       leaveVotingSessionAndCloseWheel: useCallback(() => {
         t && e(H1({
-          votingStage: W8Y.NOT_JOINED
+          votingStage: SessionStatus.NOT_JOINED
         }));
         e(Ho());
       }, [e, t])
@@ -4075,15 +4075,15 @@ function ik({
   }, [c, d]);
   a && void 0 === d.find(({
     toolId: e
-  }) => e !== NLJ.STAMP) && d.push(Yk.STAMP);
+  }) => e !== DesignGraphElements.STAMP) && d.push(Yk.STAMP);
   let u = [];
   for (let r of d) switch (r.toolId) {
-    case NLJ.STAMP:
+    case DesignGraphElements.STAMP:
       u.push(jsx(iL, {
         disabled: t
       }, r.toolId));
       break;
-    case NLJ.COMMENTS:
+    case DesignGraphElements.COMMENTS:
       u.push(jsx(eG, {
         toolbarState: e,
         disabled: i
@@ -4137,7 +4137,7 @@ function iD({
     onTouchEnd
   } = ee(lQ, _);
   let C = useCallback((e, t) => {
-    l7.user("drop-sticky-on-canvas", () => glU?.dropDiagramItemOntoCanvas(NLJ.STICKY, Math.round(e.x - 55), Math.round(e.y - 55), Math.round(t.x), Math.round(t.y), V5h.TOP_LEFT, VTL.NO));
+    permissionScopeHandler.user("drop-sticky-on-canvas", () => Fullscreen?.dropDiagramItemOntoCanvas(DesignGraphElements.STICKY, Math.round(e.x - 55), Math.round(e.y - 55), Math.round(t.x), Math.round(t.y), AlignmentPosition.TOP_LEFT, ConfirmationLevel.NO));
     l(!1);
     c(!1);
     p(_$$k2.DEFAULT);
@@ -4210,7 +4210,7 @@ function iP({
   let a = useCallback(() => {
     handleToolAction({
       type: fo.TOGGLE_SUBMENU_AND_TOOL,
-      toolIdToActivate: NLJ.STICKY,
+      toolIdToActivate: DesignGraphElements.STICKY,
       secondaryToolbeltId: _$$w2.StickyTools
     });
   }, [handleToolAction]);
@@ -4220,7 +4220,7 @@ function iP({
     "data-testid": "toolbelt-sticky-button",
     disabled: e,
     hoverBgDisabled: !0,
-    isActive: activeToolId === NLJ.STICKY,
+    isActive: activeToolId === DesignGraphElements.STICKY,
     onClick: a,
     onboardingKey: s.onboardingKey,
     recordingKey: Pt(I1, s.recordingKey),
@@ -4329,7 +4329,7 @@ function iB() {
         setActiveSecondaryToolbeltId(null);
         return;
       }
-      setActiveSecondaryToolbeltId(t => activeToolId === $o && t === _$$w2.DiagrammingTools ? _$$w2.DiagrammingTools : _$$L(activeToolId) ? _$$w2.DrawingTools : activeToolId === NLJ.STICKY ? _$$w2.StickyTools : eg(activeToolId) && !n ? _$$w2.DiagrammingTools : null);
+      setActiveSecondaryToolbeltId(t => activeToolId === $o && t === _$$w2.DiagrammingTools ? _$$w2.DiagrammingTools : _$$L(activeToolId) ? _$$w2.DrawingTools : activeToolId === DesignGraphElements.STICKY ? _$$w2.StickyTools : eg(activeToolId) && !n ? _$$w2.DiagrammingTools : null);
     }, [activeToolId, setActiveSecondaryToolbeltId, i, n]);
   }();
   !function () {
@@ -4357,7 +4357,7 @@ function iB() {
     } = LH();
     useEffect(() => {
       let i = i => {
-        "Escape" === i.key && e !== m1T.TEXT && setActiveSecondaryToolbeltId(null);
+        "Escape" === i.key && e !== LayoutTabType.TEXT && setActiveSecondaryToolbeltId(null);
       };
       document.addEventListener("keydown", i);
       return () => {

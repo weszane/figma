@@ -15,7 +15,7 @@ import { I as _$$I } from "../905/641938";
 import { u as _$$u } from "../905/16237";
 import { q } from "../figma_app/712384";
 import { oB } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { WX, Bq, Vm } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { vp } from "../905/967587";
@@ -23,7 +23,7 @@ import { FPlanNameType } from "../figma_app/191312";
 import { LN } from "../figma_app/514043";
 import { zZ } from "../figma_app/345997";
 import { X$ } from "../figma_app/465071";
-import { TN } from "../figma_app/831101";
+import { UpsellSourceType } from "../figma_app/831101";
 import { hK } from "../figma_app/211706";
 import { QO } from "../905/948828";
 import { f as _$$f } from "../905/950641";
@@ -101,9 +101,9 @@ export function $$D0({
             billingPeriod: t,
             currency: M ?? V,
             openInNewTab: l,
-            entryPoint: TN.PLAN_COMPARISON_MODAL,
+            entryPoint: UpsellSourceType.PLAN_COMPARISON_MODAL,
             upsellSource: e
-          })), s?.()) : G(to({
+          })), s?.()) : G(showModalHandler({
             type: dR,
             data: {
               plan: _$$I.PRO,
@@ -120,7 +120,7 @@ export function $$D0({
             currency: M ?? V,
             upsellSource: e,
             openInNewTab: l,
-            entryPoint: TN.PLAN_COMPARISON_MODAL
+            entryPoint: UpsellSourceType.PLAN_COMPARISON_MODAL
           }));
           s?.();
         }),
@@ -129,7 +129,7 @@ export function $$D0({
           let e = o || z?.teamId;
           e ? (G(Vm({
             teamId: e
-          })), s?.()) : G(to({
+          })), s?.()) : G(showModalHandler({
             type: q
           }));
         }),

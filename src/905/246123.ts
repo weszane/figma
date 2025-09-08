@@ -3,8 +3,8 @@ import { forwardRef, useId, useRef, useCallback, useMemo } from "react";
 import { Q } from "../vendor/912394";
 import { VN, TX } from "../905/268491";
 import { S } from "../905/823680";
-import { r as _$$r } from "../905/577641";
-import { qJ, Ju } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { isEventTargetOutside, preventAndStopEvent } from "../905/955878";
 import { F } from "../905/768014";
 import { GB, Nd, uB, lg } from "../905/127493";
 import { k } from "../905/733611";
@@ -196,7 +196,7 @@ let $$f1 = forwardRef(({
     let I = useCallback(e => (v.current = !0, _(h.current, "forward" === e ? "right" : "left", e)), []);
     let E = useCallback(t => {
       if (!function (e, t) {
-        if (qJ(e)) return !1;
+        if (isEventTargetOutside(e)) return !1;
         let i = e.target;
         for (; i && i !== t;) {
           if ("dialog" === i.getAttribute("role")) return !1;
@@ -258,7 +258,7 @@ let $$f1 = forwardRef(({
         default:
           return;
       }
-      Ju(t);
+      preventAndStopEvent(t);
     }, [onKeyDown, I, e]);
     let x = useCallback(e => {
       if (onFocus?.(e), h.current && h.current.contains(e.target) && !h.current.contains(e.relatedTarget) && "Tab" === F.key) {
@@ -302,7 +302,7 @@ let $$f1 = forwardRef(({
         ref: precedingFocusTargetRef
       }), jsx("div", {
         ...gridProps,
-        ..._$$r,
+        ...defaultComponentAttribute,
         ref: v,
         children: e
       }), jsx(A, {

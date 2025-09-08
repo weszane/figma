@@ -1,8 +1,8 @@
 import _require from "../2824/40443";
 import { W } from "../figma_app/304955";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { CWU, rXF, glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariablesBindings, VariableResolvedDataType, Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -24,17 +24,17 @@ import { PW } from "../figma_app/633080";
 import { Ag } from "../figma_app/407767";
 import { hB } from "../figma_app/609511";
 import { B9, Py } from "../figma_app/346422";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { analyticsEventManager } from "../905/449184";
 import { Om, jb, tI, Zc, Ul } from "../905/127813";
 let k = new class {
   constructor() {
-    this.selectComponentsSchemaValidator = vh();
+    this.selectComponentsSchemaValidator = createNoOpValidator();
   }
   selectComponents(e) {
     return this.selectComponentsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/make/select_components", td.toAPIParameters(e)));
+    }) => await t.post("/api/make/select_components", APIParameterUtils.toAPIParameters(e)));
   }
 }();
 function N(e, t, i) {
@@ -264,18 +264,18 @@ async function z(e) {
       let e = function () {
         let e = getSingletonSceneGraph();
         let t = debugState.getState();
-        let i = [...(CWU?.getSubscribedVariablesInfo() || []), ...(CWU?.getLocalVariablesInfo() || [])];
+        let i = [...(VariablesBindings?.getSubscribedVariablesInfo() || []), ...(VariablesBindings?.getLocalVariablesInfo() || [])];
         let n = {};
         i.forEach(e => {
           n[e.id] = e;
         });
         let r = [];
         i.forEach(e => {
-          if (e.resolvedType !== rXF.COLOR) return;
+          if (e.resolvedType !== VariableResolvedDataType.COLOR) return;
           let t = null;
           let i = e;
           for (; null === t;) {
-            let e = CWU?.getVariableSetDefaultMode(i.setID);
+            let e = VariablesBindings?.getVariableSetDefaultMode(i.setID);
             if (!e) return;
             let r = i.modeValues[e]?.value;
             if (!r) return;
@@ -444,10 +444,10 @@ async function z(e) {
       type: tc.GLOBAL_CSS,
       blob: p.globalCss
     });
-    l7.user("create-new-code-file", () => {
+    permissionScopeHandler.user("create-new-code-file", () => {
       let e = atomStoreManager.get(nM);
       let t = W(e, NJ, Ul);
-      t ? t.sourceCode = p.globalCss : glU?.createNewCodeFile(Ul, p.globalCss, null, !1);
+      t ? t.sourceCode = p.globalCss : Fullscreen?.createNewCodeFile(Ul, p.globalCss, null, !1);
     });
     w = w.map(e => ("css" === e.taskId && (e.state = z8.SUCCEEDED), e));
     e && e(w);

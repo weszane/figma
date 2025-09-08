@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useCallback, useEffect, useReducer, useLayoutEffect, Fragment as _$$Fragment, memo, useContext } from "react";
 import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { G as _$$G } from "../905/289770";
-import { h3O, z7E, JA, Ez5, NLJ, m1T, glU } from "../figma_app/763686";
+import { Multiplayer, PaintTools, SnapshotLevel, AppStateTsApi, DesignGraphElements, LayoutTabType, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
 import { globalPerfTimer, distributionAnalytics } from "../905/542194";
@@ -19,7 +19,7 @@ import { R9 } from "../905/977824";
 import { XM } from "../905/486443";
 import { p8 } from "../figma_app/722362";
 import { KP, _E } from "../figma_app/440875";
-import { ut, J2 } from "../figma_app/84367";
+import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { p as _$$p } from "../figma_app/372802";
 import { buildUploadUrl, buildStaticUrl } from "../figma_app/169182";
@@ -769,10 +769,10 @@ function eG(e) {
   eP(h, m, d, c);
   (function (e, t, r, n) {
     useEffect(() => {
-      h3O?.sendChatMessage(e, t);
+      Multiplayer?.sendChatMessage(e, t);
     }, [e, t]);
     let i = useCallback(() => {
-      h3O?.sendChatMessage("", "");
+      Multiplayer?.sendChatMessage("", "");
       n(Ho());
     }, [n]);
     useEffect(() => {
@@ -931,7 +931,7 @@ function ez() {
   });
 }
 function eJ(e, t, r) {
-  let n = z7E[t];
+  let n = PaintTools[t];
   return r ? buildStaticUrl(`multiplayer_cursors/ui3/${n}/${e.substring(1)}.png`) : buildStaticUrl(`multiplayer_cursors/v1/${n}/${e.substring(1)}.png`);
 }
 function eZ(e, t) {
@@ -1080,7 +1080,7 @@ function e8({
     debug(!!e, `Unknown color ${e} for Cursor High Fives`);
     return jsx(Fragment, {});
   }
-  let n = eJ(t ? e3 : e, z7E.HIGH_FIVE, !1);
+  let n = eJ(t ? e3 : e, PaintTools.HIGH_FIVE, !1);
   return jsx("img", {
     className: "cursor_high_five--handImage--mJVid",
     src: n,
@@ -1270,7 +1270,7 @@ function tc({
     let t = null;
     let r = () => {
       R9.sendReaction(reactImageUrl);
-      _$$H.trigger(JA.GENERIC);
+      _$$H.trigger(SnapshotLevel.GENERIC);
       d(to);
       null != e && clearTimeout(e);
       e = setTimeout(() => {
@@ -1440,8 +1440,8 @@ let $$tu0 = memo(function ({
       e && distributionAnalytics.add("view_cursor_chat_message", e);
     }
   }, [B, H, b]);
-  let z = getFeatureFlags().cursor_bot && f && r === z7E.DEFAULT;
-  let W = r === z7E.PEN;
+  let z = getFeatureFlags().cursor_bot && f && r === PaintTools.DEFAULT;
+  let W = r === PaintTools.PEN;
   let K = jsxs("div", {
     className: u()({
       [iU]: j,
@@ -1509,7 +1509,7 @@ let $$tu0 = memo(function ({
             [DE]: c,
             [z8]: z
           }),
-          src: eJ(t, c ? z7E.DEFAULT : r, !0),
+          src: eJ(t, c ? PaintTools.DEFAULT : r, !0),
           alt: `${c ? "highfive cursor" : "hand cursor"}`,
           onError: ({
             currentTarget: e
@@ -1573,7 +1573,7 @@ function t_() {
   let o = KP();
   let d = XM();
   let c = useSelector(e => e.multiplayerEmoji);
-  let u = !ut(Ez5?.uiState().hideMultiplayerCursors, !1);
+  let u = !getObservableValue(AppStateTsApi?.uiState().hideMultiplayerCursors, !1);
   let p = p8("currentTool");
   let _ = ed();
   let [h, g, f, y] = function () {
@@ -1585,13 +1585,13 @@ function t_() {
       let o = function () {
         let e = useSelector(e => {
           let t = e.mirror.appModel.currentTool;
-          return t === NLJ.SELECT || t === NLJ.HAND;
+          return t === DesignGraphElements.SELECT || t === DesignGraphElements.HAND;
         });
         let t = useSelector(e => e.multiplayerEmoji?.type === "WHEEL" || e.multiplayerEmoji?.type === "REACTING_OR_CHATTING");
         let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-        return e && !t && r !== m1T.TEXT;
+        return e && !t && r !== LayoutTabType.TEXT;
       }();
-      let d = J2(UK().cursorHighFiveWiggle);
+      let d = getObservableOrFallback(UK().cursorHighFiveWiggle);
       let c = useRef(null);
       let u = useRef(0);
       useEffect(() => {
@@ -1637,7 +1637,7 @@ function t_() {
         }
       }, [e, p, _]);
       let m = useCallback(t => {
-        "h" === t.key && (e.getWiggleMode() && null !== c.current && c.current !== NLJ.HAND && glU.triggerActionInUserEditScope("set-tool-default", {
+        "h" === t.key && (e.getWiggleMode() && null !== c.current && c.current !== DesignGraphElements.HAND && Fullscreen.triggerActionInUserEditScope("set-tool-default", {
           source: "cursor-high-fives"
         }), c.current = null, e.setHighFiveKeyPressed(!1), e.stopWigglingNow());
       }, [e, c]);
@@ -1680,11 +1680,11 @@ function t_() {
       let r = u.current;
       if (!r) return;
       (function (e, t, r) {
-        if (!debugState || !h3O) return;
+        if (!debugState || !Multiplayer) return;
         let n = debugState.getState();
         let i = R9.infoBySessionId();
         if (!n.mirror || !n.mirror.appModel) return;
-        let a = h3O.currentSessionID();
+        let a = Multiplayer.currentSessionID();
         let s = n.multiplayer;
         let o = n.mirror.appModel.currentPage;
         let d = s.observingSessionID;
@@ -1714,7 +1714,7 @@ function t_() {
             if (!eo(n.cursorEntitySystem.getEntities(), e.sessionId) && e.mouse) {
               let i = es(e.mouse.canvasSpacePosition, n.cursorKinematics, e.sessionId, t, c);
               desktopAPIInstance && setTimeout(() => {
-                _$$H.trigger(JA.GENERIC);
+                _$$H.trigger(SnapshotLevel.GENERIC);
               }, 400);
               n.cursorEntitySystem.addEntity(new et({
                 startingRelativePosition: {
@@ -1766,8 +1766,8 @@ function t_() {
   }();
   let b = "HIDDEN" !== g;
   let w = mZ.NONE;
-  let O = p === NLJ.HAND ? NLJ.HAND : NLJ.SELECT;
-  let R = b ? NLJ.SELECT : O;
+  let O = p === DesignGraphElements.HAND ? DesignGraphElements.HAND : DesignGraphElements.SELECT;
+  let R = b ? DesignGraphElements.SELECT : O;
   "REACTING_OR_CHATTING" === c.type && c.isChatting ? w = mZ.CHAT : b && (w = mZ.HIGH_FIVE);
   let L = function (e) {
     let t = e === mZ.NONE;
@@ -1870,7 +1870,7 @@ function tm({
   let l = p8("currentPage");
   let c = _$$j();
   let u = lg();
-  let p = J2(_$$d().showOutlines);
+  let p = getObservableOrFallback(_$$d().showOutlines);
   let _ = _$$S();
   let m = useSelector(({
     multiplayer: {

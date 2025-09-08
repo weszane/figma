@@ -1,16 +1,30 @@
-import { jsx } from "react/jsx-runtime";
-import { A } from "../vendor/723372";
-import { Z } from "../905/751750";
-import { u } from "../905/786321";
-import { description } from "../905/620622";
-export function $$l0(e) {
-  let t = Z();
-  let i = u(t);
-  return jsx("p", {
-    className: A(description, e.className),
-    id: i,
-    children: e.children
-  });
+import type { JSX } from 'react'
+import classNames from 'classnames'
+import { jsx } from 'react/jsx-runtime'
+import { description } from '../905/620622'
+import { useSelectionContext } from '../905/751750'
+import { generateDescId } from '../905/786321'
+
+export interface DescriptionProps {
+  className?: string
+  children?: React.ReactNode
 }
-$$l0.displayName = "Description";
-export const V = $$l0;
+
+/**
+ * Description component that renders a paragraph with generated description ID
+ * @param props - Component props containing className and children
+ * @returns JSX element representing the description paragraph
+ */
+export function Description(props: DescriptionProps): JSX.Element {
+  const selectionContext = useSelectionContext()
+  const descriptionId = generateDescId(selectionContext)
+
+  return jsx('p', {
+    className: classNames(description, props.className),
+    id: descriptionId,
+    children: props.children,
+  })
+}
+
+Description.displayName = 'Description'
+export const V = Description

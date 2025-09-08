@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, cloneElement, Children } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/465157";
-import { rXF, j0r } from "../figma_app/763686";
+import { VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Q } from "../figma_app/67145";
@@ -10,7 +10,7 @@ import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { sT } from "../figma_app/740163";
-import { q, gl, oV } from "../905/216495";
+import { getCommonValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { Ib } from "../905/129884";
 import { ig, $j } from "../figma_app/178475";
@@ -47,7 +47,7 @@ export function $$L3(e) {
       borderLeftWeight,
       borderRightWeight
     } = e.mirror.selectionProperties;
-    return q(borderTopWeight, borderBottomWeight, borderLeftWeight, borderRightWeight);
+    return getCommonValue(borderTopWeight, borderBottomWeight, borderLeftWeight, borderRightWeight);
   });
   let u = (t, r) => {
     if (0 === t.length) return;
@@ -66,14 +66,14 @@ export function $$L3(e) {
         borderBottomWeight: t[2],
         borderLeftWeight: t[3]
       };
-      gl(q(...t)) && (e.selectBorderSides(om.CUSTOM), i.borderStrokeWeightsIndependent = !0);
+      isInvalidValue(getCommonValue(...t)) && (e.selectBorderSides(om.CUSTOM), i.borderStrokeWeightsIndependent = !0);
       e.onChange(i, r);
     } else e.onChange({
       [n]: t[0]
     }, r);
   };
-  let h = d ? gl(d) ? oV : [d] : void 0;
-  let f = e.borderOption === om.CUSTOM ? h : gl(e.strokeWeight) ? oV : [Number(e.strokeWeight)];
+  let h = d ? isInvalidValue(d) ? MIXED_MARKER : [d] : void 0;
+  let f = e.borderOption === om.CUSTOM ? h : isInvalidValue(e.strokeWeight) ? MIXED_MARKER : [Number(e.strokeWeight)];
   let b = e.borderOption === om.MIXED ? 1 : 0;
   let S = e.borderOption ? Gz(e.borderOption) : void 0;
   return jsx(Fragment, {
@@ -211,7 +211,7 @@ function M({
   let T = useCallback(async e => {
     if (e) {
       let t = await c(Oe(e));
-      updateVariableConsumption(y$(rXF.FLOAT, t));
+      updateVariableConsumption(y$(VariableResolvedDataType.FLOAT, t));
     } else {
       clearVariableConsumption();
       _clearVariableConsumption();
@@ -219,7 +219,7 @@ function M({
   }, [clearVariableConsumption, _clearVariableConsumption, c, updateVariableConsumption]);
   return l ? jsxs(hu, {
     boundVariableId: y,
-    resolvedType: rXF.FLOAT,
+    resolvedType: VariableResolvedDataType.FLOAT,
     onVariableSelected: T,
     children: [jsx(sJ, {
       inputRef: s,
@@ -235,7 +235,7 @@ function M({
         noBorderOnHover: !0
       })
     }), jsx(V5, {
-      variableScope: j0r.STROKE_FLOAT
+      variableScope: PropertyScope.STROKE_FLOAT
     })]
   }) : cloneElement(Children.only(e), {
     className: t

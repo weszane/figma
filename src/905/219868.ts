@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, r1, nB } from "../figma_app/272243";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 let $$l1 = "/legal/privacy";
 let $$d3 = "/legal/tos";
 let $$c2 = "/legal/reader-mode/privacy";
 let $$u4 = "/legal/reader-mode/tos";
-let $$p0 = Ju(function (e) {
+let $$p0 = registerModal(function (e) {
   let t = hS(e);
   return jsx(bL, {
     manager: t,

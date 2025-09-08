@@ -7,8 +7,8 @@ import { q8 } from "../figma_app/459490";
 import { s_ } from "../905/17223";
 import { $$ } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
-import { Ce, to } from "../905/156213";
-import { Ju } from "../905/102752";
+import { hideModal, showModalHandler } from "../905/156213";
+import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { s as _$$s } from "../5430/913603";
 import { zE } from "../905/738636";
@@ -23,7 +23,7 @@ import { tL } from "../af221b13/10766";
 import { y as _$$y } from "../905/978641";
 import { Ui, Nr, Sl } from "../af221b13/148820";
 import { jx, tt, hh } from "../5430/774694";
-let h = Ju(function (e) {
+let h = registerModal(function (e) {
   return jsxs(d_, {
     title: jsx("div", {
       className: "feature_not_available_modal--title--kPAVe text--fontPos14--OL9Hp text--_fontBase--QdLsd",
@@ -44,7 +44,7 @@ let h = Ju(function (e) {
       className: "feature_not_available_modal--buttonContainer--9-Zwv",
       children: jsx($$, {
         onClick: () => {
-          e.dispatch(Ce());
+          e.dispatch(hideModal());
         },
         children: renderI18nText("general.got_it")
       })
@@ -131,12 +131,12 @@ export function $$I0({
         promptCategory: d,
         isMobile: `${p}`
       });
-      p ? u(to({
+      p ? u(showModalHandler({
         type: _$$s,
         data: {
           dispatch: u
         }
-      })) : w ? u(to({
+      })) : w ? u(showModalHandler({
         type: h,
         data: {
           dispatch: u

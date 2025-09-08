@@ -1,4 +1,4 @@
-import { vRS } from "../figma_app/763686";
+import { NoneColor } from "../figma_app/763686";
 import { BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
 import { Ts } from "../905/929976";
@@ -13,7 +13,7 @@ export function $$d7(e = {
     isInitialized: !0
   }).currentSelectedGradientStop.index && (e.currentSelectedGradientStop = {
     index: 0,
-    type: vRS.COLOR
+    type: NoneColor.COLOR
   }), e);
 }
 export let $$c9 = "fullscreen-menu-dropdown";

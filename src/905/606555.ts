@@ -1,7 +1,7 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.FollowsSchemaValidator = vh();
+    this.FollowsSchemaValidator = createNoOpValidator();
   }
   getFollows(e) {
     return this.FollowsSchemaValidator.validate(async ({

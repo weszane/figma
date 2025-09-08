@@ -1,5 +1,5 @@
-import { qmM, Ez5 } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { InteractionCpp, AppStateTsApi } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { j } from "../905/881708";
@@ -13,15 +13,15 @@ export class $$d0 extends j {
     let i = getSingletonSceneGraph().get(t);
     let r = !1;
     i && i.canHaveAnnotation && (atomStoreManager.set(m, i.annotations.length), r = !0);
-    r ? qmM.setEventCursor(e, "annotateCursor") : qmM.setEventCursor(e, "annotateCursorFaded");
+    r ? InteractionCpp.setEventCursor(e, "annotateCursor") : InteractionCpp.setEventCursor(e, "annotateCursorFaded");
     !r && i && e.accept(this);
   }
   handleMouseMove(e) {
-    this.showAnnotationIsPossibleCursor(e) ? qmM.setEventCursor(e, "annotateCursor") : (qmM.setEventCursor(e, "annotateCursorFaded"), e.accept(this));
+    this.showAnnotationIsPossibleCursor(e) ? InteractionCpp.setEventCursor(e, "annotateCursor") : (InteractionCpp.setEventCursor(e, "annotateCursorFaded"), e.accept(this));
   }
   showAnnotationIsPossibleCursor(e) {
     let t = e.findHoveredNodeId();
-    if (t === AD || null !== atomStoreManager.get(m) && e.selectionNodeGUIDs().some(e => e === t)) return !1;
+    if (t === defaultSessionLocalIDString || null !== atomStoreManager.get(m) && e.selectionNodeGUIDs().some(e => e === t)) return !1;
     let i = getSingletonSceneGraph().get(t);
     return !i || !!i.canHaveAnnotation;
   }
@@ -33,7 +33,7 @@ export class $$d0 extends j {
   handleBeforeFrame() {}
   renderUnderEditModeUI() {}
   reset() {
-    Ez5 && Ez5.editorState().focusedAnnotationId.set(null);
+    AppStateTsApi && AppStateTsApi.editorState().focusedAnnotationId.set(null);
   }
 }
 export const l = $$d0;

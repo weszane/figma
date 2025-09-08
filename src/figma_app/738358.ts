@@ -1,11 +1,11 @@
-import { fp8 } from "../figma_app/763686";
+import { MentionsCppBindings } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { MZ } from "../figma_app/925970";
 import { F } from "../905/302958";
 import { W } from "../figma_app/669294";
 import { h1, LQ, wm, MX } from "../905/77316";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 export let $$n0;
 class p {
   setMentionsTypeaheadQuery(e) {
@@ -44,14 +44,14 @@ class p {
     return e;
   }
   showVisualBellForPastedMentions(e, t) {
-    Y5.dispatch(F.enqueue({
+    fullscreenValue.dispatch(F.enqueue({
       message: getI18nString("whiteboard.visual_bell.canvas_at_mentions_send_notifications_from_pasted_mentions", {
         numUsers: t
       }),
       button: {
         text: getI18nString("whiteboard.visual_bell.canvas_at_mentions_send_notifications_from_pasted_mentions_action"),
         action: () => {
-          fp8?.allowSendNotificationsForPastedMentions(e);
+          MentionsCppBindings?.allowSendNotificationsForPastedMentions(e);
         }
       }
     }));

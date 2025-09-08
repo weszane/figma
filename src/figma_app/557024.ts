@@ -15,7 +15,7 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { l as _$$l } from "../905/618243";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { Ns, ci } from "../905/760074";
 import { $n } from "../905/930279";
@@ -24,7 +24,7 @@ import { iZ } from "../905/372672";
 import { op7 } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/202020";
 import { p$, jG, Ge } from "../905/822842";
 var L = (e => (e.ACTIVE = "active", e.YOURS = "yours", e.ARCHIVED = "archived", e))(L || {});
@@ -103,7 +103,7 @@ export function $$M0(e) {
 function F() {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(Ce());
+    e(hideModal());
   }, [e]);
   let [r, _] = useState(null);
   let h = hS({
@@ -237,6 +237,6 @@ function F() {
   });
 }
 F.displayName = "BranchesModal";
-export let $$j1 = Ju(F, "BranchesModal");
+export let $$j1 = registerModal(F, "BranchesModal");
 export const Yj = $$M0;
 export const jS = $$j1;

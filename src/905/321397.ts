@@ -1,8 +1,8 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { s } from "../905/506024";
 let $$s2 = NC("ADD_TEMPLATE_TO_RECENTS_WITH_USER_ID");
-let $$o0 = nF((e, t) => {
+let $$o0 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let n = s(i);
   e.dispatch($$s2({

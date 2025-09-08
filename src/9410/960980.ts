@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { W8Y } from "../figma_app/763686";
+import { SessionStatus } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { DG as _$$DG } from "../figma_app/789";
 import { F } from "../905/224";
-import { BI } from "../figma_app/455680";
+import { inputValue } from "../figma_app/455680";
 import { q5 } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { PS } from "../figma_app/598018";
@@ -55,7 +55,7 @@ export function $$I7() {
 }
 export function $$k8() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
-  let t = BI.getUserId();
+  let t = inputValue.getUserId();
   let i = t && e.userIdToVoteStampIds[t]?.length || 0;
   return e.userVoteLimit - i;
 }
@@ -87,7 +87,7 @@ export function $$L3() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo.votingStage);
   let t = Xr(Qs);
   useEffect(() => {
-    (e === W8Y.JOINED || e === W8Y.NOT_JOINED) && t({
+    (e === SessionStatus.JOINED || e === SessionStatus.NOT_JOINED) && t({
       type: "SET_VIEW",
       payload: iN.DEFAULT
     });
@@ -99,7 +99,7 @@ export function $$R6() {
   let i = $();
   let o = qU();
   useEffect(() => {
-    e !== W8Y.ENDED || i || (t({
+    e !== SessionStatus.ENDED || i || (t({
       type: "VOTING_ENDED"
     }), D(o));
   }, [e, t, i, o]);
@@ -110,7 +110,7 @@ export function $$D5(e) {
   let a = useSelector(e => i && i.teamId ? e.teams[i.teamId] ?? null : null);
   let s = useDispatch();
   return useCallback(() => {
-    if ("eligibleWithUpgrade" === t) s(to({
+    if ("eligibleWithUpgrade" === t) s(showModalHandler({
       type: DV,
       data: {
         team: a,

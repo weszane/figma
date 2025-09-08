@@ -1,4 +1,4 @@
-import { td } from "../figma_app/181241";
+import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   updateRecentlyUsedActions(e) {
@@ -22,7 +22,7 @@ export let $$a0 = new class {
   }
   updateFrecencyHistory(e) {
     return XHR.put("/api/actions_history", {
-      frecency_payload: td.toAPIParameters(e)
+      frecency_payload: APIParameterUtils.toAPIParameters(e)
     });
   }
 }();

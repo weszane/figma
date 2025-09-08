@@ -3,7 +3,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { _J } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { N } from "../905/696711";
@@ -11,7 +11,7 @@ import { _M, jx, wZ, OL } from "../figma_app/869776";
 import { S } from "../figma_app/11182";
 var $$h1 = (e => (e.TEAM_PERMISSIONS_MODAL = "team permissions modal", e.NUX_INVITE_COLLABORATOR = "nux invite collaborator", e))($$h1 || {});
 let $$g0 = NC("TEAM_JOIN_LINKS_SET_REQUEST_STATE");
-let $$f5 = nF(async (e, t, {
+let $$f5 = createOptimistThunk(async (e, t, {
   loadingKey: i
 }) => {
   let n = XHR.put("/api/team_join_link/disable", {
@@ -27,7 +27,7 @@ let $$f5 = nF(async (e, t, {
     e.dispatch(_$$s.error(t.message));
   });
 });
-let $$_3 = nF(async (e, t) => {
+let $$_3 = createOptimistThunk(async (e, t) => {
   let i = XHR.post("/api/team_join_link/reset", {
     team_id: t.teamId,
     level: t.level
@@ -49,7 +49,7 @@ let $$_3 = nF(async (e, t) => {
     e.dispatch(_$$s.error(t.data.message || "Unknown error"));
   });
 });
-let $$A4 = nF((e, t) => {
+let $$A4 = createOptimistThunk((e, t) => {
   let i = wZ(t.teamId, t.level);
   N(i, e, OL(t.teamId));
   i.then(t => {
@@ -68,7 +68,7 @@ let $$A4 = nF((e, t) => {
     t.callbackOnFailure?.();
   });
 });
-let $$y2 = nF((e, t) => {
+let $$y2 = createOptimistThunk((e, t) => {
   _J("Team Join Link Copied", t.teamId, e.getState(), {
     userId: e.getState().user?.id,
     teamJoinLink: t.url,

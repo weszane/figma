@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useMemo, useEffect } from "react";
-import { CX } from "../figma_app/763686";
+import { InsetEditorBindingsCpp } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { iT } from "../figma_app/74165";
 import { Ye } from "../figma_app/32128";
@@ -21,7 +21,7 @@ export function $$c0({
   }), [r, isPropertiesPanelCollapsed]);
   let u = ZC(c);
   useEffect(() => {
-    void 0 !== u && u.isLeftPanelCollapsed !== c.isLeftPanelCollapsed && queueMicrotask(() => CX.updateLayoutForMinimizeUI());
+    void 0 !== u && u.isLeftPanelCollapsed !== c.isLeftPanelCollapsed && queueMicrotask(() => InsetEditorBindingsCpp.updateLayoutForMinimizeUI());
   }, [c, u]);
   return jsx($$d1.Provider, {
     value: c,

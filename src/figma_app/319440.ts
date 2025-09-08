@@ -7,11 +7,11 @@ import { d as _$$d2 } from '../905/49800';
 import { selectWithShallowEqual } from '../905/103090';
 import { J as _$$J2 } from '../905/125993';
 import { Ib } from '../905/129884';
-import { l7 } from '../905/189185';
-import { hS } from '../905/216495';
+import { permissionScopeHandler } from '../905/189185';
+import { isValidValue } from '../905/216495';
 import { C as _$$C } from '../905/217042';
 import { n6 } from '../905/234821';
-import { J as _$$J3 } from '../905/270045';
+import { Label } from '../905/270045';
 import { kl, lJ } from '../905/275640';
 import { E as _$$E } from '../905/277716';
 import { F as _$$F } from '../905/302958';
@@ -37,7 +37,7 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { ay, RW } from '../figma_app/17220';
 import { sO } from '../figma_app/21029';
 import { JQ, LB } from '../figma_app/29089';
-import { ut } from '../figma_app/84367';
+import { getObservableValue } from '../figma_app/84367';
 import { Jp } from '../figma_app/95266';
 import { Q as _$$Q } from '../figma_app/104130';
 import { W as _$$W3 } from '../figma_app/110892';
@@ -57,7 +57,7 @@ import { $L, ek as _$$ek, XS as _$$XS, aj, aT, gF, gv, mp, rq, sE, T0, TQ, yc, Z
 import { U as _$$U3 } from '../figma_app/427950';
 import { J as _$$J } from '../figma_app/451499';
 import { T as _$$T2 } from '../figma_app/453188';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { Z3 } from '../figma_app/461594';
 import { isIntegrationContext } from '../figma_app/469876';
 import { i as _$$i } from '../figma_app/472709';
@@ -74,7 +74,7 @@ import { aV } from '../figma_app/722362';
 import { bh, VE, X9 } from '../figma_app/730706';
 import { qw } from '../figma_app/740163';
 import { dG } from '../figma_app/753501';
-import { Ez5, htN, ibQ, lyf, m1T, qmM, rcl, TsU, ZEs } from '../figma_app/763686';
+import { AppStateTsApi, CmsRepeaterHelpers, ItemType, ViewType, LayoutTabType, InteractionCpp, Command, InsertSourceType, ChildRelationshipStatus } from '../figma_app/763686';
 import { bw, gc, jw, Xl } from '../figma_app/781981';
 import { Pt } from '../figma_app/806412';
 import { to } from '../figma_app/828186';
@@ -99,24 +99,24 @@ function F() {
   let e = getSingletonSceneGraph().getDirectlySelectedNodes();
   let t = kk(e);
   let r = !1;
-  let s = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
-  s.length === 0 && (s = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_CHILDREN) ?? [], r = !0);
+  let s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_IDENTICAL_CHILDREN) ?? [];
+  s.length === 0 && (s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_CHILDREN) ?? [], r = !0);
   let o = useDispatch();
   let u = tS();
   let p = c$(u).data;
   let _ = getFeatureFlags().dakota_repeaters && s.length > 0 || U(t);
   let m = t?.getDakotaSelector()?.collectionId;
   let g = useSetAtom(_$$C);
-  let f = OU(TsU.CMS_PROPERTIES_PANEL);
+  let f = OU(InsertSourceType.CMS_PROPERTIES_PANEL);
   let E = useCallback(e => {
-    e && (t && t.type === 'RESPONSIVE_SET' ? l7.user('dakota-set-text-binding', () => {
-      t.setDakotaSelectorCollection(e, TsU.CMS_PROPERTIES_PANEL);
+    e && (t && t.type === 'RESPONSIVE_SET' ? permissionScopeHandler.user('dakota-set-text-binding', () => {
+      t.setDakotaSelectorCollection(e, InsertSourceType.CMS_PROPERTIES_PANEL);
     }) : f(e, () => {
       o(_$$F.enqueue({
         button: {
           text: getI18nString('dakota.fullscreen_actions.visual_bell.go_to_component'),
           action: () => {
-            Y5.triggerActionEnum(rcl.GO_TO_REPEATER_COMPONENT);
+            fullscreenValue.triggerActionEnum(Command.GO_TO_REPEATER_COMPONENT);
           }
         },
         message: getI18nString('dakota.fullscreen_actions.visual_bell.repeater_created'),
@@ -164,7 +164,7 @@ function F() {
     preventSingleItemSubmenuFlattening: !0,
     preventHoisting: !getFeatureFlags().cms_bindings_ux_improvements || r,
     onSubmenuOpenClose: e => {
-      getFeatureFlags().cms_bindings_ux_improvements && (g(e), qmM?.invalidateViewport());
+      getFeatureFlags().cms_bindings_ux_improvements && (g(e), InteractionCpp?.invalidateViewport());
     }
   };
 }
@@ -176,9 +176,9 @@ function j() {
     return {
       type: ZU.CUSTOM_ACTION,
       onClick: () => {
-        l7.user('dakota-unbind-collection', () => {
-          t.setDakotaSelectorCollection('', TsU.CMS_PROPERTIES_PANEL);
-          Y5.triggerAction('commit');
+        permissionScopeHandler.user('dakota-unbind-collection', () => {
+          t.setDakotaSelectorCollection('', InsertSourceType.CMS_PROPERTIES_PANEL);
+          fullscreenValue.triggerAction('commit');
         });
       },
       icon: jsx(_$$U, {}),
@@ -225,7 +225,7 @@ let ed = {
   id: gc
 };
 function ey() {
-  let e = !!ut(Ez5?.propertiesPanelState()?.shownPropertiesPanels, [])[ibQ.CODE_INSTANCE_HTML_FIBER];
+  let e = !!getObservableValue(AppStateTsApi?.propertiesPanelState()?.shownPropertiesPanels, [])[ItemType.CODE_INSTANCE_HTML_FIBER];
   let t = _$$u.directManipulationCanvasEditor();
   let r = useCallback(() => {
     t.goToSource();
@@ -252,8 +252,8 @@ function ek() {
     let s = c$(a).data;
     let o = t?.getDakotaSelector()?.collectionId;
     let d = useCallback(e => {
-      e && t && t.type === 'RESPONSIVE_SET' && l7.user('dakota-set-text-binding', () => {
-        t.setDakotaSelectorCollection(e, TsU.CMS_PROPERTIES_PANEL);
+      e && t && t.type === 'RESPONSIVE_SET' && permissionScopeHandler.user('dakota-set-text-binding', () => {
+        t.setDakotaSelectorCollection(e, InsertSourceType.CMS_PROPERTIES_PANEL);
       });
     }, [t]);
     if (!_$$U2() || !r || (s ?? []).length === 0 || o) return;
@@ -345,7 +345,7 @@ let ez = memo(({
     shouldShowComponentPropertiesPanel: s,
     shouldShowSlotPanel: o
   });
-  if (useSelector(e => e.mirror.appModel.activeCanvasEditModeType) === m1T.VECTOR && t) {
+  if (useSelector(e => e.mirror.appModel.activeCanvasEditModeType) === LayoutTabType.VECTOR && t) {
     return jsx(eK, {
       node: t,
       panelTitleRef: c,
@@ -494,8 +494,8 @@ function eK({
   let a = !!i && i.offsetWidth < i.scrollWidth;
   let [s] = lJ('leftEndCap');
   let [o] = lJ('rightEndCap');
-  let l = hS(s) ? s : void 0;
-  let d = hS(o) ? o : void 0;
+  let l = isValidValue(s) ? s : void 0;
+  let d = isValidValue(o) ? o : void 0;
   let c = sO();
   let u = t || function (e, t, r, n) {
     if (function (e, t) {
@@ -593,44 +593,44 @@ function e8() {
           id: 'autoplay',
           checked: !0 === t,
           onChange: () => {
-            Y5.updateSelectionProperties({
+            fullscreenValue.updateSelectionProperties({
               videoAutoplay: !t
             });
           },
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: getI18nString('fullscreen.properties_panel.video_controls.autoplay')
           })
         }), jsx(_$$d2, {
           id: 'mediaLoop',
           checked: !0 === e,
           onChange: () => {
-            Y5.updateSelectionProperties({
+            fullscreenValue.updateSelectionProperties({
               videoMediaLoop: !e
             });
           },
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: getI18nString('fullscreen.properties_panel.video_controls.loop')
           })
         }), jsx(_$$d2, {
           id: 'showControls',
           checked: !0 === i,
           onChange: () => {
-            Y5.updateSelectionProperties({
+            fullscreenValue.updateSelectionProperties({
               videoShowControls: !i
             });
           },
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: getI18nString('fullscreen.properties_panel.video_controls.show_playback_controls')
           })
         }), jsx(_$$d2, {
           id: 'muted',
           checked: !0 === r,
           onChange: () => {
-            Y5.updateSelectionProperties({
+            fullscreenValue.updateSelectionProperties({
               videoMuted: !r
             });
           },
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: getI18nString('fullscreen.properties_panel.video_controls.mute')
           })
         })]
@@ -702,7 +702,7 @@ function tr({
   let eo = Em();
   let el = sO();
   let ed = cJ();
-  let ep = editMode === m1T.COMMENTS || editMode === m1T.PREVIEW || editMode === m1T.BRANCHING || topLevelMode === lyf.HISTORY || topLevelMode === lyf.PREVIEW || topLevelMode === lyf.DEV_HANDOFF || topLevelMode === lyf.BRANCHING;
+  let ep = editMode === LayoutTabType.COMMENTS || editMode === LayoutTabType.PREVIEW || editMode === LayoutTabType.BRANCHING || topLevelMode === ViewType.HISTORY || topLevelMode === ViewType.PREVIEW || topLevelMode === ViewType.DEV_HANDOFF || topLevelMode === ViewType.BRANCHING;
   let em = ow();
   let eg = !!Q?.isTryFile && !q && !ea && es;
   let ef = $$ta8(O, U);

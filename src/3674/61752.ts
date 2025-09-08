@@ -12,7 +12,7 @@ import { V as _$$V } from "../905/223767";
 import { _I } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { sf } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { i$ } from "../905/15667";
 import { c as _$$c } from "../905/370443";
@@ -23,9 +23,9 @@ import { D6 } from "../figma_app/465071";
 import { h4 } from "../figma_app/421473";
 import { ol, H7 } from "../figma_app/598018";
 import { wH } from "../figma_app/680166";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
-import { TN } from "../figma_app/831101";
+import { UpsellSourceType } from "../figma_app/831101";
 import { q, J as _$$J } from "../905/202542";
 import { x as _$$x } from "../905/749159";
 import { R as _$$R2 } from "../905/300969";
@@ -76,7 +76,7 @@ export function $$z0({
             formState: qB.JOIN_ORG,
             redirectUrl: Ay.location.pathname
           }));
-          C(to({
+          C(showModalHandler({
             type: _$$x,
             data: {}
           }));
@@ -93,12 +93,12 @@ export function $$z0({
           n !== i$.DowngradeEmail && e ? C(WX({
             teamId: e,
             openInNewTab: !0,
-            entryPoint: TN.DEV_MODE_MODAL
-          })) : (B(), C(to({
+            entryPoint: UpsellSourceType.DEV_MODE_MODAL
+          })) : (B(), C(showModalHandler({
             type: _$$V,
             data: {
               teamId: e ?? void 0,
-              upsellSource: _$$b.DEV_MODE_UPSELL,
+              upsellSource: UpsellModalType.DEV_MODE_UPSELL,
               openCheckoutInNewTab: !0,
               onDone: () => O(_$$c2.DEFAULT)
             }

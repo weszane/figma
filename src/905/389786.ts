@@ -1,4 +1,4 @@
-import { mKm } from "../figma_app/763686";
+import { LayoutSizingMode } from "../figma_app/763686";
 import { Ji } from "../figma_app/387100";
 import { h, v6, KY, jd, iz, qK, Pm } from "../figma_app/17669";
 import { sJ } from "../905/532366";
@@ -51,8 +51,8 @@ export function $$d1(e, t, i = !0) {
   }(e, _);
   size && function (e, t, i) {
     let r = "TEXT" === e.type || e.childrenNodes.length > 0;
-    e.stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? i.push("w-full") : r && e.stackHorizontalLayoutSize === mKm.HUG_CONTENT ? t || i.push("w-fit") : e.stackHorizontalLayoutSize !== mKm.FIXED && (r || e.stackHorizontalLayoutSize !== mKm.HUG_CONTENT) || i.push(`w-${h(e.size.x)}`);
-    e.stackVerticalLayoutSize === mKm.FILL_CONTAINER ? i.push("h-full") : r && e.stackVerticalLayoutSize === mKm.HUG_CONTENT ? t || i.push("h-fit") : e.stackVerticalLayoutSize !== mKm.FIXED && (r || e.stackVerticalLayoutSize !== mKm.HUG_CONTENT) || i.push(`h-${h(e.size.y)}`);
+    e.stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? i.push("w-full") : r && e.stackHorizontalLayoutSize === LayoutSizingMode.HUG_CONTENT ? t || i.push("w-fit") : e.stackHorizontalLayoutSize !== LayoutSizingMode.FIXED && (r || e.stackHorizontalLayoutSize !== LayoutSizingMode.HUG_CONTENT) || i.push(`w-${h(e.size.x)}`);
+    e.stackVerticalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? i.push("h-full") : r && e.stackVerticalLayoutSize === LayoutSizingMode.HUG_CONTENT ? t || i.push("h-fit") : e.stackVerticalLayoutSize !== LayoutSizingMode.FIXED && (r || e.stackVerticalLayoutSize !== LayoutSizingMode.HUG_CONTENT) || i.push(`h-${h(e.size.y)}`);
     "number" == typeof e.minWidth && i.push(`min-w-${h(e.minWidth)}`);
     "number" == typeof e.maxWidth && i.push(`max-w-${h(e.maxWidth)}`);
     "number" == typeof e.minHeight && i.push(`min-h-${h(e.minHeight)}`);

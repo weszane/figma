@@ -1,8 +1,8 @@
 import { parseQuery, serializeQuery } from "../905/634134";
 import { getI18nString } from "../905/303541";
-import { b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { X1 } from "../figma_app/736948";
-import { tn } from "../figma_app/831101";
+import { UpgradeSteps } from "../figma_app/831101";
 import { SC } from "../figma_app/707808";
 export class $$d0 {
   pathToSelectedView(e, t, i) {
@@ -11,7 +11,7 @@ export class $$d0 {
         view: "orgSelfServe",
         step: X1.Initial,
         orgMigrated: !1,
-        upsellSource: b.UNSET
+        upsellSource: UpsellModalType.UNSET
       };
       if (i) {
         let t = parseQuery(i);
@@ -24,7 +24,7 @@ export class $$d0 {
           view: "teamUpgrade",
           teamFlowType: t,
           teamId: null,
-          paymentStep: tn.CREATE_TEAM
+          paymentStep: UpgradeSteps.CREATE_TEAM
         };
         e.newTeamProps = {
           teamFlowType: t

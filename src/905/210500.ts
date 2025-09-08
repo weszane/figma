@@ -1,4 +1,4 @@
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
 import s from "../vendor/946678";
@@ -11,7 +11,7 @@ let p = atom(new Map());
 let m = P8([e => e.mirror.appModel.pagesList], e => {
   let t = new Map();
   e.forEach(e => {
-    e.thumbnailInfo && e.thumbnailInfo.nodeID !== AD && t.set(e.nodeId, {
+    e.thumbnailInfo && e.thumbnailInfo.nodeID !== defaultSessionLocalIDString && t.set(e.nodeId, {
       ...e.thumbnailInfo,
       pageName: e.name,
       pageId: e.nodeId
@@ -22,7 +22,7 @@ let m = P8([e => e.mirror.appModel.pagesList], e => {
 let h = createReduxSubscriptionAtomWithState(m);
 let g = (e, t) => e.nodeID !== t.thumbnailId || e.thumbnailVersion !== t.content_hash;
 let f = (e, t) => {
-  let i = !!e && e.nodeID !== AD;
+  let i = !!e && e.nodeID !== defaultSessionLocalIDString;
   return t && !i ? E8.DELETED : !t && i ? E8.NEW : t || i ? e && t && g(e, t) ? E8.CHANGED : E8.CURRENT : E8.NOT_STAGED;
 };
 let $$_0 = atom(e => {

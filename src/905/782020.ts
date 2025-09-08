@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { CWU, Z_n } from "../figma_app/763686";
+import { VariablesBindings, VariableDataType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "../vendor/626715";
 import { Ez } from "../figma_app/766708";
@@ -88,7 +88,7 @@ export function $$x8(e, t) {
   return null === t ? [] : e.filter(e => e.name.startsWith(t));
 }
 export function $$S2(e, t, i) {
-  return $$x8(e, t).every(e => CWU.renameVariable(e.node_id, rh(i + "/" + $$k14(e, t))));
+  return $$x8(e, t).every(e => VariablesBindings.renameVariable(e.node_id, rh(i + "/" + $$k14(e, t))));
 }
 export function $$w6(e) {
   return e.includes("/") ? e.split("/").slice(0, -1).join("/") + "/" : "";
@@ -121,7 +121,7 @@ export function $$O19(e, t, i, n) {
   let s;
   if (t) {
     let [i, n] = t;
-    CWU.insertVariableBetween(e, i, n);
+    VariablesBindings.insertVariableBetween(e, i, n);
     return;
   }
   if (0 === n.length) return;
@@ -138,7 +138,7 @@ export function $$O19(e, t, i, n) {
     return 0 === t.variables.length ? e(t.subgroups[t.subgroups.length - 1]) : t.variables[t.variables.length - 1];
   }(o[l - 1]));
   l < o.length - 1 && (s = $$v5(o[l + 1]));
-  CWU.insertVariableBetween(e, a?.node_id || "", s?.node_id || "");
+  VariablesBindings.insertVariableBetween(e, a?.node_id || "", s?.node_id || "");
 }
 export function $$D20(e, t) {
   return t ? e : null;
@@ -159,29 +159,29 @@ export function $$F22(e) {
 }
 export function $$M18(e) {
   switch (e.type) {
-    case Z_n.STRING:
-    case Z_n.FLOAT:
-    case Z_n.BOOLEAN:
-    case Z_n.COLOR:
+    case VariableDataType.STRING:
+    case VariableDataType.FLOAT:
+    case VariableDataType.BOOLEAN:
+    case VariableDataType.COLOR:
       return e.value;
-    case Z_n.ALIAS:
+    case VariableDataType.ALIAS:
       return {
         type: "VARIABLE_ALIAS",
         id: e.value
       };
-    case Z_n.NODE_FIELD_ALIAS:
-    case Z_n.MAP:
-    case Z_n.FONT_STYLE:
-    case Z_n.EXPRESSION:
-    case Z_n.SYMBOL_ID:
-    case Z_n.TEXT_DATA:
-    case Z_n.MANAGED_STRING_ALIAS:
-    case Z_n.CMS_ALIAS:
-    case Z_n.IMAGE:
-    case Z_n.LINK:
-    case Z_n.JS_RUNTIME_ALIAS:
-    case Z_n.DATE:
-    case Z_n.SLOT_CONTENT_ID:
+    case VariableDataType.NODE_FIELD_ALIAS:
+    case VariableDataType.MAP:
+    case VariableDataType.FONT_STYLE:
+    case VariableDataType.EXPRESSION:
+    case VariableDataType.SYMBOL_ID:
+    case VariableDataType.TEXT_DATA:
+    case VariableDataType.MANAGED_STRING_ALIAS:
+    case VariableDataType.CMS_ALIAS:
+    case VariableDataType.IMAGE:
+    case VariableDataType.LINK:
+    case VariableDataType.JS_RUNTIME_ALIAS:
+    case VariableDataType.DATE:
+    case VariableDataType.SLOT_CONTENT_ID:
       return;
     default:
       throwTypeError(e, "Unknown VariableDataType when converting to VariableModeValue");

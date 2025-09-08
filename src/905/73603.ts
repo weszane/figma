@@ -1,7 +1,7 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { DM } from "../figma_app/300692";
-import { ZQ } from "../figma_app/155287";
+import { getPluginByFileId } from "../figma_app/300692";
+import { hasLocalFileId } from "../figma_app/155287";
 import { I } from "../905/454965";
 import { $O, Z8 } from "../figma_app/109130";
 export function $$d0({
@@ -10,7 +10,7 @@ export function $$d0({
   localFileIdOrPluginId: i
 }) {
   let d = $O();
-  let c = i ? DM({
+  let c = i ? getPluginByFileId({
     idToSearch: i.toString(),
     localExtensionsByFileId: debugState.getState().localPlugins,
     publishedExtensions: {
@@ -24,8 +24,8 @@ export function $$d0({
     extensionInfo: c ? {
       extensionId: c.plugin_id,
       extensionType: c.manifest.containsWidget ? "widget" : "plugin",
-      currentExtensionVersionId: ZQ(c) ? null : c.id ?? null,
-      localFileId: ZQ(c) ? c.localFileId : null
+      currentExtensionVersionId: hasLocalFileId(c) ? null : c.id ?? null,
+      localFileId: hasLocalFileId(c) ? c.localFileId : null
     } : void 0
   };
   d.unshift(u);

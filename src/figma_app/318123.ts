@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { VIy } from "../figma_app/763686";
+import { IPanelType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { y8 } from "../figma_app/459490";
 import { b as _$$b } from "../905/985254";
 import { B as _$$B } from "../figma_app/750676";
@@ -72,7 +72,7 @@ let K = atom(null, (e, t) => {
   t($$z9);
   t($$J5, void 0);
   t($$Z16, Xi());
-  t($$Q10, VIy.BASIC);
+  t($$Q10, IPanelType.BASIC);
 });
 let $$Y21 = Wh(() => atom(!1));
 let $$$1 = atom("");
@@ -80,7 +80,7 @@ let $$X20 = atom(void 0);
 let $$q6 = atom("");
 let $$J5 = atom(void 0);
 let $$Z16 = atom(Xi());
-let $$Q10 = atom(VIy.BASIC);
+let $$Q10 = atom(IPanelType.BASIC);
 let $$ee14 = atom({
   status: _$$c.NONE
 });
@@ -120,7 +120,7 @@ let ea = atom(null, async (e, t, {
     teamId: e(As) || null,
     fileKey: r,
     userId: e(kS) || null,
-    trackingSessionId: fF(),
+    trackingSessionId: getTrackingSessionId(),
     fileSeq: e(J)?.toString() || null
   };
   t($$ee14, {

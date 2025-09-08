@@ -1,5 +1,5 @@
 import _require from "../2824/40443";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
@@ -170,11 +170,11 @@ export async function $$v1(e) {
       let r = i.name;
       let a = r.replace("[CODEGEN]", "").trim();
       0 === a.length && (a = "Component", console.warn(`[CODEGEN] Frame in section "${t}" has no name.`));
-      l7.system("bulk-export-designs-to-react", () => {
+      permissionScopeHandler.system("bulk-export-designs-to-react", () => {
         i.name = a;
       });
       let l = await $$y0(i);
-      i.name !== r && l7.system("bulk-export-designs-to-react", () => {
+      i.name !== r && permissionScopeHandler.system("bulk-export-designs-to-react", () => {
         i.name = r;
       });
       s++;

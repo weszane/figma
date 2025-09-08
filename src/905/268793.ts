@@ -2,16 +2,16 @@ import { getFeatureFlags } from "../905/601108";
 import { tv, um, lQ } from "../905/985374";
 import { FPlanNameType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 let l = new class {
   constructor() {
-    this.TotalActiveUsersSchemaValidator = vh();
-    this.ActiveUserAvatarsSchemaValidator = vh();
+    this.TotalActiveUsersSchemaValidator = createNoOpValidator();
+    this.ActiveUserAvatarsSchemaValidator = createNoOpValidator();
   }
   getTotalActiveUsers(e) {
     return this.TotalActiveUsersSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/social_proof/${tv[e.seatType]}/${e.planType}/${e.planParentId}/total_active_users`, td.toAPIParameters({
+    }) => await t.get(`/api/social_proof/${tv[e.seatType]}/${e.planType}/${e.planParentId}/total_active_users`, APIParameterUtils.toAPIParameters({
       license_type: e.licenseType,
       days: e.days
     })));
@@ -19,7 +19,7 @@ let l = new class {
   getActiveUserAvatars(e) {
     return this.ActiveUserAvatarsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/social_proof/${tv[e.seatType]}/${e.planType}/${e.planParentId}/active_user_avatars`, td.toAPIParameters({
+    }) => await t.get(`/api/social_proof/${tv[e.seatType]}/${e.planType}/${e.planParentId}/active_user_avatars`, APIParameterUtils.toAPIParameters({
       license_type: e.licenseType,
       job_title: e.jobTitle,
       num_avatars_requested: e.numAvatarsRequested,

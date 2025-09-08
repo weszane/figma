@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/632989";
@@ -341,7 +341,7 @@ function A({
         minX,
         maxX
       } = f.current;
-      let o = qE(0, (i - minX) / (maxX - minX) * t, t);
+      let o = clamp(0, (i - minX) / (maxX - minX) * t, t);
       f.current.newTime = o;
       l(o);
       s(f.current.newTime);
@@ -370,7 +370,7 @@ function A({
         let r = i.x;
         let n = i.x + i.width;
         let l = e.clientX;
-        let d = qE(0, (l - r) / (n - r) * t, t);
+        let d = clamp(0, (l - r) / (n - r) * t, t);
         s(d);
         f.current = {
           minX: r,

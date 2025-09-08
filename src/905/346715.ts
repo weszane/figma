@@ -17,7 +17,7 @@ import { B as _$$B } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { Ce, to, Lo } from "../905/156213";
+import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { FOrganizationLevelType, FResourceCategoryType } from "../figma_app/191312";
@@ -26,16 +26,16 @@ import { Cl, Eq } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { c as _$$c } from "../905/32166";
 import { $ as _$$$ } from "../905/834575";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { CE, XK, C2, Xu, QL, T as _$$T, Pv, Gu, Kk, Qu, Cr, iU, g2 } from "../figma_app/397283";
 import { A as _$$A } from "../6828/7452";
 var $$D1 = (e => (e.PROJECT_SETTINGS = "project_settings", e.CONNECTED_PROJECT_ADMIN_UI = "connected_project_admin_ui", e.CONNECTED_PROJECT_ORG_PAGE = "connected_project_org_page", e.PROJECT_SETTINGS_ONBOARDING_CTA = "project_settings_onboarding_cta", e))($$D1 || {});
 var L = (e => (e.URL_FORMAT = "url_format", e.URL_SAME_PLAN = "url_same_plan", e.EMAIL_FORMAT = "email_format", e.EMAIL_USER_NOT_FOUND = "email_user_not_found", e.EMAIL_NOT_MATCH_PLAN = "email_not_match_plan", e.EMAIL_SAME_DOMAIN = "email_same_domain", e.EMAIL_USER_ALREADY_EXISTS = "email_user_already_exists", e.NON_GOV_URL = "non_gov_url", e))(L || {});
-let $$F0 = Ju(function (e) {
+let $$F0 = registerModal(function (e) {
   let t;
   let i = useDispatch();
   let u = () => {
-    i(Ce());
+    i(hideModal());
   };
   let p = hS({
     ...e,
@@ -209,7 +209,7 @@ let $$F0 = Ju(function (e) {
                     askThemToCreateOneButton: jsx("button", {
                       className: C2,
                       onClick: () => {
-                        i(to({
+                        i(showModalHandler({
                           type: M,
                           data: {
                             projectPlan: N
@@ -327,10 +327,10 @@ let $$F0 = Ju(function (e) {
     })
   });
 }, "ResourceConnectRequestModal");
-let M = Ju(function (e) {
+let M = registerModal(function (e) {
   let t = useDispatch();
   let i = () => {
-    t(Ce());
+    t(hideModal());
   };
   let h = hS({
     ...e,
@@ -363,7 +363,7 @@ let M = Ju(function (e) {
             className: g2,
             children: [jsx(K, {
               onClick: () => {
-                t(Lo());
+                t(popModalStack());
               },
               "aria-label": getI18nString("resource_connection.aria_label.button"),
               children: jsx(_$$C, {})
@@ -412,7 +412,7 @@ let M = Ju(function (e) {
                 host_plan_id: e.projectPlan.key.parentId,
                 invitee_email: g
               }).then(() => {
-                t(Ce());
+                t(hideModal());
                 t(_$$F.enqueue({
                   message: getI18nString("resource_connection.visual_bell.instructions_sent")
                 }));

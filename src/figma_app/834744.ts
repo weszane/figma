@@ -6,7 +6,7 @@ import { D } from "../905/591570";
 import { Pt } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { A as _$$A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { Ib } from "../905/129884";
 import { t as _$$t2 } from "../figma_app/480016";
@@ -92,7 +92,7 @@ let C = (e, t, r, n) => ({
   disabled: !r,
   recordingKey: n,
   onClick: () => {
-    Y5.triggerActionInUserEditScope(e);
+    fullscreenValue.triggerActionInUserEditScope(e);
   }
 });
 export const Q = $$N0;

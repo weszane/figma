@@ -3,11 +3,11 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { n as _$$n, sD } from "../figma_app/740025";
 import { N } from "../905/696711";
 import { vt } from "../figma_app/45218";
-let $$p1 = nF((e, {
+let $$p1 = createOptimistThunk((e, {
   id: t,
   resourceType: r
 }, {
@@ -47,7 +47,7 @@ let $$p1 = nF((e, {
 }, ({
   id: e
 }) => `LIKE_RESOURCE_${e}`);
-let $$_0 = nF((e, {
+let $$_0 = createOptimistThunk((e, {
   id: t,
   resourceType: r,
   likeId: s

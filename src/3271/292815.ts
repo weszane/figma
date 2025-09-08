@@ -1,7 +1,7 @@
-import { kf } from "../905/992467";
+import { setupLazyComponentFactory } from "../905/992467";
 import _require from "../8316/638316";
 import { jsx } from "react/jsx-runtime";
-let a = kf("lazy_cmty_purchase_button", {
+let a = setupLazyComponentFactory("lazy_cmty_purchase_button", {
   isCodesplit: !0,
   ComponentFactory: async () => ({
     default: (await _require).$$default

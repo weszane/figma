@@ -15,7 +15,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
 import { B } from "../905/900597";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { N as _$$N2 } from "../figma_app/55043";
 import { sMZ } from "../figma_app/43951";
@@ -31,7 +31,7 @@ export function $$w0() {
   let w = a?.tier;
   let N = a?.connectionCount ?? 0;
   let R = _$$N2(a?.key, () => {
-    e(to({
+    e(showModalHandler({
       type: B,
       data: {
         entryPoint: wR.CONNECTED_PROJECT_ADMIN_UI

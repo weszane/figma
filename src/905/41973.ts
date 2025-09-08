@@ -1,4 +1,4 @@
-import { Qtg } from "../figma_app/763686";
+import { deprecatedXHRBindings } from "../figma_app/763686";
 import { getInitialOptions } from "../figma_app/169182";
 export let $$n1;
 class s {
@@ -6,7 +6,7 @@ class s {
     this.sendRequest = e => {
       let t = new XMLHttpRequest();
       for (let i in t.onloadend = () => {
-        Qtg?.receiveResponse({
+        deprecatedXHRBindings?.receiveResponse({
           promiseID: e.promiseID,
           status: t.status,
           contentType: t.getResponseHeader("Content-Type"),

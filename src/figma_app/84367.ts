@@ -1,81 +1,151 @@
-import { useState, useCallback, useRef, useEffect, useLayoutEffect } from "react";
-import { mov } from "../figma_app/763686";
-import { q } from "../905/924253";
-import { J } from "../905/633914";
-import { H } from "../905/561433";
-export function $$l2(e) {
-  return mov?.isAlive(e.handle) ?? !1;
+import type { Fn } from '../../types/global';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { requestDeferredExecution } from '../905/561433';
+import { useSyncedRef } from '../905/633914';
+import { useFullscreenReady } from '../905/924253';
+import { weakHandleHelpers } from '../figma_app/763686';
+
+/**
+ * Checks if the observable handle is alive.
+ * Original: $$l2
+ */
+export function isObservableAlive(observable: any): boolean {
+  return weakHandleHelpers?.isAlive(observable.handle) ?? false;
 }
-let d = new Set();
-function c(e) {
-  d.has(e) || (d.add(e), H());
+
+/**
+ * Set to track deferred callbacks.
+ * Original: d
+ */
+const deferredCallbacks = new Set<Fn>();
+
+/**
+ * Adds a callback to the deferred set and requests execution.
+ * Original: c
+ */
+function addDeferredCallback(callback: Fn) {
+  if (!deferredCallbacks.has(callback)) {
+    deferredCallbacks.add(callback);
+    requestDeferredExecution();
+  }
 }
-export function $$u3(e, {
-  onChangeImmediate: t,
-  onChangeDeferred: r
+
+/**
+ * Subscribes to observable changes and handles immediate and deferred callbacks.
+ * Original: $$u3
+ */
+export function subscribeObservable(observable: any, {
+  onChangeImmediate,
+  onChangeDeferred
+}: {
+  onChangeImmediate?: () => void;
+  onChangeDeferred?: () => void;
 }) {
-  let n = e.subscribeFromJs(() => {
-    t?.();
-    r && c(r);
+  const subscription = observable.subscribeFromJs(() => {
+    onChangeImmediate?.();
+    if (onChangeDeferred) addDeferredCallback(onChangeDeferred);
   });
   return () => {
-    if (r && d.$$delete(r), e instanceof Object) $$l2(e) && e.unsubscribeFromJs(n);else try {
-      e.unsubscribeFromJs(n);
-    } catch (e) {}
+    if (onChangeDeferred) deferredCallbacks.delete(onChangeDeferred);
+    if (observable instanceof Object) {
+      isObservableAlive(observable) && observable.unsubscribeFromJs(subscription);
+    } else {
+      try {
+        observable.unsubscribeFromJs(subscription);
+      } catch {}
+    }
   };
 }
-export function $$p1() {
-  if (0 === d.size) return;
-  let e = new Set(d);
-  for (let t of (d = new Set(), e)) t();
+
+/**
+ * Executes all deferred callbacks.
+ * Original: $$p1
+ */
+export function executeDeferredCallbacks() {
+  if (deferredCallbacks.size === 0) return;
+  const callbacks = new Set(deferredCallbacks);
+  deferredCallbacks.clear();
+  for (const callback of callbacks) callback();
 }
-let _ = 0;
-let h = Symbol("EMPTY_OBSERVABLE");
-export function $$m0(e) {
-  return $$g4(e, h);
+
+/**
+ * Internal counter for state updates.
+ * Original: _
+ */
+let updateCounter = 0;
+
+/**
+ * Symbol representing an empty observable.
+ * Original: h
+ */
+const EMPTY_OBSERVABLE = Symbol('EMPTY_OBSERVABLE');
+
+/**
+ * Returns the observable value or a fallback if not alive.
+ * Original: $$m0
+ */
+export function getObservableOrFallback(observable: any) {
+  return getObservableValue(observable, EMPTY_OBSERVABLE);
 }
-export function $$g4(e, t) {
-  q();
-  let [r, i] = useState(0);
-  let s = useCallback(() => {
-    i(++_);
+
+/**
+ * Returns the current value of an observable, updating on changes.
+ * Original: $$g4
+ */
+export function getObservableValue(observable: any, fallback: any) {
+  useFullscreenReady();
+  const [_, setUpdate] = useState(0);
+  const triggerUpdate = useCallback(() => {
+    setUpdate(++updateCounter);
   }, []);
-  let o = useRef(h);
-  let d = () => {
-    o.current = h;
+  const valueRef = useRef<any>(EMPTY_OBSERVABLE);
+  const resetValue = () => {
+    valueRef.current = EMPTY_OBSERVABLE;
   };
   useEffect(() => {
-    if (!e || !$$l2(e)) return;
-    let t = $$u3(e, {
-      onChangeImmediate: d,
-      onChangeDeferred: s
+    if (!observable || !isObservableAlive(observable)) return;
+    const unsubscribe = subscribeObservable(observable, {
+      onChangeImmediate: resetValue,
+      onChangeDeferred: triggerUpdate
     });
-    let r = e.getCopy();
-    o.current !== r && (d(), c(s));
-    return t;
-  }, [e, s]);
-  o.current === h && e && $$l2(e) && (o.current = e.getCopy());
-  return o.current === h ? t : o.current;
+    const currentValue = observable.getCopy();
+    if (valueRef.current !== currentValue) {
+      resetValue();
+      addDeferredCallback(triggerUpdate);
+    }
+    return unsubscribe;
+  }, [observable, triggerUpdate]);
+  if (valueRef.current === EMPTY_OBSERVABLE && observable && isObservableAlive(observable)) {
+    valueRef.current = observable.getCopy();
+  }
+  return valueRef.current === EMPTY_OBSERVABLE ? fallback : valueRef.current;
 }
-export function $$f5(e, t) {
-  q();
-  let [r, i, o] = J(h);
+
+/**
+ * Returns the current value of an observable using a synced ref.
+ * Original: $$f5
+ */
+export function useSyncedObservableValue(observable: any, fallback: any) {
+  useFullscreenReady();
+  const [ref, value, setValue] = useSyncedRef(EMPTY_OBSERVABLE);
   useLayoutEffect(() => {
-    if (!e || !$$l2(e)) return;
-    let t = $$u3(e, {
+    if (!observable || !isObservableAlive(observable)) return;
+    const unsubscribe = subscribeObservable(observable, {
       onChangeImmediate: () => {
-        $$l2(e) && o(e.getCopy());
+        if (isObservableAlive(observable)) setValue(observable.getCopy());
       }
     });
-    let n = e.getCopy();
-    r.current !== n && o(n);
-    return t;
-  }, [e, r, o]);
-  return i === h ? t : i;
+    const currentValue = observable.getCopy();
+    if (ref.current !== currentValue) setValue(currentValue);
+    return unsubscribe;
+  }, [observable, ref, setValue]);
+  return value === EMPTY_OBSERVABLE ? fallback : value;
 }
-export const J2 = $$m0;
-export const TG = $$p1;
-export const _n = $$l2;
-export const lu = $$u3;
-export const ut = $$g4;
-export const xB = $$f5;
+
+// Exported names refactored for clarity and traceability
+export const J2 = getObservableOrFallback;
+export const TG = executeDeferredCallbacks;
+export const _n = isObservableAlive;
+export const lu = subscribeObservable;
+export const ut = getObservableValue;
+export const xB = useSyncedObservableValue;

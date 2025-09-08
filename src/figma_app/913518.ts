@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { W8Y } from "../figma_app/763686";
+import { SessionStatus } from "../figma_app/763686";
 import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { H1 } from "../figma_app/124493";
@@ -47,8 +47,8 @@ export function $$b5() {
     e({
       type: "CLOSE"
     });
-    o.votingStage === W8Y.ENDED && r(H1({
-      votingStage: W8Y.NO_SESSION
+    o.votingStage === SessionStatus.ENDED && r(H1({
+      votingStage: SessionStatus.NO_SESSION
     }));
   }, [t, e, r, o]);
 }

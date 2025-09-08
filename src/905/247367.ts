@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { A } from "../905/920165";
 import { w_ } from "../figma_app/273493";
 import { o6 } from "../figma_app/806412";
@@ -20,7 +20,7 @@ let _ = class e extends o6 {
     };
     this.keyDownCallback = e => {
       let t = W(e);
-      let i = qE(this.props.color.a + t / 100, 0, 1);
+      let i = clamp(this.props.color.a + t / 100, 0, 1);
       this.props.changeCallback({
         ...this.props.color,
         a: i

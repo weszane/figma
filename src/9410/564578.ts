@@ -1,6 +1,6 @@
 import { c2 } from "../905/382883";
-import { luZ } from "../figma_app/763686";
-import { Hr } from "../905/871411";
+import { AnimationTriggerType } from "../figma_app/763686";
+import { defaultSessionLocalID } from "../905/871411";
 import { logError } from "../905/714362";
 import { uc, eB, kP } from "../9410/228612";
 function l(e, t) {
@@ -15,14 +15,14 @@ export function $$d1(e, t, i) {
   let r = [];
   for (let s of i) l(s, e) || (l(s, t) ? (r.push({
     ...e,
-    startCondition: luZ.TRIGGER,
-    interactionId: Hr
+    startCondition: AnimationTriggerType.TRIGGER,
+    interactionId: defaultSessionLocalID
   }), r.push(t)) : r.push(s));
   let s = r.map((e, t, i) => {
     let r = t - 1 >= 0 && i[t - 1] && eB(i[t - 1]);
     return uc(e) && r ? {
       ...e,
-      startCondition: luZ.TRIGGER
+      startCondition: AnimationTriggerType.TRIGGER
     } : e;
   });
   return kP.toPrototypeInteractions(s);
@@ -50,10 +50,10 @@ export function $$c0(e, t, i, r) {
   let a = [];
   for (let s of r) l(s, e) || (t && l(s, t) ? (a.push(t), a.push({
     ...e,
-    startCondition: uc(t) ? luZ.AFTER_PREVIOUS : luZ.TRIGGER
+    startCondition: uc(t) ? AnimationTriggerType.AFTER_PREVIOUS : AnimationTriggerType.TRIGGER
   })) : i && l(s, i) && uc(i) ? a.push({
     ...i,
-    startCondition: luZ.AFTER_PREVIOUS
+    startCondition: AnimationTriggerType.AFTER_PREVIOUS
   }) : a.push(s));
   return kP.toPrototypeInteractions(a);
 }

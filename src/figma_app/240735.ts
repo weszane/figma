@@ -1,4 +1,4 @@
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
 import { Ay } from "../905/612521";
 import { XHR } from "../905/910117";
@@ -6,12 +6,12 @@ import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { RF, Nh } from "../905/890368";
 import { F } from "../905/302958";
-import { MM, nF } from "../905/350402";
+import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { A } from "../905/654645";
 import { kW } from "../figma_app/391338";
 import { N } from "../905/696711";
 import { $ } from "../905/834575";
-let $$g7 = MM("BATCH_DEL_TEAM_MEMBERS", (e, {
+let $$g7 = createOptimistAction("BATCH_DEL_TEAM_MEMBERS", (e, {
   teamId: t,
   userIds: r
 }, {
@@ -20,12 +20,12 @@ let $$g7 = MM("BATCH_DEL_TEAM_MEMBERS", (e, {
   XHR.del(`/api/teams/${t}/users`, {
     user_ids: r
   }).then(() => {
-    e.dispatch(_$$c(i));
+    e.dispatch(createOptimistCommitAction(i));
   }).catch(t => {
-    e.dispatch(_$$r(i));
+    e.dispatch(createOptimistRevertAction(i));
   });
 });
-let $$f3 = nF(async (e, t) => {
+let $$f3 = createOptimistThunk(async (e, t) => {
   let {
     teamId
   } = t;
@@ -39,7 +39,7 @@ let $$f3 = nF(async (e, t) => {
     })));
   });
 });
-let $$E17 = nF(async (e, t) => {
+let $$E17 = createOptimistThunk(async (e, t) => {
   await XHR.put(`/api/teams/${t.teamId}`, {
     description: t.description
   }).then(() => {
@@ -54,7 +54,7 @@ let $$E17 = nF(async (e, t) => {
     e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.update_description_error")));
   });
 });
-let $$y16 = nF(async (e, t) => {
+let $$y16 = createOptimistThunk(async (e, t) => {
   let r = t.figma_provided_libraries_disabled;
   await $.updatePresetsDisabled({
     teamId: t.teamId,
@@ -76,7 +76,7 @@ let $$y16 = nF(async (e, t) => {
     e.dispatch(_$$s.error(getI18nString("file_browser.error_try_again")));
   });
 });
-nF((e, {
+createOptimistThunk((e, {
   teamId: t
 }, {
   loadingKey: r
@@ -96,7 +96,7 @@ nF((e, {
     e.dispatch(_$$s.error(getI18nString("file_browser.error_try_again")));
   });
 });
-let $$b12 = nF((e, {
+let $$b12 = createOptimistThunk((e, {
   teamId: t,
   userInitiated: r = !0
 }, {
@@ -143,7 +143,7 @@ NC("TEAM_LOADED");
 let $$O2 = NC("TEAM_RENAME");
 let $$R18 = NC("TEAM_BATCH_PUT");
 let $$L0 = RF;
-let $$P20 = nF((e, t) => {
+let $$P20 = createOptimistThunk((e, t) => {
   e.dispatch($$L0(t));
 });
 let $$D19 = Nh;

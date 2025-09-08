@@ -1,4 +1,4 @@
-import { bOM } from "../figma_app/763686";
+import { PresentationValidationStatus } from "../figma_app/763686";
 import r from "../vendor/336892";
 import { debugState } from "../905/407919";
 import { Sb } from "../905/359847";
@@ -71,11 +71,11 @@ async function v({
     description: Yp(c_(n).currentValue),
     category_id: (r && c_(r).currentValue?.id) ?? null,
     tags: [...c_(a).currentValue],
-    tags_v2: (s && c_(s).currentValue.map((e) => e.text)) ?? [],
+    tags_v2: (s && c_(s).currentValue.map(e => e.text)) ?? [],
     viewer_mode: c_(o).currentValue,
     scaling_mode: (c && c_(c).currentValue) ?? null,
     creator_policy: "",
-    publisher_ids: c_(u).currentValue.map((e) => e.id),
+    publisher_ids: c_(u).currentValue.map(e => e.id),
     price: c_(p).currentValue,
     support_contact: c_(m).currentValue,
     carousel_images: A,
@@ -105,7 +105,7 @@ export async function $$E1(e) {
   let d = {
     ...(await v(e)),
     file_version_id: newVersionId,
-    valid_prototype: figFilePrototypeStatus === bOM.VALID,
+    valid_prototype: figFilePrototypeStatus === PresentationValidationStatus.VALID,
     author_org_id: o && "org_id" in o ? o.org_id : "",
     author_team_id: o && "team_id" in o ? o.team_id : "",
     is_paid: (c_(price).currentValue ?? 0) > 0,
@@ -164,7 +164,7 @@ export async function $$S3({
   i && (n && (debugState.dispatch(HZ({
     ...i,
     profile_created: n
-  })), await new Promise((e) => {
+  })), await new Promise(e => {
     debugState.dispatch(aP({
       profileHandle: c_(r).currentValue,
       profileId: i.id,
@@ -176,7 +176,7 @@ export async function $$w4(e) {
   let t = 0;
   for (let i of [200, 300, 500, 1e3, 1e3, 2e3, 5e3, 1e4, 1e4]) {
     if (t >= 3e4) break;
-    await new Promise((e) => setTimeout(e, i));
+    await new Promise(e => setTimeout(e, i));
     t += i;
     let {
       data: {

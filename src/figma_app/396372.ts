@@ -1,6 +1,6 @@
 import { assert } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { MoD, Msn } from "../figma_app/763686";
+import { ImageExportType, SitesBindingsCpp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
 import { captureException, reportError } from "../905/11";
@@ -128,8 +128,8 @@ async function E(e) {
 }
 async function y(e) {
   let t;
-  "GENERATED_ASSET" === e.type ? await Jr().loadAllImagesUnder([e.nodeId], MoD.ALL, "sites.assetGeneration") : "PAINT_FILL_ASSET" === e.type && "IMAGE" === e.fill.type && (await Jr().loadImageByHash(e.fill.imageRef));
-  let r = (Msn?.generateSitesAssets({
+  "GENERATED_ASSET" === e.type ? await Jr().loadAllImagesUnder([e.nodeId], ImageExportType.ALL, "sites.assetGeneration") : "PAINT_FILL_ASSET" === e.type && "IMAGE" === e.fill.type && (await Jr().loadImageByHash(e.fill.imageRef));
+  let r = (SitesBindingsCpp?.generateSitesAssets({
     assets: [e]
   }) || {
     assetsJson: {},

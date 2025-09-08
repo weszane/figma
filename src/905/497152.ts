@@ -1,66 +1,66 @@
-import { PWo } from "../figma_app/763686";
+import { FacetType } from "../figma_app/763686";
 var $$r1 = (e => (e.COMPONENT = "component", e.STYLE = "style", e.STATE_GROUP = "state_group", e.VARIABLE = "variable", e.VARIABLE_SET = "variable_set", e.MODULE = "module", e.VARIABLE_OVERRIDE = "variable_override", e.RESPONSIVE_SET = "responsive_set", e.CONSTRAINED_TEMPLATE = "constrained_template", e.CODE_LIBRARY = "code_library", e.CODE_FILE = "code_file", e.CODE_COMPONENT = "code_component", e.MANAGED_STRING = "managed_string", e))($$r1 || {});
 export function $$a2(e) {
   switch (e) {
-    case PWo.SYMBOL:
+    case FacetType.SYMBOL:
       return "component";
-    case PWo.STYLE:
+    case FacetType.STYLE:
       return "style";
-    case PWo.STATE_GROUP:
+    case FacetType.STATE_GROUP:
       return "state_group";
-    case PWo.MODULE:
+    case FacetType.MODULE:
       return "module";
-    case PWo.RESPONSIVE_SET:
+    case FacetType.RESPONSIVE_SET:
       return "responsive_set";
-    case PWo.VARIABLE:
+    case FacetType.VARIABLE:
       return "variable";
-    case PWo.VARIABLE_SET:
+    case FacetType.VARIABLE_SET:
       return "variable_set";
-    case PWo.VARIABLE_OVERRIDE:
+    case FacetType.VARIABLE_OVERRIDE:
       return "variable_override";
-    case PWo.CONSTRAINED_TEMPLATE:
+    case FacetType.CONSTRAINED_TEMPLATE:
       return "constrained_template";
-    case PWo.CODE_LIBRARY:
+    case FacetType.CODE_LIBRARY:
       return "code_library";
-    case PWo.CODE_FILE:
+    case FacetType.CODE_FILE:
       return "code_file";
-    case PWo.CODE_COMPONENT:
+    case FacetType.CODE_COMPONENT:
       return "code_component";
-    case PWo.MANAGED_STRING:
+    case FacetType.MANAGED_STRING:
       return "managed_string";
-    case PWo.BRUSH:
-    case PWo.NONE:
+    case FacetType.BRUSH:
+    case FacetType.NONE:
       return null;
   }
 }
 export function $$s0(e) {
   switch (e) {
     case "component":
-      return PWo.SYMBOL;
+      return FacetType.SYMBOL;
     case "module":
-      return PWo.MODULE;
+      return FacetType.MODULE;
     case "style":
-      return PWo.STYLE;
+      return FacetType.STYLE;
     case "state_group":
-      return PWo.STATE_GROUP;
+      return FacetType.STATE_GROUP;
     case "variable":
-      return PWo.VARIABLE;
+      return FacetType.VARIABLE;
     case "variable_set":
-      return PWo.VARIABLE_SET;
+      return FacetType.VARIABLE_SET;
     case "variable_override":
-      return PWo.VARIABLE_OVERRIDE;
+      return FacetType.VARIABLE_OVERRIDE;
     case "responsive_set":
-      return PWo.RESPONSIVE_SET;
+      return FacetType.RESPONSIVE_SET;
     case "constrained_template":
-      return PWo.CONSTRAINED_TEMPLATE;
+      return FacetType.CONSTRAINED_TEMPLATE;
     case "code_library":
-      return PWo.CODE_LIBRARY;
+      return FacetType.CODE_LIBRARY;
     case "code_file":
-      return PWo.CODE_FILE;
+      return FacetType.CODE_FILE;
     case "code_component":
-      return PWo.CODE_COMPONENT;
+      return FacetType.CODE_COMPONENT;
     case "managed_string":
-      return PWo.MANAGED_STRING;
+      return FacetType.MANAGED_STRING;
   }
 }
 export const Hk = $$s0;

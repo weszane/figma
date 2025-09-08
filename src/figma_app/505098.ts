@@ -1,7 +1,7 @@
 import { Mz } from "../vendor/925040";
 import { Ul } from "../905/973142";
 import { p } from "../905/778115";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { LI, FS } from "../figma_app/646357";
 import { dK, Sh, F4 } from "../figma_app/889655";
 import { xP } from "../figma_app/164212";
@@ -13,7 +13,7 @@ export function $$_14(e) {
     description,
     symbolDescription
   } = e.mirror.selectionProperties;
-  return gl(description) || gl(symbolDescription) ? description ?? "" : description && description && (description.startsWith("<") && description.endsWith(">") || description.startsWith("{") && description.endsWith("}") || Ul(symbolDescription) === description) ? description : gl(symbolDescription) ? symbolDescription : Ul(symbolDescription ?? "");
+  return isInvalidValue(description) || isInvalidValue(symbolDescription) ? description ?? "" : description && description && (description.startsWith("<") && description.endsWith(">") || description.startsWith("{") && description.endsWith("}") || Ul(symbolDescription) === description) ? description : isInvalidValue(symbolDescription) ? symbolDescription : Ul(symbolDescription ?? "");
 }
 let $$h4 = Mz([dK, Sh], $$j17);
 let $$m6 = Mz([dK, Sh], (e, t) => {

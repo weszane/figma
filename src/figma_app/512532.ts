@@ -1,4 +1,4 @@
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { C } from "../905/887158";
 import { debugState } from "../905/407919";
 import { Oe } from "../figma_app/933328";
@@ -52,7 +52,7 @@ export async function $$c0(e, t, r, i, d, c) {
     return !0;
   }
   try {
-    if (l7.user("design-linter-apply-corner-radius-variable", () => {
+    if (permissionScopeHandler.user("design-linter-apply-corner-radius-variable", () => {
       e.setBoundVariable(u, y);
     }), c) {
       let e = f.variableSetId;

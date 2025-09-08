@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
-import { xae } from "../figma_app/763686";
+import { UserInterfaceElements } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { FP } from "../figma_app/91703";
 import { q5 } from "../figma_app/516028";
@@ -13,7 +13,7 @@ export function $$c0() {
     t && (trackEventAnalytics("left_panel_set_tab", {
       value: "Components"
     }), r(), e(FP({
-      tab: xae.ASSETS,
+      tab: UserInterfaceElements.ASSETS,
       persist: !0,
       shouldFocusSearchBar: n
     })));
@@ -23,7 +23,7 @@ export function $$c0() {
       value: "Layers"
     });
     e(FP({
-      tab: xae.LAYERS,
+      tab: UserInterfaceElements.LAYERS,
       persist: !0
     }));
   }, [e]);
@@ -32,7 +32,7 @@ export function $$c0() {
       value: "Code"
     });
     e(FP({
-      tab: xae.CODE
+      tab: UserInterfaceElements.CODE
     }));
   }, [e]);
   let _ = useCallback(() => {
@@ -40,7 +40,7 @@ export function $$c0() {
       value: "Chat"
     });
     e(FP({
-      tab: xae.CHAT
+      tab: UserInterfaceElements.CHAT
     }));
   }, [e]);
   return useMemo(() => ({

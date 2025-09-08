@@ -2,33 +2,33 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
 import { c$, bL } from "../905/575478";
 import { q } from "../905/932270";
-import { eVK } from "../figma_app/763686";
+import { AnchorPosition } from "../figma_app/763686";
 import l from "classnames";
 import { renderI18nText } from "../905/303541";
 import { _r } from "../figma_app/451499";
 var d = l;
-let p = [eVK.TOP_LEFT, eVK.TOP_CENTER, eVK.TOP_RIGHT, eVK.MIDDLE_LEFT, eVK.MIDDLE_CENTER, eVK.MIDDLE_RIGHT, eVK.BOTTOM_LEFT, eVK.BOTTOM_CENTER, eVK.BOTTOM_RIGHT];
+let p = [AnchorPosition.TOP_LEFT, AnchorPosition.TOP_CENTER, AnchorPosition.TOP_RIGHT, AnchorPosition.MIDDLE_LEFT, AnchorPosition.MIDDLE_CENTER, AnchorPosition.MIDDLE_RIGHT, AnchorPosition.BOTTOM_LEFT, AnchorPosition.BOTTOM_CENTER, AnchorPosition.BOTTOM_RIGHT];
 let m = {
-  [eVK.TOP_LEFT]: "anchor_point_selector--apTopLeft--jsueH",
-  [eVK.TOP_CENTER]: "anchor_point_selector--apTopMiddle--Wp-kD",
-  [eVK.TOP_RIGHT]: "anchor_point_selector--apTopRight--mbC5X",
-  [eVK.MIDDLE_LEFT]: "anchor_point_selector--apMiddleLeft--G-YlO",
-  [eVK.MIDDLE_CENTER]: "anchor_point_selector--apMiddleMiddle--gut-r",
-  [eVK.MIDDLE_RIGHT]: "anchor_point_selector--apMiddleRight--VZnhH",
-  [eVK.BOTTOM_LEFT]: "anchor_point_selector--apBottomLeft--30X3n",
-  [eVK.BOTTOM_CENTER]: "anchor_point_selector--apBottomMiddle--ySpzF",
-  [eVK.BOTTOM_RIGHT]: "anchor_point_selector--apBottomRight--rXs-P"
+  [AnchorPosition.TOP_LEFT]: "anchor_point_selector--apTopLeft--jsueH",
+  [AnchorPosition.TOP_CENTER]: "anchor_point_selector--apTopMiddle--Wp-kD",
+  [AnchorPosition.TOP_RIGHT]: "anchor_point_selector--apTopRight--mbC5X",
+  [AnchorPosition.MIDDLE_LEFT]: "anchor_point_selector--apMiddleLeft--G-YlO",
+  [AnchorPosition.MIDDLE_CENTER]: "anchor_point_selector--apMiddleMiddle--gut-r",
+  [AnchorPosition.MIDDLE_RIGHT]: "anchor_point_selector--apMiddleRight--VZnhH",
+  [AnchorPosition.BOTTOM_LEFT]: "anchor_point_selector--apBottomLeft--30X3n",
+  [AnchorPosition.BOTTOM_CENTER]: "anchor_point_selector--apBottomMiddle--ySpzF",
+  [AnchorPosition.BOTTOM_RIGHT]: "anchor_point_selector--apBottomRight--rXs-P"
 };
 let h = {
-  [eVK.TOP_LEFT]: "top_left",
-  [eVK.TOP_CENTER]: "top_center",
-  [eVK.TOP_RIGHT]: "top_right",
-  [eVK.MIDDLE_LEFT]: "middle_left",
-  [eVK.MIDDLE_CENTER]: "middle_center",
-  [eVK.MIDDLE_RIGHT]: "middle_right",
-  [eVK.BOTTOM_LEFT]: "bottom_left",
-  [eVK.BOTTOM_CENTER]: "bottom_center",
-  [eVK.BOTTOM_RIGHT]: "bottom_right"
+  [AnchorPosition.TOP_LEFT]: "top_left",
+  [AnchorPosition.TOP_CENTER]: "top_center",
+  [AnchorPosition.TOP_RIGHT]: "top_right",
+  [AnchorPosition.MIDDLE_LEFT]: "middle_left",
+  [AnchorPosition.MIDDLE_CENTER]: "middle_center",
+  [AnchorPosition.MIDDLE_RIGHT]: "middle_right",
+  [AnchorPosition.BOTTOM_LEFT]: "bottom_left",
+  [AnchorPosition.BOTTOM_CENTER]: "bottom_center",
+  [AnchorPosition.BOTTOM_RIGHT]: "bottom_right"
 };
 function g(e) {
   let {

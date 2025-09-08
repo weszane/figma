@@ -1,18 +1,18 @@
 import type { NoOpVm } from './700654';
 import { reportError } from '../905/11';
 import { ServiceCategories } from '../905/165054';
-import { l7 } from '../905/189185';
+import { permissionScopeHandler } from '../905/189185';
 import { z } from '../905/223332';
 import { c2 } from '../905/382883';
 import { P5 } from '../905/531105';
-import { BK, By } from '../905/816730';
+import { validateWithVm, PropTypes } from '../905/816730';
 import { Ed, OV } from '../905/828428';
 import { getSceneGraphInstance } from '../905/830071';
 import { Lb } from '../905/835985';
 import { AuthError, InternalError, RequestError } from '../905/845428';
 import { qg } from '../905/866640';
 import { isDevEnvironment } from '../figma_app/169182';
-import { Gc } from '../figma_app/300692';
+import { getWidgetVersionData } from '../figma_app/300692';
 import { Vi } from '../figma_app/364284';
 import { assert } from '../figma_app/465776';
 import { gH } from '../figma_app/985200';
@@ -65,7 +65,7 @@ class WidgetEffectManager {
     this.cleanup();
     for (const effect of this.effects) {
       if (!this.vm.isFunction(effect)) continue;
-      const result = l7.plugin('widget-effect', () => this.vm.callFunction(effect, this.vm.undefined));
+      const result = permissionScopeHandler.plugin('widget-effect', () => this.vm.callFunction(effect, this.vm.undefined));
       if (result.type === 'FAILURE') throw result.error;
       if (this.vm.isFunction(result.handle)) {
         this.cleanups.push(result.handle);
@@ -415,7 +415,7 @@ export class WidgetManager {
     const state = this.getRenderingState(widgetId);
     if (state.propertyMenuHookCalled) throw new InternalError('usePropertyMenu called multiple times');
     state.propertyMenuHookCalled = true;
-    const definition = BK({
+    const definition = validateWithVm({
       vm: this.vm,
       handle: propertyMenuDefinitionHandle,
       schema: Ed,
@@ -481,10 +481,10 @@ export class WidgetManager {
     if (state.shouldHideCursors !== null) {
       throw new InternalError('useHideCursors called multiple times. You can only call it once per widget.');
     }
-    const result = BK({
+    const result = validateWithVm({
       vm: this.vm,
       handle,
-      schema: By.bool,
+      schema: PropTypes.bool,
       property: 'useHideCursors.args[0]'
     });
     state.shouldHideCursors = result;
@@ -540,7 +540,7 @@ export class WidgetManager {
               rootNode: any;
               syncedState: any;
             } | null = null;
-            const pluginManifest = Gc(node);
+            const pluginManifest = getWidgetVersionData(node);
             const allowedDomains = pluginManifest?.manifest.networkAccess?.allowedDomains ?? gH;
             const {
               imgInfoMap,
@@ -555,7 +555,7 @@ export class WidgetManager {
               }
               return renderResult;
             }, this.getPluginRuntimeBridge(), allowedDomains);
-            l7.plugin('widget-rerender', () => {
+            permissionScopeHandler.plugin('widget-rerender', () => {
               if (state.oldVRoot && !c2(state.oldVRoot.syncedState, node.renderedSyncedState)) {
                 const renderTreeResult = this.renderWidgetTree(widgetId, 'previous');
                 if (!(renderTreeResult instanceof RequestError)) {
@@ -602,7 +602,7 @@ export class WidgetManager {
             if (this.lifecycleCommand?.name === 'mount' && this.lifecycleCommand?.isInsert) {
               const node = getSceneGraphInstance().get(widgetId);
               if (node) {
-                l7.plugin('remove-widget-after-first-render', () => node.removeWidgetWithoutSafetyChecks());
+                permissionScopeHandler.plugin('remove-widget-after-first-render', () => node.removeWidgetWithoutSafetyChecks());
               }
             }
           } finally {
@@ -695,7 +695,7 @@ export class WidgetManager {
       const handle = result.handle;
       const afterCall = window.performance.now();
       const unwrapped = this.vm.deepUnwrap(handle, true);
-      const pluginManifest = Gc(node);
+      const pluginManifest = getWidgetVersionData(node);
       const widgetApiVersion = pluginManifest?.manifest?.widgetApi ?? '1.0.0';
       const rootNode = P5(unwrapped, {
         isLocalWidget,
@@ -709,7 +709,7 @@ export class WidgetManager {
       const afterRender = window.performance.now();
       z.didRender(afterRender - start, afterRender - afterCall);
       if (pluginManifest && pluginManifest.name) {
-        l7.plugin('set-widget-name', () => {
+        permissionScopeHandler.plugin('set-widget-name', () => {
           node.widgetName = pluginManifest.name;
         });
       }

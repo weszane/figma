@@ -8,8 +8,8 @@ import { R as _$$R } from "../905/912455";
 import { K } from "../905/796744";
 import { y as _$$y } from "../905/672706";
 import { z as _$$z2 } from "../905/335547";
-import { Qa7, mKm, _0v, QeU, Egt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { StackBindingsCpp, LayoutSizingMode, Axis, SpacingMode, SceneGraphHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { M as _$$M2 } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -21,9 +21,9 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { ak } from "../figma_app/8833";
 import { PZ, Lk } from "../figma_app/975811";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { hS, ZX, E7, Q8, gl } from "../905/216495";
+import { isValidValue, arrayOrMixed, normalizeValue, AUTO_MARKER, isInvalidValue } from "../905/216495";
 import { M as _$$M3 } from "../figma_app/634148";
 import { zj, lJ, kl } from "../905/275640";
 import { o as _$$o } from "../905/237202";
@@ -134,7 +134,7 @@ function J(e, t) {
 }
 export function $$Z18() {
   return _$$A(useCallback((e, t) => {
-    null == e ? Qa7.setHoverStackLayoutSize(mKm.FIXED, _0v.X, !1) : Qa7.setHoverStackLayoutSize(e, t, !0);
+    null == e ? StackBindingsCpp.setHoverStackLayoutSize(LayoutSizingMode.FIXED, Axis.X, !1) : StackBindingsCpp.setHoverStackLayoutSize(e, t, !0);
   }, []), 100);
 }
 export function $$Q4(e) {
@@ -147,7 +147,7 @@ export function $$Q4(e) {
       stackHorizontalPadding
     } = zj("stackPaddingBottom", "stackVerticalPadding", "stackPaddingRight", "stackHorizontalPadding");
     return useCallback((n, i) => {
-      hS(stackVerticalPadding) && hS(stackPaddingBottom) && hS(stackHorizontalPadding) && hS(stackPaddingRight) && _$$F.trackFromFullscreen("Autolayout Padding Changed", {
+      isValidValue(stackVerticalPadding) && isValidValue(stackPaddingBottom) && isValidValue(stackHorizontalPadding) && isValidValue(stackPaddingRight) && _$$F.trackFromFullscreen("Autolayout Padding Changed", {
         side: $$K29[n],
         top: stackVerticalPadding,
         bottom: stackPaddingBottom,
@@ -177,20 +177,20 @@ export function $$Q4(e) {
           return [t.stackVerticalPadding, t.stackPaddingRight, t.stackPaddingBottom, t.stackHorizontalPadding];
       }
     }(e, t.mirror.selectionProperties);
-    return ZX(r);
+    return arrayOrMixed(r);
   });
   return [zN(r), useCallback((r, n, i) => {
     n && i && t(e, i);
     let a = J(r, e);
-    Y5.updateSelectionProperties(a, {
+    fullscreenValue.updateSelectionProperties(a, {
       shouldCommit: n
     });
   }, [e, t])];
 }
 export function $$ee36(e, t) {
-  e === QeU.SPACE_BETWEEN ? l7.user("set-stack-distribution-mode", () => {
-    Qa7.setDistributeOnSelectedStacks();
-  }) : e === QeU.PACKED && t !== QeU.PACKED && Y5.updateSelectionProperties({
+  e === SpacingMode.SPACE_BETWEEN ? permissionScopeHandler.user("set-stack-distribution-mode", () => {
+    StackBindingsCpp.setDistributeOnSelectedStacks();
+  }) : e === SpacingMode.PACKED && t !== SpacingMode.PACKED && fullscreenValue.updateSelectionProperties({
     stackPrimaryAlignItems: "MIN"
   }, {
     shouldCommit: zk.NO
@@ -201,7 +201,7 @@ class et extends _$$M3 {
     return $$X34(e.stackPrimaryAlignItems) ? null : e.stackSpacing;
   }
   setValueForNode(e, t) {
-    $$X34(e.stackPrimaryAlignItems) || e.stackSpacing === t || l7.user("set-stack-spacing", () => {
+    $$X34(e.stackPrimaryAlignItems) || e.stackSpacing === t || permissionScopeHandler.user("set-stack-spacing", () => {
       e.stackSpacing = t;
     });
   }
@@ -212,7 +212,7 @@ class en extends _$$M3 {
     return e.stackCounterSpacing;
   }
   setValueForNode(e, t) {
-    e.stackCounterSpacing !== t && l7.user("set-stack-counter-spacing", () => {
+    e.stackCounterSpacing !== t && permissionScopeHandler.user("set-stack-counter-spacing", () => {
       e.stackSpacing = t;
     });
   }
@@ -247,7 +247,7 @@ export function $$ea5(e) {
       }(t, e);
     }
     setValueForNode(r, n) {
-      l7.user("set-stack-padding", () => {
+      permissionScopeHandler.user("set-stack-padding", () => {
         t(r, J(n, e));
       });
     }
@@ -303,13 +303,13 @@ export function $$ed12(e) {
 export function $$ec25(e, t, r, n) {
   let i;
   i = "width" === n ? new _$$M2(t, e.size.y) : new _$$M2(e.size.x, t);
-  let a = Qa7.sizeClampedToMinAndMaxIfFixed(i, e.guid);
+  let a = StackBindingsCpp.sizeClampedToMinAndMaxIfFixed(i, e.guid);
   return _$$o(a.x, i.x, .1) && _$$o(a.y, i.y, .1) ? t : r;
 }
 function eu(e, t, r) {
   getSingletonSceneGraph().getDirectlySelectedNodes().forEach(n => {
     let i = $$ec25(n, e, t, r);
-    i !== ("width" === r ? n.size.x : n.size.y) && l7.system("dimension-change-during-min-max-scrub", () => Egt.setNodeTransformProperties(n.guid, {
+    i !== ("width" === r ? n.size.x : n.size.y) && permissionScopeHandler.system("dimension-change-during-min-max-scrub", () => SceneGraphHelpers.setNodeTransformProperties(n.guid, {
       [r]: i,
       sizeChangeIsAutomatic: !0
     }));
@@ -514,7 +514,7 @@ export function $$eT8() {
       nodesAreAllInsideStacks,
       isNonEditableInstanceSublayerSelected
     } = r.mirror.selectionProperties;
-    let s = "HORIZONTAL" === E7(stackMode) || "VERTICAL" === E7(stackMode) || "GRID" === E7(stackMode) && getFeatureFlags().ce_tv_grid_hug;
+    let s = "HORIZONTAL" === normalizeValue(stackMode) || "VERTICAL" === normalizeValue(stackMode) || "GRID" === normalizeValue(stackMode) && getFeatureFlags().ce_tv_grid_hug;
     if (getFeatureFlags().ce_tv_grid_min_max) {
       if (!t) return !1;
     } else if (!s && !nodesAreAllInsideStacks && !e) return !1;
@@ -523,7 +523,7 @@ export function $$eT8() {
 }
 class eI extends PZ {
   format(e) {
-    return null == e ? "" : "number" != typeof e && e !== Q8 ? e === $$ew43 ? getI18nString("fullscreen.properties_panel.apply_variable_ellipses") : (debug(!0, "Unknown stack spacing dropdown option: '" + e + "'"), "") : super.format(e);
+    return null == e ? "" : "number" != typeof e && e !== AUTO_MARKER ? e === $$ew43 ? getI18nString("fullscreen.properties_panel.apply_variable_ellipses") : (debug(!0, "Unknown stack spacing dropdown option: '" + e + "'"), "") : super.format(e);
   }
 }
 export class $$eS17 extends Lk {
@@ -535,17 +535,17 @@ export class $$eS17 extends Lk {
   format(e) {
     if (null == e) return "";
     if ("number" != typeof e) {
-      let t = e => gl(e) ? getI18nString("fullscreen.mixed") : e?.toFixed(0);
+      let t = e => isInvalidValue(e) ? getI18nString("fullscreen.mixed") : e?.toFixed(0);
       switch (e) {
-        case mKm[mKm.FILL_CONTAINER]:
+        case LayoutSizingMode[LayoutSizingMode.FILL_CONTAINER]:
           return getI18nString("fullscreen.properties_panel.stack_panel.al.fill");
-        case mKm[mKm.FIXED]:
+        case LayoutSizingMode[LayoutSizingMode.FIXED]:
           return "width" === this.activeDimension ? getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.width", {
             value: t(this.minmax.width.actual.value)
           }) : getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.height", {
             value: t(this.minmax.height.actual.value)
           });
-        case mKm[mKm.HUG_CONTENT]:
+        case LayoutSizingMode[LayoutSizingMode.HUG_CONTENT]:
           return getI18nString("fullscreen.properties_panel.stack_panel.al.hug");
         case $$eA28:
           return this.minmax.width.min.enabled ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_value", {
@@ -662,7 +662,7 @@ export function $$eG2() {
   let r = _$$A(useCallback((t, r, n, i) => {
     if (i !== eB.count) return;
     let a = !e?.minMaxOnly || "minmax" === t;
-    Qa7.setMinMaxVisuals(r || (1 !== n && a ? e?.visuals ?? null : r));
+    StackBindingsCpp.setMinMaxVisuals(r || (1 !== n && a ? e?.visuals ?? null : r));
   }, [e]), 100);
   return useCallback((n, i, a = 0) => {
     let s = e?.minMaxOnly && "minmax" === n;
@@ -679,15 +679,15 @@ export function $$eG2() {
 export function $$eV14() {
   let e = $$eG2();
   return useCallback((t, r) => {
-    r ? Qa7.setMinMaxVisuals(null) : e("other", null);
-    Qa7.setFocusStackPanelInput(t, r);
+    r ? StackBindingsCpp.setMinMaxVisuals(null) : e("other", null);
+    StackBindingsCpp.setFocusStackPanelInput(t, r);
   }, [e]);
 }
 export function $$eH16() {
   let e = $$eG2();
   return useCallback((t, r) => {
-    r ? Qa7.setMinMaxVisuals(null) : e("other", null);
-    Qa7.setHoverStackPanelInput(t, r);
+    r ? StackBindingsCpp.setMinMaxVisuals(null) : e("other", null);
+    StackBindingsCpp.setHoverStackPanelInput(t, r);
   }, [e]);
 }
 export function $$ez9(e, t, ...r) {

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import s from "classnames";
 import { B } from "../905/714743";
 import { G } from "../905/750789";
@@ -40,7 +40,7 @@ export let $$v2 = forwardRef(({
   useHoveredStyle: O = !1,
   isNonInteractive: D = !1
 }, L) => {
-  let F = p?.resolvedType === rXF.COLOR;
+  let F = p?.resolvedType === VariableResolvedDataType.COLOR;
   let M = (!F || P) && !!p && !i;
   let j = e === J.OVERRIDDEN;
   let {

@@ -1,5 +1,5 @@
 import { decodeBase64 } from "../905/561685";
-import { RYP, UF0 } from "../figma_app/763686";
+import { ColorSpaceEnum, YesNoEnum } from "../figma_app/763686";
 import { iL } from "../figma_app/762706";
 import { f as _$$f, a as _$$a } from "../905/580661";
 import { BrowserInfo } from "../figma_app/778880";
@@ -24,7 +24,7 @@ let y = function () {
   }
 }();
 async function b(e, t, r, n) {
-  let i = RYP.SRGB;
+  let i = ColorSpaceEnum.SRGB;
   if ("image/png" === t) {
     let t = Ll(e);
     if (e = t.withoutColorSpace, t.iccProfileRawData) try {
@@ -35,7 +35,7 @@ async function b(e, t, r, n) {
   if ("image/jpeg" === t) {
     try {
       let t = yy(e);
-      t && (i = Y(t) ?? RYP.SRGB);
+      t && (i = Y(t) ?? ColorSpaceEnum.SRGB);
     } catch (e) {}
     s = _$$f.getOrientation(e);
     w && (s = null);
@@ -221,7 +221,7 @@ let L = null;
 let $$P3 = {
   init(e) {
     L = (async () => {
-      if (e === UF0.YES) C = {
+      if (e === YesNoEnum.YES) C = {
         works: !0,
         allowsOptions: !0
       };else {
@@ -240,11 +240,11 @@ let $$P3 = {
     n && X(r, a);
     i && _$$e(r, a);
   },
-  encodeInPlace(e, t, r, n, s, o, l = RYP.SRGB, d = !1) {
+  encodeInPlace(e, t, r, n, s, o, l = ColorSpaceEnum.SRGB, d = !1) {
     let c;
     let u = m;
     let p = f;
-    l === RYP.DISPLAY_P3 && E && y && (u = E, p = y);
+    l === ColorSpaceEnum.DISPLAY_P3 && E && y && (u = E, p = y);
     $$P3.prepareDataForEncodeInPlace(e, t, r, o, d);
     let _ = new ImageData(new Uint8ClampedArray(r.buffer), e, t);
     u.width = e;
@@ -254,7 +254,7 @@ let $$P3 = {
     let h = ";base64,";
     return decodeBase64(c.slice(c.indexOf(h) + h.length));
   },
-  encode: (e, t, r, n, i, s, o = RYP.SRGB, l = !1) => (r = new Uint8Array(r), $$P3.encodeInPlace(e, t, r, n, i, s, o, l)),
+  encode: (e, t, r, n, i, s, o = ColorSpaceEnum.SRGB, l = !1) => (r = new Uint8Array(r), $$P3.encodeInPlace(e, t, r, n, i, s, o, l)),
   async decodeAsync(e, t, r, n, i) {
     if (await L, !C.works) return await b(e, t, r, n);
     if (R ??= new _$$o(), "image/jpeg" === t && O) {
@@ -399,7 +399,7 @@ async function k(e, t) {
     return {
       bitmap: await createImageBitmap(n, i),
       isMultiFrameGIF: !1,
-      colorProfile: RYP.SRGB
+      colorProfile: ColorSpaceEnum.SRGB
     };
   } catch (e) {
     logError("image_io", "HEIC conversion via Upnode failed", {
@@ -409,7 +409,7 @@ async function k(e, t) {
     return {
       bitmap: null,
       isMultiFrameGIF: !1,
-      colorProfile: RYP.SRGB
+      colorProfile: ColorSpaceEnum.SRGB
     };
   } else {
     if (!R) throw Error("Worker not initialized");
@@ -459,7 +459,7 @@ export let $$B5 = {
   },
   init(e) {
     $$P3.init(e);
-    O = e === UF0.YES;
+    O = e === YesNoEnum.YES;
   }
 };
 export const B0 = $$U0;

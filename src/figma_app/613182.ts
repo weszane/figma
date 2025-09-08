@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
-import { glU, vmp } from "../figma_app/763686";
+import { Fullscreen, Position } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import c from "classnames";
@@ -18,7 +18,7 @@ import { Sh } from "../905/470286";
 import { sx as _$$sx } from "../905/941192";
 import { jD, ac, kA, eB, xE } from "../905/765855";
 import { A as _$$A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Yb } from "../figma_app/62612";
 import { F4 } from "../905/691205";
 import { FEditorType } from "../figma_app/53721";
@@ -602,7 +602,7 @@ function q(e, t) {
   if ("return" !== s && (s || (s = function () {
     let e = atomStoreManager.get(HV);
     if (!e) return null;
-    let t = Y5.getViewportInfo();
+    let t = fullscreenValue.getViewportInfo();
     let r = Yb(t, e.bounds);
     r.y += bG();
     r.x += t.x;
@@ -622,12 +622,12 @@ function q(e, t) {
       }
     };
   }()), !s && a && (s = function () {
-    if (!Y5.isReady()) return null;
-    let e = glU?.getCanvasTooltip();
+    if (!fullscreenValue.isReady()) return null;
+    let e = Fullscreen?.getCanvasTooltip();
     if (!e) return null;
-    let t = glU?.getCanvasTooltipMaxWidth();
-    let r = glU?.getCanvasTooltipPosition();
-    let n = glU?.getCanvasTooltipDelay();
+    let t = Fullscreen?.getCanvasTooltipMaxWidth();
+    let r = Fullscreen?.getCanvasTooltipPosition();
+    let n = Fullscreen?.getCanvasTooltipDelay();
     let i = e.bounds;
     return {
       target: {
@@ -636,13 +636,13 @@ function q(e, t) {
       },
       position: r ? function (e) {
         switch (e) {
-          case vmp.BELOW:
+          case Position.BELOW:
             return Zj.BELOW;
-          case vmp.ABOVE:
+          case Position.ABOVE:
             return Zj.ABOVE;
-          case vmp.LEFT:
+          case Position.LEFT:
             return Zj.LEFT;
-          case vmp.RIGHT:
+          case Position.RIGHT:
             return Zj.RIGHT;
         }
       }(r) : Zj.BELOW,

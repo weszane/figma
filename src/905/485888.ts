@@ -6,8 +6,8 @@ import { Pq } from "../figma_app/12796";
 import { o5, Cu, f$ } from "../figma_app/603466";
 import { R } from "../figma_app/612938";
 import { hw, wY } from "../905/753206";
-import { ZQ } from "../figma_app/155287";
-import { X } from "../905/661977";
+import { hasLocalFileId } from "../figma_app/155287";
+import { findCodegenLanguage } from "../905/661977";
 let m = class {
   async generateCode({
     plugin: e,
@@ -16,7 +16,7 @@ let m = class {
     canRunCodegenArgs: n
   }) {
     let c = i.pluginLanguage;
-    if (dW(e, c ? X(e, c) : null), !Pq(n)) throw Error("Not allowed to run codegen");
+    if (dW(e, c ? findCodegenLanguage(e, c) : null), !Pq(n)) throw Error("Not allowed to run codegen");
     return (await R.instance.enqueue({
       runPluginArgs: {
         plugin: e,
@@ -42,7 +42,7 @@ let m = class {
     let t = hw();
     if (t) switch (e.type) {
       case "local-plugin":
-        ZQ(t) && e.id === String(t.localFileId) && (f$(), await wY());
+        hasLocalFileId(t) && e.id === String(t.localFileId) && (f$(), await wY());
         return;
       case "published-plugin":
         e.id === t.plugin_id && (f$(), await wY());

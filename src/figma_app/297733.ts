@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
-import { m1T } from "../figma_app/763686";
+import { LayoutTabType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { Yx } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { e as _$$e } from "../905/810168";
 import { xM, lU } from "../figma_app/539925";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType } from "../figma_app/53721";
 import { TI } from "../figma_app/407856";
 import { sG } from "../figma_app/440994";
@@ -22,7 +22,7 @@ export let $$y1 = "hidden-input-activedescendant";
 export function $$b3(e) {
   useEffect(() => {
     let t = $$T2();
-    null == t ? Y5.onReady().then(() => {
+    null == t ? fullscreenValue.onReady().then(() => {
       let t = $$T2();
       let r = document.getElementById($$y1);
       setTimeout(() => {
@@ -35,7 +35,7 @@ export function $$b3(e) {
     };
   }, [e]);
   let t = selectWithShallowEqual(e => Object.keys(e.mirror.sceneGraphSelection).length);
-  let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DESIGN_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.WHITEBOARD_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.SITES_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS || e.mirror.appModel.activeCanvasEditModeType === m1T.SLIDE_LAYOUT);
+  let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.DESIGN_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.WHITEBOARD_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.SITES_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMMENTS || e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.SLIDE_LAYOUT);
   let h = _$$e();
   let [b, I] = selectWithShallowEqual(e => {
     let t;

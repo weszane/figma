@@ -4,8 +4,8 @@ import { W, Hg } from "../figma_app/304955";
 import { VH, Ac } from "../figma_app/178419";
 import { j } from "../figma_app/171378";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
@@ -119,11 +119,11 @@ export function $$P3() {
     let n = r?.exportedFromCodeFile;
     if (n && n.isSoftDeleted) {
       let e = Hg(nc)[n.codeFileFullPathWithoutScheme];
-      e && (n.sourceCode = e.sourceCode, l7.ai("recover-code-entrypoint", () => {
-        glU?.restoreSoftDeletedNode(n.id);
-        glU?.renameNode(e.id, "/[Backup]App.tsx");
-        glU?.deleteCodeFile(e.id);
-        glU?.commit();
+      e && (n.sourceCode = e.sourceCode, permissionScopeHandler.ai("recover-code-entrypoint", () => {
+        Fullscreen?.restoreSoftDeletedNode(n.id);
+        Fullscreen?.renameNode(e.id, "/[Backup]App.tsx");
+        Fullscreen?.deleteCodeFile(e.id);
+        Fullscreen?.commit();
       }));
     }
   }, []);

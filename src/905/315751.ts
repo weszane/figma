@@ -1,4 +1,4 @@
-import { sH, fn, dI } from "../905/871411";
+import { parseSessionLocalID, isValidSessionLocalID, sessionLocalIDToString } from "../905/871411";
 export function $$r0({
   sceneGraph: e,
   selectionNodeIds: t,
@@ -10,9 +10,9 @@ export function $$r0({
     if ("string" != typeof i?.nodeId || "" === i.nodeId.trim()) throw Error(`Invalid nodeId provided in toolArgs: ${JSON.stringify(i)}`);
     let t = function (e) {
       let t = e.replace(/-/g, ":");
-      let i = sH(t);
-      if (null === i || !fn(i)) throw Error(`Invalid nodeId provided: ${e}`);
-      return dI(i);
+      let i = parseSessionLocalID(t);
+      if (null === i || !isValidSessionLocalID(i)) throw Error(`Invalid nodeId provided: ${e}`);
+      return sessionLocalIDToString(i);
     }(i.nodeId);
     try {
       return [function ({

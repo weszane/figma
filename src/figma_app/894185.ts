@@ -1,8 +1,8 @@
-import { dF } from "../905/426868";
+import { notifyFontLoadingState } from "../905/426868";
 export let $$n0;
 let $$a = class {
   fontResourceStatusChanged(e, t, r) {
-    dF(e, t, r);
+    notifyFontLoadingState(e, t, r);
   }
 };
 export function $$s1() {

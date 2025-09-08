@@ -33,7 +33,7 @@ import { k as _$$k2 } from "../905/644504";
 import { XHR } from "../905/910117";
 import { Q9 } from "../905/773401";
 import { F as _$$F } from "../905/302958";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { sS } from "../figma_app/516028";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { xf } from "../figma_app/416935";
@@ -516,10 +516,10 @@ function Q(e) {
             t(_$$F.enqueue({
               message: getI18nString("permissions.join_org.request_sent")
             }));
-            t(Lo());
+            t(popModalStack());
           }, e => {
             o(!1);
-            t(Lo());
+            t(popModalStack());
             t(_$$F.enqueue({
               message: e.message || e.data.message,
               error: !0

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState, createElement } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { m7W, glU } from "../figma_app/763686";
+import { SettingsAction, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
@@ -14,7 +14,7 @@ import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { Fy, g5, NT } from "../figma_app/579169";
 import { r1, Fu } from "../figma_app/545877";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { aV } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
@@ -24,7 +24,7 @@ import { w as _$$w, tX } from "../figma_app/728657";
 import { Td } from "../905/595131";
 import { selectWithShallowEqual } from "../905/103090";
 import { oB, ho, j7 } from "../905/929976";
-import { q as _$$q } from "../905/924253";
+import { useFullscreenReady } from "../905/924253";
 import { Um } from "../905/848862";
 import { TY, pi } from "../figma_app/357047";
 import { rq } from "../905/425180";
@@ -45,7 +45,7 @@ function M({
   }) => e.showUi);
   let l = Um();
   let d = useRef(!1);
-  let c = _$$q();
+  let c = useFullscreenReady();
   let u = useCallback(() => {
     e();
     i(oB());
@@ -58,7 +58,7 @@ function M({
       if (TY(l)) i(ho({
         type: pi,
         data: {
-          selectionToUpdate: m7W.PREFERENCES
+          selectionToUpdate: SettingsAction.PREFERENCES
         }
       }));else {
         let e = s ? 42 : 0;
@@ -488,8 +488,8 @@ function Y(e) {
     l();
     onNext();
   }, [l, onNext]);
-  useEffect(() => (glU?.setUsedZoomAction(!1), Y5.fromFullscreen.on("zoomActionMessageForOnboarding", c), () => {
-    Y5.fromFullscreen.removeListener("zoomActionMessageForOnboarding", c);
+  useEffect(() => (Fullscreen?.setUsedZoomAction(!1), fullscreenValue.fromFullscreen.on("zoomActionMessageForOnboarding", c), () => {
+    fullscreenValue.fromFullscreen.removeListener("zoomActionMessageForOnboarding", c);
   }), [s, c]);
   return jsx(_$$p, {
     trackingContext: "FigJam New User Zoom Banner",
@@ -542,10 +542,10 @@ function J(e) {
   }, [d, onManualDismiss]);
   return (useEffect(() => {
     if (i) {
-      glU?.setUsedPanAction(!1);
-      Y5.fromFullscreen.on("panActionMessageForOnboarding", c);
+      Fullscreen?.setUsedPanAction(!1);
+      fullscreenValue.fromFullscreen.on("panActionMessageForOnboarding", c);
       return () => {
-        Y5.fromFullscreen.removeListener("panActionMessageForOnboarding", c);
+        fullscreenValue.fromFullscreen.removeListener("panActionMessageForOnboarding", c);
       };
     }
   }, [l, i, c]), i) ? jsx(_$$p, {

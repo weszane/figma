@@ -1,2 +1,3 @@
-import $$n0 from "../vendor/6488";
-export const F = $$n0;
+import $$n0 from '../vendor/6488'
+
+export const F = $$n0

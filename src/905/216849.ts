@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect, forwardRef } from "react";
 import { I as _$$I } from "../905/494625";
 import { _ as _$$_ } from "../905/302698";
-import { M } from "../905/581092";
-import { r as _$$r } from "../905/577641";
+import { useExposedRef } from "../905/581092";
+import { defaultComponentAttribute } from "../905/577641";
 import { au } from "../905/336566";
 let o = Symbol();
 function u({
@@ -35,7 +35,7 @@ function u({
     "data-onboarding-key": m,
     ...b
   });
-  let x = M(v);
+  let x = useExposedRef(v);
   let S = p.activeTab === i;
   return (!function (e, t) {
     let i = useRef(o);
@@ -60,7 +60,7 @@ function u({
       return S || e && t;
     }() ? -1 : 0,
     ...I,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...E,
     children: e
   }) : null;

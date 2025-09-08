@@ -5,7 +5,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { bA, _q } from "../905/668764";
 import { Lk, X9, ag, i5, NB, PZ, f0, LN, cu, h7 } from "../figma_app/975811";
 import { dG } from "../figma_app/753501";
-import { oV, gl } from "../905/216495";
+import { MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
@@ -111,7 +111,7 @@ export function $$v15(e) {
   return jsxs(_$$b, {
     ...I,
     ...e,
-    scrubbingDisabled: e.scrubbingDisabled || e.disabled || null == e.value || e.value === oV && !e.mixedMathHandler,
+    scrubbingDisabled: e.scrubbingDisabled || e.disabled || null == e.value || e.value === MIXED_MARKER && !e.mixedMathHandler,
     children: [e.childrenAtEnd ? null : jsx(_$$e, {
       condition: !!e.children || !!x,
       wrapper: A,
@@ -369,7 +369,7 @@ export function $$P14({
     smallNudgeAmount,
     bigNudgeAmount
   }), [e, t, smallNudgeAmount, bigNudgeAmount]);
-  let c = gl(r.value) && r.mixedMathHandler;
+  let c = isInvalidValue(r.value) && r.mixedMathHandler;
   let _ = r.disabled || r.scrubbingDisabled || "number" != typeof r.value && !Array.isArray(r.value) && !c;
   let h = r.isTokenizable ? $ : p_;
   return jsxs(_$$b, {
@@ -426,7 +426,7 @@ export function $$D0({
     smallNudgeAmount,
     bigNudgeAmount
   }), [e, t, smallNudgeAmount, bigNudgeAmount]);
-  let c = gl(r.value) && r.mixedMathHandler;
+  let c = isInvalidValue(r.value) && r.mixedMathHandler;
   let _ = r.disabled || r.scrubbingDisabled || "number" != typeof r.value && !Array.isArray(r.value) && !c;
   let h = r.isTokenizable ? $ : p_;
   return jsxs(_$$b, {
@@ -485,7 +485,7 @@ export function $$k6({
     bigNudgeAmount,
     allowEmpty: r
   }), [e, t, smallNudgeAmount, bigNudgeAmount, r]);
-  let _ = gl(a.value) && a.mixedMathHandler;
+  let _ = isInvalidValue(a.value) && a.mixedMathHandler;
   let h = a.disabled || a.scrubbingDisabled || "number" != typeof a.value && !_;
   let m = a.isTokenizable ? $ : p_;
   return jsxs(_$$b, {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
-import { S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { N } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { U } from "../905/331038";
@@ -73,8 +73,8 @@ export function $$A0({
     disabled: !Zc(e),
     error: y,
     afterErrorContent: o.length > 0 ? _(o[0]) : void 0,
-    children: jsx(S, {
-      label: jsx(J, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("community.publishing.sell_this_resource_on_community")
       }),
       checked: wC(e),

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useCallback, useRef, useImperativeHandle, useState, useEffect } from "react";
-import { F } from "../905/549791";
+import { CheckboxPrimitive } from "../905/549791";
 import { $n } from "../905/521428";
 import { l as _$$l } from "../905/479687";
 import { J } from "../905/129695";
@@ -57,7 +57,7 @@ let b = forwardRef(function ({
         className: c()("tags_v2_select--tag--ukyQf", {
           "tags_v2_select--disabled--2jKbM": r
         }),
-        children: [jsx(F, {
+        children: [jsx(CheckboxPrimitive, {
           ref: e === A ? y : void 0,
           id: `tagsV2Select-tag-${e.text}`,
           className: "tags_v2_select--hiddenCheckbox---pexC",

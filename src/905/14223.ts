@@ -1,8 +1,8 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { U } from "../figma_app/477548";
-let $$o2 = nF((e, t, {
+let $$o2 = createOptimistThunk((e, t, {
   loadingKey: i
 }) => {
   let n = e.getState();
@@ -19,11 +19,11 @@ let $$o2 = nF((e, t, {
       users: i,
       fileKey: r
     }));
-  }).catch(e => { });
+  }).catch(e => {});
   N(o, e, i);
 });
 let $$l1 = NC("CONTACTS_SET");
 let $$d0 = NC("CONTACTS_RESET");
 export const cL = $$d0;
 export const hZ = $$l1;
-export const um = $$o2; 
+export const um = $$o2;

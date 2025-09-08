@@ -1,6 +1,6 @@
 import _require from "../5973/625973";
-import { biQ, glU, zvt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ComponentPropsAiCPPBindings, Fullscreen, TextModificationAction } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { hV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/531474";
@@ -67,16 +67,16 @@ export function $$u0(e, t, r) {
   let o = !0;
   let l = e.textNodes;
   let d = Object.values(t);
-  return (l7.ai("content-fill", () => {
+  return (permissionScopeHandler.ai("content-fill", () => {
     l.filter((e, t) => !r.has(t)).forEach((e, t) => {
       if (e.isLockedInCanvas) return;
       let r = d[t];
       if (!r) return;
-      let a = biQ.setTextContentOnTextNode(e.node.guid, r);
+      let a = ComponentPropsAiCPPBindings.setTextContentOnTextNode(e.node.guid, r);
       if (a) {
-        if (!glU) throw Error("Fullscreen is not available");
-        glU.requestNextCommitMergeWithPrevious(zvt.CONTENT_FILL_INSERT_AND_GENERATE);
-        n = glU.commit();
+        if (!Fullscreen) throw Error("Fullscreen is not available");
+        Fullscreen.requestNextCommitMergeWithPrevious(TextModificationAction.CONTENT_FILL_INSERT_AND_GENERATE);
+        n = Fullscreen.commit();
       } else !1 === a && (s = !0);
       o = o && !a;
     });
@@ -146,7 +146,7 @@ export function $$m8(e) {
   };
 }
 export function $$g1(e) {
-  for (let t of e) for (let e of t.textNodes) if (biQ.nodeHasMissingFonts(e.node.guid)) return !0;
+  for (let t of e) for (let e of t.textNodes) if (ComponentPropsAiCPPBindings.nodeHasMissingFonts(e.node.guid)) return !0;
   return !1;
 }
 export async function $$f7(e) {

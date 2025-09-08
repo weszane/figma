@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { QjO } from "../figma_app/763686";
+import { TemplateType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { wm } from "../905/19536";
@@ -88,13 +88,13 @@ export function $$T2() {
 export function $$I0(e) {
   if (!getFeatureFlags().dse_module_publish) return !1;
   switch (e.moduleSource) {
-    case QjO.EDITOR_TEMPLATE:
+    case TemplateType.EDITOR_TEMPLATE:
       return !1;
-    case QjO.SLIDES_TEMPLATE:
+    case TemplateType.SLIDES_TEMPLATE:
       return !0;
-    case QjO.SITES_TEMPLATE:
+    case TemplateType.SITES_TEMPLATE:
       return !!getFeatureFlags().sites;
-    case QjO.LITE_TEMPLATE:
+    case TemplateType.LITE_TEMPLATE:
       return !!getFeatureFlags().cooper;
   }
 }

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createRef } from "react";
-import { qE } from "../figma_app/492908";
-import { RYP, vRS, Ez5 } from "../figma_app/763686";
+import { clamp } from "../figma_app/492908";
+import { ColorSpaceEnum, NoneColor, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { Uz } from "../905/63728";
@@ -11,7 +11,7 @@ import { j7 } from "../905/929976";
 import { Vl } from "../figma_app/8833";
 import { F } from "../905/989956";
 import { dG } from "../figma_app/753501";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { dM, Eh } from "../figma_app/837840";
 import { VG } from "../figma_app/622881";
 import { f7 } from "../figma_app/896988";
@@ -24,7 +24,7 @@ import { zi } from "../figma_app/626177";
 import { oV, Ug, Zb } from "../905/706046";
 var d = l;
 export function $$T0({
-  colorProfile: e = RYP.SRGB,
+  colorProfile: e = ColorSpaceEnum.SRGB,
   ...t
 }) {
   let i = X7();
@@ -114,7 +114,7 @@ class k extends o6 {
     };
     this.clientXToStopPosition = (e, t, i = !0) => {
       let n = null;
-      if (this.props.colorProfile === RYP.SRGB ? n = this.srgbCanvasElement : this.props.colorProfile === RYP.DISPLAY_P3 && (n = this.displayP3CanvasElement), !n) throw Error("canvas doesn't exist!");
+      if (this.props.colorProfile === ColorSpaceEnum.SRGB ? n = this.srgbCanvasElement : this.props.colorProfile === ColorSpaceEnum.DISPLAY_P3 && (n = this.displayP3CanvasElement), !n) throw Error("canvas doesn't exist!");
       let {
         left,
         width
@@ -207,7 +207,7 @@ class k extends o6 {
       let r = this.currentSelectedStopIndex();
       let s = n[r];
       if (!s) return;
-      let o = qE(s.position + t, 0, 1);
+      let o = clamp(s.position + t, 0, 1);
       let l = {
         ...s,
         position: o
@@ -225,7 +225,7 @@ class k extends o6 {
         u[r] = e;
         Zb(u);
       }
-      i && (n = [...n.slice(0, r), ...n.slice(r + 1)], u = [...u.slice(0, r), ...u.slice(r + 1)], d = qE(d, 0, n.length - 1));
+      i && (n = [...n.slice(0, r), ...n.slice(r + 1)], u = [...u.slice(0, r), ...u.slice(r + 1)], d = clamp(d, 0, n.length - 1));
       this.updateStops(n, u, zk.YES);
       this.updateCurrentSelectedStop(d);
     };
@@ -277,9 +277,9 @@ class k extends o6 {
     };
     this.updateCurrentSelectedStop = e => {
       this.nextCurrentSelectedStopIndex = e;
-      Y5.updateAppModel({
+      fullscreenValue.updateAppModel({
         currentSelectedGradientStop: {
-          type: vRS.COLOR,
+          type: NoneColor.COLOR,
           index: e
         }
       });
@@ -309,7 +309,7 @@ class k extends o6 {
     this.srgbCanvasRef(this.srgbCanvasElement);
     this.displayP3CanvasRef(this.displayP3CanvasElement);
     this.updateCurrentSelectedStop(0);
-    Ez5.uiState().gradientPaintPickerOpen.set(!0);
+    AppStateTsApi.uiState().gradientPaintPickerOpen.set(!0);
   }
   componentDidUpdate(e, t) {
     super.componentDidUpdate(e, t);
@@ -320,7 +320,7 @@ class k extends o6 {
     super.componentWillUnmount();
     document.removeEventListener("mousemove", this.onMouseMove);
     document.removeEventListener("mouseup", this.onMouseUp);
-    Ez5.uiState().gradientPaintPickerOpen.set(!1);
+    AppStateTsApi.uiState().gradientPaintPickerOpen.set(!1);
   }
   addNewStop(e, t, i) {
     let n = this.props.paint.stops.slice();
@@ -402,11 +402,11 @@ class k extends o6 {
         })
       }, t)), e, jsxs("div", {
         className: "gradient_control--canvasContainer--m3w-- color_controls--slider--dWz2q",
-        children: [this.props.colorProfile === RYP.SRGB ? jsx("canvas", {
+        children: [this.props.colorProfile === ColorSpaceEnum.SRGB ? jsx("canvas", {
           ref: this.srgbCanvasRef,
           width: this.WIDTH,
           height: this.trackHeight
-        }) : void 0, this.props.colorProfile === RYP.DISPLAY_P3 ? jsx("canvas", {
+        }) : void 0, this.props.colorProfile === ColorSpaceEnum.DISPLAY_P3 ? jsx("canvas", {
           ref: this.displayP3CanvasRef,
           width: this.WIDTH,
           height: this.trackHeight
@@ -456,11 +456,11 @@ function R({
   });
 }
 export function $$N1(e) {
-  return qE(e, 0, 1);
+  return clamp(e, 0, 1);
 }
 k.displayName = "GradientControlInner";
 k.defaultProps = {
-  colorProfile: RYP.SRGB
+  colorProfile: ColorSpaceEnum.SRGB
 };
 export const i = $$T0;
 export const H = $$N1;

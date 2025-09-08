@@ -1,9 +1,9 @@
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
-    this.ApproveRequestsSchemaValidator = vh();
-    this.DenyRequestsSchemaValidator = vh();
+    this.ApproveRequestsSchemaValidator = createNoOpValidator();
+    this.DenyRequestsSchemaValidator = createNoOpValidator();
   }
   approveRequests(e) {
     return this.ApproveRequestsSchemaValidator.validate(async ({

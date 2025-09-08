@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { B9 } from "../905/125019";
-import { rrT, glU, zvt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { bytesToHex } from "../905/125019";
+import { NodePropertyCategory, Fullscreen, TextModificationAction } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { oA } from "../905/663269";
 import { debugState } from "../905/407919";
@@ -14,7 +14,7 @@ import { ds } from "../figma_app/314264";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { JB } from "../905/843553";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Jr, UD } from "../figma_app/624361";
 import { Mo } from "../905/913055";
 import { Tm } from "../figma_app/385874";
@@ -87,7 +87,7 @@ export async function $$D3(e) {
   if (!e || !e.image || !e.image.hash) throw new $$T5("No image paint available", {
     reportToSentry: !0
   });
-  let t = B9(e.image.hash);
+  let t = bytesToHex(e.image.hash);
   await Jr().imageUploadPromise();
   let i = Jr().getSignedUrls([t]);
   let n = i.get(t);
@@ -179,7 +179,7 @@ export async function $$M0({
             previousHash: i,
             modifyPaint: n
           }) {
-            e.isAlive && (l7.ai("image-modification", () => {
+            e.isAlive && (permissionScopeHandler.ai("image-modification", () => {
               let r = e.fills.findIndex(e => "IMAGE" === e.type && e.image?.hash && H9(e.image.hash) === i);
               Mo(e, "fill-paint-data").forEach(e => {
                 if (-1 !== r) {
@@ -190,16 +190,16 @@ export async function $$M0({
                   n && n(i);
                   a.splice(r + 1, 0, i);
                   e.fills = a;
-                  Y5.updateAppModel({
+                  fullscreenValue.updateAppModel({
                     currentSelectedProperty: {
-                      type: rrT.FILL,
+                      type: NodePropertyCategory.FILL,
                       indices: [r + 1]
                     }
                   });
                   e.setFillPaintEnabled(r, !1);
                   e.setImageInFillPaint(t, r + 1);
                   (function (e) {
-                    if (debugState.getState().mirror.appModel.currentSelectedProperty.type !== rrT.FILL) return;
+                    if (debugState.getState().mirror.appModel.currentSelectedProperty.type !== NodePropertyCategory.FILL) return;
                     let t = debugState.getState().pickerShown;
                     if (!t) return;
                     let {
@@ -214,10 +214,10 @@ export async function $$M0({
                         isInStyleModal: !1
                       }
                     }));
-                  })(Tm.getId(r + 1, rrT.FILL, "paint"));
+                  })(Tm.getId(r + 1, NodePropertyCategory.FILL, "paint"));
                 } else e.insertImageInFillPaint(t);
               });
-            }), glU && (glU.requestNextCommitMergeWithPrevious(zvt.AI_IMAGE_MODIFICATION), glU.triggerAction("commit", {})));
+            }), Fullscreen && (Fullscreen.requestNextCommitMergeWithPrevious(TextModificationAction.AI_IMAGE_MODIFICATION), Fullscreen.triggerAction("commit", {})));
           })({
             node: t,
             image: m,

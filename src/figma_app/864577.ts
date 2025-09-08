@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { h } from "../905/270045";
-import { S as _$$S } from "../905/274480";
+import { HiddenLabel } from "../905/270045";
+import { Checkbox } from "../905/274480";
 import { B } from "../905/714743";
 import { pX, NL, kv } from "../figma_app/708115";
 import { A } from "../svg/759533";
@@ -18,12 +18,12 @@ export function $$u1(e) {
   });
 }
 export function $$p0(e) {
-  let t = jsx(h, {
+  let t = jsx(HiddenLabel, {
     children: e.label
   });
   return jsx("div", {
     className: kv,
-    children: jsx(_$$S, {
+    children: jsx(Checkbox, {
       checked: e.checked,
       disabled: e.disabled,
       label: t

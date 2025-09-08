@@ -1,10 +1,10 @@
 import { s as _$$s } from "../cssbuilder/589278";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { s6 } from "../figma_app/443991";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { ck } from "../905/952832";
 import { _ } from "../905/549496";
-let $$d0 = nF((e, {
+let $$d0 = createOptimistThunk((e, {
   entity: t,
   entityType: r,
   shape: i
@@ -21,7 +21,7 @@ let $$d0 = nF((e, {
       entityType: r,
       file: n[0],
       shape: i || "CIRCLE"
-    })), e.dispatch(to({
+    })), e.dispatch(showModalHandler({
       type: _,
       showModalsBeneath: !0
     })));
@@ -29,7 +29,7 @@ let $$d0 = nF((e, {
   document.body.appendChild(o);
   o.click();
 });
-let $$c1 = nF((e, {
+let $$c1 = createOptimistThunk((e, {
   team: t
 }) => {
   e.dispatch($$d0({

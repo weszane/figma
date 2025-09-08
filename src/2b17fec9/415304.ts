@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { nj } from "../905/125019";
+import { sha1HexFromBytes } from "../905/125019";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { _L } from "../9410/635978";
 import { tJ } from "../figma_app/741237";
@@ -11,12 +11,12 @@ import { y7 } from "../figma_app/385874";
 import { _X, Yb } from "../figma_app/62612";
 import { Mw, KH } from "../figma_app/722362";
 import { wA } from "../figma_app/167249";
-import { MT } from "../905/321380";
+import { isSupportedNodeType } from "../905/321380";
 import { mc, DD, ZU } from "../9410/640042";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { tG } from "../figma_app/723183";
-import { J } from "../905/633914";
+import { useSyncedRef } from "../905/633914";
 import { oe, H as _$$H } from "../figma_app/376315";
 import { sO } from "../figma_app/21029";
 function T(e) {
@@ -82,16 +82,16 @@ function I({
     if (-1 === n) return null;
     let r = i.fills[n];
     return r && r.video?.hash ? {
-      hexHash: nj(r.video.hash),
+      hexHash: sha1HexFromBytes(r.video.hash),
       index: n,
       showControls: !!(i.videoPlayback?.showControls || i.isInImmutableFrame)
     } : null;
   }, e);
   let [A, O, k, R, M] = function (e, t, i, n, a, s) {
     let [o, d] = useState("dormant");
-    let [c, u, p] = J(null);
-    let [h, m, f] = J(null);
-    let [_, C, T] = J(null);
+    let [c, u, p] = useSyncedRef(null);
+    let [h, m, f] = useSyncedRef(null);
+    let [_, C, T] = useSyncedRef(null);
     let [E] = useAtomValueAndSetter(oe);
     let S = function (e, t, i, n, a, s, o, l) {
       let d = useRef(s);
@@ -127,13 +127,13 @@ function I({
       }
       function t() {
         let t = getSingletonSceneGraph().get(e);
-        t && null != i && (Ez5?.markContainingIndependentLayerNodesDirty(t.guid) || Ez5?.invalidateCanvas(), Ez5?.moveFromIndependentRenderLayer(t.guid), t.invalidateCanvasSpaceBoundsForSelfAndParents());
+        t && null != i && (AppStateTsApi?.markContainingIndependentLayerNodesDirty(t.guid) || AppStateTsApi?.invalidateCanvas(), AppStateTsApi?.moveFromIndependentRenderLayer(t.guid), t.invalidateCanvasSpaceBoundsForSelfAndParents());
       }
       h.current && h.current.parentNode && h.current.remove();
       f(null);
       _.current && _.current.parentNode && _.current.remove();
       T(null);
-      Ez5?.removeAllVideoNodeReferences(e);
+      AppStateTsApi?.removeAllVideoNodeReferences(e);
       d("dormant");
       t();
       setTimeout(t, 0);
@@ -148,13 +148,13 @@ function I({
           if (i) {
             i.initializeVideoTextureInFillPaint(t, n.videoWidth, n.videoHeight);
             i.setVideoElementInFillPaint(t, n);
-            Ez5?.moveToIndependentRenderLayer(i.guid);
+            AppStateTsApi?.moveToIndependentRenderLayer(i.guid);
             let r = () => {
               if (!o.current && (i = getSingletonSceneGraph().get(e))) {
                 let e = Math.floor(1e3 * n.currentTime);
                 i.setVideoCurrentTimeInFillPaint(t, e);
                 i.setVideoIsPlayingInFillPaint(t, !n.paused);
-                Ez5?.markContainingIndependentLayerNodesDirty(i.guid) || Ez5?.invalidateCanvas();
+                AppStateTsApi?.markContainingIndependentLayerNodesDirty(i.guid) || AppStateTsApi?.invalidateCanvas();
                 i.invalidateCanvasSpaceBoundsForSelfAndParents();
               }
             };
@@ -191,7 +191,7 @@ function I({
   let D = useCallback(t => {
     let i = I.get(e);
     let n = i?.parentNode?.type || "";
-    if (MT(n)) {
+    if (isSupportedNodeType(n)) {
       let e = i?.parentGuid;
       e && !w.includes(e) && tJ([e]);
     } else w.includes(e) || tJ([e]);

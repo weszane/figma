@@ -1,4 +1,4 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { f } from "../905/940356";
@@ -13,7 +13,7 @@ export function $$o0({
   let c = f("cursor_bot_v2_make_show_me_primary_cta");
   let u = () => {
     t.onClickNext?.();
-    glU.triggerActionInUserEditScope("set-tool-default", null);
+    Fullscreen.triggerActionInUserEditScope("set-tool-default", null);
   };
   let p = t.isFollowUp ? getI18nString("cursor_bot.got_it") : getI18nString("tooltips_plus_onboarding.next");
   let h = t.isFollowUp ? _$$c.GOT_IT : _$$c.NEXT;

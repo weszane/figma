@@ -13,12 +13,12 @@ import { Q7 } from "../905/15667";
 import { Yo } from "../figma_app/543529";
 import { V2 } from "../figma_app/844435";
 import { tS } from "../figma_app/516028";
-import { vA, JT } from "../figma_app/300692";
+import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
 import { bD } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
-import { ZQ, FW } from "../figma_app/155287";
+import { hasLocalFileId, ManifestEditorType } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { _r } from "../905/291714";
@@ -122,7 +122,7 @@ function S(e) {
     showChevron: hasMultipleOptions,
     ariaLabel: u,
     ...s,
-    children: ZQ(plugin) ? jsx(a, {}) : jsx(_$$V, {
+    children: hasLocalFileId(plugin) ? jsx(a, {}) : jsx(_$$V, {
       className: "plugin_relaunch_content--pluginIcon--dxgZD plugin--pluginIconBase--yAG5F",
       plugin,
       alt: plugin.name
@@ -209,7 +209,7 @@ export function $$F0() {
     id: e,
     resourceType: n[e]?.is_widget ? bD.WIDGET : bD.PLUGIN
   }));
-  let k = vA(e, n, r, a, t || 0, (e, t) => C.current.debounceRefresh(e, () => D(e), t), FW.FIGJAM);
+  let k = getRelaunchablePlugins(e, n, r, a, t || 0, (e, t) => C.current.debounceRefresh(e, () => D(e), t), ManifestEditorType.FIGJAM);
   let V = u()(k, e => e.pluginTypeAndID);
   let B = e => {
     var t;
@@ -231,7 +231,7 @@ export function $$F0() {
     }));
     let {
       canRun
-    } = JT({
+    } = canRunPlugin({
       plugin: e.plugin,
       editorType: FEditorType.Whiteboard
     });

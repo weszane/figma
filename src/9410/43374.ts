@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, forwardRef, useImperativeHandle } from "react";
 import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { nzw, qmM, miS, cfv } from "../figma_app/763686";
+import { DiagramElementType, InteractionCpp, HideMode, Positioning } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { isIpadDevice } from "../figma_app/778880";
 import { jw } from "../figma_app/327588";
@@ -17,7 +17,7 @@ export function $$m4() {
       sceneGraphSelection: t,
       appModel: i
     }
-  }) => 1 === Object.keys(t).length && e.whiteboardNumSelectedByType && 1 === e.whiteboardNumSelectedByType.SECTION && (e.name || i.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME));
+  }) => 1 === Object.keys(t).length && e.whiteboardNumSelectedByType && 1 === e.whiteboardNumSelectedByType.SECTION && (e.name || i.onCanvasNameEditorInfo.mode === DiagramElementType.SECTION_NAME));
   let i = useSelector(({
     mirror: {
       selectionProperties: e,
@@ -30,21 +30,21 @@ export function $$m4() {
     }
   }) => e.nodeSelectedValidForQuickAdd);
   let n = lg();
-  return "whiteboard" === n ? t ? 40 : i && isIpadDevice ? 40 : r ? 20 + h / 2 : qmM?.shouldRenderTableUiForSelection() !== miS.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
+  return "whiteboard" === n ? t ? 40 : i && isIpadDevice ? 40 : r ? 20 + h / 2 : InteractionCpp?.shouldRenderTableUiForSelection() !== HideMode.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
 }
 export function $$f3() {
   return useSelector(e => e.mirror.appModel.hyperlinkLocation);
 }
 export function $$g1(e, t, i, r) {
   switch (r) {
-    case cfv.ABOVE:
-      return i < e.y ? cfv.ABOVE : cfv.BELOW;
-    case cfv.BELOW:
-      return i > e.y ? cfv.BELOW : cfv.ABOVE;
-    case cfv.LEFT:
-      return t < e.x ? cfv.LEFT : cfv.RIGHT;
-    case cfv.RIGHT:
-      return t > e.x ? cfv.RIGHT : cfv.LEFT;
+    case Positioning.ABOVE:
+      return i < e.y ? Positioning.ABOVE : Positioning.BELOW;
+    case Positioning.BELOW:
+      return i > e.y ? Positioning.BELOW : Positioning.ABOVE;
+    case Positioning.LEFT:
+      return t < e.x ? Positioning.LEFT : Positioning.RIGHT;
+    case Positioning.RIGHT:
+      return t > e.x ? Positioning.RIGHT : Positioning.LEFT;
     default:
       throwTypeError(r);
   }

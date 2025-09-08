@@ -1,11 +1,11 @@
 import { throwTypeError } from "../figma_app/465776";
-import { XJn } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { FirstDraftHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { C } from "../figma_app/193952";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { vh } from "../905/296461";
 let $$p0 = 50;
 let $$_1 = 20;
@@ -35,7 +35,7 @@ export function $$m7(e, t) {
     let e = $$g8(n, t);
     e && (r = new Map([...r, ...e]));
   }
-  Y5.commit();
+  fullscreenValue.commit();
   return r;
 }
 export function $$g8(e, t) {
@@ -44,7 +44,7 @@ export function $$g8(e, t) {
   let n = r.childrenGuids.findIndex(t => t === e.guid);
   let a = t.createInstance();
   if (!a) return;
-  let s = XJn.applyOverridesToInstanceToMatchNode(a.guid, e.guid);
+  let s = FirstDraftHelpers.applyOverridesToInstanceToMatchNode(a.guid, e.guid);
   r.insertChild(a, n + 1);
   "NONE" === r.stackMode && (a.x = e.x, a.y = e.y);
   a.visible = e.visible;
@@ -78,7 +78,7 @@ function E(e) {
   if (r) return r;
   {
     let e = $$b3(getSingletonSceneGraph().getCurrentPage());
-    return l7.user("create-section", () => {
+    return permissionScopeHandler.user("create-section", () => {
       let r = getSingletonSceneGraph().createNode("SECTION");
       r.name = t;
       r.relativeTransform = {
@@ -91,7 +91,7 @@ function E(e) {
   }
 }
 export function $$y2(e, t) {
-  let r = XJn.findIcons(e.guid);
+  let r = FirstDraftHelpers.findIcons(e.guid);
   let n = getSingletonSceneGraph();
   let a = r.map(e => n.get(e));
   let s = {
@@ -101,7 +101,7 @@ export function $$y2(e, t) {
   let o = {};
   for (let e of a) {
     if (!e) continue;
-    let r = XJn.findSimilarNodes(e.guid, t.guid, !1, !0, !1);
+    let r = FirstDraftHelpers.findSimilarNodes(e.guid, t.guid, !1, !0, !1);
     let a = r[0] ? n.get(r[0]) : null;
     a || ((a = n.createComponentFromNode(e.clone())).visible = !0, t.appendChild(a), a.relativeTransform = {
       ...a.relativeTransform,

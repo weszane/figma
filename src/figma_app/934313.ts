@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { mKm } from "../figma_app/763686";
+import { LayoutSizingMode } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { xj, Cs, Dq, Qz, gP, W7, tr } from "../figma_app/655717";
 import { oc } from "../figma_app/451499";
 import { m0 } from "../figma_app/976749";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { Gt, kl } from "../905/275640";
 import { Fk } from "../figma_app/167249";
 import { aj } from "../figma_app/803932";
@@ -47,12 +47,12 @@ function v({
       let n = "string" == typeof e ? e : (e || 0).toLocaleString("en", {
         maximumFractionDigits: 2
       }) + "px";
-      if (!r || gl(t)) return n;
+      if (!r || isInvalidValue(t)) return n;
       let i = {
-        [mKm.FILL_CONTAINER]: getI18nString("inspect_panel.properties.fill"),
-        [mKm.HUG_CONTENT]: getI18nString("inspect_panel.properties.hug"),
-        [mKm.FIXED]: getI18nString("inspect_panel.properties.fixed")
-      }[t || mKm.FIXED];
+        [LayoutSizingMode.FILL_CONTAINER]: getI18nString("inspect_panel.properties.fill"),
+        [LayoutSizingMode.HUG_CONTENT]: getI18nString("inspect_panel.properties.hug"),
+        [LayoutSizingMode.FIXED]: getI18nString("inspect_panel.properties.fixed")
+      }[t || LayoutSizingMode.FIXED];
       return `${i} (${n})`;
     }(r, i, o),
     shouldFallbackCopyValueToRawValue: !0
@@ -86,7 +86,7 @@ function A() {
       variableField2: "BORDER_BOTTOM_WEIGHT",
       variableField3: "BORDER_LEFT_WEIGHT"
     }), (!!e || !!t || !!r || !!i) && jsxs(Fragment, {
-      children: [!!a && hS(a) && a.length > 0 && jsxs(Fragment, {
+      children: [!!a && isValidValue(a) && a.length > 0 && jsxs(Fragment, {
         children: [jsx(_p, {
           name: getI18nString("inspect_panel.strokes.border_style"),
           value: getI18nString("fullscreen.properties_panel.stroke_settings.simple_dash"),
@@ -168,7 +168,7 @@ function C() {
   let t = S();
   let r = useCallback(r => {
     let n = t && rO(e) ? void 0 : r;
-    return n && hS(n) && n > 0 ? n : void 0;
+    return n && isValidValue(n) && n > 0 ? n : void 0;
   }, [t, e]);
   return t ? jsx(p7, {
     name: getI18nString("inspect_panel.properties.gap"),

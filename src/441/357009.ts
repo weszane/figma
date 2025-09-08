@@ -2,8 +2,8 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, memo, useState, useEffect } from "react";
 import { createPortal } from "../vendor/944059";
 import { lQ } from "../905/934246";
-import { lyf, Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ViewType, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
@@ -16,7 +16,7 @@ import { dh } from "../figma_app/186343";
 import { _X, Yb } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
 import { v as _$$v, Z } from "../6401/653234";
@@ -27,7 +27,7 @@ export function $$w0() {
     subscribeToUpdates_expensive: !0
   });
   let t = p8("isReadOnly");
-  let i = p8("topLevelMode") === lyf.HISTORY;
+  let i = p8("topLevelMode") === ViewType.HISTORY;
   let r = k9(() => e, [e]);
   let o = document.getElementById("fullscreen-root");
   if (!o) return null;
@@ -56,12 +56,12 @@ function T({
       type: i.interactiveSlideElementType
     };
   }, []);
-  let o = ut(Ez5?.flappData().nodeIds, []);
+  let o = getObservableValue(AppStateTsApi?.flappData().nodeIds, []);
   let l = tB("Flapps", o, a, {
     useFlushSyncExpensive: !0
   });
-  let u = ut(Ez5?.singleSlideView().focusedNodeId, "");
-  let m = Ez5?.singleSlideView().isFocusedNodeViewFocused() ?? !1;
+  let u = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, "");
+  let m = AppStateTsApi?.singleSlideView().isFocusedNodeViewFocused() ?? !1;
   let p = dh();
   let f = k9(() => Object.values(l).filter(e => e.pageId === p && (!m || m && e.slideId === u)), [l, m, u, p]);
   return wj(JT.BOARD_TO_DECK).state === qy.RUNNING ? null : jsx(Fragment, {
@@ -79,7 +79,7 @@ let R = memo(({
   shouldRenderMobileFlapp: i,
   isReadOnly: a
 }) => {
-  let o = ut(Ez5?.flappData().nodeThumbnailEditCount, new Map()).get(e.guid) ?? 0;
+  let o = getObservableValue(AppStateTsApi?.flappData().nodeThumbnailEditCount, new Map()).get(e.guid) ?? 0;
   let [l, c] = useState(0);
   let m = useCallback(() => c(e => e + 1), []);
   let [p, f] = useState(null);
@@ -162,7 +162,7 @@ function D({
           if (!e || 0 === e.byteLength) throw Error("Cannot decode empty buffer");
           return UD(new Uint8Array(e), "image/png", `${r}thumbnail`);
         }).then(e => {
-          t.isAlive && !a && l7.system("generate-slide-thumbnail", () => {
+          t.isAlive && !a && permissionScopeHandler.system("generate-slide-thumbnail", () => {
             0 === t.fills.length ? t.insertImageInFillPaint(e) : t.setImageInFillPaint(e);
           });
         }).catch(e => {

@@ -1,4 +1,4 @@
-import { dI, fn, sH } from "../905/871411";
+import { sessionLocalIDToString, isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 var $$n0;
 var $$r1;
 var $$a2;
@@ -16,13 +16,13 @@ export function $$o3(e, t) {
     return e;
   };
   e.fromKiwi = function (e) {
-    return dI(e);
+    return sessionLocalIDToString(e);
   };
   e.format = function (e) {
     return `(${e})`;
   };
   e.isValid = function (e) {
-    return fn(sH(e));
+    return isValidSessionLocalID(parseSessionLocalID(e));
   };
 })($$r1 || ($$r1 = {}));
 (e => {

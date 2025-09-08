@@ -5,14 +5,14 @@ import { O } from "../figma_app/114128";
 import { D } from "../905/993374";
 import { c as _$$c } from "../905/90943";
 import { x as _$$x } from "../905/764527";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Uz } from "../905/63728";
 import { q8 } from "../figma_app/459490";
 import { getI18nString } from "../905/303541";
 import { A } from "../905/482208";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { Ib } from "../905/129884";
 import { w as _$$w } from "../figma_app/654279";
@@ -256,14 +256,14 @@ export function $$z4() {
           p = "inline-menu-organize-cluster";
           break;
         case "tidy_up":
-          u = () => Y5.triggerActionInUserEditScope("tidy-up");
+          u = () => fullscreenValue.triggerActionInUserEditScope("tidy-up");
           p = "inline-menu-organize-tidy-up";
           break;
         case "wrap_in_section":
-          u = () => Y5.triggerActionInUserEditScope("create-section-from-selection");
+          u = () => fullscreenValue.triggerActionInUserEditScope("create-section-from-selection");
           p = "inline-menu-organize-wrap-in-section";
       }
-      l7.user(p, u);
+      permissionScopeHandler.user(p, u);
       "open_cluster_by_more_menu" !== e.type && d();
     }
   };

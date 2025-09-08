@@ -1,4 +1,4 @@
-import { s_ } from "../905/992467";
+import { setupAdvancedLazyLoader } from "../905/992467";
 export class $$r0 {
   constructor(e) {
     this.args = e;
@@ -7,7 +7,7 @@ export class $$r0 {
     return this.args.name;
   }
   createLazyComponent(e, t) {
-    return s_(this.name, e, t);
+    return setupAdvancedLazyLoader(this.name, e, t);
   }
 }
 export const b = $$r0;

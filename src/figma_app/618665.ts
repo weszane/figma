@@ -1,5 +1,5 @@
 import { assert } from "../figma_app/465776";
-import { Ez5, dBj } from "../figma_app/763686";
+import { AppStateTsApi, PresentationMode } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
@@ -31,7 +31,7 @@ let $$T9 = atom(null, (e, t, r) => {
   t(b, r);
 });
 function I() {
-  return Ez5?.prototypingEditorState().prototypeViewMode.getCopy() === dBj.PRESENT ? "fullscreen" : "modal";
+  return AppStateTsApi?.prototypingEditorState().prototypeViewMode.getCopy() === PresentationMode.PRESENT ? "fullscreen" : "modal";
 }
 let $$S2 = Wh(() => atom(I()));
 let $$v3 = Wh(() => atom(0));

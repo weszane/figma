@@ -4,8 +4,8 @@ import { isLocalFileKey } from "../905/657242";
 import { filterNotNullish } from "../figma_app/656233";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { i6g, NUh, W2B, Bko, uXP, h3O } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AutosaveHelpers, LogToConsoleMode, EditChangeMode, ImageCppBindings, ConnectionState, Multiplayer } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
@@ -19,7 +19,7 @@ import { Timer } from "../905/609396";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logError, logInfo, logDebug, logWarning } from "../905/714362";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { YQ } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
@@ -28,11 +28,11 @@ import { yJ } from "../figma_app/78808";
 import { ds } from "../figma_app/314264";
 import { kS } from "../figma_app/864723";
 import { Ff, Xl } from "../figma_app/582924";
-import { l as _$$l2 } from "../905/412815";
+import { awaitSync } from "../905/412815";
 import { xK } from "../905/125218";
 import { dDF } from "../figma_app/43951";
 import { M4 as _$$M } from "../905/713695";
-import { m as _$$m } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { B as _$$B } from "../905/18613";
 import { L_, hS } from "../905/200074";
 import { O as _$$O } from "../905/291063";
@@ -101,7 +101,7 @@ async function q(e, t, r) {
           let {
             changes
           } = e;
-          r = i6g.mergeMultiplayerMessages(changes, t.changes, l.fileVersion);
+          r = AutosaveHelpers.mergeMultiplayerMessages(changes, t.changes, l.fileVersion);
         }
         c.set(t.nodeID, {
           changes: r,
@@ -144,7 +144,7 @@ async function q(e, t, r) {
   dU(e);
   await e.done;
   logInfo("Autosave", `Found claimed autosave changes from ${o.length} sessions`, void 0, {
-    logToConsole: NUh.ALWAYS
+    logToConsole: LogToConsoleMode.ALWAYS
   });
   return {
     changesByNode: c,
@@ -168,7 +168,7 @@ async function J(e, t) {
     await t.done;
   });
   n.length > 0 && logDebug("Autosave", "Found auto-saved data for this file", void 0, {
-    logToConsole: NUh.ALWAYS
+    logToConsole: LogToConsoleMode.ALWAYS
   });
   return n;
 }
@@ -178,7 +178,7 @@ async function Z(e) {
     let r = Date.now() - $$Y11();
     let n = e.filter((e, n) => !t[n] && e.lastUpdatedAt > r);
     0 === n.length && logInfo("Autosave", "Changes not available or already claimed by another tab", void 0, {
-      logToConsole: NUh.ALWAYS
+      logToConsole: LogToConsoleMode.ALWAYS
     });
     return n;
   });
@@ -273,7 +273,7 @@ async function en(e, t) {
   let s = [];
   let o = r.objectStore(jP);
   for (let e of a) if ((await o.count(iM(e.id))) > 0) {
-    for (let t of await o.getAll(iM(e.id))) if (!(getFeatureFlags().suppress_unsaved_changes_ui && getFeatureFlags().incremental_loading_validation) || i6g && !i6g.changesAreOnlyNewFileSystemChanges(t.changes, e.fileVersion)) {
+    for (let t of await o.getAll(iM(e.id))) if (!(getFeatureFlags().suppress_unsaved_changes_ui && getFeatureFlags().incremental_loading_validation) || AutosaveHelpers && !AutosaveHelpers.changesAreOnlyNewFileSystemChanges(t.changes, e.fileVersion)) {
       s.push(e);
       break;
     }
@@ -412,7 +412,7 @@ export async function $$eu8(e, t) {
   }
   for (let r of (s.unknown = {
     changes: {}
-  }, (await a.getAll()).slice(0, e))) r.editorSessionID in s ? s[r.editorSessionID].changes[r.nodeID] = JSON.parse(i6g.encodeChangesAsJson(r.changes, s[r.editorSessionID].fileVersion, !!t)) : s.unknown.changes[r.nodeID] = JSON.parse(i6g.encodeChangesAsJson(r.changes, 1, !!t));
+  }, (await a.getAll()).slice(0, e))) r.editorSessionID in s ? s[r.editorSessionID].changes[r.nodeID] = JSON.parse(AutosaveHelpers.encodeChangesAsJson(r.changes, s[r.editorSessionID].fileVersion, !!t)) : s.unknown.changes[r.nodeID] = JSON.parse(AutosaveHelpers.encodeChangesAsJson(r.changes, 1, !!t));
   await n.done;
   return s;
 }
@@ -448,9 +448,9 @@ async function ep(e) {
     fileVersion,
     lastCommitReason: reason,
     offlineEditingTime: T,
-    originalTrackingSessionId: fF()
+    originalTrackingSessionId: getTrackingSessionId()
   };
-  for (let e of (null == I ? I = await m.add(S) : (commitPolicy === W2B.REPLACE_CHANGES && (g.$$delete(iM(I)).catch(e => K(e, "commitChanges: replace node changes")), y.$$delete(iM(I)).catch(e => K(e, "commitChanges: replace referenced nodes"))), m.put({
+  for (let e of (null == I ? I = await m.add(S) : (commitPolicy === EditChangeMode.REPLACE_CHANGES && (g.$$delete(iM(I)).catch(e => K(e, "commitChanges: replace node changes")), y.$$delete(iM(I)).catch(e => K(e, "commitChanges: replace referenced nodes"))), m.put({
     id: I,
     ...S
   }).catch(e => K(e, "commitChanges: update session"))), pendingChanges)) e.changes ? g.put({
@@ -459,7 +459,7 @@ async function ep(e) {
     changes: e.changes
   }).catch(e => K(e, "commitChanges: put node changes")) : g.$$delete([I, e.nodeID]).catch(e => K(e, "commitChanges: clear node changes"));
   for (let e of pendingImages) if ((await f.count([I, e])) === 0) {
-    let t = Bko.getCompressedImage(e);
+    let t = ImageCppBindings.getCompressedImage(e);
     t && f.add({
       editorSessionID: I,
       hash: e,
@@ -591,7 +591,7 @@ class eg {
       await Fy();
     } catch (e) {
       logInfo("Autosave", "IDB is not available in the current browser session.", void 0, {
-        logToConsole: NUh.ALWAYS
+        logToConsole: LogToConsoleMode.ALWAYS
       });
       trackEventAnalytics("autosave_db_failure", {
         message: e.message
@@ -774,7 +774,7 @@ class ey {
     return this.lastCommitTime;
   }
   async tryToFlushAutosave() {
-    this.readyToAcceptChanges() && (i6g.flushAutosave(), await this.transactionQueue.waitForCompletion());
+    this.readyToAcceptChanges() && (AutosaveHelpers.flushAutosave(), await this.transactionQueue.waitForCompletion());
   }
   async enqueueAutosaveCommit(e) {
     await this.transactionQueue.enqueue(() => this.commitAutosave(e));
@@ -868,10 +868,10 @@ class ey {
       cleared_nodes: changes.clearedNodes.length,
       referenced_nodes: _.length,
       pending_images: h.size,
-      commit_policy: W2B[commitPolicy],
+      commit_policy: EditChangeMode[commitPolicy],
       session_id: this.sessionID,
       new_session_id: newSessionID,
-      commit_reason: void 0 !== reason ? uXP[reason] : void 0,
+      commit_reason: void 0 !== reason ? ConnectionState[reason] : void 0,
       file_key: fileKey,
       manager_file_key: this.manager.fileKey
     };
@@ -892,7 +892,7 @@ class ey {
           clearedNodes: e(changes.clearedNodes),
           referencedNodes: e(changes.referencedNodes.map(e => e.nodeID)),
           imageHashes: e(changes.imageHashes),
-          currentSessionID: h3O.currentSessionID(),
+          currentSessionID: Multiplayer.currentSessionID(),
           commitQueueLength: this.transactionQueue.length
         });
         this.manager.terminateDueToError("Expected IDB to be empty after synchronizing with multiplayer", !0);
@@ -901,12 +901,12 @@ class ey {
     }
     null != c && c.release().catch(e => K(e, "commitAutosave: release lock"));
     this.commitEventListener.onCommitEvent();
-    commitPolicy === W2B.ADD_CHANGES ? (this.consecutiveCommitsAddingChanges++, this.consecutiveCommitsAddingChanges >= 4 && YQ({
+    commitPolicy === EditChangeMode.ADD_CHANGES ? (this.consecutiveCommitsAddingChanges++, this.consecutiveCommitsAddingChanges >= 4 && YQ({
       id: Cr
     })) : this.consecutiveCommitsAddingChanges = 0;
   }
   async restoreAutosaveIfNeeded() {
-    if (i6g.fileIsReadOnly()) return;
+    if (AutosaveHelpers.fileIsReadOnly()) return;
     this.restoreAnalytics.fileKey = this.manager.fileKey;
     this.restoreAnalytics.isLocalFile = isLocalFileKey(this.manager.fileKey);
     this.restoring = !0;
@@ -922,7 +922,7 @@ class ey {
       this.restoreAnalytics.lastUpdatedAt = e.lastUpdatedAt;
       this.restoreAnalytics.offlineEditingTime = e.offlineEditingTime;
       this.restoreAnalytics.originalTrackingSessionId = e.originalTrackingSessionId;
-      this.restoreAnalytics.lastCommitReason = e.lastCommitReason ? uXP[e.lastCommitReason] : void 0;
+      this.restoreAnalytics.lastCommitReason = e.lastCommitReason ? ConnectionState[e.lastCommitReason] : void 0;
       this.restoreAnalytics.releaseTag = e.releaseTag;
       await this.restoreChangesForSessionRows(r);
     }
@@ -933,7 +933,7 @@ class ey {
     } = await t;
     this.restoreAnalytics.storageUsageBytes = usageBytes;
     this.restoreAnalytics.storageQuotaBytes = quotaBytes;
-    this.restoreAnalytics.isIncremental = h3O.isIncrementalSession();
+    this.restoreAnalytics.isIncremental = Multiplayer.isIncrementalSession();
     this.restoreTimer.stop();
     this.restoreAnalytics.time = this.restoreTimer.getElapsedTime();
     ds("autosave_restore_on_load", this.restoreAnalytics.fileKey, debugState.getState(), this.restoreAnalytics, {
@@ -958,13 +958,13 @@ class ey {
     let i = changesByNode.size > 0;
     for (let {
       changes
-    } of (i ? (isLocalFileKey(this.manager.fileKey) || (await _$$m(this.manager.fileKey, "Offline sync", "Before syncing changes", debugState.dispatch).catch(e => W6("Failed to create before savepoint", {
+    } of (i ? (isLocalFileKey(this.manager.fileKey) || (await maybeCreateSavepoint(this.manager.fileKey, "Offline sync", "Before syncing changes", debugState.dispatch).catch(e => W6("Failed to create before savepoint", {
       status: e.status,
       message: e.data?.message
     }))), logInfo("Autosave", "Restoring auto-saved data", void 0, {
-      logToConsole: NUh.ALWAYS
+      logToConsole: LogToConsoleMode.ALWAYS
     }), await this.restoreChanges(changesByNode, referencedNodeMap, fileVersion)) : logInfo("Autosave", "Changes are empty!", void 0, {
-      logToConsole: NUh.ALWAYS
+      logToConsole: LogToConsoleMode.ALWAYS
     }), this.commitEventListener.waitForNextCommit().then(() => {
       hp.sendToOtherTabs(_$$a);
     }).catch(e => K(e, "restoreChangesForSessionRows: waitForNextCommit")), this.restoreAnalytics.hadChangesToRestore = i, this.restoreAnalytics.numberOfBytes = 0, this.restoreAnalytics.numberOfNodes = changesByNode.size, this.restoreAnalytics.numberOfReferencedNodes = referencedNodeMap.size, changesByNode.values())) this.restoreAnalytics.numberOfBytes += changes.length;
@@ -973,7 +973,7 @@ class ey {
     let n = Array.from(e.entries()).sort(([e, t], [r, n]) => e < r ? -1 : 1);
     let i = getFeatureFlags().suppress_unsaved_changes_ui && getFeatureFlags().incremental_loading_validation && n.every(([e, {
       changes: t
-    }]) => i6g.changesAreOnlyNewFileSystemChanges(t, r));
+    }]) => AutosaveHelpers.changesAreOnlyNewFileSystemChanges(t, r));
     let s = [];
     for (let [e, {
       changes: t,
@@ -981,7 +981,7 @@ class ey {
     }] of n) {
       let {
         decodedAsEmptyMultiplayerMessage
-      } = i6g.loadAutosavedNodeChanges(e, t, r);
+      } = AutosaveHelpers.loadAutosavedNodeChanges(e, t, r);
       decodedAsEmptyMultiplayerMessage && s.push([e, i]);
     }
     let o = Promise.resolve();
@@ -996,14 +996,14 @@ class ey {
       let r = new Set(s.map(([e, t]) => t));
       await Promise.all(s.map(([e, r]) => t.$$delete([r, e]).catch(e => K(e, "restoreChanges: delete empty node changes"))));
       await Promise.all(Array.from(r.values()).map(t => ec(t, e)));
-    }, "readwrite")), this.restoreAnalytics.changesAreAllDerivedData = i6g.changesAreAllDerivedData(), this.restoreAnalytics.nodeFields = i6g.restoredNodeFieldNames(), this.restoreAnalytics.neededToMigrate = i6g.currentFileVersion() > r, Ff()) {
+    }, "readwrite")), this.restoreAnalytics.changesAreAllDerivedData = AutosaveHelpers.changesAreAllDerivedData(), this.restoreAnalytics.nodeFields = AutosaveHelpers.restoredNodeFieldNames(), this.restoreAnalytics.neededToMigrate = AutosaveHelpers.currentFileVersion() > r, Ff()) {
       ds("autosave_load_containing_pages_start", this.manager.fileKey, debugState.getState(), {
         node_count: e.size,
         fileKey: this.manager.fileKey
       });
       let t = performance.now();
       let r = new Set(e.keys());
-      for (let e of i6g.getParentIndexChanges()) r.add(e);
+      for (let e of AutosaveHelpers.getParentIndexChanges()) r.add(e);
       await Xl(r);
       ds("autosave_load_containing_pages_end", this.manager.fileKey, debugState.getState(), {
         node_count: e.size,
@@ -1011,14 +1011,14 @@ class ey {
         fileKey: this.manager.fileKey
       });
     }
-    let l = i6g.getImagesUsedInAutosavedChanges().split(" ");
+    let l = AutosaveHelpers.getImagesUsedInAutosavedChanges().split(" ");
     this.restoreAnalytics.numberOfImages = await this.restoreImagesIfAvailable(l);
     let p = this.restoreAvailableReferencedNodes(t);
-    i6g.migrateAndSetAutosaveChanges(p, r);
-    l7.autosave("autosave", () => i6g.applyAutosavedChanges());
+    AutosaveHelpers.migrateAndSetAutosaveChanges(p, r);
+    permissionScopeHandler.autosave("autosave", () => AutosaveHelpers.applyAutosavedChanges());
     this.restoreAnalytics.timeToApply = this.restoreTimer.getElapsedTime();
     logInfo("Autosave", "Successfully applied auto-saved changes", void 0, {
-      logToConsole: NUh.ALWAYS
+      logToConsole: LogToConsoleMode.ALWAYS
     });
     let _ = () => {
       debugState.dispatch(_$$Q.enqueueFront({
@@ -1028,14 +1028,14 @@ class ey {
         }
       }));
       logInfo("Autosave", "Successfully synced auto-saved changes", void 0, {
-        logToConsole: NUh.ALWAYS
+        logToConsole: LogToConsoleMode.ALWAYS
       });
     };
     await o;
     (async () => {
-      await _$$l2();
+      await awaitSync();
       this.restoreAnalytics.timeToSync = this.restoreTimer.getElapsedTime();
-      isLocalFileKey(this.manager.fileKey) || (await _$$m(this.manager.fileKey, "Offline sync", "After syncing changes", debugState.dispatch).catch(e => {
+      isLocalFileKey(this.manager.fileKey) || (await maybeCreateSavepoint(this.manager.fileKey, "Offline sync", "After syncing changes", debugState.dispatch).catch(e => {
         ds("autosave_skip_after_checkpoint", this.manager.fileKey, debugState.getState(), {
           error: e.data?.message
         });
@@ -1055,7 +1055,7 @@ class ey {
       let i = r.objectStore(DV);
       for (let r of e) {
         let e = await i.get([n, r]);
-        e && (i6g.restoreImageBytes(r, e.blob), t++);
+        e && (AutosaveHelpers.restoreImageBytes(r, e.blob), t++);
       }
       await r.done;
     });
@@ -1064,7 +1064,7 @@ class ey {
   restoreAvailableReferencedNodes(e) {
     let t = [];
     for (let [r, n] of e) {
-      i6g.restoreReferencedNodeFile(r, n);
+      AutosaveHelpers.restoreReferencedNodeFile(r, n);
       t.push(r);
     }
     return t;

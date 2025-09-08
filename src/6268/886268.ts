@@ -69,19 +69,19 @@ import { hS } from "../905/437088";
 import { bL as _$$bL2 } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { fu } from "../figma_app/831799";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { n as _$$n } from "../1250/647011";
 import { gK } from "../1250/158057";
 import { o as _$$o2 } from "../1250/251689";
 import { P as _$$P } from "../1250/665611";
 import { e as _$$e3 } from "../1250/871209";
 import { l as _$$l2 } from "../1250/511088";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { DP } from "../905/640017";
 import { trackEventAnalytics } from "../905/449184";
 import { F as _$$F } from "../905/302958";
 import { D6 } from "../figma_app/465071";
-import { w as _$$w2 } from "../905/70843";
+import { codeSuggestionAPIHandler } from "../905/70843";
 import { WG } from "../1250/218868";
 import { gP } from "../6268/693700";
 import { x as _$$x } from "../6658/928537";
@@ -1121,7 +1121,7 @@ function eB({
     })]
   });
 }
-let nn = Ju(function (e) {
+let nn = registerModal(function (e) {
   let n = hS(e);
   let {
     installMethod,
@@ -1194,7 +1194,7 @@ function no({
   });
 }
 let nm = "confirm_deletion_modal--bodyText--OTH-f";
-let np = Ju(function (e) {
+let np = registerModal(function (e) {
   let n = hS(e);
   let o = D6("ConfirmDeletionModal");
   let c = useDispatch();
@@ -1208,7 +1208,7 @@ let np = Ju(function (e) {
       trackEventAnalytics(WG);
       l(!0);
       try {
-        await _$$w2.deleteAllCodeSuggestions({
+        await codeSuggestionAPIHandler.deleteAllCodeSuggestions({
           planParentType: _,
           planParentId: m
         });
@@ -1345,12 +1345,12 @@ function nj() {
     manager
   } = _$$b();
   let c = useCallback(() => {
-    e(to({
+    e(showModalHandler({
       type: nn
     }));
   }, [e]);
   let r = useCallback(() => {
-    e(to({
+    e(showModalHandler({
       type: np
     }));
   }, [e]);

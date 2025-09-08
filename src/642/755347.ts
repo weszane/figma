@@ -3,12 +3,12 @@ import { useMemo, useRef, useCallback, memo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/720559";
 import { RR } from "../figma_app/338442";
-import { rXF } from "../figma_app/763686";
+import { VariableResolvedDataType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { rf, Pt } from "../figma_app/806412";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { hS } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { Sh } from "../figma_app/889655";
 import { Yc, yQ } from "../figma_app/930914";
@@ -262,12 +262,12 @@ export function $$ey4() {
   let [u] = lJ("opacity");
   let h = useRef(null);
   let x = useCallback((e, t) => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       opacity: e
     }, {
       shouldCommit: t
     });
-    e > 0 && !isDefReferencedBySelection && Y5.updateSelectionProperties({
+    e > 0 && !isDefReferencedBySelection && fullscreenValue.updateSelectionProperties({
       visible: !0
     }, {
       shouldCommit: t
@@ -346,8 +346,8 @@ let $$e_0 = memo(function (e) {
         recordingKey: Pt(e, "layerOpacityInputWrapper"),
         fields: $$ex3,
         disabled: !1,
-        resolvedType: rXF.FLOAT,
-        currentFieldValue: hS(opacity) ? opacity : void 0,
+        resolvedType: VariableResolvedDataType.FLOAT,
+        currentFieldValue: isValidValue(opacity) ? opacity : void 0,
         inputRef: opacityInputRef,
         hasBindingContextMenu: !0,
         children: jsx(Pd, {

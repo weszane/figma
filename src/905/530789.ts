@@ -3,7 +3,7 @@ import { forwardRef, useRef, useCallback } from "react";
 import { createPortal } from "../vendor/944059";
 import { E } from "../905/632989";
 import { x } from "../905/587214";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { ts } from "../905/929949";
 import { Pt, rf } from "../figma_app/806412";
 import { c$ } from "../figma_app/236327";
@@ -109,11 +109,11 @@ function S(e) {
       r && (n = r);
     }
     let r = e.groups.map(e => e.name).includes(e.groupPrefix) ? n : void 0;
-    let a = l7.user("create-variable", () => i(e.variableSetID, t, e.resolvedType, r, void 0));
+    let a = permissionScopeHandler.user("create-variable", () => i(e.variableSetID, t, e.resolvedType, r, void 0));
     e.setSelectedVariableID && e.setSelectedVariableID(a ? [a] : []);
     e.setRenamingVariableID?.(a);
     e.onClose();
-    a && l7.system("reorder-new-variable", () => {
+    a && permissionScopeHandler.system("reorder-new-variable", () => {
       qQ(a, e.insertVariableBetweenIDs, r ?? n, e.groups);
     });
   }, [i, e, t]));

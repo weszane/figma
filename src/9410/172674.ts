@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, PayloadTooLargeError, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
-import { l7 } from "../905/189185";
-import { fn, sH } from "../905/871411";
+import { permissionScopeHandler } from "../905/189185";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -143,7 +143,7 @@ export function $$j1(e) {
 }
 export function $$I3(e, t) {
   let i = ZC(e);
-  let n = i !== e && fn(sH(e)) && fn(sH(i));
+  let n = i !== e && isValidSessionLocalID(parseSessionLocalID(e)) && isValidSessionLocalID(parseSessionLocalID(i));
   let a = ZC(t) !== t && !t;
   useEffect(() => {
     pP(JT.SLIDES_GENERATE_SPEAKER_NOTES).state === qy.RUNNING && i && (n ? k(new b(), i) : a && k(new C(), i));
@@ -155,7 +155,7 @@ function k(e, t) {
   let i = atomStoreManager.get(TD);
   if (t && i) {
     let e = JSON.stringify(i.toJSON());
-    l7.ai("generate-slide-speaker-notes", () => {
+    permissionScopeHandler.ai("generate-slide-speaker-notes", () => {
       lq(t, e);
     });
   }

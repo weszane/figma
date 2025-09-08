@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback } from "react";
-import { Osy } from "../figma_app/763686";
-import { dI } from "../905/871411";
+import { SelectionPaintHelpers } from "../figma_app/763686";
+import { sessionLocalIDToString } from "../905/871411";
 import { GP } from "../figma_app/15927";
 import { debugState } from "../905/407919";
 import { ds, GS } from "../figma_app/314264";
@@ -19,7 +19,7 @@ export function $$c2(e, t) {
       });
     })(i.current, t);
   }, [t]);
-  return useCallback((e) => {
+  return useCallback(e => {
     (function (e, t) {
       let i = debugState.getState();
       ds("paint_picker_select", i.openFile?.key, i, {
@@ -63,7 +63,7 @@ export function $$p0(e, t) {
 function m(e, t) {
   let i = Object.keys(t.mirror.sceneGraphSelection);
   let n = t.mirror.selectedStyleProperties.guid;
-  n ? i = [dI(n)] : i.length > 1 && !E3(e.type) && (i = Osy.getConsumingPaints(GP(e)));
+  n ? i = [sessionLocalIDToString(n)] : i.length > 1 && !E3(e.type) && (i = SelectionPaintHelpers.getConsumingPaints(GP(e)));
   return i;
 }
 export const T7 = $$p0;

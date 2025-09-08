@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { RR } from "../figma_app/338442";
-import { rXF, glU, Z_n, m1T, Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { VariableResolvedDataType, Fullscreen, VariableDataType, LayoutTabType, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
-import { hS } from "../905/216495";
+import { isValidValue } from "../905/216495";
 import { u as _$$u } from "../figma_app/852050";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { Sh } from "../figma_app/889655";
 import { t } from "../905/62933";
 import { Yc } from "../figma_app/930914";
@@ -24,14 +24,14 @@ export function $$b0() {
   return !!consumedVariable && !!r;
 }
 export function $$T4(e) {
-  return JV(["VISIBLE"], rXF.BOOLEAN, void 0, {
-    requestedTypes: [rXF.BOOLEAN, rXF.FLOAT, rXF.STRING],
+  return JV(["VISIBLE"], VariableResolvedDataType.BOOLEAN, void 0, {
+    requestedTypes: [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.FLOAT, VariableResolvedDataType.STRING],
     variableFilters: {
       [t.MUST_INCLUDE_ONE_OF]: {
-        [rXF.STRING]: O4
+        [VariableResolvedDataType.STRING]: O4
       },
       [t.HIDE_IN_DEFAULT_VIEW]: {
-        [rXF.FLOAT]: !0
+        [VariableResolvedDataType.FLOAT]: !0
       }
     },
     mapVariableIdToTypedValue: eT,
@@ -40,7 +40,7 @@ export function $$T4(e) {
     let e = selectWithShallowEqual(e => Sh(e));
     let t = !Yc(RR.VISIBLE, e);
     let r = useCallback(e => {
-      l7.user("add-prop-ref", () => glU.addComponentPropRef(RR.VISIBLE, e.value.explicitDefId));
+      permissionScopeHandler.user("add-prop-ref", () => Fullscreen.addComponentPropRef(RR.VISIBLE, e.value.explicitDefId));
     }, []);
     return useMemo(() => t ? r : void 0, [t, r]);
   }());
@@ -51,8 +51,8 @@ export function $$I1() {
     consumedVariable
   } = u3(["VISIBLE"]);
   if (consumedVariable) {
-    if (hS(consumedVariable) && consumedVariable.type === Z_n.ALIAS) e = consumedVariable.value;else if (hS(consumedVariable) && consumedVariable.type === Z_n.EXPRESSION) {
-      for (let r of Pr(consumedVariable)) if (r.type === Z_n.ALIAS) {
+    if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS) e = consumedVariable.value;else if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.EXPRESSION) {
+      for (let r of Pr(consumedVariable)) if (r.type === VariableDataType.ALIAS) {
         e = r.value;
         break;
       }
@@ -61,10 +61,10 @@ export function $$I1() {
   return e;
 }
 export function $$S2() {
-  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.VECTOR);
+  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.VECTOR);
 }
 export function $$v3() {
-  let e = J2(Ez5.propertiesPanelState().enabledTransformControls);
+  let e = getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTransformControls);
   return useMemo(() => new Z(e), [e]);
 }
 export const $H = $$b0;

@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useRef, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { Ez5 } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { AppStateTsApi } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -15,7 +15,7 @@ import { JG } from "../figma_app/12220";
 import { Z } from "../905/104740";
 import { Z0 } from "../figma_app/62612";
 import { eY } from "../figma_app/722362";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { hm } from "../905/380385";
 import { XC } from "../905/512783";
 import { c4 } from "../figma_app/70421";
@@ -61,8 +61,8 @@ export function $$R1(e, t, i, l, d) {
   let c = _$$s();
   let h = useDispatch();
   let g = eY();
-  let f = ut(Ez5?.singleSlideView().focusedNodeId, null);
-  let _ = f && f !== AD;
+  let f = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, null);
+  let _ = f && f !== defaultSessionLocalIDString;
   let A = hA();
   let I = useMemo(() => {
     let t;
@@ -91,8 +91,8 @@ export function $$R1(e, t, i, l, d) {
           if (e.anchored && e.comments.length > 0 && e.comments[0].client_meta?.node_id) {
             let t = e.comments[0].client_meta.node_id;
             let i = t ? getSingletonSceneGraph().get(t) : void 0;
-            let n = i ? i.containingSlideId : AD;
-            return _ ? n === f : n !== AD;
+            let n = i ? i.containingSlideId : defaultSessionLocalIDString;
+            return _ ? n === f : n !== defaultSessionLocalIDString;
           }
           return !0;
         });

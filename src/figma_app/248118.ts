@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useStore } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { _gJ } from "../figma_app/763686";
+import { IAssertResource } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { reportError } from "../905/11";
 import { gB } from "../905/294543";
@@ -14,9 +14,9 @@ import { E3 } from "../figma_app/976749";
 import { EL } from "../figma_app/740025";
 import { ax } from "../figma_app/741237";
 import { Eh, cb } from "../figma_app/12796";
-import { Ar, YG, mx } from "../figma_app/300692";
+import { getCurrentPluginVersion, isSingleDevEditorType, isValidForCooperDevCodegen } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
-import { ZQ, k0 } from "../figma_app/155287";
+import { hasLocalFileId, manifestContainsWidget } from "../figma_app/155287";
 import { b as _$$b } from "../905/635568";
 import { $1, Be, cW } from "../figma_app/844435";
 function v() {
@@ -62,7 +62,7 @@ export function $$A3(e) {
   let t = Be();
   let r = t.plugins[e] || t.orgPlugins[e];
   let n = cW()[e];
-  return r || (n ? Ar(n) : null);
+  return r || (n ? getCurrentPluginVersion(n) : null);
 }
 export function $$x4(e) {
   return {
@@ -86,10 +86,10 @@ export function $$N1(e, t) {
       return;
     }
     let n = $$x4(r);
-    if (YG(r) && P(_), mx(r)) {
+    if (isSingleDevEditorType(r) && P(_), isValidForCooperDevCodegen(r)) {
       p($n(r));
       P(_);
-      ax(_gJ.PRIMARY);
+      ax(IAssertResource.PRIMARY);
       return;
     }
     Im({
@@ -116,7 +116,7 @@ export function $$w0(e) {
   };
 }
 export function $$O2(e) {
-  return ZQ(e) ? k0(e) ? $$C6(e) : $$R7(e) : k0(e) ? $$w0(e) : $$x4(e);
+  return hasLocalFileId(e) ? manifestContainsWidget(e) ? $$C6(e) : $$R7(e) : manifestContainsWidget(e) ? $$w0(e) : $$x4(e);
 }
 export function $$R7(e) {
   return {
@@ -139,10 +139,10 @@ export function $$L5(e, t) {
       return;
     }
     let n = $$R7(a);
-    if (YG(a) && P(u), mx(a)) {
+    if (isSingleDevEditorType(a) && P(u), isValidForCooperDevCodegen(a)) {
       l($n(a));
       P(u);
-      ax(_gJ.PRIMARY);
+      ax(IAssertResource.PRIMARY);
       return;
     }
     Im(r, t, e || n);

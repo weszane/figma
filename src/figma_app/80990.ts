@@ -1,6 +1,6 @@
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { Vzr, BXd, ZiZ, ZxO } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Thumbnail, LibraryPubSub, SceneIdentifier, Confirmation } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { Hc } from "../905/805904";
 import { Hc as _$$Hc, sH, dI } from "../905/537777";
 import { q as _$$q } from "../905/196201";
@@ -25,18 +25,18 @@ export function $$v7(e) {
   return !(!e || e === $$I22 || e === $$S23 || e.startsWith("blob:") && !b[e]);
 }
 export function $$A14(e, t) {
-  let [r, n] = Vzr.generateThumbnailFromStyleMaster(e, t, 18, 18, 2);
+  let [r, n] = Thumbnail.generateThumbnailFromStyleMaster(e, t, 18, 18, 2);
   return r && r.status === $$S23 ? $$S23 : $$O0(n) || (console.error(`failed to generate thumbnail for node ${e}`), $$I22);
 }
 export function $$x15(e, t) {
-  let [r, n] = Vzr.generateThumbnailFromStyleConsumer(e, t, 18, 18);
+  let [r, n] = Thumbnail.generateThumbnailFromStyleConsumer(e, t, 18, 18);
   return $$O0(n) || (console.error(`failed to generate thumbnail for node ${e}`), $$I22);
 }
 export function $$N19(e, t, r) {
   if (!Kb(e)) return {
     type: "INVALID"
   };
-  let n = Vzr.generateSerializableThumbnailForStyle(t || "", e, r || "");
+  let n = Thumbnail.generateSerializableThumbnailForStyle(t || "", e, r || "");
   let a = n.length > 0 ? w.decodeMessage(n) : null;
   let s = a && a.nodeChanges && a.nodeChanges[0] || null;
   return s ? No(s, e) : (console.error(`failed to generate serializable thumbnail for node ${t}`), {
@@ -244,24 +244,24 @@ async function ee(e, t, r) {
       };
     }
     return {
-      resultType: l7.system("upsert-asset-from-log", () => function (e, t, r) {
+      resultType: permissionScopeHandler.system("upsert-asset-from-log", () => function (e, t, r) {
         let n;
         let a;
         switch (e.type) {
           case PW.COMPONENT:
-            n = BXd.upsertSharedSymbol(e.component_key, e.content_hash, e.library_key, t, r, ZiZ.ACTIVE_SCENE);
+            n = LibraryPubSub.upsertSharedSymbol(e.component_key, e.content_hash, e.library_key, t, r, SceneIdentifier.ACTIVE_SCENE);
             a = "shared-symbol-error";
             break;
           case PW.STATE_GROUP:
-            n = BXd.upsertSharedStateGroup(e.key, e.version, e.library_key, t, r, ZiZ.ACTIVE_SCENE);
+            n = LibraryPubSub.upsertSharedStateGroup(e.key, e.version, e.library_key, t, r, SceneIdentifier.ACTIVE_SCENE);
             a = "shared-state-group-error";
             break;
           case PW.VARIABLE:
-            n = BXd.upsertSharedVariable(Hc(e.key, e.version), t, r);
+            n = LibraryPubSub.upsertSharedVariable(Hc(e.key, e.version), t, r);
             a = "shared-variable-error";
             break;
           case PW.VARIABLE_SET:
-            n = BXd?.upsertSharedRootVariableSet(_$$Hc(e.key, e.version), e.library_key, t, ZxO.NO, r);
+            n = LibraryPubSub?.upsertSharedRootVariableSet(_$$Hc(e.key, e.version), e.library_key, t, Confirmation.NO, r);
             a = "shared-variable-set-error";
         }
         if (!n || n.fileUpdateRequired) return a;

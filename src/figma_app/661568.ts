@@ -1,5 +1,5 @@
 import { debounce } from "../905/915765";
-import { hMR } from "../figma_app/763686";
+import { CorePerfInfo } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { BrowserInfo } from "../figma_app/778880";
@@ -35,8 +35,8 @@ class p {
     let e = {
       version: 2,
       firstReport: !this.reported,
-      totalUsedHeapMemory: hMR?.getTotalUsedHeapMemory(),
-      maxUsedHeapMemory: hMR?.getMaxUsedHeapMemory(),
+      totalUsedHeapMemory: CorePerfInfo?.getTotalUsedHeapMemory(),
+      maxUsedHeapMemory: CorePerfInfo?.getMaxUsedHeapMemory(),
       fileKey: hk()?.openFileKey(),
       ...this.events
     };
@@ -67,8 +67,8 @@ class _ {
   }
   end(e) {
     if (void 0 !== this.startTimes[e]) {
-      let t = hMR?.getTotalUsedHeapMemory();
-      let r = hMR?.getMaxUsedHeapMemory();
+      let t = CorePerfInfo?.getTotalUsedHeapMemory();
+      let r = CorePerfInfo?.getMaxUsedHeapMemory();
       let n = {
         name: e,
         start: this.startTimes[e],
@@ -107,8 +107,8 @@ class _ {
     let n = {
       totalMemoryInBytes: le(),
       failedSize: t,
-      currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
-      maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
+      currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
+      maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
       timeSinceInitialization: r,
       is64BitBrowser: BrowserInfo.is64BitBrowser
     };

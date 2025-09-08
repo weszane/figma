@@ -1,8 +1,8 @@
 import { ic, J6 } from "../figma_app/617606";
-import { K$p, glU } from "../figma_app/763686";
+import { ChatMessageType, Fullscreen } from "../figma_app/763686";
 import { throwIf } from "../905/419236";
 export function $$a1(e, t, n) {
-  let a = ic(K$p.SYSTEM_MESSAGE, e.id, () => (throwIf(void 0 !== glU, "Fullscreen must be defined"), glU.generateUniqueID()));
+  let a = ic(ChatMessageType.SYSTEM_MESSAGE, e.id, () => (throwIf(void 0 !== Fullscreen, "Fullscreen must be defined"), Fullscreen.generateUniqueID()));
   a.textContent = J6({
     type: "restore",
     codeSnapshot: t,
@@ -12,7 +12,7 @@ export function $$a1(e, t, n) {
   return a;
 }
 export function $$l2(e, t, n, a) {
-  let l = ic(K$p.SYSTEM_MESSAGE, e.id, () => (throwIf(void 0 !== glU, "Fullscreen must be defined"), glU.generateUniqueID()));
+  let l = ic(ChatMessageType.SYSTEM_MESSAGE, e.id, () => (throwIf(void 0 !== Fullscreen, "Fullscreen must be defined"), Fullscreen.generateUniqueID()));
   l.textContent = J6({
     type: "manual_edit",
     changedFiles: t,
@@ -23,7 +23,7 @@ export function $$l2(e, t, n, a) {
   return l;
 }
 export function $$o0(e, t) {
-  let n = ic(K$p.SYSTEM_MESSAGE, e.id, () => (throwIf(void 0 !== glU, "Fullscreen must be defined"), glU.generateUniqueID()));
+  let n = ic(ChatMessageType.SYSTEM_MESSAGE, e.id, () => (throwIf(void 0 !== Fullscreen, "Fullscreen must be defined"), Fullscreen.generateUniqueID()));
   n.textContent = J6({
     type: "duplicated_file",
     fileKeyHash: t,

@@ -1,8 +1,8 @@
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { NC } from "../905/17179";
 import { R7 } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
-nF(e => {
+createOptimistThunk(e => {
   let t = e.getState().appWindow.inFullScreenMode;
   if (desktopAPIInstance) {
     desktopAPIInstance.setFullScreen(!t);

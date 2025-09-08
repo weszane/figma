@@ -7,9 +7,9 @@ import { GG } from "../905/511649";
 import { Point } from "../905/736624";
 import { renderI18nText } from "../905/303541";
 import { bV } from "../figma_app/808294";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { Uv } from "../905/54385";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Xj } from "../905/748636";
 import { DP } from "../905/640017";
 import { v as _$$v } from "../figma_app/79979";
@@ -358,7 +358,7 @@ function y() {
   });
 }
 var $$I1 = (e => (e.TRIAL_ENDED = "TRIAL_ENDED", e.PAID_FEATURE = "PAID_FEATURE", e.SKIP = "SKIP", e.LOGGED_OUT = "LOGGED_OUT", e))($$I1 || {});
-export let $$E0 = Ju(function (e) {
+export let $$E0 = registerModal(function (e) {
   let {
     onClose,
     onContinue
@@ -366,7 +366,7 @@ export let $$E0 = Ju(function (e) {
   let h = useDispatch();
   let f = useCallback(() => {
     onClose?.();
-    h(Ce());
+    h(hideModal());
   }, [h, onClose]);
   if ("SKIP" === e.type) {
     onContinue?.();

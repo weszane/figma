@@ -1,4 +1,4 @@
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { D } from "../905/775228";
 import { q } from "../figma_app/446378";
 export function $$s0(e = {}, t) {
@@ -14,7 +14,7 @@ export function $$s0(e = {}, t) {
   }
   return e;
 }
-export let $$o1 = nF(async (e, {
+export let $$o1 = createOptimistThunk(async (e, {
   fileKey: t
 }) => {
   let r = e.getState();

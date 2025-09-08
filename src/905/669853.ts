@@ -1,12 +1,12 @@
 import { F } from '../905/422355';
 import { encodeStringToBase64 } from '../905/561685';
 import { A } from '../905/920142';
-import { td, vh } from '../figma_app/181241';
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 var o = (e => (e.INSERTION = 'insertion', e.DETACHMENT = 'detachment', e))(o || {});
 var l = (e => (e.INSERTION = 'insertion', e.DETACHMENT = 'detachment', e))(l || {});
 var $$d1 = (e => (e.INSERTION = 'insertion', e.DETACHMENT = 'detachment', e))($$d1 || {});
 function c(e) {
-  let t = td.toAPIParameters(e) ?? {};
+  let t = APIParameterUtils.toAPIParameters(e) ?? {};
   let i = Object.keys(t);
   let o = i.map(e => t[e]);
   let l = A().utc().unix();
@@ -20,31 +20,31 @@ function c(e) {
 }
 export let $$u0 = new class {
   constructor() {
-    this.LibraryWeeklyInsertionsSchemaValidator = vh();
-    this.LibraryTeamUsageSchemaValidator = vh();
-    this.LibraryPublishedComponentsUsagesSchemaValidator = vh();
-    this.LibraryPublishedComponentsActionsSchemaValidator = vh();
-    this.LibraryOverviewSchemaValidator = vh();
-    this.LibrariesSchemaValidator = vh();
-    this.NumTeamsSchemaValidator = vh();
-    this.StateGroupComponentsSchemaValidator = vh();
-    this.ComponentFileUsageSchemaValidator = vh();
-    this.ComponentSchemaValidator = vh();
-    this.StateGroupSchemaValidator = vh();
-    this.OrgMigrationStatusSchemaValidator = vh();
-    this.LibraryStyleOverviewValidator = vh();
-    this.LibraryStyleDetailsValidator = vh();
-    this.LibraryVariableOverviewValidator = vh();
-    this.LibraryVariableDetailsValidator = vh();
-    this.RecordStylesActionValidator = vh();
-    this.RecordVariablesActionValidator = vh();
-    this.RecordComponentActionValidator = vh();
+    this.LibraryWeeklyInsertionsSchemaValidator = createNoOpValidator();
+    this.LibraryTeamUsageSchemaValidator = createNoOpValidator();
+    this.LibraryPublishedComponentsUsagesSchemaValidator = createNoOpValidator();
+    this.LibraryPublishedComponentsActionsSchemaValidator = createNoOpValidator();
+    this.LibraryOverviewSchemaValidator = createNoOpValidator();
+    this.LibrariesSchemaValidator = createNoOpValidator();
+    this.NumTeamsSchemaValidator = createNoOpValidator();
+    this.StateGroupComponentsSchemaValidator = createNoOpValidator();
+    this.ComponentFileUsageSchemaValidator = createNoOpValidator();
+    this.ComponentSchemaValidator = createNoOpValidator();
+    this.StateGroupSchemaValidator = createNoOpValidator();
+    this.OrgMigrationStatusSchemaValidator = createNoOpValidator();
+    this.LibraryStyleOverviewValidator = createNoOpValidator();
+    this.LibraryStyleDetailsValidator = createNoOpValidator();
+    this.LibraryVariableOverviewValidator = createNoOpValidator();
+    this.LibraryVariableDetailsValidator = createNoOpValidator();
+    this.RecordStylesActionValidator = createNoOpValidator();
+    this.RecordVariablesActionValidator = createNoOpValidator();
+    this.RecordComponentActionValidator = createNoOpValidator();
   }
   getLibraryWeeklyInsertions(e) {
     let t = c(e);
     return this.LibraryWeeklyInsertionsSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library/${e.fileKey}/weekly_insertions`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library/${e.fileKey}/weekly_insertions`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -53,7 +53,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibraryTeamUsageSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library/${e.fileKey}/team_usage`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library/${e.fileKey}/team_usage`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -69,7 +69,7 @@ export let $$u0 = new class {
     let i = c(t);
     return this.LibraryPublishedComponentsUsagesSchemaValidator.validate(async ({
       xr: n
-    }) => await n.get(`/api/dsa/library/${e.libraryFileKey}/published_components_usages`, td.toAPIParameters({
+    }) => await n.get(`/api/dsa/library/${e.libraryFileKey}/published_components_usages`, APIParameterUtils.toAPIParameters({
       ...t,
       ...i
     })));
@@ -85,7 +85,7 @@ export let $$u0 = new class {
     let i = c(t);
     return this.LibraryPublishedComponentsActionsSchemaValidator.validate(async ({
       xr: n
-    }) => await n.get(`/api/dsa/library/${e.libraryFileKey}/published_components_actions`, td.toAPIParameters({
+    }) => await n.get(`/api/dsa/library/${e.libraryFileKey}/published_components_actions`, APIParameterUtils.toAPIParameters({
       ...t,
       ...i
     })));
@@ -94,7 +94,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibraryOverviewSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library_overview/${e.libraryFileKey}`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library_overview/${e.libraryFileKey}`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -103,7 +103,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibrariesSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get('/api/dsa/libraries', td.toAPIParameters({
+    }) => await i.get('/api/dsa/libraries', APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -112,7 +112,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.NumTeamsSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get('/api/dsa/num_teams', td.toAPIParameters({
+    }) => await i.get('/api/dsa/num_teams', APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -121,7 +121,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.StateGroupComponentsSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/state_group/${e.stateGroupKey}/components`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/state_group/${e.stateGroupKey}/components`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -130,7 +130,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.ComponentFileUsageSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/component/${e.componentKey}/file_usage`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/component/${e.componentKey}/file_usage`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -139,7 +139,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.ComponentSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/component/${e.componentKey}`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/component/${e.componentKey}`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -148,7 +148,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.StateGroupSchemaValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/state_group/${e.stateGroupKey}`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/state_group/${e.stateGroupKey}`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -162,7 +162,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibraryStyleOverviewValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/styles/overview`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/styles/overview`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -171,7 +171,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibraryStyleDetailsValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/styles/${e.styleKey}/details`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/styles/${e.styleKey}/details`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -180,7 +180,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibraryVariableOverviewValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/variables/overview`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/variables/overview`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -189,7 +189,7 @@ export let $$u0 = new class {
     let t = c(e);
     return this.LibraryVariableDetailsValidator.validate(async ({
       xr: i
-    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/variables/${e.variableKey}/details`, td.toAPIParameters({
+    }) => await i.get(`/api/dsa/library/${e.libraryFileKey}/variables/${e.variableKey}/details`, APIParameterUtils.toAPIParameters({
       ...e,
       ...t
     })));
@@ -197,17 +197,17 @@ export let $$u0 = new class {
   recordStylesAction(e) {
     return this.RecordStylesActionValidator.validate(async ({
       xr: t
-    }) => await t.post('/api/dsa/record/style/action', td.toAPIParameters(e)));
+    }) => await t.post('/api/dsa/record/style/action', APIParameterUtils.toAPIParameters(e)));
   }
   recordVariablesAction(e) {
     return this.RecordVariablesActionValidator.validate(async ({
       xr: t
-    }) => await t.post('/api/dsa/record/variable/action', td.toAPIParameters(e)));
+    }) => await t.post('/api/dsa/record/variable/action', APIParameterUtils.toAPIParameters(e)));
   }
   recordComponentAction(e) {
     return this.RecordComponentActionValidator.validate(async ({
       xr: t
-    }) => await t.post('/api/dsa/record/component/action', td.toAPIParameters(e)));
+    }) => await t.post('/api/dsa/record/component/action', APIParameterUtils.toAPIParameters(e)));
   }
 }();
 export const PT = $$u0;

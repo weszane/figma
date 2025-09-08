@@ -17,11 +17,11 @@ import { s as _$$s } from "../905/573154";
 import { F as _$$F } from "../905/302958";
 import { E9, pf } from "../figma_app/314264";
 import { J8, By } from "../905/760074";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { oB, j7, sf } from "../905/929976";
 import { S as _$$S } from "../figma_app/78808";
 import { kj } from "../905/191601";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { d as _$$d2 } from "../905/91820";
 import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
@@ -41,7 +41,7 @@ function g(e) {
     children: e.title
   });
 }
-let x = nF(async (e, t) => {
+let x = createOptimistThunk(async (e, t) => {
   let i = {
     key: t.branch.key,
     name: t.name,
@@ -63,7 +63,7 @@ let x = nF(async (e, t) => {
     fileName: t.name
   });
 });
-let S = nF(async (e, t) => {
+let S = createOptimistThunk(async (e, t) => {
   let i = await J8(t.branches.map(e => e.key));
   "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(_$$F.enqueue({
     type: "file_restored",
@@ -73,7 +73,7 @@ let S = nF(async (e, t) => {
   }));
   pf("File Restored", t.branches);
 });
-let w = nF(async (e, t) => {
+let w = createOptimistThunk(async (e, t) => {
   let i = XHR.del("/api/files_batch", {
     files: t.branches.map(e => ({
       key: e.key
@@ -194,7 +194,7 @@ export function $$V0(e) {
     children: renderI18nText("collaboration.branching.copy_link")
   }, "copy-link"), ...U(G, jsx(c$, {
     onClick: () => {
-      t(to({
+      t(showModalHandler({
         type: _$$e,
         data: {
           fileName: e.branch.name,
@@ -295,7 +295,7 @@ export function $$V0(e) {
       children: !e.isCurrentBranch && jsx($n, {
         variant: "ghost",
         onClick: () => {
-          t(Ce());
+          t(hideModal());
           t(sf({
             view: "fullscreen",
             fileKey: e.branch.key,

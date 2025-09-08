@@ -2,9 +2,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useId, useMemo, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
 import { E } from "../905/53857";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
-import { tKW } from "../figma_app/763686";
+import { MeasurementUnit } from "../figma_app/763686";
 import { Pt, rf } from "../figma_app/806412";
 import { e as _$$e } from "../905/713353";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -97,7 +97,7 @@ function S({
   let d = useId();
   return jsxs("div", {
     className: k,
-    children: [jsx(J, {
+    children: [jsx(Label, {
       className: A,
       htmlFor: d,
       children: renderI18nText("dev_handoff.alternative_units.dimension_unit")
@@ -154,7 +154,7 @@ export class $$L3 {
     this.scaledUnitName = e;
   }
   format(e) {
-    return e === tKW.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : this.scaledUnitName;
+    return e === MeasurementUnit.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : this.scaledUnitName;
   }
 }
 function R(e) {

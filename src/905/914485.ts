@@ -17,7 +17,7 @@ import { B } from "../905/714743";
 import { In } from "../905/672640";
 import { Q8, sC, R9 } from "../905/61477";
 import { XW, Yb } from "../905/182534";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { Dy, uL } from "../905/977218";
 import { _6 } from "../figma_app/386952";
 import { vj } from "../905/574958";
@@ -47,7 +47,7 @@ function T({
       }));
       c(s.query);
       Yb(o, l, s.query, u, p ?? uH.FILES, !0);
-      o(AS());
+      o(hideModalHandler());
     }
   }, [o, l, s.query, h, p, u, c]);
   let R = useCallback(e => {

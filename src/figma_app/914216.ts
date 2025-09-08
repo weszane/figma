@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b, bL, mc, YJ, hE } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
-import { NLJ, Oin } from "../figma_app/763686";
+import { DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
@@ -15,7 +15,7 @@ import { T as _$$T } from "../905/868547";
 import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { Yh, TY, vg } from "../figma_app/357047";
 import { xn } from "../figma_app/108168";
@@ -85,7 +85,7 @@ let D = memo(function ({
   item: e,
   recordingKey: t
 }) {
-  let r = ut(e.isActiveObservable ? e.isActiveObservable() : null, !1);
+  let r = getObservableValue(e.isActiveObservable ? e.isActiveObservable() : null, !1);
   let i = useSelector(t => P(e, t)) || r;
   let s = $$G0();
   return jsx(rA, {
@@ -105,7 +105,7 @@ let k = memo(function ({
 }) {
   let s = useSelector(t => Yh(t.mirror.appModel, e.action));
   let o = Um();
-  let l = useSelector(t => e.tool !== NLJ.NONE && e.tool === t.mirror.appModel.currentTool && !TY(o));
+  let l = useSelector(t => e.tool !== DesignGraphElements.NONE && e.tool === t.mirror.appModel.currentTool && !TY(o));
   let d = useSelector(e => e.mirror.appModel.topLevelMode);
   return e.featureFlags && !e.featureFlags.every(e => getFeatureFlags()[e]) ? null : jsx(T0, {
     dropdownShown: o,
@@ -222,7 +222,7 @@ export function $$U3() {
   let o = useSelector(e => s ? !r?.canEdit : e.mirror.appModel.isReadOnly);
   let l = useSelector(e => e.mirror.appModel.isSceneReadOnly);
   let d = useSelector(e => !!e.user);
-  return useCallback(i => !(!i || l && !i.nonEditorsAllowed || i.onlyShowInReadOnly && !(o && n !== Oin.HIDE_UI) || i.hideInExtension && z4.getIsExtension()) && (!!r || !i.newFileDisabled) && (!!d || !!i.loggedOutAllowed) && (!i.editModes || -1 !== i.editModes.indexOf(e)) && (!i.showForTools || -1 !== i.showForTools.indexOf(t)), [l, o, n, r, d, e, t]);
+  return useCallback(i => !(!i || l && !i.nonEditorsAllowed || i.onlyShowInReadOnly && !(o && n !== UIVisibilitySetting.HIDE_UI) || i.hideInExtension && z4.getIsExtension()) && (!!r || !i.newFileDisabled) && (!!d || !!i.loggedOutAllowed) && (!i.editModes || -1 !== i.editModes.indexOf(e)) && (!i.showForTools || -1 !== i.showForTools.indexOf(t)), [l, o, n, r, d, e, t]);
 }
 export function $$B2() {
   return selectWithShallowEqual(e => {

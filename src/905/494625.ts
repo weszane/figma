@@ -1,7 +1,7 @@
 import { createContext, useContext, useRef, useState, useCallback } from "react";
 import { Q } from "../905/586361";
 import { F } from "../905/768014";
-import { Qv } from "../905/959312";
+import { useRecording } from "../905/959312";
 export let $$o1 = createContext(!1);
 export function $$l0({
   onClick: e,
@@ -34,13 +34,13 @@ export function $$l0({
   };
   let y = useRef(!1);
   let [b, v] = useState(!1);
-  let I = Qv(t => {
+  let I = useRecording(t => {
     suppressClicks || e?.(t);
   }, {
     eventName: "click",
     recordingKey: suppressClicks ? void 0 : t
   }, [e, suppressClicks, t]);
-  let E = Qv(e => {
+  let E = useRecording(e => {
     suppressClicks || p?.(e);
   }, {
     eventName: "pointerdown",

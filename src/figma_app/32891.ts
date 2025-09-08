@@ -1,12 +1,12 @@
 import { useSelector } from "../vendor/514228";
-import { Nfd, lyf } from "../figma_app/763686";
+import { PanelType, ViewType } from "../figma_app/763686";
 import { T } from "../905/868547";
 import { R } from "../905/105002";
-let $$o2 = [Nfd.CODE, Nfd.SETTINGS];
+let $$o2 = [PanelType.CODE, PanelType.SETTINGS];
 let l = [...$$o2.map(e => R(e)), "INSERT"];
 export function $$d0() {
   let e = useSelector(e => T(e.progressBarState.mode));
-  let t = useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let t = useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   return {
     fileLoading: e,
     readOnlyUser: e ? void 0 : t

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { connect } from "../vendor/514228";
 import { cd, _H } from "../figma_app/243058";
-import { glU, Pt4 } from "../figma_app/763686";
+import { Fullscreen, StylesBindings } from "../figma_app/763686";
 import { NQ } from "../905/508367";
 import { T1 } from "../905/711212";
 import { aV, r2, OM } from "../figma_app/80990";
@@ -25,13 +25,13 @@ var n;
         let e = null;
         switch (this.props.item.type) {
           case PW.COMPONENT:
-            this.props.item.component_key && this.props.item.content_hash && (e = glU?.getSymbolNodeId(this.props.item.component_key, this.props.item.content_hash) ?? null);
+            this.props.item.component_key && this.props.item.content_hash && (e = Fullscreen?.getSymbolNodeId(this.props.item.component_key, this.props.item.content_hash) ?? null);
             break;
           case PW.STATE_GROUP:
-            this.props.item.key && (e = glU?.getStateGroupNodeId(this.props.item.key, this.props.item.version) ?? null);
+            this.props.item.key && (e = Fullscreen?.getStateGroupNodeId(this.props.item.key, this.props.item.version) ?? null);
             break;
           case PW.STYLE:
-            this.props.item.content_hash && (e = Pt4?.getStyleNodeId(this.props.item.key, this.props.item.content_hash) ?? null);
+            this.props.item.content_hash && (e = StylesBindings?.getStyleNodeId(this.props.item.key, this.props.item.content_hash) ?? null);
         }
         e && (this.setState({
           fallbackLocalThumbnailGuid: e

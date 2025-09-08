@@ -11,7 +11,7 @@ import { z } from "../905/905430";
 import { aS, Im } from "../905/608145";
 import { c4 } from "../figma_app/805925";
 import { Um } from "../905/848862";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { cq } from "../905/794154";
 import { w0 } from "../figma_app/189990";
 import { ms } from "../figma_app/38430";
@@ -49,7 +49,7 @@ export function $$I2({
 }
 export function $$S1(e) {
   let t = Um();
-  return ZQ(e) ? t?.type === b && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === b && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
+  return hasLocalFileId(e) ? t?.type === b && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === b && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
 }
 export function $$v0({
   submenuIsShown: e,
@@ -64,7 +64,7 @@ export function $$v0({
         type: b,
         data: {
           extensionId: t.plugin_id,
-          localFileId: ZQ(t) ? t.localFileId : null,
+          localFileId: hasLocalFileId(t) ? t.localFileId : null,
           targetRect: e,
           displayAboveTarget: r
         }

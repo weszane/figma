@@ -2,10 +2,10 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useState, useId, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/49800";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { N as _$$N } from "../905/438674";
-import { _em, glU } from "../figma_app/763686";
+import { PluginModalType, Fullscreen } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -14,7 +14,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { vQ, jE } from "../905/656545";
 import { am } from "../figma_app/430563";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { J as _$$J2 } from "../905/445197";
 import { d1 } from "../905/766303";
 import { q as _$$q } from "../905/807667";
@@ -23,7 +23,7 @@ import { T as _$$T } from "../905/486858";
 import { kc, Co } from "../figma_app/141508";
 import { er as _$$er } from "../905/753512";
 import { K as _$$K } from "../905/443068";
-import { W as _$$W } from "../905/909715";
+import { ManuallyLabeledCheckbox } from "../905/909715";
 import { q9 } from "../905/865071";
 import { C as _$$C } from "../905/520159";
 import { O as _$$O } from "../905/791978";
@@ -340,7 +340,7 @@ function ep({
 }) {
   return jsx("div", {
     className: _$$s.flex.justifyEnd.$,
-    children: jsx(_$$W, {
+    children: jsx(ManuallyLabeledCheckbox, {
       checked: e,
       disabled: t,
       onChange: i,
@@ -469,9 +469,9 @@ export function $$ef0({
   let [d, C] = useState(!0);
   _$$h(() => {
     _$$J2(() => {
-      _$$q(_em.REPLACE_LIBRARIES).then(() => {
-        glU.expandInstancesWithStyleOverrides();
-        glU.onFrame();
+      _$$q(PluginModalType.REPLACE_LIBRARIES).then(() => {
+        Fullscreen.expandInstancesWithStyleOverrides();
+        Fullscreen.onFrame();
         C(!1);
       });
     });
@@ -498,7 +498,7 @@ export function $$ef0({
       editingFileKey: T?.key,
       libraryKeyToSwapFrom: e,
       libraryKeyToSwapTo: R
-    }), M(N, L), i(Ce()), T && R && j(e) && i(am({
+    }), M(N, L), i(hideModal()), T && R && j(e) && i(am({
       libraryFileSubscription: {
         file_key: T.key,
         library_key: R,
@@ -540,7 +540,7 @@ export function $$ef0({
           children: k && jsx(_$$d, {
             checked: L,
             onChange: F,
-            label: jsx(_$$J, {
+            label: jsx(Label, {
               children: jsx(e_, {})
             })
           })

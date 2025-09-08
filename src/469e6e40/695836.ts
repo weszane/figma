@@ -16,9 +16,9 @@ import { e as _$$e } from "../figma_app/522702";
 import { v as _$$v } from "../905/213481";
 import { Ay } from "../vendor/159563";
 import { k as _$$k, p as _$$p } from "../469e6e40/343829";
-import { S as _$$S2 } from "../905/274480";
-import { J, h as _$$h } from "../905/270045";
-import { W as _$$W } from "../905/909715";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
+import { ManuallyLabeledCheckbox } from "../905/909715";
 import { mc as _$$mc, c$, bL, DZ } from "../905/493196";
 import { s as _$$s } from "../9314/287043";
 function j(e, t) {
@@ -113,9 +113,9 @@ function S({
   checked: a,
   handleChange: s
 }) {
-  return jsx(_$$S2, {
+  return jsx(Checkbox, {
     checked: a,
-    label: jsx(J, {
+    label: jsx(Label, {
       children: t
     }),
     onChange: t => s(e, t ? "on" : _$$p)
@@ -130,11 +130,11 @@ function N({
   let r = useId();
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 x1qughib xh8yej3",
-    children: [jsx(J, {
+    children: [jsx(Label, {
       htmlFor: r,
       className: "x1n0bwc9",
       children: t
-    }), jsx(_$$W, {
+    }), jsx(ManuallyLabeledCheckbox, {
       checked: a,
       onChange: t => i(e, t ? "on" : _$$p),
       id: r
@@ -194,7 +194,7 @@ function R(e) {
     value: o ?? _$$p,
     children: jsxs("div", {
       className: "xh8yej3 x78zum5 x1q0g3np x6s0dn4 x1qughib",
-      children: [jsx(J, {
+      children: [jsx(Label, {
         htmlFor: label,
         children: jsx(_$$E, {
           color: "secondary",
@@ -225,7 +225,7 @@ function O(e) {
   return jsxs(bL, {
     onChange: e => handleChange(type, e),
     value: o ?? _$$p,
-    children: [jsx(_$$h, {
+    children: [jsx(HiddenLabel, {
       htmlFor: `${label}-row-filter`,
       children: label
     }), jsx(D, {

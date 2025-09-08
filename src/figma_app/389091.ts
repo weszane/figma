@@ -1,5 +1,5 @@
 import { debounce } from "../905/915765";
-import { h3O } from "../figma_app/763686";
+import { Multiplayer } from "../figma_app/763686";
 import { NC } from "../905/17179";
 import { k } from "../905/651849";
 import { getInitialOptions } from "../figma_app/169182";
@@ -17,7 +17,7 @@ import { ym, qV as _$$qV } from "../figma_app/818609";
 import { _s, I8, om, c4, $_ } from "../figma_app/198387";
 import { YI, P$, FR } from "../figma_app/152368";
 import { D } from "../905/80656";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 function S(e) {
   return e.multiplayer.allUsers.length;
 }
@@ -59,7 +59,7 @@ async function N(e, t) {
   return r;
 }
 let $$C39 = NC("SET_SELECTED_SONG_ID_MUSIC");
-let $$w3 = nF((e, t) => {
+let $$w3 = createOptimistThunk((e, t) => {
   let {
     music
   } = e.getState().music;
@@ -76,13 +76,13 @@ let $$w3 = nF((e, t) => {
   }
   e.dispatch($$C39(t));
 });
-let $$O25 = nF(e => {
+let $$O25 = createOptimistThunk(e => {
   e.dispatch($$R20());
   I8();
   om();
 });
 let $$R20 = NC("RESET_LOCAL_MUSIC");
-let $$$$L11 = nF((e, t) => {
+let $$$$L11 = createOptimistThunk((e, t) => {
   if (e.dispatch($$P4(t)), t.isPaused || t.isStopped || !t.selectedSongID) (t.isPaused || t.isStopped) && c4() && I8();else {
     let r = U(t.selectedSongID, e.getState().music.activeSongs);
     $_(r, () => {
@@ -92,7 +92,7 @@ let $$$$L11 = nF((e, t) => {
 });
 let $$P4 = NC("SET_MUSIC_STATE");
 let $$D6 = NC("RESUME_MUSIC");
-nF(async (e, t) => {
+createOptimistThunk(async (e, t) => {
   let r = $$A15(t);
   let n = e.getState();
   let i = n.music.music?.selectedSongID;
@@ -106,7 +106,7 @@ nF(async (e, t) => {
   }));
   e.dispatch($$D6(t));
 });
-let $$k23 = nF((e, t) => {
+let $$k23 = createOptimistThunk((e, t) => {
   let r = $$A15(t);
   let n = e.getState();
   let i = n.music.music?.selectedSongID;
@@ -118,7 +118,7 @@ let $$k23 = nF((e, t) => {
     isStopped: !1
   }));
 });
-let $$M26 = nF(e => {
+let $$M26 = createOptimistThunk(e => {
   let t = e.getState();
   let r = t.music.music?.selectedSongID;
   e.dispatch(G({
@@ -130,7 +130,7 @@ let $$M26 = nF(e => {
   }));
 });
 let $$F28 = NC("START_MUSIC");
-let $$j35 = nF(async (e, {
+let $$j35 = createOptimistThunk(async (e, {
   musicStartTimeMs: t = 0
 }) => {
   let {
@@ -152,12 +152,12 @@ let $$j35 = nF(async (e, {
 });
 let U = (e, t) => t.find(t => t.song_id === e);
 let $$B17 = NC("SEND_MUSIC_MESSAGE");
-let G = nF((e, t) => {
+let G = createOptimistThunk((e, t) => {
   let r = e.getState().music;
-  h3O?.sendMusic(t.isPaused, (r?.music?.musicMessageID || 0) + 1, t.selectedSongID || "", t.lastReceivedSongTimestampMs || 0, t.isStopped);
+  Multiplayer?.sendMusic(t.isPaused, (r?.music?.musicMessageID || 0) + 1, t.selectedSongID || "", t.lastReceivedSongTimestampMs || 0, t.isStopped);
   e.dispatch($$B17(t));
 });
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   "open" === t.state && D(() => {
     e.getState().music?.modalState === "open" && e.dispatch($$V12({
       state: "closed",
@@ -169,12 +169,12 @@ nF((e, t) => {
 let $$V12 = NC("SET_MUSIC_MODAL");
 let $$H40 = NC("RESET_LOCAL_TIMER");
 let $$z1 = NC("SET_MUSIC_STANDALONE_VOLUME");
-let $$W41 = nF((e, t) => {
+let $$W41 = createOptimistThunk((e, t) => {
   Z(e.getState(), t);
   e.dispatch($$z1(t));
 });
 let $$K29 = NC("SET_MUSIC_IS_MUTED");
-let $$Y44 = nF((e, {
+let $$Y44 = createOptimistThunk((e, {
   isMuted: t,
   userInitiated: r
 }) => {
@@ -185,7 +185,7 @@ let $$Y44 = nF((e, {
   }));
 });
 let $$$31 = NC("SET_TIMER_AND_MUSIC_ARE_MUTED");
-nF((e, {
+createOptimistThunk((e, {
   isMuted: t,
   userInitiated: r
 }) => {
@@ -198,13 +198,13 @@ nF((e, {
 let $$X45 = NC("SET_STANDALONE_MUSIC_PLAYER");
 let $$q0 = NC("SET_MAIN_MUSIC_PLAYER");
 let $$J9 = NC("SET_MUSIC_VOLUME");
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   Z(e.getState(), t);
   e.dispatch($$J9(t));
 });
 let Z = debounce((e, t) => _$$qV(e, t), 1e3, !1);
 let $$Q2 = NC("SET_SELECTED_SONG_ID");
-let $$ee7 = nF((e, t) => {
+let $$ee7 = createOptimistThunk((e, t) => {
   let {
     time
   } = e.getState().timer;
@@ -223,7 +223,7 @@ let $$ee7 = nF((e, t) => {
   e.dispatch($$Q2(t));
 });
 let $$et16 = NC("GET_ACTIVE_SONGS_SUCCESS");
-let $$er42 = nF(async e => {
+let $$er42 = createOptimistThunk(async e => {
   try {
     let t = await _$$N.getSongs();
     if (!t || 200 !== t.status || !t.data || !t.data.meta) {
@@ -242,7 +242,7 @@ let $$ea30 = NC("SET_START_CHIME_PLAYED");
 let $$es32 = NC("SET_TIMER_NOTIFICATION");
 let $$eo13 = NC("SET_TIMER_AUDIO_ENABLED");
 let $$el10 = NC("SET_TIMER_MODAL");
-let $$ed34 = nF((e, t) => {
+let $$ed34 = createOptimistThunk((e, t) => {
   if ("open" === t.state && FR() && D(() => {
     let t = FR();
     e.getState().timer?.modalState === "open" && t && e.dispatch($$ed34({
@@ -261,7 +261,7 @@ let $$ed34 = nF((e, t) => {
   e.dispatch($$el10(t));
 });
 let $$ec27 = NC("SEND_TIMER");
-let eu = nF((e, t) => {
+let eu = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.timer;
   let a = n.setBy;
@@ -269,7 +269,7 @@ let eu = nF((e, t) => {
     let e = r.multiplayer.allUsers.find(e => e.sessionID === r.multiplayer.sessionID);
     a = e ? e.name : getInitialOptions().user_data?.handle || "anonymous user";
   }
-  if (h3O?.sendTimer(t.totalTimeMs || 0, t.timeRemainingMs || 0, !!t.isPaused, (n?.time?.timerID || 0) + 1, a, t.songID || "", t.lastReceivedSongTimestampMs || 0), t.eventName) {
+  if (Multiplayer?.sendTimer(t.totalTimeMs || 0, t.timeRemainingMs || 0, !!t.isPaused, (n?.time?.timerID || 0) + 1, a, t.songID || "", t.lastReceivedSongTimestampMs || 0), t.eventName) {
     let e = {
       "multiplayer-users": S(r)
     };
@@ -284,7 +284,7 @@ let eu = nF((e, t) => {
   e.dispatch($$ec27(t));
 });
 let $$ep24 = NC("SET_TIMER");
-let $$e_36 = nF((e, t) => {
+let $$e_36 = createOptimistThunk((e, t) => {
   if (0 === t.totalTimeMs) {
     let t = e.getState();
     let r = d1(t);
@@ -296,7 +296,7 @@ let $$e_36 = nF((e, t) => {
   e.dispatch($$ep24(t));
 });
 let $$eh22 = NC("START_TIMER");
-let $$em14 = nF(async (e, {
+let $$em14 = createOptimistThunk(async (e, {
   totalTimeMs: t,
   musicStartTimeMs: r = 0
 }) => {
@@ -316,7 +316,7 @@ let $$em14 = nF(async (e, {
     musicStartTimeMs: r
   }));
 });
-let $$eg18 = nF((e, t) => {
+let $$eg18 = createOptimistThunk((e, t) => {
   let r = e.getState().timer.selectedSongID;
   e.dispatch(eu({
     eventName: "adjust-timer",
@@ -328,7 +328,7 @@ let $$eg18 = nF((e, t) => {
   }));
   _$$d.timerChange("timeradjust");
 });
-let $$ef21 = nF((e, t) => {
+let $$ef21 = createOptimistThunk((e, t) => {
   let r = P$(t);
   let n = $$A15(t);
   let i = e.getState().timer.selectedSongID;
@@ -345,7 +345,7 @@ let $$ef21 = nF((e, t) => {
   }));
   _$$d.timerChange("timerpause");
 });
-let $$eE19 = nF(e => {
+let $$eE19 = createOptimistThunk(e => {
   let t = e.getState().timer.selectedSongID;
   e.dispatch(eu({
     eventName: "stop-timer",
@@ -358,7 +358,7 @@ let $$eE19 = nF(e => {
   _$$d.timerChange("timerstop");
 });
 let $$ey5 = NC("RESUME_TIMER");
-let $$eb38 = nF(async (e, t) => {
+let $$eb38 = createOptimistThunk(async (e, t) => {
   let r = e.getState().timer.selectedSongID;
   r && (r = await N(r, e));
   e.dispatch(eu({

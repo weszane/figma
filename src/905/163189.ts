@@ -1,5 +1,5 @@
 import { returnSecond, throwTypeError } from "../figma_app/465776";
-import { h62 } from "../figma_app/763686";
+import { WhiteboardIntegrationType } from "../figma_app/763686";
 import { FFileType } from "../figma_app/191312";
 export let $$s1 = [FFileType.DESIGN, FFileType.WHITEBOARD, FFileType.SLIDES, FFileType.SITES, FFileType.COOPER, FFileType.FIGMAKE];
 var $$o7 = (e => (e[e.SUCCESS = 0] = "SUCCESS", e[e.WARNING = 1] = "WARNING", e[e.FAILURE = 2] = "FAILURE", e[e.BUSY = 3] = "BUSY", e[e.WAITING = 4] = "WAITING", e[e.CANCELED = 5] = "CANCELED", e))($$o7 || {});
@@ -39,15 +39,15 @@ export function $$m0(e) {
 }
 export function $$h4(e) {
   switch (e) {
-    case h62.MIRO:
+    case WhiteboardIntegrationType.MIRO:
       return "Miro";
-    case h62.MURAL:
+    case WhiteboardIntegrationType.MURAL:
       return "Mural";
-    case h62.LUCID:
+    case WhiteboardIntegrationType.LUCID:
       return "Lucid";
-    case h62.JAMBOARD:
+    case WhiteboardIntegrationType.JAMBOARD:
       return "Jamboard";
-    case h62.UNKNOWN:
+    case WhiteboardIntegrationType.UNKNOWN:
       return "Unknown";
     default:
       throwTypeError(e);

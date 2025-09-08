@@ -3,7 +3,7 @@ import { K } from "../905/443068";
 import { I as _$$I } from "../905/932503";
 import { memo } from "react";
 import { O as _$$O } from "../905/587457";
-import { Nfd } from "../figma_app/763686";
+import { PanelType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -12,7 +12,7 @@ import { J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
 import { tc } from "../905/15667";
 import { tf, fu } from "../figma_app/831799";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../figma_app/590592";
 import { tJ } from "../figma_app/741237";
 import { q5 } from "../figma_app/516028";
@@ -65,10 +65,10 @@ export function $$P2(e) {
   let o = e ?? _$$p.WEBSITE;
   return () => {
     s(o);
-    i && Y5.triggerAction("toggle-sidebar", {
+    i && fullscreenValue.triggerAction("toggle-sidebar", {
       source: "site_metadata_button"
     });
-    r(Nfd.SETTINGS);
+    r(PanelType.SETTINGS);
     n(f0.SETTINGS);
     closeOverlay();
     let t = getSingletonSceneGraph().getCurrentPage();

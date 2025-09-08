@@ -7,9 +7,9 @@ import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { Uu } from "../figma_app/471982";
 import { n7 } from "../905/926523";
-import { Lo } from "../905/156213";
+import { popModalStack } from "../905/156213";
 import { kc, sD } from "../figma_app/740025";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Ro } from "../figma_app/805373";
 import { EL } from "../905/748636";
 import { d_ } from "../figma_app/918700";
@@ -177,7 +177,7 @@ class L extends Component {
       e.community_profile_id || (this.props.dispatch(n7({
         primaryUserId: this.props.currentUser.id,
         secondaryUserId: e.id
-      })), this.props.dispatch(Lo()));
+      })), this.props.dispatch(popModalStack()));
       this.setState({
         step: 1
       });
@@ -243,7 +243,7 @@ class L extends Component {
         }),
         footerRight: jsxs(Fragment, {
           children: [jsx(nR, {
-            onClick: () => this.props.dispatch(Lo()),
+            onClick: () => this.props.dispatch(popModalStack()),
             children: renderI18nText("general.cancel")
           }), jsx($$, {
             onClick: () => this.setState({
@@ -324,7 +324,7 @@ class L extends Component {
         }),
         footerRight: jsxs(Fragment, {
           children: [jsx(nR, {
-            onClick: () => this.props.dispatch(Lo()),
+            onClick: () => this.props.dispatch(popModalStack()),
             children: renderI18nText("general.cancel")
           }), jsx($$, {
             onClick: () => {
@@ -332,7 +332,7 @@ class L extends Component {
                 primaryUserId: this.state.primaryUser.id,
                 secondaryUserId: this.state.primaryUser.id === this.props.currentUser.id ? this.state.selectedUser.id : this.props.currentUser.id
               }));
-              this.props.dispatch(Lo());
+              this.props.dispatch(popModalStack());
             },
             className: pL,
             children: renderI18nText("community.merge_profile_modal.merge_profiles")
@@ -352,7 +352,7 @@ class L extends Component {
       }), jsx("div", {
         children: 0 === this.state.step ? jsx($$O1, {
           onSubmit: this.onSelectUserToMerge,
-          onCancel: () => this.props.dispatch(Lo())
+          onCancel: () => this.props.dispatch(popModalStack())
         }) : 1 === this.state.step ? this.renderContinueStep(e) : 2 === this.state.step ? this.renderChooseHandleStep() : null
       })]
     });
@@ -365,6 +365,6 @@ let F = connect(e => ({
   authedProfilesById: e.authedProfilesById,
   currentUser: e.user
 }))(L);
-let $$M0 = Ju(F, "MergeProfilesModal");
+let $$M0 = registerModal(F, "MergeProfilesModal");
 export const g = $$M0;
 export const $ = $$O1;

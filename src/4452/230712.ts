@@ -13,19 +13,19 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { b as _$$b, A as _$$A } from "../905/723768";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { N as _$$N } from "../figma_app/55043";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { S2 } from "../figma_app/465071";
 import { Ib } from "../905/129884";
 import { c as _$$c } from "../905/32166";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { fF, yF, Kg, F5, QU, j1, xQ } from "../figma_app/397283";
-export let $$A0 = Ju(function (e) {
+export let $$A0 = registerModal(function (e) {
   let t = useDispatch();
   let a = () => {
-    t(Ce());
+    t(hideModal());
   };
   let S = S2().unwrapOr(null);
   let A = hS({

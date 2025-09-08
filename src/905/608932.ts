@@ -1,5 +1,5 @@
 import { sortByDate } from "../figma_app/656233";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { Qy } from "../figma_app/471982";
 import { M4 } from "../905/713695";
 import { H } from "../905/473998";
@@ -7,11 +7,11 @@ import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 export let $$c0 = new class {
   constructor() {
-    this.ProfileSchemaValidator = vh();
-    this.HandleSchemaValidator = vh();
-    this.RestrictedProfilesSchemaValidator = vh();
-    this.HandleAvailableSchemaValidator = vh();
-    this.EditorsSchemaValidator = vh();
+    this.ProfileSchemaValidator = createNoOpValidator();
+    this.HandleSchemaValidator = createNoOpValidator();
+    this.RestrictedProfilesSchemaValidator = createNoOpValidator();
+    this.HandleAvailableSchemaValidator = createNoOpValidator();
+    this.EditorsSchemaValidator = createNoOpValidator();
     this.profilePublicResourceQuery = M4.Query({
       fetch: async e => {
         let {
@@ -42,7 +42,7 @@ export let $$c0 = new class {
   getHandle(e) {
     return this.HandleSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/profile/handle/${e.handle}`, td.toAPIParameters({
+    }) => await t.get(`/api/profile/handle/${e.handle}`, APIParameterUtils.toAPIParameters({
       currentOrgId: e.currentOrgId
     })));
   }

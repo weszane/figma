@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { YV } from "../figma_app/181241";
+import { createMetaValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { D } from "../905/412108";
 let o = z.object({
@@ -29,8 +29,8 @@ let l = z.object({
 });
 let $$d0 = new class {
   constructor() {
-    this.CollectionResponseSchemaValidator = YV("CollectionSchemaValidator", D(o), null);
-    this.FieldSchemaResponseValidator = YV("FieldSchemaResponseValidator", D(l), null);
+    this.CollectionResponseSchemaValidator = createMetaValidator("CollectionSchemaValidator", D(o), null);
+    this.FieldSchemaResponseValidator = createMetaValidator("FieldSchemaResponseValidator", D(l), null);
   }
   createCollection({
     id: e,
@@ -99,4 +99,4 @@ let $$d0 = new class {
     await XHR.del(`/api/collections/${e.databaseId}/field_schemas/${t.databaseId}`);
   }
 }();
-export const A2 = $$d0; 
+export const A2 = $$d0;

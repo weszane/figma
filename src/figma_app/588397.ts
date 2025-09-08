@@ -4,7 +4,7 @@ import { useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { E as _$$E2 } from "../905/172252";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import u from "classnames";
 import _ from "../vendor/961736";
@@ -22,7 +22,7 @@ import { F as _$$F } from "../905/989956";
 import { lg } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { zR } from "../figma_app/80990";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { q as _$$q } from "../905/524117";
 import { N as _$$N } from "../905/645480";
 import { zR as _$$zR } from "../figma_app/817077";
@@ -163,13 +163,13 @@ export function $$er1(e) {
         e.top < bG() + q ? r.current.scrollIntoView() : e.bottom > window.innerHeight - bG() && r.current.scrollIntoView(!1);
       }
     };
-    Y5.fromFullscreen.on("scrollToNode", t);
-    let n = glU && glU?.getFirstSelectedNodeIdForCurrentPage();
+    fullscreenValue.fromFullscreen.on("scrollToNode", t);
+    let n = Fullscreen && Fullscreen?.getFirstSelectedNodeIdForCurrentPage();
     n && t({
       nodeId: n
     });
     return () => {
-      Y5.fromFullscreen.removeListener("scrollToNode", t);
+      fullscreenValue.fromFullscreen.removeListener("scrollToNode", t);
     };
   });
   let a = e.item;

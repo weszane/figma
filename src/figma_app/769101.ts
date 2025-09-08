@@ -4,7 +4,7 @@ import { W as _$$W } from "../905/187396";
 import { Uz, sC, Te } from "../905/63728";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { g as _$$g } from "../905/880308";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { W1 } from "../figma_app/439493";
 import { A as _$$A } from "../905/139173";
@@ -126,7 +126,7 @@ export function $$E1({
           case Uz.C:
           case Uz.V:
           case Uz.X:
-            Te(e) && (Y5.triggerAction(e.keyCode === Uz.C ? "copy" : e.keyCode === Uz.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
+            Te(e) && (fullscreenValue.triggerAction(e.keyCode === Uz.C ? "copy" : e.keyCode === Uz.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
             break;
           default:
             f7(e);

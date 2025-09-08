@@ -4,7 +4,7 @@ import { A } from "../905/920142";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { q5 } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { x } from "../905/749159";
@@ -24,7 +24,7 @@ export function $$_1(e) {
       formState: a,
       redirectUrl: Ay.location.pathname
     }));
-    n(to({
+    n(showModalHandler({
       type: x,
       data: {
         headerText: c

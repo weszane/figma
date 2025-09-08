@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 z.object({
   id: z.string(),
   node_id: z.string(),
@@ -9,12 +9,12 @@ z.object({
 });
 export let $$a0 = new class {
   constructor() {
-    this.LinkMetadataSchemaValidator = vh();
+    this.LinkMetadataSchemaValidator = createNoOpValidator();
   }
   getLinkMetadata(e) {
     return this.LinkMetadataSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/upnode/link_metadata", td.toAPIParameters({
+    }) => await t.get("/api/upnode/link_metadata", APIParameterUtils.toAPIParameters({
       text: e.text,
       useEmbedsAllowList: e.useEmbedsAllowList,
       useLinkPreviewsV2: e.useLinkPreviewsV2

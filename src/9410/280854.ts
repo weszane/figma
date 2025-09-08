@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { QOV } from "../figma_app/763686";
+import { UserActionState } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { p8 } from "../figma_app/722362";
 import { vD } from "../figma_app/889655";
@@ -13,7 +13,7 @@ export function $$p0() {
   let i = p8("activeUserAction");
   let p = LC();
   useEffect(() => {
-    (e !== t && t || ![QOV.DEFAULT, QOV.CLICKING_TO_CHANGE_SELECTION].includes(i)) && KY({
+    (e !== t && t || ![UserActionState.DEFAULT, UserActionState.CLICKING_TO_CHANGE_SELECTION].includes(i)) && KY({
       actionToClear: JT.FIND_INSPIRATION
     });
   }, [e, i, t, p]);

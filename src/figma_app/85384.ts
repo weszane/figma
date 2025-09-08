@@ -1,12 +1,12 @@
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { dI, sH, fn } from "../905/871411";
+import { sessionLocalIDToString, parseSessionLocalID, isValidSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { se, _j } from "../figma_app/843119";
-import { E7 } from "../905/216495";
+import { normalizeValue } from "../905/216495";
 import { xT } from "../figma_app/841415";
 export function $$_7(e, t, r) {
   let n;
@@ -39,7 +39,7 @@ export function $$h6(e) {
       openInNewTab: t.openInNewTab
     };
     if (t.guid) {
-      let e = dI(t.guid);
+      let e = sessionLocalIDToString(t.guid);
       if (t.cmsTarget) {
         if (t.cmsTarget.cmsItemId && t.cmsTarget.fieldSchemaId) return {
           type: "internal_cms_item_page_item",
@@ -73,8 +73,8 @@ export function $$m0(e) {
     openInNewTab: e.openInNewTab
   };
   if ("internal" === e.type || "internal_cms_item_page_item" === e.type) {
-    let t = sH(e.id);
-    return fn(t) ? "internal_cms_item_page_item" === e.type ? {
+    let t = parseSessionLocalID(e.id);
+    return isValidSessionLocalID(t) ? "internal_cms_item_page_item" === e.type ? {
       guid: t,
       cmsTarget: {
         nodeId: t,
@@ -94,7 +94,7 @@ export function $$m0(e) {
 export function $$g2(e) {
   return null == e || null == e.nodeId || null == e.cmsItemId || null == e.fieldSchemaId ? null : {
     type: "internal_cms_item_page_item",
-    id: dI(e.nodeId),
+    id: sessionLocalIDToString(e.nodeId),
     itemId: e.cmsItemId,
     fieldSchemaId: e.fieldSchemaId
   };
@@ -104,7 +104,7 @@ export function $$f3(e, t, r, n, s) {
     let o = t && null != t.nodeId && null != t.cmsItemId && e.value.fieldSchemaId === r ? {
       type: "internal_cms_item_page",
       collectionId: e.value.collectionId,
-      id: dI(t.nodeId)
+      id: sessionLocalIDToString(t.nodeId)
     } : null;
     if (o) return o;
     let d = n && n.fieldType === _j.LINK && r && e.value.fieldSchemaId !== r ? {
@@ -136,7 +136,7 @@ export function $$y5({
   interactionType: e,
   actions: t
 }) {
-  return "ON_CLICK" === E7(e) && 1 === t.length && void 0 !== t.find(e => e.connectionURL || "NAVIGATE" === e.navigationType) || getFeatureFlags().sts_links_v2 && t.find(e => $$E4(e));
+  return "ON_CLICK" === normalizeValue(e) && 1 === t.length && void 0 !== t.find(e => e.connectionURL || "NAVIGATE" === e.navigationType) || getFeatureFlags().sts_links_v2 && t.find(e => $$E4(e));
 }
 export function $$b1(e, t) {
   return e?.type === t?.type && (e?.type === "cms_link_field_alias" && t?.type === "cms_link_field_alias" ? e.collectionId === t.collectionId && e.fieldId === t.fieldId && e.fieldName === t.fieldName : e?.type === "internal_cms_item_page_item" && t?.type === "internal_cms_item_page_item" ? e.fieldSchemaId === t.fieldSchemaId && e.id === t.id : c2(e, t));

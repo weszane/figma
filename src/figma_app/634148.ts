@@ -1,4 +1,4 @@
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { zk } from "../figma_app/198712";
 export class $$s0 {
@@ -21,7 +21,7 @@ export class $$s0 {
         s = !0;
       } catch (e) {}
     }
-    r !== zk.NO && s && glU?.triggerAction("commit", {});
+    r !== zk.NO && s && Fullscreen?.triggerAction("commit", {});
   }
 }
 export const M = $$s0;

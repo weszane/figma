@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 import { atom } from "jotai";
 import { VU } from "../905/625959";
 import { xc } from "../905/848862";
@@ -8,175 +8,175 @@ import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { c1 } from "../figma_app/357047";
 export function $$u3(e) {
   switch (e) {
-    case NLJ.SELECT:
+    case DesignGraphElements.SELECT:
       return "set-tool-default";
-    case NLJ.HAND:
+    case DesignGraphElements.HAND:
       return "set-tool-hand";
-    case NLJ.SCALE:
+    case DesignGraphElements.SCALE:
       return "set-tool-scale";
-    case NLJ.LASSO:
+    case DesignGraphElements.LASSO:
       return "set-tool-lasso";
-    case NLJ.MULTISELECT:
+    case DesignGraphElements.MULTISELECT:
       return "set-tool-multiselect";
-    case NLJ.COMMENTS:
+    case DesignGraphElements.COMMENTS:
       return "set-tool-comments";
-    case NLJ.FRAME:
+    case DesignGraphElements.FRAME:
       return "set-tool-frame";
-    case NLJ.SLICE:
+    case DesignGraphElements.SLICE:
       return "set-tool-slice";
-    case NLJ.SHAPE_STAR:
+    case DesignGraphElements.SHAPE_STAR:
       return "set-tool-star";
-    case NLJ.SHAPE_LINE:
+    case DesignGraphElements.SHAPE_LINE:
       return "set-tool-line";
-    case NLJ.SHAPE_ARROW:
+    case DesignGraphElements.SHAPE_ARROW:
       return "set-tool-arrow";
-    case NLJ.SHAPE_ELLIPSE:
+    case DesignGraphElements.SHAPE_ELLIPSE:
       return "set-tool-ellipse";
-    case NLJ.SHAPE_RECTANGLE:
+    case DesignGraphElements.SHAPE_RECTANGLE:
       return "set-tool-rectangle";
-    case NLJ.SHAPE_REGULAR_POLYGON:
+    case DesignGraphElements.SHAPE_REGULAR_POLYGON:
       return "set-tool-regular-polygon";
-    case NLJ.VECTOR_PEN:
+    case DesignGraphElements.VECTOR_PEN:
       return "set-tool-pen";
-    case NLJ.VECTOR_PENCIL:
+    case DesignGraphElements.VECTOR_PENCIL:
       return "set-tool-pencil";
-    case NLJ.BRUSH:
+    case DesignGraphElements.BRUSH:
       return "set-tool-brush";
-    case NLJ.ERASER:
+    case DesignGraphElements.ERASER:
       return "set-tool-eraser";
-    case NLJ.HIGHLIGHTER:
+    case DesignGraphElements.HIGHLIGHTER:
       return "set-tool-highlighter";
-    case NLJ.VECTOR_BEND:
+    case DesignGraphElements.VECTOR_BEND:
       return "set-tool-bend";
-    case NLJ.VECTOR_CUT:
+    case DesignGraphElements.VECTOR_CUT:
       return "set-tool-cut";
-    case NLJ.OFFSET_PATH:
+    case DesignGraphElements.OFFSET_PATH:
       return "set-tool-offset-path";
-    case NLJ.VECTOR_LASSO:
+    case DesignGraphElements.VECTOR_LASSO:
       return "set-tool-vector-lasso";
-    case NLJ.VECTOR_PAINT_BUCKET:
+    case DesignGraphElements.VECTOR_PAINT_BUCKET:
       return "set-tool-paint-bucket";
-    case NLJ.VECTOR_VAR_WIDTH_POINT:
+    case DesignGraphElements.VECTOR_VAR_WIDTH_POINT:
       return "set-tool-var-width-point";
-    case NLJ.SHAPE_BUILDER:
+    case DesignGraphElements.SHAPE_BUILDER:
       return "set-tool-shape-builder";
-    case NLJ.SIMPLIFY_VECTOR:
+    case DesignGraphElements.SIMPLIFY_VECTOR:
       return "set-tool-simplify-vector";
-    case NLJ.TYPE:
+    case DesignGraphElements.TYPE:
       return "set-tool-type";
-    case NLJ.IMAGE_OR_VIDEO:
+    case DesignGraphElements.IMAGE_OR_VIDEO:
       return "place";
-    case NLJ.STICKY:
+    case DesignGraphElements.STICKY:
       return "set-tool-sticky";
-    case NLJ.STAMP:
+    case DesignGraphElements.STAMP:
       return "set-tool-stamp";
-    case NLJ.SECTION:
+    case DesignGraphElements.SECTION:
       return "set-tool-section";
-    case NLJ.TABLE:
+    case DesignGraphElements.TABLE:
       return "set-tool-table";
-    case NLJ.CONNECTOR_ELBOWED:
+    case DesignGraphElements.CONNECTOR_ELBOWED:
       return "set-tool-connector-elbowed";
-    case NLJ.CONNECTOR_STRAIGHT:
+    case DesignGraphElements.CONNECTOR_STRAIGHT:
       return "set-tool-connector-straight";
-    case NLJ.CONNECTOR_CURVED:
+    case DesignGraphElements.CONNECTOR_CURVED:
       return "set-tool-connector-curved";
-    case NLJ.CODE_BLOCK:
+    case DesignGraphElements.CODE_BLOCK:
       return "set-tool-code-block";
-    case NLJ.WASHI_TAPE:
+    case DesignGraphElements.WASHI_TAPE:
       return "set-tool-washi-tape";
-    case NLJ.SHAPE_WHITEBOARD_SQUARE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SQUARE:
       return "set-tool-shape-whiteboard-square";
-    case NLJ.SHAPE_WHITEBOARD_ELLIPSE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ELLIPSE:
       return "set-tool-shape-whiteboard-ellipse";
-    case NLJ.SHAPE_WHITEBOARD_DIAMOND:
+    case DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND:
       return "set-tool-shape-whiteboard-diamond";
-    case NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP:
+    case DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_UP:
       return "set-tool-shape-whiteboard-triangle-up";
-    case NLJ.SHAPE_WHITEBOARD_TRIANGLE_DOWN:
+    case DesignGraphElements.SHAPE_WHITEBOARD_TRIANGLE_DOWN:
       return "set-tool-shape-whiteboard-triangle-down";
-    case NLJ.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ROUNDED_RECTANGLE:
       return "set-tool-shape-whiteboard-rounded-rectangle";
-    case NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_RIGHT:
       return "set-tool-shape-whiteboard-parallelogram-right";
-    case NLJ.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PARALLELOGRAM_LEFT:
       return "set-tool-shape-whiteboard-parallelogram-left";
-    case NLJ.SHAPE_WHITEBOARD_ENG_DATABASE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_DATABASE:
       return "set-tool-shape-whiteboard-eng-database";
-    case NLJ.SHAPE_WHITEBOARD_ENG_QUEUE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_QUEUE:
       return "set-tool-shape-whiteboard-eng-queue";
-    case NLJ.SHAPE_WHITEBOARD_ENG_FILE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_FILE:
       return "set-tool-shape-whiteboard-eng-file";
-    case NLJ.SHAPE_WHITEBOARD_ENG_FOLDER:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ENG_FOLDER:
       return "set-tool-shape-whiteboard-eng-folder";
-    case NLJ.SHAPE_WHITEBOARD_TRAPEZOID:
+    case DesignGraphElements.SHAPE_WHITEBOARD_TRAPEZOID:
       return "set-tool-shape-whiteboard-trapezoid";
-    case NLJ.SHAPE_WHITEBOARD_STAR:
+    case DesignGraphElements.SHAPE_WHITEBOARD_STAR:
       return "set-tool-shape-whiteboard-star";
-    case NLJ.SHAPE_WHITEBOARD_SHIELD:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SHIELD:
       return "set-tool-shape-whiteboard-shield";
-    case NLJ.SHAPE_WHITEBOARD_HEXAGON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_HEXAGON:
       return "set-tool-shape-whiteboard-hexagon";
-    case NLJ.SHAPE_WHITEBOARD_PENTAGON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PENTAGON:
       return "set-tool-shape-whiteboard-pentagon";
-    case NLJ.SHAPE_WHITEBOARD_OCTAGON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_OCTAGON:
       return "set-tool-shape-whiteboard-octagon";
-    case NLJ.SHAPE_WHITEBOARD_PLUS:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PLUS:
       return "set-tool-shape-whiteboard-plus";
-    case NLJ.SHAPE_WHITEBOARD_PREDEFINED_PROCESS:
+    case DesignGraphElements.SHAPE_WHITEBOARD_PREDEFINED_PROCESS:
       return "set-tool-shape-whiteboard-predefined-process";
-    case NLJ.SHAPE_WHITEBOARD_MANUAL_INPUT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_MANUAL_INPUT:
       return "set-tool-shape-whiteboard-manual-input";
-    case NLJ.SHAPE_WHITEBOARD_CHEVRON:
+    case DesignGraphElements.SHAPE_WHITEBOARD_CHEVRON:
       return "set-tool-shape-whiteboard-chevron";
-    case NLJ.SHAPE_WHITEBOARD_DOCUMENT_SINGLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_SINGLE:
       return "set-tool-shape-whiteboard-document-single";
-    case NLJ.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_DOCUMENT_MULTIPLE:
       return "set-tool-shape-whiteboard-document-multiple";
-    case NLJ.SHAPE_WHITEBOARD_ARROW_LEFT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT:
       return "set-tool-shape-whiteboard-arrow-left";
-    case NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT:
+    case DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT:
       return "set-tool-shape-whiteboard-arrow-right";
-    case NLJ.SHAPE_WHITEBOARD_SUMMING_JUNCTION:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SUMMING_JUNCTION:
       return "set-tool-shape-whiteboard-summing-junction";
-    case NLJ.SHAPE_WHITEBOARD_OR:
+    case DesignGraphElements.SHAPE_WHITEBOARD_OR:
       return "set-tool-shape-whiteboard-or";
-    case NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE:
       return "set-tool-shape-whiteboard-speech-bubble";
-    case NLJ.SHAPE_WHITEBOARD_INTERNAL_STORAGE:
+    case DesignGraphElements.SHAPE_WHITEBOARD_INTERNAL_STORAGE:
       return "set-tool-shape-whiteboard-internal-storage";
-    case NLJ.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS:
+    case DesignGraphElements.SHAPE_WHITEBOARD_MINDMAP_TREE_NUCLEUS:
       return "set-tool-mindmap-tree-nucleus";
-    case NLJ.ANNOTATE:
+    case DesignGraphElements.ANNOTATE:
       return "set-tool-annotate";
-    case NLJ.MEASURE:
+    case DesignGraphElements.MEASURE:
       return "set-tool-measure";
-    case NLJ.DROPPER_COLOR:
+    case DesignGraphElements.DROPPER_COLOR:
       return "toggle-dropper";
-    case NLJ.SLIDES_POLL:
+    case DesignGraphElements.SLIDES_POLL:
       return "set-tool-slides-poll";
-    case NLJ.SLIDES_EMBED:
+    case DesignGraphElements.SLIDES_EMBED:
       return "set-tool-slides-embed";
-    case NLJ.SLIDES_FACEPILE:
+    case DesignGraphElements.SLIDES_FACEPILE:
       return "set-tool-slides-facepile";
-    case NLJ.SLIDES_ALIGNMENT_SCALE:
+    case DesignGraphElements.SLIDES_ALIGNMENT_SCALE:
       return "set-tool-slides-alignment-scale";
-    case NLJ.SLIDES_YOUTUBE:
+    case DesignGraphElements.SLIDES_YOUTUBE:
       return "set-tool-slides-youtube";
-    case NLJ.SLIDE_NUMBER:
+    case DesignGraphElements.SLIDE_NUMBER:
       return "set-tool-slide-number";
-    case NLJ.SITES_RESPONSIVE_SET:
+    case DesignGraphElements.SITES_RESPONSIVE_SET:
       return "set-tool-sites-responsive-set";
-    case NLJ.SITES_WEBPAGE:
+    case DesignGraphElements.SITES_WEBPAGE:
       return "set-tool-sites-webpage";
-    case NLJ.SITES_RESPONSIVE_NODE_SET:
+    case DesignGraphElements.SITES_RESPONSIVE_NODE_SET:
       return "set-tool-sites-responsive-node-set";
-    case NLJ.SITES_LINK:
+    case DesignGraphElements.SITES_LINK:
       return "set-tool-sites-link";
-    case NLJ.CODE_COMPONENT:
+    case DesignGraphElements.CODE_COMPONENT:
       return "set-tool-code-component";
-    case NLJ.SITES_EMBED:
+    case DesignGraphElements.SITES_EMBED:
       return "set-tool-sites-embed";
-    case NLJ.JSX:
+    case DesignGraphElements.JSX:
       return "set-tool-jsx";
     default:
       console.warn("Unsupported tool", e);

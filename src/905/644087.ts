@@ -1,24 +1,24 @@
-import { rVj } from "../figma_app/763686";
+import { PageType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { _i, U8, E8 } from "../figma_app/800999";
 export let $$s0 = new class {
   getDisplayStringFromKeyTrigger(e, t) {
     let i;
     let s = _i(t);
-    if (e === rVj.KEYBOARD) return s ? getI18nString("proto.interaction.type.key_specific", {
+    if (e === PageType.KEYBOARD) return s ? getI18nString("proto.interaction.type.key_specific", {
       key_combo: U8(s)
     }) : getI18nString("proto.interaction.type.key_gamepad");
     switch (e) {
-      case rVj.XBOX_ONE:
+      case PageType.XBOX_ONE:
         i = "XBOX_ONE";
         break;
-      case rVj.PS4:
+      case PageType.PS4:
         i = "PS4";
         break;
-      case rVj.SWITCH_PRO:
+      case PageType.SWITCH_PRO:
         i = "SWITCH_PRO";
         break;
-      case rVj.UNKNOWN_CONTROLLER:
+      case PageType.UNKNOWN_CONTROLLER:
       default:
         i = "UNKNOWN_CONTROLLER";
     }

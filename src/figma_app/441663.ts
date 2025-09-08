@@ -4,9 +4,9 @@ import { getI18nString } from "../905/303541";
 import { AC } from "../figma_app/777551";
 import { et, zn } from "../figma_app/559491";
 import { m3 } from "../figma_app/45218";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { yX } from "../figma_app/918700";
-export let $$u0 = Ju(function ({
+export let $$u0 = registerModal(function ({
   plugin: e
 }) {
   let t;
@@ -48,5 +48,5 @@ export let $$u0 = Ju(function ({
     enableEscapeToClose: !0,
     popStack: !0
   });
-}, "UnpublishPluginModal", ZU.YES);
+}, "UnpublishPluginModal", ModalSupportsBackground.YES);
 export const H = $$u0;

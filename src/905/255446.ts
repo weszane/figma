@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { o5, IA } from "../905/859698";
-import { glU, Vzr, BXd, ZiZ } from "../figma_app/763686";
+import { Fullscreen, Thumbnail, LibraryPubSub, SceneIdentifier } from "../figma_app/763686";
 import { v as _$$v } from "../905/439972";
 import { getSingletonSceneGraph } from "../905/700578";
 import { q } from "../905/196201";
@@ -127,7 +127,7 @@ export function $$F1(e) {
       noPanViewportMultiplier: 1,
       panJustEnoughViewportMultiplier: 1.5
     }))?.then(() => {
-      glU.selectInstances(getSingletonSceneGraph().guidFromDeveloperFriendlyId(v.instanceId), !1);
+      Fullscreen.selectInstances(getSingletonSceneGraph().guidFromDeveloperFriendlyId(v.instanceId), !1);
     });
   }, [v, t]);
   let k = useSelector(e => {
@@ -154,8 +154,8 @@ export function $$F1(e) {
 }
 export function $$M8(e, t, i, a, o) {
   let l = eY();
-  let c = useMemo(() => !!t && V(a, glU.getBackingAssetRef(t.instanceId)), [a, t, l]);
-  let p = useMemo(() => !!o && o.instanceIdsToUpdate.map(glU.getBackingAssetRef).every(e => V(a, e)), [a, o, l]);
+  let c = useMemo(() => !!t && V(a, Fullscreen.getBackingAssetRef(t.instanceId)), [a, t, l]);
+  let p = useMemo(() => !!o && o.instanceIdsToUpdate.map(Fullscreen.getBackingAssetRef).every(e => V(a, e)), [a, o, l]);
   let m = useRef(new q(100));
   let h = function (e) {
     let t = useDispatch();
@@ -222,7 +222,7 @@ export function $$j2(e) {
     let y = Oo(e, g);
     let b = useMemo(() => {
       if (null == t || "" === t) return Ok();
-      let [e, i] = Vzr.generateThumbnailForNode(t, 0, 0, 2, {
+      let [e, i] = Thumbnail.generateThumbnailForNode(t, 0, 0, 2, {
         scale: 2,
         type: "UNCOMPRESSED",
         clearColor: c
@@ -253,8 +253,8 @@ export function $$j2(e) {
       beforeImage: b,
       afterImage: useMemo(() => {
         if (v.status !== _$$r.SUCCESS) return v;
-        let t = y ? e.node_id : BXd.getOrCreateSubscribedStyleNodeId(e.key, e.content_hash ?? IA.INVALID, e.library_key, v.value, ZiZ.ACTIVE_SCENE)?.localGUID ?? "";
-        let [i, n] = Vzr.generateThumbnailForNode(t, 0, 0, 2, {
+        let t = y ? e.node_id : LibraryPubSub.getOrCreateSubscribedStyleNodeId(e.key, e.content_hash ?? IA.INVALID, e.library_key, v.value, SceneIdentifier.ACTIVE_SCENE)?.localGUID ?? "";
+        let [i, n] = Thumbnail.generateThumbnailForNode(t, 0, 0, 2, {
           type: "UNCOMPRESSED",
           clearColor: c,
           scale: 2
@@ -309,7 +309,7 @@ function U(e, t, i, a) {
       let {
         beforeThumbnail,
         afterThumbnail
-      } = e.type === PW.COMPONENT && null != e.component_key ? glU.generateComponentUpdateInstanceThumbnails(t.instanceId, e.component_key, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, l, 2, i.value) : e.type === PW.STATE_GROUP && null != e.key ? glU.generateStateUpdateInstanceThumbnails(t.instanceId, e.key, e.newStateKeyToOutdatedItems, l, 2, i.value) : {
+      } = e.type === PW.COMPONENT && null != e.component_key ? Fullscreen.generateComponentUpdateInstanceThumbnails(t.instanceId, e.component_key, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, l, 2, i.value) : e.type === PW.STATE_GROUP && null != e.key ? Fullscreen.generateStateUpdateInstanceThumbnails(t.instanceId, e.key, e.newStateKeyToOutdatedItems, l, 2, i.value) : {
         beforeThumbnail: void 0,
         afterThumbnail: void 0
       };

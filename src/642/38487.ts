@@ -3,7 +3,7 @@ import { PureComponent, memo, useRef, useCallback, useMemo, useState, useContext
 import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { R as _$$R } from "../905/256203";
-import { uQ6, Egt } from "../figma_app/763686";
+import { ActionType, SceneGraphHelpers } from "../figma_app/763686";
 import { MT } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -29,7 +29,7 @@ import { o3 } from "../figma_app/852050";
 import { QZ } from "../figma_app/62612";
 import { pr } from "../figma_app/952446";
 import { y0 } from "../figma_app/718307";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { F as _$$F } from "../905/258517";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
@@ -225,7 +225,7 @@ function ex({
     className: J0,
     onClick: () => {
       Br({
-        source: uQ6.LAYERS_PANEL_ACTION_ROW,
+        source: ActionType.LAYERS_PANEL_ACTION_ROW,
         trackingDataSource: "layers_panel_action_row"
       });
     },
@@ -239,7 +239,7 @@ function eb({
   isWebpage: t
 }) {
   let s = cJ();
-  let n = J2(UK().showSemanticTagsOnLayerRows);
+  let n = getObservableOrFallback(UK().showSemanticTagsOnLayerRows);
   let i = Fk((e, s) => {
     let r = e.get(s);
     if (!r) return {
@@ -335,7 +335,7 @@ export function $$eI2(e) {
   if (t && e.isWebpage && e.isDefaultResponsiveSet ? r = getI18nString("sites.panel.home") : s && "SLIDE" === e.nodeType && (r = getI18nString("slides.layers_panel.slide_number", {
     orderNum: e.name
   })), e.shouldShowGuids) {
-    let t = Egt.getOverridePathForNode(e.guid);
+    let t = SceneGraphHelpers.getOverridePathForNode(e.guid);
     return `${r} (${e.guid}): [${t}]`;
   }
   return r;
@@ -580,12 +580,12 @@ let eA = memo(function (e) {
   let eO = parsePxNumber(scrollBarYWidth) + parsePxNumber(trackPadding);
   let eD = void 0 !== e.panelWidth && eR + eO > e.panelWidth + e.scrollLeft;
   let eF = 0 === e.level;
-  let eB = A0(uQ6.LAYERS_PANEL_ACTION_ROW);
+  let eB = A0(ActionType.LAYERS_PANEL_ACTION_ROW);
   let eK = getSingletonSceneGraph().get(e.guid);
   let eG = eB && eF && X && eK && sq(eK);
   let eH = "REACT_FIBER" !== e.nodeType && "SLIDE" !== e.nodeType;
   let eV = useAtomWithSubscription(r8(e.guid))?.state === "pending";
-  let eU = J2(UK().showSemanticTagsOnLayerRows);
+  let eU = getObservableOrFallback(UK().showSemanticTagsOnLayerRows);
   let ez = !X && getFeatureFlags().sts_a11y_layers_semantic_tags && eU;
   let eW = eF ? topLevelObjectRowHeight : nestedObjectRowHeight;
   let e$ = eF ? topLevelIconSize : nestedIconSize;

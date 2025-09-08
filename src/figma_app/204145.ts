@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { V3 } from "../figma_app/976345";
 import { K } from "../905/621769";
 import { sf } from "../905/929976";
@@ -48,7 +48,7 @@ export function $$f1({
       e && T(V3({
         url: e
       }));
-    } else glU.goToSymbolOrStateGroupById(N, !0);
+    } else Fullscreen.goToSymbolOrStateGroupById(N, !0);
   } : null;
 }
 export function $$E2() {

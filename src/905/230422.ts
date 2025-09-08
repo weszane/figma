@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Component, createRef } from "react";
 import { debounce } from "../905/915765";
-import { vs, u9, En, AS } from "../figma_app/661371";
+import { DEFAULT_PAGE_SIZE, hasMorePages, fetchPaginatedData, PAGINATION_NEXT } from "../figma_app/661371";
 import { isMobileUA } from "../figma_app/778880";
 import { kt } from "../figma_app/858013";
 import { s as _$$s2 } from "../905/573154";
@@ -9,7 +9,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { fu } from "../figma_app/831799";
 import { g3 } from "../figma_app/707808";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { o as _$$o } from "../905/451156";
 import { W } from "../905/316655";
@@ -159,7 +159,7 @@ class S extends Component {
     this.getFollowsListHeightStyle = e => {
       let t = isMobileUA ? window.innerHeight : window.innerHeight - 128 - 48;
       return {
-        height: Math.min(Math.max(80 * Math.min(e === g3.FOLLOWERS ? this.props.profile.follower_count : this.props.profile.following_count, vs), 328), t)
+        height: Math.min(Math.max(80 * Math.min(e === g3.FOLLOWERS ? this.props.profile.follower_count : this.props.profile.following_count, DEFAULT_PAGE_SIZE), 328), t)
       };
     };
     this.renderTabs = () => {
@@ -274,7 +274,7 @@ class S extends Component {
     e.currentSelectedView.profileTab !== this.props.currentSelectedView.profileTab && this.fetchNextFollows();
   }
   async fetchFollowers() {
-    if (u9(this.state.followerState)) {
+    if (hasMorePages(this.state.followerState)) {
       this.setState({
         followerState: {
           ...this.state.followerState,
@@ -283,7 +283,7 @@ class S extends Component {
         didFetchFail: !1
       });
       try {
-        let e = await En(`/api/followers/${this.props.profile.id}`, vs, this.state.followerState, AS);
+        let e = await fetchPaginatedData(`/api/followers/${this.props.profile.id}`, DEFAULT_PAGE_SIZE, this.state.followerState, PAGINATION_NEXT);
         this.setState({
           followerState: {
             followers: [...this.state.followerState.followers, ...e.followers],
@@ -298,7 +298,7 @@ class S extends Component {
     }
   }
   async fetchFollowing() {
-    if (u9(this.state.followingState)) {
+    if (hasMorePages(this.state.followingState)) {
       this.setState({
         followingState: {
           ...this.state.followingState,
@@ -307,7 +307,7 @@ class S extends Component {
         didFetchFail: !1
       });
       try {
-        let e = await En(`/api/following/${this.props.profile.id}`, vs, this.state.followingState, AS);
+        let e = await fetchPaginatedData(`/api/following/${this.props.profile.id}`, DEFAULT_PAGE_SIZE, this.state.followingState, PAGINATION_NEXT);
         this.setState({
           followingState: {
             following: [...this.state.followingState.following, ...e.following],
@@ -334,5 +334,5 @@ class S extends Component {
   }
 }
 S.displayName = "FollowsListModal";
-export let $$$$w0 = Ju(S, "FollowsListModal");
+export let $$$$w0 = registerModal(S, "FollowsListModal");
 export const w = $$$$w0;

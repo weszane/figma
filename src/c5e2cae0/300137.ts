@@ -12,7 +12,7 @@ import { fu, tf } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
 import { Cn } from "../c5e2cae0/453906";
 import { iZ } from "../905/372672";
-import { tY } from "../figma_app/831101";
+import { SubscriptionType } from "../figma_app/831101";
 let g = M4.Query({
   fetch: async () => (await Cn.maintenancePoc1()).data.meta
 });
@@ -34,7 +34,7 @@ export function $$v0(e) {
   });
 }
 function y({
-  billingPeriod: e = tY.ANNUAL,
+  billingPeriod: e = SubscriptionType.ANNUAL,
   isProCart: t,
   isReviewPage: a,
   isCampfireCart: h
@@ -89,7 +89,7 @@ function j(e) {
   let a = new Date();
   a.setFullYear(2025);
   a.getDate() >= 11 ? a.setMonth(2) : a.setMonth(3);
-  return A(e === tY.ANNUAL ? t : a).format("MMMM D, YYYY");
+  return A(e === SubscriptionType.ANNUAL ? t : a).format("MMMM D, YYYY");
 }
 let S = tf(function ({
   onClick: e,

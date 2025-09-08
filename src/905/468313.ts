@@ -5,15 +5,15 @@ import { E as _$$E } from "../905/632989";
 import { K } from "../905/443068";
 import { U as _$$U } from "../905/708285";
 import { RR } from "../figma_app/338442";
-import { Z_n, rcl, rXF, j0r } from "../figma_app/763686";
+import { VariableDataType, Command, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { X } from "../905/606795";
 import { Uz } from "../905/63728";
 import { rf, Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { X as _$$X } from "../905/190511";
 import { sD } from "../905/937198";
-import { Y5 } from "../figma_app/455680";
-import { hS, gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Sh } from "../figma_app/889655";
 import { zk } from "../figma_app/198712";
@@ -60,11 +60,11 @@ let M = memo(function ({
   let S = u3(["TEXT_DATA"]);
   let w = u3(["CMS_SERIALIZED_RICH_TEXT_DATA"]);
   let C = S.consumedVariable || w.consumedVariable;
-  let T = C && hS(C) && C.type === Z_n.CMS_ALIAS;
+  let T = C && isValidValue(C) && C.type === VariableDataType.CMS_ALIAS;
   let M = T ? C.value.fieldSchemaId : void 0;
   let j = w.consumedVariable ? _j.RICH_TEXT : _j.PLAIN_TEXT;
   let U = useCallback(() => {
-    T ? Y5.triggerActionEnumInUserEditScope(rcl.UNBIND_SELECTION, {
+    T ? fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
       fieldSchemaId: M,
       fieldType: j,
       removeBoundData: !1
@@ -74,13 +74,13 @@ let M = memo(function ({
   if (!s) return null;
   a = T ? Xx(C.resolvedType) ?? void 0 : "MIXED" !== x ? x : void 0;
   let V = onExpressionSubmitted ? jsx(y3, {
-    targetVariableData: C && !gl(C) ? C : void 0,
+    targetVariableData: C && !isInvalidValue(C) ? C : void 0,
     onClick: B,
     isNarrowPanel: !0,
     isInCell: !1,
     showVariableThumbnails: !0,
     isInConditional: !1,
-    isMixed: gl(C)
+    isMixed: isInvalidValue(C)
   }) : jsx("button", {
     className: "text_content_variable_pill--variablePill--NNm9-",
     onClick: B,
@@ -174,7 +174,7 @@ export function $$K0({
           tooltip: function ({
             boundVariable: e
           }) {
-            return t && e?.resolvedType === rXF.STRING ? getI18nString("variables.binding_ui.missing_font_style") : null;
+            return t && e?.resolvedType === VariableResolvedDataType.STRING ? getI18nString("variables.binding_ui.missing_font_style") : null;
           }({
             boundVariable: s
           }) ?? void 0,
@@ -273,7 +273,7 @@ function $({
   });
   let u = jsxs(Fragment, {
     children: [jsx(V5, {
-      variableScope: j0r.TEXT_CONTENT
+      variableScope: PropertyScope.TEXT_CONTENT
     }), jsx(_$$K, {
       recordingKey: Pt(e, "assignTextContent"),
       tooltip: l,
@@ -304,7 +304,7 @@ function Z({
     }
   } = X({
     onFocus: () => {
-      gl(e) ? s("") : s(e);
+      isInvalidValue(e) ? s("") : s(e);
     },
     onChange: e => s(e.currentTarget.value)
   });
@@ -313,11 +313,11 @@ function Z({
       e?.textarea && (inputRef.current = e.textarea);
     },
     className: Dp,
-    disableInput: i && gl(e),
+    disableInput: i && isInvalidValue(e),
     onBlur: function () {
-      a && (Y5.updateSelectionProperties({
+      a && (fullscreenValue.updateSelectionProperties({
         textContent: a
-      }), Y5.commit());
+      }), fullscreenValue.commit());
       s(null);
     },
     onChange,
@@ -339,7 +339,7 @@ export function $$X4({
 }) {
   let s = useContext(_$$p);
   let o = useSelector(e => UT(e) ?? "");
-  let l = gl(o) ? getI18nString("fullscreen.mixed") : o;
+  let l = isInvalidValue(o) ? getI18nString("fullscreen.mixed") : o;
   return jsx(YW, {
     className: gb,
     svg: $$default,

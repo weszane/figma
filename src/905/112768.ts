@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { $ } from "../905/411599";
 import { X } from "../905/647103";
-import { ruz, Egt, glU } from "../figma_app/763686";
+import { ImageToolsBindings, SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { B } from "../905/969273";
@@ -56,7 +56,7 @@ function T(e, t) {
   return e instanceof PE ? [{
     type: _$$f.BOOST_ANYWAY,
     callback: () => {
-      let e = ruz?.getNodeImagePairsForEdit() ?? [];
+      let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
       Ag(JT.UPSCALE_IMAGE, sj, {
         source: t,
         targets: e
@@ -77,7 +77,7 @@ function k({
   getErrorViewButtons: h
 }) {
   let g = KH();
-  let x = useMemo(() => !!g && (ruz?.getNodeImagePairsForEdit().length ?? 0) > 1, [g]);
+  let x = useMemo(() => !!g && (ImageToolsBindings?.getNodeImagePairsForEdit().length ?? 0) > 1, [g]);
   let {
     close
   } = cq();
@@ -90,7 +90,7 @@ function k({
   } = w;
   let k = gg(state);
   let R = useCallback(() => {
-    let e = ruz?.getNodeImagePairsForEdit().length ?? 0;
+    let e = ImageToolsBindings?.getNodeImagePairsForEdit().length ?? 0;
     return getFeatureFlags().aip_batch_image_modify ? e > 25 ? renderI18nText("image_ai.image_modification.max_images", {
       max: 25
     }) : renderI18nText("image_ai.image_modification.instruction") : e > 1 ? renderI18nText("image_ai.background_remove.only_one_image") : renderI18nText("image_ai.background_remove.instruction");
@@ -101,7 +101,7 @@ function k({
     actionLabel: a,
     onPerform: () => w.start({
       source: s,
-      targets: ruz?.getNodeImagePairsForEdit() ?? []
+      targets: ImageToolsBindings?.getNodeImagePairsForEdit() ?? []
     }),
     aiTrackingContext,
     instructionAction: {
@@ -129,7 +129,7 @@ function k({
       let l = [{
         type: _$$f.SELECT,
         callback: () => {
-          Egt?.replaceSelection(t.map(e => e.guid), !0);
+          SceneGraphHelpers?.replaceSelection(t.map(e => e.guid), !0);
         }
       }];
       return jsx(_$$E, {
@@ -152,7 +152,7 @@ function k({
       iterateOptions: [{
         type: is.UNDO,
         callback: () => {
-          glU.triggerActionInUserEditScope("undo", {});
+          Fullscreen.triggerActionInUserEditScope("undo", {});
           close();
         }
       }],

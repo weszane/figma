@@ -6,13 +6,13 @@ import { $ } from "../905/953280";
 import { y as _$$y } from "../905/582657";
 import { o as _$$o } from "../905/530496";
 import { V } from "../905/735518";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { RR } from "../figma_app/338442";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { rT, dT } from "../figma_app/889655";
 import { Xn } from "../905/429125";
 import { Fv } from "../figma_app/164212";
@@ -48,7 +48,7 @@ let P = () => {
       e.push({
         type: ZU.CUSTOM_ACTION,
         customActionType: Wg.STANDARD_BUTTON,
-        onClick: () => l7.user("reset-prop-assignments", () => glU.resetComponentPropAssignmentForInstances(a.instanceGUIDs, i)),
+        onClick: () => permissionScopeHandler.user("reset-prop-assignments", () => Fullscreen.resetComponentPropAssignmentForInstances(a.instanceGUIDs, i)),
         icon: jsx($, {}),
         getTitle: () => getI18nString("design_systems.instance_panel.reset_property_assignment", {
           assignmentName: a.name
@@ -72,7 +72,7 @@ export function $$k0() {
     getTitle: () => getI18nString("design_systems.instance_panel.restore_variant"),
     recordingKey: "restoreVariant",
     icon: jsx(_$$y, {}),
-    onClick: () => Y5.triggerActionInUserEditScope("restore-symbol-or-state-group")
+    onClick: () => fullscreenValue.triggerActionInUserEditScope("restore-symbol-or-state-group")
   };
 }
 function M(e) {

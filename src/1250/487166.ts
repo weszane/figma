@@ -10,7 +10,7 @@ import { I7 } from "../figma_app/594947";
 import { oW } from "../905/675859";
 import { rX, vz, Q5, sJ } from "../9864/183809";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
@@ -64,7 +64,7 @@ function O(e) {
       label: renderI18nText("es_es_announcement.cta_button"),
       type: "button",
       onClick: () => {
-        t(to({
+        t(showModalHandler({
           type: kA,
           data: {
             source: IO.ANNOUNCEMENT_MODAL

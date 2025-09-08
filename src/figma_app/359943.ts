@@ -6,8 +6,8 @@ import { Y9, JU } from "../figma_app/322555";
 import { E as _$$E } from "../905/632989";
 import { K as _$$K } from "../905/443068";
 import c, { F as _$$F } from "../905/172964";
-import { EYD, Ez5, glU, btW, X3B, V$M } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { DeviceType, AppStateTsApi, Fullscreen, SideType, PrototypingTsApi, ContainerType } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { Pt, o6 } from "../figma_app/806412";
@@ -19,10 +19,10 @@ import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../figma_app/91703";
 import { sE, EZ, fS } from "../figma_app/681244";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
-import { hS, oV } from "../905/216495";
-import { ut } from "../figma_app/84367";
+import { isValidValue, MIXED_MARKER } from "../905/216495";
+import { getObservableValue } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { Q as _$$Q } from "../905/346809";
 import { v as _$$v } from "../905/694527";
@@ -204,58 +204,58 @@ function el() {
 }
 let ep = () => [{
   name: getI18nString("proto.frame_preset_panel.phone"),
-  type: EYD.PHONE,
+  type: DeviceType.PHONE,
   headerRecordingKey: "phoneToggle",
   listRecordingKey: "phoneRows",
   presetList: sE.phonePresets
 }, {
   name: getI18nString("proto.frame_preset_panel.tablet"),
-  type: EYD.TABLET,
+  type: DeviceType.TABLET,
   headerRecordingKey: "tabletToggle",
   listRecordingKey: "tabletRows",
   presetList: sE.tabletPresets
 }, {
   name: getI18nString("proto.frame_preset_panel.desktop"),
-  type: EYD.DESKTOP,
+  type: DeviceType.DESKTOP,
   headerRecordingKey: "desktopToggle",
   listRecordingKey: "desktopRows",
   presetList: sE.desktopPresets,
   children: jsx(es, {})
 }, {
   name: getI18nString("proto.frame_preset_panel.presentation"),
-  type: EYD.PRESENTATION,
+  type: DeviceType.PRESENTATION,
   headerRecordingKey: "presentationToggle",
   listRecordingKey: "presentationRows",
   presetList: sE.presentationPresets,
   children: jsx(el, {})
 }, {
   name: getI18nString("proto.frame_preset_panel.watch"),
-  type: EYD.WATCH,
+  type: DeviceType.WATCH,
   headerRecordingKey: "watchToggle",
   listRecordingKey: "watchRows",
   presetList: sE.watchPresets
 }, {
   name: getI18nString("proto.frame_preset_panel.paper"),
-  type: EYD.PAPER,
+  type: DeviceType.PAPER,
   headerRecordingKey: "paperToggle",
   listRecordingKey: "paperRows",
   presetList: sE.paperPresets
 }, {
   name: getI18nString("proto.frame_preset_panel.social_media"),
-  type: EYD.SOCIALMEDIA,
+  type: DeviceType.SOCIALMEDIA,
   headerRecordingKey: "socialMediaToggle",
   listRecordingKey: "socialMediaRows",
   presetList: sE.socialMediaPresets,
   children: jsx(ei, {})
 }, {
   name: getI18nString("proto.frame_preset_panel.figma_community"),
-  type: EYD.FIGMA,
+  type: DeviceType.FIGMA,
   headerRecordingKey: "figmaToggle",
   listRecordingKey: "figmaRows",
   presetList: sE.figmaPresets
 }, {
   name: getI18nString("proto.frame_preset_panel.archive"),
-  type: EYD.ARCHIVE,
+  type: DeviceType.ARCHIVE,
   headerRecordingKey: "archiveToggle",
   listRecordingKey: "archiveRows",
   presetList: sE.archivedPresets
@@ -264,15 +264,15 @@ export function $$e_2({
   recordingKey: e
 }) {
   let t = useDispatch();
-  let r = ut(UK().expandedFramePresetType, EYD.NONE);
+  let r = getObservableValue(UK().expandedFramePresetType, DeviceType.NONE);
   let l = useCallback(e => {
-    r === e && (e = EYD.NONE);
-    Ez5 ? Ez5.editorPreferences().expandedFramePresetType.set(e) : logWarning("properties_panel", "failed to update user preference for frame presets types, AppStateTsApi is not available");
+    r === e && (e = DeviceType.NONE);
+    AppStateTsApi ? AppStateTsApi.editorPreferences().expandedFramePresetType.set(e) : logWarning("properties_panel", "failed to update user preference for frame presets types, AppStateTsApi is not available");
   }, [r]);
   let d = useCallback(e => {
-    l7.user("select-frame-preset", () => {
+    permissionScopeHandler.user("select-frame-preset", () => {
       let r = `${e.name} -`;
-      glU && glU.createFrame(r, e.width, e.height, btW.RIGHT, !0);
+      Fullscreen && Fullscreen.createFrame(r, e.width, e.height, SideType.RIGHT, !0);
       t(sx({
         name: "Frame Size Preset Chosen",
         params: {
@@ -280,7 +280,7 @@ export function $$e_2({
           deviceName: e.name
         }
       }));
-      X3B && X3B.updateCurrentPagePrototypeDeviceIfNecessary();
+      PrototypingTsApi && PrototypingTsApi.updateCurrentPagePrototypeDeviceIfNecessary();
     });
   }, [t]);
   let c = useId();
@@ -360,85 +360,85 @@ let em = memo(function ({
         })
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.phone"),
-        expanded: i === EYD.PHONE,
-        onMouseDown: () => t(EYD.PHONE),
+        expanded: i === DeviceType.PHONE,
+        onMouseDown: () => t(DeviceType.PHONE),
         recordingKey: Pt(e, "phoneToggle")
-      }), i === EYD.PHONE && jsx(ef, {
+      }), i === DeviceType.PHONE && jsx(ef, {
         framePresets: sE.phonePresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "phoneRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.tablet"),
-        expanded: i === EYD.TABLET,
-        onMouseDown: () => t(EYD.TABLET),
+        expanded: i === DeviceType.TABLET,
+        onMouseDown: () => t(DeviceType.TABLET),
         recordingKey: Pt(e, "framePresetPanel", "tabletToggle")
-      }), i === EYD.TABLET && jsx(ef, {
+      }), i === DeviceType.TABLET && jsx(ef, {
         framePresets: sE.tabletPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "tabletRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.desktop"),
-        expanded: i === EYD.DESKTOP,
-        onMouseDown: () => t(EYD.DESKTOP),
+        expanded: i === DeviceType.DESKTOP,
+        onMouseDown: () => t(DeviceType.DESKTOP),
         recordingKey: Pt(e, "desktopToggle")
-      }), i === EYD.DESKTOP && jsx(ef, {
+      }), i === DeviceType.DESKTOP && jsx(ef, {
         framePresets: sE.desktopPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "desktopRows"),
         children: jsx(es, {})
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.presentation"),
-        expanded: i === EYD.PRESENTATION,
-        onMouseDown: () => t(EYD.PRESENTATION),
+        expanded: i === DeviceType.PRESENTATION,
+        onMouseDown: () => t(DeviceType.PRESENTATION),
         recordingKey: Pt(e, "presentationToggle")
-      }), i === EYD.PRESENTATION && jsx(ef, {
+      }), i === DeviceType.PRESENTATION && jsx(ef, {
         framePresets: sE.presentationPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "presentationRows"),
         children: jsx(el, {})
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.watch"),
-        expanded: i === EYD.WATCH,
-        onMouseDown: () => t(EYD.WATCH),
+        expanded: i === DeviceType.WATCH,
+        onMouseDown: () => t(DeviceType.WATCH),
         recordingKey: Pt(e, "watchToggle")
-      }), i === EYD.WATCH && jsx(ef, {
+      }), i === DeviceType.WATCH && jsx(ef, {
         framePresets: sE.watchPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "watchRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.paper"),
-        expanded: i === EYD.PAPER,
-        onMouseDown: () => t(EYD.PAPER),
+        expanded: i === DeviceType.PAPER,
+        onMouseDown: () => t(DeviceType.PAPER),
         recordingKey: Pt(e, "paperToggle")
-      }), i === EYD.PAPER && jsx(ef, {
+      }), i === DeviceType.PAPER && jsx(ef, {
         framePresets: sE.paperPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "paperRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.social_media"),
-        expanded: i === EYD.SOCIALMEDIA,
-        onMouseDown: () => t(EYD.SOCIALMEDIA),
+        expanded: i === DeviceType.SOCIALMEDIA,
+        onMouseDown: () => t(DeviceType.SOCIALMEDIA),
         recordingKey: Pt(e, "socialMediaToggle")
-      }), i === EYD.SOCIALMEDIA && jsx(ef, {
+      }), i === DeviceType.SOCIALMEDIA && jsx(ef, {
         framePresets: sE.socialMediaPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "socialMediaRows"),
         children: jsx(ei, {})
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.figma_community"),
-        expanded: i === EYD.FIGMA,
-        onMouseDown: () => t(EYD.FIGMA),
+        expanded: i === DeviceType.FIGMA,
+        onMouseDown: () => t(DeviceType.FIGMA),
         recordingKey: Pt(e, "figmaToggle")
-      }), i === EYD.FIGMA && jsx(ef, {
+      }), i === DeviceType.FIGMA && jsx(ef, {
         framePresets: sE.figmaPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "figmaRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.archive"),
-        expanded: i === EYD.ARCHIVE,
-        onMouseDown: () => t(EYD.ARCHIVE),
+        expanded: i === DeviceType.ARCHIVE,
+        onMouseDown: () => t(DeviceType.ARCHIVE),
         recordingKey: Pt(e, "archiveToggle")
-      }), i === EYD.ARCHIVE && jsx(ef, {
+      }), i === DeviceType.ARCHIVE && jsx(ef, {
         framePresets: sE.archivedPresets,
         onSelectPreset: r,
         recordingKey: Pt(e, "archiveRows")
@@ -534,13 +534,13 @@ export class $$eE1 extends o6 {
       focusedPreset: void 0
     };
     this.formatter = {
-      format: e => e === V$M.FRAME ? getI18nString("viewer.options_menu.frame") : e === V$M.GROUP ? getI18nString("viewer.options_menu.group") : e === V$M.SECTION ? getI18nString("viewer.options_menu.section") : e,
+      format: e => e === ContainerType.FRAME ? getI18nString("viewer.options_menu.frame") : e === ContainerType.GROUP ? getI18nString("viewer.options_menu.group") : e === ContainerType.SECTION ? getI18nString("viewer.options_menu.section") : e,
       isEqual: (e, t) => e === t
     };
     this.onChange = e => {
       if ("number" == typeof e) {
-        e === V$M.SECTION && this.changeSelectionToSection();
-        e === V$M.FRAME && this.getFrameOrGroupOrSectionOrMixed() === V$M.SECTION && this.changeSelectionSectionToFrame();
+        e === ContainerType.SECTION && this.changeSelectionToSection();
+        e === ContainerType.FRAME && this.getFrameOrGroupOrSectionOrMixed() === ContainerType.SECTION && this.changeSelectionSectionToFrame();
         this.changeSelectionToFrameOrGroup(e);
       } else {
         let t = EZ[e];
@@ -548,15 +548,15 @@ export class $$eE1 extends o6 {
       }
     };
     this.changeSelectionToSection = () => {
-      Y5.triggerActionInUserEditScope("replace-selected-frame-with-section");
+      fullscreenValue.triggerActionInUserEditScope("replace-selected-frame-with-section");
     };
     this.changeSelectionSectionToFrame = () => {
-      Y5.triggerActionInUserEditScope("replace-selected-section-with-frame");
+      fullscreenValue.triggerActionInUserEditScope("replace-selected-section-with-frame");
     };
     this.changeSelectionToFrameOrGroup = e => {
-      l7.user("change-selection-to-frame-or-group", () => {
-        glU && glU.changeSelectionToFrameOrGroup(e);
-        X3B && X3B.updateCurrentPagePrototypeDeviceIfNecessary();
+      permissionScopeHandler.user("change-selection-to-frame-or-group", () => {
+        Fullscreen && Fullscreen.changeSelectionToFrameOrGroup(e);
+        PrototypingTsApi && PrototypingTsApi.updateCurrentPagePrototypeDeviceIfNecessary();
       });
     };
     this.setPreset = e => {
@@ -567,16 +567,16 @@ export class $$eE1 extends o6 {
           deviceName: e.name
         }
       }));
-      l7.user("set-frame-preset", () => {
-        glU && glU.makeSelectedFramesManuallySized();
-        Y5.updateSelectionProperties({
+      permissionScopeHandler.user("set-frame-preset", () => {
+        Fullscreen && Fullscreen.makeSelectedFramesManuallySized();
+        fullscreenValue.updateSelectionProperties({
           width: e.width,
           height: e.height
         });
-        X3B && X3B.updateCurrentPagePrototypeDeviceIfNecessary();
+        PrototypingTsApi && PrototypingTsApi.updateCurrentPagePrototypeDeviceIfNecessary();
       });
     };
-    this.getFrameOrGroupOrSectionOrMixed = () => hS(this.props.resizeToFit) ? this.props.resizeToFit ? V$M.GROUP : this.props.isSection ? V$M.SECTION : V$M.FRAME : oV;
+    this.getFrameOrGroupOrSectionOrMixed = () => isValidValue(this.props.resizeToFit) ? this.props.resizeToFit ? ContainerType.GROUP : this.props.isSection ? ContainerType.SECTION : ContainerType.FRAME : MIXED_MARKER;
     this.onFocus = e => {
       this.setState({
         focusedPreset: e
@@ -595,13 +595,13 @@ export class $$eE1 extends o6 {
   render() {
     let e = [];
     let t = this.getFrameOrGroupOrSectionOrMixed();
-    let r = hS(this.props.width) && hS(this.props.height) ? fS({
+    let r = isValidValue(this.props.width) && isValidValue(this.props.height) ? fS({
       width: this.props.width,
       height: this.props.height
     }) : null;
-    hS(t) && e.push(t);
+    isValidValue(t) && e.push(t);
     r && e.push(r.name);
-    0 === e.length && e.push(oV);
+    0 === e.length && e.push(MIXED_MARKER);
     let i = e[0];
     let a = this.props.isWidget;
     let s = !!this.props.showPresetOptions && !this.props.isSection;
@@ -627,15 +627,15 @@ export class $$eE1 extends o6 {
         property: i,
         recordingKey: Pt(this.props, "select"),
         children: [!!this.props.showSectionOption && jsx(c$, {
-          value: V$M.SECTION,
+          value: ContainerType.SECTION,
           recordingKey: Pt(this.props, "SECTION"),
           disabled: !this.props.canBecomeSection
         }), jsx(c$, {
-          value: V$M.FRAME,
+          value: ContainerType.FRAME,
           recordingKey: Pt(this.props, "FRAME"),
           disabled: !o || !this.props.canBecomeFrame
         }), jsx(c$, {
-          value: V$M.GROUP,
+          value: ContainerType.GROUP,
           recordingKey: Pt(this.props, "GROUP"),
           disabled: !this.props.canBecomeGroup
         }), s && jsx(sK, {}), s && sE.phonePresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.tabletPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.desktopPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.presentationPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.watchPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.paperPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.socialMediaPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.figmaPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.archivedPresets.map(this.renderPresetOption)]
@@ -648,7 +648,7 @@ export function $$ey0(e) {
     className: e.className,
     children: jsx(_$$K, {
       onClick: () => {
-        Y5.triggerActionInUserEditScope("resize-to-fit");
+        fullscreenValue.triggerActionInUserEditScope("resize-to-fit");
       },
       recordingKey: e.recordingKey,
       "aria-label": getI18nString("fullscreen_actions.resize-to-fit"),

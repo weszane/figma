@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { glU, rcl } from "../figma_app/763686";
+import { Fullscreen, Command } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -44,7 +44,7 @@ class m {
       button: {
         text: getI18nString("fullscreen.text_suggestion_nudge_turn_off"),
         action: () => {
-          glU?.triggerActionEnum(rcl.TOGGLE_TEXT_SUGGESTIONS_PREFERENCE, {});
+          Fullscreen?.triggerActionEnum(Command.TOGGLE_TEXT_SUGGESTIONS_PREFERENCE, {});
         }
       }
     }));

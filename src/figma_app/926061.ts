@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback, Fragment as _$$Fragment } from "react";
 import { bL, l9, mc, c$, wv } from "../905/493196";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { r as _$$r } from "../905/571562";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
@@ -242,7 +242,7 @@ export function $$L2({
     value: h(e),
     onChange: g,
     children: [jsx(l9, {
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: u || getI18nString("folder_permissions_modal.email_invite_level")
       }),
       children: o(e)

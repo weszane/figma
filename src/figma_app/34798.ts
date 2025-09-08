@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { m1T, w3z, Ez5, NLJ } from "../figma_app/763686";
+import { LayoutTabType, HandoffBindingsCpp, AppStateTsApi, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { Kv } from "../figma_app/544649";
@@ -7,7 +7,7 @@ import { m0 } from "../figma_app/976749";
 import { p8, dH } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
 import { SQ7, Znl, XDd } from "../figma_app/43951";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 export function $$_2() {
   let e = tS();
   let t = Rs(SQ7, {
@@ -31,7 +31,7 @@ export function $$m4() {
   let t = p8("activeCanvasEditModeType");
   let r = $$h1();
   let a = Kv();
-  return useMemo(() => r && (!e || t === m1T.DEV_HANDOFF) && !a, [e, t, r, a]);
+  return useMemo(() => r && (!e || t === LayoutTabType.DEV_HANDOFF) && !a, [e, t, r, a]);
 }
 export function $$g0() {
   let e = $$_2();
@@ -46,21 +46,21 @@ export function $$g0() {
     return !!t.data?.file && "error" !== t.data.file.status && (t.data?.file?.data?.hasPermission ?? !1);
   }();
   useEffect(() => {
-    w3z && w3z.setAnnotationsPermissions(e, t, r);
+    HandoffBindingsCpp && HandoffBindingsCpp.setAnnotationsPermissions(e, t, r);
   }, [e, t, r]);
 }
 export function $$f3() {
   let e = dH();
   let t = m0();
   let r = $$_2();
-  let n = ut(Ez5?.uiState().showAnnotationsInDevMode, !0);
-  let s = ut(Ez5?.uiState().alwaysExpandAnnotations, !0);
-  let o = e === NLJ.ANNOTATE || e === NLJ.MEASURE;
-  if (e === NLJ.DROPPER_COLOR) ;else if (t) {
-    if (n || e === NLJ.ANNOTATE) return !0;
+  let n = getObservableValue(AppStateTsApi?.uiState().showAnnotationsInDevMode, !0);
+  let s = getObservableValue(AppStateTsApi?.uiState().alwaysExpandAnnotations, !0);
+  let o = e === DesignGraphElements.ANNOTATE || e === DesignGraphElements.MEASURE;
+  if (e === DesignGraphElements.DROPPER_COLOR) ;else if (t) {
+    if (n || e === DesignGraphElements.ANNOTATE) return !0;
   } else if (r) {
     if (getFeatureFlags().dt_annotations_always_expand) {
-      if (n || e === NLJ.ANNOTATE) return !0;
+      if (n || e === DesignGraphElements.ANNOTATE) return !0;
     } else if (s || o) return !0;
   }
   return !1;

@@ -5,9 +5,9 @@ import s, { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { oT } from "../905/478473";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { xQ } from "../figma_app/45218";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { A } from "../figma_app/122760";
 import { genericSelectorExternalTeamsIcon, workspaceSelectorModal, workspaceSelectorModalInner, genericSelectorModalCancel } from "../figma_app/727769";
 import { A as _$$A } from "../6041/915738";
@@ -23,10 +23,10 @@ export function $$f0(e) {
     entity: i.byId[e.userId]
   });
 }
-export let $$$$_1 = Ju(function (e) {
+export let $$$$_1 = registerModal(function (e) {
   let t = useDispatch();
   let i = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let {
     payload

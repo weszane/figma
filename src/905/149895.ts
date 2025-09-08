@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { XHR } from "../905/910117";
@@ -51,7 +51,7 @@ export function $$I2() {
         state: F4.PUBLISH_TEMPLATE_INITIATED,
         request: t
       });
-      let r = Ez5?.slideThemeLibBindings()?.renameThemeForTemplatePublish(t.name) ? u.map(e => e.node_id) : c;
+      let r = AppStateTsApi?.slideThemeLibBindings()?.renameThemeForTemplatePublish(t.name) ? u.map(e => e.node_id) : c;
       let s = Object.keys(I);
       r.push(...s);
       0 === r.length ? oX(e, t) : requestAnimationFrame(() => {
@@ -68,7 +68,7 @@ export function $$I2() {
         state: F4.UNPUBLISH_TEMPLATE_INITIATED
       }), XHR.del(`/api/templates/file/${t}`).then(() => {
         $$b1(e);
-        Ez5?.canvasGrid().updateSourceLibraryKey(_$$l(""));
+        AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
         e(ZS({
           publishingMode: _$$o.LIBRARY,
           unpublishAll: !0,

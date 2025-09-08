@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories } from "../905/165054";
 import { ey } from "../905/859698";
-import { BXd, CWU, glU } from "../figma_app/763686";
+import { LibraryPubSub, VariablesBindings, Fullscreen } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { U as _$$U } from "../figma_app/901889";
@@ -15,7 +15,7 @@ import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { yA, rX, As, t5, _K, f$, Qn } from "../figma_app/933328";
 import { ni, kX, V2 } from "../905/63598";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { Ak, Ki, Ff } from "../figma_app/582924";
 import { wM } from "../figma_app/852050";
 import { c as _$$c } from "../905/210851";
@@ -43,7 +43,7 @@ export async function $$M1(e) {
     componentKeys: [],
     localIds: []
   });
-  BXd.downloadAllSubscribedInstancesForUpdate(componentKeys, [], localIds, t);
+  LibraryPubSub.downloadAllSubscribedInstancesForUpdate(componentKeys, [], localIds, t);
   try {
     await r;
   } catch (e) {
@@ -68,7 +68,7 @@ export async function $$F5(e) {
     stateGroupKeys: [],
     localIds: []
   });
-  BXd.downloadAllSubscribedInstancesForUpdate(componentKeys, stateGroupKeys, localIds, t);
+  LibraryPubSub.downloadAllSubscribedInstancesForUpdate(componentKeys, stateGroupKeys, localIds, t);
   try {
     await r;
   } catch (e) {
@@ -85,7 +85,7 @@ export async function $$j3(e) {
     styleKeys: [],
     localIds: []
   });
-  BXd.downloadAllSubscribedStyleConsumersForUpdate(styleKeys, localIds, t);
+  LibraryPubSub.downloadAllSubscribedStyleConsumersForUpdate(styleKeys, localIds, t);
   try {
     await r;
   } catch (e) {
@@ -102,7 +102,7 @@ async function U(e) {
     let n = Ak();
     let i = Ki(n);
     r.push(i);
-    BXd.downloadAllSubscribedCodeInstancesForUpdate(t[e], n);
+    LibraryPubSub.downloadAllSubscribedCodeInstancesForUpdate(t[e], n);
   }
   try {
     await Promise.all(r);
@@ -111,7 +111,7 @@ async function U(e) {
   }
 }
 export async function $$B0(e, t) {
-  let r = BXd.getTimestampForLibraryUpdateStart();
+  let r = LibraryPubSub.getTimestampForLibraryUpdateStart();
   Ff() && (await U(t));
   await e.dispatch(yA({
     assets: t,
@@ -148,7 +148,7 @@ export function $$G6(e, t = aD.ALL, r) {
   let X = He();
   let q = _$$T();
   let J = useCallback(async (t, r) => {
-    let n = BXd.getTimestampForLibraryUpdateStart();
+    let n = LibraryPubSub.getTimestampForLibraryUpdateStart();
     Ff() && (await $$M1(t));
     await a(rX({
       components: t,
@@ -160,7 +160,7 @@ export function $$G6(e, t = aD.ALL, r) {
     }));
   }, [a, e, X, q]);
   let Z = useCallback(async (t, r) => {
-    let n = BXd.getTimestampForLibraryUpdateStart();
+    let n = LibraryPubSub.getTimestampForLibraryUpdateStart();
     Ff() && (await $$F5(t));
     await a(As({
       stateGroups: t,
@@ -172,7 +172,7 @@ export function $$G6(e, t = aD.ALL, r) {
     }));
   }, [a, e, X, q]);
   let Q = useCallback(async e => {
-    let t = BXd.getTimestampForLibraryUpdateStart();
+    let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
     Ff() && (await $$j3(e));
     await a(t5({
       styles: e,
@@ -182,11 +182,11 @@ export function $$G6(e, t = aD.ALL, r) {
     }));
   }, [a, X, q]);
   let ee = useCallback(async e => {
-    let t = BXd.getTimestampForLibraryUpdateStart();
+    let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
     if (Ff()) {
       let t = Ak();
       let r = Ki(t);
-      BXd.downloadAllSubscribedVariableSetConsumersForUpdate(e.map(e => e.key), t);
+      LibraryPubSub.downloadAllSubscribedVariableSetConsumersForUpdate(e.map(e => e.key), t);
       try {
         await r;
       } catch (e) {
@@ -195,7 +195,7 @@ export function $$G6(e, t = aD.ALL, r) {
       for (let t of e) {
         let e = [];
         if (t.libraryVariableIdsForUpdate) {
-          for (let [r, n] of CWU.getUsedSubscribedVariablesInSetByVariableKey(t.key)) {
+          for (let [r, n] of VariablesBindings.getUsedSubscribedVariablesInSetByVariableKey(t.key)) {
             let t = Y[ey(r)];
             t && (n.size > 0 || !n.has(t.version)) && e.push(`VariableID:${r}/${t.version}`);
           }
@@ -203,13 +203,13 @@ export function $$G6(e, t = aD.ALL, r) {
         } else logError("variables", "Expected variableSet to be an UpdateRootVariableSet");
       }
     }
-    let r = CWU?.getSubscribedVariableSetsInfo();
+    let r = VariablesBindings?.getSubscribedVariableSetsInfo();
     let n = new Map(r?.map(e => [e.id.toString().split("/")[0], e.defaultModeID]));
     await a(_K({
       variableSets: e,
       updateStartTime: t
     }));
-    let i = CWU?.getSubscribedVariableSetsInfo();
+    let i = VariablesBindings?.getSubscribedVariableSetsInfo();
     let l = !1;
     if (!i) return !1;
     for (let e of i) if (n.get(e.id.toString().split("/")[0]) !== e.defaultModeID) {
@@ -219,7 +219,7 @@ export function $$G6(e, t = aD.ALL, r) {
     return l;
   }, [a, Y]);
   let et = useCallback(async e => {
-    let t = BXd.getTimestampForLibraryUpdateStart();
+    let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
     Ff() && (await U(e));
     await a(f$({
       assets: e,
@@ -299,7 +299,7 @@ export function $$G6(e, t = aD.ALL, r) {
         a(ni({
           total: t
         }));
-        a(Ce());
+        a(hideModal());
         analyticsEventManager.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
           fileKey: V,
           fileParentOrgId: H,
@@ -347,7 +347,7 @@ export function $$V4(e, t) {
   } = $$G6(e, void 0, t);
   let s = useDispatch();
   let l = useCallback((e, t) => {
-    let r = glU.getOutdatedStyleConsumers(t);
+    let r = Fullscreen.getOutdatedStyleConsumers(t);
     s(Qn({
       styleUpdateInfo: e,
       oldStyleGUID: t,

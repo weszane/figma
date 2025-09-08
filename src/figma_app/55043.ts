@@ -5,12 +5,12 @@ import { analyticsEventManager } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { u as _$$u } from "../905/918498";
 import { b } from "../905/723768";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { VTr } from "../figma_app/43951";
 import { T5 } from "../figma_app/465071";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
 export function $$E1(e, t) {
@@ -24,7 +24,7 @@ export function $$E1(e, t) {
       planType: l.key.parentId || void 0,
       planTier: l.tier,
       resourceConnectionInviteId: t
-    }), o(to({
+    }), o(showModalHandler({
       type: DV,
       data: {
         team: {
@@ -35,7 +35,7 @@ export function $$E1(e, t) {
         editorType: null,
         currentPlan: F.Plan.STARTER,
         upsellPlan: F.Plan.PRO,
-        upsellSource: _$$b.CONNECTED_PROJECT_INVITE
+        upsellSource: UpsellModalType.CONNECTED_PROJECT_INVITE
       }
     })), a(!0)) : e();
   }, [l, e, o, t, r, a]);
@@ -57,7 +57,7 @@ export function $$y0(e, t, r) {
       planTier: m.tier,
       numConnections: m.connectionCount,
       resourceConnectionInviteId: r
-    }), u(to({
+    }), u(showModalHandler({
       type: _$$u,
       data: {
         plan: m

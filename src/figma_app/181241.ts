@@ -1,67 +1,68 @@
-import { mapKeys } from 'lodash-es';
-import camelCase from 'lodash-es/camelCase';
-import snakeCase from 'lodash-es/snakeCase';
-import { z } from 'zod';
-import { trackEventAnalytics } from '../905/449184';
-import { getFeatureFlags } from '../905/601108';
-import { logError } from '../905/714362';
-import { API } from '../905/910117';
+import type { AjaxResponse } from '../905/910117'
+import { mapKeys } from 'lodash-es'
+import camelCase from 'lodash-es/camelCase'
+import snakeCase from 'lodash-es/snakeCase'
+import { z } from 'zod'
+import { trackEventAnalytics } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { logError } from '../905/714362'
+import { API } from '../905/910117'
 
 // Types
 interface ValidationContext {
-  xr: typeof API;
+  xr: typeof API
 }
 interface ValidationError {
-  [key: string]: string[];
+  [key: string]: string[]
 }
 interface ValidatorResponse<T = any> {
-  status: number;
-  data: T;
-  [key: string]: any;
+  status: number
+  data: T
+  [key: string]: any
 }
-type LogLevel = 'error' | 'warn';
+type LogLevel = 'error' | 'warn'
 
 /**
  * Base validator class for API response validation
  */
 class BaseValidator<T> {
-  public debugKey: string;
-  private readonly schema: z.ZodSchema<T>;
-  private readonly logLevel: LogLevel;
-  protected _input: any = null;
-  protected _output: any = null;
+  public debugKey: string
+  private readonly schema: z.ZodSchema<T>
+  private readonly logLevel: LogLevel
+  protected _input: any = null
+  protected _output: any = null
   constructor(debugKey: string, schema: z.ZodSchema<T>, logLevel: LogLevel) {
-    this.debugKey = debugKey;
-    this.schema = schema;
-    this.logLevel = logLevel;
+    this.debugKey = debugKey
+    this.schema = schema
+    this.logLevel = logLevel
   }
 
   /**
    * Validates the API response against the schema
    */
-  async validate(requestFn: (context: ValidationContext) => Promise<ValidatorResponse>): Promise<ValidatorResponse<T>> {
+  async validate(requestFn: (context: ValidationContext) => Promise<ValidatorResponse<T>>): Promise<ValidatorResponse<T>> {
     const response = await requestFn({
-      xr: API
-    });
-    const parseResult = this.schema.safeParse(response.data);
+      xr: API,
+    })
+    const parseResult = this.schema.safeParse(response.data)
     if (parseResult.success) {
-      const validatedData = parseResult.data;
+      const validatedData = parseResult.data
       const {
         data,
         ...restResponse
-      } = response;
+      } = response
       return {
         ...restResponse,
-        data: validatedData
-      };
+        data: validatedData,
+      }
     }
 
     // Handle validation failure
-    this.logValidationFailure(parseResult.error);
+    this.logValidationFailure(parseResult.error)
     if (this.logLevel === 'error') {
-      throw parseResult.error;
+      throw parseResult.error
     }
-    return response;
+    return response
   }
 
   /**
@@ -71,15 +72,15 @@ class BaseValidator<T> {
     trackEventAnalytics('Validator Failure', {
       name: this.debugKey,
       level: this.logLevel,
-      error: JSON.stringify(error.flatten())
+      error: JSON.stringify(error.flatten()),
     }, {
       forwardToDatadog: true,
-      batchRequest: true
-    });
+      batchRequest: true,
+    })
     if (this.logLevel === 'error') {
       logError('APIGetValidationFailure', `Validation failed for api response for ${this.debugKey}`, this.formatValidationErrors(error), {
-        reportAsSentryError: true
-      });
+        reportAsSentryError: true,
+      })
     }
   }
 
@@ -87,15 +88,15 @@ class BaseValidator<T> {
    * Formats validation errors for better readability
    */
   protected formatValidationErrors(error: z.ZodError): ValidationError {
-    const formattedErrors: ValidationError = {};
-    error.issues.forEach(issue => {
-      const path = issue.path.map(segment => typeof segment === 'number' ? '[#]' : segment).join('.');
+    const formattedErrors: ValidationError = {}
+    error.issues.forEach((issue) => {
+      const path = issue.path.map(segment => typeof segment === 'number' ? '[#]' : segment).join('.')
       if (!formattedErrors[path]) {
-        formattedErrors[path] = [];
+        formattedErrors[path] = []
       }
-      formattedErrors[path].push(issue.message);
-    });
-    return formattedErrors;
+      formattedErrors[path].push(issue.message)
+    })
+    return formattedErrors
   }
 }
 
@@ -103,14 +104,14 @@ class BaseValidator<T> {
  * Enhanced validator with feature flag support and enforcement options
  */
 class EnhancedValidator<T> extends BaseValidator<T> {
-  private readonly featureFlagKey?: string;
-  private readonly enforce: boolean;
-  private readonly reportAsSentryError: boolean;
+  private readonly featureFlagKey?: string
+  private readonly enforce: boolean
+  private readonly reportAsSentryError: boolean
   constructor(public debugKey: string, schema: z.ZodSchema<T>, featureFlagKey?: string, enforce: boolean = false, reportAsSentryError: boolean = false) {
-    super(debugKey, schema, enforce ? 'error' : 'warn');
-    this.featureFlagKey = featureFlagKey;
-    this.enforce = enforce;
-    this.reportAsSentryError = reportAsSentryError;
+    super(debugKey, schema, enforce ? 'error' : 'warn')
+    this.featureFlagKey = featureFlagKey
+    this.enforce = enforce
+    this.reportAsSentryError = reportAsSentryError
   }
 
   /**
@@ -118,17 +119,17 @@ class EnhancedValidator<T> extends BaseValidator<T> {
    */
   async validate(requestFn: (context: ValidationContext) => Promise<ValidatorResponse>): Promise<ValidatorResponse<T>> {
     const response = await requestFn({
-      xr: API
-    });
+      xr: API,
+    })
 
     // Skip validation if feature flag is disabled or response is not successful
     if (typeof this.featureFlagKey === 'string' && !getFeatureFlags()[this.featureFlagKey] || response.status !== 200) {
-      return response;
+      return response
     }
     try {
-      const validatedResponse = await super.validate(() => Promise.resolve(response));
+      const validatedResponse = await super.validate(() => Promise.resolve(response))
       if (this.enforce) {
-        return validatedResponse;
+        return validatedResponse
       }
 
       // Merge original and validated data for non-enforced validation
@@ -136,22 +137,23 @@ class EnhancedValidator<T> extends BaseValidator<T> {
         ...validatedResponse,
         data: {
           ...response.data,
-          ...validatedResponse.data
-        }
-      };
-    } catch (error) {
+          ...validatedResponse.data,
+        },
+      }
+    }
+    catch (error) {
       if (error instanceof z.ZodError) {
         logError('ZODValidatorError', 'Validation failed for api response', {
           debugKey: this.debugKey,
-          error: this.formatValidationErrors(error)
+          error: this.formatValidationErrors(error),
         }, {
-          reportAsSentryError: this.reportAsSentryError
-        });
+          reportAsSentryError: this.reportAsSentryError,
+        })
       }
       if (this.enforce) {
-        throw error;
+        throw error
       }
-      return response;
+      return response
     }
   }
 }
@@ -163,24 +165,24 @@ class EnhancedValidator<T> extends BaseValidator<T> {
  * Creates a validator with meta object schema
  */
 export function createMetaValidator<T>(debugKey: string, metaSchema: z.ZodSchema<T> | ((zodLib: typeof z) => z.ZodSchema<T>), featureFlagKey?: string, enforce: boolean = false, reportAsSentryError: boolean = false) {
-  const resolvedMetaSchema = typeof metaSchema === 'function' ? metaSchema(z) : metaSchema;
+  const resolvedMetaSchema = typeof metaSchema === 'function' ? metaSchema(z) : metaSchema
   return new EnhancedValidator(debugKey, z.object({
-    meta: resolvedMetaSchema
-  }), featureFlagKey, enforce, reportAsSentryError);
+    meta: resolvedMetaSchema,
+  }), featureFlagKey, enforce, reportAsSentryError)
 }
 
 /**
  * Creates a validator with meta and pagination schema
  */
 export function createPaginatedValidator<T>(debugKey: string, metaSchema: z.ZodSchema<T> | ((zodLib: typeof z) => z.ZodSchema<T>), featureFlagKey?: string, enforce: boolean = false) {
-  const resolvedMetaSchema = typeof metaSchema === 'function' ? metaSchema(z) : metaSchema;
+  const resolvedMetaSchema = typeof metaSchema === 'function' ? metaSchema(z) : metaSchema
   return new EnhancedValidator(debugKey, z.object({
     meta: resolvedMetaSchema,
     pagination: z.object({
       nextPage: z.string().nullable(),
-      prevPage: z.string().nullable()
-    })
-  }), featureFlagKey, enforce);
+      prevPage: z.string().nullable(),
+    }),
+  }), featureFlagKey, enforce)
 }
 
 /**
@@ -188,8 +190,8 @@ export function createPaginatedValidator<T>(debugKey: string, metaSchema: z.ZodS
  */
 export function createSimpleMetaValidator<T>(debugKey: string, metaSchema: z.ZodSchema<T>) {
   return new BaseValidator(debugKey, z.object({
-    meta: metaSchema
-  }), 'error');
+    meta: metaSchema,
+  }), 'error')
 }
 
 /**
@@ -199,10 +201,10 @@ export function createNoOpValidator() {
   return {
     _input: null,
     _output: null,
-    validate: (requestFn: (context: ValidationContext) => Promise<ValidatorResponse>) => requestFn({
-      xr: API
-    })
-  };
+    validate: <T>(requestFn: (context: ValidationContext) => Promise<AjaxResponse<T>>) => requestFn({
+      xr: API,
+    }),
+  }
 }
 
 /**
@@ -212,10 +214,10 @@ export function createMinimalValidator() {
   return {
     _input: null,
     _output: null,
-    validate: (requestFn: (context: ValidationContext) => Promise<ValidatorResponse>) => requestFn({
-      xr: API
-    })
-  };
+    validate: <T>(requestFn: (context: ValidationContext) => Promise<AjaxResponse<T>>) => requestFn({
+      xr: API,
+    }),
+  }
 }
 
 /**
@@ -227,41 +229,41 @@ export namespace APIParameterUtils {
    */
   export function toAPIParameters(params: Record<string, any>, preserveKeys: string[] = []): Record<string, any> {
     if (params === undefined) {
-      return params;
+      return params
     }
-    const preserveKeySet = new Set(preserveKeys);
+    const preserveKeySet = new Set(preserveKeys)
     return Object.keys(params).reduce((result, key) => {
-      const apiKey = preserveKeySet.has(key) ? key : snakeCase(key);
-      const value = params[key];
+      const apiKey = preserveKeySet.has(key) ? key : snakeCase(key)
+      const value = params[key]
       if (value !== undefined) {
-        result[apiKey] = value;
+        result[apiKey] = value
         if (typeof value === 'number' || typeof value === 'boolean') {
-          result[apiKey] = value.toString();
+          result[apiKey] = value.toString()
         }
       }
-      return result;
-    }, {} as Record<string, any>);
+      return result
+    }, {} as Record<string, any>)
   }
 
   /**
    * Converts object keys to camelCase
    */
   export function toCamelCase<T>(schema: z.ZodSchema<T>): z.ZodSchema<T> {
-    return schema.transform(data => mapKeys(data, (value, key) => camelCase(key))) as z.ZodSchema<T>;
+    return schema.transform(data => mapKeys<any>(data, (value, key) => camelCase(key))) as unknown as z.ZodSchema<T>
   }
 }
 
 // Default validator instance
-const defaultValidator = createNoOpValidator();
+const defaultValidator = createNoOpValidator()
 
 // Legacy exports for backward compatibility
-export const Rq = createPaginatedValidator;
-export const YV = createMetaValidator;
-export const _5 = defaultValidator;
-export const ch = createMinimalValidator;
-export const q$ = createSimpleMetaValidator;
-export const td = APIParameterUtils;
-export const vh = createNoOpValidator;
+export const Rq = createPaginatedValidator
+export const YV = createMetaValidator
+export const _5 = defaultValidator
+export const ch = createMinimalValidator
+export const q$ = createSimpleMetaValidator
+export const td = APIParameterUtils
+export const vh = createNoOpValidator
 
 // Modern named exports
-export { createMetaValidator as MetaValidator, createMinimalValidator as MinimalValidator, createNoOpValidator as NoOpValidator, createPaginatedValidator as PaginatedValidator, createSimpleMetaValidator as SimpleMetaValidator };
+export { createMetaValidator as MetaValidator, createMinimalValidator as MinimalValidator, createNoOpValidator as NoOpValidator, createPaginatedValidator as PaginatedValidator, createSimpleMetaValidator as SimpleMetaValidator }

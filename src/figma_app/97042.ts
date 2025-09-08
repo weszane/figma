@@ -1,12 +1,12 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { IT } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { fd } from "../figma_app/255679";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { tS, _S } from "../figma_app/516028";
 import { J_J, yUR } from "../figma_app/43951";
 import { nD } from "../905/92359";
@@ -86,7 +86,7 @@ export function $$T7(e, t) {
   return n;
 }
 export function $$I10(e) {
-  return (e?.publishID && e?.publishID !== AD ? e?.publishID : e?.guid) ?? null;
+  return (e?.publishID && e?.publishID !== defaultSessionLocalIDString ? e?.publishID : e?.guid) ?? null;
 }
 export function $$S2(e, t, r) {
   let n = t.get(e);
@@ -100,7 +100,7 @@ export function $$S2(e, t, r) {
   } = nD(new Set([(n?.type === "INSTANCE" ? n?.symbolId : n?.guid) ?? ""]), t);
   let s = null;
   let o = null;
-  if (gl(backingSymbolGUID) || null === backingSymbolGUID || (s = t.get(backingSymbolGUID)), gl(backingStateGroupGUID) || null === backingStateGroupGUID || (o = t.get(backingStateGroupGUID)), "INSTANCE" === n.type && n.symbolId) {
+  if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID || (s = t.get(backingSymbolGUID)), isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID || (o = t.get(backingStateGroupGUID)), "INSTANCE" === n.type && n.symbolId) {
     let e = t.get(n.symbolId);
     if (e?.isState) {
       let e = o?.sourceLibraryKey;
@@ -409,9 +409,9 @@ export function $$w1(e, t, r) {
       backingSymbolGUID,
       backingStateGroupGUID
     } = nD(new Set([e]), t);
-    if (gl(backingSymbolGUID) || null === backingSymbolGUID) return null;
+    if (isInvalidValue(backingSymbolGUID) || null === backingSymbolGUID) return null;
     let a = t.get(backingSymbolGUID);
-    let s = gl(backingStateGroupGUID) || null === backingStateGroupGUID ? null : t.get(backingStateGroupGUID);
+    let s = isInvalidValue(backingStateGroupGUID) || null === backingStateGroupGUID ? null : t.get(backingStateGroupGUID);
     return s ? {
       backingNodeId: $$I10(s),
       backingLibraryKey: "" !== s.sourceLibraryKey ? s.sourceLibraryKey : r

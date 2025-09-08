@@ -4,9 +4,9 @@ import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { cL } from "../905/748726";
-import { Lo, to } from "../905/156213";
+import { popModalStack, showModalHandler } from "../905/156213";
 import { bE, yH } from "../905/98702";
 import { ds, z_ } from "../figma_app/314264";
 import { ZW, U5 } from "../figma_app/349248";
@@ -20,13 +20,13 @@ import { useDispatch } from "../vendor/514228";
 import { T as _$$T } from "../figma_app/257703";
 import { fu } from "../figma_app/831799";
 import { v as _$$v } from "../905/124421";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 import { DQ, Pw } from "../figma_app/121751";
 import { HZ, A5 } from "../figma_app/391338";
-import { b as _$$b } from "../905/165519";
-let T = Ju(function (e) {
+import { UpsellModalType } from "../905/165519";
+let T = registerModal(function (e) {
   let t = useDispatch();
   return jsx(fu, {
     name: "Sharing with external users is disabled modal",
@@ -38,7 +38,7 @@ let T = Ju(function (e) {
     children: jsx(yX, {
       confirmationTitle: getI18nString("permissions.guests_banned.sharing_with_external_users_is_disabled"),
       confirmText: getI18nString("permissions.guests_banned.got_it"),
-      onConfirm: () => t(Lo()),
+      onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
@@ -66,7 +66,7 @@ function k(e) {
     }
   });
 }
-let R = Ju(function (e) {
+let R = registerModal(function (e) {
   let t = useDispatch();
   return jsx(fu, {
     name: "Admin approval needed modal",
@@ -78,7 +78,7 @@ let R = Ju(function (e) {
     children: jsx(yX, {
       confirmationTitle: getI18nString("permissions.invites_require_access.almost_there"),
       confirmText: getI18nString("permissions.invites_require_access.got_it"),
-      onConfirm: () => t(Lo()),
+      onConfirm: () => t(popModalStack()),
       disableClickOutsideToHide: !0,
       hideOnConfirm: !1,
       popStack: e.popStack,
@@ -102,7 +102,7 @@ let R = Ju(function (e) {
     })
   });
 }, "REQUEST_ACCESS_WARNING_MODAL");
-let N = Ju(function (e) {
+let N = registerModal(function (e) {
   let t = useDispatch();
   return jsx(fu, {
     name: "Invite whitelist error modal",
@@ -114,7 +114,7 @@ let N = Ju(function (e) {
     children: jsx(yX, {
       confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
       confirmText: getI18nString("permissions.invites_whitelist.got_it"),
-      onConfirm: () => t(Lo()),
+      onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
@@ -135,7 +135,7 @@ let N = Ju(function (e) {
     })
   });
 }, "INVITE_WHITELIST_ERROR_MODAL");
-let P = Ju(function (e) {
+let P = registerModal(function (e) {
   let t = useDispatch();
   return jsx(fu, {
     name: "Deprovisioned user invite error modal",
@@ -147,7 +147,7 @@ let P = Ju(function (e) {
     children: jsx(yX, {
       confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
       confirmText: getI18nString("permissions.deprovisioned_users.got_it"),
-      onConfirm: () => t(Lo()),
+      onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
@@ -168,7 +168,7 @@ let P = Ju(function (e) {
     })
   });
 }, "DEPROVISIONED_USER_MODAL");
-let O = Ju(function (e) {
+let O = registerModal(function (e) {
   let t = useDispatch();
   return jsx(fu, {
     name: "Deprovisioned user invite error modal",
@@ -180,7 +180,7 @@ let O = Ju(function (e) {
     children: jsx(yX, {
       confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
       confirmText: getI18nString("permissions.org_restricted_invite.got_it"),
-      onConfirm: () => t(Lo()),
+      onConfirm: () => t(popModalStack()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
       popStack: e.popStack,
@@ -201,7 +201,7 @@ let O = Ju(function (e) {
     })
   });
 }, "ORG_RESTRICTED_INVITE_MODAL");
-let $$M3 = nF((e, {
+let $$M3 = createOptimistThunk((e, {
   emails: t,
   resourceType: i,
   resourceIdOrKey: o,
@@ -319,7 +319,7 @@ let $$M3 = nF((e, {
         label: A5.RoleInvites.teamId,
         enableFullRead: a
       });
-      if (a) e.dispatch(to({
+      if (a) e.dispatch(showModalHandler({
         type: _$$t2,
         data: {
           teamId: s,
@@ -331,12 +331,12 @@ let $$M3 = nF((e, {
           canEdit: hasEditorRoleAccessOnTeam(s, n),
           canAdmin: hasAdminRoleAccessOnTeam(s, n)
         };
-        e.dispatch(to({
+        e.dispatch(showModalHandler({
           type: oE,
           data: {
             team: t,
             editorType: null,
-            upsellSource: _$$b.ADD_EDITOR
+            upsellSource: UpsellModalType.ADD_EDITOR
           }
         }));
       }
@@ -371,7 +371,7 @@ export function $$U0(e, t, i, n, r, a) {
   let l = e.reduce((e, t) => (t.type && (e[t.type] = e[t.type] || [], e[t.type].push(t)), e), Object.create(null));
   let d = Object.keys(l).length > 0;
   l.no_self_invite?.length > 0 && n(_$$s.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")));
-  l.user_requires_approval?.length > 0 && a && (n(to({
+  l.user_requires_approval?.length > 0 && a && (n(showModalHandler({
     type: R,
     data: {
       emails: l.user_requires_approval.map(e => e.email),
@@ -381,7 +381,7 @@ export function $$U0(e, t, i, n, r, a) {
       orgName: a
     }
   })), j(l.user_requires_approval, n, r));
-  l.org_guests_banned?.length > 0 && a && (n(to({
+  l.org_guests_banned?.length > 0 && a && (n(showModalHandler({
     type: T,
     data: {
       emails: l.org_guests_banned.map(e => e.email),
@@ -391,7 +391,7 @@ export function $$U0(e, t, i, n, r, a) {
       orgName: a
     }
   })), j(l.org_guests_banned, n, r));
-  l.org_whitelist?.length > 0 && a && (n(to({
+  l.org_whitelist?.length > 0 && a && (n(showModalHandler({
     type: N,
     data: {
       emails: l.org_whitelist.map(e => e.email),
@@ -401,7 +401,7 @@ export function $$U0(e, t, i, n, r, a) {
       orgName: a
     }
   })), j(l.org_whitelist, n, r));
-  l.deprovisioned?.length > 0 && a && (n(to({
+  l.deprovisioned?.length > 0 && a && (n(showModalHandler({
     type: P,
     data: {
       emails: l.deprovisioned.map(e => e.email),
@@ -411,7 +411,7 @@ export function $$U0(e, t, i, n, r, a) {
       orgName: a
     }
   })), j(l.deprovisioned, n, r));
-  l.org_restricted_invite?.length > 0 && a && (n(to({
+  l.org_restricted_invite?.length > 0 && a && (n(showModalHandler({
     type: O,
     data: {
       emails: l.org_restricted_invite.map(e => e.email),
@@ -423,7 +423,7 @@ export function $$U0(e, t, i, n, r, a) {
   })), j(l.org_restricted_invite, n, r));
   return d;
 }
-let $$B1 = nF((e, {
+let $$B1 = createOptimistThunk((e, {
   invites: t,
   inviteLevel: i,
   file: n,
@@ -446,7 +446,7 @@ let $$B1 = nF((e, {
     })
   }));
 });
-let $$V2 = nF((e, {
+let $$V2 = createOptimistThunk((e, {
   role: t
 }) => {
   let i = XHR.post("/api/invites/resend", {

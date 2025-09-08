@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { ZC } from "../figma_app/39751";
 import { At, vV, CX, UU, Z5 } from "../figma_app/770088";
 import { I_ } from "../905/234821";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
 import { $$, Z0 } from "../figma_app/62612";
 import { hm } from "../905/380385";
@@ -58,7 +58,7 @@ export function $$E1(e, t, r, a, o) {
   }, [h, e, m, o]);
   useEffect(() => {
     h && a && (h._set_comments_visibility = e => {
-      Y5.triggerAction("toggle-show-comments", {
+      fullscreenValue.triggerAction("toggle-show-comments", {
         source: "mobile_app"
       });
     });

@@ -3,11 +3,11 @@ import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react";
 import { A as _$$A } from "../vendor/763703";
 import { A as _$$A2 } from "../vendor/723372";
 import { M } from "../905/749786";
-import { q } from "../905/751750";
-import { Qv } from "../905/959312";
+import { useSelectionProvider } from "../905/751750";
+import { useRecording } from "../905/959312";
 import { nK } from "../905/691059";
-import { r as _$$r } from "../905/577641";
-import { Dm } from "../905/955878";
+import { defaultComponentAttribute } from "../905/577641";
+import { EVENT_CAPTURE_CLASS } from "../905/955878";
 import { v } from "../905/475481";
 let h = "data-modals-open";
 export function $$g0({
@@ -17,7 +17,7 @@ export function $$g0({
   htmlAttributes: a,
   ...d
 }) {
-  let [h, g] = q();
+  let [h, g] = useSelectionProvider();
   let {
     close,
     ..._
@@ -32,11 +32,11 @@ export function $$g0({
     children: jsx(M.Provider, {
       value: A,
       children: jsxs("div", {
-        ..._$$r,
+        ...defaultComponentAttribute,
         ...v(d, a, _),
         role: "dialog",
         "aria-modal": "true",
-        className: _$$A2("modal-primitive__root__x1Mdk", e.root, Dm),
+        className: _$$A2("modal-primitive__root__x1Mdk", e.root, EVENT_CAPTURE_CLASS),
         "aria-labelledby": h,
         tabIndex: -1,
         children: [jsx("div", {
@@ -58,7 +58,7 @@ export function $$f1({
   preventUserClose: i = !1,
   recordingKey: n
 }) {
-  let a = Qv(t, {
+  let a = useRecording(t, {
     eventName: "close",
     recordingKey: n
   }, [t]);

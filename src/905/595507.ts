@@ -1,10 +1,10 @@
-import { MM } from "../905/350402";
+import { createOptimistAction } from "../905/350402";
 import { COMMIT, REVERT } from "redux-optimist";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-let $$l1 = MM("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
+let $$l1 = createOptimistAction("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
   editor: t
 }, {
   optimistId: i

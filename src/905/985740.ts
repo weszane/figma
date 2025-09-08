@@ -1,9 +1,9 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 export let $$r0 = new class {
   constructor() {
-    this.VersionsSchemaValidator = vh();
-    this.PageSizeSchemaValidator = vh();
-    this.VersionSchemaValidator = vh();
+    this.VersionsSchemaValidator = createNoOpValidator();
+    this.PageSizeSchemaValidator = createNoOpValidator();
+    this.VersionSchemaValidator = createNoOpValidator();
   }
   getVersions(e) {
     let {
@@ -12,7 +12,7 @@ export let $$r0 = new class {
     } = e;
     return this.VersionsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/versions/${e.fileKey}`, td.toAPIParameters(i)));
+    }) => await t.get(`/api/versions/${e.fileKey}`, APIParameterUtils.toAPIParameters(i)));
   }
   getPaginatedVersions(e) {
     let {
@@ -21,7 +21,7 @@ export let $$r0 = new class {
     } = e;
     return this.PageSizeSchemaValidator.validate(async ({
       xr: e
-    }) => await e.get(`/api/versions/${fileKey}`, td.toAPIParameters(i)));
+    }) => await e.get(`/api/versions/${fileKey}`, APIParameterUtils.toAPIParameters(i)));
   }
   getVersion(e) {
     return this.VersionSchemaValidator.validate(({

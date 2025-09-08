@@ -1,6 +1,6 @@
 import { b } from "../905/275748";
 import _require from "../7021/149615";
-import { Ju, Ij } from "../905/102752";
+import { registerModal, createModalConfig } from "../905/102752";
 let a;
 let r = new b({
   name: "billing_remodel_terms",
@@ -16,6 +16,6 @@ let r = new b({
   routeHints: ["file_browser"]
 });
 export function $$o0() {
-  return a ??= Ju(r.createLazyComponent(() => Promise.resolve().then(_require).then(e => e.SeatBillingTermsModal), Ij("SeatBillingTermsModal")));
+  return a ??= registerModal(r.createLazyComponent(() => Promise.resolve().then(_require).then(e => e.SeatBillingTermsModal), createModalConfig("SeatBillingTermsModal")));
 }
 export const w = $$o0;

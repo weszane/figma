@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect, mem
 import { useDispatch, useSelector, connect } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { RR } from "../figma_app/338442";
-import { Ez5, NLJ, QOV, glU, ibQ, yFm, mrc } from "../figma_app/763686";
+import { AppStateTsApi, DesignGraphElements, UserActionState, Fullscreen, ItemType, ScaleToolTsApi, TextAlignmentOptions } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
@@ -11,11 +11,11 @@ import { selectWithShallowEqual } from "../905/103090";
 import { c1, qP, Pt } from "../figma_app/806412";
 import { Ku, sT } from "../figma_app/740163";
 import { m as _$$m } from "../905/571439";
-import { oV, gl, E7, _W } from "../905/216495";
+import { MIXED_MARKER, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { rC } from "../figma_app/385874";
 import { kl, pw, zj, ER, wR, DQ, fC } from "../905/275640";
 import { SG } from "../figma_app/852050";
-import { J2 } from "../figma_app/84367";
+import { getObservableOrFallback } from "../figma_app/84367";
 import { VF } from "../figma_app/679183";
 import { cM } from "../figma_app/803787";
 import { Sh } from "../figma_app/889655";
@@ -30,13 +30,13 @@ import { F as _$$F } from "../905/294430";
 import { S as _$$S } from "../905/148017";
 import { eT as _$$eT } from "../figma_app/580959";
 import { flushSync } from "../vendor/944059";
-import { xN, qE } from "../figma_app/492908";
+import { nearlyEqual, clamp } from "../figma_app/492908";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
-import { nc } from "../905/189185";
+import { scopeAwareFunction } from "../905/189185";
 import { ZC } from "../figma_app/39751";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { h as _$$h } from "../905/943864";
 import { p8 } from "../figma_app/722362";
 import { o as _$$o } from "../905/237202";
@@ -65,10 +65,10 @@ var a;
 var s;
 var o;
 function er(e, t) {
-  return xN(e, 0) ? (logError("clampScaleValue", "scale is 0", {
+  return nearlyEqual(e, 0) ? (logError("clampScaleValue", "scale is 0", {
     originalValue: e,
     newValue: t
-  }), $Y) : qE(t / e, sI, sH);
+  }), $Y) : clamp(t / e, sI, sH);
 }
 let ed = {
   smallNudgeAmount: .01,
@@ -98,12 +98,12 @@ function ec(e) {
   let m = function () {
     if (selectionRegionsBounds && selectionRegionsBounds.length) {
       let e = selectionRegionsBounds[0][property];
-      return selectionRegionsBounds.every(t => xN(t[property], e, .005)) ? e : oV;
+      return selectionRegionsBounds.every(t => nearlyEqual(t[property], e, .005)) ? e : MIXED_MARKER;
     }
-    return oV;
+    return MIXED_MARKER;
   }();
   let g = Xs();
-  let f = gl(m) ? ed : {};
+  let f = isInvalidValue(m) ? ed : {};
   return jsx($j, {
     className: _$$z,
     "data-tooltip": "width" === property ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
@@ -113,18 +113,18 @@ function ec(e) {
     dispatch: _,
     forwardedRef,
     inputClassName: hF,
-    min: gl(m) ? sI : 1,
+    min: isInvalidValue(m) ? sI : 1,
     mixedMathHandler: {
       getValue: () => scale,
       onChange: (e, t, r) => {
         let n = t(e);
-        Number.isNaN(n) || onScaleChange(qE(n, sI, sH), p, r);
+        Number.isNaN(n) || onScaleChange(clamp(n, sI, sH), p, r);
       }
     },
     noBorderOnHover: !0,
     onKeyDown,
     onValueChange: (e, t) => {
-      !Number.isNaN(e) && m && m !== oV && selectionRegionsOriginalBounds && selectionRegionsOriginalBounds.length && onScaleChange(er(selectionRegionsOriginalBounds[0][property], e), p, t);
+      !Number.isNaN(e) && m && m !== MIXED_MARKER && selectionRegionsOriginalBounds && selectionRegionsOriginalBounds.length && onScaleChange(er(selectionRegionsOriginalBounds[0][property], e), p, t);
     },
     recordingKey: h(`${property}Input.input`),
     tooltipForScreenReadersOnly: !0,
@@ -184,22 +184,22 @@ function e_(e) {
 }
 var em = eh;
 let eE = () => {
-  Y5.triggerAction("set-tool-default");
+  fullscreenValue.triggerAction("set-tool-default");
 };
 function ey(e) {
   let t = useSelector(e => e.mirror.sceneGraphSelection);
   let r = kl("selectionRegions");
-  let n = E7(r);
+  let n = normalizeValue(r);
   let i = ZC(n);
   let a = useRef(0);
   let [s, o] = useState(void 0);
   let u = ZC(s);
   let p = useRef(null);
   let m = kl("selectionResizable");
-  let g = _W(m, !1);
+  let g = valueOrFallback(m, !1);
   let f = p8("activeUserAction");
   let y = ZC(f);
-  let b = J2(Ez5.propertiesPanelState().shownPropertiesPanels);
+  let b = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels);
   let I = ZC(b);
   let [v, x] = useState(!1);
   let N = useRef(null);
@@ -207,10 +207,10 @@ function ey(e) {
   let w = useRef(null);
   let O = p8("currentTool");
   let R = ZC(O);
-  let L = O !== NLJ.SCALE;
+  let L = O !== DesignGraphElements.SCALE;
   let P = !g || L;
   let [D, k] = useState(Ps);
-  let M = J2(Ez5.canvasViewState().scaleToolLastCanvasAnchorPoint);
+  let M = getObservableOrFallback(AppStateTsApi.canvasViewState().scaleToolLastCanvasAnchorPoint);
   let F = qP(e.recordingKey ?? "", "anchorPointChange", k);
   let [j, et] = useState(void 0);
   let ei = useCallback(e => {
@@ -256,14 +256,14 @@ function ey(e) {
     };
   }();
   useEffect(() => {
-    f === QOV.RESIZING && D !== M && (ei(M), F(M));
+    f === UserActionState.RESIZING && D !== M && (ei(M), F(M));
   }, [f, D, F, ei, M]);
   let [el, ed] = useState($Y);
   let [ec, eu] = useState(!1);
   let [ep, eh] = useState(!1);
   let [ey, eb] = useState(!0);
   let eT = useCallback((e, t) => {
-    s && s.length && (glU.setScale(e, t, s.map(e => ({
+    s && s.length && (Fullscreen.setScale(e, t, s.map(e => ({
       origin: {
         x: e.x,
         y: e.y
@@ -278,9 +278,9 @@ function ey(e) {
     eu(!0);
   }, [t]);
   useEffect(() => {
-    !I?.[ibQ.SCALE_ITEM] && b?.[ibQ.SCALE_ITEM] && eu(!0);
+    !I?.[ItemType.SCALE_ITEM] && b?.[ItemType.SCALE_ITEM] && eu(!0);
   }, [b, I]);
-  let eI = useCallback(() => ep ? (eh(!1), !0) : f === QOV.RESIZING || f === QOV.DEFAULT && y === QOV.RESIZING, [f, ep, y]);
+  let eI = useCallback(() => ep ? (eh(!1), !0) : f === UserActionState.RESIZING || f === UserActionState.DEFAULT && y === UserActionState.RESIZING, [f, ep, y]);
   useLayoutEffect(() => {
     if (i && i.length && n && n.length && i.length === n.length) for (let e = 0; e < n.length; e++) {
       let {
@@ -297,7 +297,7 @@ function ey(e) {
       } = i[e].bounds;
       if (_width !== width || _height !== height) {
         if (!eI() && !ec) {
-          eu(xN(_width, width) !== xN(_height, height));
+          eu(nearlyEqual(_width, width) !== nearlyEqual(_height, height));
           break;
         }
       } else if (_x !== x || _y !== y) {
@@ -310,7 +310,7 @@ function ey(e) {
     let e = !1;
     if (getFeatureFlags().ce_scale_tool_skew && n) {
       let t = p.current ?? n.map(e => (e.bounds.width || 1) / (e.bounds.height || 1));
-      let r = glU.getSelectionAngleSum();
+      let r = Fullscreen.getSelectionAngleSum();
       if (n.length === t.length) {
         p.current = [];
         for (let i = 0; i < n.length; ++i) {
@@ -321,7 +321,7 @@ function ey(e) {
         }
       }
     }
-    (e || ec) && (ed($Y), F(Ps), Ez5.canvasViewState().scaleToolLastCanvasAnchorPoint.set(Ps), et(void 0), o(glU.getSelectionRegionsBounds().map(({
+    (e || ec) && (ed($Y), F(Ps), AppStateTsApi.canvasViewState().scaleToolLastCanvasAnchorPoint.set(Ps), et(void 0), o(Fullscreen.getSelectionRegionsBounds().map(({
       origin: e,
       size: t
     }) => ({
@@ -335,8 +335,8 @@ function ey(e) {
     n && n.length && s && s.length && (n !== i || getFeatureFlags().ce_scale_tool_skew && s !== u) && (ey ? ed(er(s[0].width, n[0].bounds.width)) : eb(!0));
   }, [u, n, s, i, ey]);
   useEffect(() => {
-    let e = O === NLJ.SCALE && R !== NLJ.SCALE;
-    e && Object.keys(t).length > 0 && e && [QOV.DEFAULT, QOV.SELECTING_TEXT].includes(f) && N.current && (N.current.focus(), N.current.select());
+    let e = O === DesignGraphElements.SCALE && R !== DesignGraphElements.SCALE;
+    e && Object.keys(t).length > 0 && e && [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT].includes(f) && N.current && (N.current.focus(), N.current.select());
   }, [f, O, R, t]);
   useEffect(() => {
     let e = () => {
@@ -376,7 +376,7 @@ function ey(e) {
   let eA = jsx(_$$g, {
     scale: el,
     onInputKeyDown: eS,
-    onScaleChange: nc.user("change-scale", (e, t, r, i) => {
+    onScaleChange: scopeAwareFunction.user("change-scale", (e, t, r, i) => {
       ed(e);
       eb(!1);
       void 0 !== i && getFeatureFlags().ee_scale_tool_ap_input ? (trackScaleChangeEvent({
@@ -396,7 +396,7 @@ function ey(e) {
         anchorPointSource: be.Selector
       }, !0), flushSync(() => {
         eT(e, D);
-        r && n && n.length > 1 && glU.logMultiEditActionForSelection("scale_panel_finish", null);
+        r && n && n.length > 1 && Fullscreen.logMultiEditActionForSelection("scale_panel_finish", null);
       }));
     }),
     disabled: P,
@@ -406,7 +406,7 @@ function ey(e) {
   let ex = jsx(_$$V, {
     restoreFocusElements: [N.current, C.current, w.current].filter(Boolean),
     anchorPoint: D,
-    onAnchorPointChange: nc.user("change-anchor-point", e => {
+    onAnchorPointChange: scopeAwareFunction.user("change-anchor-point", e => {
       e !== D && (1 !== el && (eT(1, D), eT(el, e)), F(e));
       trackAnchorPointChange({
         anchorPoint: e
@@ -418,7 +418,7 @@ function ey(e) {
     disabled: P,
     heightRef: w,
     onHeightInputKeyDown: eS,
-    onScaleChange: nc.user("change-scale", (e, t, r) => {
+    onScaleChange: scopeAwareFunction.user("change-scale", (e, t, r) => {
       trackScaleChangeEvent({
         value: e,
         source: t,
@@ -428,7 +428,7 @@ function ey(e) {
       ed(e);
       eb(!1);
       eT(e, D);
-      r && (n && n.length > 1 && glU.logMultiEditActionForSelection("scale_panel_finish", null), Y5.commit());
+      r && (n && n.length > 1 && Fullscreen.logMultiEditActionForSelection("scale_panel_finish", null), fullscreenValue.commit());
     }),
     onWidthInputKeyDown: eS,
     recordingKey: e.recordingKey,
@@ -455,29 +455,29 @@ function ey(e) {
   });
 }
 function eT() {
-  Y5.triggerAction("set-tool-default");
+  fullscreenValue.triggerAction("set-tool-default");
 }
 let eI = memo(function ({
   recordingKey: e
 }) {
-  let t = J2(yFm.state().scale);
-  let r = J2(yFm.state().disabled);
-  let n = nc.user("change-scale", e => {
-    yFm.setScale(e);
+  let t = getObservableOrFallback(ScaleToolTsApi.state().scale);
+  let r = getObservableOrFallback(ScaleToolTsApi.state().disabled);
+  let n = scopeAwareFunction.user("change-scale", e => {
+    ScaleToolTsApi.setScale(e);
   });
-  let i = J2(yFm.state().width);
-  i = "number" == typeof i ? i : oV;
-  let a = nc.user("change-scale-width", e => {
-    yFm.setWidth(e);
+  let i = getObservableOrFallback(ScaleToolTsApi.state().width);
+  i = "number" == typeof i ? i : MIXED_MARKER;
+  let a = scopeAwareFunction.user("change-scale-width", e => {
+    ScaleToolTsApi.setWidth(e);
   });
-  let s = J2(yFm.state().height);
-  s = "number" == typeof s ? s : oV;
-  let o = nc.user("change-scale-height", e => {
-    yFm.setHeight(e);
+  let s = getObservableOrFallback(ScaleToolTsApi.state().height);
+  s = "number" == typeof s ? s : MIXED_MARKER;
+  let o = scopeAwareFunction.user("change-scale-height", e => {
+    ScaleToolTsApi.setHeight(e);
   });
-  let u = J2(yFm.state().anchorPoint);
-  let p = nc.user("change-anchor-point", e => {
-    yFm.setAnchorPoint(e);
+  let u = getObservableOrFallback(ScaleToolTsApi.state().anchorPoint);
+  let p = scopeAwareFunction.user("change-anchor-point", e => {
+    ScaleToolTsApi.setAnchorPoint(e);
   });
   let h = qP(e ?? "", "anchorPointChange", e => {
     p(e);
@@ -498,8 +498,8 @@ let eI = memo(function ({
     let l = p8("activeUserAction");
     let [u, p] = useState(!1);
     useEffect(() => {
-      let t = s === NLJ.SCALE && o !== NLJ.SCALE;
-      Object.keys(e).length > 0 && t && [QOV.DEFAULT, QOV.SELECTING_TEXT].includes(l) && n.current && (n.current.focus(), n.current.select());
+      let t = s === DesignGraphElements.SCALE && o !== DesignGraphElements.SCALE;
+      Object.keys(e).length > 0 && t && [UserActionState.DEFAULT, UserActionState.SELECTING_TEXT].includes(l) && n.current && (n.current.focus(), n.current.select());
     }, [l, s, o, e]);
     useEffect(() => {
       let e = () => {
@@ -630,7 +630,7 @@ export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DE
     dropdownShown: e.dropdownShown,
     editModeType: e.activeCanvasEditModeType,
     exportBackgroundDisabled,
-    hasExports: !!exportSettings && _W(exportSettings, []).length > 0,
+    hasExports: !!exportSettings && valueOrFallback(exportSettings, []).length > 0,
     inheritStyleID: styleIdForFill || null,
     inheritStyleKey: inheritFillStyleKey || null,
     isPanelBodyCollapsedAtom: null,
@@ -749,7 +749,7 @@ export let $$eP4 = a.ConnectedTransformModifiersPanel;
     smallNudgeAmount,
     bigNudgeAmount
   } = sT();
-  let i = J2(Ez5.editorPreferences().showFrameGrids);
+  let i = getObservableOrFallback(AppStateTsApi.editorPreferences().showFrameGrids);
   let {
     layoutGrids,
     inheritGridStyleKey,
@@ -806,7 +806,7 @@ export let $$eD3 = s.ConnectedGridsPanel;
     ...t
   }))(function (e) {
     let r = useContext(zK);
-    let n = J2(Ez5.propertiesPanelState().enabledTypePanelControls);
+    let n = getObservableOrFallback(AppStateTsApi.propertiesPanelState().enabledTypePanelControls);
     let i = e.shouldUseSelectedStyleProperties ? pw : zj;
     let a = e.shouldUseSelectedStyleProperties ? DQ : fC;
     let {
@@ -860,7 +860,7 @@ export let $$eD3 = s.ConnectedGridsPanel;
       fontVariations
     } = a("hasHadRTLText", "textUserLayoutVersion", "textExplicitLayoutVersion", "textBidiVersion", "fontVariations");
     let eg = wR("guid") ?? null;
-    (0 | n) & 1 << mrc.TEXT_TRUNCATION && debug(null != maxLines, "TypePanel missing maxLines");
+    (0 | n) & 1 << TextAlignmentOptions.TEXT_TRUNCATION && debug(null != maxLines, "TypePanel missing maxLines");
     let {
       smallNudgeAmount,
       bigNudgeAmount

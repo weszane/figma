@@ -2,14 +2,14 @@ import { atom } from 'jotai';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { F } from '../905/302958';
 import { getI18nString } from '../905/303541';
-import { nF } from '../905/350402';
+import { createOptimistThunk } from '../905/350402';
 import { debugState } from '../905/407919';
 import { zX } from '../905/576487';
 import { gc } from '../figma_app/120227';
 import { PW } from '../figma_app/198712';
 import { mJ } from '../figma_app/311375';
 import { tJ } from '../figma_app/741237';
-import { tKW } from '../figma_app/763686';
+import { MeasurementUnit } from '../figma_app/763686';
 let $$m7 = atom(!1);
 let $$g3 = atom({});
 export function $$f8({
@@ -33,7 +33,7 @@ export function $$b10({
   let {
     unit
   } = gc();
-  let s = unit === tKW.SCALED;
+  let s = unit === MeasurementUnit.SCALED;
   let o = e => (e ?? 0).toLocaleString('en', {
     maximumFractionDigits: 2
   });
@@ -104,13 +104,13 @@ let v = 'return_to_previous';
 let A = null;
 let x = !1;
 let N = null;
-let $$C9 = nF((e, t) => {
+let $$C9 = createOptimistThunk((e, t) => {
   t && (A = {
     guidsToReturnTo: Object.keys(e.getState().mirror.sceneGraphSelection).sort(),
     selectedGUID: t
   });
 });
-let $$w2 = nF(e => {
+let $$w2 = createOptimistThunk(e => {
   let t = Object.keys(e.getState().mirror.sceneGraphSelection).sort();
   let r = A && t.length === 1 && A.selectedGUID === t[0];
   r && !x ? (document.addEventListener('keydown', O), e.dispatch(F.enqueue({

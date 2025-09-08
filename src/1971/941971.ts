@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { $n } from "../905/521428";
-import { Egt, biQ, XJn, mKm, oVz } from "../figma_app/763686";
+import { SceneGraphHelpers, ComponentPropsAiCPPBindings, FirstDraftHelpers, LayoutSizingMode, DraftState } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { logError, logWarning } from "../905/714362";
 import { g as _$$g } from "../905/880308";
@@ -36,7 +36,7 @@ import { Xh } from "../figma_app/803787";
 import { Ib } from "../905/129884";
 import { Gh, Xs } from "../figma_app/707567";
 import { m as _$$m } from "../figma_app/175364";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import B from "../vendor/267721";
 import { trackEventAnalytics } from "../905/449184";
 import { H9 } from "../figma_app/930338";
@@ -50,7 +50,7 @@ import { sI, YG } from "../9410/797086";
 var G = B;
 function W(e) {
   return "SYMBOL" === e.type ? {
-    symbolId: Egt.getAssetKeyForPublish(e.guid),
+    symbolId: SceneGraphHelpers.getAssetKeyForPublish(e.guid),
     version: e.sharedSymbolVersion
   } : "INSTANCE" === e.type && e.symbolId ? W(getSingletonSceneGraph().get(e.symbolId)) : {
     symbolId: "",
@@ -119,7 +119,7 @@ async function Q(e, t, a) {
  ${JSON.stringify(i)}`, e);
 }
 function Z(e, t, a) {
-  l7.user("Create sticky note with IP Conflict eval results", () => {
+  permissionScopeHandler.user("Create sticky note with IP Conflict eval results", () => {
     let l = getSingletonSceneGraph().createNode("FRAME");
     let i = getSingletonSceneGraph().createNode("TEXT");
     l.appendChild(i);
@@ -134,7 +134,7 @@ function Z(e, t, a) {
       x: l.size.x,
       y: l.size.y
     };
-    biQ.setTextContentOnTextNode(i.guid, t);
+    ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, t);
     getSingletonSceneGraph().getCurrentPage().appendChild(l);
   });
 }
@@ -352,7 +352,7 @@ async function eo({
   kit: a,
   customEvalPrompts: l
 }) {
-  let i = "LOCAL" === a.dsKitKey.type ? XJn.getKitKey(a.dsKitKey.pageId) ?? "" : a.dsKitKey.key;
+  let i = "LOCAL" === a.dsKitKey.type ? FirstDraftHelpers.getKitKey(a.dsKitKey.pageId) ?? "" : a.dsKitKey.key;
   let n = "LOCAL" === a.dsKitKey.type;
   let {
     data: {
@@ -542,32 +542,32 @@ function ec({
         }
       })]
     }), jsxs(_$$Y, {
-      children: [jsx(_$$S, {
+      children: [jsx(Checkbox, {
         checked: p,
         disabled: J,
         onChange: () => m(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Gen images"
         })
-      }), jsx(_$$S, {
+      }), jsx(Checkbox, {
         checked: v,
         disabled: J,
         onChange: () => b(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Detach"
         })
-      }), jsx(_$$S, {
+      }), jsx(Checkbox, {
         checked: I,
         disabled: J,
         onChange: () => w(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Ip conflict"
         })
-      }), G && jsx(_$$S, {
+      }), G && jsx(Checkbox, {
         checked: K,
         disabled: J,
         onChange: () => k(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Use published kit version"
         })
       }), G && _ && jsx(_$$Z, {
@@ -796,7 +796,7 @@ async function ep({
       id: e,
       ...s[t]
     }));
-    for (let e of y.childrenNodes) e.stackHorizontalLayoutSize = mKm.HUG_CONTENT;
+    for (let e of y.childrenNodes) e.stackHorizontalLayoutSize = LayoutSizingMode.HUG_CONTENT;
     let S = [];
     S.push(qV({
       containingNodeId: m,
@@ -846,7 +846,7 @@ async function ep({
       }));
     })());
     await Promise.all(S);
-    l && (await oT(t.dsKitKey, m, oVz.CURRENT, {
+    l && (await oT(t.dsKitKey, m, DraftState.CURRENT, {
       detachVariables: !0
     }));
     debugState.dispatch(_$$F.enqueue({
@@ -926,7 +926,7 @@ async function ex({
   openFileKey: a,
   customizableVariables: l
 }) {
-  let i = "LOCAL" === e.dsKitKey.type ? XJn.getKitKey(e.dsKitKey.pageId) ?? "" : e.dsKitKey.key;
+  let i = "LOCAL" === e.dsKitKey.type ? FirstDraftHelpers.getKitKey(e.dsKitKey.pageId) ?? "" : e.dsKitKey.key;
   let n = "LOCAL" === e.dsKitKey.type;
   n && a && (await p4(a, e, l));
   let {
@@ -1181,17 +1181,17 @@ function eI({
       fontWeight: "medium",
       children: "Serialize & Insert"
     }), jsxs(_$$Y, {
-      children: [jsx(_$$S, {
+      children: [jsx(Checkbox, {
         checked: w,
         onChange: () => K(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Serialize with Direct Gen JSX"
         })
-      }), jsx(_$$S, {
+      }), jsx(Checkbox, {
         checked: j || w,
         disabled: w,
         onChange: () => k(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Include props in JSX (for Llama)"
         })
       })]
@@ -1202,10 +1202,10 @@ function eI({
       placeholder: "Select an example to serialize it or enter JSX to insert directly",
       onChange: e => I(e.target.value)
     }), jsx(_$$Y, {
-      children: jsx(_$$S, {
+      children: jsx(Checkbox, {
         checked: d,
         onChange: () => p(e => !e),
-        label: jsx(_$$J, {
+        label: jsx(Label, {
           children: "Gen images"
         })
       })
@@ -1249,7 +1249,7 @@ function eI({
 }
 function ew(e) {
   let t = e.kit.dsKitKey;
-  let a = "LOCAL" === t.type ? XJn.getKitKey(t.pageId) : t.key;
+  let a = "LOCAL" === t.type ? FirstDraftHelpers.getKitKey(t.pageId) : t.key;
   return a ? {
     kitKey: a,
     isLocal: "LOCAL" === t.type,

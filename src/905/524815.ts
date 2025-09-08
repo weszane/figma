@@ -22,7 +22,7 @@ import { m as _$$m } from "../905/924751";
 import { Y } from "../905/192715";
 import { m as _$$m2 } from "../905/601661";
 import { FPublicationStatusType } from "../figma_app/191312";
-import { m as _$$m3 } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { PR } from "../figma_app/911880";
 import { r as _$$r } from "../figma_app/78879";
 import { S3, Rr, fY, YI, SK, Ur, RN, nz, fe } from "../905/234639";
@@ -257,7 +257,7 @@ let $$P2 = {
       description
     } = t;
     if (createNewVersionOnSubmit) try {
-      i = (await _$$m3(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
+      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
       return new _$$o.SubmissionError({

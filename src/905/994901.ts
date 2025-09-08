@@ -1,9 +1,9 @@
-import { glU } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Fullscreen } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { ds } from "../figma_app/314264";
 import { d1 } from "../905/766303";
 import { vO, yc } from "../figma_app/671547";
@@ -13,13 +13,13 @@ export async function $$h1(e, t, i, s, o) {
   let l;
   let h;
   function g(e, a) {
-    return l7.system("finalize-link-preview-failure", () => !i && a ? {
+    return permissionScopeHandler.system("finalize-link-preview-failure", () => !i && a ? {
       status: "success",
-      nodeID: glU.finalizeLinkPreview(a, {
+      nodeID: Fullscreen.finalizeLinkPreview(a, {
         url: t
       }),
       type: "preview"
-    } : (a && glU.removeLoadingEmbed(a), console.error(e), {
+    } : (a && Fullscreen.removeLoadingEmbed(a), console.error(e), {
       status: "error",
       error: e
     }));
@@ -28,7 +28,7 @@ export async function $$h1(e, t, i, s, o) {
   let f = d1(o)?.key ?? "";
   let _ = vO(t);
   try {
-    h = glU.insertLoadingEmbedInCanvas(encodeURIComponent(t), encodeURIComponent(e));
+    h = Fullscreen.insertLoadingEmbedInCanvas(encodeURIComponent(t), encodeURIComponent(e));
     ds(yc.ATTEMPT, f, o, {
       entrypoint: s,
       domain: _,
@@ -42,7 +42,7 @@ export async function $$h1(e, t, i, s, o) {
   } catch (e) {
     return g("Failed to get metadata for the provided text", h);
   }
-  return l ? l7.system("finalize-link-preview", () => {
+  return l ? permissionScopeHandler.system("finalize-link-preview", () => {
     switch (l.thumbnailImage && l.thumbnailImageHash && K(l.thumbnailImageHash, new Uint8Array(l.thumbnailImage.data)), l.favicon && l.faviconImageHash && K(l.faviconImageHash, new Uint8Array(l.favicon.data)), ds(yc.SUCCESS, f, o, {
       entrypoint: s,
       domain: _,
@@ -52,7 +52,7 @@ export async function $$h1(e, t, i, s, o) {
       case "preview":
         return {
           status: "success",
-          nodeID: glU.finalizeLinkPreview(h, {
+          nodeID: Fullscreen.finalizeLinkPreview(h, {
             url: l.url,
             title: l.title,
             description: l.description,
@@ -67,7 +67,7 @@ export async function $$h1(e, t, i, s, o) {
       case "embed":
         return {
           status: "success",
-          nodeID: glU.finalizeEmbed(h, {
+          nodeID: Fullscreen.finalizeEmbed(h, {
             url: l.url,
             srcUrl: l.srcUrl,
             originalText: l.originalText,
@@ -86,14 +86,14 @@ export async function $$h1(e, t, i, s, o) {
     }
   }) : g("Failed to get metadata for the provided text", h);
 }
-export let $$g0 = nF(async (e, {
+export let $$g0 = createOptimistThunk(async (e, {
   clipboardText: t,
   url: i,
   isTextIframe: r,
   entrypoint: a
 }) => {
   if ("error" === (await $$h1(t, i, r, a, e.getState())).status) {
-    glU.tryPastingTextFromClipboardAsTextNode(t);
+    Fullscreen.tryPastingTextFromClipboardAsTextNode(t);
     let i = d1(e.getState())?.key ?? "";
     ds(yc.ERROR, i, e.getState(), {
       entrypoint: a,

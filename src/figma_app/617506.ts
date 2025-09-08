@@ -4,7 +4,7 @@ import { createLocalStorageAtom, atom, useAtomValueAndSetter } from "../figma_ap
 import { ZC } from "../figma_app/39751";
 import { uQ } from "../figma_app/311375";
 import { sf } from "../905/929976";
-import { AS } from "../905/156213";
+import { hideModalHandler } from "../905/156213";
 import { u as _$$u, Rb, L5, rW } from "../figma_app/852050";
 import { _6 } from "../figma_app/386952";
 import { Pw } from "../905/782020";
@@ -51,7 +51,7 @@ export function $$b4() {
   let t = ZC(e);
   let r = useDispatch();
   useEffect(() => {
-    t && e !== t && r(AS());
+    t && e !== t && r(hideModalHandler());
   }, [r, t, e]);
 }
 export function $$T7(e) {

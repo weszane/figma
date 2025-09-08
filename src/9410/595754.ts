@@ -1,6 +1,6 @@
-import { NLJ } from "../figma_app/763686";
+import { DesignGraphElements } from "../figma_app/763686";
 let $$n1 = "whiteboardToolbelt";
-let $$a0 = NLJ.SELECT;
+let $$a0 = DesignGraphElements.SELECT;
 let $$s4 = "whiteboardDrawingToolbelt";
 let $$o2 = "whiteboardStickyToolbelt";
 let $$l3 = "whiteboardDiagrammingToolbelt";

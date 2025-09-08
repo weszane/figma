@@ -1,4 +1,4 @@
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
 import { FViewPermissionType, FPermissionLevelType } from "../figma_app/191312";
 import { Bi } from "../905/652992";
@@ -15,7 +15,7 @@ export function $$d1(e) {
   return t;
 }
 export function $$c0(e, t, r) {
-  e(to({
+  e(showModalHandler({
     type: DV,
     data: {
       team: r,

@@ -21,7 +21,7 @@ import { n6 } from "../905/234821";
 import { p as _$$p } from "../905/36308";
 import { _p } from "../figma_app/297957";
 import { $n, gW } from "../905/930279";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { f as _$$f } from "../figma_app/990299";
 import { ck } from "../905/87821";
 import { isZoomIntegration } from "../figma_app/469876";
@@ -176,7 +176,7 @@ function Q({
         } : void 0
       });
       U(n);
-      return i === ai.SAME_TAB ? Y5.dispatchIfSaved(a) : r(a);
+      return i === ai.SAME_TAB ? fullscreenValue.dispatchIfSaved(a) : r(a);
     }, [r, I, g, f, e, U]);
     let V = useMemo(() => {
       if (t !== FFileType.DESIGN) return null;
@@ -188,7 +188,7 @@ function Q({
         displayText: getI18nString("fullscreen_actions.new-from-sketch"),
         callback: () => {
           U("action_new_from_sketch");
-          Y5.dispatchIfSaved(_$$f());
+          fullscreenValue.dispatchIfSaved(_$$f());
         },
         iconType: createElement(_$$b),
         featureFlags: [],

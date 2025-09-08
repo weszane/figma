@@ -1,9 +1,9 @@
 import { throwTypeError } from "../figma_app/465776";
-import { AD } from "../905/871411";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { k as _$$k } from "../905/651849";
 import { getI18nString } from "../905/303541";
-import { gl, hS, oV, _W } from "../905/216495";
+import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { ag, i5, f0 } from "../figma_app/975811";
 export class $$c30 {
   constructor() {
@@ -160,25 +160,25 @@ export class $$f17 {
     this.scene = e;
   }
   hasNameForNode(e) {
-    return e === AD || null == e || !!this.scene.get(e);
+    return e === defaultSessionLocalIDString || null == e || !!this.scene.get(e);
   }
   format(e) {
-    if (gl(e)) return getI18nString("fullscreen.mixed");
-    if (e === AD || null == e) return getI18nString("proto.node_name_formatter.none");
+    if (isInvalidValue(e)) return getI18nString("fullscreen.mixed");
+    if (e === defaultSessionLocalIDString || null == e) return getI18nString("proto.node_name_formatter.none");
     let t = this.scene.get(e);
     return t ? t.stateAbbreviatedName || t.name : getI18nString("proto.node_name_formatter.missing");
   }
 }
 export function $$E8(e) {
-  if (!hS(e.connectionType)) return oV;
-  let t = _W(e.connectionType, "NONE");
-  let r = _W(e.mediaAction, "PLAY");
+  if (!isValidValue(e.connectionType)) return MIXED_MARKER;
+  let t = valueOrFallback(e.connectionType, "NONE");
+  let r = valueOrFallback(e.mediaAction, "PLAY");
   switch (t) {
     case "NONE":
       return "NONE";
     case "INTERNAL_NODE":
-      if (!hS(e.navigationType)) return oV;
-      switch (_W(e.navigationType, "NAVIGATE")) {
+      if (!isValidValue(e.navigationType)) return MIXED_MARKER;
+      switch (valueOrFallback(e.navigationType, "NAVIGATE")) {
         case "NAVIGATE":
           return "NAVIGATE_TO";
         case "OVERLAY":
@@ -231,8 +231,8 @@ export function $$E8(e) {
 }
 export function $$y15(e) {
   if ("UPDATE_MEDIA_RUNTIME" === e.connectionType) {
-    if (gl(e.mediaAction)) return oV;
-    switch (_W(e.mediaAction, "PLAY")) {
+    if (isInvalidValue(e.mediaAction)) return MIXED_MARKER;
+    switch (valueOrFallback(e.mediaAction, "PLAY")) {
       case "PLAY":
       case "PAUSE":
       case "TOGGLE_PLAY_PAUSE":
@@ -517,9 +517,9 @@ export class $$A27 {
     this.timestampFormatter = new f0(this.oneHourInSeconds, !0);
   }
   format(e) {
-    if (!e || !hS(e)) return getI18nString("proto.action_none");
-    let t = hS(e.mediaSkipToTime) ? e.mediaSkipToTime ?? 0 : 0;
-    let r = hS(e.mediaSkipByAmount) ? e.mediaSkipByAmount ?? 5 : 5;
+    if (!e || !isValidValue(e)) return getI18nString("proto.action_none");
+    let t = isValidValue(e.mediaSkipToTime) ? e.mediaSkipToTime ?? 0 : 0;
+    let r = isValidValue(e.mediaSkipByAmount) ? e.mediaSkipByAmount ?? 5 : 5;
     let n = this.secondsFormatter.format(r);
     let i = this.timestampFormatter.format(t);
     if ("UPDATE_MEDIA_RUNTIME" === e.connectionType) switch (e.mediaAction) {

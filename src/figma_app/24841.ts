@@ -15,27 +15,27 @@ import { F } from "../905/302958";
 import { q0 } from "../figma_app/976345";
 import { U2 } from "../figma_app/545293";
 import { os } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Pg } from "../figma_app/314264";
 import { z$ } from "../figma_app/840917";
 import { d9 } from "../figma_app/740025";
 import { y as _$$y, J } from "../905/235145";
 import { H } from "../905/202181";
-import { nF } from "../905/350402";
-let $$A1 = nF(async () => {
+import { createOptimistThunk } from "../905/350402";
+let $$A1 = createOptimistThunk(async () => {
   try {
     await XHR.post("/api/user/migrate_personal_drafts");
   } catch (e) {
     logInfo("planSpaces", "Personal drafts not auto-migrated for user", e);
   }
 });
-let $$x2 = nF(async e => {
+let $$x2 = createOptimistThunk(async e => {
   try {
     let t = e.getState();
     for (let n of t.authedUsers.orderedIds) if (await z$(n)) {
       w();
       let n = _$$xv;
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: n,
         data: {
           users: Object.values(t.authedUsers.byId),
@@ -51,7 +51,7 @@ let $$x2 = nF(async e => {
   }
   e.dispatch(N());
 });
-let N = nF(e => {
+let N = createOptimistThunk(e => {
   if (desktopAPIInstance) {
     Ay.redirect("/logout");
     return;
@@ -70,12 +70,12 @@ let N = nF(e => {
     }));
   });
 });
-let $$C5 = nF(async (e, t) => {
+let $$C5 = createOptimistThunk(async (e, t) => {
   try {
     if (await z$(t.user.id)) {
       w();
       let n = xv;
-      e.dispatch(to({
+      e.dispatch(showModalHandler({
         type: n,
         data: {
           users: [t.user],
@@ -98,7 +98,7 @@ let w = () => {
     });
   } catch (e) {}
 };
-let O = nF((e, t) => {
+let O = createOptimistThunk((e, t) => {
   H.logoutOneUser(t.user.id).then(r => {
     e.dispatch(os(r.data.meta));
     e.dispatch(q0(r.data.meta));

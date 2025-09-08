@@ -3,16 +3,16 @@ import { useCallback } from "react";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { Hq } from "../905/189185";
+import { AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getI18nString } from "../905/303541";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { s3 } from "../figma_app/171177";
 import { z6 } from "../figma_app/846841";
 import { _9 } from "../figma_app/119420";
 import { Pe } from "../1156/713925";
 import { E } from "../1156/298326";
-export let $$f0 = Ju(function (e) {
+export let $$f0 = registerModal(function (e) {
   let t = hS(e);
   let {
     claimAPendingAttachmentOrMakeOne,
@@ -28,7 +28,7 @@ export let $$f0 = Ju(function (e) {
     let a = i.get(s);
     if (!a) return;
     let l = i.getInternalCanvas();
-    l && (Hq.system("figmake-inserted-component", () => {
+    l && (AIScopeHandler.system("figmake-inserted-component", () => {
       l.appendChild(a);
     }), E(s, i, setAttachments, () => {}, claimAPendingAttachmentOrMakeOne));
   }, [setAttachments, claimAPendingAttachmentOrMakeOne]);
@@ -63,5 +63,5 @@ export let $$f0 = Ju(function (e) {
       })]
     })
   });
-}, "ChatAssetSearchModal", ZU.YES);
+}, "ChatAssetSearchModal", ModalSupportsBackground.YES);
 export const H = $$f0;

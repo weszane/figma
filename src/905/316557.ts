@@ -3,8 +3,8 @@ import { useEffect, useCallback, useState, createRef, useRef, useMemo, memo, Fra
 import { useSelector, useDispatch } from "../vendor/514228";
 import { gZ, hE, HG, bL } from "../905/598775";
 import { IK } from "../905/521428";
-import { Ez5, glU, Z_n } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
+import { AppStateTsApi, Fullscreen, VariableDataType } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createAtomWithEquality, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
@@ -16,9 +16,9 @@ import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { hS, gl } from "../905/216495";
-import { ut } from "../figma_app/84367";
+import { fullscreenValue } from "../figma_app/455680";
+import { isValidValue, isInvalidValue } from "../905/216495";
+import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { cn, VZ } from "../905/959568";
 import { UG } from "../figma_app/628987";
@@ -122,13 +122,13 @@ function em({
   onClose: i
 }) {
   let a = useAtomWithSubscription(TN).length;
-  let s = Ez5?.slideThemeLibBindings().numSlidesUsingTheme(e) ?? 0;
+  let s = AppStateTsApi?.slideThemeLibBindings().numSlidesUsingTheme(e) ?? 0;
   let o = !0;
   let c = getI18nString("slides.properties_panel.theme.remove_style_from_deck");
   1 === a ? (o = !1, c = getI18nString("slides.properties_panel.theme.cant_remove_only_style")) : s > 0 && (o = !1, c = getI18nString("slides.properties_panel.theme.cant_remove_used_style"));
   let u = useCallback(() => {
-    l7.user("delete-theme", () => {
-      o && (Ez5.slideThemeLibBindings().deleteTheme(e), trackEventAnalytics("Theme Removed"), i());
+    permissionScopeHandler.user("delete-theme", () => {
+      o && (AppStateTsApi.slideThemeLibBindings().deleteTheme(e), trackEventAnalytics("Theme Removed"), i());
     });
   }, [e, o, i]);
   let m = Pt(t, "removeTheme");
@@ -179,7 +179,7 @@ function ef({
 }) {
   let [s, o] = useState(t);
   let c = useCallback(() => {
-    s.trim().length > 0 && s !== t && l7.user("rename-theme", () => Ez5?.slideThemeLibBindings().setThemeName(e, s));
+    s.trim().length > 0 && s !== t && permissionScopeHandler.user("rename-theme", () => AppStateTsApi?.slideThemeLibBindings().setThemeName(e, s));
     a();
   }, [s, t, e, a]);
   let u = useCallback(e => {
@@ -212,12 +212,12 @@ function e_({
   let o = useSelector(e => e.stylePickerShown);
   let [c, u] = useState(void 0);
   if (!i.length) return null;
-  let p = nc.user("slides-add-text-style", () => {
-    if (!glU || !Ez5) return;
-    let t = glU.createStyleWithoutSelection("inheritTextStyleKey", `Text style ${i.length + 1}`, "", !1);
+  let p = scopeAwareFunction.user("slides-add-text-style", () => {
+    if (!Fullscreen || !AppStateTsApi) return;
+    let t = Fullscreen.createStyleWithoutSelection("inheritTextStyleKey", `Text style ${i.length + 1}`, "", !1);
     if (!t) return;
     let n = getSingletonSceneGraph().getStyleNodeByRef(t);
-    n && (Ez5?.slideThemeLibBindings().addStyleToLocalTheme(n.guid, e), u(n.guid));
+    n && (AppStateTsApi?.slideThemeLibBindings().addStyleToLocalTheme(n.guid, e), u(n.guid));
   });
   return jsxs(Fragment, {
     children: [jsx(ew, {}), jsxs("div", {
@@ -266,8 +266,8 @@ function eA({
   let [p, h] = useState([]);
   let g = useCallback(() => h([]), [h]);
   let f = useCallback((e, t, i) => {
-    for (let n of e) l7.user("reorder-slide-theme-style", () => {
-      glU?.insertStyleBetween(n.node_id, t?.node_id || "", i?.node_id || "");
+    for (let n of e) permissionScopeHandler.user("reorder-slide-theme-style", () => {
+      Fullscreen?.insertStyleBetween(n.node_id, t?.node_id || "", i?.node_id || "");
     });
   }, []);
   return jsx(_$$q, {
@@ -337,8 +337,8 @@ function ey({
     (void 0 === k || k && !C) && N.flush();
   }, [k, C, N]);
   let P = useCallback(() => {
-    if (E) b(sw());else if (R) glU?.findMissingFontsAndShowPopover();else if (I.current) {
-      glU?.selectStyleByGuid(t.node_id);
+    if (E) b(sw());else if (R) Fullscreen?.findMissingFontsAndShowPopover();else if (I.current) {
+      Fullscreen?.selectStyleByGuid(t.node_id);
       let e = I.current.getBoundingClientRect();
       b(rk({
         style: t,
@@ -486,7 +486,7 @@ function ex({
   let u = ZC(o);
   let m = function (e, t) {
     let i = _$$bL2(e?.varId ?? "", t);
-    return i && i.type === Z_n.COLOR ? i : null;
+    return i && i.type === VariableDataType.COLOR ? i : null;
   }(o, s);
   let h = useMemo(() => {
     if (o && m) return NQ(m.value);
@@ -537,7 +537,7 @@ function ex({
   }, [R, C, T]);
   let P = k1(e);
   let O = useCallback(() => {
-    let e = l7.user("slides-add-theme-color", () => {
+    let e = permissionScopeHandler.user("slides-add-theme-color", () => {
       let e = UE;
       if (i.length > 0) {
         let t = i[i.length - 1]?.paint?.color;
@@ -550,7 +550,7 @@ function ex({
   let D = CK();
   let L = rR(D);
   if (useEffect(() => {
-    x && o?.varId !== u?.varId && (Y5.commit(), S(!1));
+    x && o?.varId !== u?.varId && (fullscreenValue.commit(), S(!1));
   }, [u, o, x]), useEffect(() => () => {
     c(null);
     closeColorPicker();
@@ -1154,7 +1154,7 @@ export function $$eX0({
     let u = useAtomWithSubscription(TN);
     let h = useAtomWithSubscription(Dq);
     let g = function () {
-      let e = ut(Ez5?.canvasGrid().canvasGridArray, []);
+      let e = getObservableValue(AppStateTsApi?.canvasGrid().canvasGridArray, []);
       let t = Fk((e, t) => {
         let i = {};
         for (let n of t) for (let t of n) {
@@ -1198,9 +1198,9 @@ export function $$eX0({
       L.current[e] = t;
     },
     isThemeBeingEdited: e => N && h === e,
-    onCreateNewThemeClick: nc.user("create-new-slide-theme", () => {
+    onCreateNewThemeClick: scopeAwareFunction.user("create-new-slide-theme", () => {
       i();
-      Y5.commit();
+      fullscreenValue.commit();
       z();
     }),
     onPreviewRowClick: (e, i) => {
@@ -1211,7 +1211,7 @@ export function $$eX0({
     recordingKey: c
   });
   let q = useCallback(() => {
-    u.length > 0 && 1 === Y.length && e && hS(e) ? V(e, (e, t) => {
+    u.length > 0 && 1 === Y.length && e && isValidValue(e) ? V(e, (e, t) => {
       let {
         x,
         y
@@ -1270,13 +1270,13 @@ let eQ = forwardRef((e, t) => {
   let f = UG();
   let A = function (e) {
     let t = useAtomWithSubscription(Dq);
-    return gl(e) ? getI18nString("slides.properties_panel.theme.mixed") : t[e] || getI18nString("slides.properties_panel.theme.generic_theme_name");
+    return isInvalidValue(e) ? getI18nString("slides.properties_panel.theme.mixed") : t[e] || getI18nString("slides.properties_panel.theme.generic_theme_name");
   }(themeId);
   return getFeatureFlags().slides_a11y_template_styles ? jsx(bL, {
     ...Ay.props(e1.selectedRoot, isActive ? e1.active : e1.inactive),
     ref: t,
     "data-testid": "theme-picker-button",
-    children: gl(themeId) ? jsx(eU, {
+    children: isInvalidValue(themeId) ? jsx(eU, {
       width,
       recordingKey,
       onClick
@@ -1301,7 +1301,7 @@ let eQ = forwardRef((e, t) => {
     forwardedRef: t,
     dataTestId: "theme-picker-button",
     recordingKey,
-    children: gl(themeId) ? jsx(eU, {
+    children: isInvalidValue(themeId) ? jsx(eU, {
       width,
       onClick,
       recordingKey

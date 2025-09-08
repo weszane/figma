@@ -8,11 +8,11 @@ import { QP } from "../vendor/335500";
 import { xR } from "../vendor/558427";
 import { getSingletonSceneGraph } from "../905/700578";
 import { isNotNullish } from "../figma_app/95419";
-import { glU, mov, HzA, mKm } from "../figma_app/763686";
+import { Fullscreen, weakHandleHelpers, TrackType, LayoutSizingMode } from "../figma_app/763686";
 import { throwTypeError, assert, throwError } from "../figma_app/465776";
-import { l7 } from "../905/189185";
-import { ye, EV } from "../905/426868";
-import { _g, qE } from "../figma_app/492908";
+import { permissionScopeHandler } from "../905/189185";
+import { getClosestFontName, loadNonPluginFont } from "../905/426868";
+import { positiveMod, clamp } from "../figma_app/492908";
 import { I0, oq } from "../figma_app/273493";
 import { Ay } from "../vendor/917855";
 import { PW, KS } from "../2824/430873";
@@ -2976,11 +2976,11 @@ async function ek(e, t) {
   let s = null;
   let a = null;
   return new Promise((t, n) => {
-    if (!glU) {
+    if (!Fullscreen) {
       n(Error("Fullscreen is not available"));
       return;
     }
-    a = (s = glU.registerImageDesignToReact(e, i, r.buffer)).subscribeFromJs(() => {
+    a = (s = Fullscreen.registerImageDesignToReact(e, i, r.buffer)).subscribeFromJs(() => {
       if (s?.getCopy()) {
         if (!r.getSuccess()) {
           n(Error("Failed to get hash for image"));
@@ -2994,8 +2994,8 @@ async function ek(e, t) {
       }
     });
   }).$$finally(() => {
-    s && mov?.isAlive(s.handle) && a && s.unsubscribeFromJs(a);
-    glU?.cleanUpGetHashForImageDesignToReactRequest(r.getRequestId());
+    s && weakHandleHelpers?.isAlive(s.handle) && a && s.unsubscribeFromJs(a);
+    Fullscreen?.cleanUpGetHashForImageDesignToReactRequest(r.getRequestId());
   });
 }
 async function ew(e) {
@@ -3896,10 +3896,10 @@ function eq(e) {
   let t = parseFloat(e);
   let i = 0;
   i = e.includes("grad") ? .9 * t : e.includes("rad") ? 180 * t / Math.PI : e.includes("turn") ? 360 * t : t;
-  return (i = _g(i, 360)) / 360;
+  return (i = positiveMod(i, 360)) / 360;
 }
 function eJ(e) {
-  return qE(e, 0, 1);
+  return clamp(e, 0, 1);
 }
 let eK = /^(?:rgba?\()?\s*([-+]?[0-9]*\.?[0-9]+)%\s*?[, ]\s*([-+]?[0-9]*\.?[0-9]+)%\s*?[, ]\s*([-+]?[0-9]*\.?[0-9]+)%\s*?(?:[,\/ ]\s*([-+]?[0-9]*\.?[0-9]+%?))?\s*\)?\s*;?$/;
 let eZ = /^(?:rgba?\()?\s*([0-9]*\.?[0-9]+)\s*?[, ]\s*([0-9]*\.?[0-9]+)\s*?[, ]\s*([0-9]*\.?[0-9]+)\s*?(?:[,\/ ]\s*([-+]?[0-9]*\.?[0-9]+%?))?\s*\)?\s*;?$/;
@@ -4217,7 +4217,7 @@ function tn(e, t, i) {
       let i = null;
       let r = parseInt(e.styles.fontWeight ?? "400");
       let s = "italic" == e.styles.fontStyle;
-      if (i = ye(t, r, s) ?? ye(td[t], r, s) ?? ye(to[t], r, s)) return {
+      if (i = getClosestFontName(t, r, s) ?? getClosestFontName(td[t], r, s) ?? getClosestFontName(to[t], r, s)) return {
         ...i,
         postscript: i.family
       };
@@ -4312,17 +4312,17 @@ let td = {
   "ui-rounded": tl ? "SF Pro Rounded" : "Arial Rounded MT"
 };
 if (443 == require.j) {}
-export async function $$tu1(e, t, i, r = HzA.IGNORE) {
+export async function $$tu1(e, t, i, r = TrackType.IGNORE) {
   let s = await tp(i, e.assets);
-  await EV({
+  await loadNonPluginFont({
     family: "Inter",
     style: "Regular"
   });
-  await EV({
+  await loadNonPluginFont({
     family: "Arimo",
     style: "Regular"
   });
-  return l7.system("html-to-figma", () => {
+  return permissionScopeHandler.system("html-to-figma", () => {
     let i = t.createNode("FRAME", {
       tracking: r
     });
@@ -4447,17 +4447,17 @@ async function tm(e, t) {
   return i;
 }
 if (443 == require.j) {}
-export async function $$tg2(e, t, i, r = HzA.IGNORE) {
+export async function $$tg2(e, t, i, r = TrackType.IGNORE) {
   let s = await tb(i, e.assets);
-  await EV({
+  await loadNonPluginFont({
     family: "Inter",
     style: "Regular"
   });
-  await EV({
+  await loadNonPluginFont({
     family: "Arimo",
     style: "Regular"
   });
-  return l7.system("html-to-figma", () => {
+  return permissionScopeHandler.system("html-to-figma", () => {
     let i = t.createNode("FRAME", {
       tracking: r
     });
@@ -4584,17 +4584,17 @@ async function tv(e, t) {
   }
   return i;
 }
-export async function $$tx3(e, t, i, r = HzA.IGNORE) {
+export async function $$tx3(e, t, i, r = TrackType.IGNORE) {
   let s = await tk(i, e.assets);
-  await EV({
+  await loadNonPluginFont({
     family: "Inter",
     style: "Regular"
   });
-  await EV({
+  await loadNonPluginFont({
     family: "Arimo",
     style: "Regular"
   });
-  return l7.system("html-to-figma", () => {
+  return permissionScopeHandler.system("html-to-figma", () => {
     let i = t.createNode("FRAME", {
       tracking: r
     });
@@ -4796,8 +4796,8 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
       }
       if (e.nodeType === HZ.TEXT_NODE) {
         o.appendChild(a);
-        a.stackHorizontalLayoutSize = mKm.FILL_CONTAINER;
-        a.stackVerticalLayoutSize = mKm.HUG_CONTENT;
+        a.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
+        a.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
         a.textAutoResize = "HEIGHT";
         a.resizeWithConstraints(a.size.x, a.size.y);
         return;
@@ -4810,11 +4810,11 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
         case "grid":
           {
             o.appendChild(a);
-            a.stackHorizontalLayoutSize = mKm.FILL_CONTAINER;
-            a.stackVerticalLayoutSize = mKm.HUG_CONTENT;
+            a.stackHorizontalLayoutSize = LayoutSizingMode.FILL_CONTAINER;
+            a.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
             let t = PW(e.styles.width);
             let i = PW(e.styles.height);
-            if (null != t && (a.stackHorizontalLayoutSize = mKm.FIXED), null != i && (a.stackVerticalLayoutSize = mKm.FIXED), "border-box" === e.styles.boxSizing) a.resizeWithConstraints(t ?? e.rect.width, i ?? e.rect.height);else {
+            if (null != t && (a.stackHorizontalLayoutSize = LayoutSizingMode.FIXED), null != i && (a.stackVerticalLayoutSize = LayoutSizingMode.FIXED), "border-box" === e.styles.boxSizing) a.resizeWithConstraints(t ?? e.rect.width, i ?? e.rect.height);else {
               let r = a.stackLeftPadding + a.stackRightPadding;
               let s = a.stackTopPadding + a.stackBottomPadding;
               a.resizeWithConstraints(t ? t + r : e.rect.width, i ? i + s : e.rect.height);
@@ -4828,12 +4828,12 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
         case "inline-grid":
           {
             o.appendChild(a);
-            a.stackHorizontalLayoutSize = mKm.HUG_CONTENT;
-            a.stackVerticalLayoutSize = mKm.HUG_CONTENT;
+            a.stackHorizontalLayoutSize = LayoutSizingMode.HUG_CONTENT;
+            a.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
             let t = PW(e.styles.width);
             let i = PW(e.styles.height);
-            null != t && (a.stackHorizontalLayoutSize = mKm.FIXED);
-            null != i && (a.stackVerticalLayoutSize = mKm.FIXED);
+            null != t && (a.stackHorizontalLayoutSize = LayoutSizingMode.FIXED);
+            null != i && (a.stackVerticalLayoutSize = LayoutSizingMode.FIXED);
             a.resizeWithConstraints(a.size.x, a.size.y);
             break;
           }
@@ -4861,8 +4861,8 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
             d.stackMode = "VERTICAL";
             d.fills = [];
             o.appendChild(d);
-            d.stackHorizontalLayoutSize = a.stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? mKm.FILL_CONTAINER : mKm.HUG_CONTENT;
-            d.stackVerticalLayoutSize = mKm.HUG_CONTENT;
+            d.stackHorizontalLayoutSize = a.stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? LayoutSizingMode.FILL_CONTAINER : LayoutSizingMode.HUG_CONTENT;
+            d.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
             d.stackLeftPadding = l.left;
             d.stackRightPadding = l.right;
             d.stackBottomPadding = l.bottom;
@@ -4878,8 +4878,8 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
           d.stackMode = "VERTICAL";
           d.fills = [];
           o.appendChild(d);
-          d.stackHorizontalLayoutSize = a.stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? mKm.FILL_CONTAINER : mKm.HUG_CONTENT;
-          d.stackVerticalLayoutSize = mKm.HUG_CONTENT;
+          d.stackHorizontalLayoutSize = a.stackHorizontalLayoutSize === LayoutSizingMode.FILL_CONTAINER ? LayoutSizingMode.FILL_CONTAINER : LayoutSizingMode.HUG_CONTENT;
+          d.stackVerticalLayoutSize = LayoutSizingMode.HUG_CONTENT;
           d.stackLeftPadding = l.left;
           d.stackRightPadding = l.right;
           ("img" === e.tag || "svg" === e.tag || "video" === e.tag || "audio" === e.tag || "canvas" === e.tag || "input" === e.tag) && (d.stackTopPadding = l.top, d.stackBottomPadding = l.bottom);

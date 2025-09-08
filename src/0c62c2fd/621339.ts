@@ -6,7 +6,7 @@ import { yH } from "../figma_app/240735";
 import { useState } from "react";
 import { trackEventAnalytics } from "../905/449184";
 import { tB, ks, vd } from "../figma_app/637027";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { _6 } from "../figma_app/386952";
 import { OJ } from "../905/519092";
 import { shuffle } from "../figma_app/656233";
@@ -261,7 +261,7 @@ function O({
     minWidth: 370,
     maxWidth: 370,
     onClose: () => {
-      o(Ce());
+      o(hideModal());
     },
     dataTestId: "downgrade-survey-modal",
     isCloseHidden: !0,
@@ -289,7 +289,7 @@ function O({
           selectedOptions: s.map(e => JSON.stringify(e))
         });
         e?.();
-        o(Ce());
+        o(hideModal());
       },
       children: [jsxs("div", {
         className: "downgrade_survey_modal_component_v2--exitSurvey--9HRcF",

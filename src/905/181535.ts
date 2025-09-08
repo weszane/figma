@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, createContext, PureComponent, createRef } from "react";
-import { JA } from "../figma_app/763686";
+import { SnapshotLevel } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import d from "../vendor/879378";
@@ -12,8 +12,8 @@ import { B } from "../905/877503";
 import { Uz } from "../905/63728";
 import { F } from "../905/302958";
 import { ql } from "../905/668764";
-import { Y5 } from "../figma_app/455680";
-import { gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue } from "../905/216495";
 import { Lh, D8 } from "../figma_app/242339";
 import { zk } from "../figma_app/198712";
 import { En } from "../figma_app/613182";
@@ -516,13 +516,13 @@ export class $$F0 extends PureComponent {
     };
     this.onScrubBegin = e => {
       if (this.props.scrubbingDisabled) return !1;
-      if (null == this.props.value) this.preScrubValue = this.props.scrubStartValue ?? 0;else if (gl(this.props.value)) {
+      if (null == this.props.value) this.preScrubValue = this.props.scrubStartValue ?? 0;else if (isInvalidValue(this.props.value)) {
         if (!this.props.mixedMathHandler) return !1;
         this.isMixedScrub = !0;
         this.preScrubMixedMathValue = this.props.mixedMathHandler.getValue();
       } else this.preScrubValue = this.props.value;
       this.currentScrubScale = 0;
-      Y5.commit();
+      fullscreenValue.commit();
       this.props.onScrubBegin?.(e);
       this.setState({
         inLiveScrub: !0
@@ -556,7 +556,7 @@ export class $$F0 extends PureComponent {
       }
     };
     this.onScrubEnd = e => {
-      if (this.didJustScrub || this.props.onScrubClick?.(), this.didJustScrub = !1, this.isMixedScrub = !1, Y5.commit(), this.currentValue) {
+      if (this.didJustScrub || this.props.onScrubClick?.(), this.didJustScrub = !1, this.isMixedScrub = !1, fullscreenValue.commit(), this.currentValue) {
         let e = this.currentValue !== this.preScrubValue ? zk.YES_FORCE_TRACKING_AS_EDIT : zk.YES;
         this.props.onValueChange(this.currentValue, e);
         this.currentValue = void 0;
@@ -603,7 +603,7 @@ export class $$F0 extends PureComponent {
     };
     this.updateScrubContext();
     this.throttledHaptics = c()(() => {
-      getFeatureFlags().desktop_haptics_experimental && H.trigger(JA.LEVEL);
+      getFeatureFlags().desktop_haptics_experimental && H.trigger(SnapshotLevel.LEVEL);
     }, 128, {
       leading: !0
     });

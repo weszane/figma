@@ -1,4 +1,4 @@
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { DA } from "../figma_app/191804";
 import { Ne, jF } from "../figma_app/702372";
@@ -15,7 +15,7 @@ export function $$d7(e, t, r) {
   for (let i in e) {
     let s = a.get(i);
     s && function (e, t, r, i) {
-      l7.user("first-draft-theme-modal-adjust-radius", () => {
+      permissionScopeHandler.user("first-draft-theme-modal-adjust-radius", () => {
         switch (e.type) {
           case "FRAME":
           case "INSTANCE":
@@ -92,7 +92,7 @@ export function $$_1(e, t, r) {
   for (let [i, s] of e) {
     let e = a.get(i);
     e && function (e, t, r, i) {
-      l7.user("first-draft-theme-modal-adjust-spacing", () => {
+      permissionScopeHandler.user("first-draft-theme-modal-adjust-spacing", () => {
         switch (e.type) {
           case "FRAME":
           case "INSTANCE":

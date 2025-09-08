@@ -1,11 +1,11 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { xae } from "../figma_app/763686";
+import { UserInterfaceElements } from "../figma_app/763686";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { yH } from "../figma_app/714946";
 import { d1 } from "../905/766303";
 import { td } from "../figma_app/646357";
@@ -17,7 +17,7 @@ import { yD } from "../905/92359";
 import { n as _$$n } from "../905/64411";
 let b = "file_key_optimistic_update";
 let T = "hub_file_id_optimistic_update";
-let $$I0 = nF((e, {
+let $$I0 = createOptimistThunk((e, {
   libraryKey: t,
   subscriptions: r
 }) => {
@@ -25,14 +25,14 @@ let $$I0 = nF((e, {
   let n = d1(e.getState());
   if (n) {
     let a = n.editor_type ?? "design";
-    (!0 === r || "design" === a && r.design || "whiteboard" === a && r.figjam) && (e.getState().leftPanel.activeTab === xae.ASSETS || e.getState().universalInsertModal.showing ? e.dispatch(_$$n({
+    (!0 === r || "design" === a && r.design || "whiteboard" === a && r.figjam) && (e.getState().leftPanel.activeTab === UserInterfaceElements.ASSETS || e.getState().universalInsertModal.showing ? e.dispatch(_$$n({
       libraryKey: t
     })) : e.dispatch(yH({
       key: yD(n.key)
     })));
   }
 });
-let $$S3 = nF(async (e, t) => {
+let $$S3 = createOptimistThunk(async (e, t) => {
   let {
     libraryFileSubscription,
     userInitiated,
@@ -127,7 +127,7 @@ let $$S3 = nF(async (e, t) => {
     });
   }
 });
-let $$v4 = nF(async (e, t) => {
+let $$v4 = createOptimistThunk(async (e, t) => {
   let {
     libraryUserSubscription,
     userInitiated,
@@ -190,7 +190,7 @@ let $$v4 = nF(async (e, t) => {
     });
   }
 });
-let $$A5 = nF(async (e, t) => {
+let $$A5 = createOptimistThunk(async (e, t) => {
   let {
     libraryTeamSubscription,
     userInitiated,
@@ -254,7 +254,7 @@ let $$A5 = nF(async (e, t) => {
     });
   }
 });
-let $$x1 = nF(async (e, t) => {
+let $$x1 = createOptimistThunk(async (e, t) => {
   let {
     libraryWorkspaceSubscription,
     libraryName,
@@ -308,7 +308,7 @@ let $$x1 = nF(async (e, t) => {
     }));
   }
 });
-let $$N6 = nF(async (e, t) => {
+let $$N6 = createOptimistThunk(async (e, t) => {
   let {
     libraryWorkspaceSubscription,
     libraryName,
@@ -342,7 +342,7 @@ let $$N6 = nF(async (e, t) => {
     }));
   }
 });
-let $$C2 = nF(async (e, t) => {
+let $$C2 = createOptimistThunk(async (e, t) => {
   let {
     libraryOrgSubscription,
     libraryTeamId,

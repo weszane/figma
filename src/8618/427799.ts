@@ -6,8 +6,8 @@ import { r as _$$r } from "../905/571562";
 import { C as _$$C } from "../905/504203";
 import { l as _$$l } from "../905/479687";
 import { J as _$$J } from "../905/614223";
-import { fZl, Z64, Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { CooperTemplateTypesTsBindings, SocialMediaFormats, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { U as _$$U } from "../figma_app/901889";
@@ -24,7 +24,7 @@ import { Ku } from "../figma_app/755939";
 import { XH } from "../1250/322393";
 import { Cl } from "../figma_app/334505";
 import { UK } from "../figma_app/740163";
-import { gl, hS, oV } from "../905/216495";
+import { isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
 import { Ib } from "../905/129884";
 import { $j } from "../figma_app/178475";
@@ -54,10 +54,10 @@ export function $$Q1({
     closePopover
   } = _$$j2(_$$p.TEMPLATE_TYPE);
   let a = XH();
-  let c = useMemo(() => fZl?.getAllCooperTemplateTypeGroups() || [], []);
+  let c = useMemo(() => CooperTemplateTypesTsBindings?.getAllCooperTemplateTypeGroups() || [], []);
   let u = useMemo(() => ({
     format: e => {
-      if (gl(e)) return getI18nString("common.mixed");
+      if (isInvalidValue(e)) return getI18nString("common.mixed");
       for (let t of c) {
         let n = t.types.find(t => t.type === e);
         if (n) return n.name;
@@ -108,14 +108,14 @@ function z({
   let [a, c] = useAtomValueAndSetter(Ku);
   let d = _$$U();
   let m = useCallback(e => {
-    hS(l) && e !== l && (d("cooper_template_asset_type_changed", {
+    isValidValue(l) && e !== l && (d("cooper_template_asset_type_changed", {
       productType: "buzz",
-      old_template_asset_type: hS(l) ? l : null,
+      old_template_asset_type: isValidValue(l) ? l : null,
       new_template_asset_type: e
-    }), l7.user("Convert Template Type", () => {
-      fZl?.convertSelectedNodesToCooperTemplateType(e);
-      e === Z64.CUSTOM ? c(!0) : n();
-      Ez5?.cooperFocusView().isFocusedNodeViewEnabled() && Ez5?.cooperFocusView().focusSelectedNodeInFocusedNodeView(!0);
+    }), permissionScopeHandler.user("Convert Template Type", () => {
+      CooperTemplateTypesTsBindings?.convertSelectedNodesToCooperTemplateType(e);
+      e === SocialMediaFormats.CUSTOM ? c(!0) : n();
+      AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() && AppStateTsApi?.cooperFocusView().focusSelectedNodeInFocusedNodeView(!0);
     }));
   }, [c, l, d, n]);
   return jsxs("div", {
@@ -201,7 +201,7 @@ function X({
   let {
     hasInstanceSelected
   } = Cl();
-  let g = hasInstanceSelected || e !== Z64.CUSTOM;
+  let g = hasInstanceSelected || e !== SocialMediaFormats.CUSTOM;
   return jsxs(_$$P, {
     ref: o,
     scrollContainerRef: s,
@@ -273,7 +273,7 @@ function Y({
   let _ = "";
   let m = 1;
   o = n.type;
-  [Z64.PRINT_US_LETTER, Z64.CARD_HORIZONTAL, Z64.CARD_VERTICAL, Z64.POSTER, Z64.NAME_TAG_LANDSCAPE, Z64.NAME_TAG_PORTRAIT].includes(o) && (UK().renderRulerUnitAsInches.getCopy() ? (_ = " in", m = 300, l && (u += " (inches)")) : UK().renderRulerUnitAsCentimeters.getCopy() && (_ = " cm", m = 300 / 2.54, l && (u += " (cm)")));
+  [SocialMediaFormats.PRINT_US_LETTER, SocialMediaFormats.CARD_HORIZONTAL, SocialMediaFormats.CARD_VERTICAL, SocialMediaFormats.POSTER, SocialMediaFormats.NAME_TAG_LANDSCAPE, SocialMediaFormats.NAME_TAG_PORTRAIT].includes(o) && (UK().renderRulerUnitAsInches.getCopy() ? (_ = " in", m = 300, l && (u += " (inches)")) : UK().renderRulerUnitAsCentimeters.getCopy() && (_ = " cm", m = 300 / 2.54, l && (u += " (cm)")));
   1 !== m && (a = (a / m).toFixed(2) + _, d = (d / m).toFixed(2) + _);
   return jsxs(_$$E, {
     onClick: () => r(n.type),
@@ -318,18 +318,18 @@ function Z() {
   let x = 1 !== m ? _ / m : _;
   1 !== m && (a /= m);
   let h = useCallback(e => {
-    l7.user("Update Template Height", () => {
+    permissionScopeHandler.user("Update Template Height", () => {
       if (void 0 !== e) {
         let t = H(e);
-        fZl?.resizeSelectedNodes(t, !1);
+        CooperTemplateTypesTsBindings?.resizeSelectedNodes(t, !1);
       }
     });
   }, []);
   let y = useCallback(e => {
-    l7.user("Update Template Width", () => {
+    permissionScopeHandler.user("Update Template Width", () => {
       if (void 0 !== e) {
         let t = H(e);
-        fZl?.resizeSelectedNodes(t, !0);
+        CooperTemplateTypesTsBindings?.resizeSelectedNodes(t, !0);
       }
     });
   }, []);
@@ -339,7 +339,7 @@ function Z() {
       bigNudgeAmount: c,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.width"),
       "data-tooltip-type": Ib.TEXT,
-      disabled: void 0 === t || t === oV,
+      disabled: void 0 === t || t === MIXED_MARKER,
       dispatch: e,
       min: a,
       onValueChange: y,
@@ -354,7 +354,7 @@ function Z() {
       bigNudgeAmount: c,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.height"),
       "data-tooltip-type": Ib.TEXT,
-      disabled: void 0 === s || s === oV,
+      disabled: void 0 === s || s === MIXED_MARKER,
       dispatch: e,
       min: a,
       onValueChange: h,

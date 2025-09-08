@@ -30,7 +30,7 @@ import { T5, S2 } from "../figma_app/465071";
 import { e0 as _$$e2 } from "../905/696396";
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, Y as _$$Y } from "../469e6e40/781142";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Z4, tB, qH, W8, fA, _k, zz, fx, gl, iv, RK } from "../figma_app/934005";
 import { Xf } from "../figma_app/153916";
 import { vr } from "../figma_app/514043";
@@ -39,7 +39,7 @@ import { pW } from "../905/160095";
 import { V as _$$V } from "../905/223767";
 import { k as _$$k2 } from "../figma_app/618031";
 import { m as _$$m } from "../469e6e40/61410";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { f as _$$f } from "../905/167712";
 import { O as _$$O } from "../905/487602";
 import { e as _$$e3 } from "../905/149844";
@@ -407,11 +407,11 @@ function em(e) {
   let u = useMemo(() => c === FPlanNameType.PRO ? jsx($z, {
     variant: "secondary",
     onClick: () => {
-      t(to({
+      t(showModalHandler({
         type: _$$V,
         data: {
           teamId: o?.id ?? "",
-          upsellSource: _$$b.BILLING_FAQ_WIDGET,
+          upsellSource: UpsellModalType.BILLING_FAQ_WIDGET,
           openCheckoutInNewTab: !0
         }
       }));
@@ -1089,7 +1089,7 @@ function e3(e) {
       key: "true_up_review_billing_groups",
       renderContent: () => jsx(_$$$, {
         onClick: () => {
-          t(to({
+          t(showModalHandler({
             type: _$$A2,
             data: {
               orgId: e.planId,
@@ -1118,7 +1118,7 @@ function e3(e) {
       key: "true_up_review",
       renderContent: () => jsx(_$$$, {
         onClick: () => {
-          t(to({
+          t(showModalHandler({
             type: _$$H,
             data: {
               orgId: e.planId,
@@ -1218,7 +1218,7 @@ export function $$e80(e) {
           children: "Development placeholder"
         }), jsx(_$$$, {
           onClick: () => {
-            d(to({
+            d(showModalHandler({
               type: _$$e()
             }));
           },

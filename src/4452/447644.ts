@@ -1,4 +1,4 @@
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
@@ -44,7 +44,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z, Me } from "../figma_app/617427";
 import { u as _$$u2 } from "../905/16237";
-import { Ce, to as _$$to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { OL as _$$OL } from "../figma_app/421473";
@@ -87,14 +87,14 @@ import { Um } from "../905/848862";
 import { x1, U0, cp, Mc, eF as _$$eF, jR, P_, M2, $h, KY, h4 } from "../4452/710166";
 import { oi } from "../figma_app/527041";
 var u = c;
-let ee = Ju(function (e) {
+let ee = registerModal(function (e) {
   let t;
   let a = hS(e);
   let n = useDispatch();
   let i = Xf(e.plan.key.parentId, e.plan.key.type !== _$$OL.TEAM);
   let l = useSelector(e => e.teamBilling);
   let o = e.plan.key.type === _$$OL.TEAM ? l.summary.currency : i.data?.currency;
-  let d = () => n(Ce());
+  let d = () => n(hideModal());
   t = !o || e.isELA ? renderI18nText("admin_dashboard.seat_requests.approve_all_modal.body.no_cost", {
     numRequests: e.requestsToApprove.length
   }) : renderI18nText("admin_dashboard.seat_requests.bulk_approve_modal.body");
@@ -855,7 +855,7 @@ export function $$e$0({
           t();
           return;
         }
-        eS(_$$to({
+        eS(showModalHandler({
           type: _$$W,
           data: {
             plan: e,
@@ -1038,7 +1038,7 @@ export function $$e$0({
             }), jsx(_$$V, {
               variant: "primary",
               disabled: !!e$,
-              onClick: e$ ? lQ : () => eS(_$$to({
+              onClick: e$ ? lQ : () => eS(showModalHandler({
                 type: ee,
                 data: {
                   plan: e,

@@ -10,16 +10,16 @@ import { trackEventAnalytics } from "../905/449184";
 import { of, Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to, Ce } from "../905/156213";
+import { showModalHandler, hideModal } from "../905/156213";
 import { JT } from "../figma_app/632248";
 import { uZ, i9 } from "../905/487011";
 import { EM, s7, Cb } from "../905/278499";
 import { B as _$$B } from "../905/222272";
-import { J } from "../905/270045";
+import { Label } from "../905/270045";
 import { Fo } from "../905/63728";
 import { Point } from "../905/736624";
 import { ks } from "../figma_app/637027";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Ao } from "../905/748636";
 let d = memo(function (e) {
   return jsx("svg", {
@@ -35,7 +35,7 @@ let d = memo(function (e) {
   });
 });
 let C = "feedback_modal--label--YyRBR";
-let T = Ju(function (e) {
+let T = registerModal(function (e) {
   let {
     aiTrackingContext,
     additionalFeedbackCallback,
@@ -70,7 +70,7 @@ let T = Ju(function (e) {
     children: jsxs("form", {
       className: "feedback_modal--modal--RI3dg",
       onSubmit: p,
-      children: [jsx(J, {
+      children: [jsx(Label, {
         className: C,
         children: renderI18nText("qa.how_was_your_experience")
       }), jsx(ks, {
@@ -83,7 +83,7 @@ let T = Ju(function (e) {
         onChange: e => d(e.target.value),
         onKeyDown: h,
         maxLength: 1e3
-      }), jsx(J, {
+      }), jsx(Label, {
         className: [C, "feedback_modal--secondary--llXoR"].join(" "),
         children: renderI18nText("qa.we_use_this_to_improve")
       }), jsx(_$$B, {
@@ -170,13 +170,13 @@ export function $$L0({
           children: jsx($n, {
             variant: "link",
             onClick: () => {
-              F(to({
+              F(showModalHandler({
                 type: T,
                 data: {
                   aiTrackingContext: e,
                   recordingKey: Pt(P, "additionalFeedback"),
                   onClose: () => {
-                    F(Ce());
+                    F(hideModal());
                     M && M.current?.focus();
                   },
                   onSubmitted: () => {

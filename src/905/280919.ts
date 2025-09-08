@@ -10,10 +10,10 @@ import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
 import { getStaticDomain, getInitialOptions } from "../figma_app/169182";
 import { normalizeUrl } from "../3973/348894";
-import { T as _$$T } from "../905/912096";
+import { getUserPlan } from "../905/912096";
 import { captureException, setSentryContext } from "../905/11";
 import { gP } from "../figma_app/594947";
-import { fF } from "../905/471229";
+import { getTrackingSessionId } from "../905/471229";
 import { isDebugFlowActive, murmurHash } from "../905/667887";
 var s = a;
 var l = o;
@@ -68,7 +68,7 @@ export function $$k1({
   let j = function (e) {
     let t = gP("datadog_rum_plan_rollout_config");
     let i = function () {
-      let e = _$$T();
+      let e = getUserPlan();
       return e && C.includes(e) ? e : "fallback";
     }();
     let n = t.get("fallback", w);
@@ -170,7 +170,7 @@ export function $$k1({
   datadogRum.setGlobalContextProperty("bundler", "webpack");
   datadogRum.setGlobalContextProperty("entrypoint", window.ENTRY_POINT ?? "unknown");
   datadogRum.setGlobalContextProperty("entrypoint_variant", entrypointVariant ?? "unknown");
-  datadogRum.setGlobalContextProperty("tracking_session_id", fF());
+  datadogRum.setGlobalContextProperty("tracking_session_id", getTrackingSessionId());
   $$D0.configure({
     applicationId: datadog_rum_application_id
   });
@@ -185,8 +185,8 @@ export function $$k1({
       org_id,
       locale,
       user_kind: M,
-      user_highest_plan: _$$T(),
-      tracking_session_id: fF()
+      user_highest_plan: getUserPlan(),
+      tracking_session_id: getTrackingSessionId()
     });
   }
   datadog_logs_init && _$$y?.init({

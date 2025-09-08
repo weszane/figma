@@ -25,8 +25,8 @@ import { r as _$$r2 } from "../905/290294";
 import { D as _$$D } from "../905/572843";
 import { A as _$$A2, o as _$$o2 } from "../905/17894";
 import { Zc, Lz, i_ as _$$i_, c_ } from "../905/497882";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J3 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { __, tZ as _$$tZ, Mm } from "../905/271611";
 import { A as _$$A3 } from "../905/567946";
 import L from "classnames";
@@ -51,8 +51,8 @@ import { N as _$$N2 } from "../905/438674";
 import { _ as _$$_ } from "../905/574895";
 import { Vq, EX, Wh, Rc, nT, J9, Fh, Kc, bo, Gl } from "../905/448740";
 import { Qi, uT, n1, se, fd } from "../figma_app/559491";
-import { to as _$$to, Ce } from "../905/156213";
-import { ou, Ar, Mi, u0, ZT, wf, EY, Pz, c2 as _$$c, MB, vj, Tk } from "../figma_app/300692";
+import { showModalHandler, hideModal } from "../905/156213";
+import { generatePluginId, getCurrentPluginVersion, getLocalFileId, getOrgRole, validatePluginCodeSize, validateExtensionIconImage, hasRoleOrOrgChanged, mapToFileType, loadPluginManifest, loadLocalPluginSource, validateAndResizeIconImage, getPublishedResourceOrNull } from "../figma_app/300692";
 import { bD, dj, hE as _$$hE, vt } from "../figma_app/45218";
 import { A as _$$A8 } from "../905/552947";
 import { gG, ic as _$$ic } from "../905/702716";
@@ -102,7 +102,7 @@ import { lQ } from "../905/934246";
 import { $ as _$$$4 } from "../905/379902";
 import { Y as _$$Y } from "../905/185567";
 import { jY, Ro } from "../figma_app/564095";
-import { Lu } from "../figma_app/155287";
+import { PublisherType } from "../figma_app/155287";
 import { v as _$$v } from "../905/318279";
 import { Q as _$$Q2 } from "../905/978641";
 import { X as _$$X, S as _$$S4 } from "../905/109653";
@@ -138,7 +138,7 @@ import { is as _$$is } from "../905/744076";
 import { n as _$$n } from "../905/341791";
 import { t as _$$t4 } from "../905/431558";
 import { w as _$$w3 } from "../905/893785";
-import { A as _$$A10 } from "../905/284190";
+import { deepClone } from "../905/284190";
 import { J as _$$J6 } from "../905/931050";
 import { r as _$$r4 } from "../905/520829";
 import { j6, fu } from "../figma_app/831799";
@@ -155,7 +155,7 @@ import { xw } from "../figma_app/951233";
 import { D6, Kd } from "../figma_app/465071";
 import { k2 } from "../figma_app/10554";
 import { e0 as _$$e3 } from "../905/696396";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r5 } from "../905/490676";
 import { KT, Cd, ME, jc, DK, $o } from "../905/54042";
 function D({
@@ -167,8 +167,8 @@ function D({
   } = e;
   return jsx(_$$A3, {
     label: getI18nString("community.seller.discount"),
-    children: jsx(_$$S, {
-      label: jsx(_$$J3, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         children: getI18nString("community.seller.give_a_discount_for_yearly")
       }),
       checked: currentValue.isActive,
@@ -372,7 +372,7 @@ function eA({
     message: i,
     children: jsx(_$$$2, {
       onClick: () => {
-        t(_$$to({
+        t(showModalHandler({
           type: _$$K,
           data: {
             localPlugin: e
@@ -394,7 +394,7 @@ function ey({
   let l = async () => {
     if (!s) return;
     let e = r ? bD.WIDGET : bD.PLUGIN;
-    let i = await ou(e);
+    let i = await generatePluginId(e);
     o(Qi({
       publishedPlugins: [i],
       src: "generatePluginId"
@@ -515,8 +515,8 @@ function eL({
   return jsxs(_$$A3, {
     label: t ? getI18nString("community.publishing.security_form.share_how_your_widget_handles_data") : getI18nString("community.publishing.security_form.share_how_your_plugin_handles_data"),
     subLabel: t ? getI18nString("community.publishing.security_form.widget_description") : getI18nString("community.publishing.security_form.plugin_description"),
-    children: [jsx(_$$S, {
-      label: jsxs(_$$J3, {
+    children: [jsx(Checkbox, {
+      label: jsxs(Label, {
         children: [getI18nString("community.publishing.security_form.i_agree_to_share_this_information"), " ", jsx(_$$N2, {
           href: t ? "https://help.figma.com/hc/articles/4410337103639" : "https://help.figma.com/hc/articles/360042293394",
           trusted: !0,
@@ -665,7 +665,7 @@ function eU({
       children: options.map((e, i) => jsxs(_$$Fragment, {
         children: [jsx(_$$c2, {
           value: String(i),
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             children: e.label
           })
         }), jsx(eG, {
@@ -698,12 +698,12 @@ function eB({
       fontWeight: "semi-bold",
       children: prompt
     }), options.map((e, a) => jsxs(_$$Fragment, {
-      children: [jsx(_$$S, {
+      children: [jsx(Checkbox, {
         checked: e.isSelected ?? !1,
         onChange: () => {
           dataSecurityFieldManager?.updateMultiSelectQuestion(t[0], a);
         },
-        label: jsx(_$$J3, {
+        label: jsx(Label, {
           children: e.label
         })
       }), jsx(eG, {
@@ -932,13 +932,13 @@ function e6({
   } = e.deps;
   let a = Lz(e, !1);
   let s = 0;
-  existingExtension && (s = parseInt(Ar(existingExtension)?.version || "0"));
+  existingExtension && (s = parseInt(getCurrentPluginVersion(existingExtension)?.version || "0"));
   a && s++;
   return jsx(_$$A3, {
     label: getI18nString("community.publishing.version"),
     afterLabelContent: `${getI18nString("community.publishing.version")} ${s}`,
-    children: jsx(_$$S, {
-      label: jsx(_$$J3, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         children: (i = Lz(t, void 0), i?.is_public ? existingExtension && Ul(existingExtension) ? getI18nString("community.publishing.publish_a_new_version") : existingExtension && AC(existingExtension) ? getI18nString("community.publishing.resubmit_a_new_version") : getI18nString("community.publishing.submit_a_new_version") : getI18nString("community.publishing.publish_a_new_version"))
       }),
       checked: a,
@@ -980,7 +980,7 @@ let tu = forwardRef(function ({
     isWidget
   } = e.deps;
   let y = Lz(e, void 0)?.playgroundFilePublishType;
-  let v = Mi(existingExtension, localExtension);
+  let v = getLocalFileId(existingExtension, localExtension);
   let I = i => {
     t?.();
     e.setValue?.({
@@ -988,13 +988,13 @@ let tu = forwardRef(function ({
       playgroundFilePublishType: _$$J5.Actions.SET
     });
   };
-  let E = existingExtension ? Ar(existingExtension) : null;
+  let E = existingExtension ? getCurrentPluginVersion(existingExtension) : null;
   let x = E && y === _$$J5.Actions.NOOP && d && d.id !== E.playground_file_version_id;
   let S = E && existingExtension && y === _$$J5.Actions.SET && o?.key === E.playground_fig_file?.key;
   let w = jsxs("div", {
     children: [jsx("div", {
       onClick: () => {
-        m(_$$to({
+        m(showModalHandler({
           type: _$$$3,
           data: {
             pluginId: v,
@@ -1146,7 +1146,7 @@ function tI(e) {
     org,
     isOrgMember
   } = e;
-  return u0(existingExtension, org ?? null, isOrgMember);
+  return getOrgRole(existingExtension, org ?? null, isOrgMember);
 }
 let tx = e => {
   if (e) switch (e.key) {
@@ -1167,11 +1167,11 @@ function tS({
   let i = !Zc(e) || t;
   let a = Lz(e, void 0);
   let s = getI18nString("community.publishing.paid_extensions_cannot_be_published_privately");
-  let o = a?.is_public ? Lu.PUBLIC : Lu.ORG;
+  let o = a?.is_public ? PublisherType.PUBLIC : PublisherType.ORG;
   let l = tI(e.deps);
   let d = useMemo(() => {
     if (!i) return function (t) {
-      t === Lu.PUBLIC ? e.setValue({
+      t === PublisherType.PUBLIC ? e.setValue({
         is_public: !0
       }) : null !== l && e.setValue({
         org: l
@@ -1188,12 +1188,12 @@ function tS({
       onChange: d ?? lQ,
       children: [l && jsx(tw, {
         icon: jsx(_$$$4, {}),
-        roleToPublishAs: Lu.ORG,
+        roleToPublishAs: PublisherType.ORG,
         title: l.name,
         subtitle: getI18nString("community.cards.private")
       }), jsx(tw, {
         icon: jsx(_$$Y, {}),
-        roleToPublishAs: Lu.PUBLIC,
+        roleToPublishAs: PublisherType.PUBLIC,
         title: getI18nString("community.community"),
         subtitle: getI18nString("community.publishing.public")
       })]
@@ -1512,12 +1512,12 @@ async function ii(e) {
     imagePaths,
     code
   } = e;
-  code && "codeUploadUrl" in imagePaths && (t = uT(imagePaths.codeUploadUrl, code), ZT(code));
+  code && "codeUploadUrl" in imagePaths && (t = uT(imagePaths.codeUploadUrl, code), validatePluginCodeSize(code));
   let d = c_(icon).currentValue?.buffer;
   if (null != d) {
     i = M0(imagePaths.iconUploadUrl, d);
     let e = _$$i(d) ?? "image/png";
-    wf(new File([d], "icon.png", {
+    validateExtensionIconImage(new File([d], "icon.png", {
       type: e
     }));
   }
@@ -1628,7 +1628,7 @@ async function io(e) {
     isExistingExtensionUnpublished
   } = e;
   let l = c_(publishRole).currentValue;
-  let d = EY(publishedExtension, l);
+  let d = hasRoleOrOrgChanged(publishedExtension, l);
   let c = Dd(publishedExtension, user.id) || isExistingExtensionUnpublished;
   if (!d || !c) return;
   let u = {
@@ -1709,7 +1709,7 @@ let id = {
     displayName: "TaglineField",
     fetchInitialValue: ({
       existingResourceContent: e
-    }) => e && Ar(e)?.tagline || "",
+    }) => e && getCurrentPluginVersion(e)?.tagline || "",
     validate: ({}, e) => {
       let t = Yp(e);
       return 0 === t.length ? [{
@@ -1735,7 +1735,7 @@ let id = {
       existingResourceContent: e
     }) => {
       if (e) {
-        let t = Ar(e)?.redirect_icon_url;
+        let t = getCurrentPluginVersion(e)?.redirect_icon_url;
         if (t) return {
           url: t,
           buffer: void 0
@@ -1756,7 +1756,7 @@ let id = {
     fetchInitialValue: ({
       existingExtension: e
     }) => {
-      let t = e ? Ar(e) : void 0;
+      let t = e ? getCurrentPluginVersion(e) : void 0;
       return {
         playgroundFile: t?.playground_fig_file,
         playgroundFilePublishType: _$$J5.Actions.NOOP
@@ -1768,7 +1768,7 @@ let id = {
     }, i) => {
       let n = nT(e, t);
       let r = i.playgroundFile?.editor_type;
-      if (n && r && !n.map(Pz).includes(r)) return [{
+      if (n && r && !n.map(mapToFileType).includes(r)) return [{
         key: "EDITOR_TYPE_MISMATCH",
         data: {}
       }];
@@ -1787,7 +1787,7 @@ let id = {
       let i = await e;
       if (i) return i;
       if (t) {
-        let e = Ar(t)?.redirect_snapshot_url;
+        let e = getCurrentPluginVersion(t)?.redirect_snapshot_url;
         if (e) return {
           url: e,
           buffer: void 0
@@ -1846,7 +1846,7 @@ let id = {
     fetchInitialValue: ({
       existingExtension: e
     }) => ({
-      oldVersion: e ? Ar(e)?.release_notes ?? "" : "",
+      oldVersion: e ? getCurrentPluginVersion(e)?.release_notes ?? "" : "",
       newVersion: ""
     }),
     validate: ({
@@ -2324,10 +2324,10 @@ let ic = _$$T2({
         }
       });
       try {
-        [u, c] = await Promise.all([_$$c(e?.localFileId, {
+        [u, c] = await Promise.all([loadPluginManifest(e?.localFileId, {
           resourceType: nF(n),
           isPublishing: !0
-        }), MB(e?.localFileId)]);
+        }), loadLocalPluginSource(e?.localFileId)]);
       } catch (e) {
         reportError(_$$e.COMMUNITY, e);
         return new _$$o2.SubmissionError({
@@ -2505,7 +2505,7 @@ let ic = _$$T2({
         pluginId: validExtensionId,
         hasUI: !!manifest?.ui,
         apiVersion: manifest?.api,
-        codeLength: code ? ZT(code) : 0,
+        codeLength: code ? validatePluginCodeSize(code) : 0,
         iconFileSize: l,
         isWidget,
         editorType: manifest?.editorType?.sort().join(", ")
@@ -2600,7 +2600,7 @@ function iM({
     let o = useMemo(() => async function (e, t) {
       if (a) try {
         let n = t === dj.PASTE;
-        let r = await vj(e, n, !0);
+        let r = await validateAndResizeIconImage(e, n, !0);
         let [s, o] = await Promise.all([l8(URL.createObjectURL(r)), _$$c4(r)]);
         let l = new Uint8Array(o);
         i.current($$in, {
@@ -2726,7 +2726,7 @@ function iM({
           });
           return;
         }
-        n(_$$to({
+        n(showModalHandler({
           type: _$$i2,
           data: {
             onConfirm: u,
@@ -2794,7 +2794,7 @@ function iM({
       if (!n) return;
       let r = function (e, t, i) {
         let [n, r, a] = t;
-        let s = _$$A10(e);
+        let s = deepClone(e);
         let o = s[n];
         if (!o || "text" === o.inputType) return e;
         let l = o.options[r];
@@ -2992,7 +2992,7 @@ function iM({
     });
   }, [A]));
   let ec = useCallback(() => {
-    l(Ce());
+    l(hideModal());
     A.current($$in, {
       step: WX.CLOSED
     });
@@ -3440,7 +3440,7 @@ function ij(e) {
     })
   });
 }
-let $$iU0 = Ju(function (e) {
+let $$iU0 = registerModal(function (e) {
   let {
     localFileId,
     validExtensionId
@@ -3462,7 +3462,7 @@ let $$iU0 = Ju(function (e) {
   }] = IT(fd(), {
     enabled: c
   });
-  let f = Tk(m ?? void 0, g ?? void 0, r) ?? void 0;
+  let f = getPublishedResourceOrNull(m ?? void 0, g ?? void 0, r) ?? void 0;
   let _ = s ?? f ?? void 0;
   let v = !s?.id && !!f;
   if ("loading" === p || "loading" === h || !d.loaded) return jsx(_$$k, {});
@@ -3483,7 +3483,7 @@ let $$iU0 = Ju(function (e) {
       ...I
     })
   });
-}, "ExtensionFormView", ZU.YES);
+}, "ExtensionFormView", ModalSupportsBackground.YES);
 let iB = e => {
   if (e && "validation" === e.type) {
     let t = e.key;

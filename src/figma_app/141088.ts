@@ -1,10 +1,10 @@
-import { Lv9 } from "../figma_app/763686";
+import { BoundsWatcherCpp } from "../figma_app/763686";
 let i = new Set();
 export function $$a3(e) {
-  Lv9.watchBoundsForNodes(e);
+  BoundsWatcherCpp.watchBoundsForNodes(e);
 }
 export function $$s0(e) {
-  Lv9.watchBoundsForStablePaths(e);
+  BoundsWatcherCpp.watchBoundsForStablePaths(e);
 }
 export function $$o1(e) {
   i.add(e);

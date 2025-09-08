@@ -1,5 +1,5 @@
-import { Ez5, m1T, TsU, KgA, Egt, Z_n, rXF, rcl } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, LayoutTabType, InsertSourceType, UserInteractionState, SceneGraphHelpers, VariableDataType, VariableResolvedDataType, Command } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { selectWithShallowEqual } from "../905/103090";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
@@ -11,31 +11,31 @@ import { zX } from "../905/576487";
 import { gL } from "../figma_app/618433";
 import { _j } from "../figma_app/843119";
 import { Mw, f4 } from "../figma_app/722362";
-import { J2, ut } from "../figma_app/84367";
+import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { If, Jo } from "../figma_app/565242";
 import { OU, oj, HA } from "../figma_app/986594";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 var x = (e => (e.IDLE = "IDLE", e.SELECT_NODE_FOR_COLLECTION_BINDING = "SELECT_NODE_FOR_COLLECTION_BINDING", e.HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING = "HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING", e.HOVERED_FRAME_FOR_COLLECTION_BINDING = "HOVERED_FRAME_FOR_COLLECTION_BINDING", e.COLLECTION_BINDING_SUCCESS_RESPONSIVE_SET = "COLLECTION_BINDING_SUCCESS_RESPONSIVE_SET", e.COLLECTION_BINDING_SUCCESS_FRAME = "COLLECTION_BINDING_SUCCESS_FRAME", e.SELECT_NODE_FOR_FIELD_BINDING = "SELECT_NODE_FOR_FIELD_BINDING", e.HOVERED_NODE_FOR_FIELD_BINDING = "HOVERED_NODE_FOR_FIELD_BINDING", e.HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING = "HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING", e.FIELD_BINDING_SUCCESS = "FIELD_BINDING_SUCCESS", e))(x || {});
 let g = "cms-binding-visual-bell";
 function f() {
-  let [e, t] = useState(() => Ez5.cmsState().bindingModeState());
-  let n = J2(Ez5.cmsState().bindingCollectionId);
+  let [e, t] = useState(() => AppStateTsApi.cmsState().bindingModeState());
+  let n = getObservableOrFallback(AppStateTsApi.cmsState().bindingCollectionId);
   let {
     type,
     id
-  } = J2(Ez5.cmsState().bindingFieldSchema) ?? {};
+  } = getObservableOrFallback(AppStateTsApi.cmsState().bindingFieldSchema) ?? {};
   useEffect(() => {
-    t(Ez5.cmsState().bindingModeState());
+    t(AppStateTsApi.cmsState().bindingModeState());
   }, [n, type, id]);
   return e;
 }
 export function $$y1() {
-  return selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType === m1T.CMS_BINDING_CONSTRAINED);
+  return selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType === LayoutTabType.CMS_BINDING_CONSTRAINED);
 }
 export function $$b0() {
-  let e = Ez5?.cmsState();
-  let t = ut(e?.bindingCollectionId, "");
-  let n = ut(e?.bindingFieldSchema, {
+  let e = AppStateTsApi?.cmsState();
+  let t = getObservableValue(e?.bindingCollectionId, "");
+  let n = getObservableValue(e?.bindingFieldSchema, {
     type: "",
     id: ""
   });
@@ -45,14 +45,14 @@ export function $$b0() {
     data
   } = gL(t || "");
   let C = data?.fieldSchemas ?? [];
-  let S = OU(TsU.CMS_CONNECT_MODE);
+  let S = OU(InsertSourceType.CMS_CONNECT_MODE);
   !function () {
     let e = getSingletonSceneGraph();
     let t = useDispatch();
-    let n = Ez5.cmsState();
+    let n = AppStateTsApi.cmsState();
     let l = f();
-    let i = J2(n.bindingCollectionId);
-    let x = J2(n.bindingFieldSchema);
+    let i = getObservableOrFallback(n.bindingCollectionId);
+    let x = getObservableOrFallback(n.bindingFieldSchema);
     let v = useSelector(e => e.mirror.appModel.hoveredNode);
     let I = v ? e.get(v) : null;
     let N = Mw();
@@ -120,7 +120,7 @@ export function $$b0() {
           cmsBindingState: e,
           collectionName: t,
           selectedNode: n
-        }) => !!t && e === KgA.COLLECTION_SELECTED && !n
+        }) => !!t && e === UserInteractionState.COLLECTION_SELECTED && !n
       }, {
         from: ["SELECT_NODE_FOR_COLLECTION_BINDING", "HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING"],
         to: "HOVERED_FRAME_FOR_COLLECTION_BINDING",
@@ -129,7 +129,7 @@ export function $$b0() {
           selectedNode: t,
           collectionName: n,
           cmsBindingState: l
-        }) => l === KgA.COLLECTION_SELECTED && !!n && !isNullish(e) && "FRAME" === e.type && isNullish(t)
+        }) => l === UserInteractionState.COLLECTION_SELECTED && !!n && !isNullish(e) && "FRAME" === e.type && isNullish(t)
       }, {
         from: ["SELECT_NODE_FOR_COLLECTION_BINDING", "HOVERED_FRAME_FOR_COLLECTION_BINDING"],
         to: "HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING",
@@ -138,7 +138,7 @@ export function $$b0() {
           selectedNode: t,
           collectionName: n,
           cmsBindingState: l
-        }) => l === KgA.COLLECTION_SELECTED && !!n && !isNullish(e) && "FRAME" !== e.type && isNullish(t)
+        }) => l === UserInteractionState.COLLECTION_SELECTED && !!n && !isNullish(e) && "FRAME" !== e.type && isNullish(t)
       }, {
         from: ["HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING", "HOVERED_FRAME_FOR_COLLECTION_BINDING"],
         to: "SELECT_NODE_FOR_COLLECTION_BINDING",
@@ -147,13 +147,13 @@ export function $$b0() {
           selectedNode: t,
           collectionName: n,
           cmsBindingState: l
-        }) => l === KgA.COLLECTION_SELECTED && !!n && isNullish(e) && !t
+        }) => l === UserInteractionState.COLLECTION_SELECTED && !!n && isNullish(e) && !t
       }, {
         from: ["HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING", "SELECT_NODE_FOR_COLLECTION_BINDING", "HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING"],
         to: "IDLE",
         when: ({
           cmsBindingState: e
-        }) => e === KgA.IDLE
+        }) => e === UserInteractionState.IDLE
       }, {
         from: ["HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING", "SELECT_NODE_FOR_COLLECTION_BINDING"],
         to: "COLLECTION_BINDING_SUCCESS_RESPONSIVE_SET",
@@ -161,7 +161,7 @@ export function $$b0() {
           cmsBindingState: e,
           selectedNode: t,
           collectionName: n
-        }) => !!n && e === KgA.COLLECTION_SELECTED && !!t && "FRAME" !== t.type
+        }) => !!n && e === UserInteractionState.COLLECTION_SELECTED && !!t && "FRAME" !== t.type
       }, {
         from: ["HOVERED_FRAME_FOR_COLLECTION_BINDING", "SELECT_NODE_FOR_COLLECTION_BINDING"],
         to: "COLLECTION_BINDING_SUCCESS_FRAME",
@@ -169,7 +169,7 @@ export function $$b0() {
           cmsBindingState: e,
           selectedNode: t,
           collectionName: n
-        }) => !!n && e === KgA.COLLECTION_SELECTED && !!t && "FRAME" === t.type
+        }) => !!n && e === UserInteractionState.COLLECTION_SELECTED && !!t && "FRAME" === t.type
       }, {
         from: ["IDLE", "SELECT_NODE_FOR_COLLECTION_BINDING", "HOVERED_RESPONSIVE_SET_FOR_COLLECTION_BINDING", "HOVERED_FRAME_FOR_COLLECTION_BINDING", "FIELD_BINDING_SUCCESS", "COLLECTION_BINDING_SUCCESS_RESPONSIVE_SET", "COLLECTION_BINDING_SUCCESS_FRAME"],
         to: "SELECT_NODE_FOR_FIELD_BINDING",
@@ -177,7 +177,7 @@ export function $$b0() {
           cmsBindingState: e,
           fieldSchemaName: t,
           selectedNode: n
-        }) => !!t && e === KgA.FIELD_SELECTED && !n
+        }) => !!t && e === UserInteractionState.FIELD_SELECTED && !n
       }, {
         from: "SELECT_NODE_FOR_FIELD_BINDING",
         to: "HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING",
@@ -187,7 +187,7 @@ export function $$b0() {
           fieldSchemaName: n,
           cmsBindingState: l,
           isHoveredNodeTextInInstanceForRichTextField: r
-        }) => !!n && l === KgA.FIELD_SELECTED && !isNullish(e) && !t && r
+        }) => !!n && l === UserInteractionState.FIELD_SELECTED && !isNullish(e) && !t && r
       }, {
         from: ["SELECT_NODE_FOR_FIELD_BINDING", "HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING"],
         to: "HOVERED_NODE_FOR_FIELD_BINDING",
@@ -197,7 +197,7 @@ export function $$b0() {
           fieldSchemaName: n,
           cmsBindingState: l,
           isHoveredNodeTextInInstanceForRichTextField: r
-        }) => !!n && l === KgA.FIELD_SELECTED && !isNullish(e) && !t && !r
+        }) => !!n && l === UserInteractionState.FIELD_SELECTED && !isNullish(e) && !t && !r
       }, {
         from: "HOVERED_NODE_FOR_FIELD_BINDING",
         to: "HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING",
@@ -207,7 +207,7 @@ export function $$b0() {
           fieldSchemaName: n,
           cmsBindingState: l,
           isHoveredNodeTextInInstanceForRichTextField: r
-        }) => !!n && l === KgA.FIELD_SELECTED && !isNullish(e) && !t && r
+        }) => !!n && l === UserInteractionState.FIELD_SELECTED && !isNullish(e) && !t && r
       }, {
         from: ["HOVERED_NODE_FOR_FIELD_BINDING", "HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING"],
         to: "SELECT_NODE_FOR_FIELD_BINDING",
@@ -216,7 +216,7 @@ export function $$b0() {
           selectedNode: t,
           fieldSchemaName: n,
           cmsBindingState: l
-        }) => !!n && l === KgA.FIELD_SELECTED && isNullish(e) && !t
+        }) => !!n && l === UserInteractionState.FIELD_SELECTED && isNullish(e) && !t
       }, {
         from: "HOVERED_NODE_FOR_FIELD_BINDING",
         to: "FIELD_BINDING_SUCCESS",
@@ -224,7 +224,7 @@ export function $$b0() {
           cmsBindingState: e,
           selectedNode: t,
           fieldSchemaName: n
-        }) => !!n && e === KgA.FIELD_SELECTED && !!t
+        }) => !!n && e === UserInteractionState.FIELD_SELECTED && !!t
       }],
       states: {
         IDLE: {
@@ -389,89 +389,89 @@ export function $$b0() {
     }, [checkTransitions, i, x?.id, I, N, l, name, _name, fieldType, L]);
   }();
   f4(() => {
-    if (!Egt || !t || !i) return;
+    if (!SceneGraphHelpers || !t || !i) return;
     let e = getSingletonSceneGraph();
     let s = oj(e.getDirectlySelectedNodes());
     if (0 !== s.length) switch (x) {
-      case KgA.COLLECTION_SELECTED:
+      case UserInteractionState.COLLECTION_SELECTED:
         let o = !1;
-        for (let e of s) if ("RESPONSIVE_SET" === e.type && "/" !== e.name) l7.user("dakota-set-collection-binding", () => {
-          e.setDakotaSelectorCollection(t, TsU.CMS_CONNECT_MODE);
+        for (let e of s) if ("RESPONSIVE_SET" === e.type && "/" !== e.name) permissionScopeHandler.user("dakota-set-collection-binding", () => {
+          e.setDakotaSelectorCollection(t, InsertSourceType.CMS_CONNECT_MODE);
           o = !0;
         });else {
           S(t);
           o = !0;
           break;
         }
-        o && Ez5?.cmsState().reset();
+        o && AppStateTsApi?.cmsState().reset();
         break;
-      case KgA.FIELD_SELECTED:
+      case UserInteractionState.FIELD_SELECTED:
         let d = C.find(e => e.id === n.id);
         if (!d) return;
         switch (d.fieldType) {
           case _j.IMAGE:
             If(t, d.id);
-            Ez5?.cmsState().reset();
+            AppStateTsApi?.cmsState().reset();
             break;
           case _j.RICH_TEXT:
             if (HA(s, ["CMS_RICH_TEXT"])) {
               let e = {
-                type: Z_n.CMS_ALIAS,
-                resolvedType: rXF.JS_RUNTIME_ALIAS,
+                type: VariableDataType.CMS_ALIAS,
+                resolvedType: VariableResolvedDataType.JS_RUNTIME_ALIAS,
                 value: {
                   collectionId: t,
                   fieldSchemaId: d.id
                 }
               };
-              l7.user("dakota-set-rich-text-binding", () => {
+              permissionScopeHandler.user("dakota-set-rich-text-binding", () => {
                 s?.forEach(n => n.getNodesForCmsBinding(t).forEach(t => {
                   t.updateVariableConsumption("CMS_SERIALIZED_RICH_TEXT_DATA", e);
                 }));
               });
-              Ez5?.cmsState().reset();
-            } else HA(s, ["TEXT"]) && (Y5.triggerActionEnumInUserEditScope(rcl.CREATE_CMS_RICH_TEXT, {
+              AppStateTsApi?.cmsState().reset();
+            } else HA(s, ["TEXT"]) && (fullscreenValue.triggerActionEnumInUserEditScope(Command.CREATE_CMS_RICH_TEXT, {
               args: {
                 collectionId: t,
                 fieldId: d.id
               }
-            }), Ez5?.cmsState().reset());
+            }), AppStateTsApi?.cmsState().reset());
             break;
           case _j.PLAIN_TEXT:
             if (!HA(s, ["TEXT"])) break;
             let c = {
-              type: Z_n.CMS_ALIAS,
-              resolvedType: rXF.STRING,
+              type: VariableDataType.CMS_ALIAS,
+              resolvedType: VariableResolvedDataType.STRING,
               value: {
                 collectionId: t,
                 fieldSchemaId: d.id,
                 itemId: ""
               }
             };
-            l7.user("dakota-set-text-binding", () => {
+            permissionScopeHandler.user("dakota-set-text-binding", () => {
               for (let e of s) e.getNodesForCmsBinding(t).forEach(e => {
                 e.updateVariableConsumption("TEXT_DATA", c);
               });
             });
-            Ez5?.cmsState().reset();
+            AppStateTsApi?.cmsState().reset();
             break;
           case _j.DATE:
             Jo(t, d.id);
-            Ez5?.cmsState().reset();
+            AppStateTsApi?.cmsState().reset();
             break;
           case _j.LINK:
             let u = {
-              type: Z_n.CMS_ALIAS,
-              resolvedType: rXF.LINK,
+              type: VariableDataType.CMS_ALIAS,
+              resolvedType: VariableResolvedDataType.LINK,
               value: {
                 collectionId: t,
                 fieldSchemaId: d.id,
                 itemId: ""
               }
             };
-            l7.user("dakota-set-link-binding", () => {
+            permissionScopeHandler.user("dakota-set-link-binding", () => {
               for (let e of s) for (let n of e.getNodesForCmsBinding(t)) "TEXT" === n.type ? n.updateVariableConsumption("HYPERLINK", u) : n.setDakotaLinkFieldBindingOnPrototypeAction(u);
             });
-            Ez5?.cmsState().reset();
+            AppStateTsApi?.cmsState().reset();
         }
     }
   });

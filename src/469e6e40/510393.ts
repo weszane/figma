@@ -14,7 +14,7 @@ import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
 import { e0 } from "../905/696396";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { P } from "../905/392438";
 function j(e) {
   return jsx("div", {
@@ -25,7 +25,7 @@ let y = e => ({
   state: xf(e.trim()) ? _$$d.OK : _$$d.ERROR,
   content: e
 });
-let $$w0 = Ju(function (e) {
+let $$w0 = registerModal(function (e) {
   let t = hS({
     onClose: e.onClose,
     open: e.open

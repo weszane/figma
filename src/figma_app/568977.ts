@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { h as _$$h } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL as _$$bL, D0 } from "../905/4410";
@@ -59,7 +59,7 @@ export function $$x1(e) {
   };
   let L = new Point(window.innerWidth / 2 - A / 2, window.innerHeight / 3);
   let P = getFeatureFlags().ce_tv_fpl_input ? jsxs(Fragment, {
-    children: [jsx(_$$h, {
+    children: [jsx(HiddenLabel, {
       htmlFor: "small-nudge-input",
       children: renderI18nText("fullscreen.nudge.small_nudge")
     }), jsx(_$$bL, {
@@ -84,7 +84,7 @@ export function $$x1(e) {
     recordingKey: Pt(e, "smallNudgeInput")
   });
   let D = getFeatureFlags().ce_tv_fpl_input ? jsxs(Fragment, {
-    children: [jsx(_$$h, {
+    children: [jsx(HiddenLabel, {
       htmlFor: "big-nudge-input",
       children: renderI18nText("fullscreen.nudge.big_nudge")
     }), jsx(_$$bL, {

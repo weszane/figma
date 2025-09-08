@@ -8,14 +8,14 @@ import { Hn, f6, xD, ri } from "../905/337179";
 import { useState, useCallback, useEffect } from "react";
 import { Uz } from "../905/63728";
 import { O1, KD } from "../figma_app/317394";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 var a = r;
 let g = function (e) {
   let t = il.getDefaultSkin();
   let [i, r] = useState(t ? t - 1 : 0);
-  let o = (t) => {
+  let o = t => {
     t += 1;
-    Y5.triggerAction("set-default-emoji-skin-tone", {
+    fullscreenValue.triggerAction("set-default-emoji-skin-tone", {
       newEmojiSkinTone: t
     });
     e.onInsert();
@@ -25,12 +25,12 @@ let g = function (e) {
   };
   let l = useCallback(() => (e.forceCloseSkinToneSelector(), !0), [e]);
   O1(l, KD.EDITING_TEXT_FIELD);
-  let d = (t) => {
+  let d = t => {
     let n = e.allSkinTones.length;
     t.keyCode === Uz.UP_ARROW || t.keyCode === Uz.LEFT_ARROW ? (t.stopPropagation(), t.preventDefault(), r((i - 1 + n) % n)) : t.keyCode === Uz.DOWN_ARROW || t.keyCode === Uz.RIGHT_ARROW ? (t.stopPropagation(), t.preventDefault(), r((i + 1) % n)) : (t.keyCode === Uz.ENTER || t.keyCode === Uz.TAB) && (t.stopPropagation(), t.preventDefault(), o(e.allSkinTones[i].skin));
   };
-  let c = (e) => r(e);
-  let g = (e) => i === e;
+  let c = e => r(e);
+  let g = e => i === e;
   useEffect(() => (window.addEventListener("keydown", d, {
     capture: !0
   }), () => window.removeEventListener("keydown", d, {
@@ -73,26 +73,26 @@ export class $$A0 extends o6 {
       wasPointerDownInTypeahead: !1,
       isSkinToneSelectorToggled: !1
     };
-    this.setWasPointerDownInTypeahead = (e) => {
-      this.setState((t) => ({
+    this.setWasPointerDownInTypeahead = e => {
+      this.setState(t => ({
         ...t,
         wasPointerDownInTypeahead: e
       }));
     };
-    this.setIsPointerDownInTypeahead = (e) => {
-      this.setState((t) => ({
+    this.setIsPointerDownInTypeahead = e => {
+      this.setState(t => ({
         ...t,
         isPointerDownInTypeahead: e
       }));
     };
     this.toggleSkinToneSelector = () => {
-      this.setState((e) => ({
+      this.setState(e => ({
         ...e,
         isSkinToneSelectorToggled: !e.isSkinToneSelectorToggled
       }));
     };
     this.forceCloseSkinToneSelector = () => {
-      this.setState((e) => ({
+      this.setState(e => ({
         ...e,
         isSkinToneSelectorToggled: !1,
         wasPointerDownInTypeahead: !1,
@@ -103,7 +103,7 @@ export class $$A0 extends o6 {
       this.props.onInsert();
       this.props.dispatchTypeahead(null);
     };
-    this.placeEmoji = (e) => {
+    this.placeEmoji = e => {
       this.props.dispatchTypeahead({
         ...this.props.typeahead,
         index: e

@@ -1,13 +1,13 @@
 import { useSelector } from "../vendor/514228";
-import { W8Y } from "../figma_app/763686";
+import { SessionStatus } from "../figma_app/763686";
 export function $$a2(e) {
-  return e.mirror.appModel.votingSessionInfo.votingStage === W8Y.JOINED;
+  return e.mirror.appModel.votingSessionInfo.votingStage === SessionStatus.JOINED;
 }
 export function $$s0() {
   return useSelector($$a2);
 }
 function o(e) {
-  return e.mirror.appModel.votingSessionInfo.votingStage === W8Y.NOT_JOINED && !e.voting.hasDismissedJoinConfirmation;
+  return e.mirror.appModel.votingSessionInfo.votingStage === SessionStatus.NOT_JOINED && !e.voting.hasDismissedJoinConfirmation;
 }
 export function $$l1() {
   return useSelector(o);

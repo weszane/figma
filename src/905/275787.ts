@@ -3,7 +3,7 @@ import { memo, useMemo, useCallback } from "react";
 import { createPortal } from "../vendor/944059";
 import { useSelector } from "../vendor/514228";
 import { isNotNullish, isNullish } from "../figma_app/95419";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
@@ -84,7 +84,7 @@ function x({
   let i = useCallback(() => {
     let i = getSingletonSceneGraph().get(e);
     if (!i) return null;
-    l7.user("toggle-publishability", () => {
+    permissionScopeHandler.user("toggle-publishability", () => {
       i.isStateGroup ? i.isPublishable = !t : i.isLooseComponent && (i.isSymbolPublishable = !t);
     });
   }, [e, t]);

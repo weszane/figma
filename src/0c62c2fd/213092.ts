@@ -6,7 +6,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { I } from "../c5e2cae0/718426";
 import { sx } from "../figma_app/307841";
 import { Dw } from "../figma_app/976345";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { Vm } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
@@ -34,7 +34,7 @@ export function $$x0() {
   let t = useDispatch();
   let r = sx();
   let x = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let b = useCallback(e => {
     x();

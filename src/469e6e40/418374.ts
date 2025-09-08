@@ -7,10 +7,10 @@ import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { W } from "../5430/573261";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { xF, yo } from "../figma_app/494261";
-import { ZI, yx } from "../figma_app/300692";
-import { Ju } from "../905/102752";
+import { extractPluginIdFromUrl, extractWidgetIdFromUrl } from "../figma_app/300692";
+import { registerModal } from "../905/102752";
 import { yX, d_ } from "../figma_app/918700";
 let x = "allowlist_plugins_modals--allowListInputDescription--0Tdk6";
 let b = "allowlist_plugins_modals--allowListInput--ISr-U";
@@ -142,7 +142,7 @@ NOW THEREFORE, Figma and Customer hereby agree as follows:`, jsxs("ol", {
     this Amendment is unenforceable in the future. Figma also agrees to be bound by the Agreement as
     amended and\xa0will not assert that this Amendment is unenforceable in the future.`]
 });
-let $$y0 = Ju(function ({
+let $$y0 = registerModal(function ({
   org: e,
   extensionType: t
 }) {
@@ -165,10 +165,10 @@ let $$y0 = Ju(function ({
         },
         successMessage: getI18nString("allowlist_widgets_modals.msa_amendment_modal.success_notification")
       }));
-      a(Ce());
+      a(hideModal());
     },
     onCancel: () => {
-      a(Ce());
+      a(hideModal());
     },
     dontClose: !0,
     disableClickOutsideToHide: !0,
@@ -180,11 +180,11 @@ let $$y0 = Ju(function ({
     })
   });
 }, "AllowListPluginsMSAAmendmentModal");
-let $$w1 = Ju(function (e) {
+let $$w1 = registerModal(function (e) {
   let t = useDispatch();
   let [a, o] = useState("");
   let m = () => {
-    t(Ce());
+    t(hideModal());
     o("");
   };
   return jsxs(d_, {
@@ -199,10 +199,10 @@ let $$w1 = Ju(function (e) {
     }), jsxs("form", {
       onSubmit: n => {
         n.preventDefault();
-        let s = ZI(a);
+        let s = extractPluginIdFromUrl(a);
         if (s) {
           m();
-          t(to({
+          t(showModalHandler({
             type: W(),
             data: {
               mode: "review",
@@ -232,7 +232,7 @@ let $$w1 = Ju(function (e) {
           type: "button",
           children: renderI18nText("general.cancel")
         }), jsx($$, {
-          disabled: !ZI(a),
+          disabled: !extractPluginIdFromUrl(a),
           className: f,
           type: "submit",
           children: renderI18nText("allowlist_plugins_modals.add_plugin.add_button")
@@ -241,11 +241,11 @@ let $$w1 = Ju(function (e) {
     })]
   });
 }, "AllowlistPluginsInputModal");
-let $$k2 = Ju(function (e) {
+let $$k2 = registerModal(function (e) {
   let t = useDispatch();
   let [a, o] = useState("");
   let m = () => {
-    t(Ce());
+    t(hideModal());
     o("");
   };
   return jsxs(d_, {
@@ -260,10 +260,10 @@ let $$k2 = Ju(function (e) {
     }), jsxs("form", {
       onSubmit: n => {
         n.preventDefault();
-        let s = yx(a);
+        let s = extractWidgetIdFromUrl(a);
         if (s) {
           m();
-          t(to({
+          t(showModalHandler({
             type: W(),
             data: {
               mode: "review",
@@ -293,7 +293,7 @@ let $$k2 = Ju(function (e) {
           type: "button",
           children: renderI18nText("general.cancel")
         }), jsx($$, {
-          disabled: !yx(a),
+          disabled: !extractWidgetIdFromUrl(a),
           className: f,
           type: "submit",
           children: renderI18nText("allowlist_widgets_modals.add_widget.add_button")

@@ -2,18 +2,18 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback, PureComponent, useId, useMemo, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { assertNotNullish, debug } from "../figma_app/465776";
-import { n4 } from "../905/955878";
-import { fn } from "../905/871411";
+import { isFakeTouchEvent } from "../905/955878";
+import { isValidSessionLocalID } from "../905/871411";
 import { Pt, o6 } from "../figma_app/806412";
 import { k as _$$k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { fu, kp } from "../figma_app/831799";
 import { xv } from "../figma_app/290668";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
 import { wr } from "../figma_app/741237";
-import { _W, gl, E7, hS } from "../905/216495";
+import { valueOrFallback, isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { kl, lJ, pw, zj, DQ, fC, Gt } from "../905/275640";
 import { _P, $J, Qx } from "../figma_app/2590";
 import { e0 as _$$e } from "../905/696396";
@@ -23,7 +23,7 @@ import { YR } from "../figma_app/365713";
 import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { c$ as _$$c$, bL as _$$bL, l9, mc, wv, DZ } from "../905/493196";
-import { h as _$$h, J as _$$J } from "../905/270045";
+import { HiddenLabel, Label } from "../905/270045";
 import { atomStoreManager } from "../figma_app/27355";
 import { hY, yr, $X, Fh, r6, J_, AG, $w, dr } from "../figma_app/349969";
 import { TI, z5 } from "../905/713722";
@@ -44,7 +44,7 @@ import { Rk } from "../figma_app/483189";
 import { A as _$$A } from "../6020/852410";
 import { y7 } from "../5421/828271";
 import { A as _$$A2 } from "../6020/624960";
-import { S as _$$S } from "../905/274480";
+import { Checkbox } from "../905/274480";
 import { f as _$$f } from "../905/167712";
 import { L as _$$L } from "../905/473569";
 import { B as _$$B } from "../905/714743";
@@ -55,12 +55,12 @@ import { A as _$$A4 } from "../svg/621897";
 import { z as _$$z } from "../905/454433";
 import { isDefined } from "../figma_app/95419";
 import { r as _$$r } from "../905/571838";
-import { Ez5, ibQ, KjJ, X3B } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { AppStateTsApi, ItemType, ScrollBehavior, PrototypingTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { selectWithShallowEqual } from "../905/103090";
 import { Rk as _$$Rk, Ge, wi } from "../figma_app/451499";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { l6, c$ as _$$c$2 } from "../905/794875";
 import { iE } from "../figma_app/711157";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -126,13 +126,13 @@ function z(e) {
     dispatch(_P({
       name: "Prototype Background Modified"
     }));
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeBackgroundColor: e
     }, {
       shouldCommit: t
     });
   }, [dispatch]);
-  let c = _W(prototypeBackgroundColor, {
+  let c = valueOrFallback(prototypeBackgroundColor, {
     r: 0,
     g: 0,
     b: 0,
@@ -186,7 +186,7 @@ class J extends PureComponent {
       let t = hY[e];
       if (!t) return;
       let n = this.props.prototypeDevice.rotation;
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         prototypeDevice: {
           type: "PRESET",
           size: t.framePresetSize,
@@ -233,7 +233,7 @@ class J extends PureComponent {
     this.renderDevicePreview = () => {
       let e = this.deviceInfo();
       if (!e) return;
-      let t = _W(this.props.prototypeBackgroundColor, {
+      let t = valueOrFallback(this.props.prototypeBackgroundColor, {
         r: 0,
         g: 0,
         b: 0,
@@ -278,7 +278,7 @@ class J extends PureComponent {
       let n = t.size.y > t.size.x;
       let o = t.rotation;
       o = n ? "PORTRAIT" === e ? "NONE" : "CCW_90" : "PORTRAIT" === e ? "CCW_90" : "NONE";
-      Y5.updateSelectionProperties({
+      fullscreenValue.updateSelectionProperties({
         prototypeDevice: {
           ...t,
           rotation: o
@@ -354,7 +354,7 @@ class J extends PureComponent {
 }
 function Q(e) {
   let t = useCallback(t => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeDevice: {
         type: "CUSTOM",
         size: {
@@ -366,7 +366,7 @@ function Q(e) {
     });
   }, [e.prototypeDevice.size.y, e.prototypeDevice.rotation]);
   let n = useCallback(t => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeDevice: {
         type: "CUSTOM",
         size: {
@@ -465,7 +465,7 @@ class ee extends o6 {
       recordingKey: Pt(this.props, "select"),
       value: t,
       children: [jsx(l9, {
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: renderI18nText("proto.frame_preset_panel.device")
         }),
         width: "fill",
@@ -528,7 +528,7 @@ class et extends o6 {
       recordingKey: Pt(this.props, "select"),
       value: n,
       children: [jsx(l9, {
-        label: jsx(_$$h, {
+        label: jsx(HiddenLabel, {
           children: renderI18nText("proto.frame_preset_panel.device.model")
         }),
         width: "fill",
@@ -590,7 +590,7 @@ function eg({
   }
 }) {
   let n = null;
-  gl(e) && gl(t) ? n = renderI18nText("proto.prototype_panel.replace_mixed_muted_and_loop_video_playback", {
+  isInvalidValue(e) && isInvalidValue(t) ? n = renderI18nText("proto.prototype_panel.replace_mixed_muted_and_loop_video_playback", {
     loopSvg: jsx(_$$B, {
       svg: _$$A3,
       className: _$$eT
@@ -599,12 +599,12 @@ function eg({
       svg: _$$A4,
       className: To
     })
-  }) : gl(e) ? n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
+  }) : isInvalidValue(e) ? n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
     svg: jsx(_$$B, {
       svg: _$$A3,
       className: _$$eT
     })
-  }) : gl(t) && (n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
+  }) : isInvalidValue(t) && (n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
     svg: jsx(_$$B, {
       svg: _$$A4,
       className: To
@@ -617,12 +617,12 @@ function eg({
     })
   }) : null;
 }
-let ey = e => gl(e) ? "mixed" : e;
+let ey = e => isInvalidValue(e) ? "mixed" : e;
 let ef = e => !0 === e;
 let e_ = function (e) {
   let t = jsx("span", {
-    children: jsx(_$$S, {
-      label: jsx(_$$J, {
+    children: jsx(Checkbox, {
+      label: jsx(Label, {
         htmlAttributes: {
           "data-tooltip": getI18nString("proto.prototype_panel.default_video_playback_state"),
           "data-tooltip-type": Ib.TEXT
@@ -643,13 +643,13 @@ let e_ = function (e) {
         }));
       },
       checked: ef(e.videoPlayback.autoplay),
-      mixed: gl(e.videoPlayback.autoplay),
+      mixed: isInvalidValue(e.videoPlayback.autoplay),
       recordingKey: Pt(e, "autoPlayToggle")
     })
   });
   let n = jsx(_$$f, {
     checked: ef(e.videoPlayback.mediaLoop),
-    mixed: gl(e.videoPlayback.mediaLoop),
+    mixed: isInvalidValue(e.videoPlayback.mediaLoop),
     onIcon: jsx(el, {}),
     offIcon: jsx(es, {}),
     onChange: () => {
@@ -676,7 +676,7 @@ let e_ = function (e) {
   });
   let i = jsx(_$$f, {
     checked: ef(!e.videoPlayback.muted),
-    mixed: gl(e.videoPlayback.muted),
+    mixed: isInvalidValue(e.videoPlayback.muted),
     onIcon: jsx(_$$L, {}),
     offIcon: jsx(ec, {}),
     onChange: () => {
@@ -767,7 +767,7 @@ function eK(e) {
     dropdownShown
   } = e;
   let [a, l] = function () {
-    let e = ut(Ez5?.propertiesPanelState().shownPropertiesPanels, [])[ibQ.OVERFLOW_ITEM];
+    let e = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, [])[ItemType.OVERFLOW_ITEM];
     let t = cJ();
     let n = kl("isSection");
     let o = kl("anyTopLevelFramesInSelection");
@@ -822,17 +822,17 @@ function ez({
       name: "Overflow Behavior changed",
       params: {
         newDirection: e,
-        oldDirection: _W(l, "MIXED")
+        oldDirection: valueOrFallback(l, "MIXED")
       }
     }));
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       scrollDirection: e
     });
   }, [n, l]);
   return useMemo(() => jsxs(fI, {
     children: [jsx("div", {
       className: eF,
-      children: jsx(_$$J, {
+      children: jsx(Label, {
         htmlFor: c,
         className: eU,
         children: renderI18nText("proto.scroll_panel.overflow_dropdown.overflow")
@@ -881,16 +881,16 @@ function eG({
       }
     })), e) {
       case "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME":
-        t = KjJ.FIXED;
+        t = ScrollBehavior.FIXED;
         break;
       case "STICKY_SCROLLS":
-        t = KjJ.STICKY_SCROLLS;
+        t = ScrollBehavior.STICKY_SCROLLS;
         break;
       case "SCROLLS":
-        t = KjJ.SCROLLS;
+        t = ScrollBehavior.SCROLLS;
     }
-    l7.user("set-scroll-behavior", () => X3B && X3B.aggressivelySetScrollBehaviorOfSelection(t));
-    Y5.commit();
+    permissionScopeHandler.user("set-scroll-behavior", () => PrototypingTsApi && PrototypingTsApi.aggressivelySetScrollBehaviorOfSelection(t));
+    fullscreenValue.commit();
   }, [n]);
   let {
     fixedScrollingDisabled
@@ -899,7 +899,7 @@ function eG({
   return useMemo(() => jsxs(fI, {
     children: [jsx("div", {
       className: eF,
-      children: jsx(_$$J, {
+      children: jsx(Label, {
         htmlFor: d,
         className: eU,
         children: renderI18nText("proto.scroll_panel.position_dropdown.position")
@@ -957,9 +957,9 @@ function eY(e) {
           newValue: e
         }
       }));
-      let n = "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" === e ? KjJ.FIXED : "STICKY_SCROLLS" === e ? KjJ.STICKY_SCROLLS : KjJ.SCROLLS;
-      l7.user("set-scroll-behavior", () => X3B?.aggressivelySetScrollBehaviorOfSelection(n));
-      Y5.commit();
+      let n = "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" === e ? ScrollBehavior.FIXED : "STICKY_SCROLLS" === e ? ScrollBehavior.STICKY_SCROLLS : ScrollBehavior.SCROLLS;
+      permissionScopeHandler.user("set-scroll-behavior", () => PrototypingTsApi?.aggressivelySetScrollBehaviorOfSelection(n));
+      fullscreenValue.commit();
     },
     property: n || "SCROLLS",
     recordingKey: e.recordingKey,
@@ -1086,7 +1086,7 @@ export let $$e70 = kp(function (e) {
       };
     }
   }(!!numVideosSelected);
-  let H = E7(numSelected);
+  let H = normalizeValue(numSelected);
   let U = null !== H && H > 0;
   let F = useDispatch();
   let K = useCallback(() => {
@@ -1114,7 +1114,7 @@ export let $$e70 = kp(function (e) {
     let e = xv(q.current);
     e && e.focus();
   }, [U]);
-  let X = !hS(transitionNodeID) || fn(E7(transitionNodeID));
+  let X = !isValidValue(transitionNodeID) || isValidSessionLocalID(normalizeValue(transitionNodeID));
   let Q = !R && !!numVideosSelected;
   let ee = !R && prototypeStartingPointsInfo && prototypeStartingPointsInfo.length > 0;
   let et = R || X ? null : jsx(e9, {
@@ -1125,13 +1125,13 @@ export let $$e70 = kp(function (e) {
   });
   let er = !R && ((isValidPrototypingSourceSelected ?? !0) || isSectionSelected && YR());
   let ea = !R;
-  debug(U || R || hS(prototypeDevice), "should not have mixed device selection");
+  debug(U || R || isValidValue(prototypeDevice), "should not have mixed device selection");
   return jsxs("div", {
     ref: q,
     onBlur: G,
     onFocus: Z,
     onPointerDown: e => {
-      $.current = n4(e.nativeEvent);
+      $.current = isFakeTouchEvent(e.nativeEvent);
     },
     children: [ea && jsx(Mw, {
       panelName: ON.PROTOTYPE
@@ -1144,7 +1144,7 @@ export let $$e70 = kp(function (e) {
         disableScrollBehaviorItem: !!isInstanceSublayerSelected,
         recordingKey: Pt(e, "scrollBehaviorPanel")
       }), Q && jsx(e_, {
-        updateSelectionProperties: Y5.updateSelectionProperties,
+        updateSelectionProperties: fullscreenValue.updateSelectionProperties,
         dispatch: F,
         videoPlayback: B,
         recordingKey: Pt(e, "prototypeVideoPlaybackPanel")

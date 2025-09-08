@@ -5,18 +5,18 @@ import { cT } from "../905/997533";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, getI18nStringAlias } from "../905/303541";
 import { J } from "../905/231762";
-import { nF } from "../905/350402";
-import { Lo, Ce } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { popModalStack, hideModal } from "../905/156213";
 import { z3, sp, r1, Yu } from "../905/355291";
 import { WJ, yJ, C$, hz, S5 } from "../figma_app/24841";
 import { yV, r6 } from "../905/990455";
 import { k } from "../905/93362";
-export let $$f5 = nF((e, t) => {
+export let $$f5 = createOptimistThunk((e, t) => {
   t.passwordNew !== t.passwordRetype ? e.dispatch(_$$s.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : XHR.post("/api/password/change", {
     password_old: t.passwordOld,
     password_new: t.passwordNew
   }).then(() => {
-    e.dispatch(Lo());
+    e.dispatch(popModalStack());
     e.dispatch(_$$s.flash(getI18nString("api_user.password_changed")));
   }).catch(({
     response: t
@@ -37,7 +37,7 @@ function _(e, t, i) {
     e(z3(i));
   }
 }
-let $$A1 = nF((e, t) => {
+let $$A1 = createOptimistThunk((e, t) => {
   XHR.post("/api/session/verify_password", {
     password: t.password
   }).then(({
@@ -56,7 +56,7 @@ let $$A1 = nF((e, t) => {
   });
   e.dispatch(r1());
 });
-let $$y8 = nF((e, t) => {
+let $$y8 = createOptimistThunk((e, t) => {
   let i = e.getState().user.password_token;
   let n = e.getState().user.mfa_setup_token;
   XHR.post("/api/user/phone_number", {
@@ -75,7 +75,7 @@ let $$y8 = nF((e, t) => {
   });
   e.dispatch(r1());
 });
-let $$b10 = nF((e, t) => {
+let $$b10 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
   let o = e.getState().user.mfa_setup_token;
   XHR.post("/api/user/phone_number/confirm", {
@@ -105,7 +105,7 @@ let $$b10 = nF((e, t) => {
   });
   e.dispatch(r1());
 });
-let $$v11 = nF(e => {
+let $$v11 = createOptimistThunk(e => {
   let t = e.getState().user.password_token;
   XHR.del("/api/user/phone_number", {
     password_verify_token: t
@@ -122,7 +122,7 @@ let $$v11 = nF(e => {
   });
   e.dispatch(r1());
 });
-let $$I4 = nF((e, t) => {
+let $$I4 = createOptimistThunk((e, t) => {
   k.getBackupCodes({
     passwordVerifyToken: t.token
   }).then(({
@@ -136,7 +136,7 @@ let $$I4 = nF((e, t) => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-get-recovery-codes"));
   });
 });
-let $$E3 = nF(e => {
+let $$E3 = createOptimistThunk(e => {
   let t = e.getState().user.password_token;
   XHR.post("/api/user/backup_codes", {
     password_verify_token: t
@@ -151,7 +151,7 @@ let $$E3 = nF(e => {
     _(e.dispatch, t, getI18nString("auth.two-factor-setup.error.generic-reset-recovery-codes"));
   });
 });
-let $$x6 = nF((e, t) => {
+let $$x6 = createOptimistThunk((e, t) => {
   XHR.del("/api/user/totp", {
     password_verify_token: t.token
   }).then(() => {
@@ -163,7 +163,7 @@ let $$x6 = nF((e, t) => {
   });
   e.dispatch(r1());
 });
-let $$S7 = nF((e, t) => {
+let $$S7 = createOptimistThunk((e, t) => {
   XHR.post("/api/user/totp", {
     password_verify_token: t.token,
     mfa_setup_token: t.mfaToken
@@ -183,7 +183,7 @@ let $$S7 = nF((e, t) => {
   });
   e.dispatch(r1());
 });
-let $$w12 = nF((e, t) => {
+let $$w12 = createOptimistThunk((e, t) => {
   let i = r6().token;
   let o = e.getState().user;
   let d = o.mfa_setup_token;
@@ -217,7 +217,7 @@ let $$w12 = nF((e, t) => {
   });
   e.dispatch(r1());
 });
-let $$C0 = nF(e => {
+let $$C0 = createOptimistThunk(e => {
   let t = e.dispatch(_$$s.flash(getI18nString("api_user.one_moment")));
   XHR.post("/api/password/forgot", {
     username: e.getState().user.email
@@ -235,7 +235,7 @@ let $$C0 = nF(e => {
     e.dispatch(_$$s.error(getI18nString("api_user.error.an_error_occurred_while_resetting_your_password")));
   });
 });
-let $$T9 = nF(e => {
+let $$T9 = createOptimistThunk(e => {
   XHR.post("/api/validation/email/send").then(() => {
     let t = getI18nString("api_user.confirmation-email", {
       email: e.getState().user.email
@@ -246,7 +246,7 @@ let $$T9 = nF(e => {
     e.dispatch(_$$s.error(t));
   });
 });
-let $$k2 = nF((e, t) => {
+let $$k2 = createOptimistThunk((e, t) => {
   e.dispatch(hz({
     loading: !0
   }));
@@ -255,7 +255,7 @@ let $$k2 = nF((e, t) => {
   }).then(({
     response: t
   }) => {
-    e.dispatch(Ce());
+    e.dispatch(hideModal());
     let i = JSON.parse(t);
     if (i.i18n?.id) {
       let t = getI18nStringAlias(i.i18n.id);
@@ -267,7 +267,7 @@ let $$k2 = nF((e, t) => {
   }).catch(({
     response: t
   }) => {
-    e.dispatch(Ce());
+    e.dispatch(hideModal());
     e.dispatch(hz({
       loading: !1
     }));

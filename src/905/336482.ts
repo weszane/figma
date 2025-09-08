@@ -64,12 +64,12 @@ import { f as _$$f } from "../905/265642";
 import { Y as _$$Y } from "../905/192715";
 import { m as _$$m } from "../905/601661";
 import { OA, PP, PH, Pn } from "../905/230175";
-import { m as _$$m2 } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { S3, Rr, fY, YI, SK, Ur, RN, nz, fe } from "../905/234639";
 import { w as _$$w } from "../905/893785";
 import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { $$in, WX } from "../figma_app/350203";
 import { j6, fu } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
@@ -82,7 +82,7 @@ import { e0 as _$$e3 } from "../905/696396";
 import { pz } from "../figma_app/825489";
 import { KT, Cd, DK, $o, ME, jc } from "../905/54042";
 import { r as _$$r3 } from "../905/490676";
-import { X3B } from "../figma_app/763686";
+import { PrototypingTsApi } from "../figma_app/763686";
 import { t as _$$t3 } from "../905/104116";
 import { P as _$$P } from "../905/19648";
 import { $ as _$$$ } from "../905/410306";
@@ -93,7 +93,7 @@ import { r as _$$r4 } from "../905/783627";
 import { x as _$$x } from "../905/956141";
 import { K as _$$K } from "../905/198422";
 import { d as _$$d } from "../905/49800";
-import { h as _$$h3 } from "../905/270045";
+import { HiddenLabel } from "../905/270045";
 import { A as _$$A9 } from "../905/567946";
 import { vj } from "../905/652712";
 import { l as _$$l } from "../905/493845";
@@ -327,7 +327,7 @@ let ey = {
       description
     } = t;
     if (createNewVersionOnSubmit) try {
-      i = (await _$$m2(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
+      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
@@ -489,7 +489,7 @@ function eM({
   } = j6();
   let c = _$$H(trackEvent);
   let u = useCallback(() => {
-    l(Ce());
+    l(hideModal());
     c.current($$in, {
       step: WX.CLOSED
     });
@@ -872,7 +872,7 @@ function e0({
     children: jsxs("div", {
       className: _$$s.flex.itemsCenter.gap8.$,
       children: [jsx(_$$d, {
-        label: jsx(_$$h3, {
+        label: jsx(HiddenLabel, {
           children: getI18nString("community.publishing.include_prototypes_in_thumbnail")
         }),
         checked: t === FTemplateCategoryType.PROTOTYPE,
@@ -1195,7 +1195,7 @@ let tt = _$$T({
       viewerMode
     } = t;
     if (createNewVersionOnSubmit) try {
-      i = (await _$$m2(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
+      i = (await maybeCreateSavepoint(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
@@ -1355,7 +1355,7 @@ function td({
   } = j6();
   let p = _$$H(trackEvent);
   let m = useCallback(() => {
-    c(Ce());
+    c(hideModal());
     p.current($$in, {
       step: WX.CLOSED
     });
@@ -1780,7 +1780,7 @@ function tc(e) {
   let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
   let g = ti({
     ...e,
-    figFilePrototypeStatus: X3B?.firstPagePrototypeStatus(),
+    figFilePrototypeStatus: PrototypingTsApi?.firstPagePrototypeStatus(),
     allowVideosInCarouselMedia: !1,
     canvasThumbnailPromise: o,
     user: s,

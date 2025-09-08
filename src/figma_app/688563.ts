@@ -1,4 +1,4 @@
-import { Bko } from "../figma_app/763686";
+import { ImageCppBindings } from "../figma_app/763686";
 import { H9 } from "../figma_app/930338";
 import { gC } from "../figma_app/368611";
 import { B } from "../figma_app/371825";
@@ -10,7 +10,7 @@ export function $$o0(e) {
       return Promise.resolve(H9(e));
     }
     {
-      let t = Bko?.getCompressedImage(e) ?? null;
+      let t = ImageCppBindings?.getCompressedImage(e) ?? null;
       if (t) return Promise.resolve(H9(t));
     }
     return Promise.resolve(null);

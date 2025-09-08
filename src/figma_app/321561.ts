@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { l7 } from "../905/189185";
+import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { mG } from "../figma_app/15924";
 import { XR } from "../figma_app/808294";
 import { v as _$$v } from "../905/581647";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { a as _$$a } from "../figma_app/453187";
 import { Gt } from "../figma_app/248118";
@@ -19,7 +19,7 @@ import { TA } from "../905/372672";
 import { R as _$$R } from "../figma_app/612938";
 import { aL } from "../figma_app/45218";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { k0 } from "../figma_app/155287";
+import { manifestContainsWidget } from "../figma_app/155287";
 import { Kp } from "../figma_app/189990";
 import { q8, U4, S3 } from "../figma_app/254872";
 import { S as _$$S } from "../905/404161";
@@ -73,7 +73,7 @@ export function $$O0({
     _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
   }, [close]);
   let X = useCallback(() => {
-    k0(extension) ? l7.user("insert-widget", () => R(extension)) : H && t ? W(t.current) : V();
+    manifestContainsWidget(extension) ? permissionScopeHandler.user("insert-widget", () => R(extension)) : H && t ? W(t.current) : V();
     H || U();
     K() && close();
   }, [extension, H, t, U, K, W, V, close]);
@@ -87,13 +87,13 @@ export function $$O0({
         iconUrl: extension.redirect_icon_url,
         name: extension.name
       },
-      isWidget: k0(extension),
+      isWidget: manifestContainsWidget(extension),
       orgId: q.parentOrgId,
       workspaceDetails: J.loaded ? J.data : void 0,
       openedFrom: "editor",
       fullscreenEditorType: mapFileTypeToEditorType(q.editorType)
     };
-    D(to({
+    D(showModalHandler({
       type: _$$S,
       data: e
     }));

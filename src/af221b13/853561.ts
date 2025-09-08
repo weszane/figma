@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { WX } from "../figma_app/350203";
 import { Tm } from "../figma_app/740025";
 import { _6 } from "../figma_app/386952";
@@ -31,7 +31,7 @@ export function $$h0() {
           user: t.id,
           step: WX.OPENED
         });
-        e(to({
+        e(showModalHandler({
           type: R,
           data: {
             source: Zm.NAVBAR

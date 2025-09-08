@@ -1,25 +1,25 @@
-import { vh, YV, td } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { fileEntityModel } from "../905/806985";
 export let $$s0 = new class {
   constructor() {
-    this.RelatedLinksSchemaValidator = vh();
-    this.FilesSchemaValidator = vh();
-    this.FilesSchemaValidatorWithPerms = vh();
-    this.VideosSchemaValidator = vh();
-    this.RealtimeTokenSchemaValidator = vh();
-    this.SourceCheckpointCreatedAtSchemaValidator = vh();
-    this.SourceFileUpdatedInfoSchemaValidator = vh();
-    this.MetaSchemaValidator = vh();
-    this.LastInteractionSchemaValidator = vh();
-    this.VideosUploadSchemaValidator = vh();
-    this.VideoDownloadSchemaValidator = vh();
-    this.IncludeFolderTeamCanEditSchemaValidator = vh();
-    this.PageCheckpointThumbnailsSchemaValidator = vh();
-    this.GetHubFileDuplicatesSchemaValidator = vh();
-    this.GetTaggedUserFileSchemaValidator = vh();
-    this.PageWAFValidatorSchemaValidator = vh();
-    this.CopyFileSchemaValidator = YV("CopyFileSchemaValidator", fileEntityModel, null);
+    this.RelatedLinksSchemaValidator = createNoOpValidator();
+    this.FilesSchemaValidator = createNoOpValidator();
+    this.FilesSchemaValidatorWithPerms = createNoOpValidator();
+    this.VideosSchemaValidator = createNoOpValidator();
+    this.RealtimeTokenSchemaValidator = createNoOpValidator();
+    this.SourceCheckpointCreatedAtSchemaValidator = createNoOpValidator();
+    this.SourceFileUpdatedInfoSchemaValidator = createNoOpValidator();
+    this.MetaSchemaValidator = createNoOpValidator();
+    this.LastInteractionSchemaValidator = createNoOpValidator();
+    this.VideosUploadSchemaValidator = createNoOpValidator();
+    this.VideoDownloadSchemaValidator = createNoOpValidator();
+    this.IncludeFolderTeamCanEditSchemaValidator = createNoOpValidator();
+    this.PageCheckpointThumbnailsSchemaValidator = createNoOpValidator();
+    this.GetHubFileDuplicatesSchemaValidator = createNoOpValidator();
+    this.GetTaggedUserFileSchemaValidator = createNoOpValidator();
+    this.PageWAFValidatorSchemaValidator = createNoOpValidator();
+    this.CopyFileSchemaValidator = createMetaValidator("CopyFileSchemaValidator", fileEntityModel, null);
   }
   getRelatedLinks(e) {
     let {
@@ -28,7 +28,7 @@ export let $$s0 = new class {
     } = e;
     return this.RelatedLinksSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/files/${e.fileKey}/related_links`, td.toAPIParameters(r)));
+    }) => await t.get(`/api/files/${e.fileKey}/related_links`, APIParameterUtils.toAPIParameters(r)));
   }
   getFiles(e) {
     let {
@@ -38,9 +38,9 @@ export let $$s0 = new class {
     } = e;
     return e.includePerms ? this.FilesSchemaValidatorWithPerms.validate(async ({
       xr: t
-    }) => await t.get(`/api/files/${e.fileKey}`, td.toAPIParameters(i), args)) : this.FilesSchemaValidator.validate(async ({
+    }) => await t.get(`/api/files/${e.fileKey}`, APIParameterUtils.toAPIParameters(i), args)) : this.FilesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/files/${e.fileKey}`, td.toAPIParameters(i), args));
+    }) => await t.get(`/api/files/${e.fileKey}`, APIParameterUtils.toAPIParameters(i), args));
   }
   getVideos(e) {
     return this.VideosSchemaValidator.validate(async ({
@@ -85,7 +85,7 @@ export let $$s0 = new class {
   getIncludeFolderTeamCanEdit(e) {
     return this.IncludeFolderTeamCanEditSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get(`/api/files/${e.fileKey}`, td.toAPIParameters({
+    }) => await t.get(`/api/files/${e.fileKey}`, APIParameterUtils.toAPIParameters({
       includeFolderTeamCanEdit: e.includeFolderTeamCanEdit ? 1 : 0
     })));
   }
@@ -100,14 +100,14 @@ export let $$s0 = new class {
   getHubFileDuplicates(e) {
     return this.GetHubFileDuplicatesSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/files/hub_file_duplicates", td.toAPIParameters({
+    }) => await t.post("/api/files/hub_file_duplicates", APIParameterUtils.toAPIParameters({
       fileKeys: e.fileKeys
     })));
   }
   getTaggedUserFiles(e) {
     return this.GetTaggedUserFileSchemaValidator.validate(async ({
       xr: t
-    }) => await t.post("/api/tagged_file", td.toAPIParameters({
+    }) => await t.post("/api/tagged_file", APIParameterUtils.toAPIParameters({
       fileTags: e.fileTags,
       currentOrgId: e.currentOrgId,
       currentTeamId: e.currentTeamId,
@@ -122,7 +122,7 @@ export let $$s0 = new class {
   copyFile(e, t) {
     return this.CopyFileSchemaValidator.validate(async ({
       xr: r
-    }) => await r.post(`/api/multiplayer/${e}/copy`, td.toAPIParameters({
+    }) => await r.post(`/api/multiplayer/${e}/copy`, APIParameterUtils.toAPIParameters({
       ...(t || {})
     })));
   }

@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useMemo, useEffect, useCallback, useId, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n, IK } from "../905/521428";
-import { _0v, glU, rXF, Egt, Qa7, RN9, hJs, AlE, Ez5 } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Axis, Fullscreen, VariableResolvedDataType, SceneGraphHelpers, StackBindingsCpp, SpacingConstants, SnapMode, documentStateTsApi, AppStateTsApi } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
@@ -13,7 +13,7 @@ import { k as _$$k2 } from "../905/582200";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Kl } from "../figma_app/175258";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { kl, lJ } from "../905/275640";
 import { KH, f4 } from "../figma_app/722362";
@@ -24,7 +24,7 @@ import { b7, aW } from "../figma_app/803054";
 import { Zk, fI } from "../figma_app/626177";
 import { u as _$$u } from "../figma_app/6978";
 import { O as _$$O } from "../905/587457";
-import { E7, gl, hS, oV, q as _$$q } from "../905/216495";
+import { normalizeValue, isInvalidValue, isValidValue, MIXED_MARKER, getCommonValue } from "../905/216495";
 import { F as _$$F } from "../905/258517";
 import { zk } from "../figma_app/198712";
 import { gq } from "../figma_app/178475";
@@ -54,7 +54,7 @@ import { N as _$$N } from "../905/438674";
 import { Ay } from "../905/612521";
 import { Gc, Uz, Fo } from "../905/63728";
 import { ex as _$$ex } from "../905/524523";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { jr, W0, VA } from "../figma_app/896988";
 import { _6 } from "../figma_app/386952";
 import { Vj, cJ } from "../905/561485";
@@ -153,18 +153,18 @@ function B(e) {
   let n = Xs();
   let a = kl("detectedList");
   let s = kl("detectableListAxis");
-  let c = E7(a);
+  let c = normalizeValue(a);
   let d = Zr("arrange-as-grid");
   let u = useRef(null);
   if (!c && null == u.current && !d && null == s) return null;
-  let h = c?.canvasSpacingBetweenItemsX != null || "X" === s || d || u.current === _0v.X;
-  let g = c?.canvasSpacingBetweenItemsY != null || "Y" === s || d || u.current === _0v.Y;
+  let h = c?.canvasSpacingBetweenItemsX != null || "X" === s || d || u.current === Axis.X;
+  let g = c?.canvasSpacingBetweenItemsY != null || "Y" === s || d || u.current === Axis.Y;
   let m = jsx(gq, {
     dispatch: t,
     min: F(c, "X"),
-    mixedMathHandler: new G(_0v.X),
+    mixedMathHandler: new G(Axis.X),
     onScrubBegin: () => {
-      u.current = _0v.X;
+      u.current = Axis.X;
     },
     onScrubEnd: () => {
       u.current = null;
@@ -186,9 +186,9 @@ function B(e) {
   let x = jsx(gq, {
     dispatch: t,
     min: F(c, "Y"),
-    mixedMathHandler: new G(_0v.Y),
+    mixedMathHandler: new G(Axis.Y),
     onScrubBegin: () => {
-      u.current = _0v.Y;
+      u.current = Axis.Y;
     },
     onScrubEnd: () => {
       u.current = null;
@@ -220,7 +220,7 @@ function F(e, t) {
 }
 let z = (e, t) => (n, l) => {
   let i = "X" === t ? "canvasSpacingBetweenItemsX" : "canvasSpacingBetweenItemsY";
-  Y5.updateSelectionProperties({
+  fullscreenValue.updateSelectionProperties({
     detectedList: {
       [i]: Math.max(n, F(e, t))
     }
@@ -240,16 +240,16 @@ class G {
     this.axis = e;
   }
   getValue() {
-    return glU.getCurrentListSpacing(this.axis);
+    return Fullscreen.getCurrentListSpacing(this.axis);
   }
   onChange(e, t, n) {
     let l = e.spacings.map(t);
-    l7.user("update-list-spacing", () => {
-      glU.setCurrentListSpacing({
+    permissionScopeHandler.user("update-list-spacing", () => {
+      Fullscreen.setCurrentListSpacing({
         ...e,
         spacings: l
       }, this.axis);
-      n !== zk.NO && glU.triggerAction("commit", {});
+      n !== zk.NO && Fullscreen.triggerAction("commit", {});
     });
   }
 }
@@ -468,7 +468,7 @@ function es(e) {
   s !== minMaxApi.value && f.push(vC);
   f.push(Bn);
   let w = f.map(t => {
-    let n = gl(s);
+    let n = isInvalidValue(s);
     return jsx(c$, {
       recordingKey: Pt(e.recordingKey, "select", t),
       value: t,
@@ -491,14 +491,14 @@ function es(e) {
     case "height":
       t = "min" === minMaxApi.minOrMax ? jsx(D, {}) : jsx(U, {});
   }
-  let S = "width" === minMaxApi.widthOrHeight ? _0v.X : _0v.Y;
+  let S = "width" === minMaxApi.widthOrHeight ? Axis.X : Axis.Y;
   useEffect(() => {
     shouldFocus && (y.current?.focus(), y.current?.select());
   }, [shouldFocus]);
   let j = VY(minMaxApi);
   let {
     clearVariableConsumption
-  } = _$$O2(C, rXF.FLOAT);
+  } = _$$O2(C, VariableResolvedDataType.FLOAT);
   let N = useCallback((e, t = zk.YES) => {
     if (clearVariableConsumption(zk.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, zk.NO);else if (e === Bn) {
       minMaxApi.set(null, zk.NO);
@@ -514,11 +514,11 @@ function es(e) {
       });
       g(null);
     } else ("number" == typeof e || null == e) && minMaxApi.set(e, zk.NO, u.current);
-    t === zk.YES && Y5.triggerAction("commit");
+    t === zk.YES && fullscreenValue.triggerAction("commit");
   }, [clearVariableConsumption, s, minMaxApi, m, x, g]);
   class I extends _$$M {
     getValueForNode(e) {
-      return Egt.getNodeTransformProperties(e.guid)[minMaxApi.minOrMaxWidthOrHeight];
+      return SceneGraphHelpers.getNodeTransformProperties(e.guid)[minMaxApi.minOrMaxWidthOrHeight];
     }
     setValueForNode(e, t, l) {
       let i = {
@@ -531,7 +531,7 @@ function es(e) {
         r !== l && (i[minMaxApi.widthOrHeight] = r);
         i.sizeChangeIsAutomatic = !0;
       }
-      Egt.setNodeTransformProperties(e.guid, i);
+      SceneGraphHelpers.setNodeTransformProperties(e.guid, i);
     }
   }
   return jsx(ow, {
@@ -576,8 +576,8 @@ function es(e) {
         }),
         onMouseLeave: () => d("minmax", null),
         onScrubBegin: () => {
-          gl(c) ? getSingletonSceneGraph().getDirectlySelectedNodes().forEach(e => {
-            h.current.set(e.guid, e.size[S === _0v.X ? "x" : "y"]);
+          isInvalidValue(c) ? getSingletonSceneGraph().getDirectlySelectedNodes().forEach(e => {
+            h.current.set(e.guid, e.size[S === Axis.X ? "x" : "y"]);
           }) : "number" == typeof s ? u.current = s : u.current = 0;
         },
         onScrubEnd: () => {
@@ -641,11 +641,11 @@ function eN({
 }) {
   let a = rO(r.stackPrimaryAlignItems);
   let o = "BASELINE" === r.stackCounterAlignItems;
-  let s = c4(E7(r.stackMode)) ? "HORIZONTAL" : "VERTICAL";
+  let s = c4(normalizeValue(r.stackMode)) ? "HORIZONTAL" : "VERTICAL";
   let c = "WRAP" === r.stackWrap;
   let d = "HORIZONTAL" === s ? "alignment_view_v4_ui3--horizontal--2Shqc" : "alignment_view_v4_ui3--vertical--zGQMJ";
   let u = a ? "alignment_view_v4_ui3--spaceBetween--o3EAq" : "alignment_view_v4_ui3--packed--EvdQi";
-  let p = hS(r.stackPrimaryAlignItems) && hS(r.stackCounterAlignItems);
+  let p = isValidValue(r.stackPrimaryAlignItems) && isValidValue(r.stackCounterAlignItems);
   let h = r.primaryHover && r.counterHover;
   let g = useCallback(e => {
     let [n, l] = eH(e.target);
@@ -944,7 +944,7 @@ function ez({
   });
   let {
     clearVariableConsumption
-  } = _$$O2("STACK_SPACING", rXF.FLOAT);
+  } = _$$O2("STACK_SPACING", VariableResolvedDataType.FLOAT);
   let L = useCallback((e, t) => {
     w(void 0 === t || t, e, zk.NO);
     clearVariableConsumption();
@@ -975,19 +975,19 @@ function ez({
   }, [g, C]);
   let M = v_(t, "keydown", useCallback(e => {
     function t(e) {
-      c4(E7(n)) ? c(e) : g(e);
+      c4(normalizeValue(n)) ? c(e) : g(e);
     }
     function l(e) {
       "VERTICAL" === n ? c(e) : g(e);
     }
     function i(e, t) {
-      if (gl(e)) return "CENTER";
+      if (isInvalidValue(e)) return "CENTER";
       let n = eF.indexOf(e);
       if (-1 === n) return null;
-      let l = qE(n + t, 0, eF.length - 1);
+      let l = clamp(n + t, 0, eF.length - 1);
       return eF[l];
     }
-    let r = c4(E7(n)) ? s : u;
+    let r = c4(normalizeValue(n)) ? s : u;
     let a = "VERTICAL" === n ? s : u;
     switch (e.keyCode) {
       case Uz.ESCAPE:
@@ -1160,7 +1160,7 @@ function ta() {
       actionEnabledUnstackSelection: Yh(appModel, "unstack-selection"),
       propertiesPanelShouldShowRemoveAutoLayout,
       propertiesPanelShouldShowAddAutoLayout,
-      wrappingEnabled: ("HORIZONTAL" === stackMode || gl(stackMode)) && ("WRAP" === stackWrap || gl(stackWrap))
+      wrappingEnabled: ("HORIZONTAL" === stackMode || isInvalidValue(stackMode)) && ("WRAP" === stackWrap || isInvalidValue(stackWrap))
     };
   });
 }
@@ -1213,12 +1213,12 @@ function td({
   return (o || t) && (d || s || c) ? jsxs(Fragment, {
     children: [jsx(DE, {
       input: jsxs(bL, {
-        value: u && !a && propertiesPanelShouldShowAddAutoLayout && !propertiesPanelShouldShowRemoveAutoLayout ? oV : n,
+        value: u && !a && propertiesPanelShouldShowAddAutoLayout && !propertiesPanelShouldShowRemoveAutoLayout ? MIXED_MARKER : n,
         readonly: !o,
         onChange: e => {
-          "NONE" === e ? Y5.triggerActionInUserEditScope("unstack-selection", {
+          "NONE" === e ? fullscreenValue.triggerActionInUserEditScope("unstack-selection", {
             source: "panel"
-          }) : Y5.triggerActionInUserEditScope("stack-selected-nodes", {
+          }) : fullscreenValue.triggerActionInUserEditScope("stack-selected-nodes", {
             source: "panel",
             stackMode: e
           });
@@ -1298,7 +1298,7 @@ function tu(e) {
         newStackWrap: e,
         nodeIds: a
       });
-      l7.user("set-stack-mode", () => Qa7?.setStackModeAndFlipPrimaryAndCounterAxisValues(e));
+      permissionScopeHandler.user("set-stack-mode", () => StackBindingsCpp?.setStackModeAndFlipPrimaryAndCounterAxisValues(e));
     },
     recordingKey: Pt(e, "stackWrap")
   });
@@ -1334,16 +1334,16 @@ function t_({
       stackVerticalPadding,
       stackPaddingBottom
     } = e.mirror.selectionProperties;
-    let a = _$$q(stackHorizontalPadding, stackPaddingRight);
-    let o = _$$q(stackVerticalPadding, stackPaddingBottom);
-    n(gl(a) || gl(o) || c);
+    let a = getCommonValue(stackHorizontalPadding, stackPaddingRight);
+    let o = getCommonValue(stackVerticalPadding, stackPaddingBottom);
+    n(isInvalidValue(a) || isInvalidValue(o) || c);
   });
   let u = am();
   let g = useSelector(Sh);
   let m = jsx(_$$d, {
     onClick: () => {
       n(!t);
-      Qa7.setFocusStackPanelInput(RN9.PADDING_ALL, !1);
+      StackBindingsCpp.setFocusStackPanelInput(SpacingConstants.PADDING_ALL, !1);
       u(t ? "Disable autolayout independent padding" : "Enable autolayout independent padding", {
         nodeIds: g
       });
@@ -1444,14 +1444,14 @@ function tv({
     focusOnMount: s,
     inputTestId: i,
     onBlur: e => {
-      Qa7.setFocusStackPanelInput(t, !1);
+      StackBindingsCpp.setFocusStackPanelInput(t, !1);
       a?.(e);
     },
     onClick: r,
-    onFocus: () => Qa7.setFocusStackPanelInput(t, !0),
+    onFocus: () => StackBindingsCpp.setFocusStackPanelInput(t, !0),
     onMouseEnter: () => u(t, !0),
     onMouseLeave: () => u(t, !1),
-    onNudge: () => glU.temporarilyHideOverlay(hJs.SELECTION),
+    onNudge: () => Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION),
     onScrubBegin: () => d(t, !0),
     onScrubEnd: () => d(t, !1),
     outerClassName: e,
@@ -1473,7 +1473,7 @@ function tw(e) {
   let o = propertiesPanelShouldShowRemoveAutoLayout ? actionEnabledUnstackSelection : actionEnabledStackSelection;
   let s = propertiesPanelShouldShowRemoveAutoLayout ? "unstack-selection" : "stack-selection";
   let c = useCallback(() => {
-    Y5.triggerActionInUserEditScope(s, {
+    fullscreenValue.triggerActionInUserEditScope(s, {
       source: "panel"
     });
   }, [s]);
@@ -1651,16 +1651,16 @@ function tE() {
     r(!1);
   });
   let h = useCallback(() => {
-    let e = AlE.getActiveCanvas();
-    l7.user("update-stack-to-alv3", () => {
-      Qa7.updateStackToAutoLayoutV3(e, Ez5.bigNudgeAmount());
+    let e = documentStateTsApi.getActiveCanvas();
+    permissionScopeHandler.user("update-stack-to-alv3", () => {
+      StackBindingsCpp.updateStackToAutoLayoutV3(e, AppStateTsApi.bigNudgeAmount());
     });
-    Y5.triggerAction("commit");
+    fullscreenValue.triggerAction("commit");
     r(!0);
     t("stack_v2_migration_updated");
   }, [t]);
   let g = useCallback(e => {
-    Y5.triggerActionInUserEditScope("undo");
+    fullscreenValue.triggerActionInUserEditScope("undo");
     r(!1);
   }, []);
   if (n) return jsxs(fI, {
@@ -1677,8 +1677,8 @@ function tE() {
       })
     })]
   });
-  let x = AlE.getActiveCanvas();
-  let f = Qa7.isOrInInstanceWithDeprecatedAlignmentOverride(x);
+  let x = documentStateTsApi.getActiveCanvas();
+  let f = StackBindingsCpp.isOrInInstanceWithDeprecatedAlignmentOverride(x);
   e = isOrInInstance ? f ? getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version_instance_overrides") : getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version_instance") : containsComponents ? getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version_components") : getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version");
   return jsxs(fI, {
     className: A5,
@@ -1710,13 +1710,13 @@ function tR(e) {
   return jsx(_$$E, {
     name: "stack_spacing_control",
     children: jsx(KI, {
-      onBlur: () => t(RN9.SPACING, !1),
-      onFocus: () => t(RN9.SPACING, !0),
-      onMouseEnter: () => n(RN9.SPACING, !0),
-      onMouseLeave: () => n(RN9.SPACING, !1),
-      onNudge: () => glU.temporarilyHideOverlay(hJs.SELECTION),
-      onScrubBegin: () => t(RN9.SPACING, !0),
-      onScrubEnd: () => t(RN9.SPACING, !1),
+      onBlur: () => t(SpacingConstants.SPACING, !1),
+      onFocus: () => t(SpacingConstants.SPACING, !0),
+      onMouseEnter: () => n(SpacingConstants.SPACING, !0),
+      onMouseLeave: () => n(SpacingConstants.SPACING, !1),
+      onNudge: () => Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION),
+      onScrubBegin: () => t(SpacingConstants.SPACING, !0),
+      onScrubEnd: () => t(SpacingConstants.SPACING, !1),
       onboardingKey: "stack-spacing-input",
       recordingKey: Pt(e, "stackSpacing"),
       source: "panel"
@@ -1730,13 +1730,13 @@ function tL(e) {
     name: "stack_counter_spacing_input",
     children: jsx(_$$q2, {
       inputTestId: "stack-counter-spacing",
-      onBlur: () => t(RN9.COUNTER_SPACING, !1),
-      onFocus: () => t(RN9.COUNTER_SPACING, !0),
-      onMouseEnter: () => n(RN9.COUNTER_SPACING, !0),
-      onMouseLeave: () => n(RN9.COUNTER_SPACING, !1),
-      onNudge: () => glU.temporarilyHideOverlay(hJs.SELECTION),
-      onScrubBegin: () => t(RN9.COUNTER_SPACING, !0),
-      onScrubEnd: () => t(RN9.COUNTER_SPACING, !1),
+      onBlur: () => t(SpacingConstants.COUNTER_SPACING, !1),
+      onFocus: () => t(SpacingConstants.COUNTER_SPACING, !0),
+      onMouseEnter: () => n(SpacingConstants.COUNTER_SPACING, !0),
+      onMouseLeave: () => n(SpacingConstants.COUNTER_SPACING, !1),
+      onNudge: () => Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION),
+      onScrubBegin: () => t(SpacingConstants.COUNTER_SPACING, !0),
+      onScrubEnd: () => t(SpacingConstants.COUNTER_SPACING, !1),
       recordingKey: Pt(e, "stackCounterSpacing"),
       source: "panel"
     })

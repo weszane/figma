@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector, useStore } from "../vendor/514228";
-import { _gJ, Oin, FAf } from "../figma_app/763686";
+import { IAssertResource, UIVisibilitySetting, DesignWorkspace } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { globalPerfTimer } from "../905/542194";
 import { getFilteredFeatureFlags } from "../905/717445";
@@ -16,16 +16,16 @@ import { Y6 } from "../figma_app/91703";
 import { IN, pM, KE } from "../905/116101";
 import { b as _$$b } from "../905/985254";
 import { E3 } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { ax, tw, NT } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
 import { iZ } from "../905/372672";
 import { dDF } from "../figma_app/43951";
-import { my, uF, M5 } from "../figma_app/300692";
+import { getPluginMetadata, getPluginVersion, isDevModePlugin } from "../figma_app/300692";
 import { Nb, V_, Eg } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
-import { FW } from "../figma_app/155287";
+import { ManifestEditorType } from "../figma_app/155287";
 import { cq } from "../905/794154";
 import { s as _$$s } from "../figma_app/504088";
 import { R as _$$R } from "../905/300969";
@@ -62,10 +62,10 @@ export function $$k0(e, t) {
       globalPerfTimer.start("switch_to_inspect_mode.left_panel_tti");
       globalPerfTimer.start("switch_to_inspect_mode.right_panel_tti");
       let i = Q.getState();
-      if (i.universalInsertModal.showing && (ax(_gJ.PLUGIN), i.universalInsertModal.fdPreviewResource)) {
-        let e = my(i.universalInsertModal.fdPreviewResource.id, i.publishedPlugins);
-        let t = uF(e);
-        M5(t) && (n = {
+      if (i.universalInsertModal.showing && (ax(IAssertResource.PLUGIN), i.universalInsertModal.fdPreviewResource)) {
+        let e = getPluginMetadata(i.universalInsertModal.fdPreviewResource.id, i.publishedPlugins);
+        let t = getPluginVersion(e);
+        isDevModePlugin(t) && (n = {
           id: i.universalInsertModal.fdPreviewResource.id,
           type: _$$s.PLUGIN
         });
@@ -76,12 +76,12 @@ export function $$k0(e, t) {
         editorType: FEditorType.DevHandoff
       }));
       "fullscreen" === K.view && K.compareVersionId && (r(Y6({
-        mode: Oin.KEEP_UI,
+        mode: UIVisibilitySetting.KEEP_UI,
         type: lF.SPINNER
       })), r(Nb({
         id: K.compareVersionId
       })));
-      Y && Y5.triggerAction("toggle-prototyping-info");
+      Y && fullscreenValue.triggerAction("toggle-prototyping-info");
       n && r(IN({
         fdPreviewResource: n
       }));
@@ -105,10 +105,10 @@ export function $$k0(e, t) {
     {
       globalPerfTimer.start("switch_to_design_mode.toolbelt_animation");
       let n = Q.getState();
-      if (tw()?.getCopy() === _gJ.PLUGIN && n.universalInsertModal.fdPreviewResource) {
-        let e = my(n.universalInsertModal.fdPreviewResource.id, n.publishedPlugins);
-        let t = uF(e);
-        t?.manifest?.editorType?.includes(FW.FIGMA) && r(pM({
+      if (tw()?.getCopy() === IAssertResource.PLUGIN && n.universalInsertModal.fdPreviewResource) {
+        let e = getPluginMetadata(n.universalInsertModal.fdPreviewResource.id, n.publishedPlugins);
+        let t = getPluginVersion(e);
+        t?.manifest?.editorType?.includes(ManifestEditorType.FIGMA) && r(pM({
           id: n.universalInsertModal.fdPreviewResource.id,
           isWidget: !1
         }));
@@ -124,7 +124,7 @@ export function $$k0(e, t) {
       r(KE());
       G || (H || r(_$$b({
         dev_mode_should_see_paywall_reminder: !0
-      })), B || NT(FAf.INSPECT), W(_$$c.DEFAULT));
+      })), B || NT(DesignWorkspace.INSPECT), W(_$$c.DEFAULT));
       Ym(Q.getState(), FEditorType.Design, e, t, ee);
       return !0;
     }

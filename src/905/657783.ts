@@ -1,11 +1,11 @@
-import { vh, td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$a0 = new class {
   constructor() {
-    this.CommentsSchemaValidator = vh();
-    this.CanvasMentionsFileNeedsInviteValidator = vh();
-    this.FileCanRequestEditValidator = vh();
-    this.NewDraftFileLocation = vh();
+    this.CommentsSchemaValidator = createNoOpValidator();
+    this.CanvasMentionsFileNeedsInviteValidator = createNoOpValidator();
+    this.FileCanRequestEditValidator = createNoOpValidator();
+    this.NewDraftFileLocation = createNoOpValidator();
   }
   getComments(e) {
     return this.CommentsSchemaValidator.validate(async ({
@@ -50,7 +50,7 @@ export let $$a0 = new class {
   getNewFileLocation(e) {
     return this.NewDraftFileLocation.validate(async ({
       xr: t
-    }) => await t.get("/api/new_file_location", td.toAPIParameters({
+    }) => await t.get("/api/new_file_location", APIParameterUtils.toAPIParameters({
       editorType: e.editorType
     })));
   }

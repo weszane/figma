@@ -1,6 +1,6 @@
 import { debounce } from "../905/915765";
-import { zIx, zkO, z7j } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { BuildStatus, SourceType, PluginSource } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -97,21 +97,21 @@ export function $$I1() {
   $$b2 = {
     getIsExtension: () => T(),
     setNodesReady(e, t, i, n) {
-      let a = e ? zIx.BUILD : zIx.NONE;
+      let a = e ? BuildStatus.BUILD : BuildStatus.NONE;
       L({
         nodeIds: t,
         status: a,
         sourceForLogging: i,
         description: n,
-        editScopeType: zkO.USER
+        editScopeType: SourceType.USER
       });
     },
     setNodesCompleted(e, t) {
       L({
         nodeIds: e,
-        status: zIx.COMPLETED,
+        status: BuildStatus.COMPLETED,
         sourceForLogging: t,
-        editScopeType: zkO.USER
+        editScopeType: SourceType.USER
       });
     },
     forwardExportsToExtension(e, t) {
@@ -153,7 +153,7 @@ export function $$I1() {
       return "fullscreen" === e.view && !!e.showOverview;
     },
     enterDevModeFocusView(e, t) {
-      if (!e || e === AD) return;
+      if (!e || e === defaultSessionLocalIDString) return;
       let i = debugState.getState().selectedView;
       atomStoreManager.set(wz, "dev_mode_canvas_ii");
       let n = {
@@ -183,7 +183,7 @@ export function $$I1() {
     getUnitName(e, t) {
       let i = {
         ...e,
-        type: e.type === z7j.FIRST_PARTY ? "first-party" : e.type === z7j.LOCAL_PLUGIN ? "local-plugin" : "published-plugin"
+        type: e.type === PluginSource.FIRST_PARTY ? "first-party" : e.type === PluginSource.LOCAL_PLUGIN ? "local-plugin" : "published-plugin"
       };
       return $o(i, t);
     }

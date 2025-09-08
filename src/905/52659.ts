@@ -15,7 +15,7 @@ import { B as _$$B } from "../905/799228";
 import { Z as _$$Z } from "../905/406205";
 import { A as _$$A } from "../905/351112";
 import { j7 } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { Ct } from "../figma_app/199513";
 import { _6 } from "../figma_app/386952";
 import { Bp } from "../figma_app/349248";
@@ -255,7 +255,7 @@ export function $$ea0(e) {
       teamId: e.team_id,
       orgId: t
     });
-    "loaded" === C.projects.status && C.projects.data[e.id].canPermanentlyDelete && s(to({
+    "loaded" === C.projects.status && C.projects.data[e.id].canPermanentlyDelete && s(showModalHandler({
       type: _$$U(),
       data: {
         folder: e,
@@ -273,7 +273,7 @@ export function $$ea0(e) {
       folderId: e.id
     }).catch(() => {
       s(_$$s.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
-    }) : "loaded" === C.projects.status && C.projects.data[e.id].canTrash && s(to({
+    }) : "loaded" === C.projects.status && C.projects.data[e.id].canTrash && s(showModalHandler({
       type: _$$V(),
       data: {
         folder: e

@@ -28,7 +28,7 @@ import { f as _$$f } from "../0c62c2fd/277163";
 import { sf, j7 } from "../905/929976";
 import { iK, HK, CU, xH, OT, t3, Pb, Mi, w3, EN, Dp, hq, Ww, zv, TL, qb, YG, qM, Mn, JG } from "../905/586954";
 import { z as _$$z } from "../905/404751";
-import { Ce, Lo, to, ES } from "../905/156213";
+import { hideModal, popModalStack, showModalHandler, hideSpecificModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
 import { FFileType, FAccessLevelType, FPlanFeatureType, FPaymentHealthStatusType, FPlanRestrictionType } from "../figma_app/191312";
@@ -45,7 +45,7 @@ import { X as _$$X } from "../905/698965";
 import { O as _$$O } from "../905/833838";
 import { Ib } from "../905/129884";
 import { e0 as _$$e2 } from "../905/696396";
-import { vh } from "../figma_app/181241";
+import { createNoOpValidator } from "../figma_app/181241";
 import { NB } from "../905/826900";
 import { OJ } from "../905/519092";
 import { v as _$$v } from "../905/92662";
@@ -55,7 +55,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { X0 } from "../905/784221";
 import { debounce } from "../905/915765";
 import { VI, d6 } from "../figma_app/687776";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { S$, XX } from "../figma_app/345997";
 import { KH } from "../905/81982";
 import { NU } from "../905/163189";
@@ -99,7 +99,7 @@ function R(e) {
 }
 let Z = new class {
   constructor() {
-    this.TeamRestrictionsListsSchemaValidator = vh();
+    this.TeamRestrictionsListsSchemaValidator = createNoOpValidator();
   }
   getTeamRestrictionsLists(e) {
     return this.TeamRestrictionsListsSchemaValidator.validate(async ({
@@ -407,11 +407,11 @@ let ek = (e, t, r, a = !1, s, i, n) => {
 let eR = debounce((e, t, r, a, s = !1) => {
   eS(e, t, r, a, s, !!r, e.dispatch);
 }, 200);
-let eA = nF((e, t) => {
+let eA = createOptimistThunk((e, t) => {
   ej(t.userResources, t.modalData.isPublishing);
   ek(e, t.modalData, t.userResources, t.modalData.isPublishing, !1, t.currentFolderId, t.currentFolderTeamId);
 });
-let eO = nF((e, t) => {
+let eO = createOptimistThunk((e, t) => {
   eR(e, t.modalData, t.query, t.userResources);
   e.dispatch(hq(t));
 });
@@ -447,7 +447,7 @@ function eH(e) {
             userId: t.id,
             teams: Object.values(e.teams),
             rolesByTeamId: e.rolesByTeamId
-          }) ? (o(Ce()), o(Dw({
+          }) ? (o(hideModal()), o(Dw({
             openInNewTab: !desktopAPIInstance
           }))) : (d(!1), o(xH()));
         },
@@ -820,7 +820,7 @@ export class $$e32 extends PureComponent {
       }
     };
     this.onClose = () => {
-      this.props.fileMoveData.displayBanner ? this.props.dispatch(Lo()) : this.props.dispatch(Ce());
+      this.props.fileMoveData.displayBanner ? this.props.dispatch(popModalStack()) : this.props.dispatch(hideModal());
     };
     this.openOrgView = e => {
       this.props.dispatch(sf({
@@ -830,7 +830,7 @@ export class $$e32 extends PureComponent {
       }));
     };
     this.onOrgViewLinkClick = () => {
-      this.props.dispatch(Ce());
+      this.props.dispatch(hideModal());
       this.props.currentOrg && this.openOrgView(this.props.currentOrg.id);
     };
     this.moveToSelectedFolder = () => {
@@ -864,7 +864,7 @@ export class $$e32 extends PureComponent {
       }
       let i = this.props.fileMoveData;
       if (i.type === _$$A.FILE && i.file.is_team_template && VA(e)) {
-        this.props.dispatch(to({
+        this.props.dispatch(showModalHandler({
           type: X0,
           data: {
             title: renderI18nText("templates.confirmation.move_to_drafts.title", {
@@ -904,7 +904,7 @@ export class $$e32 extends PureComponent {
       trailing: !1
     });
     this.closeModal = () => {
-      this.props.dispatch(ES(this.props.modalId));
+      this.props.dispatch(hideSpecificModal(this.props.modalId));
     };
     this.moveFile = (e, t) => {
       if (e && e.id !== t.folder_id) {
@@ -1251,7 +1251,7 @@ export class $$e74 extends PureComponent {
             modalData: this.props.fileMoveData,
             query: "",
             userResources: this.props.userResources
-          }))) : this.props.dispatch(Ce());
+          }))) : this.props.dispatch(hideModal());
           this.props.dispatch(xH());
           break;
         case Uz.TAB:

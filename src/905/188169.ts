@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useState, useEffect } from "react";
-import { jXp, t8O } from "../figma_app/763686";
+import { FontSourceType, FontHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { logError } from "../905/714362";
@@ -28,17 +28,17 @@ export function $$p5(e, t, i, s, u) {
       if (0 === Object.keys(t[u] || {}).length) continue;
       let g = _$$a(e[u]);
       let f = e[u][g].source;
-      if (RE(u) && f === jXp.GOOGLE) continue;
-      let _ = u.toLowerCase().endsWith("charted") && f === jXp.GOOGLE;
-      let A = "Noto Color Emoji Compat Test" === u && f === jXp.GOOGLE;
-      let y = u.toLowerCase().startsWith("playwrite") && f === jXp.GOOGLE && !["Playwrite US Modern", "Playwrite US Trad"].includes(u);
-      let b = getFeatureFlags().ce_skip_misnamed_font && "?????" === u && f === jXp.GOOGLE;
+      if (RE(u) && f === FontSourceType.GOOGLE) continue;
+      let _ = u.toLowerCase().endsWith("charted") && f === FontSourceType.GOOGLE;
+      let A = "Noto Color Emoji Compat Test" === u && f === FontSourceType.GOOGLE;
+      let y = u.toLowerCase().startsWith("playwrite") && f === FontSourceType.GOOGLE && !["Playwrite US Modern", "Playwrite US Trad"].includes(u);
+      let b = getFeatureFlags().ce_skip_misnamed_font && "?????" === u && f === FontSourceType.GOOGLE;
       let v = !1;
       if (getFeatureFlags().dse_sf_pro_font && p && (v = _D(u, p)), y || _ || A || b || v) continue;
-      let I = f === jXp.LOCAL && Object.values(e[u][g].styles).some(e => e.userInstalled);
-      let E = f === jXp.LOCAL && Wp(e[u][g]);
+      let I = f === FontSourceType.LOCAL && Object.values(e[u][g].styles).some(e => e.userInstalled);
+      let E = f === FontSourceType.LOCAL && Wp(e[u][g]);
       let x = Object.keys(e[u]).every(t => Object.values(e[u][t].styles).some(e => !!e.variationAxes));
-      (f !== jXp.LOCAL || i) && (m = x6(u, e[u], f), f === jXp.GOOGLE && s && m && s.has(m) && (h = Aw(u, s.get(m) || "")));
+      (f !== FontSourceType.LOCAL || i) && (m = x6(u, e[u], f), f === FontSourceType.GOOGLE && s && m && s.has(m) && (h = Aw(u, s.get(m) || "")));
       n.push({
         family: u,
         source: f,
@@ -63,7 +63,7 @@ export function $$m1(e, t, i) {
   }, [e, t, i]);
 }
 export function $$h2(e, t, i) {
-  return useMemo(() => e || t !== Qr.DOCUMENT_FONTS ? [] : t8O.collectDocumentFonts(), [e, t, i]);
+  return useMemo(() => e || t !== Qr.DOCUMENT_FONTS ? [] : FontHelpers.collectDocumentFonts(), [e, t, i]);
 }
 export function $$g4(e, t, i) {
   let r = useCallback(e => e >= 0 ? Math.max(0, e * i.itemRowHeight - ((i.scrollContainerHeight + (t ? 0 : i.fontSetRowHeight)) / 2 - i.itemRowHeight)) : 0, [i, t]);

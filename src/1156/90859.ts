@@ -3,7 +3,7 @@ import { lV, U1 } from "../figma_app/617606";
 import { eB } from "../figma_app/178419";
 import { assert } from "../figma_app/465776";
 import { g as _$$g } from "../905/687265";
-import { K$p } from "../figma_app/763686";
+import { ChatMessageType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -158,7 +158,7 @@ export function $$T5({
   title: u,
   layerDisplayName: x
 }) {
-  assert(e.type === K$p.SYSTEM_MESSAGE, "Message must be a system message");
+  assert(e.type === ChatMessageType.SYSTEM_MESSAGE, "Message must be a system message");
   let {
     defaultTypographyStyle
   } = L();
@@ -200,7 +200,7 @@ export function $$I4({
   title: u,
   layerDisplayName: x
 }) {
-  assert(e.type === K$p.SYSTEM_MESSAGE, "Message must be a system message");
+  assert(e.type === ChatMessageType.SYSTEM_MESSAGE, "Message must be a system message");
   let {
     defaultTypographyStyle
   } = L();

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, useState, useRef } from "react";
-import { W as _$$W } from "../905/909715";
+import { ManuallyLabeledCheckbox } from "../905/909715";
 import { N as _$$N } from "../905/438674";
 import { o as _$$o } from "../905/89370";
 import { a as _$$a } from "../905/964520";
@@ -477,7 +477,7 @@ function B({
     children: [d.includes("checkbox") && jsx("td", {
       className: m()(LU, of),
       onClick: e => e.stopPropagation(),
-      children: jsx(_$$W, {
+      children: jsx(ManuallyLabeledCheckbox, {
         checked: ec,
         muted: !0,
         onChange: e => ei(e),
@@ -668,7 +668,7 @@ export function $$W0({
             className: SR,
             children: [k.includes("checkbox") && jsx("th", {
               className: m()(LU, of),
-              children: jsx(_$$W, {
+              children: jsx(ManuallyLabeledCheckbox, {
                 checked: !!A && A.size > 0 && A.size === n.length,
                 mixed: !!A && A.size > 0 && A.size < n.length,
                 muted: !0,

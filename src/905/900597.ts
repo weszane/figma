@@ -10,9 +10,9 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { C as _$$C, wR } from "../905/346715";
-import { Ce, to } from "../905/156213";
+import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../vendor/850789";
@@ -146,10 +146,10 @@ function G({
     })]
   });
 }
-let z = Ju(function (e) {
+let z = registerModal(function (e) {
   let t = useDispatch();
   let i = useCallback(() => {
-    t(Ce());
+    t(hideModal());
   }, [t]);
   let d = hS({
     ...e,
@@ -229,7 +229,7 @@ let z = Ju(function (e) {
     })) ?? [];
   }, [teams, W]);
   let et = useCallback(() => {
-    c && H && (i(), t(to({
+    c && H && (i(), t(showModalHandler({
       type: _$$C,
       data: {
         folder: {
@@ -351,7 +351,7 @@ let z = Ju(function (e) {
     })
   });
 }, "ConnectedProjectSelectModal");
-export let $$W0 = Ju(function (e) {
+export let $$W0 = registerModal(function (e) {
   var t;
   let i = hS(e);
   let _ = useDispatch();
@@ -408,13 +408,13 @@ export let $$W0 = Ju(function (e) {
               }), jsx($n, {
                 variant: "primary",
                 onClick: () => {
-                  e.entryPoint === wR.PROJECT_SETTINGS ? _(to({
+                  e.entryPoint === wR.PROJECT_SETTINGS ? _(showModalHandler({
                     type: _$$C,
                     data: {
                       folder: e.folder,
                       entryPoint: wR.PROJECT_SETTINGS
                     }
-                  })) : _(to({
+                  })) : _(showModalHandler({
                     type: z
                   }));
                 },

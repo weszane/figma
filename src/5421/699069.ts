@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { lV, MK, U1, lr, AD, Vm, Xy } from "../figma_app/617606";
-import { K$p } from "../figma_app/763686";
+import { ChatMessageType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tS } from "../figma_app/516028";
 import { zy } from "../figma_app/656450";
@@ -59,11 +59,11 @@ export function $$I0({
     if (!V) return null;
     for (let e = V.length - 1; e >= 0; e--) {
       let t = V[e];
-      if (t?.type === K$p.USER_MESSAGE) return t;
+      if (t?.type === ChatMessageType.USER_MESSAGE) return t;
     }
     return null;
   }, [V]);
-  let F = useMemo(() => !!U && U.type === K$p.USER_MESSAGE && gG(MK(U.textContent)), [U]);
+  let F = useMemo(() => !!U && U.type === ChatMessageType.USER_MESSAGE && gG(MK(U.textContent)), [U]);
   let K = useMemo(() => V ?? [], [V]);
   let $ = useMemo(() => {
     let e = new Set();
@@ -94,7 +94,7 @@ export function $$I0({
     for (let n = 0; n < $.length; n++) {
       let o = $[n];
       switch (o.type) {
-        case K$p.USER_MESSAGE:
+        case ChatMessageType.USER_MESSAGE:
           let i = z.usersById?.[o.userId];
           if (i) {
             let n = MK(o.textContent || "");
@@ -112,7 +112,7 @@ export function $$I0({
             t = a;
           }
           continue;
-        case K$p.SYSTEM_MESSAGE:
+        case ChatMessageType.SYSTEM_MESSAGE:
           let l = U1(o.textContent || "");
           let s = l?.type === "manual_edit" || l?.type === "restore" ? l?.title : void 0;
           e.push({
@@ -122,7 +122,7 @@ export function $$I0({
           });
           t = !1;
           continue;
-        case K$p.ASSISTANT_MESSAGE:
+        case ChatMessageType.ASSISTANT_MESSAGE:
           let d = [o];
           let c = lr(o.textContent || "").title;
           let p = n;
@@ -132,9 +132,9 @@ export function $$I0({
             let n = lr(t.textContent || "");
             c ||= n.title;
             let o = !0 === n.hidden;
-            let i = t.type === K$p.SYSTEM_MESSAGE;
-            let l = t.type === K$p.ASSISTANT_MESSAGE;
-            let s = t.type === K$p.TOOL_MESSAGE;
+            let i = t.type === ChatMessageType.SYSTEM_MESSAGE;
+            let l = t.type === ChatMessageType.ASSISTANT_MESSAGE;
+            let s = t.type === ChatMessageType.TOOL_MESSAGE;
             if (l || o && i || s) p = e;else break;
             if (s) {
               let e = t.toolResults[0];
@@ -147,7 +147,7 @@ export function $$I0({
           let u = function (e) {
             let t = [];
             e.forEach(e => {
-              if (e.type === K$p.ASSISTANT_MESSAGE) {
+              if (e.type === ChatMessageType.ASSISTANT_MESSAGE) {
                 let n = lr(e.textContent);
                 let o = [];
                 switch (n.signedReasoning && o.push({
@@ -235,7 +235,7 @@ export function $$I0({
           t = !1;
           n = p;
           continue;
-        case K$p.TOOL_MESSAGE:
+        case ChatMessageType.TOOL_MESSAGE:
           continue;
       }
     }
@@ -251,7 +251,7 @@ export function $$I0({
       type: "system",
       message: {
         id: ct,
-        type: K$p.SYSTEM_MESSAGE,
+        type: ChatMessageType.SYSTEM_MESSAGE,
         userId: M?.id || "",
         textContent: JSON.stringify({
           type: "manual_edit",
@@ -272,11 +272,11 @@ export function $$I0({
     let o = new Map();
     $.forEach(i => {
       switch (i.type) {
-        case K$p.ASSISTANT_MESSAGE:
-        case K$p.SYSTEM_MESSAGE:
+        case ChatMessageType.ASSISTANT_MESSAGE:
+        case ChatMessageType.SYSTEM_MESSAGE:
           t = i.id;
           break;
-        case K$p.USER_MESSAGE:
+        case ChatMessageType.USER_MESSAGE:
           t && e && o.set(t, Pd(R, n, e));
           t = void 0;
           e = i.id;

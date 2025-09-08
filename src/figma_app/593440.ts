@@ -1,11 +1,11 @@
-import { ruz } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { ImageToolsBindings } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 let $$u3 = async ({
   abortController: e,
   params: {
@@ -63,10 +63,10 @@ let p = atom({
 });
 let _ = atom(null, (e, t) => {
   let r = e(p).currentOperation;
-  r && ("success" === r.status && l7.ai("make video", () => {
-    if (!ruz) return;
+  r && ("success" === r.status && permissionScopeHandler.ai("make video", () => {
+    if (!ImageToolsBindings) return;
     let e = getSingletonSceneGraph();
-    let t = Y5.getViewportInfo();
+    let t = fullscreenValue.getViewportInfo();
     let i = e.createNode("RECTANGLE");
     i.size = {
       x: 1280,
@@ -75,8 +75,8 @@ let _ = atom(null, (e, t) => {
     i.x = t.offsetX - i.size.x / 2;
     i.y = t.offsetY - i.size.y / 2;
     let s = Vs(r.video);
-    ruz.insertVideoInNode(i.id, s, r.prompt);
-    Y5.triggerAction("commit");
+    ImageToolsBindings.insertVideoInNode(i.id, s, r.prompt);
+    fullscreenValue.triggerAction("commit");
   }), t(h));
 });
 let h = atom(null, (e, t) => {

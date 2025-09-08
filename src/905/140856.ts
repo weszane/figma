@@ -4,9 +4,9 @@ import { createPortal } from "../vendor/944059";
 import s from "classnames";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { M5 } from "../figma_app/817077";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { t as _$$t } from "../905/851577";
 import { N } from "../905/645480";
 import { cq } from "../905/794154";
@@ -58,10 +58,10 @@ export let $$y0 = forwardRef(({
       dragPreviewPointerPosition: N.RELATIVE,
       getDragPreviewSrc: () => e.thumbnail_url,
       onPointerDownCallback: () => {
-        glU.setShowCanvasDragAndDropOutlines(!0);
+        Fullscreen.setShowCanvasDragAndDropOutlines(!0);
       },
       onPointerUpCallback: () => {
-        glU.setShowCanvasDragAndDropOutlines(!1);
+        Fullscreen.setShowCanvasDragAndDropOutlines(!1);
       }
     });
   }({
@@ -75,7 +75,7 @@ export let $$y0 = forwardRef(({
   });
   let {
     zoomScale
-  } = Y5.getViewportInfo();
+  } = fullscreenValue.getViewportInfo();
   let v = useMemo(() => dragState?.isDraggingOverCanvas ? new Point(dragState.draggingResource.width, dragState.draggingResource.height).scale(zoomScale) : dragState?.draggingThumbSize, [dragState?.draggingResource.height, dragState?.draggingResource.width, dragState?.draggingThumbSize, dragState?.isDraggingOverCanvas, zoomScale]);
   let I = M5(dragState, !0, [dragState?.draggingResource.width, dragState?.draggingResource.height]);
   let E = jsx(V.Image, {

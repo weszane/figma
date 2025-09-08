@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { AD, lV } from "../figma_app/617606";
-import { K$p } from "../figma_app/763686";
+import { ChatMessageType } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { ly } from "../905/138461";
 import { tS } from "../figma_app/516028";
@@ -37,11 +37,11 @@ export function $$f0({
   let P = useMemo(() => {
     if (E && E.length > 0) {
       let e = E[E.length - 1];
-      if (e?.type === K$p.TOOL_MESSAGE && e?.toolCalls.some(e => AD.includes(e.toolName))) return !0;
+      if (e?.type === ChatMessageType.TOOL_MESSAGE && e?.toolCalls.some(e => AD.includes(e.toolName))) return !0;
     }
     if (exchange?.messages && exchange?.messages.length > 0) {
       let e = exchange.messages[exchange.messages.length - 1];
-      if (e?.type === K$p.TOOL_MESSAGE && e?.toolCalls.some(e => AD.includes(e.toolName))) return !0;
+      if (e?.type === ChatMessageType.TOOL_MESSAGE && e?.toolCalls.some(e => AD.includes(e.toolName))) return !0;
     }
     return !1;
   }, [E, exchange]);

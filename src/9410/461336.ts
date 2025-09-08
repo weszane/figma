@@ -8,8 +8,8 @@ import { U } from "../figma_app/901889";
 import { wS } from "../figma_app/221240";
 import { uQ } from "../figma_app/311375";
 import { d as _$$d } from "../9410/441456";
-import { to } from "../905/156213";
-import { gl } from "../905/216495";
+import { showModalHandler } from "../905/156213";
+import { isInvalidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
 import { iZ } from "../905/372672";
@@ -21,7 +21,7 @@ export function $$C0(e) {
   let {
     backingSymbolGUID
   } = $([e ?? ""]);
-  let a = useMemo(() => null === backingSymbolGUID || gl(backingSymbolGUID) ? null : backingSymbolGUID, [backingSymbolGUID]);
+  let a = useMemo(() => null === backingSymbolGUID || isInvalidValue(backingSymbolGUID) ? null : backingSymbolGUID, [backingSymbolGUID]);
   let s = useDispatch();
   return useCallback(() => {
     e && a && (globalPerfTimer.reset("dev_handoff.view_history", e), globalPerfTimer.start("dev_handoff.view_history", {
@@ -30,7 +30,7 @@ export function $$C0(e) {
       nodeId: e,
       mainComponentNodeId: a,
       origin: "cc_overrides"
-    }), s(to({
+    }), s(showModalHandler({
       type: ku,
       data: {
         changeNodeId: e,
@@ -52,7 +52,7 @@ export function $$v2(e) {
       origin: "cc_detached_component"
     }), globalPerfTimer.reset("dev_handoff.view_history", i), globalPerfTimer.start("dev_handoff.view_history", {
       key: i
-    }), a(to({
+    }), a(showModalHandler({
       type: jo,
       data: {
         nodeId: i,
@@ -89,7 +89,7 @@ export function $$E1(e, t) {
         });
       }
     }
-    b(to({
+    b(showModalHandler({
       type: EH,
       data: {
         nodeId: e,

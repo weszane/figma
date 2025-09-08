@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { XJn, NUh, glU } from "../figma_app/763686";
+import { FirstDraftHelpers, LogToConsoleMode, Fullscreen } from "../figma_app/763686";
 import { s4 } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
 import { waitForAnimationFrame } from "../905/236856";
@@ -19,9 +19,9 @@ import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { I0 } from "../905/879323";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { d1 } from "../905/766303";
 import { z as _$$z } from "../905/853613";
@@ -29,7 +29,7 @@ import { Hj } from "../figma_app/412398";
 import { tf } from "../905/295427";
 import { HF, E2 } from "../figma_app/646357";
 import { aB, jx } from "../905/576221";
-import { m as _$$m } from "../905/294113";
+import { maybeCreateSavepoint } from "../905/294113";
 import { MH, dM, cM, bh, x6, tK, Io } from "../figma_app/803787";
 import { H7 } from "../figma_app/598018";
 import { O as _$$O } from "../905/566074";
@@ -45,7 +45,7 @@ let $$K1 = NC("START_PUBLISH");
 let $$Y5 = NC("PUBLISH_PROGRESS");
 let $$$3 = NC("PUBLISH_REQUEST_FINISHED");
 let $$X0 = NC("SAVE_PUBLISH_DESCRIPTION");
-let $$q2 = nF(e => {
+let $$q2 = createOptimistThunk(e => {
   e.dispatch(Q.dequeue({
     type: _$$_.MOVE_COMPONENTS_PROMPT
   }));
@@ -56,7 +56,7 @@ let $$q2 = nF(e => {
 });
 let J = "library publish SSP";
 var Z = (e => (e.PublishStart = "publish_start", e.CreateSavepoint = "create_savepoint", e.GetPresignedPost = "get_presigned_post", e.UploadThumbnails = "upload_thumbnails", e.UploadParams = "upload_params", e.AssetValidation = "asset_validation", e.NonS3Error = "non_s3_error", e.GenericError = "generic_error", e))(Z || {});
-export let $$Q8 = nF((e, {
+export let $$Q8 = createOptimistThunk((e, {
   hubFileId: t,
   localAssetsWithDenormalizedPublishInfo: r
 }) => {
@@ -287,7 +287,7 @@ export function $$ei6(e, t, r, n, i, a, s, o) {
 let ea = async e => {
   let t;
   if (getFeatureFlags().first_draft_publish_ux && (e.publishAsFirstDraftKit || e.unpublishAll)) {
-    let r = XJn.getLocalDesignSystemKits();
+    let r = FirstDraftHelpers.getLocalDesignSystemKits();
     if (r.length > 1) logWarning("first_draft", "Attempting to publish a file with multiple kits", {
       kitNames: r.map(e => e.name)
     });else if (1 === r.length) {
@@ -305,7 +305,7 @@ let ea = async e => {
   }
   return t;
 };
-let $$es7 = nF(async (e, t = {}) => {
+let $$es7 = createOptimistThunk(async (e, t = {}) => {
   let r = e.getState();
   let n = d1(r);
   let i = n?.key;
@@ -329,7 +329,7 @@ let $$es7 = nF(async (e, t = {}) => {
     icon: zX.EXCLAMATION,
     error: !0
   });
-  e.dispatch(Ce());
+  e.dispatch(hideModal());
   e.dispatch(a);
   let l = await ea(t);
   if (!l) {
@@ -350,7 +350,7 @@ let $$es7 = nF(async (e, t = {}) => {
     e.dispatch(o);
   }
 });
-let $$eo4 = nF(async (e, t = {}) => {
+let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   let r;
   let c;
   let p;
@@ -411,7 +411,7 @@ let $$eo4 = nF(async (e, t = {}) => {
       message: l?.message,
       stack: l?.stack
     }, {
-      logToConsole: NUh.ALWAYS,
+      logToConsole: LogToConsoleMode.ALWAYS,
       reportAsSentryError: !0,
       forwardToDatadog: !0
     });
@@ -426,7 +426,7 @@ let $$eo4 = nF(async (e, t = {}) => {
     let {
       hideModalOnPublishRequestFinish = !0
     } = t;
-    hideModalOnPublishRequestFinish && e.dispatch(Ce());
+    hideModalOnPublishRequestFinish && e.dispatch(hideModal());
   };
   let es = jx(dM(A), MH(A), cM(A), tK(A), bh(A), x6(A), $, X, A.teams, {
     overridePublishPermissions: !!t.hubFileId,
@@ -440,7 +440,7 @@ let $$eo4 = nF(async (e, t = {}) => {
     t.start();
     let r = e[PW.STYLE][M$.PUBLISH].filter(e => e.style_type === s4.TEXT);
     r.forEach(e => {
-      glU.prepNodeForAssetThumbnailRendering(e.node_id);
+      Fullscreen.prepNodeForAssetThumbnailRendering(e.node_id);
     });
     let n = t.stop();
     n && trackEventAnalytics("Prepared node fields used for thumbnail rendering", {
@@ -457,7 +457,7 @@ let $$eo4 = nF(async (e, t = {}) => {
   let ec = ed ? getI18nString("design_systems.publish_actions.savepoint_for_unpublish_slides") : getI18nString("design_systems.publish_actions.savepoint_for_unpublish");
   let eu = ed ? getI18nString("design_systems.publish_actions.savepoint_for_publish_slides") : getI18nString("design_systems.publish_actions.savepoint_for_publish");
   try {
-    r = await _$$m(X.key, ei ? ec : eu, t.savepointDescription, e.dispatch, !0);
+    r = await maybeCreateSavepoint(X.key, ei ? ec : eu, t.savepointDescription, e.dispatch, !0);
   } catch (t) {
     navigator.onLine ? ea("Unable to create savepoint during library publish", "create_savepoint", null, {
       error: t
@@ -686,7 +686,7 @@ let $$eo4 = nF(async (e, t = {}) => {
     } : null;
   }).filter(isNotNullish);
   if (getFeatureFlags().first_draft_publish_ux && (t.publishAsFirstDraftKit || t.unpublishAll)) {
-    let e = XJn.getLocalDesignSystemKits();
+    let e = FirstDraftHelpers.getLocalDesignSystemKits();
     if (e.length > 1) logWarning("first_draft", "Attempting to publish a file with multiple kits", {
       kitNames: e.map(e => e.name)
     });else if (1 === e.length) {

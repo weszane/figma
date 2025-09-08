@@ -5,7 +5,7 @@ import { p as _$$p, Rs } from "../figma_app/288654";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/999566";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { nb } from "../figma_app/543100";
 import { TA } from "../905/372672";
 import { Au } from "../figma_app/518077";
@@ -116,7 +116,7 @@ export function $$b2(e) {
       })));
       return;
     }
-    t(to({
+    t(showModalHandler({
       type: _$$a(),
       data: {
         fileKey: r,

@@ -1,4 +1,4 @@
-import { CNR, Ez5 } from "../figma_app/763686";
+import { SlideConstantsCppBindings, AppStateTsApi } from "../figma_app/763686";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -11,7 +11,7 @@ import { Sz } from "../figma_app/784857";
 import { Ei } from "../figma_app/60023";
 export class $$h0 extends C {
   getDefaultChildSize() {
-    return CNR ? new M(CNR.slideWidth(), CNR.slideHeight()) : new M(1920, 1080);
+    return SlideConstantsCppBindings ? new M(SlideConstantsCppBindings.slideWidth(), SlideConstantsCppBindings.slideHeight()) : new M(1920, 1080);
   }
   addBlankChildAtCoord(e, t, i, n, r) {
     return Sz(e, t, i, n);
@@ -23,8 +23,8 @@ export class $$h0 extends C {
     return !getSingletonSceneGraph().getRoot().slideThemeId.endsWith("-1:-1");
   }
   renderEmptyCanvasPlaceholder(e, t) {
-    if (!(Ez5 && CNR)) return;
-    let i = Ez5.canvasGrid().rectForCoord({
+    if (!(AppStateTsApi && SlideConstantsCppBindings)) return;
+    let i = AppStateTsApi.canvasGrid().rectForCoord({
       row: 0,
       col: 0
     }, this.getDefaultChildSize(), !0);
@@ -34,18 +34,18 @@ export class $$h0 extends C {
         y: i.origin.y + i.size.y / 2
       };
       let a = e.canvasSpaceToViewportSpace(r);
-      let s = CNR.slideHeight() * e.canvasScale() / 2.5;
+      let s = SlideConstantsCppBindings.slideHeight() * e.canvasScale() / 2.5;
       ft(a, t, s, 2, this.getActiveOutlineColor());
     }
   }
   addRowDotVerticalOffset() {
-    return getFeatureFlags().slide_chapters ? -(Ez5?.canvasGrid().gridRowSpacing() || 600) / 4 : 0;
+    return getFeatureFlags().slide_chapters ? -(AppStateTsApi?.canvasGrid().gridRowSpacing() || 600) / 4 : 0;
   }
   getActiveBgColor() {
-    return Ez5?.getBgFSDesignTertiary() ?? 0xffffff;
+    return AppStateTsApi?.getBgFSDesignTertiary() ?? 0xffffff;
   }
   getActiveOutlineColor() {
-    return Ez5?.getCanvasButton() ?? 0xcccccc;
+    return AppStateTsApi?.getCanvasButton() ?? 0xcccccc;
   }
 }
 export const w = $$h0;

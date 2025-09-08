@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { AWq, juq } from "../figma_app/763686";
+import { HistoryChangesBindings, FileSourceType } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
@@ -53,7 +53,7 @@ export function $$H7(e) {
   let t = new Map();
   e.forEach((e, r) => {
     var n;
-    let i = (n = e.nodeId) && getFeatureFlags().version_diffing ? Math.max(AWq.getChangeCountForPage(n), 0) : 0;
+    let i = (n = e.nodeId) && getFeatureFlags().version_diffing ? Math.max(HistoryChangesBindings.getChangeCountForPage(n), 0) : 0;
     i > 0 && t.set(e.nodeId, i);
   });
   return t;
@@ -113,7 +113,7 @@ export function $$K1(e) {
   }, [n, a, e, o]);
 }
 export function $$Y0(e) {
-  let t = new ReduxSceneGraph(juq.LIVE_FILE);
+  let t = new ReduxSceneGraph(FileSourceType.LIVE_FILE);
   let r = ei(e, !1, t);
   let n = r?.createdAt || null;
   let s = n ? new Date(n).toISOString() : void 0;

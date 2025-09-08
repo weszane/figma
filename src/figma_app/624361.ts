@@ -9,9 +9,9 @@ import { XHR, XHRError } from '../905/910117';
 import { debounce } from '../905/915765';
 import { buildStaticUrl } from '../figma_app/169182';
 import { d$, EC } from '../figma_app/291892';
-import { Y5 } from '../figma_app/455680';
+import { fullscreenValue } from '../figma_app/455680';
 import { Jj } from '../figma_app/553184';
-import { AlE, Bko, d8m, MoD } from '../figma_app/763686';
+import { documentStateTsApi, ImageCppBindings, UploadStatus, ImageExportType } from '../figma_app/763686';
 import { LF4 } from '../vendor/678915';
 let E = new Uint8Array([171, 75, 84, 88, 32, 50, 48, 187, 13, 10, 26, 10]).toString();
 export async function $$b1(e, t, r, n) {
@@ -181,7 +181,7 @@ class x {
   }
 }
 function N() {
-  return Y5.openFilePromise();
+  return fullscreenValue.openFilePromise();
 }
 class C extends Error {
   constructor(e, t) {
@@ -264,7 +264,7 @@ let w = class e {
               success,
               failed
             } = e.parseFileUpdateResponseForImages(d, r);
-            for (let e of (Bko.imagePermissionsCopied(success), failed)) this.markImageMissing(e);
+            for (let e of (ImageCppBindings.imagePermissionsCopied(success), failed)) this.markImageMissing(e);
             for (let e of (failed.length > 0 && trackEventAnalytics('image_permission_copy_failed', {
               shas: failed.join(',')
             }), d)) delete this.pendingPasteRequests[e];
@@ -293,7 +293,7 @@ let w = class e {
     return e._shouldUseCompressedTextures;
   }
   getEditingFileKey() {
-    return Y5.openFileKeyPromise();
+    return fullscreenValue.openFileKeyPromise();
   }
   getOrCreateImageLogData(e) {
     let t = this.imageTimingLog.get(e);
@@ -362,7 +362,7 @@ let w = class e {
     let n = await $$b1(t, r, this.imageMaxSize, e.shouldUseCompressedTextures());
     let i = t.filter(e => !(e in n.s3_urls));
     if (i.length > 0) {
-      let t = await Y5.sourceFileKeyPromise();
+      let t = await fullscreenValue.sourceFileKeyPromise();
       if (t) {
         let r = await $$b1(i, {
           type: 'figFile',
@@ -522,7 +522,7 @@ let w = class e {
         this.alreadyDownloaded.add(r.hash);
         let n = null;
         if (this.imagesNeedingDirectUpload.has(r.hash)) {
-          Bko.imageDownloadedForPaste(r.hash, t);
+          ImageCppBindings.imageDownloadedForPaste(r.hash, t);
           this.imagesNeedingDirectUpload.$$delete(r.hash);
         } else {
           let i = t;
@@ -532,11 +532,11 @@ let w = class e {
               width: e.pixelWidth,
               height: e.pixelHeight
             };
-            Bko.setCompressedTextureMetadata(r.hash, n);
+            ImageCppBindings.setCompressedTextureMetadata(r.hash, n);
             i = e.levels[0].levelData;
             this.clearImageDecodePending(r.hash, !0);
           }
-          Bko.imageDownloaded(r.hash, i);
+          ImageCppBindings.imageDownloaded(r.hash, i);
         }
         n || this.pendingDecodes.has(r.hash) || (logWarning('ImageManager', 'missing pending decode after download', {
           hash: r.hash
@@ -609,11 +609,11 @@ let w = class e {
   }
   markImagePresent(e) {
     let t = this.allImages.get(e);
-    t && (t.state = 8, Bko.imageIsPresent(e));
+    t && (t.state = 8, ImageCppBindings.imageIsPresent(e));
   }
   markImageMissing(e) {
     let t = this.allImages.get(e);
-    t && (t.state = 6, Bko.imageIsMissing(e), t.imageIsReady());
+    t && (t.state = 6, ImageCppBindings.imageIsMissing(e), t.imageIsReady());
   }
   markImageFailed(e) {
     let t = this.allImages.get(e);
@@ -774,9 +774,9 @@ let w = class e {
     this.incomingImages.size === 0 && this.incomingImagesLookedUp?.resolve();
   }
   unresolvedImagesUnder(e, t, r) {
-    let n = r ?? AlE?.getMutableActiveDocument();
+    let n = r ?? documentStateTsApi?.getMutableActiveDocument();
     if (!n) return [];
-    let i = Bko?.findImagesUnder(n, e, t);
+    let i = ImageCppBindings?.findImagesUnder(n, e, t);
     return i ? i.map(e => this.allImages.get(e)).filter(e => void 0 !== e && e.state !== 5 && e.state !== 4) : [];
   }
   loadAllImagesUnder(e, t, r, n = null, i) {
@@ -892,7 +892,7 @@ let w = class e {
         hash: n
       });
       this.pendingUploads.$$delete(n);
-      Bko.imageUploadFinished(n, d8m.SUCCESS);
+      ImageCppBindings.imageUploadFinished(n, UploadStatus.SUCCESS);
       i.state = 5;
       this.uploadedImagesNeedingUrl.add(n);
       this.maybeResolveImagesUploaded();
@@ -900,9 +900,9 @@ let w = class e {
       let t;
       e.status === 415 ? (logError('image', 'image upload failed, removing invalid image', {
         hash: n
-      }), t = d8m.UNSUPPORTED_MEDIA) : t = d8m.OTHER_FAILURE;
+      }), t = UploadStatus.UNSUPPORTED_MEDIA) : t = UploadStatus.OTHER_FAILURE;
       this.pendingUploads.$$delete(n);
-      Bko.imageUploadFinished(n, t);
+      ImageCppBindings.imageUploadFinished(n, t);
       this.maybeResolveImagesUploaded();
     });
   }
@@ -982,7 +982,7 @@ let w = class e {
     });
   }
   getDebugState() {
-    let e = Bko.getImageResourceDebugInfo();
+    let e = ImageCppBindings.getImageResourceDebugInfo();
     let t = new Map();
     e.forEach(e => {
       t.set(e.hash, {
@@ -1075,7 +1075,7 @@ export function $$L0() {
   return $$R3.imageManager;
 }
 export async function $$P2(e, t, r) {
-  if (!Bko.imageTypeDecodeSupported(t)) throw new Error(`Image type ${t} is not supported and cannot be decoded`);
+  if (!ImageCppBindings.imageTypeDecodeSupported(t)) throw new Error(`Image type ${t} is not supported and cannot be decoded`);
   let n = await EC.decodeAsync(e, t, d$, d$, !0);
   let i = await crypto.subtle.digest('SHA-1', e);
   let a = {
@@ -1107,7 +1107,7 @@ export async function $$P2(e, t, r) {
 }
 async function D(e, t) {
   let r = !!$$O4.includeOutsideContents(t);
-  await $$L0().loadAllImagesUnder([r ? e.containingCanvas || '-1:-1' : e.guid], MoD.NON_ANIMATED_ONLY, 'plugins.loadImagesAndExport');
+  await $$L0().loadAllImagesUnder([r ? e.containingCanvas || '-1:-1' : e.guid], ImageExportType.NON_ANIMATED_ONLY, 'plugins.loadImagesAndExport');
 }
 _$$c(D);
 export const Jr = $$L0;

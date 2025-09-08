@@ -1,7 +1,7 @@
 import { useMemo, useCallback, useEffect } from "react";
 import { Hg } from "../figma_app/304955";
-import { t8O } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { FontHelpers } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
@@ -64,10 +64,10 @@ export function $$j1() {
   let l = useCallback(e => {
     if (e.raw_text_styles) {
       let t = JSON.parse(e.raw_text_styles || "[]");
-      l7.ai("figmake custom fonts", () => {
+      permissionScopeHandler.ai("figmake custom fonts", () => {
         t.forEach(e => {
           e.fontFamily && e.fontWeight && function (e) {
-            let t = t8O?.getLocalTextStyleFontInfo();
+            let t = FontHelpers?.getLocalTextStyleFontInfo();
             if (t && t.find(t => t.family === e.fontFamily && t.style === e.styleName)) return;
             let n = getSingletonSceneGraph().createStyle("TEXT");
             n.fontName = {

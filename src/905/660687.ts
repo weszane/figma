@@ -1,6 +1,6 @@
 import { Lz, xO, NZ, Pe, Z9, $t, sU, YH } from "../figma_app/770359";
-import { h3O, glU, zvt } from "../figma_app/763686";
-import { l7 } from "../905/189185";
+import { Multiplayer, Fullscreen, TextModificationAction } from "../figma_app/763686";
+import { permissionScopeHandler } from "../905/189185";
 let s = Lz.baseTheme({
   ".cm-remoteSelection": {
     display: "inline-block",
@@ -171,9 +171,9 @@ export function $$c0(e, t, i) {
       let t = e();
       if (!t) return [];
       let i = [];
-      if (t.isInUnrecoverableBugErrorState() && i.push($t.readOnly.of(!0)), h3O) {
+      if (t.isInUnrecoverableBugErrorState() && i.push($t.readOnly.of(!0)), Multiplayer) {
         var a;
-        i.push((a = () => h3O ? h3O.computeCollaborativeTextRemoteCursorPositions(t) : [], sU.define({
+        i.push((a = () => Multiplayer ? Multiplayer.computeCollaborativeTextRemoteCursorPositions(t) : [], sU.define({
           create: e => NZ.set(a().flatMap(t => l(t, e.doc)), !0),
           update(e, t) {
             for (let e of t.effects) if (e.is(d)) return NZ.set(a().flatMap(e => l(e, t.state.doc)), !0);
@@ -265,13 +265,13 @@ let p = class e {
     });
   }
   update(e) {
-    if (this.relayTextUpdatesToCollaborativeText(e), h3O) {
+    if (this.relayTextUpdatesToCollaborativeText(e), Multiplayer) {
       if (e.view.hasFocus && e.view.dom.ownerDocument.hasFocus()) {
         let t = e.state.selection.main;
         let i = t.to - t.from;
         let n = i > 0 && t.head === t.from;
-        h3O.sendCollaborativeTextCursorPosition(t.from, i, n, this.collaborativeText);
-      } else h3O.clearCollaborativeTextCursorPosition();
+        Multiplayer.sendCollaborativeTextCursorPosition(t.from, i, n, this.collaborativeText);
+      } else Multiplayer.clearCollaborativeTextCursorPosition();
     }
   }
   relayTextUpdatesToCollaborativeText(e) {
@@ -279,7 +279,7 @@ let p = class e {
     let t = e.transactions.filter(e => e.annotation(u) !== this.cmAnnotation);
     0 !== t.length && (this.logVerbose("Collaborative Text", "CodeMirror informed us of local changes", {
       nonCollabTransactions: t
-    }), this.checkForDocMismatch(e.startState.doc, "before CodeMirror updates are applied"), l7.user("codemirror-local-edit", () => {
+    }), this.checkForDocMismatch(e.startState.doc, "before CodeMirror updates are applied"), permissionScopeHandler.user("codemirror-local-edit", () => {
       for (let e of (this.collaborativeText.startBatch(), t)) e.changes.iterChanges((e, t, i, n, r) => {
         let a = r.sliceString(0, r.length, "\n");
         if (e !== t) {
@@ -288,9 +288,9 @@ let p = class e {
         }
         a.length > 0 && this.collaborativeText.createInsertionOp(i, a.length, a, this.collaborativeTextObserverHandle ?? 0);
       });
-      glU?.requestNextCommitMergeWithPrevious(zvt.COLLABORATIVE_TEXT_EDIT);
+      Fullscreen?.requestNextCommitMergeWithPrevious(TextModificationAction.COLLABORATIVE_TEXT_EDIT);
       this.collaborativeText.endBatch();
-      glU?.commit();
+      Fullscreen?.commit();
       this.checkForDocMismatch(e.state.doc, "after Codemirror edits applied");
       this.onLocalChanges?.();
     }));
@@ -305,7 +305,7 @@ let p = class e {
   destroy() {
     let e = this.getCollaborativeText();
     e && null !== this.collaborativeTextObserverHandle && (e.removeObserver(this.collaborativeTextObserverHandle), this.collaborativeTextObserverHandle = null);
-    h3O && h3O.clearCollaborativeTextCursorPosition();
+    Multiplayer && Multiplayer.clearCollaborativeTextCursorPosition();
   }
 };
 p.nextAnnotation = 1;

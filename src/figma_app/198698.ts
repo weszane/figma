@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { U1 } from "../figma_app/343967";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
 import { wY, cU } from "../figma_app/708845";
@@ -37,12 +37,12 @@ export function $$w0(e) {
   let P = U1(R);
   switch (useEffect(() => {
     let e = document.documentElement.style;
-    Ez5?.uiState().editorBannerHeight.set(L.height);
+    AppStateTsApi?.uiState().editorBannerHeight.set(L.height);
     e.setProperty("--editor-banner-height", `${L.height}px`);
   }, [L.height]), useEffect(() => ($$C++, () => {
     if (0 == --$$C) {
       let e = document.documentElement.style;
-      Ez5?.uiState().editorBannerHeight.set(0);
+      AppStateTsApi?.uiState().editorBannerHeight.set(0);
       e.setProperty("--editor-banner-height", "0px");
     }
   }), []), content.bannerType) {

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { DT } from "../figma_app/8833";
 import { l as _$$l } from "../905/348437";
 import { q } from "../905/70772";
@@ -15,7 +15,7 @@ export function $$h0(e) {
     attachments
   } = e;
   let h = n => {
-    t(to({
+    t(showModalHandler({
       type: q,
       data: {
         attachments,

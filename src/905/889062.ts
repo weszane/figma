@@ -1,6 +1,6 @@
 import { VH } from "../figma_app/178419";
-import { Et } from "../905/125019";
-import { Vzr } from "../figma_app/763686";
+import { sha1Hex } from "../905/125019";
+import { Thumbnail } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { sf } from "../figma_app/12535";
 export async function $$l0(e, t) {
@@ -43,7 +43,7 @@ export async function $$c2(e, t) {
       thumbnailMedium: {
         ...i,
         type: "image",
-        sha1: Et(i.buffer)
+        sha1: sha1Hex(i.buffer)
       },
       isSetByUser: !!e.thumbnail_guid
     };
@@ -53,15 +53,15 @@ export async function $$c2(e, t) {
 }
 export async function $$u1(e, t = {}) {
   return await scheduler.postTask(() => {
-    if (!Vzr) return;
-    let [i, n] = Vzr.generateThumbnailForNode(e, t.fixedWidth ?? 0, t.fixedHeight ?? 0, 10, {
+    if (!Thumbnail) return;
+    let [i, n] = Thumbnail.generateThumbnailForNode(e, t.fixedWidth ?? 0, t.fixedHeight ?? 0, 10, {
       useAbsoluteBounds: !0,
       thumbnailScalingStrategy: t.thumbnailScalingStrategy
     });
     return {
       url: URL.createObjectURL(new Blob([n || ""])),
       buffer: n,
-      sha1: Et(n),
+      sha1: sha1Hex(n),
       type: "image"
     };
   });

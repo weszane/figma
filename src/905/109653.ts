@@ -13,7 +13,7 @@ import { AC, Y5 } from "../figma_app/777551";
 import { uX, Rk, Un, MY, I_ } from "../905/759470";
 import { sZ } from "../905/845253";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
-import { Ar } from "../figma_app/300692";
+import { getCurrentPluginVersion } from "../figma_app/300692";
 import { ol } from "../figma_app/598018";
 import { mr } from "../figma_app/45218";
 import { i as _$$i } from "../905/186961";
@@ -259,7 +259,7 @@ function P({
             if (s === FPublicationStatusType.ORG_PRIVATE && a) {
               let e = l?.name || "";
               let t = "";
-              i && mr(i) && (t = Ar(i)?.name || "");
+              i && mr(i) && (t = getCurrentPluginVersion(i)?.name || "");
               return I_.privateExtension({
                 resourceName: t,
                 orgName: e

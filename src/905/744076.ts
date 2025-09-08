@@ -1,11 +1,11 @@
 import { z } from "../905/239603";
-import { q$, YV } from "../figma_app/181241";
+import { createSimpleMetaValidator, createMetaValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { FRequestStatusType } from "../figma_app/191312";
 import { D } from "../905/412108";
-import { C } from "../figma_app/155287";
+import { PluginVersionsRecordSchema } from "../figma_app/155287";
 var u = (e => (e.PENDING = "pending", e.APPROVED = "approved", e.REJECTED = "rejected", e))(u || {});
 let p = D(z.object({
   prompt: z.string(),
@@ -44,7 +44,7 @@ let y = {
 let b = D(z.object(y));
 let v = {
   ...y,
-  plugin: C
+  plugin: PluginVersionsRecordSchema
 };
 D(z.object(v));
 D(z.object({
@@ -55,10 +55,10 @@ D(z.object({
 }));
 export let $$I1 = new class {
   constructor() {
-    this.SecurityFormValidator = q$("SecurityFormValidator", _);
-    this.GetSecurityFormResponseValidator = q$("GetSecurityFormResponseValidator", b);
-    this.SubmitSecurityFormResponseValidator = q$("SubmitSecurityFormResponseValidator", z.union([z.boolean(), b]));
-    this.DeleteSecurityFormResponseValidator = YV("DeleteSecurityFormResponseValidator", z.undefined(), null, !0);
+    this.SecurityFormValidator = createSimpleMetaValidator("SecurityFormValidator", _);
+    this.GetSecurityFormResponseValidator = createSimpleMetaValidator("GetSecurityFormResponseValidator", b);
+    this.SubmitSecurityFormResponseValidator = createSimpleMetaValidator("SubmitSecurityFormResponseValidator", z.union([z.boolean(), b]));
+    this.DeleteSecurityFormResponseValidator = createMetaValidator("DeleteSecurityFormResponseValidator", z.undefined(), null, !0);
     this.getBlankSecurityForm = async e => {
       let {
         data
@@ -99,7 +99,7 @@ export let $$I1 = new class {
         version: i
       }));
     };
-    this.approveReviewPluginSecurityForms = nF((e, t) => {
+    this.approveReviewPluginSecurityForms = createOptimistThunk((e, t) => {
       let {
         securityFormId,
         pluginId,
@@ -117,7 +117,7 @@ export let $$I1 = new class {
         e.dispatch(_$$s.error("Unable to approve security form."));
       });
     });
-    this.rejectReviewPluginSecurityForms = nF((e, t) => {
+    this.rejectReviewPluginSecurityForms = createOptimistThunk((e, t) => {
       let {
         securityFormId,
         pluginId,
@@ -138,4 +138,4 @@ export let $$I1 = new class {
   }
 }();
 export const E3 = $$A0;
-export const is = $$I1; 
+export const is = $$I1;

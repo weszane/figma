@@ -1,11 +1,11 @@
 import { NC } from "../905/17179";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 let $$a6 = NC("FULLSCREEN_HIDE_STYLE_PREVIEW");
-let $$s2 = nF(e => {
+let $$s2 = createOptimistThunk(e => {
   let t = e.getState().stylePreviewShown;
   t.isShown && !t.isCreating && e.dispatch($$a6());
 });
-let $$o3 = nF((e, t) => {
+let $$o3 = createOptimistThunk((e, t) => {
   let {
     rowTop,
     rowLeft,
@@ -25,7 +25,7 @@ let $$o3 = nF((e, t) => {
 });
 let $$l1 = NC("SHOW_CREATE_STYLE_PREVIEW");
 let $$d0 = NC("FULLSCREEN_SHOW_STYLE_PREVIEW");
-let $$c5 = nF((e, t) => {
+let $$c5 = createOptimistThunk((e, t) => {
   e.dispatch($$d0(t));
 });
 let $$u4 = NC("STYLE_FILE_PUT_STYLE_SET");

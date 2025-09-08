@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
-import { qE } from "../figma_app/492908";
+import { clamp } from "../figma_app/492908";
 import { isNullish } from "../figma_app/95419";
-import { Ez5, Z_n, rXF } from "../figma_app/763686";
+import { AppStateTsApi, VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/267721";
 import c from "../vendor/223926";
@@ -158,7 +158,7 @@ export function $$w14({
       e.forEach(e => {
         let n = t.find(t => t.node_id === e.variableSetId);
         let r = e.node_id.replace("VariableID:", "");
-        let a = Ez5.slideThemeLibBindings().themeIdForAsset(r);
+        let a = AppStateTsApi.slideThemeLibBindings().themeIdForAsset(r);
         n && a ? (i.themed[a] || (i.themed[a] = {
           name: n.name,
           variables: []
@@ -365,7 +365,7 @@ export function $$R15({
   switch (e) {
     case "list":
     case "grid":
-      return qE(t, $$k1({
+      return clamp(t, $$k1({
         layout: e
       }), 288);
   }
@@ -422,12 +422,12 @@ export function $$D9(e) {
 }
 export function $$L11(e) {
   switch (e.varValue.type) {
-    case Z_n.BOOLEAN:
+    case VariableDataType.BOOLEAN:
       return e.varValue.value;
-    case Z_n.TEXT_DATA:
+    case VariableDataType.TEXT_DATA:
       return e.varValue.value.characters;
-    case Z_n.STRING:
-    case Z_n.FLOAT:
+    case VariableDataType.STRING:
+    case VariableDataType.FLOAT:
       return e.varValue.value;
     default:
       throw Error("This function doesn't support this type of component prop.");
@@ -439,11 +439,11 @@ export function $$F2(e, t, i) {
       varValue
     } = e;
     let r = varValue.type;
-    if ([Z_n.BOOLEAN, Z_n.FLOAT, Z_n.STRING, Z_n.TEXT_DATA].includes(r)) {
-      let n = [Z_n.TEXT_DATA, Z_n.STRING].includes(r) && (t?.includes(rXF.STRING) || t?.includes(rXF.TEXT_DATA));
-      let a = r === Z_n.FLOAT && t?.includes(rXF.FLOAT);
-      let o = (n || a) && i !== rXF.BOOLEAN;
-      let l = r === Z_n.BOOLEAN && t?.includes(rXF.BOOLEAN);
+    if ([VariableDataType.BOOLEAN, VariableDataType.FLOAT, VariableDataType.STRING, VariableDataType.TEXT_DATA].includes(r)) {
+      let n = [VariableDataType.TEXT_DATA, VariableDataType.STRING].includes(r) && (t?.includes(VariableResolvedDataType.STRING) || t?.includes(VariableResolvedDataType.TEXT_DATA));
+      let a = r === VariableDataType.FLOAT && t?.includes(VariableResolvedDataType.FLOAT);
+      let o = (n || a) && i !== VariableResolvedDataType.BOOLEAN;
+      let l = r === VariableDataType.BOOLEAN && t?.includes(VariableResolvedDataType.BOOLEAN);
       if (void 0 === t || l || o) return {
         type: "COMPONENT_PROP",
         value: e

@@ -1,45 +1,91 @@
-import { lu } from "../figma_app/84367";
-import { desktopAPIInstance } from "../figma_app/876459";
-let a = {};
-let s = new Map();
-export function $$o1(e) {
-  return a[e];
+import { subscribeObservable } from '../figma_app/84367'
+import { desktopAPIInstance } from '../figma_app/876459'
+
+/**
+ * Stores property actions by property name.
+ * Original variable: a
+ */
+const propertyActions: Record<string, { actions: Array<{ name: string, propertyValue: boolean | string }> }> = {}
+
+/**
+ * Stores unsubscribe functions for observables by action name.
+ * Original variable: s
+ */
+const unsubscribeMap = new Map<string, () => void>()
+
+/**
+ * Retrieves property actions for a given property name.
+ * Original function: $$o1
+ * @param propertyName - The property name to look up.
+ * @returns The property actions object or undefined.
+ */
+export function getPropertyActions(propertyName: string) {
+  return propertyActions[propertyName]
 }
-export function $$l0(e, t, i) {
-  if (null == e.property) return null;
-  let o = e.property;
-  if ("string" != typeof o) {
-    let i = s.get(t);
-    i && i();
-    s.set(t, lu(o, {
-      onChangeImmediate: () => {
-        if (desktopAPIInstance) {
-          let i = o.getCopy() === e.propertyValue;
-          desktopAPIInstance.updateFullscreenMenuState({
-            actionCheckedState: {
-              [t]: i
-            }
-          });
-        }
-      }
-    }));
+
+/**
+ * Handles property state and updates fullscreen menu state.
+ * Original function: $$l0
+ * @param params - The property parameters.
+ * @param actionName - The action name.
+ * @param currentValues - The current property values.
+ * @returns An object with isChecked state or null.
+ */
+export function handlePropertyState(params: {
+  property: string | { getCopy: () => boolean | string }
+  propertyValue: boolean | string
+}, actionName: string, currentValues: Record<string, boolean | string>): { isChecked: boolean } | null {
+  if (params.property == null)
+    return null
+
+  const { property, propertyValue } = params
+
+  // Observable property handling
+  if (typeof property !== 'string') {
+    const unsubscribe = unsubscribeMap.get(actionName)
+    if (unsubscribe)
+      unsubscribe()
+
+    unsubscribeMap.set(
+      actionName,
+      subscribeObservable(property, {
+        onChangeImmediate: () => {
+          if (desktopAPIInstance) {
+            const isChecked = property.getCopy() === propertyValue
+            desktopAPIInstance.updateFullscreenMenuState({
+              actionCheckedState: {
+                [actionName]: isChecked,
+              },
+            })
+          }
+        },
+      }),
+    )
     return {
-      isChecked: o.getCopy() === e.propertyValue
-    };
+      isChecked: property.getCopy() === propertyValue,
+    }
   }
-  if ("boolean" == typeof e.propertyValue || "string" == typeof e.propertyValue) {
-    let n = a[o]?.actions ?? [];
-    a[o] = {
-      actions: [...n, {
-        name: t,
-        propertyValue: e.propertyValue
-      }]
-    };
+
+  // Boolean or string property value handling
+  if (typeof propertyValue === 'boolean' || typeof propertyValue === 'string') {
+    const actions = propertyActions[property]?.actions ?? []
+    propertyActions[property] = {
+      actions: [
+        ...actions,
+        {
+          name: actionName,
+          propertyValue,
+        },
+      ],
+    }
     return {
-      isChecked: i[o] === e.propertyValue
-    };
+      isChecked: currentValues[property] === propertyValue,
+    }
   }
-  return null;
+
+  return null
 }
-export const e = $$l0;
-export const m = $$o1;
+
+// Refactored exports for compatibility
+export const e = handlePropertyState // setupPlaybackHandler
+export const m = getPropertyActions // getPropertyActions

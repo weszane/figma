@@ -1,6 +1,6 @@
 import { useLayoutEffect, useEffect } from "react";
 import { DP } from "../905/158740";
-import { Ez5 } from "../figma_app/763686";
+import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { updateEnvironmentInfo } from "../905/883621";
 import { uiVariantName } from "../905/709735";
@@ -23,14 +23,14 @@ export function $$u2() {
 export function $$p0() {
   let e = g();
   useEffect(() => {
-    queueMicrotask(() => Ez5?.uiState().isUI3.set(!0));
+    queueMicrotask(() => AppStateTsApi?.uiState().isUI3.set(!0));
   }, [e]);
 }
 export function $$_1() {
   let e = !!getFeatureFlags().figjam_ui3_color_palette;
   let t = g();
   useEffect(() => {
-    queueMicrotask(() => Ez5?.uiState().showUI3Colors.set(e));
+    queueMicrotask(() => AppStateTsApi?.uiState().showUI3Colors.set(e));
   }, [e, t]);
 }
 export const Ou = $$p0;

@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { Ez } from "../figma_app/766708";
 import { renderI18nText } from "../905/303541";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { E8 } from "../figma_app/633080";
 export function $$l0(e) {
   return [...e].sort((e, t) => {
@@ -28,7 +28,7 @@ export function $$d3(e) {
   }
 }
 export function $$c1(e, t) {
-  return to({
+  return showModalHandler({
     type: {
       type: "PublishingModal"
     },

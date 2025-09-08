@@ -59,8 +59,8 @@ import { yJ } from "../figma_app/24841";
 import { c as _$$c2 } from "../905/370443";
 import { sf } from "../905/929976";
 import { WX, Bq, Vm } from "../figma_app/482142";
-import { b as _$$b2 } from "../905/165519";
-import { tn as _$$tn, TN } from "../figma_app/831101";
+import { UpsellModalType } from "../905/165519";
+import { UpgradeSteps, UpsellSourceType } from "../figma_app/831101";
 import { SC, Sc } from "../figma_app/707808";
 import { ud, Gu, TI } from "../905/513035";
 import { q5 } from "../figma_app/516028";
@@ -127,10 +127,10 @@ import { jx, wZ } from "../figma_app/869776";
 import { r as _$$r2 } from "../905/520829";
 import { LN as _$$LN, Kq } from "../905/941249";
 import { A as _$$A4 } from "../quill_composer/816110";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J3 } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { _ as _$$_ } from "../figma_app/496441";
-import { F as _$$F2 } from "../905/549791";
+import { CheckboxPrimitive } from "../905/549791";
 import { g as _$$g3 } from "../905/125190";
 import { C as _$$C } from "../905/520159";
 import { E as _$$E2 } from "../905/172252";
@@ -391,25 +391,25 @@ function ey() {
       view: "teamUpgrade",
       teamFlowType: SC.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
-      paymentStep: _$$tn.CHOOSE_PLAN,
+      paymentStep: UpgradeSteps.CHOOSE_PLAN,
       previousView: r,
       planType: Sc.TEAM,
-      entryPoint: TN.NUX
+      entryPoint: UpsellSourceType.NUX
     })) : e(WX({
       teamId: t.id,
       openInNewTab: !0,
-      entryPoint: TN.NUX
+      entryPoint: UpsellSourceType.NUX
     }));
   };
   let s = () => {
     desktopAPIInstance ? e(sf({
       view: "orgSelfServe",
-      upsellSource: _$$b2.TEAM_WELCOME,
-      entryPoint: TN.NUX
+      upsellSource: UpsellModalType.TEAM_WELCOME,
+      entryPoint: UpsellSourceType.NUX
     })) : e(Bq({
       openInNewTab: !0,
-      upsellSource: _$$b2.TEAM_WELCOME,
-      entryPoint: TN.NUX
+      upsellSource: UpsellModalType.TEAM_WELCOME,
+      entryPoint: UpsellSourceType.NUX
     }));
   };
   let o = r => {
@@ -2964,7 +2964,7 @@ let tN = forwardRef(function (e, r) {
     children: [jsxs("span", {
       className: "branded_checkbox--root--Vbbqu",
       "data-disabled": !!e.disabled || void 0,
-      children: [jsx(_$$F2, {
+      children: [jsx(CheckboxPrimitive, {
         ref: r,
         ...e,
         className: "branded_checkbox--checkbox--xEyjK"
@@ -3039,10 +3039,10 @@ function tR(e) {
         ..._$$Ay2.props(tT.modalOptInDesccription),
         children: u
       }) : jsxs(Fragment, {
-        children: [jsx(_$$S, {
+        children: [jsx(Checkbox, {
           checked: i,
           onChange: e => l(e),
-          label: jsx(_$$J3, {
+          label: jsx(Label, {
             ..._$$Ay2.props(tT.modalCheckboxText),
             children: x
           })

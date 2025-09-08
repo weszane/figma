@@ -3,15 +3,15 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useMemo, useCallback, useRef, useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
 import { u as _$$u } from "../905/65923";
 import { Z as _$$Z } from "../905/279476";
 import { O as _$$O } from "../905/487602";
-import { YnC, glU, rrT, yxn } from "../figma_app/763686";
-import { l7, nc } from "../905/189185";
-import { sH, Hr, dI, fn } from "../905/871411";
+import { SymbolOverrideType, Fullscreen, NodePropertyCategory, CanvasComponentType } from "../figma_app/763686";
+import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
+import { parseSessionLocalID, defaultSessionLocalID, sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { kh } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
@@ -29,8 +29,8 @@ import { XE, u1 } from "../figma_app/91703";
 import { AO, o$ } from "../figma_app/8833";
 import { JV, Eq, sX, cP, js, mj } from "../figma_app/451499";
 import { cJ } from "../figma_app/976749";
-import { Y5 } from "../figma_app/455680";
-import { gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { isInvalidValue } from "../905/216495";
 import { e7, av } from "../figma_app/316316";
 import { NE } from "../3276/373312";
 import { q5 } from "../figma_app/516028";
@@ -168,7 +168,7 @@ let $$eT0 = memo(function ({
   let C = function () {
     let e = eL();
     let t = useSelector(eP);
-    return !!e && !!t && t.selectionOverrides[YnC.PROTOTYPE_INTERACTIONS];
+    return !!e && !!t && t.selectionOverrides[SymbolOverrideType.PROTOTYPE_INTERACTIONS];
   }();
   let j = q5();
   let N = _$$U();
@@ -177,12 +177,12 @@ let $$eT0 = memo(function ({
   let D = useCallback(e => A.format(e), [A]);
   let R = useRef(null);
   let M = e => {
-    Y5.updateSelectionProperties({
+    fullscreenValue.updateSelectionProperties({
       prototypeInteractions: e
     }, {
       shouldCommit: zk.NO_BUT_TRACK_AS_EDIT
     });
-    Y5.commit();
+    fullscreenValue.commit();
   };
   let B = Zj(Object.keys(c));
   let K = jsx(eS, {
@@ -201,13 +201,13 @@ let $$eT0 = memo(function ({
       let t = [];
       let o = [];
       for (let e of Object.keys(c)) {
-        let n = glU.generateUniqueID();
+        let n = Fullscreen.generateUniqueID();
         if (!n) return;
-        let i = sH(n);
+        let i = parseSessionLocalID(n);
         if (!i) return;
         let r = {
           id: i,
-          sourceNodeID: sH(e) ?? Hr,
+          sourceNodeID: parseSessionLocalID(e) ?? defaultSessionLocalID,
           event: {
             interactionType: $$eR1(p, void 0, S)
           }
@@ -225,7 +225,7 @@ let $$eT0 = memo(function ({
         interactionID: e.id
       }));
       if (i.length > 0) {
-        glU.setSelectedInteractions(i);
+        Fullscreen.setSelectedInteractions(i);
         let e = cn(R.current);
         $$eU3(new Point(e.x, e.y + parsePxNumber(rightNavGridRowHeight)), !1);
       }
@@ -241,10 +241,10 @@ let $$eT0 = memo(function ({
       let i = new Set();
       let r = [];
       for (let e of o) {
-        let t = dI(e.id);
+        let t = sessionLocalIDToString(e.id);
         if (t && !i.has(t)) r.push(e);else {
-          if (!(t = glU.generateUniqueID())) continue;
-          let n = sH(t);
+          if (!(t = Fullscreen.generateUniqueID())) continue;
+          let n = parseSessionLocalID(t);
           if (!n) continue;
           r.push({
             ...e,
@@ -261,11 +261,11 @@ let $$eT0 = memo(function ({
       let o = [];
       for (let e of n) o.push(...e.interactions);
       let i = $$eH2(o);
-      l7.user("delete-prototype-interactions", () => glU.deleteInteractions(i));
-      Y5.deselectProperty();
+      permissionScopeHandler.user("delete-prototype-interactions", () => Fullscreen.deleteInteractions(i));
+      fullscreenValue.deselectProperty();
     },
     openFile: j,
-    shouldIgnoreKeyboardEvents: l.length > 0 || s.type !== rrT.PROTOTYPE_INTERACTION && s.type !== rrT.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
+    shouldIgnoreKeyboardEvents: l.length > 0 || s.type !== NodePropertyCategory.PROTOTYPE_INTERACTION && s.type !== NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
     showResetInteractionsButton: C,
     toggleScrollBehaviorPicker: () => {
       if (f?.id === AO) t(XE());else {
@@ -296,7 +296,7 @@ function eS(e) {
   let d = n ? e.filterInteractionCategory === _$$J2.INHERITED_INTERNAL && s : s;
   let c = jsx("div", {
     className: "prototype_interaction_list--categoryRow--Xxfm4",
-    children: jsx(_$$J, {
+    children: jsx(Label, {
       className: "prototype_interaction_list--categoryLabel--0dGOM",
       children: renderI18nText("proto.interaction_list.variant_interactions")
     })
@@ -316,7 +316,7 @@ function eS(e) {
         hideAddButton: !e.isValidPrototypingSourceSelected,
         onChange: t => e.onChange(t, _$$J2.NORMAL),
         onDeleteProperty: t => e.onDeleteProperty(t, _$$J2.NORMAL),
-        onResetInteractions: nc.user("reset-instance-interactions", () => glU.resetSymbolOverrides(YnC.PROTOTYPE_INTERACTIONS)),
+        onResetInteractions: scopeAwareFunction.user("reset-instance-interactions", () => Fullscreen.resetSymbolOverrides(SymbolOverrideType.PROTOTYPE_INTERACTIONS)),
         openFile: e.openFile,
         pickerShown: null,
         propertyList: e.interactionGroups,
@@ -338,7 +338,7 @@ function eS(e) {
           selected: r,
           singletonRow: e.interactionGroups.length <= 1
         }, p ? void 0 : i),
-        selectedPropertyType: rrT.PROTOTYPE_INTERACTION,
+        selectedPropertyType: NodePropertyCategory.PROTOTYPE_INTERACTION,
         shouldIgnoreKeyboardEvents: e.shouldIgnoreKeyboardEvents,
         showResetInteractionsButton: e.showResetInteractionsButton,
         stylePickerShown: {
@@ -379,7 +379,7 @@ function eS(e) {
           selected: r,
           singletonRow: e.inheritedInternalInteractionGroups.length <= 1
         }, p ? void 0 : i),
-        selectedPropertyType: rrT.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
+        selectedPropertyType: NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
         shouldIgnoreKeyboardEvents: e.shouldIgnoreKeyboardEvents,
         stylePickerShown: {
           isShown: !1
@@ -420,10 +420,10 @@ function eA({
   let ea = function (e, t) {
     let n = new Set(t.map(e => {
       let t = _$$s(e);
-      return t ? dI(t.interactionID) : "";
+      return t ? sessionLocalIDToString(t.interactionID) : "";
     }).filter(e => "" !== e));
     for (let t of e.interactions) {
-      let e = dI(t.id);
+      let e = sessionLocalIDToString(t.id);
       if (e && n.has(e)) return !0;
     }
     return !1;
@@ -440,9 +440,9 @@ function eA({
     $$eU3(cn(e), !1);
   }, [U]);
   let eg = useCallback(() => {
-    glU.setSelectedInteractions([]);
+    Fullscreen.setSelectedInteractions([]);
     D(XE());
-    Y5.deselectProperty();
+    fullscreenValue.deselectProperty();
   }, [D]);
   let eI = n => {
     if (!ep || !eu) return;
@@ -478,9 +478,9 @@ function eA({
       let s = e.slice(n, i + 1);
       for (let e of (o = [...G], s)) o.push(...eB(e));
     }
-    if (glU.setSelectedInteractions(o), Y5.updateAppModel({
+    if (Fullscreen.setSelectedInteractions(o), fullscreenValue.updateAppModel({
       currentSelectedProperty: {
-        type: V === _$$J2.NORMAL ? rrT.PROTOTYPE_INTERACTION : rrT.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
+        type: V === _$$J2.NORMAL ? NodePropertyCategory.PROTOTYPE_INTERACTION : NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
         indices: []
       }
     }), o.length) {
@@ -504,11 +504,11 @@ function eA({
   }
   let ek = () => {
     let e = $$eH2(t.interactions);
-    glU.hoverInteractions(e);
+    Fullscreen.hoverInteractions(e);
     eo(!0);
   };
   let eP = () => {
-    glU.hoverInteractions([]);
+    Fullscreen.hoverInteractions([]);
     eo(!1);
   };
   let eO = new js(!0, eN);
@@ -527,9 +527,9 @@ function eA({
   let ez = e => {
     e.stopPropagation();
     let n = $$eH2(t.interactions);
-    l7.user("delete-prototype-interactions", () => glU.deleteInteractions(n));
-    Y5.deselectProperty();
-    Y5.commit();
+    permissionScopeHandler.user("delete-prototype-interactions", () => Fullscreen.deleteInteractions(n));
+    fullscreenValue.deselectProperty();
+    fullscreenValue.commit();
   };
   let eW = !1;
   let eZ = !1;
@@ -540,7 +540,7 @@ function eA({
       if (!t || "SWAP_STATE" !== t.navigationType) continue;
       let n = "";
       if (t.transitionNodeID) {
-        let e = et.get(dI(t.transitionNodeID));
+        let e = et.get(sessionLocalIDToString(t.transitionNodeID));
         if (e) {
           if (e.isState) n = e.parentGuid || "";else {
             eW = !0;
@@ -548,7 +548,7 @@ function eA({
           }
         }
       }
-      let o = glU.getContainingStateGroupOrSelf(dI(e.sourceNodeID ?? Hr)) || "";
+      let o = Fullscreen.getContainingStateGroupOrSelf(sessionLocalIDToString(e.sourceNodeID ?? defaultSessionLocalID)) || "";
       if ("" === o || "" !== n && o !== n) {
         eW = !0;
         break;
@@ -566,7 +566,7 @@ function eA({
       let o = void 0 !== t.actions && t.actions.length >= 1;
       if (!n || !o) return !1;
       let i = e.actions.every(e => "UPDATE_MEDIA_RUNTIME" === e.connectionType);
-      let r = e.actions.every(e => fn(e.transitionNodeID));
+      let r = e.actions.every(e => isValidSessionLocalID(e.transitionNodeID));
       var a = !1;
       for (let e of t.actions) if ("INTERNAL_NODE" === e.connectionType && "SWAP_STATE" === e.navigationType) {
         a = !0;
@@ -767,7 +767,7 @@ function eV(e, t, n, o) {
       return i.format(r);
     case "OPEN_URL":
       if (null != e.connectionURL) {
-        if (gl(e.connectionURL)) return getI18nString("fullscreen.mixed");
+        if (isInvalidValue(e.connectionURL)) return getI18nString("fullscreen.mixed");
         return e.connectionURL.replace(/https?:\/\//, "");
       }
       return i.format("NONE");
@@ -782,7 +782,7 @@ function eV(e, t, n, o) {
     case "UPDATE_MEDIA_SKIP_TO":
       return eN.format(e);
   }
-  return e.transitionNodeID ? gl(e.transitionNodeID) ? getI18nString("fullscreen.mixed") : t(dI(e.transitionNodeID)) : i.format("NONE");
+  return e.transitionNodeID ? isInvalidValue(e.transitionNodeID) ? getI18nString("fullscreen.mixed") : t(sessionLocalIDToString(e.transitionNodeID)) : i.format("NONE");
 }
 function eB(e) {
   return e.interactions.filter(e => e.id && e.sourceNodeID).map(e => _$$d2({
@@ -805,9 +805,9 @@ export function $$eH2(e) {
   return t;
 }
 export function $$eU3(e, t) {
-  Y5.triggerAction("show-prototype-interaction-edit-modal", {
+  fullscreenValue.triggerAction("show-prototype-interaction-edit-modal", {
     args: {
-      source: yxn.PROPERTIES_PANEL,
+      source: CanvasComponentType.PROPERTIES_PANEL,
       x: e.x,
       y: e.y,
       isBehaviorsOnly: t

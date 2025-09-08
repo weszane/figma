@@ -7,7 +7,7 @@ import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { b as _$$b } from "../905/618904";
 import { b as _$$b2, c as _$$c } from "../905/308099";
-import { J as _$$J } from "../905/270045";
+import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
@@ -34,7 +34,7 @@ import { iB as _$$iB } from "../figma_app/188671";
 import { fy, wx, uX, Qi, Ij, gD, Dl, Vp, zn, R8, se, fd, pm } from "../figma_app/559491";
 import { oB, j7, sf } from "../905/929976";
 import { s as _$$s2 } from "../905/58247";
-import { to as _$$to, Lo, Ce } from "../905/156213";
+import { showModalHandler, popModalStack, hideModal } from "../905/156213";
 import { WX } from "../figma_app/350203";
 import { tf as _$$tf, fu } from "../figma_app/831799";
 import { A as _$$A2 } from "../905/72153";
@@ -48,18 +48,18 @@ import { TA, Pc } from "../905/372672";
 import { M4, IT } from "../905/713695";
 import { eE as _$$eE, Ts, wA as _$$wA } from "../figma_app/336853";
 import { getPermissionsState, canMemberOrg, canAdminOrg } from "../figma_app/642025";
-import { uF, lT, vj, nW, T as _$$T, tH as _$$tH, EY, Mi as _$$Mi, u0, M5, SW, ZB as _$$ZB, $H, Tk, CB, mI } from "../figma_app/300692";
+import { getPluginVersion, pluginMetadata, validateAndResizeIconImage, getFirstFileOrThrow, getFullscreenViewEditorType, getPublishingRole, hasRoleOrOrgChanged, getLocalFileId, getOrgRole, isDevModePlugin, getPublishingErrors, validatePublishingData, validatePublishingDataLengths, getPublishedResourceOrNull, getPublishedResource, getPublishingData } from "../figma_app/300692";
 import { qu, UR } from "../905/671449";
 import { w3 } from "../905/481915";
 import { dj, bD, hE, vt } from "../figma_app/45218";
 import { kM, k2, aP } from "../figma_app/10554";
 import { PN } from "../905/54385";
-import { Lu, FW } from "../figma_app/155287";
+import { PublisherType, ManifestEditorType } from "../figma_app/155287";
 import { D6 } from "../figma_app/175992";
 import { e0 as _$$e2 } from "../905/696396";
-import { vh, td as _$$td } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { is as _$$is } from "../905/744076";
-import { Ju, ZU } from "../905/102752";
+import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { oE, zK } from "../figma_app/397269";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s3 } from "../figma_app/504088";
@@ -162,12 +162,12 @@ import { VJh } from "../figma_app/27776";
 var n;
 let ec = new class {
   constructor() {
-    this.PermissionsSchemaValidator = vh();
+    this.PermissionsSchemaValidator = createNoOpValidator();
   }
   getPermissions(e) {
     return this.PermissionsSchemaValidator.validate(async ({
       xr: t
-    }) => await t.get("/api/plugin_publishers/permissions", _$$td.toAPIParameters(e)));
+    }) => await t.get("/api/plugin_publishers/permissions", APIParameterUtils.toAPIParameters(e)));
   }
 }();
 var ey = eA;
@@ -289,7 +289,7 @@ let eD = _$$tf(function (e) {
     subtitle
   });
 });
-let eF = Ju(function (e) {
+let eF = registerModal(function (e) {
   let {
     isWidget,
     onConfirm,
@@ -479,7 +479,7 @@ function e5({
   removeFileCallback: d
 }) {
   let c = useDispatch();
-  let u = t ? uF(t) : lT;
+  let u = t ? getPluginVersion(t) : pluginMetadata;
   let p = n === _$$J2.Actions.NOOP && i && i.id !== u.playground_file_version_id;
   let m = t && n === _$$J2.Actions.SET && a?.key === u.playground_fig_file?.key;
   return jsxs("div", {
@@ -565,7 +565,7 @@ let e9 = function ({
     src: a
   }) => {
     try {
-      let s = await vj(nW(i), r);
+      let s = await validateAndResizeIconImage(getFirstFileOrThrow(i), r);
       h(URL.createObjectURL(s), s);
       trackEventAnalytics("community_publish_modal", {
         name: "upload_icon",
@@ -694,7 +694,7 @@ function tt({
   reviewStatus: i
 }) {
   let n = useId();
-  return jsxs(_$$J, {
+  return jsxs(Label, {
     htmlFor: n,
     className: _$$s4.flex.itemsCenter.hFull.justifyEnd.gap8.$,
     children: [jsx(ti, {
@@ -760,7 +760,7 @@ function ta({
     })
   });
 }
-let to = Ju(function (e) {
+let to = registerModal(function (e) {
   return jsx(_$$yX, {
     destructive: !0,
     confirmationTitle: getI18nString("community.publishing.confirm_change_plugin_profile_modal.profile_will_be_removed", {
@@ -783,7 +783,7 @@ let to = Ju(function (e) {
     })
   });
 }, "ConfirmChangePluginProfileModal");
-let tl = Ju(function (e) {
+let tl = registerModal(function (e) {
   let t = {
     authorName: jsx(_$$E, {
       fontWeight: "bold",
@@ -857,7 +857,7 @@ function tx({
     content: a
   };
 }
-let tC = Ju(function (e) {
+let tC = registerModal(function (e) {
   return jsxs(_$$yX, {
     destructive: !0,
     confirmationTitle: e.isWidget ? getI18nString("community.publishing.confirm_plugin_ownership_transfer_modal.transfer_plugin_ownership.widget") : getI18nString("community.publishing.confirm_plugin_ownership_transfer_modal.transfer_plugin_ownership.plugin"),
@@ -951,10 +951,10 @@ function tO({
     }), jsx(HU, {
       dispatch: c,
       onChange: t => {
-        t === kM.OWNER ? l?.monetized_resource_metadata ? c(_$$to({
+        t === kM.OWNER ? l?.monetized_resource_metadata ? c(showModalHandler({
           type: _$$K2,
           data: {}
-        })) : c(_$$to({
+        })) : c(showModalHandler({
           type: tC,
           data: {
             newOwnerName: tN(e),
@@ -1250,7 +1250,7 @@ function tU({
   entryPoint: u
 }) {
   let p = null;
-  p = o.id && o.plugin_publishers && uF(o).id ? jsx(tM, {
+  p = o.id && o.plugin_publishers && getPluginVersion(o).id ? jsx(tM, {
     allowedTabs: d,
     closePluginPublishModal: c,
     contacts: e,
@@ -1288,7 +1288,7 @@ function tW({
         roleToPublishAs: t,
         setRoleToPublishAs: i,
         orgToPublishTo: e,
-        disabled: !e || s || a && t === Lu.PUBLIC
+        disabled: !e || s || a && t === PublisherType.PUBLIC
       }), jsx(tY, {
         publishedPlugin: n,
         roleToPublishAs: t
@@ -1313,19 +1313,19 @@ function tK({
         className: "plugin_publish_role_to_publish_as--roleToPublishAsRadioOptions--seiRG",
         children: [jsx(_$$c, {
           readonly: n || void 0,
-          value: Lu.ORG,
-          label: jsx(_$$J, {
+          value: PublisherType.ORG,
+          label: jsx(Label, {
             children: i.name
           })
         }), jsx(_$$c, {
           readonly: n || void 0,
-          value: Lu.PUBLIC,
-          label: jsx(_$$J, {
+          value: PublisherType.PUBLIC,
+          label: jsx(Label, {
             children: renderI18nText("community.community")
           })
         })]
       })
-    }), e === Lu.ORG ? jsx(_$$A1, {
+    }), e === PublisherType.ORG ? jsx(_$$A1, {
       iconSrc: _$$A11,
       children: renderI18nText("community.publishing.private_only_people_at_org_entity", {
         orgName: i.name
@@ -1354,8 +1354,8 @@ function tY({
   let i;
   let n = e.roles;
   let a = e.is_widget;
-  if (Ul(e) || t === Lu.ORG) return null;
-  if (null != n.org && t === Lu.PUBLIC) i = jsx(_$$E, {
+  if (Ul(e) || t === PublisherType.ORG) return null;
+  if (null != n.org && t === PublisherType.PUBLIC) i = jsx(_$$E, {
     children: renderI18nText(a ? "community.publishing.figma_reviews_all_resources_published_to_community_org_private.widget" : "community.publishing.figma_reviews_all_resources_published_to_community_org_private.plugin", {
       orgName: n.org.name
     })
@@ -1615,7 +1615,7 @@ function iu({
             resource: s,
             roleToPublishAs: o,
             isPaid: l
-          }), o === Lu.PUBLIC && !p && jsx(_$$A22, {
+          }), o === PublisherType.PUBLIC && !p && jsx(_$$A22, {
             onClick: () => m(!0)
           })]
         }) : jsx(_$$A19, {
@@ -1626,7 +1626,7 @@ function iu({
           dataTestId: "plugin-publish-creator-publisher"
         })
       })
-    }), o === Lu.PUBLIC && jsx(Fragment, {
+    }), o === PublisherType.PUBLIC && jsx(Fragment, {
       children: p && jsx(_$$A6, {
         label: getI18nString("community.publishing.cocreators"),
         children: jsx(il, {
@@ -1979,8 +1979,8 @@ class iW extends Component {
           hasSucceededToPublish: e.code === aP.SUCCESS,
           timeSpentInModal: this.getTimeSinceComponentDidMount()
         });
-        this.props.dispatch(Lo());
-        let i = _$$T();
+        this.props.dispatch(popModalStack());
+        let i = getFullscreenViewEditorType();
         i && _$$s2({
           initialX: 0,
           initialY: 0,
@@ -1998,7 +1998,7 @@ class iW extends Component {
         version: r?.formVersion,
         questions: r?.responses
       })) {
-        this.props.dispatch(_$$to({
+        this.props.dispatch(showModalHandler({
           type: eF,
           data: {
             isWidget: this.isWidget(),
@@ -2092,7 +2092,7 @@ class iW extends Component {
       } = this.props.publishingState;
       return status.code === aP.FAILURE && status.error.includes("invalid word");
     };
-    this.isPrivateResource = () => this.state.roleToPublishAs === Lu.ORG && !!this.getOrgToPublishTo();
+    this.isPrivateResource = () => this.state.roleToPublishAs === PublisherType.ORG && !!this.getOrgToPublishTo();
     this.onTagsChanged = e => {
       this.props.dispatch(fy({
         id: this.getLocalFileIdOrPluginId(),
@@ -2187,7 +2187,7 @@ class iW extends Component {
         this.doPublish();
         return;
       }
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: tl,
         data: {
           usersToRemove: e.fail,
@@ -2232,7 +2232,7 @@ class iW extends Component {
       }
       let n = UU(this.props.permissionsState, this.props.publishedPlugin, !1);
       let r = of(this.props.permissionsState, this.props.publishedPlugin);
-      this.authorWillChange() && r && !n.some(e => f7(e, r)) ? this.props.dispatch(_$$to({
+      this.authorWillChange() && r && !n.some(e => f7(e, r)) ? this.props.dispatch(showModalHandler({
         type: to,
         data: {
           prevProfileName: this.props.publishedPlugin.publisher.name,
@@ -2369,10 +2369,10 @@ class iW extends Component {
       this.props.validPluginId || reportError(_$$e.COMMUNITY, Error("validPluginId is undefined but should have been validated already"));
       let n = this.props.validPluginId ?? "";
       this.submitSecurityForm();
-      let r = _$$tH(this.getOrgToPublishTo(), this.state.roleToPublishAs);
+      let r = getPublishingRole(this.getOrgToPublishTo(), this.state.roleToPublishAs);
       if (null == r) return;
       let a = !e.blockPublishingOnToS;
-      let s = EY(this.props.publishedPlugin, r);
+      let s = hasRoleOrOrgChanged(this.props.publishedPlugin, r);
       let o = Dd(this.props.publishedPlugin, this.props.user.id) || this.props.isRepublishingUnpublishedPlugin;
       s && o && this.props.dispatch(zn({
         pluginId: n,
@@ -2380,7 +2380,7 @@ class iW extends Component {
         agreedToTos: a,
         isWidget: this.isWidget()
       }));
-      let l = this.state.roleToPublishAs === Lu.PUBLIC ? t.map(e => e.id) : [];
+      let l = this.state.roleToPublishAs === PublisherType.PUBLIC ? t.map(e => e.id) : [];
       this.props.dispatch(R8({
         pluginId: n,
         ...(i ? {
@@ -2423,7 +2423,7 @@ class iW extends Component {
       if ("org_id" in author) return author.org_id;
       if ("team_id" in author) return this.props.teams[author.team_id]?.org_id || void 0;
       {
-        let e = _$$tH(this.getOrgToPublishTo(), this.state.roleToPublishAs);
+        let e = getPublishingRole(this.getOrgToPublishTo(), this.state.roleToPublishAs);
         return e?.org?.id || void 0;
       }
     };
@@ -2483,9 +2483,9 @@ class iW extends Component {
         }
       }));
     };
-    this.getLocalFileIdOrPluginId = () => _$$Mi(this.props.publishedPlugin, this.props.localPlugin);
-    this.getPluginManifest = () => this.props.localPlugin ? this.props.localPlugin.manifest : uF(this.props.publishedPlugin).manifest;
-    this.getOrgToPublishTo = () => u0(this.props.publishedPlugin, this.props.currentOrg, this.props.isCurrentOrgMember);
+    this.getLocalFileIdOrPluginId = () => getLocalFileId(this.props.publishedPlugin, this.props.localPlugin);
+    this.getPluginManifest = () => this.props.localPlugin ? this.props.localPlugin.manifest : getPluginVersion(this.props.publishedPlugin).manifest;
+    this.getOrgToPublishTo = () => getOrgRole(this.props.publishedPlugin, this.props.currentOrg, this.props.isCurrentOrgMember);
     this.isFirstTimePublish = () => 0 === Object.keys(this.props.publishedPlugin.versions).length;
     this.isPrimaryOwner = () => {
       if (this.isFirstTimePublish()) return !0;
@@ -2495,7 +2495,7 @@ class iW extends Component {
     };
     this.isPaidResource = () => !!this.props.publishedPlugin.monetized_resource_metadata;
     this.getLastPublishedAtDateString = () => {
-      let e = uF(this.props.publishedPlugin);
+      let e = getPluginVersion(this.props.publishedPlugin);
       return new Intl.DateTimeFormat("en-US", {
         month: "short",
         day: "numeric",
@@ -2557,7 +2557,7 @@ class iW extends Component {
       }));
     };
     this.onPlaygroundFileClick = () => {
-      this.props.dispatch(_$$to({
+      this.props.dispatch(showModalHandler({
         type: _$$$2,
         data: {
           pluginId: this.getLocalFileIdOrPluginId(),
@@ -2683,7 +2683,7 @@ class iW extends Component {
     this.authorWillChange = () => this.props.publishedPlugin.id && Object.keys(this.props.publishedPlugin.versions).length > 0 && !this.isAuthorSame(this.props.publishingState);
     this.existingPluginPublishersPermissions = async () => {
       let e = this.props.publishingState.metadata.author;
-      let t = _$$tH(this.getOrgToPublishTo(), this.state.roleToPublishAs);
+      let t = getPublishingRole(this.getOrgToPublishTo(), this.state.roleToPublishAs);
       if (!this.authorWillChange() || !("team_id" in e || "org_id" in e) || t && !t.is_public) return;
       let i = this.isWidget() ? {
         ...e,
@@ -2713,7 +2713,7 @@ class iW extends Component {
     };
     this.getSuccessScreenText = e => {
       let t = this.props.publishedPlugin;
-      let i = uF(t);
+      let i = getPluginVersion(t);
       let n = t.roles;
       let a = AC(this.props.publishedPlugin);
       let s = this.resourceType();
@@ -2913,7 +2913,7 @@ class iW extends Component {
   }
   async componentDidMount() {
     this.componentDidMountTime = Date.now();
-    this.props.publishedPlugin.id && uF(this.props.publishedPlugin).id && YQ({
+    this.props.publishedPlugin.id && getPluginVersion(this.props.publishedPlugin).id && YQ({
       id: zK
     });
     this.footerErrorRef.current && this.setState({
@@ -2940,7 +2940,7 @@ class iW extends Component {
   }
   isPublishingLegoPlugin() {
     let e = this.props.localPlugin ?? this.getCurrentPublishedPluginVersion();
-    return !!(e && M5(e));
+    return !!(e && isDevModePlugin(e));
   }
   getFormErrors(e, t = {}) {
     e || (e = this.state.showingDeferredFieldErrors);
@@ -2951,23 +2951,23 @@ class iW extends Component {
     } = this.props.publishingState;
     i = {
       ...i,
-      ...SW(this.props.user, status, this.isWidget(), !this.props.localPlugin)
+      ...getPublishingErrors(this.props.user, status, this.isWidget(), !this.props.localPlugin)
     };
     metadata.widgetSnapshotImageError && (i.widgetSnapshotImageError = getI18nString("community.publishing.error_please_upload_with_transparent_background"));
     i.manifest || this.props.validPluginId || (i.id = getI18nString("community.publishing.error_id_identifier_is_invalid"));
     e && (i = {
       ...i,
-      ..._$$ZB(metadata, this.getPluginManifest(), this.isWidget(), this.props.publishedPlugin)
+      ...validatePublishingData(metadata, this.getPluginManifest(), this.isWidget(), this.props.publishedPlugin)
     });
     let a = this.props.localPlugin?.manifest;
     a?.enableProposedApi && (i.usesProposedApi = this.resourceType() === bD.PLUGIN ? getI18nString("community.publishing.cannot_publish_using_enableProposedApi.plugin") : getI18nString("community.publishing.cannot_publish_using_enableProposedApi.widget"));
     (!this.canUserSellPluginOnCmty() || !this.props.user.stripe_account_status) && a?.permissions?.includes("payments") && (i.notApprovedSeller = getI18nString("community.publishing.cannot_use_payments_api_if_non_approved"));
-    this.isPublishingLegoPlugin() && this.props.localPlugin?.manifest.editorType?.includes(FW.INSPECT) && (i.lego = getI18nString("community.publishing.cannot_publish_with_inspect_editor_type"));
+    this.isPublishingLegoPlugin() && this.props.localPlugin?.manifest.editorType?.includes(ManifestEditorType.INSPECT) && (i.lego = getI18nString("community.publishing.cannot_publish_with_inspect_editor_type"));
     $i(a) && (a?.containsWidget || this.isFirstTimePublish()) && (i.incrementalMode = getI18nString("community.publishing.cannot_publish_without_document_access"));
     !this.state.optedOutOfSecurityForm && UR(this.state.localSecurityFormResponse, this.props.existingSecurityFormResponse) > 0 && (i.securityForm = getI18nString("community.publishing.data_security.errors"));
     return {
       ...i,
-      ...$H(metadata),
+      ...validatePublishingDataLengths(metadata),
       ...t
     };
   }
@@ -3010,13 +3010,13 @@ class iW extends Component {
               children: [jsx(_$$c, {
                 value: hE.ONE_TIME,
                 readonly: !!i || !n || void 0,
-                label: jsx(_$$J, {
+                label: jsx(Label, {
                   children: renderI18nText("community.seller.one_time_payment")
                 })
               }), jsx(_$$c, {
                 value: hE.SUBSCRIPTION,
                 readonly: !!i || !n || void 0,
-                label: jsx(_$$J, {
+                label: jsx(Label, {
                   children: renderI18nText("community.seller.monthly_subscription")
                 })
               })]
@@ -3191,7 +3191,7 @@ class iW extends Component {
           validPluginId: this.props.validPluginId,
           resourceType: this.resourceType(),
           updatePluginPublishingMetadata: this.updatePluginPublishingMetadata
-        }), this.state.roleToPublishAs === Lu.PUBLIC && jsx(_$$A23, {
+        }), this.state.roleToPublishAs === PublisherType.PUBLIC && jsx(_$$A23, {
           isCommentsEnabled: !this.props.commentsDisabled,
           onChange: this.onCommentsSettingChange
         }), !this.isPrivateResource() && jsx(_$$A28, {
@@ -3305,9 +3305,9 @@ class iW extends Component {
   }
   getReviewStatus() {
     switch (this.state.roleToPublishAs) {
-      case Lu.ORG:
+      case PublisherType.ORG:
         return "none";
-      case Lu.PUBLIC:
+      case PublisherType.PUBLIC:
         if (Ul(this.props.publishedPlugin)) return "approved";
         if (AC(this.props.publishedPlugin)) return "pending";
         return "required";
@@ -3334,7 +3334,7 @@ class iW extends Component {
       let o = AC(publishedPlugin) || Ul(publishedPlugin);
       let l = _$$D2.Step.INFO;
       o && (profile?.public_at || (l = _$$D2.Step.USER_PUBLISH_FLOW), profile && ("org_id" in profile && profile.org_id || "team_id" in profile && profile.team_id) && (l = _$$D2.Step.TEAM_ORG_POST_PUBLISH_FLOW));
-      let d = _$$Mi(publishedPlugin, localPlugin);
+      let d = getLocalFileId(publishedPlugin, localPlugin);
       d ? (this.postFormFlow = !0, e = jsx(i$, {
         plugin: publishedPlugin,
         publisher: profile,
@@ -3359,7 +3359,7 @@ class iW extends Component {
       publishedPlugin: this.props.publishedPlugin,
       userIsAdmin: this.props.isAdminOfPrivateOrgPlugin
     });else if (this.state.activeTab === KM.DATA_SECURITY) {
-      let t = Tk(this.props.unpublishedPlugins, this.props.unpublishedWidgets, this.props.localPlugin);
+      let t = getPublishedResourceOrNull(this.props.unpublishedPlugins, this.props.unpublishedWidgets, this.props.localPlugin);
       e = jsx(_$$A4, {
         localSecurityFormResponse: this.state.localSecurityFormResponse,
         setSecurityFormResponse: this.setSecurityFormResponse,
@@ -3434,13 +3434,13 @@ let iY = connect((e, t) => {
     publishedPlugins,
     publishedWidgets
   } = e;
-  let d = CB(publishedPlugins, publishedWidgets, s, publishedPluginId);
-  let c = Tk(unpublishedPlugins, unpublishedWidgets, s);
+  let d = getPublishedResource(publishedPlugins, publishedWidgets, s, publishedPluginId);
+  let c = getPublishedResourceOrNull(unpublishedPlugins, unpublishedWidgets, s);
   let u = d.id ? d.id : c?.id;
   let p = localFileId && e.publishingPlugins[localFileId] || e.publishingPlugins[d.id];
   localFileId && !p?.metadata && (p = {
     status: oH(p),
-    metadata: mI({
+    metadata: getPublishingData({
       ...getPermissionsState(e),
       localPlugins: e.localPlugins,
       publishedPlugins,
@@ -3471,7 +3471,7 @@ let iY = connect((e, t) => {
     isRepublishingUnpublishedPlugin: !d.id && !!c
   };
 })(iW);
-let $$iq0 = Ju(function (e) {
+let $$iq0 = registerModal(function (e) {
   let {
     Sprig
   } = useSprigWithSampling();
@@ -3492,7 +3492,7 @@ let $$iq0 = Ju(function (e) {
     unpublishedWidgets: s ?? void 0,
     existingSecurityFormResponse: l.data
   }) : jsx(kt, {});
-}, "PluginPublishModal", ZU.YES);
+}, "PluginPublishModal", ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalPostFormFlow = function (e) {
   let t = useDispatch();
   let i = Pc();
@@ -3510,7 +3510,7 @@ let $$iq0 = Ju(function (e) {
     initialStep: e.initialStep
   });
   let c = () => {
-    t(Ce());
+    t(hideModal());
     t(Ij({
       id: e.localFileIdOrPluginId
     }));

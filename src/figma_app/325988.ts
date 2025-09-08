@@ -1,4 +1,4 @@
-import { UNF, mSn } from "../figma_app/763686";
+import { NodeTsApi, SceneGraphTsApi } from "../figma_app/763686";
 import { SceneGraphUnavailableError, NodeTsApiUnavailableError } from "../figma_app/518682";
 export function $$a0(e) {
   let t = e;
@@ -7,15 +7,15 @@ export function $$a0(e) {
 }
 export function $$s1(e, t, r) {
   if (!e) return null;
-  if (!UNF) throw new SceneGraphUnavailableError();
-  if (!mSn) throw new NodeTsApiUnavailableError();
+  if (!NodeTsApi) throw new SceneGraphUnavailableError();
+  if (!SceneGraphTsApi) throw new NodeTsApiUnavailableError();
   let a = t.symbolId;
   if (a) {
     let t = r.get(a);
     if (t) {
       let n = r.get(t.containingStateGroupId);
       if (n) {
-        let t = n.childrenNodes.find((t) => t.componentKey === e);
+        let t = n.childrenNodes.find(t => t.componentKey === e);
         if (t) return t;
       }
     }

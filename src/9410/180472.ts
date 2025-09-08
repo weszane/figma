@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect, useCallback, memo, useRef, useLayoutEffec
 import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { A } from "../905/251970";
-import { ofk, W8Y } from "../figma_app/763686";
+import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686";
 import { x as _$$x } from "../vendor/194682";
 import { P as _$$P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
@@ -99,7 +99,7 @@ function P({
   let b = i ? "selected" : m || a ? "hovered" : s ? "dimmed" : "default";
   let C = "selected" === b || "hovered" === b;
   useEffect(() => {
-    C && !g ? (ofk.setVoteStampsHiddenOnVotedNode(e.guid, !0), _(!0)) : !C && g && (ofk.setVoteStampsHiddenOnVotedNode(e.guid, !1), _(!1));
+    C && !g ? (WhiteboardVotingCppBindings.setVoteStampsHiddenOnVotedNode(e.guid, !0), _(!0)) : !C && g && (WhiteboardVotingCppBindings.setVoteStampsHiddenOnVotedNode(e.guid, !1), _(!1));
   }, [C, g, e.guid]);
   return jsx(I, {
     nodePosition: c,
@@ -612,7 +612,7 @@ export function $$V1({
     children: e.map(e => {
       let n = h[e.guid];
       if (!n) return null;
-      let a = 1 === c.size && c.has(e.guid) && t === W8Y.ENDED;
+      let a = 1 === c.size && c.has(e.guid) && t === SessionStatus.ENDED;
       return jsx(P, {
         currentUserId: s,
         deselectPin: p,

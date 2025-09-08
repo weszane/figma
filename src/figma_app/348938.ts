@@ -1,8 +1,8 @@
 import { debug } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { k } from "../905/749197";
-import { Egt, KjJ } from "../figma_app/763686";
-import { F } from "../905/266460";
+import { SceneGraphHelpers, ScrollBehavior } from "../figma_app/763686";
+import { isSpecialNodeType } from "../905/266460";
 import { MT } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
@@ -74,7 +74,7 @@ export class $$f3 {
           let d = this.getNode(n);
           if (!d) continue;
           let c = d.mask;
-          let u = s && (c || F(d.type) && !d.resizeToFit && !d.frameMaskDisabled || a.length - t === i);
+          let u = s && (c || isSpecialNodeType(d.type) && !d.resizeToFit && !d.frameMaskDisabled || a.length - t === i);
           u && (s = !1);
           c && (s = d.visible);
           u && !l && (this.maskInfos[a[a.length - t]].isLastMaskedAtLevels += `[${e}]`);
@@ -199,7 +199,7 @@ export function $$S2(e) {
           pathFromRoot
         } = r;
         let m = t.sceneGraph.get(nodeGuid);
-        if (!m || "SECTION_OVERLAY" === m.type && !t.showImmutableFrameSublayers || m.isCodeComponent || m.isCodeFile || m.isCodeLibrary || Egt && Egt.isGhostNodeSubtree(m.guid) && getFeatureFlags().ce_al_perf_reparent_to_tlf) return;
+        if (!m || "SECTION_OVERLAY" === m.type && !t.showImmutableFrameSublayers || m.isCodeComponent || m.isCodeFile || m.isCodeLibrary || SceneGraphHelpers && SceneGraphHelpers.isGhostNodeSubtree(m.guid) && getFeatureFlags().ce_al_perf_reparent_to_tlf) return;
         m.mask && t.maskGuids.push(m.guid);
         let f = null;
         if (t.allRowData.length > 0) {
@@ -248,7 +248,7 @@ export function $$S2(e) {
           let c = "SYMBOL" === r.type || n.opts.isDescendantOfSymbol;
           let u = ("INSTANCE" === r.type || n.opts.isDescendantOfInstanceExcludingSlotSublayers) && !r.isSlotReactive;
           let p = "MODULE" === r.type || n.opts.isDescendantOfModule;
-          let _ = T(t, KjJ.FIXED, n.indentLevel + 1, c, u, p);
+          let _ = T(t, ScrollBehavior.FIXED, n.indentLevel + 1, c, u, p);
           l.filter(({
             scrollBehavior: e
           }) => "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" === e).forEach(({
@@ -257,7 +257,7 @@ export function $$S2(e) {
             e(t, b(r, l.map(e => e.node.guid), n, i, o));
           });
           let h = t.top;
-          let m = T(t, KjJ.SCROLLS, n.indentLevel + 1, c, u, p);
+          let m = T(t, ScrollBehavior.SCROLLS, n.indentLevel + 1, c, u, p);
           l.filter(({
             scrollBehavior: e
           }) => "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME" !== e).forEach(({

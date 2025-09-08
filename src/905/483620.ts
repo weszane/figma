@@ -3,7 +3,7 @@ import { useRef, useEffect, useCallback } from "react";
 import { lQ } from "../905/934246";
 import { AF, v_, iQ } from "../figma_app/806412";
 import { L as _$$L } from "../905/408237";
-import { J } from "../905/633914";
+import { useSyncedRef } from "../905/633914";
 import { v as _$$v } from "../905/318279";
 import { ks } from "../figma_app/626177";
 var $$u1 = (e => (e[e.CELL = 0] = "CELL", e[e.FORM = 1] = "FORM", e))($$u1 || {});
@@ -29,7 +29,7 @@ export function $$p0({
 }) {
   let w = useRef(null);
   let C = useRef(!1);
-  let [T, k, R] = J(_);
+  let [T, k, R] = useSyncedRef(_);
   useEffect(() => {
     R(_);
   }, [_, R]);

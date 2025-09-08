@@ -1,4 +1,4 @@
-import { vh, YV } from "../figma_app/181241";
+import { createNoOpValidator, createMetaValidator } from "../figma_app/181241";
 import { ar } from "../figma_app/934005";
 import { P } from "../905/242077";
 import { z } from "../905/239603";
@@ -25,16 +25,16 @@ let l = z.object({
 });
 let $$d0 = new class {
   constructor() {
-    this.UpdateUpgradeApprovalSettingsValidator = vh();
-    this.PlanInvoicesValidator = YV("PlanInvoicesValidator", e => e.object({
+    this.UpdateUpgradeApprovalSettingsValidator = createNoOpValidator();
+    this.PlanInvoicesValidator = createMetaValidator("PlanInvoicesValidator", e => e.object({
       invoices: ar.array()
     }), null);
-    this.TransferAdminsSchemaValidator = vh();
-    this.EligibleUpgradeDataSchemaValidator = YV("EligibleUpgradeDataSchemaValidator", e => e.object({
+    this.TransferAdminsSchemaValidator = createNoOpValidator();
+    this.EligibleUpgradeDataSchemaValidator = createMetaValidator("EligibleUpgradeDataSchemaValidator", e => e.object({
       eligible_team_users: e.array(P)
     }), null, !1);
-    this.ValidatePaymentSchemaValidator = YV("ValidatePaymentSchemaValidator", e => e.$$void(), null, !1);
-    this.SavedPaymentMethodSchemaValidator = YV("SavedPaymentMethodSchemaValidator", e => e.object({
+    this.ValidatePaymentSchemaValidator = createMetaValidator("ValidatePaymentSchemaValidator", e => e.$$void(), null, !1);
+    this.SavedPaymentMethodSchemaValidator = createMetaValidator("SavedPaymentMethodSchemaValidator", e => e.object({
       payment_methods: e.array(l)
     }), null, !1);
   }

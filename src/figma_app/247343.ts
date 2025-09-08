@@ -1,15 +1,15 @@
-import { c as _$$c, r as _$$r } from "../905/676456";
+import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { j } from "../905/869261";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { FPlanRestrictionType } from "../figma_app/191312";
 import { j4 } from "../905/814802";
-import { nF, MM } from "../905/350402";
+import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { yJ } from "../905/584989";
-nF((e, {
+createOptimistThunk((e, {
   members: t,
   team: r,
   teamUsers: n,
@@ -19,7 +19,7 @@ nF((e, {
   entryPoint: _,
   showModalsBeneath: m = !1
 }) => {
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: j(),
     data: {
       onConfirm: () => {
@@ -62,7 +62,7 @@ nF((e, {
     showModalsBeneath: m
   }));
 });
-export let $$h0 = MM("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", async (e, {
+export let $$h0 = createOptimistAction("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", async (e, {
   teamId: t,
   teamUsers: r,
   usersWithNoTeamUserIds: o,
@@ -87,13 +87,13 @@ export let $$h0 = MM("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", async (e, {
     }).then(function ({
       data: r
     }) {
-      e.dispatch(_$$c(h));
+      e.dispatch(createOptimistCommitAction(h));
       e.dispatch(yJ({
         teamUsers: r.meta,
         teamId: t
       }));
     }).catch(function (t) {
-      e.dispatch(_$$r(h));
+      e.dispatch(createOptimistRevertAction(h));
       let r = getI18nString("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
       e.dispatch(_$$s.error(r));
       console.error(t);

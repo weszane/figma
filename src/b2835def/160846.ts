@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { rXF, plo, WXh, rrT, ibQ, FAf, lyf, Ez5, NLJ, Oin } from "../figma_app/763686";
+import { VariableResolvedDataType, DistributionType, VisibilityCondition, NodePropertyCategory, ItemType, DesignWorkspace, ViewType, AppStateTsApi, DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
@@ -9,7 +9,7 @@ import { T as _$$T } from "../905/858738";
 import { s6, KH, p8 } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { W as _$$W } from "../441/503702";
-import { ut } from "../figma_app/84367";
+import { getObservableValue } from "../figma_app/84367";
 import { Lk } from "../figma_app/122682";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/99004";
@@ -53,7 +53,7 @@ import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { zp } from "../figma_app/740025";
 import { Ku } from "../figma_app/740163";
-import { hS, BI as _$$BI, gl, E7, _W } from "../905/216495";
+import { isValidValue, getCommonFromArray, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { Em, rC } from "../figma_app/385874";
 import { Gt, A5, kl, fC, pw, DQ } from "../905/275640";
 import { Um } from "../905/848862";
@@ -111,7 +111,7 @@ import { M as _$$M } from "../figma_app/339170";
 import { AS, n4 } from "../figma_app/709323";
 import { k as _$$k2 } from "../905/582200";
 import { Vi, GI } from "../905/125333";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { b as _$$b4 } from "../figma_app/755529";
 import { q5 } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
@@ -126,7 +126,7 @@ import { W as _$$W3 } from "../905/63398";
 import { Y as _$$Y } from "../905/701291";
 import { a as _$$a2 } from "../905/612746";
 import { n as _$$n2 } from "../905/540741";
-import { Hr, sH } from "../905/871411";
+import { defaultSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { W3 } from "../905/232641";
 import { zk } from "../figma_app/198712";
 import { i as _$$i3 } from "../905/382332";
@@ -232,7 +232,7 @@ let e9 = memo(function (e) {
       })
     }), jsx(DE, {
       input: jsx(sA, {
-        currentFieldValue: hS(opacity) ? opacity : void 0,
+        currentFieldValue: isValidValue(opacity) ? opacity : void 0,
         disabled: !1,
         fields: qP,
         fullHeight: !0,
@@ -241,7 +241,7 @@ let e9 = memo(function (e) {
         inputRef: opacityInputRef,
         noBorder: !0,
         recordingKey: Pt(e, "layerOpacityInputWrapper"),
-        resolvedType: rXF.FLOAT,
+        resolvedType: VariableResolvedDataType.FLOAT,
         children: jsx(AS, {
           ariaLabel: getI18nString("fullscreen.properties_panel.section_appearance.label_opacity"),
           dataTooltip: getI18nString("fullscreen.properties_panel.section_appearance.label_opacity"),
@@ -311,7 +311,7 @@ function tS(e) {
   Gx();
   let t = Bu();
   let i = Gt("strokeBrushGuid");
-  let n = _$$BI(i);
+  let n = getCommonFromArray(i);
   let s = A5("strokeBrushGuid");
   let o = A5("scatterStrokeSettings");
   let d = Kt();
@@ -324,7 +324,7 @@ function tS(e) {
       }),
       icon: jsx(_$$K4, {
         onClick: () => {
-          s(Hr);
+          s(defaultSessionLocalID);
         },
         "aria-label": getI18nString("fullscreen.properties_panel.remove"),
         children: jsx(_$$f2, {})
@@ -333,10 +333,10 @@ function tS(e) {
       input: jsx(_$$i3, {
         brushList: t,
         onChange: (e, t) => {
-          let i = sH(e.guid);
-          i && (e.type === plo.SCATTER && o(e.settings, zk.NO), s(i, t));
+          let i = parseSessionLocalID(e.guid);
+          i && (e.type === DistributionType.SCATTER && o(e.settings, zk.NO), s(i, t));
         },
-        value: n ?? Hr,
+        value: n ?? defaultSessionLocalID,
         brushInputClassName: "illustration_stroke_panel--brushInputButton--r86UG",
         recordingKey: Pt(e.recordingKey, "brushDropdown"),
         positioningProps: {
@@ -348,10 +348,10 @@ function tS(e) {
         }
       }),
       label: null,
-      icon: d === plo.STRETCH ? jsx(tk, {
+      icon: d === DistributionType.STRETCH ? jsx(tk, {
         defaultStyleAtom: e.defaultStyleAtom
       }) : null
-    }), d === plo.SCATTER && jsx(tC, {
+    }), d === DistributionType.SCATTER && jsx(tC, {
       defaultStyleAtom: e.defaultStyleAtom,
       recordingKey: Pt(e.recordingKey, "scatterBrushSettings")
     })]
@@ -558,8 +558,8 @@ function tM(e) {
   let S = zr();
   let k = CL();
   let E = kl("strokePaints");
-  let C = E && (gl(E) || E.length > 0);
-  let A = E7(_$$b4("guid"));
+  let C = E && (isInvalidValue(E) || E.length > 0);
+  let A = normalizeValue(_$$b4("guid"));
   let I = yT({
     styleType: "FILL",
     inheritStyleKeyField: "inheritFillStyleKeyForStroke",
@@ -600,16 +600,16 @@ function tM(e) {
             }));
           },
           onChange: (e, t, i, r) => {
-            Y5.updateSelectionProperties({
+            fullscreenValue.updateSelectionProperties({
               strokePaints: e
             }, {
               shouldCommit: t,
-              overwrite: r ?? WXh.ONLY_WHEN_NOT_EMPTY
+              overwrite: r ?? VisibilityCondition.ONLY_WHEN_NOT_EMPTY
             });
           },
           pickerInStyleCreationShown: b,
           recordingKey: Pt(e, "paintList"),
-          selectedPropertyType: rrT.STROKE,
+          selectedPropertyType: NodePropertyCategory.STROKE,
           variableScopes: z1,
           ...I,
           defaultColor: Em,
@@ -679,7 +679,7 @@ function tP({
   if ((isEmptyObject(p) || Object.keys(p).every(e => !p[parseInt(e)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && logError("PropertiesPanel", "Rendering illustration tab with no shownPropertiesPanels", {
     isEmpty: isEmptyObject(p),
     shouldRenderInspectTab: n
-  }), p[ibQ.FRAME_PRESETS]) return jsx(_$$i, {
+  }), p[ItemType.FRAME_PRESETS]) return jsx(_$$i, {
     children: jsx(VF, {
       isVisible: !0,
       children: () => jsx(_$$nl, {
@@ -687,10 +687,10 @@ function tP({
       }, "frame-presets")
     })
   });
-  let K = d || D || _$$tV(p, stateGroupSelectionInfo) || p[ibQ.COMPONENT_ITEM] || M0(p);
+  let K = d || D || _$$tV(p, stateGroupSelectionInfo) || p[ItemType.COMPONENT_ITEM] || M0(p);
   return jsxs(_$$i, {
     children: [jsx(eN, {
-      panelsShown: p[ibQ.EFFECTS_ITEM] ?? !1
+      panelsShown: p[ItemType.EFFECTS_ITEM] ?? !1
     }), jsx(_i, {
       recordingKey: "toolbarView",
       shouldShowComponentPropertiesPanel: _$$tV(p, stateGroupSelectionInfo),
@@ -699,7 +699,7 @@ function tP({
       shouldShowVectorOperationPanel: d,
       shouldShowTransformModifiersPanel: D
     }), getFeatureFlags().react_scenegraph && jsx(VF, {
-      isVisible: p[ibQ.JSX_ITEM],
+      isVisible: p[ItemType.JSX_ITEM],
       children: () => jsx(_$$_3, {})
     }), jsx(VF, {
       isVisible: d,
@@ -716,7 +716,7 @@ function tP({
         recordingKey: "propsPanel"
       }, "componentProperties")
     }), jsx(VF, {
-      isVisible: p[ibQ.COMPONENT_ITEM],
+      isVisible: p[ItemType.COMPONENT_ITEM],
       children: () => jsx(_$$c2, {
         recordingKey: "componentPanel"
       }, "component")
@@ -726,17 +726,17 @@ function tP({
         recordingKey: "instancePanel"
       }, "instance")
     }), jsx(VF, {
-      isVisible: d6(p) || p[ibQ.TRANSFORM_ITEM],
+      isVisible: d6(p) || p[ItemType.TRANSFORM_ITEM],
       children: () => jsx(zq, {
         recordingKey: "transformPanel",
         propertiesPanelState: a,
         openFileKey: w?.key || null,
         canEditConstraints: GG(p),
-        onlyShowXYInputsRow: a === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && hS(areOnlyResponsiveSetsSelected)) ?? !1),
+        onlyShowXYInputsRow: a === GR.DEFAULT_SIMPLIFIED || ((areOnlyResponsiveSetsSelected && isValidValue(areOnlyResponsiveSetsSelected)) ?? !1),
         topPadding: K
       }, "transform")
     }), jsx(VF, {
-      isVisible: p[ibQ.VECTOR_TRANSFORM_UNIFIED_ITEM],
+      isVisible: p[ItemType.VECTOR_TRANSFORM_UNIFIED_ITEM],
       children: () => jsx(U_, {
         recordingKey: "transformPanel",
         openFileKey: w?.key || null,
@@ -744,9 +744,9 @@ function tP({
         dropdownShown: h
       }, "vector-transform")
     }), jsx(F$, {
-      isVisible: p[ibQ.SCALE_ITEM]
+      isVisible: p[ItemType.SCALE_ITEM]
     }), jsx(VF, {
-      isVisible: p[ibQ.VECTOR_ITEM],
+      isVisible: p[ItemType.VECTOR_ITEM],
       children: () => jsx(VR, {
         isUI3: !0,
         recordingKey: "vectorTransformPanel",
@@ -754,27 +754,27 @@ function tP({
         dropdownShown: h
       }, "vector-transform")
     }), jsx(VF, {
-      isVisible: p[ibQ.MASK_ITEM],
+      isVisible: p[ItemType.MASK_ITEM],
       children: () => jsx(_$$B, {
         recordingKey: "maskPanel",
         maskType
       }, "mask")
     }), jsx(VF, {
-      isVisible: p[ibQ.LAYER_ITEM],
+      isVisible: p[ItemType.LAYER_ITEM],
       children: () => jsx(e9, {
         recordingKey: "appearancePanel"
       })
     }), jsx(VF, {
-      isVisible: p[ibQ.TYPE_ITEM],
+      isVisible: p[ItemType.TYPE_ITEM],
       children: () => jsx(gc, {}, "type")
     }), jsx(VF, {
-      isVisible: p[ibQ.CANVAS_ITEM],
+      isVisible: p[ItemType.CANVAS_ITEM],
       children: () => jsx(_$$v2, {
         colorFormat: u,
         defaultColor: rC,
         dispatch: t,
         dropdownShown: h,
-        hasExports: !!C && _W(C, []).length > 0,
+        hasExports: !!C && valueOrFallback(C, []).length > 0,
         library: _,
         modalShown: b,
         openFile: w,
@@ -784,20 +784,20 @@ function tP({
         setDefaultToolOnPickerOpen: !0
       }, "canvas-background")
     }), jsx(VF, {
-      isVisible: p[ibQ.REMOVE_GROUP_BACKGROUND_ITEM],
+      isVisible: p[ItemType.REMOVE_GROUP_BACKGROUND_ITEM],
       children: () => jsx(_$$C, {}, "remove-group-fill-stroke")
     }), jsx(VF, {
-      isVisible: p[ibQ.FILL_ITEM],
+      isVisible: p[ItemType.FILL_ITEM],
       children: () => jsx(B8, {
         variableScopes: o
       }, "fill")
     }), jsx(VF, {
-      isVisible: p[ibQ.STROKE_ITEM],
+      isVisible: p[ItemType.STROKE_ITEM],
       children: () => jsx(tM, {
         recordingKey: "strokePanel"
       }, "stroke")
     }), jsx(VF, {
-      isVisible: p[ibQ.EFFECTS_ITEM],
+      isVisible: p[ItemType.EFFECTS_ITEM],
       children: () => jsx(w5, {}, "effects")
     }), jsx(VF, {
       isVisible: V,
@@ -821,7 +821,7 @@ function tP({
         setDefaultToolOnCreateStyle: !0
       }, "local-styles")
     }), jsx(VF, {
-      isVisible: p[ibQ.GRIDS_ITEM],
+      isVisible: p[ItemType.GRIDS_ITEM],
       children: () => jsx(_$$tC, {}, "grids")
     }), jsx(VF, {
       isVisible: P1(p, w),
@@ -862,16 +862,16 @@ function tP({
 }
 function tF() {
   S2();
-  let e = useCallback(e => e === FAf.DESIGN ? FAf.ILLUSTRATION : e, []);
+  let e = useCallback(e => e === DesignWorkspace.DESIGN ? DesignWorkspace.ILLUSTRATION : e, []);
   let t = P5({
-    defaultTab: FAf.ILLUSTRATION,
+    defaultTab: DesignWorkspace.ILLUSTRATION,
     getActiveTab: e
   });
   let i = p8("topLevelMode");
   let s = p8("isReadOnly");
-  let a = i === lyf.LAYOUT && !s && t === FAf.ILLUSTRATION;
-  let o = t === FAf.COMMENT;
-  let d = t === FAf.INSPECT;
+  let a = i === ViewType.LAYOUT && !s && t === DesignWorkspace.ILLUSTRATION;
+  let o = t === DesignWorkspace.COMMENT;
+  let d = t === DesignWorkspace.INSPECT;
   let u = null;
   return jsxs(_$$j, {
     recordingKey: "illustrationPropertiesPanel",
@@ -900,7 +900,7 @@ let tz = memo(({
 }) => {
   let t = useSelector(e => e.progressBarState);
   let i = p8("loadingEmbeds");
-  let k = ut(Ez5?.uiState().showCanvasSearch, !1);
+  let k = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let A = Lk();
   let U = useRef(null);
   let q = useSelector(e => e.openFile);
@@ -929,7 +929,7 @@ let tz = memo(({
     let {
       Sprig
     } = useSprigWithSampling();
-    let t = ut(Ez5?.drawToolsTrackingState().currentToolStrokeCount, 0);
+    let t = getObservableValue(AppStateTsApi?.drawToolsTrackingState().currentToolStrokeCount, 0);
     let i = useRef(!1);
     useEffect(() => {
       getFeatureFlags().ce_il_sprig_tracking && t >= 10 && !i.current && (Sprig("setAttribute", "is_freehand_user", !0), i.current = !0);
@@ -939,7 +939,7 @@ let tz = memo(({
     let {
       Sprig
     } = useSprigWithSampling();
-    let t = ut(Ez5?.drawToolsTrackingState().addedTransform, !1);
+    let t = getObservableValue(AppStateTsApi?.drawToolsTrackingState().addedTransform, !1);
     let i = useRef(!1);
     useEffect(() => {
       getFeatureFlags().ce_il_sprig_tracking && t && !i.current && (Sprig("setAttribute", "is_repeat_user", !0), i.current = !0);
@@ -949,11 +949,11 @@ let tz = memo(({
     let {
       Sprig
     } = useSprigWithSampling();
-    let t = ut(Ez5?.drawToolsTrackingState().currentTool, NLJ.NONE);
-    let i = ut(Ez5?.drawToolsTrackingState().isMultiVectorEditing, !1);
+    let t = getObservableValue(AppStateTsApi?.drawToolsTrackingState().currentTool, DesignGraphElements.NONE);
+    let i = getObservableValue(AppStateTsApi?.drawToolsTrackingState().isMultiVectorEditing, !1);
     let r = useRef(!1);
     useEffect(() => {
-      let n = [NLJ.SHAPE_BUILDER, NLJ.VECTOR_LASSO];
+      let n = [DesignGraphElements.SHAPE_BUILDER, DesignGraphElements.VECTOR_LASSO];
       getFeatureFlags().ce_il_sprig_tracking && (n.includes(t) || i) && !r.current && (Sprig("setAttribute", "is_complex_shapes_user", !0), r.current = !0);
     }, [Sprig, t, i]);
   })();
@@ -965,7 +965,7 @@ let tz = memo(({
   });
   return jsxs(_$$a, {
     children: [jsx(ED, {}), jsxs(sk, {
-      children: [t.mode !== Oin.OFF && jsx("div", {
+      children: [t.mode !== UIVisibilitySetting.OFF && jsx("div", {
         className: _q
       }), jsxs(pO, {
         initialFilterState: {

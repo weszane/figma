@@ -2,13 +2,13 @@ import { NC } from "../905/17179";
 import { logError } from "../905/714362";
 import { Sb } from "../905/359847";
 import { Qi } from "../905/172918";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { x1 as _$$x } from "../figma_app/740025";
 import { N } from "../905/696711";
 import { Ug } from "../figma_app/45218";
 import { A } from "../905/665703";
 let $$p2 = NC("COMMUNITY_SET_SHELVES_FOR_SHELF_TYPE");
-let $$_1 = nF((e, {
+let $$_1 = createOptimistThunk((e, {
   shelfType: t,
   limit: r
 }, {
@@ -39,7 +39,7 @@ let $$_1 = nF((e, {
   shelfType: e,
   limit: t
 }) => `COMMUNITY_FETCH_SHELVES_FOR_SHELF_TYPE_${e}_${t}`);
-let $$h0 = nF((e, {
+let $$h0 = createOptimistThunk((e, {
   shelfType: t,
   filterLabel: r,
   limit: n

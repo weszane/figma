@@ -1,6 +1,6 @@
 import { trackEventAnalytics } from "../905/449184";
-import { nF } from "../905/350402";
-import { Ce, to } from "../905/156213";
+import { createOptimistThunk } from "../905/350402";
+import { hideModal, showModalHandler } from "../905/156213";
 import { d1 } from "../905/766303";
 import { Z as _$$Z } from "../905/515860";
 import { canAdminTeam } from "../figma_app/642025";
@@ -8,7 +8,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
-import { X as _$$X } from "../905/128376";
+import { setupAutofocusHandler } from "../905/128376";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { p as _$$p } from "../905/185998";
@@ -25,7 +25,7 @@ import { yJ, bE } from "../figma_app/78808";
 import { bE as _$$bE } from "../905/466026";
 import { dDF } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { Ay as _$$Ay } from "../905/612521";
 import { Us } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
@@ -34,7 +34,7 @@ import { Y as _$$Y } from "../905/830372";
 import { V as _$$V } from "../905/223767";
 import { FPlanNameType } from "../figma_app/191312";
 import { w5 } from "../figma_app/345997";
-import { b as _$$b } from "../905/165519";
+import { UpsellModalType } from "../905/165519";
 import { RO, Q1, zS, xp, Xj } from "../905/472146";
 import { lQ } from "../905/934246";
 import { fu } from "../figma_app/831799";
@@ -68,7 +68,7 @@ function N(e) {
       t(bE({
         file
       }));
-      t(Ce());
+      t(hideModal());
       t(sf({
         view: "fullscreen",
         fileKey: file.key,
@@ -95,7 +95,7 @@ function N(e) {
     });
   };
   let P = hS(e);
-  let O = _$$X();
+  let O = setupAutofocusHandler();
   return jsx(bL, {
     manager: P,
     width: "sm",
@@ -121,7 +121,7 @@ function N(e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: () => {
-              t(Ce());
+              t(hideModal());
             },
             children: renderI18nText("collaboration.branching_create.cancel_button")
           }), jsx($n, {
@@ -140,7 +140,7 @@ function N(e) {
   });
 }
 N.displayName = "BranchCreateModal";
-let P = Ju(N, "BranchCreateModal");
+let P = registerModal(N, "BranchCreateModal");
 function z() {
   return jsxs("svg", {
     width: "195",
@@ -419,19 +419,19 @@ let Z = [{
   key: 3,
   elem: renderI18nText("oss_exposure_branching_upsell_modal.feature3")
 }];
-let X = Ju(function ({
+let X = registerModal(function ({
   currentTeam: e,
   canAdminCurrentTeam: t,
   trackingContextName: i
 }) {
   let n = useDispatch();
-  let r = _$$b.OSS_EXPOSURE_BRANCHING_UPSELL_MODAL;
+  let r = UpsellModalType.OSS_EXPOSURE_BRANCHING_UPSELL_MODAL;
   let s = t ? renderI18nText("oss_exposure_branching_upsell_modal.body1") : renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.body1", {
     learnMoreLink: jsx(Us, {
       href: $,
       target: "_blank",
       trusted: !0,
-      onClick: () => Ce(),
+      onClick: () => hideModal(),
       children: renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.body_link")
     })
   });
@@ -478,7 +478,7 @@ let X = Ju(function ({
     onClickPrimaryCta: t ? () => {
       let t = w5(e);
       let i = t ? RO : Q1;
-      n(to({
+      n(showModalHandler({
         type: _$$V,
         data: {
           upsellSource: r,
@@ -491,11 +491,11 @@ let X = Ju(function ({
         }
       }));
     } : () => {
-      n(Ce());
+      n(hideModal());
     },
     onClickSecondaryCta: t ? () => {
       _$$Ay.unsafeRedirect($, "_blank");
-      Ce();
+      hideModal();
     } : void 0,
     primaryCtaText: renderI18nText(t ? "oss_exposure_branching_upsell_modal.primary_cta" : "oss_exposure_branching_upsell_modal.nonadmin.cta"),
     rightPane: jsx(z, {}),
@@ -505,14 +505,14 @@ let X = Ju(function ({
     upsellSource: r
   });
 }, "OssExposureBranchingUpsellModal");
-let $$Q1 = nF((e, t, {
+let $$Q1 = createOptimistThunk((e, t, {
   liveStore: i
 }) => {
   let n = e.getState();
   let r = _$$Z(n);
   let s = canAdminTeam(r, n);
   let d = n.teams[r];
-  d && e.dispatch(to({
+  d && e.dispatch(showModalHandler({
     type: X,
     data: {
       currentTeam: d,
@@ -521,14 +521,14 @@ let $$Q1 = nF((e, t, {
     }
   }));
 });
-let $$J0 = nF(async (e, t, {
+let $$J0 = createOptimistThunk(async (e, t, {
   liveStore: i
 }) => {
   let r;
   let o = e.getState();
   if (!(r = t.sourceFileKey ? await i.fetchFile(t.sourceFileKey) : d1(o))) return;
   let l = r.source_file_key || r.key;
-  e.dispatch(to({
+  e.dispatch(showModalHandler({
     type: P,
     data: {
       sourceFileKey: l

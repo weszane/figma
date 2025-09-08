@@ -1,4 +1,4 @@
-import { Qa7 } from "../figma_app/763686";
+import { StackBindingsCpp } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
@@ -104,7 +104,7 @@ class N {
         !function e(t, r) {
           if (!t || "FRAME" !== t.type) return;
           for (let n of t.children) e(n, r);
-          let n = Qa7.getBackgroundNodeCandidatesByGUID(t.id);
+          let n = StackBindingsCpp.getBackgroundNodeCandidatesByGUID(t.id);
           if (0 === n.backgroundNodes.length) return;
           let a = r.getNodeById(n.backgroundNodes[0]);
           if (t.resize(a.width, a.height), a.absoluteBoundingBox && t.absoluteBoundingBox) {

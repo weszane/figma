@@ -11,7 +11,7 @@ import { U } from "../905/926550";
 import { J } from "../905/844906";
 import { l as _$$l } from "../905/37596";
 import { S as _$$S } from "../figma_app/11182";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { j6, fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
 import { F } from "../905/224";
@@ -57,7 +57,7 @@ export function $$w1(e) {
         });
         o && !rR(o, {
           type: sK.ADD_PROJECT
-        }) ? w(to({
+        }) ? w(showModalHandler({
           type: DV,
           data: {
             team: o,
@@ -83,7 +83,7 @@ export function $$w1(e) {
           teamId: e.teamId,
           orgId: l
         });
-        w(to({
+        w(showModalHandler({
           type: U(),
           data: {
             folder: e,
@@ -111,7 +111,7 @@ export function $$w1(e) {
           folderId: e.id,
           loadedFolders: n
         }));
-        w(to({
+        w(showModalHandler({
           type: W,
           data: {
             folderId: e.id
@@ -125,7 +125,7 @@ export function $$w1(e) {
           folderId: e.id,
           loadedFolders: n
         }));
-        w(to({
+        w(showModalHandler({
           type: J,
           data: {
             folderId: e.id
@@ -141,7 +141,7 @@ export function $$w1(e) {
       items: [{
         displayText: getI18nString("project_menu.settings"),
         onClick: () => {
-          w(to({
+          w(showModalHandler({
             type: _$$l,
             data: {
               folderId: e.id

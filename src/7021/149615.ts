@@ -15,7 +15,7 @@ import { A as _$$A } from "../905/251970";
 import x from "classnames";
 import { e6, $z } from "../figma_app/617427";
 import { j as _$$j } from "../905/261906";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { ud } from "../905/513035";
 import { Hl, YT } from "../figma_app/217457";
@@ -265,7 +265,7 @@ export function $$B0({
   });
   let f = () => {
     p.onClose();
-    h(Ce());
+    h(hideModal());
   };
   let w = hS({
     open: _,
@@ -304,7 +304,7 @@ export function $$B0({
       onBack: () => x(1),
       onSubmit: () => {
         p.onAccept();
-        h(Ce());
+        h(hideModal());
       },
       onCancel: f,
       manager: w,

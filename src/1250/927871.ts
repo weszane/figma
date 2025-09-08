@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { S } from "../905/274480";
-import { J } from "../905/270045";
+import { Checkbox } from "../905/274480";
+import { Label } from "../905/270045";
 import { J as _$$J } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
@@ -170,8 +170,8 @@ function k({
   checked: e,
   setChecked: t
 }) {
-  return jsx(S, {
-    label: jsx(J, {
+  return jsx(Checkbox, {
+    label: jsx(Label, {
       children: getI18nString("rcs.whats_new_in_figjam.show_fig_jam_updates")
     }),
     checked: e,

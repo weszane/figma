@@ -1,18 +1,18 @@
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { qE } from "../figma_app/492908";
-import { l7 } from "../905/189185";
-import { dI } from "../905/871411";
+import { clamp } from "../figma_app/492908";
+import { permissionScopeHandler } from "../905/189185";
+import { sessionLocalIDToString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { Y5 } from "../figma_app/455680";
-import { C8, oV, gl } from "../905/216495";
+import { fullscreenValue } from "../figma_app/455680";
+import { toArray, MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { zk } from "../figma_app/198712";
 import { iM, SA } from "../figma_app/405546";
 import { lN, lF, QE, F2, Ge, dg, Y4 } from "../figma_app/384713";
-let f = e => !!e && e !== dI(lN.strokeBrushGuid);
+let f = e => !!e && e !== sessionLocalIDToString(lN.strokeBrushGuid);
 let E = e => {
   let {
     frequency,
@@ -22,21 +22,21 @@ let E = e => {
   return !(("frequency" in e ? e.frequency === frequency : "interval" in e ? e.interval === frequency : throwTypeError) && e.wiggle === wiggle && e.smoothen === smoothen);
 };
 export function $$y1() {
-  let e = C8(Gt("strokeBrushGuid"));
-  let t = C8(Gt("dynamicStrokeSettings"));
-  return e.length > 0 && e.every(e => f(dI(e))) ? "Brush" : t.length > 0 && t.every(e => e && E(e)) ? "Dynamic" : e.some(e => f(dI(e))) || t.some(e => e && E(e)) ? oV : "Basic";
+  let e = toArray(Gt("strokeBrushGuid"));
+  let t = toArray(Gt("dynamicStrokeSettings"));
+  return e.length > 0 && e.every(e => f(sessionLocalIDToString(e))) ? "Brush" : t.length > 0 && t.every(e => e && E(e)) ? "Dynamic" : e.some(e => f(sessionLocalIDToString(e))) || t.some(e => e && E(e)) ? MIXED_MARKER : "Basic";
 }
 export function $$b6() {
-  return C8(Gt("strokeBrushGuid")).every(e => !f(dI(e)));
+  return toArray(Gt("strokeBrushGuid")).every(e => !f(sessionLocalIDToString(e)));
 }
 export function $$T2() {
-  return C8(Gt("dynamicStrokeSettings")).every(e => !e || !E(e));
+  return toArray(Gt("dynamicStrokeSettings")).every(e => !e || !E(e));
 }
 export function $$I0(e) {
   let t = useAtomWithSubscription(e);
   let r = t.strokeBrushGuid;
   let n = t.dynamicStrokeSettings;
-  return r && f(dI(r)) ? "Brush" : n && E(n) ? "Dynamic" : "Basic";
+  return r && f(sessionLocalIDToString(r)) ? "Brush" : n && E(n) ? "Dynamic" : "Basic";
 }
 let S = {
   gap: () => getI18nString("fullscreen.properties_panel.gap"),
@@ -65,7 +65,7 @@ export function $$x3(e, t) {
     sliderMax
   } = QE[e];
   let d = useCallback(e => {
-    i(qE(e, min, max));
+    i(clamp(e, min, max));
   }, [i, min, max]);
   return {
     value: r ?? F2[e],
@@ -81,7 +81,7 @@ export function $$N4(e) {
   let [t, r] = iM(e, "stretchStrokeSettings");
   let i = Ge.orientation;
   return {
-    orientation: gl(t) ? oV : t?.orientation ?? i,
+    orientation: isInvalidValue(t) ? MIXED_MARKER : t?.orientation ?? i,
     setOrientation: useCallback(e => {
       r({
         ...t,
@@ -141,7 +141,7 @@ class R {
       let i = t(n);
       this.setValueToNode(r, i);
     });
-    r !== zk.NO && Y5.commit();
+    r !== zk.NO && fullscreenValue.commit();
   }
 }
 export class $$L7 extends R {
@@ -153,7 +153,7 @@ export class $$L7 extends R {
     return e.dynamicStrokeSettings[this.key];
   }
   setValueToNode(e, t) {
-    l7.user(`set-dynamic-stroke-${this.key}`, () => {
+    permissionScopeHandler.user(`set-dynamic-stroke-${this.key}`, () => {
       e.dynamicStrokeSettings = {
         ...e.dynamicStrokeSettings,
         [this.key]: t
@@ -170,7 +170,7 @@ class P extends R {
     return e.scatterStrokeSettings[this.key];
   }
   setValueToNode(e, t) {
-    l7.user(`set-scatter-brush-${this.key}`, () => {
+    permissionScopeHandler.user(`set-scatter-brush-${this.key}`, () => {
       e.scatterStrokeSettings = {
         ...e.scatterStrokeSettings,
         [this.key]: t

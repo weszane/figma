@@ -1,9 +1,9 @@
-import { K$p } from "../figma_app/763686";
+import { ChatMessageType } from "../figma_app/763686";
 import { gB, rU, z7 } from "../figma_app/383733";
 import { debug } from "../figma_app/465776";
 export function $$s14(e) {
   switch (e.type) {
-    case K$p.ASSISTANT_MESSAGE:
+    case ChatMessageType.ASSISTANT_MESSAGE:
       {
         let t = {
           role: "assistant",
@@ -20,7 +20,7 @@ export function $$s14(e) {
         })));
         return t;
       }
-    case K$p.USER_MESSAGE:
+    case ChatMessageType.USER_MESSAGE:
       return {
         role: "user",
         content: {
@@ -28,7 +28,7 @@ export function $$s14(e) {
           ...$$g4(e.textContent)
         }
       };
-    case K$p.TOOL_MESSAGE:
+    case ChatMessageType.TOOL_MESSAGE:
       return {
         role: "toolResults",
         content: e.toolResults.map(e => ({
@@ -37,7 +37,7 @@ export function $$s14(e) {
           result: d(e.resultJson)
         }))
       };
-    case K$p.SYSTEM_MESSAGE:
+    case ChatMessageType.SYSTEM_MESSAGE:
       return {
         role: "system",
         content: $$E6(e.textContent) ?? void 0
@@ -130,7 +130,7 @@ export function $$E6(e) {
   }
 }
 export function $$y3(e) {
-  return e.map(e => e.type === K$p.USER_MESSAGE ? {
+  return e.map(e => e.type === ChatMessageType.USER_MESSAGE ? {
     ...e,
     textContent: function (e) {
       let t = $$g4(e);
@@ -144,7 +144,7 @@ export function $$y3(e) {
 class b {
   clearCodeSnapshotsFromMessages(e) {
     return e.map(e => {
-      if (e.type === K$p.ASSISTANT_MESSAGE) {
+      if (e.type === ChatMessageType.ASSISTANT_MESSAGE) {
         let t = $$f13(e.textContent);
         t.codeSnapshot = void 0;
         return {
@@ -186,7 +186,7 @@ export function $$A10(e) {
   let t;
   for (let r = e.length - 1; r >= 0; r--) {
     let i = e[r];
-    if (i.type === K$p.ASSISTANT_MESSAGE) {
+    if (i.type === ChatMessageType.ASSISTANT_MESSAGE) {
       let e = $$f13(i.textContent || "");
       if (e.title && e.title.trim()) {
         t = e.title.trim();

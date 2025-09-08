@@ -1,11 +1,11 @@
-import { qmM, glU, _0v } from "../figma_app/763686";
+import { InteractionCpp, Fullscreen, Axis } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { j } from "../905/881708";
 import { bi, au, R0 } from "../figma_app/273493";
 let l = class e {
   getPrimaryColor() {
-    return qmM.getBorderFSDesignStrong();
+    return InteractionCpp.getBorderFSDesignStrong();
   }
   constructor(t, i = e.selectionActionDefaultViewportSpaceButtonSize) {
     this._isHovered = !1;
@@ -18,7 +18,7 @@ let l = class e {
   }
   handleMouseMove(e) {
     let t = M.fromVectorD(e.viewportSpaceMouse());
-    this.updateHoverStates(t) && (e.invalidateViewport(), this._isHovered && qmM.clearHoveredNode());
+    this.updateHoverStates(t) && (e.invalidateViewport(), this._isHovered && InteractionCpp.clearHoveredNode());
     this._isHovered && e.accept(this._owningBehavior);
   }
   handleMouseDown(e) {
@@ -48,7 +48,7 @@ let l = class e {
   updateBounds(t, i, a) {
     this._viewportSpaceSelectionBounds = t;
     let s = i.minus(e.viewportSpaceButtonMargin);
-    qmM.shouldRenderResizeAndRotateHandlesAtScale() && t.containsPointIncludingBoundary(s) || a ? (this._viewportSpaceButtonBounds = new _$$r(i, this._buttonSize), this._viewportSpaceHitBoxBounds = new _$$r(s, this._buttonSize.plus(e.viewportSpaceButtonMargin.multiplyBy(2)))) : (this._viewportSpaceButtonBounds = _$$r.invalidRect(), this._viewportSpaceHitBoxBounds = _$$r.invalidRect());
+    InteractionCpp.shouldRenderResizeAndRotateHandlesAtScale() && t.containsPointIncludingBoundary(s) || a ? (this._viewportSpaceButtonBounds = new _$$r(i, this._buttonSize), this._viewportSpaceHitBoxBounds = new _$$r(s, this._buttonSize.plus(e.viewportSpaceButtonMargin.multiplyBy(2)))) : (this._viewportSpaceButtonBounds = _$$r.invalidRect(), this._viewportSpaceHitBoxBounds = _$$r.invalidRect());
   }
   positionInsideBounds(t) {
     let i = t.bottomRight().minus(e.viewportSpaceButtonSize).minus(e.viewportSpaceButtonMargin);
@@ -102,7 +102,7 @@ export class $$d0 extends j {
     this._button.handleMouseDown(e);
   }
   handleMouseUp(e) {
-    qmM.canTidyUp() && this._button.handleMouseUp(e) && glU.triggerAction("tidy-up", {
+    InteractionCpp.canTidyUp() && this._button.handleMouseUp(e) && Fullscreen.triggerAction("tidy-up", {
       source: "canvas"
     });
   }
@@ -110,28 +110,28 @@ export class $$d0 extends j {
     this._button.handleMouseMove(e);
   }
   render(e, t) {
-    if (!(qmM.editorTypeConfig().showTidyUpButtonsOnCanvas() && qmM.canTidyUp() && qmM.activeCanvasExists() && qmM.isSelectionViewportOverlayVisible())) {
+    if (!(InteractionCpp.editorTypeConfig().showTidyUpButtonsOnCanvas() && InteractionCpp.canTidyUp() && InteractionCpp.activeCanvasExists() && InteractionCpp.isSelectionViewportOverlayVisible())) {
       this._button.removeBounds();
       return;
     }
     let i = _$$r.fromRectD(e.viewportSpaceSelectionBounds());
     if (this._button.positionInsideBounds(i), this._button.isSelectionHovered()) {
-      if (this._button.render(t), qmM.isActionEnabled("arrange-as-grid")) {
+      if (this._button.render(t), InteractionCpp.isActionEnabled("arrange-as-grid")) {
         let e = new M(2, 2);
         for (let i = -1; i <= 1; i++) for (let r = -1; r <= 1; r++) {
           let s = new M(5 * i, 5 * r);
           let o = this._button.buildRectangleOffsetFromCenter(s, e);
-          t.fillRoundedRect(o, 0, qmM.getCanvasButtonInterior());
+          t.fillRoundedRect(o, 0, InteractionCpp.getCanvasButtonInterior());
         }
       } else {
-        let e = qmM.getArrangeAsListAxisForCurrentSelection();
+        let e = InteractionCpp.getArrangeAsListAxisForCurrentSelection();
         if (null != e) {
-          let i = e === _0v.X ? new M(5, 0) : new M(0, 5);
-          let r = e === _0v.X ? new M(2, 13) : new M(13, 2);
+          let i = e === Axis.X ? new M(5, 0) : new M(0, 5);
+          let r = e === Axis.X ? new M(2, 13) : new M(13, 2);
           for (let e = -1; e <= 1; e++) {
             let a = i.multiplyBy(e);
             let s = this._button.buildRectangleOffsetFromCenter(a, r);
-            t.fillRect(s, qmM.getCanvasButtonInterior());
+            t.fillRect(s, InteractionCpp.getCanvasButtonInterior());
           }
         }
       }

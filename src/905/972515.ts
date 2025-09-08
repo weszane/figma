@@ -5,9 +5,9 @@ import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
-import { S as _$$S } from "../905/274480";
-import { J as _$$J, h as _$$h } from "../905/270045";
-import { W as _$$W } from "../905/909715";
+import { Checkbox } from "../905/274480";
+import { Label, HiddenLabel } from "../905/270045";
+import { ManuallyLabeledCheckbox } from "../905/909715";
 import { getFeatureFlags } from "../905/601108";
 import g from "classnames";
 import { n as _$$n } from "../vendor/547481";
@@ -407,7 +407,7 @@ let el = memo(function (e) {
     },
     className: `${L} ${G}`,
     ref: el,
-    children: jsxs(_$$J, {
+    children: jsxs(Label, {
       htmlAttributes: j,
       htmlFor: $,
       className: f()(_$$s.flex.$, {
@@ -418,7 +418,7 @@ let el = memo(function (e) {
         className: f()(V ? "drilldown_item--checkboxList--kqmln" : "drilldown_item--checkboxGrid--aXuyI", Qx, {
           "drilldown_item--checkboxChecked--c4ThM": selected
         }),
-        children: jsx(_$$W, {
+        children: jsx(ManuallyLabeledCheckbox, {
           checked: selected,
           onChange: eo,
           id: $,
@@ -837,19 +837,19 @@ function eI(e) {
       let n = e.filter(e => "LEAF" === e.type).map(e => e.item);
       i?.(n, t);
     }, [e, i, c]);
-    return useMemo(() => n && e.some(e => "LEAF" === e.type) ? l ? jsx(_$$S, {
+    return useMemo(() => n && e.some(e => "LEAF" === e.type) ? l ? jsx(Checkbox, {
       checked: c.checked,
       mixed: c.mixed,
       recordingKey: Pt(s, "drilldownItem-parentSubpath-checkbox", o),
       onChange: h,
-      label: jsx(_$$h, {
+      label: jsx(HiddenLabel, {
         children: renderI18nText("design_systems.instance_swap_picker.select_all_instances")
       })
     }) : jsxs(Fragment, {
-      children: [jsx(_$$J, {
+      children: [jsx(Label, {
         htmlFor: d,
         children: renderI18nText("design_systems.instance_swap_picker.select_all_instances")
-      }), jsx(_$$W, {
+      }), jsx(ManuallyLabeledCheckbox, {
         id: d,
         checked: c.checked,
         mixed: c.mixed,

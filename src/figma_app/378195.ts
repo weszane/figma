@@ -1,15 +1,15 @@
 import { debounce } from "../905/915765";
 import { NC } from "../905/17179";
 import { s as _$$s2 } from "../905/573154";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { x } from "../905/239551";
 import { M } from "../figma_app/170366";
 import { getPermissionsState } from "../figma_app/642025";
-import { t3, mm, mI, L1 } from "../figma_app/300692";
+import { loadLocalPluginManifest, getLocalPluginManifest, getPublishingData, isDefaultPublishingData } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { hM, A9 } from "../905/851937";
 import { wY } from "../905/753206";
-import { ZQ } from "../figma_app/155287";
+import { hasLocalFileId } from "../figma_app/155287";
 import { c as _$$c } from "../905/949750";
 import { o as _$$o } from "../905/938553";
 import { Ij, fy } from "../figma_app/559491";
@@ -18,18 +18,18 @@ let $$y1 = NC("PLUGIN_UPDATE_LOCAL");
 let $$b2 = NC("PLUGIN_DELETE_LOCAL");
 let T = !1;
 let I = M();
-let $$S3 = nF(async (e) => {
+let $$S3 = createOptimistThunk(async e => {
   if (I) {
     if (I.isCompatibleWith({
       desktopVersion: 59
     })) {
       let t = (await I.getLocalManifestFileExtensionIdsToCachedMetadataMap()) ?? {};
-      let r = Object.keys(t).map((e) => parseInt(e));
-      let n = await Promise.all(r.map((e) => t3(e, {
+      let r = Object.keys(t).map(e => parseInt(e));
+      let n = await Promise.all(r.map(e => loadLocalPluginManifest(e, {
         resourceType: "unknown"
       })));
       let i = {};
-      n.forEach((e) => {
+      n.forEach(e => {
         e.cachedContainsWidget = !!t[e.localFileId].cachedContainsWidget;
         e.lastKnownPluginId = t[e.localFileId].lastKnownPluginId || "";
         i[e.localFileId] = e;
@@ -39,34 +39,34 @@ let $$S3 = nF(async (e) => {
       desktopVersion: 58
     })) {
       let t = await I.getLocalManifestFileExtensionIdsToCachedContainsWidgetMap();
-      let r = Object.keys(t).map((e) => parseInt(e));
-      let n = await Promise.all(r.map((e) => t3(e, {
+      let r = Object.keys(t).map(e => parseInt(e));
+      let n = await Promise.all(r.map(e => loadLocalPluginManifest(e, {
         resourceType: "unknown"
       })));
       let i = {};
-      n.forEach((e) => {
+      n.forEach(e => {
         e.cachedContainsWidget = !!t[e.localFileId];
         i[e.localFileId] = e;
       });
       e.dispatch($$E0(i));
     } else {
       let t = await I.getAllLocalFileExtensionIds();
-      let r = await Promise.all(t.map((e) => t3(e, {
+      let r = await Promise.all(t.map(e => loadLocalPluginManifest(e, {
         resourceType: "unknown"
       })));
       let n = {};
-      r.forEach((e) => {
+      r.forEach(e => {
         n[e.localFileId] = e;
       });
       e.dispatch($$E0(n));
     }
     if (!T) {
       T = !0;
-      I.registerManifestChangeObserver((t) => {
+      I.registerManifestChangeObserver(t => {
         if ("added" === t.type || "changed" === t.type) {
           let r;
           let n = t.id;
-          let i = mm(n, t.localLoadResult, {
+          let i = getLocalPluginManifest(n, t.localLoadResult, {
             resourceType: "unknown"
           });
           let s = e.getState().localPlugins[n]?.plugin_id;
@@ -86,7 +86,7 @@ let $$S3 = nF(async (e) => {
             id: n
           }));
           try {
-            r = mI({
+            r = getPublishingData({
               ...getPermissionsState(o),
               currentUserOrgId,
               localPlugins,
@@ -98,20 +98,20 @@ let $$S3 = nF(async (e) => {
             e.dispatch(_$$s2.error(t.message));
             return;
           }
-          b && b.metadata && L1(b.metadata) && !i.error && e.dispatch(fy({
+          b && b.metadata && isDefaultPublishingData(b.metadata) && !i.error && e.dispatch(fy({
             id: n,
             metadata: r
           }));
         } else "removed" === t.type && e.dispatch($$b2(t.id));
       });
-      let t = debounce((t) => {
+      let t = debounce(t => {
         if ("added" === t.type || "changed" === t.type) {
           let r = e.getState().mirror?.selectionProperties?.selectedWidgetInfo;
           r && r.pluginID && x.mountWidget(r.pluginID, r.widgetID, "hot-reloading re-render");
           let n = SH()?.plugin;
           let i = SH()?.triggeredFrom;
           let a = e.getState();
-          "manifestFileId" in t && n && ZQ(n) && a.mirror.appModel.hotReloadPluginDev && t.manifestFileId === n.localFileId && hM() && (async () => {
+          "manifestFileId" in t && n && hasLocalFileId(n) && a.mirror.appModel.hotReloadPluginDev && t.manifestFileId === n.localFileId && hM() && (async () => {
             await wY();
             "codegen" !== i && A9({
               newTriggeredFrom: null

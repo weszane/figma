@@ -1,5 +1,5 @@
 import { R0 } from "../figma_app/273493";
-import { qmM, Ez5, GP2, zbP, zd5, PVe } from "../figma_app/763686";
+import { InteractionCpp, AppStateTsApi, HorizontalAlignment, VerticalAlignment, TextBoxType, FontWeight } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -37,19 +37,19 @@ export class $$A0 extends j {
     this._isMouseOverAddButton(e) && (e.accept(this), atomStoreManager.set(Nl, $e.INSERT), atomStoreManager.set(aK, t6.Blocks));
   }
   render(e, t) {
-    if (!qmM.shouldRenderAddButton()) return;
-    let i = qmM.findNodeForAddButton();
+    if (!InteractionCpp.shouldRenderAddButton()) return;
+    let i = InteractionCpp.findNodeForAddButton();
     let l = getSingletonSceneGraph().get(i);
     if (l) {
       let i = l.absoluteBoundingBox;
       let o = new M(i.x + i.w / 2, i.y + i.h);
       let c = M.fromVectorD(e.canvasSpaceToViewportSpace(o));
       c = c.plus(f);
-      let u = R0(Ez5.getCanvasButton());
-      this.addButtonUiState.isHovered ? t.fillTextWithBox(c, getI18nString("sites.fullscreen.add-section"), g, u, GP2.CENTER, zbP.CENTER, 0, zd5.TEXT, new M(0, 0), PVe.MEDIUM, 2) : function (e, t, i, n = 0) {
+      let u = R0(AppStateTsApi.getCanvasButton());
+      this.addButtonUiState.isHovered ? t.fillTextWithBox(c, getI18nString("sites.fullscreen.add-section"), g, u, HorizontalAlignment.CENTER, VerticalAlignment.CENTER, 0, TextBoxType.TEXT, new M(0, 0), FontWeight.MEDIUM, 2) : function (e, t, i, n = 0) {
         let a = t.canvasSpaceToViewportSpace(e);
         a.x += n;
-        i.fillCircle(a, 4, Ez5.getFSNodeHandle());
+        i.fillCircle(a, 4, AppStateTsApi.getFSNodeHandle());
       }(e.viewportSpaceToCanvasSpace(c), e, t, 0);
       let p = new _$$r(c.minus(new M(40, 10)), h);
       this.addButtonUiState.bounds = p;

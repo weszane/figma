@@ -1,4 +1,4 @@
-import { glU, Ez5, CNR } from "../figma_app/763686";
+import { Fullscreen, AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { FEditorType } from "../figma_app/53721";
 import { XC } from "../905/512783";
@@ -6,7 +6,7 @@ import { QZ, Z0 } from "../figma_app/62612";
 import { rY4, PXB } from "../figma_app/27776";
 let d = parsePxInt(rY4) + parsePxInt(PXB);
 export function $$c0(e, t, i, r, a) {
-  return "fullscreen" === i.view && glU ? u(e, t, i, r, a) : Promise.resolve(p(e, t, i));
+  return "fullscreen" === i.view && Fullscreen ? u(e, t, i, r, a) : Promise.resolve(p(e, t, i));
 }
 let u = (e, t, i, n, r) => {
   let a = e.page;
@@ -100,11 +100,11 @@ let h = (e, t, i) => {
       y: r.height
     }
   };
-  if ("fullscreen" === t.view && t.editorType === FEditorType.Whiteboard && i && (s.size.x -= d), "fullscreen" === t.view && t.editorType === FEditorType.Slides && Ez5.singleSlideView().isFocusedNodeViewEnabled()) {
-    let e = Ez5.editorPreferences().speakerNotesHeight.getCopy() + (CNR?.dragHandleTotalHeight() ?? 0);
+  if ("fullscreen" === t.view && t.editorType === FEditorType.Whiteboard && i && (s.size.x -= d), "fullscreen" === t.view && t.editorType === FEditorType.Slides && AppStateTsApi.singleSlideView().isFocusedNodeViewEnabled()) {
+    let e = AppStateTsApi.editorPreferences().speakerNotesHeight.getCopy() + (SlideConstantsCppBindings?.dragHandleTotalHeight() ?? 0);
     s.size.y -= e;
   }
-  let o = Ez5?.uiState().editorBannerHeight.getCopy() ?? 0;
+  let o = AppStateTsApi?.uiState().editorBannerHeight.getCopy() ?? 0;
   o && (s.origin.y += o, s.size.y -= o);
   return s;
 };

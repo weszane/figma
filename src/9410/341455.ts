@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect } from "react";
-import { zkO } from "../figma_app/763686";
-import { AD } from "../905/871411";
+import { SourceType } from "../figma_app/763686";
+import { defaultSessionLocalIDString } from "../905/871411";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { BT } from "../905/618447";
 import { ze } from "../figma_app/516028";
@@ -60,7 +60,7 @@ export function $$T3(e) {
       t(r, {
         row: 0,
         col: 0
-      }, zkO.USER, "figjam-board-to-deck-default-slide", Ji.BOARD_TO_DECK);
+      }, SourceType.USER, "figjam-board-to-deck-default-slide", Ji.BOARD_TO_DECK);
     }
   }, [t, e]);
 }
@@ -86,7 +86,7 @@ export function $$S4() {
   let t = useRef(new Set());
   return {
     showPlaceholderOverlay: useCallback(i => {
-      if (i && i !== AD && e.current !== i) {
+      if (i && i !== defaultSessionLocalIDString && e.current !== i) {
         for (let e of t.current) ks(e);
         e.current = i;
         t.current.add(i);

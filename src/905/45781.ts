@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useContext, useMemo, useState, useRef, useEffect, useCallback } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { eii } from "../figma_app/763686";
+import { DimensionErrorType } from "../figma_app/763686";
 import o from "classnames";
 import { ZC } from "../figma_app/39751";
 import { M } from "../figma_app/648761";
@@ -10,7 +10,7 @@ import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString } from "../905/303541";
-import { gl, hS } from "../905/216495";
+import { isInvalidValue, isValidValue } from "../905/216495";
 import { p_ } from "../905/203369";
 import { p as _$$p } from "../905/427409";
 import { J, P as _$$P } from "../figma_app/120873";
@@ -24,7 +24,7 @@ export function $$v0(e) {
   } = e;
   let v = useMemo(() => {
     if (!t?.boundVariableId) return [];
-    if (gl(property) || gl(t.mismatchedValue)) return [{
+    if (isInvalidValue(property) || isInvalidValue(t.mismatchedValue)) return [{
       value: getI18nString("fullscreen.mixed")
     }];
     let e = t.mismatchedValue;
@@ -35,21 +35,21 @@ export function $$v0(e) {
       invalidReason: function (e) {
         if (null == e) return null;
         switch (e) {
-          case eii.NONE:
+          case DimensionErrorType.NONE:
             return null;
-          case eii.LESS_THAN_MIN_WIDTH:
+          case DimensionErrorType.LESS_THAN_MIN_WIDTH:
             return getI18nString("variables.invalid.less_than_min_width");
-          case eii.LESS_THAN_MIN_HEIGHT:
+          case DimensionErrorType.LESS_THAN_MIN_HEIGHT:
             return getI18nString("variables.invalid.less_than_min_height");
-          case eii.GREATER_THAN_MAX_WIDTH:
+          case DimensionErrorType.GREATER_THAN_MAX_WIDTH:
             return getI18nString("variables.invalid.greater_than_max_width");
-          case eii.GREATER_THAN_MAX_HEIGHT:
+          case DimensionErrorType.GREATER_THAN_MAX_HEIGHT:
             return getI18nString("variables.invalid.greater_than_max_height");
-          case eii.LESS_THAN_ONE:
+          case DimensionErrorType.LESS_THAN_ONE:
             return getI18nString("variables.invalid.less_than_one");
-          case eii.NEGATIVE:
+          case DimensionErrorType.NEGATIVE:
             return getI18nString("variables.invalid.negative");
-          case eii.NEGATIVE_OR_ZERO:
+          case DimensionErrorType.NEGATIVE_OR_ZERO:
             return getI18nString("variables.invalid.negative_or_zero");
         }
       }(e?.reason) ?? void 0
@@ -83,7 +83,7 @@ export function $$v0(e) {
   let O = () => {
     let e = C.current;
     t?.showBindingUI(e, {
-      currentFieldValue: hS(property) && isNotNullish(property) ? property : void 0
+      currentFieldValue: isValidValue(property) && isNotNullish(property) ? property : void 0
     });
   };
   let D = (e, t) => {

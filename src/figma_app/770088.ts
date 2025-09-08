@@ -1,5 +1,5 @@
-import n, { glU, NLJ } from "../figma_app/763686";
-import { EP, x7 } from "../905/871411";
+import n, { Fullscreen, DesignGraphElements } from "../figma_app/763686";
+import { defaultSessionLocalIDStringArray, defaultSessionLocalIDArrayString } from "../905/871411";
 import a, { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { handleOptimistTransaction } from "../905/842794";
@@ -16,13 +16,13 @@ import { s as _$$s, Q } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F as _$$F } from "../905/302958";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { O as _$$O } from "../905/963222";
 import { ds } from "../figma_app/314264";
 import { LO, Mu } from "../905/901964";
 import { E as _$$E } from "../905/617605";
-import { Y5 } from "../figma_app/455680";
+import { fullscreenValue } from "../figma_app/455680";
 import { U2 } from "../figma_app/193867";
 import { Gq, hm, EB } from "../905/380385";
 import { m as _$$m } from "../905/70820";
@@ -30,7 +30,7 @@ import { WE } from "../905/29425";
 import { h as _$$h } from "../905/438683";
 import { R as _$$R } from "../905/780757";
 import { VB } from "../905/431747";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { zq } from "../905/193529";
 import { jD } from "../905/765855";
 import { b as _$$b } from "../905/985254";
@@ -81,7 +81,7 @@ export async function $$B31(e, t, r, n, i, a, s, o) {
 }
 function G(e, t, r, n, i) {
   return new Promise(a => {
-    t(to({
+    t(showModalHandler({
       type: VB,
       data: {
         messageMeta: e,
@@ -95,7 +95,7 @@ function G(e, t, r, n, i) {
     }));
   });
 }
-let $$V16 = nF((e, t) => {
+let $$V16 = createOptimistThunk((e, t) => {
   let {
     receiptsAPI,
     comment
@@ -110,7 +110,7 @@ let $$V16 = nF((e, t) => {
     }
   });
 });
-let $$H2 = nF((e, t) => {
+let $$H2 = createOptimistThunk((e, t) => {
   let {
     receiptsAPI,
     thread
@@ -125,7 +125,7 @@ let $$H2 = nF((e, t) => {
     }
   });
 });
-let $$z21 = nF((e, t) => {
+let $$z21 = createOptimistThunk((e, t) => {
   let {
     commentReceiptsAPI,
     canvasMentionReceiptsAPI
@@ -149,7 +149,7 @@ let $$z21 = nF((e, t) => {
     }
   });
 });
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   let {
     reactionsApi,
     id,
@@ -162,7 +162,7 @@ nF((e, t) => {
     fallbackError: s
   }));
 });
-nF((e, t) => {
+createOptimistThunk((e, t) => {
   let r = e.getState();
   let {
     reactionsApi,
@@ -180,7 +180,7 @@ nF((e, t) => {
     fallbackError: o
   }));
 });
-let $$W58 = nF((e, t) => {
+let $$W58 = createOptimistThunk((e, t) => {
   let {
     reactionsApi,
     id
@@ -201,7 +201,7 @@ let $$W58 = nF((e, t) => {
     fallbackError: o
   }));
 });
-let $$K10 = nF((e, t) => {
+let $$K10 = createOptimistThunk((e, t) => {
   let r;
   let {
     comment
@@ -239,7 +239,7 @@ let $$K10 = nF((e, t) => {
     }
   }));
 });
-let $$Y34 = nF((e, {
+let $$Y34 = createOptimistThunk((e, {
   thread: {
     key: t,
     id: r,
@@ -323,7 +323,7 @@ let $$Y34 = nF((e, {
     });
   }
 });
-let $$$33 = nF((e, {
+let $$$33 = createOptimistThunk((e, {
   thread: {
     key: t,
     id: r,
@@ -382,7 +382,7 @@ let $$$33 = nF((e, {
   }, a);
 });
 let $$X48 = NC("COMMENTS_SET_COMMENT_CONTENT");
-let $$q27 = nF((e, t) => {
+let $$q27 = createOptimistThunk((e, t) => {
   let r = t.comment.key;
   if (!r || _$$I(t.messageMeta)) {
     e.dispatch($$X48());
@@ -452,14 +452,14 @@ let $$q27 = nF((e, t) => {
   }
   e.dispatch($$X48());
 });
-let $$J3 = nF(async (e, t) => {
+let $$J3 = createOptimistThunk(async (e, t) => {
   let r = e.dispatch($$Z38(t));
   if (!r || t.thread.isPendingFromSinatra) return;
   let a = t.thread.comments[0];
   if (!a) return;
   let s = e.getState();
   let o = a.client_meta?.node_id;
-  let l = a.client_meta?.stable_path ? a.client_meta.stable_path : EP;
+  let l = a.client_meta?.stable_path ? a.client_meta.stable_path : defaultSessionLocalIDStringArray;
   !l && o && (l = [o]);
   let d = t.thread.id;
   let u = t.source;
@@ -481,11 +481,11 @@ let $$J3 = nF(async (e, t) => {
   })), trackEventAnalytics("Comment Thread Read", {
     commentThreadId: d
   }));
-  "fullscreen" === s.selectedView.view && glU.setActiveCommentAnchorData({
+  "fullscreen" === s.selectedView.view && Fullscreen.setActiveCommentAnchorData({
     stablePath: `[${l.join(",")}]`
   });
 });
-let $$Z38 = nF((e, t) => {
+let $$Z38 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (r.comments.activeThread && r.comments.activeThread.id !== t.thread.id && !t.skipDeactivatingExistingActiveComment && !e.dispatch($$ea23())) return null;
   r = e.getState();
@@ -511,7 +511,7 @@ let $$Z38 = nF((e, t) => {
   h && (f = g !== h, m.push(setCurrentPageIdAsync(h).then(async () => {
     f && (await waitForAnimationFrame());
   })));
-  let E = r.mirror.appModel.currentTool === NLJ.COMMENTS;
+  let E = r.mirror.appModel.currentTool === DesignGraphElements.COMMENTS;
   if (!isOrphanedComment && config.repositionViewportOnCommentSelection) {
     let e = navigate(_$$E(thread, viewport, r.selectedView, f, E), {
       jump: f,
@@ -521,13 +521,13 @@ let $$Z38 = nF((e, t) => {
   }
   return Promise.all(m).then();
 });
-let $$Q29 = nF((e, t) => {
+let $$Q29 = createOptimistThunk((e, t) => {
   let r = e.getState();
   r.comments.activeThread?.id === t.thread.id ? e.dispatch($$ea23()) : (t.skipDeactivatingExistingActiveComment || e.dispatch($$ea23()), H3(r.comments) && (e.dispatch($$J3(t)), atomStoreManager.set(_$$m, null)));
 });
 let $$ee45 = NC("COMMENTS_STOP_EDITING");
 let $$et32 = NC("COMMENTS_SUBMIT_REPLY");
-let $$er40 = nF((e, t) => {
+let $$er40 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let {
     commentsWriteApi,
@@ -570,8 +570,8 @@ let $$er40 = nF((e, t) => {
         action: () => {
           let t = e.getState();
           e.dispatch($$ea23());
-          t.mirror.appModel.showUi || Y5.triggerAction("toggle-ui");
-          t.mirror.appModel.currentTool !== NLJ.COMMENTS && Y5.triggerAction("set-tool-comments");
+          t.mirror.appModel.showUi || fullscreenValue.triggerAction("toggle-ui");
+          t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction("set-tool-comments");
           requestAnimationFrame(() => {
             _$$h();
           });
@@ -630,7 +630,7 @@ let $$er40 = nF((e, t) => {
   e.dispatch($$et32(t));
 });
 let $$en39 = NC("COMMENTS_SUBMIT_NEW_COMMENT");
-let $$ei26 = nF((e, t) => {
+let $$ei26 = createOptimistThunk((e, t) => {
   trackEventAnalytics("New comment starting dispatched action", {
     uuid: t.uuid
   });
@@ -742,8 +742,8 @@ let $$ei26 = nF((e, t) => {
           e.dispatch($$ea23({
             force: !0
           }));
-          t.mirror.appModel.showUi || Y5.triggerAction("toggle-ui");
-          t.mirror.appModel.currentTool !== NLJ.COMMENTS && Y5.triggerAction("set-tool-comments");
+          t.mirror.appModel.showUi || fullscreenValue.triggerAction("toggle-ui");
+          t.mirror.appModel.currentTool !== DesignGraphElements.COMMENTS && fullscreenValue.triggerAction("set-tool-comments");
           requestAnimationFrame(() => {
             _$$h();
           });
@@ -818,7 +818,7 @@ let $$ei26 = nF((e, t) => {
     }));
   });
 });
-let $$ea23 = nF((e, t) => {
+let $$ea23 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let a = t instanceof Object && t.force;
   let {
@@ -837,8 +837,8 @@ let $$ea23 = nF((e, t) => {
     return !1;
   }
   let _ = r.comments.editingComment;
-  return !a && _ ? (e.dispatch(eS(_.id)), !1) : ("fullscreen" === r.selectedView.view && glU.setActiveCommentAnchorData({
-    stablePath: x7
+  return !a && _ ? (e.dispatch(eS(_.id)), !1) : ("fullscreen" === r.selectedView.view && Fullscreen.setActiveCommentAnchorData({
+    stablePath: defaultSessionLocalIDArrayString
   }), "communityHub" === r.selectedView.view && e.dispatch(sf({
     ...r.selectedView,
     commentThreadId: void 0
@@ -847,7 +847,7 @@ let $$ea23 = nF((e, t) => {
   })), r.tooltip && e.dispatch(jD()), !0);
 });
 let $$es0 = NC("COMMENTS_SET_NEW_COMMENT_ACTIVE");
-let $$eo5 = nF((e, t) => {
+let $$eo5 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if ("fullscreen" === r.selectedView.view) {
     if (r.comments.newComment.anchorPosition) {
@@ -856,30 +856,30 @@ let $$eo5 = nF((e, t) => {
         y
       } = r.comments.newComment.anchorPosition;
       let a = t?.stablePath;
-      a ? glU.setActiveCommentAnchorData({
+      a ? Fullscreen.setActiveCommentAnchorData({
         stablePath: `[${a.join(",")}]`
-      }) : glU.setActiveCommentAnchorData(glU.getCommentAnchorDataAtPosition(x, y));
-    } else glU.setActiveCommentAnchorData({
-      stablePath: x7
+      }) : Fullscreen.setActiveCommentAnchorData(Fullscreen.getCommentAnchorDataAtPosition(x, y));
+    } else Fullscreen.setActiveCommentAnchorData({
+      stablePath: defaultSessionLocalIDArrayString
     });
   }
   e.dispatch($$es0(t));
 });
 let $$el7 = NC("COMMENTS_SET_NEW_SELECTION_BOX_ANCHOR_POSITION");
-let $$ed28 = nF((e, t) => {
+let $$ed28 = createOptimistThunk((e, t) => {
   e.getState().userFlags.has_created_selection_comment || e.dispatch(_$$b({
     has_created_selection_comment: !0
   }));
   e.dispatch($$el7(t));
 });
 let $$ec14 = NC("COMMENTS_SET_NEW_ANCHOR_POSITION");
-let $$eu52 = nF((e, t) => {
+let $$eu52 = createOptimistThunk((e, t) => {
   if ("fullscreen" === e.getState().selectedView.view) {
     let {
       x,
       y
     } = t.anchorPosition;
-    glU.setActiveCommentAnchorData(glU.getCommentAnchorDataAtPosition(x, y));
+    Fullscreen.setActiveCommentAnchorData(Fullscreen.getCommentAnchorDataAtPosition(x, y));
   }
   e.dispatch($$ec14(t));
 });
@@ -888,7 +888,7 @@ let $$e_54 = NC("COMMENTS_ADD_HOVERED_PIN");
 let $$eh12 = NC("COMMENTS_REMOVE_EMPHASIZED_PIN");
 let $$em11 = NC("COMMENTS_ADD_EMPHASIZED_PIN");
 let $$eg8 = NC("COMMENTS_SET_ACTIVE");
-let $$ef17 = nF(e => {
+let $$ef17 = createOptimistThunk(e => {
   let t = e.getState();
   let r = t.selectedView;
   "subView" in r && ("hubFile" === r.subView || "plugin" === r.subView) && trackEventAnalytics("at_mention_search_started", {
@@ -903,7 +903,7 @@ let $$ey24 = NC("COMMENTS_SET_TYPEAHEAD");
 let $$eb18 = NC("COMMENTS_SHOW_EMOJI_PICKER");
 let $$eT42 = NC("COMMENTS_SET_ACTIVE_SORT");
 let $$eI49 = NC("COMMENTS_DISCARD_COMMENT_REPLY_ATTEMPT");
-let eS = nF((e, t) => {
+let eS = createOptimistThunk((e, t) => {
   let r = e.getState().comments;
   let n = r.activeThread?.id;
   let i = n && r.threads[n];
@@ -922,7 +922,7 @@ let eS = nF((e, t) => {
   e.dispatch($$eI49(t));
 });
 let $$ev55 = NC("COMMENTS_DISCARD_NEW_COMMENT_ATTEMPT");
-let eA = nF(e => {
+let eA = createOptimistThunk(e => {
   let t = e.getState().comments.newComment;
   if (t.discardAttempt === B2) {
     let e = _Z(t.messageMeta);
@@ -956,7 +956,7 @@ let $$eG53 = NC("COMMENTS_CLEAR_SAVING");
 let $$eV56 = NC("COMMENTS_STORE_SERVER_ID_FOR_LG_PENDING_UUID");
 let $$eH46 = NC("COMMENTS_CLEAR_LG_PENDING_UUID");
 let $$ez57 = NC("COMMENTS_DEL");
-let eW = nF((e, t) => {
+let eW = createOptimistThunk((e, t) => {
   let r = e.dispatch;
   let n = e.getState();
   let {

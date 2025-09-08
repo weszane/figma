@@ -1,4 +1,4 @@
-import { qmM } from "../figma_app/763686";
+import { InteractionCpp } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { atomStoreManager } from "../figma_app/27355";
@@ -35,7 +35,7 @@ export class $$c0 extends j {
     });
   }
   isPointWithinVideoNode(e) {
-    let t = _$$r.fromRectD(qmM.viewportSpaceVideoBounds());
+    let t = _$$r.fromRectD(InteractionCpp.viewportSpaceVideoBounds());
     return !t.isInvalid() && t.containsPointIncludingBoundary(M.fromVectorD(e));
   }
   handleMouseUp(e) {}

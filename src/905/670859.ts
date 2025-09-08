@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { BrowserInfo } from "../figma_app/778880";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
-import { to } from "../905/156213";
+import { showModalHandler } from "../905/156213";
 import { kn } from "../905/219868";
 export function $$c0({
   url: e,
@@ -12,7 +12,7 @@ export function $$c0({
   let i = useDispatch();
   return BrowserInfo.isMeetDevice ? jsx($z, {
     variant: "link",
-    onClick: () => i(to({
+    onClick: () => i(showModalHandler({
       type: kn,
       data: {
         url: e,

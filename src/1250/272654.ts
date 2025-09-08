@@ -8,7 +8,7 @@ import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Dw } from "../figma_app/976345";
-import { Ce } from "../905/156213";
+import { hideModal } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { _6 } from "../figma_app/386952";
@@ -16,11 +16,11 @@ import { iZ } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { FStudentTeamStatusType } from "../figma_app/191312";
 import { UpR, FA_ } from "../figma_app/43951";
-import { Ju } from "../905/102752";
+import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { A as _$$A } from "../svg/619883";
 var o = i;
-export let $$k0 = Ju(function (e) {
+export let $$k0 = registerModal(function (e) {
   let t = iZ();
   let n = useDispatch();
   let i = _6();
@@ -64,7 +64,7 @@ export let $$k0 = Ju(function (e) {
   }(k.data.team);
   if (null === A) return null;
   let S = () => {
-    n(Ce());
+    n(hideModal());
   };
   let N = () => {
     S();

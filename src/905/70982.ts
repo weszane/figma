@@ -3,9 +3,9 @@ import { NC } from "../905/17179";
 import { Q } from "../905/150006";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
-import { nF } from "../905/350402";
+import { createOptimistThunk } from "../905/350402";
 let $$d5 = NC("RECENT_PROTOTYPE_UNMARK_VIEWED");
-let $$c14 = nF((e, t) => {
+let $$c14 = createOptimistThunk((e, t) => {
   let i = XHR.del(`/api/files/${t.fileKey}/prototype/view`, {
     page_id: t.pageId
   });
@@ -21,7 +21,7 @@ let $$c14 = nF((e, t) => {
   });
   e.dispatch($$d5(t));
 });
-let $$u6 = nF((e, t) => {
+let $$u6 = createOptimistThunk((e, t) => {
   XHR.post(`/api/files/${t.fileKey}/prototype/view`, {
     page_id: t.pageId
   }).then(i => {

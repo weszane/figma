@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useContext } from "react";
-import { Qv } from "../905/959312";
-import { r as _$$r } from "../905/577641";
+import { useRecording } from "../905/959312";
+import { defaultComponentAttribute } from "../905/577641";
 import { A } from "../905/268204";
 let l = createContext(void 0);
 let $$d1 = l.Provider;
@@ -25,7 +25,7 @@ let $$c0 = forwardRef(({
       return !1;
     }
   }(r) ? "noopener" : "noopener nofollow noreferrer ugc";
-  let f = Qv(u || m ? e => {
+  let f = useRecording(u || m ? e => {
     m?.(e);
     u?.(e);
   } : void 0, {
@@ -35,7 +35,7 @@ let $$c0 = forwardRef(({
   return jsx("a", {
     target: c ? "_blank" : void 0,
     rel: g,
-    ..._$$r,
+    ...defaultComponentAttribute,
     ...p,
     ..._,
     ref: h,

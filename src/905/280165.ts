@@ -4,11 +4,11 @@ import { _ } from "../figma_app/496441";
 import { K } from "../905/443068";
 import { N } from "../905/301843";
 import { E } from "../905/235326";
-import { glU } from "../figma_app/763686";
+import { Fullscreen } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/217163";
-import { gl } from "../905/216495";
+import { isInvalidValue } from "../905/216495";
 import { Ib } from "../905/129884";
 import { $ } from "../905/330495";
 export function $$f0(e) {
@@ -33,9 +33,9 @@ export function $$f0(e) {
     let A = useMemo(() => isBackingSymbolSoftDeleted || !singleBackingSymbol ? "SYMBOL_AS_STATE" === restoreType ? getI18nString("design_systems.instance_panel.variant_missing") : getI18nString("design_systems.instance_panel.component_missing") : isBackingSymbolShared ? _ ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("design_systems.instance_panel.go_to_main_component_nin_library") : getI18nString("design_systems.instance_panel.go_to_main_component"), [isBackingSymbolSoftDeleted, singleBackingSymbol, isBackingSymbolShared, _, restoreType]);
     let y = !(isBackingSymbolSoftDeleted || !singleBackingSymbol) && isBackingSymbolShared;
     let b = useCallback(() => {
-      _backingSymbolGUID && !gl(_backingSymbolGUID) && glU.goToSymbolOrStateGroupById(_backingSymbolGUID, !0);
+      _backingSymbolGUID && !isInvalidValue(_backingSymbolGUID) && Fullscreen.goToSymbolOrStateGroupById(_backingSymbolGUID, !0);
     }, [_backingSymbolGUID]);
-    return y && !f || null == _backingSymbolGUID || gl(_backingSymbolGUID) ? null : {
+    return y && !f || null == _backingSymbolGUID || isInvalidValue(_backingSymbolGUID) ? null : {
       onMouseDown: b,
       url: h.data?.link,
       dataTooltip: A,
