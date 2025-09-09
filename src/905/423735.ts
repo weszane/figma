@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { i as _$$i } from "../905/718764";
 import { l as _$$l } from "../905/716947";
 import l from "../vendor/523035";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
@@ -43,7 +43,7 @@ export function $$F0({
 }) {
   let B = n1();
   let V = _$$er();
-  let G = Rs(LibraryModalAssetsDataByLibraryKey, {
+  let G = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: e
   }, {
     enabled: B
@@ -60,7 +60,7 @@ export function $$F0({
   let q = _$$W2();
   let $ = ol();
   let Z = !l && !F;
-  let [X] = IT(Yt(e));
+  let [X] = setupResourceAtomHandler(Yt(e));
   let Q = useMemo(() => "loaded" !== X.status ? [] : Tf(X.data.components, X.data.stateGroups), [X]);
   let J = _$$c2({
     libraryKey: e

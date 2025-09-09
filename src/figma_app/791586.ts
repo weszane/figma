@@ -1,8 +1,8 @@
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { FJ } from "../905/508367";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
-import { tS } from "../figma_app/516028";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { UserAvatarView } from "../figma_app/43951";
 import { M4 } from "../905/713695";
@@ -13,7 +13,7 @@ import { lA, TT, YF } from "../figma_app/952035";
 export function $$m9() {
   let e = dq();
   let t = ol();
-  let r = tS() || "";
+  let r = useCurrentFileKey() || "";
   return () => {
     let n = Yr;
     e ? n += `?org_id=${encodeURIComponent(e)}&file_key=${encodeURIComponent(r)}` : t?.id && (n += `?team_id=${encodeURIComponent(t.id)}&file_key=${encodeURIComponent(r)}`);
@@ -42,7 +42,7 @@ export function $$g3({
   };
 }
 export function $$f10() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = lA(e ?? "");
   let r = !!t.authenticated;
   let n = !!t.expired;
@@ -108,8 +108,8 @@ export function $$b2() {
 }
 let T = ["active_healthy", "active_unhealthy", "pausing", "coming_up", "restoring"];
 export function $$I6(e = !1) {
-  let t = tS();
-  let [r] = IT(YF({
+  let t = useCurrentFileKey();
+  let [r] = setupResourceAtomHandler(YF({
     fileKey: e ? null : t
   }));
   let n = r.data?.existingProjects ?? [];
@@ -119,8 +119,8 @@ export function $$I6(e = !1) {
   };
 }
 export function $$S8(e = !1) {
-  let t = tS();
-  let [r] = IT(YF({
+  let t = useCurrentFileKey();
+  let [r] = setupResourceAtomHandler(YF({
     fileKey: e ? null : t
   }));
   return {
@@ -129,7 +129,7 @@ export function $$S8(e = !1) {
   };
 }
 export function $$v7(e = !1) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = lA((e ? null : t) ?? "");
   return {
     organization: r.org ?? void 0,
@@ -137,8 +137,8 @@ export function $$v7(e = !1) {
   };
 }
 export function $$A1(e = !1) {
-  let t = tS();
-  let [r] = IT(TT({
+  let t = useCurrentFileKey();
+  let [r] = setupResourceAtomHandler(TT({
     fileKey: e ? null : t
   }));
   let n = r.data?.connectedProject ?? void 0;
@@ -156,7 +156,7 @@ export function $$x4() {
   let {
     projectOwnerId
   } = $$f10();
-  let t = Rs(UserAvatarView, {
+  let t = useSubscription(UserAvatarView, {
     userId: projectOwnerId
   }, {
     enabled: !!projectOwnerId

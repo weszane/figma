@@ -8,12 +8,12 @@ import { i as _$$i } from "../905/718764";
 import { $y } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { K as _$$K } from "../905/443068";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { A as _$$A } from "../vendor/850789";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
-import { oY } from "../905/485103";
+import { useWebLoggerTimerEffect } from "../905/485103";
 import { vb } from "../905/86266";
 import { Ex, zE } from "../figma_app/919079";
 import { nR, $$, vd } from "../figma_app/60079";
@@ -67,9 +67,9 @@ import { Er, Ub, Al, rJ, Xv, rx, bV, _Z, Uo, KF, Zg, Rt, mt, eb as _$$eb, Yf, BY
 import { ks, CY } from "../figma_app/637027";
 import { B as _$$B2 } from "../905/714743";
 import { KQ } from "../figma_app/475472";
-import { qg } from "../figma_app/630077";
+import { teamConstant } from "../figma_app/630077";
 import { A as _$$A2 } from "../5724/142155";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { fileEntityDataMapper } from "../905/943101";
 import { J as _$$J } from "../905/202542";
 import { K as _$$K2 } from "../905/899124";
@@ -105,7 +105,7 @@ function eA(e) {
     planId,
     currentFolderId
   } = e;
-  let c = Rs(OrgUserDraftFolder, {
+  let c = useSubscription(OrgUserDraftFolder, {
     orgId: planId ?? ""
   }, {
     enabled: isOrgContext && !!planId
@@ -149,7 +149,7 @@ function eA(e) {
       }, `all-team-${e.id}}`))]
     })
   });
-  let g = Rs(DestinationProjectsForTeam, {
+  let g = useSubscription(DestinationProjectsForTeam, {
     teamId: selectedTeam ? selectedTeam.id : ""
   }, {
     enabled: !!selectedTeam
@@ -293,7 +293,7 @@ function eb(e) {
     setSelectedTeam: e.setSelectedTeam
   }, `section-${t.id}`));
   let o = !!(e.selectedTeam && e.isOrgContext);
-  let l = Rs(DestinationProjectsForTeam, {
+  let l = useSubscription(DestinationProjectsForTeam, {
     teamId: e.selectedTeam ? e.selectedTeam.id : ""
   }, {
     enabled: o
@@ -426,7 +426,7 @@ let eT = registerModal(function (e) {
         value: i,
         autoFocus: !0,
         required: !0,
-        maxLength: qg,
+        maxLength: teamConstant,
         minLength: 1,
         placeholder: getI18nString("team_creation.writer_s_guild_placeholder")
       }), jsxs("div", {
@@ -640,7 +640,7 @@ let eR = registerModal(function (e) {
       fileBrowserPreferences: e5 ? td.data.currentUser.baseOrgUser?.fileBrowserPreferences : td.data.currentUser.currentTeamUser?.fileBrowserPreferences,
       favoritedProjects: e,
       favoritedTeams: e5 ? td.data.currentUser.favoritedTeams : [],
-      userSidebarSections: oA(td.data.currentUser.userSidebarSections) || null
+      userSidebarSections: getResourceDataOrFallback(td.data.currentUser.userSidebarSections) || null
     };
   }, [td, e5, tc]);
   let tp = filterNotNullish(Object.values(Q).map(e => jsx(_$$r2, {
@@ -654,18 +654,18 @@ let eR = registerModal(function (e) {
     isSelected: eP === e
   }, e)));
   let tm = !e5 && ta.length > 1;
-  let th = Rs(MoveFileDestination, {
+  let th = useSubscription(MoveFileDestination, {
     projectId: eS?.id
   }, {
     enabled: !!eS?.id
   });
   let tg = th?.status === "loaded" ? th.data.project : null;
-  let tf = Rs(MoveFileCurrentProject, {
+  let tf = useSubscription(MoveFileCurrentProject, {
     projectId: eS?.id
   }, {
     enabled: !!eS?.id
   });
-  let t_ = tf?.status === "loaded" ? oA(tf.data.project) : null;
+  let t_ = tf?.status === "loaded" ? getResourceDataOrFallback(tf.data.project) : null;
   let tA = jB({
     files,
     repos,
@@ -764,7 +764,7 @@ let eR = registerModal(function (e) {
   let tD = e.files.length + e.repos.length;
   let tL = files.length > 0 ? e.files[0].name : repos.length > 0 ? e.repos[0].name : "";
   let tF = 1 === tD ? tL : `${tD} files`;
-  oY(null !== eJ, e => {
+  useWebLoggerTimerEffect(null !== eJ, e => {
     trackEventAnalytics("file_move_modal_v2_latency", {
       latency_ms: e
     }, {
@@ -1114,7 +1114,7 @@ let eU = registerModal(function (e) {
   let i = useCallback(() => {
     t(hideModal());
   }, [t]);
-  let n = Rs(ProjectNameForFile, {
+  let n = useSubscription(ProjectNameForFile, {
     fileKey: e.fileKey
   });
   if ("loading" === n.status) return jsx(qc, {});
@@ -1231,7 +1231,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
   let h = !!inDrafts && hasConnectedPlanUserInOrg;
   if (draftsMoveData.requiresUpgrade && draftsMoveData.isAdminSelfUpgrade && !draftsMoveData.shouldShowCurf && !draftsMoveData.shouldShowScim && !h) {
     Y9({
-      licenseType: wR(e.editor_type),
+      licenseType: getProductAccessTypeOrDefault(e.editor_type),
       dispatch: i,
       upgradePathway: _$$J.ADMIN_AUTO_PATHWAY,
       entryPoint: PE.FileMoveUpsell,
@@ -1248,7 +1248,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
   }
   if (draftsMoveData.requiresManualUpgrade && !h) {
     fm({
-      licenseType: wR(e.editor_type),
+      licenseType: getProductAccessTypeOrDefault(e.editor_type),
       dispatch: i,
       entryPoint: PE.FileMoveUpsell,
       plan: draftsMoveData.destinationPlan ?? null,
@@ -1264,7 +1264,7 @@ export function $$eV0(e, t, i, n, r, a, s, o = !1) {
   }
   if (draftsMoveData.canAutoUpgrade && !h) {
     Y9({
-      licenseType: wR(e.editor_type),
+      licenseType: getProductAccessTypeOrDefault(e.editor_type),
       dispatch: i,
       upgradePathway: _$$J.AUTO_PATHWAY,
       entryPoint: PE.FileMoveUpsell,

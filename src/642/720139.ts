@@ -26,15 +26,15 @@ import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { V as _$$V, q as _$$q } from "../figma_app/473391";
 import { resourceUtils } from "../905/989992";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { RR } from "../figma_app/307841";
 import { _X, Pw, DQ } from "../figma_app/121751";
-import { MF, A5, HZ } from "../figma_app/391338";
-import { q5, tB } from "../figma_app/516028";
+import { useShadowReadLoaded, adminPermissionConfig, setupShadowRead } from "../figma_app/391338";
+import { selectCurrentFile, selectOpenFile } from "../figma_app/516028";
 import { FUserTypeClassification, FProductAccessType, FPlanAccessType, FTeamType } from "../figma_app/191312";
 import { CurrentUserInStudentPlanView, LibraryFileContext } from "../figma_app/43951";
 import { getPermissionsState, canGuestOrg, hasActiveEduTeam } from "../figma_app/642025";
-import { D6 } from "../figma_app/465071";
+import { useCurrentPlanUser } from "../figma_app/465071";
 import { x as _$$x } from "../figma_app/584132";
 import { TG } from "../905/72677";
 import { o as _$$o } from "../figma_app/915774";
@@ -67,7 +67,7 @@ import { fO } from "../figma_app/329496";
 import { X as _$$X2 } from "../905/257331";
 import { k as _$$k3 } from "../905/443820";
 import { Fullscreen, VariablesBindings } from "../figma_app/763686";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k4 } from "../905/582200";
 import { MO } from "../1528/85853";
 import { IK } from "../905/521428";
@@ -85,7 +85,7 @@ import { Ib } from "../905/129884";
 import { O2 } from "../figma_app/164212";
 import { Y as _$$Y2 } from "../905/411989";
 import { K0 } from "../figma_app/778125";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { h1 } from "../905/986103";
 import { Pf, H8 } from "../905/590952";
 import { e as _$$e } from "../905/579755";
@@ -109,31 +109,31 @@ import { JA, Ev, VI } from "../figma_app/608944";
 import { LdP, wkK } from "../figma_app/27776";
 function H(e) {
   let t = RR();
-  let s = D6("useCanViewPlaygroundQuery");
+  let s = useCurrentPlanUser("useCanViewPlaygroundQuery");
   let r = useSelector(getPermissionsState);
-  let l = q5();
+  let l = selectCurrentFile();
   let a = useSelector(_$$x)?.id;
   let {
     currentUserOrgId
   } = r;
   let d = !!(currentUserOrgId && canGuestOrg(currentUserOrgId, r));
-  let c = Rs(CurrentUserInStudentPlanView, {}, {
+  let c = useSubscription(CurrentUserInStudentPlanView, {}, {
     enabled: _X(Pw.GROUP_7)
   });
   let p = !!(a && hasActiveEduTeam(r, a));
-  let h = MF({
+  let h = useShadowReadLoaded({
     oldValue: resourceUtils.loaded(p),
     newValue: c.transform(e => e?.currentUser.inStudentPlan),
-    label: A5.CanViewPlayground.hasActiveEduTeam,
+    label: adminPermissionConfig.CanViewPlayground.hasActiveEduTeam,
     enableFullRead: DQ(Pw.GROUP_7)
   });
   return useMemo(() => resourceUtils.transformAll([s, h], (s, r) => {
     if (!l || !a) return !1;
     let n = s.key.type === FUserTypeClassification.ORG_USER;
-    if (HZ({
+    if (setupShadowRead({
       oldValue: d,
       newValue: n,
-      label: A5.CanViewPlayground.canGuestOrg,
+      label: adminPermissionConfig.CanViewPlayground.canGuestOrg,
       contextArgs: {
         planUserType: s.key.type,
         planUserParentId: s.key.parentId
@@ -163,7 +163,7 @@ function e_({
     isPresetLibrary,
     isLoading
   } = function (e) {
-    let t = Rs(LibraryFileContext, {
+    let t = useSubscription(LibraryFileContext, {
       libraryKey: e
     });
     let s = fd(e);
@@ -179,7 +179,7 @@ function e_({
       libraryKey: e,
       nodeId: t
     });
-    let r = useSelector(tB);
+    let r = useSelector(selectOpenFile);
     return useMemo(() => {
       if (r?.libraryKey === e) return null;
       let t = s.data;
@@ -264,7 +264,7 @@ function ez({
       avatar: null,
       authorName: null
     };
-    let e = oA(i.data.assetAttribution);
+    let e = getResourceDataOrFallback(i.data.assetAttribution);
     if (!e) return {
       avatar: null,
       authorName: null
@@ -322,7 +322,7 @@ function e0({
   let s = useRef(null);
   let [i, l] = useState(!0);
   let [a, o] = useState(!1);
-  let d = ZC(e);
+  let d = useLatestRef(e);
   useEffect(() => {
     if (e && s.current && d !== e) {
       let e = s.current.scrollHeight > eQ;
@@ -617,7 +617,7 @@ function ti({
   });
   let x = _$$H();
   let y = useSelector(e => e.fileVersion);
-  let _ = ZC(y);
+  let _ = useLatestRef(y);
   if (useEffect(() => {
     f?.state === "LOADED" && f?.currentAssetData?.nodeData?.playgroundGUID && null != _ && _ !== y && (x(), Fullscreen.clearPlaygroundScene());
   }, [y, _, x, e.type, f]), !f) return jsx("div", {
@@ -674,7 +674,7 @@ export function $$tu1({
     closeFlyout
   } = JA();
   let ec = fV(e.library_key);
-  let eu = q5();
+  let eu = selectCurrentFile();
   let ep = useDispatch();
   let eh = useSelector(e => _$$e_(e).local.thumbnails);
   let em = _$$H();

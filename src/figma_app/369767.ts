@@ -15,10 +15,10 @@ import { tf, fu } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../figma_app/590592";
 import { replaceSelection } from "../figma_app/741237";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
-import { f0 } from "../figma_app/707808";
+import { AppView } from "../figma_app/707808";
 import { Ib } from "../905/129884";
 import { q as _$$q } from "../905/202542";
 import { C5, h5 } from "../figma_app/812915";
@@ -69,7 +69,7 @@ export function $$P2(e) {
       source: "site_metadata_button"
     });
     r(PanelType.SETTINGS);
-    n(f0.SETTINGS);
+    n(AppView.SETTINGS);
     closeOverlay();
     let t = getSingletonSceneGraph().getCurrentPage();
     e ? e !== t?.guid && (getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), replaceSelection([e])) : t && t.setSelectionToSingleNode("-1:-1");
@@ -79,7 +79,7 @@ export function $$D1({
   recordingKey: e,
   page: t
 }) {
-  let r = q5();
+  let r = selectCurrentFile();
   let s = $$P2(t);
   return r?.canEdit ? jsx(K, {
     "aria-label": getI18nString("sites.metadata.modal_button_site"),
@@ -134,7 +134,7 @@ export function $$M0({
     "aria-label": c,
     disabled: y,
     onClick: () => {
-      t ? r(f0.FILE) : (r(f0.SETTINGS), i(_$$p.WEBSITE));
+      t ? r(AppView.FILE) : (r(AppView.SETTINGS), i(_$$p.WEBSITE));
     },
     recordingKey: E,
     htmlAttributes: {

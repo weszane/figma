@@ -49,7 +49,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { L as _$$L } from "../905/477111";
 import { O as _$$O } from "../905/969533";
 import { j as _$$j, l as _$$l } from "../905/618243";
-import { L8, mr, gx } from "../905/760074";
+import { getRepoById, findBranchById, filterBranches } from "../905/760074";
 import { ac } from "../905/930279";
 import { M4 } from "../905/713695";
 import { e0 } from "../905/696396";
@@ -302,7 +302,7 @@ let e_ = (e, t, i, n, r, a) => {
 function eA(e) {
   let t = M4.useFile(e.fileKey).data;
   let i = useSelector(e => e.repos);
-  let r = t ? L8(t, i) : null;
+  let r = t ? getRepoById(t, i) : null;
   let s = M4.File.useValue(r?.default_file_key).data;
   let o = ac(s ? fileEntityDataMapper.toLiveGraph(s) : null);
   let l = useDispatch();
@@ -351,8 +351,8 @@ function eb({
   let o = selectUser();
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
   let d = e.branches.filter(e => !e.trashed_at);
-  let c = mr(e.repo, e.branches, l);
-  let u = useMemo(() => gx(e.repo, d, s, o.id), [e, d, s, o]);
+  let c = findBranchById(e.repo, e.branches, l);
+  let u = useMemo(() => filterBranches(e.repo, d, s, o.id), [e, d, s, o]);
   return d.length <= 1 ? jsx(Fragment, {}) : jsx(eA, {
     fileKey: e.repo.default_file_key,
     branches: u,

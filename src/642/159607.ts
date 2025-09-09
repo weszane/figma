@@ -3,7 +3,7 @@ import { n as _$$n } from '../905/64411';
 import { getResourceDataOrFallback } from '../905/419236';
 import { l as _$$l } from '../905/716947';
 import { useAtomWithSubscription } from '../figma_app/27355';
-import { qd } from '../figma_app/39751';
+import { usePreviousValue } from '../figma_app/922077';
 import { LibraryPresetSubscriptionsV2 } from '../figma_app/43951';
 import { M } from '../figma_app/155411';
 import { je } from '../figma_app/155728';
@@ -14,7 +14,7 @@ export function $$m0() {
   let t = useRef(!1);
   let s = useSelector(e => e.loadingState);
   let m = n1();
-  let g = qd(m);
+  let g = usePreviousValue(m);
   let f = useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
     group: M()
   }));

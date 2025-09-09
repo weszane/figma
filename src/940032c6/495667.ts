@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { WB } from "../905/761735";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -83,8 +83,8 @@ export function $$k0(e, t, i, p) {
     let x = useDispatch();
     let m = selectCurrentUser();
     let b = Jm();
-    let y = gY($$w);
-    let v = gY(S);
+    let y = getAtomMutate($$w);
+    let v = getAtomMutate(S);
     let k = () => {
       if (!XW(e)) return;
       let t = qY(e);

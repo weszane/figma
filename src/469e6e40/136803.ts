@@ -6,7 +6,7 @@ import l from "../vendor/805353";
 import { xj, Cz } from "../figma_app/851625";
 import { J } from "../905/931050";
 import { n as _$$n } from "../figma_app/741211";
-import { No, H3 } from "../figma_app/465071";
+import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { Od, J0 } from "../figma_app/967319";
 import { P } from "../905/392438";
 import { Ro } from "../figma_app/805373";
@@ -47,8 +47,8 @@ let f = {
 };
 export function $$j0(e) {
   let t = useDispatch();
-  let a = No().unwrapOr(null);
-  let l = H3(a);
+  let a = useTeamPlanPublicInfo().unwrapOr(null);
+  let l = getParentOrgIdIfOrgLevel(a);
   let [m, g] = useState([]);
   let j = o()(t => {
     e.onAutocompleteChange(t);

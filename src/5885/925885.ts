@@ -21,7 +21,7 @@ import { fD, Rq, ne } from "../figma_app/345997";
 import { R_ } from "../5885/399780";
 import { FEditorType } from "../figma_app/53721";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
-import { SC, Sc } from "../figma_app/707808";
+import { UpgradeAction, TeamType } from "../figma_app/707808";
 import { C as _$$C } from "../5885/53111";
 import { I2, Je, Lo, Ay as _$$Ay2, Qg, WG } from "../figma_app/482142";
 import { yJ } from "../figma_app/240735";
@@ -314,11 +314,11 @@ let $$D3 = createOptimistThunk((e, {
       e.dispatch(sf({
         ...X,
         view: "teamUpgrade",
-        teamFlowType: t ? SC.UPGRADE_EXISTING_TEAM : SC.CREATE_AND_UPGRADE,
+        teamFlowType: t ? UpgradeAction.UPGRADE_EXISTING_TEAM : UpgradeAction.CREATE_AND_UPGRADE,
         teamId: t || i.freeTeamId || null,
         paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS,
         previousView: X.previousView,
-        planType: Sc.TEAM,
+        planType: TeamType.TEAM,
         ...(r ? {
           searchParams: {
             onCompleteRedirectFileKey: r,

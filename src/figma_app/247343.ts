@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { j } from "../905/869261";
 import { showModalHandler } from "../905/156213";
 import { FPlanRestrictionType } from "../figma_app/191312";
-import { j4 } from "../905/814802";
+import { TeamType } from "../905/814802";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { yJ } from "../905/584989";
 createOptimistThunk((e, {
@@ -35,7 +35,7 @@ createOptimistThunk((e, {
         }));
         let d = t.length;
         let m = {
-          productName: a === j4.WHITEBOARD ? getI18nString("general.figjam") : getI18nString("general.figma_design"),
+          productName: a === TeamType.WHITEBOARD ? getI18nString("general.figjam") : getI18nString("general.figma_design"),
           nameOrEmail: t[0].name || t[0].email,
           numTeamMembers: d
         };
@@ -80,7 +80,7 @@ export let $$h0 = createOptimistAction("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", as
         let t = {
           user_id: e
         };
-        d === j4.WHITEBOARD ? t.whiteboard_paid_status = l : t.design_paid_status = l;
+        d === TeamType.WHITEBOARD ? t.whiteboard_paid_status = l : t.design_paid_status = l;
         return t;
       }),
       entry_point: p

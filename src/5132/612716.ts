@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import c from "classnames";
 import { P as _$$P } from "../vendor/348225";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { s_ } from "../905/17223";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -15,7 +15,7 @@ import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { L0, jm, fu } from "../figma_app/831799";
 import { SK, Fq } from "../905/84777";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 import { K } from "../905/3140";
 import { LN, vr } from "../figma_app/514043";
@@ -91,7 +91,7 @@ function C({
 }
 function E() {
   let e = LN();
-  let l = Oq.exclude([ud.DEV_MODE]).dict(l => ({
+  let l = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]).dict(l => ({
     currency: e,
     billableProductKey: l,
     billableProductVariantKey: null,
@@ -100,11 +100,11 @@ function E() {
     unit: IX.MONTH
   }));
   let i = SK(l, Fq.UPSELL_MODALS);
-  let [a] = mI(i);
+  let [a] = handleSuspenseRetainRelease(i);
   if (null === a.data) throw Error("Price data is null");
   let r = new vr(e);
-  let s = a.data[ud.DESIGN].amount;
-  let c = a.data[ud.FIGJAM].amount;
+  let s = a.data[ProductAccessTypeEnum.DESIGN].amount;
+  let c = a.data[ProductAccessTypeEnum.FIGJAM].amount;
   return jsxs(Y, {
     padding: 14,
     direction: "vertical",

@@ -12,10 +12,10 @@ import { t_ } from "../9410/141954";
 import { B as _$$B } from "../905/521763";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { S } from "../figma_app/106763";
 import { ce, yh } from "../9410/58505";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { Vh } from "../9410/671180";
 import { _J } from "../9410/483857";
 async function E(e = {}) {
@@ -64,8 +64,8 @@ export function $$j2({
   clientLifecycleId: k,
   insertType: N
 }) {
-  let A = tS();
-  let O = cJ();
+  let A = useCurrentFileKey();
+  let O = useIsFullscreenSitesView();
   let L = useRef(null);
   let R = useRef(void 0);
   let D = useRef(void 0);

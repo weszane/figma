@@ -15,7 +15,7 @@ import { yt, m1, SW, T1 } from "../figma_app/545293";
 import { XE } from "../figma_app/976749";
 import { pi } from "../figma_app/314264";
 import { qp } from "../905/977779";
-import { tB } from "../figma_app/516028";
+import { selectOpenFile } from "../figma_app/516028";
 import { eD, ET } from "../figma_app/646357";
 import { V } from "../905/342732";
 import { Cn, g_ } from "../905/225265";
@@ -23,7 +23,7 @@ import { Z } from "../905/387928";
 import { Wg, YG, Ow } from "../905/921418";
 import { B0, eB } from "../figma_app/807786";
 import { UR, cu, Al } from "../figma_app/707943";
-import { KK } from "../905/276025";
+import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { h as _$$h } from "../figma_app/198885";
 import { vx, t_ } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
@@ -35,7 +35,7 @@ import { lj } from "../905/991973";
 import { Ci } from "../figma_app/318590";
 import { dd } from "../figma_app/604494";
 import { s as _$$s } from "../905/234042";
-import { Jh } from "../figma_app/552876";
+import { isFigmakeFullscreenView } from "../figma_app/552876";
 let $$V3 = atom({
   currentSearch: null
 });
@@ -71,13 +71,13 @@ export function $$z2({
 }
 export async function $$H1(e, t) {
   let i = debugState.getState();
-  let n = tB(i);
+  let n = selectOpenFile(i);
   let d = vx(i);
   let g = B0();
   let f = await Ci("input-text" === e.type);
   let C = atomStoreManager.get(cY("fileKey"));
   let P = atomStoreManager.get(cY("libraryKey"));
-  let L = Jh(i.selectedView) ? "figmake" : "input-text" === e.type ? "actions_assets_tab" : "actions_visual_search";
+  let L = isFigmakeFullscreenView(i.selectedView) ? "figmake" : "input-text" === e.type ? "actions_assets_tab" : "actions_visual_search";
   if (!n || null == d) return;
   let U = generateUUIDv4();
   let G = atomStoreManager.get(dd);
@@ -99,7 +99,7 @@ export async function $$H1(e, t) {
     i = debugState.getState();
     let h = {
       ...e,
-      openFile: tB(i),
+      openFile: selectOpenFile(i),
       selectedView: _$$h(i),
       inDesignEditor: XE(_$$h(i)) === FEditorType.Design,
       fileVersion: d,
@@ -181,7 +181,7 @@ export async function $$H1(e, t) {
         queryType: h.type.replace("input-", ""),
         selectedViewFileKey: "fullscreen" === i.selectedView.view && i.selectedView.fileKey ? i.selectedView.fileKey : void 0,
         totalShownResults: a.length,
-        tier: atomStoreManager.get(KK(!0)).data?.tier
+        tier: atomStoreManager.get(getPlanPublicInfoAtomFamily(!0)).data?.tier
       };
       await hW("exp_asset_search_refactor");
       analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { LayoutTabType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/810168";
@@ -64,10 +64,10 @@ export function $$b3(e) {
     let n = [S(e), sG(b, I), t > 0 ? getI18nString("fullscreen.accessibility.num_items_selected", {
       num_selected: t
     }) : null].filter(isNotNullish);
-    r.ariaLabel = Yx(n, "unit");
+    r.ariaLabel = formatList(n, "unit");
     let i = document.getElementById($$y1);
     if (i) {
-      i.ariaLabel = Yx(n, "unit");
+      i.ariaLabel = formatList(n, "unit");
       return () => {
         i.ariaLabel = null;
       };

@@ -6,16 +6,16 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/90566";
 import { selectWithShallowEqual } from "../905/103090";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { ye, Gi as _$$Gi } from "../figma_app/528509";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
 import { PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByOrg, PaginatedTemplatesByTeam, BrowseTemplatesView, PaginatedTemplatesSearch } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { G7 } from "../figma_app/336853";
-import { D6, T5, X$ } from "../figma_app/465071";
+import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071";
 import { AC, tz } from "../figma_app/803787";
 import { ol } from "../figma_app/598018";
 import { ke } from "../figma_app/841351";
@@ -29,8 +29,8 @@ import { j } from "../905/521149";
 var $$R13 = (e => (e.NOT_ENABLED = "NOT_ENABLED", e.CAN_PUBLISH = "CAN_PUBLISH", e.FILE_IN_DRAFTS = "FILE_IN_DRAFTS", e.FILE_IN_DRAFTS_CANNOT_MOVE = "FILE_IN_DRAFTS_CANNOT_MOVE", e.DISABLED_IN_SETTINGS = "DISABLED_IN_SETTINGS", e.CANNOT_PUBLISH = "CANNOT_PUBLISH", e))($$R13 || {});
 function L() {
   let e = lg();
-  let t = D6("useCustomTemplatesAllowed").unwrapOr(null);
-  let r = T5("useCustomTemplatesAllowed").unwrapOr(null);
+  let t = useCurrentPlanUser("useCustomTemplatesAllowed").unwrapOr(null);
+  let r = useCurrentPrivilegedPlan("useCustomTemplatesAllowed").unwrapOr(null);
   return useMemo(() => r?.key.type === FOrganizationLevelType.ORG ? ar(!!r?.customTemplatesAllowed, !!t) : r?.key.type === FOrganizationLevelType.TEAM && !!r && !!e && r.tier !== FPlanNameType.STARTER && (e === FFileType.SLIDES || (e === FFileType.WHITEBOARD ? !!getFeatureFlags().pro_templates_figjam : e === FFileType.COOPER || e === FFileType.FIGMAKE)), [t, r, e]);
 }
 export function $$P2() {
@@ -58,13 +58,13 @@ export function $$k15(e) {
   return !!e && t;
 }
 export function $$M3() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = function () {
     let e = $$P2();
-    let t = q5();
+    let t = selectCurrentFile();
     return useSelector(r => !!t && !!t.folderId && (e?.type === "team" ? ye(r.folders[t.folderId]) : e?.type === "org" && _$$Gi(r.folders[t.folderId])));
   }();
-  let r = X$("usePublishTemplateStatus").unwrapOr(null);
+  let r = useCurrentPublicPlan("usePublishTemplateStatus").unwrapOr(null);
   let n = r?.key.type;
   let a = L();
   let s = !!e?.canPublishTemplate;
@@ -95,7 +95,7 @@ export function $$j8({
   return !!(i && e && t === FFileType.WHITEBOARD && i.are_custom_templates_allowed && r);
 }
 export function $$U12() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = $$B0(e);
   return e?.template && t ? e?.template : null;
 }
@@ -305,7 +305,7 @@ export function $$W11({
 }) {
   let u = getFeatureFlags().pro_templates_lg && !!e && c;
   let _ = !!e && t;
-  let [h] = IT(PaginatedTemplatesByOrgWorkspace({
+  let [h] = setupResourceAtomHandler(PaginatedTemplatesByOrgWorkspace({
     orgId: e,
     editorType: r,
     filterByWorkspaceIds: l,
@@ -316,7 +316,7 @@ export function $$W11({
     enabled: u && _,
     revalidateOnMount: s
   });
-  let [m] = IT(PaginatedTemplatesByOrg({
+  let [m] = setupResourceAtomHandler(PaginatedTemplatesByOrg({
     orgId: e,
     editorType: r,
     filterByTeamIds: l,
@@ -453,7 +453,7 @@ export function $$$14({
   let [{
     status: i,
     data: a
-  }] = IT(PaginatedTemplatesByTeam({
+  }] = setupResourceAtomHandler(PaginatedTemplatesByTeam({
     teamId: e,
     editorType: t,
     firstPageSize: r
@@ -488,7 +488,7 @@ export function $$$14({
 }
 let X = e => {
   let t = G7(e);
-  let r = Rs(BrowseTemplatesView, {
+  let r = useSubscription(BrowseTemplatesView, {
     currentOrgId: e?.id || ""
   }, {
     enabled: !!e
@@ -536,7 +536,7 @@ export function $$Z19(e, t = 2, r = !0) {
   let [{
     data: f,
     status: E
-  }] = IT(q({
+  }] = setupResourceAtomHandler(q({
     orgId: c?.type === "org" ? c.entity.id : "",
     count: t,
     editorType: e,
@@ -602,7 +602,7 @@ export function $$ee9() {
 }
 export function $$et17(e, t, r = 10, n = !1, i = !0) {
   let a = $$P2();
-  let s = Rs(PaginatedTemplatesSearch, {
+  let s = useSubscription(PaginatedTemplatesSearch, {
     teamId: a?.type === "team" ? a.entity.id : null,
     orgId: a?.type === "org" ? a.entity.id : null,
     query: e,

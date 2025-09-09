@@ -1,4 +1,4 @@
-import { reportError, setSentryTag } from '../905/11';
+import { reportError, setTagGlobal } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { Tj } from '../905/266529';
 import { n as _$$n } from '../905/347702';
@@ -24,11 +24,11 @@ export function $$f6() {
   return atomStoreManager.get(GR);
 }
 export function $$_8(e) {
-  setSentryTag('pluginId', e?.plugin_id);
+  setTagGlobal('pluginId', e?.plugin_id);
   atomStoreManager.set(GR, e);
 }
 export function $$A11(e) {
-  setSentryTag('pluginTriggeredFrom', e);
+  setTagGlobal('pluginTriggeredFrom', e);
   atomStoreManager.set(vT, e ?? null);
 }
 export function $$y0(e) {

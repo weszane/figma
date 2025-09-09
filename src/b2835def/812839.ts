@@ -21,7 +21,7 @@ import { Gc } from "../905/63728";
 import { ex } from "../905/524523";
 import { n8, xG } from "../figma_app/121043";
 import { $0 } from "../1556/751556";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Z } from "../905/521211";
 import { O as _$$O } from "../6020/752349";
 import { s as _$$s } from "../9410/760762";
@@ -146,7 +146,7 @@ function R({
   });
 }
 function N() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = Z();
   return jsxs(_$$O, {
     label: getI18nString("fullscreen_actions.expand-ui-with-filename", {

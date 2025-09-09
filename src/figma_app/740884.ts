@@ -5,7 +5,7 @@ import { E as _$$E } from "../905/632989";
 import { O } from "../905/969533";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { hx } from "../figma_app/290668";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
@@ -54,7 +54,7 @@ export function $$g0({
             ...g,
             targetRect: A?.current.getBoundingClientRect()
           }
-        }), T && YQ({
+        }), T && handleAtomEvent({
           id: T,
           properties: {
             dropdownKey: r

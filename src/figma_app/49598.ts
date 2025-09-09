@@ -12,7 +12,7 @@ import { customHistory } from "../905/612521";
 import { x as _$$x } from "../figma_app/256637";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
-import { Jl } from "../figma_app/566371";
+import { createAtomSetter } from "../figma_app/566371";
 import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
@@ -51,8 +51,8 @@ import { rR, sK } from "../figma_app/598018";
 import { aP } from "../figma_app/10554";
 import { o as _$$o } from "../figma_app/633080";
 import { $A, vt } from "../905/862883";
-import { G4 } from "../figma_app/707808";
-import { ZN } from "../figma_app/630077";
+import { PreviewMode } from "../figma_app/707808";
+import { fileActionEnum } from "../figma_app/630077";
 import { C as _$$C } from "../905/180";
 import { D as _$$D } from "../905/17527";
 import { H as _$$H } from "../905/473998";
@@ -163,7 +163,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
           teamName: i.name,
           editorType: a,
           dispatch: e.dispatch,
-          action: ZN.CREATE_FILE_FROM_TEMPLATE
+          action: fileActionEnum.CREATE_FILE_FROM_TEMPLATE
         }
       }));
       return;
@@ -645,7 +645,7 @@ let $$eM24 = createOptimistThunk((e, {
 }, {
   loadingKey: r
 }) => {
-  let n = Jl(ek)({
+  let n = createAtomSetter(ek)({
     id: t
   });
   _$$N2(n, e, r);
@@ -693,7 +693,7 @@ let $$ej6 = createOptimistThunk((e, {
 }, {
   loadingKey: n
 }) => {
-  let i = Jl(eF)({
+  let i = createAtomSetter(eF)({
     id: t
   });
   _$$N2(i, e, n);
@@ -739,16 +739,16 @@ let $$eG14 = createOptimistThunk(async (e, {
   })));
 });
 let $$eV19 = createOptimistThunk((e, t) => {
-  (t === G4.FULLSCREEN || t === G4.FULLSCREEN_WITH_COMMENTS) && (trackEventAnalytics("Context Viewed", {
+  (t === PreviewMode.FULLSCREEN || t === PreviewMode.FULLSCREEN_WITH_COMMENTS) && (trackEventAnalytics("Context Viewed", {
     name: "hub-file-canvas-enter-fullscreen"
-  }), t === G4.FULLSCREEN_WITH_COMMENTS && trackEventAnalytics("CTA Clicked", {
+  }), t === PreviewMode.FULLSCREEN_WITH_COMMENTS && trackEventAnalytics("CTA Clicked", {
     name: "community_hub_preview_comments_viewed"
   }));
   let r = {
     ...e.getState().selectedView,
     fullscreenState: t
   };
-  t === G4.FULLSCREEN && r.commentThreadId && delete r.commentThreadId;
+  t === PreviewMode.FULLSCREEN && r.commentThreadId && delete r.commentThreadId;
   e.dispatch(sf(r));
 });
 export { D3, L1, Sb } from "../905/359847";

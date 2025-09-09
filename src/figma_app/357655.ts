@@ -2,7 +2,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { Iv, sO } from "../figma_app/97020";
-import { Vj } from "../905/561485";
+import { isFullscreenSitesView } from "../905/561485";
 export function $$l0({
   domain: e,
   path: t = "/",
@@ -16,7 +16,7 @@ export function $$d2(e, t) {
   let {
     selectedView
   } = debugState.getState();
-  if (!Vj(selectedView) || t) return {
+  if (!isFullscreenSitesView(selectedView) || t) return {
     id: e,
     cmsSlug: null
   };

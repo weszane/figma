@@ -6,9 +6,9 @@ import { trackEventAnalytics } from "../905/449184";
 import { w } from "../905/5147";
 import { logError } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
-import { cb } from "../905/760074";
-import { nX } from "../905/617744";
-import { ap, NQ } from "../905/535806";
+import { handleModalError } from "../905/760074";
+import { currentSelectionAtom } from "../905/617744";
+import { AggregationType, LanguageType } from "../905/535806";
 var $$n1;
 export class $$g0 extends Error {
   constructor(e) {
@@ -40,11 +40,11 @@ class f extends Error {
     };
   }
   function i(e) {
-    let t = atomStoreManager.get(nX);
+    let t = atomStoreManager.get(currentSelectionAtom);
     let i = {
-      loadType: ap.GRANULAR,
+      loadType: AggregationType.GRANULAR,
       functionName: e.functionName,
-      profileStep: NQ.JAVACRIPT_ONLY,
+      profileStep: LanguageType.JAVACRIPT_ONLY,
       durationMs: e.durationMs,
       branchFileKey: e.branchKey,
       sourceFileKey: e.sourceKey,
@@ -57,8 +57,8 @@ class f extends Error {
   }
   function n(e, i) {
     assert(e.type === CollectionGroupType.GENERIC);
-    e.variantChunks.length > 0 && cb(Error("Non-state group chunk with variants"));
-    e.variableChunks.length > 0 && cb(Error("Non-variable collection with variable chunks"));
+    e.variantChunks.length > 0 && handleModalError(Error("Non-state group chunk with variants"));
+    e.variableChunks.length > 0 && handleModalError(Error("Non-variable collection with variable chunks"));
     let {
       basisChunkGuid,
       affectedChunks,
@@ -76,7 +76,7 @@ class f extends Error {
       case CollectionGroupType.STATE_GROUP:
         return function (e, i) {
           assert(e.type === CollectionGroupType.STATE_GROUP);
-          e.variableChunks.length > 0 && cb(Error("Non-variable collection with variable chunks"));
+          e.variableChunks.length > 0 && handleModalError(Error("Non-variable collection with variable chunks"));
           let {
             basisChunkGuid,
             affectedChunks,
@@ -94,7 +94,7 @@ class f extends Error {
       case CollectionGroupType.VARIABLE_COLLECTION:
         return function (i, n) {
           assert(i.type === CollectionGroupType.VARIABLE_COLLECTION);
-          i.variantChunks.length > 0 && cb(Error("Non-state group chunk with variants"));
+          i.variantChunks.length > 0 && handleModalError(Error("Non-state group chunk with variants"));
           let {
             basisChunkGuid,
             variableChunks,
@@ -105,15 +105,15 @@ class f extends Error {
             mainChunk: t(mainChunk, n),
             basisChunkGuid,
             variableChunks: mapFilter(variableChunks, i => function (i, n) {
-              i.variantChunks.length > 0 && cb(Error("Variable with variants"));
-              i.affectedChunks.length > 0 && cb(Error("Variable with affected nodes"));
+              i.variantChunks.length > 0 && handleModalError(Error("Variable with variants"));
+              i.affectedChunks.length > 0 && handleModalError(Error("Variable with affected nodes"));
               let {
                 basisChunkGuid: _basisChunkGuid,
                 mainChunk: _mainChunk
               } = i;
               let s = t(_mainChunk, n);
               if (!_mainChunk.variableId) {
-                cb(Error("Variable group missing variableId"), {
+                handleModalError(Error("Variable group missing variableId"), {
                   "variable id": _mainChunk.variableId,
                   "display node guid": s.displayNode.guid,
                   phase: s.phase,
@@ -124,7 +124,7 @@ class f extends Error {
               let {
                 diffBasis
               } = e.getChunkChanges(n, s.originalIndex);
-              return 0 === diffBasis.length ? (cb(Error("Expected basis changes for variable")), null) : {
+              return 0 === diffBasis.length ? (handleModalError(Error("Expected basis changes for variable")), null) : {
                 type: "variable",
                 displayNode: s.displayNode,
                 phase: s.phase,
@@ -287,7 +287,7 @@ class f extends Error {
     r.buggedConflictingGUIDs.length > 0 && (logError("Branching", "bugged conflicting guids", {
       branchKey: e.branchKey,
       truncatedGuids: r.buggedConflictingGUIDs.slice(0, 5)
-    }), cb(Error("bugged conflicting guids")));
+    }), handleModalError(Error("bugged conflicting guids")));
     return {
       conflictGroups: a,
       nonConflictingBranchChunkGUIDs: r.nonConflictingBranchChunkGUIDs,

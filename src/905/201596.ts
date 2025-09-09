@@ -2,7 +2,7 @@ import { useRef, useEffect, useMemo, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { AppStateTsApi } from "../figma_app/763686";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
 import { showModalHandler } from "../905/156213";
@@ -53,7 +53,7 @@ export function $$T1(e) {
   let t = FC();
   let i = useSelector(e => e.authedProfilesById);
   let a = useSelector(e => e.figFileDuplicatedFromHubFile);
-  let s = Rs(PublishedHubFileForFile({
+  let s = useSubscription(PublishedHubFileForFile({
     fileKey: e?.key ?? ""
   }), {
     enabled: !!e

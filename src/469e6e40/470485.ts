@@ -13,14 +13,14 @@ import { Bq } from "../figma_app/482142";
 import { vt } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { FBillingPeriodType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
-import { S2, px } from "../figma_app/465071";
+import { useTeamPlanFeatures, useTeamPlanUser } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 var o = l;
 export function $$j0(e) {
   let t;
   let a = useDispatch();
-  let l = S2().unwrapOr(null);
-  let j = px().unwrapOr(null);
+  let l = useTeamPlanFeatures().unwrapOr(null);
+  let j = useTeamPlanUser().unwrapOr(null);
   let y = vt();
   let w = useSelector(e => e.teamBilling.summary.annual_subscription ? FBillingPeriodType.YEAR : e.teamBilling.summary.monthly_subscription ? FBillingPeriodType.MONTH : null);
   let k = useCallback(() => {

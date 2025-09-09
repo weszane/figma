@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState, forwardRef, useRef, createRe
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription, atom } from "../figma_app/27355";
 import a from "classnames";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { cn } from "../figma_app/141320";
 import { MS } from "../figma_app/797994";
@@ -12,14 +12,14 @@ import { FFileType, FResourceCategoryType, FProductAccessType } from "../figma_a
 import { TeamFileLimitsInfo, FileCanEditIgnorePaidStatus, TeamById } from "../figma_app/43951";
 import { aW, sK, cD, FQ } from "../figma_app/598018";
 import { i as _$$i } from "../905/718764";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { M as _$$M } from "../905/152487";
 import { h as _$$h } from "../905/207101";
 import { YX, S0, bk, PG, ZE, xO, VQ, qV, r3 as _$$r, X9, bT, Nz, nt, $l, aV, uN, Q7, BG, eL as _$$eL, kd, SL, ni, fj, VN, _D, pr, JA, Xw, xo, JC } from "../905/98947";
 import { pu, XL, ug, Pp, Ig, zH, td as _$$td, nH } from "../7037/430062";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { ServiceCategories as _$$e } from "../905/165054";
 import R from "../vendor/128080";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
@@ -61,15 +61,15 @@ import { sf } from "../905/929976";
 import { WX, Bq, Vm } from "../figma_app/482142";
 import { UpsellModalType } from "../905/165519";
 import { UpgradeSteps, UpsellSourceType } from "../figma_app/831101";
-import { SC, Sc } from "../figma_app/707808";
-import { ud, Gu, TI } from "../905/513035";
-import { q5 } from "../figma_app/516028";
+import { UpgradeAction, TeamType } from "../figma_app/707808";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum, ProductAccessTypeMap } from "../905/513035";
+import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { rq as _$$rq } from "../905/351260";
 import { wH } from "../figma_app/680166";
-import { e6 as _$$e3 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { subscribeAndAwaitData } from "../905/553831";
-import { d6 } from "../figma_app/687776";
+import { canCreateFileType } from "../figma_app/687776";
 import { V3 } from "../figma_app/976345";
 import { zE, uM } from "../905/738636";
 import { XZ } from "../figma_app/176973";
@@ -145,7 +145,7 @@ import { J as _$$J4 } from "../905/341359";
 import { Tq, B1, Vb, Q5, sJ, QS, vz, rX as _$$rX, EK, Kz as _$$Kz } from "../9864/183809";
 import { W as _$$W } from "../905/522628";
 import { $ as _$$$ } from "../905/834575";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { m as _$$m } from "../9864/958952";
 import { A as _$$A5 } from "../6828/250823";
 let i;
@@ -169,7 +169,7 @@ function v({
 }) {
   let d = L(e);
   let c = useDispatch();
-  let u = ZC(r);
+  let u = useLatestRef(r);
   useEffect(() => {
     u && !r && d();
   }, [u, r, d]);
@@ -227,7 +227,7 @@ function N() {
   let t = useAtomWithSubscription(bk);
   let [i] = useAtomWithSubscription(PG);
   let [s] = useAtomWithSubscription(ZE);
-  let o = Oc();
+  let o = useIsSelectedFigmakeFullscreen();
   let l = Xr(xO);
   let a = Xr(VQ);
   let d = Xr(qV);
@@ -389,11 +389,11 @@ function ey() {
   let i = t => {
     desktopAPIInstance ? e(sf({
       view: "teamUpgrade",
-      teamFlowType: SC.UPGRADE_EXISTING_TEAM,
+      teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
       paymentStep: UpgradeSteps.CHOOSE_PLAN,
       previousView: r,
-      planType: Sc.TEAM,
+      planType: TeamType.TEAM,
       entryPoint: UpsellSourceType.NUX
     })) : e(WX({
       teamId: t.id,
@@ -438,7 +438,7 @@ async function eq(e, r) {
   } = i;
   if (!projects || 1 !== projects.length) return null;
   let o = projects[0];
-  return o && d6(o, r) && aW(i, {
+  return o && canCreateFileType(o, r) && aW(i, {
     type: sK.ADD_FILE,
     editorType: r
   }) ? o : null;
@@ -704,24 +704,24 @@ function eJ(e) {
   let Z = function () {
     var e;
     let r = useAtomWithSubscription(fj);
-    let t = q5();
+    let t = selectCurrentFile();
     let {
       handleUpgrade
     } = wH({
       folderId: t?.folderId || null,
       entryPoint: _$$tc.NUX
     });
-    let s = Rs(FileCanEditIgnorePaidStatus({
+    let s = useSubscription(FileCanEditIgnorePaidStatus({
       key: t?.key ?? ""
     }), {
       enabled: !!t?.key
     });
     let o = s?.data?.file?.hasPermission || !1;
     let [, l] = Wz("nux_seat_selection_show_confirmation", null);
-    let a = o && !!r && (e = t?.editorType ?? FFileType.DESIGN, r === ud.EXPERT || [FFileType.WHITEBOARD, FFileType.SLIDES, FFileType.COOPER].includes(e));
+    let a = o && !!r && (e = t?.editorType ?? FFileType.DESIGN, r === ProductAccessTypeEnum.EXPERT || [FFileType.WHITEBOARD, FFileType.SLIDES, FFileType.COOPER].includes(e));
     return () => {
       let e = !1;
-      r && r !== Gu.VIEW && (e = a, handleUpgrade({
+      r && r !== ViewAccessTypeEnum.VIEW && (e = a, handleUpgrade({
         afterUpgradeCallback: (t, i) => {
           if (!i) throw Error("Metadata is required");
           if (e) {
@@ -736,7 +736,7 @@ function eJ(e) {
             customHistory.reload("NUX seat choice refresh");
           }
         },
-        licenseType: TI[r],
+        licenseType: ProductAccessTypeMap[r],
         upgradeReason: _$$i2.NUX_SEAT_CHOICE,
         entryPoint: _$$tc.NUX
       })(null));
@@ -904,7 +904,7 @@ function eJ(e) {
         emails: i,
         resourceType: FResourceCategoryType.TEAM,
         resourceIdOrKey: e.team.id,
-        level: _$$e3.EDITOR,
+        level: AccessLevelEnum.EDITOR,
         teamId: e.team.id,
         onSuccess: () => {
           r(VisualBellActions.enqueue({
@@ -1041,7 +1041,7 @@ let rh = {
 function r_() {
   let e = useDispatch();
   let r = LN();
-  let t = Oq.exclude([ud.DEV_MODE]);
+  let t = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let i = {
     currency: r,
     tier: Ju.PRO,
@@ -1207,13 +1207,13 @@ function rm({
             className: _$$s.textBodyMedium.$,
             children: function (e) {
               switch (e) {
-                case ud.EXPERT:
+                case ProductAccessTypeEnum.EXPERT:
                   return getI18nString("nux.campfire.full_seat");
-                case ud.DEVELOPER:
+                case ProductAccessTypeEnum.DEVELOPER:
                   return getI18nString("nux.campfire.dev_seat");
-                case ud.COLLABORATOR:
+                case ProductAccessTypeEnum.COLLABORATOR:
                   return getI18nString("nux.campfire.collab_seat");
-                case ud.CONTENT:
+                case ProductAccessTypeEnum.CONTENT:
                   return getI18nString("nux.campfire.content_seat");
                 default:
                   throwTypeError(e);
@@ -1626,20 +1626,20 @@ function rI({
   e9();
   let f = jsx(rg, {
     isFree: u,
-    price: proPrices[ud.DESIGN],
+    price: proPrices[ProductAccessTypeEnum.DESIGN],
     title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figma")
   });
   let g = jsx(rg, {
     isFree: u,
-    price: proPrices[ud.FIGJAM],
+    price: proPrices[ProductAccessTypeEnum.FIGJAM],
     title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
   });
   let m = jsx(rg, {
-    price: orgPrices[ud.DESIGN],
+    price: orgPrices[ProductAccessTypeEnum.DESIGN],
     title: getI18nString("new_user_experience.choose_plan_card.org.title.Figma")
   });
   let E = jsx(rg, {
-    price: orgPrices[ud.FIGJAM],
+    price: orgPrices[ProductAccessTypeEnum.FIGJAM],
     title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
   });
   function b() {
@@ -1982,11 +1982,11 @@ function rV(e) {
         PlanCardPrices: () => jsxs(Fragment, {
           children: [jsx(rg, {
             isMobileViewport: !0,
-            price: proPrices[ud.DESIGN],
+            price: proPrices[ProductAccessTypeEnum.DESIGN],
             title: getI18nString("new_user_experience.choose_plan_card.org.title.Figma")
           }), jsx(rg, {
             isMobileViewport: !0,
-            price: proPrices[ud.FIGJAM],
+            price: proPrices[ProductAccessTypeEnum.FIGJAM],
             title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
           })]
         }),
@@ -2000,11 +2000,11 @@ function rV(e) {
         PlanCardPrices: () => jsxs(Fragment, {
           children: [jsx(rg, {
             isMobileViewport: !0,
-            price: orgPrices[ud.DESIGN],
+            price: orgPrices[ProductAccessTypeEnum.DESIGN],
             title: getI18nString("new_user_experience.choose_plan_card.org.title.Figma")
           }), jsx(rg, {
             isMobileViewport: !0,
-            price: orgPrices[ud.FIGJAM],
+            price: orgPrices[ProductAccessTypeEnum.FIGJAM],
             title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
           })]
         })
@@ -2331,13 +2331,13 @@ function r7({
 function te() {
   let [e, r] = useAtomValueAndSetter(fj);
   let t = Xr(JA);
-  let i = e === Gu.VIEW;
-  let l = e === ud.COLLABORATOR;
-  let a = e === ud.DEVELOPER;
-  let d = e === ud.EXPERT;
+  let i = e === ViewAccessTypeEnum.VIEW;
+  let l = e === ProductAccessTypeEnum.COLLABORATOR;
+  let a = e === ProductAccessTypeEnum.DEVELOPER;
+  let d = e === ProductAccessTypeEnum.EXPERT;
   let [c] = useAtomWithSubscription(ZE);
   let [u, x] = useState({});
-  let h = q5();
+  let h = selectCurrentFile();
   let {
     getUpgradePathway,
     getUpgradeEligibility,
@@ -2349,14 +2349,14 @@ function te() {
   e9();
   _$$R(() => {
     x(N_.reduce((e, r) => {
-      let t = getUpgradeEligibility(TI[r]);
+      let t = getUpgradeEligibility(ProductAccessTypeMap[r]);
       e[r] = t;
       return e;
     }, {}));
   }, [getIsUpgradeHandlerLoading, getUpgradeEligibility], () => !getIsUpgradeHandlerLoading());
   useEffect(() => {
     N_.forEach(e => {
-      let r = getUpgradePathway(TI[e]) === _$$J2.AUTO_PATHWAY;
+      let r = getUpgradePathway(ProductAccessTypeMap[e]) === _$$J2.AUTO_PATHWAY;
       t(t => ({
         ...t,
         [e]: r
@@ -2370,9 +2370,9 @@ function te() {
     }, g);
     r(e);
   }
-  let E = u[ud.COLLABORATOR] === _$$q.CAN_UPGRADE;
-  let b = u[ud.DEVELOPER] === _$$q.CAN_UPGRADE;
-  let j = u[ud.EXPERT] === _$$q.CAN_UPGRADE;
+  let E = u[ProductAccessTypeEnum.COLLABORATOR] === _$$q.CAN_UPGRADE;
+  let b = u[ProductAccessTypeEnum.DEVELOPER] === _$$q.CAN_UPGRADE;
+  let j = u[ProductAccessTypeEnum.EXPERT] === _$$q.CAN_UPGRADE;
   let C = 1;
   E && C++;
   b && C++;
@@ -2400,7 +2400,7 @@ function te() {
           title: getI18nString("seat_selection_in_nux.view"),
           seatTestId: r8.VIEW_OPTION,
           isSelected: i,
-          onSeatSelect: () => m(Gu.VIEW),
+          onSeatSelect: () => m(ViewAccessTypeEnum.VIEW),
           subtitle: getI18nString("seat_selection_in_nux.view_and_comment_access_only"),
           Icon: _$$e4,
           features: r7({})
@@ -2408,7 +2408,7 @@ function te() {
           title: getI18nString("seat_selection_in_nux.collab"),
           seatTestId: r8.COLLABORATOR_OPTION,
           isSelected: l,
-          onSeatSelect: () => m(ud.COLLABORATOR),
+          onSeatSelect: () => m(ProductAccessTypeEnum.COLLABORATOR),
           subtitle: getI18nString("seat_selection_in_nux.for_brainstorming_diagramming_and_presenting"),
           Icon: _$$M2,
           mode: "whiteboard",
@@ -2419,7 +2419,7 @@ function te() {
           title: getI18nString("seat_selection_in_nux.dev"),
           seatTestId: r8.DEVELOPER_OPTION,
           isSelected: a,
-          onSeatSelect: () => m(ud.DEVELOPER),
+          onSeatSelect: () => m(ProductAccessTypeEnum.DEVELOPER),
           subtitle: getI18nString("seat_selection_in_nux.everything_on_collab_plus_products"),
           Icon: _$$u2,
           isRecommended: "developer" === c,
@@ -2433,7 +2433,7 @@ function te() {
           title: getI18nString("seat_selection_in_nux.full"),
           seatTestId: r8.EXPERT_OPTION,
           isSelected: d,
-          onSeatSelect: () => m(ud.EXPERT),
+          onSeatSelect: () => m(ProductAccessTypeEnum.EXPERT),
           subtitle: getI18nString("seat_selection_in_nux.full_access_to_all_figma"),
           Icon: _$$K,
           mode: "design",
@@ -2775,7 +2775,7 @@ function tE(e) {
   let [r, t] = useState([""]);
   let [i, l] = useAtomValueAndSetter($l);
   let a = getIsAndroidOrIphoneNotFigmaMobile();
-  let c = w5(e.team) ? _$$e3.VIEWER : _$$e3.EDITOR;
+  let c = w5(e.team) ? AccessLevelEnum.VIEWER : AccessLevelEnum.EDITOR;
   let x = _$$f4(() => e.team ? wZ(e.team.id, c) : Promise.resolve(null), [e.team, c]);
   let h = (e, t) => {
     let s = [...i];
@@ -2908,7 +2908,7 @@ function tL() {
     questionSubtitle,
     getOptionDisplay
   } = CR(e);
-  let c = Oc();
+  let c = useIsSelectedFigmakeFullscreen();
   let x = N();
   let [h, _] = useAtomValueAndSetter(ZE);
   let [p, f] = useAtomValueAndSetter(_$$eL);
@@ -4156,7 +4156,7 @@ function il(e) {
   let r = J();
   let t = useAtomWithSubscription(fj);
   let i = useAtomWithSubscription(JC);
-  let o = T5("NuxDynamicPreviewBottomBar").unwrapOr(null);
+  let o = useCurrentPrivilegedPlan("NuxDynamicPreviewBottomBar").unwrapOr(null);
   let l = o?.name;
   let a = useAtomWithSubscription(YX);
   let d = useAtomWithSubscription(bk) === pu.WHICH_SEAT_WOULD_YOU_LIKE;
@@ -4173,7 +4173,7 @@ function il(e) {
         onNextQuestion: e.onNextQuestion,
         currentQuestion: e.currentQuestion,
         formatAndSubmitSignalCollectionResponses: r
-      }), d && !!t && t !== Gu.VIEW && jsx("div", {
+      }), d && !!t && t !== ViewAccessTypeEnum.VIEW && jsx("div", {
         className: mx,
         children: i ? getI18nString("seat_selection_in_nux.well_update_your_set", {
           orgOrTeamName: l || ""
@@ -4467,7 +4467,7 @@ function iE({
   let [u, x] = useAtomValueAndSetter(bk);
   let [h, _] = useAtomValueAndSetter(Xw);
   let p = useAtomWithSubscription(ni);
-  let f = Oc();
+  let f = useIsSelectedFigmakeFullscreen();
   let g = N();
   let m = useAtomWithSubscription(S0);
   let E = function ({
@@ -4483,7 +4483,7 @@ function iE({
     let [u, x] = useAtomValueAndSetter(S0);
     let [h, _] = useAtomValueAndSetter(bk);
     let p = fr();
-    let f = Oc();
+    let f = useIsSelectedFigmakeFullscreen();
     let g = useMemo(() => {
       let i = [];
       "loading" === l.status || "loading" === a.status || (l.data ? i = XL : f ? i = ug : a.data ? (i = Pp, p() && (i = [...i, pu.WHICH_SEAT_WOULD_YOU_LIKE])) : i = e ? Ig : Aj() ? zH : "community" === t || c ? _$$td : nH, r || (i = i.filter(e => e !== pu.INVITE_COLLABORATORS)), s && (i = i.filter(e => e !== pu.CHOOSE_PRODUCT)));
@@ -4600,7 +4600,7 @@ export function $$ij0(e) {
   let i = getIsAndroidOrIphoneNotFigmaMobile();
   let a = useSelector(e => MS(e.userFlags));
   let m = useSelector(e => e.currentTeamId);
-  let E = Rs(TeamById(_X(Pw.GROUP_7) && m ? {
+  let E = useSubscription(TeamById(_X(Pw.GROUP_7) && m ? {
     teamId: m
   } : null));
   let b = useMemo(() => E.transform(({
@@ -4609,7 +4609,7 @@ export function $$ij0(e) {
   let j = useSelector(r => e.isGen1 || _X(Pw.GROUP_7) && "loaded" !== b.status ? null : FQ(r, b.data));
   let C = useSelector(e => null !== e.user && cn(e.user));
   let w = useRef();
-  let k = Oc();
+  let k = useIsSelectedFigmakeFullscreen();
   j && !w.current && (w.current = j);
   useEffect(() => {
     r(C);

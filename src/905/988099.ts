@@ -1,5 +1,5 @@
 import { um, atom, atomStoreManager } from "../figma_app/27355";
-import { az } from "../905/502364";
+import { eventEmitterAtom } from "../905/502364";
 import { gV } from "../905/337355";
 import { b } from "../905/965432";
 function o(e, t, i) {
@@ -61,14 +61,14 @@ export function $$c0(e, t) {
         }
       });
     };
-    o(atomStoreManager.get(az), i, p);
+    o(atomStoreManager.get(eventEmitterAtom), i, p);
     d.set(e, {
       clear: () => {
         d.$$delete(e);
-        l(atomStoreManager.get(az), i, p);
+        l(atomStoreManager.get(eventEmitterAtom), i, p);
       },
       reset: () => {
-        let e = atomStoreManager.get(az);
+        let e = atomStoreManager.get(eventEmitterAtom);
         l(e, i, p);
         o(e, i, p);
       }

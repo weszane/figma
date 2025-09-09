@@ -77,7 +77,7 @@ import { ZE } from "../figma_app/932285";
 import { s as _$$s } from "../figma_app/666387";
 import { W1 } from "../figma_app/439493";
 import { R as _$$R } from "../figma_app/640506";
-import { ZC, PD } from "../figma_app/39751";
+import { useLatestRef, usePersistentValue } from "../figma_app/922077";
 import { Qv } from "../figma_app/967873";
 import { TS, AF, V_, Cz, zS, MV } from "../figma_app/153399";
 import { v as _$$v } from "../figma_app/99807";
@@ -1342,7 +1342,7 @@ function td({
 let tc = memo(function ({
   numSwatchesLoading: e
 }) {
-  let t = ZC(e);
+  let t = useLatestRef(e);
   let i = t && !e;
   let r = i ? t : e;
   let a = 0 === e;
@@ -3601,7 +3601,7 @@ function t2({
   }();
   let i = function () {
     let e = useAtomWithSubscription(_$$XS) ?? void 0;
-    let t = PD(e);
+    let t = usePersistentValue(e);
     return e || t || gf;
   }();
   let a = v0();
@@ -3896,9 +3896,9 @@ function iT({
       easing: "cubic-bezier(0.37, 0, 0.48, 1.33)"
     }));
     n.play();
-    n.finished.then(() => r.play()).catch(() => { });
-    r.finished.then(() => a.play()).catch(() => { });
-    a.finished.then(() => s.play()).catch(() => { });
+    n.finished.then(() => r.play()).catch(() => {});
+    r.finished.then(() => a.play()).catch(() => {});
+    a.finished.then(() => s.play()).catch(() => {});
     return () => {
       n.cancel();
       a.cancel();

@@ -1,10 +1,10 @@
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { sf } from "../905/929976";
 import { TeamCanView } from "../figma_app/43951";
 export function $$o0(e) {
-  let t = Rs(TeamCanView, {
+  let t = useSubscription(TeamCanView, {
     id: e ?? ""
   }, {
     enabled: !!e
@@ -17,7 +17,7 @@ export function $$o0(e) {
   }, [t, a]);
 }
 export function $$d1(e) {
-  let t = Rs(TeamCanView, {
+  let t = useSubscription(TeamCanView, {
     id: e ?? ""
   }, {
     enabled: !!e

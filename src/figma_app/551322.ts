@@ -6,9 +6,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Wn } from "../figma_app/88484";
-import { ZC } from "../figma_app/39751";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
+import { useLatestRef } from "../figma_app/922077";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { Ve, c$ } from "../figma_app/236327";
 import { tM, vd } from "../figma_app/637027";
@@ -27,12 +27,12 @@ import { b as _$$b } from "../905/985254";
 import { lg } from "../figma_app/976749";
 import { F as _$$F2 } from "../905/224";
 import { Um } from "../905/848862";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType, FPlanLimitationType } from "../figma_app/191312";
 import { MoveDraftsTeamData, MoveDraftsNudgeV2OverlayRecentFilesView, MoveDraftsNudgeV2OverlayRecentFilesLegacyView } from "../figma_app/43951";
 import { YN } from "../figma_app/349248";
 import { vL, Bi } from "../905/652992";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { Ib } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { eg, O0, Lh } from "../figma_app/452252";
@@ -50,7 +50,7 @@ let X = "move_drafts_nudge_rcs_steps--infoText--dIEdg";
 export function $$Z1(e) {
   let t = useDispatch();
   let r = Um();
-  let s = q5();
+  let s = selectCurrentFile();
   let o = useSelector(e => e.repos);
   let l = useSelector(e => e.userFlags.seen_move_drafts_nudge);
   let [d, c] = useState(!1);
@@ -99,7 +99,7 @@ export function $$Q0(e) {
     dismissModal
   } = e;
   let o = r?.type === eg;
-  let l = ZC(o);
+  let l = useLatestRef(o);
   useEffect(() => {
     l && !o && dismissModal();
   }, [o, l, dismissModal]);
@@ -149,13 +149,13 @@ export function $$ee2({
   let d = useDispatch();
   let u = Um();
   let p = lg();
-  let h = q5();
+  let h = selectCurrentFile();
   let x = et();
   let [w, M] = useState(void 0);
   useEffect(() => {
     u?.type === eg && e();
   }, [u?.type, e]);
-  let B = Rs(MoveDraftsTeamData, {
+  let B = useSubscription(MoveDraftsTeamData, {
     orgId: null
   });
   if ("loaded" !== B.status || 0 === B.data.currentUser.teamEditRoles.length) return null;
@@ -329,7 +329,7 @@ export function $$ee2({
               data: {
                 team: w,
                 resource: p !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
-                action: ZN.MOVE_FILES,
+                action: fileActionEnum.MOVE_FILES,
                 currentPlan: _$$F2.Plan.STARTER,
                 upsellPlan: _$$F2.Plan.PRO,
                 editorType: p,
@@ -366,14 +366,14 @@ export function $$ee2({
   });
 }
 let et = getFeatureFlags().move_drafts_nudge_v2_recent_files_slim ? function () {
-  let [e] = IT(MoveDraftsNudgeV2OverlayRecentFilesView({}));
+  let [e] = setupResourceAtomHandler(MoveDraftsNudgeV2OverlayRecentFilesView({}));
   return useMemo(() => e.transform(e => {
     let t = [];
     for (let r of e.currentUser.recentFiles2 ?? []) r.file && t.push(r.file);
     return t;
   }), [e]);
 } : function () {
-  let [e] = IT(MoveDraftsNudgeV2OverlayRecentFilesLegacyView({}));
+  let [e] = setupResourceAtomHandler(MoveDraftsNudgeV2OverlayRecentFilesLegacyView({}));
   let t = useMemo(() => e.transform(e => YN(e.currentUser.recentFiles2)), [e]);
   useEffect(() => {
     "loaded" === t.status && Wn(t.data);

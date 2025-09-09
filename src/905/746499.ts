@@ -4,9 +4,9 @@ import { GitReferenceType, OperationResult } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { nX } from "../905/617744";
+import { currentSelectionAtom } from "../905/617744";
 import { Z_ } from "../figma_app/793953";
-import { Kn, ap } from "../905/535806";
+import { SourceDirection, AggregationType } from "../905/535806";
 import { kB, kL, qr, rb, pz } from "../905/710747";
 export function $$m4(e) {
   return jsx("div", {
@@ -41,7 +41,7 @@ export function $$_0(e) {
 }
 export let $$A5 = createContext(0);
 export function $$y1(e) {
-  let t = atomStoreManager.get(nX);
+  let t = atomStoreManager.get(currentSelectionAtom);
   let {
     metrics,
     ...n
@@ -76,7 +76,7 @@ export function $$b6(e) {
     let e = displayGroups.filter(e => "state-group" === e.type || "generic" === e.type).map(e => e.affectedChunks.length).reduce((e, t) => e + t, 0);
     let t = displayGroups.filter(e => "variable-collection" === e.type).map(e => e.variableChunks.length).reduce((e, t) => e + t, 0);
     let i = displayGroups.filter(e => "state-group" === e.type).map(e => e.variantChunks.length).reduce((e, t) => e + t, 0);
-    let n = direction === Kn.FROM_SOURCE && conflictGroups.length > 0;
+    let n = direction === SourceDirection.FROM_SOURCE && conflictGroups.length > 0;
     return {
       branchFileKey,
       sourceFileKey,
@@ -100,7 +100,7 @@ export function $$b6(e) {
             if (0 === i) {
               let i = {
                 durationMs: e - t,
-                loadType: ap.TOTAL,
+                loadType: AggregationType.TOTAL,
                 ...v
               };
               trackEventAnalytics("Branch Modal Load Backgrounded", i, {
@@ -123,7 +123,7 @@ export function $$b6(e) {
       getFeatureFlags().internal_only_debug_tools && console.log(`[Branching][${e.direction}] modal loaded source diff loadtime=${(n / 1e3).toFixed(2)}s`);
       let r = {
         durationMs: n,
-        loadType: ap.TOTAL,
+        loadType: AggregationType.TOTAL,
         backgrounded: i > 0,
         backgroundDurationMs: i,
         ...v
@@ -136,10 +136,10 @@ export function $$b6(e) {
   useEffect(() => {
     if (e.isDoneLoading && e.branchFileKey && e.sourceFileKey && e.fileRepoId) {
       let n = Date.now() - t;
-      if (getFeatureFlags().internal_only_debug_tools && console.log(`[Branching][${e.direction}] modal loadtime=${(n / 1e3).toFixed(2)}s`), entryPointDirection === Kn.TO_SOURCE && direction === Kn.FROM_SOURCE) return;
+      if (getFeatureFlags().internal_only_debug_tools && console.log(`[Branching][${e.direction}] modal loadtime=${(n / 1e3).toFixed(2)}s`), entryPointDirection === SourceDirection.TO_SOURCE && direction === SourceDirection.FROM_SOURCE) return;
       let r = {
         durationMs: n,
-        loadType: ap.TOTAL,
+        loadType: AggregationType.TOTAL,
         backgrounded: i > 0,
         backgroundDurationMs: i,
         ...v,
@@ -158,7 +158,7 @@ export function $$b6(e) {
         getFeatureFlags().internal_only_debug_tools && console.log(`[Branching][${e.direction}] modal time to browser paint=${(n / 1e3).toFixed(2)}s`);
         let r = {
           durationMs: n,
-          loadType: ap.TOTAL,
+          loadType: AggregationType.TOTAL,
           backgrounded: i > 0,
           backgroundDurationMs: i,
           ...v
@@ -175,12 +175,12 @@ export function $$b6(e) {
     }
   }, [e.isDoneLoading, e.branchFileKey, e.sourceFileKey, e.fileRepoId]);
   useEffect(() => {
-    if (e.direction === Kn.TO_SOURCE && e.isDoneLoadingConflicts && e.branchFileKey && e.sourceFileKey && e.fileRepoId) {
+    if (e.direction === SourceDirection.TO_SOURCE && e.isDoneLoadingConflicts && e.branchFileKey && e.sourceFileKey && e.fileRepoId) {
       let n = Date.now() - t;
       getFeatureFlags().internal_only_debug_tools && console.log(`[Branching][${e.direction}] conflicts loadtime=${(n / 1e3).toFixed(2)}s`);
       let r = {
         durationMs: n,
-        loadType: ap.TOTAL,
+        loadType: AggregationType.TOTAL,
         backgrounded: i > 0,
         backgroundDurationMs: i,
         ...v

@@ -4,7 +4,7 @@ import { x } from "../905/811596";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Ho } from "../figma_app/236178";
 import { wZ } from "../figma_app/777207";
 import { d$, G7 } from "../905/863795";
@@ -36,7 +36,7 @@ export function $$g1({
   ...t
 }) {
   let r = useAtomWithSubscription(d$);
-  let i = T5("ApprovedLibraryIconForFullScreen").unwrapOr(null);
+  let i = useCurrentPrivilegedPlan("ApprovedLibraryIconForFullScreen").unwrapOr(null);
   let a = i?.name;
   let o = Ho(e);
   return jsx($$m3, {
@@ -47,7 +47,7 @@ export function $$g1({
 }
 export function $$f2(e) {
   let t = useAtomWithSubscription(G7);
-  let r = T5("ApprovedLibraryIconForUserDefaultSubscriptions").unwrapOr(null);
+  let r = useCurrentPrivilegedPlan("ApprovedLibraryIconForUserDefaultSubscriptions").unwrapOr(null);
   let i = r?.name;
   let a = Ho(e.libraryKey);
   return jsx($$m3, {

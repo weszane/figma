@@ -9,18 +9,18 @@ import { qB } from "../905/862321";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { V as _$$V } from "../905/223767";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { i$ } from "../905/15667";
 import { c as _$$c } from "../905/370443";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { w5, oc } from "../figma_app/345997";
-import { D6 } from "../figma_app/465071";
-import { h4 } from "../figma_app/421473";
+import { useCurrentPlanUser } from "../figma_app/465071";
+import { FUserTypeClassification } from "../figma_app/421473";
 import { ol, H7 } from "../figma_app/598018";
 import { wH } from "../figma_app/680166";
 import { UpsellModalType } from "../905/165519";
@@ -41,11 +41,11 @@ export function $$z0({
   onRequestAccess: n
 } = {}) {
   let O = function () {
-    let e = _I();
-    let t = q5();
-    let n = D6("useUpgradeForDevMode").unwrapOr(null);
-    let r = n?.key.type === h4.TEAM_USER && n?.planKey.parentId === t?.teamId;
-    let u = n?.key.type === h4.ORG_USER && n?.planKey.parentId === t?.parentOrgId;
+    let e = useCanAccessFullDevMode();
+    let t = selectCurrentFile();
+    let n = useCurrentPlanUser("useUpgradeForDevMode").unwrapOr(null);
+    let r = n?.key.type === FUserTypeClassification.TEAM_USER && n?.planKey.parentId === t?.teamId;
+    let u = n?.key.type === FUserTypeClassification.ORG_USER && n?.planKey.parentId === t?.parentOrgId;
     let g = ol();
     let x = w5(g) && !g?.org_id;
     let y = _$$U();
@@ -82,7 +82,7 @@ export function $$z0({
           }));
         } else if (x) C(VisualBellActions.enqueue({
           message: "No team user"
-        })); else {
+        }));else {
           y("Dev Mode Paywall clicked", {
             type: "Starter Tier Upgrade",
             entryPoint: n
@@ -199,7 +199,7 @@ export function $$H2() {
   };
 }
 export function $$W1() {
-  let e = q5();
+  let e = selectCurrentFile();
   return e?.currentPartialOrgUser?.designAccountTypeRequest?.status === "pending" || e?.currentPartialOrgUser?.devModeAccountTypeRequest?.status === "pending" || e?.currentTeamUser?.designAccountTypeRequest?.status === "pending";
 }
 export const BC = $$z0;

@@ -7,7 +7,7 @@ import { AppStateTsApi, BuzzCloneHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { Vs } from "../figma_app/930338";
+import { base64ToUint8Array } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { v as _$$v } from "../6388/913037";
@@ -68,12 +68,12 @@ export function $$C0({
             if (!s) continue;
             let r = n[0];
             let a = n[1];
-            if (r === PU.TEXT) s.characters = a; else if (r === PU.IMAGE) {
+            if (r === PU.TEXT) s.characters = a;else if (r === PU.IMAGE) {
               let e = a.split(",")[1];
               let t = a.split(";")[0]?.split(":")[1] || "";
               if (!e || !t) continue;
               Vm(s.guid, jsx(_$$A, {}));
-              let l = Vs(e);
+              let l = base64ToUint8Array(e);
               UD(l, t, "File").then(e => {
                 let t = -1;
                 let l = "FILL";
@@ -153,7 +153,7 @@ export function $$C0({
         }(r);
         for (let [a, u] of o) {
           let o = x;
-          if (d.createRow(o), x++, 0 === Object.keys(r).length) for (let r = 0; r < e; r++) c(u, n, i, a, o, r, s, e, l, t); else for (let r = 0; r < e; r += 10) setTimeout(() => {
+          if (d.createRow(o), x++, 0 === Object.keys(r).length) for (let r = 0; r < e; r++) c(u, n, i, a, o, r, s, e, l, t);else for (let r = 0; r < e; r += 10) setTimeout(() => {
             for (let d = 0; d < 10 && !(r + d >= e); d++) c(u, n, i, a, o, r + d, s, e, l, t);
           }, h * r);
         }

@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { isDevEnvironment } from "../figma_app/169182";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { M4 } from "../905/713695";
 import { pluginAPIService } from "../905/3209";
@@ -34,7 +34,7 @@ let h = M4.Query({
   })
 });
 export function $$g0() {
-  let [e] = IT(h());
+  let [e] = setupResourceAtomHandler(h());
   return {
     loading: "loading" === e.status,
     inspectPlugins: e.data?.inspectPlugins ?? [],

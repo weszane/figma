@@ -1,10 +1,10 @@
 import { FAccessLevelType } from "../figma_app/191312";
-import { Fb } from "../figma_app/630077";
+import { teamVisibilityEnum } from "../figma_app/630077";
 export function $$a0(e, t) {
   switch (t) {
-    case Fb.ORG_BROWSABLE:
+    case teamVisibilityEnum.ORG_BROWSABLE:
       return FAccessLevelType.PRIVATE;
-    case Fb.HIDDEN:
+    case teamVisibilityEnum.HIDDEN:
       return FAccessLevelType.SECRET;
     default:
       return e ?? null;

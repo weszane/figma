@@ -15,7 +15,7 @@ import { Uf, $K } from "../figma_app/223206";
 import { J3, JU } from "../figma_app/622574";
 import { Cu } from "../figma_app/314264";
 import { Kl } from "../905/766303";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Me } from "../figma_app/598018";
 import { ai } from "../figma_app/915202";
@@ -66,7 +66,7 @@ export function $$I1({
 export function $$k0() {
   let e = useDispatch();
   let t = useAtomWithSubscription(Uf);
-  let i = tS();
+  let i = useCurrentFileKey();
   let s = EI();
   let l = !!t;
   let u = l && !!i && s;

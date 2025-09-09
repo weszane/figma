@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import a from "classnames";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { a as _$$a } from "../905/925868";
 import { t as _$$t } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -268,7 +268,7 @@ export function $$D2({
             children: getI18nString("community.follow.followers")
           }), jsx("div", {
             className: JQ,
-            children: $M(model.follower_count + _)
+            children: formatNumber(model.follower_count + _)
           })]
         })]
       })]

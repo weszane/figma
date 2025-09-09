@@ -1,6 +1,6 @@
 import { useMemo, useLayoutEffect } from "react";
 import { customHistory } from "../905/612521";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { parseQuerySimple } from "../905/634134";
 import { C as _$$C } from "../905/237873";
 import { S, N } from "../905/872825";
@@ -139,7 +139,7 @@ export function $$R6(e) {
     resource_type
   } = e.search;
   let l = zq();
-  let [c] = IT(Zp({
+  let [c] = setupResourceAtomHandler(Zp({
     categorySlug,
     tagSlug,
     locale: l

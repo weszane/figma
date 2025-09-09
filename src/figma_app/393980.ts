@@ -26,7 +26,7 @@ import { b as _$$b } from "../figma_app/755529";
 import { Um } from "../905/848862";
 import { kH, In } from "../905/309735";
 import { Ib } from "../905/129884";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { v as _$$v } from "../figma_app/398917";
 import { sO } from "../figma_app/21029";
 import { TN, Dq, Dh } from "../figma_app/177697";
@@ -58,7 +58,7 @@ export function $$Y0({
   onEnterPressed: h,
   type: m
 }) {
-  let g = cJ() && getFeatureFlags().sites_responsive_text_styles && "TEXT" === m;
+  let g = useIsFullscreenSitesView() && getFeatureFlags().sites_responsive_text_styles && "TEXT" === m;
   return jsxs(Y, {
     direction: "vertical",
     spacing: 0,
@@ -189,7 +189,7 @@ function X({
     }));
   };
   let U = useHandleKeyboardEvent(p, "keydown", e => {
-    if (e.keyCode === Uz.TAB) k(); else if (e.keyCode === Uz.ENTER) {
+    if (e.keyCode === Uz.TAB) k();else if (e.keyCode === Uz.ENTER) {
       k();
       D === zM.EDIT_STYLE && "" === g || h?.();
       e.preventDefault();

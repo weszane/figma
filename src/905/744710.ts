@@ -68,12 +68,12 @@ import { Label, HiddenLabel } from "../905/270045";
 import { J as _$$J2 } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { mI, gY } from "../figma_app/566371";
+import { handleSuspenseRetainRelease, getAtomMutate } from "../figma_app/566371";
 import { Ph } from "../905/160095";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { w as _$$w } from "../figma_app/705249";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { f as _$$f } from "../905/940356";
 import { Au } from "../figma_app/518077";
@@ -91,10 +91,10 @@ import { E as _$$E } from "../905/632989";
 import { D as _$$D } from "../905/443020";
 import { X as _$$X2 } from "../905/857208";
 import { V as _$$V } from "../905/849455";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { zN } from "../figma_app/416935";
 import { selectWithShallowEqual } from "../905/103090";
-import { Rs, p as _$$p2 } from "../figma_app/288654";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { G as _$$G } from "../905/750789";
 import { sx as _$$sx } from "../905/941192";
@@ -139,7 +139,7 @@ import { V as _$$V2 } from "../905/223767";
 import { Qh, fK } from "../905/469533";
 import { c as _$$c2 } from "../905/370443";
 import { am } from "../905/640017";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { $I } from "../figma_app/865646";
 import { UpsellModalType } from "../905/165519";
 import { C_ } from "../905/345933";
@@ -166,7 +166,7 @@ import { p as _$$p3 } from "../905/185998";
 import { z as _$$z4 } from "../905/239603";
 import { s_ } from "../905/17223";
 import { L as _$$L2 } from "../905/408237";
-import { P5 } from "../figma_app/175992";
+import { StatusType } from "../figma_app/175992";
 import { Hl, hM } from "../905/840929";
 import { q as _$$q } from "../905/932270";
 import { _ as _$$_2, S as _$$S4 } from "../figma_app/490799";
@@ -182,7 +182,7 @@ import { A as _$$A8 } from "../905/215698";
 import { B as _$$B2 } from "../905/950875";
 import { n as _$$n } from "../figma_app/3731";
 import { tc as _$$tc } from "../905/15667";
-import { a_, ud, TI } from "../905/513035";
+import { isCollaboratorType, ProductAccessTypeEnum, ProductAccessTypeMap } from "../905/513035";
 import { N_ } from "../905/332483";
 import { Zx } from "../figma_app/217457";
 import { j as _$$j } from "../figma_app/496854";
@@ -1326,8 +1326,8 @@ function tA() {
   let [t] = IT(tf({
     orgId: e
   }));
-  let [i] = mI(t);
-  let n = gY(t_);
+  let [i] = handleSuspenseRetainRelease(t);
+  let n = getAtomMutate(t_);
   let s = useCallback(t => {
     n({
       orgId: e,
@@ -1509,7 +1509,7 @@ function tk(e) {
     channelType: e.channelType,
     policyTypesCsv: e.policyTypesCsv
   }));
-  let [i] = mI(t);
+  let [i] = handleSuspenseRetainRelease(t);
   let n = _$$gY(tw);
   let s = _$$gY(tC);
   let o = _$$gY(tT);
@@ -1643,7 +1643,7 @@ let tP = M4.Query({
 function tO() {
   let [e, t] = useState(!1);
   let [i] = IT(tP({}));
-  let [n] = mI(i);
+  let [n] = handleSuspenseRetainRelease(i);
   if ("loaded" !== n.status) return null;
   let s = n.data;
   return !e && s.isPushNotificationsSupported && "prompt" === s.permissionStatus.state ? jsxs("div", {
@@ -1672,7 +1672,7 @@ function tO() {
 }
 function tD() {
   let e = selectCurrentUser();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = _$$w();
   let n = dq();
   let s = null != Au(n);
@@ -2439,8 +2439,8 @@ function iM({
   user: e
 }) {
   let t = useDispatch();
-  let i = Rs(CurrentUserIsMfaRequiredByMembershipOrgView({}));
-  let n = oA(i.data?.currentUser?.isMfaRequiredByMembershipOrg);
+  let i = useSubscription(CurrentUserIsMfaRequiredByMembershipOrgView({}));
+  let n = getResourceDataOrFallback(i.data?.currentUser?.isMfaRequiredByMembershipOrg);
   let a = e.two_factor_app_enabled;
   let s = e.phone_number;
   let o = a || s;
@@ -2736,7 +2736,7 @@ function nn({
   userEmailFeatures: e
 }) {
   let t = _$$lW();
-  let i = T5("EmailChangeWarning").unwrapOr(null);
+  let i = useCurrentPrivilegedPlan("EmailChangeWarning").unwrapOr(null);
   let n = i?.name;
   return t && n ? jsx("div", {
     className: _$$s.flex.mt16.bRadius8.p16.colorBgDangerTertiary.flexColumn.$,
@@ -3507,7 +3507,7 @@ class n8 extends PureComponent {
           }), " ", renderI18nText("settings.delete_user_account.deleting_your_this_props_user_email_account_will_delete_all_your_associated_data", {
             email: this.props.user.email
           }), jsx("br", {})]
-        }), jsx("br", {}), this.props.user.stripe_account_status && this.props.user.stripe_account_status !== P5.NONE && jsxs(Fragment, {
+        }), jsx("br", {}), this.props.user.stripe_account_status && this.props.user.stripe_account_status !== StatusType.NONE && jsxs(Fragment, {
           children: [jsx("p", {
             children: renderI18nText("settings.any_resources_you_have_marked_for_sale", {
               creatorAgreement: Hl
@@ -3901,7 +3901,7 @@ function rO(e) {
     planParentId: e.plan_id,
     planType: "org" === e.plan_type ? FOrganizationLevelType.ORG : FOrganizationLevelType.TEAM
   }));
-  let s = _$$p2(UserSettingsPlanRow, n);
+  let s = useMultiSubscription(UserSettingsPlanRow, n);
   let [o, l] = useState(s.length <= 3);
   return jsxs(_$$Y, {
     direction: "vertical",
@@ -3922,7 +3922,7 @@ function rO(e) {
       } = e.result.data;
       if (!planPermissions || !planUser) return null;
       let s = null;
-      planUser.billableProductKeys && (s = planUser.billableProductKeys.find(e => a_(e)));
+      planUser.billableProductKeys && (s = planUser.billableProductKeys.find(e => isCollaboratorType(e)));
       let o = planUser.pendingAccountTypeRequest?.billableProductKey ? Zx(planUser.pendingAccountTypeRequest?.billableProductKey) : null;
       let l = planUser.latestProvisionalAccess?.billableProductKey ?? null;
       let d = null !== o && null !== l && o === Zx(l);
@@ -3980,11 +3980,11 @@ function rD(e) {
   } = n;
   let l = N_.toArray().filter(e => function (e, t) {
     switch (e) {
-      case ud.COLLABORATOR:
+      case ProductAccessTypeEnum.COLLABORATOR:
         return t.canUpgradeCollaborator;
-      case ud.DEVELOPER:
+      case ProductAccessTypeEnum.DEVELOPER:
         return t.canUpgradeDeveloper;
-      case ud.EXPERT:
+      case ProductAccessTypeEnum.EXPERT:
         return t.canUpgradeExpert;
       default:
         return !1;
@@ -4118,7 +4118,7 @@ function rD(e) {
             children: [jsx($n.Link, {
               onClick: () => {
                 handleUpgrade({
-                  licenseType: TI[e],
+                  licenseType: ProductAccessTypeMap[e],
                   upgradeReason: _$$i.USER_SETTINGS,
                   entryPoint: _$$tc.USER_SETTINGS,
                   afterUpgradeCallback: () => {
@@ -4144,21 +4144,21 @@ function rD(e) {
 }
 function rL(e) {
   switch (e) {
-    case ud.EXPERT:
+    case ProductAccessTypeEnum.EXPERT:
       return {
         currentSeatCopy: getI18nString("user_settings.plan_sections.full_seat"),
         seatUpgradeOptionCopy: getI18nString("general.bundle.expert"),
         pendingAccountTypeRequestCopy: getI18nString("user_settings.plan_sections.pending_account_type_request_for_full_seat"),
         provisionalAccessCopy: getI18nString("user_settings.plan_sections.provisional_access_text_for_full_seat")
       };
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return {
         currentSeatCopy: getI18nString("user_settings.plan_sections.dev_seat"),
         seatUpgradeOptionCopy: getI18nString("general.bundle.developer"),
         pendingAccountTypeRequestCopy: getI18nString("user_settings.plan_sections.pending_account_type_request_for_dev_seat"),
         provisionalAccessCopy: getI18nString("user_settings.plan_sections.provisional_access_text_for_dev_seat")
       };
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return {
         currentSeatCopy: getI18nString("user_settings.plan_sections.collaborator_seat"),
         seatUpgradeOptionCopy: getI18nString("general.bundle.collaborator"),
@@ -4187,16 +4187,16 @@ function rF({
     orgDomains: e.orgDomains,
     currentOrgDisabledPresetsAndTemplates: yK(e)
   }));
-  let s = Rs(UserFlagByName({
+  let s = useSubscription(UserFlagByName({
     name: "disable_file_view_history"
   }));
   let o = !!s?.data?.currentUser?.userFlagByName;
-  let l = Rs(CurrentUserInStudentPlusPlanView({}));
-  let d = T5("SettingsViewInner").unwrapOr(null);
+  let l = useSubscription(CurrentUserInStudentPlusPlanView({}));
+  let d = useCurrentPrivilegedPlan("SettingsViewInner").unwrapOr(null);
   let c = d && d.key.type === FOrganizationLevelType.TEAM ? d.key.parentId : null;
   let u = _$$oA(l.data?.currentUser?.inStudentPlusPlan);
   let g = c && d && d.tier === FPlanNameType.STARTER;
-  let f = Rs(TeamCanEdit({
+  let f = useSubscription(TeamCanEdit({
     id: c || ""
   }), {
     enabled: !!c

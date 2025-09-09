@@ -6,10 +6,10 @@ import { e } from "../905/149844";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { h1 } from "../905/986103";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { M4 } from "../905/713695";
 import { R as _$$R } from "../905/943003";
 import { uF } from "../1156/418246";
@@ -81,7 +81,7 @@ function P({
   props: e,
   projectIdToPause: t
 }) {
-  let n = tS();
+  let n = useCurrentFileKey();
   let [i, s] = useAtomValueAndSetter(kz);
   let l = h5({
     toolCallId: e.toolCallId,
@@ -425,15 +425,15 @@ function Y({
     let {
       needsToPauseProject
     } = Lz();
-    let o = tS();
+    let o = useCurrentFileKey();
     let {
       organization
     } = mS();
     let x = organization?.id;
-    let [, m] = IT(TT({
+    let [, m] = setupResourceAtomHandler(TT({
       fileKey: o
     }));
-    let [, b] = IT(YF({
+    let [, b] = setupResourceAtomHandler(YF({
       fileKey: o
     }));
     let v = _$$S();

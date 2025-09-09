@@ -1,7 +1,7 @@
 import { A } from "../905/920142";
 import { h } from "../905/142086";
 import { oB } from "../905/929976";
-import { up } from "../905/760074";
+import { getRepoByIdAlt } from "../905/760074";
 import { M4 } from "../905/713695";
 import { L } from "../905/657783";
 export function $$d0(e, t) {
@@ -10,7 +10,7 @@ export function $$d0(e, t) {
 export function $$c2(e, t, r, n) {
   return () => {
     if (e(oB()), !t) return;
-    let o = up(t, r);
+    let o = getRepoByIdAlt(t, r);
     h({
       key: t.key,
       name: t.name,

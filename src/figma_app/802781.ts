@@ -12,14 +12,14 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { JF } from "../905/34809";
-import { HH } from "../figma_app/828186";
+import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { nX, FE } from "../figma_app/314264";
 import { wW } from "../figma_app/656450";
 import { G } from "../figma_app/471068";
 import { ue, rR, rJ, Jh, t2, C0 } from "../figma_app/756995";
 import { H } from "../905/209153";
-import { aI } from "../figma_app/552876";
-import { oz } from "../905/561485";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { E as _$$E } from "../905/409917";
 export function $$x7(e) {
   let t = wW(e.userId).user;
@@ -150,9 +150,9 @@ export function $$R1(e) {
 export function $$L8(e) {
   let t = useDispatch();
   let r = useSelector(e => e.selectedView);
-  let i = oz();
-  let s = HH();
-  let o = aI();
+  let i = isSitesFeatureEnabled();
+  let s = isCooperFeatureEnabled();
+  let o = isFigmakeSitesEnabled();
   let l = "recentsAndSharing" === r.view;
   let d = [t2.ANY, t2.DESIGN, t2.FIGJAM, t2.SLIDES];
   d = s ? d.concat([t2.COOPER]) : d;

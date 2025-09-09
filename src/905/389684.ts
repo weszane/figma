@@ -4,8 +4,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { generateUUIDv4 } from "../905/871474";
 import { Zn } from "../figma_app/933328";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
-import { Kz } from "../905/760074";
-import { q5 } from "../figma_app/516028";
+import { isBranchAlt } from "../905/760074";
+import { selectCurrentFile } from "../figma_app/516028";
 import { LH } from "../905/872904";
 import { cX, Wv } from "../figma_app/633080";
 import { Vg } from "../905/300621";
@@ -19,7 +19,7 @@ export function $$_0({
 }) {
   let _ = useDispatch();
   let A = useSelector(e => e.modalShown);
-  let y = q5();
+  let y = selectCurrentFile();
   let b = LH();
   let v = "editor" === t;
   let I = useMemo(() => "editor" === t && A?.type === cX || "figjam" === t && A?.type === Vg.type, [A?.type, t]);
@@ -31,7 +31,7 @@ export function $$_0({
       libraryModalSessionId: v ? n : void 0,
       fileKey: y?.key,
       orgId: b,
-      isBranch: y ? Kz(y) : void 0,
+      isBranch: y ? isBranchAlt(y) : void 0,
       isRedesign: v,
       tab: v ? FX(i) : void 0
     }, {

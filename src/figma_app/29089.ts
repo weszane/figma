@@ -2,7 +2,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { LayoutTabType, DesignGraphElements, AppStateTsApi, SelectionPanelType, SymbolOverrideType, SwitchState, PresentationMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
-import { tn } from "../figma_app/473493";
+import { canAccessFullDevMode } from "../figma_app/473493";
 import { P as _$$P } from "../905/36308";
 import { kg } from "../figma_app/120210";
 import { wA } from "../figma_app/167249";
@@ -723,7 +723,7 @@ export function $$eG2(e) {
   } : em;
 }
 export let $$eV31 = [en, ei, ea, es, eo, el, ed, $$ec, eu, er, ep, e_];
-[ZU.ACTION, ZU.ACTION, ...L, ZU.ACTION, ZU.ACTION, ZU.FLYOUT, ZU.ACTION, ZU.ACTION, (ZU.ACTION, _$$P, () => AppStateTsApi.editorState().selectionIsMask.getCopy() === SwitchState.ON), ZU.FLYOUT, ZU.ACTION, (ZU.ACTION, LayoutTabType.DESIGN_LAYOUT, LayoutTabType.TEXT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT), ZU.ACTION, (ZU.ACTION, [...$$E11, LayoutTabType.DEV_HANDOFF, LayoutTabType.PREVIEW], (e, t, r) => r?.canEdit || tn({
+[ZU.ACTION, ZU.ACTION, ...L, ZU.ACTION, ZU.ACTION, ZU.FLYOUT, ZU.ACTION, ZU.ACTION, (ZU.ACTION, _$$P, () => AppStateTsApi.editorState().selectionIsMask.getCopy() === SwitchState.ON), ZU.FLYOUT, ZU.ACTION, (ZU.ACTION, LayoutTabType.DESIGN_LAYOUT, LayoutTabType.TEXT, LayoutTabType.SLIDE_LAYOUT, LayoutTabType.SITES_LAYOUT), ZU.ACTION, (ZU.ACTION, [...$$E11, LayoutTabType.DEV_HANDOFF, LayoutTabType.PREVIEW], (e, t, r) => r?.canEdit || canAccessFullDevMode({
   openFile: r
 })), (ZU.ACTION, [...$$E11, LayoutTabType.DEV_HANDOFF, LayoutTabType.PREVIEW], () => !0)];
 ZU.TOOL;

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { _Z } from "../figma_app/819288";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { registerModal } from "../905/102752";
@@ -82,7 +82,7 @@ export let $$_0 = registerModal(function (e) {
   });
   let A = g ? renderI18nText("comments.please_note_that_is_external_to_your_organization", {
     numUsers: s.length,
-    userNames: Yx(s),
+    userNames: formatList(s),
     learnMore: _
   }) : renderI18nText("comments.please_note_that_some_of_these_users_are_external_to_your_organization", {
     numUsers: s.length,

@@ -6,7 +6,7 @@ import { M } from "../905/413543";
 import { u as _$$u } from "../905/158787";
 import { e } from "../905/240303";
 import { J } from "../905/614223";
-import { ud, Gu } from "../905/513035";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
 import { JW, ju } from "../905/389382";
 let s = memo(function (e) {
   return jsx("svg", {
@@ -174,7 +174,7 @@ let b = memo(function (e) {
   });
 });
 let x = {
-  [ud.EXPERT]: {
+  [ProductAccessTypeEnum.EXPERT]: {
     iconsBySize: {
       16: s,
       24: K,
@@ -183,7 +183,7 @@ let x = {
     },
     brand: "design"
   },
-  [ud.COLLABORATOR]: {
+  [ProductAccessTypeEnum.COLLABORATOR]: {
     iconsBySize: {
       16: d,
       24: M,
@@ -192,7 +192,7 @@ let x = {
     },
     brand: "whiteboard"
   },
-  [ud.DEVELOPER]: {
+  [ProductAccessTypeEnum.DEVELOPER]: {
     iconsBySize: {
       16: p,
       24: _$$u,
@@ -201,7 +201,7 @@ let x = {
     },
     brand: "dev-handoff"
   },
-  [ud.CONTENT]: {
+  [ProductAccessTypeEnum.CONTENT]: {
     iconsBySize: {
       16: g,
       24: f,
@@ -210,7 +210,7 @@ let x = {
     },
     brand: "cooper"
   },
-  [Gu.VIEW]: {
+  [ViewAccessTypeEnum.VIEW]: {
     iconsBySize: {
       16: A,
       24: e,

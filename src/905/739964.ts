@@ -8,8 +8,8 @@ import { q as _$$q } from "../905/636218";
 import { g as _$$g } from "../905/125190";
 import { $ as _$$$ } from "../905/379902";
 import p from "classnames";
-import { Rs } from "../figma_app/288654";
-import { mI } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { G as _$$G } from "../figma_app/361869";
 import { Jn } from "../905/17223";
@@ -29,15 +29,15 @@ import { u as _$$u } from "../905/16237";
 import { fu } from "../figma_app/831799";
 import { cw, Fq, I8, yF, vu, jv, vK } from "../905/84777";
 import { h as _$$h } from "../905/864281";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq, N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
-import { vc } from "../figma_app/765689";
+import { getProductAccessTypeFromFileType } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/224";
 import { FOrganizationLevelType, FFileType } from "../figma_app/191312";
 import { TeamCanEdit } from "../figma_app/43951";
 import { vr, LN } from "../figma_app/514043";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 import { Ju, IX } from "../905/712921";
 import { Bi } from "../905/652992";
@@ -175,8 +175,8 @@ function er({
 }) {
   let s;
   let o;
-  let l = X$("Pricing");
-  let [d] = mI(l);
+  let l = useCurrentPublicPlan("Pricing");
+  let [d] = handleSuspenseRetainRelease(l);
   let c = d.data?.key;
   if (i) {
     let e = en(t) === Ju.PRO ? FOrganizationLevelType.TEAM : FOrganizationLevelType.ORG;
@@ -192,7 +192,7 @@ function er({
   }
   let u = function (e, t) {
     let i = en(e);
-    return Oq.exclude([ud.DEV_MODE]).dict(e => ({
+    return Oq.exclude([ProductAccessTypeEnum.DEV_MODE]).dict(e => ({
       currency: t,
       billableProductKey: e,
       billableProductVariantKey: null,
@@ -202,18 +202,18 @@ function er({
     }));
   }(t, e);
   let p = yF(o, u, s);
-  let [m] = mI(p);
+  let [m] = handleSuspenseRetainRelease(p);
   let h = vu(m);
   let f = a ? [a] : [FFileType.DESIGN, FFileType.WHITEBOARD];
   let A = new vr(e);
   let y = h.data;
   let b = {
-    [FFileType.DESIGN]: y[ud.DESIGN].amount,
-    [FFileType.SITES]: y[ud.DESIGN].amount,
-    [FFileType.FIGMAKE]: y[ud.DESIGN].amount,
-    slides: y[ud.DESIGN].amount,
-    [FFileType.COOPER]: y[ud.DESIGN].amount,
-    [FFileType.WHITEBOARD]: y[ud.FIGJAM].amount
+    [FFileType.DESIGN]: y[ProductAccessTypeEnum.DESIGN].amount,
+    [FFileType.SITES]: y[ProductAccessTypeEnum.DESIGN].amount,
+    [FFileType.FIGMAKE]: y[ProductAccessTypeEnum.DESIGN].amount,
+    slides: y[ProductAccessTypeEnum.DESIGN].amount,
+    [FFileType.COOPER]: y[ProductAccessTypeEnum.DESIGN].amount,
+    [FFileType.WHITEBOARD]: y[ProductAccessTypeEnum.FIGJAM].amount
   };
   let E = {
     design: y1.DESIGN_AND_DEV_MODE,
@@ -226,7 +226,7 @@ function er({
   let x = e => {
     let t = jsx("span", {
       className: "consumption_paywall_modals--priceRowProductName--L5rAD",
-      children: _$$E(vc(e))
+      children: _$$E(getProductAccessTypeFromFileType(e))
     });
     return e === FFileType.DESIGN ? jsxs("div", {
       className: _$$s.flex.flexColumn.lh14.rowGap2.$,
@@ -278,7 +278,7 @@ function ea({
     }
   };
   let a = jv(r);
-  let [l] = mI(a);
+  let [l] = handleSuspenseRetainRelease(a);
   let d = vu(l).data;
   let c = new vr(e);
   return jsx(fu, {
@@ -306,13 +306,13 @@ function ea({
             }), jsx("p", {
               children: function (e) {
                 switch (e) {
-                  case ud.EXPERT:
+                  case ProductAccessTypeEnum.EXPERT:
                     return getI18nString("consumption_paywalls.expert_seat");
-                  case ud.DEVELOPER:
+                  case ProductAccessTypeEnum.DEVELOPER:
                     return getI18nString("consumption_paywalls.dev_seat");
-                  case ud.COLLABORATOR:
+                  case ProductAccessTypeEnum.COLLABORATOR:
                     return getI18nString("consumption_paywalls.collab_seat");
-                  case ud.CONTENT:
+                  case ProductAccessTypeEnum.CONTENT:
                     return getI18nString("consumption_paywalls.content_seat");
                   default:
                     throwTypeError(e);
@@ -585,8 +585,8 @@ function ec(e) {
   let Y = !hideUpsellPlanCta;
   let q = function (e, t) {
     let i = function (e) {
-      let t = X$("useContractRatesArgs");
-      let [i] = mI(t);
+      let t = useCurrentPublicPlan("useContractRatesArgs");
+      let [i] = handleSuspenseRetainRelease(t);
       if (e === _$$F2.Plan.STARTER) return null;
       let n = i.data?.key;
       let r = n?.parentId;
@@ -598,7 +598,7 @@ function ec(e) {
     let n = vK(i || {}, {
       enabled: t && !!i
     });
-    let [r] = mI(n);
+    let [r] = handleSuspenseRetainRelease(n);
     return e === _$$F2.Plan.STARTER ? LN() : r.data || LN();
   }(currentPlan, Y);
   let Z = _$$u();
@@ -688,7 +688,7 @@ function eu(e) {
     isLoading
   } = function (e) {
     let t = e.team?.id;
-    let i = Rs(TeamCanEdit, {
+    let i = useSubscription(TeamCanEdit, {
       id: t ?? ""
     }, {
       enabled: !!t

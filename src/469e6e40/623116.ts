@@ -47,7 +47,7 @@ import { R as _$$R } from "../905/298004";
 import { rq } from "../905/425180";
 import { Ql8, YHe } from "../figma_app/6204";
 import { throwTypeError } from "../figma_app/465776";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { A as _$$A2 } from "../905/956262";
 import { dq } from "../905/845253";
 import { FOrganizationRoleType, FAccessLevelType, FPermissionLevelType } from "../figma_app/191312";
@@ -66,10 +66,10 @@ import { fu, jm } from "../figma_app/831799";
 import { m as _$$m2 } from "../figma_app/369596";
 import { O as _$$O } from "../figma_app/748328";
 import { NJ } from "../figma_app/518077";
-import { e$ as _$$e$ } from "../figma_app/12796";
+import { getTeamVisibilityLabels } from "../figma_app/12796";
 import { O as _$$O2 } from "../figma_app/809387";
 import { J7, SN } from "../figma_app/650409";
-import { Fb } from "../figma_app/630077";
+import { teamVisibilityEnum } from "../figma_app/630077";
 import { Ib } from "../905/129884";
 import { V0, m2 } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
@@ -88,8 +88,8 @@ import { Cj } from "../905/270084";
 import { Uc } from "../4452/915131";
 import { gO, YP } from "../figma_app/88768";
 import { getPermissionsState, canViewTeam } from "../figma_app/642025";
-import { px, j_ } from "../figma_app/465071";
-import { e6 as _$$e4 } from "../905/557142";
+import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
+import { AccessLevelEnum } from "../905/557142";
 import { p as _$$p3 } from "../905/195198";
 import { Lg, Lq } from "../figma_app/392626";
 import { dm } from "../figma_app/976345";
@@ -111,7 +111,7 @@ import { A as _$$A3 } from "../6828/493300";
 import t_ from "../vendor/239910";
 import { trackEventAnalytics } from "../905/449184";
 import { EK } from "../4452/90195";
-import { td as _$$td } from "../figma_app/930338";
+import { formatCount } from "../figma_app/930338";
 import { qc } from "../figma_app/858013";
 import { nl, Pf } from "../905/590952";
 import { U as _$$U2 } from "../905/566881";
@@ -164,7 +164,7 @@ let ed = r1(eo);
 var ec = (e => (e.AddTeamsToWorkspace = "AddTeamsToWorkspace", e.CheckUnassignedTeams = "CheckUnassignedTeams", e))(ec || {});
 function e_() {
   let e = dq();
-  let t = Rs(WorkspaceAdminOnboardingOverlayView({
+  let t = useSubscription(WorkspaceAdminOnboardingOverlayView({
     orgId: e
   }));
   let a = useAtomWithSubscription(ed);
@@ -309,7 +309,7 @@ let eV = registerModal(function ({
     selectedAll: N,
     isUnassignedTeamsModal: !0
   });
-  let L = Rs(AddUnassignedTeamsModalView, {
+  let L = useSubscription(AddUnassignedTeamsModalView, {
     workspaceId: e
   });
   let P = L.data ? oA(L.data.workspace) : null;
@@ -657,8 +657,8 @@ function ta({
   let _;
   let u = useDispatch();
   let m = useSelector(e => getPermissionsState(e));
-  let p = px();
-  let g = j_(p).unwrapOr(!1);
+  let p = useTeamPlanUser();
+  let g = useIsOrgAdminUser(p).unwrapOr(!1);
   let {
     onDeleteTeam,
     onJoinRequest,
@@ -730,7 +730,7 @@ function ta({
     let t = e ?? S;
     u(ZT({
       teamIds: t,
-      level: _$$e4.ADMIN
+      level: AccessLevelEnum.ADMIN
     }));
     d && t.forEach(e => {
       d(e);
@@ -752,7 +752,7 @@ function ta({
     let t = e ?? S;
     u(ZT({
       teamIds: t,
-      level: _$$e4.OWNER
+      level: AccessLevelEnum.OWNER
     }));
     d && t.forEach(e => {
       d(e);
@@ -889,8 +889,8 @@ function tc({
   let x = useSelector(e => e.teamBilling);
   let b = useSelector(e => e.teams[r.id]);
   let v = _6();
-  let f = px();
-  let j = j_(f).unwrapOr(!1);
+  let f = useTeamPlanUser();
+  let j = useIsOrgAdminUser(f).unwrapOr(!1);
   let y = useMemo(() => ({
     canAdminTeam: r.canAdmin,
     canEditTeam: r.canEdit,
@@ -921,8 +921,8 @@ function tc({
     }));
   };
   let M = lH(r.id, void 0, _);
-  let P = lH(r.id, _$$e4.ADMIN, _);
-  let F = lH(r.id, _$$e4.OWNER, _);
+  let P = lH(r.id, AccessLevelEnum.ADMIN, _);
+  let F = lH(r.id, AccessLevelEnum.OWNER, _);
   let q = b ? {
     team: b,
     billing: x,
@@ -1111,11 +1111,11 @@ function tC(e) {
             children: "\xa0\xb7\xa0"
           })]
         }), jsx("span", {
-          children: _$$td(t.member_count, "member")
+          children: formatCount(t.member_count, "member")
         }), jsx("span", {
           children: "\xa0\xb7\xa0"
         }), jsx("span", {
-          children: _$$td(t.projects, "project")
+          children: formatCount(t.projects, "project")
         })]
       })]
     })]
@@ -1136,7 +1136,7 @@ let tN = registerModal(function (e) {
     status: "loaded",
     data: tu()(l.data, e => e.id)
   }, [l]);
-  let d = Rs(WorkspaceDefaultTeamsView, {
+  let d = useSubscription(WorkspaceDefaultTeamsView, {
     workspaceId
   });
   let c = d?.data?.workspace;
@@ -1594,10 +1594,10 @@ function tL(e) {
         value: null
       }, {
         display: getI18nString("admin_filters.filter_values.visible"),
-        value: Fb.ORG_BROWSABLE
+        value: teamVisibilityEnum.ORG_BROWSABLE
       }, {
         display: getI18nString("admin_filters.filter_values.hidden"),
-        value: Fb.HIDDEN
+        value: teamVisibilityEnum.HIDDEN
       }]
     }]
   }];
@@ -1773,22 +1773,22 @@ function tL(e) {
                 dropdownShown,
                 dropdownType: "FILTER_DISCOVERABILITY_DROPDOWN",
                 selectedValue: filters.discoverabilityFilter,
-                getDisplayText: e => _$$e$()[e],
+                getDisplayText: e => getTeamVisibilityLabels()[e],
                 getSelectedDisplayText: e => {
                   switch (e) {
-                    case Fb.ORG_BROWSABLE:
+                    case teamVisibilityEnum.ORG_BROWSABLE:
                       return getI18nString("teams_table.discoverability_filter.visible");
-                    case Fb.HIDDEN:
+                    case teamVisibilityEnum.HIDDEN:
                       return getI18nString("teams_table.discoverability_filter.hidden");
                     default:
                       return getI18nString("teams_table.discoverability_filter.all");
                   }
                 },
-                getCount: e => e$.org_access[e === Fb.ORG_BROWSABLE ? FAccessLevelType.PRIVATE : FAccessLevelType.SECRET],
+                getCount: e => e$.org_access[e === teamVisibilityEnum.ORG_BROWSABLE ? FAccessLevelType.PRIVATE : FAccessLevelType.SECRET],
                 updateFilter: e => onFilter({
                   discoverabilityFilter: e
                 }),
-                values: Object.values(Fb),
+                values: Object.values(teamVisibilityEnum),
                 dispatch: en
               }), jsx(bv, {
                 dropdownShown,
@@ -1843,8 +1843,8 @@ function tL(e) {
                 orgAccessFilter: e$.org_access,
                 teamMembershipFilter: e$.team_membership,
                 discoverabilityFilter: {
-                  [Fb.ORG_BROWSABLE]: e$.org_access[FAccessLevelType.PRIVATE],
-                  [Fb.HIDDEN]: e$.org_access[FAccessLevelType.SECRET]
+                  [teamVisibilityEnum.ORG_BROWSABLE]: e$.org_access[FAccessLevelType.PRIVATE],
+                  [teamVisibilityEnum.HIDDEN]: e$.org_access[FAccessLevelType.SECRET]
                 },
                 orphanedTeamFilter: {}
               },

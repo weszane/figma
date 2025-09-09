@@ -6,7 +6,7 @@ import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
 import { RW } from "../figma_app/684168";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { S } from "../905/404161";
@@ -18,7 +18,7 @@ export function $$_0(e) {
     isPlugin,
     variant
   } = e;
-  let x = q5();
+  let x = selectCurrentFile();
   let g = sZ();
   let j = RW();
   let b = _$$a(g?.id, version.plugin_id, j.loaded ? j.data?.workspaceId : void 0);

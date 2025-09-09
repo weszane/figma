@@ -7,7 +7,7 @@ import { e as _$$e } from "../905/295932";
 import { a as _$$a } from "../905/676930";
 import { A as _$$A } from "../905/920142";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { i0 } from "../905/17223";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -25,8 +25,8 @@ import { WW, Wf } from "../figma_app/345997";
 import { e0 } from "../905/696396";
 import { W as _$$W } from "../905/244810";
 import { d_ } from "../figma_app/918700";
-import { aI } from "../figma_app/552876";
-import { oz } from "../905/561485";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { I as _$$I2 } from "../905/597430";
 import { L as _$$L } from "../905/479295";
 let $$v = "team-admin-confirm-downgrade";
@@ -235,7 +235,7 @@ let j = {
 };
 let U = {
   title: renderI18nText("churn_friction.modal.published_content"),
-  url: oz() ? "https://help.figma.com/hc/articles/31242845959703-Publish-a-site" : "https://help.figma.com/hc/articles/31304586129559",
+  url: isSitesFeatureEnabled() ? "https://help.figma.com/hc/articles/31242845959703-Publish-a-site" : "https://help.figma.com/hc/articles/31304586129559",
   graphic: jsx(function () {
     return jsxs("svg", {
       width: "112",
@@ -271,7 +271,7 @@ let U = {
   }, {})
 };
 function B() {
-  return !!aI() || !!oz();
+  return !!isFigmakeSitesEnabled() || !!isSitesFeatureEnabled();
 }
 function V({
   image: e,
@@ -330,7 +330,7 @@ function G({
 export let $$z0 = registerModal(function ({
   teamId: e
 }) {
-  let t = Rs(ChurnFrictionPersonalizedModalView, {
+  let t = useSubscription(ChurnFrictionPersonalizedModalView, {
     teamId: e
   });
   let i = E9();

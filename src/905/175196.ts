@@ -8,7 +8,7 @@ import { _ as _$$_2 } from "../vendor/577508";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { getInitialOptions, isLocalCluster, getLocaleFallbacks, emptyObject } from "../figma_app/169182";
-import { Rh } from "../905/485103";
+import { sendMetric } from "../905/485103";
 import { logInfo } from "../905/714362";
 import { setupSentryIntegrations } from "../905/670985";
 import { XHRError } from "../905/910117";
@@ -23,7 +23,7 @@ import { customHistory } from "../905/612521";
 import { getSentryConfig } from "../905/256712";
 import { BrowserInfo } from "../figma_app/778880";
 import { getUserPlan, setUserPlanTag } from "../905/912096";
-import { errorIgnorePatterns, urlIgnorePatterns, processBreadcrumb, normalizeSentryEventUrls, SeverityLevel, setUserId, setOrgIdTag, setServerReleaseTag, setSentryTag, startSentrySession, reportError } from "../905/11";
+import { errorIgnorePatterns, urlIgnorePatterns, processBreadcrumb, normalizeSentryEventUrls, SeverityLevel, setUserId, setOrgIdTag, setServerReleaseTag, setTagGlobal, startSentrySession, reportError } from "../905/11";
 void 0 === self.scheduler && (self.scheduler = new _$$_(), self.TaskController = i, self.TaskPriorityChangeEvent = _$$w);
 let k = new Map();
 let R = !1;
@@ -106,7 +106,7 @@ if (getSentryConfig().enabled) {
       if (a > 5) return null;
       k.set(r, a + 1);
       console.log(`Sentry event id: ${e.event_id}`);
-      Rh("sentry_error").catch(() => logInfo("sentry", "Failed to report sentry error to datadog"));
+      sendMetric("sentry_error").catch(() => logInfo("sentry", "Failed to report sentry error to datadog"));
       let s = getFeatureFlags().sentry_proxy_leave_extension;
       (s || n) && (e.figma_meta = {
         skip_extension_stripping: s,
@@ -119,20 +119,20 @@ if (getSentryConfig().enabled) {
   setUserId(e.user_data?.id);
   setOrgIdTag(e.org_id);
   setServerReleaseTag(e.release_server_git_commit);
-  setSentryTag("tracking_session_id", e.tracking_session_id);
-  setSentryTag("offline", !1);
-  setSentryTag("wasm_oom", "no");
-  setSentryTag("editorType", "unknown-init");
-  setSentryTag("locale", getLocaleFallbacks()[0]);
-  setSentryTag("reactVersion", `${version}-actual`);
-  setSentryTag("client_protocol_version", `${window.mpGlobal?.version}`);
-  setSentryTag("codesplit", "true");
-  setSentryTag("fullscreen_status", "ok");
-  setSentryTag("webpack", "true");
-  setSentryTag("bundler", "webpack");
-  setSentryTag("is_app_shell", isAppShellEnabled() ? "true" : "false");
-  setSentryTag("entrypoint_variant", entrypointVariant ?? "unknown");
-  setSentryTag("entrypoint", window.ENTRY_POINT ?? "unknown");
+  setTagGlobal("tracking_session_id", e.tracking_session_id);
+  setTagGlobal("offline", !1);
+  setTagGlobal("wasm_oom", "no");
+  setTagGlobal("editorType", "unknown-init");
+  setTagGlobal("locale", getLocaleFallbacks()[0]);
+  setTagGlobal("reactVersion", `${version}-actual`);
+  setTagGlobal("client_protocol_version", `${window.mpGlobal?.version}`);
+  setTagGlobal("codesplit", "true");
+  setTagGlobal("fullscreen_status", "ok");
+  setTagGlobal("webpack", "true");
+  setTagGlobal("bundler", "webpack");
+  setTagGlobal("is_app_shell", isAppShellEnabled() ? "true" : "false");
+  setTagGlobal("entrypoint_variant", entrypointVariant ?? "unknown");
+  setTagGlobal("entrypoint", window.ENTRY_POINT ?? "unknown");
   (function () {
     let e = getUserPlan();
     e && (setUserPlanTag(e), updateEnvironmentInfo({
@@ -143,15 +143,15 @@ if (getSentryConfig().enabled) {
     });
   })();
   let t = Rf();
-  t?.buildNumber && setSentryTag("nativeAppBuildNumber", t.buildNumber);
-  t?.marketingNumber && setSentryTag("nativeAppMarketingNumber", t.marketingNumber);
-  t?.appContext && setSentryTag("nativeAppContext", t.appContext);
-  t?.appName && setSentryTag("nativeAppName", t.appName);
-  setSentryTag("reconnect_sequence_number", null);
-  setSentryTag("disable_track_user_interactions", !getFeatureFlags().datadog_rum_track_interactions);
+  t?.buildNumber && setTagGlobal("nativeAppBuildNumber", t.buildNumber);
+  t?.marketingNumber && setTagGlobal("nativeAppMarketingNumber", t.marketingNumber);
+  t?.appContext && setTagGlobal("nativeAppContext", t.appContext);
+  t?.appName && setTagGlobal("nativeAppName", t.appName);
+  setTagGlobal("reconnect_sequence_number", null);
+  setTagGlobal("disable_track_user_interactions", !getFeatureFlags().datadog_rum_track_interactions);
   let i = "other";
   BrowserInfo.firefox ? i = "gecko" : BrowserInfo.webkit ? i = "webkit" : BrowserInfo.blink ? i = "blink" : BrowserInfo.msie && (i = "msie");
-  setSentryTag("browser_engine", i);
+  setTagGlobal("browser_engine", i);
   startSentrySession();
 }
 let N = Rf();

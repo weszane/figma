@@ -2,7 +2,7 @@ import { fc, z } from "../905/239603";
 import { FCostCenterType, FPlanFeatureType, FDomainVerificationStatusType, FPlanNameType } from "../figma_app/191312";
 import { z as _$$z } from "../905/4823";
 import { S as _$$S } from "../905/962956";
-import { bV } from "../905/13165";
+import { ExperimentAssignmentsSchema } from "../905/13165";
 import { N4 } from "../905/158283";
 import { C$ } from "../figma_app/482728";
 let c = fc(FCostCenterType);
@@ -35,7 +35,7 @@ let A = z.object({
   scheduled_run_at: z.string().optional().nullable(),
   operation_state: z.string()
 });
-bV.extend({
+ExperimentAssignmentsSchema.extend({
   id: z.string(),
   name: z.string(),
   legal_name: z.string().optional(),
@@ -115,4 +115,4 @@ export const EZ = $$g2;
 export const Gv = $$E3;
 export const OE = $$b4;
 export const X1 = $$I5;
-export const ZG = $$m6; 
+export const ZG = $$m6;

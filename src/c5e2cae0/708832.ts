@@ -7,7 +7,7 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { zN, qe } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { tH, H4 } from "../905/751457";
@@ -19,7 +19,7 @@ import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { sx as _$$sx } from "../905/941192";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { Up, O$, s$, GL, vm, VB } from "../figma_app/361035";
 import { Vh, kV, N9 } from "../figma_app/692987";
 import { gu, Tj, gS, R9, Jh } from "../figma_app/441925";
@@ -32,7 +32,7 @@ import { tf, fu } from "../figma_app/831799";
 import { Ju, IX } from "../905/712921";
 import { X1 } from "../figma_app/736948";
 import { UpgradeSteps, BillingCycle, createEmptyAddress, isAddressEmpty, SubscriptionType } from "../figma_app/831101";
-import { SC } from "../figma_app/707808";
+import { UpgradeAction } from "../figma_app/707808";
 import { Nd, li, Uu, kH, K6, ER, i9, $y, uD, Bb } from "../c5e2cae0/763339";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { j as _$$j } from "../c5e2cae0/282622";
@@ -60,7 +60,7 @@ import { aE, LN } from "../figma_app/514043";
 import { x9 } from "../figma_app/951233";
 import { rq } from "../905/351260";
 import { lB, Ey, To } from "../905/148137";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { e0 } from "../905/696396";
 import { Eh } from "../figma_app/617654";
 import { V as _$$V } from "../905/57562";
@@ -85,7 +85,7 @@ function C({
   t.forEach(t => {
     e[t].eligibleUsers.forEach(e => {
       if (!r[e]) {
-        if (s[e]) r[e] = s[e]; else {
+        if (s[e]) r[e] = s[e];else {
           let s = a[e];
           i[e] || (i[e] = []);
           i[e].push(s.recommendedSeatTypeByTeamId[t]);
@@ -119,7 +119,7 @@ function U(e) {
       name: getI18nString("org_self_serve.headers.create_team")
     };
     switch (e.newTeamProps?.teamFlowType) {
-      case SC.CREATE:
+      case UpgradeAction.CREATE:
         t.push({
           step: X1.PseudoCreateTeam,
           name: getI18nString("org_self_serve.headers.create_team")
@@ -130,12 +130,12 @@ function U(e) {
         });
         t.push(s);
         break;
-      case SC.CREATE_AND_UPGRADE:
+      case UpgradeAction.CREATE_AND_UPGRADE:
         t.push(s);
         t.push(r);
         a = X1.CreateTeam;
         break;
-      case SC.UPGRADE_EXISTING_TEAM:
+      case UpgradeAction.UPGRADE_EXISTING_TEAM:
         t.push(s);
     }
   }
@@ -313,7 +313,7 @@ let eI = ({
             throw Error("sent error");
         }
       }(t, e));
-    } catch (e) { }
+    } catch (e) {}
   }, []);
   return {
     changeUserSeatType: useCallback((e, t) => {
@@ -349,7 +349,7 @@ function ek({
     renewalTerm: IX.YEAR,
     showCents: !1
   });
-  let [o] = mI(d);
+  let [o] = handleSuspenseRetainRelease(d);
   if (null === o.data) throw Error("No seat types data");
   let c = o.data;
   let {
@@ -379,7 +379,7 @@ export class $$eM2 extends Component {
   constructor(e) {
     super(e);
     this.canSeeTeamAndSeatSelectionSteps = () => Object.keys(this.state.eligibleTeamsByTeamId).length > 0 || this.state.loading || !!this.props.newTeamProps;
-    this.effectiveStep = () => this.props.step === X1.Initial || this.props.step === X1.ChoosePlan ? this.props.newTeamProps?.teamFlowType === SC.CREATE_AND_UPGRADE ? X1.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? X1.TeamSelect : X1.Payment : this.props.step;
+    this.effectiveStep = () => this.props.step === X1.Initial || this.props.step === X1.ChoosePlan ? this.props.newTeamProps?.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE ? X1.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? X1.TeamSelect : X1.Payment : this.props.step;
     this.setStep = e => {
       this.props.dispatch(sf({
         view: "orgSelfServe",
@@ -717,7 +717,7 @@ export class $$eM2 extends Component {
             recommendedSeatTypeByTeamId: {},
             teamIds: []
           });
-          r[s].recommendedSeatTypeByTeamId[e.team_id] = e.recommended_seat_type?.key ?? Gu.VIEW;
+          r[s].recommendedSeatTypeByTeamId[e.team_id] = e.recommended_seat_type?.key ?? ViewAccessTypeEnum.VIEW;
           r[s].teamIds.push(e.team_id);
           a[e.team_id] && a[e.team_id].eligibleUsers.add(s);
         });
@@ -783,7 +783,7 @@ export class $$eM2 extends Component {
     }
     if (this.setState({
       apiPending: !0
-    }), a && !(await _$$V(a, e.country, () => { }, this.onVatValidationFail))) return;
+    }), a && !(await _$$V(a, e.country, () => {}, this.onVatValidationFail))) return;
     if (this.props.canSeeBillingAddressExp && !this.state.nameOnPaymentMethod) {
       let e = getI18nString("org_self_serve.payment_step.name_on_payment_method_is_required");
       this.trackError(e);
@@ -793,7 +793,7 @@ export class $$eM2 extends Component {
       });
       return;
     }
-    if (s && !(await _$$V(s, e.country, () => { }, this.onVatValidationFail, e.region))) return;
+    if (s && !(await _$$V(s, e.country, () => {}, this.onVatValidationFail, e.region))) return;
     let r = this.props.canSeeBillingAddressExp ? {
       name: this.state.nameOnPaymentMethod,
       address_line1: e.line1,
@@ -896,7 +896,7 @@ export class $$eM2 extends Component {
         emails: this.state.inviteEmails,
         resourceType: FResourceCategoryType.TEAM,
         resourceIdOrKey: e.data.meta.new_team.id,
-        level: e6.EDITOR,
+        level: AccessLevelEnum.EDITOR,
         teamId: e.data.meta.new_team.id
       }));
       this.state.newTeamName && e.data.meta.new_team && Al(this.props.user.id);
@@ -1080,7 +1080,7 @@ export class $$eM2 extends Component {
               ...this.props.newTeamProps?.previousView,
               view: "teamUpgrade",
               paymentStep: e,
-              teamFlowType: this.props.newTeamProps?.teamFlowType || SC.CREATE_AND_UPGRADE
+              teamFlowType: this.props.newTeamProps?.teamFlowType || UpgradeAction.CREATE_AND_UPGRADE
             }));
           },
           isCampfireCart: !0
@@ -1124,7 +1124,7 @@ export function $$eR1(e) {
       unit: IX.YEAR
     }
   });
-  let [c] = mI(o);
+  let [c] = handleSuspenseRetainRelease(o);
   if ("loaded" !== c.status) return jsx(_$$K, {});
   let u = c.data;
   return jsx(tH, {

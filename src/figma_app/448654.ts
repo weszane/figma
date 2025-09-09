@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
-import { oA } from "../905/663269";
-import { p } from "../figma_app/288654";
-import { _R } from "../figma_app/765689";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useMultiSubscription } from "../figma_app/288654";
+import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
 import { RepoTilePermissions } from "../figma_app/43951";
 export function $$c7(e) {
@@ -11,16 +11,16 @@ export function $$c7(e) {
   let n = !!e.project?.canView;
   let i = e.canEdit && !e.isTrashed;
   let s = e.canEdit && e.isTrashed;
-  let d = e.isTrashed && !!oA(e.sourceFile?.canRestore);
-  let c = oA(e.canMoveWithReasons);
-  let u = !!(e.isTrashed && oA(e.sourceFile?.canRestoreToOtherFolders));
+  let d = e.isTrashed && !!getResourceDataOrFallback(e.sourceFile?.canRestore);
+  let c = getResourceDataOrFallback(e.canMoveWithReasons);
+  let u = !!(e.isTrashed && getResourceDataOrFallback(e.sourceFile?.canRestoreToOtherFolders));
   let p = !!e.sourceFile?.isFavorited;
   let _ = e.canRead && !!e.sourceFile && !e.sourceFile.isFavorited;
   let h = e.canRead && !!e.sourceFile && e.sourceFile.isFavorited;
   let m = !!e.project && e.canEdit;
   let g = e.parentOrgId ? "org" : e.teamId ? "team" : null;
   let f = e.parentOrgId || e.teamId || null;
-  let E = _R(FFileType.DESIGN, e.currentPlanUser);
+  let E = isRestrictedPlanAccess(FFileType.DESIGN, e.currentPlanUser);
   let y = e.isDraftRepo;
   return {
     canDelete: i,
@@ -66,7 +66,7 @@ export function $$y5(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     repoId: e
   })), [e]);
-  let a = p(RepoTilePermissions, r, {
+  let a = useMultiSubscription(RepoTilePermissions, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(a.map(e => e.result)).transform(e => {

@@ -67,7 +67,7 @@ export function createAtomWithReduxWithState(...args: [actionType: string, initi
  * @param t - Second argument
  * @returns The result of createReduxSubscriptionAtom
  */
-export function createReduxSubscriptionAtomWithState<T, S>(e: (state: S) => T, t: { notifyImmediate?: boolean } = {}) {
+export function createReduxSubscriptionAtomWithState<T = any, S = any>(e: (state: S) => T, t: { notifyImmediate?: boolean } = {}) {
   return createReduxSubscriptionAtom(getDebugState, e, t)
 }
 

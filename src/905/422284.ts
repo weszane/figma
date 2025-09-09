@@ -28,12 +28,12 @@ import { Lp } from "../905/309846";
 import { QO, VO } from "../figma_app/646357";
 import { xN } from "../905/672897";
 import { FEditorType } from "../figma_app/53721";
-import { e6 } from "../figma_app/707808";
+import { SelectorType } from "../figma_app/707808";
 import { $ as _$$$3 } from "../905/834575";
 import { l as _$$l } from "../905/26554";
 import { on } from "../figma_app/292324";
 import { qp } from "../905/977779";
-import { Dz } from "../figma_app/516028";
+import { getFullscreenViewFile } from "../figma_app/516028";
 import { mapToEditorType } from "../figma_app/300692";
 import { jr } from "../905/792802";
 import { vU } from "../figma_app/193867";
@@ -84,8 +84,8 @@ let $$H = createOptimistThunk((e, t, {
           devModeFocusId: E["focus-id"]
         }));
       } else if ("1" === E["component-browser"]) {
-        let i = e6.NONE;
-        "repo" === E["gh-settings"] ? i = e6.REPO_SELECTOR : "dirs" === E["gh-settings"] ? i = e6.DIRECTORY_SELECTOR : "1" === E["gh-repo-selector"] && (i = e6.REPO_SELECTOR);
+        let i = SelectorType.NONE;
+        "repo" === E["gh-settings"] ? i = SelectorType.REPO_SELECTOR : "dirs" === E["gh-settings"] ? i = SelectorType.DIRECTORY_SELECTOR : "1" === E["gh-repo-selector"] && (i = SelectorType.REPO_SELECTOR);
         e.dispatch(sf({
           ...t,
           showDevModeComponentBrowser: !0,
@@ -115,7 +115,7 @@ let $$H = createOptimistThunk((e, t, {
       if (n) Fullscreen.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) QO.then(async () => {
         let t = atomStoreManager.get(qp);
         let n = VO(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
-        let r = await Dz(e);
+        let r = await getFullscreenViewFile(e);
         r?.canEdit ? e.dispatch(showModalHandler({
           type: _$$l,
           data: {

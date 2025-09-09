@@ -7,7 +7,7 @@ import { reportError } from "../905/11";
 import { c$ } from "../figma_app/618433";
 import { w1 } from "../figma_app/649254";
 import { e as _$$e2 } from "../905/810361";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
 export function $$h1() {
   return Fk(e => function (e) {
@@ -38,7 +38,7 @@ export function $$T7(e) {
   return e.some(e => null !== e.getNearestDakotaCollectionId());
 }
 export function $$I3(e) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = c$(t).data;
   return useCallback(async (t, n) => {
     let i = await w1(t);

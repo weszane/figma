@@ -12,7 +12,7 @@ import { c as _$$c2 } from "../905/370443";
 import { kD, tS } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
 import { aV } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { vt } from "../905/862883";
 import { RJ } from "../figma_app/869006";
 import { Yy } from "../figma_app/59509";
@@ -54,7 +54,7 @@ function w() {
   let e = aV();
   let t = kD();
   let i = b4();
-  let n = q5();
+  let n = selectCurrentFile();
   if (!tS() || e) return null;
   let a = t?.publishedByUser?.handle ? jsx("div", {
     children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_team_template", {

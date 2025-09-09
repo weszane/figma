@@ -1,4 +1,4 @@
-import { td } from "../figma_app/930338";
+import { formatCount } from "../figma_app/930338";
 import { MultiSetMap } from "../905/810750";
 import { $7 } from "../905/258397";
 export class $$s0 {
@@ -15,7 +15,7 @@ export class $$s0 {
     let r = this.ownFailuresById.get(e);
     if (r && r.size > 0) {
       let e = r.size;
-      let t = `${td(e, "SceneGraph validation failure")} for this node: ${Array.from(r).join(", ")}`;
+      let t = `${formatCount(e, "SceneGraph validation failure")} for this node: ${Array.from(r).join(", ")}`;
       i.push({
         type: "error",
         value: `${e}!`,
@@ -25,7 +25,7 @@ export class $$s0 {
     let a = this.childrenWithFailuresById.get(e);
     if (a && a.size > 0) {
       let e = a.size;
-      let t = `${td(e, "SceneGraph validation failure")} in this node's descendants.`;
+      let t = `${formatCount(e, "SceneGraph validation failure")} in this node's descendants.`;
       i.push({
         type: "warning",
         value: `${e}!`,

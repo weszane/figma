@@ -6,13 +6,13 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { showModalHandler } from "../905/156213";
 import { ow } from "../figma_app/976749";
 import { F as _$$F } from "../905/224";
 import { isValidValue, MIXED_MARKER, normalizeValue } from "../905/216495";
 import { dq } from "../figma_app/316316";
-import { q5, Hu } from "../figma_app/516028";
+import { selectCurrentFile, openFileTeamAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
@@ -33,7 +33,7 @@ export function $$P14(e, t, r, n, i, a, s, o, l, d) {
     behavior: function (e) {
       if (e) {
         if (!isValidValue(e)) return MIXED_MARKER;
-        if ("INSTANT_TRANSITION" === e); else if ("DISSOLVE" === e) return "DISSOLVE"; else if ("FADE" === e) return "FADE"; else if (e.startsWith("SLIDE_OUT")) return "SLIDE_OUT"; else if (e.startsWith("SLIDE")) return "SLIDE"; else if (e.startsWith("PUSH")) return "PUSH"; else if (e.startsWith("MOVE_OUT")) return "MOVE_OUT"; else if (e.startsWith("MOVE")) return "MOVE"; else if ("SMART_ANIMATE" === e || "MAGIC_MOVE" === e) return "SMART_ANIMATE"; else if ("SCROLL_ANIMATE" === e) return "SCROLL_ANIMATE";
+        if ("INSTANT_TRANSITION" === e) ;else if ("DISSOLVE" === e) return "DISSOLVE";else if ("FADE" === e) return "FADE";else if (e.startsWith("SLIDE_OUT")) return "SLIDE_OUT";else if (e.startsWith("SLIDE")) return "SLIDE";else if (e.startsWith("PUSH")) return "PUSH";else if (e.startsWith("MOVE_OUT")) return "MOVE_OUT";else if (e.startsWith("MOVE")) return "MOVE";else if ("SMART_ANIMATE" === e || "MAGIC_MOVE" === e) return "SMART_ANIMATE";else if ("SCROLL_ANIMATE" === e) return "SCROLL_ANIMATE";
       }
       return "INSTANT";
     }(e),
@@ -47,7 +47,7 @@ export function $$P14(e, t, r, n, i, a, s, o, l, d) {
       if (e) {
         if (!isValidValue(e)) return MIXED_MARKER;
         if ("IN_CUBIC" === e) return "EASE_IN";
-        if ("OUT_CUBIC" === e); else if ("INOUT_CUBIC" === e) return "EASE_IN_AND_OUT"; else if ("LINEAR" === e) return "LINEAR"; else if ("IN_BACK_CUBIC" === e) return "EASE_IN_BACK"; else if ("OUT_BACK_CUBIC" === e) return "EASE_OUT_BACK"; else if ("INOUT_BACK_CUBIC" === e) return "EASE_IN_AND_OUT_BACK"; else if ("CUSTOM_CUBIC" === e) return "CUSTOM_BEZIER"; else if ("GENTLE_SPRING" === e) return "GENTLE"; else if ("SPRING_PRESET_ONE" === e) return "QUICK"; else if ("SPRING_PRESET_TWO" === e) return "BOUNCY"; else if ("SPRING_PRESET_THREE" === e) return "SLOW"; else if ("CUSTOM_SPRING" === e) return "CUSTOM_SPRING";
+        if ("OUT_CUBIC" === e) ;else if ("INOUT_CUBIC" === e) return "EASE_IN_AND_OUT";else if ("LINEAR" === e) return "LINEAR";else if ("IN_BACK_CUBIC" === e) return "EASE_IN_BACK";else if ("OUT_BACK_CUBIC" === e) return "EASE_OUT_BACK";else if ("INOUT_BACK_CUBIC" === e) return "EASE_IN_AND_OUT_BACK";else if ("CUSTOM_CUBIC" === e) return "CUSTOM_BEZIER";else if ("GENTLE_SPRING" === e) return "GENTLE";else if ("SPRING_PRESET_ONE" === e) return "QUICK";else if ("SPRING_PRESET_TWO" === e) return "BOUNCY";else if ("SPRING_PRESET_THREE" === e) return "SLOW";else if ("CUSTOM_SPRING" === e) return "CUSTOM_SPRING";
       }
       return "EASE_OUT";
     }(t),
@@ -270,12 +270,12 @@ export function $$es23() {
     showMoveToProTeam
   } = _$$R();
   let n = getFeatureFlags().prototype_multi_path_paywall && !canUseAdvancedPrototyping;
-  let a = q5();
+  let a = selectCurrentFile();
   let s = useSelector(e => a && a.teamId ? e.teams[a.teamId] : null);
-  let d = useAtomWithSubscription(Hu);
+  let d = useAtomWithSubscription(openFileTeamAtom);
   let c = sO();
   let p = ow();
-  let h = to();
+  let h = useIsSelectedViewFullscreenCooper();
   let m = ea(Bi.PROTOTYPING_MULTIPLE_ACTIONS, s);
   let g = ea(Bi.PROTOTYPING_CONDITIONAL_ACTIONS, s);
   let E = ea(Bi.PROTOTYPING_VARIABLES, s);

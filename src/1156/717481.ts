@@ -16,7 +16,7 @@ import { b as _$$b } from "../905/966382";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { M4 } from "../905/713695";
 import { R as _$$R } from "../905/943003";
 import { registerModal } from "../905/102752";
@@ -230,7 +230,7 @@ let $$O0 = registerModal(function (e) {
     ...e,
     preventUserClose: t
   });
-  let d = q5();
+  let d = selectCurrentFile();
   let [u, x] = useState(d?.name || "");
   let [m, h] = useState("");
   let [g, f] = useState();

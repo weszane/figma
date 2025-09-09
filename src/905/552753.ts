@@ -5,7 +5,7 @@ import { E } from "../905/632989";
 import { A as _$$A } from "../905/744692";
 import o from "classnames";
 import { UF } from "../905/403166";
-import { td, Yx } from "../figma_app/930338";
+import { formatCount, formatList } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dN } from "../vendor/291472";
 import { Ib } from "../905/129884";
@@ -89,8 +89,8 @@ let y = {};
 function b(e, t) {
   let i = e.map(e => e.handle).slice(0, t);
   let n = e.length - t;
-  n > 0 && i.push(td(n, "other"));
-  return Yx(i);
+  n > 0 && i.push(formatCount(n, "other"));
+  return formatList(i);
 }
 m.forEach(e => {
   y[`:${e.id}:`] = e;

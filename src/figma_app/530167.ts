@@ -20,12 +20,12 @@ import { F6 } from "../905/395917";
 import { yJ } from "../figma_app/240735";
 import { c as _$$c } from "../905/289751";
 import { n as _$$n, HR, Cj } from "../figma_app/740025";
-import { Ay as _$$Ay } from "../figma_app/12796";
+import { mapUserRoleToOrgUserRoleAlias } from "../figma_app/12796";
 import { N as _$$N } from "../905/696711";
 import { Il } from "../figma_app/502247";
 import { hm } from "../905/380385";
 import { Qv } from "../figma_app/45218";
-import { jh } from "../figma_app/35887";
+import { OrgUserRoleEnum } from "../figma_app/35887";
 import { s as _$$s2 } from "../905/608932";
 import { Oo, HZ, cr } from "../905/926523";
 let $$P2 = NC("COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER");
@@ -63,7 +63,7 @@ let $$M3 = createOptimistThunk((e, t) => {
     let e = orgUsersByOrgId[m.org_id];
     r = Object.keys(authedUsers.byId).find(t => {
       let r = e[t];
-      if (r && _$$Ay(r.permission) >= jh.ADMIN) return r.user_id;
+      if (r && mapUserRoleToOrgUserRoleAlias(r.permission) >= OrgUserRoleEnum.ADMIN) return r.user_id;
     });
   } else m.team_id ? (E = authedTeamsById[m.team_id]?.org_id || null, r = Object.keys(authedUsers.byId).find(e => {
     let t = teamAdminRolesForAuthedUsers[e];

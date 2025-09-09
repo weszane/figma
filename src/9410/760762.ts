@@ -11,7 +11,7 @@ import { b as _$$b } from "../905/985254";
 import { pi } from "../figma_app/314264";
 import { zN } from "../figma_app/579169";
 import { UQ } from "../figma_app/864723";
-import { tS, q5, MY } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
 import { UpsellModalType } from "../905/165519";
 import { QY, xw, Zk } from "../9410/351585";
 import y from "classnames";
@@ -20,8 +20,8 @@ import { l as _$$l, I as _$$I } from "../9410/990893";
 import { A as _$$A } from "../vendor/90566";
 import { y as _$$y } from "../1250/295724";
 import { DQ, Pw } from "../figma_app/121751";
-import { A as _$$A2 } from "../905/654645";
-import { u8 } from "../figma_app/391338";
+import { adminPermissionConfig } from "../905/654645";
+import { useShadowRead } from "../figma_app/391338";
 import { jd } from "../figma_app/528509";
 import { FC } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
@@ -30,7 +30,7 @@ import { WW, XX } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { ng } from "../figma_app/205827";
 import { jn } from "../figma_app/522082";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { vd } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -105,7 +105,7 @@ function w({
   let n = Xr(xw);
   let o = useAtomWithSubscription(Zk);
   let h = useSelector(e => e.multiplayer.sessionID);
-  let m = tS();
+  let m = useCurrentFileKey();
   return jsx(E, {
     name: _Y.FREE,
     onBadgeClick: () => {
@@ -159,10 +159,10 @@ function ee(e) {
     topPadding,
     pointerPaddingOffset
   } = e;
-  let o = Rs(TeamFileCountsByTeamId, {
+  let o = useSubscription(TeamFileCountsByTeamId, {
     teamId
   });
-  let l = q5();
+  let l = selectCurrentFile();
   let c = _$$y(teamId, UpsellModalType.FILE_TRACKER_MODAL);
   let u = E9();
   let p = _$$h.useTrackingContext({
@@ -331,14 +331,14 @@ function ea({
   let n = TN(t.id);
   let s = t.restrictionsList?.includes(FPlanLimitationType.LOCKED);
   let o = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
-  let l = MY().errors;
+  let l = useFullscreenViewFile().errors;
   let d = !XX(t) && canEditTeam(t.id, i);
   let c = t.canEdit && e.plan?.tier === FPlanNameType.STARTER;
-  let u = u8({
+  let u = useShadowRead({
     oldValue: d,
     newValue: c,
     newValueReady: o,
-    label: _$$A2.TeamPaidStatusBadge.canEditStarterTeam,
+    label: adminPermissionConfig.TeamPaidStatusBadge.canEditStarterTeam,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
       canEdit: t.canEdit,

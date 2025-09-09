@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { d6 } from "../figma_app/687776";
+import { canCreateFileType } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
 import { sf } from "../905/929976";
 import { jd } from "../figma_app/528509";
@@ -23,7 +23,7 @@ export function $$g3(e, t, i) {
   let s = r ? i.teams[r] : null;
   let o = e?.plan?.tier;
   let u = e?.editorType ?? FFileType.DESIGN;
-  let p = !!e && !!t && d6(t, u);
+  let p = !!e && !!t && canCreateFileType(t, u);
   if (s && p && !rR(s, {
     type: sK.ADD_FILE,
     editorType: u,

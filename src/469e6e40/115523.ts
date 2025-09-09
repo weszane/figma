@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, forwardRef, useEffect, useRef, useCallback } from "react";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Y as _$$Y } from "../905/830372";
 import { wR } from "../905/346715";
@@ -13,7 +13,7 @@ import { t as _$$t } from "../figma_app/55043";
 import { Z as _$$Z } from "../4452/80578";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { ResourceConnectionByPlan } from "../figma_app/43951";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { O as _$$O } from "../figma_app/809387";
 import { J7, SN } from "../figma_app/650409";
 import { e0 } from "../905/696396";
@@ -60,11 +60,11 @@ import { K as _$$K4 } from "../905/443068";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { Ax } from "../figma_app/616261";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { L as _$$L } from "../905/408237";
 import { In } from "../905/672640";
 import { selectUser } from "../905/372672";
-import { C1 } from "../figma_app/12796";
+import { getPermissionLevelName } from "../figma_app/12796";
 var T = I;
 let B = "connected_projects_table--planRow--PfOxe";
 let G = "connected_projects_table--clampText--q7sr9";
@@ -556,7 +556,7 @@ function eO(e) {
             })
           }), j.map(e => jsx(c$, {
             value: e,
-            children: EJ(y[e] || "", 20)
+            children: truncate(y[e] || "", 20)
           }, e))]
         })]
       })
@@ -621,13 +621,13 @@ function eO(e) {
             }), jsxs("div", {
               children: [jsxs("div", {
                 className: "connected_projects_flyout--name--AyFlx",
-                children: [e.user.name && EJ(e.user.name, 40), " ", d.id === e.user.id && jsx("span", {
+                children: [e.user.name && truncate(e.user.name, 40), " ", d.id === e.user.id && jsx("span", {
                   className: "connected_projects_flyout--you--MfCZP",
                   children: renderI18nText("avatar.tooltip.you")
                 })]
               }), jsx("div", {
                 className: "connected_projects_flyout--email--Kix6Y",
-                children: e.user.email && EJ(e.user.email, 40)
+                children: e.user.email && truncate(e.user.email, 40)
               })]
             })]
           }), jsx("span", {
@@ -635,7 +635,7 @@ function eO(e) {
             children: e.isFileRole ? jsx("span", {
               className: "connected_projects_flyout--fileLevelAccess--VCER8",
               children: getI18nString("resource_connection.people.file_level_access")
-            }) : e.level && C1(e.level)
+            }) : e.level && getPermissionLevelName(e.level)
           })]
         });
       })]
@@ -672,7 +672,7 @@ let eM = {
       status
     } = e.resourceConnection;
     let l = useDispatch();
-    let o = S2().unwrapOr(null);
+    let o = useTeamPlanFeatures().unwrapOr(null);
     let [d, c] = useState("overview");
     let [_, u, m] = _$$t3.useManagedTabs({
       overview: !0,
@@ -1023,10 +1023,10 @@ function eF({
   });
 }
 export function $$eq0(e) {
-  let t = S2().unwrapOr(null);
+  let t = useTeamPlanFeatures().unwrapOr(null);
   let a = t?.key.parentId;
   let k = t?.key.type;
-  let E = Rs(ResourceConnectionByPlan, {
+  let E = useSubscription(ResourceConnectionByPlan, {
     planId: a,
     planType: k
   }, {

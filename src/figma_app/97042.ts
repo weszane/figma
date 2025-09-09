@@ -3,11 +3,11 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { fd } from "../figma_app/255679";
 import { isInvalidValue } from "../905/216495";
-import { tS, _S } from "../figma_app/516028";
+import { useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
 import { nD } from "../905/92359";
 import { zV } from "../figma_app/410317";
@@ -135,9 +135,9 @@ export function $$S2(e, t, r) {
 }
 export function $$v8(e, t) {
   let r = t.get(e);
-  let n = tS();
-  let i = useAtomWithSubscription(_S);
-  let [d] = IT(FileCanAccessFullCodeConnect({
+  let n = useCurrentFileKey();
+  let i = useAtomWithSubscription(openFileLibraryKeyAtom);
+  let [d] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
     key: n ?? ""
   }));
   let {
@@ -147,7 +147,7 @@ export function $$v8(e, t) {
   let g = fd(_$$l(backingLibraryKey ?? ""));
   let f = atomStoreManager.get(zV);
   let E = d.data?.file?.status === "loaded" && !d.data.file?.data?.hasPermission && !g;
-  let [y] = IT(CodeConnectForNodeLk({
+  let [y] = setupResourceAtomHandler(CodeConnectForNodeLk({
     libraryKey: backingLibraryKey ?? "",
     nodeId: backingNodeId ?? "",
     instances: [],
@@ -237,9 +237,9 @@ export function $$x11({
 export function $$N5(e, t, r, i) {
   let u;
   let h = t.get(e);
-  let g = tS();
-  let f = useAtomWithSubscription(_S);
-  let [E] = IT(FileCanAccessFullCodeConnect({
+  let g = useCurrentFileKey();
+  let f = useAtomWithSubscription(openFileLibraryKeyAtom);
+  let [E] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
     key: g ?? ""
   }));
   let y = atomStoreManager.get(zV);
@@ -258,7 +258,7 @@ export function $$N5(e, t, r, i) {
   }(backingLibraryKey, backingNodeId, x);
   let w = null;
   let O = E.data?.file?.status === "loaded" && !E.data.file?.data?.hasPermission && !v;
-  let [R] = IT(CodeConnectForNodeLk({
+  let [R] = setupResourceAtomHandler(CodeConnectForNodeLk({
     libraryKey: backingLibraryKey ?? "",
     nodeId: backingNodeId ?? "",
     instances: x,

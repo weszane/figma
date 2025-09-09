@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import n from "classnames";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { vd } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,12 +22,12 @@ export let $$b0 = memo(function (e) {
     updateVatGstId
   } = e;
   let n = !!e.org?.id;
-  let b = Rs(OrgTaxIdView, {
+  let b = useSubscription(OrgTaxIdView, {
     orgId: e.org?.id || ""
   }, {
     enabled: n
   });
-  let v = Rs(TeamTaxIdView, {
+  let v = useSubscription(TeamTaxIdView, {
     teamId: e.team?.id || ""
   }, {
     enabled: !n

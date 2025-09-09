@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import { analyticsEventManager } from "../905/449184";
-import { IT } from "../figma_app/566371";
-import { I } from "../905/485103";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { useWebLoggerTimer } from "../905/485103";
 import { BU, LK } from "../figma_app/199513";
 export let $$c0 = getFeatureFlags().folder_preview_file_pagination ? function ({
   folderId: e,
   shouldShowOnlyTrashedFiles: t
 }) {
-  let [i, r] = IT(BU({
+  let [i, r] = setupResourceAtomHandler(BU({
     folderId: e,
     sort_column: "touched_at",
     sort_order: "desc",
@@ -46,7 +46,7 @@ function u({
   isReady: t,
   isPaginated: i
 }) {
-  I(t, (t, n, r) => {
+  useWebLoggerTimer(t, (t, n, r) => {
     n || r || 0 === t || analyticsEventManager.trackDefinedMetric("file_browser.folder_preview_files_load_time", {
       durationMs: t,
       isPaginated: i,

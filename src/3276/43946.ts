@@ -13,7 +13,7 @@ import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { WN } from "../figma_app/638601";
 import { s as _$$s } from "../cssbuilder/589278";
-import { nt, d6 } from "../figma_app/687776";
+import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { $z, Me, lR } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -21,7 +21,7 @@ import { N as _$$N } from "../905/438674";
 import { hh } from "../figma_app/42945";
 import { u as _$$u } from "../figma_app/365543";
 import { A as _$$A2 } from "../svg/910223";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { xb, FO } from "../figma_app/910914";
 import { $ as _$$$ } from "../figma_app/61705";
 import { b as _$$b } from "../905/985254";
@@ -33,12 +33,12 @@ import { _Z, eC, $1 } from "../905/539601";
 import { ck as _$$ck } from "../905/87821";
 import { NE } from "../3276/373312";
 import { w as _$$w } from "../0c62c2fd/912149";
-import { MY, q5 } from "../figma_app/516028";
+import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { jN } from "../905/612685";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { f6 } from "../figma_app/915202";
 import { $A } from "../905/782918";
 import { U as _$$U } from "../figma_app/65327";
@@ -79,7 +79,7 @@ function el(e) {
 }
 function ed(e) {
   let t = selectCurrentUser();
-  let n = MY();
+  let n = useFullscreenViewFile();
   let a = useDispatch();
   let s = _$$w();
   let r = () => {
@@ -195,7 +195,7 @@ let eg = [{
     userFlagName: e
   }) {
     let t = useDispatch();
-    let n = q5();
+    let n = selectCurrentFile();
     let a = "dark" === DP();
     let {
       folderId,
@@ -484,9 +484,9 @@ let ev = atom(e => {
   return t;
 });
 export function $$ex0(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let n = t?.editorType;
-  let l = S2().unwrapOr(null);
+  let l = useTeamPlanFeatures().unwrapOr(null);
   let h = l?.figjamDisabledAt || null;
   let f = useSelector(e => e.userFlags);
   let g = useAtomWithSubscription(ev);
@@ -500,16 +500,16 @@ export function $$ex0(e) {
   let T = useMemo(() => "prototype" === C.view ? void 0 : AppStateTsApi, [C.view]);
   let M = getObservableValue(T?.uiState().isRecovery, !1);
   let E = "developer" === _$$w();
-  let S = _I();
+  let S = useCanAccessFullDevMode();
   let {
     folderId
   } = eh(t);
   let {
     data,
     status
-  } = nt(folderId);
+  } = useProjectFileCreationPermissions(folderId);
   let H = l?.tier === FPlanNameType.STARTER && !getFeatureFlags().bake_starter_limit;
-  let Z = null !== data && d6(data, FFileType.FIGMAKE) && !H;
+  let Z = null !== data && canCreateFileType(data, FFileType.FIGMAKE) && !H;
   let $ = {
     Prototype: "loading" === status
   };

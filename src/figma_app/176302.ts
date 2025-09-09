@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { DM, $K } from "../figma_app/223206";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { R as _$$R2 } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
@@ -149,7 +149,7 @@ export function $$O0({
 export function $$R4() {
   let e = useDispatch();
   let t = EI();
-  let r = tS();
+  let r = useCurrentFileKey();
   let y = useAtomWithSubscription(DM);
   let S = Xr($K);
   let v = AppStateTsApi?.figmakeState();

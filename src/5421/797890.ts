@@ -24,7 +24,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4 } from "../figma_app/540726";
 import { isValidValue, normalizeValue, MIXED_MARKER, valueOrFallback, isInvalidValue } from "../905/216495";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../5421/927984";
 import { _P } from "../figma_app/2590";
 import { zy } from "../figma_app/915202";
@@ -44,7 +44,7 @@ import { ex as _$$ex } from "../905/524523";
 import { A as _$$A2 } from "../svg/420906";
 import { j as _$$j, u as _$$u } from "../642/638075";
 import { rC } from "../5421/658325";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { kc } from "../figma_app/85384";
 import { P as _$$P2 } from "../5421/146016";
 import { Op, qQ, Vp } from "../figma_app/405038";
@@ -116,7 +116,7 @@ function es({
     (!t || !t.keyCodes || 0 === t.keyCodes.length) && n && p.current && (o(!1), p.current.focus(), c(!0));
   }, [o, n, t]);
   useEffect(() => {
-    if (!d) return () => { };
+    if (!d) return () => {};
     let t = new _$$L();
     let n = t.onPress(t => {
       e({
@@ -183,7 +183,7 @@ let eE = new Eq();
 function ej(e) {
   let t = useDispatch();
   let n = Um();
-  let o = cJ();
+  let o = useIsFullscreenSitesView();
   let {
     showVideoV2Triggers
   } = selectWithShallowEqual(e => ({
@@ -463,7 +463,7 @@ function eM(e) {
     resetNewActionIndexPath
   } = e;
   let I = useAtomWithSubscription(_$$j);
-  let C = cJ() && kc({
+  let C = useIsFullscreenSitesView() && kc({
     interactionType: e.interactionType,
     actions: mergedActions
   });
@@ -842,7 +842,7 @@ let e7 = memo(function ({
     updateSelectionProperties
   } = Ay(e, N);
   let ed = detailPropsMultipleActions.interactionEvent.interactionType ?? "NONE";
-  let ec = cJ();
+  let ec = useIsFullscreenSitesView();
   var ep = X.path.length > 0 ? X : new Op([0]);
   let eu = ep.isConditional();
   let eh = (e, t) => ep = new Op(e);
@@ -938,7 +938,7 @@ let e7 = memo(function ({
     eF && (ez(!1), eU.current?.scrollToBottom());
   }, [eF, ez, eU]);
   let [eX, e9] = useState(new Op([]));
-  let e7 = q5();
+  let e7 = selectCurrentFile();
   let tn = useCallback((e, t) => {
     let n = e.event.clipboardData || window.clipboardData;
     switch (t) {
@@ -993,7 +993,7 @@ let e7 = memo(function ({
     if (interactionsOnSelectedNodesAndComponents && selectedInteractions) {
       var t = !1;
       var n = !1;
-      if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal(); else {
+      if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal();else {
         for (let r = 0; r < selectedInteractions?.length; r++) {
           let a = selectedInteractions[r];
           let l = [];
@@ -1030,7 +1030,7 @@ let e7 = memo(function ({
     if (!interactionsOnSelectedNodesAndComponents || !selectedInteractions || !e.path.length || void 0 === e.path[0]) return;
     let [t, n, o] = e.path;
     let i = e.isConditional();
-    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal(); else if (i) {
+    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal();else if (i) {
       let e = !1;
       let i = !1;
       let r = selectedInteractions.map(r => {

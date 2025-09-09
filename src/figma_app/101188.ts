@@ -11,13 +11,13 @@ import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
 import { DQ, Pw } from "../figma_app/121751";
-import { A as _$$A } from "../905/654645";
-import { HZ } from "../figma_app/391338";
+import { adminPermissionConfig } from "../905/654645";
+import { setupShadowRead } from "../figma_app/391338";
 import { FAccessLevelType } from "../figma_app/191312";
 import { YP, gO } from "../figma_app/88768";
 import { getPermissionsState, canAdminOrg } from "../figma_app/642025";
-import { e6 } from "../905/557142";
-import { bL } from "../figma_app/630077";
+import { AccessLevelEnum } from "../905/557142";
+import { getTeamUrl } from "../figma_app/630077";
 import { $ } from "../905/834575";
 import { j } from "../905/834956";
 import { H } from "../905/154301";
@@ -45,7 +45,7 @@ export function $$C0() {
       }));
     };
     let O = GR(n, C.id);
-    let R = GR(n, C.id, e6.ADMIN);
+    let R = GR(n, C.id, AccessLevelEnum.ADMIN);
     let L = e => {
       n(showModalHandler({
         type: _$$p,
@@ -78,10 +78,10 @@ export function $$C0() {
     };
     let D = e.roles.byTeamId[C.id] || {};
     let k = Object.keys(D).filter(e => !D[e].pending).length;
-    let M = HZ({
+    let M = setupShadowRead({
       oldValue: canAdminOrg(C.org_id, e),
       newValue: v.canAdminOrg,
-      label: _$$A.TeamContextMenuInTeamTiles.canAdminOrg,
+      label: adminPermissionConfig.TeamContextMenuInTeamTiles.canAdminOrg,
       enableFullRead: DQ(Pw.GROUP_7),
       contextArgs: {
         currentTeamId: e.currentTeamId,
@@ -97,7 +97,7 @@ export function $$C0() {
     if (U.push({
       displayText: getI18nString("file_browser.copy_link"),
       onClick: () => {
-        let e = bL(C.id, C.org_id);
+        let e = getTeamUrl(C.id, C.org_id);
         n(_$$S({
           url: e,
           linkType: "team"
@@ -139,7 +139,7 @@ export function $$C0() {
       if (v.isInTeam) F && t.push({
         displayText: getI18nString("team_view.toolbar.leave_team"),
         onClick: w
-      }); else if (C.org_id) {
+      });else if (C.org_id) {
         let i = YP(C, r[C.id], e, M);
         null != i && i !== gO.CLICK_JOIN && t.push({
           displayText: RI({

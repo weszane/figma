@@ -1,10 +1,10 @@
 import { useRef, useCallback, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoShallow } from "../905/19536";
-import { az } from "../905/502364";
+import { eventEmitterAtom } from "../905/502364";
 import { R } from "../905/994802";
 export function $$l0(e, t, i) {
-  let l = useAtomWithSubscription(az);
+  let l = useAtomWithSubscription(eventEmitterAtom);
   let d = useMemoShallow(() => "string" == typeof t ? [t] : t, [t]);
   let c = useRef(i);
   c.current = i;

@@ -15,7 +15,7 @@ import { FP } from "../figma_app/91703";
 import { me } from "../figma_app/223206";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../905/955316";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { Ts } from "../905/994545";
 import { A as _$$A } from "../905/929620";
 import { ks, Vm } from "../figma_app/838407";
@@ -32,7 +32,7 @@ import { M5, qs, fM } from "../figma_app/346422";
 import { hB, wn } from "../figma_app/609511";
 import { GV, Xl } from "../figma_app/72338";
 import { Mj } from "../figma_app/346269";
-import { Jh, YE } from "../figma_app/552876";
+import { isFigmakeFullscreenView, isDebugSelectedFigmakeFullscreen } from "../figma_app/552876";
 import Y from "../vendor/805353";
 import { oD } from "../figma_app/991782";
 import { _b, W as _$$W } from "../figma_app/618665";
@@ -154,7 +154,7 @@ function ed(e) {
   return e.endsWith(".ts") ? e.substring(0, e.length - 3) : e.endsWith(".tsx") ? e.substring(0, e.length - 4) : e;
 }
 function ec() {
-  return !!Jh(debugState.getState().selectedView);
+  return !!isFigmakeFullscreenView(debugState.getState().selectedView);
 }
 export let $$eu0 = new class {
   constructor() {
@@ -231,7 +231,7 @@ export let $$eu0 = new class {
         let d = i;
         let c = !0;
         if (o && (s = this._designToReactNodes.get(i), this._designToReactNodes.$$delete(i)), o && analyticsEventManager.trackDefinedEvent("design_to_react.design_to_react_code_generated", {
-          selectedFileKey: atomStoreManager.get(ze) ?? void 0,
+          selectedFileKey: atomStoreManager.get(openFileKeyAtom) ?? void 0,
           selectedNodeId: s,
           codeInstanceGuid: d,
           isFigmake: ec()
@@ -254,14 +254,14 @@ export let $$eu0 = new class {
               let e = t.getElapsedTime();
               t.stop();
               analyticsEventManager.trackDefinedEvent("sites.code_snapshot_time", {
-                selectedFileKey: atomStoreManager.get(ze) ?? void 0,
+                selectedFileKey: atomStoreManager.get(openFileKeyAtom) ?? void 0,
                 isFigmake: ec(),
                 elapsedTimeMs: e,
                 numSnapshotsAttempted: n
               });
             }
             analyticsEventManager.trackDefinedEvent("sites.individual_code_snapshot_time", {
-              selectedFileKey: atomStoreManager.get(ze) ?? void 0,
+              selectedFileKey: atomStoreManager.get(openFileKeyAtom) ?? void 0,
               selectedNodeIdDesignToReact: s,
               codeInstanceGuid: d,
               isFigmake: ec(),
@@ -269,7 +269,7 @@ export let $$eu0 = new class {
               snapshotResult: i
             });
             o && analyticsEventManager.trackDefinedEvent("design_to_react.design_to_react_code_validity", {
-              selectedFileKey: atomStoreManager.get(ze) ?? void 0,
+              selectedFileKey: atomStoreManager.get(openFileKeyAtom) ?? void 0,
               selectedNodeId: s,
               codeInstanceGuid: d,
               isFigmake: ec(),
@@ -350,7 +350,7 @@ export let $$eu0 = new class {
       isDirectManipulationOnCanvasEnabled: this.isDirectManipulationOnCanvasEnabled()
     });
     if (this._codeNodeSnapshotNumber.get(e.guid) !== t || this._codeNodeDebounceTimeouts.has(e.guid)) return "Snapshot is stale";
-    let I = !YE();
+    let I = !isDebugSelectedFigmakeFullscreen();
     if (e.setCodeSnapshot(imageSet, {
       x: offsetX,
       y: offsetY

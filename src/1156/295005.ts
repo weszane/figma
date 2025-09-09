@@ -14,7 +14,7 @@ import { P } from "../vendor/348225";
 import { N as _$$N2 } from "../1156/461005";
 import { getI18nString } from "../905/303541";
 import { O as _$$O } from "../figma_app/184628";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { $W } from "../figma_app/325537";
 import { N as _$$N3, l as _$$l } from "../1156/676968";
 import { L } from "../1156/365427";
@@ -119,7 +119,7 @@ export function $$w0(e) {
   let {
     exchange
   } = $W(chatMessagesNodeGuid);
-  let C = Oc();
+  let C = useIsSelectedFigmakeFullscreen();
   let w = "progress" === e.type && e.showCodeStreaming && exchange ? function (e) {
     if (!(e && e.messages.length > 0)) return;
     let t = e?.messages[e.messages.length - 1];

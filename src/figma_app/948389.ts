@@ -7,12 +7,12 @@ import { J } from "../905/915227";
 import { B } from "../905/969273";
 import { _s } from "../figma_app/33126";
 import { kS } from "../figma_app/864723";
-import { As, ze } from "../figma_app/516028";
+import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 export function $$_1() {
   return {
     orgId: atomStoreManager.get(_s) || null,
-    teamId: atomStoreManager.get(As) || null,
-    fileKey: atomStoreManager.get(ze) || null,
+    teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
+    fileKey: atomStoreManager.get(openFileKeyAtom) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     userId: atomStoreManager.get(kS) || null,
     trackingSessionId: getTrackingSessionId()

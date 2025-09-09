@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { FUserRoleType } from "../figma_app/191312";
 import { G } from "../figma_app/66216";
-import { sS, q5 } from "../figma_app/516028";
+import { selectOpenFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { mp } from "../905/772425";
 let c = null;
@@ -26,7 +26,7 @@ export function $$p0() {
   c = null;
 }
 export function $$m1(e) {
-  let t = useSelector(sS);
+  let t = useSelector(selectOpenFileKey);
   let [i, a] = useState(null);
   useEffect(() => {
     if (!t || !e) {
@@ -52,7 +52,7 @@ export function $$h2({
   checkPermissions: s,
   feedPostUuid: c
 } = {}) {
-  let u = q5();
+  let u = selectCurrentFile();
   let p = u?.teamId;
   let m = u?.key;
   let g = u?.parentOrgId || null;

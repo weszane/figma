@@ -29,7 +29,7 @@ import { W as _$$W } from "../905/25249";
 import { VisualBellActions } from "../905/302958";
 import { p7 } from "../figma_app/49598";
 import { selectCurrentUser } from "../905/372672";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { TeamById } from "../figma_app/43951";
 import { p as _$$p } from "../905/195198";
 import { o as _$$o } from "../905/895626";
@@ -387,7 +387,7 @@ let $ = e => ({
   e.CopyLink = n.Creators.CopyViewLink($);
 })(l || (l = {}));
 let J = e => {
-  let t = Rs(TeamById, {
+  let t = useSubscription(TeamById, {
     teamId: e.id
   }).transform(({
     team: e

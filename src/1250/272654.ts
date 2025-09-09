@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import i from "classnames";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { x$, cn } from "../figma_app/141320";
 import { Us, vd } from "../figma_app/637027";
 import { B } from "../905/714743";
@@ -24,8 +24,8 @@ export let $$k0 = registerModal(function (e) {
   let t = selectCurrentUser();
   let n = useDispatch();
   let i = _6();
-  let w = Rs(EduOffboardingData, {});
-  let k = Rs(EduOffboardingTeam, {
+  let w = useSubscription(EduOffboardingData, {});
+  let k = useSubscription(EduOffboardingTeam, {
     teamId: e.teamId || ""
   }, {
     enabled: !!e.teamId

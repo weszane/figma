@@ -15,7 +15,7 @@ import { IW } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Dy, ky } from "../figma_app/925970";
-import { to as _$$to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { N as _$$N } from "../3271/584206";
 import { RB } from "../figma_app/69680";
 import { oB, j7 } from "../905/929976";
@@ -99,10 +99,10 @@ import { BI } from "../figma_app/546509";
 import { N as _$$N3 } from "../905/301843";
 import { selectWithShallowEqual } from "../905/103090";
 import { s7 } from "../905/551193";
-import { tS as _$$tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FUserRoleType } from "../figma_app/191312";
 import { mC } from "../905/18797";
-import { X$, H3, T5 } from "../figma_app/465071";
+import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getWidgetAllowListKey, getPluginAllowListKey } from "../figma_app/155287";
 import { A as _$$A8 } from "../svg/987294";
 import { H as _$$H } from "../2b17fec9/68162";
@@ -350,7 +350,7 @@ function eH({
   text: t
 }) {
   let s = m0();
-  let r = _$$to();
+  let r = useIsSelectedViewFullscreenCooper();
   return jsxs("div", {
     className: "browse_resource_modal_tab_header--header--MQQB5 text--fontPos11--2LvXf text--_fontBase--QdLsd",
     children: [jsxs("div", {
@@ -401,7 +401,7 @@ function eG(e) {
   let r = activeTab === _$$s2.PLUGIN;
   let l = useDispatch();
   let o = m0();
-  let d = _$$to();
+  let d = useIsSelectedViewFullscreenCooper();
   let c = _$$x();
   let u = Um();
   let m = NF(_$$T() ? gC + 64 : gC);
@@ -875,8 +875,8 @@ function ty({
   });
 }
 function tR(e) {
-  let t = X$("OrgView").unwrapOr(null);
-  let s = H3(t);
+  let t = useCurrentPublicPlan("OrgView").unwrapOr(null);
+  let s = getParentOrgIdIfOrgLevel(t);
   return s ? jsx(tM, {
     currentOrgId: s,
     viewExpandedList: e.viewExpandedList
@@ -889,7 +889,7 @@ function tM(e) {
     currentOrgId,
     viewExpandedList
   } = e;
-  let r = T5("_OrgView").unwrapOr(null);
+  let r = useCurrentPrivilegedPlan("_OrgView").unwrapOr(null);
   let l = r?.pluginsWhitelistEnforced ?? !1;
   let o = r?.widgetsWhitelistEnforced ?? !1;
   let {
@@ -903,7 +903,7 @@ function tM(e) {
   let p = x.length > 0;
   let g = c ? o : l;
   let h = c ? getWidgetAllowListKey : getPluginAllowListKey;
-  let v = _$$tS();
+  let v = useCurrentFileKey();
   let f = mC(h(currentOrgId, v));
   let j = ll();
   let y = bT(Object.values(j)).map(e => e.plugin_id);
@@ -1327,7 +1327,7 @@ function st(e) {
   } = IT();
   let r = activeTab === _$$s2.WIDGET;
   let i = m0();
-  let l = _$$to();
+  let l = useIsSelectedViewFullscreenCooper();
   let o = e.query.trim();
   let d = lg();
   let c = _$$k3.getApiEditorType(d);
@@ -1598,7 +1598,7 @@ export function $$so0() {
     setCurrentViewOrTab
   } = IT();
   let u = m0();
-  let _ = _$$to();
+  let _ = useIsSelectedViewFullscreenCooper();
   let m = u || _ ? "fd_browse_resource_modal--slidingPaneContainerAdjustable--ge7kl sliding_pane--slidingPaneContainer--RQkXf" : "fd_browse_resource_modal--slidingPaneContainer--sW-oK sliding_pane--slidingPaneContainer--RQkXf";
   let [p, h] = useState(initialFdView ? "" : r || "");
   let [v, f] = useState(_$$Y.MAIN);
@@ -1728,7 +1728,7 @@ function sd({
     children: getI18nString("dev_handoff.inspect_panel.search_bar_filter_codegen_option")
   }));
   let O = m0();
-  let Z = _$$to();
+  let Z = useIsSelectedViewFullscreenCooper();
   let F = Z ? jsx(_$$N, {
     searchQuery: e,
     placeholder: s,
@@ -1794,7 +1794,7 @@ function sd({
 function sc(e) {
   let t = useRef(null);
   let s = m0();
-  let r = _$$to();
+  let r = useIsSelectedViewFullscreenCooper();
   let l = z4.getIsExtension() ? Ix + gC + 48 : s ? gC + Kr + Ix + ff : gC + Kr + Ix;
   let {
     activeTab,

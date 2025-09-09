@@ -8,7 +8,7 @@ import { subscribeAndAwaitData } from "../905/553831";
 import { reportError } from "../905/11";
 import { logWarning } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
-import { d6, bJ } from "../figma_app/687776";
+import { canCreateFileType, canCreateFileTypeAsync } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { gN } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
@@ -105,9 +105,9 @@ let $$C6 = createOptimistThunk(async e => {
     e.dispatch(U());
     return;
   }
-  if (!d6(k, R)) {
+  if (!canCreateFileType(k, R)) {
     let t = cu(k.name);
-    let n = !!C && T !== C && (await bJ(C, R));
+    let n = !!C && T !== C && (await canCreateFileTypeAsync(C, R));
     e.dispatch($$O10({
       id: i,
       status: mO.FAILURE,

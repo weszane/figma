@@ -10,7 +10,7 @@ import { tS } from "../figma_app/622574";
 import { Ou } from "../figma_app/106207";
 import { A as _$$A2 } from "../1291/23528";
 import { Ih } from "../figma_app/740025";
-import { tS as _$$tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { a6 } from "../figma_app/198840";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
@@ -107,7 +107,7 @@ export function $$z0() {
     setQuery
   } = _$$I(Cn.FigJam);
   let j = useDispatch();
-  let S = _$$tS();
+  let S = useCurrentFileKey();
   let {
     shelves,
     hubFiles

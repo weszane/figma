@@ -37,7 +37,7 @@ import { FBillingPeriodType, FOrganizationLevelType } from '../figma_app/191312'
 import { AG } from '../figma_app/217457';
 import { P8, vt } from '../figma_app/297957';
 import { Tj } from '../figma_app/342207';
-import { S2 } from '../figma_app/465071';
+import { useTeamPlanFeatures } from '../figma_app/465071';
 import { vr } from '../figma_app/514043';
 import { R as _$$R } from '../figma_app/522082';
 import { tI } from '../figma_app/599327';
@@ -438,7 +438,7 @@ function er(e) {
 function el(e) {
   let t = useDispatch();
   let a = _$$k2();
-  let r = S2().unwrapOr(null);
+  let r = useTeamPlanFeatures().unwrapOr(null);
   let l = r?.key?.type;
   let o = r?.key?.parentId;
   let d = RG();

@@ -4,7 +4,7 @@ import { bL, c$ } from "../905/575478";
 import { q } from "../905/932270";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Pyi, vE6 } from "../figma_app/27776";
@@ -19,7 +19,7 @@ export function $$g0(e) {
     onboardingKey,
     recordingKey
   } = e;
-  let _ = ZC(activeMode) ?? activeMode;
+  let _ = useLatestRef(activeMode) ?? activeMode;
   let g = useCallback(e => modes.findIndex(t => t.mode === e), [modes]);
   let E = g(activeMode);
   let y = Math.abs(E - g(_));

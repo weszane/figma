@@ -21,7 +21,7 @@ import { getFeatureFlags } from "../905/601108";
 import { $w } from "../figma_app/935144";
 import { nP } from "../figma_app/484865";
 import { t2 } from "../figma_app/911720";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { yT } from "../figma_app/332598";
@@ -242,7 +242,7 @@ function Q({
       };
     }
   }, [o, e.selectedFile?.metadata?.path, e.selectedComponent?.title, n]);
-  let [r] = IT(Fq({
+  let [r] = setupResourceAtomHandler(Fq({
     libraryKey: e.component.library_key,
     repositoryId: i?.repositoryId ?? "",
     filePath: i?.filePath ?? ""

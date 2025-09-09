@@ -1,18 +1,38 @@
-import { z } from "../905/239603";
-var $$a4 = (e => (e.DISABLE_FIGJAM = "disable_figjam", e.DISABLE_WORKSHOP = "disable_workshop", e.VOICE = "voice", e.DISABLE_AI_FEATURES = "disable_ai_features", e))($$a4 || {});
-var $$s3 = (e => (e.ELIGIBLE = "eligible", e.UPSELL = "upsell", e.INELIGIBLE = "ineligible", e))($$s3 || {});
-var $$o0 = (e => (e.ENABLED = "enabled", e.DISABLED = "disabled", e))($$o0 || {});
-let l = z.object({
-  supports: z.nativeEnum($$s3),
-  enabled: z.nativeEnum($$o0)
-});
-z.object({
-  disable_figjam: l,
-  voice: l,
-  disable_workshop: l,
-  disable_ai_features: l
-});
-export { OL, h4 } from "../figma_app/191312";
-export const LC = $$o0;
-export const i5 = $$s3;
-export const s$ = $$a4;
+import { FOrganizationLevelType, FUserTypeClassification } from '../figma_app/191312'
+
+/**
+ * FeatureToggleType - Original: $$a4
+ * Represents the types of feature toggles available.
+ */
+export enum FeatureToggleType {
+  DISABLE_FIGJAM = 'disable_figjam',
+  DISABLE_WORKSHOP = 'disable_workshop',
+  VOICE = 'voice',
+  DISABLE_AI_FEATURES = 'disable_ai_features',
+}
+
+/**
+ * EligibilityStatusType - Original: $$s3
+ * Represents the eligibility status types.
+ */
+export enum EligibilityStatusType {
+  ELIGIBLE = 'eligible',
+  UPSELL = 'upsell',
+  INELIGIBLE = 'ineligible',
+}
+
+/**
+ * FeatureStateType - Original: $$o0
+ * Represents the state of a feature.
+ */
+export enum FeatureStateType {
+  ENABLED = 'enabled',
+  DISABLED = 'disabled',
+}
+
+// Refactored exports for compatibility with original names
+export const s$ = FeatureToggleType
+export const i5 = EligibilityStatusType
+export const LC = FeatureStateType
+export const h4 = FUserTypeClassification
+export const OL = FOrganizationLevelType

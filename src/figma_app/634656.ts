@@ -5,13 +5,13 @@ import { ColorOptions, WhiteboardTsApi } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
 import { tK, DA } from "../figma_app/191804";
 import { Eg } from "../figma_app/583114";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { WB } from "../905/761735";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { GI, IZ, ez, lC, U9, qL } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { AppliedColorPaletteForFile } from "../figma_app/43951";
 import { _ as _$$_ } from "../905/613917";
 import { canViewTeam } from "../figma_app/642025";
@@ -23,7 +23,7 @@ import { XQ, Dq, n6, ns, T7, E$ } from "../figma_app/285009";
 import { zS, Ku, BV, Qe } from "../figma_app/153399";
 import { Qv, $R, zd, Ze } from "../figma_app/967873";
 export function $$N2() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = useDispatch();
   let r = Xr(Qv);
   return (n, i, a) => {
@@ -38,8 +38,8 @@ export function $$N2() {
   };
 }
 export function $$C4() {
-  let e = tS() || "";
-  let [t] = IT(AppliedColorPaletteForFile({
+  let e = useCurrentFileKey() || "";
+  let [t] = setupResourceAtomHandler(AppliedColorPaletteForFile({
     fileKey: e
   }), {
     enabled: !!e
@@ -48,8 +48,8 @@ export function $$C4() {
   if ("loaded" === t.status && r && r.defaultColorPaletteData?.colorPalette) return r.defaultColorPaletteData.colorPalette;
 }
 export let $$w7 = D(() => {
-  let e = tS();
-  let [t] = IT(AppliedColorPaletteForFile({
+  let e = useCurrentFileKey();
+  let [t] = setupResourceAtomHandler(AppliedColorPaletteForFile({
     fileKey: e || ""
   }), {
     enabled: !!e
@@ -133,7 +133,7 @@ export function $$k5(e, t) {
 }
 export function $$M9() {
   let e = $$w7();
-  let t = ZC(e.uuid);
+  let t = useLatestRef(e.uuid);
   let r = e.type === Yv.CUSTOM ? zd(e) : null;
   let i = Xr(GI);
   let l = Xr(IZ);

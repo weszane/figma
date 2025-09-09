@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { N } from "../905/794224";
 import { V } from "../figma_app/385855";
 import { q } from "../905/600041";
@@ -30,7 +30,7 @@ export function $$h1({
   file: e,
   ...t
 }) {
-  let r = Rs(FileCanView, {
+  let r = useSubscription(FileCanView, {
     key: e.key
   });
   let l = $$p2(e.editor_type, !!e.thumbnail_guid);

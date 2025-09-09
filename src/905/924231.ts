@@ -6,7 +6,7 @@ import { B } from "../905/714743";
 import { Rw } from "../figma_app/91703";
 import { E3 } from "../figma_app/976749";
 import { cW, $1 } from "../figma_app/844435";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
 import { createDeferredPromise } from "../905/263346";
@@ -33,7 +33,7 @@ export function $$E0({
   let T = useSelector(e => e.installedPluginVersions.plugins);
   let k = $1();
   let R = E3();
-  let N = q5();
+  let N = selectCurrentFile();
   let P = useDispatch();
   let O = useCallback(async () => {
     let n = null;

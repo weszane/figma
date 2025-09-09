@@ -15,7 +15,7 @@ import { getI18nString } from "../905/303541";
 import { OG, w6 } from "../1250/340571";
 import { k1 } from "../1250/428971";
 import { Ib } from "../905/129884";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { rt } from "../1250/282084";
 import { trackEventAnalytics } from "../905/449184";
 import { O as _$$O } from "../1250/664647";
@@ -350,7 +350,7 @@ export function $$V1({
   }) {
     let i = t?.metadata?.repository?.id;
     let o = t?.metadata?.path;
-    let [s] = IT(rt({
+    let [s] = setupResourceAtomHandler(rt({
       libraryKey: e,
       repository: i ?? "",
       path: o ?? ""

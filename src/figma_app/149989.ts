@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../figma_app/272902";
 import u from "classnames";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Uz } from "../905/63728";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { tH } from "../905/751457";
@@ -22,7 +22,7 @@ import { B8 } from "../figma_app/255679";
 import { kf, u5, Rb, yp, pN } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { dH } from "../figma_app/722362";
-import { _G, tS } from "../figma_app/516028";
+import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { Oe } from "../figma_app/336853";
 import { PW, ub } from "../figma_app/633080";
@@ -530,7 +530,7 @@ export function $$el3({
     isLoading: y ?? !1,
     eventName: "variables.variable_picker_load_time"
   });
-  let ea = _G();
+  let ea = useOpenFileLibraryKey();
   let es = Um();
   let el = l ? tx(l) : null;
   let [ec, eu] = useState(null);
@@ -658,7 +658,7 @@ export function $$el3({
     r >= 0 && eF.current?.scrollToIndex(r, t);
     eu(e);
   }, []);
-  let eB = tS();
+  let eB = useCurrentFileKey();
   let eG = useContext(d2);
   g$({
     variables: e,
@@ -668,7 +668,7 @@ export function $$el3({
     fileKey: eB ?? "",
     orgId: ey?.id
   });
-  let eV = ZC(F);
+  let eV = useLatestRef(F);
   useLayoutEffect(() => {
     !y && eV !== F && (F.length > 0 || !el ? ej() : F || eU(el, {
       align: "center"

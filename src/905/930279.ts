@@ -6,12 +6,12 @@ import { ViewType, SchemaJoinStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
-import { up, SA, Kz, Ns } from "../905/760074";
+import { getRepoByIdAlt, isDefaultFile, isBranchAlt, isDefaultFileAlt } from "../905/760074";
 import { Wy, eE } from "../figma_app/952446";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType, FFileType } from "../figma_app/191312";
 import { BranchingPermissionsView, RepoFiles } from "../figma_app/43951";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
@@ -20,7 +20,7 @@ import { TY } from "../figma_app/701001";
 import { FC } from "../figma_app/212807";
 import { d as _$$d } from "../905/647058";
 import { XD } from "../905/981217";
-import { Pe } from "../figma_app/12796";
+import { isExportRestricted } from "../figma_app/12796";
 export function $$w2(e, t, i, n, r, a, d, c, u, f) {
   var A;
   return {
@@ -45,7 +45,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         status: "disabled",
         reason: "Low memory"
       };
-      if (Pe(e)) return {
+      if (isExportRestricted(e)) return {
         status: "disabled",
         reason: "File is copy/export restricted"
       };
@@ -68,8 +68,8 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         status: "hidden",
         reason: "Not in org"
       };
-      let o = up(e, t.repos);
-      if (o && !SA(e, o)) return {
+      let o = getRepoByIdAlt(e, t.repos);
+      if (o && !isDefaultFile(e, o)) return {
         status: "hidden",
         reason: "Not the main file"
       };
@@ -85,7 +85,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         status: "hidden"
       };
     }(e, t, d, c, u, i, n),
-    openBranchSource: e && Kz(e) ? {
+    openBranchSource: e && isBranchAlt(e) ? {
       status: "enabled"
     } : {
       status: "hidden"
@@ -98,7 +98,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
     } : {
       status: "hidden"
     },
-    viewBranchDiff: (A = e?.sourceFile || null, e ? Kz(e) ? e.canView ? A?.canView ? d ? {
+    viewBranchDiff: (A = e?.sourceFile || null, e ? isBranchAlt(e) ? e.canView ? A?.canView ? d ? {
       status: "hidden",
       reason: "Recovery mode"
     } : r !== ViewType.BRANCHING && n !== Wy.SAFE ? {
@@ -122,7 +122,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
       if (!e) return {
         status: "hidden"
       };
-      if (!Kz(e)) return {
+      if (!isBranchAlt(e)) return {
         status: "hidden",
         reason: "Not a branch"
       };
@@ -160,7 +160,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
       if (!e) return {
         status: "hidden"
       };
-      if (!Kz(e)) return {
+      if (!isBranchAlt(e)) return {
         status: "hidden",
         reason: "Not a branch"
       };
@@ -215,7 +215,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
       };
     }(e, e?.sourceFile || null, t, n, r, a, d),
     updateBranch: function (e, t, i, n, r, a, d, c) {
-      if (!e || !Kz(e)) return {
+      if (!e || !isBranchAlt(e)) return {
         status: "hidden"
       };
       if (!e.canManage) return {
@@ -248,7 +248,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
           };
         }
         let i = t.find(t => t.key === e.key);
-        let n = t.find(e => Ns(e, c));
+        let n = t.find(e => isDefaultFileAlt(e, c));
         if (!i) return {
           status: "disabled",
           reason: "No branch file in livegraph"
@@ -307,7 +307,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
 }
 export function $$C0() {
   let e = FC();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = _$$d();
   let a = useSelector(e => e.selectedView.editorType);
   let s = TY();
@@ -317,7 +317,7 @@ export function $$C0() {
   let m = t?.teamId ?? null;
   let h = t?.sourceFile ?? t;
   let _ = !!(h && h.key);
-  let y = Rs(BranchingPermissionsView, {
+  let y = useSubscription(BranchingPermissionsView, {
     fileKey: h?.key
   }, {
     enabled: _
@@ -333,7 +333,7 @@ export function $$C0() {
     reason: "Not enabled"
   }), [s, i, y, _]);
   let x = t?.sourceFile?.fileRepoId ?? "";
-  let S = Rs(RepoFiles, {
+  let S = useSubscription(RepoFiles, {
     repoId: x
   }, {
     enabled: !!x
@@ -370,7 +370,7 @@ function T({
     reason: "Invalid editor type"
   } : e.canCreateBranch ? {
     status: "enabled"
-  } : Pe(e) ? {
+  } : isExportRestricted(e) ? {
     status: "disabled",
     reason: "File is copy/export restricted"
   } : n && ![Agb.ENTERPRISE, Agb.ORG].includes(n.tier) ? {
@@ -392,7 +392,7 @@ function k(e, t) {
 export function $$R1(e) {
   let t = _$$d();
   let i = e?.key;
-  let r = Rs(BranchingPermissionsView, {
+  let r = useSubscription(BranchingPermissionsView, {
     fileKey: i
   }, {
     enabled: !!i

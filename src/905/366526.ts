@@ -1,9 +1,10 @@
 import rN from 'classnames';
 import { PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { H as _$$H } from 'react-dom';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
-import { reportError, SeverityLevel, setSentryTag, setSentryContext } from '../905/11';
+import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
 import { WR, X0 } from '../905/2848';
 import { vq as _$$vq } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
@@ -36,7 +37,7 @@ import { c5 as _$$c4, uo as _$$uo8 } from '../905/93909';
 import { i as _$$i5 } from '../905/97346';
 import { bE as _$$bE4, uo as _$$uo5, yH as _$$yH3, yJ as _$$yJ5 } from '../905/98702';
 import { useSprigWithSampling } from '../905/99656';
-import { registerModal, ModalSupportsBackground } from '../905/102752';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { C as _$$C2 } from '../905/109977';
 import { cZ as _$$cZ2, Xc } from '../905/113138';
 import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
@@ -51,7 +52,7 @@ import { CL } from '../905/148074';
 import { Q as _$$Q3 } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
 import { N as _$$N3 } from '../905/155850';
-import { showModal, popPrevModal, updateModal, popModalStack, showModalHandler, hideModal, hideSpecificModal } from '../905/156213';
+import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
 import { lM as _$$lM, Dx } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
@@ -88,18 +89,18 @@ import { nE as _$$nE, EU } from '../905/255097';
 import { dK as _$$dK, TE, v9 } from '../905/266289';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { datadogRum } from '../905/270963';
-import { hS as _$$hS, oy as _$$oy } from '../905/276025';
+import { teamOrOrgIdAtom, parentOrgIdAtom } from '../905/276025';
 import { A as _$$A } from '../905/289770';
 import { L as _$$L } from '../905/293182';
 import { Q8, R9 } from '../905/294085';
-import { sendMessageToParent, initializeIntegrationEnvironment } from '../905/298920';
+import { initializeIntegrationEnvironment, sendMessageToParent } from '../905/298920';
 import { setLastUsedEditorType } from '../905/298923';
 import { E as _$$E3, ie as _$$ie, nM as _$$nM, Nu, SL } from '../905/300250';
 import { F as _$$F5 } from '../905/300562';
 import { p as _$$p2 } from '../905/300815';
 import { r as _$$r } from '../905/302698';
 import { VisualBellActions } from '../905/302958';
-import { getI18nString, renderI18nText, loadI18nState } from '../905/303541';
+import { getI18nString, loadI18nState, renderI18nText } from '../905/303541';
 import { T as _$$T3, v as _$$v4 } from '../905/309844';
 import { sR as _$$sR } from '../905/309846';
 import { $N, an as _$$an, OX, OZ, Sp, U_ } from '../905/327855';
@@ -148,7 +149,7 @@ import { id as _$$id2, lk as _$$lk, nq as _$$nq, Qh as _$$Qh, Xc as _$$Xc, FY, K
 import { O as _$$O2 } from '../905/480562';
 import { formatI18nMessage } from '../905/482208';
 import { R as _$$R } from '../905/483499';
-import { Rh } from '../905/485103';
+import { sendMetric } from '../905/485103';
 import { $ as _$$$2 } from '../905/489647';
 import { S as _$$S7 } from '../905/491708';
 import { b as _$$b4 } from '../905/493664';
@@ -156,13 +157,13 @@ import { N as _$$N6 } from '../905/493958';
 import { C as _$$C3 } from '../905/496700';
 import { G as _$$G2, j as _$$j2 } from '../905/496937';
 import { f as _$$f, r as _$$r2 } from '../905/501976';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { au as _$$au2, hK as _$$hK, Y9 as _$$Y2, yu } from '../905/504768';
 import { $R, dR as _$$dR, mc as _$$mc, Lb, NQ, wy } from '../905/508367';
 import { TranslationErrors } from '../905/508408';
 import { vv } from '../905/508457';
 import { T9 } from '../905/511649';
-import { Z as _$$Z5 } from '../905/515860';
+import { resolveTeamId } from '../905/515860';
 import { OJ } from '../905/519092';
 import { r as _$$r9 } from '../905/520829';
 import { J as _$$J2 } from '../905/521144';
@@ -177,7 +178,7 @@ import { reactTimerGroup } from '../905/542194';
 import { xH } from '../905/546357';
 import { subscribeAndGetStatus } from '../905/553831';
 import { $B, aL as _$$aL, hT as _$$hT2, Y4 } from '../905/561087';
-import { requestDeferredExecution, registerDeferredCallback } from '../905/561433';
+import { registerDeferredCallback, requestDeferredExecution } from '../905/561433';
 import { i as _$$i2 } from '../905/565139';
 import { nD as _$$nD, uB as _$$uB } from '../905/572991';
 import { s as _$$s2 } from '../905/573154';
@@ -199,20 +200,20 @@ import { customHistory, CustomRouter } from '../905/612521';
 import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
 import { _G, Pv } from '../905/619652';
 import { e as _$$e5 } from '../905/621515';
-import { UE } from '../905/628874';
+import { setupFileObject } from '../905/628874';
 import { E as _$$E9 } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, removeQueryParam, serializeQuery } from '../905/634134';
 import { A as _$$A0, y as _$$y6 } from '../905/638715';
 import { F as _$$F7, h as _$$h4 } from '../905/642505';
 import { k as _$$k3 } from '../905/644504';
-import { i as _$$i } from '../905/651613';
+import { createFileLibraryKeys } from '../905/651613';
 import { logger } from '../905/651849';
-import { getStorage, getLocalStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
+import { getLocalStorage, getStorage, localStorageRef, useLocalStorageSync } from '../905/657224';
 import { $T, KJ as _$$KJ, Vx as _$$Vx, V0 } from '../905/657710';
-import { oA as _$$oA, tT as _$$tT } from '../905/663269';
+import { ResourceStatus } from '../905/663269';
 import { j2 } from '../905/667970';
 import { S as _$$S4 } from '../905/669334';
-import { measureSyncDuration, measureAsyncDuration } from '../905/670985';
+import { measureAsyncDuration, measureSyncDuration } from '../905/670985';
 import { sh as _$$sh, uA as _$$uA, xN, YO } from '../905/672897';
 import { oW as _$$oW } from '../905/675859';
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
@@ -225,7 +226,7 @@ import { N as _$$N } from '../905/696711';
 import { R as _$$R3, V as _$$V3 } from '../905/697254';
 import { De as _$$De } from '../905/697795';
 import { X as _$$X2 } from '../905/698965';
-import { SingletonSceneGraph, getSingletonSceneGraph } from '../905/700578';
+import { getSingletonSceneGraph, SingletonSceneGraph } from '../905/700578';
 import { o as _$$o8 } from '../905/701807';
 import { U as _$$U } from '../905/707331';
 import { S3 } from '../905/708054';
@@ -235,7 +236,7 @@ import { uiVariantName } from '../905/709735';
 import { us as _$$us2, xp } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
 import { IT, M4 } from '../905/713695';
-import { logDebug, logInfo, logError, logWarning } from '../905/714362';
+import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { lG as _$$lG } from '../905/714538';
 import { B as _$$B2 } from '../905/714743';
 import { H as _$$H6 } from '../905/715533';
@@ -254,7 +255,7 @@ import { f as _$$f3 } from '../905/749689';
 import { B as _$$B } from '../905/749933';
 import { tH as _$$tH, As, H4, S1 } from '../905/751457';
 import { wY } from '../905/753206';
-import { up as _$$up, Kz, L8, Xm } from '../905/760074';
+import { getRepoByIdAlt, isBranchAlt, getRepoById, isBranch } from '../905/760074';
 import { m as _$$m } from '../905/760316';
 import { MV, WB } from '../905/761735';
 import { pP as _$$pP, fW } from '../905/765855';
@@ -264,13 +265,13 @@ import { gD } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
 import { M as _$$M } from '../905/777093';
 import { $A } from '../905/782918';
-import { VERSION_HISTORY_RESET, VERSION_HISTORY_SET_FILE_LAST_SEEN_AT, VERSION_HISTORY_LOADING, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_DOC_HAS_CHANGED, VERSION_HISTORY_APPEND, UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_COMPARE_CHANGES } from '../905/784363';
+import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPARE_CHANGES, VERSION_HISTORY_LOADING, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_RESET, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_DOC_HAS_CHANGED, VERSION_HISTORY_SET_FILE_LAST_SEEN_AT, VERSION_HISTORY_SET_LINKED_VERSION } from '../905/784363';
 import { X as _$$X3 } from '../905/784599';
 import { FullscreenMenu, PluginMenu } from '../905/791556';
 import { L4 as _$$L2, jr } from '../905/792802';
 import { x as _$$x2 } from '../905/805083';
 import { d as _$$d5 } from '../905/811033';
-import { j4 } from '../905/814802';
+import { TeamType } from '../905/814802';
 import { languageCodes } from '../905/816253';
 import { F0 } from '../905/820492';
 import { F2 } from '../905/826900';
@@ -289,15 +290,15 @@ import { hM as _$$hM } from '../905/851937';
 import { D as _$$D2 } from '../905/852057';
 import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
 import { T as _$$T5 } from '../905/858738';
-import { n3 as _$$n2, VariableStyleId, Rf } from '../905/859698';
+import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
 import { cc as _$$cc, zl as _$$zl, By, qB, RE, vR } from '../905/862321';
 import { RD } from '../905/862913';
 import { w as _$$w2 } from '../905/863010';
 import { xH as _$$xH2 } from '../905/869282';
 import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
+import { generateUUIDv4 } from '../905/871474';
 import { createDeferredPromise } from '../905/874553';
 import { $I as _$$$I, ay as _$$ay, cr as _$$cr, dC as _$$dC, iE as _$$iE2, lx as _$$lx, ow as _$$ow, ru as _$$ru, uo as _$$uo3, yH as _$$yH2, B2, Bn, Cp, gP, Ho, HV, I0, JV, KQ, ku, Ty, U$, UA, WE, xI, Y1 } from '../905/879323';
-import { generateUUIDv4 } from '../905/871474';
 import { P6, VK, YF, YK } from '../905/880488';
 import { D as _$$D4 } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
@@ -343,22 +344,21 @@ import { DFF } from '../figma_app/6204';
 import { aN as _$$aN, o$ as _$$o$, AB, h2, J6, vu } from '../figma_app/8833';
 import { lW as _$$lW2 } from '../figma_app/11182';
 import { GV as _$$GV, us as _$$us, PK } from '../figma_app/12220';
-import { cb as _$$cb2, Eh } from '../figma_app/12796';
+import { canRunExtensions, canPerformAction } from '../figma_app/12796';
 import { yJ as _$$yJ, S5, WJ } from '../figma_app/24841';
-import { atom, useAtomWithSubscription, tP as _$$tP, AtomProvider, createLocalStorageAtom, useAtomValueAndSetter, Xr, atomStoreManager } from '../figma_app/27355';
+import { tP as _$$tP, atom, AtomProvider, atomStoreManager, createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { YQL } from '../figma_app/27776';
 import { hZ as _$$hZ6, w4, yo } from '../figma_app/28323';
 import { ec as _$$ec } from '../figma_app/29089';
-import { Wd } from '../figma_app/35887';
-import { ZC } from '../figma_app/39751';
-import { BlockingUserState, StateGroupUpdatesForTeam, StateGroupUpdatesForFile, ComponentUpdatesForProject, OpenEditorFileData, ReposForProject, OrgByIdForRealtimeShim, WhitelistedPluginsForOrg, EduGracePeriodsForUser, StatsigTeamsOrderView, PluginUpdatesForOrg, OrgByIdForPlanView, WidgetUpdatesForOrg, UserTeamRoleRequestView, FontFileForOrgView, CommunityPaymentsForRealtimeShim, TeamByIdForPlanView, OrgByIdForPlanUserView, OrgUsersForRealtimeShim, ComponentUpdatesForFile, TeamByIdForPlanUserView, RepoByIdForRealtimeShim, UserForRealtimeShim, RoleUpdatesForUser, FontFileForTeamView, ReposForFile, UserTeamFlagsForRealtimeShim, ComponentUpdatesForTeam, ReposForTeam, StateGroupUpdatesForProject, TeamByIdForRealtimeShim, RoleUpdatesForTeam } from '../figma_app/43951';
+import { AccountTypeEnum } from '../figma_app/35887';
+import { BlockingUserState, CommunityPaymentsForRealtimeShim, ComponentUpdatesForFile, ComponentUpdatesForProject, ComponentUpdatesForTeam, EduGracePeriodsForUser, FontFileForOrgView, FontFileForTeamView, OpenEditorFileData, OrgByIdForPlanUserView, OrgByIdForPlanView, OrgByIdForRealtimeShim, OrgUsersForRealtimeShim, PluginUpdatesForOrg, RepoByIdForRealtimeShim, ReposForFile, ReposForProject, ReposForTeam, RoleUpdatesForTeam, RoleUpdatesForUser, StateGroupUpdatesForFile, StateGroupUpdatesForProject, StateGroupUpdatesForTeam, StatsigTeamsOrderView, TeamByIdForPlanUserView, TeamByIdForPlanView, TeamByIdForRealtimeShim, UserForRealtimeShim, UserTeamFlagsForRealtimeShim, UserTeamRoleRequestView, WhitelistedPluginsForOrg, WidgetUpdatesForOrg } from '../figma_app/43951';
 import { Qv as _$$Qv, vt as _$$vt } from '../figma_app/45218';
 import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '../figma_app/49598';
-import { FEditorType, mapEditorTypeToStringWithObfuscated, mapFileTypeToEditorType, mapEditorTypeToWorkspaceType, mapEditorTypeToString } from '../figma_app/53721';
+import { FEditorType, mapEditorTypeToString, mapEditorTypeToStringWithObfuscated, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
 import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
 import { Eo, qv } from '../figma_app/80990';
-import { subscribeObservable, executeDeferredCallbacks } from '../figma_app/84367';
+import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { Wl } from '../figma_app/88239';
 import { aK as _$$aK, ho as _$$ho2, il as _$$il, lz as _$$lz, p5 as _$$p3, pj as _$$pj, PQ as _$$PQ, re as _$$re, Uv as _$$Uv, bO, Bs, CN, D9, fG, fk, FP, fy, Gm, JM, Jt, kP, Kx, OB, Qm, R5, Rw, U8, UC, UM, vg, Wk, XE, XQ, Y6, yv, Z1, Z_ } from '../figma_app/91703';
@@ -376,11 +376,11 @@ import { v2 } from '../figma_app/164260';
 import { xZ } from '../figma_app/165422';
 import { qV } from '../figma_app/165623';
 import { buildUploadUrl, defaultUserConfig, getInitialOptions, isGovCluster, isLocalCluster, isProdCluster, isStagingCluster } from '../figma_app/169182';
-import { P5 as _$$P6 } from '../figma_app/175992';
+import { StatusType } from '../figma_app/175992';
 import { c0 as _$$c5 } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
 import { Ni } from '../figma_app/188152';
-import { FPlanAccessType, FTeamAccessPermissionType, FBasicPermissionType, FUserRoleType, FFileType, FAccessLevelType, FProductAccessType, FPublicationStatusType, FOrganizationLevelType, FFeatureAdoptionStatusType, FPermissionLevelType, FPaymentHealthStatusType, FResourceCategoryType, FPlanRestrictionType } from '../figma_app/191312';
+import { FAccessLevelType, FBasicPermissionType, FFeatureAdoptionStatusType, FFileType, FOrganizationLevelType, FPaymentHealthStatusType, FPermissionLevelType, FPlanAccessType, FPlanRestrictionType, FProductAccessType, FPublicationStatusType, FResourceCategoryType, FTeamAccessPermissionType, FUserRoleType } from '../figma_app/191312';
 import { K as _$$K3, U2 as _$$U2, bW, Iu, Np, vU, yn } from '../figma_app/193867';
 import { P0 } from '../figma_app/198387';
 import { iT as _$$iT, Q3, xT } from '../figma_app/199513';
@@ -391,13 +391,12 @@ import { N as _$$N9 } from '../figma_app/240060';
 import { $I, $V, $w, aB as _$$aB, bE as _$$bE2, ii as _$$ii, Jt as _$$Jt, mw as _$$mw, n9 as _$$n, r1 as _$$r5, uo as _$$uo2, yH as _$$yH, yJ as _$$yJ3, _E, bQ, TI, WC } from '../figma_app/240735';
 import { m as _$$m2 } from '../figma_app/247343';
 import { tB as _$$tB, wc, Zp } from '../figma_app/253220';
-import { isInteractionPathCheck, getFalseValue, isInteractionOrEvalMode } from '../figma_app/897289';
 import { N as _$$N0 } from '../figma_app/268271';
 import { hE as _$$hE2, nB as _$$nB, vo as _$$vo, jk, wi, Y9 } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { h as _$$h2 } from '../figma_app/275739';
 import { Gk } from '../figma_app/277330';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { wl, y4 } from '../figma_app/298277';
 import { getPluginVersion } from '../figma_app/300692';
 import { g3 } from '../figma_app/304207';
@@ -412,27 +411,27 @@ import { E as _$$E7, hZ as _$$hZ5 } from '../figma_app/342125';
 import { ce as _$$ce, cm as _$$cm, GH } from '../figma_app/347146';
 import { Ns } from '../figma_app/349248';
 import { fj } from '../figma_app/357047';
-import { reportTranslationIssue, getI18nState } from '../figma_app/363242';
+import { getI18nState, reportTranslationIssue } from '../figma_app/363242';
 import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
 import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
 import { Tm } from '../figma_app/385874';
 import { _6, z3 } from '../figma_app/386952';
 import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
-import { HZ as _$$HZ, A5, X7 } from '../figma_app/391338';
+import { setupShadowRead, adminPermissionConfig, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { Au as _$$Au, mX as _$$mX, oF as _$$oF, rx as _$$rx, sZ as _$$sZ2, _L, BG, Bt, fL, GD, hQ, LF, N$, w_, wS } from '../figma_app/415217';
 import { iE as _$$iE, Ng, xf } from '../figma_app/416935';
 import { b4 as _$$b5, _V } from '../figma_app/421886';
 import { g5 } from '../figma_app/422062';
 import { hg as _$$hg } from '../figma_app/425489';
-import { Do } from '../figma_app/428858';
+import { parseOrgParentId } from '../figma_app/428858';
 import { h0, TP, Y3, zE } from '../figma_app/435872';
 import { PI as _$$PI, s6 as _$$s4, AY } from '../figma_app/443991';
 import { fullscreenValue } from '../figma_app/455680';
 import { Cp as _$$Cp } from '../figma_app/457074';
 import { q as _$$q } from '../figma_app/458300';
-import { D6 as _$$D3, Kd as _$$Kd, px as _$$px, j_, S2 } from '../figma_app/465071';
-import { noop, debug, assert, throwTypeError } from '../figma_app/465776';
+import { useCurrentPlanUser, useIsOrgMemberOrAdminUser, useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures } from '../figma_app/465071';
+import { assert, debug, noop, throwTypeError } from '../figma_app/465776';
 import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
 import { G as _$$G } from '../figma_app/471068';
 import { Cg, Ug, v7 } from '../figma_app/475303';
@@ -444,14 +443,14 @@ import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640';
 import { up as _$$up2 } from '../figma_app/506364';
 import { LN } from '../figma_app/514043';
 import { Fi, YD } from '../figma_app/515363';
-import { q5, ze } from '../figma_app/516028';
+import { selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
 import { df as _$$df, Sb as _$$Sb, De, WM } from '../figma_app/519839';
 import { A as _$$A9 } from '../figma_app/526287';
 import { P as _$$P, Z as _$$Z } from '../figma_app/529847';
 import { cO as _$$cO, cR as _$$cR, dv as _$$dv, eg as _$$eg, ig as _$$ig, r1 as _$$r6, rO as _$$rO2, _F, Ad, Ch, gT, Hx, LO, qo, RS, Rx, Zj } from '../figma_app/530167';
 import { Tf } from '../figma_app/543100';
 import { Jj } from '../figma_app/546509';
-import { aI as _$$aI } from '../figma_app/552876';
+import { isFigmakeSitesEnabled } from '../figma_app/552876';
 import { l7 as _$$l8, uV as _$$uV, uw as _$$uw, fs, GV, KJ, L4, Qi, Vx } from '../figma_app/559491';
 import { cD as _$$cD, n$ as _$$n$, BU } from '../figma_app/598018';
 import { $l, $o, bE as _$$bE, yJ as _$$yJ2, HA, IU, Kc, MR, Q2, y2, yH } from '../figma_app/598926';
@@ -464,13 +463,13 @@ import { cX as _$$cX, AT, jg, M$, PW, Qx, Tb, wg, Yu } from '../figma_app/633080
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
 import { _d, J7 } from '../figma_app/650409';
-import { PAGINATION_PREV, PAGINATION_NEXT } from '../figma_app/661371';
+import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
 import { fl, ye, zw } from '../figma_app/682945';
-import { DI } from '../figma_app/687776';
+import { FileCreationPermissionsGenerator } from '../figma_app/687776';
 import { kE as _$$kE, mH as _$$mH, QA as _$$QA, tG as _$$tG2, TW as _$$TW, HF, zs, Zv } from '../figma_app/703138';
 import { y as _$$y5 } from '../figma_app/705249';
-import { f0, QB } from '../figma_app/707808';
+import { AppView, isIncludedView } from '../figma_app/707808';
 import { cL as _$$cL5, DI as _$$DI, dY as _$$dY, sV as _$$sV, NY, V2, zx } from '../figma_app/712525';
 import { of as _$$of, SI as _$$SI, yH as _$$yH6, Cx, x2 } from '../figma_app/714946';
 import { aV as _$$aV2 } from '../figma_app/722362';
@@ -480,13 +479,13 @@ import { ZG } from '../figma_app/736948';
 import { F as _$$F9 } from '../figma_app/738753';
 import { ax as _$$ax, d9 as _$$d3, oH as _$$oH, ou as _$$ou, T9 as _$$T, CR, HR } from '../figma_app/740025';
 import { LQ } from '../figma_app/741211';
-import { setPropertiesPanelTab, consumeFullscreenEventState } from '../figma_app/741237';
+import { consumeFullscreenEventState, setPropertiesPanelTab } from '../figma_app/741237';
 import { WJ as _$$WJ } from '../figma_app/745458';
 import { R_ } from '../figma_app/749805';
 import { cT as _$$cT2, rJ as _$$rJ, t2 as _$$t7, ue as _$$ue, C0, Jh, XU } from '../figma_app/756995';
 import { aU as _$$aU } from '../figma_app/757606';
 import { nx as _$$nx } from '../figma_app/761870';
-import { KeyboardLayout, SceneGraphHelpers, EditAction, AppStateTsApi, DesignWorkspace, perfTimerFrameManagerBindings, Fullscreen, colorManagementStateJs, WhiteboardIntegrationType, ItemType, SchemaJoinStatus, PageViewMode, ViewType, LayoutTabType, UIVisibilitySetting, IMixedValues, BackgroundPattern, Fonts, HandoffBindingsCpp, SessionStatus, UserInterfaceElements, DataLoadStatus, ColorProfileEnum } from '../figma_app/763686';
+import { AppStateTsApi, BackgroundPattern, colorManagementStateJs, ColorProfileEnum, DataLoadStatus, DesignWorkspace, EditAction, Fonts, Fullscreen, HandoffBindingsCpp, IMixedValues, ItemType, KeyboardLayout, LayoutTabType, PageViewMode, perfTimerFrameManagerBindings, SceneGraphHelpers, SchemaJoinStatus, SessionStatus, UIVisibilitySetting, UserInterfaceElements, ViewType, WhiteboardIntegrationType } from '../figma_app/763686';
 import { $0, $M, cL as _$$cL3, Fm as _$$Fm, i4 as _$$i3, js as _$$js, lI as _$$lI, li as _$$li, nb as _$$nb, on as _$$on2, PB as _$$PB2, pD as _$$pD, pI as _$$pI, Q8 as _$$Q5, RI as _$$RI, RO as _$$RO, rW as _$$rW, sQ as _$$sQ, U3 as _$$U5, uy as _$$uy, uz as _$$uz, wg as _$$wg, xH as _$$xH3, y3 as _$$y4, yH as _$$yH4, Df, F8, gi, Jc, k7, NJ, Oo, q4, QD, RP, UU, We, wJ, Z5 } from '../figma_app/770088';
 import { A as _$$A1 } from '../figma_app/776368';
 import { BrowserInfo, isFigmaMobileApp } from '../figma_app/778880';
@@ -505,13 +504,15 @@ import { Ay as _$$Ay5 } from '../figma_app/846003';
 import { hV as _$$hV, id as _$$id, lW as _$$lW, pn as _$$pn, rH as _$$rH2, u2 as _$$u, _p, Dz, gN, k$, M3, MH, TV } from '../figma_app/847915';
 import { r5 as _$$r3, r$ as _$$r$, ZH } from '../figma_app/855490';
 import { vP } from '../figma_app/864378';
-import { OpenTarget, desktopAPIInstance, bellFeedAPIInstance } from '../figma_app/876459';
+import { bellFeedAPIInstance, desktopAPIInstance, OpenTarget } from '../figma_app/876459';
 import { Ed } from '../figma_app/883490';
 import { o as _$$o } from '../figma_app/885533';
+import { getFalseValue, isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { iN as _$$iN, lF as _$$lF3, Mv as _$$Mv, pS as _$$pS, to as _$$to2, U6 as _$$U4, X7 as _$$X4, gG, jv, N9, qP } from '../figma_app/909778';
 import { nH as _$$nH, sw as _$$sw, Ev, FL } from '../figma_app/914957';
 import { ai as _$$ai, kF as _$$kF, lF as _$$lF2 } from '../figma_app/915202';
 import { l0 as _$$l9, OP } from '../figma_app/920435';
+import { useLatestRef } from '../figma_app/922077';
 import { desktopVisibilityEmitter } from '../figma_app/925651';
 import { $h as _$$$h, e$ as _$$e$, nz as _$$nz, tL as _$$tL, Z as _$$Z2, BK, Ee, fv, Kd, NW, Yx } from '../figma_app/933328';
 import { Q$ } from '../figma_app/934707';
@@ -538,7 +539,6 @@ import uW from '../vendor/223926';
 import { n_ as _$$n_ } from '../vendor/235095';
 import ag from '../vendor/239910';
 import uy from '../vendor/241899';
-import { useSelector, Provider, useDispatch } from 'react-redux';
 import eW from '../vendor/625526';
 import mI from '../vendor/643300';
 import { A as _$$A4 } from '../vendor/718327';
@@ -728,7 +728,7 @@ let Z = atom(e => {
 });
 let X = createReduxSubscriptionAtomWithState(e => e.isOpenFileLoadedFromLiveGraph);
 let Q = _$$tP(atom(e => {
-  let t = e(ze);
+  let t = e(openFileKeyAtom);
   return t == null ? null : [t, e(X)];
 }));
 function J(e, t) {
@@ -1185,14 +1185,14 @@ function e1({
   let a = null;
   let s = null;
   let l = getInitialOptions().statsig_plan_key;
-  let c = useAtomWithSubscription(_$$oy);
-  let u = useAtomWithSubscription(_$$hS);
+  let c = useAtomWithSubscription(parentOrgIdAtom);
+  let u = useAtomWithSubscription(teamOrOrgIdAtom);
   if (getFeatureFlags().statsig_plan_key_bootstrap) {
     if (!l && (c || u) && reportError(_$$e.APPLICATION_PLATFORM, new Error(`One of the plan keys is not set. This should never happen, and means that the server disagrees with the client on what the plan key should be.
           initialOptionsPlanKey: ${l}
           sidebarOrOpenFileOrgId: ${c}
           sidebarOrOpenFileTeamId: ${u}`)), l && _$$tU()) {
-      let e = Do(l);
+      let e = parseOrgParentId(l);
       e?.type === FOrganizationLevelType.ORG && e.parentId ? (a = e.parentId, s = l) : e?.type === FOrganizationLevelType.TEAM && e.parentId && (s = l);
     }
   } else {
@@ -1206,7 +1206,7 @@ function e1({
   !function (e, t, i) {
     let n = Xr(_$$oo);
     let r = function (e, t, i) {
-      let n = Rs(StatsigTeamsOrderView, {
+      let n = useSubscription(StatsigTeamsOrderView, {
         currentOrgId: t
       });
       return useMemo(() => {
@@ -1681,7 +1681,7 @@ let t8 = {
 async function t9(e, t) {
   let i = e.getState();
   let n = {
-    [FFileType.FIGMAKE]: _$$aI(),
+    [FFileType.FIGMAKE]: isFigmakeSitesEnabled(),
     [FFileType.SITES]: !!getFeatureFlags().sites,
     [FFileType.COOPER]: !!getFeatureFlags().cooper,
     [FFileType.DESIGN]: !0,
@@ -1865,7 +1865,7 @@ let iz = e => t => function (i) {
       if (s.length === 1) {
         let t = s[0];
         let i = e.getState().fileByKey[t];
-        i && Xm(i) && (l = !0);
+        i && isBranch(i) && (l = !0);
       }
       let d = () => {
         assert(P6.matches(i), 'undoDelete was called after deleteFilesForever which should be impossible');
@@ -2410,7 +2410,7 @@ let nS = e => t => function (i) {
     if (r.view === 'fullscreen' && n.selectedView.view === 'fullscreen') {
       let e = n.selectedView;
       let t = r.editorType === FEditorType.Figmake && e.editorType === FEditorType.Figmake;
-      let i = e.figmakeView === f0.FULLSCREEN_PREVIEW || r.figmakeView === f0.FULLSCREEN_PREVIEW;
+      let i = e.figmakeView === AppView.FULLSCREEN_PREVIEW || r.figmakeView === AppView.FULLSCREEN_PREVIEW;
       if (t && e.figmakeView !== r.figmakeView && i) {
         let e = n.openFile?.name ?? '';
         desktopAPIInstance.openFile({
@@ -2437,7 +2437,7 @@ let nS = e => t => function (i) {
         if (r.view === 'fullscreen') {
           let o = r.fileKey ? n.fileByKey[r.fileKey] : void 0;
           e = r.editorType ? mapEditorTypeToStringWithObfuscated(r.editorType) : void 0;
-          o && (t = o.name, i = Xm(o), a = !!o.last_published_at, s = !!(o.is_team_template && LQ(n)));
+          o && (t = o.name, i = isBranch(o), a = !!o.last_published_at, s = !!(o.is_team_template && LQ(n)));
         } else {
           r.view === 'prototype' && (t = Iu(n, r));
         }
@@ -2758,8 +2758,8 @@ let nQ = e => t => function (i) {
     let t = e.getState();
     if (t.user) {
       if (t.openFile && t.openFile.key in i.payload.fileKeys) {
-        let n = t.openFile != null ? _$$up(t.openFile, t.repos) : null;
-        Kz(t.openFile) && n?.default_file_key ? e.dispatch(_$$sf({
+        let n = t.openFile != null ? getRepoByIdAlt(t.openFile, t.repos) : null;
+        isBranchAlt(t.openFile) && n?.default_file_key ? e.dispatch(_$$sf({
           view: 'fullscreen',
           fileKey: n.default_file_key,
           editorType: FEditorType.Design
@@ -2803,7 +2803,7 @@ function ry({
     overview: !0,
     analytics: !0
   });
-  let I = _$$i(t.key, _$$l4(t));
+  let I = createFileLibraryKeys(t.key, _$$l4(t));
   return jsxs(_$$t6, {
     page: _$$e3.DSA_FILE_VIEW,
     properties: {
@@ -2894,7 +2894,7 @@ function rW({
   viewFile: c
 }) {
   let u = _$$b3(i, r, a, o);
-  let p = _$$i(e.key, _$$l4(e));
+  let p = createFileLibraryKeys(e.key, _$$l4(e));
   let m = _$$S5({
     disabled: u,
     libraryIdentifier: p,
@@ -3285,7 +3285,7 @@ function r7({
     A(null);
     b(_$$R3.OVERVIEW);
     setTimeout(() => {
-      YQ({
+      handleAtomEvent({
         id: 'Library File Collapsed'
       });
     }, 200);
@@ -3323,8 +3323,8 @@ function r7({
   useEffect(() => {
     i(Yx({}));
   }, [i]);
-  let O = _$$D3('DSALibraryView');
-  let D = j_(O).unwrapOr(!1);
+  let O = useCurrentPlanUser('DSALibraryView');
+  let D = useIsOrgAdminUser(O).unwrapOr(!1);
   if (x.status === 'loading') {
     return jsx('div', {
       className: 'dsa_library_view--loadingSpinnerContainer--liRsx',
@@ -3418,9 +3418,9 @@ let as = registerModal(e => {
   let r = _$$sZ();
   let a = useSelector(e => e.sharedFonts);
   let o = useSelector(e => getPermissionsStateMemoized(e));
-  let l = _$$D3('OrgViewModal');
-  let c = j_(l).unwrapOr(!1);
-  let u = _$$Kd(l);
+  let l = useCurrentPlanUser('OrgViewModal');
+  let c = useIsOrgAdminUser(l).unwrapOr(!1);
+  let u = useIsOrgMemberOrAdminUser(l);
   if (useEffect(() => {
     c && e.tab === _$$X2.FONTS && (t(hideModal()), t(_$$sf({
       view: 'orgAdminSettings',
@@ -3891,7 +3891,7 @@ function aV(e) {
       } : void 0
     },
     sort_position: e.component?.sortPosition || null,
-    has_video: _$$oA(e.component?.hasVideo, null),
+    has_video: getResourceDataOrFallback(e.component?.hasVideo, null),
     id: e.component?.id,
     updated_at: e.component?.updatedAt?.toISOString(),
     hub_file_id: e.component?.hubFileId,
@@ -4147,7 +4147,7 @@ let aQ = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.team || !t.team.fontFileUpdateForTeam) return [];
-    let i = _$$oA(t.team.fontFileUpdateForTeam);
+    let i = getResourceDataOrFallback(t.team.fontFileUpdateForTeam);
     return i ? aX(e, i) : [];
   }(n.store, e),
   periodicallyResubscribe: !0,
@@ -4164,7 +4164,7 @@ let aJ = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.org || !t.org.fontFileUpdateForOrg) return [];
-    let i = _$$oA(t.org.fontFileUpdateForOrg);
+    let i = getResourceDataOrFallback(t.org.fontFileUpdateForOrg);
     return i ? aX(e, i) : [];
   }(n.store, e),
   periodicallyResubscribe: !0,
@@ -4737,8 +4737,8 @@ function sg(e) {
       org_team: !!e.orgId,
       pro_team: !e.orgId && e.subscription !== null && e.subscription !== FPaymentHealthStatusType.INCOMPLETE
     };
-    X7({
-      label: A5.convertTeam.sinatraTeam,
+    setupShadowReadWithConfig({
+      label: adminPermissionConfig.convertTeam.sinatraTeam,
       oldValue: i,
       newValue: t,
       enableFullRead: getFeatureFlags().team_shim_converter_lg,
@@ -5205,7 +5205,7 @@ let sP = new _$$H6({
         profile: {
           job_title: i.profile?.jobTitle,
           usage_purpose: i.profile?.usagePurpose || void 0,
-          images: i.profile?.images?.status === _$$tT.Loaded && i.profile.images.data ? i.profile.images.data : void 0
+          images: i.profile?.images?.status === ResourceStatus.Loaded && i.profile.images.data ? i.profile.images.data : void 0
         },
         dev_tokens: i.developerTokens?.map(e => ({
           id: e.id,
@@ -5227,18 +5227,18 @@ let sP = new _$$H6({
         community_blocked_at: i.communityBlockedAt?.toISOString() || null,
         cmty_buyer_tos_accepted_at: i.userMonetizationMetadata?.cmtyBuyerTosAcceptedAt?.toISOString() || null,
         stripe_account_status: function (e) {
-          if (!e) return _$$P6.NONE;
+          if (!e) return StatusType.NONE;
           switch (e) {
             case FFeatureAdoptionStatusType.NONE:
-              return _$$P6.NONE;
+              return StatusType.NONE;
             case FFeatureAdoptionStatusType.ACCEPTED:
-              return _$$P6.ACCEPTED;
+              return StatusType.ACCEPTED;
             case FFeatureAdoptionStatusType.DISABLED:
-              return _$$P6.DISABLED;
+              return StatusType.DISABLED;
             case FFeatureAdoptionStatusType.ENABLED:
-              return _$$P6.ENABLED;
+              return StatusType.ENABLED;
             case FFeatureAdoptionStatusType.STARTED_ONBOARDING:
-              return _$$P6.STARTED_ONBOARDING;
+              return StatusType.STARTED_ONBOARDING;
           }
         }(i.userMonetizationMetadata?.stripeAccountStatus),
         can_sell_on_community: i.canSellOnCommunity || null,
@@ -5330,7 +5330,7 @@ let sF = new _$$H6({
         whitelisted_plugin: {
           org_id: e.orgId,
           plugin_id: e.pluginId,
-          is_widget: _$$oA(e.isWidget) || !1,
+          is_widget: getResourceDataOrFallback(e.isWidget) || !1,
           plugin_version_id: null,
           allowlist_group_type: e.allowlistGroupType === 'Org' ? 'Org' : 'Workspace',
           allowlist_group_id: e.allowlistGroupId
@@ -5344,7 +5344,7 @@ let sF = new _$$H6({
         whitelisted_plugin: {
           org_id: e.orgId,
           plugin_id: e.pluginId,
-          is_widget: _$$oA(e.isWidget) || !1,
+          is_widget: getResourceDataOrFallback(e.isWidget) || !1,
           plugin_version_id: null,
           allowlist_group_type: e.allowlistGroupType === 'Org' ? 'Org' : 'Workspace',
           allowlist_group_id: e.allowlistGroupId
@@ -5370,7 +5370,7 @@ let sM = new _$$H6({
     if (!t.org) return [];
     let i = [];
     let n = e.getState().publishedWidgets;
-    for (let e of _$$oA(t.org.widgetUpdates) || []) {
+    for (let e of getResourceDataOrFallback(t.org.widgetUpdates) || []) {
       let r = n[e.id];
       let a = function (e, t) {
         let i = a7(e, t);
@@ -5683,10 +5683,10 @@ function sV(e) {
     let t = d && l.byTeamId[e][d];
     t && t.realtime_token && (a.add(t.resource_id_or_key), s.add(t.resource_id_or_key), o(t.realtime_token));
   }
-  _$$HZ({
+  setupShadowRead({
     oldValue: Array.from(a).sort(),
     newValue: Array.from(s).sort(),
-    label: A5.RealtimeMiddleware.teamIdSet,
+    label: adminPermissionConfig.RealtimeMiddleware.teamIdSet,
     maxReports: 3
   });
   let c = t.currentUserOrgId && t.orgById[t.currentUserOrgId];
@@ -5913,7 +5913,7 @@ let sq = e => t => function (i) {
       YO(s, e, {
         shouldFetchTeamUsers: t
       });
-      let i = L8(s, a.repos);
+      let i = getRepoById(s, a.repos);
       i && _$$sh(i, a.currentUserOrgId, e);
     } else if (a.selectedView.view === 'team') {
       let t = a.selectedView.teamId;
@@ -7918,7 +7918,7 @@ let lx = HY({
         i[e.id] = {
           ...i[e.id],
           ...e,
-          type: Wd.IDP_USER,
+          type: AccountTypeEnum.IDP_USER,
           isOrgInvite: !0,
           seat_type_key: e.billable_product_key,
           scim_metadata: null,
@@ -9004,7 +9004,7 @@ function dt(e = {}, t) {
           ...s[teamId]
         };
         let o = {};
-        paidStatusType === j4.WHITEBOARD ? o.whiteboard_paid_status = paidStatus : o.design_paid_status = paidStatus;
+        paidStatusType === TeamType.WHITEBOARD ? o.whiteboard_paid_status = paidStatus : o.design_paid_status = paidStatus;
         let l = {
           ...e,
           ...o
@@ -10117,12 +10117,12 @@ function cO(e = null, t) {
     let t = getInitialOptions().editing_file;
     if (!t) return null;
     let i = t.folder ? {
-      ...DI.disabled(),
+      ...FileCreationPermissionsGenerator.disabled(),
       ...t.folder
     } : null;
     let n = getInitialOptions().frame_context;
     return {
-      ...UE(t, {
+      ...setupFileObject(t, {
         folder: i,
         team: t.team,
         repo: t.file_repo,
@@ -10935,7 +10935,7 @@ let uQ = Oi((e = {}, t) => {
     } = t.payload;
     return uX(e, teamUsers.map(e => {
       let t = {};
-      paidStatusType === j4.WHITEBOARD ? t.whiteboard_paid_status = paidStatus : t.design_paid_status = paidStatus;
+      paidStatusType === TeamType.WHITEBOARD ? t.whiteboard_paid_status = paidStatus : t.design_paid_status = paidStatus;
       return {
         ...e,
         ...t
@@ -13288,7 +13288,7 @@ class p4 {
 }
 function p3(e) {
   let t = e.getState();
-  return t.selectedView.view === 'fullscreen' ? 'fullscreen' : QB(t.selectedView) ? 'file_browser' : t.selectedView.view === 'desktopNewTab' ? 'desktop_new_tab' : 'other';
+  return t.selectedView.view === 'fullscreen' ? 'fullscreen' : isIncludedView(t.selectedView) ? 'file_browser' : t.selectedView.view === 'desktopNewTab' ? 'desktop_new_tab' : 'other';
 }
 let p6 = null;
 let md = createOptimistThunk((e, {
@@ -13504,30 +13504,30 @@ class mS {
 }
 let mw = mE()(() => new mS());
 function mR(e) {
-  let t = useSelector(e => _$$Z5(e));
+  let t = useSelector(e => resolveTeamId(e));
   let i = useSelector(e => e.currentUserOrgId);
-  Rs(OrgByIdForPlanView, {
+  useSubscription(OrgByIdForPlanView, {
     orgId: i ?? ''
   }, {
     enabled: !!i
   });
-  Rs(OrgByIdForPlanUserView, {
+  useSubscription(OrgByIdForPlanUserView, {
     orgId: i ?? ''
   }, {
     enabled: !!i
   });
-  Rs(TeamByIdForPlanView, {
+  useSubscription(TeamByIdForPlanView, {
     teamId: t ?? ''
   }, {
     enabled: !i && !!t
   });
-  Rs(TeamByIdForPlanUserView, {
+  useSubscription(TeamByIdForPlanUserView, {
     teamId: t ?? ''
   }, {
     enabled: !i && !!t
   });
-  S2();
-  _$$px();
+  useTeamPlanFeatures();
+  useTeamPlanUser();
   return jsx(Fragment, {
     children: e.children
   });
@@ -13576,9 +13576,9 @@ function mB() {
   } = useSprigWithSampling();
   let i = _$$sZ();
   let n = RR();
-  let r = _$$D3('TrackEnterDevHandoffModeWithSprig');
+  let r = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig');
   let a = _$$D4();
-  let o = _$$D3('TrackEnterDevHandoffModeWithSprig').unwrapOr(null);
+  let o = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig').unwrapOr(null);
   let l = o?.devModePaidStatus === FPlanAccessType.FULL;
   (n ? r.data?.seatTypeLicenseTypes?.includes(FProductAccessType.DEV_MODE) : l) && a && (e = i?.bigma_enabled ? 'dev_mode_ent_full' : 'dev_mode_org_full');
   let c = useSelector(e => {
@@ -13700,7 +13700,7 @@ function mH() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = useSelector(e => QB(e.selectedView));
+  let t = useSelector(e => isIncludedView(e.selectedView));
   useEffect(() => {
     t && getFeatureFlags().perf_sentiment_survey && Sprig('track', 'enter_file_browser');
   }, [Sprig, t]);
@@ -13721,7 +13721,7 @@ function mZ() {
     Sprig
   } = useSprigWithSampling();
   let t = useAtomWithSubscription(_$$dO2);
-  let i = ZC(t);
+  let i = useLatestRef(t);
   useEffect(() => {
     i?.status === _$$c6.LOADING && t.status === _$$c6.SUCCESS && (t.type === 'board' ? Sprig('track', _$$Dl) : Sprig('track', _$$i_2));
   }, [Sprig, i, t]);
@@ -13732,7 +13732,7 @@ function mJ() {
     Sprig
   } = useSprigWithSampling();
   let t = _$$aV2();
-  let i = q5();
+  let i = selectCurrentFile();
   let n = selectCurrentUser();
   useEffect(() => {
     if (t || i?.editorType !== FFileType.WHITEBOARD || !n || n.id !== i.creatorId) return;
@@ -13764,7 +13764,7 @@ function m3() {
     Sprig
   } = useSprigWithSampling();
   let t = _$$aV2();
-  let i = q5();
+  let i = selectCurrentFile();
   let n = selectCurrentUser();
   let r = _$$f4(_$$at);
   useEffect(() => {
@@ -14136,7 +14136,7 @@ export async function $$hz0(e, t, d = {
     let u = _$$A2.withExtraArgument({
       liveStore: M4
     });
-    setSentryTag('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
+    setTagGlobal('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
     let p = Zz(Tw(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__({
       stateSanitizer: mN
     }) : e => e, function (e, t) {
@@ -14526,8 +14526,8 @@ export async function $$hz0(e, t, d = {
               localExtensions: e.localPlugins,
               recentlyUsedPlugins: CR(e),
               org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
-              userCanViewPlugins: Eh(e),
-              userCanRunExtensions: _$$cb2(e),
+              userCanViewPlugins: canPerformAction(e),
+              userCanRunExtensions: canRunExtensions(e),
               activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin,
               publishedPlugins: e.publishedPlugins,
               publishedWidgets: e.publishedWidgets
@@ -14761,7 +14761,7 @@ export async function $$hz0(e, t, d = {
             browser_name: 'VS Code Extension',
             vscode_extension_version: e
           });
-          setSentryContext('browser', {
+          setContextGlobal('browser', {
             name: 'VS Code Extension',
             vscode_extension_version: e
           });
@@ -15203,9 +15203,9 @@ export async function $$hz0(e, t, d = {
       initializeIntegrationEnvironment();
       wH(b);
       (function (e) {
-        Rh('session_start', {});
+        sendMetric('session_start', {});
         setInterval(() => {
-          Rh('active_session', {
+          sendMetric('active_session', {
             is_safe_to_reload: pB(e),
             has_pending_reload: _$$rg(),
             is_showing_banner: atomStoreManager.get(_$$T4),

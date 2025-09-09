@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { nt } from "../figma_app/687776";
+import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { h } from "../figma_app/334471";
 import { p as _$$p, u as _$$u } from "../1250/964548";
 import { E } from "../figma_app/61705";
@@ -13,7 +13,7 @@ export function $$l0({
   let {
     data,
     status
-  } = nt(t);
+  } = useProjectFileCreationPermissions(t);
   let u = h(data);
   let m = E({
     isDraftsFolder: !0,

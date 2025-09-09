@@ -16,7 +16,7 @@ import { c$ } from "../figma_app/236327";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { oB, j7 } from "../905/929976";
 import { Vg } from "../figma_app/147952";
 import { IN } from "../905/116101";
@@ -187,7 +187,7 @@ function V({
   let _ = c?.plugin_id ?? null;
   let p = _$$U();
   let h = useRef(null);
-  let x = _I();
+  let x = useCanAccessFullDevMode();
   let b = m0() && !x;
   let f = useDispatch();
   let w = Um();

@@ -8,17 +8,17 @@ import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { w as _$$w } from "../0c62c2fd/912149";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { t as _$$t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
 import { getUserId } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
-import { X$, YY } from "../figma_app/465071";
+import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { PW } from "../figma_app/633080";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { dF } from "../figma_app/275938";
 import { DV } from "../905/739964";
 import { n as _$$n } from "../905/347702";
@@ -122,11 +122,11 @@ export function $$F3({
   });
 }
 export function $$B8() {
-  let e = X$("useAreAdvancedShapesLocked");
-  return YY(e).unwrapOr(!1);
+  let e = useCurrentPublicPlan("useAreAdvancedShapesLocked");
+  return useIsStarterPlan(e).unwrapOr(!1);
 }
 export function $$U10() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useDispatch();
   return useCallback(() => {
     e && t(showModalHandler({
@@ -140,7 +140,7 @@ export function $$U10() {
   }, [e, t]);
 }
 export function $$G11() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useDispatch();
   let i = F.useShouldHideStarterCtaForOpenFile();
   return useCallback(() => {
@@ -149,7 +149,7 @@ export function $$G11() {
       data: {
         team: e.team,
         resource: Bi.ADVANCED_SHAPES,
-        action: ZN.INSERT_ADVANCED_SHAPE,
+        action: fileActionEnum.INSERT_ADVANCED_SHAPE,
         editorType: FFileType.WHITEBOARD,
         currentPlan: F.Plan.STARTER,
         upsellPlan: F.Plan.PRO,

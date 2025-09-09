@@ -19,7 +19,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { K as _$$K } from '../905/443068';
 import { z as _$$z } from '../905/454433';
 import { U as _$$U2 } from '../905/492359';
-import { cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { r as _$$r } from '../905/571562';
 import { k as _$$k2 } from '../905/582200';
 import { getFeatureFlags } from '../905/601108';
@@ -62,7 +62,7 @@ import { Z3 } from '../figma_app/461594';
 import { isIntegrationContext } from '../figma_app/469876';
 import { i as _$$i } from '../figma_app/472709';
 import { s as _$$s3 } from '../figma_app/483328';
-import { q5, tS } from '../figma_app/516028';
+import { selectCurrentFile, useCurrentFileKey } from '../figma_app/516028';
 import { s as _$$s2 } from '../figma_app/553327';
 import { c$ } from '../figma_app/618433';
 import { Zk } from '../figma_app/626177';
@@ -77,13 +77,13 @@ import { dG } from '../figma_app/753501';
 import { AppStateTsApi, CmsRepeaterHelpers, ItemType, ViewType, LayoutTabType, InteractionCpp, Command, InsertSourceType, ChildRelationshipStatus } from '../figma_app/763686';
 import { bw, gc, jw, Xl } from '../figma_app/781981';
 import { generateRecordingKey } from '../figma_app/878298';
-import { to } from '../figma_app/828186';
+import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { t as _$$t2 } from '../figma_app/856638';
 import { b as _$$b, bL, mc, YJ } from '../figma_app/860955';
 import { W as _$$W } from '../figma_app/896386';
 import { QE } from '../figma_app/914216';
 import { S as _$$S } from '../figma_app/924300';
-import { uc } from '../figma_app/930338';
+import { camelToSnake } from '../figma_app/930338';
 import { vG } from '../figma_app/938628';
 import { L as _$$L } from '../figma_app/940186';
 import { dP, m9 } from '../figma_app/947348';
@@ -102,7 +102,7 @@ function F() {
   let s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_IDENTICAL_CHILDREN) ?? [];
   s.length === 0 && (s = CmsRepeaterHelpers?.getSelectedNodesToConvertIntoRepeatersGUIDs(ChildRelationshipStatus.HAS_CHILDREN) ?? [], r = !0);
   let o = useDispatch();
-  let u = tS();
+  let u = useCurrentFileKey();
   let p = c$(u).data;
   let _ = getFeatureFlags().dakota_repeaters && s.length > 0 || U(t);
   let m = t?.getDakotaSelector()?.collectionId;
@@ -120,7 +120,7 @@ function F() {
           }
         },
         message: getI18nString('dakota.fullscreen_actions.visual_bell.repeater_created'),
-        onDismiss: () => { }
+        onDismiss: () => {}
       }));
     }));
   }, [t, f, o]);
@@ -248,7 +248,7 @@ function ek() {
     let e = getSingletonSceneGraph().getDirectlySelectedNodes();
     let t = kk(e);
     let r = Fk(e => e.getDirectlySelectedNodes().every(e => U(e)));
-    let a = tS();
+    let a = useCurrentFileKey();
     let s = c$(a).data;
     let o = t?.getDakotaSelector()?.collectionId;
     let d = useCallback(e => {
@@ -286,7 +286,7 @@ function ek() {
   return getFeatureFlags().cms_bindings_ux_improvements && e ? jsx(_$$E, {
     name: 'layer_header_button',
     alsoTrack: () => ({
-      layerButtonAction: `open_submenu_${uc(e.getTitle())}`
+      layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
     }),
     children: jsx(QE, {
       item: e,
@@ -333,7 +333,7 @@ let ez = memo(({
   panelTitleRef: c
 }) => {
   let u = sO();
-  let p = to();
+  let p = useIsSelectedViewFullscreenCooper();
   let _ = F();
   let h = j();
   let m = [];
@@ -696,12 +696,12 @@ function tr({
     let t = e.modalShown;
     return t?.type === _$$e;
   });
-  let Q = q5();
+  let Q = selectCurrentFile();
   let ea = aV();
   let es = isIntegrationContext();
   let eo = Em();
   let el = sO();
-  let ed = cJ();
+  let ed = useIsFullscreenSitesView();
   let ep = editMode === LayoutTabType.COMMENTS || editMode === LayoutTabType.PREVIEW || editMode === LayoutTabType.BRANCHING || topLevelMode === ViewType.HISTORY || topLevelMode === ViewType.PREVIEW || topLevelMode === ViewType.DEV_HANDOFF || topLevelMode === ViewType.BRANCHING;
   let em = ow();
   let eg = !!Q?.isTryFile && !q && !ea && es;
@@ -763,7 +763,7 @@ function tr({
           'children': [U.map(e => e.type === ZU.FLYOUT ? jsx(_$$E, {
             name: 'layer_header_button',
             alsoTrack: () => ({
-              layerButtonAction: `open_flyout_${uc(e.dropdownKey)}`
+              layerButtonAction: `open_flyout_${camelToSnake(e.dropdownKey)}`
             }),
             children: jsx(_$$F2, {
               flyoutConfig: e,
@@ -772,7 +772,7 @@ function tr({
           }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(_$$E, {
             name: 'layer_header_button',
             alsoTrack: () => ({
-              layerButtonAction: `${uc(e.action)}`
+              layerButtonAction: `${camelToSnake(e.action)}`
             }),
             children: jsx(QE, {
               item: e,
@@ -782,7 +782,7 @@ function tr({
           }, e.recordingKey) : e.type === ZU.ACTION_SUBMENU ? jsx(_$$E, {
             name: 'layer_header_button',
             alsoTrack: () => ({
-              layerButtonAction: `open_submenu_${uc(e.getTitle())}`
+              layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
             }),
             children: jsx(QE, {
               item: e,
@@ -833,7 +833,7 @@ export function $$ti7(e, t) {
       let t = e.getDirectlySelectedNodes();
       return t.length > 0 && t.every(e => findContainingResponsiveSet(e) && (e.type === 'FRAME' || e.isCodeInstance && e.isLayerLikeCodeNode) && !e.isBreakpointFrame);
     });
-    if (cJ() && e) {
+    if (useIsFullscreenSitesView() && e) {
       return {
         type: ZU.CUSTOM_ACTION,
         customActionType: Wg.STANDARD_BUTTON,
@@ -851,7 +851,7 @@ export function $$ti7(e, t) {
     }
   }();
   let m = LF();
-  let g = cJ();
+  let g = useIsFullscreenSitesView();
   let f = kl('containsNodesInResponsiveSets');
   let E = kl('containsSitesLayouts');
   let b = g && !!E;
@@ -909,7 +909,7 @@ export function $$to1({
   return jsx(_$$E, {
     name: 'layer_header_button',
     alsoTrack: () => ({
-      layerButtonAction: `${uc(e.getTitle())}`
+      layerButtonAction: `${camelToSnake(e.getTitle())}`
     }),
     children: t || r ? jsx('span', {
       className: zU,

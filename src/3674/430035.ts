@@ -7,7 +7,7 @@ import { renderI18nText } from "../905/303541";
 import { M, n as _$$n } from "../3674/214307";
 import { BC } from "../3674/61752";
 import { i$ } from "../905/15667";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { J as _$$J } from "../905/202542";
@@ -36,7 +36,7 @@ function b() {
 }
 function j() {
   let e = _$$n();
-  let t = q5();
+  let t = selectCurrentFile();
   let n = t?.team?.name || "";
   return e ? jsx("div", {
     className: HS,

@@ -8,7 +8,7 @@ import { E as _$$E } from "../905/53857";
 import { K } from "../905/443068";
 import { L as _$$L } from "../1577/392861";
 import { i as _$$i } from "../905/22844";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
@@ -191,7 +191,7 @@ export let $$B0 = registerModal(function ({
   let u = cD();
   let _ = hS(c);
   let h = useDispatch();
-  let [y] = IT(ColorPalettesForTeam({
+  let [y] = setupResourceAtomHandler(ColorPalettesForTeam({
     teamId: u
   }), {
     enabled: !!u

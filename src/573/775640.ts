@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { fu } from "../figma_app/831799";
 import { Gt } from "../905/275640";
 import { KH } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { VF } from "../figma_app/679183";
 import { e0 } from "../905/696396";
 import { Q } from "../9314/475980";
@@ -12,7 +12,7 @@ import { A } from "../6020/852410";
 export function $$g0({
   scrollContainer: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let s = KH();
   let g = Gt("prototypeStartingPointsInfo");
   let y = !g || g.length > 0;

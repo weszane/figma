@@ -7,12 +7,12 @@ import { SeverityLevel } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { renderI18nText } from "../905/303541";
 import { YJ } from "../figma_app/297957";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { kU, Kw, RJ } from "../figma_app/869006";
 import { G } from "../figma_app/35473";
 import { $q } from "../figma_app/60171";
 export function $$g0(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   return t ? jsx($$f, {
     ...e,
     file: t

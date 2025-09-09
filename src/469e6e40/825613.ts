@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { $$default } from "../vendor/73080";
-import { tT } from "../905/663269";
+import { ResourceStatus } from "../905/663269";
 import { A as _$$A } from "../905/920142";
 import { qr } from "../figma_app/827447";
 import { reportError } from "../905/11";
@@ -13,35 +13,35 @@ import { getI18nState } from "../figma_app/363242";
 import { Tm } from "../figma_app/599327";
 import { d as _$$d } from "../469e6e40/490120";
 import { UV } from "../figma_app/297957";
-import { ud, Gu } from "../905/513035";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
 import { Ye } from "../905/332483";
 import { f2 } from "../figma_app/217457";
-import { Te, px } from "../figma_app/765689";
+import { ProductAccessMap, getProductAccessTypeFromString } from "../figma_app/765689";
 import { FAccessLevelType, FVisibilityType, FFileType, FApprovalMethodType, FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
 import { W3 } from "../figma_app/336853";
-import { z5, $K, q9, Db } from "../figma_app/12796";
+import { getUserRoleLabel, getFeatureTypeLabelAlias, getPermissionLevelRoleName, getOrgAccessLevelLabels } from "../figma_app/12796";
 import { v as _$$v } from "../905/124421";
-import { t as _$$t2 } from "../figma_app/326667";
-import { U as _$$U } from "../figma_app/565016";
+import { getFeatureTypeLabel } from "../figma_app/326667";
+import { FUpgradeReasonType } from "../figma_app/565016";
 import { CT } from "../figma_app/736948";
 import { E as _$$E } from "../figma_app/126651";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { $q } from "../figma_app/482728";
 import { r as _$$r } from "../469e6e40/505264";
 import { Hj } from "../905/682977";
 import { p3 } from "../figma_app/588582";
 import { T as _$$T } from "../figma_app/257703";
 let y = {
-  [ud.EXPERT]: {
+  [ProductAccessTypeEnum.EXPERT]: {
     displayName: () => getI18nString("general.bundle.expert")
   },
-  [ud.DEVELOPER]: {
+  [ProductAccessTypeEnum.DEVELOPER]: {
     displayName: () => getI18nString("general.bundle.developer")
   },
-  [ud.COLLABORATOR]: {
+  [ProductAccessTypeEnum.COLLABORATOR]: {
     displayName: () => getI18nString("general.bundle.collaborator")
   },
-  [ud.CONTENT]: {
+  [ProductAccessTypeEnum.CONTENT]: {
     displayName: () => getI18nString("general.bundle.content")
   }
 };
@@ -548,123 +548,123 @@ let eu = "activity_logs_table--tableCellSubtext--ouC0F";
 export function $$em3(e, t) {
   if (!t) return null;
   switch (t.reason) {
-    case _$$U.ROLE_UPGRADE:
-    case _$$U.INVITE_REDEEM:
-    case _$$U.INVITE_AUTOUPGRADE:
-    case _$$U.JOIN_TEAM_REQUEST:
+    case FUpgradeReasonType.ROLE_UPGRADE:
+    case FUpgradeReasonType.INVITE_REDEEM:
+    case FUpgradeReasonType.INVITE_AUTOUPGRADE:
+    case FUpgradeReasonType.JOIN_TEAM_REQUEST:
       return getI18nString("activity_log.upgrade.added_to_resource.seat_rename", {
         actor_name: t.actor_name,
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.PAID_STATUS_ON_ORG_CREATION:
+    case FUpgradeReasonType.PAID_STATUS_ON_ORG_CREATION:
       return getI18nString("activity_log.upgrade.paid_status_on_org_creation", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.RESOURCE_MOVED_TO_ORG:
+    case FUpgradeReasonType.RESOURCE_MOVED_TO_ORG:
       return getI18nString("activity_log.upgrade.resource_moved_to_org", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.TEAM_ADDED_TO_ORG_THROUGH_FIGMA_ADMIN:
+    case FUpgradeReasonType.TEAM_ADDED_TO_ORG_THROUGH_FIGMA_ADMIN:
       return getI18nString("activity_log.upgrade.resource_move.seat_rename", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.ORG_INVITE_REDEEM:
+    case FUpgradeReasonType.ORG_INVITE_REDEEM:
       return getI18nString("activity_log.upgrade.redeem_invite_to_org", {
         upgrader_name: e
       });
-    case _$$U.ORG_MERGE:
+    case FUpgradeReasonType.ORG_MERGE:
       return getI18nString("activity_log.upgrade.org_merge.seat_rename", {
         upgrader_name: e,
         child_org: t.resource_name
       });
-    case _$$U.DRAFTS_SHARE:
+    case FUpgradeReasonType.DRAFTS_SHARE:
       return getI18nString("activity_log.upgrade.drafts_share", {
         upgrader_name: e,
         resource_name: t.resource_name,
         actor_name: t.actor_name ? t.actor_name : getI18nString("activity_log.upgrade.drafts_share_anonymous")
       });
-    case _$$U.CREATE_TEAM:
+    case FUpgradeReasonType.CREATE_TEAM:
       return getI18nString("activity_log.upgrade.create_team", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.JOIN_TEAM:
+    case FUpgradeReasonType.JOIN_TEAM:
       return getI18nString("activity_log.upgrade.join_team.seat_rename", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.ADMIN_UPGRADE:
+    case FUpgradeReasonType.ADMIN_UPGRADE:
       return getI18nString("activity_log.upgrade.admin_upgrade.seat_rename", {
         actor_name: t.actor_name,
         upgrader_name: e
       });
-    case _$$U.SCIM:
+    case FUpgradeReasonType.SCIM:
       return getI18nString("activity_log.upgrade.scim.seat_rename", {
         upgrader_name: e
       });
-    case _$$U.FIGMA_ADMIN:
+    case FUpgradeReasonType.FIGMA_ADMIN:
       return getI18nString("activity_log.upgrade.figma_admin", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.DEPART_TEAM:
+    case FUpgradeReasonType.DEPART_TEAM:
       return getI18nString("activity_log.upgrade.depart_team", {
         upgrader_name: e
       });
-    case _$$U.CREATE_FILE:
+    case FUpgradeReasonType.CREATE_FILE:
       return getI18nString("activity_log.upgrade.create_file", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.EDIT_REQUEST_AUTO_APPROVAL:
-    case _$$U.EDIT_REQUEST_APPROVAL:
+    case FUpgradeReasonType.EDIT_REQUEST_AUTO_APPROVAL:
+    case FUpgradeReasonType.EDIT_REQUEST_APPROVAL:
       return getI18nString("activity_log.upgrade.edit_request_approval", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.RUN_PLUGIN:
+    case FUpgradeReasonType.RUN_PLUGIN:
       return getI18nString("activity_log.upgrade.run_plugin", {
         upgrader_name: e
       });
-    case _$$U.ORG_INVITE_REDEEM:
+    case FUpgradeReasonType.ORG_INVITE_REDEEM:
       return getI18nString("activity_log.upgrade.redeem_invite_to_org", {
         upgrader_name: e
       });
-    case _$$U.ORG_MERGE:
+    case FUpgradeReasonType.ORG_MERGE:
       return getI18nString("activity_log.upgrade.org_merge.seat_rename", {
         upgrader_name: e,
         child_org: t.resource_name
       });
-    case _$$U.RESOURCE_MOVED_FROM_ORG_DRAFTS:
+    case FUpgradeReasonType.RESOURCE_MOVED_FROM_ORG_DRAFTS:
       return getI18nString("activity_log.upgrade.resource_moved_from_drafts", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.DEFAULT_PAID_STATUS:
+    case FUpgradeReasonType.DEFAULT_PAID_STATUS:
       return getI18nString("activity_log.upgrade.default_paid_status.seat_rename", {
         upgrader_name: e
       });
-    case _$$U.FJ_GA_REUPGRADE:
+    case FUpgradeReasonType.FJ_GA_REUPGRADE:
       return getI18nString("activity_log.upgrade.figjam_ga_reupgrade", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.EDIT_BUTTON:
+    case FUpgradeReasonType.EDIT_BUTTON:
       return getI18nString("activity_log.upgrade.edit_button", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.ACCESS_EDIT_LINK:
-    case _$$U.EDIT_ACTION:
+    case FUpgradeReasonType.ACCESS_EDIT_LINK:
+    case FUpgradeReasonType.EDIT_ACTION:
       return getI18nString("activity_log.upgrade.edit_action", {
         upgrader_name: e,
         resource_name: t.resource_name
       });
-    case _$$U.DEV_MODE_PRE_COMMIT_BETA_USE:
+    case FUpgradeReasonType.DEV_MODE_PRE_COMMIT_BETA_USE:
       return getI18nString("activity_log.upgrade.dev_mode_pre_commit_beta_use", {
         upgrader_name: e
       });
@@ -1799,7 +1799,7 @@ export function $$ep2(e, t, a, s) {
       return jsx("span", {
         children: renderI18nText("activity_log.event.org_default_license_type_change.seat_rename", {
           role: jsx("b", {
-            children: _$$t2(e.metadata.new_paid_status)
+            children: getFeatureTypeLabel(e.metadata.new_paid_status)
           }),
           product: jsx("b", {
             children: function (e) {
@@ -1958,7 +1958,7 @@ export function $$ep2(e, t, a, s) {
             resourceName: e.metadata.resource_name ?? null,
             resourceId: e.metadata.resource_id_or_key ?? null,
             metadata: {
-              status: tT.Loaded,
+              status: ResourceStatus.Loaded,
               data: {
                 previous_team_name: e.metadata?.previous_team_name ?? null,
                 previous_team_id: e.metadata?.previous_team_id ?? null
@@ -1976,7 +1976,7 @@ export function $$ep2(e, t, a, s) {
               children: t
             }),
             permission: jsx("b", {
-              children: z5(e.metadata.permission)
+              children: getUserRoleLabel(e.metadata.permission)
             }),
             seatType: jsx("b", {
               children: eb(e.metadata.seat_type)
@@ -1988,7 +1988,7 @@ export function $$ep2(e, t, a, s) {
               children: t
             }),
             permission: jsx("b", {
-              children: z5(e.metadata.permission)
+              children: getUserRoleLabel(e.metadata.permission)
             })
           })
         });
@@ -1998,7 +1998,7 @@ export function $$ep2(e, t, a, s) {
               children: t
             }),
             permission: jsx("b", {
-              children: z5(e.metadata.permission)
+              children: getUserRoleLabel(e.metadata.permission)
             }),
             userEmail: jsx("b", {
               children: e.metadata.user_email
@@ -2060,7 +2060,7 @@ export function $$ep2(e, t, a, s) {
             children: t
           }),
           permission: jsx("b", {
-            children: z5(e.metadata.permission)
+            children: getUserRoleLabel(e.metadata.permission)
           })
         })
       });
@@ -2074,7 +2074,7 @@ export function $$ep2(e, t, a, s) {
       });
     case "org_user_account_type_change":
       if (ex(e.metadata)) return function (e) {
-        if (!e.upgrade_method) return e.reason === _$$U.SCIM ? jsx("span", {
+        if (!e.upgrade_method) return e.reason === FUpgradeReasonType.SCIM ? jsx("span", {
           children: renderI18nText("activity_log.event.org_user_account_type_change.seat_based.scim", {
             userEmail: jsx("b", {
               children: e.user_email
@@ -2101,7 +2101,7 @@ export function $$ep2(e, t, a, s) {
         });
         switch (e.upgrade_method) {
           case FApprovalMethodType.ADMIN_INITIATED:
-            if (e.reason === _$$U.INVITE_REDEEM) {
+            if (e.reason === FUpgradeReasonType.INVITE_REDEEM) {
               if (e.upgrade_actor_email) return jsxs("span", {
                 children: [renderI18nText("activity_log.event.org_user_account_type_change.seat_based.admin_initiated.invite_with_seat", {
                   newSeatType: jsx("b", {
@@ -2222,13 +2222,13 @@ export function $$ep2(e, t, a, s) {
             children: e.metadata.user_email
           }),
           oldAccountType: jsx("b", {
-            children: $K(e.metadata.old_account_type)
+            children: getFeatureTypeLabelAlias(e.metadata.old_account_type)
           }),
           accountType: jsx("b", {
-            children: $K(e.metadata.account_type)
+            children: getFeatureTypeLabelAlias(e.metadata.account_type)
           }),
           product: jsx("b", {
-            children: _$$E(Te.DESIGN)
+            children: _$$E(ProductAccessMap.DESIGN)
           })
         })
       });
@@ -2238,13 +2238,13 @@ export function $$ep2(e, t, a, s) {
             children: e.metadata.user_email
           }),
           oldAccountType: jsx("b", {
-            children: $K(e.metadata.old_whiteboard_paid_status)
+            children: getFeatureTypeLabelAlias(e.metadata.old_whiteboard_paid_status)
           }),
           accountType: jsx("b", {
-            children: $K(e.metadata.whiteboard_paid_status)
+            children: getFeatureTypeLabelAlias(e.metadata.whiteboard_paid_status)
           }),
           product: jsx("b", {
-            children: _$$E(Te.WHITEBOARD)
+            children: _$$E(ProductAccessMap.WHITEBOARD)
           })
         })
       });
@@ -2254,13 +2254,13 @@ export function $$ep2(e, t, a, s) {
             children: e.metadata.user_email
           }),
           oldAccountType: jsx("b", {
-            children: $K(e.metadata.old_dev_mode_paid_status)
+            children: getFeatureTypeLabelAlias(e.metadata.old_dev_mode_paid_status)
           }),
           accountType: jsx("b", {
-            children: $K(e.metadata.dev_mode_paid_status)
+            children: getFeatureTypeLabelAlias(e.metadata.dev_mode_paid_status)
           }),
           product: jsx("b", {
-            children: _$$E(Te.DEV_MODE)
+            children: _$$E(ProductAccessMap.DEV_MODE)
           })
         })
       });
@@ -2275,21 +2275,21 @@ export function $$ep2(e, t, a, s) {
             let a = "activity_logs_table--upgradeReasonBoldedNoun--dzlls";
             let s = e => {
               switch (e) {
-                case Te.DESIGN:
+                case ProductAccessMap.DESIGN:
                   return getI18nString("general.figma_design_short_lower");
-                case Te.WHITEBOARD:
+                case ProductAccessMap.WHITEBOARD:
                   return getI18nString("general.figjam");
-                case Te.DEV_MODE:
+                case ProductAccessMap.DEV_MODE:
                   return getI18nString("general.dev_mode");
                 default:
                   return getI18nString("general.figma_design_short_lower");
               }
             };
             switch (t.reason) {
-              case _$$U.ROLE_UPGRADE:
-              case _$$U.INVITE_REDEEM:
-              case _$$U.INVITE_AUTOUPGRADE:
-              case _$$U.JOIN_TEAM_REQUEST:
+              case FUpgradeReasonType.ROLE_UPGRADE:
+              case FUpgradeReasonType.INVITE_REDEEM:
+              case FUpgradeReasonType.INVITE_AUTOUPGRADE:
+              case FUpgradeReasonType.JOIN_TEAM_REQUEST:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.added_to_resource_with_product.seat_rename", {
                     actor_name: jsx("span", {
@@ -2307,7 +2307,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.ORG_INVITE_REDEEM:
+              case FUpgradeReasonType.ORG_INVITE_REDEEM:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.redeem_invite_to_org", {
                     upgrader_name: jsx("span", {
@@ -2316,7 +2316,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.ORG_MERGE:
+              case FUpgradeReasonType.ORG_MERGE:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.org_merge.seat_rename", {
                     upgrader_name: jsx("span", {
@@ -2329,8 +2329,8 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.PAID_STATUS_ON_ORG_CREATION:
-              case _$$U.RESOURCE_MOVED_TO_ORG:
+              case FUpgradeReasonType.PAID_STATUS_ON_ORG_CREATION:
+              case FUpgradeReasonType.RESOURCE_MOVED_TO_ORG:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.resource_move_with_product.seat_rename", {
                     upgrader_name: jsx("span", {
@@ -2344,7 +2344,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.DRAFTS_SHARE:
+              case FUpgradeReasonType.DRAFTS_SHARE:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.drafts_share", {
                     upgrader_name: jsx("span", {
@@ -2361,7 +2361,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.CREATE_TEAM:
+              case FUpgradeReasonType.CREATE_TEAM:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.create_team", {
                     upgrader_name: jsx("span", {
@@ -2374,7 +2374,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.JOIN_TEAM:
+              case FUpgradeReasonType.JOIN_TEAM:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.join_team_with_product.seat_rename", {
                     upgrader_name: jsx("span", {
@@ -2388,7 +2388,7 @@ export function $$ep2(e, t, a, s) {
                     product: s(t.editor_type)
                   })
                 });
-              case _$$U.ADMIN_UPGRADE:
+              case FUpgradeReasonType.ADMIN_UPGRADE:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.admin_upgrade_with_product.seat_rename", {
                     actor_name: jsx("span", {
@@ -2402,7 +2402,7 @@ export function $$ep2(e, t, a, s) {
                     product: s(t.editor_type)
                   })
                 });
-              case _$$U.SCIM:
+              case FUpgradeReasonType.SCIM:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.scim_with_product.seat_rename", {
                     upgrader_name: jsx("span", {
@@ -2412,7 +2412,7 @@ export function $$ep2(e, t, a, s) {
                     product: s(t.editor_type)
                   })
                 });
-              case _$$U.FIGMA_ADMIN:
+              case FUpgradeReasonType.FIGMA_ADMIN:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.figma_admin", {
                     upgrader_name: jsx("span", {
@@ -2425,7 +2425,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.DEPART_TEAM:
+              case FUpgradeReasonType.DEPART_TEAM:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.depart_team", {
                     upgrader_name: jsx("span", {
@@ -2434,7 +2434,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.CREATE_FILE:
+              case FUpgradeReasonType.CREATE_FILE:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.create_file", {
                     upgrader_name: jsx("span", {
@@ -2447,8 +2447,8 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.EDIT_REQUEST_AUTO_APPROVAL:
-              case _$$U.EDIT_REQUEST_APPROVAL:
+              case FUpgradeReasonType.EDIT_REQUEST_AUTO_APPROVAL:
+              case FUpgradeReasonType.EDIT_REQUEST_APPROVAL:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.edit_request_approval", {
                     upgrader_name: jsx("span", {
@@ -2461,7 +2461,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.RUN_PLUGIN:
+              case FUpgradeReasonType.RUN_PLUGIN:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.run_plugin", {
                     upgrader_name: jsx("span", {
@@ -2470,7 +2470,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.ORG_INVITE_REDEEM:
+              case FUpgradeReasonType.ORG_INVITE_REDEEM:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.redeem_invite_to_org", {
                     upgrader_name: jsx("span", {
@@ -2479,7 +2479,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.ORG_MERGE:
+              case FUpgradeReasonType.ORG_MERGE:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.org_merge.seat_rename", {
                     upgrader_name: jsx("span", {
@@ -2492,7 +2492,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.RESOURCE_MOVED_FROM_ORG_DRAFTS:
+              case FUpgradeReasonType.RESOURCE_MOVED_FROM_ORG_DRAFTS:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.resource_moved_from_drafts", {
                     upgrader_name: jsx("span", {
@@ -2505,7 +2505,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.DEFAULT_PAID_STATUS:
+              case FUpgradeReasonType.DEFAULT_PAID_STATUS:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.default_paid_status_with_product.seat_rename", {
                     upgrader_name: jsx("span", {
@@ -2515,7 +2515,7 @@ export function $$ep2(e, t, a, s) {
                     product: s(t.editor_type)
                   })
                 });
-              case _$$U.FJ_GA_REUPGRADE:
+              case FUpgradeReasonType.FJ_GA_REUPGRADE:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.figjam_ga_reupgrade", {
                     upgrader_name: jsx("span", {
@@ -2528,7 +2528,7 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.EDIT_BUTTON:
+              case FUpgradeReasonType.EDIT_BUTTON:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.edit_button", {
                     upgrader_name: jsx("span", {
@@ -2541,9 +2541,9 @@ export function $$ep2(e, t, a, s) {
                     })
                   })
                 });
-              case _$$U.ACCESS_EDIT_LINK:
-              case _$$U.ACTIVE_EDIT_ACTION:
-              case _$$U.EDIT_ACTION:
+              case FUpgradeReasonType.ACCESS_EDIT_LINK:
+              case FUpgradeReasonType.ACTIVE_EDIT_ACTION:
+              case FUpgradeReasonType.EDIT_ACTION:
                 return jsx("span", {
                   children: renderI18nText("activity_log.upgrade.edit_action", {
                     upgrader_name: jsx("span", {
@@ -2573,7 +2573,7 @@ export function $$ep2(e, t, a, s) {
       return jsx("span", {
         children: renderI18nText("activity_log.event.org_user_account_type_upgrade_requested", {
           accountType: jsx("b", {
-            children: $K(FPlanFeatureType.FULL)
+            children: getFeatureTypeLabelAlias(FPlanFeatureType.FULL)
           }),
           product: jsx("b", {
             children: _$$E(e.metadata.editor_type)
@@ -2594,7 +2594,7 @@ export function $$ep2(e, t, a, s) {
       return jsx("span", {
         children: renderI18nText("activity_log.event.org_user_account_type_upgrade_approved", {
           accountType: jsx("b", {
-            children: $K(FPlanFeatureType.FULL)
+            children: getFeatureTypeLabelAlias(FPlanFeatureType.FULL)
           }),
           product: jsx("b", {
             children: _$$E(e.metadata.editor_type)
@@ -2618,7 +2618,7 @@ export function $$ep2(e, t, a, s) {
       return jsx("span", {
         children: renderI18nText("activity_log.event.org_user_account_type_upgrade_denied", {
           accountType: jsx("b", {
-            children: $K(FPlanFeatureType.FULL)
+            children: getFeatureTypeLabelAlias(FPlanFeatureType.FULL)
           }),
           product: jsx("b", {
             children: _$$E(e.metadata.editor_type)
@@ -3173,7 +3173,7 @@ export function $$ep2(e, t, a, s) {
       {
         let t = e.metadata;
         if (t.user_email === a) {
-          if (t.level === e6.OWNER) return null;
+          if (t.level === AccessLevelEnum.OWNER) return null;
           return jsx("span", {
             children: renderI18nText("activity_log.teams.joined_the_resource_name_resource", {
               resourceName: jsx("b", {
@@ -3193,7 +3193,7 @@ export function $$ep2(e, t, a, s) {
             }),
             resourceType: _$$v(t.resource_type),
             level: jsx("b", {
-              children: q9(t.level)
+              children: getPermissionLevelRoleName(t.level)
             })
           })
         });
@@ -3250,8 +3250,8 @@ export function $$ep2(e, t, a, s) {
     case "team_member_permission_change":
       {
         let t = e.metadata;
-        let a = q9(t.old_level);
-        let s = q9(t.level);
+        let a = getPermissionLevelRoleName(t.old_level);
+        let s = getPermissionLevelRoleName(t.level);
         return jsx("span", {
           children: renderI18nText("activity_log.teams.changed_user_email", {
             userEmail: jsx("b", {
@@ -3272,7 +3272,7 @@ export function $$ep2(e, t, a, s) {
       }
     case "team_create":
       {
-        let a = Db(t)[e.metadata.org_access];
+        let a = getOrgAccessLevelLabels(t)[e.metadata.org_access];
         return jsx("span", {
           children: renderI18nText("activity_log.teams.created_the_team_name_team_with", {
             teamName: jsx("b", {
@@ -3366,8 +3366,8 @@ export function $$ep2(e, t, a, s) {
       });
     case "team_org_access_change":
       {
-        let a = Db(t)[e.metadata.old_org_access];
-        let s = Db(t)[e.metadata.org_access];
+        let a = getOrgAccessLevelLabels(t)[e.metadata.old_org_access];
+        let s = getOrgAccessLevelLabels(t)[e.metadata.org_access];
         return jsx("span", {
           children: renderI18nText("activity_log.teams.changed_the__team_from_old_access", {
             oldAccess: jsx("b", {
@@ -3848,12 +3848,12 @@ export function $$eg1(e) {
   if (!(["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete", "fig_file_create", "fig_file_duplicate", "fig_file_link_access_change", "fig_file_proto_link_access_change", "fig_file_viewer_access_change", "fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove", "fig_file_move", "fig_file_export", "fig_file_image_download", "fig_file_permanent_delete", "fig_file_permanent_undelete", "fig_file_rename", "fig_file_restore", "fig_file_save_as", "fig_file_set_password", "fig_file_trash", "fig_file_unset_password", "fig_file_view", "fig_file_view_prototype", "supabase_project_connected", "supabase_project_disconnected", "repo_branch_archive", "repo_branch_create", "repo_branch_delete", "repo_merge_to_source", "repo_branch_unarchive", "repo_merge_from_source", "file_repo_member_add", "file_repo_member_remove", "file_repo_member_permission_change", "org_user_account_type_change", "org_user_account_type_change_to_full", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "org_user_account_type_upgrade_requested", "sites_subdomain_changed", "sites_custom_domain_activate", "sites_custom_domain_removal", "sites_set_password", "sites_unset_password", "sites_publish", "sites_unpublish"].includes(e.event_name) && !ex(e.metadata))) return "\u2013";
   {
     let t = null;
-    if (e.metadata.editor_type && e.metadata.editor_type !== FFileType.SLIDES && e.metadata.editor_type !== FFileType.SITES && e.metadata.editor_type !== FFileType.FIGMAKE && e.metadata.editor_type !== FFileType.COOPER && !Ye.has(e.metadata.editor_type)) (t = px(e.metadata.editor_type)) || reportError(_$$e.SCALE, Error(`Unexpected editor_type '${e.metadata.editor_type}' encountered in event '${e.event_name}'`), {
+    if (e.metadata.editor_type && e.metadata.editor_type !== FFileType.SLIDES && e.metadata.editor_type !== FFileType.SITES && e.metadata.editor_type !== FFileType.FIGMAKE && e.metadata.editor_type !== FFileType.COOPER && !Ye.has(e.metadata.editor_type)) (t = getProductAccessTypeFromString(e.metadata.editor_type)) || reportError(_$$e.SCALE, Error(`Unexpected editor_type '${e.metadata.editor_type}' encountered in event '${e.event_name}'`), {
       tags: {
         id: e.id
       }
     });else if (e.metadata.editor_type === FFileType.SLIDES) return getI18nString("general.figma_slides");else if (e.metadata.editor_type === FFileType.SITES) return getI18nString("general.figma_sites");else if (e.metadata.editor_type === FFileType.FIGMAKE) return getI18nString("general.figma_rev");else if (e.metadata.editor_type === FFileType.COOPER) return getI18nString("general.figma_buzz");
-    return t ? _$$E(t) : _$$E(Te.DESIGN);
+    return t ? _$$E(t) : _$$E(ProductAccessMap.DESIGN);
   }
 }
 export function $$eh0(e) {
@@ -3924,7 +3924,7 @@ function ex(e) {
   return "old_seat_type" in e && "new_seat_type" in e;
 }
 function eb(e) {
-  if (e === Gu.VIEW) return getI18nString("checkout.view");
+  if (e === ViewAccessTypeEnum.VIEW) return getI18nString("checkout.view");
   {
     let t = e && f2(e);
     return isNotNullish(t) ? y[t].displayName() : void 0;

@@ -13,7 +13,7 @@ import { OB } from "../figma_app/91703";
 import { yJ as _$$yJ2 } from "../905/466026";
 import { Rz } from "../905/977218";
 import { uE } from "../figma_app/314264";
-import { L8 } from "../905/760074";
+import { getRepoById } from "../905/760074";
 import { Qr, hL, OR } from "../905/697795";
 import { B8 } from "../figma_app/682945";
 import { WQ } from "../figma_app/345997";
@@ -140,7 +140,7 @@ let $$P0 = e => t => function (r) {
     if ("fullscreen" === t.view) {
       let e = t.fileKey && P.fileByKey[t.fileKey];
       if (e) {
-        let n = L8(e, P.repos);
+        let n = getRepoById(e, P.repos);
         if (n && n.id === r.payload.repo.id) {
           OR(P, t);
           let e = Np(P, t);

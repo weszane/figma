@@ -1,7 +1,7 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { oz } from "../905/561485";
+import { isSitesFeatureEnabled } from "../905/561485";
 export function $$a0(e) {
-  if (oz()) {
+  if (isSitesFeatureEnabled()) {
     let t = getSingletonSceneGraph();
     for (let r in e) {
       let e = t.get(r);

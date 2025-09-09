@@ -3,7 +3,7 @@ import { PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763
 import { xf } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { Gc } from "../905/63728";
-import { gU } from "../figma_app/930338";
+import { isValidUrl } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { N6 } from "../figma_app/471982";
 import { vf, Yp, mZ, F8 } from "../figma_app/808294";
@@ -11,7 +11,7 @@ import { Tn, gO, Ii, xw, vC } from "../figma_app/599979";
 import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "../figma_app/191312";
 import { d as _$$d } from "../905/44199";
 import { o1 } from "../figma_app/10554";
-import { G4 } from "../figma_app/707808";
+import { PreviewMode } from "../figma_app/707808";
 import { Rs } from "../figma_app/761870";
 import { Hc, b as _$$b, Yp as _$$Yp, IZ } from "../figma_app/740025";
 import { X$ } from "../905/612685";
@@ -168,7 +168,7 @@ export function $$L3(e) {
   if (_$$Yp(e || null).length > 1e4) return getI18nString("community.publishing.creator_policy_must_be_at_most_10000_characters_long");
 }
 export function $$P7(e, t) {
-  return e && !t ? getI18nString("community.publishing.support_contact_must_not_be_empty") : !t || xf(t) || gU(t) ? void 0 : getI18nString("community.publishing.support_contact_must_be_a_valid_email_or_url");
+  return e && !t ? getI18nString("community.publishing.support_contact_must_not_be_empty") : !t || xf(t) || isValidUrl(t) ? void 0 : getI18nString("community.publishing.support_contact_must_be_a_valid_email_or_url");
 }
 export function $$D9(e) {
   if (!e) return getI18nString("community.publishing.category_cant_be_empty");
@@ -189,7 +189,7 @@ export function $$k8(e) {
   return t;
 }
 export function $$M13(e) {
-  return e === G4.FULLSCREEN || e === G4.FULLSCREEN_WITH_COMMENTS;
+  return e === PreviewMode.FULLSCREEN || e === PreviewMode.FULLSCREEN_WITH_COMMENTS;
 }
 export function $$F0(e) {
   return !!e && !e.unpublished_at;

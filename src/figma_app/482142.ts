@@ -12,7 +12,7 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { UE } from "../figma_app/345997";
 import { Np } from "../figma_app/193867";
 import { SubscriptionType, mapUpsellModalTypeToSource, UpgradeSteps } from "../figma_app/831101";
-import { SC, Sc } from "../figma_app/707808";
+import { UpgradeAction, TeamType } from "../figma_app/707808";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal } from "../905/156213";
 import { yJ } from "../figma_app/240735";
@@ -177,11 +177,11 @@ let $$Y17 = createOptimistThunk((e, t) => {
   });
   let d = {
     view: "teamUpgrade",
-    teamFlowType: SC.UPGRADE_EXISTING_TEAM,
+    teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
     teamId,
     paymentStep: UpgradeSteps.CHOOSE_PLAN,
     billingPeriod,
-    planType: Sc.TEAM,
+    planType: TeamType.TEAM,
     entryPoint: l,
     ...(onBillingCompleteRedirectInfo ? {
       searchParams: {

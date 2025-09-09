@@ -1,10 +1,10 @@
 import { reportError } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { tT } from '../905/663269';
+import { ResourceStatus } from '../905/663269';
 import { M4 } from '../905/713695';
 import { R } from '../905/943003';
 import { SupabaseAuthView } from '../figma_app/43951';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { p3 } from '../figma_app/588582';
 export let $$u6 = M4.Query({
   fetch: async e => {
@@ -41,7 +41,7 @@ export let $$u6 = M4.Query({
 });
 export function $$p4(e) {
   let t = p3();
-  let r = Rs(SupabaseAuthView, {
+  let r = useSubscription(SupabaseAuthView, {
     fileKey: e
   }, {
     enabled: !!e && t
@@ -63,7 +63,7 @@ export function $$p4(e) {
     };
   }
   let n = r.data?.supabaseAuth;
-  return n && n.status === tT.Loaded && n.data ? {
+  return n && n.status === ResourceStatus.Loaded && n.data ? {
     isLoading: !1,
     authenticated: n.data.authorized,
     expired: n.data.expired,

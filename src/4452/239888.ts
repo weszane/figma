@@ -9,7 +9,7 @@ import { L } from "../905/857916";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -19,15 +19,15 @@ import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { N as _$$N2 } from "../figma_app/55043";
 import { UserFlagByName } from "../figma_app/43951";
-import { px, S2, Um } from "../figma_app/465071";
+import { useTeamPlanUser, useTeamPlanFeatures, useIsAdminUser } from "../figma_app/465071";
 import { b as _$$b2, A as _$$A } from "../905/723768";
 var _ = m;
 let $$A = "connected_projects_tab_header--headerContainer--Rz5m6";
 export function $$w0() {
   let e = useDispatch();
-  let t = px();
-  let a = S2().unwrapOr(null);
-  let m = Um(t).unwrapOr(!1);
+  let t = useTeamPlanUser();
+  let a = useTeamPlanFeatures().unwrapOr(null);
+  let m = useIsAdminUser(t).unwrapOr(!1);
   let w = a?.tier;
   let N = a?.connectionCount ?? 0;
   let R = _$$N2(a?.key, () => {
@@ -42,7 +42,7 @@ export function $$w0() {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
     children: renderI18nText("resource_connection.request_modal.learn_more")
   });
-  let k = Rs(UserFlagByName, {
+  let k = useSubscription(UserFlagByName, {
     name: "seen_connected_projects_org_member_banner"
   });
   let q = useMemo(() => "loaded" !== k.status || !!k.data?.currentUser?.userFlagByName, [k]);

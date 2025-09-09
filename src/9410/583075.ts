@@ -7,7 +7,7 @@ import { oB } from "../905/929976";
 import { XE, Uv } from "../figma_app/91703";
 import { Cu } from "../figma_app/314264";
 import { setPropertiesPanelTab } from "../figma_app/741237";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Bk } from "../figma_app/357367";
 import { FT } from "../9410/607036";
 import { bs } from "../9410/680511";
@@ -27,7 +27,7 @@ export function $$g0({
     };
   }();
   let i = Bk();
-  let _ = tS();
+  let _ = useCurrentFileKey();
   let {
     Sprig
   } = useSprigWithSampling();

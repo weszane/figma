@@ -13,13 +13,13 @@ import { getInitialOptions } from "../figma_app/169182";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { fC } from "../figma_app/968813";
 import { fi, zK } from "../figma_app/913823";
 import { fu } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
 import { g5 } from "../figma_app/178752";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { Ow } from "../905/921418";
@@ -77,7 +77,7 @@ function Z(e) {
   let p = d === rp.WIDE ? 2 : 8;
   let x = _$$b();
   let h = sO();
-  let f = to();
+  let f = useIsSelectedViewFullscreenCooper();
   let y = ow();
   let [j, S] = useState(!1);
   let [v, w] = useState(width);
@@ -287,7 +287,7 @@ export function $$eo1({
   toggleLibraryModalType: G = "figjam",
   showOrgLibraryLoadingState: U = !0
 }) {
-  let q = q5();
+  let q = selectCurrentFile();
   let {
     fileVersion,
     loadingState
@@ -297,7 +297,7 @@ export function $$eo1({
     library: e.library
   }));
   let V = _$$I(Cn.FigJam);
-  let Y = to();
+  let Y = useIsSelectedViewFullscreenCooper();
   let {
     productComponents
   } = g5(t);
@@ -429,7 +429,7 @@ export function $$eo1({
 }
 function el() {
   let e = useSelector(MH);
-  let t = q5();
+  let t = selectCurrentFile();
   return jsx(fu, {
     name: "detail",
     properties: {
@@ -454,7 +454,7 @@ export function $$ed2({
   shouldHideTooltip: r = !1
 }) {
   let o = hY();
-  let l = q5();
+  let l = selectCurrentFile();
   let c = o.libraryKeyToSubscribedItems[_$$l(e.id)];
   return l && e.id === l.libraryKey ? jsx(el, {}) : c ? jsx(fu, {
     name: "detail",
@@ -479,7 +479,7 @@ export function $$ed2({
 }
 export function $$ec0() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     fileVersion,
     loadingState

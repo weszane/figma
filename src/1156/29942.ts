@@ -21,7 +21,7 @@ import { analyticsEventManager } from "../905/449184";
 import { F as _$$F } from "../905/680873";
 import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
-import { EJ, jN, gU } from "../figma_app/930338";
+import { truncate, isWhitespace, isValidUrl } from "../figma_app/930338";
 import { Y as _$$Y } from "../905/506207";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { O1, Zl, uQ, Tv } from "../figma_app/311375";
@@ -40,7 +40,7 @@ import { HB, oD, t$ as _$$t$, wj, kx } from "../1156/721826";
 import { l as _$$l } from "../1156/926585";
 import { FX, St } from "../figma_app/558805";
 import { oA } from "../figma_app/812915";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { H as _$$H2 } from "../1156/461363";
 import { throwTypeError } from "../figma_app/465776";
 import { N as _$$N2 } from "../905/438674";
@@ -59,7 +59,7 @@ import { g as _$$g } from "../905/687265";
 import { SceneGraphHelpers, InsertErrorType, ChatMessageType } from "../figma_app/763686";
 import { A as _$$A2 } from "../vendor/454088";
 import { A as _$$A3 } from "../905/920142";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { isDevEnvironment } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
@@ -70,10 +70,10 @@ import { y as _$$y } from "../1250/295724";
 import { k as _$$k2 } from "../figma_app/564183";
 import { B as _$$B } from "../905/969273";
 import { A0, sZ, Ay as _$$Ay } from "../figma_app/948389";
-import { q5, Hu, tS as _$$tS } from "../figma_app/516028";
+import { selectCurrentFile, openFileTeamAtom, useCurrentFileKey } from "../figma_app/516028";
 import { X$ } from "../905/612685";
 import { FPlanNameType, FProductAccessType, FFileType } from "../figma_app/191312";
-import { No, X$ as _$$X$, YY } from "../figma_app/465071";
+import { useTeamPlanPublicInfo, useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { wH, mT } from "../figma_app/680166";
 import { UpsellModalType } from "../905/165519";
 import { Ig, co, xD } from "../figma_app/350332";
@@ -929,7 +929,7 @@ function tF({
     newTab: !0,
     href: X$(e.hubFileId),
     trusted: !0,
-    children: EJ(e.hubFileName, 30)
+    children: truncate(e.hubFileName, 30)
   }, e.hubFileId));
   return jsx(eB, {
     variant: "community",
@@ -963,7 +963,7 @@ function tD({
   licenseType: e,
   onClose: t
 }) {
-  let n = No();
+  let n = useTeamPlanPublicInfo();
   let i = n.unwrapOr(null)?.tier;
   let {
     getProvisionalAccessBanner,
@@ -1004,7 +1004,7 @@ function tD({
 function tB({
   onClose: e
 }) {
-  let t = No();
+  let t = useTeamPlanPublicInfo();
   let n = t.unwrapOr(null)?.tier;
   let i = getI18nString("figmake.meter_limit.enjoy_more_ai_credits");
   let s = renderI18nText("figmake.meter_limit.used_all_your_credits", {
@@ -1036,10 +1036,10 @@ function tB({
   });
 }
 function tq() {
-  let e = No();
+  let e = useTeamPlanPublicInfo();
   let t = e.unwrapOr(null)?.tier || null;
-  let n = q5();
-  let i = Oc();
+  let n = selectCurrentFile();
+  let i = useIsSelectedFigmakeFullscreen();
   let s = n?.teamId ?? "";
   let a = $Y(s);
   let l = i ? UpsellModalType.FIGMAKE_METER_LIMIT_TOAST : UpsellModalType.LIVING_DESIGNS_METER_LIMIT_TOAST;
@@ -1058,7 +1058,7 @@ function t$() {
     entryPoint: _$$tc.CODE_CHAT_LIMIT,
     folderId: null
   });
-  let n = Oc() ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
+  let n = useIsSelectedFigmakeFullscreen() ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
   return getIsUpgradeHandlerLoading() ? jsx($z, {
     variant: "primary",
     disabled: !0,
@@ -1074,7 +1074,7 @@ function t$() {
   });
 }
 function tP() {
-  let e = Oc() ? JT.FIGMAKE : JT.LIVING_DESIGNS;
+  let e = useIsSelectedFigmakeFullscreen() ? JT.FIGMAKE : JT.LIVING_DESIGNS;
   let {
     meterResetDate,
     meteringWindow
@@ -1122,11 +1122,11 @@ function tH() {
 }
 function tW() {
   let e = _H();
-  let t = No();
+  let t = useTeamPlanPublicInfo();
   let n = t.unwrapOr(null)?.tier || null;
   let i = Tk();
   let s = yy();
-  let a = useAtomWithSubscription(Hu);
+  let a = useAtomWithSubscription(openFileTeamAtom);
   if (!i || i === _$$ee.DISABLE_WITHOUT_TOAST) return null;
   let l = function (e, t) {
     switch (e) {
@@ -1462,11 +1462,11 @@ let tQ = forwardRef((e, t) => {
   let [A, T] = jT();
   let [I] = PM();
   let L = A.filter(e => "error" === e.type || "warn" === e.type);
-  let R = ZC(L);
+  let R = useLatestRef(L);
   let F = useMemo(() => L.every(e => "warn" === e.type) && 0 === I.length, [L, I]);
-  let O = ZC(chatMessageCount);
+  let O = useLatestRef(chatMessageCount);
   let [D, B] = useState(!1);
-  let q = canSend && !jN(k);
+  let q = canSend && !isWhitespace(k);
   let $ = function (e) {
     let [t, n] = useState(!1);
     let r = useRef(null);
@@ -1524,7 +1524,7 @@ let tQ = forwardRef((e, t) => {
   let Z = _$$ry();
   let Q = useAtomWithSubscription(Ng);
   let ee = _$$k2();
-  let et = Oc();
+  let et = useIsSelectedFigmakeFullscreen();
   let en = et ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
   let er = Xu();
   let ei = useAtomWithSubscription(Xl);
@@ -1555,7 +1555,7 @@ let tQ = forwardRef((e, t) => {
   } = function (e) {
     let t = useDispatch();
     let n = _$$f3(th);
-    let r = No();
+    let r = useTeamPlanPublicInfo();
     let i = r.unwrapOr(null)?.tier;
     let {
       meterUsed
@@ -1673,7 +1673,7 @@ function t0({
   onFocus: v,
   featureType: k
 }) {
-  let E = Oc();
+  let E = useIsSelectedFigmakeFullscreen();
   let w = O1();
   let A = k === lV.AI_ASSISTANT && w && !u;
   let T = useAtomWithSubscription(f3);
@@ -1733,7 +1733,7 @@ function t0({
             (function (e) {
               let t = e.match(/(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g);
               return !!(t && [...t].findIndex(e => function (e) {
-                if (gU(e)) {
+                if (isValidUrl(e)) {
                   let t = new URL(e);
                   if (F4(t.hostname)) return !0;
                 }
@@ -2141,7 +2141,7 @@ function nS({
   trackingContext: t
 }) {
   let n = wT();
-  let s = _$$tS() || "";
+  let s = useCurrentFileKey() || "";
   let a = useCallback(() => {
     oU({
       persistentEntityId: t.persistentEntityId,
@@ -2351,7 +2351,7 @@ function nR({
   trackingContext: s
 }) {
   let a = useAtomWithSubscription(hR);
-  let l = _$$tS() || "";
+  let l = useCurrentFileKey() || "";
   let o = useRef(!1);
   switch (useEffect(() => {
     if (o.current) return;
@@ -2602,7 +2602,7 @@ function nJ({
   trackingContext: o
 }) {
   let [c, d] = useState("");
-  let u = _$$tS();
+  let u = useCurrentFileKey();
   let x = "loading" === e;
   let m = _$$S2();
   let h = async () => {
@@ -2699,7 +2699,7 @@ function n0({
   let u = _$$ry();
   let x = useMemo(() => s ? u || o && d4(e) ? nd.TOOL_CALL_DISABLED : c ? nd.TOOL_CALL_CANCELLED : void 0 : a === nc.SUCCESS ? nd.TOOL_CALL_SUCCESS : nd.TOOL_CALL_CANCELLED, [s, a, o, c, u, e]);
   let m = _$$S2();
-  let h = _$$tS() || "";
+  let h = useCurrentFileKey() || "";
   let g = useCallback(n => {
     IB({
       persistentEntityId: l.persistentEntityId,
@@ -2865,7 +2865,7 @@ function rd({
   });
 }
 function ru() {
-  let e = Oc() ? rl : ra;
+  let e = useIsSelectedFigmakeFullscreen() ? rl : ra;
   return function (t) {
     return jsx(rd, {
       textContent: t,
@@ -3057,7 +3057,7 @@ function ry({
     C.current = e;
     E.current = f?.id;
   }, [_, b, a, n, f?.id]);
-  let N = ZC(n);
+  let N = useLatestRef(n);
   useEffect(() => {
     !n && N && t && a();
   }, [n, t, a, N]);
@@ -3194,7 +3194,7 @@ function rE({
   lastMessage: n,
   chatMessagesNodeGuid: s
 }) {
-  let l = q5();
+  let l = selectCurrentFile();
   let o = l?.key || null;
   let c = e.clientLifecycleId && !t && l?.canEdit;
   let d = _$$Q2();
@@ -3639,7 +3639,7 @@ function rF({
   requestScrollToBottom: m,
   showCodeStreaming: h
 }) {
-  let g = q5();
+  let g = selectCurrentFile();
   let f = g?.key || null;
   let y = useMemo(() => qE(f, o), [f, o]);
   let _ = g?.name;
@@ -3767,7 +3767,7 @@ function rD({
     onClick: handleScrollToBottomClick,
     children: jsx(_$$W4, {})
   }) : null, [showScrollToBottomButton, handleScrollToBottomClick]);
-  let k = q5();
+  let k = selectCurrentFile();
   let C = k?.key || null;
   let E = useMemo(() => qE(C, e), [C, e]);
   let S = k?.name;
@@ -4425,7 +4425,7 @@ function iy({
     overlay: q6k,
     priority: _$$N5.DEFAULT_MODAL
   }, [o]);
-  let x = _$$tS();
+  let x = useCurrentFileKey();
   useEffect(() => {
     if (e) return;
     let t = Hg(_$$nc);
@@ -4433,9 +4433,9 @@ function iy({
       Fullscreen?.createNewCodeFile(dY, "", null, !1);
     });
   }, [e]);
-  let m = q5();
-  let y = _$$X$("LibraryImportButton");
-  let _ = YY(y).unwrapOr(!1);
+  let m = selectCurrentFile();
+  let y = useCurrentPublicPlan("LibraryImportButton");
+  let _ = useIsStarterPlan(y).unwrapOr(!1);
   let [j, v] = useState(!1);
   let k = useRef(null);
   let {
@@ -4749,7 +4749,7 @@ function ik({
     }) : jsxs(Fragment, {
       children: [U, H]
     }), jsx(iv, {
-      disabled: d || jN(A) || y,
+      disabled: d || isWhitespace(A) || y,
       onClick: $,
       onUndo: P,
       isEnhanced: F
@@ -4926,7 +4926,7 @@ export function $$iC0({
   let {
     communityAttribution
   } = Pe();
-  let ew = Oc();
+  let ew = useIsSelectedFigmakeFullscreen();
   let {
     libraryImport,
     stashLibraryImport,
@@ -5091,7 +5091,7 @@ export default function App() {
       user
     } = $W(e);
     let s = void 0 !== exchange && exchange.messages.length > 0;
-    let l = _$$tS();
+    let l = useCurrentFileKey();
     let o = selectCurrentUser();
     useEffect(() => {
       if (!s || !l || user?.userID !== o?.id) return;

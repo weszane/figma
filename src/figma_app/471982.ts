@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/128080";
 import { customHistory } from "../905/612521";
 import { N as _$$N } from "../figma_app/469468";
-import { fs } from "../figma_app/930338";
+import { processSlug } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { k as _$$k } from "../905/22009";
 import { L as _$$L } from "../905/178090";
@@ -22,7 +22,7 @@ import { o1 } from "../figma_app/10554";
 import { createEmptyAddress } from "../figma_app/831101";
 import { ManifestEditorType } from "../figma_app/155287";
 import { Z4 } from "../figma_app/809727";
-import { z4, P5 } from "../figma_app/175992";
+import { statusTypeToNumber, StatusType } from "../figma_app/175992";
 import { C as _$$C } from "../905/237873";
 import { CS } from "../figma_app/275462";
 import { S as _$$S } from "../905/872825";
@@ -169,7 +169,7 @@ export function $$Z19({
     id: t,
     name: r
   }) {
-    let n = fs(r) ?? "";
+    let n = processSlug(r) ?? "";
     return t ? `${iY()}/${e}/${t}${"" === n ? "" : "/"}${n}` : void 0;
   }({
     path: t,
@@ -191,7 +191,7 @@ export function $$ee17({
   id: t,
   name: r
 }) {
-  let n = fs(r) ?? "";
+  let n = processSlug(r) ?? "";
   return `${iY()}/${e}/${t}${"" === n ? "" : "/"}${n}`;
 }
 export function $$et5(e) {
@@ -221,13 +221,13 @@ export function $$ea2(e) {
   }) : getI18nString("community.browser_home_tab_title");
 }
 export function $$es23(e) {
-  return !!e && e?.stripe_account_status && z4(e.stripe_account_status) >= z4(P5.ACCEPTED);
+  return !!e && e?.stripe_account_status && statusTypeToNumber(e.stripe_account_status) >= statusTypeToNumber(StatusType.ACCEPTED);
 }
 export function $$eo28(e) {
   return !!e?.associated_users?.find(e => e.can_sell_on_community);
 }
 export function $$el18(e) {
-  return e?.stripe_account_status && e.stripe_account_status !== P5.NONE && e.stripe_account_status !== P5.ACCEPTED;
+  return e?.stripe_account_status && e.stripe_account_status !== StatusType.NONE && e.stripe_account_status !== StatusType.ACCEPTED;
 }
 export function $$ed38(e) {
   return e ? "100%" : Math.min(window.innerWidth, parseInt(communityViewerMaxWidth));

@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { x } from "../905/392802";
 import { F } from "../905/672930";
-import { YE } from "../figma_app/552876";
+import { isDebugSelectedFigmakeFullscreen } from "../figma_app/552876";
 let n;
 let d = 0;
 let c = new Map();
@@ -39,7 +39,7 @@ export function $$h10({
 export function $$m12() {
   return v({
     type: "INITIALIZE_LS",
-    skipTypeAcquisition: !!(getFeatureFlags().bake_skip_ata && YE())
+    skipTypeAcquisition: !!(getFeatureFlags().bake_skip_ata && isDebugSelectedFigmakeFullscreen())
   });
 }
 export function $$g9(e) {

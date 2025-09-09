@@ -7,7 +7,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { memoizeByArgs } from "../figma_app/815945";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { n as _$$n } from "../figma_app/339971";
-import { tn } from "../figma_app/473493";
+import { canAccessFullDevMode } from "../figma_app/473493";
 import { ho, oB } from "../905/929976";
 import { Dm } from "../figma_app/8833";
 import { k$, gN, id, Dz } from "../figma_app/847915";
@@ -24,7 +24,7 @@ import { $A } from "../905/782918";
 import { j as _$$j } from "../905/834956";
 import { getFeatureFlags } from "../905/601108";
 import { isDevEnvironment } from "../figma_app/169182";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Point } from "../905/736624";
 import { cH } from "../figma_app/451396";
@@ -36,7 +36,7 @@ import { Ao } from "../905/748636";
 import { kL, zN, Pf } from "../905/326616";
 import { b as _$$b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
-import { tS, Cq } from "../figma_app/516028";
+import { useCurrentFileKey, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { isInvalidValue } from "../905/216495";
@@ -235,7 +235,7 @@ let eo = registerModal(function () {
     e(hideModalHandler());
   }, [e]);
   let [r, a] = useState([]);
-  let o = tS();
+  let o = useCurrentFileKey();
   useEffect(() => {
     let r = !1;
     let n = e => {
@@ -265,7 +265,7 @@ let eo = registerModal(function () {
 }, "MLExportModal");
 let ec = () => {
   let e = useDispatch();
-  let t = Cq({
+  let t = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   let r = _$$f("cursor_bot_v2_make_show_me_primary_cta");
@@ -306,7 +306,7 @@ let ec = () => {
     getFeatureFlags().cursor_bot && t?.editor_type === FFileType.DESIGN && n.push({
       name: "toggle-cursor-bot",
       callback: () => {
-        YQ({
+        handleAtomEvent({
           id: _$$W
         });
       }
@@ -340,14 +340,14 @@ let ec = () => {
     isDevEnvironment() && t?.editor_type === FFileType.DESIGN && (n.push({
       name: "toggle-tooltips-plus",
       callback: () => {
-        YQ({
+        handleAtomEvent({
           id: _$$v
         });
       }
     }), n.push({
       name: "toggle-visual-asset-tooltips",
       callback: () => {
-        YQ({
+        handleAtomEvent({
           id: io
         });
       }
@@ -417,7 +417,7 @@ export function $$eh0(e) {
   let r = useSelector(e => e.mirror.appModel);
   let i = useSelector(e => e.selectedView);
   let a = useSelector(e => e.dropdownShown?.data?.selectionToUpdate);
-  let o = useSelector(e => $A(e.selectedView) && !tn(e));
+  let o = useSelector(e => $A(e.selectedView) && !canAccessFullDevMode(e));
   let l = ec();
   let d = d$({
     debugMenuItems: l

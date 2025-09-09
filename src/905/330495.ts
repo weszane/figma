@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import { isInvalidValue } from "../905/216495";
 import { B9 } from "../figma_app/722362";
-import { _S } from "../figma_app/516028";
+import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { lm } from "../figma_app/745458";
 import { Rn } from "../figma_app/357047";
 import { nD } from "../905/92359";
@@ -13,7 +13,7 @@ export function $$h0(e) {
   let t = Rn("restore-symbol-or-state-group");
   let i = useSelector(e => e.mirror.appModel[t]);
   let h = B9();
-  let g = useAtomWithSubscription(_S);
+  let g = useAtomWithSubscription(openFileLibraryKeyAtom);
   let f = useMemoStable(() => {
     let t = new Set();
     for (let i of e) {

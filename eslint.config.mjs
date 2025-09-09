@@ -15,5 +15,6 @@ export default antfu({
     'jsdoc/check-param-names': 'off',
     'prefer-promise-reject-errors': 'off',
     'no-async-promise-executor': 'off',
+    'no-console': 'off',
   },
 })

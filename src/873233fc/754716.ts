@@ -21,7 +21,7 @@ import { Bf } from "../figma_app/249941";
 import { MO } from "../3682/618608";
 import { pc } from "../figma_app/152690";
 import { O as _$$O, w as _$$w } from "../3674/344857";
-import { _I, xo } from "../figma_app/473493";
+import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
 import { l7, ZO } from "../figma_app/88239";
 import { Gb } from "../figma_app/933328";
@@ -793,12 +793,12 @@ let eX = memo(({
 }) => {
   let t = useSelector(e => e.progressBarState);
   let n = p8("loadingEmbeds");
-  let c = !!_I();
+  let c = !!useCanAccessFullDevMode();
   let m = l7();
   let x = _$$e();
   let p = ZO();
   let h = Lk();
-  let g = xo();
+  let g = useCanUseDevModeDemoFile();
   let f = useRef(null);
   let v = useSelector(e => e.openFile);
   let _ = v ? v.key : "";

@@ -16,7 +16,7 @@ import { V as _$$V } from "../1577/311426";
 import { J as _$$J } from "../905/341359";
 import { eJ } from "../vendor/352483";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { o as _$$o } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { Jm, BY } from "../figma_app/387599";
@@ -163,7 +163,7 @@ let Z = registerModal(function (e) {
     apiResourceType: q,
     resourceId: Z
   }, f).href : "";
-  let [X] = IT(_$$Z({
+  let [X] = setupResourceAtomHandler(_$$Z({
     apiResourceType: q,
     id: Z
   }), {
@@ -304,7 +304,7 @@ export function $$el1(e, t, r) {
       resourceUrl: t.rdp_url,
       shouldUpdateUrl: o
     }
-  })); else {
+  }));else {
     var a;
     var l;
     a = t.id;
@@ -398,7 +398,7 @@ export function $$ed0(e, t, r, n) {
 function eu(e) {
   let t;
   let r = o_(e);
-  if (r) t = e.libraryKey; else {
+  if (r) t = e.libraryKey;else {
     let r = B2(e);
     t = r?.library_key;
   }
@@ -461,7 +461,7 @@ function em(e, t) {
 function e_(e) {
   let t;
   let r = o_(e);
-  if (r) t = e.libraryKey; else {
+  if (r) t = e.libraryKey;else {
     let r = B2(e);
     t = r?.library_key;
   }

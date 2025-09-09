@@ -8,7 +8,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { oB, sf } from "../905/929976";
 import { NA } from "../905/738636";
 import { c5 } from "../905/93909";
-import { Kz, mr, Xm } from "../905/760074";
+import { isBranchAlt, findBranchById, isBranch } from "../905/760074";
 import { z4 } from "../905/37051";
 import { Tf, nb } from "../figma_app/543100";
 import { dq } from "../905/845253";
@@ -86,7 +86,7 @@ let w = ({
         title: e.file.name,
         fileEditorType: e.file.editorType,
         target: r,
-        isBranch: Kz(e.file),
+        isBranch: isBranchAlt(e.file),
         isLibrary: !!e.file.lastPublishedAt,
         isTeamTemplate: s,
         userId: n?.id
@@ -106,13 +106,13 @@ let w = ({
       desktopAPIInstance.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || "", r, n?.id);
       break;
     case nb.REPO:
-      let c = mr(e.repo, e.branches, t);
+      let c = findBranchById(e.repo, e.branches, t);
       c && desktopAPIInstance.openFile({
         fileKey: c.key,
         title: c.name,
         fileEditorType: c.editor_type,
         target: r,
-        isBranch: Xm(c),
+        isBranch: isBranch(c),
         isLibrary: !!c.last_published_at,
         userId: n?.id
       });
@@ -208,7 +208,7 @@ let T = async ({
       }));
       break;
     case nb.REPO:
-      let b = mr(e.repo, e.branches, t);
+      let b = findBranchById(e.repo, e.branches, t);
       if (!b) return;
       N7(n, b.parent_org_id, o, b.team_id) ? QV({
         file: {

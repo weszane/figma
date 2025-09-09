@@ -9,7 +9,7 @@ import { We } from "../905/909811";
 import { c as _$$c } from "../905/511370";
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { LibraryModalVariablesDataByLibraryKey } from "../figma_app/43951";
 import { RV } from "../figma_app/214643";
 function p(e, t) {
@@ -21,7 +21,7 @@ function A({
   publishedLibrary: e,
   searchResults: t
 }) {
-  let i = Rs(LibraryModalVariablesDataByLibraryKey, {
+  let i = useSubscription(LibraryModalVariablesDataByLibraryKey, {
     libraryKey: e?.library_key ?? ""
   }, {
     enabled: !!e?.library_key

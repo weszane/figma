@@ -13,7 +13,7 @@ import { i as _$$i } from "../905/667910";
 import { o as _$$o } from "../905/738144";
 import { F } from "../905/686267";
 import { kX, cM } from "../905/261982";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, setupReduxAtomWithState, attachReducerWrapper } from "../905/270322";
 import { SubscribedLibrariesForFile, CommunityLibraryComponentsAndStateGroups, CommunityLibraryStyleData, CommunityLibraryVariableCollectionDataWithVariables, CommunityLibraryModules } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
@@ -22,7 +22,7 @@ import { Me } from "../figma_app/598018";
 import { o as _$$o2 } from "../figma_app/633080";
 var o = s;
 let $$x0 = atom(e => {
-  let t = e(yV);
+  let t = e(openFileAtom);
   if (!t) return Xm();
   let r = t.parentOrgId;
   let n = !!t.teamId;

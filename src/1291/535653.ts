@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { sz } from "../figma_app/216696";
 import { CommunityProfileView } from "../figma_app/43951";
 import { oh, mC } from "../905/18797";
@@ -24,7 +24,7 @@ export function $$$$d0(e) {
   };
 }
 export function $$c1(e) {
-  let t = Rs(CommunityProfileView, {
+  let t = useSubscription(CommunityProfileView, {
     profileId: e
   });
   if ("loaded" === t.status) {

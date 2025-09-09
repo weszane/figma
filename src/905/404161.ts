@@ -7,7 +7,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { zE } from "../905/64735";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -17,8 +17,8 @@ import { AllowlistPluginsSectionView, PluginRequests } from "../figma_app/43951"
 import { J } from "../905/403084";
 import { registerModal } from "../905/102752";
 import { P } from "../905/994270";
-import { tT } from "../905/663269";
-import { Yx } from "../figma_app/930338";
+import { ResourceStatus } from "../905/663269";
+import { formatList } from "../figma_app/930338";
 import { z } from "../905/284530";
 import { A as _$$A } from "../5724/933949";
 import { A as _$$A2 } from "../5724/663128";
@@ -29,7 +29,7 @@ function w(e) {
     isWidget,
     workspaceId
   } = e;
-  let s = Rs(AllowlistPluginsSectionView, {
+  let s = useSubscription(AllowlistPluginsSectionView, {
     orgId
   });
   let o = s.data?.org;
@@ -41,7 +41,7 @@ function w(e) {
     let r = 0;
     let a = [];
     for (let s of e) {
-      if ("Workspace" !== s.allowlistGroupType || !s.allowlistedWorkspace || !s.plugin || s.plugin.status !== tT.Loaded) continue;
+      if ("Workspace" !== s.allowlistGroupType || !s.allowlistedWorkspace || !s.plugin || s.plugin.status !== ResourceStatus.Loaded) continue;
       let e = s.plugin.data;
       e && e.id === t && !!e.isWidget == !!i && s.allowlistedWorkspace.id !== n && (r += 1, a.push(s.allowlistedWorkspace.name));
     }
@@ -55,7 +55,7 @@ function w(e) {
     numWorkspacesApproved,
     workspaceList: jsx(_$$E, {
       fontWeight: "semi-bold",
-      children: Yx(workspaceNames)
+      children: formatList(workspaceNames)
     })
   };
   let u = isWidget ? jsx(_$$E, {
@@ -145,7 +145,7 @@ export let $$k0 = registerModal(function ({
     fullscreenEditorType: I
   });
   P(!0);
-  let k = Rs(PluginRequests, {
+  let k = useSubscription(PluginRequests, {
     orgId: i
   });
   let R = k?.data?.org?.pluginRequests.reduce((t, i) => i.pluginId === e.pluginId && "rejected" === i.status && (!t || i.updatedAt > t.updatedAt) ? i : t, null);

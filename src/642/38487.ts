@@ -16,7 +16,7 @@ import { F as _$$F } from '../905/258517';
 import { getI18nString } from '../905/303541';
 import { s as _$$s2 } from '../905/403855';
 import { globalPerfTimer } from '../905/542194';
-import { cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { e as _$$e2 } from '../905/579635';
 import { getFeatureFlags } from '../905/601108';
 import { r as _$$r2 } from '../905/619088';
@@ -62,7 +62,7 @@ import { indentWidthWithMargin, rowActionsWidth, scrollBarYWidth, trackPadding }
 import { o3 } from '../figma_app/852050';
 import { generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { jr, W0 } from '../figma_app/896988';
-import { Yx } from '../figma_app/930338';
+import { formatList } from '../figma_app/930338';
 import { Rt, Zy } from '../figma_app/945858';
 import { pr } from '../figma_app/952446';
 import { useSelector } from 'react-redux';
@@ -77,7 +77,7 @@ function W({
     'data-testid': 'variable-mode-pill',
     'data-tooltip-type': Ib.TEXT,
     'data-tooltip': getI18nString('variables.mode_pill.tooltip', {
-      listOfModes: Yx(e)
+      listOfModes: formatList(e)
     }),
     'children': jsx('div', {
       className: XW,
@@ -237,7 +237,7 @@ function eb({
   guid: e,
   isWebpage: t
 }) {
-  let s = cJ();
+  let s = useIsFullscreenSitesView();
   let n = getObservableOrFallback(UK().showSemanticTagsOnLayerRows);
   let i = Fk((e, s) => {
     let r = e.get(s);
@@ -330,7 +330,7 @@ let eS = memo(e => {
 eS.displayName = 'VisibilityToggle';
 export let $$eN0 = 'layer-panel-onboarding-key';
 export function $$eI2(e) {
-  let t = cJ();
+  let t = useIsFullscreenSitesView();
   let s = sO();
   let r = (e.abbreviatedStateName || e.name).replace(/\n/, ' ');
   if (t && e.isWebpage && e.isDefaultResponsiveSet ? r = getI18nString('sites.panel.home') : s && e.nodeType === 'SLIDE' && (r = getI18nString('slides.layers_panel.slide_number', {
@@ -355,7 +355,7 @@ function eE({
 function eM(e) {
   let [t, s] = useState(null);
   let [i, l] = useState(!1);
-  let a = cJ();
+  let a = useIsFullscreenSitesView();
   let o = useAtomWithSubscription(r8(e.guid));
   let {
     showVisualLayerIcons

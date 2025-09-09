@@ -9,7 +9,7 @@ import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { E as _$$E, t7 } from "../905/508367";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
-import { VZ } from "../figma_app/930338";
+import { camelToKebab } from "../figma_app/930338";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { HV } from "../905/125333";
@@ -137,7 +137,7 @@ function W(e) {
       return jsx("div", {});
     }
   };
-  let s = t => t.shortcut ? t.shortcut : t.shortcutKey ? c1(e.keyboardShortcuts, VZ(t.shortcutKey)) : null;
+  let s = t => t.shortcut ? t.shortcut : t.shortcutKey ? c1(e.keyboardShortcuts, camelToKebab(t.shortcutKey)) : null;
   let o = e.tooltip.target;
   let d = ul(o) && e.tooltip.position === Zj.RIGHT;
   if (e.tooltip.state !== zr.SHOWING) return null;
@@ -193,7 +193,7 @@ function W(e) {
         t = e.tooltip.target.text;
         break;
       case Ui.KEY:
-        t = formatI18nMessage(VZ(e.tooltip.target.key));
+        t = formatI18nMessage(camelToKebab(e.tooltip.target.key));
         r = e.tooltip.target.key;
         break;
       case Ui.ELEMENT:
@@ -319,8 +319,8 @@ function W(e) {
               if (r()) return jsx(_$$x, {
                 tooltipKey: target.key
               });
-              let a = formatI18nMessage(VZ(t.target.key));
-              let s = c1(e.keyboardShortcuts, VZ(t.target.key));
+              let a = formatI18nMessage(camelToKebab(t.target.key));
+              let s = c1(e.keyboardShortcuts, camelToKebab(t.target.key));
               if (s) return jsxs("span", {
                 className: GQ,
                 children: [jsx("span", {
@@ -410,7 +410,7 @@ export function $$Y4(e, t, r, n) {
       let o = 1 / 0;
       for (let e = 0; e < r.length; e++) {
         let t = r[e];
-        if (null === a) a = _$$E(t); else if (t.top === a.top && t.bottom === a.bottom) {
+        if (null === a) a = _$$E(t);else if (t.top === a.top && t.bottom === a.bottom) {
           a.left = Math.min(t.left, a.left);
           a.right = Math.max(t.right, a.right);
           a.width += t.width;
@@ -659,7 +659,7 @@ function q(e, t) {
     };
   }()), i.tooltip)) {
     if (!s) {
-      if (i.tooltip.state === zr.PENDING || i.tooltip.hideImmediately) t.dispatch(jD()); else if (i.tooltip.state === zr.SHOWING) {
+      if (i.tooltip.state === zr.PENDING || i.tooltip.hideImmediately) t.dispatch(jD());else if (i.tooltip.state === zr.SHOWING) {
         let e = i.tooltip.hideAfterDelay ?? 300;
         t.dispatch(ac({
           timeoutDelay: e

@@ -31,13 +31,13 @@ import { Y$ } from "../905/84777";
 import { xQ, Zz, LY, $$in } from "../figma_app/84966";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
-import { XP } from "../figma_app/465071";
+import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N2 } from "../905/809096";
 var y = A;
 let B = "dynamic";
 export function $$V0(e) {
-  let t = XP({
+  let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   }).key.parentId;
   return jsx(tH, {
@@ -89,7 +89,7 @@ function z(e) {
 function H(e) {
   let t = useDispatch();
   let i = hS(e);
-  let d = XP({
+  let d = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });
   let c = xQ();

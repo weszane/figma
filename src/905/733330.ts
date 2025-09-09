@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { UpsellModalType } from "../905/165519";
 import { X1 } from "../figma_app/736948";
 import { UpgradeSteps } from "../figma_app/831101";
-import { SC } from "../figma_app/707808";
+import { UpgradeAction } from "../figma_app/707808";
 export class $$d0 {
   pathToSelectedView(e, t, i) {
     if ("purchase-organization" === t[1]) {
@@ -20,7 +20,7 @@ export class $$d0 {
       let r = new URLSearchParams(i);
       if (r.get("team_flow_type")) {
         let t = r.get("team_flow_type");
-        if (t === SC.CREATE) return {
+        if (t === UpgradeAction.CREATE) return {
           view: "teamUpgrade",
           teamFlowType: t,
           teamId: null,
@@ -30,7 +30,7 @@ export class $$d0 {
           teamFlowType: t
         };
       } else "create-team" === t[2] && (e.newTeamProps = {
-        teamFlowType: SC.CREATE_AND_UPGRADE
+        teamFlowType: UpgradeAction.CREATE_AND_UPGRADE
       });
       r.get("entryPoint") && (e.entryPoint = parseInt(r.get("entryPoint")));
       return e;

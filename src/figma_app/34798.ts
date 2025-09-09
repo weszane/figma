@@ -1,16 +1,16 @@
 import { useMemo, useEffect } from "react";
 import { LayoutTabType, HandoffBindingsCpp, AppStateTsApi, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { m0 } from "../figma_app/976749";
 import { p8, dH } from "../figma_app/722362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanViewAnnotations, FileCanEditAnnotations, FileCanViewAnnotationsMegadot } from "../figma_app/43951";
 import { getObservableValue } from "../figma_app/84367";
 export function $$_2() {
-  let e = tS();
-  let t = Rs(FileCanViewAnnotations, {
+  let e = useCurrentFileKey();
+  let t = useSubscription(FileCanViewAnnotations, {
     key: e || ""
   }, {
     enabled: !!e
@@ -18,8 +18,8 @@ export function $$_2() {
   return !!t.data?.file && "error" !== t.data.file.status && (t.data?.file?.data?.hasPermission ?? !1);
 }
 export function $$h1() {
-  let e = tS();
-  let t = Rs(FileCanEditAnnotations, {
+  let e = useCurrentFileKey();
+  let t = useSubscription(FileCanEditAnnotations, {
     key: e || ""
   }, {
     enabled: !!e
@@ -37,8 +37,8 @@ export function $$g0() {
   let e = $$_2();
   let t = $$m4();
   let r = function () {
-    let e = tS();
-    let t = Rs(FileCanViewAnnotationsMegadot, {
+    let e = useCurrentFileKey();
+    let t = useSubscription(FileCanViewAnnotationsMegadot, {
       key: e || ""
     }, {
       enabled: !!e

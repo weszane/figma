@@ -6,7 +6,7 @@ import { assertNotNullish } from "../figma_app/95419";
 import { M3 } from "../figma_app/91703";
 import { tc as _$$tc } from "../905/15667";
 import { fu, L0 } from "../figma_app/831799";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { Ir, nk as _$$nk, m1 } from "../figma_app/2023";
 import { selectCurrentUser, selectUser } from "../905/372672";
 import { FPublicationStatusType, FFileType, FPlanNameType, FOrganizationLevelType, FTeamAccessPermissionType, FPermissionLevelType, FViewPermissionType, FResourceCategoryType, FContainerType, FTemplateCategoryType, FUserVerificationStatusType, FProductAccessType } from "../figma_app/191312";
@@ -14,7 +14,7 @@ import { M4 } from "../905/713695";
 import { w5, n0 as _$$n } from "../figma_app/345997";
 import { wH, fm, KI } from "../figma_app/680166";
 import { FEditorType, mapFileTypeToEditorType, isSlidesOrWhiteboardOrDesignOrIllustration, mapEditorTypeToFileType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { A5 } from "../figma_app/707808";
+import { ShareAction } from "../figma_app/707808";
 import { q as _$$q, J as _$$J } from "../905/202542";
 import { registerModal } from "../905/102752";
 import { mK } from "../figma_app/197286";
@@ -31,16 +31,16 @@ import { m as _$$m } from "../905/701558";
 import { Y as _$$Y } from "../905/185567";
 import { atom, useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { Qw } from "../905/989992";
-import { tT as _$$tT } from "../905/663269";
+import { ResourceStatus } from "../905/663269";
 import { conditionalFeatureFlag, getInitialOptions, isStagingCluster, buildUploadUrl, isDevEnvironment, getSupportEmail } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Su, aP as _$$aP, QU, DU, bF } from "../figma_app/275462";
 import { W as _$$W } from "../905/336482";
 import { JT } from "../figma_app/173838";
 import { HW, iq as _$$iq, lg, m0 } from "../figma_app/976749";
 import { Hz, Of, Yw, Pb } from "../905/201596";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FilePublishSitePermissions, PublishedHubFileForFile } from "../figma_app/43951";
 import { td as _$$td } from "../figma_app/558805";
 import { Wl, l7, hA, ZO, NZ } from "../figma_app/88239";
@@ -54,7 +54,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { e as _$$e } from "../905/383776";
 import { A8 } from "../figma_app/617506";
 import { S as _$$S, Yn, Rh, rA as _$$rA, og } from "../figma_app/78808";
-import { CE, Xm, SA } from "../905/760074";
+import { generateUrl, isBranch, isDefaultFile } from "../905/760074";
 import { jN } from "../905/612685";
 import { EO, Ml } from "../905/691205";
 import { lD, qI } from "../figma_app/831696";
@@ -71,11 +71,11 @@ import { A as _$$A } from "../905/389851";
 import { T as _$$T } from "../905/909590";
 import { $n } from "../905/521428";
 import { X as _$$X } from "../905/999307";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { L as _$$L } from "../figma_app/288254";
 import { j as _$$j } from "../figma_app/398600";
 import { p as _$$p } from "../905/536283";
-import { DG } from "../figma_app/789";
+import { getWorkshopModeStatus } from "../figma_app/789";
 import { Cu } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
 import { Q9, M_, kA } from "../905/32091";
@@ -90,7 +90,7 @@ import { B as _$$B } from "../905/714743";
 import { Ib } from "../905/129884";
 import { Qy } from "../figma_app/146384";
 import { m as _$$m2 } from "../905/636019";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { $z } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
 import { L as _$$L2 } from "../905/92291";
@@ -156,7 +156,7 @@ import { Gv } from "../figma_app/736948";
 import { _9, J4, p8, fb, YU, Iz, lG, ET, mi } from "../figma_app/907616";
 import { m_ } from "../figma_app/209680";
 import { $ as _$$$ } from "../figma_app/995722";
-import { e6 as _$$e4 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { R9, nu as _$$nu, E4 } from "../905/144598";
 import { og as _$$og } from "../905/466026";
 import { K as _$$K3 } from "../905/443068";
@@ -229,8 +229,8 @@ import { A as _$$A11 } from "../1617/433962";
 import { A as _$$A12 } from "../1617/504853";
 import { g as _$$g } from "../905/595923";
 import { z as _$$z } from "../vendor/999105";
-import { DN, D8, C1 } from "../figma_app/12796";
-import { X$ as _$$X$, YY, No } from "../figma_app/465071";
+import { getViewerPermissionMessage, getPermissionMessageForSeenState, getPermissionLevelName } from "../figma_app/12796";
+import { useCurrentPublicPlan, useIsStarterPlan, useTeamPlanPublicInfo } from "../figma_app/465071";
 import { O as _$$O } from "../905/921963";
 import { L as _$$L4 } from "../905/857916";
 import { _ as _$$_2, S as _$$S3 } from "../figma_app/490799";
@@ -279,7 +279,7 @@ import { BI, m0 as _$$m3 } from "../figma_app/546509";
 import { Z as _$$Z2 } from "../905/116724";
 import { w as _$$w2 } from "../905/733703";
 import { l as _$$l2 } from "../905/572910";
-import { Rh as _$$Rh, oY } from "../905/485103";
+import { sendMetric, useWebLoggerTimerEffect } from "../905/485103";
 import { _P } from "../figma_app/2590";
 import { F as _$$F4 } from "../905/680873";
 import { useSprigWithSampling } from "../905/99656";
@@ -310,7 +310,7 @@ function X() {
   });
 }
 function Q(e) {
-  return "filePermissionsModalTab" in e && e.filePermissionsModalTab || A5.INVITE;
+  return "filePermissionsModalTab" in e && e.filePermissionsModalTab || ShareAction.INVITE;
 }
 function J() {
   return useSelector(e => Q(e.selectedView));
@@ -327,7 +327,7 @@ function en({
   onClick: e,
   isLoading: t
 }) {
-  let i = q5();
+  let i = selectCurrentFile();
   let r = i?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && i.publishedHubFile || null;
   let a = r ? jsx(_$$m, {}) : jsx(_$$Y, {});
   let s = r ? getI18nString("file_permissions_modal.share_as.publish.published") : getI18nString("file_permissions_modal.share_as.publish");
@@ -385,7 +385,7 @@ function eA({
     }));
     let I = d || r === _$$iO.DEV_MODE;
     let E = r === _$$iO.AUTO;
-    if (y = t ? CE(e, t, b ? "proto" : "file") : b ? qI(e.prototype_url, e.editor_type || FFileType.DESIGN) : jN({
+    if (y = t ? generateUrl(e, t, b ? "proto" : "file") : b ? qI(e.prototype_url, e.editor_type || FFileType.DESIGN) : jN({
       file: e,
       isDevHandoff: I,
       allowDefaulting: E,
@@ -547,7 +547,7 @@ function eM({
           children: renderI18nText("permissions.embed.embed_page_name_in_your_webpage", {
             pageName: jsx("span", {
               className: "embed--embedMessagePageName--LYE4z",
-              children: EJ(l, 30)
+              children: truncate(l, 30)
             })
           })
         })
@@ -707,7 +707,7 @@ function eJ({
   let o = s?.id;
   let l = t.key;
   let d = !!t.has_file_link_password;
-  let c = DG(l);
+  let c = getWorkshopModeStatus(l);
   let u = () => {
     let i = e ? w5(e) : !!t.parent_org_id;
     if (Cu({
@@ -795,7 +795,7 @@ let tt = "google_device_screenshare_modal--description--z5lBL text--fontPos11--2
 let ti = atom(!1);
 function tn(e) {
   let t = useAtomWithSubscription(ti);
-  let i = DG(e);
+  let i = getWorkshopModeStatus(e);
   return getFeatureFlags().figjam_3p_hardware_integration && (t || i.enabled);
 }
 let tr = M4.Query({
@@ -823,7 +823,7 @@ function ts(e) {
 let to = registerModal(function (e) {
   let t = tn(e.fileKey);
   let i = function (e) {
-    let t = DG(e);
+    let t = getWorkshopModeStatus(e);
     if (!t.enabled) return null;
     let i = Math.floor(Math.floor(t.until.valueOf() - new Date().valueOf()) / 6e4);
     let n = Math.floor(i / 60);
@@ -840,7 +840,7 @@ let to = registerModal(function (e) {
     ...e,
     onClose: p
   });
-  let [h, g] = IT(tr({
+  let [h, g] = setupResourceAtomHandler(tr({
     fileKey: e.fileKey
   }), {
     enabled: t
@@ -1383,7 +1383,7 @@ function ir() {
   } = function () {
     let e = !!kD();
     let t = J3();
-    let i = q5();
+    let i = selectCurrentFile();
     let n = useDispatch();
     return {
       openMakePublishFlow: async r => {
@@ -1431,7 +1431,7 @@ function is({
     let e = l7();
     let t = _$$o();
     return BrowserInfo.isIpadNative || e ? null : jsx(eL, {
-      onClick: () => t(A5.EMBED_CODE)
+      onClick: () => t(ShareAction.EMBED_CODE)
     });
   }();
   let I = function ({
@@ -1447,14 +1447,14 @@ function is({
     let d = QU();
     let c = _$$W(e.editor_type);
     let u = function (e, t) {
-      let i = Rs(FilePublishSitePermissions, {
+      let i = useSubscription(FilePublishSitePermissions, {
         fileKey: e
       }, {
         enabled: null != t && [FFileType.FIGMAKE, FFileType.SITES].includes(t)
       });
       return Qw.useTransform(i, e => {
         let t = e.file?.canPublishSiteWithReasons;
-        return null != t && t.status === _$$tT.Loaded && t.data.result;
+        return null != t && t.status === ResourceStatus.Loaded && t.data.result;
       }).data ?? !1;
     }(e.key, e.editor_type);
     let p = useAtomWithSubscription(_$$td);
@@ -1479,7 +1479,7 @@ function is({
     })();
     return e.canEdit && r && !a && !getInitialOptions().integration_host && !BrowserInfo.isIpadNative && A ? jsx(en, {
       onClick: async () => {
-        (await g.doSetup()) && s(A5.PUBLISH_COMMUNITY);
+        (await g.doSetup()) && s(ShareAction.PUBLISH_COMMUNITY);
       },
       isLoading: g.inProgress
     }) : null;
@@ -1495,7 +1495,7 @@ function is({
     return t9({
       file: e
     }) ? jsx(ie, {
-      onClick: () => t(A5.PUBLISH_TEMPLATE)
+      onClick: () => t(ShareAction.PUBLISH_TEMPLATE)
     }) : null;
   }({
     file: e
@@ -1648,9 +1648,9 @@ function is({
         data: {
           fileKey: o
         }
-      })) : u(A5.SHARE_GOOGLE_DEVICE_DISCLAIMER);
+      })) : u(ShareAction.SHARE_GOOGLE_DEVICE_DISCLAIMER);
     }, [o, c, l, p, d, u]);
-    let g = q5();
+    let g = selectCurrentFile();
     let f = !!g && Qy(g);
     let _ = M_({
       editorType: l,
@@ -1811,7 +1811,7 @@ function io({
   planTier: d
 }) {
   var c;
-  return (c = A5.INVITE, useSelector(e => Q(e.selectedView) === c)) ? jsx(is, {
+  return (c = ShareAction.INVITE, useSelector(e => Q(e.selectedView) === c)) ? jsx(is, {
     file: e,
     repo: t,
     org: r,
@@ -2058,7 +2058,7 @@ function iG({
     isInDesignPrototype: t,
     isInSlidesPresentation: i
   }) {
-    return t ? e.filter(e => e.level === _$$e4.OWNER || e.level === _$$e4.VIEW_PROTOTYPES) : i ? e : e.filter(e => e.level !== _$$e4.VIEW_PROTOTYPES);
+    return t ? e.filter(e => e.level === AccessLevelEnum.OWNER || e.level === AccessLevelEnum.VIEW_PROTOTYPES) : i ? e : e.filter(e => e.level !== AccessLevelEnum.VIEW_PROTOTYPES);
   }({
     allFileRoles: e,
     isInDesignPrototype: i,
@@ -2522,7 +2522,7 @@ function na({
   let E = mapFileTypeToEditorType(e.editor_type);
   let x = t ? t.canEdit : e.hasEditRole;
   let S = !!(i && i.bigma_enabled);
-  let w = Xm(e);
+  let w = isBranch(e);
   let C = w5(o);
   let T = iU({
     file: e,
@@ -2673,7 +2673,7 @@ function na({
     g("File Share Settings Updated", e);
   };
   let ey = () => {
-    b(A5.SHARE_SETTINGS);
+    b(ShareAction.SHARE_SETTINGS);
   };
   let eb = useCallback(() => {
     let e = d?.public_link_controls_max_expiration;
@@ -3108,7 +3108,7 @@ let nR = registerModal(function () {
   let e = useDispatch();
   let t = useCallback(() => e(hideModal()), [e]);
   let i = useSelector(e => e.currentUserOrgId);
-  let [s] = IT(Eh.OrgAdminsQuery({
+  let [s] = setupResourceAtomHandler(Eh.OrgAdminsQuery({
     orgId: i
   }), {
     enabled: !!i
@@ -3147,7 +3147,7 @@ let nR = registerModal(function () {
 }, "AccessNeededToPublishInOrgModal");
 let nN = registerModal(function () {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = useCallback(() => e(hideModal()), [e]);
   let s = useCallback(() => {
     t?.key && (i(), e(showModalConditional({
@@ -3580,7 +3580,7 @@ function re({
     onSubmit: a,
     onCancel: () => {
       i(M3({
-        view: A5.INVITE
+        view: ShareAction.INVITE
       }));
       i(popModalStack());
     },
@@ -3990,14 +3990,14 @@ function rn(e) {
   let t = useDispatch();
   let i = selectUser();
   let s = useSelector(e => e.modalShown?.type === jS);
-  let o = q5();
+  let o = selectCurrentFile();
   let l = o?.trackTags?.isTemplate || !1;
   let d = useSelector(e => o ? e.figFilePublishedAsHubFile[o.key] : void 0);
   let {
     canPublishAsHubFile,
     reason
   } = Of(o);
-  let p = Rs(PublishedHubFileForFile({
+  let p = useSubscription(PublishedHubFileForFile({
     fileKey: o?.key ?? ""
   }), {
     enabled: !!o
@@ -4152,7 +4152,7 @@ function rg({
   });
 }
 function rb() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = selectCurrentUser();
   let i = J();
   let s = _$$o();
@@ -4197,10 +4197,10 @@ function rb() {
   let T = Hz({
     figFileKey: e?.key
   });
-  return E === kN.NOT_ENABLED ? jsx(rn, {}) : e && b ? (i === A5.PUBLISH_TEMPLATE || "template" === l) && u ? jsx(rg, {
+  return E === kN.NOT_ENABLED ? jsx(rn, {}) : e && b ? (i === ShareAction.PUBLISH_TEMPLATE || "template" === l) && u ? jsx(rg, {
     file: e,
     template: u
-  }) : i === A5.PUBLISH_COMMUNITY || "community" === l ? jsx(rn, {}) : jsx(fu, {
+  }) : i === ShareAction.PUBLISH_COMMUNITY || "community" === l ? jsx(rn, {}) : jsx(fu, {
     name: _$$e5.SHARE_MODAL_PUBLISH_TAB,
     children: jsxs("div", {
       className: "publish_tab--publishTab--FVuph",
@@ -4225,7 +4225,7 @@ function rb() {
             }
             C();
             d("template");
-            s(A5.PUBLISH_TEMPLATE);
+            s(ShareAction.PUBLISH_TEMPLATE);
           }
         }
       }), jsx(rc, {
@@ -4265,7 +4265,7 @@ function rb() {
               }));
               return;
             }
-            (await T.doSetup()) && (d("community"), s(A5.PUBLISH_COMMUNITY));
+            (await T.doSetup()) && (d("community"), s(ShareAction.PUBLISH_COMMUNITY));
           }
         }
       })]
@@ -4365,8 +4365,8 @@ function rR({
   forceExpanded: l = !1
 }) {
   let d = ee(e);
-  let c = _$$X$("RoleRows");
-  let u = YY(c).unwrapOr(!1);
+  let c = useCurrentPublicPlan("RoleRows");
+  let u = useIsStarterPlan(c).unwrapOr(!1);
   let p = selectUser();
   if (!getFeatureFlags().file_share_modal_scroll && !l && a.length > 3) return jsx(KZ, {
     roles: a
@@ -4380,7 +4380,7 @@ function rR({
     isPrototypeRole: d,
     isStarterTier: u,
     orgDomains: r?.org_domains,
-    readOnlyOverrideWarningMessage: DN({
+    readOnlyOverrideWarningMessage: getViewerPermissionMessage({
       role: a,
       file: e,
       folder: i,
@@ -4619,7 +4619,7 @@ function rZ(e) {
       text: jsx("div", {
         children: renderI18nText("file_permissions_modal.external_teams_in_connected_projects")
       }),
-      onClick: () => t(A5.CONNECTED_PROJECT_USERS),
+      onClick: () => t(ShareAction.CONNECTED_PROJECT_USERS),
       rightSideElement: jsx("div", {
         children: renderI18nText("folder_access_row.num_people", {
           num: i
@@ -4767,7 +4767,7 @@ function r5(e) {
         [bU]: !r
       }),
       disabled: !r,
-      onClick: () => i(A5.FOLDER_MEMBERS),
+      onClick: () => i(ShareAction.FOLDER_MEMBERS),
       htmlAttributes: {
         "data-testid": "folder-members-row"
       },
@@ -4888,7 +4888,7 @@ function al() {
   });
 }
 function ad(e) {
-  let t = DG(e.fileKey);
+  let t = getWorkshopModeStatus(e.fileKey);
   let i = _$$o();
   let r = e.isBranch || t && t.enabled || !e.hasEditRole || e.isPrototype && e.disablePrototypeOrPresentationAudience;
   let a = e.isBranch || e.isPrototype;
@@ -4904,7 +4904,7 @@ function ad(e) {
         [Jt]: !r
       }),
       disabled: r,
-      onClick: () => i(A5.SHARE_SETTINGS),
+      onClick: () => i(ShareAction.SHARE_SETTINGS),
       htmlAttributes: {
         "data-testid": "file-audience-row"
       },
@@ -4989,7 +4989,7 @@ function ad(e) {
   });
 }
 function ac(e) {
-  let t = No();
+  let t = useTeamPlanPublicInfo();
   return !("design" !== e.editor_type || t.data && [FPlanNameType.STARTER].includes(t.data.tier)) && (!!e.canEdit || !e.isDraftFileLG);
 }
 function au({
@@ -5030,7 +5030,7 @@ function au({
     expiresAt: f ?? void 0,
     fileKey: e.key,
     hasEditRole: t ? t.canEdit : e.hasEditRole,
-    isBranch: Xm(e),
+    isBranch: isBranch(e),
     isInDraftsFolder: e.isDraftFileLG,
     isPrototype: s,
     org: i || void 0,
@@ -5069,11 +5069,11 @@ function aA(e) {
       let n = e.seenState.user_id === t.id;
       let r = e.isOwnerOfResource;
       (r || n) && (i = !0);
-      return _$$nu(r, n, i, e.canMakeAdmin, !1, _$$e4.VIEWER, void 0);
+      return _$$nu(r, n, i, e.canMakeAdmin, !1, AccessLevelEnum.VIEWER, void 0);
     },
     id: `seen-state-${e.seenState.id}`,
     isBranchFile: !1,
-    level: _$$e4.VIEWER,
+    level: AccessLevelEnum.VIEWER,
     onChangeLevel: t => {
       let i = () => {
         r(hw({
@@ -5083,7 +5083,7 @@ function aA(e) {
           isStarterTier: e.isStarterTier
         }));
       };
-      t === _$$e4.OWNER ? r(showModalHandler({
+      t === AccessLevelEnum.OWNER ? r(showModalHandler({
         type: _$$b5,
         data: {
           resourceType: FResourceCategoryType.FILE,
@@ -5127,8 +5127,8 @@ function ay({
   seenStates: r,
   virtualItems: a
 }) {
-  let s = _$$X$("UserSeenStateRows");
-  let o = YY(s).unwrapOr(!1);
+  let s = useCurrentPublicPlan("UserSeenStateRows");
+  let o = useIsStarterPlan(s).unwrapOr(!1);
   let l = selectUser();
   let d = (r, a) => jsx(aA, {
     canEditRole: QZ(e.hasEditRole, e, i),
@@ -5141,7 +5141,7 @@ function ay({
     },
     isOwnerOfResource: e.isOwner,
     isStarterTier: o,
-    readOnlyOverrideWarningMessage: D8({
+    readOnlyOverrideWarningMessage: getPermissionMessageForSeenState({
       file: e,
       folder: t,
       seenState: r,
@@ -5240,7 +5240,7 @@ function ab({
       folderAccessEnabled: e.folderAccessEnabled,
       folderName: i?.name || "",
       hasEditRole: e.hasEditRole,
-      isBranch: Xm(e),
+      isBranch: isBranch(e),
       isPrototype: p,
       numMembers: c,
       teamAccess: i?.team_access || "",
@@ -5299,7 +5299,7 @@ function aI() {
   });
 }
 let aw = {
-  inviteLevel: _$$e4.NONE,
+  inviteLevel: AccessLevelEnum.NONE,
   changeInviteLevel: lQ,
   inviteLevelOptions: []
 };
@@ -5360,7 +5360,7 @@ function aV({
   repo: e,
   file: t
 }) {
-  return e && SA(t, e) ? {
+  return e && isDefaultFile(t, e) ? {
     resourceType: FResourceCategoryType.FILE_REPO,
     resourceIdOrKey: e.id
   } : {
@@ -5448,7 +5448,7 @@ function aq({
   });
   return jsx(aZ, {
     ...s,
-    inviteLevel: _$$e4.NONE,
+    inviteLevel: AccessLevelEnum.NONE,
     file: e,
     org: i,
     buttonText: getI18nString("file_permissions_modal.send"),
@@ -5489,10 +5489,10 @@ function a$({
     let u = useDispatch();
     let p = HW();
     let g = $Y(e);
-    let f = _$$X$("useHandleSendInvitesSubmit");
-    let _ = YY(f).unwrapOr(!1);
+    let f = useCurrentPublicPlan("useHandleSendInvitesSubmit");
+    let _ = useIsStarterPlan(f).unwrapOr(!1);
     let y = tv(_ && p);
-    y() && (c = _$$e4.VIEWER);
+    y() && (c = AccessLevelEnum.VIEWER);
     let b = function ({
       file: e,
       repo: t,
@@ -5506,7 +5506,7 @@ function a$({
       let [c, u] = useAtomValueAndSetter(_$$H2);
       let p = _$$P().usersByEmail;
       let g = selectUser();
-      let f = o || s === _$$e4.VIEW_PROTOTYPES;
+      let f = o || s === AccessLevelEnum.VIEW_PROTOTYPES;
       let _ = aB({
         isPrototypeInvite: f
       });
@@ -5614,7 +5614,7 @@ function a$({
           return;
         }
       }
-      c === _$$e4.EDITOR && l && !i && _ ? _$$h(e, t, u, {
+      c === AccessLevelEnum.EDITOR && l && !i && _ ? _$$h(e, t, u, {
         handlesVisualBell: !0,
         callback: e => {
           b(r, e);
@@ -5632,7 +5632,7 @@ function a$({
     inviteLevel
   });
   if (0 === inviteLevelOptions.length) return null;
-  let y = inviteLevelOptions.length > 1 || inviteLevelOptions[0] !== _$$e4.VIEW_PROTOTYPES;
+  let y = inviteLevelOptions.length > 1 || inviteLevelOptions[0] !== AccessLevelEnum.VIEW_PROTOTYPES;
   return jsx(aZ, {
     ...c,
     file: e,
@@ -5645,7 +5645,7 @@ function a$({
     dropdownProps: y ? {
       inviteLevel,
       dropdownKey: "permissions-invite-dropdown",
-      getSelectText: C1,
+      getSelectText: getPermissionLevelName,
       onInviteLevelChange: changeInviteLevel,
       options: inviteLevelOptions
     } : {}
@@ -5712,7 +5712,7 @@ function aZ({
         placeholderText: getI18nString("team_creation.add_a_name_or_email"),
         searchResultToken: getFeatureFlags().user_groups ? b : y,
         shouldAutoFocus: A,
-        tokenClassName: o === _$$e4.VIEW_PROTOTYPES ? Ed : void 0,
+        tokenClassName: o === AccessLevelEnum.VIEW_PROTOTYPES ? Ed : void 0,
         validateToken: v,
         validateTokensAsEmail: !0,
         ...u
@@ -5757,8 +5757,8 @@ function a0({
   activeProjectConnection: I,
   planRecordId: E
 }) {
-  let x = _$$X$("InviteTabLoaded");
-  let S = YY(x).unwrapOr(!1);
+  let x = useCurrentPublicPlan("InviteTabLoaded");
+  let S = useIsStarterPlan(x).unwrapOr(!1);
   let w = useDispatch();
   let C = selectUser();
   let {
@@ -5785,7 +5785,7 @@ function a0({
     isInDraftsFolder: l,
     isStarterTier: S
   });
-  let D = m0() ? FProductAccessType.DEV_MODE : wR(editor_type);
+  let D = m0() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(editor_type);
   let {
     getHasProvisionalAccess
   } = wH({
@@ -5897,10 +5897,10 @@ function a5({
   let k = HW();
   let R = tv(S === FPlanNameType.STARTER && k);
   switch (C) {
-    case A5.PUBLISH_COMMUNITY:
-    case A5.PUBLISH_TEMPLATE:
+    case ShareAction.PUBLISH_COMMUNITY:
+    case ShareAction.PUBLISH_TEMPLATE:
       return jsx(rb, {});
-    case A5.INVITE:
+    case ShareAction.INVITE:
       return jsxs(Fragment, {
         children: [R() && jsx(a2, {
           file: e,
@@ -5926,7 +5926,7 @@ function a5({
           team: r
         })]
       });
-    case A5.COLLABORATORS:
+    case ShareAction.COLLABORATORS:
       return jsx(rP, {
         file: e,
         repo: t,
@@ -5935,12 +5935,12 @@ function a5({
         fileRoles: f,
         isInDraftsFolder: _
       });
-    case A5.EMBED_CODE:
+    case ShareAction.EMBED_CODE:
       return jsx(eM, {
         file: e,
         repo: t
       });
-    case A5.SHARE_SETTINGS:
+    case ShareAction.SHARE_SETTINGS:
       return jsx(na, {
         file: e,
         repo: t,
@@ -5952,14 +5952,14 @@ function a5({
         fileRoles: f,
         currentUser: u
       });
-    case A5.FOLDER_MEMBERS:
+    case ShareAction.FOLDER_MEMBERS:
       return jsx(iy, {
         folderRoles: i,
         team: r,
         folder: s,
         fileName: e.name
       });
-    case A5.SHARE_GOOGLE_DEVICE_DISCLAIMER:
+    case ShareAction.SHARE_GOOGLE_DEVICE_DISCLAIMER:
       return jsx(nc, {
         onSubmit: () => {
           T(showModalHandler({
@@ -5970,18 +5970,18 @@ function a5({
           }));
         }
       });
-    case A5.SHARE_TO_GOOGLE_CLASSROOM:
+    case ShareAction.SHARE_TO_GOOGLE_CLASSROOM:
       return jsx(Ku, {
         closeModal: () => m(),
         linkAccess: e.link_access
       });
-    case A5.CONNECTED_PROJECT_USERS:
+    case ShareAction.CONNECTED_PROJECT_USERS:
       return jsx(im, {
         org: l,
         team: r,
         resourceConnectionSharingGroupUsers: E ?? []
       });
-    case A5.UPDATE_SEAT:
+    case ShareAction.UPDATE_SEAT:
       return jsx(_$$g, {
         editorType: e.editor_type,
         org: l,
@@ -6041,12 +6041,12 @@ function a8({
   let a = J();
   let s = _$$L();
   switch (a) {
-    case A5.INVITE:
+    case ShareAction.INVITE:
       return jsx(a9, {
         file: e,
         repo: i
       });
-    case A5.FOLDER_MEMBERS:
+    case ShareAction.FOLDER_MEMBERS:
       return jsx(_$$w2, {
         title: jsx("div", {
           className: Bd,
@@ -6113,7 +6113,7 @@ function a9({
         selectionName: e
       }) : getI18nString("file_permissions_modal.share_to_selection_no_name");
     }
-    return s ? getI18nString("file_permissions_modal.share_in_dev_mode") : t && Xm(e) ? getI18nString("file_permissions_modal.share_this_branch") : a ? getI18nString("file_permissions_modal.share_this_prototype") : i === FEditorType.Whiteboard ? getI18nString("file_permissions_modal.share_this_board") : getI18nString("file_permissions_modal.share_this_file");
+    return s ? getI18nString("file_permissions_modal.share_in_dev_mode") : t && isBranch(e) ? getI18nString("file_permissions_modal.share_this_branch") : a ? getI18nString("file_permissions_modal.share_this_prototype") : i === FEditorType.Whiteboard ? getI18nString("file_permissions_modal.share_this_board") : getI18nString("file_permissions_modal.share_this_file");
   }({
     file: e,
     repo: t
@@ -6124,7 +6124,7 @@ function a9({
     children: [jsx("div", {
       className: DA,
       children: jsx("p", {
-        children: EJ(d, 50)
+        children: truncate(d, 50)
       })
     }), jsx("div", {
       className: IE,
@@ -6179,33 +6179,33 @@ function st({
   file: i
 }) {
   switch (e) {
-    case A5.PUBLISH_COMMUNITY:
+    case ShareAction.PUBLISH_COMMUNITY:
       return jsx(si, {});
-    case A5.PUBLISH_TEMPLATE:
+    case ShareAction.PUBLISH_TEMPLATE:
       return jsx(sn, {});
-    case A5.COLLABORATORS:
+    case ShareAction.COLLABORATORS:
       return jsx(sr, {
         fileRoles: t,
         file: i
       });
-    case A5.EMBED_CODE:
+    case ShareAction.EMBED_CODE:
       return renderI18nText("permissions.embed.copy_public_embed_code");
-    case A5.SHARE_SETTINGS:
+    case ShareAction.SHARE_SETTINGS:
       return renderI18nText("file_permissions_modal.share_as.share_settings");
-    case A5.SHARE_GOOGLE_DEVICE_DISCLAIMER:
+    case ShareAction.SHARE_GOOGLE_DEVICE_DISCLAIMER:
       return renderI18nText("file_permissions_modal.share_as.google_device");
-    case A5.SHARE_TO_GOOGLE_CLASSROOM:
+    case ShareAction.SHARE_TO_GOOGLE_CLASSROOM:
       return renderI18nText("file_permissions_modal.google_classroom_modal.title");
-    case A5.CONNECTED_PROJECT_USERS:
+    case ShareAction.CONNECTED_PROJECT_USERS:
       return renderI18nText("file_permissions_modal.external_teams_in_connected_projects");
-    case A5.UPDATE_SEAT:
+    case ShareAction.UPDATE_SEAT:
       return renderI18nText("file_permissions_modal.update_seat_tab.title");
     default:
       throwTypeError(e);
   }
 }
 function si() {
-  let e = q5();
+  let e = selectCurrentFile();
   return e?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && e.publishedHubFile ? renderI18nText("publishing.community.header") : renderI18nText("file_permissions_modal.tab.publish");
 }
 function sn() {
@@ -6245,8 +6245,8 @@ function su({
     team: i,
     isInDraftsFolder: n
   }) {
-    let a = _$$X$("useInitializeInviteLevelContext");
-    let s = YY(a).unwrapOr(!1);
+    let a = useCurrentPublicPlan("useInitializeInviteLevelContext");
+    let s = useIsStarterPlan(a).unwrapOr(!1);
     let o = ee(e);
     let l = ac(e);
     let d = et(e);
@@ -6263,10 +6263,10 @@ function su({
       canSharePrototype: n,
       shouldShowPrototypeSharingUpsells: r
     }) {
-      if (i) return n || r ? [_$$e4.VIEW_PROTOTYPES] : [];
+      if (i) return n || r ? [AccessLevelEnum.VIEW_PROTOTYPES] : [];
       let a = [];
-      (e.isOwner || t) && a.push(_$$e4.EDITOR);
-      e.hasViewRole && a.push(_$$e4.VIEWER);
+      (e.isOwner || t) && a.push(AccessLevelEnum.EDITOR);
+      e.hasViewRole && a.push(AccessLevelEnum.VIEWER);
       return a;
     }({
       file: e,
@@ -6282,9 +6282,9 @@ function su({
       canShareEditRole: n,
       isInSlidesPresentation: r
     }) {
-      if (0 === e.length) return _$$e4.NONE;
+      if (0 === e.length) return AccessLevelEnum.NONE;
       if (1 === e.length) return e[0];
-      let a = r ? _$$e4.VIEWER : "whiteboard" === t.editor_type ? _$$e4.EDITOR : t.team_id && w5(i) ? _$$e4.VIEWER : n ? _$$e4.EDITOR : _$$e4.VIEWER;
+      let a = r ? AccessLevelEnum.VIEWER : "whiteboard" === t.editor_type ? AccessLevelEnum.EDITOR : t.team_id && w5(i) ? AccessLevelEnum.VIEWER : n ? AccessLevelEnum.EDITOR : AccessLevelEnum.VIEWER;
       return e.includes(a) ? a : e[0];
     }({
       inviteLevelOptions: p,
@@ -6308,7 +6308,7 @@ function su({
       g(t);
     }, [e.key, p]);
     _$$h2(() => {
-      _$$Rh("file_permissions_modal_initial_invite_level", {
+      sendMetric("file_permissions_modal_initial_invite_level", {
         invite_level: h,
         editor_type: e.editor_type,
         is_free_user_only: s
@@ -6376,7 +6376,7 @@ function sp({
     }(e);
     return useCallback(() => {
       t(M3({
-        view: A5.INVITE
+        view: ShareAction.INVITE
       }));
       t(hideModal());
       t(cL());
@@ -6402,7 +6402,7 @@ function sp({
   mK(file.key, file.mainFileLinkExpirationConfig);
   useEffect(() => {
     let e = () => W(M3({
-      view: A5.INVITE
+      view: ShareAction.INVITE
     }));
     e();
     return () => {
@@ -6429,7 +6429,7 @@ function sp({
     teamUser: K
   });
   let ee = getIsUpgradeHandlerLoading();
-  let et = wR(mapEditorTypeToFileType(editorType));
+  let et = getProductAccessTypeOrDefault(mapEditorTypeToFileType(editorType));
   let ei = getUpgradeEligibility(et, !J);
   let en = getUpgradePathway(et);
   let [er, ea] = useState(!1);
@@ -6537,7 +6537,7 @@ export let $$sm0 = registerModal(function ({
     useEffect(() => {
       "loaded" === e.status && null === e.data.file && t(hideModal());
     }, [e, t]);
-  }(c), s = !!d && "loaded" === c.status, oY(s, e => {
+  }(c), s = !!d && "loaded" === c.status, useWebLoggerTimerEffect(s, e => {
     trackEventAnalytics("share_modal_latency", {
       latency_ms: e,
       modal_type: "file",

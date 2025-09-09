@@ -6,7 +6,7 @@ import l from "../vendor/656470";
 import { analyticsEventManager } from "../905/449184";
 import { n1 } from "../figma_app/657017";
 import { Fl } from "../figma_app/236178";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { LH } from "../905/872904";
 import { je, fi } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
@@ -83,7 +83,7 @@ var d = l;
     let e = ol() ?? void 0;
     let t = LH() ?? void 0;
     return {
-      fileKey: tS() ?? void 0,
+      fileKey: useCurrentFileKey() ?? void 0,
       teamId: e?.id,
       workspaceId: e?.workspace_id ?? void 0,
       orgId: t

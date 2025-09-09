@@ -11,7 +11,7 @@ import { av } from "../figma_app/316316";
 import { BK } from "../905/848862";
 import { w as _$$w } from "../figma_app/883622";
 import { j } from "../905/834956";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { zt, YT, Oz, hP, He, Bs, vc, Xk } from "../figma_app/84580";
 import { x1, xm, U3, BP } from "../897/934363";
 var s = l;
@@ -39,7 +39,7 @@ export function $$v1(e) {
   }, [e.skipPaywall, shouldShowAdvancedPrototypingPaywall, showAdvancedPrototypinglMultipleActionsModal, toggle]);
   let w = YT() === Oz.TWO_COL;
   let k = hP();
-  let P = cJ();
+  let P = useIsFullscreenSitesView();
   let O = He({
     showVideoActions: k,
     isNestedInConditional: e.isNestedInConditional,

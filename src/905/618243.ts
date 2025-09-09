@@ -2,7 +2,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal, showModalHandler } from "../905/156213";
 import { d1 } from "../905/766303";
-import { Z as _$$Z } from "../905/515860";
+import { resolveTeamId } from "../905/515860";
 import { canAdminTeam } from "../figma_app/642025";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
@@ -15,7 +15,7 @@ import { p as _$$p } from "../905/185998";
 import { k as _$$k } from "../905/443820";
 import { $n } from "../905/521428";
 import { Uz } from "../905/63728";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -45,7 +45,7 @@ function N(e) {
   let [i, r] = useState("");
   let [s, o] = useState(!1);
   let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.nodeId : void 0);
-  let R = Rs(FileCanEdit, {
+  let R = useSubscription(FileCanEdit, {
     key: e.sourceFileKey
   });
   let N = r => {
@@ -509,7 +509,7 @@ let $$Q1 = createOptimistThunk((e, t, {
   liveStore: i
 }) => {
   let n = e.getState();
-  let r = _$$Z(n);
+  let r = resolveTeamId(n);
   let s = canAdminTeam(r, n);
   let d = n.teams[r];
   d && e.dispatch(showModalHandler({

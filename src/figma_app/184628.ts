@@ -34,7 +34,7 @@ import { _H } from "../figma_app/408883";
 import { p as _$$p2, h as _$$h } from "../905/397119";
 import { Wn } from "../figma_app/114522";
 import { b_, OV, pO } from "../figma_app/302802";
-import { aI, Oc } from "../figma_app/552876";
+import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { O as _$$O } from "../905/273186";
 import { d as _$$d } from "../905/977713";
 import { C as _$$C } from "../905/660687";
@@ -196,8 +196,8 @@ export function $$X1({
   let ed = useCallback(() => C ? e?.collaborativeSourceCode?.computeCurrentText() : e?.sourceCode, [e, C]);
   let ec = uQ();
   let eu = getFeatureFlags().sites || getFeatureFlags().sts_code;
-  let ep = aI();
-  let e_ = Oc();
+  let ep = isFigmakeSitesEnabled();
+  let e_ = useIsSelectedFigmakeFullscreen();
   let eh = Wn(S);
   if (!ep && !eu || !ed) return null;
   let em = C ? x?.handle : `non-collab-${y}-${P}`;
@@ -343,7 +343,7 @@ export function $$Q0({
     if (e) try {
       d.setText(e);
     } catch (t) {
-      let e = aI() ? lV.FIGMAKE : lV.CODE_IN_SITES;
+      let e = isFigmakeSitesEnabled() ? lV.FIGMAKE : lV.CODE_IN_SITES;
       Ho(t, e, a5.EDIT_LOCALLY);
     }
   }, [d, e]);

@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { K } from "../905/135526";
-import { ze, As } from "../figma_app/516028";
+import { openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
 import { Q } from "../905/717951";
 export function $$g0(e) {
   let {
@@ -17,8 +17,8 @@ export function $$g0(e) {
   } = e;
   let g = useDispatch();
   let f = useSelector(e => e?.selectedView?.view === "fullscreen" && !e.mirror.appModel.showUi);
-  let _ = useAtomWithSubscription(ze);
-  let A = useAtomWithSubscription(As);
+  let _ = useAtomWithSubscription(openFileKeyAtom);
+  let A = useAtomWithSubscription(openFileTeamIdAtom);
   let y = useMemo(() => _ ? {
     fileTeamId: A,
     fileKey: _

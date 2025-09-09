@@ -11,7 +11,7 @@ import { xr } from "../figma_app/314264";
 import { SS, d as _$$d } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { rq } from "../905/351260";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { G } from "../figma_app/66216";
 import { createOptimistThunk } from "../905/350402";
 import { bE as _$$bE } from "../905/98702";
@@ -117,7 +117,7 @@ let $$w11 = createOptimistThunk((e, t) => {
         emailsToExclude: n ? new Set([n.email]) : void 0,
         resourceType: FResourceCategoryType.FOLDER,
         resourceIdOrKey: r.id,
-        level: t.inviteLevel || e6.VIEWER,
+        level: t.inviteLevel || AccessLevelEnum.VIEWER,
         source: "new_project_creation_modal",
         teamId: t.teamId
       }));

@@ -10,7 +10,7 @@ import { j7 } from "../905/929976";
 import { _ as _$$_ } from "../905/793009";
 import { Cu } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { a6 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { oh, mC } from "../905/18797";
@@ -37,7 +37,7 @@ export function $$A3(e) {
   let b = mC(h);
   let I = useSelector(e => e.hubFiles);
   let S = useSelector(e => e.communityHub.shelves[p]);
-  let v = tS();
+  let v = useCurrentFileKey();
   let A = getInitialOptions().user_data?.id;
   let [x, N] = useState("");
   let [C, w] = useState([]);

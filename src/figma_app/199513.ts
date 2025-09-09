@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { z as _$$z } from "../905/239603";
 import { WB } from "../905/761735";
-import { Jl } from "../figma_app/566371";
+import { createAtomSetter } from "../figma_app/566371";
 import { getRequest, XHR } from "../905/910117";
 import { Q, s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -22,7 +22,7 @@ import { uo as _$$uo } from "../905/98702";
 import { xr } from "../figma_app/314264";
 import { F as _$$F2 } from "../905/224";
 import { SS } from "../figma_app/528509";
-import { Ws } from "../905/628874";
+import { convertTeamToRaw } from "../905/628874";
 import { FFolderType } from "../figma_app/191312";
 import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
 import { M4, IT } from "../905/713695";
@@ -34,9 +34,9 @@ import { vL } from "../905/652992";
 import { fileEntityModel } from "../905/806985";
 import { lH } from "../905/316062";
 import { z as _$$z2 } from "../905/954314";
-import { an } from "../905/557142";
-import { Ft } from "../figma_app/707808";
-import { ZN } from "../figma_app/630077";
+import { AccessSchema } from "../905/557142";
+import { EntityType } from "../figma_app/707808";
+import { fileActionEnum } from "../figma_app/630077";
 import { W as _$$W } from "../905/522628";
 import { $ as _$$$ } from "../905/834575";
 import { z as _$$z3 } from "../905/40865";
@@ -148,7 +148,7 @@ let q = _$$z.object({
   folder: lH.nullable(),
   files: _$$z.array(fileEntityModel),
   repos: _$$z.array(_$$z2),
-  roles: _$$z.array(an)
+  roles: _$$z.array(AccessSchema)
 });
 let $$J0 = M4.PaginatedQuery({
   fetch: async (e, {
@@ -265,7 +265,7 @@ let $$Z10 = createOptimistThunk(async (e, {
     } catch (r) {
       404 === r.status || 403 === r.status ? e.dispatch(_$$sf({
         view: "resourceUnavailable",
-        resourceType: Ft.PROJECT
+        resourceType: EntityType.PROJECT
       })) : r.status >= 400 && r.status < 500 ? e.dispatch(Kc({
         folderId: t,
         state: "loaded"
@@ -491,7 +491,7 @@ let $$eo13 = createOptimistAction("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
 let $$el3 = createOptimistThunk(async (e, t) => {
   let r = t.folder;
   let n = t.team;
-  let i = Ws(n);
+  let i = convertTeamToRaw(n);
   if (r.inviteOnlyAt || r.viewOnlyAt) {
     e.dispatch(showModalHandler({
       type: _$$z3,
@@ -512,7 +512,7 @@ let $$el3 = createOptimistThunk(async (e, t) => {
       data: {
         team: i,
         resource: vL.FOLDER,
-        action: ZN.MOVE_FOLDER,
+        action: fileActionEnum.MOVE_FOLDER,
         currentPlan: _$$F2.Plan.STARTER,
         upsellPlan: _$$F2.Plan.PRO,
         editorType: null,
@@ -528,7 +528,7 @@ let $$el3 = createOptimistThunk(async (e, t) => {
         folder: r,
         destinationTeam: i,
         onConfirm: () => {
-          Jl(ed)({
+          createAtomSetter(ed)({
             folder: r,
             team: i
           });
@@ -537,7 +537,7 @@ let $$el3 = createOptimistThunk(async (e, t) => {
     }));
     return;
   }
-  Jl(ed)({
+  createAtomSetter(ed)({
     folder: r,
     team: i
   });
@@ -611,7 +611,7 @@ let $$ec6 = createOptimistThunk((e, t) => {
       data: {
         team: s,
         resource: vL.FOLDER,
-        action: ZN.CREATE_FOLDER,
+        action: fileActionEnum.CREATE_FOLDER,
         currentPlan: _$$F2.Plan.STARTER,
         upsellPlan: _$$F2.Plan.PRO,
         editorType: null

@@ -9,7 +9,7 @@ import { ZU } from "../figma_app/986347";
 import { U } from "../figma_app/427950";
 import { throwTypeError } from "../figma_app/465776";
 import { generateRecordingKey } from "../figma_app/878298";
-import { uc } from "../figma_app/930338";
+import { camelToSnake } from "../figma_app/930338";
 import { QE } from "../figma_app/914216";
 import { F } from "../figma_app/127204";
 import { R } from "../figma_app/360122";
@@ -21,7 +21,7 @@ function f({
       return jsx(E, {
         name: "selection_actions_button",
         alsoTrack: () => ({
-          layerButtonAction: `open_flyout_${uc(e.dropdownKey)}`
+          layerButtonAction: `open_flyout_${camelToSnake(e.dropdownKey)}`
         }),
         children: jsx(F, {
           flyoutConfig: e,
@@ -32,7 +32,7 @@ function f({
       return jsx(E, {
         name: "selection_actions_button",
         alsoTrack: () => ({
-          layerButtonAction: `${uc(e.action)}`
+          layerButtonAction: `${camelToSnake(e.action)}`
         }),
         children: jsx(QE, {
           item: e,
@@ -48,7 +48,7 @@ function f({
       return jsx(E, {
         name: "selection_actions_button",
         alsoTrack: () => ({
-          layerButtonAction: `open_submenu_${uc(e.getTitle())}`
+          layerButtonAction: `open_submenu_${camelToSnake(e.getTitle())}`
         }),
         children: jsx(QE, {
           item: e,

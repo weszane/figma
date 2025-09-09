@@ -17,8 +17,8 @@ import { tI } from "../figma_app/599327";
 import { hideSpecificModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { ud } from "../905/513035";
-import { q5 } from "../figma_app/516028";
+import { ProductAccessTypeEnum } from "../905/513035";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { w as _$$w } from "../905/281010";
 import { registerModal } from "../905/102752";
@@ -58,31 +58,31 @@ function N(e) {
   });
 }
 let P = {
-  [ud.COLLABORATOR]: "whiteboard",
-  [ud.DEVELOPER]: "dev-handoff",
-  [ud.EXPERT]: "design",
-  [ud.CONTENT]: "cooper"
+  [ProductAccessTypeEnum.COLLABORATOR]: "whiteboard",
+  [ProductAccessTypeEnum.DEVELOPER]: "dev-handoff",
+  [ProductAccessTypeEnum.EXPERT]: "design",
+  [ProductAccessTypeEnum.CONTENT]: "cooper"
 };
 let O = (e, t) => {
   if (e) switch (t) {
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return renderI18nText("seat_selection_in_nux.collab_seat_auto_approved");
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return renderI18nText("seat_selection_in_nux.dev_seat_auto_approved");
-    case ud.EXPERT:
+    case ProductAccessTypeEnum.EXPERT:
       return renderI18nText("seat_selection_in_nux.full_seat_auto_approved");
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.CONTENT:
       return renderI18nText("seat_selection_in_nux.content_seat_auto_approved");
     default:
       throwTypeError(t);
   } else switch (t) {
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return renderI18nText("seat_selection_in_nux.collab_seat_manual_request");
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return renderI18nText("seat_selection_in_nux.dev_seat_manual_request");
-    case ud.EXPERT:
+    case ProductAccessTypeEnum.EXPERT:
       return renderI18nText("seat_selection_in_nux.full_seat_manual_request");
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.CONTENT:
       return renderI18nText("seat_selection_in_nux.content_seat_manual_request");
     default:
       throwTypeError(t);
@@ -90,22 +90,22 @@ let O = (e, t) => {
 };
 let D = (e, t) => {
   if (e) switch (t) {
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return buildUploadUrl(k);
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return buildUploadUrl("bb9c1da4623599a5b504821d08933e4a62f77738");
-    case ud.EXPERT:
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.EXPERT:
+    case ProductAccessTypeEnum.CONTENT:
       return buildUploadUrl("e64c10dbcf541d5c046e504238332a5a4e6c3936");
     default:
       throwTypeError(t);
   } else switch (t) {
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return buildUploadUrl(k);
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return buildUploadUrl("c01e13ea74266be4e3bd04138f24580a366f34db");
-    case ud.EXPERT:
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.EXPERT:
+    case ProductAccessTypeEnum.CONTENT:
       return buildUploadUrl("8ccf73b4d60956f75e7d328f2f84303814551671");
     default:
       throwTypeError(t);
@@ -118,7 +118,7 @@ let $$L0 = registerModal(function (e) {
   } = G();
   let c = useDispatch();
   let u = U("nux_seat_request_confirmation_modal");
-  let A = q5();
+  let A = selectCurrentFile();
   _$$h(() => {
     e.autoApproved || e.requestId || function (e) {
       if (isDevEnvironment()) throw e;
@@ -144,7 +144,7 @@ let $$L0 = registerModal(function (e) {
       } else n = !0;
     }
     c(hideSpecificModal($$L0));
-    e.seatType === ud.DEVELOPER && A?.editorType === FFileType.DESIGN && u("handoff");
+    e.seatType === ProductAccessTypeEnum.DEVELOPER && A?.editorType === FFileType.DESIGN && u("handoff");
     n && c(VisualBellActions.enqueue({
       message: "Error updating request message.",
       error: !0

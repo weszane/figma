@@ -37,7 +37,7 @@ import { getUserId } from "../905/372672";
 import { az as _$$az } from "../figma_app/805373";
 import { m as _$$m } from "../905/602189";
 import { j as _$$j } from "../905/584270";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 let R = registerModal(function (e) {
   let {
     seatTypes,
@@ -209,7 +209,7 @@ let H = registerModal(function (e) {
                 onClose();
               },
               availableSeatCounts: null,
-              pricing: Object.fromEntries(Object.entries(seatTypes).filter(([e, t]) => e !== Gu.VIEW && !!t).map(([e, t]) => [e, t.displayPrice])),
+              pricing: Object.fromEntries(Object.entries(seatTypes).filter(([e, t]) => e !== ViewAccessTypeEnum.VIEW && !!t).map(([e, t]) => [e, t.displayPrice])),
               learnMoreLinkHref: "/pricing",
               displayPricing: !0,
               canSetCurrentSeatType: !0,

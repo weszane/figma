@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { U } from "../figma_app/901889";
 import { h } from "../905/207101";
 import { reportError } from "../905/11";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 let n;
 let _ = Wh(() => atom(!1), {
   preserveValue: !1
@@ -18,7 +18,7 @@ var $$g3 = (e => (e.ALL = "ALL", e.RECENTLY_VIEWED = "RECENTLY_VIEWED", e.BUILD 
 var $$f0 = (e => (e.RECENT = "RECENT", e.PAGE = "PAGE", e.ALPHABETICAL = "ALPHABETICAL", e))($$f0 || {});
 export function $$E2(e, t, r) {
   let o = U();
-  let l = _I();
+  let l = useCanAccessFullDevMode();
   h(() => {
     n = null;
   });

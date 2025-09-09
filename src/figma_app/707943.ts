@@ -4,16 +4,16 @@ import a from "../vendor/946678";
 import o from "../vendor/241899";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { rw } from "../905/485103";
+import { WebLoggerTimer } from "../905/485103";
 import { w0 } from "../figma_app/594947";
 import { JB } from "../figma_app/657017";
 import { Oo } from "../905/709171";
-import { Kz } from "../905/760074";
+import { isBranchAlt } from "../905/760074";
 import { Av, ah, uN, f0 } from "../figma_app/646357";
 import { aV } from "../905/405710";
 import { FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
-import { KK as _$$KK } from "../905/276025";
+import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { PW } from "../figma_app/633080";
 import { $W, $$in } from "../905/144933";
 import { I as _$$I } from "../figma_app/130633";
@@ -22,7 +22,7 @@ var s = a;
 var l = o;
 export let $$A5 = 40;
 export async function $$x12(e, t, r, n, i, a, s, o, l, c, p, _) {
-  let h = new rw();
+  let h = new WebLoggerTimer();
   let m = $$C3(await $$N2(e, t, r, n, i, s, o, c, p, _), n, new Set(Object.keys(a)), s, l);
   h.stop(e => {
     analyticsEventManager.trackDefinedEvent("asset_search.fetch_all_server_side_search_results_time", {
@@ -70,7 +70,7 @@ export async function $$N2(e, t, r, i, a, s, o, l, u, p) {
   }
 }
 export function $$C3(e, t, r, n, i) {
-  let a = t && (Kz(t) ? t.sourceFileKey : "");
+  let a = t && (isBranchAlt(t) ? t.sourceFileKey : "");
   let o = e.filter(e => !Oo(e, a) && r.has(e.library_key)).map(e => ({
     ...e,
     server_score: e.score
@@ -167,7 +167,7 @@ export async function $$L7(e, t, r) {
   };
 }
 export async function $$P11(e, t, r, n, i = !1, a) {
-  let s = new rw();
+  let s = new WebLoggerTimer();
   let o = $$k13(await $$D8(e, r, i), t, n);
   s.stop(e => {
     analyticsEventManager.trackDefinedEvent("asset_search.fetch_community_component_search_results_time", {
@@ -235,7 +235,7 @@ export let $$M14 = M4.Query({
   }) => null != e && e.trim().length > 0
 });
 export function $$F9(e, t) {
-  let r = new rw();
+  let r = new WebLoggerTimer();
   return Promise.all([Z(), e.search(t)]).then(([e, t]) => (r.stop(t => {
     e || analyticsEventManager.trackDefinedEvent("asset_search.fuse_search_results_time", {
       elapsedTime: t,
@@ -300,7 +300,7 @@ export async function $$B4(e, t, r, n, i, a, s, o) {
   }
 }
 export function $$G1() {
-  let e = atomStoreManager.get(_$$KK(!0));
+  let e = atomStoreManager.get(getPlanPublicInfoAtomFamily(!0));
   return e.data?.tier;
 }
 var V = (e => (e.OPEN_FILE = "OPEN_FILE", e.FILE_VERSION = "FILE_VERSION", e.LOADING_STATE = "LOADING_STATE", e))(V || {});

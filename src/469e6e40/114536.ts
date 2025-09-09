@@ -6,9 +6,9 @@ import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
-import { T5, px, j_, S2, H3 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { o0 } from "../905/844131";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y as _$$Y } from "../905/830372";
@@ -49,7 +49,7 @@ import { p as _$$p } from "../469e6e40/348454";
 import { v as _$$v } from "../4452/562448";
 import { b as _$$b2 } from "../4452/320061";
 import { B as _$$B } from "../4452/541264";
-import { tT, oA as _$$oA } from "../905/663269";
+import { ResourceStatus, getResourceDataOrFallback } from "../905/663269";
 import { A as _$$A } from "../vendor/90566";
 import { zE } from "../figma_app/919079";
 import { tH, H4 } from "../905/751457";
@@ -81,7 +81,7 @@ let F = registerModal(function (e) {
   let a = useDispatch();
   let [r, l] = useState(!1);
   let [o, d] = useState(!1);
-  let c = T5("DomainCaptureModal").unwrapOr(null);
+  let c = useCurrentPrivilegedPlan("DomainCaptureModal").unwrapOr(null);
   let u = c?.name;
   let m = async () => {
     d(!0);
@@ -673,15 +673,15 @@ function ek({
   let [r, l] = useState("");
   let [o, d] = useState(new Set());
   let c = useDispatch();
-  let _ = Rs(UnclaimedDomainUserView, {
+  let _ = useSubscription(UnclaimedDomainUserView, {
     domainId: e,
     orgId: t,
     searchQuery: r,
     firstPageSize: null
   });
   let u = "loaded" === _.status;
-  let p = u && _.data?.unclaimedDomainUsers?.status === tT.Loaded && !!_.data?.unclaimedDomainUsers?.data?.isLoadingNextPage;
-  let b = u && _.data?.unclaimedDomainUsers?.status === tT.Loaded && !!_.data?.unclaimedDomainUsers?.data?.hasNextPage();
+  let p = u && _.data?.unclaimedDomainUsers?.status === ResourceStatus.Loaded && !!_.data?.unclaimedDomainUsers?.data?.isLoadingNextPage;
+  let b = u && _.data?.unclaimedDomainUsers?.status === ResourceStatus.Loaded && !!_.data?.unclaimedDomainUsers?.data?.hasNextPage();
   let v = a ? [] : function (e, t) {
     if (!e) return [];
     let a = [];
@@ -695,7 +695,7 @@ function ek({
       });
     });
     return a;
-  }(_$$oA(_.data?.unclaimedDomainUsers) ?? null, o);
+  }(getResourceDataOrFallback(_.data?.unclaimedDomainUsers) ?? null, o);
   let f = [{
     name: getI18nString("domain_insights.unclaimed_users.columns.name"),
     className: "domain_flyout--avatarColumn--q8Rns domain_flyout--column---t1PD admin_settings_page--membersColumn--E3seT table--column--974RA",
@@ -793,7 +793,7 @@ function ek({
       items: v,
       minContentWidth: 456,
       onFetchMore: b ? () => {
-        u && !p && b && !a && _.data?.unclaimedDomainUsers?.status === tT.Loaded && _.data.unclaimedDomainUsers.data.loadNext(100);
+        u && !p && b && !a && _.data?.unclaimedDomainUsers?.status === ResourceStatus.Loaded && _.data.unclaimedDomainUsers.data.loadNext(100);
       } : void 0,
       onSetSortState: lQ,
       scrollContainerInnerClassName: "domain_flyout--removeHorizontalPadding--32jx6",
@@ -956,12 +956,12 @@ let eO = registerModal(function (e) {
       r(!1);
     }
   };
-  let d = Rs(DomainOrgAdminsToRemove, {
+  let d = useSubscription(DomainOrgAdminsToRemove, {
     orgId: e.orgId,
     domainIds: e.domainIds
   });
-  let c = "loading" === d.status || d.data?.domainOrgAdminsToRemove?.status !== tT.Loaded;
-  let _ = "loaded" === d.status && d.data?.domainOrgAdminsToRemove && d.data?.domainOrgAdminsToRemove?.status === tT.Loaded && d.data?.domainOrgAdminsToRemove.data ? d.data?.domainOrgAdminsToRemove.data : [];
+  let c = "loading" === d.status || d.data?.domainOrgAdminsToRemove?.status !== ResourceStatus.Loaded;
+  let _ = "loaded" === d.status && d.data?.domainOrgAdminsToRemove && d.data?.domainOrgAdminsToRemove?.status === ResourceStatus.Loaded && d.data?.domainOrgAdminsToRemove.data ? d.data?.domainOrgAdminsToRemove.data : [];
   return jsx(bL, {
     manager: l,
     width: "lg",
@@ -1501,7 +1501,7 @@ function e$(e) {
 function eB(e) {
   var t;
   var a;
-  let i = Rs(OrgDomainManagementPage, {
+  let i = useSubscription(OrgDomainManagementPage, {
     orgId: e.orgId
   });
   let [r, l] = useState("");
@@ -1578,10 +1578,10 @@ let eG = {
 };
 export function $$ez0() {
   let e = useDispatch();
-  let t = px();
-  let a = j_(t).unwrapOr(!1);
-  let m = S2().unwrapOr(null);
-  let p = H3(m);
+  let t = useTeamPlanUser();
+  let a = useIsOrgAdminUser(t).unwrapOr(!1);
+  let m = useTeamPlanFeatures().unwrapOr(null);
+  let p = getParentOrgIdIfOrgLevel(m);
   let g = m?.name;
   let h = m?.key.type === FOrganizationLevelType.ORG;
   return (useEffect(() => {

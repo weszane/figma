@@ -10,7 +10,7 @@ import { P8 } from "../905/270781";
 import { logWarning } from "../905/714362";
 import { f as _$$f } from "../905/412913";
 import { d1 } from "../905/766303";
-import { dp } from "../905/760074";
+import { matchesSourceKey } from "../905/760074";
 import { z } from "../905/915227";
 import { normalizeValue } from "../905/216495";
 import { U as _$$U } from "../905/722080";
@@ -129,7 +129,7 @@ function B({
   let s = [];
   for (let o of Object.keys(t)) {
     let l = e[sg(o)];
-    !(!l || r && dp(r, U(l))) && j(t[sg(o)], l, n) && s.push(a(l));
+    !(!l || r && matchesSourceKey(r, U(l))) && j(t[sg(o)], l, n) && s.push(a(l));
   }
   return s;
 }
@@ -264,7 +264,7 @@ let K = P8([a3, gJ, d1, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, 
   let _ = Fullscreen?.getInternalCanvasNodeId();
   for (let a of o.keys()) {
     let l = e[ey(a)];
-    if (!l || r && dp(r, W(l))) continue;
+    if (!l || r && matchesSourceKey(r, W(l))) continue;
     let h = t[yG(l.variableCollectionKey)];
     if (!h) continue;
     let m = u[yG(l.variableCollectionKey)] || {

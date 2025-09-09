@@ -1,9 +1,9 @@
 import { canViewTeam } from "../figma_app/642025";
 import { Tb } from "../figma_app/633080";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { C0 } from "../figma_app/756995";
 import { DQ, Pw } from "../figma_app/121751";
-import { HZ, A5 } from "../figma_app/391338";
+import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 let $$d = "temp-";
 export function $$c1(e, t) {
   return $$p2(e[t]);
@@ -29,7 +29,7 @@ export function $$g11(e, t, r, n) {
   for (let n in t) {
     let i = t[n];
     let s = r[n] ? r[n][e] : null;
-    if (!i.teamId && "" === i.path && null == i.orgId && s && s.level === e6.OWNER) return i;
+    if (!i.teamId && "" === i.path && null == i.orgId && s && s.level === AccessLevelEnum.OWNER) return i;
   }
   return null;
 }
@@ -67,8 +67,8 @@ export function $$v8(e, t) {
 }
 export function $$A9(e, t, r, i, a, s, d) {
   let c = r && canViewTeam(r, i);
-  let u = HZ({
-    label: A5.planBasedFolderUrl.hasTeamAccess,
+  let u = setupShadowRead({
+    label: adminPermissionConfig.planBasedFolderUrl.hasTeamAccess,
     oldValue: c,
     newValue: a,
     enableShadowRead: d,

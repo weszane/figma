@@ -9,7 +9,7 @@ import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getI18nStringAlias } from "../905/303541";
 import { fu } from "../figma_app/831799";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { _ as _$$_ } from "../905/919117";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
@@ -153,7 +153,7 @@ export function $$I2(e, t) {
   }(e, t);
 }
 function E(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   return jsx(fu, {
     name: "library upsell bell",
     properties: {

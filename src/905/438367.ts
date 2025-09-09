@@ -8,7 +8,7 @@ import { Ez } from "../figma_app/766708";
 import { $ } from "../905/383708";
 import { kiwiParserCodec } from "../905/294864";
 import { Rb, yp, kf, u5 } from "../figma_app/852050";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Bh, oz } from "../figma_app/936646";
 import { ti, LX } from "../figma_app/646357";
 import { XV } from "../905/405710";
@@ -18,7 +18,7 @@ export function $$y2({
   subscribedLibraries: e
 }) {
   let t = useSelector(e => e.library);
-  let i = tS();
+  let i = useCurrentFileKey();
   let o = Rb().filter(e => e.resolvedType === VariableResolvedDataType.COLOR).length > 0;
   let l = ti(t.local.styles, "FILL").length > 0;
   return useMemo(() => {
@@ -78,7 +78,7 @@ export function $$v3() {
   return useMemo(() => [...l, ...c], [l, c]);
 }
 export function $$I1(e) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let i = e !== EU && e !== KV;
   let r = kf(i ? e : null);
   let a = u5(i ? e : null);

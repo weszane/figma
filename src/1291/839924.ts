@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { jy } from "../905/116101";
 import { VU } from "../905/625959";
 import { LR } from "../figma_app/120210";
@@ -39,7 +39,7 @@ export function $$u0(e, t, s, u, m, _) {
     })), b(!0), t(m));
   }, [y, t, s, m, _]);
   let S = useSelector(e => e.mirror?.appModel.showUi);
-  let v = ZC(S);
+  let v = useLatestRef(S);
   let w = LR();
   useEffect(() => {
     v && !S ? w() : !v && S && s === _$$t.PINNED_AND_DOCKED_LEFT && j();

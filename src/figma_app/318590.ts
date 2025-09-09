@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { vs, I7 } from "../figma_app/594947";
 import { dZ } from "../figma_app/459490";
@@ -10,7 +10,7 @@ import { JV } from "../figma_app/976749";
 import { Z } from "../905/296690";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFragmentSearchAi } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
-import { Jh } from "../figma_app/552876";
+import { isFigmakeFullscreenView } from "../figma_app/552876";
 import { P } from "../905/35881";
 import { n as _$$n } from "../905/347702";
 import { PE, W7 } from "../figma_app/251115";
@@ -23,7 +23,7 @@ export function $$v8(e) {
   let t = function (e) {
     let t = atomStoreManager.get(Z);
     let r = getFeatureFlags().ai_search_llama_enable_workaround && dZ(t);
-    let n = Rs(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFragmentSearchAi, {
+    let n = useSubscription(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFragmentSearchAi, {
       key: e
     }, {
       enabled: !!e
@@ -74,7 +74,7 @@ export function $$O6() {
 export function $$R3() {
   let e = debugState.getState().selectedView;
   let t = P(e);
-  let r = Jh(e);
+  let r = isFigmakeFullscreenView(e);
   return JV(e) === FEditorType.Design || t || r;
 }
 export function $$L7() {

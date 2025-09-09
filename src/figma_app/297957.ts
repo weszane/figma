@@ -2,29 +2,29 @@ import { useCallback, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { tT } from "../905/663269";
+import { ResourceStatus } from "../905/663269";
 import { analyticsEventManager } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
 import { g as _$$g } from "../figma_app/618031";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { Em } from "../figma_app/976749";
 import { y as _$$y } from "../905/461685";
 import { FOrganizationLevelType, FPlanNameType, FFileType, FVisibilityType, FProductAccessType } from "../figma_app/191312";
-import { T5, No, q8, px, X$, H3, S2, W8 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, useTeamPlanPublicInfo, useIsStarterOrStudentPlan, useTeamPlanUser, useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useTeamPlanFeatures, useIsTeamAdminUser } from "../figma_app/465071";
 import { Fk } from "../figma_app/167249";
 import { vD } from "../figma_app/889655";
 import { JR } from "../figma_app/217457";
 import { h as _$$h } from "../figma_app/496854";
 import { jd } from "../figma_app/528509";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { OrgSharedSettingView, ExpOneClickAskToEditTeamView, ExpOneClickAskToEditOrgView, ExpSocialProofExpansionTeamView, ExpSocialProofExpansionOrgView } from "../figma_app/43951";
 import { XX } from "../figma_app/345997";
 import { cD } from "../figma_app/598018";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../905/606579";
 import { w as _$$w } from "../905/917761";
 let L = () => !!dq();
@@ -67,7 +67,7 @@ function F(e, t, r) {
   for (let a of (t.forEach(e => i[e.id] = e), Object.keys(r))) {
     let t = i[a];
     let s = r[a][e];
-    t && s && s.level === e6.OWNER && t.starter_team && !t.org_team && !t.student_team && null === t.subscription && null === t.deleted_at && n++;
+    t && s && s.level === AccessLevelEnum.OWNER && t.starter_team && !t.org_team && !t.student_team && null === t.subscription && null === t.deleted_at && n++;
   }
   return n;
 }
@@ -86,7 +86,7 @@ export function $$V8() {
   let {
     getConfig
   } = I7("exp_fbg_navigation_updates");
-  let t = T5("useFBGNavigationUpdatesTreatment").unwrapOr(null);
+  let t = useCurrentPrivilegedPlan("useFBGNavigationUpdatesTreatment").unwrapOr(null);
   let r = t?.key.type === FOrganizationLevelType.TEAM;
   let n = t?.tier === FPlanNameType.STARTER;
   return r && n ? getConfig().getValue("treatment", "control") : "control";
@@ -133,20 +133,20 @@ export function $$X17() {
   return useCallback(() => getConfig().get("enabled", !1), [getConfig]);
 }
 export function $$q36() {
-  let e = q5();
-  let t = No();
-  let r = q8(t);
-  let i = px().unwrapOr(null);
+  let e = selectCurrentFile();
+  let t = useTeamPlanPublicInfo();
+  let r = useIsStarterOrStudentPlan(t);
+  let i = useTeamPlanUser().unwrapOr(null);
   let a = dq();
   let s = !!a;
   let l = cD();
   let u = !s;
-  let p = Rs(OrgSharedSettingView({
+  let p = useSubscription(OrgSharedSettingView({
     orgId: a
   }), {
     enabled: !!a
   }).unwrapOr(null);
-  let _ = p?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === tT.Loaded ? p?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null;
+  let _ = p?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded ? p?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null;
   let h = _ === FVisibilityType.ALL_USERS || _ === FVisibilityType.MEMBERS;
   let {
     getConfig
@@ -175,7 +175,7 @@ export function $$J35() {
   return useCallback(() => !a && (!r || !!t) && l().get("enabled", !1), [l, r, t, a]);
 }
 export function $$Z4() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = e?.planPublicInfo;
   let {
     type
@@ -204,7 +204,7 @@ export function $$ee37() {
 }
 export function $$et29() {
   let e = function () {
-    let e = T5("useIsExpProAnnualImprovementsEnabled").unwrapOr(null);
+    let e = useCurrentPrivilegedPlan("useIsExpProAnnualImprovementsEnabled").unwrapOr(null);
     let t = _$$g(e);
     let {
       getConfig
@@ -222,8 +222,8 @@ export function $$er16() {
 export function $$en26({
   disableExposureLogging: e
 } = {}) {
-  let t = No();
-  let r = q8(t);
+  let t = useTeamPlanPublicInfo();
+  let r = useIsStarterOrStudentPlan(t);
   let {
     getConfig
   } = I7("exp_pro_admin_plan_invite_with_seat", void 0, e);
@@ -253,7 +253,7 @@ export function $$ei25() {
   let {
     getConfig: _getConfig4
   } = I7("exp_org_admin_file_invite_with_seat");
-  let r = X$("useIsInviteToFileWithSeatExpEnabled").unwrapOr(null);
+  let r = useCurrentPublicPlan("useIsInviteToFileWithSeatExpEnabled").unwrapOr(null);
   return useCallback(({
     rolePending: n,
     inviteBillableProductKey: i,
@@ -269,33 +269,33 @@ export function $$ei25() {
   }, [r, getConfig, _getConfig4]);
 }
 export function $$ea19(e) {
-  let t = No().unwrapOr(null);
+  let t = useTeamPlanPublicInfo().unwrapOr(null);
   let r = selectCurrentUser();
-  let i = q5();
-  let a = H3(t) ?? null;
-  let s = Rs(OrgSharedSettingView({
+  let i = selectCurrentFile();
+  let a = getParentOrgIdIfOrgLevel(t) ?? null;
+  let s = useSubscription(OrgSharedSettingView({
     orgId: a
   }), {
     enabled: !!a
   }).unwrapOr(null);
-  let c = s?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === tT.Loaded ? s?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null;
+  let c = s?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded ? s?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null;
   let u = c === FVisibilityType.ALL_USERS || c === FVisibilityType.MEMBERS;
   let p = _$$c();
   let _ = t?.tier === FPlanNameType.PRO;
   let h = t?.tier === FPlanNameType.ORG || t?.tier === FPlanNameType.ENTERPRISE;
-  let f = Rs(ExpOneClickAskToEditTeamView({
+  let f = useSubscription(ExpOneClickAskToEditTeamView({
     teamId: t?.key.parentId || ""
   }), {
     enabled: _ && !u && !p && e
   }).unwrapOr(null);
-  let E = Rs(ExpOneClickAskToEditOrgView({
+  let E = useSubscription(ExpOneClickAskToEditOrgView({
     orgId: t?.key.parentId || ""
   }), {
     enabled: h && !u && !p && e
   }).unwrapOr(null);
   let y = useRef(!1);
-  let b = E?.orgPublicInfo?.expOneClickAskToEditOrgId.status === tT.Loaded ? E.orgPublicInfo.expOneClickAskToEditOrgId.data : null;
-  let T = f?.teamPublicInfo?.expOneClickAskToEditTeamIdPublic.status === tT.Loaded ? f.teamPublicInfo.expOneClickAskToEditTeamIdPublic.data : null;
+  let b = E?.orgPublicInfo?.expOneClickAskToEditOrgId.status === ResourceStatus.Loaded ? E.orgPublicInfo.expOneClickAskToEditOrgId.data : null;
+  let T = f?.teamPublicInfo?.expOneClickAskToEditTeamIdPublic.status === ResourceStatus.Loaded ? f.teamPublicInfo.expOneClickAskToEditTeamIdPublic.data : null;
   return useCallback(() => (!y.current && (b || T) && (analyticsEventManager.trackDefinedEvent("activation.experiment_exposure_for_user", {
     userId: r?.id,
     fileKey: i?.key,
@@ -317,13 +317,13 @@ export function $$es23({
   let u = c?.id;
   let p = _$$c();
   let _ = !s && !p && e === FOrganizationLevelType.TEAM && !!t;
-  let h = Rs(ExpSocialProofExpansionTeamView({
+  let h = useSubscription(ExpSocialProofExpansionTeamView({
     teamId: t
   }), {
     enabled: _
   }).unwrapOr(null);
   let g = !s && !p && !r && e === FOrganizationLevelType.ORG && !!t;
-  let f = Rs(ExpSocialProofExpansionOrgView({
+  let f = useSubscription(ExpSocialProofExpansionOrgView({
     orgId: t
   }), {
     enabled: g
@@ -343,8 +343,8 @@ export function $$es23({
   }, [u, e, t]);
   if (s) return !0;
   if (r || p) return !1;
-  let b = h?.team?.expSocialProofExpansionTeamId.status === tT.Loaded ? h.team.expSocialProofExpansionTeamId.data.enabled : null;
-  let T = f?.org?.expSocialProofExpansionOrgId.status === tT.Loaded ? f.org.expSocialProofExpansionOrgId.data.enabled : null;
+  let b = h?.team?.expSocialProofExpansionTeamId.status === ResourceStatus.Loaded ? h.team.expSocialProofExpansionTeamId.data.enabled : null;
+  let T = f?.org?.expSocialProofExpansionOrgId.status === ResourceStatus.Loaded ? f.org.expSocialProofExpansionOrgId.data.enabled : null;
   return null !== T && e === FOrganizationLevelType.ORG ? (y(T), T) : null !== b && e === FOrganizationLevelType.TEAM && (y(b), b);
 }
 export function $$eo24() {
@@ -359,7 +359,7 @@ export function $$eo24() {
   return useCallback(() => !!e && (e().get("enabled", !1) ?? !1), [e]);
 }
 export function $$el33() {
-  let e = _I();
+  let e = useCanAccessFullDevMode();
   let {
     getConfig
   } = I7("exp_dt_mcp_callout");
@@ -368,9 +368,9 @@ export function $$el33() {
 }
 export function $$ed20() {
   let e = function () {
-    let e = S2().unwrapOr(null);
-    let t = px();
-    let r = W8(t).unwrapOr(!1);
+    let e = useTeamPlanFeatures().unwrapOr(null);
+    let t = useTeamPlanUser();
+    let r = useIsTeamAdminUser(t).unwrapOr(!1);
     let i = e?.tier === FPlanNameType.PRO;
     let a = _$$g(e);
     return useCallback(e => i && a && r && e, [i, a, r]);
@@ -387,7 +387,7 @@ export function $$ec5() {
   let {
     getConfig: _getConfig5
   } = I7("seat_management_widget_org");
-  let r = S2().unwrapOr(null)?.type;
+  let r = useTeamPlanFeatures().unwrapOr(null)?.type;
   return useCallback(() => {
     if (!getFeatureFlags().billing_page_updates_jul_2025) return !1;
     switch (r) {
@@ -409,7 +409,7 @@ export function $$eu34() {
     let t = _$$y().transform(e => e?.canCreateFigmakeFileWithReasons.result ?? !1).unwrapOr(!1);
     let r = useSelector(vD);
     let n = Fk((e, t) => e.get(t)?.isTopLevelFrame() ?? !1, r);
-    let a = No().unwrapOr(null);
+    let a = useTeamPlanPublicInfo().unwrapOr(null);
     return !!e && !!n && !!a && (a.tier !== FPlanNameType.STARTER || !!getFeatureFlags().bake_starter_limit) && t;
   }();
   return useCallback(() => !!t && (getConfig().get("enabled", !1) ?? !1), [getConfig, t]);

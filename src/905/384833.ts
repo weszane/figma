@@ -37,12 +37,12 @@ import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { YL, Zz } from "../figma_app/84966";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { XP } from "../figma_app/465071";
+import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { J7 } from "../figma_app/650409";
 import { Eh } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
@@ -73,12 +73,12 @@ export function $$er0(e) {
 }
 function ea(e) {
   let t = hS(e);
-  let i = XP({
+  let i = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });
   let p = i.key.parentId;
   let m = zz(p, FOrganizationLevelType.ORG);
-  let h = A()(m, Gu.VIEW);
+  let h = A()(m, ViewAccessTypeEnum.VIEW);
   let g = f()(h, e => e?.assigned ?? 0);
   let _ = f()(h, e => e?.available ?? 0);
   let [y, S] = function (e, t, i) {

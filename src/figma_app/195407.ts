@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { D } from "../905/347702";
 import { P7, gm, my } from "../905/383548";
 export function $$o1({
@@ -15,7 +15,7 @@ export function $$o1({
     !l.current && e && (l.current = !0);
   }, [l, e]);
   useEffect(() => {
-    e ? (s.current = e, o.current = r) : o.current === r && (YQ({
+    e ? (s.current = e, o.current = r) : o.current === r && (handleAtomEvent({
       id: "Lost DOM Target"
     }), t?.(l.current, a));
   }, [e, t, r, a]);

@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { n as _$$n } from "../905/875063";
-import { aw } from "../figma_app/175992";
+import { UserOrgSchema } from "../figma_app/175992";
 var $$s3 = (e => (e.RESOURCE_PAGE = "resource_page", e.EDITOR = "editor", e.UNIVERSAL_POSTING = "universal_posting", e.ADMIN = "admin", e.SITES_PUBLISH_MODAL = "sites_publish_modal", e))($$s3 || {});
 var $$o1 = (e => (e[e.EDIT = 0] = "EDIT", e[e.UPLOADING = 1] = "UPLOADING", e[e.SUCCESS = 2] = "SUCCESS", e[e.FAILURE = 3] = "FAILURE", e))($$o1 || {});
 let l = z.object({
@@ -38,16 +38,16 @@ let p = z.object({
   pending: z.array($$u2).optional()
 });
 let $$_6 = z.object({
-  creator: aw,
+  creator: UserOrgSchema,
   publisher: $$u2,
   community_publishers: p
 });
-let h = aw.pick({
+let h = UserOrgSchema.pick({
   id: !0,
   email: !0
 });
 let $$m0 = z.object({
-  accepted: z.array(aw),
+  accepted: z.array(UserOrgSchema),
   pending: z.array(h).optional()
 });
 export var $$g4 = (e => (e.OWNER = "owner", e.PUBLISHER = "publisher", e.NONE = "none", e))($$g4 || {});
@@ -57,4 +57,4 @@ export const bo = $$u2;
 export const k2 = $$s3;
 export const kM = $$g4;
 export const o1 = $$d5;
-export const xK = $$_6; 
+export const xK = $$_6;

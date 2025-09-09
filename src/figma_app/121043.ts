@@ -17,7 +17,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { U as _$$U } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
-import { Ym, Dj } from "../figma_app/288654";
+import { useConnectionState, ConnectionState } from "../figma_app/288654";
 import { parseQuery } from "../905/634134";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
@@ -30,14 +30,14 @@ import { B as _$$B } from "../905/714743";
 import { t } from "../905/331623";
 import { i as _$$i, L as _$$L } from "../figma_app/942671";
 import { s as _$$s } from "../cssbuilder/589278";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { n6 } from "../905/234821";
 import { formatI18nMessage } from "../905/482208";
-import { $D } from "../figma_app/789";
+import { isWorkshopModeEnabled } from "../figma_app/789";
 import { k as _$$k } from "../figma_app/564183";
 import { ZG } from "../figma_app/840917";
 import { hx } from "../figma_app/290668";
@@ -48,7 +48,7 @@ import { isGoogleMeetIntegration } from "../figma_app/469876";
 import { z4 } from "../905/37051";
 import { LW, bs, GG } from "../figma_app/553940";
 import { Um } from "../905/848862";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { EO } from "../905/691205";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
@@ -220,9 +220,9 @@ export function $$eO4() {
   }) : null;
 }
 export function $$eR10() {
-  let e = !!q5();
+  let e = !!selectCurrentFile();
   let [t, r] = useState(!1);
-  let n = eG(Ym() !== Dj.CONNECTED);
+  let n = eG(useConnectionState() !== ConnectionState.CONNECTED);
   let s = eG(useSelector(e => e.saveStatus?.hasAutosaveChanges ?? !1));
   let o = eG(useSelector(e => e.saveStatus?.hasMultiplayerChanges ?? !1));
   useEffect(() => {
@@ -254,7 +254,7 @@ memo(function ({
   recordingKey: e
 }) {
   let t = Um();
-  let r = q5();
+  let r = selectCurrentFile();
   let i = useSelector(e => Yh(e.mirror.appModel, _$$ec.action) && !!r);
   let s = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
   let o = n6();
@@ -293,7 +293,7 @@ let eL = e => {
 export function $$eP9() {
   let e = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
   let t = useSelector(e => e.saveStatus?.tabCloseText);
-  let r = Ym() === Dj.CONNECTED || isInteractionOrEvalMode();
+  let r = useConnectionState() === ConnectionState.CONNECTED || isInteractionOrEvalMode();
   let s = $$eR10();
   let o = t ? eL(t) : "";
   let l = _$$A2;
@@ -413,13 +413,13 @@ let $$eU7 = memo(function (e) {
     user: e.user,
     selectedView: e.selectedView
   }));
-  let u = $D();
+  let u = isWorkshopModeEnabled();
   let p = _$$k();
   let _ = WN();
   useEffect(() => {
-    TY(dropdownShown) ? YQ({
+    TY(dropdownShown) ? handleAtomEvent({
       id: $$eM2
-    }) : YQ({
+    }) : handleAtomEvent({
       id: $$eF1
     });
   }, [dropdownShown]);
@@ -508,13 +508,13 @@ let $$eU7 = memo(function (e) {
   }, "toggle-menu-button");
 });
 let $$eB8 = memo(function (e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     selectedView
   } = selectWithShallowEqual(e => ({
     selectedView: e.selectedView
   }));
-  let i = $D();
+  let i = isWorkshopModeEnabled();
   let s = useDispatch();
   return jsx("span", {
     className: _$$s.mr8.$,

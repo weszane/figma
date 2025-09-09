@@ -18,8 +18,8 @@ import { HG } from "../figma_app/440875";
 import { T as _$$T, N as _$$N } from "../905/847283";
 import { z3 } from "../figma_app/386952";
 import { a as _$$a } from "../905/298663";
-import { Oc } from "../figma_app/552876";
-import { cJ } from "../905/561485";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { ex } from "../905/524523";
 let w = "view_user_profile_tooltip--base--SgkjR tooltip--column--zo-M5 text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let C = "view_user_profile_tooltip--handle--RzZyC";
@@ -115,7 +115,7 @@ let L = {
   "start-observe": function (e) {
     let t = useDispatch();
     let i = HG();
-    if (Oc()) return jsx(D, {
+    if (useIsSelectedFigmakeFullscreen()) return jsx(D, {
       ...e
     });
     let r = i => {
@@ -203,7 +203,7 @@ let L = {
   },
   "nominate-presenter": function (e) {
     let t = useSelector(e => e.multiplayer);
-    let i = cJ();
+    let i = useIsFullscreenSitesView();
     let s = t && t.sessionNominatedByCurrentUser === e.userSessionID;
     let o = tu();
     let l = useCallback(() => {

@@ -13,15 +13,15 @@ import { Xr } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
-import { Rh } from "../905/485103";
+import { useSubscription } from "../figma_app/288654";
+import { sendMetric } from "../905/485103";
 import { g3, zI } from "../figma_app/304207";
 import { UC } from "../figma_app/91703";
 import { lX } from "../figma_app/107215";
-import { Kc } from "../figma_app/789";
+import { workshopModeExpirationAtom } from "../figma_app/789";
 import { Be } from "../figma_app/844435";
 import { rB } from "../figma_app/236178";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { o as _$$o, n as _$$n } from "../figma_app/264395";
 import { DeveloperRelatedLinks, FileWorkshopMode, OpenEditorFileData } from "../figma_app/43951";
@@ -41,13 +41,13 @@ function L(e) {
   let l = useSelector(e => e.fileByKey);
   let d = useSelector(e => e.userAnalyticsData);
   let c = useSelector(e => e.user);
-  let u = q5();
+  let u = selectCurrentFile();
   let p = u?.canEdit;
   let {
     orgId
   } = e;
   let m = null != i && !!l[i]?.is_favorited;
-  let L = Rs(DeveloperRelatedLinks, {
+  let L = useSubscription(DeveloperRelatedLinks, {
     fileKey: i || ""
   }, {
     enabled: !!i
@@ -67,8 +67,8 @@ function L(e) {
     }
   }, [L]);
   let R = useRef(!1);
-  let D = Xr(Kc);
-  let M = Rs(FileWorkshopMode, {
+  let D = Xr(workshopModeExpirationAtom);
+  let M = useSubscription(FileWorkshopMode, {
     fileKey: i || ""
   }, {
     enabled: !!i
@@ -90,7 +90,7 @@ function L(e) {
   let F = useRef(!1);
   let B = useRef(null);
   let U = useRef(null);
-  let G = Rs(OpenEditorFileData, {
+  let G = useSubscription(OpenEditorFileData, {
     fileKey: i || ""
   }, {
     enabled: !!i
@@ -107,7 +107,7 @@ function L(e) {
         user: debugState.getState().user?.id
       }, {
         batchRequest: !0
-      }), Rh("open_file.inconsistent_permissions", {
+      }), sendMetric("open_file.inconsistent_permissions", {
         lg_can_edit: e.canEdit,
         sinatra_can_edit: t.can_edit
       }));

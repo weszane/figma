@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { D } from "../905/12032";
 import { X, Y } from "../figma_app/916469";
@@ -41,7 +41,7 @@ export function $$f1({
 }) {
   let m = useAtomWithSubscription(D);
   useEffect(() => {
-    e && m && !_$$l.has(m) && YQ({
+    e && m && !_$$l.has(m) && handleAtomEvent({
       id: X,
       properties: {
         requester: Y.FigjamDLTSubmenuOpen

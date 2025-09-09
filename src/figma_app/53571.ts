@@ -6,7 +6,7 @@ import { getI18nString } from '../905/303541';
 import { e as _$$e2 } from '../905/365408';
 import { debugState } from '../905/407919';
 import { f as _$$f } from '../905/436809';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { subscribeMultipleAndAwaitAll } from '../905/553831';
 import { n as _$$n } from '../905/917104';
 import { b as _$$b } from '../905/985254';
@@ -18,7 +18,7 @@ import { FEventType } from '../figma_app/191312';
 import { ds } from '../figma_app/314264';
 import { S7 } from '../figma_app/379850';
 import { fullscreenValue } from '../figma_app/455680';
-import { tn } from '../figma_app/473493';
+import { canAccessFullDevMode } from '../figma_app/473493';
 import { isDevModeFocusViewCopyActive } from '../figma_app/544649';
 import { d as _$$d, cR, hv, pc } from '../figma_app/715641';
 import { Multiplayer, SessionOrigin, HandoffBindingsCpp, BuildStatus } from '../figma_app/763686';
@@ -146,7 +146,7 @@ export async function $$P0({
     x(_$$b({
       has_marked_ready_for_dev: !0
     }));
-    YQ({
+    handleAtomEvent({
       id: 'marked_ready_for_dev',
       properties: {
         nodeIds: e
@@ -192,7 +192,7 @@ export async function $$P0({
       status: A,
       canAccessDevModeRaw: s?.canAccessFullDevMode,
       canAccessDevModeEntryPoint: s?.canAccessDevModeEntryPoint,
-      canAccessDevMode: tn(d),
+      canAccessDevMode: canAccessFullDevMode(d),
       fileRepoId: s?.fileRepoId,
       userOrgId: d.user?.org_id,
       currentTeamId: d.currentTeamId,
@@ -221,7 +221,7 @@ export async function $$P0({
     }, 2e3);
     Multiplayer.sendSetNodeStatus(e, t, r ?? '', S);
     let [c] = await Promise.all([$$L(k, E), _$$n()]);
-    if (l = !0, tn(d)) {
+    if (l = !0, canAccessFullDevMode(d)) {
       for (let {
         id,
         name,
@@ -285,7 +285,7 @@ export async function $$P0({
       prevStatus,
       previewBackground
     } of k) {
-      tn(d) && _$$f.recordStatusChange({
+      canAccessFullDevMode(d) && _$$f.recordStatusChange({
         fileKey: E,
         nodeId: id,
         nodeName: name,

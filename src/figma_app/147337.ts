@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
-import { p as _$$p, Rs } from "../figma_app/288654";
+import { useMultiSubscription, useSubscription } from "../figma_app/288654";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/999566";
@@ -18,7 +18,7 @@ export function $$g3(e, t = {}) {
     fileKey: e,
     orgId: o
   })), [e, o]);
-  let d = _$$p(FileWorkspacePinActionsView, l, t);
+  let d = useMultiSubscription(FileWorkspacePinActionsView, l, t);
   let c = Au(o);
   let u = resourceUtils.all([c, ...d.map(e => e.result)]);
   return resourceUtils.useTransform(u, ([t, ...n]) => {
@@ -86,7 +86,7 @@ export function $$y6(e, t) {
   let r = function (e, {
     enabled: t = !0
   } = {}) {
-    let r = Rs(WorkspacePinnedFileKeysView, {
+    let r = useSubscription(WorkspacePinnedFileKeysView, {
       workspaceId: e
     }, {
       enabled: t

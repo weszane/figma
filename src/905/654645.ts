@@ -1,7 +1,7 @@
 export function $$n1(e) {
   return e;
 }
-export let $$r0 = {
+export let adminPermissionConfig = {
   AdminSettingsViews: {
     canAdminOrg: "AdminSettingsViews.canAdminOrg"
   },
@@ -243,5 +243,5 @@ export let $$r0 = {
     isFileInTeamWithProFeatures: "UpsellModal.isFileInTeamWithProFeatures"
   }
 };
-export const A = $$r0;
+export const A = adminPermissionConfig;
 export const R = $$n1;

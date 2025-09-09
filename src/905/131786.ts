@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { l as _$$l } from "../905/716947";
-import { FS } from "../figma_app/930338";
+import { removeSpaces } from "../figma_app/930338";
 import { nh, jD } from "../figma_app/933328";
 import { ov } from "../figma_app/646357";
 import { PW } from "../figma_app/633080";
@@ -55,15 +55,15 @@ export function $$g6(e, t) {
   let i = Object.create(null);
   let n = Object.create(null);
   let r = Object.create(null);
-  for (let e of t.components) i[FS(e.name)] = e;
-  for (let e of t.stateGroups) n[FS(e.name)] = e;
+  for (let e of t.components) i[removeSpaces(e.name)] = e;
+  for (let e of t.stateGroups) n[removeSpaces(e.name)] = e;
   for (let e of t.styles) {
     let {
       name,
       style_type
     } = e;
     let n = r[style_type] || Object.create(null);
-    n[FS(name)] = e;
+    n[removeSpaces(name)] = e;
     r[style_type] = n;
   }
   let a = {
@@ -71,11 +71,11 @@ export function $$g6(e, t) {
     styles: new Map()
   };
   for (let t of [...e.components, ...e.stateGroups]) {
-    let e = n[FS(t.name)] || i[FS(t.name)] || null;
+    let e = n[removeSpaces(t.name)] || i[removeSpaces(t.name)] || null;
     a.components.set(t, e);
   }
   for (let t of e.styles) {
-    let e = r[t.style_type]?.[FS(t.name)] || null;
+    let e = r[t.style_type]?.[removeSpaces(t.name)] || null;
     a.styles.set(t, e);
   }
   return a;

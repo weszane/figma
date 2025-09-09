@@ -15,13 +15,13 @@ import { xn, bL, qL } from "../905/934145";
 import { showModalHandler, hideModal } from "../905/156213";
 import { o3, fu } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
-import { g3 } from "../figma_app/707808";
+import { UserProfileTab } from "../figma_app/707808";
 import { e0 as _$$e } from "../905/696396";
 import { s as _$$s2 } from "../905/608932";
 import { w as _$$w } from "../905/230422";
 import { xk } from "@stylexjs/stylex";
 import { m as _$$m } from "../5430/992484";
-import { IT as _$$IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { vb, _W, gM } from "../5430/823351";
 import { k as _$$k } from "../905/22009";
 import { L as _$$L } from "../905/178090";
@@ -42,7 +42,7 @@ import { Ro } from "../figma_app/805373";
 import { S0, fr } from "../905/52565";
 import { A as _$$A2 } from "../svg/35845";
 import { g as _$$g2 } from "../905/687265";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { N as _$$N } from "../905/438674";
 import { J as _$$J } from "../5132/948584";
 import { V as _$$V } from "../1577/311426";
@@ -67,7 +67,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { nR, N_, CY } from "../figma_app/637027";
 import { G as _$$G } from "../905/750789";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { l as _$$l } from "../905/152724";
 import { t as _$$t2 } from "../5430/535653";
 import { tx as _$$tx2 } from "../figma_app/395505";
@@ -89,7 +89,7 @@ import { EL } from "../905/748636";
 import { NJ } from "../figma_app/419216";
 import { O9D } from "../figma_app/6204";
 import { z as _$$z2 } from "../905/353894";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { VisualBellActions } from "../905/302958";
 import { S as _$$S2 } from "../5430/465757";
 import { C as _$$C } from "../905/237873";
@@ -102,7 +102,7 @@ import { RK } from "../figma_app/815170";
 import { N as _$$N3 } from "../905/696711";
 import { Cu } from "../figma_app/314264";
 import { CommunityResourceStat, UserMonetizationMetadata } from "../figma_app/43951";
-import { P5, D6, VU } from "../figma_app/175992";
+import { StatusType, SourceType, PayoutMetric } from "../figma_app/175992";
 import { s as _$$s3 } from "../5430/114211";
 import { P as _$$P } from "../905/347284";
 import { C as _$$C2 } from "../905/180";
@@ -146,7 +146,7 @@ function A({
   filterState: t,
   pageSize: r
 }) {
-  let s = _$$IT(_$$a.ResourcesPaginatedQuery({
+  let s = setupResourceAtomHandler(_$$a.ResourcesPaginatedQuery({
     ...vb({
       resourceType: t.resourceType || _$$L.BrowseResourceTypes.MIXED,
       editorType: t.editorType || _$$k.Editors.ALL,
@@ -409,8 +409,8 @@ function eh({
 function ex({
   profile: e
 }) {
-  let t = $M(e.follower_count);
-  let r = $M(e.following_count);
+  let t = formatNumber(e.follower_count);
+  let r = formatNumber(e.following_count);
   let s = e.description || "";
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x1nfngrj",
@@ -1086,7 +1086,7 @@ function ry({
     id,
     is_subscription
   } = e.monetized_resource_metadata;
-  let n = Rs(CommunityResourceStat, {
+  let n = useSubscription(CommunityResourceStat, {
     monetizedResourceMetadataId: id
   });
   let a = new vr("usd");
@@ -1210,7 +1210,7 @@ function rj({
     isFetchingNextPage: p
   }, {
     fetchNextPage: h
-  }] = _$$IT(_$$a.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a.ResourcesPaginatedQuery({
     resourceType: yX(),
     sortBy: _$$e4.Browse.PUBLISHED_AT,
     caller: _$$z.PROFILE,
@@ -1223,7 +1223,7 @@ function rj({
     !p && u && h();
   }, [p, u, h]);
   let [x, f] = useState(!1);
-  let y = Rs(UserMonetizationMetadata, {
+  let y = useSubscription(UserMonetizationMetadata, {
     userId: e
   });
   let v = () => {
@@ -1252,7 +1252,7 @@ function rj({
     }));
   };
   function j() {
-    return s?.stripe_account_status === P5.ENABLED || s?.stripe_account_status === P5.DISABLED ? jsxs("div", {
+    return s?.stripe_account_status === StatusType.ENABLED || s?.stripe_account_status === StatusType.DISABLED ? jsxs("div", {
       className: tY,
       children: [jsx("button", {
         className: "profile_resources_grid--stripeDashboardButton--LHyS8 profile_resources_grid--stripeSetupButton--HNei8 profile_resources_grid--stripeSetupButtonDisabled--EUiQo text--fontPos13--xW8hS text--_fontBase--QdLsd",
@@ -1303,18 +1303,18 @@ function rj({
   let C = renderI18nText("community.seller.agree_to_figma_terms_of_service", {
     link: Hl
   });
-  a ? w = renderI18nText("community.seller.stripe_loading_text") : s?.stripe_account_status === P5.STARTED_ONBOARDING && (w = renderI18nText("community.seller.finish_stripe_setup_button"));
+  a ? w = renderI18nText("community.seller.stripe_loading_text") : s?.stripe_account_status === StatusType.STARTED_ONBOARDING && (w = renderI18nText("community.seller.finish_stripe_setup_button"));
   let L = "profile_resources_grid--metricValue--w627p text--fontPos48--H177Q text--_fontBase--QdLsd";
   let T = "profile_resources_grid--metricLabel--1bOis text--fontPos13--xW8hS text--_fontBase--QdLsd";
   let I = renderI18nText("community.seller.resource_metrics_coming_soon");
   let E = renderI18nText("community.seller.working_on_bringing_you_more_in_depth_metrics");
-  s?.stripe_account_status !== P5.ENABLED && (L = "profile_resources_grid--metricValueDisabled--mYlXF profile_resources_grid--metricValue--w627p text--fontPos48--H177Q text--_fontBase--QdLsd", T = "profile_resources_grid--metricLabelDisabled--dTvu- profile_resources_grid--metricLabel--1bOis text--fontPos13--xW8hS text--_fontBase--QdLsd");
+  s?.stripe_account_status !== StatusType.ENABLED && (L = "profile_resources_grid--metricValueDisabled--mYlXF profile_resources_grid--metricValue--w627p text--fontPos48--H177Q text--_fontBase--QdLsd", T = "profile_resources_grid--metricLabelDisabled--dTvu- profile_resources_grid--metricLabel--1bOis text--fontPos13--xW8hS text--_fontBase--QdLsd");
   let S = "loaded" === d ? (c || []).map(e => qY(e)).filter(e => void 0 !== e).filter(rb) : [];
   let R = S.length > 0;
   let A = S.reduce((e, t) => e + (t.view_count || 0), 0);
   I = renderI18nText("community.seller.youre_all_set_up_to_sell_on_community");
-  E = s?.cmty_seller_capabilities?.includes(D6.FILE) ? renderI18nText("community.seller.to_publish_your_first_resource") : renderI18nText("community.seller.to_publish_your_first_extension");
-  s?.stripe_account_status !== P5.ENABLED && (I = renderI18nText("community.seller.resources_youre_selling_will_appear_here"), E = renderI18nText("community.seller.well_show_you_stripe_metrics"));
+  E = s?.cmty_seller_capabilities?.includes(SourceType.FILE) ? renderI18nText("community.seller.to_publish_your_first_resource") : renderI18nText("community.seller.to_publish_your_first_extension");
+  s?.stripe_account_status !== StatusType.ENABLED && (I = renderI18nText("community.seller.resources_youre_selling_will_appear_here"), E = renderI18nText("community.seller.well_show_you_stripe_metrics"));
   return jsxs("div", {
     className: "profile_resources_grid--profileMetricsTabOuterContainer--d-PPR",
     children: [jsx("div", {
@@ -1344,8 +1344,8 @@ function rj({
           totalViewCount: A,
           metricValueStyle: L,
           metricLabelStyle: T,
-          totalPurchases: t[VU.NUM_PURCHASES],
-          totalEarned: up(t[VU.ALL_TIME_TOTAL_EARNED]),
+          totalPurchases: t[PayoutMetric.NUM_PURCHASES],
+          totalEarned: up(t[PayoutMetric.ALL_TIME_TOTAL_EARNED]),
           children: jsx(j, {})
         });
       }
@@ -1635,7 +1635,7 @@ function rQ() {
     hasNextPage: c
   }, {
     fetchNextPage: d
-  }] = _$$IT(r$.PaginatedCommunityResourceSavesQuery({
+  }] = setupResourceAtomHandler(r$.PaginatedCommunityResourceSavesQuery({
     pageSize: 30
   }));
   let [{
@@ -1644,7 +1644,7 @@ function rQ() {
     hasNextPage: _
   }, {
     fetchNextPage: p
-  }] = _$$IT(r$.PaginatedPrivateExtensionInstallsQuery({
+  }] = setupResourceAtomHandler(r$.PaginatedPrivateExtensionInstallsQuery({
     pageSize: 30
   }));
   useEffect(() => {
@@ -1881,15 +1881,15 @@ function r9(e) {
       viewingProfileId: profile.id
     }
   });
-  let x = $M(profile.follower_count);
-  let f = $M(profile.following_count);
+  let x = formatNumber(profile.follower_count);
+  let f = formatNumber(profile.following_count);
   let y = jsxs("div", {
     className: "profile_resources_grid--followsDataContainer--TnbJI",
     children: [jsx("div", {
       className: eB()(tF, {
         [tH]: !0
       }),
-      onClick: () => e.showFollowsModal(g3.FOLLOWERS),
+      onClick: () => e.showFollowsModal(UserProfileTab.FOLLOWERS),
       children: renderI18nText("community.profiles.follower_count", {
         followerCount: x,
         formattedFollowerCount: jsx("span", {
@@ -1901,7 +1901,7 @@ function r9(e) {
       className: eB()(tF, {
         [tH]: !0
       }),
-      onClick: () => e.showFollowsModal(g3.FOLLOWING),
+      onClick: () => e.showFollowsModal(UserProfileTab.FOLLOWING),
       children: renderI18nText("community.profiles.following_count", {
         followingCount: jsx("span", {
           className: tU,
@@ -1951,14 +1951,14 @@ function r7({
   let a = useDispatch();
   let l = r === e.id;
   return (useEffect(() => {
-    t !== g3.SAVES || l || customHistory.push(bL(e.profile_handle, g3.RESOURCES));
-  }, [t, l, s, e.profile_handle, a]), t === g3.METRICS) ? jsx("div", {
+    t !== UserProfileTab.SAVES || l || customHistory.push(bL(e.profile_handle, UserProfileTab.RESOURCES));
+  }, [t, l, s, e.profile_handle, a]), t === UserProfileTab.METRICS) ? jsx("div", {
     className: tV,
     children: jsx(rj, {
       primaryUserId: e.primary_user_id,
       profileId: e.id
     })
-  }) : t === g3.SAVES ? jsx(rQ, {}) : jsx(rO, {
+  }) : t === UserProfileTab.SAVES ? jsx(rQ, {}) : jsx(rO, {
     profile: e
   });
 }
@@ -1974,7 +1974,7 @@ function r6({
   let l = useSelector(t => kJ(t, e));
   let c = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null);
   let d = useSelector(e => "selectedView" in e ? e.selectedView : null);
-  let u = tabView && a ? tabView : g3.RESOURCES;
+  let u = tabView && a ? tabView : UserProfileTab.RESOURCES;
   return jsx(s.Inner, {
     profileId: e.id,
     profile: e,
@@ -2053,7 +2053,7 @@ function se({
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        customHistory.push(bL(this.props.profile.profile_handle, g3.RESOURCES));
+        customHistory.push(bL(this.props.profile.profile_handle, UserProfileTab.RESOURCES));
       };
       this.onMetricsTabClick = () => {
         trackEventAnalytics("Profile Resources Tab Clicked", {
@@ -2061,21 +2061,21 @@ function se({
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        YQ({
+        handleAtomEvent({
           id: "profile-metrics-tab-clicked"
         });
-        customHistory.push(bL(this.props.profile.profile_handle, g3.METRICS, this.props.currentUser));
+        customHistory.push(bL(this.props.profile.profile_handle, UserProfileTab.METRICS, this.props.currentUser));
       };
       this.onSavesTabClick = () => {
-        YQ({
+        handleAtomEvent({
           id: "cmty-profile-saves"
         });
         trackEventAnalytics("Profile Resources Tab Clicked", {
-          tabName: g3.SAVES,
+          tabName: UserProfileTab.SAVES,
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        customHistory.push(bL(this.props.profile.profile_handle, g3.SAVES));
+        customHistory.push(bL(this.props.profile.profile_handle, UserProfileTab.SAVES));
       };
       this.showFollowsModal = e => {
         this.props.dispatch(sf({
@@ -2092,7 +2092,7 @@ function se({
       let t = this.props.profile.primary_user_id && this.props.authedActiveCommunityProfileId === this.props.profile.id ? jsx(Fragment, {
         children: jsxs("button", {
           className: eB()(tk, tA, {
-            [tM]: this.props.profileTab === g3.SAVES
+            [tM]: this.props.profileTab === UserProfileTab.SAVES
           }),
           onClick: this.onSavesTabClick,
           tabIndex: 0,
@@ -2130,7 +2130,7 @@ function se({
           className: tR,
           children: [jsx("div", {
             className: eB()(tk, tA, {
-              [tM]: this.props.profileTab === g3.RESOURCES
+              [tM]: this.props.profileTab === UserProfileTab.RESOURCES
             }),
             onClick: this.onFilesPluginsTabClick,
             role: "button",
@@ -2142,7 +2142,7 @@ function se({
               className: tP,
               children: jsxs("div", {
                 className: eB()(tk, tA, tO, {
-                  [tM]: this.props.profileTab === g3.METRICS
+                  [tM]: this.props.profileTab === UserProfileTab.METRICS
                 }),
                 onClick: this.onMetricsTabClick,
                 role: "button",
@@ -2162,7 +2162,7 @@ function se({
         className: tR,
         children: [jsx("div", {
           className: eB()(tk, tA, {
-            [tM]: this.props.profileTab === g3.RESOURCES
+            [tM]: this.props.profileTab === UserProfileTab.RESOURCES
           }),
           onClick: this.onFilesPluginsTabClick,
           role: "button",
@@ -2178,7 +2178,7 @@ function se({
             className: tP,
             children: jsxs("div", {
               className: eB()(tk, tA, tO, {
-                [tM]: this.props.profileTab === g3.METRICS
+                [tM]: this.props.profileTab === UserProfileTab.METRICS
               }),
               onClick: this.onMetricsTabClick,
               role: "button",
@@ -2220,7 +2220,7 @@ let st = connect(e => ({
   currentSelectedView: "selectedView" in e ? e.selectedView : null,
   authedActiveCommunityProfileId: "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null
 }))(se);
-let sr = l()(g3, ["FOLLOWERS", "FOLLOWING"]);
+let sr = l()(UserProfileTab, ["FOLLOWERS", "FOLLOWING"]);
 let ss = M4.Query({
   fetch: async e => (await _$$s2.getHandle({
     handle: e

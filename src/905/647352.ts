@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { NG } from "../figma_app/709893";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -21,7 +21,7 @@ import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { sb } from "../figma_app/519839";
 import { JT } from "../figma_app/173838";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { o as _$$o } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
 import { pz } from "../figma_app/825489";
@@ -46,7 +46,7 @@ let M = registerModal(function ({
   libraryModalSessionId: e
 }) {
   let t = useDispatch();
-  let i = q5();
+  let i = selectCurrentFile();
   let r = useAtomWithSubscription(pz);
   let s = useAtomWithSubscription(_$$t2);
   let o = JT();
@@ -124,7 +124,7 @@ export function $$W0(e) {
     let r = getI18nString("design_systems.libraries_modal.plural.num_style", {
       numStyles: t
     });
-    if (e > 0 && t > 0) i = Yx([n, r], "unit"); else if (e > 0) i = n; else {
+    if (e > 0 && t > 0) i = formatList([n, r], "unit");else if (e > 0) i = n;else {
       if (!(t > 0)) return "";
       i = r;
     }

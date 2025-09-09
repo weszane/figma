@@ -5,8 +5,8 @@ import { Q } from "../905/618914";
 import { EO } from "../figma_app/684446";
 import { FMemberRoleType } from "../figma_app/191312";
 import { Sc, VP } from "../905/18797";
-import { gq } from "../905/276025";
-import { A8 } from "../figma_app/465071";
+import { getPlanUserAtomFamily } from "../905/276025";
+import { checkOrgUserPermission } from "../figma_app/465071";
 import { Eh } from "../figma_app/617654";
 import { createOptimistThunk } from "../905/350402";
 import { Cx, x2, of } from "../figma_app/714946";
@@ -28,8 +28,8 @@ let y = async (e, t, r) => {
     orgById,
     loadingState
   } = e.getState();
-  let m = await Q(gq(!0));
-  let g = A8(m, FMemberRoleType.MEMBER);
+  let m = await Q(getPlanUserAtomFamily(!0));
+  let g = checkOrgUserPermission(m, FMemberRoleType.MEMBER);
   if (!r) return;
   let E = orgById[r];
   let y = EO(E.id);

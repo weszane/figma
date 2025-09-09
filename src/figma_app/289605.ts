@@ -13,7 +13,7 @@ import { Q as _$$Q } from "../905/553231";
 import { f as _$$f } from "../905/257420";
 import { VariableDataType, PropertyScope } from "../figma_app/763686";
 import f from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Uz } from "../905/63728";
 import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -123,9 +123,9 @@ function ei({
     variableId: e,
     isDetailsModal: r
   });
-  let _ = ZC(e);
+  let _ = useLatestRef(e);
   let h = p.variable?.variableSetId;
-  let m = ZC(h);
+  let m = useLatestRef(h);
   let [g, f] = useState(null);
   useEffect(() => {
     r ? _ && _ !== e && f(null) : m && m !== h && f(null);

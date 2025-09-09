@@ -12,7 +12,7 @@ import { E as _$$E, J } from "../figma_app/953812";
 import { A5, J5 } from "../figma_app/623414";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
-import { px, j_ } from "../figma_app/465071";
+import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { FRequestsStr } from "../905/384551";
 import { UserRole } from "../905/441038";
 import { O as _$$O } from "../figma_app/809387";
@@ -24,16 +24,16 @@ var d = l;
 export function $$x1() {
   let e = _6();
   let t = _$$E();
-  let r = px();
-  let n = j_(r).unwrapOr(!1);
+  let r = useTeamPlanUser();
+  let n = useIsOrgAdminUser(r).unwrapOr(!1);
   return t || N(e, n);
 }
 function N(e, t) {
   return "teamAdminConsole" !== e.view && "orgAdminSettings" !== e.view && ("licenseGroup" === e.view && e.subView === UserRole.ADMIN && !!t || "billingGroupDashboard" === e.view && e.selectedTab === FRequestsStr.ALL_REQUESTS || "workspace" === e.view && e.subView === V0.ADMIN && !!t || "orgDomainManagement" === e.view || "orgIdpManagement" === e.view || "abandonedDraftFiles" === e.view || "seatRequests" === e.view);
 }
 function C(e) {
-  let t = px();
-  return j_(t).unwrapOr(!1) ? jsxs(A5, {
+  let t = useTeamPlanUser();
+  return useIsOrgAdminUser(t).unwrapOr(!1) ? jsxs(A5, {
     children: [jsx(J5, {
       text: _$$O(J7.CONTENT),
       onClick: () => {
@@ -57,8 +57,8 @@ function C(e) {
   }) : null;
 }
 function w(e) {
-  let t = px();
-  return j_(t).unwrapOr(!1) ? jsx(A5, {
+  let t = useTeamPlanUser();
+  return useIsOrgAdminUser(t).unwrapOr(!1) ? jsx(A5, {
     children: jsx(J5, {
       text: _$$O(J7.BILLING),
       onClick: () => {
@@ -224,8 +224,8 @@ function M() {
 export function $$F0() {
   let e = useDispatch();
   let t = _6();
-  let r = px();
-  let a = j_(r).unwrapOr(!1);
+  let r = useTeamPlanUser();
+  let a = useIsOrgAdminUser(r).unwrapOr(!1);
   let s = _$$E();
   let o = N(t, a);
   let l = jsxs(Y, {

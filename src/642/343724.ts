@@ -15,7 +15,7 @@ import { renderI18nText } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { jo } from "../figma_app/753501";
 import { A0, Br } from "../figma_app/454974";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Ib } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { BZ } from "../642/998522";
@@ -65,7 +65,7 @@ export function $$M0({
   recordingKey: s,
   ...n
 }) {
-  let a = q5();
+  let a = selectCurrentFile();
   let d = a?.thumbnailGuid || null;
   return jsxs(Fragment, {
     children: [jsxs(bL, {

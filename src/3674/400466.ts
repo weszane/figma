@@ -37,7 +37,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/78808";
 import { VU } from "../905/625959";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { jN } from "../905/612685";
 import { d as _$$d } from "../905/91820";
 import { w as _$$w } from "../figma_app/883622";
@@ -1901,7 +1901,7 @@ function tB(e) {
     annotationIndex,
     parentRect
   } = e;
-  let s = q5();
+  let s = selectCurrentFile();
   let r = useDispatch();
   let c = tO();
   let u = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
@@ -3179,7 +3179,7 @@ function n5({
       }
     }));
   }, [m, y, e, F, j]);
-  let e_ = q5();
+  let e_ = selectCurrentFile();
   let ev = useCallback(() => {
     if (null === e_) return;
     let t = jN({

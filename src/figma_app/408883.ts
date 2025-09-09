@@ -1,9 +1,9 @@
 import { getFeatureFlags } from "../905/601108";
 import { Mq } from "../figma_app/991591";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FProductAccessType } from "../figma_app/191312";
-import { No } from "../figma_app/465071";
+import { useTeamPlanPublicInfo } from "../figma_app/465071";
 import { useEffect, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
@@ -13,22 +13,22 @@ import { q } from "../905/202542";
 import { JT } from "../figma_app/632248";
 import { Ig } from "../figma_app/350332";
 import { uQ } from "../figma_app/251115";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { e as _$$e2 } from "../figma_app/831857";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 var $$T0 = (e => (e.DISABLE_WITHOUT_TOAST = "disable_without_toast", e.UNAVAILABLE_ON_EDU_PLANS = "unavailable_on_edu_plans", e.MAKE_UNAVAILABLE_ON_PLAN = "make_unavailable_on_plan", e.MAKE_UNAVAILABLE_ON_SEAT = "make_unavailable_on_seat", e.INTERIM_VIEW_ONLY_COMING_SOON = "interim_view_only_coming_soon", e.VIEW_ONLY_ASK_TO_EDIT = "view_only_ask_to_edit", e.METER_LIMIT = "meter_limit", e.METER_LIMIT_UPGRADE_PLAN = "meter_limit_upgrade_plan", e.METER_LIMIT_UPGRADE_SEAT = "meter_limit_upgrade_seat", e.PLAN_AI_DISABLED = "plan_ai_disabled", e.DISABLE_CATCH_ALL = "disable_catch_all", e))($$T0 || {});
 export function $$I2() {
-  let e = q5();
+  let e = selectCurrentFile();
   return e?.canView && !e.canEdit;
 }
 export function $$S1() {
   let e = selectCurrentUser();
-  let t = q5();
+  let t = selectCurrentFile();
   let r = $$I2();
-  let T = No();
+  let T = useTeamPlanPublicInfo();
   let S = T.unwrapOr(null)?.tier || null;
-  let v = Oc();
-  let A = cJ();
+  let v = useIsSelectedFigmakeFullscreen();
+  let A = useIsFullscreenSitesView();
   let x = _$$e2();
   let N = v ? JT.FIGMAKE : JT.LIVING_DESIGNS;
   let {

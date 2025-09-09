@@ -4,9 +4,9 @@ import { xf } from "../figma_app/416935";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { FMemberRoleType } from "../figma_app/191312";
-import { A8 } from "../figma_app/465071";
+import { checkOrgUserPermission } from "../figma_app/465071";
 import { d as _$$d } from "../905/44199";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { vy, Um, aU } from "../figma_app/349248";
 import { eE } from "../figma_app/336853";
 export function $$h5(e, t, i) {
@@ -55,10 +55,10 @@ export function $$A1(e) {
     canEdit: t.canEdit,
     canRead: t.canRead,
     canAdmin: t.canAdmin,
-    canAdminOrg: !!(t?.currentPlanUser && A8(t.currentPlanUser, FMemberRoleType.ADMIN)),
+    canAdminOrg: !!(t?.currentPlanUser && checkOrgUserPermission(t.currentPlanUser, FMemberRoleType.ADMIN)),
     canDelete: t.canDelete,
     isOwner: t.isOwner,
-    isInTeam: !!(t.roleOnObjectForUser && t.roleOnObjectForUser.level >= e6.VIEWER),
+    isInTeam: !!(t.roleOnObjectForUser && t.roleOnObjectForUser.level >= AccessLevelEnum.VIEWER),
     pendingTeamRoleRequests: a,
     currentPlanUser: t.currentPlanUser
   };

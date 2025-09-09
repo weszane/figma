@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { a as _$$a } from "../0c62c2fd/950366";
-import { Ci } from "../figma_app/765689";
+import { getProductAccessType } from "../figma_app/765689";
 import { throwTypeError } from "../figma_app/465776";
-import { av } from "../figma_app/687776";
+import { mapFileTypeToPermissions } from "../figma_app/687776";
 import { h as _$$h } from "../figma_app/334471";
 import { FPermissionDenialReason } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
@@ -50,7 +50,7 @@ export function $$R0({
           editorType: e,
           lgFolder: t
         }) {
-          let r = av(t)[e];
+          let r = mapFileTypeToPermissions(t)[e];
           if (!r) return !1;
           if (r.result) return !0;
           if (!t.canEdit) return !1;
@@ -60,7 +60,7 @@ export function $$R0({
           lgFolder: e,
           editorType: s
         })) return "CANNOT_CREATE";
-        let c = Ci(s);
+        let c = getProductAccessType(s);
         if (!c) return "CANNOT_CREATE";
         let m = getUpgradeEligibility(c);
         let _ = hasPendingRequest(c);
@@ -159,7 +159,7 @@ export function $$R0({
                 handleUpgradeBuilder: s,
                 dispatch: n
               }) {
-                let o = Ci(t);
+                let o = getProductAccessType(t);
                 if (!o) {
                   reportError(_$$e.MONETIZATION_UPGRADES, Error("Editor type has no corresponding license type for file creation upgrade flow"), {
                     extra: {
@@ -205,7 +205,7 @@ export function $$R0({
           fileCreationOptionState: t,
           trackingContextProperties: r
         }) {
-          let a = Ci(e);
+          let a = getProductAccessType(e);
           let s = (() => {
             switch (t) {
               case m.CAN_CREATE:
@@ -267,7 +267,7 @@ export function $$R0({
     newFileFrom: t,
     fileCreationOptions: r
   });
-  let A = r.filter(e => e.fileCreationOptionState === m.CAN_REQUEST_UPGRADE).map(e => Ci(e.editorType)).filter(Boolean).sort().join(",");
+  let A = r.filter(e => e.fileCreationOptionState === m.CAN_REQUEST_UPGRADE).map(e => getProductAccessType(e.editorType)).filter(Boolean).sort().join(",");
   return jsx(_$$a, {
     menuItems: R,
     trackingProperties: {

@@ -8,7 +8,7 @@ import { useStableMemo } from "../905/19536";
 import c from "../vendor/73823";
 import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { Ru } from "../905/251509";
@@ -471,7 +471,7 @@ function ep({
   }
 }) {
   let l = a[t];
-  let c = ZC(l);
+  let c = useLatestRef(l);
   let [u, p] = useState(!1);
   let m = useRef(void 0);
   useEffect(() => {

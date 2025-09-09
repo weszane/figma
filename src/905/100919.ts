@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
-import { Rs } from "../figma_app/288654";
-import { gY } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { getAtomMutate } from "../figma_app/566371";
 import { Ex, zE } from "../figma_app/919079";
 import { p as _$$p } from "../905/991924";
 import { B } from "../905/714743";
@@ -23,9 +23,9 @@ import { A as _$$A } from "../5724/663128";
 export function $$S0(e) {
   let [t, i] = useState(null);
   let m = useDispatch();
-  let x = gY(b_);
+  let x = getAtomMutate(b_);
   let S = Xr(Y6);
-  let C = Rs(FileCanEdit, {
+  let C = useSubscription(FileCanEdit, {
     key: e.tile.type === nb.FILE ? e.tile.file.key : ""
   }, {
     enabled: e.tile.type === nb.FILE

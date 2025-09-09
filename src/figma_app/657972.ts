@@ -5,14 +5,14 @@ import { atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter, Ut } 
 import { debugState } from "../905/407919";
 import { R } from "../905/165069";
 import { logError } from "../905/714362";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
 import { u2, $K } from "../figma_app/223206";
 import { Kl } from "../905/766303";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Me } from "../figma_app/598018";
 import { f6, ai } from "../figma_app/915202";
@@ -85,7 +85,7 @@ async function N({
 }
 export function $$C1() {
   let e = EI();
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = useAtomWithSubscription(u2);
   let [a, d] = useAtomValueAndSetter($K);
   return R(() => {
@@ -113,7 +113,7 @@ export function $$C1() {
         icon: VisualBellIcon.CHECK,
         timeoutOverride: 3e3
       }));
-      YQ({
+      handleAtomEvent({
         id: Bn
       });
     });

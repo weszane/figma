@@ -1,6 +1,6 @@
 import { t_, atom, atomStoreManager, Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { a as _$$a, D as _$$D2 } from "../905/12032";
 import { Z3, FQ, Oi, oE } from "../905/953718";
 import { getLaunchDarklyFlagsExport, getInitialOptions, isDevEnvironment } from "../figma_app/169182";
@@ -124,7 +124,7 @@ window.Curator = {
     return atomStoreManager.get(_$$a);
   },
   sendEvent: function (e) {
-    YQ(e);
+    handleAtomEvent(e);
     return !0;
   },
   getExperienceSelectorChannels: function () {

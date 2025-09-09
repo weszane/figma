@@ -13,13 +13,13 @@ import { D as _$$D } from "../905/852057";
 import { formatI18nMessage } from "../905/482208";
 import { F as _$$F } from "../905/224";
 import { xp } from "../905/87821";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { pW } from "../905/218608";
 import { $A } from "../905/782918";
 import { hS } from "../905/437088";
@@ -27,7 +27,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { J8 } from "../905/760074";
+import { restoreFiles } from "../905/760074";
 import { registerModal } from "../905/102752";
 import { DV } from "../905/739964";
 import { y as _$$y } from "../figma_app/504415";
@@ -36,7 +36,7 @@ function $$D(e) {
   let t = useDispatch();
   let i = hS(e);
   let [s, d] = useState(!1);
-  let u = q5();
+  let u = selectCurrentFile();
   let h = u?.canEdit;
   let {
     version
@@ -55,7 +55,7 @@ function $$D(e) {
       return;
     }
     d(!0);
-    let n = await J8([i]);
+    let n = await restoreFiles([i]);
     if ("error" === n.status) {
       t(_$$s.error(n.message));
       d(!1);
@@ -135,7 +135,7 @@ let F = registerModal(function (e) {
   });
 }, "ConfirmRestoreModal");
 export function $$B0(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let i = t?.canEdit || !1;
   let C = useSelector(t => t.versionHistory.versions.find(t => t.id === e));
   let T = _6();
@@ -196,7 +196,7 @@ export function $$B0(e) {
         data: {
           team: e,
           resource: vL.FILE,
-          action: ZN.DUPLICATE_FILES,
+          action: fileActionEnum.DUPLICATE_FILES,
           editorType: t.editorType,
           currentPlan: _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.PRO,

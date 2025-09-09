@@ -17,7 +17,7 @@ import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { N as _$$N } from "../figma_app/55043";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { Ib } from "../905/129884";
 import { c as _$$c } from "../905/32166";
 import { registerModal } from "../905/102752";
@@ -27,7 +27,7 @@ export let $$A0 = registerModal(function (e) {
   let a = () => {
     t(hideModal());
   };
-  let S = S2().unwrapOr(null);
+  let S = useTeamPlanFeatures().unwrapOr(null);
   let A = hS({
     ...e,
     onClose: a

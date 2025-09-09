@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useLayoutEffect, useMemo, useContext } from "react";
 import { atom } from "../figma_app/27355";
 import { F } from "../905/680873";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
 import { bG } from "../905/149328";
 import { Wh } from "../figma_app/615482";
@@ -61,7 +61,7 @@ export function $$h0({
     defaultHeight: i,
     setHeight: n
   }) {
-    let o = ZC(t);
+    let o = useLatestRef(t);
     let l = F({
       previousComputedHeight: o,
       defaultHeight: i,

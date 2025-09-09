@@ -6,7 +6,7 @@ import { sf } from "../905/929976";
 import { F } from "../905/989956";
 import { ds } from "../figma_app/314264";
 import { FEditorType } from "../figma_app/53721";
-import { e6 } from "../figma_app/707808";
+import { SelectorType } from "../figma_app/707808";
 export function $$p3(e, t, r) {
   if ("fullscreen" !== t.view) return;
   let n = debugState.getState();
@@ -26,7 +26,7 @@ export function $$_0(e, t) {
     showDevModeComponentBrowser: !1,
     componentKey: void 0,
     devModeComponentBrowserBackButtonTargetNodeId: void 0,
-    githubRepositorySelectorMode: e6.NONE
+    githubRepositorySelectorMode: SelectorType.NONE
   }));
 }
 export function $$h1(e, t, r) {

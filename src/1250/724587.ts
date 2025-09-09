@@ -5,7 +5,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useSelector, useDispatch } from "react-redux";
 import { DQ, Pw, _X } from "../figma_app/121751";
-import { u8, A5, MF } from "../figma_app/391338";
+import { useShadowRead, adminPermissionConfig, useShadowReadLoaded } from "../figma_app/391338";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
 import { H } from "../figma_app/951233";
 import { kA } from "../figma_app/336853";
@@ -14,7 +14,7 @@ import { useState, useRef } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { V } from "../905/223767";
 import { dm } from "../figma_app/976345";
 import { showModalHandler } from "../905/156213";
@@ -25,20 +25,20 @@ import { TeamById } from "../figma_app/43951";
 import { w5, oc } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { UpsellModalType } from "../905/165519";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { Ib } from "../905/129884";
 function p(e) {
   let t = useSelector(e => getPermissionsStateMemoized(e));
-  let n = u8({
+  let n = useShadowRead({
     oldValue: H(t, e.orgId)?.permission === FUserRoleType.GUEST,
     newValue: e.isGuest,
-    label: A5.PlanSwitcherOrgBadges.isOrgGuest,
+    label: adminPermissionConfig.PlanSwitcherOrgBadges.isOrgGuest,
     enableFullRead: DQ(Pw.GROUP_7)
   });
-  let p = u8({
+  let p = useShadowRead({
     oldValue: kA(t.orgById[e.orgId]),
     newValue: e.planTier === FPlanNameType.ENTERPRISE,
-    label: A5.PlanSwitcherOrgBadges.isEnterprise,
+    label: adminPermissionConfig.PlanSwitcherOrgBadges.isEnterprise,
     enableFullRead: DQ(Pw.GROUP_7)
   });
   let g = n ? getI18nString("navbar.navbar.guest") : p ? getI18nString("navbar.navbar.enterprise") : getI18nString("navbar.navbar.org");
@@ -73,23 +73,23 @@ function R(e) {
   let n = useSelector(e => e.user);
   let _ = useSelector(e => e.teams)[e.teamId];
   let u = useSelector(e => getPermissionsStateMemoized(e));
-  let p = u8({
+  let p = useShadowRead({
     oldValue: w5(_),
     newValue: e.planTier === FPlanNameType.PRO || e.planTier === FPlanNameType.STUDENT,
-    label: A5.PlanSwitcherTeamBadges.isProOrStudentTeam,
+    label: adminPermissionConfig.PlanSwitcherTeamBadges.isProOrStudentTeam,
     enableFullRead: DQ(Pw.GROUP_7)
   });
-  let R = Rs(TeamById({
+  let R = useSubscription(TeamById({
     teamId: e.teamId
   }), {
     enabled: !p && _X(Pw.GROUP_7)
   });
-  let M = MF({
+  let M = useShadowReadLoaded({
     oldValue: resourceUtils.loaded(hasEditorRoleAccessOnTeam(e.teamId, u)),
     newValue: R.transform(({
       team: e
-    }) => !!(e?.roleOnObjectForUser && e.roleOnObjectForUser.level >= e6.EDITOR)),
-    label: A5.PlanSwitcherTeamBadges.canUpgradeStarterTeam,
+    }) => !!(e?.roleOnObjectForUser && e.roleOnObjectForUser.level >= AccessLevelEnum.EDITOR)),
+    label: adminPermissionConfig.PlanSwitcherTeamBadges.canUpgradeStarterTeam,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
       teamId: e.teamId

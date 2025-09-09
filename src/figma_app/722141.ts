@@ -5,9 +5,9 @@ import { getI18nString } from '../905/303541';
 import { oA } from '../905/723791';
 import { HasConnectedPlanUserInOrg, ProjectNameById } from '../figma_app/43951';
 import { FOrganizationLevelType, FProductAccessType } from '../figma_app/191312';
-import { p as _$$p, Rs } from '../figma_app/288654';
+import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { Cy, wH } from '../figma_app/680166';
-import { wR } from '../figma_app/765689';
+import { getProductAccessTypeOrDefault } from '../figma_app/765689';
 let _ = {
   [FProductAccessType.DESIGN]: 1,
   [FProductAccessType.SITES]: 2,
@@ -42,13 +42,13 @@ export function $$E4(e) {
   let t = e.filter(e => e != null).map(e => ({
     projectId: e
   }));
-  let r = _$$p(ProjectNameById, t);
+  let r = useMultiSubscription(ProjectNameById, t);
   return useMemo(() => r.reduce((e, t) => (t.args.projectId && e.set(t.args.projectId, t?.result?.data?.project?.path ?? null), e), new Map()), [r]);
 }
 export function $$y0(e, t) {
   let r = e?.parentId || '';
   let n = e?.type === FOrganizationLevelType.ORG;
-  let i = Rs(HasConnectedPlanUserInOrg, {
+  let i = useSubscription(HasConnectedPlanUserInOrg, {
     org_id: r,
     license_type: t
   }, {
@@ -125,7 +125,7 @@ export function $$I3({
 }) {
   let E = function (e, t, r) {
     let n = e => r.get(String(e.folder_id)) === '';
-    let i = e.filter(n).map(e => wR(e.editor_type));
+    let i = e.filter(n).map(e => getProductAccessTypeOrDefault(e.editor_type));
     t.filter(n).length > 0 && i.push(FProductAccessType.DESIGN);
     return i.reduce((e, t) => e === null || _[t] < _[e] ? t : e, null);
   }(e, t, n);

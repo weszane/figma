@@ -1,8 +1,8 @@
 import { n as _$$n } from "../905/347702";
 import { useSelector } from "react-redux";
-import { tB } from "../figma_app/516028";
+import { selectOpenFile } from "../figma_app/516028";
 export let $$a1 = _$$n(e => {
-  let t = tB({
+  let t = selectOpenFile({
     openFile: e.openFile
   });
   return !!t?.parentOrgId;

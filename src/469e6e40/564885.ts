@@ -13,7 +13,7 @@ import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { sf } from "../905/929976";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { O } from "../905/833838";
@@ -138,7 +138,7 @@ function S(e) {
     className: "x1n5zjp5 x17akokd xdpxx8g",
     children: [jsx("td", {
       className: "xi4r6k5 x1qxcl5b",
-      children: _$$E(wR(e.editorType))
+      children: _$$E(getProductAccessTypeOrDefault(e.editorType))
     }), jsx("td", {
       className: "xi4r6k5 x1qxcl5b",
       children: (() => {

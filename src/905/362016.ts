@@ -3,8 +3,8 @@ import { useMemo } from "react";
 import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/500201";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Gj, Lk } from "../figma_app/646357";
@@ -17,7 +17,7 @@ import { lH, Ze } from "../905/297574";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A as _$$A } from "../905/408320";
 import { q } from "../905/820062";
-import { DV } from "../figma_app/930338";
+import { sortWithCollator } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
 import { PW } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
@@ -42,7 +42,7 @@ function T({
     let s = i.get(n);
     s ? s.push(e) : i.set(n, [e]);
   });
-  let a = DV(Array.from(i.keys()), e => r.get(e) ?? "");
+  let a = sortWithCollator(Array.from(i.keys()), e => r.get(e) ?? "");
   let s = a.length > 1;
   return jsx("div", {
     children: a.map(e => {
@@ -169,7 +169,7 @@ function P({
 function M({
   libraryFileKey: e
 }) {
-  let [t] = IT(U(e));
+  let [t] = setupResourceAtomHandler(U(e));
   let i = useMemo(() => [{
     type: _$$V.STAT,
     header: getI18nString("design_systems.libraries_modal.used_by"),
@@ -207,7 +207,7 @@ function M({
 function j({
   libraryFileKey: e
 }) {
-  let [t] = IT(U(e));
+  let [t] = setupResourceAtomHandler(U(e));
   let i = t.data;
   let a = useMemo(() => [{
     type: _$$V.STAT,
@@ -267,10 +267,10 @@ export function $$H0(e) {
     onItemClick
   } = e;
   let f = LH();
-  let [y] = IT(lH(file.key));
+  let [y] = setupResourceAtomHandler(lH(file.key));
   let b = "loading" === y.status;
   let v = useMemo(() => [...("loaded" === y.status ? y.data : [])].sort(Lk), [y]);
-  let [I] = IT(Xk({
+  let [I] = setupResourceAtomHandler(Xk({
     duration,
     orgId: f,
     libraryFileKey: file.key,
@@ -322,7 +322,7 @@ export function $$H0(e) {
 function W({
   libraryFileKey: e
 }) {
-  let t = Rs(LibraryVariableCollectionDataWithVariables, {
+  let t = useSubscription(LibraryVariableCollectionDataWithVariables, {
     fileKey: e
   });
   let i = t.data?.file?.variableCollections;

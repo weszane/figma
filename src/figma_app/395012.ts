@@ -1,9 +1,9 @@
 import { createMetaValidator } from "../figma_app/181241";
-import { wF } from "../905/814802";
+import { TeamUserSchema } from "../905/814802";
 var $$a0 = (e => (e.DEV_MODE_BETA_SUGGESTED_UPGRADES = "dev_mode_beta_suggested_upgrades", e.MEMBERS_TAB = "members_tab", e.FILE_PERMISSIONS_MODAL = "file_permissions_modal", e))($$a0 || {});
 export let $$s1 = new class {
   constructor() {
-    this.UpdateTeamUsersSchemaValidator = createMetaValidator("UpdateTeamUsersSchemaValidator", wF.array(), null);
+    this.UpdateTeamUsersSchemaValidator = createMetaValidator("UpdateTeamUsersSchemaValidator", TeamUserSchema.array(), null);
   }
   updateTeamUsers(e) {
     return this.UpdateTeamUsersSchemaValidator.validate(async ({

@@ -3,9 +3,9 @@ import { l as _$$l } from "../905/716947";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { z } from "../905/239603";
 import { unwrap } from "../vendor/812047";
-import { oA as _$$oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { Xm, gB } from "../905/723791";
-import { En } from "../figma_app/566371";
+import { setupMemoizedAtomSubscription } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
 import { ZJ } from "../3973/697935";
 import { Uv } from "../3973/473379";
@@ -82,7 +82,7 @@ let $$D2 = _$$n(() => {
     libraryKey: e,
     assetType: FComponentType.RESPONSIVE_SET
   }));
-  return En(r, {
+  return setupMemoizedAtomSubscription(r, {
     enabled
   });
 });
@@ -134,20 +134,20 @@ export function $$F6() {
   let t = $$D2();
   let r = [];
   for (let e of t) {
-    let t = _$$oA(e.data?.libraryKeyToFile?.file);
+    let t = getResourceDataOrFallback(e.data?.libraryKeyToFile?.file);
     let n = t?.libraryKey ?? "";
     n && r.push(n);
   }
   let s = r.map(e => LibraryComponentDataByLibraryKey.Query({
     libraryKey: e
   }));
-  let o = En(s, {
+  let o = setupMemoizedAtomSubscription(s, {
     enabled: !0
   });
   return useMemo(() => {
     let t = {};
     for (let r of o) {
-      let n = _$$oA(r.data?.libraryKeyToFile?.file);
+      let n = getResourceDataOrFallback(r.data?.libraryKeyToFile?.file);
       let a = r.data?.libraryKeyToFile?.file?.libraryKey;
       if (!n || !a) continue;
       let s = n.libraryHierarchyPaths.flatMap(e => e.components).map(e => Qp(e, {

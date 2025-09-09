@@ -15,7 +15,7 @@ import { H8 } from "../905/590952";
 import { popModalStack } from "../905/156213";
 import { aJ, kN, QC } from "../figma_app/494261";
 import { selectUser } from "../905/372672";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 export let $$b0 = registerModal(function (e) {
   let {
     team,
@@ -27,8 +27,8 @@ export let $$b0 = registerModal(function (e) {
     u(popModalStack());
   };
   let b = selectUser();
-  let I = void 0 === requesterCurrentLevel || requesterCurrentLevel < e6.VIEWER;
-  let [E, x] = useState(I ? e6.VIEWER : e6.EDITOR);
+  let I = void 0 === requesterCurrentLevel || requesterCurrentLevel < AccessLevelEnum.VIEWER;
+  let [E, x] = useState(I ? AccessLevelEnum.VIEWER : AccessLevelEnum.EDITOR);
   let [S, w] = useState("");
   let C = I ? aJ : kN;
   let T = () => {
@@ -41,7 +41,7 @@ export let $$b0 = registerModal(function (e) {
       actionType: aJ
     })) : C === kN && u(QC({
       teamId: team.id ?? "",
-      level: e6.EDITOR,
+      level: AccessLevelEnum.EDITOR,
       message: S,
       source: source ?? "",
       actionType: kN
@@ -51,7 +51,7 @@ export let $$b0 = registerModal(function (e) {
   let k = useCallback(e => {
     w(e.currentTarget.value);
   }, [w]);
-  let R = E === e6.EDITOR ? getI18nString("file_browser.request_access_modal.request_edit_access") : getI18nString("file_browser.request_access_modal.request_view_access");
+  let R = E === AccessLevelEnum.EDITOR ? getI18nString("file_browser.request_access_modal.request_edit_access") : getI18nString("file_browser.request_access_modal.request_view_access");
   let N = jsx("span", {
     className: "request_access_modal--teamName--9ZkLe",
     children: team.name
@@ -120,7 +120,7 @@ function v({
   requesterCurrentLevel: i,
   user: r
 }) {
-  let a = void 0 === i || i < e6.VIEWER;
+  let a = void 0 === i || i < AccessLevelEnum.VIEWER;
   return jsxs("div", {
     className: "request_access_modal--userRow--ijROZ",
     children: [jsx(H8, {
@@ -143,10 +143,10 @@ function v({
         disabled: !a
       }), jsxs(mc, {
         children: [a && jsx(c$, {
-          value: e6.VIEWER.toString(),
+          value: AccessLevelEnum.VIEWER.toString(),
           children: getI18nString("file_browser.request_access_modal.can_view")
         }), jsx(c$, {
-          value: e6.EDITOR.toString(),
+          value: AccessLevelEnum.EDITOR.toString(),
           children: getI18nString("file_browser.request_access_modal.can_edit")
         })]
       })]

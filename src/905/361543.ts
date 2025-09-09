@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { c2 } from "../905/382883";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 export function $$s0(e, t = {
   resetOnInitialStateChange: !1
 }) {
   let [i, o] = useState(e);
-  let l = ZC(e);
+  let l = useLatestRef(e);
   useEffect(() => {
     t.resetOnInitialStateChange && !c2(e, l) && o(e);
   }, [t.resetOnInitialStateChange, e, l]);

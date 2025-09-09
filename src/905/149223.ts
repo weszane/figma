@@ -21,7 +21,7 @@ import { Ku } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { Tm, bn, x$ } from "../figma_app/385874";
 import { lJ } from "../905/275640";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
 import { q } from "../905/65944";
@@ -248,7 +248,7 @@ export function $$j1({
 }) {
   let G = useDispatch();
   let z = Ku();
-  let H = q5();
+  let H = selectCurrentFile();
   let {
     currentTool,
     editModeType,

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -24,7 +24,7 @@ export function $$y0({
 }) {
   let _ = useDispatch();
   let y = _$$p2(getI18nString("file_browser.pinning.pin_modal.confirmation_bell"), "file-browser-workspace-add-pin");
-  let j = Rs(AddWorkspacePinnedFileView, {
+  let j = useSubscription(AddWorkspacePinnedFileView, {
     fileKey: e
   });
   let T = function (e) {

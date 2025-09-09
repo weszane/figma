@@ -9,7 +9,7 @@ import { logError } from "../905/714362";
 import { am } from "../figma_app/430563";
 import { Jl, y3, UB } from "../figma_app/80990";
 import { qp } from "../905/977779";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dx, ZX, nJ, Hb, fc, t$ } from "../figma_app/646357";
 import { QB } from "../905/921418";
 import { T } from "../905/486858";
@@ -244,7 +244,7 @@ export var $$P1 = (e => (e[e.Grid = 0] = "Grid", e[e.List = 1] = "List", e))($$P
 export let $$D4 = e => 0 === e ? "grid" : "list";
 export function $$k7(e, t) {
   let r = useDispatch();
-  let a = q5();
+  let a = selectCurrentFile();
   let s = M();
   let o = t$(e);
   let l = T();

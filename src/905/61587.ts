@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { createElement } from "react";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { hK } from "../figma_app/211706";
 import { yg, Wb, Rc } from "../905/948828";
 export function $$c0() {
@@ -37,7 +37,7 @@ function u({
         height: 10
       }), jsxs("div", {
         className: _$$s.font15.lh24.$,
-        children: [i, e === ud.EXPERT && jsx(Wb, {
+        children: [i, e === ProductAccessTypeEnum.EXPERT && jsx(Wb, {
           isStaticColor: !0
         })]
       }), jsx(hK, {

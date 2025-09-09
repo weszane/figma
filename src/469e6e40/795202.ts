@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
 import { KX } from "../469e6e40/623537";
 import { re } from "../469e6e40/421552";
@@ -16,7 +16,7 @@ import { NJ } from "../figma_app/518077";
 import { WorkspaceAdminSettingsView, WorkspaceInfoView } from "../figma_app/43951";
 import { U5 } from "../figma_app/336853";
 import { J0, oU } from "../figma_app/967319";
-import { Ft } from "../figma_app/707808";
+import { EntityType } from "../figma_app/707808";
 import { m2 } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
 import { z6 } from "../figma_app/805373";
@@ -98,7 +98,7 @@ function q(e) {
 function $({
   workspaceId: e
 }) {
-  let t = Rs(WorkspaceAdminSettingsView, {
+  let t = useSubscription(WorkspaceAdminSettingsView, {
     workspaceId: e
   });
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
@@ -139,7 +139,7 @@ function G({
   let E = useSelector(({
     selectedView: e
   }) => e);
-  let C = Rs(WorkspaceInfoView, {
+  let C = useSubscription(WorkspaceInfoView, {
     workspaceId: e
   });
   let S = "loaded" !== C.status;
@@ -235,7 +235,7 @@ export function $$z0({
   return (useEffect(() => {
     c && a(sf({
       view: "resourceUnavailable",
-      resourceType: Ft.WORKSPACE
+      resourceType: EntityType.WORKSPACE
     }));
   }, [a, c]), _) ? null : jsx(G, {
     workspaceId: e,

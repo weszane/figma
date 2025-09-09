@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -23,7 +23,7 @@ export let $$v0 = memo(function ({
   width: l,
   hideOpenInFileButton: p = !1
 }) {
-  let [h] = IT(U7({
+  let [h] = setupResourceAtomHandler(U7({
     libraryFileKey: e ?? "",
     variableKey: t.key
   }), {
@@ -77,7 +77,7 @@ function I({
   variableKey: t,
   resolvedType: i
 }) {
-  let [r] = IT(U7({
+  let [r] = setupResourceAtomHandler(U7({
     libraryFileKey: e ?? "",
     variableKey: t
   }), {

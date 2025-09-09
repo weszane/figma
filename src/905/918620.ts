@@ -2,9 +2,9 @@ import { useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { selectWithShallowEqual } from "../905/103090";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { L8 } from "../905/760074";
+import { getRepoById } from "../905/760074";
 import { Ad } from "../figma_app/2023";
 import { FileShareModalPermissionsV3, FileShareModalCurrentUserPermissions, TeamCanEdit, ResourceConnectionSharingGroupUsersByFile } from "../figma_app/43951";
 import { s5 } from "../figma_app/193867";
@@ -26,10 +26,10 @@ export function $$h0({
     repoId: null,
     currentOrgId: null
   };
-  let r = Rs(FileShareModalPermissionsV3, i, {
+  let r = useSubscription(FileShareModalPermissionsV3, i, {
     enabled: !!t
   });
-  let a = Rs(FileShareModalCurrentUserPermissions, {
+  let a = useSubscription(FileShareModalCurrentUserPermissions, {
     fileKey: e
   });
   let s = useMemo(() => Ad(r, a), [r, a]);
@@ -42,7 +42,7 @@ export function $$g1(e) {
   let t = null;
   "string" == typeof e ? t = e : e && (t = e.team_id);
   let i = !!t;
-  let n = Rs(TeamCanEdit, {
+  let n = useSubscription(TeamCanEdit, {
     id: t || ""
   }, {
     enabled: i
@@ -52,7 +52,7 @@ export function $$g1(e) {
 export function $$f3({
   fileKey: e
 }) {
-  let t = Rs(ResourceConnectionSharingGroupUsersByFile, {
+  let t = useSubscription(ResourceConnectionSharingGroupUsersByFile, {
     fileKey: e
   });
   return ("loaded" === t.status ? oA(t.data?.file?.resourceConnectionSharingGroupUsers) : void 0) ?? void 0;
@@ -81,7 +81,7 @@ export function $$A5() {
 export function $$y4(e, t) {
   return useSelector(i => {
     if (!e || !t) return null;
-    let n = L8(e, i.repos);
+    let n = getRepoById(e, i.repos);
     let r = n ? n.team_id : e.team_id;
     return r && i.teamUserByTeamId?.[r]?.[t] || null;
   });

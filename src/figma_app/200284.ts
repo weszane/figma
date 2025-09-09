@@ -19,7 +19,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { Fe } from "../905/284552";
 import { Y as _$$Y } from "../905/506207";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { LN } from "../figma_app/975811";
@@ -33,8 +33,8 @@ import { y7, Lt } from "../figma_app/385874";
 import { Sl } from "../905/619652";
 import { Zr } from "../figma_app/678782";
 import { J as _$$J } from "../905/95677";
-import { q5 } from "../figma_app/516028";
-import { Qn } from "../figma_app/12796";
+import { selectCurrentFile } from "../figma_app/516028";
+import { canEditBasedOnPlan } from "../figma_app/12796";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { qo } from "../905/959568";
@@ -83,7 +83,7 @@ export function $$eT3(e) {
   let r = GM();
   let s = Os();
   let o = X7();
-  let l = q5();
+  let l = selectCurrentFile();
   let d = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   return jsx(fu, {
     name: "Image Settings Modal",
@@ -305,7 +305,7 @@ class eI extends Component {
     let t = null != e.paint.animatedImage;
     let r = null != this.props.paint.animatedImage;
     !t && r ? this.setupGIF() : t && r ? eE(e.paint.animatedImage.hash, this.props.paint.animatedImage.hash) || this.setupGIF() : t && !r && this.clearGIFContentRequest();
-    "STRETCH" === this.props.paint.imageScaleMode && YQ({
+    "STRETCH" === this.props.paint.imageScaleMode && handleAtomEvent({
       id: "Image panel has cropped image"
     });
   }
@@ -372,7 +372,7 @@ class eI extends Component {
       setPlaying: this.setGIFPlaying,
       playing: null != this.state.animatedImage && this.state.playing,
       setGIFCoverFrame: this.setGIFCoverFrame
-    }); else return jsxs(Fragment, {
+    });else return jsxs(Fragment, {
       children: [this.props.isAiEnabled && jsx(eC, {
         onClose: this.props.onClose
       }), jsx(fu, {
@@ -395,7 +395,7 @@ class eI extends Component {
   }
   render() {
     let e = this.isVideo();
-    let t = Qn(this.props.openFile);
+    let t = canEditBasedOnPlan(this.props.openFile);
     let r = !this.isVideo() && !this.isAnimatedImage() && this.props.isUI3 && this.props.isAiEnabled;
     let i = this.props.insetImageSettings ? 208 : ef;
     let a = this.props.insetImageSettings ? 208 : 152;

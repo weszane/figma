@@ -3,7 +3,7 @@ import { debugState } from '../905/407919';
 import { getFeatureFlags } from '../905/601108';
 import { FEditorType } from '../figma_app/53721';
 import { qy, uk } from '../figma_app/216057';
-import { ze } from '../figma_app/516028';
+import { openFileKeyAtom } from '../figma_app/516028';
 import { Wh } from '../figma_app/615482';
 import { td } from '../figma_app/827216';
 import { XE } from '../figma_app/976749';
@@ -60,7 +60,7 @@ let $$C10 = Wh(() => atom(new Map()));
 let $$w4 = Wh(() => atom(void 0));
 let $$O18 = Wh(() => atom(e => {
   let t = e($$w4);
-  let r = e(ze);
+  let r = e(openFileKeyAtom);
   return t?.has(r) ?? !1;
 }));
 let $$R7 = Wh(() => atom(new Set()));

@@ -14,7 +14,7 @@ import { selectCurrentUser } from "../905/372672";
 import { OI, Mt } from "../c5e2cae0/2942";
 import { Ju } from "../905/712921";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
-import { SC, Sc, h5, ck, jX } from "../figma_app/707808";
+import { UpgradeAction, TeamType, isCreateOrUpgrade, isCreateOrPlanComparison, isUpgradeExistingTeam } from "../figma_app/707808";
 import { Nd, N6 } from "../figma_app/81441";
 if (443 == require.j) {}
 function j(e) {
@@ -34,21 +34,21 @@ function T(e, t, a, s) {
   let r = t === SubscriptionType.STUDENT;
   let l = [];
   switch (e) {
-    case SC.CREATE_AND_UPGRADE:
+    case UpgradeAction.CREATE_AND_UPGRADE:
       l.push(0);
       l.push(1);
       r ? l.push(4) : a || (l.push(4), l.push(5));
       l.push(6);
       break;
-    case SC.UPGRADE_EXISTING_TEAM:
-      s === Sc.TEAM ? (l.push(3), r || l.push(5)) : r ? (l.push(0), l.push(3)) : a ? l.push(0) : (l.push(0), l.push(4), l.push(5));
+    case UpgradeAction.UPGRADE_EXISTING_TEAM:
+      s === TeamType.TEAM ? (l.push(3), r || l.push(5)) : r ? (l.push(0), l.push(3)) : a ? l.push(0) : (l.push(0), l.push(4), l.push(5));
       l.push(6);
       break;
-    case SC.CREATE:
+    case UpgradeAction.CREATE:
       l.push(1);
       l.push(2);
       l.push(0);
-      s === Sc.TEAM && (r ? l.push(4) : a || (l.push(4), l.push(5)), l.push(6));
+      s === TeamType.TEAM && (r ? l.push(4) : a || (l.push(4), l.push(5)), l.push(6));
       break;
     default:
       throwTypeError(e);
@@ -111,14 +111,14 @@ export function $$b1(e) {
   let _ = useDispatch();
   let u = useSelector(e => e.payment.billingPeriod);
   let S = selectCurrentUser()?.id;
-  let N = T(teamFlowType, u, useSelector(e => e.payment.promo), e.selectedView.planType || Sc.UNDETERMINED);
+  let N = T(teamFlowType, u, useSelector(e => e.payment.promo), e.selectedView.planType || TeamType.UNDETERMINED);
   let b = N.findIndex(e => e.step === paymentStep);
   return jsxs("div", {
     className: N6,
     "data-testid": "cart-breadcrumb-menu-pro",
     children: [jsx(j, {
       onClick: () => {
-        (clearPaymentFlowData(), e.isCampfireCart ? OI(_) : Mt(_), h5(teamFlowType) && null === teamId && Al(S), S) ? teamId && (!selectedView.previousView || "fullscreen" !== selectedView.previousView.view) ? _(_l({
+        (clearPaymentFlowData(), e.isCampfireCart ? OI(_) : Mt(_), isCreateOrUpgrade(teamFlowType) && null === teamId && Al(S), S) ? teamId && (!selectedView.previousView || "fullscreen" !== selectedView.previousView.view) ? _(_l({
           workspace: {
             userId: S,
             teamId,
@@ -155,8 +155,8 @@ export function $$b1(e) {
           ...selectedView,
           paymentStep: r.step,
           billingPeriod: u === SubscriptionType.UNSPECIFIED ? void 0 : u,
-          planType: ck(teamFlowType, r.step) ? Sc.UNDETERMINED : selectedView.planType,
-          teamFlowType: jX(teamFlowType) && r.step === UpgradeSteps.PLAN_COMPARISON ? SC.CREATE_AND_UPGRADE : selectedView.teamFlowType
+          planType: isCreateOrPlanComparison(teamFlowType, r.step) ? TeamType.UNDETERMINED : selectedView.planType,
+          teamFlowType: isUpgradeExistingTeam(teamFlowType) && r.step === UpgradeSteps.PLAN_COMPARISON ? UpgradeAction.CREATE_AND_UPGRADE : selectedView.teamFlowType
         }));
       }
     }, r.text))]

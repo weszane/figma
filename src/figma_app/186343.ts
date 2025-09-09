@@ -18,7 +18,7 @@ import { IL } from "../figma_app/582924";
 import { QZ } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { P3 } from "../figma_app/952446";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { KI, J9, LF } from "../figma_app/345997";
 import { F as _$$F2 } from "../905/258517";
@@ -26,7 +26,7 @@ import { Fk } from "../figma_app/167249";
 import { UpsellModalType } from "../905/165519";
 import { vw, yH } from "../figma_app/841351";
 import { vL } from "../905/652992";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { ob, kh } from "../figma_app/571341";
 import { DV } from "../905/739964";
 export function $$D5(e, t) {
@@ -47,9 +47,9 @@ export async function $$M11({
   return !(!t || !e || KI(e)) && !!$$D5(t, r) && (Multiplayer.isIncrementalSession() && (await IL(t.guid, AutosaveEventType.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
 }
 export function $$F7() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = p8("pagesList").length;
     let r = $$j3();
     return !!(e && (J9({
@@ -69,7 +69,7 @@ export function $$F7() {
         data: {
           team: e.team,
           resource: vL.PAGE,
-          action: ZN.CREATE_PAGE,
+          action: fileActionEnum.CREATE_PAGE,
           editorType: e.editorType,
           currentPlan: _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.PRO,

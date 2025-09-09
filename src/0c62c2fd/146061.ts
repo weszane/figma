@@ -3,7 +3,7 @@ import { useState, useCallback, Fragment as _$$Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import n from "classnames";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { nR, vd } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -19,12 +19,12 @@ import { FC } from "../figma_app/212807";
 import { FolderMoveModalView } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
 import { UpsellModalType } from "../905/165519";
-import { bL } from "../figma_app/630077";
+import { getTeamUrl } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { e0 } from "../905/696396";
 import { OJ } from "../905/519092";
 import { Uc } from "../4452/915131";
-import { aI } from "../figma_app/552876";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { s as _$$s } from "../905/761565";
 import { A as _$$A } from "../6828/555288";
 import { A as _$$A2 } from "../6828/7452";
@@ -40,7 +40,7 @@ export function $$M0(e) {
   let o = _$$s();
   let g = useSelector(e => e.currentUserOrgId);
   let A = useSelector(e => null != g ? e.orgById[g] : null);
-  let P = Rs(FolderMoveModalView, {
+  let P = useSubscription(FolderMoveModalView, {
     currentOrgId: g,
     currentTeamId: null,
     folderId: e.folderId
@@ -81,7 +81,7 @@ export function $$M0(e) {
   };
   let X = useCallback(() => {
     if (M && !$) {
-      let e = bL(M?.id, M.orgId);
+      let e = getTeamUrl(M?.id, M.orgId);
       customHistory.redirect(e, "_blank");
     }
   }, [M, $]);
@@ -199,7 +199,7 @@ export function $$M0(e) {
                 })]
               })]
             })
-          }), (o || aI()) && !A && M && $ && "loaded" === P.status && P.data?.project?.hasPublishedSite.status === "loaded" && oA(P.data?.project?.hasPublishedSite) && jsx("div", {
+          }), (o || isFigmakeSitesEnabled()) && !A && M && $ && "loaded" === P.status && P.data?.project?.hasPublishedSite.status === "loaded" && oA(P.data?.project?.hasPublishedSite) && jsx("div", {
             className: O,
             children: jsx(_$$_, {
               dataTestId: "project-move-site-unpublish-banner",

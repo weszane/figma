@@ -1,9 +1,9 @@
-import { tT } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { ResourceStatus } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { c } from "../905/587163";
 import { AllowlistPluginsSectionView, CurrentWorkspaceView } from "../figma_app/43951";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 function d(e, t, r) {
   let i = [];
   let a = [];
@@ -11,7 +11,7 @@ function d(e, t, r) {
     var s;
     if (!t.plugin) continue;
     if ("status" in t.plugin) {
-      if (t.plugin.status !== tT.Loaded) continue;
+      if (t.plugin.status !== ResourceStatus.Loaded) continue;
       s = t.plugin.data;
     } else s = t.plugin;
     if (!s) continue;
@@ -25,7 +25,7 @@ function d(e, t, r) {
 }
 export function $$c6(e, t, r = !0) {
   let n = $$g3();
-  let a = Rs(AllowlistPluginsSectionView, {
+  let a = useSubscription(AllowlistPluginsSectionView, {
     orgId: e
   }, {
     enabled: r
@@ -90,9 +90,9 @@ export function $$m0({
   }) && !t.is_private && !n[t.plugin_id]);
 }
 export function $$g3() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = !!e;
-  let r = Rs(CurrentWorkspaceView, {
+  let r = useSubscription(CurrentWorkspaceView, {
     fileKey: e?.key ?? ""
   }, {
     enabled: t

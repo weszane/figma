@@ -19,7 +19,7 @@ import { qg, r5, GZ } from "../figma_app/436286";
 import { X7 } from "../905/713167";
 import { K0 } from "../figma_app/778125";
 import { c$, l6, sK } from "../905/794875";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { p6, DU, rO } from "../905/567570";
 let x = c$;
 function N(e) {
@@ -75,7 +75,7 @@ export function $$O1(e) {
   });
 }
 let R = memo(function (e) {
-  let t = cJ();
+  let t = useIsFullscreenSitesView();
   let r = r5.map((r, i) => {
     let a = "LINEAR_BURN" === r && t;
     return "SELECT_DIVIDER" === r ? jsx(sK, {}, i) : jsx(x, {

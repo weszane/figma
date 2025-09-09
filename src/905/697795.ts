@@ -17,7 +17,7 @@ import { hideModal } from "../905/156213";
 import { c5, p4 } from "../905/93909";
 import { NR } from "../905/977218";
 import { XE } from "../figma_app/976749";
-import { Xm } from "../905/760074";
+import { isBranch } from "../905/760074";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
@@ -99,7 +99,7 @@ export function $$M2(e, t) {
     e?.name ? i = e.name : t?.localFileName && (i = t.localFileName);
   }
   let n = yt(e);
-  if (n && Xm(n)) {
+  if (n && isBranch(n)) {
     L(`\u2325 ${i}`, `${i}`);
     return;
   }

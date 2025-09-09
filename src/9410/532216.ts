@@ -23,12 +23,12 @@ import { OA } from "../figma_app/419216";
 import { lQ } from "../905/934246";
 import { o as _$$o } from "../905/821217";
 import { ColorSpaceEnum, ColorProfileEnum, Fullscreen, AppStateTsApi } from "../figma_app/763686";
-import { oA } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { R as _$$R } from "../905/304671";
-import { to as _$$to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { Dl } from "../figma_app/601682";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { ju } from "../figma_app/88239";
 import { n6 } from "../905/234821";
 import { fu } from "../figma_app/831799";
@@ -37,13 +37,13 @@ import { Em, m0 } from "../figma_app/976749";
 import { h as _$$h } from "../905/864281";
 import { kD, J3, JU, kN } from "../figma_app/622574";
 import { Cu } from "../figma_app/314264";
-import { up, SA, Kz } from "../905/760074";
+import { getRepoByIdAlt, isDefaultFile, isBranchAlt } from "../905/760074";
 import { m as _$$m, t as _$$t2 } from "../905/364535";
 import { $n } from "../905/930279";
 import { ck } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 as _$$m2 } from "../figma_app/546509";
-import { q5, vu } from "../figma_app/516028";
+import { selectCurrentFile, selectOpenFileObject } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FileManagePermission, FileNameViewDropdown } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
@@ -65,8 +65,8 @@ import { jT } from "../figma_app/277330";
 import { tz } from "../figma_app/531331";
 import { DF, RG } from "../figma_app/146384";
 import { F as _$$F } from "../figma_app/928238";
-import { Oc } from "../figma_app/552876";
-import { cJ } from "../905/561485";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { e as _$$e2 } from "../figma_app/831857";
 import { sO } from "../figma_app/21029";
 import { fx, PF } from "../figma_app/657972";
@@ -84,7 +84,7 @@ import { kj, U1 } from "../905/191601";
 import { vg } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
-import { _R } from "../figma_app/765689";
+import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/300562";
 import { T0, gV, t$ } from "../figma_app/863319";
 import { cU } from "../figma_app/528509";
@@ -239,8 +239,8 @@ function e2() {
   };
 }
 function e3() {
-  let e = q5();
-  let t = Rs(FileManagePermission({
+  let e = selectCurrentFile();
+  let t = useSubscription(FileManagePermission({
     fileKey: e?.key || ""
   }), {
     enabled: !!e?.key
@@ -251,7 +251,7 @@ function e3() {
     let r = !1;
     let n = !1;
     let a = null;
-    "loaded" === t.status && (i = !!t.data?.file?.canTrash && !!oA(t.data?.file?.canTrash), n = !!oA(t.data?.file?.canMove), r = !!(t.data.file && _R(t.data.file.editorType ?? FFileType.DESIGN, t.data.file.currentPlanUser)), a = oA(t.data?.file?.canMoveWithReasons) || null);
+    "loaded" === t.status && (i = !!t.data?.file?.canTrash && !!getResourceDataOrFallback(t.data?.file?.canTrash), n = !!getResourceDataOrFallback(t.data?.file?.canMove), r = !!(t.data.file && isRestrictedPlanAccess(t.data.file.editorType ?? FFileType.DESIGN, t.data.file.currentPlanUser)), a = getResourceDataOrFallback(t.data?.file?.canMoveWithReasons) || null);
     return {
       userCanTrashFile: i,
       userIsVRForSeat: r,
@@ -269,7 +269,7 @@ let e6 = memo(function () {
   });
   let o = !!selectCurrentUser();
   let l = function () {
-    let e = useSelector(vu);
+    let e = useSelector(selectOpenFileObject);
     let t = useSelector(e => e.currentUserOrgId);
     let i = useSelector(e => e.currentTeamId);
     let r = _$$Q({
@@ -282,10 +282,10 @@ let e6 = memo(function () {
   }();
   let d = !!l;
   let c = selectCurrentUser();
-  let u = q5();
+  let u = selectCurrentFile();
   let p = te();
   let h = "loaded" === i.status && gV(i.data, e);
-  let m = i.data?.currentUser?.userSidebarSections != null ? oA(i.data.currentUser.userSidebarSections) : null;
+  let m = i.data?.currentUser?.userSidebarSections != null ? getResourceDataOrFallback(i.data.currentUser.userSidebarSections) : null;
   let f = i.data?.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? [];
   let g = t$(m ?? [], f);
   let _ = g.find(e => e.id === l?.resource.sidebarSectionId);
@@ -311,7 +311,7 @@ let e7 = memo(function ({
 }) {
   let o = function () {
     let e = useDispatch();
-    let t = useSelector(vu);
+    let t = useSelector(selectOpenFileObject);
     let i = useSelector(e => e.currentUserOrgId);
     let r = useSelector(e => e.currentTeamId);
     let s = _$$Q({
@@ -366,7 +366,7 @@ let e7 = memo(function ({
   });
 });
 let e8 = memo(function () {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = function () {
     let e = useDispatch();
     return t => {
@@ -416,7 +416,7 @@ let e8 = memo(function () {
 });
 let e9 = ck();
 let te = () => {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useSelector(e => e.plans);
   return useMemo(() => !!t.find(t => e?.plan?.tier === FPlanNameType.ORG || e?.plan?.tier === FPlanNameType.ENTERPRISE ? `organization::${t.plan_id}` === e?.plan?.id : `team::${t.plan_id}` === e?.plan?.id), [t, e?.plan?.tier, e?.plan?.id]);
 };
@@ -428,7 +428,7 @@ let ti = memo(function ({
   let i = useSelector(e => e.selectedView);
   let o = useSelector(e => getPermissionsStateMemoized(e));
   let l = useSelector(e => e.userStateLoaded);
-  let c = q5();
+  let c = selectCurrentFile();
   let u = useSelector(e => e.fileVersion);
   let m = useSelector(e => e.repos);
   let g = !!selectCurrentUser();
@@ -448,7 +448,7 @@ let ti = memo(function ({
     closeSelectMenu
   } = {
     deleteBranch: function () {
-      let e = q5();
+      let e = selectCurrentFile();
       let t = useDispatch();
       return () => {
         e && t(showModalHandler({
@@ -472,18 +472,18 @@ let ti = memo(function ({
       }, [e]);
     }(),
     deleteFile: function () {
-      let e = q5();
+      let e = selectCurrentFile();
       let t = e?.canDelete;
-      let i = useSelector(vu);
+      let i = useSelector(selectOpenFileObject);
       let r = JT();
       let n = r && r.profile.entityType === o1.TEAM;
       let s = useDispatch();
       let o = useSelector(e => e.repos);
       return () => {
         if (!e || !i) return;
-        let r = up(e, o);
+        let r = getRepoByIdAlt(e, o);
         let a = !!Ay && t && !n;
-        r && SA(e, r) ? e.repo?.canEdit && !r.trashed_at && s(U1({
+        r && isDefaultFile(e, r) ? e.repo?.canEdit && !r.trashed_at && s(U1({
           filesByKey: {},
           reposById: {
             [r.id]: {
@@ -499,7 +499,7 @@ let ti = memo(function ({
       };
     }(),
     archiveBranch: function () {
-      let e = useSelector(vu);
+      let e = useSelector(selectOpenFileObject);
       let t = useDispatch();
       return () => {
         e && (t(VK({
@@ -514,7 +514,7 @@ let ti = memo(function ({
       };
     }(),
     restoreBranch: function () {
-      let e = useSelector(vu);
+      let e = useSelector(selectOpenFileObject);
       let t = useDispatch();
       return () => {
         e && t(Rh({
@@ -526,7 +526,7 @@ let ti = memo(function ({
       };
     }(),
     openFileAnalytics: function () {
-      let e = q5();
+      let e = selectCurrentFile();
       let t = useDispatch();
       return useCallback(() => {
         e && t(showModalHandler({
@@ -539,7 +539,7 @@ let ti = memo(function ({
       }, [e, t]);
     }(),
     projectUrl: function () {
-      let e = q5();
+      let e = selectCurrentFile();
       let t = FC();
       let i = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
       return useMemo(() => {
@@ -551,10 +551,10 @@ let ti = memo(function ({
     publish: function () {
       let e = useAtomWithSubscription(p9);
       let t = useSelector(fA);
-      let i = q5();
+      let i = selectCurrentFile();
       let r = e2();
       let s = function () {
-        let e = q5();
+        let e = selectCurrentFile();
         let t = useSelector(e => e.teams);
         let i = useDispatch();
         return () => {
@@ -585,7 +585,7 @@ let ti = memo(function ({
     }(),
     resetFileThumbnail: function () {
       let e = useDispatch();
-      let t = q5();
+      let t = selectCurrentFile();
       return () => {
         t && e($m({
           file_key: t.key,
@@ -601,10 +601,10 @@ let ti = memo(function ({
     }()
   };
   let ep = sO();
-  let ef = cJ();
-  let ew = Oc();
+  let ef = useIsFullscreenSitesView();
+  let ew = useIsSelectedFigmakeFullscreen();
   let eS = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);
-  let ej = _$$to();
+  let ej = useIsSelectedViewFullscreenCooper();
   let eA = Em();
   let eO = m0();
   let eL = BI();
@@ -614,7 +614,7 @@ let ti = memo(function ({
   let eW = ju("filename_menu");
   let eq = useSelector(F9);
   let eQ = jT(c, eq).unwrapOr(!1);
-  let e$ = Rs(FileNameViewDropdown, {
+  let e$ = useSubscription(FileNameViewDropdown, {
     branchFileKey: c?.key || ""
   }, {
     enabled: !!c
@@ -647,9 +647,9 @@ let ti = memo(function ({
       userCanMove: _userCanMove,
       userCanMoveWithReasons
     } = e3();
-    let s = q5();
+    let s = selectCurrentFile();
     let o = RR();
-    let l = Rs(FileManagePermission({
+    let l = useSubscription(FileManagePermission({
       fileKey: s?.key || ""
     }), {
       enabled: !!s?.key
@@ -665,10 +665,10 @@ let ti = memo(function ({
       canMoveWithReasons: userCanMoveWithReasons || void 0
     }), [_userCanMove, userIsVRForSeat, l.data?.file?.currentPlanUser, l.data?.file?.isDraftFile, o, e, t, userCanMoveWithReasons]);
   }(ti, !!tr);
-  let ta = xo();
+  let ta = useCanUseDevModeDemoFile();
   let ts = _$$R();
   let to = !1;
-  c && i.editorType && (to = i.editorType === FEditorType.Slides && oA(c.org?.isSlidesDisabled) || i.editorType === FEditorType.Sites && !!c.org?.isSitesDisabled || i.editorType === FEditorType.Cooper && !!c.org?.isCooperDisabled);
+  c && i.editorType && (to = i.editorType === FEditorType.Slides && getResourceDataOrFallback(c.org?.isSlidesDisabled) || i.editorType === FEditorType.Sites && !!c.org?.isSitesDisabled || i.editorType === FEditorType.Cooper && !!c.org?.isCooperDisabled);
   let tl = ew && ti.requiresUpgrade && !e5;
   let td = !!ts && Px(ti, to);
   let tc = ta || td || tl;
@@ -715,9 +715,9 @@ let ti = memo(function ({
   let tS = AppStateTsApi && AppStateTsApi.uiState().isRecovery.getCopy();
   let tj = i.editorType;
   let tI = !c.canExport;
-  let tk = tj === FEditorType.Whiteboard && !!c.org?.figjamDisabledAt || tj === FEditorType.Slides && oA(c.org?.isSlidesDisabled) || tj === FEditorType.Sites && !!c.org?.isSitesDisabled || tj === FEditorType.Cooper && !!c.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(o) || tI;
+  let tk = tj === FEditorType.Whiteboard && !!c.org?.figjamDisabledAt || tj === FEditorType.Slides && getResourceDataOrFallback(c.org?.isSlidesDisabled) || tj === FEditorType.Sites && !!c.org?.isSitesDisabled || tj === FEditorType.Cooper && !!c.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(o) || tI;
   let tN = tj !== FEditorType.Whiteboard;
-  let tA = !!(tN && Kz(c));
+  let tA = !!(tN && isBranchAlt(c));
   let tO = "loaded" === e$.status && (null === e$.data.file || e$.data.file && AM(e$.data.file) === pT.MERGED);
   let tL = tA && ("loaded" !== e$.status || tO);
   let tR = eK && c.canManage;

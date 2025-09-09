@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react";
-import { VZ } from "../figma_app/930338";
+import { camelToKebab } from "../figma_app/930338";
 import { rf, sT } from "../905/187165";
 import { mN } from "../figma_app/985200";
 export function $$o0(e, t, i, l, d = !0) {
@@ -18,7 +18,7 @@ export function $$o0(e, t, i, l, d = !0) {
         let a = getComputedStyle(i);
         u(new Proxy({}, {
           get(e, t) {
-            let i = a.getPropertyValue(`--${VZ(t.toString())}`);
+            let i = a.getPropertyValue(`--${camelToKebab(t.toString())}`);
             return "" === i ? null : i;
           }
         }));

@@ -1,14 +1,14 @@
 import { n as _$$n } from "../905/347702";
 import { useEffect } from "react";
 import { atomStoreManager, atom, Xr } from "../figma_app/27355";
-import { tT } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { ResourceStatus } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { q8, dZ } from "../figma_app/459490";
 import { lg } from "../figma_app/976749";
 import { sZ } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseSlidesAi } from "../figma_app/43951";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { PE } from "../figma_app/251115";
 export function $$h0() {
   let e = lg();
@@ -31,7 +31,7 @@ export function $$h0() {
   }
 }
 export function $$m1() {
-  let e = T5("useIsAiEnabledAtOrgOrTeamLevel").unwrapOr(null);
+  let e = useCurrentPrivilegedPlan("useIsAiEnabledAtOrgOrTeamLevel").unwrapOr(null);
   return !e || !!e.aiFeaturesEnabled;
 }
 let g = _$$n(() => atomStoreManager.get(y));
@@ -47,7 +47,7 @@ let y = atom("loading");
 export function $$b2(e) {
   let t = Xr(y);
   let r = sZ();
-  let l = Rs(dZ(r) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseSlidesAi, {
+  let l = useSubscription(dZ(r) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseSlidesAi, {
     key: e
   }, {
     enabled: !!e
@@ -57,7 +57,7 @@ export function $$b2(e) {
     let {
       file
     } = l.data;
-    file.status === tT.Loaded && file.data && t(file.data.hasPermission ? "has_permission" : "no_permission");
+    file.status === ResourceStatus.Loaded && file.data && t(file.data.hasPermission ? "has_permission" : "no_permission");
   }, [t, l.data, l.status]);
 }
 export const BE = $$h0;

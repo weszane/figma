@@ -7,7 +7,7 @@ import { getTrackingSessionId } from "../905/471229";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { kS } from "../figma_app/864723";
-import { As, ze } from "../figma_app/516028";
+import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 export function $$_0(e, t, r, n) {
   if (!e) return [];
   let i = n ?? getSingletonSceneGraph();
@@ -59,8 +59,8 @@ export function $$S12({
 }) {
   return {
     orgId: atomStoreManager.get(_s) || null,
-    teamId: atomStoreManager.get(As) || null,
-    fileKey: atomStoreManager.get(ze) || null,
+    teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
+    fileKey: atomStoreManager.get(openFileKeyAtom) || null,
     userId: atomStoreManager.get(kS) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     clientLifecycleId: e,

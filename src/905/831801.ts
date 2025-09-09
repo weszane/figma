@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { c2 } from "../905/382883";
 import { VariableResolvedDataType } from "../figma_app/763686";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { renderI18nText } from "../905/303541";
 import { $d, dB } from "../905/901822";
 let $$d3 = -1;
@@ -64,7 +64,7 @@ export function $$g1({
     query,
     searchSessionId
   } = t;
-  let c = ZC(query);
+  let c = useLatestRef(query);
   useEffect(() => {
     query !== c && "" !== query && a("ds_variables_modal.search_query_result", {
       collection_id: r,
@@ -164,14 +164,14 @@ export function $$A5({
   clearFilterState: r,
   clearQuery: a
 }) {
-  let o = ZC(e);
+  let o = useLatestRef(e);
   useEffect(() => {
     void 0 !== e && void 0 !== o && e !== o && (r({
       reason: "collection-changed"
     }), a());
   }, [e, o, r, a]);
-  let l = ZC(t);
-  let d = ZC(i);
+  let l = useLatestRef(t);
+  let d = useLatestRef(i);
   useEffect(() => {
     void 0 !== t && void 0 !== l && void 0 !== i && void 0 !== d && !(i > d) && t > l && (r({
       reason: "variable-added"

@@ -17,8 +17,8 @@ import { b as _$$b2 } from '../905/985254';
 import { HB } from '../3973/538504';
 import { s as _$$s2 } from '../cssbuilder/589278';
 import { buildUploadUrl } from '../figma_app/169182';
-import { q5 } from '../figma_app/516028';
-import { A5 } from '../figma_app/707808';
+import { selectCurrentFile } from '../figma_app/516028';
+import { ShareAction } from '../figma_app/707808';
 import { $z, fu, tf } from '../figma_app/831799';
 import { fb, J4 } from '../figma_app/907616';
 export function $$x3(e) {
@@ -73,7 +73,7 @@ export function $$P1({
   let i = e?.k12_google_org;
   let a = $$x3(t?.profile?.jobTitle || '');
   return i || a ? jsx(L, {
-    onClick: () => r(A5.SHARE_TO_GOOGLE_CLASSROOM)
+    onClick: () => r(ShareAction.SHARE_TO_GOOGLE_CLASSROOM)
   }) : null;
 }
 let D = tf($n);
@@ -87,7 +87,7 @@ let M = sx.add({
 }).$;
 export function $$F2(e) {
   let t = fb[e.linkAccess].audienceAccessLevel !== J4.EDIT;
-  let r = q5();
+  let r = selectCurrentFile();
   let [a, s] = useState('edit');
   let c = _$$o();
   return jsx(fu, {
@@ -102,7 +102,7 @@ export function $$F2(e) {
               'data-testid': 'share-to-google-classroom-disclaimer',
               'children': renderI18nText('file_permissions_modal.google_classroom_modal.disclaimer', {
                 link: jsx($z, {
-                  onClick: () => c(A5.SHARE_SETTINGS),
+                  onClick: () => c(ShareAction.SHARE_SETTINGS),
                   type: 'button',
                   style: k,
                   children: renderI18nText('file_permissions_modal.google_classroom_modal.disclaimer_link')

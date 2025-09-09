@@ -7,7 +7,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { analyticsEventManager } from "../905/449184";
 import { U as _$$U } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { PerfTimer } from "../905/609396";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
@@ -19,7 +19,7 @@ import { hideModal } from "../905/156213";
 import { Ak, Ki, Ff } from "../figma_app/582924";
 import { wM } from "../figma_app/852050";
 import { c as _$$c } from "../905/210851";
-import { yV, q5 } from "../figma_app/516028";
+import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
 import { Z } from "../905/116724";
 import { getUserId } from "../905/372672";
 import { rt } from "../figma_app/615482";
@@ -121,7 +121,7 @@ export async function $$B0(e, t) {
 export function $$G6(e, t = aD.ALL, r) {
   let a = useDispatch();
   let u = bA(t);
-  let p = useAtomWithSubscription(yV);
+  let p = useAtomWithSubscription(openFileAtom);
   let {
     scopedComponentUpdates,
     scopedStateGroupUpdates,
@@ -369,9 +369,9 @@ export function $$z2({
   disabled: r
 }) {
   let i = getUserId() ?? void 0;
-  let a = q5();
+  let a = selectCurrentFile();
   let [s, o] = useAtomValueAndSetter(H);
-  let c = ZC(e);
+  let c = useLatestRef(e);
   let _ = useCallback(e => {
     analyticsEventManager.trackDefinedEvent("design_systems_analytics.update_notification_displayed", {
       userId: i,

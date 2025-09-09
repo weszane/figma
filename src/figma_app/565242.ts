@@ -9,7 +9,7 @@ import { permissionScopeHandler } from '../905/189185';
 import { getI18nString } from '../905/303541';
 import { Nz } from '../905/417232';
 import { G } from '../905/594445';
-import { oA, tT } from '../905/663269';
+import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { N as _$$N } from '../905/670143';
 import { getSingletonSceneGraph } from '../905/700578';
 import { G as _$$G } from '../905/707993';
@@ -66,7 +66,7 @@ export function $$k7(e) {
   let t = _$$G({
     collectionStableId: e
   });
-  return t.status === tT.Loaded ? O((oA(t.collection)?.fieldSchemas ?? []).map(e => ({
+  return t.status === ResourceStatus.Loaded ? O((getResourceDataOrFallback(t.collection)?.fieldSchemas ?? []).map(e => ({
     ...e,
     action: 'noop'
   }))) : [];

@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { qr } from "../figma_app/637336";
 import { W5, Eo } from "../figma_app/120294";
 import { Em } from "../figma_app/318520";
 export let $$c0 = memo(function ({
   sessionId: e
 }) {
-  let t = tS();
+  let t = useCurrentFileKey();
   return useSelector(e => t && !!e.voice.activeCall[t]) ? jsx(u, {
     sessionId: e
   }) : null;
@@ -16,7 +16,7 @@ export let $$c0 = memo(function ({
 function u({
   sessionId: e
 }) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let {
     userIdsInCall
   } = W5(t);

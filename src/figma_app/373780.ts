@@ -8,7 +8,7 @@ import { A as _$$A } from "../vendor/850789";
 import { h as _$$h, f as _$$f } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { isAnyMobile } from "../figma_app/778880";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -121,7 +121,7 @@ function z({
     let i = new Set(t.filter(e => !(e in d)));
     let a = new Set(e.filter(e => !(e in p.current)));
     let o = 1 === r ? $$G : V;
-    if (1 === r && 1 !== n) for (let e of Object.keys(d)) e in p.current && s.trigger(`selection-changed-${e}`, [o]); else if (1 === n && 1 !== r) for (let e of Object.keys(p.current)) e in d && s.trigger(`selection-changed-${e}`, [o]);
+    if (1 === r && 1 !== n) for (let e of Object.keys(d)) e in p.current && s.trigger(`selection-changed-${e}`, [o]);else if (1 === n && 1 !== r) for (let e of Object.keys(p.current)) e in d && s.trigger(`selection-changed-${e}`, [o]);
     for (let e of i) s.trigger(`selection-changed-${e}`, [void 0]);
     for (let e of a) s.trigger(`selection-changed-${e}`, [o]);
     p.current = d;
@@ -168,7 +168,7 @@ function W(e, t) {
       l(e => c2(e, t) ? e : t);
     };
     for (let n of (t([dK(debugState.getState())]), e)) r.on(`node-changed-${n}`, t);
-    return () => { };
+    return () => {};
   }, [s, r, e]);
   return o;
 }
@@ -485,7 +485,7 @@ function ey(e, t) {
   return useMemo(() => {
     let t = r && n ? getI18nString("fullscreen.accessibility_dom.selected") : void 0;
     let i = e ? Array.isArray(e) ? e : [e] : [];
-    return Yx(t ? [...i, t] : i, "unit");
+    return formatList(t ? [...i, t] : i, "unit");
   }, [r, e, n]);
 }
 function eb({
@@ -1421,7 +1421,7 @@ function e6({
   let y = e => {
     t.current = e;
   };
-  let b = useMemo(() => m ? Yx([getI18nString("fullscreen.accessibility.main_region"), getI18nString("fullscreen.filename_view.view-only")], "unit") : getI18nString("fullscreen.accessibility.main_region"), [m]);
+  let b = useMemo(() => m ? formatList([getI18nString("fullscreen.accessibility.main_region"), getI18nString("fullscreen.filename_view.view-only")], "unit") : getI18nString("fullscreen.accessibility.main_region"), [m]);
   let A = useMemo(() => it(p), [p]);
   let x = l()(kL, {
     [Qg]: !_

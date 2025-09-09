@@ -12,7 +12,7 @@ import { z } from "../905/931953";
 import { b } from "../905/875374";
 import { _t } from "../figma_app/171413";
 import { V7, TI, uV } from "../figma_app/359181";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { JW } from "../figma_app/433317";
 import { q } from "../figma_app/216831";
 export let $$b3 = Wh(() => atom({
@@ -48,7 +48,7 @@ export function $$I2({
   let t = Xr($$b3);
   let r = useDispatch();
   let a = selectCurrentUser()?.id;
-  let s = Oc();
+  let s = useIsSelectedFigmakeFullscreen();
   return {
     onPublishChanges: useCallback(async n => {
       let i;
@@ -137,7 +137,7 @@ export function $$v0({
       }));
     });
   }, [u]);
-  let h = Oc();
+  let h = useIsSelectedFigmakeFullscreen();
   useEffect(() => {
     let e = A({
       publishProgress: s,

@@ -1,7 +1,7 @@
 import { n as _$$n } from "../905/347702";
 import { FirstDraftHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { M4, IT } from "../905/713695";
 import { Gh } from "../figma_app/707567";
 export function $$l2(e) {
@@ -57,7 +57,7 @@ let p = M4.Query({
   fetch: u
 });
 export function $$m0() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let [t] = IT(c(null));
   let i = [];
   if ("loaded" === t.status) for (let n of t.data) n.fileKey !== e && i.push(n);

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { IT } from "../figma_app/566371";
-import { tS } from "../figma_app/516028";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { Xu } from "../figma_app/588582";
 import { gZ } from "../figma_app/952035";
@@ -12,14 +12,14 @@ export function $$m2() {
   atomStoreManager.set(x, []);
 }
 export function $$h1() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = Xu();
   let [n, l] = useAtomValueAndSetter(x);
   let m = useAtomWithSubscription($$u0);
   let {
     connectedProject
   } = GC();
-  let [g] = IT(gZ({
+  let [g] = setupResourceAtomHandler(gZ({
     fileKey: e,
     functionName: "make-server"
   }), {

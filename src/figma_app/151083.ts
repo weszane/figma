@@ -16,7 +16,7 @@ import { showModalHandler } from "../905/156213";
 import { p9 } from "../figma_app/864723";
 import { fullscreenValue } from "../figma_app/455680";
 import { c as _$$c } from "../905/210851";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { eS, aD } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { bd } from "../905/557338";
@@ -228,7 +228,7 @@ function W() {
     file_key,
     file_team_id
   } = useSelector(_$$c);
-  let r = useAtomWithSubscription(yV);
+  let r = useAtomWithSubscription(openFileAtom);
   let n = useAtomWithSubscription(p9);
   return useMemo(() => ({
     fileKey: file_key,

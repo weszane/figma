@@ -2,7 +2,7 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { getSupportEmail, isProdCluster, isDevEnvironment } from "../figma_app/169182";
 import { m0, ow, lg } from "../figma_app/976749";
-import { q5, tS as _$$tS } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { dq, sZ } from "../905/845253";
 import { n as _$$n } from "../1577/959155";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
@@ -17,7 +17,7 @@ import { CooperHelpers, SchemaJoinStatus, Multiplayer } from "../figma_app/76368
 import { bV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { FJ } from "../905/508367";
 import { A as _$$A } from "../905/920142";
@@ -35,7 +35,7 @@ import { sx as _$$sx } from "../905/941192";
 import { V as _$$V } from "../905/355181";
 import { lQ } from "../905/934246";
 import { b as _$$b } from "../905/946806";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { VisualBellActions } from "../905/302958";
 import { T as _$$T, b as _$$b2 } from "../1577/951568";
 import { w as _$$w } from "../1250/922745";
@@ -60,7 +60,7 @@ import { pW } from "../905/160095";
 import { dl } from "../figma_app/307841";
 import { g as _$$g } from "../1250/695038";
 import { M4, IT, gY as _$$gY } from "../905/713695";
-import { D6, Ty, X$ } from "../figma_app/465071";
+import { useCurrentPlanUser, isOrgGuestUser, useCurrentPublicPlan } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
 import { w as _$$w2 } from "../7021/108292";
 import { filterNotNullish } from "../figma_app/656233";
@@ -73,7 +73,7 @@ import { R as _$$R2 } from "../figma_app/522082";
 import { h as _$$h } from "../905/142086";
 import { A6 } from "../905/350234";
 import { _ as _$$_ } from "../figma_app/4253";
-import { to as _$$to2, HH } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper, isCooperFeatureEnabled } from "../figma_app/828186";
 import { u1 } from "../figma_app/91703";
 import { WX } from "../figma_app/482142";
 import { b as _$$b3 } from "../905/985254";
@@ -81,7 +81,7 @@ import { bE } from "../figma_app/375098";
 import { Tb } from "../figma_app/350203";
 import { C9 } from "../figma_app/8833";
 import { c as _$$c2 } from "../905/370443";
-import { nF } from "../figma_app/789";
+import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { V6 } from "../1250/12342";
 import { a9 } from "../figma_app/741211";
 import { y as _$$y } from "../1250/295724";
@@ -92,7 +92,7 @@ import { FC } from "../figma_app/212807";
 import { f as _$$f } from "../905/940356";
 import { q as _$$q } from "../905/236878";
 import { oc, n0, f4 } from "../figma_app/345997";
-import { R$ } from "../figma_app/12796";
+import { isExternalRestricted } from "../figma_app/12796";
 import { canAdminTeam, canEditTeam } from "../figma_app/642025";
 import { lg as _$$lg, ng as _$$ng } from "../figma_app/205827";
 import { N as _$$N } from "../figma_app/301442";
@@ -101,7 +101,7 @@ import { A as _$$A2 } from "../905/638715";
 import { A as _$$A3 } from "../905/389851";
 import { Ay as _$$Ay2 } from "@stylexjs/stylex";
 import { s as _$$s3 } from "../905/573154";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { jN } from "../905/612685";
 import { QF } from "../figma_app/502247";
@@ -287,7 +287,7 @@ let tO = JSON.parse('{"safari":"16","firefox":"101","chrome":"99","edge":"121","
 let tD = {
   bannerId: om.TestWarningBanner,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     if (t?._name === "_BANNERTEST PAYMENT") {
       let t = {
         bannerType: x1.WARN,
@@ -312,7 +312,7 @@ let tD = {
 let tL = {
   bannerId: om.TestOOMBanner,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     if (t?._name === "_BANNERTEST OOM") {
       let t = {
         bannerType: x1.WARN,
@@ -378,9 +378,9 @@ let tF = {
 let tB = {
   bannerId: om.CooperOldFileBanner,
   Banner: function (e) {
-    let t = _$$to2();
+    let t = useIsSelectedViewFullscreenCooper();
     if (!useMemo(() => {
-      if (!t || !HH()) return !1;
+      if (!t || !isCooperFeatureEnabled()) return !1;
       let e = getSingletonSceneGraph();
       if (!e || !e.isValidScene) return [];
       let n = bV(e, "0:1");
@@ -457,7 +457,7 @@ let tG = {
 let tW = {
   bannerId: om.TestInfoBanner,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     if (t?._name === "_BANNERTEST EDU") {
       let t = {
         bannerType: x1.INFO,
@@ -486,7 +486,7 @@ let tz = {
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = FC();
     let o = n && canAdminTeam(n, i);
-    let l = q5();
+    let l = selectCurrentFile();
     let d = !!l?.canEdit;
     let _ = r && r.subscription === FPaymentHealthStatusType.PAST_DUE;
     let u = {
@@ -531,10 +531,10 @@ let t$ = {
   bannerId: om.ExternalContentControlBanner,
   Banner: function (e) {
     let t = useDispatch();
-    let n = q5();
+    let n = selectCurrentFile();
     let r = selectCurrentUser();
     let i = dq();
-    let o = R$(r, i);
+    let o = isExternalRestricted(r, i);
     let d = useSelector(e => {
       if (!o) return null;
       let t = e.orgById[r.external_restricted_org_id];
@@ -681,7 +681,7 @@ let tH = {
   bannerId: om.ProTrialsExpiryBanner,
   Banner: function (e) {
     let t = useDispatch();
-    let n = q5();
+    let n = selectCurrentFile();
     let r = cD();
     let i = useSelector(e => r ? e.teams[r] : null);
     let o = FC();
@@ -783,7 +783,7 @@ let tK = {
     let l = m0();
     let d = ow();
     let _ = useStore();
-    let u = q5()?.canEdit;
+    let u = selectCurrentFile()?.canEdit;
     let m = n && canEditTeam(n, i);
     let p = r && !n0(r) && !r.student_team && oc(r.id, i);
     if (p) {
@@ -902,12 +902,12 @@ let tK = {
 let tY = {
   bannerId: om.OrphanedOrgDraftsFile,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let n = dq();
     let r = useSelector(_$$wA);
     let i = null;
     let o = null;
-    if (i = n && oA(t?.isAbandonedDraftFile), o = oA(t?.canMove) ? jsxs(Fragment, {
+    if (i = n && getResourceDataOrFallback(t?.isAbandonedDraftFile), o = getResourceDataOrFallback(t?.canMove) ? jsxs(Fragment, {
       children: [renderI18nText("banner.orphaned_projects.move_to_project"), " ", jsx(N_, {
         trusted: !0,
         target: "_blank",
@@ -936,12 +936,12 @@ let tY = {
 let tQ = {
   bannerId: om.TeamAbandonedDraftsFile,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let n = dq();
-    let a = oA(t?.isAbandonedDraftFile);
+    let a = getResourceDataOrFallback(t?.isAbandonedDraftFile);
     let r = ol();
     if (r && !n && a) {
-      let n = oA(t?.canMove) ? jsxs(Fragment, {
+      let n = getResourceDataOrFallback(t?.canMove) ? jsxs(Fragment, {
         children: [renderI18nText("banner.orphaned_projects.move_to_project.team"), " ", jsx(N_, {
           trusted: !0,
           target: "_blank",
@@ -972,7 +972,7 @@ let tQ = {
 let tZ = {
   bannerId: om.PersonalProjectDeprecatedFile,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = dq();
@@ -1010,11 +1010,11 @@ let tZ = {
 let tX = {
   bannerId: om.EduGracePeriodAccessRestricted,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectCurrentUser();
-    let o = nF();
+    let o = useCurrentFileWorkshopModeStatus();
     let l = useSelector(e => e.userEduGracePeriods);
     if (!n || !i) return null;
     if (r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && GU(l, cn(i), n, !!r.student_team).showAccessRestricted) {
@@ -1042,11 +1042,11 @@ let tX = {
 let tJ = {
   bannerId: om.EduGracePeriodShowReminder,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = selectCurrentUser();
-    let o = nF();
+    let o = useCurrentFileWorkshopModeStatus();
     let l = useSelector(e => e.userEduGracePeriods);
     if (n && i) {
       let a = r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && GU(l, cn(i), n, !!r.student_team).showReminder;
@@ -1111,7 +1111,7 @@ let t1 = {
     let t = p8("multiplayerSessionState") !== SchemaJoinStatus.UNJOINED;
     let n = !p8("isReadOnly");
     let i = useSelector(e => e.showingUpgradeBanner);
-    let o = q5()?.editorType;
+    let o = selectCurrentFile()?.editorType;
     let [l, d] = useState(!1);
     let u = hS({
       open: l,
@@ -1155,7 +1155,7 @@ let t5 = {
     let [i, o] = useState(!1);
     let l = useAtomWithSubscription(_$$T2);
     let d = useSelector(e => !!e.saveStatus?.hasUnsavedChanges);
-    let u = q5()?.editorType;
+    let u = selectCurrentFile()?.editorType;
     if (useEffect(() => {
       l && !i && (analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.shown", {}), o(!0));
     }, [l, i]), useEffect(() => {
@@ -1189,8 +1189,8 @@ let t4 = {
   bannerId: om.FigJamTryDraftsBanner,
   Banner: function (e) {
     let t = useDispatch();
-    let n = q5();
-    let r = nF();
+    let n = selectCurrentFile();
+    let r = useCurrentFileWorkshopModeStatus();
     let i = selectCurrentUser();
     let o = _$$f("dismissed_figjam_try_drafts_banner");
     let l = _$$R("minute");
@@ -1237,7 +1237,7 @@ let t2 = {
     let {
       onClaim
     } = function () {
-      let e = q5();
+      let e = selectCurrentFile();
       let t = useDispatch();
       let n = useSelector(e => e.plans);
       useEffect(() => {
@@ -1273,8 +1273,8 @@ let t2 = {
         }
       };
     }();
-    let i = q5();
-    let o = nF();
+    let i = selectCurrentFile();
+    let o = useCurrentFileWorkshopModeStatus();
     let l = selectCurrentUser();
     let d = _$$f("dismissed_figjam_try_claim_banner");
     let u = _$$R("minute");
@@ -1400,7 +1400,7 @@ function t9({
 let t7 = {
   bannerId: om.FreemiumPreviewBanner,
   Banner: function (e) {
-    let t = _$$tS();
+    let t = useCurrentFileKey();
     let n = useSelector(e => t ? e.figFileDuplicatedFromHubFile[t] : null);
     let r = useSelector(e => n ? e.hubFiles[n.hubFileId] : null);
     return n && n.isPreview && r && r.monetized_resource_metadata ? jsx(_$$f2, {
@@ -1452,13 +1452,13 @@ let nt = {
     let n = aV();
     let r = kD();
     let i = b4();
-    let l = q5();
+    let l = selectCurrentFile();
     let d = _$$tS2();
     let _ = ac();
     let u = Td();
     let m = lg();
     let g = sO();
-    let f = _$$to2();
+    let f = useIsSelectedViewFullscreenCooper();
     let h = selectCurrentUser();
     let b = h?.id && r && r.publishedByUserId === h.id;
     let x = J3();
@@ -1569,7 +1569,7 @@ let nn = {
   Banner: function (e) {
     let t = aV();
     let n = kD();
-    let a = q5();
+    let a = selectCurrentFile();
     let {
       draftTemplateKeys,
       isCurrentFileDraftTemplate,
@@ -1655,7 +1655,7 @@ let nr = {
     let t = selectCurrentUser();
     let n = sZ();
     let i = !!n?.id;
-    let o = gY(_$$l);
+    let o = getAtomMutate(_$$l);
     let s = getFeatureFlags().terms_of_service_may_2025_update;
     let d = _$$T(n);
     let _ = !!d?.data?.isEligible;
@@ -1762,14 +1762,14 @@ let ni = {
 let no = {
   bannerId: om.DevModeDemoFileUpsellBanner,
   Banner: function (e) {
-    let t = xo();
+    let t = useCanUseDevModeDemoFile();
     let n = !!hA();
     let r = getUserId();
     let i = function () {
-      let e = xo();
+      let e = useCanUseDevModeDemoFile();
       let t = useDispatch();
       let n = selectCurrentUser();
-      let r = q5();
+      let r = selectCurrentFile();
       return e && r && n ? async () => {
         let e = await _$$S.copyFile(r.key);
         if (e.data.meta) {
@@ -1932,8 +1932,8 @@ let nl = {
     let o = !!t?.created_at && dl({
       date: new Date(t?.created_at)
     });
-    let s = D6("NonAdminBillingTermsBanner");
-    let d = Ty(s?.data ?? null);
+    let s = useCurrentPlanUser("NonAdminBillingTermsBanner");
+    let d = isOrgGuestUser(s?.data ?? null);
     let [u] = IT(ef({
       orgId: t?.id
     }), {
@@ -2015,13 +2015,13 @@ let nl = {
 let nd = {
   bannerId: om.starterViewOnlySitesBanner,
   Banner: function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let n = t?.editorType === "sites";
     let {
       isEligible,
       canEditTeam
     } = _$$V2();
-    let i = X$("StarterViewOnlySitesBanner");
+    let i = useCurrentPublicPlan("StarterViewOnlySitesBanner");
     let o = i.unwrapOr(null)?.tier || null;
     let l = o === Agb.STARTER || o === Agb.STUDENT;
     let d = _$$y(t?.teamId ?? "", UpsellModalType.STARTER_VIEW_ONLY_BANNER);
@@ -2098,7 +2098,7 @@ let ng = [];
 let nf = [na, nr, ns, nl];
 let nh = [ni];
 export function $$nb0() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = m0();
   let n = e?.teamId;
   let r = useSelector(e => n ? e.teams[n] : null);

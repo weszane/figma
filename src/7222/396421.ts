@@ -16,7 +16,7 @@ import { Point } from "../905/736624";
 import { Bs } from "../figma_app/933328";
 import { qY } from "../figma_app/622574";
 import { Cu } from "../figma_app/314264";
-import { q5, tS } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { FFileType } from "../figma_app/191312";
@@ -144,13 +144,13 @@ export function $$W17(e) {
 }
 export function $$z15() {
   let e = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = e?.template;
     return e && t && !t.unpublishedAt ? _$$l(e.libraryKey) : null;
   }();
   let [t, r] = useAtomValueAndSetter(bY);
   let [u, n] = useAtomValueAndSetter(Ei);
-  let i = tS() || "";
+  let i = useCurrentFileKey() || "";
   let a = useCallback(() => {
     n(!0);
     Cu({
@@ -350,7 +350,7 @@ export function $$ea10() {
 }
 export function $$es2() {
   let [, e] = useLocalStorageSync(j, {});
-  let t = q5();
+  let t = selectCurrentFile();
   let r = getUserId();
   let u = (() => {
     let e = localStorage.getItem(j);

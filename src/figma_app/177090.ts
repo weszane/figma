@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
 import a from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 var s = a;
 export let $$l0 = memo(function ({
   loadingPaletteCircleCount: e
 }) {
-  let t = ZC(e);
+  let t = useLatestRef(e);
   let r = t && !e;
   let i = r ? t : e;
   return jsx("div", {

@@ -2,7 +2,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { i as _$$i } from "../905/970229";
-import { Rw } from "../figma_app/930338";
+import { uint8ArrayToHex } from "../figma_app/930338";
 import { UD } from "../figma_app/624361";
 import { t as _$$t } from "../905/658240";
 export async function $$c0(e, t) {
@@ -24,7 +24,7 @@ export async function $$c0(e, t) {
     i.appendChild(r);
     r.fills = [];
     r.insertImageInFillPaint(m);
-    let s = Rw(m.fullResolution.hash);
+    let s = uint8ArrayToHex(m.fullResolution.hash);
     Fullscreen?.addImageNodeAsImageImport(r.id);
     t({
       type: "IMAGE",

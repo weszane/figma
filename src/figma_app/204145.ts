@@ -6,7 +6,7 @@ import { K } from "../905/621769";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/217163";
 import { eY } from "../figma_app/722362";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { $ } from "../905/330495";
 import { Bv, wS } from "../figma_app/221240";
@@ -28,7 +28,7 @@ export function $$f1({
   } = Bv(singleBackingSymbol, singleBackingStateGroup);
   let E = wS();
   let y = M4();
-  let b = _G();
+  let b = useOpenFileLibraryKey();
   let T = useDispatch();
   let I = "loaded" === E.status ? E.result : void 0;
   let S = useMemo(() => I && I.isExternal ? I.libraryKey : backingSymbol?.sourceLibraryKey ? backingSymbol?.sourceLibraryKey : b, [I, backingSymbol?.sourceLibraryKey, b]);
@@ -53,7 +53,7 @@ export function $$f1({
 }
 export function $$E2() {
   let e = eY();
-  let t = _G();
+  let t = useOpenFileLibraryKey();
   return useCallback(r => {
     let {
       backingComponentKey,
@@ -68,7 +68,7 @@ export function $$y0() {
   let r = eY();
   let n = $$E2();
   let a = uQ();
-  let _ = _G();
+  let _ = useOpenFileLibraryKey();
   let {
     backingLibraryKey,
     backingNodeId

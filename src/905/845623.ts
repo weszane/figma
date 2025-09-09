@@ -3,7 +3,7 @@ import { gB, Xm, e1 } from "../905/723791";
 import { D, n as _$$n } from "../905/347702";
 import { useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { j } from "../905/918929";
 import { ZA } from "../figma_app/633080";
 import { bj } from "../905/420347";
@@ -11,8 +11,8 @@ import { e6, _x, qE } from "../905/404538";
 import { dK } from "../figma_app/889655";
 import { C9, jf, MH } from "../figma_app/141508";
 import { Fullscreen } from "../figma_app/763686";
-import { p as _$$p } from "../figma_app/288654";
-import { tS } from "../figma_app/516028";
+import { useMultiSubscription } from "../figma_app/288654";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { L } from "../905/348758";
 import { LH } from "../905/872904";
 import { StyleByKey } from "../figma_app/43951";
@@ -44,7 +44,7 @@ let $$x0 = _$$n(() => {
     let e = f();
     let t = bj(e);
     let i = t.data;
-    let [a] = IT(e6.EverPublishedLibraryQuery({
+    let [a] = setupResourceAtomHandler(e6.EverPublishedLibraryQuery({
       libraryKeys: e
     }));
     let s = g(a);
@@ -73,19 +73,19 @@ let $$x0 = _$$n(() => {
   }();
   let t = function () {
     let e = LH();
-    let t = tS();
+    let t = useCurrentFileKey();
     let i = E();
     let a = useMemo(() => Array.from(i), [i]);
     let s = useMemo(() => a.map(e => ({
       key: e,
       openFileKey: t
     })), [a, t]);
-    let m = _$$p(StyleByKey, s);
+    let m = useMultiSubscription(StyleByKey, s);
     let h = useMemo(() => m.map(e => {
       let t = L(e.result).result;
       return "loaded" === t.status ? t.data : null;
     }).filter(isNotNullish), [m]);
-    let [g] = IT(_x.UnpublishedStylesQuery({
+    let [g] = setupResourceAtomHandler(_x.UnpublishedStylesQuery({
       styleKeys: a,
       orgId: e
     }));
@@ -101,7 +101,7 @@ let $$x0 = _$$n(() => {
       return e;
     }, [h, f]);
     let x = useMemo(() => a.filter(e => !_.has(e)), [a, _]);
-    let [S] = IT(qE.MissingStyleKeyToLibraryKeyQuery({
+    let [S] = setupResourceAtomHandler(qE.MissingStyleKeyToLibraryKeyQuery({
       styleKeys: x
     }));
     let w = useMemo(() => {

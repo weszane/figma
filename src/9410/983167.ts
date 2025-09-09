@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { buildUploadUrl } from "../figma_app/169182";
 import { B } from "../905/714743";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { renderI18nText } from "../905/303541";
 import { D } from "../figma_app/861252";
 import { J } from "../9410/591377";
@@ -46,7 +46,7 @@ export function $$x4(e) {
       children: jsxs(J, {
         onClick: () => {
           e.onSkipClick();
-          YQ({
+          handleAtomEvent({
             id: P7
           });
           t({

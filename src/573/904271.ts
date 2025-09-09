@@ -3,11 +3,11 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useMemo, Component, us
 import { HistoryChangesBindings, SceneGraphHelpers, Fullscreen, UserInterfaceElements, LayoutTabType, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { A as _$$A } from "../573/289674";
 import { X0 } from "../figma_app/88239";
 import { eY as _$$eY, KH, aV, p8 } from "../figma_app/722362";
-import { tB as _$$tB, q5 } from "../figma_app/516028";
+import { selectOpenFile, selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { F9, e_ as _$$e_, MH, dM, Xh } from "../figma_app/803787";
 import { bL, EA } from "../9410/499229";
@@ -47,7 +47,7 @@ import { A as _$$A2 } from "../vendor/90566";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Av } from "../905/149328";
 import { O as _$$O } from "../905/257139";
 import { dP, q_, M3 } from "../figma_app/119475";
@@ -98,7 +98,7 @@ import { Wh } from "../figma_app/615482";
 import { Bk, RN, Sg, $1, oV, Mt, mZ } from "../figma_app/76115";
 import { g5 } from "../figma_app/178752";
 import { $A } from "../905/862883";
-import { Kz } from "../905/760074";
+import { isBranchAlt } from "../905/760074";
 import { qp, oE } from "../905/977779";
 import { O as _$$O2 } from "../905/221694";
 import { Qe, Nx } from "../figma_app/112055";
@@ -107,7 +107,7 @@ import { pR, xO } from "../figma_app/585235";
 import { throwTypeError } from "../figma_app/465776";
 import { oz, zq, l$ } from "../figma_app/782261";
 import { V as _$$V } from "../figma_app/473391";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { NG } from "../figma_app/709893";
 import { B as _$$B } from "../905/714743";
@@ -297,7 +297,7 @@ function eW(e) {
   } = e;
   let d = useDispatch();
   let c = useSelector(e => e.dropdownShown);
-  let u = useSelector(_$$tB);
+  let u = useSelector(selectOpenFile);
   let {
     closeFlyout
   } = JA();
@@ -489,7 +489,7 @@ function tS({
   let K = !!query;
   let H = _$$F2(e, _$$K.ASSETS_PANEL, h, u);
   let U = _$$n2(e);
-  let z = ZC(U);
+  let z = useLatestRef(U);
   let D = !p;
   useEffect(() => {
     U && !z && f(jD());
@@ -646,7 +646,7 @@ let tR = e => {
 };
 class tK extends Component {
   componentDidUpdate(e) {
-    tO(this.props) && tO(e) && e.isExpanded !== this.props.isExpanded && "h1" === this.props.size && YQ({
+    tO(this.props) && tO(e) && e.isExpanded !== this.props.isExpanded && "h1" === this.props.size && handleAtomEvent({
       id: "library_section_header_toggled"
     });
   }
@@ -1057,7 +1057,7 @@ function t6({
   recordingKey: t
 }) {
   let s = selectCurrentUser();
-  let a = q5();
+  let a = selectCurrentFile();
   let [i, l] = useAtomValueAndSetter(e0);
   let d = _$$A2(e => {
     l(e);
@@ -1116,7 +1116,7 @@ function t9({
   let v = useSelector(e => e.isFreeUser);
   let _ = useSelector(e => e.user);
   let T = Av();
-  let k = q5();
+  let k = selectCurrentFile();
   let S = _$$D();
   let {
     query,
@@ -1144,7 +1144,7 @@ function t9({
     var s;
     let a = function () {
       let e = useSelector(_$$e_);
-      let t = useSelector(_$$tB);
+      let t = useSelector(selectOpenFile);
       let s = useAtomWithSubscription(_$$O2);
       let n = useSelector(MH);
       let a = useSelector(dM);
@@ -1170,7 +1170,7 @@ function t9({
         subscribedCommunityItemsInfo: b,
         defaultSubscribedItemsInfo: Mt(),
         canPublish: p,
-        currentFileKeyForPublish: t ? Kz(t) ? t.sourceFileKey : t.key : null,
+        currentFileKeyForPublish: t ? isBranchAlt(t) ? t.sourceFileKey : t.key : null,
         approvedLibraryKeysByResourceType: c
       }), [y, m, b, p, t, c]);
     }();
@@ -1211,7 +1211,7 @@ function t9({
       });
       let o = useDispatch();
       let l = useSelector(_$$q);
-      let d = q5();
+      let d = selectCurrentFile();
       useEffect(() => {
         s || "loading" === e || (i(e5(function () {
           if (localStorageRef) try {
@@ -1489,7 +1489,7 @@ function t9({
   let eN = S || B.isLoading;
   let eI = jO();
   let eC = k?.teamId ? b[k.teamId] : null;
-  let eM = Rs(TeamCanEdit, {
+  let eM = useSubscription(TeamCanEdit, {
     id: k?.teamId ?? ""
   }, {
     enabled: !!k?.teamId
@@ -1677,7 +1677,7 @@ function sw({
   recordingKey: p
 }) {
   let g = _$$M();
-  let y = q5();
+  let y = selectCurrentFile();
   let m = useSelector(e => t || !y ? UserInterfaceElements.LAYERS : e.leftPanel.activeTab);
   let f = useSelector(e => e.versionHistory);
   let b = dh();
@@ -1911,7 +1911,7 @@ function sN({
 }
 export let $$sC0 = memo(function () {
   let e = useAtomWithSubscription(Xh(void 0));
-  let t = q5();
+  let t = selectCurrentFile();
   let s = aV();
   bi();
   let E = X0();
@@ -1920,7 +1920,7 @@ export let $$sC0 = memo(function () {
   let N = p8("showUi");
   let I = useAtomWithSubscription(_$$G);
   useEffect(() => {
-    S && YQ({
+    S && handleAtomEvent({
       id: "Found Updates To Publish"
     });
   }, [S]);

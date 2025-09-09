@@ -35,7 +35,7 @@ import { xQ, $$in } from "../figma_app/84966";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { vr } from "../figma_app/514043";
-import { XP } from "../figma_app/465071";
+import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { T as _$$T2 } from "../905/696189";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N2 } from "../905/809096";
@@ -71,7 +71,7 @@ function $() {
   });
 }
 export function $$Z0(e) {
-  let t = XP({
+  let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   }).key.parentId;
   return jsx(tH, {
@@ -98,7 +98,7 @@ function X(e) {
   var i;
   let l = useDispatch();
   let h = hS(e);
-  let g = XP({
+  let g = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });
   let f = useSelector(e => e.teamBilling);

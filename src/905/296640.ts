@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { trackEventAnalytics } from "../905/449184";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 export function $$o0(e, t) {
   return useCallback(i => {
@@ -17,7 +17,7 @@ export function $$o0(e, t) {
 }
 export function $$$$l1(e, t, i) {
   let [s, o] = useState(e);
-  let l = ZC(s);
+  let l = useLatestRef(s);
   useEffect(() => {
     t && s !== l && trackEventAnalytics(t, {
       previousState: l,

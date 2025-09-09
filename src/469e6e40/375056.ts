@@ -26,7 +26,7 @@ import { fu, tf } from "../figma_app/831799";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { FOrganizationLevelType, FBillingPeriodType, FTeamStatusType, FPlanNameType } from "../figma_app/191312";
-import { T5, S2 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, useTeamPlanFeatures } from "../figma_app/465071";
 import { e0 as _$$e2 } from "../905/696396";
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, Y as _$$Y } from "../469e6e40/781142";
@@ -73,7 +73,7 @@ import { A as _$$A2 } from "../469e6e40/916829";
 var v = b;
 let L = "seat_counts--totalBadge--tVRtq";
 function D() {
-  let e = T5("useTrackingProperties").unwrapOr(null);
+  let e = useCurrentPrivilegedPlan("useTrackingProperties").unwrapOr(null);
   return useMemo(() => ({
     orgId: e?.key?.type === FOrganizationLevelType.ORG ? e.key.parentId : void 0,
     teamId: e?.key?.type === FOrganizationLevelType.TEAM ? e.key.parentId : void 0
@@ -273,7 +273,7 @@ function z(e) {
 function X() {
   let e = function () {
     let e = a8();
-    let t = S2().unwrapOr(null);
+    let t = useTeamPlanFeatures().unwrapOr(null);
     let a = t?.key?.type === FOrganizationLevelType.ORG;
     let n = Xf(t?.key.parentId, a);
     let s = useSelector(e => e.teamBilling);
@@ -389,7 +389,7 @@ function em(e) {
     adjustAnnualSeatsAction,
     isELA
   } = e;
-  let o = S2().unwrapOr(null);
+  let o = useTeamPlanFeatures().unwrapOr(null);
   let d = _$$k2();
   let c = o?.tier;
   let _ = useMemo(() => {
@@ -1035,7 +1035,7 @@ function ez(e) {
   let {
     onReactivateClick
   } = e;
-  let a = S2().unwrapOr(null);
+  let a = useTeamPlanFeatures().unwrapOr(null);
   let i = getFeatureFlags().scheduled_cancellation_enabled;
   let o = useCallback(() => {
     onReactivateClick();

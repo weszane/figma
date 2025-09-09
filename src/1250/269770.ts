@@ -5,8 +5,8 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import s from "classnames";
 import { tH } from "../905/751457";
 import { s4, Dm } from "../figma_app/8833";
-import { eE, a4, tM } from "../905/149196";
-import { wh } from "../figma_app/347406";
+import { flagAtom, requestsAtom, NetworkState } from "../905/149196";
+import { getFigmentDebuggerFlag } from "../figma_app/347406";
 var l = s;
 var $$m1 = (e => (e.FILE_BROWSER = "file_browser", e))($$m1 || {});
 export function $$p0({
@@ -23,9 +23,9 @@ export function $$p0({
 function g({
   entryPoint: e
 }) {
-  let [t, n] = useAtomValueAndSetter(eE);
+  let [t, n] = useAtomValueAndSetter(flagAtom);
   useEffect(() => {
-    n(!!wh());
+    n(!!getFigmentDebuggerFlag());
   }, []);
   return t && getFeatureFlags().figment_debugger ? jsx("div", {
     className: l()("file_browser" === e ? "figment_debugger--fileBrowserContainer--KNMPr figment_debugger--container--4qsMx" : "figment_debugger--container--4qsMx", s4, Dm),
@@ -33,7 +33,7 @@ function g({
   }) : null;
 }
 function f() {
-  let [e, t] = useAtomValueAndSetter(a4);
+  let [e, t] = useAtomValueAndSetter(requestsAtom);
   let [n, i] = useState([]);
   let s = useRef(null);
   let l = s.current && s.current.value.length > 0;
@@ -96,7 +96,7 @@ function b({
       children: [jsx("span", {
         children: t ? "\uFF0D" : "\uFF0B"
       }), "\xa0", jsx("span", {
-        children: e.networkState === tM.SUCCESS ? "\u{1F49A}" : e.networkState === tM.FAILURE ? "\u{1F494}" : "\u{1F9E1}"
+        children: e.networkState === NetworkState.SUCCESS ? "\u{1F49A}" : e.networkState === NetworkState.FAILURE ? "\u{1F494}" : "\u{1F9E1}"
       }), "\xa0", jsx("span", {
         className: "figment_debugger--timestamp--BaHtN",
         children: s.sentAt.slice(11, 16)

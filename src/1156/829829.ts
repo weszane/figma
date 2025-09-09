@@ -1,7 +1,7 @@
 import { Hg } from "../figma_app/304955";
 import { Xr } from "../figma_app/27355";
 import { generateUUIDv4 } from "../905/871474";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { M4 } from "../905/713695";
 import { R } from "../905/943003";
 import { p7, Xl, GV, Ut } from "../figma_app/72338";
@@ -19,7 +19,7 @@ export function $$f0() {
   } = oA();
   let n = vD(entryPointCodeInstance?.guid ?? null);
   let f = I4(n);
-  let y = tS();
+  let y = useCurrentFileKey();
   let _ = Xr(Xl);
   let b = Xr(GV);
   let j = Xr(GA);

@@ -1,4 +1,4 @@
-import { cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { I9 } from '../figma_app/151869';
 import { GW } from '../figma_app/701001';
 import { SelectionPanelType } from '../figma_app/763686';
@@ -6,7 +6,7 @@ export function $$o2(e) {
   return e === 'MIXED' || e === 'MIXED_FRAME_SECTION_GROUP';
 }
 export function $$l1() {
-  let e = cJ();
+  let e = useIsFullscreenSitesView();
   let t = GW();
   let r = I9();
   let o = r?.[0];

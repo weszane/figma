@@ -36,7 +36,7 @@ import { rZ, yT, zM } from "../figma_app/332598";
 import { v4 } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { X as _$$X } from "../905/853613";
 import { findComponentGuidOrPublishId } from "../figma_app/854115";
 import { showModalHandler } from "../905/156213";
@@ -46,7 +46,7 @@ import { replaceSelection } from "../figma_app/741237";
 import { T as _$$T } from "../905/858738";
 import { Um } from "../905/848862";
 import { eY as _$$eY, T3 } from "../figma_app/722362";
-import { q5, tS, _S } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f2 } from "../905/940356";
 import { Wh } from "../figma_app/615482";
@@ -972,7 +972,7 @@ function eK({
   copyButtonContainer: d
 }) {
   let c = selectCurrentUser();
-  let u = q5();
+  let u = selectCurrentFile();
   let p = uQ();
   let _ = _$$eY();
   let {
@@ -1007,7 +1007,7 @@ function eK({
       });
     });
     let s = t?.result === "ERROR" && t?.data?.error ? t.data.error.type : null;
-    let o = ZC(s);
+    let o = useLatestRef(s);
     useEffect(() => {
       s !== o && s && analyticsEventManager.trackDefinedEvent("code_connect.code_connect_error", {
         partnerType: a,
@@ -1262,14 +1262,14 @@ export function $$eQ0({
     hasRenderedCodeConnectOnce: s,
     isComponentBrowserMapping: o
   }) {
-    let l = tS();
+    let l = useCurrentFileKey();
     let d = M4.File.useValue(l).data;
     let c = useSelector(e => e.userFlags.dev_mode_has_dismissed_code_connect_instance_entrypoint);
     let u = {
       view: "none"
     };
     let p = function (e = !0) {
-      let t = useAtomWithSubscription(_S);
+      let t = useAtomWithSubscription(openFileLibraryKeyAtom);
       let r = _$$eY();
       let n = Vr();
       let i = [];

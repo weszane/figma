@@ -5,7 +5,7 @@ import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { N as _$$N } from "../905/572042";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { y2 } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -128,7 +128,7 @@ export function $$U0(e) {
       isReversed: O(t, e)
     }));
   }, [N]);
-  let F = Rs(PaginatedAbandonedDraftsView, {
+  let F = useSubscription(PaginatedAbandonedDraftsView, {
     firstPageSize: 30,
     sortOrder: a.isReversed ? "desc" : "asc",
     cursorColumn: a.columnName,

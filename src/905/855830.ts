@@ -8,7 +8,7 @@ import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_a
 import c from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError, SeverityLevel } from "../905/11";
 import { tH } from "../905/751457";
 import { ks, nR, vd } from "../figma_app/637027";
@@ -27,13 +27,13 @@ import { R as _$$R } from "../905/263821";
 import { Cu } from "../figma_app/314264";
 import { VG, A7, F2, E2, ju } from "../905/389382";
 import { throwTypeError } from "../figma_app/465776";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { FProductAccessType, FOrganizationLevelType, FPlanNameType, FMemberRoleType, FFileType } from "../figma_app/191312";
 import { _6 } from "../figma_app/386952";
 import { ConfiguredUpgradeRequestModalView } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { UQ } from "../figma_app/864723";
-import { tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { Sm } from "../figma_app/482728";
 import { e0 } from "../905/696396";
@@ -66,7 +66,7 @@ var u = c;
 function L(e, t, i, n) {
   switch (i) {
     case tc.CODE_CHAT_LIMIT:
-      if (getFeatureFlags().ai_ga && t === ud.EXPERT) return getI18nString("request_upgrade.header.figmake.more_prompts");
+      if (getFeatureFlags().ai_ga && t === ProductAccessTypeEnum.EXPERT) return getI18nString("request_upgrade.header.figmake.more_prompts");
       break;
     case tc.SHARE_DRAFTS:
     case tc.IN_EDITOR_RESTRICTED_DRAFT:
@@ -98,13 +98,13 @@ function L(e, t, i, n) {
         break;
       }
       switch (t) {
-        case ud.COLLABORATOR:
+        case ProductAccessTypeEnum.COLLABORATOR:
           return getI18nString("request_upgrade_modal.header.collab");
-        case ud.DEVELOPER:
+        case ProductAccessTypeEnum.DEVELOPER:
           return getI18nString("request_upgrade_modal.header.dev");
-        case ud.EXPERT:
+        case ProductAccessTypeEnum.EXPERT:
           return getI18nString("request_upgrade_modal.header.full");
-        case ud.CONTENT:
+        case ProductAccessTypeEnum.CONTENT:
           return getI18nString("request_upgrade_modal.header.content");
         default:
           throwTypeError(t);
@@ -157,7 +157,7 @@ function eh(e) {
   let f = useDispatch();
   let _ = licenseType === FProductAccessType.DEV_MODE;
   let A = iS(licenseType);
-  let y = tS();
+  let y = useCurrentFileKey();
   let v = F2(licenseType);
   let I = iq();
   let x = DP();
@@ -320,7 +320,7 @@ export function $$eb0(e) {
   let ei = !!e.getIsEligibleForProvisionalAccess && e.getIsEligibleForProvisionalAccess(Z);
   let en = function (e) {
     let t = useAtomWithSubscription(UQ);
-    let i = q5();
+    let i = selectCurrentFile();
     return !t && !!i && i.editorType === FFileType.DESIGN && (e === i$.BlockingModal || e === i$.Upsell);
   }(e.entryPoint);
   let er = e.entryPoint === tc.ASK_TO_EDIT_ONE_CLICK || en;
@@ -464,7 +464,7 @@ export function $$eb0(e) {
     er ? ew() : (t(popModalStack()), ex?.());
   };
   let eR = _$$u();
-  let eN = Rs(ConfiguredUpgradeRequestModalView, {
+  let eN = useSubscription(ConfiguredUpgradeRequestModalView, {
     orgId: planParentId,
     permission: planUserPermission
   }, {

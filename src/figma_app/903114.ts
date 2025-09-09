@@ -9,7 +9,7 @@ import { vo, nB, wi, jk } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { HB, lb } from "../3973/538504";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { h1 } from "../905/986103";
@@ -31,15 +31,15 @@ import { tb } from "../905/848667";
 import { U2 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { Gu, ud } from "../905/513035";
+import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
 import { I as _$$I } from "../905/343211";
 import { d as _$$d } from "../figma_app/603561";
 import { selectCurrentUser } from "../905/372672";
 import { FOrganizationLevelType, FBillingPeriodType, FSeatAssignmentReasonType, FUpgradeReasonType, FApprovalMethodType } from "../figma_app/191312";
 import { vr } from "../figma_app/514043";
-import { T5 } from "../figma_app/465071";
-import { Ef } from "../figma_app/428858";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
+import { getPlanData } from "../figma_app/428858";
 import { h as _$$h } from "../figma_app/124713";
 import { B as _$$B } from "../figma_app/395012";
 import { registerModal } from "../905/102752";
@@ -54,8 +54,8 @@ function $$Z(e) {
   let p = _$$d({
     reportErrorsToTeam: _$$e.SCALE
   });
-  let _ = T5("ModifyPlanUserSeatModalInner");
-  let [g] = mI(_);
+  let _ = useCurrentPrivilegedPlan("ModifyPlanUserSeatModalInner");
+  let [g] = handleSuspenseRetainRelease(_);
   if ("loaded" !== g.status) {
     let e = Error("disabled" === g.status ? "Plan fetching disabled" : "Error fetching plan");
     reportError(_$$e.SCALE, e);
@@ -85,7 +85,7 @@ function $$Z(e) {
     enabled: y && !p && !!T.data,
     currentSeatBillingInterval: w
   });
-  let [L] = mI(R);
+  let [L] = handleSuspenseRetainRelease(R);
   let P = Qf(f.key.parentId, f.key.type);
   let D = "loaded" === P.status ? Ye.dict(e => P.data[e]?.available ?? 0) : J;
   let B = new vr(e.currency);
@@ -100,7 +100,7 @@ function $$Z(e) {
   });
   let W = "errors" === P.status;
   let K = "disabled" !== L.status && ("errors" === L.status || !e.currency || !L.data);
-  let Y = !!a && (a === Gu.VIEW || isNotNullish(D[a]) && D[a] > 0);
+  let Y = !!a && (a === ViewAccessTypeEnum.VIEW || isNotNullish(D[a]) && D[a] > 0);
   let $ = kI({
     prices: L.data,
     currentSeatType: e.planUser.currentSeatType,
@@ -108,7 +108,7 @@ function $$Z(e) {
     nextSeatAvailable: Y,
     failedToLoadPrices: K
   });
-  let q = f.key.type === FOrganizationLevelType.TEAM && !y && w === FBillingPeriodType.YEAR && e.planUser.currentSeatType === ud.EXPERT && a === ud.DEVELOPER && D[ud.DEVELOPER] < 1;
+  let q = f.key.type === FOrganizationLevelType.TEAM && !y && w === FBillingPeriodType.YEAR && e.planUser.currentSeatType === ProductAccessTypeEnum.EXPERT && a === ProductAccessTypeEnum.DEVELOPER && D[ProductAccessTypeEnum.DEVELOPER] < 1;
   return jsx(fu, {
     name: "Modify Plan User Seat Modal",
     children: jsx(bL, {
@@ -128,7 +128,7 @@ function $$Z(e) {
               user: e.planUser,
               text: null === a ? getI18nString("modify_plan_user_seat_modal.choose_seat", {
                 name: r
-              }) : a !== Gu.VIEW && Y ? getI18nString("modify_plan_user_seat_modal.move_to_available_seat", {
+              }) : a !== ViewAccessTypeEnum.VIEW && Y ? getI18nString("modify_plan_user_seat_modal.move_to_available_seat", {
                 name: r,
                 seatType: JT(a)
               }) : getI18nString("modify_plan_user_seat_modal.move_to_unavailable_seat", {
@@ -174,7 +174,7 @@ function $$Z(e) {
           previousSeatWillBecomeAvailable: !p && (x && !y || y && !$),
           queueFilterCountsRefetch: e.queueFilterCountsRefetch,
           refetchSeatCounts: P.refetch,
-          seatIncreaseAuthorized: !y || a === Gu.VIEW || isNotNullish(D[a]) && D[a] < 1,
+          seatIncreaseAuthorized: !y || a === ViewAccessTypeEnum.VIEW || isNotNullish(D[a]) && D[a] < 1,
           seatSwapIntended: y && $,
           setNextSeatType: u,
           userId: e.planUser.userId,
@@ -246,19 +246,19 @@ function ee({
   let C = useCallback(() => {
     let e = m ? function (e, t) {
       switch (t) {
-        case ud.EXPERT:
+        case ProductAccessTypeEnum.EXPERT:
           return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_full", {
             userName: e
           });
-        case ud.DEVELOPER:
+        case ProductAccessTypeEnum.DEVELOPER:
           return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_dev", {
             userName: e
           });
-        case ud.COLLABORATOR:
+        case ProductAccessTypeEnum.COLLABORATOR:
           return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_collab", {
             userName: e
           });
-        case Gu.VIEW:
+        case ViewAccessTypeEnum.VIEW:
         default:
           return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_view", {
             userName: e
@@ -276,7 +276,7 @@ function ee({
   }, [v, t, p, _, m]);
   let O = _$$N({
     planId: E,
-    ...Ef(S, {
+    ...getPlanData(S, {
       team: {
         entryPoint: _$$B.MEMBERS_TAB
       },

@@ -2,7 +2,7 @@ import { ImageToolsBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { Vs } from "../figma_app/930338";
+import { base64ToUint8Array } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { fullscreenValue } from "../figma_app/455680";
@@ -74,7 +74,7 @@ let _ = atom(null, (e, t) => {
     };
     i.x = t.offsetX - i.size.x / 2;
     i.y = t.offsetY - i.size.y / 2;
-    let s = Vs(r.video);
+    let s = base64ToUint8Array(r.video);
     ImageToolsBindings.insertVideoInNode(i.id, s, r.prompt);
     fullscreenValue.triggerAction("commit");
   }), t(h));

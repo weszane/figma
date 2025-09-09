@@ -6,7 +6,7 @@ import { K } from "../905/443068";
 import { A } from "../905/251970";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { g as _$$g } from "../figma_app/777171";
@@ -127,7 +127,7 @@ export function $$H13(e) {
   let r = e.unique_run_count;
   let n = getI18nString("community.try.people_use_this", {
     numPeople: r,
-    numPeopleStr: $M(r)
+    numPeopleStr: formatNumber(r)
   });
   return `${t}${r > 0 ? ` \xb7 ${n}` : ""}`;
 }

@@ -16,7 +16,7 @@ import { popModalStack } from "../905/156213";
 import { _z, W0 } from "../905/977218";
 import { _6 } from "../figma_app/386952";
 import { uR } from "../figma_app/162807";
-import { kV } from "../figma_app/707808";
+import { isSearchView } from "../figma_app/707808";
 import { Ib } from "../905/129884";
 import { oT, L8, rG, z5, q4 } from "../905/124270";
 import { K as _$$K2 } from "../905/328468";
@@ -101,7 +101,7 @@ export function $$P0({
     F("");
     t(_z({}));
     W();
-    M && kV(i) && t(sf(i.previousView ?? {
+    M && isSearchView(i) && t(sf(i.previousView ?? {
       view: "recentsAndSharing"
     }));
   }, [W, t, i, M, F]);

@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Pp } from "../vendor/330821";
 import { fullscreenValue } from "../figma_app/455680";
-import { q5, tS } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { H } from "../905/457575";
 import { Nm } from "../figma_app/202307";
 import { nc } from "../figma_app/570630";
@@ -31,7 +31,7 @@ let $$E = H({
 });
 export function $$S0(e, t, n) {
   let l = e?.guid || "";
-  let o = q5();
+  let o = selectCurrentFile();
   let x = o?.key || null;
   let [h, g] = useAtomValueAndSetter(C(l));
   let [p, j] = useAtomValueAndSetter($$E(l));
@@ -202,7 +202,7 @@ export function $$N1({
   featureType: t
 }) {
   let [n] = useAtomValueAndSetter(C(e));
-  let a = tS();
+  let a = useCurrentFileKey();
   return {
     restoreFile: useCallback(r => {
       if (e && n.codeSnapshotKey && n.files[r] && a) return () => {

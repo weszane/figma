@@ -7,8 +7,8 @@ import { $n } from "../905/521428";
 import { setupAutofocusHandler } from "../905/128376";
 import { Rq, bL } from "../905/38914";
 import { hS } from "../905/437088";
-import { oA } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { zd, Bb, B7 } from "../905/651696";
 import { R as _$$R } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -36,8 +36,8 @@ function R({
 }) {
   let i = useDispatch();
   let r = k();
-  let s = Rs(CurrentUserIsMfaRequiredByMembershipOrgView, {});
-  let d = oA(s.data?.currentUser?.isMfaRequiredByMembershipOrg) && !t.two_factor_app_enabled;
+  let s = useSubscription(CurrentUserIsMfaRequiredByMembershipOrgView, {});
+  let d = getResourceDataOrFallback(s.data?.currentUser?.isMfaRequiredByMembershipOrg) && !t.two_factor_app_enabled;
   return jsxs(vo, {
     children: [jsx(Y9, {
       children: jsx(hE, {

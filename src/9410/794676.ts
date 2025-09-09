@@ -14,7 +14,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { I7 } from "../figma_app/594947";
 import { k as _$$k2 } from "../905/582200";
 import { Hb, tH as _$$tH, H4 } from "../905/751457";
-import { lF, xo } from "../figma_app/473493";
+import { subscribeDevModePermissions, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { oQ } from "../figma_app/332085";
 import { PQ, sx } from "../figma_app/91703";
 import { HQ, gr, vZ, aF } from "../figma_app/147952";
@@ -40,7 +40,7 @@ import { h as _$$h } from "../9410/146161";
 import { gN, SH } from "../figma_app/790714";
 import { y4 } from "../figma_app/298277";
 import { XS } from "../figma_app/178752";
-import { q5, MY } from "../figma_app/516028";
+import { selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
 import { dq, sZ } from "../905/845253";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { Bc } from "../figma_app/615482";
@@ -73,7 +73,7 @@ import { L as _$$L } from "../905/92291";
 import { atom, useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
 import eO from "../vendor/879378";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { FileByKey } from "../figma_app/43951";
 import { U2 } from "../figma_app/193867";
 import { K as _$$K } from "../905/12775";
@@ -91,11 +91,11 @@ import { u as _$$u } from "../905/684425";
 import { Ji } from "../905/739314";
 import { d as _$$d } from "../905/241150";
 import { PG } from "../figma_app/453508";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { S as _$$S } from "../5132/668270";
 import { showModal, showModalHandler } from "../905/156213";
 import { cq, QA } from "../figma_app/107215";
-import { nF } from "../figma_app/789";
+import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { QL } from "../905/609392";
 import { T as _$$T } from "../905/868547";
 import { generateAnonymouseName } from "../905/301652";
@@ -109,7 +109,7 @@ import { v6, kO } from "../figma_app/442916";
 import { ox } from "../figma_app/197286";
 import { Wz } from "../figma_app/211694";
 import { u as _$$u2 } from "../905/14084";
-import { Vs } from "../figma_app/930338";
+import { base64ToUint8Array } from "../figma_app/930338";
 import { Yk } from "../figma_app/644079";
 import { ZG } from "../figma_app/840917";
 import { p8, dH } from "../figma_app/722362";
@@ -400,12 +400,12 @@ function tm(e) {
     let e = useDispatch();
     let t = selectCurrentUser();
     let i = !t;
-    let r = nF();
+    let r = useCurrentFileWorkshopModeStatus();
     let s = r.enabled;
     let o = r.enabled ? r.id : null;
     let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
     let c = useSelector(e => e.progressBarState.mode);
-    let u = q5()?.isTryFile;
+    let u = selectCurrentFile()?.isTryFile;
     let p = QL("name");
     useEffect(() => {
       i && u && o && p && l && e(cq({
@@ -426,7 +426,7 @@ function tm(e) {
     useEffect(() => {
       m && o && u && kO(o, m);
     }, [m, o, u]);
-    let f = MY();
+    let f = useFullscreenViewFile();
     useEffect(() => {
       if (s && !_$$T(c) && "loaded" === f.status) {
         let t = localStorage.getItem(generateAnonymouseName(o));
@@ -437,7 +437,7 @@ function tm(e) {
         }));
       }
     }, [e, i, s, o, c, h, f]);
-    let g = q5();
+    let g = selectCurrentFile();
     let _ = g?.key;
     let x = g?.name;
     useEffect(() => {
@@ -457,7 +457,7 @@ function tm(e) {
     let [t, i] = useState(!1);
     let r = useDispatch();
     let s = selectCurrentUser();
-    let o = q5();
+    let o = selectCurrentFile();
     let l = o?.name;
     let d = !s;
     let {
@@ -471,9 +471,9 @@ function tm(e) {
       userCanEditFile: !1,
       userCanSeeEditButton: !1
     }, [d, o]);
-    let u = nF();
+    let u = useCurrentFileWorkshopModeStatus();
     let p = u.enabled;
-    let h = ZC(p);
+    let h = useLatestRef(p);
     let m = u.enabled ? u.until.valueOf() : null;
     let f = useRef(null);
     let g = useCallback(() => {
@@ -538,7 +538,7 @@ let t5 = memo(({
   let p = p8("isReadOnly");
   let h = dq();
   let f = E3();
-  let g = ZC(f);
+  let g = useLatestRef(f);
   f !== g && g && d(PQ([]));
   G_(i, s);
   OQ(i);
@@ -654,14 +654,14 @@ export function $$t80({
     }) : Tf.disableEventSendingUnlessDebugEnabled();
   }, []);
   let i = useDispatch();
-  let d = q5();
-  lF(d?.key ?? "");
+  let d = selectCurrentFile();
+  subscribeDevModePermissions(d?.key ?? "");
   M4.Folder.useValue(d?.folderId);
   let h = useSelector(e => e.selectedView.editorType);
   let [f, g] = useState(!1);
   let x = DP();
   let C = sO();
-  let S = xo();
+  let S = useCanUseDevModeDemoFile();
   let j = useCallback(() => {
     jS();
     g(!0);
@@ -674,7 +674,7 @@ export function $$t80({
     let r = dq();
     let [s, o] = useState(!1);
     let d = _$$K();
-    let c = Rs(FileByKey, {
+    let c = useSubscription(FileByKey, {
       fileKey: t ?? ""
     }, {
       enabled: !!t
@@ -755,7 +755,7 @@ export function $$t80({
     let i = useSelector(m0);
     let r = useSelector(No);
     let s = useSelector(e => e.library.publishedByLibraryKey);
-    let o = q5();
+    let o = selectCurrentFile();
     let l = useSelector(e => e.fileVersion);
     let d = useSelector(e => e.loadingState);
     let c = useSelector(e => e.library.local);
@@ -877,7 +877,7 @@ export function $$t80({
     let o = useSelector(e => e.multiplayer);
     let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
     !function () {
-      let e = q5();
+      let e = selectCurrentFile();
       let t = window.FigmaMobile;
       let i = rE();
       let r = C3();
@@ -1065,7 +1065,7 @@ export function $$t80({
           encoded_data,
           mime_type
         } = e;
-        return new Blob([Vs(encoded_data)], {
+        return new Blob([base64ToUint8Array(encoded_data)], {
           type: mime_type
         });
       });

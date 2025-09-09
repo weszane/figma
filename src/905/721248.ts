@@ -14,8 +14,8 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getSupportEmail } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
-import { setSentryTag } from "../905/11";
+import { useSubscription } from "../figma_app/288654";
+import { setTagGlobal } from "../905/11";
 import { logInfo, logError } from "../905/714362";
 import { Hb, tH as _$$tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -26,19 +26,19 @@ import { ov, S2 } from "../905/300250";
 import { fu } from "../figma_app/831799";
 import { rY } from "../905/985490";
 import { b_, gf, _l, ds, n6 as _$$n, Ur, YH } from "../905/585030";
-import { cb } from "../905/760074";
+import { handleModalError } from "../905/760074";
 import { $n as _$$$n } from "../905/930279";
-import { nX as _$$nX, qm } from "../905/617744";
+import { currentSelectionAtom, isActiveAtom } from "../905/617744";
 import { F4 } from "../figma_app/527873";
 import { w as _$$w } from "../905/346794";
 import { Z_ } from "../figma_app/793953";
-import { tB as _$$tB } from "../figma_app/516028";
+import { selectOpenFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { BranchingSourceViewSidebarView, RepoReviewerSuggestions, FileCanEdit, BranchOpenMergeRequest } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
-import { Kn, Wo, PW } from "../905/535806";
-import { e6 as _$$e } from "../905/557142";
+import { SourceDirection, BranchType, CPPEventType } from "../905/535806";
+import { AccessLevelEnum } from "../905/557142";
 import { e0 as _$$e2 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { K as _$$K } from "../905/443068";
@@ -75,7 +75,7 @@ import { A as _$$A2 } from "../3850/204081";
 import { A as _$$A3 } from "../2854/952200";
 import { A as _$$A4 } from "../1617/466789";
 import eW from "../vendor/128080";
-import { Zr, _5 as _$$_ } from "../figma_app/930338";
+import { capitalize, camelToSnakeWithLeading } from "../figma_app/930338";
 import { UB } from "../figma_app/249941";
 import { flatten, mapFilter } from "../figma_app/656233";
 import { l as _$$l2 } from "../905/716947";
@@ -133,7 +133,7 @@ import { H as _$$H } from "../905/706055";
 import { fG } from "../905/772425";
 import { zW } from "../905/162414";
 import { oA } from "../905/723791";
-import { pl } from "../figma_app/175992";
+import { EditorLocation } from "../figma_app/175992";
 import { Um } from "../figma_app/349248";
 import { A as _$$A0 } from "../905/920142";
 import { Ro } from "../figma_app/805373";
@@ -736,7 +736,7 @@ function e2(e) {
     className: "chunk_property_changes--property--WdCvZ",
     children: [jsx("div", {
       className: "chunk_property_changes--propertyTitle--ntp3n",
-      children: Zr(_$$_(fieldName).split("_").join(" "))
+      children: capitalize(camelToSnakeWithLeading(fieldName).split("_").join(" "))
     }), jsx("div", {
       children: jsx(e1, {
         prevValue,
@@ -2828,7 +2828,7 @@ function ny(e) {
     readOnly
   } = e;
   let l = new Set(e.reviewers.map(e => e.user.id));
-  let d = Rs(BranchingSourceViewSidebarView, {
+  let d = useSubscription(BranchingSourceViewSidebarView, {
     branchKey: e.branchKey
   });
   let c = useMemo(() => d.transform(e => e.file ? fileEntityDataMapper.toSinatra(e.file) : null).data, [d]);
@@ -2836,7 +2836,7 @@ function ny(e) {
   let p = useRef(null);
   let m = selectCurrentUser();
   let h = function (e, t, i = 3) {
-    return Rs(RepoReviewerSuggestions, {
+    return useSubscription(RepoReviewerSuggestions, {
       repoId: e || ""
     }, {
       enabled: !!e
@@ -2846,8 +2846,8 @@ function ny(e) {
       let a = new Map();
       for (let e of [...n, ...r]) {
         if (a.size >= i) break;
-        if (!e.pending && e.userId && e.userId !== t?.id && e.user && !a.has(e.userId) && e.level >= _$$e.EDITOR) {
-          let t = "file_repo" === e.resourceType ? pl.EDITOR_ON_MAIN : pl.EDITOR_ON_TEAM;
+        if (!e.pending && e.userId && e.userId !== t?.id && e.user && !a.has(e.userId) && e.level >= AccessLevelEnum.EDITOR) {
+          let t = "file_repo" === e.resourceType ? EditorLocation.EDITOR_ON_MAIN : EditorLocation.EDITOR_ON_TEAM;
           a.set(e.userId, {
             ...Um(e.user),
             editorContext: t
@@ -3304,7 +3304,7 @@ let nw = memo(function (e) {
     displayGroupsByVariableSet,
     displayGroupsByLibrary,
     sortedPageIds
-  } = useMemo(() => e.styleKeyToFileKey ? on(e.displayGroups ?? [], e.styleKeyToFileKey, e.styleKeyToLibraryKey ?? {}, Kn.TO_SOURCE) : on([], {}, {}, Kn.TO_SOURCE), [e.displayGroups, e.styleKeyToFileKey, e.styleKeyToLibraryKey]);
+  } = useMemo(() => e.styleKeyToFileKey ? on(e.displayGroups ?? [], e.styleKeyToFileKey, e.styleKeyToLibraryKey ?? {}, SourceDirection.TO_SOURCE) : on([], {}, {}, SourceDirection.TO_SOURCE), [e.displayGroups, e.styleKeyToFileKey, e.styleKeyToLibraryKey]);
   let ex = function (e, t, i, n, a, s, o, l) {
     let [d, c] = useState(null);
     let [u, p] = useState({});
@@ -3446,7 +3446,7 @@ let nw = memo(function (e) {
   let eT = useCallback(e => {
     let t = allDisplayGroups[e];
     if (!t) {
-      cb(Error("No display group found for index"), {
+      handleModalError(Error("No display group found for index"), {
         index: e,
         length: allDisplayGroups.length
       });
@@ -3468,7 +3468,7 @@ let nw = memo(function (e) {
     isDoneLoading: ek,
     isDoneLoadingSourceDiff: e.hasSourceDiffLoaded,
     isDoneLoadingConflicts: !e.isConflictDetectionLoading,
-    direction: Kn.TO_SOURCE,
+    direction: SourceDirection.TO_SOURCE,
     branchFileKey: branch.key,
     sourceFileKey: branch.source_file_key,
     fileRepoId: branch.file_repo_id,
@@ -3476,7 +3476,7 @@ let nw = memo(function (e) {
     conflictGroups: e.conflictGroups ?? [],
     modalCloseIntent,
     branchModalTrackingId: b,
-    entryPointDirection: Kn.TO_SOURCE
+    entryPointDirection: SourceDirection.TO_SOURCE
   });
   useEffect(() => {
     I && B(I.reviewers);
@@ -3522,7 +3522,7 @@ let nw = memo(function (e) {
       let i = !!e.unreadCommentCount && 0 !== e.unreadCommentCount;
       let n = A || _ ? tW(A, e.isMergeBlocked, 0 !== t, i, e.hasDuplicateConflictingGuids) : null;
       let r = n === tH.CONFLICTING_UPDATES || n === tH.CONFLICT_MERGE_BLOCKED;
-      !e.isMergeBlocked && _ || r || (eN(!0), cb(Error("Merge button disabled without conflict banner"), {
+      !e.isMergeBlocked && _ || r || (eN(!0), handleModalError(Error("Merge button disabled without conflict banner"), {
         bannerState: n ? tH[n] : null,
         isMergeBlocked: e.isMergeBlocked,
         conflictCount: t,
@@ -3541,7 +3541,7 @@ let nw = memo(function (e) {
     let e = {
       branchKey: branch.key,
       sourceKey: branch?.source_file_key,
-      direction: Kn.FROM_SOURCE,
+      direction: SourceDirection.FROM_SOURCE,
       backFileKey: branch.key
     };
     t(sf({
@@ -3557,7 +3557,7 @@ let nw = memo(function (e) {
     return e ? rY.getChunkChanges(GitReferenceType.BRANCH, e.mainChunk.originalIndex) : null;
   }, [i]);
   let eD = {
-    direction: Kn.TO_SOURCE
+    direction: SourceDirection.TO_SOURCE
   };
   let eM = useCallback(e => eT(e.index), [eT]);
   let ej = e.openMergeRequest ? z2(e.openMergeRequest) : null;
@@ -3894,11 +3894,11 @@ let nF = memo(function (e) {
     pageIdToInfo
   } = useMemo(() => function (e, t, i, n) {
     if (!(t.length > 0)) return {
-      ...on(e, i, n, Kn.FROM_SOURCE),
+      ...on(e, i, n, SourceDirection.FROM_SOURCE),
       otherChanges: []
     };
     {
-      let r = on(t, i, n, Kn.FROM_SOURCE);
+      let r = on(t, i, n, SourceDirection.FROM_SOURCE);
       return {
         ...r,
         otherChanges: e.map((e, t) => ({
@@ -4079,12 +4079,12 @@ function nW(e) {
   return jsxs("div", {
     className: ev()("selection_columns--columns--iPmSx", e.className),
     children: [jsx("section", {
-      className: ev()("selection_columns--leftChunk--uOUKy selection_columns--chunkItem--mJ8QX", e.choice === Wo.MAIN && nH),
+      className: ev()("selection_columns--leftChunk--uOUKy selection_columns--chunkItem--mJ8QX", e.choice === BranchType.MAIN && nH),
       "aria-labelledby": t,
       "aria-label": "string" == typeof e.leftLabel ? e.leftLabel : void 0,
       children: e.leftChildren
     }), jsx("section", {
-      className: ev()("selection_columns--rightChunk--QxrFK selection_columns--chunkItem--mJ8QX", e.choice === Wo.BRANCH && nH),
+      className: ev()("selection_columns--rightChunk--QxrFK selection_columns--chunkItem--mJ8QX", e.choice === BranchType.BRANCH && nH),
       "aria-labelledby": i,
       "aria-label": "string" == typeof e.rightLabel ? e.rightLabel : void 0,
       children: e.rightChildren
@@ -4517,10 +4517,10 @@ function ra(e) {
       let i = !0;
       switch (t.keyCode) {
         case Uz.BRACKET_LEFT:
-          e(Wo.MAIN);
+          e(BranchType.MAIN);
           break;
         case Uz.BRACKET_RIGHT:
-          e(Wo.BRANCH);
+          e(BranchType.BRANCH);
           break;
         default:
           i = !1;
@@ -4541,7 +4541,7 @@ function rs({
   ra(useCallback(t => e(i, t), [e, i]));
   return jsxs(Fragment, {
     children: [jsxs("div", {
-      className: ev()("conflict_group_diff--diffHeaderLeft--jlkCd conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--mainHeader--l2ahY conflict_resolution--headerBorder--mFV8I", t === Wo.MAIN && n5),
+      className: ev()("conflict_group_diff--diffHeaderLeft--jlkCd conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--mainHeader--l2ahY conflict_resolution--headerBorder--mFV8I", t === BranchType.MAIN && n5),
       children: [jsx("div", {
         className: n4,
         children: jsx(_$$R, {
@@ -4549,11 +4549,11 @@ function rs({
           element: "h3"
         })
       }), jsx("div", {
-        className: ev()(n3, t === Wo.MAIN && n6),
+        className: ev()(n3, t === BranchType.MAIN && n6),
         children: renderI18nText("collaboration.branching_from_source.main")
       })]
     }), jsxs("div", {
-      className: ev()("conflict_group_diff--diffHeaderRight--9h2Uw conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--branchHeader--zbjpj conflict_resolution--headerBorder--mFV8I", t === Wo.BRANCH && n5),
+      className: ev()("conflict_group_diff--diffHeaderRight--9h2Uw conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--branchHeader--zbjpj conflict_resolution--headerBorder--mFV8I", t === BranchType.BRANCH && n5),
       children: [jsxs("div", {
         className: n4,
         children: [jsx(_$$B, {
@@ -4564,7 +4564,7 @@ function rs({
           element: "h3"
         })]
       }), jsx("div", {
-        className: ev()(n3, t === Wo.BRANCH && n6),
+        className: ev()(n3, t === BranchType.BRANCH && n6),
         children: renderI18nText("collaboration.branching_from_source.branch")
       })]
     })]
@@ -4623,29 +4623,29 @@ function rl({
   };
   return (ra(s), a) ? null : jsxs(Fragment, {
     children: [jsx("div", {
-      className: ev()("conflict_group_diff--diffFooterLeft--gdTe1 conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--mainFooter--ramGe", t === Wo.MAIN && n5),
+      className: ev()("conflict_group_diff--diffFooterLeft--gdTe1 conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--mainFooter--ramGe", t === BranchType.MAIN && n5),
       children: jsx(IK, {
         variant: "secondary",
         iconPrefix: jsx(_$$r2, {
           className: n7
         }),
         onClick: () => {
-          o(Wo.MAIN);
+          o(BranchType.MAIN);
         },
-        "aria-pressed": t === Wo.MAIN,
+        "aria-pressed": t === BranchType.MAIN,
         children: renderI18nText("collaboration.branching_from_source.keep_main")
       })
     }), jsx("div", {
-      className: ev()("conflict_group_diff--diffFooterRight--adX-Z conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--branchFooter--8jDG8", t === Wo.BRANCH && n5),
+      className: ev()("conflict_group_diff--diffFooterRight--adX-Z conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--branchFooter--8jDG8", t === BranchType.BRANCH && n5),
       children: jsx(IK, {
         variant: "secondary",
         iconPrefix: jsx(_$$r2, {
           className: n7
         }),
         onClick: () => {
-          o(Wo.BRANCH);
+          o(BranchType.BRANCH);
         },
-        "aria-pressed": t === Wo.BRANCH,
+        "aria-pressed": t === BranchType.BRANCH,
         children: renderI18nText("collaboration.branching_from_source.keep_branch")
       })
     })]
@@ -4700,9 +4700,9 @@ function rd({
 function rg(e) {
   let t = function (e) {
     switch (e) {
-      case Wo.BRANCH:
+      case BranchType.BRANCH:
         return getI18nString("collaboration.branching_from_source.branch");
-      case Wo.MAIN:
+      case BranchType.MAIN:
         return getI18nString("collaboration.branching_from_source.main");
       default:
         return null;
@@ -4816,10 +4816,10 @@ function rb({
             disabled: !0,
             children: renderI18nText("collaboration.branching_from_source.resolve_all")
           }), jsx(c$, {
-            value: Wo.MAIN,
+            value: BranchType.MAIN,
             children: getI18nString("collaboration.branching_from_source.pick_main_file")
           }), jsx(c$, {
-            value: Wo.BRANCH,
+            value: BranchType.BRANCH,
             children: getI18nString("collaboration.branching_from_source.pick_branch")
           })]
         })]
@@ -5143,17 +5143,17 @@ let rR = memo(function (e) {
         nonConflictingSourceChunkGUIDs,
         identicalChunkGUIDs
       } = e;
-      let o = _conflictGroups.filter(e => t[e.id] === Wo.BRANCH && e !== i);
-      let l = _conflictGroups.filter(e => t[e.id] === Wo.MAIN && e !== i);
-      let d = nj()(nN()(l, e => ue(e, Wo.MAIN)));
-      let c = nj()(nN()(o, e => ue(e, Wo.BRANCH)));
+      let o = _conflictGroups.filter(e => t[e.id] === BranchType.BRANCH && e !== i);
+      let l = _conflictGroups.filter(e => t[e.id] === BranchType.MAIN && e !== i);
+      let d = nj()(nN()(l, e => ue(e, BranchType.MAIN)));
+      let c = nj()(nN()(o, e => ue(e, BranchType.BRANCH)));
       let u = _conflictGroups.filter(e => !t[e.id]);
       let p = c.concat(nonConflictingBranchChunkGUIDs, identicalChunkGUIDs);
       let m = d.concat(nonConflictingSourceChunkGUIDs);
-      let h = nj()(nN()([i].concat(u), e => ue(e, Wo.BRANCH)));
+      let h = nj()(nN()([i].concat(u), e => ue(e, BranchType.BRANCH)));
       return {
         mainGuidsToAlwaysApplyToGenerateImages: m,
-        extraGuidsToApplyToGenerateMainImageFromDiff: nj()(nN()([i].concat(u), e => ue(e, Wo.MAIN))),
+        extraGuidsToApplyToGenerateMainImageFromDiff: nj()(nN()([i].concat(u), e => ue(e, BranchType.MAIN))),
         branchGuidsToAlwaysApplyToGenerateImages: p,
         extraGuidsToApplyToGenerateBranchImageFromConflictDiff: h
       };
@@ -5416,7 +5416,7 @@ let rN = memo(function (e) {
   useEffect(() => (I("loading"), () => I("off")), [I]);
   _$$tW({
     isDoneLoading: "loaded" === v,
-    direction: Kn.FROM_SOURCE,
+    direction: SourceDirection.FROM_SOURCE,
     branchFileKey: e.branch.key,
     sourceFileKey: e.branch.source_file_key,
     fileRepoId: e.branch.file_repo_id,
@@ -5424,7 +5424,7 @@ let rN = memo(function (e) {
     conflictGroups: conflictDetection?.conflictGroups || [],
     modalCloseIntent,
     branchModalTrackingId: b,
-    entryPointDirection: e.entryPointDirection || Kn.FROM_SOURCE
+    entryPointDirection: e.entryPointDirection || SourceDirection.FROM_SOURCE
   });
   let x = _$$$n();
   let S = useAtomWithSubscription(_$$eE);
@@ -5445,7 +5445,7 @@ let rN = memo(function (e) {
   let k = "enabled" !== x.updateBranch.status;
   let [O, D] = useState(!1);
   if (useEffect(() => {
-    getFeatureFlags().branching_view_only_error && k && conflictDetection && conflictDetection.conflictGroups.length > 0 && !O && (cb(Error("From source modal opened with view-only permissions"), {
+    getFeatureFlags().branching_view_only_error && k && conflictDetection && conflictDetection.conflictGroups.length > 0 && !O && (handleModalError(Error("From source modal opened with view-only permissions"), {
       updateBranchStatus: x.updateBranch.status,
       updateBranchReason: x.updateBranch.reason,
       memoryWarningLevel: Wy[S],
@@ -5467,13 +5467,13 @@ let rN = memo(function (e) {
       })
     })
   });
-  let [L, F] = iZ()(conflictDetection?.conflictGroups || [], e => d[e.id] === Wo.BRANCH);
-  let M = nN()(L, e => ue(e, Wo.BRANCH));
-  let j = new Set(nN()(F, e => ue(e, Wo.MAIN)));
+  let [L, F] = iZ()(conflictDetection?.conflictGroups || [], e => d[e.id] === BranchType.BRANCH);
+  let M = nN()(L, e => ue(e, BranchType.BRANCH));
+  let j = new Set(nN()(F, e => ue(e, BranchType.MAIN)));
   let U = (displayGroups ?? []).filter(e => j.has(sessionLocalIDToString(e.mainChunk.displayNode.guid)));
   let B = L.length === (conflictDetection?.conflictGroups || []).length;
   let V = {
-    direction: Kn.FROM_SOURCE
+    direction: SourceDirection.FROM_SOURCE
   };
   let z = {
     fileKey: e.branch.key,
@@ -5588,9 +5588,9 @@ function rO({
   });
   let u = useMemo(() => {
     switch (e) {
-      case Kn.TO_SOURCE:
+      case SourceDirection.TO_SOURCE:
         return renderI18nText("collaboration.branching_merge_modal.title_merge_to_source");
-      case Kn.FROM_SOURCE:
+      case SourceDirection.FROM_SOURCE:
         if (null != t) return renderI18nText("collaboration.branching_merge_modal.title_merge_from_source_version");
         return renderI18nText("collaboration.branching_merge_modal.title_merge_from_source");
     }
@@ -5641,7 +5641,7 @@ function rD(e) {
         className: oW,
         children: [jsx("div", {
           className: v2,
-          children: e.mergeDirection === Kn.FROM_SOURCE ? renderI18nText("collaboration.branching_merge_modal.unexpected_error_from_source") : renderI18nText("collaboration.branching_merge_modal.unexpected_error_to_source")
+          children: e.mergeDirection === SourceDirection.FROM_SOURCE ? renderI18nText("collaboration.branching_merge_modal.unexpected_error_from_source") : renderI18nText("collaboration.branching_merge_modal.unexpected_error_to_source")
         }), jsx("div", {
           className: rU,
           children: renderI18nText("collaboration.branching_merge_modal.for_help_please_contact_figma_support", {
@@ -5704,7 +5704,7 @@ function rF(e) {
         d(e);
         u(!1);
       } catch (e) {
-        cb(e);
+        handleModalError(e);
         s(VisualBellActions.enqueue({
           message: "An error occurred while calculating conflicts",
           error: !0
@@ -5737,17 +5737,17 @@ function rF(e) {
 function rM(e) {
   let t;
   let i = useDispatch();
-  let [s, o] = useAtomValueAndSetter(_$$nX);
+  let [s, o] = useAtomValueAndSetter(currentSelectionAtom);
   let l = s ?? e.direction;
   _$$h(() => (o(e.direction), () => o(null)));
   let d = e.direction;
   let [c, u] = useState(null);
   let [g, f] = useState(!1);
-  let A = useSelector(_$$tB);
+  let A = useSelector(selectOpenFile);
   let I = A?.key || null;
   let S = selectCurrentUser();
   let D = useSelector(e => e.roles);
-  let L = Rs(BranchOpenMergeRequest, {
+  let L = useSubscription(BranchOpenMergeRequest, {
     branchFileKey: e.branchKey
   });
   let F = "loaded" === L.status ? L.data.file?.openMergeRequest ?? null : null;
@@ -5756,7 +5756,7 @@ function rM(e) {
   let Y = A?.fileRepoId;
   let q = S?.id;
   let X = q && Y && D.byRepoId[Y]?.[q];
-  let Q = !!(X && X.level > _$$e.VIEWER);
+  let Q = !!(X && X.level > AccessLevelEnum.VIEWER);
   let J = useSelector(e => e.mirror.appModel.topLevelMode);
   let ee = _$$$n();
   let et = useRef(!0);
@@ -5780,10 +5780,10 @@ function rM(e) {
       reason: "not_in_branching_mode"
     });
   }, [J, c]);
-  let ei = Xr(qm);
-  useEffect(() => (ei(!0), setSentryTag("bm.isMergeModalOpen", !0), () => {
+  let ei = Xr(isActiveAtom);
+  useEffect(() => (ei(!0), setTagGlobal("bm.isMergeModalOpen", !0), () => {
     ei(!1);
-    setSentryTag("bm.isMergeModalOpen", void 0);
+    setTagGlobal("bm.isMergeModalOpen", void 0);
   }), [ei]);
   let en = e.sourceDiffInfo.checkpointDiff || null;
   let er = e.sourceDiffInfo.displayGroups || null;
@@ -5796,7 +5796,7 @@ function rM(e) {
   let eu = e.conflictDetectionInfo;
   let ep = null === eu;
   useEffect(() => {
-    en && l === Kn.FROM_SOURCE && en.to_checkpoint_key === en.from_checkpoint_key && cb(Error("No changes from main"));
+    en && l === SourceDirection.FROM_SOURCE && en.to_checkpoint_key === en.from_checkpoint_key && handleModalError(Error("No changes from main"));
   }, [en, l]);
   (function (e, t, i, n, a) {
     let s = getFeatureFlags().internal_only_debug_tools ?? !1;
@@ -5880,8 +5880,8 @@ function rM(e) {
   }
   let e_ = useCallback(() => {
     b_();
-    o(Kn.FROM_SOURCE);
-    rY.updateBranchingStagerDirection(Kn.FROM_SOURCE);
+    o(SourceDirection.FROM_SOURCE);
+    rY.updateBranchingStagerDirection(SourceDirection.FROM_SOURCE);
   }, [o]);
   let ey = useCallback(t => n => {
     let {
@@ -5914,7 +5914,7 @@ function rM(e) {
     em(e.backFileKey, "user_closed_modal");
   }, [em, e.backFileKey]);
   let ev = rP(eu, ee);
-  let eI = l === Kn.TO_SOURCE ? renderI18nText("collaboration.branching_merge_modal.banner_review_conflicts") : renderI18nText("collaboration.branching_merge_modal.banner_resolve_conflicts");
+  let eI = l === SourceDirection.TO_SOURCE ? renderI18nText("collaboration.branching_merge_modal.banner_review_conflicts") : renderI18nText("collaboration.branching_merge_modal.banner_resolve_conflicts");
   return jsxs(rO, {
     mergeDirection: l,
     sourceCheckpointKey: e.sourceCheckpointKey,
@@ -5929,7 +5929,7 @@ function rM(e) {
       children: jsx(tK, {
         isLoading: ep,
         text: eI,
-        button: l === Kn.TO_SOURCE ? (t = renderI18nText("collaboration.branching_merge_modal.button_review_conflicts"), jsx("div", {
+        button: l === SourceDirection.TO_SOURCE ? (t = renderI18nText("collaboration.branching_merge_modal.button_review_conflicts"), jsx("div", {
           className: tV,
           children: jsx($n, {
             onClick: e_,
@@ -5937,7 +5937,7 @@ function rM(e) {
           })
         })) : jsx(Fragment, {})
       })
-    }), l === Kn.TO_SOURCE && jsx(nw, {
+    }), l === SourceDirection.TO_SOURCE && jsx(nw, {
       branch: eh,
       checkpointDiff: eo,
       conflictGroups: eu?.conflictGroups ?? null,
@@ -5961,7 +5961,7 @@ function rM(e) {
       styleKeyToFileKey: ed,
       styleKeyToLibraryKey: ec,
       unreadCommentCount: e.unreadCommentCount
-    }), l === Kn.FROM_SOURCE && jsx(rN, {
+    }), l === SourceDirection.FROM_SOURCE && jsx(rN, {
       branch: eh,
       checkpointDiff: en,
       conflictDetection: eu,
@@ -5998,7 +5998,7 @@ export let $$rj0 = registerModal(function (e) {
       }),
       boundaryKey: "BranchMergeModalInner",
       sentryTags: {
-        "bm.branchingFailureType": PW.UNHANDLED
+        "bm.branchingFailureType": CPPEventType.UNHANDLED
       },
       children: jsx(rF, {
         ...e

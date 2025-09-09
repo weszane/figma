@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { GD } from "../1250/51387";
 import { rI, Hf, IN } from "../6658/436658";
 import { k } from "../6658/341273";
@@ -91,7 +91,7 @@ export function $$x1({
     defaultFilter: n,
     noSelection: s
   }) {
-    let [d, c] = IT(GD(e), {
+    let [d, c] = setupResourceAtomHandler(GD(e), {
       enabled: !0
     });
     let u = useMemo(() => d.data ? function (e) {

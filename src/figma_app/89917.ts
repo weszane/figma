@@ -7,7 +7,7 @@ import { L3 } from "../figma_app/806075";
 import { E3 } from "../figma_app/976749";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
@@ -89,7 +89,7 @@ export function $$O0() {
     overlay: _v_,
     priority: _$$N.SECONDARY_MODAL
   });
-  let t = q5();
+  let t = selectCurrentFile();
   let r = E3();
   return (_$$E2(e.uniqueId, $$A1, () => {
     t?.canEdit && e.show();

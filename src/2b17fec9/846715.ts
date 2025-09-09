@@ -21,7 +21,7 @@ import { LR, gR } from "../figma_app/120210";
 import { XM } from "../905/486443";
 import { aV, dH } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
-import { tS as _$$tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { t as _$$t2 } from "../905/192333";
@@ -122,7 +122,7 @@ var u = c;
 function Q(e) {
   let t = useDispatch();
   let [i, s] = useState(!0);
-  let o = _$$tS();
+  let o = useCurrentFileKey();
   let l = FL();
   let {
     getPlanAndPlanUser,
@@ -178,7 +178,7 @@ let eo = memo(function () {
   let e = aV();
   let t = kD();
   let i = b4();
-  let r = q5();
+  let r = selectCurrentFile();
   if (!_$$tS2() || e) return null;
   let a = {
     icon: jsx(_$$Q, {})
@@ -369,7 +369,7 @@ let eA = memo(function (e) {
     return [t, n, s];
   }(a);
   let p = _$$S();
-  let h = !!q5()?.org?.figjamDisabledAt;
+  let h = !!selectCurrentFile()?.org?.figjamDisabledAt;
   let m = useMemo(() => p && h ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org_no_chat", {
     commentKey: jsx(uk, {
       isPressed: d
@@ -718,13 +718,13 @@ let tp = () => {
     transform: "translate(32px, 32px) rotate(5deg) translate(0, -8px) translate(-32px, -32px)",
     offset: .1
   }, {
-      transform: "translate(32px, 32px) rotate(5deg) translate(0, -10px) translate(-32px, -32px)",
-      offset: .35
-    }, t, {
-      transform: "translate(-32px, 32px) rotate(-3deg) translate(32px, -32px) "
-    }, t, {
-      transform: "translate(32px, 32px) rotate(1deg) translate(-32px, -32px) "
-    }, t];
+    transform: "translate(32px, 32px) rotate(5deg) translate(0, -10px) translate(-32px, -32px)",
+    offset: .35
+  }, t, {
+    transform: "translate(-32px, 32px) rotate(-3deg) translate(32px, -32px) "
+  }, t, {
+    transform: "translate(32px, 32px) rotate(1deg) translate(-32px, -32px) "
+  }, t];
   [_$$eB, gz, Sk].forEach((t, n) => {
     document.getElementsByClassName(t)[0].parentElement?.animate(i, {
       ...e,
@@ -964,7 +964,7 @@ function tE() {
 }
 let tw = memo(function () {
   let e = useSelector(e => e.universalInsertModal.pinned);
-  let t = q5();
+  let t = selectCurrentFile();
   let i = t?.votingSessions;
   let [c, x] = useState("PRE");
   let I = useRef(null);
@@ -1115,7 +1115,7 @@ let tw = memo(function () {
         className: u()({
           [Uq]: !1
         }),
-        onPointerDown: e => { },
+        onPointerDown: e => {},
         role: void 0,
         children: jsxs("div", {
           className: u()(iU, {

@@ -88,7 +88,7 @@ export const UpgradeSteps = {
   CHOOSE_PLAN: 'choose_plan',
   PAYMENT_AND_ADDRESS: 'payment_and_address',
   CONFIRM_PAY: 'confirm_pay',
-} as const
+} 
 
 /**
  * Enum for PlanType (original: $$d5)

@@ -1,23 +1,23 @@
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { sD } from "../905/937198";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { ListItemsView } from "../figma_app/43951";
 import { k } from "../905/366917";
 import { J } from "../905/458135";
 export function $$p0({
   collectionStableId: e
 }) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let {
     collectionDatabaseId
   } = k({
     collectionStableId: e
   });
   let p = (collectionDatabaseId ?? "") !== "" && null != t;
-  let _ = Rs(ListItemsView, {
+  let _ = useSubscription(ListItemsView, {
     fileKey: t ?? "",
     collectionId: collectionDatabaseId ?? ""
   }, {

@@ -15,7 +15,7 @@ import { rY } from "../905/985490";
 import { Jr } from "../figma_app/624361";
 import { pq, f2 } from "../figma_app/646357";
 import { bW } from "../905/491806";
-import { Kn, mg } from "../905/535806";
+import { SourceDirection, ViewType } from "../905/535806";
 import { vPu, kLz } from "../figma_app/27776";
 import { A as _$$A2 } from "../2854/317197";
 import { A as _$$A3 } from "../2854/950417";
@@ -122,11 +122,11 @@ export async function $$O5(e, t, i, n, s) {
       return i;
     }));
   }({
-    direction: Kn.FROM_SOURCE,
+    direction: SourceDirection.FROM_SOURCE,
     fileKey: t,
     nodeIds: l.map(e => sessionLocalIDToString(e.mainChunk.displayNode.guid)),
     checkpointKey: n,
-    resolution: mg.SUMMARY,
+    resolution: ViewType.SUMMARY,
     maxChunksPerRequest: 50
   });
   let p = await P(c.map(e => ({
@@ -267,7 +267,7 @@ let Y = e => {
   return i.filter(t => t in e).concat(Object.keys(e).filter(e => !i.includes(e)));
 };
 export function $$q16(e, t, i, n) {
-  let s = function (e, t, i, n = Kn.TO_SOURCE) {
+  let s = function (e, t, i, n = SourceDirection.TO_SOURCE) {
     let s = {};
     let o = {};
     let l = {};
@@ -308,7 +308,7 @@ export function $$q16(e, t, i, n) {
           }) : $$D20
         };
       }
-    }), n === Kn.FROM_SOURCE) for (let e of Object.keys(o)) {
+    }), n === SourceDirection.FROM_SOURCE) for (let e of Object.keys(o)) {
       let t = SceneGraphHelpers.getNodePageBackgroundColor(e);
       t && (o[e] = {
         ...o[e],

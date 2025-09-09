@@ -15,13 +15,13 @@ import { Jt } from "../figma_app/28323";
 import { MX, EO } from "../figma_app/684446";
 import { VP, mn, D2 } from "../905/18797";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { px, j_ } from "../figma_app/465071";
+import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
 import { GroupType } from "../905/441038";
 import { J0, oU } from "../figma_app/967319";
 import { o0 } from "../905/844131";
 import { nF, lF } from "../469e6e40/68843";
-if (443 == require.j) { }
+if (443 == require.j) {}
 export function $$C0(e) {
   let {
     selectedTab,
@@ -45,8 +45,8 @@ export function $$C0(e) {
   let R = Xf(N?.id);
   let O = R?.data?.invoices;
   let L = EO(N?.id ?? "");
-  let D = px();
-  let M = j_(D);
+  let D = useTeamPlanUser();
+  let M = useIsOrgAdminUser(D);
   let P = useSelector(e => getPermissionsStateMemoized(e));
   let U = "loaded" === M.status && $N({
     isAdminOrg: !!M.data,

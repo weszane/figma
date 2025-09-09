@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { isIpadDevice } from "../figma_app/778880";
 import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
@@ -22,7 +22,7 @@ export function $$y1() {
   let r = "whiteboard" === lg();
   let a = aq();
   let E = isIpadDevice ? FDeviceType.DESKTOP : FDeviceType.IPAD;
-  let y = Rs(LatestClipboardData, {
+  let y = useSubscription(LatestClipboardData, {
     deviceType: E
   });
   useEffect(() => {

@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { assert } from "../figma_app/465776";
 import { P } from "../figma_app/529847";
 import { uo } from "../figma_app/990058";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { Hl, YT } from "../figma_app/217457";
 import { jL } from "../figma_app/658324";
 import { FPlanAccessType } from "../figma_app/191312";
-import { OL } from "../figma_app/421473";
-import { RB } from "../figma_app/428858";
+import { FOrganizationLevelType } from "../figma_app/421473";
+import { getOrgLevelData } from "../figma_app/428858";
 export function $$m0(e) {
   let t = useDispatch();
   let r = Hl({
@@ -26,11 +26,11 @@ export function $$m0(e) {
     upgradeActorName: h
   }) => {
     let m = {};
-    i !== Gu.VIEW && (m[i] = {
+    i !== ViewAccessTypeEnum.VIEW && (m[i] = {
       key: i,
       license_types: r(i)
     });
-    assert(e.planType === OL.TEAM);
+    assert(e.planType === FOrganizationLevelType.TEAM);
     t(P({
       teamId: e.planId,
       deltas: n.map(({
@@ -63,14 +63,14 @@ export function $$m0(e) {
     seatIncreaseAuthorized: s,
     seatSwapIntended: c
   }) => {
-    assert(e.planType === OL.ORG);
+    assert(e.planType === FOrganizationLevelType.ORG);
     t(uo({
       orgId: e.planId,
       lastUpdateTimestampOverride: i,
       seatTypeProducts: {},
       params: {
         org_user_ids: r.map(e => e.planUserId),
-        paid_statuses: n === Gu.VIEW ? N_.dict(() => FPlanAccessType.STARTER) : {
+        paid_statuses: n === ViewAccessTypeEnum.VIEW ? N_.dict(() => FPlanAccessType.STARTER) : {
           [n]: FPlanAccessType.FULL
         },
         entry_point: e.entryPoint,
@@ -82,7 +82,7 @@ export function $$m0(e) {
       successCallback: () => {
         onSuccess?.();
         jL({
-          planType: OL.ORG,
+          planType: FOrganizationLevelType.ORG,
           planId: e.planId
         });
       },
@@ -92,7 +92,7 @@ export function $$m0(e) {
     }));
     queueFilterCountsRefetch?.();
   }, [t, e.planId, e.entryPoint, e.planType, onSuccess, queueFilterCountsRefetch, onFailure]);
-  return RB(e.planType, {
+  return getOrgLevelData(e.planType, {
     team: m,
     org: y
   });

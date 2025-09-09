@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import a from "classnames";
-import { VZ } from "../figma_app/930338";
+import { camelToKebab } from "../figma_app/930338";
 import { Kz } from "../figma_app/637027";
 import { S } from "../figma_app/420927";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -49,7 +49,7 @@ export function $$g0({
   tooltipKey: e
 }) {
   let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
-  let i = VZ(e);
+  let i = camelToKebab(e);
   let a = formatI18nMessage(i);
   let g = c1(t, i);
   let f = TT.includes(e) ? oo[e]?.getDescription() : null;

@@ -13,12 +13,12 @@ import { isLocalDevOnCluster } from "../figma_app/169182";
 import { delay } from "../905/236856";
 import { XHRError, XHR } from "../905/910117";
 import { serializeQuery } from "../905/634134";
-import { setSentryTag } from "../905/11";
+import { setTagGlobal } from "../905/11";
 import { logError, logInfo, logWarning } from "../905/714362";
 import { SH } from "../figma_app/141320";
 import { generateUUIDv4 } from "../905/871474";
 import { yp } from "../905/138461";
-import { DI } from "../figma_app/687776";
+import { FileCreationPermissionsGenerator } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/620668";
@@ -39,7 +39,7 @@ import { LQ } from "../figma_app/741211";
 import { ds, f5 } from "../figma_app/314264";
 import { ZG, GT, mu, yn, $3 } from "../figma_app/840917";
 import { fullscreenValue } from "../figma_app/455680";
-import { UE } from "../905/628874";
+import { setupFileObject } from "../905/628874";
 import { ds as _$$ds } from "../905/87821";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { M4 } from "../905/713695";
@@ -200,8 +200,8 @@ export async function $$ew5(e, t, i, n) {
   if (!o) return;
   {
     let e = await M4.fetchFile(t);
-    setSentryTag("file.key", e.key);
-    null === e.file_repo_id ? setSentryTag("branching", "not enabled") : (setSentryTag("branching_repo", e.file_repo_id), null === e.source_file_key ? setSentryTag("branching", "main branch") : setSentryTag("branching", "user branch"));
+    setTagGlobal("file.key", e.key);
+    null === e.file_repo_id ? setTagGlobal("branching", "not enabled") : (setTagGlobal("branching_repo", e.file_repo_id), null === e.source_file_key ? setTagGlobal("branching", "main branch") : setTagGlobal("branching", "user branch"));
     $$eS6({
       fileKey: t,
       folderId: e.folder_id,
@@ -287,10 +287,10 @@ export async function $$ew5(e, t, i, n) {
   let w = _.repos[f.file_repo_id || ""];
   let T = _.fileByKey[f.source_file_key || ""];
   let k = A ? {
-    ...DI.disabled(),
+    ...FileCreationPermissionsGenerator.disabled(),
     ...A
   } : null;
-  let N = UE(f, {
+  let N = setupFileObject(f, {
     folder: k,
     team: v,
     repo: w,

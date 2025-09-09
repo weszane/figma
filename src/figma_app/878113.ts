@@ -10,7 +10,7 @@ import { atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { oy } from "../figma_app/964367";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
-import { reportError, setSentryTag } from "../905/11";
+import { reportError, setTagGlobal } from "../905/11";
 import g, { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { on, Gc } from "../figma_app/456871";
@@ -312,7 +312,7 @@ export async function $$M0({
     r && r(Z);
     let e = t;
     featureType === JT.SLIDES_REWRITE_TEXT && t instanceof G1 && (e = Gx(t));
-    "reportToSentry" in e && !e.reportToSentry || (setSentryTag("text_feature_type", X.featureType), reportError(_$$e.AI_PRODUCTIVITY, e, {
+    "reportToSentry" in e && !e.reportToSentry || (setTagGlobal("text_feature_type", X.featureType), reportError(_$$e.AI_PRODUCTIVITY, e, {
       extra: {
         ...X,
         numberOfNodes: targets.length

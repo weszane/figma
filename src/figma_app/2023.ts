@@ -1,8 +1,8 @@
 import { throwTypeError } from "../figma_app/465776";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import a from "../vendor/961736";
 import { A } from "../905/920142";
-import { sy } from "../figma_app/930338";
+import { encodeUri } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { Zx } from "../figma_app/217457";
 import { fileEntityDataMapper } from "../905/943101";
@@ -90,9 +90,9 @@ export function $$S3(e) {
     updated_at: e.updatedAt.toString(),
     checkpoint_token: "",
     edit_url: "",
-    prototype_url: `${window.location.origin}/proto/${e.key}/${sy(e.name || "")}`,
+    prototype_url: `${window.location.origin}/proto/${e.key}/${encodeUri(e.name || "")}`,
     track_tags: "",
-    url: `${window.location.origin}/file/${e.key}/${sy(e.name || "")}`
+    url: `${window.location.origin}/file/${e.key}/${encodeUri(e.name || "")}`
   };
   return {
     canEdit: e.canEdit,
@@ -108,10 +108,10 @@ export function $$S3(e) {
     isOwner: r ? !!e.repo?.roleOnObjectForUser?.isOwnerOfResource : !!e.roleOnObjectForUser?.isOwnerOfResource,
     isPublishedHubFile: !!e.publishedHubFile && !e.publishedHubFile.unpublishedAt,
     mainFileLinkExpirationConfig: Nl(t),
-    folderAccessEnabled: e.folderAccessEnabled && oA(e.folderAccessEnabled) || !1,
-    isDraftFileLG: e.isDraftFile && oA(e.isDraftFile) || !1,
+    folderAccessEnabled: e.folderAccessEnabled && getResourceDataOrFallback(e.folderAccessEnabled) || !1,
+    isDraftFileLG: e.isDraftFile && getResourceDataOrFallback(e.isDraftFile) || !1,
     isAbandonedDraftFile: e.isAbandonedDraftFile || !1,
-    mustUpgradeToShareDraft: oA(e.mustUpgradeToShareDraft) || !1,
+    mustUpgradeToShareDraft: getResourceDataOrFallback(e.mustUpgradeToShareDraft) || !1,
     ...s
   };
 }
@@ -218,7 +218,7 @@ export function $$v5(e, t) {
   } : null;
   var O = void 0;
   r.org && null !== r.org.imgUrl && (O = r.org.imgUrl);
-  let R = r.org && r.org.k12GoogleOrg && oA(r.org.k12GoogleOrg);
+  let R = r.org && r.org.k12GoogleOrg && getResourceDataOrFallback(r.org.k12GoogleOrg);
   return {
     file: s,
     repo: N,
@@ -231,7 +231,7 @@ export function $$v5(e, t) {
       is_invite_only: !!l.inviteOnlyAt,
       team_id: l.teamId,
       team_access: d,
-      canRead: l.canRead && oA(l.canRead) || !1
+      canRead: l.canRead && getResourceDataOrFallback(l.canRead) || !1
     },
     folderRoles: l && l.roles || [],
     isInDraftsFolder: VA(l),
@@ -287,7 +287,7 @@ export function $$v5(e, t) {
     numProjectTeamMembersWithAccess: c.size,
     activeProjectConnection: r.activeProjectResourceConnections?.[0],
     planTier: r.planPublicInfo?.tier || null,
-    planRecordId: oA(r.planRecordId) || null
+    planRecordId: getResourceDataOrFallback(r.planRecordId) || null
   };
 }
 export function $$A0(e, t) {

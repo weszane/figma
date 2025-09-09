@@ -18,7 +18,7 @@ import { o as _$$o } from "../figma_app/915774";
 import { X as _$$X } from "../905/853613";
 import { Ew } from "../figma_app/361662";
 import { fullscreenValue } from "../figma_app/455680";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
 import { td } from "../figma_app/646357";
@@ -81,7 +81,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    })); else if (V.type === PW.COMPONENT) i(FU({
+    }));else if (V.type === PW.COMPONENT) i(FU({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -94,7 +94,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    })); else if (V.type === PW.MODULE) i(Bs({
+    }));else if (V.type === PW.MODULE) i(Bs({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -107,7 +107,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    })); else if (V.type === PW.RESPONSIVE_SET && Do(V)) {
+    }));else if (V.type === PW.RESPONSIVE_SET && Do(V)) {
       getFeatureFlags().sts_sprig_targeted_feedback && Sprig("track", "sites_blocks_insert");
       i(jR({
         item: V,
@@ -131,7 +131,7 @@ export function $$$$j0(e) {
     });
     return await Promise.resolve();
   }, [Sprig, i, q, K, e, V, Y]);
-  let Z = _G() ?? _$$l("");
+  let Z = useOpenFileLibraryKey() ?? _$$l("");
   let X = Ew({
     assetKey: u2(V),
     assetLibraryKey: G ? "LIBRARY" === V.subscriptionStatus ? V.sourceLibraryKey : Z : V.library_key,

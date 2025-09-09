@@ -14,7 +14,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
 import { hC } from "../figma_app/901889";
 import { C as _$$C } from "../905/108595";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { M as _$$M } from "../figma_app/648761";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { generateRecordingKey, useHandleMouseEvent, useSetupPlayback } from "../figma_app/878298";
@@ -49,7 +49,7 @@ import { z as _$$z } from "../905/626016";
 import { L as _$$L } from "../905/858162";
 import { Z as _$$Z } from "../905/801075";
 import { k as _$$k3 } from "../905/376839";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { p as _$$p } from "../figma_app/353099";
 import { FJ } from "../905/508367";
 import { h as _$$h2 } from "../905/207101";
@@ -68,7 +68,7 @@ import { useSessionStorageSync } from "../905/657224";
 import { P as _$$P } from "../905/347284";
 import { Oo } from "../905/709171";
 import { Eo } from "../figma_app/80990";
-import { tS as _$$tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { rt } from "../figma_app/646357";
 import { EU, KV, _U } from "../905/255097";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -369,7 +369,7 @@ function ek({
 }) {
   let c = useCallback(() => {
     t(i);
-    "VIDEO" === i && YQ({
+    "VIDEO" === i && handleAtomEvent({
       id: ef
     });
   }, [t, i]);
@@ -624,7 +624,7 @@ function e7({
 }) {
   let a = useMemo(() => [VariableResolvedDataType.COLOR], []);
   let s = _$$A2(a, null);
-  let o = _$$tS();
+  let o = useCurrentFileKey();
   let l = bR({
     subscribedLibraries: s
   });
@@ -645,7 +645,7 @@ function e7({
     } else Eo.getCanvas(t).then(t => {
       let i = SharedStyle.getColorForSharedFillStyle(t);
       i && e(i);
-    }).catch(() => { });
+    }).catch(() => {});
   }, [e, o]);
   let g = useCallback(t => {
     null != t.color && null != t.opacity && e({
@@ -1729,7 +1729,7 @@ function t9(e) {
   });
 }
 function ie(e, t, i, n) {
-  let a = ZC(e);
+  let a = useLatestRef(e);
   useEffect(() => {
     e !== a && (e !== DesignGraphElements.DROPPER_COLOR || t && t.includes("custom_color"));
   }, [e, i, n, t, a]);

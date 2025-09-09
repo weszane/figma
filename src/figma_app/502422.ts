@@ -3,7 +3,7 @@ import { createRemovableAtomFamily, atom, atomStoreManager } from "../figma_app/
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { subscribeAndAwaitData } from "../905/553831";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { UserFlagByName } from "../figma_app/43951";
 import { H } from "../905/17478";
@@ -91,7 +91,7 @@ export function $$m1(e) {
   return atomStoreManager.get(h(e)).increment();
 }
 export function $$g0(e) {
-  return Rs(UserFlagByName, {
+  return useSubscription(UserFlagByName, {
     name: e
   }, {
     enabled: !!getInitialOptions().user_data?.id

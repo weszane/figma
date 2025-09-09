@@ -3,7 +3,7 @@ import rh from 'classnames';
 import { createElement, PureComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { H as _$$H2 } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { reportError, setSentryTag, reportNullOrUndefined } from '../905/11';
+import { reportError, setTagGlobal, reportNullOrUndefined } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
 import { Q7 } from '../905/15667';
 import { iM as _$$iM, DB, h5, jP, JR, Sp, SW, Z4, Zt } from '../905/25189';
@@ -56,7 +56,7 @@ import { T as _$$T4 } from '../905/239551';
 import { ih as _$$ih, UA } from '../905/250387';
 import { R as _$$R2 } from '../905/256203';
 import { HiddenLabel, Label } from '../905/270045';
-import { Ji } from '../905/276025';
+import { getPlanUserTeamAtomFamily } from '../905/276025';
 import { dM, F9 } from '../905/278499';
 import { Z as _$$Z4 } from '../905/279476';
 import { Ay as _$$Ay8, Tr } from '../905/281495';
@@ -96,12 +96,12 @@ import { MZ } from '../905/470594';
 import { createPluginInstance } from '../905/472793';
 import { formatI18nMessage } from '../905/482208';
 import { Vy, zT } from '../905/484695';
-import { S3 } from '../905/485103';
+import { sendHistogram } from '../905/485103';
 import { as as _$$as, Dl } from '../905/487011';
 import { bL as _$$bL2, c$, l9, mc } from '../905/493196';
 import { J as _$$J4 } from '../905/494216';
 import { k as _$$k3 } from '../905/498777';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { r6 as _$$r2 } from '../905/507950';
 import { hR, hW } from '../905/508457';
 import { $7 } from '../905/509613';
@@ -123,7 +123,7 @@ import { y8 as _$$y6 } from '../905/551193';
 import { subscribeAndAwaitData } from '../905/553831';
 import { $e } from '../905/554703';
 import { requestDeferredExecution } from '../905/561433';
-import { oz as _$$oz } from '../905/561485';
+import { isSitesFeatureEnabled } from '../905/561485';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { j as _$$j } from '../905/564614';
 import { dequeuePluginStatus } from '../905/571565';
@@ -142,7 +142,7 @@ import { a as _$$a3 } from '../905/608122';
 import { Timer } from '../905/609396';
 import { customHistory, isMainAppRoute } from '../905/612521';
 import { jN } from '../905/612685';
-import { qm } from '../905/617744';
+import { isActiveAtom } from '../905/617744';
 import { o8 as _$$o3, Fr } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
 import { E as _$$E } from '../905/632989';
@@ -151,7 +151,7 @@ import { getSessionStorage, useLocalStorageSync, localStorageRef } from '../905/
 import { isLocalFileKey } from '../905/657242';
 import { a6 as _$$a2, il as _$$il, pM as _$$pM, sd as _$$sd, tS as _$$tS, dE, Fo, GZ, Oc, PC, pV, PZ, RU, Uj, un, W9, WE, XF, zN } from '../905/661614';
 import { h as _$$h } from '../905/662353';
-import { oA as _$$oA } from '../905/663269';
+import { getResourceDataOrFallback } from '../905/663269';
 import { gG } from '../905/684180';
 import { IM } from '../905/687477';
 import { EventEmitter } from '../905/690073';
@@ -179,7 +179,7 @@ import { iu as _$$iu, wY as _$$wY, mv } from '../905/753206';
 import { L6 } from '../905/755627';
 import { Z as _$$Z } from '../905/757420';
 import { d as _$$d2, X as _$$X2 } from '../905/758967';
-import { Kz } from '../905/760074';
+import { isBranchAlt } from '../905/760074';
 import { WL, ZY } from '../905/764747';
 import { d1 } from '../905/766303';
 import { M as _$$M2 } from '../905/771870';
@@ -242,7 +242,7 @@ import { s as _$$s6 } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8833';
 import { El } from '../figma_app/9619';
-import { F1 as _$$F2, Pe, Qn } from '../figma_app/12796';
+import { checkZoomWidgetAccess, isExportRestricted, canEditBasedOnPlan } from '../figma_app/12796';
 import { bJ as _$$bJ } from '../figma_app/16595';
 import { sO as _$$sO } from '../figma_app/21029';
 import { useAtomWithSubscription, atomStoreManager } from '../figma_app/27355';
@@ -330,7 +330,7 @@ import { vE } from '../figma_app/376315';
 import { n_ as _$$n_2 } from '../figma_app/385874';
 import { kh, MT, O5 } from '../figma_app/387100';
 import { lu as _$$lu, lV as _$$lV, k1, mI, OJ } from '../figma_app/389091';
-import { jV } from '../figma_app/391338';
+import { initializeShadowReadReporter } from '../figma_app/391338';
 import { g as _$$g6 } from '../figma_app/398051';
 import { sn as _$$sn, hf } from '../figma_app/407856';
 import { u_ } from '../figma_app/415217';
@@ -349,7 +349,7 @@ import { _ as _$$_2 } from '../figma_app/485258';
 import { pP } from '../figma_app/492354';
 import { y as _$$y3 } from '../figma_app/504415';
 import { ZH } from '../figma_app/504823';
-import { bv, Dz, q5 } from '../figma_app/516028';
+import { transformOpenFileObject, getFullscreenViewFile, selectCurrentFile } from '../figma_app/516028';
 import { ZS } from '../figma_app/519839';
 import { oY as _$$oY } from '../figma_app/524655';
 import { mQ } from '../figma_app/527668';
@@ -438,7 +438,7 @@ import { h as _$$h2 } from '../figma_app/907304';
 import { fG } from '../figma_app/912411';
 import { kF as _$$kF } from '../figma_app/915202';
 import { CV } from '../figma_app/916560';
-import { lH as _$$lH, EJ, H9, hX, Vs } from '../figma_app/930338';
+import { toWellFormed, truncate, uint8ArrayToBase64, escapeHtml, base64ToUint8Array } from '../figma_app/930338';
 import { l7 as _$$l3 } from '../figma_app/932601';
 import { FU as _$$FU, b$ } from '../figma_app/933328';
 import { hR as _$$hR } from '../figma_app/945605';
@@ -2203,7 +2203,7 @@ let r7 = registerModal(({
   onClose: i
 }) => {
   let n = useDispatch();
-  let r = q5();
+  let r = selectCurrentFile();
   let [o, l] = useLocalStorageSync('preferred-document-color-profile-change-option', 'convert');
   let d = Av();
   let c = e === ColorProfileEnum.DISPLAY_P3 ? r4(o, d) : null;
@@ -2764,7 +2764,7 @@ let aO = registerModal(e => {
     preventUserClose: t
   });
   let l = _$$sO();
-  let d = q5();
+  let d = selectCurrentFile();
   let c = Wj();
   let [p, m] = useState(l ? 'pptx' : 'pdf');
   let h = c.length;
@@ -3415,7 +3415,7 @@ function sP(e) {
       _$$J5.finishLoadingImage();
     }
     setSentryTag(e, t) {
-      setSentryTag(e, t);
+      setTagGlobal(e, t);
     }
     onFrame() {
       this.isReady() && Fullscreen && Fullscreen.onFrame();
@@ -3946,7 +3946,7 @@ let ov = (e, t, i, n, r) => {
         isOnLG: !0
       });
       XHR.post(`/api/mobile_app_push/${encodeURIComponent(e)}`, {
-        frame_name: _$$lH(n?.substring(0, 200)),
+        frame_name: toWellFormed(n?.substring(0, 200)),
         frame_id: i,
         selection_id: s,
         tsid: a,
@@ -4353,7 +4353,7 @@ async function lN({
   } = t;
   let c = getSceneGraphInstance().get(widgetNodeID);
   if (!c) throw new lR('Widget node does not exist');
-  let u = _$$F2();
+  let u = checkZoomWidgetAccess();
   if (!u.canRun) {
     await showVisualBell(u.message);
     return;
@@ -4860,7 +4860,7 @@ class lV {
     let t = e.filter(e => !!e.widgetVersionID);
     lp.trackImpression(e.filter(e => !_$$Vi(e.widgetID)));
     this.trackLocalWidgetsInPlaygroundFile(e);
-    let i = await Dz(debugState);
+    let i = await getFullscreenViewFile(debugState);
     i?.canEditCanvas && (debugState?.dispatch(Cf({
       widgetIDAndVersions: t
     })), this.didStartPreloadingSandbox || (_$$a4('cppvm').catch(() => {}), this.didStartPreloadingSandbox = !0));
@@ -4950,7 +4950,7 @@ class lV {
     });
     let n = getSceneGraphInstance().get(t);
     this.addWidgetToRecentlyUsed(n?.widgetVersionId, e);
-    getFullscreenViewEditorType() === 'figma' && YQ({
+    getFullscreenViewEditorType() === 'figma' && handleAtomEvent({
       id: 'widget_run_from_figma'
     });
   }
@@ -5229,7 +5229,7 @@ export function $$lq1(e, t, i, n) {
     pH(t);
     _$$A7();
     _$$ae();
-    jV();
+    initializeShadowReadReporter();
     EA();
     L6();
     wy();
@@ -5327,7 +5327,7 @@ let lX = class e extends sP(sN(sR)) {
     });
     this._hasSelection = () => !!AppStateTsApi && !AppStateTsApi.editorState().selectionEmpty?.getCopy();
     this._currentFileThumbnail = () => {
-      let e = bv(this._store?.getState());
+      let e = transformOpenFileObject(this._store?.getState());
       return e?.thumbnailGuid;
     };
     this._isSelectedNodeCurrentThumbnail = () => this._currentFileThumbnail() === this._selectedValidThumbnailNodeIds()[0];
@@ -5404,7 +5404,7 @@ let lX = class e extends sP(sN(sR)) {
       return Fullscreen.commit();
     };
     this.getCurrentFileName = () => this._state.openFile?.name || 'Untitled';
-    this.isCopyExportRestricted = () => this._state.openFile != null && Pe(this._state.openFile);
+    this.isCopyExportRestricted = () => this._state.openFile != null && isExportRestricted(this._state.openFile);
     this.onShowImageScaledDownWarningInfoClick = () => {
       customHistory.unsafeRedirect('https://help.figma.com/hc/articles/360040028034', '_blank');
       this.dispatch(VisualBellActions.dequeue({}));
@@ -5554,7 +5554,7 @@ let lX = class e extends sP(sN(sR)) {
       observabilityClient.addAction(e, _$$e.SCENEGRAPH_AND_SYNC, LogLevelStr.INFO, t);
     };
     this.showNudgeDesignModeAfterTemplateSetPasted = () => {
-      let e = atomStoreManager.get(Ji(!0));
+      let e = atomStoreManager.get(getPlanUserTeamAtomFamily(!0));
       let t = e.data?.seatTypeLicenseTypes;
       t?.includes(G_h.DESIGN) && (debugState.dispatch(VisualBellActions.dequeue({})), debugState.dispatch(VisualBellActions.enqueue({
         icon: VisualBellIcon.DESIGN_MODE,
@@ -5575,7 +5575,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   addStackOverflowListener() {
     window.addEventListener('oom_trigger', e => {
-      let t = atomStoreManager.get(qm);
+      let t = atomStoreManager.get(isActiveAtom);
       _$$y4.showMemoryCrashModal({
         isBranching: t
       }, this.openFileKey(), this._store);
@@ -5963,10 +5963,10 @@ let lX = class e extends sP(sN(sR)) {
       let i = e.indexOf(_$$eY);
       if (t < 0 || i < 0 || t > i) return new Uint8Array();
       let n = e.slice(t + xY.length, i);
-      return Vs(n);
+      return base64ToUint8Array(n);
     }
     let n = e.slice(t + FJ.length, i);
-    return Vs(n);
+    return base64ToUint8Array(n);
   }
   decodeMetadataFromHTML(e) {
     let t = e.indexOf(D2);
@@ -5976,11 +5976,11 @@ let lX = class e extends sP(sN(sR)) {
       let i = e.indexOf(wh);
       if (t < 0 || i < 0 || t > i) return null;
       let n = e.slice(t + FM.length, i);
-      let r = Vs(n);
+      let r = base64ToUint8Array(n);
       return JSON.parse(new TextDecoder().decode(r));
     }
     let n = e.slice(t + D2.length, i);
-    let r = Vs(n);
+    let r = base64ToUint8Array(n);
     return JSON.parse(new TextDecoder().decode(r));
   }
   detectSpreadsheetDataInHTML(e) {
@@ -6000,8 +6000,8 @@ let lX = class e extends sP(sN(sR)) {
   }
   getHtmlString(e, t, i, n) {
     let r = '';
-    getFeatureFlags().ce_copy_rightclick_richtext && (r = getFeatureFlags().ce_rich_text_copy && n ? n : `<span style="white-space:pre-wrap;">${hX(e).replace(/\n/g, '<br>')}</span>`);
-    return `<meta charset="utf-8"><div>${fb}${btoa(unescape(encodeURIComponent(t)))}${cB}${H3}${H9(i)}${Er}</div>${r}`;
+    getFeatureFlags().ce_copy_rightclick_richtext && (r = getFeatureFlags().ce_rich_text_copy && n ? n : `<span style="white-space:pre-wrap;">${escapeHtml(e).replace(/\n/g, '<br>')}</span>`);
+    return `<meta charset="utf-8"><div>${fb}${btoa(unescape(encodeURIComponent(t)))}${cB}${H3}${uint8ArrayToBase64(i)}${Er}</div>${r}`;
   }
   writeToClipboard(e, t, i, n) {
     if (!navigator.clipboard?.write) throw new Error('No clipboard api');
@@ -6059,7 +6059,7 @@ let lX = class e extends sP(sN(sR)) {
     let i;
     let n = this._state;
     if (!_$$n3(n.userAnalyticsData, n.user?.email)) return;
-    let r = D2 + btoa(unescape(encodeURIComponent(e))) + cu + FJ + H9(t) + gU;
+    let r = D2 + btoa(unescape(encodeURIComponent(e))) + cu + FJ + uint8ArrayToBase64(t) + gU;
     let a = 'other';
     if (BrowserInfo.isIpadNative) {
       a = 'ipad';
@@ -6190,7 +6190,7 @@ let lX = class e extends sP(sN(sR)) {
     let a = r ? VisualBellIcon[r] : void 0;
     let s = getI18nStringAlias(t, i);
     let o = window.FigmaMobile;
-    o?.showToast ? this.NOT_LOCALIZED_showMobileNativeToast(s, null) : (e === 'copy-as' && YQ({
+    o?.showToast ? this.NOT_LOCALIZED_showMobileNativeToast(s, null) : (e === 'copy-as' && handleAtomEvent({
       id: 'copy_as_completed',
       properties: {
         type: t === 'visual_bell.copied_as_png' ? 'png' : 'svg'
@@ -6574,7 +6574,7 @@ let lX = class e extends sP(sN(sR)) {
     let r = e.symbolToStateGroup;
     let a = e.movableStyles;
     let s = Object.keys(a).length;
-    !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || Kz(t)) && (s || w5(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(_$$Q.dequeue({
+    !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || w5(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(_$$Q.dequeue({
       type: _$$_.MOVE_COMPONENTS_PROMPT
     })), XHR.post('/api/design_systems/move_validity', {
       style_moves: a,
@@ -6732,9 +6732,9 @@ let lX = class e extends sP(sN(sR)) {
     if (n) {
       switch (t) {
         case FigmaSite.SITE:
-          let c = _$$oA(n.siteMount);
+          let c = getResourceDataOrFallback(n.siteMount);
           let u = c?.siteDomain?.domain;
-          if (!u || _$$oA(c?.status) !== 'published') return;
+          if (!u || getResourceDataOrFallback(c?.status) !== 'published') return;
           l = IU({
             domain: u,
             path: o
@@ -6869,7 +6869,7 @@ let lX = class e extends sP(sN(sR)) {
     FullscreenPerfInfo && (this._memorySpikeOnFileLoadBytes = CorePerfInfo ? CorePerfInfo.getLocalMaxUsedHeapMemory() - CorePerfInfo.getTotalUsedHeapMemory() : 0);
   }
   static async maybeEnterRecoveryMode(e) {
-    let t = await Dz(e);
+    let t = await getFullscreenViewFile(e);
     let i = e.getState().selectedView;
     t?.canEdit ? t && i.isRecoveryMode && (AppStateTsApi?.uiState().isRecovery.set(!0), trackEventAnalytics('enter_recovery_mode', {
       currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
@@ -6897,7 +6897,7 @@ let lX = class e extends sP(sN(sR)) {
         name: 'FULLSCREEN_IS_READY',
         value: performance.now() / 1e3
       }, '*');
-      S3('performance.fullscreen.load_time', t / 1e3);
+      sendHistogram('performance.fullscreen.load_time', t / 1e3);
       _$$xK.start('fullscreenIsReady');
       (function () {
         if (!getFeatureFlags().internal_only_debug_tools) {
@@ -7181,7 +7181,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   mobileAppExportFile(e, t, i) {
     let n = this.mimeTypeToExportedFileType(t);
-    let r = H9(i);
+    let r = uint8ArrayToBase64(i);
     let a = window.FigmaMobile;
     a?.exportFile && a.exportFile(r, n);
   }
@@ -7802,7 +7802,7 @@ let lX = class e extends sP(sN(sR)) {
     this.fromFullscreen.trigger('panActionMessageForOnboarding', {});
   }
   handleNodeCountReachedForMoveDraft() {
-    this.isInDrafts() && YQ({
+    this.isInDrafts() && handleAtomEvent({
       id: _$$s4
     });
   }
@@ -7911,7 +7911,7 @@ let lX = class e extends sP(sN(sR)) {
     mr(e);
   }
   canUploadAndEditVideo() {
-    return Qn(this._state.openFile);
+    return canEditBasedOnPlan(this._state.openFile);
   }
   getVariableSetNumberOfModesAllowed() {
     return f8();
@@ -8031,7 +8031,7 @@ let lX = class e extends sP(sN(sR)) {
     _$$Dc(t, debugState.getState().saveAsState, this.dispatch, () => e === ImageFormat.RASTERIZE ? permissionScopeHandler.user('rasterize', () => Fullscreen?.completeExportAction(e)) : Fullscreen?.completeExportAction(e), i, 'copy for export');
   }
   sendEventToWebEventListener(e) {
-    YQ({
+    handleAtomEvent({
       id: e
     });
   }
@@ -8144,7 +8144,7 @@ let lX = class e extends sP(sN(sR)) {
     this.dispatch(VisualBellActions.enqueue({
       type: 'moved-single-node',
       message: getI18nString('visual_bell.moved_single_node', {
-        nodeName: EJ(t, 30),
+        nodeName: truncate(t, 30),
         newPage: i
       }),
       ...(getFeatureFlags().ce_move_to_navigate ? {
@@ -8315,7 +8315,7 @@ let lX = class e extends sP(sN(sR)) {
     return null;
   }
   onDirectExportCompleted() {
-    YQ({
+    handleAtomEvent({
       id: 'export_completed',
       properties: {
         from: 'export_panel'
@@ -8323,22 +8323,22 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   setSitesViewFile() {
-    _$$oz() && (atomStoreManager.set(_$$s9, PanelType.FILE), this.closeLeftRailOverlay());
+    isSitesFeatureEnabled() && (atomStoreManager.set(_$$s9, PanelType.FILE), this.closeLeftRailOverlay());
   }
   setSitesViewCode() {
-    _$$oz() && (atomStoreManager.set(_$$s9, PanelType.CODE), this.closeLeftRailOverlay());
+    isSitesFeatureEnabled() && (atomStoreManager.set(_$$s9, PanelType.CODE), this.closeLeftRailOverlay());
   }
   setSitesViewCms() {
-    _$$oz() && (atomStoreManager.set(_$$s9, PanelType.DAKOTA), this.closeLeftRailOverlay());
+    isSitesFeatureEnabled() && (atomStoreManager.set(_$$s9, PanelType.DAKOTA), this.closeLeftRailOverlay());
   }
   closeLeftRailOverlay() {
     atomStoreManager.set(Nl, void 0);
   }
   setSitesInsertsOverlay() {
-    _$$oz() && atomStoreManager.set(Nl, $e.INSERT);
+    isSitesFeatureEnabled() && atomStoreManager.set(Nl, $e.INSERT);
   }
   setSitesFindOverlay() {
-    _$$oz() && atomStoreManager.set(Nl, $e.FIND);
+    isSitesFeatureEnabled() && atomStoreManager.set(Nl, $e.FIND);
   }
   setAnnotationEditingIndex(e) {
     atomStoreManager.set(_$$m2, e);

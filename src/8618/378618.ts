@@ -35,7 +35,7 @@ import { pq } from "../8826/642528";
 import { q as _$$q } from "../8826/33573";
 import { SQ, tV, M0, Br, U4, So, Ws, SJ, d6, GG, ww, P1, iP, NR, Dj } from "../figma_app/803054";
 import { useSelector, useDispatch } from "react-redux";
-import { HH } from "../figma_app/828186";
+import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { k as _$$k2 } from "../905/582200";
 import { k as _$$k3 } from "../8618/427799";
 import { Cl } from "../figma_app/334505";
@@ -96,7 +96,7 @@ import { li, T$, PU, GQ, hg, Oy, LS, D5, FC, OD, YW, Ef, Sd, zb, s$, sM, _x, sv,
 import { L as _$$L } from "../figma_app/940186";
 import { a3, or, Ez } from "../figma_app/139805";
 import { Um } from "../905/848862";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { b as _$$b2 } from "../905/600173";
 import { n } from "../905/796896";
 import { i as _$$i } from "../905/542104";
@@ -555,7 +555,7 @@ function th({
 function ty() {
   let e = useDispatch();
   let t = Um();
-  let n = q5();
+  let n = selectCurrentFile();
   let r = GV();
   let {
     numSelected,
@@ -719,7 +719,7 @@ function tb({
   let {
     onlyCooperFrames
   } = Cl();
-  let $ = HH() && onlyCooperFrames;
+  let $ = isCooperFeatureEnabled() && onlyCooperFrames;
   let Z = o3(nt.designSelectionActionsPanel);
   let eh = !tx() && Z;
   return jsxs(Fragment, {

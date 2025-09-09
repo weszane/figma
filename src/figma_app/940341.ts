@@ -15,7 +15,7 @@ import { Point } from "../905/736624";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sw } from "../figma_app/914957";
 import { p8 } from "../figma_app/722362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { IW } from "../figma_app/646357";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
@@ -27,7 +27,7 @@ let $$C0 = "slides-edit-text-style-modal";
 export function $$w1() {
   let e = useDispatch();
   let t = p8("isReadOnly");
-  let r = tS();
+  let r = useCurrentFileKey();
   let w = "slidesEditStyleModal";
   let {
     inheritTextStyleKey,

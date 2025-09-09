@@ -21,7 +21,7 @@ import { Point } from "../905/736624";
 import { N_, CY, ks } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -55,7 +55,7 @@ import { dj, bD, hE, vt } from "../figma_app/45218";
 import { kM, k2, aP } from "../figma_app/10554";
 import { PN } from "../905/54385";
 import { PublisherType, ManifestEditorType } from "../figma_app/155287";
-import { D6 } from "../figma_app/175992";
+import { SourceType } from "../figma_app/175992";
 import { e0 as _$$e2 } from "../905/696396";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { is as _$$is } from "../905/744076";
@@ -1950,7 +1950,7 @@ class iW extends Component {
         resourceType: this.isWidget() ? "widget" : "plugin"
       };
       trackEventAnalytics("plugin_publish_modal_click_tab", t);
-      e === KM.PERMISSIONS && YQ({
+      e === KM.PERMISSIONS && handleAtomEvent({
         id: oE
       });
       this.setState({
@@ -2649,7 +2649,7 @@ class iW extends Component {
     };
     this.canUserSellPluginOnCmty = () => {
       let e = this.props.user;
-      return !!(!this.isPrimaryOwner() || e.can_sell_on_community && e.cmty_seller_capabilities?.includes(D6.EXTENSION));
+      return !!(!this.isPrimaryOwner() || e.can_sell_on_community && e.cmty_seller_capabilities?.includes(SourceType.EXTENSION));
     };
     this.renderPricingSection = (e, t) => {
       if (!this.canUserSellPluginOnCmty()) return null;
@@ -2913,7 +2913,7 @@ class iW extends Component {
   }
   async componentDidMount() {
     this.componentDidMountTime = Date.now();
-    this.props.publishedPlugin.id && getPluginVersion(this.props.publishedPlugin).id && YQ({
+    this.props.publishedPlugin.id && getPluginVersion(this.props.publishedPlugin).id && handleAtomEvent({
       id: zK
     });
     this.footerErrorRef.current && this.setState({

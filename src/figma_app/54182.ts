@@ -1,23 +1,23 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { $D } from "../figma_app/789";
+import { isWorkshopModeEnabled } from "../figma_app/789";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
-import { e6 } from "../905/557142";
-import { QB } from "../figma_app/707808";
+import { AccessLevelEnum } from "../905/557142";
+import { isIncludedView } from "../figma_app/707808";
 import { Ib } from "../905/129884";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { c as _$$c, M } from "../905/57178";
 function g(e, t, r) {
-  let n = EJ(e, 25);
+  let n = truncate(e, 25);
   let i = r ? function (e) {
     switch (e) {
-      case e6.OWNER:
+      case AccessLevelEnum.OWNER:
         return " (owner)";
-      case e6.ADMIN:
+      case AccessLevelEnum.ADMIN:
         return " (admin)";
       default:
         return "";
@@ -35,7 +35,7 @@ export function $$f0(e) {
   let t = selectCurrentUser();
   let r = useSelector(e => e.multiplayer);
   let a = q();
-  let s = cJ();
+  let s = useIsFullscreenSitesView();
   let u = "user" in e ? `user-${e.user.id}` : `role-${e.role.id}`;
   let f = "user" in e ? e.user : e.role.user;
   let E = !1;
@@ -59,12 +59,12 @@ export function $$f0(e) {
       let l = "sessionId" in tooltipUser && tooltipUser.sessionId === multiplayer.sessionID;
       let d = "sessionId" in tooltipUser && tooltipUser.sessionId === multiplayer.presenterSessionID;
       let c = "sessionId" in tooltipUser && multiplayer.observingSessionID === tooltipUser.sessionId;
-      return !o || QB(selectedView) ? s ? _$$c.NONE : _$$c.VIEW_PROFILE : l ? s || !localUser ? isInWorkshop ? _$$c.EDIT_NAME : _$$c.NONE : d ? _$$c.STOP_PRESENTING : _$$c.NONE : d && !c ? _$$c.FOLLOW_PRESENTER : c ? _$$c.STOP_OBSERVE : _$$c.START_OBSERVE;
+      return !o || isIncludedView(selectedView) ? s ? _$$c.NONE : _$$c.VIEW_PROFILE : l ? s || !localUser ? isInWorkshop ? _$$c.EDIT_NAME : _$$c.NONE : d ? _$$c.STOP_PRESENTING : _$$c.NONE : d && !c ? _$$c.FOLLOW_PRESENTER : c ? _$$c.STOP_OBSERVE : _$$c.START_OBSERVE;
     }({
       localUser: t,
       tooltipUser: e,
       multiplayer: useSelector(e => e.multiplayer),
-      isInWorkshop: $D(),
+      isInWorkshop: isWorkshopModeEnabled(),
       selectedView: _6()
     });
   }(f);

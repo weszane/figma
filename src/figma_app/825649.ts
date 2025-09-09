@@ -4,16 +4,16 @@ import { useSelector } from "react-redux";
 import { AppStateTsApi, ColorProfileEnum, ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { oA } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { getI18nString } from "../905/303541";
 import { V3 } from "../figma_app/976345";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
 import { pH, GI } from "../figma_app/147337";
-import { to as _$$to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { Dl } from "../figma_app/601682";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { ju } from "../figma_app/88239";
 import { qP, Fb } from "../figma_app/909778";
 import { oB } from "../905/929976";
@@ -29,8 +29,8 @@ import { JT } from "../figma_app/173838";
 import { h as _$$h } from "../905/864281";
 import { kD, J3, JU, kN } from "../figma_app/622574";
 import { Cu } from "../figma_app/314264";
-import { _R } from "../figma_app/765689";
-import { Kz, up, SA } from "../905/760074";
+import { isRestrictedPlanAccess } from "../figma_app/765689";
+import { isBranchAlt, getRepoByIdAlt, isDefaultFile } from "../905/760074";
 import { t as _$$t2, m as _$$m } from "../905/364535";
 import { $n } from "../905/930279";
 import { F as _$$F } from "../905/300562";
@@ -42,7 +42,7 @@ import { jK, hP } from "../figma_app/829197";
 import { ck } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 } from "../figma_app/546509";
-import { q5, Cq } from "../figma_app/516028";
+import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
@@ -69,8 +69,8 @@ import { RR } from "../905/514666";
 import { $3 } from "../905/946937";
 import { j as _$$j } from "../905/834956";
 import { tz as _$$tz } from "../figma_app/531331";
-import { Oc } from "../figma_app/552876";
-import { cJ } from "../905/561485";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { e as _$$e4 } from "../figma_app/831857";
 import { sO } from "../figma_app/21029";
 import { fx, PF } from "../figma_app/657972";
@@ -92,10 +92,10 @@ export function $$eO1({
   let eP = useSelector(e => e.selectedView);
   let eD = useSelector(e => getPermissionsStateMemoized(e));
   let ek = useSelector(e => e.userStateLoaded);
-  let eM = q5();
+  let eM = selectCurrentFile();
   let eF = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   let ej = useSelector(e => e.fileVersion);
-  let eU = Cq({
+  let eU = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   let eB = useSelector(e => e.repos);
@@ -109,17 +109,17 @@ export function $$eO1({
     currentTeamId: eH
   });
   let eY = sO();
-  let e$ = cJ();
-  let eX = Oc();
+  let e$ = useIsFullscreenSitesView();
+  let eX = useIsSelectedFigmakeFullscreen();
   let eq = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);
-  let eJ = _$$to();
+  let eJ = useIsSelectedViewFullscreenCooper();
   let eZ = _$$F3();
   let eQ = _$$e4();
   let e0 = Dl(eM);
   let e1 = ju("filename_menu");
   let e2 = BI();
   let e5 = m0();
-  let e3 = Rs(FileManagePermission({
+  let e3 = useSubscription(FileManagePermission({
     fileKey: eM?.key || ""
   }), {
     enabled: !!eM?.key
@@ -127,7 +127,7 @@ export function $$eO1({
   let e4 = useSelector(fA);
   let e8 = useAtomWithSubscription(p9);
   SR();
-  let e6 = Rs(FileNameViewDropdown({
+  let e6 = useSubscription(FileNameViewDropdown({
     branchFileKey: eM?.key || ""
   }), {
     enabled: !!eM
@@ -164,7 +164,7 @@ export function $$eO1({
   let ty = !1;
   let tb = !1;
   let tT = null;
-  "loaded" === e3.status && (tE = !!e3.data?.file?.canTrash && !!oA(e3.data?.file?.canTrash), ty = !!oA(e3.data?.file?.canMove), tb = !!(e3.data.file && _R(e3.data.file.editorType ?? FFileType.DESIGN, e3.data.file.currentPlanUser)), tT = oA(e3.data?.file?.canMoveWithReasons) || null);
+  "loaded" === e3.status && (tE = !!e3.data?.file?.canTrash && !!getResourceDataOrFallback(e3.data?.file?.canTrash), ty = !!getResourceDataOrFallback(e3.data?.file?.canMove), tb = !!(e3.data.file && isRestrictedPlanAccess(e3.data.file.editorType ?? FFileType.DESIGN, e3.data.file.currentPlanUser)), tT = getResourceDataOrFallback(e3.data?.file?.canMoveWithReasons) || null);
   let tI = jB({
     files: [{
       editor_type: eM?.editorType ?? null,
@@ -175,10 +175,10 @@ export function $$eO1({
     isDestinationDrafts: !1
   });
   let tS = Cp(tI.destinationPlan?.key || null, tI.licenseType);
-  let tv = xo();
+  let tv = useCanUseDevModeDemoFile();
   let tA = ty;
   let tx = !1;
-  eM && eP.editorType && (tx = eP.editorType === FEditorType.Slides && oA(eM.org?.isSlidesDisabled) || eP.editorType === FEditorType.Sites && !!eM.org?.isSitesDisabled || eP.editorType === FEditorType.Cooper && !!eM.org?.isCooperDisabled);
+  eM && eP.editorType && (tx = eP.editorType === FEditorType.Slides && getResourceDataOrFallback(eM.org?.isSlidesDisabled) || eP.editorType === FEditorType.Sites && !!eM.org?.isSitesDisabled || eP.editorType === FEditorType.Cooper && !!eM.org?.isCooperDisabled);
   let tN = eX && tI.requiresUpgrade && !eQ;
   let tC = Px(tI, tx);
   let tw = tv || tC || tN;
@@ -205,12 +205,12 @@ export function $$eO1({
   if (!eM || !ew) return null;
   let tM = eP.editorType;
   let tF = tM !== FEditorType.Whiteboard;
-  let tj = !!(tF && Kz(eM));
+  let tj = !!(tF && isBranchAlt(eM));
   let tU = "loaded" === eK.status && gV(eK.data, eV);
   let tB = "loaded" === e6.status && (null === e6.data.file || e6.data.file && AM(e6.data.file) === pT.MERGED);
   let tG = tj && ("loaded" !== e6.status || tB);
   let tV = !eM.canExport;
-  let tH = tM === FEditorType.Whiteboard && !!eM.org?.figjamDisabledAt || tM === FEditorType.Slides && oA(eM.org?.isSlidesDisabled) || tM === FEditorType.Sites && !!eM.org?.isSitesDisabled || tM === FEditorType.Cooper && !!eM.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(eD) || tV;
+  let tH = tM === FEditorType.Whiteboard && !!eM.org?.figjamDisabledAt || tM === FEditorType.Slides && getResourceDataOrFallback(eM.org?.isSlidesDisabled) || tM === FEditorType.Sites && !!eM.org?.isSitesDisabled || tM === FEditorType.Cooper && !!eM.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(eD) || tV;
   let tz = tO && eM.canManage;
   let tW = !!(tj && eM.trashedAt);
   let tK = tW && !tG;
@@ -222,7 +222,7 @@ export function $$eO1({
   let tJ = eM.folderId === tO?.personal_drafts_folder_id;
   let tZ = eM.canEdit && !!eM.thumbnailGuid;
   let tQ = eK.data?.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? [];
-  let t0 = eK.data?.currentUser?.userSidebarSections != null ? oA(eK.data.currentUser.userSidebarSections) : null;
+  let t0 = eK.data?.currentUser?.userSidebarSections != null ? getResourceDataOrFallback(eK.data.currentUser.userSidebarSections) : null;
   let t1 = _$$t$(t0 ?? [], tQ);
   let t2 = t1.find(e => e.id === e9?.resource.sidebarSectionId);
   let t5 = () => {
@@ -533,8 +533,8 @@ export function $$eO1({
       }));
     } : () => {
       if (z(oB()), !eM || !eU) return;
-      let e = up(eM, eB);
-      e && SA(eM, e) ? eM.repo?.canEdit && !e.trashed_at && z(U1({
+      let e = getRepoByIdAlt(eM, eB);
+      e && isDefaultFile(eM, e) ? eM.repo?.canEdit && !e.trashed_at && z(U1({
         filesByKey: {},
         reposById: {
           [e.id]: {

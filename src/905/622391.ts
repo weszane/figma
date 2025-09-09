@@ -1,10 +1,9 @@
-import { n as _$$n } from '../905/347702'
 import { debugState } from '../905/407919'
 import { s as _$$s } from '../905/506024'
 import { logWarning } from '../905/714362'
-import { cb, Eh, Pe } from '../figma_app/12796'
+import { canPerformAction, canRunExtensions, isExportRestricted } from '../figma_app/12796'
 import { getInitialOptions } from '../figma_app/169182'
-import { tn } from '../figma_app/473493'
+import { canAccessFullDevMode } from '../figma_app/473493'
 import { isDevModeFocusViewCopyActive } from '../figma_app/544649'
 import { isInteractionPathCheck } from '../figma_app/897289'
 
@@ -20,13 +19,13 @@ export function $$m3() {
 }
 export function $$h1() {
   let e = debugState.getState()
-  return cb(e)
+  return canRunExtensions(e)
 }
 export function $$g7() {
   if (getInitialOptions().e2e_traffic || isInteractionPathCheck())
     return !0
   let e = debugState.getState()
-  return Eh(e) && cb(e)
+  return canPerformAction(e) && canRunExtensions(e)
 }
 export function $$f2() {
   return debugState.getState().currentUserOrgId || void 0
@@ -36,13 +35,13 @@ export function $$_8() {
 }
 export function $$A0() {
   let e = debugState.getState().openFile
-  return !!e && !Pe(e)
+  return !!e && !isExportRestricted(e)
 }
-let $$y4 = _$$n(() => {
+let $$y4 = () => {
   let e = debugState.getState()
-  return tn(e)
-})
-let $$b5 = _$$n(isDevModeFocusViewCopyActive)
+  return canAccessFullDevMode(e)
+}
+let $$b5 = (isDevModeFocusViewCopyActive)
 export const CQ = $$A0
 export const Fr = $$h1
 export const I = $$f2

@@ -57,7 +57,7 @@ import { ex as _$$ex } from "../905/524523";
 import { clamp } from "../figma_app/492908";
 import { jr, W0, VA } from "../figma_app/896988";
 import { _6 } from "../figma_app/386952";
-import { Vj, cJ } from "../905/561485";
+import { isFullscreenSitesView, useIsFullscreenSitesView } from "../905/561485";
 import eC from "classnames";
 import { sR, uV } from "../figma_app/694588";
 import { tL as _$$tL } from "../8826/642528";
@@ -500,7 +500,7 @@ function es(e) {
     clearVariableConsumption
   } = _$$O2(C, VariableResolvedDataType.FLOAT);
   let N = useCallback((e, t = yesNoTrackingEnum.YES) => {
-    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO); else if (e === Bn) {
+    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO);else if (e === Bn) {
       minMaxApi.set(null, yesNoTrackingEnum.NO);
       let e = {
         [minMaxApi.widthOrHeight]: {
@@ -911,7 +911,7 @@ function ez({
   let w = uV();
   let C = am();
   let S = useSelector(Sh);
-  let j = Vj(_6());
+  let j = isFullscreenSitesView(_6());
   let b = rO(s);
   let N = "BASELINE" === u;
   let I = useCallback((e, t) => {
@@ -1185,7 +1185,7 @@ function td({
     isStackControlReadOnly,
     isGridControlReadOnly
   } = function () {
-    let e = cJ();
+    let e = useIsFullscreenSitesView();
     let t = useSelector(F4);
     let n = getSingletonSceneGraph();
     let l = {

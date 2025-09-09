@@ -1,8 +1,8 @@
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { SK, Fq, vu } from "../905/84777";
 import { Ju, IX } from "../905/712921";
 import { UpgradeSteps, SubscriptionType } from "../figma_app/831101";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 export function $$d1(e, t) {
   return "promoReview" === e.view || "teamUpgrade" === e.view && e.paymentStep === UpgradeSteps.CONFIRM_PAY && t.promo;
@@ -10,7 +10,7 @@ export function $$d1(e, t) {
 export function $$c0({
   currency: e
 }) {
-  let t = Oq.exclude([ud.DEV_MODE]);
+  let t = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let r = t.dict(t => ({
     currency: e,
     billableProductKey: t,
@@ -29,14 +29,14 @@ export function $$c0({
   }));
   let c = SK(r, Fq.PRO_CART);
   let u = SK(d, Fq.PRO_CART);
-  let [p, _] = mI(c, u);
+  let [p, _] = handleSuspenseRetainRelease(c, u);
   let h = vu(p);
   let m = vu(_);
   if (!h.data || !m.data) throw Error("Prices data was null");
-  let g = h.data[ud.DESIGN].amount;
-  let f = h.data[ud.FIGJAM].amount;
-  let E = m.data[ud.DESIGN].amount;
-  let y = m.data[ud.FIGJAM].amount;
+  let g = h.data[ProductAccessTypeEnum.DESIGN].amount;
+  let f = h.data[ProductAccessTypeEnum.FIGJAM].amount;
+  let E = m.data[ProductAccessTypeEnum.DESIGN].amount;
+  let y = m.data[ProductAccessTypeEnum.FIGJAM].amount;
   let b = e => {
     switch (e) {
       case SubscriptionType.ANNUAL:

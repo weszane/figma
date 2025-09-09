@@ -1,5 +1,6 @@
 import U from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { $8, b8, cJ, Cp, Ee, Gb, hV, Hy, kL, Mc, n$, nf, PJ, r2, Sx, U0, Uj, VG, Wu, xw, Y8 } from '../469e6e40/123707';
 import { UW } from '../469e6e40/142718';
@@ -26,7 +27,7 @@ import { s as _$$s2 } from '../905/82276';
 import { e as _$$e5 } from '../905/86132';
 import { registerModal } from '../905/102752';
 import { Ib } from '../905/129884';
-import { showModalHandler, hideModal, popModalStack } from '../905/156213';
+import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { j as _$$j } from '../905/206476';
 import { h as _$$h } from '../905/207101';
@@ -56,7 +57,7 @@ import { o as _$$o } from '../905/451156';
 import { U as _$$U2 } from '../905/455766';
 import { b as _$$b } from '../905/484176';
 import { H as _$$H2 } from '../905/507464';
-import { Gu, ud } from '../905/513035';
+import { ViewAccessTypeEnum, ProductAccessTypeEnum } from '../905/513035';
 import { Dd, OJ } from '../905/519092';
 import { r as _$$r } from '../905/520829';
 import { $n } from '../905/521428';
@@ -68,7 +69,7 @@ import { getFeatureFlags } from '../905/601108';
 import { J as _$$J2 } from '../905/614223';
 import { e as _$$e4 } from '../905/621515';
 import { K as _$$K2 } from '../905/628118';
-import { oA } from '../905/663269';
+import { getResourceDataOrFallback } from '../905/663269';
 import { In } from '../905/672640';
 import { $ as _$$$2 } from '../905/692618';
 import { P as _$$P } from '../905/697522';
@@ -101,12 +102,12 @@ import { VU, zx } from '../4452/650793';
 import { s as _$$s3 } from '../cssbuilder/589278';
 import { EKN, fQh, swf } from '../figma_app/6204';
 import { II } from '../figma_app/11182';
-import { QN } from '../figma_app/12796';
+import { getPermissionLevelNameCapitalized } from '../figma_app/12796';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { fAD, lRB } from '../figma_app/27776';
 import { yo } from '../figma_app/28323';
-import { x0 } from '../figma_app/35887';
-import { WorkspacesCanAdminView, AdminRequestDashOrgInfo, OrgUsersByIdView, OrgInviteModalView, OrgIdpGroupsView } from '../figma_app/43951';
+import { getPaidStatus } from '../figma_app/35887';
+import { AdminRequestDashOrgInfo, OrgIdpGroupsView, OrgInviteModalView, OrgUsersByIdView, WorkspacesCanAdminView } from '../figma_app/43951';
 import { mapFileTypeToEditorType } from '../figma_app/53721';
 import { Yy } from '../figma_app/59509';
 import { G as _$$G, h as _$$h2 } from '../figma_app/124713';
@@ -116,13 +117,13 @@ import { f as _$$f } from '../figma_app/157238';
 import { JR, Wi } from '../figma_app/162641';
 import { o9 } from '../figma_app/173467';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
-import { FUserRoleType, FPlanNameType, FPlanAccessType, FPlanFeatureType, FProductAccessType, FUserTypeClassification, FOrganizationLevelType, FMemberRoleType } from '../figma_app/191312';
+import { FMemberRoleType, FOrganizationLevelType, FPlanAccessType, FPlanFeatureType, FPlanNameType, FProductAccessType, FUserRoleType, FUserTypeClassification } from '../figma_app/191312';
 import { Zx } from '../figma_app/217457';
 import { c$, gw } from '../figma_app/236327';
 import { Bg } from '../figma_app/246699';
 import { N as _$$N } from '../figma_app/268271';
 import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { Z5 } from '../figma_app/297957';
 import { V as _$$V2 } from '../figma_app/312987';
 import { Cu } from '../figma_app/314264';
@@ -132,9 +133,8 @@ import { p as _$$p2 } from '../figma_app/353099';
 import { m as _$$m } from '../figma_app/369596';
 import { xf } from '../figma_app/416935';
 import { bv, IV, uw, Vq } from '../figma_app/421401';
-import { OL as _$$OL } from '../figma_app/421473';
 import { e6 as _$$e3, Z as _$$Z, B7, hn, JB, O4, pv, RF, X_ } from '../figma_app/425283';
-import { j_, No, px, S2 } from '../figma_app/465071';
+import { useIsOrgAdminUser, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { Y as _$$Y3 } from '../figma_app/515088';
 import { NJ } from '../figma_app/518077';
@@ -152,7 +152,7 @@ import { jL } from '../figma_app/658324';
 import { EQ, mm, MX, NV, RG } from '../figma_app/684446';
 import { a9 as _$$a, Ew, oo, vu } from '../figma_app/741211';
 import { K as _$$K, O as _$$O } from '../figma_app/748328';
-import { PO, Te } from '../figma_app/765689';
+import { isCoreProductAccessType, ProductAccessMap } from '../figma_app/765689';
 import { isMobileUA } from '../figma_app/778880';
 import { parsePxInt } from '../figma_app/783094';
 import { fu, j6, jm, kp, T8 } from '../figma_app/831799';
@@ -160,14 +160,13 @@ import { ps, ZY } from '../figma_app/845611';
 import { m2 } from '../figma_app/858344';
 import { wv } from '../figma_app/860955';
 import { zE } from '../figma_app/919079';
-import { EJ } from '../figma_app/930338';
+import { truncate } from '../figma_app/930338';
 import { t5 as _$$t2, Ad, QS } from '../figma_app/951233';
 import { e5 as _$$e2, J0, MF, Od, oU, rk, WH, wQ } from '../figma_app/967319';
 import { uo } from '../figma_app/990058';
 import { Fb, MB } from '../figma_app/996356';
 import eT from '../vendor/128080';
 import { Ay as _$$Ay } from '../vendor/159563';
-import { useSelector, useDispatch } from 'react-redux';
 let F = U;
 let eg = new class {
   constructor() {
@@ -253,21 +252,21 @@ function tn(e) {
 }
 function ts(e) {
   let t;
-  let a = e.orgUser.active_seat_type?.key ?? Gu.VIEW;
+  let a = e.orgUser.active_seat_type?.key ?? ViewAccessTypeEnum.VIEW;
   switch (a) {
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       t = getI18nString('add_unassigned_members_modal.bundles.collaborator.tooltip');
       break;
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       t = getI18nString('add_unassigned_members_modal.bundles.developer.tooltip');
       break;
-    case ud.EXPERT:
+    case ProductAccessTypeEnum.EXPERT:
       t = getI18nString('add_unassigned_members_modal.bundles.expert.tooltip');
       break;
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.CONTENT:
       t = getI18nString('add_unassigned_members_modal.bundles.content.tooltip');
       break;
-    case Gu.VIEW:
+    case ViewAccessTypeEnum.VIEW:
       t = getI18nString('add_unassigned_members_modal.bespoke_seat_type.view.tooltip');
       break;
     default:
@@ -292,7 +291,7 @@ function ti(e) {
       'data-testid': `design-file-icon-${e.orgUser.id}`
     })
   }, `design-file-icon-${e.orgUser.id}`));
-  x0(e.orgUser, FProductAccessType.DEV_MODE) === FPlanFeatureType.FULL && t.push(jsx('div', {
+  getPaidStatus(e.orgUser, FProductAccessType.DEV_MODE) === FPlanFeatureType.FULL && t.push(jsx('div', {
     'data-tooltip-type': Ib.TEXT,
     'data-tooltip': getI18nString('add_unassigned_members_modal.dev_mode_file_icon.tooltip'),
     'children': jsx(_$$P, {
@@ -439,7 +438,7 @@ function tu({
       let e = a.find(e => e.id === i.workspace_id)?.name || '';
       let t = jsx('div', {
         className: `${Ck}`,
-        children: EJ(e, _$$A2)
+        children: truncate(e, _$$A2)
       });
       r = jsx(lJ, {
         label: t,
@@ -481,7 +480,7 @@ function tm({
       let e = a.find(e => e.id === i.license_group_id)?.name || '';
       let t = jsx('div', {
         className: `${Ck}`,
-        children: EJ(e, _$$A2)
+        children: truncate(e, _$$A2)
       });
       r = jsx(lJ, {
         label: t,
@@ -896,7 +895,7 @@ let tf = registerModal(({
   let m = useSelector(({
     licenseGroups: t
   }) => e ? t[e] : void 0);
-  let g = Rs(OrgInviteModalView, {
+  let g = useSubscription(OrgInviteModalView, {
     workspaceId: t
   }, {
     enabled: !!t
@@ -1012,7 +1011,7 @@ function tk(e) {
     licenseType: e,
     count: t
   }) => {
-    if (!PO(e)) return;
+    if (!isCoreProductAccessType(e)) return;
     let a = Zx(e);
     Oq.has(a) && (l[a] = t);
   });
@@ -1067,7 +1066,7 @@ function tk(e) {
 }
 function tE(e) {
   let t = useSelector(e => e.selectedView.view !== 'licenseGroup' ? null : e.licenseGroups[e.selectedView.licenseGroupId]);
-  let a = No().unwrapOr(null);
+  let a = useTeamPlanPublicInfo().unwrapOr(null);
   let s = a?.key;
   return s?.parentId && s?.type === FOrganizationLevelType.ORG && t ? jsx(tk, {
     orgId: s.parentId,
@@ -1148,7 +1147,7 @@ function tT(e) {
 }
 function tL() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = Rs(OrgIdpGroupsView, {
+  let t = useSubscription(OrgIdpGroupsView, {
     orgId: e
   });
   let a = (t.status === 'loading' ? [] : _$$oA(t.data?.org?.orgSamlConfigs) ?? []).map(e => e.idpGroups).flat();
@@ -1191,7 +1190,7 @@ function tM() {
   let t = useSelector(({
     user: e
   }) => e?.id);
-  let a = px().unwrapOr(null);
+  let a = useTeamPlanUser().unwrapOr(null);
   let n = a?.key.type === FUserTypeClassification.ORG_USER && a?.permission === FMemberRoleType.ADMIN;
   let r = RG();
   let l = useSelector(({
@@ -1423,10 +1422,10 @@ let t9 = () => ({
   [t8.BILLING_INTERVAL]: getI18nString('team_view.team_members_table_column.billing_interval')
 });
 let ae = () => ({
-  [ud.EXPERT]: getI18nString('people_table_filters.billing_filters.seat_type_options.full'),
-  [ud.DEVELOPER]: getI18nString('people_table_filters.billing_filters.seat_type_options.dev'),
-  [ud.COLLABORATOR]: getI18nString('people_table_filters.billing_filters.seat_type_options.collab'),
-  [Gu.VIEW]: getI18nString('people_table_filters.billing_filters.seat_type_options.view'),
+  [ProductAccessTypeEnum.EXPERT]: getI18nString('people_table_filters.billing_filters.seat_type_options.full'),
+  [ProductAccessTypeEnum.DEVELOPER]: getI18nString('people_table_filters.billing_filters.seat_type_options.dev'),
+  [ProductAccessTypeEnum.COLLABORATOR]: getI18nString('people_table_filters.billing_filters.seat_type_options.collab'),
+  [ViewAccessTypeEnum.VIEW]: getI18nString('people_table_filters.billing_filters.seat_type_options.view'),
   [UW.MORE_SEVEN_DAYS]: getI18nString('people_table_filters.access_filters.last_active_options.seven_days_ago'),
   [UW.MORE_THIRTY_DAYS]: getI18nString('people_table_filters.access_filters.last_active_options.thirty_days_ago'),
   [UW.MORE_THREE_MONTHS]: getI18nString('people_table_filters.access_filters.last_active_options.three_months_ago'),
@@ -1452,17 +1451,17 @@ function at(e) {
       display: getI18nString('people_table_filters.billing_filters.seat_type_options.all'),
       value: null
     }, {
-      display: a[ud.EXPERT],
-      value: ud.EXPERT
+      display: a[ProductAccessTypeEnum.EXPERT],
+      value: ProductAccessTypeEnum.EXPERT
     }, {
-      display: a[ud.DEVELOPER],
-      value: ud.DEVELOPER
+      display: a[ProductAccessTypeEnum.DEVELOPER],
+      value: ProductAccessTypeEnum.DEVELOPER
     }, {
-      display: a[ud.COLLABORATOR],
-      value: ud.COLLABORATOR
+      display: a[ProductAccessTypeEnum.COLLABORATOR],
+      value: ProductAccessTypeEnum.COLLABORATOR
     }, {
-      display: a[Gu.VIEW],
-      value: Gu.VIEW
+      display: a[ViewAccessTypeEnum.VIEW],
+      value: ViewAccessTypeEnum.VIEW
     }]
   }, {
     type: t8.CHARGED,
@@ -1690,8 +1689,8 @@ function ar(e) {
 }
 function al(e) {
   let t = function (e) {
-    let t = S2().unwrapOr(null);
-    let a = Rs(WorkspacesCanAdminView, {
+    let t = useTeamPlanFeatures().unwrapOr(null);
+    let a = useSubscription(WorkspacesCanAdminView, {
       orgId: t?.key?.parentId ?? null
     }, {
       enabled: t?.tier === FPlanNameType.ENTERPRISE
@@ -1834,7 +1833,7 @@ function ad(e) {
 }
 function ac(e) {
   let t;
-  let a = S2().unwrapOr(null);
+  let a = useTeamPlanFeatures().unwrapOr(null);
   let s = Xf(a?.key?.parentId, a?.type === FOrganizationLevelType.ORG);
   let i = !!s?.data?.invoices?.length;
   t = !!e.isELA;
@@ -1876,7 +1875,7 @@ function ac(e) {
   });
 }
 function a_(e) {
-  let t = S2().unwrapOr(null);
+  let t = useTeamPlanFeatures().unwrapOr(null);
   let {
     filterSections
   } = as(e.currentFilters, {
@@ -1924,16 +1923,16 @@ function aq({
     }));
   }, [o, a, r, l, t]);
   let c = useMemo(() => [jsx(c$, {
-    onClick: () => d(ud.EXPERT),
+    onClick: () => d(ProductAccessTypeEnum.EXPERT),
     children: getI18nString('general.bundle.expert')
   }, '1'), jsx(c$, {
-    onClick: () => d(ud.COLLABORATOR),
+    onClick: () => d(ProductAccessTypeEnum.COLLABORATOR),
     children: getI18nString('general.bundle.collaborator')
   }, '2'), jsx(c$, {
-    onClick: () => d(ud.DEVELOPER),
+    onClick: () => d(ProductAccessTypeEnum.DEVELOPER),
     children: getI18nString('general.bundle.developer')
   }, '3'), jsx(c$, {
-    onClick: () => d(Gu.VIEW),
+    onClick: () => d(ViewAccessTypeEnum.VIEW),
     children: getI18nString('checkout.view')
   }, '4')], [d]);
   let _ = e?.type === aF;
@@ -1972,7 +1971,7 @@ let a$ = registerModal(e => {
       seatTypeProducts: {},
       params: {
         org_user_ids: orgUserIds,
-        paid_statuses: seatType === Gu.VIEW ? N_.dict(() => FPlanAccessType.STARTER) : {
+        paid_statuses: seatType === ViewAccessTypeEnum.VIEW ? N_.dict(() => FPlanAccessType.STARTER) : {
           [seatType]: FPlanAccessType.FULL
         },
         entry_point: _$$h2.MEMBERS_TAB
@@ -1981,7 +1980,7 @@ let a$ = registerModal(e => {
       successCallback: () => {
         queueFilterCountsRefetch();
         jL({
-          planType: _$$OL.ORG,
+          planType: FOrganizationLevelType.ORG,
           planId: orgId
         });
         m(VisualBellActions.enqueue({
@@ -2102,7 +2101,7 @@ function aK(e) {
       children: e.resource.team ? e.resource.team.name : '-'
     }), jsx('td', {
       className: 'x1n5zjp5 x1gcgh60 x1vi7shn xp6roeo x1qxcl5b xb3r6kr xuxw1ft xlyipyv',
-      children: QN(e.resource.level)
+      children: getPermissionLevelNameCapitalized(e.resource.level)
     })]
   });
 }
@@ -2145,7 +2144,7 @@ function aX(e) {
       })
     }), jsx('td', {
       className: 'x1n5zjp5 x1gcgh60 x1vi7shn xp6roeo x1qxcl5b xb3r6kr xuxw1ft xlyipyv',
-      children: QN(e.resource.level)
+      children: getPermissionLevelNameCapitalized(e.resource.level)
     })]
   });
 }
@@ -2181,7 +2180,7 @@ function aQ(e) {
       })
     }), jsx('td', {
       className: 'x1n5zjp5 x1gcgh60 x1vi7shn xp6roeo x1qxcl5b xb3r6kr xuxw1ft xlyipyv',
-      children: QN(e.resource.level)
+      children: getPermissionLevelNameCapitalized(e.resource.level)
     })]
   });
 }
@@ -2495,8 +2494,8 @@ function nn(e) {
     },
     onClear: _$$b3(na)
   });
-  let _ = px();
-  let g = j_(_).unwrapOr(!1);
+  let _ = useTeamPlanUser();
+  let g = useIsOrgAdminUser(_).unwrapOr(!1);
   let h = useMemo(() => {
     let t = [{
       name: 'menu-cell',
@@ -2514,7 +2513,7 @@ function nn(e) {
   let [v, f] = useState(!1);
   let [j, y] = useState(!1);
   let [C, T] = useState(new Date().toISOString());
-  let U = Rs(AdminRequestDashOrgInfo, {
+  let U = useSubscription(AdminRequestDashOrgInfo, {
     orgId: e.org.id
   }, {
     enabled: e.selectedView.view === 'licenseGroup'
@@ -2672,8 +2671,8 @@ function nn(e) {
         })]
       })]
     }) : (ay.withOverrides({
-      [Te.WHITEBOARD]: 'figjam',
-      [Te.DEV_MODE]: 'devMode'
+      [ProductAccessMap.WHITEBOARD]: 'figjam',
+      [ProductAccessMap.DEV_MODE]: 'devMode'
     }).withSuffix('AccountType'), jsx('div', {
       className: F()({
         [Hy]: !a,
@@ -3173,13 +3172,13 @@ export function $$nc0(e) {
     optimisticIds,
     addOptimisticIds
   } = _$$K(sortedUsers);
-  let V = Rs(OrgUsersByIdView, {
+  let V = useSubscription(OrgUsersByIdView, {
     orgId: org.id,
     orgUserIds: optimisticIds
   }, {
     enabled: optimisticIds.length > 0
   });
-  let W = useMemo(() => (V.status === 'loaded' ? oA(V.data?.org)?.baseOrgUserMembersById ?? [] : []).map(e => _$$f(e)), [V.status, V.data?.org]);
+  let W = useMemo(() => (V.status === 'loaded' ? getResourceDataOrFallback(V.data?.org)?.baseOrgUserMembersById ?? [] : []).map(e => _$$f(e)), [V.status, V.data?.org]);
   let H = useMemo(() => searchQuery && W.length !== 0 ? (nl.set(W), nl.search(searchQuery)) : W, [searchQuery, W]);
   let Y = useCallback(e => function (e, t) {
     let a = t[_$$e2.licenseGroupFilter];
@@ -3248,7 +3247,7 @@ export function $$nc0(e) {
         disabled: !!t,
         setHighlightedItemKey: a.setItemKey
       })
-    }), XO(o) && (c && c !== Gu.VIEW && (_.push({
+    }), XO(o) && (c && c !== ViewAccessTypeEnum.VIEW && (_.push({
       name: _$$aM(Od.UPGRADE_DATE, e.featured_scim_metadata),
       sorting_key: Od.UPGRADE_DATE,
       className: PJ,
@@ -3276,7 +3275,7 @@ export function $$nc0(e) {
       selectorInnerClassName: r2,
       currency: d,
       queueFilterCountsRefetch: l,
-      hideTooltip: !!(c && c !== Gu.VIEW)
+      hideTooltip: !!(c && c !== ViewAccessTypeEnum.VIEW)
     }))), i.length > 0 && o8(o)) {
       let t = {};
       i.forEach(e => {
@@ -3340,7 +3339,7 @@ export function $$nc0(e) {
         item: e
       })
     });
-    (c === ud.EXPERT || c === ud.COLLABORATOR) && _.push({
+    (c === ProductAccessTypeEnum.EXPERT || c === ProductAccessTypeEnum.COLLABORATOR) && _.push({
       name: _$$aM(Od.LAST_EDIT, e.featured_scim_metadata),
       sorting_key: Od.LAST_EDIT,
       className: $8,

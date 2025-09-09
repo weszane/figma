@@ -14,7 +14,7 @@ import { formatI18nMessage } from "../905/482208";
 import { T as _$$T } from "../905/868547";
 import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { Yh, TY, vg } from "../figma_app/357047";
@@ -172,7 +172,7 @@ export let $$j1 = memo(function ({
 }) {
   let i = $$U3();
   let o = useSelector(e => e.progressBarState.mode);
-  let l = q5();
+  let l = selectCurrentFile();
   let d = _$$T(o);
   if (!i(e)) return null;
   let c = e.dontChainRecordingKeys ? e.recordingKey : generateRecordingKey(r, e.recordingKey);
@@ -216,7 +216,7 @@ export let $$j1 = memo(function ({
 export function $$U3() {
   let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let t = useSelector(e => e.mirror.appModel.currentTool);
-  let r = q5();
+  let r = selectCurrentFile();
   let n = useSelector(e => e.progressBarState.mode);
   let s = _$$T(n);
   let o = useSelector(e => s ? !r?.canEdit : e.mirror.appModel.isReadOnly);
@@ -234,7 +234,7 @@ export function $$B2() {
 export function $$G0() {
   let e = $$B2();
   let t = selectWithShallowEqual(e => e.mirror.selectionProperties.resettableInstanceOverrides?.selectionOverrides);
-  let r = q5();
+  let r = selectCurrentFile();
   return useCallback(n => Yh(e, n.action) && (!n.featureFlags || n.featureFlags.every(e => getFeatureFlags()[e])) && (!n.isAvailable || n.isAvailable(e, t, r)), [e, t, r]);
 }
 export const PK = $$G0;

@@ -1,12 +1,12 @@
 import { z } from "../905/239603";
 import { createNoOpValidator, createMetaValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
-import { WU } from "../figma_app/35887";
+import { OrganizationUserSchemaAlias } from "../figma_app/35887";
 var $$s1 = (e => (e.DEV_MODE_BETA_SUGGESTED_UPGRADES = "dev_mode_beta_suggested_upgrades", e.MEMBERS_TAB = "members_tab", e.FILE_PERMISSIONS_MODAL = "file_permissions_modal", e))($$s1 || {});
 export let $$o0 = new class {
   constructor() {
     this.GuestResourcesSchemaValidator = createNoOpValidator();
-    this.OrgUserSchemaValidator = createMetaValidator("OrgUserSchemaValidator", WU, null, !1);
-    this.UpdateOrgUsersSchemaValidator = createMetaValidator("UpdateOrgUsersSchemaValidator", z.array(WU), null, !1);
+    this.OrgUserSchemaValidator = createMetaValidator("OrgUserSchemaValidator", OrganizationUserSchemaAlias, null, !1);
+    this.UpdateOrgUsersSchemaValidator = createMetaValidator("UpdateOrgUsersSchemaValidator", z.array(OrganizationUserSchemaAlias), null, !1);
     this.CreateStarterTeamSchemaValidator = createNoOpValidator();
     this.requestUpgradeSchemaValidator = createNoOpValidator();
   }

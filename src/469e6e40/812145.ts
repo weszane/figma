@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import i from "classnames";
 import { A as _$$A } from "../905/920142";
 import { zN } from "../figma_app/416935";
-import { Ay } from "../figma_app/930338";
+import { toTitleCase } from "../figma_app/930338";
 import { bv } from "../figma_app/421401";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -17,19 +17,19 @@ import { n as _$$n } from "../469e6e40/721568";
 import { e6 } from "../figma_app/425283";
 import { fB, lJ } from "../469e6e40/336481";
 import { Z5 } from "../figma_app/297957";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { Ye } from "../905/332483";
 import { KS } from "../figma_app/217457";
 import { bC } from "../figma_app/951233";
-import { OL } from "../figma_app/421473";
+import { FOrganizationLevelType } from "../figma_app/421473";
 import { Od } from "../figma_app/967319";
 import { A as _$$A2 } from "../3850/566892";
 var r = i;
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
 function T(e) {
-  return Ay(zN(e ?? "") ?? "");
+  return toTitleCase(zN(e ?? "") ?? "");
 }
 function A({
   columnClassName: e,
@@ -61,7 +61,7 @@ function A({
 export function $$R0(e) {
   let t = A({
     ...e,
-    planType: OL.TEAM
+    planType: FOrganizationLevelType.TEAM
   });
   return [{
     ...t,
@@ -125,7 +125,7 @@ function O(e) {
 export function $$L1(e) {
   let t = A({
     ...e,
-    planType: OL.ORG
+    planType: FOrganizationLevelType.ORG
   });
   return [{
     ...t,
@@ -206,7 +206,7 @@ function M({
   jobTitle: F
 }) {
   let q = useDispatch();
-  let $ = a ?? Gu.VIEW;
+  let $ = a ?? ViewAccessTypeEnum.VIEW;
   let B = JT($);
   let G = Z5({
     disableExposureLogging: !0
@@ -261,7 +261,7 @@ function M({
     className: r()(e, _$$s.wFull.$),
     children: jsx("div", {
       className: r()(_$$s.wFull.$, {
-        [t]: C === OL.ORG
+        [t]: C === FOrganizationLevelType.ORG
       }),
       "data-testid": "billable-product-seat-cell",
       children: jsx(_$$n, {
@@ -291,7 +291,7 @@ function M({
         },
         children: jsxs("div", {
           className: _$$s.flex.itemsCenter.gap8.$,
-          "data-onboarding-key": C === OL.ORG && E ? `${e6}-${E}` : void 0,
+          "data-onboarding-key": C === FOrganizationLevelType.ORG && E ? `${e6}-${E}` : void 0,
           children: [jsx(_$$B, {
             type: $,
             size: "24"

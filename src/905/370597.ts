@@ -18,7 +18,7 @@ import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, G4, Hl } from "../figma_app/545293";
-import { tS, ze } from "../figma_app/516028";
+import { useCurrentFileKey, openFileKeyAtom } from "../figma_app/516028";
 import { C as _$$C } from "../905/758411";
 import { xp } from "../905/966582";
 import { I as _$$I } from "../figma_app/130633";
@@ -340,7 +340,7 @@ export function $$ec2({
 export let $$eu0 = forwardRef(({
   aiTrackingContext: e
 }, t) => {
-  let i = tS();
+  let i = useCurrentFileKey();
   let a = useRef(null);
   let s = SV(t, a);
   let o = useCallback(t => {
@@ -460,7 +460,7 @@ export function $$eg3(e) {
   return `${i}-${t}-${n}`;
 }
 export function $$ef5(e) {
-  let t = atomStoreManager.get(ze);
+  let t = atomStoreManager.get(openFileKeyAtom);
   let i = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   if (!(!t || i?.length !== 1 || i[0]?.isSlide) && (C7() && Hl({
     type: "input-selection",
@@ -483,7 +483,7 @@ export function $$ef5(e) {
   }
 }
 export function $$e_4(e, t) {
-  let i = atomStoreManager.get(ze);
+  let i = atomStoreManager.get(openFileKeyAtom);
   if (i && (C7() && Hl({
     type: "input-image",
     imageFile: t,

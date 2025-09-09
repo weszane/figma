@@ -8,7 +8,7 @@ import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { VisualBellActions } from "../905/302958";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { B9, Py } from "../figma_app/346422";
 import { hB } from "../figma_app/609511";
@@ -95,7 +95,7 @@ export async function $$y0(e, t, n, r) {
     o.stop();
     let C = debugState.getState().selectedView;
     analyticsEventManager.trackDefinedEvent("design_to_react.code_generation_time", {
-      selectedFileKey: atomStoreManager.get(ze) ?? void 0,
+      selectedFileKey: atomStoreManager.get(openFileKeyAtom) ?? void 0,
       selectedNodeId: e.guid,
       isFigmake: "editorType" in C && C.editorType === FEditorType.Figmake,
       elapsedTimeMs: w,
@@ -108,7 +108,7 @@ export async function $$y0(e, t, n, r) {
     o.stop();
     let i = debugState.getState().selectedView;
     analyticsEventManager.trackDefinedEvent("design_to_react.code_generation_time", {
-      selectedFileKey: atomStoreManager.get(ze) ?? void 0,
+      selectedFileKey: atomStoreManager.get(openFileKeyAtom) ?? void 0,
       selectedNodeId: e.guid,
       isFigmake: "editorType" in i && i.editorType === FEditorType.Figmake,
       elapsedTimeMs: t,

@@ -19,10 +19,10 @@ import { Cp } from "../905/292918";
 import { Nu, ie, ov, E as _$$E } from "../905/300250";
 import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { HJ } from "../905/760074";
+import { handleError } from "../905/760074";
 import { oJ } from "../905/346794";
 import { FEditorType } from "../figma_app/53721";
-import { PW, Kn } from "../905/535806";
+import { CPPEventType, SourceDirection } from "../905/535806";
 import { e0 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { Ao } from "../905/748636";
@@ -38,7 +38,7 @@ let O = async (e, t, i) => {
   await XHR.put(`/api/file_merge/${e.failureInfo.file_merge_id}`, {
     closed: !0
   }).catch(t => {
-    400 === t.status && (logger.warn(t), HJ(Error(t?.data?.message || "Unknown error"), PW.ON_MERGE, e.mergeParams.direction, {
+    400 === t.status && (logger.warn(t), handleError(Error(t?.data?.message || "Unknown error"), CPPEventType.ON_MERGE, e.mergeParams.direction, {
       file_merge_id: e.failureInfo.file_merge_id
     }));
   });
@@ -69,7 +69,7 @@ let D = async (e, t, i) => {
   });
 };
 let L = e => {
-  e.mergeParams.direction === Kn.TO_SOURCE ? e.dispatch(sf({
+  e.mergeParams.direction === SourceDirection.TO_SOURCE ? e.dispatch(sf({
     view: "fullscreen",
     fileKey: e.mergeParams.branchKey,
     editorType: FEditorType.Design,
@@ -83,7 +83,7 @@ let F = (e, t, i) => {
   let n;
   let r;
   let a = ["pending", "success"];
-  let s = t === Kn.TO_SOURCE ? "merge" : "update";
+  let s = t === SourceDirection.TO_SOURCE ? "merge" : "update";
   let [o, l] = a.map(e => getI18nString(`collaboration.branching.merge_error.confirm_${s}_${e}`));
   let [d, c] = a.map(e => getI18nString(`collaboration.branching.merge_error.cancel_${s}_${e}`));
   let [p, m] = a.map(e => getI18nString(`collaboration.branching.merge_error.cancel_previous_${s}_${e}`));
@@ -130,7 +130,7 @@ let F = (e, t, i) => {
         title: renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}`),
         description: n = renderI18nText("collaboration.branching.merge_error.branch_archived_description"),
         primaryButtonText: renderI18nText("base_notifications.dismiss"),
-        primaryAction: () => { }
+        primaryAction: () => {}
       };
     case 3:
       return {

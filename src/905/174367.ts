@@ -16,7 +16,7 @@ import { sx } from "../905/941192";
 import { fu } from "../figma_app/831799";
 import { B2, al, b6 } from "../figma_app/681697";
 import { u as _$$u } from "../905/997541";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { ProjectByIdForConnectedProjectStatus } from "../figma_app/43951";
 function E({
@@ -31,7 +31,7 @@ function E({
     onClose: t
   });
   let A = function (e) {
-    let t = Rs(ProjectByIdForConnectedProjectStatus, {
+    let t = useSubscription(ProjectByIdForConnectedProjectStatus, {
       projectId: e
     }, {
       enabled: "" !== e

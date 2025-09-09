@@ -14,7 +14,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { LB } from "../figma_app/29089";
 import { ZU } from "../figma_app/986347";
 import { fullHeightSidebarFlyout, disabledFullHeightSidebarFlyout, fullHeightSidebarFlyoutButton } from "../figma_app/430407";
@@ -46,7 +46,7 @@ let $$A0 = {
     className: "slides_toolbar_items--copyPresentationLinkWrapper--wpxRz",
     "data-onboarding-key": FM,
     children: jsx(function () {
-      let e = tS();
+      let e = useCurrentFileKey();
       let t = useDispatch();
       let r = useCallback(() => {
         let r = `${getInitialOptions().figma_url}/deck/${e}`;

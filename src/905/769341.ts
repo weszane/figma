@@ -1,10 +1,18 @@
-import { fc, z } from "../905/239603";
+import { nativeEnum, z } from "zod";
 import { FFileActivityType } from "../figma_app/191312";
-let a = fc(FFileActivityType);
-let $$s0 = z.object({
+/**
+ * Zod schema for file activity object validation.
+ * Original variable: $$s0
+ */
+export const fileActivitySchema = z.object({
   action_at: z.string(),
   org_id: z.string(),
   user_id: z.string(),
-  activity_type: a
+  activity_type: nativeEnum(FFileActivityType)
 });
-export const t = $$s0;
+
+/**
+ * Exported schema for file activity.
+ * Original export: t
+ */
+export const t = fileActivitySchema;

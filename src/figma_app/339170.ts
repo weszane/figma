@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { x as _$$x } from "../905/697290";
 import l from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString } from "../905/303541";
@@ -28,7 +28,7 @@ export function $$b0({
   let b = VA(r);
   let T = r1(r);
   let v = S();
-  let A = ZC(v);
+  let A = useLatestRef(v);
   useEffect(() => {
     A && !v && l?.();
   }, [l, A, v]);

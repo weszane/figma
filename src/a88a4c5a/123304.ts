@@ -86,7 +86,7 @@ import { X as _$$X } from '../905/482718';
 import { PW } from '../905/497152';
 import { L6 } from '../905/498948';
 import { O as _$$O2 } from '../905/501876';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { l as _$$l4 } from '../905/509505';
 import { E as _$$E6 } from '../905/511388';
 import { M as _$$M3 } from '../905/512402';
@@ -94,7 +94,7 @@ import { C as _$$C2 } from '../905/520159';
 import { $n } from '../905/521428';
 import { c as _$$c } from '../905/534105';
 import { r6 as _$$r4 } from '../905/542608';
-import { cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { W as _$$W3 } from '../905/569454';
 import { dG, Zk } from '../905/571648';
 import { VisualBellIcon } from '../905/576487';
@@ -217,7 +217,7 @@ import { y as _$$y } from '../figma_app/13082';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr, atomStoreManager } from '../figma_app/27355';
 import { u24 } from '../figma_app/27776';
 import { GQ, Ye } from '../figma_app/32128';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { pO } from '../figma_app/42945';
 import { FileCanAccessFullDevMode } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
@@ -267,7 +267,7 @@ import { nB as _$$nB, hE, jk, vo, wi, Wk, Y9 } from '../figma_app/272243';
 import { A5 } from '../figma_app/274104';
 import { te as _$$te } from '../figma_app/275462';
 import { s4 as _$$s2 } from '../figma_app/276332';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { lS as _$$lS, cR, RI } from '../figma_app/297957';
 import { f6 as _$$f3 } from '../figma_app/302802';
 import { RM } from '../figma_app/304955';
@@ -288,14 +288,14 @@ import { o5 as _$$o2 } from '../figma_app/433401';
 import { UN as _$$UN, Nf } from '../figma_app/449837';
 import { M_, q3 } from '../figma_app/450829';
 import { fullscreenValue } from '../figma_app/455680';
-import { No, px } from '../figma_app/465071';
+import { useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
-import { _I, U4 } from '../figma_app/473493';
+import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from '../figma_app/473493';
 import { clamp, range } from '../figma_app/492908';
 import { t as _$$t4 } from '../figma_app/501766';
 import { ED } from '../figma_app/504823';
 import { tY as _$$tY, SF } from '../figma_app/512532';
-import { tS as _$$tS, q5, yV, ze } from '../figma_app/516028';
+import { useCurrentFileKey, selectCurrentFile, openFileAtom, openFileKeyAtom } from '../figma_app/516028';
 import { GV } from '../figma_app/532170';
 import { r8 as _$$r2, W3 } from '../figma_app/537824';
 import { eF as _$$eF, iS as _$$iS, Op as _$$Op, rT as _$$rT, KV, ky, L2, yd, zZ } from '../figma_app/542202';
@@ -303,7 +303,7 @@ import { r1 as _$$r, Fu } from '../figma_app/545877';
 import { BI } from '../figma_app/546509';
 import { _9, Dm as _$$Dm, fR, gx, p6 } from '../figma_app/548615';
 import { k as _$$k4 } from '../figma_app/564183';
-import { IT } from '../figma_app/566371';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Fy, NT } from '../figma_app/579169';
 import { l2 as _$$l2, rL as _$$rL, _i, bk, Hl, mr, PM, VK, vP } from '../figma_app/584405';
 import { Xu } from '../figma_app/588582';
@@ -322,7 +322,7 @@ import { aD as _$$aD, eS as _$$eS, ti as _$$ti } from '../figma_app/646357';
 import { wW } from '../figma_app/656450';
 import { VF } from '../figma_app/679183';
 import { y6 } from '../figma_app/681951';
-import { nt as _$$nt, d6 } from '../figma_app/687776';
+import { useProjectFileCreationPermissions, canCreateFileType } from '../figma_app/687776';
 import { s_ as _$$s_, yO } from '../figma_app/701001';
 import { $ as _$$$3 } from '../figma_app/709177';
 import { E as _$$E1 } from '../figma_app/714009';
@@ -961,7 +961,7 @@ function ev() {
     }, [e]);
     !function (e) {
       let t = useAtomWithSubscription(L);
-      let l = ZC(t);
+      let l = useLatestRef(t);
       useEffect(() => {
         if (!l) return;
         let n = l || [];
@@ -1176,8 +1176,8 @@ function eW() {
 let e4 = atom(!1);
 function e7() {
   let e = useAtomWithSubscription(LZ);
-  let t = _I();
-  let l = U4();
+  let t = useCanAccessFullDevMode();
+  let l = useCanAccessDevModeEntryPoint();
   let s = _$$J3();
   let o = _$$U2('upsell');
   let a = Xr(e4);
@@ -1310,8 +1310,8 @@ function th() {
   let o = !!l && _$$A2.unix(l.lastUpdateUnixTimestamp).isAfter(_$$A2().subtract(60, 'day'));
   let a = _$$U2('upsell');
   let d = useAtomWithSubscription(LZ);
-  let u = _I();
-  let c = U4();
+  let u = useCanAccessFullDevMode();
+  let c = useCanAccessDevModeEntryPoint();
   let p = useAtomWithSubscription(NT);
   let h = _$$J3();
   let {
@@ -1417,9 +1417,9 @@ function th() {
 }
 function tk() {
   let e = X0();
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let l = _$$U2('upsell');
-  let i = Rs(FileCanAccessFullDevMode, {
+  let i = useSubscription(FileCanAccessFullDevMode, {
     key: t || ''
   }, {
     enabled: !!t
@@ -1520,10 +1520,10 @@ function tq({
   });
 }
 function tW() {
-  let e = No().unwrapOr(null);
+  let e = useTeamPlanPublicInfo().unwrapOr(null);
   let t = e?.tier === FPlanNameType.STARTER;
-  let l = _I();
-  let r = U4();
+  let l = useCanAccessFullDevMode();
+  let r = useCanAccessDevModeEntryPoint();
   let s = _$$w2();
   let o = useAtomWithSubscription(YU);
   let a = w_();
@@ -1637,10 +1637,10 @@ let t3 = _$$r('has_created_figma_make_file');
 function t4() {
   let e = useAtomWithSubscription(t5);
   let t = useAtomWithSubscription(t3);
-  let l = No();
-  let r = px();
+  let l = useTeamPlanPublicInfo();
+  let r = useTeamPlanUser();
   let s = r.unwrapOr(null)?.draftsFolderId ?? void 0;
-  let o = _$$nt(s);
+  let o = useProjectFileCreationPermissions(s);
   let d = DP() === 'dark';
   let u = d ? buildUploadUrl('1a369818117cc7e77826ee246da5938968f29e43') : buildUploadUrl('c427705996f20b17615206adc93b3171f6646529');
   let c = RI();
@@ -1661,7 +1661,7 @@ function t4() {
     s && show({
       canShow: (e, t, l, n) => {
         let i = l.tier === FPlanNameType.STARTER && !getFeatureFlags().bake_starter_limit;
-        return e && !t && !i && n !== null && d6(n, FFileType.FIGMAKE);
+        return e && !t && !i && n !== null && canCreateFileType(n, FFileType.FIGMAKE);
       }
     });
   }, [show, s]);
@@ -1777,12 +1777,12 @@ function lw({
     desktop: ''
   });
   let v = useFullscreenReady();
-  let C = _$$tS();
+  let C = useCurrentFileKey();
   let k = d4(e => e.fileVersion);
   let E = d4(e => e.mirror.sceneGraph);
   let S = v && Qf(E);
   let w = !!S && S.childCount === 0;
-  let [R] = IT(Dz({}));
+  let [R] = setupResourceAtomHandler(Dz({}));
   let {
     inProductHelpViewType
   } = A5();
@@ -1878,9 +1878,9 @@ function lw({
       editScopeType: SourceType.ONBOARDING,
       triggeredFrom: 'starting-points',
       templateInsertionDirection: CustomPosition.RIGHT
-    }), l === 'basics' ? YQ({
+    }), l === 'basics' ? handleAtomEvent({
       id: 'starting_points_basics_template_inserted'
-    }) : YQ({
+    }) : handleAtomEvent({
       id: 'starting_points_template_inserted'
     }), e(), d(!1));
   };
@@ -2038,7 +2038,7 @@ function lL() {
   let o = d4(e => e.mirror.appModel.currentPage);
   let d = Fk((e, t) => zC(e, t), o);
   let u = QL(pt.KEY) === pt.VALUE;
-  let c = q5();
+  let c = selectCurrentFile();
   let x = getUserId();
   let p = c?.creatorId === x;
   let h = useAtomWithSubscription(Fy);
@@ -2094,7 +2094,7 @@ function lV() {
   });
   let a = wA();
   let d = _$$aV();
-  let u = q5();
+  let u = selectCurrentFile();
   let c = selectCurrentUser();
   let p = _$$te();
   let h = !!_$$f(bo);
@@ -3371,7 +3371,7 @@ function nG({
   checkedStates: e,
   setLibraryCheckedState: t
 }) {
-  let l = q5();
+  let l = selectCurrentFile();
   let {
     url,
     shouldCover
@@ -3630,7 +3630,7 @@ function nQ() {
     let o = t.status === 'loaded' && r.current !== 'loaded';
     let a = useRef(!0);
     let d = useAtomWithSubscription(qN);
-    let u = useAtomWithSubscription(ze);
+    let u = useAtomWithSubscription(openFileKeyAtom);
     useEffect(() => {
       if (s && (o || t.status === 'loaded' && a.current)) {
         let e = {
@@ -3781,7 +3781,7 @@ let n8 = memo(() => {
   }) {
     let [l, n] = useAtomValueAndSetter(jq);
     let r = useAtomWithSubscription(Ut);
-    let s = useAtomWithSubscription(yV);
+    let s = useAtomWithSubscription(openFileAtom);
     let o = function () {
       let e = useAtomWithSubscription(n6);
       return useAtomWithSubscription(qp) ? e : [];
@@ -4682,14 +4682,14 @@ function iJ() {
     let {
       subscribedLibraries
     } = nw();
-    let t = q5();
+    let t = selectCurrentFile();
     let l = useAtomWithSubscription($c);
     let {
       url,
       shouldCover
     } = _$$t2();
     let s = useAtomWithSubscription(qN);
-    let o = useAtomWithSubscription(ze);
+    let o = useAtomWithSubscription(openFileKeyAtom);
     let a = subscribedLibraries?.data?.map(e => {
       let t = P2(e);
       let l = !t || e.thumbnail_guid !== null;
@@ -10038,7 +10038,7 @@ function ai({
   sceneGraphSelection: i
 }) {
   let s = wA();
-  let o = q5();
+  let o = selectCurrentFile();
   let a = p8('currentPage');
   let d = p8('isReadOnly');
   let u = p8('currentSelectedProperty');
@@ -10078,8 +10078,8 @@ function ap({
   shownPanels: i,
   userFlags: r
 }) {
-  let s = q5();
-  let d = cJ();
+  let s = selectCurrentFile();
+  let d = useIsFullscreenSitesView();
   let u = _$$tN('containsResponsiveSets');
   let c = !i[ItemType.FRAME_PRESETS] && !i[ItemType.PENCIL_TOOL] && !u;
   return jsxs(Fragment, {
@@ -10380,7 +10380,7 @@ function dc({
   isResizingPanel: r
 }) {
   let s = selectCurrentUser();
-  let d = _$$tS();
+  let d = useCurrentFileKey();
   zA();
   _$$m5();
   let u = t.guid;
@@ -10713,7 +10713,7 @@ function d_({
     nodeWithChatMessages: t,
     fullHeight: !0
   }), [t, u]);
-  let _ = _$$tS();
+  let _ = useCurrentFileKey();
   useEffect(() => {
     if (!x) return;
     let e = _$$O5.start(_, x);

@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { unwrap } from "../vendor/812047";
 import { subscribeAndAwaitData } from "../905/553831";
-import { En } from "../figma_app/566371";
+import { setupMemoizedAtomSubscription } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
 import { ZJ } from "../3973/697935";
 import { Uv } from "../3973/473379";
@@ -117,7 +117,7 @@ export function $$L3() {
     libraryKey: e,
     assetType: FComponentType.CODE_COMPONENT
   }));
-  let a = En(r, {
+  let a = setupMemoizedAtomSubscription(r, {
     enabled
   });
   return useMemo(() => enabled ? O(libraryConfigs, a.map(e => "loaded" === e.status ? e.data : null).filter(isNotNullish)) : [], [libraryConfigs, a, enabled]);

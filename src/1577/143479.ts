@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectTeams } from "../905/338617";
 import { gN } from "../figma_app/273118";
@@ -32,7 +32,7 @@ export function $$R1(e) {
     onPlanFilterUpdate
   } = e;
   let R = useDispatch();
-  let E = q5();
+  let E = selectCurrentFile();
   let D = useRef(null);
   let F = !!getFeatureFlags().limited_plan_spaces;
   let {

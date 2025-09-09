@@ -8,7 +8,7 @@ import { r as _$$r } from "../905/571562";
 import { x as _$$x } from "../905/587214";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import p from "../vendor/116389";
 import { selectWithShallowEqual } from "../905/103090";
 import { g as _$$g } from "../1556/359896";
@@ -22,7 +22,7 @@ import { hr } from "../905/352022";
 import { vp, HE } from "../905/967587";
 import { V as _$$V } from "../1250/329133";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { E as _$$E3 } from "../1556/957507";
 import { w as _$$w } from "../figma_app/883622";
 import { a as _$$a } from "../1250/599462";
@@ -42,7 +42,7 @@ export function $$G1() {
   let n = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let o = useSelector(e => e.user);
   let s = useSelector(e => e.plans);
-  let l = S2();
+  let l = useTeamPlanFeatures();
   if (useEffect(() => {
     e(hr({
       loadedPlans: s
@@ -115,7 +115,7 @@ function W({
     }
   };
   Tb(manager);
-  let j = S2();
+  let j = useTeamPlanFeatures();
   let {
     isDraftsToMovePlan,
     dtmMigrationCompleted,
@@ -123,7 +123,7 @@ function W({
     dtmMigrationPlanName,
     dtmPlanParentId,
     dtmPlanParentType
-  } = _$$V(oA(j.data) || void 0);
+  } = _$$V(getResourceDataOrFallback(j.data) || void 0);
   let L = !isDraftsToMovePlan && dtmMigrationCompleted && getFeatureFlags().dtm_deprecation_post_migration_onboarding;
   return jsxs(bL, {
     manager: T,
@@ -199,7 +199,7 @@ function z({
   let v = e => {
     onChange(e);
   };
-  let T = S2();
+  let T = useTeamPlanFeatures();
   let {
     isDraftsToMovePlan,
     dtmMigrationCompleted,
@@ -207,7 +207,7 @@ function z({
     dtmMigrationPlanName,
     dtmPlanParentId,
     dtmPlanParentType
-  } = _$$V(oA(T.data) || void 0);
+  } = _$$V(getResourceDataOrFallback(T.data) || void 0);
   let B = !isDraftsToMovePlan && dtmMigrationCompleted && getFeatureFlags().dtm_deprecation_post_migration_onboarding;
   return jsxs(Fragment, {
     children: [jsxs($, {

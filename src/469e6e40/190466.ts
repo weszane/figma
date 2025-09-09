@@ -17,7 +17,7 @@ import b from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { lb } from "../3973/538504";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
@@ -42,11 +42,11 @@ import { m as _$$m } from "../4452/688074";
 import { S as _$$S } from "../4452/304860";
 import { d as _$$d } from "../469e6e40/490120";
 import { zN } from "../figma_app/416935";
-import { Ay } from "../figma_app/930338";
+import { toTitleCase } from "../figma_app/930338";
 import { FSeatAssignmentReasonType, FOrganizationLevelType, FApprovalMethodType, FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
 import { Ib } from "../905/129884";
 import { rq as _$$rq } from "../905/351260";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { v as _$$v } from "../figma_app/899624";
 import { tb } from "../905/848667";
 import { II } from "../figma_app/11182";
@@ -55,14 +55,14 @@ import { hideModal } from "../905/156213";
 import { C3, UV } from "../figma_app/297957";
 import { j6 } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { x as _$$x } from "../469e6e40/446220";
 import { mm, a3 } from "../figma_app/684446";
 import { MemberFlyoutInfoView } from "../figma_app/43951";
 import { k_, XO, PR, w6 } from "../figma_app/609194";
 import { QS, bC, Ad } from "../figma_app/951233";
 import { n0 } from "../figma_app/345997";
-import { RB } from "../figma_app/428858";
+import { getOrgLevelData } from "../figma_app/428858";
 import { k_ as _$$k_ } from "../1881/866163";
 import { L7 } from "../figma_app/329496";
 import { J7 } from "../figma_app/650409";
@@ -379,7 +379,7 @@ function eU(e) {
     handle: n,
     imgUrl: a,
     name: s,
-    currentSeatType: e.orgUser.active_seat_type?.key ?? Gu.VIEW,
+    currentSeatType: e.orgUser.active_seat_type?.key ?? ViewAccessTypeEnum.VIEW,
     id: e.orgUser.id,
     userId: e.orgUser.user_id,
     eccUpgradingLocked: !!e.orgUser.ecc_upgrading_locked,
@@ -395,12 +395,12 @@ function eU(e) {
     handle: n,
     imgUrl: a,
     name: s,
-    currentSeatType: e.member.team_user?.active_seat_type?.key ?? Gu.VIEW,
+    currentSeatType: e.member.team_user?.active_seat_type?.key ?? ViewAccessTypeEnum.VIEW,
     currentSeatBillingInterval: e.billingInterval,
     id: e.member.team_user?.id ?? "",
     userId: e.member.team_user?.user_id ?? "",
     eccUpgradingLocked: !!e.member.ecc_upgrading_locked,
-    eccDomain: (t = e.member, Ay(zN(t.email ?? "") ?? "")),
+    eccDomain: (t = e.member, toTitleCase(zN(t.email ?? "") ?? "")),
     scimLocked: !1,
     lastActiveAt: e.member.last_active ? new Date(1e3 * e.member.last_active) : void 0,
     upgradeReason: e.member.upgrade_reason,
@@ -544,7 +544,7 @@ function eq(e) {
   });
 }
 function e$(e) {
-  if (eU(e).currentSeatType === Gu.VIEW || e.planType !== FOrganizationLevelType.TEAM || !e.billingInterval) return null;
+  if (eU(e).currentSeatType === ViewAccessTypeEnum.VIEW || e.planType !== FOrganizationLevelType.TEAM || !e.billingInterval) return null;
   let t = null;
   switch (e.billingInterval) {
     case BillingCycle.MONTH:
@@ -585,7 +585,7 @@ let eB = {
 };
 function eG(e) {
   let t = useDispatch();
-  if (eU(e).currentSeatType === Gu.VIEW) return null;
+  if (eU(e).currentSeatType === ViewAccessTypeEnum.VIEW) return null;
   let a = [];
   let r = null;
   let l = null;
@@ -707,7 +707,7 @@ function ez(e) {
   });
 }
 function eV(e) {
-  if (eU(e).currentSeatType === Gu.VIEW) return null;
+  if (eU(e).currentSeatType === ViewAccessTypeEnum.VIEW) return null;
   let t = [];
   if (e.planType === FOrganizationLevelType.TEAM) {
     if (e.member.upgrade_method) return null;
@@ -880,7 +880,7 @@ function eK(e) {
         emails: [n],
         resourceType: FResourceCategoryType.TEAM,
         resourceIdOrKey: e.teamId,
-        level: e6.ADMIN,
+        level: AccessLevelEnum.ADMIN,
         source: e.source,
         teamId: e.teamId
       }));
@@ -900,7 +900,7 @@ function eK(e) {
       };
       break;
     case FOrganizationLevelType.TEAM:
-      t = () => e.onRemoveMemberOrChangeMemberPermission(e6.ADMIN);
+      t = () => e.onRemoveMemberOrChangeMemberPermission(AccessLevelEnum.ADMIN);
       break;
     default:
       throwTypeError(e);
@@ -915,7 +915,7 @@ function eK(e) {
       };
       break;
     case FOrganizationLevelType.TEAM:
-      t = () => e.onRemoveMemberOrChangeMemberPermission(e6.EDITOR);
+      t = () => e.onRemoveMemberOrChangeMemberPermission(AccessLevelEnum.EDITOR);
       break;
     default:
       throwTypeError(e);
@@ -1227,7 +1227,7 @@ export let $$e50 = {
         default:
           throwTypeError(e);
       }
-      let n = Rs(MemberFlyoutInfoView, {
+      let n = useSubscription(MemberFlyoutInfoView, {
         ...t,
         planType: e.planType
       }).transform(t => {
@@ -1239,14 +1239,14 @@ export let $$e50 = {
           orgUserId: a?.orgUserId,
           orgUser: a?.orgUser,
           planUserMembershipRecord: a?.orgUser?.planUserMembershipRecord,
-          jobTitle: RB(e.planType, {
+          jobTitle: getOrgLevelData(e.planType, {
             team: a?.teamUser?.user.profile?.jobTitle,
             org: a?.orgUser?.user.profile?.jobTitle
           }) ?? null
         };
       });
       useLayoutEffect(() => {
-        "loaded" === n.status && "loaded" === n.status && RB(e.planType, {
+        "loaded" === n.status && "loaded" === n.status && getOrgLevelData(e.planType, {
           team: n.data.teamUserId && !n.data.teamUser,
           org: n.data.orgUserId && !n.data.orgUser
         }) && a();

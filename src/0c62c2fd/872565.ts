@@ -7,10 +7,10 @@ import l from "../vendor/805353";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA, Xm, gB } from "../905/723791";
-import { gY } from "../figma_app/566371";
-import { oY } from "../905/485103";
+import { getAtomMutate } from "../figma_app/566371";
+import { useWebLoggerTimerEffect } from "../905/485103";
 import { ms, c$, wv } from "../figma_app/236327";
 import { ks, $$, nR, vd } from "../figma_app/637027";
 import { p as _$$p } from "../905/991924";
@@ -22,7 +22,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { SX, mq } from "../figma_app/199513";
-import { Ws } from "../905/628874";
+import { convertTeamToRaw } from "../905/628874";
 import { Ah, EE } from "../905/316062";
 import { f as _$$f } from "../0c62c2fd/277163";
 import { sf, j7 } from "../905/929976";
@@ -33,8 +33,8 @@ import { fu } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
 import { FFileType, FAccessLevelType, FPlanFeatureType, FPaymentHealthStatusType, FPlanRestrictionType } from "../figma_app/191312";
 import { Um, aU } from "../figma_app/349248";
-import { Wd } from "../figma_app/35887";
-import { e6 as _$$e } from "../905/557142";
+import { AccountTypeEnum } from "../figma_app/35887";
+import { AccessLevelEnum } from "../905/557142";
 import { VA, gj, CI, jd } from "../figma_app/528509";
 import { z as _$$z2 } from "../905/875422";
 import { MoveFileCurrentProject, AccessibleFoldersV2, TeamFileCountsByTeamId } from "../figma_app/43951";
@@ -54,7 +54,7 @@ import { XHR } from "../905/910117";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { X0 } from "../905/784221";
 import { debounce } from "../905/915765";
-import { VI, d6 } from "../figma_app/687776";
+import { getFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { createOptimistThunk } from "../905/350402";
 import { S$, XX } from "../figma_app/345997";
 import { KH } from "../905/81982";
@@ -84,7 +84,7 @@ function R(e) {
     }), t(SX({
       where: Ah.FolderListView,
       team: {
-        ...Ws(e.team),
+        ...convertTeamToRaw(e.team),
         canEdit: e.team.canEdit
       }
     })));
@@ -212,7 +212,7 @@ let ej = (e, t = !1) => {
       teamId: t.teamId,
       id: t.id,
       subscription: !!t.subscription,
-      ...VI(t)
+      ...getFileCreationPermissions(t)
     };
     return r ? {
       folder: a,
@@ -363,7 +363,7 @@ let eS = async (e, t, r, a, s = !1, i = !1, o, l, d, c) => {
         throwTypeError(t);
     }
   })();
-  let x = new Set(Object.values(u).flat().filter(e => h.every(t => !!t && d6(e, t))).map(e => e.id));
+  let x = new Set(Object.values(u).flat().filter(e => h.every(t => !!t && canCreateFileType(e, t))).map(e => e.id));
   let b = g.filter(e => {
     if (e === iK) return null === u || u[e].length > 0;
     let t = a.teams;
@@ -519,12 +519,12 @@ export function $$e83(e) {
   let u = useSelector(e => e.selectedView);
   let m = $$e57(e);
   let f = _$$R();
-  let h = Rs(MoveFileCurrentProject, {
+  let h = useSubscription(MoveFileCurrentProject, {
     projectId: m
   }, {
     enabled: !!m
   });
-  let x = Rs(AccessibleFoldersV2, {
+  let x = useSubscription(AccessibleFoldersV2, {
     orgId: t
   });
   "errors" === x.status && (console.error("Loading AccessibleFolders from LiveGraph: "), console.error(x.errors));
@@ -555,7 +555,7 @@ export function $$e83(e) {
         o[e.orgId] = {
           [e.userId]: {
             ...e,
-            type: Wd.ORG_USER,
+            type: AccountTypeEnum.ORG_USER,
             account_type: e.accountType,
             design_paid_status: e.accountType,
             id: e.id,
@@ -596,9 +596,9 @@ export function $$e83(e) {
         } = e.team;
         i[id] = {
           ...e.team,
-          canView: e.level >= _$$e.VIEWER,
-          canEdit: e.level >= _$$e.EDITOR,
-          canAdmin: e.level >= _$$e.ADMIN,
+          canView: e.level >= AccessLevelEnum.VIEWER,
+          canEdit: e.level >= AccessLevelEnum.EDITOR,
+          canAdmin: e.level >= AccessLevelEnum.ADMIN,
           currentTeamUser: e.team.currentTeamUser,
           licenseGroup: null
         };
@@ -722,7 +722,7 @@ export function $$e83(e) {
     let t = v.userResources.teams[e];
     E.data[e] && (t.restrictionsList = E.data[e]);
   }
-  oY("loaded" === x.status, e => {
+  useWebLoggerTimerEffect("loaded" === x.status, e => {
     trackEventAnalytics("file_move_modal_latency", {
       latency_ms: e
     }, {
@@ -807,7 +807,7 @@ export class $$e32 extends PureComponent {
               this.props.dispatch(SX({
                 where: this.props.modalId.type,
                 team: {
-                  ...Ws(a),
+                  ...convertTeamToRaw(a),
                   canEdit: !0
                 }
               }));
@@ -1310,7 +1310,7 @@ export function $$e95(e) {
       onMouseOut: a
     }], [e, r, a]);
   })();
-  let l = Rs(TeamFileCountsByTeamId, {
+  let l = useSubscription(TeamFileCountsByTeamId, {
     teamId: team?.id ?? ""
   }, {
     enabled: !!team?.id
@@ -1439,7 +1439,7 @@ export function $$tt6(e) {
 }
 function tr(e) {
   let t = useDispatch();
-  let r = gY(mq);
+  let r = getAtomMutate(mq);
   let s = (a, s) => {
     trackEventAnalytics("Rename Folder", {
       trackingContext: e.trackingContextName

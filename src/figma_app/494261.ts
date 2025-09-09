@@ -10,7 +10,7 @@ import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
 import { yJ, F6 } from "../905/395917";
 import { vr } from "../figma_app/475472";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../figma_app/52714";
 import { Eh } from "../figma_app/617654";
 import { bE } from "../905/98702";
@@ -39,7 +39,7 @@ let $$T7 = createOptimistThunk(async (e, t) => {
     let n = r.meta;
     n.status === _$$c.APPROVED ? e.dispatch(vr({
       teamId: n.team_id
-    })) : t.level === e6.EDITOR && c === e6.VIEWER ? e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_edit_files_in_this_team"))) : e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_join_this_team")));
+    })) : t.level === AccessLevelEnum.EDITOR && c === AccessLevelEnum.VIEWER ? e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_edit_files_in_this_team"))) : e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_join_this_team")));
   }).catch(t => {
     e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });

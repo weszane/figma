@@ -15,7 +15,7 @@ import f, { FileVersions, FileCanEdit } from "../figma_app/43951";
 import { wY } from "../905/753206";
 import A, { maybeCreateSavepoint } from "../905/294113";
 import { FEditorType } from "../figma_app/53721";
-import { Wo, Kn } from "../905/535806";
+import { BranchType, SourceDirection } from "../905/535806";
 import { e0 } from "../905/696396";
 import { S as _$$S } from "../figma_app/787550";
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -32,8 +32,8 @@ import { h as _$$h } from "../905/207101";
 import { ov, S2 } from "../905/300250";
 import { rY } from "../905/985490";
 import { zZ, n6 } from "../905/585030";
-import { cb } from "../905/760074";
-import { nX } from "../905/617744";
+import { handleModalError } from "../905/760074";
+import { currentSelectionAtom } from "../905/617744";
 import { selectUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ue, tF } from "../905/61300";
@@ -44,7 +44,7 @@ import { $l } from "../905/721248";
 import { jS } from "../figma_app/557024";
 import { lQ } from "../905/934246";
 import J from "../vendor/338009";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s2 } from "../905/573154";
@@ -54,8 +54,8 @@ import { Dd } from "../905/519092";
 var P = N;
 var D = O;
 let Y = {
-  [Wo.MAIN]: () => renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_main"),
-  [Wo.BRANCH]: () => renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_branch")
+  [BranchType.MAIN]: () => renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_main"),
+  [BranchType.BRANCH]: () => renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_branch")
 };
 function q(e) {
   return renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_label", {
@@ -71,8 +71,8 @@ let $ = registerModal(function (e) {
     sourceKey
   } = e;
   let r = useDispatch();
-  let [a, l] = useState(Wo.MAIN);
-  let [d, c] = useAtomValueAndSetter(nX);
+  let [a, l] = useState(BranchType.MAIN);
+  let [d, c] = useAtomValueAndSetter(currentSelectionAtom);
   let u = d ?? e.direction;
   _$$h(() => (c(e.direction), () => c(null)));
   let p = useSelector(e => e.fileVersion);
@@ -104,7 +104,7 @@ let $ = registerModal(function (e) {
         O(e);
         I(!1);
       } catch (e) {
-        cb(e);
+        handleModalError(e);
         r(VisualBellActions.enqueue({
           message: "An error occurred while calculating conflicts",
           error: !0
@@ -134,7 +134,7 @@ let $ = registerModal(function (e) {
       reason: "force_merge_modal_closed"
     }));
   };
-  G && (cb(G), console.error(G), r(VisualBellActions.enqueue({
+  G && (handleModalError(G), console.error(G), r(VisualBellActions.enqueue({
     message: getI18nString("collaboration.branching.error_generic"),
     error: !0
   })), r(ov({
@@ -149,7 +149,7 @@ let $ = registerModal(function (e) {
     reason: "useDiffs_failed_with_error",
     error: G.message
   })));
-  let J = u === Kn.TO_SOURCE ? _displayGroups : displayGroups;
+  let J = u === SourceDirection.TO_SOURCE ? _displayGroups : displayGroups;
   if (null === J || null === N) return jsx(d_, {
     onHide: Q,
     children: jsx("div", {
@@ -160,7 +160,7 @@ let $ = registerModal(function (e) {
       })
     })
   });
-  if (u === Kn.TO_SOURCE) {
+  if (u === SourceDirection.TO_SOURCE) {
     let e = N.isMergeRequired ?? !1;
     return jsxs(yX, {
       confirmationTitle: renderI18nText("collaboration.branching_force.merge_to_source_title"),
@@ -189,7 +189,7 @@ let $ = registerModal(function (e) {
       })]
     });
   }
-  return u === Kn.FROM_SOURCE ? jsxs(yX, {
+  return u === SourceDirection.FROM_SOURCE ? jsxs(yX, {
     confirmationTitle: renderI18nText("collaboration.branching_force.merge_from_source_title"),
     destructive: !0,
     confirmText: renderI18nText("collaboration.branching_force.merge_from_source_confirm"),
@@ -200,9 +200,9 @@ let $ = registerModal(function (e) {
         ...e,
         [t.id]: a
       }), {}) ?? null;
-      let [o, l] = D()(e, e => n[e.id] === Wo.BRANCH);
-      let d = P()(o, e => ue(e, Wo.BRANCH));
-      let c = P()(l, e => ue(e, Wo.MAIN));
+      let [o, l] = D()(e, e => n[e.id] === BranchType.BRANCH);
+      let d = P()(o, e => ue(e, BranchType.BRANCH));
+      let c = P()(l, e => ue(e, BranchType.MAIN));
       let p = tF(_diffInfo.displayGroups || [], e, N.identicalChunkGUIDs);
       n6(c, d, N.nonConflictingSourceChunkGUIDs, N.nonConflictingBranchChunkGUIDs, N.identicalChunkGUIDs);
       r(S2({
@@ -230,7 +230,7 @@ let $ = registerModal(function (e) {
       children: renderI18nText("collaboration.branching_force.merge_from_source_description")
     }), jsxs(_$$b, {
       value: a,
-      onChange: e => l(_$$K(Wo, e) ?? Wo.MAIN),
+      onChange: e => l(_$$K(BranchType, e) ?? BranchType.MAIN),
       legend: jsx(_$$s, {
         children: jsx("span", {
           className: "branch_force_merge_modal--conflictChoiceRadioLegend--onrEN",
@@ -238,17 +238,17 @@ let $ = registerModal(function (e) {
         })
       }),
       children: [jsx(_$$c, {
-        value: Wo.MAIN,
+        value: BranchType.MAIN,
         label: jsx(Label, {
           children: jsx(q, {
-            value: Wo.MAIN
+            value: BranchType.MAIN
           })
         })
       }), jsx(_$$c, {
-        value: Wo.BRANCH,
+        value: BranchType.BRANCH,
         label: jsx(Label, {
           children: jsx(q, {
-            value: Wo.BRANCH
+            value: BranchType.BRANCH
           })
         })
       })]
@@ -262,7 +262,7 @@ let el = registerModal(function ({
   onCheckpointSelected: i
 }) {
   let n = useDispatch();
-  let r = Rs(FileVersions, {
+  let r = useSubscription(FileVersions, {
     fileKey: e
   });
   let [a, o] = useState(void 0);
@@ -490,7 +490,7 @@ let $$ep3 = createOptimistThunk((e, {
     force: n,
     sourceCheckpointKey: a,
     unreadCommentCount: s
-  })), t === Kn.FROM_SOURCE && trackEventAnalytics("Branch Update From Main Clicked", {
+  })), t === SourceDirection.FROM_SOURCE && trackEventAnalytics("Branch Update From Main Clicked", {
     trackingContext: i,
     fileKey: l.key,
     fileRepoId: l.file_repo_id,
@@ -508,7 +508,7 @@ let $$em1 = createOptimistThunk(e => {
       currentFileKey: openFile.key,
       onCheckpointSelected: t => {
         e.dispatch($$ep3({
-          direction: Kn.FROM_SOURCE,
+          direction: SourceDirection.FROM_SOURCE,
           trackingContextName: e0.BRANCHING_UPDATE_FROM_VERSION_MODAL,
           sourceCheckpointKey: "latest" === t ? void 0 : t
         }));

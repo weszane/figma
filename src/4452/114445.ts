@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { k as _$$k } from "../figma_app/618031";
@@ -12,11 +12,11 @@ import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
 import { I1 } from "../figma_app/990058";
 import { m$ } from "../figma_app/240735";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { d as _$$d } from "../figma_app/603561";
 import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
 import { OrgUsersByIdView } from "../figma_app/43951";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { lR, e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -24,7 +24,7 @@ import { Zu } from "../4452/396452";
 import { u as _$$u } from "../905/16237";
 import { c as _$$c } from "../905/370443";
 import { trackEventAnalytics } from "../905/449184";
-import { Zr, Ay } from "../figma_app/930338";
+import { capitalize, toTitleCase } from "../figma_app/930338";
 import { Ak } from "../905/986103";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { G as _$$G } from "../905/750789";
@@ -92,7 +92,7 @@ function G({
   planUser: n
 }) {
   let i = useDispatch();
-  let l = S2().unwrapOr(null);
+  let l = useTeamPlanFeatures().unwrapOr(null);
   let o = t.reason === D3.AVAILABLE_SEAT;
   let d = o ? jsx(_$$y, {}) : jsx(_$$S2, {});
   let c = l?.key.type === FOrganizationLevelType.ORG;
@@ -165,7 +165,7 @@ function $({
 }) {
   let i;
   let l = useDispatch();
-  let o = Zr(Ak(e.createdAt));
+  let o = capitalize(Ak(e.createdAt));
   let d = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.email"),
     value: e.email,
@@ -178,7 +178,7 @@ function $({
   });
   let c = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.role"),
-    value: e.jobTitle && Ay(e.jobTitle)
+    value: e.jobTitle && toTitleCase(e.jobTitle)
   });
   let u = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.request_sent"),
@@ -188,7 +188,7 @@ function $({
     label: getI18nString("admin_dashboard.request_flyout.body.current_seat"),
     value: n ? JT(n) : "-"
   });
-  let _ = Zr(Ak(t));
+  let _ = capitalize(Ak(t));
   let p = jsx(V, {
     label: getI18nString("admin_dashboard.request_flyout.body.last_active"),
     value: t ? _ : "-"
@@ -400,7 +400,7 @@ let er = {
     let E;
     let S;
     let T = useDispatch();
-    let A = S2().unwrapOr(null);
+    let A = useTeamPlanFeatures().unwrapOr(null);
     if (!A) throw Error("Missing Plan.");
     let N = A.key.type === FOrganizationLevelType.ORG;
     let R = useSelector(t => {
@@ -433,7 +433,7 @@ let er = {
       A?.key.type === FOrganizationLevelType.TEAM && t();
       return () => P(null);
     }, [T, N, A?.key.parentId, A?.key.type, e?.userId]);
-    let D = Rs(OrgUsersByIdView, {
+    let D = useSubscription(OrgUsersByIdView, {
       orgId: A?.key.parentId ?? "",
       orgUserIds: L ? [L.id] : []
     }, {
@@ -448,7 +448,7 @@ let er = {
         handle: L?.user.handle ?? ""
       },
       lastActive: L?.last_seen ?? void 0,
-      currentSeat: L ? L.active_seat_type?.key ?? Gu.VIEW : void 0
+      currentSeat: L ? L.active_seat_type?.key ?? ViewAccessTypeEnum.VIEW : void 0
     } : {
       id: R?.team_user?.id ?? "",
       user: {
@@ -457,7 +457,7 @@ let er = {
         handle: R?.team_user?.user?.handle ?? ""
       },
       lastActive: R?.last_active ? new Date(1e3 * R.last_active).toISOString() : void 0,
-      currentSeat: R ? R.team_user?.active_seat_type?.key ?? Gu.VIEW : void 0
+      currentSeat: R ? R.team_user?.active_seat_type?.key ?? ViewAccessTypeEnum.VIEW : void 0
     };
     let F = !L || "loading" === D.status;
     let B = "errors" === status;

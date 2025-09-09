@@ -1,7 +1,7 @@
 import { l as _$$l } from "../905/716947";
 import { createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { z } from "../905/239603";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { P } from "../905/262370";
 let l = createRemovableAtomFamily(e => P(`recently-used-${e}s`, "key", z.object({
   type: z.literal(e),
@@ -9,7 +9,7 @@ let l = createRemovableAtomFamily(e => P(`recently-used-${e}s`, "key", z.object(
   libraryKey: z.string()
 }), {
   transform: (e, t) => {
-    let r = t(yV);
+    let r = t(openFileAtom);
     return {
       type: e.type,
       key: "LOCAL" === e.subscriptionStatus ? e.keyForPublish : e.key,

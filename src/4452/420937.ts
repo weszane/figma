@@ -10,15 +10,15 @@ import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { OL } from "../figma_app/421473";
+import { FOrganizationLevelType } from "../figma_app/421473";
 import { e0 } from "../905/696396";
 export let $$h0 = registerModal(function (e) {
   let t;
   let a = hS(e);
   let h = useDispatch();
-  let x = Xf(e.plan.key.parentId, e.plan.key.type !== OL.TEAM);
+  let x = Xf(e.plan.key.parentId, e.plan.key.type !== FOrganizationLevelType.TEAM);
   let f = useSelector(e => e.teamBilling);
-  let v = e.plan.key.type === OL.TEAM ? f.summary.currency : x.data?.currency;
+  let v = e.plan.key.type === FOrganizationLevelType.TEAM ? f.summary.currency : x.data?.currency;
   let b = () => h(hideModal());
   t = !v || e.isELA ? e.filteredRowCount !== e.numRequestsToApprove ? jsx("p", {
     children: renderI18nText(1 === e.numRequestsToApprove ? "admin_dashboard.seat_requests.approve_all_modal.body.filtered_requests.single" : "admin_dashboard.seat_requests.approve_all_modal.body.filtered_requests.multiple", {

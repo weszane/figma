@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { s$ } from "../figma_app/361035";
 import { JT } from "../figma_app/847597";
 import { jv } from "../905/84777";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { N_, Ye } from "../905/332483";
 import { _w } from "../figma_app/217457";
 import { vr } from "../figma_app/514043";
@@ -38,8 +38,8 @@ export function $$m0({
     });
     let c = N_.dict(e => t[e]?.key);
     return Ye.dict(e => {
-      let t = e === Gu.VIEW ? getI18nString("checkout.free") : o[e];
-      let i = e === Gu.VIEW ? "" : c[e];
+      let t = e === ViewAccessTypeEnum.VIEW ? getI18nString("checkout.free") : o[e];
+      let i = e === ViewAccessTypeEnum.VIEW ? "" : c[e];
       if (!(isNullish(i) || isNullish(t))) return {
         id: e,
         displayName: JT(e),

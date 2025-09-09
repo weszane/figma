@@ -5,7 +5,7 @@ import { AC } from "../figma_app/777551";
 import { Kc, Fh } from "../905/448740";
 import { mr } from "../figma_app/45218";
 import { PN } from "../905/54385";
-import { D6 } from "../figma_app/175992";
+import { SourceType } from "../figma_app/175992";
 export let $$u1 = {
   displayName: "PriceField",
   fetchInitialValue: ({
@@ -138,7 +138,7 @@ export function $$p2(e) {
       user
     }
   });
-  user.cmty_seller_capabilities?.includes(D6.FILE) || t.push({
+  user.cmty_seller_capabilities?.includes(SourceType.FILE) || t.push({
     key: "USER_CANNOT_SELL_RESOURCE",
     data: {
       user
@@ -178,7 +178,7 @@ export function $$m3(e) {
       user
     }
   });
-  user.cmty_seller_capabilities?.includes(D6.EXTENSION) || t.push({
+  user.cmty_seller_capabilities?.includes(SourceType.EXTENSION) || t.push({
     key: "USER_CANNOT_SELL_RESOURCE",
     data: {
       user

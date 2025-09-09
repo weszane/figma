@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { oA } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6, lR } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
@@ -11,7 +11,7 @@ import { tc } from "../905/15667";
 import { Xt } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { yF } from "../figma_app/386952";
 import { ViewerRestrictedDraftAccessLog } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
@@ -65,12 +65,12 @@ export function $$N0({
 }) {
   let n = Bj(500);
   let a = m0();
-  let l = Rs(ViewerRestrictedDraftAccessLog, {
+  let l = useSubscription(ViewerRestrictedDraftAccessLog, {
     fileKey: e.key,
     orgId: e.parentOrgId || null,
     teamId: e.teamId || null
   });
-  let d = wR(e.editorType);
+  let d = getProductAccessTypeOrDefault(e.editorType);
   let {
     handleUpgrade,
     getUpgradeEligibility
@@ -79,7 +79,7 @@ export function $$N0({
   });
   let p = useAtomWithSubscription(yF);
   if (p && E.includes(p) || !n || "loaded" !== l.status) return null;
-  let h = oA(l.data.viewerRestrictedDraftAccessLog);
+  let h = getResourceDataOrFallback(l.data.viewerRestrictedDraftAccessLog);
   if (!h || a || !e.parentOrgId && !e.teamId || !l.data.file?.isDraftFile) return null;
   let y = l.data.currentUser?.baseOrgUser;
   let C = l.data.currentUser?.teamUser;

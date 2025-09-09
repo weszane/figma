@@ -12,12 +12,12 @@ import { Dm } from "../figma_app/8833";
 import { F as _$$F } from "../905/224";
 import { HZ } from "../figma_app/186343";
 import { p8 } from "../figma_app/722362";
-import { q5, yV } from "../figma_app/516028";
+import { selectCurrentFile, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { J9 } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { Q } from "../figma_app/320600";
 import { hZ } from "../0c62c2fd/646972";
 import { cT } from "../figma_app/32128";
@@ -36,7 +36,7 @@ export function $$O0({
 }) {
   let R = useDispatch();
   let D = useSelector(e => e.mirror.appModel);
-  let M = q5();
+  let M = selectCurrentFile();
   let P = p8("pagesList");
   let F = HZ();
   let B = _$$F.useShouldHideStarterCtaForOpenFile();
@@ -120,7 +120,7 @@ export function $$O0({
           data: {
             team: r,
             resource: vL.PAGE,
-            action: ZN.DUPLICATE_PAGE,
+            action: fileActionEnum.DUPLICATE_PAGE,
             editorType: t.editorType,
             currentPlan: _$$F.Plan.STARTER,
             upsellPlan: _$$F.Plan.PRO,
@@ -219,7 +219,7 @@ export function $$O0({
       disabled: a.size <= o
     }, ...(t => {
       if (!_$$HZ()) return [];
-      let i = atomStoreManager.get(yV);
+      let i = atomStoreManager.get(openFileAtom);
       return i && i.editorType === FFileType.WHITEBOARD ? [{
         separator: !0
       }, {

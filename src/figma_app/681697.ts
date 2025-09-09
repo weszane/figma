@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
-import { nt, d6 } from "../figma_app/687776";
+import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { createOptimistThunk } from "../905/350402";
 import { le } from "../905/904854";
 import { F } from "../905/642505";
@@ -27,7 +27,7 @@ export function $$y1(e) {
 export function $$b0() {
   let e = useSelector(e => "folder" !== e.selectedView.view ? null : e.folders[e.selectedView.folderId] ?? null);
   let t = e?.id;
-  let r = nt(t);
+  let r = useProjectFileCreationPermissions(t);
   let a = useSelector(e => e.selectedView.view);
   let l = FC();
   return useMemo(() => "recentsAndSharing" === a ? resourceUtils.loaded(!0) : "folder" === a ? !e || ZZ(e, l) ? resourceUtils.loaded(!1) : r.transform(e => !!e && $$I4(e)) : resourceUtils.loaded(!1), [r, l, e, a]);
@@ -42,7 +42,7 @@ export function $$T3(e, t, r) {
   });
 }
 export function $$I4(e) {
-  return Mk.some(t => d6(e, t));
+  return Mk.some(t => canCreateFileType(e, t));
 }
 export const B2 = $$b0;
 export const al = $$y1;

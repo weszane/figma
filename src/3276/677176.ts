@@ -10,7 +10,7 @@ import { rN } from "../figma_app/12220";
 import { MP } from "../figma_app/936061";
 import { Z } from "../905/104740";
 import { Z0, $$ } from "../figma_app/62612";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { b7 } from "../905/380385";
@@ -20,7 +20,7 @@ import { XC } from "../905/512783";
 import { c4 } from "../figma_app/70421";
 export function $$w2(e) {
   let t = getUserId();
-  let n = q5()?.canEdit;
+  let n = selectCurrentFile()?.canEdit;
   return useCallback(o => !!(!0 !== e && b7(o.sidebarItemType)) && (!!n || o.comments[0].user_id === t), [e, t, n]);
 }
 function j(e, t) {

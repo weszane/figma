@@ -11,13 +11,13 @@ import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { BrowserInfo } from "../figma_app/778880";
 import { parseAndNormalizeQuery, parseQuery, serializeQuery } from "../905/634134";
-import { sy } from "../figma_app/930338";
+import { encodeUri } from "../figma_app/930338";
 import { isEvalViewPathCheck } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { c5 } from "../905/93909";
 import { h as _$$h } from "../905/662353";
-import { L8, gN, At } from "../905/760074";
+import { getRepoById, buildUrlPath, getDisplayName } from "../905/760074";
 import { cF } from "../figma_app/527873";
 import { EO } from "../905/691205";
 import { Zt } from "../figma_app/617727";
@@ -26,7 +26,7 @@ import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/32757
 import { Vv } from "../905/32091";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
-import { f0 } from "../figma_app/707808";
+import { AppView } from "../figma_app/707808";
 import { eE, Hz } from "../905/366346";
 export function $$O0(e) {
   return "fullscreen" === e.view && e.editorType === FEditorType.Whiteboard;
@@ -108,7 +108,7 @@ export class $$D1 {
         timeoutOverride: 1 / 0,
         onDismiss: lQ
       }));
-      s.fullscreen && (d.figmakeView = f0.FULLSCREEN_PREVIEW);
+      s.fullscreen && (d.figmakeView = AppView.FULLSCREEN_PREVIEW);
       return d;
     }
     if ("jam" === t[1]) {
@@ -146,7 +146,7 @@ export class $$D1 {
     let n = e.fileKey && fileByKey ? fileByKey[e.fileKey] : void 0;
     return {
       file: n,
-      repo: n ? L8(n, repos) : void 0
+      repo: n ? getRepoById(n, repos) : void 0
     };
   }
   selectedViewToPath(e, t) {
@@ -154,7 +154,7 @@ export class $$D1 {
       let i;
       if (e.fileKey === Zt) return isEvalViewPathCheck() ? `/test/eval/view${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
       let n = this.selectedViewName(e, t);
-      let a = n ? sy(n) : "";
+      let a = n ? encodeUri(n) : "";
       let p = {};
       let h = e.fileKey || "new";
       let A = "design";
@@ -181,7 +181,7 @@ export class $$D1 {
         file,
         repo
       } = t.resources || this.DEPRECATED_getDefaultResources(e);
-      if (file ? i = gN(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && isValidSessionLocalID(parseSessionLocalID(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId))) try {
+      if (file ? i = buildUrlPath(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && isValidSessionLocalID(parseSessionLocalID(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId))) try {
         let t = getSingletonSceneGraph().get(e.nodeId)?.type;
         t && ["CANVAS", "DOCUMENT"].includes(t || "") && (p.p = "f");
       } catch (e) {
@@ -195,7 +195,7 @@ export class $$D1 {
       e.teamToMoveFileToOnNavigate && (p.teamToMoveFileToOnNavigate = e.teamToMoveFileToOnNavigate);
       getFeatureFlags().dakota && e.cmsItemId && (p["cms-item-id"] = e.cmsItemId);
       let E = _$$b(t.sharingAttributionContextKey, _$$d.BROWSER_ADDRESS_BAR);
-      if (E && (p.t = E), e.figmakeView === f0.FULLSCREEN_PREVIEW && (p.fullscreen = "1"), desktopAPIInstance) {
+      if (E && (p.t = E), e.figmakeView === AppView.FULLSCREEN_PREVIEW && (p.fullscreen = "1"), desktopAPIInstance) {
         let e = atomStoreManager.get(_$$h);
         null != e && (p.localFileKey = e);
       }
@@ -208,7 +208,7 @@ export class $$D1 {
     return null;
   }
   selectedViewNameHelper(e, t) {
-    return `${t ? At(e, t) : e.name}`;
+    return `${t ? getDisplayName(e, t) : e.name}`;
   }
   selectedViewName(e, t) {
     if ("fullscreen" === e.view) {

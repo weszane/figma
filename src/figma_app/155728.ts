@@ -7,19 +7,19 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import u from "../vendor/260986";
-import { Rs, ap } from "../figma_app/288654";
+import { useSubscription, useSubscriptionAnalytics } from "../figma_app/288654";
 import { gB, oA } from "../905/723791";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
-import { LP } from "../905/760074";
-import { q5 } from "../figma_app/516028";
+import { matchesLibraryKey } from "../905/760074";
+import { selectCurrentFile } from "../figma_app/516028";
 import { LibraryPresetSubscriptionsV2, SubscribedLibrariesForFile, SubscribedLibrariesForFigJamFile, SubscribedLibrariesForSlidesFile, SubscribedLibrariesForBuzzFile } from "../figma_app/43951";
 import { Nn } from "../figma_app/177636";
 import { f as _$$f } from "../figma_app/252485";
 import { M } from "../figma_app/155411";
 import { T9 } from "../figma_app/528509";
-import { X$, EV } from "../figma_app/465071";
+import { useCurrentPublicPlan, useIsProOrStudentPlan } from "../figma_app/465071";
 var p = u;
 var $$x1 = (e => (e.COMMUNITY = "community", e.ORGANIZATION = "organization", e.WORKSPACE = "workspace", e.TEAM = "team", e.FILE = "file", e.USER = "user", e))($$x1 || {});
 let N = createContext(null);
@@ -95,7 +95,7 @@ export function $$P7() {
 export function $$D0({
   children: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let r = !!t?.teamId;
   let a = T9(t?.project);
   useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
@@ -117,16 +117,16 @@ export function $$D0({
     orgId: m || null,
     group: M() ?? null
   }), [c, u, p, m]);
-  let R = Rs(SubscribedLibrariesForFile, O, {
+  let R = useSubscription(SubscribedLibrariesForFile, O, {
     enabled: !!t && s && "design" === w
   });
-  let L = Rs(SubscribedLibrariesForFigJamFile, O, {
+  let L = useSubscription(SubscribedLibrariesForFigJamFile, O, {
     enabled: !!t && s && "whiteboard" === w
   });
-  let P = Rs(SubscribedLibrariesForSlidesFile, O, {
+  let P = useSubscription(SubscribedLibrariesForSlidesFile, O, {
     enabled: !!t && s && "slides" === w
   });
-  let D = Rs(SubscribedLibrariesForBuzzFile, O, {
+  let D = useSubscription(SubscribedLibrariesForBuzzFile, O, {
     enabled: !!t && s && "cooper" === w
   });
   let F = useMemo(() => {
@@ -249,8 +249,8 @@ export function $$D0({
   let j = function (e, t, r) {
     let n = n1();
     let a = yy()?.id;
-    let s = X$("useTransformSubscription");
-    let o = EV(s).unwrapOr(!1);
+    let s = useCurrentPublicPlan("useTransformSubscription");
+    let o = useIsProOrStudentPlan(s).unwrapOr(!1);
     return useMemo(() => $$M5(e, t, r, n, a ?? null, o), [e, t, r, n, a, o]);
   }(F, r, a);
   let U = useMemo(() => ({
@@ -274,7 +274,7 @@ export function $$D0({
 function k({
   subscription: e
 }) {
-  ap(e, "Subscribed Libraries Subscription Load Time", {
+  useSubscriptionAnalytics(e, "Subscribed Libraries Subscription Load Time", {
     numLibraries: "loaded" === e.status ? e.data.length : 0
   });
   return null;
@@ -313,7 +313,7 @@ export function $$M5(e, t, r, n, i, o) {
     }(l)?.map(e => e.filter(e => n || !e.communityLibrary).filter(B).map(e => $$F2(e, "team"))) ?? [];
     f.push(...flatten(e));
   }
-  let y = p()(f.filter(isNotNullish), e => e.libraryKey).filter(e => !LP(l, e.libraryKey));
+  let y = p()(f.filter(isNotNullish), e => e.libraryKey).filter(e => !matchesLibraryKey(l, e.libraryKey));
   sortByPropertyWithOptions(y, "name");
   return gB(y);
 }

@@ -15,25 +15,25 @@ import { sf } from "../905/929976";
 import { sZ } from "../905/845253";
 import { g as _$$g2 } from "../905/817247";
 import { MX, EQ } from "../figma_app/684446";
-import { px, S2, j_ } from "../figma_app/465071";
+import { useTeamPlanUser, useTeamPlanFeatures, useIsOrgAdminUser } from "../figma_app/465071";
 import { ck } from "../905/952832";
 import { FRequestsStr } from "../905/384551";
 import { UserRole, GroupType } from "../905/441038";
 import { J7 } from "../figma_app/650409";
 import { o0 } from "../905/844131";
 import { ER } from "../figma_app/102449";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { F } from "../469e6e40/308608";
 import { Jt } from "../figma_app/28323";
-import { Te } from "../figma_app/765689";
+import { ProductAccessMap } from "../figma_app/765689";
 import { OrgSharedSettingView } from "../figma_app/43951";
 import { nF, lF } from "../469e6e40/68843";
 function O({
   org: e,
   isOrgAdmin: t
 }) {
-  let a = Rs(OrgSharedSettingView, {
+  let a = useSubscription(OrgSharedSettingView, {
     orgId: e.id
   });
   let r = useDispatch();
@@ -43,7 +43,7 @@ function O({
     }));
   }, [r, e.id]);
   return jsx(F, {
-    supportedLicenses: [Te.DESIGN, ...(e.figjam_disabled_at ? [] : [Te.WHITEBOARD]), Te.DEV_MODE],
+    supportedLicenses: [ProductAccessMap.DESIGN, ...(e.figjam_disabled_at ? [] : [ProductAccessMap.WHITEBOARD]), ProductAccessMap.DEV_MODE],
     configuredUpgradeRequestSetting: "loaded" === a.status && a.data.org?.orgSharedSetting?.configuredUpgradeRequestSetting.status === tT.Loaded ? a?.data?.org?.orgSharedSetting?.configuredUpgradeRequestSetting.data ?? null : null,
     planType: ps.ORG,
     planId: e.id,
@@ -60,9 +60,9 @@ export function $$D0({
     selectedView: e
   }) => e);
   let S = useSelector(e => e.avatarEditorState);
-  let N = px();
-  let I = S2();
-  let T = j_(N).unwrapOr(!1);
+  let N = useTeamPlanUser();
+  let I = useTeamPlanFeatures();
+  let T = useIsOrgAdminUser(N).unwrapOr(!1);
   let A = N.unwrapOr(null);
   let R = I.unwrapOr(null);
   let D = !!(a?.bigma_enabled && A?.fromOrgUser?.isLicenseGroupAdmin);

@@ -3,60 +3,96 @@ import { selectCurrentUser } from '../905/372672'
 import { getFeatureFlags } from '../905/601108'
 import { FileCanAccessFullDevMode, FileCanAccessFullDevModeOrgPlus, FileCanExport, FileCanUseDevModeDemoFile, FileDevModeTrialRequestPending, FileIsEligibleForDevModeTrial, FileIsInDevModeTrial } from '../figma_app/43951'
 import { getInitialOptions } from '../figma_app/169182'
-import { Rs } from '../figma_app/288654'
-import { tS } from '../figma_app/516028'
+import { useSubscription } from '../figma_app/288654'
+import { useCurrentFileKey } from '../figma_app/516028'
 
-let $$u5 = (e) => {
-  return e.openFile?.canAccessFullDevMode ?? !0
+/**
+ * Checks if the current file can access full Dev Mode.
+ * @param state - Redux state
+ * @returns boolean
+ * @originalName $$u5
+ */
+export function canAccessFullDevMode(state: any): boolean {
+  return state.openFile?.canAccessFullDevMode ?? true
 }
-let $$p0 = (e) => {
-  return e.openFile?.canAccessDevModeEntryPoint ?? !0
+
+/**
+ * Checks if the current file can access Dev Mode entry point.
+ * @param state - Redux state
+ * @returns boolean
+ * @originalName $$p0
+ */
+export function canAccessDevModeEntryPoint(state: any): boolean {
+  return state.openFile?.canAccessDevModeEntryPoint ?? true
 }
-export function $$_2() {
-  return useSelector($$u5)
+
+/**
+ * React hook to select if the file can access full Dev Mode.
+ * @returns boolean
+ * @originalName $$_2
+ */
+export function useCanAccessFullDevMode(): boolean {
+  return useSelector(canAccessFullDevMode)
 }
-export function $$h1() {
-  return useSelector($$p0)
+
+/**
+ * React hook to select if the file can access Dev Mode entry point.
+ * @returns boolean
+ * @originalName $$h1
+ */
+export function useCanAccessDevModeEntryPoint(): boolean {
+  return useSelector(canAccessDevModeEntryPoint)
 }
-export function $$m3() {
-  let e = selectCurrentUser()
-  let t = tS()
-  let r = t === getInitialOptions().dev_mode_demo_file_key
-  return !!getFeatureFlags().logged_out_dev_mode_demo_file && !!t && !e && r
+
+/**
+ * Determines if the current file is a logged out Dev Mode demo file.
+ * @returns boolean
+ * @originalName $$m3
+ */
+export function useIsLoggedOutDevModeDemoFile(): boolean {
+  const currentUser = selectCurrentUser()
+  const currentFileKey = useCurrentFileKey()
+  const isDemoFile = currentFileKey === getInitialOptions().dev_mode_demo_file_key
+  return !!getFeatureFlags().logged_out_dev_mode_demo_file && !!currentFileKey && !currentUser && isDemoFile
 }
-export function $$g6() {
-  let e = tS()
-  let t = Rs(FileCanUseDevModeDemoFile, {
-    key: e || '',
+
+/**
+ * Checks if the current file can use Dev Mode demo file.
+ * @returns boolean
+ * @originalName $$g6
+ */
+export function useCanUseDevModeDemoFile(): boolean {
+  const fileKey = useCurrentFileKey()
+  const { data } = useSubscription(FileCanUseDevModeDemoFile, {
+    key: fileKey || '',
   }, {
-    enabled: !!e,
+    enabled: !!fileKey,
   })
-  return t.data?.file && t.data.file.status !== 'error' ? t.data?.file?.data?.hasPermission ?? !1 : e === getInitialOptions().dev_mode_demo_file_key
+  if (data?.file && data.file.status !== 'error') {
+    return data?.file?.data?.hasPermission ?? false
+  }
+  return fileKey === getInitialOptions().dev_mode_demo_file_key
 }
-export function $$f4(e) {
-  Rs(FileCanAccessFullDevMode, {
-    key: e,
-  })
-  Rs(FileIsEligibleForDevModeTrial, {
-    key: e,
-  })
-  Rs(FileIsInDevModeTrial, {
-    key: e,
-  })
-  Rs(FileDevModeTrialRequestPending, {
-    key: e,
-  })
-  Rs(FileCanAccessFullDevModeOrgPlus, {
-    key: e,
-  })
-  Rs(FileCanExport, {
-    key: e,
-  })
+
+/**
+ * Subscribes to all Dev Mode related permissions for a file.
+ * @param fileKey - The file key
+ * @originalName $$f4
+ */
+export function subscribeDevModePermissions(fileKey: string): void {
+  useSubscription(FileCanAccessFullDevMode, { key: fileKey })
+  useSubscription(FileIsEligibleForDevModeTrial, { key: fileKey })
+  useSubscription(FileIsInDevModeTrial, { key: fileKey })
+  useSubscription(FileDevModeTrialRequestPending, { key: fileKey })
+  useSubscription(FileCanAccessFullDevModeOrgPlus, { key: fileKey })
+  useSubscription(FileCanExport, { key: fileKey })
 }
-export const Nc = $$p0
-export const U4 = $$h1
-export const _I = $$_2
-export const l7 = $$m3
-export const lF = $$f4
-export const tn = $$u5
-export const xo = $$g6
+
+// Exported aliases for backward compatibility and refactored names
+export const Nc = canAccessDevModeEntryPoint // $$p0
+export const U4 = useCanAccessDevModeEntryPoint // $$h1
+export const _I = useCanAccessFullDevMode // $$_2
+export const l7 = useIsLoggedOutDevModeDemoFile // $$m3
+export const lF = subscribeDevModePermissions // $$f4
+export const tn = canAccessFullDevMode // $$u5
+export const xo = useCanUseDevModeDemoFile // $$g6

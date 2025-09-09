@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { g } from "../905/370185";
 import { Q2, sD } from "../905/937198";
@@ -13,7 +13,7 @@ export function $$d0({
     reportAsSentryError: !0
   });
   let t = (e ?? "") !== "";
-  let i = Rs(HasCollectionsView, {
+  let i = useSubscription(HasCollectionsView, {
     fileKey: e ?? ""
   }, {
     enabled: t

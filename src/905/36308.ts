@@ -189,7 +189,7 @@ import { qd, YQ } from '../figma_app/257779';
 import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
 import { gn } from '../figma_app/322845';
 import { tz as _$$tz, Kx, lk, Lw, pe, Pq, rx, SV } from '../figma_app/342355';
-import { Y as _$$Y } from '../figma_app/347406';
+import { toggleFigmentDebugger } from '../figma_app/347406';
 import { c1 } from '../figma_app/357047';
 import { ce } from '../figma_app/401069';
 import { OX } from '../figma_app/407414';
@@ -198,7 +198,7 @@ import { Ay as _$$Ay2 } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
 import { xt } from '../figma_app/475303';
-import { tS as _$$tS } from '../figma_app/516028';
+import { useCurrentFileKey } from '../figma_app/516028';
 import { N5 } from '../figma_app/528509';
 import { sendBackToFilesAction } from '../figma_app/564528';
 import { zM } from '../figma_app/580736';
@@ -206,7 +206,7 @@ import { L as _$$L3 } from '../figma_app/582681';
 import { Bu, dd } from '../figma_app/604494';
 import { Dk } from '../figma_app/623293';
 import { jT } from '../figma_app/626177';
-import { ZN } from '../figma_app/630077';
+import { fileActionEnum } from '../figma_app/630077';
 import { JT } from '../figma_app/632248';
 import { PW } from '../figma_app/633080';
 import { x as _$$x, Lk } from '../figma_app/639711';
@@ -3213,7 +3213,7 @@ let iK = registerModal(e => {
 function iY(e) {
   let t = hS(e);
   let i = _$$eY();
-  let r = _$$tS();
+  let r = useCurrentFileKey();
   let a = He();
   let [s, o] = useState(0);
   let l = {
@@ -5834,7 +5834,7 @@ export function $$nN0(e) {
             team: fileMenuArgs?.openFile?.team ?? null,
             editorType: fileMenuArgs?.openFile?.editorType ?? null,
             resource: Bi.MCP,
-            action: ZN.ENABLE_MCP,
+            action: fileActionEnum.ENABLE_MCP,
             currentPlan: _$$F5.Plan.STARTER,
             upsellPlan: _$$F5.Plan.PRO,
             upsellSource: UpsellModalType.MCP_MODAL,
@@ -6995,7 +6995,7 @@ export function $$nN0(e) {
       searchOnly: !0,
       featureFlags: ['figment_debugger'],
       searchSynonyms: ['logs'],
-      callback: _$$Y
+      callback: toggleFigmentDebugger
     }, {
       action: 'debug-toggle-diagram-layout-paused',
       searchOnly: !0,

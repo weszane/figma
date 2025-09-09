@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { getI18nString } from "../905/303541";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { m0 } from "../figma_app/976749";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -20,7 +20,7 @@ export function $$y0() {
   let e = useAtomWithSubscription(PD);
   let t = useAtomWithSubscription(E6);
   let n = m0();
-  let r = _I();
+  let r = useCanAccessFullDevMode();
   let y = n && !r;
   let C = _$$e({
     overlay: hPP,

@@ -52,7 +52,7 @@ import { $n, IK } from '../905/521428';
 import { o as _$$o } from '../905/530496';
 import { globalPerfTimer } from '../905/542194';
 import { fA, m9 } from '../905/542608';
-import { cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { Q as _$$Q2 } from '../905/572508';
 import { s as _$$s } from '../905/587936';
 import { getFeatureFlags } from '../905/601108';
@@ -63,7 +63,7 @@ import { d as _$$d, Q as _$$Q } from '../905/620793';
 import { E as _$$E } from '../905/632989';
 import { $ as _$$$ } from '../905/636188';
 import { p as _$$p } from '../905/636263';
-import { oA } from '../905/663269';
+import { getResourceDataOrFallback } from '../905/663269';
 import { x as _$$x } from '../905/695363';
 import { m as _$$m } from '../905/701558';
 import { Ui } from '../905/709171';
@@ -76,7 +76,7 @@ import { G as _$$G } from '../905/750789';
 import { tH as _$$tH } from '../905/751457';
 import { er as _$$er, sz, Tp, zm } from '../905/753512';
 import { $$ei1, $$et0 } from '../905/759609';
-import { Kz } from '../905/760074';
+import { isBranchAlt } from '../905/760074';
 import { Bq } from '../905/760682';
 import { U as _$$U } from '../905/763676';
 import { w as _$$w } from '../905/770105';
@@ -104,7 +104,7 @@ import { h as _$$h3 } from '../905/994594';
 import { s as _$$s2 } from '../cssbuilder/589278';
 import { KP } from '../figma_app/12491';
 import { atom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
-import { $J, ZC } from '../figma_app/39751';
+import { useSyncedState, useLatestRef } from '../figma_app/922077';
 import { LibraryModalAssetsDataByLibraryKey, OrgTeamView } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { h as _$$h2 } from '../figma_app/58251';
@@ -118,7 +118,7 @@ import { Qk } from '../figma_app/188908';
 import { FTeamType } from '../figma_app/191312';
 import { Fl, fV } from '../figma_app/236178';
 import { Ay } from '../figma_app/272902';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { lo } from '../figma_app/297733';
 import { f9 } from '../figma_app/328188';
 import { Oe } from '../figma_app/336853';
@@ -126,12 +126,12 @@ import { _6 } from '../figma_app/386952';
 import { se } from '../figma_app/435826';
 import { assert, throwError, throwTypeError } from '../figma_app/465776';
 import { range } from '../figma_app/492908';
-import { tS as _$$tS, _G, _S, q5, yV } from '../figma_app/516028';
+import { useCurrentFileKey, useOpenFileLibraryKey, openFileLibraryKeyAtom, selectCurrentFile, openFileAtom } from '../figma_app/516028';
 import { P as _$$P2, Au } from '../figma_app/518077';
 import { e as _$$e } from '../figma_app/522702';
 import { TF } from '../figma_app/524618';
 import { MB } from '../figma_app/525558';
-import { IT as _$$IT } from '../figma_app/566371';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { P as _$$P3 } from '../figma_app/582341';
 import { lX } from '../figma_app/588397';
 import { ol } from '../figma_app/598018';
@@ -229,8 +229,8 @@ function ea({
   positionForLogging: a,
   teamPositionForLogging: s
 }) {
-  let o = !!q5()?.canEdit;
-  let l = _G() === e.library_key;
+  let o = !!selectCurrentFile()?.canEdit;
+  let l = useOpenFileLibraryKey() === e.library_key;
   let {
     debouncedSearchQuery
   } = zm();
@@ -285,7 +285,7 @@ function es({
   let o = LH();
   let l = mq.useTabContentsWidth();
   let [d] = IT(Yt(a));
-  let c = Rs(LibraryModalAssetsDataByLibraryKey, {
+  let c = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: a
   });
   let u = d.status === 'loading' || c.status === 'loading';
@@ -506,7 +506,7 @@ function eB({
   let h = !P2(e) || e.thumbnail_guid !== null;
   let g = Px(e);
   let [_, A, y] = _$$e(!1);
-  let b = $J(_);
+  let b = useSyncedState(_);
   let [v, E, x] = _$$e(!1);
   let S = _ || b || v;
   let C = useCallback(() => {
@@ -1072,7 +1072,7 @@ function e2() {
     }, [status, a, t, s, _workspaces.status, o]);
   }();
   let o = y('tab_loaded');
-  let l = ZC(isLoading);
+  let l = useLatestRef(isLoading);
   useEffect(() => {
     l && !isLoading && o();
   }, [l, isLoading, o]);
@@ -1435,7 +1435,7 @@ function tl({
     } = function (e) {
       let t = LH();
       let [i, n] = useState({});
-      let [a] = _$$IT(OrgTeamView({
+      let [a] = setupResourceAtomHandler(OrgTeamView({
         orgId: t ?? '',
         firstPageSize: 100,
         queryParams: f9(void 0, {
@@ -1524,7 +1524,7 @@ function tl({
     }, [status, _status, l, a, d]);
   }(e);
   let o = y('tab_loaded');
-  let l = ZC(isLoading);
+  let l = useLatestRef(isLoading);
   useEffect(() => {
     l && !isLoading && o();
   }, [l, isLoading, o]);
@@ -1644,7 +1644,7 @@ function td({
 function tc() {
   let e = useDispatch();
   let t = ol();
-  let i = q5();
+  let i = selectCurrentFile();
   let {
     sessionId
   } = zm();
@@ -1840,7 +1840,7 @@ function tS() {
   }();
   let t = e.status === 'loading';
   let i = y('tab_loaded');
-  let a = ZC(e);
+  let a = useLatestRef(e);
   useEffect(() => {
     a?.status !== 'loaded' && e.status === 'loaded' && i();
   }, [a, e, i]);
@@ -1953,7 +1953,7 @@ function tz({
     isPublished
   } = tB();
   let l = tH();
-  let d = !isPublishingModalEnabled || Kz(e);
+  let d = !isPublishingModalEnabled || isBranchAlt(e);
   let c = useMemo(() => isPublishingModalEnabled || isPublished ? {} : {
     'data-tooltip': getI18nString('design_systems.libraries_modal.publishing_disabled_tooltip'),
     'data-tooltip-type': Ib.TEXT
@@ -2015,8 +2015,8 @@ function tW({
     shouldCover
   } = _$$t3();
   let o = function () {
-    let e = _G();
-    let t = _$$tS();
+    let e = useOpenFileLibraryKey();
+    let t = useCurrentFileKey();
     let i = _$$bj([assertNotNullish(e)], {
       revalidateOnMount: !0
     });
@@ -2054,7 +2054,7 @@ function tW({
       }
     }, [i.status, i.data, a, t, s, sessionId, searchSessionId, queryId, c, n]);
   }();
-  let l = cJ();
+  let l = useIsFullscreenSitesView();
   let d = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);
   let u = !l || d;
   return jsx(_$$V, {
@@ -2157,12 +2157,12 @@ function tZ({
     let {
       searchQuery
     } = zm();
-    let i = ZC(searchQuery);
+    let i = useLatestRef(searchQuery);
     useEffect(() => {
       searchQuery !== i && e();
     }, [searchQuery, e, i]);
   }();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = t$();
   return e.status !== 'loaded' ? jsx(Fragment, {
     children: range(4).map(e => jsx(_$$Q2, {}, e))
@@ -2345,7 +2345,7 @@ function id() {
     let {
       sessionId
     } = zm();
-    let n = q5();
+    let n = selectCurrentFile();
     let a = useCallback(() => {
       t(showModalHandler({
         type: dD,
@@ -2377,7 +2377,7 @@ function id() {
     return useMemo(() => e && Object.values(t).some(t => t.id === e.id), [e, t]);
   }();
   let i = _$$er();
-  let a = q5();
+  let a = selectCurrentFile();
   let {
     sessionId
   } = zm();
@@ -2409,7 +2409,7 @@ function id() {
 function ic() {
   let e = function () {
     let e = useDispatch();
-    let t = q5();
+    let t = selectCurrentFile();
     let {
       sessionId
     } = zm();
@@ -2459,7 +2459,7 @@ function iu() {
   });
 }
 function ip() {
-  let e = q5();
+  let e = selectCurrentFile();
   let {
     hasProAccess
   } = mG();
@@ -2474,7 +2474,7 @@ function ip() {
       openFile: e,
       kbPath: [m3.InThisFileSection.CreatedInThisFile],
       libraryGuidelinesEnabled: i
-    }), Kz(e) && jsx(t9, {})]
+    }), isBranchAlt(e) && jsx(t9, {})]
   }) : jsx(id, {}) : null;
 }
 function im() {
@@ -2578,8 +2578,8 @@ function ib() {
     let i = y('subscribed_libraries_loaded');
     let n = y('used_in_this_file_loaded');
     let a = y('tab_loaded');
-    let s = ZC(e);
-    let o = ZC(t);
+    let s = useLatestRef(e);
+    let o = useLatestRef(t);
     useEffect(() => {
       s?.status !== 'loaded' && e.status === 'loaded' && i();
     }, [s?.status, e.status, i]);
@@ -2651,7 +2651,7 @@ function iv() {
   let e = je();
   let t = ry();
   let i = y('tab_loaded');
-  let a = ZC(t);
+  let a = useLatestRef(t);
   useEffect(() => {
     a?.status !== 'loaded' && t.status === 'loaded' && i();
   }, [a, t, i]);
@@ -2906,7 +2906,7 @@ function nh({
   });
   let g = useMemo(() => {
     if (h.status !== 'loaded') return;
-    let e = oA(h.data?.assetAttribution);
+    let e = getResourceDataOrFallback(h.data?.assetAttribution);
     return e?.type === FTeamType.TEAM ? e.handle : e?.type === FTeamType.COMMUNITY ? e.name : void 0;
   }, [h]);
   let f = _$$B2(e.libraryKey).data ?? e.fileName;
@@ -3071,7 +3071,7 @@ function ny({
   }();
   let g = Xr(wy);
   let _ = useSelector(_$$c2);
-  let A = useAtomWithSubscription(yV);
+  let A = useAtomWithSubscription(openFileAtom);
   let y = A?.parentOrgId?.toString();
   let b = _.file_team_id?.toString();
   let E = useContext(Jc) ?? aD.ALL;
@@ -3088,7 +3088,7 @@ function ny({
   } = se(w, E, o);
   let [F, M] = useState(!1);
   let j = useSelector(e => !!e.openFile && VP(e.loadingState, `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.openFile.key}`));
-  let U = _$$tS() || void 0;
+  let U = useCurrentFileKey() || void 0;
   let V = E === aD.ALL;
   let [G, z] = useState(!1);
   let [W, K] = useState(null);
@@ -3213,7 +3213,7 @@ function ny({
   });
   !function (e, t) {
     let i = e.current === document.activeElement;
-    let n = ZC(i);
+    let n = useLatestRef(i);
     let a = _$$$2(t);
     let s = a && t;
     let o = a && !t;
@@ -3318,7 +3318,7 @@ function nb({
       let o = n(iJ(i));
       let l = n(_$$jk(i));
       let d = n(kK(i));
-      let c = n(_S);
+      let c = n(openFileLibraryKeyAtom);
       let p = n(qp);
       let m = n(_$$O);
       let h = {};

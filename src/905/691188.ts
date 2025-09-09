@@ -23,7 +23,7 @@ import { B as _$$B } from "../905/506188";
 import { QB } from "../905/921418";
 import { T as _$$T } from "../905/486858";
 import { FPlanNameType, FOrganizationRoleType } from "../figma_app/191312";
-import { D6, X$, j_ } from "../figma_app/465071";
+import { useCurrentPlanUser, useCurrentPublicPlan, useIsOrgAdminUser } from "../figma_app/465071";
 import { Qh } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
 import { M } from "../905/540025";
@@ -118,7 +118,7 @@ function j({
       buzzSubscribed: r,
       subscriptionType: "team"
     });
-  }(e, t, i ?? !1, n ?? !1, r ?? !1, o); else if (e.showingDefaultSubscriptionsForUser) {
+  }(e, t, i ?? !1, n ?? !1, r ?? !1, o);else if (e.showingDefaultSubscriptionsForUser) {
     var d;
     var c;
     var p;
@@ -456,10 +456,10 @@ let H = e => ({
 let W = (e, t, i) => {
   let n = ol();
   let a = n?.id;
-  let s = D6("useWillWarnTeamAdminAboutOverride");
-  let o = X$("useWillWarnTeamAdminAboutOverride");
+  let s = useCurrentPlanUser("useWillWarnTeamAdminAboutOverride");
+  let o = useCurrentPublicPlan("useWillWarnTeamAdminAboutOverride");
   let l = o.unwrapOr(null)?.tier === FPlanNameType.ENTERPRISE;
-  let d = j_(s).unwrapOr(!1);
+  let d = useIsOrgAdminUser(s).unwrapOr(!1);
   let c = Ho(e);
   let u = Ck(e);
   let p = n?.workspace_id?.toString();

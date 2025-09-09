@@ -11,7 +11,7 @@ import { o as _$$o } from "../figma_app/915774";
 import { X } from "../905/853613";
 import { Ew } from "../figma_app/361662";
 import { u as _$$u } from "../905/290607";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { dx } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
 import { U } from "../905/966438";
@@ -57,7 +57,7 @@ function R({
   shouldRefocusAfterKeyboardInsert: l
 }) {
   let d = useContext(U);
-  let _ = useSelector(sS);
+  let _ = useSelector(selectOpenFileKey);
   let h = J(o.item, o.sectionPosition, o.sectionNameForTracking);
   let m = _$$n(o.item);
   let {

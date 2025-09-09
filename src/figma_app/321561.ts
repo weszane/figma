@@ -13,7 +13,7 @@ import { V2 } from "../figma_app/844435";
 import { EO, OY, gn, ej } from "../figma_app/86989";
 import { RW } from "../figma_app/684168";
 import { j } from "../905/813868";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { R as _$$R } from "../figma_app/612938";
@@ -77,7 +77,7 @@ export function $$O0({
     H || U();
     K() && close();
   }, [extension, H, t, U, K, W, V, close]);
-  let q = q5();
+  let q = selectCurrentFile();
   let J = RW();
   let Z = useCallback(() => {
     if (!q || !q.parentOrgId) return;

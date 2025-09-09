@@ -4,11 +4,11 @@ import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseAndNormalizeQuery } from "../905/634134";
-import { sy } from "../figma_app/930338";
+import { encodeUri } from "../figma_app/930338";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
 import { c5 } from "../905/93909";
-import { L8, gN, At } from "../905/760074";
+import { getRepoById, buildUrlPath, getDisplayName } from "../905/760074";
 import { Zt } from "../figma_app/617727";
 import { ge } from "../figma_app/349248";
 import { LT, ZK } from "../figma_app/831696";
@@ -94,7 +94,7 @@ export class $$y0 {
       if (e.file.key === Zt) return "/test/interactions/proto" === customHistory.location.pathname ? `/test/interactions/proto${customHistory.location.search}` : "/test/interactions/deck" === customHistory.location.pathname ? `/test/interactions/deck${customHistory.location.search}` : "/test/interactions/presenter" === customHistory.location.pathname ? `/test/interactions/presenter${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
       let n = this.selectedViewName(e, t);
       let r = e.file;
-      let a = n ? sy(n) : "";
+      let a = n ? encodeUri(n) : "";
       let o = "proto";
       if (e.isPresenterView) o = "presenter";else switch (e.file.editor_type) {
         case "design":
@@ -105,8 +105,8 @@ export class $$y0 {
           o = "deck";
       }
       if (r) {
-        let e = L8(r, t.repos);
-        i = gN(r, e, o);
+        let e = getRepoById(r, t.repos);
+        i = buildUrlPath(r, e, o);
       } else {
         i = `/${o}/${e.file.key}`;
         a && (i += `/${a}`);
@@ -123,8 +123,8 @@ export class $$y0 {
       let i = e.file;
       let n = e.file.name;
       if (i) {
-        let e = L8(i, t.repos);
-        e && (n = At(i, e));
+        let e = getRepoById(i, t.repos);
+        e && (n = getDisplayName(i, e));
         n = n ?? i.name;
       }
       return n ?? getI18nString("proto.prototype_view_selector.untitled");

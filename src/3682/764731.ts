@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useMemo, Component, memo, useCallback, useId } from "react";
 import { useSelector, useDispatch, connect, useStore } from "react-redux";
 import { yF, oI, rO, cb, Pp, Zq, a6 } from "../905/989765";
-import { q5, tS } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { AM, eo as _$$eo, qr } from "../figma_app/637336";
 import { W5, bF } from "../figma_app/120294";
@@ -47,7 +47,7 @@ import { g as _$$g } from "../905/757007";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { isEmptyObject } from "../figma_app/493477";
 import { e as _$$e } from "../905/483726";
-import { td as _$$td } from "../figma_app/930338";
+import { formatCount } from "../figma_app/930338";
 import { P as _$$P } from "../905/347284";
 import { Q as _$$Q } from "../3276/336897";
 import { vQ, sK } from "../9410/124657";
@@ -176,7 +176,7 @@ function es({
   let [_, u] = useState(!1);
   let [p, v] = useState(!1);
   let [m, h] = useState(!1);
-  let N = q5();
+  let N = selectCurrentFile();
   if (!N) throw Error("Open file required");
   let g = useSelector(e => e.voice.activeCall[N.key]);
   let f = useDispatch();
@@ -731,7 +731,7 @@ let eP = connect(e => ({
     children: [jsx(sK, {}), usersInCall.length > 0 && jsx("div", {
       className: _$$ev,
       children: jsx(eL, {
-        headerText: `${e.currentUserInCall ? "You and " : ""}` + _$$td(usersInCall.length, "person", "people") + " in conversation",
+        headerText: `${e.currentUserInCall ? "You and " : ""}` + formatCount(usersInCall.length, "person", "people") + " in conversation",
         collapseStateOverride: !showWidgetParticipantList,
         collapsedContent: jsx(eS, {
           usersInCall,
@@ -1366,7 +1366,7 @@ function td({
 }
 export function $$t_0() {
   let e = useSelector(e => e.mirror.appModel.showUi);
-  let t = tS();
+  let t = useCurrentFileKey();
   let a = selectCurrentUser();
   let u = useSelector(e => e.voice.showWidget);
   let p = useSelector(e => t && t in e.voice.activeCall);

@@ -23,7 +23,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { widgetErrorTracker } from "../905/250412";
 import { j } from "../905/813868";
 import { ZY, Qx as _$$Qx } from "../905/764747";
-import { Eh } from "../figma_app/12796";
+import { canPerformAction } from "../figma_app/12796";
 import { m3 } from "../figma_app/45218";
 import { hasLocalFileId, manifestContainsWidget, manifestErrorMessage } from "../figma_app/155287";
 import { Zm } from "../figma_app/201703";
@@ -78,7 +78,7 @@ export function $$F0(e, t) {
   let i = [];
   let n = !!e.isReadOnly;
   let r = debugState.getState();
-  let a = Eh(r);
+  let a = canPerformAction(r);
   if (!e.userCanViewWidgets) return i;
   if (!a || n || !BE(r)) {
     i.push(ft({

@@ -152,7 +152,7 @@ import { J as _$$J } from '../905/614223';
 import { BT } from '../905/618447';
 import { jS, Q1 } from '../905/619652';
 import { R as _$$R3 } from '../905/621802';
-import { Ws } from '../905/628874';
+import { convertTeamToRaw } from '../905/628874';
 import { T as _$$T3 } from '../905/632137';
 import { E as _$$E } from '../905/632989';
 import { useSyncedRef } from '../905/633914';
@@ -321,7 +321,7 @@ import { EI as _$$EI } from '../figma_app/21029';
 import { um as _$$um, atom, atomStoreManager, AY, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { CVP, Ep1, j4N, oBL } from '../figma_app/27776';
 import { GQ as _$$GQ, nJ as _$$nJ, bQ } from '../figma_app/32128';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { pO as _$$pO } from '../figma_app/42945';
 import { TeamCanAdmin } from '../figma_app/43951';
 import { Kk } from '../figma_app/47085';
@@ -365,7 +365,7 @@ import { oU as _$$oU, bi, Vm } from '../figma_app/273493';
 import { D7, fi } from '../figma_app/275462';
 import { s4 as _$$s3 } from '../figma_app/276332';
 import { q as _$$q2 } from '../figma_app/277543';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { L as _$$L6 } from '../figma_app/297778';
 import { vt } from '../figma_app/306946';
 import { $I, MK } from '../figma_app/322845';
@@ -397,7 +397,7 @@ import { W1 } from '../figma_app/439493';
 import { q as _$$q4 } from '../figma_app/446378';
 import { D as _$$D, ZB } from '../figma_app/451499';
 import { fullscreenValue } from '../figma_app/455680';
-import { D6, EV, T5, X$ } from '../figma_app/465071';
+import { useCurrentPlanUser, useIsProOrStudentPlan, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { d4 as _$$d4, be } from '../figma_app/474636';
 import { V$ } from '../figma_app/479760';
@@ -407,7 +407,7 @@ import { roundTo2Decimals } from '../figma_app/492908';
 import { s as _$$s8 } from '../figma_app/504088';
 import { Ep } from '../figma_app/504823';
 import { u as _$$u4 } from '../figma_app/514229';
-import { tS as _$$tS, q5, ze } from '../figma_app/516028';
+import { useCurrentFileKey, selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
 import { ie as _$$ie, Z as _$$Z3 } from '../figma_app/524655';
 import { t as _$$t2 } from '../figma_app/532797';
 import { Fu } from '../figma_app/545877';
@@ -474,7 +474,7 @@ import { mY } from '../figma_app/915281';
 import { utilityNoop } from '../figma_app/918700';
 import { kx } from '../figma_app/920333';
 import { Dy, ky } from '../figma_app/925970';
-import { Zr as _$$Zr } from '../figma_app/930338';
+import { capitalize } from '../figma_app/930338';
 import { AV, Gb, Oe } from '../figma_app/933328';
 import { _Y as _$$_Y } from '../figma_app/936646';
 import { R as _$$R8 } from '../figma_app/941983';
@@ -1448,7 +1448,7 @@ function tz({
   let r = tC();
   let i = n ? r : l;
   let s = _$$Z('cooper_template_picker_sidebar_click');
-  let d = T5('CooperTemplateSidebar');
+  let d = useCurrentPrivilegedPlan('CooperTemplateSidebar');
   let c = d.data?.name;
   let u = d.status !== 'loaded';
   let x = _$$j2();
@@ -1585,7 +1585,7 @@ function t$({
     onShowSeparatorScroll
   } = gH();
   let c = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
-  let u = _$$tS() === null;
+  let u = useCurrentFileKey() === null;
   return e === J_.LOADING || !c || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx('div', {
     className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
     children: jsx(tG, {
@@ -2775,7 +2775,7 @@ function nQ({
   let h = Xr(Tw);
   let g = jw();
   let f = v3();
-  let b = _$$tS();
+  let b = useCurrentFileKey();
   let j = useSelector(e => e.search.sessionId);
   let y = _$$nc.user(x, (e, l, r) => {
     _$$fp({
@@ -3220,7 +3220,7 @@ function lb({
     libraryKeyToPublishedLibrary,
     components
   } = _$$z4(n.map(e => e.model));
-  let m = T5('CooperTemplateSearchView');
+  let m = useCurrentPrivilegedPlan('CooperTemplateSearchView');
   if (a || s || d || isLoading || m.status === 'loading') {
     return jsxs(_$$P, {
       className: na,
@@ -3365,7 +3365,7 @@ function lv() {
     resetScrollTop
   } = Nd(mF.ALL);
   let s = Xr(Lm);
-  let d = T5('CooperTemplateAllView');
+  let d = useCurrentPrivilegedPlan('CooperTemplateAllView');
   useEffect(() => () => resetScrollTop([mF.ALL]), [resetScrollTop]);
   return r.type === mF.ALL ? jsx(Fragment, {
     children: jsxs(_$$P, {
@@ -3707,8 +3707,8 @@ function lz({
 function lN({
   size: e = 24
 }) {
-  let t = T5('CurrentWorkspaceIcon');
-  let n = D6('CurrentWorkspaceIcon').unwrapOr(null);
+  let t = useCurrentPrivilegedPlan('CurrentWorkspaceIcon');
+  let n = useCurrentPlanUser('CurrentWorkspaceIcon').unwrapOr(null);
   let l = n?.userId;
   return l ? jsx(_$$n2, {
     size: e,
@@ -3718,10 +3718,10 @@ function lN({
   }) : null;
 }
 function lR() {
-  let e = T5('CooperTemplateLeftRailEmptyState');
+  let e = useCurrentPrivilegedPlan('CooperTemplateLeftRailEmptyState');
   let t = e.status === 'loaded' ? e.data.name : '';
   let n = _$$j2();
-  let l = D6('CooperTemplateLeftRailEmptyState').unwrapOr(null);
+  let l = useCurrentPlanUser('CooperTemplateLeftRailEmptyState').unwrapOr(null);
   return l?.userId ? jsx(Fragment, {
     children: n && jsxs('div', {
       className: 'x78zum5 xdt5ytf x1excjyp xzlf1m7 x2b8uid x7hzu26',
@@ -3752,8 +3752,8 @@ function lw({
   plan: e
 }) {
   let t = Xr(Lm);
-  let n = X$('CooperTemplateAllViewTeamTemplateSection');
-  let l = EV(n).unwrapOr(!1);
+  let n = useCurrentPublicPlan('CooperTemplateAllViewTeamTemplateSection');
+  let l = useIsProOrStudentPlan(n).unwrapOr(!1);
   let {
     templatesByTeam,
     isLoading
@@ -3971,7 +3971,7 @@ function lV({
     scrollRef,
     onScroll
   } = Nd(mF.ORG);
-  let i = X$('CooperTemplateOrgView').transform(e => e.tier === FPlanNameType.ENTERPRISE);
+  let i = useCurrentPublicPlan('CooperTemplateOrgView').transform(e => e.tier === FPlanNameType.ENTERPRISE);
   let {
     yourTemplates,
     isLoading
@@ -3984,8 +3984,8 @@ function lV({
         parentId
       }
     } = e;
-    let l = X$('useCooperYourTemplates');
-    let r = EV(l).unwrapOr(!1);
+    let l = useCurrentPublicPlan('useCooperYourTemplates');
+    let r = useIsProOrStudentPlan(l).unwrapOr(!1);
     let i = type === FOrganizationLevelType.ORG && parentId ? parentId : void 0;
     let o = r && parentId ? parentId : void 0;
     let {
@@ -4308,8 +4308,8 @@ function lQ() {
   let h = useAtomWithSubscription(Lm);
   let g = Xr(Lm);
   let f = useAtomWithSubscription(_$$d2);
-  let b = useAtomWithSubscription(ze);
-  let j = T5('CooperTemplateContent');
+  let b = useAtomWithSubscription(openFileKeyAtom);
+  let j = useCurrentPrivilegedPlan('CooperTemplateContent');
   let y = lJ();
   useEffect(() => () => {
     y();
@@ -4425,7 +4425,7 @@ function l2() {
   return !(!l || e || !n || i || !t || isInteractionPathCheck()) && !!r;
 }
 function l4() {
-  let e = _$$tS();
+  let e = useCurrentFileKey();
   return l2() ? jsx(fu, {
     name: 'Buzz Template Overlay Modal',
     properties: {
@@ -5243,9 +5243,9 @@ let oO = memo(({
   }, [D]);
   let V = Z7(M, P, E);
   let G = _$$sZ() ?? null;
-  let U = q5()?.team ?? null;
-  let K = q5();
-  let W = Rs(TeamCanAdmin, {
+  let U = selectCurrentFile()?.team ?? null;
+  let K = selectCurrentFile();
+  let W = useSubscription(TeamCanAdmin, {
     id: U?.id
   }, {
     enabled: !!U
@@ -5415,7 +5415,7 @@ let oO = memo(({
         team: U,
         resource: Bi.SHARED_FONTS,
         editorType: FFileType.DESIGN,
-        currentPlan: _$$n4(Ws(U)) ? _$$F4.Plan.PRO : _$$F4.Plan.STARTER,
+        currentPlan: _$$n4(convertTeamToRaw(U)) ? _$$F4.Plan.PRO : _$$F4.Plan.STARTER,
         upsellPlan: _$$F4.Plan.ORG,
         upsellSource: UpsellModalType.FONT_PICKER_UPSELL,
         hideUpsellPlanCta: !t,
@@ -9515,7 +9515,7 @@ function dw({
   useEffect(() => {
     p.setActiveTab(isInvalidValue(c) ? 'MIXED' : c);
   }, [c, p]);
-  let m = ZC(p.activeTab);
+  let m = useLatestRef(p.activeTab);
   useEffect(() => {
     let t = p.activeTab;
     m !== t && t !== 'MIXED' && (t === 'NONE' && fullscreenValue.triggerActionInUserEditScope('remove-stroke'), r(e[t].dashPattern), m && m !== 'NONE' && m !== 'MIXED' || t === 'NONE' || n && i || fullscreenValue.triggerActionInUserEditScope('add-stroke-to-selection'));
@@ -12280,7 +12280,7 @@ function xI({
     }) {
       return jsx('p', {
         className: 'x1akne3o x77yl0c',
-        children: _$$Zr(e)
+        children: capitalize(e)
       });
     }({
       description: alt_description
@@ -12768,7 +12768,7 @@ function xH() {
       isFetchingNextPage: g,
       fetchNextPage: f
     };
-  }(useAtomWithSubscription(ze) || '', t);
+  }(useAtomWithSubscription(openFileKeyAtom) || '', t);
   let g = isLoadingFirstPage || hasNoResults || hasError;
   return t ? jsxs(Fragment, {
     children: [jsx('div', {
@@ -13030,8 +13030,8 @@ function x2() {
     communityAssetResults,
     requestLoadMore
   } = _$$pI();
-  let E = useAtomWithSubscription(ze);
-  let v = T5('TemplatesLeftRailContent');
+  let E = useAtomWithSubscription(openFileKeyAtom);
+  let v = useCurrentPrivilegedPlan('TemplatesLeftRailContent');
   let T = v.status === 'loaded' ? v.data.name : '';
   let I = getI18nString('cooper.templates.from_plan_name', {
     planName: T
@@ -13154,7 +13154,7 @@ function x4() {
   let [l, r] = function (e) {
     let [t, n] = useState(e);
     let [l, r] = useState(!1);
-    let i = ZC(e);
+    let i = useLatestRef(e);
     let o = useRef(null);
     useEffect(() => {
       o.current && (clearTimeout(o.current), o.current = null);
@@ -13403,7 +13403,7 @@ function x8({
   onClickNew: e,
   canEdit: t
 }) {
-  let n = q5();
+  let n = selectCurrentFile();
   return jsxs('div', {
     'className': 'x78zum5 x1qughib x6s0dn4 xz9dl7a xnuq7ks xsag5q8 x1gcgh60 xgk9eko x1mxnbhz x1yjdb4r x1tpqehw x1nfngrj',
     'data-fullscreen-prevent-event-capture': !0,
@@ -13546,7 +13546,7 @@ function px() {
   }, [m, u, e, t, h]);
   bE();
   let g = useRef(null);
-  let f = _$$tS();
+  let f = useCurrentFileKey();
   let b = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.DESIGN;
   let j = m && x;
   let y = useCallback(e => {
@@ -14560,7 +14560,7 @@ let mS = memo(({
   buzzInlinePreviewStatus: r
 }) => {
   let i = useRef(null);
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let d = r === _$$u.HIDDEN;
   let c = useMemo(() => n?.initialViewerSize ? n.initialViewerSize : {
     x: 400,

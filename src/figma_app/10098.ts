@@ -1,12 +1,12 @@
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { getI18nString } from "../905/303541";
 import { py } from "../905/395857";
 import { yW } from "../figma_app/644808";
 export function $$d1(e) {
   var t;
-  let r = oA(e.libraryKeyToFile?.file);
+  let r = getResourceDataOrFallback(e.libraryKeyToFile?.file);
   if (!r) return null;
   let d = r.libraryAssets.map(e => py(_$$l(r.libraryKey), e)).filter(isNotNullish);
   return 0 === d.length ? null : {

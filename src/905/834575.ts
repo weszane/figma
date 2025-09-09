@@ -1,7 +1,7 @@
 import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { isAddressEmpty } from "../figma_app/831101";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 export let $$o0 = new class {
   constructor() {
     this.MembersSchemaValidator = createNoOpValidator();
@@ -84,7 +84,7 @@ export let $$o0 = new class {
       xr: t
     }) => await t.post("/api/team_role_requests", {
       team_id: e.teamId,
-      level: e6.VIEWER
+      level: AccessLevelEnum.VIEWER
     }));
   }
   showDanglingTeamUserBackfillBanner(e) {

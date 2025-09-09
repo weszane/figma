@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { pi } from "../figma_app/314264";
-import { q5, _G } from "../figma_app/516028";
+import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
 import { Cn, oA, Rn } from "../905/225265";
 import { Ly, He } from "../figma_app/155728";
@@ -24,7 +24,7 @@ export function $$m0({
   isExample: v,
   partnerType: A
 }) {
-  let x = q5();
+  let x = selectCurrentFile();
   let {
     searchSessionId
   } = $$E2();
@@ -101,7 +101,7 @@ export function $$g1(e, t) {
   return useMemo(() => r.file?.has(e) ? "file" : r.user?.has(e) ? "user" : r.team?.has(e) ? "team" : r.org?.has(e) ? "org" : "SUBSCRIBED" === t ? "other" : "", [e, r, t]);
 }
 export function $$f3(e) {
-  let t = _G();
+  let t = useOpenFileLibraryKey();
   let r = He();
   return t === e ? "LOCAL" : r.has(e) ? "SUBSCRIBED" : "UNSUBSCRIBED";
 }

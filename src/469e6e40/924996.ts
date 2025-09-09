@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { q } from "../469e6e40/218292";
 import { s as _$$s } from "../905/82276";
@@ -9,7 +9,7 @@ export function $$c1(e, t) {
   return [...t.map(e => ({
     type: "option",
     key: e.id,
-    text: EJ(e.name, A)
+    text: truncate(e.name, A)
   })), {
     type: "separator",
     key: "separator"

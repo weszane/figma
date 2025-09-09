@@ -4,10 +4,10 @@ import { bytesToHex } from "../905/125019";
 import { NodePropertyCategory, Fullscreen, TextModificationAction } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
-import { H9, Vs } from "../figma_app/930338";
+import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { u1 } from "../figma_app/91703";
 import { ds } from "../figma_app/314264";
@@ -77,7 +77,7 @@ export function $$O4({
   node: e,
   hash: t
 }) {
-  let i = e.fills.find(e => e.image && e.image.hash && H9(e.image.hash) === t);
+  let i = e.fills.find(e => e.image && e.image.hash && uint8ArrayToBase64(e.image.hash) === t);
   if (!i) throw new $$T5("No image paint matching target", {
     reportToSentry: !0
   });
@@ -113,7 +113,7 @@ let F = async ({
     }, i => {
       if ("loaded" === i.status) {
         s?.();
-        let r = oA(i.data.aiMeterUsage);
+        let r = getResourceDataOrFallback(i.data.aiMeterUsage);
         let o = L[e];
         for (let e of r?.filter(e => e.name === o) ?? []) {
           let i = Number(e.remaining);
@@ -170,7 +170,7 @@ export async function $$M0({
           nodes: l,
           isBatch: t.length > 1
         });
-        let u = Vs(d);
+        let u = base64ToUint8Array(d);
         let m = await UD(u, "image/png", `${i} ${n}`);
         l.forEach(t => {
           (function ({
@@ -180,7 +180,7 @@ export async function $$M0({
             modifyPaint: n
           }) {
             e.isAlive && (permissionScopeHandler.ai("image-modification", () => {
-              let r = e.fills.findIndex(e => "IMAGE" === e.type && e.image?.hash && H9(e.image.hash) === i);
+              let r = e.fills.findIndex(e => "IMAGE" === e.type && e.image?.hash && uint8ArrayToBase64(e.image.hash) === i);
               Mo(e, "fill-paint-data").forEach(e => {
                 if (-1 !== r) {
                   let i = {

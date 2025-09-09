@@ -11,7 +11,7 @@ import { b as _$$b } from "../905/985254";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
-import { P5 } from "../figma_app/175992";
+import { StatusType } from "../figma_app/175992";
 import { WE, BY, Q7 } from "../figma_app/625596";
 import { C as _$$C } from "../figma_app/198698";
 import { CY } from "../figma_app/637027";
@@ -58,8 +58,8 @@ export function $$E0(e) {
   let {
     stripe_account_status
   } = R;
-  if (!O && (!stripe_account_status || stripe_account_status === P5.NONE)) return jsx(Fragment, {});
-  let D = stripe_account_status === P5.NONE && getFeatureFlags().cmty_expand_extension_m10n || stripe_account_status === P5.ACCEPTED || M ? {
+  if (!O && (!stripe_account_status || stripe_account_status === StatusType.NONE)) return jsx(Fragment, {});
+  let D = stripe_account_status === StatusType.NONE && getFeatureFlags().cmty_expand_extension_m10n || stripe_account_status === StatusType.ACCEPTED || M ? {
     userFlag: WE,
     bannerContent: function ({
       isLoading: e,
@@ -108,7 +108,7 @@ export function $$E0(e) {
       },
       showCTA: !O
     })
-  } : stripe_account_status === P5.STARTED_ONBOARDING ? {
+  } : stripe_account_status === StatusType.STARTED_ONBOARDING ? {
     userFlag: BY,
     bannerContent: function ({
       onClick: e,
@@ -144,7 +144,7 @@ export function $$E0(e) {
       },
       showCTA: !O
     })
-  } : stripe_account_status === P5.DISABLED ? {
+  } : stripe_account_status === StatusType.DISABLED ? {
     userFlag: Q7,
     bannerContent: function ({
       onClick: e,

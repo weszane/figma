@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { s9 } from "../figma_app/913823";
 import { Xh, M7 } from "../figma_app/933328";
 import { eY } from "../figma_app/722362";
-import { _S, tS } from "../figma_app/516028";
+import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { bj } from "../905/420347";
 import { PreloadCodeConnectLk } from "../figma_app/43951";
 import { M4, IT } from "../905/713695";
@@ -64,14 +64,14 @@ function A(e, t, r) {
   return i?.key ? i.key : null;
 }
 function x(e, t) {
-  let r = useAtomWithSubscription(_S);
+  let r = useAtomWithSubscription(openFileLibraryKeyAtom);
   let a = eY();
   let l = useSelector(aD);
   let d = useSelector(BA);
   let c = function (e) {
     let t = useSelector(MH);
     let r = useSelector(e => e.mirror.appModel.currentPage);
-    let a = useAtomWithSubscription(_S);
+    let a = useAtomWithSubscription(openFileLibraryKeyAtom);
     return useMemo(() => {
       let n = new Set();
       if (!e) return n;
@@ -104,7 +104,7 @@ function x(e, t) {
   }, [c, d, l, _]);
 }
 export function $$N3() {
-  let e = useAtomWithSubscription(_S);
+  let e = useAtomWithSubscription(openFileLibraryKeyAtom);
   let t = eY();
   let r = useSelector(e => e.mirror.appModel.currentPage);
   let l = useSelector(aD);
@@ -168,12 +168,12 @@ export function $$N3() {
 }
 export function $$C4() {
   let e = useSelector(e => e.mirror.appModel.currentPage);
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = x(t, !1);
   useEffect(() => {
     atomStoreManager.set(zV, null);
   }, [e]);
-  let a = Rs(PreloadCodeConnectLk, {
+  let a = useSubscription(PreloadCodeConnectLk, {
     nodes: Array.from(r),
     openFileKey: t ?? ""
   }, {
@@ -191,8 +191,8 @@ export function $$C4() {
   }, [e, a.status]);
 }
 export function $$w0(e, t = !0) {
-  let r = tS();
-  let n = Rs(PreloadCodeConnectLk, {
+  let r = useCurrentFileKey();
+  let n = useSubscription(PreloadCodeConnectLk, {
     nodes: e,
     openFileKey: r ?? ""
   }, {
@@ -226,7 +226,7 @@ export function $$L5() {
   useEffect(() => {
     atomStoreManager.set(Af, null);
   }, [e]);
-  let t = x(tS(), !0);
+  let t = x(useCurrentFileKey(), !0);
   let [r] = IT(R({
     nodes: Array.from(t)
   }), {

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { E as _$$E } from "../905/632989";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { vj } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
 import { BranchOpenMergeRequest } from "../figma_app/43951";
@@ -145,7 +145,7 @@ export function $$P1({
   convertsToDotWithSmallScreen: o,
   isToolbar: d
 }) {
-  let c = Rs(BranchOpenMergeRequest, {
+  let c = useSubscription(BranchOpenMergeRequest, {
     branchFileKey: e
   });
   let u = "loaded" === c.status && c.data.file ? $$T4(c.data.file) : null;

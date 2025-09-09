@@ -6,7 +6,7 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { h1 } from "../905/986103";
 import { A as _$$A } from "../905/920142";
 import { getI18nState } from "../figma_app/363242";
@@ -167,7 +167,7 @@ export function $$L0(e) {
   let o = useRef(null);
   !function (e, t) {
     let i = useSelector(e => e.comments.editingComment);
-    let n = ZC(i);
+    let n = useLatestRef(i);
     useEffect(() => {
       i || n?.id !== t.id || e.current?.focus();
     }, [i, n, t.id, e]);

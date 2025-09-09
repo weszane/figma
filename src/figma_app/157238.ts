@@ -2,10 +2,10 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getInitialOptions } from "../figma_app/169182";
 import { oA } from "../905/723791";
 import { reportError } from "../905/11";
-import { dA } from "../905/513035";
+import { isValidAccessType } from "../905/513035";
 import { TA, Zx } from "../figma_app/217457";
 import { FUserRoleType, FCostCenterType, FPlanFeatureType, FProductAccessType, FResourceTargetType } from "../figma_app/191312";
-import { L8, QT } from "../figma_app/576636";
+import { mapAccessLevelToProductType, AccessLevelSchema } from "../figma_app/576636";
 import { Wd } from "../figma_app/617654";
 export function $$p0(e, t, r = !1, n) {
   var i;
@@ -120,7 +120,7 @@ export function $$_1(e, t) {
         scim_metadata: s.scim.enterpriseFields || {},
         whiteboard_paid_status: m(s.scim, FProductAccessType.WHITEBOARD, n),
         dev_mode_paid_status: m(s.scim, FProductAccessType.DEV_MODE, n),
-        seat_type_key: L8(o),
+        seat_type_key: mapAccessLevelToProductType(o),
         scim_seat_type: o
       });
       break;
@@ -195,14 +195,14 @@ function g(e) {
 function $$f(e) {
   if (!e) return null;
   try {
-    return QT.parse(e);
+    return AccessLevelSchema.parse(e);
   } catch {
     reportError(_$$e.IAM, Error(`IdpUser has invalid seat type: ${e}`));
   }
   return null;
 }
 function E(e, t) {
-  return e && e.billableProduct ? dA(e.billableProduct?.key) && null === e.upgradeMethod ? t ? new Date(t).toISOString() : getInitialOptions().analyze_data_flow_v2_until || e.createdAt.toISOString() : e.createdAt.toISOString() : null;
+  return e && e.billableProduct ? isValidAccessType(e.billableProduct?.key) && null === e.upgradeMethod ? t ? new Date(t).toISOString() : getInitialOptions().analyze_data_flow_v2_until || e.createdAt.toISOString() : e.createdAt.toISOString() : null;
 }
 export const f = $$p0;
 export const t = $$_1;

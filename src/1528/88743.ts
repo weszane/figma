@@ -13,13 +13,13 @@ import { WN } from "../figma_app/638601";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
-import { to, HH } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper, isCooperFeatureEnabled } from "../figma_app/828186";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { o as _$$o } from "../1528/709529";
 import { hideModalHandler, showModalHandler } from "../905/156213";
-import { q5 } from "../figma_app/516028";
-import { Pe } from "../figma_app/12796";
+import { selectCurrentFile } from "../figma_app/516028";
+import { isExportRestricted } from "../figma_app/12796";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -52,9 +52,9 @@ import { J5, K8 } from "../905/920793";
 import { Hk, lK, fu, pu } from "../figma_app/123994";
 import { Y as _$$Y } from "../905/438063";
 import { e as _$$e2 } from "../1528/93111";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { HW } from "../figma_app/976749";
-import { DG } from "../figma_app/789";
+import { getWorkshopModeStatus } from "../figma_app/789";
 import { k as _$$k4 } from "../figma_app/564183";
 import { isIntegrationContext } from "../figma_app/469876";
 import { dR } from "../figma_app/440875";
@@ -69,7 +69,7 @@ import { Ax, Fz } from "../figma_app/29089";
 import { QE } from "../figma_app/914216";
 import { H as _$$H } from "../figma_app/378458";
 import { G as _$$G } from "../905/298663";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { sO } from "../figma_app/21029";
 import { tU, Yg, kb, wR, Oh, OI } from "../figma_app/386160";
 var K = U;
@@ -799,9 +799,9 @@ let ep = registerModal(function (e) {
 });
 function em() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let n = useAtomWithSubscription(_$$o);
-  let i = !!t && Pe(t);
+  let i = !!t && isExportRestricted(t);
   let o = useCallback(() => getFeatureFlags().buzz_video_export || getFeatureFlags().buzz_print_export ? ep : _$$Y, []);
   return jsx("div", {
     className: "x1057jvv xnfn54o",
@@ -822,22 +822,22 @@ function eF(e) {
   } = useContext(_$$t2);
   let n = useDispatch();
   let f = sO();
-  let v = cJ();
-  let I = to() && HH();
+  let v = useIsFullscreenSitesView();
+  let I = useIsSelectedViewFullscreenCooper() && isCooperFeatureEnabled();
   let N = HW();
   let y = dR();
   let b = useSelector(e => e.multiplayer);
   let C = useMemo(() => b.allUsers.find(e => e.sessionID === b.sessionID) || null, [b.allUsers, b.sessionID]);
   let S = B4();
   let T = N ? null : e.openFile;
-  let L = DG(T?.key || "").enabled;
+  let L = getWorkshopModeStatus(T?.key || "").enabled;
   let R = isIntegrationContext();
   let D = useRef(null);
   let O = Xr($$eP1);
   let j = _$$k4();
   let k = _$$e2();
   let A = _$$G();
-  let w = xo();
+  let w = useCanUseDevModeDemoFile();
   let P = selectCurrentUser();
   let F = WN();
   useEffect(() => {
@@ -917,7 +917,7 @@ function eF(e) {
 export function $$eM0({
   recordingKey: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let n = useSelector(e => e.user);
   let l = useSelector(e => e.dropdownShown);
   return jsx(eF, {

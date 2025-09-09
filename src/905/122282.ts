@@ -2,7 +2,7 @@ import { M3 } from "../figma_app/91703";
 import { hideModal, popModalStack, showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { FContainerType, FFileType, FAccessLevelType } from "../figma_app/191312";
-import { A5 } from "../figma_app/707808";
+import { ShareAction } from "../figma_app/707808";
 import { n as _$$n, a as _$$a } from "../905/114254";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { B as _$$B } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
@@ -33,7 +33,7 @@ import { fu, j6 } from "../figma_app/831799";
 import { T6 } from "../905/201596";
 import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
 import { $x, $W } from "../figma_app/599979";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { OpenEditorFileData } from "../figma_app/43951";
@@ -92,7 +92,7 @@ import { om } from "../905/175462";
 import { Nw, yJ } from "../figma_app/78808";
 import { q as _$$q } from "../figma_app/446378";
 import { n as _$$n2 } from "../905/341791";
-import { to as _$$to2 } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { SS, WX } from "../figma_app/350203";
 import { lg } from "../figma_app/976749";
 import { M4 } from "../905/713695";
@@ -554,7 +554,7 @@ let e7 = _$$e3(e6, ({
 function tr({
   source: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let i = selectCurrentUser();
   let n = cD();
   let r = sZ();
@@ -596,7 +596,7 @@ function ta({
   let a;
   let s;
   let o = useDispatch();
-  let l = q5();
+  let l = selectCurrentFile();
   let u = lg();
   let {
     trackEvent
@@ -630,7 +630,7 @@ function ta({
       Sprig("track", "buzz_published_file");
     }, [Sprig]);
   }();
-  let w = _$$to2();
+  let w = useIsSelectedViewFullscreenCooper();
   let C = useCallback(() => {
     w && draftSubmissionResult?.result === "success" && S();
     o(hideModal());
@@ -1028,7 +1028,7 @@ function tN({
 }) {
   let i = sZ();
   let n = selectCurrentUser();
-  let r = Rs(OpenEditorFileData, {
+  let r = useSubscription(OpenEditorFileData, {
     fileKey: e || ""
   }, {
     enabled: !!e
@@ -1045,7 +1045,7 @@ function tN({
 function tP({
   source: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let i = sZ();
   let n = selectCurrentUser();
   let r = T6(t, n);
@@ -1416,7 +1416,7 @@ let tD = registerModal(function ({
   source: t,
   open: i
 }) {
-  let n = q5();
+  let n = selectCurrentFile();
   return (Xr(tR)(i), !n && e) ? jsx(tN, {
     fileKey: e,
     source: t
@@ -1447,7 +1447,7 @@ export function $$tM1(e, t, i, d) {
       onSubmit: () => $$tL2(e, t, d),
       onCancel: () => {
         e(M3({
-          view: A5.INVITE
+          view: ShareAction.INVITE
         }));
         e(popModalStack());
       },

@@ -13,7 +13,7 @@ import { BK } from "../905/848862";
 import { sZ } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { FMemberRoleType } from "../figma_app/191312";
-import { D6, A8 } from "../figma_app/465071";
+import { useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071";
 import { w as _$$w } from "../figma_app/883622";
 import { k2 } from "../figma_app/10554";
 import { KM } from "../figma_app/224019";
@@ -23,8 +23,8 @@ import { j } from "../905/834956";
 export function $$S2() {
   let e = getUserId();
   let t = sZ();
-  let i = D6("useCanAdminOrgQuery");
-  return useMemo(() => i.transform(i => !!t && !!e && A8(i, FMemberRoleType.ADMIN)), [i, t, e]);
+  let i = useCurrentPlanUser("useCanAdminOrgQuery");
+  return useMemo(() => i.transform(i => !!t && !!e && checkOrgUserPermission(i, FMemberRoleType.ADMIN)), [i, t, e]);
 }
 export function $$w0() {
   let e = useId();

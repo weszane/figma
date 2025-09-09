@@ -39,11 +39,11 @@ import { m as _$$m } from "../figma_app/175364";
 import { permissionScopeHandler } from "../905/189185";
 import B from "../vendor/267721";
 import { trackEventAnalytics } from "../905/449184";
-import { H9 } from "../figma_app/930338";
+import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { J as _$$J2 } from "../905/915227";
 import { kS } from "../figma_app/864723";
-import { ze, tS } from "../figma_app/516028";
+import { openFileKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { p4 } from "../figma_app/412398";
 import { B as _$$B2 } from "../905/521763";
 import { sI, YG } from "../9410/797086";
@@ -66,7 +66,7 @@ function H(e, t, a) {
       } = W(e.node);
       !function (e, t, a) {
         if (!e) return;
-        let l = atomStoreManager.get(ze);
+        let l = atomStoreManager.get(openFileKeyAtom);
         if (!l) return;
         let i = e.data?.file?.comments.find(e => e.clientMeta?.nodeId === t.guid && e.clientMeta?.nodeOffset?.x === 0 && e.clientMeta?.nodeOffset?.y === 0);
         let n = getSingletonSceneGraph().getCurrentPage().guid;
@@ -180,7 +180,7 @@ function et(e, t, a) {
       trackEventAnalytics("FirstDraftIpConflictBuildingBlockEval", {
         runGuid: o,
         section: e,
-        fileKey: atomStoreManager.get(ze) || "",
+        fileKey: atomStoreManager.get(openFileKeyAtom) || "",
         buildingBlockScores: l.map(e => JSON.stringify(e))
       });
     } else if ("Examples" === e) {
@@ -191,7 +191,7 @@ function et(e, t, a) {
       trackEventAnalytics("FirstDraftIpConflictExamplesEval", {
         runGuid: o,
         section: e,
-        fileKey: atomStoreManager.get(ze) || "",
+        fileKey: atomStoreManager.get(openFileKeyAtom) || "",
         exampleScores: t.map(e => JSON.stringify(e))
       });
     }
@@ -216,7 +216,7 @@ async function el(e, t) {
       }));
       i += 1;
       let s = n.map(async e => ({
-        b64: "data:image/jpeg;base64," + H9(await e.loadImagesAndExport([{
+        b64: "data:image/jpeg;base64," + uint8ArrayToBase64(await e.loadImagesAndExport([{
           imageType: "JPEG"
         }])),
         node: e
@@ -226,7 +226,7 @@ async function el(e, t) {
         }, {
           orgId: null,
           teamId: null,
-          fileKey: atomStoreManager.get(ze) || null,
+          fileKey: atomStoreManager.get(openFileKeyAtom) || null,
           userId: atomStoreManager.get(kS) || null,
           fileSeq: atomStoreManager.get(_$$J2)?.toString() || null,
           trackingSessionId: null,
@@ -946,7 +946,7 @@ function eS({
   selectedKit: e
 }) {
   let t = useDispatch();
-  let a = tS();
+  let a = useCurrentFileKey();
   let [s, r] = useState("");
   let [c, d] = useState([]);
   let u = _$$B2();

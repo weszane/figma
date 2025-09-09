@@ -5,7 +5,7 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { FPlanNameType, FProductAccessType } from "../figma_app/191312";
 import { getFeatureFlags } from "../905/601108";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { z } from "../905/510753";
 import { a as _$$a } from "../905/693578";
 import { O as _$$O } from "../905/501876";
@@ -22,12 +22,12 @@ import { jsx } from "react/jsx-runtime";
 let c = {
   productNameShort: () => getI18nString("general.figma_buzz"),
   productName: () => getI18nString("general.figma_buzz"),
-  minimumBundle: getFeatureFlags().billing_enable_content_seat ? ud.CONTENT : null
+  minimumBundle: getFeatureFlags().billing_enable_content_seat ? ProductAccessTypeEnum.CONTENT : null
 };
 let m = {
   productNameShort: () => getI18nString("general.figma_design_short"),
   productName: () => getI18nString("general.figma_design"),
-  minimumBundle: ud.EXPERT,
+  minimumBundle: ProductAccessTypeEnum.EXPERT,
   seatDescriptionConfig: {
     shouldShow: () => !0,
     icon16: z,
@@ -48,7 +48,7 @@ let h = {
 let _ = {
   productNameShort: () => getI18nString("general.dev_mode"),
   productName: () => getI18nString("general.dev_mode"),
-  minimumBundle: ud.DEVELOPER,
+  minimumBundle: ProductAccessTypeEnum.DEVELOPER,
   seatDescriptionConfig: {
     shouldShow: () => !0,
     icon16: _$$O,
@@ -70,7 +70,7 @@ let v = {
   productNameShort: () => getI18nString("general.figma_rev"),
   productName: () => getI18nString("general.figma_rev"),
   productNameBeta: getFeatureFlags().ai_ga ? void 0 : () => getI18nString("general.figma_make_beta"),
-  minimumBundle: ud.EXPERT,
+  minimumBundle: ProductAccessTypeEnum.EXPERT,
   seatDescriptionConfig: {
     shouldShow: e => function (e) {
       return e === FPlanNameType.STARTER ? !!getFeatureFlags().bake_starter_limit : e !== FPlanNameType.STUDENT && (e === FPlanNameType.PRO || e === FPlanNameType.ORG || e === FPlanNameType.ENTERPRISE) && !!getFeatureFlags().bake_full_seat_description;
@@ -94,7 +94,7 @@ let w = {
   productNameShort: () => getI18nString("general.sites"),
   productName: () => getI18nString("general.figma_sites"),
   productNameBeta: () => getI18nString("general.figma_sites_beta"),
-  minimumBundle: ud.EXPERT,
+  minimumBundle: ProductAccessTypeEnum.EXPERT,
   seatDescriptionConfig: {
     shouldShow: e => V(e),
     icon16: $,
@@ -115,7 +115,7 @@ let C = {
 let R = {
   productNameShort: () => getI18nString("general.figma_slides_short"),
   productName: () => getI18nString("general.figma_slides"),
-  minimumBundle: ud.COLLABORATOR,
+  minimumBundle: ProductAccessTypeEnum.COLLABORATOR,
   seatDescriptionConfig: {
     shouldShow: () => !0,
     icon16: _$$T,
@@ -149,7 +149,7 @@ let D = memo(function (e) {
 let L = {
   productNameShort: () => getI18nString("general.figjam"),
   productName: () => getI18nString("general.figjam"),
-  minimumBundle: ud.COLLABORATOR,
+  minimumBundle: ProductAccessTypeEnum.COLLABORATOR,
   seatDescriptionConfig: {
     shouldShow: () => !0,
     icon16: _$$D,

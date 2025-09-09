@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dq } from "../905/845253";
 import { WorkspacesDirectoryView } from "../figma_app/43951";
@@ -13,7 +13,7 @@ import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
-import { T5, H3 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { cD } from "../figma_app/598018";
 import { SF } from "../905/55862";
 import { w } from "../905/768636";
@@ -74,8 +74,8 @@ function x({
   handleLibrariesViewFilterChange: i,
   showBottomBorder: r
 }) {
-  let s = T5("FilterRow").unwrapOr(null);
-  let o = H3(s);
+  let s = useCurrentPrivilegedPlan("FilterRow").unwrapOr(null);
+  let o = getParentOrgIdIfOrgLevel(s);
   let l = s?.name;
   let m = cD();
   let x = useMemo(() => SF(e, l), [e, l]);
@@ -137,7 +137,7 @@ export function $$w0({
   let u = dq();
   let p = t?.find(e => "workspace" === e.type);
   let m = p && "workspace" === p.type && p.id;
-  let h = Rs(WorkspacesDirectoryView, {
+  let h = useSubscription(WorkspacesDirectoryView, {
     orgId: u
   });
   let g = "loaded" !== h.status;

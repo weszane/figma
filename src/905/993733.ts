@@ -18,7 +18,7 @@ import { UB } from "../figma_app/249941";
 import { ReviewPhase, formatRenderName, createSinglePropertyRenderTreatment, createMultiPropertyRenderTreatment, createMultiNodeRenderTreatment, createDisplayNodeSinglePropertyRenderTreatment, ProjectDevelopmentPhases, visualAttributes2, visualAttributes, RenderStrategy } from "../905/869235";
 import { cF, c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { rY } from "../905/985490";
 import { zn, xb } from "../figma_app/164212";
 import { s as _$$s } from "../905/583953";
@@ -910,7 +910,7 @@ let e$ = (e, t, i, n, r = !1) => {
   }
   m && (c.padding = {
     displayName: getI18nString("collaboration.branching_node_treatments.property.padding"),
-    displayValue: Yx(p, "unit")
+    displayValue: formatList(p, "unit")
   });
   (l || d || h) && (c.align_items = {
     displayName: getI18nString("collaboration.branching_node_treatments.property.align_items"),

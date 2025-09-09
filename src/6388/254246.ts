@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import s from "../vendor/267721";
 import { A } from "../vendor/850789";
 import { I6 } from "../figma_app/688398";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 var r = s;
 export function $$c0({
   ids: e,
@@ -13,7 +13,7 @@ export function $$c0({
   width: c,
   height: h
 }) {
-  let p = tS();
+  let p = useCurrentFileKey();
   let [g, f] = useState([]);
   let [m] = A(g, 100, {
     equalityFn: x

@@ -16,10 +16,10 @@ import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Uz } from "../905/63728";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
 import { BrowserInfo } from "../figma_app/778880";
 import { logError } from "../905/714362";
@@ -43,11 +43,11 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { d$ } from "../figma_app/664693";
 import { MIXED_MARKER } from "../905/216495";
 import { nN, SR } from "../figma_app/852050";
-import { _G, q5, Cq } from "../figma_app/516028";
+import { useOpenFileLibraryKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { nn, zE, vu, lg, RQ, HF, Hb, ad, Cj, Fl } from "../figma_app/646357";
 import { FFileType, FContainerType, FAccessLevelType } from "../figma_app/191312";
 import { PublishingModalView } from "../figma_app/43951";
-import { X$, H3 } from "../figma_app/465071";
+import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { Wz, MW, ju, cM, MH, dM, fA, y6, x$ as _$$x$, oB as _$$oB, JI, Dc, Iy, Mh, Pd } from "../figma_app/803787";
 import { O as _$$O3 } from "../905/566074";
 import { Qx, o as _$$o, PW, E8 } from "../figma_app/633080";
@@ -79,7 +79,7 @@ import { k as _$$k3 } from "../905/700890";
 import { $z } from "../figma_app/617427";
 import { Y as _$$Y2, M as _$$M } from "../905/830372";
 import { E as _$$E } from "../905/984674";
-import { Xm as _$$Xm } from "../905/760074";
+import { isBranch } from "../905/760074";
 import { M4 } from "../905/713695";
 import { bL as _$$bL, mc, c$ } from "../905/493196";
 import { WM, l9 } from "../905/408073";
@@ -158,7 +158,7 @@ function K(e) {
 function ey() {
   let e;
   let t = RL(_$$JT.PUBLISH_LIBRARY_FOR_AI, Iq);
-  let i = _G();
+  let i = useOpenFileLibraryKey();
   let {
     state,
     start
@@ -512,7 +512,7 @@ function e$({
   let E = !a && 0 === s;
   let x = u.state === Qx.ASSEMBLING_COMPONENTS;
   let S = getFeatureFlags().first_draft_api_publish && (E || !r);
-  let w = E || u.state !== Qx.NONE || !r || _$$Xm(i) || f;
+  let w = E || u.state !== Qx.NONE || !r || isBranch(i) || f;
   let C = S ? "Update First Draft kit data" : "success" === o ? "Publish as First Draft kit" : "error" === o ? "Fix kit errors before publishing" : e ? renderI18nText("design_systems.publishing_modal.publish_button_text") : renderI18nText("design_systems.publishing_modal.publish_styles");
   return jsxs("div", {
     className: "publishing_modal_footer--publishFooter--3e6Ln",
@@ -1302,10 +1302,10 @@ function tJ(e) {
   let [en, ea] = useState(Y || "");
   let [el, ed] = useState(!1);
   let [ec, eu] = useState(null);
-  let ep = q5();
+  let ep = selectCurrentFile();
   let em = useSelector(d1);
   let eh = useSelector(e => e.library);
-  let eg = Cq({
+  let eg = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   let ef = em?.key;
@@ -1321,8 +1321,8 @@ function tJ(e) {
     showCTA
   } = _$$z2("publishing");
   let eR = useSelector(fA);
-  let eN = X$("PublishingModalInner").unwrapOr(null);
-  let eP = H3(eN);
+  let eN = useCurrentPublicPlan("PublishingModalInner").unwrapOr(null);
+  let eP = getParentOrgIdIfOrgLevel(eN);
   let eO = useSelector(e => e.orgById);
   let eD = _$$Y(eg || null);
   let eL = !!em?.starter_library_src_file_key;
@@ -1347,7 +1347,7 @@ function tJ(e) {
     eG(e);
     h(oB());
   }, [h]);
-  let eH = Rs(PublishingModalView({
+  let eH = useSubscription(PublishingModalView({
     fileKey: ef
   }), {
     enabled: !!ef
@@ -1374,7 +1374,7 @@ function tJ(e) {
   SR();
   let e0 = useAtomWithSubscription(y6(eQ));
   let e1 = useAtomWithSubscription(_$$x$(eQ));
-  let e2 = ZC(eY);
+  let e2 = useLatestRef(eY);
   useEffect(() => {
     e2?.status === _$$r.LOADING && eY.status === _$$r.SUCCESS && (initiallyCheckedItemIDs || tt(new Set(e1)));
   }, [e1, eY, initiallyCheckedItemIDs, e2?.status]);
@@ -1407,8 +1407,8 @@ function tJ(e) {
   useEffect(() => {
     eh.publishProgress.state === Qx.UPLOADING && tn();
   }, [tn, eh.publishProgress.state]);
-  let tr = ZC(eh);
-  let ta = ZC(e1);
+  let tr = useLatestRef(eh);
+  let ta = useLatestRef(e1);
   useEffect(() => {
     if (tr && ta && tr !== eh) {
       if (eu(null), ta.every(e => te.has(e))) {
@@ -1737,7 +1737,7 @@ function t0({
   closeModal: e,
   isCurrentFilePublished: t
 }) {
-  let i = _G();
+  let i = useOpenFileLibraryKey();
   let r = useDispatch();
   let s = Object.values(useSelector(MH));
   let o = Object.values(useSelector(dM));

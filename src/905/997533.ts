@@ -8,7 +8,7 @@ import { Rg } from "../figma_app/827447";
 import { getInitialOptions } from "../figma_app/169182";
 import { P as _$$P } from "../905/724705";
 import { parseQuery } from "../905/634134";
-import { YH } from "../figma_app/930338";
+import { stringToUint8Array } from "../figma_app/930338";
 import { XHR } from "../905/910117";
 import { IY, kQ, LP, E as _$$E, Qg, Em, WY, My } from "../905/194276";
 import { _G } from "../905/164233";
@@ -160,7 +160,7 @@ let M = (e, t) => {
 let $$j4 = (e = "") => !!parseQuery(customHistory.location.search).is_not_gen_0 || e && P.includes(e);
 let U = (e, t, i) => {
   let n = "";
-  YH(e).length > 500 && (n = getI18nString("auth.input-validation.long-password"));
+  stringToUint8Array(e).length > 500 && (n = getI18nString("auth.input-validation.long-password"));
   Array.from(e).length < 8 && (n = getI18nString("auth.input-validation.short-password"));
   e === t && (n = getI18nString("auth.input-validation.email-is-password"));
   i && e === i && (n = getI18nString("auth.input-validation.name-is-password"));

@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import { Mz } from "../vendor/925040";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { LU, jw } from "../figma_app/327588";
 import { Lk, x } from "../figma_app/639711";
 import { gI, Pc } from "../figma_app/396464";
@@ -151,7 +151,7 @@ export function $$U7() {
   }), e) && !!e.length;
   let [s, l] = useAtomValueAndSetter(Lk);
   let c = useSelector(e => e.mirror.sceneGraphSelection);
-  let u = ZC(c);
+  let u = useLatestRef(c);
   let m = e => e.some(e => {
     let t = getSingletonSceneGraph().get(e);
     let r = t?.containingCooperFrameId();

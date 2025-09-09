@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { h as _$$h } from "../905/142086";
 import { showModalHandler } from "../905/156213";
 import { QL, EM } from "../905/609392";
@@ -8,7 +8,7 @@ import { nk } from "../figma_app/2023";
 import { aV } from "../figma_app/722362";
 import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { IZ, wR } from "../905/452667";
 import { g_ } from "../905/646788";
 import { RC, Yx } from "../3276/926297";
@@ -19,7 +19,7 @@ export function $$x0(e) {
   let n = RC();
   let x = Yx();
   let b = e.editorType === FFileType.WHITEBOARD && !!e.org?.figjamDisabledAt;
-  let y = e.editorType === FFileType.SLIDES && oA(e.org?.isSlidesDisabled);
+  let y = e.editorType === FFileType.SLIDES && getResourceDataOrFallback(e.org?.isSlidesDisabled);
   let C = e.editorType === FFileType.SITES && e.org?.isSitesDisabled;
   let w = e.editorType === FFileType.COOPER && e.org?.isCooperDisabled;
   let j = aV();
@@ -30,7 +30,7 @@ export function $$x0(e) {
     o && !j && function (o) {
       if (b || y || C || w || !n) return;
       let i = x.find(e => e.id === o);
-      if (i?.level !== e6.EDITOR || i.status !== IZ.Pending) return;
+      if (i?.level !== AccessLevelEnum.EDITOR || i.status !== IZ.Pending) return;
       let c = e.ownerRole?.userId;
       let m = k?.id;
       if (null == c || null == m || c !== m) return;
@@ -39,7 +39,7 @@ export function $$x0(e) {
       let _ = a && n.isFreeUserOnly && n.isInDraftsFolder && !n.hasOrg;
       let j = {
         handle: u,
-        requestType: e6.EDITOR,
+        requestType: AccessLevelEnum.EDITOR,
         roleRequestId: o
       };
       t(showModalHandler({

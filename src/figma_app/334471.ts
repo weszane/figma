@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { d6 } from "../figma_app/687776";
-import { HH } from "../figma_app/828186";
+import { canCreateFileType } from "../figma_app/687776";
+import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { FFileType } from "../figma_app/191312";
-import { oz } from "../905/561485";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { s as _$$s } from "../905/761565";
 import { k } from "../figma_app/831857";
 export function $$c0(e) {
@@ -19,14 +19,14 @@ export function $$c0(e) {
     }), n.push({
       editorType: FFileType.SLIDES,
       canCreate: u(e, FFileType.SLIDES)
-    }), HH()) {
+    }), isCooperFeatureEnabled()) {
       let t = FFileType.COOPER;
       n.push({
         editorType: t,
         canCreate: u(e, t)
       });
     }
-    if (oz() && t) {
+    if (isSitesFeatureEnabled() && t) {
       let t = FFileType.SITES;
       n.push({
         editorType: t,
@@ -44,6 +44,6 @@ export function $$c0(e) {
   }, [e, t, r]);
 }
 function u(e, t) {
-  return !!e && d6(e, t);
+  return !!e && canCreateFileType(e, t);
 }
 export const h = $$c0;

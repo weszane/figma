@@ -1,7 +1,7 @@
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { atom } from "../figma_app/27355";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { getInitialOptions } from "../figma_app/169182";
 import { M } from "../figma_app/155411";
 import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
@@ -19,7 +19,7 @@ let m = atom(e => {
   }));
   if (t?.status !== "loaded") return null;
   let i = t.data?.libraryPresetSubscriptionsV2?.map(e => {
-    let t = oA(e.libraryKey);
+    let t = getResourceDataOrFallback(e.libraryKey);
     return null == t ? null : _$$l(t);
   }) ?? null;
   return i?.filter(isNotNullish) ?? null;
@@ -33,7 +33,7 @@ let $$f1 = atom(e => {
   if (t?.status !== "loaded") return {};
   let i = {};
   for (let e of t.data.libraryPresetSubscriptionsV2 ?? []) {
-    let t = oA(e.libraryKey);
+    let t = getResourceDataOrFallback(e.libraryKey);
     null != t && (i[_$$l(t)] = e);
   }
   return i;

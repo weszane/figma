@@ -28,12 +28,12 @@ import { c as _$$c } from "../905/370443";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import W from "lodash-es/mapValues";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
 import { sx as _$$sx } from "../905/941192";
 import { E as _$$E } from "../905/984674";
 import { SK, Fq, vu } from "../905/84777";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 import { UpsellModalType } from "../905/165519";
 import { Ju, IX } from "../905/712921";
@@ -256,7 +256,7 @@ function es({
 }) {
   let a = [FPlanNameType.STUDENT, FPlanNameType.PRO, FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(i);
   let s = [FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(i);
-  let o = s ? Oq : Oq.exclude([ud.DEV_MODE]);
+  let o = s ? Oq : Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let l = function (e) {
     switch (e) {
       case FPlanNameType.ENTERPRISE:
@@ -281,7 +281,7 @@ function es({
     unit: c
   }));
   let h = SK(m, Fq.UPSELL_MODALS);
-  let [_] = mI(h);
+  let [_] = handleSuspenseRetainRelease(h);
   let A = vu(_);
   let b = new vr(t);
   let v = K()(A.data, e => b.formatMoney(e.amount, {
@@ -314,11 +314,11 @@ function es({
         children: renderI18nText("plan_details.price_editor_mo.seat_rename", {
           price: jsx("strong", {
             className: S,
-            children: v[ud.DESIGN]
+            children: v[ProductAccessTypeEnum.DESIGN]
           })
         })
       })]
-    }), s && ud.DEV_MODE in v && jsxs("div", {
+    }), s && ProductAccessTypeEnum.DEV_MODE in v && jsxs("div", {
       className: I,
       "data-testid": "dev-mode-price-row",
       children: [jsx("div", {
@@ -332,7 +332,7 @@ function es({
         children: renderI18nText("plan_details.price_editor_mo.seat_rename", {
           price: jsx("strong", {
             className: S,
-            children: v[ud.DEV_MODE]
+            children: v[ProductAccessTypeEnum.DEV_MODE]
           })
         })
       })]
@@ -347,7 +347,7 @@ function es({
         children: renderI18nText("plan_details.price_editor_mo.seat_rename", {
           price: jsx("strong", {
             className: S,
-            children: v[ud.FIGJAM]
+            children: v[ProductAccessTypeEnum.FIGJAM]
           })
         })
       })]

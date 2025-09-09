@@ -9,14 +9,14 @@ import { zE } from "../905/738636";
 import { s5 } from "../figma_app/223206";
 import { Kl } from "../905/766303";
 import { dh } from "../figma_app/186343";
-import { ze, yV } from "../figma_app/516028";
+import { openFileKeyAtom, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { ol, Me } from "../figma_app/598018";
 import { ai } from "../figma_app/915202";
 import { S, E as _$$E } from "../figma_app/999099";
 import { V } from "../figma_app/761984";
 export function $$b3() {
-  let e = useAtomWithSubscription(ze);
+  let e = useAtomWithSubscription(openFileKeyAtom);
   let t = useDispatch();
   let r = debugState.getState();
   let l = Kl(r);
@@ -43,7 +43,7 @@ export function $$T0({
   fileKey: r,
   source: n
 }) {
-  let i = atomStoreManager.get(ze);
+  let i = atomStoreManager.get(openFileKeyAtom);
   let a = atomStoreManager.get(Me);
   let l = debugState.getState();
   I({
@@ -100,7 +100,7 @@ function A({
     isDisabledForViewers: e
   })) return !1;
   if (!e) {
-    let e = atomStoreManager.get(yV);
+    let e = atomStoreManager.get(openFileAtom);
     let t = !atomStoreManager.get(Me)?.starter_team && e?.viewerExportRestricted;
     if (e && !e.canEditCanvas && t) return !1;
   }

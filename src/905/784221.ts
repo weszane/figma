@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -9,7 +9,7 @@ import { yJ } from "../figma_app/78808";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileTemplateView } from "../figma_app/43951";
@@ -60,10 +60,10 @@ let x = registerModal(function ({
   dispatch: e,
   fileKey: t
 }) {
-  let i = q5();
+  let i = selectCurrentFile();
   let s = dq();
   let y = cD();
-  let b = Rs(FileTemplateView, {
+  let b = useSubscription(FileTemplateView, {
     fileKey: t
   }, {
     enabled: !i

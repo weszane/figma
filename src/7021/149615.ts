@@ -17,7 +17,7 @@ import { e6, $z } from "../figma_app/617427";
 import { j as _$$j } from "../905/261906";
 import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Hl, YT } from "../figma_app/217457";
 import { a as _$$a2 } from "../905/584964";
 import { vr } from "../figma_app/514043";
@@ -213,7 +213,7 @@ function M({
   let p = a[r];
   if (isNullish(p)) return jsx(Fragment, {});
   let h = new vr(p.currency).formatMoney(p.amount);
-  let g = r === ud.EXPERT ? getI18nString("seat_billing_terms.modal.seat_features.list.full", {
+  let g = r === ProductAccessTypeEnum.EXPERT ? getI18nString("seat_billing_terms.modal.seat_features.list.full", {
     productList: _
   }) : getI18nString("seat_billing_terms.modal.seat_features.list", {
     productList: _
@@ -274,15 +274,15 @@ export function $$B0({
   });
   let S = o ? getI18nString("seat_billing_terms.modal.plan_types.ent") : getI18nString("seat_billing_terms.modal.plan_types.org");
   let k = useMemo(() => [{
-    bpKey: ud.EXPERT,
+    bpKey: ProductAccessTypeEnum.EXPERT,
     oldSeatType: getI18nString("seat_billing_terms.modal.old_seat.design"),
     newSeatType: getI18nString("seat_billing_terms.modal.new_seat.full")
   }, {
-    bpKey: ud.DEVELOPER,
+    bpKey: ProductAccessTypeEnum.DEVELOPER,
     oldSeatType: getI18nString("seat_billing_terms.modal.old_seat.dev_mode"),
     newSeatType: getI18nString("seat_billing_terms.modal.new_seat.dev")
   }, {
-    bpKey: ud.COLLABORATOR,
+    bpKey: ProductAccessTypeEnum.COLLABORATOR,
     oldSeatType: getI18nString("seat_billing_terms.modal.old_seat.figjam"),
     newSeatType: getI18nString("seat_billing_terms.modal.new_seat.collab")
   }].map(e => ({

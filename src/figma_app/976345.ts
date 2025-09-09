@@ -25,7 +25,7 @@ import { Y9 } from "../figma_app/502247";
 import { Qn } from "../figma_app/415217";
 import { lH } from "../905/316062";
 import { UpgradeSteps } from "../figma_app/831101";
-import { SC, gu } from "../figma_app/707808";
+import { UpgradeAction, allViews } from "../figma_app/707808";
 import { y as _$$y } from "../905/235145";
 import { H } from "../905/202181";
 import { p as _$$p } from "../905/494706";
@@ -274,7 +274,7 @@ let $$et3 = createOptimistThunk((e, {
   })) {
     e.dispatch(sf({
       view: "teamUpgrade",
-      teamFlowType: SC.CREATE_AND_UPGRADE,
+      teamFlowType: UpgradeAction.CREATE_AND_UPGRADE,
       teamId: null,
       paymentStep: UpgradeSteps.PLAN_COMPARISON,
       previousView: t,
@@ -285,7 +285,7 @@ let $$et3 = createOptimistThunk((e, {
   }
   o.user && Mk(o.user.id, Object.values(o.teams), o.roles.byTeamId) ? e.dispatch(sf({
     view: "teamUpgrade",
-    teamFlowType: SC.CREATE,
+    teamFlowType: UpgradeAction.CREATE,
     teamId: null,
     paymentStep: UpgradeSteps.CREATE_TEAM,
     previousView: t,
@@ -300,7 +300,7 @@ let $$et3 = createOptimistThunk((e, {
   }));
 });
 let er = ["fullscreen", "prototype"];
-let en = [...gu, "desktopNewTab"];
+let en = [...allViews, "desktopNewTab"];
 export function $$ei12(e, t) {
   if (er.includes(e.view)) ;else if (en.includes(e.view)) return !0;else if (t && t.includes(e.view)) return !0;
   return !1;

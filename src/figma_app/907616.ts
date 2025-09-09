@@ -10,13 +10,13 @@ import { Y as _$$Y } from "../905/26051";
 import { c as _$$c2 } from "../905/425573";
 import { b as _$$b2 } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { z, Z } from "../905/306088";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sZ } from "../905/845253";
 import { FPermissionLevelType, FViewPermissionType, FResourceCategoryType } from "../figma_app/191312";
 import { FEditorType } from "../figma_app/53721";
-import { Fb } from "../figma_app/630077";
+import { teamVisibilityEnum } from "../figma_app/630077";
 import { Ib } from "../905/129884";
 import { UNASSIGNED } from "../905/247093";
 import { Ro } from "../figma_app/805373";
@@ -236,7 +236,7 @@ export function $$j2(e) {
     value: e.selectedDiscoverability,
     onChange: e.setSelectedDiscoverability,
     children: [jsx(Z, {
-      value: Fb.ORG_BROWSABLE,
+      value: teamVisibilityEnum.ORG_BROWSABLE,
       className: x,
       children: jsx("p", {
         className: A,
@@ -252,7 +252,7 @@ export function $$j2(e) {
       value: e.selectedDiscoverability,
       onChange: e.setSelectedDiscoverability,
       children: [jsx(Z, {
-        value: Fb.ORG_BROWSABLE,
+        value: teamVisibilityEnum.ORG_BROWSABLE,
         className: x,
         children: jsx("p", {
           className: A,
@@ -262,7 +262,7 @@ export function $$j2(e) {
         className: N,
         children: renderI18nText("team_creation.anyone_can_find_this_team")
       }), jsx(Z, {
-        value: Fb.HIDDEN,
+        value: teamVisibilityEnum.HIDDEN,
         className: x,
         children: jsx("p", {
           className: A,
@@ -305,7 +305,7 @@ export function $$B10(e, t, r, i, a) {
     containerName: t.name
   }) : e === FPermissionLevelType.WORKSPACE_EDIT || e === FPermissionLevelType.WORKSPACE_VIEW ? renderI18nText("permissions.anyone_in_container_name", {
     containerName: r?.name ?? renderI18nText("folder_permissions_modal.project_name_s_workspace", {
-      projectName: EJ(a ?? "", 30)
+      projectName: truncate(a ?? "", 30)
     })
   }) : e === FPermissionLevelType.INVITE_ONLY || e === FPermissionLevelType.INHERIT ? renderI18nText("permissions.only_those_invited") : jsx(Fragment, {});
 }

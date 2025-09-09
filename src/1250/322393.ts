@@ -3,10 +3,10 @@ import { permissionScopeHandler } from '../905/189185';
 import { isInvalidValue, MIXED_MARKER } from '../905/216495';
 import { getI18nString } from '../905/303541';
 import { bj } from '../905/420347';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { M as _$$M } from '../905/512402';
 import { j as _$$j } from '../905/521149';
-import { oA } from '../905/663269';
+import { getResourceDataOrFallback } from '../905/663269';
 import { getSingletonSceneGraph } from '../905/700578';
 import { l as _$$l } from '../905/716947';
 import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411';
@@ -25,9 +25,9 @@ import { LU } from '../figma_app/327588';
 import { Qp } from '../figma_app/349248';
 import { gI, Wn } from '../figma_app/396464';
 import { fullscreenValue } from '../figma_app/455680';
-import { EV, X$ } from '../figma_app/465071';
-import { tS } from '../figma_app/516028';
-import { IT } from '../figma_app/566371';
+import { useIsProOrStudentPlan, useCurrentPublicPlan } from '../figma_app/465071';
+import { useCurrentFileKey } from '../figma_app/516028';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Fj } from '../figma_app/594947';
 import { Gi, qY } from '../figma_app/622574';
 import { eY } from '../figma_app/722362';
@@ -121,8 +121,8 @@ export function $$J18() {
     requestLoadMore,
     status
   } = qY(h, FFileType.COOPER, b === 'NEW_FILE_MODAL' ? 16 : 10);
-  let E = X$('useCooperTemplatesSearch');
-  let C = EV(E).unwrapOr(!1);
+  let E = useCurrentPublicPlan('useCooperTemplatesSearch');
+  let C = useIsProOrStudentPlan(E).unwrapOr(!1);
   let I = _$$j();
   let N = x?.type === 'team' && C;
   let O = x?.type === 'org' ? x.entity.id : void 0;
@@ -130,7 +130,7 @@ export function $$J18() {
   let [{
     data: M,
     status: P
-  }] = IT(_$$V({
+  }] = setupResourceAtomHandler(_$$V({
     query: h,
     sort_by: _$$e.Search.POPULAR,
     resource_type: [vt.COOPER_TEMPLATE_ASSET],
@@ -143,7 +143,7 @@ export function $$J18() {
   let [{
     data: D,
     status: L
-  }] = IT(_$$V({
+  }] = setupResourceAtomHandler(_$$V({
     query: h,
     sort_by: _$$e.Search.POPULAR,
     resource_type: [vt.COOPER_TEMPLATE_ASSET],
@@ -201,7 +201,7 @@ export function $$ee13(e) {
 export function $$et11() {
   let e = Xr(Tw);
   let t = Xr(Hk);
-  let n = tS();
+  let n = useCurrentFileKey();
   return useCallback(() => {
     n && (t(!0), e(!1), AppStateTsApi?.cooperFocusView().exitFocusedNodeView(), AppStateTsApi?.cooperFocusView().zoomToGrid(0));
   }, [e, n, t]);
@@ -210,10 +210,10 @@ export function $$en6({
   library: e
 }) {
   let t = Xr(Tw);
-  let n = tS();
+  let n = useCurrentFileKey();
   let i = useDispatch();
   let s = function (e) {
-    let [t] = IT(_$$u(e), {
+    let [t] = setupResourceAtomHandler(_$$u(e), {
       enabled: !0
     });
     return useMemo(() => {
@@ -309,7 +309,7 @@ export function $$ea12({
     if (n) {
       let e = getSingletonSceneGraph().get(c);
       e && SceneGraphHelpers?.replaceSelection([e.guid], !0);
-      d.length === 1 && d[0] ? (d[0].isInstance && YQ({
+      d.length === 1 && d[0] ? (d[0].isInstance && handleAtomEvent({
         id: qA
       }), AppStateTsApi?.cooperFocusView().isFocusedNodeViewEnabled() ? AppStateTsApi?.cooperFocusView().focusSelectedNodeInFocusedNodeView(!0) : setTimeout(() => {
         AppStateTsApi?.cooperFocusView().panToSelectedNodeIfOutsideViewport(0.6);
@@ -339,7 +339,7 @@ export function $$ei9(e) {
   let t = LibraryComponentDataByLibraryKey.Query({
     libraryKey: e
   });
-  let [n] = IT(t, {
+  let [n] = setupResourceAtomHandler(t, {
     enabled: !0
   });
   return useMemo(() => {
@@ -351,7 +351,7 @@ export function $$ei9(e) {
         }
       };
     }
-    let t = oA(n.data?.libraryKeyToFile?.file);
+    let t = getResourceDataOrFallback(n.data?.libraryKeyToFile?.file);
     if (!t || !e) {
       return {
         status: 'loaded',

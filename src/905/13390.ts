@@ -30,7 +30,7 @@ import { e0 as _$$e2 } from '../905/696396';
 import { D4, nz } from '../905/697795';
 import { l as _$$l } from '../905/714607';
 import { NA } from '../905/738636';
-import { CE, mr, SA } from '../905/760074';
+import { generateUrl, findBranchById, isDefaultFile } from '../905/760074';
 import { noop } from '../905/834956';
 import { BK } from '../905/848862';
 import { n as _$$n, g4, m8, SW, Ul, v_ } from '../905/864644';
@@ -40,7 +40,7 @@ import { sf } from '../905/929976';
 import { fileEntityDataMapper } from '../905/943101';
 import { nk } from '../figma_app/2023';
 import { S as _$$S } from '../figma_app/11182';
-import { R$ } from '../figma_app/12796';
+import { isExternalRestricted } from '../figma_app/12796';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { S as _$$S2 } from '../figma_app/78808';
 import { yN } from '../figma_app/88484';
@@ -51,12 +51,12 @@ import { vt } from '../figma_app/231614';
 import { MG } from '../figma_app/277330';
 import { ce } from '../figma_app/347146';
 import { _H, ae, CS, gX, nL, zj } from '../figma_app/448654';
-import { D6 as _$$D, Kd } from '../figma_app/465071';
+import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from '../figma_app/465071';
 import { throwError, throwTypeError } from '../figma_app/465776';
 import { jn } from '../figma_app/522082';
 import { Gi } from '../figma_app/528509';
 import { nb, Tf, Y6 } from '../figma_app/543100';
-import { IT } from '../figma_app/566371';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Fj } from '../figma_app/594947';
 import { gO, z6 } from '../figma_app/598926';
 import { UF } from '../figma_app/622574';
@@ -64,7 +64,7 @@ import { Z as _$$Z } from '../figma_app/640519';
 import { wH } from '../figma_app/680166';
 import { Cp, jB, Px, zS } from '../figma_app/722141';
 import { a9 } from '../figma_app/741211';
-import { wR } from '../figma_app/765689';
+import { getProductAccessTypeOrDefault } from '../figma_app/765689';
 import { e as _$$e4 } from '../figma_app/831857';
 import { V1 } from '../figma_app/834392';
 import { dm, gp, OL } from '../figma_app/840917';
@@ -154,7 +154,7 @@ export function $$ek0(e) {
   }));
   let eU = e.tile;
   let eB = getUserId();
-  let [eV] = IT(OL({
+  let [eV] = setupResourceAtomHandler(OL({
     userId: eB
   }));
   let eG = useMemo(() => eV?.data ?? {}, [eV]);
@@ -214,8 +214,8 @@ export function $$ek0(e) {
         D4(t.prototype.url, t.prototype.file_key, t.prototype.page_id, selectedView);
         break;
       case nb.REPO:
-        let r = mr(t.repo, t.branches, selectedBranchKeyByRepoId);
-        customHistory.redirect(CE(r, t.repo, 'file'), '_blank');
+        let r = findBranchById(t.repo, t.branches, selectedBranchKeyByRepoId);
+        customHistory.redirect(generateUrl(r, t.repo, 'file'), '_blank');
         break;
       case nb.OFFLINE_FILE:
         i(NA({
@@ -320,10 +320,10 @@ export function $$ek0(e) {
         }));
         break;
       case nb.REPO:
-        let n = mr(e.repo, e.branches, selectedBranchKeyByRepoId);
+        let n = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
         i(_$$S2({
           fileKey: n.key,
-          url: CE(n, e.repo, 'file'),
+          url: generateUrl(n, e.repo, 'file'),
           source: _$$d.FILE_TILE_CONTEXT_MENU
         }));
     }
@@ -430,7 +430,7 @@ export function $$ek0(e) {
           canMoveWithReasons: t?.canMoveWithReasons
         }, void 0, !0);
       } else if (r?.type === nb.REPO) {
-        let e = r.branches.find(e => SA(e, r.repo));
+        let e = r.branches.find(e => isDefaultFile(e, r.repo));
         _$$h(e ?? null, r.repo, i, void 0, void 0, {
           canMove: !!n?.canMove,
           isUserViewerRestricted: !!n?.isUserRestrictedForSeat,
@@ -561,7 +561,7 @@ export function $$ek0(e) {
           canMoveWithReasons: t?.canMoveWithReasons
         });
       } else if (r?.type === nb.REPO) {
-        let e = r.branches.find(e => SA(e, r.repo));
+        let e = r.branches.find(e => isDefaultFile(e, r.repo));
         _$$h(e ?? null, r.repo, i, void 0, void 0, {
           canMove: !!n?.canMove,
           isUserViewerRestricted: !!n?.isUserRestrictedForSeat,
@@ -620,7 +620,7 @@ export function $$ek0(e) {
   let tH = (tG && e.permsByFileKey[tG.key]) ?? null;
   let tW = (tz && e.permsByRepoId[tz.id]) ?? null;
   let tK = e.tile.type === nb.PROTOTYPE ? e.tile.prototype : null;
-  let tY = tz != null && eU.branches ? eU.branches.find(e => SA(e, tz)) : null;
+  let tY = tz != null && eU.branches ? eU.branches.find(e => isDefaultFile(e, tz)) : null;
   let tq = tY ? fileEntityDataMapper.toLiveGraph(tY) : null;
   let t$ = e.tile.type === nb.OFFLINE_FILE ? e.tile.file : null;
   let tZ = mu(e.tile.type === nb.FILE ? fileEntityDataMapper.toSinatra(e.tile.file) : null, eB);
@@ -635,7 +635,7 @@ export function $$ek0(e) {
     if (!user || !e || !tQ) return null;
     let t = fileEntityDataMapper.toSinatra(tQ);
     let i = tJ.data?.file?.mustUpgradeToShareDraft ?? !1;
-    return getUpgradeEligibility(wR(e), !_$$l3({
+    return getUpgradeEligibility(getProductAccessTypeOrDefault(e), !_$$l3({
       file: {
         ...t,
         mustUpgradeToShareDraft: i
@@ -659,8 +659,8 @@ export function $$ek0(e) {
   });
   let t7 = Cp(t6.destinationPlan?.key || null, t6.licenseType);
   let t8 = e.selectedTiles.filter(e => e.type === nb.FILE).map(e => e.file).some(e => e.editorType === FFileType.FIGMAKE) && t6.requiresUpgrade && !tU;
-  let t9 = _$$D('TileActionDropdown');
-  let ie = Kd(t9).unwrapOr(!1);
+  let t9 = useCurrentPlanUser('TileActionDropdown');
+  let ie = useIsOrgMemberOrAdminUser(t9).unwrapOr(!1);
   let it = useAtomWithSubscription(V1);
   let ii = dropdownShown?.data;
   if (!ii) return null;
@@ -704,8 +704,8 @@ export function $$ek0(e) {
       [eC.DELETE]: (e, i, n) => {
         let r = !1;
         if (e.type === nb.REPO) {
-          let t = mr(e.repo, e.branches, selectedBranchKeyByRepoId);
-          r = !SA(t, e.repo);
+          let t = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
+          r = !isDefaultFile(t, e.repo);
         }
         return {
           displayText: r ? getI18nString('tile.dropdown.move_file_and_branches_to_trash') : t === 1 ? getI18nString('tile.dropdown.trash_single_tile') : getI18nString('tile.dropdown.trash_file', {
@@ -769,9 +769,9 @@ export function $$ek0(e) {
               callback: () => tt(e.file)
             };
           case nb.REPO:
-            let t = mr(e.repo, e.branches, selectedBranchKeyByRepoId);
+            let t = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             return {
-              displayText: SA(t, e.repo) ? getI18nString('tile.dropdown.rename') : getI18nString('tile.dropdown.rename_file'),
+              displayText: isDefaultFile(t, e.repo) ? getI18nString('tile.dropdown.rename') : getI18nString('tile.dropdown.rename_file'),
               callback: () => ti(e.repo)
             };
           case nb.OFFLINE_FILE:
@@ -802,7 +802,7 @@ export function $$ek0(e) {
               }
             };
           case nb.REPO:
-            let t = mr(e.repo, e.branches, selectedBranchKeyByRepoId);
+            let t = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             return {
               displayText: getI18nString('fullscreen_actions.toggle-version-history'),
               callback: () => {
@@ -820,7 +820,7 @@ export function $$ek0(e) {
             case nb.PINNED_FILE:
               return e.file;
             case nb.REPO:
-              return mr(e.repo, e.branches, selectedBranchKeyByRepoId);
+              return findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
             default:
               reportError(_$$e.WAYFINDING, new Error('Invalid tile type when rendering DropdownActionOptions.SHARE'), {
                 extra: {
@@ -834,7 +834,7 @@ export function $$ek0(e) {
           }
         })();
         let i = Tf.getEditorType(e);
-        let n = wR(i);
+        let n = getProductAccessTypeOrDefault(i);
         return {
           displayText: getI18nString('tile.dropdown.share'),
           callback: () => {
@@ -982,7 +982,7 @@ export function $$ek0(e) {
   })(is, ir);
   let iv = (() => {
     let i = (tK && e.permsByPrototypeId[tK.file_key]) ?? null;
-    let n = R$(user, currentUserOrgId);
+    let n = isExternalRestricted(user, currentUserOrgId);
     let r = !!tB && !!tB.teamId && eH;
     let a = selectedView.view === 'folder' && pinnedFileKeys[selectedView.folderId] || it && openFileFolderId && pinnedFileKeys[openFileFolderId] || [];
     let s = tB && a.includes(tB.key);

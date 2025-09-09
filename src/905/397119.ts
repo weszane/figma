@@ -1,7 +1,7 @@
 import { Z9 } from "../figma_app/770359";
 import { lV } from "../figma_app/617606";
 import { Ho, a5 } from "../figma_app/337924";
-import { aI } from "../figma_app/552876";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { A } from "../905/866368";
 export class $$l1 {
   constructor() {
@@ -45,7 +45,7 @@ class d extends A {
         });
       }
     } catch (t) {
-      let e = aI() ? lV.FIGMAKE : lV.CODE_IN_SITES;
+      let e = isFigmakeSitesEnabled() ? lV.FIGMAKE : lV.CODE_IN_SITES;
       Ho(t, e, a5.EDIT_LOCALLY, {
         editorViewState: JSON.stringify(this.editorView.state)
       });

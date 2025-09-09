@@ -8,7 +8,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Xm, gB, oA } from "../905/723791";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -28,13 +28,13 @@ import { k as _$$k2 } from "../469e6e40/952112";
 import { sf, oB } from "../905/929976";
 import { jm, fu, kp } from "../figma_app/831799";
 import { UserFlagByName, TeamById, TeamAdminSettingsPage } from "../figma_app/43951";
-import { S2, No, YQ, px, W8 } from "../figma_app/465071";
+import { useTeamPlanFeatures, useTeamPlanPublicInfo, useIsStudentPlan, useTeamPlanUser, useIsTeamAdminUser } from "../figma_app/465071";
 import { ck } from "../905/952832";
 import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
 import { ER } from "../figma_app/102449";
 import { ps } from "../figma_app/845611";
 import { F as _$$F } from "../469e6e40/308608";
-import { Te } from "../figma_app/765689";
+import { ProductAccessMap } from "../figma_app/765689";
 import { resourceUtils } from "../905/989992";
 import z from "../vendor/529640";
 import { A as _$$A } from "../905/920142";
@@ -42,8 +42,8 @@ import { VisualBellActions } from "../905/302958";
 import { b_, sH, Ji } from "../figma_app/149367";
 import { tb as _$$tb } from "../905/848667";
 import { If, wv } from "../figma_app/121751";
-import { A as _$$A2 } from "../905/654645";
-import { MF } from "../figma_app/391338";
+import { adminPermissionConfig } from "../905/654645";
+import { useShadowReadLoaded } from "../figma_app/391338";
 import { FBillingPeriodType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { k_, BP, TG } from "../1881/866163";
 import { Ok, Vc, UW, d2 } from "../469e6e40/142718";
@@ -77,7 +77,7 @@ import { yN } from "../905/727738";
 import { ol, Rq, pe } from "../figma_app/598018";
 import { IX } from "../905/712921";
 import { O as _$$O } from "../905/833838";
-import { e6 as _$$e2 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { d as _$$d2 } from "../figma_app/135698";
 import { i9 } from "../figma_app/805373";
 import { r as _$$r } from "../469e6e40/505264";
@@ -98,7 +98,7 @@ import { cE, oi } from "../figma_app/527041";
 import { fAD } from "../figma_app/27776";
 import { Mc, nM, Gb, r2, dG, U0, nf, Hy, kL } from "../469e6e40/504232";
 import { B as _$$B2 } from "../905/950875";
-import { oA as _$$oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { S as _$$S } from "../469e6e40/679996";
 import { logError } from "../905/714362";
@@ -114,7 +114,7 @@ import { T_, Kz, x8, bX } from "../469e6e40/336248";
 import { Bq, WX } from "../figma_app/482142";
 import { Hq, C8, BO, Be } from "../figma_app/920435";
 import { UC, mL } from "../905/563637";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { L as _$$L } from "../c5e2cae0/262856";
 import { u as _$$u } from "../469e6e40/510414";
@@ -122,7 +122,7 @@ import { Ti, bQ } from "../figma_app/658324";
 import { d as _$$d3 } from "../7021/966231";
 import { UpsellModalType } from "../905/165519";
 import { createEmptyAddress } from "../figma_app/831101";
-import { OI } from "../figma_app/630077";
+import { isTeamEligibleForUpgrade } from "../figma_app/630077";
 import { Ib } from "../905/129884";
 import { fm } from "../c5e2cae0/453906";
 import { $ as _$$$ } from "../905/834575";
@@ -140,9 +140,9 @@ import { bE } from "../figma_app/375098";
 import { selectCurrentUser } from "../905/372672";
 import { M4, IT } from "../905/713695";
 import { VP, D2 } from "../905/18797";
-import { OL as _$$OL } from "../figma_app/12796";
+import { canPerformActionBasedOnLevel } from "../figma_app/12796";
 import { vS } from "../figma_app/846003";
-import { Ft } from "../figma_app/707808";
+import { EntityType } from "../figma_app/707808";
 import { R as _$$R2 } from "../figma_app/522082";
 import { p as _$$p3 } from "../figma_app/353099";
 import { X as _$$X } from "../905/482718";
@@ -180,7 +180,7 @@ function $({
   team: e
 }) {
   return jsx(_$$F, {
-    supportedLicenses: [Te.DESIGN, Te.WHITEBOARD],
+    supportedLicenses: [ProductAccessMap.DESIGN, ProductAccessMap.WHITEBOARD],
     planType: ps.TEAM,
     planId: e.id,
     isOrgAdmin: !1
@@ -191,8 +191,8 @@ function B({
 }) {
   let t = useDispatch();
   let a = useSelector(e => e.avatarEditorState);
-  let n = S2().unwrapOr(null);
-  let s = Rs(UserFlagByName, {
+  let n = useTeamPlanFeatures().unwrapOr(null);
+  let s = useSubscription(UserFlagByName, {
     name: "seen_connected_project_in_admin_dashboard_banner"
   });
   let o = !useMemo(() => "loaded" !== s.status || !!s.data?.currentUser?.userFlagByName, [s]) && n?.tier === Agb.PRO && getFeatureFlags().fc_initial_onboarding_enabled;
@@ -415,7 +415,7 @@ let e5 = kp(function (e) {
     let s = member.team_role;
     let i = () => {
       let e = s?.pending;
-      if (member.id && newLevel === _$$e2.NONE && !e) {
+      if (member.id && newLevel === AccessLevelEnum.NONE && !e) {
         _([member]);
         return;
       }
@@ -424,7 +424,7 @@ let e5 = kp(function (e) {
         level: newLevel
       }));
     };
-    s && newLevel === _$$e2.OWNER ? dispatch(showModalHandler({
+    s && newLevel === AccessLevelEnum.OWNER ? dispatch(showModalHandler({
       type: _$$b3,
       data: {
         resourceType: s.resource_type,
@@ -434,7 +434,7 @@ let e5 = kp(function (e) {
           i();
         }
       }
-    })) : s && newLevel === _$$e2.VIEWER && !s.pending ? dispatch(e0({
+    })) : s && newLevel === AccessLevelEnum.VIEWER && !s.pending ? dispatch(e0({
       team,
       member
     })) : i();
@@ -448,7 +448,7 @@ let e5 = kp(function (e) {
   let g = useCallback(e => {
     u({
       member: e,
-      newLevel: _$$e2.NONE
+      newLevel: AccessLevelEnum.NONE
     });
   }, [u]);
   let b = useCallback(e => {
@@ -463,7 +463,7 @@ let e5 = kp(function (e) {
           e.forEach(e => {
             e.team_role?.pending && u({
               member: e,
-              newLevel: _$$e2.NONE
+              newLevel: AccessLevelEnum.NONE
             });
           });
           let t = 1 === e.length ? e[0].name || e[0].email : getI18nString("team_view.upgrade.members_length_users", {
@@ -564,7 +564,7 @@ let e5 = kp(function (e) {
   let L = useCallback(t => {
     let a = !t.member.team_role;
     let n = t.member.team_role?.pending || !1;
-    let s = t.member.team_role?.level === _$$e2.OWNER;
+    let s = t.member.team_role?.level === AccessLevelEnum.OWNER;
     let i = k_(t.member, t.isCurrentMember, e.team);
     let {
       canAdmin,
@@ -598,13 +598,13 @@ let e5 = kp(function (e) {
       text: getI18nString("team_view.settings.revoke_admin_access"),
       callback: () => u({
         member: t.member,
-        newLevel: _$$e2.EDITOR
+        newLevel: AccessLevelEnum.EDITOR
       })
     }), ..._("grant" === i, {
       text: getI18nString("team_view.settings.grant_admin_access"),
       callback: () => u({
         member: t.member,
-        newLevel: _$$e2.ADMIN
+        newLevel: AccessLevelEnum.ADMIN
       })
     })];
     let x = [..._(n && o, {
@@ -924,10 +924,10 @@ function e8(e) {
   let [l, o] = useState(Vc.FILTER);
   let d = TG(e.team.id);
   let c = If("migrate_team_data_to_livegraph", wv.GROUP_1);
-  let _ = MF({
+  let _ = useShadowReadLoaded({
     oldValue: resourceUtils.useMemoizedLoaded(e.membersList),
     newValue: d,
-    label: _$$A2.TeamMembersTable.teamMembersByTeamId,
+    label: adminPermissionConfig.TeamMembersTable.teamMembersByTeamId,
     enableFullRead: c,
     comparator: ts,
     contextArgs: {
@@ -1145,16 +1145,16 @@ function tG(e) {
   let _ = e.billing.summary.shipping_address;
   let m = !!e.billing.summary.has_billing_address;
   let p = !!settingsData?.studentTeamAt && !settingsData?.isAiDataSharingEnabled;
-  t = S2();
+  t = useTeamPlanFeatures();
   let g = N_.reduce((e, a) => {
     switch (a) {
-      case ud.EXPERT:
+      case ProductAccessTypeEnum.EXPERT:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsExpert === zRx.INSTANT_APPROVAL;
-      case ud.DEVELOPER:
+      case ProductAccessTypeEnum.DEVELOPER:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsDeveloper === zRx.INSTANT_APPROVAL;
-      case ud.CONTENT:
-        return e || _$$oA(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === zRx.INSTANT_APPROVAL;
-      case ud.COLLABORATOR:
+      case ProductAccessTypeEnum.CONTENT:
+        return e || getResourceDataOrFallback(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === zRx.INSTANT_APPROVAL;
+      case ProductAccessTypeEnum.COLLABORATOR:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === zRx.INSTANT_APPROVAL;
       default:
         throwTypeError(a);
@@ -1303,7 +1303,7 @@ function tG(e) {
             canSeeBillingAddressExp: m,
             isBillingRemodelEnabled: s
           })
-        }), OI(e.team) && jsx(Kz, {
+        }), isTeamEligibleForUpgrade(e.team) && jsx(Kz, {
           title: getI18nString("settings_table.resources"),
           settings: [jsx(T_, {
             label: getI18nString("settings_tab.ui_kits_toggle_label"),
@@ -1754,8 +1754,8 @@ function ah({
   billing: s
 }) {
   let l = _$$R();
-  let o = No();
-  let d = YQ(o).unwrapOr(!1);
+  let o = useTeamPlanPublicInfo();
+  let d = useIsStudentPlan(o).unwrapOr(!1);
   let c = _$$v2(s?.summary);
   let _ = _$$s2();
   let u = useCallback(() => _({
@@ -2080,7 +2080,7 @@ function aO(e) {
 }
 function aP(e) {
   let t = useDispatch();
-  let a = No();
+  let a = useTeamPlanPublicInfo();
   let n = a?.data?.tier === FPlanNameType.STUDENT;
   let [s, o, d] = _$$t2.useManagedTabs({
     "abandoned-drafts": !0,
@@ -2158,10 +2158,10 @@ export function $$aB1(e, t) {
       let s = n.team_role?.level || -1;
       e[a] = {
         ...n,
-        canEditRole: !!n.team_role && _$$OL(n.team_role, !!i, !!r),
+        canEditRole: !!n.team_role && canPerformActionBasedOnLevel(n.team_role, !!i, !!r),
         canMakeOwner: !!(n.team_role && t),
         canMakeAdmin: !!(n.team_role && i),
-        canRemoveUser: s < _$$e2.OWNER
+        canRemoveUser: s < AccessLevelEnum.OWNER
       };
       return e;
     }, {});
@@ -2172,8 +2172,8 @@ export function $$aG0(e) {
   let a = useDispatch();
   let n = useSelector(e => e.teams);
   let s = n[e.teamId];
-  let k = px();
-  let E = W8(k);
+  let k = useTeamPlanUser();
+  let E = useIsTeamAdminUser(k);
   let C = "loaded" === E.status && gb({
     isAdminTeam: E.data,
     teamId: e.teamId,
@@ -2190,7 +2190,7 @@ export function $$aG0(e) {
   }, [C, a, N]);
   _$$w(s?.id);
   let I = selectCurrentUser();
-  let T = Rs(TeamById, {
+  let T = useSubscription(TeamById, {
     teamId: e.teamId
   });
   let R = useMemo(() => T.transform(e => ({
@@ -2295,7 +2295,7 @@ export function $$aG0(e) {
       }
     }
   }, [a, e.selectedTab, D, s, G, $, V]);
-  let H = Rs(TeamAdminSettingsPage, {
+  let H = useSubscription(TeamAdminSettingsPage, {
     teamId: e.teamId
   }, {
     enabled: e.selectedTab === DashboardSections.SETTINGS
@@ -2303,7 +2303,7 @@ export function $$aG0(e) {
   let Y = oA(H.data?.team);
   let J = useMemo(() => F.unwrapOr({}), [F]);
   if (!I || "loaded" === R.status && !R.data.canAdmin || !s) return jsx(_$$S3, {
-    resourceType: Ft.TEAM
+    resourceType: EntityType.TEAM
   });
   let K = !1;
   let X = !0;

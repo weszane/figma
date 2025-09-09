@@ -1,7 +1,7 @@
 import n from "../vendor/923386";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { tl, ss } from "../figma_app/614170";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { N_, Oq } from "../905/332483";
 import { zU, fx, tB, dp } from "../figma_app/934005";
 var s = n;
@@ -12,7 +12,7 @@ export function $$_4(e, t) {
   return ss(tB(e), t);
 }
 export function $$u7(e) {
-  return dp(e) ? N_ : e.plan_parent_type === FOrganizationLevelType.TEAM ? Oq.exclude([ud.DEV_MODE]) : Oq;
+  return dp(e) ? N_ : e.plan_parent_type === FOrganizationLevelType.TEAM ? Oq.exclude([ProductAccessTypeEnum.DEV_MODE]) : Oq;
 }
 export function $$m8(e) {
   let t = [];

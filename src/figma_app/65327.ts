@@ -4,8 +4,8 @@ import { IAssertResource, UIVisibilitySetting, DesignWorkspace } from "../figma_
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { globalPerfTimer } from "../905/542194";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { Rs } from "../figma_app/288654";
-import { _I, U4 } from "../figma_app/473493";
+import { useSubscription } from "../figma_app/288654";
+import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from "../figma_app/473493";
 import { Ym } from "../figma_app/806075";
 import { W as _$$W } from "../905/200727";
 import { d as _$$d } from "../905/692836";
@@ -18,7 +18,7 @@ import { b as _$$b } from "../905/985254";
 import { E3 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab, getSelectedDevModePropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FileCanEdit } from "../figma_app/43951";
 import { getPluginMetadata, getPluginVersion, isDevModePlugin } from "../figma_app/300692";
@@ -34,12 +34,12 @@ export function $$k0(e, t) {
   let r = useDispatch();
   let [k, M] = useAtomValueAndSetter(_$$R);
   let [F, j] = useAtomValueAndSetter(_$$c2);
-  let U = tS() ?? "";
-  let B = Rs(FileCanEdit, {
+  let U = useCurrentFileKey() ?? "";
+  let B = useSubscription(FileCanEdit, {
     key: U
   })?.data?.file?.hasPermission;
-  let G = _I();
-  let V = U4();
+  let G = useCanAccessFullDevMode();
+  let V = useCanAccessDevModeEntryPoint();
   let H = useAtomWithSubscription(_$$d)?.data;
   let [z, W] = useAtomValueAndSetter(_$$t);
   let K = useSelector(e => e.selectedView);

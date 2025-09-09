@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { b } from "../905/985254";
 import { Fu } from "../figma_app/545877";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 let $$d1 = Fu("dev_handoff_has_seen_dev_mode");
 let $$c3 = Fu("dev_handoff_has_seen_dev_mode_ga");
 let $$u2 = atom(!1);
@@ -12,7 +12,7 @@ export function $$_4() {
   (function () {
     let e = useSelector(e => e.currentUserOrgId);
     let t = useSelector(e => e.currentTeamId);
-    let r = q5()?.teamId || null;
+    let r = selectCurrentFile()?.teamId || null;
     let o = useDispatch();
     let c = useAtomWithSubscription($$d1);
     let u = useRef(!1);

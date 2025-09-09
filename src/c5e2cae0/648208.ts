@@ -3,7 +3,7 @@ import { throwError } from "../figma_app/465776";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { w as _$$w } from "../c5e2cae0/59973";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -16,7 +16,7 @@ import { tI } from "../figma_app/847597";
 import { UR } from "../figma_app/307841";
 import { fu } from "../figma_app/831799";
 import { jv } from "../905/84777";
-import { ud, dA } from "../905/513035";
+import { ProductAccessTypeEnum, isValidAccessType } from "../905/513035";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { vr } from "../figma_app/514043";
@@ -53,7 +53,7 @@ export function $$E0({
       unit: BillingCycle.MONTH
     }
   });
-  let [b, E] = mI(x, N);
+  let [b, E] = handleSuspenseRetainRelease(x, N);
   if (!b.data || !E.data) throw Error("Price data is null");
   let P = s$(b.data);
   let M = s$(E.data);
@@ -100,7 +100,7 @@ export function $$E0({
           isCartReviewSummary: r,
           paymentPrices: P,
           lineItemPrices: M,
-          hasPriceAsterisk: o && t === ud.EXPERT
+          hasPriceAsterisk: o && t === ProductAccessTypeEnum.EXPERT
         }, t))
       }), jsxs("div", {
         className: _$$s.flex.justifyBetween.py4.$,
@@ -186,7 +186,7 @@ function A({
   lineItemPrices: _,
   hasPriceAsterisk: u
 }) {
-  if (!dA(e)) {
+  if (!isValidAccessType(e)) {
     reportError(_$$e.MONETIZATION_UPGRADES, Error(`Received invalid billable product key ${e}`));
     return null;
   }

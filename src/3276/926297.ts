@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { VA } from "../figma_app/528509";
 import { t as _$$t } from "../figma_app/579169";
-import { tS, vu } from "../figma_app/516028";
+import { useCurrentFileKey, selectOpenFileObject } from "../figma_app/516028";
 import { FileWithRoleRequests, FilePermissionsV2 } from "../figma_app/43951";
 import { Xs } from "../figma_app/349248";
 export function $$u1() {
-  let e = tS();
-  let t = Rs(FileWithRoleRequests, {
+  let e = useCurrentFileKey();
+  let t = useSubscription(FileWithRoleRequests, {
     fileKey: e ?? ""
   }, {
     enabled: !!e
@@ -18,9 +18,9 @@ export function $$u1() {
 }
 export function $$p0() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = useSelector(vu);
+  let t = useSelector(selectOpenFileObject);
   let n = useAtomWithSubscription(_$$t).data ?? !0;
-  let u = Rs(FilePermissionsV2, {
+  let u = useSubscription(FilePermissionsV2, {
     fileKey: t?.key ?? "",
     teamId: t?.team_id ?? null,
     repoId: t?.file_repo_id ?? null,

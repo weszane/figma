@@ -1,4 +1,4 @@
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { p } from "../905/896627";
 import { A } from "../905/17894";
 import { Lz } from "../905/497882";
@@ -17,7 +17,7 @@ export function $$d0(e) {
     existingResourceContent,
     localExtension
   } = e.deps;
-  let [u] = IT(LK({
+  let [u] = setupResourceAtomHandler(LK({
     figFile,
     currentViewerMode: viewerModeField && Lz(viewerModeField, void 0),
     existingResourceContent,

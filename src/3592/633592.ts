@@ -25,7 +25,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { uQ } from "../figma_app/311375";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
@@ -519,7 +519,7 @@ export default App
   }) : null;
 }
 function ec() {
-  let e = q5()?.name || getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
+  let e = selectCurrentFile()?.name || getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
   let t = uQ();
   let s = Fk((e, t) => e?.get(t ?? "")?.name, t);
   return jsx(hE, {

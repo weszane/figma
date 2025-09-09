@@ -17,11 +17,11 @@ import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createLocalStorageAtom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Uz } from "../905/63728";
-import { H9, Vs } from "../figma_app/930338";
+import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
 import { oW } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { BT } from "../905/618447";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { zD } from "../figma_app/109758";
 import { fullscreenValue } from "../figma_app/455680";
 import { UD } from "../figma_app/624361";
@@ -69,7 +69,7 @@ export async function $$el1(e) {
     if (!t) return null;
     try {
       let r = xJ(e.imageHash);
-      let n = H9(r);
+      let n = uint8ArrayToBase64(r);
       let i = XJ({
         node: t,
         hash: n
@@ -300,7 +300,7 @@ function eg({
   imageResults: l
 }) {
   let d = sZ();
-  let c = to();
+  let c = useIsSelectedViewFullscreenCooper();
   let u = useMemo(() => _$$O(JT.GENERATE_IMAGE, d), [d]);
   let [p, _] = useAtomValueAndSetter(ei);
   let h = u[0]?.value;
@@ -365,7 +365,7 @@ function eg({
     ea(t);
     addPromptToHistory(G);
     let r = async e => {
-      let r = await UD(Vs(e), "image/png", G);
+      let r = await UD(base64ToUint8Array(e), "image/png", G);
       t === ey.current && s(r);
     };
     let n = qY(e);
@@ -534,7 +534,7 @@ function ef({
   imageResults: d
 }) {
   let c = sZ();
-  let u = to();
+  let u = useIsSelectedViewFullscreenCooper();
   let p = useMemo(() => _$$O(JT.EDIT_IMAGE, c), [c]);
   let [_, m] = useAtomValueAndSetter(ea);
   let f = p[0]?.value;
@@ -607,7 +607,7 @@ function ef({
     addPromptToHistory(H);
     J("");
     let i = async t => {
-      let r = await UD(Vs(t), "image/png", H);
+      let r = await UD(base64ToUint8Array(t), "image/png", H);
       e === eA.current && s(r);
     };
     let a = qY(node);
@@ -911,7 +911,7 @@ function eT({
               onDragStart: e => {
                 e.dataTransfer.setData("filename", `${t}@2x.png`);
               },
-              src: `data:image/png;base64,${H9(e.image.thumbnail.compressedData)}`,
+              src: `data:image/png;base64,${uint8ArrayToBase64(e.image.thumbnail.compressedData)}`,
               alt: d,
               "aria-hidden": !0
             })

@@ -9,7 +9,7 @@ import { Ay } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { ks, tM, vd } from "../figma_app/637027";
 import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
@@ -24,12 +24,12 @@ import { selectCurrentUser } from "../905/372672";
 import { FPermissionLevelType, FAccessLevelType, FBasicPermissionType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
 import { TeamCreationWorkspaceView } from "../figma_app/43951";
 import { H_ } from "../figma_app/336853";
-import { C1 } from "../figma_app/12796";
+import { getPermissionLevelName } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
-import { D6, j_, X$ } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgAdminUser, useCurrentPublicPlan } from "../figma_app/465071";
 import { Wj } from "../905/913057";
-import { e6 } from "../905/557142";
-import { Fb, qg } from "../figma_app/630077";
+import { AccessLevelEnum } from "../905/557142";
+import { teamVisibilityEnum, teamConstant } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { Z as _$$Z } from "../figma_app/761870";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -60,7 +60,7 @@ function Q(e) {
     let r = getFeatureFlags().team_creation_restricted_guests_err_ui && s?.invite_whitelist_guest_invite_setting != null;
     return yI(t, a.usersByEmail[t] || t, s, n, d.email, r ? getI18nString("team_creation.restricted_against_adding_external_users") : null);
   };
-  let _ = [e6.ADMIN, e6.EDITOR, e6.VIEWER];
+  let _ = [AccessLevelEnum.ADMIN, AccessLevelEnum.EDITOR, AccessLevelEnum.VIEWER];
   return e.inviteLevel && e.onInviteLevelChange ? jsx(_$$e, {
     SearchResultComponent: o6,
     TokenComponent: gy,
@@ -72,7 +72,7 @@ function Q(e) {
       inviteLevel: e.inviteLevel,
       source: "team-invite-bar"
     }),
-    getSelectText: C1,
+    getSelectText: getPermissionLevelName,
     inviteLevel: e.inviteLevel,
     joinLinkShown: !1,
     onInviteLevelChange: e.onInviteLevelChange,
@@ -118,11 +118,11 @@ export let $$K0 = registerModal(function (e) {
   useEffect(() => {
     t(um());
   }, [t]);
-  let V = Rs(TeamCreationWorkspaceView({
+  let V = useSubscription(TeamCreationWorkspaceView({
     orgId: a
   }));
-  let K = D6("TeamCreationModal");
-  let X = j_(K).unwrapOr(!1);
+  let K = useCurrentPlanUser("TeamCreationModal");
+  let X = useIsOrgAdminUser(K).unwrapOr(!1);
   let J = useMemo(() => {
     if ("loaded" === V.status) {
       let e = V.data.org?.workspaces?.filter(e => e.canCreateTeam) ?? [];
@@ -149,7 +149,7 @@ export let $$K0 = registerModal(function (e) {
     eo(ea);
   }, [ea]);
   let ed = FBasicPermissionType.EDIT;
-  let [ec, eu] = useState(e6.EDITOR);
+  let [ec, eu] = useState(AccessLevelEnum.EDITOR);
   let [em, e_] = useState(e?.workspaceId ?? Z);
   let ep = getFeatureFlags().sc_workspace_audience;
   let eg = useCallback(e => {
@@ -168,14 +168,14 @@ export let $$K0 = registerModal(function (e) {
   let ef = useSelector(e => e.autocomplete);
   let ev = !!ef.errorMessage;
   let [eb, ey] = useState(J4.VIEW);
-  let [ej, eI] = useState(Fb.ORG_BROWSABLE);
+  let [ej, eI] = useState(teamVisibilityEnum.ORG_BROWSABLE);
   let [eE, eS] = useState(es);
   useEffect(() => {
     eS(es);
   }, [es]);
   let [eT, eA] = useState("");
   let [ew, eN] = useState("");
-  let eR = X$("TeamCreationModal").transform(e => e.tier === FPlanNameType.ENTERPRISE).unwrapOr(!1) && J.length > 0;
+  let eR = useCurrentPublicPlan("TeamCreationModal").transform(e => e.tier === FPlanNameType.ENTERPRISE).unwrapOr(!1) && J.length > 0;
   (X || Z === UNASSIGNED) && J.length > 0 && (J = J.concat({
     id: UNASSIGNED,
     name: getI18nString("team_creation.unassigned_workspace"),
@@ -244,7 +244,7 @@ export let $$K0 = registerModal(function (e) {
       className: "team_creation_modal--teamNameInputSC--bbcKV",
       "data-testid": "team_creation_modal_title",
       id: eO,
-      maxLength: qg,
+      maxLength: teamConstant,
       minLength: 1,
       onChange: e => eA(e.target.value),
       placeholder: getI18nString("team_creation.writer_s_guild_placeholder"),
@@ -256,7 +256,7 @@ export let $$K0 = registerModal(function (e) {
     let {
       onSubmitReturnToPrevView = !0
     } = e;
-    let s = ec ?? e6.EDITOR;
+    let s = ec ?? AccessLevelEnum.EDITOR;
     t(_$$KQ({
       teamName: eT,
       orgAccess: el,
@@ -266,8 +266,8 @@ export let $$K0 = registerModal(function (e) {
       defaultPermission: ed,
       description: ew,
       sharingAudienceControl: $$Y1(eE, eb),
-      orgBrowsable: eE === _9.INVITE_ONLY && ej === Fb.ORG_BROWSABLE,
-      hidden: eE === _9.INVITE_ONLY && ej === Fb.HIDDEN,
+      orgBrowsable: eE === _9.INVITE_ONLY && ej === teamVisibilityEnum.ORG_BROWSABLE,
+      hidden: eE === _9.INVITE_ONLY && ej === teamVisibilityEnum.HIDDEN,
       inviteLevel: s
     }));
     e.afterSubmit && e.afterSubmit();

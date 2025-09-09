@@ -24,7 +24,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { D8, GG } from "../905/511649";
 import { w as _$$w } from "../905/835474";
-import { jN } from "../figma_app/930338";
+import { isWhitespace } from "../figma_app/930338";
 import { Wy, ml, Fk, Ch, hw } from "../905/125333";
 import { ph } from "../figma_app/709893";
 import { b as _$$b } from "../figma_app/556971";
@@ -33,7 +33,7 @@ import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { V2, DI } from "../figma_app/712525";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../figma_app/860474";
@@ -58,7 +58,7 @@ import { p9, D4, IM, OP } from "../figma_app/463678";
 import { f as _$$f } from "../905/54715";
 import { VS, JE, oZ, WP, _0 } from "../9410/763216";
 import { Bf } from "../figma_app/249941";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { Nl } from "../figma_app/115923";
 import { sO } from "../figma_app/21029";
 import { II, EA, SQ, CT, A5, aH, ih, WB, L4 } from "../9410/499229";
@@ -371,7 +371,7 @@ export let $$eF0 = memo(function ({
     inputRef
   } = CT();
   let L = useRef(null);
-  let R = to();
+  let R = useIsSelectedViewFullscreenCooper();
   let j = _$$Z("canvas_search_navigate");
   let w = useAtomWithSubscription(Wy);
   let P = useAtomWithSubscription(ml);
@@ -509,7 +509,7 @@ export let $$eF0 = memo(function ({
           size: "medium",
           testId: "canvas-search-loading-spinner"
         })
-      }) : query && !jN(query) && jsx(eM, {
+      }) : query && !isWhitespace(query) && jsx(eM, {
         allInstancesExpanded,
         hasMultipleSelections: Q,
         hoverSelectMode: $,
@@ -968,8 +968,8 @@ function eB({
   allInstancesExpanded: n
 }) {
   let l = sO();
-  let i = cJ();
-  let s = to();
+  let i = useIsFullscreenSitesView();
+  let s = useIsSelectedViewFullscreenCooper();
   let o = useSelector(e => e.mirror.appModel.pagesList);
   let d = "";
   d = 0 === e ? lH(o) || !n ? l ? getI18nString("canvas_search.no_results_in_this_deck") : i ? getI18nString("canvas_search.no_results_on_site") : s ? getI18nString("canvas_search.no_results_in_buzz_file") : getI18nString("canvas_search.no_results_on_page") : t ? getI18nString("canvas_search.no_results") : getI18nString("canvas_search.no_results_in_file") : getI18nString("canvas_search.results_count", {

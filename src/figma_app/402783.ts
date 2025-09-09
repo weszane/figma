@@ -18,7 +18,7 @@ import { zp } from "../figma_app/847014";
 import { Gw, WN } from "../figma_app/274571";
 import { Z } from "../905/104740";
 import { QZ } from "../figma_app/62612";
-import { As, ze } from "../figma_app/516028";
+import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { D } from "../905/347702";
 import { AM } from "../figma_app/610446";
 import { tE, ez, xQ, E$, um } from "../figma_app/835718";
@@ -53,8 +53,8 @@ async function R({
   let v;
   let A = {
     orgId: atomStoreManager.get(_s),
-    teamId: atomStoreManager.get(As) || null,
-    fileKey: atomStoreManager.get(ze) || null,
+    teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
+    fileKey: atomStoreManager.get(openFileKeyAtom) || null,
     userId: atomStoreManager.get(kS) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     trackingSessionId: getTrackingSessionId()

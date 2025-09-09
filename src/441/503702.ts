@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { generateUUIDv4 } from "../905/871474";
 import { hU, ZI, EJ } from "../figma_app/934707";
@@ -8,7 +8,7 @@ import { NotificationExperimentInfoView } from "../figma_app/43951";
 export function $$u0(e = !1) {
   let t = useDispatch();
   let i = useMemo(() => generateUUIDv4(), []);
-  let c = Rs(NotificationExperimentInfoView({
+  let c = useSubscription(NotificationExperimentInfoView({
     cacheNonce: i
   }));
   useEffect(() => {

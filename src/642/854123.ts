@@ -23,7 +23,7 @@ import { isGovCluster, buildUploadUrl } from "../figma_app/169182";
 import { Fb } from "../figma_app/819458";
 import { F as _$$F } from "../5132/756360";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { w5 } from "../figma_app/345997";
 import { mapFileTypeToEditorTypeNullable } from "../figma_app/53721";
 import { DF } from "../figma_app/861252";
@@ -68,7 +68,7 @@ function P() {
     isEditingFile,
     unsortedTeams
   } = DF();
-  let l = q5();
+  let l = selectCurrentFile();
   let a = mapFileTypeToEditorTypeNullable(l?.editorType);
   let o = createRef();
   return jsxs(Fragment, {

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import i from "../vendor/128080";
-import { Rs } from "../figma_app/288654";
-import { Kz } from "../905/760074";
+import { useSubscription } from "../figma_app/288654";
+import { isBranchAlt } from "../905/760074";
 import { FileExpirationView, FilePermissionsV2 } from "../figma_app/43951";
 import { d4 } from "../905/759412";
 var a = i;
 export function $$c1(e) {
-  let t = Rs(FileExpirationView, {
-    figFileKey: null != e ? Kz(e) ? e.sourceFileKey : e.key : ""
+  let t = useSubscription(FileExpirationView, {
+    figFileKey: null != e ? isBranchAlt(e) ? e.sourceFileKey : e.key : ""
   }, {
     enabled: null != e
   });
@@ -26,14 +26,14 @@ export function $$c1(e) {
   }, [t]);
 }
 export function $$u0(e, t) {
-  let r = Rs(FilePermissionsV2, {
+  let r = useSubscription(FilePermissionsV2, {
     fileKey: e.key,
     teamId: e.teamId,
     projectId: e.folderId,
     repoId: e.fileRepoId,
     currentOrgId: t
   });
-  let i = Kz(e);
+  let i = isBranchAlt(e);
   return useMemo(() => {
     if (!t || "loaded" !== r.status) return;
     let e = r.data?.file;

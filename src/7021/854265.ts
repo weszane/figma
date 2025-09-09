@@ -3,8 +3,8 @@ import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { eS } from "../figma_app/33126";
 import { f } from "../905/940356";
-import { X$, Az } from "../figma_app/465071";
-import { Oc } from "../figma_app/552876";
+import { useCurrentPublicPlan, useIsOrgOrEnterprisePlan } from "../figma_app/465071";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 let c = atom(() => ({
   questionKey: "what_do_you_do_k12_v1",
   options: new Set(shuffle(["student", "educator"])),
@@ -31,12 +31,12 @@ let m = atom(() => {
 function _() {
   let e = useAtomWithSubscription(u);
   let t = useAtomWithSubscription(m);
-  let a = X$("useWhatDoYouDoV3");
+  let a = useCurrentPublicPlan("useWhatDoYouDoV3");
   let {
     questionKey,
     options,
     getOptionDisplay
-  } = Az(a).unwrapOr(!1) ? e : t;
+  } = useIsOrgOrEnterprisePlan(a).unwrapOr(!1) ? e : t;
   return {
     questionKey,
     options,
@@ -119,7 +119,7 @@ function b() {
   };
 }
 export function $$f0(e) {
-  let t = Oc();
+  let t = useIsSelectedFigmakeFullscreen();
   let a = useAtomWithSubscription(eS);
   let s = f("not_gen_0");
   let u = function () {
@@ -164,8 +164,8 @@ export function $$f0(e) {
   let _ = function () {
     let e = g();
     let t = b();
-    let a = X$("useWhatDoYouDoGen1");
-    return Az(a).unwrapOr(!1) ? e : t;
+    let a = useCurrentPublicPlan("useWhatDoYouDoGen1");
+    return useIsOrgOrEnterprisePlan(a).unwrapOr(!1) ? e : t;
   }();
   return a.data ? u : s && !t ? _ : m;
 }

@@ -15,7 +15,7 @@ import { serializeQuery } from '../905/634134';
 import { logError } from '../905/714362';
 import { o as _$$o } from '../905/721794';
 import { oA } from '../905/723791';
-import { Xm } from '../905/760074';
+import { isBranch } from '../905/760074';
 import { WB } from '../905/761735';
 import { VERSION_HISTORY_SET_FILE_LAST_SEEN_AT } from '../905/784363';
 import { XHR } from '../905/910117';
@@ -27,7 +27,7 @@ import { ds } from '../figma_app/314264';
 import { Lb } from '../figma_app/323326';
 import { Ns, TP, yT } from '../figma_app/349248';
 import { Dk, wY } from '../figma_app/623293';
-import { d6 } from '../figma_app/687776';
+import { canCreateFileType } from '../figma_app/687776';
 import { AppStateTsApi } from '../figma_app/763686';
 import { S as _$$S } from '../figma_app/787550';
 import { Ul } from '../figma_app/841351';
@@ -78,7 +78,7 @@ let $$V11 = createOptimistThunk(async (e, t) => {
     let e = oA((await subscribeAndAwaitData(FileCreationPermissionsView, {
       projectId: s
     })).project);
-    o = !!e && !!a.editorType && d6(e, a.editorType);
+    o = !!e && !!a.editorType && canCreateFileType(e, a.editorType);
   }
   o && (i.folder_id = s);
   t.versionId && (i.version_id = t.versionId);
@@ -102,7 +102,7 @@ let $$V11 = createOptimistThunk(async (e, t) => {
           title: s.name,
           fileEditorType: s.editor_type,
           target: OpenTarget.FOCAL_TAB,
-          isBranch: Xm(s),
+          isBranch: isBranch(s),
           isLibrary: !!s.last_published_at,
           isTeamTemplate: !1,
           userId: r.user?.id

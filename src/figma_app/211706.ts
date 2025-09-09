@@ -9,7 +9,7 @@ import { P } from "../905/347284";
 import { G } from "../905/750789";
 import { renderI18nText } from "../905/303541";
 import { uE } from "../figma_app/314264";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { x } from "../figma_app/584132";
 let g = "asset_panel_shared_components--sectionHeader--URtCn";
 let f = debounce((e, t, r, n) => {
@@ -30,7 +30,7 @@ export function $$E0(e) {
     ...s
   } = e;
   let o = useSelector(x);
-  let l = q5();
+  let l = selectCurrentFile();
   let d = useCallback((e, t) => {
     onScroll?.(e, t);
     o && f(o, l?.key, l?.teamId ?? void 0, l?.parentOrgId ?? void 0);

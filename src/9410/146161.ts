@@ -5,11 +5,11 @@ import { Cb } from "../figma_app/543529";
 import { cW, ZT } from "../figma_app/844435";
 import { dq } from "../905/845253";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { selectorFullScreenViewEditorType, filterResourcesByOrgId, filterPublishedResources, filterEntriesByPluginVersionEditorType, getPluginVersion } from "../figma_app/300692";
 export function $$p0(e) {
   let t = dq();
-  let i = X$("useOrgPrivateExtensions").unwrapOr(null);
+  let i = useCurrentPublicPlan("useOrgPrivateExtensions").unwrapOr(null);
   let p = i?.key.type === FOrganizationLevelType.ORG;
   let h = cW();
   let m = ZT();

@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { UF, Jd } from "../figma_app/494261";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { aD, zg } from "../905/452667";
 import { E as _$$E } from "../905/632989";
 import h from "classnames";
@@ -204,21 +204,21 @@ function k(e) {
   });
 }
 export function $$R0(e) {
-  let t = N(e6.VIEWER, e.fileRoleRequests);
-  let i = N(e6.EDITOR, e.fileRoleRequests);
+  let t = N(AccessLevelEnum.VIEWER, e.fileRoleRequests);
+  let i = N(AccessLevelEnum.EDITOR, e.fileRoleRequests);
   return jsxs(Fragment, {
     children: [t && jsx(T, {
       fileKey: e.fileKey,
-      editorUserIds: e.roles.filter(e => e.level >= e6.EDITOR && !e.pending).map(e => e.user_id),
+      editorUserIds: e.roles.filter(e => e.level >= AccessLevelEnum.EDITOR && !e.pending).map(e => e.user_id),
       fileRoleRequests: e.fileRoleRequests,
-      requestType: e6.VIEWER,
+      requestType: AccessLevelEnum.VIEWER,
       startExpanded: e.startExpanded,
       getEditRequestHandlers: e.getEditRequestHandlers
     }), i && jsx(T, {
       fileKey: e.fileKey,
-      editorUserIds: e.roles.filter(e => e.level >= e6.EDITOR && !e.pending).map(e => e.user_id),
+      editorUserIds: e.roles.filter(e => e.level >= AccessLevelEnum.EDITOR && !e.pending).map(e => e.user_id),
       fileRoleRequests: e.fileRoleRequests,
-      requestType: e6.EDITOR,
+      requestType: AccessLevelEnum.EDITOR,
       startExpanded: e.startExpanded,
       getEditRequestHandlers: e.getEditRequestHandlers
     })]
@@ -228,20 +228,20 @@ function N(e, t) {
   return t.filter(t => t.level === e && "pending" === t.status).length > 0;
 }
 export function $$P1(e) {
-  let t = N(e6.VIEWER, e.teamRoleRequests);
-  let i = N(e6.EDITOR, e.teamRoleRequests);
-  let r = () => e.teamRoles.filter(e => e.level >= e6.EDITOR && !e.pending).map(e => e.user_id);
+  let t = N(AccessLevelEnum.VIEWER, e.teamRoleRequests);
+  let i = N(AccessLevelEnum.EDITOR, e.teamRoleRequests);
+  let r = () => e.teamRoles.filter(e => e.level >= AccessLevelEnum.EDITOR && !e.pending).map(e => e.user_id);
   return jsxs(Fragment, {
     children: [t && jsx(k, {
       teamId: e.teamId,
       editorUserIds: r(),
       teamRoleRequests: e.teamRoleRequests,
-      requestType: e6.VIEWER
+      requestType: AccessLevelEnum.VIEWER
     }), i && jsx(k, {
       teamId: e.teamId,
       editorUserIds: r(),
       teamRoleRequests: e.teamRoleRequests,
-      requestType: e6.EDITOR
+      requestType: AccessLevelEnum.EDITOR
     })]
   });
 }

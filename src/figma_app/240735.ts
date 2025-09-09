@@ -7,8 +7,8 @@ import { getI18nString } from "../905/303541";
 import { RF, Nh } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistAction, createOptimistThunk } from "../905/350402";
-import { A } from "../905/654645";
-import { kW } from "../figma_app/391338";
+import { adminPermissionConfig } from "../905/654645";
+import { createLatencyTimer } from "../figma_app/391338";
 import { N } from "../905/696711";
 import { $ } from "../905/834575";
 let $$g7 = createOptimistAction("BATCH_DEL_TEAM_MEMBERS", (e, {
@@ -106,8 +106,8 @@ let $$b12 = createOptimistThunk((e, {
     teamId: t
   });
   r && N(i, e, n);
-  let a = kW({
-    label: A.TeamMembersTable.teamMembersByTeamId,
+  let a = createLatencyTimer({
+    label: adminPermissionConfig.TeamMembersTable.teamMembersByTeamId,
     variant: "old",
     contextArgs: {
       teamId: t

@@ -6,11 +6,11 @@ import { g as _$$g2 } from '../905/346780';
 import { D as _$$D } from '../905/412108';
 import { observableState } from '../905/441145';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
-import { Rh as _$$Rh, rI as _$$rI, S3 as _$$S2, BO } from '../905/485103';
+import { sendMetric, sendBatchedHistograms, sendHistogram, sendBatchedMetrics } from '../905/485103';
 import { createFieldRef } from '../905/552287';
 import { getFeatureFlags } from '../905/601108';
 import { TimerHandler } from '../905/609813';
-import { dZ as _$$dZ2, iO as _$$iO, Sj as _$$Sj, Oh } from '../905/663269';
+import { dZ as _$$dZ2, iO as _$$iO, SchemaHandler, OptimisticMutationHandler } from '../905/663269';
 import { measureAsyncDuration } from '../905/670985';
 import { serializeArgs } from '../905/679168';
 import { logError } from '../905/714362';
@@ -92097,7 +92097,7 @@ class Nm {
       this.batchedCustomEvents = [];
       this.batchedNumericEvents = [];
       try {
-        await Promise.all([BO(e), _$$rI(t)]);
+        await Promise.all([sendBatchedMetrics(e), sendBatchedHistograms(t)]);
       } catch (e) {}
       this._currentlySendingBatchedEvents = !1;
     };
@@ -93117,7 +93117,7 @@ class NE {
   }
   reportSuccessOrFail(e, t, i, n) {
     let r = t - e <= this.failureThresholdMs ? Nl.SUBSCRIPTION_UPDATE_SUCCESS : Nl.SUBSCRIPTION_UPDATE_FAILURE;
-    _$$Rh(r, {
+    sendMetric(r, {
       currently_backgrounded: String(document.visibilityState === 'hidden'),
       connected_to_livegraph: String(this.client.connection.isConnected()),
       backgrounded: String(i),
@@ -93156,7 +93156,7 @@ class NE {
       let r = new TimerHandler({
         onTimeout: (e, t) => {
           n = !0;
-          _$$Rh(Nl.SUBSCRIPTION_UPDATE_FAILURE, {
+          sendMetric(Nl.SUBSCRIPTION_UPDATE_FAILURE, {
             currently_backgrounded: String(document.visibilityState === 'hidden'),
             connected_to_livegraph: String(this.client.connection.isConnected()),
             backgrounded: String(e),
@@ -93171,7 +93171,7 @@ class NE {
       let a = Date.now();
       r.finish();
       n || this.reportSuccessOrFail(i, a, r.backgrounded, r.wasOffline);
-      _$$S2(No.SUBSCRIPTION_UPDATE_LATENCY, a - i, {
+      sendHistogram(No.SUBSCRIPTION_UPDATE_LATENCY, a - i, {
         currently_backgrounded: String(document.visibilityState === 'hidden'),
         connected_to_livegraph: String(this.client.connection.isConnected()),
         backgrounded: String(r.backgrounded),
@@ -93346,11 +93346,11 @@ export function $$NT0(e) {
       livegraphUnstickOnRefresh: getFeatureFlags().livegraph_unstick_on_refresh,
       syncTimeoutMs: getLaunchDarklyFlagsExport().livegraph_sync_timeout_ms
     };
-    let a = new _$$Sj(RY);
+    let a = new SchemaHandler(RY);
     let s = new _$$iO(RY.views, a);
     let o = t || null;
     let l = new R5(analyticsEventManager);
-    let d = new Oh(a, s, i, e => {
+    let d = new OptimisticMutationHandler(a, s, i, e => {
       if (!o || o.readyState === WebSocket.CLOSED || o.readyState === WebSocket.CLOSING) return new WebSocket(e);
       let t = o;
       o = null;

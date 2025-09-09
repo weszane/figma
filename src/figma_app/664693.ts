@@ -25,7 +25,7 @@ import { C as _$$C2 } from "../905/696698";
 import { rZ } from "../905/971098";
 import { fullscreenValue } from "../figma_app/455680";
 import { dh } from "../figma_app/186343";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Ib } from "../905/129884";
 import { xH as _$$xH } from "../figma_app/249941";
 import { cq } from "../905/794154";
@@ -35,7 +35,7 @@ import { B } from "../905/222272";
 import { n as _$$n } from "../905/895449";
 import { S as _$$S } from "../905/933340";
 export function $$U0() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let [t, r] = useState(e ? rZ(e) : []);
   let [a, l] = useState(t[0] || null);
   let d = useMemo(() => t.map(e => ({
@@ -152,7 +152,7 @@ export function $$B2() {
 function G(e) {
   var t;
   var r;
-  let a = tS();
+  let a = useCurrentFileKey();
   let [s] = useState(a ? rZ(a) : []);
   let l = dh();
   let d = useMemo(() => s.find(e => e.dsKitKey.pageId === l) || null, [s, l]);

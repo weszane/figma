@@ -19,7 +19,7 @@ import { F$, V, Yg } from '../figma_app/304955';
 import { wi } from '../figma_app/325537';
 import { fullscreenValue } from '../figma_app/455680';
 import { assert } from '../figma_app/465776';
-import { q5 } from '../figma_app/516028';
+import { selectCurrentFile } from '../figma_app/516028';
 import { lV } from '../figma_app/617606';
 import { J } from '../figma_app/710077';
 import { Fullscreen } from '../figma_app/763686';
@@ -42,7 +42,7 @@ export function $$L0({
   restoreToVersionTitle: l
 }) {
   let o = selectCurrentUser();
-  let c = q5();
+  let c = selectCurrentFile();
   let d = c?.key || null;
   let x = useDispatch();
   let [f, b] = useAtomValueAndSetter(I(t));

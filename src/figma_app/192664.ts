@@ -8,7 +8,7 @@ import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
@@ -93,7 +93,7 @@ let R = registerModal(function (e) {
   }(r);
   let [N, R] = useAtomValueAndSetter($$w2);
   useEffect(() => (N || R(!0), () => {
-    N && (YQ({
+    N && (handleAtomEvent({
       id: $$O0
     }), R(!1));
   }), [R, N]);

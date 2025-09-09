@@ -3,10 +3,10 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import d from "../vendor/116389";
 import { isGovCluster, getInitialOptions } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { O as _$$O } from "../905/539306";
 import { reportError } from "../905/11";
 import { n as _$$n } from "../figma_app/3731";
@@ -18,7 +18,7 @@ import { z } from "../905/373223";
 import { uE } from "../figma_app/314264";
 import { HE, O_ } from "../905/967587";
 import { DtmMigrationInfo, UserFlagByName } from "../figma_app/43951";
-import { nx } from "../figma_app/12796";
+import { hasExternalRestrictedOrgId } from "../figma_app/12796";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { X } from "../905/698965";
 import { O as _$$O2 } from "../905/833838";
@@ -32,17 +32,17 @@ export function $$A1({
   let n = useSelector(e => e.plans);
   let a = useSelector(e => getPermissionsStateMemoized(e));
   let d = z();
-  let g = Rs(DtmMigrationInfo, {}, {
+  let g = useSubscription(DtmMigrationInfo, {}, {
     enabled: getFeatureFlags().dtm_deprecation_post_migration_onboarding
   });
-  let b = oA(g.data?.personalDraftToPlanDraftLocation);
-  let w = oA(b?.toDraftsFolder?.team?.trackTags)?.is_auto_created_for_dtm_migration ?? !1;
+  let b = getResourceDataOrFallback(g.data?.personalDraftToPlanDraftLocation);
+  let w = getResourceDataOrFallback(b?.toDraftsFolder?.team?.trackTags)?.is_auto_created_for_dtm_migration ?? !1;
   let I = b?.status === "complete";
-  let A = Rs(UserFlagByName({
+  let A = useSubscription(UserFlagByName({
     name: "seen_dtm_post_migration_badge"
   }));
   let N = !!A?.data?.currentUser?.userFlagByName;
-  let O = nx(e);
+  let O = hasExternalRestrictedOrgId(e);
   let R = O && n.length > 1;
   let M = !O && !isGovCluster();
   return {

@@ -10,7 +10,7 @@ import { vq } from "../905/8732";
 import { hideModal } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { CG } from "../figma_app/646357";
 import { AF } from "../figma_app/889655";
 import { PW } from "../figma_app/633080";
@@ -29,7 +29,7 @@ export function $$x3({
     stateGroup: NA(i),
     stateGroupPropertySortOrder: OC(i),
     dropdownShown: i.dropdownShown,
-    openFileKey: sS(i),
+    openFileKey: selectOpenFileKey(i),
     defaultPropName: e === ComponentPropType.VARIANT ? YH(i) : vS(i, e, t),
     isInstanceSwapPickerShown: i.instanceSwapPickerShown.isShown
   }));

@@ -1,9 +1,9 @@
 import { customHistory } from "../905/612521";
 import { l as _$$l } from "../1250/511088";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { QV } from "../1250/958770";
 export function $$s0() {
-  let e = q5();
+  let e = selectCurrentFile();
   return async function (t) {
     let [n, i] = e?.plan?.id?.split("::") ?? [];
     if (!n || !i) {

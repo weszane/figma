@@ -34,7 +34,7 @@ import { XHR } from "../905/910117";
 import { Q9 } from "../905/773401";
 import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { xf } from "../figma_app/416935";
 import { $n } from "../905/521428";
@@ -356,7 +356,7 @@ function H(e) {
         t(Qg({
           message: e.message
         }));
-      }); else if (TA()) _$$k2.twoFactor(d || "").then(e => {
+      });else if (TA()) _$$k2.twoFactor(d || "").then(e => {
         customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
@@ -365,7 +365,7 @@ function H(e) {
           message: n,
           invalidInput: RE.TOTP_KEY
         }));
-      }); else switch (_) {
+      });else switch (_) {
         case qB.SIGN_IN:
           t(Jv({
             formId: i
@@ -453,7 +453,7 @@ function Q(e) {
   let i = customHistory.location.pathname + customHistory.location.search;
   let [s, o] = useState(!1);
   let d = useSelector(e => e.user);
-  let c = useSelector(sS);
+  let c = useSelector(selectOpenFileKey);
   let u = useSelector(({
     openFile: e
   }) => e?.parentOrgId);
@@ -926,7 +926,7 @@ function eb(e) {
     users: e.auth.appAuthUsers,
     onUserSelect: A,
     trackOnChangeAccount: I
-  }); else {
+  });else {
     let e;
     let i;
     e = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.generic-go-back-and-try-again") : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
@@ -2293,21 +2293,21 @@ function tl(e) {
   if (e.auth.formState === qB.RESET_PASSWORD) return jsx(en, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
+  });else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
+  });else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
+  });else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
+  });else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
+  });else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
     ...e
-  }); else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
+  });else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
     onFormSubmit: r,
     ...e
   });

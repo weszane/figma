@@ -2,8 +2,8 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -51,7 +51,7 @@ export function $$w1(e) {
     productComponentStats,
     libraryKey
   });
-  let j = Rs(LibraryModalAssetsDataByLibraryKey, {
+  let j = useSubscription(LibraryModalAssetsDataByLibraryKey, {
     libraryKey
   });
   let U = useMemo(() => "loaded" === j.status && j.data.libraryKeyToFile?.file ? j.data.libraryKeyToFile.file.variableCollections : [], [j]);
@@ -123,7 +123,7 @@ export function $$w1(e) {
 export function $$C0({
   libraryKey: e
 }) {
-  let [t] = IT(sU(e));
+  let [t] = setupResourceAtomHandler(sU(e));
   let i = useContext(_$$r);
   return useMemo(() => [...(("loaded" === t.status ? t.data : []) ?? i?.allUsedStylesByLibraryKey[e] ?? [])].sort(Lk), [t, i?.allUsedStylesByLibraryKey, e]);
 }

@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { Agb } from "../figma_app/822011";
 import a from "classnames";
 import { E as _$$E } from "../905/511388";
-import { _G } from "../figma_app/516028";
-import { X$ } from "../figma_app/465071";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { H } from "../905/991973";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
@@ -19,9 +19,9 @@ export function $$g1({
   compact: m,
   colorPrimaryOnHover: g
 }) {
-  let f = X$("LibraryBadge").unwrapOr(null);
+  let f = useCurrentPublicPlan("LibraryBadge").unwrapOr(null);
   let E = f?.tier === Agb.ENTERPRISE;
-  let y = _G();
+  let y = useOpenFileLibraryKey();
   let b = fV(e);
   let T = fd(e);
   let I = H(e);

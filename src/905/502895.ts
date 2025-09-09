@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { sha1HexFromBytes } from "../905/125019";
 import { VideoCppBindings } from "../figma_app/763686";
 import { logger } from "../905/651849";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Point } from "../905/736624";
 import { aB, uz } from "../905/284552";
 import { nt } from "../figma_app/858013";
@@ -53,7 +53,7 @@ export function $$$$A0(e) {
     };
   }, [openFileKey]);
   let O = useMemo(() => imagePaint.video?.hash, [imagePaint]);
-  let D = ZC(O);
+  let D = useLatestRef(O);
   let L = useDispatch();
   let F = useCallback((e, t, i, n) => {
     L(_P({

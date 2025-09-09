@@ -1,34 +1,34 @@
 import { useMemo, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { logger } from "../905/651849";
 import { isProdCluster } from "../figma_app/169182";
 import { subscribeAndAwaitData } from "../905/553831";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Z } from "../905/939602";
-import { yV, q5 } from "../figma_app/516028";
+import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
 import { SlotsFileEnablement } from "../figma_app/43951";
 export async function $$h1() {
-  let e = atomStoreManager.get(yV);
+  let e = atomStoreManager.get(openFileAtom);
   if (!e) return;
   let t = await subscribeAndAwaitData(SlotsFileEnablement, {
     fileKey: e.sourceFileKey ?? e.key
   });
-  oA(t.file?.slotsFileEnablement)?.slotsEnabled || (await Z.postEnableSlotsForFile({
+  getResourceDataOrFallback(t.file?.slotsFileEnablement)?.slotsEnabled || (await Z.postEnableSlotsForFile({
     fileKey: e.sourceFileKey ?? e.key
   }));
 }
 export function $$m0() {
   let e = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = e?.sourceFileKey ?? e?.key ?? "";
-    let r = Rs(SlotsFileEnablement({
+    let r = useSubscription(SlotsFileEnablement({
       fileKey: t
     }), {
       enabled: !!t && getFeatureFlags().dse_slots_file_enablement
     });
-    if ("loaded" === r.status) return oA(r.data.file?.slotsFileEnablement)?.slotsEnabled;
+    if ("loaded" === r.status) return getResourceDataOrFallback(r.data.file?.slotsFileEnablement)?.slotsEnabled;
   }();
   let t = getFeatureFlags();
   let r = useMemo(() => e ? g.filter(e => !t[e]) : [], [e, t]);

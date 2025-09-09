@@ -3,14 +3,14 @@ import { useStore } from "react-redux";
 import { SceneGraphHelpers, ViewType } from "../figma_app/763686";
 import { Ql } from "../figma_app/387100";
 import { selectWithShallowEqual } from "../905/103090";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { ds } from "../figma_app/314264";
 import { $A } from "../905/782918";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 let _ = null;
 export function $$h1(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     isTeamFile,
     topLevelMode,
@@ -38,7 +38,7 @@ export function $$h1(e) {
       topLevelNodeType: n?.type
     };
   });
-  let S = _I();
+  let S = useCanAccessFullDevMode();
   let v = !!hA();
   let A = useStore();
   let x = useRef("");

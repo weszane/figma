@@ -14,15 +14,15 @@ import { Ay } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
 import { kS } from "../figma_app/864723";
-import { As, ze } from "../figma_app/516028";
+import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { um, E$, ez } from "../figma_app/835718";
 import { ep, SU } from "../figma_app/101849";
 let I = "ai_expand_mindmap";
 var $$S = (e => (e.LOADING = "ai-expand-mindmap-loading", e.SUCCESS = "ai-expand-mindmap-success", e))($$S || {});
 export function $$v0() {
   let e = useAtomWithSubscription(_s);
-  let t = useAtomWithSubscription(As);
-  let r = useAtomWithSubscription(ze);
+  let t = useAtomWithSubscription(openFileTeamIdAtom);
+  let r = useAtomWithSubscription(openFileKeyAtom);
   let S = useAtomWithSubscription(kS);
   let v = useAtomWithSubscription(J);
   let A = um();

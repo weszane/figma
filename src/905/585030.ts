@@ -10,7 +10,7 @@ import { logInfo } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { rY, XA } from "../905/985490";
-import { cb, HJ, C2 } from "../905/760074";
+import { handleModalError, handleError, getDiffVersion } from "../905/760074";
 import { q } from "../905/807667";
 import { Jr } from "../figma_app/624361";
 import { WA } from "../figma_app/582924";
@@ -18,7 +18,7 @@ import { w as _$$w, De } from "../905/346794";
 import { Z_, yQ } from "../figma_app/793953";
 import { tG } from "../figma_app/723183";
 import { Qx, SN } from "../905/491806";
-import { PW, Kn } from "../905/535806";
+import { CPPEventType, SourceDirection } from "../905/535806";
 import { createNoOpValidator } from "../figma_app/181241";
 import { FT, ss } from "../905/746499";
 import { mT } from "../905/432493";
@@ -73,7 +73,7 @@ export function $$k6() {
       default:
         throwTypeError(e);
     }
-    cb(t);
+    handleModalError(t);
     return t;
   }
 }
@@ -97,7 +97,7 @@ export function $$R5(e, t = PreviewStage.PREVIEW) {
       default:
         throwTypeError(i);
     }
-    t === PreviewStage.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.TO_SOURCE);
+    t === PreviewStage.PREVIEW ? handleModalError(e) : handleError(e, CPPEventType.ON_MERGE, SourceDirection.TO_SOURCE);
     return e;
   }
 }
@@ -118,7 +118,7 @@ export function $$N7() {
       default:
         throwTypeError(e);
     }
-    cb(t);
+    handleModalError(t);
     return t;
   }
 }
@@ -142,7 +142,7 @@ export function $$P3(e, t, i = PreviewStage.PREVIEW) {
       default:
         throwTypeError(n);
     }
-    i === PreviewStage.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.FROM_SOURCE);
+    i === PreviewStage.PREVIEW ? handleModalError(e) : handleError(e, CPPEventType.ON_MERGE, SourceDirection.FROM_SOURCE);
     return e;
   }
 }
@@ -153,12 +153,12 @@ export function $$O4(e, t, i, n, r) {
 let D = async (e, t, i, n, r) => {
   let d;
   let p = new URLSearchParams();
-  switch (p.set("migration_version", `${n}`), r && p.set("source_checkpoint_key", r), p.set("diff_version", C2().toString()), i) {
+  switch (p.set("migration_version", `${n}`), r && p.set("source_checkpoint_key", r), p.set("diff_version", getDiffVersion().toString()), i) {
     case GitReferenceType.SOURCE:
-      d = Kn.FROM_SOURCE;
+      d = SourceDirection.FROM_SOURCE;
       break;
     case GitReferenceType.BRANCH:
-      d = Kn.TO_SOURCE;
+      d = SourceDirection.TO_SOURCE;
       break;
     case GitReferenceType.COMPARE:
       throw Error("Unexpected DiffType: COMPARE");
@@ -225,8 +225,8 @@ let M = (e, t, i) => {
     setDiffResult: o,
     isDeferConflictResolutionEnabled: !0,
     metrics: d,
-    diffVersion: C2(),
-    useDiffVersion: C2(),
+    diffVersion: getDiffVersion(),
+    useDiffVersion: getDiffVersion(),
     branchModalTrackingId,
     mergeDiffSize: t.length
   });

@@ -7,7 +7,7 @@ import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import c, { Point, expandRect } from "../905/736624";
 import { tH as _$$tH, H4 } from "../905/751457";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import p, { isDevModeFocusViewActive } from "../figma_app/544649";
 import { wg, RP, k7, QD, q4, UU, pD, vV, Z5, nb as _$$nb, a$, hY, CX, RI, dB, lV, C as _$$C, _v, hx } from "../figma_app/770088";
 import { ST } from "../figma_app/91703";
@@ -17,7 +17,7 @@ import { aV } from "../figma_app/722362";
 import { _Z } from "../figma_app/623300";
 import { BI, Yi, sc } from "../figma_app/546509";
 import { d0, $P } from "../figma_app/478866";
-import { yV, tS as _$$tS, q5 } from "../figma_app/516028";
+import { openFileAtom, useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { t as _$$t } from "../905/656351";
 import { selectCurrentUser, selectUser, getUserId } from "../905/372672";
 import { zW, Qt } from "../905/162414";
@@ -43,7 +43,7 @@ import { R as _$$R } from "../905/780757";
 import { g as _$$g } from "../3276/441754";
 import { createPortal } from "../vendor/944059";
 import K from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { buildStaticUrl, getInitialOptions } from "../figma_app/169182";
 import X from "../vendor/73823";
 import { x as _$$x } from "../905/437800";
@@ -62,7 +62,7 @@ import { getI18nString, getI18nStringAlias, renderI18nText } from "../905/303541
 import { fullscreenValue } from "../figma_app/455680";
 import { T as _$$T, w as _$$w } from "../3276/279527";
 import { Vi } from "../figma_app/955650";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { y as _$$y } from "../figma_app/705249";
 import { j as _$$j } from "../draftjs_composer/390258";
 import { O1, KD } from "../figma_app/317394";
@@ -773,7 +773,7 @@ function eL({
   let v = useMemo(() => _.getCommentsWrapperOffset(g), [_, g]);
   let [x, b] = useState(g);
   g === x || f || b(g);
-  let y = ZC(i);
+  let y = useLatestRef(i);
   let C = useMemo(() => function (e, t) {
     let n = e.all();
     if (!t || 0 === t.all().length) return n.map(n => n.pins.length > 1 ? {
@@ -1384,7 +1384,7 @@ function tV(e) {
 }
 function t3(e) {
   let t = useAtomWithSubscription(p9);
-  let n = useAtomWithSubscription(yV);
+  let n = useAtomWithSubscription(openFileAtom);
   let a = kJ();
   return yo({
     user: t,
@@ -1648,7 +1648,7 @@ function nr(e) {
   }, [e.viewportInfo.x, e.viewportInfo.y, L.xDelta, L.yDelta, nn]);
   let [O, B] = useState(null);
   let U = useMemo(() => b ? R : d ? R : A(e.thread) || new Point(0, 0), [b, e.thread, d, R, A]);
-  let H = ZC(U);
+  let H = useLatestRef(U);
   useLayoutEffect(() => {
     if (O && !b) {
       let e = H ? U.subtract(H) : new Point(0, 0);
@@ -1761,7 +1761,7 @@ function nr(e) {
     ew();
   }, [dispatch, setIsPinned, ew]);
   let eP = useSelector(e => e.universalInsertModal?.pinned === _$$t4.PINNED_AND_DOCKED_LEFT);
-  let eI = ZC(R);
+  let eI = useLatestRef(R);
   let eT = eI && eI !== R;
   let eM = eI && V.equals(eI);
   useEffect(() => {
@@ -2453,7 +2453,7 @@ function nP(e) {
       attachment: e
     }));
   }, [d]);
-  let N = _$$tS();
+  let N = useCurrentFileKey();
   let S = useStore();
   let D = useCallback((t, n) => {
     N && (d(_$$nb({
@@ -2844,7 +2844,7 @@ function nO(e) {
   let V = useMemo(() => "communityHub" === d.view && "hubFile" === d.subView && _$$t3(d.fullscreenState), [d]);
   let q = null;
   u ? q = A.selectionBoxAnchor : l.comments[0].client_meta?.selection_box_anchor && (l.comments[0].client_meta?.in_frame, q = l.selectionAnchorCanvasPosition ?? l.boundingBoxAnchorCanvasPosition ?? null);
-  let z = !!Rs(FileCanEdit(u ? null : {
+  let z = !!useSubscription(FileCanEdit(u ? null : {
     key: e.thread.key
   })).unwrapOr(!1);
   let Z = F === l.comments[0]?.user_id;
@@ -3306,7 +3306,7 @@ function n0(e) {
   let s = useContext(viewportNavigatorContext);
   let l = useSelector(e => "communityHub" === e.selectedView.view);
   let d = selectCurrentUser();
-  let m = q5();
+  let m = selectCurrentFile();
   let u = useSelector(e => e.selectedView.commentThreadId);
   let p = useDispatch();
   let h = useContext(hh);
@@ -3447,7 +3447,7 @@ function n2(e) {
       ...e,
       commentsWriteApi: f,
       commentsConfiguration: n
-    })), YQ({
+    })), handleAtomEvent({
       id: _$$w
     }));
   }, [s, t, f, n]);
@@ -3499,7 +3499,7 @@ function n2(e) {
     showResolvedComments: e.showResolvedComments,
     submitNewComment: () => {
       m();
-      YQ({
+      handleAtomEvent({
         id: _$$w
       });
     },

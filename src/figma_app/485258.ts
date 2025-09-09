@@ -7,7 +7,7 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
-import { YE } from "../figma_app/552876";
+import { isDebugSelectedFigmakeFullscreen } from "../figma_app/552876";
 export let $$n0;
 class h {
   async pasteVariablesWithLocalizationPopup(e, t, r) {
@@ -27,7 +27,7 @@ class h {
         numPublished: e.size - m.size,
         numUnpublished: m.size
       }), getFeatureFlags().variables_paste_remap_popup) {
-        if (YE()) return;
+        if (isDebugSelectedFigmakeFullscreen()) return;
         debugState.dispatch(VisualBellActions.dequeue({
           matchType: "localize_unpublished_variables"
         }));

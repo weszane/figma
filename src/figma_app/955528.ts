@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import h from "../vendor/128080";
 import { $ } from "../905/455748";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { getFalseValue } from "../figma_app/897289";
@@ -273,7 +273,7 @@ export function $$Z14(e) {
 export function $$Q9(e) {
   let t = pP(JT.SLIDES_REWRITE_TEXT);
   let r = t.state;
-  let o = ZC(r) !== r;
+  let o = useLatestRef(r) !== r;
   let l = useDispatch();
   useEffect(() => () => {
     l(VisualBellActions.dequeue({
@@ -292,9 +292,9 @@ export function $$Q9(e) {
           text: getI18nString("slides.properties_panel.rewrite_text.action_stop"),
           action: () => cT(JT.SLIDES_REWRITE_TEXT)
         }
-      })); else if (r === qy.CANCELLED) l(VisualBellActions.dequeue({
+      }));else if (r === qy.CANCELLED) l(VisualBellActions.dequeue({
         matchType: K
-      })); else if (r === qy.DONE) l(VisualBellActions.enqueue({
+      }));else if (r === qy.DONE) l(VisualBellActions.enqueue({
         icon: VisualBellIcon.CHECK,
         message: getI18nString("slides.properties_panel.rewrite_text.action_done"),
         type: K,
@@ -303,8 +303,8 @@ export function $$Q9(e) {
           text: getI18nString("slides.properties_panel.rewrite_text.action_rewrite_again"),
           action: () => e()
         },
-        onDismiss: () => { }
-      })); else if (r === qy.ERROR) {
+        onDismiss: () => {}
+      }));else if (r === qy.ERROR) {
         let r = t.error;
         let n = function (e) {
           if (e instanceof n4) return getI18nString("slides.properties_panel.rewrite_text.error.no_text_characters_found");
@@ -323,7 +323,7 @@ export function $$Q9(e) {
             not_implemented: getI18nString("ai.error.not_implemented")
           };
           let r = "generic";
-          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error"); else if (e instanceof G1) switch (e.type) {
+          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error");else if (e instanceof G1) switch (e.type) {
             case "content_length_limit_exceeded":
             case "meter_exceeded":
             case "rate_limit_exceeded":
@@ -368,7 +368,7 @@ export function $$Q9(e) {
             text: getI18nString("slides.properties_panel.rewrite_text.action_rewrite_again"),
             action: () => e()
           } : void 0,
-          onDismiss: () => { }
+          onDismiss: () => {}
         }));
       }
     }
@@ -380,7 +380,7 @@ export function $$ee11(e, t) {
   let s = r || a;
   let o = $(useSelector(() => nl()?.characters));
   let l = e === qy.RUNNING;
-  let c = ZC(l) && !l;
+  let c = useLatestRef(l) && !l;
   let u = l || c;
   useEffect(() => {
     if (!getFeatureFlags().slides_tone_dial_undo) {
@@ -393,7 +393,7 @@ export function $$ee11(e, t) {
   }, [t, s, o, u]);
 }
 export function $$et10(e, t) {
-  let r = ZC(e);
+  let r = useLatestRef(e);
   let i = r && !m()(r, e);
   let a = m()(e, [0, 0]);
   let s = i && a;
@@ -405,7 +405,7 @@ export function $$er15(e) {
   let {
     Sprig
   } = useSprigWithSampling();
-  let r = ZC(e);
+  let r = useLatestRef(e);
   useEffect(() => {
     e === qy.DONE && r === qy.RUNNING && Sprig("track", "slides_rewrite_text");
   }, [Sprig, e, r]);

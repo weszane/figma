@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { trackEventAnalytics } from "../905/449184";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { W5, bF } from "../figma_app/120294";
 let $$d1 = "audio-paywall-key";
 let $$c2 = (() => {
@@ -20,7 +20,7 @@ let $$c2 = (() => {
 })();
 export function $$u0() {
   let e;
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     userIdsInCall
   } = W5(t?.key || null);

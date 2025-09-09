@@ -1,6 +1,6 @@
 import { atom } from "../figma_app/27355";
 import { p9 } from "../figma_app/864723";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Z1 } from "../905/401885";
 import { r1 } from "../figma_app/545877";
@@ -14,7 +14,7 @@ let c = createReduxSubscriptionAtomWithState(e => e.multiplayer.deviceNameFilter
 let $$m2 = atom(e => {
   let t = e(d);
   let n = e(c);
-  return null != e(yV) && null != n && new Set(t.filter(e => e.deviceName === n).map(e => e.userID)).size > 1;
+  return null != e(openFileAtom) && null != n && new Set(t.filter(e => e.deviceName === n).map(e => e.userID)).size > 1;
 });
 let u = r1("seen_spotlight_hint");
 let $$p1 = Z1(u, (e, t) => {

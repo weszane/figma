@@ -21,8 +21,8 @@ import { oB, j7 } from "../905/929976";
 import { showModal, popModalStack } from "../905/156213";
 import { $$do, F1, Nw, ui, LN, Kq } from "../905/941249";
 import { S as _$$S } from "../1e926454/283343";
-import { C1 } from "../figma_app/12796";
-import { e6 } from "../905/557142";
+import { getPermissionLevelName } from "../figma_app/12796";
+import { AccessLevelEnum } from "../905/557142";
 import { Ib } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { Cf } from "../905/504727";
@@ -77,7 +77,7 @@ let $$L0 = connect(e => ({
     })),
     loading: u,
     canAdmin: teamPermissions.canAdmin
-  }), [dispatch, e.dropdownShown, u, p, teamPermissions.canAdmin, teamId, ,]);
+  }), [dispatch, e.dropdownShown, u, p, teamPermissions.canAdmin, teamId,,]);
   let g = useCallback(() => {
     m && dispatch(LN({
       teamId: e.teamId,
@@ -116,7 +116,7 @@ let $$L0 = connect(e => ({
       },
       currentLevel: l,
       url: u ? void 0 : e.teamJoinLinks?.url,
-      inviteLevels: teamPermissions.canEdit ? [e6.VIEWER, e6.EDITOR] : [e6.VIEWER],
+      inviteLevels: teamPermissions.canEdit ? [AccessLevelEnum.VIEWER, AccessLevelEnum.EDITOR] : [AccessLevelEnum.VIEWER],
       teamId: e.teamId,
       button: h
     }) : jsx(B, {
@@ -174,7 +174,7 @@ function D(e) {
 function M(e) {
   let t = useDispatch();
   let r = "join-link-permission-level-dropdown";
-  let s = e.currentLevel === e6.VIEWER ? "-32px" : "-61px";
+  let s = e.currentLevel === AccessLevelEnum.VIEWER ? "-32px" : "-61px";
   let n = jsxs("div", {
     className: "team_join_link_permissions--linkAndDropdown--dOdkB",
     children: [jsxs("span", {
@@ -193,7 +193,7 @@ function M(e) {
         },
         className: "team_join_link_permissions--permissionLevelDropdown--xuQLz role_row--select--6VpSS",
         children: [jsx("span", {
-          children: C1(e.currentLevel)
+          children: getPermissionLevelName(e.currentLevel)
         }), jsx("div", {
           className: "team_join_link_permissions--caretWrapper--OXpki role_row--caretWrapper--P1Mak",
           children: jsx(_$$B, {
@@ -208,7 +208,7 @@ function M(e) {
         children: e.inviteLevels.map((t, r) => jsx(MM, {
           checked: t === e.currentLevel,
           onClick: () => e.setLevel(t),
-          children: C1(t)
+          children: getPermissionLevelName(t)
         }, r))
       })]
     })]
@@ -226,7 +226,7 @@ function M(e) {
       children: jsx(b8, {
         value: e.currentLevel,
         options: e.inviteLevels,
-        getPermissionName: C1,
+        getPermissionName: getPermissionLevelName,
         getPermissionDescription: e.getPermissionDescriptionText,
         showSeparators: e.showDropdownSeparators,
         onChange: e.setLevel

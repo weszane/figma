@@ -4,7 +4,7 @@ import { shallowEqual } from "react-redux";
 import { N_ } from "../vendor/956898";
 import { trackEventAnalytics } from "../905/449184";
 import { logDebug } from "../905/714362";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { I18nTextComponent, getI18nString } from "../905/303541";
 import { u as _$$u } from "../905/16237";
 import { K } from "../905/135526";
@@ -59,7 +59,7 @@ export function $$f4({
     if (r === K.RCS) {
       let r = {};
       for (let e of Object.keys(t)) null !== t[e] && void 0 !== t[e] && (r[e] = t[e]);
-      YQ({
+      handleAtomEvent({
         id: e,
         properties: r
       });

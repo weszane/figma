@@ -7,7 +7,7 @@ import { useStableMemo } from "../905/19536";
 import { f as _$$f } from "../905/412913";
 import { Ui } from "../905/709171";
 import { nR } from "../figma_app/852050";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { SS } from "../figma_app/936646";
 import { je } from "../figma_app/155728";
 import { ub, PW } from "../figma_app/633080";
@@ -20,7 +20,7 @@ export function $$$$A0(e, t, i) {
   let A = nR();
   let y = t?.type === PW.VARIABLE && "SUBSCRIBED" === t.subscriptionStatus ? t : null;
   let b = je();
-  let v = tS();
+  let v = useCurrentFileKey();
   return useMemo(() => {
     let t = new Set();
     let i = [];

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, useEffect, useRef, useCallback } from "react";
 import a from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { M3, yn, lv } from "../figma_app/119475";
 import { Y } from "../905/470281";
 import { gp } from "../905/154591";
@@ -35,7 +35,7 @@ export function $$m0({
     path: v
   });
   let N = useContext(G);
-  let P = ZC(f);
+  let P = useLatestRef(f);
   useEffect(() => {
     !P && f && !isFocused && N() && keyboardNavigationItem?.focus();
   }, [isFocused, P, f, keyboardNavigationItem, N]);

@@ -7,10 +7,10 @@ import { c as _$$c } from "../905/486270";
 import { atomStoreManager } from "../figma_app/27355";
 import u from "classnames";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { lW } from "../figma_app/850075";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { FAuthProviderType } from "../figma_app/191312";
 import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
 import { Ib } from "../905/129884";
@@ -165,10 +165,10 @@ export function $$L0({
   }) {
     let s = _$$M();
     let o = atomStoreManager.get(_$$Rs);
-    let l = to();
+    let l = useIsSelectedViewFullscreenCooper();
     let d = lW(l);
     let u = e && d[e];
-    let p = Rs(LibraryPresetSubscriptionsV2, {
+    let p = useSubscription(LibraryPresetSubscriptionsV2, {
       group: s
     }, {
       enabled: null != s

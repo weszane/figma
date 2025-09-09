@@ -8,7 +8,7 @@ import { Jm, BY } from "../figma_app/387599";
 import { mk, K2 } from "../figma_app/777551";
 import { o_, Qd, ws, bc, $3, tv, Tv, B2, Gk } from "../figma_app/427318";
 import { Om } from "../figma_app/979714";
-import { T5, D6 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, useCurrentPlanUser } from "../figma_app/465071";
 import { XU } from "../figma_app/756995";
 import { w4, y1 } from "../905/445814";
 import { V } from "../figma_app/385855";
@@ -272,8 +272,8 @@ export function $$F0({
 }) {
   let x = useDispatch();
   let f = Om();
-  let y = T5("ResourceHubItemsView").unwrapOr(null);
-  let g = D6("ResourceHubItemsView").unwrapOr(null);
+  let y = useCurrentPrivilegedPlan("ResourceHubItemsView").unwrapOr(null);
+  let g = useCurrentPlanUser("ResourceHubItemsView").unwrapOr(null);
   let v = Jm();
   let b = BY();
   let [j, w] = useState(null);
@@ -316,7 +316,7 @@ export function $$F0({
   return jsxs(Fragment, {
     children: [jsx(_$$A, {
       getAriaLabel: t ? () => "" : e => k(e) ?? "",
-      handleOpenItem: t ? () => { } : (e, t) => S(e, t),
+      handleOpenItem: t ? () => {} : (e, t) => S(e, t),
       items: t ? A : e,
       multiselectDisabled: !0,
       viewType: XU.GRID,

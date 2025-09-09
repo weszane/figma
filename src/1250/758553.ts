@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { Y9 } from "../905/504768";
 import { selectCurrentUser } from "../905/372672";
-import { D6, j_ } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { V } from "../7037/903447";
@@ -36,10 +36,10 @@ export var $$b0 = (e => (e.USER = "user_post_context_menu", e.SYSTEM = "system_p
 let x = e => {
   let t = selectCurrentUser();
   let n = (t && t.id === e.creator.id) ?? !1;
-  let a = D6("useUserPostPermissions");
+  let a = useCurrentPlanUser("useUserPostPermissions");
   return {
     canDelete: n,
-    canAdminDelete: j_(a).unwrapOr(!1)
+    canAdminDelete: useIsOrgAdminUser(a).unwrapOr(!1)
   };
 };
 export function $$y1(e) {

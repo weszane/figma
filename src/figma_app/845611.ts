@@ -3,14 +3,14 @@ import { useMemo } from "react";
 import { H } from "../905/507464";
 import { j } from "../905/206476";
 import { P } from "../905/697522";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { I7 } from "../figma_app/594947";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
-import { Te } from "../figma_app/765689";
+import { ProductAccessMap } from "../figma_app/765689";
 import { AdminRequestDashboardRowIds } from "../figma_app/43951";
 let $$f7 = "UPGRADE_REQUESTS_PRODUCT_DROPDOWN";
 let $$E4 = "UPGRADE_REQUESTS_BILLING_GROUP_DROPDOWN";
@@ -31,15 +31,15 @@ let $$R13 = {
   OLDEST_FIRST: () => getI18nString("admin_dashboard.requests.sort.oldest_first")
 };
 let L = {
-  [Te.DESIGN]: {
+  [ProductAccessMap.DESIGN]: {
     name: () => getI18nString("admin_dashboard.requests.design_seat"),
     icon: jsx(H, {})
   },
-  [Te.WHITEBOARD]: {
+  [ProductAccessMap.WHITEBOARD]: {
     name: () => getI18nString("admin_dashboard.requests.figjam_seat"),
     icon: jsx(j, {})
   },
-  [Te.DEV_MODE]: {
+  [ProductAccessMap.DEV_MODE]: {
     name: () => getI18nString("admin_dashboard.requests.devmode_seat"),
     icon: jsx(P, {})
   }
@@ -80,7 +80,7 @@ export function $$M19({
   filterParams: r,
   processedRequestIds: n
 }) {
-  let a = Rs(AdminRequestDashboardRowIds, {
+  let a = useSubscription(AdminRequestDashboardRowIds, {
     planType: e,
     planId: t,
     filterParams: r

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { N } from "../905/438674";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -64,7 +64,7 @@ function k(e) {
                     children: t.name
                   }) : t.name, " ", !t.is_orphaned && e.showAdminEmails && jsx("span", {
                     className: _$$s.colorTextSecondary.$,
-                    children: "(" + Yx(t.admin_users_metadata.map(e => e.email || "")) + ")"
+                    children: "(" + formatList(t.admin_users_metadata.map(e => e.email || "")) + ")"
                   })]
                 }, t.id);
               })

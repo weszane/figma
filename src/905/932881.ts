@@ -6,7 +6,7 @@ import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $z } from "../figma_app/831799";
 import { P } from "../905/842406";
-import { A5 } from "../figma_app/707808";
+import { ShareAction } from "../figma_app/707808";
 import { o as _$$o } from "../905/382697";
 import { E4, hP } from "../905/144598";
 import { G2, QJ, aL, IG, u4, Lo, bv, LN, cp, Xr, Em } from "../905/959395";
@@ -103,7 +103,7 @@ export function $$_0(e) {
       text: jsx("div", {
         children: f
       }),
-      onClick: () => a(A5.COLLABORATORS),
+      onClick: () => a(ShareAction.COLLABORATORS),
       testId: "collaborators-collapsed-row",
       expandCaret: !0
     })

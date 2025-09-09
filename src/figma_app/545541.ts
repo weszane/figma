@@ -4,10 +4,10 @@ import { isNotNullish } from "../figma_app/95419";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { U, iT } from "../figma_app/901889";
 import { x as _$$x } from "../figma_app/256637";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { D as _$$D } from "../905/273829";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { xb } from "../figma_app/910914";
 import { getCodegenLanguagePreference } from "../905/515076";
 import { Bs } from "../figma_app/120227";
@@ -16,11 +16,11 @@ import { m0 } from "../figma_app/976749";
 import { YN, mf, uf, _P } from "../figma_app/844435";
 import { qZ } from "../905/201014";
 import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { FUnitType, FOverrideType, FPluginType, FPublicationStatusType } from "../figma_app/191312";
 import { PluginPreferencesView } from "../figma_app/43951";
-import { X$, H3 } from "../figma_app/465071";
+import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { isDevModeWithCodegen } from "../figma_app/300692";
 import { getMappedPluginId } from "../figma_app/455620";
 import { throwTypeError } from "../figma_app/465776";
@@ -334,7 +334,7 @@ export function $$F0() {
     let {
       loaded: _loaded,
       preferences: _preferences
-    } = V(Rs(PluginPreferencesView, {
+    } = V(useSubscription(PluginPreferencesView, {
       targetOrgId: null,
       targetUserId: e
     }));
@@ -352,7 +352,7 @@ export function $$F0() {
   let u = useDispatch();
   let h = U();
   let m = m0();
-  let y = _I();
+  let y = useCanAccessFullDevMode();
   let b = m && !y;
   useEffect(() => {
     preferences && N(null);
@@ -368,8 +368,8 @@ export function $$F0() {
     return e;
   }, [_preferences2?.pins, preferences?.pins]);
   let w = useMemo(() => x?.pinnedPluginIDs ?? T.pinnedPluginIDs, [T, x]);
-  let O = X$("usePluginPreferences").unwrapOr(null);
-  let R = H3(O) ?? null;
+  let O = useCurrentPublicPlan("usePluginPreferences").unwrapOr(null);
+  let R = getParentOrgIdIfOrgLevel(O) ?? null;
   let L = getUserId();
   let D = YN();
   let M = useMemo(() => w.map(e => {
@@ -515,7 +515,7 @@ export function $$U2() {
     loaded: _loaded3,
     plugin
   } = function () {
-    let e = tS();
+    let e = useCurrentFileKey();
     let t = useAtomWithSubscription(_$$x);
     let r = useSelector(e => e.figFileDuplicatedFromHubFile);
     let a = useMemo(() => {
@@ -553,9 +553,9 @@ async function B(e) {
   });
 }
 function G() {
-  let e = X$("useLGOrgPluginPreferences").unwrapOr(null);
-  let t = H3(e) ?? null;
-  return V(Rs(PluginPreferencesView, {
+  let e = useCurrentPublicPlan("useLGOrgPluginPreferences").unwrapOr(null);
+  let t = getParentOrgIdIfOrgLevel(e) ?? null;
+  return V(useSubscription(PluginPreferencesView, {
     targetOrgId: t,
     targetUserId: null
   }));

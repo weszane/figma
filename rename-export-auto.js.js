@@ -88,7 +88,7 @@ function updateImportFiles(lines, renameMap, candidateFiles) {
       //   compact: false,
       // })
       // if (res && res.code) {
-      //   fs.writeFileSync(file, res.code, 'utf-8')
+      //   // fs.writeFileSync(file, res.code, 'utf-8')
       //   console.log(`🔄 更新导入: ${getRelativePath(file)}`)
       //   updatedCount++
       // }

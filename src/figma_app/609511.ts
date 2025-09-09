@@ -3,7 +3,7 @@ import { FontHelpers, FontSourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { H9 } from "../figma_app/930338";
+import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { M1 } from "../905/777093";
 import { UD } from "../figma_app/624361";
 import { Wh } from "../figma_app/615482";
@@ -286,7 +286,7 @@ export async function $$N0() {
           teamId: n.currentTeamId,
           orgId: n.currentUserOrgId
         });
-        i = H9(a);
+        i = uint8ArrayToBase64(a);
         atomStoreManager.set(x, {
           ...r,
           [t]: i

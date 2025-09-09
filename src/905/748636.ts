@@ -3,7 +3,7 @@ import { forwardRef, useRef, useId, useState, useImperativeHandle, useEffect, us
 import { throwTypeError, assert } from "../figma_app/465776";
 import { n as _$$n } from "../vendor/547481";
 import { parsePxInt } from "../figma_app/783094";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Point, isPointInRect } from "../905/736624";
 import { Dm } from "../figma_app/8833";
 import { I_, G5, em, lq, Ij, E0 } from "../figma_app/792958";
@@ -31,7 +31,7 @@ export let $$A0 = forwardRef(function ({
     getEl: () => a.current?.getEl(),
     setTransform: e => a.current?.setTransform(e)
   }));
-  let f = ZC(t);
+  let f = useLatestRef(t);
   useEffect(() => {
     let e = f?.initialWidth !== t.initialWidth;
     let i = f?.initialHeight !== t.initialHeight;

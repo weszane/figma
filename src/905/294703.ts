@@ -16,7 +16,7 @@ import { Xr, uH, hf, q6 } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { B as _$$B } from "../905/714743";
 import { W } from "../905/95038";
 import { G as _$$G } from "../905/720066";
@@ -81,7 +81,7 @@ function P({
 }) {
   let {
     data
-  } = Rs(FolderSearchResult, {
+  } = useSubscription(FolderSearchResult, {
     teamId: e.model.team_id ?? ""
   }, {
     enabled: !!e.model.team_id

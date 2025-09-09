@@ -4,7 +4,7 @@ import { SourceType } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { BT } from "../905/618447";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { JT } from "../figma_app/632248";
 import { pP, qy, cT } from "../figma_app/862289";
 import { ks, Vm } from "../figma_app/838407";
@@ -51,7 +51,7 @@ export function $$T3(e) {
   let t = yt(e[0]);
   let i = useRef(!1);
   return useCallback(() => {
-    if (!atomStoreManager.get(ze)) return;
+    if (!atomStoreManager.get(openFileKeyAtom)) return;
     let r = atomStoreManager.get(BT);
     if (!i.current && 0 === r.flat().length && e.length > 0) {
       i.current = !0;

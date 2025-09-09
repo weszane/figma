@@ -4,14 +4,14 @@ import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
-import { Rs, p as _$$p } from "../figma_app/288654";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { logError } from "../905/714362";
 import { LibraryMetadataByLibraryKey } from "../figma_app/43951";
 var d = l;
 export function $$m1(e, {
   enabled: t = !0
 } = {}) {
-  let i = Rs(LibraryMetadataByLibraryKey, {
+  let i = useSubscription(LibraryMetadataByLibraryKey, {
     libraryKey: e
   }, {
     enabled: t
@@ -24,7 +24,7 @@ export function $$h0(e, {
   let i = useMemo(() => e.map(e => ({
     libraryKey: e
   })), [e]);
-  let a = _$$p(LibraryMetadataByLibraryKey, i, {
+  let a = useMultiSubscription(LibraryMetadataByLibraryKey, i, {
     enabled: t
   });
   let s = useRef(new Set([]));

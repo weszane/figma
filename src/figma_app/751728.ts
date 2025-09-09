@@ -7,7 +7,7 @@ import { z3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hO } from "../figma_app/545293";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { kK } from "../figma_app/144974";
 import { s as _$$s2 } from "../905/169089";
 import { x as _$$x } from "../905/773818";
@@ -44,7 +44,7 @@ export function $$w0({
   let k = useAtomWithSubscription(C ? hO.currentCommunitySearchAtom : hO.currentSearchAtom);
   let M = useAtomWithSubscription(hO.sortByAtom);
   let F = _$$s2(k);
-  let j = T5("FragmentsGrid").unwrapOr(null);
+  let j = useCurrentPrivilegedPlan("FragmentsGrid").unwrapOr(null);
   let U = j?.name;
   let B = w ? 12 : 8;
   let G = kK() || !U;

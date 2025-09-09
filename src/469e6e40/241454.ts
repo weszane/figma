@@ -19,14 +19,14 @@ import { Wq } from "../figma_app/481749";
 import { hideModal, popModalStack } from "../905/156213";
 import { IJ, uo } from "../figma_app/990058";
 import { fu } from "../figma_app/831799";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { jL } from "../figma_app/658324";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
 import { cg } from "../figma_app/336853";
 import { N as _$$N } from "../905/696711";
 import { e as _$$e } from "../figma_app/119601";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { createNoOpValidator } from "../figma_app/181241";
 import { h as _$$h } from "../figma_app/124713";
 import { registerModal } from "../905/102752";
@@ -170,7 +170,7 @@ function V(e) {
   let u = function (e, t, a) {
     var i;
     if (e) switch (t) {
-      case ud.DESIGN:
+      case ProductAccessTypeEnum.DESIGN:
         return jsxs(Fragment, {
           children: [s(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
@@ -213,7 +213,7 @@ function V(e) {
             })]
           })]
         });
-      case ud.FIGJAM:
+      case ProductAccessTypeEnum.FIGJAM:
         return jsxs(Fragment, {
           children: [s(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
@@ -241,7 +241,7 @@ function V(e) {
             })]
           })]
         });
-      case ud.DEV_MODE:
+      case ProductAccessTypeEnum.DEV_MODE:
         let d;
         d = 1 === a ? renderI18nText("confirm_account_change.upgrade.dev_mode.another_option.singular.no_username") : renderI18nText("confirm_account_change.upgrade.dev_mode.another_option.plural");
         return jsxs(Fragment, {
@@ -289,7 +289,7 @@ function V(e) {
       default:
         throwTypeError(t);
     } else switch (t) {
-      case ud.DESIGN:
+      case ProductAccessTypeEnum.DESIGN:
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
@@ -338,7 +338,7 @@ function V(e) {
             })]
           })]
         });
-      case ud.FIGJAM:
+      case ProductAccessTypeEnum.FIGJAM:
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
@@ -372,7 +372,7 @@ function V(e) {
             })]
           })]
         });
-      case ud.DEV_MODE:
+      case ProductAccessTypeEnum.DEV_MODE:
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
@@ -416,21 +416,21 @@ function V(e) {
       confirmText: c ? getI18nString("confirm_account_change.grant_edit_access_confirm_text") : getI18nString("confirm_account_change.remove_edit_access_confirm_text"),
       confirmationTitle: function (e, t, a) {
         if (e) switch (t) {
-          case ud.DESIGN:
+          case ProductAccessTypeEnum.DESIGN:
             return jsx("span", {
               className: U,
               children: renderI18nText("confirm_account_change.grant_figma_design_access_title.seat_rename", {
                 numUsers: a
               })
             });
-          case ud.FIGJAM:
+          case ProductAccessTypeEnum.FIGJAM:
             return jsx("span", {
               className: U,
               children: renderI18nText("confirm_account_change.grant_figjam_access_title.seat_rename", {
                 numUsers: a
               })
             });
-          case ud.DEV_MODE:
+          case ProductAccessTypeEnum.DEV_MODE:
             return jsx("span", {
               className: U,
               children: renderI18nText("confirm_account_change.upgrade.dev_mode.title", {
@@ -440,21 +440,21 @@ function V(e) {
           default:
             throwTypeError(t);
         } else switch (t) {
-          case ud.DESIGN:
+          case ProductAccessTypeEnum.DESIGN:
             return jsx("span", {
               className: U,
               children: renderI18nText("confirm_account_change.remove_figma_design_access_title.seat_rename", {
                 numUsers: a
               })
             });
-          case ud.FIGJAM:
+          case ProductAccessTypeEnum.FIGJAM:
             return jsx("span", {
               className: U,
               children: renderI18nText("confirm_account_change.remove_figjam_access_title.seat_rename", {
                 numUsers: a
               })
             });
-          case ud.DEV_MODE:
+          case ProductAccessTypeEnum.DEV_MODE:
             return jsx("span", {
               className: U,
               children: renderI18nText("confirm_account_change.remove_dev_mode_access_title", {
@@ -470,7 +470,7 @@ function V(e) {
       isLoading: !1,
       onCancel: e.onHide,
       onConfirm: () => {
-        e.licenseType !== ud.DEV_MODE || c || a();
+        e.licenseType !== ProductAccessTypeEnum.DEV_MODE || c || a();
         (function () {
           let a = {
             org_user_ids: e.orgUserIds,
@@ -586,7 +586,7 @@ let $$Y0 = registerModal(function (e) {
   let [o, x] = useState();
   let b = `ORG_JOIN_REQUEST_APPROVE_${t}`;
   let v = o && o.requester_user.handle;
-  let f = o && o.invite_level && o.invite_level <= e6.VIEWER;
+  let f = o && o.invite_level && o.invite_level <= AccessLevelEnum.VIEWER;
   let y = !!(o && o.deprovisioned_user);
   useEffect(() => {
     O.getOrgJoinRequest({

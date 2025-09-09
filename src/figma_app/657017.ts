@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription, atom } from "../figma_app/27355";
 import { isGovCluster } from "../figma_app/169182";
-import { zl } from "../905/276025";
+import { getPlanFeaturesAtomFamily } from "../905/276025";
 import { FEditorType } from "../figma_app/53721";
 import { n as _$$n } from "../905/347702";
 import { u8 } from "../figma_app/976749";
@@ -19,7 +19,7 @@ export function $$_3() {
   return useAtomWithSubscription($$h0);
 }
 export let $$h0 = atom(e => {
-  let t = e(zl(!0));
+  let t = e(getPlanFeaturesAtomFamily(!0));
   let r = e(u8);
   return $$p2(t.data, r);
 });

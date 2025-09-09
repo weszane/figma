@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { X } from "../figma_app/521331";
 import { M } from "../469e6e40/302359";
 import { Ku } from "../figma_app/740163";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { w$ } from "../figma_app/646357";
 import { AT } from "../figma_app/633080";
 import { Af, Gz, DP } from "../figma_app/803932";
@@ -25,7 +25,7 @@ export function $$y0({
     selectionStyles,
     selectionValues
   } = M();
-  let g = useSelector(sS);
+  let g = useSelector(selectOpenFileKey);
   let y = useSelector(e => e.mirror.selectionPaints.emptyDueToLimitExceeded);
   let {
     visibleItems,

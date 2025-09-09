@@ -7,13 +7,13 @@ import { globalPerfTimer } from "../905/542194";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { XP } from "../figma_app/655139";
-import { tn } from "../figma_app/473493";
+import { canAccessFullDevMode } from "../figma_app/473493";
 import { mapPlatformToFramework } from "../905/359509";
 import { b as _$$b } from "../905/985254";
 import { GS } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
 import { Jr } from "../figma_app/624361";
-import { XJ, sS, tB } from "../figma_app/516028";
+import { selectOpenFileLibraryKey, selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { A as _$$A } from "../figma_app/932979";
 import { Q } from "../905/577205";
@@ -37,8 +37,8 @@ async function x({
 }) {
   if ("SYMBOL" !== e.type && !e.isStateGroup) throw Error(E);
   let r = debugState.getState();
-  let s = XJ(r);
-  let o = sS(r);
+  let s = selectOpenFileLibraryKey(r);
+  let o = selectOpenFileKey(r);
   let {
     backingNodeId,
     backingLibraryKey
@@ -307,14 +307,14 @@ export async function $$z1(e, t, i, d) {
   if (uT(i.getState())) throw Error("The MCP server has been disabled by admin");
   if (!function (e) {
     let t = e.getState();
-    let i = tB({
+    let i = selectOpenFile({
       openFile: t.openFile ?? null
     });
     return i?.editorType === FFileType.DESIGN;
   }(i)) throw Error("The MCP server tools are only available for design files.");
   if (!function (e) {
     let t = e.getState();
-    return tn(t);
+    return canAccessFullDevMode(t);
   }(i)) throw Error("The user doesn't have access to Figma Dev Mode which is required to use this, to get access they need to be subscribed to a paid Dev seat in Figma");
   if (v.toolName === MCP_INTERNAL_GET_RESOURCE) {
     let {

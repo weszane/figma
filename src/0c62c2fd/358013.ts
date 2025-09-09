@@ -1,16 +1,16 @@
 import { useSelector } from "react-redux";
-import { nt } from "../figma_app/687776";
+import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { h } from "../figma_app/334471";
 import { FFileType } from "../figma_app/191312";
-import { No, YY } from "../figma_app/465071";
+import { useTeamPlanPublicInfo, useIsStarterPlan } from "../figma_app/465071";
 import { W } from "../905/442612";
-if (443 == require.j) { }
+if (443 == require.j) {}
 export function $$d0() {
   let e = useSelector(e => e.user?.drafts_folder_id);
-  let t = nt(e);
+  let t = useProjectFileCreationPermissions(e);
   let r = h(t.data);
-  let d = No();
-  let c = YY(d).unwrapOr(!1);
+  let d = useTeamPlanPublicInfo();
+  let c = useIsStarterPlan(d).unwrapOr(!1);
   return t.transform(e => {
     let t = r.find(({
       editorType: e

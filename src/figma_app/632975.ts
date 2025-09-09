@@ -7,7 +7,7 @@ import { ff } from "../figma_app/933328";
 import { q } from "../905/113809";
 import { o as _$$o } from "../905/609215";
 import { Rb, yp, pN } from "../figma_app/852050";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { A } from "../905/749030";
 import { lC, sr, Yc, dC, HK } from "../905/820169";
 import { qF } from "../905/943361";
@@ -162,7 +162,7 @@ export function $$z31(e, t, r, i) {
   let d = o.data?.libraryVariableSets;
   let [c, f] = useMemo(() => "ALL_LIBRARIES" === r.type ? [[...a, ...(l ?? [])], [...s, ...(d ?? [])]] : "LOCAL_VARIABLES" === r.type ? [a, s] : [l ?? [], d ?? []], [r.type, a, l, s, d]);
   let E = s1();
-  let y = _G();
+  let y = useOpenFileLibraryKey();
   let b = A(null, null);
   let T = useMemo(() => {
     let e = {};

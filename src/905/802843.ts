@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { J3, kN, JU } from "../figma_app/622574";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { x } from "../905/619833";
 import { i$, YM } from "../905/122282";
 import { YW } from "../figma_app/553488";
 export function $$d0() {
   let e = J3();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = useDispatch();
   return {
     openSlidesPublishFlow: async n => {

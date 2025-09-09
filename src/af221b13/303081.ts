@@ -49,7 +49,7 @@ import { MZ, o2, R2, Rn } from "../figma_app/146905";
 import { A as _$$A } from "../svg/60701";
 import { A as _$$A2 } from "../5724/172808";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { S as _$$S } from "../5430/465757";
 import { N_ } from "../vendor/956898";
 import { J as _$$J } from "../5430/284487";
@@ -184,7 +184,7 @@ import { D as _$$D3 } from "../5430/769256";
 import { e as _$$e6 } from "../figma_app/324237";
 import { t as _$$t2 } from "../905/150656";
 import { J as _$$J3 } from "../905/341359";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { C as _$$C3 } from "../905/237873";
 import { generateUUIDv4 } from "../905/871474";
 import { a as _$$a5 } from "../905/925868";
@@ -939,7 +939,7 @@ function eZ({
   });
 }
 function e0() {
-  let [e, t] = IT(eB(""));
+  let [e, t] = setupResourceAtomHandler(eB(""));
   let i = "loading" === e.status || !!e.isFetchingNextPage;
   return jsxs(Fragment, {
     children: [jsx(_$$S, {}), jsxs("div", {
@@ -1510,7 +1510,7 @@ function tN() {
   let [{
     data: t,
     status: i
-  }] = IT(eP({
+  }] = setupResourceAtomHandler(eP({
     urlSlug,
     isTemplateUrl: function (e) {
       try {
@@ -3351,7 +3351,7 @@ function no({
     isFetchingNextPage: m
   }, {
     fetchNextPage: p
-  }] = IT(_$$a3.ResourcesPaginatedQuery(vb(filterState)));
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery(vb(filterState)));
   let h = "loading" === d;
   let x = useRef(null);
   let _ = useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
@@ -4517,7 +4517,7 @@ function n0() {
   let [{
     data: e,
     status: t
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.SLIDE_TEMPLATE],
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
@@ -4525,7 +4525,7 @@ function n0() {
   let [{
     data: i,
     status: n
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.DESIGN_TEMPLATE],
     editorType: _$$q2.DESIGN,
     caller: _$$z2.HOMEPAGE,
@@ -4534,7 +4534,7 @@ function n0() {
   let [{
     data: s,
     status: r
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.PLUGIN],
     category: LJ.designTools,
     caller: _$$z2.HOMEPAGE,
@@ -4544,7 +4544,7 @@ function n0() {
   let [{
     data: o,
     status: l
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.FIGJAM_TEMPLATE],
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
@@ -4552,7 +4552,7 @@ function n0() {
   let [{
     data: c,
     status: d
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.WIDGET],
     category: LJ.whiteboarding,
     caller: _$$z2.HOMEPAGE,
@@ -4561,7 +4561,7 @@ function n0() {
   let [{
     data: u,
     status: m
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.SITE_TEMPLATE],
     editorType: _$$q2.SITES,
     caller: _$$z2.HOMEPAGE,
@@ -4570,7 +4570,7 @@ function n0() {
   let [{
     data: g,
     status: p
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.COOPER_TEMPLATE_FILE],
     editorType: _$$q2.COOPER,
     caller: _$$z2.HOMEPAGE,
@@ -4579,7 +4579,7 @@ function n0() {
   let [{
     data: h,
     status: x
-  }] = IT(_$$a3.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
     resourceType: [_$$vt.FIGMAKE_TEMPLATE],
     editorType: _$$q2.FIGMAKE,
     caller: _$$z2.HOMEPAGE,
@@ -5598,7 +5598,7 @@ function aA(e) {
     let [o, l, c] = _$$t2.useTabs(r, {
       defaultActive: a.current
     });
-    let d = ZC(c.activeTab);
+    let d = useLatestRef(c.activeTab);
     let u = {
       resourceType: [e],
       caller: _$$z2.RESOURCE_LANDING_PAGE,
@@ -5613,7 +5613,7 @@ function aA(e) {
       isFetchingNextPage: h
     }, {
       fetchNextPage: _
-    }] = IT(_$$a3.ResourcesPaginatedQuery(u));
+    }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery(u));
     return {
       prevActiveTab: d,
       tabPropsMap: o,
@@ -6120,13 +6120,13 @@ function so() {
     };
   }, []);
   let c = Qd();
-  let [d] = IT(_$$Z2({
+  let [d] = setupResourceAtomHandler(_$$Z2({
     apiResourceType: e,
     id: t,
     skipRelatedContent: c(),
     includeFullCategory: !0
   }));
-  IT(_$$$3.getRelatedContent({
+  setupResourceAtomHandler(_$$$3.getRelatedContent({
     resourceType: e,
     contentId: t
   }), {

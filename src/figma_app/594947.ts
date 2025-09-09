@@ -2,7 +2,7 @@ import { useContext, useRef, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription, createRemovableAtomFamily, atom } from "../figma_app/27355";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { b as _$$b } from "../905/985254";
 import { r1 } from "../figma_app/545877";
 import { Tq } from "../3973/663243";
@@ -23,7 +23,7 @@ function b(e, t, r) {
   let {
     userVersion
   } = useContext(B);
-  let a = ZC(userVersion);
+  let a = useLatestRef(userVersion);
   let l = useAtomWithSubscription(ZJ);
   let d = useRef(null);
   return {

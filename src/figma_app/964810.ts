@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { UserInterfaceElements } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { FP } from "../figma_app/91703";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { lV } from "../figma_app/914674";
 export function $$c0() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let r = lV();
   let c = useCallback((n = !0) => {
     t && (trackEventAnalytics("left_panel_set_tab", {

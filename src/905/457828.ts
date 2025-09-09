@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { useState, useRef, useCallback } from "react";
 import { I7 } from "../figma_app/594947";
 import { V } from "../figma_app/385855";
@@ -140,7 +140,7 @@ export function $$I0({
   let c = Tf.getTouchedAt(e);
   let u = v(e);
   let p = Tf.getFileOrMainBranchKey(e);
-  if (Rs(FilePermissionsLgShadowView(getFeatureFlags().iam_pv2_lg_pol_smoke && p ? {
+  if (useSubscription(FilePermissionsLgShadowView(getFeatureFlags().iam_pv2_lg_pol_smoke && p ? {
     fileKey: p,
     linkAccessOverrideKey: null
   } : null)), Tf.getIsPasswordProtected(e)) {

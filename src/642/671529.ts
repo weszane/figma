@@ -16,7 +16,7 @@ import { k as _$$k2 } from "../905/582200";
 import { V as _$$V } from "../905/506207";
 import { getI18nState } from "../figma_app/363242";
 import { CA } from "../figma_app/327588";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { e as _$$e } from "../1528/93111";
 import { fk } from "../figma_app/618433";
 import { sw, Zs } from "../figma_app/914957";
@@ -27,7 +27,7 @@ import { q as _$$q, T as _$$T } from "../figma_app/590592";
 import { normalizeValue, valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { p8, dH, KH, eY as _$$eY, aV } from "../figma_app/722362";
-import { q5, tS } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
 import R, { VP } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
@@ -80,7 +80,7 @@ import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
 import { se } from "../642/171234";
 import { j as _$$j } from "../642/638075";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { G$ } from "../figma_app/159296";
 import { GY, _w } from "../642/435480";
 import { t as _$$t3 } from "../905/150656";
@@ -309,7 +309,7 @@ function eS({
   onCloseStylePreviewModal: e,
   recordingKey: t
 }) {
-  let s = q5();
+  let s = selectCurrentFile();
   let n = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let l = p8("topLevelMode");
   let a = useSelector(e => e.library);
@@ -441,7 +441,7 @@ function eK({
   let m = Um();
   let f = Xo();
   let [x, y] = useAtomValueAndSetter(_$$j);
-  let _ = cJ();
+  let _ = useIsFullscreenSitesView();
   let b = !!(m || f?.modal);
   let C = useHandleMouseEvent(l, "mousedown", () => {
     fullscreenValue.deselectProperty();
@@ -587,8 +587,8 @@ function eJ({
   let u = m0();
   let p = c && !u;
   let h = sO();
-  let m = cJ();
-  let g = to();
+  let m = useIsFullscreenSitesView();
+  let g = useIsSelectedViewFullscreenCooper();
   let f = _$$U();
   let x = useSelector(e => {
     var t;
@@ -660,7 +660,7 @@ function eZ({
   let n = WN();
   let l = e.reduce((e, t) => (e[t.tab] = !0, e), {});
   let a = e.find(e => e.active);
-  let [d, , c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
+  let [d,, c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
     let t = parseInt(e);
     let r = eq(t, u).analyticsName;
     if (trackEventAnalytics("properties-panel-select-tab", {
@@ -674,7 +674,7 @@ function eZ({
   }, {
     recordingKey: generateRecordingKey(t, "tabs")
   });
-  let u = cJ();
+  let u = useIsFullscreenSitesView();
   let p = dH();
   let h = useSelector(e => e.mirror.appModel.topLevelMode);
   return jsxs("div", {
@@ -804,11 +804,11 @@ function e4({
   } = useContext(_$$t);
   let K = R;
   let V = _$$q();
-  let U = to();
+  let U = useIsSelectedViewFullscreenCooper();
   let z = CA();
   U && x && (K = !1);
   let W = p8("showUi");
-  let $ = tS();
+  let $ = useCurrentFileKey();
   let Y = fk($);
   let X = o3(nt.newResizablePanel);
   let q = getObservableValue(UK().renderRulers, !1);

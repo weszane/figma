@@ -7,8 +7,8 @@ import l from "../vendor/923386";
 import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
-import { mI, IT } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { T as _$$T } from "../1577/951568";
 import { Az } from "../5132/863145";
@@ -21,7 +21,7 @@ import { vr } from "../figma_app/514043";
 import { mt } from "../figma_app/345997";
 import { IX } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
-import { ud, dA, Gu } from "../905/513035";
+import { ProductAccessTypeEnum, isValidAccessType, ViewAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 var d = l;
 function w(e, t, r, n) {
@@ -29,7 +29,7 @@ function w(e, t, r, n) {
     renewalTerm: r,
     unit: n
   });
-  let [s] = mI(i);
+  let [s] = handleSuspenseRetainRelease(i);
   let o = s.data;
   if (!o) {
     reportError(_$$e.SCALE, Error("Plan renewal modal could not load price information"), {
@@ -96,7 +96,7 @@ export function $$B3(e) {
   };
   if (!r || 0 === Object.values(r).length) return null;
   let n = t.summary.total_upgraded_user_counts;
-  !e && ud.COLLABORATOR in r && n && ud.COLLABORATOR in n && r[ud.COLLABORATOR] > n[ud.COLLABORATOR] && (r[ud.COLLABORATOR] = n[ud.COLLABORATOR]);
+  !e && ProductAccessTypeEnum.COLLABORATOR in r && n && ProductAccessTypeEnum.COLLABORATOR in n && r[ProductAccessTypeEnum.COLLABORATOR] > n[ProductAccessTypeEnum.COLLABORATOR] && (r[ProductAccessTypeEnum.COLLABORATOR] = n[ProductAccessTypeEnum.COLLABORATOR]);
   let a = 0;
   Object.values(r).forEach(e => a += e);
   return a;
@@ -108,7 +108,7 @@ function G(e, t) {
   let n = N_.dict(e => 0);
   let i = N_.dict(e => 0);
   r.forEach(e => {
-    if (!e.billableProductKey || !dA(e.billableProductKey)) {
+    if (!e.billableProductKey || !isValidAccessType(e.billableProductKey)) {
       reportError(_$$e.BILLING_EXPERIENCE, Error(`Confirmed seat count with unexpected billable product key: ${e.billableProductKey}`));
       return;
     }
@@ -124,7 +124,7 @@ function G(e, t) {
 function V(e, t, r = {
   enabled: !0
 }) {
-  let [i] = IT(PendingConfirmedRenewalSeatCountsView({
+  let [i] = setupResourceAtomHandler(PendingConfirmedRenewalSeatCountsView({
     planParentId: e.parentId,
     planParentType: e.type === FOrganizationLevelType.ORG ? FOrganizationEntityType.ORG : FOrganizationEntityType.TEAM,
     billingInterval: BillingCycle.YEAR
@@ -135,7 +135,7 @@ function V(e, t, r = {
 }
 export function $$H5(e, t) {
   let r = V(e, t);
-  let [n] = mI(r);
+  let [n] = handleSuspenseRetainRelease(r);
   if ("loaded" !== n.status) {
     let e = Error("Error fetching next annual renewal confirmed seat counts");
     reportError(_$$e.SCALE, e);
@@ -147,7 +147,7 @@ export function $$z7(e) {
   let t = !!e;
   let r = e?.nextRenewalDate;
   let i = r && $$W16(r, e.renewalWindow || 30);
-  let a = Rs(PendingConfirmedRenewalSeatCountsView, {
+  let a = useSubscription(PendingConfirmedRenewalSeatCountsView, {
     planParentId: e?.planKey.parentId ?? "",
     planParentType: e?.planKey.type === FOrganizationLevelType.ORG ? FOrganizationEntityType.ORG : FOrganizationEntityType.TEAM,
     billingInterval: BillingCycle.YEAR
@@ -195,7 +195,7 @@ export function $$Y10(e) {
   let h = 0;
   let m = 0;
   _ && Object.keys(_).forEach(e => {
-    e !== Gu.VIEW && (h += _[e]?.total ?? 0, m += _[e]?.assigned ?? 0);
+    e !== ViewAccessTypeEnum.VIEW && (h += _[e]?.total ?? 0, m += _[e]?.assigned ?? 0);
   });
   let g = V({
     parentId: e?.id ?? "",

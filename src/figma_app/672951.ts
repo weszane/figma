@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
-import { Rs, p } from "../figma_app/288654";
-import { VI, DI } from "../figma_app/687776";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
+import { getFileCreationPermissions, FileCreationPermissionsGenerator } from "../figma_app/687776";
 import { ProjectTilePermissions, ProjectCanView } from "../figma_app/43951";
 export function $$l3(e) {
   let t = e.canEdit;
@@ -14,7 +14,7 @@ export function $$l3(e) {
     canShare: r,
     canMove: n,
     canSkipDeletionConfirmation: i,
-    ...VI(e),
+    ...getFileCreationPermissions(e),
     canTransferExternally: e.canTransferExternally,
     canTransferCopy: e.canTransferCopy,
     canTrash: e.canTrash,
@@ -28,7 +28,7 @@ export function $$l3(e) {
   };
 }
 export function $$d2(e, t = !0) {
-  let r = Rs(ProjectTilePermissions, {
+  let r = useSubscription(ProjectTilePermissions, {
     projectId: e
   }, {
     enabled: t
@@ -40,7 +40,7 @@ export function $$c1(e) {
     let r = useMemo(() => e.map(e => ({
       projectId: e
     })), [e]);
-    let d = p(ProjectTilePermissions, r, {
+    let d = useMultiSubscription(ProjectTilePermissions, r, {
       enabled: t
     });
     return {
@@ -55,7 +55,7 @@ export function $$c1(e) {
             canMove: !1,
             canEditDescription: !1,
             canSkipDeletionConfirmation: !1,
-            ...DI.disabled(),
+            ...FileCreationPermissionsGenerator.disabled(),
             canTransferExternally: !1,
             canTransferCopy: !1,
             canTrash: !1,
@@ -90,7 +90,7 @@ export function $$u0(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     projectId: e
   })), [e]);
-  let s = p(ProjectCanView, r, {
+  let s = useMultiSubscription(ProjectCanView, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.project?.canRead, e), {})), [s, e]);

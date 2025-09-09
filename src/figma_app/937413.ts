@@ -4,7 +4,7 @@ import a from "../vendor/239910";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { serializeQuery } from "../905/634134";
 import { XHR } from "../905/910117";
-import { d6 } from "../figma_app/687776";
+import { canCreateFileType } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -25,7 +25,7 @@ import { R5, mx } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { Bi, vL } from "../905/652992";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { F as _$$F3 } from "../905/915030";
 import { DV } from "../905/739964";
 import { W } from "../905/442612";
@@ -58,7 +58,7 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
         type: DV,
         data: {
           team: s,
-          action: ZN.RESTORE_FILES,
+          action: fileActionEnum.RESTORE_FILES,
           editorType: o.has(FFileType.FIGMAKE) ? FFileType.FIGMAKE : l,
           resource: o.has(FFileType.FIGMAKE) && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
           multipleResources: fileKeys.length > 1,
@@ -117,7 +117,7 @@ async function j({
       a = i ? i.drafts_folder_id : t;
     } else a = t;
     let _ = (a || project?.id) ?? "";
-    let h = !i && project && d6(project, editorType ?? FFileType.DESIGN) ? project.id : _;
+    let h = !i && project && canCreateFileType(project, editorType ?? FFileType.DESIGN) ? project.id : _;
     s.push({
       key,
       folderId: h
@@ -169,7 +169,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
       type: DV,
       data: {
         team: t,
-        action: ZN.DUPLICATE_FILES,
+        action: fileActionEnum.DUPLICATE_FILES,
         editorType: n,
         resource: editorTypes.has(FFileType.FIGMAKE) && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
         multipleResources: copyFiles.length > 1,

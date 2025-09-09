@@ -9,7 +9,7 @@ import c from "../vendor/946678";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { $ as _$$$ } from "../905/455748";
 import { QO } from "../905/888985";
-import { rw } from "../905/485103";
+import { WebLoggerTimer } from "../905/485103";
 import { yZ } from "../figma_app/476572";
 import { hW } from "../figma_app/594947";
 import { XE } from "../figma_app/976749";
@@ -17,12 +17,12 @@ import { pi } from "../figma_app/314264";
 import { Ui } from "../905/709171";
 import { V as _$$V } from "../figma_app/473391";
 import { qp, hN } from "../905/977779";
-import { Z as _$$Z } from "../905/515860";
-import { yV, _S } from "../figma_app/516028";
+import { resolveTeamId } from "../905/515860";
+import { openFileAtom, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { OC } from "../figma_app/386952";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { X0, WV, Gg } from "../figma_app/646357";
-import { KK } from "../905/276025";
+import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { KH } from "../905/81982";
 import { vx } from "../905/91038";
 import { FEditorType } from "../figma_app/53721";
@@ -32,7 +32,7 @@ import { cY, I1 } from "../figma_app/825489";
 import { I as _$$I } from "../figma_app/130633";
 import { lj } from "../905/991973";
 import { Ci } from "../figma_app/318590";
-import { Vj } from "../905/561485";
+import { isFullscreenSitesView } from "../905/561485";
 import { Z as _$$Z2 } from "../905/387928";
 import { vz, dO } from "../905/921418";
 import { Sv, eB, B0, PS } from "../figma_app/807786";
@@ -56,7 +56,7 @@ function q(e, t) {
 let $ = {};
 let Z = e => {
   if (!$[e]) {
-    if (H[e]) $[e] = setupDebounceAtoms("", H[e]); else {
+    if (H[e]) $[e] = setupDebounceAtoms("", H[e]);else {
       let t = atom("");
       $[e] = {
         currentValueAtom: t,
@@ -116,7 +116,7 @@ let es = createReduxSubscriptionAtomWithState(e => {
 let eo = createReduxSubscriptionAtomWithState(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
 let el = createReduxSubscriptionAtomWithState(e => e.search.sessionId);
 let ed = selectAtom(OC, e => XE(e) === FEditorType.Design);
-let ec = selectAtom(yV, f$, c2);
+let ec = selectAtom(openFileAtom, f$, c2);
 let eu = createRemovableAtomFamily(e => atom(void 0));
 let ep = createRemovableAtomFamily(e => atom(t => {
   let {
@@ -197,7 +197,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
       sessionId
     } = e(et(t));
     let n = sessionId ?? atomStoreManager.get(el);
-    let r = e(_S);
+    let r = e(openFileLibraryKeyAtom);
     let a = atomStoreManager.get(OC);
     let s = e(Z(t).debouncedValueAtom);
     let d = e(ed);
@@ -242,15 +242,15 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
         searchSessionId: n ?? "",
         sessionId: n ?? "",
         ...I,
-        tier: e(KK(!0)).data?.tier
+        tier: e(getPlanPublicInfoAtomFamily(!0)).data?.tier
       };
-      if (g?.type === _$$I.LOCAL) S.localSearchResultCount = i.normalizedSearchResults.length; else {
+      if (g?.type === _$$I.LOCAL) S.localSearchResultCount = i.normalizedSearchResults.length;else {
         let [e, t] = u()(i.normalizedSearchResults, e => e.library_key && e.library_key === r);
         S.localSearchResultCount = e.length;
         S.subscribedSearchResultCount = t.length;
         S.unsubscribedSearchResultsCount = i.unsubscribedSearchResults.length;
       }
-      if (Vj(a) && g?.type && [_$$I.ALL, _$$I.SITE_KIT].includes(g.type)) {
+      if (isFullscreenSitesView(a) && g?.type && [_$$I.ALL, _$$I.SITE_KIT].includes(g.type)) {
         let e = atomStoreManager.get(Sv);
         S.siteKitSearchResultsCount = e;
         S.totalShownResults = S.totalShownResults + e;
@@ -331,7 +331,7 @@ let ev = async (e, t) => {
     results: m,
     lastQueryId: h
   }, f] = await Promise.all([t(ex(e)), t(eS(e)), t(eE(e))]);
-  let _ = new rw();
+  let _ = new WebLoggerTimer();
   let A = K4(u, a, s, o, l);
   let y = lR(m, o, l);
   let b = PS(f, A.subscribedSearchResults, A.unsubscribedSearchResults, y.communitySearchResults, y.unsubscribedCommunitySearchResults, n, preferLocal ?? !1, d);
@@ -348,7 +348,7 @@ let eI = async (e, t) => {
     results,
     lastQueryId
   } = await t(ew(e));
-  let s = new rw();
+  let s = new WebLoggerTimer();
   let o = {
     normalizedSearchResults: AG([], results, _$$I.FILE, i),
     unsubscribedSearchResults: []
@@ -361,7 +361,7 @@ let eI = async (e, t) => {
 };
 let eE = createRemovableAtomFamily(e => atom(async t => {
   if (![3, 1].includes(await t(eg(e)))) return [];
-  let i = new rw();
+  let i = new WebLoggerTimer();
   let n = t(Z(e).debouncedValueAtom);
   let r = t(eA);
   let a = await dm(r, n);
@@ -373,7 +373,7 @@ let ex = createRemovableAtomFamily(e => atom(async t => {
     results: [],
     lastQueryId: ""
   };
-  let i = new rw();
+  let i = new WebLoggerTimer();
   let n = t(Z(e).debouncedValueAtom);
   let r = t(ei);
   let a = t(ec);
@@ -397,7 +397,7 @@ let eS = createRemovableAtomFamily(e => atom(async t => {
     results: [],
     lastQueryId: ""
   };
-  let i = new rw();
+  let i = new WebLoggerTimer();
   let n = t(Z(e).debouncedValueAtom);
   let r = t(ed);
   let a = t(en);
@@ -414,7 +414,7 @@ let ew = createRemovableAtomFamily(e => atom(async t => {
     results: [],
     lastQueryId: ""
   };
-  let i = new rw();
+  let i = new WebLoggerTimer();
   let n = t(Z(e).debouncedValueAtom);
   let r = t(ee(e));
   let a = r?.type === _$$I.FILE ? r.libraryKey : _$$l("");
@@ -433,7 +433,7 @@ let ew = createRemovableAtomFamily(e => atom(async t => {
   };
 }));
 async function eC(e, t) {
-  let i = new rw();
+  let i = new WebLoggerTimer();
   1 === (await t(eg(e))) && (await QO(I1, e => {
     let t = atomStoreManager.get(I1);
     "loaded" === t.status && e(t);
@@ -494,7 +494,7 @@ export async function $$ek5(e, t, i, n = {}) {
   return await atomStoreManager.get(ey(i));
 }
 let eR = createRemovableAtomFamily(e => atom(null));
-let eN = createReduxSubscriptionAtomWithState(_$$Z);
+let eN = createReduxSubscriptionAtomWithState(resolveTeamId);
 let eP = createReduxSubscriptionAtomWithState(e => e.search.lastLoadedQuery);
 function eO(e, t, i, n) {
   let {
@@ -512,7 +512,7 @@ function eO(e, t, i, n) {
   });
 }
 async function eD(e, t, i, n) {
-  let r = new rw();
+  let r = new WebLoggerTimer();
   let a = await e();
   eO(t, r, i, n);
   return a;

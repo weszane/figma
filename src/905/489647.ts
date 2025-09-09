@@ -4,7 +4,7 @@ import { Fullscreen, IAssertResource } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { dX } from "../905/294543";
 import { getCodegenLanguagePreference } from "../905/515076";
@@ -16,7 +16,7 @@ import { IN } from "../905/116101";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { noop } from "../905/813868";
-import { cb } from "../figma_app/12796";
+import { canRunExtensions } from "../figma_app/12796";
 import { isSingleDevWithCodegen } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { isValidPluginId } from "../905/327571";
@@ -57,7 +57,7 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
     fileKey,
     tryPluginParams: JSON.stringify(tryPluginParams)
   });
-  let K = cb(i);
+  let K = canRunExtensions(i);
   let Y = {
     initialX: 0,
     initialY: 0
@@ -93,9 +93,9 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
     });
     return;
   }
-  switch (isPlaygroundFile && fullscreenEditorType !== FEditorType.DevHandoff && YQ({
+  switch (isPlaygroundFile && fullscreenEditorType !== FEditorType.DevHandoff && handleAtomEvent({
     id: zM
-  }), fullscreenEditorType === FEditorType.DevHandoff && $ && $.manifest.editorType?.includes(ManifestEditorType.FIGMA) && YQ({
+  }), fullscreenEditorType === FEditorType.DevHandoff && $ && $.manifest.editorType?.includes(ManifestEditorType.FIGMA) && handleAtomEvent({
     id: zM
   }), fullscreenEditorType) {
     case FEditorType.Whiteboard:

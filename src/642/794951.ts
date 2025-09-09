@@ -7,7 +7,7 @@ import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
-import { MY, q5 } from "../figma_app/516028";
+import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
@@ -22,8 +22,8 @@ export let $$C1 = {
   [bo]: !1
 };
 export function $$j0() {
-  let e = MY();
-  let t = q5();
+  let e = useFullscreenViewFile();
+  let t = selectCurrentFile();
   let s = useDispatch();
   let j = selectCurrentUser();
   let {

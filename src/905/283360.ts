@@ -5,7 +5,7 @@ import { colorToHex } from "../905/436288";
 import { oy } from "../figma_app/964367";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { D } from "../905/442915";
 import { y } from "../905/456837";
 import { Hr } from "../figma_app/394327";
@@ -16,7 +16,7 @@ export async function $$g0(e, t, i, n, s, o, l) {
   let m = LinterCppBindings?.getVariableConsumptionForHighestNodeContainer(e.guid) ?? new Map();
   let g = {
     entry_point: "linter",
-    open_file_key: atomStoreManager.get(ze) ?? "",
+    open_file_key: atomStoreManager.get(openFileKeyAtom) ?? "",
     query_id: n,
     session_id: s,
     candidates: t.map(e => ({

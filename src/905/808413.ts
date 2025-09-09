@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { c2 } from "../905/382883";
-import { ZA } from "../figma_app/288654";
+import { getLivegraphClient } from "../figma_app/288654";
 import { y } from "../figma_app/705249";
 import { selectCurrentUser } from "../905/372672";
 class l {
@@ -30,7 +30,7 @@ class d {
   }
 }
 export function $$c0(e) {
-  let t = ZA();
+  let t = getLivegraphClient();
   let i = selectCurrentUser();
   let {
     args,

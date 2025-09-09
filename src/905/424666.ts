@@ -8,10 +8,10 @@ import { jN, nX, Aj, S2 } from "../905/171315";
 import { cr, CO } from "../905/703676";
 import { n as _$$n } from "../905/624711";
 import { k } from "../905/252342";
-import { HH } from "../figma_app/828186";
+import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { jD, uR, $L } from "../figma_app/162807";
-import { aI } from "../figma_app/552876";
-import { oz } from "../905/561485";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { zH, Kk } from "../905/954985";
 import { A as _$$A } from "../3850/824007";
 export function $$y0({
@@ -50,7 +50,7 @@ export function $$y0({
       sideElementAlwaysVisible: !0,
       text: Aj(b) ? getI18nString("search.preview_section.all_files") : getI18nString("search.preview_section.all_resources")
     }), b.map((i, r) => {
-      if (i === $L.SITES && !oz() || i === $L.BUZZ && !HH() || i === $L.MAKE && !aI() || i === $L.ALL_FILES || i === $L.PLUGINS || i === $L.WIDGETS) return null;
+      if (i === $L.SITES && !isSitesFeatureEnabled() || i === $L.BUZZ && !isCooperFeatureEnabled() || i === $L.MAKE && !isFigmakeSitesEnabled() || i === $L.ALL_FILES || i === $L.PLUGINS || i === $L.WIDGETS) return null;
       let a = `${e}-resource-option-${r}`;
       let o = v?.value === i;
       return jsx(cr, {

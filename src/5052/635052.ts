@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
 import { VisualBellActions } from "../905/302958";
 import { UK } from "../figma_app/740163";
-import { tB } from "../figma_app/516028";
+import { selectOpenFile } from "../figma_app/516028";
 import { O } from "../905/207358";
 import { iy } from "../figma_app/342355";
 import { r as _$$r } from "../905/501976";
@@ -140,7 +140,7 @@ export async function $$y0(e) {
   if (!r) return null;
   let u = function (e, t, n) {
     let a = e.getState();
-    let r = tB(a);
+    let r = selectOpenFile(a);
     let l = t.filter(e => e.name.startsWith(p));
     if (0 === l.length) {
       g(e, "No test cases found.");

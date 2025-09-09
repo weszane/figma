@@ -23,10 +23,10 @@ import { S as _$$S } from "../5132/668270";
 import { showModalHandler, hideModal } from "../905/156213";
 import { cq } from "../figma_app/107215";
 import { fu } from "../figma_app/831799";
-import { nF } from "../figma_app/789";
+import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { Cu } from "../figma_app/314264";
 import { BI } from "../figma_app/546509";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { generateAnnomousPrefill } from "../905/301652";
 import { x as _$$x } from "../905/749159";
@@ -45,7 +45,7 @@ function V({
   let n = useMemo(() => BrowserInfo.isMeetDevice ? getI18nString("figjam_try.google_meet_user_name") : localStorage.getItem(generateAnnomousPrefill()) || "", []);
   let [s, o] = useState(n);
   let [l, d] = useState(!1);
-  let c = nF();
+  let c = useCurrentFileWorkshopModeStatus();
   let u = c.enabled ? c.id : null;
   let p = !e;
   let _ = !!t?.isTryFile;
@@ -281,7 +281,7 @@ function z({
 }
 export function $$W0(e) {
   let t = selectCurrentUser();
-  let r = q5();
+  let r = selectCurrentFile();
   let i = !!r?.isTryFile;
   let a = debugState.getState().selectedView;
   let c = a?.view === "fullscreen" ? a.claim : null;

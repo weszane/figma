@@ -20,7 +20,7 @@ import { e as _$$e } from "../905/149844";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { g7 } from "../905/939482";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { X$ } from "../905/612685";
 import { _9 } from "../figma_app/76115";
 import { ON, zr } from "../figma_app/644808";
@@ -29,7 +29,7 @@ var d = l;
 function R() {
   let e = n1();
   let t = g7();
-  let r = q5();
+  let r = selectCurrentFile();
   let i = e && t.length > 0;
   return (_$$h(() => {
     i && analyticsEventManager.trackDefinedEvent("assets_panel.view_ui_kit_empty_state", {
@@ -62,7 +62,7 @@ function L({
     library_key,
     num_components
   } = e;
-  let c = q5();
+  let c = selectCurrentFile();
   let u = useCallback(() => {
     analyticsEventManager.trackDefinedEvent("assets_panel.go_to_library", {
       libraryKey: library_key,
@@ -116,7 +116,7 @@ function P({
     path: [ON.CONTENTS, zr.UI_KITS, t]
   });
   let a = _9(e, "assets_panel_empty_state");
-  let s = q5();
+  let s = selectCurrentFile();
   let o = useCallback(() => {
     analyticsEventManager.trackDefinedEvent("assets_panel.ui_kit_start", {
       libraryKey: e,

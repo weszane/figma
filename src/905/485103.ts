@@ -1,130 +1,247 @@
-import { useEffect, useRef } from 'react';
-import { reportError } from '../905/11';
-import { ServiceCategories as _$$e } from '../905/165054';
-import { XHR } from '../905/910117';
-import { getInitialOptions } from '../figma_app/169182';
-import { BrowserInfo } from '../figma_app/778880';
-import { desktopAPIInstance } from '../figma_app/876459';
-function c() {
-  let e = [];
-  for (let t of ['mac', 'windows', 'linux', 'ios', 'chromeos']) {
-    if (BrowserInfo[t]) {
-      e.push(`os:${t}`);
-      break;
+import { useEffect, useRef } from 'react'
+import { reportError } from '../905/11'
+import { ServiceCategories as DataInfraCategory } from '../905/165054'
+import { XHR } from '../905/910117'
+import { getInitialOptions } from '../figma_app/169182'
+import { BrowserInfo } from '../figma_app/778880'
+import { desktopAPIInstance } from '../figma_app/876459'
+
+/**
+ * Generates tags describing the current client environment.
+ * @returns {string[]} Array of environment tags.
+ * (Original: c)
+ */
+export function getClientTags(): string[] {
+  const tags: string[] = []
+  // OS detection
+  for (const os of ['mac', 'windows', 'linux', 'ios', 'chromeos']) {
+    if (BrowserInfo[os]) {
+      tags.push(`os:${os}`)
+      break
     }
   }
+  // Browser detection
   if (desktopAPIInstance) {
-    e.push('browser:figma_desktop');
-  } else {
-    for (let t of ['chrome', 'firefox', 'safari', 'msedge', 'msie', 'ios', 'android']) {
-      if (BrowserInfo[t]) {
-        e.push(`browser:${t}`);
-        break;
+    tags.push('browser:figma_desktop')
+  }
+  else {
+    for (const browser of ['chrome', 'firefox', 'safari', 'msedge', 'msie', 'ios', 'android']) {
+      if (BrowserInfo[browser]) {
+        tags.push(`browser:${browser}`)
+        break
       }
     }
   }
-  e.push(`client_version:${getInitialOptions().release_manifest_git_commit}`);
-  return e;
+  tags.push(`client_version:${getInitialOptions().release_manifest_git_commit}`)
+  return tags
 }
-function u(e) {
-  let t = [];
-  for (let i in e) t.push(`${i}:${e[i]}`);
-  return t;
+
+/**
+ * Converts an object to an array of tag strings.
+ * @param {Record<string, string>} obj
+ * @returns {string[]} Array of tags.
+ * (Original: u)
+ */
+export function objectToTags(obj: Record<string, string>): string[] {
+  return Object.entries(obj).map(([key, value]) => `${key}:${value}`)
 }
-let p = getInitialOptions().figma_url ?? '';
-export async function $$m2(e, t = {}) {
-  await XHR.crossOriginPost(`${p}/api/web_logger/metrics/${e}`, {
-    tags: [...c(), ...u(t)].join(',')
+
+const figmaUrl: string = getInitialOptions().figma_url ?? ''
+
+/**
+ * Sends a metric to the web logger.
+ * @param {string} metric
+ * @param {Record<string, string>} tags
+ * (Original: $$m2)
+ */
+export async function sendMetric(metric: string, tags: Record<string, string> = {}): Promise<void> {
+  await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/metrics/${metric}`, {
+    tags: [...getClientTags(), ...objectToTags(tags)].join(','),
   }, {
-    rawResponse: !0
-  });
+    rawResponse: true,
+  })
 }
-export function $$h3(e, t, i = {}) {
-  XHR.crossOriginPost(`${p}/api/web_logger/histogram/${e}`, {
-    value: t,
-    tags: [...c(), ...u(i)].join(',')
+
+/**
+ * Sends a histogram value to the web logger.
+ * @param {string} metric
+ * @param {number} value
+ * @param {Record<string, string>} tags
+ * (Original: $$h3)
+ */
+export function sendHistogram(metric: string, value: number, tags: Record<string, string> = {}): void {
+  XHR.crossOriginPost(`${figmaUrl}/api/web_logger/histogram/${metric}`, {
+    value,
+    tags: [...getClientTags(), ...objectToTags(tags)].join(','),
   }, {
-    rawResponse: !0
-  }).catch(e => {
-    e.status >= 400 && e.status < 500 && reportError(_$$e.DATA_INFRA, e);
-  });
+    rawResponse: true,
+  }).catch((err) => {
+    if (err.status >= 400 && err.status < 500) {
+      reportError(DataInfraCategory.DATA_INFRA, err)
+    }
+  })
 }
-export async function $$g1(e) {
-  e.length > 0 && (await XHR.crossOriginPost(`${p}/api/web_logger/metrics_batched`, e.map(e => ({
-    metric: e.metric,
-    tags: [...c(), ...u(e.tags)].join(',')
+
+/**
+ * Sends batched metrics to the web logger.
+ * @param {Array<{metric: string, tags: Record<string, string>}>} metrics
+ * (Original: $$g1)
+ */
+export async function sendBatchedMetrics(metrics: Array<{ metric: string, tags: Record<string, string> }>): Promise<void> {
+  if (metrics.length === 0)
+    return
+  await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/metrics_batched`, metrics.map(m => ({
+    metric: m.metric,
+    tags: [...getClientTags(), ...objectToTags(m.tags)].join(','),
   })), {
-    rawResponse: !0
-  }));
+    rawResponse: true,
+  })
 }
-export async function $$f4(e) {
-  if (e.length > 0) {
-    return await XHR.crossOriginPost(`${p}/api/web_logger/histogram_batched`, e.map(e => ({
-      metric: e.metric,
-      value: e.value,
-      tags: [...c(), ...u(e.tags)].join(',')
-    })), {
-      rawResponse: !0
-    });
+
+/**
+ * Sends batched histogram values to the web logger.
+ * @param {Array<{metric: string, value: number, tags: Record<string, string>}>} histograms
+ * (Original: $$f4)
+ */
+export async function sendBatchedHistograms(histograms: Array<{ metric: string, value: number, tags: Record<string, string> }>): Promise<void> {
+  if (histograms.length === 0)
+    return
+  await XHR.crossOriginPost(`${figmaUrl}/api/web_logger/histogram_batched`, histograms.map(h => ({
+    metric: h.metric,
+    value: h.value,
+    tags: [...getClientTags(), ...objectToTags(h.tags)].join(','),
+  })), {
+    rawResponse: true,
+  })
+}
+
+/**
+ * Timer utility for tracking visibility and offline state.
+ * (Original: $$A0)
+ */
+export class WebLoggerTimer {
+  private _startTime: number
+  private _timerId: ReturnType<typeof setTimeout> | null
+  public metadata: any
+  public finished: boolean
+  public backgrounded: boolean
+  public offlined: boolean
+
+  /**
+   * Handles visibility change events.
+   */
+  public onVisibilityChange = (): void => {
+    if (document.visibilityState === 'hidden') {
+      this.backgrounded = true
+    }
   }
-}
-export let $$_5 = $$h3;
-export class $$A0 {
-  onVisibilityChange = () => {
-    document.visibilityState === 'hidden' && (this.backgrounded = !0);
-  };
-  stop = (e, t) => {
-    let i = t?.skipIfIdle === void 0 || !0 === t.skipIfIdle;
-    if (this.finished) return;
-    this._timerId && clearTimeout(this._timerId);
-    this.finished = !0;
-    document.removeEventListener('visibilitychange', this.onVisibilityChange);
-    document.removeEventListener('offline', this.onOffline);
-    let n = Math.round(performance.now() - this._startTime);
-    if (!this.backgrounded && !this.offlined || !i) return e(n, this.backgrounded, this.offlined);
-  };
-  onOffline = () => {
-    this.offlined = !0;
-  };
-  constructor(e = {}, t) {
-    this._startTime = performance.now();
-    this._timerId = null;
-    this.metadata = null;
-    this.finished = !1;
-    this.backgrounded = !1;
-    this.offlined = !1;
-    this.backgrounded = document.visibilityState === 'hidden';
-    this.offlined = !1 === navigator.onLine;
-    if (document.addEventListener('visibilitychange', this.onVisibilityChange), document.addEventListener('offline', this.onOffline), t && (this.metadata = t), e.onTimeout) {
-      if (!e.timeoutMs) throw new Error('onTimeout specified without timeoutMs');
+
+  /**
+   * Handles offline events.
+   */
+  public onOffline = (): void => {
+    this.offlined = true
+  }
+
+  /**
+   * Stops the timer and invokes the callback.
+   * @param {(duration: number, backgrounded: boolean, offlined: boolean) => void} callback
+   * @param {{ skipIfIdle?: boolean }} [options]
+   */
+  public stop = (
+    callback: (duration: number, backgrounded: boolean, offlined: boolean) => void,
+    options?: { skipIfIdle?: boolean },
+  ): void => {
+    const skipIfIdle = options?.skipIfIdle === undefined || options.skipIfIdle === true
+    if (this.finished)
+      return
+    if (this._timerId)
+      clearTimeout(this._timerId)
+    this.finished = true
+    document.removeEventListener('visibilitychange', this.onVisibilityChange)
+    document.removeEventListener('offline', this.onOffline)
+    const duration = Math.round(performance.now() - this._startTime)
+    if ((!this.backgrounded && !this.offlined) || !skipIfIdle) {
+      callback(duration, this.backgrounded, this.offlined)
+    }
+  }
+
+  /**
+   * @param {object} [options]
+   * @param {object} [metadata]
+   */
+  constructor(
+    options: { onTimeout?: (backgrounded: boolean, offlined: boolean) => void, timeoutMs?: number } = {},
+    metadata?: any,
+  ) {
+    this._startTime = performance.now()
+    this._timerId = null
+    this.metadata = metadata ?? null
+    this.finished = false
+    this.backgrounded = document.visibilityState === 'hidden'
+    this.offlined = navigator.onLine === false
+
+    document.addEventListener('visibilitychange', this.onVisibilityChange)
+    document.addEventListener('offline', this.onOffline)
+
+    if (options.onTimeout) {
+      if (!options.timeoutMs)
+        throw new Error('onTimeout specified without timeoutMs')
       this._timerId = setTimeout(() => {
-        this.finished || e.onTimeout(this.backgrounded, this.offlined);
-      }, e.timeoutMs);
+        if (!this.finished)
+          options.onTimeout!(this.backgrounded, this.offlined)
+      }, options.timeoutMs)
     }
   }
 }
-export function $$y6(e, t, i) {
-  let r = i?.enabled ?? !0;
-  let a = useRef(null);
-  r && !a.current && (a.current = new $$A0(i));
-  let s = useRef(!1);
-  !s.current && e && a.current && (a.current.stop(t, {
-    skipIfIdle: !1
-  }), s.current = !0);
+
+/**
+ * React hook to stop timer when a condition is met.
+ * @param {boolean} condition
+ * @param {(duration: number, backgrounded: boolean, offlined: boolean) => void} callback
+ * @param {object} [options]
+ * (Original: $$y6)
+ */
+export function useWebLoggerTimer(condition: boolean, callback: (duration: number, backgrounded: boolean, offlined: boolean) => void, options?: any): void {
+  const enabled = options?.enabled ?? true
+  const timerRef = useRef<WebLoggerTimer | null>(null)
+  if (enabled && !timerRef.current) {
+    timerRef.current = new WebLoggerTimer(options)
+  }
+  const stoppedRef = useRef(false)
+  if (!stoppedRef.current && condition && timerRef.current) {
+    timerRef.current.stop(callback, { skipIfIdle: false })
+    stoppedRef.current = true
+  }
 }
-export function $$b7(e, t, i) {
-  let r = useRef(void 0);
-  r.current || (r.current = new $$A0());
-  let a = useRef(!1);
+
+/**
+ * React hook to stop timer on effect.
+ * @param {boolean} condition
+ * @param {(duration: number) => void} callback
+ * @param {object} [options]
+ * (Original: $$b7)
+ */
+export function useWebLoggerTimerEffect(condition: boolean, callback: (duration: number) => void, options?: object): void {
+  const timerRef = useRef<WebLoggerTimer | undefined>(undefined)
+  if (!timerRef.current) {
+    timerRef.current = new WebLoggerTimer()
+  }
+  const stoppedRef = useRef(false)
   useEffect(() => {
-    !a.current && e && (r.current.stop(e => t(e), i), a.current = !0);
-  }, [e, t, i]);
+    if (!stoppedRef.current && condition) {
+      timerRef.current!.stop(duration => callback(duration), options)
+      stoppedRef.current = true
+    }
+  }, [condition, callback, options])
 }
-export const rw = $$A0;
-export const BO = $$g1;
-export const Rh = $$m2;
-export const S3 = $$h3;
-export const rI = $$f4;
-export const aD = $$_5;
-export const I = $$y6;
-export const oY = $$b7;
+
+// Exported aliases for backward compatibility
+export const rw = WebLoggerTimer
+export const BO = sendBatchedMetrics
+export const Rh = sendMetric
+export const S3 = sendHistogram
+export const rI = sendBatchedHistograms
+export const aD = sendHistogram
+export const I = useWebLoggerTimer
+export const oY = useWebLoggerTimerEffect

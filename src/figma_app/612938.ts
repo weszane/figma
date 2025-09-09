@@ -7,8 +7,8 @@ import { logger } from "../905/651849";
 import { debugState } from "../905/407919";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { applyCodeExtensionPreferences } from "../905/515076";
-import { wR } from "../figma_app/765689";
-import { q5 } from "../figma_app/516028";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
+import { selectCurrentFile } from "../figma_app/516028";
 import { f$, n4, hY } from "../figma_app/603466";
 import { wH } from "../figma_app/680166";
 import { $A } from "../905/782918";
@@ -219,7 +219,7 @@ y.instance = new y();
 y.debug = !1;
 export let $$b0 = y;
 export function $$T1() {
-  let e = q5();
+  let e = selectCurrentFile();
   let {
     handleUpgrade
   } = wH({
@@ -231,7 +231,7 @@ export function $$T1() {
   });
   let r = useCallback(r => {
     if (!e) return;
-    let n = wR(e.editorType);
+    let n = getProductAccessTypeOrDefault(e.editorType);
     handleUpgrade({
       afterUpgradeCallback: lQ,
       licenseType: n,

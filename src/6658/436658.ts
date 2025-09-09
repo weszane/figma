@@ -4,7 +4,7 @@ import { vF } from "../vendor/150583";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { hC } from "../figma_app/901889";
-import { gY, IT } from "../figma_app/566371";
+import { getAtomMutate, setupResourceAtomHandler } from "../figma_app/566371";
 import { useSprigWithSampling } from "../905/99656";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -22,7 +22,7 @@ import { mO } from "../figma_app/410317";
 import { d as _$$d } from "../6658/928537";
 import { v as _$$v } from "../1250/232926";
 import { OG } from "../1250/340571";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 export function $$E2({
   displayedComponent: e,
   filteredComponents: n,
@@ -46,13 +46,13 @@ export function $$E2({
   }, [o.length]);
   let N = _6();
   let A = useDispatch();
-  let O = gY(RL);
-  let B = gY(S6);
-  let D = gY(K5);
-  let R = gY(LO);
-  let T = gY(_E);
+  let O = getAtomMutate(RL);
+  let B = getAtomMutate(S6);
+  let D = getAtomMutate(K5);
+  let R = getAtomMutate(LO);
+  let T = getAtomMutate(_E);
   let H = function () {
-    let e = _G();
+    let e = useOpenFileLibraryKey();
     let n = OG(e);
     let o = n?.selectedRepositories?.[0];
     let {
@@ -1229,7 +1229,7 @@ export function $$K4({
     componentKey: n,
     defaultFilter: o
   }) {
-    let [c, r] = IT(t2(e), {
+    let [c, r] = setupResourceAtomHandler(t2(e), {
       enabled: !0
     });
     return {

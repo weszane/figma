@@ -21,7 +21,7 @@ import { k as _$$k2 } from "../905/336528";
 import { l6, c$ as _$$c$ } from "../905/794875";
 import { d as _$$d } from "../905/976845";
 import { bL as _$$bL } from "../905/911410";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k3 } from "../905/582200";
 import { u1 } from "../figma_app/91703";
 import { jD } from "../905/765855";
@@ -39,7 +39,7 @@ function T({
 }) {
   let a = useDispatch();
   let o = kG(e);
-  let s = ZC(o.showing);
+  let s = useLatestRef(o.showing);
   let c = p1();
   let d = useRef(t);
   d.current = t;

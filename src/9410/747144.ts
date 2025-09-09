@@ -4,7 +4,7 @@ import { Tj, _Z } from "../figma_app/649254";
 import { X } from "../905/145028";
 import { J } from "../905/539754";
 import { sD } from "../905/937198";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 export async function $$c0() {
   let e = await navigator.clipboard.readText();
   let t = null;
@@ -19,7 +19,7 @@ export async function $$c0() {
   return t;
 }
 export function $$u1() {
-  let e = tS();
+  let e = useCurrentFileKey();
   return async t => {
     if (!e) return null;
     let i = await X({
@@ -65,7 +65,7 @@ export function $$u1() {
   };
 }
 export function $$p2() {
-  let e = tS();
+  let e = useCurrentFileKey();
   return async t => {
     if (!e) return;
     let i = t.fieldSchemas.map(e => ({

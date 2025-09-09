@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
-import { oA } from "../905/663269";
-import { p } from "../figma_app/288654";
-import { _R } from "../figma_app/765689";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useMultiSubscription } from "../figma_app/288654";
+import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
 import { FileTilePermissions } from "../figma_app/43951";
 let c = e => (t, i) => i ? t.filter(t => {
@@ -20,7 +20,7 @@ export function $$A1(e, t = !0) {
   let i = useMemo(() => e.map(e => ({
     fileKey: e
   })), [e]);
-  let c = p(FileTilePermissions, i, {
+  let c = useMultiSubscription(FileTilePermissions, i, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(c.map(e => e.result)).transform(e => {
@@ -34,18 +34,18 @@ export function $$A1(e, t = !0) {
         let r = e.canRename;
         let s = !!e.project?.canView;
         let d = !!e.project?.canEdit;
-        let c = !!oA(e.canTrash);
-        let u = !!oA(e.canMove);
-        let p = oA(e.canMoveWithReasons);
+        let c = !!getResourceDataOrFallback(e.canTrash);
+        let u = !!getResourceDataOrFallback(e.canMove);
+        let p = getResourceDataOrFallback(e.canMoveWithReasons);
         let m = (e.canEdit || !e.viewerExportRestricted) && !t;
-        let h = !!oA(e.canRestore);
-        let g = !!oA(e.canRestoreToOtherFolders);
+        let h = !!getResourceDataOrFallback(e.canRestore);
+        let g = !!getResourceDataOrFallback(e.canRestoreToOtherFolders);
         let f = e.canFavorite;
         let _ = e.isFavorited;
         let A = e.isTeamTemplate;
-        let y = _R(e.editorType ?? FFileType.DESIGN, e.currentPlanUser);
+        let y = isRestrictedPlanAccess(e.editorType ?? FFileType.DESIGN, e.currentPlanUser);
         let b = e.isDraftFile;
-        let v = !!oA(e.canPermanentlyDelete);
+        let v = !!getResourceDataOrFallback(e.canPermanentlyDelete);
         let I = e.parentOrgId ? "org" : e.teamId ? "team" : null;
         let E = e.parentOrgId || e.teamId || null;
         return {

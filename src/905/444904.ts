@@ -5,7 +5,7 @@ import { N as _$$N } from "../905/438674";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -25,14 +25,14 @@ export function $$I0({
 }) {
   let E = getUserId();
   let x = useDispatch();
-  let S = Rs(OrgUserIsMfaRestrictedView, {
+  let S = useSubscription(OrgUserIsMfaRestrictedView, {
     orgId: t.id
   });
   let w = "loaded" === S.status;
   let C = w ? S.data.currentUser.baseOrgUser?.isMfaRestricted : void 0;
   let T = !0 === oA(C);
   let k = w && (S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.GUESTS || S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.ALL_USERS);
-  let R = Rs(FileByKey, {
+  let R = useSubscription(FileByKey, {
     fileKey: I ?? ""
   }, {
     enabled: !!I

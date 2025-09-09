@@ -13,7 +13,7 @@ import { Im } from "../905/608145";
 import { E3 } from "../figma_app/976749";
 import { EL } from "../figma_app/740025";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
-import { Eh, cb } from "../figma_app/12796";
+import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { getCurrentPluginVersion, isSingleDevEditorType, isValidForCooperDevCodegen } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, manifestContainsWidget } from "../figma_app/155287";
@@ -36,8 +36,8 @@ function v() {
     org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
     openFile: e.openFile,
     isReadOnly: e.mirror.appModel.isReadOnly,
-    userCanViewPlugins: Eh(e),
-    userCanRunExtensions: cb(e),
+    userCanViewPlugins: canPerformAction(e),
+    userCanRunExtensions: canRunExtensions(e),
     activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin,
     publishedPlugins: e.publishedPlugins,
     publishedWidgets: e.publishedWidgets

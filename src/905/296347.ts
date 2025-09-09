@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useEffect } from "react";
 import r from "../vendor/336892";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { p as _$$p } from "../905/896627";
 import { A } from "../905/17894";
 import { Zc, Lz } from "../905/497882";
@@ -50,7 +50,7 @@ export function $$m0({
     existingResourceContent,
     localExtension
   } = categoryField.deps;
-  let [f] = IT(LK({
+  let [f] = setupResourceAtomHandler(LK({
     figFile,
     currentViewerMode: viewerModeField && Lz(viewerModeField, void 0),
     existingResourceContent,

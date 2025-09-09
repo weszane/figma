@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import s, { k as _$$k } from "../905/443820";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { Xf } from "../figma_app/153916";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { b as _$$b } from "../figma_app/246400";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -19,18 +19,18 @@ import { hY } from "../figma_app/80683";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
 import { Ye } from "../905/332483";
 import { h as _$$h } from "../figma_app/603561";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { F2 } from "../905/389382";
 import { O as _$$O } from "../figma_app/710329";
 import { P as _$$P } from "../905/842406";
 import { FProductAccessType, FOrganizationLevelType } from "../figma_app/191312";
 import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
 import { vr } from "../figma_app/514043";
-import { Ef } from "../figma_app/428858";
+import { getPlanData } from "../figma_app/428858";
 import { E as _$$E } from "../figma_app/126651";
 import { e0 } from "../905/696396";
 import { j as _$$j } from "../figma_app/617663";
@@ -43,7 +43,7 @@ import { WZ, ix } from "../figma_app/538002";
 export let $$W0 = atom(null);
 export function $$K1(e) {
   let t = useAtomWithSubscription($$W0);
-  let i = m0() ? FProductAccessType.DEV_MODE : wR(e.editorType);
+  let i = m0() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(e.editorType);
   let a = F2(i);
   let s = !!e.org;
   let d = s ? {
@@ -98,7 +98,7 @@ function Y(e) {
   } = s;
   let u = un({
     planKey,
-    currentSeatType: Gu.VIEW,
+    currentSeatType: ViewAccessTypeEnum.VIEW,
     currentSeatBillingInterval: void 0,
     enabled: isProrationEnabled && !isElaResult.data && !!localizeCurrency
   });
@@ -139,7 +139,7 @@ function q(e) {
   } = s;
   let p = e.confirmedRole.user_id;
   let m = e.planKey.type === FOrganizationLevelType.ORG ? e.confirmedRole.org_user?.id : e.confirmedRole.team_user?.id;
-  let h = Rs(ModifyPlanUserSeatModalView, {
+  let h = useSubscription(ModifyPlanUserSeatModalView, {
     planType: planKey.type,
     targetPlanUserId: m || "",
     targetUserId: p
@@ -149,7 +149,7 @@ function q(e) {
   let g = h.data?.planUserById ?? {
     currentSeat: null
   };
-  let f = g.currentSeat?.billableProductKey ?? Gu.VIEW;
+  let f = g.currentSeat?.billableProductKey ?? ViewAccessTypeEnum.VIEW;
   let _ = g.currentSeat?.billingInterval ?? null;
   let v = un({
     planKey,
@@ -160,7 +160,7 @@ function q(e) {
   let I = useDispatch();
   let E = _$$N({
     planId: planKey.parentId,
-    ...Ef(planKey.type, {
+    ...getPlanData(planKey.type, {
       team: {
         entryPoint: _$$B2.FILE_PERMISSIONS_MODAL
       },

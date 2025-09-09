@@ -18,7 +18,7 @@ import { jD } from "../905/765855";
 import { dG } from "../figma_app/753501";
 import { T as _$$T } from "../905/868547";
 import { Py, AD } from "../figma_app/578768";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { Cf } from "../905/504727";
@@ -49,7 +49,7 @@ function V(e) {
     secondaryActions,
     disableSpotlightAnimation
   } = e;
-  let C = q5();
+  let C = selectCurrentFile();
   let E = useSelector(e => e.multiplayer);
   let A = selectCurrentUser();
   let L = U(user);

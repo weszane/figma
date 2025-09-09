@@ -14,7 +14,7 @@ import { eY } from "../figma_app/722362";
 import { jN } from "../905/612685";
 import { FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
 import { M4 } from "../905/713695";
-import { D6 } from "../figma_app/465071";
+import { useCurrentPlanUser } from "../figma_app/465071";
 import { lD } from "../figma_app/831696";
 import { kT } from "../905/380385";
 import { cM } from "../905/530837";
@@ -110,7 +110,7 @@ export function $$O5(e, t, i, r) {
   let [a, d] = useState({});
   let [c, u] = useState({});
   let p = eY();
-  let _ = D6("useFeedPostInfo").unwrapOr(null);
+  let _ = useCurrentPlanUser("useFeedPostInfo").unwrapOr(null);
   let y = _?.key.type === FUserTypeClassification.ORG_USER ? _.planKey.parentId ?? void 0 : void 0;
   let v = _?.key.type === FUserTypeClassification.ORG_USER ? _.permission : void 0;
   useEffect(() => {

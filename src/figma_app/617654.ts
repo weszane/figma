@@ -6,25 +6,25 @@ import { _ as _$$_, P } from "../905/242077";
 import { S } from "../905/697164";
 import { pd } from "../figma_app/327564";
 import { n as _$$n } from "../905/125157";
-import { Wd, Ru, WU } from "../figma_app/35887";
+import { AccountTypeEnum, OrganizationUserSchema, OrganizationUserSchemaAlias } from "../figma_app/35887";
 var n;
 (e => {
   e.isOrgInvite = function (e) {
-    return e.type === Wd.ORG_INVITE;
+    return e.type === AccountTypeEnum.ORG_INVITE;
   };
   e.isOrgUser = function (e) {
-    return e.type === Wd.ORG_USER;
+    return e.type === AccountTypeEnum.ORG_USER;
   };
   e.isIdpUser = function (e) {
-    return e.type === Wd.IDP_USER;
+    return e.type === AccountTypeEnum.IDP_USER;
   };
 })(n || (n = {}));
-let _ = Ru.pick({
+let _ = OrganizationUserSchema.pick({
   id: !0,
   user: !0,
   type: !0
 });
-let h = z.discriminatedUnion("type", [WU, S, _$$n]);
+let h = z.discriminatedUnion("type", [OrganizationUserSchemaAlias, S, _$$n]);
 let m = z.object({
   users: z.array(z.union([h, _])).optional(),
   cursor: Ip.ignore(),
@@ -41,10 +41,10 @@ let $$g0 = new class {
     this.EligibleUpgradesFigjamSchemaValidator = createNoOpValidator();
     this.OrgNameSchemaValidator = createNoOpValidator();
     this.DomainsSchemaValidator = createNoOpValidator();
-    this.AdminsSchemaValidator = createMetaValidator("AdminsSchemaValidator", e => e.array(WU), null, !1);
+    this.AdminsSchemaValidator = createMetaValidator("AdminsSchemaValidator", e => e.array(OrganizationUserSchemaAlias), null, !1);
     this.OrgUsersPaginatedSchemaValidator = createMetaValidator("OrgUsersPaginatedSchemaValidator", m, null, !1);
     this.OrgUsersPaginatedSchemaValidatorPassthrough = createNoOpValidator();
-    this.UserSchemaValidator = createMetaValidator("UserSchemaValidator", WU, null, !1);
+    this.UserSchemaValidator = createMetaValidator("UserSchemaValidator", OrganizationUserSchemaAlias, null, !1);
     this.OauthConnectionsSchemaValidator = createNoOpValidator();
     this.ShowVatGstSchemaValidator = createNoOpValidator();
     this.LicenseGroupsMembersCountsSchemaValidator = createNoOpValidator();

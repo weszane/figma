@@ -1,6 +1,6 @@
 import { yu } from "../905/96041";
 import { z6, fV, $$if } from "../figma_app/745826";
-import { Rh } from "../905/485103";
+import { sendMetric } from "../905/485103";
 var n;
 function s(e, t, r) {
   t in e ? Object.defineProperty(e, t, {
@@ -108,7 +108,7 @@ export function $$l3() {
 }
 export let $$c2 = yu({
   onError: e => {
-    Rh("web.cortex.error", {
+    sendMetric("web.cortex.error", {
       route: e
     });
   }

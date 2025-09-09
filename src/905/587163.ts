@@ -1,10 +1,10 @@
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FileOrgExtensionSettingsView } from "../figma_app/43951";
 export function $$o0(e = !0) {
-  let t = tS();
-  let i = Rs(FileOrgExtensionSettingsView, {
+  let t = useCurrentFileKey();
+  let i = useSubscription(FileOrgExtensionSettingsView, {
     fileKey: t ?? ""
   }, {
     enabled: e && !!t

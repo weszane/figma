@@ -6,7 +6,7 @@ import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
 import { XHR } from "../905/910117";
 import { uo } from "../figma_app/78808";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { dU, GS } from "../figma_app/803787";
 let $$m3 = createContext({
   status: _$$r.SUCCESS,
@@ -28,7 +28,7 @@ export function $$g2({
   children: e
 }) {
   let t = useSelector(e => e.library);
-  let i = tS();
+  let i = useCurrentFileKey();
   let p = useDispatch();
   let [g, f] = useState({
     status: _$$r.SUCCESS,

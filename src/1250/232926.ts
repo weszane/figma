@@ -1,10 +1,10 @@
-import { IT, gY } from "../figma_app/566371";
+import { setupResourceAtomHandler, getAtomMutate } from "../figma_app/566371";
 import { iW, l_ } from "../1250/51387";
 export function $$i1({
   libraryKey: e,
   repositoryId: t
 }, n) {
-  let [i] = IT(iW({
+  let [i] = setupResourceAtomHandler(iW({
     libraryKey: e,
     repositoryId: t
   }), {
@@ -18,7 +18,7 @@ export function $$i1({
   };
 }
 export function $$o0() {
-  return gY(l_);
+  return getAtomMutate(l_);
 }
 export const L = $$o0;
 export const v = $$i1;

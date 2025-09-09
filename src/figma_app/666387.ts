@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { G as _$$G } from "../905/865520";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { eB } from "../905/765855";
 import { DQ, Pw } from "../figma_app/121751";
-import { A as _$$A } from "../905/654645";
-import { u8 } from "../figma_app/391338";
-import { q5 } from "../figma_app/516028";
+import { adminPermissionConfig } from "../905/654645";
+import { useShadowRead } from "../figma_app/391338";
+import { selectCurrentFile } from "../figma_app/516028";
 import { ColorPalettesForTeam } from "../figma_app/43951";
-import { zQ } from "../figma_app/465071";
+import { isOrgOrEnterprisePlan } from "../figma_app/465071";
 import { cD } from "../figma_app/598018";
 import { Ib, Ui, Zj } from "../905/129884";
 import { $n } from "../figma_app/439493";
@@ -142,8 +142,8 @@ function z({
 }
 function W(e) {
   let t = useDispatch();
-  let r = q5();
-  let a = X8(!!r?.team?.canEdit, zQ(r?.plan ?? null));
+  let r = selectCurrentFile();
+  let a = X8(!!r?.team?.canEdit, isOrgOrEnterprisePlan(r?.plan ?? null));
   return jsxs("div", {
     className: l()({
       "color_palette_picker--header--m9FBq": !0,
@@ -200,21 +200,21 @@ export function $$K0(e) {
   let t = cD();
   let r = useSelector(e => !!e.user);
   let a = VR();
-  let s = q5();
+  let s = selectCurrentFile();
   let o = US();
-  let l = WR(!!s?.team?.canView, zQ(s?.plan ?? null));
+  let l = WR(!!s?.team?.canView, isOrgOrEnterprisePlan(s?.plan ?? null));
   let c = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
-  let u = u8({
+  let u = useShadowRead({
     oldValue: o,
     newValue: l,
     newValueReady: c,
-    label: _$$A.ColorPalettesSubmenuPopover.canViewTeamPalettes,
+    label: adminPermissionConfig.ColorPalettesSubmenuPopover.canViewTeamPalettes,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
       isOpenFileLoadedFromLiveGraph: c
     }
   });
-  let [y] = IT(ColorPalettesForTeam({
+  let [y] = setupResourceAtomHandler(ColorPalettesForTeam({
     teamId: t
   }), {
     enabled: !!t

@@ -20,7 +20,7 @@ import { kt } from "../figma_app/858013";
 import { lD } from "../figma_app/831696";
 import { lQ } from "../905/934246";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Fe, uz } from "../905/284552";
 import { g as _$$g } from "../7037/183814";
 import { A as _$$A } from "../svg/871455";
@@ -126,8 +126,8 @@ function H(e) {
   } = e;
   let Q = cU.includes(e.videoContent.mediaType) && !!feedPostUuid;
   let X = useMemo(() => Q ? `/api/feed_posts/${feedPostUuid}/videos/${e.videoContent.videoFileUuid}/manifest` : e.videoContent.path, [Q, feedPostUuid, e.videoContent]);
-  let K = ZC(f);
-  let $ = ZC(e.videoContent.path);
+  let K = useLatestRef(f);
+  let $ = useLatestRef(e.videoContent.path);
   let J = useCallback((t, n = !1) => {
     e.isThumbnail || b({
       id: e.id,

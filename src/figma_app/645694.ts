@@ -1,5 +1,5 @@
 import { isNotNullish } from "../figma_app/95419";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import a from "../vendor/149674";
 import { Mz } from "../vendor/925040";
 import { v2, ah, vu, ad } from "../figma_app/646357";
@@ -22,7 +22,7 @@ export function $$b4(e) {
   return Object.fromEntries(Object.entries(e.library.knownUsedLibraryVariablesByKey).filter(([e, t]) => "loaded" === t.status && (t.data?.variable?.file || t.data?.variable?.hubFile.status === "loaded" && t.data.variable.hubFile.data)).map(([e, t]) => {
     let r = t.data.variable;
     let n = r.file;
-    let a = null != r.hubFile ? oA(r.hubFile) : void 0;
+    let a = null != r.hubFile ? getResourceDataOrFallback(r.hubFile) : void 0;
     let s = Zt(n, a);
     if (s) return [e, GA(r, s, !1)];
   }).filter(isNotNullish));
@@ -30,7 +30,7 @@ export function $$b4(e) {
 export let $$T6 = Mz([e => e.library.knownUsedLibraryVariableSetsByKey], e => Object.fromEntries(Object.entries(e).filter(([e, t]) => "loaded" === t.status && (t.data?.variableCollection?.file || t.data?.variableCollection?.hubFile.status === "loaded" && t.data.variableCollection.hubFile.data)).map(([e, t]) => {
   let r = t.data.variableCollection;
   let n = r.file;
-  let a = null != r.hubFile ? oA(r.hubFile) : void 0;
+  let a = null != r.hubFile ? getResourceDataOrFallback(r.hubFile) : void 0;
   let s = Zt(n, a);
   if (s) return [e, cE(r, s, !1)];
 }).filter(isNotNullish)));

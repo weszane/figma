@@ -1,8 +1,8 @@
 import { getFilteredFeatureFlags } from "../905/717445";
 import { parseAndNormalizeQuery } from "../905/634134";
-import { sy } from "../figma_app/930338";
+import { encodeUri } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { L8, At } from "../905/760074";
+import { getRepoById, getDisplayName } from "../905/760074";
 import { Zt } from "../figma_app/617727";
 import { FEditorType } from "../figma_app/53721";
 import { d8, qi, oU, ZH, gR, H_, Wi, sR, qr } from "../905/366346";
@@ -35,13 +35,13 @@ export class $$p0 {
     if (u(e)) {
       if (e.fileKey === Zt) return oU();
       let i = this.selectedViewName(e, t);
-      let n = i ? sy(i) : "";
+      let n = i ? encodeUri(i) : "";
       let r = {};
       let s = e.fileKey;
       let d = e.fileKey && t.fileByKey[e.fileKey];
       let u = "design";
       let p = "";
-      d ? p = ZH(u, s ?? "", n, d || void 0, L8(d, t.repos)) : (p = `/${u}/${s}`, n ? p += `/${n}` : p += "/Untitled");
+      d ? p = ZH(u, s ?? "", n, d || void 0, getRepoById(d, t.repos)) : (p = `/${u}/${s}`, n ? p += `/${n}` : p += "/Untitled");
       gR(r, e.nodeId);
       H_(r, e.nodeId);
       Wi(r, e.versionId);
@@ -57,8 +57,8 @@ export class $$p0 {
       if (e.fileKey) {
         let n = t.fileByKey[e.fileKey];
         if (n) {
-          let e = L8(n, t.repos);
-          i = e ? At(n, e) : n.name;
+          let e = getRepoById(n, t.repos);
+          i = e ? getDisplayName(n, e) : n.name;
         }
       }
       return i ?? getI18nString("dev_handoff.dev_handoff_view_selector.untitled");

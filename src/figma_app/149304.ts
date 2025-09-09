@@ -3,7 +3,7 @@ import { zD, j9 } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { Rh } from "../905/485103";
+import { sendMetric } from "../905/485103";
 import { BrowserInfo, isMobilePlatform, getIsLinux, getIsMac, getIsWindows, getIsChromeOS } from "../figma_app/778880";
 import { logError } from "../905/714362";
 import { gP } from "../figma_app/594947";
@@ -53,7 +53,7 @@ export function $$T6() {
           gpu_vendor: r ? /\bamd\b|\bati\b/.test(r) ? "amd" : /\bnvidia\b/.test(r) ? "nvidia" : /\bintel\b/.test(r) ? "intel" : "unknown" : "unknown",
           gpu_api: r ? /direct3d9/.test(r) ? "d3d9" : /direct3d11/.test(r) ? "d3d11" : /opengl/.test(r) ? "opengl" : "unknown" : "unknown"
         };
-        Rh("page_load", n).catch(e => console.error("Error trying to send tags", n, e));
+        sendMetric("page_load", n).catch(e => console.error("Error trying to send tags", n, e));
       }(t);
     } catch (e) {}
     return e;

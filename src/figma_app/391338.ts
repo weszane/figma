@@ -1,519 +1,812 @@
-import { useState, useRef, useEffect } from "react";
-import { shallowEqual } from "react-redux";
-import { noop } from "../figma_app/465776";
-import { PerfPriority } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { useMemoCustom, useMemoStable } from "../905/19536";
-import d from "../vendor/529640";
-import { analyticsEventManager } from "../905/449184";
-import { Tf } from "../905/280919";
-import { selectWithShallowEqual } from "../905/103090";
-import { rw, I as _$$I } from "../905/485103";
-import { Z } from "../905/515860";
-import { R as _$$R2, A } from "../905/654645";
-var c = d;
-export function $$f2({
-  oldValue: e,
-  oldLatencyMs: t,
-  newValue: r,
-  newLatencyMs: n,
-  contextArgs: i,
-  label: a,
-  debug: s = !1,
-  enableFullRead: o = !1,
-  enableShadowRead: l = !0,
-  comparator: d = $$P8(),
-  maxReports: c
+/* eslint-disable no-console */
+import { get } from 'lodash-es'
+import { useEffect, useRef, useState } from 'react'
+import { shallowEqual } from 'react-redux'
+import { useMemoCustom, useMemoStable } from '../905/19536'
+import { selectWithShallowEqual } from '../905/103090'
+import { Tf } from '../905/280919'
+import { analyticsEventManager } from '../905/449184'
+import { useWebLoggerTimer, WebLoggerTimer } from '../905/485103'
+import { resolveTeamId } from '../905/515860'
+import { getFeatureFlags } from '../905/601108'
+import { adminPermissionConfig } from '../905/654645'
+import { noop } from '../figma_app/465776'
+import { PerfPriority } from '../figma_app/763686'
+/**
+ * Types for discrepancy reporting and comparison
+ */
+export type DiscrepancySeverity = 'high' | 'low'
+
+export interface Discrepancy {
+  path: (string | number)[]
+  oldValue: any
+  newValue: any
+  severity: DiscrepancySeverity
+}
+
+export interface ShadowReadOptions {
+  oldValue?: any
+  oldLatencyMs?: number
+  newValue?: any
+  newLatencyMs?: number
+  contextArgs?: Record<string, any>
+  label?: string
+  debug?: boolean
+  enableFullRead?: boolean
+  enableShadowRead?: boolean
+  comparator?: (a: any, b: any) => Discrepancy[]
+  maxReports?: number
+}
+
+export interface ShadowReadComparisonConfig {
+  comparisonConfig?: Record<string, any>
+  [key: string]: any
+}
+
+/**
+ * Compare two values and report discrepancies if enabled.
+ * Original: $$f2
+ */
+export function setupShadowRead({
+  oldValue,
+  oldLatencyMs,
+  newValue,
+  newLatencyMs,
+  contextArgs,
+  label,
+  debug = false,
+  enableFullRead = false,
+  enableShadowRead = true,
+  comparator = defaultComparator(),
+  maxReports,
+}: ShadowReadOptions) {
+  if (enableShadowRead && isShadowReadReportingEnabled() && !hasReachedMaxReports(label, maxReports)) {
+    reportDiscrepancies({
+      label,
+      discrepancies: comparator(oldValue, newValue),
+      oldLatencyMs,
+      newLatencyMs,
+      contextArgs,
+      debug,
+    })
+  }
+  return enableFullRead ? newValue : oldValue
+}
+
+const defaultComparatorConfig = {
+  ignore: false,
+  strictRecords: true,
+  strictLists: true,
+}
+
+/**
+ * Compare using custom config and report discrepancies.
+ * Original: $$E5
+ */
+export function setupShadowReadWithConfig({
+  comparisonConfig,
+  ...rest
+}: ShadowReadComparisonConfig) {
+  const comparator = createComparator({
+    ...defaultComparatorConfig,
+    ...comparisonConfig,
+  })
+  return setupShadowRead({
+    ...rest,
+    comparator,
+  })
+}
+
+/**
+ * Serialize value for logging.
+ * Original: y
+ */
+function serializeValue(value: any): string {
+  return JSON.stringify(value, (_key, val) => val === undefined ? 'undefined' : val)
+}
+
+const reportCountMap = new Map<string, number>()
+
+/**
+ * Check if max reports reached for a label.
+ * Original: T
+ */
+function hasReachedMaxReports(label: string, maxReports?: number): boolean {
+  if (maxReports === undefined)
+    return false
+  const count = reportCountMap.get(label) ?? 0
+  if (count >= maxReports)
+    return true
+  reportCountMap.set(label, count + 1)
+  return false
+}
+
+/**
+ * Report discrepancies to analytics.
+ * Original: I
+ */
+function reportDiscrepancies({
+  label,
+  discrepancies,
+  oldLatencyMs,
+  newLatencyMs,
+  contextArgs,
+  debug,
+}: {
+  label: string
+  discrepancies: Discrepancy[]
+  oldLatencyMs?: number
+  newLatencyMs?: number
+  contextArgs?: Record<string, any>
+  debug?: boolean
 }) {
-  l && U() && !T(a, c) && I({
-    label: a,
-    discrepancies: d(e, r),
-    oldLatencyMs: t,
-    newLatencyMs: n,
-    contextArgs: i,
-    debug: s
-  });
-  return o ? r : e;
-}
-export function $$E5({
-  comparisonConfig: e,
-  ...t
-}) {
-  let r = $$k1({
-    ...L,
-    ...e
-  });
-  return $$f2({
-    ...t,
-    comparator: r
-  });
-}
-function y(e) {
-  return JSON.stringify(e, (e, t) => void 0 === t ? "undefined" : t);
-}
-let b = new Map();
-function T(e, t) {
-  if (void 0 === t) return !1;
-  let r = b.get(e) ?? 0;
-  return r >= t || (b.set(e, r + 1), !1);
-}
-function I({
-  label: e,
-  discrepancies: t,
-  oldLatencyMs: r,
-  newLatencyMs: n,
-  contextArgs: i,
-  debug: a
-}) {
-  a && (t.length > 0 ? console.log(`[Shadow read] '${e}' has discrepancies \u26A0\uFE0F`, t) : console.log(`[Shadow read] '${e}' has no discrepancies \u2705`));
-  let s = {
-    label: e,
-    contextArgs: y(i ?? {}),
-    datadogRUMSessionId: Tf.sessionId ? `https://go/dd/rum/sid/${Tf.sessionId}` : ""
-  };
-  if (t.length > 0) {
-    let e = t.reduce((e, t) => "high" === t.severity ? "high" : e, "low");
-    analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_discrepancy", {
-      ...s,
-      discrepancy_maxSeverity: e
-    });
-  } else analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_match", s);
-  t.length > 0 && (t.sort((e, t) => e.severity === t.severity ? 0 : "high" === e.severity ? -1 : 1), t.slice(0, 10).forEach(e => {
-    analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_discrepancy_details", {
-      ...s,
-      discrepancy_path: e.path.join("."),
-      discrepancy_oldValue: y(e.oldValue),
-      discrepancy_newValue: y(e.newValue),
-      discrepancy_severity: e.severity
-    });
-  }));
-  void 0 !== r && analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_latency_old_value", {
-    ...s,
-    latency_ms: r
-  });
-  void 0 !== n && analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_latency_new_value", {
-    ...s,
-    latency_ms: n
-  });
-}
-export function $$S9({
-  oldValue: e,
-  oldValueReady: t = !0,
-  newValue: r,
-  newValueReady: i = !0,
-  label: a,
-  contextArgs: s,
-  withDefaultContextArgs: o = !0,
-  enableFullRead: l = !1,
-  enableShadowRead: d = !0,
-  debug: c = !1,
-  trackLatency: u = !0,
-  timeoutMs: p,
-  sampleRate__UNSTABLE: _ = 1,
-  comparator: h = $$P8(),
-  maxReports: m
-}) {
-  let g = O(o, s);
-  let [E] = useState(() => h);
-  let y = useRef(!1);
-  let [b] = useState(() => Math.random() < _);
-  let T = d && b;
-  let I = u && T;
-  $$w4({
-    isReady: t,
-    label: a,
-    variant: "old",
-    contextArgs: s,
-    withDefaultContextArgs: o,
-    timeoutMs: p,
-    debug: c,
-    enabled: I
-  });
-  $$w4({
-    isReady: i,
-    label: a,
-    variant: "new",
-    contextArgs: s,
-    withDefaultContextArgs: o,
-    timeoutMs: p,
-    debug: c,
-    enabled: I
-  });
-  useEffect(() => {
-    !y.current && T && i && t && ($$f2({
-      oldValue: e,
-      newValue: r,
-      label: a,
-      contextArgs: g,
-      comparator: E,
-      debug: c,
-      maxReports: m
-    }), y.current = !0);
-  }, [T, e, r, a, g, E, c, m, i, t]);
-  return l ? r : e;
-}
-function v(e, t) {
-  let {
-    errors,
-    ...n
-  } = e;
-  let {
-    errors: _errors,
-    ...s
-  } = t;
-  return shallowEqual(errors, _errors) && shallowEqual(n, s);
-}
-export function $$A3({
-  oldValue: e,
-  newValue: t,
-  comparisonConfig: r,
-  ...n
-}) {
-  let i = useMemoCustom(() => e, [e], v);
-  let a = useMemoCustom(() => t, [t], v);
-  let s = "loaded" === i.status;
-  let o = "loaded" === a.status;
-  let d = $$k1(r);
-  $$S9({
-    oldValue: i.data,
-    oldValueReady: s,
-    newValue: a.data,
-    newValueReady: o,
-    comparator: d,
-    ...n
-  });
-  return n.enableFullRead ? a : i;
-}
-function x({
-  label: e,
-  variant: t,
-  contextArgs: r,
-  debug: n,
-  duration: i
-}, {
-  backgrounded: a,
-  offlined: s
-}) {
-  if (!U()) return;
-  let o = a || s;
-  n && console.log(`[Shadow read] [variant: ${t.toUpperCase()}] '${e}' took ${i}ms to be ready \u23F1 (was idle? ${o})`);
-  analyticsEventManager.trackDefinedEvent("old" === t ? "data_migrations.shadow_read_latency_old_value" : "data_migrations.shadow_read_latency_new_value", {
-    label: e,
-    latency_ms: i,
-    idled: o,
-    contextArgs: y(r ?? {}),
-    datadogRUMSessionId: Tf.sessionId || ""
-  });
-}
-function N({
-  label: e,
-  variant: t,
-  contextArgs: r,
-  debug: n,
-  duration: i
-}, {
-  backgrounded: a,
-  offlined: s
-}) {
-  if (!U()) return;
-  let o = a || s;
-  n && console.log(`[Shadow read] '${e}' has timed out after ${i}ms \u23F1 (was idle? ${o})`);
-  analyticsEventManager.trackDefinedEvent("old" === t ? "data_migrations.shadow_read_latency_old_value_timeout" : "data_migrations.shadow_read_latency_new_value_timeout", {
-    label: e,
-    idled: o,
-    contextArgs: y(r ?? {}),
-    datadogRUMSessionId: Tf.sessionId || ""
-  });
-}
-export function $$C7({
-  label: e,
-  variant: t,
-  contextArgs: r,
-  timeoutMs: n = 1e4,
-  debug: i = !1
-}) {
-  let a = new rw({
-    onTimeout: (a, s) => {
-      N({
-        label: e,
-        variant: t,
-        contextArgs: r,
-        debug: i,
-        duration: n
-      }, {
-        backgrounded: a,
-        offlined: s
-      });
-    },
-    timeoutMs: n
-  });
-  return () => {
-    a.stop((n, a, s) => {
-      x({
-        label: e,
-        variant: t,
-        contextArgs: r,
-        debug: i,
-        duration: n
-      }, {
-        backgrounded: a,
-        offlined: s
-      });
-    }, {
-      skipIfIdle: !1
-    });
-  };
-}
-export function $$w4({
-  isReady: e,
-  enabled: t = !0,
-  label: r,
-  variant: n,
-  contextArgs: i,
-  withDefaultContextArgs: a = !0,
-  timeoutMs: s = 1e4,
-  debug: o = !1
-}) {
-  let l = O(a, i);
-  _$$I(e, (e, t, i) => {
-    x({
-      label: r,
-      variant: n,
-      contextArgs: l,
-      debug: o,
-      duration: e
-    }, {
-      backgrounded: t,
-      offlined: i
-    });
-  }, {
-    enabled: t,
-    onTimeout: (e, t) => {
-      N({
-        label: r,
-        variant: n,
-        contextArgs: l,
-        debug: o,
-        duration: s
-      }, {
-        backgrounded: e,
-        offlined: t
-      });
-    },
-    timeoutMs: s
-  });
-}
-function O(e, t) {
-  if (useRef(e).current !== e) throw Error("useMemoizedContextArgs: withDefaultContextArgs cannot change during the lifetime of the hook!");
-  let r = e ? selectWithShallowEqual(e => ({
-    currentTeamId: e.currentTeamId,
-    getTeamIdReturnValue: Z(e),
-    currentOrgId: e.currentUserOrgId,
-    currentUserId: e.user?.id ?? null,
-    openFileKey: e.openFile?.key ?? null,
-    selectedView: e.selectedView?.view ?? null
-  })) : null;
-  return useMemoStable(() => ({
-    ...r,
-    ...t
-  }), [r, t]);
-}
-function R(e, t) {
-  return "function" == typeof e ? e(t) : e;
-}
-let L = {
-  ignore: !1,
-  strictRecords: !0,
-  strictLists: !0
-};
-export function $$P8(e) {
-  let t = {
-    ignore: !1
-  };
-  return (r, n) => D(r, n, [], {
-    ...t,
-    ...e
-  });
-}
-function D(e, t, r, n) {
-  if (R(n.ignore, r)) return [];
-  if (Array.isArray(e) !== Array.isArray(t) || F(e) !== F(t)) return [{
-    path: r,
-    oldValue: e,
-    newValue: t,
-    severity: "high"
-  }];
-  let i = [];
-  if (Array.isArray(e) && Array.isArray(t)) {
-    if (e.length !== t.length) {
-      i.push({
-        path: r,
-        severity: "high",
-        oldValue: e,
-        newValue: t
-      });
-      return i;
+  if (debug) {
+    if (discrepancies.length > 0) {
+      console.log(`[Shadow read] '${label}' has discrepancies ⚠️`, discrepancies)
     }
-    for (let a = 0; a < e.length; a++) i.push(...D(e[a], t[a], [...r, String(a)], n));
-  } else if (F(e) && F(t)) for (let a of function (e, t) {
-    let r = {};
-    for (let t in e) r[t] = !0;
-    for (let e in t) r[e] = !0;
-    return Object.keys(r);
-  }(e, t)) {
-    let s = r.concat(a);
-    i.push(...D(e[a], t[a], s, n));
-  } else i.push(...M(e, t, r));
-  return i;
+    else {
+      console.log(`[Shadow read] '${label}' has no discrepancies ✅`)
+    }
+  }
+  const baseEvent = {
+    label,
+    contextArgs: serializeValue(contextArgs ?? {}),
+    datadogRUMSessionId: Tf.sessionId ? `https://go/dd/rum/sid/${Tf.sessionId}` : '',
+  }
+  if (discrepancies.length > 0) {
+    const maxSeverity = discrepancies.reduce((sev, d) => d.severity === 'high' ? 'high' : sev, 'low')
+    analyticsEventManager.trackDefinedEvent('data_migrations.shadow_read_discrepancy', {
+      ...baseEvent,
+      discrepancy_maxSeverity: maxSeverity,
+    })
+  }
+  else {
+    analyticsEventManager.trackDefinedEvent('data_migrations.shadow_read_match', baseEvent)
+  }
+  if (discrepancies.length > 0) {
+    discrepancies
+      .sort((a, b) => a.severity === b.severity ? 0 : a.severity === 'high' ? -1 : 1)
+      .slice(0, 10)
+      .forEach((d) => {
+        analyticsEventManager.trackDefinedEvent('data_migrations.shadow_read_discrepancy_details', {
+          ...baseEvent,
+          discrepancy_path: d.path.join('.'),
+          discrepancy_oldValue: serializeValue(d.oldValue),
+          discrepancy_newValue: serializeValue(d.newValue),
+          discrepancy_severity: d.severity,
+        })
+      })
+  }
+  if (oldLatencyMs !== undefined) {
+    analyticsEventManager.trackDefinedEvent('data_migrations.shadow_read_latency_old_value', {
+      ...baseEvent,
+      latency_ms: oldLatencyMs,
+    })
+  }
+  if (newLatencyMs !== undefined) {
+    analyticsEventManager.trackDefinedEvent('data_migrations.shadow_read_latency_new_value', {
+      ...baseEvent,
+      latency_ms: newLatencyMs,
+    })
+  }
 }
-export function $$k1(e) {
-  return (t, r) => function e(t, r, n, i) {
-    if (R(i.ignore, n)) return [];
-    let a = R(i.strictLists, n);
-    if (Array.isArray(t) !== Array.isArray(r) || F(t) !== F(r)) return [{
-      path: n,
-      oldValue: t,
-      newValue: r,
-      severity: "high"
-    }];
-    let s = [];
-    if (Array.isArray(t) && Array.isArray(r)) {
-      if (t.every(j) && r.every(j)) s.push(...D(t, r, n, i));else {
-        let o = (e, t = 0) => {
-          if (!F(e)) return null;
-          if ("id" in e) return ["id"];
-          if ("key" in e) return ["key"];
-          if (0 === t) for (let r in e) {
-            let n = o(e[r], t + 1);
-            if (n) return [r, ...n];
+
+/**
+ * Shadow read hook for React components.
+ * Original: $$S9
+ */
+export function useShadowRead({
+  oldValue,
+  oldValueReady = true,
+  newValue,
+  newValueReady = true,
+  label,
+  contextArgs,
+  withDefaultContextArgs = true,
+  enableFullRead = false,
+  enableShadowRead = true,
+  debug = false,
+  trackLatency = true,
+  timeoutMs,
+  sampleRate__UNSTABLE = 1,
+  comparator = defaultComparator(),
+  maxReports,
+}: {
+  oldValue: any
+  oldValueReady?: boolean
+  newValue: any
+  newValueReady?: boolean
+  label?: string
+  contextArgs?: Record<string, any>
+  withDefaultContextArgs?: boolean
+  enableFullRead?: boolean
+  enableShadowRead?: boolean
+  debug?: boolean
+  trackLatency?: boolean
+  timeoutMs?: number
+  sampleRate__UNSTABLE?: number
+  comparator?: (a: any, b: any) => Discrepancy[]
+  maxReports?: number
+}) {
+  const mergedContextArgs = getContextArgs(withDefaultContextArgs, contextArgs)
+  const [comp] = useState(() => comparator)
+  const hasReported = useRef(false)
+  const [shouldSample] = useState(() => Math.random() < sampleRate__UNSTABLE)
+  const shouldReport = enableShadowRead && shouldSample
+  const shouldTrackLatency = trackLatency && shouldReport
+
+  useWebLoggerTimer(oldValueReady, (duration, backgrounded, offlined) => {
+    logLatency({
+      label,
+      variant: 'old',
+      contextArgs,
+      debug,
+      duration,
+    }, { backgrounded, offlined })
+  }, {
+    enabled: shouldTrackLatency,
+    onTimeout: (backgrounded, offlined) => {
+      logTimeout({
+        label,
+        variant: 'old',
+        contextArgs,
+        debug,
+        duration: timeoutMs,
+      }, { backgrounded, offlined })
+    },
+    timeoutMs,
+  })
+
+  useWebLoggerTimer(newValueReady, (duration, backgrounded, offlined) => {
+    logLatency({
+      label,
+      variant: 'new',
+      contextArgs,
+      debug,
+      duration,
+    }, { backgrounded, offlined })
+  }, {
+    enabled: shouldTrackLatency,
+    onTimeout: (backgrounded, offlined) => {
+      logTimeout({
+        label,
+        variant: 'new',
+        contextArgs,
+        debug,
+        duration: timeoutMs,
+      }, { backgrounded, offlined })
+    },
+    timeoutMs,
+  })
+
+  useEffect(() => {
+    if (!hasReported.current && shouldReport && newValueReady && oldValueReady) {
+      setupShadowRead({
+        oldValue,
+        newValue,
+        label,
+        contextArgs: mergedContextArgs,
+        comparator: comp,
+        debug,
+        maxReports,
+      })
+      hasReported.current = true
+    }
+  }, [shouldReport, oldValue, newValue, label, mergedContextArgs, comp, debug, maxReports, newValueReady, oldValueReady])
+
+  return enableFullRead ? newValue : oldValue
+}
+
+/**
+ * Custom shallow comparison for memoization.
+ * Original: v
+ */
+function shallowCompareWithErrors(a: any, b: any): boolean {
+  const { errors, ...restA } = a
+  const { errors: errorsB, ...restB } = b
+  return shallowEqual(errors, errorsB) && shallowEqual(restA, restB)
+}
+
+/**
+ * Shadow read hook for loaded status objects.
+ * Original: $$A3
+ */
+export function useShadowReadLoaded({
+  oldValue,
+  newValue,
+  comparisonConfig,
+  ...rest
+}: {
+  oldValue: any
+  newValue: any
+  comparisonConfig?: Record<string, any>
+  [key: string]: any
+}) {
+  const memoOld = useMemoCustom(() => oldValue, [oldValue], shallowCompareWithErrors)
+  const memoNew = useMemoCustom(() => newValue, [newValue], shallowCompareWithErrors)
+  const oldReady = memoOld.status === 'loaded'
+  const newReady = memoNew.status === 'loaded'
+  const comparator = createComparator(comparisonConfig)
+
+  useShadowRead({
+    oldValue: memoOld.data,
+    oldValueReady: oldReady,
+    newValue: memoNew.data,
+    newValueReady: newReady,
+    comparator,
+    ...rest,
+  })
+
+  return rest.enableFullRead ? memoNew : memoOld
+}
+
+/**
+ * Log latency event.
+ * Original: x
+ */
+function logLatency({ label, variant, contextArgs, debug, duration }: { label: string, variant: string, contextArgs?: any, debug?: boolean, duration?: number }, { backgrounded, offlined }: { backgrounded: boolean, offlined: boolean }) {
+  if (!isShadowReadReportingEnabled())
+    return
+  const wasIdle = backgrounded || offlined
+  if (debug) {
+    console.log(`[Shadow read] [variant: ${variant.toUpperCase()}] '${label}' took ${duration}ms to be ready ⏱ (was idle? ${wasIdle})`)
+  }
+  analyticsEventManager.trackDefinedEvent(
+    variant === 'old' ? 'data_migrations.shadow_read_latency_old_value' : 'data_migrations.shadow_read_latency_new_value',
+    {
+      label,
+      latency_ms: duration,
+      idled: wasIdle,
+      contextArgs: serializeValue(contextArgs ?? {}),
+      datadogRUMSessionId: Tf.sessionId || '',
+    },
+  )
+}
+
+/**
+ * Log timeout event.
+ * Original: N
+ */
+function logTimeout({ label, variant, contextArgs, debug, duration }: { label: string, variant: string, contextArgs?: any, debug?: boolean, duration?: number }, { backgrounded, offlined }: { backgrounded: boolean, offlined: boolean }) {
+  if (!isShadowReadReportingEnabled())
+    return
+  const wasIdle = backgrounded || offlined
+  if (debug) {
+    console.log(`[Shadow read] '${label}' has timed out after ${duration}ms ⏱ (was idle? ${wasIdle})`)
+  }
+  analyticsEventManager.trackDefinedEvent(
+    variant === 'old' ? 'data_migrations.shadow_read_latency_old_value_timeout' : 'data_migrations.shadow_read_latency_new_value_timeout',
+    {
+      label,
+      idled: wasIdle,
+      contextArgs: serializeValue(contextArgs ?? {}),
+      datadogRUMSessionId: Tf.sessionId || '',
+    },
+  )
+}
+
+/**
+ * Timer for latency reporting.
+ * Original: $$C7
+ */
+export function createLatencyTimer({
+  label,
+  variant,
+  contextArgs,
+  timeoutMs = 10000,
+  debug = false,
+}: {
+  label: string
+  variant: string
+  contextArgs?: any
+  timeoutMs?: number
+  debug?: boolean
+}) {
+  const timer = new WebLoggerTimer({
+    onTimeout: (backgrounded, offlined) => {
+      logTimeout(
+        { label, variant, contextArgs, debug, duration: timeoutMs },
+        { backgrounded, offlined },
+      )
+    },
+    timeoutMs,
+  })
+  return () => {
+    timer.stop((duration, backgrounded, offlined) => {
+      logLatency(
+        { label, variant, contextArgs, debug, duration },
+        { backgrounded, offlined },
+      )
+    }, { skipIfIdle: false })
+  }
+}
+
+/**
+ * Hook for latency reporting.
+ * Original: $$w4
+ */
+export function useLatencyLogger({
+  isReady,
+  enabled = true,
+  label,
+  variant,
+  contextArgs,
+  withDefaultContextArgs = true,
+  timeoutMs = 10000,
+  debug = false,
+}: {
+  isReady: boolean
+  enabled?: boolean
+  label: string
+  variant: string
+  contextArgs?: any
+  withDefaultContextArgs?: boolean
+  timeoutMs?: number
+  debug?: boolean
+}) {
+  const mergedContextArgs = getContextArgs(withDefaultContextArgs, contextArgs)
+  useWebLoggerTimer(isReady, (duration, backgrounded, offlined) => {
+    logLatency(
+      { label, variant, contextArgs: mergedContextArgs, debug, duration },
+      { backgrounded, offlined },
+    )
+  }, {
+    enabled,
+    onTimeout: (backgrounded, offlined) => {
+      logTimeout(
+        { label, variant, contextArgs: mergedContextArgs, debug, duration: timeoutMs },
+        { backgrounded, offlined },
+      )
+    },
+    timeoutMs,
+  })
+}
+
+/**
+ * Get context args for reporting.
+ * Original: O
+ */
+function getContextArgs(withDefault: boolean, contextArgs?: Record<string, any>) {
+  if (useRef(withDefault).current !== withDefault) {
+    throw new Error('useMemoizedContextArgs: withDefaultContextArgs cannot change during the lifetime of the hook!')
+  }
+  const defaultArgs = withDefault
+    ? selectWithShallowEqual(state => ({
+        currentTeamId: state.currentTeamId,
+        getTeamIdReturnValue: resolveTeamId(state),
+        currentOrgId: state.currentUserOrgId,
+        currentUserId: state.user?.id ?? null,
+        openFileKey: state.openFile?.key ?? null,
+        selectedView: state.selectedView?.view ?? null,
+      }))
+    : null
+  return useMemoStable(() => ({
+    ...defaultArgs,
+    ...contextArgs,
+  }), [defaultArgs, contextArgs])
+}
+
+/**
+ * Utility to resolve value if function.
+ * Original: R
+ */
+function resolveIfFunction(value: any, arg: any) {
+  return typeof value === 'function' ? value(arg) : value
+}
+
+/**
+ * Default comparator for discrepancies.
+ * Original: $$P8
+ */
+export function defaultComparator(config?: Record<string, any>) {
+  const baseConfig = { ignore: false }
+  return (a: any, b: any) => compareValues(a, b, [], { ...baseConfig, ...config })
+}
+
+/**
+ * Compare two values for discrepancies.
+ * Original: D
+ */
+function compareValues(a: any, b: any, path: (string | number)[], config: Record<string, any>): Discrepancy[] {
+  if (resolveIfFunction(config.ignore, path))
+    return []
+  if (Array.isArray(a) !== Array.isArray(b) || isObject(a) !== isObject(b)) {
+    return [{
+      path,
+      oldValue: a,
+      newValue: b,
+      severity: 'high',
+    }]
+  }
+  let discrepancies: Discrepancy[] = []
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) {
+      discrepancies.push({
+        path,
+        severity: 'high',
+        oldValue: a,
+        newValue: b,
+      })
+      return discrepancies
+    }
+    for (let i = 0; i < a.length; i++) {
+      discrepancies.push(...compareValues(a[i], b[i], [...path, String(i)], config))
+    }
+  }
+  else if (isObject(a) && isObject(b)) {
+    for (const key of getAllKeys(a, b)) {
+      const nextPath = path.concat(key)
+      discrepancies.push(...compareValues(a[key], b[key], nextPath, config))
+    }
+  }
+  else {
+    discrepancies.push(...comparePrimitives(a, b, path))
+  }
+  return discrepancies
+}
+
+/**
+ * Create a comparator with config.
+ * Original: $$k1
+ */
+export function createComparator(config?: Record<string, any>) {
+  return (a: any, b: any) => compareWithConfig(a, b, [], { ...defaultComparatorConfig, ...config })
+}
+
+/**
+ * Compare two values with config for discrepancies.
+ * Original: e (inside $$k1)
+ */
+function compareWithConfig(a: any, b: any, path: (string | number)[], config: Record<string, any>): Discrepancy[] {
+  if (resolveIfFunction(config.ignore, path))
+    return []
+  const strictLists = resolveIfFunction(config.strictLists, path)
+  if (Array.isArray(a) !== Array.isArray(b) || isObject(a) !== isObject(b)) {
+    return [{
+      path,
+      oldValue: a,
+      newValue: b,
+      severity: 'high',
+    }]
+  }
+  let discrepancies: Discrepancy[] = []
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.every(isPrimitive) && b.every(isPrimitive)) {
+      discrepancies.push(...compareValues(a, b, path, config))
+    }
+    else {
+      // Keyed comparison for arrays of objects
+      const getKeyPath = (obj: any, depth = 0): string[] | null => {
+        if (!isObject(obj))
+          return null
+        if ('id' in obj)
+          return ['id']
+        if ('key' in obj)
+          return ['key']
+        if (depth === 0) {
+          for (const k in obj) {
+            const subKey = getKeyPath(obj[k], depth + 1)
+            if (subKey)
+              return [k, ...subKey]
           }
-          return null;
-        };
-        let l = e => {
-          let t = new Map();
-          for (let r of e) {
-            let e = o(r);
-            e && t.set(c()(r, e), r);
-          }
-          return t;
-        };
-        let d = l(t);
-        let u = l(r);
-        let p = !1;
-        for (let [o, l] of (a && d.size !== u.size && (p = !0), 0 !== d.size || 0 !== u.size || 0 === t.length && 0 === r.length || s.push({
-          path: n,
-          oldValue: t,
-          newValue: r,
-          severity: "high"
-        }), d)) {
-          if (!u.has(o)) {
-            a && (p = !0);
-            continue;
-          }
-          s.push(...e(l, u.get(o), [...n, o], i));
         }
-        p && s.push({
-          path: n,
-          severity: "high",
-          oldValue: Array.from(d.keys()),
-          newValue: Array.from(u.keys())
-        });
+        return null
       }
-    } else if (F(t) && F(r)) for (let a in t) {
-      let o = [...n, a];
-      let l = R(i.strictRecords, o);
-      (a in r || l) && s.push(...e(t[a], r[a], o, i));
-    } else s.push(...M(t, r, n));
-    return s;
-  }(t, r, [], {
-    ...L,
-    ...e
-  });
-}
-function M(e, t, r) {
-  if (e === t || "function" == typeof e || "function" == typeof t) return [];
-  let n = [null, void 0, !1];
-  return n.includes(e) && n.includes(t) && e !== t ? [{
-    path: r,
-    oldValue: e,
-    newValue: t,
-    severity: "low"
-  }] : typeof e != typeof t ? [{
-    path: r,
-    oldValue: e,
-    newValue: t,
-    severity: "high"
-  }] : e instanceof Date && t instanceof Date ? Math.abs(e.getTime() - t.getTime()) >= 1e3 ? [{
-    path: r,
-    oldValue: e.toISOString(),
-    newValue: t.toISOString(),
-    severity: "high"
-  }] : [] : e !== t ? [{
-    path: r,
-    oldValue: e,
-    newValue: t,
-    severity: "high"
-  }] : [];
-}
-function F(e) {
-  return "object" == typeof e && !Array.isArray(e) && null !== e && !(e instanceof Date);
-}
-function j(e) {
-  return "object" != typeof e && "function" != typeof e;
-}
-function U() {
-  return getFeatureFlags().use_shadow_read_reporting;
-}
-class B {
-  reportDiscrepancies(e, t, r) {
-    U() && (T(e, r.maxReports ?? void 0) || I({
-      label: _$$R2(e),
-      discrepancies: t.map(({
-        severity: e,
-        ...t
-      }) => ({
-        ...t,
-        severity: function (e) {
-          switch (e) {
-            case PerfPriority.HIGH:
-              return "high";
-            case PerfPriority.LOW:
-              return "low";
-            default:
-              noop(e);
-              return "low";
+      const mapByKey = (arr: any[]) => {
+        const map = new Map()
+        for (const item of arr) {
+          const keyPath = getKeyPath(item)
+          if (keyPath)
+            map.set(get(item, keyPath), item)
+        }
+        return map
+      }
+      const mapA = mapByKey(a)
+      const mapB = mapByKey(b)
+      let listMismatch = false
+      if (strictLists && mapA.size !== mapB.size)
+        listMismatch = true
+      if (mapA.size !== 0 || mapB.size !== 0 || a.length === 0 && b.length === 0) {
+        for (const [key, itemA] of mapA) {
+          if (!mapB.has(key)) {
+            if (strictLists)
+              listMismatch = true
+            continue
           }
-        }(e)
-      })),
-      oldLatencyMs: r.oldLatencyMs ?? void 0,
-      newLatencyMs: r.newLatencyMs ?? void 0,
-      contextArgs: r.contextArgs ?? void 0,
-      debug: r.debug
-    }));
+          discrepancies.push(...compareWithConfig(itemA, mapB.get(key), [...path, key], config))
+        }
+      }
+      else {
+        discrepancies.push({
+          path,
+          oldValue: a,
+          newValue: b,
+          severity: 'high',
+        })
+      }
+      if (listMismatch) {
+        discrepancies.push({
+          path,
+          severity: 'high',
+          oldValue: Array.from(mapA.keys()),
+          newValue: Array.from(mapB.keys()),
+        })
+      }
+    }
   }
-  compareAndReportDiscrepancies(e, t, r, n) {
-    if (!U() || T(e, n.maxReports ?? void 0)) return;
-    let i = $$P8()(t, r);
-    I({
-      label: _$$R2(e),
-      discrepancies: i,
-      oldLatencyMs: n.oldLatencyMs ?? void 0,
-      newLatencyMs: n.newLatencyMs ?? void 0,
-      contextArgs: n.contextArgs ?? void 0,
-      debug: n.debug
-    });
+  else if (isObject(a) && isObject(b)) {
+    for (const key in a) {
+      const nextPath = [...path, key]
+      const strictRecords = resolveIfFunction(config.strictRecords, nextPath)
+      if (key in b || strictRecords) {
+        discrepancies.push(...compareWithConfig(a[key], b[key], nextPath, config))
+      }
+    }
+  }
+  else {
+    discrepancies.push(...comparePrimitives(a, b, path))
+  }
+  return discrepancies
+}
+
+/**
+ * Compare primitive values for discrepancies.
+ * Original: M
+ */
+function comparePrimitives(a: any, b: any, path: (string | number)[]): Discrepancy[] {
+  if (a === b || typeof a === 'function' || typeof b === 'function')
+    return []
+  const nullish = [null, undefined, false]
+  if (nullish.includes(a) && nullish.includes(b) && a !== b) {
+    return [{
+      path,
+      oldValue: a,
+      newValue: b,
+      severity: 'low',
+    }]
+  }
+  if (typeof a !== typeof b) {
+    return [{
+      path,
+      oldValue: a,
+      newValue: b,
+      severity: 'high',
+    }]
+  }
+  if (a instanceof Date && b instanceof Date) {
+    if (Math.abs(a.getTime() - b.getTime()) >= 1000) {
+      return [{
+        path,
+        oldValue: a.toISOString(),
+        newValue: b.toISOString(),
+        severity: 'high',
+      }]
+    }
+    return []
+  }
+  if (a !== b) {
+    return [{
+      path,
+      oldValue: a,
+      newValue: b,
+      severity: 'high',
+    }]
+  }
+  return []
+}
+
+/**
+ * Get all keys from two objects.
+ * Original: function inside D
+ */
+function getAllKeys(a: Record<string, any>, b: Record<string, any>): string[] {
+  const keys: Record<string, boolean> = {}
+  for (const k in a) keys[k] = true
+  for (const k in b) keys[k] = true
+  return Object.keys(keys)
+}
+
+/**
+ * Check if value is a plain object.
+ * Original: F
+ */
+function isObject(val: any): boolean {
+  return typeof val === 'object' && !Array.isArray(val) && val !== null && !(val instanceof Date)
+}
+
+/**
+ * Check if value is primitive.
+ * Original: j
+ */
+function isPrimitive(val: any): boolean {
+  return typeof val !== 'object' && typeof val !== 'function'
+}
+
+/**
+ * Check if shadow read reporting is enabled.
+ * Original: U
+ */
+function isShadowReadReportingEnabled(): boolean {
+  return getFeatureFlags().use_shadow_read_reporting
+}
+
+/**
+ * Class for shadow read reporting.
+ * Original: B
+ */
+class ShadowReadReporter {
+  /**
+   * Report discrepancies.
+   * Original: reportDiscrepancies
+   */
+  reportDiscrepancies(label: string, discrepancies: Discrepancy[], options: { maxReports?: number, oldLatencyMs?: number, newLatencyMs?: number, contextArgs?: any, debug?: boolean }) {
+    if (isShadowReadReportingEnabled() && (!hasReachedMaxReports(label, options.maxReports) || reportDiscrepancies)) {
+      reportDiscrepancies({
+        label,
+        discrepancies: discrepancies.map(({ severity, ...rest }) => ({
+          ...rest,
+          severity: mapPerfPriorityToSeverity(severity),
+        })),
+        oldLatencyMs: options.oldLatencyMs,
+        newLatencyMs: options.newLatencyMs,
+        contextArgs: options.contextArgs,
+        debug: options.debug,
+      })
+    }
+  }
+
+  /**
+   * Compare and report discrepancies.
+   * Original: compareAndReportDiscrepancies
+   */
+  compareAndReportDiscrepancies(label: string, oldValue: any, newValue: any, options: { maxReports?: number, oldLatencyMs?: number, newLatencyMs?: number, contextArgs?: any, debug?: boolean }) {
+    if (!isShadowReadReportingEnabled() || hasReachedMaxReports(label, options.maxReports))
+      return
+    const discrepancies = defaultComparator()(oldValue, newValue)
+    reportDiscrepancies({
+      label,
+      discrepancies,
+      oldLatencyMs: options.oldLatencyMs,
+      newLatencyMs: options.newLatencyMs,
+      contextArgs: options.contextArgs,
+      debug: options.debug,
+    })
   }
 }
-export function $$G6() {
-  new B();
+
+/**
+ * Map PerfPriority to severity string.
+ * Original: function inside B
+ */
+function mapPerfPriorityToSeverity(priority: any): DiscrepancySeverity {
+  switch (priority) {
+    case PerfPriority.HIGH:
+      return 'high'
+    case PerfPriority.LOW:
+      return 'low'
+    default:
+      noop(priority)
+      return 'low'
+  }
 }
-export const A5 = A;
-export const BG = $$k1;
-export const HZ = $$f2;
-export const MF = $$A3;
-export const Vy = $$w4;
-export const X7 = $$E5;
-export const jV = $$G6;
-export const kW = $$C7;
-export const st = $$P8;
-export const u8 = $$S9;
+
+/**
+ * Initialize shadow read reporter.
+ * Original: $$G6
+ */
+export function initializeShadowReadReporter() {
+  return new ShadowReadReporter()
+}
+
+// Exported variables with refactored names
+export const A5 = adminPermissionConfig
+export const BG = createComparator
+export const HZ = setupShadowRead
+export const MF = useShadowReadLoaded
+export const Vy = useLatencyLogger
+export const X7 = setupShadowReadWithConfig
+export const jV = initializeShadowReadReporter
+export const kW = createLatencyTimer
+export const st = defaultComparator
+export const u8 = useShadowRead
+export { adminPermissionConfig }

@@ -2,7 +2,7 @@ import { k } from '../905/93362';
 import { H } from '../905/202181';
 import { g } from '../905/346780';
 import { getCookieOrStorage } from '../905/414007';
-import { BO } from '../905/485103';
+import { sendBatchedMetrics } from '../905/485103';
 import { O as _$$O } from '../905/833838';
 import { createDeferredPromise } from '../905/874553';
 import { getInitialOptions } from '../figma_app/169182';
@@ -30,7 +30,7 @@ let b = new class {
       let e = this.batchedCustomEvents;
       this.batchedCustomEvents = [];
       try {
-        await BO(e);
+        await sendBatchedMetrics(e);
       } catch (e) {}
       this._currentlySendingBatchedEvents = !1;
     };

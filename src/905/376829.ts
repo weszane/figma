@@ -10,7 +10,7 @@ import { KJ, $T, Vx, V0 } from "../905/657710";
 import { hO } from "../figma_app/545293";
 import { xH, eB } from "../905/546357";
 import { t } from "../905/150656";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { fS, q6, qy, tC, Lk, uH, WY, Wr, $L } from "../figma_app/162807";
 import { oB, j7 } from "../905/929976";
 import { HI, vj, qv, c3, tw, MB } from "../905/977218";
@@ -29,7 +29,7 @@ import { E as _$$E2 } from "../905/409917";
 import { A as _$$A } from "../3850/824007";
 import { G as _$$G } from "../figma_app/119843";
 import U from "classnames";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { p as _$$p } from "../figma_app/353099";
 import { h as _$$h } from "../905/207101";
@@ -63,7 +63,7 @@ function A(e) {
   useEffect(() => {
     onChange(s.activeTab);
   }, [s.activeTab, onChange]);
-  let o = ZC(e.searchModelType);
+  let o = useLatestRef(e.searchModelType);
   useEffect(() => {
     o && o !== e.searchModelType && s.activeTab !== e.searchModelType && s.setActiveTab(e.searchModelType);
   }, [e.searchModelType, o, s]);
@@ -229,7 +229,7 @@ let ep = (e, t) => {
 function em(e) {
   let t = useSelector(e => e.currentUserOrgId);
   let i = "NON_ORG_TEAMS" !== e.planId && e.planId || t;
-  let n = Rs(SearchFilterWorkspaceView, {
+  let n = useSubscription(SearchFilterWorkspaceView, {
     orgId: i
   });
   let {

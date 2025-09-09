@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Fragment } from "react";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { Wi } from "../figma_app/162641";
 import { x } from "../905/211326";
 import { renderI18nText } from "../905/303541";
@@ -87,7 +87,7 @@ function A({
       className: "overview_stats_view--statLoading--3DxiI"
     }) : jsx("div", {
       className: g,
-      children: null == e.count ? "" : `${$M(e.count)} ${e.word}`
+      children: null == e.count ? "" : `${formatNumber(e.count)} ${e.word}`
     })]
   }) : null;
 }

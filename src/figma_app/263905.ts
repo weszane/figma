@@ -37,8 +37,8 @@ import { MV } from '../figma_app/396372';
 import { g as _$$g2 } from '../figma_app/411986';
 import { c3, LE } from '../figma_app/427737';
 import { assert } from '../figma_app/465776';
-import { ze } from '../figma_app/516028';
-import { Oc, YE } from '../figma_app/552876';
+import { openFileKeyAtom } from '../figma_app/516028';
+import { useIsSelectedFigmakeFullscreen, isDebugSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { Wh } from '../figma_app/615482';
 import { _b, Dw, HA, o7, q9 } from '../figma_app/618665';
 import { JL } from '../figma_app/690664';
@@ -205,7 +205,7 @@ export class $$ee0 {
               'X-Figma-Debug-User-ID': t.user_data?.id,
               'X-Figma-Debug-User-Email': t.user_data?.email
             } : void 0;
-            let n = YE() ? 'figmake' : 'sites';
+            let n = isDebugSelectedFigmakeFullscreen() ? 'figmake' : 'sites';
             return {
               cluster_name: t.cluster_name,
               release_manifest_git_commit: t.release_manifest_git_commit,
@@ -213,7 +213,7 @@ export class $$ee0 {
               org_id: t.org_id,
               local_dev_on_cluster: t.local_dev_on_cluster,
               sites_preview_sentry_dsn: t.sites_preview_sentry_dsn || t.frontend_sentry_dsn,
-              file_key: atomStoreManager.get(ze),
+              file_key: atomStoreManager.get(openFileKeyAtom),
               render_options: JSON.stringify(e),
               reporting_domain: getFigmaCluster(),
               analyticsHeaders: r,
@@ -264,7 +264,7 @@ export function $$er1({
   let b = getFeatureFlags().sts_runtime_debug_tools ?? !1;
   let I = useAtomWithSubscription($$Q3);
   let S = Td();
-  let v = Oc();
+  let v = useIsSelectedFigmakeFullscreen();
   let [A, x] = useState(() => ++et);
   let N = useMemo(() => new $$ee0(), []);
   let w = useMemo(() => ({

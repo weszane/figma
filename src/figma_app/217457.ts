@@ -6,26 +6,26 @@ import { reportError } from "../905/11";
 import { x } from "../905/23221";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { FProductType, FProductAccessType, FPlanNameType } from "../figma_app/191312";
-import { X$ } from "../figma_app/465071";
-import { j4 } from "../905/814802";
-import { aI } from "../figma_app/552876";
-import { ud as _$$ud, Gu, B6 } from "../905/513035";
+import { useCurrentPublicPlan } from "../figma_app/465071";
+import { TeamType } from "../905/814802";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum, B6 } from "../905/513035";
 import { N_ } from "../905/332483";
 import { a as _$$a } from "../905/584964";
-import { Hn, wR } from "../figma_app/765689";
+import { compareProductAccessOrder, getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { lG, F2 } from "../905/389382";
 let y = {
-  design: _$$ud.DESIGN,
-  whiteboard: _$$ud.FIGJAM,
-  figjam: _$$ud.FIGJAM,
-  dev_mode: _$$ud.DEV_MODE,
-  slides: _$$ud.SLIDES,
-  collaborator: _$$ud.COLLABORATOR,
-  developer: _$$ud.DEVELOPER,
-  expert: _$$ud.EXPERT,
-  content: _$$ud.CONTENT,
-  view: Gu.VIEW,
-  ai_credits: _$$ud.AI_CREDITS
+  design: ProductAccessTypeEnum.DESIGN,
+  whiteboard: ProductAccessTypeEnum.FIGJAM,
+  figjam: ProductAccessTypeEnum.FIGJAM,
+  dev_mode: ProductAccessTypeEnum.DEV_MODE,
+  slides: ProductAccessTypeEnum.SLIDES,
+  collaborator: ProductAccessTypeEnum.COLLABORATOR,
+  developer: ProductAccessTypeEnum.DEVELOPER,
+  expert: ProductAccessTypeEnum.EXPERT,
+  content: ProductAccessTypeEnum.CONTENT,
+  view: ViewAccessTypeEnum.VIEW,
+  ai_credits: ProductAccessTypeEnum.AI_CREDITS
 };
 export function $$b10(e) {
   return y[e] ?? e;
@@ -59,22 +59,22 @@ export function $$S1(e) {
 }
 x()(I);
 let v = {
-  design: j4.DESIGN,
-  whiteboard: j4.WHITEBOARD,
-  figjam: j4.WHITEBOARD
+  design: TeamType.DESIGN,
+  whiteboard: TeamType.WHITEBOARD,
+  figjam: TeamType.WHITEBOARD
 };
 x()(v);
 let A = {
-  [_$$ud.DESIGN]: 10,
-  [_$$ud.DEV_MODE]: 20,
-  [_$$ud.FIGJAM]: 30,
-  [_$$ud.SLIDES]: 40,
-  [_$$ud.EXPERT]: 50,
-  [_$$ud.DEVELOPER]: 60,
-  [_$$ud.CONTENT]: 70,
-  [_$$ud.COLLABORATOR]: 80,
-  [Gu.VIEW]: 90,
-  [_$$ud.AI_CREDITS]: 100
+  [ProductAccessTypeEnum.DESIGN]: 10,
+  [ProductAccessTypeEnum.DEV_MODE]: 20,
+  [ProductAccessTypeEnum.FIGJAM]: 30,
+  [ProductAccessTypeEnum.SLIDES]: 40,
+  [ProductAccessTypeEnum.EXPERT]: 50,
+  [ProductAccessTypeEnum.DEVELOPER]: 60,
+  [ProductAccessTypeEnum.CONTENT]: 70,
+  [ProductAccessTypeEnum.COLLABORATOR]: 80,
+  [ViewAccessTypeEnum.VIEW]: 90,
+  [ProductAccessTypeEnum.AI_CREDITS]: 100
 };
 export function $$x5(e) {
   return A[e];
@@ -90,13 +90,13 @@ export function $$w2(e, t) {
 export function $$O3(e) {
   let t = function (e) {
     let t = e.visibility ?? "seat_description";
-    let r = X$("useSeatTypeLicenseTypesMap").unwrapOr(null);
+    let r = useCurrentPublicPlan("useSeatTypeLicenseTypesMap").unwrapOr(null);
     let s = (e.overridePlanTier ? K(FPlanNameType, e.overridePlanTier) : void 0) || r?.tier;
     let o = useMemo(() => ({
-      [_$$ud.EXPERT]: filterNotNullish([FProductAccessType.DESIGN, FProductAccessType.DEV_MODE, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.SITES, FProductAccessType.COOPER, aI() ? FProductAccessType.FIGMAKE : void 0]),
-      [_$$ud.DEVELOPER]: filterNotNullish([FProductAccessType.DEV_MODE, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.COOPER]),
-      [_$$ud.COLLABORATOR]: filterNotNullish([FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES]),
-      [_$$ud.CONTENT]: filterNotNullish([FProductAccessType.COOPER, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES])
+      [ProductAccessTypeEnum.EXPERT]: filterNotNullish([FProductAccessType.DESIGN, FProductAccessType.DEV_MODE, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.SITES, FProductAccessType.COOPER, isFigmakeSitesEnabled() ? FProductAccessType.FIGMAKE : void 0]),
+      [ProductAccessTypeEnum.DEVELOPER]: filterNotNullish([FProductAccessType.DEV_MODE, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.COOPER]),
+      [ProductAccessTypeEnum.COLLABORATOR]: filterNotNullish([FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES]),
+      [ProductAccessTypeEnum.CONTENT]: filterNotNullish([FProductAccessType.COOPER, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES])
     }), []);
     return useMemo(() => N_.dict(e => {
       let r = o[e];
@@ -104,7 +104,7 @@ export function $$O3(e) {
       return r;
     }), [t, o, s]);
   }(e);
-  return useCallback(e => t[e]?.sort(Hn) || [], [t]);
+  return useCallback(e => t[e]?.sort(compareProductAccessOrder) || [], [t]);
 }
 let R = N_.dict();
 export function $$L12(e) {
@@ -127,7 +127,7 @@ export function $$D11(e) {
     overridePlanTier,
     visibility: "seat_description"
   });
-  return useCallback(e => e === Gu.VIEW ? getI18nString("modify_plan_user_seat_modal.products_for_seat.view") : _$$a(i(e), listFormatType), [listFormatType, i]);
+  return useCallback(e => e === ViewAccessTypeEnum.VIEW ? getI18nString("modify_plan_user_seat_modal.products_for_seat.view") : _$$a(i(e), listFormatType), [listFormatType, i]);
 }
 export function $$k6(e, t) {
   let r = $$D11(t);
@@ -135,21 +135,21 @@ export function $$k6(e, t) {
 }
 export function $$M8(e, t) {
   switch (F2(e)) {
-    case _$$ud.EXPERT:
+    case ProductAccessTypeEnum.EXPERT:
       return {
         header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.full_seat"),
         body: renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.full_seat", {
           planName: t
         })
       };
-    case _$$ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return {
         header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.dev_seat"),
         body: renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.dev_seat", {
           planName: t
         })
       };
-    case _$$ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return {
         header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.collab_seat"),
         body: renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.collab_seat", {
@@ -161,7 +161,7 @@ export function $$M8(e, t) {
   }
 }
 export function $$F4(e, t) {
-  let r = F2(wR(t));
+  let r = F2(getProductAccessTypeOrDefault(t));
   return !r || !B6(r, e);
 }
 export const AG = $$N0;

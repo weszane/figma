@@ -6,7 +6,7 @@ import { BrowserInfo, isAnyMobile } from "../figma_app/778880";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { q8 } from "../figma_app/459490";
 import { QI } from "../9410/60600";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import { b as _$$b } from "../905/985254";
 import { tf as _$$tf, fu, j6 } from "../figma_app/831799";
@@ -43,7 +43,7 @@ import { gB, oA as _$$oA } from "../905/723791";
 import { Bl } from "../figma_app/967857";
 import { IntegrationUtils } from "../figma_app/469876";
 import { z4 } from "../905/37051";
-import { yV, q5, tS as _$$tS, MY, As, ze } from "../figma_app/516028";
+import { openFileAtom, selectCurrentFile, useCurrentFileKey, useFullscreenViewFile, openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { yF } from "../figma_app/386952";
 import { I as _$$I } from "../figma_app/51637";
 import { FEditorType } from "../figma_app/53721";
@@ -150,7 +150,7 @@ import { b as _$$b3 } from "../3276/369349";
 import { C as _$$C } from "../1250/50098";
 import { NuxOnboardingOverlay } from "../4452/529989";
 import { lQ } from "../905/934246";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { Dv, Du, NJ } from "../figma_app/419216";
 import { O as _$$O } from "../9410/435916";
 import { fullscreenValue } from "../figma_app/455680";
@@ -162,7 +162,7 @@ import { nk as _$$nk, Ch } from "../figma_app/2023";
 import { g_ } from "../905/646788";
 import { aA as _$$aA, pb as _$$pb, Ij } from "../figma_app/877449";
 import { resourceUtils } from "../905/989992";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { lg, m0, Em } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
 import { GoogleClassroomIntegrationView, UserForRcs, TeamCanAdmin } from "../figma_app/43951";
@@ -171,7 +171,7 @@ import { b as _$$b4 } from "../905/799737";
 import { i as _$$i2 } from "../905/718764";
 import { E as _$$E3 } from "../905/632989";
 import { Q as _$$Q3 } from "../1250/220026";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { B as _$$B } from "../905/714743";
 import { Ji } from "../figma_app/972736";
 import { zE } from "../905/738636";
@@ -197,7 +197,7 @@ import { A as _$$A1 } from "../svg/519128";
 import { A as _$$A10 } from "../svg/221042";
 import { getStorage } from "../905/657224";
 import { Xk } from "../figma_app/107215";
-import { setSentryTag, captureMessage } from "../905/11";
+import { setTagGlobal, captureMessage } from "../905/11";
 import { XZ } from "../figma_app/176973";
 import { WB } from "../905/761735";
 import { kd, mW } from "../figma_app/797994";
@@ -278,7 +278,7 @@ import { jS } from "../905/136701";
 import { M3 } from "../905/759412";
 import { C5 } from "../7021/95197";
 import { $ as _$$$2 } from "../1250/770005";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { sO as _$$sO } from "../figma_app/21029";
 import { i as _$$i3 } from "../9410/16707";
 import { Kt, wl, uM, w1 } from "../figma_app/835688";
@@ -695,7 +695,7 @@ function eD() {
   let e = useAtomValue(_$$mp);
   let t = useAtomValue(_$$t2);
   let i = useAtomValue(eR);
-  let n = useAtomValue(yV);
+  let n = useAtomValue(openFileAtom);
   let a = useDispatch();
   let {
     uniqueId,
@@ -1000,7 +1000,7 @@ function th() {
   let i = useStore();
   let a = Fk((e, t) => zC(e, t), i.getState().mirror.appModel.currentPage);
   let s = JU(J3());
-  let o = !!q5()?.template;
+  let o = !!selectCurrentFile()?.template;
   let l = _$$aV();
   let d = !!_$$f("seen_custom_template_publish_nudge");
   let c = _$$f("figjam_editor_onboarded")?.updatedAt?.getTime();
@@ -1115,7 +1115,7 @@ function tR(e) {
 }
 function tD() {
   let e = getUserId();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = useSelector(e => e.mirror.appModel.currentPage);
   let a = Fk((e, t) => zC(e, t), i);
   let o = useSelector(e => !zP(e.mirror.appModel.currentTool));
@@ -1157,7 +1157,7 @@ function tV({
   dismissModal: e
 }) {
   let t = useDispatch();
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let a = useSelector(e => e.user?.email_validated_at);
   let s = useSelector(e => i ? e.loadingState[_$$Q2.loadingKeyForPayload({
     file_key: i
@@ -1220,7 +1220,7 @@ function tW() {
     overlay: JGK,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
-  let t = useAtomWithSubscription(yV);
+  let t = useAtomWithSubscription(openFileAtom);
   let i = t?.isTryFile;
   let a = _$$s3();
   let [o, l] = useState(!1);
@@ -1257,7 +1257,7 @@ function tQ() {
     overlay: XAb,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
-  let l = useAtomWithSubscription(yV);
+  let l = useAtomWithSubscription(openFileAtom);
   let d = l?.isTryFile;
   let c = _$$s3();
   let u = QL(_$$ao.key) === _$$ao.value;
@@ -1595,7 +1595,7 @@ function iw() {
   let l = useAtomWithSubscription(pQ);
   let d = useAtomWithSubscription(_$$t2);
   let c = jO();
-  let u = q5()?.teamId == null;
+  let u = selectCurrentFile()?.teamId == null;
   let {
     isShowing,
     show,
@@ -1935,9 +1935,9 @@ function ra({
 }) {
   let t = _$$aV();
   let i = lg();
-  let r = q5();
+  let r = selectCurrentFile();
   let a = useAtomWithSubscription(_$$mp);
-  let o = Rs(GoogleClassroomIntegrationView, {
+  let o = useSubscription(GoogleClassroomIntegrationView, {
     currentOrgId: r?.parentOrgId || null
   });
   return useMemo(() => resourceUtils.all([a, o]).transform(r => {
@@ -2051,7 +2051,7 @@ function rg() {
     complete: i
   }) {
     let n = useDispatch();
-    let a = q5();
+    let a = selectCurrentFile();
     return [jsx(ro, {
       isShowing: e,
       onPrimaryCtaClick: () => {
@@ -2143,7 +2143,7 @@ function rH({
   onClickPrimaryCta: e,
   useCase: t
 }) {
-  let i = q5();
+  let i = selectCurrentFile();
   let r = useDispatch();
   let a = _$$O2();
   return {
@@ -2154,7 +2154,7 @@ function rH({
           fileKey: i.key,
           source: _$$nk.expFigJamOnboardingShareVariant
         }
-      })), YQ({
+      })), handleAtomEvent({
         id: "open share modal"
       }), a({
         eventName: "share_board_clicked",
@@ -4167,7 +4167,7 @@ let ni = e => {
   let _ = e.onHideModal;
   let x = useCallback(() => {
     _();
-    YQ({
+    handleAtomEvent({
       id: Lz
     });
     a(_$$b({
@@ -4233,7 +4233,7 @@ let ni = e => {
     setHoveredUseCase: l,
     onClickCloseButton: () => {
       e.onHideModal();
-      YQ({
+      handleAtomEvent({
         id: Lz
       });
       t(_$$tX2.COMPLETED);
@@ -4334,7 +4334,7 @@ let nn = _$$n2(({
           i(VisualBellActions.dequeue({
             matchType: nt
           }));
-          YQ({
+          handleAtomEvent({
             id: a
           });
           i(_$$b({
@@ -4393,7 +4393,7 @@ function na(e) {
   }
   (function (e) {
     let t = _$$O2();
-    let i = ZC(e);
+    let i = useLatestRef(e);
     useEffect(() => {
       if (!i) {
         t({
@@ -4805,7 +4805,7 @@ q3.SELF_CONTAINED;
 let nm = "figjam_unified_onboarding_product";
 let nf = "figjam_unified_onboarding_pz";
 function ng(e) {
-  YQ({
+  handleAtomEvent({
     id: e === jg.PRODUCT_THEN_PZ ? nm : nf
   });
 }
@@ -4823,10 +4823,10 @@ function nx() {
   });
   let l = r_(useCallback(() => {
     complete();
-    e === jg.PZ_THEN_PRODUCT && YQ({
+    e === jg.PZ_THEN_PRODUCT && handleAtomEvent({
       id: nm
     });
-    e === jg.PRODUCT_THEN_PZ && YQ({
+    e === jg.PRODUCT_THEN_PZ && handleAtomEvent({
       id: rf
     });
   }, [complete, e]));
@@ -4857,10 +4857,10 @@ function ny() {
     show();
   });
   useEffect(() => {
-    t === _$$tX2.COMPLETED && e === jg.PRODUCT_THEN_PZ && YQ({
+    t === _$$tX2.COMPLETED && e === jg.PRODUCT_THEN_PZ && handleAtomEvent({
       id: nf
     });
-    t === _$$tX2.COMPLETED && e === jg.PZ_THEN_PRODUCT && YQ({
+    t === _$$tX2.COMPLETED && e === jg.PZ_THEN_PRODUCT && handleAtomEvent({
       id: rf
     });
   }, [t, e]);
@@ -4949,8 +4949,8 @@ function nM({
   return !!(e && e.trackTags?.isTemplate && e.editorType === FFileType.WHITEBOARD);
 }
 function nP(e, t) {
-  setSentryTag("type", e);
-  setSentryTag("source", t);
+  setTagGlobal("type", e);
+  setTagGlobal("source", t);
   captureMessage("FigJam onboarding - Failed to load starter files; we did not render open tutorial overlay");
 }
 function nF(e) {
@@ -4990,7 +4990,7 @@ function nF(e) {
 }
 function nB() {
   let e = useDispatch();
-  let t = MY();
+  let t = useFullscreenViewFile();
   let {
     show,
     uniqueId,
@@ -5013,7 +5013,7 @@ function nB() {
       });
     }), r.current) : Promise.resolve(a.current);
   }(UserForRcs, {});
-  let c = useAtomWithSubscription(yV);
+  let c = useAtomWithSubscription(openFileAtom);
   let u = Td();
   let m = !nM({
     openFile: c
@@ -5100,7 +5100,7 @@ function nz({
   });
 }
 let nV = (e, t) => {
-  let i = MY();
+  let i = useFullscreenViewFile();
   let r = Xr(Am);
   let a = Xr(_$$w5);
   let o = useAtomWithSubscription(zo);
@@ -6846,7 +6846,7 @@ function a0({
   let t = useSelector(e => e.modalShown);
   let i = useRef(t);
   useEffect(() => {
-    !t && i.current && (e(), YQ({
+    !t && i.current && (e(), handleAtomEvent({
       id: P7
     }));
   }, [e, t]);
@@ -7037,7 +7037,7 @@ let si = [{
 let sr = registerModal(function ({
   onDismiss: e
 }) {
-  let t = useAtomWithSubscription(yV);
+  let t = useAtomWithSubscription(openFileAtom);
   let i = useDispatch();
   return jsxs(yX, {
     autoFocusCta: !1,
@@ -7109,8 +7109,8 @@ let sr = registerModal(function ({
   });
 }, "OssSalesUpsellModal");
 function sn() {
-  let e = useAtomWithSubscription(As);
-  let t = useAtomWithSubscription(ze);
+  let e = useAtomWithSubscription(openFileTeamIdAtom);
+  let t = useAtomWithSubscription(openFileKeyAtom);
   return e && t ? jsx(sa, {
     teamId: e,
     fileKey: t
@@ -7122,7 +7122,7 @@ function sa({
 }) {
   let i = useDispatch();
   let a = useAtomWithSubscription(M$);
-  let o = Rs(TeamCanAdmin, {
+  let o = useSubscription(TeamCanAdmin, {
     id: e
   });
   let l = _$$e({
@@ -7314,7 +7314,7 @@ function sC() {
     complete: i
   }) {
     let n = useDispatch();
-    let a = q5();
+    let a = selectCurrentFile();
     return [jsx(sb, {
       onPrimaryCtaClick: () => {
         if (!a) {
@@ -7659,7 +7659,7 @@ function sJ({
 function sq(e) {
   let [t, i] = useState(!0);
   let a = useDispatch();
-  let o = useAtomWithSubscription(yV);
+  let o = useAtomWithSubscription(openFileAtom);
   useEffect(() => {
     setTimeout(() => i(!1), 1e3);
   });
@@ -7767,7 +7767,7 @@ function s4() {
     null === o && c.show({
       canShow: (e, t, r) => e && (t || i) && a && !r,
       onShow: () => {
-        YQ({
+        handleAtomEvent({
           id: s0.OnShow
         });
       }
@@ -8191,7 +8191,7 @@ function oH(e) {
     priority: _$$N.SECONDARY_MODAL
   });
   let a = _$$sZ();
-  let o = useAtomWithSubscription(yV);
+  let o = useAtomWithSubscription(openFileAtom);
   let l = useAtomWithSubscription(oK)?.type === jS;
   return (_$$E2(i.uniqueId, [q2], () => {
     a && o && !i.isShowing && !l && i.show();
@@ -8260,7 +8260,7 @@ function o2({
   let o = _$$r2(uM);
   let l = useAtomWithSubscription(o);
   let d = hX(`[data-onboarding-key="${O0}"]`);
-  let c = q5();
+  let c = selectCurrentFile();
   let u = useAtomWithSubscription(Fy);
   let h = _$$aV();
   let m = useAtomWithSubscription(_$$U3({
@@ -8438,7 +8438,7 @@ export let $$le0 = memo(function ({
       o && !e && l(!1);
     }, [o, e, l]);
   })(isDesignEditor);
-  let d = MY();
+  let d = useFullscreenViewFile();
   let c = useAtomWithSubscription(yF);
   let u = _$$I();
   return z4.getIsExtension() || "loaded" !== d.status || IntegrationUtils.isGoogleClassroomIntegration() || c === _$$E4 || c === _$$XC || isDevModeEditor && u ? null : jsxs(Suspense, {
@@ -8476,8 +8476,8 @@ function li({
   } = o9(e);
   let h = _$$tG();
   let m = q8();
-  let f = xo();
-  let g = Oc();
+  let f = useCanUseDevModeDemoFile();
+  let g = useIsSelectedFigmakeFullscreen();
   let _ = function (e) {
     switch (e) {
       case FEditorType.Design:

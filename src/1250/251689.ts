@@ -8,7 +8,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { Tr } from "../1250/158057";
 import { createPortal } from "../vendor/944059";
 import { l as _$$l } from "../905/479687";
@@ -273,7 +273,7 @@ export function $$q0({
   let [g, f] = useState(0);
   let [h, b] = useState(new Set());
   let x = function (e) {
-    let t = X$("useScriptInitOptions").unwrapOr(null);
+    let t = useCurrentPublicPlan("useScriptInitOptions").unwrapOr(null);
     let n = t?.key;
     if (!e || !n) return null;
     let {

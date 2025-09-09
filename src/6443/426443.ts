@@ -26,7 +26,7 @@ import { xM, Lg as _$$Lg, wd, UF } from "../905/403166";
 import { F as _$$F2 } from "../905/241044";
 import B from "../vendor/426804";
 import { E as _$$E } from "../905/508367";
-import { Qt } from "../figma_app/930338";
+import { splitIntoCharacters } from "../figma_app/930338";
 import { Vt, $x } from "../905/780715";
 function K(t) {
   let e;
@@ -418,7 +418,7 @@ function tl(t) {
   let a = convertToRaw(t.getCurrentContent());
   let h = "";
   a.blocks.forEach(t => {
-    let a = Qt(_$$F2(t.text) || "");
+    let a = splitIntoCharacters(_$$F2(t.text) || "");
     ["ordered-list-item", "unordered-list-item"].includes(t.type) ? (t.type !== r && (n && i.push({
       styles: ["ordered-list-item" === r ? "ol" : "ul"],
       children: e
@@ -561,8 +561,8 @@ let th = (t, e, n, i, r, s = "default") => {
       };
       o.push({
         key: Object.keys(i).length,
-        length: Qt(e).length,
-        offset: Qt(l).length
+        length: splitIntoCharacters(e).length,
+        offset: splitIntoCharacters(l).length
       });
       i[Object.keys(i).length] = {
         type: "MENTION",
@@ -575,8 +575,8 @@ let th = (t, e, n, i, r, s = "default") => {
     } else if (t.link && $x(xT(t.link))) {
       o.push({
         key: Object.keys(i).length,
-        length: Qt(h).length,
-        offset: Qt(l).length
+        length: splitIntoCharacters(h).length,
+        offset: splitIntoCharacters(l).length
       });
       i[Object.keys(i).length] = {
         type: "HYPERLINK",
@@ -593,8 +593,8 @@ let th = (t, e, n, i, r, s = "default") => {
           let e = D[t];
           a.push({
             style: e,
-            length: Qt(h).length,
-            offset: Qt(l).length
+            length: splitIntoCharacters(h).length,
+            offset: splitIntoCharacters(l).length
           });
         }
       });else if (_$$Lg(h)) {
@@ -609,8 +609,8 @@ let th = (t, e, n, i, r, s = "default") => {
             s += e.meta;
           }), o.push({
             key: Object.keys(i).length,
-            length: Qt(t).length,
-            offset: Qt(l).length + e
+            length: splitIntoCharacters(t).length,
+            offset: splitIntoCharacters(l).length + e
           }), i[Object.keys(i).length] = {
             type: "EMOJI",
             mutability: "IMMUTABLE",
@@ -620,7 +620,7 @@ let th = (t, e, n, i, r, s = "default") => {
             }
           });
           n += t.length ? t : r;
-          e += Qt(t.length ? t : r).length;
+          e += splitIntoCharacters(t.length ? t : r).length;
         }
         h = n;
       }

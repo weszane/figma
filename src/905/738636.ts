@@ -25,7 +25,7 @@ import { UpsellModalType } from "../905/165519";
 import { B } from "../905/18613";
 import { vL, Bi } from "../905/652992";
 import { f6, ai } from "../figma_app/915202";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { t as _$$t } from "../figma_app/32680";
 import { DV } from "../905/739964";
 import { W } from "../905/442612";
@@ -82,7 +82,7 @@ let $$j0 = createOptimistThunk((e, {
       data: {
         team: s,
         resource: n !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
-        action: ZN.CREATE_FILE,
+        action: fileActionEnum.CREATE_FILE,
         editorType: n,
         currentPlan: _$$F.Plan.STARTER,
         upsellPlan: _$$F.Plan.PRO,

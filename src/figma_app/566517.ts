@@ -13,7 +13,7 @@ import { XHR } from "../905/910117";
 import { Eo } from "../figma_app/80990";
 import { Ay as _$$Ay } from "../figma_app/432652";
 import { QZ } from "../figma_app/62612";
-import { _S } from "../figma_app/516028";
+import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { U2 } from "../figma_app/193867";
 import { Gh } from "../figma_app/707567";
 import { n as _$$n } from "../905/347702";
@@ -331,7 +331,7 @@ async function G(e) {
     return;
   }
   let t = getSingletonSceneGraph();
-  let r = atomStoreManager.get(_S);
+  let r = atomStoreManager.get(openFileLibraryKeyAtom);
   for (let n of e.nodeIds) {
     let i = t.get(n);
     if (!i || "INSTANCE" !== i.type) continue;

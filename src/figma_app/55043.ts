@@ -2,21 +2,21 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { analyticsEventManager } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { u as _$$u } from "../905/918498";
 import { b } from "../905/723768";
 import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { PlanCanConnectView } from "../figma_app/43951";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
 export function $$E1(e, t) {
   let [r, a] = useState(!1);
   let o = useDispatch();
-  let l = T5("useConnectedProjectsStarterTeamPaywall").unwrapOr(null);
+  let l = useCurrentPrivilegedPlan("useConnectedProjectsStarterTeamPaywall").unwrapOr(null);
   return useCallback(() => {
     if (!l || r) return null;
     l.tier === FPlanNameType.STARTER && l.key.type === FOrganizationLevelType.TEAM ? (analyticsEventManager.trackDefinedEvent("workflow.connected_project_invite_starter_team_paywall_hit", {
@@ -42,7 +42,7 @@ export function $$E1(e, t) {
 }
 export function $$y0(e, t, r) {
   let u = useDispatch();
-  let h = Rs(PlanCanConnectView, {
+  let h = useSubscription(PlanCanConnectView, {
     planParentId: e?.parentId || "",
     planType: e?.type || FOrganizationLevelType.TEAM
   }, {

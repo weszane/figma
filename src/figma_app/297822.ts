@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { v5 } from "../figma_app/314264";
 import { wg } from "../figma_app/101956";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { PE } from "../figma_app/251115";
 import { h8 } from "../figma_app/144974";
 import { Jc, Sn } from "../905/946805";
@@ -19,7 +19,7 @@ export function $$y10() {
   globalPerfTimer.start(gc);
 }
 export function $$b0() {
-  let e = useAtomWithSubscription(ze) || "";
+  let e = useAtomWithSubscription(openFileKeyAtom) || "";
   let t = useSelector(e => e.selectedView);
   let r = useAtomWithSubscription(rE);
   let a = r?.source || "";

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription, atomStoreManager, atom } from "../figma_app/27355";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { analyticsEventManager } from "../905/449184";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { w0 } from "../figma_app/594947";
@@ -15,7 +15,7 @@ export let $$m4 = M4.Query({
 });
 export function $$g2(e, t) {
   if ("loaded" === e.status) {
-    let r = e.data.libraryPresetSubscriptionsV2?.find(e => oA(e.libraryKey) === t);
+    let r = e.data.libraryPresetSubscriptionsV2?.find(e => getResourceDataOrFallback(e.libraryKey) === t);
     if (r) return r.partner_type ?? void 0;
   }
 }

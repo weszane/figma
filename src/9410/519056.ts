@@ -5,30 +5,30 @@ import { I as _$$I } from "../3276/969941";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { getInitialOptions } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { BrowserInfo } from "../figma_app/778880";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { D9 } from "../1250/182479";
 import { DG } from "../9410/60600";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { l7 } from "../figma_app/88239";
 import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { $z } from "../figma_app/831799";
 import { xf } from "../3276/13008";
 import { my } from "../figma_app/976749";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { nk } from "../figma_app/2023";
 import { aV } from "../figma_app/722362";
 import { m0 } from "../figma_app/546509";
-import { Cq } from "../figma_app/516028";
+import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { TeamCanEdit } from "../figma_app/43951";
 import { XX } from "../figma_app/345997";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { wH, KI } from "../figma_app/680166";
 import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
@@ -42,7 +42,7 @@ import { g_ } from "../905/646788";
 import { p as _$$p } from "../3276/162708";
 import { v4 } from "../figma_app/598952";
 import { r as _$$r } from "../3276/224454";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { e as _$$e } from "../figma_app/831857";
 import { $ as _$$$ } from "../3276/30079";
 import { r as _$$r2 } from "../3276/233873";
@@ -58,7 +58,7 @@ export function $$et0({
 }) {
   let o = l7();
   let l = my();
-  let f = wR(e.editorType);
+  let f = getProductAccessTypeOrDefault(e.editorType);
   let {
     hasPendingRequest,
     getUpgradePathway,
@@ -75,7 +75,7 @@ export function $$et0({
   let eo = e.isTryFile;
   let el = aV();
   let ed = useDispatch();
-  let ec = Cq({
+  let ec = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   })?.url;
   let [eu, ep] = useState(null);
@@ -93,7 +93,7 @@ export function $$et0({
   let ex = t?.id === e.creatorId;
   let ey = vt(e.team?.id);
   let eb = jn();
-  let eC = Rs(TeamCanEdit, {
+  let eC = useSubscription(TeamCanEdit, {
     id: e.team?.id || ""
   }, {
     enabled: !!e.team
@@ -101,11 +101,11 @@ export function $$et0({
   let ev = "loaded" === eC.status && !!eC.data.team?.hasPermission;
   let eE = !!e.team && ey || !!e.team && eb;
   let eT = e.editorType === FFileType.FIGMAKE && !en;
-  let ew = X$("ShareButton").unwrapOr(null);
+  let ew = useCurrentPublicPlan("ShareButton").unwrapOr(null);
   let eS = ew?.tier === FPlanNameType.PRO;
-  let ej = xo();
+  let ej = useCanUseDevModeDemoFile();
   xf(e);
-  let eI = Oc();
+  let eI = useIsSelectedFigmakeFullscreen();
   e.canView && e.canEdit;
   let ek = useCallback(() => {
     if (!el && !Z && !ee && !et && !er && !eT && !eh && e) {
@@ -122,7 +122,7 @@ export function $$et0({
           }
         }));
       } else {
-        YQ({
+        handleAtomEvent({
           id: "multiplayer_toolbar_share_button"
         });
         ed(showModalHandler({

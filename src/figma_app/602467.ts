@@ -10,7 +10,7 @@ import { T as _$$T } from "../905/2124";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription, AY } from "../figma_app/27355";
 import h from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { Us } from "../figma_app/637027";
@@ -433,7 +433,7 @@ let es = memo(function ({
   let {
     state
   } = wj(JT.SLIDES_REWRITE_TEXT);
-  let O = ZC(state);
+  let O = useLatestRef(state);
   useEffect(() => {
     state === qy.INITIAL ? C(!1) : O === qy.RUNNING && state !== qy.RUNNING && C(!0);
   }, [O, state]);

@@ -82,7 +82,7 @@ import { V as _$$V4 } from '../905/453354';
 import { e as _$$e4 } from '../905/462154';
 import { L0, MQ } from '../905/479155';
 import { V as _$$V } from '../905/480825';
-import { Rh } from '../905/485103';
+import { sendMetric } from '../905/485103';
 import { as as _$$as, _M, Dl, hm, Q0, SX, zQ } from '../905/487011';
 import { $J as _$$$J } from '../905/491152';
 import { J as _$$J2 } from '../905/494216';
@@ -236,14 +236,14 @@ import { Zh } from '../figma_app/2590';
 import { r as _$$r2 } from '../figma_app/6042';
 import { Dm } from '../figma_app/8833';
 import { ei as _$$ei } from '../figma_app/9054';
-import { Eh } from '../figma_app/12796';
+import { canPerformAction } from '../figma_app/12796';
 import { O as _$$O4, y as _$$y3 } from '../figma_app/13082';
 // import { ImageToolsBindings } from '../figma_app/13528'
 import { lg as _$$lg2, lH as _$$lH, Dk } from '../figma_app/18582';
 import { atom, atomStoreManager, AY, createLocalStorageAtom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { Pt as _$$Pt2, NV, OX, qu, x2, xZ } from '../figma_app/33586';
 import { ms } from '../figma_app/38430';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { bD } from '../figma_app/45218';
 import { YJ } from '../figma_app/50224';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
@@ -308,14 +308,14 @@ import { g as _$$g5, o as _$$o5 } from '../figma_app/449363';
 import { a as _$$a5 } from '../figma_app/453187';
 import { fullscreenValue } from '../figma_app/455680';
 import { dZ, q8 } from '../figma_app/459490';
-import { D6, T5, X$ } from '../figma_app/465071';
+import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { rH as _$$rH } from '../figma_app/467741';
 import { iR as _$$iR, _i, yZ } from '../figma_app/476572';
 import { s as _$$s5 } from '../figma_app/478542';
 import { nearlyEqual } from '../figma_app/492908';
 import { YT } from '../figma_app/506549';
-import { tB as _$$tB, tS as _$$tS, Hu, q5, ze } from '../figma_app/516028';
+import { selectOpenFile, useCurrentFileKey, openFileTeamAtom, selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
 import { s as _$$s } from '../figma_app/523506';
 import { oz as _$$oz, c0, fu } from '../figma_app/538006';
 import { BY as _$$BY, nF as _$$nF, rO as _$$rO, jR, k5, Mz, uP } from '../figma_app/541950';
@@ -325,7 +325,7 @@ import { S as _$$S3 } from '../figma_app/552746';
 import { Qi } from '../figma_app/559491';
 import { B as _$$B3, t as _$$t2 } from '../figma_app/560453';
 import { Ro } from '../figma_app/564095';
-import { IT } from '../figma_app/566371';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { xF } from '../figma_app/566517';
 import { TW } from '../figma_app/567902';
 import { w as _$$w } from '../figma_app/588564';
@@ -367,7 +367,7 @@ import { AC, G8 } from '../figma_app/777551';
 import { c4 } from '../figma_app/805925';
 import { oG as _$$oG, _g, xm } from '../figma_app/826288';
 import { I as _$$I } from '../figma_app/827540';
-import { to as _$$to2 } from '../figma_app/828186';
+import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { ks, Vm } from '../figma_app/838407';
 import { $1, ll as _$$ll, AR, cW, f6, FG, q3, QZ, U6, V2, wW, ZT } from '../figma_app/844435';
 import { lu as _$$lu } from '../figma_app/846140';
@@ -384,7 +384,7 @@ import { PN } from '../figma_app/897289';
 import { f6 as _$$f2 } from '../figma_app/915202';
 import { D as _$$D2, p as _$$p4 } from '../figma_app/930185';
 import { bL, C5, GX, jb, JT, Nf, Oy, vA, wj, ZM } from '../figma_app/930214';
-import { $M, EJ } from '../figma_app/930338';
+import { formatNumber, truncate } from '../figma_app/930338';
 import { Ay as _$$Ay3 } from '../figma_app/948389';
 import { T as _$$T6 } from '../figma_app/949105';
 import { mD } from '../figma_app/955528';
@@ -598,7 +598,7 @@ let t_ = _$$z.object({
 async function tx(e) {
   if (e.type !== 'function') throw new Error(`Unexpected tool_call type:${e.type}`);
   let t = JSON.parse(e.$$function.$$arguments);
-  let i = atomStoreManager.get(ze);
+  let i = atomStoreManager.get(openFileKeyAtom);
   if (!i) throw new Error('No file key found');
   switch (e.$$function.name) {
     case 'autocomplete':
@@ -755,7 +755,7 @@ async function tx(e) {
   }
 }
 async function ty(e, t) {
-  let i = atomStoreManager.get(ze);
+  let i = atomStoreManager.get(openFileKeyAtom);
   let r = _$$o2();
   if (!r) throw new Error('Cannot run plugin while logged out');
   if (!i) throw new Error('No file key found');
@@ -818,7 +818,7 @@ async function ty(e, t) {
 }
 async function tb(e) {
   let t = debugState.getState();
-  let i = _$$tB(t);
+  let i = selectOpenFile(t);
   let r = vx(t);
   if (!i || r == null) throw new Error('No open file or file version found');
   let n = 1;
@@ -838,7 +838,7 @@ async function tb(e) {
     query: e,
     assetTypeOption: a,
     isKnownLibrary: e => !0,
-    openFile: _$$tB(t),
+    openFile: selectOpenFile(t),
     selectedView: _$$h4(t),
     inDesignEditor: s,
     fileVersion: r,
@@ -1291,7 +1291,7 @@ function t8({
 }
 function t9(e) {
   let t = useRef(null);
-  let i = useSelector(_$$tB);
+  let i = useSelector(selectOpenFile);
   try {
     let r = e.content;
     let a = typeof r == 'string' ? JSON.parse(r) : r;
@@ -2638,7 +2638,7 @@ function am({
     clientLifecycleId: void 0
   });
   let i = t.clientLifecycleId;
-  let r = _$$tS();
+  let r = useCurrentFileKey();
   let s = useCallback(() => {
     trackEventAnalytics('First Draft: Error', {
       file_key: r,
@@ -2669,7 +2669,7 @@ function af(e) {
   let t = e.aiTrackingContext;
   let i = t.clientLifecycleId;
   let [r, l] = useState('');
-  let c = _$$tS();
+  let c = useCurrentFileKey();
   let u = _$$eY();
   let {
     allUsableKitEntries
@@ -2975,7 +2975,7 @@ function af(e) {
             logWarning('makeChanges', 'Unsupported action', {
               action: value.action.type
             });
-            Rh('first_draft.client.make_changes.unsupported_action', {
+            sendMetric('first_draft.client.make_changes.unsupported_action', {
               action: value.action.type
             });
             E.push(Promise.reject(new G1('make_changes_unsupported', {})));
@@ -3008,7 +3008,7 @@ function af(e) {
           let e = await Promise.allSettled(E);
           if (!E.length) {
             logWarning('makeChanges', 'No actions were applied from the prompt response');
-            Rh('first_draft.client.make_changes.no_actions_applied');
+            sendMetric('first_draft.client.make_changes.no_actions_applied');
             return new G1('make_changes_unsupported', {});
           }
           if (e.every(e => e.status === 'rejected')) {
@@ -3218,7 +3218,7 @@ function ag({
   let {
     close
   } = cq();
-  let j = _$$tS();
+  let j = useCurrentFileKey();
   let I = useMemo(() => {
     let e;
     let t;
@@ -4641,7 +4641,7 @@ function sc({
     u.current?.focus();
   }, [u]);
   let [_, x] = useAtomValueAndSetter(sd);
-  let y = T5('FirstDraftKitSelection').unwrapOr(null);
+  let y = useCurrentPrivilegedPlan('FirstDraftKitSelection').unwrapOr(null);
   let b = y?.name || getI18nString('first_draft.kits.org_libraries.fallback');
   let C = b && b.length > 20;
   let v = getFeatureFlags().first_draft_direct_gen && allUsableKitEntries.some(e => e.metadata.direct_generation);
@@ -4711,7 +4711,7 @@ function sc({
                 })
               },
               children: renderI18nText('first_draft.kits.org_libraries', {
-                orgName: EJ(b, 20)
+                orgName: truncate(b, 20)
               })
             }), jsx(_$$oz, {
               tabId: sl.ALL,
@@ -5353,7 +5353,7 @@ let sE = async ({
   };
 };
 function sT() {
-  let e = _$$tS();
+  let e = useCurrentFileKey();
   let {
     aiTrackingContext
   } = _$$wj(_$$JT.FIRST_DRAFT);
@@ -5399,7 +5399,7 @@ function sw({
   } = t;
   let u = aiTrackingContext.clientLifecycleId;
   let h = _$$eY();
-  let m = _$$tS();
+  let m = useCurrentFileKey();
   let f = useRef(null);
   let g = sv(u);
   let [_, x] = useAtomValueAndSetter(g);
@@ -7172,7 +7172,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(() => {
-        let e = _$$to2();
+        let e = useIsSelectedViewFullscreenCooper();
         let {
           close
         } = cq();
@@ -7664,11 +7664,11 @@ function ov() {
     let e = function () {
       let e = useMemo(() => [], []);
       let t = _$$R5();
-      let i = D6('useAIDisabledReasons').unwrapOr(null);
-      let r = X$('useAIDisabledReasons').unwrapOr(null);
-      let n = T5('useAIDisabledReasons').unwrapOr(null);
+      let i = useCurrentPlanUser('useAIDisabledReasons').unwrapOr(null);
+      let r = useCurrentPublicPlan('useAIDisabledReasons').unwrapOr(null);
+      let n = useCurrentPrivilegedPlan('useAIDisabledReasons').unwrapOr(null);
       let s = PE();
-      let o = q5();
+      let o = selectCurrentFile();
       let l = i?.key.type === FUserTypeClassification.ORG_USER && i?.permission === FMemberRoleType.GUEST;
       let d = !n?.aiFeaturesEnabled;
       let c = !!(r && r.tier !== FPlanNameType.STARTER);
@@ -7730,7 +7730,7 @@ function ov() {
   }();
   let r = useDispatch();
   let o = yy();
-  let l = useAtomWithSubscription(Hu);
+  let l = useAtomWithSubscription(openFileTeamAtom);
   let d = getI18nString('qa.no_ai.title');
   switch (reason) {
     case oy.ROLLING_OUT:
@@ -8272,7 +8272,7 @@ function oB({
     }();
     let l = function () {
       let e = Zr('send-to-buzz-from-design');
-      let t = useSelector(_$$tB);
+      let t = useSelector(selectOpenFile);
       let i = useSelector(vx);
       let r = _$$eY();
       let o = r.getDirectlySelectedNodes();
@@ -8342,7 +8342,7 @@ function oB({
       items
     } = function (e, t, i) {
       let r = PE();
-      let n = ZC(r);
+      let n = useLatestRef(r);
       let o = function (e, t, i) {
         let r = ig();
         let n = t.map(e);
@@ -8350,7 +8350,7 @@ function oB({
           let e = m0();
           let t = _$$e3();
           let i = ZO();
-          let r = q5()?.canEdit;
+          let r = selectCurrentFile()?.canEdit;
           let n = PE();
           return t ? 'VARIABLES_TABLE' : i ? 'COMPONENT_BROWSER' : e ? 'DEV' : !1 === r ? 'DESIGN_VIEWER' : r && n ? 'DESIGN_EDITOR_AI' : r && !n ? 'DESIGN_EDITOR_NO_AI' : 'NONE';
         }();
@@ -8550,14 +8550,14 @@ function oB({
     let m = useMemo(() => i === '' ? [] : t.search(e, i).slice(0, 25), [e, t, i]);
     let f = function (e, t) {
       let i = my() === FEditorType.Design;
-      let r = q5();
+      let r = selectCurrentFile();
       let o = _$$V4();
       let l = _$$s4();
       let d = !!getFeatureFlags().prt_legacy_v3;
       let [u, p] = useAtomValueAndSetter(ta);
-      let h = useSelector(Eh);
+      let h = useSelector(canPerformAction);
       let m = _$$eH();
-      let f = T5('useSearchFallbacks').unwrapOr(null);
+      let f = useCurrentPrivilegedPlan('useSearchFallbacks').unwrapOr(null);
       let g = f?.name || r?.name;
       return useMemo(() => {
         if (e === '') return [];
@@ -9674,7 +9674,7 @@ function l8({
         className: _$$s3.ml2.$,
         children: getI18nString('qa.extensions.num_users', {
           numUsers: a,
-          numUsersStr: $M(a)
+          numUsersStr: formatNumber(a)
         })
       }), jsx(l9, {}), jsx(_$$B2, {
         svg: _$$A16,
@@ -9684,7 +9684,7 @@ function l8({
         }).$
       }), jsx('div', {
         className: _$$s3.ml2.$,
-        children: $M(s)
+        children: formatNumber(s)
       }), l && jsx(l9, {}), o]
     })
   });
@@ -10134,7 +10134,7 @@ function dv({
         status: n,
         data: a,
         errors: s
-      }] = IT(getFeatureFlags().ext_extended_plugin_editor_types ? db({
+      }] = setupResourceAtomHandler(getFeatureFlags().ext_extended_plugin_editor_types ? db({
         query: e.trim(),
         resourceEditorType: _$$S2(t),
         orgId: i ? r : void 0,
@@ -10414,7 +10414,7 @@ function dI() {
   } = useAtomWithSubscription(P_);
   let g = useDispatch();
   useEffect(() => g(_$$aq()), [g]);
-  let _ = q5();
+  let _ = selectCurrentFile();
   let x = !!(defaultViewTabsAvailable && _?.canEdit);
   let y = _$$s4();
   let b = _$$V4();
@@ -10465,7 +10465,7 @@ function dI() {
   }, [i, el, b, v, y]);
   let ec = useRef(null);
   let eu = _$$U3(b);
-  let ep = useSelector(Eh);
+  let ep = useSelector(canPerformAction);
   let eh = QZ();
   useEffect(() => {
     eh || l !== BY.ALL && l !== BY.WIDGETS || d(BY.PLUGINS);

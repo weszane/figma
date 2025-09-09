@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Gu } from '../905/513035';
+import { ViewAccessTypeEnum } from '../905/513035';
 import { k as _$$k } from '../4452/48052';
 import { D3 } from '../4452/846771';
 import { isNullish } from '../figma_app/95419';
 import { Xf } from '../figma_app/153916';
-import { OL } from '../figma_app/421473';
+import { FOrganizationLevelType } from '../figma_app/421473';
 import { un } from '../figma_app/457899';
 import { vr } from '../figma_app/514043';
 import { Fj } from '../figma_app/594947';
@@ -21,7 +21,7 @@ export function $$h0(e, t) {
   } = _$$k(e);
   let f = k();
   let [v, b] = useState();
-  let y = e.key.type === OL.ORG;
+  let y = e.key.type === FOrganizationLevelType.ORG;
   let j = Xf(e.key.parentId, y);
   let I = useSelector(e => e.teamBilling);
   let E = y ? j.data?.currency : I.summary.currency;
@@ -34,7 +34,7 @@ export function $$h0(e, t) {
     }
     y && s();
   }, [a, y, e?.key.parentId, e?.key.type, t?.userId]);
-  let S = (y ? v?.active_seat_type?.key : t?.currentSeat.billableProductKey) ?? Gu.VIEW;
+  let S = (y ? v?.active_seat_type?.key : t?.currentSeat.billableProductKey) ?? ViewAccessTypeEnum.VIEW;
   let T = y ? void 0 : t?.currentSeat.billingInterval;
   let A = un({
     planKey: e.key,

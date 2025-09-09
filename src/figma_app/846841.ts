@@ -17,7 +17,7 @@ import E from "classnames";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -28,9 +28,9 @@ import { hO, cN, vz, G4, G1, Hl, d3 } from "../figma_app/545293";
 import { fi } from "../figma_app/913823";
 import { u as _$$u } from "../905/389684";
 import { g5 } from "../figma_app/178752";
-import { q5, ze } from "../figma_app/516028";
+import { selectCurrentFile, openFileKeyAtom } from "../figma_app/516028";
 import { oh } from "../905/18797";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { C as _$$C } from "../905/758411";
 import { Wv } from "../figma_app/633080";
@@ -350,9 +350,9 @@ export function $$eR6({
     eF.current?.focus();
     _$$k3();
   }, [ti, e, tc, tl, tb, th, _cancelDebouncedFragmentTextSearch, er, Q, debouncedAssetSearch, flushDebouncedAssetSearch, debouncedFragmentTextSearch, flushDebouncedFragmentTextSearch, cancelDebouncedFragmentTextSearch, cancelDebouncedAssetSearch, _debouncedFragmentTextSearch, _flushDebouncedFragmentTextSearch]);
-  let tv = T5("ActionsSearchResultsView").unwrapOr(null);
+  let tv = useCurrentPrivilegedPlan("ActionsSearchResultsView").unwrapOr(null);
   let tA = tv?.name;
-  let tx = q5();
+  let tx = selectCurrentFile();
   let tN = tA || tx?.name;
   let tC = tN && tN.length > 20;
   let tw = jsxs(fu, {
@@ -366,7 +366,7 @@ export function $$eR6({
         "data-tooltip": tN,
         "data-tooltip-type": Ib.TEXT
       } : void 0,
-      children: tN && EJ(tN, 20)
+      children: tN && truncate(tN, 20)
     }), jsx(oz, {
       tabId: Qx.COMMUNITY,
       onAction: () => tS(Qx.COMMUNITY),
@@ -655,7 +655,7 @@ export function $$eR6({
 }
 export function $$eL4(e, t, r, n, i, a) {
   let s = atomStoreManager.get(dd);
-  let o = atomStoreManager.get(ze);
+  let o = atomStoreManager.get(openFileKeyAtom);
   if (!s || !o) return;
   let {
     currentSearch

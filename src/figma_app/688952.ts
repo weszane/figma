@@ -14,7 +14,7 @@ import { F as _$$F } from "../905/422355";
 import { E as _$$E } from "../905/984674";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 export let $$y0 = registerModal(function (e) {
   let t = hS(e);
   let [r, y] = useState(!1);
@@ -25,7 +25,7 @@ export let $$y0 = registerModal(function (e) {
   let [C, w] = useState(null);
   let [O, R] = useState(!1);
   let [L, P] = useState(!1);
-  let D = atomStoreManager.get(ze);
+  let D = atomStoreManager.get(openFileKeyAtom);
   let k = D ? _$$F(D) : "";
   let M = async () => {
     try {
@@ -47,7 +47,7 @@ export let $$y0 = registerModal(function (e) {
         A("No code files found to upload");
         return;
       }
-      if (!atomStoreManager.get(ze)) {
+      if (!atomStoreManager.get(openFileKeyAtom)) {
         A("No open file key found");
         return;
       }
@@ -108,7 +108,7 @@ export let $$y0 = registerModal(function (e) {
       A(null);
       N(null);
       let e = getSingletonSceneGraph().getInternalCanvas();
-      if (!atomStoreManager.get(ze)) {
+      if (!atomStoreManager.get(openFileKeyAtom)) {
         A("No open file key found");
         return;
       }

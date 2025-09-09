@@ -113,7 +113,7 @@ import { k as _$$k2 } from "../905/582200";
 import { Vi, GI } from "../905/125333";
 import { fullscreenValue } from "../figma_app/455680";
 import { b as _$$b4 } from "../figma_app/755529";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
 import { Xd, W as _$$W2, zr } from "../figma_app/359164";
 import { hl, Vb, i as _$$i2, xI, CL } from "../figma_app/722913";
@@ -549,7 +549,7 @@ function tM(e) {
     activeCanvasEditModeType,
     currentSelectedProperty
   } = s6("currentSelectedGradientStop", "currentTool", "activeCanvasEditModeType", "currentSelectedProperty");
-  let x = q5();
+  let x = selectCurrentFile();
   let v = KH();
   let y = useSelector(e => e.library);
   let b = useSelector(e => e.pickerInStyleCreationShown);

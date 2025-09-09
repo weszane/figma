@@ -16,7 +16,7 @@ import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl, isDevEnvironment, isGovCluster, isLocalCluster, isStagingCluster } from "../figma_app/169182";
 import { vN, xH } from "../905/63728";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { RecordingPureComponent, setupPlayback, generateRecordingKey, handleMouseEvent } from "../figma_app/878298";
 import { I7 } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
@@ -34,7 +34,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { serializeQuery } from "../905/634134";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { FPlanNameType } from "../figma_app/191312";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { k as _$$k2 } from "../905/93362";
 import { F as _$$F } from "../5132/756360";
 import { S as _$$S } from "../figma_app/420927";
@@ -46,7 +46,7 @@ import { b as _$$b2 } from "../905/985254";
 import { Fn } from "../figma_app/976749";
 import { hx } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { UserWithTeams } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
@@ -72,7 +72,7 @@ import { jH, cl, bb } from "../figma_app/926950";
 import { qf } from "../905/817095";
 import { g as _$$g2 } from "../905/687265";
 import { $n } from "../905/521428";
-import { aI } from "../figma_app/552876";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { P as _$$P } from "../vendor/348225";
 import { Z1 } from "../905/401885";
 import { h4, WB } from "../figma_app/625596";
@@ -171,7 +171,7 @@ function q({
   onClose: t
 }) {
   let r = selectCurrentUser();
-  let a = X$("SupportChatbot");
+  let a = useCurrentPublicPlan("SupportChatbot");
   let s = a.unwrapOr(null)?.tier || null;
   let {
     support_chat_origin,
@@ -741,7 +741,7 @@ function tc({
   let s = useAtomWithSubscription(tl);
   let o = useAtomWithSubscription(td);
   let l = useDispatch();
-  let d = q5();
+  let d = selectCurrentFile();
   let c = useAtomWithSubscription(_$$P2);
   let {
     flagNumberVal
@@ -2704,11 +2704,11 @@ export function $$t60(e) {
   } = I7("exp_in_product_help");
   let u = function () {
     let e = useSelector(e => getPermissionsStateMemoized(e));
-    let t = q5();
+    let t = selectCurrentFile();
     let r = t?.teamId;
     let n = e.user?.id;
     let s = !useSelector(e => !!(t && e.figFileDuplicatedFromHubFile[t.key]));
-    let o = Rs(UserWithTeams, {});
+    let o = useSubscription(UserWithTeams, {});
     let l = function () {
       let e = _$$f("dismissed_move_drafts_nudge");
       let t = _$$f("ran_move_drafts_nudge_v2_num_3");
@@ -2743,7 +2743,7 @@ export function $$t60(e) {
   let m = Xr(aG);
   let g = Fn();
   let f = useSelector(e => e.userFlags);
-  let y = q5();
+  let y = selectCurrentFile();
   let I = useRef(null);
   let v = Xr(_$$H2);
   return jsxs(Fragment, {
@@ -3127,7 +3127,7 @@ let t7 = class e extends RecordingPureComponent {
       href: "https://forum.figma.com/share-your-feedback-26",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_forum_feedback"),
       label: renderI18nText("help_widget.menu.submit_feedback"),
-      shouldShow: () => !isGovCluster() && !(this.props.editorType === FEditorType.Figmake && aI())
+      shouldShow: () => !isGovCluster() && !(this.props.editorType === FEditorType.Figmake && isFigmakeSitesEnabled())
     }, {
       type: "option",
       target: "_blank",

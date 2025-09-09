@@ -9,7 +9,7 @@ import { Cn } from "../905/862913";
 import { t0 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { m3 } from "../figma_app/45218";
-import { G4 } from "../figma_app/707808";
+import { PreviewMode } from "../figma_app/707808";
 import { Ho } from "../figma_app/878651";
 import { Dy } from "../figma_app/165422";
 import { useDispatch, useSelector } from "react-redux";
@@ -386,7 +386,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       let r = -1;
       try {
         r = parseInt(t, 10);
-      } catch (e) { }
+      } catch (e) {}
       r > 0 && (trackEventAnalytics("Hub File Viewer User Input Zoom Set", {
         hubFileId: e.id,
         source: "userInput",
@@ -778,7 +778,7 @@ function ex(e) {
       hubFileId: e.hubFile.id,
       source: "click"
     });
-    r = e.isFullscreen ? G4.DEFAULT : G4.FULLSCREEN;
+    r = e.isFullscreen ? PreviewMode.DEFAULT : PreviewMode.FULLSCREEN;
     c(sW(r));
   }, [c, e.hubFile, e.isFullscreen]);
   let G = useRef(null);
@@ -795,7 +795,7 @@ function ex(e) {
     D && lS.handleMouseMove(e.x, e.y);
   }, [D]);
   let K = useCallback(e => {
-    "Escape" === e && c(sW(G4.DEFAULT));
+    "Escape" === e && c(sW(PreviewMode.DEFAULT));
   }, [c]);
   let Y = useCallback(e => {
     K(e.key);
@@ -1273,7 +1273,7 @@ export class $$eJ0 extends Component {
     this.state = {
       embedLoaded: !1,
       fullscreenTransitionState: t0(this.props.fullscreenState) ? 2 : 0,
-      showFullscreenComments: this.props.fullscreenState === G4.FULLSCREEN_WITH_COMMENTS
+      showFullscreenComments: this.props.fullscreenState === PreviewMode.FULLSCREEN_WITH_COMMENTS
     };
     this.handleFullscreenTransition = (e, t) => {
       if (e !== t) {
@@ -1288,15 +1288,15 @@ export class $$eJ0 extends Component {
               fullscreenTransitionState: r,
               showFullscreenComments: !1
             });
-            t === G4.FULLSCREEN_WITH_COMMENTS && setTimeout(() => {
+            t === PreviewMode.FULLSCREEN_WITH_COMMENTS && setTimeout(() => {
               this.setState({
                 showFullscreenComments: !0
               });
             }, 400);
           }, 10);
-        } else t === G4.FULLSCREEN_WITH_COMMENTS ? this.setState({
+        } else t === PreviewMode.FULLSCREEN_WITH_COMMENTS ? this.setState({
           showFullscreenComments: !0
-        }) : e === G4.FULLSCREEN_WITH_COMMENTS && this.setState({
+        }) : e === PreviewMode.FULLSCREEN_WITH_COMMENTS && this.setState({
           showFullscreenComments: !1
         });
       }
@@ -1378,7 +1378,7 @@ export class $$eJ0 extends Component {
       ref: this.containerRef,
       children: [jsx("div", {
         className: this.isInFullscreen() ? "hub_file_detail_view--modalEmbedBackground--LTsNY" : "hub_file_detail_view--modalEmbedBackgroundHidden--Iqlhu hub_file_detail_view--modalEmbedBackground--LTsNY",
-        onClick: () => this.setFullscreenState(G4.DEFAULT)
+        onClick: () => this.setFullscreenState(PreviewMode.DEFAULT)
       }), jsx("div", {
         className: 0 === t ? "hub_file_detail_view--coverImageContainerMinimized--W9o-Q hub_file_detail_view--coverImageContainerStatic--KXE3R hub_file_detail_view--_embedFullscreenTransition--sMsEd" : 2 === t ? "hub_file_detail_view--coverImageContainerFullscreen--eSIBa hub_file_detail_view--coverImageContainerStatic--KXE3R hub_file_detail_view--_embedFullscreenTransition--sMsEd" : "",
         style: a,

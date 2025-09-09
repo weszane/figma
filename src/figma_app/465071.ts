@@ -1,182 +1,406 @@
-import { useState, useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
-import { throwTypeError } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { selectWithShallowEqual } from "../905/103090";
-import { mI } from "../figma_app/566371";
-import { reportError } from "../905/11";
-import { A5, MF } from "../figma_app/391338";
-import { Z } from "../905/515860";
-import { FPlanNameType, FOrganizationLevelType, FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
-import { mZ, T_, Ji, zl, gq, KK } from "../905/276025";
-export function $$m7() {
-  return useAtomWithSubscription(mZ(!0));
+import { useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { reportError } from '../905/11'
+import { selectWithShallowEqual } from '../905/103090'
+import { getPlanFeaturesAtomFamily, getPlanFeaturesTeamAtomFamily, getPlanPublicInfoAtomFamily, getPlanPublicInfoTeamAtomFamily, getPlanUserAtomFamily, getPlanUserTeamAtomFamily } from '../905/276025'
+import { resolveTeamId } from '../905/515860'
+import { getFeatureFlags } from '../905/601108'
+import { useAtomWithSubscription } from '../figma_app/27355'
+import { FMemberRoleType, FOrganizationLevelType, FPlanNameType, FUserTypeClassification } from '../figma_app/191312'
+import { adminPermissionConfig, useShadowReadLoaded } from '../figma_app/391338'
+import { throwTypeError } from '../figma_app/465776'
+import { handleSuspenseRetainRelease } from '../figma_app/566371'
+
+/**
+ * Plan Feature Hooks and Utilities
+ * Refactored from original exports: $$m7, $$g6, $$f19, $$E8, $$y13, $$b2, $$T12, S, I, $$v3, $$A22, $$x14, $$N15, $$C17, $$w20, $$O1, $$R23, $$L4, $$P10, $$D16, $$k18, $$M5, $$F21, j, U, $$B9, $$G0, $$V11
+ * All original export names are preserved as comments for traceability.
+ */
+
+/**
+ * Hook for team plan features.
+ * @returns Atom subscription for team plan features.
+ * @see $$m7
+ */
+export const useTeamPlanFeatures = () => useAtomWithSubscription(getPlanFeaturesTeamAtomFamily(true))
+
+/**
+ * Hook for team plan public info.
+ * @returns Atom subscription for team plan public info.
+ * @see $$g6
+ */
+export const useTeamPlanPublicInfo = () => useAtomWithSubscription(getPlanPublicInfoTeamAtomFamily(true))
+
+/**
+ * Hook for team plan user.
+ * @returns Atom subscription for team plan user.
+ * @see $$f19
+ */
+export const useTeamPlanUser = () => useAtomWithSubscription(getPlanUserTeamAtomFamily(true))
+
+/**
+ * Selects the current privileged plan atom based on migration flags and context.
+ * @param callsite - Callsite label for tracking.
+ * @param options - Optional tracking options.
+ * @returns Atom subscription for current privileged plan.
+ * @see $$E8
+ */
+export function useCurrentPrivilegedPlan(callsite: string, options?: { sampleRate?: number, useSidebarOrOpenFile?: boolean }) {
+  const planFeatures = useAtomWithSubscription(getPlanFeaturesAtomFamily(true))
+  const teamPlanFeatures = useAtomWithSubscription(getPlanFeaturesTeamAtomFamily(true))
+  trackShadowRead(planFeatures.transform(e => e?.key), teamPlanFeatures.transform(e => e?.key), adminPermissionConfig.PlanHooks.useCurrentPrivilegedPlan, callsite, options?.sampleRate)
+  return getFeatureFlags().plan_hook_migration && options?.useSidebarOrOpenFile ? teamPlanFeatures : planFeatures
 }
-export function $$g6() {
-  return useAtomWithSubscription(T_(!0));
-}
-export function $$f19() {
-  return useAtomWithSubscription(Ji(!0));
-}
-export function $$E8(e, t) {
-  let r = useAtomWithSubscription(zl(!0));
-  let n = useAtomWithSubscription(mZ(!0));
-  S(r.transform(e => e?.key), n.transform(e => e?.key), A5.PlanHooks.useCurrentPrivilegedPlan, e, t?.sampleRate);
-  return getFeatureFlags().plan_hook_migration && t?.useSidebarOrOpenFile ? n : r;
-}
-export function $$y13({
-  reportErrorsToTeam: e
-}) {
-  let t = $$E8("useSuspendCurrentPrivilegedPlan");
-  let [r] = mI(t);
-  if ("loaded" !== r.status) {
-    let t = Error("disabled" === r.status ? "Plan fetching disabled" : "Error fetching plan");
-    reportError(e, t);
-    return t;
+
+/**
+ * Suspense hook for current privileged plan, with error reporting.
+ * @param options - Error reporting options.
+ * @returns Loaded plan or error.
+ * @see $$y13
+ */
+export function useSuspendCurrentPrivilegedPlan({
+  reportErrorsToTeam,
+}: { reportErrorsToTeam: string }) {
+  const atom = useCurrentPrivilegedPlan('useSuspendCurrentPrivilegedPlan')
+  const [result] = handleSuspenseRetainRelease(atom)
+  if (result.status !== 'loaded') {
+    const error = new Error(result.status === 'disabled' ? 'Plan fetching disabled' : 'Error fetching plan')
+    reportError(reportErrorsToTeam, error)
+    return error
   }
-  let n = r.data;
-  if (!n) {
-    let t = Error("No Plan found");
-    reportError(e, t);
-    return t;
+  if (!result.data) {
+    const error = new Error('No Plan found')
+    reportError(reportErrorsToTeam, error)
+    return error
   }
-  return n;
+  return result.data
 }
-export function $$b2(e, t) {
-  let r = useAtomWithSubscription(gq(!0));
-  let n = useAtomWithSubscription(Ji(!0));
-  S(r.transform(e => e.planKey), n.transform(e => e.planKey), A5.PlanHooks.useCurrentPlanUser, e, t?.sampleRate);
-  return getFeatureFlags().plan_hook_migration && t?.useSidebarOrOpenFile ? n : r;
+
+/**
+ * Selects the current plan user atom based on migration flags and context.
+ * @param callsite - Callsite label for tracking.
+ * @param options - Optional tracking options.
+ * @returns Atom subscription for current plan user.
+ * @see $$b2
+ */
+export function useCurrentPlanUser(callsite: string, options?: { sampleRate?: number, useSidebarOrOpenFile?: boolean }) {
+  const planUser = useAtomWithSubscription(getPlanUserAtomFamily(true))
+  const teamPlanUser = useAtomWithSubscription(getPlanUserTeamAtomFamily(true))
+  trackShadowRead(planUser.transform(e => e.planKey), teamPlanUser.transform(e => e.planKey), adminPermissionConfig.PlanHooks.useCurrentPlanUser, callsite, options?.sampleRate)
+  return getFeatureFlags().plan_hook_migration && options?.useSidebarOrOpenFile ? teamPlanUser : planUser
 }
-export function $$T12(e, t) {
-  let r = useAtomWithSubscription(KK(!0));
-  let n = useAtomWithSubscription(T_(!0));
-  S(r.transform(e => e?.key), n.transform(e => e?.key), A5.PlanHooks.useCurrentPublicPlan, e, t?.sampleRate);
-  return getFeatureFlags().plan_hook_migration && t?.useSidebarOrOpenFile ? n : r;
+
+/**
+ * Selects the current public plan atom based on migration flags and context.
+ * @param callsite - Callsite label for tracking.
+ * @param options - Optional tracking options.
+ * @returns Atom subscription for current public plan.
+ * @see $$T12
+ */
+export function useCurrentPublicPlan(callsite: string, options?: { sampleRate?: number, useSidebarOrOpenFile?: boolean }) {
+  const publicInfo = useAtomWithSubscription(getPlanPublicInfoAtomFamily(true))
+  const teamPublicInfo = useAtomWithSubscription(getPlanPublicInfoTeamAtomFamily(true))
+  trackShadowRead(publicInfo.transform(e => e?.key), teamPublicInfo.transform(e => e?.key), adminPermissionConfig.PlanHooks.useCurrentPublicPlan, callsite, options?.sampleRate)
+  return getFeatureFlags().plan_hook_migration && options?.useSidebarOrOpenFile ? teamPublicInfo : publicInfo
 }
-function I(e) {
-  return `${e.type}::${e.parentId}`;
-}
-let S = (e, t, r, a, s = .1) => {
-  let o = useSelector(e => e.selectedView?.view === "folder");
-  let d = selectWithShallowEqual(e => ({
+
+/**
+ * Helper to build a unique key for shadow read tracking.
+ * @param obj - Object with type and parentId.
+ * @returns Unique key string.
+ * @see I
+ */
+const buildShadowReadKey = (obj: { type: string, parentId: string }) => `${obj.type}::${obj.parentId}`
+
+/**
+ * Tracks shadow reads for plan atoms.
+ * @param oldAtom - Old atom selector.
+ * @param newAtom - New atom selector.
+ * @param label - Tracking label.
+ * @param callsite - Callsite label.
+ * @param sampleRate - Optional sample rate.
+ * @see S
+ */
+function trackShadowRead(oldAtom: any, newAtom: any, label: string, callsite: string, sampleRate = 0.1) {
+  const isFolderView = useSelector<any>(e => e.selectedView?.view === 'folder')
+  const context = selectWithShallowEqual(e => ({
     currentUserOrgId: e.currentUserOrgId,
     currentTeamId: e.currentTeamId,
-    getTeamIdResult: Z(e),
+    getTeamIdResult: resolveTeamId(e),
     selectedView: e.selectedView?.view,
     openFileKey: e.openFile?.key,
     openFileParentOrgId: e.openFile?.parentOrgId,
-    openFileTeamId: e.openFile?.teamId
-  }));
-  let [c, _] = useState(!1);
+    openFileTeamId: e.openFile?.teamId,
+  }))
+  const [shadowEnabled, setShadowEnabled] = useState(false)
   useEffect(() => {
-    setTimeout(() => _(!0), 2e3);
-  }, []);
-  MF({
-    oldValue: e.transform(e => I(e)),
-    newValue: t.transform(e => I(e)),
-    label: r,
+    setTimeout(() => setShadowEnabled(true), 2000)
+  }, [])
+  useShadowReadLoaded({
+    oldValue: oldAtom.transform((e: any) => buildShadowReadKey(e)),
+    newValue: newAtom.transform((e: any) => buildShadowReadKey(e)),
+    label,
     contextArgs: {
-      callsite: a,
-      ...d
+      callsite,
+      ...context,
     },
-    sampleRate__UNSTABLE: s,
-    trackLatency: !1,
-    enableShadowRead: !o || c
-  });
-};
-export function $$v3(e) {
-  return useMemo(() => e.transform(e => $$A22(e)), [e]);
+    sampleRate__UNSTABLE: sampleRate,
+    trackLatency: false,
+    enableShadowRead: !isFolderView || shadowEnabled,
+  })
 }
-export function $$A22(e) {
-  return !!e && [FPlanNameType.PRO, FPlanNameType.STUDENT].includes(e.tier);
+
+/**
+ * Memoized hook for checking if plan is PRO or STUDENT.
+ * @param atom - Plan atom.
+ * @returns Boolean atom.
+ * @see $$v3
+ */
+export function useIsProOrStudentPlan(atom: any) {
+  return useMemo(() => atom.transform((e: any) => isProOrStudentPlan(e)), [atom])
 }
-export function $$x14(e) {
-  return useMemo(() => e.transform(e => e.tier === FPlanNameType.STUDENT), [e]);
+
+/**
+ * Checks if plan is PRO or STUDENT.
+ * @param plan - Plan object.
+ * @returns True if PRO or STUDENT.
+ * @see $$A22
+ */
+export function isProOrStudentPlan(plan: any) {
+  return !!plan && [FPlanNameType.PRO, FPlanNameType.STUDENT].includes(plan.tier)
 }
-export function $$N15(e) {
-  return useMemo(() => e.transform(e => e.tier === FPlanNameType.STARTER), [e]);
+
+/**
+ * Memoized hook for checking if plan is STUDENT.
+ * @param atom - Plan atom.
+ * @returns Boolean atom.
+ * @see $$x14
+ */
+export function useIsStudentPlan(atom: any) {
+  return useMemo(() => atom.transform((e: any) => e.tier === FPlanNameType.STUDENT), [atom])
 }
-export function $$C17(e) {
-  return useMemo(() => e.transform(e => [FPlanNameType.STARTER, FPlanNameType.PRO].includes(e.tier)), [e]);
+
+/**
+ * Memoized hook for checking if plan is STARTER.
+ * @param atom - Plan atom.
+ * @returns Boolean atom.
+ * @see $$N15
+ */
+export function useIsStarterPlan(atom: any) {
+  return useMemo(() => atom.transform((e: any) => e.tier === FPlanNameType.STARTER), [atom])
 }
-export function $$w20(e) {
-  return useMemo(() => e.transform(e => [FPlanNameType.STARTER, FPlanNameType.STUDENT].includes(e.tier)), [e]);
+
+/**
+ * Memoized hook for checking if plan is STARTER or PRO.
+ * @param atom - Plan atom.
+ * @returns Boolean atom.
+ * @see $$C17
+ */
+export function useIsStarterOrProPlan(atom: any) {
+  return useMemo(() => atom.transform((e: any) => [FPlanNameType.STARTER, FPlanNameType.PRO].includes(e.tier)), [atom])
 }
-export function $$O1(e) {
-  return useMemo(() => e.transform(e => $$R23(e)), [e]);
+
+/**
+ * Memoized hook for checking if plan is STARTER or STUDENT.
+ * @param atom - Plan atom.
+ * @returns Boolean atom.
+ * @see $$w20
+ */
+export function useIsStarterOrStudentPlan(atom: any) {
+  return useMemo(() => atom.transform((e: any) => [FPlanNameType.STARTER, FPlanNameType.STUDENT].includes(e.tier)), [atom])
 }
-export function $$R23(e) {
-  return !!e && [FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(e.tier);
+
+/**
+ * Memoized hook for checking if plan is ORG or ENTERPRISE.
+ * @param atom - Plan atom.
+ * @returns Boolean atom.
+ * @see $$O1
+ */
+export function useIsOrgOrEnterprisePlan(atom: any) {
+  return useMemo(() => atom.transform((e: any) => isOrgOrEnterprisePlan(e)), [atom])
 }
-export function $$L4(e) {
-  return e?.key.type === FOrganizationLevelType.ORG ? e?.key.parentId ?? void 0 : void 0;
+
+/**
+ * Checks if plan is ORG or ENTERPRISE.
+ * @param plan - Plan object.
+ * @returns True if ORG or ENTERPRISE.
+ * @see $$R23
+ */
+export function isOrgOrEnterprisePlan(plan: any) {
+  return !!plan && [FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(plan.tier)
 }
-export function $$P10(e) {
-  return useMemo(() => e.transform(e => e?.permission === FMemberRoleType.ADMIN), [e]);
+
+/**
+ * Gets parent org id if organization level.
+ * @param obj - Object with key.
+ * @returns Parent org id or undefined.
+ * @see $$L4
+ */
+export function getParentOrgIdIfOrgLevel(obj: any) {
+  return obj?.key.type === FOrganizationLevelType.ORG ? obj?.key.parentId ?? undefined : undefined
 }
-export function $$D16(e) {
-  return useMemo(() => e.transform(e => e?.key.type === FUserTypeClassification.ORG_USER), [e]);
+
+/**
+ * Memoized hook for checking if user is ADMIN.
+ * @param atom - User atom.
+ * @returns Boolean atom.
+ * @see $$P10
+ */
+export function useIsAdminUser(atom: any) {
+  return useMemo(() => atom.transform((e: any) => e?.permission === FMemberRoleType.ADMIN), [atom])
 }
-export function $$k18(e) {
-  return useMemo(() => e.transform(e => j(e)), [e]);
+
+/**
+ * Memoized hook for checking if user is ORG_USER.
+ * @param atom - User atom.
+ * @returns Boolean atom.
+ * @see $$D16
+ */
+export function useIsOrgUser(atom: any) {
+  return useMemo(() => atom.transform((e: any) => e?.key.type === FUserTypeClassification.ORG_USER), [atom])
 }
-export function $$M5(e) {
-  return useMemo(() => e.transform(e => U(e) || j(e)), [e]);
+
+/**
+ * Memoized hook for checking if user is ORG ADMIN.
+ * @param atom - User atom.
+ * @returns Boolean atom.
+ * @see $$k18
+ */
+export function useIsOrgAdminUser(atom: any) {
+  return useMemo(() => atom.transform((e: any) => isOrgAdminUser(e)), [atom])
 }
-export function $$F21(e) {
-  return useMemo(() => e.transform(e => $$B9(e)), [e]);
+
+/**
+ * Memoized hook for checking if user is ORG MEMBER or ADMIN.
+ * @param atom - User atom.
+ * @returns Boolean atom.
+ * @see $$M5
+ */
+export function useIsOrgMemberOrAdminUser(atom: any) {
+  return useMemo(() => atom.transform((e: any) => isOrgMemberUser(e) || isOrgAdminUser(e)), [atom])
 }
-function j(e) {
-  return e?.key.type === FUserTypeClassification.ORG_USER && e?.permission === FMemberRoleType.ADMIN;
+
+/**
+ * Memoized hook for checking if user is ORG GUEST.
+ * @param atom - User atom.
+ * @returns Boolean atom.
+ * @see $$F21
+ */
+export function useIsOrgGuestUser(atom: any) {
+  return useMemo(() => atom.transform((e: any) => isOrgGuestUser(e)), [atom])
 }
-function U(e) {
-  return e?.key.type === FUserTypeClassification.ORG_USER && e?.permission === FMemberRoleType.MEMBER;
+
+/**
+ * Checks if user is ORG ADMIN.
+ * @param user - User object.
+ * @returns True if ORG ADMIN.
+ * @see j
+ */
+export function isOrgAdminUser(user: any) {
+  return user?.key.type === FUserTypeClassification.ORG_USER && user?.permission === FMemberRoleType.ADMIN
 }
-export function $$B9(e) {
-  return e?.key.type === FUserTypeClassification.ORG_USER && e?.permission === FMemberRoleType.GUEST;
+
+/**
+ * Checks if user is ORG MEMBER.
+ * @param user - User object.
+ * @returns True if ORG MEMBER.
+ * @see U
+ */
+export function isOrgMemberUser(user: any) {
+  return user?.key.type === FUserTypeClassification.ORG_USER && user?.permission === FMemberRoleType.MEMBER
 }
-export function $$G0(e, t) {
-  switch (t) {
+
+/**
+ * Checks if user is ORG GUEST.
+ * @param user - User object.
+ * @returns True if ORG GUEST.
+ * @see $$B9
+ */
+export function isOrgGuestUser(user: any) {
+  return user?.key.type === FUserTypeClassification.ORG_USER && user?.permission === FMemberRoleType.GUEST
+}
+
+/**
+ * Checks user permission type.
+ * @param user - User object.
+ * @param role - Role type.
+ * @returns True if user matches role.
+ * @see $$G0
+ */
+export function checkOrgUserPermission(user: any, role: FMemberRoleType) {
+  switch (role) {
     case FMemberRoleType.ADMIN:
-      return j(e);
+      return isOrgAdminUser(user)
     case FMemberRoleType.MEMBER:
-      return U(e) || j(e);
+      return isOrgMemberUser(user) || isOrgAdminUser(user)
     case FMemberRoleType.GUEST:
-      return $$B9(e) || U(e) || j(e);
+      return isOrgGuestUser(user) || isOrgMemberUser(user) || isOrgAdminUser(user)
     default:
-      throwTypeError(t);
+      throwTypeError(role)
   }
 }
-export function $$V11(e) {
-  return useMemo(() => e.transform(e => {
-    var t;
-    t = e;
-    return t?.key.type === FUserTypeClassification.TEAM_USER && t?.permission === FMemberRoleType.ADMIN;
-  }), [e]);
+
+/**
+ * Memoized hook for checking if team user is ADMIN.
+ * @param atom - User atom.
+ * @returns Boolean atom.
+ * @see $$V11
+ */
+export function useIsTeamAdminUser(atom: any) {
+  return useMemo(() => atom.transform((e: any) => {
+    const user = e
+    return user?.key.type === FUserTypeClassification.TEAM_USER && user?.permission === FMemberRoleType.ADMIN
+  }), [atom])
 }
-export const A8 = $$G0;
-export const Az = $$O1;
-export const D6 = $$b2;
-export const EV = $$v3;
-export const H3 = $$L4;
-export const Kd = $$M5;
-export const No = $$g6;
-export const S2 = $$m7;
-export const T5 = $$E8;
-export const Ty = $$B9;
-export const Um = $$P10;
-export const W8 = $$V11;
-export const X$ = $$T12;
-export const XP = $$y13;
-export const YQ = $$x14;
-export const YY = $$N15;
-export const fh = $$D16;
-export const iW = $$C17;
-export const j_ = $$k18;
-export const px = $$f19;
-export const q8 = $$w20;
-export const sI = $$F21;
-export const vj = $$A22;
-export const zQ = $$R23;
+
+// Export aliases for backward compatibility with original names
+export const $$m7 = useTeamPlanFeatures
+export const $$g6 = useTeamPlanPublicInfo
+export const $$f19 = useTeamPlanUser
+export const $$E8 = useCurrentPrivilegedPlan
+export const $$y13 = useSuspendCurrentPrivilegedPlan
+export const $$b2 = useCurrentPlanUser
+export const $$T12 = useCurrentPublicPlan
+export const $$v3 = useIsProOrStudentPlan
+export const $$A22 = isProOrStudentPlan
+export const $$x14 = useIsStudentPlan
+export const $$N15 = useIsStarterPlan
+export const $$C17 = useIsStarterOrProPlan
+export const $$w20 = useIsStarterOrStudentPlan
+export const $$O1 = useIsOrgOrEnterprisePlan
+export const $$R23 = isOrgOrEnterprisePlan
+export const $$L4 = getParentOrgIdIfOrgLevel
+export const $$P10 = useIsAdminUser
+export const $$D16 = useIsOrgUser
+export const $$k18 = useIsOrgAdminUser
+export const $$M5 = useIsOrgMemberOrAdminUser
+export const $$F21 = useIsOrgGuestUser
+export const $$B9 = isOrgGuestUser
+export const $$G0 = checkOrgUserPermission
+export const $$V11 = useIsTeamAdminUser
+
+// Export refactored names for improved clarity
+export const A8 = checkOrgUserPermission
+export const Az = useIsOrgOrEnterprisePlan
+export const D6 = useCurrentPlanUser
+export const EV = useIsProOrStudentPlan
+export const H3 = getParentOrgIdIfOrgLevel
+export const Kd = useIsOrgMemberOrAdminUser
+export const No = useTeamPlanPublicInfo
+export const S2 = useTeamPlanFeatures
+export const T5 = useCurrentPrivilegedPlan
+export const Ty = isOrgGuestUser
+export const Um = useIsAdminUser
+export const W8 = useIsTeamAdminUser
+export const X$ = useCurrentPublicPlan
+export const XP = useSuspendCurrentPrivilegedPlan
+export const YQ = useIsStudentPlan
+export const YY = useIsStarterPlan
+export const fh = useIsOrgUser
+export const iW = useIsStarterOrProPlan
+export const j_ = useIsOrgAdminUser
+export const px = useTeamPlanUser
+export const q8 = useIsStarterOrStudentPlan
+export const sI = useIsOrgGuestUser
+export const vj = isProOrStudentPlan
+export const zQ = isOrgOrEnterprisePlan

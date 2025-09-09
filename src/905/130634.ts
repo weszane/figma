@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { oB } from "../figma_app/530167";
-import { P5 } from "../figma_app/175992";
+import { StatusType } from "../figma_app/175992";
 import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Hl, hM } from "../905/840929";
@@ -20,7 +20,7 @@ class u extends Component {
     let e = jsxs(Fragment, {
       children: [jsx("p", {
         children: renderI18nText("community.delete_profile_modal.delete_profile_info")
-      }), jsx("br", {}), this.props.stripe_account_status && this.props.stripe_account_status !== P5.NONE && jsxs(Fragment, {
+      }), jsx("br", {}), this.props.stripe_account_status && this.props.stripe_account_status !== StatusType.NONE && jsxs(Fragment, {
         children: [jsx("p", {
           children: renderI18nText("settings.any_resources_you_have_marked_for_sale", {
             creatorAgreement: Hl

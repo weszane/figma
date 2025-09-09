@@ -1,14 +1,14 @@
 import { useMemo } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { resourceUtils } from "../905/989992";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { gB } from "../905/723791";
 import { FUserRoleType } from "../figma_app/191312";
 import { WorkspacesCanAdminView, CurrentUserAssignedWorkspaceView, WorkspacePageView, OrgHasWorkspacesView, CanCreateTeamView } from "../figma_app/43951";
 import { $q } from "../figma_app/482728";
 import { UNASSIGNED } from "../905/247093";
 export function $$p2(e) {
-  let t = Rs(WorkspacesCanAdminView, {
+  let t = useSubscription(WorkspacesCanAdminView, {
     orgId: e
   });
   return useMemo(() => {
@@ -26,13 +26,13 @@ export function $$_6(e) {
   return r?.workspaceId ?? null;
 }
 export function $$h0(e) {
-  let t = Rs(CurrentUserAssignedWorkspaceView, {
+  let t = useSubscription(CurrentUserAssignedWorkspaceView, {
     orgId: e
   });
   return resourceUtils.useTransform(t, e => $$_6(e.currentUser));
 }
 export function $$m3(e, t) {
-  let r = Rs(WorkspacePageView, {
+  let r = useSubscription(WorkspacePageView, {
     orgId: e ?? "",
     workspaceId: t ?? ""
   }, {
@@ -44,14 +44,14 @@ export function $$g4(e) {
   return (e?.workspaces?.length || 0) > 0 && !!e?.bigmaEnabledAt;
 }
 export function $$f5(e) {
-  let t = Rs(OrgHasWorkspacesView, {
+  let t = useSubscription(OrgHasWorkspacesView, {
     orgId: e
   });
   return resourceUtils.useTransform(t, e => $$g4(e.org));
 }
 export var $$E7 = (e => (e[e.IS_GUEST = 1] = "IS_GUEST", e[e.WRONG_WORKSPACE = 2] = "WRONG_WORKSPACE", e[e.TEAM_CREATION_CONTROL = 3] = "TEAM_CREATION_CONTROL", e[e.LG_LOADING = 4] = "LG_LOADING", e))($$E7 || {});
 export function $$y1(e, t) {
-  let r = Rs(CanCreateTeamView, {
+  let r = useSubscription(CanCreateTeamView, {
     orgId: e?.id ?? null
   });
   let {

@@ -14,13 +14,13 @@ import { trackEventAnalytics } from "../905/449184";
 import { l as _$$l } from "../905/728491";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
-import { p as _$$p } from "../figma_app/288654";
+import { useMultiSubscription } from "../figma_app/288654";
 import { Timer } from "../905/609396";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logError, logInfo, logDebug, logWarning } from "../905/714362";
 import { getTrackingSessionId } from "../905/471229";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q as _$$Q } from "../905/463586";
@@ -901,7 +901,7 @@ class ey {
     }
     null != c && c.release().catch(e => K(e, "commitAutosave: release lock"));
     this.commitEventListener.onCommitEvent();
-    commitPolicy === EditChangeMode.ADD_CHANGES ? (this.consecutiveCommitsAddingChanges++, this.consecutiveCommitsAddingChanges >= 4 && YQ({
+    commitPolicy === EditChangeMode.ADD_CHANGES ? (this.consecutiveCommitsAddingChanges++, this.consecutiveCommitsAddingChanges >= 4 && handleAtomEvent({
       id: Cr
     })) : this.consecutiveCommitsAddingChanges = 0;
   }
@@ -1273,7 +1273,7 @@ export function $$ej4(e) {
 export function $$eU3() {
   let e = useSelector(e => e.autosave.unclaimedFilesWithChangesInIDB);
   let t = useSelector(e => e.autosave.unclaimedFilesCreatedOffline);
-  let r = _$$p(FileCanEdit, useMemo(() => e.map(({
+  let r = useMultiSubscription(FileCanEdit, useMemo(() => e.map(({
     fileKey: e
   }) => ({
     key: e

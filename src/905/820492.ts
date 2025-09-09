@@ -56,9 +56,9 @@ import { dj, vt, bD } from "../figma_app/45218";
 import { mN } from "../905/71785";
 import { k2, aP } from "../figma_app/10554";
 import { o as _$$o } from "../figma_app/633080";
-import { e6 as _$$e2 } from "../905/557142";
-import { A5 } from "../figma_app/707808";
-import { D6 } from "../figma_app/175992";
+import { AccessLevelEnum } from "../905/557142";
+import { ShareAction } from "../figma_app/707808";
+import { SourceType } from "../figma_app/175992";
 import { Rs } from "../figma_app/761870";
 import { e0 as _$$e3 } from "../905/696396";
 import { s as _$$s2 } from "../905/608932";
@@ -1158,7 +1158,7 @@ class ts extends Component {
     }) : this.props.isFigFileExplicitOwner ? null : renderI18nText("community.seller.only_explicit_owner_can_sell");
   }
   renderPricingSection(e) {
-    if (!this.props.user.can_sell_on_community || getFeatureFlags().cmty_expand_extension_m10n && !this.props.user.cmty_seller_capabilities?.includes(D6.FILE) || e.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE) return null;
+    if (!this.props.user.can_sell_on_community || getFeatureFlags().cmty_expand_extension_m10n && !this.props.user.cmty_seller_capabilities?.includes(SourceType.FILE) || e.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE) return null;
     let t = this.props.hubFile;
     let i = !!t?.current_hub_file_version_id && !!t.monetized_resource_metadata;
     let n = this.getPricingDisabledMessage(e, this.props.hubFile);
@@ -1279,7 +1279,7 @@ let to = connect((e, t) => {
   let a = t.hubFile;
   let s = a && a6(a);
   let o = getExplicitRoleForUserAndFile(fileKey, e);
-  let l = o?.level === _$$e2.OWNER;
+  let l = o?.level === AccessLevelEnum.OWNER;
   let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== k2.UNIVERSAL_POSTING && PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID;
   let u = e.publishingHubFiles[fileKey];
   u && u.metadata || (u = {
@@ -1332,7 +1332,7 @@ let to = connect((e, t) => {
   },
   hideModal: () => {
     t.isEditHubFilePageMode || e(M3({
-      view: A5.INVITE
+      view: ShareAction.INVITE
     }));
     e(popModalStack());
   },

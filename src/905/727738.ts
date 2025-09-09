@@ -20,12 +20,12 @@ import { CI, Gi } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { ZW } from "../figma_app/349248";
 import { getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
 import { oE } from "../905/249410";
 import { throwTypeError } from "../figma_app/465776";
 import { R as _$$R } from "../905/441305";
-import { oj } from "../905/760074";
+import { getDisplayNameAlt } from "../905/760074";
 import { M4 } from "../905/713695";
 import { p as _$$p } from "../905/195198";
 import { DQ, Pw } from "../figma_app/121751";
@@ -121,7 +121,7 @@ function j(e) {
     case FResourceCategoryType.FILE_REPO:
       {
         let a = e.repos[n.resource_id_or_key];
-        let s = oj(a);
+        let s = getDisplayNameAlt(a);
         r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
           fileName: s
         }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_main_file_and_the_branches_anymore", {
@@ -195,7 +195,7 @@ let z = createOptimistThunk((e, {
   let c = e.getState();
   let u = t.resource_type === FResourceCategoryType.FILE && c.fileByKey[t.resource_id_or_key];
   let p = u && u.folder_id && c.folders[u.folder_id];
-  let m = s && t.level >= e6.EDITOR;
+  let m = s && t.level >= AccessLevelEnum.EDITOR;
   d.then(i => {
     if (e.dispatch(_$$P({
       role: t,
@@ -217,7 +217,7 @@ let z = createOptimistThunk((e, {
     W(e, i, getResourceTeamId(t, c)) || K(e, i, u || null, () => {
       e.dispatch($$q0({
         role: t,
-        level: e6.EDITOR,
+        level: AccessLevelEnum.EDITOR,
         fromDraftsLockdownFileMove: !0,
         seenState: null
       }));
@@ -245,7 +245,7 @@ let H = createOptimistThunk((e, {
   let c = () => {
     e.dispatch($$q0({
       seenState: t,
-      level: e6.EDITOR,
+      level: AccessLevelEnum.EDITOR,
       fromDraftsLockdownFileMove: !0,
       role: null
     }));
@@ -254,7 +254,7 @@ let H = createOptimistThunk((e, {
   let p = u.fileByKey[t.file_key];
   let m = p?.folder_id && u.folders[p.folder_id];
   let h = m && Gi(m);
-  let g = i && s >= e6.EDITOR;
+  let g = i && s >= AccessLevelEnum.EDITOR;
   let f = t.user.handle || t.user.email;
   if (d && h) {
     _$$h(p || null, null, e.dispatch, {
@@ -385,7 +385,7 @@ let $$q0 = createOptimistThunk((e, {
   isStarterTier: a
 }) => {
   if (!t) {
-    i !== e6.NONE ? e.dispatch(H({
+    i !== AccessLevelEnum.NONE ? e.dispatch(H({
       seenState: n,
       level: i,
       fromDraftsLockdownFileMove: r,
@@ -395,7 +395,7 @@ let $$q0 = createOptimistThunk((e, {
     }));
     return;
   }
-  i !== e6.NONE ? e.dispatch(z({
+  i !== AccessLevelEnum.NONE ? e.dispatch(z({
     role: {
       ...t,
       level: i
@@ -409,7 +409,7 @@ let $$$2 = createOptimistThunk((e, {
   role: t,
   level: i
 }) => {
-  i !== e6.NONE ? e.dispatch(z({
+  i !== AccessLevelEnum.NONE ? e.dispatch(z({
     role: {
       ...t,
       level: i
@@ -422,7 +422,7 @@ let $$Z1 = createOptimistThunk((e, {
   role: t,
   level: i
 }) => {
-  i !== e6.NONE ? e.dispatch(z({
+  i !== AccessLevelEnum.NONE ? e.dispatch(z({
     role: {
       ...t,
       level: i
@@ -438,7 +438,7 @@ let $$X3 = createOptimistThunk((e, {
   let {
     user
   } = e.getState();
-  i !== e6.NONE ? e.dispatch(z({
+  i !== AccessLevelEnum.NONE ? e.dispatch(z({
     role: {
       ...t,
       level: i

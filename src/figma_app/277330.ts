@@ -1,15 +1,15 @@
 import { useMemo, useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { LH } from "../905/872904";
-import { D6, Kd } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { Tf } from "../905/297574";
 import { Wb, rV, uU } from "../905/627262";
 import { Xk, DQ, y$ } from "../905/712714";
 import { n as _$$n } from "../905/402643";
 export function $$p2(e, t) {
-  let r = D6("useCanViewDSA");
-  return Kd(r).transform(r => $$_1(e, t, r));
+  let r = useCurrentPlanUser("useCanViewDSA");
+  return useIsOrgMemberOrAdminUser(r).transform(r => $$_1(e, t, r));
 }
 export function $$_1(e, t, r) {
   if (!e) return !1;
@@ -23,7 +23,7 @@ export function $$h4({
   entrypoint: o
 }) {
   let p = LH();
-  let [_] = IT(Xk({
+  let [_] = setupResourceAtomHandler(Xk({
     duration: t,
     orgId: p,
     libraryFileKey: r ?? "",
@@ -31,12 +31,12 @@ export function $$h4({
   }), {
     enabled: !!r && (!getFeatureFlags().dsa_styles_variables_ui || e === _$$n.PRODUCT_COMPONENTS)
   });
-  let [h] = IT(DQ({
+  let [h] = setupResourceAtomHandler(DQ({
     fileKey: r ?? ""
   }), {
     enabled: !!r && getFeatureFlags().dsa_styles_variables_ui && e === _$$n.STYLES
   });
-  let [m] = IT(y$({
+  let [m] = setupResourceAtomHandler(y$({
     fileKey: r ?? ""
   }), {
     enabled: !!r && getFeatureFlags().dsa_styles_variables_ui && e === _$$n.VARIABLES

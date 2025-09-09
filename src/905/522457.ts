@@ -4,7 +4,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { u8 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { mapEditorTypeToStringWithError } from "../figma_app/53721";
 import { W } from "../905/632622";
 import { x_, ay, op } from "../figma_app/407767";
@@ -33,7 +33,7 @@ function g({
   let g = h?.parentNode;
   let f = r ? s.get(r) : void 0;
   let _ = fullscreenValue.getViewportInfo();
-  let A = atomStoreManager.get(ze) ?? void 0;
+  let A = atomStoreManager.get(openFileKeyAtom) ?? void 0;
   let y = atomStoreManager.get(u8);
   let b = y ? mapEditorTypeToStringWithError(y) : void 0;
   let v = performance.now();

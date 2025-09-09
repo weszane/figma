@@ -7,7 +7,7 @@ import { bV } from "../figma_app/808294";
 import { hN } from "../figma_app/248118";
 import { Rm } from "../figma_app/86989";
 import { M } from "../figma_app/170366";
-import { Eh } from "../figma_app/12796";
+import { canPerformAction } from "../figma_app/12796";
 import { isDevModePlugin, isSingleDevWithCodegen, canRunPlugin, isSamePlugin, isValidForFullscreenView, getMissingEditorTypeError, formatPluginName, getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { m3 } from "../figma_app/45218";
@@ -39,7 +39,7 @@ function C(e, t, i) {
   } = t;
   i ??= w;
   let d = debugState.getState();
-  let u = Eh(d);
+  let u = canPerformAction(d);
   let h = [];
   if (!u) return h;
   for (let a of e) if (!(hasLocalFileId(a) || isDevModePlugin(a) && isSingleDevWithCodegen(a))) try {
@@ -110,7 +110,7 @@ export function $$T0(e, t) {
   let n = [];
   let s = !!e.isReadOnly;
   let l = debugState.getState();
-  let c = Eh(l);
+  let c = canPerformAction(l);
   let g = e.editorType === FEditorType.DevHandoff;
   let A = SH();
   if (Ah(l.mirror.appModel.activeCanvasEditModeType)) return [];
@@ -193,7 +193,7 @@ export function $$T0(e, t) {
           editorType
         } = e;
         let r = debugState.getState();
-        let s = Eh(r);
+        let s = canPerformAction(r);
         let o = [];
         let l = editorType === FEditorType.DevHandoff;
         if (!s) return o;

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { nD } from "../figma_app/416935";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
@@ -30,7 +30,7 @@ let $$b2 = D(({
   let y = useSelector(e => e.selectedView);
   let b = selectCurrentUser();
   let [w, A] = useState(!0);
-  let I = ZC(e);
+  let I = useLatestRef(e);
   let k = _$$sx();
   let P = Xw.loadingKeyForPayload({
     teamId: e

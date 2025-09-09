@@ -2,9 +2,9 @@ import { oA } from "../905/723791";
 import { N$ } from "../figma_app/350203";
 import { er, NQ } from "../1250/461992";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 export function $$l0() {
-  let e = T5("useDefaultResourceHubTab");
+  let e = useCurrentPrivilegedPlan("useDefaultResourceHubTab");
   let t = e.data?.type === FOrganizationLevelType.TEAM ? e.data?.key.parentId : null;
   let n = e.data?.type === FOrganizationLevelType.ORG ? e.data?.key.parentId : null;
   let l = "loaded" === e.status && e.data?.tier === FPlanNameType.STARTER;

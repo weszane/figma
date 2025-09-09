@@ -29,7 +29,7 @@ import { Ib } from "../905/129884";
 import { PT } from "../905/669853";
 import { A as _$$A2 } from "../1617/380980";
 import { resourceUtils } from "../905/989992";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { fX, Im } from "../905/627262";
 import { bu, k9, DQ, y$ } from "../905/712714";
 import { JK } from "../figma_app/514043";
@@ -599,24 +599,24 @@ function eE({
   numDays: t,
   assetType: i
 }) {
-  let [n] = IT(bu({
+  let [n] = setupResourceAtomHandler(bu({
     fileKey: e ?? "",
     numDays: t
   }), {
     enabled: (!getFeatureFlags().dsa_styles_variables_ui || i === _$$n.PRODUCT_COMPONENTS) && !!e
   });
-  let [a] = IT(k9({
+  let [a] = setupResourceAtomHandler(k9({
     fileKey: e ?? "",
     numDays: t
   }), {
     enabled: (!getFeatureFlags().dsa_styles_variables_ui || i === _$$n.PRODUCT_COMPONENTS) && !!e
   });
-  let [s] = IT(DQ({
+  let [s] = setupResourceAtomHandler(DQ({
     fileKey: e ?? ""
   }), {
     enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === _$$n.STYLES
   });
-  let [o] = IT(y$({
+  let [o] = setupResourceAtomHandler(y$({
     fileKey: e ?? ""
   }), {
     enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === _$$n.VARIABLES

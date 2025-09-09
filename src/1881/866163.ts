@@ -9,9 +9,9 @@ import { createMapperFactory, processAdditionalConfig } from "../905/508958";
 import { W } from "../4452/143028";
 import { FFileType, FSeatAssignmentReasonType, FPlanRestrictionType } from "../figma_app/191312";
 import { TeamPeopleTableView } from "../figma_app/43951";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { pw, wv } from "../figma_app/121751";
-import { mZ } from "../905/276025";
+import { getPlanFeaturesTeamAtomFamily } from "../905/276025";
 let m = createMapperFactory()(e => ({
   actor_id: e.camel(),
   created_at: e.camel().stringToDate(),
@@ -28,19 +28,19 @@ processAdditionalConfig((e, i, t) => [e()(m), i(m)(), t(m)()]);
 export function $$b0(e, i, t) {
   if (i || e.team_role?.pending) return null;
   if (!e.team_role) return t.canAdmin ? "invite" : null;
-  if (e.team_role.level >= e6.ADMIN) {
+  if (e.team_role.level >= AccessLevelEnum.ADMIN) {
     if (e.canEditRole) return "revoke";
   } else if (e.canMakeAdmin) return "grant";
   return null;
 }
 export function $$E1(e) {
-  return e.team_role?.level === e6.ADMIN ? e.team_role.pending ? {
+  return e.team_role?.level === AccessLevelEnum.ADMIN ? e.team_role.pending ? {
     color: zE.DEFAULT,
     text: getI18nString("team_view.settings.pending_admin")
   } : {
     color: zE.DEFAULT,
     text: getI18nString("permissions.level_name_capitalized.admin")
-  } : e.team_role?.level === e6.OWNER ? {
+  } : e.team_role?.level === AccessLevelEnum.OWNER ? {
     color: zE.DEFAULT,
     text: getI18nString("permissions.level_name_capitalized.owner")
   } : e.team_role?.pending ? {
@@ -50,7 +50,7 @@ export function $$E1(e) {
   } : void 0;
 }
 let w = createRemovableAtomFamily(e => atom(i => {
-  let t = i(mZ(!0)).data;
+  let t = i(getPlanFeaturesTeamAtomFamily(!0)).data;
   let n = t ? t.campfireModelEnabledAt : null;
   return pw("migrate_team_data_to_livegraph", wv.GROUP_1) ? i(TeamPeopleTableView.Query({
     teamId: e
@@ -112,10 +112,10 @@ let w = createRemovableAtomFamily(e => atom(i => {
           file_count: 0,
           folder_count: 0
         },
-        canEditRole: !!(teamRole && teamRole.canEdit && teamRole.level !== e6.OWNER),
+        canEditRole: !!(teamRole && teamRole.canEdit && teamRole.level !== AccessLevelEnum.OWNER),
         canMakeAdmin: !!teamRole && !!i.team.canAdmin,
         canMakeOwner: !!teamRole && !!i.team.isOwner,
-        canRemoveUser: teamRole ? teamRole?.level < e6.OWNER : !!e.user.id,
+        canRemoveUser: teamRole ? teamRole?.level < AccessLevelEnum.OWNER : !!e.user.id,
         current_seat_billing_interval: currentSeat?.billingInterval || void 0
       };
       return [p, teamRole ? {
@@ -167,7 +167,7 @@ let w = createRemovableAtomFamily(e => atom(i => {
         canEditRole: e.canEdit,
         canMakeAdmin: !!i.team.canAdmin,
         canMakeOwner: !!i.team.isOwner,
-        canRemoveUser: e.level < e6.OWNER
+        canRemoveUser: e.level < AccessLevelEnum.OWNER
       }];
     })) : {};
     let o = {

@@ -15,7 +15,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { wv } from "../figma_app/236327";
 import { L as _$$L } from "../figma_app/942671";
 import { getI18nString } from "../905/303541";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { oB } from "../905/929976";
 import { E3 } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
@@ -57,7 +57,7 @@ function z({
   let E = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = useSelector(e => !!e.user);
   let b = useSelector(e => $A(e.selectedView));
-  let I = _I();
+  let I = useCanAccessFullDevMode();
   let v = XR();
   let R = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let D = u === FEditorType.Design;
@@ -519,7 +519,7 @@ export function $$W1({
           let t = -1;
           try {
             t = parseInt(e, 10);
-          } catch (e) { }
+          } catch (e) {}
           t > 0 && p(t);
         },
         recordingKey: generateRecordingKey(r, "dropdown", "zoomInput")

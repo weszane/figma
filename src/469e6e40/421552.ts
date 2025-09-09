@@ -6,7 +6,7 @@ import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { y2 } from "../figma_app/563413";
@@ -65,12 +65,12 @@ import { l as _$$l2 } from "../905/716947";
 import { h1 } from "../905/986103";
 import { jN } from "../905/612685";
 import { FPlanNameType, FMemberRoleType } from "../figma_app/191312";
-import { No, H3, T5, px, j_, A8 } from "../figma_app/465071";
+import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useTeamPlanUser, useIsOrgAdminUser, checkOrgUserPermission } from "../figma_app/465071";
 import { az } from "../figma_app/805373";
 import { A as _$$A2 } from "../6828/555288";
 import { Xs, gi, Ti } from "../469e6e40/412963";
 import ek from "classnames";
-import { tT as _$$tT } from "../905/663269";
+import { ResourceStatus } from "../905/663269";
 import { a as _$$a } from "../905/925868";
 import { z as _$$z, Z as _$$Z } from "../905/306088";
 import { X as _$$X2 } from "../905/376628";
@@ -283,9 +283,9 @@ let ey = function ({
   let c = "community" === e.type ? e.profile : void 0;
   let _ = e.approvedLibraries ?? [];
   let u = useAtomWithSubscription(ev);
-  let m = No().unwrapOr(null);
+  let m = useTeamPlanPublicInfo().unwrapOr(null);
   let p = m?.tier === FPlanNameType.ENTERPRISE;
-  let v = H3(m);
+  let v = getParentOrgIdIfOrgLevel(m);
   let f = p && !!u && _.some(e => e.resourceType === EntityType.Workspace && e.resourceId === u);
   let y = p && v && _.some(e => e.resourceType === EntityType.Org && e.resourceId === v);
   let k = t.workspaces?.find(e => e.id === u)?.name;
@@ -563,7 +563,7 @@ function eX({
 }) {
   let r = useDispatch();
   let l = dq();
-  let o = T5("WorkspaceApprovedLibrarySetting").unwrapOr(null);
+  let o = useCurrentPrivilegedPlan("WorkspaceApprovedLibrarySetting").unwrapOr(null);
   let d = o?.tier === FPlanNameType.ENTERPRISE;
   let c = o?.name;
   let _ = gY(eJ);
@@ -715,12 +715,12 @@ function e9({
     };
   }, [t, a]);
   let d = Xs(e);
-  let c = Rs(LibraryModalVariablesData, {
+  let c = useSubscription(LibraryModalVariablesData, {
     fileKey: d
   }, {
     enabled: "file" === e.type
   });
-  let m = Rs(CommunityLibraryModalVariablesData, {
+  let m = useSubscription(CommunityLibraryModalVariablesData, {
     hubFileId: d
   }, {
     enabled: "community" === e.type
@@ -735,8 +735,8 @@ function e9({
   let [T, A] = useState(null);
   let O = Oe(g);
   let L = function (e, t, a, n) {
-    let i = px();
-    let r = j_(i).unwrapOr(!1);
+    let i = useTeamPlanUser();
+    let r = useIsOrgAdminUser(i).unwrapOr(!1);
     let l = Oe(t);
     let o = Ho(n.libraryKey);
     return useCallback(t => {
@@ -1074,15 +1074,15 @@ function tn({
     })
   });
 }
-let ts = e => !!(e && (e.isSubscribed || e.figJamSubscribed || e.slidesSubscribed.status === _$$tT.Loaded && e.slidesSubscribed.data || e.buzzSubscribed.status === _$$tT.Loaded && e.buzzSubscribed.data));
+let ts = e => !!(e && (e.isSubscribed || e.figJamSubscribed || e.slidesSubscribed.status === ResourceStatus.Loaded && e.slidesSubscribed.data || e.buzzSubscribed.status === ResourceStatus.Loaded && e.buzzSubscribed.data));
 let ti = (e, t) => e ? ts(e) : ts(t);
 let tr = function ({
   libraryData: e,
   orgData: t
 }) {
   let [a, i] = useState(null);
-  let r = px().unwrapOr(null);
-  let l = !!(r && A8(r, FMemberRoleType.ADMIN));
+  let r = useTeamPlanUser().unwrapOr(null);
+  let l = !!(r && checkOrgUserPermission(r, FMemberRoleType.ADMIN));
   let o = t.librarySubscription;
   let c = useCallback(e => e.sort((e, t) => {
     let a = ti(e.librarySubscription, o);
@@ -1160,13 +1160,13 @@ let td = registerModal(function ({
   let r = useSelector(e => e.currentUserOrgId);
   let l = _$$l();
   let o = wJ(e);
-  let d = Rs(LibraryManagementData, {
+  let d = useSubscription(LibraryManagementData, {
     fileKey: e,
     orgId: r
   }, {
     enabled: !o
   });
-  let c = Rs(LibraryManagementCommunityData, {
+  let c = useSubscription(LibraryManagementCommunityData, {
     hubFileId: e,
     orgId: r
   }, {
@@ -1267,7 +1267,7 @@ function tg({
   onClick: s
 }) {
   let i = Nf(e) ? e.library_file_key : e.hub_file_id;
-  let r = Rs(FileByKeyThumbnailUrl, {
+  let r = useSubscription(FileByKeyThumbnailUrl, {
     fileKey: i
   }, {
     enabled: !!i
@@ -1357,13 +1357,13 @@ export function $$tx1(e) {
   let [K, Q] = useState("");
   let Z = useAtomWithSubscription(TG);
   let ee = NJ(org.id);
-  let et = Rs(LibrarySubscriptionView, {
+  let et = useSubscription(LibrarySubscriptionView, {
     orgId: org.id
   });
   let ea = sZ();
   let en = Oe(ea);
   let es = useAtomWithSubscription(S0);
-  let ei = Rs(WorkspaceAdminLibrariesSectionView, {
+  let ei = useSubscription(WorkspaceAdminLibrariesSectionView, {
     workspaceId
   }, {
     enabled: !!workspaceId && en

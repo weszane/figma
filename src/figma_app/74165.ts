@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { AppStateTsApi, DesignGraphElements, UserActionState } from "../figma_app/763686";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { L3 } from "../figma_app/385215";
 import { clearSelection } from "../figma_app/741237";
 import { aV, ax, dH } from "../figma_app/722362";
@@ -18,8 +18,8 @@ export function $$h1() {
       setPropertiesPanelCollapsed,
       togglePropertiesPanelCollapsed
     } = $$m0();
-    let u = ZC(e);
-    let _ = ZC(r);
+    let u = useLatestRef(e);
+    let _ = useLatestRef(r);
     let h = useRef();
     useEffect(() => {
       if ((e !== u || r !== _) && void 0 !== u) {

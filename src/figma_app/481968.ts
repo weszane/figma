@@ -15,7 +15,7 @@ import { kS } from "../figma_app/864723";
 import { Z } from "../905/104740";
 import { renameNode } from "../figma_app/741237";
 import { QZ } from "../figma_app/62612";
-import { As, ze } from "../figma_app/516028";
+import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { l0 } from "../figma_app/610446";
 import { um, E$, ez } from "../figma_app/835718";
 import { Ux } from "../figma_app/864246";
@@ -36,9 +36,9 @@ export function $$x1() {
   let O = Z("figjam_summary_navigate");
   let R = um();
   let L = useAtomWithSubscription(_s);
-  let P = useAtomWithSubscription(As);
+  let P = useAtomWithSubscription(openFileTeamIdAtom);
   let D = useAtomWithSubscription(kS);
-  let k = useAtomWithSubscription(ze);
+  let k = useAtomWithSubscription(openFileKeyAtom);
   let M = useAtomWithSubscription(_$$J);
   let F = {
     orgId: L,

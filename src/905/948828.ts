@@ -7,11 +7,11 @@ import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { EK, tg } from "../figma_app/396432";
 import { B } from "../905/261906";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { FPlanNameType } from "../figma_app/191312";
-import { oz } from "../905/561485";
+import { isSitesFeatureEnabled } from "../905/561485";
 let $$_4 = renderI18nText("plan_comparison.campfire.starter.price.free");
 let A = [renderI18nText("plan_comparison.campfire.starter.feature.three_files"), renderI18nText("plan_comparison.campfire.starter.feature.basic")];
 let y = [renderI18nText("plan_comparison.campfire.pro.feature.unlimited_files"), renderI18nText("plan_comparison.campfire.pro.feature.prototyping"), renderI18nText("plan_comparison.campfire.pro.feature.library"), renderI18nText("plan_comparison.campfire.pro.feature.file_handoff")];
@@ -81,36 +81,36 @@ export function $$S1() {
 var w = (e => (e[e.FIGJAM = 0] = "FIGJAM", e[e.SLIDES = 1] = "SLIDES", e[e.DEV_MODE = 2] = "DEV_MODE", e[e.SITES = 3] = "SITES", e[e.DESIGN = 4] = "DESIGN", e[e.MAKE = 5] = "MAKE", e))(w || {});
 function C() {
   let e = {
-    seatType: ud.COLLABORATOR,
+    seatType: ProductAccessTypeEnum.COLLABORATOR,
     icon: B({
-      type: ud.COLLABORATOR,
+      type: ProductAccessTypeEnum.COLLABORATOR,
       size: "24",
       removeBackgroundColor: !0
     }),
     name: renderI18nText("plan_comparison.campfire.collab_seat.name")
   };
   let t = {
-    seatType: ud.DEVELOPER,
+    seatType: ProductAccessTypeEnum.DEVELOPER,
     icon: B({
-      type: ud.DEVELOPER,
+      type: ProductAccessTypeEnum.DEVELOPER,
       size: "24",
       removeBackgroundColor: !0
     }),
     name: renderI18nText("plan_comparison.campfire.dev_seat.name")
   };
   let i = {
-    seatType: ud.EXPERT,
+    seatType: ProductAccessTypeEnum.EXPERT,
     icon: B({
-      type: ud.EXPERT,
+      type: ProductAccessTypeEnum.EXPERT,
       size: "24",
       removeBackgroundColor: !0
     }),
     name: renderI18nText("plan_comparison.campfire.full_seat.name")
   };
   let n = {
-    seatType: ud.CONTENT,
+    seatType: ProductAccessTypeEnum.CONTENT,
     icon: B({
-      type: ud.CONTENT,
+      type: ProductAccessTypeEnum.CONTENT,
       size: "24",
       removeBackgroundColor: !0
     }),
@@ -118,18 +118,18 @@ function C() {
   };
   let r = N_.sort(AG);
   let a = {
-    [ud.COLLABORATOR]: e,
-    [ud.DEVELOPER]: t,
-    [ud.EXPERT]: i,
-    [ud.CONTENT]: n
+    [ProductAccessTypeEnum.COLLABORATOR]: e,
+    [ProductAccessTypeEnum.DEVELOPER]: t,
+    [ProductAccessTypeEnum.EXPERT]: i,
+    [ProductAccessTypeEnum.CONTENT]: n
   };
   return r.map(e => a[e]);
 }
 export function $$T7() {
   let e = {
-    seatType: ud.COLLABORATOR,
+    seatType: ProductAccessTypeEnum.COLLABORATOR,
     icon: B({
-      type: ud.COLLABORATOR,
+      type: ProductAccessTypeEnum.COLLABORATOR,
       size: "32"
     }),
     name: renderI18nText("plan_comparison.campfire.collab.name"),
@@ -137,9 +137,9 @@ export function $$T7() {
     supportedProducts: [0, 1]
   };
   let t = {
-    seatType: ud.DEVELOPER,
+    seatType: ProductAccessTypeEnum.DEVELOPER,
     icon: B({
-      type: ud.DEVELOPER,
+      type: ProductAccessTypeEnum.DEVELOPER,
       size: "32"
     }),
     name: renderI18nText("plan_comparison.campfire.dev.name"),
@@ -147,9 +147,9 @@ export function $$T7() {
     supportedProducts: [0, 1, 2]
   };
   let i = {
-    seatType: ud.EXPERT,
+    seatType: ProductAccessTypeEnum.EXPERT,
     icon: B({
-      type: ud.EXPERT,
+      type: ProductAccessTypeEnum.EXPERT,
       size: "32"
     }),
     name: renderI18nText("plan_comparison.campfire.full.name"),
@@ -157,9 +157,9 @@ export function $$T7() {
     supportedProducts: [0, 1, 2, 3, 4, 5]
   };
   let n = {
-    seatType: ud.CONTENT,
+    seatType: ProductAccessTypeEnum.CONTENT,
     icon: B({
-      type: ud.CONTENT,
+      type: ProductAccessTypeEnum.CONTENT,
       size: "32"
     }),
     name: renderI18nText("plan_comparison.campfire.content.name"),
@@ -167,10 +167,10 @@ export function $$T7() {
     supportedProducts: [0, 1, 3]
   };
   let r = {
-    [ud.COLLABORATOR]: e,
-    [ud.DEVELOPER]: t,
-    [ud.EXPERT]: i,
-    [ud.CONTENT]: n
+    [ProductAccessTypeEnum.COLLABORATOR]: e,
+    [ProductAccessTypeEnum.DEVELOPER]: t,
+    [ProductAccessTypeEnum.EXPERT]: i,
+    [ProductAccessTypeEnum.CONTENT]: n
   };
   return N_.sort((e, t) => -AG(e, t)).map(e => r[e]);
 }
@@ -197,7 +197,7 @@ export function $$k2(e) {
         i = renderI18nText("general.figma_rev");
     }
     let d = e.includes(t);
-    return (3 !== t || oz()) && (5 !== t || getFeatureFlags().bake_full_seat_description) ? jsxs("div", {
+    return (3 !== t || isSitesFeatureEnabled()) && (5 !== t || getFeatureFlags().bake_full_seat_description) ? jsxs("div", {
       className: _$$s.flex.my4.$,
       children: [d ? jsx(_$$g, {}) : jsx(q, {
         style: {

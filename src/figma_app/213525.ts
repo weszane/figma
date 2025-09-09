@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { Mb, El } from "../figma_app/646357";
 import { D2 } from "../905/18797";
 import { je } from "../figma_app/155728";
@@ -17,7 +17,7 @@ export function $$p0() {
 }
 export function $$_1() {
   let e = useSelector(e => e.loadingState);
-  let t = _G();
+  let t = useOpenFileLibraryKey();
   let r = ce();
   let l = r.data?.assetsByLibraryKey;
   return useCallback(r => {

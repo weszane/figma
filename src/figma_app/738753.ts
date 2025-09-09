@@ -1,5 +1,5 @@
 import { yZ } from "../figma_app/476572";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 let $$a1 = "Selection Changed";
 let s = new Set();
 export function $$o0(e, t, r) {
@@ -8,7 +8,7 @@ export function $$o0(e, t, r) {
     return 0 === t.length ? new Set() : new Set(t);
   }(t);
   let l = !yZ(o, s);
-  YQ({
+  handleAtomEvent({
     id: $$a1,
     properties: {
       ...r,

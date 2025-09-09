@@ -14,7 +14,7 @@ import { LN } from "../figma_app/975811";
 import { m0 } from "../figma_app/976749";
 import { Ku } from "../figma_app/740163";
 import { u as _$$u, hg } from "../figma_app/852050";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { G } from "../figma_app/194673";
 import { aj, DP, Af } from "../figma_app/803932";
 import { T4, Cj, Wf, uQ } from "../figma_app/151869";
@@ -60,7 +60,7 @@ export function $$F0({
   itemIndex: i,
   itemType: a
 }) {
-  let s = _G();
+  let s = useOpenFileLibraryKey();
   let o = Fj(e);
   let l = Cj(o?.name);
   return jsx("div", {

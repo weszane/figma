@@ -1,129 +1,206 @@
-import { throwTypeError } from "../figma_app/465776";
-import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
-import { s$, i5, LC } from "../figma_app/421473";
-let s = {
-  [s$.VOICE]: {
-    environments: {
-      gov: i5.INELIGIBLE
-    },
-    tiers: {
-      [FPlanNameType.ORG]: i5.ELIGIBLE,
-      [FPlanNameType.ENTERPRISE]: i5.ELIGIBLE,
-      [FPlanNameType.PRO]: i5.ELIGIBLE,
-      [FPlanNameType.STUDENT]: i5.ELIGIBLE,
-      [FPlanNameType.STARTER]: i5.UPSELL
-    }
-  },
-  [s$.DISABLE_WORKSHOP]: {
-    environments: {
-      gov: i5.ELIGIBLE
-    },
-    tiers: {
-      [FPlanNameType.ORG]: i5.ELIGIBLE,
-      [FPlanNameType.ENTERPRISE]: i5.ELIGIBLE,
-      [FPlanNameType.PRO]: i5.UPSELL,
-      [FPlanNameType.STUDENT]: i5.UPSELL,
-      [FPlanNameType.STARTER]: i5.UPSELL
-    }
-  },
-  [s$.DISABLE_FIGJAM]: {
-    environments: {
-      gov: i5.ELIGIBLE
-    },
-    tiers: {
-      [FPlanNameType.ORG]: i5.ELIGIBLE,
-      [FPlanNameType.ENTERPRISE]: i5.ELIGIBLE,
-      [FPlanNameType.PRO]: i5.UPSELL,
-      [FPlanNameType.STUDENT]: i5.UPSELL,
-      [FPlanNameType.STARTER]: i5.UPSELL
-    }
-  },
-  [s$.DISABLE_AI_FEATURES]: {
-    environments: {
-      gov: i5.ELIGIBLE
-    },
-    tiers: {
-      [FPlanNameType.ORG]: i5.ELIGIBLE,
-      [FPlanNameType.ENTERPRISE]: i5.ELIGIBLE,
-      [FPlanNameType.PRO]: i5.ELIGIBLE,
-      [FPlanNameType.STUDENT]: i5.ELIGIBLE,
-      [FPlanNameType.STARTER]: i5.ELIGIBLE
-    }
+import { FOrganizationLevelType, FPlanNameType } from '../figma_app/191312'
+import { EligibilityStatusType, FeatureStateType, FeatureToggleType } from '../figma_app/421473'
+import { throwTypeError } from '../figma_app/465776'
+
+/**
+ * Eligibility configuration for feature toggles (original: s)
+ */
+export type FeatureEligibilityConfig = {
+  [key in FeatureToggleType]: {
+    environments: Partial<Record<string, EligibilityStatusType>>
+    tiers: Partial<Record<FPlanNameType, EligibilityStatusType>>
   }
-};
-function o(e, t, r = window.INITIAL_OPTIONS.cluster_name) {
-  return "gov" === r && s[t].environments.gov ? s[t].environments.gov : e && s[t]?.tiers[e.tier] ? s[t].tiers[e.tier] : i5.INELIGIBLE;
 }
-function l(e, t, r = window.INITIAL_OPTIONS.cluster_name) {
-  if (o(e, t, r) === i5.INELIGIBLE || !e) return LC.DISABLED;
-  let i = o(e, t, r);
-  switch (t) {
-    case s$.VOICE:
-      if (i === i5.ELIGIBLE) return e.voiceEnabled ? LC.ENABLED : LC.DISABLED;
-      return LC.DISABLED;
-    case s$.DISABLE_FIGJAM:
-      if (i === i5.ELIGIBLE) return e.figjamDisabledAt ? LC.ENABLED : LC.DISABLED;
-      return LC.DISABLED;
-    case s$.DISABLE_WORKSHOP:
-      if (i === i5.ELIGIBLE) return e.workshopEnabled ? LC.DISABLED : LC.ENABLED;
-      return LC.DISABLED;
-    case s$.DISABLE_AI_FEATURES:
-      if (i === i5.ELIGIBLE) return e.aiFeaturesEnabled ? LC.ENABLED : LC.DISABLED;
-      return LC.DISABLED;
+
+/**
+ * Eligibility configuration for feature toggles (original: s)
+ */
+const featureEligibilityConfig: FeatureEligibilityConfig = {
+  [FeatureToggleType.VOICE]: {
+    environments: {
+      gov: EligibilityStatusType.INELIGIBLE,
+    },
+    tiers: {
+      [FPlanNameType.ORG]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.ENTERPRISE]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.PRO]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.STUDENT]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.STARTER]: EligibilityStatusType.UPSELL,
+    },
+  },
+  [FeatureToggleType.DISABLE_WORKSHOP]: {
+    environments: {
+      gov: EligibilityStatusType.ELIGIBLE,
+    },
+    tiers: {
+      [FPlanNameType.ORG]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.ENTERPRISE]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.PRO]: EligibilityStatusType.UPSELL,
+      [FPlanNameType.STUDENT]: EligibilityStatusType.UPSELL,
+      [FPlanNameType.STARTER]: EligibilityStatusType.UPSELL,
+    },
+  },
+  [FeatureToggleType.DISABLE_FIGJAM]: {
+    environments: {
+      gov: EligibilityStatusType.ELIGIBLE,
+    },
+    tiers: {
+      [FPlanNameType.ORG]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.ENTERPRISE]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.PRO]: EligibilityStatusType.UPSELL,
+      [FPlanNameType.STUDENT]: EligibilityStatusType.UPSELL,
+      [FPlanNameType.STARTER]: EligibilityStatusType.UPSELL,
+    },
+  },
+  [FeatureToggleType.DISABLE_AI_FEATURES]: {
+    environments: {
+      gov: EligibilityStatusType.ELIGIBLE,
+    },
+    tiers: {
+      [FPlanNameType.ORG]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.ENTERPRISE]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.PRO]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.STUDENT]: EligibilityStatusType.ELIGIBLE,
+      [FPlanNameType.STARTER]: EligibilityStatusType.ELIGIBLE,
+    },
+  },
+}
+
+/**
+ * Returns eligibility status for a feature toggle and plan (original: o)
+ * @param plan
+ * @param featureToggle
+ * @param clusterName
+ */
+export function getEligibilityStatus(
+  plan: { tier: FPlanNameType } | undefined,
+  featureToggle: FeatureToggleType,
+  clusterName: string = window.INITIAL_OPTIONS.cluster_name,
+): EligibilityStatusType {
+  if (clusterName === 'gov' && featureEligibilityConfig[featureToggle].environments.gov) {
+    return featureEligibilityConfig[featureToggle].environments.gov!
+  }
+  if (plan && featureEligibilityConfig[featureToggle]?.tiers[plan.tier]) {
+    return featureEligibilityConfig[featureToggle].tiers[plan.tier]!
+  }
+  return EligibilityStatusType.INELIGIBLE
+}
+
+/**
+ * Returns feature state for a given plan and feature toggle (original: l)
+ * @param plan
+ * @param featureToggle
+ * @param clusterName
+ */
+export function getFeatureState(
+  plan: any,
+  featureToggle: FeatureToggleType,
+  clusterName: string = window.INITIAL_OPTIONS.cluster_name,
+): FeatureStateType {
+  const eligibility = getEligibilityStatus(plan, featureToggle, clusterName)
+  if (eligibility === EligibilityStatusType.INELIGIBLE || !plan) {
+    return FeatureStateType.DISABLED
+  }
+  switch (featureToggle) {
+    case FeatureToggleType.VOICE:
+      return eligibility === EligibilityStatusType.ELIGIBLE && plan.voiceEnabled
+        ? FeatureStateType.ENABLED
+        : FeatureStateType.DISABLED
+    case FeatureToggleType.DISABLE_FIGJAM:
+      return eligibility === EligibilityStatusType.ELIGIBLE && plan.figjamDisabledAt
+        ? FeatureStateType.ENABLED
+        : FeatureStateType.DISABLED
+    case FeatureToggleType.DISABLE_WORKSHOP:
+      return eligibility === EligibilityStatusType.ELIGIBLE && plan.workshopEnabled
+        ? FeatureStateType.DISABLED
+        : FeatureStateType.ENABLED
+    case FeatureToggleType.DISABLE_AI_FEATURES:
+      return eligibility === EligibilityStatusType.ELIGIBLE && plan.aiFeaturesEnabled
+        ? FeatureStateType.ENABLED
+        : FeatureStateType.DISABLED
     default:
-      throwTypeError(t, "Unknown plan feature");
+      throwTypeError(featureToggle, 'Unknown plan feature')
   }
 }
-export function $$d2(e) {
+
+/**
+ * Returns plan features and states for a plan (original: $$d2)
+ * @param plan
+ */
+export function getPlanFeatures(plan: any) {
   return {
-    ...e,
+    ...plan,
     voice: {
-      supports: o(e, s$.VOICE),
-      enabled: l(e, s$.VOICE)
+      supports: getEligibilityStatus(plan, FeatureToggleType.VOICE),
+      enabled: getFeatureState(plan, FeatureToggleType.VOICE),
     },
     disable_figjam: {
-      supports: o(e, s$.DISABLE_FIGJAM),
-      enabled: l(e, s$.DISABLE_FIGJAM)
+      supports: getEligibilityStatus(plan, FeatureToggleType.DISABLE_FIGJAM),
+      enabled: getFeatureState(plan, FeatureToggleType.DISABLE_FIGJAM),
     },
     disable_workshop: {
-      supports: o(e, s$.DISABLE_WORKSHOP),
-      enabled: l(e, s$.DISABLE_WORKSHOP)
+      supports: getEligibilityStatus(plan, FeatureToggleType.DISABLE_WORKSHOP),
+      enabled: getFeatureState(plan, FeatureToggleType.DISABLE_WORKSHOP),
     },
     disable_ai_features: {
-      supports: o(e, s$.DISABLE_AI_FEATURES),
-      enabled: l(e, s$.DISABLE_AI_FEATURES)
-    }
-  };
-}
-export function $$c3(e, t) {
-  switch (e) {
-    case FOrganizationLevelType.TEAM:
-      return t.team;
-    case FOrganizationLevelType.ORG:
-      return t.org;
-    default:
-      throwTypeError(e);
+      supports: getEligibilityStatus(plan, FeatureToggleType.DISABLE_AI_FEATURES),
+      enabled: getFeatureState(plan, FeatureToggleType.DISABLE_AI_FEATURES),
+    },
   }
 }
-export function $$u1(e, t) {
+
+/**
+ * Returns organization/team data by level type (original: $$c3)
+ * @param orgLevel
+ * @param data
+ */
+export function getOrgLevelData(orgLevel: FOrganizationLevelType, data: any) {
+  switch (orgLevel) {
+    case FOrganizationLevelType.TEAM:
+      return data.team
+    case FOrganizationLevelType.ORG:
+      return data.org
+    default:
+      throwTypeError(orgLevel)
+  }
+}
+
+/**
+ * Returns plan data with type (original: $$u1)
+ * @param orgLevel
+ * @param data
+ */
+export function getPlanData(orgLevel: FOrganizationLevelType, data: any) {
   return {
-    ...$$c3(e, t),
-    planType: e
-  };
+    ...getOrgLevelData(orgLevel, data),
+    planType: orgLevel,
+  }
 }
-export function $$p0(e) {
-  if (!e || !e.includes("::")) return null;
-  let [t, r] = e.split("::");
-  return t && r && Object.values(FOrganizationLevelType).includes(t) ? {
-    type: t,
-    parentId: r
-  } : null;
+
+/**
+ * Parses organization parent id string (original: $$p0)
+ * @param value
+ */
+export function parseOrgParentId(value: string | undefined) {
+  if (!value || !value.includes('::'))
+    return null
+  const [type, parentId] = value.split('::')
+  return type && parentId && Object.values(FOrganizationLevelType).includes(type as FOrganizationLevelType)
+    ? { type, parentId }
+    : null
 }
-export function $$_4(e) {
-  return ![FPlanNameType.STARTER, FPlanNameType.STUDENT].includes(e);
+
+/**
+ * Checks if plan name is not starter or student (original: $$_4)
+ * @param planName
+ */
+export function isPaidPlan(planName: FPlanNameType) {
+  return ![FPlanNameType.STARTER, FPlanNameType.STUDENT].includes(planName)
 }
-export const Do = $$p0;
-export const Ef = $$u1;
-export const HT = $$d2;
-export const RB = $$c3;
-export const e0 = $$_4;
+
+// Export aliases for backward compatibility
+export const Do = parseOrgParentId
+export const Ef = getPlanData
+export const HT = getPlanFeatures
+export const RB = getOrgLevelData
+export const e0 = isPaidPlan

@@ -18,7 +18,7 @@ import { sx } from "../905/941192";
 import { E as _$$E3 } from "../905/984674";
 import { B } from "../905/261906";
 import { tI } from "../figma_app/847597";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { FBillingPeriodType, FOrganizationLevelType } from "../figma_app/191312";
 import { hY, ww, Vt, II } from "../figma_app/80683";
 import { C3 } from "../figma_app/297957";
@@ -143,7 +143,7 @@ function S(e) {
           color: "secondary",
           children: getI18nString("admin_settings.people_tab.seat_counts.in_this_billing_group")
         })
-      }), e.seatType !== Gu.VIEW && !e.forLicenseGroup && !e.isELA && t]
+      }), e.seatType !== ViewAccessTypeEnum.VIEW && !e.forLicenseGroup && !e.isELA && t]
     })
   });
 }

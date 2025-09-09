@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { A } from "../905/963262";
 import { qZ } from "../figma_app/451396";
@@ -11,18 +11,18 @@ import { XP } from "../figma_app/655139";
 import { mapPlatformToFramework } from "../905/359509";
 import { r as _$$r } from "../figma_app/821179";
 import { GS } from "../figma_app/314264";
-import { sS, XJ, tS } from "../figma_app/516028";
+import { selectOpenFileKey, selectOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { Q } from "../905/618914";
 import { PreloadCodeConnectLk, FileCanAccessFullCodeConnect } from "../figma_app/43951";
-import { mZ } from "../905/276025";
+import { getPlanFeaturesTeamAtomFamily } from "../905/276025";
 import { $W } from "../905/144933";
 import { HX, ad, Xe, kN } from "../figma_app/97042";
 import { tz, Lw, rx, DR } from "../figma_app/342355";
 import { w6 } from "../905/372596";
 function v(e, t, r, n = new Set()) {
-  let i = sS(t);
+  let i = selectOpenFileKey(t);
   let a = t.mirror.sceneGraph;
-  let s = XJ(t);
+  let s = selectOpenFileLibraryKey(t);
   if (!e) throw Error("No node provided");
   if (!a) throw Error("No sceneGraph provided");
   if (!i) throw Error("No fileKey provided");
@@ -128,7 +128,7 @@ async function N(e, t) {
   let n = {};
   let i = {};
   let o = debugState.getState();
-  let l = await Q(mZ(!0));
+  let l = await Q(getPlanFeaturesTeamAtomFamily(!0));
   let {
     nodesByLibraryKey
   } = v(e, o, i, t);
@@ -185,8 +185,8 @@ async function N(e, t) {
   return [n, i];
 }
 export function $$C0() {
-  let e = tS();
-  let [t] = IT(FileCanAccessFullCodeConnect({
+  let e = useCurrentFileKey();
+  let [t] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
     key: e ?? ""
   }));
   return "loaded" === t.status && "loaded" === t.data.file.status && t.data.file.data?.hasPermission === !0;

@@ -1,6 +1,6 @@
 import { isNotNullish } from "../figma_app/95419";
 import { Vh, kV, N9 } from "../figma_app/692987";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 export function $$l7(e) {
@@ -24,15 +24,15 @@ export function $$u1(e, t) {
   return r;
 }
 export function $$p2(e) {
-  return Object.entries(e).filter(([e, t]) => e !== Gu.VIEW).map(([e, t]) => t).reduce((e, t) => e + t, 0);
+  return Object.entries(e).filter(([e, t]) => e !== ViewAccessTypeEnum.VIEW).map(([e, t]) => t).reduce((e, t) => e + t, 0);
 }
 export function $$_3(e) {
-  return e.filter(e => e !== Gu.VIEW).sort((e, t) => AG(e, t))[0] ?? Gu.VIEW;
+  return e.filter(e => e !== ViewAccessTypeEnum.VIEW).sort((e, t) => AG(e, t))[0] ?? ViewAccessTypeEnum.VIEW;
 }
 export function $$h4(e) {
   let t = {};
   Object.entries(e).forEach(([e, r]) => {
-    isNotNullish(r) && r !== Gu.VIEW && (t[e] = r);
+    isNotNullish(r) && r !== ViewAccessTypeEnum.VIEW && (t[e] = r);
   });
   return t;
 }

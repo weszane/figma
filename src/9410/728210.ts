@@ -9,7 +9,7 @@ import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { BrowserInfo, isMobileNotFigmaMobile, isAnyMobile } from "../figma_app/778880";
 import { y7, oJ, $ as _$$$, jA, NB, L3, KI } from "../figma_app/385215";
 import { Fj, Dv, ah, uc } from "../905/763714";
@@ -20,7 +20,7 @@ import { O1, KD } from "../figma_app/317394";
 import { _o } from "../figma_app/701001";
 import { ni } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { $0, dR, Ww, y as _$$y, oW, D_, HG, By, VA, Pi } from "../figma_app/440875";
 import { T as _$$T, N as _$$N2 } from "../905/847283";
 import { _6, z3 } from "../figma_app/386952";
@@ -222,8 +222,8 @@ function Z() {
   return "prototype" !== z3() && !isMobileNotFigmaMobile();
 }
 function Q(e, t, i, r) {
-  let a = ZC(e);
-  let s = ZC(t);
+  let a = useLatestRef(e);
+  let s = useLatestRef(t);
   let o = useRef(performance.now());
   useEffect(() => {
     if ("presenting" === e) {
@@ -265,7 +265,7 @@ function $(e) {
   let h = dR();
   let m = $0();
   let f = _$$y();
-  let y = q5();
+  let y = selectCurrentFile();
   let E = useAtomWithSubscription(Fj);
   let T = _$$T();
   let w = y7();
@@ -654,7 +654,7 @@ function et(e) {
     isTabAccessible = !1
   } = e;
   let s = $0();
-  let o = q5();
+  let o = selectCurrentFile();
   let l = useSelector(e => e.multiplayer.allUsers.length);
   let d = useRef(l);
   d.current = l;

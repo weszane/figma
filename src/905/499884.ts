@@ -1,5 +1,9 @@
-import { z } from "../905/239603";
-export let $$r0 = z.object({
+import { z } from "zod";
+/**
+ * Schema for organization SAML configuration.
+ * Original export: $$r0
+ */
+export const orgSamlConfigSchema = z.object({
   id: z.string(),
   org_saml_config_id: z.string().optional(),
   name: z.string(),
@@ -8,4 +12,9 @@ export let $$r0 = z.object({
   deleted_at: z.string().optional(),
   external_id: z.string().optional()
 });
-export const m = $$r0;
+
+/**
+ * Alias for orgSamlConfigSchema.
+ * Original export: m
+ */
+export const m = orgSamlConfigSchema;

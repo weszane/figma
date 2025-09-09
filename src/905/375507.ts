@@ -12,7 +12,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { cleanFontVersion } from "../905/165290";
 import { Ax, Jt } from "../figma_app/616261";
 import { RecordingComponent } from "../figma_app/878298";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../905/443820";
@@ -51,7 +51,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { K as _$$K2 } from "../905/443068";
 import { o as _$$o } from "../905/821217";
 import { J as _$$J2 } from "../905/614223";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { P as _$$P } from "../905/347284";
 import { SharedFontsModalTeamPermissions, SharedFontsModalOrgPermissions } from "../figma_app/43951";
 import { g as _$$g } from "../905/763242";
@@ -485,12 +485,12 @@ function eR(e) {
     width,
     uniqueResourceId
   } = e;
-  let F = Rs(SharedFontsModalTeamPermissions, {
+  let F = useSubscription(SharedFontsModalTeamPermissions, {
     teamId: resourceId
   }, {
     enabled: "team" === resourceType
   });
-  let M = Rs(SharedFontsModalOrgPermissions, {
+  let M = useSubscription(SharedFontsModalOrgPermissions, {
     orgId: resourceId
   }, {
     enabled: "org" === resourceType
@@ -812,7 +812,7 @@ class eN extends PureComponent {
         children: jsx(_$$R, {
           text: getI18nString("design_systems.shared_fonts.list_of_variations_for_font", {
             numVariations: e.variationInstances.length,
-            listOfVariations: Yx(e.variationInstances.map(e => e.name))
+            listOfVariations: formatList(e.variationInstances.map(e => e.name))
           }),
           className: "shared_fonts_modal_content--variableFontInstances--nee-z"
         })
@@ -1274,7 +1274,7 @@ let eB = registerModal(function (e) {
           children: renderI18nText("design_systems.shared_fonts.team_fonts_override_warning_1", {
             fontFamily: p.font.family,
             fontStyle: p.font.style,
-            listOfTeams: Yx(g)
+            listOfTeams: formatList(g)
           })
         }), jsx("div", {
           className: eO,

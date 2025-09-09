@@ -4,10 +4,10 @@ import { permissionScopeHandler, AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Jr } from "../figma_app/624361";
 import { eY } from "../figma_app/722362";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { A } from "../905/202425";
 import { n0 } from "../figma_app/259678";
@@ -64,7 +64,7 @@ export async function $$y0(e, t, n, r, a) {
     }(c, u, n);
     analyticsEventManager.trackDefinedEvent("ai_for_production.chat_attachment_added", {
       attachmentType: d,
-      fileKey: atomStoreManager.get(yV)?.key ?? void 0
+      fileKey: atomStoreManager.get(openFileAtom)?.key ?? void 0
     });
   } catch (t) {
     n(t => t.map(t => ak(t, e) ? {
@@ -77,7 +77,7 @@ export function $$_1(e, t) {
   let n = eY();
   let s = AppStateTsApi.figmakeState();
   let a = getObservableOrFallback(s.pastedNodeGuid);
-  let l = ZC(a);
+  let l = useLatestRef(a);
   let {
     attachments,
     setAttachments,

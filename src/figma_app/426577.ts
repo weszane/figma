@@ -24,7 +24,7 @@ import { c as _$$c } from "../figma_app/765216";
 import { hg, zk } from "../figma_app/947348";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { c as _$$c2 } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { f as _$$f } from "../905/940356";
@@ -130,7 +130,7 @@ function H() {
   });
   let i = _$$f("seen_draw_variable_width_stroke_onboarding");
   let a = () => {
-    i?.createdAt || YQ({
+    i?.createdAt || handleAtomEvent({
       id: G
     });
     complete();

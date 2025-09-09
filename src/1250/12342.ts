@@ -1,13 +1,13 @@
 import { getFeatureFlags } from "../905/601108";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 export function $$s2() {
   let e = p8("pagesList");
   return e.some(t => t.pageType !== e[0].pageType);
 }
 export function $$l0() {
-  let e = q5();
+  let e = selectCurrentFile();
   return e?.editorType === FFileType.DESIGN;
 }
 export function $$d1() {

@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs, oS } from "../figma_app/288654";
+import { useSubscription, useLoggedSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { MF, A5 } from "../figma_app/391338";
+import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { FileBrowserSidebarData } from "../figma_app/43951";
 function c(e) {
   let {
@@ -13,14 +13,14 @@ function c(e) {
     oldValue: e.transform(e => (e.org?.workspaces?.length || 0) > 0),
     newValue: e.transform(e => oA(e.org?.hasWorkspaces, null))
   }), [e]);
-  MF({
+  useShadowReadLoaded({
     oldValue,
     newValue,
-    label: A5.FileBrowserSidebarData.hasWorkspaces
+    label: adminPermissionConfig.FileBrowserSidebarData.hasWorkspaces
   });
 }
 export function $$u0(e, t) {
-  let r = Rs(FileBrowserSidebarData, e, t);
+  let r = useSubscription(FileBrowserSidebarData, e, t);
   c(r);
   return r;
 }
@@ -45,7 +45,7 @@ export function $$p1(e, t) {
       }));
     }
   }), [e.currentOrgId, e.currentTeamId]);
-  let o = oS(FileBrowserSidebarData, e, {
+  let o = useLoggedSubscription(FileBrowserSidebarData, e, {
     ...t,
     subscriptionLogger: r
   });

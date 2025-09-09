@@ -24,7 +24,7 @@ import { i as _$$i } from "../905/186077";
 import { s as _$$s } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString } from "../905/303541";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { _j, Dh } from "../figma_app/843119";
 import { dG } from "../figma_app/753501";
 import { i as _$$i2 } from "../figma_app/85949";
@@ -139,7 +139,7 @@ function ea({
   onItemMouseLeave: _
 }) {
   let h = useMemo(() => [1, t], [t]);
-  let m = to();
+  let m = useIsSelectedViewFullscreenCooper();
   switch (e.type) {
     case Yc.ASSET_TYPE:
       return jsx(el, {

@@ -2,9 +2,9 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { tT } from "../905/663269";
+import { ResourceStatus } from "../905/663269";
 import { Xf } from "../figma_app/153916";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
 import { zE, Ex } from "../figma_app/919079";
 import { tH } from "../905/751457";
@@ -31,7 +31,7 @@ export function $$k0(e) {
   let {
     getConfig
   } = I7("exp_all_admin_request_dash");
-  let a = Rs(AdminRequestDashOrgInfo, {
+  let a = useSubscription(AdminRequestDashOrgInfo, {
     orgId: e.planId
   }, {
     enabled: e.planType === ps.ORG
@@ -41,7 +41,7 @@ export function $$k0(e) {
     isIntendedAudience: !!(e.planType === ps.ORG && "loaded" === a.status && a.data?.org?.bigmaEnabledAt) && !1 === e.isOrgAdmin
   });
   let m = e.isOrgAdmin ? [null, ...(e.managedBillingGroups ?? [])] : e.managedBillingGroups;
-  let _ = Rs(AdminNotificationsCountView, {
+  let _ = useSubscription(AdminNotificationsCountView, {
     planType: e.planType,
     planId: e.planId,
     filterParams: r || o ? JSON.stringify({
@@ -52,7 +52,7 @@ export function $$k0(e) {
       billing_group_ids: []
     })
   });
-  let g = "loaded" === _.status && _.data.adminDashboardRequestsTotalCount.status === tT.Loaded && ("loaded" === a.status || e.planType === ps.TEAM) ? _.data.adminDashboardRequestsTotalCount.data?.rowCount : void 0;
+  let g = "loaded" === _.status && _.data.adminDashboardRequestsTotalCount.status === ResourceStatus.Loaded && ("loaded" === a.status || e.planType === ps.TEAM) ? _.data.adminDashboardRequestsTotalCount.data?.rowCount : void 0;
   let h = g ?? 0;
   let [v, b] = useAtomValueAndSetter(Y);
   let y = r ? [e.planType, e.planId, !0].toString() : [e.planType, e.planId].toString();
@@ -194,7 +194,7 @@ function F(e) {
   let a = MX();
   let i = e.invoices && hX(e.invoices);
   let l = e.org.bigma_enabled && e.orgUser.license_admin && e.orgUser.permission !== FUserRoleType.ADMIN;
-  let o = Rs(OrgTaxIdView, {
+  let o = useSubscription(OrgTaxIdView, {
     orgId: e.org.id
   });
   let c = "loaded" === o.status ? o.data.org?.taxIdVerificationStatus : null;
@@ -262,7 +262,7 @@ function B(e) {
   let v = ZY({
     isIntendedAudience: e.org.bigma_enabled && !a
   });
-  let b = Rs(OrgTaxIdView, {
+  let b = useSubscription(OrgTaxIdView, {
     orgId: e.org.id
   }, {
     enabled: a

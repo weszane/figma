@@ -8,12 +8,12 @@ import { waitForAnimationFrame } from "../905/236856";
 import c from "../vendor/223926";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
-import { S3, Rh } from "../905/485103";
+import { sendHistogram, sendMetric } from "../905/485103";
 import { PerfTimer } from "../905/609396";
 import { ET, qW } from "../905/623179";
 import { reportError } from "../905/11";
 import { logError, logWarning } from "../905/714362";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
@@ -49,7 +49,7 @@ let $$q2 = createOptimistThunk(e => {
   e.dispatch(Q.dequeue({
     type: _$$_.MOVE_COMPONENTS_PROMPT
   }));
-  YQ({
+  handleAtomEvent({
     id: "Finished publishing components"
   });
   e.dispatch($$$3());
@@ -186,7 +186,7 @@ async function ee(e, t, r, n) {
     }
     try {
       T.push(await ET(_$$e.DESIGN_SYSTEMS_EDITOR, "uploadThumbnails", e, t, r.buffer, "application/octet-stream"));
-      S3("publish.thumbnails_buffer.bytes", r.buffer.byteLength);
+      sendHistogram("publish.thumbnails_buffer.bytes", r.buffer.byteLength);
     } catch (e) {
       e instanceof qW && (S = !0);
       c.push(...r.guids);
@@ -218,7 +218,7 @@ function er(e, t, r, n) {
     trackEventAnalytics(t, {
       duration: e
     });
-    S3(r, e, {
+    sendHistogram(r, e, {
       error: n
     });
   } else logError(J, "Publish start time was null");
@@ -242,7 +242,7 @@ function en(e, t, r, n, i, a, s, o) {
         let s = getFeatureFlags().ssp_stop_client_gen_thumb_generation ? "true" : "false";
         for (let [e, r] of Object.entries(a)) {
           let n = `${t.publishType}.success.${e}`;
-          S3(n, r, {
+          sendHistogram(n, r, {
             skip_client_thumbnail: s
           });
         }
@@ -393,7 +393,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   }
   let Q = [PW.CODE_COMPONENT, PW.RESPONSIVE_SET].every(e => !_$$O(e) || aB(Object.values($).filter(t => t.type === e), Z));
   let ei = t.unpublishAll || aB(Object.values(MH(A)), Z) && aB(Object.values(dM(A)), Z) && aB(Object.values(cM(A)), Z) && aB(Object.values(bh(A)), Z) && (!_$$O(PW.MODULE) || aB(Object.values(x6(A)), Z)) && Q;
-  Rh(`${ei ? M$.UNPUBLISH : M$.PUBLISH}.start`);
+  sendMetric(`${ei ? M$.UNPUBLISH : M$.PUBLISH}.start`);
   e.dispatch($$K1({
     unpublishAll: !!ei
   }));

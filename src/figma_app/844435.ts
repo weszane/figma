@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { Rs, p as _$$p } from "../figma_app/288654";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
@@ -22,13 +22,13 @@ import { dN } from "../figma_app/564095";
 import { CR, kA } from "../figma_app/684168";
 import { p8 } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { FPublicationStatusType, FPublisherType, FPinStatusType, FUserRoleType } from "../figma_app/191312";
 import { InstalledPlugins, Plugin } from "../figma_app/43951";
 import { mn, oh } from "../905/18797";
-import { Eh, cb } from "../figma_app/12796";
+import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { filterEntriesByPluginVersionEditorType, filterPublishedResources, sortResourcesByCreatedAt, filterResourcesByMatch, filterEntriesByEditorType, canRunPlugin, convertEditorTypeToFileType, isEditorTypeMatch, isDevModePlugin, getCurrentPluginVersion, getPluginByFileId, getPluginVersion } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
 import { manifestContainsWidget, ManifestSchema, ManifestEditorType, getPluginAllowListKey, getWidgetAllowListKey, hasLocalFileId, isPublicPlugin } from "../figma_app/155287";
@@ -481,7 +481,7 @@ let eg = d()(e => {
 export function $$ef4() {
   let e = useDispatch();
   let t = useSelector(e => e.currentUserOrgId);
-  let r = Rs(InstalledPlugins, {
+  let r = useSubscription(InstalledPlugins, {
     orgId: t
   });
   let a = getUserId();
@@ -589,7 +589,7 @@ export function $$ey43(e) {
 export function $$eb28(e, t) {
   let r = sZ()?.id ?? null;
   let i = getUserId();
-  let a = Rs(Plugin, {
+  let a = useSubscription(Plugin, {
     orgId: r,
     pluginId: e
   }, {
@@ -614,7 +614,7 @@ export function $$eT49(e, {
     orgId: r,
     pluginId: e
   })), [e, r]);
-  let s = _$$p(Plugin, a, {
+  let s = useMultiSubscription(Plugin, a, {
     enabled: t
   });
   let o = [];
@@ -765,7 +765,7 @@ function ek(e) {
   let s = !!t;
   let o = function (e, t = !0) {
     let r = sZ()?.id ?? "";
-    let n = tS();
+    let n = useCurrentFileKey();
     let i = CR(e, t && !!n);
     let a = kA(r ?? "", e, t && !!r && !n);
     return n ? i : a;
@@ -787,7 +787,7 @@ export function $$eM39() {
   let a = !!(t && t.plugins_whitelist_enforced);
   let s = ek("plugin");
   let o = useDispatch();
-  let l = tS();
+  let l = useCurrentFileKey();
   let d = getPluginAllowListKey(t?.id ?? "", l);
   let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
@@ -802,7 +802,7 @@ export function $$eF19() {
   let a = !!(t && t.widgets_whitelist_enforced);
   let s = ek("widget");
   let o = useDispatch();
-  let l = tS();
+  let l = useCurrentFileKey();
   let d = getWidgetAllowListKey(t?.id ?? "", l);
   let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
@@ -1036,10 +1036,10 @@ export function $$eY23() {
   }, [e, i, t, r, a]);
 }
 export function $$e$52() {
-  return useSelector(Eh);
+  return useSelector(canPerformAction);
 }
 export function $$eX21() {
-  return useSelector(cb);
+  return useSelector(canRunExtensions);
 }
 export function $$eq15() {
   let e = E3();
@@ -1089,7 +1089,7 @@ export function $$e036(e) {
   let l = e ? o : s;
   let d = e ? i : r;
   let c = t?.id ?? "";
-  let u = tS();
+  let u = useCurrentFileKey();
   let p = oh(e ? getWidgetAllowListKey(c, u) : getPluginAllowListKey(c, u));
   let _ = useCallback(e => d ? e.filter(e => !isPublicPlugin(e) || !!l[e.plugin_id]) : e, [l, d]);
   let h = useCallback(e => a ? e.filter(e => !isPublicPlugin(e)) : e, [a]);

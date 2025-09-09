@@ -14,14 +14,14 @@ import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { U } from "../905/405962";
 import { sZ } from "../905/845253";
-import { D6, j_ } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { Q } from "../905/467310";
 import { ZG } from "../figma_app/736948";
 import { e0 } from "../905/696396";
 import { h as _$$h } from "../905/388624";
 export function $$x0(e) {
-  let t = D6("OrgSuspensionModal");
-  let i = j_(t).unwrapOr(!1);
+  let t = useCurrentPlanUser("OrgSuspensionModal");
+  let i = useIsOrgAdminUser(t).unwrapOr(!1);
   let h = sZ();
   let E = Xf(e.currentOrgId, i);
   let x = (E?.data?.invoices ?? []).find(e => "open" === e.status && _$$A(e.past_due_at) < _$$A().subtract(21, "day") && _$$A(e.past_due_at) > _$$A().subtract(90, "day"));
@@ -104,8 +104,8 @@ export function $$x0(e) {
   });
 }
 function S(e) {
-  let t = D6("OrgSuspensionModalHeader");
-  return j_(t).unwrapOr(!1) && e.overdueInvoice ? jsx(_$$E, {
+  let t = useCurrentPlanUser("OrgSuspensionModalHeader");
+  return useIsOrgAdminUser(t).unwrapOr(!1) && e.overdueInvoice ? jsx(_$$E, {
     fontWeight: "bold",
     fontSize: 11,
     children: renderI18nText("payments_modal.pay_overdue_invoice_to_regain_access")

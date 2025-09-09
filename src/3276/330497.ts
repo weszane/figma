@@ -5,13 +5,13 @@ import { E } from "../905/632989";
 import { getI18nString } from "../905/303541";
 import { jT, Pp } from "../905/989765";
 import { ds } from "../figma_app/314264";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { h as _$$h } from "../figma_app/275739";
 export function $$u0(e) {
   let t = useDispatch();
   let n = useStore();
   let u = useSelector(e => e.voice.showWidget);
-  let p = q5();
+  let p = selectCurrentFile();
   let h = useSelector(t => !!t.voice.activeCall[e.fileKey]);
   let f = !!p && !!h;
   let _ = {

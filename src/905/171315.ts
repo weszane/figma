@@ -1,10 +1,10 @@
 import { c2, Jj } from "../905/382883";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { HH } from "../figma_app/828186";
+import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { qy, WY, $L, uH, Zr, Xr } from "../figma_app/162807";
-import { aI } from "../figma_app/552876";
-import { oz } from "../905/561485";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { isSitesFeatureEnabled } from "../905/561485";
 let $$c15 = 5;
 let $$u19 = {
   [qy.FOLDER]: [],
@@ -27,7 +27,7 @@ export function $$h25(e) {
     if (0 === t) return "";
     if (1 === t) {
       let t = e.value[0];
-      return EJ(t.name || t.handle, 15);
+      return truncate(t.name || t.handle, 15);
     }
     return getI18nString("search.facets.multiple_creators", {
       numCreators: t
@@ -57,9 +57,9 @@ export function $$g11(e) {
 }
 export function $$f3() {
   let e = [$L.DESIGN_FILES, $L.FIGJAM_FILES, $L.SLIDES];
-  HH() && e.push($L.BUZZ);
-  oz() && e.push($L.SITES);
-  aI() && e.push($L.MAKE);
+  isCooperFeatureEnabled() && e.push($L.BUZZ);
+  isSitesFeatureEnabled() && e.push($L.SITES);
+  isFigmakeSitesEnabled() && e.push($L.MAKE);
   return e;
 }
 export function $$_0(e) {

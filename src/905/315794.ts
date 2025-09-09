@@ -11,8 +11,8 @@ import { GR } from "../figma_app/330108";
 import { _6 } from "../figma_app/386952";
 import { YP, gO } from "../figma_app/88768";
 import { getPermissionsState } from "../figma_app/642025";
-import { px, j_ } from "../figma_app/465071";
-import { e6 } from "../905/557142";
+import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
+import { AccessLevelEnum } from "../905/557142";
 import { $ } from "../905/442144";
 var o = s;
 let b = "org_team_action--showBlueBorder--W-9zt";
@@ -23,8 +23,8 @@ export function $$v0(e) {
   let p = useSelector(e => e.currentUserOrgId);
   let m = useSelector(e => getPermissionsState(e));
   let A = _6();
-  let y = px();
-  let v = j_(y).unwrapOr(!1);
+  let y = useTeamPlanUser();
+  let v = useIsOrgAdminUser(y).unwrapOr(!1);
   let x = YP(e.team, u[e.team.id], m, v);
   let S = t => {
     t.stopPropagation();
@@ -122,7 +122,7 @@ export function $$E2({
       a?.(t.id);
       return;
     case gO.BYPASS_REQUEST:
-      GR(s, t.id, e6.OWNER)();
+      GR(s, t.id, AccessLevelEnum.OWNER)();
       return;
     case gO.CLICK_REQUEST:
       s(showModalHandler({

@@ -8,7 +8,7 @@ import { N as _$$N } from "../905/438674";
 import c from "classnames";
 import { Y1 } from "../905/143116";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { ms, c$ } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -57,7 +57,7 @@ function k({
     primaryKey
   } = fG()(e);
   let d = e.type === _$$n.TeamTemplate;
-  let c = Rs(FileCanView, {
+  let c = useSubscription(FileCanView, {
     key: primaryKey
   }, {
     enabled: d

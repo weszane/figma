@@ -1,17 +1,17 @@
 import { getFeatureFlags } from "../905/601108";
-import { q5 } from "../figma_app/516028";
-import { aI, Oc } from "../figma_app/552876";
+import { selectCurrentFile } from "../figma_app/516028";
+import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 export function $$s3() {
-  return aI() && !!getFeatureFlags().bake_sb;
+  return isFigmakeSitesEnabled() && !!getFeatureFlags().bake_sb;
 }
 export function $$o2() {
-  let e = q5();
+  let e = selectCurrentFile();
   return !!e && !!e.org && !!e.org.supabaseDisabled;
 }
 export function $$l0() {
   let e = $$s3();
   let t = $$o2();
-  let r = Oc();
+  let r = useIsSelectedFigmakeFullscreen();
   return e && !t && r;
 }
 export function $$d1(e) {

@@ -5,7 +5,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { logError } from "../905/714362";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { ds } from "../figma_app/314264";
@@ -196,7 +196,7 @@ class N {
   }
   trackShouldShowMSALOnboarding(e) {
     atomStoreManager.set($$I2, e);
-    YQ({
+    handleAtomEvent({
       id: $$S4
     });
   }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sortByWithOptions } from "../figma_app/656233";
 import { memoizeByArgs } from "../figma_app/815945";
 import { resourceUtils } from "../905/989992";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -13,7 +13,7 @@ import { TA } from "../figma_app/217457";
 import { Pe } from "../4452/207203";
 import { W } from "../4452/143028";
 import { EditAccessModalView } from "../figma_app/43951";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { OJ } from "../905/519092";
 let v = "edit_access_modal--column--MYvAz";
 let y = "edit_access_modal--resource--qhm-x";
@@ -52,7 +52,7 @@ let I = e => ({
 export function $$N0(e) {
   let t = useDispatch();
   let r = function (e, t) {
-    let r = Rs(EditAccessModalView, {
+    let r = useSubscription(EditAccessModalView, {
       teamId: e,
       userId: t
     });
@@ -117,7 +117,7 @@ export function $$N0(e) {
     console.error("Member not found");
     return null;
   }
-  let R = !!N.team_role && N.team_role?.level >= e6.EDITOR;
+  let R = !!N.team_role && N.team_role?.level >= AccessLevelEnum.EDITOR;
   let A = C.editableResources.length + C.privateResourceCount;
   let O = k.editableResources.length + k.privateResourceCount;
   return jsx(fu, {

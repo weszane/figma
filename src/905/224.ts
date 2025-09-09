@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { logError } from "../905/714362";
 import { Us } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -14,14 +14,14 @@ import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { WX, Bq } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { VG } from "../905/389382";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { TeamCanEdit } from "../figma_app/43951";
 import { WW, Wf, LF } from "../figma_app/345997";
 import { vL, Bi, Pj } from "../905/652992";
 import { mapUpsellModalTypeToSource, UpsellSourceType } from "../figma_app/831101";
-import { ZN } from "../figma_app/630077";
-import { wR } from "../figma_app/765689";
+import { fileActionEnum } from "../figma_app/630077";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { UpsellModalType } from "../905/165519";
 var $$n0;
 (e => {
@@ -255,7 +255,7 @@ var $$n0;
       case Bi.PUBLISH_SITE:
       case Bi.CONNECT_DOMAIN:
         return getFeatureFlags().ai_ga && t ? getI18nString("consumption_paywalls.ai_ga.publishing_current_product", {
-          productName: VG(wR(t))
+          productName: VG(getProductAccessTypeOrDefault(t))
         }) : getI18nString("consumption_paywalls.publish_site.publishing");
       case Bi.MCP:
         return getI18nString("consumption_paywalls.mcp.access_to_mcp");
@@ -562,7 +562,7 @@ var $$n0;
         break;
       case Bi.PUBLISH_SITE:
         l = [getFeatureFlags().ai_ga && a ? getI18nString("consumption_paywalls.ai_ga.publishing_current_product", {
-          productName: VG(wR(a))
+          productName: VG(getProductAccessTypeOrDefault(a))
         }) : getI18nString("consumption_paywalls.publish_site.publishing"), getFeatureFlags().ai_ga ? getI18nString("plan_comparison.feature.ai_credits", {
           aiCredits: EK
         }) : getI18nString("consumption_paywalls.publish_site.higher_credit_limits"), getI18nString("consumption_paywalls.unlimited_files_and_projects")];
@@ -602,13 +602,13 @@ var $$n0;
   e.getModalTitle = function (e, t, i, n) {
     switch (e) {
       case vL.FILE:
-        if (t === ZN.MOVE_FILES) return i ? getI18nString("consumption_paywalls.want_to_add_these_files_to_your_team") : getI18nString("consumption_paywalls_want_to_add_this_file_to_your_team");
-        if (t === ZN.RESTORE_FILES) return i ? getI18nString("consumption_paywalls.want_to_restore_these_files") : getI18nString("consumption_paywalls.want_to_restore_this_file");
-        if (t === ZN.DUPLICATE_FILES) return i ? getI18nString("consumption_paywalls.want_to_duplicate_these_files") : getI18nString("consumption_paywalls.want_to_duplicate_this_file");
-        if (t === ZN.IMPORT_FILES) return i ? getI18nString("consumption_paywalls.want_to_import_these_files") : getI18nString("consumption_paywalls.want_to_import_this_file");
+        if (t === fileActionEnum.MOVE_FILES) return i ? getI18nString("consumption_paywalls.want_to_add_these_files_to_your_team") : getI18nString("consumption_paywalls_want_to_add_this_file_to_your_team");
+        if (t === fileActionEnum.RESTORE_FILES) return i ? getI18nString("consumption_paywalls.want_to_restore_these_files") : getI18nString("consumption_paywalls.want_to_restore_this_file");
+        if (t === fileActionEnum.DUPLICATE_FILES) return i ? getI18nString("consumption_paywalls.want_to_duplicate_these_files") : getI18nString("consumption_paywalls.want_to_duplicate_this_file");
+        if (t === fileActionEnum.IMPORT_FILES) return i ? getI18nString("consumption_paywalls.want_to_import_these_files") : getI18nString("consumption_paywalls.want_to_import_this_file");
         return getI18nString("consumption_paywalls.need_more_files");
       case vL.FOLDER:
-        if (t === ZN.MOVE_FOLDER) return getI18nString("consumption_paywalls.want_to_move_this_project");
+        if (t === fileActionEnum.MOVE_FOLDER) return getI18nString("consumption_paywalls.want_to_move_this_project");
         return getI18nString("consumption_paywalls.need_more_projects");
       case vL.PAGE:
         return getI18nString("consumption_paywalls.need_more_pages");
@@ -648,7 +648,7 @@ var $$n0;
       case Bi.PROTOTYPING_CONDITIONAL_ACTIONS:
         return getI18nString("consumption_paywalls.need_to_access_prototyping_features");
       case Bi.VARIABLES_MODES:
-        return t === ZN.PUBLISH_MORE_VARIABLE_MODES ? getI18nString("consumption_paywalls.variables_modes.need_to_publish_variables_for_your_team") : getI18nString("consumption_paywalls.variables_modes.need_more_modes");
+        return t === fileActionEnum.PUBLISH_MORE_VARIABLE_MODES ? getI18nString("consumption_paywalls.variables_modes.need_to_publish_variables_for_your_team") : getI18nString("consumption_paywalls.variables_modes.need_more_modes");
       case Bi.PLUGIN_ANALYTICS:
         return getI18nString("consumption_paywalls.whos_using_plugin");
       case Bi.WIDGET_ANALYTICS:
@@ -755,7 +755,7 @@ var $$n0;
       case Bi.PROTOTYPING_CONDITIONAL_ACTIONS:
         return getI18nString("consumption_paywalls.you_cannot_use_conditional_prototyping_with_your_current_plan");
       case Bi.VARIABLES_MODES:
-        if (i === ZN.PUBLISH_MORE_VARIABLE_MODES) return getI18nString("consumption_paywalls.variables_modes.subtitle_publishing");
+        if (i === fileActionEnum.PUBLISH_MORE_VARIABLE_MODES) return getI18nString("consumption_paywalls.variables_modes.subtitle_publishing");
         if (0 === n) return getI18nString("consumption_paywalls.variables_modes.subtitle_starter");
         if (1 === n) return getI18nString("consumption_paywalls.variables_modes.subtitle_pro");
         if (2 === n) return getI18nString("consumption_paywalls.variables_modes.subtitle_org");
@@ -865,18 +865,18 @@ var $$n0;
       default:
         return throwTypeError(e);
     } else if (r && t) switch (t) {
-      case ZN.CREATE_FILE:
-      case ZN.CREATE_FOLDER:
-      case ZN.CREATE_PAGE:
-      case ZN.MOVE_FILES:
-      case ZN.DUPLICATE_PAGE:
+      case fileActionEnum.CREATE_FILE:
+      case fileActionEnum.CREATE_FOLDER:
+      case fileActionEnum.CREATE_PAGE:
+      case fileActionEnum.MOVE_FILES:
+      case fileActionEnum.DUPLICATE_PAGE:
         return "Consumption Paywall Modal: Plans Pricing";
-      case ZN.RESTORE_FILES:
-      case ZN.DUPLICATE_FILES:
-      case ZN.IMPORT_FILES:
-      case ZN.MOVE_FOLDER:
+      case fileActionEnum.RESTORE_FILES:
+      case fileActionEnum.DUPLICATE_FILES:
+      case fileActionEnum.IMPORT_FILES:
+      case fileActionEnum.MOVE_FOLDER:
         return "Consumption Paywall Modal: Pricing Clarity V2";
-      case ZN.CREATE_FILE_FROM_DROPDOWN:
+      case fileActionEnum.CREATE_FILE_FROM_DROPDOWN:
         return "Consumption Paywall Modal: Hit File Limit From Dropdown";
     }
     return `${e} ${t} Paywall Modal`;
@@ -906,9 +906,9 @@ var $$n0;
     return 3 === e ? _$$c.CONTACT_SALES : 2 === e ? _$$c.UPGRADE_TO_ORGANIZATION : 1 === e ? _$$c.UPGRADE_TO_PROFESSIONAL : null;
   };
   e.useShouldHideStarterCtaForOpenFile = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = e?.teamId;
-    let i = Rs(TeamCanEdit({
+    let i = useSubscription(TeamCanEdit({
       id: t ?? ""
     }), {
       enabled: !!t

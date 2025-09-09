@@ -1,4 +1,4 @@
-import { R$ } from "../figma_app/12796";
+import { isExternalRestricted } from "../figma_app/12796";
 var r = (e => (e.ORG_UPGRADE = "ORG_UPGRADE", e.PRO_TEAM_UPGRADE = "PRO_TEAM_UPGRADE", e.VIEW_RESTRICTED_FILE = "VIEW_RESTRICTED_FILE", e))(r || {});
 export function $$a0({
   file: e,
@@ -18,7 +18,7 @@ export function $$a0({
   }) {
     if (!a || !e.mustUpgradeToShareDraft) return null;
     let s = a.user_id === i.id;
-    return R$(i, t) || !s ? {
+    return isExternalRestricted(i, t) || !s ? {
       type: "VIEW_RESTRICTED_FILE",
       draftOwnerUser: a.user
     } : {

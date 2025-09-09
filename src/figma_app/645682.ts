@@ -13,7 +13,7 @@ import { sw } from "../figma_app/914957";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { V4 } from "../figma_app/383828";
 import { lm } from "../figma_app/745458";
 import { Sh, dT } from "../figma_app/889655";
@@ -196,7 +196,7 @@ function Y({
     stateResetType
   } = $(i);
   let m = useSelector(lm);
-  let f = useSelector(sS);
+  let f = useSelector(selectOpenFileKey);
   let E = useDispatch();
   let S = _$$S.useOpenFileProperties();
   if ("STATE_GROUP" === restoreType || "SYMBOL_AS_NON_STATE" === restoreType) {

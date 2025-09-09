@@ -16,7 +16,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { VisualBellActions } from "../905/302958";
 import { E9, pf } from "../figma_app/314264";
-import { J8, By } from "../905/760074";
+import { restoreFiles, generateUrlAlt } from "../905/760074";
 import { createOptimistThunk } from "../905/350402";
 import { oB, j7, sf } from "../905/929976";
 import { S as _$$S } from "../figma_app/78808";
@@ -64,7 +64,7 @@ let x = createOptimistThunk(async (e, t) => {
   });
 });
 let S = createOptimistThunk(async (e, t) => {
-  let i = await J8(t.branches.map(e => e.key));
+  let i = await restoreFiles(t.branches.map(e => e.key));
   "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(VisualBellActions.enqueue({
     type: "file_restored",
     message: getI18nString("collaboration.branching.branches_restored", {
@@ -187,7 +187,7 @@ export function $$V0(e) {
     onClick: () => {
       t(_$$S({
         fileKey: e.branch.key,
-        url: By(e.branch, e.repo, "file").href,
+        url: generateUrlAlt(e.branch, e.repo, "file").href,
         source: _$$d2.FULLSCREEN_BRANCH
       }));
     },
@@ -217,7 +217,7 @@ export function $$V0(e) {
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
     onContextMenu: e => {
-      if (e.preventDefault(), e.stopPropagation(), m) t(oB()); else {
+      if (e.preventDefault(), e.stopPropagation(), m) t(oB());else {
         let n = {
           top: e.clientY,
           right: e.clientX,
@@ -313,7 +313,7 @@ export function $$V0(e) {
       className: "branch_row--menuColumn--XSWVZ",
       children: jsx(_$$d, {
         onClick: e => {
-          if (e.stopPropagation(), e.preventDefault(), m) t(oB()); else {
+          if (e.stopPropagation(), e.preventDefault(), m) t(oB());else {
             let e = A.current;
             t(j7({
               type: i,

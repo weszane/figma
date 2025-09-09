@@ -7,11 +7,11 @@ import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
 import { t as _$$t2 } from "../figma_app/579169";
-import { Hu } from "../figma_app/516028";
+import { openFileTeamAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { Y } from "../905/513161";
 import { DV } from "../905/739964";
 import { V_, fm, $A, Ot } from "../905/850476";
@@ -32,7 +32,7 @@ export function $$v1(e) {
   let i = $A(t);
   let s = function (e, t) {
     let i = useDispatch();
-    let s = useAtomWithSubscription(Hu);
+    let s = useAtomWithSubscription(openFileTeamAtom);
     return useCallback(() => {
       if (e === V_.ENTERPRISE) {
         logError("designSystems", "attempting to show modes upsell modal to enterprise user");
@@ -48,7 +48,7 @@ export function $$v1(e) {
         data: {
           team: s,
           resource: Bi.VARIABLES_MODES,
-          action: "authoring" === t ? ZN.CREATE_MORE_VARIABLE_MODES : ZN.PUBLISH_MORE_VARIABLE_MODES,
+          action: "authoring" === t ? fileActionEnum.CREATE_MORE_VARIABLE_MODES : fileActionEnum.PUBLISH_MORE_VARIABLE_MODES,
           editorType: FFileType.DESIGN,
           currentPlan: b(e),
           upsellPlan: b(n),

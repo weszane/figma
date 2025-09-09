@@ -16,7 +16,7 @@ import { yo } from "../905/125333";
 import { y0, wv, MM } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { sV, DI, zx, dY } from "../figma_app/712525";
 import { lg } from "../figma_app/976749";
 import { BK } from "../905/848862";
@@ -24,7 +24,7 @@ import { p8 } from "../figma_app/722362";
 import { b4, _V, kM } from "../figma_app/421886";
 import { Ib } from "../905/129884";
 import { Jz } from "../905/504727";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { sW, p9 } from "../figma_app/463678";
 import { wV, H9, ed, t1 } from "../9410/763216";
 import { A as _$$A2 } from "../svg/7980";
@@ -73,8 +73,8 @@ function D({
   let A = useSelector(e => e.canvasSearch.filters);
   let L = useSelector(e => e.canvasSearch.mode);
   let R = "whiteboard" === lg();
-  let D = cJ();
-  let F = to();
+  let D = useIsFullscreenSitesView();
+  let F = useIsSelectedViewFullscreenCooper();
   let B = useMemo(() => {
     let e = y ? [] : [jsx(y0, {
       primaryText: getI18nString("canvas_search.search"),

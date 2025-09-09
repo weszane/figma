@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { YO } from "../figma_app/672951";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { o as _$$o } from "../figma_app/29593";
@@ -19,7 +19,7 @@ import { k4, jl } from "../figma_app/199513";
 import { rR, sK } from "../figma_app/598018";
 import { vL } from "../905/652992";
 import { EE } from "../905/316062";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { j } from "../905/834956";
 import { DV } from "../905/739964";
 import { W } from "../905/25249";
@@ -28,7 +28,7 @@ export function $$w1(e) {
   let t = useSelector(e => e.currentUserOrgId);
   let r = useSelector(e => e.currentTeamId);
   let n = useSelector(e => e.loadedFolders);
-  let u = gY(k4);
+  let u = getAtomMutate(k4);
   let f = t || r;
   let E = useSelector(e => e.teams);
   let A = YO(e);
@@ -62,7 +62,7 @@ export function $$w1(e) {
           data: {
             team: o,
             resource: vL.FOLDER,
-            action: ZN.CREATE_FOLDER,
+            action: fileActionEnum.CREATE_FOLDER,
             currentPlan: F.Plan.STARTER,
             upsellPlan: F.Plan.PRO,
             editorType: null

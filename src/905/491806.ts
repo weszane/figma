@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { GitReferenceType } from "../figma_app/763686";
-import { Kn } from "../905/535806";
+import { SourceDirection } from "../905/535806";
 let s = [];
 export function $$o4(e) {
   if (0 === e.length) return null;
@@ -14,9 +14,9 @@ export function $$l2() {
 }
 export function $$d1(e) {
   switch (e) {
-    case Kn.TO_SOURCE:
+    case SourceDirection.TO_SOURCE:
       return GitReferenceType.BRANCH;
-    case Kn.FROM_SOURCE:
+    case SourceDirection.FROM_SOURCE:
       return GitReferenceType.SOURCE;
     default:
       throwTypeError(e);
@@ -28,9 +28,9 @@ export function $$c3({
   direction: i
 }) {
   switch (i) {
-    case Kn.TO_SOURCE:
+    case SourceDirection.TO_SOURCE:
       return t;
-    case Kn.FROM_SOURCE:
+    case SourceDirection.FROM_SOURCE:
       return e;
     default:
       throwTypeError(i);

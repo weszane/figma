@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { getSingletonSceneGraph } from "../905/700578";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
-import { DV } from "../figma_app/930338";
+import { sortWithCollator } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
 import { j7 } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
@@ -33,7 +33,7 @@ export class $$w2 extends Component {
       let s = e.get(r);
       s ? s.push(i) : e.set(r, [i]);
     });
-    let i = DV(Array.from(e.keys()), e => t.get(e) ?? "");
+    let i = sortWithCollator(Array.from(e.keys()), e => t.get(e) ?? "");
     let r = i.length > 1;
     return jsx("div", {
       children: i.map(i => {

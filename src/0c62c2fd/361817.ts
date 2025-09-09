@@ -3,7 +3,7 @@ import { N_ } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { FPlanRestrictionType } from "../figma_app/191312";
-import { j4 } from "../905/814802";
+import { TeamType } from "../905/814802";
 import { Dd } from "../905/519092";
 export function $$c0(e) {
   let {
@@ -18,7 +18,7 @@ export function $$c0(e) {
   let m = members.length;
   let _ = members.filter(e => e.id).map(e => e.id).join();
   let p = paidStatus === FPlanRestrictionType.RESTRICTED;
-  let f = e.paidStatusType === j4.WHITEBOARD;
+  let f = e.paidStatusType === TeamType.WHITEBOARD;
   let g = f ? members.every(e => !e.whiteboard_editor_upgrade) : members.every(e => !e.design_editor_upgrade);
   let h = paidStatus === FPlanRestrictionType.RESTRICTED && g;
   let x = members[0].name || members[0].email;

@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Xf } from "../figma_app/153916";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
 import { k as _$$k2 } from "../7021/223482";
 import { d as _$$d } from "../469e6e40/744116";
@@ -29,7 +29,7 @@ import { A as _$$A } from "../905/956262";
 import { r1 } from "../figma_app/545877";
 import { FPlanNameType, FUserRoleType, FOrganizationLevelType, FAccessLevelType, FPublicationStatusType } from "../figma_app/191312";
 import { EnterpriseOrgAdminOnboardingSequenceView, WorkspacesTableView, ExtensionRequestTableView, AllowlistPluginsSectionView, OrgTeamsIdAndName } from "../figma_app/43951";
-import { No, H3, X$, px, j_ } from "../figma_app/465071";
+import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPublicPlan, useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { U as _$$U } from "../905/455766";
 import { rq } from "../905/425180";
 import { EL, F_ } from "../905/858282";
@@ -94,7 +94,7 @@ import e5 from "../vendor/128080";
 import { A as _$$A2 } from "../905/920142";
 import { xf } from "../figma_app/416935";
 import { isMobileUA } from "../figma_app/778880";
-import { EJ, Yx } from "../figma_app/930338";
+import { truncate, formatList } from "../figma_app/930338";
 import { XHR } from "../905/910117";
 import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
@@ -198,7 +198,7 @@ import { A as _$$A6 } from "../5724/663128";
 import { eu as _$$eu, zb } from "../469e6e40/418374";
 import { CW } from "../469e6e40/800566";
 import { sortBySelectors } from "../figma_app/656233";
-import { tT as _$$tT } from "../905/663269";
+import { ResourceStatus } from "../905/663269";
 import { $J } from "../905/491152";
 import { h1 } from "../905/986103";
 import { W as _$$W } from "../5430/573261";
@@ -296,12 +296,12 @@ function V(e) {
   }
 }
 function W() {
-  let e = No().unwrapOr(null);
-  let t = H3(e);
+  let e = useTeamPlanPublicInfo().unwrapOr(null);
+  let t = getParentOrgIdIfOrgLevel(e);
   let a = e?.tier === FPlanNameType.ENTERPRISE;
   let n = T();
   let i = useAtomWithSubscription(z);
-  let r = Rs(EnterpriseOrgAdminOnboardingSequenceView, {
+  let r = useSubscription(EnterpriseOrgAdminOnboardingSequenceView, {
     orgId: t || null
   }, {
     enabled: a
@@ -1708,7 +1708,7 @@ function t0(e) {
         type: a,
         dispatch: e.dispatch,
         children: [null === e.filtersConfig.team ? getI18nString("activity_log.table.teams_all") : getI18nString("activity_log.table.team_selected", {
-          team: EJ(e.filtersConfig.team.name, 21)
+          team: truncate(e.filtersConfig.team.name, 21)
         }), c && jsx("div", {
           className: tA,
           style: e.dropdownShown.data.position,
@@ -1808,8 +1808,8 @@ let aw = registerModal(function (e) {
   let t = useDispatch();
   let a = MX();
   let n = hS(e);
-  let l = X$("LicenseGroupDeleteModal").unwrapOr(null);
-  let o = H3(l);
+  let l = useCurrentPublicPlan("LicenseGroupDeleteModal").unwrapOr(null);
+  let o = getParentOrgIdIfOrgLevel(l);
   let d = e.licenseGroups.map(e => e.id);
   let c = e.licenseGroups.map(e => e.name);
   let [_, u] = useState(!1);
@@ -1863,7 +1863,7 @@ let aw = registerModal(function (e) {
                 licenseGroupsCount: e.licenseGroups.length,
                 licenseGroupsNames: jsx(_$$E, {
                   fontWeight: "bold",
-                  children: Yx(c)
+                  children: formatList(c)
                 })
               })
             }), jsx("span", {
@@ -2893,8 +2893,8 @@ let nw = "First Workspace Created";
 let nk = registerModal(function (e) {
   let t = useDispatch();
   let [a, n] = useState(null);
-  let l = X$("WorkspaceEditModal").unwrapOr(null);
-  let o = H3(l);
+  let l = useCurrentPublicPlan("WorkspaceEditModal").unwrapOr(null);
+  let o = getParentOrgIdIfOrgLevel(l);
   let d = _$$q(jD, !0);
   let _ = _$$q(_$$Vl, !0);
   let u = e.workspacesData;
@@ -3149,7 +3149,7 @@ let nL = registerModal(function (e) {
           licenseGroupsCount: e.workspaces.length,
           licenseGroupsNames: jsx(_$$E, {
             fontWeight: "bold",
-            children: Yx(o)
+            children: formatList(o)
           })
         }), jsxs("div", {
           children: [jsx("div", {
@@ -3489,7 +3489,7 @@ let nG = new Ef([], {
 function nz(e) {
   let t = useDispatch();
   let [a, n] = useState("");
-  let l = Rs(WorkspacesTableView, {
+  let l = useSubscription(WorkspacesTableView, {
     orgId: e.org.id
   });
   let o = "loaded" !== l.status;
@@ -4029,7 +4029,7 @@ function su({
   let m = function (e, t) {
     let a = new Map();
     for (let n of e) {
-      if (n.plugin.status !== _$$tT.Loaded) continue;
+      if (n.plugin.status !== ResourceStatus.Loaded) continue;
       let e = n.plugin.data;
       if (!e || "plugin" === t && e.isWidget || "widget" === t && !e.isWidget) continue;
       let s = e.currentPluginVersion;
@@ -4098,7 +4098,7 @@ function su({
       a.set(id, m);
     }
     return a;
-  }(e.filter(e => e.plugin.status === _$$tT.Loaded && e.plugin.data?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC), n);
+  }(e.filter(e => e.plugin.status === ResourceStatus.Loaded && e.plugin.data?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC), n);
   let p = m.size > 0;
   let g = Array.from(m.values());
   sortBySelectors(g, _[d.column], d.isReversed, d.secondaryColumn && _?.[d.secondaryColumn], d.isSecondaryReversed);
@@ -4730,7 +4730,7 @@ function sA(e) {
     name: e => e[1].name ?? "",
     last_requested: e => e[1].lastRequestedDates[0].getTime()
   }), []);
-  let c = Rs(ExtensionRequestTableView, {
+  let c = useSubscription(ExtensionRequestTableView, {
     orgId
   });
   if ("loading" === c.status) return null;
@@ -4793,10 +4793,10 @@ function sR({
   onRightActionsChange: n
 }) {
   let l = useDispatch();
-  let o = No().unwrapOr(null);
+  let o = useTeamPlanPublicInfo().unwrapOr(null);
   let c = o?.tier === FPlanNameType.ENTERPRISE;
   let _ = o?.key.type === FOrganizationLevelType.ORG;
-  let m = Rs(AllowlistPluginsSectionView, {
+  let m = useSubscription(AllowlistPluginsSectionView, {
     orgId: e
   });
   let [p] = IT(sD(e), {
@@ -4964,8 +4964,8 @@ function sP(e) {
 export function $$s$0(e) {
   let t = useDispatch();
   let a = FC();
-  let n = px();
-  let l = j_(n);
+  let n = useTeamPlanUser();
+  let l = useIsOrgAdminUser(n);
   let o = sZ();
   let d = NJ(o.id);
   let c = "loaded" === l.status && _$$nb({
@@ -5015,8 +5015,8 @@ function sB(e) {
   let I = useSelector(({
     selectedView: e
   }) => e);
-  let T = px().unwrapOr(null);
-  let A = No().unwrapOr(null);
+  let T = useTeamPlanUser().unwrapOr(null);
+  let A = useTeamPlanPublicInfo().unwrapOr(null);
   let R = A?.tier === FPlanNameType.ENTERPRISE;
   let O = !!(R && T?.fromOrgUser?.isLicenseGroupAdmin);
   let L = e.isOrgAdmin;
@@ -5126,7 +5126,7 @@ function sB(e) {
       title: _$$O(e.selectedTab, e.selectedSecondaryTab)
     }), jsx(qc, {})]
   });
-  let eJ = Rs(OrgTeamsIdAndName({
+  let eJ = useSubscription(OrgTeamsIdAndName({
     orgId: n.id
   }), {
     enabled: e.selectedTab === J7.ACTIVITY

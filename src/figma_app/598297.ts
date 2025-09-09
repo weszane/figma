@@ -1,14 +1,14 @@
 import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { zK } from "../figma_app/913823";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Sc, mC } from "../905/18797";
 import { yD } from "../905/92359";
 export function $$d1({
   disabled: e = !1
 } = {}) {
   let t = useDispatch();
-  let r = q5();
+  let r = selectCurrentFile();
   let c = useSelector(e => e.fileVersion);
   let u = useSelector(e => e.loadingState);
   let p = useRef(0);

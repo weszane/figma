@@ -51,7 +51,7 @@ import { Z as _$$Z, m as _$$m2 } from "../905/423399";
 import { sL, qg, j4, GZ } from "../figma_app/436286";
 import { MK } from "../figma_app/844696";
 import { c$, l6, sK } from "../905/794875";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { h as _$$h, s } from "../642/31878";
 let B = Tn();
 function K(e) {
@@ -94,7 +94,7 @@ function K(e) {
   });
 }
 let el = new SU();
-class ea extends c$ { }
+class ea extends c$ {}
 function eo(e) {
   return jsx(l6, {
     ...e,
@@ -133,7 +133,7 @@ function ec({
   let [n, l] = sL();
   let a = useDispatch();
   let o = Um();
-  let d = cJ();
+  let d = useIsFullscreenSitesView();
   let p = !qg(n, "PASS_THROUGH");
   let h = j4.map((e, t) => {
     let n = "LINEAR_BURN" === e && d;

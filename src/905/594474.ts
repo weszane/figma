@@ -13,7 +13,7 @@ import { A as _$$A } from "../vendor/90566";
 import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { tH as _$$tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J2 } from "../905/231762";
@@ -152,7 +152,7 @@ import { Fk } from "../figma_app/167249";
 import { A as _$$A11 } from "../905/72153";
 import { sZ } from "../905/845253";
 import { xw } from "../figma_app/951233";
-import { D6, Kd } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { k2 } from "../figma_app/10554";
 import { e0 as _$$e3 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -3393,8 +3393,8 @@ function ij(e) {
   let m = selectUser();
   let h = useSelector(e => xw(e) ?? void 0, c2);
   let g = sZ();
-  let f = D6("ExtensionPublishingModal");
-  let A = Kd(f).unwrapOr(!1);
+  let f = useCurrentPlanUser("ExtensionPublishingModal");
+  let A = useIsOrgMemberOrAdminUser(f).unwrapOr(!1);
   let y = useSelector(e => UU(e, existingExtension), c2);
   let b = useSelector(e => e.authedProfilesById);
   let v = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
@@ -3453,13 +3453,13 @@ let $$iU0 = registerModal(function (e) {
   let [{
     status: p,
     data: m
-  }] = IT(se(), {
+  }] = setupResourceAtomHandler(se(), {
     enabled: c
   });
   let [{
     status: h,
     data: g
-  }] = IT(fd(), {
+  }] = setupResourceAtomHandler(fd(), {
     enabled: c
   });
   let f = getPublishedResourceOrNull(m ?? void 0, g ?? void 0, r) ?? void 0;

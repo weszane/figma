@@ -10,7 +10,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { NONE_SYMBOL } from "../905/992467";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA as _$$oA } from "../905/723791";
 import { Z1 } from "../figma_app/253220";
 import { BrowserInfo, isFigmaMobileApp, isMobileUA } from "../figma_app/778880";
@@ -89,7 +89,7 @@ import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s3 } from "../cssbuilder/589278";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { rg as _$$rg } from "../figma_app/401069";
 import { G as _$$G } from "../905/496937";
 import { XE, Ty, kU, PQ as _$$PQ } from "../figma_app/91703";
@@ -102,8 +102,8 @@ import { A0, Mc, R4 } from "../figma_app/454974";
 import { xY } from "../figma_app/624361";
 import { isInvalidValue, isValidValue, normalizeValue } from "../905/216495";
 import { _G, Pv } from "../905/619652";
-import { q5, tS as _$$tS, Kf, tB as _$$tB, _G as _$$_G } from "../figma_app/516028";
-import { Pe, Eh, cb } from "../figma_app/12796";
+import { selectCurrentFile, useCurrentFileKey, useIsCurrentUserCreator, selectOpenFile, useOpenFileLibraryKey } from "../figma_app/516028";
+import { isExportRestricted, canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { Dc, hV } from "../figma_app/151766";
 import { Ib } from "../905/129884";
 import { JT } from "../figma_app/632248";
@@ -154,7 +154,7 @@ import { op as _$$op, $1, cW, Be, NU, qr, ZT, Tg, BE, x as _$$x, QZ, V2 } from "
 import { ServiceCategories as _$$e3 } from "../905/165054";
 import { reportError } from "../905/11";
 import { v as _$$v } from "../905/266815";
-import { _I, U4, tn as _$$tn, xo } from "../figma_app/473493";
+import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint, canAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { U as _$$U2, am as _$$am } from "../figma_app/901889";
 import { O as _$$O } from "../905/655700";
 import { fu } from "../figma_app/831799";
@@ -172,7 +172,7 @@ import { A as _$$A6 } from "../905/920142";
 import { qZ, ui } from "../figma_app/761118";
 import { xp } from "../figma_app/827216";
 import { XHR } from "../905/910117";
-import { to as _$$to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { rN as _$$rN, VY } from "../9410/607888";
 import { t as _$$t4 } from "../905/241707";
 import { V8 } from "../figma_app/443991";
@@ -222,7 +222,7 @@ import { gn, $I } from "../figma_app/322845";
 import { x as _$$x3 } from "../905/719609";
 import { A as _$$A9 } from "../905/51743";
 import { b as _$$b3 } from "../9410/595260";
-import { Vj } from "../905/561485";
+import { isFullscreenSitesView } from "../905/561485";
 import { Jb } from "../figma_app/224338";
 import { mD, Tm, Ne } from "../figma_app/955528";
 import { P as _$$P3 } from "../905/35881";
@@ -253,7 +253,7 @@ import { z4 } from "../905/37051";
 import { dh } from "../figma_app/186343";
 import { Uz, vN, xH } from "../905/63728";
 import { ks } from "../figma_app/637027";
-import { oA as _$$oA2 } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { k1 } from "../figma_app/687767";
 import { s1 as _$$s5 } from "../figma_app/226737";
 import { FW as _$$FW } from "../figma_app/952764";
@@ -281,7 +281,7 @@ import { r as _$$r4 } from "../905/840133";
 import { R as _$$R3 } from "../905/57445";
 import { r as _$$r5 } from "../905/216849";
 import { N as _$$N } from "../905/130112";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { FU } from "../905/26824";
 import { Zj as _$$Zj, S5 } from "../figma_app/355754";
 import { o3 as _$$o2, nt as _$$nt } from "../905/226610";
@@ -372,7 +372,7 @@ import { MO } from "../9410/228031";
 import { A as _$$A21 } from "../svg/435789";
 import { ty as _$$ty } from "../figma_app/844818";
 import { U as _$$U5 } from "../3276/848795";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { jz as _$$jz } from "../figma_app/587765";
 import { e_ as _$$e_, $_ } from "../9410/960980";
 import { Nd, jx } from "../9410/793186";
@@ -1051,10 +1051,10 @@ let tv = "export_picker--header--Wz6np";
 let tE = "export_picker--labelWithoutCheckbox--3zcNc export_picker--label--43URE";
 let tw = parsePxInt(zK5);
 function tS() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useSelector(e => e.exportableItems);
   let i = useSelector(e => e.dropdownShown);
-  let s = !!e && Pe(e);
+  let s = !!e && isExportRestricted(e);
   let o = Av();
   let d = useSelector(e => e.saveAsState);
   let c = useSelector(e => e.mirror.appModel.currentPage);
@@ -1329,7 +1329,7 @@ class tk extends PureComponent {
         Fullscreen.saveExportedItems();
         this.props.dispatch(XE());
         this.props.dispatch(_$$rg());
-        YQ({
+        handleAtomEvent({
           id: "export_completed",
           properties: {
             from: "export_picker"
@@ -2511,7 +2511,7 @@ function iG({
   children: e,
   entryPoint: t
 }) {
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let a = selectCurrentUser();
   let s = _$$ol();
   let o = _$$O();
@@ -2575,8 +2575,8 @@ function iV({
   let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$U3("annotations_button");
   let c = _$$ni();
-  let u = _I();
-  let p = U4();
+  let u = useCanAccessFullDevMode();
+  let p = useCanAccessDevModeEntryPoint();
   n = () => d("handoff");
   let h = u ? [{
     name: "view-annotations",
@@ -2769,7 +2769,7 @@ function r0(e) {
 function r8() {
   let e = Em();
   let t = _$$y5().transform(e => e?.canCreateSitesFileWithReasons.result).unwrapOr(!1);
-  let i = Kf();
+  let i = useIsCurrentUserCreator();
   let r = Vr();
   if (!r || !r.isTopLevelFrame()) return !1;
   let n = r.size.x;
@@ -3865,7 +3865,7 @@ let ns = class e extends PureComponent {
     let n = this.props.appModel;
     let a = this.props.selectedView.editorType === FEditorType.Design;
     let s = this.props.selectedView.editorType === FEditorType.Slides;
-    let d = Vj(this.props.selectedView);
+    let d = isFullscreenSitesView(this.props.selectedView);
     let c = this.props.selectedView.editorType === FEditorType.Figmake;
     let u = this.props.selectedView.editorType === FEditorType.Cooper;
     let p = this.props.selectedView.editorType === FEditorType.Illustration;
@@ -4189,14 +4189,14 @@ function no(e) {
   return e.library.publishableSymbols.some(e => e.containingFrame.pageId === t) || e.library.publishableStateGroups.some(e => e.containingFrame.pageId === t);
 }
 function nl(e) {
-  let t = useSelector(_$$tB);
+  let t = useSelector(selectOpenFile);
   let i = Tg();
   let n = _X({
     subscribeToUpdates_expensive: !0
   });
   let s = ud();
-  let o = _I();
-  let l = U4();
+  let o = useCanAccessFullDevMode();
+  let l = useCanAccessDevModeEntryPoint();
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
   let p = useDispatch();
@@ -4216,9 +4216,9 @@ function nl(e) {
       publishedPlugins: e.publishedPlugins,
       publishedWidgets: e.publishedWidgets,
       localExtensions: e.localPlugins,
-      userCanViewPlugins: Eh(e),
+      userCanViewPlugins: canPerformAction(e),
       userCanViewWidgets: BE(e),
-      userCanRunExtensions: cb(e),
+      userCanRunExtensions: canRunExtensions(e),
       sceneGraph: e.mirror.sceneGraph,
       sceneGraphSelection: e.mirror.sceneGraphSelection,
       library: e.library,
@@ -4245,7 +4245,7 @@ function nl(e) {
       attributionContextKey: e.sharingAttributionContextKey,
       editorType: a,
       isDevHandoff: a === FEditorType.DevHandoff,
-      isLimitedDevMode: $A(e.selectedView) && !_$$tn(e)
+      isLimitedDevMode: $A(e.selectedView) && !canAccessFullDevMode(e)
     };
   });
   let x = PE();
@@ -4253,7 +4253,7 @@ function nl(e) {
   let b = LC();
   let C = r8();
   let v = _p();
-  let E = _$$to();
+  let E = useIsSelectedViewFullscreenCooper();
   return jsx(ns, {
     ...e,
     ..._,
@@ -4283,14 +4283,14 @@ ns.displayName = "SelectionContextMenu";
 ns.refreshCache = new _$$O2(_$$A6.duration(1, "day"));
 var nd = (e => (e.SINGLE_SLIDE_VIEW = "single_slide_view", e.COOPER_CAROUSEL = "cooper_carousel", e))(nd || {});
 function nc(e) {
-  let t = useSelector(_$$tB);
+  let t = useSelector(selectOpenFile);
   let i = Tg();
   let n = _X({
     subscribeToUpdates_expensive: !0
   });
   let s = ud();
-  let o = _I();
-  let l = U4();
+  let o = useCanAccessFullDevMode();
+  let l = useCanAccessDevModeEntryPoint();
   let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
   let p = useDispatch();
@@ -4309,9 +4309,9 @@ function nc(e) {
       publishedPlugins: e.publishedPlugins,
       publishedWidgets: e.publishedWidgets,
       localExtensions: e.localPlugins,
-      userCanViewPlugins: Eh(e),
+      userCanViewPlugins: canPerformAction(e),
       userCanViewWidgets: BE(e),
-      userCanRunExtensions: cb(e),
+      userCanRunExtensions: canRunExtensions(e),
       sceneGraph: e.mirror.sceneGraph,
       sceneGraphSelection: e.mirror.sceneGraphSelection,
       library: e.library,
@@ -4338,14 +4338,14 @@ function nc(e) {
       attributionContextKey: e.sharingAttributionContextKey,
       editorType: n,
       isDevHandoff: n === FEditorType.DevHandoff,
-      isLimitedDevMode: $A(e.selectedView) && !_$$tn(e)
+      isLimitedDevMode: $A(e.selectedView) && !canAccessFullDevMode(e)
     };
   });
   let x = PE();
   let y = Ne() && "single_slide_view" === e.carouselType;
   let b = LC();
   let C = r8();
-  let v = _$$to();
+  let v = useIsSelectedViewFullscreenCooper();
   return jsx(ns, {
     ...e,
     ..._,
@@ -4381,7 +4381,7 @@ function nu({
   let s = useSelector(e => e.mirror.appModel);
   let o = useSelector(e => e.mirror.sceneGraph);
   let l = hA() ?? void 0;
-  let d = q5();
+  let d = selectCurrentFile();
   let c = useSelector(e => e.mirror.selectionProperties.canCopyLinkToSelection);
   let u = Fk((e, t) => {
     let i = e.get(t);
@@ -4627,7 +4627,7 @@ function ny({
 }) {
   let s = useDispatch();
   let o = useSelector(e => e.mirror.appModel);
-  let l = q5();
+  let l = selectCurrentFile();
   let d = useCallback(() => {
     s(lW({
       stringToCopy: jN({
@@ -4767,7 +4767,7 @@ function nk({
   let s = useSelector(e => e.mirror.appModel);
   let l = getSingletonSceneGraph();
   let d = _$$ni();
-  let c = xo();
+  let c = useCanUseDevModeDemoFile();
   let u = useCallback(() => {
     _$$u({
       source: MenuType.RFD_INITIAL_NUDGE
@@ -4946,11 +4946,11 @@ function nY({
   let g = m || f;
   let x = _$$D3() && !!h?.hasBeenEditedSinceLastStatusChange;
   let y = h?.type === "SECTION";
-  let b = q5();
+  let b = selectCurrentFile();
   let C = _$$U3("status_label_menu");
   let v = _$$ni();
-  let E = _I();
-  let T = U4();
+  let E = useCanAccessFullDevMode();
+  let T = useCanAccessDevModeEntryPoint();
   let S = _$$D3();
   let j = E && S;
   let I = Yh(u, "set-selection-completed-status");
@@ -4961,7 +4961,7 @@ function nY({
   let [, L] = useAtomValueAndSetter(wz);
   let R = dh();
   let D = A0(ActionType.READY_FOR_DEV);
-  let M = xo();
+  let M = useCanUseDevModeDemoFile();
   let P = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.NODE_STATUS), []);
   let F = HandoffBindingsCpp.canEditNodeStatus();
   let B = m0();
@@ -5150,8 +5150,8 @@ function nq(e) {
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
   }));
-  let n = q5();
-  let s = _$$oA2(n?.siteMount);
+  let n = selectCurrentFile();
+  let s = getResourceDataOrFallback(n?.siteMount);
   return jsx(nX, {
     ...e,
     ...i,
@@ -5364,7 +5364,7 @@ let aa = registerModal(function ({
   onConfirm: n,
   onCancel: a
 }) {
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   return jsx(fu, {
     name: "section_preset_picker_confirmation_modal_shown",
     properties: {
@@ -5504,7 +5504,7 @@ function ab({
   let c;
   let u;
   let p = useDispatch();
-  let h = _$$tS();
+  let h = useCurrentFileKey();
   let m = useAtomWithSubscription(_$$g3);
   let f = "hasData" === m.state ? m.data : [];
   let g = 0 !== f.length;
@@ -5781,7 +5781,7 @@ function ab({
 }
 function aC(e) {
   let t = useSelector(e => !e.mirror.appModel.isReadOnly);
-  let i = q5();
+  let i = selectCurrentFile();
   useSelector(e => i?.team || null);
   let n = _$$x();
   let s = QZ();
@@ -7902,8 +7902,8 @@ function sH({
   let l = useRef(null);
   let d = useRef({});
   let c = sJ();
-  let u = ZC(c);
-  let p = ZC(e);
+  let u = useLatestRef(c);
+  let p = useLatestRef(e);
   let h = useDispatch();
   let m = function (e, t, i) {
     let r = sd(t);
@@ -8257,7 +8257,7 @@ function s7() {
   let p = useSelector(e => e.mirror.appModel.currentPage);
   let h = useDispatch();
   let [m, f] = useState(null);
-  let g = ZC(isLoading);
+  let g = useLatestRef(isLoading);
   let _ = useCallback(t => {
     e("page_loading_overlay", {
       timeElapsedMs: t,
@@ -8458,7 +8458,7 @@ class ow extends RecordingPureComponent {
             return;
           }
         }
-        if (e.callback && !i && (e.callback(Dz(e), e.args, this.props.dispatch), i = !0), e.action && (VU.get(e.action, "quick-actions", e.args)(t), i = !0), i && this.addToRecentlyUsedCommands(e, e.runPluginArgs), this.logActionSelectedEvent(e), "toggle-publish" === e.action && YQ({
+        if (e.callback && !i && (e.callback(Dz(e), e.args, this.props.dispatch), i = !0), e.action && (VU.get(e.action, "quick-actions", e.args)(t), i = !0), i && this.addToRecentlyUsedCommands(e, e.runPluginArgs), this.logActionSelectedEvent(e), "toggle-publish" === e.action && handleAtomEvent({
           id: "insert-component-onboarding-event"
         }), oT(e) && !isInteractionOrEvalMode()) {
           this.cancelDelayedClose();
@@ -9200,7 +9200,7 @@ let li = {
         onCreateVariable: e,
         onClose: i
       });
-      let n = _$$_G();
+      let n = useOpenFileLibraryKey();
       let s = useSelector(e => e.mirror.sceneGraph);
       return {
         onCreateVariableSubmit: _onCreateVariableSubmit,
@@ -9294,7 +9294,7 @@ export function $$lr0({
   let T = t.openFile ? t.openFile.key : null;
   let j = getObservableValue(AppStateTsApi?.uiState().shouldShowAutoLayoutHintsIfExist, !1);
   let I = getObservableValue(AppStateTsApi?.uiState().autoLayoutShortcutHints, new Map());
-  let k = Rs(StarterFileEditConfirmation({
+  let k = useSubscription(StarterFileEditConfirmation({
     key: T ?? ""
   }), {
     enabled: !!T
@@ -9315,7 +9315,7 @@ export function $$lr0({
   let O = l7();
   let B = _$$e();
   let G = ZO();
-  let K = Oc();
+  let K = useIsSelectedFigmakeFullscreen();
   let [H] = useAtomValueAndSetter(vE);
   let z = Xr(t5);
   let V = !t.showUi && TY(t.dropdownShown);

@@ -6,7 +6,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { U, hC } from "../figma_app/901889";
 import { C as _$$C } from "../figma_app/974443";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { r as _$$r } from "../905/520829";
 import { wK } from "../905/407352";
 import { l7 } from "../figma_app/88239";
@@ -18,7 +18,7 @@ import { Z } from "../905/104740";
 import { dh, $P } from "../figma_app/186343";
 import { Ht } from "../figma_app/701001";
 import { Fy } from "../figma_app/623300";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
@@ -212,7 +212,7 @@ function D({
   let [x, y] = useState(!1);
   let v = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let w = g && g.dragOverPageId === e ? "before" === g.insertPosition ? l ? iZ : pf : _ ? Vi : IK : null;
-  let T = q5();
+  let T = selectCurrentFile();
   let [k, C] = useAtomValueAndSetter(qp);
   let S = useMemo(() => T?.editorType === FFileType.WHITEBOARD && !v, [T?.editorType, v]);
   let N = useMemo(() => x && h && S, [x, h, S]);
@@ -223,7 +223,7 @@ function D({
     R?.created_at && C(_$$r.SUCCESS);
   }, [C, R?.created_at]);
   let D = hC();
-  let L = ZC(S);
+  let L = useLatestRef(S);
   useEffect(() => {
     !L && N && D("figjam_summary_preview.preview_shown", {
       previewPageId: e

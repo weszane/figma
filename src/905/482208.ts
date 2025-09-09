@@ -1,9 +1,8 @@
-import { getI18nString } from '../905/303541'
-import { debugState } from '../905/407919'
-import { getFeatureFlags } from '../905/601108'
-import { Qn } from '../figma_app/12796'
-
-let i18nActionsMap
+import { getI18nString } from '../905/303541';
+import { debugState } from '../905/407919';
+import { getFeatureFlags } from '../905/601108';
+import { canEditBasedOnPlan } from '../figma_app/12796';
+let i18nActionsMap;
 export function formatI18nMessage(e, options?: Record<string, string | number>) {
   i18nActionsMap || (i18nActionsMap = {
     'toggle-spell-check': getI18nString('fullscreen_actions.toggle-spell-check'),
@@ -377,7 +376,7 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
     'page-delete': getI18nString('fullscreen_actions.page-delete'),
     'page-duplicate': getI18nString('fullscreen_actions.page-duplicate'),
     'page-move-to': getI18nString('fullscreen_actions.page-move-to', {
-      name: '#{name}',
+      name: '#{name}'
     }),
     'page-move-to-menu': getI18nString('fullscreen_actions.page-move-to-menu'),
     'page-move-to-new-file': getI18nString('fullscreen_actions.page-move-to-new-file'),
@@ -396,9 +395,9 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
     'place-all-images': getI18nString('fullscreen_actions.place_all_images'),
     'place': () => {
       let {
-        openFile,
-      } = debugState?.getState()
-      return Qn(openFile) ? getI18nString('fullscreen_actions.place') : getI18nString('fullscreen_actions.place_image')
+        openFile
+      } = debugState?.getState();
+      return canEditBasedOnPlan(openFile) ? getI18nString('fullscreen_actions.place') : getI18nString('fullscreen_actions.place_image');
     },
     'plugin-dock': 'Open in the inspect panel',
     'position-panel-fixed-disabled': getI18nString('sites.panel.position_panel.fixed_disabled'),
@@ -531,7 +530,7 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
     'select-matching': getI18nString('fullscreen_actions.select-matching'),
     'select-child': getI18nString('fullscreen_actions.select-child'),
     'select-node': getI18nString('fullscreen_actions.select-node', {
-      name: '#{name}',
+      name: '#{name}'
     }),
     'select-node-menu': getI18nString('fullscreen_actions.select-node-menu'),
     'select-parent': getI18nString('fullscreen_actions.select-parent'),
@@ -1038,43 +1037,43 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
     'debug-magic-link-ai-model': 'Debug Magic Link AI model',
     'missing-plugin': getI18nString('fullscreen_actions.missing-plugin', {
       pluginCommand: '#{pluginCommand}',
-      pluginName: '#{pluginName}',
+      pluginName: '#{pluginName}'
     }),
     'check-network-compatibility': getI18nString('check_network_compatibility.dropdown_title'),
     'find-files-matching': getI18nString('fullscreen_actions.quick_actions.find-files-matching', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-community-matching': getI18nString('fullscreen_actions.quick_actions.find-community-matching', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-assets-and-community-matching': getI18nString('fullscreen_actions.quick_actions.find-at-plan-file-and-community', {
       searchQuery: '#{searchQuery}',
-      planFileName: '#{planFileName}',
+      planFileName: '#{planFileName}'
     }),
     'go-to-page': getI18nString('fullscreen_actions.quick_actions.go-to-page', {
-      pageName: '#{pageName}',
+      pageName: '#{pageName}'
     }),
     'find-components-matching': getI18nString('fullscreen_actions.quick_actions.find-components-matching', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-extensions-matching': getI18nString('fullscreen_actions.quick_actions.find-extensions-matching', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-assets-matching': getI18nString('fullscreen_actions.quick_actions.find-assets-matching', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-in-community': getI18nString('fullscreen_actions.quick_actions.find-in-community', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-at-plan-file': getI18nString('fullscreen_actions.quick_actions.find-at-plan-file', {
       searchQuery: '#{searchQuery}',
-      planFileName: '#{planFileName}',
+      planFileName: '#{planFileName}'
     }),
     'find-components': getI18nString('fullscreen_actions.quick_actions.find-components', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'find-plugins-widgets': getI18nString('fullscreen_actions.quick_actions.find-plugins-widgets', {
-      searchQuery: '#{searchQuery}',
+      searchQuery: '#{searchQuery}'
     }),
     'link-to-component': getI18nString('fullscreen_actions.quick_actions.link-to-component'),
     'translate-text': getI18nString('fullscreen_actions.quick_actions.translate-text'),
@@ -1124,7 +1123,7 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
     'add-slide-object-animation': getI18nString('fullscreen_actions.add-slide-object-animation'),
     'assistant-chat': getI18nString('fullscreen_actions.assistant-chat'),
     'assistant-chat-query': getI18nString('fullscreen_actions.assistant-chat-query', {
-      query: '#{searchQuery}',
+      query: '#{searchQuery}'
     }),
     'debug-toggle-cooper-mode': 'Debug Toggle Cooper Editor Type',
     'cooper-delete-frame': getI18nString('cooper.left_panel.context_menu.delete'),
@@ -1147,8 +1146,8 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
     'send-to-make-from-design': getI18nString('fullscreen_actions.send-to-make-from-design'),
     'send-to-buzz-from-design': getI18nString('buzz.send_from_design.send_to_figma_buzz'),
     'send-selection-to-buzz-from-design': getI18nString('buzz.send_from_design.send_to_figma_buzz'),
-    'change-tag': getI18nString('fullscreen_actions.sites_change_semantic_tag'),
-  })
+    'change-tag': getI18nString('fullscreen_actions.sites_change_semantic_tag')
+  });
   /**
    * Returns the i18n string for the given action key.
    * If the value is a function, it will be called with the provided params.
@@ -1158,17 +1157,17 @@ export function formatI18nMessage(e, options?: Record<string, string | number>) 
    * @param params - Optional parameters for template replacement.
    * @returns The localized string for the action.
    */
-  let actionValue = i18nActionsMap[e]
+  let actionValue = i18nActionsMap[e];
   if (typeof actionValue === 'function') {
-    actionValue = actionValue(options)
+    actionValue = actionValue(options);
   }
   if (!actionValue || typeof actionValue !== 'string') {
-    console.warn(`Fullscreen_strings missing for key: ${e}`)
-    actionValue = ''
+    console.warn(`Fullscreen_strings missing for key: ${e}`);
+    actionValue = '';
   }
   if (options) {
-    actionValue = (actionValue as string).replace(/#\{(\w+)\}/g, (_match, param) => options[param] ?? '')
+    actionValue = (actionValue as string).replace(/#\{(\w+)\}/g, (_match, param) => options[param] ?? '');
   }
-  return actionValue
+  return actionValue;
 }
-export const A = formatI18nMessage
+export const A = formatI18nMessage;

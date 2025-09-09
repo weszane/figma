@@ -1,6 +1,6 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Ro } from "../figma_app/805373";
 export let $$o0 = ex("user_info", function (e) {
@@ -20,7 +20,7 @@ export let $$o0 = ex("user_info", function (e) {
       })
     }), jsx("span", {
       className: "user_info_tooltip--tooltipName--iCh4X",
-      children: EJ(userHandle, 25)
+      children: truncate(userHandle, 25)
     })]
   });
 }, e => ({

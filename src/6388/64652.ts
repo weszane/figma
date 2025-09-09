@@ -37,7 +37,7 @@ import { debugState } from "../905/407919";
 import { F as _$$F } from "../905/680873";
 import { $ as _$$$2 } from "../9410/841699";
 import { ds, Cu } from "../figma_app/314264";
-import { tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { QU } from "../1250/559338";
 import { g as _$$g } from "../642/216228";
 import { A as _$$A } from "../9410/103334";
@@ -76,7 +76,7 @@ function Z() {
     pagesList: l
   });
   let u = _4();
-  let x = tS();
+  let x = useCurrentFileKey();
   let {
     height,
     setHeight,
@@ -95,7 +95,7 @@ function Z() {
     });
     setIsOpen(e);
   }, [x, m, setIsOpen]);
-  let [b, , j] = BN(a, e);
+  let [b,, j] = BN(a, e);
   return jsxs(_$$A, {
     isFullHeight: !r,
     children: [jsx(_$$$2, {}), !t && jsx(_$$I, {
@@ -122,7 +122,7 @@ function Z() {
 }
 function ep() {
   let e = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
-  let t = tS();
+  let t = useCurrentFileKey();
   let l = useCallback(e => {
     "GRID" === e ? (fullscreenValue.triggerAction("exit-focus-view"), Cu({
       trackingContext: "grid_view_toggle",
@@ -198,7 +198,7 @@ function ej() {
   }) : null;
 }
 function ey() {
-  let e = q5();
+  let e = selectCurrentFile();
   return useSelector(e => e.isRenaming) ? jsx("div", {
     className: p()(eb, "slides_left_panel_island--renaming--PguET"),
     children: jsx("div", {

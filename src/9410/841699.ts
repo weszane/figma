@@ -8,7 +8,7 @@ import { lt } from "../905/511649";
 import { Ex, vj, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { U4, xo } from "../figma_app/473493";
+import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { d as _$$d, cR, hv } from "../figma_app/715641";
 import { h as _$$h } from "../905/207101";
 import { l7, X0, U0, ZI, Xd } from "../figma_app/88239";
@@ -91,7 +91,7 @@ export function $$M1({
   devFocusedOnboarding: e
 }) {
   let t = X0();
-  let i = !U4();
+  let i = !useCanAccessDevModeEntryPoint();
   let l = useDispatch();
   let u = U0();
   let p = useSelector(e => i ? void 0 : Np(e, u));
@@ -99,7 +99,7 @@ export function $$M1({
   let x = ZI();
   let y = useAtomWithSubscription(hv)?.data;
   let [b, v] = useAtomValueAndSetter(cR);
-  let E = xo();
+  let E = useCanUseDevModeDemoFile();
   let T = useAtomWithSubscription(_$$d);
   let M = ow();
   let P = _$$n();

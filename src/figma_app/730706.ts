@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { s as _$$s } from "../figma_app/478542";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { getI18nString } from "../905/303541";
 import { Em, ow } from "../figma_app/976749";
 import { YH } from "../figma_app/604494";
@@ -37,7 +37,7 @@ function b() {
     let r = Ne();
     let n = useCallback(() => o$(e), [e]);
     let s = useAtomWithSubscription(YH).length > 0;
-    let o = ZC(s);
+    let o = useLatestRef(s);
     let c = s && !o;
     useEffect(() => {
       t && (c || !r) && n();

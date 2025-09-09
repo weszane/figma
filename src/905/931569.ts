@@ -1,4 +1,4 @@
-import { sy } from "../figma_app/930338";
+import { encodeUri } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 export class $$a0 {
   pathToSelectedView(e, t) {
@@ -15,7 +15,7 @@ export class $$a0 {
     return "teamRestore" === e.view ? getI18nString("view_selectors.file_browser.restore_team") : null;
   }
   selectedViewName(e) {
-    return "teamRestore" === e.view ? `/files/team/${e.teamId}/${sy(e.teamName)}/restore` : null;
+    return "teamRestore" === e.view ? `/files/team/${e.teamId}/${encodeUri(e.teamName)}/restore` : null;
   }
   selectedViewHasMissingResources(e, t) {
     return !1;

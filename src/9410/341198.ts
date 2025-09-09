@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from "react";
 import { E } from "../905/632989";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { jN } from "../905/612685";
 import { Qn } from "../figma_app/415217";
 import { useSelector } from "react-redux";
@@ -73,7 +73,7 @@ export function $$E0({
   children: e,
   isOnReadyForDevPage: t
 }) {
-  let i = tS();
+  let i = useCurrentFileKey();
   let u = useCallback(() => {
     let e = jN({
       file: {

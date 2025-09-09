@@ -5,7 +5,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { N9, qg } from "../figma_app/385874";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
 import { ut } from "../figma_app/328423";
 var s = a;
@@ -235,7 +235,7 @@ export function $$P1(e = 0) {
   return 0 === r ? "-" : `${r}`;
 }
 export function $$D13() {
-  let e = useSelector(sS);
+  let e = useSelector(selectOpenFileKey);
   let t = useSelector(e => e.mirror.selectionProperties.fillPaints) || null;
   let r = useMemo(() => N9(t)?.filter(e => e.opacity > 0 && e.visible && e.image), [t]);
   if (r?.length !== 1 || !r[0]?.image) return null;

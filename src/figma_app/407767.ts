@@ -8,7 +8,7 @@ import { T1 } from "../figma_app/545293";
 import { cJ } from "../figma_app/976749";
 import { qc } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Ls, m3, ZA } from "../figma_app/645694";
 import { PW } from "../figma_app/633080";
 import { C7 } from "../figma_app/144974";
@@ -289,7 +289,7 @@ export function $$L12({
 export function $$P14() {
   let e = getFeatureFlags().anticipation;
   let t = C7();
-  let r = q5()?.canEdit;
+  let r = selectCurrentFile()?.canEdit;
   let i = p8("topLevelMode") === ViewType.LAYOUT;
   let s = cJ();
   return e && t && r && i && !!Fullscreen && !s;

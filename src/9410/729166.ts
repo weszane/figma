@@ -119,7 +119,7 @@ import { a_Q, bTb, Evg, Gyo, m8f, RtY, Wsk, wxr } from '../figma_app/27776';
 import { gs, ON, oy } from '../figma_app/31103';
 import { n0 } from '../figma_app/32128';
 import { J2 as _$$J3 } from '../figma_app/34798';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { DevModeActivity } from '../figma_app/43951';
 import { H as _$$H } from '../figma_app/47866';
 import { y as _$$y2 } from '../figma_app/53571';
@@ -157,10 +157,10 @@ import { bi } from '../figma_app/425489';
 import { dR, Ww } from '../figma_app/440875';
 import { fullscreenValue } from '../figma_app/455680';
 import { assert, assertNotNullish, throwTypeError } from '../figma_app/465776';
-import { _I, U4, xo } from '../figma_app/473493';
+import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from '../figma_app/473493';
 import { clamp } from '../figma_app/492908';
 import { _ as _$$_ } from '../figma_app/496441';
-import { tS as _$$tS, _G, q5 } from '../figma_app/516028';
+import { useCurrentFileKey, useOpenFileLibraryKey, selectCurrentFile } from '../figma_app/516028';
 import { uv } from '../figma_app/518364';
 import { iA as _$$iA } from '../figma_app/545541';
 import { BI } from '../figma_app/546509';
@@ -549,10 +549,10 @@ let en = function ({
 };
 function ea() {
   let e = bh();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = Dl(t);
   let [n, a] = Vc('componentBrowserOnboardingSelection', null);
-  let s = _G();
+  let s = useOpenFileLibraryKey();
   let o = _6();
   return i && s ? n ? jsx(fu, {
     name: 'Component Browser',
@@ -1278,7 +1278,7 @@ function th({
   let t = Ww();
   let i = Um();
   let s = useSelector(e => e.multiplayer);
-  let o = q5();
+  let o = selectCurrentFile();
   let l = selectCurrentUser();
   let d = _6();
   let c = useDispatch();
@@ -1451,8 +1451,8 @@ function iw({
   let s = Fk(t => t.get(e)?.getStatusInfo(), e);
   let o = _$$ei(e);
   let l = Ak(o?.lastEditedAt);
-  let d = q5();
-  let c = _I();
+  let d = selectCurrentFile();
+  let c = useCanAccessFullDevMode();
   if (!t) {
     return jsx(iv, {
       previewUrl: i,
@@ -1494,7 +1494,7 @@ function iS({
   let o = Fk(t => t.get(e)?.getStatusInfo(), e);
   let d = o?.lastUpdateUnixTimestamp ? 1e3 * o.lastUpdateUnixTimestamp : null;
   let c = Ak(d);
-  let u = q5();
+  let u = selectCurrentFile();
   if (!d) {
     return jsx(iw, {
       nodeId: e,
@@ -1562,7 +1562,7 @@ function ij({
   isEdited: t
 }) {
   let i = useDispatch();
-  let n = q5()?.key;
+  let n = selectCurrentFile()?.key;
   let s = _$$U();
   let l = async () => {
     let r;
@@ -1638,7 +1638,7 @@ let iW = Wh(() => atom(!1), {
   preserveValue: !1
 });
 function iY() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useDispatch();
   let i = selectCurrentUser();
   let s = Um();
@@ -1710,8 +1710,8 @@ function iZ() {
   }) : null;
 }
 function iQ() {
-  let e = _I();
-  let t = q5()?.key;
+  let e = useCanAccessFullDevMode();
+  let t = selectCurrentFile()?.key;
   let i = dP();
   _$$T() && getFeatureFlags().dt_vscode_ready_for_dev && (i = 0);
   let s = _$$U();
@@ -2680,7 +2680,7 @@ let r0 = memo(({
   viewerControl: t
 }) => {
   let i = useRef(null);
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let o = useRef(!1);
   let [{
     currentPresentedNode: d,
@@ -2695,7 +2695,7 @@ let r0 = memo(({
   let y = _$$eY();
   let C = useMemo(() => h === bi.OPEN, [h]);
   let v = m?.initialViewerSize ?? rX;
-  let E = ZC(v);
+  let E = useLatestRef(v);
   let T = rQ();
   let [w, S] = useState(T);
   let [j, I] = useState(v.x);
@@ -3285,13 +3285,13 @@ function r2({
 }
 function r5() {
   let e = useSelector(e => e.selectedView);
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = useSelector(e => e.progressBarState.mode);
   let r = useSelector(e => pi({
     editorType: d1(e)?.editor_type
   }));
   let o = i !== UIVisibilitySetting.HIDE_UI && i !== UIVisibilitySetting.ON_AND_LOCKED;
-  let p = q5();
+  let p = selectCurrentFile();
   let m = jY();
   let f = BI();
   let g = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
@@ -3351,16 +3351,16 @@ function r5() {
   useEffect(() => {
     f?.updateReadOnly && _ && !x && (y(!0), f.updateReadOnly(C));
   }, [f, _, x, y, C]);
-  let v = ZC(p);
+  let v = useLatestRef(p);
   let E = useSelector(e => e.mirror.appModel.pagesList);
   let T = useMemo(() => E.map(e => ({
     id: e.nodeId,
     name: e.name,
     divider: e.isDivider
   })), [E]);
-  let w = ZC(T);
+  let w = useLatestRef(T);
   let S = useSelector(e => e.mirror.appModel.currentPage);
-  let j = ZC(S);
+  let j = useLatestRef(S);
   useEffect(() => {
     f?.updatePages && p && (!v || p.key !== v.key || p.name !== v.name || p.editorType !== v.editorType || p.isTryFile !== v.isTryFile || !c2(T, w) || S !== j) && f.updatePages({
       fileKey: p.key,
@@ -3404,15 +3404,15 @@ function r5() {
       users
     };
   }, [N, L, A, O, R]);
-  let M = ZC(D);
+  let M = useLatestRef(D);
   useEffect(() => {
     f?.updateMultiplayerUserInfo && !c2(M, D) && f.updateMultiplayerUserInfo(D);
   }, [f, D, M]);
   _$$iA();
   !function (e, t) {
-    let i = U4();
-    let r = _I();
-    let a = xo();
+    let i = useCanAccessDevModeEntryPoint();
+    let r = useCanAccessFullDevMode();
+    let a = useCanUseDevModeDemoFile();
     let s = _$$D2();
     let o = _$$U2('permission', !0);
     let d = e && !r && !i && !_$$T();

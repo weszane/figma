@@ -1,12 +1,12 @@
-import { dn, qk } from "../905/760074";
-import { PW } from "../905/535806";
+import { setGlobalTags, clearGlobalTags } from "../905/760074";
+import { CPPEventType } from "../905/535806";
 export let $$n0;
 class s {
   setBranchingSentryTags() {
-    dn(PW.CPP, null);
+    setGlobalTags(CPPEventType.CPP, null);
   }
   clearBranchingSentryTags() {
-    qk();
+    clearGlobalTags();
   }
 }
 export function $$o1() {

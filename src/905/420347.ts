@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { createRemovableAtomFamily, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { Bq } from "../905/760682";
 import { Z } from "../905/939602";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { LH } from "../905/872904";
 import { IT, M4 } from "../905/713695";
 var $$n0;
@@ -27,7 +27,7 @@ export function $$f1(e, t) {
     return useMemo(() => Array.from(n), [n]);
   }(d);
   let g = LH();
-  let f = tS();
+  let f = useCurrentFileKey();
   let [_] = IT($$n0.LibrariesByLibraryKeysQuery({
     libraryKeys: t?.revalidateOnMount ? e : m,
     subscriptionFileKey: f,

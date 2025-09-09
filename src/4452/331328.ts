@@ -14,7 +14,7 @@ import { fu } from "../figma_app/831799";
 import { zK } from "../figma_app/475472";
 import { dr } from "../4452/405965";
 import { FResourceCategoryType, FPermissionLevelType } from "../figma_app/191312";
-import { Fb } from "../figma_app/630077";
+import { teamVisibilityEnum } from "../figma_app/630077";
 import { registerModal } from "../905/102752";
 import { MF } from "../4452/915131";
 import { _9, J4, Kd, Iz, YU } from "../figma_app/907616";
@@ -83,8 +83,8 @@ export function $$T1(e) {
   let l = useCallback(() => {
     let t = e.teamSharingSettings && e.teamSharingSettings.orgBrowsable;
     let a = e.teamSharingSettings && e.teamSharingSettings.hidden;
-    if (t); else if (a) return Fb.HIDDEN;
-    return Fb.ORG_BROWSABLE;
+    if (t) ;else if (a) return teamVisibilityEnum.HIDDEN;
+    return teamVisibilityEnum.ORG_BROWSABLE;
   }, [e.teamSharingSettings]);
   let o = useCallback(() => {
     let t = e.teamSharingSettings && e.teamSharingSettings.sharingAudienceControl;
@@ -129,8 +129,8 @@ export function $$T1(e) {
         children: renderI18nText("project_creation.cancel")
       }), jsx(vd, {
         onClick: () => {
-          let t = u === _9.INVITE_ONLY && p === Fb.ORG_BROWSABLE;
-          let s = u === _9.INVITE_ONLY && p === Fb.HIDDEN;
+          let t = u === _9.INVITE_ONLY && p === teamVisibilityEnum.ORG_BROWSABLE;
+          let s = u === _9.INVITE_ONLY && p === teamVisibilityEnum.HIDDEN;
           let n = MF(u, x);
           if (a(zK({
             team: e.team,

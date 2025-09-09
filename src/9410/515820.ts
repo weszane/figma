@@ -30,10 +30,10 @@ import { Fr } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { DQ, Pw } from "../figma_app/121751";
-import { A as _$$A } from "../905/654645";
-import { u8 } from "../figma_app/391338";
+import { adminPermissionConfig } from "../905/654645";
+import { useShadowRead } from "../figma_app/391338";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { XX, Lj, LF } from "../figma_app/345997";
@@ -115,7 +115,7 @@ function W({
   onHeightChange: e
 }) {
   let t = useDispatch();
-  let i = q5();
+  let i = selectCurrentFile();
   let a = FC();
   let s = p8("pagesList").length;
   let o = m0();
@@ -132,11 +132,11 @@ function W({
   let _ = i?.plan;
   let x = f && canEditTeam(f.id, a) && !XX(f);
   let y = f && _ && f.canEdit && _.tier === FPlanNameType.STARTER;
-  let b = u8({
+  let b = useShadowRead({
     oldValue: x,
     newValue: y,
     newValueReady: m,
-    label: _$$A.PageTrackerUpsell.canEditStarterTeam,
+    label: adminPermissionConfig.PageTrackerUpsell.canEditStarterTeam,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
       planId: _?.id,

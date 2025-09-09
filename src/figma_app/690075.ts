@@ -1,4 +1,4 @@
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { cV } from "../figma_app/740025";
 export function $$s2(e, t, r) {
@@ -12,7 +12,7 @@ export function $$s2(e, t, r) {
   });
   let l = a.map(r);
   o && l.push(o);
-  return Yx(l);
+  return formatList(l);
 }
 export function $$o1(e) {
   let t = cV(e);

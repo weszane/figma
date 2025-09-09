@@ -33,11 +33,11 @@ import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { YL, Zz, $$in } from "../figma_app/84966";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { XP } from "../figma_app/465071";
+import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { DashboardSections } from "../905/548208";
 import { Ib } from "../905/129884";
 import { Ro } from "../figma_app/805373";
@@ -48,7 +48,7 @@ import { A as _$$A } from "../5724/663128";
 var h = m;
 var f = g;
 export function $$Q0(e) {
-  let t = XP({
+  let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   }).key.parentId;
   return jsx(tH, {
@@ -77,7 +77,7 @@ export function $$Q0(e) {
 function J(e) {
   let t = useDispatch();
   let i = hS(e);
-  let p = XP({
+  let p = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });
   let m = _$$k();
@@ -96,7 +96,7 @@ function J(e) {
     let r = _$$g(n.summary.annual_seats, {
       throwOnError: !1
     });
-    !i && isNotNullish(r[ud.COLLABORATOR]) && isNotNullish(t[ud.COLLABORATOR]) && r[ud.COLLABORATOR] > t[ud.COLLABORATOR] && (r[ud.COLLABORATOR] = t[ud.COLLABORATOR]);
+    !i && isNotNullish(r[ProductAccessTypeEnum.COLLABORATOR]) && isNotNullish(t[ProductAccessTypeEnum.COLLABORATOR]) && r[ProductAccessTypeEnum.COLLABORATOR] > t[ProductAccessTypeEnum.COLLABORATOR] && (r[ProductAccessTypeEnum.COLLABORATOR] = t[ProductAccessTypeEnum.COLLABORATOR]);
     return _$$a(e ?? r);
   }(C, v, m);
   let [W, q] = useState(!1);
@@ -257,7 +257,7 @@ function J(e) {
             textAlign: "center",
             cellComponent: e => jsxs("div", {
               className: _$$s.flex.flexRow.gap4.$,
-              children: [e === ud.COLLABORATOR && !m && !C && jsxs("div", {
+              children: [e === ProductAccessTypeEnum.COLLABORATOR && !m && !C && jsxs("div", {
                 "data-tooltip-type": Ib.TEXT,
                 "data-tooltip": getI18nString("billing_modals.team_renewal.table.collab_tooltip"),
                 "data-tooltip-timeout-delay": 500,

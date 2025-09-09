@@ -1,14 +1,14 @@
 import { useCallback, useState, useEffect, useRef } from "react";
 import { A } from "../vendor/90566";
 import { hC } from "../figma_app/901889";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { generateUUIDv4 } from "../905/871474";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { n as _$$n } from "../905/884252";
 export function $$u3() {
   let e = selectCurrentUser();
-  let t = q5();
+  let t = selectCurrentFile();
   return {
     org_id: t?.parentOrgId ?? void 0,
     user_id: e?.id
@@ -47,7 +47,7 @@ export function $$m2(e) {
   } = _$$n();
   let a = currentVariableSet?.node_id;
   let l = "" === e;
-  let d = ZC(l);
+  let d = useLatestRef(l);
   useEffect(() => {
     i(generateUUIDv4());
   }, [a]);
@@ -64,8 +64,8 @@ export function $$h1({
   let r = $$p0({
     debounce: !0
   });
-  let a = ZC(i);
-  let o = ZC(e);
+  let a = useLatestRef(i);
+  let o = useLatestRef(e);
   let l = useRef(!1);
   let d = useCallback(n => {
     r("ds_variables_modal.content_loaded", {

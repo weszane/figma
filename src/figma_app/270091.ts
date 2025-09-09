@@ -49,7 +49,7 @@ import { t as _$$t3 } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
 import { u as _$$u } from "../905/290607";
 import { g5 } from "../figma_app/178752";
-import { _G, tB } from "../figma_app/516028";
+import { useOpenFileLibraryKey, selectOpenFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { Gj, X0, Av, fc, El, Mb } from "../figma_app/646357";
 import { V as _$$V } from "../905/342732";
@@ -190,7 +190,7 @@ function eW(e) {
   let e2 = useAtomWithSubscription(qp);
   let e5 = useSelector(e => e.universalInsertModal.showing);
   let e3 = openFile.key;
-  let e4 = _G();
+  let e4 = useOpenFileLibraryKey();
   let e8 = useDispatch();
   let e6 = multiselect ? null : selectedItems[0] ?? null;
   let e7 = useMemo(() => overrideDefaultItem ? overrideDefaultItem.library_key : null, [overrideDefaultItem]);
@@ -880,8 +880,8 @@ export function $$eK1(e) {
     instanceSwapPickerShown: e.instanceSwapPickerShown,
     loadingState: e.loadingState
   }));
-  let x = useSelector(tB);
-  let N = _G();
+  let x = useSelector(selectOpenFile);
+  let N = useOpenFileLibraryKey();
   let C = useMemo(() => !!preferredItems && ez(preferredItems), [preferredItems]);
   let w = x?.key || null;
   let O = useMemo(() => I ? I.library_key : null, [I]);

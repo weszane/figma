@@ -6,10 +6,10 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { useMemoStable } from "../905/19536";
 import { resourceUtils } from "../905/989992";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import p from "../vendor/626715";
 import { customHistory } from "../905/612521";
-import { Rs, p as _$$p } from "../figma_app/288654";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
@@ -17,10 +17,10 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { tc, i$, PE } from "../905/15667";
-import { ud } from "../905/513035";
-import { wR } from "../figma_app/765689";
+import { ProductAccessTypeEnum } from "../905/513035";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { F2 } from "../905/389382";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType, FUserRoleType, FPlanNameType, FMemberRoleType, FOrganizationLevelType, FFileType } from "../figma_app/191312";
 import { UpgradeEligibilityView, UpgradeEligibilityFolderView, IdpUserView, ConfiguredUpgradeRequestModalView, UserLicensesForFile } from "../figma_app/43951";
@@ -36,7 +36,7 @@ import { YG, PK } from "../905/223565";
 import { u as _$$u } from "../905/14084";
 var _ = p;
 export function $$B5(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let r = useDispatch();
   let a = selectCurrentUser();
   let c = null;
@@ -44,11 +44,11 @@ export function $$B5(e) {
   if (!e?.isDraftsMove) {
     let r = e?.fileInBrowser ?? t;
     c = r?.key ?? null;
-    p = r?.editorType ? wR(r?.editorType) : null;
+    p = r?.editorType ? getProductAccessTypeOrDefault(r?.editorType) : null;
   }
   let h = e?.folderId ?? null;
   let f = e?.plan;
-  let E = Rs(UpgradeEligibilityView({
+  let E = useSubscription(UpgradeEligibilityView({
     projectId: h,
     fileKey: c,
     planParentId: f?.id ?? null,
@@ -63,7 +63,7 @@ export function $$B5(e) {
         licenseType: t.toString()
       }
     }));
-    let n = _$$p(UpgradeEligibilityFolderView, r, {
+    let n = useMultiSubscription(UpgradeEligibilityFolderView, r, {
       enabled: t && !!e
     });
     return useMemoStable(() => {
@@ -73,8 +73,8 @@ export function $$B5(e) {
         if (!n) return;
         let i = t.result.data;
         e[n] = {
-          plan: oA(i?.project?.resolvedHostOrConnectedPlanPermissions) || null,
-          planUser: oA(i?.project?.resolvedHostOrConnectedPlanUser) || null
+          plan: getResourceDataOrFallback(i?.project?.resolvedHostOrConnectedPlanPermissions) || null,
+          planUser: getResourceDataOrFallback(i?.project?.resolvedHostOrConnectedPlanUser) || null
         };
       }), n.some(e => "loading" === e.result.status)) ? null : e;
     }, [n]);
@@ -82,23 +82,23 @@ export function $$B5(e) {
   let A = function (e, t, r, n, i) {
     let a = {};
     for (let t of Object.values(FProductAccessType)) n === tc.NUX && e?.file ? a[t] = {
-      plan: oA(e.file.resolvedHostOrConnectedPlanPermissions) || null,
-      planUser: oA(e.file.resolvedHostOrConnectedPlanUser) || null
+      plan: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanPermissions) || null,
+      planUser: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanUser) || null
     } : (n === tc.USER_SETTINGS || n === tc.DOWNGRADE_EMAIL || n === tc.LIFECYCLE_REUPGRADE_EMAIL) && e?.planUser && e.planPermissions ? a[t] = {
-      plan: oA(e.planPermissions) || null,
-      planUser: oA(e.planUser) || null
+      plan: getResourceDataOrFallback(e.planPermissions) || null,
+      planUser: getResourceDataOrFallback(e.planUser) || null
     } : a[t] = {
       plan: null,
       planUser: null
     };
     if (e?.file && r) {
       a[r] = {
-        plan: oA(e.file.resolvedHostOrConnectedPlanPermissions) || null,
-        planUser: oA(e.file.resolvedHostOrConnectedPlanUser) || null
+        plan: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanPermissions) || null,
+        planUser: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanUser) || null
       };
       r === FProductAccessType.DESIGN && (a[FProductAccessType.DEV_MODE] = {
-        plan: oA(e.file.resolvedHostOrConnectedPlanDevModePermissions) || null,
-        planUser: oA(e.file.resolvedHostOrConnectedPlanUserDevMode) || null
+        plan: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanDevModePermissions) || null,
+        planUser: getResourceDataOrFallback(e.file.resolvedHostOrConnectedPlanUserDevMode) || null
       });
     } else if (e?.project && t) {
       let e = e => ({
@@ -134,10 +134,10 @@ export function $$B5(e) {
       if (i && a) {
         let e = plan.campfireProvisionalAccessEnabled;
         n[t] = {
-          [ud.COLLABORATOR]: e && plan.isEligibleProvisionalAccessCollaborator,
-          [ud.DEVELOPER]: e && plan.isEligibleProvisionalAccessDeveloper,
-          [ud.EXPERT]: e && plan.isEligibleProvisionalAccessExpert,
-          [ud.CONTENT]: e && plan.isEligibleProvisionalAccessExpert
+          [ProductAccessTypeEnum.COLLABORATOR]: e && plan.isEligibleProvisionalAccessCollaborator,
+          [ProductAccessTypeEnum.DEVELOPER]: e && plan.isEligibleProvisionalAccessDeveloper,
+          [ProductAccessTypeEnum.EXPERT]: e && plan.isEligibleProvisionalAccessExpert,
+          [ProductAccessTypeEnum.CONTENT]: e && plan.isEligibleProvisionalAccessExpert
         };
       } else n[t] = null;
     });
@@ -162,7 +162,7 @@ export function $$B5(e) {
     let r = _()(Object.values(e).map(e => e.plan?.key.parentId).filter(e => !!e)).map(e => ({
       orgId: e
     }));
-    let n = _$$p(IdpUserView, r, {
+    let n = useMultiSubscription(IdpUserView, r, {
       enabled: t
     });
     let i = n.every(e => "loaded" === e.result.status && e.result.data?.currentUser.idpUsersInOrg.status === "loaded");
@@ -170,7 +170,7 @@ export function $$B5(e) {
     let a = {};
     let s = {};
     n.forEach(e => {
-      let t = oA(e.result.data?.currentUser.idpUsersInOrg, []);
+      let t = getResourceDataOrFallback(e.result.data?.currentUser.idpUsersInOrg, []);
       let r = t.length > 0 && t[0]?.seatType !== null;
       s[e.args.orgId] = r;
     });
@@ -194,7 +194,7 @@ export function $$B5(e) {
       orgId: e.plan?.key.parentId || "",
       permission: e.planUser?.permission || ""
     })));
-    let n = _$$p(ConfiguredUpgradeRequestModalView, r, {
+    let n = useMultiSubscription(ConfiguredUpgradeRequestModalView, r, {
       enabled: t
     });
     let i = n.every(e => "loaded" === e.result.status);
@@ -356,12 +356,12 @@ export function $$B5(e) {
         });
         if (!n) return !1;
         switch (n) {
-          case ud.DEVELOPER:
+          case ProductAccessTypeEnum.DEVELOPER:
             return t.needUpgradeDeveloper;
-          case ud.COLLABORATOR:
+          case ProductAccessTypeEnum.COLLABORATOR:
             return t.needUpgradeCollaborator;
-          case ud.EXPERT:
-          case ud.CONTENT:
+          case ProductAccessTypeEnum.EXPERT:
+          case ProductAccessTypeEnum.CONTENT:
             return t.needUpgradeExpert;
           default:
             throwTypeError(n);
@@ -373,13 +373,13 @@ export function $$B5(e) {
         });
         if (!n) return !1;
         switch (n) {
-          case ud.DEVELOPER:
+          case ProductAccessTypeEnum.DEVELOPER:
             return t.canUpgradeDeveloper;
-          case ud.COLLABORATOR:
+          case ProductAccessTypeEnum.COLLABORATOR:
             return t.canUpgradeCollaborator;
-          case ud.EXPERT:
+          case ProductAccessTypeEnum.EXPERT:
             return t.canUpgradeExpert;
-          case ud.CONTENT:
+          case ProductAccessTypeEnum.CONTENT:
             return t.canUpgradeContent;
           default:
             throwTypeError(n);
@@ -538,21 +538,21 @@ function V({
     if (r && !n) return _$$J.ADMIN_AUTO_PATHWAY;
     let s = null;
     switch (l) {
-      case ud.DEVELOPER:
-        d = !!oA(t?.canUpgradeAutoPathwayDeveloper);
-        s = oA(t?.upgradeApprovalSettingsDeveloper);
+      case ProductAccessTypeEnum.DEVELOPER:
+        d = !!getResourceDataOrFallback(t?.canUpgradeAutoPathwayDeveloper);
+        s = getResourceDataOrFallback(t?.upgradeApprovalSettingsDeveloper);
         break;
-      case ud.COLLABORATOR:
-        d = !!oA(t?.canUpgradeAutoPathwayCollaborator);
-        s = oA(t?.upgradeApprovalSettingsCollaborator);
+      case ProductAccessTypeEnum.COLLABORATOR:
+        d = !!getResourceDataOrFallback(t?.canUpgradeAutoPathwayCollaborator);
+        s = getResourceDataOrFallback(t?.upgradeApprovalSettingsCollaborator);
         break;
-      case ud.EXPERT:
-        d = !!oA(t?.canUpgradeAutoPathwayExpert);
-        s = oA(t?.upgradeApprovalSettingsExpert);
+      case ProductAccessTypeEnum.EXPERT:
+        d = !!getResourceDataOrFallback(t?.canUpgradeAutoPathwayExpert);
+        s = getResourceDataOrFallback(t?.upgradeApprovalSettingsExpert);
         break;
-      case ud.CONTENT:
-        d = !!oA(t?.canUpgradeAutoPathwayContent);
-        s = oA(t?.upgradeApprovalSettingsContent);
+      case ProductAccessTypeEnum.CONTENT:
+        d = !!getResourceDataOrFallback(t?.canUpgradeAutoPathwayContent);
+        s = getResourceDataOrFallback(t?.upgradeApprovalSettingsContent);
     }
     d || s !== zRx.INSTANT_APPROVAL || console.warn(`PlanUser ${i?.id} in plan ${t?.id} has instant-approval upgrade approval setting for billable product ${l} but did not pass permission for canUpgradeAutoPathway`);
   }
@@ -843,7 +843,7 @@ function $(e, t, r) {
   return t?.[e]?.includes(n) ?? !1;
 }
 export function $$X1(e) {
-  let t = Rs(UserLicensesForFile({
+  let t = useSubscription(UserLicensesForFile({
     fileKey: e.fileKey,
     userId: e.userId
   }), {
@@ -861,7 +861,7 @@ export function $$X1(e) {
     userLacksLicenseAccess: useCallback(e => {
       if (!r || "loaded" !== r.status) return null;
       if (e === FFileType.COOPER) return !1;
-      let t = wR(e);
+      let t = getProductAccessTypeOrDefault(e);
       return !r.data?.availableLicenses?.includes(t);
     }, [r])
   };
@@ -871,7 +871,7 @@ export function $$q0(e) {
 }
 export function $$J4(e) {
   let t = useDispatch();
-  let r = q5();
+  let r = selectCurrentFile();
   let {
     getPlanAndPlanUser,
     getIsEligibleForProvisionalAccess
@@ -879,7 +879,7 @@ export function $$J4(e) {
   let {
     plan,
     planUser
-  } = getPlanAndPlanUser(wR(r?.editorType || null));
+  } = getPlanAndPlanUser(getProductAccessTypeOrDefault(r?.editorType || null));
   return {
     curfCtaHandler: useCallback(() => {
       r && planUser && plan && t(showModalHandler({

@@ -1,4 +1,4 @@
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { ZG } from "../figma_app/536669";
 import { rs } from "../figma_app/440994";
@@ -8,7 +8,7 @@ export function $$$$o1(e) {
     i: e.setPos,
     size: e.setSize
   }));
-  return Yx(t, "unit");
+  return formatList(t, "unit");
 }
 export function $$l0(e) {
   let t = [];
@@ -21,7 +21,7 @@ export function $$l0(e) {
     count: n,
     name: i
   }));
-  return Yx(t, "unit");
+  return formatList(t, "unit");
 }
 export const E = $$l0;
 export const o = $$$$o1;

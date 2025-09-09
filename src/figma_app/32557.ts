@@ -9,7 +9,7 @@ import { FJ } from "../905/508367";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { E as _$$E } from "../905/984674";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { IT, gY } from "../905/713695";
 import { ol } from "../figma_app/598018";
@@ -20,7 +20,7 @@ import { Yr } from "../figma_app/325912";
 let I = createNoOpValidator();
 let $$S0 = registerModal(function (e) {
   let t = hS(e);
-  let r = q5().key;
+  let r = selectCurrentFile().key;
   let [E, S] = useState(null);
   let [v, A] = useState(null);
   let [x, N] = useState([]);

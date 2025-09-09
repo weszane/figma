@@ -5,11 +5,11 @@ import { reportError } from "../905/11";
 import { Yx } from "../3276/926297";
 import { aV } from "../figma_app/722362";
 import { getUserId } from "../905/372672";
-import { oA } from "../905/663269";
-import { Rs } from "../figma_app/288654";
+import { getResourceDataOrFallback } from "../905/663269";
+import { useSubscription } from "../figma_app/288654";
 import { ps } from "../figma_app/845611";
 import { dI } from "../figma_app/297957";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { AccountTypeRequestsInPlan } from "../figma_app/43951";
 import { jS } from "../905/136701";
@@ -57,14 +57,14 @@ export function $$k3() {
   let [e, t] = useState(0);
   let n = Yx();
   let i = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = e?.planPublicInfo;
     let {
       parentId,
       type
     } = t?.key ?? {};
     let a = dI();
-    let i = Rs(AccountTypeRequestsInPlan({
+    let i = useSubscription(AccountTypeRequestsInPlan({
       planType: type === FOrganizationLevelType.TEAM ? ps.TEAM : ps.ORG,
       planId: parentId ?? "",
       sortOrder: "desc",
@@ -76,7 +76,7 @@ export function $$k3() {
       enabled: !!e && !!parentId && !!type && a
     });
     if (!parentId || !type || !e) return [];
-    let s = oA(i.data?.accountTypeRequestsFromPlan);
+    let s = getResourceDataOrFallback(i.data?.accountTypeRequestsFromPlan);
     return s?.filter(e => e.request?.status === "pending") ?? [];
   }();
   let s = useSelector(e => e.modalShown?.type === jS);

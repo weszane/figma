@@ -1,183 +1,277 @@
-import { addBreadcrumb } from '@sentry/browser';
-import { atom } from 'jotai';
-import { selectAtom } from 'jotai/utils';
-import { useSelector } from 'react-redux';
-import { selectWithShallowEqual } from '../905/103090';
-import { createReduxSubscriptionAtomWithState } from '../905/270322';
-import { teamsAtom } from '../905/338617';
-import { D } from '../905/347702';
-import { selectCurrentUser } from '../905/372672';
-import { trackEventAnalytics } from '../905/449184';
-import { subscribeAndAwaitData } from '../905/553831';
-import { getFeatureFlags } from '../905/601108';
-import { UE } from '../905/628874';
-import { i as _$$i } from '../905/651613';
-import { l as _$$l } from '../905/716947';
-import { lQ } from '../905/934246';
-import { resourceUtils } from '../905/989992';
-import { qd } from '../figma_app/39751';
-import { OpenEditorFileData, FileCanTestPlanRecordPermission, FilePermissionsLgShadowView } from '../figma_app/43951';
-import { Bh, Rs } from '../figma_app/288654';
-import { IT, QV } from '../figma_app/566371';
-import { useAtomWithSubscription } from './27355';
-export async function $$S2(e) {
-  let t = e.getState().selectedView;
-  let r = t.view === 'fullscreen' && t.fileKey;
-  return r && (await subscribeAndAwaitData(OpenEditorFileData, {
-    fileKey: r
-  })).file || null;
+/* eslint-disable no-console */
+import { addBreadcrumb } from '@sentry/browser'
+import { atom } from 'jotai'
+import { selectAtom } from 'jotai/utils'
+import { noop } from 'lodash-es'
+import { useSelector } from 'react-redux'
+import { selectWithShallowEqual } from '../905/103090'
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { teamsAtom } from '../905/338617'
+import { selectCurrentUser } from '../905/372672'
+import { trackEventAnalytics } from '../905/449184'
+import { subscribeAndAwaitData } from '../905/553831'
+import { getFeatureFlags } from '../905/601108'
+import { setupFileObject } from '../905/628874'
+import { createFileLibraryKeys } from '../905/651613'
+import { resourceUtils } from '../905/989992'
+import { FileCanTestPlanRecordPermission, FilePermissionsLgShadowView, OpenEditorFileData } from '../figma_app/43951'
+import { useSubscription, useSuspendableSubscription } from '../figma_app/288654'
+import { handleResourceAtomMetrics, setupResourceAtomHandler } from '../figma_app/566371'
+import { usePreviousValue } from '../figma_app/922077'
+import { useAtomWithSubscription } from './27355'
+/**
+ * Retrieves the file object for the currently selected fullscreen view.
+ * @param store - Redux store object.
+ * @returns The file object or null.
+ * (Original: $$S2)
+ */
+export async function getFullscreenViewFile(store) {
+  const selectedView = store.getState().selectedView
+  const fileKey = selectedView.view === 'fullscreen' && selectedView.fileKey
+  if (fileKey) {
+    const { file } = await subscribeAndAwaitData(OpenEditorFileData, { fileKey })
+    return file || null
+  }
+  return null
 }
-export function $$v6() {
-  let e = useSelector(e => {
-    if (e.selectedView?.view === 'fullscreen') return e.selectedView.fileKey;
-  });
-  (function (e) {
-    let t = getFeatureFlags().iam_pv2_lg_pol_smoke;
-    Rs(FilePermissionsLgShadowView, {
-      fileKey: e,
-      linkAccessOverrideKey: null
-    }, {
-      enabled: t && !!e
-    });
-  })(e || '');
-  (function (e) {
-    let t = getFeatureFlags().pv2_plan_record_dummy_policy;
-    Rs(FileCanTestPlanRecordPermission, {
-      key: e
-    }, {
-      enabled: t && !!e
-    });
-  })(e || '');
-  let t = Rs(OpenEditorFileData, {
-    fileKey: e || ''
-  }, {
-    enabled: !!e
-  });
-  return resourceUtils.useTransform(t, ({
-    file: e
-  }) => e);
+
+/**
+ * Hook to get the file object for the currently selected fullscreen view.
+ * (Original: $$v6)
+ */
+export function useFullscreenViewFile() {
+  const fileKey = useSelector<any>(state => state.selectedView?.view === 'fullscreen' ? state.selectedView.fileKey : undefined);
+
+  // Subscribe to shadow view permissions if feature flag enabled
+  (() => {
+    const enabled = getFeatureFlags().iam_pv2_lg_pol_smoke && !!fileKey
+    useSubscription(FilePermissionsLgShadowView, { fileKey, linkAccessOverrideKey: null }, { enabled })
+  })();
+
+  // Subscribe to test plan record permission if feature flag enabled
+  (() => {
+    const enabled = getFeatureFlags().pv2_plan_record_dummy_policy && !!fileKey
+    useSubscription(FileCanTestPlanRecordPermission, { key: fileKey }, { enabled })
+  })()
+
+  const subscription = useSubscription(OpenEditorFileData, { fileKey: fileKey || '' }, { enabled: !!fileKey })
+  return resourceUtils.useTransform(subscription, ({ file }) => file)
 }
-export function $$A16(e) {
-  return e.openFile;
+
+/**
+ * Selector for openFile from Redux state.
+ * (Original: $$A16)
+ */
+export function selectOpenFile(state) {
+  return state.openFile
 }
-let $$x20 = createReduxSubscriptionAtomWithState($$A16);
-let $$N3 = atom(e => {
-  let t = e($$x20);
-  let r = e(teamsAtom);
-  return t?.teamId ? r[t.teamId] ?? null : null;
-});
-let $$C0 = selectAtom($$x20, e => e?.teamId ?? void 0);
-export function $$w15(e) {
-  return e.openFile?.key || null;
+
+/** Atom for openFile subscription (Original: $$x20) */
+export const openFileAtom = createReduxSubscriptionAtomWithState(selectOpenFile)
+
+/**
+ * Atom to get the team object for the open file.
+ * (Original: $$N3)
+ */
+export const openFileTeamAtom = atom((get) => {
+  const openFile = get(openFileAtom)
+  const teams = get(teamsAtom)
+  return openFile?.teamId ? teams[openFile.teamId] ?? null : null
+})
+
+/** Atom to select teamId from openFile (Original: $$C0) */
+export const openFileTeamIdAtom = selectAtom(openFileAtom, openFile => openFile?.teamId ?? undefined)
+
+/**
+ * Selector for openFile key from Redux state.
+ * (Original: $$w15)
+ */
+export function selectOpenFileKey(state) {
+  return state.openFile?.key || null
 }
-export let $$O21 = createReduxSubscriptionAtomWithState($$w15);
-export function $$R7(e) {
-  let t = $$A16(e);
-  return t ? _$$l(t.libraryKey) : null;
+
+/** Atom for openFile key subscription (Original: $$O21) */
+export const openFileKeyAtom = createReduxSubscriptionAtomWithState(selectOpenFileKey)
+
+/**
+ * Selector for libraryKey from openFile.
+ * (Original: $$R7)
+ */
+export function selectOpenFileLibraryKey(state) {
+  const openFile = selectOpenFile(state)
+  return openFile ? openFile.libraryKey : null
 }
-let $$L10 = createReduxSubscriptionAtomWithState($$R7);
-let $$P9 = D(() => useAtomWithSubscription($$L10));
-export function $$D4() {
-  let e = $$B17();
-  let t = $$P9();
-  return _$$i(e, t);
+
+/** Atom for openFile libraryKey subscription (Original: $$L10) */
+export const openFileLibraryKeyAtom = createReduxSubscriptionAtomWithState(selectOpenFileLibraryKey)
+
+/** Hook to get openFile libraryKey (Original: $$P9) */
+export const useOpenFileLibraryKey = () => useAtomWithSubscription(openFileLibraryKeyAtom)
+
+
+/** Exported selector for current file (Original: $$j14) */
+export const selectCurrentFile = getFeatureFlags().preload_open_editor_file_data ? useCurrentFile : useOpenFile
+
+/**
+ * Hook to get editorType from current file.
+ * (Original: $$U8)
+ */
+export function useEditorType() {
+  const file = selectCurrentFile()
+  return file?.editorType
 }
-export function $$k19(e) {
-  return e.openFile?.key && e.fileByKey[e.openFile.key] || null;
+
+/** Hook to get current file key (Original: $$B17) */
+export const useCurrentFileKey = () => selectCurrentFile()?.key || null
+
+
+/**
+ * Hook to create file library keys from openFile key and libraryKey.
+ * (Original: $$D4)
+ */
+export function useFileLibraryKeys() {
+  const fileKey = useCurrentFileKey()
+  const libraryKey = useOpenFileLibraryKey()
+  return createFileLibraryKeys(fileKey, libraryKey)
 }
-function M() {
-  return useSelector($$A16);
+
+/**
+ * Selector for file object by openFile key.
+ * (Original: $$k19)
+ */
+export function selectOpenFileObject(state) {
+  const key = state.openFile?.key
+  return key && state.fileByKey[key] || null
 }
-export function $$F13() {
-  let e = useSelector(e => e.selectedView?.view === 'prototype');
-  let t = function () {
-    let e = useSelector(e => e.selectedView?.view === 'fullscreen' ? e.selectedView.fileKey : null);
-    let t = Bh(OpenEditorFileData(e ? {
-      fileKey: e
-    } : null));
-    return resourceUtils.useTransform(t, ({
-      file: e
-    }) => e);
-  }();
-  let r = M();
-  return e ? r : t.data ?? null;
+
+/** Hook to get openFile from Redux (Original: M) */
+function useOpenFile() {
+  return useSelector(selectOpenFile)
 }
-export let $$j14 = getFeatureFlags().preload_open_editor_file_data ? $$F13 : M;
-export function $$U8() {
-  let e = $$j14();
-  return e?.editorType;
+
+/**
+ * Hook to get the file object depending on selected view.
+ * (Original: $$F13)
+ */
+export function useCurrentFile() {
+  const isPrototypeView = useSelector<any>(state => state.selectedView?.view === 'prototype')
+  const fullscreenFile = (() => {
+    const fileKey = useSelector<any>(state => state.selectedView?.view === 'fullscreen' ? state.selectedView.fileKey : null)
+    const subscription = useSuspendableSubscription(OpenEditorFileData(fileKey ? { fileKey } : null))
+    return resourceUtils.useTransform(subscription, ({ file }) => file)
+  })()
+  const openFile = useOpenFile()
+  return isPrototypeView ? openFile : fullscreenFile.data ?? null
 }
-export let $$B17 = () => $$j14()?.key || null;
-export function $$G18() {
-  let e = $$j14();
-  return (e?.sourceFileKey ?? e?.key) || null;
+
+
+/**
+ * Hook to get sourceFileKey or key from current file.
+ * (Original: $$G18)
+ */
+export function useSourceFileKey() {
+  const file = selectCurrentFile()
+  return (file?.sourceFileKey ?? file?.key) || null
 }
-export function $$V5() {
-  let e = $$j14();
-  let t = selectCurrentUser();
-  return e?.creatorId === t?.id;
+
+/**
+ * Hook to check if current user is creator of current file.
+ * (Original: $$V5)
+ */
+export function useIsCurrentUserCreator() {
+  const file = selectCurrentFile()
+  const user = selectCurrentUser()
+  return file?.creatorId === user?.id
 }
-export function $$H1(e) {
-  return $$z11(selectWithShallowEqual(e => ({
-    openFile: e.openFile,
-    fileByKey: e.fileByKey
-  })), e);
+
+/**
+ * Hook to get openFile and fileByKey, then transform with useSinatraType.
+ * (Original: $$H1)
+ */
+export function useOpenFileObjectWithSinatraType(options) {
+  return transformOpenFileObject(selectWithShallowEqual(state => ({
+    openFile: state.openFile,
+    fileByKey: state.fileByKey,
+  })), options)
 }
-export function $$z11(e, t) {
-  let r = $$k19(e);
-  return t?.useSinatraType ? r : r ? UE(r) : null;
+
+/**
+ * Transform openFile object depending on useSinatraType.
+ * (Original: $$z11)
+ */
+export function transformOpenFileObject(state, options) {
+  const fileObj = selectOpenFileObject(state)
+  return options?.useSinatraType ? fileObj : fileObj ? setupFileObject(fileObj) : null
 }
-function W(e) {
-  console.log('_useRequireOpenFileOrSuspend resolved');
+
+/**
+ * Metrics handler for suspense resolution.
+ * (Original: W)
+ */
+function handleSuspenseResolved(suspenseDuration) {
+  console.log('_useRequireOpenFileOrSuspend resolved')
   addBreadcrumb({
     category: 'suspense',
-    message: '_useRequireOpenFileOrSuspend resolved successfully'
-  });
-  trackEventAnalytics('open_file_lg_suspended', {
-    suspenseDuration: e
-  });
+    message: '_useRequireOpenFileOrSuspend resolved successfully',
+  })
+  trackEventAnalytics('open_file_lg_suspended', { suspenseDuration })
 }
-function K() {
-  console.log('_useRequireOpenFileOrSuspend is about to suspend');
+
+/**
+ * Metrics handler for suspense about to suspend.
+ * (Original: K)
+ */
+function handleSuspenseWillSuspend() {
+  console.log('_useRequireOpenFileOrSuspend is about to suspend')
   addBreadcrumb({
     category: 'suspense',
-    message: '_useRequireOpenFileOrSuspend is about to suspend'
-  });
+    message: '_useRequireOpenFileOrSuspend is about to suspend',
+  })
 }
-export let $$Y12 = getFeatureFlags().preload_open_editor_file_data ? function (e) {
-  let t = qd(e ?? null);
-  let [r] = IT(OpenEditorFileData({
-    fileKey: e
-  }), {
-    enabled: !!e
-  });
-  let n = QV(r, e && t === null ? 'passthrough' : 'suspend', {
-    willSuspend: K,
-    onResolveForMetrics: W,
-    metricKey: 'openFile'
-  });
-  if (n.status === 'errors') throw n.errors[0];
-  return n.status === 'disabled' || n.status === 'loading' ? null : n.data.file;
-} : lQ;
-export const As = $$C0;
-export const Cq = $$H1;
-export const Dz = $$S2;
-export const Hu = $$N3;
-export const K5 = $$D4;
-export const Kf = $$V5;
-export const MY = $$v6;
-export const XJ = $$R7;
-export const XO = $$U8;
-export const _G = $$P9;
-export const _S = $$L10;
-export const bv = $$z11;
-export const eq = $$Y12;
-export const l3 = $$F13;
-export const q5 = $$j14;
-export const sS = $$w15;
-export const tB = $$A16;
-export const tS = $$B17;
-export const uL = $$G18;
-export const vu = $$k19;
-export const yV = $$x20;
-export const ze = $$O21;
+
+/**
+ * Hook to require open file or suspend, with metrics.
+ * (Original: $$Y12)
+ */
+export const useRequireOpenFileOrSuspend = getFeatureFlags().preload_open_editor_file_data
+  ? function (fileKey) {
+    const prevFileKey = usePreviousValue(fileKey ?? null)
+    const [resourceAtom] = setupResourceAtomHandler(OpenEditorFileData({ fileKey }), { enabled: !!fileKey })
+    const metrics = handleResourceAtomMetrics(
+      resourceAtom,
+      fileKey && prevFileKey === null ? 'passthrough' : 'suspend',
+      {
+        willSuspend: handleSuspenseWillSuspend,
+        onResolveForMetrics: handleSuspenseResolved,
+        metricKey: 'openFile',
+      },
+    )
+    if (metrics.status === 'errors')
+      throw metrics.errors[0]
+    return metrics.status === 'disabled' || metrics.status === 'loading' ? null : metrics.data.file
+  }
+  : noop
+
+// Exported variables with refactored names
+export const As = openFileTeamIdAtom
+export const Cq = useOpenFileObjectWithSinatraType
+export const Dz = getFullscreenViewFile
+export const Hu = openFileTeamAtom
+export const K5 = useFileLibraryKeys
+export const Kf = useIsCurrentUserCreator
+export const MY = useFullscreenViewFile
+export const XJ = selectOpenFileLibraryKey
+export const XO = useEditorType
+export const _G = useOpenFileLibraryKey
+export const _S = openFileLibraryKeyAtom
+export const bv = transformOpenFileObject
+export const eq = useRequireOpenFileOrSuspend
+export const l3 = useCurrentFile
+export const q5 = selectCurrentFile
+export const sS = selectOpenFileKey
+export const tB = selectOpenFile
+export const tS = useCurrentFileKey
+export const uL = useSourceFileKey
+export const vu = selectOpenFileObject
+export const yV = openFileAtom
+export const ze = openFileKeyAtom

@@ -3,7 +3,7 @@ import { w } from "../905/433065";
 import { W } from "../905/569454";
 import { M } from "../1250/358700";
 import { getI18nString } from "../905/303541";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { kw } from "../1250/729732";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -27,7 +27,7 @@ export function $$_0() {
   };
 }
 export function $$u2() {
-  let e = q5();
+  let e = selectCurrentFile();
   let [t, n] = e?.plan?.id?.split("::") ?? [];
   return {
     planType: t,
@@ -35,7 +35,7 @@ export function $$u2() {
   };
 }
 export function $$m1() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = kw(e?.key ?? null);
   if ("loaded" === t.status) return t.data.planKey;
 }

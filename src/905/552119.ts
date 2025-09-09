@@ -6,11 +6,11 @@ import { getI18nString } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/217163";
 import { A as _$$A } from "../905/456912";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { K } from "../905/770444";
 import { cq } from "../905/794154";
 import { M$ } from "../figma_app/297822";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 export function $$f0({
   asset: e,
   afterSuccessfulInsert: t,
@@ -22,9 +22,9 @@ export function $$f0({
   let {
     close
   } = cq();
-  let b = q5();
+  let b = selectCurrentFile();
   let v = _$$A();
-  let I = Oc();
+  let I = useIsSelectedFigmakeFullscreen();
   let E = useDispatch();
   let x = useMemo(() => {
     let n = {

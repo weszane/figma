@@ -7,7 +7,7 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import p from "classnames";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { _C } from "../figma_app/709893";
@@ -20,10 +20,10 @@ import { Nw } from "../figma_app/78808";
 import { vg, Wk } from "../figma_app/91703";
 import { NN } from "../905/466026";
 import { lu, b_, oE } from "../figma_app/840917";
-import { oj } from "../905/760074";
+import { getDisplayNameAlt } from "../905/760074";
 import { hL } from "../905/697795";
 import { hx } from "../figma_app/290668";
-import { q5, tB, l3 } from "../figma_app/516028";
+import { selectCurrentFile, selectOpenFile, useCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { o3 as _$$o, nt } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -120,7 +120,7 @@ class W extends RecordingPureComponent {
 export function $$K5(e) {
   return jsx(W, {
     ...e,
-    name: oj(e.repo),
+    name: getDisplayNameAlt(e.repo),
     onRename: t => {
       e.dispatch(NN({
         repo: e.repo,
@@ -133,7 +133,7 @@ export function $$K5(e) {
 export function $$Y3(e) {
   let t = useDispatch();
   let r = selectCurrentUser();
-  let n = q5();
+  let n = selectCurrentFile();
   let a = useSelector(e => e.isRenaming);
   let o = useAtomWithSubscription(lu);
   let l = !!n && DF(n, r);
@@ -157,7 +157,7 @@ function $(e) {
   let t;
   let r;
   let n;
-  let s = gY(b_);
+  let s = getAtomMutate(b_);
   let {
     renamableFile
   } = e;
@@ -197,7 +197,7 @@ export function $$q4({
   }(e, t);
   let n = r.length > 25 ? r : void 0;
   let o = function () {
-    let e = useSelector(tB);
+    let e = useSelector(selectOpenFile);
     let t = FC();
     let r = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
     return useMemo(() => {
@@ -208,7 +208,7 @@ export function $$q4({
   let l = _$$o(nt.interopFiles);
   let p = Xr(V1);
   let _ = e?.project?.activeProjectResourceConnections?.[0];
-  let h = l3();
+  let h = useCurrentFile();
   let g = h?.ownerRole?.userId === t?.id;
   let f = !e?.teamId && !e?.parentOrgId && g;
   let y = getFeatureFlags().dtm_deprecation_pre_migration_onboarding && f;

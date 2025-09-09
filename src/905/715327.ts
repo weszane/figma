@@ -6,12 +6,12 @@ import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { nz, Yx, Tn } from "../figma_app/933328";
 import { fu } from "../figma_app/831799";
-import { MF, A5 } from "../figma_app/391338";
+import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { FC } from "../figma_app/212807";
 import { LH } from "../905/872904";
 import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConnection } from "../figma_app/43951";
@@ -21,7 +21,7 @@ import { e0 as _$$e } from "../905/696396";
 import { r as _$$r, F as _$$F } from "../905/336143";
 import { I as _$$I } from "../905/423735";
 import { i as _$$i } from "../905/718764";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { E as _$$E } from "../905/128063";
 import { Yt } from "../905/712714";
 import { ZO, kz, d_, tq } from "../905/691188";
@@ -46,18 +46,18 @@ import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { g7, Ev } from "../905/939482";
 import { d1 } from "../905/766303";
-import { L8, Xm, oj } from "../905/760074";
+import { getRepoById, isBranch, getDisplayNameAlt } from "../905/760074";
 import { hT, GS } from "../figma_app/630951";
 import { t as _$$t2 } from "../figma_app/579169";
 import { fV, Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
 import { SR } from "../figma_app/852050";
-import { q5, Cq } from "../figma_app/516028";
+import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { gE, DV } from "../905/842072";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
-import { e6 as _$$e2 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { p as _$$p } from "../figma_app/353099";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e3 } from "../905/621515";
@@ -67,7 +67,7 @@ import { KI } from "../figma_app/797994";
 import { Um } from "../905/848862";
 import { N as _$$N2 } from "../figma_app/268271";
 import { rq } from "../905/425180";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { cD } from "../figma_app/598018";
 import { l6, c$ } from "../905/794875";
 import { SF, CK, Yy, is, mJ, mo, TW } from "../905/55862";
@@ -93,7 +93,7 @@ import { oA } from "../905/723791";
 import { generateRecordingKey } from "../figma_app/878298";
 import { KP, L1 } from "../figma_app/12491";
 import { E as _$$E2 } from "../905/511388";
-import { i as _$$i3 } from "../905/651613";
+import { createFileLibraryKeys } from "../905/651613";
 import { E as _$$E3 } from "../905/632989";
 import { w as _$$w } from "../905/768636";
 import { n1 } from "../figma_app/657017";
@@ -121,7 +121,7 @@ function O({
   width: c,
   sharingGroupData: u
 }) {
-  let [p] = IT(Yt(i));
+  let [p] = setupResourceAtomHandler(Yt(i));
   let m = ZO(l, d);
   let h = useMemo(() => m(i), [i, m]);
   return jsx(fu, {
@@ -163,7 +163,7 @@ function ew({
   currentFilter: t,
   onChangeFilter: i
 }) {
-  let s = T5("SubscriptionListFilterSelect").unwrapOr(null);
+  let s = useCurrentPrivilegedPlan("SubscriptionListFilterSelect").unwrapOr(null);
   let o = s?.key.type === FOrganizationLevelType.ORG ? s?.key.parentId : void 0;
   let l = s?.name;
   let d = cD();
@@ -262,15 +262,15 @@ function e4({
 }) {
   var u;
   let m = FC();
-  let h = L8(e, m.repos);
-  let g = Xm(e);
+  let h = getRepoById(e, m.repos);
+  let g = isBranch(e);
   let f = _$$l2(e);
   let _ = useSelector(Pg);
   let y = _$$b2(t, i, r, o) || g;
   let v = getFeatureFlags().cmty_lib_admin_publish ? y && !_ : y;
   let {
     data
-  } = Rs(FileCanEdit, {
+  } = useSubscription(FileCanEdit, {
     key: e.key
   });
   let E = _$$Q({
@@ -318,7 +318,7 @@ function e4({
             children: renderI18nText("design_systems.libraries_modal.branch_of", {
               repoName: jsx("span", {
                 className: "file_row--branchInfoRepoName--Hve9w",
-                children: oj(h, e)
+                children: getDisplayNameAlt(h, e)
               })
             })
           })
@@ -384,11 +384,11 @@ function te({
   usedInThisFile: h = !1
 }) {
   let g;
-  let f = _$$i3(e.key, t.library_key);
+  let f = createFileLibraryKeys(e.key, t.library_key);
   let _ = "community" === t.library_type;
   let A = fV(f.libraryKey);
   let y = function (e) {
-    let t = Rs(LibraryIsBranch, {
+    let t = useSubscription(LibraryIsBranch, {
       libraryKey: e
     });
     return oA(t?.data?.libraryKeyToFile?.file?.isBranch) ?? !1;
@@ -817,7 +817,7 @@ function tS(e) {
     mapFromLibraryKeyToSharingGroupData,
     planType
   } = e;
-  let v = q5();
+  let v = selectCurrentFile();
   let I = sO();
   let E = !!useAtomWithSubscription(_$$t2).data;
   let x = sZ();
@@ -1020,7 +1020,7 @@ function tC({
   editingStats: t,
   viewFile: i
 }) {
-  let r = Cq({
+  let r = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   })?.thumbnail_url || "";
   SR();
@@ -1044,7 +1044,7 @@ function tC({
       numVariableCollections: t?.num_variable_collections ?? 0,
       viewFile: i,
       recordingKey: "subscriptionListViewFileRow.currentFile"
-    }), Xm({
+    }), isBranch({
       file_repo_id: e.fileRepoId,
       source_file_key: e.sourceFileKey
     }) && jsxs("div", {
@@ -1063,7 +1063,7 @@ function tT({
   editingStats: t,
   viewFile: i
 }) {
-  let r = Cq({
+  let r = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   })?.thumbnail_url || "";
   SR();
@@ -1126,7 +1126,7 @@ function tT({
           viewFile: i,
           recordingKey: "subscriptionListViewFileRow.currentFile",
           isLibraryUpsell: !0
-        }), Xm({
+        }), isBranch({
           file_repo_id: e.fileRepoId,
           source_file_key: e.sourceFileKey
         }) && jsxs("div", {
@@ -1249,7 +1249,7 @@ function tN(e) {
     let r = e.showingDefaultSubscriptionsForTeamId && roles.byTeamId[e.showingDefaultSubscriptionsForTeamId] || {};
     for (let e in r) {
       let t = r[e];
-      !1 === t.pending && t.level >= _$$e2.ADMIN && i.push(t.user);
+      !1 === t.pending && t.level >= AccessLevelEnum.ADMIN && i.push(t.user);
     }
     let a = "";
     1 === i.length ? a = getI18nString("design_systems.libraries_modal.admin_list_1", {
@@ -1322,7 +1322,7 @@ export function $$tM0({
     B(!1);
     H?.current?.focus?.();
     setTimeout(() => {
-      YQ({
+      handleAtomEvent({
         id: "Library File Collapsed"
       });
     }, 200);
@@ -1346,7 +1346,7 @@ export function $$tM0({
     onSearchQueryChange
   } = TW(K.files);
   let ea = Y.result.some(e => e.library_key === M);
-  let es = Rs(TeamCanAdmin, {
+  let es = useSubscription(TeamCanAdmin, {
     id: e ?? ""
   }, {
     enabled: !!e
@@ -1356,17 +1356,17 @@ export function $$tM0({
     let t = teams[e];
     return !!(t && hasAdminRoleAccessOnTeam(t.id, F));
   }, [e, teams, F]);
-  let el = MF({
+  let el = useShadowReadLoaded({
     oldValue: resourceUtils.loaded(eo),
     newValue: es.transform(e => !!e.team?.hasPermission),
-    label: A5.LibrarySubscriptions.canEditSubscriptionsForTeamLibraryModal,
+    label: adminPermissionConfig.LibrarySubscriptions.canEditSubscriptionsForTeamLibraryModal,
     enableFullRead: getFeatureFlags().dse_library_subscriptions_for_team,
     contextArgs: {
       teamId: e
     }
   });
   T = e ? !!el.data : t ? !!user : !!openFile?.canEdit;
-  let ed = Rs(SharingGroupsByResourceConnection, {
+  let ed = useSubscription(SharingGroupsByResourceConnection, {
     resourceConnectionId: i
   }, {
     enabled: !!i

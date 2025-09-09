@@ -33,7 +33,7 @@ import { jD } from "../905/765855";
 import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, normalizeValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
-import { q5, _G } from "../figma_app/516028";
+import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
 import { Lh, D8 } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { nm, j_ } from "../figma_app/745458";
@@ -56,7 +56,7 @@ import { mw } from "../905/566585";
 import { r as _$$r } from "../figma_app/711157";
 import { B as _$$B } from "../905/229357";
 import { RC } from "../905/579068";
-import { oz } from "../905/561485";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { c as _$$c } from "../figma_app/73139";
 import { sO } from "../figma_app/21029";
 import { Rc } from "../figma_app/634146";
@@ -311,7 +311,7 @@ class eA extends RecordingPureComponent {
     let {
       mainStyle
     } = this.props;
-    !(oz() && getFeatureFlags().sites_responsive_text_styles && mw(this.props.sceneGraphSelection, this.props.library) && _$$c(this.props.sceneGraphSelection)) && (this.props.inheritStyleKey === MIXED_MARKER || null != normalizeValue(this.props.inheritStyleKey) && this.props.hasMixedProperties && mainStyle) ? (t = 1, i = this.props.addProperty) : mainStyle ? t = 0 : (t = 2, i = this.props.addProperty);
+    !(isSitesFeatureEnabled() && getFeatureFlags().sites_responsive_text_styles && mw(this.props.sceneGraphSelection, this.props.library) && _$$c(this.props.sceneGraphSelection)) && (this.props.inheritStyleKey === MIXED_MARKER || null != normalizeValue(this.props.inheritStyleKey) && this.props.hasMixedProperties && mainStyle) ? (t = 1, i = this.props.addProperty) : mainStyle ? t = 0 : (t = 2, i = this.props.addProperty);
     let c = RC(this.props);
     let u = zb(this.props);
     let p = 0 === t && !this.props.hasMixedProperties;
@@ -443,7 +443,7 @@ class eA extends RecordingPureComponent {
     if (p) r = jsx(_$$Q2, {
       ...v,
       children: this.renderStyleTitle(mainStyle, c || u)
-    }); else if (getFeatureFlags().eu_fpl_migration_interactive_panel) {
+    });else if (getFeatureFlags().eu_fpl_migration_interactive_panel) {
       let e = jsx("h2", {
         className: yr,
         children: this.props.title
@@ -501,8 +501,8 @@ class eA extends RecordingPureComponent {
 eA.displayName = "CollapsibleStyleAndPropertyPanel";
 eA.contextType = lk;
 export let $$ey0 = memo(e => {
-  let t = q5();
-  let i = _G();
+  let t = selectCurrentFile();
+  let i = useOpenFileLibraryKey();
   let r = {
     ...selectWithShallowEqual(t => ({
       dropdownShown: t.dropdownShown,

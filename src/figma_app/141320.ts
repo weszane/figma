@@ -1,5 +1,5 @@
 import { A } from "../905/920142";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 export function $$a4(e) {
   return e && !!e.student_validated_at;
 }
@@ -67,17 +67,17 @@ export function $$_0(e, t, r, n) {
   };
 }
 export function $$h6(e, t, r) {
-  return !!r?.student_team && t[r.id]?.[e]?.level === e6.OWNER;
+  return !!r?.student_team && t[r.id]?.[e]?.level === AccessLevelEnum.OWNER;
 }
 export function $$m2(e, t, r) {
   for (let n in t) {
     let a = t[n][e];
-    if (r?.student_team && a?.level >= e6.EDITOR) return !0;
+    if (r?.student_team && a?.level >= AccessLevelEnum.EDITOR) return !0;
   }
   return !1;
 }
 export function $$g7(e, t, r) {
-  return !!r?.student_team && t[r.id]?.[e]?.level >= e6.EDITOR;
+  return !!r?.student_team && t[r.id]?.[e]?.level >= AccessLevelEnum.EDITOR;
 }
 export const GU = $$_0;
 export const Me = $$u1;

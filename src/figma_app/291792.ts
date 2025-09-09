@@ -13,7 +13,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackFullScreenAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { nt } from "../figma_app/687776";
+import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { h as _$$h } from "../figma_app/334471";
 import { getI18nString } from "../905/303541";
 import { zE } from "../905/738636";
@@ -29,9 +29,9 @@ import { m as _$$m } from "../905/575846";
 import { TY } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
 import { r as _$$r } from "../905/210851";
-import { Z } from "../905/515860";
+import { resolveTeamId } from "../905/515860";
 import { eE } from "../figma_app/952446";
-import { q5, tS, tB } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey, selectOpenFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { B as _$$B } from "../905/524020";
 import { d as _$$d } from "../905/647058";
@@ -84,7 +84,7 @@ export function $$Z2() {
     let e = useAtomWithSubscription(eE);
     let t = TY();
     let r = _$$d();
-    let a = q5();
+    let a = selectCurrentFile();
     let s = FC();
     let o = E3();
     let l = useSelector(e => e.mirror.appModel.topLevelMode);
@@ -132,13 +132,13 @@ function Q({
   }) {
     let t = lg();
     let r = useDispatch();
-    let h = q5();
+    let h = selectCurrentFile();
     let g = h?.currentPlanUser?.draftsFolderId ?? void 0;
     let f = h?.team;
     let I = _$$B();
     let {
       data
-    } = nt(g);
+    } = useProjectFileCreationPermissions(g);
     let A = _$$h(data);
     let w = Zr("send-to-make-from-design");
     let R = _p();
@@ -298,9 +298,9 @@ function Q({
   let g = useSelector(e => e.saveAsState);
   let f = useSelector(e => e.mirror.appModel.topLevelMode);
   let S = n6();
-  let A = q5();
+  let A = selectCurrentFile();
   let w = function () {
-    let e = tS();
+    let e = useCurrentFileKey();
     let {
       hasCollection,
       status
@@ -348,7 +348,7 @@ export function $$en0(e, {
   isUserInLimitedSpace: a,
   isPublishingModalDisabled: s
 }) {
-  let o = Z(e) || null;
+  let o = resolveTeamId(e) || null;
   let l = getFeatureFlags().branching_update_status_lg ? {
     createBranch: {
       status: "hidden"
@@ -371,7 +371,7 @@ export function $$en0(e, {
     updateBranch: {
       status: "hidden"
     }
-  } : gW(tB(e), getPermissionsState(e), e.selectedView.editorType, t, e.mirror.appModel.topLevelMode, e.mirror.appModel.multiplayerSessionState, i, o, a, null);
+  } : gW(selectOpenFile(e), getPermissionsState(e), e.selectedView.editorType, t, e.mirror.appModel.topLevelMode, e.mirror.appModel.multiplayerSessionState, i, o, a, null);
   return _$$p({
     fileMenuArgs: {
       fileCreationMenuItems: [],
@@ -380,7 +380,7 @@ export function $$en0(e, {
       topLevelMode: e.mirror.appModel.topLevelMode,
       unreadCommentCount: r,
       shouldShowSlideConversionEntrypoint: !1,
-      openFile: tB(e),
+      openFile: selectOpenFile(e),
       hasCollections: !1
     },
     pluginAndWidgetMenuArgs: n,

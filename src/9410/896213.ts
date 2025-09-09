@@ -38,7 +38,7 @@ import { hx } from "../figma_app/290668";
 import { isIntegrationContext } from "../figma_app/469876";
 import { Zr } from "../figma_app/678782";
 import { AD, wF, Wq, uC, A8 } from "../figma_app/578768";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dR } from "../figma_app/440875";
 import { Z as _$$Z } from "../905/116724";
 import { _P } from "../figma_app/2590";
@@ -57,14 +57,14 @@ import { FFileType } from "../figma_app/191312";
 import { _2 } from "../9410/635666";
 import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
-import { pE } from "../figma_app/630077";
+import { projectPermissionEnum } from "../figma_app/630077";
 import { DV } from "../905/739964";
 import { A as _$$A2 } from "../3276/51271";
 import { K as _$$K } from "../3276/330497";
 import { WF, tL, sl, Te, iw, iG, zc } from "../9410/132424";
 import { a as _$$a, G as _$$G } from "../905/298663";
-import { Oc } from "../figma_app/552876";
-import { cJ } from "../905/561485";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { s as _$$s2 } from "../3276/362217";
 import { n as _$$n } from "../3276/384190";
 import { MT, BK, zW, me, mg, Vr, rT, Tw, aK, qN, QD, Km, zK, hg, XE, yx, Ge, wH, yo, r9, rR, zk, ai, EI } from "../9410/574786";
@@ -74,7 +74,7 @@ var et = (e => (e.VOICE = "voice", e))(et || {});
 var ef = (e => (e[e.NO_CALL_STATE = 0] = "NO_CALL_STATE", e[e.JOIN_CALL_STATE = 1] = "JOIN_CALL_STATE", e[e.IN_CALL_WIDGET_OPEN = 2] = "IN_CALL_WIDGET_OPEN", e[e.IN_CALL_WIDGET_CLOSED = 3] = "IN_CALL_WIDGET_CLOSED", e))(ef || {});
 function eg(e) {
   let t = useStore();
-  let i = q5();
+  let i = selectCurrentFile();
   let n = useSelector(e => e.orgById);
   let s = useSelector(e => e.teams);
   let o = useSelector(e => e.selectedView?.editorType);
@@ -104,7 +104,7 @@ function eg(e) {
           data: {
             team: e,
             resource: Bi.AUDIO,
-            action: pE.USE_AUDIO,
+            action: projectPermissionEnum.USE_AUDIO,
             editorType: r,
             currentPlan: _$$F.Plan.STARTER,
             upsellPlan: _$$F.Plan.PRO
@@ -160,7 +160,7 @@ export function $$ew1(e, t, i, r, n, a, s) {
   let o = e.sessionID;
   let l = o === t;
   let d = a && a.sessionID === t;
-  if (l && d) s(); else if (r) {
+  if (l && d) s();else if (r) {
     let t = n.observingSessionID === o || n.sessionID === o ? -1 : e.sessionID;
     let r = -1 !== n.observingSessionID;
     let a = n.observingSessionID !== o && n.sessionID !== o;
@@ -202,7 +202,7 @@ function eS(e) {
   let l = useRef(!1);
   let d = l.current;
   let c = useCallback(async e => {
-    if ("" === e) a(usersToSearch); else {
+    if ("" === e) a(usersToSearch);else {
       s.current = !1;
       let t = await _$$n(e, usersToSearch);
       s.current || (a(t.map(e => e.item)), d || (o("Multiplayer Tools User Search", {
@@ -655,7 +655,7 @@ let $$eO0 = memo(function (e) {
   let O = WN();
   let M = useDispatch();
   let [P, G] = useState(!1);
-  let z = Oc();
+  let z = useIsSelectedFigmakeFullscreen();
   let W = dropdownShown?.type;
   let Y = !z && W === eA;
   let q = useMemo(() => multiplayer.allUsers.filter(e => e.sessionID !== currentUser?.sessionID), [multiplayer.allUsers, currentUser]);
@@ -692,7 +692,7 @@ let $$eO0 = memo(function (e) {
   let ef = _$$q();
   let eg = tu();
   let eC = oJ();
-  let eE = cJ();
+  let eE = useIsFullscreenSitesView();
   let eT = useMemo(() => ({
     label: e => e.name,
     id: e => String(e.sessionID),

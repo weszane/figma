@@ -27,7 +27,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { M as _$$M } from "../figma_app/648761";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { td as _$$td } from "../figma_app/930338";
+import { formatCount } from "../figma_app/930338";
 import { k as _$$k2 } from "../905/582200";
 import { Y as _$$Y } from "../905/506207";
 import { tH, H4 } from "../905/751457";
@@ -56,7 +56,7 @@ import { kl, ER } from "../905/275640";
 import { Rb, Pt as _$$Pt } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { p8 } from "../figma_app/722362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
 import { R2, sy, w$ } from "../figma_app/646357";
@@ -100,7 +100,7 @@ import { Fs } from "../figma_app/743107";
 import { t as _$$t2 } from "../905/332351";
 import { ZQ, UX } from "../905/668609";
 import { a as _$$a } from "../905/597867";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { sO } from "../figma_app/21029";
 import { f as _$$f2 } from "../figma_app/252485";
 import { Sw, rM, UM } from "../905/95091";
@@ -134,7 +134,7 @@ let $$ti6 = memo(function (e) {
   let {
     dispatch
   } = e;
-  let r = cJ();
+  let r = useIsFullscreenSitesView();
   let n = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
     return !t || isValidValue(t) && 0 === t.length;
@@ -1329,7 +1329,7 @@ function tf({
   rowRef: c,
   openPickerOnInitialRender: u
 }) {
-  let _ = tS();
+  let _ = useCurrentFileKey();
   let h = Um();
   let m = Xo();
   let {
@@ -1420,11 +1420,11 @@ function tf({
     className: `${v9} ${N4}`,
     children: jsx(_$$K, {
       actionOnPointerDown: !0,
-      "aria-label": `Select ${_$$td(r, "item")} using this style`,
+      "aria-label": `Select ${formatCount(r, "item")} using this style`,
       recordingKey: generateRecordingKey(d, "selectSameStyleButton"),
       onClick: q,
       htmlAttributes: {
-        "data-tooltip": `Select ${_$$td(r, "item")} using this style`,
+        "data-tooltip": `Select ${formatCount(r, "item")} using this style`,
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$A, {})

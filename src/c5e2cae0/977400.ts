@@ -17,7 +17,7 @@ import { _6 } from "../figma_app/386952";
 import { LN } from "../figma_app/514043";
 import { PS } from "../figma_app/345997";
 import { UpgradeSteps } from "../figma_app/831101";
-import { SC, Sc } from "../figma_app/707808";
+import { UpgradeAction, TeamType } from "../figma_app/707808";
 import { ey } from "../figma_app/918700";
 import { debounce } from "../905/915765";
 import { XHR } from "../905/910117";
@@ -159,9 +159,9 @@ export function $$z0(e) {
   let k = t => {
     "teamUpgrade" === b.view ? N(sf({
       ...b,
-      teamFlowType: SC.UPGRADE_EXISTING_TEAM,
+      teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
-      paymentStep: kR(b.paymentStep, SC.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || Sc.UNDETERMINED, w ? UpgradeSteps.CONFIRM_PAY : UpgradeSteps.CHOOSE_PLAN),
+      paymentStep: kR(b.paymentStep, UpgradeAction.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || TeamType.UNDETERMINED, w ? UpgradeSteps.CONFIRM_PAY : UpgradeSteps.CHOOSE_PLAN),
       billingPeriod: e.billingPeriod || E,
       entryPoint: e.entryPoint
     })) : N(WX({

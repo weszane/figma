@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { P } from "../vendor/348225";
 import { N } from "../vendor/930821";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { pl } from "../figma_app/578768";
 import { Q } from "../3276/336897";
 export function $$m0({
@@ -22,7 +22,7 @@ export function $$m0({
   let f = h.length + (e ? 1 : 0);
   let _ = pl;
   let g = Math.min(m, h.length + (e ? 1 : 0)) * _;
-  let v = ZC(u);
+  let v = useLatestRef(u);
   v && u !== v && (p.duration = .3);
   let x = useCallback(e => {
     if (0 === e) return "multiplayer-observation-nux-key";

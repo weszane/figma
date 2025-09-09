@@ -16,7 +16,7 @@ import { H as _$$H } from '../figma_app/358450';
 import { fullscreenValue } from '../figma_app/455680';
 import { v7 } from '../figma_app/475303';
 import { gk, tj } from '../figma_app/540726';
-import { YE } from '../figma_app/552876';
+import { isDebugSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { gP } from '../figma_app/594947';
 import { I2 } from '../figma_app/603466';
 import { wo } from '../figma_app/753501';
@@ -25,7 +25,7 @@ import { isMobileUA } from '../figma_app/778880';
 import { ty } from '../figma_app/844818';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { BI, nB } from '../figma_app/896988';
-import { hX } from '../figma_app/930338';
+import { escapeHtml } from '../figma_app/930338';
 import { Wh, Yx } from '../figma_app/985200';
 let R = {
   ALT: 256,
@@ -360,7 +360,7 @@ function z() {
 }
 function H(e) {
   return t => {
-    if (z() || YE()) return e(t);
+    if (z() || isDebugSelectedFigmakeFullscreen()) return e(t);
   };
 }
 class W {
@@ -444,7 +444,7 @@ class W {
       e.preventDefault();
     }));
     document.addEventListener('keydown', H(e => {
-      if (this.isHandlingDoubleInputForMicrosoftIMEFix = !1, this.lastKeydownEventAccepted = !1, this.lastKeydownEventForwarded = !1, YE()) {
+      if (this.isHandlingDoubleInputForMicrosoftIMEFix = !1, this.lastKeydownEventAccepted = !1, this.lastKeydownEventForwarded = !1, isDebugSelectedFigmakeFullscreen()) {
         if (er(e.target)) return;
         let t = _$$y.isMac();
         let i = (t ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'z' && !e.shiftKey;
@@ -1224,11 +1224,11 @@ class W {
   }
   setupClipboardAndDropEvents() {
     let e = (e, t) => {
-      if (this.clipboardDataTransfer = e.clipboardData || window.clipboardData, !(F2.shouldInterceptClipboardEvent(e, t) || ei(e) && !YE()) && this.clipboardDataTransfer) {
+      if (this.clipboardDataTransfer = e.clipboardData || window.clipboardData, !(F2.shouldInterceptClipboardEvent(e, t) || ei(e) && !isDebugSelectedFigmakeFullscreen()) && this.clipboardDataTransfer) {
         e.preventDefault();
         let i = e.target;
         i instanceof HTMLElement && i.tagName === 'BODY' && (i = document.activeElement);
-        let n = YE() ? this.canvasViewHandle : this.viewHandleFromElement(i);
+        let n = isDebugSelectedFigmakeFullscreen() ? this.canvasViewHandle : this.viewHandleFromElement(i);
         this.cppAPI.clipboardEvent(n, t);
       }
     };
@@ -1244,7 +1244,7 @@ class W {
     }));
     document.body.addEventListener('paste', H(i => {
       if (!t()) {
-        if (YE()) {
+        if (isDebugSelectedFigmakeFullscreen()) {
           if (!(tj(i) || gk(i))) return;
           if (atomStoreManager.get(qG)) {
             hH(InsertErrorType.MAXIMUM_ATTACHMENTS_EXCEEDED);
@@ -1653,7 +1653,7 @@ export let $$eu0 = new class {
   }
   writeToClipboardAsBlobInHTML(e, t, i, r, s, o, l, d) {
     if (!this.globalWindowState?.clipboardDataTransfer) return !1;
-    let c = `<span style="white-space:pre-wrap;">${hX(l).replace(/\n/g, '<br>')}</span>`;
+    let c = `<span style="white-space:pre-wrap;">${escapeHtml(l).replace(/\n/g, '<br>')}</span>`;
     let u = `<meta charset="utf-8">${e}${btoa(unescape(encodeURIComponent(t)))}${i}${r}${encodeBase64(s)}${o}${getFeatureFlags().ce_rich_text_copy && d ? d : c}`;
     try {
       this.globalWindowState.clipboardDataTransfer.setData('text/html', u);

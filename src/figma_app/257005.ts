@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { Wn } from "../figma_app/88484";
 import { Uz } from "../905/63728";
-import { Rs, p as _$$p } from "../figma_app/288654";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { L } from "../905/408237";
 import { kt } from "../figma_app/858013";
 import { ne } from "../figma_app/563413";
@@ -38,7 +38,7 @@ export function $$O4(e) {
   });
 }
 export function $$R5() {
-  let e = Rs(CommunityPlaygroundFileSelectorRecentFilesView({}));
+  let e = useSubscription(CommunityPlaygroundFileSelectorRecentFilesView({}));
   useEffect(() => {
     if ("loaded" === e.status) {
       let t = YN(e.data.currentUser.recentFiles2);
@@ -111,7 +111,7 @@ export function $$P2({
   }) => ({
     key: e
   })), [o]);
-  let E = _$$p(FileCanEdit, g);
+  let E = useMultiSubscription(FileCanEdit, g);
   let I = useMemo(() => E.map(({
     result: e
   }) => e.transform(e => !!e.file?.hasPermission)), [E]);

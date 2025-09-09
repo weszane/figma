@@ -13,7 +13,7 @@ import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";
 import { hC } from "../figma_app/901889";
 import { buildUploadUrl } from "../figma_app/169182";
-import { n_ } from "../figma_app/566371";
+import { getAtomWithEnabledCheck } from "../figma_app/566371";
 import { oW } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -213,7 +213,7 @@ function z({
 }) {
   let l = useMemo(() => i?.selectedRepositories ?? [], [i?.selectedRepositories]);
   let [d, u] = useState(l.length > 0 ? l[0]?.id : getI18nString("dev_handoff.component_browser_onboarding.github_select_repository"));
-  let m = n_(XU);
+  let m = getAtomWithEnabledCheck(XU);
   let f = useMemo(() => {
     let e = i?.availableRepositories.find(e => e.id === d)?.name;
     let t = l[0]?.name;
@@ -309,7 +309,7 @@ function $({
   repositories: r,
   onNext: i
 }) {
-  let o = n_(XU);
+  let o = getAtomWithEnabledCheck(XU);
   let s = r?.availableRepositories[0];
   return jsxs("div", {
     children: [jsxs("div", {

@@ -10,7 +10,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { d as _$$d } from "../figma_app/429226";
-import { Rw } from "../figma_app/930338";
+import { uint8ArrayToHex } from "../figma_app/930338";
 import { renderI18nText } from "../905/303541";
 import { Zl } from "../figma_app/311375";
 import { Ay, hI } from "../figma_app/432652";
@@ -106,12 +106,12 @@ function O(e) {
       };
     case "IMAGE":
       let t = e.image?.hash;
-      let r = t ? Rw(t) : "";
+      let r = t ? uint8ArrayToHex(t) : "";
       let n = e.imageThumbnail?.hash;
       return {
         type: "IMAGE",
         hash: r,
-        thumbnailHash: n ? Rw(n) : "",
+        thumbnailHash: n ? uint8ArrayToHex(n) : "",
         visible: e.visible
       };
     case "SOLID":

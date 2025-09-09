@@ -30,7 +30,7 @@ import { O as _$$O } from "../905/791978";
 import P from "classnames";
 import D from "../vendor/239910";
 import { selectWithShallowEqual } from "../905/103090";
-import { p as _$$p } from "../figma_app/288654";
+import { useMultiSubscription } from "../figma_app/288654";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { NG } from "../figma_app/709893";
 import { P as _$$P } from "../905/347284";
@@ -40,7 +40,7 @@ import { n1 } from "../figma_app/657017";
 import { t as _$$t2 } from "../905/511388";
 import { fd } from "../figma_app/255679";
 import { T9 } from "../figma_app/528509";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { B as _$$B2 } from "../905/506188";
 import { LibraryFileSelect } from "../figma_app/43951";
 import { je } from "../figma_app/155728";
@@ -90,7 +90,7 @@ function ec({
 }) {
   let l = useDispatch();
   let d = useSelector(e => e.dropdownShown);
-  let c = q5();
+  let c = selectCurrentFile();
   let u = Qj({
     includeLocalLibrary: !0
   });
@@ -107,7 +107,7 @@ function ec({
       projectId: e
     }));
   }, [p]);
-  let y = _$$p(LibraryFileSelect, A);
+  let y = useMultiSubscription(LibraryFileSelect, A);
   let b = useMemo(() => {
     let e = {};
     y.forEach(t => {

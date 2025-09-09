@@ -2,7 +2,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { zE } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
 import { FUserRoleType } from "../figma_app/191312";
-import { Wd } from "../figma_app/35887";
+import { AccountTypeEnum } from "../figma_app/35887";
 import { Ib } from "../905/129884";
 import { x } from "../905/439650";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
@@ -56,7 +56,7 @@ export function $$b3(e) {
   return !!e.scim_metadata;
 }
 export function $$T6(e) {
-  return e.type === Wd.ORG_USER ? !!e.scim_seat_type : !e.isOrgInvite && !!e.scim_seat_type;
+  return e.type === AccountTypeEnum.ORG_USER ? !!e.scim_seat_type : !e.isOrgInvite && !!e.scim_seat_type;
 }
 export const Ad = $$y0;
 export const H = $$h1;

@@ -6,11 +6,11 @@ import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { cs, Rc } from "../figma_app/819288";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { S6 } from "../905/761735";
-import { ZA, Rs } from "../figma_app/288654";
+import { getLivegraphClient, useSubscription } from "../figma_app/288654";
 import { gB, Xm } from "../905/723791";
-import { setSentryTag } from "../905/11";
+import { setTagGlobal } from "../905/11";
 import { Zv } from "../905/760682";
 import { logError, logInfo } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
@@ -112,7 +112,7 @@ class j {
     _$$O.records[r.id] = {
       parentId: r.parent_id,
       report: (t, o) => {
-        if (!s && (s = !0, setSentryTag("comments_optimistic_updates", "true"), setSentryTag("isLoadedComments", i.isLoadedComments ? "true" : "false"), setSentryTag("commentType", e), logError(t, o, {
+        if (!s && (s = !0, setTagGlobal("comments_optimistic_updates", "true"), setTagGlobal("isLoadedComments", i.isLoadedComments ? "true" : "false"), setTagGlobal("commentType", e), logError(t, o, {
           id: r.id,
           fileKey: this.client.fileKey,
           parentId: r.parent_id,
@@ -505,7 +505,7 @@ function G(e, t, r) {
     let e = r.data.file;
     return new Set(e ? "comments" in e ? e.comments.map(e => e.id) : e.resolvedComments.map(e => e.id) : []);
   }, [r]);
-  let a = ZC(n);
+  let a = useLatestRef(n);
   let {
     removed
   } = useMemo(() => Zv(n, a), [n, a]);
@@ -517,7 +517,7 @@ function G(e, t, r) {
   }, [o, removed]);
 }
 export function $$V1(e) {
-  let t = ZA();
+  let t = getLivegraphClient();
   let r = selectCurrentUser();
   let {
     args,
@@ -565,17 +565,17 @@ export function $$H0(e) {
     fileKey: S ?? ""
   }), [S]);
   let P = useMemo(() => generateUUIDv4(), [N]);
-  let D = Rs($J, N, {
+  let D = useSubscription($J, N, {
     enabled: v,
     traceId: P
   });
-  let M = Rs(ResolvedComments, N, {
+  let M = useSubscription(ResolvedComments, N, {
     enabled: v
   });
-  let F = Rs(FeedPostsByFileKey, N, {
+  let F = useSubscription(FeedPostsByFileKey, N, {
     enabled: y && v
   });
-  let j = Rs(FileCanvasMentionsByFileKey, N, {
+  let j = useSubscription(FileCanvasMentionsByFileKey, N, {
     enabled: f && v
   });
   let U = useSelector(e => e.comments.lgPendingUuidToServerIdMap);

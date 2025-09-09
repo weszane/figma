@@ -1,6 +1,6 @@
 import { S } from "../905/872825";
 import { nS, Ac, aV } from "../figma_app/321395";
-import { g3 } from "../figma_app/707808";
+import { UserProfileTab } from "../figma_app/707808";
 import { VR, FZ, CS, p7 } from "../figma_app/979714";
 let o = class extends nS {};
 Ac(o);
@@ -8,12 +8,12 @@ o.displayName = "ProfileRoute";
 o.path = "/@:profileHandle/:tabView?";
 o.deserializeParams = e => ({
   profileHandle: e.profileHandle,
-  tabView: S(e.tabView, g3)
+  tabView: S(e.tabView, UserProfileTab)
 });
 o.serializeParams = e => e;
 export let $$l2 = o;
 export function $$d0(e, t, i) {
-  return t === g3.RESOURCES || t === g3.METRICS && i?.community_profile_handle !== e ? new $$l2({
+  return t === UserProfileTab.RESOURCES || t === UserProfileTab.METRICS && i?.community_profile_handle !== e ? new $$l2({
     profileHandle: e
   }).href : new $$l2({
     profileHandle: e,

@@ -1,19 +1,19 @@
 import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
-import { d6 } from "../figma_app/687776";
+import { useSubscription } from "../figma_app/288654";
+import { canCreateFileType } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { c$ } from "../figma_app/618433";
 import { oB } from "../905/929976";
 import { YW } from "../figma_app/78808";
 import { showModalHandler } from "../905/156213";
-import { Kz } from "../905/760074";
+import { isBranchAlt } from "../905/760074";
 import { F as _$$F } from "../905/224";
 import { hr } from "../905/352022";
 import { fullscreenValue } from "../figma_app/455680";
 import { xp } from "../905/87821";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { FileNameViewDropdown, ProjectTilePermissions } from "../figma_app/43951";
@@ -23,7 +23,7 @@ import { UpsellModalType } from "../905/165519";
 import { vL, Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { h as _$$h } from "../figma_app/270558";
 import { DV } from "../905/739964";
 import { W as _$$W } from "../905/442612";
@@ -49,11 +49,11 @@ export function $$D0() {
   }));
 }
 export function $$k1() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useDispatch();
   let r = useSelector(e => getPermissionsStateMemoized(e));
   let y = useSelector(F9);
-  let N = Rs(FileNameViewDropdown, {
+  let N = useSubscription(FileNameViewDropdown, {
     branchFileKey: e?.key || ""
   }, {
     enabled: !!e
@@ -70,13 +70,13 @@ export function $$k1() {
   }, []);
   let B = $$D0();
   let G = N.data?.file?.project;
-  let V = G && e?.editorType && d6(G, e.editorType);
+  let V = G && e?.editorType && canCreateFileType(G, e.editorType);
   let H = e?.project && V;
   let z = F.editorType !== FEditorType.Whiteboard;
-  let W = !!(e && z && Kz(e));
+  let W = !!(e && z && isBranchAlt(e));
   let K = H ? W ? getI18nString("fullscreen.filename_view.duplicate-as-new") : getI18nString("fullscreen.filename_view.duplicate") : getI18nString("fullscreen.filename_view.duplicate-to-drafts");
   let Y = e?.currentPlanUser?.draftsFolderId;
-  let $ = Rs(ProjectTilePermissions, {
+  let $ = useSubscription(ProjectTilePermissions, {
     projectId: Y || ""
   }, {
     enabled: !!Y && getFeatureFlags().filter_pro_plus_sites_make_web
@@ -135,7 +135,7 @@ export function $$k1() {
           data: {
             team: n,
             resource: e?.editorType !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
-            action: ZN.DUPLICATE_FILES,
+            action: fileActionEnum.DUPLICATE_FILES,
             editorType: e?.editorType || FFileType.DESIGN,
             currentPlan: _$$F.Plan.STARTER,
             upsellPlan: _$$F.Plan.PRO,

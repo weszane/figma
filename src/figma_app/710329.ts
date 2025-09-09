@@ -1,16 +1,16 @@
 import { getI18nString } from "../905/303541";
-import { ud, Gu } from "../905/513035";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
 export function $$a0(e) {
   switch (e) {
-    case ud.EXPERT:
+    case ProductAccessTypeEnum.EXPERT:
       return getI18nString("billing_modals.billing_remodel_edu.full_seat");
-    case ud.DEVELOPER:
+    case ProductAccessTypeEnum.DEVELOPER:
       return getI18nString("billing_modals.billing_remodel_edu.dev_seat");
-    case ud.COLLABORATOR:
+    case ProductAccessTypeEnum.COLLABORATOR:
       return getI18nString("billing_modals.billing_remodel_edu.collab_seat");
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.CONTENT:
       return getI18nString("billing_modals.billing_remodel_edu.content_seat");
-    case Gu.VIEW:
+    case ViewAccessTypeEnum.VIEW:
       return getI18nString("billing_modals.billing_remodel_edu.view_seat");
     default:
       return "";

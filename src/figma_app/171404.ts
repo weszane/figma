@@ -4,13 +4,13 @@ import { k } from "../905/443820";
 import { xk } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { I as _$$I } from "../905/485103";
+import { useWebLoggerTimer } from "../905/485103";
 import { EH } from "../905/985374";
 import { wu } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { iq } from "../figma_app/976749";
 import { DP } from "../905/640017";
-import { TI } from "../905/513035";
+import { ProductAccessTypeMap } from "../905/513035";
 import { NT } from "../figma_app/579169";
 import { FProductAccessType } from "../figma_app/191312";
 import { IT } from "../905/713695";
@@ -188,9 +188,9 @@ function A(e) {
   });
   let g = useMemo(() => {
     var t;
-    return e.licenseType ?? (t = e.seatType, TI[t] ?? FProductAccessType.DESIGN);
+    return e.licenseType ?? (t = e.seatType, ProductAccessTypeMap[t] ?? FProductAccessType.DESIGN);
   }, [e.licenseType, e.seatType]);
-  if (_$$I(null != c.data, t => {
+  if (useWebLoggerTimer(null != c.data, t => {
     analyticsEventManager.trackDefinedEvent("activation.time_to_load_social_proof", {
       loadTimeMS: t,
       planType: e.planData.planType,

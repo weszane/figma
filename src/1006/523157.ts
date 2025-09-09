@@ -12,7 +12,7 @@ import { af } from "../figma_app/559491";
 import { Q7 } from "../905/15667";
 import { Yo } from "../figma_app/543529";
 import { V2 } from "../figma_app/844435";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
@@ -201,7 +201,7 @@ export function $$F0() {
   let n = selectWithShallowEqual(e => e.publishedPlugins);
   let r = selectWithShallowEqual(e => e.localPlugins);
   let a = Yo();
-  let p = tS();
+  let p = useCurrentFileKey();
   let C = useRef(new _$$O(_$$A.duration(1, "day")));
   let T = V2();
   let I = useDispatch();

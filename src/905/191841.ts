@@ -21,7 +21,7 @@ import { BK } from "../905/848862";
 import { dq } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { G as _$$G } from "../figma_app/471068";
-import { bL } from "../figma_app/630077";
+import { getTeamUrl } from "../figma_app/630077";
 import { XU } from "../figma_app/756995";
 import { $ } from "../905/834575";
 import { $ as _$$$ } from "../905/442144";
@@ -97,7 +97,7 @@ export function $$P0(e) {
       selectedView: "recentsAndSharing" === P.view ? P.tab || _$$G.RECENTLY_VIEWED : P.view,
       viewMode: "grid"
     }), oJ(r)) {
-      let e = bL(n.id, t);
+      let e = getTeamUrl(n.id, t);
       customHistory.redirect(e, "_blank");
       r.stopPropagation();
       return;

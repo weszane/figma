@@ -1,15 +1,15 @@
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { FPlanNameType, FTeamStatusType } from "../figma_app/191312";
 import { TeamCanAdmin } from "../figma_app/43951";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 export function $$o1() {
-  let e = T5("useIsCurrentTeamProLocked").unwrapOr(null);
+  let e = useCurrentPrivilegedPlan("useIsCurrentTeamProLocked").unwrapOr(null);
   return !!(e && e.tier === FPlanNameType.PRO && e?.planSubscription?.status === FTeamStatusType.SUSPENDED);
 }
 export function $$l0(e) {
-  let t = T5("useIsEligbileForProTeamLockedRevampUI").unwrapOr(null);
+  let t = useCurrentPrivilegedPlan("useIsEligbileForProTeamLockedRevampUI").unwrapOr(null);
   let r = function (e) {
-    let t = Rs(TeamCanAdmin, {
+    let t = useSubscription(TeamCanAdmin, {
       id: e || ""
     }, {
       enabled: !!e

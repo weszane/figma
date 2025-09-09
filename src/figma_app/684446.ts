@@ -4,7 +4,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A } from "../905/920142";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { kc } from "../figma_app/35887";
+import { LicenseGroupUpdateReasonEnum } from "../figma_app/35887";
 import { Eh } from "../figma_app/617654";
 import { dq } from "../905/845253";
 import { C5, D1, hX } from "../figma_app/614170";
@@ -104,19 +104,19 @@ export function $$I9(e, t) {
     e?.idp_group && (i = e.idp_group?.name || "");
     r = function (e, t) {
       switch (e) {
-        case kc.SELF_SELECTED:
+        case LicenseGroupUpdateReasonEnum.SELF_SELECTED:
           return getI18nString("members_table.billing_group_update_description.self_selected");
-        case kc.SELF_SELECTED_NOT_LISTED:
+        case LicenseGroupUpdateReasonEnum.SELF_SELECTED_NOT_LISTED:
           return getI18nString("members_table.billing_group_update_description.self_selected_not_listed");
-        case kc.SELF_SELECTED_DONT_KNOW:
+        case LicenseGroupUpdateReasonEnum.SELF_SELECTED_DONT_KNOW:
           return getI18nString("members_table.billing_group_update_description.self_selected_dont_know");
-        case kc.MOVED_BY_ADMIN:
+        case LicenseGroupUpdateReasonEnum.MOVED_BY_ADMIN:
           return t ? getI18nString("members_table.billing_group_update_description.moved_by_admin", {
             adminName: t
           }) : getI18nString("members_table.billing_group_update_description.moved_by_admin_generic");
-        case kc.AUTO_ASSIGNED:
+        case LicenseGroupUpdateReasonEnum.AUTO_ASSIGNED:
           return getI18nString("members_table.billing_group_update_description.auto_assigned");
-        case kc.SCIM_GROUP:
+        case LicenseGroupUpdateReasonEnum.SCIM_GROUP:
           return getI18nString("members_table.billing_group_update_description.scim_group", {
             groupName: t
           });

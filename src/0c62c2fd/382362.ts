@@ -8,7 +8,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { Uz } from "../905/63728";
-import { oY } from "../905/485103";
+import { useWebLoggerTimerEffect } from "../905/485103";
 import { qc } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
@@ -20,11 +20,11 @@ import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { H_ } from "../figma_app/336853";
-import { OL, C1 } from "../figma_app/12796";
+import { canPerformActionBasedOnLevel, getPermissionLevelName } from "../figma_app/12796";
 import { rq } from "../905/351260";
 import { bp, Wj } from "../905/913057";
 import { ls } from "../905/158283";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e } from "../905/393279";
 import { o6, gy } from "../905/986349";
@@ -113,7 +113,7 @@ let Z = memo(function ({
     children: t.map(t => {
       let r = t.index;
       let s = e[r];
-      let _ = OL(s, d, c);
+      let _ = canPerformActionBasedOnLevel(s, d, c);
       return jsx(_$$O, {
         canEditRole: _,
         canMakeAdmin: d,
@@ -147,7 +147,7 @@ export function $$ee0(e) {
   let K = M4.Team.useValue(teamId).data;
   let q = dr(teamId);
   let ee = _$$eb(teamId);
-  oY("loaded" === q.status && "loaded" === ee.status, e => {
+  useWebLoggerTimerEffect("loaded" === q.status && "loaded" === ee.status, e => {
     let t = ee.data?.length ?? 0;
     let r = "unknown";
     r = t <= 100 ? "small" : t <= 300 ? "medium" : "large";
@@ -179,9 +179,9 @@ export function $$ee0(e) {
   });
   let em = useMemo(() => {
     let e = [];
-    et?.canAdmin && e.push(e6.ADMIN);
-    et?.canEdit && e.push(e6.EDITOR);
-    et?.canRead && e.push(e6.VIEWER);
+    et?.canAdmin && e.push(AccessLevelEnum.ADMIN);
+    et?.canEdit && e.push(AccessLevelEnum.EDITOR);
+    et?.canRead && e.push(AccessLevelEnum.VIEWER);
     return e;
   }, [et]);
   let {
@@ -285,7 +285,7 @@ export function $$ee0(e) {
               inviteLevel,
               source: "team-permissions-modal"
             }),
-            getSelectText: C1,
+            getSelectText: getPermissionLevelName,
             hideDropdownOnEmpty: !0,
             inviteLevel,
             joinLinkShown: ev,

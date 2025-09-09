@@ -1,4 +1,5 @@
-import { T as _$$T } from '../905/27038'
+import { addBreadcrumb } from '@sentry/browser'
+import { BaseViewManager } from '../905/27038'
 import { B } from '../905/122726'
 import { y as _$$y } from '../905/289978'
 import { ViewSelectorGroup } from '../905/560883'
@@ -19,9 +20,8 @@ import { $T, nw } from '../figma_app/422062'
 import { throwTypeError } from '../figma_app/465776'
 import { G as _$$G } from '../figma_app/471068'
 import { pk } from '../figma_app/502247'
-import { addBreadcrumb } from '../vendor/39153'
 
-export let $$A0 = new ViewSelectorGroup([new $T(), new _$$f(), new YY(), new _$$y(), new _$$a(), new _$$m(), new B(), new G(), new _$$_(), new N(), new _$$u(), new _$$i(), new _$$T(), new _$$v()])
+export let $$A0 = new ViewSelectorGroup([new $T(), new _$$f(), new YY(), new _$$y(), new _$$a(), new _$$m(), new B(), new G(), new _$$_(), new N(), new _$$u(), new _$$i(), new BaseViewManager(), new _$$v()])
 export function $$x14(e, t) {
   return new URL($$N6(e, t), document.baseURI).href
 }

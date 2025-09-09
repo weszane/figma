@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { logError, logInfo } from "../905/714362";
 import { u8 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { $p } from "../figma_app/155728";
 import { FEditorType } from "../figma_app/53721";
 import { PW } from "../figma_app/633080";
@@ -27,7 +27,7 @@ async function v({
   contextComponentUsage: I
 }) {
   if (getFeatureFlags().anticipation_suggestions_shadow) try {
-    let r = atomStoreManager.get(ze) ?? void 0;
+    let r = atomStoreManager.get(openFileKeyAtom) ?? void 0;
     let l = atomStoreManager.get(u8);
     if (!r || l !== FEditorType.Design) return;
     let E = atomStoreManager.get($p);

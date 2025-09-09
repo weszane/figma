@@ -44,7 +44,7 @@ import { uE } from '../figma_app/314264';
 import { $W, KD } from '../figma_app/317394';
 import { Y as _$$Y2 } from '../figma_app/433187';
 import { throwTypeError } from '../figma_app/465776';
-import { q5 } from '../figma_app/516028';
+import { selectCurrentFile } from '../figma_app/516028';
 import { k as _$$k2 } from '../figma_app/564183';
 import { i4, RI, uz, We } from '../figma_app/770088';
 import { BrowserInfo } from '../figma_app/778880';
@@ -153,7 +153,7 @@ export function $$ed1(e) {
     editorRef,
     scrollToBottom
   } = e;
-  let eh = q5();
+  let eh = selectCurrentFile();
   let eg = eh?.key || null;
   let em = useSelector(e => e.currentUserOrgId);
   let ef = eh?.teamId;

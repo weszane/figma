@@ -7,18 +7,18 @@ import { subscribeAndAwaitData } from "../905/553831";
 import { Wk, oA } from "../905/723791";
 import { getI18nString } from "../905/303541";
 import { DQ, Pw } from "../figma_app/121751";
-import { HZ, A5 } from "../figma_app/391338";
+import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { FPlanLimitationType, FFileType, FPaymentHealthStatusType } from "../figma_app/191312";
 import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from "../figma_app/43951";
 import { XX, WW } from "../figma_app/345997";
 import { canAdminTeam } from "../figma_app/642025";
 import { t as _$$t2 } from "../905/504360";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { d as _$$d } from "../figma_app/135698";
 import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
 import { D as _$$D } from "../905/347702";
 import { ye } from "../figma_app/528509";
-import { Z } from "../905/515860";
+import { resolveTeamId } from "../905/515860";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { M4 } from "../905/713695";
 export async function $$x10(e) {
@@ -214,10 +214,10 @@ export function $$j5(e, t) {
   if (!e.teams || !e.authedTeamsById) return null;
   let r = Object.values(e.teams);
   let n = Object.values(e.authedTeamsById);
-  if (HZ({
+  if (setupShadowRead({
     oldValue: 1 === r.length && canAdminTeam(r[0].id, e),
     newValue: t?.canAdmin,
-    label: A5.gen0OnboardingOnlyTeam.canAdmin,
+    label: adminPermissionConfig.gen0OnboardingOnlyTeam.canAdmin,
     enableFullRead: DQ(Pw.GROUP_7),
     maxReports: 1,
     contextArgs: {
@@ -225,10 +225,10 @@ export function $$j5(e, t) {
       userId: e.user?.id,
       teams: String(r.map(e => e.id))
     }
-  })) return HZ({
+  })) return setupShadowRead({
     oldValue: r[0],
     newValue: r.find(e => e.id === t?.id) || null,
-    label: A5.gen0OnboardingOnlyTeam.currentTeamFromState,
+    label: adminPermissionConfig.gen0OnboardingOnlyTeam.currentTeamFromState,
     enableFullRead: DQ(Pw.GROUP_7),
     maxReports: 1,
     contextArgs: {
@@ -312,17 +312,17 @@ export function $$Y4(e) {
   return t ? t[1] : null;
 }
 export function $$$15() {
-  return useSelector(e => Z(e)) || "";
+  return useSelector(e => resolveTeamId(e)) || "";
 }
 export function $$X21() {
   return useSelector(e => {
-    let t = Z(e);
+    let t = resolveTeamId(e);
     return "" === t || null == e.teams ? null : e.teams[t];
   }) || null;
 }
-export let $$q8 = createReduxSubscriptionAtomWithState(e => e.teams[Z(e)] || null);
+export let $$q8 = createReduxSubscriptionAtomWithState(e => e.teams[resolveTeamId(e)] || null);
 export function $$J6(e) {
-  return e.teams[Z(e)] || null;
+  return e.teams[resolveTeamId(e)] || null;
 }
 export function $$Z13(e, t, r) {
   return e ? Object.keys(_$$t2(t.byTeamId, e.id)).filter(e => r[e]) : [];
@@ -356,7 +356,7 @@ export function $$er2(e, t, r) {
     let s = r[a][e];
     if (t && s) {
       if (t.pro_team || t.org_access || t.student_team) return !1;
-      s.level === e6.OWNER && n++;
+      s.level === AccessLevelEnum.OWNER && n++;
     }
   }
   return n > 1;

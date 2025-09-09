@@ -1,7 +1,7 @@
-import { ViewDefinition } from '../905/119879';
-import { SchemaHandler } from '../905/578699';
-import { INTERNAL_SYMBOL } from '../905/957591';
-import { FigmaAppClient } from '../figma_app/28817';
+import { ViewDefinition } from '../905/119879'
+import { SchemaHandler } from '../905/578699'
+import { CodedError, deepEqual, INTERNAL_SYMBOL, ResourceStatus } from '../905/957591'
+import { FigmaAppClient } from '../figma_app/28817'
 
 /**
  * Registry for view definitions.
@@ -11,7 +11,7 @@ export class ViewRegistry {
   /**
    * Map of view names to their definitions.
    */
-  views: Map<string, ViewDefinition | undefined> = new Map();
+  views: Map<string, ViewDefinition | undefined> = new Map()
 
   /**
    * @param viewDefs - Object containing view definitions.
@@ -19,9 +19,9 @@ export class ViewRegistry {
    */
   constructor(public viewDefs: Record<string, any>, public schema: any) {
     // Initialize views map with keys from viewDefs, values as undefined
-    Object.keys(viewDefs).forEach(key => {
-      this.views.set(key, undefined);
-    });
+    Object.keys(viewDefs).forEach((key) => {
+      this.views.set(key, undefined)
+    })
   }
 
   /**
@@ -31,8 +31,8 @@ export class ViewRegistry {
   createViewDef(name: string): ViewDefinition {
     return new ViewDefinition(name, this.viewDefs[name], this.schema.objects.get('root'), this.schema, {
       shouldValidateDeprecated: true,
-      shouldUseMissingFields: false
-    });
+      shouldUseMissingFields: false,
+    })
   }
 
   /**
@@ -43,9 +43,9 @@ export class ViewRegistry {
    */
   set(name: string, def: ViewDefinition): void {
     if (this.views.has(name)) {
-      throw new Error(`View ${name} already exists in the registry.`);
+      throw new Error(`View ${name} already exists in the registry.`)
     }
-    this.views.set(name, def);
+    this.views.set(name, def)
   }
 
   /**
@@ -54,9 +54,9 @@ export class ViewRegistry {
    */
   get(name: string): ViewDefinition | null {
     if (this.views.has(name) && this.views.get(name) === undefined) {
-      this.views.set(name, this.createViewDef(name));
+      this.views.set(name, this.createViewDef(name))
     }
-    return this.views.get(name) ?? null;
+    return this.views.get(name) ?? null
   }
 
   /**
@@ -66,10 +66,10 @@ export class ViewRegistry {
   entries(): IterableIterator<[string, ViewDefinition | undefined]> {
     for (const name of this.views.keys()) {
       if (this.views.get(name) === undefined) {
-        this.views.set(name, this.createViewDef(name));
+        this.views.set(name, this.createViewDef(name))
       }
     }
-    return this.views.entries();
+    return this.views.entries()
   }
 }
 
@@ -79,7 +79,7 @@ export class ViewRegistry {
  * @param obj - Object to check.
  */
 export function hasInternalSymbol(obj: any): boolean {
-  return !!obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, INTERNAL_SYMBOL);
+  return !!obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, INTERNAL_SYMBOL)
 }
 
 /**
@@ -91,59 +91,61 @@ export class OptimisticMutationHandler extends FigmaAppClient {
    * Applies a 'create' mutation optimistically.
    */
   optimisticallyCreate(entity: any, mutations: any): any {
-    return this.applyMutations(entity, mutations, 'create');
+    return this.applyMutations(entity, mutations, 'create')
   }
 
   /**
    * Applies an 'update' mutation optimistically.
    */
   optimisticallyUpdate(entity: any, mutations: any): any {
-    return this.applyMutations(entity, mutations, 'update');
+    return this.applyMutations(entity, mutations, 'update')
   }
 
   /**
    * Applies a 'delete' mutation optimistically.
    */
   optimisticallyDelete(entity: any, mutations: any): any {
-    return this.applyMutations(entity, mutations, 'delete');
+    return this.applyMutations(entity, mutations, 'delete')
   }
 
   /**
    * Applies a 'create' mutation with UUID optimistically.
    */
   optimisticallyCreateWithUUID(entity: any, mutations: any): any {
-    return this.applyMutationsWithUUID(entity, mutations, 'create');
+    return this.applyMutationsWithUUID(entity, mutations, 'create')
   }
 
   /**
    * Applies an 'update' mutation with UUID optimistically.
    */
   optimisticallyUpdateWithUUID(entity: any, mutations: any): any {
-    return this.applyMutationsWithUUID(entity, mutations, 'update');
+    return this.applyMutationsWithUUID(entity, mutations, 'update')
   }
 
   /**
    * Applies a 'delete' mutation with UUID optimistically.
    */
   optimisticallyDeleteWithUUID(entity: any, mutations: any): any {
-    return this.applyMutationsWithUUID(entity, mutations, 'delete');
+    return this.applyMutationsWithUUID(entity, mutations, 'delete')
   }
 
   /**
    * Gets an ID from a UUID.
    */
   getIdFromUuid(uuid: any, type: any): any {
-    return super.getIdFromUuid(uuid, type);
+    return super.getIdFromUuid(uuid, type)
   }
 }
 
 // Re-exported modules and variables with updated names
-export { getResourceDataOrFallback as oA } from '../905/419236';
-export { dZ } from '../905/552287';
-export { lw, tT } from '../905/957591';
-
+export { getResourceDataOrFallback as oA } from '../905/419236'
+export { dZ } from '../905/552287'
+export { CodedError, deepEqual, ResourceStatus }
+export const tT = CodedError
+export const lw = deepEqual
+// export const CodedError = ResourceStatus
 // Refactored exports
-export const YJ = ViewRegistry; // $$l0 -> ViewRegistry -> YJ
-export const Oh = OptimisticMutationHandler; // $$u1 -> OptimisticMutationHandler -> Oh
-export const Sj = SchemaHandler; // S -> Sj
-export const bu = hasInternalSymbol; // $$c5 -> hasInternalSymbol -> bu
+export const YJ = ViewRegistry // $$l0 -> ViewRegistry -> YJ
+export const Oh = OptimisticMutationHandler // $$u1 -> OptimisticMutationHandler -> Oh
+export const Sj = SchemaHandler // S -> Sj
+export const bu = hasInternalSymbol // $$c5 -> hasInternalSymbol -> bu

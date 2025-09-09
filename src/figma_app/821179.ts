@@ -4,13 +4,13 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useLocalStorageSync } from "../905/657224";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { A } from "../905/963262";
 import { qZ } from "../figma_app/451396";
 import { v4 } from "../figma_app/655139";
 import { wJ } from "../figma_app/630951";
 import { eY } from "../figma_app/722362";
-import { _S } from "../figma_app/516028";
+import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
 import { HX, ad, xQ } from "../figma_app/97042";
 import { mapPlatformToFramework } from "../905/359509";
@@ -24,11 +24,11 @@ export function $$b0() {
   let e = debugState.getState();
   let t = "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : null;
   let r = eY();
-  let y = useAtomWithSubscription(_S);
+  let y = useAtomWithSubscription(openFileLibraryKeyAtom);
   let b = v4();
   let T = mapPlatformToFramework(b.id);
   let [I] = useLocalStorageSync("code-connect-selected-language-storage-key", T);
-  let [S] = IT(FileCanAccessFullCodeConnect({
+  let [S] = setupResourceAtomHandler(FileCanAccessFullCodeConnect({
     key: t ?? ""
   }));
   return useCallback(async e => {

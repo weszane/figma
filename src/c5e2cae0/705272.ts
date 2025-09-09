@@ -1,5 +1,5 @@
 import s from "../vendor/128080";
-import { dA, ud } from "../905/513035";
+import { isValidAccessType, ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 var r = s;
 let $$n4 = 1;
@@ -8,14 +8,14 @@ export function $$o5(e, t) {
   let a = {};
   for (let s of Object.keys(e)) {
     let r = e[s] || "";
-    t.includes(s) && dA(r) && (a[s] = r);
+    t.includes(s) && isValidAccessType(r) && (a[s] = r);
   }
   return a;
 }
 export function $$c2(e, t, a) {
   return {
     minimumPaidSeats: 1,
-    defaultAdditionalSeatType: ud.EXPERT,
+    defaultAdditionalSeatType: ProductAccessTypeEnum.EXPERT,
     selectedTeamIds: [e],
     selectedUserSeatTypes: t,
     additionalSeatCounts: a
@@ -24,7 +24,7 @@ export function $$c2(e, t, a) {
 export function $$m7(e, t, a) {
   return {
     minimumPaidSeats: 1,
-    defaultAdditionalSeatType: ud.EXPERT,
+    defaultAdditionalSeatType: ProductAccessTypeEnum.EXPERT,
     selectedTeamIds: e,
     selectedUserSeatTypes: t,
     additionalSeatCounts: a

@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { Z } from "../905/296690";
-import { Hu } from "../figma_app/516028";
+import { openFileTeamAtom } from "../figma_app/516028";
 import { kA } from "../figma_app/336853";
 import { w5 } from "../figma_app/345997";
 var $$d3 = (e => (e.STARTER = "starter", e.PRO = "pro", e.ORG = "org", e.ENTERPRISE = "enterprise", e))($$d3 || {});
@@ -10,7 +10,7 @@ function u() {
   return getFeatureFlags().ds_variables_pp_force_enterprise ? "enterprise" : getFeatureFlags().ds_variables_pp_force_org ? "org" : getFeatureFlags().ds_variables_pp_force_pro ? "pro" : getFeatureFlags().ds_variables_pp_force_starter ? "starter" : null;
 }
 export let $$p5 = atom(e => {
-  let t = e(Hu);
+  let t = e(openFileTeamAtom);
   let i = e(Z) ?? null;
   return u() || (kA(i) ? "enterprise" : i ? "org" : w5(t) ? "pro" : "starter");
 });

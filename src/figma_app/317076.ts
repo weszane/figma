@@ -5,7 +5,7 @@ import { Gw, FB } from "../vendor/149334";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { reportError } from "../905/11";
-import { Zr } from "../figma_app/930338";
+import { capitalize } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { ds } from "../figma_app/314264";
@@ -197,7 +197,7 @@ export async function $$x11(e) {
   } catch (e) {} finally {
     if (!t) {
       let r = Gw(e);
-      t = r ? Zr(r) : "N/A";
+      t = r ? capitalize(r) : "N/A";
     }
   }
   return t;

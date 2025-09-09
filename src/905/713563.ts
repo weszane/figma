@@ -10,7 +10,7 @@ import { hideModalHandler } from "../905/156213";
 import { nG, qr, Je, PP, PI } from "../905/977218";
 import { WY, $L, uH, Rr } from "../figma_app/162807";
 import { vj } from "../905/574958";
-import { QB, bN } from "../figma_app/707808";
+import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { S } from "../905/417453";
 export function $$_1(e, t, i) {
   let r = useAtomWithSubscription(Hv);
@@ -49,7 +49,7 @@ export function $$A0(e, t, i) {
       })), d(sf({
         view: "search",
         entryPoint: e,
-        previousView: v && (QB(v) || bN(v)) ? v : void 0
+        previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0
       })), d(hideModalHandler()));
       let i = o ? Rr.ALL_TYPES_STREAMING : Rr.ALL_TYPES_BLOCKING;
       d(PI({
@@ -68,7 +68,7 @@ export function $$A0(e, t, i) {
     })), d(sf({
       view: "search",
       entryPoint: e,
-      previousView: v && (QB(v) || bN(v)) ? v : void 0
+      previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0
     })));
     d(PI({
       query: n,

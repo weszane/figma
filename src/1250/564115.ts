@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { $P } from "../vendor/218029";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { OG, w6 } from "../1250/340571";
 import { Tp } from "../1250/282084";
 function l(e, t, n, a) {
@@ -26,7 +26,7 @@ function d({
 }) {
   let n = OG(t);
   let r = n?.selectedRepositories?.[0];
-  let [l] = IT(Tp({
+  let [l] = setupResourceAtomHandler(Tp({
     libraryKey: t,
     repository: r?.id ?? ""
   }), {

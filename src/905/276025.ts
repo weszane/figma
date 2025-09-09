@@ -1,272 +1,403 @@
-import { shallowEqual } from "react-redux";
-import { createRemovableAtomFamily, atom } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
-import { oA } from "../905/663269";
-import { analyticsEventManager } from "../905/449184";
-import { Z } from "../905/515860";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { FOrganizationLevelType } from "../figma_app/191312";
-import { OrgByIdForPlanView, TeamByIdForPlanView, OrgByIdForPlanUserView, TeamByIdForPlanUserView } from "../figma_app/43951";
-import { QB, bN as _$$bN } from "../figma_app/707808";
-import { HT } from "../figma_app/428858";
-let h = createReduxSubscriptionAtomWithState(e => Z(e));
-let g = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId);
-let f = createReduxSubscriptionAtomWithState(e => e.openFile ? e.openFile.parentOrgId : e.selectedView?.view && (QB(e.selectedView) || _$$bN(e.selectedView)) ? e.currentUserOrgId : null);
-let _ = createReduxSubscriptionAtomWithState(e => e.openFile ? e.openFile.parentOrgId ? null : e.openFile.teamId : e.selectedView?.view && (QB(e.selectedView) || _$$bN(e.selectedView)) ? e.currentUserOrgId ? null : e.currentTeamId : null);
-let A = e => [{
-  code: "nonNullableResult",
-  path: [],
-  error: Error(e),
-  retriable: !1
-}];
-function y(e) {
-  return resourceUtils.errorSuspendable(A(e), {
-    release: () => {}
-  });
+import { shallowEqual } from 'react-redux'
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { analyticsEventManager } from '../905/449184'
+import { resolveTeamId } from '../905/515860'
+import { resourceUtils } from '../905/989992'
+import { atom, createRemovableAtomFamily } from '../figma_app/27355'
+import { OrgByIdForPlanUserView, OrgByIdForPlanView, TeamByIdForPlanUserView, TeamByIdForPlanView } from '../figma_app/43951'
+import { FOrganizationLevelType } from '../figma_app/191312'
+import { getPlanFeatures } from '../figma_app/428858'
+import { isIncludedView, isOrgView } from '../figma_app/707808'
+import { getResourceDataOrFallback } from './419236'
+/**
+ * Atoms and resource utilities for plan, plan public info, and plan user data.
+ * Original variable names: h, g, f, _, A, y, b, v, I, E, x, S, $$w7, $$C3, $$T1, $$k5, $$R0, $$N2, $$P6, $$O4
+ */
+
+/** Atom for current team id (original: h) */
+const teamIdAtom = createReduxSubscriptionAtomWithState(e => resolveTeamId(e))
+
+/** Atom for current user org id (original: g) */
+const userOrgIdAtom = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId)
+
+/** Atom for parent org id or fallback logic (original: f) */
+const parentOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
+  e.openFile
+    ? e.openFile.parentOrgId
+    : e.selectedView?.view && (isIncludedView(e.selectedView) || isOrgView(e.selectedView))
+      ? e.currentUserOrgId
+      : null,
+)
+
+/** Atom for team id or fallback logic (original: _) */
+const teamOrOrgIdAtom = createReduxSubscriptionAtomWithState(e =>
+  e.openFile
+    ? e.openFile.parentOrgId
+      ? null
+      : e.openFile.teamId
+    : e.selectedView?.view && (isIncludedView(e.selectedView) || isOrgView(e.selectedView))
+      ? e.currentUserOrgId
+        ? null
+        : e.currentTeamId
+      : null,
+)
+
+/**
+ * Generates a resource error result.
+ * Original: A
+ * @param errorMsg Error message
+ */
+function createResourceError(errorMsg: string) {
+  return [{
+    code: 'nonNullableResult',
+    path: [],
+    error: new Error(errorMsg),
+    retriable: false,
+  }]
 }
-function b(e, t, i) {
-  if (t) {
-    let i = e(OrgByIdForPlanView.Query({
-      orgId: t
-    }));
-    "errors" === i.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-      viewStatus: i.status,
-      viewType: "orgInfo",
-      publicInfo: !1,
-      resolvedEmpty: !1
-    });
-    try {
-      return i.transform(e => {
-        let t = e.orgInfo?.plan;
-        let n = t ? HT(t) : null;
-        if (null === n) {
-          analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-            viewStatus: i.status,
-            viewType: "orgInfo",
-            publicInfo: !1,
-            resolvedEmpty: !0
-          });
-          return Error("No org plan found");
-        }
-        return n;
-      });
-    } catch (e) {
-      return y(e.message);
+
+/**
+ * Wraps error result in a suspendable resource.
+ * Original: y
+ * @param errorMsg Error message
+ */
+function errorSuspendableResource(errorMsg: string) {
+  return resourceUtils.errorSuspendable(createResourceError(errorMsg), {
+    release: () => {},
+  })
+}
+
+/**
+ * Gets plan features for org or team.
+ * Original: b
+ */
+function getPlanFeaturesResource(getResource: any, orgId: string | null, teamId: string | null) {
+  if (orgId) {
+    const orgResource = getResource(OrgByIdForPlanView.Query({ orgId }))
+    if (orgResource.status === 'errors') {
+      analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+        viewStatus: orgResource.status,
+        viewType: 'orgInfo',
+        publicInfo: false,
+        resolvedEmpty: false,
+      })
     }
-  } else {
-    if (!i) return y("No plan found, no org or team id");
-    let t = e(TeamByIdForPlanView.Query({
-      teamId: i
-    }));
-    "errors" === t.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-      viewStatus: t.status,
-      viewType: "teamLimitedInfo",
-      publicInfo: !1,
-      resolvedEmpty: !1
-    });
     try {
-      return t.transform(e => {
-        let i = e.teamLimitedInfo?.plan;
-        let n = i ? HT(i) : null;
-        if (null === n) {
-          analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-            viewStatus: t.status,
-            viewType: "teamLimitedInfo",
-            publicInfo: !1,
-            resolvedEmpty: !0
-          });
-          return Error("No team plan found");
+      return orgResource.transform((data: any) => {
+        const plan = data.orgInfo?.plan
+        const features = plan ? getPlanFeatures(plan) : null
+        if (features === null) {
+          analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+            viewStatus: orgResource.status,
+            viewType: 'orgInfo',
+            publicInfo: false,
+            resolvedEmpty: true,
+          })
+          return new Error('No org plan found')
         }
-        return n;
-      });
-    } catch (e) {
-      return y(e.message);
+        return features
+      })
+    }
+    catch (err: any) {
+      return errorSuspendableResource(err.message)
+    }
+  }
+  else {
+    if (!teamId)
+      return errorSuspendableResource('No plan found, no org or team id')
+    const teamResource = getResource(TeamByIdForPlanView.Query({ teamId }))
+    if (teamResource.status === 'errors') {
+      analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+        viewStatus: teamResource.status,
+        viewType: 'teamLimitedInfo',
+        publicInfo: false,
+        resolvedEmpty: false,
+      })
+    }
+    try {
+      return teamResource.transform((data: any) => {
+        const plan = data.teamLimitedInfo?.plan
+        const features = plan ? getPlanFeatures(plan) : null
+        if (features === null) {
+          analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+            viewStatus: teamResource.status,
+            viewType: 'teamLimitedInfo',
+            publicInfo: false,
+            resolvedEmpty: true,
+          })
+          return new Error('No team plan found')
+        }
+        return features
+      })
+    }
+    catch (err: any) {
+      return errorSuspendableResource(err.message)
     }
   }
 }
-function v(e, t, i) {
-  if (t) {
-    let i = e(OrgByIdForPlanView.Query({
-      orgId: t
-    }));
-    "errors" === i.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-      viewStatus: i.status,
-      viewType: "org",
-      publicInfo: !0,
-      resolvedEmpty: !1
-    });
-    try {
-      return i.transform(e => {
-        let t = oA(e?.orgPublicInfo, null)?.planPublicInfo ?? null;
-        if (null === t) {
-          analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-            viewStatus: i.status,
-            viewType: "org",
-            publicInfo: !0,
-            resolvedEmpty: !0
-          });
-          return Error("No org plan public info found");
-        }
-        return t;
-      });
-    } catch (e) {
-      return y(e.message);
+
+/**
+ * Gets plan public info for org or team.
+ * Original: v
+ */
+function getPlanPublicInfoResource(getResource: any, orgId: string | null, teamId: string | null) {
+  if (orgId) {
+    const orgResource = getResource(OrgByIdForPlanView.Query({ orgId }))
+    if (orgResource.status === 'errors') {
+      analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+        viewStatus: orgResource.status,
+        viewType: 'org',
+        publicInfo: true,
+        resolvedEmpty: false,
+      })
     }
-  } else {
-    if (!i) return y("No plan public info found, no org or team id");
-    let t = e(TeamByIdForPlanView.Query({
-      teamId: i
-    }));
-    "errors" === t.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-      viewStatus: t.status,
-      viewType: "team",
-      publicInfo: !0,
-      resolvedEmpty: !1
-    });
     try {
-      return t.transform(e => {
-        let i = oA(e?.teamPublicInfo, null)?.planPublicInfo ?? null;
-        if (null === i) {
-          analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
-            viewStatus: t.status,
-            viewType: "team",
-            publicInfo: !0,
-            resolvedEmpty: !0
-          });
-          return Error("No team plan public info found");
+      return orgResource.transform((data: any) => {
+        const publicInfo = getResourceDataOrFallback(data?.orgPublicInfo, null)?.planPublicInfo ?? null
+        if (publicInfo === null) {
+          analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+            viewStatus: orgResource.status,
+            viewType: 'org',
+            publicInfo: true,
+            resolvedEmpty: true,
+          })
+          return new Error('No org plan public info found')
         }
-        return i;
-      });
-    } catch (e) {
-      return y(e.message);
+        return publicInfo
+      })
+    }
+    catch (err: any) {
+      return errorSuspendableResource(err.message)
+    }
+  }
+  else {
+    if (!teamId)
+      return errorSuspendableResource('No plan public info found, no org or team id')
+    const teamResource = getResource(TeamByIdForPlanView.Query({ teamId }))
+    if (teamResource.status === 'errors') {
+      analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+        viewStatus: teamResource.status,
+        viewType: 'team',
+        publicInfo: true,
+        resolvedEmpty: false,
+      })
+    }
+    try {
+      return teamResource.transform((data: any) => {
+        const publicInfo = getResourceDataOrFallback(data?.teamPublicInfo, null)?.planPublicInfo ?? null
+        if (publicInfo === null) {
+          analyticsEventManager.trackDefinedEvent('plans.current_plan_view_error', {
+            viewStatus: teamResource.status,
+            viewType: 'team',
+            publicInfo: true,
+            resolvedEmpty: true,
+          })
+          return new Error('No team plan public info found')
+        }
+        return publicInfo
+      })
+    }
+    catch (err: any) {
+      return errorSuspendableResource(err.message)
     }
   }
 }
-function I(e, t, i) {
-  if (t) {
-    let i = e(OrgByIdForPlanUserView.Query({
-      orgId: t
-    }));
-    "errors" === i.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_user_view_error", {
-      viewStatus: i.status,
-      viewType: "org",
-      publicInfo: !1,
-      resolvedEmpty: !1
-    });
-    try {
-      return i.transform(e => {
-        let t = e.orgPublicInfo?.currentPlanUser ?? null;
-        if (null === t) {
-          analyticsEventManager.trackDefinedEvent("plans.current_plan_user_view_error", {
-            viewStatus: i.status,
-            viewType: "org",
-            publicInfo: !1,
-            resolvedEmpty: !0
-          });
-          return Error("No org current plan user found");
-        }
-        return t;
-      });
-    } catch (e) {
-      return y(e.message);
+
+/**
+ * Gets current plan user info for org or team.
+ * Original: I
+ */
+function getPlanUserResource(getResource: any, orgId: string | null, teamId: string | null) {
+  if (orgId) {
+    const orgResource = getResource(OrgByIdForPlanUserView.Query({ orgId }))
+    if (orgResource.status === 'errors') {
+      analyticsEventManager.trackDefinedEvent('plans.current_plan_user_view_error', {
+        viewStatus: orgResource.status,
+        viewType: 'org',
+        publicInfo: false,
+        resolvedEmpty: false,
+      })
     }
-  } else {
-    if (!i) return y("No plan user found, no org or team id");
-    let t = e(TeamByIdForPlanUserView.Query({
-      teamId: i
-    }));
-    "errors" === t.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_user_view_error", {
-      viewStatus: t.status,
-      viewType: "team",
-      publicInfo: !1,
-      resolvedEmpty: !1
-    });
     try {
-      return t.transform(e => {
-        let i = e.teamPublicInfo?.currentPlanUser ?? null;
-        if (null === i) {
-          analyticsEventManager.trackDefinedEvent("plans.current_plan_user_view_error", {
-            viewStatus: t.status,
-            viewType: "team",
-            publicInfo: !1,
-            resolvedEmpty: !0
-          });
-          return Error("No team current plan user found");
+      return orgResource.transform((data: any) => {
+        const user = data.orgPublicInfo?.currentPlanUser ?? null
+        if (user === null) {
+          analyticsEventManager.trackDefinedEvent('plans.current_plan_user_view_error', {
+            viewStatus: orgResource.status,
+            viewType: 'org',
+            publicInfo: false,
+            resolvedEmpty: true,
+          })
+          return new Error('No org current plan user found')
         }
-        return i;
-      });
-    } catch (e) {
-      return y(e.message);
+        return user
+      })
+    }
+    catch (err: any) {
+      return errorSuspendableResource(err.message)
+    }
+  }
+  else {
+    if (!teamId)
+      return errorSuspendableResource('No plan user found, no org or team id')
+    const teamResource = getResource(TeamByIdForPlanUserView.Query({ teamId }))
+    if (teamResource.status === 'errors') {
+      analyticsEventManager.trackDefinedEvent('plans.current_plan_user_view_error', {
+        viewStatus: teamResource.status,
+        viewType: 'team',
+        publicInfo: false,
+        resolvedEmpty: false,
+      })
+    }
+    try {
+      return teamResource.transform((data: any) => {
+        const user = data.teamPublicInfo?.currentPlanUser ?? null
+        if (user === null) {
+          analyticsEventManager.trackDefinedEvent('plans.current_plan_user_view_error', {
+            viewStatus: teamResource.status,
+            viewType: 'team',
+            publicInfo: false,
+            resolvedEmpty: true,
+          })
+          return new Error('No team current plan user found')
+        }
+        return user
+      })
+    }
+    catch (err: any) {
+      return errorSuspendableResource(err.message)
     }
   }
 }
-function E(e) {
-  return createRemovableAtomFamily(t => atom(i => {
-    let n;
-    let r;
-    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), v(i, r, n)) : resourceUtils.disabledSuspendable({
-      release: () => {}
-    });
-  }));
+
+/**
+ * Atom family for plan public info resource.
+ * Original: E
+ */
+function planPublicInfoAtomFamily(useTeam: boolean) {
+  return createRemovableAtomFamily(key => atom((get) => {
+    let teamId: string | null
+    let orgId: string | null
+    if (key) {
+      if (useTeam) {
+        teamId = get(teamOrOrgIdAtom)
+        orgId = get(parentOrgIdAtom)
+      }
+      else {
+        teamId = get(teamIdAtom)
+        orgId = get(userOrgIdAtom)
+      }
+      return getPlanPublicInfoResource(get, orgId, teamId)
+    }
+    return resourceUtils.disabledSuspendable({ release: () => {} })
+  }))
 }
-function x(e) {
-  return createRemovableAtomFamily(t => atom(i => {
-    let n;
-    let r;
-    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), b(i, r, n)) : resourceUtils.disabledSuspendable({
-      release: () => {}
-    });
-  }));
+
+/**
+ * Atom family for plan features resource.
+ * Original: x
+ */
+function planFeaturesAtomFamily(useTeam: boolean) {
+  return createRemovableAtomFamily(key => atom((get) => {
+    let teamId: string | null
+    let orgId: string | null
+    if (key) {
+      if (useTeam) {
+        teamId = get(teamOrOrgIdAtom)
+        orgId = get(parentOrgIdAtom)
+      }
+      else {
+        teamId = get(teamIdAtom)
+        orgId = get(userOrgIdAtom)
+      }
+      return getPlanFeaturesResource(get, orgId, teamId)
+    }
+    return resourceUtils.disabledSuspendable({ release: () => {} })
+  }))
 }
-function S(e) {
-  return createRemovableAtomFamily(t => atom(i => {
-    let n;
-    let r;
-    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), I(i, r, n)) : resourceUtils.disabledSuspendable({
-      release: () => {}
-    });
-  }));
+
+/**
+ * Atom family for plan user resource.
+ * Original: S
+ */
+function planUserAtomFamily(useTeam: boolean) {
+  return createRemovableAtomFamily(key => atom((get) => {
+    let teamId: string | null
+    let orgId: string | null
+    if (key) {
+      if (useTeam) {
+        teamId = get(teamOrOrgIdAtom)
+        orgId = get(parentOrgIdAtom)
+      }
+      else {
+        teamId = get(teamIdAtom)
+        orgId = get(userOrgIdAtom)
+      }
+      return getPlanUserResource(get, orgId, teamId)
+    }
+    return resourceUtils.disabledSuspendable({ release: () => {} })
+  }))
 }
-let $$w7 = x(!1);
-let $$C3 = S(!1);
-let $$T1 = E(!1);
-let $$k5 = x(!0);
-let $$R0 = S(!0);
-let $$N2 = E(!0);
-let $$P6 = f;
-let $$O4 = _;
-createRemovableAtomFamily(e => atom(t => {
-  if (!e) return resourceUtils.disabledSuspendable({
-    release: () => {}
-  });
-  let i = null;
-  let n = null;
-  e.type === FOrganizationLevelType.ORG ? i = e.parentId : e.type === FOrganizationLevelType.TEAM && (n = e.parentId);
-  return b(t, i, n);
-}), shallowEqual);
-createRemovableAtomFamily(e => atom(t => {
-  if (!e) return resourceUtils.disabledSuspendable({
-    release: () => {}
-  });
-  let i = null;
-  let n = null;
-  e.type === FOrganizationLevelType.ORG ? i = e.parentId : e.type === FOrganizationLevelType.TEAM && (n = e.parentId);
-  return v(t, i, n);
-}), shallowEqual);
-createRemovableAtomFamily(e => atom(t => {
-  if (!e) return resourceUtils.disabledSuspendable({
-    release: () => {}
-  });
-  let i = null;
-  let n = null;
-  e.type === FOrganizationLevelType.ORG ? i = e.parentId : e.type === FOrganizationLevelType.TEAM && (n = e.parentId);
-  return I(t, i, n);
-}), shallowEqual);
-export const Ji = $$R0;
-export const KK = $$T1;
-export const T_ = $$N2;
-export const gq = $$C3;
-export const hS = $$O4;
-export const mZ = $$k5;
-export const oy = $$P6;
-export const zl = $$w7;
+
+// Exported atoms (original: $$w7, $$C3, $$T1, $$k5, $$R0, $$N2, $$P6, $$O4)
+export const getPlanFeaturesAtomFamily = planFeaturesAtomFamily(false)
+export const getPlanUserAtomFamily = planUserAtomFamily(false)
+export const getPlanPublicInfoAtomFamily = planPublicInfoAtomFamily(false)
+export const getPlanFeaturesTeamAtomFamily = planFeaturesAtomFamily(true)
+export const getPlanUserTeamAtomFamily = planUserAtomFamily(true)
+export const getPlanPublicInfoTeamAtomFamily = planPublicInfoAtomFamily(true)
+export const zl = getPlanFeaturesAtomFamily
+export const gq = getPlanUserAtomFamily
+export const KK = getPlanPublicInfoAtomFamily
+export const mZ = getPlanFeaturesTeamAtomFamily
+export const Ji = getPlanUserTeamAtomFamily
+export const T_ = getPlanPublicInfoTeamAtomFamily
+export const oy = parentOrgIdAtom
+export const hS = teamOrOrgIdAtom
+
+/**
+ * Atom families for org/team level plan features, public info, and user.
+ * These are not exported, but can be grouped for clarity.
+ */
+
+// Plan features by org/team level
+// const planFeaturesByLevelAtomFamily = createRemovableAtomFamily(e => atom((get) => {
+//   if (!e) {
+//     return resourceUtils.disabledSuspendable({ release: () => {} })
+//   }
+//   let orgId: string | null = null
+//   let teamId: string | null = null
+//   if (e.type === FOrganizationLevelType.ORG)
+//     orgId = e.parentId
+//   else if (e.type === FOrganizationLevelType.TEAM)
+//     teamId = e.parentId
+//   return getPlanFeaturesResource(get, orgId, teamId)
+// }), shallowEqual)
+
+// // Plan public info by org/team level
+// const planPublicInfoByLevelAtomFamily = createRemovableAtomFamily(e => atom((get) => {
+//   if (!e) {
+//     return resourceUtils.disabledSuspendable({ release: () => {} })
+//   }
+//   let orgId: string | null = null
+//   let teamId: string | null = null
+//   if (e.type === FOrganizationLevelType.ORG)
+//     orgId = e.parentId
+//   else if (e.type === FOrganizationLevelType.TEAM)
+//     teamId = e.parentId
+//   return getPlanPublicInfoResource(get, orgId, teamId)
+// }), shallowEqual)
+
+// // Plan user by org/team level
+// const planUserByLevelAtomFamily = createRemovableAtomFamily(e => atom((get) => {
+//   if (!e) {
+//     return resourceUtils.disabledSuspendable({ release: () => {} })
+//   }
+//   let orgId: string | null = null
+//   let teamId: string | null = null
+//   if (e.type === FOrganizationLevelType.ORG)
+//     orgId = e.parentId
+//   else if (e.type === FOrganizationLevelType.TEAM)
+//     teamId = e.parentId
+//   return getPlanUserResource(get, orgId, teamId)
+// }), shallowEqual)

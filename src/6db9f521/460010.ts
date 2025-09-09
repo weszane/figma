@@ -10,7 +10,7 @@ import { Hm, Bs, AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { T as _$$T } from "../905/858738";
 import { eY as _$$eY, p8, aV as _$$aV, s6 as _$$s, f4 } from "../figma_app/722362";
-import { q5, ze, tS as _$$tS } from "../figma_app/516028";
+import { selectCurrentFile, openFileKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { W as _$$W } from "../441/503702";
 import { getObservableValue } from "../figma_app/84367";
 import { Lk } from "../figma_app/122682";
@@ -235,7 +235,7 @@ import { m as _$$m3 } from "../2b17fec9/628878";
 import { A as _$$A6 } from "../2b17fec9/467175";
 import { K as _$$K4 } from "../6388/341838";
 import { Ah } from "../6388/574648";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { yZ } from "../905/407352";
 import { lu as _$$lu, b_, oE as _$$oE } from "../figma_app/840917";
 import { DF as _$$DF } from "../figma_app/146384";
@@ -352,7 +352,7 @@ import { N as _$$N4 } from "../2b17fec9/152433";
 import { r as _$$r5 } from "../905/571562";
 import { n3 as _$$n5, VariableStyleId as _$$IA } from "../905/859698";
 import { waitForAnimationFrame } from "../905/236856";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { XE, Uv, bS } from "../figma_app/91703";
 import { TK } from "../905/129660";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -880,7 +880,7 @@ function ej() {
   });
 }
 function eb() {
-  let e = q5();
+  let e = selectCurrentFile();
   return jsx("div", {
     ...xk(ef.leftHeaderPositioner),
     children: jsxs(_$$_2, {
@@ -894,7 +894,7 @@ function eb() {
 }
 function eE() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = useSelector(e => e.multiplayer);
   let n = useSelector(e => e.user);
   let o = useMemo(() => i.allUsers.find(e => e.sessionID === i.sessionID) || null, [i.allUsers, i.sessionID]);
@@ -2409,7 +2409,7 @@ function ip() {
     modules: e
   }) {
     let t = useDispatch();
-    let i = useAtomWithSubscription(ze);
+    let i = useAtomWithSubscription(openFileKeyAtom);
     let n = m4();
     let {
       data,
@@ -4583,7 +4583,7 @@ function lC({
   isEditable: t,
   buttonRef: i
 }) {
-  let n = _$$tS() || "";
+  let n = useCurrentFileKey() || "";
   function l(e) {
     let t = getSingletonSceneGraph().get(e);
     return t?.slideSpeakerNotes || "";
@@ -5723,7 +5723,7 @@ function am({
   let {
     Sprig
   } = useSprigWithSampling();
-  let d = _$$tS();
+  let d = useCurrentFileKey();
   let p = _$$l5();
   let x = useCallback((e, n) => _$$l3.user("swap-slide-theme", () => {
     let r = Dh(e);
@@ -6923,7 +6923,7 @@ function oX({
     maxHeight: KL.MAX_THEME_TEXT_STYLE_PREVIEW_HEIGHT
   }), [t]);
   let [x, h] = useState("");
-  let m = ZC(x);
+  let m = useLatestRef(x);
   let [_, g] = useState(0);
   let y = useCallback(e => {
     let t = e ? URL.createObjectURL(new Blob([e.preview])) : "";
@@ -8166,7 +8166,7 @@ function co({
   let A = y7(e);
   let L = useRef(A);
   L.current = A;
-  let P = _$$tS();
+  let P = useCurrentFileKey();
   let D = !!e?.animatedImage;
   let R = !!e?.video || e?.type === "VIDEO";
   useEffect(() => {
@@ -8871,7 +8871,7 @@ function cM({
   stylePickerListLayout: c
 }) {
   let u = useDispatch();
-  let p = q5();
+  let p = selectCurrentFile();
   let {
     numSelectedByType
   } = fC("numSelectedByType");
@@ -9027,7 +9027,7 @@ function cF({
 }
 let cU = memo(function () {
   let e = Ku();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = Um();
   let n = Xo();
   let a = GV();
@@ -9078,7 +9078,7 @@ let cK = memo(({
   let n = getObservableValue(AppStateTsApi?.uiState().showCanvasSearch, !1);
   let k = Lk();
   let O = useRef(null);
-  let A = q5();
+  let A = selectCurrentFile();
   let L = A ? A.key : "";
   let G = p8("showUi");
   let H = useSelector(e => e.universalInsertModal);
@@ -9203,7 +9203,7 @@ function cB() {
 }
 function cz() {
   !function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = useAtomWithSubscription(_$$lu);
     (function (e, t) {
       let i = e?.name || t?.name;
@@ -9227,7 +9227,7 @@ function cz() {
       let n = useRef(t);
       n.current = t;
       let r = useDispatch();
-      let a = gY(b_);
+      let a = getAtomMutate(b_);
       let o = selectCurrentUser();
       let d = yZ();
       let c = useMemo(() => !o || !d || !_$$DF(e, o), [o, d, e]);

@@ -21,7 +21,7 @@ import { hideModal } from "../905/156213";
 import { eB } from "../905/765855";
 import { fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 import { AG, Zx } from "../figma_app/217457";
 import { vr } from "../figma_app/514043";
@@ -172,7 +172,7 @@ export function $$H2(e) {
   });
 }
 registerModal(function (e) {
-  let t = e.isProTeam ? Oq.exclude([ud.DEV_MODE]) : Oq;
+  let t = e.isProTeam ? Oq.exclude([ProductAccessTypeEnum.DEV_MODE]) : Oq;
   let [a, i] = useState(t.dict(t => e.seatDataByLicenseType[t]?.currentSeats || 0));
   let [o, c] = useState(null);
   let m = e => {
@@ -199,21 +199,21 @@ registerModal(function (e) {
     isNaN(a) || t(a);
   };
   let g = new vr(e.currency);
-  let x = a[ud.FIGJAM];
+  let x = a[ProductAccessTypeEnum.FIGJAM];
   let f = {
-    [ud.DESIGN]: {
+    [ProductAccessTypeEnum.DESIGN]: {
       headerString: getI18nString("all_carts.figma_design_editors.seat_rename"),
-      totalSeatCount: a[ud.DESIGN],
+      totalSeatCount: a[ProductAccessTypeEnum.DESIGN],
       shouldShowDevModeIncludedText: !0
     },
-    [ud.FIGJAM]: {
+    [ProductAccessTypeEnum.FIGJAM]: {
       headerString: getI18nString("all_carts.figjam_editors.seat_rename"),
       totalSeatCount: x,
       shouldShowDevModeIncludedText: !1
     },
-    [ud.DEV_MODE]: {
+    [ProductAccessTypeEnum.DEV_MODE]: {
       headerString: getI18nString("all_carts.dev_mode_only_seats"),
-      totalSeatCount: a[ud.DEV_MODE] ?? 0,
+      totalSeatCount: a[ProductAccessTypeEnum.DEV_MODE] ?? 0,
       shouldShowDevModeIncludedText: !1
     }
   };
@@ -240,20 +240,20 @@ registerModal(function (e) {
           svg: _$$A
         }), jsxs("div", {
           className: "org_self_serve_modals--errorBannerText--srvT- org_self_serve_modals--headerModalText--h0Go9",
-          children: [o === ud.DESIGN && renderI18nText("all_carts.you_need_a_minimum_n_design_editors.seat_rename", {
-            minSeatsCount: e.seatDataByLicenseType[ud.DESIGN].minSeats
-          }), o === ud.FIGJAM && renderI18nText("all_carts.you_need_a_minimum_n_whiteboard_editors.seat_rename", {
-            minSeatsCount: e.seatDataByLicenseType[ud.FIGJAM].minSeats
-          }), o === ud.DEV_MODE && renderI18nText("all_carts.you_need_a_minimum_n_dev_mode_seats", {
-            minSeatsCount: e.seatDataByLicenseType[ud.DEV_MODE]?.minSeats || 0
+          children: [o === ProductAccessTypeEnum.DESIGN && renderI18nText("all_carts.you_need_a_minimum_n_design_editors.seat_rename", {
+            minSeatsCount: e.seatDataByLicenseType[ProductAccessTypeEnum.DESIGN].minSeats
+          }), o === ProductAccessTypeEnum.FIGJAM && renderI18nText("all_carts.you_need_a_minimum_n_whiteboard_editors.seat_rename", {
+            minSeatsCount: e.seatDataByLicenseType[ProductAccessTypeEnum.FIGJAM].minSeats
+          }), o === ProductAccessTypeEnum.DEV_MODE && renderI18nText("all_carts.you_need_a_minimum_n_dev_mode_seats", {
+            minSeatsCount: e.seatDataByLicenseType[ProductAccessTypeEnum.DEV_MODE]?.minSeats || 0
           }), "total" === o && !!e.minTotalSeats && (getFeatureFlags().org_checkout_min_seat_info_copy ? renderI18nText("all_carts.minimum_seats", {
             minTotalSeats: e.minTotalSeats,
-            minDesignSeats: e.seatDataByLicenseType[ud.DESIGN].minSeats,
+            minDesignSeats: e.seatDataByLicenseType[ProductAccessTypeEnum.DESIGN].minSeats,
             seatsText: renderI18nText("checkout.seats_text", {
               numOfSeats: e.minTotalSeats
             }),
             designSeatsText: renderI18nText("checkout.seats_text", {
-              numOfSeats: e.seatDataByLicenseType[ud.DESIGN].minSeats
+              numOfSeats: e.seatDataByLicenseType[ProductAccessTypeEnum.DESIGN].minSeats
             })
           }) : renderI18nText("all_carts.you_need_a_minimum_n_editors.seat_rename", {
             minSeatsCount: e.minTotalSeats
@@ -602,32 +602,32 @@ registerModal(function ({
             children: renderI18nText("all_carts.add_additional_editors_description.seat_rename")
           })]
         }), jsx(_$$s, {
-          billableProductKey: ud.DESIGN,
-          incrementSeats: () => w(ud.DESIGN),
-          decrementSeats: () => A(ud.DESIGN),
+          billableProductKey: ProductAccessTypeEnum.DESIGN,
+          incrementSeats: () => w(ProductAccessTypeEnum.DESIGN),
+          decrementSeats: () => A(ProductAccessTypeEnum.DESIGN),
           numSeats: y.design,
           minSeatsCount: 0,
           headerText: "",
           headerSubText: "",
-          updateAdditionalSeatsText: e => I(e, ud.DESIGN)
+          updateAdditionalSeatsText: e => I(e, ProductAccessTypeEnum.DESIGN)
         }), jsx(_$$s, {
-          billableProductKey: ud.DEV_MODE,
-          incrementSeats: () => w(ud.DEV_MODE),
-          decrementSeats: () => A(ud.DEV_MODE),
+          billableProductKey: ProductAccessTypeEnum.DEV_MODE,
+          incrementSeats: () => w(ProductAccessTypeEnum.DEV_MODE),
+          decrementSeats: () => A(ProductAccessTypeEnum.DEV_MODE),
           numSeats: y.dev_mode,
           minSeatsCount: 0,
           headerText: "",
           headerSubText: "",
-          updateAdditionalSeatsText: e => I(e, ud.DEV_MODE)
+          updateAdditionalSeatsText: e => I(e, ProductAccessTypeEnum.DEV_MODE)
         }), jsx(_$$s, {
-          billableProductKey: ud.FIGJAM,
-          incrementSeats: () => w(ud.FIGJAM),
-          decrementSeats: () => A(ud.FIGJAM),
+          billableProductKey: ProductAccessTypeEnum.FIGJAM,
+          incrementSeats: () => w(ProductAccessTypeEnum.FIGJAM),
+          decrementSeats: () => A(ProductAccessTypeEnum.FIGJAM),
           numSeats: y.figjam,
           minSeatsCount: 0,
           headerText: "",
           headerSubText: "",
-          updateAdditionalSeatsText: e => I(e, ud.FIGJAM)
+          updateAdditionalSeatsText: e => I(e, ProductAccessTypeEnum.FIGJAM)
         })]
       }), jsxs("div", {
         className: "org_self_serve_modals--selectEditorModalActions--ng3b0 org_self_serve_modals--selectEditorModalFooter--8vKi7",
@@ -670,7 +670,7 @@ registerModal(function ({
                 e[t].designEditor ? s++ : e[t].devMode && i++;
                 e[t].figjamEditor && r++;
               }
-              return s * a[ud.DESIGN] * 12 + r * a[ud.FIGJAM] * 12 + i * a[ud.DEV_MODE] * 12;
+              return s * a[ProductAccessTypeEnum.DESIGN] * 12 + r * a[ProductAccessTypeEnum.FIGJAM] * 12 + i * a[ProductAccessTypeEnum.DEV_MODE] * 12;
             }(g, y, p), {
               showCents: !0
             })

@@ -33,7 +33,7 @@ import { a5, Ho } from '../figma_app/337924';
 import { u as _$$u } from '../figma_app/353758';
 import { Ay as _$$Ay } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
-import { yV, ze } from '../figma_app/516028';
+import { openFileAtom, openFileKeyAtom } from '../figma_app/516028';
 import { nc, NJ, nM } from '../figma_app/570630';
 import { Wh } from '../figma_app/615482';
 import { H5, J6, jv, L6, Li, lV, MK, P5, U1, yZ } from '../figma_app/617606';
@@ -586,7 +586,7 @@ export async function $$ei1({
       let o = n.chatMessages || [];
       if (o.length === 0) return;
       let c = eB(o) || function () {
-        let e = atomStoreManager.get(yV);
+        let e = atomStoreManager.get(openFileAtom);
         return e?.name;
       }();
       let d = xD(e, t, void 0, c);
@@ -661,7 +661,7 @@ export async function $$ei1({
   }
 }
 function es() {
-  return atomStoreManager.get(ze);
+  return atomStoreManager.get(openFileKeyAtom);
 }
 async function ea() {
   let e = es();

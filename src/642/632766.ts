@@ -11,7 +11,7 @@ import { Ib } from "../905/129884";
 import { ig } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
 import { u3 } from "../figma_app/152690";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { p as _$$p } from "../905/427409";
 import { HF, C8, wH, Jj, mx } from "../figma_app/409807";
 import { QK, hF } from "../figma_app/960598";
@@ -22,8 +22,8 @@ function _({
 }) {
   let s = useContext(_$$p);
   let r = s?.isShowingBindingUI;
-  let i = ZC(r);
-  let l = ZC(t);
+  let i = useLatestRef(r);
+  let l = useLatestRef(t);
   useEffect(() => {
     i && !r && e?.(!1);
   }, [r, e, i]);

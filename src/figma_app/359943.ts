@@ -38,12 +38,12 @@ import { f6 } from "../figma_app/915202";
 import { cV } from "../figma_app/59509";
 import { Q as _$$Q2 } from "../905/363675";
 import { $n } from "../905/521428";
-import { uc } from "../figma_app/930338";
+import { camelToSnake } from "../figma_app/930338";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
 import { Em } from "../figma_app/976749";
-import { Kf } from "../figma_app/516028";
+import { useIsCurrentUserCreator } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { J as _$$J } from "../5132/948584";
 import { l as _$$l } from "../905/241412";
@@ -77,7 +77,7 @@ function $(e) {
         onDismiss: () => {
           Cu({
             trackingContext: `${productName} conversion ${presetType} presets entrypoint`,
-            name: `${uc(productName)}_conversion_${uc(presetType)}_presets_entrypoint_dismissed`
+            name: `${camelToSnake(productName)}_conversion_${camelToSnake(presetType)}_presets_entrypoint_dismissed`
           });
           _(_$$b({
             [userFlag]: !0
@@ -96,7 +96,7 @@ function $(e) {
               onClick: e => {
                 Cu({
                   trackingContext: `${productName} conversion ${presetType} presets entrypoint`,
-                  name: `${uc(productName)}_conversion_${uc(presetType)}_presets_entrypoint`
+                  name: `${camelToSnake(productName)}_conversion_${camelToSnake(presetType)}_presets_entrypoint`
                 });
                 onClick && onClick(e);
               },
@@ -124,7 +124,7 @@ function er(e) {
 }
 function en() {
   let e = Em();
-  let t = Kf();
+  let t = useIsCurrentUserCreator();
   let r = _$$f(Z);
   let n = _$$f(Q);
   let i = _$$f(ee);

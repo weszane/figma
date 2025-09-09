@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ViewType, AppStateTsApi } from "../figma_app/763686";
 import { oz, o5, hx, dZ } from "../905/292918";
 import { j, l as _$$l } from "../905/618243";
-import { Kn } from "../905/535806";
+import { SourceDirection } from "../905/535806";
 export function $$d1(e, t, i) {
   return filterNotNullish(["hidden" !== e.createBranch.status ? {
     name: "create-branch",
@@ -57,7 +57,7 @@ export function $$c0(e, t, i, r) {
     disabled: "disabled" === e.viewBranchDiff.status,
     callback: (e, i, n) => {
       n(hx({
-        direction: Kn.TO_SOURCE,
+        direction: SourceDirection.TO_SOURCE,
         trackingContextName: t
       }));
     }
@@ -67,7 +67,7 @@ export function $$c0(e, t, i, r) {
     disabled: "disabled" === e.mergeBranch.status,
     callback: (e, i, n) => {
       n(hx({
-        direction: Kn.TO_SOURCE,
+        direction: SourceDirection.TO_SOURCE,
         trackingContextName: t,
         unreadCommentCount: r
       }));
@@ -79,7 +79,7 @@ export function $$c0(e, t, i, r) {
     featureFlags: ["branching_and_merging_force"],
     callback: (e, i, n) => {
       n(hx({
-        direction: Kn.TO_SOURCE,
+        direction: SourceDirection.TO_SOURCE,
         trackingContextName: t,
         force: !0
       }));
@@ -90,7 +90,7 @@ export function $$c0(e, t, i, r) {
     disabled: "disabled" === e.viewSourceDiff.status,
     callback: (e, i, n) => {
       n(hx({
-        direction: Kn.FROM_SOURCE,
+        direction: SourceDirection.FROM_SOURCE,
         trackingContextName: t
       }));
     }
@@ -100,7 +100,7 @@ export function $$c0(e, t, i, r) {
     disabled: "disabled" === e.updateBranch.status,
     callback: (e, i, n) => {
       n(hx({
-        direction: Kn.FROM_SOURCE,
+        direction: SourceDirection.FROM_SOURCE,
         trackingContextName: t
       }));
     }
@@ -111,7 +111,7 @@ export function $$c0(e, t, i, r) {
     featureFlags: ["branching_and_merging_force"],
     callback: (e, i, n) => {
       n(hx({
-        direction: Kn.FROM_SOURCE,
+        direction: SourceDirection.FROM_SOURCE,
         trackingContextName: t,
         force: !0
       }));

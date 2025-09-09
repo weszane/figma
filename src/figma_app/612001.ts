@@ -1,5 +1,5 @@
 import { Fullscreen } from "../figma_app/763686";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 let a = null;
 let $$s1 = "Upsell Libraries Valid Paste For Nudge";
 export function $$o0(e, t) {
@@ -8,7 +8,7 @@ export function $$o0(e, t) {
     fileKey: t,
     offset: 1
   };
-  2 === a.offset && Fullscreen.shouldNudgeComponentCreationForSelection() && YQ({
+  2 === a.offset && Fullscreen.shouldNudgeComponentCreationForSelection() && handleAtomEvent({
     id: $$s1
   });
 }

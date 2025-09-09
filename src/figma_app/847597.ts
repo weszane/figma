@@ -1,7 +1,7 @@
 import { zRx } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
-import { ud, Gu } from "../905/513035";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
 import { Gj } from "../figma_app/217457";
 import { FUpgradeReasonType, FApprovalMethodType, FSeatAssignmentReasonType } from "../figma_app/191312";
 import { $ } from "../figma_app/126651";
@@ -9,20 +9,20 @@ let $$c10 = "Seat";
 let $$u1 = e => $$p11(e);
 export function $$p11(e) {
   switch (e) {
-    case ud.DESIGN:
-    case ud.FIGJAM:
-    case ud.DEV_MODE:
+    case ProductAccessTypeEnum.DESIGN:
+    case ProductAccessTypeEnum.FIGJAM:
+    case ProductAccessTypeEnum.DEV_MODE:
       return $(Gj(e));
-    case ud.SLIDES:
+    case ProductAccessTypeEnum.SLIDES:
       return getI18nString("general.figma_slides");
-    case ud.EXPERT:
-    case ud.DEVELOPER:
-    case ud.COLLABORATOR:
-    case ud.CONTENT:
+    case ProductAccessTypeEnum.EXPERT:
+    case ProductAccessTypeEnum.DEVELOPER:
+    case ProductAccessTypeEnum.COLLABORATOR:
+    case ProductAccessTypeEnum.CONTENT:
       return getI18nString(`general.bundle.${e}`);
-    case ud.AI_CREDITS:
+    case ProductAccessTypeEnum.AI_CREDITS:
       return getI18nString("general.ai_credits");
-    case Gu.VIEW:
+    case ViewAccessTypeEnum.VIEW:
       return getI18nString("checkout.view");
     default:
       return "";

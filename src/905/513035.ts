@@ -1,63 +1,150 @@
-import { z } from "../905/239603";
-import r from "../vendor/239910";
-import { FProductAccessType } from "../figma_app/191312";
-import { DK } from "../figma_app/765689";
-var a = r;
-var $$l12 = (e => (e.DESIGN = "design", e.FIGJAM = "figjam", e.DEV_MODE = "dev_mode", e.SLIDES = "slides", e.COLLABORATOR = "collaborator", e.DEVELOPER = "developer", e.EXPERT = "expert", e.CONTENT = "content", e.AI_CREDITS = "ai_credits", e))($$l12 || {});
-export let $$d9 = z.nativeEnum($$l12);
-var c = (e => (e.AI_CREDITS_1K = "ai_credits_1k", e.AI_CREDITS_10K = "ai_credits_10k", e))(c || {});
-let $$u3 = z.nativeEnum(c);
-let $$p4 = {
+import { keyBy } from 'lodash-es'
+import { z } from 'zod'
+import { FProductAccessType } from '../figma_app/191312'
+import { ProductAccessTypeSchema } from '../figma_app/765689'
+/**
+ * ProductAccessTypeEnum - Original: $$l12
+ */
+export enum ProductAccessTypeEnum {
+  DESIGN = 'design',
+  FIGJAM = 'figjam',
+  DEV_MODE = 'dev_mode',
+  SLIDES = 'slides',
+  COLLABORATOR = 'collaborator',
+  DEVELOPER = 'developer',
+  EXPERT = 'expert',
+  CONTENT = 'content',
+  AI_CREDITS = 'ai_credits',
+}
+
+/**
+ * Zod schema for ProductAccessTypeEnum - Original: $$d9
+ */
+export const ProductAccessTypeEnumSchema = z.nativeEnum(ProductAccessTypeEnum)
+
+/**
+ * AICreditsTypeEnum - Original: c
+ */
+export enum AICreditsTypeEnum {
+  AI_CREDITS_1K = 'ai_credits_1k',
+  AI_CREDITS_10K = 'ai_credits_10k',
+}
+
+/**
+ * Zod schema for AICreditsTypeEnum - Original: $$u3
+ */
+export const AICreditsTypeEnumSchema = z.nativeEnum(AICreditsTypeEnum)
+
+/**
+ * ProductAccessTypeMap - Original: $$p4
+ */
+export const ProductAccessTypeMap: Record<string, FProductAccessType> = {
   collaborator: FProductAccessType.WHITEBOARD,
   developer: FProductAccessType.DEV_MODE,
   expert: FProductAccessType.DESIGN,
-  content: FProductAccessType.COOPER
-};
-export var $$m2 = (e => (e.VIEW = "view", e))($$m2 || {});
-let $$h1 = ["collaborator", "developer", "expert", "content"];
-let $$g6 = z.nativeEnum(a()($$h1));
-let f = [...$$h1, "view"];
-export function $$_8(e) {
-  return f.includes(e);
+  content: FProductAccessType.COOPER,
 }
-export function $$A5(e) {
-  return $$h1.includes(e);
+
+/**
+ * ViewAccessTypeEnum - Original: $$m2
+ */
+export enum ViewAccessTypeEnum {
+  VIEW = 'view',
 }
-let $$y11 = ["design", "figjam", "dev_mode"];
-let $$b7 = z.object({
-  key: $$g6,
-  license_types: DK.array()
-});
-export function $$v10(e) {
+
+/**
+ * CollaboratorTypes - Original: $$h1
+ */
+export const CollaboratorTypes = ['collaborator', 'developer', 'expert', 'content'] as const
+
+/**
+ * Zod schema for CollaboratorTypes - Original: $$g6
+ */
+export const CollaboratorTypesSchema = z.nativeEnum(
+  keyBy(CollaboratorTypes),
+)
+
+/**
+ * AllAccessTypes - Original: f
+ */
+export const AllAccessTypes = [...CollaboratorTypes, 'view']
+
+/**
+ * Checks if a value is in AllAccessTypes - Original: $$_8
+ * @param value
+ */
+export function isValidAccessType(value: string): boolean {
+  return AllAccessTypes.includes(value)
+}
+
+/**
+ * Checks if a value is in CollaboratorTypes - Original: $$A5
+ * @param value
+ * @returns {boolean} True if value is a valid CollaboratorType
+ */
+export function isCollaboratorType(value: string): boolean {
+  return CollaboratorTypes.includes(value as typeof CollaboratorTypes[number])
+}
+
+/**
+ * DesignTypes - Original: $$y11
+ */
+export const DesignTypes = ['design', 'figjam', 'dev_mode'] as const
+
+/**
+ * CollaboratorTypeSchema - Original: $$b7
+ */
+export const CollaboratorTypeSchema = z.object({
+  key: CollaboratorTypesSchema,
+  license_types: ProductAccessTypeSchema.array(),
+})
+
+/**
+ * Generates a Zod object schema for product access types - Original: $$v10
+ * @param fieldSchema
+ */
+export function createProductAccessSchema(fieldSchema: z.ZodTypeAny) {
   return z.object({
-    design: e.optional(),
-    figjam: e.optional(),
-    dev_mode: e.optional(),
-    collaborator: e.optional(),
-    developer: e.optional(),
-    expert: e.optional(),
-    content: e.optional()
-  });
+    design: fieldSchema.optional(),
+    figjam: fieldSchema.optional(),
+    dev_mode: fieldSchema.optional(),
+    collaborator: fieldSchema.optional(),
+    developer: fieldSchema.optional(),
+    expert: fieldSchema.optional(),
+    content: fieldSchema.optional(),
+  })
 }
-let I = {
-  collaborator: ["content", "developer", "expert"],
-  content: ["developer", "expert"],
-  developer: ["expert"],
-  expert: []
-};
-export function $$E0(e, t) {
-  return (I[t] ?? []).includes(e);
+
+/**
+ * CollaboratorHierarchy - Original: I
+ */
+const CollaboratorHierarchy: Record<string, string[]> = {
+  collaborator: ['content', 'developer', 'expert'],
+  content: ['developer', 'expert'],
+  developer: ['expert'],
+  expert: [],
 }
-export const B6 = $$E0;
-export const DM = $$h1;
-export const Gu = $$m2;
-export const OQ = $$u3;
-export const TI = $$p4;
-export const a_ = $$A5;
-export const bO = $$g6;
-export const cD = $$b7;
-export const dA = $$_8;
-export const dw = $$d9;
-export const g7 = $$v10;
-export const qD = $$y11;
-export const ud = $$l12;
+
+/**
+ * Checks if a type is in the hierarchy of another type - Original: $$E0
+ * @param type
+ * @param parentType
+ */
+export function isInCollaboratorHierarchy(type: string, parentType: string): boolean {
+  return (CollaboratorHierarchy[parentType] ?? []).includes(type)
+}
+
+// Exported aliases for backward compatibility
+export const YJ = isInCollaboratorHierarchy // $$E0
+export const DM = CollaboratorTypes // $$h1
+export const Gu = ViewAccessTypeEnum // $$m2
+export const OQ = AICreditsTypeEnumSchema // $$u3
+export const TI = ProductAccessTypeMap // $$p4
+export const a_ = isCollaboratorType // $$A5
+export const bO = CollaboratorTypesSchema // $$g6
+export const cD = CollaboratorTypeSchema // $$b7
+export const dA = isValidAccessType // $$_8
+export const dw = ProductAccessTypeEnumSchema // $$d9
+export const g7 = createProductAccessSchema // $$v10
+export const qD = DesignTypes // $$y11
+export const ud = ProductAccessTypeEnum // $$l12

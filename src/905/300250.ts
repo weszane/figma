@@ -15,13 +15,13 @@ import { Nf } from "../figma_app/864378";
 import { hideModal, showModalHandler } from "../905/156213";
 import { rY, XA } from "../905/985490";
 import { gf, FK, fA, ds, Mt } from "../905/585030";
-import { HJ, cb } from "../905/760074";
+import { handleError, handleModalError } from "../905/760074";
 import { fullscreenValue } from "../figma_app/455680";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { De, eN, oJ, mN, lt } from "../905/346794";
 import { Qx, WO } from "../905/491806";
 import { FEditorType } from "../figma_app/53721";
-import { PW, Kn } from "../905/535806";
+import { CPPEventType, SourceDirection } from "../905/535806";
 import { my, RK } from "../905/561832";
 async function T(e, t, i) {
   try {
@@ -30,7 +30,7 @@ async function T(e, t, i) {
     let e = new s9("Error creating image usages", {
       cause: n
     });
-    HJ(e, PW.ON_MERGE, i);
+    handleError(e, CPPEventType.ON_MERGE, i);
     t(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.error_creating_image_usages"),
       error: !0
@@ -67,7 +67,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       reason: "commitMerge_failed_with_error",
       error: "missing openFile"
     }));
-    HJ(Error("commitMerge: missing openFile"), PW.ON_MERGE, mergeParams.direction);
+    handleError(Error("commitMerge: missing openFile"), CPPEventType.ON_MERGE, mergeParams.direction);
     return;
   }
   let I = WO(mergeParams);
@@ -82,7 +82,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
     })) : await De(!1);
     e.dispatch(sf({
       view: "fullscreen",
-      fileKey: mergeParams.direction === Kn.TO_SOURCE ? mergeParams.sourceKey : mergeParams.branchKey,
+      fileKey: mergeParams.direction === SourceDirection.TO_SOURCE ? mergeParams.sourceKey : mergeParams.branchKey,
       editorType: FEditorType.Design,
       mergeParams
     }));
@@ -93,9 +93,9 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       type: "file-merge-submit"
     }));
     e.dispatch($$j4({}));
-    mergeParams.direction === Kn.TO_SOURCE && gf(GitReferenceType.BRANCH, PreviewStage.STAGE);
-    let t = mergeParams.direction === Kn.FROM_SOURCE ? checkpointDiff.to_checkpoint_key : null;
-    mergeParams.pickedAllFromBranch = mergeParams.direction === Kn.FROM_SOURCE && conflictResolutionDetails?.nonConflictingGroups === 0 && conflictResolutionDetails?.mainPickGroups === 0 && conflictResolutionDetails?.branchPickGroups > 0;
+    mergeParams.direction === SourceDirection.TO_SOURCE && gf(GitReferenceType.BRANCH, PreviewStage.STAGE);
+    let t = mergeParams.direction === SourceDirection.FROM_SOURCE ? checkpointDiff.to_checkpoint_key : null;
+    mergeParams.pickedAllFromBranch = mergeParams.direction === SourceDirection.FROM_SOURCE && conflictResolutionDetails?.nonConflictingGroups === 0 && conflictResolutionDetails?.mainPickGroups === 0 && conflictResolutionDetails?.branchPickGroups > 0;
     try {
       let n = {
         key: u.key,
@@ -114,7 +114,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       let t = new s9("Error committing merge", {
         cause: n
       });
-      HJ(t, PW.ON_MERGE, mergeParams.direction);
+      handleError(t, CPPEventType.ON_MERGE, mergeParams.direction);
       e.dispatch($$N7({
         userInitiated: !1,
         reason: "commitMerge_failed_with_error",
@@ -141,7 +141,7 @@ let $$N7 = createOptimistThunk((e, t) => {
     let t = new s9("Refreshing due to error in abandonDiff", {
       cause: e
     });
-    cb(t);
+    handleModalError(t);
     customHistory.reload("Merge cancelled");
   });
 });
@@ -152,7 +152,7 @@ let $$P0 = createOptimistThunk(async (e, t) => {
       icon: VisualBellIcon.SPINNER,
       type: "file-merge-submit"
     })), e.getState().mirror.appModel.isReadOnly) {
-      HJ(Error("mergeOnFileOpen: app model is in read only state"), PW.ON_MERGE, t.mergeParams.direction);
+      handleError(Error("mergeOnFileOpen: app model is in read only state"), CPPEventType.ON_MERGE, t.mergeParams.direction);
       e.dispatch(k({
         message: getI18nString("collaboration.branching.file_is_in_view_only_state_please_current_refresh_tab_and_try_again")
       }));
@@ -189,9 +189,9 @@ let $$P0 = createOptimistThunk(async (e, t) => {
           branchModalTrackingId: t.mergeParams.branchModalTrackingId || 0
         });
       } catch (e) {
-        if (Multiplayer.isValidatingIncremental()) HJ(new s9("Incremental loading validation failed", {
+        if (Multiplayer.isValidatingIncremental()) handleError(new s9("Incremental loading validation failed", {
           cause: e
-        }), PW.ON_MERGE, t.mergeParams.direction);else throw e;
+        }), CPPEventType.ON_MERGE, t.mergeParams.direction);else throw e;
       }
       await mN();
       gf(r, PreviewStage.STAGE);
@@ -212,9 +212,9 @@ let $$P0 = createOptimistThunk(async (e, t) => {
         reason: "mergeOnFileOpen_failed_with_error",
         error: i.message
       })));
-      HJ(new s9("merge: Failed to commit diff", {
+      handleError(new s9("merge: Failed to commit diff", {
         cause: i
-      }), PW.ON_MERGE, t.mergeParams.direction);
+      }), CPPEventType.ON_MERGE, t.mergeParams.direction);
       e.dispatch($$N7({
         hideModal: !1,
         mergeParams: t.mergeParams,
@@ -240,7 +240,7 @@ let O = async (e, t, i, n, r = null) => {
           await lt({
             fileMergeId: a.id,
             userId: n,
-            allowEmptyMerge: i.direction === Kn.FROM_SOURCE
+            allowEmptyMerge: i.direction === SourceDirection.FROM_SOURCE
           });
           r?.commitSynced(a.id);
           t($$N7({
@@ -252,9 +252,9 @@ let O = async (e, t, i, n, r = null) => {
           t($$M1({}));
         } catch (n) {
           t($$F2({}));
-          HJ(new s9("merge: Failed to handle commit result", {
+          handleError(new s9("merge: Failed to handle commit result", {
             cause: n
-          }), PW.ON_MERGE, i.direction, {
+          }), CPPEventType.ON_MERGE, i.direction, {
             file_merge_id: e.data?.failure_info?.file_merge_id
           });
           t(VisualBellActions.clearAll());
@@ -303,9 +303,9 @@ let O = async (e, t, i, n, r = null) => {
             n = `Unknown 400 reason from server while creating FileMerge: ${e.data.reason}`;
             r = RK.COULD_NOT_START;
         }
-        HJ(new s9("merge: received 400 error when opening transactional merge", {
+        handleError(new s9("merge: received 400 error when opening transactional merge", {
           cause: Error(n)
-        }), PW.ON_MERGE, i.direction, {
+        }), CPPEventType.ON_MERGE, i.direction, {
           file_merge_id: e.data.failure_info?.file_merge_id || null
         });
         t(VisualBellActions.clearAll());
@@ -328,7 +328,7 @@ let O = async (e, t, i, n, r = null) => {
       }
     default:
       t($$F2({}));
-      HJ(Error("merge: Encountered unknown server error while creating FileMerge record"), PW.ON_MERGE, i.direction, {
+      handleError(Error("merge: Encountered unknown server error while creating FileMerge record"), CPPEventType.ON_MERGE, i.direction, {
         file_merge_id: e.data?.failure_info?.file_merge_id
       });
       t(VisualBellActions.clearAll());

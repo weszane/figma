@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Us, M7 } from "../figma_app/637027";
 import { B } from "../905/714743";
@@ -24,7 +24,7 @@ export let $$w0 = registerModal(function (e) {
   let n = useDispatch();
   let b = _6();
   let w = useSelector(e => e.folders);
-  let T = Rs(TeamFileCountsByTeamId, {
+  let T = useSubscription(TeamFileCountsByTeamId, {
     teamId
   });
   let j = E9();

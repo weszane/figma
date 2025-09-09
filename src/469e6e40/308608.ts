@@ -10,7 +10,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { R as _$$R } from "../905/165069";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { I7 } from "../figma_app/594947";
 import { bv } from "../figma_app/421401";
@@ -47,7 +47,7 @@ import { WZ } from "../905/893645";
 import { ONe } from "../figma_app/6204";
 import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { PO, Te } from "../figma_app/765689";
+import { isCoreProductAccessType, ProductAccessMap } from "../figma_app/765689";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
 import { Um } from "../905/848862";
@@ -299,7 +299,7 @@ let eI = registerModal(function ({
       g(!1);
     }).$$finally(() => g(!1)) : g(!1);
   }, [_, t, e.userId, r, l]);
-  let x = Rs(OrgUsersByIdView, {
+  let x = useSubscription(OrgUsersByIdView, {
     orgId: t,
     orgUserIds: u ? [u] : []
   }, {
@@ -502,7 +502,7 @@ export function $$eD0({
   let te = useMemo(() => JSON.stringify({
     billing_group_ids: e6
   }), [e6]);
-  let tt = Rs(AdminRequestDashboardView({
+  let tt = useSubscription(AdminRequestDashboardView({
     planType: t,
     planId: a,
     sortOrder: Q === i5.NEWEST_FIRST ? "desc" : "asc",
@@ -524,7 +524,7 @@ export function $$eD0({
     }),
     processedRequestIds: eq
   });
-  let ts = Rs(AdminRequestDashOrgInfo({
+  let ts = useSubscription(AdminRequestDashOrgInfo({
     orgId: a
   }), {
     enabled: e5
@@ -623,7 +623,7 @@ export function $$eD0({
         t.has(s) || t.add(s);
         return a;
       }
-      if (!o.licenseType || !PO(o.licenseType) || !e.includes(o.licenseType) || t.has(s)) return a;
+      if (!o.licenseType || !isCoreProductAccessType(o.licenseType) || !e.includes(o.licenseType) || t.has(s)) return a;
       if ("pending" !== o.status) {
         t.has(s) || t.add(s);
         return a;
@@ -647,7 +647,7 @@ export function $$eD0({
     e$(e => new Set([...e, ...new Set(t)]));
     return a.sort((e, t) => Q === i5.NEWEST_FIRST ? t.updatedAt.getTime() - e.updatedAt.getTime() : e.updatedAt.getTime() - t.updatedAt.getTime());
   }, [ti, tt.data, Q, e, to.requestId, eU]);
-  let ty = useMemo(() => new Set(tj?.filter(e => e.licenseType === Te.DESIGN && e.message?.includes("Dev Mode")).map(e => e.id)), [tj]);
+  let ty = useMemo(() => new Set(tj?.filter(e => e.licenseType === ProductAccessMap.DESIGN && e.message?.includes("Dev Mode")).map(e => e.id)), [tj]);
   _$$R(() => {
     let e = QL("viewRequestId");
     let t = QL("dashEntryPoint");

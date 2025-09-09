@@ -1,26 +1,26 @@
-import { EventEmitter } from "../905/690073";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { Multiplayer, DocumentSaveEvent } from "../figma_app/763686";
-import { atomStoreManager } from "../figma_app/27355";
-import { trackFullScreenAnalytics, analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { timerEventNames, reactTimerGroup, globalPerfTimer, distributionAnalytics } from "../905/542194";
-import { I as _$$I } from "../905/117966";
-import { isDevEnvironment } from "../figma_app/169182";
-import { ai, kJ, f1, $G, S as _$$S, s$, Ad } from "../figma_app/553184";
-import { aD, S3 } from "../905/485103";
-import { reportError } from "../905/11";
-import { setModeEventHandler, logCustom } from "../905/714362";
-import { JA, Cd, sl, Zp, kq, Cr, wl, P2, w4, E7 } from "../figma_app/682945";
-import { N } from "../905/945673";
-import { xK, Qw } from "../905/125218";
-import { debounce } from "../905/915765";
-import { ap, NQ } from "../905/535806";
-import { nX } from "../905/617744";
-import { r as _$$r } from "../905/210851";
-import { Rf } from "../figma_app/546509";
+import { reportError } from '../905/11';
+import { I as _$$I } from '../905/117966';
+import { Qw, xK } from '../905/125218';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { r as _$$r } from '../905/210851';
+import { analyticsEventManager, trackEventAnalytics, trackFullScreenAnalytics } from '../905/449184';
+import { sendHistogram } from '../905/485103';
+import { AggregationType, LanguageType } from '../905/535806';
+import { distributionAnalytics, globalPerfTimer, reactTimerGroup, timerEventNames } from '../905/542194';
+import { currentSelectionAtom } from '../905/617744';
+import { EventEmitter } from '../905/690073';
+import { logCustom, setModeEventHandler } from '../905/714362';
+import { debounce } from '../905/915765';
+import { N } from '../905/945673';
+import { atomStoreManager } from '../figma_app/27355';
+import { isDevEnvironment } from '../figma_app/169182';
+import { Rf } from '../figma_app/546509';
+import { $G, S as _$$S, Ad, ai, f1, kJ, s$ } from '../figma_app/553184';
+import { Cd, Cr, E7, JA, kq, P2, sl, w4, wl, Zp } from '../figma_app/682945';
+import { DocumentSaveEvent, Multiplayer } from '../figma_app/763686';
 let A = [];
 function y(e) {
-  return '<img src="data:image/png;base64, ' + e + '" alt="Image of tile" />';
+  return `<img src="data:image/png;base64, ${e}" alt="Image of tile" />`;
 }
 let v = new class {
   constructor() {
@@ -30,7 +30,7 @@ let v = new class {
       this.roundTripTimes.forEach(t => e += t);
       let t = Math.round(1e3 * e / this.roundTripTimes.length);
       this.roundTripTimes = [];
-      aD("performance.multiplayer.round_trip_time", t);
+      sendHistogram('performance.multiplayer.round_trip_time', t);
     }, 6e4);
   }
   reportMultiplayerRoundTripTime(e) {
@@ -40,7 +40,7 @@ let v = new class {
 }();
 export let $$w0 = new class {
   constructor() {
-    this.events = new EventEmitter("fullscreen");
+    this.events = new EventEmitter('fullscreen');
     setModeEventHandler(this.trackFromFullscreen.bind(this));
   }
   trackFromFullscreen(e, t, i, n, r, a) {
@@ -95,26 +95,28 @@ export let $$w0 = new class {
   }
   recordRenderingEvent(e, t) {
     !function (e, t) {
-      let i = "";
-      if ("transferState" === e) {
+      let i = '';
+      if (e === 'transferState') {
         let e = !0;
         let n = 0;
-        i += "<h1>Transfer State Tiles</h1><table><tr>";
+        i += '<h1>Transfer State Tiles</h1><table><tr>';
         for (let r = 0; r < t.tiles.length; r++) {
           let a = t.tiles[r];
-          e || a.y === n || (i += "</tr><tr>");
-          i += "<td>" + y(a.tile) + "</td>";
+          e || a.y === n || (i += '</tr><tr>');
+          i += `<td>${y(a.tile)}</td>`;
           n = a.y;
           e = !1;
         }
-        i += "</tr></table>";
-      } else "renderTile" === e ? (i += "<h1>Rendered Tile</h1>", i += "<h2>x = " + t.x + ", y = " + t.y + ", GUID = " + t.guid + "</h2>", i += y(t.tile)) : "drawToTileStackTile" === e && (i += "<h1>Draw to Tile Stack Tile</h1>", i += "<h2>debugInfo = " + t.debugInfo + "</h2>", i += y(t.tile));
+        i += '</tr></table>';
+      } else {
+        e === 'renderTile' ? (i += '<h1>Rendered Tile</h1>', i += `<h2>x = ${t.x}, y = ${t.y}, GUID = ${t.guid}</h2>`, i += y(t.tile)) : e === 'drawToTileStackTile' && (i += '<h1>Draw to Tile Stack Tile</h1>', i += `<h2>debugInfo = ${t.debugInfo}</h2>`, i += y(t.tile));
+      }
       A.push(i);
     }(e, t);
   }
   saveRenderingTrace() {
     !function () {
-      if (0 === A.length) return;
+      if (A.length === 0) return;
       let e = `<!doctype html>
     <html>
     <head>
@@ -127,15 +129,15 @@ export let $$w0 = new class {
       </style>
     </head>
     <body>`;
-      e += A.join("");
+      e += A.join('');
       e += `
     </body>
     </html>`;
-      let t = document.createElement("a");
+      let t = document.createElement('a');
       t.href = URL.createObjectURL(new Blob([e], {
-        type: "application/javascript"
+        type: 'application/javascript'
       }));
-      t.download = "rendering_trace.html";
+      t.download = 'rendering_trace.html';
       document.body.appendChild(t);
       t.click();
       document.body.removeChild(t);
@@ -144,7 +146,7 @@ export let $$w0 = new class {
   }
   reportDirtyAfterLoad(e) {
     let t = isDevEnvironment();
-    trackEventAnalytics("dirty_after_load", {
+    trackEventAnalytics('dirty_after_load', {
       registersDump: Multiplayer?.pendingRegistersDump(t).substring(0, 1e4),
       sessionID: e
     });
@@ -159,31 +161,31 @@ export let $$w0 = new class {
   reportPerfEvent(e) {
     switch (e) {
       case DocumentSaveEvent.AFTER_FIRST_RENDER:
-        s$("AFTER_FIRST_RENDER");
-        xK.start("AFTER_FIRST_RENDER");
+        s$('AFTER_FIRST_RENDER');
+        xK.start('AFTER_FIRST_RENDER');
         break;
       case DocumentSaveEvent.DOCUMENT_STARTED_SAVING:
-        s$("DOCUMENT_STARTED_SAVING");
+        s$('DOCUMENT_STARTED_SAVING');
         break;
       case DocumentSaveEvent.DOCUMENT_FINISHED_SAVING:
-        s$("DOCUMENT_FINISHED_SAVING");
+        s$('DOCUMENT_FINISHED_SAVING');
     }
   }
   reportContextRestore() {
-    this.events.trigger("context-restore");
+    this.events.trigger('context-restore');
   }
   reportMultiplayerRoundTripTime(e) {
     v.reportMultiplayerRoundTripTime(e);
   }
   reportBranchingLoadTime(e, t, i, n, r, a) {
-    let l = atomStoreManager.get(nX);
+    let l = atomStoreManager.get(currentSelectionAtom);
     let d = {
       branchFileKey: n,
       sourceFileKey: i,
       durationMs: 1e3 * e,
-      loadType: ap.GRANULAR,
+      loadType: AggregationType.GRANULAR,
       functionName: t,
-      profileStep: NQ.CPP_ONLY,
+      profileStep: LanguageType.CPP_ONLY,
       branchModalTrackingId: a,
       direction: l
     };
@@ -191,11 +193,11 @@ export let $$w0 = new class {
       diffType: r,
       ...d
     });
-    trackEventAnalytics("Branch Modal Load Time", d);
+    trackEventAnalytics('Branch Modal Load Time', d);
   }
   reportQuantizedColorEqualsUse(e, t, i, n, r, a, s, l) {
     let c = {
-      ..._$$I(Error().stack),
+      ..._$$I(new Error().stack),
       color1: JSON.stringify({
         r: e,
         g: t,
@@ -203,16 +205,16 @@ export let $$w0 = new class {
         a: n
       }),
       color2: JSON.stringify({
-        r: r,
+        r,
         g: a,
         b: s,
         a: l
       })
     };
-    trackEventAnalytics("quantized_color_equal_use", c);
+    trackEventAnalytics('quantized_color_equal_use', c);
   }
   tryReportError(e) {
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error(e));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error(e));
   }
   startPerfTimer(e) {
     timerEventNames.has(e) && reactTimerGroup.start(e);
@@ -264,12 +266,14 @@ export let $$w0 = new class {
     return globalPerfTimer.report().get(e)?.get(t) || null;
   }
   logNumericMetric(e, t) {
-    for (let i of Ad) if (e.startsWith(i)) {
-      S3(e, t);
-      break;
+    for (let i of Ad) {
+      if (e.startsWith(i)) {
+        sendHistogram(e, t);
+        break;
+      }
     }
     N.isNumberEvent(e) && N.loadTimer.logEvent(e, t);
-    "receiveNodeChanges" === e && xK.logNodeChangeMsg(t);
+    e === 'receiveNodeChanges' && xK.logNodeChangeMsg(t);
   }
   logStringMetric(e, t) {
     N.isStringEvent(e) && N.loadTimer.logEvent(e, t);

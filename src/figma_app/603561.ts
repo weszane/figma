@@ -1,14 +1,14 @@
 import { resourceUtils } from "../905/989992";
-import { IT, mI } from "../figma_app/566371";
+import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { CurrentOrgBillingPeriodView } from "../figma_app/43951";
-import { XP } from "../figma_app/465071";
+import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 export function $$$$d1({
   planType: e,
   planParentId: t
 }) {
-  let [r] = IT(CurrentOrgBillingPeriodView({
+  let [r] = setupResourceAtomHandler(CurrentOrgBillingPeriodView({
     orgId: t
   }), {
     enabled: e === FOrganizationLevelType.ORG && !!t
@@ -33,14 +33,14 @@ export function $$$$d1({
 export function $$c0({
   reportErrorsToTeam: e
 }) {
-  let t = XP({
+  let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: e
   });
   let r = $$$$d1({
     planType: t.type,
     planParentId: t.key.parentId
   });
-  let [n] = mI(r);
+  let [n] = handleSuspenseRetainRelease(r);
   if ("loaded" !== n.status) {
     let t = Error("Error fetching isELA info");
     reportError(e, t);

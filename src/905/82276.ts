@@ -1,6 +1,6 @@
-import { z } from "../905/239603";
-import { aw } from "../figma_app/175992";
-let $$a1 = "Unassigned";
+import { z } from 'zod';
+import { UserOrgSchema } from '../figma_app/175992';
+let $$a1 = 'Unassigned';
 let $$s0 = z.object({
   id: z.string(),
   name: z.string(),
@@ -8,7 +8,7 @@ let $$s0 = z.object({
   updated_at: z.string(),
   last_reviewed_at: z.string().optional(),
   last_reviewed_by_id: z.string().optional(),
-  admin_users_metadata: z.array(aw),
+  admin_users_metadata: z.array(UserOrgSchema),
   is_orphaned: z.boolean(),
   member_count: z.number().optional(),
   team_count: z.number().optional(),
@@ -16,4 +16,4 @@ let $$s0 = z.object({
   org_id: z.string()
 });
 export const W = $$s0;
-export const s = $$a1; 
+export const s = $$a1;

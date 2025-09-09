@@ -19,11 +19,11 @@ import { selectWithShallowEqual } from "../905/103090";
 import { P as _$$P } from "../905/347284";
 import { fu } from "../figma_app/831799";
 import { u as _$$u } from "../figma_app/187359";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { ev } from "../905/909811";
 import { generateRecordingKey } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
-import { i as _$$i } from "../905/651613";
+import { createFileLibraryKeys } from "../905/651613";
 import { b as _$$b } from "../905/937225";
 import { a as _$$a } from "../905/426262";
 import { u as _$$u2 } from "../905/831362";
@@ -38,7 +38,7 @@ import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { Z as _$$Z } from "../905/939602";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { IT as _$$IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { qp } from "../905/977779";
 import { ud } from "../905/862913";
 import { E as _$$E } from "../905/128063";
@@ -64,7 +64,7 @@ function j({
   isSearching: u,
   recordingKey: p
 }) {
-  let m = _$$i(e.key, t?.library_key ?? null);
+  let m = createFileLibraryKeys(e.key, t?.library_key ?? null);
   let h = t?.library_name ?? "";
   let g = _$$b(i, r, a, 0);
   let f = _$$S({
@@ -150,7 +150,7 @@ function K(e) {
     selectedView: e.selectedView,
     defaultPublished: e.library.defaultPublished
   }));
-  let c = _G();
+  let c = useOpenFileLibraryKey();
   let [p] = IT(_$$u(i), {
     enabled: !!i
   });
@@ -220,8 +220,8 @@ function es(e) {
     debouncedSearchQuery,
     setSearchQuery
   } = PG();
-  let [h] = _$$IT(HK(debouncedSearchQuery));
-  let [f] = _$$IT(Q_(debouncedSearchQuery));
+  let [h] = setupResourceAtomHandler(HK(debouncedSearchQuery));
+  let [f] = setupResourceAtomHandler(Q_(debouncedSearchQuery));
   let [_] = z();
   let A = H();
   let b = useMemo(() => {

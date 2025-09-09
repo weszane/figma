@@ -8,7 +8,7 @@ import { N as _$$N } from "../905/438674";
 import { U as _$$U } from "../0c62c2fd/547944";
 import { getFeatureFlags } from "../905/601108";
 import { xf } from "../figma_app/416935";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { ks, wG } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { qc } from "../figma_app/858013";
@@ -27,11 +27,11 @@ import { FTeamAccessPermissionType, FPlanNameType, FPermissionLevelType, FResour
 import { FolderCreation, UserFlagByName } from "../figma_app/43951";
 import { vy } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
-import { C1 } from "../figma_app/12796";
+import { getPermissionLevelName } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
 import { Wj } from "../905/913057";
 import { UpsellModalType } from "../905/165519";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
 import { e0 } from "../905/696396";
 import { e as _$$e } from "../905/393279";
@@ -100,10 +100,10 @@ export function $$er0(e) {
   let Y = useSelector(e => e.dropdownShown);
   let J = useSelector(e => e.autocomplete);
   let er = selectCurrentUser();
-  let ea = Rs(FolderCreation, {
+  let ea = useSubscription(FolderCreation, {
     teamId: e.teamId
   });
-  let es = Rs(UserFlagByName, {
+  let es = useSubscription(UserFlagByName, {
     name: "seen_connected_project_in_project_creation_onboarding"
   });
   let ei = !!es.data?.currentUser?.userFlagByName;
@@ -154,7 +154,7 @@ export function $$er0(e) {
   let ef = useCallback(() => el && (el.sharing_audience_control === FPermissionLevelType.ORG_EDIT || el.sharing_audience_control === FPermissionLevelType.WORKSPACE_EDIT) ? J4.EDIT : J4.VIEW, [el]);
   let [eg, eh] = useState(ep());
   let [ex, eb] = useState(ef());
-  let [ev, ey] = useState(e6.EDITOR);
+  let [ev, ey] = useState(AccessLevelEnum.EDITOR);
   useEffect(() => {
     eh(ep());
     eb(ef());
@@ -252,7 +252,7 @@ export function $$er0(e) {
     })]
   }) : (() => {
     let e = ed ? ed.id : null;
-    let r = [e6.EDITOR, e6.VIEWER];
+    let r = [AccessLevelEnum.EDITOR, AccessLevelEnum.VIEWER];
     return jsx("div", {
       className: "folder_creation_modal--stepTwoContainer--7Oi4o",
       children: jsx(_$$e, {
@@ -267,7 +267,7 @@ export function $$er0(e) {
           inviteLevel: ev,
           source: "folder-creation-modal"
         }),
-        getSelectText: C1,
+        getSelectText: getPermissionLevelName,
         inviteLevel: ev,
         joinLinkShown: !1,
         onInviteLevelChange: ey,

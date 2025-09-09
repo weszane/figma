@@ -1,7 +1,7 @@
 import { ComponentPropType } from "../figma_app/763686";
 import { Mz } from "../vendor/925040";
 import { P8 } from "../905/270781";
-import { DV } from "../figma_app/930338";
+import { sortWithCollator } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { MIXED_MARKER, isValidValue } from "../905/216495";
 import { g as _$$g } from "../905/578436";
@@ -29,7 +29,7 @@ export function $$b7() {
     let n = Object.values(e).filter(({
       type: e
     }) => r.includes(e));
-    DV(n, e => e.name.toLocaleLowerCase());
+    sortWithCollator(n, e => e.name.toLocaleLowerCase());
     return n;
   });
 }

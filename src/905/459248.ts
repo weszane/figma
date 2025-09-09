@@ -52,7 +52,7 @@ import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ay } from "../figma_app/628987";
 import { zz } from "../905/32188";
 import { Ao } from "../905/748636";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { sO } from "../figma_app/21029";
 import { R as _$$R } from "../905/256203";
 import { trackEventAnalytics } from "../905/449184";
@@ -61,11 +61,11 @@ import { K1 } from "../905/956994";
 import { D as _$$D } from "../905/347702";
 import { L as _$$L } from "../905/704296";
 import { A as _$$A2 } from "../svg/619883";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Us } from "../figma_app/637027";
 import { Bq } from "../figma_app/482142";
 import { b as _$$b } from "../905/985254";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
@@ -232,7 +232,7 @@ export let $$eZ0 = registerModal(function (e) {
   let E = _$$U();
   let [S, C] = useState();
   let T = sO();
-  let k = cJ();
+  let k = useIsFullscreenSitesView();
   let Z = useSelector(e => e.userFlags);
   let ee = useSelector(e => e.selectedView);
   let en = _$$XE(ee);
@@ -460,16 +460,16 @@ export let $$eZ0 = registerModal(function (e) {
   let ej = function () {
     let e = _$$f("seen_missing_fonts_org_upsell_banner");
     let t = sZ() ?? null;
-    let i = q5()?.team ?? null;
+    let i = selectCurrentFile()?.team ?? null;
     let n = selectCurrentUser();
-    let r = cJ();
+    let r = useIsFullscreenSitesView();
     let a = Rk({
       enabled: !r,
       user: n,
       hasCurrentTeam: !!i,
       hasCurrentOrg: !!t
     });
-    let s = Rs(TeamCanAdmin, {
+    let s = useSubscription(TeamCanAdmin, {
       id: i?.id
     }, {
       enabled: !!i

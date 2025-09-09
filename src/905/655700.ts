@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { Z } from "../905/515860";
-import { tB } from "../figma_app/516028";
+import { resolveTeamId } from "../905/515860";
+import { selectOpenFile } from "../figma_app/516028";
 import { td } from "../905/845253";
 import { xw } from "../figma_app/951233";
 import { kA } from "../figma_app/336853";
@@ -10,10 +10,10 @@ export function $$u0() {
   return useSelector(p);
 }
 function p(e) {
-  let t = tB(e);
+  let t = selectOpenFile(e);
   let i = xw(e);
   let n = UQ(e);
-  let u = e.teams[Z(e)] || null;
+  let u = e.teams[resolveTeamId(e)] || null;
   let p = w5(u) && !u?.org_id;
   let m = td(e.currentUserOrgId, e.orgById);
   if (!t || null === t) return "unknown";

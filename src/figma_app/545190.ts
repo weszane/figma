@@ -89,7 +89,7 @@ import { generateRecordingKey, useHandleInputEvent, useHandleKeyboardEvent, useH
 import { Og } from '../figma_app/882817';
 import { Sh } from '../figma_app/889655';
 import { q as _$$q } from '../figma_app/905311';
-import { Yx } from '../figma_app/930338';
+import { formatList } from '../figma_app/930338';
 import { Yi } from '../figma_app/933328';
 import { dD, DD, Jg } from '../figma_app/941824';
 import { useDispatch, useSelector } from 'react-redux';
@@ -521,7 +521,7 @@ function eO({
   }));
   let ey = useMemo(() => {
     if (v.kind === uN.VARIANT) {
-      if (M) return Yx(M, 'unit');
+      if (M) return formatList(M, 'unit');
     } else {
       if (v.varValue.type === VariableDataType.ALIAS) {
         let e = VariableIdHandler.fromString(v.varValue.value);

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Wn } from "../figma_app/88484";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { renderI18nText } from "../905/303541";
 import { S as _$$S } from "../905/417453";
 import { Q0, kq } from "../905/994947";
@@ -93,7 +93,7 @@ export function $$k0({
   let _ = f.searches.slice(0, Or);
   let A = MU - _.length;
   let y = function () {
-    let [e] = IT(FacetedSearchPreviewRecentFilesView({}));
+    let [e] = setupResourceAtomHandler(FacetedSearchPreviewRecentFilesView({}));
     let t = useMemo(() => e.transform(e => YN(e.currentUser.recentFiles)), [e]);
     useEffect(() => {
       "loaded" === t.status && Wn(t.data);

@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
 import { t as _$$t2 } from "../905/511388";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { Sh } from "../figma_app/803787";
 import { I as _$$I } from "../figma_app/130633";
 import { g as _$$g } from "../905/505662";
@@ -28,7 +28,7 @@ export function $$x0({
   recordingKey: w,
   dropdownDataTestId: C
 }) {
-  let T = _G() ?? _$$l("");
+  let T = useOpenFileLibraryKey() ?? _$$l("");
   let k = useAtomWithSubscription(Sh);
   let {
     libraries,

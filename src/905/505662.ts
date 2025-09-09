@@ -3,7 +3,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { gB, Xm } from "../905/723791";
 import { Fl } from "../figma_app/236178";
 import { B8 } from "../figma_app/255679";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { je } from "../figma_app/155728";
 import { Nh, mb } from "../figma_app/188908";
 import { ce } from "../figma_app/177636";
@@ -13,7 +13,7 @@ import { x as _$$x } from "../905/453561";
 export function $$$$g0({
   includeEmptyLibraries: e
 } = {}) {
-  let t = _G();
+  let t = useOpenFileLibraryKey();
   let i = je();
   let f = B8();
   let _ = function () {

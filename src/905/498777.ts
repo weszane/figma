@@ -4,10 +4,10 @@ import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { dk } from "../figma_app/789";
+import { isValidWorkshopModeExpiration } from "../figma_app/789";
 import { F } from "../905/224";
 import { t as _$$t2 } from "../figma_app/579169";
-import { Hu } from "../figma_app/516028";
+import { openFileTeamAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
@@ -16,7 +16,7 @@ import { Y } from "../905/513161";
 import { DV } from "../905/739964";
 export function $$y1(e) {
   let t = atomStoreManager.get(_$$t2).data ?? !1;
-  let i = atomStoreManager.get(Hu);
+  let i = atomStoreManager.get(openFileTeamAtom);
   let h = e.getState().selectedView?.editorType === FEditorType.Cooper;
   let y = e.getState().selectedView?.editorType === FEditorType.Slides;
   let v = e.getState().selectedView?.editorType === FEditorType.Whiteboard;
@@ -24,7 +24,7 @@ export function $$y1(e) {
   let E = I?.teamId ? e.getState().teams[I.teamId] : null;
   let x = e.getState().openFile?.editorType === FFileType.WHITEBOARD;
   let S = !e.getState().user;
-  let w = dk(e.getState().openFile);
+  let w = isValidWorkshopModeExpiration(e.getState().openFile);
   x && S && w ? (e.dispatch(Ts({
     origin: "open_session_video_upload",
     redirectUrl: customHistory.location.pathname,

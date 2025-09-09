@@ -8,8 +8,8 @@ import { E as _$$E2 } from "../905/53857";
 import { B as _$$B } from "../905/950875";
 import u from "classnames";
 import { YO } from "../figma_app/672951";
-import { Rs } from "../figma_app/288654";
-import { gY } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { getAtomMutate } from "../figma_app/566371";
 import { B as _$$B2 } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
@@ -32,7 +32,7 @@ import { sf } from "../905/929976";
 import { hideModal, popModalStack, showModalHandler } from "../905/156213";
 import { fu, j6 } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FPermissionDenialReason } from "../figma_app/191312";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { J7, SN } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
 import { registerModal } from "../905/102752";
@@ -56,7 +56,7 @@ import { Ib } from "../905/129884";
 import { DV } from "../905/739964";
 var p = u;
 let Y = registerModal(function (e) {
-  let t = S2().unwrapOr(null);
+  let t = useTeamPlanFeatures().unwrapOr(null);
   let i = e.hasOwnProperty("resourceConnectionInvite");
   let d = i ? e.resourceConnectionInvite.hostPlan : e.resourceConnection.hostPlan;
   let c = i ? e.resourceConnectionInvite.connectingPlan : e.resourceConnection.connectedPlan;
@@ -333,11 +333,11 @@ let Y = registerModal(function (e) {
 }, "ResourceConnectManageModal");
 let eo = (e, t) => {
   let i = YO(e);
-  let n = Rs(ProjectByIdForFolderSettings, {
+  let n = useSubscription(ProjectByIdForFolderSettings, {
     projectId: e
   });
   let a = useDispatch();
-  let s = gY(Ct);
+  let s = getAtomMutate(Ct);
   let o = n.data?.project;
   let l = _$$b(o?.plan?.tier);
   let d = o?.activeProjectResourceConnections;
@@ -575,7 +575,7 @@ let $$el0 = registerModal(function (e) {
     folderId
   } = e;
   let u = j6();
-  let m = Rs(ProjectByIdForFolderSettings, {
+  let m = useSubscription(ProjectByIdForFolderSettings, {
     projectId: folderId
   });
   let g = m.data?.project;

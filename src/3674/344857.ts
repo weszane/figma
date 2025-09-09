@@ -18,12 +18,12 @@ import { Fk, $y, wA as _$$wA, Gj } from "../figma_app/167249";
 import { ec as _$$ec, Te } from "../figma_app/29089";
 import { uQ as _$$uQ, NM, Zl, Tv } from "../figma_app/311375";
 import { OM, uL as _$$uL } from "../figma_app/422471";
-import { U4, xo, _I } from "../figma_app/473493";
+import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile, useCanAccessFullDevMode } from "../figma_app/473493";
 import { W as _$$W } from "../905/200727";
 import { fu as _$$fu } from "../figma_app/831799";
 import { UK, UX, Ku } from "../figma_app/740163";
 import { z4 } from "../905/37051";
-import { tS as _$$tS, q5, _G, uL as _$$uL2, sS as _$$sS } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile, useOpenFileLibraryKey, useSourceFileKey, selectOpenFileKey } from "../figma_app/516028";
 import { M as _$$M } from "../905/152487";
 import { xT, Yh, g_, Ye } from "../figma_app/32128";
 import { t as _$$t, c as _$$c } from "../905/722657";
@@ -31,7 +31,7 @@ import { k as _$$k2 } from "../905/443820";
 import { J as _$$J } from "../905/614223";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { HD, YU } from "../figma_app/191804";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA as _$$oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx as _$$sx2 } from "../905/941192";
@@ -232,7 +232,7 @@ import { y as _$$y3 } from "../figma_app/404310";
 import { Y as _$$Y2 } from "../905/830372";
 import { E as _$$E4 } from "../905/984674";
 import { Gw, FB } from "../vendor/149334";
-import { Zr } from "../figma_app/930338";
+import { capitalize } from "../figma_app/930338";
 import { Nf, lA as _$$lA, ro as _$$ro, M4, lU as _$$lU, RI } from "../figma_app/624323";
 import { j_ } from "../figma_app/9619";
 import { C as _$$C } from "../figma_app/686450";
@@ -298,7 +298,7 @@ import { A as _$$A14 } from "../svg/86097";
 import { useMemoStable } from "../905/19536";
 import { z as _$$z4 } from "../905/239603";
 import { reportError } from "../905/11";
-import { Ns } from "../905/760074";
+import { isDefaultFileAlt } from "../905/760074";
 import { yX } from "../figma_app/918700";
 import { setupAutofocusHandler } from "../905/128376";
 import { Uz } from "../905/63728";
@@ -320,7 +320,7 @@ import { t as _$$t4 } from "../905/241707";
 import { VU } from "../905/625959";
 import { A as _$$A15 } from "../svg/237839";
 import { A as _$$A16 } from "../svg/623841";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { U as _$$U3 } from "../1528/28142";
 import { vY, O5, q1, rI as _$$rI } from "../figma_app/955484";
 import { KAq, tUy, LDP, Rv9, WPY, YI7, Qhc } from "../figma_app/27776";
@@ -531,11 +531,11 @@ function b({
 let J = buildUploadUrl("bd68de9e9483d946011f6721dc4d37bcf7cc3021");
 function Q() {
   let e = _$$U("blocking_modal");
-  let t = _$$tS() ?? "";
-  let n = Rs(FileDevModeTrialRequestPending, {
+  let t = useCurrentFileKey() ?? "";
+  let n = useSubscription(FileDevModeTrialRequestPending, {
     key: t
   });
-  let o = Rs(FileIsInDevModeTrial, {
+  let o = useSubscription(FileIsInDevModeTrial, {
     key: t
   });
   let l = n.data?.file.status !== "error" && n.data?.file.data?.hasPermission && o.data?.file?.hasPermission === !1;
@@ -710,9 +710,9 @@ function e_() {
   !function () {
     let [e, t] = useAtomValueAndSetter(_$$t);
     let n = _$$J3();
-    let a = _$$tS() ?? "";
+    let a = useCurrentFileKey() ?? "";
     let o = w_();
-    let l = Rs(FileDevModeRequestDenied, {
+    let l = useSubscription(FileDevModeRequestDenied, {
       key: a
     });
     let s = o.loading;
@@ -727,10 +727,10 @@ function e_() {
     }, [e, c, d, s, n, t]);
   }();
   let e = useAtomWithSubscription(_$$t);
-  let t = _$$tS() ?? "";
+  let t = useCurrentFileKey() ?? "";
   let n = _$$J3();
   let l = useSelector(e => _$$oc(H7(e)?.id ?? "", e));
-  let s = Rs(FileAccountTypeRequest, {
+  let s = useSubscription(FileAccountTypeRequest, {
     key: t
   });
   let {
@@ -1920,8 +1920,8 @@ function nl({
   });
 }
 function ns() {
-  let e = q5();
-  let t = U4();
+  let e = selectCurrentFile();
+  let t = useCanAccessDevModeEntryPoint();
   return jsx(_$$M, {
     isShowing: !0,
     children: jsx(nl, {
@@ -2616,7 +2616,7 @@ function nY({
   let d = useMemo(() => groups.map(e => e.name), [groups]);
   let [c, u] = useAtomValueAndSetter(bE);
   let p = ON();
-  let h = _$$tS();
+  let h = useCurrentFileKey();
   let [f, g] = useSessionStorageSync(`dev_mode_variables_sidebar_collapsed_groups__${h}`, {});
   let x = f[e.node_id] ?? nG;
   let m = useCallback((t, n) => {
@@ -4968,7 +4968,7 @@ function o8({
   } = _$$B3(t.id);
   let k = function (e) {
     let t = o5(e);
-    let n = _$$tS();
+    let n = useCurrentFileKey();
     let a = v4();
     if (!t || !n || !hasInspectOrPanelCapability(t.manifest.capabilities)) return null;
     let i = async ({
@@ -5237,7 +5237,7 @@ function lk({
   backingSymbol: e
 }) {
   let t = useDispatch();
-  let n = _G();
+  let n = useOpenFileLibraryKey();
   let s = _$$b5({
     libraryKey: e?.sourceLibraryKey,
     nodeId: e?.publishID ?? void 0,
@@ -5776,7 +5776,7 @@ function lY({
   appendLabel: t
 }) {
   let n = Gw(e.uri);
-  let i = n ? Zr(n) : getI18nString("dev_handoff.docs.links_default");
+  let i = n ? capitalize(n) : getI18nString("dev_handoff.docs.links_default");
   let o = {
     id: e.uri,
     nodeId: "",
@@ -5824,7 +5824,7 @@ function l8({
   let f = _$$eY();
   let g = Nf() ?? "";
   let x = f.get(g);
-  let m = _$$tS();
+  let m = useCurrentFileKey();
   let _ = o3(d);
   let {
     inputRef,
@@ -5978,7 +5978,7 @@ function so(e) {
 }
 _$$z4.union([si, _$$z4.$$null()]);
 function ss(e, t) {
-  let n = Rs(DeveloperRelatedLinksForNode, {
+  let n = useSubscription(DeveloperRelatedLinksForNode, {
     fileKey: e,
     nodeId: t
   });
@@ -5990,7 +5990,7 @@ function ss(e, t) {
 let sd = registerModal(function (e) {
   let t = e.linkId;
   let n = Nf() ?? "";
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let l = _$$eY().get(n);
   let s = useDispatch();
   let r = async () => {
@@ -6041,7 +6041,7 @@ let sf = registerModal(function ({
   let [p, h] = useState(!e.isUserOverride && u ? "" : linkName);
   let [f, g] = useState(!1);
   let x = Nf() ?? "";
-  let m = _$$tS();
+  let m = useCurrentFileKey();
   let _ = _$$eY().get(x);
   let v = useDispatch();
   let y = useCallback(e => h(e.target.value), []);
@@ -6300,7 +6300,7 @@ function sy({
 }) {
   let n = useDispatch();
   let s = Nf() ?? "";
-  let d = _$$uL2() ?? "";
+  let d = useSourceFileKey() ?? "";
   let u = _$$eY();
   let p = _$$lU();
   let h = useSelector(e => e.mirror.appModel.currentPage);
@@ -6309,15 +6309,15 @@ function sy({
   let x = LS();
   let m = function () {
     let e = oA();
-    let t = q5();
+    let t = selectCurrentFile();
     let n = t?.repo;
-    let a = !!(t && n && Ns(t, n)) || !n;
-    let i = xo();
+    let a = !!(t && n && isDefaultFileAlt(t, n)) || !n;
+    let i = useCanUseDevModeDemoFile();
     return !e && a && !i;
   }();
   let _ = oA();
   let [v, y] = function (e) {
-    let t = Rs(DeveloperRelatedLinks, {
+    let t = useSubscription(DeveloperRelatedLinks, {
       fileKey: e
     });
     return useMemoStable(() => "loaded" === t.status && t.data.file?.developerRelatedLinks ? [t.data.file.developerRelatedLinks.map(e => ({
@@ -6533,7 +6533,7 @@ function sO() {
   let e;
   let t = _$$lA();
   let n = wS();
-  let s = useSelector(_$$sS);
+  let s = useSelector(selectOpenFileKey);
   let r = _$$uQ();
   let d = function () {
     let e = RI();
@@ -6664,7 +6664,7 @@ function s1({
   compareOverrides: s,
   overridesText: d
 }) {
-  let c = _I();
+  let c = useCanAccessFullDevMode();
   let u = !n && c;
   let p = _$$dU(e, "cc_versions");
   let h = xY("cc_dropdown_detached_component");
@@ -6754,10 +6754,10 @@ function s1({
   });
 }
 function s2() {
-  let e = _I();
+  let e = useCanAccessFullDevMode();
   let t = selectCurrentUser()?.id;
   let n = _$$Tv();
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let l = useDispatch();
   if (n?.length !== 2) return null;
   let s = n[1];
@@ -6800,7 +6800,7 @@ function s5() {
   return "loaded" === e.status && !n;
 }
 function s3() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = _$$uQ();
   let n = Fk((e, t) => {
     let n = e?.get(t ?? "");
@@ -6808,7 +6808,7 @@ function s3() {
   }, t);
   let l = s5();
   let s = s_();
-  let r = xo();
+  let r = useCanUseDevModeDemoFile();
   let d = Td();
   let c = useDispatch();
   let {
@@ -7420,7 +7420,7 @@ function rf({
     estimateSize: e => 0 !== e || s ? rd : rc,
     overscan: 10
   });
-  let C = ZC(u);
+  let C = useLatestRef(u);
   useEffect(() => {
     if (C === u) return;
     let e = A.findIndex(e => e.nodeId === u);
@@ -8178,7 +8178,7 @@ function rY({
   side: e
 }) {
   let t = getObservableOrFallback(UK().renderRulers);
-  let n = _I();
+  let n = useCanAccessFullDevMode();
   let i = _$$l2();
   let o = !!_$$hA() && n;
   return t || i || o ? null : jsx("div", {
@@ -9197,7 +9197,7 @@ function cr() {
   let i = _$$Be();
   let l = Yo();
   let s = useDispatch();
-  let r = _$$tS();
+  let r = useCurrentFileKey();
   return jsx(_$$Q3, {
     allSavedPlugins: i.plugins,
     collapsible: !0,
@@ -9364,7 +9364,7 @@ let c9 = memo(({
   showComponentControls: n
 }) => {
   let d = _$$nl2();
-  let c = _$$tS();
+  let c = useCurrentFileKey();
   let [u, p] = useAtomValueAndSetter(g6);
   let f = !ua() || u;
   let g = useSelector(e => e.saveAsState);
@@ -9632,7 +9632,7 @@ function ue({
   asset: e,
   onClose: t
 }) {
-  let n = _$$tS() ?? "";
+  let n = useCurrentFileKey() ?? "";
   let l = useDispatch();
   let {
     ref,
@@ -9731,8 +9731,8 @@ function un({
   });
 }
 function ua() {
-  let e = _$$tS() ?? "";
-  let t = Rs(FileCanExport, {
+  let e = useCurrentFileKey() ?? "";
+  let t = useSubscription(FileCanExport, {
     key: e
   });
   return !!_$$nl2() || t.data?.file && "error" !== t.data.file.status && t.data?.file?.data?.hasPermission;
@@ -9826,7 +9826,7 @@ function us({
   let [a, s] = useAtomValueAndSetter(g6);
   let [d, c] = useState(!1);
   let p = !ua() || a || d;
-  let f = q5();
+  let f = selectCurrentFile();
   let g = useSelector(e => e.saveAsState);
   let x = useDispatch();
   let m = useAtomWithSubscription(c4)[e];
@@ -9968,7 +9968,7 @@ function uc({
   let p = useDispatch();
   let h = Um();
   let f = Xo();
-  let g = q5();
+  let g = selectCurrentFile();
   let x = _$$p3("currentSelectedProperty");
   let m = s?.[e];
   let _ = useCallback(t => {
@@ -10244,7 +10244,7 @@ function ug({
 function ux() {
   let e = Gt("assets");
   let t = function () {
-    let e = _$$tS() ?? "";
+    let e = useCurrentFileKey() ?? "";
     let t = useAtomWithSubscription(_$$O6);
     let [n, a] = useAtomValueAndSetter(Qm);
     useEffect(() => {
@@ -11471,7 +11471,7 @@ function pA({
   let {
     activeId
   } = useSelector(e => e.versionHistory);
-  let i = q5();
+  let i = selectCurrentFile();
   let s = i?.canEdit;
   let r = useDispatch();
   let d = _$$hA();
@@ -11980,7 +11980,7 @@ function hc({
   }, [r]);
   !function (e = _$$lQ) {
     let t = _$$uQ();
-    let n = ZC(t);
+    let n = useLatestRef(t);
     useEffect(() => {
       n && t !== n && e();
     }, [e, n, t]);
@@ -12943,7 +12943,7 @@ function fp() {
       }(n, t));
     }, [t, n, a]);
     useEffect(() => () => a(_$$xX.IDLE), [a]);
-    let d = ZC(e);
+    let d = useLatestRef(e);
     let c = d !== e;
     useEffect(() => {
       c && n !== _$$xX.STARTED && a(_$$xX.IDLE);
@@ -13003,7 +13003,7 @@ function fh() {
     dropdownTargetRef,
     isDropdownShown
   } = _$$B3("FOCUS_MODE_NAME_DROPDOWN");
-  let r = q5();
+  let r = selectCurrentFile();
   let d = _$$uQ();
   let c = _$$hA();
   let u = _6();
@@ -13071,7 +13071,7 @@ function ff() {
     };
   }, n);
   let c = Fk(e => e.getCurrentPage()?.name);
-  let u = _$$tS();
+  let u = useCurrentFileKey();
   let p = useSelector(e => e.versionHistory);
   let h = QV();
   let f = _$$U2();
@@ -13079,7 +13079,7 @@ function ff() {
   let v = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let [, y] = useAtomValueAndSetter(_o);
   let [b] = useAtomValueAndSetter(wz);
-  let j = xo();
+  let j = useCanUseDevModeDemoFile();
   let N = useSelector(e => $A(e.selectedView) ? {
     ...e.selectedView,
     editorType: e.selectedView.focusViewBackNavigation?.toEditorType ?? e.selectedView.editorType,
@@ -13179,7 +13179,7 @@ function ff() {
   });
 }
 export function $$fg0() {
-  let e = _I();
+  let e = useCanAccessFullDevMode();
   let t = _$$aV();
   let n = useSelector(e => e.mirror.appModel.showUi);
   let s = selectCurrentUser();
@@ -13190,7 +13190,7 @@ export function $$fg0() {
     topLevelMode: ViewType.DEV_HANDOFF,
     eventName: "Dev Handoff Selection Changed"
   });
-  let u = _$$tS() ?? "";
+  let u = useCurrentFileKey() ?? "";
   return (useEffect(() => {
     let e = () => {
       wY().then(() => {
@@ -13229,7 +13229,7 @@ export function $$fm1() {
   let t = ZO();
   let n = _$$e2();
   let i = _$$hA();
-  let o = _I();
+  let o = useCanAccessFullDevMode();
   let l = _$$T();
   let s = X0();
   let r = Ye();
@@ -13254,7 +13254,7 @@ let f_ = memo(function () {
   let t = _$$l2();
   let n = _$$e2();
   let l = !!_$$hA() && !t && !n;
-  let r = xo();
+  let r = useCanUseDevModeDemoFile();
   _$$uj();
   vy();
   useEffect(() => {

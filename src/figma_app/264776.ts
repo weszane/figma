@@ -3,11 +3,11 @@ import { StateGroupErrorType, Fullscreen, StateHierarchy } from "../figma_app/76
 import { l as _$$l } from "../905/716947";
 import { Mz } from "../vendor/925040";
 import { trackEventAnalytics } from "../905/449184";
-import { im } from "../figma_app/828186";
+import { isSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { MIXED_MARKER } from "../905/216495";
-import { sS, XJ } from "../figma_app/516028";
+import { selectOpenFileKey, selectOpenFileLibraryKey } from "../figma_app/516028";
 import { i_ } from "../figma_app/646357";
 export let $$h14 = "\u2014";
 export function $$m16(e, t) {
@@ -170,7 +170,7 @@ export function $$N7(e, t, r, n, a) {
   };
 }
 createContext(null);
-let $$C13 = Mz([e => e.mirror.selectionProperties.stateGroupSelectionInfo, sS, XJ, im], $$N7);
+let $$C13 = Mz([e => e.mirror.selectionProperties.stateGroupSelectionInfo, selectOpenFileKey, selectOpenFileLibraryKey, isSelectedViewFullscreenCooper], $$N7);
 let $$w2 = [["yes", "no"], ["true", "false"], ["on", "off"]];
 let $$O3 = $$w2.reduce((e, t) => e.concat(t), []);
 export const A = $$f0;

@@ -3,7 +3,7 @@ import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/850075";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { E } from "../905/511388";
 let c = {
   communitySourceText: {
@@ -18,7 +18,7 @@ export function $$u0({
   attribution: t,
   showAuthor: s = !0
 }) {
-  let a = to();
+  let a = useIsSelectedViewFullscreenCooper();
   let u = lW(a);
   let m = e && u[e];
   return a && m ? jsxs("div", {

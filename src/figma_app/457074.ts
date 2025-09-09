@@ -9,7 +9,7 @@ import { UQ } from "../figma_app/864723";
 import { d4 } from "../figma_app/202626";
 import { D } from "../905/347702";
 import { I7 } from "../figma_app/630951";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Ai, jO } from "../figma_app/242339";
 export function $$g0(e) {
   let t = [e];
@@ -43,7 +43,7 @@ export function $$T2() {
   } = I7();
   let p = useAtomWithSubscription(UQ);
   let g = Em();
-  let f = q5()?.canEdit;
+  let f = selectCurrentFile()?.canEdit;
   useEffect(() => {
     if (g && f && r && !t) {
       let t = b();

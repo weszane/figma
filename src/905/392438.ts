@@ -6,7 +6,7 @@ import { A as _$$A } from "../vendor/90566";
 import { trackEventAnalytics } from "../905/449184";
 import { N0 } from "../figma_app/416935";
 import { H as _$$H } from "../905/620380";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { L as _$$L } from "../905/408237";
 import { S as _$$S } from "../figma_app/552746";
 import { j6 } from "../figma_app/831799";
@@ -80,7 +80,7 @@ export function $$E0({
   useContainerForWidth: Y,
   validateTokensAsEmail: q
 }) {
-  let $ = ZC(t.tokens.length);
+  let $ = useLatestRef(t.tokens.length);
   let [Z, X] = useState(null);
   let [Q, J] = useState(null);
   let [ee, et] = useState(!1);

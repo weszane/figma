@@ -5,7 +5,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "../vendor/523035";
 import { U } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
-import { U4 } from "../figma_app/473493";
+import { useCanAccessDevModeEntryPoint } from "../figma_app/473493";
 import { D } from "../905/882262";
 import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
@@ -13,7 +13,7 @@ import { Tj } from "../figma_app/582924";
 import { aV } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
-import { e6 } from "../figma_app/707808";
+import { SelectorType } from "../figma_app/707808";
 import { $A } from "../905/782918";
 import { gk } from "../figma_app/715641";
 import { _o } from "../figma_app/879363";
@@ -33,10 +33,10 @@ export function $$A1() {
   }(e.selectedView));
 }
 export function $$x14() {
-  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 && e.selectedView?.githubRepositorySelectorMode !== void 0 && e.selectedView?.githubRepositorySelectorMode !== e6.NONE);
+  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 && e.selectedView?.githubRepositorySelectorMode !== void 0 && e.selectedView?.githubRepositorySelectorMode !== SelectorType.NONE);
 }
 export function $$N11() {
-  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 ? e.selectedView?.githubRepositorySelectorMode ?? e6.NONE : e6.NONE);
+  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 ? e.selectedView?.githubRepositorySelectorMode ?? SelectorType.NONE : SelectorType.NONE);
 }
 export function $$C4(e) {
   return !!e && e?.view === "fullscreen" && e?.showOverview === !0;
@@ -86,7 +86,7 @@ export function $$D2() {
 export function $$k6() {
   let e = useStore();
   let t = U();
-  let r = !U4();
+  let r = !useCanAccessDevModeEntryPoint();
   let [, a] = useAtomValueAndSetter(_o);
   let o = useDispatch();
   let [l, c] = useAtomValueAndSetter(gk);

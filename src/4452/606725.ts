@@ -1,19 +1,19 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { r as _$$r } from "../905/398386";
-import { Ft } from "../figma_app/707808";
+import { EntityType } from "../figma_app/707808";
 import { NuxOnboardingOverlay } from "../4452/529989";
 import { C5 } from "../7021/95197";
 export function $$d0(e) {
   let t = (e => {
     switch (e) {
-      case Ft.PROJECT:
+      case EntityType.PROJECT:
         return getI18nString("file_browser.project");
-      case Ft.TEAM:
+      case EntityType.TEAM:
         return getI18nString("file_browser.team");
-      case Ft.WORKSPACE:
+      case EntityType.WORKSPACE:
         return getI18nString("file_browser.workspace");
-      case Ft.LICENSE_GROUP:
+      case EntityType.LICENSE_GROUP:
         return getI18nString("file_browser.billing_group");
       default:
         return getI18nString("file_browser.unavailable_view_resource");
@@ -21,13 +21,13 @@ export function $$d0(e) {
   })(e.resourceType);
   let a = (e => {
     switch (e) {
-      case Ft.PROJECT:
+      case EntityType.PROJECT:
         return getI18nString("file_browser.project_capitalized");
-      case Ft.TEAM:
+      case EntityType.TEAM:
         return getI18nString("file_browser.team_capitalized");
-      case Ft.WORKSPACE:
+      case EntityType.WORKSPACE:
         return getI18nString("file_browser.workspace_capitalized");
-      case Ft.LICENSE_GROUP:
+      case EntityType.LICENSE_GROUP:
         return getI18nString("file_browser.billing_group_capitalized");
       default:
         return getI18nString("file_browser.unavailable_view_resource_capitalized");

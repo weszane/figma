@@ -14,7 +14,7 @@ import { _ as _$$_ } from "../905/793009";
 import { Gi, tS, wv } from "../figma_app/622574";
 import { Ou, Fz, b4, WS } from "../figma_app/106207";
 import { Cu } from "../figma_app/314264";
-import { tS as _$$tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { a6, Ve, RD } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
 import { cS } from "../figma_app/45218";
@@ -35,7 +35,7 @@ import { tJ, G3, iq, AF, Pr, Cm } from "../figma_app/80782";
 import { O9 } from "../figma_app/522930";
 import { R as _$$R } from "../figma_app/313269";
 import { $J } from "../905/491152";
-import { G4 } from "../figma_app/707808";
+import { PreviewMode } from "../figma_app/707808";
 import { Z as _$$Z } from "../figma_app/684783";
 import { L as _$$L, I as _$$I } from "../1577/16430";
 import { selectCurrentUser } from "../905/372672";
@@ -64,7 +64,7 @@ function B({
   subcategories: d
 }) {
   let c = useDispatch();
-  let u = _$$tS();
+  let u = useCurrentFileKey();
   let p = Gi();
   let _ = _$$f("figjam_editor_onboarded");
   let h = _$$f(U);
@@ -144,7 +144,7 @@ G.displayName = "TemplatesPickerSidebarItem";
 function z(e) {
   let t = tS();
   let r = useSelector(e => e.hubFiles);
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let o = useMemo(() => $(e.templates), [e.templates]);
   let l = useRef(null);
   useEffect(() => {
@@ -358,7 +358,7 @@ function en(e) {
           disableFullscreen: !0,
           dispatch: t,
           fixedSize: !0,
-          fullscreenState: G4.DEFAULT,
+          fullscreenState: PreviewMode.DEFAULT,
           hubFile: a,
           profileIdToAdminResourceAs: null
         }, a.id)
@@ -406,7 +406,7 @@ function eo({
   onInsertTemplate: n,
   onPreviewHubFileTemplate: s
 }) {
-  let o = _$$tS();
+  let o = useCurrentFileKey();
   let l = useRef(null);
   let d = tS();
   let [c, u] = useState(!d);
@@ -693,7 +693,7 @@ function eg(e) {
   });
 }
 export let $$ef0 = registerModal(function (e) {
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   return jsx(fu, {
     name: "template_modal_shown",
     properties: {

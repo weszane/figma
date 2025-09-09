@@ -4,19 +4,19 @@ import { Fullscreen, DataLoadStatus } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { Yh } from "../figma_app/888478";
 import { J } from "../905/445197";
 import { dh, rE, zO, CQ, $P } from "../figma_app/186343";
 import { Fy } from "../figma_app/623300";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { W, d as _$$d } from "../figma_app/833988";
 import { l7, oZ } from "../figma_app/932601";
 export function $$_0(e) {
   let t = dh();
   let [i, _] = useAtomValueAndSetter(l7);
   let [x, y] = useAtomValueAndSetter(oZ);
-  let b = q5();
+  let b = selectCurrentFile();
   let C = useDispatch();
   let v = rE();
   let E = useSelector(e => e.versionHistory);
@@ -61,7 +61,7 @@ export function $$_0(e) {
         r += 1;
         n = e[r];
       }
-      if (n) J(() => $P(n.nodeId, t, E, C, Fy(e, n.nodeId) === DataLoadStatus.LOADED, T)); else {
+      if (n) J(() => $P(n.nodeId, t, E, C, Fy(e, n.nodeId) === DataLoadStatus.LOADED, T));else {
         let r = i - 1;
         let n = e[r];
         for (; n && n.isDivider;) {
@@ -76,7 +76,7 @@ export function $$_0(e) {
       newTitle: o,
       nodeType: "PAGE"
     });
-    n !== o && _$$d(o).length > 0 && (S(i), YQ({
+    n !== o && _$$d(o).length > 0 && (S(i), handleAtomEvent({
       id: "page_name_changed_with_rfd_indicator",
       properties: {
         pageId: i

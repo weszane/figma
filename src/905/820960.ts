@@ -15,7 +15,7 @@ import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { _J } from "../figma_app/314264";
 import { DQ, Pw } from "../figma_app/121751";
-import { u8, A5 } from "../figma_app/391338";
+import { useShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { FC } from "../figma_app/212807";
 import { FEntityType, FAccessLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
@@ -42,8 +42,8 @@ export function $$O2(e) {
   let U = e.team.member_count ?? 0;
   let B = _$$Y(e.team.id, FEntityType.TEAM, O);
   let V = useMemo(() => "loaded" === B.status && void 0 !== B.favorite, [B]);
-  let G = u8({
-    label: A5.TeamTile.isCurrentUserInTeam,
+  let G = useShadowRead({
+    label: adminPermissionConfig.TeamTile.isCurrentUserInTeam,
     oldValue: hasViewerRoleAccessOnTeam(e.team.id, D),
     newValue: e.teamPermissions?.isInTeam ?? !1,
     newValueReady: void 0 !== e.teamPermissions,
@@ -55,12 +55,12 @@ export function $$O2(e) {
   let z = canMemberOrg(e.team.org_id, D) && e.team.org_access === FAccessLevelType.PUBLIC;
   let H = canManageNonSecretOrgTeam(e.team, D, D.user?.id);
   let W = e.canUserViewTeam ?? (G || z || H);
-  let K = u8({
+  let K = useShadowRead({
     oldValue: W,
     newValue: e.teamPermissions?.canView ?? !1,
     newValueReady: void 0 !== e.teamPermissions,
     enableFullRead: DQ(Pw.GROUP_7),
-    label: A5.TeamTile.canUserViewTeam,
+    label: adminPermissionConfig.TeamTile.canUserViewTeam,
     contextArgs: {
       teamId: e.team.id,
       canUserViewTeam: e.canUserViewTeam,

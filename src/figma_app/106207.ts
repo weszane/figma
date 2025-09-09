@@ -21,12 +21,12 @@ import { T as _$$T, _ as _$$_ } from "../905/793009";
 import { gY } from "../figma_app/973927";
 import { n as _$$n } from "../905/815475";
 import { sf } from "../figma_app/12535";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { to } from "../905/612685";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { n as _$$n2 } from "../905/79930";
 import { vt, $A } from "../905/862883";
 import { q } from "../figma_app/446378";
@@ -187,7 +187,7 @@ function V(e, t) {
 }
 export function $$H4() {
   let e = useDispatch();
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = useSelector(e => e.fileVersion);
   let n = useSelector(e => e.loadingState);
   return {
@@ -341,7 +341,7 @@ export function $$q7(e, t, r, i = 10) {
       });
     }, []);
   }();
-  let h = X$("useTeamTemplatesSearch_DEPRECATED").unwrapOr(null);
+  let h = useCurrentPublicPlan("useTeamTemplatesSearch_DEPRECATED").unwrapOr(null);
   let m = h?.key.type === FOrganizationLevelType.ORG;
   let g = m ? h.key.parentId : null;
   useEffect(() => {

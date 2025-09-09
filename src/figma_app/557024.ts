@@ -9,7 +9,7 @@ import { vo, Y9, hE, nB, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { A as _$$A } from "../905/920142";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -17,9 +17,9 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { l as _$$l } from "../905/618243";
 import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { Ns, ci } from "../905/760074";
+import { isDefaultFileAlt, isTrashed } from "../905/760074";
 import { $n } from "../905/930279";
-import { sS, tB } from "../figma_app/516028";
+import { selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { RepoFiles } from "../figma_app/43951";
 import { Ib } from "../905/129884";
@@ -58,7 +58,7 @@ function k(e) {
   };
 }
 export function $$M0(e) {
-  let t = Rs(RepoFiles, {
+  let t = useSubscription(RepoFiles, {
     repoId: e
   }, {
     enabled: null !== e
@@ -68,7 +68,7 @@ export function $$M0(e) {
     let {
       repo
     } = t.data;
-    return (t.data.repo?.files || []).filter(e => repo && !Ns(e, repo)).map(e => ({
+    return (t.data.repo?.files || []).filter(e => repo && !isDefaultFileAlt(e, repo)).map(e => ({
       ...e,
       name: e._name || getI18nString("fullscreen.filename_view.title_placeholder")
     }));
@@ -86,8 +86,8 @@ export function $$M0(e) {
     return e;
   }, [a]);
   let o = useMemo(() => s.filter(e => e.roleOnObjectForUser?.isOwnerOfResource === !0), [s]);
-  let l = useMemo(() => s.filter(e => !ci(e)), [s]);
-  let d = useMemo(() => s.filter(e => ci(e)), [s]);
+  let l = useMemo(() => s.filter(e => !isTrashed(e)), [s]);
+  let d = useMemo(() => s.filter(e => isTrashed(e)), [s]);
   return useMemo(() => "loaded" !== t.status ? t : {
     status: "loaded",
     errors: null,
@@ -115,8 +115,8 @@ function F() {
     yours: !0,
     archived: !0
   });
-  let L = useSelector(sS);
-  let k = useSelector(tB);
+  let L = useSelector(selectOpenFileKey);
+  let k = useSelector(selectOpenFile);
   let F = selectCurrentUser();
   let j = $n();
   let U = $$M0(k?.fileRepoId || "");
@@ -148,7 +148,7 @@ function F() {
   }, [w, U]);
   let z = useMemo(() => selectedBranches.length < 1, [selectedBranches]);
   let W = "enabled" === j.createBranch.status;
-  let K = useMemo(() => selectedBranches.filter(e => !!B && !Ns(e, B)).map(e => {
+  let K = useMemo(() => selectedBranches.filter(e => !!B && !isDefaultFileAlt(e, B)).map(e => {
     let t = G[e.key];
     return jsx(_$$v, {
       branch: e,

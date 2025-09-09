@@ -5,7 +5,7 @@ import { $n } from '../905/521428';
 import { s as _$$s } from '../cssbuilder/589278';
 import { B7, My } from '../figma_app/143628';
 import { Cu } from '../figma_app/314264';
-import { q5 } from '../figma_app/516028';
+import { selectCurrentFile } from '../figma_app/516028';
 import { fx, PF } from '../figma_app/657972';
 import { fu } from '../figma_app/831799';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ export function $$h1() {
 }
 export function $$g0() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = useSelector(e => e.fileVersion);
   return t?.key ? jsx(fu, {
     name: 'Slides conversion visual bell entrypoint',

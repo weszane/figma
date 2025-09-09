@@ -38,7 +38,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A2 } from "../vendor/850789";
 import { trackEventAnalytics } from "../905/449184";
 import { UE, J1 } from "../figma_app/191804";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { u1, XE } from "../figma_app/91703";
 import { sw, rk } from "../figma_app/914957";
 import { Yr } from "../figma_app/8833";
@@ -320,7 +320,7 @@ function ey({
     checkFontsAreLoading
   } = d;
   let [C, T] = useState(!1);
-  let k = ZC(C);
+  let k = useLatestRef(C);
   Fk((e, t) => {
     let i = e.get(t);
     if (!i) return !1;
@@ -483,7 +483,7 @@ function ex({
   let i = lK(e);
   let s = UZ(e);
   let [o, c] = useAtomValueAndSetter(E_);
-  let u = ZC(o);
+  let u = useLatestRef(o);
   let m = function (e, t) {
     let i = _$$bL2(e?.varId ?? "", t);
     return i && i.type === VariableDataType.COLOR ? i : null;

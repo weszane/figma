@@ -4,19 +4,19 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Y9, hE, nB, wi, jk, r1, vo } from "../figma_app/272243";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { j6, fu } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { N as _$$N } from "../905/809096";
 import { useDispatch, useSelector } from "react-redux";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { F5, Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e2 } from "../905/393279";
 import { _u, rG } from "../1881/125927";
@@ -43,7 +43,7 @@ import { Cu } from "../figma_app/314264";
 import { Ye } from "../905/332483";
 import { AG, _w } from "../figma_app/217457";
 import { t as _$$t2 } from "../905/150656";
-import { oY } from "../905/485103";
+import { useWebLoggerTimerEffect } from "../905/485103";
 import { T as _$$T } from "../figma_app/257703";
 import { VisualBellActions } from "../905/302958";
 import { LN, Kq } from "../905/941249";
@@ -51,12 +51,12 @@ import { u as _$$u } from "../1e926454/858319";
 import { S as _$$S } from "../1e926454/283343";
 import { dr, eb as _$$eb, oU } from "../4452/405965";
 import { selectUser } from "../905/372672";
-import { C1 } from "../figma_app/12796";
-import { e0 } from "../figma_app/428858";
+import { getPermissionLevelName } from "../figma_app/12796";
+import { isPaidPlan } from "../figma_app/428858";
 import { rq } from "../905/351260";
 import { bp, Wj } from "../905/913057";
 import { TG } from "../1881/866163";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { o6, gy } from "../905/986349";
 import { r as _$$r, X as _$$X } from "../905/308709";
 import { i as _$$i } from "../1e926454/162932";
@@ -78,7 +78,7 @@ function T({
   });
 }
 function W(e) {
-  let [n] = mI(function (e) {
+  let [n] = handleSuspenseRetainRelease(function (e) {
     let n = _$$k();
     let t = _$$h2({
       planType: e.type,
@@ -88,7 +88,7 @@ function W(e) {
     let a = "loaded" === i.status && !i.data || !!t.data;
     let r = un({
       planKey: e.key,
-      currentSeatType: Gu.VIEW,
+      currentSeatType: ViewAccessTypeEnum.VIEW,
       currentSeatBillingInterval: e.type === FOrganizationLevelType.ORG ? IX.YEAR : IX.MONTH,
       enabled: n && !a
     });
@@ -154,7 +154,7 @@ function Q({
   });
   let a = W(e);
   return jsx(mc, {
-    children: Ye.sort(AG).map(r => r === Gu.VIEW ? jsx(U, {
+    children: Ye.sort(AG).map(r => r === ViewAccessTypeEnum.VIEW ? jsx(U, {
       planTier: e.tier,
       seatType: r
     }, r) : jsx(U, {
@@ -269,7 +269,7 @@ function en({
     reportErrorsToTeam: _$$e.SCALE
   });
   let c = W(e);
-  let p = n !== Gu.VIEW ? c?.[n] : null;
+  let p = n !== ViewAccessTypeEnum.VIEW ? c?.[n] : null;
   let u = useMemo(() => p?.currency ? new vr(p?.currency) : null, [p?.currency]);
   let m = useMemo(() => ({
     seatType: n,
@@ -278,7 +278,7 @@ function en({
     priceAmount: p?.amount,
     priceCurrency: p?.currency
   }), [n, s, o, p]);
-  if (t || n === Gu.VIEW || d) return null;
+  if (t || n === ViewAccessTypeEnum.VIEW || d) return null;
   if (!s || o) return jsx(et, {
     trackingProperties: m,
     children: renderI18nText("plan_invite_modal.cost_messaging.description.without_prorated_costs", {
@@ -355,7 +355,7 @@ function er({
 }) {
   let s = useDispatch();
   let l = useSelector(e => e.autocomplete);
-  let [d, c] = useState(Gu.VIEW);
+  let [d, c] = useState(ViewAccessTypeEnum.VIEW);
   let {
     title,
     onValidateToken,
@@ -432,11 +432,11 @@ function eb({
   let u = useSelector(e => e.autocomplete);
   let m = useSelector(e => e.contacts);
   let h = useSelector(e => e.dropdownShown);
-  let [b, S] = useState(Gu.VIEW);
+  let [b, S] = useState(ViewAccessTypeEnum.VIEW);
   let I = e.key.parentId;
   let L = dr(I);
   let E = _$$eb(I);
-  oY("loaded" === L.status && "loaded" === E.status, e => {
+  useWebLoggerTimerEffect("loaded" === L.status && "loaded" === E.status, e => {
     let n = E.data?.length ?? 0;
     let t = "unknown";
     t = n <= 100 ? "small" : n <= 300 ? "medium" : "large";
@@ -462,9 +462,9 @@ function eb({
   });
   let R = useMemo(() => {
     let e = [];
-    M?.canRead && e.push(e6.VIEWER);
-    M?.canEdit && e.push(e6.EDITOR);
-    M?.canAdmin && e.push(e6.ADMIN);
+    M?.canRead && e.push(AccessLevelEnum.VIEWER);
+    M?.canEdit && e.push(AccessLevelEnum.EDITOR);
+    M?.canAdmin && e.push(AccessLevelEnum.ADMIN);
     return e;
   }, [M]);
   let [B, O, F] = _$$t2.useTabs({
@@ -507,7 +507,7 @@ function eb({
       level: inviteLevel,
       emailsToExclude: bp(m.usersByEmail, p, N ?? []),
       source: "team_share_modal",
-      billableProductKey: b === Gu.VIEW ? null : b,
+      billableProductKey: b === ViewAccessTypeEnum.VIEW ? null : b,
       teamId: I,
       onSuccess: e => {
         s();
@@ -530,7 +530,7 @@ function eb({
     }));
   }, [l, q, I]);
   let X = useId();
-  if (mI(L), !M) {
+  if (handleSuspenseRetainRelease(L), !M) {
     let e = Error("Team permissions not loaded");
     reportError(_$$e.SCALE, e);
     return e;
@@ -571,7 +571,7 @@ function eb({
                 inviteLevel,
                 source: "team-permissions-modal"
               }),
-              getSelectText: C1,
+              getSelectText: getPermissionLevelName,
               getSelectTextDescription: eS,
               hideDropdownOnEmpty: !0,
               id: X,
@@ -586,11 +586,11 @@ function eb({
               validateToken,
               validateTokensAsEmail: !0
             })
-          }), e0(e.tier) && M.canAdmin && jsx(ee, {
+          }), isPaidPlan(e.tier) && M.canAdmin && jsx(ee, {
             seatType: b,
             onChange: S,
             plan: e,
-            helpText: b === Gu.VIEW ? null : J,
+            helpText: b === ViewAccessTypeEnum.VIEW ? null : J,
             hideCostMessaging: $.length > 0 && z.length === $.length
           })]
         })
@@ -632,11 +632,11 @@ function eb({
 }
 function eS(e) {
   switch (e) {
-    case e6.ADMIN:
+    case AccessLevelEnum.ADMIN:
       return getI18nString("plan_invite_modal.team.permissions_description.admin");
-    case e6.EDITOR:
+    case AccessLevelEnum.EDITOR:
       return getI18nString("plan_invite_modal.team.permissions_description.can_edit");
-    case e6.VIEWER:
+    case AccessLevelEnum.VIEWER:
       return getI18nString("plan_invite_modal.team.permissions_description.can_view");
     default:
       return null;
@@ -644,9 +644,9 @@ function eS(e) {
 }
 function eT(e) {
   let n = hS(e);
-  let t = S2();
+  let t = useTeamPlanFeatures();
   let p = t.data;
-  mI(t);
+  handleSuspenseRetainRelease(t);
   useEffect(() => {
     "loaded" === t.status && p?.type !== e.planType && reportError(_$$e.SCALE, Error("PlanInviteModal received planType incongruent with current plan context"), {
       extra: {

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { bUL } from "../figma_app/822011";
 import { getFeatureFlags } from "../905/601108";
-import { ZC } from "../figma_app/39751";
-import { Rs } from "../figma_app/288654";
+import { useLatestRef } from "../figma_app/922077";
+import { useSubscription } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
 import { serializeQuery } from "../905/634134";
 import { K } from "../figma_app/748328";
@@ -12,7 +12,7 @@ import { OrgTeamsInAdminView, OrgTeamView } from "../figma_app/43951";
 import { Ef } from "../905/81982";
 import { dy } from "../figma_app/967319";
 import { ig } from "../figma_app/713624";
-import { Fb } from "../figma_app/630077";
+import { teamVisibilityEnum } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
 import { S } from "../905/335273";
 import { R } from "../905/192963";
@@ -108,10 +108,10 @@ export function $$S1({
   isUnassignedTeamsModal: d = !1
 }) {
   let [c, u] = useState({});
-  let p = ZC(e);
-  let _ = ZC(t);
-  let h = ZC(r);
-  let m = ZC(o);
+  let p = useLatestRef(e);
+  let _ = useLatestRef(t);
+  let h = useLatestRef(r);
+  let m = useLatestRef(o);
   let g = p !== e || t?.orgAccessFilter !== _?.orgAccessFilter || t?.discoverabilityFilter !== _?.discoverabilityFilter || t?.orphanedTeamFilter !== _?.orphanedTeamFilter || t?.teamMembershipFilter !== _?.teamMembershipFilter || t?.workspaceFilter !== _?.workspaceFilter || r?.columnName !== h?.columnName || r?.isReversed !== h?.isReversed || !m && o;
   let f = !o;
   useEffect(() => {
@@ -167,7 +167,7 @@ function v({
 }) {
   let h = !d && getFeatureFlags().org_teams_in_admin_lg_view && !c;
   let m = dq();
-  let g = Rs(h ? OrgTeamsInAdminView : OrgTeamView, {
+  let g = useSubscription(h ? OrgTeamsInAdminView : OrgTeamView, {
     orgId: p ?? m,
     firstPageSize: i || 25,
     queryParams: $$C2(e, t, r, d),
@@ -183,7 +183,7 @@ function v({
   };
 }
 function A(e, t) {
-  return !(t?.orphanedTeamFilter && e.owner || t?.teamMembershipFilter && t.teamMembershipFilter !== e.userTeamMembership || t?.orgAccessFilter && t.orgAccessFilter !== e.org_access || t?.discoverabilityFilter && (t.discoverabilityFilter === Fb.ORG_BROWSABLE && e.org_access !== bUL.PRIVATE || t.discoverabilityFilter === Fb.HIDDEN && e.org_access !== bUL.SECRET) || t?.workspaceFilter && (t.workspaceFilter === UNASSIGNED && null !== e.workspace_id || t.workspaceFilter !== UNASSIGNED && t.workspaceFilter !== e.workspace_id));
+  return !(t?.orphanedTeamFilter && e.owner || t?.teamMembershipFilter && t.teamMembershipFilter !== e.userTeamMembership || t?.orgAccessFilter && t.orgAccessFilter !== e.org_access || t?.discoverabilityFilter && (t.discoverabilityFilter === teamVisibilityEnum.ORG_BROWSABLE && e.org_access !== bUL.PRIVATE || t.discoverabilityFilter === teamVisibilityEnum.HIDDEN && e.org_access !== bUL.SECRET) || t?.workspaceFilter && (t.workspaceFilter === UNASSIGNED && null !== e.workspace_id || t.workspaceFilter !== UNASSIGNED && t.workspaceFilter !== e.workspace_id));
 }
 function x(e, t, r) {
   let n = t[e.id] ?? 0;

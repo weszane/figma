@@ -11,7 +11,7 @@ import { d as _$$d } from "../9410/441456";
 import { showModalHandler } from "../905/156213";
 import { isInvalidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { Fk } from "../figma_app/167249";
 import { ku, jo, EH } from "../figma_app/241341";
@@ -66,7 +66,7 @@ export function $$E1(e, t) {
   let i = selectCurrentUser()?.id;
   let d = uQ();
   let c = Fk((e, t) => e?.get(t ?? "")?.name.trim(), d);
-  let m = tS();
+  let m = useCurrentFileKey();
   let b = useDispatch();
   let C = useAtomWithSubscription(_$$d);
   let v = eY();

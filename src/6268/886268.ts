@@ -10,7 +10,7 @@ import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Vc } from "../figma_app/211694";
 import { L as _$$L2 } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -26,7 +26,7 @@ import { Ib } from "../905/129884";
 import { Bt, xV, kZ } from "../figma_app/88239";
 import { bh } from "../1250/224366";
 import { LibraryKeyToFileLink } from "../figma_app/43951";
-import { e6 as _$$e } from "../figma_app/707808";
+import { SelectorType } from "../figma_app/707808";
 import { k1, qd, Mj } from "../1250/428971";
 import { d as _$$d } from "../905/976845";
 import { E as _$$E2 } from "../905/632989";
@@ -36,7 +36,7 @@ import { g as _$$g } from "../905/757007";
 import { A as _$$A2 } from "../905/251970";
 import { $P } from "../vendor/218029";
 import { A as _$$A3 } from "../vendor/850789";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { R as _$$R } from "../905/621802";
 import { f as _$$f } from "../905/54715";
 import { createPortal } from "../vendor/944059";
@@ -80,7 +80,7 @@ import { showModalHandler } from "../905/156213";
 import { DP } from "../905/640017";
 import { trackEventAnalytics } from "../905/449184";
 import { VisualBellActions } from "../905/302958";
-import { D6 } from "../figma_app/465071";
+import { useCurrentPlanUser } from "../figma_app/465071";
 import { codeSuggestionAPIHandler } from "../905/70843";
 import { WG } from "../1250/218868";
 import { gP } from "../6268/693700";
@@ -422,7 +422,7 @@ let eo = ({
 }) => {
   let t = (o?.length ?? 0) > 0;
   let c = o[0];
-  let [i] = IT(Tp({
+  let [i] = setupResourceAtomHandler(Tp({
     libraryKey: n,
     repository: c?.id ?? ""
   }), {
@@ -1196,7 +1196,7 @@ function no({
 let nm = "confirm_deletion_modal--bodyText--OTH-f";
 let np = registerModal(function (e) {
   let n = hS(e);
-  let o = D6("ConfirmDeletionModal");
+  let o = useCurrentPlanUser("ConfirmDeletionModal");
   let c = useDispatch();
   let r = "loaded" === o.status;
   let [a, l] = useState(!1);
@@ -1465,11 +1465,11 @@ function nN({
             status: _.status
           }), jsx(nw, {
             onChangeRepo: () => {
-              d(_$$e.REPO_SELECTOR);
+              d(SelectorType.REPO_SELECTOR);
               o(!1);
             },
             onChangeGithubDirectories: () => {
-              d(_$$e.DIRECTORY_SELECTOR);
+              d(SelectorType.DIRECTORY_SELECTOR);
               o(!1);
               r("component_browser.clicked_change_directories", {
                 location: "options_menu"
@@ -1849,7 +1849,7 @@ export function $$nE0(e) {
                 libraryKey: o,
                 notConnectedComponents,
                 onChooseDirectories: () => {
-                  h(_$$e.DIRECTORY_SELECTOR);
+                  h(SelectorType.DIRECTORY_SELECTOR);
                 },
                 onViewSuggestions: () => setDropdownFilter("suggestionsAvailable"),
                 repositoryDirectories: directories,
@@ -1884,12 +1884,12 @@ export function $$nE0(e) {
     }), a && o && jsx(_$$A, {
       libraryKey: o,
       onClose: () => {
-        h(_$$e.NONE);
+        h(SelectorType.NONE);
       },
       onBack: () => {
-        h(_$$e.NONE);
+        h(SelectorType.NONE);
       },
-      isDirectorySelection: l === _$$e.DIRECTORY_SELECTOR
+      isDirectorySelection: l === SelectorType.DIRECTORY_SELECTOR
     })]
   });
 }
@@ -1924,7 +1924,7 @@ function nM({
   });
 }
 export function $$nD1(e) {
-  let n = Rs(LibraryKeyToFileLink({
+  let n = useSubscription(LibraryKeyToFileLink({
     libraryKey: e ?? ""
   }), {
     enabled: !!e

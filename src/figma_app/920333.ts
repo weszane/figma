@@ -13,7 +13,7 @@ import { cr } from "../905/879323";
 import { _ as _$$_ } from "../905/793009";
 import { ZT, cW } from "../figma_app/844435";
 import { qp } from "../905/977779";
-import { q5, tS } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
@@ -46,7 +46,7 @@ export function $$D7(e, t) {
 }
 export function $$k4() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     fileVersion,
     loadingState,
@@ -113,7 +113,7 @@ export function $$U6({
   searchQuery: a,
   children: s
 }) {
-  let l = tS();
+  let l = useCurrentFileKey();
   let [d, u, p] = _$$t.useTabs({
     Recents: !1,
     Saved: !1,

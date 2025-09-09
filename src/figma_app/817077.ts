@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Point } from "../905/736624";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
@@ -12,7 +12,7 @@ export function $$d2(e) {
 }
 export let $$c1 = 5;
 export function $$u0(e, t, r) {
-  let l = ZC(e?.isDraggingOverCanvas);
+  let l = useLatestRef(e?.isDraggingOverCanvas);
   let d = Z();
   let [c, u] = useState(null);
   useEffect(() => {

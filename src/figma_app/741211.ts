@@ -5,10 +5,10 @@ import s from "../vendor/128080";
 import { trackEventAnalytics } from "../905/449184";
 import { xj, ok } from "../figma_app/851625";
 import { logger } from "../905/651849";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { J } from "../905/931050";
 import { subscribeAndAwaitData } from "../905/553831";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Xm, gB, e1, tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
 import { serializeQuery } from "../905/634134";
@@ -22,7 +22,7 @@ import { OrgAdminUserView, OrgAdminUserMinimalFieldsView } from "../figma_app/43
 import { nG } from "../figma_app/585126";
 import { n as _$$n } from "../905/902560";
 import { xw } from "../figma_app/951233";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { J0 } from "../figma_app/967319";
 import { Eh, Wd } from "../figma_app/617654";
 import { t as _$$t2 } from "../figma_app/157238";
@@ -198,11 +198,11 @@ export function $$B6(e) {
   let r = useSelector(({
     currentUserOrgId: e
   }) => e);
-  let s = T5("useGetOrgUsers").unwrapOr(null);
+  let s = useCurrentPrivilegedPlan("useGetOrgUsers").unwrapOr(null);
   let o = null;
   s && (o = s.campfireModelEnabledAt);
   let l = useMemo(() => z(r, e), [r, e]);
-  let d = Rs(OrgAdminUserView, l);
+  let d = useSubscription(OrgAdminUserView, l);
   let [u, p] = useState(null);
   let m = useCallback(() => {
     subscribeAndAwaitData(OrgAdminUserView, {
@@ -264,9 +264,9 @@ export function $$G0({
     currentUserOrgId: e
   }) => e);
   let [s, l] = useState({});
-  let d = ZC(e);
-  let c = ZC(t);
-  let p = ZC(r);
+  let d = useLatestRef(e);
+  let c = useLatestRef(t);
+  let p = useLatestRef(r);
   let _ = d !== e || !o()(c, t) || !p && r;
   let f = {
     ...J0,
@@ -280,7 +280,7 @@ export function $$G0({
     searchQuery: e,
     filter: t
   }), [t, a, e]);
-  let b = Rs(OrgAdminUserMinimalFieldsView, y);
+  let b = useSubscription(OrgAdminUserMinimalFieldsView, y);
   let T = _$$r.LOADING;
   if ("loaded" === b.status && b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? T = _$$r.SUCCESS : ("errors" === b.status || b.data?.orgAdminUsersMinimalFields?.status === tT.Error) && (T = _$$r.FAILURE), useEffect(() => {
     if (T !== _$$r.SUCCESS) return;

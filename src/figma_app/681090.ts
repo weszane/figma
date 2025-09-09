@@ -1,4 +1,4 @@
-import { OL } from "../figma_app/421473";
+import { FOrganizationLevelType } from "../figma_app/421473";
 import { Ju, IX } from "../905/712921";
 class a extends Error {}
 export function $$s1(e, t) {
@@ -39,8 +39,8 @@ export function $$s1(e, t) {
   throw new a(`No product price available for: ${JSON.stringify(t)})`);
 }
 export let $$o0 = {
-  [OL.TEAM]: [IX.MONTH, IX.YEAR],
-  [OL.ORG]: [IX.YEAR]
+  [FOrganizationLevelType.TEAM]: [IX.MONTH, IX.YEAR],
+  [FOrganizationLevelType.ORG]: [IX.YEAR]
 };
 export const c = $$o0;
 export const y = $$s1;

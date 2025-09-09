@@ -3,7 +3,7 @@ import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
 import { ks, nR, vd, Us } from "../figma_app/637027";
@@ -25,7 +25,7 @@ import { AccessibleFoldersV2 } from "../figma_app/43951";
 import { kA } from "../figma_app/336853";
 import { XX, oc } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { k as _$$k } from "../905/93362";
 import { registerModal } from "../905/102752";
 import { fZ } from "../figma_app/805373";
@@ -190,7 +190,7 @@ export let $$en0 = registerModal(function (e) {
   let ed = useRef(null);
   let ec = useRef(null);
   let eu = useSelector(e => getPermissionsStateMemoized(e));
-  let ep = Rs(AccessibleFoldersV2, {
+  let ep = useSubscription(AccessibleFoldersV2, {
     orgId: null
   });
   let em = useDispatch();
@@ -306,7 +306,7 @@ export let $$en0 = registerModal(function (e) {
       isFullSeatForFigjam: e?.whiteboardPaidStatus === FPlanRestrictionType.FULL
     };
   };
-  let eS = (e, t) => !!t && t.level >= e6.ADMIN;
+  let eS = (e, t) => !!t && t.level >= AccessLevelEnum.ADMIN;
   let ew = (e, t) => {
     if (!t) return !1;
     let {

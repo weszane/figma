@@ -7,7 +7,7 @@ import { bL, RT } from "../905/867927";
 import { q } from "../905/932270";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { _y, vV } from "../figma_app/755395";
 import { a9 } from "../905/191741";
 import { Em, ie } from "../figma_app/120227";
@@ -36,7 +36,7 @@ export function $$N0({
   hidePreferencesForList: o
 }) {
   let l = useDispatch();
-  let d = _I();
+  let d = useCanAccessFullDevMode();
   let {
     inspectionMode,
     setInspectionMode,
@@ -186,7 +186,7 @@ function L({
   selectedTabKey: r
 }) {
   let i = e.reduce((e, t) => (e[t.key] = !0, e), {});
-  let [a, , s] = _$$t.useManagedTabs(i, r, t, {
+  let [a,, s] = _$$t.useManagedTabs(i, r, t, {
     recordingKey: "devHandoffPanelTabs"
   });
   return jsx("div", {

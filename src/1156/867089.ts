@@ -6,7 +6,7 @@ import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { N6 } from "../figma_app/275370";
 import { nc } from "../figma_app/570630";
@@ -60,7 +60,7 @@ export function $$b2(e) {
 }
 export function $$j1() {
   let [e, t] = useAtomValueAndSetter(g);
-  let n = tS();
+  let n = useCurrentFileKey();
   let l = useCallback(e => {
     if (e.raw_text_styles) {
       let t = JSON.parse(e.raw_text_styles || "[]");

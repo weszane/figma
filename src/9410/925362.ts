@@ -6,11 +6,11 @@ import { debugState } from "../905/407919";
 import { F } from "../905/680873";
 import { d as _$$d } from "../905/86829";
 import { getI18nString } from "../905/303541";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { ds } from "../figma_app/314264";
 import { dh } from "../figma_app/186343";
 import { T as _$$T } from "../905/858738";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { QU } from "../1250/559338";
 import { n0, _4 } from "../figma_app/32128";
 import { uF } from "../9410/398228";
@@ -27,7 +27,7 @@ export function $$j0() {
   let t = F(e);
   let i = n0();
   let j = _$$K();
-  let I = tS();
+  let I = useCurrentFileKey();
   let {
     height,
     setHeight,
@@ -61,7 +61,7 @@ export function $$j0() {
     showAll: t,
     setShowAll: i
   }) {
-    let n = _I();
+    let n = useCanAccessFullDevMode();
     let a = dh();
     if (!n) return {
       pagesToDisplay: e

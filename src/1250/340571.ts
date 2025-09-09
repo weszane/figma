@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { H } from "../figma_app/47866";
 import { bg, sN } from "../1250/282084";
 import { jI } from "../1250/807901";
@@ -24,7 +24,7 @@ export function $$u0() {
   let [{
     data: n,
     status: i
-  }] = IT(bg({
+  }] = setupResourceAtomHandler(bg({
     planType: e?.type,
     planParentId: e?.parentId
   }), {
@@ -44,7 +44,7 @@ export function $$u0() {
 }
 export function $$m1(e) {
   let t = $$u0();
-  let [n] = IT(sN(e), {
+  let [n] = setupResourceAtomHandler(sN(e), {
     enabled: "connected" === t
   });
   return "connected" === t && n.data ? {

@@ -4,7 +4,7 @@ import { N } from "../905/972754";
 import { ku, Os, qA, fn } from "../figma_app/255679";
 import { useDispatch, useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { uo, yH } from "../905/879323";
 import { n1 } from "../figma_app/657017";
 import { SS, Qp } from "../figma_app/349248";
@@ -26,7 +26,7 @@ export function $$f0() {
       stateGroups
     } = useSelector(e => e.library.publishedByLibraryKey);
     let a = useAtomWithSubscription(g);
-    let s = ZC(a);
+    let s = useLatestRef(a);
     let h = n1();
     useEffect(() => {
       if (h && s !== a && a.data) for (let n of a.data) {

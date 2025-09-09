@@ -1,7 +1,7 @@
 import { isEmptyObject } from "../figma_app/493477";
 import { getFeatureFlags } from "../905/601108";
 import { serializeQuery } from "../905/634134";
-import { sy } from "../figma_app/930338";
+import { encodeUri } from "../figma_app/930338";
 import { FFileType } from "../figma_app/191312";
 import { EO, Ml } from "../905/691205";
 export function $$d1(e) {
@@ -91,7 +91,7 @@ export function $$h0(e) {
   getFeatureFlags().dakota && e.cmsItemId && (i["cms-item-id"] = e.cmsItemId);
   e.isFigmakeFullscreenPreview && (i.fullscreen = 1);
   let p = isEmptyObject(i) ? "" : `?${serializeQuery(i)}`;
-  let m = sy(e.file.name || "");
+  let m = encodeUri(e.file.name || "");
   return `${location.origin}/${c}/${e.file.key}${m.length > 0 ? `/${m}` : ""}${p}${u}`;
 }
 export const Kw = $$h0;

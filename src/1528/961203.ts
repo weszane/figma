@@ -21,7 +21,7 @@ import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { z7, Uo } from "../figma_app/334505";
 import { DP } from "../905/640017";
 import { ic } from "../figma_app/688398";
@@ -686,7 +686,7 @@ export function $$ed1({
 }) {
   let r = ic(e);
   let i = z7();
-  let s = to();
+  let s = useIsSelectedViewFullscreenCooper();
   let o = Uo(e) && s && getFeatureFlags().buzz_video_export;
   return jsxs(Fragment, {
     children: [1 === l && jsx("div", {

@@ -1,7 +1,7 @@
 import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { wF, Xe, Sm, j6 } from "../905/859698";
 import { z } from "../905/239603";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { FComponentType } from "../figma_app/191312";
 import { U7, Qp, uW, SS, KC, GA, cE } from "../figma_app/349248";
 import { PW as _$$PW } from "../905/497152";
@@ -28,11 +28,11 @@ export function $$m1(e, t) {
     subscriptionStatus: "LIBRARY",
     mainThumbnailInfo: {
       thumbnailUrl: EU(e, i, a),
-      height: Number.parseInt(oA(t.mainNodeHeight) ?? "0"),
-      width: Number.parseInt(oA(t.mainNodeWidth) ?? "0")
+      height: Number.parseInt(getResourceDataOrFallback(t.mainNodeHeight) ?? "0"),
+      width: Number.parseInt(getResourceDataOrFallback(t.mainNodeWidth) ?? "0")
     },
     canvasUrl: IV(e, i, a),
-    containingFrame: U7(oA(t.containingFrame) ?? null) ?? null,
+    containingFrame: U7(getResourceDataOrFallback(t.containingFrame) ?? null) ?? null,
     updatedAt: t.updatedAt,
     fullPage: dl(t.name)
   };
@@ -58,12 +58,12 @@ export function $$g0(e, t) {
     subscriptionStatus: "LIBRARY",
     mainThumbnailInfo: {
       thumbnailUrl: EU(e, i, a),
-      height: Number.parseInt(oA(t.mainNodeHeight) ?? "0"),
-      width: Number.parseInt(oA(t.mainNodeWidth) ?? "0")
+      height: Number.parseInt(getResourceDataOrFallback(t.mainNodeHeight) ?? "0"),
+      width: Number.parseInt(getResourceDataOrFallback(t.mainNodeWidth) ?? "0")
     },
     canvasUrl: IV(e, i, a),
-    containingFrame: U7(oA(t.containingFrame) ?? null) ?? null,
-    updatedAt: oA(t.updatedAt) ?? new Date(),
+    containingFrame: U7(getResourceDataOrFallback(t.containingFrame) ?? null) ?? null,
+    updatedAt: getResourceDataOrFallback(t.updatedAt) ?? new Date(),
     codePresetMetadata: t.codePresetMetadata ?? null
   };
 }

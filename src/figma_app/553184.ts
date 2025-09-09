@@ -1,4 +1,4 @@
-import { Rh } from "../905/485103";
+import { sendMetric } from "../905/485103";
 import { x } from "../905/707384";
 let $$a1 = ["memory.fullscreen.", "performance.fullscreen."];
 let s = !0;
@@ -18,16 +18,16 @@ window.addEventListener("error", e => {
   } = e;
   let i = /abort/i.test(message);
   let a = /\/compiled_/.test(filename);
-  Rh("unhandled_error", {
+  sendMetric("unhandled_error", {
     abort: i,
     fullscreen: a
   });
 });
 let $$l8 = o(30, () => {
-  Rh("context_lost");
+  sendMetric("context_lost");
 });
 let $$d10 = o(30, () => {
-  Rh("context_restored");
+  sendMetric("context_restored");
 });
 export function $$c11(e) {
   window.figmaPerfTesting && window.postMessage({
@@ -36,25 +36,25 @@ export function $$c11(e) {
   }, "*");
 }
 export function $$u9() {
-  Rh("dirty_after_load");
+  sendMetric("dirty_after_load");
 }
 export function $$p0() {
-  Rh("consecutive_flushes");
+  sendMetric("consecutive_flushes");
 }
 export function $$_6() {
-  Rh("consecutive_image_change_skips");
+  sendMetric("consecutive_image_change_skips");
 }
 export function $$h4() {
-  Rh("image_paste_error");
+  sendMetric("image_paste_error");
 }
 export function $$m3() {
-  Rh("unsaved_changes_bell");
+  sendMetric("unsaved_changes_bell");
 }
 export function $$g5() {
-  Rh("autosave_notification");
+  sendMetric("autosave_notification");
 }
 export function $$f2(e) {
-  Rh("reconnecting_banner", {
+  sendMetric("reconnecting_banner", {
     client: e
   });
 }

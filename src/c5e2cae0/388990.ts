@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import n from "classnames";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G } from "../figma_app/361869";
 import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
@@ -17,13 +17,13 @@ import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { kp } from "../figma_app/831799";
 import { vK, vu, ic, Fq, jv } from "../905/84777";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 import { K } from "../905/3140";
 import { F } from "../905/224";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { vr } from "../figma_app/514043";
-import { XP } from "../figma_app/465071";
+import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { ol } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
 import { Bi } from "../905/652992";
@@ -98,17 +98,17 @@ export function $$$1(e) {
       }), jsx("div", {
         children: jsx("p", {
           className: G8,
-          children: e.prices[ud.DESIGN]
+          children: e.prices[ProductAccessTypeEnum.DESIGN]
         })
       })]
-    }), e.prices[ud.DEV_MODE] && jsxs("div", {
+    }), e.prices[ProductAccessTypeEnum.DEV_MODE] && jsxs("div", {
       className: y3,
       children: [jsx("p", {
         children: renderI18nText("plan_details.dev_mode_only")
       }), jsx("div", {
         children: jsx("p", {
           className: G8,
-          children: e.prices[ud.DEV_MODE]
+          children: e.prices[ProductAccessTypeEnum.DEV_MODE]
         })
       })]
     }), jsxs("div", {
@@ -118,14 +118,14 @@ export function $$$1(e) {
       }), jsx("div", {
         children: jsx("p", {
           className: G8,
-          children: e.prices[ud.FIGJAM]
+          children: e.prices[ProductAccessTypeEnum.FIGJAM]
         })
       })]
     })]
   });
 }
 function U(e) {
-  let t = XP({
+  let t = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.BILLING_EXPERIENCE
   });
   let a = {
@@ -133,11 +133,11 @@ function U(e) {
     planType: t.key.type
   };
   let r = vK(a);
-  let [n] = mI(r);
+  let [n] = handleSuspenseRetainRelease(r);
   let c = vu(n);
   if (null === c.data) throw Error("Contract prices currency was null");
   let _ = c.data;
-  let u = Oq.exclude([ud.DEV_MODE]);
+  let u = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let h = u.dict(e => ({
     currency: _,
     billableProductKey: e,
@@ -156,7 +156,7 @@ function U(e) {
       unit: IX.MONTH
     }
   });
-  let [j, b] = mI(x, y);
+  let [j, b] = handleSuspenseRetainRelease(x, y);
   let C = vu(j);
   if (null === C.data) throw Error("Contract price data was null");
   let I = vu(b);

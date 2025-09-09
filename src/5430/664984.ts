@@ -8,7 +8,7 @@ import { ek, MJ } from "../figma_app/657017";
 import { g } from "../905/347448";
 import { nm } from "../905/352022";
 import { selectCurrentUser } from "../905/372672";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { O } from "../905/833838";
 var $$h3 = (e => (e.SITES_DISABLED_FOR_STARTER = "sites_disabled_for_starter", e.SITES_DISABLED_FOR_ORG = "sites_disabled_for_org", e.COOPER_DISABLED_FOR_ORG = "cooper_disabled_for_org", e.FIGMAKE_DISABLED_FOR_ORG = "figmake_disabled_for_org", e))($$h3 || {});
 function x(e) {
@@ -51,7 +51,7 @@ export function $$f1(e) {
     teams,
     orgs
   } = x(e);
-  let n = T5("useCanUseDsePresetsInCommunity").unwrapOr(null);
+  let n = useCurrentPrivilegedPlan("useCanUseDsePresetsInCommunity").unwrapOr(null);
   let o = ek(n, null);
   return useMemo(() => !!t && (teams.length || orgs.length ? Object.values(teams).some(e => MJ(null, e, null)) || Object.values(orgs).some(e => MJ(e, null, null)) : o), [t, teams, orgs, o]);
 }

@@ -25,11 +25,11 @@ import { Ki } from "../figma_app/328188";
 import { o as _$$o } from "../905/268099";
 import { f as _$$f } from "../905/287602";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { Kq } from "../figma_app/713624";
 import { c as _$$c } from "../905/32166";
 import { E as _$$E } from "../905/632989";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { E as _$$E2 } from "../905/984674";
 import { S as _$$S2 } from "../905/433182";
@@ -56,7 +56,7 @@ function G({
       className: _$$s.colorBorder.bSolid.bt1.wFull.$
     })
   });
-  let c = Rs(DestinationProjectsForTeam, {
+  let c = useSubscription(DestinationProjectsForTeam, {
     teamId: o ? o.id : ""
   }, {
     enabled: !!o
@@ -162,7 +162,7 @@ let z = registerModal(function (e) {
   let [F, M] = useState(null);
   let [j, U] = useState(!1);
   let [B, z] = useState(null);
-  let H = S2().unwrapOr(null);
+  let H = useTeamPlanFeatures().unwrapOr(null);
   let W = H?.key.type === FOrganizationLevelType.ORG ? H?.key.parentId : void 0;
   let K = H?.key.type === FOrganizationLevelType.TEAM ? H?.key.parentId : void 0;
   let Y = useCallback(e => {

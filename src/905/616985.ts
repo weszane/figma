@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useLayoutEffect } from "react";
 import { decimalToPercent } from "../905/436288";
 import { $, h } from "../905/455748";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { H } from "../905/773253";
 let d = "push_container--panel--WJ-MY";
 export function $$c0({
@@ -13,8 +13,8 @@ export function $$c0({
 }) {
   let d = useMemo(() => t.flat().filter(e => !!e), [t]);
   let c = d.length - 1;
-  let p = ZC(c);
-  let m = ZC(d);
+  let p = useLatestRef(c);
+  let m = useLatestRef(d);
   let [h, g] = useState([]);
   let f = $(c);
   useLayoutEffect(function () {

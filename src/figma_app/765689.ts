@@ -1,87 +1,153 @@
-import { throwTypeError } from "../figma_app/465776";
-import { z } from "../905/239603";
-import { FProductAccessType, FFileType, FPlanAccessType } from "../figma_app/191312";
-export let $$s4 = {
+import { z } from 'zod'
+import { FFileType, FPlanAccessType, FProductAccessType } from '../figma_app/191312'
+import { throwTypeError } from '../figma_app/465776'
+
+/**
+ * ProductAccessMap - Maps product access types for DESIGN, WHITEBOARD, DEV_MODE.
+ */
+export const ProductAccessMap = {
   DESIGN: FProductAccessType.DESIGN,
   WHITEBOARD: FProductAccessType.WHITEBOARD,
-  DEV_MODE: FProductAccessType.DEV_MODE
-};
-z.nativeEnum($$s4);
-export let $$o1 = z.union([z.nativeEnum(FProductAccessType), z.literal("figjam")]);
-export function $$l7(e) {
-  switch (e) {
+  DEV_MODE: FProductAccessType.DEV_MODE,
+}
+
+/**
+ * ProductAccessTypeSchema - Zod schema for product access type or 'figjam'.
+ */
+export const ProductAccessTypeSchema = z.union([z.nativeEnum(FProductAccessType), z.literal('figjam')])
+
+/**
+ * getProductAccessTypeFromFileType - Maps FFileType to ProductAccessType.
+ * @param fileType - FFileType value
+ * @returns ProductAccessType
+ */
+export function getProductAccessTypeFromFileType(fileType: FFileType | null): FProductAccessType {
+  switch (fileType) {
     case FFileType.DESIGN:
     case FFileType.SLIDES:
     case FFileType.SITES:
     case FFileType.COOPER:
     case FFileType.FIGMAKE:
     case null:
-      return $$s4.DESIGN;
+      return ProductAccessMap.DESIGN
     case FFileType.WHITEBOARD:
-      return $$s4.WHITEBOARD;
+      return ProductAccessMap.WHITEBOARD
     default:
-      throwTypeError(e);
+      throwTypeError(fileType)
   }
 }
-export function $$d8(e) {
-  return $$c0(e) ?? FProductAccessType.DESIGN;
+
+/**
+ * getProductAccessTypeOrDefault - Returns ProductAccessType from fileType or DESIGN as default.
+ * @param fileType - FFileType value
+ * @returns ProductAccessType
+ */
+export function getProductAccessTypeOrDefault(fileType: FFileType | null): FProductAccessType {
+  return getProductAccessType(fileType) ?? FProductAccessType.DESIGN
 }
-export function $$c0(e) {
-  switch (e) {
+
+/**
+ * getProductAccessType - Maps FFileType to ProductAccessType, returns null for null input.
+ * @param fileType - FFileType value
+ * @returns ProductAccessType | null
+ */
+export function getProductAccessType(fileType: FFileType | null): FProductAccessType | null {
+  switch (fileType) {
     case FFileType.DESIGN:
-      return FProductAccessType.DESIGN;
+      return FProductAccessType.DESIGN
     case FFileType.WHITEBOARD:
-      return FProductAccessType.WHITEBOARD;
+      return FProductAccessType.WHITEBOARD
     case FFileType.SLIDES:
-      return FProductAccessType.SLIDES;
+      return FProductAccessType.SLIDES
     case FFileType.SITES:
-      return FProductAccessType.SITES;
+      return FProductAccessType.SITES
     case FFileType.FIGMAKE:
-      return FProductAccessType.FIGMAKE;
+      return FProductAccessType.FIGMAKE
     case FFileType.COOPER:
-      return FProductAccessType.COOPER;
+      return FProductAccessType.COOPER
     case null:
-      return null;
+      return null
     default:
-      throwTypeError(e);
+      throwTypeError(fileType)
   }
 }
-export function $$u6(e) {
-  switch (e) {
-    case "design":
-      return FProductAccessType.DESIGN;
-    case "figjam":
-    case "whiteboard":
-      return FProductAccessType.WHITEBOARD;
-    case "dev_mode":
-      return FProductAccessType.DEV_MODE;
+
+/**
+ * getProductAccessTypeFromString - Maps string to ProductAccessType.
+ * @param type - string value
+ * @returns ProductAccessType | null
+ */
+export function getProductAccessTypeFromString(type: string): FProductAccessType | null {
+  switch (type) {
+    case 'design':
+      return FProductAccessType.DESIGN
+    case 'figjam':
+    case 'whiteboard':
+      return FProductAccessType.WHITEBOARD
+    case 'dev_mode':
+      return FProductAccessType.DEV_MODE
   }
-  return null;
+  return null
 }
-export function $$p5(e, t) {
-  return e === FFileType.WHITEBOARD ? t?.whiteboardPaidStatus === FPlanAccessType.RESTRICTED : e === FFileType.DESIGN && t?.designPaidStatus === FPlanAccessType.RESTRICTED;
+
+/**
+ * isRestrictedPlanAccess - Checks if plan access is restricted for file type.
+ * @param fileType - FFileType value
+ * @param planStatus - object with paid status fields
+ * @returns boolean
+ */
+export function isRestrictedPlanAccess(
+  fileType: FFileType,
+  planStatus?: { whiteboardPaidStatus?: FPlanAccessType; designPaidStatus?: FPlanAccessType }
+): boolean {
+  return fileType === FFileType.WHITEBOARD
+    ? planStatus?.whiteboardPaidStatus === FPlanAccessType.RESTRICTED
+    : fileType === FFileType.DESIGN && planStatus?.designPaidStatus === FPlanAccessType.RESTRICTED
 }
-export function $$_3(e) {
-  return e === FProductAccessType.DESIGN || e === FProductAccessType.WHITEBOARD || e === FProductAccessType.DEV_MODE;
+
+/**
+ * isCoreProductAccessType - Checks if type is DESIGN, WHITEBOARD, or DEV_MODE.
+ * @param type - FProductAccessType value
+ * @returns boolean
+ */
+export function isCoreProductAccessType(type: FProductAccessType): boolean {
+  return (
+    type === FProductAccessType.DESIGN ||
+    type === FProductAccessType.WHITEBOARD ||
+    type === FProductAccessType.DEV_MODE
+  )
 }
-let h = {
+
+/**
+ * ProductAccessOrder - Order mapping for ProductAccessType.
+ */
+const ProductAccessOrder: Record<FProductAccessType, number> = {
   [FProductAccessType.DESIGN]: 10,
   [FProductAccessType.SITES]: 20,
   [FProductAccessType.FIGMAKE]: 30,
   [FProductAccessType.DEV_MODE]: 40,
   [FProductAccessType.WHITEBOARD]: 50,
   [FProductAccessType.SLIDES]: 60,
-  [FProductAccessType.COOPER]: 70
-};
-export function $$m2(e, t) {
-  return h[e] - h[t];
+  [FProductAccessType.COOPER]: 70,
 }
-export const Ci = $$c0;
-export const DK = $$o1;
-export const Hn = $$m2;
-export const PO = $$_3;
-export const Te = $$s4;
-export const _R = $$p5;
-export const px = $$u6;
-export const vc = $$l7;
-export const wR = $$d8;
+
+/**
+ * compareProductAccessOrder - Compares order of two ProductAccessTypes.
+ * @param a - FProductAccessType
+ * @param b - FProductAccessType
+ * @returns number
+ */
+export function compareProductAccessOrder(a: FProductAccessType, b: FProductAccessType): number {
+  return ProductAccessOrder[a] - ProductAccessOrder[b]
+}
+
+// Export aliases for backward compatibility and refactored names
+export const Ci = getProductAccessType
+export const DK = ProductAccessTypeSchema
+export const Hn = compareProductAccessOrder
+export const PO = isCoreProductAccessType
+export const Te = ProductAccessMap
+export const _R = isRestrictedPlanAccess
+export const px = getProductAccessTypeFromString
+export const vc = getProductAccessTypeFromFileType
+export const wR = getProductAccessTypeOrDefault

@@ -5,18 +5,18 @@ import { UIVisibilitySetting } from "../figma_app/763686";
 import { ty, Rm, Y2, DT } from "../figma_app/320164";
 import { BrowserInfo } from "../figma_app/778880";
 import { B as _$$B, N as _$$N } from "../figma_app/659940";
-import { nF } from "../figma_app/789";
+import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { v as _$$v } from "../figma_app/354567";
 import { F as _$$F } from "../figma_app/564183";
-import { up, Kz } from "../905/760074";
+import { getRepoByIdAlt, isBranchAlt } from "../905/760074";
 import { ck } from "../905/87821";
 import { Kx } from "../figma_app/546509";
-import { tB, tS, q5 } from "../figma_app/516028";
+import { selectOpenFile, useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { $n } from "../905/521428";
 import { J as _$$J } from "../905/614223";
 import { l as _$$l } from "../905/728491";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { B as _$$B2 } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
@@ -29,7 +29,7 @@ import { R as _$$R } from "../905/309400";
 import { AM, pT } from "../905/467351";
 import { kL, qr, PU, hz, Qw, Lo, wV } from "../905/478905";
 import { A as _$$A } from "../3850/566892";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { P as _$$P } from "../figma_app/650304";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../figma_app/769913";
@@ -113,15 +113,15 @@ function D(e) {
 }
 function k() {
   let e = useDispatch();
-  let t = useSelector(tB);
+  let t = useSelector(selectOpenFile);
   let r = M4.useFile(t?.key || "").data;
   let i = useSelector(e => getPermissionsState(e));
-  let s = Rs(BranchOpenMergeRequest, {
+  let s = useSubscription(BranchOpenMergeRequest, {
     branchFileKey: t && t?.key || ""
   }, {
     enabled: !!(t && t?.key)
   });
-  let o = up(t ?? {
+  let o = getRepoByIdAlt(t ?? {
     fileRepoId: null
   }, i.repos);
   let l = _$$l(FileCanView, o?.default_file_key ?? "").unwrapOr(!1);
@@ -162,7 +162,7 @@ let eE = registerModal(function (e) {
   let t = useDispatch();
   let [r, s] = useState("");
   let [o, d] = useState(!1);
-  let c = tS();
+  let c = useCurrentFileKey();
   let u = useSelector(e => c ? e.loadingState[_$$f.loadingKeyForPayload({
     fileKey: c,
     emailAddress: r
@@ -263,7 +263,7 @@ let eb = registerModal(function (e) {
     onChangeEmail
   } = e;
   let i = useDispatch();
-  let s = tS();
+  let s = useCurrentFileKey();
   let o = hS({
     ...e,
     preventUserClose: !0
@@ -366,7 +366,7 @@ function eS({
 function ex({
   isFigJamTry: e
 }) {
-  let t = nF();
+  let t = useCurrentFileWorkshopModeStatus();
   let r = _6();
   let i = I4(e, t);
   let a = E3();
@@ -547,7 +547,7 @@ function eD({
   };
   let p = dR(customHistory.location.pathname, u);
   let _ = e ? p : jM();
-  let h = nF(!0);
+  let h = useCurrentFileWorkshopModeStatus(!0);
   let m = _6();
   let g = I4(e, h);
   let f = getI18nString("footer_banner.welcome_to_figma");
@@ -654,9 +654,9 @@ function eD({
   });
 }
 export function $$ek0() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = selectCurrentUser();
-  let r = nF(!0);
+  let r = useCurrentFileWorkshopModeStatus(!0);
   let E = useSelector(e => e.progressBarState.mode);
   let y = ck();
   let b = _$$N();
@@ -665,12 +665,12 @@ export function $$ek0() {
   let S = Kx();
   let v = _$$v();
   let A = _$$F();
-  let x = Oc();
+  let x = useIsSelectedFigmakeFullscreen();
   return (useEffect(() => {
     v();
   }, [v]), T) ? null : y && BrowserInfo.isMeetDevice && !I ? jsx(ex, {
     isFigJamTry: b
-  }) : t ? Kz(e) && e.trashedAt && E === UIVisibilitySetting.OFF ? jsx(k, {}) : null : y || I || BrowserInfo.isMeetDevice || A || x ? null : S ? jsxs("div", {
+  }) : t ? isBranchAlt(e) && e.trashedAt && E === UIVisibilitySetting.OFF ? jsx(k, {}) : null : y || I || BrowserInfo.isMeetDevice || A || x ? null : S ? jsxs("div", {
     className: cI,
     children: [jsx(eD, {
       isFigJamTry: b

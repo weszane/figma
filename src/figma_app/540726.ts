@@ -1,7 +1,7 @@
 import { kiwiParserCodec } from '../905/294864';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { Fullscreen } from '../figma_app/763686';
-import { hX } from '../figma_app/930338';
+import { escapeHtml } from '../figma_app/930338';
 let $$o3 = '\x3C!--(figma)';
 let $$l12 = '(/figma)--\x3E';
 let $$d5 = `<span data-buffer="${$$o3}`;
@@ -15,7 +15,7 @@ let $$g7 = `${$$h8}"></span>`;
 let $$f4 = '&lt;!--(figmeta)';
 let $$E16 = '(/figmeta)--&gt;';
 export function $$y0(e, t, r) {
-  let n = `<meta charset="utf-8">${$$d5}${encodeBase64(t)}${$$c2}${hX(r)}`;
+  let n = `<meta charset="utf-8">${$$d5}${encodeBase64(t)}${$$c2}${escapeHtml(r)}`;
   try {
     e.setData('text/html', n);
   } catch (e) {

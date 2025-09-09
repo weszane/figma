@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { z3 } from "../figma_app/386952";
 let o = createContext(null);
 export function $$l0() {
@@ -13,7 +13,7 @@ export function $$d1({
   let [l, d] = useState(null);
   let [c, u] = useState(null);
   let p = z3();
-  let _ = ZC(p);
+  let _ = useLatestRef(p);
   useEffect(() => {
     _ !== p && "fullscreen" === _ && (r(null), d(null), u(null));
   }, [_, p]);

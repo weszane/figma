@@ -9,7 +9,7 @@ import { J } from "../905/125993";
 import { V as _$$V } from "../1577/311426";
 import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/907815";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import p, { generateUUIDv4 } from "../905/871474";
 import { oW } from "../905/675859";
 import { qc } from "../figma_app/858013";
@@ -47,7 +47,7 @@ let O = new class {
 }();
 let q = null;
 let $$U0 = forwardRef((e, t) => {
-  let i = Rs(QuickReply_CommentThreadByRootComment, {
+  let i = useSubscription(QuickReply_CommentThreadByRootComment, {
     fileKey: e.quickReplyInfo.fileKey,
     rootId: e.quickReplyInfo.threadId
   });

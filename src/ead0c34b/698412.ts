@@ -9,7 +9,7 @@ import { reportError } from "../905/11";
 import { N } from "../905/809096";
 import { getI18nString } from "../905/303541";
 import { delay } from "../905/236856";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { M4, IT } from "../905/713695";
 function f() {
   return getI18nString("billing.purchase_ai_credits.modal_hidden_title");
@@ -38,7 +38,7 @@ function C(e) {
   let r = hS(e);
   return "loaded" !== function () {
     let [e] = IT(I({}));
-    let [r] = mI(e);
+    let [r] = handleSuspenseRetainRelease(e);
     useEffect(() => {
       "loaded" !== r.status && reportError(_$$e.BILLING_EXPERIENCE, Error("usePurchaseAiCreditsData failed to load"));
     }, [r.status]);

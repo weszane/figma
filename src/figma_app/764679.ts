@@ -18,7 +18,7 @@ import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { U3 } from "../figma_app/412189";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { zF } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
@@ -91,7 +91,7 @@ export function $$B0(e) {
   let r = jsx(dn, {
     editorType: [e.editorType]
   });
-  if (e.fileName) t = e.fileName; else if (e.playgroundFile) t = getI18nString("community.using.playground_file"); else switch (e.editorType) {
+  if (e.fileName) t = e.fileName;else if (e.playgroundFile) t = getI18nString("community.using.playground_file");else switch (e.editorType) {
     case ManifestEditorType.FIGMA:
       t = getI18nString("community.duplicate.open_in_figma");
       break;
@@ -247,7 +247,7 @@ export function $$H1(e, t, r) {
   let A = memo(function ({
     primaryFullscreenEditorType: r
   }) {
-    let a = T5("usePluginTrySwitchEditorDropdown").unwrapOr(null);
+    let a = useCurrentPrivilegedPlan("usePluginTrySwitchEditorDropdown").unwrapOr(null);
     let h = a?.figjamDisabledAt ?? null;
     let b = a?.type === FOrganizationLevelType.ORG ? a?.key.parentId : void 0;
     let A = Jm();
@@ -354,7 +354,7 @@ export function $$H1(e, t, r) {
           resource: e,
           editorTypes: k
         })
-      }); else if (!j && B.length > 1) return H;
+      });else if (!j && B.length > 1) return H;
       j ? t.push(W) : t.push(z);
       return t;
     })();

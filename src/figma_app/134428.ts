@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { lQ } from "../905/934246";
 import { createLocalStorageAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useStorageEventSync } from "../905/657224";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 var $$l0 = (e => (e.LIST = "list", e.GRID = "grid", e))($$l0 || {});
 let d = "assets-panel-view-mode-v2";
 let c = createLocalStorageAtom(d, "grid");
@@ -19,7 +19,7 @@ export function $$u1() {
     onSync: l,
     shouldSyncValue: r
   });
-  let u = cJ();
+  let u = useIsFullscreenSitesView();
   return useMemo(() => u ? ["grid", lQ] : [e, t], [e, u, t]);
 }
 let p = "asset-panel-show-folders";

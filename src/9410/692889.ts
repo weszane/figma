@@ -6,7 +6,7 @@ import { g as _$$g } from "../905/757007";
 import { W } from "../905/569454";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { _I, xo } from "../figma_app/473493";
+import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { D as _$$D } from "../905/882262";
 import { z4 } from "../905/37051";
 import { Fk } from "../figma_app/167249";
@@ -18,8 +18,8 @@ export function $$g0({
   isMinimal: g
 }) {
   let _ = _$$D();
-  let x = _I();
-  let y = xo();
+  let x = useCanAccessFullDevMode();
+  let y = useCanUseDevModeDemoFile();
   let b = _ && x && !y;
   let {
     hasReadyStatus,

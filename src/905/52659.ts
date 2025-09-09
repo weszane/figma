@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Ay } from "@stylexjs/stylex";
 import { trackEventAnalytics } from "../905/449184";
 import { MD } from "../figma_app/672951";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { kg } from "../figma_app/976345";
@@ -241,7 +241,7 @@ export function $$ea0(e) {
   let s = useDispatch();
   let x = useSelector(k);
   let S = _6();
-  let w = gY(Ct);
+  let w = getAtomMutate(Ct);
   let C = MD(t);
   let T = useSelector(e => e.teams);
   let {

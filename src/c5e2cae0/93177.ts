@@ -7,9 +7,9 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData, clearPaymentFlowData } from "../figma_app/169182";
-import { mI, IT } from "../figma_app/566371";
+import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
 import { _H } from "../figma_app/598111";
 import { cn } from "../figma_app/141320";
 import { tH, H4 } from "../905/751457";
@@ -51,7 +51,7 @@ import { c as _$$c } from "../905/370443";
 import { h3, fu } from "../figma_app/831799";
 import { jv, vu } from "../905/84777";
 import { lo, wn, dl } from "../9420/795870";
-import { a_, Gu, ud } from "../905/513035";
+import { isCollaboratorType, ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { kt, pI, Al, lX, dT } from "../9420/394825";
 import { KQ } from "../figma_app/475472";
@@ -64,12 +64,12 @@ import { LN, ub } from "../figma_app/514043";
 import { PS, ne, JV } from "../figma_app/345997";
 import { Ud, OI } from "../c5e2cae0/2942";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
-import { D6 } from "../figma_app/465071";
+import { useCurrentPlanUser } from "../figma_app/465071";
 import { Np } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
 import { Ju } from "../905/712921";
 import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
-import { SC, Sc, h5 } from "../figma_app/707808";
+import { UpgradeAction, TeamType, isCreateOrUpgrade } from "../figma_app/707808";
 import { e0 } from "../905/696396";
 import { V as _$$V } from "../905/223084";
 import { Q as _$$Q } from "../figma_app/113686";
@@ -349,7 +349,7 @@ function eH(e) {
     ...e.additionalSeatCounts
   };
   Object.values(e.selectedUserSeatTypes).forEach(e => {
-    a_(e) && e in t && t[e]++;
+    isCollaboratorType(e) && e in t && t[e]++;
   });
   return {
     countBySeatType: t,
@@ -371,7 +371,7 @@ let eX = (e, t, a, s) => {
       let n = md(selectedUserSeatTypes, l);
       t.forEach(e => {
         let t = e.user.id;
-        n[t] || (n[t] = e.recommended_seat_type?.key ?? Gu.VIEW);
+        n[t] || (n[t] = e.recommended_seat_type?.key ?? ViewAccessTypeEnum.VIEW);
       });
       s = Ed(countBySeatType) ? {
         ...countBySeatType
@@ -436,7 +436,7 @@ function eW({
     renewalTerm: a,
     showCents: !1
   });
-  let [d] = mI(n);
+  let [d] = handleSuspenseRetainRelease(n);
   if (null === d.data) throw Error("Seat types data is null");
   let o = d.data;
   let {
@@ -475,7 +475,7 @@ function eY(e) {
   let j = useSelector(e => e.teams);
   let R = e.selectedView.paymentStep;
   let O = useSelector(e => e.roles.byTeamId);
-  let B = D6("TeamUpgradeCart");
+  let B = useCurrentPlanUser("TeamUpgradeCart");
   let L = B.data?.permission === FMemberRoleType.ADMIN;
   let [V, $] = useState(n?.team_name ?? "");
   let [z, G] = useState(kt);
@@ -511,7 +511,7 @@ function eY(e) {
   }));
   let eO = Mh();
   let eD = void 0 === x.cartSelections;
-  let eB = ZC(eD);
+  let eB = useLatestRef(eD);
   let eL = N_.dict(e => x.cartSelections?.countBySeatType?.[e] || 0);
   let e$ = eA && ne(eA) || BillingCycle.YEAR;
   let eU = jv({
@@ -523,7 +523,7 @@ function eY(e) {
       unit: e$
     }
   });
-  let [ez] = mI(eU);
+  let [ez] = handleSuspenseRetainRelease(eU);
   let eF = vu(ez);
   if (null === eF.data) throw Error("Price data is null");
   let eG = eF.data;
@@ -583,7 +583,7 @@ function eY(e) {
     teamId: eP,
     canSeeBillingAddressExp: eO
   });
-  let [tm] = IT(eJ({
+  let [tm] = setupResourceAtomHandler(eJ({
     teamId: eP
   }), {
     enabled: !!eP
@@ -599,7 +599,7 @@ function eY(e) {
     id: "",
     team_id: eP,
     recommended_seat_type: {
-      key: ud.EXPERT,
+      key: ProductAccessTypeEnum.EXPERT,
       license_types: []
     }
   };
@@ -628,8 +628,8 @@ function eY(e) {
     teamId: eP,
     teamName: eP ? void 0 : V,
     setTeamName: eP ? void 0 : $,
-    collaborators: eP || e.selectedView.teamFlowType !== SC.CREATE ? void 0 : z,
-    setCollaborators: eP || e.selectedView.teamFlowType !== SC.CREATE ? void 0 : G
+    collaborators: eP || e.selectedView.teamFlowType !== UpgradeAction.CREATE ? void 0 : z,
+    setCollaborators: eP || e.selectedView.teamFlowType !== UpgradeAction.CREATE ? void 0 : G
   });
   let tf = useSelector(e => e.currentUserOrgId);
   let tv = ignoreCurrentPlan ? null : tf;
@@ -685,7 +685,7 @@ function eY(e) {
     }));
   }, [to, e.selectedView.isEduTeam, tE]);
   useEffect(() => {
-    e.selectedView.teamFlowType === SC.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (customHistory.redirect("/"), to(_$$s2.error(getI18nString("team_creation.missing_team_creation_controls"))));
+    e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (customHistory.redirect("/"), to(_$$s2.error(getI18nString("team_creation.missing_team_creation_controls"))));
   }, [e.selectedView.teamFlowType, tb, cannotCreateTeamReason, to]);
   let tA = x.currencyToSwitch;
   useEffect(() => {
@@ -704,7 +704,7 @@ function eY(e) {
     let s = a.get("onCompleteRedirectFileKey");
     let r = a.get("onCompleteRedirectNodeId");
     t.currentTarget && t.currentTarget.blur();
-    let i = kR(e.selectedView.paymentStep, e.selectedView.teamFlowType, eA, x.promo, e.selectedView.planType || Sc.UNDETERMINED);
+    let i = kR(e.selectedView.paymentStep, e.selectedView.teamFlowType, eA, x.promo, e.selectedView.planType || TeamType.UNDETERMINED);
     R === UpgradeSteps.CREATE_TEAM && ($(V.trim()), to(sf({
       ...e.selectedView,
       teamId: null,
@@ -744,7 +744,7 @@ function eY(e) {
       submitPending: !1
     })));
   };
-  let tO = e.selectedView.teamFlowType === SC.CREATE ? () => {
+  let tO = e.selectedView.teamFlowType === UpgradeAction.CREATE ? () => {
     to(KQ({
       teamName: V,
       orgAccess: FAccessLevelType.PUBLIC,
@@ -756,15 +756,15 @@ function eY(e) {
       ignoreCurrentPlan
     }));
   } : void 0;
-  [SC.CREATE_AND_UPGRADE, SC.UPGRADE_EXISTING_TEAM].includes(e.selectedView.teamFlowType) && (1 === ee.length ? t = t => {
+  [UpgradeAction.CREATE_AND_UPGRADE, UpgradeAction.UPGRADE_EXISTING_TEAM].includes(e.selectedView.teamFlowType) && (1 === ee.length ? t = t => {
     t = t || e.selectedView.billingPeriod;
-    let a = SC.UPGRADE_EXISTING_TEAM;
+    let a = UpgradeAction.UPGRADE_EXISTING_TEAM;
     to(sf({
       ...e.selectedView,
       teamFlowType: a,
       teamId: ee[0].id,
-      paymentStep: kR(e.selectedView.paymentStep, a, t || null, x.promo, Sc.TEAM, UpgradeSteps.CHOOSE_PLAN),
-      planType: Sc.UNDETERMINED,
+      paymentStep: kR(e.selectedView.paymentStep, a, t || null, x.promo, TeamType.TEAM, UpgradeSteps.CHOOSE_PLAN),
+      planType: TeamType.UNDETERMINED,
       billingPeriod: t,
       ignoreCurrentPlan
     }));
@@ -784,7 +784,7 @@ function eY(e) {
     teamId: eP,
     userId: a.id
   })?.is3DS;
-  return e.selectedView.teamFlowType === SC.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) ? jsx(Fragment, {}) : jsx(fu, {
+  return e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) ? jsx(Fragment, {}) : jsx(fu, {
     name: e0.TEAM_CHECKOUT_FLOW,
     properties: {
       teamId: e.selectedView.teamId,
@@ -825,13 +825,13 @@ function eY(e) {
             to(Lo({
               billingPeriod: t
             }));
-            let a = h5(e.selectedView.teamFlowType) ? e.selectedView.teamFlowType : SC.CREATE_AND_UPGRADE;
+            let a = isCreateOrUpgrade(e.selectedView.teamFlowType) ? e.selectedView.teamFlowType : UpgradeAction.CREATE_AND_UPGRADE;
             to(sf({
               ...e.selectedView,
               teamFlowType: a,
-              paymentStep: kR(e.selectedView.paymentStep, a, t, x.promo, Sc.TEAM),
+              paymentStep: kR(e.selectedView.paymentStep, a, t, x.promo, TeamType.TEAM),
               billingPeriod: t,
-              planType: Sc.TEAM,
+              planType: TeamType.TEAM,
               openInNewTab: !1,
               ignoreCurrentPlan
             }));
@@ -852,7 +852,7 @@ function eY(e) {
           updateCurrency: eE,
           upgradeExistingTeam: t
         }), R === UpgradeSteps.CREATE_TEAM && jsx(_$$y, {
-          type: e.selectedView.teamFlowType === SC.CREATE ? _$$I2.STARTER : _$$I2.PRO,
+          type: e.selectedView.teamFlowType === UpgradeAction.CREATE ? _$$I2.STARTER : _$$I2.PRO,
           teamName: V,
           setTeamName: $,
           onNext: tR,
@@ -910,7 +910,7 @@ function eY(e) {
                 tw(!0);
                 clearPaymentFlowData();
                 OI(to);
-                h5(e.selectedView.teamFlowType) && null === eP && Al(l);
+                isCreateOrUpgrade(e.selectedView.teamFlowType) && null === eP && Al(l);
               };
               if (e.selectedView.teamId && tI) to(Nj({
                 teamId: e.selectedView.teamId

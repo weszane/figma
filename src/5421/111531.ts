@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useContext, cloneElement, useMemo, useCallback, useState, useRef, forwardRef, createRef, useEffect, useLayoutEffect } from "react";
 import { k as _$$k } from "../905/443820";
 import { Ay, xk } from "@stylexjs/stylex";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { d as _$$d, k as _$$k2 } from "../5421/548912";
 import { Y_, p_, l6, Xs, xJ, UL, iK, ZY, qQ, Wn } from "../figma_app/114522";
 import { c2 } from "../905/382883";
@@ -121,8 +121,8 @@ import { V as _$$V } from "../905/802779";
 import { lV, r9 } from "../figma_app/617606";
 import { W as _$$W3 } from "../9410/92046";
 import { d as _$$d2 } from "../1006/820986";
-import { jN } from "../figma_app/930338";
-import { tS as _$$tS } from "../figma_app/516028";
+import { isWhitespace } from "../figma_app/930338";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { KP } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
 import { e as _$$e, $v } from "../figma_app/259678";
@@ -1951,10 +1951,10 @@ function ny({
     clearChatError
   } = _$$tk(t);
   let m = selectCurrentUser();
-  let g = _$$tS();
+  let g = useCurrentFileKey();
   let y = Xu();
   let f = useMemo(() => getSingletonSceneGraph().get(t), [t]);
-  let _ = Oc();
+  let _ = useIsSelectedFigmakeFullscreen();
   let b = _ ? lV.FIGMAKE : lV.CODE_IN_SITES;
   let {
     changedFiles
@@ -2018,7 +2018,7 @@ function ny({
   let O = void 0 !== exchange && exchange.messages.length > 0;
   let D = user?.sessionID === w;
   let R = useRef(null);
-  let M = !jN(n) && !O;
+  let M = !isWhitespace(n) && !O;
   let V = useAtomWithSubscription(Z3(t));
   let B = useCallback(() => {
     if (R && "current" in R && R.current) {
@@ -3159,7 +3159,7 @@ function nH({
   onError: T,
   onBuild: S
 }) {
-  let A = Oc();
+  let A = useIsSelectedFigmakeFullscreen();
   let w = useRef(null);
   let k = useRef(null);
   let [O, R] = useAtomValueAndSetter(Y_);
@@ -3742,7 +3742,7 @@ export function $$nq0({
   }, [r, setComponentPreviewState, I, N]);
   pO();
   let S = GW(C);
-  let A = Oc();
+  let A = useIsSelectedFigmakeFullscreen();
   let w = e?.type === "instance" && u ? () => {
     u(C);
   } : void 0;

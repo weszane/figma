@@ -33,7 +33,7 @@ import { xS, JZ } from "../905/901964";
 import { eR as _$$eR } from "../figma_app/12220";
 import { $W, KD } from "../figma_app/317394";
 import { H as _$$H } from "../905/674803";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
@@ -153,7 +153,7 @@ export function $$em1(e) {
     editorRef,
     scrollToBottom
   } = e;
-  let eg = q5();
+  let eg = selectCurrentFile();
   let eh = eg?.key || null;
   let ef = useSelector(e => e.currentUserOrgId);
   let eC = eg?.teamId;

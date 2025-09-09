@@ -1,10 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { GM } from "../figma_app/275462";
 import { fI, In } from "../figma_app/229259";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { n1 } from "../figma_app/657017";
 let p = Error("useCommunityLibraries: no presets exist but presets are enabled");
@@ -13,11 +13,11 @@ let h = [];
 let g = [];
 export function $$f1(e) {
   let t = n1();
-  let [i] = IT(fI(void 0), {
+  let [i] = setupResourceAtomHandler(fI(void 0), {
     enabled: !e?.disabled && t
   });
   let o = dq();
-  let m = q5();
+  let m = selectCurrentFile();
   useEffect(() => {
     t && "loaded" === i.status && 0 === i.data.length && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, p, {
       tags: {
@@ -30,11 +30,11 @@ export function $$f1(e) {
 }
 export function $$_2() {
   let e = !!GM()();
-  let [t] = IT(In(void 0), {
+  let [t] = setupResourceAtomHandler(In(void 0), {
     enabled: e
   });
   let i = dq();
-  let u = q5();
+  let u = selectCurrentFile();
   useEffect(() => {
     e && "loaded" === t.status && 0 === t.data.length && reportError(_$$e.COMMUNITY, m, {
       tags: {

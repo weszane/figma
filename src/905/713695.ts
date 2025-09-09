@@ -11,7 +11,7 @@ import { g as _$$g2 } from '../905/346780';
 import { debugState } from '../905/407919';
 import { observableState } from '../905/441145';
 import { trackEventAnalytics } from '../905/449184';
-import { BO, rI } from '../905/485103';
+import { sendBatchedMetrics, sendBatchedHistograms } from '../905/485103';
 import { RetainedPromiseManager } from '../905/491061';
 import { Y as _$$Y } from '../905/493958';
 import { waitForVisibility } from '../905/621429';
@@ -24,10 +24,10 @@ import { shouldSampleRequest, XHR } from '../905/910117';
 import { getUserPlan } from '../905/912096';
 import { resourceUtils } from '../905/989992';
 import { atomStoreManager, createCustomAtom, createRemovableAtomFamily, setupAtomWithMount, useAtomWithSubscription } from '../figma_app/27355';
-import { getFalseValue } from '../figma_app/897289';
 import { throwTypeError } from '../figma_app/465776';
-import { IT } from '../figma_app/566371';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { V$ } from '../figma_app/804490';
+import { getFalseValue } from '../figma_app/897289';
 import { $ as _$$$ } from '../vendor/148711';
 import { Ay, ht, jM } from '../vendor/159563';
 import V from '../vendor/181640';
@@ -933,7 +933,7 @@ let et = new class {
       this.batchedCustomEvents = [];
       this.batchedNumericEvents = [];
       try {
-        await Promise.all([BO(e), rI(t)]);
+        await Promise.all([sendBatchedMetrics(e), sendBatchedHistograms(t)]);
       } catch (e) {
         console.error(e);
       }
@@ -1044,7 +1044,7 @@ let ed = function (e, t = () => ({}), i) {
     return {
       useValue: e => {
         let t = i(e);
-        let [n] = IT(t);
+        let [n] = setupResourceAtomHandler(t);
         return n;
       }
     };

@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { ds } from "../figma_app/314264";
 import { d1 } from "../905/766303";
-import { L8 } from "../905/760074";
+import { getRepoById } from "../905/760074";
 import { hL } from "../905/697795";
 import { d1 as _$$d } from "../figma_app/603466";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -289,7 +289,7 @@ let $$e_36 = createOptimistThunk((e, t) => {
     let t = e.getState();
     let r = d1(t);
     if (r) {
-      let e = L8(r, t.repos);
+      let e = getRepoById(r, t.repos);
       $$v43(r, e);
     }
   }

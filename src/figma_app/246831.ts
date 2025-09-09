@@ -41,7 +41,7 @@ import { P$, Eo } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, normalizeValue } from "../905/216495";
-import { tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { bO, SS } from "../figma_app/936646";
 import { QT } from "../figma_app/646357";
 import { je } from "../figma_app/155728";
@@ -629,7 +629,7 @@ function eG({
   children: W
 }) {
   let Y = useDispatch();
-  let X = tS();
+  let X = useCurrentFileKey();
   let Z = useMemo(() => D || (t ? new Point(t.initialX, t.initialY) : new Point(0, 0)), [D, t]);
   let [Q, ee] = useState(!1);
   let et = useCallback(() => ee(!0), []);
@@ -661,7 +661,7 @@ function eG({
         t.modal && n();
       },
       showStyleDetails(e, t, n) {
-        if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i(); else {
+        if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i();else {
           debug(null != e.content_hash, "style does not have a hash");
           let i = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(e).then(e => {
@@ -845,7 +845,7 @@ function eW({
     showStyleDetails,
     deleteStyle
   } = assertNotNullish(useContext(_$$G), "Must be inside <StylePickerActionsContext>");
-  let s = q5();
+  let s = selectCurrentFile();
   let o = _$$eE(e, s);
   let d = _$$b({
     libraryKey: e.library_key,

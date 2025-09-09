@@ -16,7 +16,7 @@ import { dP } from "../figma_app/119475";
 import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { aD } from "../figma_app/646357";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r6 } from "../905/542608";
@@ -46,7 +46,7 @@ let B = registerModal(function (e) {
   let {
     createLibraryImport
   } = S1();
-  let u = tS();
+  let u = useCurrentFileKey();
   _$$h(() => {
     analyticsEventManager.trackDefinedEvent("ds_import.library_warning_modal_shown", {
       library_key: library.library_key,
@@ -141,7 +141,7 @@ function G({
     createLibraryImport
   } = S1();
   let o = useDispatch();
-  let c = tS();
+  let c = useCurrentFileKey();
   if ("loading" === allDsImportReadyLibrariesRequestStatus) return jsx(Fragment, {
     children: range(3).map(e => jsx(Q, {}, e))
   });
@@ -196,7 +196,7 @@ function G({
 function H() {
   let e = Xr(jx);
   let t = useAtomWithSubscription(FX);
-  let n = tS();
+  let n = useCurrentFileKey();
   _$$h(() => {
     analyticsEventManager.trackDefinedEvent("ds_import.library_selector_empty_state_seen", {
       file_key: n || ""

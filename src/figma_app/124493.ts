@@ -1,7 +1,7 @@
 import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { handleOptimistTransaction } from "../905/842794";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
@@ -158,7 +158,7 @@ let $$w4 = createOptimistThunk((e, t) => {
     r = l?.find(t => t.id === e && !t.inProgress);
   } else r = l?.find(e => e.inProgress);
   if (!r) return;
-  let d = oA(r.pageNodeId);
+  let d = getResourceDataOrFallback(r.pageNodeId);
   d && (WhiteboardVotingCppBindings.setVotingSessionInfo(r.id, i, r.userVoteLimit, d), i === SessionStatus.JOINED && (e.dispatch($$O7()), a.mirror.selectionProperties.whiteboardNumSelectedByType?.STAMP && clearSelection()));
 });
 let $$O7 = NC("DISMISS_JOIN_CONFIRMATION");

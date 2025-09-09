@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { lV, MK, U1, lr, AD, Vm, Xy } from "../figma_app/617606";
 import { ChatMessageType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { zy } from "../figma_app/656450";
 import { selectCurrentUser } from "../905/372672";
 import { e as _$$e } from "../figma_app/259678";
@@ -37,7 +37,7 @@ export function $$I0({
   rootPath: L,
   onChatInputFocus: D
 }) {
-  let R = tS();
+  let R = useCurrentFileKey();
   let M = selectCurrentUser();
   let V = _$$E(t);
   let B = function (e) {

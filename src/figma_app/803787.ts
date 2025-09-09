@@ -15,14 +15,14 @@ import { VariableSetIdCompatHandler } from '../figma_app/243058';
 import { w5 } from '../figma_app/345997';
 import { Wn, XR } from '../figma_app/396464';
 import { isEmptyObject } from '../figma_app/493477';
-import { sS, tB, XJ, yV } from '../figma_app/516028';
+import { selectOpenFileKey, selectOpenFile, selectOpenFileLibraryKey, openFileAtom } from '../figma_app/516028';
 import { jd } from '../figma_app/528509';
 import { o as _$$o, E8, PW } from '../figma_app/633080';
 import { c5, qV, ZA } from '../figma_app/645694';
 import { ad, CG, E2, gA, Hb, HF, i_, LB, lg, Lk, MA, pD, Q_, rC, RQ, w8, zE } from '../figma_app/646357';
 import { sortByMultiple } from '../figma_app/656233';
 import { VariableErrorType } from '../figma_app/763686';
-import { im } from '../figma_app/828186';
+import { isSelectedViewFullscreenCooper } from '../figma_app/828186';
 import { Xt } from '../figma_app/889655';
 import g from '../vendor/149674';
 import c from '../vendor/223926';
@@ -43,14 +43,14 @@ let z = e => e.library.openHubFilePublished__LIVEGRAPH.variables;
 let W = e => e.library.openHubFilePublished__LIVEGRAPH.variableSets;
 let K = e => e.library.openHubFilePublished__LIVEGRAPH.modules;
 let $$Y15 = Mz([$$G13, H, z, W, $$V14], (e, t, r, n, a) => !isEmptyObject(e) || !isEmptyObject(t) || !isEmptyObject(r) || !isEmptyObject(n) || !isEmptyObject(a));
-let $ = Mz([XJ, qV], (e, t) => e && t[e] || {});
-let X = Mz([XJ, ZA], (e, t) => e && t[e] || {});
+let $ = Mz([selectOpenFileLibraryKey, qV], (e, t) => e && t[e] || {});
+let X = Mz([selectOpenFileLibraryKey, ZA], (e, t) => e && t[e] || {});
 let q = e => e.library.local.thumbnails;
 let J = e => e.library.openFilePublished__LIVEGRAPH.styles;
 let Z = e => e.library.openFilePublished__LIVEGRAPH.variableSets;
 let Q = e => e.library.openFilePublished__LIVEGRAPH.modules;
 let $$ee5 = Mz([$, J, Z, Q], (e, t, r, n) => !isEmptyObject(t) || !isEmptyObject(e) || !isEmptyObject(r) || !isEmptyObject(n));
-let et = Mz([e => e.library.local.styles, sS, $$U8, e => e.library.publishableStyles, H, B, q], (e, t, r, n, i, a, s) => {
+let et = Mz([e => e.library.local.styles, selectOpenFileKey, $$U8, e => e.library.publishableStyles, H, B, q], (e, t, r, n, i, a, s) => {
   if (r === _$$o.HUBFILE && a) {
     let r = _$$l(a.libraryKey);
     let {
@@ -73,7 +73,7 @@ let $$en21 = Mz([et, er], (e, t) => {
   }
   return r;
 });
-let ei = Mz([e => e.library.local.components, sS, $$U8, $$G13, B, e => e.library.publishableSymbols, q, im], (e, t, r, n, i, a, s, l) => {
+let ei = Mz([e => e.library.local.components, selectOpenFileKey, $$U8, $$G13, B, e => e.library.publishableSymbols, q, isSelectedViewFullscreenCooper], (e, t, r, n, i, a, s, l) => {
   if (r === _$$o.HUBFILE && i) {
     let r = _$$l(i.libraryKey);
     let {
@@ -86,7 +86,7 @@ let ei = Mz([e => e.library.local.components, sS, $$U8, $$G13, B, e => e.library
 let ea = Mz([$, $$G13, $$U8], (e, t, r) => r === _$$o.HUBFILE ? t : e);
 let es = Mz([function (e) {
   return e.library.local.stateGroups;
-}, sS, $$U8, $$V14, B, e => e.library.publishableStateGroups, q], (e, t, r, n, i, a, s) => {
+}, selectOpenFileKey, $$U8, $$V14, B, e => e.library.publishableStateGroups, q], (e, t, r, n, i, a, s) => {
   if (r === _$$o.HUBFILE && i) {
     let r = _$$l(i.libraryKey);
     let {
@@ -97,7 +97,7 @@ let es = Mz([function (e) {
   return e;
 });
 let eo = Mz([X, $$V14, $$U8], (e, t, r) => r === _$$o.HUBFILE ? t : e);
-let $$el11 = Mz([ei, ea, es, eo, im], (e, t, r, n, i) => {
+let $$el11 = Mz([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e, t, r, n, i) => {
   if (!getFeatureFlags().ds_remove_redux_library_status) return e;
   let a = {};
   let s = (e, t) => {
@@ -144,7 +144,7 @@ let $$ec33 = P8([e => {
     r.isSoftDeleted || (t[e] = r);
   });
   return t;
-}, e => e.library.openFilePublished__LIVEGRAPH.variables, tB, $$U8, B, z], (e, t, r, n, i, a) => {
+}, e => e.library.openFilePublished__LIVEGRAPH.variables, selectOpenFile, $$U8, B, z], (e, t, r, n, i, a) => {
   let s = {};
   let l = n === _$$o.HUBFILE && i ? a : t;
   let d = r?.key ?? '';
@@ -189,7 +189,7 @@ let $$ep20 = P8([e => {
     r.isSoftDeleted || (t[e] = r);
   });
   return t;
-}, Z, eu, tB, $$U8, B, W], (e, t, r, n, i, d, c) => {
+}, Z, eu, selectOpenFile, $$U8, B, W], (e, t, r, n, i, d, c) => {
   let u = i === _$$o.HUBFILE && d ? c : t;
   let p = n?.key ?? '';
   let _ = i === _$$o.HUBFILE && d ? _$$l(d.libraryKey) : _$$l(n?.libraryKey ?? '');
@@ -316,7 +316,7 @@ let $$eR17 = createReduxSubscriptionAtomWithState(eO);
 let eL = (e, t) => e.status != null && (!!lg(e.status) || !!Hb(e.status) && (t ? t.has(e.node_id) : !!e.old_key));
 let eP = (e, t) => eL(e, t) && HF(e.status);
 let eD = createReduxSubscriptionAtomWithState(e => e.userStateLoaded);
-let $$ek30 = atom(e => e(eD) && e(yV)?.canEdit && (e($$tj32) || e($$ew0)));
+let $$ek30 = atom(e => e(eD) && e(openFileAtom)?.canEdit && (e($$tj32) || e($$ew0)));
 let $$eM23 = Mz([$$el11, $$ed22, $$en21, (e, t) => t], ej);
 let $$eF7 = Mz([$$el11, $$ed22, $$en21], (e, t, r) => ej(e, t, r, void 0));
 function ej(e, t, r, n) {
@@ -429,7 +429,7 @@ let e8 = Mz([eK], e => e.variableSets.modified.wellFormed);
 let e6 = Mz([e8], e => e.filter(e => HF(e.status)));
 let e7 = Mz([eK], e => _$$O(PW.MODULE) ? e.modules.modified.wellFormed : []);
 let e9 = Mz([e7], e => e.filter(e => HF(e.status)));
-let $$te25 = Mz([tB, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !jd(e?.project) && !!(e && w5(e.teamId ? t[e.teamId] : null)));
+let $$te25 = Mz([selectOpenFile, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !jd(e?.project) && !!(e && w5(e.teamId ? t[e.teamId] : null)));
 let $$tt3 = e0;
 let tr = Mz([$$tt3], e => e.length > 0);
 let tn = createRemovableAtomFamily(e => createReduxSubscriptionAtomWithState(t => tr(t, e)));

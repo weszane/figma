@@ -6,9 +6,9 @@ import o from "classnames";
 import { b as _$$b } from "../figma_app/556971";
 import { renderI18nText } from "../905/303541";
 import { oz, o5 } from "../905/292918";
-import { oj, Ns, Kz } from "../905/760074";
+import { getDisplayNameAlt, isDefaultFileAlt, isBranchAlt } from "../905/760074";
 import { Um } from "../905/848862";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { e0 } from "../905/696396";
 import { x as _$$x } from "../905/106997";
@@ -26,7 +26,7 @@ function C(e) {
       onClick: () => e.dispatch(oz({
         trackingContextName: e.trackingContextName
       })),
-      children: oj(e.repo)
+      children: getDisplayNameAlt(e.repo)
     })
   });
 }
@@ -85,10 +85,10 @@ export function $$I0({
   });
 }
 export function $$k4() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = e?.repo;
-  let i = !!(t && Ns(e, t));
-  let n = !!(e && Kz(e));
+  let i = !!(t && isDefaultFileAlt(e, t));
+  let n = !!(e && isBranchAlt(e));
   let s = useDispatch();
   return n && t ? jsx("div", {
     className: l()(T, w),

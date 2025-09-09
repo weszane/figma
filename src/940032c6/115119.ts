@@ -36,7 +36,7 @@ import { w_ as _$$w_ } from '../897/602108';
 import { R as _$$R1 } from '../897/631032';
 import { dR as _$$dR2 } from '../897/641331';
 import { BP } from '../897/934363';
-import { reportError, setSentryTag } from '../905/11';
+import { reportError, setTagGlobal } from '../905/11';
 import { F as _$$F4 } from '../905/224';
 import { t as _$$t9 } from '../905/1946';
 import { a as _$$a6 } from '../905/5627';
@@ -186,7 +186,7 @@ import { U as _$$U } from '../905/492359';
 import { bL as _$$bL6, c$ as _$$c$5, l9 as _$$l7, mc as _$$mc2, wv as _$$wv2, zW } from '../905/493196';
 import { PW } from '../905/497152';
 import { Z as _$$Z4 } from '../905/498136';
-import { az as _$$az2, YQ } from '../905/502364';
+import { eventEmitterAtom, handleAtomEvent } from '../905/502364';
 import { C as _$$C8 } from '../905/504203';
 import { Cf as _$$Cf, it as _$$it, Jz } from '../905/504727';
 import { Y as _$$Y4 } from '../905/506207';
@@ -203,7 +203,7 @@ import { e as _$$e14 } from '../905/545750';
 import { s as _$$s7 } from '../905/551945';
 import { l as _$$l3 } from '../905/556594';
 import { B as _$$B } from '../905/559262';
-import { cJ as _$$cJ, oz as _$$oz } from '../905/561485';
+import { useIsFullscreenSitesView, isSitesFeatureEnabled } from '../905/561485';
 import { N as _$$N9 } from '../905/568293';
 import { r as _$$r2 } from '../905/571562';
 import { N as _$$N7 } from '../905/572042';
@@ -229,7 +229,7 @@ import { z as _$$z9 } from '../905/634240';
 import { A as _$$A10 } from '../905/639174';
 import { Bi } from '../905/652992';
 import { i as _$$i3 } from '../905/661697';
-import { oA as _$$oA3, tT as _$$tT } from '../905/663269';
+import { getResourceDataOrFallback, ResourceStatus } from '../905/663269';
 import { N as _$$N0 } from '../905/670143';
 import { F as _$$F6 } from '../905/672930';
 import { oW as _$$oW } from '../905/675859';
@@ -316,7 +316,6 @@ import { R as _$$R3 } from '../905/943003';
 import { b as _$$b7 } from '../905/946806';
 import { B as _$$B3 } from '../905/950875';
 import { A as _$$A11 } from '../905/956262';
-import { ResourceStatus } from '../905/957591';
 import { r as _$$r } from '../905/957643';
 import { cn as _$$cn } from '../905/959568';
 import { a as _$$a4 } from '../905/964520';
@@ -469,7 +468,7 @@ import ha from '../b2835def/987714';
 import { d as _$$d4 } from '../c5e2cae0/368426';
 import { s as _$$s4 } from '../cssbuilder/589278';
 import _require2 from '../f2246930/453829';
-import { DG } from '../figma_app/789';
+import { getWorkshopModeStatus } from '../figma_app/789';
 import { at as _$$at, lz as _$$lz, N as _$$N4, uy as _$$uy, we as _$$we, Ab, Iv, R0, Vc, ZH } from '../figma_app/987';
 import { bY as _$$bY, Jj } from '../figma_app/2023';
 import { l4 as _$$l5, __X, bbp, Bd, BZN, Htp, KYV, Nbd, p2q, sfE, TtK, zpn } from '../figma_app/6204';
@@ -486,7 +485,7 @@ import { MGP } from '../figma_app/27776';
 import { Mk } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
 import { hM as _$$hM, Sn as _$$Sn } from '../figma_app/32891';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { Y9 as _$$Y } from '../figma_app/42724';
 import { pO as _$$pO } from '../figma_app/42945';
 import { c as _$$c7 } from '../figma_app/43065';
@@ -573,7 +572,7 @@ import { N as _$$N5 } from '../figma_app/268271';
 import { hE as _$$hE, i3 as _$$i2, jk as _$$jk, nB as _$$nB, Pt as _$$Pt, vo as _$$vo, wi as _$$wi, Wk, Y9 } from '../figma_app/272243';
 import { s4 as _$$s10, Zk as _$$Zk2 } from '../figma_app/276332';
 import { q as _$$q9 } from '../figma_app/277543';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { C_ as _$$C_ } from '../figma_app/290668';
 import { em as _$$em } from '../figma_app/297957';
 import { C9 as _$$C2, f6 as _$$f5, gz as _$$gz, pO as _$$pO2, tq as _$$tq, vD as _$$vD, wE as _$$wE, yj as _$$yj, I4, qe, XW } from '../figma_app/302802';
@@ -637,7 +636,7 @@ import { Q as _$$Q10 } from '../figma_app/447352';
 import { cP as _$$cP, dg as _$$dg, vX as _$$vX } from '../figma_app/451499';
 import { o3 as _$$o3, O0 } from '../figma_app/452252';
 import { additionalValue, fullscreenValue } from '../figma_app/455680';
-import { iW as _$$iW, S2 as _$$S3, No, X$, YY } from '../figma_app/465071';
+import { useIsStarterOrProPlan, useTeamPlanFeatures, useTeamPlanPublicInfo, useCurrentPublicPlan, useIsStarterPlan } from '../figma_app/465071';
 import { assert, debug, throwTypeError } from '../figma_app/465776';
 import { _ as _$$_2 } from '../figma_app/467504';
 import { _t as _$$_t2, VJ } from '../figma_app/471982';
@@ -650,7 +649,7 @@ import { clamp, nearlyEqual } from '../figma_app/492908';
 import { _ as _$$_5 } from '../figma_app/496441';
 import { t as _$$t8 } from '../figma_app/501766';
 import { y as _$$y5 } from '../figma_app/504415';
-import { _G as _$$_G, tS as _$$tS, Kf, q5 } from '../figma_app/516028';
+import { useOpenFileLibraryKey, useCurrentFileKey, useIsCurrentUserCreator, selectCurrentFile } from '../figma_app/516028';
 import { z as _$$z2 } from '../figma_app/516075';
 import { h0 as _$$h10, o3 as _$$o7, Yu as _$$Yu, Zr as _$$Zr, B_ } from '../figma_app/525810';
 import { VA } from '../figma_app/528509';
@@ -663,14 +662,14 @@ import { r1 as _$$r7 } from '../figma_app/545877';
 import { N0 } from '../figma_app/547638';
 import { x as _$$x4 } from '../figma_app/550678';
 import { S as _$$S2 } from '../figma_app/552746';
-import { iG as _$$iG, Oc } from '../figma_app/552876';
+import { useToggleFigmakeMode, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { hl as _$$hl } from '../figma_app/553024';
 import { A as _$$A, b as _$$b2 } from '../figma_app/556971';
 import { td as _$$td, EB, FX } from '../figma_app/558805';
 import { k as _$$k6 } from '../figma_app/564183';
 import { $h, Tu as _$$Tu, uE as _$$uE, Mo, QM, VC } from '../figma_app/565242';
 import { i as _$$i6 } from '../figma_app/566312';
-import { gY as _$$gY, En, IT } from '../figma_app/566371';
+import { getAtomMutate, setupMemoizedAtomSubscription, setupResourceAtomHandler } from '../figma_app/566371';
 import { nc as _$$nc } from '../figma_app/570630';
 import { nl as _$$nl, wk as _$$wk, JZ } from '../figma_app/572363';
 import { $p, UA } from '../figma_app/580959';
@@ -720,7 +719,7 @@ import { m as _$$m6 } from '../figma_app/694193';
 import { f as _$$f4, K as _$$K } from '../figma_app/695131';
 import { _o as _$$_o, GW, L3 } from '../figma_app/701001';
 import { $X, B8 as _$$B0, gq as _$$gq2, oM as _$$oM, Eu, JQ, LU, Xc } from '../figma_app/703447';
-import { f0 as _$$f6 } from '../figma_app/707808';
+import { AppView } from '../figma_app/707808';
 import { wY as _$$wY } from '../figma_app/708845';
 import { iE as _$$iE, r as _$$r8, Wv as _$$Wv } from '../figma_app/711157';
 import { y0 as _$$y0 } from '../figma_app/718307';
@@ -779,7 +778,7 @@ import { KJ } from '../figma_app/916560';
 import { utilityNoop } from '../figma_app/918700';
 import { vj as _$$vj, Ex, zE } from '../figma_app/919079';
 import { f as _$$f7 } from '../figma_app/924252';
-import { Yv, Yx, Zr } from '../figma_app/930338';
+import { slugify, formatList, capitalize } from '../figma_app/930338';
 import { nh as _$$nh, Gb, Zl } from '../figma_app/933328';
 import { h as _$$h13 } from '../figma_app/935454';
 import { dA as _$$dA, U_, VR, Ws, zq } from '../figma_app/938628';
@@ -1463,7 +1462,7 @@ function tz() {
   let y = AE();
   let v = _$$uh();
   let j = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
-  let k = Oc();
+  let k = useIsSelectedFigmakeFullscreen();
   let S = selectCurrentUser();
   if (useEffect(() => {
     j !== DesignWorkspace.PROTOTYPE && activeToolId === DesignGraphElements.SITES_LINK && (activateTool(DesignGraphElements.SELECT), Fullscreen.setDefaultEditMode());
@@ -1722,7 +1721,7 @@ function tB(e) {
   } = _$$wH();
   let n = getProvisionalAccessBanner(G_.SITES);
   let s = _$$aV();
-  let r = q5();
+  let r = selectCurrentFile();
   let d = VA(r?.project);
   let c = useAtomWithSubscription(_$$wg);
   let u = useMemo(() => n?.showBanner && !s && !d && c, [n?.showBanner, s, d, c]);
@@ -1822,7 +1821,7 @@ function ij({
   let [a, s] = useAtomValueAndSetter(_$$mC(e?.guid ?? ''));
   let d = getFeatureFlags().living_designs_image_attachments;
   let c = selectCurrentUser();
-  let u = _$$tS();
+  let u = useCurrentFileKey();
   let {
     changedFiles
   } = _$$E3(e, _$$lV.CODE_IN_SITES);
@@ -2003,7 +2002,7 @@ function iF({
     let t = _$$O3.get(m);
     t && (e === _$$d3.ERROR ? t.hasErrors = !0 : e === _$$d3.LOADED && (t.hasErrors = !1));
   }, [m]);
-  let j = _$$tS();
+  let j = useCurrentFileKey();
   useEffect(() => {
     if (!m) return;
     let e = _$$O3.start(j, m);
@@ -2672,9 +2671,9 @@ function nI() {
     overlay: zpn,
     priority: _$$N5.HIGH_PRIORITY_MODAL
   });
-  let n = X$('FigMakePaywallOverlay');
-  let a = YY(n).unwrapOr(!1);
-  let s = q5();
+  let n = useCurrentPublicPlan('FigMakePaywallOverlay');
+  let a = useIsStarterPlan(n).unwrapOr(!1);
+  let s = selectCurrentFile();
   let r = s && s.teamId ? s.teamId : null;
   let o = $Y(r);
   let d = !s?.canEdit;
@@ -2820,7 +2819,7 @@ function nz() {
 function nH({
   children: e
 }) {
-  let t = Oc();
+  let t = useIsSelectedFigmakeFullscreen();
   let {
     fileLoading
   } = _$$Sn();
@@ -2831,11 +2830,11 @@ function nH({
 }
 function nq() {
   let e = function () {
-    let e = Oc();
+    let e = useIsSelectedFigmakeFullscreen();
     let t = Xr(_$$s3);
     let i = _$$C4();
     return e ? () => {
-      i(_$$f6.FILE);
+      i(AppView.FILE);
     } : () => {
       t(PanelType.FILE);
     };
@@ -2856,7 +2855,7 @@ nH.Header = function ({
   children: t,
   dataTestId: i
 }) {
-  let n = Oc();
+  let n = useIsSelectedFigmakeFullscreen();
   return jsxs('div', {
     ..._$$Ay.props(nX.header(!!n)),
     'data-testid': i,
@@ -3224,7 +3223,7 @@ function ax({
   fileKey: e,
   onClose: t
 }) {
-  let [i] = IT(SiteMountWithPublishEvents.Query({
+  let [i] = setupResourceAtomHandler(SiteMountWithPublishEvents.Query({
     fileKey: e
   }));
   if (i.status === _$$H3.LOADING) {
@@ -3257,7 +3256,7 @@ function am({
   onClose: n
 }) {
   let r;
-  let o = Oc();
+  let o = useIsSelectedFigmakeFullscreen();
   let d = o ? getI18nString('figmake.publish_modal.publish_history_dropdown.published_app') : getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.published_site');
   let c = o ? getI18nString('figmake.toolbar.publish_modal.publish_history_dropdown.unpublished_app') : getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.unpublished_site');
   let p = () => {
@@ -3279,7 +3278,7 @@ function am({
   let h = useRef(null);
   let g = `site-publish-history-dropdown-${e.id}`;
   let f = m?.type === g;
-  let _ = _$$tS();
+  let _ = useCurrentFileKey();
   let {
     onUpdateBundle
   } = MT({
@@ -3582,9 +3581,9 @@ function aN() {
 function aR() {
   let e = _$$a5();
   let t = useAtomWithSubscription(lZ);
-  let i = Oc();
-  let n = No();
-  let a = _$$iW(n).unwrapOr(!0);
+  let i = useIsSelectedFigmakeFullscreen();
+  let n = useTeamPlanPublicInfo();
+  let a = useIsStarterOrProPlan(n).unwrapOr(!0);
   return i && t && getFeatureFlags().cmty_make_publishing ? a ? renderI18nText('sites.toolbar.publish_modal.community_publish_disclaimer', {
     creator_agreement: jsx(_$$CY, {
       href: aT,
@@ -3628,7 +3627,7 @@ function aR() {
   });
 }
 function aA() {
-  return Oc() && (FontHelpers?.getLocalTextStyleFontInfo() || []).filter(e => e.source !== FontSourceType.GOOGLE).length !== 0 ? jsxs('div', {
+  return useIsSelectedFigmakeFullscreen() && (FontHelpers?.getLocalTextStyleFontInfo() || []).filter(e => e.source !== FontSourceType.GOOGLE).length !== 0 ? jsxs('div', {
     className: 'x78zum5 x1q0g3np x1jnr06f',
     children: [jsx(_$$B3, {
       style: {
@@ -3652,7 +3651,7 @@ function aD({
   fileKey: e
 }) {
   let t = useDispatch();
-  let i = Oc();
+  let i = useIsSelectedFigmakeFullscreen();
   let n = _$$_t(e);
   let a = n ? jsx(_$$N6, {
     href: _$$uw(n),
@@ -3720,7 +3719,7 @@ function az({
 function aX({
   hubFileId: e
 }) {
-  let [t] = IT(_$$Z2({
+  let [t] = setupResourceAtomHandler(_$$Z2({
     apiResourceType: 'file',
     id: e
   }));
@@ -3779,7 +3778,7 @@ function aV() {
     apiResourceType: 'file',
     id: e
   }));
-  let a = En(n);
+  let a = setupMemoizedAtomSubscription(n);
   if (i.length === 0 || a.some(e => e.status === 'loading') || a.every(e => e.status === 'errors')) return null;
   let s = e.color === 'dark';
   return jsxs(Wk, {
@@ -3927,10 +3926,10 @@ function a7({
   fileKey: e,
   setCommunityPublishingState: t
 }) {
-  let i = _$$S3();
-  let n = YY(i).unwrapOr(!1);
-  let a = _$$iW(i);
-  if (!Oc() || !getFeatureFlags().cmty_make_publishing || a.status !== 'loaded') return null;
+  let i = useTeamPlanFeatures();
+  let n = useIsStarterPlan(i).unwrapOr(!1);
+  let a = useIsStarterOrProPlan(i);
+  if (!useIsSelectedFigmakeFullscreen() || !getFeatureFlags().cmty_make_publishing || a.status !== 'loaded') return null;
   let s = a.data;
   return jsx(a9, {
     fileKey: e,
@@ -3950,15 +3949,15 @@ function a9({
     setCommunityPublishingState: t
   }) {
     let i = useDispatch();
-    let n = Oc();
-    let l = q5();
+    let n = useIsSelectedFigmakeFullscreen();
+    let l = selectCurrentFile();
     let r = getFeatureFlags().cmty_make_publishing ?? !1;
     let d = useAtomWithSubscription(lZ) ?? !1;
     let c = function () {
       let [e] = useAtomValueAndSetter(lZ);
-      let t = _$$S3();
-      let i = YY(t);
-      return !!Oc() && !!getFeatureFlags().cmty_make_publishing && (i.status !== 'loaded' || i.data && !e);
+      let t = useTeamPlanFeatures();
+      let i = useIsStarterPlan(t);
+      return !!useIsSelectedFigmakeFullscreen() && !!getFeatureFlags().cmty_make_publishing && (i.status !== 'loaded' || i.data && !e);
     }();
     let u = useAtomWithSubscription(_$$td) ?? !1;
     let p = n && d && r && u;
@@ -4001,8 +4000,8 @@ function a9({
 function se() {
   let [e, t] = useAtomValueAndSetter(lZ);
   let i = useId();
-  let n = _$$S3();
-  let s = YY(n).unwrapOr(!1);
+  let n = useTeamPlanFeatures();
+  let s = useIsStarterPlan(n).unwrapOr(!1);
   let r = useCallback(e => {
     e?.stopPropagation?.();
     t(e => !e);
@@ -4031,8 +4030,8 @@ function st() {
   let i = _$$h7.useTrackingContext({
     trigger: UpsellModalType.FIGMAKE_PUBLISH_SITE
   });
-  let n = _$$S3();
-  let a = YY(n);
+  let n = useTeamPlanFeatures();
+  let a = useIsStarterPlan(n);
   let s = _$$y6(t?.id || '', UpsellModalType.FIGMAKE_PUBLISH_SITE);
   return e || !a.data ? null : jsx('div', {
     children: renderI18nText('sites.toolbar.publish_modal.allow_others_to_remix_on_community.description', {
@@ -4157,12 +4156,12 @@ function sp({
   let k = useDispatch();
   let [w] = _$$_I();
   let [S, C] = useState('main');
-  let T = _$$S3();
-  let I = YY(T).unwrapOr(!1);
+  let T = useTeamPlanFeatures();
+  let I = useIsStarterPlan(T).unwrapOr(!1);
   let E = _$$ol();
   let N = selectCurrentUser();
   let R = _$$sZ();
-  let A = Oc();
+  let A = useIsSelectedFigmakeFullscreen();
   let L = {
     top: _$$f7 + 8,
     right: 14
@@ -4315,8 +4314,8 @@ function sp({
   }
   let D = _?.filter(e => !p.has(e)) || [];
   let z = function () {
-    let e = Oc();
-    let t = _$$cJ();
+    let e = useIsSelectedFigmakeFullscreen();
+    let t = useIsFullscreenSitesView();
     return e ? !getFeatureFlags().bake_pub : !!t && !getFeatureFlags().sts_pub_enabled;
   }();
   let B = getFeatureFlags().cmty_make_publishing;
@@ -4448,7 +4447,7 @@ function sm({
   view: e,
   setPublishModalView: t
 }) {
-  let i = Oc();
+  let i = useIsSelectedFigmakeFullscreen();
   let n = _$$a5();
   let a = i ? renderI18nText('figmake.publish_modal.modal_title') : renderI18nText('sites.toolbar.publish_modal.publish_site');
   let s = i && !n ? jsx(sx, {}) : null;
@@ -4565,11 +4564,11 @@ function sv(e) {
   let {
     selectedResponsiveSetGuids
   } = _$$q5(n);
-  let r = Oc();
-  let o = _$$cJ();
+  let r = useIsSelectedFigmakeFullscreen();
+  let o = useIsFullscreenSitesView();
   let d = useMemo(() => r ? G_.FIGMAKE : G_.SITES, [r]);
-  let c = _$$S3();
-  let p = YY(c).unwrapOr(!1);
+  let c = useTeamPlanFeatures();
+  let p = useIsStarterPlan(c).unwrapOr(!1);
   let {
     isUpgradeHandlerLoadingCallback,
     handleUpgradeCallback,
@@ -4580,12 +4579,12 @@ function sv(e) {
     upgradeDisabledReason
   } = function (e, t) {
     let i = function (e, t) {
-      let i = Rs(FilePublishSitePermissions, {
+      let i = useSubscription(FilePublishSitePermissions, {
         fileKey: e.key
       });
       return resourceUtils.useTransform(i, i => {
         let n = i.file?.canPublishSiteWithReasons;
-        if (!n || n.status !== _$$tT.Loaded) {
+        if (!n || n.status !== ResourceStatus.Loaded) {
           return {
             result: e.canEdit,
             canRequestUpgrade: !1
@@ -4606,7 +4605,7 @@ function sv(e) {
           upgradeDisabledReason: a
         };
       });
-    }(e, Oc());
+    }(e, useIsSelectedFigmakeFullscreen());
     let {
       handleUpgrade,
       getUpgradeEligibility,
@@ -4637,7 +4636,7 @@ function sv(e) {
   let y = isUpgradeHandlerLoadingCallback();
   let v = r && getFeatureFlags().cmty_make_publishing;
   let j = p && !v && (r && getFeatureFlags().bake_starter_limit || o && getFeatureFlags().sts_starter_enabled);
-  if (!_$$oz() || !t || n.isLoading || !selectedResponsiveSetGuids || y) {
+  if (!isSitesFeatureEnabled() || !t || n.isLoading || !selectedResponsiveSetGuids || y) {
     return {
       isPublishingDisabled: !0,
       publishButtonProps: {
@@ -4774,7 +4773,7 @@ function sA({
   } = _$$b5({
     initialPosition: 'bottom-end'
   });
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let {
     openFigmakeFullscreenInNewTab
   } = Ve();
@@ -4788,7 +4787,7 @@ function sA({
     });
     openFigmakeFullscreenInNewTab();
   }, [openFigmakeFullscreenInNewTab, n]);
-  let c = useAtomWithSubscription(_$$az2);
+  let c = useAtomWithSubscription(eventEmitterAtom);
   useEffect(() => {
     let e = () => {
       manager.setOpen(!0);
@@ -4940,7 +4939,7 @@ function sQ() {
   let {
     openFigmakeFullscreenInNewTab
   } = Ve();
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = useCallback(() => {
     analyticsEventManager.trackDefinedEvent('ai_for_production.figmake_open_preview_in_new_tab_clicked', {
       fileKey: t ?? ''
@@ -4995,7 +4994,7 @@ function s5({
   codeInstanceNodeToRender: n
 }) {
   let a;
-  let r = q5();
+  let r = selectCurrentFile();
   let d = _$$u4();
   let c = I4(n);
   let p = useDispatch();
@@ -5122,8 +5121,8 @@ function s2() {
   });
 }
 function s4() {
-  let e = q5();
-  let t = _$$iG();
+  let e = selectCurrentFile();
+  let t = useToggleFigmakeMode();
   return jsxs('div', {
     className: 'x78zum5 x6s0dn4 x167g77z x98rzlu x1iyjqo2 x1r8uery x13a6bvl',
     children: [e ? jsx(Fragment, {
@@ -5159,7 +5158,7 @@ function s3() {
   });
 }
 function s8() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = _$$k6();
   let i = e?.canView && !e?.canEdit;
   return t ? jsx(s6, {}) : i ? jsx(s7, {}) : jsx(re, {});
@@ -5168,7 +5167,7 @@ function s6() {
   let {
     figmakeInFullscreen
   } = Ve();
-  let t = q5();
+  let t = selectCurrentFile();
   return figmakeInFullscreen ? jsxs(Fragment, {
     children: [jsx(s3, {}), jsx(sJ, {
       blockWithAuthModal: !0
@@ -5183,9 +5182,9 @@ function s7() {
   let {
     figmakeInFullscreen
   } = Ve();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = selectCurrentUser();
-  let n = DG(t?.key || '').enabled;
+  let n = getWorkshopModeStatus(t?.key || '').enabled;
   return figmakeInFullscreen ? jsxs(Fragment, {
     children: [jsx(s3, {}), jsx(sJ, {}), t && jsx(_$$w2, {
       user: i,
@@ -5262,9 +5261,9 @@ function re() {
   let t = _$$h4();
   let i = !getFeatureFlags().bake_publish_flow;
   let n = Fk(e => e.getCurrentPage()?.guid);
-  let a = q5();
+  let a = selectCurrentFile();
   let s = selectCurrentUser();
-  let r = DG(a?.key || '').enabled;
+  let r = getWorkshopModeStatus(a?.key || '').enabled;
   let {
     codeLibraryInstance
   } = _$$oA2();
@@ -5274,7 +5273,7 @@ function re() {
     apiResourceType: 'file',
     id: e
   }));
-  return (En(d), a) ? figmakeInFullscreen ? jsxs(Fragment, {
+  return (setupMemoizedAtomSubscription(d), a) ? figmakeInFullscreen ? jsxs(Fragment, {
     children: [jsx(s3, {}), jsx(s9, {}), jsx(sJ, {}), a && jsx(_$$w2, {
       user: s,
       editingFile: a,
@@ -5314,7 +5313,7 @@ function rt() {
 }
 function ru() {
   let e = _$$wT();
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = async () => {
     if (t) {
       _$$oU({
@@ -5391,8 +5390,8 @@ let rm = {
   }
 };
 function rj() {
-  let e = _$$tS();
-  let t = _$$gY(_$$rY);
+  let e = useCurrentFileKey();
+  let t = getAtomMutate(_$$rY);
   let i = Xr(Kj);
   let {
     connectedProject,
@@ -5933,7 +5932,7 @@ function rU({
   view: e
 }) {
   let t = useRef(!1);
-  let i = _$$tS() || '';
+  let i = useCurrentFileKey() || '';
   switch (useEffect(() => {
     if (t.current) return;
     let n = _$$oR({
@@ -5970,7 +5969,7 @@ function rK() {
 function rH() {
   let e = _$$wT();
   let t = _$$gJ();
-  let i = _$$tS() || '';
+  let i = useCurrentFileKey() || '';
   let n = useCallback(() => {
     _$$oU({
       persistentEntityId: '',
@@ -6162,7 +6161,7 @@ function r2({
       ..._$$xk(r8.summary),
       children: renderI18nText('sites.metadata.fonts.styles_count', {
         numStyles: e.length,
-        styles: Yx(e)
+        styles: formatList(e)
       })
     })]
   });
@@ -6562,7 +6561,7 @@ let o_ = atom(e => e(of), (e, t) => {
   }
 });
 function ob() {
-  let e = _$$tS();
+  let e = useCurrentFileKey();
   let {
     data
   } = function () {
@@ -6579,13 +6578,13 @@ function ob() {
     familyAndStyleNames: []
   };
   let d = function () {
-    let e = _$$tS();
-    let t = Rs(WebFontsForFile({
+    let e = useCurrentFileKey();
+    let t = useSubscription(WebFontsForFile({
       fileKey: e || ''
     }), {
       enabled: !!e
     });
-    return t.status !== 'loaded' ? null : _$$oA3(t.data?.webFonts) ?? null;
+    return t.status !== 'loaded' ? null : getResourceDataOrFallback(t.data?.webFonts) ?? null;
   }();
   let c = function (e, t) {
     let [i, n] = useState(new Set());
@@ -7113,7 +7112,7 @@ function oL({
   let d = r ? getI18nString('sites.panel.home') : n?.name;
   let p = a !== null ? e === a : e === 'website';
   let x = _$$b2();
-  let m = Oc();
+  let m = useIsSelectedFigmakeFullscreen();
   let h = t => {
     t.preventDefault();
     i(e);
@@ -7430,11 +7429,11 @@ function oY({
   let n = useDispatch();
   let r = qg(e.domain).subdomain ?? '';
   let o = `.${qg(e.domain).domain ?? ''}`;
-  let d = _$$tS();
+  let d = useCurrentFileKey();
   let [c, x] = useState(r);
   let [m, h] = useState(null);
   let [g, f] = useState(!1);
-  let _ = Rs(SiteMount({
+  let _ = useSubscription(SiteMount({
     fileKey: d || ''
   }), {
     enabled: !!d
@@ -7630,7 +7629,7 @@ function oZ({
   domainInfo: e
 }) {
   let t = _$$b2();
-  let i = Oc();
+  let i = useIsSelectedFigmakeFullscreen();
   let n = jsxs(Fragment, {
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf xg2d0mh xod5an3',
@@ -7657,11 +7656,11 @@ function oZ({
 function oQ({
   domainInfo: e
 }) {
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = JW(t);
   let [n, s] = useState(!1);
   let [r, o] = useState(!1);
-  let d = Oc();
+  let d = useIsSelectedFigmakeFullscreen();
   if (i.isLoading) return null;
   let {
     isNotPublished,
@@ -7998,8 +7997,8 @@ function dl({
 }) {
   let r = useDispatch();
   let [o, d] = useState(!1);
-  let c = _$$S3();
-  let p = YY(c);
+  let c = useTeamPlanFeatures();
+  let p = useIsStarterPlan(c);
   let x = _$$ol();
   let m = _$$lg();
   let h = i.status === 'loading';
@@ -8050,13 +8049,13 @@ let ds = registerModal(e => {
   } = e;
   let i = _$$hS(e);
   let n = useDispatch();
-  let [a] = IT(SiteMount.Query({
+  let [a] = setupResourceAtomHandler(SiteMount.Query({
     fileKey: e.fileKey
   }));
-  let r = _$$oA3(a.data?.siteMount);
+  let r = getResourceDataOrFallback(a.data?.siteMount);
   let o = r?.customDomain?.verifiedAt != null;
-  let d = _$$gY(dr);
-  let c = Oc();
+  let d = getAtomMutate(dr);
+  let c = useIsSelectedFigmakeFullscreen();
   let x = c ? renderI18nText('figmake.metadata.domain.confirm_connected_domain_removal') : renderI18nText('sites.metadata.domain.confirm_connected_domain_removal');
   let m = c ? renderI18nText('figmake.metadata.domain.remove_connected_domain_confirmation') : renderI18nText('sites.metadata.domain.you_are_about_to_remove_your_site_s_connected_domain_url_existing_external_links_to_your_site_may_break');
   let h = c ? renderI18nText('figmake.metadata.domain.confirm_connected_domain_removal_button') : renderI18nText('general.confirm');
@@ -8222,10 +8221,10 @@ function dm({
   redirectedDomain: t
 }) {
   let i = useDispatch();
-  let [n] = IT(SiteMount.Query({
+  let [n] = setupResourceAtomHandler(SiteMount.Query({
     fileKey: e
   }));
-  let a = _$$oA3(n.data?.siteMount);
+  let a = getResourceDataOrFallback(n.data?.siteMount);
   let [r, d] = useAtomValueAndSetter(AP);
   let c = async () => {
     try {
@@ -8582,9 +8581,9 @@ function dI({
   domainInfo: e,
   recordingKey: t
 }) {
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let n = e && e.hasCustomDomain;
-  let [a] = IT(_$$q7(i ?? ''));
+  let [a] = setupResourceAtomHandler(_$$q7(i ?? ''));
   return i ? jsxs(_$$fu, {
     name: 'Sites Domain Settings',
     children: [jsx('h2', {
@@ -8800,7 +8799,7 @@ function dz({
   recordingKey: e,
   fileKey: t
 }) {
-  let i = Rs(SiteMount({
+  let i = useSubscription(SiteMount({
     fileKey: t
   }), {
     enabled: !0
@@ -8812,14 +8811,14 @@ function dz({
   let o = useMemo(() => !!(i.status === 'loaded' && _$$oA(i.data?.siteMount)?.pwdConfig?.id), [i]);
   let d = useDispatch();
   let c = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     if (!e) return !1;
     let {
       sharedContainerSetting
     } = e;
-    return !!sharedContainerSetting && sharedContainerSetting.status === _$$tT.Loaded && (sharedContainerSetting.data?.autogenPasswordControls ?? !1);
+    return !!sharedContainerSetting && sharedContainerSetting.status === ResourceStatus.Loaded && (sharedContainerSetting.data?.autogenPasswordControls ?? !1);
   }();
-  let x = Oc();
+  let x = useIsSelectedFigmakeFullscreen();
   let [m, h] = useState(o);
   let [g, f] = useState(!1);
   let [_, b] = useState(!1);
@@ -9488,8 +9487,8 @@ function d9(e) {
 let ct = registerModal(({
   onClose: e
 }) => {
-  let t = Oc();
-  let i = q5();
+  let t = useIsSelectedFigmakeFullscreen();
+  let i = selectCurrentFile();
   if (!i) return null;
   let n = i.key;
   let a = async () => {
@@ -9527,7 +9526,7 @@ function ci({
   }(0);
   let a = _$$_t(e);
   let s = _$$JT();
-  let r = Oc();
+  let r = useIsSelectedFigmakeFullscreen();
   let o = r ? renderI18nText('figmake.unpublish_modal.header') : renderI18nText('sites.toolbar.publish_modal.unpublish_site');
   let d = a && a.hasCustomDomain && a.verifiedAt ? a.customDomain : a?.domain;
   let c = jsx('span', {
@@ -9581,7 +9580,7 @@ function cl({
   isSiteLevelSetting: i
 }) {
   let n = generateRecordingKey(e, 'title');
-  let s = Oc();
+  let s = useIsSelectedFigmakeFullscreen();
   let r = useMemo(() => s ? getI18nString('figmake.metadata.controls.site_title.label') : i ? getI18nString('sites.metadata.controls.title_site.label') : getI18nString('sites.metadata.controls.title_page.label'), [i, s]);
   return jsx(dK, {
     label: r,
@@ -9604,7 +9603,7 @@ function ca({
   let n = d9(t);
   let [s, o] = useState(n.description);
   let d = OG(i ? 'description' : 'page_description');
-  let c = Oc();
+  let c = useIsSelectedFigmakeFullscreen();
   let p = useMemo(() => c ? getI18nString('figmake.metadata.controls.description_site.label') : i ? getI18nString('sites.metadata.controls.description_site.label') : getI18nString('sites.metadata.controls.description_page.label'), [c, i]);
   return jsx(dK, {
     label: p,
@@ -9669,11 +9668,11 @@ function co({
   recordingKey: e
 }) {
   let t = selectCurrentUser();
-  let i = Oc();
+  let i = useIsSelectedFigmakeFullscreen();
   let {
     codeLibraryInstance
   } = _$$oA2();
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let [o, d] = useState(!1);
   let c = useCallback(() => {
     if (t && codeLibraryInstance && codeLibraryInstance.type === 'CODE_LIBRARY' && codeLibraryInstance.chatMessages) {
@@ -9797,7 +9796,7 @@ function cu({
   let o = d9(null).blockSearchIndexing && !i;
   let [d, c] = useState(s.blockSearchIndexing);
   let p = OG(i ? 'search_indexing' : 'page_search_indexing');
-  let x = Oc();
+  let x = useIsSelectedFigmakeFullscreen();
   let m = [t];
   x && (m = [t, ...(n ?? [])]);
   let h = useMemo(() => x ? getI18nString('figmake.metadata.controls.no_indexing_site.label') : i ? getI18nString('sites.metadata.controls.no_indexing_site.label') : getI18nString('sites.metadata.controls.no_indexing_page.label'), [i, x]);
@@ -10141,7 +10140,7 @@ function cb({
   let i = t.key;
   let n = JW(i || null);
   let a = useDispatch();
-  let r = Oc();
+  let r = useIsSelectedFigmakeFullscreen();
   if (_$$$D({
     fileKey: i
   }), n.isLoading) {
@@ -10172,7 +10171,7 @@ function cb({
 function cy({
   recordingKey: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   return t ? jsx(dK, {
     useLabel: !1,
     label: getI18nString('sites.metadata.controls.publish_status.label'),
@@ -10200,23 +10199,23 @@ function cj({
   let n = _$$b2();
   let a = noop();
   let s = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = e?.plan?.tier === Agb.STARTER;
-    let i = Oc();
+    let i = useIsSelectedFigmakeFullscreen();
     let n = function (e) {
-      let t = Rs(FilePublishSitePermissions({
+      let t = useSubscription(FilePublishSitePermissions({
         fileKey: e || ''
       }), {
         enabled: !!e
       });
       return resourceUtils.useTransform(t, e => {
         let t = e.file?.canPublishSiteWithReasons;
-        return t != null && t.status === _$$tT.Loaded && t.data.result;
+        return t != null && t.status === ResourceStatus.Loaded && t.data.result;
       }).data ?? !1;
     }(e?.key);
     return !!getFeatureFlags().sts_passwords && (!t || !i) && n;
   }();
-  let r = Oc();
+  let r = useIsSelectedFigmakeFullscreen();
   let o = jsxs(Fragment, {
     children: [jsx(d$, {
       children: getI18nString('sites.metadata.heading.general')
@@ -10276,7 +10275,7 @@ function cj({
       closeModal: i
     })]
   });
-  let m = q5();
+  let m = selectCurrentFile();
   let h = m?.key;
   let g = h ? jsxs(Fragment, {
     children: [jsx(d$, {
@@ -10418,7 +10417,7 @@ function cS({
 }) {
   let i = useAtomWithSubscription(_$$j4);
   let n = _$$dh();
-  let a = _$$tS();
+  let a = useCurrentFileKey();
   let s = _$$_t(a ?? '');
   return i === null || i === n || i === _$$p6.WEBSITE ? jsx(cj, {
     page: n,
@@ -10757,9 +10756,9 @@ let cZ = {
   }
 };
 function c5() {
-  let e = _$$tS();
-  let t = No();
-  let i = YY(t).unwrapOr(!1);
+  let e = useCurrentFileKey();
+  let t = useTeamPlanPublicInfo();
+  let i = useIsStarterPlan(t).unwrapOr(!1);
   let [n, r] = useState(!1);
   let o = useRef(null);
   let {
@@ -10835,7 +10834,7 @@ function c8({
     maxHeight: 200
   });
   let h = useRef(!1);
-  let g = q5();
+  let g = selectCurrentFile();
   useEffect(() => {
     m();
   }, [i, m]);
@@ -11092,7 +11091,7 @@ function ur({
   requestClose: e,
   codeLibraryInstance: t
 }) {
-  let i = q5();
+  let i = selectCurrentFile();
   let n = GQ();
   let {
     color
@@ -11118,7 +11117,7 @@ function ur({
           fileKey: i.key,
           templateName: n
         });
-        YQ({
+        handleAtomEvent({
           id: 'ai_for_production.chat_response_received'
         });
       } catch (e) {
@@ -11333,7 +11332,7 @@ function u_({
 }
 let ub = 'Figmake Existing File Fullscreen Onboarding';
 function uy() {
-  let e = Kf();
+  let e = useIsCurrentUserCreator();
   let {
     figmakeInFullscreen
   } = Ve();
@@ -11441,7 +11440,7 @@ let uE = 'Figmake Existing File Editor Onboarding';
 function uN({
   chatMessagesNodeGuid: e
 }) {
-  let t = Kf();
+  let t = useIsCurrentUserCreator();
   let {
     figmakeInFullscreen
   } = Ve();
@@ -11610,7 +11609,7 @@ function uF({
     priority: _$$N5.OVERRIDING_MODAL
   });
   return (_$$E8(uniqueId, 'ai_for_production.chat_response_received', () => n(!0)), useEffect(() => {
-    t && d === 'put_it_on_the_web' && YQ({
+    t && d === 'put_it_on_the_web' && handleAtomEvent({
       id: _$$hj
     });
   }, [d, t]), useEffect(() => {
@@ -11621,7 +11620,7 @@ function uF({
       steps: uP,
       complete() {
         complete();
-        YQ({
+        handleAtomEvent({
           id: 'make_onboarding_completed'
         });
       },
@@ -11685,7 +11684,7 @@ function uM() {
 function uD({
   chatMessagesNodeGuid: e
 }) {
-  let t = Kf();
+  let t = useIsCurrentUserCreator();
   let {
     figmakeInFullscreen
   } = Ve();
@@ -11763,7 +11762,7 @@ let uH = {
   }
 };
 function uq() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = !!(e && e.key && e.name);
   let i = _$$aV();
   let n = _$$h4();
@@ -11806,7 +11805,7 @@ function uX() {
   } = function (e, t) {
     let i = useAtomWithSubscription(Nm(e?.guid || ''));
     let n = _$$E4(e);
-    let l = _$$tS();
+    let l = useCurrentFileKey();
     let s = function (e) {
       let t = _$$E4(e);
       if (!t) return null;
@@ -11870,7 +11869,7 @@ function uX() {
   let w = useAtomWithSubscription(_$$TJ);
   let S = entryPointCodeInstance ? w[entryPointCodeInstance.guid] ?? entryPointCodeInstance.guid : null;
   let C = _$$vD(S);
-  let T = q5();
+  let T = selectCurrentFile();
   let I = useAtomWithSubscription(_$$o2(codeLibraryInstance?.guid || ''));
   let E = _$$d7(T?.key ?? null, _$$lV.FIGMAKE);
   if (!T || !entryPointCodeInstance) return jsx(uG, {});
@@ -11986,7 +11985,7 @@ function uG() {
 function uW({
   message: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     codeLibraryInstance
   } = _$$oA2();
@@ -12096,7 +12095,7 @@ function uJ({
   nodeWithChatMessages: e,
   selectedCodeFileNode: t
 }) {
-  let i = q5();
+  let i = selectCurrentFile();
   let [n, s] = useState(!1);
   let [r, o] = useState(!1);
   let d = _$$Y();
@@ -12227,13 +12226,13 @@ function pr({
   codeInstanceGuid: i
 }) {
   let n = selectCurrentUser();
-  let r = _$$tS();
+  let r = useCurrentFileKey();
   let d = useAtomWithSubscription(EB);
   zA();
   _$$m5();
   (function (e) {
     let t = useDispatch();
-    let i = q5();
+    let i = selectCurrentFile();
     let n = i?.key;
     let [l] = useAtomValueAndSetter(_$$n6);
     let r = e.chatMessagesNode || null;
@@ -12317,7 +12316,7 @@ function pr({
 function po({
   isResizingPanel: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     codeLibraryInstance,
     entryPointCodeInstance
@@ -12562,7 +12561,7 @@ function xa({
   onBlur: e,
   collection: t
 }) {
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let [n] = _$$DF();
   let s = useRef(null);
   let r = useRef(null);
@@ -12935,7 +12934,7 @@ function xh({
   value: e
 }) {
   let [t, i] = useState(null);
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   return (useEffect(() => {
     async function t() {
       try {
@@ -13697,7 +13696,7 @@ function xU({
         case _$$_j.LINK:
           return jsx(x$, {
             id: e.id,
-            label: Zr(e.name),
+            label: capitalize(e.name),
             children: jsx('div', {
               className: 'x1yrfp1h x1lliihq x1yjhc3n x9f619 xiuzu7u xlyipyv x1gs6z28 xnsahwu xh8yej3 xxk0z11'
             })
@@ -13705,7 +13704,7 @@ function xU({
         case _$$_j.IMAGE:
           return jsx(x$, {
             id: e.id,
-            label: Zr(e.name),
+            label: capitalize(e.name),
             children: jsx('div', {
               className: 'x1lliihq x1yjhc3n x9f619 xiuzu7u xlyipyv x1md70p1 x1plog1 xur7f20 x1d786w4 xo1570h'
             })
@@ -13714,7 +13713,7 @@ function xU({
         case _$$_j.PLAIN_TEXT:
           return jsx(x$, {
             id: e.id,
-            label: Zr(e.name),
+            label: capitalize(e.name),
             children: jsx('div', {
               className: 'x1yrfp1h x1lliihq x1yjhc3n x9f619 xiuzu7u xlyipyv x1gs6z28 xnsahwu xh8yej3 xxk0z11'
             })
@@ -13722,7 +13721,7 @@ function xU({
         case _$$_j.RICH_TEXT:
           return jsx(x$, {
             id: e.id,
-            label: Zr(e.name),
+            label: capitalize(e.name),
             children: jsx('div', {
               className: 'x1yrfp1h x1lliihq x1yjhc3n x9f619 xiuzu7u xlyipyv x1gs6z28 xnsahwu xh8yej3 xlo07zb'
             })
@@ -14433,7 +14432,7 @@ function mx({
   }, [i]);
   let [d, c] = useState(null);
   let [p, x] = useState(2);
-  let m = _$$tS();
+  let m = useCurrentFileKey();
   useEffect(() => {
     async function e() {
       if (o?.imageThumbnail && m && d?.hash !== o.imageThumbnail) {
@@ -14639,9 +14638,9 @@ function mf({
   let j = i.id;
   let k = (g[j] ?? []).length > 0;
   function w(e, t = {}) {
-    i.name === _$$rU.Title && p != null && v(_$$_j.SLUG, c, p, Yv(e));
+    i.name === _$$rU.Title && p != null && v(_$$_j.SLUG, c, p, slugify(e));
     let n = i.fieldType;
-    if (n === _$$_j.SLUG && (e = Yv(e, {
+    if (n === _$$_j.SLUG && (e = slugify(e, {
       stripTrailingHyphens: t.stripSlugLeadingTrailingHyphens,
       stripLeadingHyphens: t.stripSlugLeadingTrailingHyphens
     })), !K5(n)) {
@@ -14812,7 +14811,7 @@ function mv({
     className: mg,
     children: p.map(i => jsx(x$, {
       id: i.id,
-      label: Zr(i.name),
+      label: capitalize(i.name),
       children: (() => {
         switch (i.fieldType) {
           case _$$_j.LINK:
@@ -15641,7 +15640,7 @@ let mY = registerModal(e => {
 }, 'CMSNewCollectionModal', ModalSupportsBackground.YES);
 function mJ() {
   let e = useDispatch();
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = _$$c$(t);
   let n = (i.data?.length ?? 0) + 1;
   return () => e(showModalHandler({
@@ -16391,7 +16390,7 @@ let hu = {
 function hp() {
   let e = useDispatch();
   let t = function () {
-    let e = _$$tS();
+    let e = useCurrentFileKey();
     return async function ({
       name: t,
       fieldSchemasByIndex: i,
@@ -16689,7 +16688,7 @@ function hb() {
   let [n, r] = useState(!1);
   let d = getI18nString('dakota.ai.prompt_placeholder');
   let [c, x] = useState(d);
-  let m = _$$tS();
+  let m = useCurrentFileKey();
   let h = Xr(pb);
   let g = Xr(_$$iO);
   let f = Xr(_$$ou);
@@ -16973,7 +16972,7 @@ function hA(e) {
 function hL({
   isCollectionListLoading: e
 }) {
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = useAtomWithSubscription(_$$iO);
   let {
     collection
@@ -17048,7 +17047,7 @@ function hF() {
   let t = useAtomWithSubscription(p_);
   let i = useAtomWithSubscription(pb);
   let n = useAtomWithSubscription(_$$iO);
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let {
     status,
     data
@@ -17789,7 +17788,7 @@ function ga() {
   let g = h.length > 1;
   let f = useAtomWithSubscription(ge);
   let _ = useAtomWithSubscription(_$$lT);
-  let b = _$$tS();
+  let b = useCurrentFileKey();
   b || reportError(_$$e2.CMS, new Error('fileKey not found in DakotaCollectionsPanel'));
   let y = _$$c$(b);
   let k = e => {
@@ -17993,7 +17992,7 @@ function go({
   });
 }
 function gd() {
-  let e = _$$tS();
+  let e = useCurrentFileKey();
   let t = _$$c$(e).data;
   let [i, n] = useAtomValueAndSetter(_$$iO);
   let s = useAtomWithSubscription(_$$ou);
@@ -18137,7 +18136,7 @@ function gR({
     isDefaultResponsiveSet: i === t,
     nodeType: null
   });
-  let I = _$$tS();
+  let I = useCurrentFileKey();
   let {
     guid,
     width,
@@ -18628,7 +18627,7 @@ function gL(e) {
 function gO() {
   let e = GQ();
   let t = _$$cT();
-  let i = q5();
+  let i = selectCurrentFile();
   let n = useSelector(e => e.versionHistory);
   let d = function () {
     let e = _$$dh();
@@ -18777,7 +18776,7 @@ function gB() {
   });
 }
 function g$() {
-  let e = q5();
+  let e = selectCurrentFile();
   if (!(e && e.key && e.name)) return jsx(VQ, {});
   let t = jsxs('div', {
     className: 'x78zum5 x6s0dn4 x1qughib x8439ig',
@@ -18812,14 +18811,14 @@ function gU({
 }) {
   let t = _$$_t(e);
   if (!function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = e?.key;
-    let i = Rs(SiteBundles, {
+    let i = useSubscription(SiteBundles, {
       fileKey: t ?? ''
     }, {
       enabled: !!t
     });
-    let n = Rs(SiteMount, {
+    let n = useSubscription(SiteMount, {
       fileKey: t || ''
     }, {
       enabled: !!t
@@ -18886,7 +18885,7 @@ function gK() {
   });
 }
 function gV() {
-  let e = q5();
+  let e = selectCurrentFile();
   return jsxs(_$$O7, {
     children: [jsx('div', {
       className: 'xs83m0k x1iyjqo2 xeuugli',
@@ -19131,8 +19130,8 @@ let g9 = memo(() => {
   useEffect(() => {
     let i = _$$R9(e);
     t && (i = t);
-    setSentryTag('sites-area', i);
-    return () => setSentryTag('sites-area', void 0);
+    setTagGlobal('sites-area', i);
+    return () => setTagGlobal('sites-area', void 0);
   }, [e, t]);
   let {
     isLeftPanelCollapsed
@@ -19366,8 +19365,8 @@ function fd() {
     teamId,
     canEditTeam
   } = _$$V4();
-  let r = X$('SitesPaywallOverlay');
-  let o = YY(r).unwrapOr(!1);
+  let r = useCurrentPublicPlan('SitesPaywallOverlay');
+  let o = useIsStarterPlan(r).unwrapOr(!1);
   return (_$$h3(() => {
     isEligible && o && show();
   }), isEligible && teamId && o) ? jsx(_$$W8, {
@@ -19382,13 +19381,13 @@ function fd() {
 var ff = (e => (e.WEBPAGES = 'webpages', e.BLOCKS = 'blocks', e.CODE = 'code', e.PREVIEW = 'preview', e.PUBLISH = 'publish', e))(ff || {});
 let f_ = 240 / 135;
 function fb() {
-  let e = X$('OnboardSitesTOS');
+  let e = useCurrentPublicPlan('OnboardSitesTOS');
   return e.status === 'errors' || e.status === 'disabled' ? null : jsx(fy, {});
 }
 function fy() {
   let e = _$$r7(Vc);
   let t = useAtomWithSubscription(e);
-  let i = X$('OnboardSitesTOSInner');
+  let i = useCurrentPublicPlan('OnboardSitesTOSInner');
   let n = useDispatch();
   let a = _$$eY();
   let r = useAtomWithSubscription(LZ);
@@ -20242,7 +20241,7 @@ function f6({
   modalHistory: t,
   recordingKey: i
 }) {
-  let n = q5();
+  let n = selectCurrentFile();
   return jsxs('div', {
     className: 'sites_full_page_preview--leftControlGroup--tfTiF sites_full_page_preview--controlGroup--vHfcT',
     children: [jsx(_$$K2, {
@@ -21672,7 +21671,7 @@ let bi = () => {
         tab: UserInterfaceElements.ASSETS,
         persist: !1
       }));
-      YQ({
+      handleAtomEvent({
         id: _$$lz
       });
       t(!1);
@@ -21843,7 +21842,7 @@ function bg() {
     isFetchingNextPage: u
   }, {
     fetchNextPage: p
-  }] = IT(_$$a12.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a12.ResourcesPaginatedQuery({
     resourceType: [_$$vt2.SITE_TEMPLATE],
     caller: _$$z10.SITES_TEMPLATE_PICKER,
     pageSize: 20,
@@ -21906,7 +21905,7 @@ function bf() {
           tab: UserInterfaceElements.ASSETS,
           persist: !1
         }));
-        YQ({
+        handleAtomEvent({
           id: _$$lz
         });
         getFeatureFlags().sts_sprig_templates && Sprig('track', 'sites_template_picker_exit');
@@ -21937,7 +21936,7 @@ function bw({
 }) {
   let t = useRef(null);
   let i = _$$a14(e.content.hub_file);
-  let [n] = IT(bk({
+  let [n] = setupResourceAtomHandler(bk({
     id: e.content.hub_file.id
   }));
   let s = !n.data?.carousel_media.images || n.status !== 'loaded';
@@ -22020,7 +22019,7 @@ function bS({
           tab: UserInterfaceElements.ASSETS,
           persist: !1
         }));
-        YQ({
+        handleAtomEvent({
           id: _$$lz
         });
         getFeatureFlags().sts_sprig_templates && Sprig('track', 'sites_template_picker_exit');
@@ -22082,7 +22081,7 @@ function bI({
     template: e,
     onInsertTemplateFinished: () => n(!1)
   });
-  let d = _$$tS();
+  let d = useCurrentFileKey();
   let c = _$$a13({
     isSitesTemplate: !0,
     resourceContentId: e.content.hub_file.id
@@ -22143,7 +22142,7 @@ let bE = ({
               tab: UserInterfaceElements.LAYERS,
               persist: !1
             }));
-            YQ({
+            handleAtomEvent({
               id: Ab
             });
           },
@@ -22186,7 +22185,7 @@ let bE = ({
             let e = O5(a, d.guid);
             e.length > 1 && u2(e[0].guid);
           });
-          YQ({
+          handleAtomEvent({
             id: Ab
           });
         }
@@ -22221,7 +22220,7 @@ function bA({
         tab: UserInterfaceElements.ASSETS,
         persist: !1
       }));
-      YQ({
+      handleAtomEvent({
         id: _$$lz
       });
       i(!1);
@@ -22247,7 +22246,7 @@ function bL() {
   let a = useAtomWithSubscription(n);
   let s = a.status === 'loaded' && !0 === a.data;
   let r = useAtomWithSubscription(_$$me);
-  let d = q5();
+  let d = selectCurrentFile();
   let c = d?.key;
   let u = _$$eY();
   let p = useAtomWithSubscription(u3);
@@ -22400,7 +22399,7 @@ function yi({
   onInspectStyle: i,
   isSelected: n
 }) {
-  let a = _$$_G();
+  let a = useOpenFileLibraryKey();
   let s = WH(e, t, _$$s10.TEXT);
   return jsx(Fragment, {
     children: jsx('div', {
@@ -22466,7 +22465,7 @@ function ya({
   let [p, x] = useState(null);
   let m = 'inheritTextStyleKey';
   let h = _$$_S(m);
-  let g = ZC(h);
+  let g = useLatestRef(h);
   let f = useContext(_$$lk);
   let _ = h || g;
   let y = useCallback((t, i, l) => {
@@ -22834,7 +22833,7 @@ function yS() {
   let a = Fk(e => e.getDirectlySelectedNodes().every(e => e.type === 'FRAME' || e.type === 'RESPONSIVE_SET' && e.name !== '/' || e.type === 'REPEATER'));
   let s = Fk(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector() ?? null);
   let r = s?.collectionId;
-  let o = _$$tS();
+  let o = useCurrentFileKey();
   let d = _$$c$(o).data ?? [];
   let c = d.find(e => e.id === r) || null;
   let u = !r || i;
@@ -25309,7 +25308,7 @@ function kc(e) {
   let n = Df();
   let o = Jo();
   let [d, c] = Xw();
-  let p = _$$tS();
+  let p = useCurrentFileKey();
   let [x, m] = _$$lJ2('stackPositioning');
   let g = _$$kl('scrollBehavior');
   let f = G7();
@@ -25435,7 +25434,7 @@ function ku({
 }) {
   let y = useDispatch();
   let v = useAtomWithSubscription(_$$b12);
-  let j = q5();
+  let j = selectCurrentFile();
   let k = _$$hD();
   let w = zp();
   let S = _$$s2('currentPage', 'currentSelectedProperty');
@@ -29612,7 +29611,7 @@ function TA(e) {
   } = _$$Ay9(W, !0);
   let [Z, Q] = useAtomValueAndSetter(_$$u9);
   let ee = KH();
-  let et = q5();
+  let et = selectCurrentFile();
   let ei = _$$h16(TN);
   let {
     toggleDropdown
@@ -30614,7 +30613,7 @@ function TY({
   sceneGraphSelection: i,
   shownPanels: n
 }) {
-  let a = q5();
+  let a = selectCurrentFile();
   let o = useSelector(e => e.userFlags);
   let d = _$$tN('containsResponsiveSets');
   let c = !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL] && !d;
@@ -30809,10 +30808,10 @@ let T2 = memo(({
   let t = _$$e();
   let i = useSelector(e => e.progressBarState);
   let n = _$$p2('loadingEmbeds');
-  let c = Oc();
+  let c = useIsSelectedFigmakeFullscreen();
   let h = _$$p2('isReadOnly');
   let g = useRef(null);
-  let f = q5();
+  let f = selectCurrentFile();
   let _ = f ? f.key : '';
   let y = _$$p2('showUi');
   let v = useAtomWithSubscription(_$$s3);
@@ -30834,7 +30833,7 @@ let T2 = memo(({
   (function () {
     let e = performance.now();
     let t = EI();
-    let i = q5();
+    let i = selectCurrentFile();
     let n = useAtomWithSubscription(_$$me);
     let l = Xr($K);
     let a = _$$eY();
@@ -30907,10 +30906,10 @@ let T2 = memo(({
   _$$W();
   (function (e) {
     let [t, i] = useState([]);
-    let n = Rs(SiteBundles, {
+    let n = useSubscription(SiteBundles, {
       fileKey: e
     });
-    let l = Rs(SiteMount, {
+    let l = useSubscription(SiteMount, {
       fileKey: e
     });
     if (n.status !== 'loaded' || l.status !== 'loaded' || !getFeatureFlags().sts_ppp) return;
@@ -31004,7 +31003,7 @@ let T2 = memo(({
 });
 export function $$T43() {
   let [e, t] = useState(!1);
-  let i = Oc();
+  let i = useIsSelectedFigmakeFullscreen();
   _$$tq();
   return jsx(_$$A.Provider, {
     value: !i,

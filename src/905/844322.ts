@@ -1,5 +1,5 @@
 import { WB } from "../905/761735";
-import { Jl } from "../figma_app/566371";
+import { createAtomSetter } from "../figma_app/566371";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
@@ -10,7 +10,7 @@ import { sf } from "../905/929976";
 import { yJ, U2 } from "../figma_app/78808";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { PB, OH } from "../figma_app/314264";
-import { Xm } from "../905/760074";
+import { isBranch } from "../905/760074";
 import { f as _$$f } from "../905/509236";
 import { sR } from "../905/862913";
 import { Ns } from "../figma_app/349248";
@@ -35,7 +35,7 @@ let $$E2 = createOptimistThunk((e, t) => {
   if (1 === r.length) {
     let e = r[0];
     let i = t.fileKeys[e];
-    i && Xm(i) && (c = !0);
+    i && isBranch(i) && (c = !0);
   }
   let p = Object.keys(t.fileKeys);
   PB("File Restored", p, e.getState());
@@ -115,7 +115,7 @@ let $$E2 = createOptimistThunk((e, t) => {
   return a;
 });
 let $$x1 = createOptimistThunk((e, t) => {
-  Jl(Ip)(t);
+  createAtomSetter(Ip)(t);
   e.dispatch(xY({
     fileKeys: Object.keys(t.fileKeys)
   }));
@@ -172,7 +172,7 @@ let $$w0 = createOptimistThunk(async (e, t) => {
     newFileTeamId: [e.getState().folders[n]?.team_id]
   };
   OH("File Moved", files, s);
-  let o = Jl(S)({
+  let o = createAtomSetter(S)({
     files,
     isDraftsToMove: t.isDraftsToMove,
     isMultiMove: t.isMultiMove,

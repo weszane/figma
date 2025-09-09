@@ -6,7 +6,7 @@ import { isNotNullish, isNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { U as _$$U } from "../figma_app/901889";
 import { h4, Nz, hh } from "../905/417232";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey, useHandleMouseEvent, useHandleGenericEvent, useHandleInputEvent } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { UK } from "../figma_app/740163";
@@ -83,7 +83,7 @@ import { D8 } from "../905/511649";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { dG, wo } from "../figma_app/753501";
-import { tS as _$$tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { J as _$$J2 } from "../905/125993";
 import { debugState } from "../905/407919";
 import { B as _$$B2 } from "../905/714743";
@@ -1991,7 +1991,7 @@ function t1({
   variableSet: v,
   isShowingGuids: I
 }) {
-  let E = _$$tS();
+  let E = useCurrentFileKey();
   let [x, S] = useSessionStorageSync(`variables_modal_sidebar_collapsed_groups__${E}`, {});
   let w = x[v.node_id] ?? t0;
   let C = useCallback((t, i) => {
@@ -2103,7 +2103,7 @@ function t2({
     canDrop: !!o && !!d,
     dropPositionThreshold: 1 / 3,
     onDrop(t) {
-      if (t.dragType === tq) d?.(e.name); else if (t.dragType === tJ && (!_ || t.position === Nz.INSIDE)) {
+      if (t.dragType === tq) d?.(e.name);else if (t.dragType === tJ && (!_ || t.position === Nz.INSIDE)) {
         if (!OI(t)) return;
         o?.(t);
       }
@@ -3279,7 +3279,7 @@ function iU({
   let R = useCallback(() => {
     E(e => !e);
   }, [E]);
-  let N = ZC(x);
+  let N = useLatestRef(x);
   useEffect(() => {
     x && !N ? k("ds_variables_modal.expanded") : !x && N && k("ds_variables_modal.minimized");
   }, [x, N, k]);
@@ -3537,7 +3537,7 @@ function i2({
     let o = useCallback(t => {
       n || (e.setPosition(t.position), e.setSize(new Point(t.width, t.height)));
     }, [e, n]);
-    let l = ZC(i);
+    let l = useLatestRef(i);
     useEffect(() => {
       void 0 !== l && l !== i && o(s);
     }, [i, l, o, s]);
@@ -4196,7 +4196,7 @@ export let $$i50 = registerModal(function () {
   let z = e => selectedVariableIDs.length > 0 && e?.key === "Enter" && !!e.shiftKey && (actions.duplicateVariables?.(), !0);
   let H = _$$rN(function (e, t, i) {
     let [n, a] = useState(null);
-    let s = ZC(e);
+    let s = useLatestRef(e);
     useEffect(() => {
       let i = null !== n && Date.now() - n < 250;
       e.length > (s?.length ?? 0) && i && (t(e.filter(e => !s?.includes(e)).map(e => e.node_id)), a(null));

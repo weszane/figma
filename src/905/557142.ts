@@ -1,36 +1,50 @@
-import { z } from "../905/239603";
-import { dw } from "../905/513035";
-import { FResourceCategoryType } from "../figma_app/191312";
-import { WU } from "../figma_app/35887";
-import { wF } from "../905/814802";
-import { aw } from "../figma_app/175992";
-var $$d1 = (e => (e[e.NONE = -1] = "NONE", e[e.VIEW_PROTOTYPES = 30] = "VIEW_PROTOTYPES", e[e.VIEW_METADATA = 50] = "VIEW_METADATA", e[e.VIEWER = 100] = "VIEWER", e[e.EDITOR = 300] = "EDITOR", e[e.ADMIN = 900] = "ADMIN", e[e.OWNER = 999] = "OWNER", e))($$d1 || {});
-let c = z.object({
+import { z } from 'zod';
+import { ProductAccessTypeEnumSchema } from '../905/513035';
+import { TeamUserSchema } from '../905/814802';
+import { OrganizationUserSchemaAlias } from '../figma_app/35887';
+import { UserOrgSchema } from '../figma_app/175992';
+import { FResourceCategoryType } from '../figma_app/191312';
+
+// Original code: $$d1 enum definition
+export enum AccessLevelEnum {
+  NONE = -1,
+  VIEW_PROTOTYPES = 30,
+  VIEW_METADATA = 50,
+  VIEWER = 100,
+  EDITOR = 300,
+  ADMIN = 900,
+  OWNER = 999,
+}
+
+// Original code: c schema
+const BaseAccessSchema = z.object({
   created_at: z.union([z.string(), z.number()]),
   id: z.string(),
-  level: z.nativeEnum($$d1),
+  level: z.nativeEnum(AccessLevelEnum),
   resource_id_or_key: z.string(),
   resource_type: z.nativeEnum(FResourceCategoryType),
   updated_at: z.string(),
-  org_user: z.optional(WU.pick({
-    id: !0,
-    design_paid_status: !0,
-    whiteboard_paid_status: !0,
-    user_id: !0,
-    permission: !0,
-    updated_at: !0
+  org_user: z.optional(OrganizationUserSchemaAlias.pick({
+    id: true,
+    design_paid_status: true,
+    whiteboard_paid_status: true,
+    user_id: true,
+    permission: true,
+    updated_at: true
   })),
-  team_user: z.optional(wF.pick({
-    id: !0,
-    design_paid_status: !0,
-    whiteboard_paid_status: !0,
-    user_id: !0,
-    team_id: !0
+  team_user: z.optional(TeamUserSchema.pick({
+    id: true,
+    design_paid_status: true,
+    whiteboard_paid_status: true,
+    user_id: true,
+    team_id: true
   })),
   realtime_token: z.string().optional()
 });
-let u = c.extend({
-  pending: z.literal(!0),
+
+// Original code: u schema (extends c)
+const PendingAccessSchema = BaseAccessSchema.extend({
+  pending: z.literal(true),
   user_id: z.literal(null),
   user: z.object({
     id: z.string().nullable().optional(),
@@ -39,24 +53,32 @@ let u = c.extend({
   invite: z.object({
     id: z.string(),
     redeemedBy: z.string().nullable(),
-    billableProductKey: dw.nullable(),
+    billableProductKey: ProductAccessTypeEnumSchema.nullable(),
     inviteeUserId: z.string().nullable()
   }).nullable().optional()
 });
-let p = c.extend({
-  pending: z.literal(!1),
+
+// Original code: p schema (extends c)
+const ActiveAccessSchema = BaseAccessSchema.extend({
+  pending: z.literal(false),
   user_id: z.string(),
-  user: aw
+  user: UserOrgSchema
 });
-let $$m2 = c.extend({
+
+// Original code: $$m2 schema (extends c)
+const MixedAccessSchema = BaseAccessSchema.extend({
   pending: z.boolean(),
   user_id: z.string().nullable(),
-  user: z.union([aw, z.object({
+  user: z.union([UserOrgSchema, z.object({
     id: z.string().nullable().optional(),
     email: z.string()
   })])
 });
-let $$h0 = z.union([u, p]);
-export const an = $$h0;
-export const e6 = $$d1;
-export const rT = $$m2; 
+
+// Original code: $$h0 union
+const AccessSchema = z.union([PendingAccessSchema, ActiveAccessSchema]);
+
+// Original exports: an, e6, rT
+export const an = AccessSchema;
+export const e6 = AccessLevelEnum;
+export const rT = MixedAccessSchema;

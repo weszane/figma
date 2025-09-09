@@ -3,7 +3,7 @@ import { useMemo, useRef, useId, useState, useCallback, useEffect } from "react"
 import { d as _$$d } from "../905/976845";
 import { r as _$$r } from "../905/571562";
 import o from "../vendor/128080";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Uz } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { c$, wv, MM } from "../figma_app/236327";
@@ -110,7 +110,7 @@ function v(e) {
     hide,
     showing
   } = BK(s);
-  let f = ZC(showing);
+  let f = useLatestRef(showing);
   let [b, T] = useState();
   let I = () => {
     let e = r.current;

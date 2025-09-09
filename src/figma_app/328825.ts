@@ -5,7 +5,7 @@ import { X } from "../905/880040";
 import { _j } from "../figma_app/843119";
 import { ZS, o6, Rj } from "../figma_app/986594";
 import { U } from "../905/492359";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 var $$u2 = (e => (e.DISABLED_FOR_INSTANCE_SUBLAYER = "DISABLED_FOR_INSTANCE_SUBLAYER", e.DISABLED_FOR_INSTANCE_SUBLAYER_IN_CMS_LIST = "DISABLED_FOR_INSTANCE_SUBLAYER_IN_CMS_LIST", e.DISABLED_FOR_NOT_IN_CMS_CONTAINER = "DISABLED_FOR_NOT_IN_CMS_CONTAINER", e.DISABLED_FOR_NO_IMAGE_FIELD = "DISABLED_FOR_NO_IMAGE_FIELD", e))($$u2 || {});
 export function $$p3(e) {
   return e.some(e => "DISABLED_FOR_NOT_IN_CMS_CONTAINER" === e.disabledReason);
@@ -15,7 +15,7 @@ export function $$_0() {
   let {
     collections
   } = X({
-    fileKey: tS()
+    fileKey: useCurrentFileKey()
   });
   let r = o6();
   let n = Rj();
@@ -47,7 +47,7 @@ export function $$h1() {
   let {
     collections
   } = X({
-    fileKey: tS()
+    fileKey: useCurrentFileKey()
   });
   return {
     showDakotaFieldPicker: U() && !!getFeatureFlags().dakota_field_image && null !== collections && collections.length > 0,

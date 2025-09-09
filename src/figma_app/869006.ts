@@ -2,20 +2,20 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V, $ as _$$$ } from "../905/355181";
 import { tc } from "../905/15667";
 import { m0 } from "../figma_app/976749";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { BI } from "../figma_app/546509";
-import { l3, q5 } from "../figma_app/516028";
+import { useCurrentFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType, FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { OpenEditorFileData, EditButtonView } from "../figma_app/43951";
-import { Pe } from "../figma_app/12796";
+import { isExportRestricted } from "../figma_app/12796";
 import { wH } from "../figma_app/680166";
 import { Gv } from "../figma_app/736948";
 import { J as _$$J, q as _$$q } from "../905/202542";
@@ -33,7 +33,7 @@ import { e0 } from "../905/696396";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { n2 } from "../figma_app/478006";
-import { D6 } from "../figma_app/465071";
+import { useCurrentPlanUser } from "../figma_app/465071";
 import { i as _$$i } from "../905/46262";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
@@ -76,7 +76,7 @@ function R({
   let l = useDispatch();
   let [d, p] = useState(!1);
   let _ = selectCurrentUser();
-  let h = Rs(OpenEditorFileData, {
+  let h = useSubscription(OpenEditorFileData, {
     fileKey: e
   }).data?.file;
   let m = _$$u();
@@ -146,7 +146,7 @@ function V(e) {
     trackingDescriptor: r
   }) {
     let n = useRef(!1);
-    let a = D6("useTrackUsersViewingViewOnlyToolbeltBanner").unwrapOr(null);
+    let a = useCurrentPlanUser("useTrackUsersViewingViewOnlyToolbeltBanner").unwrapOr(null);
     let s = a?.userId;
     let o = useAtomWithSubscription(n2);
     useEffect(() => {
@@ -299,12 +299,12 @@ export var $$ee2 = (e => (e.EDIT_BUTTON_LOADING = "editButtonLoading", e.PLAN_RE
 export function $$et3(e) {
   let t = e.file;
   let r = selectCurrentUser();
-  let n = useMemo(() => !!t && Pe(t), [t]);
+  let n = useMemo(() => !!t && isExportRestricted(t), [t]);
   let d = useSelector(({
     openFile: e
   }) => e?.org?.name);
   let u = t.canEdit;
-  let v = l3();
+  let v = useCurrentFile();
   let A = !!(v && v.editorType === FFileType.WHITEBOARD && v.org?.figjamDisabledAt);
   let x = t.editorType === FFileType.SLIDES && !!oA(t.org?.isSlidesDisabled);
   let N = t.editorType === FFileType.SITES && (!!t.org?.isSitesDisabled || !!t?.team?.studentTeamAt);
@@ -319,7 +319,7 @@ export function $$et3(e) {
     getIsUpgradeHandlerLoading,
     getHasProvisionalAccess
   } = wH();
-  let F = Rs(EditButtonView, {
+  let F = useSubscription(EditButtonView, {
     fileKey: t.key,
     orgId: t.parentOrgId
   });
@@ -346,7 +346,7 @@ export function $$et3(e) {
       isDisabledView: w,
       hasPendingRequest: !1
     };
-    let _ = wR(t.editorType);
+    let _ = getProductAccessTypeOrDefault(t.editorType);
     let m = getHasProvisionalAccess(_);
     let g = getUpgradeEligibility(_, u);
     if (!F.data.file?.currentPlanUser) {
@@ -425,7 +425,7 @@ export function $$et3(e) {
   return null;
 }
 export function $$er1(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   return t ? jsx(en, {
     file: t,
     viewOnly: e.viewOnly,

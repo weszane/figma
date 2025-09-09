@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { Q2, sD } from "../905/937198";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { OneItemView } from "../figma_app/43951";
 import { k } from "../905/366917";
 import { J } from "../905/458135";
@@ -10,7 +10,7 @@ export function $$u0({
   itemStableId: e,
   collectionStableId: t
 }) {
-  let i = tS();
+  let i = useCurrentFileKey();
   "" === e && Q2("itemStableId is being passed as an empty string", {
     itemStableId: e
   }, {
@@ -22,7 +22,7 @@ export function $$u0({
     collectionStableId: t
   });
   let p = (e ?? "") !== "" && (t ?? "") !== "" && (collectionDatabaseId ?? "") !== "" && null != i;
-  let m = Rs(OneItemView, {
+  let m = useSubscription(OneItemView, {
     fileKey: i ?? "",
     collectionId: collectionDatabaseId ?? "",
     itemStableId: e ?? ""

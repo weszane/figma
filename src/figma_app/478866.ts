@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { At, vV, CX, UU, Z5 } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { fullscreenValue } from "../figma_app/455680";
@@ -108,8 +108,8 @@ export function $$y0(e, t, r, s, l) {
       height: 1.15 * s.height
     };
   }, [e, c, t, r]);
-  let g = ZC(e);
-  let E = ZC(u);
+  let g = useLatestRef(e);
+  let E = useLatestRef(u);
   useEffect(() => {
     e && u && e === g && E && !c2(u, E) && (e === hm ? d?.updateDraftCommentPinPosition?.(u) : d?.updateCommentPinPosition?.(e, u));
   }, [d, e, u, E, g]);

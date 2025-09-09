@@ -9,7 +9,7 @@ import { renderI18nText } from "../905/303541";
 import { f as _$$f } from "../905/412913";
 import { sx } from "../905/941192";
 import { lW } from "../figma_app/850075";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { j7, oB } from "../905/929976";
 import { ow } from "../figma_app/976749";
 import { Um } from "../905/848862";
@@ -74,7 +74,7 @@ export function $$I0(e) {
   let h = cX().tabManager;
   let f = sO();
   let $ = ow();
-  let I = to();
+  let I = useIsSelectedViewFullscreenCooper();
   let L = t === rp.THIN_2_COL || t === rp.THIN_3_COL ? 4 : 8;
   let A = useDispatch();
   let R = f ? Du : Vq(h.activeTab);

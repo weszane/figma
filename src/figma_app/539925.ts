@@ -4,7 +4,7 @@ import { aH } from "../figma_app/273493";
 import { NodeType, BooleanOperationType, SelectionMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { f as _$$f } from "../905/24905";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { XE } from "../figma_app/976749";
@@ -226,7 +226,7 @@ class T {
           distance: Math.abs(y)
         }))].filter(isNotNullish);
         if (0 === i.length) return;
-        let s = Yx(i, "unit");
+        let s = formatList(i, "unit");
         return t ? t.containerNodeName ? getI18nString("fullscreen.accessibility.panned_insert_in_container", {
           containerName: t.containerNodeName,
           amount: s

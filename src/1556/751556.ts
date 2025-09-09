@@ -76,13 +76,13 @@ import { X9 } from "../figma_app/236327";
 import { J as _$$J3 } from "../1577/181415";
 import { dG } from "../figma_app/753501";
 import { N as _$$N2 } from "../1577/472492";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { X2, td as _$$td } from "../figma_app/273118";
 import { Ib } from "../905/129884";
 import { Ro } from "../figma_app/598952";
 import { iX } from "../905/415545";
 import { ue } from "../af221b13/476940";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT, oA } from "../905/723791";
 import { CommunityNotificationBellView, PersistentUserNotificationBellData } from "../figma_app/43951";
 import { M as _$$M } from "../1556/569109";
@@ -1050,7 +1050,7 @@ function ta(e) {
 }
 function tr(e) {
   let t = useDispatch();
-  let n = Rs(CommunityNotificationBellView, {});
+  let n = useSubscription(CommunityNotificationBellView, {});
   useEffect(() => {
     if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === tT.Loaded) {
       let e = oA(n.data.currentUser.communityProfileNotificationBell);
@@ -1084,11 +1084,11 @@ export function $$th1() {
   let l = useSelector(_$$E3(tu));
   let o = useRef(null);
   let c = _$$N2();
-  let d = q5();
+  let d = selectCurrentFile();
   let u = !!d;
   let h = kc();
   let m = function () {
-    let e = Rs(PersistentUserNotificationBellData, {});
+    let e = useSubscription(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return {};
     let t = oA(e.data.persistentUserNotificationBells);
     let n = {};
@@ -1106,7 +1106,7 @@ export function $$th1() {
     return n;
   }();
   let x = function () {
-    let e = Rs(PersistentUserNotificationBellData, {});
+    let e = useSubscription(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return td;
     let t = oA(e.data.persistentUserNotificationBells);
     let n = t?.find(e => e.notificationSpaceId === _$$td);

@@ -14,7 +14,7 @@ import { Q as _$$Q } from '../905/346809';
 import { w as _$$w } from '../905/442596';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
-import { cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { k as _$$k2 } from '../905/582200';
 import { a as _$$a } from '../905/597867';
 import { getFeatureFlags } from '../905/601108';
@@ -134,7 +134,7 @@ export function $$G0(e) {
   let t = useRef(null);
   let s = DP();
   let k = useDispatch();
-  let w = cJ();
+  let w = useIsFullscreenSitesView();
   let {
     backgroundColor,
     backgroundEnabled,

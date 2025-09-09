@@ -1,10 +1,10 @@
 import { D } from "../905/347702";
-import { Cq } from "../figma_app/516028";
+import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { f } from "../905/940356";
 export function $$o0(e) {
   let t = selectCurrentUser();
-  let r = Cq({
+  let r = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   return $$l3(t?.id, r, e);

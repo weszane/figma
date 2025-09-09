@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { U } from "../figma_app/199513";
@@ -10,7 +10,7 @@ export function $$u0({
   folders: e
 }) {
   let t = useDispatch();
-  let r = gY(U);
+  let r = getAtomMutate(U);
   let u = e => {
     e.forEach(e => {
       trackEventAnalytics("Folder Batch Abandoned Draft Delete Confirmation Click", {

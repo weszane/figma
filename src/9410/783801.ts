@@ -7,7 +7,7 @@ import { useMemo, useEffect, useState, useContext } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
@@ -15,9 +15,9 @@ import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { hx } from "../905/292918";
 import { m0 } from "../figma_app/976749";
-import { cb, Ns, HJ, Kz } from "../905/760074";
+import { handleModalError, isDefaultFileAlt, handleError, isBranchAlt } from "../905/760074";
 import { RepoFiles, MergeStatusRepoFiles } from "../figma_app/43951";
-import { Kn, PW } from "../905/535806";
+import { SourceDirection, CPPEventType } from "../905/535806";
 import { e0 } from "../905/696396";
 import { $l } from "../905/721248";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -25,7 +25,7 @@ import { W as _$$W } from "../905/95038";
 import { Um } from "../905/848862";
 import { y as _$$y } from "../905/725962";
 import { throwTypeError } from "../figma_app/465776";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { ie, ov } from "../905/300250";
@@ -33,7 +33,7 @@ import { T as _$$T } from "../figma_app/640519";
 import { showModalHandler } from "../905/156213";
 import { ss } from "../905/746499";
 import { my, RK } from "../905/561832";
-import { q5, l3 } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { l as _$$l, O as _$$O } from "../figma_app/471586";
 import { eg, IS, o3 } from "../figma_app/452252";
@@ -41,7 +41,7 @@ import { DF } from "../figma_app/146384";
 var l = o;
 function S(e) {
   let t = Number(e);
-  return Number.isNaN(t) ? (cb(Error("Invalid checkpoint id found in repo data")), null) : t;
+  return Number.isNaN(t) ? (handleModalError(Error("Invalid checkpoint id found in repo data")), null) : t;
 }
 function j(e) {
   let t = m0();
@@ -58,7 +58,7 @@ function j(e) {
   } = i;
   let j = function (e) {
     let t = e?.fileRepoId || "";
-    let i = Rs(RepoFiles, {
+    let i = useSubscription(RepoFiles, {
       repoId: t
     });
     return useMemo(() => {
@@ -67,13 +67,13 @@ function j(e) {
         repo
       } = i.data;
       let n = i.data.repo?.files;
-      if (repo && Ns(e, repo)) return !1;
+      if (repo && isDefaultFileAlt(e, repo)) return !1;
       if (null == repo || !n) {
         reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid repo or repo files data"));
         return !1;
       }
       let a = n.find(t => t.key === e.key);
-      let s = n.find(e => Ns(e, repo));
+      let s = n.find(e => isDefaultFileAlt(e, repo));
       if (!a || !s) {
         reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid branch or source file data"));
         return !1;
@@ -107,7 +107,7 @@ function j(e) {
               return [e, i];
             }));
           } catch (e) {
-            cb(Error("Invalid edit count found in repo data"));
+            handleModalError(Error("Invalid edit count found in repo data"));
             return null;
           }
         }(meta.editCounts);
@@ -133,7 +133,7 @@ function j(e) {
         message: getI18nString("collaboration.branching.updates_available_from_main_file"),
         acceptCallback: () => {
           dispatch(hx({
-            direction: Kn.FROM_SOURCE,
+            direction: SourceDirection.FROM_SOURCE,
             trackingContextName: e0.BRANCHING_UPDATE_NOTIFICATION
           }));
           trackEventAnalytics("Branch Update Alert", {
@@ -174,7 +174,7 @@ function H({
     appMergingStatus: i,
     openFileMerge: r
   }) {
-    let n = Rs(MergeStatusRepoFiles, {
+    let n = useSubscription(MergeStatusRepoFiles, {
       repoId: e
     });
     let [a, s] = useState(0);
@@ -209,7 +209,7 @@ function H({
     appMergingStatus: r,
     openFileMerge: a
   });
-  let l = ZC(o);
+  let l = useLatestRef(o);
   let c = function (e, t, i) {
     switch (t) {
       case 0:
@@ -266,7 +266,7 @@ function H({
       return;
     }
     if (4 === o.state && l && 1 === l.state && l.mergeFile) {
-      let e = o.mergeFile.key === t ? Kn.FROM_SOURCE : Kn.TO_SOURCE;
+      let e = o.mergeFile.key === t ? SourceDirection.FROM_SOURCE : SourceDirection.TO_SOURCE;
       u(VisualBellActions.clearAll());
       u(showModalHandler({
         type: my,
@@ -284,7 +284,7 @@ function H({
       }));
     }
     y && u(VisualBellActions.enqueue(y));
-    let e = c?.direction === 0 ? Kn.TO_SOURCE : Kn.FROM_SOURCE;
+    let e = c?.direction === 0 ? SourceDirection.TO_SOURCE : SourceDirection.FROM_SOURCE;
     if (l && 1 === l.state && (3 === o.state || 4 === o.state)) {
       let t;
       switch (o.state) {
@@ -297,7 +297,7 @@ function H({
         default:
           throwTypeError(o.state);
       }
-      HJ(t, PW.ON_MERGE, e, {
+      handleError(t, CPPEventType.ON_MERGE, e, {
         file_merge_id: c?.id
       });
     }
@@ -322,10 +322,10 @@ function H({
 let q = "filename_view--renaming--fsHo8";
 export function $$X0(e) {
   let t = selectCurrentUser();
-  let i = q5();
+  let i = selectCurrentFile();
   let o = i?.repo;
-  let d = !!(i && o && Ns(i, o));
-  let c = !!(i && Kz(i));
+  let d = !!(i && o && isDefaultFileAlt(i, o));
+  let c = !!(i && isBranchAlt(i));
   let u = !!i && DF(i, t);
   let p = useSelector(e => e.isRenaming);
   let h = Um()?.type === eg;
@@ -334,7 +334,7 @@ export function $$X0(e) {
   let g = useSelector(e => e.mirror.appModel.topLevelMode);
   let _ = useSelector(e => e.modalShown);
   let x = useDispatch();
-  let y = l3();
+  let y = useCurrentFile();
   let b = y?.ownerRole?.userId === t?.id;
   let v = i?.project?.activeProjectResourceConnections?.[0];
   let E = !i?.teamId && !i?.parentOrgId;

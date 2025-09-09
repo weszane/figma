@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { N_ } from "../vendor/956898";
 import a from "classnames";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
@@ -78,7 +78,7 @@ export function $$O1({
   let a = r ? void 0 : i ? Yr : Vh;
   return jsxs("div", {
     className: s()(t ? aS : dv, a),
-    children: [jsx(d, {}), $M(e)]
+    children: [jsx(d, {}), formatNumber(e)]
   });
 }
 export function $$D2({
@@ -91,7 +91,7 @@ export function $$D2({
     className: s()(Au, r),
     children: [jsx(B, {
       svg: _$$A
-    }), $M(e)]
+    }), formatNumber(e)]
   });
 }
 export function $$L0(e) {

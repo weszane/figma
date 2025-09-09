@@ -18,7 +18,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import _ from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { U as _$$U } from "../figma_app/901889";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { d as _$$d2, s as _$$s } from "../figma_app/429226";
 import { generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
@@ -33,7 +33,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
 import { e7, av } from "../figma_app/316316";
 import { NE } from "../3276/373312";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
 import { dK, Xt } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -170,7 +170,7 @@ let $$eT0 = memo(function ({
     let t = useSelector(eP);
     return !!e && !!t && t.selectionOverrides[SymbolOverrideType.PROTOTYPE_INTERACTIONS];
   }();
-  let j = q5();
+  let j = selectCurrentFile();
   let N = _$$U();
   let S = cJ();
   let A = useMemo(() => new cP(d), [d]);
@@ -242,7 +242,7 @@ let $$eT0 = memo(function ({
       let r = [];
       for (let e of o) {
         let t = sessionLocalIDToString(e.id);
-        if (t && !i.has(t)) r.push(e); else {
+        if (t && !i.has(t)) r.push(e);else {
           if (!(t = Fullscreen.generateUniqueID())) continue;
           let n = parseSessionLocalID(t);
           if (!n) continue;
@@ -268,7 +268,7 @@ let $$eT0 = memo(function ({
     shouldIgnoreKeyboardEvents: l.length > 0 || s.type !== NodePropertyCategory.PROTOTYPE_INTERACTION && s.type !== NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
     showResetInteractionsButton: C,
     toggleScrollBehaviorPicker: () => {
-      if (f?.id === AO) t(XE()); else {
+      if (f?.id === AO) t(XE());else {
         let e = cn(R.current);
         t(u1({
           id: AO,
@@ -449,7 +449,7 @@ function eA({
     U && ed?.focus();
     let o = eB(t);
     let i = n.metaKey || n.ctrlKey;
-    if (i) ea ? o = G.filter(e => !o.includes(e)) : o.push(...G); else if (!U && n.shiftKey) {
+    if (i) ea ? o = G.filter(e => !o.includes(e)) : o.push(...G);else if (!U && n.shiftKey) {
       var r;
       let n;
       let i;
@@ -542,7 +542,7 @@ function eA({
       if (t.transitionNodeID) {
         let e = et.get(sessionLocalIDToString(t.transitionNodeID));
         if (e) {
-          if (e.isState) n = e.parentGuid || ""; else {
+          if (e.isState) n = e.parentGuid || "";else {
             eW = !0;
             break;
           }
@@ -576,7 +576,7 @@ function eA({
     }(e.interactions[0], t.interactions[0]));
     return o?.interactions[0] ?? null;
   }(V, t, e);
-  let eY = ZC(eG);
+  let eY = useLatestRef(eG);
   let eq = _$$U();
   if (useEffect(() => {
     null === eY && eG && eq("prototype_interaction_conflict_override_created", {

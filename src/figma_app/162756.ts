@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Rs } from "../figma_app/288654";
-import { tB } from "../figma_app/516028";
+import { useSubscription } from "../figma_app/288654";
+import { selectOpenFile } from "../figma_app/516028";
 import { FileByKey } from "../figma_app/43951";
 export function $$l0() {
-  let e = useSelector(tB);
-  let t = Rs(FileByKey, {
+  let e = useSelector(selectOpenFile);
+  let t = useSubscription(FileByKey, {
     fileKey: e?.key ?? ""
   }, {
     enabled: !!e?.key

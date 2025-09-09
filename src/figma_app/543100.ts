@@ -4,7 +4,7 @@ import { throwTypeError, debug } from "../figma_app/465776";
 import { atom, useAtomWithSubscription, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { oA } from "../905/723791";
-import { LH, oj, mr, CE, yR } from "../905/760074";
+import { findBestBranch, getDisplayNameAlt, findBranchById, generateUrl, hasPassword } from "../905/760074";
 import { fileEntityDataMapper } from "../905/943101";
 import { Z } from "../905/190310";
 import { FEntityType, FFileType } from "../figma_app/191312";
@@ -50,8 +50,8 @@ export function $$I6(e) {
   };
 }
 export function $$S11(e) {
-  let t = LH(e.repo, e.branches, e.selectedBranchKey);
-  return t ? t : (e.repo.default_file_key ? LH(e.repo, e.branches, e.repo.default_file_key) : null) || e.branches[0];
+  let t = findBestBranch(e.repo, e.branches, e.selectedBranchKey);
+  return t ? t : (e.repo.default_file_key ? findBestBranch(e.repo, e.branches, e.repo.default_file_key) : null) || e.branches[0];
 }
 export let $$v2 = atom(null);
 export function $$A9(e) {
@@ -115,7 +115,7 @@ export class $$x1 {
       case "PROTOTYPE":
         return e.prototype.fig_file.name + " - " + e.prototype.name;
       case "REPO":
-        return oj(e.repo);
+        return getDisplayNameAlt(e.repo);
       default:
         throwTypeError(e);
     }
@@ -277,8 +277,8 @@ export class $$x1 {
       case "PROTOTYPE":
         return e.prototype.url;
       case "REPO":
-        let r = mr(e.repo, e.branches, t);
-        return r ? CE(r, e.repo, "file") : "";
+        let r = findBranchById(e.repo, e.branches, t);
+        return r ? generateUrl(r, e.repo, "file") : "";
       case "OFFLINE_FILE":
         return "";
       default:
@@ -297,7 +297,7 @@ export class $$x1 {
       case "PROTOTYPE":
         return e.prototype.url;
       case "REPO":
-        let r = mr(e.repo, e.branches, t);
+        let r = findBranchById(e.repo, e.branches, t);
         return r ? rl(r) : "";
       case "OFFLINE_FILE":
         return "";
@@ -433,7 +433,7 @@ export class $$x1 {
       case "FILE":
         return Ph(e.file);
       case "REPO":
-        return yR(e.repo);
+        return hasPassword(e.repo);
       case "PROTOTYPE":
         return Uj(e.prototype.fig_file) || i4(e.prototype.fig_file);
       case "PINNED_FILE":

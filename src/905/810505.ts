@@ -1,6 +1,6 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { S3 } from "../905/485103";
+import { sendHistogram } from "../905/485103";
 import { o as _$$o } from "../figma_app/915774";
 import { X } from "../905/853613";
 import { TG } from "../905/72677";
@@ -18,6 +18,6 @@ export function $$d0(e, t, i, d, c) {
   }, {
     forwardToDatadog: !0
   });
-  c && S3(c.metricName, c.duration);
+  c && sendHistogram(c.metricName, c.duration);
 }
 export const V = $$d0;

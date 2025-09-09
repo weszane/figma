@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { R } from "../9410/46722";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { ow } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { B as _$$B } from "../905/969273";
@@ -202,7 +202,7 @@ export function $$A0() {
   let D = _$$s(JT.TRANSLATE_TEXT);
   let M = tasks.length;
   let P = tasks.filter(e => e.state === z8.FAILED).length;
-  let F = to();
+  let F = useIsSelectedViewFullscreenCooper();
   switch (state) {
     case qy.RUNNING:
       return jsx(_$$F, {

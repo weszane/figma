@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { isNullish } from "../figma_app/95419";
 import { resourceUtils } from "../905/989992";
-import { IT, mI } from "../figma_app/566371";
+import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
 import { Ln } from "../905/84777";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { c as _$$c } from "../figma_app/681090";
 import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
@@ -15,7 +15,7 @@ export function $$_1({
   nextSeatAvailable: n,
   failedToLoadPrices: a
 }) {
-  if (!r || n || t === Gu.VIEW || r === Gu.VIEW) return !1;
+  if (!r || n || t === ViewAccessTypeEnum.VIEW || r === ViewAccessTypeEnum.VIEW) return !1;
   if (a || !e) return !0;
   let s = e[r];
   let o = e[t];
@@ -62,8 +62,8 @@ export function $$h2({
   }, [i, t, s, u, l, h]);
 }
 export function $$m0(e) {
-  let [t] = IT(ModifyPlanUserSeatModalView(e));
-  let [r] = mI(t);
+  let [t] = setupResourceAtomHandler(ModifyPlanUserSeatModalView(e));
+  let [r] = handleSuspenseRetainRelease(t);
   return r;
 }
 export const UL = $$m0;

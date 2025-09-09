@@ -3,7 +3,7 @@ import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { createOptimistAction } from "../905/350402";
 import { yJ } from "../905/584989";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { H } from "../figma_app/395012";
 export let $$c0 = createOptimistAction("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
   teamId: t,
@@ -24,7 +24,7 @@ export let $$c0 = createOptimistAction("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
     }) => {
       let i = {
         user_id: e,
-        seat_type: t === Gu.VIEW ? "" : t
+        seat_type: t === ViewAccessTypeEnum.VIEW ? "" : t
       };
       null != r && (i.seat_increase_authorized = r);
       null != n && (i.seat_swap_intended = n);
@@ -92,7 +92,7 @@ export function $$u1(e, t) {
       originalKey,
       originalMember
     } = p[e] || {};
-    let c = t === Gu.VIEW ? null : t;
+    let c = t === ViewAccessTypeEnum.VIEW ? null : t;
     let _ = (c && seatTypeProducts[c]) ?? null;
     if (!originalKey || !originalMember || !originalMember.team_user || c && !_) return;
     let h = {

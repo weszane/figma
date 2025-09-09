@@ -3,7 +3,7 @@ import { l as _$$l } from "../905/716947";
 import { atom } from "../figma_app/27355";
 import { oA } from "../905/723791";
 import { Z } from "../905/296690";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { ApprovedLibrariesForWorkspaceView, ApprovedLibrariesForOrgViewV2 } from "../figma_app/43951";
 import { LM } from "../figma_app/951233";
 import { Oe } from "../figma_app/336853";
@@ -11,7 +11,7 @@ import { Me } from "../figma_app/598018";
 let $$m4 = atom(e => {
   let t = (() => {
     let t = e(Z);
-    let i = e(yV);
+    let i = e(openFileAtom);
     if (i) {
       if (!i.canEdit || !Oe(t)) return;
       let n = i.team?.workspaceId;

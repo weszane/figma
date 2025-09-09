@@ -1,10 +1,10 @@
 import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { rT } from "../905/557142";
+import { MixedAccessSchema } from "../905/557142";
 import { createDataMapper, processAdditionalConfig } from "../905/508958";
 import { W } from "../4452/143028";
-let d = createDataMapper(rT, e => ({
+let d = createDataMapper(MixedAccessSchema, e => ({
   id: e.camel(),
   pending: e.camel(),
   user_id: e.camel(),

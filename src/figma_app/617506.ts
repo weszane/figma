@@ -1,7 +1,7 @@
 import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createLocalStorageAtom, atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { uQ } from "../figma_app/311375";
 import { sf } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
@@ -48,7 +48,7 @@ export function $$y2(e) {
 }
 export function $$b4() {
   let e = uQ();
-  let t = ZC(e);
+  let t = useLatestRef(e);
   let r = useDispatch();
   useEffect(() => {
     t && e !== t && r(hideModalHandler());

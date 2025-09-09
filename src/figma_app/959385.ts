@@ -10,7 +10,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { e as _$$e2 } from "../905/280005";
 import { R as _$$R } from "../figma_app/313269";
 import { reportError } from "../905/11";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { x as _$$x } from "../905/868466";
@@ -233,7 +233,7 @@ function er({
             margin: "3px"
           }).$
         }), jsx("div", {
-          children: $M(t)
+          children: formatNumber(t)
         })]
       }), jsxs("div", {
         className: _$$s.flex.flexRow.gap2.$,
@@ -241,7 +241,7 @@ function er({
           svg: _$$A,
           className: _$$s.mx2.colorIconSecondary.$
         }), jsx("div", {
-          children: $M(r)
+          children: formatNumber(r)
         })]
       })]
     })]

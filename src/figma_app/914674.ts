@@ -3,7 +3,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { PerfTimer } from "../905/609396";
 import { zq, We } from "../figma_app/782261";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { rt } from "../figma_app/615482";
 import { D } from "../905/367723";
 let $$u2 = "performance.ds_eco.asset_panel_loading";
@@ -17,7 +17,7 @@ export function $$m4() {
   }, [e, t]);
 }
 let g = (e, t) => {
-  let r = q5();
+  let r = selectCurrentFile();
   let s = D();
   let [d, _] = useAtomValueAndSetter($$h0);
   useEffect(() => {

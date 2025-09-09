@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { Multiplayer } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880";
 import { Dv, Fj, jI } from "../905/763714";
 import { isInteractionPathCheck } from "../figma_app/897289";
@@ -18,7 +18,7 @@ import { J4 } from "../figma_app/91703";
 import { z4 } from "../905/37051";
 import { clearSelection } from "../figma_app/741237";
 import { XM, e2 } from "../905/486443";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { z3 } from "../figma_app/386952";
 import { Z } from "../905/116724";
 var $$x2 = (e => (e.INITIAL = "initial", e.NEXT = "next", e))($$x2 || {});
@@ -71,7 +71,7 @@ export function $$R12(e) {
   let _ = z3();
   let h = useAtomWithSubscription(Dv);
   let [m, g] = useState("initial");
-  let f = ZC(presenterSessionID);
+  let f = useLatestRef(presenterSessionID);
   let E = observingSessionID === presenterSessionID;
   let y = sessionID === presenterSessionID || h;
   let b = w(f, presenterSessionID, observingSessionID, sessionID);
@@ -172,7 +172,7 @@ export function $$F7({
   multiplayer: e
 }) {
   let t = function () {
-    let e = Oc();
+    let e = useIsSelectedFigmakeFullscreen();
     let t = $$U3();
     let r = XM();
     let n = hA();
@@ -201,11 +201,11 @@ export function $$j6({
   }, [r, i, t]);
 }
 export function $$U3() {
-  let e = Oc();
+  let e = useIsSelectedFigmakeFullscreen();
   return !(getIsMobile() && isInFigmaMobile() && !isIpadDevice() || z4?.getIsExtension()) && !e;
 }
 export function $$B1() {
-  let e = Oc();
+  let e = useIsSelectedFigmakeFullscreen();
   let t = XM();
   let r = e2();
   let n = hA();

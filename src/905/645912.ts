@@ -17,7 +17,7 @@ import { hO, G4, U2, d3, eQ } from "../figma_app/545293";
 import { g as _$$g, o as _$$o } from "../905/566160";
 import { fullscreenValue } from "../figma_app/455680";
 import { dh } from "../figma_app/186343";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { $z } from "../figma_app/297733";
 import { XG } from "../figma_app/98578";
@@ -60,7 +60,7 @@ export function $$L0(e, t) {
   let M = useAtomWithSubscription(dd);
   let j = getUserId();
   let U = dh();
-  let B = useAtomWithSubscription(ze);
+  let B = useAtomWithSubscription(openFileKeyAtom);
   let V = Jb();
   let G = _$$m();
   return useCallback(async ({

@@ -1,16 +1,16 @@
 import { useAtomWithSubscription, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { qB } from "../905/862321";
-import { ze } from "../figma_app/516028";
+import { openFileKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { DeviceTryFileView } from "../figma_app/43951";
 import { D as _$$D } from "../905/347702";
 import { B } from "../figma_app/659940";
 let $$_0 = _$$D(() => {
-  let e = useAtomWithSubscription(ze);
-  return Rs(DeviceTryFileView, {
+  let e = useAtomWithSubscription(openFileKeyAtom);
+  return useSubscription(DeviceTryFileView, {
     fileKey: e || ""
   }, {
     enabled: !!e

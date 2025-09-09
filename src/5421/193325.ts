@@ -53,14 +53,14 @@ import { $$default } from "../svg/764361";
 import { Ql, X4, H_ } from "../figma_app/387100";
 import eg from "../vendor/223926";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { to as _$$to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { updateHoveredNode } from "../figma_app/741237";
-import { tS, _G } from "../figma_app/516028";
+import { useCurrentFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
 import { Sh, dK } from "../figma_app/889655";
 import { D as _$$D } from "../figma_app/335489";
 import { lS } from "../figma_app/218448";
 import { cP as _$$cP } from "../figma_app/264776";
-import { cJ as _$$cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { c as _$$c, P as _$$P2 } from "../905/200950";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h2 } from "../905/207101";
@@ -136,7 +136,7 @@ function K({
     p(!1);
   }, [p]);
   let B = useCallback(() => {
-    if (d) V(); else {
+    if (d) V();else {
       p(!0);
       let e = D.current;
       x(cn(e));
@@ -211,7 +211,7 @@ function K({
   let et = jsxs("div", {
     className: "overlay_panel--colorValueContainer--gJtb9 paint_panels--colorValueContainer--DGeSP raw_components--borderFocusWithin--BaipZ paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t",
     children: [jsx(_$$J3, {
-      onClick: ee ? B : () => { },
+      onClick: ee ? B : () => {},
       color: q,
       opacity: X,
       recordingKey: generateRecordingKey(t, "chit"),
@@ -538,7 +538,7 @@ function eh({
     }));
   };
   let k = e => function (t) {
-    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypingConditionalActionsModal(); else {
+    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypingConditionalActionsModal();else {
       var n = [...S];
       let o = S[e];
       let i = [];
@@ -693,7 +693,7 @@ function ew(e) {
   let t = useMemo(() => new cP(e.scene), [e.scene]);
   let [n, r] = useState([]);
   let [s, d] = useState([]);
-  let c = _$$cJ();
+  let c = useIsFullscreenSitesView();
   let p = e.nodeId === MIXED_MARKER ? MIXED_MARKER : sessionLocalIDToString(e.nodeId);
   let h = n;
   isValidValue(p) && p !== defaultSessionLocalIDString && -1 === h.indexOf(p) && (h = h.concat([p]));
@@ -764,12 +764,12 @@ function ew(e) {
   });
 }
 let ek = memo(function (e) {
-  let t = tS();
-  let n = _G();
+  let t = useCurrentFileKey();
+  let n = useOpenFileLibraryKey();
   let l = useSelector(eP);
   let s = useSelector(Sh);
   let d = useSelector(dK);
-  let c = _$$to();
+  let c = useIsSelectedViewFullscreenCooper();
   let p = _$$D(s, d);
   let u = useSelector(eO);
   let h = useMemo(() => _$$cP(u, t, n, c, e.actionIndexPath), [u, t, n, e.actionIndexPath, c]);
@@ -895,7 +895,7 @@ function eX({
   let O = "nodeFieldAlias" in t ? aA(t.nodeFieldAlias.stablePathToNode, t.nodeFieldAlias.indexOrKey) : void 0;
   let D = O ? Xx(O.varValue.resolvedType) : null;
   let M = null;
-  if (isInvalidValue(t)) M = null; else if (C?.resolvedType === VariableResolvedDataType.COLOR) M = isInvalidValue(e) ? jsx("div", {
+  if (isInvalidValue(t)) M = null;else if (C?.resolvedType === VariableResolvedDataType.COLOR) M = isInvalidValue(e) ? jsx("div", {
     className: "prototype_set_variable_controls--targetVariableDataMixedContainer--H6uGu",
     children: getI18nString("fullscreen.mixed")
   }) : jsx(Fragment, {
@@ -910,7 +910,7 @@ function eX({
       setVariableAction: !0,
       innerContainerClassName: "prototype_set_variable_controls--variableColorInputContainer--NaOmp"
     })
-  }); else {
+  });else {
     let t = VariableResolvedDataType.BOOLEAN;
     _ ? t = _.resolvedType : O && (t = O.varValue.resolvedType === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : O.varValue.resolvedType);
     M = jsx("div", {

@@ -3,7 +3,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { fileEntityModel } from "../905/806985";
-import { WU } from "../figma_app/35887";
+import { OrganizationUserSchemaAlias } from "../figma_app/35887";
 import { z as _$$z } from "../905/954314";
 let c = z.object({
   recent_files: fileEntityModel.array(),
@@ -12,7 +12,7 @@ let c = z.object({
     files: Ip.ignore(fileEntityModel.array()),
     timestamp: z.string()
   }).array(),
-  org_drafts_owners: WU.array()
+  org_drafts_owners: OrganizationUserSchemaAlias.array()
 });
 let $$u0 = new class {
   constructor() {

@@ -17,10 +17,10 @@ export const createPrimaryKeySchema = () => z.string().describe(livestorePrimary
  * Describes a normalized value with a prefix.
  * Original: $$o1
  * @param {string} entity - The entity name.
- * @param {z.ZodTypeAny} type - The Zod type to describe.
- * @returns {z.ZodTypeAny} The described Zod type.
+ * @param {z.ZodObject<any>} type - The Zod type to describe.
+ * @returns {z.ZodObject<any>} The described Zod type.
  */
-export function describeNormalized(entity: string, type: z.ZodTypeAny): z.ZodTypeAny {
+export function describeNormalized(entity: string, type: z.ZodObject<any>): z.ZodObject<any> {
   return type.describe(`${livestoreNormalized}:${entity}`);
 }
 

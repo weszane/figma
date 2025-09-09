@@ -6,7 +6,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB, Y9, hE, wi, jk } from "../figma_app/272243";
 import { resourceUtils } from "../905/989992";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
 import { pW } from "../905/160095";
@@ -16,12 +16,12 @@ import { h as _$$h } from "../905/142086";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { up } from "../905/760074";
+import { getRepoByIdAlt } from "../905/760074";
 import { F as _$$F } from "../905/224";
 import { DQ, Pw } from "../figma_app/121751";
-import { MF, A5 } from "../figma_app/391338";
+import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { jd } from "../figma_app/528509";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
@@ -31,13 +31,13 @@ import { w5 } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
-import { pE } from "../figma_app/630077";
+import { projectPermissionEnum } from "../figma_app/630077";
 import { registerModal } from "../905/102752";
 import { RR } from "../905/514666";
 import { bP } from "../905/739964";
 import { dD } from "../905/519113";
 export let $$V0 = registerModal(function (e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let {
     team,
     afterFileMove
@@ -47,7 +47,7 @@ export let $$V0 = registerModal(function (e) {
   let l = selectCurrentUser();
   let d = !!team && canEditTeam(team?.id, o);
   let p = w5(team);
-  let m = Rs(PublishUpsellTeamPlan(team ? {
+  let m = useSubscription(PublishUpsellTeamPlan(team ? {
     teamId: team.id
   } : null));
   let h = resourceUtils.useTransform(m, e => e?.team?.canEdit ?? !1);
@@ -55,20 +55,20 @@ export let $$V0 = registerModal(function (e) {
     let t = e?.team?.plan.tier;
     return !!t && [FPlanNameType.STUDENT, FPlanNameType.PRO].includes(t);
   });
-  let f = MF({
+  let f = useShadowReadLoaded({
     oldValue: resourceUtils.useMemoizedLoaded(d),
     newValue: h,
-    label: A5.UpsellModal.canEditTeam,
+    label: adminPermissionConfig.UpsellModal.canEditTeam,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
       teamId: team?.id,
       userId: l?.id
     }
   });
-  let _ = MF({
+  let _ = useShadowReadLoaded({
     oldValue: resourceUtils.useMemoizedLoaded(p),
     newValue: g,
-    label: A5.UpsellModal.isFileInTeamWithProFeatures,
+    label: adminPermissionConfig.UpsellModal.isFileInTeamWithProFeatures,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
       teamId: team?.id,
@@ -87,7 +87,7 @@ export let $$V0 = registerModal(function (e) {
   return !t || team && "loaded" !== f.status && "loaded" !== _.status ? jsx(Fragment, {}) : team && f.data && !_.data ? jsx(bP, {
     team,
     resource: Bi.TEAM_LIBRARY,
-    action: pE.PUBLISH_COMPONENTS,
+    action: projectPermissionEnum.PUBLISH_COMPONENTS,
     editorType: FFileType.DESIGN,
     onStarterPlanCtaClick: b,
     currentPlan: _$$F.Plan.STARTER,
@@ -114,8 +114,8 @@ function G(e) {
   let {
     onStylesClick
   } = e;
-  let h = Rs(PublishUpsellTeamRoles, {});
-  let g = q5();
+  let h = useSubscription(PublishUpsellTeamRoles, {});
+  let g = selectCurrentFile();
   let _ = w5(e.team);
   let A = useMemo(() => h.transform(e => e.currentUser.teamEditRoles.some(e => {
     let i = e.team;
@@ -147,7 +147,7 @@ function G(e) {
   return void 0 !== E ? jsx(bP, {
     team: e.team,
     resource: Bi.TEAM_LIBRARY,
-    action: pE.PUBLISH_COMPONENTS,
+    action: projectPermissionEnum.PUBLISH_COMPONENTS,
     editorType: FFileType.DESIGN,
     onStarterPlanCtaClick: onStylesClick,
     currentPlan: _$$F.Plan.STARTER,
@@ -168,8 +168,8 @@ function z(e) {
     onClose: i,
     open: !0
   });
-  let s = q5();
-  let c = useSelector(e => s ? up(s, e.repos) : null);
+  let s = selectCurrentFile();
+  let c = useSelector(e => s ? getRepoByIdAlt(s, e.repos) : null);
   if (!s) return jsx(Fragment, {});
   let u = renderI18nText("upsell.move_file_publish.move_file_to_team_to_publish");
   let p = renderI18nText("upsell.move_file_publish.move_file_to_pro_team_to_publish");

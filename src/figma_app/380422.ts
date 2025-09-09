@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { fi } from "../figma_app/913823";
 import { g5 } from "../figma_app/178752";
-import { tB } from "../figma_app/516028";
+import { selectOpenFile } from "../figma_app/516028";
 import { U as _$$U } from "../905/506188";
 import { kH } from "../905/309735";
 import { oh } from "../905/18797";
@@ -55,7 +55,7 @@ export function $$W0({
   let {
     currentSearch
   } = useAtomWithSubscription(WP);
-  let G = useSelector(tB);
+  let G = useSelector(selectOpenFile);
   let V = g5($A.Design).productComponents;
   let H = useMemoStable(() => V.map(e => e.library_key), [V]);
   let z = _$$U(H);

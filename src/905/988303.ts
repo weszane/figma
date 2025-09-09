@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { lo, TQ, Yd, dq, gu, az, k9, s0, _y, Qe } from "../905/5637";
 import { A } from "../6828/379561";
@@ -13,7 +13,7 @@ export function $$d3(e) {
         className: Yd,
         svg: e.icon
       })
-    }), $M(e.metric)]
+    }), formatNumber(e.metric)]
   });
 }
 export function $$c2(e) {
@@ -39,7 +39,7 @@ export function $$c2(e) {
         className: s0,
         svg: e.activeIcon
       })]
-    }), $M(e.metric)]
+    }), formatNumber(e.metric)]
   });
 }
 export function $$u1(e) {

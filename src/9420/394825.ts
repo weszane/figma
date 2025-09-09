@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { c2, he } from "../905/382883";
 import { getLocalStorage } from "../905/657224";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { FFileType } from "../figma_app/191312";
 import { D } from "../905/347702";
 import { selectCurrentUser } from "../905/372672";
@@ -31,7 +31,7 @@ export function $$E5({
   let y = useSelector(e => e.payment.numWhiteboardEditors);
   let h = useSelector(e => e.payment.editorStatusChanges);
   let f = useSelector(e => e.payment.cartSelections);
-  let S = ZC(e);
+  let S = useLatestRef(e);
   let R = BR(E, m);
   let D = O1(T, Ky(R, h, FFileType.DESIGN));
   let N = O1(y, Ky(R, h, FFileType.WHITEBOARD));

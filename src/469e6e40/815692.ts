@@ -62,7 +62,7 @@ import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V2 } from '../905/480825';
 import { FJ } from '../905/508367';
-import { ud } from '../905/513035';
+import { ProductAccessTypeEnum } from '../905/513035';
 import { getCodegenLanguagePreference } from '../905/515076';
 import { Dd, OJ } from '../905/519092';
 import { $n } from '../905/521428';
@@ -76,7 +76,7 @@ import { K as _$$K } from '../905/628118';
 import { E as _$$E3 } from '../905/632989';
 import { F as _$$F2 } from '../905/634016';
 import { Bi } from '../905/652992';
-import { tT as _$$tT } from '../905/663269';
+import { ResourceStatus } from '../905/663269';
 import { In } from '../905/672640';
 import { g as _$$g2 } from '../905/687265';
 import { X as _$$X } from '../905/698965';
@@ -116,7 +116,7 @@ import { fm } from '../c5e2cae0/453906';
 import { WQ } from '../c5e2cae0/705272';
 import { s as _$$s } from '../cssbuilder/589278';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { IpAllowlistRangesView, OrgAdminSettingsPage, OrgMfaGuestInfoView, Plugin, OrgWorkspacesWithControlSettingsView, OrgMfaMemberInfoView, OrgSharedSettingView, ToggledDevModeSettingsView } from '../figma_app/43951';
 import { $y } from '../figma_app/59509';
 import { $$ as _$$$$, nR as _$$nR2 } from '../figma_app/60079';
@@ -133,13 +133,13 @@ import { Bg } from '../figma_app/246699';
 import { T as _$$T } from '../figma_app/257703';
 import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
 import { yl } from '../figma_app/275462';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { t4 as _$$t2 } from '../figma_app/297957';
 import { isSingleDevWithCodegen, isDevModePlugin, isDevModeWithCodegen } from '../figma_app/300692';
 import { V as _$$V3 } from '../figma_app/312987';
 import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
 import { UE } from '../figma_app/345997';
-import { H3, S2 } from '../figma_app/465071';
+import { getParentOrgIdIfOrgLevel, useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { Jt } from '../figma_app/481749';
 import { $q, Sm, w_ } from '../figma_app/482728';
@@ -149,8 +149,8 @@ import { $w, hi, Hq, KA, Kc, NL, OT, q4, Sl, Tf, vs, xP, Xw, Y4, ye, yo } from '
 import { aE as _$$aE } from '../figma_app/514043';
 import { c4 } from '../figma_app/518077';
 import { IE } from '../figma_app/545541';
-import { aI as _$$aI } from '../figma_app/552876';
-import { mI } from '../figma_app/566371';
+import { isFigmakeSitesEnabled } from '../figma_app/552876';
+import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { p3 } from '../figma_app/588582';
 import { I7 } from '../figma_app/594947';
 import { ol } from '../figma_app/598018';
@@ -343,7 +343,7 @@ function ec() {
 function e_(e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
-  let l = ZC(e.mfaRequiredSetting);
+  let l = useLatestRef(e.mfaRequiredSetting);
   let o = l === CT.GUESTS || l === CT.ALL_USERS;
   let d = l === CT.MEMBERS || l === CT.ALL_USERS;
   let c = e.mfaRequiredSetting === CT.MEMBERS || e.mfaRequiredSetting === CT.ALL_USERS;
@@ -417,13 +417,13 @@ let eu = registerModal(() => {
     let t = I7('ff_mfa_for_members');
     return !!(e && kA(e) && e.security_add_on_enabled_at && t.getConfig().getValue('enabled', !1));
   }(t);
-  let c = Rs(OrgMfaMemberInfoView, {
+  let c = useSubscription(OrgMfaMemberInfoView, {
     orgId: t.id
   });
-  let _ = c.status === 'loading' || c.data?.orgMfaMemberInfo?.status !== _$$tT.Loaded;
+  let _ = c.status === 'loading' || c.data?.orgMfaMemberInfo?.status !== ResourceStatus.Loaded;
   let u = t.mfa_required ? t.mfa_required : null;
   let [m, p] = useState(u);
-  let g = c.status === 'loaded' && c.data?.orgMfaMemberInfo?.status === _$$tT.Loaded && c.data?.orgMfaMemberInfo?.data || {
+  let g = c.status === 'loaded' && c.data?.orgMfaMemberInfo?.status === ResourceStatus.Loaded && c.data?.orgMfaMemberInfo?.data || {
     totalMemberCount: 0,
     mfaMemberCount: 0,
     nonMfaMemberCount: 0
@@ -1303,7 +1303,7 @@ let tU = registerModal(() => {
   let e = useDispatch();
   let t = getI18nString('org_settings.autogen_password_controls.success');
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
-  let r = Rs(OrgSharedSettingView, {
+  let r = useSubscription(OrgSharedSettingView, {
     orgId: a.id
   });
   let l = () => e(popModalStack());
@@ -1878,8 +1878,8 @@ function aj({
   error: s,
   buttonText: r
 }) {
-  let l = S2().unwrapOr(null);
-  let o = H3(l);
+  let l = useTeamPlanFeatures().unwrapOr(null);
+  let o = getParentOrgIdIfOrgLevel(l);
   let d = l?.name;
   let c = useDispatch();
   let _ = jsx(CY, {
@@ -2523,7 +2523,7 @@ let aH = registerModal(() => {
     b('');
   }, [g, m, h, b, p]);
   let v = useAtomWithSubscription(aI);
-  let f = Rs(ToggledDevModeSettingsView, {
+  let f = useSubscription(ToggledDevModeSettingsView, {
     targetOrgId: e?.id ?? '',
     targetUserId: null
   });
@@ -3071,7 +3071,7 @@ let nc = 'guest_invite_settings_modal--radioLabel--Yuqzr';
 function n_(e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
-  let l = ZC(e.mfaRequiredSetting);
+  let l = useLatestRef(e.mfaRequiredSetting);
   let o = l === CT.MEMBERS || l === CT.ALL_USERS;
   let d = l === CT.GUESTS || l === CT.ALL_USERS;
   let c = e.mfaRequiredSetting === CT.GUESTS || e.mfaRequiredSetting === CT.ALL_USERS;
@@ -3157,12 +3157,12 @@ let nm = registerModal(() => {
   let e = useDispatch();
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = _$$M2(t);
-  let r = Rs(OrgMfaGuestInfoView, {
+  let r = useSubscription(OrgMfaGuestInfoView, {
     orgId: t.id
   });
-  let l = r.status === 'loading' || r.data?.orgMfaGuestInfo?.status !== _$$tT.Loaded;
+  let l = r.status === 'loading' || r.data?.orgMfaGuestInfo?.status !== ResourceStatus.Loaded;
   let [o, d] = useState(t.mfa_required ? t.mfa_required : null);
-  let c = r.status === 'loaded' && r.data?.orgMfaGuestInfo?.status === _$$tT.Loaded && r.data?.orgMfaGuestInfo?.data || {
+  let c = r.status === 'loaded' && r.data?.orgMfaGuestInfo?.status === ResourceStatus.Loaded && r.data?.orgMfaGuestInfo?.data || {
     totalGuestCount: 0,
     nonMfaGuestCount: 0
   };
@@ -4050,7 +4050,7 @@ function n3(e) {
     planParentId: e.orgId,
     planType: FOrganizationLevelType.ORG
   });
-  let [l] = mI(r);
+  let [l] = handleSuspenseRetainRelease(r);
   a = l.data !== null ? l.data : 'usd';
   let o = function ({
     billableSeats: e,
@@ -4070,7 +4070,7 @@ function n3(e) {
       planType: FOrganizationLevelType.ORG,
       planParentId: a
     }, Fq.ADMIN_SETTINGS);
-    let [r] = mI(i);
+    let [r] = handleSuspenseRetainRelease(i);
     if (r.data === null) throw new Error('Price data is null');
     let l = r.data;
     let o = nK()(Object.values(e));
@@ -4079,7 +4079,7 @@ function n3(e) {
       let [a, n] = t;
       return e + n * l[Zx(a)].amount;
     }, 0);
-    d && (c += d * l[ud.DESIGN].amount);
+    d && (c += d * l[ProductAccessTypeEnum.DESIGN].amount);
     return 12 * c;
   }({
     billableSeats: e.billableSeats,
@@ -4260,7 +4260,7 @@ function n6({
 let n9 = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
-  let r = Rs(OrgAdminSettingsPage, {
+  let r = useSubscription(OrgAdminSettingsPage, {
     orgId: a.id
   });
   let l = oA(r.data?.org) ?? null;
@@ -4344,7 +4344,7 @@ let n9 = registerModal(e => {
 let se = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
-  let r = Rs(OrgAdminSettingsPage, {
+  let r = useSubscription(OrgAdminSettingsPage, {
     orgId: a.id
   });
   let l = oA(r.data?.org) ?? null;
@@ -4531,16 +4531,16 @@ export function $$sr0(e) {
   let q = _$$r2();
   let $ = useDispatch();
   let B = selectUser();
-  t = S2();
+  t = useTeamPlanFeatures();
   let z = _$$N_2.reduce((e, a) => {
     switch (a) {
-      case ud.EXPERT:
+      case ProductAccessTypeEnum.EXPERT:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsExpert === r.zRx.INSTANT_APPROVAL;
-      case ud.DEVELOPER:
+      case ProductAccessTypeEnum.DEVELOPER:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsDeveloper === r.zRx.INSTANT_APPROVAL;
-      case ud.CONTENT:
+      case ProductAccessTypeEnum.CONTENT:
         return e || oA(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === r.zRx.INSTANT_APPROVAL;
-      case ud.COLLABORATOR:
+      case ProductAccessTypeEnum.COLLABORATOR:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === r.zRx.INSTANT_APPROVAL;
       default:
         throwTypeError(a);
@@ -4571,11 +4571,11 @@ export function $$sr0(e) {
       }
     }));
   });
-  let ed = Rs(IpAllowlistRangesView({
+  let ed = useSubscription(IpAllowlistRangesView({
     orgId: org.id
   }));
   let ec = ed.status === 'loaded' && ed.data?.org?.ipAllowlistRanges.status === 'loaded' && ed.data.org.ipAllowlistRanges.data || [];
-  let e_ = Rs(OrgAdminSettingsPage({
+  let e_ = useSubscription(OrgAdminSettingsPage({
     orgId: org.id
   }), {
     enabled: !0
@@ -4743,7 +4743,7 @@ export function $$sr0(e) {
     contactSupportCopy: getI18nString('settings_tab.contact_support_to_disable'),
     contactSupportTooltipCopy: getI18nString('settings_tab.domain_capture_contact_support_tooltip_copy')
   }, 'external-collab-controls'));
-  (F && (getFeatureFlags().sts_k12_google_org_enabled || !org.k12_google_org) || _$$aI()) && eI.push(jsx(x8, {
+  (F && (getFeatureFlags().sts_k12_google_org_enabled || !org.k12_google_org) || isFigmakeSitesEnabled()) && eI.push(jsx(x8, {
     label: getI18nString('settings_tab.sites_publishing_toggle_label'),
     description: getI18nString('settings_tab.sites_publishing_toggle_description'),
     currentValue: eb?.sitesPublishingDisabled ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),

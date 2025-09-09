@@ -5,10 +5,10 @@ import { Xr } from "../figma_app/27355";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { DG as _$$DG } from "../figma_app/789";
+import { getWorkshopModeStatus } from "../figma_app/789";
 import { F } from "../905/224";
 import { inputValue } from "../figma_app/455680";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { PS } from "../figma_app/598018";
 import { Bi } from "../905/652992";
@@ -45,10 +45,10 @@ export function $$S1() {
 }
 export var $$j0 = (e => (e.FEATURE_DISABLED = "featureDisabled", e.ELIGIBLE_WITH_MOVE_FILE_TO_PAID_TEAM = "eligibleWithMoveFileToPaidTeam", e.ELIGIBLE_WITH_UPGRADE = "eligibleWithUpgrade", e.ELIGIBLE = "eligible", e))($$j0 || {});
 export function $$I7() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useSelector(t => e && e.teamId ? t.teams[e.teamId] : null);
   let i = useSelector(e => e.isFreeUser);
-  let r = _$$DG(e?.key || "").enabled;
+  let r = getWorkshopModeStatus(e?.key || "").enabled;
   let a = e?.isTryFile;
   let s = !!e && (e.canEdit || r);
   return a || !s ? "featureDisabled" : e.parentOrgId ? "eligible" : t ? PS(t) ? "eligible" : "eligibleWithUpgrade" : i ? "eligibleWithUpgrade" : "eligibleWithMoveFileToPaidTeam";
@@ -106,7 +106,7 @@ export function $$R6() {
 }
 export function $$D5(e) {
   let t = $$I7();
-  let i = q5();
+  let i = selectCurrentFile();
   let a = useSelector(e => i && i.teamId ? e.teams[i.teamId] ?? null : null);
   let s = useDispatch();
   return useCallback(() => {
@@ -119,7 +119,7 @@ export function $$D5(e) {
         currentPlan: F.Plan.STARTER,
         upsellPlan: F.Plan.PRO
       }
-    })); else if ("eligible" === t) {
+    }));else if ("eligible" === t) {
       e();
       return !0;
     }

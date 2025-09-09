@@ -6,15 +6,15 @@ import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { px, j_, S2, H3 } from "../figma_app/465071";
+import { useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { o0 } from "../905/844131";
 import { a as _$$a } from "../469e6e40/51498";
 export function $$p0() {
   let e = useDispatch();
-  let t = px();
-  let a = j_(t).unwrapOr(!1);
-  let p = S2().unwrapOr(null);
-  let g = H3(p);
+  let t = useTeamPlanUser();
+  let a = useIsOrgAdminUser(t).unwrapOr(!1);
+  let p = useTeamPlanFeatures().unwrapOr(null);
+  let g = getParentOrgIdIfOrgLevel(p);
   let h = p?.name;
   let x = p?.key.type === FOrganizationLevelType.ORG;
   return (useEffect(() => {

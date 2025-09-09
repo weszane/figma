@@ -6,10 +6,10 @@ import { hS } from "../905/437088";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { xf } from "../figma_app/416935";
 import { isGovCluster } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { ks } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -28,8 +28,8 @@ import { HE, Cl, Eq } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { $ as _$$$ } from "../905/834575";
 import { registerModal } from "../905/102752";
-import { aI } from "../figma_app/552876";
-import { oz } from "../905/561485";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { C2, Cr, p_, Aw, cx, Xu, QL, T as _$$T, Pv, Gu, Kk, Qu, iU } from "../905/566000";
 import { A as _$$A } from "../6828/7452";
 let n;
@@ -68,7 +68,7 @@ function B(e) {
   let [ea, es] = useState(!1);
   let [eo, el] = useState(!1);
   let ed = hS(e);
-  let ec = Rs(TeamHasPublishedSite, {
+  let ec = useSubscription(TeamHasPublishedSite, {
     teamId: e.teamId
   });
   let eu = _$$N(e.folderId ?? "");
@@ -214,11 +214,11 @@ function B(e) {
           children: [(() => {
             if (ep && "loading" === eu.status || !ep && "loading" === ec.status) return null;
             let t = e.shouldTransferCopy ? "" : ep ? getI18nString("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_team_it_can_t_be_undone") : getI18nString("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_organization_it_can_t_be_undone");
-            if (oz() || aI()) {
+            if (isSitesFeatureEnabled() || isFigmakeSitesEnabled()) {
               if (ep) {
-                let e = oA(eu.data)?.publishedSiteCount;
+                let e = getResourceDataOrFallback(eu.data)?.publishedSiteCount;
                 e && e > 0 && (t += getI18nString("asset_transfers.request_modal.sites_unpublished_on_project_transfer"));
-              } else oA(ec.data?.team)?.hasPublishedSite && (t += getI18nString("asset_transfers.request_modal.sites_unpublished_on_team_transfer"));
+              } else getResourceDataOrFallback(ec.data?.team)?.hasPublishedSite && (t += getI18nString("asset_transfers.request_modal.sites_unpublished_on_team_transfer"));
             }
             return "" === t ? null : jsx(_$$_, {
               dataTestId: "asset-transfer-warning-banner",

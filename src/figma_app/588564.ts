@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { T as _$$T } from "../905/2124";
 import { useAtomWithSubscription, useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { ow } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { B } from "../905/969273";
@@ -71,7 +71,7 @@ export function $$M0() {
   let t = U(e);
   let [r, o] = useState("");
   let C = JT.REWRITE_TEXT;
-  let w = to();
+  let w = useIsSelectedViewFullscreenCooper();
   let {
     close
   } = cq();

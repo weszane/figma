@@ -1,6 +1,6 @@
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 export function $$r0(e, t) {
-  return Rs(e, {
+  return useSubscription(e, {
     key: t
   }, {
     enabled: !!t

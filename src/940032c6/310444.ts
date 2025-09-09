@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 export function $$s0({
   atom: e
 }) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let [i, s] = useAtomValueAndSetter(e);
   let [r, o] = useState(!1);
   useEffect(() => {

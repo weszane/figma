@@ -31,7 +31,7 @@ import { qB } from "../905/862321";
 import { FL } from "../figma_app/248365";
 import { b as _$$b } from "../5430/872214";
 import { A as _$$A2 } from "../vendor/850789";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { IW } from "../figma_app/563413";
 import { lH, r4 } from "../figma_app/229259";
 import { o as _$$o } from "../905/451156";
@@ -356,7 +356,7 @@ function eu({
 }) {
   let n = r === et.COMPONENTS;
   let o = n ? [PW.COMPONENT, PW.STATE_GROUP] : [PW.STYLE];
-  let [l] = IT(nh({
+  let [l] = setupResourceAtomHandler(nh({
     query: e,
     libraryId: t,
     assetTypes: o
@@ -444,11 +444,11 @@ function em({
     trailing: !0,
     leading: !1
   });
-  let [l] = IT(lH({
+  let [l] = setupResourceAtomHandler(lH({
     hubFileId: e
   }));
   let c = useMemo(() => es("loaded" === l.status ? l.data : []), [l]);
-  let [d] = IT(r4(e));
+  let [d] = setupResourceAtomHandler(r4(e));
   let {
     itemsByPageId,
     topLevelComponents,
@@ -1012,7 +1012,7 @@ function tl({
   let [{
     data: c,
     status: u
-  }] = IT(_$$$.getRelatedContent({
+  }] = setupResourceAtomHandler(_$$$.getRelatedContent({
     resourceType: a,
     contentId: l
   }), {
@@ -1212,7 +1212,7 @@ function tR({
 }) {
   let n = _$$S(e.category_slug, LJ);
   let o = zq();
-  let [a] = IT(Zp({
+  let [a] = setupResourceAtomHandler(Zp({
     categorySlug: n,
     locale: o
   }), {

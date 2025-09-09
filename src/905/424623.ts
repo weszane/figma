@@ -2,12 +2,12 @@ import { useContext, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { Qp } from "../figma_app/930338";
+import { compareIgnoringSpaces } from "../figma_app/930338";
 import { Kk, n8, EY, x as _$$x } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { LibraryDataByLibraryKey } from "../figma_app/43951";
 import { Qp as _$$Qp, SS, KC } from "../figma_app/349248";
 import { C9, jf } from "../figma_app/141508";
@@ -47,7 +47,7 @@ export function $$I2({
   }, [t, i]);
 }
 export function $$E4(e) {
-  return "loaded" === Rs(LibraryDataByLibraryKey, {
+  return "loaded" === useSubscription(LibraryDataByLibraryKey, {
     libraryKey: e || ""
   }, {
     enabled: !!e
@@ -55,7 +55,7 @@ export function $$E4(e) {
 }
 function x(e) {
   let t = function (e) {
-    let t = Rs(LibraryDataByLibraryKey, {
+    let t = useSubscription(LibraryDataByLibraryKey, {
       libraryKey: e || ""
     }, {
       enabled: !!e
@@ -81,7 +81,7 @@ function x(e) {
   }, [t]);
 }
 export function $$S0(e) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let i = VJ(e);
   let o = useDispatch();
   let l = Kw(e);
@@ -100,7 +100,7 @@ export function $$S0(e) {
     for (let e of b) {
       if (e.type === PW.VARIABLE || e.type === PW.VARIABLE_SET || e.type === PW.MODULE || i.has(e.node_id)) continue;
       if (e.type === PW.STYLE) {
-        let t = styles.find(t => Qp(t.name, e.name) && t.style_type === e.style_type);
+        let t = styles.find(t => compareIgnoringSpaces(t.name, e.name) && t.style_type === e.style_type);
         if (!t) continue;
         let i = Fullscreen.getNumUsagesOfStyle(e.key, r);
         if (0 === i) continue;
@@ -112,7 +112,7 @@ export function $$S0(e) {
       }
       let t = e.type === PW.COMPONENT ? components : stateGroups;
       let n = e.type === PW.COMPONENT ? stateGroups : components;
-      let s = t.find(t => Qp(t.name, e.name)) ?? n.find(t => Qp(t.name, e.name));
+      let s = t.find(t => compareIgnoringSpaces(t.name, e.name)) ?? n.find(t => compareIgnoringSpaces(t.name, e.name));
       if (!s) continue;
       let l = e.type === PW.COMPONENT ? e.component_key : e.key;
       let u = e.type === PW.COMPONENT ? e.content_hash : e.version;

@@ -6,7 +6,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { oW } from "../905/675859";
-import { nt } from "../figma_app/687776";
+import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { $ as _$$$ } from "../figma_app/61705";
@@ -14,7 +14,7 @@ import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { f6 } from "../figma_app/915202";
 import { N as _$$N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
@@ -71,9 +71,9 @@ export function $$I0() {
   let {
     data,
     status
-  } = nt(n);
+  } = useProjectFileCreationPermissions(n);
   let j = !!data?.canCreateFigmakeFileWithReasons.result;
-  let I = X$("FigmakePromoModalOverlay");
+  let I = useCurrentPublicPlan("FigmakePromoModalOverlay");
   let S = I.unwrapOr(null)?.tier || null;
   let N = S && ([FPlanNameType.PRO, FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(S) || S === FPlanNameType.STARTER && getFeatureFlags().bake_starter_limit);
   let O = useAtomWithSubscription(mp);

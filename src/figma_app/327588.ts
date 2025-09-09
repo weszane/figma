@@ -4,20 +4,20 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { BT } from "../905/618447";
-import { to, Oe } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper, isDesignModeAndFullscreenCooper } from "../figma_app/828186";
 import { getObservableValue, useSyncedObservableValue } from "../figma_app/84367";
 import { Bk } from "../figma_app/357367";
 export function $$p5() {
   return !getObservableValue(AppStateTsApi?.cooperFocusView().isInFocusedNodeView, !1);
 }
 export function $$_6() {
-  let e = to();
+  let e = useIsSelectedViewFullscreenCooper();
   let t = getObservableValue(AppStateTsApi?.cooperFocusView().isInFocusedNodeView, !0);
   return e && t;
 }
 export function $$h4() {
   let e = $$p5();
-  let t = Oe();
+  let t = isDesignModeAndFullscreenCooper();
   let r = Bk();
   if (!e || t || !r) return !1;
   let c = atomStoreManager.get(BT);
@@ -39,9 +39,9 @@ export function $$f1() {
   return useSyncedObservableValue(AppStateTsApi?.cooperFocusView().focusedNodeId, "");
 }
 export function $$E0() {
-  let e = to();
+  let e = useIsSelectedViewFullscreenCooper();
   let t = $$p5();
-  let r = Oe();
+  let r = isDesignModeAndFullscreenCooper();
   return e && r && !t;
 }
 export const CA = $$E0;

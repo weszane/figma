@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import { ViewType } from "../figma_app/763686";
 import { H } from "../905/620380";
 import { I } from "../figma_app/583780";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { q0 } from "../figma_app/107215";
 import { N } from "../figma_app/659940";
 import { Cu } from "../figma_app/314264";
 import { $K } from "../figma_app/247611";
 import { g as _$$g } from "../figma_app/115586";
 import { _X, qc } from "../figma_app/62612";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { i1 } from "../figma_app/193867";
 import { J } from "../905/61366";
@@ -42,7 +42,7 @@ export function $$I5() {
   let {
     createdAt,
     key
-  } = q5() || {
+  } = selectCurrentFile() || {
     createdAt: null,
     key: null
   };
@@ -129,7 +129,7 @@ export function $$C6(e) {
       triggeredFrom: "starter_kit"
     });
   }, [fileKey, didUserCancel]);
-  let a = ZC(showStarterKit);
+  let a = useLatestRef(showStarterKit);
   useEffect(() => {
     0 === a && 1 === showStarterKit && Cu({
       fileKey,

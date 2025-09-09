@@ -7,7 +7,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { Hu } from "../figma_app/516028";
+import { openFileTeamAtom } from "../figma_app/516028";
 import { zt } from "../figma_app/84580";
 import { JU } from "../figma_app/626177";
 import { aV } from "../figma_app/305626";
@@ -22,7 +22,7 @@ export function $$y0() {
     canMoveFileToProPlus
   } = R();
   let i = useDispatch();
-  let y = !useAtomWithSubscription(Hu);
+  let y = !useAtomWithSubscription(openFileTeamAtom);
   let b = useCallback(() => {
     i(showModalHandler({
       type: Y,

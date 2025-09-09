@@ -10,15 +10,15 @@ import { EO } from "../figma_app/86989";
 import { t as _$$t2 } from "../905/851577";
 import { N } from "../905/645480";
 import { x as _$$x } from "../469e6e40/671704";
-import { X$, H3 } from "../figma_app/465071";
+import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { F } from "../905/827944";
 import { hasLocalFileId } from "../figma_app/155287";
 import { p as _$$p } from "../905/42189";
 import { W } from "../3276/776313";
 import { F5, oM } from "../905/192343";
 export function $$y0(e) {
-  let t = X$("useInsertablePlugin").unwrapOr(null);
-  let n = H3(t);
+  let t = useCurrentPublicPlan("useInsertablePlugin").unwrapOr(null);
+  let n = getParentOrgIdIfOrgLevel(t);
   let y = Gt(e.resource.plugin_id, e.triggeredFrom);
   let C = dR(e.resource.plugin_id, e.triggeredFrom);
   let w = "whiteboard" === lg();
@@ -40,7 +40,7 @@ export function $$y0(e) {
       if (e.showRequestFlow) return Promise.resolve();
       let n = validatePublishedPluginInOrgAllowlist();
       if (!hasLocalFileId(e.resource) && !n) return Promise.resolve();
-      if (M) E(); else {
+      if (M) E();else {
         let {
           e
         } = t;

@@ -7,7 +7,7 @@ import { rR, sK } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { Mk } from "../905/163189";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { O } from "../905/174367";
 import { DV } from "../905/739964";
 import { u as _$$u } from "../905/997541";
@@ -24,7 +24,7 @@ let $$g0 = createOptimistThunk(e => {
     data: {
       team: n,
       resource: vL.FILE,
-      action: ZN.CREATE_FILE,
+      action: fileActionEnum.CREATE_FILE,
       currentPlan: F.Plan.STARTER,
       upsellPlan: F.Plan.PRO,
       editorType: null,

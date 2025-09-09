@@ -1,7 +1,7 @@
 import { Actions } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { LRUCache } from "../905/196201";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 export function $$d1() {
@@ -12,22 +12,22 @@ export function $$d1() {
     seen_development_plugin_onboarding_modal: !0,
     seen_universal_inserts_onboarding_modal: !0
   }));
-  YQ({
+  handleAtomEvent({
     id: "components_proceed_to_close_modal"
   });
-  YQ({
+  handleAtomEvent({
     id: "widget_insert_proceed_to_close_modal"
   });
-  YQ({
+  handleAtomEvent({
     id: "development_plugin_proceed_to_close_modal"
   });
-  YQ({
+  handleAtomEvent({
     id: "published_plugin_proceed_to_close_modal"
   });
-  YQ({
+  handleAtomEvent({
     id: "universal_inserts_proceed_to_close_modal"
   });
-  YQ({
+  handleAtomEvent({
     id: "saved_and_recent_close_modal"
   });
 }

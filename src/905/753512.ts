@@ -4,8 +4,8 @@ import { isNotNullish, assertNotNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/150656";
 import { resourceUtils, LOADING_STATUS } from "../905/989992";
 import { A as _$$A } from "../vendor/850789";
-import { ZC } from "../figma_app/39751";
-import { Rs } from "../figma_app/288654";
+import { useLatestRef } from "../figma_app/922077";
+import { useSubscription } from "../figma_app/288654";
 import { Xm, gB } from "../905/723791";
 import { generateUUIDv4 } from "../905/871474";
 import { n1 } from "../figma_app/657017";
@@ -15,8 +15,8 @@ import { Wv } from "../figma_app/633080";
 import { F as _$$F, r as _$$r } from "../905/336143";
 import { l as _$$l } from "../905/716947";
 import { analyticsEventManager } from "../905/449184";
-import { IT } from "../figma_app/566371";
-import { tS } from "../figma_app/516028";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { XD } from "../905/842072";
 import { Q_ } from "../905/570707";
 import { ol } from "../figma_app/598018";
@@ -72,7 +72,7 @@ export function $$N0({
     return t.current;
   }(B);
   let G = function (e) {
-    let t = ZC(e.activeTab);
+    let t = useLatestRef(e.activeTab);
     let [i, n] = useState(!1);
     useEffect(() => {
       t && e.activeTab !== t && n(!0);
@@ -100,7 +100,7 @@ export function $$N0({
       queryId
     } = function (e, t, i) {
       let n = function (e) {
-        let [t] = IT(Q_(e), {
+        let [t] = setupResourceAtomHandler(Q_(e), {
           enabled: !!e
         });
         let i = Qj({
@@ -137,7 +137,7 @@ export function $$N0({
       let s = function (e) {
         let t = ry();
         let i = n1();
-        let [n] = IT(XD({
+        let [n] = setupResourceAtomHandler(XD({
           query: e
         }), {
           enabled: !!e && i
@@ -160,7 +160,7 @@ export function $$N0({
       let d = function (e, t, i, n) {
         let [a, s] = useState(void 0);
         let [o, l] = useState(!0);
-        let d = tS() ?? void 0;
+        let d = useCurrentFileKey() ?? void 0;
         let c = ol()?.id;
         let u = LH() ?? void 0;
         useEffect(function () {
@@ -186,7 +186,7 @@ export function $$N0({
         queryId: d
       };
     }(k, i, c);
-    let P = ZC(t.activeTab);
+    let P = useLatestRef(t.activeTab);
     useEffect(function () {
       "search" === P && "search" !== t.activeTab ? u(void 0) : "search" !== P && "search" === t.activeTab && u(generateUUIDv4());
     }, [P, t.activeTab]);
@@ -197,7 +197,7 @@ export function $$N0({
     let {
       hasEntAccess
     } = mG();
-    let i = Rs(WorkspaceSelectorView, {
+    let i = useSubscription(WorkspaceSelectorView, {
       orgId: e
     }, {
       enabled: hasEntAccess

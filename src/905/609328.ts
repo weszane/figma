@@ -15,11 +15,11 @@ import { Eo } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
-import { tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 export let $$v0 = "variable-picker-style-context-menu";
 export function $$I1() {
   let e = useDispatch();
-  let t = tS();
+  let t = useCurrentFileKey();
   let i = useSelector(e => e.stylePreviewShown);
   let {
     showStyleContextMenu,
@@ -56,7 +56,7 @@ export function $$I1() {
         dsStyle: n,
         position: a
       }) {
-        if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r(); else {
+        if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r();else {
           debug(null != n.content_hash, "style does not have a hash");
           let i = Oo(n, t) ? n.node_id : StylesBindings.getStyleNodeId(n.key, n.content_hash);
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(n).then(e => {
@@ -90,7 +90,7 @@ export function $$E2({
     showStyleDetails,
     deleteStyle
   } = $$I1();
-  let m = q5();
+  let m = selectCurrentFile();
   let h = useMemo(() => {
     if (a.data?.type === "team") return a.data.link;
   }, [a.data]);

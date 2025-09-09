@@ -28,7 +28,7 @@ import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { V as _$$V2 } from "../905/506207";
 import { P as _$$P } from "../905/347284";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { j7 } from "../905/929976";
 import { Rb } from "../figma_app/8833";
 import { i as _$$i } from "../figma_app/85949";
@@ -66,7 +66,7 @@ import { w as _$$w } from "../642/994749";
 import ex from "../vendor/267721";
 import { A as _$$A2 } from "../vendor/850789";
 import { I6, lp } from "../figma_app/688398";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { X as _$$X, C as _$$C } from "../642/70391";
 import { s as _$$s } from "../cssbuilder/589278";
 import { gz, el as _$$el, Rp, $V } from "../figma_app/605071";
@@ -211,7 +211,7 @@ function ej({
   width: i,
   height: l
 }) {
-  let a = tS();
+  let a = useCurrentFileKey();
   let [o, d] = useState([]);
   let [c] = _$$A2(o, 100, {
     equalityFn: ew
@@ -1269,7 +1269,7 @@ function eW(e) {
   let b = useSelector(e => e.mirror.appModel.temporarilyExpandedInstanceLayers);
   let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let j = m0();
-  let v = _I();
+  let v = useCanAccessFullDevMode();
   let S = _$$E();
   let k = getSingletonSceneGraph();
   let w = _$$wA((e, t) => {

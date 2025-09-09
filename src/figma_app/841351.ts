@@ -20,14 +20,14 @@ import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
 import { VERSION_HISTORY_PAGE_LOADING, UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_LOADING, VERSION_HISTORY_APPEND, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION, VERSION_HISTORY_COMPARE_CHANGES } from "../905/784363";
-import { C2 } from "../905/760074";
+import { getDiffVersion } from "../905/760074";
 import { replaceSelection } from "../figma_app/741237";
 import { FEditorType, mapEditorTypeToStringWithError } from "../figma_app/53721";
 import { NK } from "../figma_app/111825";
 import { lE } from "../905/218608";
 import { S as _$$S } from "../figma_app/787550";
 import { W } from "../905/985740";
-import { Vj } from "../905/561485";
+import { isFullscreenSitesView } from "../905/561485";
 import { s0 } from "../figma_app/115923";
 import { n as _$$n } from "../905/815475";
 import { fullscreenValue } from "../figma_app/455680";
@@ -90,7 +90,7 @@ export function $$K18(e) {
 }
 let Y = async (e, t, r, n) => {
   let i = new URLSearchParams();
-  i.set("diff_version", C2().toString());
+  i.set("diff_version", getDiffVersion().toString());
   i.set("from_file_version_id", t);
   i.set("migration_version", `${r}`);
   n && n.length > 0 && i.set("nodes_to_diff", n.join(","));
@@ -394,7 +394,7 @@ let $$eo6 = createOptimistThunk((e, t) => {
   fullscreenValue.triggerAction("enter-history-mode");
   fullscreenValue.triggerAction("deselect-all");
   e.dispatch(es());
-  Vj(e.getState().selectedView) && atomStoreManager.set(s0, PanelType.FILE);
+  isFullscreenSitesView(e.getState().selectedView) && atomStoreManager.set(s0, PanelType.FILE);
   AppStateTsApi?.uiState().showPropertiesPanel.set(!0);
   trackEventAnalytics("Toggle Version History", {
     source: t?.source || null

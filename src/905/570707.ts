@@ -3,8 +3,8 @@ import { useState, useEffect, useMemo } from "react";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
 import { trackEventAnalytics } from "../905/449184";
-import { YQ } from "../905/502364";
-import { yV } from "../figma_app/516028";
+import { handleAtomEvent } from "../905/502364";
+import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { eD } from "../figma_app/646357";
 import { M4 } from "../905/713695";
@@ -58,7 +58,7 @@ export function $$v2() {
   let [e, t] = useState("");
   let [i] = _$$A(e, 100);
   useEffect(() => {
-    YQ({
+    handleAtomEvent({
       id: "Library Search Query Changed",
       properties: {
         text: i
@@ -157,7 +157,7 @@ let w = createReduxSubscriptionAtomWithState(vx);
 let $$C1 = createRemovableAtomFamily(e => atom(t => {
   let i = t(I);
   let r = t(S);
-  let a = t(yV);
+  let a = t(openFileAtom);
   let s = a?.editorType;
   return t(n.livestoreQuery({
     query: e,
@@ -170,7 +170,7 @@ let $$C1 = createRemovableAtomFamily(e => atom(t => {
 let $$T0 = createRemovableAtomFamily(e => atom(t => {
   let i = t(I);
   let r = t(S);
-  let a = t(yV);
+  let a = t(openFileAtom);
   let s = a?.editorType;
   return t(n.libraryKeyLivestoreQuery({
     query: e,

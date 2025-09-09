@@ -2,15 +2,15 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { m0 } from "../figma_app/976749";
 import { mf, YN } from "../figma_app/844435";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FInheritanceType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { AutoRunPluginsView } from "../figma_app/43951";
-import { T5, H3, X$ } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, getParentOrgIdIfOrgLevel, useCurrentPublicPlan } from "../figma_app/465071";
 import { isDevModeWithInspectPanel } from "../figma_app/300692";
 import { R } from "../figma_app/612938";
 import { Lx } from "../figma_app/474636";
@@ -38,7 +38,7 @@ let w = registerModal(function ({
     d(popModalStack());
   };
   let u = () => d(popModalStack());
-  let p = T5("AutoRunConfirmModal").unwrapOr(null);
+  let p = useCurrentPrivilegedPlan("AutoRunConfirmModal").unwrapOr(null);
   let h = p?.key.type === FOrganizationLevelType.ORG ? p.name : void 0;
   let g = {
     currentAutoRunPluginName: jsx(_$$E, {
@@ -276,8 +276,8 @@ export function $$R0(e) {
 function L() {
   let e = P();
   let t = D();
-  let r = T5("usePluginToAutoRun").unwrapOr(null);
-  let n = H3(r);
+  let r = useCurrentPrivilegedPlan("usePluginToAutoRun").unwrapOr(null);
+  let n = getParentOrgIdIfOrgLevel(r);
   let i = selectCurrentUser()?.id;
   if (!(e.loaded && t.loaded)) return {
     loaded: !1,
@@ -303,7 +303,7 @@ function L() {
 }
 function P() {
   let e = selectCurrentUser();
-  return k(Rs(AutoRunPluginsView, {
+  return k(useSubscription(AutoRunPluginsView, {
     targetOrgId: null,
     targetUserId: e?.id ?? ""
   }, {
@@ -311,12 +311,12 @@ function P() {
   }));
 }
 function D(e) {
-  let t = X$("useOrgAutoRunPlugin").unwrapOr(null);
+  let t = useCurrentPublicPlan("useOrgAutoRunPlugin").unwrapOr(null);
   let r = {
-    id: H3(t),
+    id: getParentOrgIdIfOrgLevel(t),
     isEnterprise: t?.tier === FPlanNameType.ENTERPRISE
   };
-  let n = Rs(AutoRunPluginsView, {
+  let n = useSubscription(AutoRunPluginsView, {
     targetOrgId: r?.id ?? "",
     targetUserId: null
   }, {
@@ -364,7 +364,7 @@ async function M(e, t, r) {
 }
 export function $$F1() {
   let e = m0();
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = YN();
   let n = L();
   let [i, a] = useAtomValueAndSetter(Lx);
@@ -378,8 +378,8 @@ export function $$F1() {
 }
 export function $$j2() {
   let e = D(!0);
-  let t = T5("useOrgPluginToAutoRun").unwrapOr(null);
-  let r = H3(t);
+  let t = useCurrentPrivilegedPlan("useOrgPluginToAutoRun").unwrapOr(null);
+  let r = getParentOrgIdIfOrgLevel(t);
   if (!e.loaded) return {
     loaded: !1,
     plugin: null

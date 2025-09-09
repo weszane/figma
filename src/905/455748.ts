@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 export function $$a0(e) {
-  let t = ZC(e);
+  let t = useLatestRef(e);
   return e !== t;
 }
 let s = Symbol("initialValue");

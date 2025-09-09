@@ -7,7 +7,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { sendBackToFilesAction } from "../figma_app/564528";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -147,7 +147,7 @@ let $$ep29 = NC("FULLSCREEN_SET_PROGRESS_BAR_STATE");
 let $$e_31 = NC("FULLSCREEN_STOP_OBSERVING_OTHER_USER");
 let $$eh22 = NC("FULLSCREEN_UPDATE_MULTIPLAYER_STATE");
 let $$em6 = createOptimistThunk((e, t) => {
-  void 0 !== t.allUsers && (k6(t.allUsers.length, t.presenterSessionID), YQ({
+  void 0 !== t.allUsers && (k6(t.allUsers.length, t.presenterSessionID), handleAtomEvent({
     id: M8
   }));
   e.dispatch($$eh22(t));

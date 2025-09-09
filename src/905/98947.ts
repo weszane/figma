@@ -1,5 +1,5 @@
 import { atom, t_ } from "../figma_app/27355";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
 import { qG } from "../figma_app/545877";
 let $$o8 = atom([]);
@@ -44,7 +44,7 @@ let $$M4 = atom(e => {
   return !!t && !!N_.has(t) && (e($$F3)[t] || !1);
 });
 let $$j23 = atom(null);
-let $$U2 = atom(e => e($$j23) === ud.DEVELOPER);
+let $$U2 = atom(e => e($$j23) === ProductAccessTypeEnum.DEVELOPER);
 let $$B1 = t_(e => !!e(qG).data?.opted_in_email);
 export const $l = $$h0;
 export const BG = $$B1;

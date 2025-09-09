@@ -8,7 +8,7 @@ import { buildUploadUrl, isLocalCluster } from "../figma_app/169182";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText, getTranslatedDynamicContent } from "../905/303541";
-import { q5, tS as _$$tS, ze, As } from "../figma_app/516028";
+import { selectCurrentFile, useCurrentFileKey, openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
 import { JY } from "../9410/236102";
 import { kM, gu, v8, oJ, yx } from "../9410/43627";
 import { tJ, ui, _8 } from "../9410/430140";
@@ -27,7 +27,7 @@ import { Ji, Zx, h0, qm } from "../figma_app/553488";
 import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { useSetAtom } from "../vendor/525001";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { eE as _$$eE } from "../figma_app/106207";
 import { Cu } from "../figma_app/314264";
 import { FFileType } from "../figma_app/191312";
@@ -87,7 +87,7 @@ import { e as _$$e4 } from "../figma_app/509285";
 import { X as _$$X } from "../1250/115566";
 import { G7 } from "../figma_app/336853";
 import { dq, sZ } from "../905/845253";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { w4, y1 } from "../905/445814";
 import { selectCurrentUser } from "../905/372672";
 import { SlidesAiFileDisabledForFilePickerView } from "../figma_app/43951";
@@ -275,7 +275,7 @@ function ee() {
   let [{
     data: e,
     status: t
-  }] = IT(_$$_2());
+  }] = setupResourceAtomHandler(_$$_2());
   let i = useSetAtom(bY);
   let r = fK();
   return "loading" === t ? jsx(kM, {
@@ -305,7 +305,7 @@ function et() {
   let t = TI($A.Slides);
   let i = fK();
   let r = useDispatch();
-  let a = q5();
+  let a = selectCurrentFile();
   let s = J3();
   let l = JU(s);
   let d = s === kN.FILE_IN_DRAFTS;
@@ -427,7 +427,7 @@ function ed({
     onShowSeparatorScroll
   } = gH();
   let y = useAtomWithSubscription(q7);
-  let b = _$$tS();
+  let b = useCurrentFileKey();
   let C = Gi();
   let {
     start
@@ -660,7 +660,7 @@ class eX {
   }
   update() {
     if (!SlidesAiBindings) return;
-    if (this.abortController.signal.aborted || !atomStoreManager.get(ze)) {
+    if (this.abortController.signal.aborted || !atomStoreManager.get(openFileKeyAtom)) {
       this.cancel();
       return;
     }
@@ -709,13 +709,13 @@ async function eZ({
       data: e
     }, {
       orgId: atomStoreManager.get(_s),
-      teamId: atomStoreManager.get(As) || null,
-      fileKey: atomStoreManager.get(ze) || null,
+      teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
+      fileKey: atomStoreManager.get(openFileKeyAtom) || null,
       fileSeq: atomStoreManager.get(_$$J)?.toString() || null,
       userId: atomStoreManager.get(kS) || null,
       trackingSessionId: getTrackingSessionId()
     });
-    if (r.signal.aborted || !atomStoreManager.get(ze)) {
+    if (r.signal.aborted || !atomStoreManager.get(openFileKeyAtom)) {
       i.cancel();
       return;
     }
@@ -799,7 +799,7 @@ function e2() {
     removeAllPlaceholderOverlays
   } = Wb();
   let p = useDispatch();
-  let h = useAtomWithSubscription(ze);
+  let h = useAtomWithSubscription(openFileKeyAtom);
   let m = t?.source ?? _$$E.SLIDES_TEMPLATE;
   Xr(zF)(m);
   let g = _$$D(slidePresetModules[0]?.library_key);
@@ -896,7 +896,7 @@ let e3 = async ({
     logger.error("Failed to generate slides", t);
   } finally {
     removeAllPlaceholderOverlays();
-    openFileKey !== atomStoreManager.get(ze) || addFirstPresetToEmptyDeck();
+    openFileKey !== atomStoreManager.get(openFileKeyAtom) || addFirstPresetToEmptyDeck();
     SlidesAiBindings?.finishDeckGeneration();
     e1(x);
   }
@@ -1088,7 +1088,7 @@ function to({
 }) {
   let t = NG(e);
   let [i, r] = useAtomValueAndSetter(bY);
-  let o = null === _$$tS();
+  let o = null === useCurrentFileKey();
   let d = r$();
   let c = S7();
   let u = Xr(ux);
@@ -1124,7 +1124,7 @@ function tl({
   libraryKey: e,
   modules: t
 }) {
-  let i = q5();
+  let i = selectCurrentFile();
   let r = r$();
   let [o, d] = useAtomValueAndSetter(bY);
   let c = Xr(ux);
@@ -1504,7 +1504,7 @@ function tT({
     onShowSeparatorScroll
   } = gH();
   let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === SchemaJoinStatus.JOINED);
-  let u = null === _$$tS();
+  let u = null === useCurrentFileKey();
   return e === J_.LOADING || !d || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx("div", {
     className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
     children: jsx(tS, {
@@ -1536,7 +1536,7 @@ function tw({
     disabled,
     tooltipText
   } = function (e) {
-    let t = Rs(SlidesAiFileDisabledForFilePickerView, {
+    let t = useSubscription(SlidesAiFileDisabledForFilePickerView, {
       fileKey: e
     });
     if ("loaded" !== t.status) return {
@@ -1678,7 +1678,7 @@ function tN() {
   let [r, s] = useState(null);
   let [{
     data: o
-  }] = IT(_$$_2());
+  }] = setupResourceAtomHandler(_$$_2());
   let d = _$$eE($A.Slides);
   let {
     scrollPosition,
@@ -1873,7 +1873,7 @@ function tR({
 }) {
   let [{
     status: a
-  }] = IT(_$$_2());
+  }] = setupResourceAtomHandler(_$$_2());
   if ("loading" === a) return jsx(kM, {});
   let s = e.id;
   return jsx(_$$P, {

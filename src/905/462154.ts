@@ -18,7 +18,7 @@ import { Ll } from "../figma_app/144974";
 import { E0 } from "../905/848469";
 import { c as _$$c } from "../905/231180";
 import { N4 } from "../905/889788";
-import { H9 } from "../figma_app/930338";
+import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { g4 } from "../905/368836";
@@ -64,7 +64,7 @@ export let $$C1 = async ({
         imageType: "PNG",
         suffix: "png"
       }]);
-      return H9(t);
+      return uint8ArrayToBase64(t);
     });
     return await Promise.all(t);
   });

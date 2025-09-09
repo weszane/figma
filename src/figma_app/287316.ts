@@ -11,10 +11,10 @@ import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import _ from "../vendor/73823";
 import { A as _$$A } from "../vendor/90566";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { F as _$$F } from "../figma_app/954027";
 import { reportError } from "../905/11";
-import { Vs, H9 } from "../figma_app/930338";
+import { base64ToUint8Array, uint8ArrayToBase64 } from "../figma_app/930338";
 import { GI, IZ, SK } from "../905/125333";
 import { KE, En, jx } from "../905/116101";
 import { F as _$$F2 } from "../905/989956";
@@ -1496,7 +1496,7 @@ export function $$em6() {
       if (n) {
         let t = setTimeout(() => {
           window.FigmaMobile.nativeToolbarSupportedVersions = void 0;
-          n._native_toolbar_confirm_configuration = () => { };
+          n._native_toolbar_confirm_configuration = () => {};
           reportError(_$$e.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
         }, 2e3);
         n._native_toolbar_confirm_configuration = () => {
@@ -1558,7 +1558,7 @@ export function $$em6() {
       }
     }, n._native_toolbar_set_tool_image_data = (e, t, r) => {
       if ("TAPE" === e) {
-        let e = Vs(r);
+        let e = base64ToUint8Array(r);
         Fullscreen.setCustomWashiTapeImageFromFile(e);
       }
     }, n._native_toolbar_activate_submenu_item = e => {
@@ -1626,7 +1626,7 @@ let ef = async e => {
   let r = _$$B.find(t => t.image === e);
   if (!(t = r ? await gC(r) : ImageCppBindings.getCompressedImage(e))) return Promise.resolve(null);
   {
-    let e = "data:image/png;base64," + H9(t);
+    let e = "data:image/png;base64," + uint8ArrayToBase64(t);
     let r = new Image();
     r.src = e;
     await r.decode();
@@ -1687,7 +1687,7 @@ export function $$eE0() {
     let t = e.mirror.appModel;
     return u.filter(e => Yh(t, e));
   });
-  let E = ZC(_);
+  let E = useLatestRef(_);
   useEffect(() => {
     !_ || E && arraysEqual(E, _) || e?.nativeToolbarUpdateEnabledActions?.(_);
   }, [e, _, E]);
@@ -1794,7 +1794,7 @@ export function $$eE0() {
     return "REACTING_OR_CHATTING" === t.type && !!t.imageUrl;
   });
   let Z = useCallback(e => {
-    if (q) CB.closeWheel(); else {
+    if (q) CB.closeWheel();else {
       let {
         viewportX,
         viewportY

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { renderI18nText } from "../905/303541";
@@ -78,7 +78,7 @@ function I({
 }) {
   let {
     data
-  } = Rs(FileSearchResult, {
+  } = useSubscription(FileSearchResult, {
     projectId: e.folder_id
   }, {
     enabled: !!e.folder_id

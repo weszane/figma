@@ -1,5 +1,5 @@
 import { xf } from "../figma_app/416935";
-import { gU } from "../figma_app/930338";
+import { isValidUrl } from "../figma_app/930338";
 import { A } from "../905/17894";
 import { wC } from "../905/448440";
 import { Yp } from "../figma_app/740025";
@@ -28,7 +28,7 @@ let $$d2 = {
         maxLength: $$l1
       }
     });
-    !(a.length > 0) || xf(a) || gU(a) || s.push({
+    !(a.length > 0) || xf(a) || isValidUrl(a) || s.push({
       key: "INVALID_SUPPORT_CONTACT",
       data: {
         sanitizedSupportContact: a

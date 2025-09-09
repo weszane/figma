@@ -1,10 +1,10 @@
 import { getFeatureFlags } from "../905/601108";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Fk } from "../figma_app/167249";
 import { tS, pN, A8 } from "../figma_app/29089";
 function l() {
-  let e = q5();
+  let e = selectCurrentFile();
   return !!(e?.editorType === FFileType.COOPER && getFeatureFlags().buzz_template_sets);
 }
 export function $$d1() {

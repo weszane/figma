@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { l as _$$l } from "../905/716947";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { n as _$$n } from "../905/79930";
 import { a6 } from "../figma_app/198840";
 export function $$c3(e) {
@@ -40,7 +40,7 @@ export function $$p2(e) {
   }
 }
 export function $$_1() {
-  let e = T5("useGetGenericTemplateDisplayProps").unwrapOr(null);
+  let e = useCurrentPrivilegedPlan("useGetGenericTemplateDisplayProps").unwrapOr(null);
   let t = e?.imgUrl || void 0;
   let r = e?.name;
   return useCallback(e => {

@@ -30,15 +30,15 @@ import { CAe } from "../figma_app/6204";
 import { A as _$$A } from "../905/920142";
 import { HB } from "../3973/538504";
 import { sZ } from "../905/845253";
-import { X$, YY } from "../figma_app/465071";
+import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { A as _$$A2 } from "../svg/831814";
 let L = "Job Title Prompt";
 export function $$F0({
   source: e
 }) {
   let t = function () {
-    let e = X$("useIsEligibleForJobTitleReprompt");
-    let t = YY(e).unwrapOr(!1);
+    let e = useCurrentPublicPlan("useIsEligibleForJobTitleReprompt");
+    let t = useIsStarterPlan(e).unwrapOr(!1);
     let n = selectUser();
     let a = sZ();
     let i = n.profile.job_title;

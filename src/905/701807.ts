@@ -11,11 +11,11 @@ import { Z, kq } from "../905/292918";
 import { Ad } from "../905/300250";
 import { Y6 } from "../figma_app/91703";
 import { Nf } from "../figma_app/864378";
-import { Kz } from "../905/760074";
+import { isBranchAlt } from "../905/760074";
 import { rJ } from "../905/327855";
 import { Dd } from "../figma_app/682945";
 import { _b, yH, vF } from "../figma_app/841351";
-import { Kn } from "../905/535806";
+import { SourceDirection } from "../905/535806";
 import { W } from "../905/985740";
 import { h as _$$h } from "../905/438683";
 import { createOptimistThunk } from "../905/350402";
@@ -61,13 +61,13 @@ let $$S0 = createOptimistThunk(e => {
     }));
     rJ(t);
   }
-  if (t.user && a && Kz(a) && (e.dispatch(Z({
+  if (t.user && a && isBranchAlt(a) && (e.dispatch(Z({
     branchFileKey: a.key
   })), E && !isNaN(E) || i.openReview)) {
     let t = {
       branchKey: a.key,
       sourceKey: a.sourceFileKey,
-      direction: Kn.TO_SOURCE
+      direction: SourceDirection.TO_SOURCE
     };
     e.dispatch(kq(t));
   }

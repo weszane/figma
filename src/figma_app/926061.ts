@@ -8,7 +8,7 @@ import { xk } from "@stylexjs/stylex";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { wv as _$$wv, rr, gw } from "../figma_app/236327";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
@@ -185,7 +185,7 @@ export function $$R0({
               } : {};
             }(b)
           }
-        })), g && YQ({
+        })), g && handleAtomEvent({
           id: g
         }));
       },

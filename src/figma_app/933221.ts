@@ -1,27 +1,27 @@
 import { useMemo } from "react";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { ComponentAttribution, StateGroupAttribution, StyleAttribution, VariableCollectionAttribution } from "../figma_app/43951";
 import { PW } from "../figma_app/633080";
 export function $$o2({
   assetKey: e,
   type: t
 }) {
-  let r = Rs(ComponentAttribution, {
+  let r = useSubscription(ComponentAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.COMPONENT && !!e
   });
-  let o = Rs(StateGroupAttribution, {
+  let o = useSubscription(StateGroupAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.STATE_GROUP && !!e
   });
-  let l = Rs(StyleAttribution, {
+  let l = useSubscription(StyleAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.STYLE && !!e
   });
-  let d = Rs(VariableCollectionAttribution, {
+  let d = useSubscription(VariableCollectionAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.VARIABLE_SET && !!e

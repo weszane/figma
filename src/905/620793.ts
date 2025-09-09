@@ -6,7 +6,7 @@ import { h as _$$h } from "../figma_app/58251";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { P } from "../figma_app/582341";
-import { X$, H3 } from "../figma_app/465071";
+import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { Nf } from "../figma_app/633080";
 import { S } from "../905/612212";
 import { hx, m3 } from "../905/66449";
@@ -110,8 +110,8 @@ function y({
   team: t,
   communityAuthor: i
 }) {
-  let r = X$("Path").unwrapOr(null);
-  let a = H3(r);
+  let r = useCurrentPublicPlan("Path").unwrapOr(null);
+  let a = getParentOrgIdIfOrgLevel(r);
   let {
     setKeyboardNavigationElement
   } = hx({

@@ -9,10 +9,10 @@ import { getI18nString } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { lx } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { C1 } from "../figma_app/12796";
-import { D6, Um } from "../figma_app/465071";
-import { e6 as _$$e } from "../905/557142";
-import { A5 } from "../figma_app/707808";
+import { getPermissionLevelName } from "../figma_app/12796";
+import { useCurrentPlanUser, useIsAdminUser } from "../figma_app/465071";
+import { AccessLevelEnum } from "../905/557142";
+import { ShareAction } from "../figma_app/707808";
 import { Ib } from "../905/129884";
 import { HU } from "../figma_app/926061";
 import { o as _$$o } from "../905/382697";
@@ -30,11 +30,11 @@ export function $$x2(e) {
     editorType: e.editorType,
     filePlanKey: e.filePlanKey,
     userNeedsUpgrade: e.userNeedsUpgrade,
-    hasEditRole: e.level >= _$$e.EDITOR
+    hasEditRole: e.level >= AccessLevelEnum.EDITOR
   });
-  let x = D6("UserRowBase");
-  let S = Um(x).unwrapOr(!1);
-  let C = p && e.level === _$$e.EDITOR;
+  let x = useCurrentPlanUser("UserRowBase");
+  let S = useIsAdminUser(x).unwrapOr(!1);
+  let C = p && e.level === AccessLevelEnum.EDITOR;
   let T = e.virtualRowItem ? {
     position: "absolute",
     top: e.virtualRowItem.start,
@@ -64,7 +64,7 @@ export function $$x2(e) {
         className: yR,
         onClick: () => {
           e.setSelectedRoleToUpdateSeat && e.setSelectedRoleToUpdateSeat();
-          o(A5.UPDATE_SEAT);
+          o(ShareAction.UPDATE_SEAT);
         },
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("role_row.upgrade_seat.tooltip"),
@@ -110,12 +110,12 @@ export function $$x2(e) {
           dropdownId: e.id
         },
         isOpen: !!(e.dropdownShown && e.dropdownShown.type === i && e.dropdownShown.data.dropdownId === e.id)
-      }) : e.isPrototypeRole && e.level === _$$e.VIEW_PROTOTYPES ? jsx("span", {
+      }) : e.isPrototypeRole && e.level === AccessLevelEnum.VIEW_PROTOTYPES ? jsx("span", {
         className: _$$C,
         children: getI18nString("permissions.level_name.can_view")
       }) : jsx("span", {
         className: l()(_$$C, C && mL),
-        children: C1(e.level, e.isBranchFile)
+        children: getPermissionLevelName(e.level, e.isBranchFile)
       }))]
     })]
   });
@@ -175,11 +175,11 @@ export function $$T4(e, t, i, n, r, a, s) {
   let o = [];
   let l = !1;
   if (!i) return null;
-  s && a === _$$e.VIEW_PROTOTYPES ? o.push({
+  s && a === AccessLevelEnum.VIEW_PROTOTYPES ? o.push({
     type: "option",
-    key: _$$e.VIEW_PROTOTYPES,
-    text: C1(_$$e.VIEWER)
-  }) : t ? o.push(k(a)) : (e && !r && o.push(k(_$$e.OWNER)), n && o.push(k(_$$e.ADMIN)), o.push(k(_$$e.EDITOR)), o.push(k(_$$e.VIEWER)), l = r);
+    key: AccessLevelEnum.VIEW_PROTOTYPES,
+    text: getPermissionLevelName(AccessLevelEnum.VIEWER)
+  }) : t ? o.push(k(a)) : (e && !r && o.push(k(AccessLevelEnum.OWNER)), n && o.push(k(AccessLevelEnum.ADMIN)), o.push(k(AccessLevelEnum.EDITOR)), o.push(k(AccessLevelEnum.VIEWER)), l = r);
   let d = t && !e ? getI18nString("confirm_remove_role.leave") : getI18nString("confirm_remove_role.remove");
   o.push({
     type: "separator"
@@ -191,7 +191,7 @@ export function $$T4(e, t, i, n, r, a, s) {
   });
   o.push({
     type: "option",
-    key: _$$e.NONE,
+    key: AccessLevelEnum.NONE,
     text: d
   });
   return o;
@@ -200,7 +200,7 @@ function k(e) {
   return {
     type: "option",
     key: e,
-    text: C1(e)
+    text: getPermissionLevelName(e)
   };
 }
 export const CM = $$S0;

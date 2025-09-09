@@ -19,7 +19,7 @@ import { B as _$$B } from "../905/808775";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { T as _$$T } from "../905/858738";
-import { Eh, cb } from "../figma_app/12796";
+import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { F as _$$F2 } from "../905/827944";
 import { showVisualBell, joinStringSegments, PluginPermissions, getFullscreenViewEditorType, isValidForCooper, isDevModeWithInspectPanel, isValidForCooperSelectedView, isBuzzPlugin, loadLocalPluginSource, loadPluginManifest, isValidForFullscreenView, clearVisualBell, hasSpecialCapability } from "../figma_app/300692";
 import { C3, SH } from "../figma_app/790714";
@@ -420,7 +420,7 @@ class er extends Error {
 }
 export function $$ea2(e) {
   let t = debugState.getState();
-  let i = Eh(t) && cb(t);
+  let i = canPerformAction(t) && canRunExtensions(t);
   let n = isE2ETraffic() || i;
   if (!n) {
     if (_$$et()) {

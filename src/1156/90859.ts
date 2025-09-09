@@ -9,7 +9,7 @@ import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { wW } from "../figma_app/656450";
 import { F as _$$F } from "../1156/295005";
 import { useState } from "react";
@@ -262,7 +262,7 @@ export function $$z3({
   } = n;
   let f = getSingletonSceneGraph().get(e);
   let y = _$$E2(f);
-  let _ = useAtomWithSubscription(yV);
+  let _ = useAtomWithSubscription(openFileAtom);
   if (error || !hasBaseline || 0 === changedFiles.length) return null;
   let b = (y ? eB(y) : void 0) || _?.name;
   let v = b && getI18nString("figmake.chat.edited_version", {

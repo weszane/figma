@@ -40,7 +40,7 @@ import { d as _$$d } from '../905/976845';
 import { A7, i4 } from '../9314/278494';
 import { Nu } from '../figma_app/23780';
 import { dGl, jNX, uj0 } from '../figma_app/27776';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { P$ } from '../figma_app/80990';
 import { XE } from '../figma_app/91703';
 import { Bs } from '../figma_app/229710';
@@ -50,7 +50,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { a2, dm, g5, h$, j3, KU, l0, lM, Md, mx, Nr, Pc, QA, rM, t_, Ug, VB } from '../figma_app/463500';
 import { debug, noop } from '../figma_app/465776';
 import { range } from '../figma_app/492908';
-import { q5 } from '../figma_app/516028';
+import { selectCurrentFile } from '../figma_app/516028';
 import { $4, fI, K0, ks, Zk } from '../figma_app/626177';
 import { PW } from '../figma_app/633080';
 import { Kw, LX, og, QT, XV } from '../figma_app/646357';
@@ -612,7 +612,7 @@ function eC({
     Fullscreen.clearPastableStyleCount();
   }), []);
   let g = useSelector(e => e.mirror.appModel.pastableStyleCount);
-  let h = !!q5()?.canEdit;
+  let h = !!selectCurrentFile()?.canEdit;
   let w = useCallback(() => {
     if (!t.length || t[0].type !== PW.STYLE) return;
     let l = t[0];
@@ -1116,7 +1116,7 @@ function ez({
   setDefaultToolOnCreateStyle: O,
   recordingKey: $
 }) {
-  let U = q5();
+  let U = selectCurrentFile();
   let Y = !p8('isReadOnly');
   let z = useDispatch();
   let W = useSelector(e => e.stylePreviewShown);
@@ -1146,7 +1146,7 @@ function ez({
   useEffect(() => {
     isInteractionPathCheck() || el();
   }, [el, l]);
-  let es = ZC(X);
+  let es = useLatestRef(X);
   useEffect(() => {
     if (!es || !localStorageRef || !U || _f(es, X)) return;
     let t = JSON.parse(localStorageRef.getItem(e$) || '{}');
@@ -1413,7 +1413,7 @@ function ez({
     Z([]);
     v();
   }, [v]));
-  let eI = ZC(q);
+  let eI = useLatestRef(q);
   useEffect(() => {
     eI !== q && q && V(e => {
       let l = new Set(e);

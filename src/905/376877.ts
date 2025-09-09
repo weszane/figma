@@ -1,7 +1,7 @@
 import { $V } from "../figma_app/990058";
 import { tc } from "../905/15667";
 import { Nu } from "../905/584989";
-import { TI } from "../905/513035";
+import { ProductAccessTypeMap } from "../905/513035";
 import { FOrganizationLevelType } from "../figma_app/191312";
 export async function $$l0({
   dispatch: e,
@@ -16,7 +16,7 @@ export async function $$l0({
       e($V({
         orgId: a,
         entryPoint: tc.NUX,
-        licenseType: TI[d],
+        licenseType: ProductAccessTypeMap[d],
         seatTypeKey: d,
         fileKey: t ?? void 0,
         onError: () => u(Error("Error requesting upgrade for org")),
@@ -31,7 +31,7 @@ export async function $$l0({
       e(Nu({
         teamId: n,
         entryPoint: tc.NUX,
-        licenseType: TI[d],
+        licenseType: ProductAccessTypeMap[d],
         seatTypeKey: d,
         fileKey: t ?? void 0,
         onError: () => u(Error("Error requesting upgrade for team")),

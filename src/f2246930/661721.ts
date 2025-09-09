@@ -18,7 +18,7 @@ import { Z } from "../905/224161";
 import { dB } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { expandNodeToRoot, clearSelection } from "../figma_app/741237";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { nt } from "../9314/278494";
@@ -94,7 +94,7 @@ function I({
   setAppSelection: l
 }) {
   let c = _6();
-  let m = tS();
+  let m = useCurrentFileKey();
   let f = getObservableOrFallback(figmaScopeBindings.sceneGeneration());
   let [w] = _$$A(f, 500, {
     trailing: !0

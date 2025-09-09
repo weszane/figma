@@ -4,7 +4,7 @@ import { Hg } from "../figma_app/304955";
 import { utilityNoop, returnSecond } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import s from "lodash-es/mapValues";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { F } from "../905/422355";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -167,7 +167,7 @@ export function $$b1(e, t) {
   let [n, s] = useReducer(f, {
     status: "disabled"
   });
-  let _ = ZC(n);
+  let _ = useLatestRef(n);
   let b = useRef([]);
   let v = useRef(n);
   v.current = n;

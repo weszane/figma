@@ -1,18 +1,18 @@
 import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
-import { p } from "../figma_app/288654";
+import { useMultiSubscription } from "../figma_app/288654";
 import { FMemberRoleType } from "../figma_app/191312";
 import { TeamTilePermissions, TeamCanView } from "../figma_app/43951";
-import { A8 } from "../figma_app/465071";
-import { e6 } from "../905/557142";
+import { checkOrgUserPermission } from "../figma_app/465071";
+import { AccessLevelEnum } from "../905/557142";
 export function $$c1(e) {
   let t = e.canRead;
   let r = e.canAdmin;
   let n = e.canDelete;
-  let i = !!(e.roleOnObjectForUser && e.roleOnObjectForUser.level >= e6.VIEWER);
+  let i = !!(e.roleOnObjectForUser && e.roleOnObjectForUser.level >= AccessLevelEnum.VIEWER);
   let a = !!e.currentPrivilegedOrgUser;
   return {
-    canAdminOrg: !!(e.currentPlanUser && A8(e.currentPlanUser, FMemberRoleType.ADMIN)),
+    canAdminOrg: !!(e.currentPlanUser && checkOrgUserPermission(e.currentPlanUser, FMemberRoleType.ADMIN)),
     canDelete: n,
     canView: t,
     isInTeam: i,
@@ -25,7 +25,7 @@ export function $$u2(e) {
     let r = useMemo(() => e.map(e => ({
       teamId: e
     })), [e]);
-    let s = p(TeamTilePermissions, r, {
+    let s = useMultiSubscription(TeamTilePermissions, r, {
       enabled: t
     });
     return {
@@ -59,7 +59,7 @@ export function $$p0(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     id: e
   })), [e]);
-  let s = p(TeamCanView, r, {
+  let s = useMultiSubscription(TeamCanView, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.team?.hasPermission, e), {})), [s, e]);

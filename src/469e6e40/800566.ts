@@ -11,7 +11,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { t as _$$t } from "../905/117577";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
@@ -130,7 +130,7 @@ export let $$I0 = registerModal(function (e) {
     hasBackButton
   } = e;
   let l = hS(e);
-  let o = Rs(AllowlistSettingsModalView, {
+  let o = useSubscription(AllowlistSettingsModalView, {
     orgId
   });
   let d = o.data?.org;

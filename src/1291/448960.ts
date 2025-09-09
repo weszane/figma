@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { Kr } from "../vendor/111975";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Uz } from "../905/63728";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
@@ -128,7 +128,7 @@ function O({
   let [k, L] = useState(!1);
   let A = Um();
   J$(C.pinned === _$$t2.NOT_PINNED, N, d ? `[data-element-target=${d}]` : void 0);
-  let B = ZC(p);
+  let B = useLatestRef(p);
   useEffect(() => {
     void 0 !== B && (B && !p || !B && p) && L(!0);
   }, [B, p]);

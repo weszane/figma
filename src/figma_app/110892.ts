@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
 import { f4 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
 import { d as _$$d } from "../figma_app/444297";
 import { A } from "../905/556276";
@@ -17,7 +17,7 @@ import { Ad } from "../figma_app/811257";
 export function $$y0() {
   let [e, t] = useState(!1);
   let r = useDispatch();
-  let y = q5();
+  let y = selectCurrentFile();
   let b = useSelector(e => e.fileVersion);
   let T = _$$d();
   let I = Fk(e => e.getDirectlySelectedNodes().some(e => "SYMBOL" === e.type));

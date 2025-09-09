@@ -22,7 +22,7 @@ import { vp } from "../905/967587";
 import { FPlanNameType } from "../figma_app/191312";
 import { LN } from "../figma_app/514043";
 import { zZ } from "../figma_app/345997";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UpsellSourceType } from "../figma_app/831101";
 import { hK } from "../figma_app/211706";
 import { QO } from "../905/948828";
@@ -69,7 +69,7 @@ export function $$D0({
   let G = useDispatch();
   let [V, H] = useState(LN());
   let z = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
-  let W = X$("PlanComparisonModalContent");
+  let W = useCurrentPublicPlan("PlanComparisonModalContent");
   let K = W.unwrapOr(null)?.tier || null;
   let Y = _$$U(M ?? V);
   let $ = _$$u();

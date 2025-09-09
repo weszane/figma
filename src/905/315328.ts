@@ -1,7 +1,7 @@
 import { atom } from "../figma_app/27355";
 import { fh } from "../figma_app/98072";
-import { Nc } from "../905/617744";
-import { _S } from "../figma_app/516028";
+import { libraryKeySelector } from "../905/617744";
+import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { LibraryAssetByKey } from "../figma_app/43951";
 import { Gd } from "../figma_app/600968";
 import { sC } from "../905/395857";
@@ -12,8 +12,8 @@ let $$u0 = {
       let i = sC[e];
       let n = {};
       let l = t(fh[e].subscribed);
-      let c = t(_S);
-      let u = t(Nc) ?? c;
+      let c = t(openFileLibraryKeyAtom);
+      let u = t(libraryKeySelector) ?? c;
       for (let [e, r] of Object.entries(l)) {
         if (r.sourceLibraryKey === u || t(p).has(e)) continue;
         let a = t(LibraryAssetByKey.Query({

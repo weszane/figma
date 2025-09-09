@@ -4,14 +4,14 @@ import { Fc } from "../figma_app/484865";
 import { $k } from "../figma_app/802241";
 import { selectWithShallowEqual } from "../905/103090";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { BE, Be, qr, QZ } from "../figma_app/844435";
 import { gS } from "../figma_app/740025";
 import { UK } from "../figma_app/740163";
 import { e as _$$e, n as _$$n } from "../figma_app/48514";
 import { td } from "../905/845253";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Eh, cb } from "../figma_app/12796";
+import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { mapEditorTypeToFileType, mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 let E = {};
 export function $$y1(e) {
@@ -24,8 +24,8 @@ export function $$y1(e) {
     localExtensions: e.localPlugins,
     org: td(e.currentUserOrgId, e.orgById) ?? null,
     isReadOnly: e.mirror.appModel.isReadOnly,
-    userCanViewPlugins: Eh(e),
-    userCanRunExtensions: cb(e),
+    userCanViewPlugins: canPerformAction(e),
+    userCanRunExtensions: canRunExtensions(e),
     editorType: mapFileTypeToEditorType(t),
     widgetSelectionInfo: e.mirror.selectionProperties?.selectedWidgetInfo,
     activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin,
@@ -68,7 +68,7 @@ export function $$T3() {
 }
 export function $$I0() {
   let e = getObservableOrFallback(UK().enableCodegenMcpServer);
-  let t = _I();
+  let t = useCanAccessFullDevMode();
   let r = Fc();
   let i = $k();
   let o = e || t && !i;

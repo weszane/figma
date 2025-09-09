@@ -34,7 +34,7 @@ import { getSceneGraphInstance, SceneGraph } from '../905/830071';
 import { a as _$$a } from '../905/860779';
 import { z as _$$z } from '../905/897942';
 import { j as _$$j } from '../905/971516';
-import { Pe, Pq } from '../figma_app/12796';
+import { isExportRestricted, isCopyExportAllowed } from '../figma_app/12796';
 import { ManifestEditorType } from '../figma_app/155287';
 import { PluginPermissions } from '../figma_app/300692';
 import { BT, q$ } from '../figma_app/644255';
@@ -4582,7 +4582,7 @@ class ic {
     preferences: t,
     canRunCodegenArgs: i
   }) {
-    if (!Pq(i)) {
+    if (!isCopyExportAllowed(i)) {
       return {
         propertiesByLayer: {},
         error: new Error('Codegen is not allowed')
@@ -4599,7 +4599,7 @@ class ic {
       }
       let n = this.nodeCache.getNode(i);
       let a = debugState.getState();
-      let o = !!a.openFile && Pe(a.openFile);
+      let o = !!a.openFile && isExportRestricted(a.openFile);
       return {
         propertiesByLayer: await tA(n, {
           unit: t?.unit ?? MeasurementUnit.PIXEL,
@@ -4619,7 +4619,7 @@ class ic {
     nodeId: e,
     canRunCodegenArgs: t
   }) {
-    if (!Pq(t)) {
+    if (!isCopyExportAllowed(t)) {
       return {
         code: '',
         error: new Error('Codegen is not allowed')
@@ -4684,7 +4684,7 @@ class ic {
     canRunCodegenArgs: n,
     generateForCodePanel: a
   }) {
-    if (!Pq(n)) {
+    if (!isCopyExportAllowed(n)) {
       return {
         error: new Error('Codegen is not allowed'),
         code: []
@@ -4737,7 +4737,7 @@ class ic {
     }
     let d = this.nodeCache.getNode(l);
     let p = debugState.getState();
-    let m = !!p.openFile && Pe(p.openFile);
+    let m = !!p.openFile && isExportRestricted(p.openFile);
     try {
       let {
         sections,

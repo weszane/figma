@@ -14,8 +14,8 @@ import { BellId } from "../905/576487";
 import { h as _$$h } from "../905/142086";
 import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { up } from "../905/760074";
-import { q5 } from "../figma_app/516028";
+import { getRepoByIdAlt } from "../905/760074";
+import { selectCurrentFile } from "../figma_app/516028";
 export let $$b0 = registerModal(function ({
   titleText: e,
   bodyText: t,
@@ -24,7 +24,7 @@ export let $$b0 = registerModal(function ({
   let b = hS(i);
   let v = useDispatch();
   let I = useSelector(e => e.repos);
-  let E = q5();
+  let E = selectCurrentFile();
   let x = useCallback(e => {
     v(VisualBellActions.enqueue({
       type: "file-moved",
@@ -62,7 +62,7 @@ export let $$b0 = registerModal(function ({
             href: "#",
             onClick: () => {
               if (!E) return;
-              let e = up(E, I);
+              let e = getRepoByIdAlt(E, I);
               _$$h({
                 key: E.key,
                 name: E.name,

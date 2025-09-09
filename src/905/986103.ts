@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { throwError } from "../figma_app/465776";
 import { A as _$$A } from "../905/920142";
-import { Zr } from "../figma_app/930338";
+import { capitalize } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 function c(e, t) {
@@ -43,7 +43,7 @@ export function $$m3(e) {
   return jsx("span", {
     className: e.className || "",
     title: e.title,
-    children: e.capitalize ? Zr(t) : t
+    children: e.capitalize ? capitalize(t) : t
   });
 }
 function h(e, t) {

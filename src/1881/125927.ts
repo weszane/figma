@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import o from "classnames";
 import { xf } from "../figma_app/416935";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { CY } from "../figma_app/637027";
 import { T as _$$T } from "../figma_app/257703";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -11,7 +11,7 @@ import { cL } from "../905/748726";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { MB } from "../figma_app/996356";
 import { fu } from "../figma_app/831799";
-import { Gu } from "../905/513035";
+import { ViewAccessTypeEnum } from "../905/513035";
 import { sZ } from "../905/845253";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { OrgInviteModalView } from "../figma_app/43951";
@@ -43,7 +43,7 @@ export function $$U3({
   let R = useSelector(({
     licenseGroups: i
   }) => e ? i[e] : void 0);
-  let N = Rs(OrgInviteModalView, {
+  let N = useSubscription(OrgInviteModalView, {
     workspaceId: i
   }, {
     enabled: !!i
@@ -69,7 +69,7 @@ export function $$U3({
       emails: um(n),
       licenseGroupId: e,
       workspaceId: i,
-      billableProductKey: t === Gu.VIEW ? null : t
+      billableProductKey: t === ViewAccessTypeEnum.VIEW ? null : t
     }));
     p(cL());
   };

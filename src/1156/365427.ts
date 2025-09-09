@@ -1,4 +1,4 @@
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 let i = {
   defaultTypography: {
     lineHeight: "xno9bf3",
@@ -62,7 +62,7 @@ let i = {
   }
 };
 export function $$s0() {
-  let e = Oc();
+  let e = useIsSelectedFigmakeFullscreen();
   let t = e ? i.figmakeUserMessageTypography : i.userMessageTypography;
   let n = e ? i.figmakeArtifactTypography : i.artifactTypography;
   return {

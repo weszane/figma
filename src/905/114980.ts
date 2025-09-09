@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { VG } from "../905/389382";
 export function $$o0(e) {
   return e.licenseType ? jsx("span", {
@@ -17,17 +17,17 @@ export function $$o0(e) {
       totalActiveUsers: e.totalActiveUsers - 1,
       seatType: function (e) {
         switch (e) {
-          case ud.EXPERT:
+          case ProductAccessTypeEnum.EXPERT:
             return getI18nString("social_proof.message.seat_type.expert");
-          case ud.DEVELOPER:
+          case ProductAccessTypeEnum.DEVELOPER:
             return getI18nString("social_proof.message.seat_type.developer");
-          case ud.COLLABORATOR:
+          case ProductAccessTypeEnum.COLLABORATOR:
             return getI18nString("social_proof.message.seat_type.collaborator");
-          case ud.DESIGN:
-          case ud.FIGJAM:
-          case ud.DEV_MODE:
-          case ud.SLIDES:
-          case ud.CONTENT:
+          case ProductAccessTypeEnum.DESIGN:
+          case ProductAccessTypeEnum.FIGJAM:
+          case ProductAccessTypeEnum.DEV_MODE:
+          case ProductAccessTypeEnum.SLIDES:
+          case ProductAccessTypeEnum.CONTENT:
             return "";
         }
       }(e.seatType)

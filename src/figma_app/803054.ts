@@ -8,7 +8,7 @@ import { isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { Gt, kl, ER, pw, zj } from "../905/275640";
 import { ax, p8 } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
-import { Pe } from "../figma_app/12796";
+import { isExportRestricted } from "../figma_app/12796";
 import { sO } from "../figma_app/21029";
 import { GV } from "../figma_app/159296";
 import { uj0 } from "../figma_app/27776";
@@ -65,7 +65,7 @@ export function $$v8(e, t) {
   }(e, $$I4(e), t);
 }
 export function $$A5(e, t) {
-  return !!e[ItemType.EXPORT_ITEM] && null !== t && !Pe(t) && !isZoomIntegration();
+  return !!e[ItemType.EXPORT_ITEM] && null !== t && !isExportRestricted(t) && !isZoomIntegration();
 }
 export function $$x1(e) {
   let t = p8("showUi");

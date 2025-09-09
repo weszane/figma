@@ -11,7 +11,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { v as _$$v } from "../905/479136";
 import { em } from "../figma_app/297957";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Nm } from "../figma_app/202307";
 import { E as _$$E } from "../figma_app/626557";
 import { nc } from "../figma_app/570630";
@@ -72,7 +72,7 @@ export function $$S0(e, t) {
   let s = em({
     logExposure: !0
   });
-  let a = q5();
+  let a = selectCurrentFile();
   let l = ry();
   let o = _$$E(t);
   return {

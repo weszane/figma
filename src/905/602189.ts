@@ -21,12 +21,12 @@ import { JT, tI } from "../figma_app/847597";
 import { U2 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { tf } from "../figma_app/831799";
-import { Gu, ud } from "../905/513035";
+import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
 import { Ye } from "../905/332483";
 import { AG, SS } from "../figma_app/217457";
 import { O as _$$O } from "../figma_app/710329";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 var $$m = p;
 let O = "seat_options--seatChangeInformationContainer--XoAO5";
 let D = "seat_options--seatChangeOptionContainer--yYwT5";
@@ -108,9 +108,9 @@ function U({
     overridePlanTier: s
   });
   let l = U2();
-  if (e !== Gu.VIEW && !r[e]) return null;
-  let d = e !== Gu.VIEW ? r[e] : void 0;
-  let c = e === Gu.VIEW ? renderI18nText("checkout.free") : renderI18nText("general.price_per_month", {
+  if (e !== ViewAccessTypeEnum.VIEW && !r[e]) return null;
+  let d = e !== ViewAccessTypeEnum.VIEW ? r[e] : void 0;
+  let c = e === ViewAccessTypeEnum.VIEW ? renderI18nText("checkout.free") : renderI18nText("general.price_per_month", {
     priceString: G(d)
   });
   return jsxs(Y, {
@@ -144,7 +144,7 @@ function U({
               }), i && jsx("div", {
                 children: c
               })]
-            }), e === Gu.VIEW ? getI18nString("modify_plan_user_seat_modal.view_and_comment_on_all_file_types_in_figma") : jsx(_$$i, {
+            }), e === ViewAccessTypeEnum.VIEW ? getI18nString("modify_plan_user_seat_modal.view_and_comment_on_all_file_types_in_figma") : jsx(_$$i, {
               seatType: e,
               spacing: 8,
               colorStyle: "pastel",
@@ -223,19 +223,19 @@ export function $$V0({
   let x = _$$s.bRadius4.b1.wFull.zIndex1.relative.colorBg.borderBox;
   let S = e > 0;
   let w = isGovCluster() && !S;
-  let T = t !== Gu.VIEW && (o || !d);
-  let k = i !== Gu.VIEW && (o || !d) && !w;
-  let R = t !== Gu.VIEW ? a[t] : void 0;
-  let N = i !== Gu.VIEW ? a[i] : void 0;
-  let P = o && i !== Gu.VIEW && t !== Gu.VIEW && N && R && N.amount >= R.amount;
-  let L = S || i === Gu.VIEW || !P;
+  let T = t !== ViewAccessTypeEnum.VIEW && (o || !d);
+  let k = i !== ViewAccessTypeEnum.VIEW && (o || !d) && !w;
+  let R = t !== ViewAccessTypeEnum.VIEW ? a[t] : void 0;
+  let N = i !== ViewAccessTypeEnum.VIEW ? a[i] : void 0;
+  let P = o && i !== ViewAccessTypeEnum.VIEW && t !== ViewAccessTypeEnum.VIEW && N && R && N.amount >= R.amount;
+  let L = S || i === ViewAccessTypeEnum.VIEW || !P;
   return (useEffect(() => {
     p && analyticsEventManager.trackDefinedEvent("admin.discouraged_seat_swap_viewed", {
       planType: f.key.type,
       planId: f.key.parentId ?? void 0,
       planKey: f.id ?? void 0
     });
-  }, [p, f]), t !== Gu.VIEW && isNullish(R) || i !== Gu.VIEW && isNullish(N)) ? null : jsxs(Y, {
+  }, [p, f]), t !== ViewAccessTypeEnum.VIEW && isNullish(R) || i !== ViewAccessTypeEnum.VIEW && isNullish(N)) ? null : jsxs(Y, {
     direction: "vertical",
     spacing: 8,
     children: [jsxs("div", {
@@ -278,7 +278,7 @@ export function $$V0({
         children: jsx(_$$E, {
           fontSize: 11,
           color: "default",
-          children: i === Gu.VIEW ? null : S ? renderI18nText("modify_plan_user_seat_modal.use_one_available_full_seat_learn_more_info_message", {
+          children: i === ViewAccessTypeEnum.VIEW ? null : S ? renderI18nText("modify_plan_user_seat_modal.use_one_available_full_seat_learn_more_info_message", {
             seatType: tI(i),
             learnMore: jsx(_$$N, {
               newTab: !0,
@@ -327,7 +327,7 @@ function z({
     numAccessedFiles,
     numEditedFiles
   } = function (e, t) {
-    let i = S2().unwrapOr(null);
+    let i = useTeamPlanFeatures().unwrapOr(null);
     let n = i?.key?.parentId;
     return useMemo(() => {
       let i = getInitialOptions().user_analytics_data?.admin_user_metrics;
@@ -340,15 +340,15 @@ function z({
       let s = 0;
       let o = 0;
       switch (t) {
-        case ud.EXPERT:
+        case ProductAccessTypeEnum.EXPERT:
           s = a.num_accessed_files_expert;
           o = a.num_edited_files_expert;
           break;
-        case ud.DEVELOPER:
+        case ProductAccessTypeEnum.DEVELOPER:
           s = a.num_accessed_files_dev;
           o = a.num_edited_files_dev;
           break;
-        case ud.COLLABORATOR:
+        case ProductAccessTypeEnum.COLLABORATOR:
           s = a.num_accessed_files_collab;
           o = a.num_edited_files_collab;
           break;
@@ -362,9 +362,9 @@ function z({
       };
     }, [e, t, n]);
   }(t, i);
-  if (!s() || a !== Gu.VIEW || 0 === numAccessedFiles) return null;
+  if (!s() || a !== ViewAccessTypeEnum.VIEW || 0 === numAccessedFiles) return null;
   let u = null;
-  u = 0 === numEditedFiles ? renderI18nText(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_recently_worked_in" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_recently_worked_in", {
+  u = 0 === numEditedFiles ? renderI18nText(i === ProductAccessTypeEnum.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_recently_worked_in" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_recently_worked_in", {
     userName: e,
     numAccessedFiles: jsx("span", {
       className: "x6xwguf",
@@ -372,7 +372,7 @@ function z({
         numFiles: numAccessedFiles
       })
     })
-  }) : numAccessedFiles === numEditedFiles ? renderI18nText(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_worked_in_over_the_last_month", {
+  }) : numAccessedFiles === numEditedFiles ? renderI18nText(i === ProductAccessTypeEnum.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_worked_in_over_the_last_month", {
     userName: e,
     numAccessedFiles: jsx("span", {
       className: "x6xwguf",
@@ -380,7 +380,7 @@ function z({
         numFiles: numAccessedFiles
       })
     })
-  }) : renderI18nText(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month", {
+  }) : renderI18nText(i === ProductAccessTypeEnum.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month", {
     userName: e,
     numAccessedFiles: jsx("span", {
       className: "x6xwguf",

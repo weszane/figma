@@ -8,11 +8,11 @@ import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { px, j_ } from "../figma_app/465071";
+import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Ex, zE } from "../figma_app/919079";
 import { h1 } from "../905/986103";
 import { y2 } from "../figma_app/563413";
@@ -232,7 +232,7 @@ function ee(e) {
       isReversed: u(t, e)
     }));
   }, [r]);
-  let p = Rs(PaginatedAbandonedDraftFilesView, {
+  let p = useSubscription(PaginatedAbandonedDraftFilesView, {
     firstPageSize: 20,
     sortOrder: a.isReversed ? "desc" : "asc",
     cursorColumn: a.columnName,
@@ -240,7 +240,7 @@ function ee(e) {
     queryString: l,
     showTrashed: d
   });
-  let U = Rs(ProjectNameById, {
+  let U = useSubscription(ProjectNameById, {
     projectId: e.abandonedDraftFolderId
   });
   ("errors" === p.status || "errors" === U.status) && (e.planType === _$$O.TEAM ? t(sf({
@@ -384,8 +384,8 @@ export function $$et0(e) {
   let a = _6();
   let g = useSelector(e => getPermissionsStateMemoized(e));
   let h = useSelector(e => e.teams);
-  let x = px();
-  let b = j_(x);
+  let x = useTeamPlanUser();
+  let b = useIsOrgAdminUser(x);
   let v = "loaded" === b.status && pO({
     isAdminOrg: b.data,
     permissions: g,

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { C1 } from "../figma_app/12796";
+import { getPermissionLevelName } from "../figma_app/12796";
 import { CM, hP } from "../905/144598";
 import { zn, H, $S, NE, UU } from "../905/372455";
 var a = r;
@@ -35,7 +35,7 @@ export function $$c0(e) {
         children: i
       }, `name-${e.id}`), jsx("span", {
         className: _$$s.colorTextSecondary.$,
-        children: C1(e.level)
+        children: getPermissionLevelName(e.level)
       })]
     })]
   });

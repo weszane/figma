@@ -8,13 +8,13 @@ import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/2735
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
-import { Rw } from "../figma_app/930338";
+import { uint8ArrayToHex } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _G, Pv } from "../905/619652";
-import { yV, tS } from "../figma_app/516028";
+import { openFileAtom, useCurrentFileKey } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { tk, T_ } from "../figma_app/883638";
 import { MD } from "../figma_app/176302";
@@ -22,7 +22,7 @@ let $$S0 = Wh(() => atom([]));
 let v = Wh(() => atom([]));
 let $$A11 = atom(e => e($$S0).filter(e => "error" !== e.status).length >= $$C12);
 let x = atom(e => {
-  let t = e(yV);
+  let t = e(openFileAtom);
   return !!(t?.canEdit && t?.canEditCanvas);
 });
 let $$N2 = atom(null, (e, t) => {
@@ -156,7 +156,7 @@ export function $$U6(e) {
     chatError,
     setChatError
   } = tk(e);
-  let _ = tS();
+  let _ = useCurrentFileKey();
   let h = useCallback(() => {
     atomStoreManager.set($$S0, [...atomStoreManager.get($$S0), {
       status: "pending",
@@ -297,7 +297,7 @@ export function $$G1(e) {
 export function $$V4(e) {
   if (!e) return null;
   let t = e.fills.find(e => e.image && e.visible);
-  return t?.image?.hash ? Rw(t.image.hash) : null;
+  return t?.image?.hash ? uint8ArrayToHex(t.image.hash) : null;
 }
 function H(e) {
   return e ? Math.floor(3 * e.length / 4) : 0;

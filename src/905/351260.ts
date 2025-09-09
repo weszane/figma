@@ -12,7 +12,7 @@ import { ds, z_ } from "../figma_app/314264";
 import { ZW, U5 } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
 import { getRolesForResource, getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
 import { oE } from "../905/249410";
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -24,7 +24,7 @@ import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 import { DQ, Pw } from "../figma_app/121751";
-import { HZ, A5 } from "../figma_app/391338";
+import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { UpsellModalType } from "../905/165519";
 let T = registerModal(function (e) {
   let t = useDispatch();
@@ -313,10 +313,10 @@ let $$M3 = createOptimistThunk((e, {
       let r = getRolesForResource(i, o, n);
       r && (t = getResourceTeamId(r[0], n));
       let a = DQ(Pw.GROUP_7);
-      let s = HZ({
+      let s = setupShadowRead({
         oldValue: t ?? "",
         newValue: C,
-        label: A5.RoleInvites.teamId,
+        label: adminPermissionConfig.RoleInvites.teamId,
         enableFullRead: a
       });
       if (a) e.dispatch(showModalHandler({
@@ -325,7 +325,7 @@ let $$M3 = createOptimistThunk((e, {
           teamId: s,
           canEditTeam: void 0
         }
-      })); else {
+      }));else {
         let t = s && {
           ...n.teams[s],
           canEdit: hasEditorRoleAccessOnTeam(s, n),
@@ -430,7 +430,7 @@ let $$B1 = createOptimistThunk((e, {
   folderName: r
 }) => {
   let a = n && r ? `Moved '${n.name}' to ${r}` : void 0;
-  i >= e6.EDITOR && r && n ? a && e.dispatch(VisualBellActions.enqueue({
+  i >= AccessLevelEnum.EDITOR && r && n ? a && e.dispatch(VisualBellActions.enqueue({
     type: "file-moved",
     message: ((e, t, i, n) => {
       if (0 === e.length) return n;

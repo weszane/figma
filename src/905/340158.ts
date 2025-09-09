@@ -3,7 +3,7 @@ import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { Xm, gB, e1 } from "../905/723791";
 import { P as _$$P } from "../905/412913";
 import { Mk } from "../figma_app/31188";
-import { _S, ze } from "../figma_app/516028";
+import { openFileLibraryKeyAtom, openFileKeyAtom } from "../figma_app/516028";
 import { O as _$$O } from "../905/566074";
 import { c2 } from "../905/382883";
 import { logError } from "../905/714362";
@@ -38,7 +38,7 @@ let y = {
 };
 function b(e) {
   return atom(t => {
-    let i = t(_S);
+    let i = t(openFileLibraryKeyAtom);
     return i ? t(_({
       libraryKey: i,
       assetType: e
@@ -59,7 +59,7 @@ let I = createRemovableAtomFamily(({
   assetType: t,
   livegraphAssetToLibraryAsset: i
 }) => atom(n => {
-  if (!n(_S)) return Xm();
+  if (!n(openFileLibraryKeyAtom)) return Xm();
   let r = function (e) {
     switch (function (e) {
       switch (e) {
@@ -187,8 +187,8 @@ let $$L0 = atom(e => {
   } : {
     libraryAssetAtoms: A,
     publishStatusAtoms: k,
-    libraryKey: e(_S),
-    fileKey: e(ze)
+    libraryKey: e(openFileLibraryKeyAtom),
+    fileKey: e(openFileKeyAtom)
   };
   for (let l of D) {
     if (!_$$O(l)) continue;

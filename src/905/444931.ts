@@ -1,6 +1,6 @@
 import { MJ } from "../figma_app/657017";
 import { HE } from "../905/967587";
-import { R$ } from "../figma_app/12796";
+import { isExternalRestricted } from "../figma_app/12796";
 export function $$s0(e, t, i, s, o) {
   let {
     userId,
@@ -17,7 +17,7 @@ export function $$s0(e, t, i, s, o) {
     [t.id]: t
   }), {}) : i.teams;
   let h = HE(i, e, p, m);
-  let g = R$(u, orgId);
+  let g = isExternalRestricted(u, orgId);
   let f = !!o && !MJ(orgId ? p[orgId] : null, teamId ? m[teamId] : null, null);
   if (!orgId) {
     let t = s?.plansByUserId[userId]?.find(e => e.plan_id === teamId);

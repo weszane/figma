@@ -9,7 +9,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { L4, I as _$$I, cs, Rc, H3, Kx, B2, _Z } from "../figma_app/819288";
 import { uD, $f, Kh } from "../905/403166";
 import { WB } from "../905/761735";
-import { setSentryTag, captureMessage } from "../905/11";
+import { setTagGlobal, captureMessage } from "../905/11";
 import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
@@ -915,8 +915,8 @@ let eS = createOptimistThunk((e, t) => {
       messageLength: e.length,
       isMessageDiscardable: t
     });
-    setSentryTag("isMessageDiscardable", String(t));
-    setSentryTag("messageType", "reply");
+    setTagGlobal("isMessageDiscardable", String(t));
+    setTagGlobal("messageType", "reply");
     captureMessage("User attempted to close comments more than max attempt times");
   }
   e.dispatch($$eI49(t));
@@ -931,8 +931,8 @@ let eA = createOptimistThunk(e => {
       messageLength: e.length,
       isMessageDiscardable: r
     });
-    setSentryTag("isMessageDiscardable", String(r));
-    setSentryTag("messageType", "new");
+    setTagGlobal("isMessageDiscardable", String(r));
+    setTagGlobal("messageType", "new");
     captureMessage("User attempted to close comments more than max attempt times");
   }
   e.dispatch($$ev55());

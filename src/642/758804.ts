@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { zq, We } from "../figma_app/782261";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { D2 } from "../905/18797";
 import { yW } from "../figma_app/644808";
 import { yD } from "../905/92359";
@@ -61,7 +61,7 @@ export function $$h0(e) {
 function m(e) {
   let t = useSelector(e => e.loadingState);
   let s = useSelector(e => e.fileVersion);
-  let l = q5();
+  let l = selectCurrentFile();
   let d = k();
   let p = l && null != s && yD(l.key) || null;
   let h = !(null != p && D2(t, p));

@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { reportError } from "../905/11";
 import { eY, T3 } from "../figma_app/722362";
-import { tS, _G } from "../figma_app/516028";
+import { useCurrentFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
 import { Vr } from "../figma_app/151869";
 import { ph, Bn, Gl, Ji, kN } from "../figma_app/97042";
 import { yT, Nv } from "../figma_app/478201";
@@ -36,8 +36,8 @@ export function $$E0(e, t, r) {
   r && (a = (d = _).get(f?.playgroundGUID ?? ""));
   let E = !!getFeatureFlags().dt_code_connect_inline_instances;
   let y = useAtomWithSubscription($$g1);
-  let I = tS();
-  let S = _G();
+  let I = useCurrentFileKey();
+  let S = useOpenFileLibraryKey();
   let v = useMemo(() => b({
     node: a,
     scene: d,

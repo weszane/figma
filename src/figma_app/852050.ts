@@ -14,7 +14,7 @@ import g from "../vendor/990460";
 import { logError } from "../905/714362";
 import { wJ, $Q } from "../figma_app/630951";
 import { iw, cM, kX, C$, q0 } from "../905/261982";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { U } from "../905/506188";
 import { je } from "../figma_app/155728";
 import { GI, Rn, ZI, Av } from "../figma_app/633080";
@@ -165,7 +165,7 @@ export function $$en5(e) {
   return r ? "LOCAL" === r.subscriptionStatus ? r.keyForPublish : r.key : null;
 }
 export function $$ei1() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = useMemo(() => e ? cp(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   return useMemo(() => {
@@ -208,7 +208,7 @@ export function $$es21(e) {
   }, [l, a, s]);
 }
 export function $$eo17() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = useMemo(() => e ? cp(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   return useMemo(() => {

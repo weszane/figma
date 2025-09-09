@@ -14,7 +14,7 @@ import { F } from "../905/224";
 import { Ht, WW, Wf } from "../figma_app/345997";
 import { Bi } from "../905/652992";
 import { DashboardSections } from "../905/548208";
-import { pE, ZN } from "../figma_app/630077";
+import { projectPermissionEnum, fileActionEnum } from "../figma_app/630077";
 import { registerLegacyModal, registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { bP } from "../905/739964";
@@ -125,7 +125,7 @@ registerLegacyModal($$w1, e => {
   return jsx(bP, {
     team,
     resource: Bi.INVITE_ONLY_PROJECT,
-    action: pE.INVITE_ONLY_PROJECT,
+    action: projectPermissionEnum.INVITE_ONLY_PROJECT,
     currentPlan: F.Plan.STARTER,
     upsellPlan: F.Plan.PRO,
     editorType,
@@ -141,7 +141,7 @@ registerLegacyModal($$C2, e => {
   return jsx(bP, {
     team,
     resource: Bi.VIEW_ONLY_PROJECT,
-    action: pE.VIEW_ONLY_PROJECT,
+    action: projectPermissionEnum.VIEW_ONLY_PROJECT,
     currentPlan: F.Plan.STARTER,
     upsellPlan: F.Plan.PRO,
     editorType,
@@ -188,20 +188,20 @@ registerModal(function (e) {
   })) : (t = renderI18nText("payments_modal.upgrade_to_verb_resource_name", {
     verb: (() => {
       switch (e.action) {
-        case ZN.MOVE_FILES:
-        case ZN.MOVE_FOLDER:
+        case fileActionEnum.MOVE_FILES:
+        case fileActionEnum.MOVE_FOLDER:
           return getI18nString("payments_modal.move");
-        case ZN.DUPLICATE_FILES:
+        case fileActionEnum.DUPLICATE_FILES:
           return getI18nString("payments_modal.duplicate");
-        case ZN.RESTORE_FILES:
+        case fileActionEnum.RESTORE_FILES:
           return getI18nString("payments_modal.restore");
-        case ZN.IMPORT_FILES:
+        case fileActionEnum.IMPORT_FILES:
           return getI18nString("payments_modal.import");
         default:
           return getI18nString("payments_modal.add");
       }
     })(),
-    resourceName: e.action === ZN.MOVE_FOLDER ? getI18nString("payments_modal.this_project") : e.action === ZN.IMPORT_FILES ? getI18nString("payments_modal.more_files") : e.numFiles && e.numFiles > 1 ? getI18nString("payments_modal.these_files") : getI18nString("payments_modal.this_file")
+    resourceName: e.action === fileActionEnum.MOVE_FOLDER ? getI18nString("payments_modal.this_project") : e.action === fileActionEnum.IMPORT_FILES ? getI18nString("payments_modal.more_files") : e.numFiles && e.numFiles > 1 ? getI18nString("payments_modal.these_files") : getI18nString("payments_modal.this_file")
   }), i = renderI18nText("payments_modal.on_the_starter_plan_your_team_is_limited", {
     maxFreeFiles: WW,
     maxFreeFolders: Wf

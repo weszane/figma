@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { N } from "../7222/898730";
 import { e as _$$e2 } from "../figma_app/324237";
@@ -28,7 +28,7 @@ export function $$p4({
     isFetchingNextPage: b
   }, {
     fetchNextPage: x
-  }] = IT(_$$a.ResourcesPaginatedQuery({
+  }] = setupResourceAtomHandler(_$$a.ResourcesPaginatedQuery({
     resourceType: t,
     orgId: l,
     teamId: n,

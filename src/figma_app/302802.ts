@@ -24,7 +24,7 @@ import { PW } from "../905/497152";
 import { sM, pS } from "../figma_app/346422";
 import { s0 } from "../figma_app/115923";
 import { jT as _$$jT, K8 } from "../figma_app/108909";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { YD, Vo, KL, TJ } from "../figma_app/690664";
 import { Ho, a5 } from "../figma_app/337924";
 import { E as _$$E } from "../figma_app/626557";
@@ -41,7 +41,7 @@ export function $$B13() {
   let [e, t] = useAtomValueAndSetter(F);
   let [r, i] = useAtomValueAndSetter(j);
   let a = useAtomWithSubscription(wh);
-  let s = Oc();
+  let s = useIsSelectedFigmakeFullscreen();
   useEffect(() => {
     null === r ? i(a) : JSON.stringify(a) !== JSON.stringify(r) && (s || t([]), i(a));
   }, [a, r, t, i, s]);
@@ -205,7 +205,7 @@ function ee(e) {
   debugState.dispatch(sf(t));
 }
 export function $$et10() {
-  let e = Oc();
+  let e = useIsSelectedFigmakeFullscreen();
   let t = useAtomWithSubscription(s0);
   let r = useRef(!0);
   let i = useRef(!1);

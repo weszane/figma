@@ -5,7 +5,7 @@ import { atomStoreManager, useAtomWithSubscription, atom } from "../figma_app/27
 import { analyticsEventManager } from "../905/449184";
 import { NX, k9 } from "../figma_app/777207";
 import { fd } from "../figma_app/255679";
-import { q5, _G, tS } from "../figma_app/516028";
+import { selectCurrentFile, useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { r6, CK } from "../figma_app/517115";
 import { tM, k1 } from "../figma_app/984498";
 import { I } from "../figma_app/130633";
@@ -16,7 +16,7 @@ import { o8, yW } from "../figma_app/644808";
 import { wV, S5 } from "../figma_app/647246";
 import { AS } from "../figma_app/177636";
 export function $$b9() {
-  let e = q5();
+  let e = selectCurrentFile();
   return useCallback((t, r) => {
     !function (e, t, r) {
       if (!t) return;
@@ -47,7 +47,7 @@ export function $$b9() {
   }, [e]);
 }
 export function $$T7() {
-  let e = _G();
+  let e = useOpenFileLibraryKey();
   let {
     libraryKey,
     currentView
@@ -64,7 +64,7 @@ export function $$I12({
     isNavigatingVisualAssets,
     visualAssetsType
   } = wV();
-  let l = _G();
+  let l = useOpenFileLibraryKey();
   let u = useAtomWithSubscription(lj);
   let p = libraryKey && u.includes(libraryKey);
   let _ = fd(libraryKey);
@@ -192,7 +192,7 @@ export function $$R6(e) {
 export function $$L4(e) {
   let t = Nv(!0);
   let r = k();
-  let i = tS();
+  let i = useCurrentFileKey();
   let s = CK();
   return useCallback(n => {
     let {

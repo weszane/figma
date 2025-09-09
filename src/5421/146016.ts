@@ -20,7 +20,7 @@ import { I7 } from "../figma_app/594947";
 import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
 import { av } from "../figma_app/316316";
 import { ZM } from "../figma_app/505098";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
@@ -119,7 +119,7 @@ function w(e) {
         children: isInvalidValue(e.action) ? getI18nString("fullscreen.mixed") : null
       }), jsx(mc, {
         children: function (e, t) {
-          let n = cJ();
+          let n = useIsFullscreenSitesView();
           let i = jsx(S, {
             formatter: t,
             value: "NONE",

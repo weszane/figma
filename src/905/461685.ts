@@ -1,9 +1,9 @@
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { FileCreationPermissionsView } from "../figma_app/43951";
-import { gq } from "../905/276025";
+import { getPlanUserAtomFamily } from "../905/276025";
 let o = atom(e => {
-  let t = e(gq(!0)).data?.draftsFolderId;
+  let t = e(getPlanUserAtomFamily(!0)).data?.draftsFolderId;
   if (!t) {
     let e = {
       code: "nonNullableResult",

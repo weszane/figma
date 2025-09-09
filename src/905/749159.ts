@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
 import { Command, DesignGraphElements } from "../figma_app/763686";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { qB } from "../905/862321";
 import { a as _$$a } from "../905/105502";
 import { Ob } from "../905/191560";
@@ -82,9 +82,9 @@ function _({
                   return getI18nString("auth.sign_up_for_figma");
               }
               return i || (u.formState === qB.SIGN_IN || u.formState === qB.VERIFY_HUMAN && u.prevForm === qB.SIGN_IN || u.formState === qB.TWO_FACTOR ? t ? getI18nString("auth.log_in_to_collaborate_on_display_name", {
-                displayName: `"${EJ(t, 30)}"`
+                displayName: `"${truncate(t, 30)}"`
               }) : getI18nString("auth.log_in_to_collaborate_on_this_file") : t ? getI18nString("auth.create_an_account_to_collaborate_on_display_name", {
-                displayName: `"${EJ(t, 30)}"`
+                displayName: `"${truncate(t, 30)}"`
               }) : getI18nString("auth.create_an_account_to_collaborate_on_this_file"));
             })(),
             subtitle: e,

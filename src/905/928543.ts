@@ -28,7 +28,7 @@ import { nZ } from "../figma_app/277330";
 import { t as _$$t2 } from "../905/414363";
 import { n as _$$n } from "../905/402643";
 import O from "../vendor/923386";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { B as _$$B } from "../905/714743";
 import { Ib } from "../905/129884";
 import { yu, Lp } from "../905/712714";
@@ -40,11 +40,11 @@ function B({
   componentKey: t,
   orgId: i
 }) {
-  let [a] = IT(yu({
+  let [a] = setupResourceAtomHandler(yu({
     fileVersion: e?.toString(),
     componentKey: t
   }));
-  let [s] = IT(Lp({
+  let [s] = setupResourceAtomHandler(Lp({
     orgId: i ?? void 0,
     fileVersion: e?.toString(),
     componentKey: t

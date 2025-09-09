@@ -3,14 +3,14 @@ import { ChatMessageType } from "../figma_app/763686";
 import { AIScopeHandler } from "../905/189185";
 import { qV } from "../figma_app/165623";
 import { fullscreenValue } from "../figma_app/455680";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { E } from "../figma_app/626557";
 import { IO } from "../1156/751255";
 import { oA } from "../figma_app/812915";
 import { p3 } from "../figma_app/588582";
 export function $$$$m0() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = e?.key;
   let n = selectCurrentUser();
   let m = e?.trackTags;

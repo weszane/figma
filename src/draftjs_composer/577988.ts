@@ -14,7 +14,7 @@ import { mz } from "../figma_app/12220";
 import { kc } from "../figma_app/740025";
 import { j as _$$j } from "../draftjs_composer/390258";
 import { wT } from "../figma_app/188152";
-import { tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { CM } from "../figma_app/45218";
 import { wV } from "../figma_app/585209";
@@ -93,9 +93,9 @@ export function $$D1(e) {
   let l = mz();
   let [m, d] = useState(!0);
   let p = useSelector(e => e.comments.typeahead);
-  let h = tS();
+  let h = useCurrentFileKey();
   let C = useSelector(e => e.currentUserOrgId);
-  let T = q5()?.teamId;
+  let T = selectCurrentFile()?.teamId;
   let j = useSelector(e => e.orgUsersByOrgId);
   let w = useRef(null);
   let {

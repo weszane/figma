@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { resourceUtils } from "../905/989992";
-import { IT, mI } from "../figma_app/566371";
+import { setupResourceAtomHandler, handleSuspenseRetainRelease } from "../figma_app/566371";
 import { sZ, dq } from "../905/845253";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
 import { OrgHasSeatsManagedViaScimView } from "../figma_app/43951";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { zp } from "../figma_app/740025";
 export function $$u0() {
   let e = sZ();
@@ -23,13 +23,13 @@ export function $$_4() {
 }
 export function $$h3() {
   let e = dq();
-  let t = X$("useSuspendOrgManagesSeatsViaScim");
-  let [r, n] = IT(OrgHasSeatsManagedViaScimView({
+  let t = useCurrentPublicPlan("useSuspendOrgManagesSeatsViaScim");
+  let [r, n] = setupResourceAtomHandler(OrgHasSeatsManagedViaScimView({
     orgId: e
   }), {
     enabled: !!e
   });
-  let c = mI(t, r);
+  let c = handleSuspenseRetainRelease(t, r);
   let u = resourceUtils.all(c);
   return resourceUtils.useTransform(u, ([e, t]) => e.tier === FPlanNameType.ENTERPRISE && !!t.org?.orgSamlConfigs?.some(e => "loaded" === e.hasSeatManagedViaScim.status && e.hasSeatManagedViaScim.data));
 }

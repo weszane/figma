@@ -5,7 +5,7 @@ import { clamp } from "../figma_app/492908";
 import o from "classnames";
 import { A as _$$A } from "../vendor/850789";
 import { YU, H0, Bx } from "../figma_app/191804";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
 import { kt } from "../figma_app/858013";
 import { getI18nString } from "../905/303541";
@@ -733,7 +733,7 @@ export function $$ec1(e) {
     leading: !0
   });
   let eN = useMemo(() => eR && Z && showEditPreviewControls ? es(Z.height, eR, ee, eA && eA in k ? eA : void 0) : void 0, [eA, eR, ee, Z, showEditPreviewControls]);
-  let eP = ZC(eN);
+  let eP = useLatestRef(eN);
   useEffect(() => {
     async function t(e, t) {
       if (!e.complete) {

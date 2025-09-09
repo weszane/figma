@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useEffect } from "react";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { qd } from "../figma_app/39751";
+import { usePreviousValue } from "../figma_app/922077";
 import { OC } from "../figma_app/386952";
 import { rt } from "../figma_app/615482";
 import { Mk, yW } from "../figma_app/644808";
@@ -8,7 +8,7 @@ import { G as _$$G } from "../figma_app/923271";
 import { ZX, r6 } from "../figma_app/950074";
 import { ye } from "../figma_app/134428";
 import { lj } from "../905/991973";
-import { Vj } from "../905/561485";
+import { isFullscreenSitesView } from "../905/561485";
 import { q as _$$q } from "../figma_app/213525";
 var $$m1 = (e => (e.IconSets = "icon_sets", e.Illustrations = "illustrations", e))($$m1 || {});
 var $$g3 = (e => (e.Libraries = "All libraries", e.Pages = "Library", e.Assets = "Page", e.Search = "Search", e.Recents = "Recents", e.VisualAssets = "Visual assets", e))($$g3 || {});
@@ -21,7 +21,7 @@ let I = rt("Blocks");
 let $$S6 = atom(e => {
   let t = e(I);
   let r = e(OC);
-  return Vj(r) ? t : "Libraries";
+  return isFullscreenSitesView(r) ? t : "Libraries";
 }, (e, t, r) => {
   t(I, r);
 });
@@ -198,7 +198,7 @@ export function $$A10() {
     folderPath,
     visualAssetsType
   }, "Blocks" === D), [currentView, libraryKey, pageId, folderPath, visualAssetsType, D]);
-  let j = qd(F);
+  let j = usePreviousValue(F);
   let U = useCallback(e => (clearNavigationState(), P(!1), setLastNavAction(r6.Back, e), M({
     newNavigationState: {}
   })), [clearNavigationState, M, setLastNavAction, P]);
@@ -402,10 +402,10 @@ export function $$R2() {
     folderPath,
     visualAssetsType
   } = $$A10();
-  let s = qd(libraryKey);
-  let o = qd(pageId);
-  let l = qd(folderPath);
-  let d = qd(visualAssetsType);
+  let s = usePreviousValue(libraryKey);
+  let o = usePreviousValue(pageId);
+  let l = usePreviousValue(folderPath);
+  let d = usePreviousValue(visualAssetsType);
   return lastNavAction === r6.Back ? {
     previousLibraryKey: s,
     previousPageId: o,

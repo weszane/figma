@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { sZ } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
-import { D6, sI } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgGuestUser } from "../figma_app/465071";
 import { CT } from "../figma_app/736948";
 export function $$l0() {
   let e = sZ();
@@ -21,8 +21,8 @@ export function $$c1() {
   return !!getFeatureFlags().mfa_for_guests && e && !t && !i;
 }
 export function $$u2() {
-  let e = D6("useShouldShowMfaDisableWarningForMfaRequiredOrg");
-  let t = sI(e).unwrapOr(!1);
+  let e = useCurrentPlanUser("useShouldShowMfaDisableWarningForMfaRequiredOrg");
+  let t = useIsOrgGuestUser(e).unwrapOr(!1);
   let i = $$l0();
   let r = d();
   return !!getFeatureFlags().mfa_for_guests && t && i && !r;

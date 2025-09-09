@@ -63,7 +63,7 @@ import { k as _$$k4 } from "../figma_app/564183";
 import { VA } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { aV } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
@@ -124,7 +124,7 @@ function e0({
   areAnyShapesActive: i
 }) {
   let a = aV();
-  let d = q5();
+  let d = selectCurrentFile();
   let c = VA(d?.project);
   let u = s === ViewType.HISTORY;
   let h = atomStoreManager.get(_$$o2);

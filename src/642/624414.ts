@@ -12,11 +12,11 @@ import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { UpsellModalType } from "../905/165519";
 export function $$_0() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let s = useSelector(e => e.user?.id);
   if (!t) return null;
   let _ = t.teamId;

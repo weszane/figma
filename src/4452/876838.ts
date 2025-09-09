@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { subscribeAndAwaitData } from "../905/553831";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -20,7 +20,7 @@ export async function $$x0(e, t) {
     let a = await subscribeAndAwaitData(AccountTypeRequestByIdView, {
       requestId: e
     });
-    let s = oA(a.accountTypeRequest);
+    let s = getResourceDataOrFallback(a.accountTypeRequest);
     if (!s) {
       v(t, getI18nString("admin_dashboard.requests.not_found"));
       return;

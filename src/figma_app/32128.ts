@@ -5,11 +5,11 @@ import { permissionScopeHandler } from '../905/189185';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { F as _$$F } from '../905/680873';
 import { getSingletonSceneGraph } from '../905/700578';
 import { atom, useAtomValueAndSetter, createRemovableAtomFamily } from '../figma_app/27355';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { getObservableValue } from '../figma_app/84367';
 import { L3 } from '../figma_app/385215';
 import { fullscreenValue } from '../figma_app/455680';
@@ -55,9 +55,9 @@ export function $$B11({
 }) {
   !function (e) {
     let t = $$j3();
-    let r = ZC(t);
+    let r = useLatestRef(t);
     let i = p8('showUi');
-    let a = ZC(i);
+    let a = useLatestRef(i);
     let s = Z(() => {
       e(t);
     });
@@ -71,7 +71,7 @@ export function $$B11({
 export function $$G7() {
   !function (e) {
     let t = $$j3();
-    let r = ZC(e);
+    let r = useLatestRef(e);
     let i = useRef();
     useEffect(() => {
       e !== r && void 0 !== r && (e ? t ? i.current = !1 : (fullscreenValue.triggerAction('toggle-sidebar', {
@@ -124,7 +124,7 @@ export function $$z2() {
       t !== i && e?.type && ['FRAME', 'SECTION'].includes(e.type) && (y({
         newTitle: t,
         nodeType: e.type
-      }), e.type === 'FRAME' && _$$d(t).length > 0 && YQ({
+      }), e.type === 'FRAME' && _$$d(t).length > 0 && handleAtomEvent({
         id: 'frame_node_name_changed_with_rfd_indicator',
         properties: {
           nodeId: l

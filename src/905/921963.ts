@@ -7,7 +7,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/378566";
 import { h as _$$h } from "../905/142086";
 import { showModalHandler } from "../905/156213";
-import { Xm } from "../905/760074";
+import { isBranch } from "../905/760074";
 import { P as _$$P } from "../905/842406";
 import { Um } from "../905/848862";
 import { FResourceCategoryType, FOrganizationLevelType } from "../figma_app/191312";
@@ -16,7 +16,7 @@ import { $S } from "../905/351260";
 import { hw, zO, lP, yN } from "../905/727738";
 import { Zm } from "../905/913057";
 import { KI } from "../figma_app/680166";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { K } from "../905/868738";
 import { t as _$$t3 } from "../905/50272";
 import { _ as _$$_ } from "../905/328370";
@@ -53,13 +53,13 @@ export function $$N0(e) {
     let t = e.user;
     let i = e.canEditRole;
     let n = e.role.user_id === t.id;
-    let r = e.role.level === e6.OWNER;
+    let r = e.role.level === AccessLevelEnum.OWNER;
     let a = e.isOwnerOfResource;
     a ? i = !r : r ? i = !1 : n && (i = !0);
     return nu(a, n, i, e.canMakeAdmin, e.role.pending, e.role.level, e.isPrototypeRole);
   }, [e.canEditRole, e.canMakeAdmin, e.isOwnerOfResource, e.isPrototypeRole, e.role, e.user]);
   let G = e.readOnlyOverrideWarningMessage;
-  let z = e.isStarterTier || e.role.level === e6.VIEWER || e.resource.type !== FResourceCategoryType.FILE ? null : e.user.id === e.role.user_id && U ? {
+  let z = e.isStarterTier || e.role.level === AccessLevelEnum.VIEWER || e.resource.type !== FResourceCategoryType.FILE ? null : e.user.id === e.role.user_id && U ? {
     tooltipId: _$$a,
     text: getI18nString("folder_permissions_modal.restricted_warning.admin_needs_to_update_your_seat")
   } : e.role.user_id && U ? {
@@ -67,7 +67,7 @@ export function $$N0(e) {
     text: getI18nString("folder_permissions_modal.restricted_warning.admin_needs_to_update_this_seat")
   } : null;
   z && (G = null);
-  let H = !!(e.repo && e.resource.type === FResourceCategoryType.FILE && Xm(e.resource.file));
+  let H = !!(e.repo && e.resource.type === FResourceCategoryType.FILE && isBranch(e.resource.file));
   let W = e.resource.type === FResourceCategoryType.FILE ? e.resource.file.parent_org_id ? {
     type: FOrganizationLevelType.ORG,
     parentId: e.resource.file.parent_org_id
@@ -110,9 +110,9 @@ export function $$N0(e) {
       };
       let a = e.resource && e.resource.type === FResourceCategoryType.FILE && e.resource.file;
       let s = e.resource && e.resource.type === FResourceCategoryType.FILE && e.resource.isInDraftsFolder && !e.resource.file.parent_org_id;
-      let l = e.role.level === e6.VIEWER && i === e6.EDITOR;
+      let l = e.role.level === AccessLevelEnum.VIEWER && i === AccessLevelEnum.EDITOR;
       let p = !!P.dismissed_move_draft_to_project_interstitial_modal;
-      if (i === e6.OWNER) e.isPaidPublished ? t(showModalHandler({
+      if (i === AccessLevelEnum.OWNER) e.isPaidPublished ? t(showModalHandler({
         type: K,
         data: {}
       })) : t(showModalHandler({
@@ -123,14 +123,14 @@ export function $$N0(e) {
           newOwnerName: e.role.user.handle,
           onConfirmTransfer: r
         }
-      })); else if (a && s && l && e.isStarterTier) {
+      }));else if (a && s && l && e.isStarterTier) {
         let i = Zm(e.role, N);
         i?.endsWith(getInitialOptions().figma_email_suffix) ? r() : p ? _$$h(a, e.repo || null, t, {
           handlesVisualBell: !0,
           callback: () => {
             t(hw({
               role: e.role,
-              level: e6.EDITOR,
+              level: AccessLevelEnum.EDITOR,
               fromDraftsLockdownFileMove: !0,
               seenState: null
             }));
@@ -145,7 +145,7 @@ export function $$N0(e) {
               callback: () => {
                 t(hw({
                   role: e.role,
-                  level: e6.EDITOR,
+                  level: AccessLevelEnum.EDITOR,
                   fromDraftsLockdownFileMove: !0,
                   seenState: null
                 }));

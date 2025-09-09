@@ -67,7 +67,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { ex as _$$ex } from "../905/524523";
 import { A as _$$A5 } from "../svg/94747";
 import { A as _$$A6 } from "../svg/330785";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { rq } from "../figma_app/386160";
 import { A as _$$A7 } from "../svg/328437";
 import { A as _$$A8 } from "../svg/201898";
@@ -113,7 +113,7 @@ function z(e) {
   } = e;
   let l = useCallback(() => {
     let e = t.current;
-    if (pickerShown && pickerShown.id === $T) dispatch(XE()); else if (e && e instanceof HTMLElement) {
+    if (pickerShown && pickerShown.id === $T) dispatch(XE());else if (e && e instanceof HTMLElement) {
       let t = cn(e);
       dispatch(u1({
         id: $T,
@@ -768,7 +768,7 @@ function eK(e) {
   } = e;
   let [a, l] = function () {
     let e = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, [])[ItemType.OVERFLOW_ITEM];
-    let t = cJ();
+    let t = useIsFullscreenSitesView();
     let n = kl("isSection");
     let o = kl("anyTopLevelFramesInSelection");
     return [e, !t && !n && !o];
@@ -1063,7 +1063,7 @@ export let $$e70 = kp(function (e) {
       ...n("isSectionSelected", "numTransitionsOnCurrentPage", "prototypeStartingPointsInfo")
     };
   }(shouldUseSelectedStyleProperties);
-  let R = cJ();
+  let R = useIsFullscreenSitesView();
   let {
     bigNudgeAmount,
     smallNudgeAmount

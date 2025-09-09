@@ -4,15 +4,15 @@ import { sortByProperty } from "../figma_app/656233";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
-import { IT } from "../figma_app/566371";
+import { useSubscription } from "../figma_app/288654";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { Qv } from "../905/929976";
 import { n1 } from "../figma_app/657017";
-import { gs } from "../905/760074";
+import { compareWithKey } from "../905/760074";
 import { NX, k9 } from "../figma_app/777207";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { eO } from "../figma_app/518077";
@@ -20,7 +20,7 @@ import { gi, r9, fc } from "../figma_app/646357";
 import { PG, Q_ } from "../905/570707";
 import { LibrariesViewFilterStatesView } from "../figma_app/43951";
 import { M4 } from "../905/713695";
-import { D6, Kd } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { _X, YH } from "../figma_app/502247";
 import { Yu } from "../figma_app/633080";
 import { ZO } from "../905/691188";
@@ -87,7 +87,7 @@ export function $$R5({
     orgApprovedLibraryKeys: new Set()
   }
 }) {
-  let s = q5();
+  let s = selectCurrentFile();
   let o = FC();
   let {
     fileByKey
@@ -106,7 +106,7 @@ export function $$R5({
       key: s.key,
       file_repo_id: s.fileRepoId,
       source_file_key: s.sourceFileKey
-    }, (t, i) => t.library_file_key !== e.key && !gs(e, i)));
+    }, (t, i) => t.library_file_key !== e.key && !compareWithKey(e, i)));
     t ? i.push(function (e, t) {
       let i = new Set(t);
       return (t, n) => n.team_id === e || !!n.org_browsable || i.has(t.library_key);
@@ -174,7 +174,7 @@ export function $$N2(e) {
     debouncedSearchQuery,
     setSearchQuery
   } = PG();
-  let [a] = IT(Q_(debouncedSearchQuery));
+  let [a] = setupResourceAtomHandler(Q_(debouncedSearchQuery));
   let s = useMemo(() => {
     if ("loading" === a.status) return [];
     if (!searchQuery || !a.data) return e;
@@ -226,8 +226,8 @@ export function $$L3(e, t = !1) {
   let i = [];
   let a = useDispatch();
   let o = sZ();
-  let c = D6("useLibrariesViewFilterStates");
-  let p = Kd(c).unwrapOr(!1);
+  let c = useCurrentPlanUser("useLibrariesViewFilterStates");
+  let p = useIsOrgMemberOrAdminUser(c).unwrapOr(!1);
   let g = !!o?.workspaces_count;
   useEffect(() => {
     async function e() {
@@ -241,7 +241,7 @@ export function $$L3(e, t = !1) {
     }), e());
   });
   let f = n1() && !t;
-  let _ = Rs(LibrariesViewFilterStatesView, {
+  let _ = useSubscription(LibrariesViewFilterStatesView, {
     orgId: o?.id ?? null
   });
   let y = useSelector(({

@@ -18,10 +18,10 @@ import { hS } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
-import { ud } from '../905/513035';
+import { ProductAccessTypeEnum } from '../905/513035';
 import { $n } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
-import { oA } from '../905/663269';
+import { getResourceDataOrFallback } from '../905/663269';
 import { g as _$$g } from '../905/687265';
 import { e0 } from '../905/696396';
 import { IX } from '../905/712921';
@@ -36,12 +36,12 @@ import { FPlanNameType, FOrganizationLevelType } from '../figma_app/191312';
 import { c$, Ve, wv } from '../figma_app/236327';
 import { b as _$$b } from '../figma_app/246400';
 import { jk, nB, vo, wi } from '../figma_app/272243';
-import { S2 } from '../figma_app/465071';
+import { useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { _ as _$$_, S as _$$S } from '../figma_app/490799';
 import { vr } from '../figma_app/514043';
 import { i6 } from '../figma_app/543529';
-import { mI } from '../figma_app/566371';
+import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { CM, kj, NU, SI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
 import { $z } from '../figma_app/617427';
@@ -203,8 +203,8 @@ function er(e) {
     reportErrorsToTeam: _$$e.SCALE
   });
   let x = _$$k();
-  let b = S2();
-  let [y] = mI(b);
+  let b = useTeamPlanFeatures();
+  let [y] = handleSuspenseRetainRelease(b);
   let A = !!y.data?.campfireProvisionalAccessEnabled;
   let V = i6();
   let W = V.data;
@@ -229,7 +229,7 @@ function er(e) {
       renewalTerm: a,
       unit: IX.MONTH
     });
-    let [n] = mI(s);
+    let [n] = handleSuspenseRetainRelease(s);
     let r = _$$k();
     let i = n.status === 'disabled' ? new Error('Missing contract rate args.') : n.status === 'errors' ? new Error('Error while fetching pricing.') : void 0;
     if (i && reportError(_$$e.MONETIZATION_EXPANSION, i), i || !t) {
@@ -261,14 +261,14 @@ function er(e) {
   }(z, currency, renewalTerm);
   let [Y, K] = useState(N_.dict(e => {
     switch (e) {
-      case ud.EXPERT:
+      case ProductAccessTypeEnum.EXPERT:
         return z.upgradeApprovalSettingsExpert ?? en;
-      case ud.DEVELOPER:
+      case ProductAccessTypeEnum.DEVELOPER:
         return z.upgradeApprovalSettingsDeveloper ?? en;
-      case ud.COLLABORATOR:
+      case ProductAccessTypeEnum.COLLABORATOR:
         return z.upgradeApprovalSettingsCollaborator ?? en;
-      case ud.CONTENT:
-        let t = oA(z.upgradeApprovalSettingsContent);
+      case ProductAccessTypeEnum.CONTENT:
+        let t = getResourceDataOrFallback(z.upgradeApprovalSettingsContent);
         if (isNotNullish(t)) return t;
         return en;
       default:
@@ -451,7 +451,7 @@ let ed = registerModal(e => {
   });
 });
 let eu = registerModal(e => {
-  let t = S2().unwrapOr(null);
+  let t = useTeamPlanFeatures().unwrapOr(null);
   let a = hS(e);
   return jsx(fu, {
     name: 'Auto Approval Settings Modal (CURF All Users)',

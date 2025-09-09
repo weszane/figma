@@ -27,13 +27,13 @@ import { J as _$$J } from "../905/125993";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { customHistory } from "../905/612521";
 import { WB } from "../905/761735";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA, tT } from "../905/723791";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { qB } from "../905/862321";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { VisualBellActions } from "../905/302958";
 import { AG } from "../figma_app/999312";
 import { FL } from "../figma_app/248365";
@@ -45,7 +45,7 @@ import { d6, uR, s1 } from "../figma_app/304207";
 import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
 import { ResourceSaveFromResourceId, ResourceSave, PluginInstall, AllowlistedPlugin } from "../figma_app/43951";
-import { g3 } from "../figma_app/707808";
+import { UserProfileTab } from "../figma_app/707808";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
 import { c as _$$c } from "../figma_app/11961";
@@ -390,18 +390,18 @@ function eo({
 function ea(e, t) {
   let r = useDispatch();
   let s = function (e) {
-    let t = Rs(ResourceSaveFromResourceId, {
+    let t = useSubscription(ResourceSaveFromResourceId, {
       resourceId: e.id,
       orgIds: []
     }, {
       enabled: XW(e) && !rZ(e)
     });
-    let r = Rs(ResourceSave, {
+    let r = useSubscription(ResourceSave, {
       hubFileId: e.id
     }, {
       enabled: !XW(e) && _$$U(e)
     });
-    let s = Rs(PluginInstall, {
+    let s = useSubscription(PluginInstall, {
       pluginId: e.id,
       orgIds: []
     }, {
@@ -415,11 +415,11 @@ function ea(e, t) {
   let c = useSelector(e => e.authedActiveCommunityProfile?.profile_handle);
   let d = useMemo(() => o && a ? new _$$e2(a, l) : c ? new xn({
     profileHandle: c,
-    tabView: g3.SAVES
+    tabView: UserProfileTab.SAVES
   }) : void 0, [o, a, l, c]);
   let u = !!s;
   let m = useCallback(s => {
-    YQ({
+    handleAtomEvent({
       id: "cmty-detail-view-saved-button-clicked"
     });
     s?.stopPropagation();
@@ -438,19 +438,19 @@ function ea(e, t) {
 function el(e, t, r) {
   let s = useDispatch();
   let o = useSelector(e => Tm(e));
-  let a = Rs(PluginInstall, {
+  let a = useSubscription(PluginInstall, {
     pluginId: t.id,
     orgIds: Object.keys(o)
   }, {
     enabled: !XW(e)
   });
-  let l = Rs(ResourceSaveFromResourceId, {
+  let l = useSubscription(ResourceSaveFromResourceId, {
     resourceId: e.id,
     orgIds: Object.keys(o)
   }, {
     enabled: XW(e)
   });
-  let c = Rs(AllowlistedPlugin, {
+  let c = useSubscription(AllowlistedPlugin, {
     pluginId: t.id,
     orgIds: Object.keys(o)
   });

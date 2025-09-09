@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { Dd } from "../905/519092";
@@ -14,7 +14,7 @@ export function $$l0(e) {
   let d = editors.length;
   let c = editors.filter(e => e.id).map(e => e.id).join();
   let u = getI18nString("team_view.downgrade_editor_modal.downgrade_user_team_permissions", {
-    username: EJ(e.editors[0].name || e.editors[0].email, 20)
+    username: truncate(e.editors[0].name || e.editors[0].email, 20)
   });
   let m = getI18nString("team_view.downgrade_editor_modal.downgrade_multiple_users_team_permissions", {
     numSelectedUsers: d

@@ -11,7 +11,7 @@ import { useEventSubscription } from "../figma_app/516794";
 import { am } from "../figma_app/901889";
 import { Uz, Te } from "../905/63728";
 import { yZ } from "../905/407352";
-import { jN } from "../figma_app/930338";
+import { isWhitespace } from "../figma_app/930338";
 import { Fk } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { NY } from "../figma_app/712525";
@@ -28,7 +28,7 @@ import { FFileType } from "../figma_app/191312";
 import { H1 as _$$H } from "../figma_app/451700";
 import { kM } from "../figma_app/421886";
 import { iW } from "../figma_app/34798";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 import { Nl } from "../figma_app/115923";
 import { H as _$$H2 } from "../9410/748457";
 import { kH } from "../figma_app/463678";
@@ -167,7 +167,7 @@ export function $$K7() {
   let G = _$$A(U, 300);
   let K = useCallback((e, t = !0) => {
     p(NY(e));
-    O(!!e && !jN(e));
+    O(!!e && !isWhitespace(e));
     G(e, t);
   }, [p, G]);
   useEffect(() => {
@@ -185,7 +185,7 @@ export function $$K7() {
     });
   }, [e]);
   let V = Xr(Nl);
-  let W = cJ();
+  let W = useIsFullscreenSitesView();
   return {
     query,
     showSearch: x,
@@ -217,7 +217,7 @@ function H() {
   let u = iW();
   return useCallback(async (n, a = !0, p) => {
     let h = p ?? r;
-    if (!n || jN(n)) {
+    if (!n || isWhitespace(n)) {
       let {
         nav
       } = CanvasSearchHelpers.setSearchResultsAndGetViewportSettings([], h, "", {

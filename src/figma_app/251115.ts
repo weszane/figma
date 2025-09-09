@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { BF, dZ } from "../figma_app/459490";
@@ -19,7 +19,7 @@ export function $$b1(e, t) {
   let r;
   r = !1;
   !isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic && t && "enabled_for_gated_users" === BF(t) && getFeatureFlags().ai_user_use_llama && (r = !0);
-  let u = Rs(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmaAi, {
+  let u = useSubscription(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmaAi, {
     key: e
   }, {
     enabled: !!e
@@ -40,7 +40,7 @@ export function $$v3(e) {
   let r = e?.key ?? "";
   let i = Xr(y);
   let s = sZ();
-  let d = Rs(dZ(s) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
+  let d = useSubscription(dZ(s) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
     key: r
   }, {
     enabled: !!r && t

@@ -6,7 +6,7 @@ import { b as _$$b } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { NT, g5 } from "../figma_app/579169";
-import { q5, Cq } from "../figma_app/516028";
+import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { Lh, D8, WO } from "../figma_app/242339";
@@ -585,7 +585,7 @@ export let $$ei0 = "tooltips_plus_onboarding_reset_onboarding";
 export function $$ea1() {
   let e = useDispatch();
   let t = selectCurrentUser();
-  let r = q5()?.canEditCanvas;
+  let r = selectCurrentFile()?.canEditCanvas;
   let f = useAtomWithSubscription(NT);
   let E = useAtomWithSubscription(g5);
   let {
@@ -602,7 +602,7 @@ export function $$ea1() {
   let A = !!_$$f("no_figma_basics_tooltips_onboarding");
   let x = !!_$$f("seen_starting_points_tooltips_onboarding");
   let N = !!_$$f("started_figma_basics_onboarding");
-  let C = Cq({
+  let C = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   let w = WO(t?.id, C, [_$$d]);

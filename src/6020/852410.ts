@@ -23,7 +23,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
 import { eY } from "../figma_app/722362";
-import { sS, q5, Cq } from "../figma_app/516028";
+import { selectOpenFileKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
 import { vp } from "../figma_app/831696";
 import { Ib } from "../905/129884";
@@ -169,9 +169,9 @@ function F({
 }
 export let $$L0 = function (t) {
   let e = kl("prototypeStartingPointsInfo");
-  let o = useSelector(sS) || "";
-  let l = q5();
-  let s = Cq({
+  let o = useSelector(selectOpenFileKey) || "";
+  let l = selectCurrentFile();
+  let s = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   let p = useSelector(t => t.mirror.appModel.currentSelectedProperty);
@@ -236,7 +236,7 @@ export let $$L0 = function (t) {
             Fullscreen.insertPrototypeStartingPointsBetween(e, n, r);
           });
         },
-        onDeleteProperty: v ? () => { } : t => {
+        onDeleteProperty: v ? () => {} : t => {
           let e = R.filter((e, o) => t.has(o)).map(t => t.nodeID);
           e.length > 0 && Fullscreen.deletePrototypeStartingPoints(e);
         },

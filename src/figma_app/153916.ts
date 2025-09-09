@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useEffect } from "react";
-import { ZC } from "../figma_app/39751";
-import { gY, IT } from "../figma_app/566371";
+import { useLatestRef } from "../figma_app/922077";
+import { getAtomMutate, setupResourceAtomHandler } from "../figma_app/566371";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
-import { D6, j_ } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { i as _$$i } from "../905/787489";
 import { Eh } from "../figma_app/617654";
 var n;
@@ -59,7 +59,7 @@ let f = M4.Mutation((e, {
   t.refetch(n.orgBillingDataQuery(e));
 });
 export function $$E2(e) {
-  let t = gY(f);
+  let t = getAtomMutate(f);
   return useCallback(() => {
     t(e);
   }, [t, e]);
@@ -70,15 +70,15 @@ export async function $$y3(e) {
   });
 }
 export function $$b4(e, t = !0) {
-  let r = D6("useOrgBillingData");
-  let o = j_(r).unwrapOr(!1);
-  let [d, c] = IT(n.orgBillingDataQuery(e), {
+  let r = useCurrentPlanUser("useOrgBillingData");
+  let o = useIsOrgAdminUser(r).unwrapOr(!1);
+  let [d, c] = setupResourceAtomHandler(n.orgBillingDataQuery(e), {
     enabled: t
   });
   _$$i(d, getI18nString("org_billing_error_default"));
-  let u = ZC(e);
+  let u = useLatestRef(e);
   let h = useMemo(() => u !== e && !!u, [e, u]);
-  let m = ZC(o);
+  let m = useLatestRef(o);
   let g = useMemo(() => !1 === m && o && d.data && 0 === Object.keys(d.data).length, [o, d.data, m]);
   let f = useMemo(() => g || h, [g, h]);
   useEffect(() => {

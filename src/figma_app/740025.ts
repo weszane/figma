@@ -6,7 +6,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { $A } from '../905/862883';
 import { aP } from '../figma_app/10554';
 import { c as _$$c } from '../figma_app/11961';
-import { jh } from '../figma_app/35887';
+import { OrgUserRoleEnum } from '../figma_app/35887';
 import { bD, Ug, vt } from '../figma_app/45218';
 import { FEditorType } from '../figma_app/53721';
 import { Ni } from '../figma_app/188152';
@@ -297,7 +297,7 @@ export function $$eS27(e, t) {
       if (!r) return !1;
       let n = t.orgById[r];
       let a = t.orgUsersByOrgId[r][e.id];
-      return hasOrgAccess(a, n, jh.ADMIN);
+      return hasOrgAccess(a, n, OrgUserRoleEnum.ADMIN);
     }) || null;
     return e ? {
       userId: e.id,

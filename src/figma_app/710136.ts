@@ -2,10 +2,10 @@ import { useState, useCallback, useEffect } from "react";
 import { ViewType, DesignWorkspace, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { uh as _$$uh, Kh } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { m0, vn, E3 } from "../figma_app/976749";
 import { k as _$$k } from "../figma_app/564183";
@@ -30,12 +30,12 @@ export function $$S1(e) {
   return topLevelMode !== ViewType.DEV_HANDOFF && !e && r === Q.REQUEST_NEEDED;
 }
 export function $$v0(e) {
-  let t = ZC(e);
+  let t = useLatestRef(e);
   return void 0 !== t && t !== e;
 }
 export function $$A3() {
   let e = _$$k();
-  let t = _I();
+  let t = useCanAccessFullDevMode();
   let r = !!hA() && t;
   return !e && (r || T() && getFeatureFlags().dt_vscode_ready_for_dev);
 }
@@ -57,7 +57,7 @@ export function $$C2() {
   let t = useAtomWithSubscription(Fj);
   let r = useAtomWithSubscription(go);
   let i = E3();
-  let a = ZC(i);
+  let a = useLatestRef(i);
   let [l, d] = useState(null);
   let c = p8("isReadOnly");
   let u = U("ui3_toolbelt");

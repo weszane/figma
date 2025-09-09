@@ -6,10 +6,10 @@ import { useStableMemo } from "../905/19536";
 import { parsePxInt } from "../figma_app/783094";
 import { f as _$$f } from "../905/412913";
 import { Oo } from "../905/709171";
-import { Kz, dp } from "../905/760074";
+import { isBranchAlt, matchesSourceKey } from "../905/760074";
 import { Fl } from "../figma_app/236178";
 import { NX, Qy } from "../figma_app/777207";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { bO, z5 } from "../figma_app/936646";
 import { ti, uJ } from "../figma_app/646357";
@@ -31,8 +31,8 @@ export function $$R1(e) {
 }
 export function $$N0(e, t) {
   let i = useSelector(i => _$$b(i, e, t));
-  let n = q5();
-  let a = n && (Kz(n) ? n.sourceFileKey : n.key);
+  let n = selectCurrentFile();
+  let a = n && (isBranchAlt(n) ? n.sourceFileKey : n.key);
   return a && Oo(i?.data, a) ? null : i;
 }
 export function $$P2() {
@@ -73,12 +73,12 @@ export function $$D5(e, t, i) {
 }
 let L = _$$f();
 export function $$F6(e, t) {
-  let i = q5();
+  let i = selectCurrentFile();
   let a = je();
   let s = sZ();
   let l = Fl();
   let d = Oe(s) && NX(l);
-  let f = useCallback(t => !(0 === Sp(t, e) || t.fileKey === i?.key || dp({
+  let f = useCallback(t => !(0 === Sp(t, e) || t.fileKey === i?.key || matchesSourceKey({
     file_repo_id: i?.fileRepoId ?? null,
     source_file_key: i?.sourceFileKey ?? null
   }, t.fileKey)), [i?.fileRepoId, i?.key, i?.sourceFileKey, e]);
@@ -144,7 +144,7 @@ export function $$j4({
 }
 let U = _$$f();
 export function $$B3(e, t, i, d, c, u) {
-  let p = q5();
+  let p = selectCurrentFile();
   let m = p?.key ?? "__OPEN_FILE_KEY__";
   let g = p ? _$$l(p.libraryKey) : void 0;
   let f = $$R1(e);

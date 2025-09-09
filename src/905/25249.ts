@@ -14,8 +14,8 @@ import { L as _$$L } from "../905/857916";
 import { r as _$$r } from "../905/857502";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
-import { Rs } from "../figma_app/288654";
-import { oY } from "../905/485103";
+import { useSubscription } from "../figma_app/288654";
+import { useWebLoggerTimerEffect } from "../905/485103";
 import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { qc } from "../figma_app/858013";
@@ -34,21 +34,21 @@ import { FPermissionLevelType, FTeamAccessPermissionType, FResourceCategoryType,
 import { FolderPermissions } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { H_ } from "../figma_app/336853";
-import { C1 } from "../figma_app/12796";
+import { getPermissionLevelName } from "../figma_app/12796";
 import { ob, t9, yI } from "../905/915142";
 import { getReadOnlyOverrideMessageForFolder } from "../figma_app/642025";
-import { vj } from "../figma_app/465071";
+import { isProOrStudentPlan } from "../figma_app/465071";
 import { rq } from "../905/351260";
 import { bp, Wj } from "../905/913057";
 import { UpsellModalType } from "../905/165519";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
 import { registerModal } from "../905/102752";
 import { e as _$$e2 } from "../905/393279";
 import { Ni, Dp } from "../905/249410";
 import { o6, gy } from "../905/986349";
 import { E as _$$E } from "../905/632989";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { B as _$$B } from "../905/714743";
 import { z6 } from "../figma_app/805373";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -241,7 +241,7 @@ function eL(e) {
             children: ET(e.sharingAudienceControl, e.org, e.workspace, !1, folder.name)
           }) : (() => {
             let e = team ? team.name : getI18nString("folder_permissions_modal.project_name_s_team", {
-              projectName: EJ(folder.name, 30)
+              projectName: truncate(folder.name, 30)
             });
             return jsx("span", {
               className: team && folder.is_invite_only ? mL : void 0,
@@ -406,11 +406,11 @@ export let $$eK0 = registerModal(function (e) {
   let en = M4.Folder.useValue(folderId).data;
   let er = useSelector(e => en?.team_id && e.teams[en.team_id] || null);
   let ea = sZ() || null;
-  let [es, eo] = useState(e6.VIEWER);
+  let [es, eo] = useState(AccessLevelEnum.VIEWER);
   let [el, ed] = useState(0);
   let [ec, eu] = useState(!1);
   let ep = useDispatch();
-  let em = Rs(FolderPermissions, {
+  let em = useSubscription(FolderPermissions, {
     projectId: folderId,
     currentOrgId: ea?.id || null
   }, {
@@ -422,7 +422,7 @@ export let $$eK0 = registerModal(function (e) {
   let {
     Sprig
   } = useSprigWithSampling();
-  oY("loaded" === em.status, e => {
+  useWebLoggerTimerEffect("loaded" === em.status, e => {
     let t = em.data?.project?.roles?.length ?? 0;
     let i = "unknown";
     i = t <= 100 ? "small" : t <= 300 ? "medium" : "large";
@@ -547,7 +547,7 @@ export let $$eK0 = registerModal(function (e) {
     e1(teamAccess);
   }, [sharingAudienceControl, eZ, eX, e1, teamAccess]);
   let e4 = !1;
-  eC ? e4 = !0 : vj(planPublicInfo) && (e4 = !0);
+  eC ? e4 = !0 : isProOrStudentPlan(planPublicInfo) && (e4 = !0);
   let {
     sharingSuggestions,
     sharingSuggestionIdsToExclude,
@@ -584,7 +584,7 @@ export let $$eK0 = registerModal(function (e) {
     return teamAccess !== FTeamAccessPermissionType.TEAM_ACCESS_DISABLED || i ? t : null;
   };
   let te = () => {
-    let e = e => e.level !== e6.OWNER && e.level !== e6.ADMIN && !!canModifyRoles;
+    let e = e => e.level !== AccessLevelEnum.OWNER && e.level !== AccessLevelEnum.ADMIN && !!canModifyRoles;
     return jsx(Fragment, {
       children: eR.map((t, i) => jsx(_$$O, {
         canEditRole: e(t),
@@ -725,8 +725,8 @@ export let $$eK0 = registerModal(function (e) {
           children: eg ? {
             0: (() => {
               let e = [];
-              canEdit && e.push(e6.EDITOR);
-              canRead && e.push(e6.VIEWER);
+              canEdit && e.push(AccessLevelEnum.EDITOR);
+              canRead && e.push(AccessLevelEnum.VIEWER);
               debug(e.length > 0, "there should be at least one role (the user's own)");
               return jsxs(Fragment, {
                 children: [_$$r2(q) ? jsx(_$$X, {
@@ -769,7 +769,7 @@ export let $$eK0 = registerModal(function (e) {
                         inviteLevel: es,
                         source: "folder-permissions-modal"
                       }),
-                      getSelectText: C1,
+                      getSelectText: getPermissionLevelName,
                       hideDropdownOnEmpty: !0,
                       inviteLevel: es,
                       onHideModal: eY,

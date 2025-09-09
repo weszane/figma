@@ -16,7 +16,7 @@ import { logInfo } from "../905/714362";
 import { SH } from "../figma_app/141320";
 import { dK, xt, x2 } from "../figma_app/149304";
 import { XHR } from "../905/910117";
-import { DI } from "../figma_app/687776";
+import { FileCreationPermissionsGenerator } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b } from "../905/620668";
@@ -29,10 +29,10 @@ import { yJ as _$$yJ } from "../figma_app/240735";
 import { c as _$$c } from "../905/370443";
 import { GS, Cu } from "../figma_app/314264";
 import { mu, yn } from "../figma_app/840917";
-import { Kz } from "../905/760074";
+import { isBranchAlt } from "../905/760074";
 import { Xg } from "../figma_app/199513";
 import { W as _$$W } from "../905/242083";
-import { UE } from "../905/628874";
+import { setupFileObject } from "../905/628874";
 import { A7 } from "../905/87821";
 import { getFeatureFlags } from "../905/601108";
 import { getFontMetadataList } from "../905/165290";
@@ -76,7 +76,7 @@ import { Dm } from "../figma_app/8833";
 import { registerLegacyModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { isEditorTypeEnabled, getLastUsedEditorType, setLastUsedEditorType } from "../905/298923";
-import { tn } from "../figma_app/473493";
+import { canAccessFullDevMode } from "../figma_app/473493";
 import { sf } from "../905/929976";
 import { mapToEditorType } from "../figma_app/300692";
 import { z4 } from "../905/37051";
@@ -359,7 +359,7 @@ let $$ej0 = createOptimistThunk(async (e, {
     let n = t.getState();
     let r = n.openFile;
     let a = r && !r.parentOrgId && !r.teamId;
-    if (!tn(n) && a && i === FEditorType.DevHandoff) {
+    if (!canAccessFullDevMode(n) && a && i === FEditorType.DevHandoff) {
       t.dispatch(sf({
         ...e,
         editorType: FEditorType.Design
@@ -424,11 +424,11 @@ let $$ej0 = createOptimistThunk(async (e, {
     isFavorited: !!l.openFile?.isFavorited
   };
   let I = p ? {
-    ...DI.disabled(),
+    ...FileCreationPermissionsGenerator.disabled(),
     ...p
   } : null;
   e.dispatch(eU({
-    file: UE(u, {
+    file: setupFileObject(u, {
       folder: I,
       team: h,
       repo: g,
@@ -496,7 +496,7 @@ let eU = createOptimistThunk((e, t) => {
       file: t.file
     }));
   }
-  Kz(file) && desktopAPIInstance?.setIsBranch(!0);
+  isBranchAlt(file) && desktopAPIInstance?.setIsBranch(!0);
   let s = t.fullscreenEditorType;
   s && mapEditorTypeToFileType(s) === t.file.editorType || (s = mapFileTypeToEditorType(t.file.editorType));
   _$$R.setEditorType(s);

@@ -15,7 +15,7 @@ import f from "../vendor/524488";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
-import { EJ } from "../figma_app/930338";
+import { truncate } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -24,9 +24,9 @@ import { hO, cN, d3, G4, G1 } from "../figma_app/545293";
 import { fi } from "../figma_app/913823";
 import { u as _$$u } from "../905/389684";
 import { g5 } from "../figma_app/178752";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { oh } from "../905/18797";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { l as _$$l } from "../905/202425";
 import { Wv } from "../figma_app/633080";
@@ -120,7 +120,7 @@ export function $$ef1({
     presets,
     librariesForConnectedProject
   } = _$$g2();
-  let et = tS();
+  let et = useCurrentFileKey();
   let er = useAtomWithSubscription(Rt);
   let ei = useSelector(_$$l);
   let ea = useAtomWithSubscription(Sh);
@@ -358,7 +358,7 @@ export function $$eE0({
 }) {
   let d = _$$V();
   let c = _$$eH();
-  let u = T5("AssetsTabDetailView").unwrapOr(null);
+  let u = useCurrentPrivilegedPlan("AssetsTabDetailView").unwrapOr(null);
   let _ = u?.name;
   let m = useRef(null);
   let {
@@ -562,7 +562,7 @@ export function $$eE0({
           className: _$$s.textBodyMediumStrong.$,
           children: renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion_bold_text")
         }),
-        orgText: EJ(_, 20)
+        orgText: truncate(_, 20)
       }) : renderI18nText("assets_in_actions.fragments_section.empty_state.text")
     }), jsx("span", {
       className: _$$s.mlAuto.textBodyMediumStrong.colorTextBrand.$,

@@ -12,23 +12,23 @@ import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { S2, px, j_ } from "../figma_app/465071";
+import { useTeamPlanFeatures, useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
 import { J7 } from "../figma_app/650409";
 import { DashboardSections } from "../905/548208";
 import { o0 } from "../905/844131";
 import { l as _$$l } from "../4452/447644";
 import { nF, lF } from "../4452/710166";
-if (443 == require.j) { }
+if (443 == require.j) {}
 export function $$T0() {
   let e = useDispatch();
-  let t = S2();
-  let r = px();
+  let t = useTeamPlanFeatures();
+  let r = useTeamPlanUser();
   let T = RR();
   let E = _6();
   let I = useSelector(e => getPermissionsStateMemoized(e));
   let N = useSelector(e => e.teams);
-  let C = j_(r);
+  let C = useIsOrgAdminUser(r);
   let S = "loaded" === C.status && pO({
     isAdminOrg: C.data,
     permissions: I,

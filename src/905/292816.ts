@@ -10,7 +10,7 @@ import { tI } from "../figma_app/599327";
 import { cj, As } from "../figma_app/84966";
 import { i as _$$i } from "../figma_app/127401";
 import { O } from "../figma_app/710329";
-import { OL } from "../figma_app/421473";
+import { FOrganizationLevelType } from "../figma_app/421473";
 function f(e, t) {
   return getI18nString("general.price_per_month", {
     priceString: t.formatMoney(e, {
@@ -137,7 +137,7 @@ function y({
   });
 }
 export function $$b0(e) {
-  let t = e.planKey.type === OL.TEAM && e.showMonthlyAnnualPriceComparison;
+  let t = e.planKey.type === FOrganizationLevelType.TEAM && e.showMonthlyAnnualPriceComparison;
   return jsxs(Y, {
     direction: "horizontal",
     spacing: 4,

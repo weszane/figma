@@ -14,16 +14,16 @@ import { showModalHandler } from "../905/156213";
 import { hs, G6, j2 } from "../figma_app/84966";
 import { sZ } from "../905/845253";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { aD, Sn, EC } from "../469e6e40/875985";
 import { tQ } from "../469e6e40/878707";
 import { A } from "../svg/330858";
 var l = r;
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 export var $$k0 = (e => (e.FILE_BROWSER = "file_browser", e.BILLING = "billing", e))($$k0 || {});
 export function $$E1(e) {
-  let t = T5("AdminRenewalBanner").unwrapOr(null);
+  let t = useCurrentPrivilegedPlan("AdminRenewalBanner").unwrapOr(null);
   if (!R() || !t?.key.parentId) return null;
   switch (t.key.type) {
     case FOrganizationLevelType.TEAM:

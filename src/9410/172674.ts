@@ -6,7 +6,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -142,9 +142,9 @@ export function $$j1(e) {
   if (0 === e.length) throw new v();
 }
 export function $$I3(e, t) {
-  let i = ZC(e);
+  let i = useLatestRef(e);
   let n = i !== e && isValidSessionLocalID(parseSessionLocalID(e)) && isValidSessionLocalID(parseSessionLocalID(i));
-  let a = ZC(t) !== t && !t;
+  let a = useLatestRef(t) !== t && !t;
   useEffect(() => {
     pP(JT.SLIDES_GENERATE_SPEAKER_NOTES).state === qy.RUNNING && i && (n ? k(new b(), i) : a && k(new C(), i));
   }, [a, n, i]);

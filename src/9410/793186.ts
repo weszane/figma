@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, useLayoutEffect, useEffect, useMemo } fr
 import { useSelector, useDispatch } from "react-redux";
 import { DiagramElementType, InteractionCpp, Fullscreen, AppStateTsApi, LayoutSizingType, Axis, HandoffBindingsCpp, LayoutTabType, UIVisibilitySetting, DesignGraphElements, ViewType } from "../figma_app/763686";
 import { memoizeByArgs } from "../figma_app/815945";
-import { xo } from "../figma_app/473493";
+import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
 import { l7, ZO } from "../figma_app/88239";
 import { mV } from "../905/837497";
@@ -13,7 +13,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { k as _$$k } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { debugState } from "../905/407919";
 import { uE } from "../figma_app/314264";
@@ -47,7 +47,7 @@ import { _X, Z0 } from "../figma_app/62612";
 import { permissionScopeHandler as _$$l2, scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { U as _$$U } from "../figma_app/901889";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { renameNode } from "../figma_app/741237";
 import { W as _$$W, d as _$$d } from "../figma_app/833988";
@@ -502,7 +502,7 @@ function eh() {
       e && (_$$l2.user("rename-frame", () => renameNode(i, t)), n({
         newTitle: t,
         nodeType: "FRAME"
-      }), t !== e && _$$d(t).length > 0 && YQ({
+      }), t !== e && _$$d(t).length > 0 && handleAtomEvent({
         id: "frame_node_name_changed_with_rfd_indicator",
         properties: {
           nodeId: i
@@ -845,7 +845,7 @@ export function $$eD3() {
   return jsx(Fragment, {});
 }
 export function $$eM0(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let i = selectCurrentUser();
   return e.showStartModal && i && t && t.key ? jsx(ek, {
     fileKey: t.key
@@ -912,7 +912,7 @@ export function $$eU1({
   commentsDetailContainerRef: e
 }) {
   let t = p8("topLevelMode") === ViewType.HISTORY;
-  let i = q5();
+  let i = selectCurrentFile();
   let n = useSelector(e => e.user);
   let o = p8("currentPage");
   let u = useSelector(e => e.comments);
@@ -920,7 +920,7 @@ export function $$eU1({
   let h = _$$e();
   let f = ZO();
   let x = _$$k();
-  let y = xo();
+  let y = useCanUseDevModeDemoFile();
   let b = u.activeThread?.id || null;
   let C = u.showOnlyParticipating;
   let T = u.showResolved;

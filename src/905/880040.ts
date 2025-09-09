@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { Q2, sD } from "../905/937198";
 import { ListCollectionsView } from "../figma_app/43951";
@@ -14,7 +14,7 @@ export function $$c0({
     reportAsSentryError: !0
   });
   let t = (e ?? "") !== "";
-  let i = Rs(ListCollectionsView, {
+  let i = useSubscription(ListCollectionsView, {
     fileKey: e ?? ""
   }, {
     enabled: t

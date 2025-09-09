@@ -18,7 +18,7 @@ import { oB } from "../905/929976";
 import { Rw } from "../figma_app/91703";
 import { BE } from "../figma_app/844435";
 import { fullscreenValue } from "../figma_app/455680";
-import { Eh, cb } from "../figma_app/12796";
+import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
 import { createDeferredPromise } from "../905/263346";
@@ -78,7 +78,7 @@ class K extends RecordingPureComponent {
         return;
       }
       t = this.firstOptionalIndex - 1;
-    } else if ("final" === e) t = this.props.parameters.length - 1; else {
+    } else if ("final" === e) t = this.props.parameters.length - 1;else {
       if (0 === e) {
         this.props.onExitParameterEntry();
         return;
@@ -654,10 +654,10 @@ export let $$H2 = connect(function (e) {
     localExtensions: e.localPlugins,
     org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
     editorType: t,
-    userCanViewPlugins: Eh(e),
+    userCanViewPlugins: canPerformAction(e),
     activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin,
     userCanViewWidgets: BE(e),
-    userCanRunExtensions: cb(e)
+    userCanRunExtensions: canRunExtensions(e)
   };
 }, function (e) {
   return {
@@ -710,7 +710,7 @@ class W extends RecordingPureComponent {
 }
 function Y(e, t) {
   let i = "";
-  if (e.iconUrl) i = e.iconUrl; else if (e.icon && "string" == typeof e.icon) i = "data:image/svg+xml;base64," + encodeStringToBase64(e.icon); else {
+  if (e.iconUrl) i = e.iconUrl;else if (e.icon && "string" == typeof e.icon) i = "data:image/svg+xml;base64," + encodeStringToBase64(e.icon);else {
     if (!e.icon || "string" == typeof e.icon) return;
     i = "data:application/octet-stream;base64," + encodeBase64(e.icon);
   }

@@ -9,19 +9,19 @@ import { memoizeWeak } from "../figma_app/815945";
 import u from "../vendor/983401";
 import _ from "../vendor/239910";
 import m from "../vendor/626715";
-import { ap, Rs } from "../figma_app/288654";
+import { useSubscriptionAnalytics, useSubscription } from "../figma_app/288654";
 import { Xm, e1, gB } from "../905/723791";
 import { B2 } from "../905/879323";
 import { Nf } from "../figma_app/864378";
 import { n1 } from "../figma_app/657017";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { eM } from "../figma_app/646357";
 import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
 import { KC, Qp, SS as _$$SS } from "../figma_app/349248";
 import { jz } from "../figma_app/825489";
 import { Ns } from "../figma_app/409131";
 import { wJ } from "../figma_app/630951";
-import { i as _$$i } from "../905/651613";
+import { createFileLibraryKeys } from "../905/651613";
 import { hE, D1 } from "../figma_app/852050";
 var p = u;
 var h = _;
@@ -58,14 +58,14 @@ export function $$k1({
   fileKey: e,
   libraryKey: t
 }) {
-  $$L0(_$$i(e, t));
+  $$L0(createFileLibraryKeys(e, t));
   return null;
 }
 export function $$M4({
   children: e,
   maxSubscriptionsBeforeCleanup: t = 20
 }) {
-  let r = tS();
+  let r = useCurrentFileKey();
   useAtomValueAndSetter(jz);
   let [s, o] = useState({});
   let c = useCallback((e, t) => {
@@ -210,7 +210,7 @@ function F({
   subscription: e,
   fileKey: t
 }) {
-  ap(e, "Library Data Subscription Load Time", {
+  useSubscriptionAnalytics(e, "Library Data Subscription Load Time", {
     fileKey: t,
     numStyles: "loaded" === e.status ? e.data.numStyles : 0
   });
@@ -220,7 +220,7 @@ let j = memo(function ({
   fileKey: e,
   onChange: t
 }) {
-  let r = e !== tS();
+  let r = e !== useCurrentFileKey();
   let n = wJ(e);
   let a = n1();
   let {
@@ -242,7 +242,7 @@ let j = memo(function ({
     },
     options: void 0
   };
-  let d = Rs(view, args, options);
+  let d = useSubscription(view, args, options);
   useEffect(() => {
     t(e, d);
   }, [t, e, d]);

@@ -23,7 +23,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/978641";
 import { ce, Lm, U_, mF } from "../figma_app/755939";
 import { c as _$$c } from "../905/370443";
-import { T5 as _$$T } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Ib } from "../905/129884";
 import { zA, o6, VU } from "../1250/322393";
 var h = f;
@@ -210,7 +210,7 @@ let K = {
 export function $$Y2({
   onPointerDown: e
 }) {
-  let t = _$$T("useAllowInternalTemplatesCooper");
+  let t = useCurrentPrivilegedPlan("useAllowInternalTemplatesCooper");
   let n = "loaded" === t.status ? t.data?.name : void 0;
   return jsx(_$$E, {
     onClick: e,

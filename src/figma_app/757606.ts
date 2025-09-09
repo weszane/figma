@@ -9,7 +9,7 @@ import { IW, Lp } from "../figma_app/563413";
 import { ky, Dy } from "../figma_app/925970";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { k as _$$k } from "../905/540025";
 import { K } from "../905/954649";
 let f = e => !!e.isNewAssetsPanel;
@@ -42,7 +42,7 @@ export function $$y1(e) {
     recordingKey
   } = e;
   let R = useDispatch();
-  let L = q5();
+  let L = selectCurrentFile();
   let P = useSelector(e => e.search.sessionId);
   let D = _$$k();
   let k = useRef(null);

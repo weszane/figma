@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { I7 } from "../figma_app/594947";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { wA } from "../figma_app/336853";
 function l() {
   let e = useSelector(e => wA(e));
-  let t = q5();
+  let t = selectCurrentFile();
   return {
     currentOrg: e,
     currentTeam: t?.team ?? null,

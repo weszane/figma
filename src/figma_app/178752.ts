@@ -1,12 +1,12 @@
 import { useMemo, useEffect } from "react";
 import { useSelector, useStore } from "react-redux";
-import { ZC } from "../figma_app/39751";
-import { Rs } from "../figma_app/288654";
+import { useLatestRef } from "../figma_app/922077";
+import { useSubscription } from "../figma_app/288654";
 import { eB } from "../figma_app/933328";
 import { LH } from "../905/872904";
 import { WorkspaceSubscribedLibrariesForFile } from "../figma_app/43951";
 import { PW } from "../figma_app/633080";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 export function $$_1(e) {
   let t = useSelector(e => e.library);
@@ -30,15 +30,15 @@ export function $$_1(e) {
   }, [a, e, t, r]);
 }
 export function $$h0() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = LH();
   let r = useStore();
-  let c = Rs(WorkspaceSubscribedLibrariesForFile, {
+  let c = useSubscription(WorkspaceSubscribedLibrariesForFile, {
     fileKey: e
   }, {
     enabled: !!e && !!t
   });
-  let p = ZC(c);
+  let p = useLatestRef(c);
   useEffect(() => {
     if (!p?.data || !c.data) return;
     let e = c.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions || [];

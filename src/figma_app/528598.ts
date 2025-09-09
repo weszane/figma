@@ -24,7 +24,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import C from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { X as _$$X } from "../905/606795";
 import { Uz } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -43,7 +43,7 @@ import { setHoveredComponentPropDef } from "../figma_app/741237";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { J as _$$J } from "../905/95677";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { PW } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -190,7 +190,7 @@ new class {
     e?.skipFlush !== !0 && (await this.flushBufferAsync());
     this.calls = [];
   }
-  async flushBufferAsync() { }
+  async flushBufferAsync() {}
   addCall(e) {
     this.calls.push(e);
   }
@@ -908,7 +908,7 @@ function eq({
   submitBehaviorAssignment: E
 }) {
   let y = useDispatch();
-  let b = useSelector(sS);
+  let b = useSelector(selectOpenFileKey);
   let {
     preferredValues,
     preferredValuesFetchError,
@@ -1082,7 +1082,7 @@ function e0({
   disableAi: l
 }) {
   let d = useMemo(() => eD(e), [e]);
-  let u = ZC(d);
+  let u = useLatestRef(d);
   let _ = useRef(null);
   let [h] = useState(!d.image);
   useEffect(function () {
@@ -1096,8 +1096,8 @@ function e0({
   let T = useRef(!1);
   let [I, S] = useState(null);
   let v = !!d.animatedImage;
-  let A = ZC(!!d.animatedImage);
-  let x = ZC(e);
+  let A = useLatestRef(!!d.animatedImage);
+  let x = useLatestRef(e);
   let N = useCallback(() => {
     S(null);
     T.current = !0;

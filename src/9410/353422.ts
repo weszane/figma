@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { o as _$$o } from "../905/808775";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { zg } from "../figma_app/193867";
 import { $A } from "../905/862883";
 export function $$d1() {
-  let e = !!q5()?.org;
+  let e = !!selectCurrentFile()?.org;
   let t = useSelector(e => zg(e.selectedView) && !e.user);
   return !!(e && !t);
 }

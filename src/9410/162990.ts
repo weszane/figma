@@ -1,12 +1,12 @@
 import { useState, useLayoutEffect, useCallback } from "react";
 import { shallowEqual } from "react-redux";
 import { getLocalStorage } from "../905/657224";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 export function $$o0({
   defaultIsOpen: e
 }) {
   let [t, i] = function (e) {
-    let t = tS();
+    let t = useCurrentFileKey();
     let [i, o] = useState(() => t ? l(t) ?? e : e);
     useLayoutEffect(() => {
       if (!t) return;

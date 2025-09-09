@@ -7,7 +7,7 @@ import { uM } from "../905/738636";
 import { b as _$$b } from "../905/985254";
 import { e } from "../905/621515";
 import { xA } from "../905/766303";
-import { Cq, q5 } from "../figma_app/516028";
+import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { WO, Ai, jm, Y3 } from "../figma_app/242339";
@@ -527,7 +527,7 @@ export function $$eo1() {
     let r = selectCurrentUser();
     let n = useDispatch();
     let s = _$$f("has_cursor_bot_onboarding_v2");
-    let o = Cq({
+    let o = useOpenFileObjectWithSinatraType({
       useSinatraType: !0
     });
     let l = WO(r?.id, o, ["exp_cursor_bot_onboarding"]);
@@ -592,7 +592,7 @@ export function $$eo1() {
   let z = Y3();
   let X = jm(H);
   let Z = z || X;
-  let Q = q5()?.canEdit;
+  let Q = selectCurrentFile()?.canEdit;
   useEffect(() => {
     !Z && !isShowing && B && K && R && D && Q && show();
   }, [Z, isShowing, show, B, K, R, D, Q]);

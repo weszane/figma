@@ -17,7 +17,7 @@ import { Oo } from "../905/709171";
 import { Z } from "../905/104740";
 import { QZ } from "../figma_app/62612";
 import { eY } from "../figma_app/722362";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { Av, Dg, eS, aD } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { f5, t, $4, O1 } from "../figma_app/889655";
@@ -218,7 +218,7 @@ export function $$j2(e) {
     let l = useDispatch();
     let d = useSelector(e => e.theme.visibleTheme);
     let c = Bx(d);
-    let g = selectWithShallowEqual(e => sS(e) || "");
+    let g = selectWithShallowEqual(e => selectOpenFileKey(e) || "");
     let y = Oo(e, g);
     let b = useMemo(() => {
       if (null == t || "" === t) return Ok();

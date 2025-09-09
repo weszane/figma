@@ -10,7 +10,7 @@ import { h as _$$h } from "../905/207101";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/985254";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { N as _$$N } from "../905/73189";
@@ -25,10 +25,10 @@ export function $$b1({
 }) {
   let I = useDispatch();
   let S = selectCurrentUser();
-  let v = q5();
+  let v = selectCurrentFile();
   !function () {
     let e = selectCurrentUser();
-    let t = q5();
+    let t = selectCurrentFile();
     _$$h(() => {
       analyticsEventManager.trackDefinedEvent("preset_libraries.apple_eula_displayed", {
         userId: e?.id ?? void 0,

@@ -22,6 +22,7 @@ declare global {
     DESKTOP_CLIENT_ID: string
     scheduler: any
     _fullscreen_:any
+    setDevLogAnalytics: any
   }
 
   interface globalThis {

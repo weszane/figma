@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { atom, createRemovableAtomFamily, useAtomWithSubscription } from "../figma_app/27355";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { gB } from "../905/723791";
 import { JB } from "../figma_app/657017";
 import { M } from "../figma_app/155411";
@@ -10,12 +10,12 @@ import { h0 } from "../905/845253";
 import { DQ } from "../905/872904";
 import { FPlanNameType } from "../figma_app/191312";
 import { LibraryPresetSubscriptionsV2, LibraryOrgSubscriptions, WorkspaceSubscribedLibrariesForTeam, LibrarySubscriptionsForTeam, LibraryTeamSubscriptions, LibraryUserSubscriptions } from "../figma_app/43951";
-import { zl } from "../905/276025";
+import { getPlanFeaturesAtomFamily } from "../905/276025";
 import { Me, jv } from "../figma_app/598018";
 let _ = atom(e => {
   let t = e(DQ);
   let i = M();
-  let n = e(zl(!0)).data?.tier !== FPlanNameType.STARTER;
+  let n = e(getPlanFeaturesAtomFamily(!0)).data?.tier !== FPlanNameType.STARTER;
   let {
     data
   } = null != i ? e(LibraryPresetSubscriptionsV2.Query({
@@ -129,7 +129,7 @@ export function $$x2() {
     if (!e) return;
     let t = {};
     for (let i of e) {
-      let e = oA(i.libraryKey);
+      let e = getResourceDataOrFallback(i.libraryKey);
       e && (t[_$$l(e)] = {
         design: !0,
         figjam: !1,

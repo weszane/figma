@@ -24,9 +24,9 @@ import { IW } from "../figma_app/563413";
 import { renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { LR } from "../figma_app/120210";
-import { tB } from "../figma_app/516028";
+import { selectOpenFile } from "../figma_app/516028";
 import { B0 } from "../figma_app/807786";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { je } from "../figma_app/155728";
 import { CK } from "../figma_app/517115";
 import { rp } from "../figma_app/703988";
@@ -672,10 +672,10 @@ function eI(e) {
   } = useContext(q);
   let [eD, eL] = useState([]);
   let eF = Nv(!0);
-  let eM = useSelector(tB);
+  let eM = useSelector(selectOpenFile);
   let ej = _$$S2.useOpenFileProperties();
   let eU = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : void 0);
-  let eB = X$("_DrilldownPicker").unwrapOr(null)?.tier;
+  let eB = useCurrentPublicPlan("_DrilldownPicker").unwrapOr(null)?.tier;
   let eV = CK();
   useEffect(() => {
     eL(searchFilter(eN));

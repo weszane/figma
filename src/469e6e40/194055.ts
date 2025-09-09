@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useEffect, useRef, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { CY, u4 } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
@@ -16,12 +16,12 @@ import { XB } from "../figma_app/481749";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { A as _$$A2 } from "../905/72153";
 import { ExtensionActivityLogHistoryView, PluginAllowlistManagementModalView } from "../figma_app/43951";
-import { No, T5, px } from "../figma_app/465071";
+import { useTeamPlanPublicInfo, useCurrentPrivilegedPlan, useTeamPlanUser } from "../figma_app/465071";
 import { X as _$$X } from "../5430/785696";
 import { J as _$$J } from "../905/403084";
 import { ox, ab } from "../figma_app/870683";
 import { OJ } from "../905/519092";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { u as _$$u } from "../4452/434813";
 import { z as _$$z } from "../905/284530";
 import { kq } from "../figma_app/563413";
@@ -47,7 +47,7 @@ import { getUserId, selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { A as _$$A5 } from "../5724/933949";
 import { $J } from "../905/491152";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { x as _$$x } from "../5430/373843";
 import { L as _$$L } from "../1577/16430";
 import { qT, Lq } from "../figma_app/844435";
@@ -55,7 +55,7 @@ import { u as _$$u2 } from "../905/952696";
 import { X as _$$X2, b as _$$b } from "../5430/435821";
 import { I as _$$I } from "../905/343721";
 import { aI, JA, lx } from "../figma_app/558929";
-import { nx } from "../figma_app/12796";
+import { hasExternalRestrictedOrgId } from "../figma_app/12796";
 import { mapToEditorType } from "../figma_app/300692";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
@@ -168,7 +168,7 @@ function q({
     return e;
   }, [l]);
   let [j, k] = useState(t.isPluginAllowlisted);
-  let E = ZC(j);
+  let E = useLatestRef(j);
   let S = useMemo(() => l.some(e => null === e.workspaceId), [l]);
   let T = useCallback(() => (t.workspaces ?? []).reduce((e, t) => (e[t.id] = !!j || t.isPluginAllowlisted, e), {}), [t.workspaces, j]);
   let [R, O] = useState(T());
@@ -585,7 +585,7 @@ function en({
 }
 var es = (e => (e[e.Users = 0] = "Users", e[e.Workspaces = 1] = "Workspaces", e))(es || {});
 function ei(e) {
-  let t = No().unwrapOr(null);
+  let t = useTeamPlanPublicInfo().unwrapOr(null);
   let a = t?.tier !== FPlanNameType.ENTERPRISE;
   let i = e.usageData || (a ? ee : Z);
   let {
@@ -815,7 +815,7 @@ function ec(e) {
     orgId,
     extensionId
   } = e;
-  let s = Rs(ExtensionActivityLogHistoryView, {
+  let s = useSubscription(ExtensionActivityLogHistoryView, {
     userId: getUserId(),
     actedOnIdOrKey: extensionId,
     orgId
@@ -940,7 +940,7 @@ function ej({
     currentPluginVersion
   } = t;
   if (!currentPluginVersion) return null;
-  let i = $M(t.installCount);
+  let i = formatNumber(t.installCount);
   let r = currentPluginVersion.name ?? "";
   let l = currentPluginVersion.description ?? "";
   return jsxs("div", {
@@ -1216,9 +1216,9 @@ function eq(e) {
   }(extension, orgId, mode, resource, source);
   let b = useRef(null);
   let v = selectCurrentUser();
-  let f = T5("UniversalEditorPluginTryButton").unwrapOr(null);
+  let f = useCurrentPrivilegedPlan("UniversalEditorPluginTryButton").unwrapOr(null);
   let y = f?.name;
-  let w = nx(v);
+  let w = hasExternalRestrictedOrgId(v);
   return jsxs("div", {
     ref: b,
     children: [jsx(_$$$, {
@@ -1269,8 +1269,8 @@ function e$(e) {
     }));
   };
   let x = selectCurrentUser();
-  let b = nx(x);
-  let v = T5("SingleEditorPluginTryButton").unwrapOr(null);
+  let b = hasExternalRestrictedOrgId(x);
+  let v = useCurrentPrivilegedPlan("SingleEditorPluginTryButton").unwrapOr(null);
   let f = v?.name;
   return jsx(_$$$, {
     onClick: () => {
@@ -1306,7 +1306,7 @@ function eB(e) {
   let {
     Sprig
   } = useSprigWithSampling();
-  let d = px().unwrapOr(null);
+  let d = useTeamPlanUser().unwrapOr(null);
   let c = d?.key?.parentId;
   return jsx(_$$$, {
     onClick: () => {
@@ -1335,7 +1335,7 @@ function eG(e) {
     workspaces
   } = e;
   let d = useDispatch();
-  let c = px().unwrapOr(null);
+  let c = useTeamPlanUser().unwrapOr(null);
   let _ = c?.key?.parentId;
   let {
     Sprig
@@ -1400,7 +1400,7 @@ function ez(e) {
   let {
     Sprig
   } = useSprigWithSampling();
-  let _ = px().unwrapOr(null);
+  let _ = useTeamPlanUser().unwrapOr(null);
   let p = _?.key?.parentId;
   return workspaces.length > 0 ? jsx(_$$$, {
     variant: "primary",
@@ -1449,7 +1449,7 @@ export function $$eV0({
 }) {
   let C = useDispatch();
   let S = _$$A2(t, !0);
-  let N = Rs(PluginAllowlistManagementModalView, {
+  let N = useSubscription(PluginAllowlistManagementModalView, {
     pluginId: t,
     orgId: e
   });

@@ -1,11 +1,11 @@
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { h } from "../905/142086";
-import { e6 } from "../905/557142";
+import { AccessLevelEnum } from "../905/557142";
 import { L } from "../905/657783";
 export function $$l2(e, t) {
   let i = (i, n) => {
-    let r = n.requestType === e6.EDITOR && t.isInDraftsFolder && !t.hasOrg;
+    let r = n.requestType === AccessLevelEnum.EDITOR && t.isInDraftsFolder && !t.hasOrg;
     "approved" === i && r && t.isFreeUserOnly ? d(e, i, t.file, t.repo, n) : $$c3(e, i, n);
   };
   return e => ({
@@ -45,10 +45,10 @@ export async function $$c3(e, t, i) {
 }
 export var $$u0 = (e => (e.Approved = "approved", e.Denied = "denied", e.Pending = "pending", e))($$u0 || {});
 export function $$p4(e) {
-  return e === e6.VIEWER ? getI18nString("role_requests.view") : getI18nString("role_requests.edit");
+  return e === AccessLevelEnum.VIEWER ? getI18nString("role_requests.view") : getI18nString("role_requests.edit");
 }
 export function $$m1(e) {
-  return e === e6.VIEWER ? "View" : "Edit";
+  return e === AccessLevelEnum.VIEWER ? "View" : "Edit";
 }
 export const IZ = $$u0;
 export const aD = $$m1;

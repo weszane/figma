@@ -6,7 +6,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { tg, KB, lR } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
 import { e as _$$e } from "../905/621515";
-import { T5, S2, D6, A8, X$ } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, useTeamPlanFeatures, useCurrentPlanUser, checkOrgUserPermission, useCurrentPublicPlan } from "../figma_app/465071";
 import { WZ } from "../905/893645";
 import { F_, EL } from "../905/858282";
 import { rRT, LPt } from "../figma_app/6204";
@@ -24,7 +24,7 @@ import { SidebarRow } from "../451de8f0/94979";
 import { sf } from "../905/929976";
 import { a9 } from "../figma_app/741211";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Xm, gB } from "../905/723791";
 import { MX, RG, EQ, EO } from "../figma_app/684446";
 import { FMemberRoleType, FOrganizationRoleType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
@@ -47,7 +47,7 @@ import { A as _$$A } from "../905/891805";
 import { U as _$$U } from "../905/275247";
 import { Xf, SM } from "../figma_app/153916";
 import { s as _$$s } from "../cssbuilder/589278";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { o as _$$o } from "../469e6e40/744116";
 import { Ii } from "../figma_app/425283";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -68,7 +68,7 @@ import { t as _$$t2 } from "../905/117577";
 import { Wi } from "../figma_app/162641";
 import { Xg } from "../1556/751556";
 function g(e) {
-  let t = T5("AdminNavigationOnboardingOverlay");
+  let t = useCurrentPrivilegedPlan("AdminNavigationOnboardingOverlay");
   let a = useMemo(() => t.transform(e => e.name), [t]);
   let {
     show,
@@ -305,7 +305,7 @@ function ey(e) {
   let c = _6();
   let _ = "workspace" !== c.view && "licenseGroup" !== c.view && c.view === e.selectViewArgs.view && ("orgAdminSettings" === c.view && "orgAdminSettings" === e.selectViewArgs.view ? c.orgAdminSettingsViewTab === e.selectViewArgs.orgAdminSettingsViewTab : "teamAdminConsole" === c.view && "teamAdminConsole" === e.selectViewArgs.view ? c.teamAdminConsoleViewTab === e.selectViewArgs.teamAdminConsoleViewTab : void 0);
   let u = useCallback(() => {
-    !_ && (preNavAction && preNavAction(), d(sf(selectViewArgs)), webEventId && YQ({
+    !_ && (preNavAction && preNavAction(), d(sf(selectViewArgs)), webEventId && handleAtomEvent({
       id: webEventId
     }));
   }, [_, d, preNavAction, selectViewArgs, webEventId]);
@@ -352,7 +352,7 @@ function eC() {
   });
 }
 function eS() {
-  let e = S2().unwrapOr(null);
+  let e = useTeamPlanFeatures().unwrapOr(null);
   let t = e?.name;
   return jsxs("div", {
     className: "x78zum5 x1q0g3np xrupf6j xemv814 xkezfkh x6s0dn4 x1nfngrj xuxw1ft",
@@ -508,15 +508,15 @@ function eL() {
   } = function () {
     let e = FC();
     let t = e.orgById[e.currentUserOrgId];
-    let a = D6("useCurrentAdminSettingsViews").unwrapOr(null);
-    let n = !!(a && A8(a, FMemberRoleType.ADMIN));
+    let a = useCurrentPlanUser("useCurrentAdminSettingsViews").unwrapOr(null);
+    let n = !!(a && checkOrgUserPermission(a, FMemberRoleType.ADMIN));
     let s = MX();
     let r = RG();
     let {
       groupsUserIsAdminOf
     } = EQ(s, e.user?.id, !n);
     let o = useMemo(() => r ? groupsUserIsAdminOf : [], [r, groupsUserIsAdminOf]);
-    let d = Rs(AdminSettingsSelectorView, {
+    let d = useSubscription(AdminSettingsSelectorView, {
       orgId: t.id
     }, {
       enabled: kA(t)
@@ -679,7 +679,7 @@ function eD(e) {
   });
 }
 function eM() {
-  let e = X$("Navigation").unwrapOr(null);
+  let e = useCurrentPublicPlan("Navigation").unwrapOr(null);
   let t = e?.key.type;
   let a = e?.key.parentId;
   return e ? jsx("div", {

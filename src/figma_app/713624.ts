@@ -1,8 +1,8 @@
 import { z } from "../905/239603";
 import { FAccessLevelType } from "../figma_app/191312";
-import { kE } from "../figma_app/630077";
+import { TeamSchema } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
-export let $$o1 = kE.extend({
+export let $$o1 = TeamSchema.extend({
   orphaned: z.boolean().optional(),
   member_count: z.number().optional()
 });

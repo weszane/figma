@@ -1,5 +1,5 @@
 import { SubscriptionManager } from '../905/417830';
-import { lw } from '../905/663269';
+import { deepEqual } from '../905/663269';
 import { Xm } from '../905/723791';
 import { WB } from '../905/761735';
 import { debounce } from '../905/915765';
@@ -7,7 +7,7 @@ import { resourceUtils } from '../905/989992';
 import { atom, createRemovableAtomFamily, setupAtomWithMount, atomStoreManager } from '../figma_app/27355';
 import { VariableCollectionByKey, VariablesByVariableCollectionKey, LibraryVariableCollectionDataWithVariables, VariableByKey, LibraryVariableCollectionData, UserColorProfilePreferenceView, LibraryModuleData } from '../figma_app/43951';
 function u(e, t) {
-  return lw(e, t);
+  return deepEqual(e, t);
 }
 function p(e, t) {
   let i = atom(Xm());

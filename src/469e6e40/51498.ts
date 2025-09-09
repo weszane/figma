@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useRef, useEffect, useMemo, forwardRef } from "react";
 import i from "../vendor/128080";
-import { ZC } from "../figma_app/39751";
-import { Rs } from "../figma_app/288654";
+import { useLatestRef } from "../figma_app/922077";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Fj } from "../figma_app/594947";
 import { sZ } from "../905/845253";
@@ -21,7 +21,7 @@ import { showModalHandler, hideModal, popModalStack } from "../905/156213";
 import { a as _$$a } from "../469e6e40/234755";
 import { E as _$$E2 } from "../905/632989";
 import { a as _$$a2 } from "../905/964520";
-import { oA as _$$oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { Wi, JR } from "../figma_app/162641";
 import { v as _$$v } from "../4452/562448";
 import { b as _$$b } from "../4452/320061";
@@ -975,8 +975,8 @@ function eb(e) {
         memberCount: a
       };
     });
-    let s = _$$oA(t.spScimBearerTokenAt);
-    let i = _$$oA(t.nickname) || (a = t.id, `IDP-${a}`);
+    let s = getResourceDataOrFallback(t.spScimBearerTokenAt);
+    let i = getResourceDataOrFallback(t.nickname) || (a = t.id, `IDP-${a}`);
     return {
       id: t.id,
       tenantId: t.id,
@@ -1157,7 +1157,7 @@ function ek(e) {
 export function $$eE0() {
   var e;
   let t = sZ();
-  let a = Rs(OrgIdpManagementPageView, {
+  let a = useSubscription(OrgIdpManagementPageView, {
     orgId: t.id
   });
   let i = (e = a.data?.org ? oA(a.data.org) : null) ? {
@@ -1174,7 +1174,7 @@ export function $$eE0() {
   }, [a, orgDomains]);
   let [h, x] = useState([]);
   let b = $$eS1();
-  let v = ZC(orgDomains);
+  let v = useLatestRef(orgDomains);
   useEffect(() => {
     $$r()(v || [], orgDomains) || _$$z.getOrgDomainMemberCounts({
       org_id: t.id

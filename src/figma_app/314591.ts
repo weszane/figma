@@ -13,7 +13,7 @@ import { isNotNullish } from '../figma_app/95419';
 import { throwTypeError } from '../figma_app/465776';
 import { Fy } from '../figma_app/623300';
 import { SceneGraphHelpers, figmaScopeBindings, ComponentPropType, SymbolInstanceType, FromToDirection, VariantType, DataLoadStatus } from '../figma_app/763686';
-import { zS } from '../figma_app/930338';
+import { kebabToCamel } from '../figma_app/930338';
 import { KV } from '../figma_app/952446';
 export class $$b0 extends $ {
   constructor({
@@ -550,10 +550,10 @@ class S extends _$$E {
   }) {
     let r = [];
     let n = [];
-    for (let [t, n] of Object.entries(e)) r.push(this.scene.generateNodeFieldItem(zS(t), n));
+    for (let [t, n] of Object.entries(e)) r.push(this.scene.generateNodeFieldItem(kebabToCamel(t), n));
     for (let [e, r] of Object.entries(t)) {
       n.push({
-        label: zS(e),
+        label: kebabToCamel(e),
         value: {
           type: 'error',
           value: 'No toJson() support'

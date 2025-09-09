@@ -15,7 +15,7 @@ let sessionCounter = 0
  * Stores the initial ISO timestamp.
  * @see $$s1
  */
-const initISOString = new Date().toISOString()
+export const initISOString = new Date().toISOString()
 
 /**
  * Returns the tracking session ID, generating it if not already set.

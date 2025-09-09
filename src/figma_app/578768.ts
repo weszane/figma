@@ -2,12 +2,12 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
-import { ZC } from "../figma_app/39751";
-import { Rs } from "../figma_app/288654";
+import { useLatestRef } from "../figma_app/922077";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { iT } from "../figma_app/74165";
 import { FileRecentViewers } from "../figma_app/43951";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 let $$_0 = 8;
 let $$h6 = 22;
 export function $$m3(e, t) {
@@ -84,9 +84,9 @@ export function $$b7(e, t, r, s, l) {
   let c = useSelector(e => e.multiplayer.observingSessionID);
   let u = useSelector(e => e.multiplayer.presenterSessionID);
   let _ = useSelector(e => e.multiplayer.deviceNameFilter);
-  let h = q5();
+  let h = selectCurrentFile();
   let [m, g] = useState(null);
-  let f = ZC(c);
+  let f = useLatestRef(c);
   f !== c && isNotNullish(f) && -1 !== f && f !== m && g(f);
   let E = useMemo(() => ({
     sessionID: d,
@@ -107,9 +107,9 @@ export function $$b7(e, t, r, s, l) {
   };
 }
 export function $$T8() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = e?.key;
-  let r = Rs(FileRecentViewers, {
+  let r = useSubscription(FileRecentViewers, {
     fileKey: t ?? ""
   }, {
     enabled: !!t

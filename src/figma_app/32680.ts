@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { s as _$$s } from "../905/403855";
 import { U } from "../905/275247";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Jn } from "../905/17223";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -25,7 +25,7 @@ function x(e) {
   let t = useDispatch();
   let r = $Y(e.teamId);
   let m = void 0 === e.canEditTeam ? r : e.canEditTeam;
-  let y = Rs(TeamFileLimitsInfo({
+  let y = useSubscription(TeamFileLimitsInfo({
     teamId: e.teamId
   }), {
     enabled: !!e.teamId

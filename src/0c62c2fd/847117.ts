@@ -13,7 +13,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { selectWithShallowEqual } from "../905/103090";
-import { p as _$$p } from "../figma_app/288654";
+import { useMultiSubscription } from "../figma_app/288654";
 import { Us, Ph } from "../figma_app/637027";
 import { w4, Y8 } from "../905/445814";
 import { kt } from "../figma_app/858013";
@@ -33,12 +33,12 @@ import { cY, yD, _9, AU } from "../905/81459";
 import { jN } from "../905/612685";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { FileByKey } from "../figma_app/43951";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { K as _$$K } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
 import { Bi, vL } from "../905/652992";
 import { Y5, mO, kI, NU } from "../905/163189";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { DV } from "../905/739964";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
@@ -259,7 +259,7 @@ export function $$ee2({
   let u = $$ea7();
   let m = $$es3(e);
   let _ = useSelector(e => e.selectedView);
-  let p = X$("ImportModal").unwrapOr(null);
+  let p = useCurrentPublicPlan("ImportModal").unwrapOr(null);
   let f = p?.tier !== FPlanNameType.STARTER;
   let g = 0 === m.remainingFiles;
   let h = useSelector(e => "folder" === e.selectedView.view ? e.folders[e.selectedView.folderId] : null);
@@ -286,7 +286,7 @@ export function $$ee2({
     });
     return r;
   }(C, e.files), [C, e.files]);
-  let A = _$$p(FileByKey, k);
+  let A = useMultiSubscription(FileByKey, k);
   let F = $$et4({
     isImportComplete: g,
     fileImport: e,
@@ -390,7 +390,7 @@ export function $$et4({
         data: {
           team: s,
           resource: n.hasMakeFile && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
-          action: ZN.IMPORT_FILES,
+          action: fileActionEnum.IMPORT_FILES,
           editorType: n.editorType,
           multipleResources: n.failedFiles > 1,
           currentPlan: _$$F.Plan.STARTER,

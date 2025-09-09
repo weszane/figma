@@ -4,15 +4,15 @@ import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { Xr } from "../figma_app/27355";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { gB, Xm, e1 } from "../905/723791";
-import { IT, DC } from "../figma_app/566371";
+import { setupResourceAtomHandler, handleStatusChangeEffect } from "../figma_app/566371";
 import { fI } from "../figma_app/229259";
 import { uo } from "../figma_app/78808";
 import { Yb, wV } from "../figma_app/933328";
 import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { E as _$$E } from "../905/128063";
 import { qU, bj } from "../905/420347";
 import { LH } from "../905/872904";
@@ -45,16 +45,16 @@ let $$N5 = _$$n(({
   enabled: t = !0
 } = {}) => {
   let i = LH();
-  let a = q5();
+  let a = selectCurrentFile();
   let s = useDispatch();
-  let [d] = IT(R({
+  let [d] = setupResourceAtomHandler(R({
     currentOrgId: i,
     subscriptionFileKey: a?.key,
     includeThumbnails: !0
   }), {
     enabled: t && !getFeatureFlags().dse_lk_libraries_endpoint_v2
   });
-  let [c] = IT(wV({
+  let [c] = setupResourceAtomHandler(wV({
     orgId: i,
     subscriptionFileKey: a?.key
   }), {
@@ -62,7 +62,7 @@ let $$N5 = _$$n(({
   });
   let p = getFeatureFlags().dse_lk_libraries_endpoint_v2 ? c : d;
   let g = Xr(qU);
-  DC(d, e => {
+  handleStatusChangeEffect(d, e => {
     let t = e.libraryStats.files.map(e => e.file);
     t.length > 0 && s(uo({
       files: t,
@@ -70,7 +70,7 @@ let $$N5 = _$$n(({
     }));
     g(e.publishedLibraries);
   });
-  DC(c, e => {
+  handleStatusChangeEffect(c, e => {
     g(e);
   });
   let f = useMemo(() => getFeatureFlags().dse_lk_libraries_endpoint_v2 ? c.data : d.data?.publishedLibraries ?? [], [d, c]);
@@ -82,11 +82,11 @@ let $$N5 = _$$n(({
 });
 let $$P11 = _$$n(() => {
   let e = n1();
-  let [t] = IT(fI(void 0), {
+  let [t] = setupResourceAtomHandler(fI(void 0), {
     enabled: e
   });
   let i = Xr(qU);
-  DC(t, e => {
+  handleStatusChangeEffect(t, e => {
     i(e.map(e => _$$E(e)));
   });
   return {
@@ -149,7 +149,7 @@ export function $$B1(e, t, i) {
 }
 let $$V9 = _$$n(e => {
   let t = _$$c();
-  let i = Rs(SharingGroupsByResourceConnection, {
+  let i = useSubscription(SharingGroupsByResourceConnection, {
     resourceConnectionId: t?.id ?? ""
   }, {
     enabled: !!t
@@ -164,7 +164,7 @@ let $$V9 = _$$n(e => {
 });
 let $$G0 = _$$n(e => {
   let t = _$$c();
-  let i = Rs(SharingGroupsByResourceConnection, {
+  let i = useSubscription(SharingGroupsByResourceConnection, {
     resourceConnectionId: t?.id ?? ""
   }, {
     enabled: !!t

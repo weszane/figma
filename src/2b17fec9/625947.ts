@@ -33,7 +33,7 @@ import { U as _$$U, am as _$$am } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { MZ, Dy } from "../figma_app/925970";
 import { b as _$$b } from "../905/985254";
-import { tS as _$$tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { fG as _$$fG } from "../905/772425";
 import { zW } from "../905/162414";
 import { m as _$$m } from "../figma_app/477548";
@@ -154,7 +154,7 @@ import { clamp } from "../figma_app/492908";
 import { EE, lB as _$$lB } from "../figma_app/731583";
 import { Al, tJ as _$$tJ, T1, DH, lM as _$$lM } from "../figma_app/90441";
 import { A as _$$A4 } from "../905/920142";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { V as _$$V2 } from "../905/223767";
 import { popModalStack, showModalHandler, showModal } from "../905/156213";
 import { zN } from "../figma_app/579169";
@@ -169,9 +169,9 @@ import { l as _$$l4 } from "../9410/990893";
 import { H as _$$H2 } from "../9410/25542";
 import { t as _$$t3 } from "../905/150656";
 import { selectWithShallowEqual } from "../905/103090";
-import { IT as _$$IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { a as _$$a2 } from "../905/925868";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { sz as _$$sz2 } from "../figma_app/216696";
 import { _J as _$$_J } from "../figma_app/378195";
 import { af as _$$af, LP, a8 as _$$a3, se as _$$se, fd as _$$fd } from "../figma_app/559491";
@@ -199,7 +199,7 @@ import { cd as _$$cd } from "../905/381612";
 import { yD as _$$yD } from "../905/92359";
 import { p as _$$p2 } from "../905/42189";
 import { zD, mS as _$$mS, wR } from "../figma_app/293326";
-import { LD, Vs, zS } from "../figma_app/930338";
+import { pluralize, base64ToUint8Array, kebabToCamel } from "../figma_app/930338";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { Ow } from "../905/921418";
@@ -284,7 +284,7 @@ import { L as _$$L3 } from "../figma_app/520315";
 import { debugState } from "../905/407919";
 import { HQ, aF as _$$aF } from "../figma_app/147952";
 import { S7, xk as _$$xk2 } from "../figma_app/190980";
-import { T5, D6, sI as _$$sI } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan, useCurrentPlanUser, useIsOrgGuestUser } from "../figma_app/465071";
 import { n as _$$n7 } from "../2b17fec9/3836";
 import { K as _$$K2 } from "../1291/825015";
 import { E2, Hr } from "../905/257019";
@@ -298,7 +298,7 @@ import { Ol } from "../figma_app/279454";
 import { N as _$$N } from "../905/438674";
 import { A as _$$A0 } from "../svg/336063";
 import { memoizeByArgs } from "../figma_app/815945";
-import { $D as _$$$D, nF as _$$nF, DG } from "../figma_app/789";
+import { isWorkshopModeEnabled, useCurrentFileWorkshopModeStatus, getWorkshopModeStatus } from "../figma_app/789";
 import { H as _$$H3 } from "../2b17fec9/68162";
 import { F as _$$F2 } from "../1291/661220";
 import { _ as _$$_6 } from "../figma_app/496441";
@@ -307,7 +307,7 @@ import { z as _$$z3 } from "../905/905430";
 import { q as _$$q2 } from "../905/276489";
 import { Im as _$$Im } from "../905/608145";
 import { EL as _$$EL } from "../figma_app/740025";
-import { Eh, cb as _$$cb } from "../figma_app/12796";
+import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { r as _$$r } from "../905/319631";
 import { jv as _$$jv } from "../905/525678";
 import { noop } from "../905/834956";
@@ -318,7 +318,7 @@ import { S as _$$S2 } from "../1291/885929";
 import { N as _$$N2 } from "../905/551536";
 import { UI } from "../figma_app/471982";
 import { Uo } from "../figma_app/354658";
-import { G4 } from "../figma_app/707808";
+import { PreviewMode } from "../figma_app/707808";
 import { Z as _$$Z2 } from "../figma_app/684783";
 import { eg as _$$eg2 } from "../figma_app/690075";
 import { O as _$$O } from "../figma_app/71774";
@@ -421,7 +421,7 @@ import { y as _$$y3 } from "../905/236825";
 import { z as _$$z4 } from "../905/788559";
 import { is as _$$is } from "../905/904596";
 import { F as _$$F4 } from "../905/382217";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay as _$$Ay4 } from "../figma_app/432652";
 import { Ay as _$$Ay5 } from "../figma_app/948389";
@@ -647,7 +647,7 @@ import { $ as _$$$5, jo as _$$jo, Ld } from "../figma_app/629335";
 import { getStorage } from "../905/657224";
 import { F as _$$F8 } from "../905/680873";
 import { d1 as _$$d9 } from "../905/766303";
-import { L8 } from "../905/760074";
+import { getRepoById } from "../905/760074";
 import { d1 as _$$d0 } from "../figma_app/603466";
 import { wQ, PK, H1, $c, hL as _$$hL, D6 as _$$D8, vt as _$$vt2, $l, gA as _$$gA, Vw, w9, Ev, U6 as _$$U4, rT as _$$rT2 } from "../figma_app/124493";
 import { C3, NE, jz as _$$jz2 } from "../figma_app/587765";
@@ -829,7 +829,7 @@ function X() {
     let u = zW({
       checkPermissions: _$$m.VIEW_OR_PENDING
     });
-    let h = _$$tS();
+    let h = useCurrentFileKey();
     let m = _$$U();
     let f = !!i?.mentions;
     let _ = "" === s;
@@ -2577,7 +2577,7 @@ function iN({
   let n = Um();
   let r = n?.type === _$$eg;
   let a = useSelector(e => e.isRenaming);
-  let s = q5();
+  let s = selectCurrentFile();
   let c = selectCurrentUser();
   let u = !!s && DF(s, c);
   let p = s?.project?.activeProjectResourceConnections?.[0];
@@ -2672,7 +2672,7 @@ function iO({
   let c = _$$h4({
     nonDividerPageCount: d
   });
-  let u = q5();
+  let u = selectCurrentFile();
   let {
     renamingPageId,
     commitRenaming
@@ -3368,7 +3368,7 @@ function nF({
     user: _user,
     loading: _loading
   } = wW(r);
-  let c = q5()?.org?.name;
+  let c = selectCurrentFile()?.org?.name;
   let u = (() => {
     let t = !e.isFaceStamp;
     let i = !!e.stampData?.votingSessionId;
@@ -3514,7 +3514,7 @@ function n3() {
 }
 function n5() {
   let e = useSelector(e => e.userFlags);
-  let t = q5();
+  let t = selectCurrentFile();
   let i = t?.teamId;
   let n = t?.key;
   let r = useSelector(e => e.multiplayer.sessionID);
@@ -3549,7 +3549,7 @@ function n6(e) {
     currentSessionId,
     currentFileKey
   } = e;
-  let s = Rs(TeamFileCountsByTeamId, {
+  let s = useSubscription(TeamFileCountsByTeamId, {
     teamId
   });
   if ("loaded" !== s.status) return null;
@@ -4417,7 +4417,7 @@ function aX(e) {
         onClick: () => {
           t.setActiveTab(_$$p2.WIDGETS);
         },
-        children: `See ${n} more ${LD(n, "result")}`
+        children: `See ${n} more ${pluralize(n, "result")}`
       })]
     }), jsx("div", {
       className: "browse_resources_all_search_view--widgetTilesGridContainer--MDlpu browse_widgets_view--widgetTilesGridContainer--t5-lL",
@@ -4451,7 +4451,7 @@ function aq(e) {
         onClick: () => {
           t.setActiveTab(_$$p2.PLUGINS);
         },
-        children: `See ${n} more ${LD(n, "result")}`
+        children: `See ${n} more ${pluralize(n, "result")}`
       })]
     }), jsxs(Fragment, {
       children: [r.slice(0, 4).map(e => jsx(aC, {
@@ -4509,7 +4509,7 @@ function aQ() {
   let i = useMemo(() => Ow(results.normalizedSearchResults), [results.normalizedSearchResults]);
   let n = Math.max(i.length - 12, 0);
   let r = useDispatch();
-  let a = q5();
+  let a = selectCurrentFile();
   let {
     fileVersion,
     loadingState
@@ -5422,7 +5422,7 @@ function s8(e) {
 }
 function os(e) {
   let t = e.extensionType === PluginType.Plugin ? E2 : Hr;
-  let i = T5("BrowseExtensionsOrgAllowlistView").unwrapOr(null);
+  let i = useCurrentPrivilegedPlan("BrowseExtensionsOrgAllowlistView").unwrapOr(null);
   let n = i?.key.type === OL.ORG ? i.key.parentId : void 0;
   return i && n && t.hasAllowlist({
     id: n,
@@ -5457,7 +5457,7 @@ function ol(e) {
   } = e;
   let i = (e.extensionType === PluginType.Plugin ? _$$ll : U6)();
   let n = useMemo(() => Object.keys(i), [i]);
-  let r = _$$tS();
+  let r = useCurrentFileKey();
   let a = (e.extensionType === PluginType.Plugin ? getPluginAllowListKey : getWidgetAllowListKey)(orgId, r);
   let s = _$$mC(a);
   let d = Be();
@@ -5618,7 +5618,7 @@ function oI({
   let n = _$$ll();
   let r = selectWithShallowEqual(i => e && !t ? filterResourcesByOrgId(filterPublishedResources(H6(Object.values(i.publishedPlugins))), e.id) : {});
   let a = Object.keys(r);
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let c = getPluginAllowListKey(e?.id ?? "", s);
   let u = _$$mC(c);
   let p = LP.loadingKeyForPayload(e?.id ?? "");
@@ -5681,7 +5681,7 @@ function oM() {
   let c = Ol(d());
   let [u, p] = useState(!1);
   let h = useMemo(() => u ? c : c.slice(0, 40), [c, u]);
-  let m = _$$$D();
+  let m = isWorkshopModeEnabled();
   if (!r.loaded && !m) return jsx("div", {
     className: _$$s.flex.justifyCenter.alignCenter.p24.$,
     children: jsx(_$$k4, {})
@@ -5735,7 +5735,7 @@ function oP() {
 }
 function oU() {
   let e = useAtomWithSubscription(ox);
-  let t = T5("BrowsePluginsCombinedListView").unwrapOr(null);
+  let t = useCurrentPrivilegedPlan("BrowsePluginsCombinedListView").unwrapOr(null);
   let i = !!t?.pluginsWhitelistEnforced;
   return jsxs("div", {
     children: [jsx(ob, {}), jsxs("div", {
@@ -5775,7 +5775,7 @@ function oF() {
   let i = _$$oh(_$$sz2.loadingKeyForPayload({
     shelfType: _$$cS.BROWSE_PLUGINS_MODAL
   }));
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let r = _$$oh(getPluginAllowListKey(t, n));
   let a = _$$oh(LP.loadingKeyForPayload(t));
   return i || r || a ? jsx(VR, {}) : jsx(_$$fu, {
@@ -5803,7 +5803,7 @@ function oQ(e) {
   let j = Vq(g.activeTab);
   let y = _$$b4();
   let v = Kx();
-  let C = q5();
+  let C = selectCurrentFile();
   let {
     orgEntity,
     org,
@@ -5820,8 +5820,8 @@ function oQ(e) {
     appModel: e.mirror.appModel,
     selectedView: e.selectedView,
     isReadOnly: e.mirror.appModel.isReadOnly,
-    userCanViewPlugins: Eh(e),
-    userCanRunExtensions: _$$cb(e),
+    userCanViewPlugins: canPerformAction(e),
+    userCanRunExtensions: canRunExtensions(e),
     pluginSubmenuDropdownTargetRect: e.dropdownShown?.data?.targetRect,
     activeTextReviewPlugin: e.mirror.appModel.activeTextReviewPlugin
   }));
@@ -6055,7 +6055,7 @@ function o8(e) {
           disableFullscreen: !0,
           dispatch: t,
           fixedSize: !0,
-          fullscreenState: G4.DEFAULT,
+          fullscreenState: PreviewMode.DEFAULT,
           hubFile: n,
           profileIdToAdminResourceAs: null
         }, n.id)
@@ -6472,12 +6472,12 @@ function lj() {
 function lb({
   org: e
 }) {
-  let t = D6("_BrowseWidgetsOrgView");
-  let i = _$$sI(t).unwrapOr(!1);
+  let t = useCurrentPlanUser("_BrowseWidgetsOrgView");
+  let i = useIsOrgGuestUser(t).unwrapOr(!1);
   let n = e && e.widgets_whitelist_enforced;
   let r = U6();
   let a = _$$h7("widget");
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let d = getWidgetAllowListKey(e?.id ?? "", s);
   let c = _$$mC(d);
   let u = _$$a3.loadingKeyForPayload(e.id ?? "");
@@ -6581,7 +6581,7 @@ function lT() {
   let i = _$$oh(_$$sz2.loadingKeyForPayload({
     shelfType: _$$cS.BROWSE_WIDGETS_MODAL
   }));
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let r = _$$oh(getWidgetAllowListKey(t, n));
   let a = _$$oh(_$$a3.loadingKeyForPayload(t));
   let s = _$$mC(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
@@ -6903,7 +6903,7 @@ function lU() {
     universalInsertModal: e.universalInsertModal
   }));
   let [t, i] = useState(universalInsertModal.initialSelectedCategory ?? a);
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let r = universalInsertModal.initialTab || s || (n ? _$$p2.ALL : _$$p2.WIDGETS);
   let {
     searchQuery,
@@ -6934,7 +6934,7 @@ function lF({
     searchQuery,
     setPreviewResource
   } = _$$cX();
-  let m = q5();
+  let m = selectCurrentFile();
   let {
     fileVersion,
     loadingState,
@@ -6973,7 +6973,7 @@ function lF({
   let W = _$$sZ();
   let z = useAtomWithSubscription(_$$D);
   useEffect(() => {
-    z && !_$$l7.has(z) && YQ({
+    z && !_$$l7.has(z) && handleAtomEvent({
       id: _$$X,
       properties: {
         requester: _$$Y.FigjamUniversalInsertsMenuOpen
@@ -7048,8 +7048,8 @@ function lF({
   useEffect(() => {
     el && ($(_$$_J()), $(_$$aq2()));
   }, [$, el, eo]);
-  _$$IT(_$$se());
-  _$$IT(_$$fd());
+  setupResourceAtomHandler(_$$se());
+  setupResourceAtomHandler(_$$fd());
   useEffect(() => {
     $(_$$cr({
       shouldSearchDefaultLibraries: !0
@@ -8110,7 +8110,7 @@ function d8({
 }) {
   let t = useAtomWithSubscription(_$$zS);
   let i = Xr(_$$H4);
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let r = useMemo(() => _$$w2(1), []);
   let a = Xr(_$$ft);
   let s = Xr(Ac);
@@ -8245,7 +8245,7 @@ function ci({
   let n = useAtomWithSubscription(JV);
   let [r, a] = useAtomValueAndSetter(_$$Sn);
   let s = useAtomWithSubscription(_$$l8);
-  let l = q5();
+  let l = selectCurrentFile();
   let d = i.status === _$$c6.SUCCESS ? _$$Zj.REFINEMENT_MODE : _$$Zj.GENERATE_MODE;
   let u = Xr(_$$ft);
   let h = _$$dh();
@@ -8364,7 +8364,7 @@ function co() {
     }, [e, i, t]);
   }();
   (function () {
-    let e = _$$tS();
+    let e = useCurrentFileKey();
     let t = Xr(A0);
     useEffect(() => {
       t();
@@ -8387,7 +8387,7 @@ function co() {
 function cl({
   onGenerate: e
 }) {
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let i = ca();
   U1(i);
   return jsx(_$$fu, {
@@ -8423,7 +8423,7 @@ function cc({
   onGenerate: e,
   hasGenerated: t
 }) {
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let n = _$$tG();
   let r = ca();
   return jsxs(Fragment, {
@@ -8449,7 +8449,7 @@ function cc({
   });
 }
 function cu() {
-  let e = _$$tS();
+  let e = useCurrentFileKey();
   let t = useDispatch();
   let i = {
     rest: {
@@ -9039,7 +9039,7 @@ let ul = async ({
   if (c.signal.aborted) return;
   o && p.enhancedPrompt && l(p.enhancedPrompt);
   t(p.base64Image);
-  let h = await UD(Vs(p.base64Image), "image/png", d.prompt);
+  let h = await UD(base64ToUint8Array(p.base64Image), "image/png", d.prompt);
   _$$l.ai("figjam-ai-canvas-make-image-from-canvas-content", () => {
     e.insertImageInFillPaint(h);
     c6(e, {
@@ -9135,8 +9135,8 @@ function um({
   let {
     state
   } = n;
-  let a = ZC(state);
-  let s = ZC(e);
+  let a = useLatestRef(state);
+  let s = useLatestRef(e);
   useEffect(() => {
     (state !== a || e !== s) && t({
       type: "SET_LONG_RUNNING_ACTION",
@@ -9597,7 +9597,7 @@ function uB() {
       return {
         receiveImage: useCallback(async e => {
           let r = (await i()).nodeTextContents.join("\n");
-          let a = await UD(Vs(e), "image/png", r);
+          let a = await UD(base64ToUint8Array(e), "image/png", r);
           t({
             type: "SET_GENERATION_RESULT",
             generationResult: n.current?.generationType === uu.IMAGE ? {
@@ -12892,7 +12892,7 @@ function fL({
   let o = _$$_X({
     subscribeToUpdates_expensive: !1
   });
-  let d = ZC(o.y);
+  let d = useLatestRef(o.y);
   let c = o.y !== d;
   useEffect(() => {
     c ? (r.current = !0, s()) : r.current || a();
@@ -13117,7 +13117,7 @@ function fR() {
       i && v(i);
     }, e._native_toolbar_set_palette_image_data = (e, t, i) => {
       if ("WASHI_TAPE_PATTERN" === e) {
-        let e = Vs(i);
+        let e = base64ToUint8Array(i);
         fullscreenValue.updateAppModel({
           currentSelectedProperty: {
             type: NodePropertyCategory.STROKE,
@@ -13136,7 +13136,7 @@ function fR() {
         paint,
         paintIndex
       } = C;
-      let a = Vs(i);
+      let a = base64ToUint8Array(i);
       fullscreenValue.updateAppModel({
         currentSelectedProperty: {
           type: NodePropertyCategory.FILL,
@@ -16557,7 +16557,7 @@ function xY() {
       onPointerUp: e => {
         n && t(e);
       },
-      recordingKey: generateRecordingKey("alignmentControl", zS(e)),
+      recordingKey: generateRecordingKey("alignmentControl", kebabToCamel(e)),
       role: "option",
       svg: xZ[e],
       tooltip: e,
@@ -19650,7 +19650,7 @@ function jd(e) {
   }) : null;
 }
 function ju() {
-  let e = _$$nF(!0);
+  let e = useCurrentFileWorkshopModeStatus(!0);
   let t = !_$$N7() && e.enabled;
   let i = useSelector(e => e.userFlags.dismissed_figjam_music_volume_hint);
   let n = useSelector(e => e.music.music?.selectedSongID && e.music.music?.selectedSongID !== "");
@@ -19893,7 +19893,7 @@ function jU() {
 function jF() {
   let e = useSelector(e => e.timer);
   let t = useSelector(e => _$$d9(e));
-  let i = useSelector(e => t ? L8(t, e.repos) : null);
+  let i = useSelector(e => t ? getRepoById(t, e.repos) : null);
   let n = Math.ceil(P$(e.time) / 1e3);
   n > 0 ? _$$rF(t, i, n) : _$$rF(t, i);
 }
@@ -20555,7 +20555,7 @@ function bs({
 }) {
   let t = C3();
   let i = useDispatch();
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let r = _$$oh(wQ(n || ""));
   let a = useCallback(() => {
     i(PK({
@@ -20836,7 +20836,7 @@ function bw({
 }) {
   let n = C3();
   let r = useSelector(e => !e.user);
-  let a = _$$tS();
+  let a = useCurrentFileKey();
   return n ? jsxs("div", {
     className: "joined_vote_view--joinedVoteViewContainer--2w8-v",
     children: [jsx("div", {
@@ -21433,7 +21433,7 @@ let bU = e => {
 };
 function bF() {
   let e = useDispatch();
-  let t = _$$tS();
+  let t = useCurrentFileKey();
   let {
     title,
     userVoteLimit
@@ -21462,7 +21462,7 @@ function bF() {
 function bH(e) {
   let t = useRef(null);
   let i = useDispatch();
-  let n = _$$tS();
+  let n = useCurrentFileKey();
   let r = useSelector(e => !e.user);
   let a = _$$oh($c(n || ""));
   let s = useSelector(e => e.multiplayer.allUsers.length);
@@ -21590,7 +21590,7 @@ function bV(e) {
     setOnNewSessionClick,
     recordingKey
   } = e;
-  let r = _$$tS();
+  let r = useCurrentFileKey();
   let a = void 0 !== setOnPastVotesClick;
   return jsxs("div", {
     className: _$$s.flex.flexColumn.p16.$,
@@ -21675,7 +21675,7 @@ let b$ = registerModal(function ({
   votingSessionId: e
 }) {
   let t = useDispatch();
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let n = () => {
     trackEventAnalytics("cancel_delete_voting_session", {
       source: bZ,
@@ -21763,7 +21763,7 @@ function bq({
   onClick: u
 }) {
   let p = useDispatch();
-  let h = _$$tS();
+  let h = useCurrentFileKey();
   return jsx("li", {
     children: jsxs(_$$E2, {
       recordingKey: generateRecordingKey(l, "viewPastVotingSession"),
@@ -22606,7 +22606,7 @@ function yI({
 function yF() {
   let e = generateRecordingKey("toolbarView", _$$ec2.recordingKey);
   let t = useRef(null);
-  let i = q5();
+  let i = selectCurrentFile();
   let n = useSelector(e => _$$Yh(e.mirror.appModel, _$$ec2.action) && i);
   let r = useSelector(e => e.mirror.appModel.currentTool === _$$ec2.tool);
   let a = _$$n0();
@@ -22909,7 +22909,7 @@ function y0() {
       }], yY), l, a].map(e => new Animation(e, document.timeline)));
     }, [e, t, i, n, r]);
     (function (e, t, i) {
-      let n = ZC(e);
+      let n = useLatestRef(e);
       let r = useAtomWithSubscription(Qs);
       let a = II();
       let s = r.isOpen || a.length > 0;
@@ -23065,7 +23065,7 @@ let y4 = "figjam_right_panel--leftSection--wZTVw";
 let y9 = "figjam_right_panel--middleSection--xMAsd";
 function y8() {
   let e = useDispatch();
-  let t = q5();
+  let t = selectCurrentFile();
   let i = Um();
   let n = useSelector(e => e.multiplayer);
   let r = _$$dR2();
@@ -23077,7 +23077,7 @@ function y8() {
   let _ = !q8() && Uy() && !Cd();
   let x = BrowserInfo.isMeetDevice;
   let g = _$$L2();
-  let b = DG(t?.key || "").enabled;
+  let b = getWorkshopModeStatus(t?.key || "").enabled;
   let y = useCallback(t => {
     Lx(t, s?.sessionID, e, !1, n, r, u);
   }, [s?.sessionID, e, n, r, u]);
@@ -23317,7 +23317,7 @@ function vf({
     let t = useSelector(e => e.multiplayer).allUsers.find(t => t.userID === e) ?? null;
     return t ? t.color : null;
   }(e);
-  let s = _$$tS();
+  let s = useCurrentFileKey();
   let u = useAtomWithSubscription(Fj);
   let h = isInteractionPathCheck() ? 1e3 : u;
   let m = useCallback(e => {
@@ -24090,7 +24090,7 @@ function vB({
 }) {
   let t = useAtomWithSubscription(_$$P6);
   let i = _$$dH();
-  let n = _$$tS() || void 0;
+  let n = useCurrentFileKey() || void 0;
   let r = useDispatch();
   let [a, s] = useState(!1);
   let u = useRef(!1);

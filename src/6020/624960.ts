@@ -18,7 +18,7 @@ import { lW } from "../figma_app/11182";
 import { fullscreenValue } from "../figma_app/455680";
 import { normalizeValue, valueOrFallback } from "../905/216495";
 import { lJ } from "../905/275640";
-import { Cq } from "../figma_app/516028";
+import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
 import { vp } from "../figma_app/831696";
 import { Ib } from "../905/129884";
@@ -121,7 +121,7 @@ export function $$F1(t) {
   let [M, F] = useState(!1);
   let U = useRef(null);
   let H = Tv();
-  let X = Cq({
+  let X = useOpenFileObjectWithSinatraType({
     useSinatraType: !0
   });
   let Y = !!X;

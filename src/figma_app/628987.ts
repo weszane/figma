@@ -23,7 +23,7 @@ import { E as _$$E2 } from "../905/277716";
 import { XHR } from "../905/910117";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { XE, Uv, u1 } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { J6 } from "../figma_app/8833";
@@ -58,8 +58,8 @@ let ea = buildStaticUrl("font/previews");
 let es = getFeatureFlags().font_index_250317 ? "font_previews.3e7c0297f334e1a1002e3f2f2dc38dcb.json.br" : "font_previews.be806b368d91ef4a0f93e8d2136d49a9.json.br";
 let eo = `${ea}/${es}`;
 let el = !1;
-class ed extends a3 { }
-class ec extends c$ { }
+class ed extends a3 {}
+class ec extends c$ {}
 export function $$eu1() {
   let e = selectWithShallowEqual(e => Cy(e.mirror));
   let t = useRef(e);
@@ -121,7 +121,7 @@ export function $$em2({
   let eE = Um();
   let ey = getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF);
   let eb = sO() && ey === SelfDesignType.SELF;
-  let eT = to();
+  let eT = useIsSelectedViewFullscreenCooper();
   let eI = useSelector(e => e.selectedView);
   let eS = _$$XE(eI);
   let ev = useSelector(e => e.userFlags);
@@ -168,7 +168,7 @@ export function $$em2({
   let eF = useRef(null);
   let ej = useRef(null);
   let eU = useCallback(e => {
-    if (ef?.id === eo) eg(XE()); else {
+    if (ef?.id === eo) eg(XE());else {
       eC(!0);
       eg(Uv());
       let e = "row" === em ? cn(ej.current, parsePxNumber(kaq)) : ej.current.getBoundingClientRect();
@@ -299,15 +299,15 @@ export function $$em2({
           nodeIds: eP.current
         }), Promise.resolve()),
         children: eB
-      }); else if (eb || eT) return jsx(Ad, {
+      });else if (eb || eT) return jsx(Ad, {
         ref: ej,
         label: null,
         input: u
-      }); else if ("button" === em) return jsx(D8, {
+      });else if ("button" === em) return jsx(D8, {
         forwardedRef: ej,
         "data-non-interactive": !0,
         children: u
-      }); else return jsx(DE, {
+      });else return jsx(DE, {
         appendedClassName: m()({
           [A5]: a
         }),

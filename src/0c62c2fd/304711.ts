@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -17,7 +17,7 @@ export function $$x0(e) {
   var t;
   let r = useDispatch();
   let x = hS(e);
-  let b = gY(Q4);
+  let b = getAtomMutate(Q4);
   let v = _$$x(e.folder.id, !0);
   let y = jsx("span", {
     className: _$$s.fontBold.$,

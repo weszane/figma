@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
@@ -10,7 +10,7 @@ import { v as _$$v } from "../905/556792";
 import { createOptimistThunk } from "../905/350402";
 import { Cy } from "../905/844322";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
-import { wR } from "../figma_app/765689";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/224";
 import { mE } from "../905/561087";
 import { ye, jd, VA } from "../figma_app/528509";
@@ -19,7 +19,7 @@ import { RepoCanMove, RepoCanMoveWithReasons, FileCanMoveWithReasons } from "../
 import { Y9, fm } from "../figma_app/680166";
 import { Bi, vL } from "../905/652992";
 import { o1 } from "../figma_app/10554";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { J } from "../905/202542";
 import { W as _$$W } from "../905/522628";
 import { jsx } from "react/jsx-runtime";
@@ -97,7 +97,7 @@ let P = registerModal(function (e) {
     children
   });
 }, "file-move-confirm-modal");
-let U = (e, t) => e.find(e => wR(e.editor_type) === t)?.key ?? null;
+let U = (e, t) => e.find(e => getProductAccessTypeOrDefault(e.editor_type) === t)?.key ?? null;
 let B = (e, t, i, n) => {
   let r = i.length + (n ? n.length : 0) > 1;
   i.length > 0 && t.dispatch(Cy({
@@ -254,13 +254,13 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     for (let t = 0; t < repos.length; t++) {
       let n = repos[t];
       let r = i[t];
-      let s = r && oA(oA(r.result.data?.repo)?.hasPermission);
+      let s = r && getResourceDataOrFallback(getResourceDataOrFallback(r.result.data?.repo)?.hasPermission);
       if (s && n?.default_file_key && W(s, n.default_file_key, e)) return;
     }
     for (let i = 0; i < repos.length; i++) {
       let n = repos[i];
       let r = n.folder_id ? g.folders[n.folder_id] ?? null : null;
-      if (!oA(t[i].result.data?.repo)?.hasPermission && !C) {
+      if (!getResourceDataOrFallback(t[i].result.data?.repo)?.hasPermission && !C) {
         let t = r ? getI18nString("file_browser.file_browser_actions.remove_files_from_project_permission", {
           projectName: r.name
         }) : getI18nString("file_browser.file_browser_actions.remove_files_from_this_project_permission");
@@ -277,7 +277,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     for (let n = 0; n < files.length; n++) {
       let r = files[n];
       let s = t[n];
-      let o = s && oA(s.result.data?.file)?.hasPermission;
+      let o = s && getResourceDataOrFallback(s.result.data?.file)?.hasPermission;
       if (o && r && W(o, r.key, e)) return;
     }
   }
@@ -292,7 +292,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
         data: {
           team,
           resource: t && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
-          action: ZN.MOVE_FILES,
+          action: fileActionEnum.MOVE_FILES,
           editorType: files.every(e => e.editor_type === files[0].editor_type) ? files[0].editor_type : null,
           multipleResources: files.length > 1,
           currentPlan: _$$F2.Plan.STARTER,
@@ -338,7 +338,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
             data: {
               team,
               resource: u > 0 && !getFeatureFlags().bake_starter_limit ? Bi.FIGMAKE : vL.FILE,
-              action: ZN.MOVE_FILES,
+              action: fileActionEnum.MOVE_FILES,
               currentPlan: _$$F2.Plan.STARTER,
               upsellPlan: _$$F2.Plan.PRO,
               editorType: files.every(e => e.editor_type === files[0].editor_type) ? files[0].editor_type : null,

@@ -1,15 +1,15 @@
 import { getFeatureFlags } from "../905/601108";
 import { A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
-import { q5 } from "../figma_app/516028";
-import { T5 } from "../figma_app/465071";
+import { selectCurrentFile } from "../figma_app/516028";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 export function $$l1(e) {
-  let t = T5("useCampfireModelEnabled").unwrapOr(null);
-  let r = q5();
+  let t = useCurrentPrivilegedPlan("useCampfireModelEnabled").unwrapOr(null);
+  let r = selectCurrentFile();
   return !!getFeatureFlags().campfire || (e?.preferOpenFilePlan && r?.plan ? !!r.plan.campfireModelEnabledAt : t ? !!t.campfireModelEnabledAt : !!getInitialOptions().campfire_model_enabled);
 }
 export function $$d5(e, t) {
-  let r = T5("useCampfireEducationEnabled").unwrapOr(null);
+  let r = useCurrentPrivilegedPlan("useCampfireEducationEnabled").unwrapOr(null);
   let a = function (e) {
     let t = $$l1();
     let r = !!getFeatureFlags()[e];

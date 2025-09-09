@@ -1,15 +1,15 @@
 import { useDispatch } from "react-redux";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { w } from "../905/281010";
 export function $$d1(e) {
-  let t = oA(e.createdAt) || new Date();
+  let t = getResourceDataOrFallback(e.createdAt) || new Date();
   let r = Date.now() - t.getTime() < 2592e5;
-  let n = null != oA(e.lastNudgedAt);
+  let n = null != getResourceDataOrFallback(e.lastNudgedAt);
   let a = "pending" === e.status && !r && !n;
-  let s = !!oA(e.requesterDismissedNudgeBadgeAt);
+  let s = !!getResourceDataOrFallback(e.requesterDismissedNudgeBadgeAt);
   return {
     requestCanBeNudged: a,
     requestHasBeenNudged: n,

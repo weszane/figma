@@ -15,7 +15,7 @@ import { tB } from "../figma_app/731583";
 import { dh } from "../figma_app/186343";
 import { _X, Yb } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
@@ -144,7 +144,7 @@ function D({
 }) {
   let [u] = A(t, 500);
   let [c] = A(i, 500);
-  let m = tS();
+  let m = useCurrentFileKey();
   useEffect(() => {
     var t;
     if (s) return;

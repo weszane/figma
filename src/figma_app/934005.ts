@@ -3,12 +3,12 @@ import { z } from "../905/239603";
 import a from "../vendor/241899";
 import { A as _$$A } from "../905/920142";
 import { reportError } from "../905/11";
-import { Ay } from "../figma_app/930338";
+import { toTitleCase } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { FOrganizationLevelType, FLicenseType } from "../figma_app/191312";
 import { D } from "../905/962956";
 import { BillingCycle } from "../figma_app/831101";
-import { g7 } from "../905/513035";
+import { createProductAccessSchema } from "../905/513035";
 var s = a;
 var m = (e => (e.ACH_DEBIT = "ach_debit", e.CARD = "card", e.SEPA_DEBIT = "sepa_debit", e.UNKNOWN = "unknown", e))(m || {});
 var g = (e => (e.AMEX = "amex", e.DINERS = "diners", e.DISCOVER = "discover", e.EFTPOS_AU = "eftpos_au", e.JCB = "jcb", e.MASTERCARD = "mastercard", e.UNIONPAY = "unionpay", e.VISA = "visa", e.UNKNOWN = "unknown", e))(g || {});
@@ -38,7 +38,7 @@ let A = z.object({
   payment_method: T.nullable()
 });
 export var $$x0 = (e => (e.LEGACY = "legacy", e.PRORATED = "prorated", e))($$x0 || {});
-let N = g7(z.object({
+let N = createProductAccessSchema(z.object({
   net_quantity: z.number(),
   amount: z.number(),
   seats_quantity: z.number(),
@@ -104,7 +104,7 @@ export function $$j8(e) {
   });
 }
 export function $$U7(e) {
-  let t = () => Ay(e.subtype);
+  let t = () => toTitleCase(e.subtype);
   switch (e.plan_parent_type) {
     case FOrganizationLevelType.TEAM:
       switch (e.billing_interval) {
@@ -195,7 +195,7 @@ export function $$G9(e) {
           return getI18nString(`plan_invoices.payment_method.${e.type}.unknown`);
         }
       case "unknown":
-        return Ay(e.stripe_type);
+        return toTitleCase(e.stripe_type);
       default:
         reportError(_$$e.BILLING_EXPERIENCE, Error("unknown payment method"), {
           extra: {

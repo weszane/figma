@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { jN } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
@@ -12,7 +12,7 @@ export function $$p1() {
   let t = sn();
   let i = _6();
   let a = "prototype" === i.view;
-  let p = q5();
+  let p = selectCurrentFile();
   let m = a ? i.file.editor_type : p?.editorType;
   return useCallback(i => {
     let n = jN({

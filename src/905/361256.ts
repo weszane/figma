@@ -116,7 +116,7 @@ import { bo } from "../figma_app/447445";
 import { B as _$$B2 } from "../figma_app/846647";
 import { u3 } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
-import { oz } from "../905/561485";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { c as _$$c } from "../figma_app/73139";
 import { K0 } from "../figma_app/778125";
 import { gb, yp, kx, nf, hf, KY, Kk as _$$Kk, lY, qf } from "../905/71683";
@@ -3272,7 +3272,7 @@ class iS extends PureComponent {
     let t = this.getStylePanelProps();
     let i = !!fullscreenValue?.isFontListLoaded();
     let n = valueOrFallback(this.props.missingFont, !1);
-    let a = oz() && getFeatureFlags().sites_responsive_text_styles;
+    let a = isSitesFeatureEnabled() && getFeatureFlags().sites_responsive_text_styles;
     let s = mw(this.props.sceneGraphSelection, this.props.library);
     let o = a && s && _$$c(this.props.sceneGraphSelection);
     let l = a && !s && _$$c(this.props.sceneGraphSelection) && this.getHasMixedPropertiesInner(!1, this.props.validMixedPropertiesForResponsiveTextStyle && isValidValue(this.props.validMixedPropertiesForResponsiveTextStyle));

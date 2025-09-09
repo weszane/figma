@@ -6,7 +6,7 @@ import { useMemoShallow } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import { ResourceStatus } from "../905/957591";
 import { logInfo } from "../905/714362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { J4 } from "../figma_app/349248";
 import { arraysEqual } from "../figma_app/656233";
 import { x8 } from "../905/888985";
@@ -73,7 +73,7 @@ export function $$b1(e, t) {
   }, [n, t]);
 }
 export function $$T2() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let t = useMemo(() => e ? f(e) : atom(null), [e]);
   let r = useAtomWithSubscription(t);
   return useMemo(() => function (e, t = y) {

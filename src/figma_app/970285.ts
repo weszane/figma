@@ -42,7 +42,7 @@ import { xY } from "../figma_app/624361";
 import { isValidValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { WQ, Pv } from "../905/619652";
 import { o3, nt } from "../905/226610";
-import { Pe } from "../figma_app/12796";
+import { isExportRestricted } from "../figma_app/12796";
 import { H4 } from "../figma_app/679183";
 import { Dc, hV } from "../figma_app/151766";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -265,7 +265,7 @@ let ex = class e extends PureComponent {
     });
   }
   render() {
-    let e = this.props.openFile && Pe(this.props.openFile);
+    let e = this.props.openFile && isExportRestricted(this.props.openFile);
     let t = this.exportList(this.props.exportSettings);
     return jsx(_$$k3, {
       name: "export_panel",

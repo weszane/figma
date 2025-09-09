@@ -27,11 +27,11 @@ import { P as _$$P } from "../905/347284";
 import { To, $I } from "../3276/545630";
 import { HG, bL, O6 } from "../905/598775";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { yZ } from "../905/407352";
 import { F as _$$F } from "../905/241044";
 import { WN } from "../figma_app/638601";
-import { tS, q5, sS } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile, selectOpenFileKey } from "../figma_app/516028";
 import { getUserId, selectCurrentUser } from "../905/372672";
 import { MV, m as _$$m, kT, Vk } from "../905/380385";
 import { E as _$$E } from "../905/632989";
@@ -293,7 +293,7 @@ function ex(e) {
   } = I_();
   let m = fr();
   let h = useDispatch();
-  let f = tS();
+  let f = useCurrentFileKey();
   let _ = getUserId();
   let g = useCallback(() => {
     commentReceipts && (isUnread ? h(AY({
@@ -603,10 +603,10 @@ let e0 = memo(function (e) {
   let h = !!element.isPendingFromSinatra;
   let f = useRef(null);
   let v = useRef(null);
-  let x = ZC(element.isActive);
+  let x = useLatestRef(element.isActive);
   let b = useRef(!1);
   let w = selectCurrentUser();
-  let j = q5();
+  let j = selectCurrentFile();
   let k = yZ();
   let P = eJ(element);
   let I = useMemo(() => !k && !P, [k, P]);
@@ -633,7 +633,7 @@ let e0 = memo(function (e) {
     let l = useRef(!1);
     let [d, c] = useState(!1);
     let m = e.id;
-    let h = !q5()?.canEdit;
+    let h = !selectCurrentFile()?.canEdit;
     let f = useSelector(e => e.mirror.appModel.showComments);
     let _ = yZ();
     let v = eJ(e);
@@ -1081,7 +1081,7 @@ let tl = createOptimistThunk((e, t) => {
 });
 var tc = (e => (e.ALL = "all", e.PARTICIPATING = "participating", e.NONE = "none", e))(tc || {});
 function tp() {
-  let e = useSelector(sS);
+  let e = useSelector(selectOpenFileKey);
   let t = selectCurrentUser();
   let n = jp();
   let s = I_();
@@ -1216,7 +1216,7 @@ function tg(e) {
   let r = _$$k2();
   let l = WN();
   _$$Z2(manager);
-  let d = ZC(manager.isOpen);
+  let d = useLatestRef(manager.isOpen);
   return (useEffect(() => {
     if (d !== manager.isOpen) {
       if (r) return l("SELECT_COMMENT_SIDEBAR");
@@ -1292,7 +1292,7 @@ function tb({
     }, "mode-group"));
     return e;
   }, [t.sorts, t.filters, t.modes, t.activeSort, t.threadManager, t.activeMode, l]);
-  let f = ZC(manager.isOpen) ?? !1;
+  let f = useLatestRef(manager.isOpen) ?? !1;
   useEffect(() => {
     f !== manager.isOpen && n(UU());
   }, [n, manager.isOpen, f]);

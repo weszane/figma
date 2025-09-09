@@ -6,7 +6,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { zK } from "../figma_app/913823";
 import { cr } from "../905/879323";
 import { ts, zo, gR } from "../figma_app/120210";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Sc } from "../905/18797";
 import { $A } from "../905/862883";
 import { yD } from "../905/92359";
@@ -181,7 +181,7 @@ function O({
   });
 }
 export function $$F0() {
-  let e = q5();
+  let e = selectCurrentFile();
   let {
     fileVersion,
     loadingState,

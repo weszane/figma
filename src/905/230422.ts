@@ -8,7 +8,7 @@ import { s as _$$s2 } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { fu } from "../figma_app/831799";
-import { g3 } from "../figma_app/707808";
+import { UserProfileTab } from "../figma_app/707808";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { o as _$$o } from "../905/451156";
@@ -136,7 +136,7 @@ class S extends Component {
       this.lastProfileRef.current && this.modalContainerRef.current && this.lastProfileRef.current.getBoundingClientRect().top <= this.modalContainerRef.current.getBoundingClientRect().bottom && this.fetchNextFollows();
     };
     this.scrollListener = debounce(this.onScroll);
-    this.fetchNextFollows = () => this.props.currentSelectedView.profileTab === g3.FOLLOWERS ? this.fetchFollowers() : this.fetchFollowing();
+    this.fetchNextFollows = () => this.props.currentSelectedView.profileTab === UserProfileTab.FOLLOWERS ? this.fetchFollowers() : this.fetchFollowing();
     this.handleFetchFailure = () => {
       this.setState({
         didFetchFail: !0
@@ -159,7 +159,7 @@ class S extends Component {
     this.getFollowsListHeightStyle = e => {
       let t = isMobileUA ? window.innerHeight : window.innerHeight - 128 - 48;
       return {
-        height: Math.min(Math.max(80 * Math.min(e === g3.FOLLOWERS ? this.props.profile.follower_count : this.props.profile.following_count, DEFAULT_PAGE_SIZE), 328), t)
+        height: Math.min(Math.max(80 * Math.min(e === UserProfileTab.FOLLOWERS ? this.props.profile.follower_count : this.props.profile.following_count, DEFAULT_PAGE_SIZE), 328), t)
       };
     };
     this.renderTabs = () => {
@@ -167,8 +167,8 @@ class S extends Component {
       return jsxs("div", {
         className: "follows_list_modal--tabs--2JRKm",
         children: [jsxs(x, {
-          onClick: () => this.onTabClick(g3.FOLLOWERS),
-          tab: g3.FOLLOWERS,
+          onClick: () => this.onTabClick(UserProfileTab.FOLLOWERS),
+          tab: UserProfileTab.FOLLOWERS,
           selectedTab: e,
           children: [jsx("span", {
             "aria-hidden": !0,
@@ -180,8 +180,8 @@ class S extends Component {
             children: renderI18nText("community.follow.followers")
           })]
         }), this.props.profile.primary_user_id && jsxs(x, {
-          onClick: () => this.onTabClick(g3.FOLLOWING),
-          tab: g3.FOLLOWING,
+          onClick: () => this.onTabClick(UserProfileTab.FOLLOWING),
+          tab: UserProfileTab.FOLLOWING,
           selectedTab: e,
           children: [jsx("span", {
             "aria-hidden": !0,
@@ -197,8 +197,8 @@ class S extends Component {
     };
     this.renderView = () => {
       let e = this.props.currentSelectedView.profileTab;
-      let t = e === g3.FOLLOWERS ? this.state.followerState : this.state.followingState;
-      let i = e === g3.FOLLOWERS ? this.state.followerState.followers : this.state.followingState.following;
+      let t = e === UserProfileTab.FOLLOWERS ? this.state.followerState : this.state.followingState;
+      let i = e === UserProfileTab.FOLLOWERS ? this.state.followerState.followers : this.state.followingState.following;
       return 0 !== i.length || t.loading ? jsx(fu, {
         name: "Follows List Modal",
         properties: {
@@ -220,12 +220,12 @@ class S extends Component {
                 viewingProfileId: this.props.profile.id
               }
             }) : void 0,
-            hideFollowsYouBadge: this.props.profile.id === this.props.currentUserProfileId && e === g3.FOLLOWERS
+            hideFollowsYouBadge: this.props.profile.id === this.props.currentUserProfileId && e === UserProfileTab.FOLLOWERS
           }, t.profile_handle)), t.loading && jsx(kt, {
             className: "follows_list_modal--loadingSpinner--OmkLk"
           })]
         })
-      }) : e === g3.FOLLOWERS ? jsxs("div", {
+      }) : e === UserProfileTab.FOLLOWERS ? jsxs("div", {
         className: I,
         children: [jsx(y, {}), jsx("div", {
           className: E,
@@ -239,9 +239,9 @@ class S extends Component {
         })]
       });
     };
-    e.profile.primary_user_id || e.currentSelectedView.profileTab !== g3.FOLLOWING || e.dispatch(sf({
+    e.profile.primary_user_id || e.currentSelectedView.profileTab !== UserProfileTab.FOLLOWING || e.dispatch(sf({
       ...e.currentSelectedView,
-      profileTab: g3.FOLLOWERS
+      profileTab: UserProfileTab.FOLLOWERS
     }));
     this.state = {
       followerState: {

@@ -9,13 +9,13 @@ import { useRef, useLayoutEffect } from "react";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
 import { RC } from "../3276/926297";
 import { nk } from "../figma_app/2023";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Cf } from "../905/504727";
 import { zg, iF, aD } from "../905/452667";
 import { g_ } from "../905/646788";
@@ -62,7 +62,7 @@ export function $$M0({
   let s = c4(unreadFileRoleRequests.slice(0, 2));
   let r = RC();
   let l = m0();
-  let d = _I();
+  let d = useCanAccessFullDevMode();
   return n && unreadFileRoleRequests.length && s && r && (!l || d) ? jsx(E, {
     target: e,
     unreadRequests: unreadFileRoleRequests,
@@ -238,7 +238,7 @@ function A({
   editRequestPermissionsData: t
 }) {
   let n = useDispatch();
-  let i = tS();
+  let i = useCurrentFileKey();
   let s = t.file?.key ?? i;
   let r = e[0];
   return 1 === e.length && r && r.requesterUser ? jsx("div", {
@@ -280,7 +280,7 @@ function L(e) {
     editRequestPermissionsData
   } = e;
   let l = useDispatch();
-  let d = tS();
+  let d = useCurrentFileKey();
   let {
     handleApprove,
     handleDeny

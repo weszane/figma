@@ -327,3 +327,6 @@ export const xZ = setBranchingTags
 export const xg = externalUrlPatterns
 export const xn = normalizeSentryEvent
 export const yO = errorPatterns
+export const setSentryTag = setTagGlobal
+export const setDatadogTags = setTagsGlobal
+

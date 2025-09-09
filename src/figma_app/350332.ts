@@ -3,18 +3,18 @@ import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { Fj } from "../figma_app/594947";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { AiMeterUsageView } from "../figma_app/43951";
 import { n as _$$n } from "../905/347702";
 import { Ac, ag, u6 } from "../905/509613";
 import { JT } from "../figma_app/632248";
 var $$g1 = (e => (e.DAILY = "daily", e.MONTHLY = "monthly", e))($$g1 || {});
 function f() {
-  let e = tS() ?? "";
-  let t = Rs(AiMeterUsageView, {
+  let e = useCurrentFileKey() ?? "";
+  let t = useSubscription(AiMeterUsageView, {
     fileKey: e
   }, {
     enabled: !!e

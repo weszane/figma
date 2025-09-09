@@ -8,7 +8,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "../vendor/635";
 import { A as _$$A } from "../vendor/90566";
 import { am } from "../figma_app/901889";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { reportError } from "../905/11";
 import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
@@ -304,12 +304,12 @@ let er = memo(function (e) {
   let eX = useCallback((e, t) => {
     eQ(n => new Map(n.set(e, t)));
   }, []);
-  let eY = ZC(eW);
+  let eY = useLatestRef(eW);
   let eJ = eW !== eY && void 0 !== eY;
   useEffect(() => {
     eJ && eQ(new Map());
   }, [eJ, eW]);
-  let e0 = ZC(eg);
+  let e0 = useLatestRef(eg);
   let [e1, e2] = useState(() => {
     if (eg) return Zz(e.threads);
   });

@@ -13,7 +13,7 @@ import { _s } from "../figma_app/33126";
 import { r1 } from "../figma_app/545877";
 import { J } from "../905/915227";
 import { kS } from "../figma_app/864723";
-import { As, ze } from "../figma_app/516028";
+import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { l5 } from "../figma_app/728657";
@@ -117,7 +117,7 @@ let ea = atom(null, async (e, t, {
   let k = e(ei).signal;
   let M = {
     orgId: e(_s),
-    teamId: e(As) || null,
+    teamId: e(openFileTeamIdAtom) || null,
     fileKey: r,
     userId: e(kS) || null,
     trackingSessionId: getTrackingSessionId(),
@@ -215,7 +215,7 @@ let $$es15 = atom(null, (e, t, {
   fromGenerateModalV2: c,
   pageNodeId: u
 }) => {
-  let p = e(ze);
+  let p = e(openFileKeyAtom);
   if (null === p || 0 === p.length) {
     reportError(_$$e.AI_PRODUCTIVITY, Error("No file key found for loaded file to use for FigJam AI Generate request"));
     return;

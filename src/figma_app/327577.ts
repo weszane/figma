@@ -18,7 +18,7 @@ import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
 import { uH, Rx } from "../figma_app/162807";
 import { vj } from "../905/574958";
-import { QB, bN } from "../figma_app/707808";
+import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { createOptimistThunk } from "../905/350402";
 import { Rz, r0, ky } from "../905/977218";
 let x = createOptimistThunk((e, {
@@ -51,7 +51,7 @@ let $$N6 = createOptimistThunk(e => {
   let n = xS(t, {
     view: "search",
     entryPoint: "desktop_new_tab",
-    previousView: t.selectedView && (QB(t.selectedView) || bN(t.selectedView)) ? t.selectedView : void 0
+    previousView: t.selectedView && (isIncludedView(t.selectedView) || isOrgView(t.selectedView)) ? t.selectedView : void 0
   });
   customHistory.redirect(n);
 });

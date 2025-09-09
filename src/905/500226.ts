@@ -6,7 +6,7 @@ import { o as _$$o } from "../figma_app/915774";
 import { X } from "../905/853613";
 import { Hu, GZ } from "../figma_app/361662";
 import { u as _$$u } from "../905/290607";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
 import { PW } from "../figma_app/633080";
 import { $z } from "../figma_app/297733";
@@ -19,7 +19,7 @@ import { cq } from "../905/794154";
 import { eg } from "../figma_app/297822";
 import { Jc } from "../905/946805";
 import { dd } from "../figma_app/604494";
-import { Oc } from "../figma_app/552876";
+import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { xA } from "../905/742325";
 export let $$w0 = "Quick Actions Component Search";
 export function $$C1({
@@ -39,9 +39,9 @@ export function $$C1({
   let O = GZ(e.library_key, P);
   let D = useAtomWithSubscription(dd);
   let L = Nv(currentSearch?.input.type === "input-text");
-  let F = Oc();
+  let F = useIsSelectedFigmakeFullscreen();
   let M = F ? "figmake" : "actions_assets_tab";
-  let j = q5();
+  let j = selectCurrentFile();
   let U = CK();
   let B = useMemo(() => ({
     assetKey: u2(e),

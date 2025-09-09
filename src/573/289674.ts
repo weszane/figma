@@ -25,7 +25,7 @@ import { sF } from "../figma_app/193952";
 import { r as _$$r } from "../905/955316";
 import { Td } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
-import { No } from "../figma_app/465071";
+import { useTeamPlanPublicInfo } from "../figma_app/465071";
 import { JT } from "../figma_app/632248";
 import { nR } from "../9410/40486";
 import { mC } from "../figma_app/325537";
@@ -564,7 +564,7 @@ export function $$X0() {
   let n = Td();
   let o = lg();
   let l = hC();
-  let d = No().unwrapOr(null);
+  let d = useTeamPlanPublicInfo().unwrapOr(null);
   let c = uQ();
   let u = NM();
   let y = useRef(null);

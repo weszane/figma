@@ -4,7 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../905/403855";
 import { buildUploadUrl } from "../figma_app/169182";
-import { mI } from "../figma_app/566371";
+import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
 import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
@@ -20,7 +20,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { kp } from "../figma_app/831799";
 import { jv, SK, Fq } from "../905/84777";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { N_, Oq } from "../905/332483";
 import { K as _$$K } from "../905/3140";
 import { vr, wU } from "../figma_app/514043";
@@ -120,7 +120,7 @@ function W({
     billableProductKeys: N_,
     baseQuery: t
   });
-  let [r] = mI(a);
+  let [r] = handleSuspenseRetainRelease(a);
   if (null === r.data) throw Error("Price data is null");
   let i = new vr(e);
   return jsx("div", {
@@ -137,13 +137,13 @@ function W({
           className: _$$s2.textBodyLarge.$,
           children: function (e) {
             switch (e) {
-              case ud.EXPERT:
+              case ProductAccessTypeEnum.EXPERT:
                 return getI18nString("nux.campfire.full_seat");
-              case ud.DEVELOPER:
+              case ProductAccessTypeEnum.DEVELOPER:
                 return getI18nString("nux.campfire.dev_seat");
-              case ud.COLLABORATOR:
+              case ProductAccessTypeEnum.COLLABORATOR:
                 return getI18nString("nux.campfire.collab_seat");
-              case ud.CONTENT:
+              case ProductAccessTypeEnum.CONTENT:
                 return getI18nString("nux.campfire.content_seat");
               default:
                 throwTypeError(e);
@@ -252,7 +252,7 @@ function ea(e) {
     unit: IX.MONTH
   }));
   let O = SK(R, Fq.UPSELL_MODALS);
-  let [D] = mI(O);
+  let [D] = handleSuspenseRetainRelease(O);
   if (null === D.data) throw Error("Price data is null");
   let B = D.data;
   let L = jsx("div", {
@@ -374,7 +374,7 @@ function ea(e) {
               children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
                 monthlyCostInDollars: jsx("span", {
                   className: G8,
-                  children: P.formatMoney(B[ud.DESIGN].amount)
+                  children: P.formatMoney(B[ProductAccessTypeEnum.DESIGN].amount)
                 })
               })
             })]
@@ -384,7 +384,7 @@ function ea(e) {
               children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
                 monthlyCostInDollars: jsx("span", {
                   className: G8,
-                  children: P.formatMoney(B[ud.DEV_MODE].amount)
+                  children: P.formatMoney(B[ProductAccessTypeEnum.DEV_MODE].amount)
                 })
               })
             })]
@@ -394,7 +394,7 @@ function ea(e) {
               children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
                 monthlyCostInDollars: jsx("span", {
                   className: A,
-                  children: P.formatMoney(B[ud.FIGJAM].amount)
+                  children: P.formatMoney(B[ProductAccessTypeEnum.FIGJAM].amount)
                 })
               })
             })]

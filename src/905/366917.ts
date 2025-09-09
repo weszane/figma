@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { generateUUIDv4 } from "../905/871474";
 import { sD, FU } from "../905/937198";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { X } from "../905/880040";
 let l = new Map();
 let d = {
@@ -19,7 +19,7 @@ let u = {
 export function $$p0({
   collectionStableId: e
 }) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let {
     collections,
     status

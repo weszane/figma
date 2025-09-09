@@ -9,7 +9,7 @@ import { CT } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
 import { OrgProductTermsEligibleInfo } from "../figma_app/43951";
-import { D6, j_ } from "../figma_app/465071";
+import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 export let $$p1 = createRemovableAtomFamily(e => atom(t => e ? t(OrgProductTermsEligibleInfo.Query({
   orgId: e
 })).transform(({
@@ -20,8 +20,8 @@ export function $$h0(e, t) {
   let o = Xf(e?.id);
   let _ = _$$n();
   let m = useAtomWithSubscription($$p1(e?.id ?? null));
-  let h = D6("useProductTermsEligibility");
-  let b = j_(h).unwrapOr(!1);
+  let h = useCurrentPlanUser("useProductTermsEligibility");
+  let b = useIsOrgAdminUser(h).unwrapOr(!1);
   let x = o.data?.analyze_data_contract_v2_start;
   let k = x ? _$$A(x) : null;
   let w = _$$A();

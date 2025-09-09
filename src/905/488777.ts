@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo, useState, useRef, useImperativeHandle, useCallback } from "react";
 import { o as _$$o } from "../905/821217";
 import s from "classnames";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
@@ -185,7 +185,7 @@ function I({
       }), e.text.slice(e.searchedPrefix.length)]
     }), jsx("div", {
       children: renderI18nText("community.publishing.number_of_resources", {
-        num: $M(e.count)
+        num: formatNumber(e.count)
       })
     })]
   });

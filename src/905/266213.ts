@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { Kz } from "../905/760074";
+import { isBranchAlt } from "../905/760074";
 import { fA, qN, $c, Iy, p9 } from "../figma_app/803787";
 import { Qx, M$ } from "../figma_app/633080";
 import { bj, E4, m3 } from "../905/66449";
@@ -40,7 +40,7 @@ class f extends RecordingPureComponent {
     this.stopPropagation = e => e.stopPropagation();
   }
   render() {
-    if (!this.props.openFile || Kz(this.props.openFile)) return null;
+    if (!this.props.openFile || isBranchAlt(this.props.openFile)) return null;
     if (this.props.library.publishProgress.state !== Qx.NONE) return jsx(IK, {
       variant: "secondary",
       disabled: !0,

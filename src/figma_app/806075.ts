@@ -1,5 +1,5 @@
 import { getInitialOptions } from "../figma_app/169182";
-import { tn } from "../figma_app/473493";
+import { canAccessFullDevMode } from "../figma_app/473493";
 import { ds } from "../figma_app/314264";
 import { FFileActivityType } from "../figma_app/191312";
 import { FEditorType } from "../figma_app/53721";
@@ -10,7 +10,7 @@ export function $$c1(e, t, r, u, p = {}) {
   let h = t === FEditorType.Illustration;
   let m = {
     source: r,
-    hasSeatForDevMode: tn(e),
+    hasSeatForDevMode: canAccessFullDevMode(e),
     ...p
   };
   let g = e.openFile?.key;

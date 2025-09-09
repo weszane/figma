@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";
 import { getI18nState } from "../figma_app/363242";
 import { t7 } from "../905/989765";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { PS } from "../figma_app/598018";
 import { MK } from "../figma_app/120529";
 let _ = () => !(isIpadDevice() || getIsMobile());
 export function $$h1() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useSelector(e => e.orgById);
   let r = useSelector(e => e.teams);
   let a = e?.key;
   let o = useSelector(e => a && !!e.voice.activeCall[a]);
   let [l, d] = useState(!1);
-  let u = ZC(l);
+  let u = useLatestRef(l);
   useEffect(() => {
     let n = _() && 4 === $$g5({
       openFile: e,

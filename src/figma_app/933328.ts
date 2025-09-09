@@ -29,7 +29,7 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { Q as _$$Q } from '../905/477656';
 import { atomStoreManager } from '../905/490038';
 import { Hk } from '../905/497152';
-import { YQ } from '../905/502364';
+import { handleAtomEvent } from '../905/502364';
 import { s as _$$s2 } from '../905/506024';
 import { L as _$$L } from '../905/522457';
 import { e as _$$e3 } from '../905/545750';
@@ -61,7 +61,7 @@ import { c6 } from '../905/950959';
 import { r as _$$r } from '../905/955316';
 import { qp } from '../905/977779';
 import { b as _$$b } from '../905/985254';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { LibraryOrgSubscriptions, LibraryTeamSubscriptions, LibraryUserSubscriptions, LibraryFileSubscriptions } from '../figma_app/43951';
 import { uo, yJ } from '../figma_app/78808';
 import { Eo } from '../figma_app/80990';
@@ -69,7 +69,7 @@ import { Ob } from '../figma_app/111825';
 import { LL, OQ } from '../figma_app/141508';
 import o, { VariableSetIdCompatHandler } from '../figma_app/243058';
 import { e as _$$e2 } from '../figma_app/267183';
-import { Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { ds } from '../figma_app/314264';
 import { RX } from '../figma_app/409131';
 import { am, F$ } from '../figma_app/430563';
@@ -77,7 +77,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { C$ } from '../figma_app/457074';
 import { isEmptyObject } from '../figma_app/493477';
 import { kb } from '../figma_app/502247';
-import { DC } from '../figma_app/566371';
+import { handleStatusChangeEffect } from '../figma_app/566371';
 import { cD } from '../figma_app/598018';
 import { qr } from '../figma_app/608944';
 import { PW, wg } from '../figma_app/633080';
@@ -290,15 +290,15 @@ let $$e$8 = createOptimistThunk((e, t) => {
         let i = Object.keys(n && n.type === 'INSTANCE' && n.componentProperties() || {}).length > 0;
         r && i ? (e.dispatch(_$$E({
           nodeId: s
-        })), YQ({
+        })), handleAtomEvent({
           id: sh
         })) : r ? (e.dispatch(_$$E({
           nodeId: s
-        })), YQ({
+        })), handleAtomEvent({
           id: Sp
-        })) : i ? YQ({
+        })) : i ? handleAtomEvent({
           id: An
-        }) : YQ({
+        }) : handleAtomEvent({
           id: fe
         });
       }
@@ -487,9 +487,9 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
           let a = I.mirror.sceneGraph.get(n.localGUID)?.childrenNodes[0];
           a && (C$(a) && i !== defaultSessionLocalIDString ? (e.dispatch(_$$E({
             nodeId: i
-          })), YQ({
+          })), handleAtomEvent({
             id: sh
-          })) : YQ({
+          })) : handleAtomEvent({
             id: An
           }));
         });
@@ -1456,7 +1456,7 @@ export function $$tR19(e, t = {}) {
   let n = useDispatch();
   let [a] = r;
   let s = useSetAtom(qU);
-  DC(a, e => {
+  handleStatusChangeEffect(a, e => {
     let t = e.files.map(e => e.file);
     t.length > 0 && n(uo({
       files: t,
@@ -1546,7 +1546,7 @@ export function $$tk34(e, t, r) {
 }
 let $$tM9 = function (e) {
   let t = useStore();
-  let r = Rs(LibraryFileSubscriptions, {
+  let r = useSubscription(LibraryFileSubscriptions, {
     fileKey: e
   }, {
     enabled: !!e
@@ -1554,7 +1554,7 @@ let $$tM9 = function (e) {
   let {
     data
   } = useMemo(() => r.transform(e => e?.file?.libraryFileSubscriptionOverrides ?? []), [r]);
-  let s = ZC(data);
+  let s = useLatestRef(data);
   useEffect(() => {
     s && data && tD(t, s, data);
   }, [t, data, s]);
@@ -1568,15 +1568,15 @@ let $$tj42 = function () {
   let r = LH();
   let {
     data
-  } = Rs(LibraryUserSubscriptions, {});
-  let s = ZC(data);
+  } = useSubscription(LibraryUserSubscriptions, {});
+  let s = useLatestRef(data);
   useEffect(() => {
     if (!s || !data) return;
     let t = data?.currentUser?.libraryUserSubscriptions;
     $$tk34(e, s?.currentUser?.libraryUserSubscriptions, t);
   }, [e, data, s]);
   let o = Nn();
-  let l = ZC(o);
+  let l = useLatestRef(o);
   useEffect(() => {
     if (!o || !l) return;
     let t = sj(o);
@@ -1584,19 +1584,19 @@ let $$tj42 = function () {
   }, [e, o, l]);
   let {
     data: _data
-  } = Rs(LibraryOrgSubscriptions, {
+  } = useSubscription(LibraryOrgSubscriptions, {
     orgId: r
   }, {
     enabled: !!r
   });
-  let c = ZC(_data);
+  let c = useLatestRef(_data);
   useEffect(() => {
     if (!c || !_data) return;
     let t = _data?.orgLibrarySubscriptions;
     $$tk34(e, c?.orgLibrarySubscriptions, t);
   }, [e, _data, c]);
   let u = cD();
-  let p = Rs(LibraryTeamSubscriptions, {});
+  let p = useSubscription(LibraryTeamSubscriptions, {});
   let {
     data: _data2
   } = useMemo(() => p.transform(e => {
@@ -1608,7 +1608,7 @@ let $$tj42 = function () {
     }
     return i;
   }), [t, r, u, p]);
-  let h = ZC(_data2);
+  let h = useLatestRef(_data2);
   useEffect(() => {
     h && _data2 && tD(e, Object.values(h).flat(), Object.values(_data2).flat());
   }, [e, _data2, h]);

@@ -5,7 +5,7 @@ import { reportError } from "../905/11";
 import { bv } from "../figma_app/421401";
 import { getI18nString } from "../905/303541";
 import { JT, nf, V5 } from "../figma_app/847597";
-import { Gu, ud } from "../905/513035";
+import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
 import { f2 } from "../figma_app/217457";
 import { FPlanAccessType, FUpgradeReasonType } from "../figma_app/191312";
@@ -36,7 +36,7 @@ function m(e) {
     isPendingSeat,
     seatTypeKey
   } = $$h4(e);
-  return isPendingSeat ? null : seatTypeKey || Gu.VIEW;
+  return isPendingSeat ? null : seatTypeKey || ViewAccessTypeEnum.VIEW;
 }
 export function $$g5(e, t) {
   return !t || t === m(e);
@@ -91,7 +91,7 @@ export function $$y7(e, t) {
     active_seat_type: null
   } : {};
 }
-let $$b3 = [ud.EXPERT, ud.DEVELOPER, ud.COLLABORATOR, Gu.VIEW];
+let $$b3 = [ProductAccessTypeEnum.EXPERT, ProductAccessTypeEnum.DEVELOPER, ProductAccessTypeEnum.COLLABORATOR, ViewAccessTypeEnum.VIEW];
 let $$T6 = [FUpgradeReasonType.SCIM];
 export function $$I0(e) {
   return jsx(bv, {

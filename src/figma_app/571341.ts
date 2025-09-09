@@ -14,7 +14,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { l as _$$l } from "../905/745972";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { reportError } from "../905/11";
 import { Ss } from "../905/720292";
@@ -23,12 +23,12 @@ import { qc } from "../figma_app/858013";
 import { renderI18nText } from "../905/303541";
 import { t as _$$t } from "../905/241707";
 import { lW } from "../figma_app/11182";
-import { tS, q5 } from "../figma_app/516028";
+import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FEventType } from "../figma_app/191312";
 import { DevModeActivity } from "../figma_app/43951";
 import { IT } from "../905/713695";
 import { cn, tP, kT } from "../figma_app/841351";
-import { mg } from "../905/535806";
+import { ViewType } from "../905/535806";
 import { NK } from "../figma_app/111825";
 import { compareChangesModalPadding } from "../figma_app/786175";
 import { Hb, KJ, DF, Lg, $0, Sl, GE } from "../905/850755";
@@ -59,7 +59,7 @@ export function $$H7(e) {
   return t;
 }
 export function $$z8(e) {
-  let t = tS();
+  let t = useCurrentFileKey();
   let r = $$K1(e ?? "");
   let n = e ? ("loading" === r ? null : r)?.map(e => e.version?.id).filter(_$$t) : void 0;
   let a = kT({
@@ -78,12 +78,12 @@ export function $$z8(e) {
     requestStatus: "loading" === r ? "loading" : o.status
   };
 }
-mg.COMPARE_THUMBNAIL;
+ViewType.COMPARE_THUMBNAIL;
 let W = atom("");
 export function $$K1(e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let r = t?.key;
-  let n = Rs(DevModeActivity, {
+  let n = useSubscription(DevModeActivity, {
     nodeId: e,
     fileKey: r ?? ""
   }, {

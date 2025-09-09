@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import u from "classnames";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h2 } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { M } from "../figma_app/648761";
 import { getInitialOptions } from "../figma_app/169182";
 import { Uz } from "../905/63728";
@@ -99,7 +99,7 @@ export function $$P7(e, t) {
     o(!1);
     r();
   });
-  let O = ZC(e.isFocused);
+  let O = useLatestRef(e.isFocused);
   useEffect(() => {
     O || !0 !== e.isFocused ? !0 === O && !1 === e.isFocused && n() : r();
   }, [n, r, O, e.isFocused]);

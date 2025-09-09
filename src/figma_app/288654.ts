@@ -1,199 +1,374 @@
-import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useStableMemo } from '../905/19536';
-import { SubscriptionManager } from '../905/417830';
-import { LivegraphContext } from '../905/436043';
-import { trackEventAnalytics } from '../905/449184';
-import { RetainedPromiseManager } from '../905/491061';
-import { TimerHandler } from '../905/609813';
-import { bu, lw } from '../905/663269';
-import { DEFAULT_DISABLED_STATE } from '../905/795642';
-import { generateUUIDv4 } from '../905/871474';
-import { DEFAULT_LOADING_STATE } from '../905/957591';
-import { resourceUtils } from '../905/989992';
-import { ConnectionState } from '../figma_app/28817';
-import { ZC } from '../figma_app/39751';
-function f() {
-  let e = useContext(LivegraphContext);
-  if (!e) throw new Error('Tried to use useSubscription outside a LiveGraph context provider');
-  return e;
+import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useStableMemo } from '../905/19536'
+import { SubscriptionManager } from '../905/417830'
+import { LivegraphContext } from '../905/436043'
+import { trackEventAnalytics } from '../905/449184'
+import { RetainedPromiseManager } from '../905/491061'
+import { TimerHandler } from '../905/609813'
+import { hasInternalSymbol } from '../905/663269'
+import { DEFAULT_DISABLED_STATE } from '../905/795642'
+import { generateUUIDv4 } from '../905/871474'
+import { deepEqual, DEFAULT_LOADING_STATE } from '../905/957591'
+import { resourceUtils } from '../905/989992'
+import { ConnectionState } from '../figma_app/28817'
+import { useLatestRef } from '../figma_app/922077'
+
+/**
+ * LivegraphContext hook (f)
+ * Throws if used outside LiveGraph context provider.
+ */
+function useLivegraphContext() {
+  const context = useContext(LivegraphContext)
+  if (!context) {
+    throw new Error('Tried to use useSubscription outside a LiveGraph context provider')
+  }
+  return context
 }
-export function $$E4() {
-  return f().client;
+
+/**
+ * Returns the Livegraph client from context.
+ * @returns {any}
+ */
+export function getLivegraphClient() {
+  return useLivegraphContext().client
 }
-function y(e) {
-  return !e.hasOwnProperty('enabled') || !!e.enabled;
+
+/**
+ * Checks if subscription is enabled.
+ * @param {object} options
+ * @returns {boolean}
+ */
+function isSubscriptionEnabled(options: any): boolean {
+  return !Object.prototype.hasOwnProperty.call(options, 'enabled') || !!options.enabled
 }
-export function $$b2(...e) {
-  let t = T(e) ? e[0].view : e[0];
-  let r = T(e) ? e[0].args : e[1];
-  let i = (T(e) ? e[1] : e[2]) ?? {};
-  let s = y(i);
-  let [l, d] = useState(s && r ? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE);
-  let u = f();
-  let [_, h] = useState(r);
-  let m = i.traceId;
-  let g = l;
-  u.mock && r && (g = u.mock.useSubscription(t, r));
-  r && !lw(r, _) && (h(r), d(g = s ? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE));
+
+/**
+ * Determines if argument is a view subscription tuple.
+ * @param {any[]} args
+ * @returns {boolean}
+ */
+function isViewSubscriptionTuple(args: any[]): boolean {
+  return Array.isArray(args) && (args.length === 1 || args.length === 2) && hasInternalSymbol(args[0])
+}
+
+/**
+ * useSubscription (formerly $$b2)
+ * Handles subscription logic for a view and args.
+ */
+export function useSubscription(...args: any[]) {
+  const view = isViewSubscriptionTuple(args) ? args[0].view : args[0]
+  const viewArgs = isViewSubscriptionTuple(args) ? args[0].args : args[1]
+  const options = (isViewSubscriptionTuple(args) ? args[1] : args[2]) ?? {}
+  const enabled = isSubscriptionEnabled(options)
+
+  const [result, setResult] = useState(enabled && viewArgs ? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE)
+  const context = useLivegraphContext()
+  const [lastArgs, setLastArgs] = useState(viewArgs)
+  const traceId = options.traceId
+  let currentResult = result
+
+  if (context.mock && viewArgs) {
+    currentResult = context.mock.useSubscription(view, viewArgs)
+  }
+
+  if (viewArgs && !deepEqual(viewArgs, lastArgs)) {
+    setLastArgs(viewArgs)
+    setResult(currentResult = enabled ? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE)
+  }
+
   useEffect(() => {
-    if (u.mock) return;
-    if (!1 === s) {
-      d(DEFAULT_DISABLED_STATE);
-      return;
+    if (context.mock)
+      return
+    if (!enabled) {
+      setResult(DEFAULT_DISABLED_STATE)
+      return
     }
-    if (!_) return;
-    let e = u.client?.subscribe(t, _, e => {
-      d(e);
-    }, m);
+    if (!lastArgs)
+      return
+    const unsubscribe = context.client?.subscribe(view, lastArgs, setResult, traceId)
     return () => {
-      e?.();
-    };
-  }, [s, _, u.client, u.mock, t, m]);
-  return useMemo(() => resourceUtils.from(g), [g]);
-}
-function T(e) {
-  return Array.isArray(e) && (e.length === 1 || e.length === 2) && bu(e[0]);
-}
-export function $$I0(...e) {
-  let t = T(e) ? e[0].view : e[0];
-  let r = T(e) ? e[0].args : e[1];
-  let l = (T(e) ? e[1] : e[2]) ?? {};
-  let d = useStableMemo(r, lw);
-  let u = y(l);
-  let _ = function () {
-    let [e, t] = useState(0);
-    return useCallback(() => t(e => e + 1), []);
-  }();
-  let g = f();
-  let E = l.traceId;
-  let b = function (e, t) {
-    let r = useRef(generateUUIDv4());
-    let i = ZC(e);
-    let a = ZC(t);
-    void 0 === i || void 0 === a || i === e && lw(t, a) || (r.current = generateUUIDv4());
-    return r.current;
-  }(t, d);
-  let S = useMemo(() => g.client?.viewHasStaticQueries(t) ? {
-    ...d,
-    __requestId: b
-  } : d, [d, b, t, g.client]);
-  let v = u && S ? g.mock ? g.mock.useSubscription(t, S) : g.client?.getViewResult(t, S) ?? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE;
-  useEffect(() => {
-    if (!g.mock && !1 !== u && S) return g.client?.subscribe(t, S, _, E);
-  }, [u, g.client, g.mock, t, E, S, _]);
-  let A = useMemo(() => new RetainedPromiseManager(() => () => {}), []);
-  return useMemo(() => {
-    let e = g.client;
-    return e == null ? resourceUtils.disabled() : resourceUtils.suspendableFrom(v, () => new Promise((r, n) => {
-      let i = e.subscribe(t, d, e => {
-        e.status === 'loaded' ? (r(), setTimeout(() => i?.())) : e.errors && (n(e.errors), setTimeout(() => i?.()));
-      });
-    }), A);
-  }, [d, g.client, v, A, t]);
-}
-export function $$S7(e, t, r = {}) {
-  let i = f();
-  let s = y(r);
-  let [o, d] = useState({});
-  let [c] = useState(() => new SubscriptionManager(i.client, () => d({})));
-  useLayoutEffect(() => {
-    c.update(e, s ? t : []);
-  }, [c, e, t, s]);
-  useLayoutEffect(() => () => c.clear(), [c]);
-  return useMemo(() => t.map(e => ({
-    args: e,
-    result: s ? resourceUtils.from(c.currentResult(e)) : resourceUtils.disabled()
-  })), [c, t, s, o]);
-}
-export function $$v3() {
-  let e = f();
-  let [t, r] = useState(e.client ? e.client.getHealthStatus() : ConnectionState.DISCONNECTED);
-  let i = e => r(e);
-  useEffect(() => {
-    if (e.client !== null) return e.client.addHealthListener(i);
-  }, [e]);
-  return t;
-}
-class A {
-  constructor(e, t, r) {
-    this.viewArgs = e;
-    this.traceId = generateUUIDv4();
-    this.errors = null;
-    this._isLoading = !0;
-    this.timer = new TimerHandler({
-      onTimeout: () => t(this),
-      timeoutMs: r
-    });
-  }
-  finish() {
-    this._isLoading = !1;
-    this.timer.finish();
-  }
-  get timeElapsedMs() {
-    return this.timer.getTime();
-  }
-  get wasBackgrounded() {
-    return this.timer.backgrounded;
-  }
-  get wasOffline() {
-    return this.timer.wasOffline;
-  }
-  get wasDisconnected() {
-    return this.timer.wasDisconnected;
-  }
-  get isLoading() {
-    return this._isLoading;
-  }
-}
-export function $$x6(e, t, r) {
-  let i = useRef(null);
-  let a = !1 !== r.enabled;
-  let s = r.subscriptionLogger;
-  let l = useRef(t);
-  let d = i.current;
-  !i.current && a && (i.current = new A(t, e => s.onEvent('stuck', u, e), s.stuckMs));
-  let c = a ? i.current.traceId : void 0;
-  let u = $$b2(e, t, {
-    enabled: a,
-    traceId: c
-  });
-  if (d === null && a && s.onEvent('initiated', u, i.current), !lw(t, l.current)) {
-    let e = new A(t, e => s.onEvent('stuck', u, e), s.stuckMs);
-    i.current?.isLoading && (i.current.finish(), s.onEvent('canceled', u, i.current, {
-      nextTraceId: e.traceId
-    }));
-    i.current = e;
-    s.onEvent('initiated', u, i.current);
-    l.current = t;
-  }
-  useEffect(() => {
-    u.status === 'loaded' ? i.current?.isLoading && (i.current.finish(), s.onEvent('loaded', u, i.current)) : u.status === 'errors' && i.current?.isLoading && (i.current.finish(), i.current.errors = u.errors, s.onEvent('error', u, i.current));
-  }, [u, u.errors, u.status, s]);
-  useEffect(() => () => {
-    i.current?.isLoading && (i.current.finish(), s.onEvent('canceled', u, i.current));
-  }, []);
-  return u;
-}
-export function $$N5(e, t, r = {}) {
-  let i = useRef(window.performance.now());
-  let a = useRef(!1);
-  useEffect(() => {
-    if (!a.current && e.status !== 'loading' && e.status !== 'disabled') {
-      let n = window.performance.now();
-      trackEventAnalytics(t, {
-        ...r,
-        durationMs: n - i.current,
-        status: e.status
-      });
-      a.current = !0;
+      unsubscribe?.()
     }
-  }, [r, t, e.status]);
+  }, [enabled, lastArgs, context.client, context.mock, view, traceId])
+
+  return useMemo(() => resourceUtils.from(currentResult), [currentResult])
 }
-export { Dj } from '../figma_app/28817';
-export const Bh = $$I0;
-export const Rs = $$b2;
-export const Ym = $$v3;
-export const ZA = $$E4;
-export const ap = $$N5;
-export const oS = $$x6;
-export const p = $$S7;
+
+/**
+ * useSuspendableSubscription (formerly $$I0)
+ * Returns a suspendable resource for a subscription.
+ */
+export function useSuspendableSubscription(...args: any[]) {
+  const view = isViewSubscriptionTuple(args) ? args[0].view : args[0]
+  const viewArgs = isViewSubscriptionTuple(args) ? args[0].args : args[1]
+  const options = (isViewSubscriptionTuple(args) ? args[1] : args[2]) ?? {}
+  const memoizedArgs = useStableMemo(viewArgs, deepEqual)
+  const enabled = isSubscriptionEnabled(options)
+
+  // Helper for triggering updates
+  const [_, setUpdateCount] = useState(0)
+  const forceUpdate = useCallback(() => setUpdateCount(count => count + 1), [])
+
+  const context = useLivegraphContext()
+  const traceId = options.traceId
+
+  // Generate a unique request ID for each args change
+  const requestId = useMemo(() => {
+    const ref = useRef(generateUUIDv4())
+    const latestView = useLatestRef(view)
+    const latestArgs = useLatestRef(memoizedArgs)
+    if (latestView !== view || !deepEqual(memoizedArgs, latestArgs)) {
+      ref.current = generateUUIDv4()
+    }
+    return ref.current
+  }, [view, memoizedArgs])
+
+  // Compose subscription args with requestId if static queries
+  const subscriptionArgs = useMemo(() => {
+    return context.client?.viewHasStaticQueries(view)
+      ? { ...memoizedArgs, __requestId: requestId }
+      : memoizedArgs
+  }, [memoizedArgs, requestId, view, context.client])
+
+  const subscriptionResult = enabled && subscriptionArgs
+    ? context.mock
+      ? context.mock.useSubscription(view, subscriptionArgs)
+      : context.client?.getViewResult(view, subscriptionArgs) ?? DEFAULT_LOADING_STATE
+    : DEFAULT_DISABLED_STATE
+
+  useEffect(() => {
+    if (!context.mock && enabled && subscriptionArgs) {
+      return context.client?.subscribe(view, subscriptionArgs, forceUpdate, traceId)
+    }
+  }, [enabled, context.client, context.mock, view, traceId, subscriptionArgs, forceUpdate])
+
+  const retainedPromiseManager = useMemo(() => new RetainedPromiseManager(() => () => {}), [])
+
+  return useMemo(() => {
+    const client = context.client
+    if (!client)
+      return resourceUtils.disabled()
+    return resourceUtils.suspendableFrom(
+      subscriptionResult,
+      () =>
+        new Promise((resolve, reject) => {
+          const unsubscribe = client.subscribe(view, memoizedArgs, (res: any) => {
+            if (res.status === 'loaded') {
+              resolve(undefined)
+              setTimeout(() => unsubscribe?.())
+            }
+            else if (res.errors) {
+              reject(res.errors)
+              setTimeout(() => unsubscribe?.())
+            }
+          })
+        }),
+      retainedPromiseManager,
+    )
+  }, [memoizedArgs, context.client, subscriptionResult, retainedPromiseManager, view])
+}
+
+/**
+ * useMultiSubscription (formerly $$S7)
+ * Handles multiple subscriptions for a set of args.
+ */
+export function useMultiSubscription(view: any, argsList: any[], options: any = {}) {
+  const context = useLivegraphContext()
+  const enabled = isSubscriptionEnabled(options)
+
+  const [updateToken, setUpdateToken] = useState({})
+  const [manager] = useState(() => new SubscriptionManager(context.client, () => setUpdateToken({})))
+
+  useLayoutEffect(() => {
+    manager.update(view, enabled ? argsList : [])
+  }, [manager, view, argsList, enabled])
+
+  useLayoutEffect(() => () => manager.clear(), [manager])
+
+  return useMemo(
+    () =>
+      argsList.map(args => ({
+        args,
+        result: enabled ? resourceUtils.from(manager.currentResult(args)) : resourceUtils.disabled(),
+      })),
+    [manager, argsList, enabled, updateToken],
+  )
+}
+
+/**
+ * useConnectionState (formerly $$v3)
+ * Tracks the connection state of the Livegraph client.
+ */
+export function useConnectionState() {
+  const context = useLivegraphContext()
+  const [state, setState] = useState(
+    context.client ? context.client.getHealthStatus() : ConnectionState.DISCONNECTED,
+  )
+
+  useEffect(() => {
+    if (context.client !== null) {
+      return context.client.addHealthListener(setState)
+    }
+  }, [context])
+
+  return state
+}
+
+/**
+ * SubscriptionTimer (formerly class A)
+ * Tracks timing and status for a subscription.
+ */
+class SubscriptionTimer {
+  viewArgs: any
+  traceId: string
+  errors: any
+  _isLoading: boolean
+  timer: TimerHandler
+
+  constructor(viewArgs: any, onTimeout: (timer: SubscriptionTimer) => void, timeoutMs: number) {
+    this.viewArgs = viewArgs
+    this.traceId = generateUUIDv4()
+    this.errors = null
+    this._isLoading = true
+    this.timer = new TimerHandler({
+      onTimeout: () => onTimeout(this),
+      timeoutMs,
+    })
+  }
+
+  finish() {
+    this._isLoading = false
+    this.timer.finish()
+  }
+
+  get timeElapsedMs() {
+    return this.timer.getTime()
+  }
+
+  get wasBackgrounded() {
+    return this.timer.backgrounded
+  }
+
+  get wasOffline() {
+    return this.timer.wasOffline
+  }
+
+  get wasDisconnected() {
+    return this.timer.wasDisconnected
+  }
+
+  get isLoading() {
+    return this._isLoading
+  }
+}
+
+/**
+ * useLoggedSubscription (formerly $$x6)
+ * Tracks subscription lifecycle events for analytics/logging.
+ */
+export function useLoggedSubscription(
+  view: any,
+  args: any,
+  options: {
+    enabled?: boolean
+    subscriptionLogger: any
+    stuckMs: number
+  },
+) {
+  const timerRef = useRef<SubscriptionTimer | null>(null)
+  const enabled = options.enabled !== false
+  const logger = options.subscriptionLogger
+  const lastArgsRef = useRef(args)
+  const prevTimer = timerRef.current
+
+  const traceId = enabled ? timerRef.current?.traceId : undefined
+  const subscriptionResult = useSubscription(view, args, {
+    enabled,
+    traceId,
+  })
+
+  if (!timerRef.current && enabled) {
+    timerRef.current = new SubscriptionTimer(args, t => logger.onEvent('stuck', subscriptionResult, t), logger.stuckMs)
+  }
+
+  if (prevTimer === null && enabled) {
+    logger.onEvent('initiated', subscriptionResult, timerRef.current)
+  }
+  if (!deepEqual(args, lastArgsRef.current)) {
+    const newTimer = new SubscriptionTimer(args, t => logger.onEvent('stuck', subscriptionResult, t), logger.stuckMs)
+    if (timerRef.current?.isLoading) {
+      timerRef.current.finish()
+      logger.onEvent('canceled', subscriptionResult, timerRef.current, {
+        nextTraceId: newTimer.traceId,
+      })
+    }
+    timerRef.current = newTimer
+    logger.onEvent('initiated', subscriptionResult, timerRef.current)
+    lastArgsRef.current = args
+  }
+
+  useEffect(() => {
+    if (subscriptionResult.status === 'loaded' && timerRef.current?.isLoading) {
+      timerRef.current.finish()
+      logger.onEvent('loaded', subscriptionResult, timerRef.current)
+    }
+    else if (
+      subscriptionResult.status === 'errors'
+      && timerRef.current?.isLoading
+    ) {
+      timerRef.current.finish()
+      timerRef.current.errors = subscriptionResult.errors
+      logger.onEvent('error', subscriptionResult, timerRef.current)
+    }
+  }, [subscriptionResult, subscriptionResult.errors, subscriptionResult.status, logger])
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current?.isLoading) {
+        timerRef.current.finish()
+        logger.onEvent('canceled', subscriptionResult, timerRef.current)
+      }
+    }
+  }, [])
+
+  return subscriptionResult
+}
+
+/**
+ * useSubscriptionAnalytics (formerly $$N5)
+ * Tracks analytics for subscription duration and status.
+ */
+export function useSubscriptionAnalytics(
+  result: any,
+  eventName: string,
+  analyticsOptions: any = {},
+) {
+  const startTimeRef = useRef(window.performance.now())
+  const sentRef = useRef(false)
+
+  useEffect(() => {
+    if (
+      !sentRef.current
+      && result.status !== 'loading'
+      && result.status !== 'disabled'
+    ) {
+      const durationMs = window.performance.now() - startTimeRef.current
+      trackEventAnalytics(eventName, {
+        ...analyticsOptions,
+        durationMs,
+        status: result.status,
+      })
+      sentRef.current = true
+    }
+  }, [analyticsOptions, eventName, result.status])
+}
+
+// Export refactored names for imports
+export const Bh = useSuspendableSubscription
+export const Rs = useSubscription
+export const Ym = useConnectionState
+export const ZA = getLivegraphClient
+export const ap = useSubscriptionAnalytics
+export const oS = useLoggedSubscription
+export const p = useMultiSubscription
+export const Dj = ConnectionState

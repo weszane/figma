@@ -7,11 +7,11 @@ import { $n } from "../905/521428";
 import { k } from "../905/443820";
 import { _ as _$$_ } from "../figma_app/496441";
 import { N as _$$N } from "../905/438674";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { aK } from "../figma_app/401069";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanExport } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { S } from "../figma_app/787550";
@@ -92,7 +92,7 @@ function N({
   children: r,
   variant: a = "text"
 }) {
-  let c = tS() ?? "";
+  let c = useCurrentFileKey() ?? "";
   let u = $$T6(e);
   let [p, m] = useState(!1);
   let f = useCallback(() => {
@@ -165,7 +165,7 @@ function C({
     return r ? $$b7(t, r) : null;
   }({
     paint: e,
-    fileKey: tS() ?? ""
+    fileKey: useCurrentFileKey() ?? ""
   });
   let o = useDispatch();
   let l = useCallback(() => {
@@ -210,8 +210,8 @@ export function $$w1({
   children: r,
   variant: i = "text"
 }) {
-  let a = tS() ?? "";
-  let s = Rs(FileCanExport, {
+  let a = useCurrentFileKey() ?? "";
+  let s = useSubscription(FileCanExport, {
     key: a
   });
   return s.data?.file && "error" !== s.data.file.status && s.data?.file?.data?.hasPermission ? "VIDEO" === e.type && e.video ? jsx(N, {

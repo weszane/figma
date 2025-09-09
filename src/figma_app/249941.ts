@@ -76,7 +76,7 @@ import { Ib } from "../905/129884";
 import { g$ } from "../figma_app/116234";
 import { i as _$$i } from "../905/415810";
 import { n as _$$n3 } from "../figma_app/859750";
-import { oz } from "../905/561485";
+import { isSitesFeatureEnabled } from "../905/561485";
 import { Rt, po } from "../figma_app/945858";
 import { V3, W5, aN, TK, E7, P0, EA, EU } from "../figma_app/622978";
 import { A as _$$A3 } from "../6828/587919";
@@ -270,7 +270,7 @@ export function $$tI2(e) {
         };
       case "GROUP":
       case "FRAME":
-        if (oz() && t(e) && e.parentNode?.isResponsiveSetOrWebpage) return {
+        if (isSitesFeatureEnabled() && t(e) && e.parentNode?.isResponsiveSetOrWebpage) return {
           src: _$$n3(e.size.x),
           tooltip: getI18nString("layer_icon.tooltip.layout")
         };
@@ -344,7 +344,7 @@ export function $$tI2(e) {
           src: jsx(_$$l, {}),
           tooltip: getI18nString("layer_icon.tooltip.code_layer")
         };
-        if (oz()) return {
+        if (isSitesFeatureEnabled()) return {
           src: a === g$.Webpage ? jsx(_$$A2, {}) : jsx(_$$t, {}),
           tooltip: getI18nString("layer_icon.tooltip.webpage")
         };
@@ -353,7 +353,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "REPEATER":
-        if (oz() && _$$U()) return {
+        if (isSitesFeatureEnabled() && _$$U()) return {
           src: jsx(_$$u, {}),
           tooltip: getI18nString("layer_icon.tooltip.repeater")
         };
@@ -362,7 +362,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "CMS_RICH_TEXT":
-        if (oz() && _$$U()) return {
+        if (isSitesFeatureEnabled() && _$$U()) return {
           src: jsx(_$$G, {}),
           tooltip: getI18nString("layer_icon.tooltip.cms_rich_text")
         };
@@ -371,7 +371,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "CODE_COMPONENT":
-        if (oz()) return {
+        if (isSitesFeatureEnabled()) return {
           src: jsx(_$$R2, {}),
           tooltip: getI18nString("layer_icon.tooltip.code_component")
         };
@@ -380,7 +380,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "CODE_INSTANCE":
-        if (!oz()) return {
+        if (!isSitesFeatureEnabled()) return {
           src: _$$A14,
           tooltip: getI18nString("layer_icon.tooltip.component")
         };
@@ -416,7 +416,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.react_fiber")
         };
       case "CODE_LAYER":
-        if (oz()) return {
+        if (isSitesFeatureEnabled()) return {
           src: jsx(_$$l, {}),
           tooltip: getI18nString("layer_icon.tooltip.code_layer")
         };
@@ -425,7 +425,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "CODE_LIBRARY":
-        if (oz()) return {
+        if (isSitesFeatureEnabled()) return {
           src: jsx(_$$O, {}),
           tooltip: getI18nString("layer_icon.tooltip.code_library")
         };
@@ -434,7 +434,7 @@ export function $$tI2(e) {
           tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "CODE_FILE":
-        if (!oz()) return {
+        if (!isSitesFeatureEnabled()) return {
           src: _$$A14,
           tooltip: getI18nString("layer_icon.tooltip.component")
         };

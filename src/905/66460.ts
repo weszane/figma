@@ -1,13 +1,24 @@
-import { FUserRoleType } from "../figma_app/191312";
-import { jh } from "../figma_app/35887";
-export function $$a0(e) {
-  switch (e) {
+import { OrgUserRoleEnum } from '../figma_app/35887'
+import { FUserRoleType } from '../figma_app/191312'
+
+/**
+ * Maps FUserRoleType to OrgUserRoleEnum.
+ * @param role - The user role from FUserRoleType.
+ * @returns The corresponding OrgUserRoleEnum value.
+ * @see $$a0
+ */
+export function mapUserRoleToOrgUserRole(role: FUserRoleType): OrgUserRoleEnum | undefined {
+  switch (role) {
     case FUserRoleType.GUEST:
-      return jh.GUEST;
+      return OrgUserRoleEnum.GUEST
     case FUserRoleType.MEMBER:
-      return jh.MEMBER;
+      return OrgUserRoleEnum.MEMBER
     case FUserRoleType.ADMIN:
-      return jh.ADMIN;
+      return OrgUserRoleEnum.ADMIN
+    default:
+      return undefined
   }
 }
-export const A = $$a0;
+
+// Refactored export for compatibility with original usage (A)
+export const A = mapUserRoleToOrgUserRole

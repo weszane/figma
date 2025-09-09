@@ -5,7 +5,7 @@ import { H_ } from "../905/963340";
 import { useHandleGenericEvent, generateRecordingKey } from "../figma_app/878298";
 import { SU } from "../figma_app/451499";
 import { g } from "../905/412697";
-import { cJ } from "../905/561485";
+import { useIsFullscreenSitesView } from "../905/561485";
 let u = new SU();
 export function $$p0({
   blendMode: e,
@@ -45,7 +45,7 @@ let $$$$m1 = memo(function ({
   recordingKey: r,
   onFocus: s
 }) {
-  let o = cJ();
+  let o = useIsFullscreenSitesView();
   return jsx(Fragment, {
     children: t.map((t, l) => jsx(YJ, {
       children: t.map(t => jsx(h, {

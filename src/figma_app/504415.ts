@@ -16,7 +16,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { fk } from "../figma_app/618433";
 import { popModalStack } from "../905/156213";
 import { D, m as _$$m } from "../905/852057";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { _b } from "../figma_app/841351";
 import { registerModal } from "../905/102752";
 import { B } from "../905/867899";
@@ -187,7 +187,7 @@ x.savedLabelInput = "";
 x.savedDescriptionInput = "";
 let $$C1 = registerModal(function (e) {
   let t = hS(e);
-  let r = q5();
+  let r = selectCurrentFile();
   let s = useDispatch();
   let o = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
   let l = e.description || "";
@@ -225,7 +225,7 @@ let $$C1 = registerModal(function (e) {
   }), null);
 });
 let $$w0 = registerModal(function (e) {
-  let t = q5();
+  let t = selectCurrentFile();
   let r = useDispatch();
   let s = hS(e);
   let o = N(e.savepointID, !1);

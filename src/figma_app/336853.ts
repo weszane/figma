@@ -3,13 +3,13 @@ import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { zN, xf } from "../figma_app/416935";
 import { isGovCluster, isDevEnvironment } from "../figma_app/169182";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { Qw } from "../figma_app/47866";
 import { getI18nString } from "../905/303541";
 import { FCostCenterType } from "../figma_app/191312";
 import { Ct, Gv, CT } from "../figma_app/736948";
 import { OrgWorkspaceCount } from "../figma_app/43951";
-import { X$, D6, Az, sI } from "../figma_app/465071";
+import { useCurrentPublicPlan, useCurrentPlanUser, useIsOrgOrEnterprisePlan, useIsOrgGuestUser } from "../figma_app/465071";
 export function $$m2(e, t) {
   let r = e.map(e => e.domain.toLowerCase());
   let n = zN(t);
@@ -85,11 +85,11 @@ export function $$R4(e) {
   return !!(e?.bigma_enabled && e?.security_add_on_enabled_at);
 }
 export function $$L3(e) {
-  let t = X$("useEnterpriseOrgDirectoryEnabled");
-  let r = D6("useEnterpriseOrgDirectoryEnabled");
-  let i = Az(t);
-  let a = sI(r);
-  let s = Rs(OrgWorkspaceCount({
+  let t = useCurrentPublicPlan("useEnterpriseOrgDirectoryEnabled");
+  let r = useCurrentPlanUser("useEnterpriseOrgDirectoryEnabled");
+  let i = useIsOrgOrEnterprisePlan(t);
+  let a = useIsOrgGuestUser(r);
+  let s = useSubscription(OrgWorkspaceCount({
     orgId: e
   }));
   return useMemo(() => Qw.transformAll([i, a, s], (e, t, r) => !!e && !t && !!r.org?.workspaceCount.data), [i, a, s]);

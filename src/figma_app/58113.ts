@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Cg, Gb, sw } from "../figma_app/534676";
@@ -45,8 +45,8 @@ export function $$m0({
       textSize: "small"
     }) : null;
   })();
-  let f = $M(t);
-  let E = $M(e.like_count);
+  let f = formatNumber(t);
+  let E = formatNumber(e.like_count);
   return jsxs("div", {
     className: "detail_engagement_row--detailEngagementRow--JLmtH",
     children: [jsxs(_, {

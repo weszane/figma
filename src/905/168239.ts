@@ -19,7 +19,7 @@ import { hoH } from "../figma_app/6204";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/388233";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
-import { X$ } from "../figma_app/465071";
+import { useCurrentPublicPlan } from "../figma_app/465071";
 import { O } from "../figma_app/809387";
 import { J7, _d, SN, G_, M7 } from "../figma_app/650409";
 import { p as _$$p } from "../figma_app/353099";
@@ -64,7 +64,7 @@ export function $$O0({
   rightActions: i
 }) {
   let s = useDispatch();
-  let l = X$("OrgAdminSettingsSecondaryTabs").unwrapOr(null);
+  let l = useCurrentPublicPlan("OrgAdminSettingsSecondaryTabs").unwrapOr(null);
   let m = l?.tier === FPlanNameType.ENTERPRISE;
   let h = _$$b(l?.tier);
   let f = getFeatureFlags().ff_a11y_page_tab_fix;

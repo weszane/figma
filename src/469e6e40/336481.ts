@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { s as _$$s } from "../905/403855";
 import { zN } from "../figma_app/416935";
-import { Ay } from "../figma_app/930338";
+import { toTitleCase } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
@@ -11,9 +11,9 @@ import { B as _$$B } from "../905/261906";
 import { JT } from "../figma_app/847597";
 import { Ib } from "../905/129884";
 import { hz, cG } from "../469e6e40/123707";
-if (_require, 443 == require.j) { }
+if (_require, 443 == require.j) {}
 export function $$g0(e) {
-  return Ay(zN(e.user?.email ?? "") ?? "");
+  return toTitleCase(zN(e.user?.email ?? "") ?? "");
 }
 export function $$h2(e) {
   let {

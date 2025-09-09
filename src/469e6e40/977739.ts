@@ -6,7 +6,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { gY } from "../figma_app/566371";
+import { getAtomMutate } from "../figma_app/566371";
 import { z as _$$z, Z } from "../905/306088";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -218,7 +218,7 @@ let $$z0 = registerModal(function ({
   let [L, D] = useState();
   let M = useMemo(() => R || (T.data ? new Set(T.data.frequencies) : new Set()), [R, T.data]);
   let P = useMemo(() => L || (T.data ? T.data.recipient_settings : UI.SPECIFIC_ADMINS), [L, T.data]);
-  let U = gY(G);
+  let U = getAtomMutate(G);
   let [F, z] = useState(Rs());
   let [V, W] = useState(!1);
   let [H, Y] = useState(!1);

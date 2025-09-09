@@ -12,7 +12,7 @@ import { IT } from "../905/864644";
 import { YO } from "../figma_app/672951";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { oJ } from "../905/63728";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { BrowserInfo } from "../figma_app/778880";
 import { Ex, zE } from "../figma_app/919079";
 import { tH, H4 } from "../905/751457";
@@ -101,7 +101,7 @@ function em(e) {
   let f = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_org?.id ?? null : d;
   let y = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_team?.id ?? null : u;
   let b = Um();
-  let v = Rs(FavoritesByResourceId, {
+  let v = useSubscription(FavoritesByResourceId, {
     resourceId: e.folder.id,
     resourceType: FEntityType.FOLDER,
     orgId: f,

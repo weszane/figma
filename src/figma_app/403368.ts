@@ -1,11 +1,11 @@
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
-import { Rs } from "../figma_app/288654";
-import { tS } from "../figma_app/516028";
+import { useSubscription } from "../figma_app/288654";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FileFeaturesEnabled } from "../figma_app/43951";
 export function $$l0() {
-  let e = tS();
-  let t = Rs(FileFeaturesEnabled, {
+  let e = useCurrentFileKey();
+  let t = useSubscription(FileFeaturesEnabled, {
     fileKey: e || ""
   }, {
     enabled: !!e

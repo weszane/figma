@@ -16,7 +16,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Ku } from "../figma_app/740163";
 import { normalizeValue, getCommonFromArray } from "../905/216495";
 import { Tm, rC, Em } from "../figma_app/385874";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
 import { zK } from "../905/182453";
@@ -128,7 +128,7 @@ function B(e) {
     className: "pencil_tool_panel--advancedStroke--1497y",
     children: jsx(_$$d, {
       onClick: () => {
-        if (e.pickerShown?.id === t) w(XE()); else {
+        if (e.pickerShown?.id === t) w(XE());else {
           if (!z) return;
           let e = cn(z.current);
           w(u1({
@@ -260,7 +260,7 @@ function B(e) {
 }
 export function $$F0(e) {
   let t = Ku();
-  let n = q5();
+  let n = selectCurrentFile();
   let i = selectWithShallowEqual(e => ({
     currentSelectedGradientStop: e.mirror.appModel.currentSelectedGradientStop,
     library: e.library,

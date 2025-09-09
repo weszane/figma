@@ -1,6 +1,6 @@
 import { C } from "../905/222694";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { bellFeedAPIInstance } from "../figma_app/876459";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
@@ -150,7 +150,7 @@ export function $$m0(e) {
   let t = !1;
   return e.subscribe(PersistentUserNotificationBellData, {}, e => {
     if ("loaded" !== e.status) return;
-    let i = (oA(e.data.persistentUserNotificationBells) || []).find(e => e.notificationSpaceId === td);
+    let i = (getResourceDataOrFallback(e.data.persistentUserNotificationBells) || []).find(e => e.notificationSpaceId === td);
     i && i.bell !== t && (t = i.bell, bellFeedAPIInstance?.setBell(i.bell));
   });
 }

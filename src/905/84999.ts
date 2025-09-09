@@ -1,14 +1,14 @@
 import { z, Ip } from "../905/239603";
 import { customHistory } from "../905/612521";
 import { createMetaValidator } from "../figma_app/181241";
-import { WU } from "../figma_app/35887";
+import { OrganizationUserSchemaAlias } from "../figma_app/35887";
 let o = z.object({
   script: z.string(),
   name: z.string(),
   file_key: z.string(),
   source_file_key: z.string().nullable(),
   needs_upgrade: z.boolean(),
-  org_drafts_owners: z.array(WU),
+  org_drafts_owners: z.array(OrganizationUserSchemaAlias),
   prefix: z.string(),
   shared_fonts: Ip.ignore(),
   feature_flags: Ip.ignore(),

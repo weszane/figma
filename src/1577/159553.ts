@@ -11,7 +11,7 @@ import { bellFeedAPIInstance, desktopAPIInstance } from "../figma_app/876459";
 import { ek as _$$ek, zv } from "../figma_app/640683";
 import { customHistory } from "../905/612521";
 import { F as _$$F } from "../905/680873";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { XHR } from "../905/910117";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -21,7 +21,7 @@ import { oB, sf } from "../905/929976";
 import { Ow } from "../figma_app/297957";
 import { qD, FE, Cu, xr, _J } from "../figma_app/314264";
 import { H as _$$H } from "../905/422284";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
@@ -726,7 +726,7 @@ let ez = class e {
 function eV(e) {
   let [t, i] = useState(null);
   let [a, r] = useState(0);
-  let l = q5();
+  let l = selectCurrentFile();
   let s = useRef(lQ);
   let c = useRef(lQ);
   let d = useRef(null);
@@ -945,7 +945,7 @@ export function $$eX0(e) {
     priority: !!b && h,
     unread: !0
   });
-  let g = ZC(v.activeTab);
+  let g = useLatestRef(v.activeTab);
   useEffect(() => {
     v.activeTab !== g && qD({
       name: "user_notifications_filter_viewed",
@@ -1035,7 +1035,7 @@ function eW(e, t) {
     let s = useStore();
     let d = useDispatch();
     let u = FC();
-    let _ = q5();
+    let _ = selectCurrentFile();
     let m = sZ();
     let b = t => {
       e.setHiddenNotificationIds([...e.hiddenNotificationIds, t]);
@@ -1174,7 +1174,7 @@ function eW(e, t) {
   e.DateHeader = t;
   e.PriorityHeader = i;
   e.Header = function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let i = !e.inDesktopTray && (!!t || !!getFeatureFlags().notif_settings_button);
     return jsxs("div", {
       className: "user_notifications_dropdown--header--aOhWS",

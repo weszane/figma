@@ -6,12 +6,12 @@ import { T } from "../905/880327";
 import { showModalHandler } from "../905/156213";
 import { Z5 } from "../figma_app/297957";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { S2 } from "../figma_app/465071";
+import { useTeamPlanFeatures } from "../figma_app/465071";
 import { e as _$$e2 } from "../905/86132";
 export function $$m0() {
   let e = useDispatch();
   let t = Z5();
-  let i = S2();
+  let i = useTeamPlanFeatures();
   let m = i.data?.type;
   return useCallback(n => {
     let {

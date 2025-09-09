@@ -1,11 +1,11 @@
 import { oA } from "../905/723791";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { SiteBundles, SiteMountWithPublishEvents } from "../figma_app/43951";
 export function $$s0(e) {
-  let [t] = IT(SiteBundles.Query(e ? {
+  let [t] = setupResourceAtomHandler(SiteBundles.Query(e ? {
     fileKey: e
   } : null));
-  let [r] = IT(SiteMountWithPublishEvents.Query(e ? {
+  let [r] = setupResourceAtomHandler(SiteMountWithPublishEvents.Query(e ? {
     fileKey: e
   } : null));
   if ("loaded" !== t.status || "loaded" !== r.status) return {

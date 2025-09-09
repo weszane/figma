@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { s_ } from "../905/17223";
 import { $$ } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -33,7 +33,7 @@ let $$S0 = registerModal(function (e) {
   let i = useDispatch();
   let o = t.teams[e.teamId];
   let y = t.user?.id || "";
-  let b = Rs(TeamById, {
+  let b = useSubscription(TeamById, {
     teamId: e.teamId
   });
   let S = useMemo(() => b.transform(({

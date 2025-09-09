@@ -1,6 +1,6 @@
 import { w as _$$w } from "../5430/495667";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { $M } from "../figma_app/930338";
+import { formatNumber } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { W, B as _$$B } from "../905/841666";
@@ -41,7 +41,7 @@ export function $$m0({
         children: j ? p : _
       }), jsx("div", {
         className: lp,
-        children: $M(e.like_count)
+        children: formatNumber(e.like_count)
       })]
     }), g && jsxs(Fragment, {
       children: [L, jsx(B, {
@@ -50,7 +50,7 @@ export function $$m0({
       }), jsx("div", {
         className: lp,
         children: renderI18nText("community.detail_view.number_of_users", {
-          numberOfUsers: $M(mk(e))
+          numberOfUsers: formatNumber(mk(e))
         })
       })]
     }), !!f && jsxs(Fragment, {

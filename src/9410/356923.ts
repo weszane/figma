@@ -18,7 +18,7 @@ import { f as _$$f } from "../905/412913";
 import { wo } from "../figma_app/753501";
 import { Cu } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { q } from "../905/524117";
 import { j as _$$j } from "../905/523935";
 import { sU, WM, dY, Wh } from "../905/838765";
@@ -40,7 +40,7 @@ export function $$P2({
   let s = Xr(VZ);
   let o = Xr(Ei);
   let c = useAtomWithSubscription(v2);
-  let u = tS();
+  let u = useCurrentFileKey();
   let h = useDispatch();
   let g = "insert-slide-module";
   let _ = _$$D(e.library_key);

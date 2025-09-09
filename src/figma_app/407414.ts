@@ -9,7 +9,7 @@ import { eA } from "../905/695660";
 import { C } from "../905/887158";
 import { td } from "../figma_app/827216";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Wh } from "../figma_app/615482";
 import { aW } from "../figma_app/965653";
 import { b as _$$b } from "../905/919117";
@@ -43,7 +43,7 @@ function v() {
   return atomStoreManager.get(NM) ?? void 0;
 }
 export function $$A23(e, t) {
-  let r = ZC(e);
+  let r = useLatestRef(e);
   let i = useAtomWithSubscription($$T14);
   let [{
     impressionId: a

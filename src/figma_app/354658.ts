@@ -1,7 +1,7 @@
 import { parseQuerySimple } from "../905/634134";
-import { fs } from "../figma_app/930338";
+import { processSlug } from "../figma_app/930338";
 import { nS, Ac, Wk, aV } from "../figma_app/321395";
-import { G4 } from "../figma_app/707808";
+import { PreviewMode } from "../figma_app/707808";
 import { VR, FZ, CS, p7 } from "../figma_app/979714";
 var l = Object.getPrototypeOf;
 var d = Reflect.get;
@@ -12,7 +12,7 @@ class _ extends nS {
   constructor(e, t) {
     super({
       ...e,
-      urlSlug: fs(e.urlSlug)
+      urlSlug: processSlug(e.urlSlug)
     }, t);
   }
 }
@@ -76,7 +76,7 @@ E.parseQueryString = e => {
     ...c(E, E, "parseQueryString").call(void 0, e),
     preview: (() => {
       let e = t.preview;
-      if (void 0 !== e) return parseInt(e) === G4.DEFAULT ? G4.DEFAULT : e;
+      if (void 0 !== e) return parseInt(e) === PreviewMode.DEFAULT ? PreviewMode.DEFAULT : e;
     })(),
     freemium_preview: t.freemium_preview
   };

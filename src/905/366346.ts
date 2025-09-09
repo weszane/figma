@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { serializeQuery } from "../905/634134";
-import { gN } from "../905/760074";
+import { buildUrlPath } from "../905/760074";
 import { EO } from "../905/691205";
 export function $$p4(e, t) {
   (e = e ? e.slice(1) : "") && ("commentPreferences" === e ? t.showCommentPreferencesPicker = !0 : t.commentThreadId = e);
@@ -22,7 +22,7 @@ export function $$h7(e = !1) {
   return e ? `/test/eval/view${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
 }
 export function $$g3(e, t, i, n, r, a = !1) {
-  if (n) return gN(n, r || null, e);
+  if (n) return buildUrlPath(n, r || null, e);
   let s = `/${e}/${t}`;
   a || (i ? s += `/${i}` : s += "/Untitled");
   return s;

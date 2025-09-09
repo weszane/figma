@@ -16,7 +16,7 @@ import { F as _$$F } from "../905/759613";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { J } from "../905/341359";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { popModalStack, showModal } from "../905/156213";
 import { M as _$$M } from "../905/152487";
 function v(e) {
@@ -26,9 +26,9 @@ function v(e) {
     onClose,
     modalType
   } = e;
-  let s = ZC(isShowing);
+  let s = useLatestRef(isShowing);
   let o = useSelector(e => e.modalShown?.type) === modalType;
-  let l = ZC(o);
+  let l = useLatestRef(o);
   useEffect(() => {
     isShowing && l && !o && onClose("different_modal_shown");
   }, [isShowing, l, o, onClose]);

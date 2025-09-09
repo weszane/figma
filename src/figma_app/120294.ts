@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { c2 } from "../905/382883";
 import { useMemoArrayCustom } from "../905/19536";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { NS, Pp, a6 } from "../905/989765";
 import { R9 } from "../905/977824";
 import { _i } from "../figma_app/578768";
@@ -32,7 +32,7 @@ export function $$m1(e, t) {
   let [_, m] = useState(new Set());
   let [g, f] = useState([]);
   let [E, y] = useState();
-  let b = ZC(s);
+  let b = useLatestRef(s);
   useEffect(() => {
     s && !b && !E && t && (y(!0), setTimeout(() => {
       y(!1);

@@ -70,7 +70,7 @@ import { $n, IK } from '../905/521428';
 import { r6 as _$$r6 } from '../905/542608';
 import { V as _$$V2 } from '../905/546897';
 import { K as _$$K5 } from '../905/547934';
-import { cJ as _$$cJ } from '../905/561485';
+import { useIsFullscreenSitesView } from '../905/561485';
 import { getFeatureFlags } from '../905/601108';
 import { PerfTimer } from '../905/609396';
 import { e as _$$e } from '../905/621515';
@@ -134,7 +134,7 @@ import { Dm } from '../figma_app/8833';
 import { Pv, Yl } from '../figma_app/10098';
 import { FX as _$$FX } from '../figma_app/12491';
 import { atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
-import { qd, ZC } from '../figma_app/39751';
+import { usePreviousValue, useLatestRef } from '../figma_app/922077';
 import { TeamCanEdit } from '../figma_app/43951';
 import { bo, Bs, fg, ko } from '../figma_app/73698';
 import { _9, $1, Bk, mZ, oV, Sg } from '../figma_app/76115';
@@ -170,7 +170,7 @@ import { o as _$$o } from '../figma_app/267183';
 import { N as _$$N } from '../figma_app/268271';
 import { Ay as _$$Ay4 } from '../figma_app/272902';
 import { te as _$$te, GM } from '../figma_app/275462';
-import { Rs as _$$Rs } from '../figma_app/288654';
+import { useSubscription } from '../figma_app/288654';
 import { $z } from '../figma_app/297733';
 import { KD, O1 } from '../figma_app/317394';
 import { Ko, Nv, P5 } from '../figma_app/318590';
@@ -187,7 +187,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { V as _$$V3 } from '../figma_app/473391';
 import { Nz as _$$Nz, cP, FX, uY, ZI } from '../figma_app/475869';
 import { t as _$$t6 } from '../figma_app/501766';
-import { tB as _$$tB, tS as _$$tS, _G, MY, q5 } from '../figma_app/516028';
+import { selectOpenFile, useCurrentFileKey, useOpenFileLibraryKey, useFullscreenViewFile, selectCurrentFile } from '../figma_app/516028';
 import { r6 as _$$r, CK, NB } from '../figma_app/517115';
 import { rl as _$$rl, tM as _$$tM2, C0, MB, NR, pg } from '../figma_app/525558';
 import { vZ } from '../figma_app/527603';
@@ -195,7 +195,7 @@ import { $c, nT as _$$nT, _K, _q, ce, CT, d5, Gd, GH, H0, HE, Kd, Kv, Mj, PK, RQ
 import { G4, T1 } from '../figma_app/545293';
 import { b3, kL, Nb } from '../figma_app/547952';
 import { b as _$$b } from '../figma_app/556971';
-import { IT } from '../figma_app/566371';
+import { setupResourceAtomHandler } from '../figma_app/566371';
 import { J as _$$J, P as _$$P } from '../figma_app/582341';
 import { $A, lX as _$$lX, MT } from '../figma_app/588397';
 import { Hz } from '../figma_app/591738';
@@ -258,8 +258,8 @@ import { createPortal } from '../vendor/944059';
 let l = i;
 function M() {
   let e = aV();
-  let t = q5()?.canEdit;
-  let s = MY();
+  let t = selectCurrentFile()?.canEdit;
+  let s = useFullscreenViewFile();
   let {
     show,
     isShowing,
@@ -483,7 +483,7 @@ function e3({
   let {
     isFlyoutOpen
   } = JA();
-  let N = _$$tS();
+  let N = useCurrentFileKey();
   let I = useAtomWithSubscription(TG);
   let {
     currentView
@@ -628,7 +628,7 @@ function e2({
   });
   let A = !!x.query;
   let P = _$$n2(e);
-  let L = ZC(P);
+  let L = useLatestRef(P);
   useEffect(() => {
     P && !L && f(jD());
   }, [P, f, L]);
@@ -906,7 +906,7 @@ function tp({
     let {
       width
     } = e8();
-    let p = ZC(width);
+    let p = useLatestRef(width);
     let h = useCallback((e, t) => {
       if (!t) {
         return {
@@ -1666,7 +1666,7 @@ function t3({
   isList: i
 }) {
   let l = Nv(!0);
-  let o = _$$tS();
+  let o = useCurrentFileKey();
   let d = _m();
   let c = Ew({
     assetKey: u2(e),
@@ -2579,7 +2579,7 @@ let s3 = memo(({
 }) => {
   let [{
     data: s
-  }] = IT(Re(e?.data?.partnerType));
+  }] = setupResourceAtomHandler(Re(e?.data?.partnerType));
   if (!e || e.type !== sZ) return null;
   let {
     data
@@ -2916,7 +2916,7 @@ function rB() {
           let [a, o] = useState(YQ);
           let [d, c] = useState(!1);
           let [u, p] = useState(void 0);
-          let h = _$$tS();
+          let h = useCurrentFileKey();
           let m = He();
           let x = _$$r5();
           useEffect(() => {
@@ -3132,7 +3132,7 @@ function rG() {
   let e = rK();
   return (function () {
     let e = useAtomWithSubscription(W9);
-    let t = ZC(e);
+    let t = useLatestRef(e);
     let {
       suggestions,
       analyticsData
@@ -3140,7 +3140,7 @@ function rG() {
     let {
       currentView
     } = wV();
-    let l = ZC(currentView);
+    let l = useLatestRef(currentView);
     useEffect(() => {
       !1 === t && !0 === e && suggestions.length > 0 && analyticsData.queryId && l === rL && gb(analyticsData, _$$GG.STARTED_SEARCH, _$$qd.ASSET_PANEL);
     }, [t, e, suggestions, analyticsData, l]);
@@ -3162,7 +3162,7 @@ function r4() {
     subscribedFileDataByLibraryKey,
     hubFilesByLibraryKey
   } = _$$N4();
-  let s = useSelector(_$$tB);
+  let s = useSelector(selectOpenFile);
   let r = useSelector(_$$e_);
   let i = useSelector(MH);
   let l = useSelector(dM);
@@ -3592,7 +3592,7 @@ let ns = forwardRef(({
 function nr({
   shouldEllipsize: e
 }) {
-  let t = _G();
+  let t = useOpenFileLibraryKey();
   let {
     allLibrariesByLibraryKey
   } = _$$g3();
@@ -3778,7 +3778,7 @@ let na = (e, t, s) => {
   return r - 1;
 };
 function nd() {
-  let e = _G();
+  let e = useOpenFileLibraryKey();
   let {
     getLibrary
   } = _$$G();
@@ -4083,7 +4083,7 @@ function nA() {
   });
 }
 function nP() {
-  let e = _$$tS();
+  let e = useCurrentFileKey();
   let {
     data,
     status
@@ -4314,7 +4314,7 @@ function nV({
   let {
     navigateToLibrary
   } = wV();
-  let y = q5();
+  let y = selectCurrentFile();
   let b = useAtomWithSubscription(nD);
   let C = _$$H(e.libraryKey);
   let [j] = MA();
@@ -4351,14 +4351,14 @@ function nV({
     return generateRecordingKey('assetsLibrary', t);
   }, [e.libraryKey, y?.libraryKey]);
   let O = function (e, t = !1) {
-    let s = q5();
+    let s = selectCurrentFile();
     let r = useDispatch();
     let i = e.libraryKey === s?.libraryKey;
     let l = _9(e.libraryKey, 'assets_panel_library_context_menu');
     let o = useCallback(() => l(!1), [l]);
     let d = function () {
       let e = useDispatch();
-      let t = q5();
+      let t = selectCurrentFile();
       let s = useSelector(e => e.teams);
       let r = useSelector(fA);
       let i = useCallback(() => {
@@ -6099,7 +6099,7 @@ function ii({
     onClick: focusSearchBar
   });
   let _ = function (e, t) {
-    let s = q5();
+    let s = selectCurrentFile();
     let r = useDispatch();
     let i = e === s?.libraryKey;
     let l = e && !!t;
@@ -6299,7 +6299,7 @@ function iS({
     let {
       currentView
     } = wV();
-    let s = ZC(currentView);
+    let s = useLatestRef(currentView);
     useEffect(() => (s === S5.Libraries && currentView === S5.Pages && io.start(), currentView === S5.Pages && !e && io.isRunning && id({
       didFinishLoading: !0
     }), () => {
@@ -6566,7 +6566,7 @@ function iW() {
   } = _$$I(Cn.AssetsPanel);
   let c = t && searchOption && [_$$I2.SITE_KIT, _$$I2.ALL].includes(searchOption?.type);
   let u = _$$$(l);
-  let p = ZC(query);
+  let p = useLatestRef(query);
   let [h, m] = useState([]);
   let [g, f] = useState(!1);
   useLayoutEffect(() => {
@@ -6867,7 +6867,7 @@ function i3() {
   });
 }
 let i2 = e => {
-  let t = ZC(e);
+  let t = useLatestRef(e);
   let {
     isActive,
     start
@@ -6883,17 +6883,17 @@ let i4 = ({
   additionalLogData: s,
   query: r
 }) => {
-  let i = ZC(e);
-  let l = ZC(r);
+  let i = useLatestRef(e);
+  let l = useLatestRef(r);
   let [o, d] = useState(null);
   let c = selectCurrentUser();
   let u = _$$DP().version;
   let p = _$$tM4('assets-panel');
-  let h = ZC(p);
+  let h = useLatestRef(p);
   let m = je();
   let x = useSelector(e => e.fileVersion);
   let y = useSelector(e => e.loadingState);
-  let _ = q5();
+  let _ = selectCurrentFile();
   let b = _?.key;
   let C = oh(_$$fi);
   let j = useCallback(r => {
@@ -7075,7 +7075,7 @@ function i9({
   let {
     navigateToLibrary
   } = wV();
-  let i = q5();
+  let i = selectCurrentFile();
   let [a, o] = useState(!1);
   let d = _$$sN();
   let c = useCallback(() => {
@@ -7150,7 +7150,7 @@ function ls({
   let {
     visualAssetsType
   } = wV();
-  let s = qd(visualAssetsType);
+  let s = usePreviousValue(visualAssetsType);
   let n = visualAssetsType ?? s;
   let [i] = MA();
   let a = i === 'list';
@@ -7228,7 +7228,7 @@ function li({
     localAssets
   } = e;
   !function (e, t, s, r) {
-    let i = q5();
+    let i = selectCurrentFile();
     let [l, o] = useAtomValueAndSetter(GT);
     let d = t.length + s.length + r.length;
     e.numComponents + e.numTemplates > 0 && (d += 1);
@@ -7323,7 +7323,7 @@ function lb({
     setQuery,
     setSearchOption
   } = _$$I(Cn.AssetsPanel);
-  let v = _G();
+  let v = useOpenFileLibraryKey();
   let S = useCallback(() => {
     c && onBack();
   }, [c, onBack]);
@@ -7469,7 +7469,7 @@ function lL({
     path: [ON.HEADER, my.SEARCH_AND_FILTER],
     column: Wy.SETTINGS
   });
-  let i = _$$tS();
+  let i = useCurrentFileKey();
   let l = Um();
   let o = l?.type === lP;
   let d = useDispatch();
@@ -7533,8 +7533,8 @@ function lR({
   let {
     getLibrary
   } = _$$G();
-  let b = _$$tS();
-  let C = _G();
+  let b = useCurrentFileKey();
+  let C = useOpenFileLibraryKey();
   let [j] = MA();
   let v = !!GM()() && currentView === S5.Libraries;
   let S = v ? $H.LIST : j;
@@ -7554,7 +7554,7 @@ function lR({
     changeAssetsView,
     toggleShowFolders
   } = function (e) {
-    let t = q5();
+    let t = selectCurrentFile();
     let s = _$$sN();
     let {
       navigateToLibrary,
@@ -7974,7 +7974,7 @@ function l3() {
   let o = useMemo(() => getLibrary(libraryKey), [getLibrary, libraryKey]);
   let d = rK();
   let [c, u] = useAtomValueAndSetter(aK);
-  let p = _$$cJ() && currentView !== S5.Search && currentView !== S5.Recents ? [_$$t2.Blocks, _$$t2.Libraries] : void 0;
+  let p = useIsFullscreenSitesView() && currentView !== S5.Search && currentView !== S5.Recents ? [_$$t2.Blocks, _$$t2.Libraries] : void 0;
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf xw6ie8e',
     children: [jsx(l4, {
@@ -8000,7 +8000,7 @@ function l2({
   let {
     currentView
   } = wV();
-  let s = _$$cJ();
+  let s = useIsFullscreenSitesView();
   let [n] = useAtomValueAndSetter(aK);
   let i = nd();
   let l = s && currentView === S5.Libraries && n === _$$t2.Libraries;
@@ -8034,7 +8034,7 @@ function l4({
   let {
     closeOverlay
   } = _$$h5();
-  let o = !_$$cJ() && n && getConfig().get('variant', 'control') !== 'control';
+  let o = !useIsFullscreenSitesView() && n && getConfig().get('variant', 'control') !== 'control';
   return jsxs('div', {
     ...Ay.props(l6.searchAndFilter, l && l6.leftRailSearchAndFilter),
     children: [jsx('div', {
@@ -8168,13 +8168,13 @@ function an({
   let t = r4();
   let s = function (e) {
     let t = selectCurrentUser();
-    let s = q5();
+    let s = selectCurrentFile();
     let r = jO();
     let i = _$$f('has_dismissed_component_sidebar_library_upsell_banner');
     let l = useSelector(e => e.isFreeUser);
     let a = useSelector(selectTeams);
     let o = s?.teamId ? a[s.teamId] : null;
-    let d = _$$Rs(TeamCanEdit, {
+    let d = useSubscription(TeamCanEdit, {
       id: s?.teamId ?? ''
     }, {
       enabled: !!s?.teamId
@@ -8188,7 +8188,7 @@ function an({
   let l = useRef(null);
   let c = wY(l)?.width || e;
   let [u] = MA();
-  let p = q5();
+  let p = selectCurrentFile();
   _$$h(() => {
     trackEventAnalytics('Component Sidebar Viewed', {
       viewMode: u,

@@ -10,15 +10,15 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { B } from "../905/900597";
 import { showModalHandler } from "../905/156213";
-import { px, Um } from "../figma_app/465071";
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
+import { useTeamPlanUser, useIsAdminUser } from "../figma_app/465071";
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
 export function $$h0(e) {
   let t = useDispatch();
-  let a = px();
-  let h = Um(a).unwrapOr(!1);
+  let a = useTeamPlanUser();
+  let h = useIsAdminUser(a).unwrapOr(!1);
   let x = jsxs(N, {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD68CH88F663KG08AJ",
     children: [" ", renderI18nText("resource_connection.request_modal.learn_more"), " "]

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { R } from "../905/441305";
 import { s as _$$s } from "../905/573154";
@@ -23,7 +23,7 @@ export function $$b0({
   let v = useDispatch();
   let y = _$$p2(getI18nString("file_browser.pinning.delete_pin_modal.confirmation_bell"), "file-browser-workspace-delete-pin");
   let [w, j] = useState(!1);
-  let T = Rs(DeleteWorkspacePinnedFileView, {
+  let T = useSubscription(DeleteWorkspacePinnedFileView, {
     pinnedFileId: e
   });
   if ("loaded" !== T.status) return null;

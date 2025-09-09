@@ -13,7 +13,7 @@ import { VisualBellIcon } from "../905/576487";
 import { Ze } from "../figma_app/540726";
 import { UD, Jr } from "../figma_app/624361";
 import { clearSelection, addToSelection } from "../figma_app/741237";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { createNoOpValidator } from "../figma_app/181241";
 import { f3 } from "../figma_app/690664";
 import { k, d as _$$d } from "../5421/548912";
@@ -102,7 +102,7 @@ let T = () => {
   };
 };
 export function $$S1() {
-  let e = tS();
+  let e = useCurrentFileKey();
   let [t, n] = useState(!1);
   let {
     showProcessing,
@@ -161,7 +161,7 @@ export function $$S1() {
               e.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE";
               let i = getSingletonSceneGraph();
               let r = i.getInternalCanvas();
-              if (r) r.appendChild(e); else throw Error("Internal canvas not found");
+              if (r) r.appendChild(e);else throw Error("Internal canvas not found");
               if (!Fullscreen?.directlyPasteSuggestion(o, e.parentGuid ?? "", null, e.guid)) {
                 e.removeSelfAndChildren();
                 return Error("Failed to paste buffer to canvas");

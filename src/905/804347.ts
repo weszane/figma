@@ -3,7 +3,7 @@ import { useMemo, createElement, useState, Component, memo, useCallback, useId, 
 import { useSelector, useDispatch } from "react-redux";
 import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
-import { Rs, p as _$$p } from "../figma_app/288654";
+import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { BrowserInfo } from "../figma_app/778880";
 import { j as _$$j } from "../905/35621";
 import { G as _$$G } from "../905/186289";
@@ -114,7 +114,7 @@ let b = _$$h({
   [XU.GRID]: function (e) {
     let t = e.searchResult.model;
     let i = t.id;
-    let r = Rs(ProjectTilePermissions, {
+    let r = useSubscription(ProjectTilePermissions, {
       projectId: i
     });
     if ("loaded" === r.status && r.data.project) {
@@ -429,7 +429,7 @@ let eh = _$$h({
   },
   [XU.LIST]: function (e) {
     let t = e.searchResult.model;
-    let i = Rs(TeamTilePermissions, {
+    let i = useSubscription(TeamTilePermissions, {
       teamId: t.id
     });
     let r = !1;
@@ -937,7 +937,7 @@ export function $$tt0(e) {
   let p = useMemo(() => e.searchModelType === uH.TEAMS ? t.map(e => ({
     teamId: e.model.id
   })) : [], [e.searchModelType, t]);
-  let m = _$$p(TeamOrphanedStatus, p, {
+  let m = useMultiSubscription(TeamOrphanedStatus, p, {
     enabled: e.searchModelType === uH.TEAMS
   });
   let h = useDispatch();

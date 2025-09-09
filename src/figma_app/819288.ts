@@ -4,7 +4,7 @@ import a from "classnames";
 import { xM, Bx, x6 } from "../905/403166";
 import { hm, IT } from "../905/380385";
 import { F } from "../905/241044";
-import { hX } from "../figma_app/930338";
+import { escapeHtml } from "../figma_app/930338";
 import { Point } from "../905/736624";
 import { mh, hp, XH, u5, Vc } from "../905/540111";
 var s = a;
@@ -160,7 +160,7 @@ export const sP = function e(t = []) {
       (t || n) && (n += "\n");
       n += i.includes("ol") ? `${a + 1}. ` : "* ";
       n += e(r.children);
-    }) : (n = x6(n).map(e => "string" == typeof e ? hX(e) : `<span class="${mh}">${e.props["data-text"]}</span>`).join("\n"), r.link && (i = ["lightbold"]));
+    }) : (n = x6(n).map(e => "string" == typeof e ? escapeHtml(e) : `<span class="${mh}">${e.props["data-text"]}</span>`).join("\n"), r.link && (i = ["lightbold"]));
     let a = [];
     i.forEach(e => {
       "b" === e ? a.push(hp) : "lightbold" === e ? a.push(XH) : "i" === e ? a.push(u5) : "s" === e && a.push(Vc);

@@ -14,7 +14,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { XE } from "../figma_app/976749";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { registerLegacyModal } from "../905/102752";
 import { E as _$$E } from "../905/191910";
@@ -34,12 +34,12 @@ export function $$C2(e) {
   let t = hS({
     open: !0,
     preventUserClose: !0,
-    onClose: () => { }
+    onClose: () => {}
   });
   let r = useSelector(e => e.mirror.appModel.isReadOnly);
   let u = useSelector(e => e.selectedView);
   let T = XE(u) === FEditorType.Design;
-  let x = tS() || getInitialOptions().editing_file?.source_file?.key || "";
+  let x = useCurrentFileKey() || getInitialOptions().editing_file?.source_file?.key || "";
   let N = useDispatch();
   let C = {
     view: "fullscreen",

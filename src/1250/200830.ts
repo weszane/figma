@@ -22,7 +22,7 @@ import { useEffect, useState, useCallback, useMemo, createElement, useRef, memo 
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getStorage } from "../905/657224";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { buildStaticUrl, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { zl } from "../905/862321";
 import { yl } from "../figma_app/275462";
@@ -67,7 +67,7 @@ import { Z1 } from "../905/401885";
 import { g as _$$g } from "../1250/695038";
 import { sZ, dq } from "../905/845253";
 import { WorkspaceSelectorView, TeamFileCountsByTeamId } from "../figma_app/43951";
-import { D6 as _$$D2, S2 } from "../figma_app/465071";
+import { useCurrentPlanUser, useTeamPlanFeatures } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
 import { trackEventAnalytics } from "../905/449184";
 import { tM as _$$tM, vd as _$$vd } from "../figma_app/60079";
@@ -114,7 +114,7 @@ import { getCookieOrStorage } from "../905/414007";
 import { Bq, lc } from "../figma_app/598111";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Hj } from "../figma_app/336229";
-import { p as _$$p } from "../figma_app/288654";
+import { useMultiSubscription } from "../figma_app/288654";
 import { I as _$$I } from "../c5e2cae0/718426";
 import { FC } from "../figma_app/212807";
 import { canEditTeam } from "../figma_app/642025";
@@ -603,7 +603,7 @@ function eG() {
   let e = useDispatch();
   let t = useAtomWithSubscription(qG);
   let n = useAtomWithSubscription(eL);
-  let r = ZC(n);
+  let r = useLatestRef(n);
   let s = useAtomWithSubscription(d2);
   let l = useSelector(e => e.currentUserOrgId);
   let d = UC(l);
@@ -878,7 +878,7 @@ let td = createRemovableAtomFamily(e => Z1(WorkspaceSelectorView.Query({
 }));
 function tc() {
   let e = dq();
-  let t = _$$D2("OrgSelectWorkspaceOverlay");
+  let t = useCurrentPlanUser("OrgSelectWorkspaceOverlay");
   let n = "loaded" === t.status ? t?.data?.key.parentId ?? void 0 : void 0;
   let r = useRef();
   r.current = n;
@@ -2178,7 +2178,7 @@ function nA({
   let l = useMemo(() => o.map(e => ({
     teamId: e.id
   })), [o]);
-  return (_$$p(TeamFileCountsByTeamId, l).forEach(e => {
+  return (useMultiSubscription(TeamFileCountsByTeamId, l).forEach(e => {
     s.push(e.result.data?.team?.teamFileCounts?.designFileCount ?? 0);
   }), _$$h(() => {
     lc();
@@ -2310,7 +2310,7 @@ function n0() {
   let {
     getConfig
   } = I7("starter_global_file_limits");
-  let t = S2();
+  let t = useTeamPlanFeatures();
   let n = oA(t?.data?.tier);
   let {
     show,

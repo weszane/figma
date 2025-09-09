@@ -1,110 +1,225 @@
-import { useMemo, useLayoutEffect, useEffect, useRef } from "react";
-import { useAtomValueAndSetter, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { useMemoShallow } from "../905/19536";
-import { resourceUtils } from "../905/989992";
-import { logErrorAndReturn } from "../905/607410";
-import { bu } from "../905/663269";
-import { k } from "../905/745286";
-import { GC, ff } from "../905/80725";
-import { getResourceAtomStore } from "../905/157003";
-import { uf, Kh } from "../905/16369";
-export function $$_2(e, t = {}) {
-  return uf(e) ? function (e, t) {
-    let r;
-    let a;
-    let o = k(t) ? e : h;
-    [r, a] = useAtomValueAndSetter(o);
-    k(t) || (r = resourceUtils.Paginated.disabled(), a = void 0);
-    let l = useMemo(() => GC(a), [a]);
-    return useMemo(() => [r, l], [r, l]);
-  }(e, t) : Kh(e) ? function (e, t) {
-    let r;
-    let a;
-    let o = k(t) ? e : h;
-    [r, a] = useAtomValueAndSetter(o);
-    k(t) || (r = resourceUtils.disabledSuspendable({
-      release: () => {}
-    }), a = void 0);
-    let l = useMemo(() => ff(a), [a]);
-    useLayoutEffect(() => {
-      t.revalidateOnMount && l.refetch();
-    }, [t.revalidateOnMount, l]);
-    return useMemo(() => [r, l], [r, l]);
-  }(e, t) : bu(e) ? m(getResourceAtomStore(e.view)(e.args), t) : m(e, t);
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
+import { Kh, uf } from '../905/16369'
+import { useMemoShallow } from '../905/19536'
+import { ff, GC } from '../905/80725'
+import { getResourceAtomStore } from '../905/157003'
+import { logErrorAndReturn } from '../905/607410'
+import { hasInternalSymbol } from '../905/663269'
+import { k } from '../905/745286'
+import { resourceUtils } from '../905/989992'
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355'
+
+/**
+ * Resource Atom Handler (original: $$_2)
+ * Handles different resource atom types and returns their state and controls.
+ * @param e Resource atom or view
+ * @param t Options
+ * @returns [state, controls]
+ */
+export function setupResourceAtomHandler(e: any, t: any = {}) {
+  if (uf(e)) {
+    // Paginated resource atom
+    return handlePaginatedResourceAtom(e, t)
+  }
+  if (Kh(e)) {
+    // Suspendable resource atom
+    return handleSuspendableResourceAtom(e, t)
+  }
+  // Internal symbol or generic atom
+  return hasInternalSymbol(e)
+    ? handleGenericResourceAtom(getResourceAtomStore(e.view)(e.args), t)
+    : handleGenericResourceAtom(e, t)
 }
-let h = atom([null, null]);
-function m(e, t) {
-  return k(t) ? [useAtomWithSubscription(e), void 0] : (useAtomWithSubscription(h), [resourceUtils.disabledSuspendable({
-    release: () => {}
-  }), void 0]);
+
+const defaultAtom = atom([null, null])
+
+/**
+ * Handles paginated resource atom (original: inline in $$_2)
+ */
+function handlePaginatedResourceAtom(e: any, t: any) {
+  const atomToUse = k(t)
+    ? e
+    : defaultAtom
+  let [resource, setter] = useAtomValueAndSetter(atomToUse)
+  if (!k(t)) {
+    resource = resourceUtils.Paginated.disabled()
+    setter = undefined
+  }
+  const controls = useMemo(() => GC(setter), [setter])
+  return useMemo(() => [resource, controls], [resource, controls])
 }
-export function $$g1(e, t = {}) {
-  let r = k(t);
-  let o = useMemoShallow(() => e, [e]);
-  let l = useMemo(() => r ? atom(e => o.map(t => e(t))) : atom(() => o.map(() => resourceUtils.disabled())), [o, r]);
-  useEffect(() => {
-    let e = atomStoreManager.sub(l, () => {});
-    return () => {
-      requestAnimationFrame(e);
-    };
-  }, [l]);
-  return useAtomWithSubscription(l);
-}
-let f = 0;
-setInterval(() => {
-  f = 0;
-}, 3e3);
-let $$E6 = function (...e) {
-  let t = e.filter(e => "loading" === e.status).map(e => e.suspense);
-  let r = e.filter(e => "loading" !== e.status).map(e => e.suspense);
-  t.length > 0 && (f++, t.forEach(e => e.retain()), logErrorAndReturn(Promise.all(t.map(e => e.getPromise()))));
-  useEffect(() => {
-    r.forEach(e => e.release());
-  }, [r]);
-  return [...e];
-};
-let y = {};
-export function $$b4(e, t, r) {
-  let i = r?.onResolveForMetrics;
-  let a = r?.metricKey;
-  let s = "loading" !== e.status;
-  let l = "loaded" === e.status;
-  "loading" === e.status && "suspend" === t && (a && (r?.willSuspend(), y[a] = performance.now()), e.suspense.retain(), logErrorAndReturn(e.suspense.getPromise()));
-  useEffect(() => {
-    s && e.suspense.release();
-  }, [s, e.suspense]);
-  useEffect(() => {
-    if (l && i && a && null != y[a]) {
-      let e = performance.now() - y[a];
-      delete y[a];
-      i(e);
-    }
-  }, [l, i, a]);
-  return e;
-}
-export function $$T0(e, t) {
-  let r = useRef();
+
+/**
+ * Handles suspendable resource atom (original: inline in $$_2)
+ */
+function handleSuspendableResourceAtom(e: any, t: any) {
+  const atomToUse = k(t)
+    ? e
+    : defaultAtom
+  let [resource, setter] = useAtomValueAndSetter(atomToUse)
+  if (!k(t)) {
+    resource = resourceUtils.disabledSuspendable({ release: () => {} })
+    setter = undefined
+  }
+  const controls = useMemo(() => ff(setter), [setter])
   useLayoutEffect(() => {
-    "loading" === r.current && "loaded" === e.status && t(e.data);
-    r.current = e.status;
-  }, [e, t]);
+    if (t.revalidateOnMount)
+      controls.refetch()
+  }, [t.revalidateOnMount, controls])
+  return useMemo(() => [resource, controls], [resource, controls])
 }
-export function $$I7(e, t) {
-  let r = t?.enabled;
-  let n = useAtomWithSubscription(e);
-  if (!1 !== r) return n;
+
+/**
+ * Handles generic resource atom (original: m)
+ */
+function handleGenericResourceAtom(e: any, t: any) {
+  if (k(t)) {
+    return [useAtomWithSubscription(e), undefined]
+  }
+  useAtomWithSubscription(defaultAtom)
+  return [resourceUtils.disabledSuspendable({ release: () => {} }), undefined]
 }
-export function $$S5(e, t) {
-  return $$I7(e, t)?.mutate;
+
+/**
+ * Memoized Atom Subscription (original: $$g1)
+ * @param e Array of atoms
+ * @param t Options
+ * @returns Atom subscription value
+ */
+export function setupMemoizedAtomSubscription(e: any, t: any = {}) {
+  const enabled = k(t)
+  const memoizedAtoms = useMemoShallow(() => e, [e])
+  const atomToSubscribe = useMemo(
+    () =>
+      enabled
+        ? atom((get: any) => memoizedAtoms.map((fn: any) => get(fn)))
+        : atom(() => memoizedAtoms.map(() => resourceUtils.disabled())),
+    [memoizedAtoms, enabled],
+  )
+  useEffect(() => {
+    const unsubscribe = atomStoreManager.sub(atomToSubscribe, () => {})
+    return () => {
+      requestAnimationFrame(unsubscribe)
+    }
+  }, [atomToSubscribe])
+  return useAtomWithSubscription(atomToSubscribe)
 }
-export function $$v3(e) {
-  return t => atomStoreManager.set(e, [t]);
+
+
+
+/**
+ * Suspense Retain/Release Handler (original: $$E6)
+ * Retains loading suspenses and releases others.
+ * @param resources Array of resource objects
+ * @returns Array of resources
+ */
+export function handleSuspenseRetainRelease(...resources: any[]) {
+
+  const loadingSuspenses = resources.filter(r => r.status === 'loading').map(r => r.suspense)
+  const nonLoadingSuspenses = resources.filter(r => r.status !== 'loading').map(r => r.suspense)
+  if (loadingSuspenses.length > 0) {
+    loadingSuspenses.forEach(suspense => suspense.retain())
+    logErrorAndReturn(Promise.all(loadingSuspenses.map(suspense => suspense.getPromise())))
+  }
+  useEffect(() => {
+    nonLoadingSuspenses.forEach(suspense => suspense.release())
+  }, [nonLoadingSuspenses])
+  return [...resources]
 }
-export const DC = $$T0;
-export const En = $$g1;
-export const IT = $$_2;
-export const Jl = $$v3;
-export const QV = $$b4;
-export const gY = $$S5;
-export const mI = $$E6;
-export const n_ = $$I7;
+
+
+
+/**
+ * Metrics Handler for Resource Atom (original: $$b4)
+ * Handles metrics and suspense for resource atom.
+ * @param e Resource atom
+ * @param t Mode
+ * @param r Metrics options
+ * @returns Resource atom
+ */
+const metricsTimeMap: Record<string, number> = {}
+
+export function handleResourceAtomMetrics(e: any, t: any, r: any) {
+  const onResolve = r?.onResolveForMetrics
+  const metricKey = r?.metricKey
+  const notLoading = e.status !== 'loading'
+  const isLoaded = e.status === 'loaded'
+  if (e.status === 'loading' && t === 'suspend') {
+    if (metricKey) {
+      r?.willSuspend?.()
+      metricsTimeMap[metricKey] = performance.now()
+    }
+    e.suspense.retain()
+    logErrorAndReturn(e.suspense.getPromise())
+  }
+  useEffect(() => {
+    if (notLoading)
+      e.suspense.release()
+  }, [notLoading, e.suspense])
+  useEffect(() => {
+    if (isLoaded && onResolve && metricKey && metricsTimeMap[metricKey] != null) {
+      const duration = performance.now() - metricsTimeMap[metricKey]
+      delete metricsTimeMap[metricKey]
+      onResolve(duration)
+    }
+  }, [isLoaded, onResolve, metricKey])
+  return e
+}
+
+/**
+ * Status Change Effect Handler (original: $$T0)
+ * Calls callback when resource status changes from 'loading' to 'loaded'.
+ * @param e Resource atom
+ * @param t Callback
+ */
+export function handleStatusChangeEffect(e: any, t: (data: any) => void) {
+  const statusRef = useRef<string>('')
+  useLayoutEffect(() => {
+    if (statusRef.current === 'loading' && e.status === 'loaded') {
+      t(e.data)
+    }
+    statusRef.current = e.status
+  }, [e, t])
+}
+
+/**
+ * Atom Subscription with Enabled Check (original: $$I7)
+ * @param e Atom
+ * @param t Options
+ * @returns Atom value or undefined
+ */
+export function getAtomWithEnabledCheck(e: any, t: any) {
+  const enabled = t?.enabled
+  const value = useAtomWithSubscription(e)
+  if (enabled !== false)
+    return value
+}
+
+/**
+ * Atom Mutate Getter (original: $$S5)
+ * @param e Atom
+ * @param t Options
+ * @returns Mutate function or undefined
+ */
+export function getAtomMutate(e: any, t: any) {
+  return getAtomWithEnabledCheck(e, t)?.mutate
+}
+
+/**
+ * Atom Setter Factory (original: $$v3)
+ * @param e Atom
+ * @returns Setter function
+ */
+export function createAtomSetter(e: any) {
+  return (value: any) => atomStoreManager.set(e, [value])
+}
+
+// Exported names refactored for clarity and traceability
+export const DC = handleStatusChangeEffect
+export const En = setupMemoizedAtomSubscription
+export const IT = setupResourceAtomHandler
+export const Jl = createAtomSetter
+export const QV = handleResourceAtomMetrics
+export const gY = getAtomMutate
+export const mI = handleSuspenseRetainRelease
+export const n_ = getAtomWithEnabledCheck

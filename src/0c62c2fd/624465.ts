@@ -12,12 +12,12 @@ import { Dm } from "../figma_app/8833";
 import { F as _$$F } from "../905/224";
 import { HZ } from "../figma_app/186343";
 import { p8 } from "../figma_app/722362";
-import { q5, yV } from "../figma_app/516028";
+import { selectCurrentFile, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { J9 } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
-import { ZN } from "../figma_app/630077";
+import { fileActionEnum } from "../figma_app/630077";
 import { Q } from "../figma_app/320600";
 import { hZ } from "../0c62c2fd/646972";
 import { cT } from "../figma_app/32128";
@@ -26,8 +26,8 @@ import { A as _$$A } from "../figma_app/965813";
 import { DV } from "../905/739964";
 import { E as _$$E } from "../figma_app/999099";
 import { HZ as _$$HZ, $t } from "../figma_app/29287";
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 export let $$R1 = atom(!1);
 export function $$A0({
   clientX: e,
@@ -38,7 +38,7 @@ export function $$A0({
 }) {
   let F = useDispatch();
   let P = useSelector(e => e.mirror.appModel);
-  let L = q5();
+  let L = selectCurrentFile();
   let D = p8("pagesList");
   let M = HZ();
   let B = _$$F.useShouldHideStarterCtaForOpenFile();
@@ -122,7 +122,7 @@ export function $$A0({
           data: {
             team: a,
             resource: vL.PAGE,
-            action: ZN.DUPLICATE_PAGE,
+            action: fileActionEnum.DUPLICATE_PAGE,
             editorType: t.editorType,
             currentPlan: _$$F.Plan.STARTER,
             upsellPlan: _$$F.Plan.PRO,
@@ -221,7 +221,7 @@ export function $$A0({
       disabled: i.size <= o
     }, ...(t => {
       if (!_$$HZ()) return [];
-      let r = atomStoreManager.get(yV);
+      let r = atomStoreManager.get(openFileAtom);
       return r && r.editorType === FFileType.WHITEBOARD ? [{
         separator: !0
       }, {

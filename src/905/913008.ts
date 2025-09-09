@@ -3,13 +3,13 @@ import { GLFailureType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { fF } from "../905/194389";
-import { setSentryTag, reportError, SeverityLevel } from "../905/11";
+import { setTagGlobal, reportError, SeverityLevel } from "../905/11";
 import { logInfo } from "../905/714362";
 import { showModalHandler } from "../905/156213";
 import { bY } from "../figma_app/298277";
-import { yV } from "../figma_app/516028";
+import { openFileAtom } from "../figma_app/516028";
 import { Lu } from "../figma_app/453508";
-import { qm } from "../905/617744";
+import { isActiveAtom } from "../905/617744";
 import { h as _$$h } from "../figma_app/276445";
 export let $$f0 = new class {
   constructor() {
@@ -36,9 +36,9 @@ export let $$f0 = new class {
       i?.dismissMediaLoadingToast && i.dismissMediaLoadingToast();
       "oom" === e.type && i?.handleAllocationFailure && i.handleAllocationFailure(GLFailureType.WASM_FAILURE);
       let o = bY();
-      setSentryTag("fullscreen_status", "has_crashed");
+      setTagGlobal("fullscreen_status", "has_crashed");
       try {
-        let e = atomStoreManager.get(yV);
+        let e = atomStoreManager.get(openFileAtom);
         t = e?.editorType;
       } catch (e) {
         reportError(_$$e.CLIENT_PLATFORM, e, {
@@ -49,7 +49,7 @@ export let $$f0 = new class {
       }
       trackEventAnalytics("Fullscreen Hard Crash", {
         crashType: e.type,
-        isMergeModalOpen: atomStoreManager.get(qm),
+        isMergeModalOpen: atomStoreManager.get(isActiveAtom),
         editorType: t,
         ...o
       }, {
@@ -67,13 +67,13 @@ export let $$f0 = new class {
     "bindings" === t && window.dispatchEvent(new ErrorEvent("bindingserror", {
       error: e
     }));
-    setSentryTag("fullscreen_status", "crash");
+    setTagGlobal("fullscreen_status", "crash");
     let i = reportError(_$$e.UNOWNED, e, {
       tags: {
         severity: SeverityLevel.Critical
       }
     });
-    setSentryTag("fullscreen_status", "has_crashed");
+    setTagGlobal("fullscreen_status", "has_crashed");
     let r = "oom" === t ? "oom" : fF(e) ? "stack-overflow" : "other";
     this.fullscreenCrashed({
       type: r,

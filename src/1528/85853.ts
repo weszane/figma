@@ -13,7 +13,7 @@ import { Eo } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
 import { k } from "../figma_app/449815";
 import { Pv } from "../905/619652";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
 import { AF } from "../figma_app/889655";
 import { PW } from "../figma_app/633080";
@@ -127,7 +127,7 @@ export function $$T1({
     hasThumbnailErrors,
     setHasChangesToReset
   } = S(s);
-  let T = tS();
+  let T = useCurrentFileKey();
   let L = u !== t || !playgroundNodeData || "loading" === e.status;
   let [R, D] = useState(null);
   let O = useCallback(() => {
@@ -141,7 +141,7 @@ export function $$T1({
       return;
     }
     let a = Date.now();
-    if (D(null), t.isLocal) n = null; else try {
+    if (D(null), t.isLocal) n = null;else try {
       let e = Eo.getCanvas({
         canvas_url: t.canvas_url
       });

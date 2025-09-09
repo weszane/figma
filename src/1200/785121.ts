@@ -18,7 +18,7 @@ import { o as _$$o } from "../6268/77352";
 import { T_ } from "../6268/886268";
 import { gP } from "../6268/693700";
 import { e as _$$e } from "../1250/871209";
-import { _G } from "../figma_app/516028";
+import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { gn, DD, KB, I7, O } from "../9410/43961";
 function C({
   activeRowKey: e,
@@ -233,7 +233,7 @@ export function $$I2({
     componentKey: t,
     entrypoint: e
   });
-  let P = _G();
+  let P = useOpenFileLibraryKey();
   let W = P ?? _$$l("");
   let z = T_(W ?? _$$l(""));
   return "list" == (displayedComponent && !0 === z ? "detail" : "list") ? jsxs(vo, {

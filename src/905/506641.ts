@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect } from "react";
 import { parsePxInt } from "../figma_app/783094";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { dOH } from "../figma_app/27776";
 let l = parsePxInt(dOH);
 export function $$d0({
@@ -12,7 +12,7 @@ export function $$d0({
 }) {
   let o = useMemo(() => window.matchMedia(e), [e]);
   let [l, d] = useState(o.matches);
-  let c = ZC(l);
+  let c = useLatestRef(l);
   return (useEffect(() => {
     let e = () => d(o.matches);
     o.addEventListener("change", e);

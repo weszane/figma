@@ -3,7 +3,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { updateEnvironmentInfo } from "../905/883621";
 import { BrowserInfo } from "../figma_app/778880";
-import { setSentryTag } from "../905/11";
+import { setTagGlobal } from "../905/11";
 export function $$d3() {
   return !!(BrowserInfo.chromeos && window.matchMedia("(display-mode: tabbed)").matches);
 }
@@ -27,7 +27,7 @@ export function $$h2() {
 }
 function m() {
   let e = $$d3();
-  setSentryTag("chrome_os_app", e);
+  setTagGlobal("chrome_os_app", e);
   e && updateEnvironmentInfo({
     browser_name: "Figma ChromeOS App"
   });

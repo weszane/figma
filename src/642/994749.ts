@@ -13,7 +13,7 @@ import { Qp, JR } from "../figma_app/162641";
 import { getI18nString } from "../905/303541";
 import { DP } from "../905/640017";
 import { ic } from "../figma_app/688398";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
 let c = memo(function (e) {
   return jsx("svg", {
@@ -35,7 +35,7 @@ export function $$C1(e) {
   let t;
   let s = Fk((e, t) => e.get(t)?.visible, e.guid);
   let b = Fk((e, t) => e.get(t)?.type, e.guid);
-  let C = tS();
+  let C = useCurrentFileKey();
   let v = DP();
   let S = ic(e.guid);
   if (!b) return null;

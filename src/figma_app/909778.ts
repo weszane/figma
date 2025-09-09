@@ -12,7 +12,7 @@ import { J } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { ah } from "../figma_app/637328";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { mr } from "../905/760074";
+import { findBranchById } from "../905/760074";
 import { D6 } from "../figma_app/863319";
 import { nb } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
@@ -329,7 +329,7 @@ let $$P12 = createOptimistThunk((e, t) => {
       e.dispatch($$H20({
         entrypoint,
         favoriteId,
-        file: fileEntityDataMapper.toLiveGraph(mr(tile.repo, tile.branches, {})),
+        file: fileEntityDataMapper.toLiveGraph(findBranchById(tile.repo, tile.branches, {})),
         repoId: tile.repo.id,
         fileBrowserEntryPoint
       }));
@@ -399,7 +399,7 @@ let $$k1 = createOptimistThunk(async (e, t, {
         entrypoint,
         favoriteId,
         sectionId,
-        file: fileEntityDataMapper.toLiveGraph(mr(tile.repo, tile.branches, e.getState().selectedBranchKeyByRepoId)),
+        file: fileEntityDataMapper.toLiveGraph(findBranchById(tile.repo, tile.branches, e.getState().selectedBranchKeyByRepoId)),
         repoId: tile.repo.id,
         fileBrowserEntryPoint
       }));

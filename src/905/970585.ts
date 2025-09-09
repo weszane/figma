@@ -6,7 +6,7 @@ import { w as _$$w } from "../905/5147";
 import { customHistory } from "../905/612521";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
-import { reportError, setSentryTag } from "../905/11";
+import { reportError, setTagGlobal } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -47,7 +47,7 @@ import { handleSyncEvent } from "../905/412815";
 import { DH } from "../905/327855";
 import { xK } from "../905/125218";
 import { Js, QY, pi } from "../figma_app/139113";
-import { Dz } from "../figma_app/516028";
+import { getFullscreenViewFile } from "../figma_app/516028";
 import { c3, Lt } from "../figma_app/440875";
 import { QO, VO } from "../figma_app/646357";
 class M {
@@ -243,7 +243,7 @@ export class $$eu0 {
   constructor(e) {
     this.store = e;
     this.hasShownMultiplayerDecodeError = !1;
-    this.dispatch = () => { };
+    this.dispatch = () => {};
     this.hasUnsavedChanges = () => {
       let e = this.store.getState();
       return !!(e.saveStatus && e.saveStatus.hasUnsavedChanges);
@@ -301,7 +301,7 @@ export class $$eu0 {
     AW();
   }
   handleMultiplayerSignal(e, t, i) {
-    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal"); else if ("too-many-connections" === e) {
+    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
       if (this.hasUnsavedChanges()) {
         let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = getI18nString("unsaved_changes.syncing.too_many_people_in_file");
@@ -321,7 +321,7 @@ export class $$eu0 {
       }));
     } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.experiencing_server_issues")
-    }))); else if ("invalid-permissions" === e) {
+    })));else if ("invalid-permissions" === e) {
       let e;
       let t;
       this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(eH({
@@ -382,7 +382,7 @@ export class $$eu0 {
     return Yq();
   }
   async showRestoreComponentDialog(e) {
-    let [t] = await Promise.all([Dz(this.store), QO]);
+    let [t] = await Promise.all([getFullscreenViewFile(this.store), QO]);
     let i = this.store.getState();
     let n = atomStoreManager.get(qp);
     if (t) {
@@ -439,7 +439,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   isWindowActive() {
@@ -466,14 +466,14 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   prettyPrintMessage(e) {
     console.log("[MultiplayerDebugging]", _$$w.decodeMessage(e));
   }
   reconnectSequenceNumberChanged(e) {
-    setSentryTag("reconnect_sequence_number", e);
+    setTagGlobal("reconnect_sequence_number", e);
     null === e || (!1 === atomStoreManager.get(b2) && atomStoreManager.set(b2, !0), atomStoreManager.set(_$$J, e), this.store.getState().versionHistory.docHasChanged || this.dispatch(VERSION_HISTORY_SET_DOC_HAS_CHANGED({
       status: !0
     })));

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ZA } from "../figma_app/288654";
+import { getLivegraphClient } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { GH, H5 } from "../905/234821";
 import { selectCurrentUser } from "../905/372672";
@@ -185,7 +185,7 @@ function p(e) {
   return `pending-canvas-mention-read-status-${e.getTime()}`;
 }
 export function $$m2(e) {
-  let t = ZA();
+  let t = getLivegraphClient();
   let i = selectCurrentUser();
   let {
     canvasMentionArgs,

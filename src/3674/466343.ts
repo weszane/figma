@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { Zr } from "../figma_app/930338";
+import { capitalize } from "../figma_app/930338";
 import { DP } from "../905/158740";
 import p from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -22,10 +22,10 @@ import { Pf, H8 } from "../905/590952";
 import { Wi, JR } from "../figma_app/162641";
 import { useState, useEffect } from "react";
 import { FPlanNameType, FOrganizationLevelType, FUserTypeClassification, FMemberRoleType, FProductAccessType } from "../figma_app/191312";
-import { X$, D6, S2, px, Ty } from "../figma_app/465071";
+import { useCurrentPublicPlan, useCurrentPlanUser, useTeamPlanFeatures, useTeamPlanUser, isOrgGuestUser } from "../figma_app/465071";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { sZ } from "../905/845253";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { w as _$$w } from "../figma_app/171404";
 var h = p;
 function y({
@@ -387,8 +387,8 @@ function H(e) {
     isShowing,
     totalActiveDevModeUsers
   } = function () {
-    let e = X$("useShowDevModeSocialProof").unwrapOr(null);
-    let t = D6("useShowDevModeSocialProof").unwrapOr(null);
+    let e = useCurrentPublicPlan("useShowDevModeSocialProof").unwrapOr(null);
+    let t = useCurrentPlanUser("useShowDevModeSocialProof").unwrapOr(null);
     let n = e?.tier === FPlanNameType.PRO;
     let a = e?.key.type === FOrganizationLevelType.ORG;
     let i = t?.key.type === FUserTypeClassification.ORG_USER && t?.permission === FMemberRoleType.GUEST;
@@ -403,7 +403,7 @@ function H(e) {
       let [i, o] = useState(!1);
       let [l, s] = useState(0);
       let [r, d] = useState(null);
-      let c = X$("useTotalActiveDevModeUsers").unwrapOr(null);
+      let c = useCurrentPublicPlan("useTotalActiveDevModeUsers").unwrapOr(null);
       let u = c?.key.parentId;
       let p = c?.key.type;
       useEffect(() => {
@@ -455,7 +455,7 @@ function W({
     let [o, l] = useState(!1);
     let [s, r] = useState([]);
     let [d, c] = useState(null);
-    let u = X$("useActiveDevModeUserAvatars").unwrapOr(null);
+    let u = useCurrentPublicPlan("useActiveDevModeUserAvatars").unwrapOr(null);
     let p = u?.key.parentId;
     let h = u?.key.type;
     useEffect(() => {
@@ -567,18 +567,18 @@ export function $$X0({
     recordingKey: "dev-mode-paywall-modal"
   });
   let m = function () {
-    let e = S2();
-    let t = px();
+    let e = useTeamPlanFeatures();
+    let t = useTeamPlanUser();
     return "loaded" !== e.status || "loaded" !== t.status ? null : {
       planParentId: e.data.key.parentId,
       planType: e.data.key.type,
       planTier: e.data.tier,
-      isOrgGuest: Ty(t.data)
+      isOrgGuest: isOrgGuestUser(t.data)
     };
   }();
   let _ = "blocking modal" === p;
   return jsx(fu, {
-    name: Zr(p),
+    name: capitalize(p),
     properties: {
       ...g,
       primaryCtaTrackingDescriptor: h?.trackingDescriptor,
@@ -606,7 +606,7 @@ export function $$X0({
         children: jsx(nB, {
           padding: 0,
           children: getFeatureFlags().is_extended_social_proof_enabled ? null !== m ? jsx(_$$w, {
-            seatType: ud.DEVELOPER,
+            seatType: ProductAccessTypeEnum.DEVELOPER,
             licenseType: FProductAccessType.DEV_MODE,
             entryPoint: "dev-mode-blocking-modal",
             planData: m

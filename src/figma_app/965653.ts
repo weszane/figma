@@ -3,7 +3,7 @@ import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import a from "../vendor/128080";
 import { v4, qp, mn, jq } from "../figma_app/761118";
 import { generateUUIDv4 } from "../905/871474";
-import { _S } from "../figma_app/516028";
+import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { uJ } from "../figma_app/646357";
 import { $p } from "../figma_app/155728";
@@ -51,7 +51,7 @@ let $$v5 = createRemovableAtomFamily(e => atom(t => {
       componentProps: [],
       layout: "list",
       fileNamesByLibraryKey: _,
-      openFileLibraryKey: t(_S),
+      openFileLibraryKey: t(openFileLibraryKeyAtom),
       collapsedLibraryKeys: new Set(),
       slideThemeId: null
     }).reduce((e, t) => {

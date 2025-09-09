@@ -5,14 +5,14 @@ import { Fo, Uz } from "../905/63728";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../figma_app/564183";
 import { f4 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { Sh, dK, a$ } from "../figma_app/889655";
 import { Ae } from "../figma_app/461594";
 import { t as _$$t2 } from "../figma_app/143965";
 import { L as _$$L } from "../905/109200";
 import { S as _$$S } from "../figma_app/9979";
 import { useAtomValue } from "../vendor/525001";
-import { _I } from "../figma_app/473493";
+import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { mp } from "../figma_app/579169";
 import { f as _$$f } from "../905/940356";
 import { u as _$$u } from "../figma_app/365543";
@@ -56,9 +56,9 @@ let I = "code_and_measurement_hint--icon--5-cVy";
 let S = new Date("2023-06-21");
 let v = "dev_mode_dismissed_code_and_measurements_hint";
 function A() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = !e?.canEdit;
-  let r = _I();
+  let r = useCanAccessFullDevMode();
   let i = !!_$$f("dev_mode_dismissed_properties_panel_announcement");
   let a = !!_$$f(v);
   let s = useAtomValue(mp);
@@ -532,7 +532,7 @@ function eL() {
   });
 }
 function eP() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useSelector(Sh);
   let r = useSelector(Ae);
   let i = useSelector(dK);

@@ -2,10 +2,10 @@ import { createContext, useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { qp } from "../905/977779";
 import { B8 } from "../figma_app/255679";
-import { q5, K5 } from "../figma_app/516028";
+import { selectCurrentFile, useFileLibraryKeys } from "../figma_app/516028";
 import { cU } from "../figma_app/646357";
 import { LH } from "../905/872904";
 import { M4 } from "../905/713695";
@@ -27,7 +27,7 @@ let $$I1 = D(() => {
   let g = useSelector(dK);
   let f = useSelector(C9);
   let b = useSelector(jf);
-  let v = q5();
+  let v = selectCurrentFile();
   let I = LH();
   let E = useMemo(() => {
     let e = new Set();
@@ -37,8 +37,8 @@ let $$I1 = D(() => {
   let x = useSelector(MH);
   let S = useSelector(e => e.fileVersion);
   let w = useAtomWithSubscription(qp);
-  let C = K5();
-  let T = ZC(x);
+  let C = useFileLibraryKeys();
+  let T = useLatestRef(x);
   let k = useSelector(_);
   let R = B8();
   useEffect(() => {

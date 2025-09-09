@@ -7,15 +7,15 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { tc } from "../905/15667";
 import { QL, EM } from "../905/609392";
-import { q5 } from "../figma_app/516028";
-import { T5 } from "../figma_app/465071";
+import { selectCurrentFile } from "../figma_app/516028";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { wH } from "../figma_app/680166";
 import { q } from "../905/202542";
 import { q0, qm } from "../figma_app/431689";
 import { i as _$$i } from "../905/46262";
-import { a_, TI } from "../905/513035";
-import { wR } from "../figma_app/765689";
-if (443 == require.j) { }
+import { isCollaboratorType, ProductAccessTypeMap } from "../905/513035";
+import { getProductAccessTypeOrDefault } from "../figma_app/765689";
+if (443 == require.j) {}
 export function $$y0() {
   let e;
   let t = useDispatch();
@@ -24,13 +24,13 @@ export function $$y0() {
   } = q0();
   let y = getFeatureFlags().billing_remodel_downgrade_email_rerequest;
   let v = getFeatureFlags().deeplink_request_from_draft_copied_link_email;
-  let w = T5("useUpgradeRequestModalOnPageLoad");
-  let T = q5();
+  let w = useCurrentPrivilegedPlan("useUpgradeRequestModalOnPageLoad");
+  let T = selectCurrentFile();
   let j = QL("entry_point") || "";
   let k = QL("upgrade_request_type") || "";
   let E = v && null !== T && "in_editor" === k;
-  let C = E || a_(k);
-  C && (e = E ? wR(T.editorType) : TI[k]);
+  let C = E || isCollaboratorType(k);
+  C && (e = E ? getProductAccessTypeOrDefault(T.editorType) : ProductAccessTypeMap[k]);
   let I = K(tc, j) ?? tc.UNKNOWN_DEEP_LINK;
   let A = K(_$$i, j) ?? _$$i.UNKNOWN_DEEP_LINK;
   let {

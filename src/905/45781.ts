@@ -3,7 +3,7 @@ import { useContext, useMemo, useState, useRef, useEffect, useCallback } from "r
 import { isNotNullish } from "../figma_app/95419";
 import { DimensionErrorType } from "../figma_app/763686";
 import o from "classnames";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { M } from "../figma_app/648761";
 import { Uz } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -71,7 +71,7 @@ export function $$v0(e) {
     w.current?.focus?.();
     S(Math.max(0, null === x ? E - 1 : x - 1));
   };
-  let N = ZC(I);
+  let N = useLatestRef(I);
   useEffect(() => {
     T && N !== I && (C?.current?.select(), k(!1));
   }, [C, I, N, T]);

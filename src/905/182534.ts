@@ -7,7 +7,7 @@ import { Pj, Ns, PI } from "../905/977218";
 import { Tq } from "../905/697795";
 import { jN } from "../905/612685";
 import { uH, L0, Rr } from "../figma_app/162807";
-import { QB, bN } from "../figma_app/707808";
+import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { o as _$$o } from "../905/895626";
 export function $$h1(e) {
   return !!e.search_model_type;
@@ -19,7 +19,7 @@ export function $$f4(e, t) {
   let i = e?.currentUser.recentSearches;
   let n = i?.length ? i[0].searches ?? [] : [];
   let r = new Date().getTime();
-  return n.filter((e) => parseInt(e.timestamp) > r - 864e5 * t);
+  return n.filter(e => parseInt(e.timestamp) > r - 864e5 * t);
 }
 export function $$_0(e, t, i, r, a) {
   let s = jN({
@@ -41,18 +41,18 @@ export function $$v12(e) {
 }
 export function $$I13(e, t) {
   if (!e) return [];
-  for (let i of e) if (i.search_model_type === t) return i.results.map((e) => e.model);
+  for (let i of e) if (i.search_model_type === t) return i.results.map(e => e.model);
   return [];
 }
 export function $$E11() {
   let e = debugState.getState().selectedView;
-  return QB(e) ? "search" === e.view ? L0.FULL_PAGE : L0.PREVIEW : null;
+  return isIncludedView(e) ? "search" === e.view ? L0.FULL_PAGE : L0.PREVIEW : null;
 }
 export function $$x8(e, t, i, n, r, a) {
   e(sf({
     view: "search",
     entryPoint: "file_browser",
-    previousView: t && (QB(t) || bN(t)) ? t : void 0
+    previousView: t && (isIncludedView(t) || isOrgView(t)) ? t : void 0
   }));
   e(Pj({
     category: a ? void 0 : r

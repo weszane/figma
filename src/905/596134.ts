@@ -1,9 +1,9 @@
 import { BrowserInfo } from "../figma_app/778880";
-import { to } from "../figma_app/828186";
+import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { ow } from "../figma_app/976749";
 export function $$s0() {
   let e = ow();
-  let t = to();
+  let t = useIsSelectedViewFullscreenCooper();
   return (e || t) && !BrowserInfo.isIpad;
 }
 export const v = $$s0;

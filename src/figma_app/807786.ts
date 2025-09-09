@@ -1,7 +1,7 @@
 import { atom, atomStoreManager } from "../figma_app/27355";
 import i from "../vendor/946678";
 import { analyticsEventManager } from "../905/449184";
-import { rw } from "../905/485103";
+import { WebLoggerTimer } from "../905/485103";
 import { w0 } from "../figma_app/594947";
 import { PW, Do } from "../figma_app/633080";
 import { I } from "../figma_app/130633";
@@ -89,7 +89,7 @@ export function $$b10(e, t, r) {
   return t === e ? "LOCAL" : r.has(e) ? "SUBSCRIBED" : "UNSUBSCRIBED";
 }
 export function $$T0() {
-  let e = new rw();
+  let e = new WebLoggerTimer();
   return () => {
     let t;
     e.stop(e => {

@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -9,7 +9,7 @@ import { d as _$$d } from "../4452/230712";
 import { showModalHandler } from "../905/156213";
 import { FAccessRequestStatusType } from "../figma_app/191312";
 import { ResourceConnectionInviteByIdView } from "../figma_app/43951";
-import { T5 } from "../figma_app/465071";
+import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 if (443 == require.j) {}
 if (443 == require.j) {}
 let g = e => {
@@ -30,8 +30,8 @@ export function $$h0(e) {
   var t;
   let [a, r] = useState((t = e || "", /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t)) ? e : void 0);
   let o = useDispatch();
-  let h = T5("useOpenResourceConnectionReviewModal").unwrapOr(null);
-  let x = Rs(ResourceConnectionInviteByIdView, {
+  let h = useCurrentPrivilegedPlan("useOpenResourceConnectionReviewModal").unwrapOr(null);
+  let x = useSubscription(ResourceConnectionInviteByIdView, {
     resourceConnectionInviteId: a
   }, {
     enabled: !!a

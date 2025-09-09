@@ -4,7 +4,7 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { updateEnvironmentInfo } from "../905/883621";
 import { uiVariantName } from "../905/709735";
-import { setSentryTag } from "../905/11";
+import { setTagGlobal } from "../905/11";
 import { g } from "../figma_app/115586";
 export function $$u2() {
   let {
@@ -17,7 +17,7 @@ export function $$u2() {
     updateEnvironmentInfo({
       uiVersion: uiVariantName
     });
-    setSentryTag("uiVersion", uiVariantName);
+    setTagGlobal("uiVersion", uiVariantName);
   }, [updateMode]);
 }
 export function $$p0() {

@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { Uz } from "../905/63728";
 import { NONE_SYMBOL } from "../905/992467";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { w4 } from "../905/445814";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { s as _$$s } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Pf, H8 } from "../905/590952";
@@ -243,13 +243,13 @@ export let $$eb0 = registerModal(function (e) {
   let h = useCallback(t => {
     _.current || !t || e.autofocusCommentInput || (t.focus(), _.current = !0);
   }, [e.autofocusCommentInput]);
-  let C = ZC(e.postUuid);
+  let C = useLatestRef(e.postUuid);
   useEffect(() => {
     n && (e.inFileView || C === e.postUuid || "teamFeed" !== u.view || (_.current = !1, customHistory.replace(Kc(n, {
       uuid: e.postUuid
     }))));
   }, [C, e.postUuid, n, e.inFileView, u]);
-  let b = Rs(FeedPostWithDetails, {
+  let b = useSubscription(FeedPostWithDetails, {
     publicUuid: e.postUuid
   });
   useEffect(() => {
@@ -281,7 +281,7 @@ export let $$eb0 = registerModal(function (e) {
   let R = useCallback(() => A(e => !e), []);
   let [F, B] = useState(!1);
   useEffect(() => {
-    !F && "loaded" === b.status && j[w] && Dr(j[w]) && (YQ({
+    !F && "loaded" === b.status && j[w] && Dr(j[w]) && (handleAtomEvent({
       id: H
     }), B(!0));
   }, [b.status, F, j, w]);

@@ -7,7 +7,7 @@ import { vo, Y9, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { H9 } from "../figma_app/930338";
+import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -20,7 +20,7 @@ async function y(e) {
     useAbsoluteBounds: !1,
     colorProfile: "DOCUMENT"
   }]);
-  return `data:image/png;base64,${H9(t)}`;
+  return `data:image/png;base64,${uint8ArrayToBase64(t)}`;
 }
 let _ = () => {
   let [e, t] = useAtomValueAndSetter(f);

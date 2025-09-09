@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef } from "react";
 import { mc, r1, Q$, ME, Ov, rm, b as _$$b, bL } from "../figma_app/860955";
 import { Jo, rN } from "../905/872033";
 import { h as _$$h } from "../905/207101";
-import { PD } from "../figma_app/39751";
+import { usePersistentValue } from "../figma_app/922077";
 import { generateRecordingKey, addInteractionPath, removeInteractionPath } from "../figma_app/878298";
 import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
@@ -132,7 +132,7 @@ function x(e) {
   } = e;
   let E = null != activeToolId && wK(items, activeToolId) ? activeToolId : void 0;
   let y = useRef();
-  let T = PD(E, y);
+  let T = usePersistentValue(E, y);
   _$$h(() => {
     let e = () => y.current = void 0;
     addInteractionPath(e);

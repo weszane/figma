@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { IT } from "../figma_app/566371";
+import { setupResourceAtomHandler } from "../figma_app/566371";
 import { af } from "../1250/218868";
 import { Mo, wP } from "../1250/51387";
 import { jb } from "../1250/807901";
@@ -27,7 +27,7 @@ export function $$d1(e) {
   }), [d, planId, planType]);
   let u = l.length > 0 && p;
   let _ = useMemo(() => u ? af() : "", [m, u]);
-  let [g] = IT(Mo({
+  let [g] = setupResourceAtomHandler(Mo({
     ...m,
     query_id: _,
     session_id: _
@@ -41,7 +41,7 @@ export function $$d1(e) {
   };
 }
 export function $$l0(e) {
-  let [n] = IT(wP(e), {
+  let [n] = setupResourceAtomHandler(wP(e), {
     enabled: !!e
   });
   return {

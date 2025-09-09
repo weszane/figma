@@ -2,7 +2,7 @@ import { useRef, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { A } from "../905/920142";
 import { XHR } from "../905/910117";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { showModalHandler } from "../905/156213";
 import { v } from "../figma_app/380543";
 import { selectCurrentUser } from "../905/372672";
@@ -40,7 +40,7 @@ export function $$g1(e) {
   let b = y?.hasViewPrototypeRole;
   let T = g?.accessReverted;
   useEffect(() => {
-    b && T && !f.current?.accessReverted && g.expiresAt && g.expiresAt === f.current?.expiresAt && YQ({
+    b && T && !f.current?.accessReverted && g.expiresAt && g.expiresAt === f.current?.expiresAt && handleAtomEvent({
       id: $$_2
     });
     f.current = g;

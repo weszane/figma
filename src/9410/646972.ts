@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { nn } from "../figma_app/186343";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { cT } from "../figma_app/32128";
@@ -14,7 +14,7 @@ export function $$p1() {
   return t && "student" === i;
 }
 function h() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = cT();
   let i = $$p1();
   return e ? i ? "k12" : t ? "readOnly" : Qy(e) ? "personalDraft" : null : "fileLoading";

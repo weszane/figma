@@ -5,16 +5,16 @@ import { K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/782411";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
-import { X$, H3, D6, A8 } from "../figma_app/465071";
+import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071";
 import { IE } from "../figma_app/193867";
 import { p as _$$p } from "../905/763242";
 import { FEditorType } from "../figma_app/53721";
@@ -29,7 +29,7 @@ import { c as _$$c } from "../905/300572";
 import { b as _$$b } from "../905/359141";
 function L(e) {
   let t = useSelector(e => e.selectedView);
-  let r = ZC(t);
+  let r = useLatestRef(t);
   let n = useSelector(e => e.modalShown?.type);
   let s = useDispatch();
   let o = "fullscreen" !== t.view && r?.view === t.view;
@@ -49,9 +49,9 @@ let P = memo(function ({
   L(cX);
   let c = useSelector(e => e.selectedView);
   let u = useSelector(e => IE(e));
-  let p = q5();
-  let _ = X$("LibraryPreferencesModal").unwrapOr(null);
-  let f = H3(_);
+  let p = selectCurrentFile();
+  let _ = useCurrentPublicPlan("LibraryPreferencesModal").unwrapOr(null);
+  let f = getParentOrgIdIfOrgLevel(_);
   let E = new URLSearchParams(customHistory.location.search).get("teamToMoveFileToOnNavigate");
   let T = _$$R();
   _$$h(() => {
@@ -124,8 +124,8 @@ function F({
   let r = useDispatch();
   let s = useSelector(e => e.sharedFonts);
   let o = useSelector(e => _$$p(e));
-  let l = D6("TeamLibraryPreferencesModal").unwrapOr(null);
-  let d = !!(l && A8(l, FMemberRoleType.ADMIN));
+  let l = useCurrentPlanUser("TeamLibraryPreferencesModal").unwrapOr(null);
+  let d = !!(l && checkOrgUserPermission(l, FMemberRoleType.ADMIN));
   let c = FC();
   let u = useMemo(() => {
     let e = [Wv.LIBRARIES];

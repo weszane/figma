@@ -11,7 +11,7 @@ import { uH, hf, Rr, uR, Rx } from "../figma_app/162807";
 import { XU, t2 } from "../figma_app/756995";
 import { o as _$$o } from "../905/668706";
 import { E as _$$E } from "../905/632989";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { x as _$$x } from "../905/211326";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -79,8 +79,8 @@ import { UP } from "../figma_app/740025";
 import { Q as _$$Q2 } from "../905/618914";
 import { FOrganizationLevelType, FMemberRoleType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { mZ, Ji } from "../905/276025";
-import { X$, zQ as _$$zQ, A8 } from "../figma_app/465071";
+import { getPlanFeaturesTeamAtomFamily, getPlanUserTeamAtomFamily } from "../905/276025";
+import { useCurrentPublicPlan, isOrgOrEnterprisePlan, checkOrgUserPermission } from "../figma_app/465071";
 import { g as _$$g } from "../905/210813";
 import { l as _$$l } from "../figma_app/676249";
 let F = {
@@ -217,7 +217,7 @@ export function $$G6(e) {
   } = e;
   let s = useSelector(e => e.currentUserOrgId);
   let o = "NON_ORG_TEAMS" !== e.activePlan && e.activePlan || s;
-  let l = Rs(SearchFilterWorkspaceView, {
+  let l = useSubscription(SearchFilterWorkspaceView, {
     orgId: o ?? null
   });
   let d = useMemo(() => "loaded" === l.status ? l.data?.org?.workspaces : [], [l]);
@@ -823,7 +823,7 @@ export function $$e53({
     let e = useDispatch();
     let t = UP();
     let r = useSelector(e => getPermissionsStateMemoized(e));
-    let n = X$("useUpdateSearchScope");
+    let n = useCurrentPublicPlan("useUpdateSearchScope");
     let s = useRef(!1);
     r.currentTeamId && n.data?.key.type === FOrganizationLevelType.ORG && !s.current && (s.current = !0, reportError(_$$e.FRONTEND_PLATFORM, Error("Redux vs. plan-hook inconsistency"), {
       extra: {
@@ -835,10 +835,10 @@ export function $$e53({
       }
     }));
     return useCallback(async () => {
-      let r = await _$$Q2(mZ(!0));
-      let n = await _$$Q2(Ji(!0));
-      let i = _$$zQ(r);
-      let a = A8(n, FMemberRoleType.MEMBER);
+      let r = await _$$Q2(getPlanFeaturesTeamAtomFamily(!0));
+      let n = await _$$Q2(getPlanUserTeamAtomFamily(!0));
+      let i = isOrgOrEnterprisePlan(r);
+      let a = checkOrgUserPermission(n, FMemberRoleType.MEMBER);
       e(Ns({
         searchScope: t ? Rx.COMMUNITY : i ? a ? Rx.ORG : Rx.ORG_GUEST : Rx.PERSONAL
       }));

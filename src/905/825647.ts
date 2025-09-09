@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
 import { kD, J3, kN, JU } from "../figma_app/622574";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { x } from "../905/619833";
 import { i$, YM } from "../905/122282";
 import { YW } from "../figma_app/553488";
 export function $$d0() {
   let e = !!kD();
   let t = J3();
-  let i = q5();
+  let i = selectCurrentFile();
   let d = useDispatch();
   return {
     openCooperPublishFlow: async n => {

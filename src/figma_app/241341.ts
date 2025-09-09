@@ -44,7 +44,7 @@ import { rb } from '../figma_app/151869';
 import { aS, Cr } from '../figma_app/221114';
 import { mJ } from '../figma_app/311375';
 import { w1 } from '../figma_app/449837';
-import { tS } from '../figma_app/516028';
+import { useCurrentFileKey } from '../figma_app/516028';
 import { HISTORY_DOCUMENT_INDEX } from '../figma_app/518682';
 import { _W, DS, q0, Q4, Qp, R$, t$ } from '../figma_app/571341';
 import { eY } from '../figma_app/722362';
@@ -455,7 +455,7 @@ export function $$eE2(e) {
     preferencesApi,
     origin
   } = e;
-  let D = tS();
+  let D = useCurrentFileKey();
   let k = selectCurrentUser()?.id;
   let [M, F] = useState(Ss.SIDE_BY_SIDE);
   let [j, G] = useState(q0);
@@ -1054,7 +1054,7 @@ let $$eT0 = registerModal(e => {
   let {
     Sprig
   } = useSprigWithSampling();
-  let u = tS();
+  let u = useCurrentFileKey();
   let h = E1()?.toISOString();
   let m = useAtomValueAndSetter(Ib)[1];
   let {

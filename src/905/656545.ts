@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { oA } from "../905/663269";
+import { getResourceDataOrFallback } from "../905/663269";
 import { analyticsEventManager } from "../905/449184";
 import { QO } from "../905/888985";
 import { PerfTimer } from "../905/609396";
@@ -36,7 +36,7 @@ let E = D(async e => {
     let n = atomStoreManager.get(t);
     "loaded" === n.status ? e(n) : "errors" === n.status && i("Error loading presetLibraryAtom");
   });
-  let n = i?.data?.libraryPresetSubscriptionsV2?.find(t => oA(t.libraryKey) === e);
+  let n = i?.data?.libraryPresetSubscriptionsV2?.find(t => getResourceDataOrFallback(t.libraryKey) === e);
   return n?.partner_type === FAuthProviderType.APPLE;
 });
 let x = _$$n(async () => await w0("ui_kits_apple_fonts"));

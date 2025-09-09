@@ -113,12 +113,12 @@ import { e as _$$e0 } from '../905/457828';
 import { b as _$$b8 } from '../905/465888';
 import { Q as _$$Q4 } from '../905/467310';
 import { A as _$$A7 } from '../905/475480';
-import { S3 } from '../905/485103';
-import { YQ } from '../905/502364';
+import { sendHistogram } from '../905/485103';
+import { handleAtomEvent } from '../905/502364';
 import { Y as _$$Y } from '../905/506207';
 import { jM as _$$jM } from '../905/508367';
 import { hR, hW } from '../905/508457';
-import { ud as _$$ud2 } from '../905/513035';
+import { ProductAccessTypeEnum } from '../905/513035';
 import { s as _$$s } from '../905/513506';
 import { RR } from '../905/514666';
 import { v as _$$v } from '../905/516963';
@@ -195,7 +195,7 @@ import { u as _$$u5 } from '../905/747030';
 import { EL } from '../905/748636';
 import { H4 as _$$H4, tH as _$$tH, Hb, S1 } from '../905/751457';
 import { Bm } from '../905/755627';
-import { SA } from '../905/760074';
+import { isDefaultFile } from '../905/760074';
 import { D as _$$D2 } from '../905/771179';
 import { X as _$$X3 } from '../905/776923';
 import { LS } from '../905/782918';
@@ -291,7 +291,7 @@ import { h8, QH, Ze } from '../figma_app/27829';
 import { ki } from '../figma_app/31188';
 import { Ye } from '../figma_app/32128';
 import { ZS } from '../figma_app/33126';
-import { ZC } from '../figma_app/39751';
+import { useLatestRef } from '../figma_app/922077';
 import { Y9 as _$$Y4 } from '../figma_app/42724';
 import { i as _$$i2 } from '../figma_app/43065';
 import { FileCreationDropdownView, ComponentByKey, PinnedFiles, OpenEditorFileData, DesktopPushNotificationView, ActiveFileUsersForFileView, FolderPageView, LibraryPublish, FileThumbnail, ProductTrialsView, ClientReloadView, LegacySourceStyleData, RecentIdleTimeoutSettingChangeView, DesktopNewTabRecentFilesView, RecentNetworkControlRejectionView, StyleByKey } from '../figma_app/43951';
@@ -366,7 +366,7 @@ import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
 import { h as _$$h3 } from '../figma_app/276445';
 import { W6 } from '../figma_app/287316';
-import { p as _$$p, Rs, ZA } from '../figma_app/288654';
+import { useMultiSubscription, useSubscription, getLivegraphClient } from '../figma_app/288654';
 import { YN } from '../figma_app/291892';
 import { mw, Ow } from '../figma_app/297957';
 import { F$, LH, y4 } from '../figma_app/298277';
@@ -411,9 +411,9 @@ import { q3 } from '../figma_app/450829';
 import { flagValue, userValue, inputValue, modalValue, additionalValue, fullscreenValue, sessionValue } from '../figma_app/455680';
 import { Ws } from '../figma_app/459125';
 import { wV } from '../figma_app/462456';
-import { D6, j_ } from '../figma_app/465071';
+import { useCurrentPlanUser, useIsOrgAdminUser } from '../figma_app/465071';
 import { assert, throwTypeError } from '../figma_app/465776';
-import { _I as _$$_I, l7 as _$$l5, xo as _$$xo, U4 } from '../figma_app/473493';
+import { useCanAccessFullDevMode, useIsLoggedOutDevModeDemoFile, useCanUseDevModeDemoFile, useCanAccessDevModeEntryPoint } from '../figma_app/473493';
 import { A as _$$A4 } from '../figma_app/475340';
 import { yZ } from '../figma_app/476572';
 import { $X, n6 as _$$n2, pD as _$$pD, f7, FZ, KN, LD, ZB } from '../figma_app/476677';
@@ -424,7 +424,7 @@ import { zj } from '../figma_app/502363';
 import { p as _$$p4 } from '../figma_app/502587';
 import { wG } from '../figma_app/504823';
 import { $4 } from '../figma_app/506364';
-import { eq as _$$eq, tS as _$$tS, K5, MY, q5, ze } from '../figma_app/516028';
+import { useRequireOpenFileOrSuspend, useCurrentFileKey, useFileLibraryKeys, useFullscreenViewFile, selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
 import { D as _$$D6, z as _$$z4 } from '../figma_app/516075';
 import { _c as _$$_c, l0 as _$$l3, wV as _$$wV, BX, Dp, Eo, wF } from '../figma_app/516324';
 import { IF, Lo } from '../figma_app/518364';
@@ -440,10 +440,10 @@ import { yH } from '../figma_app/540726';
 import { nb as _$$nb, fA, Tf } from '../figma_app/543100';
 import { r1 as _$$r4, Fu, Hy } from '../figma_app/545877';
 import { N as _$$N, Gm } from '../figma_app/548577';
-import { aI as _$$aI, Oc } from '../figma_app/552876';
+import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { ZO as _$$ZO } from '../figma_app/557318';
 import { k as _$$k3 } from '../figma_app/564183';
-import { gY as _$$gY, IT, mI, QV } from '../figma_app/566371';
+import { getAtomMutate, setupResourceAtomHandler, handleSuspenseRetainRelease, handleResourceAtomMetrics } from '../figma_app/566371';
 import { NX } from '../figma_app/568591';
 import { Pm } from '../figma_app/569743';
 import { st as _$$st } from '../figma_app/578011';
@@ -462,7 +462,7 @@ import { $z, Ih } from '../figma_app/617427';
 import { sv as _$$sv } from '../figma_app/617606';
 import { Eh } from '../figma_app/617654';
 import { j5 } from '../figma_app/624361';
-import { Z_, ZN } from '../figma_app/630077';
+import { normalizeTeamData, fileActionEnum } from '../figma_app/630077';
 import { pp as _$$pp } from '../figma_app/632319';
 import { M$, Qx } from '../figma_app/633080';
 import { X_ } from '../figma_app/634146';
@@ -482,9 +482,9 @@ import { aJ as _$$aJ, Sz, ZQ } from '../figma_app/673202';
 import { Gm as _$$Gm } from '../figma_app/675605';
 import { KI, wH } from '../figma_app/680166';
 import { Z as _$$Z3 } from '../figma_app/684783';
-import { nt as _$$nt2 } from '../figma_app/687776';
+import { useProjectFileCreationPermissions } from '../figma_app/687776';
 import { R as _$$R7 } from '../figma_app/690591';
-import { ou as _$$ou, G4, U6 } from '../figma_app/707808';
+import { viewMappings, PreviewMode, OnboardingStep } from '../figma_app/707808';
 import { cU as _$$cU, wY } from '../figma_app/708845';
 import { EX, xI } from '../figma_app/709323';
 import { eJ as _$$eJ, ub as _$$ub2, uh as _$$uh, D_, q8, Uv, wX } from '../figma_app/710136';
@@ -547,7 +547,7 @@ import { Ex as _$$Ex, zE } from '../figma_app/919079';
 import { w as _$$w } from '../figma_app/922802';
 import { E as _$$E } from '../figma_app/924252';
 import { w4 as _$$w3, Fj, go } from '../figma_app/927140';
-import { Yx } from '../figma_app/930338';
+import { formatList } from '../figma_app/930338';
 import { e_ as _$$e_, Cn } from '../figma_app/936061';
 import { z5 as _$$z3, Bh, fN } from '../figma_app/936646';
 import { $ as _$$$4 } from '../figma_app/938538';
@@ -604,7 +604,7 @@ function ec(e) {
     priority: !!u && c,
     unread: !0
   });
-  let m = ZC(h.activeTab);
+  let m = useLatestRef(h.activeTab);
   useEffect(() => {
     h.activeTab !== m && qD({
       name: 'user_notifications_filter_viewed',
@@ -674,7 +674,7 @@ function eu() {
     let e = useStore();
     let t = useMemo(() => generateUUIDv4(), []);
     let r = useAtomWithSubscription(_$$d2);
-    let n = Rs(DesktopPushNotificationView, {
+    let n = useSubscription(DesktopPushNotificationView, {
       cacheNonce: t
     }, {
       enabled: !r
@@ -1826,7 +1826,7 @@ let nG = memo(e => {
   let r;
   let n = _$$ow();
   let i = Em();
-  let a = Oc();
+  let a = useIsSelectedFigmakeFullscreen();
   let s = _$$cJ();
   let o = Ye();
   let d = DP();
@@ -2189,7 +2189,7 @@ function iW() {
     redirectUrl,
     interstitialType
   } = i;
-  interstitialType === U6.ONBOARDING && (e = renderI18nText('community.seller.setup_complete'), t = renderI18nText('community.seller.head_back_to_figma_to_start_selling'), r = _$$A3, n = 'community_monetization_desktop_interstitial--stripeToFigmaLogo--819Zk');
+  interstitialType === OnboardingStep.ONBOARDING && (e = renderI18nText('community.seller.setup_complete'), t = renderI18nText('community.seller.head_back_to_figma_to_start_selling'), r = _$$A3, n = 'community_monetization_desktop_interstitial--stripeToFigmaLogo--819Zk');
   return jsx(_$$w, {
     children: jsx(_$$u4, {
       useOriginalSrcFills: !0,
@@ -3828,7 +3828,7 @@ class sx extends PureComponent {
         hubFile: this.props.hubFile,
         profileIdToAdminResourceAs: null,
         disableClickToExpand: !0,
-        fullscreenState: G4.DEFAULT,
+        fullscreenState: PreviewMode.DEFAULT,
         dispatch: this.props.dispatch
       }) : null
     });
@@ -4641,9 +4641,9 @@ function oj(e) {
   } = e;
   let [r, n] = useState(!1);
   let i = useDispatch();
-  let a = _$$gY(_$$A7.validateOrgTrialMutation);
-  let s = D6('OrgTrialPendingModal');
-  let o = j_(s);
+  let a = getAtomMutate(_$$A7.validateOrgTrialMutation);
+  let s = useCurrentPlanUser('OrgTrialPendingModal');
+  let o = useIsOrgAdminUser(s);
   if (orgTrial.status !== _$$Q4.PENDING || o.status !== 'loaded') return null;
   let d = o.data;
   let c = orgTrial.planType === FPlanTierType.ENTERPRISE ? renderI18nText('payments_modal.org_trial.enterprise') : renderI18nText('payments_modal.org_trial.organization');
@@ -4822,7 +4822,7 @@ function oZ({
 }) {
   let [t, r] = useState(!1);
   let n = useDispatch();
-  let i = _$$gY(oz);
+  let i = getAtomMutate(oz);
   let a = hS({
     preventUserClose: !0,
     open: !0,
@@ -4855,8 +4855,8 @@ function oZ({
     'children': renderI18nText('payments_modal.org_trial_pending.ssa_link')
   });
   let c = renderI18nText('payments_modal.org_trial_pending.i_agree');
-  let u = Yx(e.productLicenseTypes?.map(e => _$$E5(e)) || []);
-  let p = Yx(e.productLicenseTypes?.map(e => _$$$2(e)) || []);
+  let u = formatList(e.productLicenseTypes?.map(e => _$$E5(e)) || []);
+  let p = formatList(e.productLicenseTypes?.map(e => _$$$2(e)) || []);
   let _ = e.productLicenseTypes?.length || 0;
   return jsx(bL, {
     'manager': a,
@@ -5174,7 +5174,7 @@ function lF({
       throwTypeError(e);
   }
   let d = r ? r.project.id : void 0;
-  let c = !!r && !_$$rR(Z_(r.team), {
+  let c = !!r && !_$$rR(normalizeTeamData(r.team), {
     type: _$$sK.ADD_FILE,
     editorType: e
   });
@@ -5217,7 +5217,7 @@ function lF({
               data: {
                 team: r.team,
                 resource: e !== FFileType.FIGMAKE || getFeatureFlags().bake_starter_limit ? vL.FILE : Bi.FIGMAKE,
-                action: ZN.CREATE_FILE_FROM_DROPDOWN,
+                action: fileActionEnum.CREATE_FILE_FROM_DROPDOWN,
                 editorType: e,
                 currentPlan: _$$F4.Plan.STARTER,
                 upsellPlan: _$$F4.Plan.PRO,
@@ -5275,7 +5275,7 @@ function lj({
   }
 }
 function lJ() {
-  let [e] = IT(DesktopNewTabRecentFilesView({}));
+  let [e] = setupResourceAtomHandler(DesktopNewTabRecentFilesView({}));
   let t = useMemo(() => e.transform(e => _$$YN2(e.currentUser.recentFiles)), [e]);
   useEffect(() => {
     t.status === 'loaded' && Wn(t.data);
@@ -5317,7 +5317,7 @@ function l5({
   let s = useMemo(() => a.map(e => ({
     fileKey: e
   })), [a]);
-  let o = _$$p(ActiveFileUsersForFileView, s, {
+  let o = useMultiSubscription(ActiveFileUsersForFileView, s, {
     enabled: !0
   });
   useEffect(() => {
@@ -5605,7 +5605,7 @@ function dr() {
   let f = function ({
     enabled: e = !0
   } = {}) {
-    let t = Rs(FileCreationDropdownView, {
+    let t = useSubscription(FileCreationDropdownView, {
       orgId: null
     }, {
       enabled: e
@@ -5631,7 +5631,7 @@ function dr() {
   }
   let E = useSelector(e => e.user?.drafts_folder_id);
   let y = e ? g : null;
-  let b = _$$nt2(E);
+  let b = useProjectFileCreationPermissions(E);
   let T = y ? y.project : b.data;
   let I = !y && b.status === 'loading';
   let S = _$$h7(T);
@@ -5647,7 +5647,7 @@ function dr() {
       });
     }
     for (let t of n) {
-      let r = t.files.find(e => SA(e, t.repo));
+      let r = t.files.find(e => isDefaultFile(e, t.repo));
       r && e.push({
         type: _$$nb.REPO,
         repo: t.repo,
@@ -5679,7 +5679,7 @@ function dr() {
   }, [o]);
   let N = parsePxNumber('-120px');
   let C = getUserId();
-  IT(_$$OL({
+  setupResourceAtomHandler(_$$OL({
     userId: C ?? ''
   }), {
     enabled: C != null
@@ -5821,12 +5821,12 @@ function dR() {
       let r = useMemo(() => t.map(e => ({
         key: e
       })), [t]);
-      _$$p(ComponentByKey, r, {
+      useMultiSubscription(ComponentByKey, r, {
         enabled: e
       });
     }();
     let t = function () {
-      let e = _$$tS();
+      let e = useCurrentFileKey();
       let t = _$$n4();
       let r = useAtomWithSubscription(TG);
       let [n, i] = useAtomValueAndSetter(dP);
@@ -5837,7 +5837,7 @@ function dR() {
         key: t,
         openFileKey: e
       })), [o, e]);
-      let d = _$$p(StyleByKey, l);
+      let d = useMultiSubscription(StyleByKey, l);
       let c = useMemo(() => dO(d), [d]);
       let u = useMemo(() => ({
         ...a,
@@ -5866,8 +5866,8 @@ function dR() {
       unpublishedLocalStyleKeyToNodeIds,
       usedLocalStyles
     } = function () {
-      let e = _$$tS();
-      let t = K5();
+      let e = useCurrentFileKey();
+      let t = useFileLibraryKeys();
       let r = _$$eY();
       let n = Bh(t);
       let i = useSelector(RW);
@@ -5885,7 +5885,7 @@ function dR() {
         key: t,
         openFileKey: e
       })), [s, e]);
-      let l = _$$p(StyleByKey, o);
+      let l = useMultiSubscription(StyleByKey, o);
       return {
         localUnpublishedStyles: useMemo(() => dO(l), [l]),
         unpublishedLocalStyleKeyToNodeIds: s,
@@ -5968,7 +5968,7 @@ let dL = Zm(({
 let dP = atom(new Set());
 let dD = atom(e => {
   if (!e(JB)) return {};
-  let t = e(ze);
+  let t = e(openFileKeyAtom);
   let r = Array.from(e(dP)).map(e => ({
     key: e,
     openFileKey: t
@@ -5991,8 +5991,8 @@ function dB({
 }) {
   !function () {
     let e = useDispatch();
-    let t = _$$tS();
-    let r = Rs(LegacySourceStyleData, {
+    let t = useCurrentFileKey();
+    let r = useSubscription(LegacySourceStyleData, {
       fileKey: t ?? ''
     }, {
       enabled: !!t
@@ -6015,7 +6015,7 @@ function dG({
   children: e,
   maxSubscriptionsBeforeCleanup: t
 }) {
-  let r = q5()?.canEdit;
+  let r = selectCurrentFile()?.canEdit;
   !function () {
     let e = useRef(new Set());
     let t = useDispatch();
@@ -6058,7 +6058,7 @@ function dH() {
     let d = useRef(200);
     let c = useMemo(() => r.state === Qx.UPLOADING ? r.libraryPublishId : null, [r]);
     o !== c && (l(c), i(0), s(void 0));
-    let u = Rs(LibraryPublish, {
+    let u = useSubscription(LibraryPublish, {
       id: c || ''
     }, {
       enabled: !!c
@@ -6079,7 +6079,7 @@ function dH() {
         libraryPublishV2: null
       });
     }, [u]);
-    let _ = _$$tS();
+    let _ = useCurrentFileKey();
     useEffect(() => {
       e(TS());
     }, [e, _]);
@@ -6092,7 +6092,7 @@ function dH() {
       });
       let t = () => {
         let e = Math.floor((performance.now() - h) / 36e5);
-        e !== m.current && (m.current = e, S3('publish.periodic_progress.hours', e));
+        e !== m.current && (m.current = e, sendHistogram('publish.periodic_progress.hours', e));
       };
       let r = Symbol('__PUBLISH_COMPLETE__');
       let n = () => {
@@ -6267,7 +6267,7 @@ function dJ() {
   });
   let r = t.unwrapOr(void 0)?.file?.folderId;
   let n = useDeferredValue(r);
-  QV(t, n ? 'passthrough' : 'suspend');
+  handleResourceAtomMetrics(t, n ? 'passthrough' : 'suspend');
   return n;
 }
 function d1({
@@ -6372,7 +6372,7 @@ let cr = memo(({
   let u = useCallback(t => {
     d(e, t);
   }, [d, e]);
-  let p = Rs(FileThumbnail({
+  let p = useSubscription(FileThumbnail({
     fileKey: e.file.key
   })).unwrapOr(void 0)?.file;
   return jsxs('div', {
@@ -6491,14 +6491,14 @@ function co() {
   let e = dJ();
   assert(!!e, 'Folder id is undefined');
   let t = LK(e);
-  let [r] = mI(t);
+  let [r] = handleSuspenseRetainRelease(t);
   let n = r.unwrapOr(void 0)?.files;
   assert(!!n, 'Files is undefined');
   assert(n.length > 0, 'No files in folder');
-  let [i] = IT(PinnedFiles({
+  let [i] = setupResourceAtomHandler(PinnedFiles({
     folderId: e
   }));
-  mI(i);
+  handleSuspenseRetainRelease(i);
   let a = i.unwrapOr(void 0)?.project?.pinnedFiles;
   let s = useMemo(() => n.filter(e => !a || !a.some(t => t.file?.key === e.key)).map(e => fA(e)).sort((e, t) => {
     let r = Tf.getTouchedAt(e);
@@ -6528,10 +6528,10 @@ function cc() {
 function cu() {
   let e = dJ();
   assert(!!e, 'Folder id is undefined');
-  let [t] = IT(PinnedFiles({
+  let [t] = setupResourceAtomHandler(PinnedFiles({
     folderId: e
   }));
-  let [r] = mI(t);
+  let [r] = handleSuspenseRetainRelease(t);
   let n = r.unwrapOr(void 0)?.project?.pinnedFiles;
   assert(!!n, 'Pinned Files is undefined');
   let i = useMemo(() => n.filter(e => !!e.file).map(e => ({
@@ -6601,10 +6601,10 @@ function cm() {
 function cg() {
   let e = dJ();
   assert(!!e, 'Folder id is undefined');
-  let [t] = IT(FolderPageView({
+  let [t] = setupResourceAtomHandler(FolderPageView({
     projectId: e
   }));
-  let [r] = mI(t);
+  let [r] = handleSuspenseRetainRelease(t);
   let n = r.unwrapOr(void 0)?.project;
   let i = useDispatch();
   assert(!!n, 'Project is null');
@@ -6688,8 +6688,8 @@ function cX() {
   let e = useDispatch();
   let t = !selectCurrentUser();
   let r = _$$e11();
-  let n = _$$xo();
-  let i = _$$l5();
+  let n = useCanUseDevModeDemoFile();
+  let i = useIsLoggedOutDevModeDemoFile();
   let a = useSelector(e => e.selectedView);
   let s = my();
   let o = s === FEditorType.Design;
@@ -6724,13 +6724,13 @@ let c0 = atom(new Set());
 let c1 = 'true';
 function c2() {
   let e = useDispatch();
-  let t = q5();
-  let r = _$$tS();
+  let t = selectCurrentFile();
+  let r = useCurrentFileKey();
   let n = selectCurrentUser();
   let i = function () {
-    let e = q5();
+    let e = selectCurrentFile();
     let t = _$$J6();
-    let r = _$$tS();
+    let r = useCurrentFileKey();
     let n = selectCurrentUser();
     let {
       userLacksLicenseAccess
@@ -6791,9 +6791,9 @@ function c2() {
 let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
   let e = _$$U4();
   let t = selectCurrentUser();
-  let r = D6('ModeSwitcherTrackedTooltip').unwrapOr(null);
+  let r = useCurrentPlanUser('ModeSwitcherTrackedTooltip').unwrapOr(null);
   let n = r?.planKey.type === FOrganizationLevelType.TEAM;
-  let i = q5();
+  let i = selectCurrentFile();
   let a = t?.external_restricted_org_id ? getI18nString('dev_handoff.paywall.external_content_control_hint') : i?.parentOrgId ? getI18nString('dev_handoff.paywall.org_not_member_hint') : n ? void 0 : getI18nString('dev_handoff.paywall.team_not_member_hint');
   let s = t?.external_restricted_org_id ? 'ecc' : i?.parentOrgId ? 'not_member_org' : n ? void 0 : 'not_member_pro_team';
   _$$h9(() => {
@@ -6862,7 +6862,7 @@ function ue({
   onClick_UI3_DO_NOT_REUSE: i
 }) {
   let a = selectCurrentUser();
-  let s = q5();
+  let s = selectCurrentFile();
   let {
     onModeSwitch,
     newModeWhenLoaded,
@@ -6908,17 +6908,17 @@ function ut({
   onClick_UI3_DO_NOT_REUSE: e
 }) {
   let t = m0();
-  let r = _$$tS();
-  let n = q5();
-  let i = U4();
-  let a = _$$_I();
-  let s = _$$xo();
+  let r = useCurrentFileKey();
+  let n = selectCurrentFile();
+  let i = useCanAccessDevModeEntryPoint();
+  let a = useCanAccessFullDevMode();
+  let s = useCanUseDevModeDemoFile();
   let o = selectCurrentUser();
   let d = !!hA() && a;
   !function () {
     let e = useDispatch();
-    let t = _$$tS();
-    let r = _$$xo();
+    let t = useCurrentFileKey();
+    let r = useCanUseDevModeDemoFile();
     let n = getFilteredFeatureFlags().ce_il_root;
     let i = my();
     let a = useRef(i);
@@ -7009,7 +7009,7 @@ function ud(e) {
     }, e);
   }), [_, a, s, activateTool, u, c, showDisabledTools]);
   let m = useCallback(() => {
-    YQ({
+    handleAtomEvent({
       id: wX(o ? 'dev' : u === 'illustration' ? 'illustration' : 'design')
     });
   }, [o, u]);
@@ -7290,7 +7290,7 @@ function uO() {
   } = wH();
   let i = getPendingRequest(FProductAccessType.DEV_MODE);
   useEffect(() => {
-    if (!i || !i.billableProductKey || Zx(i.billableProductKey) !== _$$ud2.DEVELOPER) return;
+    if (!i || !i.billableProductKey || Zx(i.billableProductKey) !== ProductAccessTypeEnum.DEVELOPER) return;
     let {
       showNudgeEligibility
     } = qm(i);
@@ -7355,8 +7355,8 @@ function uF() {
 }
 function uj() {
   let e = function () {
-    let e = _$$_I();
-    let t = q5();
+    let e = useCanAccessFullDevMode();
+    let t = selectCurrentFile();
     let r = t?.currentPartialOrgUser?.designAccountTypeRequest;
     let n = t?.currentPartialOrgUser?.devModeAccountTypeRequest;
     let i = !!t?.parentOrgId;
@@ -7365,9 +7365,9 @@ function uj() {
     return !!e && !!i && a;
   }();
   let t = function () {
-    let e = _$$_I();
+    let e = useCanAccessFullDevMode();
     let t = useAtomWithSubscription(fC).data;
-    let r = MY();
+    let r = useFullscreenViewFile();
     let n = _$$R5({
       preferOpenFilePlan: !0
     });
@@ -7766,7 +7766,7 @@ function pb() {
   });
 }
 function pN() {
-  let e = _$$_I();
+  let e = useCanAccessFullDevMode();
   let t = hA();
   let r = pw();
   if (!e) return !1;
@@ -7804,7 +7804,7 @@ function pP({
     let e = getObservableValue(AppStateTsApi?.devHandoffState()?.focusAnimationIsRunning, !1);
     let t = _$$uQ() ?? defaultSessionLocalIDString;
     let r = LS();
-    let n = _$$_I();
+    let n = useCanAccessFullDevMode();
     let i = _$$eY();
     let [a, s] = useState(!1);
     _$$D5({
@@ -7835,7 +7835,7 @@ function pP({
     return a;
   }();
   let r = useSelector(e => e.mirror.appModel.keyboardShortcuts);
-  let n = _$$_I();
+  let n = useCanAccessFullDevMode();
   let i = !!hA();
   let a = pN();
   let {
@@ -8063,7 +8063,7 @@ function pz() {
   let h = useMemo(() => getProvisionalAccessBanner(_), [getProvisionalAccessBanner, _]);
   let [m, g] = useState(!1);
   let f = _$$Td();
-  let E = q5();
+  let E = selectCurrentFile();
   let y = VA(E?.project);
   let b = _$$I4();
   let T = h?.showBanner && !m && (!f || o) && (!y || o) && !(o && b);
@@ -8142,7 +8142,7 @@ function pW({
   }) : t ? jsx(uY, {}) : null;
 }
 function pY() {
-  let e = _$$_I();
+  let e = useCanAccessFullDevMode();
   let t = _$$I3();
   let r = !!hA() && e;
   let n = UX();
@@ -8163,7 +8163,7 @@ function pY() {
 function p$({
   children: e
 }) {
-  let t = q5();
+  let t = selectCurrentFile();
   let r = selectWithShallowEqual(e => e.comments);
   let {
     anchorPositions,
@@ -8244,8 +8244,8 @@ function p3(e) {
   };
 })(o || (o = {}));
 let p4 = {
-  [_$$ou.ACCOUNT_SETTINGS]: o.AccountSettingsModalInIframe,
-  [_$$ou.UNIVERSAL_PUBLISHING]() {
+  [viewMappings.ACCOUNT_SETTINGS]: o.AccountSettingsModalInIframe,
+  [viewMappings.UNIVERSAL_PUBLISHING]() {
     let e = useDispatch();
     return jsx(p3, {
       showModal: () => e(showModalHandler({
@@ -8604,7 +8604,7 @@ function _S({
   editorType: e,
   fileKey: t
 }) {
-  switch (_$$eq(t), yB(t), e) {
+  switch (useRequireOpenFileOrSuspend(t), yB(t), e) {
     case FEditorType.Cooper:
       return jsx(n0, {
         fallback: NONE_SYMBOL.NONE
@@ -8777,7 +8777,7 @@ let _C = memo(() => {
     let e = useDispatch();
     let t = function () {
       let e = useMemo(() => generateUUIDv4(), []);
-      let t = Rs(ClientReloadView, {
+      let t = useSubscription(ClientReloadView, {
         cacheNonce: e
       });
       return useMemo(() => {
@@ -8827,7 +8827,7 @@ let _C = memo(() => {
   })();
   (function () {
     let e = useMemo(() => generateUUIDv4(), []);
-    let t = Rs(RecentNetworkControlRejectionView, {
+    let t = useSubscription(RecentNetworkControlRejectionView, {
       cacheNonce: e
     });
     useEffect(() => {
@@ -8839,7 +8839,7 @@ let _C = memo(() => {
     }, [t]);
   })();
   (function () {
-    let e = ZA();
+    let e = getLivegraphClient();
     useEffect(() => {
       if (e != null) {
         e.addEventListener(n6);
@@ -8850,7 +8850,7 @@ let _C = memo(() => {
   (function () {
     let e = debugState;
     let t = useMemo(() => generateUUIDv4(), []);
-    let r = Rs(RecentIdleTimeoutSettingChangeView, {
+    let r = useSubscription(RecentIdleTimeoutSettingChangeView, {
       cacheNonce: t
     });
     useEffect(() => {
@@ -9047,7 +9047,7 @@ function _P() {
 function _D() {
   let e = parseAndNormalizeQuery(customHistory.location.search);
   let t = FFileType.DESIGN;
-  e.editor_type === 'whiteboard' || e.type === 'whiteboard' || customHistory.location.pathname === '/jam' || customHistory.location.pathname === '/board/new' ? t = FFileType.WHITEBOARD : customHistory.location.pathname === '/slides/new' || e.type === 'slides' || e.editor_type === 'slides' ? t = FFileType.SLIDES : getFeatureFlags().sites && (customHistory.location.pathname === '/site/new' || e.type === 'sites' || e.editor_type === 'sites') ? t = FFileType.SITES : getFeatureFlags().cooper && (customHistory.location.pathname === '/buzz/new' || e.type === 'buzz' || e.editor_type === 'buzz' || e.type === 'cooper' || e.editor_type === 'cooper') ? t = FFileType.COOPER : _$$aI() && (customHistory.location.pathname === '/rev/new' || customHistory.location.pathname === '/make/new' || e.type === 'figmake' || e.editor_type === 'figmake') && (t = FFileType.FIGMAKE);
+  e.editor_type === 'whiteboard' || e.type === 'whiteboard' || customHistory.location.pathname === '/jam' || customHistory.location.pathname === '/board/new' ? t = FFileType.WHITEBOARD : customHistory.location.pathname === '/slides/new' || e.type === 'slides' || e.editor_type === 'slides' ? t = FFileType.SLIDES : getFeatureFlags().sites && (customHistory.location.pathname === '/site/new' || e.type === 'sites' || e.editor_type === 'sites') ? t = FFileType.SITES : getFeatureFlags().cooper && (customHistory.location.pathname === '/buzz/new' || e.type === 'buzz' || e.editor_type === 'buzz' || e.type === 'cooper' || e.editor_type === 'cooper') ? t = FFileType.COOPER : isFigmakeSitesEnabled() && (customHistory.location.pathname === '/rev/new' || customHistory.location.pathname === '/make/new' || e.type === 'figmake' || e.editor_type === 'figmake') && (t = FFileType.FIGMAKE);
   t !== 'whiteboard' && _$$Q().render(jsx('div', {
     style: {
       position: 'absolute',

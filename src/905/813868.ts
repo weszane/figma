@@ -8,7 +8,7 @@ import { Q7 } from "../905/15667";
 import { b as _$$b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { $$ } from "../figma_app/62612";
-import { F1 } from "../figma_app/12796";
+import { checkZoomWidgetAccess } from "../figma_app/12796";
 import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { o8, Fr, r_ } from "../905/622391";
@@ -45,7 +45,7 @@ export function $$I0({
       widgetRunPromise: void 0
     };
   }
-  let N = F1();
+  let N = checkZoomWidgetAccess();
   if (!N.canRun) {
     showVisualBell(N.message);
     return {

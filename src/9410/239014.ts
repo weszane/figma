@@ -7,7 +7,7 @@ import { resourceUtils } from "../905/989992";
 import { z } from "../905/239603";
 import c from "classnames";
 import { hC } from "../figma_app/901889";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
 import { reportError } from "../905/11";
@@ -15,7 +15,7 @@ import { kt } from "../figma_app/858013";
 import { lv } from "../figma_app/204891";
 import { V } from "../figma_app/385855";
 import { getI18nString } from "../905/303541";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { PageThumbnailsByFileKeyView } from "../figma_app/43951";
 import { S as _$$S } from "../figma_app/787550";
 import { qp } from "../figma_app/932601";
@@ -28,7 +28,7 @@ export function $$w0({
   pageThumbnail: l,
   isLoading: d
 }) {
-  let c = q5();
+  let c = selectCurrentFile();
   let h = hC();
   let m = Xr(qp);
   if (!c || !t.current || !e.current) return null;
@@ -102,8 +102,8 @@ let S = z.record(z.object({
   created_at: z.string().optional()
 }));
 export function $$j1(e) {
-  let t = q5();
-  let i = Rs(PageThumbnailsByFileKeyView, {
+  let t = selectCurrentFile();
+  let i = useSubscription(PageThumbnailsByFileKeyView, {
     fileKey: t?.key ?? ""
   }, {
     enabled: !!(t?.key && e)

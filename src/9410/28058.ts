@@ -15,7 +15,7 @@ import { Tc } from "../905/797478";
 import { dP } from "../figma_app/740163";
 import { _o } from "../figma_app/701001";
 import { p8 } from "../figma_app/722362";
-import { tS } from "../figma_app/516028";
+import { useCurrentFileKey } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
 import { cS } from "../figma_app/45218";
@@ -117,7 +117,7 @@ export function $$W0() {
   let {
     state
   } = wj(JT.BOARD_TO_DECK);
-  let x = tS();
+  let x = useCurrentFileKey();
   let y = wd();
   return a || p && p.fileKey && !a || e || !c || y || !l || t || i || n || d && !u || state === qy.RUNNING ? null : jsx(fu, {
     name: "Slides Template Overlay Modal",

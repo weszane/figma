@@ -7,7 +7,7 @@ import { wL, Hc } from "../905/805904";
 import { wL as _$$wL, Hc as _$$Hc } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { getResourceDataOrFallback } from "../905/419236";
-import { _5, sy } from "../figma_app/930338";
+import { camelToSnakeWithLeading, encodeUri } from "../figma_app/930338";
 import { P } from "../905/412913";
 import { FPermissionLevelType, FViewPermissionType, FPlanFeatureType, FResourceCategoryType } from "../figma_app/191312";
 import { PW } from "../figma_app/633080";
@@ -18,7 +18,7 @@ import { iX } from "../905/405710";
 export function $$b12(e, t) {
   if (null === e) return null;
   let r = {};
-  for (let t in e) r[_5(t)] = e[t];
+  for (let t in e) r[camelToSnakeWithLeading(t)] = e[t];
   return Object.assign(r, t || {});
 }
 export function $$T5(e, t) {
@@ -91,8 +91,8 @@ export function $$x24(e) {
   };
 }
 export function $$N20(e, t, r) {
-  let n = `${window.location.origin}/proto/${e}/${sy(t || "")}`;
-  return null != r ? `${n}?node-id=${sy(r)}` : n;
+  let n = `${window.location.origin}/proto/${e}/${encodeUri(t || "")}`;
+  return null != r ? `${n}?node-id=${encodeUri(r)}` : n;
 }
 export function $$C11(e) {
   return {

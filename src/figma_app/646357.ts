@@ -19,15 +19,15 @@ import { Ez } from "../figma_app/766708";
 import { reportError } from "../905/11";
 import { Bq } from "../905/760682";
 import { logError } from "../905/714362";
-import { Yx } from "../figma_app/930338";
+import { formatList } from "../figma_app/930338";
 import { XHR } from "../905/910117";
-import { YQ } from "../905/502364";
+import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { $ as _$$$ } from "../905/383708";
 import { P as _$$P } from "../905/412913";
 import { $ as _$$$2 } from "../905/851662";
 import { _ as _$$_ } from "../905/170564";
-import { im } from "../figma_app/828186";
+import { isSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { uo } from "../figma_app/78808";
 import { I0 } from "../905/879323";
 import { xp, rb } from "../905/711212";
@@ -41,7 +41,7 @@ import { wM } from "../figma_app/463500";
 import { e3 } from "../figma_app/275938";
 import { GO, Nn, pD as _$$pD, Lr, zK } from "../905/561897";
 import { P as _$$P2 } from "../905/815475";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { td as _$$td } from "../905/845253";
 import { ag, LH } from "../905/872904";
 import { FContainerType } from "../figma_app/191312";
@@ -373,7 +373,7 @@ export function $$eD4(e) {
 }
 let ek = (e, t) => _$$$(e.key) === t || !!e.source_file_key && _$$$(e.source_file_key) === t;
 export function $$$$eM69() {
-  let e = q5();
+  let e = selectCurrentFile();
   let t = useSelector(e => e.library);
   let r = He();
   return useCallback(n => !!e && eF(t.defaultPublished, {
@@ -483,7 +483,7 @@ export function $$eX24(e) {
   let n = r ? r.key : "";
   let i = r?.library_key ? _$$l(r.library_key) : _$$l("");
   let a = new Set();
-  let s = im(t);
+  let s = isSelectedViewFullscreenCooper(t);
   let o = {};
   let {
     newLocal,
@@ -517,7 +517,7 @@ export function $$eX24(e) {
     return !1;
   }(t.library.local.thumbnails, o) && e.dispatch(xp({
     thumbnails: o
-  })), numNewComponents > 0 && eK && (YQ({
+  })), numNewComponents > 0 && eK && (handleAtomEvent({
     id: "Parsed first components"
   }), eK = !1), a.size > 0) {
     let r = t.notifications.filter(e => e.type === _$$_.MOVE_COMPONENTS_PROMPT);
@@ -1135,7 +1135,7 @@ export function $$tU13({
     numVariableCollections: n
   }) : null;
   let d = filterNotNullish([s, i, o, l]);
-  return 0 === d.length ? getI18nString("design_systems.libraries_modal.no_components_styles_variables") : Yx(d, "unit");
+  return 0 === d.length ? getI18nString("design_systems.libraries_modal.no_components_styles_variables") : formatList(d, "unit");
 }
 export let $$tB20 = e => e !== E8.DELETED && e !== E8.NOT_STAGED;
 export function $$tG47(e, t, r, n) {

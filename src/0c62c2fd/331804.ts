@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -18,7 +18,7 @@ export function $$g0({
 }) {
   let g = useDispatch();
   let h = _$$p2(getI18nString("file_browser.pinning.pin_modal.edit.confirmation_bell"), "file-browser-workspace-edit-pin");
-  let x = Rs(EditWorkspacePinnedFileView, {
+  let x = useSubscription(EditWorkspacePinnedFileView, {
     pinnedFileId: e
   });
   if ("loaded" !== x.status) return null;

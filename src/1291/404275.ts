@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { ow, Em } from "../figma_app/976749";
 import { _6 } from "../figma_app/386952";
 import { pk, Qr } from "../figma_app/598952";
-import { Vj } from "../905/561485";
+import { isFullscreenSitesView } from "../905/561485";
 import { U } from "../figma_app/964810";
 let $$p0 = UserInterfaceElements.ASSETS.toString();
 let $$x1 = UserInterfaceElements.CHAT.toString();
@@ -54,7 +54,7 @@ export function $$y4(e, t) {
     showCodePanel,
     showChat
   } = U();
-  let y = Vj(s);
+  let y = isFullscreenSitesView(s);
   let j = !!getFeatureFlags().sts_code;
   let S = ow();
   let v = Em();

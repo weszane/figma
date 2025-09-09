@@ -11,7 +11,7 @@ import { oB } from "../905/929976";
 import { jD } from "../905/765855";
 import { ft, UE } from "../figma_app/753501";
 import { y as _$$y } from "../905/320282";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { lM } from "../905/574958";
 import { zr } from "../905/129884";
 import { aT } from "../figma_app/613182";
@@ -102,7 +102,7 @@ export function $$x0({
       editorType: "fullscreen" === e.selectedView.view ? e.selectedView.editorType : void 0
     }
   }));
-  let d = q5();
+  let d = selectCurrentFile();
   let c = useRef(!1);
   useEffect(() => {
     d?.key && !c.current && (c.current = !0, _$$y.startTimer(d.key, lM()));

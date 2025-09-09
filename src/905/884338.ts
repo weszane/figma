@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import r from "../vendor/128080";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { rI, Rh, S3 } from "../905/485103";
+import { sendBatchedHistograms, sendMetric, sendHistogram } from "../905/485103";
 var a = r;
 let d = {
   PENDING_COMMENT: "comments.web.pending_comment",
@@ -16,7 +16,7 @@ export function $$c0(e) {
   let p = useRef(new Map());
   let m = useRef(new Map());
   let h = useCallback(() => {
-    rI(Array.from(u.current).map(([e, t]) => {
+    sendBatchedHistograms(Array.from(u.current).map(([e, t]) => {
       let i = performance.now() - t.startTime;
       return {
         metric: d.PENDING_COMMENT,
@@ -57,7 +57,7 @@ export function $$c0(e) {
         backgrounded: !1
       });
       let t = setTimeout(() => {
-        Rh(d.PENDING_COMMENT_SLOW, {});
+        sendMetric(d.PENDING_COMMENT_SLOW, {});
       }, 3e4);
       m.current.set(e, t);
     });
@@ -74,7 +74,7 @@ export function $$c0(e) {
     u.current.forEach((e, i) => {
       if (!t.has(i)) {
         let t = performance.now() - e.startTime;
-        S3(d.PENDING_COMMENT, t / 1e3, {
+        sendHistogram(d.PENDING_COMMENT, t / 1e3, {
           backgrounded: e.backgrounded
         });
         u.current.$$delete(i);
@@ -86,7 +86,7 @@ export function $$c0(e) {
     p.current.forEach((e, t) => {
       if (!r.has(t)) {
         let i = performance.now() - e.startTime;
-        S3(d.PENDING_FROM_LG_COMMENT, i / 1e3, {
+        sendHistogram(d.PENDING_FROM_LG_COMMENT, i / 1e3, {
           backgrounded: e.backgrounded
         });
         p.current.$$delete(t);

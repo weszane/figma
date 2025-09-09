@@ -13,7 +13,7 @@ import { renderI18nText } from "../905/303541";
 import { B } from "../905/261906";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
-import { ud } from "../905/513035";
+import { ProductAccessTypeEnum } from "../905/513035";
 import { UpsellSourceType } from "../figma_app/831101";
 import { registerModal } from "../905/102752";
 import { J as _$$J } from "../905/273120";
@@ -65,7 +65,7 @@ export function $$A0(e) {
             }), jsxs("div", {
               className: "x4z9k3i xo1l8bm x1o2sk6j x78zum5",
               children: [!A && jsx(B, {
-                type: ud.EXPERT,
+                type: ProductAccessTypeEnum.EXPERT,
                 size: "24.small",
                 removeBackgroundColor: !0
               }), jsx("div", {

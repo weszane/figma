@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { am } from "../figma_app/430563";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { t$ } from "../figma_app/646357";
 import { QB } from "../905/921418";
 import { T } from "../905/486858";
@@ -11,7 +11,7 @@ export function $$p0(e, t) {
   let i = e?.library_key;
   let p = M();
   let m = useDispatch();
-  let h = q5();
+  let h = selectCurrentFile();
   let g = t$(e?.library_key);
   let f = T();
   let _ = useCallback(t => {

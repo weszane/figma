@@ -19,7 +19,7 @@ import { getI18nString } from "../905/303541";
 import { hA } from "../figma_app/88239";
 import { lW } from "../figma_app/11182";
 import { m0 } from "../figma_app/976749";
-import { sS } from "../figma_app/516028";
+import { selectOpenFileKey } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
@@ -79,7 +79,7 @@ function P({
         action: "copy"
       })) : Fo(e) && e.keyCode === Uz.A ? (t = !0, x({
         action: "select_all"
-      })) : BrowserInfo.mac ? "Meta" === e.key && (t = !0) : "Control" === e.key && (t = !0), (e.target?.type === "text" || e.target?.type === "textarea" || e.target?.tabIndex === 0) && (t = !0), t); else {
+      })) : BrowserInfo.mac ? "Meta" === e.key && (t = !0) : "Control" === e.key && (t = !0), (e.target?.type === "text" || e.target?.type === "textarea" || e.target?.tabIndex === 0) && (t = !0), t) ;else {
         let e = window.getSelection();
         if (!e) return;
         e.removeAllRanges();
@@ -106,7 +106,7 @@ function P({
           let e = Ql(sceneGraph, selectedNodeId);
           n = e?.guid;
           i = e?.type;
-        } catch { }
+        } catch {}
         trackEventAnalytics("inspection_panel_clicked", {
           name: e,
           x: r.clientX,
@@ -298,7 +298,7 @@ export function $$U1(e) {
   });
 }
 let B = Wh(() => atom({}));
-let G = atom(() => !1, () => { });
+let G = atom(() => !1, () => {});
 export function $$V0(e, t = !1) {
   let r = function (e, t = !1) {
     let r = useMemo(() => e ? _$$n(300, !0, (t, r) => {
@@ -342,7 +342,7 @@ export function $$z3(e) {
     recordingKey,
     collapsiblePanelKey
   } = e;
-  let p = useSelector(sS);
+  let p = useSelector(selectOpenFileKey);
   let _ = useMemo(() => `inspect:${recordingKey.toLowerCase()}`, [recordingKey]);
   let h = useMemo(() => ({
     recordingKey: `inspect:${recordingKey}`

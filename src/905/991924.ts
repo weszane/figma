@@ -1,13 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useEffect, useCallback, useMemo } from "react";
 import { Ay } from "../figma_app/272902";
-import { ZC } from "../figma_app/39751";
+import { useLatestRef } from "../figma_app/922077";
 import { useSetupPlayback, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { Q } from "../905/249555";
 export let $$d0 = forwardRef(function (e, t) {
   let i = e.recordingKey || "";
   let d = useRef(null);
-  let c = ZC(d.current);
+  let c = useLatestRef(d.current);
   useEffect(() => {
     let t = d.current;
     t && !c && (t.value || (e.usePlaceholderAttribute || (t.value = e.placeholderValue || ""), e.noDefaultFocus || (t.focus(), t.select())));

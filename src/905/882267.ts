@@ -14,7 +14,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
 import { customHistory } from "../905/612521";
-import { Rs } from "../figma_app/288654";
+import { useSubscription } from "../figma_app/288654";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
@@ -32,7 +32,7 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B2 } from "../905/330741";
 import { fu } from "../figma_app/831799";
 import { F as _$$F } from "../905/224";
-import { Ws } from "../905/628874";
+import { convertTeamToRaw } from "../905/628874";
 import { Cj } from "../905/291654";
 import { Kk, Rt } from "../905/777093";
 import { G8, Qr, kF, Km, e2, HP, sp } from "../905/690539";
@@ -40,7 +40,7 @@ import { jB, Uh } from "../905/465941";
 import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
+import { selectCurrentFile } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
@@ -265,8 +265,8 @@ function eL({
   }, [eD, z]);
   let eU = Z7(eO, ek, el);
   let eV = sZ() ?? null;
-  let eG = q5()?.team ?? null;
-  let eH = q5();
+  let eG = selectCurrentFile()?.team ?? null;
+  let eH = selectCurrentFile();
   let eW = selectCurrentUser();
   let eY = Rk({
     enabled: !B && (eg === Qr.SHARED_FONTS || x?.type === eP),
@@ -442,8 +442,8 @@ function eL({
   let to = function ({
     dispatch: e
   }) {
-    let t = q5()?.team ?? null;
-    let i = Rs(TeamCanAdmin, {
+    let t = selectCurrentFile()?.team ?? null;
+    let i = useSubscription(TeamCanAdmin, {
       id: t?.id
     }, {
       enabled: !!t
@@ -460,7 +460,7 @@ function eL({
           team: t,
           resource: Bi.SHARED_FONTS,
           editorType: FFileType.DESIGN,
-          currentPlan: n0(Ws(t)) ? _$$F.Plan.PRO : _$$F.Plan.STARTER,
+          currentPlan: n0(convertTeamToRaw(t)) ? _$$F.Plan.PRO : _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.ORG,
           upsellSource: UpsellModalType.FONT_PICKER_UPSELL,
           hideUpsellPlanCta: !r,
